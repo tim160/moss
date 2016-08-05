@@ -1,0 +1,67 @@
+﻿@using EC.Models;
+@using EC.Models.Database;
+@using EC.App_LocalResources;
+
+@{
+    ViewBag.Title = GlobalRes.CompanySettings;
+    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+
+    var um = (UserModel)ViewBag.um;
+    var user_id = um.ID;
+}
+
+
+<div class="blockSettings">
+    <div id="casesHeared">
+        <div id="menu">
+            <a href="/Settings/Index" class="caseesTab">@GlobalRes.MyProfile</a>
+            <a class="caseesTab active">@GlobalRes.CompanyProfile</a>
+            <a href="/Settings/Mediators" class="caseesTab">@GlobalRes.CompanyMediators</a>
+            <a href="/Settings/Cases" class="caseesTab">@GlobalRes.CaseSettings</a>
+        </div>
+     @*   <div class="positionActivityIcon">
+                <div id="activityIcon"></div>
+            </div>*@
+        </div>
+
+
+        <div class="contentSettings">
+            <div class="PersonalPhotoBlock">
+
+            </div>
+            <div class="personalBlock">
+
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script>
+            $(document).ready(function () {
+            //    $('.activeCases').css('display', 'none');
+            //    $('.completedCases').css('display', 'none');
+            //    $('.spamCases').css('display', 'none');
+            //    $('.spamCases').css('display', 'table');
+
+            //$("#casesHeared #menu .caseesTab").click(function () {
+            //    $(".active").removeClass("active");
+            //    $(this).addClass("active");
+
+            //});
+
+            //$('h2.caseesTab:nth-child(4)').click(function () {
+            //    location.href = "/Settings/Cases";
+            //});
+            //$('h2.caseesTab:nth-child(3)').click(function () {
+            //    location.href = "/Settings/Mediators";
+            //});
+            //$('h2.caseesTab:nth-child(2)').click(function () {
+            //    location.href = "/Settings/Company";
+            //    });
+            //$('h2.caseesTab:nth-child(1)').click(function () {
+            //    location.href = "/Settings/Index";
+            //    });
+            });
+
+    </script>

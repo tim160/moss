@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    @*<link href="~/Content/fonts.css" rel="stylesheet" type="text/css">*@
+    <title>@ViewBag.Title - Employee Confidential</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/Site.css">
+    <script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
+    @RenderSection("pageStyles", required: false)
+    <!--<link rel="stylesheet" type="text/css" href="~/Content/main.min.css" />-->
+</head>
+<body>
+<div class="fullContainer">
+    @RenderBody()
+</div>
+
+    <div class="footer" style="height:150px">
+        
+    </div>
+@RenderSection("pageScripts", required: false)
+</body>
+</html>

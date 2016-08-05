@@ -1,0 +1,81 @@
+﻿@using EC.Models;
+@using EC.Models.ECModel;
+@using EC.Models.Database;
+@using EC.Controllers.ViewModel;
+@using EC.App_LocalResources;
+@{
+    ViewBag.Title = "My Messages";
+    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+    int user_id = (Int32)ViewBag.user_id;
+    ReportModel rm = new ReportModel();
+    MessagesViewModel _mvm = (MessagesViewModel)ViewBag.Message;
+    GlobalFunctions glb = new GlobalFunctions();
+    UserModel um = new UserModel();
+    string _old = "";
+}
+
+<div class="blockSettings blockAllTasks">
+    <div id="casesHeared">
+        <div id="menu">
+            <a class="caseesTab active casesMassage">
+                @GlobalRes.Allmessages @if (_mvm.Unread_Number > 0)
+                {<span>@_mvm.Unread_Number</span>}
+            </a>
+        </div>
+   @*     <div class="positionActivityIcon">
+                <div id="activityIcon"></div>
+            </div>*@
+        </div><!--casesHeared-->
+
+        <div class="contentSettings">
+            @foreach (MessageExtended _message in _mvm._messages)
+            {
+                if (_message.MessagePosterID != user_id)
+                {
+                    um = new UserModel(_message.MessagePosterID);
+                    rm = new ReportModel(_message.MessageCaseID);
+                    _old = "";
+                    if (_message.IsRead())
+                    {
+                        _old = "oldMessage";
+                    }
+                    string message_type = "Reporter";
+                    if (_message._message.reporter_access == 2)
+                    {
+                        message_type = "Message";
+                    }
+                    if (_message._message.reporter_access == 3)
+                    {
+                        message_type = "Legal";
+                    }
+                    <div class="myMessages @_old">
+                        <div class="headerMessages" style="border-left: 10px solid #@rm._color_code;">
+                            <div class="topBlock">
+                                <p class="titleMessages">@rm._secondary_type_string - @rm._location_string - #@rm._report.display_name</p>
+                            </div>
+                        </div>
+                        <div class="blockMessage withStaticBorder">
+                            <div class="blockPhoto">
+                                <img src='@Url.Content(_message.MessagePosterPhoto)'>
+                                <p></p>
+                            </div>
+                            <div class="textMessage">
+                                <p class="personalName">@_message.MessagePoster</p>
+                                <p class="text"><a href="/Case/@message_type/@_message.MessageCaseID">@_message._message.body_tx</a></p>
+                            </div>
+                            <div class="blockDate">
+                                <p>@_message._message.created_dt.Value.Day  @glb.GetShortMonth(_message._message.created_dt.Value.Month)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            }
+
+        </div><!--contentSettings-->
+    </div>
+
+
+    <script>
+
+    </script>

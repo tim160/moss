@@ -1,0 +1,135 @@
+﻿@font-face {
+    font-family: Lato-Semibold;
+    src: url(fonts/Lato-Semibold.ttf);
+}
+
+.loginFormHeader {
+    margin: 0 auto;
+    width: 420px;
+    height: 80px;
+    background-color:#4B686C;
+	margin-top: 6%;
+	cursor: default;
+}
+.loginFormHeader p {
+    margin-top: -14px;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    border-width: 1px;
+    padding-top: 26px;
+    font-size: 23px;
+    font-family: LatoRegular;
+}
+.emptyBlockSecond {
+    background-color: rgb(140, 201, 195);
+    width: 100%;
+    height: 730px;
+}
+.loginForm {
+    padding-top: 28px;
+    margin: 0 auto;
+    width: 420px;
+    height: 210px;
+    padding-bottom:20px;
+    background-color:#587C7E;
+    color: #305458;
+    font-family: LatoSemibold;
+}
+.loginForm div {
+    margin-left: 21px;
+    margin-right: 17px;
+    margin-top: 1px;
+}
+.loginForm div input{
+  width: 372px;
+  height: 70px;
+  padding-top: 0px;
+  padding-left: 8px;
+  margin-left: 0px;
+  text-indent: 2px;
+  background-color: #eff2f2;
+  outline: none;
+  line-height: 3em;
+  border: none;
+  border-bottom: 1px solid #ced7d8;
+  font-size: 22px;
+  color: #305458;
+  margin-top: -20px;
+}
+
+.loginForm div input:focus {
+  width: 372px;
+  height: 67px;
+  padding-top: 0px;
+  padding-left: 8px;
+  margin-left: -2px;
+  text-indent: 2px;
+  background-color: #FFFFFF;
+  outline: none;
+  line-height: 3em;
+  border: 2px solid #02B4A1;
+  font-size: 22px;
+  color: #305458;
+  margin-top: -20px;
+}
+
+.loginForm label {
+    top: 0px; 
+    right: 0px; 
+    padding-left: 10px;
+    font-size: 14px;
+    opacity: 0.5;
+}
+.loginForm div.selected {
+    border: 1px solid #05b5a2;
+}
+.loginForm #submit:hover{
+    background-color: #e74918;
+    border-color: #c74b24;
+}
+.loginForm #submit:active{
+    background-color: #db3a08;
+    border-color: #ba350b;
+}
+   
+.loginForm #submit {
+    outline: none;
+    width: 177px;
+    height: 38px;
+    margin-top: 20px;
+    margin-left: 28%;
+    background-color: #F95E2D;
+    border-color: rgb(199, 75, 36);
+    color: white;
+    font-size: 11pt;
+    font-family: OpenSans;
+    font-weight: bold;
+    border-width: 1px;
+    border-style: solid;
+	cursor: pointer;
+}
+
+.loginFormFooter {
+  position: relative;
+  margin: 0 auto;
+  width: 420px;
+  height: 50px;
+  background-color: #97ACAE;
+  cursor: default;
+}
+
+.loginFormFooter a {
+  float: right;
+  color: white;
+  padding: 16px;
+  font-family: Lato-Semibold;
+  font-size: 13px;
+}
+
+.label {
+  position: relative;
+  padding-left: 7px;
+  margin-top: 7px;
+  color: #CFD7D8;
+}

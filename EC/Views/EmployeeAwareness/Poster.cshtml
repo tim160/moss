@@ -1,0 +1,108 @@
+﻿@using EC.Models;
+@using EC.Models.Database;
+@using EC.App_LocalResources;
+@{
+
+    <link rel="stylesheet" href="~/Content/EmployeeAwareness.css" />
+
+    ViewBag.Title = GlobalRes.EmployeeAwarenessUp;
+    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+
+    var um = (UserModel)ViewBag.um;
+    var user_id = um.ID;
+    //var user_id = 2;
+}
+
+
+<div id="EmployeeAwarenessBlock" class="blockSettings">
+    <div class="topHeader">Awareness materials</div>
+    <div class="mainContent">
+        <div class="rightContent">
+            <div class="topBlockFilters">
+                <a href="#" class="toBack">
+                    Back to results 
+                </a>
+                <span class="textShot">Employee awareness materials </span>
+                <span class="rez">Banking & Financial</span>
+                <span class="rezCalc">(5 items)</span>
+            </div>
+
+            <div class="rezoultItems">
+
+                <div class="mainImg">
+                    <img src="~/Content/img/employeeAwarenessPoster.jpg" />
+                </div>
+                <div class="rightInfoSelect">
+                    <div class="downloadPdf">download 11'' X 17'' poster (pdf)</div>
+                    <div class="availableFormat">
+                        <div class="titleFormat">Available format: </div>
+                        <div class="blockFormat">
+                            <div class="titleBlockFormat active">Poster</div>
+                            <div class="itemsFormat">
+                                <div class="itemFormat active">
+                                    <div class="format format1"></div>
+                                    <div class="size">11" X 17"</div>
+                                </div>
+                                <div class="itemFormat">
+                                    <div class="format format2"></div>
+                                    <div class="size">16" X 20"</div>
+                                </div>
+                                <div class="itemFormat">
+                                    <div class="format format3"></div>
+                                    <div class="size">18" X 24"</div>
+                                </div>
+                                <div class="itemFormat">
+                                    <div class="format format4"></div>
+                                    <div class="size">22" X 28"</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="blockFormat">
+                            <div class="titleBlockFormat">Wallet-size card</div>
+                        </div>
+
+                        <div class="blockFormat">
+                            <div class="titleBlockFormat">Digital asstes</div>
+                        </div>
+                    </div>
+
+                    <div class="titleFormat">Options: </div>
+                    <div class="blockFormat blockOption">
+                        <div class="itemFormat active">
+                            <div class="format noLogo"></div>
+                            <div class="size">No logo</div>
+                        </div>
+                        <div class="itemFormat">
+                            <div class="format useCurrentLogo"></div>
+                            <div class="size">Use current logo</div>
+                        </div>
+                        <div class="itemFormat">
+                            <div class="format newLogo"></div>
+                            <div class="size">Upload new logo</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+       
+        function selectblockMenu() {
+            $('.itemFormat').click(function () {
+                var self = $(this);
+                self.parent().find('.itemFormat').removeClass('active');
+                self.addClass('active');
+            });
+        }
+
+        selectblockMenu();
+    });
+</script>

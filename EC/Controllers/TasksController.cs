@@ -1,0 +1,105 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Web;
+using System.Web.DynamicData.ModelProviders;
+using System.Web.Mvc;
+using System.Web.UI.WebControls;
+using EC.Controllers.Utils;
+using EC.Models;
+using EC.Models.Database;
+using EC.Models.ECModel;
+using EC.Controllers.ViewModel;
+
+namespace EC.Controllers
+{
+    public class TasksController : BaseController
+    {
+        //
+        // GET: /Tasks/
+        public ActionResult AllMyTasks()
+        {
+            return View();
+        }
+
+        public ActionResult Index()
+        {
+
+            user user = (user)Session[Constants.CurrentUserMarcker];
+            if (user == null || user.id == 0)
+                return RedirectToAction("Index", "Account");
+
+            #region EC-CC Viewbag
+            ViewBag.is_cc = is_cc;
+            string cc_ext = "";
+            if (is_cc) cc_ext = "_cc";
+            ViewBag.cc_extension = cc_ext;
+            #endregion
+
+          
+            int user_id = user.id;
+            // user
+            UserModel um = new UserModel(user_id);
+            ReportModel rm = new ReportModel();
+
+          //  List<task> tasks = um.UserTasks(0, null);
+            List<task> tasks = um.UserTasks(1, null, true);
+            List<TaskExtended> list_tsk = new List<TaskExtended>();
+            int task_id = 0;
+            foreach (task _task in tasks)
+            {
+                task_id = _task.id;
+                TaskExtended tsk = new TaskExtended(_task.id, user_id);
+                list_tsk.Add(tsk);
+            }
+            ViewBag.tasks = list_tsk;
+            ViewBag.user_id = user_id;
+            ViewBag.um = um;
+
+            List<report> reports =  um.ReportsSearch(0, 0);
+            ViewBag.reports = reports;
+
+            return View();
+        }
+
+        public ActionResult Completed()
+        {
+            user user = (user)Session[Constants.CurrentUserMarcker];
+            if (user == null || user.id == 0)
+                return RedirectToAction("Index", "Account");
+
+            int user_id = user.id;
+            // user
+            UserModel um = new UserModel(user_id);
+            ReportModel rm = new ReportModel();
+
+            #region EC-CC Viewbag
+            ViewBag.is_cc = is_cc;
+            string cc_ext = "";
+            if (is_cc) cc_ext = "_cc";
+            ViewBag.cc_extension = cc_ext;
+            #endregion
+
+          
+            //  List<task> tasks = um.UserTasks(0, null);
+            List<task> tasks = um.UserTasks(2, null, true);
+            List<TaskExtended> list_tsk = new List<TaskExtended>();
+            int task_id = 0;
+            foreach (task _task in tasks)
+            {
+                task_id = _task.id;
+                TaskExtended tsk = new TaskExtended(_task.id, user_id);
+                list_tsk.Add(tsk);
+            }
+            ViewBag.tasks = list_tsk;
+            ViewBag.user_id = user_id;
+            ViewBag.um = um;
+
+            List<report> reports = um.ReportsSearch(0, 0);
+            ViewBag.reports = reports;
+
+            return View();
+        }
+	}
+}

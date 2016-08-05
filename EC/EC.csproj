@@ -1,0 +1,1008 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Pta.Build.WebEssentialsBundleTask.1.0.2\build\Pta.Build.WebEssentialsBundleTask.props" Condition="Exists('..\packages\Pta.Build.WebEssentialsBundleTask.1.0.2\build\Pta.Build.WebEssentialsBundleTask.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5F873FC7-DBE4-4F2B-A03F-DE84BB7B1B56}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EC</RootNamespace>
+    <AssemblyName>EC</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
+    <NuGetPackageImportStamp>8acab050</NuGetPackageImportStamp>
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.3.2.0.0\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Activities" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.Abstractions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.2\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Routing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="AspNet.ScriptManager.bootstrap">
+      <HintPath>..\packages\AspNet.ScriptManager.bootstrap.3.0.0\lib\net45\AspNet.ScriptManager.bootstrap.dll</HintPath>
+    </Reference>
+    <Reference Include="AspNet.ScriptManager.jQuery">
+      <HintPath>..\packages\AspNet.ScriptManager.jQuery.1.10.2\lib\net45\AspNet.ScriptManager.jQuery.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ScriptManager.MSAjax">
+      <HintPath>..\packages\Microsoft.AspNet.ScriptManager.MSAjax.5.0.0\lib\net45\Microsoft.ScriptManager.MSAjax.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ScriptManager.WebForms">
+      <HintPath>..\packages\Microsoft.AspNet.ScriptManager.WebForms.5.0.0\lib\net45\Microsoft.ScriptManager.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <Private>True</Private>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Web.Optimization.WebForms">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.WebForms.1.1.3\lib\net45\Microsoft.AspNet.Web.Optimization.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.FriendlyUrls">
+      <HintPath>..\packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.2\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.2\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.2\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.1.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.1.0\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.1.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Providers">
+      <HintPath>..\packages\Microsoft.AspNet.Providers.Core.2.0.0\lib\net40\System.Web.Providers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.0\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.0\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.0\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.0\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\caseTasks.css" />
+    <Content Include="Content\caseTasks.min.css">
+      <DependentUpon>caseTasks.css</DependentUpon>
+    </Content>
+    <Content Include="Content\daterangepicker.css" />
+    <Content Include="Content\daterangepickerAnalit.css" />
+    <Content Include="Content\emails\CaseReopened.html" />
+    <Content Include="Content\emails\EscalatedCase.html" />
+    <Content Include="Content\emails\EscalatedCaseTimeline.html" />
+    <Content Include="Content\emails\MediatorAssigned.html" />
+    <Content Include="Content\emails\MediatorInvited.html" />
+    <Content Include="Content\emails\MediatorRoleChange.html" />
+    <Content Include="Content\emails\MediatorStatusChange.html" />
+    <Content Include="Content\emails\NewCase.html" />
+    <Content Include="Content\emails\NewCaseInvolved.html" />
+    <Content Include="Content\emails\NewCompany.html" />
+    <Content Include="Content\emails\NewRequest.html" />
+    <Content Include="Content\emails\NewTask.html" />
+    <Content Include="Content\emails\NewUser.html" />
+    <Content Include="Content\emails\NewUserArrived.html" />
+    <Content Include="Content\emails\NextStep.html" />
+    <Content Include="Content\emails\PartnerNewCompany.html" />
+    <Content Include="Content\emails\PartnerNewCompanyArrived.html" />
+    <Content Include="Content\emails\PartnerNewCompanyStatusChange.html" />
+    <Content Include="Content\emails\ReporterNewCase.html" />
+    <Content Include="Content\Icons\activityIcon.png" />
+    <Content Include="Content\Icons\anonimousReporterIcon.png" />
+    <Content Include="Content\Icons\arrowMessage.png" />
+    <Content Include="Content\Icons\arrowSelect.png" />
+    <Content Include="Content\Icons\blockInfo_img1.png" />
+    <Content Include="Content\Icons\blockInfo_img2.png" />
+    <Content Include="Content\Icons\calendarImg.png" />
+    <Content Include="Content\Icons\CaseAndNewAdded.png" />
+    <Content Include="Content\Icons\caseNotResolvedIcons.png" />
+    <Content Include="Content\Icons\caseResolvedIcon.png" />
+    <Content Include="Content\Icons\cases-all-cases-v5 copy.png" />
+    <Content Include="Content\Icons\cases.png" />
+    <Content Include="Content\Icons\casesActive.png" />
+    <Content Include="Content\Icons\casesHover.png" />
+    <Content Include="Content\Icons\close.png" />
+    <Content Include="Content\Icons\exclamationmark.png" />
+    <Content Include="Content\Icons\fifth.png" />
+    <Content Include="Content\Icons\fileCases.png" />
+    <Content Include="Content\Icons\first.png" />
+    <Content Include="Content\Icons\fourth.png" />
+    <Content Include="Content\Icons\generic-file.png" />
+    <Content Include="Content\Icons\HappyHogan.png" />
+    <Content Include="Content\Icons\IconsCasesNewReport\cases-icon-active.png" />
+    <Content Include="Content\Icons\IconsCasesNewReport\cases-icon.png" />
+    <Content Include="Content\Icons\IconsCasesNewReport\messages-icon-active.png" />
+    <Content Include="Content\Icons\IconsCasesNewReport\messages-icon.png" />
+    <Content Include="Content\Icons\IconsCasesNewReport\statistics-icon-active.png" />
+    <Content Include="Content\Icons\IconsCasesNewReport\statistics-icon.png" />
+    <Content Include="Content\Icons\IconsCasesNewReport\tasks-icon-active.png" />
+    <Content Include="Content\Icons\IconsCasesNewReport\tasks-icon.png" />
+    <Content Include="Content\Icons\imgPlus.png" />
+    <Content Include="Content\Icons\left.png" />
+    <Content Include="Content\Icons\left2.gif" />
+    <Content Include="Content\Icons\logo.png" />
+    <Content Include="Content\Icons\messageImg.png" />
+    <Content Include="Content\Icons\messages.png" />
+    <Content Include="Content\Icons\messagesActive.png" />
+    <Content Include="Content\Icons\messagesHover.png" />
+    <Content Include="Content\Icons\noPhoto.png" />
+    <Content Include="Content\Icons\people.png" />
+    <Content Include="Content\Icons\peopleBlockSelect.png" />
+    <Content Include="Content\Icons\peopleBlockSelectBlack.png" />
+    <Content Include="Content\Icons\peopleBlockSelectBlue.png" />
+    <Content Include="Content\Icons\pepper-sm-faded-red.png" />
+    <Content Include="Content\Icons\pepper-sm-faded.png" />
+    <Content Include="Content\Icons\pepperPhoto.png" />
+    <Content Include="Content\Icons\report-icon-white.png" />
+    <Content Include="Content\Icons\report-icon.png" />
+    <Content Include="Content\Icons\reviewStage.png" />
+    <Content Include="Content\Icons\second.png" />
+    <Content Include="Content\Icons\settingsPersonalNOPhoto.png" />
+    <Content Include="Content\Icons\statistic.png" />
+    <Content Include="Content\Icons\statisticActive.png" />
+    <Content Include="Content\Icons\statisticHover.png" />
+    <Content Include="Content\Icons\tasks.png" />
+    <Content Include="Content\Icons\TasksActive.png" />
+    <Content Include="Content\Icons\TasksHover.png" />
+    <Content Include="Content\Icons\third.png" />
+    <Content Include="Content\Icons\TonyStark.png" />
+    <Content Include="Content\Icons\viewDoc1.png" />
+    <Content Include="Content\Icons\viewDoc2.png" />
+    <Content Include="Content\Icons\X.png" />
+    <Content Include="Content\Icons\yes.png" />
+    <Content Include="Content\img\arrowSelect.png" />
+    <Content Include="Content\img\back.jpg" />
+    <Content Include="Content\img\check.png" />
+    <Content Include="Content\img\checkbox.png" />
+    <Content Include="Content\img\checkbox_checked.png" />
+    <Content Include="Content\img\down_arrow_select.png" />
+    <Content Include="Content\img\icon.png" />
+    <Content Include="Content\img\iconHover.png" />
+    <Content Include="Content\img\iconHover2.png" />
+    <Content Include="Content\img\left.png" />
+    <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\logo2.png" />
+    <Content Include="Content\img\logos\demo_logo.jpg" />
+    <Content Include="Content\img\logos\stark.jpg" />
+    <Content Include="Content\img\nextStep.png" />
+    <Content Include="Content\img\print.png" />
+    <Content Include="Content\img\printSelected.png" />
+    <Content Include="Content\img\radio.png" />
+    <Content Include="Content\img\reportDashboard.png" />
+    <Content Include="Content\img\reportDashboardHover.png" />
+    <Content Include="Content\img\ReportDashboardLogo.png" />
+    <Content Include="Content\img\reporterChecked.png" />
+    <Content Include="Content\img\reporterUnchecked.png" />
+    <Content Include="Content\img\right.png" />
+    <Content Include="Content\img\secondLogo.jpg" />
+    <Content Include="Content\img\selectButton.jpg" />
+    <Content Include="Content\img\send_Updates_checked.png" />
+    <Content Include="Content\img\send_Updates_unchecked.png" />
+    <Content Include="Content\img\subd-index1.png" />
+    <Content Include="Content\img\subd-index2.png" />
+    <Content Include="Content\img\timeOnTask.png" />
+    <Content Include="Content\img\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\img\website-report.jpg" />
+    <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\login.css" />
+    <Content Include="Content\login.min.css">
+      <DependentUpon>login.css</DependentUpon>
+    </Content>
+    <Content Include="Content\main.css" />
+    <Content Include="Content\main.min.css">
+      <DependentUpon>main.css</DependentUpon>
+    </Content>
+    <Content Include="Content\MainStyle.css" />
+    <Content Include="Content\MainStyle.min.css">
+      <DependentUpon>MainStyle.css</DependentUpon>
+    </Content>
+    <Content Include="Content\reportCss.css" />
+    <Content Include="Content\reportCss.min.css">
+      <DependentUpon>reportCss.css</DependentUpon>
+    </Content>
+    <Content Include="Content\reportDashboard.css" />
+    <Content Include="Content\reportDashboard.min.css">
+      <DependentUpon>reportDashboard.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\Site.min.css">
+      <DependentUpon>Site.css</DependentUpon>
+    </Content>
+    <Content Include="Content\style.min.css">
+      <DependentUpon>style.css</DependentUpon>
+    </Content>
+    <Content Include="Content\styleAnalitics.css" />
+    <Content Include="Content\styleAnalitics.min.css">
+      <DependentUpon>styleAnalitics.css</DependentUpon>
+    </Content>
+    <Content Include="Content\styleLogin.css" />
+    <Content Include="Content\style.css" />
+    <Content Include="Content\styleLogin.min.css">
+      <DependentUpon>styleLogin.css</DependentUpon>
+    </Content>
+    <Content Include="Content\stylePageMessages.css" />
+    <Content Include="Content\stylePageMessages.min.css">
+      <DependentUpon>stylePageMessages.css</DependentUpon>
+    </Content>
+    <Content Include="Content\styleReportDashboard.css" />
+    <Content Include="Content\styleReportDashboard.min.css">
+      <DependentUpon>styleReportDashboard.css</DependentUpon>
+    </Content>
+    <Content Include="Content\styleTasks.css" />
+    <Content Include="Content\styleAnalitics.css" />
+    <Content Include="Content\styleTasks.min.css">
+      <DependentUpon>styleTasks.css</DependentUpon>
+    </Content>
+    <Content Include="Content\the-modal.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Models\Database\ECEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ECEntities.edmx</DependentUpon>
+      <LastGenOutput>ECEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Database\ECEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ECEntities.edmx</DependentUpon>
+      <LastGenOutput>ECEntities.cs</LastGenOutput>
+    </Content>
+    <Content Include="packages.config" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="App_Code\Helpers.cshtml" />
+    <Content Include="fonts\OpenSansSemibold.ttf" />
+    <Content Include="Content\fonts\fyKNU6PN.ttf" />
+    <Content Include="Content\fonts\lato-heavy.ttf" />
+    <Content Include="Content\fonts\Lato-Regular.ttf" />
+    <Content Include="Content\fonts\OpenSans-Light.ttf" />
+    <Content Include="Content\eVX6sX1i.ttf" />
+    <Content Include="Content\fonts\eVX6sX1i.ttf" />
+    <Content Include="Content\fonts\OpenSans-Bold.ttf" />
+    <Content Include="Content\fonts\OpenSans-BoldItalic.ttf" />
+    <Content Include="Content\fonts\OpenSans-ExtraBold.ttf" />
+    <Content Include="Content\fonts\OpenSans-ExtraBoldItalic.ttf" />
+    <Content Include="Content\fonts\OpenSans-Italic.ttf" />
+    <Content Include="Content\fonts\OpenSans-LightItalic.ttf" />
+    <Content Include="Content\fonts\OpenSans-Regular.ttf" />
+    <Content Include="Content\fonts\OpenSans-Semibold.ttf" />
+    <Content Include="Content\fonts\OpenSans-SemiboldItalic.ttf" />
+    <Content Include="Content\fonts\OpenSansSemibold.ttf" />
+    <Content Include="Content\fonts\Lato-Bold.ttf" />
+    <Content Include="Content\fonts\Lato-Semibold.ttf" />
+    <Content Include="Content\fonts\OpenSans-Regular-webfont.eot" />
+    <Content Include="Content\fonts\OpenSans-Semibold.eot" />
+    <Content Include="Content\fonts\OpenSansBold.eot" />
+    <Content Include="Content\fonts\OpenSansLight.eot" />
+    <EntityDeploy Include="Models\Database\ECEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ECEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Database\ECEntities.edmx.diagram">
+      <DependentUpon>ECEntities.edmx</DependentUpon>
+    </Content>
+    <None Include="Properties\PublishProfiles\Dev.pubxml" />
+    <None Include="Properties\PublishProfiles\ec-code.pubxml" />
+    <None Include="Properties\PublishProfiles\ec-dev.pubxml" />
+    <None Include="Properties\PublishProfiles\FTP.pubxml" />
+    <Content Include="patches\1_6.sql" />
+    <Content Include="patches\1_5.sql" />
+    <Content Include="patches\1_7.sql" />
+    <Content Include="PrivacyStatement.html" />
+    <Content Include="Scripts\daterangepicker.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <None Include="Scripts\lib\jquery-1.10.2.intellisense.js" />
+    <Content Include="patches\1_4.sql" />
+    <Content Include="patches\1_3.sql" />
+    <Content Include="patches\1_2.sql" />
+    <Content Include="patches\1_1.sql" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Common\helper.js" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery.daterangepicker.min.js" />
+    <Content Include="Scripts\jquery.the-modal.js" />
+    <Content Include="Scripts\lib\bootstrap.js" />
+    <Content Include="Scripts\lib\bootstrap.min.js" />
+    <Content Include="Scripts\lib\jquery-1.10.2.js" />
+    <Content Include="Scripts\lib\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\lib\jquery-ui.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\reportDashboard\reportDashboard.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\updateAjax.js" />
+    <Content Include="Scripts\View\blockActivityRight.js" />
+    <Content Include="Scripts\View\CaseCircleDraw.js" />
+    <Content Include="Scripts\View\LoginHereCompany.js" />
+    <Content Include="Scripts\View\menuWork.js" />
+    <Content Include="Scripts\View\newCompany.js" />
+    <Content Include="Scripts\View\newIndex.js" />
+    <Content Include="Scripts\View\report.js" />
+    <Content Include="Scripts\View\reportSummary.js" />
+    <Content Include="Scripts\WebForms\DetailsView.js" />
+    <Content Include="Scripts\WebForms\Focus.js" />
+    <Content Include="Scripts\WebForms\GridView.js" />
+    <Content Include="Scripts\WebForms\Menu.js" />
+    <Content Include="Scripts\WebForms\MenuStandards.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjax.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxApplicationServices.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxComponentModel.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxCore.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxGlobalization.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxHistory.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxNetwork.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxSerialization.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxTimer.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebForms.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebServices.js" />
+    <Content Include="Scripts\WebForms\SmartNav.js" />
+    <Content Include="Scripts\WebForms\TreeView.js" />
+    <Content Include="Scripts\WebForms\WebForms.js" />
+    <Content Include="Scripts\WebForms\WebParts.js" />
+    <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="StarkLogo.jpg" />
+    <Content Include="TermsOfService.html" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Bundle.config" />
+    <Content Include="Scripts\lib\jquery-1.10.2.min.map" />
+    <Content Include="Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Index\Index.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Report\New.cshtml" />
+    <Content Include="Views\Report\CaseSubmitted.cshtml" />
+    <Content Include="Views\Report\Messages.cshtml" />
+    <Content Include="Views\Report\Details.cshtml" />
+    <Content Include="Views\Report\Tasks.cshtml" />
+    <Content Include="Views\Cases\Index.cshtml" />
+    <Content Include="Views\Main\Index.cshtml" />
+    <Content Include="Views\Shared\_MainHTML.cshtml" />
+    <Content Include="Views\NewReport\Index.cshtml" />
+    <Content Include="Views\Shared\IndexPages\CompanyFinder.cshtml" />
+    <Content Include="Views\Shared\IndexPages\Error.cshtml" />
+    <Content Include="Views\Shared\IndexPages\FrontShared.cshtml" />
+    <Content Include="Views\Shared\IndexPages\_Layout.cshtml" />
+    <Content Include="Views\Shared\IndexPages\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\IndexPages\LayoutCasesNewReport.cshtml" />
+    <Content Include="Views\ReporterDashboard\Index.cshtml" />
+    <Content Include="Views\Shared\IndexPages\ReporterDashboard.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\PartialViews\_ReportPreview.cshtml" />
+    <Content Include="Views\PartialViews\_ReportPendingNotification.cshtml" />
+    <Content Include="Views\Cases\Completed.cshtml" />
+    <Content Include="Views\Cases\Spam.cshtml" />
+    <Content Include="Views\Shared\HeaderFooterFrontPages.cshtml" />
+    <Content Include="Views\Shared\IndexPages\NoAccess.cshtml" />
+    <Content Include="Views\ReporterDashboard\Messages.cshtml" />
+    <Content Include="Views\ReporterDashboard\Activity.cshtml" />
+    <Content Include="Views\ReporterDashboard\Settings.cshtml" />
+    <Content Include="Views\Case\Index.cshtml" />
+    <Content Include="Views\Case\Messages.cshtml" />
+    <Content Include="Views\Case\Team.cshtml" />
+    <Content Include="Views\Case\Activity.cshtml" />
+    <Content Include="Views\Case\Reporter.cshtml" />
+    <Content Include="Views\PartialViews\_ReportDetailsLeft.cshtml" />
+    <Content Include="Views\Settings\Index.cshtml" />
+    <Content Include="Views\Index\Page.cshtml" />
+    <Content Include="Views\Company\Cases.cshtml" />
+    <Content Include="Views\Company\Company.cshtml" />
+    <Content Include="Views\Company\Mediators.cshtml" />
+    <Content Include="Views\Settings\Cases.cshtml" />
+    <Content Include="Views\Settings\Company.cshtml" />
+    <Content Include="Views\Settings\Mediators.cshtml" />
+    <Content Include="Views\Login\Company.cshtml" />
+    <Content Include="Views\Tasks\Index.cshtml" />
+    <Content Include="Views\Tasks\Completed.cshtml" />
+    <Content Include="Views\Case\Task.cshtml" />
+    <Content Include="Views\PartialViews\_ReportTopMenu.cshtml" />
+    <Content Include="Views\Messages\Index.cshtml" />
+    <Content Include="Views\Analytics\Tasks.cshtml" />
+    <Content Include="Views\Analytics\Mediators.cshtml" />
+    <Content Include="Views\New\Company.cshtml" />
+    <Content Include="Views\New\Index.cshtml" />
+    <Content Include="Views\Case\Legal.cshtml" />
+    <Content Include="Views\PartialViews\_ReportTopMessagesMenu.cshtml" />
+    <Content Include="Views\Login\ForgetPassword.cshtml" />
+    <Content Include="Views\Login\Restore.cshtml" />
+    <Content Include="Views\New\Success.cshtml" />
+    <Content Include="Views\Settings\User.cshtml" />
+    <Content Include="Views\Shared\Helpers\_UserPreviewFace.cshtml" />
+    <Content Include="Views\Settings\Password.cshtml" />
+    <Content Include="Views\Login\RestorePass.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\CreateTaskModal.cshtml" />
+    <Content Include="Views\Analytics\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ApproveDialogModal.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <TypeScriptCompile Include="Scripts\Common\test.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_LocalResources\GlobalRes.en1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GlobalRes.en.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\GlobalRes1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GlobalRes.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AnalyticsController.cs" />
+    <Compile Include="Controllers\ApplicationController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CaseController.cs" />
+    <Compile Include="Controllers\CasesController.cs" />
+    <Compile Include="Controllers\MainController.cs" />
+    <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Controllers\NewController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\ReporterDashboardController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\SettingsController.cs" />
+    <Compile Include="Controllers\TasksController.cs" />
+    <Compile Include="Controllers\Utils\AuthHelper.cs" />
+    <Compile Include="Controllers\Utils\Constatns.cs" />
+    <Compile Include="Controllers\IndexController.cs" />
+    <Compile Include="Controllers\Utils\HtmlDataHelper.cs" />
+    <Compile Include="Controllers\Utils\ListEntety.cs" />
+    <Compile Include="Controllers\Utils\SessionManager.cs" />
+    <Compile Include="Controllers\ViewModel\ActiveCasesViewModel.cs" />
+    <Compile Include="Controllers\ViewModel\AnonimityViewModel.cs" />
+    <Compile Include="Controllers\ViewModel\BaseViewModel.cs" />
+    <Compile Include="Controllers\NewReportController.cs" />
+    <Compile Include="Controllers\ViewModel\CaseSubmittedViewModel.cs" />
+    <Compile Include="Controllers\ViewModel\MediatorsView.cs" />
+    <Compile Include="Controllers\ViewModel\MessagesViewModel.cs" />
+    <Compile Include="Controllers\ViewModel\ReporterDashboardViewModel.cs" />
+    <Compile Include="Controllers\ViewModel\LoginViewModel.cs" />
+    <Compile Include="Controllers\ViewModel\ReportViewModel.cs" />
+    <Compile Include="Controllers\ViewModel\SettingsViewModel.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\App\Case\CaseMessagesModel.cs" />
+    <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\ActiveCasesModel.cs" />
+    <Compile Include="Models\CountryModel.cs" />
+    <Compile Include="Models\Database\action.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\address.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\anonymity.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\attachment.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\billing_option.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\client.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\color.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\company.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\company_anonymity.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\company_custom_question.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\company_department.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\company_invitation.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\company_location.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\company_relationship.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\company_secondary_type.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\company_type.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\company_unread_report_reminder.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\country.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\custom_question.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\custom_question_answer.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\demoq_request.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\ECEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ECEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\ECEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\ECEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ECEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\frequency.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\industry.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\injury_damage.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\investigation_status.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\invitation.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\language.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\login_history.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\management_know.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\message.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\message_user_read.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\notification_summary_period.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\ongoing.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\outcome.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\partner.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\preferred_contact_method.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\priority.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\province.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\relationship.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\report.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\reported_outside.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\report_department.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\report_investigation_status.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\report_log.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\report_mediator_assigned.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\report_mediator_involved.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\report_non_mediator_involved.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\report_owner.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\report_relationship.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\report_resolution.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\report_secondary_type.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\report_type_mandatory_question.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\report_user_read.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\resolution.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\role_in_report.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\secondary_type_mandatory.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\source.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\status.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\task.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\task_comment.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\task_comment_user_read.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\task_user_read.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\time_zone.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\tmp_raph_client.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\type.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\unread_report_reminder.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\unread_report_reminder_sent.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\user.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\user_change_password.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\user_role.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\validation_type.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\zzbilling_info.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\zzcase_type.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\zzmediator_secondary_type.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\zzreport_action_type.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\zzzzreport_message_attachment.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataObjects\SearchCompanyDto.cs" />
+    <Compile Include="Models\ECModel\MessageExtended.cs" />
+    <Compile Include="Models\ECModel\ReportTypes.cs" />
+    <Compile Include="Models\ECModel\StartPage.cs" />
+    <Compile Include="Models\ECModel\Anonymity.cs" />
+    <Compile Include="Models\CompanyModel.cs" />
+    <Compile Include="Models\ECModel\Department.cs" />
+    <Compile Include="Models\ECModel\Location.cs" />
+    <Compile Include="Models\ECModel\Relationship.cs" />
+    <Compile Include="Models\ECModel\TaskCommentExtended.cs" />
+    <Compile Include="Models\ECModel\TaskExtended.cs" />
+    <Compile Include="Models\GlobalFunctions.cs" />
+    <Compile Include="Models\JsonPResult.cs" />
+    <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\NewReportModel.cs" />
+    <Compile Include="Models\ReporterDashboardModel.cs" />
+    <Compile Include="Models\ReportModel.cs" />
+    <Compile Include="Models\SettingsModel.cs" />
+    <Compile Include="Models\UserIdentifyModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\ECModel\BaseEntity.cs" />
+    <Compile Include="Models\Constant.cs" />
+    <Compile Include="Models\ECModel\Company.cs" />
+    <Compile Include="Models\ECModel\User.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Utils\FileUtils.cs" />
+    <Compile Include="Models\ViewModels\CaseMessagesViewModel.cs" />
+    <Compile Include="Models\ViewModels\CasePreviewViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="Controllers\Utils\EcAuthorizedAttribute.cs" />
+    <Compile Include="Utils\Auth\AuthHttpModule .cs" />
+    <Compile Include="Utils\Auth\AuthUser.cs" />
+    <Compile Include="Utils\Auth\CookiesAuthentication.cs" />
+    <Compile Include="Utils\Auth\EcMembershipProvider.cs" />
+    <Compile Include="Utils\Auth\EcRoleProvider.cs" />
+    <Compile Include="Utils\Auth\IAuthentication.cs" />
+    <Compile Include="Utils\Auth\Repo.cs" />
+    <Compile Include="Utils\Auth\User.cs" />
+    <Compile Include="Utils\Auth\UserIndentity .cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Upload\CompanyLogo\" />
+    <Folder Include="Views\ActiveCasesModel\" />
+    <Folder Include="Views\App_LocalResources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="App_LocalResources\GlobalRes.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>GlobalRes.en1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\GlobalRes.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>GlobalRes1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EC.Business\EC.Business.csproj">
+      <Project>{41f69955-26be-4a77-832e-109f2d88654e}</Project>
+      <Name>EC.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EC.Common.Interfaces\EC.Common.Interfaces.csproj">
+      <Project>{f8e5914c-dc00-460a-827a-6cadbc8a7e24}</Project>
+      <Name>EC.Common.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EC.Common.Util\EC.Common.Util.csproj">
+      <Project>{60f0f82e-fa76-4279-b980-21614256dafb}</Project>
+      <Name>EC.Common.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EC.Framework.Data.Util\EC.Framework.Data.Util.csproj">
+      <Project>{c7573cb1-0e71-48db-9238-52c1807f7825}</Project>
+      <Name>EC.Framework.Data.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EC.Framework.Email\EC.Framework.Email.csproj">
+      <Project>{f17c0764-8c0b-4290-b7c3-e647ce65e96f}</Project>
+      <Name>EC.Framework.Email</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Localization\EC.Localization.csproj">
+      <Project>{2403521e-4e55-43c3-a91c-2d4454488003}</Project>
+      <Name>EC.Localization</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>25440</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:25403/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <servers defaultServer="SelfHostServer">
+            <server name="SelfHostServer" exePath="" cmdArgs="" url="http://localhost:25403/" workingDir="" />
+          </servers>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Pta.Build.WebEssentialsBundleTask.1.0.2\build\Pta.Build.WebEssentialsBundleTask.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Pta.Build.WebEssentialsBundleTask.1.0.2\build\Pta.Build.WebEssentialsBundleTask.props'))" />
+    <Error Condition="!Exists('..\packages\Pta.Build.WebEssentialsBundleTask.1.0.2\build\Pta.Build.WebEssentialsBundleTask.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Pta.Build.WebEssentialsBundleTask.1.0.2\build\Pta.Build.WebEssentialsBundleTask.targets'))" />
+  </Target>
+  <Import Project="..\packages\Pta.Build.WebEssentialsBundleTask.1.0.2\build\Pta.Build.WebEssentialsBundleTask.targets" Condition="Exists('..\packages\Pta.Build.WebEssentialsBundleTask.1.0.2\build\Pta.Build.WebEssentialsBundleTask.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

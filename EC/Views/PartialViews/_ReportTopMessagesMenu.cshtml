@@ -1,0 +1,78 @@
+﻿@using EC.Models;
+@using EC.App_LocalResources;
+@{
+    int report_id = (Int32)ViewBag.report_id;
+    int user_id = (Int32)ViewBag.user_id;
+    int selected_item = (Int32)ViewBag.selected_item;
+    ReportModel rm = new ReportModel(report_id);
+    UserModel um = new UserModel(user_id);
+    CompanyModel cm = new CompanyModel(um._user.company_id);
+    int privilige_number = cm.AllMediators(um._user.company_id, true, 7).Count();
+    
+    int unread_messages = @um.Unread_Messages_Quantity(report_id, 2);
+    int unread_reporters = @um.Unread_Messages_Quantity(report_id, 1);
+    int unread_legals = @um.Unread_Messages_Quantity(report_id, 3);
+
+    string unread_messages_s = "";
+    string unread_reporters_s = "";
+    string unread_legal_s = "";
+}
+
+@{
+        if (unread_messages > 0)
+        {
+            unread_messages_s = unread_messages.ToString();
+        }
+        if (unread_reporters > 0)
+        {
+            unread_reporters_s = unread_reporters.ToString();
+        }
+        if (unread_legals > 0)
+        {
+            unread_legal_s = unread_legals.ToString();
+        }
+        
+        if (selected_item == 0)
+        {
+            selected_item = 1; 
+        }
+        
+        
+        string popup = null;
+        if (ViewBag.popup != null)
+        {
+            popup = report_id + "?popup=" + ViewBag.popup;
+        }
+        else
+        {
+            popup = report_id + "?popup=true";
+        }
+}
+
+<a href="/Case/Messages/@popup" class="@(selected_item == 1 ? "messagesTab active" : "messagesTab")">
+    <span class="titleText">@GlobalRes.Casemediators.ToLower()</span>
+    @if (unread_messages_s.Length > 0)
+    {
+        <span class="number">@unread_messages</span>
+    }
+    <span class="labelArrow">></span>
+</a>
+<a href="/Case/Reporter/@popup" class="@(selected_item == 2 ? "messagesTab active" : "messagesTab")" style="padding-left:43px">
+    <span class="titleText">@GlobalRes.Reporter.ToLower()</span>
+    @if (unread_reporters_s.Length > 0)
+    {
+        <span class="number">@unread_reporters_s</span>
+    }
+    <span class="labelArrow">></span>
+</a>
+@if (privilige_number > 0)
+{
+    <a href="/Case/Legal/@popup" class="@(selected_item == 3 ? "messagesTab active" : "messagesTab")" style="padding-left:13px">
+        <span class="titleText">@GlobalRes.Legalcounsel.ToLower()</span>
+        @if (unread_legal_s.Length > 0)
+        {
+            <span class="number">@unread_legal_s</span>
+        }
+        <span class="labelArrow">></span>
+    </a>
+}

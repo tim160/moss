@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Tzs" xml:space="preserve">
+    <value>&lt;Tzs&gt;
+&lt;Tz dn="(GMT-12:00) International Date Line West" sn="Dateline Standard Time" dln="Dateline Daylight Time" bias="720" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="0" /&gt;
+&lt;Tz dn="(GMT-11:00) Midway Island, Samoa" sn="Samoa Standard Time" dln="Samoa Daylight Time" bias="660" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="1" /&gt;
+&lt;Tz dn="(GMT-10:00) Hawaii" sn="Hawaiian Standard Time" dln="Hawaiian Daylight Time" bias="600" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="2" /&gt;
+&lt;Tz dn="(GMT-09:00) Alaska" sn="Alaskan Standard Time" dln="Alaskan Daylight Time" bias="540" sbias="0" dlbias="-60" ddate="0,3,0,2,2,0,0,0" sdate="0,11,0,1,2,0,0,0" idx="3" /&gt;
+&lt;Tz dn="(GMT-08:00) Pacific Time (US &amp;amp; Canada)" sn="Pacific Standard Time" dln="Pacific Daylight Time" bias="480" sbias="0" dlbias="-60" ddate="0,3,0,2,2,0,0,0" sdate="0,11,0,1,2,0,0,0" idx="4" sshort="PST" dlshort="PDT"/&gt;
+&lt;Tz dn="(GMT-07:00) Mountain Time (US &amp;amp; Canada)" sn="Mountain Standard Time" dln="Mountain Daylight Time" bias="420" sbias="0" dlbias="-60" ddate="0,3,0,2,2,0,0,0" sdate="0,11,0,1,2,0,0,0" idx="10" sshort="MST" dlshort="MDT"/&gt;
+&lt;Tz dn="(GMT-04:00) Atlantic Time (Canada)" sn="Atlantic Standard Time" dln="Atlantic Daylight Time" bias="240" sbias="0" dlbias="-60" ddate="0,3,0,2,2,0,0,0" sdate="0,11,0,1,2,0,0,0" idx="6" /&gt;
+&lt;Tz dn="(GMT-06:00) Saskatchewan" sn="Canada Central Standard Time" dln="Canada Central Daylight Time" bias="360" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="11" /&gt;
+&lt;Tz dn="(GMT-06:00) Central Time (US &amp;amp; Canada)" sn="Central Standard Time" dln="Central Daylight Time" bias="360" sbias="0" dlbias="-60" ddate="0,3,0,2,2,0,0,0" sdate="0,11,0,1,2,0,0,0" idx="20" sshort="CST" dlshort="CDT"/&gt;
+&lt;Tz dn="(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi" sn="China Standard Time" dln="China Daylight Time" bias="-480" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="210" /&gt;
+&lt;Tz dn="(GMT-07:00) Chihuahua, La Paz, Mazatlan" sn="Mountain Standard Time (Mexico)" dln="Mountain Daylight Time (Mexico)" bias="420" sbias="0" dlbias="-60" ddate="0,4,0,1,2,0,0,0" sdate="0,10,0,5,2,0,0,0" idx="49" /&gt;
+&lt;Tz dn="(GMT-06:00) Guadalajara, Mexico City, Monterrey" sn="Central Standard Time (Mexico)" dln="Central Daylight Time (Mexico)" bias="360" sbias="0" dlbias="-60" ddate="0,4,0,1,2,0,0,0" sdate="0,10,0,5,2,0,0,0" idx="22" /&gt;
+&lt;Tz dn="(GMT-08:00) Tijuana, Baja California" sn="Pacific Standard Time (Mexico)" dln="Pacific Daylight Time (Mexico)" bias="480" sbias="0" dlbias="-60" ddate="0,4,0,1,2,0,0,0" sdate="0,10,0,5,2,0,0,0" idx="60" /&gt;
+&lt;Tz dn="(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague" sn="Central Europe Standard Time" dln="Central Europe Daylight Time" bias="-60" sbias="0" dlbias="-60" ddate="0,3,0,5,2,0,0,0" sdate="0,10,0,5,3,0,0,0" idx="100" /&gt;
+&lt;Tz dn="(GMT+10:00) Canberra, Melbourne, Sydney" sn="AUS Eastern Standard Time" dln="AUS Eastern Daylight Time" bias="-600" sbias="0" dlbias="-60" ddate="0,10,0,1,2,0,0,0" sdate="0,4,0,1,3,0,0,0" idx="255" /&gt;
+&lt;Tz dn="(GMT+09:30) Darwin" sn="AUS Central Standard Time" dln="AUS Central Daylight Time" bias="-570" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="245" /&gt;
+&lt;Tz dn="(GMT+09:30) Adelaide" sn="Cen. Australia Standard Time" dln="Cen. Australia Daylight Time" bias="-570" sbias="0" dlbias="-60" ddate="0,10,0,1,2,0,0,0" sdate="0,4,0,1,3,0,0,0" idx="250" /&gt;
+&lt;Tz dn="(GMT+08:00) Perth" sn="W. Australia Standard Time" dln="W. Australia Daylight Time" bias="-480" sbias="0" dlbias="-60" ddate="0,10,0,5,2,0,0,0" sdate="0,3,0,5,3,0,0,0" idx="225" /&gt;
+&lt;Tz dn="(GMT+10:00) Brisbane" sn="E. Australia Standard Time" dln="E. Australia Daylight Time" bias="-600" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="260" /&gt;
+&lt;Tz dn="(GMT+04:30) Kabul" sn="Afghanistan Standard Time" dln="Afghanistan Daylight Time" bias="-270" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="101" /&gt;
+&lt;Tz dn="(GMT+03:00) Kuwait, Riyadh" sn="Arab Standard Time" dln="Arab Daylight Time" bias="-180" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="102" /&gt;
+&lt;Tz dn="(GMT+04:00) Abu Dhabi, Muscat" sn="Arabian Standard Time" dln="Arabian Daylight Time" bias="-240" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="103" /&gt;
+&lt;Tz dn="(GMT+03:00) Baghdad" sn="Arabic Standard Time" dln="Arabic Daylight Time" bias="-180" sbias="0" dlbias="-60" ddate="0,4,3,1,3,0,0,0" sdate="0,10,4,1,4,0,0,0" idx="104" /&gt;
+&lt;Tz dn="(GMT+04:00) Baku" sn="Azerbaijan Standard Time" dln="Azerbaijan Daylight Time" bias="-240" sbias="0" dlbias="-60" ddate="0,3,0,5,4,0,0,0" sdate="0,10,0,5,5,0,0,0" idx="9" /&gt;
+&lt;Tz dn="(GMT-01:00) Azores" sn="Azores Standard Time" dln="Azores Daylight Time" bias="60" sbias="0" dlbias="-60" ddate="0,3,0,5,2,0,0,0" sdate="0,10,0,5,3,0,0,0" idx="14" /&gt;
+&lt;Tz dn="(GMT-01:00) Cape Verde Is." sn="Cape Verde Standard Time" dln="Cape Verde Daylight Time" bias="60" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="12" /&gt;
+&lt;Tz dn="(GMT+04:00) Yerevan" sn="Caucasus Standard Time" dln="Caucasus Daylight Time" bias="-240" sbias="0" dlbias="-60" ddate="0,3,0,5,2,0,0,0" sdate="0,10,0,5,3,0,0,0" idx="13" /&gt;
+&lt;Tz dn="(GMT-06:00) Central America" sn="Central America Standard Time" dln="Central America Daylight Time" bias="360" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="15" /&gt;
+&lt;Tz dn="(GMT+06:00) Astana, Dhaka" sn="Central Asia Standard Time" dln="Central Asia Daylight Time" bias="-360" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="16" /&gt;
+&lt;Tz dn="(GMT-04:00) Manaus" sn="Central Brazilian Standard Time" dln="Central Brazilian Daylight Time" bias="240" sbias="0" dlbias="-60" ddate="0,10,0,2,0,0,0,0" sdate="0,2,0,3,0,0,0,0" idx="17" /&gt;
+&lt;Tz dn="(GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb" sn="Central European Standard Time" dln="Central European Daylight Time" bias="-60" sbias="0" dlbias="-60" ddate="0,3,0,5,2,0,0,0" sdate="0,10,0,5,3,0,0,0" idx="19" /&gt;
+&lt;Tz dn="(GMT+11:00) Magadan, Solomon Is., New Caledonia" sn="Central Pacific Standard Time" dln="Central Pacific Daylight Time" bias="-660" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="21" /&gt;
+&lt;Tz dn="(GMT+03:00) Nairobi" sn="E. Africa Standard Time" dln="E. Africa Daylight Time" bias="-180" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="25" /&gt;
+&lt;Tz dn="(GMT+02:00) Minsk" sn="E. Europe Standard Time" dln="E. Europe Daylight Time" bias="-120" sbias="0" dlbias="-60" ddate="0,3,0,5,2,0,0,0" sdate="0,10,0,5,3,0,0,0" idx="27" /&gt;
+&lt;Tz dn="(GMT-03:00) Brasilia" sn="E. South America Standard Time" dln="E. South America Daylight Time" bias="180" sbias="0" dlbias="-60" ddate="0,10,0,2,0,0,0,0" sdate="0,2,0,3,0,0,0,0" idx="28" /&gt;
+&lt;Tz dn="(GMT-05:00) Eastern Time (US &amp;amp; Canada)" sn="Eastern Standard Time" dln="Eastern Daylight Time" bias="300" sbias="0" dlbias="-60" ddate="0,3,0,2,2,0,0,0" sdate="0,11,0,1,2,0,0,0" idx="35" sshort="EST" dlshort="EDT"/&gt;
+&lt;Tz dn="(GMT+02:00) Cairo" sn="Egypt Standard Time" dln="Egypt Daylight Time" bias="-120" sbias="0" dlbias="-60" ddate="0,4,4,5,23,59,59,999" sdate="0,9,4,5,23,59,59,999" idx="30" /&gt;
+&lt;Tz dn="(GMT+05:00) Ekaterinburg" sn="Ekaterinburg Standard Time" dln="Ekaterinburg Daylight Time" bias="-300" sbias="0" dlbias="-60" ddate="0,3,0,5,2,0,0,0" sdate="0,10,0,5,3,0,0,0" idx="31" /&gt;
+&lt;Tz dn="(GMT+12:00) Fiji, Kamchatka, Marshall Is." sn="Fiji Standard Time" dln="Fiji Daylight Time" bias="-720" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="32" /&gt;
+&lt;Tz dn="(GMT+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius" sn="FLE Standard Time" dln="FLE Daylight Time" bias="-120" sbias="0" dlbias="-60" ddate="0,3,0,5,3,0,0,0" sdate="0,10,0,5,4,0,0,0" idx="33" /&gt;
+&lt;Tz dn="(GMT+03:00) Tbilisi" sn="Georgian Standard Time" dln="Georgian Daylight Time" bias="-180" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="34" /&gt;
+&lt;Tz dn="(GMT) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London" sn="GMT Standard Time" dln="GMT Daylight Time" bias="0" sbias="0" dlbias="-60" ddate="0,3,0,5,1,0,0,0" sdate="0,10,0,5,2,0,0,0" idx="29" /&gt;
+&lt;Tz dn="(GMT-03:00) Greenland" sn="Greenland Standard Time" dln="Greenland Daylight Time" bias="180" sbias="0" dlbias="-60" ddate="0,4,0,1,2,0,0,0" sdate="0,10,0,5,2,0,0,0" idx="36" /&gt;
+&lt;Tz dn="(GMT) Casablanca, Monrovia, Reykjavik" sn="Greenwich Standard Time" dln="Greenwich Daylight Time" bias="0" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="37" /&gt;
+&lt;Tz dn="(GMT+02:00) Athens, Bucharest, Istanbul" sn="GTB Standard Time" dln="GTB Daylight Time" bias="-120" sbias="0" dlbias="-60" ddate="0,3,0,5,3,0,0,0" sdate="0,10,0,5,4,0,0,0" idx="38" /&gt;
+&lt;Tz dn="(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi" sn="India Standard Time" dln="India Daylight Time" bias="-330" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="40" /&gt;
+&lt;Tz dn="(GMT+03:30) Tehran" sn="Iran Standard Time" dln="Iran Daylight Time" bias="-210" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="41" /&gt;
+&lt;Tz dn="(GMT+02:00) Jerusalem" sn="Jerusalem Standard Time" dln="Jerusalem Daylight Time" bias="-120" sbias="0" dlbias="-60" ddate="2009,3,0,27,2,0,0,0" sdate="2009,9,0,27,2,0,0,0" idx="42" id="Israel Standard Time" /&gt;
+&lt;Tz dn="(GMT+02:00) Amman" sn="Jordan Standard Time" dln="Jordan Daylight Time" bias="-120" sbias="0" dlbias="-60" ddate="0,3,4,5,23,59,59,999" sdate="0,10,5,5,1,0,0,0" idx="43" /&gt;
+&lt;Tz dn="(GMT+09:00) Seoul" sn="Korea Standard Time" dln="Korea Daylight Time" bias="-540" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="44" /&gt;
+&lt;Tz dn="(GMT-02:00) Mid-Atlantic" sn="Mid-Atlantic Standard Time" dln="Mid-Atlantic Daylight Time" bias="120" sbias="0" dlbias="-60" ddate="0,3,0,5,2,0,0,0" sdate="0,9,0,5,2,0,0,0" idx="45" /&gt;
+&lt;Tz dn="(GMT+02:00) Beirut" sn="Middle East Standard Time" dln="Middle East Daylight Time" bias="-120" sbias="0" dlbias="-60" ddate="0,3,0,5,0,0,0,0" sdate="0,10,0,5,0,0,0,0" idx="46" /&gt;
+&lt;Tz dn="(GMT-03:00) Montevideo" sn="Montevideo Standard Time" dln="Montevideo Daylight Time" bias="180" sbias="0" dlbias="-60" ddate="0,10,0,1,2,0,0,0" sdate="0,3,0,2,2,0,0,0" idx="47" /&gt;
+&lt;Tz dn="(GMT+06:30) Yangon (Rangoon)" sn="Myanmar Standard Time" dln="Myanmar Daylight Time" bias="-390" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="50" /&gt;
+&lt;Tz dn="(GMT+06:00) Almaty, Novosibirsk" sn="N. Central Asia Standard Time" dln="N. Central Asia Daylight Time" bias="-360" sbias="0" dlbias="-60" ddate="0,3,0,5,2,0,0,0" sdate="0,10,0,5,3,0,0,0" idx="51" /&gt;
+&lt;Tz dn="(GMT+02:00) Windhoek" sn="Namibia Standard Time" dln="Namibia Daylight Time" bias="-120" sbias="0" dlbias="60" ddate="0,4,0,1,2,0,0,0" sdate="0,9,0,1,2,0,0,0" idx="52" /&gt;
+&lt;Tz dn="(GMT+05:45) Kathmandu" sn="Nepal Standard Time" dln="Nepal Daylight Time" bias="-345" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="53" /&gt;
+&lt;Tz dn="(GMT+12:00) Auckland, Wellington" sn="New Zealand Standard Time" dln="New Zealand Daylight Time" bias="-720" sbias="0" dlbias="-60" ddate="0,9,0,5,2,0,0,0" sdate="0,4,0,1,3,0,0,0" idx="54" /&gt;
+&lt;Tz dn="(GMT-03:30) Newfoundland" sn="Newfoundland Standard Time" dln="Newfoundland Daylight Time" bias="210" sbias="0" dlbias="-60" ddate="0,3,0,2,0,1,0,0" sdate="0,11,0,1,0,1,0,0" idx="55" /&gt;
+&lt;Tz dn="(GMT+08:00) Irkutsk, Ulaan Bataar" sn="North Asia East Standard Time" dln="North Asia East Daylight Time" bias="-480" sbias="0" dlbias="-60" ddate="0,3,0,5,2,0,0,0" sdate="0,10,0,5,3,0,0,0" idx="56" /&gt;
+&lt;Tz dn="(GMT+07:00) Krasnoyarsk" sn="North Asia Standard Time" dln="North Asia Daylight Time" bias="-420" sbias="0" dlbias="-60" ddate="0,3,0,5,2,0,0,0" sdate="0,10,0,5,3,0,0,0" idx="57" /&gt;
+&lt;Tz dn="(GMT-04:00) Santiago" sn="Pacific SA Standard Time" dln="Pacific SA Daylight Time" bias="240" sbias="0" dlbias="-60" ddate="0,10,6,2,23,59,59,999" sdate="0,3,6,2,23,59,59,999" idx="58" /&gt;
+&lt;Tz dn="(GMT+01:00) Brussels, Copenhagen, Madrid, Paris" sn="Romance Standard Time" dln="Romance Daylight Time" bias="-60" sbias="0" dlbias="-60" ddate="0,3,0,5,2,0,0,0" sdate="0,10,0,5,3,0,0,0" idx="61" /&gt;
+&lt;Tz dn="(GMT+03:00) Moscow, St. Petersburg, Volgograd" sn="Russian Standard Time" dln="Russian Daylight Time" bias="-180" sbias="0" dlbias="-60" ddate="0,3,0,5,2,0,0,0" sdate="0,10,0,5,3,0,0,0" idx="62" /&gt;
+&lt;Tz dn="(GMT-03:00) Buenos Aires, Georgetown" sn="SA Eastern Standard Time" dln="SA Eastern Daylight Time" bias="180" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="63" /&gt;
+&lt;Tz dn="(GMT-05:00) Bogota, Lima, Quito, Rio Branco" sn="SA Pacific Standard Time" dln="SA Pacific Daylight Time" bias="300" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="64" /&gt;
+&lt;Tz dn="(GMT-04:00) La Paz" sn="SA Western Standard Time" dln="SA Western Daylight Time" bias="240" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="65" /&gt;
+&lt;Tz dn="(GMT+07:00) Bangkok, Hanoi, Jakarta" sn="SE Asia Standard Time" dln="SE Asia Daylight Time" bias="-420" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="67" /&gt;
+&lt;Tz dn="(GMT+08:00) Kuala Lumpur, Singapore" sn="Malay Peninsula Standard Time" dln="Malay Peninsula Daylight Time" bias="-480" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="68" id="Singapore Standard Time"/&gt;
+&lt;Tz dn="(GMT+02:00) Harare, Pretoria" sn="South Africa Standard Time" dln="South Africa Daylight Time" bias="-120" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="69" /&gt;
+&lt;Tz dn="(GMT+05:30) Sri Jayawardenepura" sn="Sri Lanka Standard Time" dln="Sri Lanka Daylight Time" bias="-330" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="70" /&gt;
+&lt;Tz dn="(GMT+08:00) Taipei" sn="Taipei Standard Time" dln="Taipei Daylight Time" bias="-480" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="71" /&gt;
+&lt;Tz dn="(GMT+10:00) Hobart" sn="Tasmania Standard Time" dln="Tasmania Daylight Time" bias="-600" sbias="0" dlbias="-60" ddate="0,10,0,1,2,0,0,0" sdate="0,4,0,1,3,0,0,0" idx="72" /&gt;
+&lt;Tz dn="(GMT+09:00) Osaka, Sapporo, Tokyo" sn="Tokyo Standard Time" dln="Tokyo Daylight Time" bias="-540" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="73" /&gt;
+&lt;Tz dn="(GMT+13:00) Nuku'alofa" sn="Tonga Standard Time" dln="Tonga Daylight Time" bias="-780" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="74" /&gt;
+&lt;Tz dn="(GMT-05:00) Indiana (East)" sn="US Eastern Standard Time" dln="US Eastern Daylight Time" bias="300" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="75" /&gt;
+&lt;Tz dn="(GMT-07:00) Arizona" sn="US Mountain Standard Time" dln="US Mountain Daylight Time" bias="420" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="76" /&gt;
+&lt;Tz dn="(GMT-04:30) Caracas" sn="Venezuela Standard Time" dln="Venezuela Daylight Time" bias="270" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="77" /&gt;
+&lt;Tz dn="(GMT+10:00) Vladivostok" sn="Vladivostok Standard Time" dln="Vladivostok Daylight Time" bias="-600" sbias="0" dlbias="-60" ddate="0,3,0,5,2,0,0,0" sdate="0,10,0,5,3,0,0,0" idx="78" /&gt;
+&lt;Tz dn="(GMT+01:00) West Central Africa" sn="W. Central Africa Standard Time" dln="W. Central Africa Daylight Time" bias="-60" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="80" /&gt;
+&lt;Tz dn="(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna" sn="W. Europe Standard Time" dln="W. Europe Daylight Time" bias="-60" sbias="0" dlbias="-60" ddate="0,3,0,5,2,0,0,0" sdate="0,10,0,5,3,0,0,0" idx="81" /&gt;
+&lt;Tz dn="(GMT+05:00) Islamabad, Karachi, Tashkent" sn="West Asia Standard Time" dln="West Asia Daylight Time" bias="-300" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="82" /&gt;
+&lt;Tz dn="(GMT+10:00) Guam, Port Moresby" sn="West Pacific Standard Time" dln="West Pacific Daylight Time" bias="-600" sbias="0" dlbias="-60" ddate="0,0,0,0,0,0,0,0" sdate="0,0,0,0,0,0,0,0" idx="83" /&gt;
+&lt;Tz dn="(GMT+09:00) Yakutsk" sn="Yakutsk Standard Time" dln="Yakutsk Daylight Time" bias="-540" sbias="0" dlbias="-60" ddate="0,3,0,5,2,0,0,0" sdate="0,10,0,5,3,0,0,0" idx="84" /&gt;
+&lt;/Tzs&gt;</value>
+  </data>
+</root>

@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="~/Content/style.css">
+    @RenderBody()
+</head>
+<body>
+<div id="main">
+    <div id="wrap">
+        <div id="header">
+            <div class="positionLogo">
+                <div class="blueLogo"></div>
+            </div>
+            <div style="float: right">
+                <div class="positionLogin">
+                    <div class="login">LOGIN</div>
+                </div>
+                <div class="positionButton">
+                    <div class="bigButton"><span>FILE A REPORT</span></div>
+                </div>
+            </div>
+        </div><!--end header-->
+        <div id="topBody">
+            <div class="firstTitle">
+                File a report
+            </div>
+            <div class="secondTitle">
+                Find an organization by company name or code
+            </div>
+            <div class="thirdTitle">
+                <input id="specialInput" placeholder="Company name or code">
+                <div id="buttonStart"><span class="buttonStartText">START</span></div>
+            </div>
+        </div><!--end topBody-->
+        <div id="bottomBody">
+
+            <div class="fourthTitle">
+                Don't be a Silent Bystander
+            </div>
+            <div class="icons">
+                <div class="centerBlock">
+
+
+                    <div class="positionFirstBlock">
+                        <div class="hoverClassFirstBlock">
+                            <div class="empty"></div>
+                            <div class="positionIcons">
+                                <div id="firstIcon"></div>
+                            </div>
+                            <span class="title">Act Early,<br />Act Ethically</span><br/>
+                            <span class="textBlock">
+                                    If you witness (or know of) an incident that compromises your organization, contribute to the solution. Report it.
+                                </span>
+                        </div> <!-- end hoverClassFirstBlock-->
+                    </div><!-- end positionFirstBlock-->
+                    <div class="positionSecondBlock">
+                        <div class="hoverClassSecondBlock">
+                            <div class="empty"></div>
+                            <div class="positionIcons">
+                                <div id="secondIcon"></div>
+                            </div>
+                            <span class="title">Report by Web, <br />Tablet or Mobile</span><br/>
+                            <span class="textBlock">
+                                    Use the quick and easy online form. Submit the report via web, tablet or mobile.
+                                </span>
+                        </div> <!-- end hoverClassSecondBlock-->
+                    </div><!-- end positionSecondBlock-->
+
+
+                    <div id="positionThirdAndFourth">
+                        <div class="positionThirdBlock">
+                            <div class="hoverClassThirdBlock">
+                                <div class="empty"></div>
+                                <div class="positionIcons">
+                                    <div id="thirdIcon"></div>
+                                </div>
+                                <span class="title">Choose your  <br />Confidentiality Level</span><br/>
+                                <span class="textBlock">
+                                        Report anonymously or confidentially. If you choose to report confidentially, you control whether or not your name & contact information is shared.
+                                    </span>
+                            </div> <!-- end hoverClassThirdBlock-->
+                        </div><!-- end positionThirdBlock-->
+                        <div class="positionFourthBlock">
+                            <div class="hoverClassFourthBlock">
+                                <div class="empty"></div>
+                                <div class="positionIcons">
+                                    <div id="fourthIcon"></div>
+                                </div>
+                                <span class="title">Expect a <br />Response</span><br/>
+                                <span class="textBlock">
+                                        Mediators will get back to you quickly and keep you updated on the status of the case. All companies that use Employee Confidential are required to have a C-Suite Escalation Process.
+                                    </span>
+                            </div> <!-- end hoverClassFourthBlock-->
+                        </div><!-- end positionFourthBlock-->
+                    </div><!--end positionThirdAndFourth -->
+                </div><!-- end centerBlock-->
+            </div><!--end icons-->
+        </div><!--end bottomBody-->
+
+    </div><!--end wrap-->
+
+    <div id="footer">
+        <ul>
+            <li id="firstLogo">
+                <div class="blueLogo"></div>
+            </li>
+            <li id="secondLogo">
+            </li>
+            <li id="terms">
+                <a target="_blank" href="TermsOfService.html">Terms</a>
+            </li>
+            <li id="privacy">
+                <a target="_blank" href="PrivacyStatement.html">Privacy</a>
+            </li>
+            <li id="contact">
+                <a target="_blank" href="#footer">Contact</a>
+            </li>
+            <li class="employeeConfidential">
+                © 2015 Employee Confidential LLC
+            </li>
+        </ul>
+    </div><!--end footer-->
+    @RenderSection("pageScripts", required: false)
+</div>
+</body>
+</html>

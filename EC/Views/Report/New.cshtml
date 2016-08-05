@@ -1,0 +1,870 @@
+﻿@using EC.App_LocalResources
+@using EC.Controllers.Utils
+@using EC.Models
+@using EC.Models.Database
+@using EC.Models.ECModel
+
+@{
+    ViewBag.Title = "New Incident Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //List<relationship> relationship = ViewBag.relationship;
+    List<anonymity> anonimity = ViewBag.anonimity;
+    List<anonymity> string_anon = new List<anonymity>();
+    string_anon = anonimity;
+
+    //bool? is_cc = ViewBag.is_cc;
+    //String class_ext = ViewBag.cc_extension;
+
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
+    String class_ext = "";
+    if (is_cc.Value)
+    {
+        class_ext = "_cc";
+    }
+        //19
+}
+
+
+@section pageStyles{
+    <script type="text/javascript" src="~/Scripts/Common/helper.js"></script>
+}
+@section pageScripts{
+    <script type="text/javascript" src="~/Scripts/View/report.js"></script>
+    <script type="text/javascript" src="~/Scripts/lib/jquery-ui.min.js"></script>
+
+    <link href="~/Content/jquery-ui.css" rel="stylesheet">
+}
+
+
+<form enctype="multipart/form-data" method="POST">
+    <input type="hidden" value="" />
+    <div class="headerBlock">
+        <div class="firstBlock">
+            <div class="logo">
+                @if (is_cc.Value)
+                {
+                    <img src='@Url.Content("~/Content/img/logo2.png")' />
+                }
+                else
+                {
+                    <img src='@Url.Content("~/Content/img/logo.png")' />
+                }
+            </div>
+        </div>
+
+        <div class="steps" style="height: 65px; background-color: rgb(51,59,64); border-bottom: 5px solid rgb(5, 181, 162);">
+            <div class="selectedStep clicked" data-val="1" style="border-color: rgb(5, 181, 162); color: rgb(5, 181, 162);">1</div>
+            <div class="selectedStep" data-val="2">2</div>
+            <div class="selectedStep" data-val="3">3</div>
+            <div class="selectedStep" data-val="4">4</div>
+            <div class="selectedStep" data-val="5">5</div>
+        </div>
+
+        <div class="secondBlock">
+            <div>
+                @if (@ViewBag.companylogo != null)
+                {
+                    <img class="logo" src=@ViewBag.companylogo />
+                } else
+                {
+                    <div style="width: 240px;float: left;height: 110px;"></div>
+                }
+            </div>
+            <div class="titlePage">
+                <p>@GlobalRes.GeneralInformation</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="rowContent">
+        <div class="leftBlock leftBlock@{@class_ext}">
+            <p class="titleMenu">@GlobalRes.NewIncidentReport</p>
+            <ul class="verticalMenu verticalMenu@{@class_ext}">
+                <li data-id="1" class="clicked"><span>@GlobalRes.GeneralInformation</span></li>
+                <li data-id="2"><span>@GlobalRes.PartiesInvolved</span></li>
+                <li data-id="3"><span>@GlobalRes.CaseInformation</span></li>
+                <li data-id="4"><span>@GlobalRes.Summary</span></li>
+            </ul>
+        </div>
+
+        <div class="rightBlock rightBlock@{@class_ext}">
+            <input type="hidden" value="@ViewBag.currentCompany" class="validate" name="currentCompany" data-validate="notEmpty" />
+            <input type="hidden" value=@ViewBag.currentCompanyId class="validate" id="currentCompanyId" name="currentCompanyId" data-validate="notEmpty" />
+            <input type="hidden" value=@anonimity name="str_anon" id="str_anon" />
+            <!--generalInfo tab-->
+            <div class="generalInfo tab" data-id="1">
+
+                <div class="content">
+                    <div class="contentBlock" tabindex="1">
+                        <p class="title">@GlobalRes.WhereAreYouReportingFrom</p>
+                        @Helpers.Select(ViewBag.countries, "reportingFrom", "reportFrom validate", GlobalRes.SelectCountry, "", "notEmpty")
+                        <p class="description">
+                            <span id="ReportingFromSelect">@GlobalRes.ReportingFromSelect</span>
+                            @foreach (EC.Models.Database.country myItem in ViewBag.countriesDescription)
+                            {
+                                <div class="countries" style="display: none" data-value="@myItem.id">@myItem.Description()</div>
+                            }
+                        </p>
+                    </div>
+                    <div class="contentBlock" tabindex="1">
+                        <p class="title">@GlobalRes.WouldYouLikeToStay</p>
+                        <div class="rowBlock anType vlCorrect">
+                            <input type="hidden" value="2" class="validate vlCorrect incidentAnonymityId" name="incident_anonymity_id" data-vltarget=".anType" data-validate="notEmpty" />
+
+                            @for (int i = 10; i < string_anon.Count + 10; i++)
+                            {
+                                if (i == 10)
+                                {
+                                    <div class="freeBlock inputRadio option active" data-val="@string_anon[i - 10].id">
+                                        <label class="inputBlock" for="@string_anon[i - 10].AnonymityCompany()">
+                                            <input id="@string_anon[i - 10].AnonymityCompany()" type="radio" name="stay" value="@string_anon[i - 10].AnonymityCompany()" />
+                                            <span class="radioButton"></span>
+                                            <span class="radioTitle">@string_anon[i - 10].AnonymityCompany()</span>
+                                            <p class="descriptionRadio">@string_anon[i - 10].AnonymityDs()</p>
+                                        </label>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="freeBlock inputRadio option" data-val="@string_anon[i - 10].id">
+                                        <label class="inputBlock" for="@string_anon[i - 10].Anonymity()">
+                                            <input id="@string_anon[i - 10].Anonymity()" type="radio" name="stay" value="@string_anon[i - 10].Anonymity()" />
+                                            <span class="radioButton"></span>
+                                            <span class="radioTitle">@string_anon[i - 10].Anonymity()</span>
+                                            <p class="descriptionRadio">@string_anon[i - 10].AnonymityDs()</p>
+                                        </label>
+                                    </div>
+                                }
+
+                            }
+                        </div>
+
+                    </div>
+                    <div class="contentBlock" tabindex="1">
+                        <p class="title">@GlobalRes.Youareaan:</p>
+                        <div class="rowBlock reporterType vlCorrect">
+                            <input type="hidden" class="validate vlCorrect reporterTypeInput" value="1" name="reporterTypeDetail" data-vltarget=".reporterTypeDetail" data-validate="notEmpty">
+                            @*@if (ViewBag.relationship != null)
+                            {
+                                int count = 0;
+                                foreach (var item in ViewBag.relationship)
+                                {
+                                    if (count == 0)
+                                    {
+                                        <div class="fourBlock inputRadio option active" data-val="@item.id">
+                                            <label class="inputBlock" for="@String.Concat(@item.relationship_en)">
+                                                <input id="@String.Concat(@item.relationship_en)" type="radio" name="radioName" value="@item.id" /><span class="radioButton"></span><span class="radioTitle">@item.relationship_en</span>
+                                            </label>
+                                        </div>
+                                        count++;
+                                    }
+                                    else
+                                    {
+                                        <div class="fourBlock inputRadio option" data-val="@item.id">
+                                            <label class="inputBlock" for="@String.Concat(@item.relationship_en)">
+                                                <input id="@String.Concat(@item.relationship_en)" type="radio" name="radioName" value="@String.Concat(@item.relationship_en)" /><span class="radioButton"></span><span class="radioTitle">@String.Concat(@item.relationship_en)</span>
+                                            </label>
+                                        </div>
+                                    }
+                                ///b Employee” came through as “9” in “Reported as:”
+                                }
+                            }*@
+                            @if (ViewBag.relationship != null)
+                            {
+                                foreach (var item in ViewBag.relationship)
+                                {
+                                    <div class="fourBlock inputRadio option" data-val="@item.id">
+                                        <label class="inputBlock" for="@String.Concat(@item.relationship_en)">
+                                            <input id="@String.Concat(@item.relationship_en)" type="radio" name="radioName" value="@String.Concat(@item.relationship_en)" />
+                                            <span class="radioButton"></span>
+                                            <span class="radioTitle">@String.Concat(@item.relationship_en)</span>
+                                        </label>
+                                    </div>
+                                }
+                                <div class="fourBlock inputRadio option other" data-val="@Html.Raw(ViewBag.relationship.Count + 1)">
+                                    <label class="inputBlock" for="@GlobalRes.Other">
+                                        <input id="Other2" type="radio" name="radioName" value="other" />
+                                        <span class="radioButton"></span>
+                                        <span class="radioTitle">@GlobalRes.Other</span>
+                                    </label>
+                                </div>
+                            }
+                            <script>
+                                $(".reporterType .other").on('click', function (event) {
+                                    var temp = $(event.currentTarget).find('input');
+                                    temp.attr("checked", "checked");
+                                    $('.explainReportType').addClass('validate');
+                                    $('.contentBlock.incident').show();
+                                    $('.contentBlock.incident').find('textarea').focus();
+                                });
+                            </script>
+                        </div>
+                    </div>
+
+                    <div class="contentBlock incident" style="display: none;" tabindex="1">
+                        <p class="title">@GlobalRes.Pleaseexplain:</p>
+                        <textarea name="companyRelationshipOther" class="explainReportType validate" data-validate="notEmpty"></textarea>
+                    </div>
+
+                    <div class="contentBlock" tabindex="1">
+                        <p class="title">@GlobalRes.LocationOfIncident</p>
+                        <div class="rowBlock">
+                            @if (ViewBag.locationsOfIncident.Items.Count > 0)
+                            {
+                                @*@Helpers.Select(ViewBag.locationsOfIncident, "locationsOfIncident validate selectBlock", "Not listed", "Select location", "notEmpty")*@
+                                @Helpers.Select(ViewBag.locationsOfIncident, "location", "locationsOfIncident selectBlock validate", "Not listed", "Select location", "notEmpty")
+                            }
+                            else
+                            {
+                                @*<input type="text" class="current" placeholder="new location" name="other_location_name">*@
+                                <textarea class="current" name="other_location_name"></textarea>
+                            }
+                        </div>
+
+                        <div style="display: none;" class="otherLocation">
+                            <p class="title">@GlobalRes.Enterlocation</p>
+                            <textarea name="locationOfIncidentInput"></textarea>
+                        </div>
+                    </div>
+
+
+
+                    <div class="contentBlock" tabindex="1">
+                        <p class="title">@GlobalRes.SelectDepartmentInvolved</p>
+                        <div class="rowBlock">
+                            <div class="departmentInvolvedContainer">
+                                <input type="hidden" class="departmentInvolvedNum" name="departmentInvolvedNum">
+                                <div>
+                                    @Helpers.Select(ViewBag.departments, "department", "departmentInvolved validate selectBlock", GlobalRes.SelectDepartment, "", "notEmpty")
+                                    <span class="delete redText deleteDepartmentPosition" style="display: none;"></span>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+
+                <div class="buttonBlock buttonBlock@{@class_ext}">
+                    <input type="button" class="button nextSepButton tabOption pInvolved" value="continue">
+                </div>
+
+            </div>
+
+            <!--partiesInvolved-->
+            <div class="partiesInvolved tab" data-id="2">
+                <div class="content">
+
+                    <div class="contentBlock" tabindex="1">
+                        <p class="title">@GlobalRes.NamesOfWitnesses</p>
+                        <div class="inputAddPerson">
+                            <div class="addPersonContainer"></div>
+                        </div>
+                        <div class="addPerson addPerson@{@class_ext}" data-personcounter=0>
+                            <input type="hidden" class="personNameNum" name="personNameNum" placeholder="Name of person" />
+                            <input type="hidden" class="personLastNameNum" name="personLastNameNum" placeholder="Lane Name of person" />
+                            <input type="hidden" class="personTitleNum" name="personTitleNum" placeholder="Title of person" />
+                            <input type="hidden" class="personRoleNum" name="personRoleNum" placeholder="Select role" />
+                            <u class="button display">@GlobalRes.AddPerson</u>
+                        </div>
+                    </div>
+
+                    <div class="contentBlock" tabindex="1">
+                        <p class="title">@GlobalRes.ManagementKnow</p>
+                        <div class="rowBlock managementIncident">
+                            <input type="hidden" value="false" name="managamentKnowId" class="validate" data-vltarget=".managementIncident" data-validate="notEmpty" />
+                            @foreach (EC.Models.Database.management_know myManagementKnow in ViewBag.managament)
+                            {
+                                <div class="freeBlock inputRadio option" data-val="@myManagementKnow.id">
+                                    <label class="inputBlock" for="Html.Raw(@myManagementKnow.id)">
+                                        <input id="Html.Raw(@myManagementKnow.id)" type="radio" name="managementKnow" value="@myManagementKnow.Managament()" /><span class="radioButton"></span><span class="radioTitle">@myManagementKnow.Managament()</span>
+                                    </label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="contentBlock managementKnownExplaintion" style="display: none;" tabindex="1">
+                        <p class="title">@GlobalRes.Pleaseexplain:</p>
+                        <textarea name="management_know_text" class="largeTextArea managementIsKnown validate" data-validate="notEmpty"></textarea>
+                    </div>
+
+                    <div class="contentBlock" tabindex="1">
+                        <div class="referredOutside title">
+                            <p>@GlobalRes.Hascasereportedoutside<br /></p>
+                            <div class="rowBlock whoKnow">
+                                <input type="hidden" value="false" name="reported_outside_id" class="validate" data-vltarget=".reported_outside_id" data-validate="notEmpty" />
+                                @foreach (EC.Models.Database.reported_outside item in ViewBag.reportedOutsides)
+                                {
+                                    <div class="freeBlock inputRadio option" data-val="@item.id">
+                                        <label class="inputBlock" for="@item.description_en">
+                                            <input id="@item.description_en" type="radio" name="isReportRefered" value="@item.description_en" />
+                                            <span class="radioButton"></span>
+                                            <span class="radioTitle">@item.description_en</span>
+                                        </label>
+                                    </div>
+                                }
+                                <div class="freeBlock inputRadio option other3" data-val="other">
+                                    <label class="inputBlock" for="@GlobalRes.Other">
+                                        <input id="OtherWhoknow" type="radio" name="isReportRefered" value="@GlobalRes.Other" />
+                                        <span class="radioButton"></span>
+                                        <span class="radioTitle">@GlobalRes.Other</span>
+                                    </label>
+                                </div>
+                                <script>
+                                    $('.whoKnow .freeBlock ').on('click', function (event) {
+                                        $('.whoKnow input').each(function (indx, element) {
+                                            $(element).prop('checked', false);
+                                            $(element).next().css({ "background-position-x": "0%", "background-position-y": "0%" });
+                                            $(element).parent().find('.radioTitle').css("color", "#AEB5B7");
+                                        });
+                                        $(event.currentTarget).find('.radioButton').css({ "background-position-x": "0%", "background-position-y": "100%" });
+                                        $(event.currentTarget).find('.radioTitle').css("color", "#3C3E3F");
+                                        if ($(event.currentTarget).find('input').val() == "No") {
+                                            $('.contentBlock.reportReferedExplain').hide();
+                                        } else {
+                                            $('.contentBlock.reportReferedExplain').show();
+                                            $('.reportReferedExplain').find('textarea').focus();
+                                            $('#textAreaWhoKnow').click();
+                                        }
+                                    });
+                                    $(".whoKnow .other3").on('click', function (event) {
+                                        $('.isReportedOutside').addClass('validate');
+                                        $('.whoKnow input').each(function (indx, element) {
+                                            $(element).prop('checked', false);
+                                            $(element).find('.radioButton').css({ "background-position-x": "0%", "background-position-y": "0%" });
+                                        });
+                                        $(event.currentTarget).find('.radioButton').css({ "background-position-x": "0%", "background-position-y": "100%" });
+                                        $('.contentBlock.reportReferedExplain').show();
+                                        $('.reportReferedExplain').find('textarea').focus();
+                                        $('#textAreaWhoKnow').click();
+                                    });
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contentBlock reportReferedExplain" style="display: none;" tabindex="1">
+                        <p class="title">@GlobalRes.Pleaseexplain:</p>
+                        <textarea name="reported_outside_text" id="textAreaWhoKnow" class="isReportedOutside validate" data-validate="notEmpty"></textarea>
+                    </div>
+
+
+                    <div>
+                        <div class="contentBlock" style="border-bottom:none; margin-bottom:0px" tabindex="1">
+                            <div class="rowBlock urgent">
+                                <p class=" title">@GlobalRes.IsReportUrgent</p>
+
+                                <!--Here-->
+
+                                <div class="rowBlock isReportUrgent">
+                                    <div class="freeBlock inputRadio option">
+                                        <label class="inputBlock" for="firstUrgent">
+                                            <input id="firstUrgent" type="radio" name="isUrgent" value="1" data-val="Yes" /><span class="radioButton"></span><span class="radioTitle">Yes</span>
+                                        </label>
+                                    </div>
+                                    <div class="freeBlock inputRadio option">
+                                        <label class="inputBlock" for="secondUrgent">
+                                            <input id="secondUrgent" type="radio" name="isUrgent" value="0" data-val="No" /><span class="radioButton"></span><span class="radioTitle">No</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!--End-->
+                            </div>
+                            </br>
+                            </br>
+                            </br>
+                        </div>
+                    </div>
+                    <div id="emergency" class="isUrgentYesTextStyle isUrgentYesTextStyle@{@class_ext}" style="display: none">@GlobalRes.LifeThreatening</div>
+                </div>
+                <div class="buttonBlock buttonBlock@{@class_ext}">
+                    <input type="button" class="button nextSepButton tabOption cInformation" value="continue">
+                </div>
+
+            </div>
+            <!--caseInformation-->
+            <div class="caseInformation tab" data-id="3">
+                <div class="content">
+
+                    <div class="contentBlock" tabindex="1">
+                        <p class="title">@GlobalRes.YouReport</p>
+                        <div class="rowBlock caseInformationReport">
+                            <input type="hidden" class="validate" value="false" name="caseInformationReport" data-vltarget=".caseInformationReport" data-validate="notEmpty" />
+                            @if (ViewBag.secondary_type_mandatory != null)
+                            {
+                                int counter = 0;
+                                foreach (var item in ViewBag.secondary_type_mandatory)
+                                {
+                                    counter++;
+
+                                    <div class="freeBlock inputRadio option" data-val="@String.Concat(@item.secondary_type_en)">
+                                        <label class="inputBlock" for="@String.Concat(@item.secondary_type_en)">
+                                            <input id="@String.Concat(@item.secondary_type_en)" type="radio" name="whatHappened" value="@item.secondary_type_en" />
+                                            <span class="radioButton"></span>
+                                            <span class="radioTitle">@item.secondary_type_en</span>
+                                        </label>
+                                    </div>
+                                    if (counter == 4)
+                                    {
+                                        <div class='rowBlock'></div>
+                                    }
+                                }
+                            }
+                            <div class="freeBlock inputRadio option" data-val="OtherIncident">
+                                <label class="inputBlock" for="OtherIncident">
+                                    <input id="OtherIncident" type="radio" name="whatHappened" value="@GlobalRes.Other" /><span class="radioButton"></span><span class="radioTitle">@GlobalRes.Other</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contentBlock reportingAboutArea" style="display: none;" tabindex="1">
+                        <p class="title">@GlobalRes.Pleaseexplain:</p>
+                        <textarea name="caseInformationReportDetail" class="reportAbout validate" data-validate="notEmpty"></textarea>
+                    </div>
+
+                    <div class="contentBlock" tabindex="1">
+                        <p class="title">@GlobalRes.dateIncidentHappened</p>
+                        <span style="display: none">@GlobalRes.IncidentFrequency</span>
+                        <div>
+                            <span style="position: relative;">
+                                <input name="dateIncidentHappened" id="datepicker" class="validate dateInputBox calendarText" data-validate="date" value="Select date">
+                                <div class="borderTriangle"></div>
+                                <!--<div name="dateIncidentHappened" id="datepicker" class="validate dateInputBox " data-validate="notEmpty"></div>-->
+                            </span>
+                        </div>
+                    </div>
+                    <div class="contentBlock" tabindex="1">
+                        <div>
+                            <p class="title">@GlobalRes.isOngoing?</p>
+
+                            <!--START-->
+                            <div class="isAccidentOngoing">
+                                <div class="isOngoing">
+                                    <input type="hidden" class="validate" value="false" name="isOnGoing" data-vltarget=".isOnGoing" data-validate="notEmpty" />
+
+                                    <div class="freeBlock inputRadio option" data-val="1">
+                                        <label class="inputBlock" for="Not">
+                                            <input id="Not" type="radio" name="isIncidentOngoing" value="No" />
+                                            <span class="radioButton"></span>
+                                            <span class="radioTitle">@GlobalRes.No</span>
+                                        </label>
+                                    </div>
+                                    <div class="freeBlock inputRadio option" data-val="2">
+                                        <label class="inputBlock" for="Yes">
+                                            <input id="Yes" type="radio" name="isIncidentOngoing" value="Yes" /><span class="radioButton"></span><span class="radioTitle">@GlobalRes.Yes</span>
+                                        </label>
+                                    </div>
+                                    <div class="freeBlock inputRadio option" data-val="3">
+                                        <label class="inputBlock" for="Not sure">
+                                            <input id="Not sure" type="radio" name="isIncidentOngoing" value="Not sure" /><span class="radioButton"></span><span class="radioTitle">@GlobalRes.NotSureUp</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--STOP-->
+                        </div>
+                    </div>
+
+                    <div class="contentBlock incidentOngoing" style="display: none;" tabindex="1">
+                        <p class="title">@GlobalRes.Pleaseexplain:</p>
+                        <textarea name="report_frequency_text" class="validate incidentOngoingDescription" data-validate="notEmpty"></textarea>
+                    </div>
+
+                    <div class="contentBlock describeHappened" tabindex="1">
+                        <p class="title">@GlobalRes.describeHappened @GlobalRes.Bespecific</p>
+                        <textarea id="describeHappened" name="describeHappened" class="validate describeHappenedArea largeTextArea" data-validate="notEmpty" data-vltarget=".describeHappened"></textarea>
+                    </div>
+
+                    <div class="contentBlock" tabindex="1">
+                        <div class="incidentResultReport">
+                            <p class="title">@GlobalRes.IncidentResultInjury</p>
+                            <input type="hidden" class="validate" value="false" name="incidentResultReport" data-vltarget=".incidentResultReport" data-validate="notEmpty" />
+                            @foreach (EC.Models.Database.injury_damage item in ViewBag.injury_damage)
+                            {
+                                <div class="freeBlock inputRadio option" data-val="@item.id">
+                                    <label class="inputBlock" for="@item.id + '-' + @item.InjuryDamage()">
+                                        <input id="@item.id + '-' + @item.InjuryDamage()" type="radio" name="resultInjury" value="@item.InjuryDamage()" />
+                                        <span class="radioButton"></span>
+                                        <span class="radioTitle">@item.InjuryDamage()</span>
+                                    </label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="contentBlock discribeInjuryDamage" tabindex="1" @*style="display: none;"*@>
+                        <p class="title">@GlobalRes.Pleaseexplain:</p>
+                        <textarea id="injury_damage" class="validate" name="injury_damage" data-validate="notEmpty"></textarea>
+                    </div>
+
+                    <div class="contentBlock" tabindex="1">
+                        <p class="title">@GlobalRes.PleaseAttach</p>
+                        <div class="attach">
+                            <label class="file_upload file_upload@{@class_ext}">
+                                <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+                                <span type="button" class="button addFileButton">@GlobalRes.SelectFile</span>
+                                <input type="file" id="attachments" multiple="multiple" name="attachDocuments" />
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="buttonBlock buttonBlock@{@class_ext}">
+                    <input type="button" class="button nextSepButton tabOption mAssignedButton" value="continue">
+                </div>
+
+            </div>
+            <!--caseInformation END-->
+            <!--Previwe Summaru. Page 4 -->
+            <div class="mAssigned tab" data-id="4">
+                <div class="content">
+                    <div id="hideIfConfidential">
+                        <div class="contentBlock" tabindex="1">
+                            <p class="title">@GlobalRes.YourName</p>
+                            <textarea id="userName" name="userName" class="validate lessHeight" data-validate="login"></textarea>
+                        </div>
+
+                        <div class="contentBlock" tabindex="1">
+                            <p class="title">@GlobalRes.LastNameUp</p>
+                            <textarea id="userLastName" name="userLastName" class="validate lessHeight" data-validate="login"></textarea>
+                        </div>
+
+                        <div class="contentBlock" tabindex="1">
+                            <p class="title">@GlobalRes.YourEmail</p>
+                            <textarea id="reporterFirstName" name="userEmail" class="validate lessHeight" data-validate="email"></textarea>
+                            <div style="padding-bottom: 20px;">
+                                <img class="check" style="display: inline;">
+                                <img class="checked" style="display: none;">
+                                <input type="checkbox" name="sendUpdates" id="checkBox" value="false" class="checkBoxStyle floatLeftClass" />
+                                <span class="radioTitle sendUpdates" style="height:30px;">@GlobalRes.Sendreportupdates</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="summaryContentTitle">@GlobalRes.CheckCaseSummary:</div>
+
+                <div class="content">
+                    <div class="contentBlock summaryBackground" tabindex="1" style="border: none!important">
+
+                        <table style="width: 100%;">
+                            <tr>
+                                <td class=" demotd listtext">
+                                    <span class="listText listHead">General&nbsp;information</span>
+                                </td>
+                                <td class="demoTD" style="width: 100%;"><hr class="listHR"></td>
+                                <td class="demoTD goToStep1"><input class="listInput" type="button" value="EDIT"></td>
+                            </tr>
+                        </table>
+
+                        <div class="reportBlock">
+                            <table style="width: 100%;padding-left:9px;">
+                                <tbody>
+                                    <tr>
+                                        <td class=" titlereporttable" style="width: 25%;">
+                                            @GlobalRes.ReportingFrom:
+                                        </td>
+                                        <td class="reportTextTable" id="reportingFrom"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="titleReportTable">@GlobalRes.ConfidentialityLevel:</td>
+                                        <td class="reportTextTable" id="anonymityStatus"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="titleReportTable">@GlobalRes.Reportedas:</td>
+                                        <td class="reportTextTable" id="formalRole"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="titleReportTable">@GlobalRes.Incidentlocation:</td>
+                                        <td class="reportTextTable" id="incedentHappenedIn"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="titleReportTable">@GlobalRes.AffectedDepartment:</td>
+                                        <td class="reportTextTable" id="departments"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <table>
+                            <tr>
+                                <td class="demoTD listText">
+                                    <span class="listText listHead">Parties&nbsp;involved</span>
+                                </td>
+                                <td class="demoTD" style="width: 100%;"><hr class="listHR"></td>
+                                <td class="demoTD goToStep2"><input class="listInput" type="button" value="EDIT"></td>
+                            </tr>
+                        </table>
+
+                        <div class="reportBlock">
+                            <div class="report">
+                                <div class="partiesInvolvedBlock">
+                                    @*<div class="reportText" style="float: left; padding-left: 0px;" id="FirstLastName">Stan Lee,</div>
+                                    <div class="titleReport">Title unknown</div>+
+                                    <div class="reportText" id="witnessRole">Witness</div>
+                                    <div id="addedPepsones"></div>*@
+                                </div>
+
+                                <!--<span id="managementTrue">The management knows about the incident</span>
+                            <span id="managementFalse">The management doesn't know about the incident</span>
+                            <div class="titleReportAll" id="isManagementKnow"></div>-->
+                            </div>
+                        </div>
+
+                        <div class="reportBlock">
+                            <table style="width: 100%; padding-left: 9px;">
+                                <tbody>
+                                    <tr>
+                                        <td class=" titlereportTable" style="width: 25%;">
+                                            @GlobalRes.Doesmanagementknowaboutthisincident
+                                        </td>
+                                        <td class="reportTextTable" id="isManagementKnow"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class=" titlereportTable">
+                                            @GlobalRes.ReportedOutside
+                                        </td>
+                                        <td class="reportTextTable" id="isReportedOutside"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="titleReportTable">@GlobalRes.IsCaseUrgent_q</td>
+                                        <td class="reportTextTable" id="isReportUrgent"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <table>
+                            <tr>
+                                <td class="demoTD listText">
+                                    <span class="listText listHead">Case&nbsp;Information</span>
+                                </td>
+                                <td class="demoTD" style="width: 100%;"><hr class="listHR"></td>
+                                <td class="demoTD goToStep3"><input class="listInput" type="button" value="EDIT"></td>
+                            </tr>
+                        </table>
+
+                        <div class="reportBlock">
+                            <div class="report">
+
+                                <table style="width: 100%;">
+                                    <tbody>
+                                        <tr>
+                                            <td class=" titlereporttable" style="width: 25%;">@GlobalRes.IncidentType:</td>
+                                            <td class="reportTextTable" id="reportAbout"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="titleReportTable">@GlobalRes.IncidentDate:</td>
+                                            <td class="reportTextTable" id="incidentHappendDate"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="titleReportTable">@GlobalRes.ongoingIncident</td>
+                                            <td class="reportTextTable" id="isIncidentOngoing"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="titleReportTable">@GlobalRes.IncidentResultInjury</td>
+                                            <td class="reportTextTable" id="hasInjury"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="titleReportTable">@GlobalRes.IncidentDescription:</td>
+                                            <td class="reportTextTable"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <p class="reportDescriptionText" id="incidentDescription"></p>
+
+                                <div class="attachedFilesTitle">
+                                    @*Attached files:*@
+                                    <div class="addedFilesList"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="titleMediators">@GlobalRes.MediatorsAssigned</div>
+                <div class="titleMediatorsDescrition">@GlobalRes.MediatorsAssignedSecondOption</div>
+
+
+                <div class="administrationMediator">
+                    <div class="anType">
+                        <input type="hidden" value="false" class="" name="" data-vltarget=".anType" data-validate="notEmpty" />
+                        @{
+                            int tempCounter2 = 0;
+                        }
+                        <div class="content">
+                            @foreach (EC.Models.Database.user myItem in ViewBag.supervisingMediators)
+                            {
+                                tempCounter2++;
+                                <div class="contentBlock" tabindex="1" style="padding:0px;border: none!important">
+                                    <div class="option mediator" data-val="@myItem.id">
+                                        <div class="contentBlockChild">
+                                            @if (myItem.photo_path != String.Empty)
+                                            {
+                                                <img src="@myItem.photo_path" />
+                                            }
+                                            else
+                                            {
+                                                <img src="/Content/Icons/settingsPersonalNOPhoto.png" />
+                                            }
+
+                                        </div>
+                                        <label class="inputBlock floatRightClass" for="@myItem.id" style="padding-top:25px">
+                                            <span class="involvedArea">@GlobalRes.Involved.ToUpper()</span>
+                                            <input id="@myItem.id"
+                                                   type="checkbox"
+                                                   float="right"
+                                                   class="checkboxMediatorInvolved" />
+                                            <span for="@myItem.id"></span>
+                                        </label>
+
+                                        <div class="specialBigButton mediatorsName">@myItem.first_nm @myItem.last_nm </div>
+                                        <div class="labelUnderBigButton mediatorsInfo">@myItem.title_ds</div>
+                                        <div class="labelUnderBigButton mediatorsInfo">@ViewBag.currentCompany</div>
+                                    </div>
+                                </div>
+                                if (ViewBag.supervisingMediators.Count > 1 && tempCounter2 < ViewBag.supervisingMediators.Count)
+                                {
+                                    <div class="borderTemp"></div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                @if (ViewBag.nonSupervisingMediators.Count > 0)
+                {
+                    <div class="titleMediators">@GlobalRes.Mediationteam</div>
+                    <div class="titleMediatorsDescrition">@GlobalRes.ThismediatorsCould</div>
+                }
+
+
+                <div class="administrationMediator">
+                    <div class="anType">
+                        <input type="hidden" value="false" class="" name="" data-vltarget=".anType" data-validate="notEmpty" />
+
+                        <div class="content">
+                            @{
+                                int tempCounter = 0;
+                            }
+                            @foreach (EC.Models.Database.user myItem in ViewBag.nonSupervisingMediators)
+                            {
+                                tempCounter++;
+                                <div class="contentBlock" style="padding:0px;border: none!important">
+                                    <div class="contentBlockChild">
+                                        @if (myItem.photo_path != String.Empty)
+                                        {
+                                            <img src="@myItem.photo_path" />
+                                        }
+                                        else
+                                        {
+                                            <img src="/Content/Icons/settingsPersonalNOPhoto.png" />
+                                        }
+
+                                    </div>
+                                    <div class="option mediator" data-val="@myItem.id">
+
+                                        <label class="inputBlock floatRightClass" for="@myItem.id" style="padding-top:25px">
+                                            <span class="involvedArea">@GlobalRes.Involved.ToUpper()</span>
+                                            <input id="@myItem.id"
+                                                   value="@myItem.id"
+                                                   name="mediatorsInvolved"
+                                                   type="checkbox"
+                                                   float="right"
+                                                   class="checkboxMediatorInvolved" />
+                                            <span for="@myItem.id"></span>
+                                        </label>
+
+                                        <div class="specialBigButton mediatorsName">@myItem.first_nm @myItem.last_nm </div>
+                                        <div class="labelUnderBigButton mediatorsInfo">@myItem.title_ds</div>
+                                        <div class="labelUnderBigButton mediatorsInfo">@ViewBag.currentCompany</div>
+                                    </div>
+                                </div>
+                                if (ViewBag.nonSupervisingMediators.Count > 1 && tempCounter < ViewBag.nonSupervisingMediators.Count)
+                                {
+                                    <div class="borderTemp"></div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="buttonSubmitBlock buttonSubmitBlock@{@class_ext}">
+                    <input type="submit" class="buttonSubmit nextSepButton tabOption cSummary" value="submit">
+                </div>
+            </div>
+        </div>
+
+
+
+    </div><!--right Block end-->
+    </div><!--row content-->
+
+    <div id="tmpl">
+        <div id="addPersonTmpl">
+
+            <div id="persone" class="witnessPersone witnessPersone@{@class_ext}">
+                <div class="addPersonName">
+                    <div class="personTitle title">@GlobalRes.FirstNameUp</div>
+                    <div class="personData">
+                        <input name="personName[NUM]"
+                               class="personDataTextBox fName" />
+                    </div>
+                </div>
+
+                <div class="addPersonName">
+                    <div class="personTitle title">@GlobalRes.LastNameUp</div>
+                    <div class="personData">
+                        <input name="personLastName[NUM]"
+                               class="personDataTextBox lName" />
+                    </div>
+                </div>
+
+                <div class="addPersonInfo">
+                    <div class="personTitle title">@GlobalRes.Title</div>
+                    <div class="personData">
+                        <input type="text" name="personTitle[NUM]"
+                               class="personDataTextBox witnessTitle" />
+                    </div>
+                </div>
+
+                <div class="addPersonInfo">
+                    <div class="personTitle title">@GlobalRes.Role</div>
+                    <div class="personData">
+                        <input type="text" name="personRole[NUM]"
+                               class="personDataTextBox witnessRole" />
+                    </div>
+                </div>
+
+                <div class="delete redText deletePersonElement"></div>
+
+                <hr>
+            </div>
+        </div>
+        <div id="departmentInvolvedTmpl">
+            <div>
+                @Helpers.Select(ViewBag.departments, "department", "departmentInvolved", GlobalRes.SelectDepartment)
+                <span class="delete redText deleteDepartmentPosition"></span>
+                <br>
+            </div>
+        </div>
+
+    </div>
+</form>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+            $(".button.nextSepButton").on('click', function(){
+                window.scrollTo(0, 0);
+        });
+    });
+</script>

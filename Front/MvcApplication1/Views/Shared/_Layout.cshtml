@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>@ViewBag.Title</title>
+    <link rel="shortcut icon" type="image/x-icon" src="~/favicon.ico" />
+    <meta name="viewport" content="width=device-width"/>
+    @Styles.Render("~/Content/style.css")
+</head>
+<body>
+<div id="main">
+    <div id="wrap">
+        <header>
+            <div class="content-wrapper">
+                <div id="header">
+                    <div class="positionLogo">
+                        <div class="blueLogo"></div>
+                    </div>
+                    <div style="float: right">
+                        <div class="positionLogin">
+                            <div class="login">LOGIN</div>
+                        </div>
+                        <div class="positionButtonGreen">
+                            <div class="bigButtonGreen"><span>FILE A REPORT</span></div>
+                        </div>
+                    </div>
+                </div><!--end header-->
+            </div>
+        </header>
+    </div>
+</div>
+@RenderBody()
+</body>
+</html>
+<script>
+
+    // IE 10 only CSS properties
+    var ie10Styles = [
+        'msTouchAction',
+        'msWrapFlow',
+        'msWrapMargin',
+        'msWrapThrough',
+        'msOverflowStyle',
+        'msScrollChaining',
+        'msScrollLimit',
+        'msScrollLimitXMin',
+        'msScrollLimitYMin',
+        'msScrollLimitXMax',
+        'msScrollLimitYMax',
+        'msScrollRails',
+        'msScrollSnapPointsX',
+        'msScrollSnapPointsY',
+        'msScrollSnapType',
+        'msScrollSnapX',
+        'msScrollSnapY',
+        'msScrollTranslation',
+        'msFlexbox',
+        'msFlex',
+        'msFlexOrder'];
+
+    var ie11Styles = [
+        'msTextCombineHorizontal'];
+
+    /*
+     * Test all IE only CSS properties
+     */
+    var d = document;
+    var b = d.body;
+    var s = b.style;
+    var ieVersion = null;
+    var property;
+
+    // Test IE10 properties
+    for (var i = 0; i < ie10Styles.length; i++) {
+        property = ie10Styles[i];
+
+        if (s[property] != undefined) {
+            ieVersion = "ie10";
+            createEl("IE10 style found: " + property);
+        }
+    }
+
+    // Test IE11 properties
+    for (var i = 0; i < ie11Styles.length; i++) {
+        property = ie11Styles[i];
+
+        if (s[property] != undefined) {
+            ieVersion = "ie11";
+            createEl("IE11 style found: " + property);
+        }
+    }
+
+    if (ieVersion) {
+        b.className = ieVersion;
+        $('#versionId').html('Version: ' + ieVersion);
+    } 
+
+    /*
+     * Just a little helper to create a DOM element
+     */
+    function createEl(content) {
+
+        
+        /*el = d.createElement('div');
+        el.innerHTML = content;
+        b.appendChild(el);*/
+        $("#benefits").css("display", "block");
+    }
+
+    /*
+     * List of IE CSS stuff:
+     * http://msdn.microsoft.com/en-us/library/ie/hh869403(v=vs.85).aspx
+     */
+</script>

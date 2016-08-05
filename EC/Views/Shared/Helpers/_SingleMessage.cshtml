@@ -1,0 +1,22 @@
+﻿@using EC.Models.ViewModel;
+@{
+
+}
+@model CaseMessagesViewModel
+<div class='blockComments blockNoAnonimous'>
+    <div class='blockComment'>
+        <div class='blockPhoto'>
+            <div class='photoPersonal'>
+                <img src='@Url.Content(Model.sender_photo)' alt=@Model.sender_name />
+            </div>
+        </div>
+
+        <div class='contentComment'>
+            <p class='headerComment'>
+                <span class='namePersone'>@Model.sender_name</span>
+                <span class='dateComment'>@Model.created_dt</span>
+            </p>
+            <p class='textComment'>@Model.body_tx</p>
+        </div>
+    </div>
+</div>

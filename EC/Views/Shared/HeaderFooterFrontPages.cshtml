@@ -1,0 +1,110 @@
+﻿@{
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
+    String class_ext = ViewBag.cc_extension;
+    
+    //bool is_cc = true;
+    //String class_ext = "";
+    //if (is_cc)
+    //{
+    //    class_ext = "_cc";
+    //}
+        //19
+}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>@ViewBag.Title</title>
+    @*<link href="~/Content/fonts.css" rel="stylesheet" type="text/css">*@
+    <link rel="stylesheet" type="text/css" href="~/Content/style.css">
+    <link rel="stylesheet" type="text/css" href="@ViewBag.cssStyle">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link rel="icon" href="~/favicon.ico" />
+
+</head>
+<body>
+<div id="main">
+    <div id="wrap" style="@ViewBag.background">
+        <div id="header@{@class_ext}">
+            <div class="positionLogo">
+                <div class="blueLogo"></div>
+            </div>
+            <div style="float: right">
+                <div class="positionLogin">
+                    <div class="login">LOGIN</div>
+                </div>
+                <div class="positionButton">
+                    <div class="bigButton changeFontOpenSans">
+                        <span>FILE A REPORT</span>
+                    </div>
+                </div>
+            </div>
+        </div><!--end header-->
+        @RenderBody()
+    </div><!--end wrap-->
+    <div id="footer">
+        <div style="float: left">
+            <div class="positionLogo">
+                <div class="blueLogo"></div>
+            </div>
+            <div class="positionLogo">
+
+            </div>
+        </div>
+        <ul>
+            <li id="terms">
+                <a target="_blank" href="http://employeeconfidential.com/TermsOfService.html">Terms</a>
+            </li>
+            <li id="privacy">
+                <a target="_blank" href="http://employeeconfidential.com/PrivacyStatement.html">Privacy</a>
+            </li>
+            <li id="contact">
+                <a target="_blank" href="http://employeeconfidential.com/#footer">Contact</a>
+            </li>
+        </ul>
+        <div class="employeeConfidential">
+            © 2015 @if(DateTime.Today.Year>2015){<span> - @DateTime.Today.Year</span>} Employee Confidential LLC
+        </div>
+    </div><!--end footer-->
+</div>
+
+@RenderSection("pageScripts", required: false)
+
+</body>
+</html>
+
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54295621-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
+<script>
+    $(document).ready(function() {
+        $("#header@{@class_ext} .login").on('click', function () {
+            window.location.href = "/login";
+        });
+        $("#header@{@class_ext} .blueLogo").on('click', function () {
+            window.location.href = "http://employeeconfidential.com/";
+        });
+
+        $("#header@{@class_ext} .bigButton").on('click', function () {
+            window.location.href = "/Report/new?";
+        });
+    });
+
+
+</script>

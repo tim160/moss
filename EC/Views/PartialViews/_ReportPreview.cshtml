@@ -1,0 +1,567 @@
+﻿@using EC.Models;
+@using EC.Models.ECModel;
+@using EC.Models.Database;
+@using EC.App_LocalResources;
+@{
+    GlobalFunctions glb = new GlobalFunctions();
+
+    var report_id = (Int32)ViewBag.report_id;
+    var user_id = (Int32)ViewBag.user_id;
+    var flag = (Int32)ViewBag.flag;
+
+
+    ReportModel rm = new ReportModel(report_id);
+
+    string _color_descr = rm._color_descr;
+    var company_name = rm._company_name;
+
+    var last_message = rm.LastMessage(user_id);
+    var last_message_poster_id = last_message.MessagePosterID;
+    user _last_message_poster = new UserModel(last_message_poster_id)._user;
+
+
+    var last_task = rm.LastTask(user_id);
+
+    var last_task_status = last_task.TaskStatusString;
+    var last_task_poster_photopath = last_task.TaskAssignerPhoto;
+    var last_task_poster_id = last_task.TaskAssignerID;
+    user _last_task_poster = new UserModel(last_task_poster_id)._user;
+
+    #region mediators
+    List<user> mediators_with_access = rm._mediators_whoHasAccess_toReport;
+
+    List<user> involved_mediators = rm._involved_mediators_user_list;
+    #endregion
+    report_investigation_status ris = new report_investigation_status();
+
+    System.Text.StringBuilder _sb_full_name = new System.Text.StringBuilder();
+    string statusclass = "activeCases";
+    if (flag == 3)
+    { statusclass = "spamCases"; }
+    string typeCases = "";
+    if (flag == 2)
+    {
+        statusclass = "completedCases";
+        if ((rm._investigation_status == Constant.investigation_status_closed) || (rm._previous_investigation_status_id == Constant.investigation_status_completed))
+        {
+            typeCases = "caseClosed";
+        }
+        else
+        {
+            typeCases = "caseResolved";
+        }
+    }
+
+    List<TaskExtended> _tasks = rm.ThreeLastTasks(user_id);
+    string _task_status = "";
+    string _task_grey = "";
+    string littleDot_red = "";
+    string lastelement = "contanatTableLast";
+
+    string report_string = string.Format(@GlobalRes.ReportPreviewNotification_noDate, rm.Get_reporter_name(user_id), rm._secondary_type_string, rm._location_string);
+
+}
+
+<div class=@statusclass>
+    <div class="caseComtainer @typeCases">
+        <div class="header">
+            <div class="headerContent">
+                <div class="topContent @_color_descr">
+                    <div class="text">
+                        <a href="/Case/Index/@report_id">
+                            @rm._secondary_type_string - @GlobalRes.Report # @rm._report.display_name
+                        </a><br />
+                        <span>@GlobalRes.Reportedon @rm._reported_date_string_month_long</span>
+                    </div>
+                    @if (flag == 1)
+                    {
+                        <div class="blockDays">
+                            <div class="circleDays">
+                                <div class="triangle">
+                                    <canvas class="canvas" height="60px" width="60px"></canvas>
+                                    <div class="textDays">
+                                        <p>@rm._step_days_left.ToString()</p>
+                                        @if (@rm._step_days_left == 1)
+                                        {
+                                            <p>@GlobalRes.dayleft</p>
+                                        }
+                                        else
+                                        {
+                                            <p>@GlobalRes.daysleft</p>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    @if (flag == 2)
+                    {
+                        string caseStatusBtn = "";
+                        if (rm._investigation_status == Constant.investigation_status_closed)
+                        {
+                            caseStatusBtn = "caseClosedBtn";
+                        }
+                        else if (rm._investigation_status == Constant.investigation_status_completed)
+                        {
+                            caseStatusBtn = "caseCompletedBtn";
+                        }                   
+                        else// if (rm._investigation_status == Constant.investigation_status_resolution)
+                        {
+                            caseStatusBtn = "caseResolvedBtn";
+                        }
+                        <div class="blockButtonAndDate">
+                            <p class="caseBtn @caseStatusBtn"></p><!-- and class = caseResolvedBtn -->
+                            <p class="data">@glb.ConvertDateToLongMonthString(rm._last_investigation_status().created_date)</p>
+                        </div>
+                    }
+                    @if (flag == 3)
+                    {
+                        <div class="blockButtonAndDate">
+                            <p class="caseBtn caseSpamBtn"></p>
+                            <p class="data">@glb.ConvertDateToLongMonthString(rm._last_investigation_status().created_date)</p>
+                        </div>
+                    }
+                </div>
+                <ul class="lines">
+                    @for (int i = 0; i < 6; i++)
+                    {
+                        if (i < rm._investigation_status)
+                        {
+                            <li class="line active"></li>
+                        }
+                        else
+                        {
+                            <li class="line"></li>
+                        }
+                    }
+
+                </ul>
+                <div class="bottomContent">
+                    @Html.Raw(report_string)
+                    <br />
+                    @GlobalRes.IncidentDate: <span> @rm._incident_date_string_month_long </span>
+                    <br />
+                    @GlobalRes.CaseStatusUp: <span> @rm._investigation_status_string </span>
+                    <br />
+                    @GlobalRes.DepartmentsInvolved: <span> @rm._departments_string </span>
+                </div>
+            </div>
+        </div>
+        <ul>
+            @if (flag == 1)
+            {
+                if (last_task.TaskID != 0)
+                {
+                    <li>
+                        @if (_tasks.Count > 0)
+                        {
+                        <a class="contanatTable" href="~/Case/Index/@report_id">
+                            <div class="taskIcon">
+                                <img src='@Url.Content("/Content/Icons/tasks.png")'>
+                            </div>
+                            <ul class="tasks">
+                                @for (int i = 0; i < _tasks.Count; i++)
+                                    {
+                                        string _circle_color = _color_descr;
+                                        littleDot_red = "";
+                                        if (_tasks[i].IsCompleted())
+                                        {
+                                            // task complete
+                                            //_task_status = "notShadedCircle";
+                                            //_task_grey = "grey"; for grey text color -> class textGrey, not grey
+                                            _task_grey = "textGrey";
+
+                                            _circle_color = "grey";
+                                        }
+                                        else
+                                        {
+                                            //_task_status = "circle";
+                                            _task_grey = "";
+                                        }
+
+
+                                        if (_tasks[i].IsRead() && (!_tasks[i].HasNewActivity()))
+                                        {
+                                            _task_status = "notShadedCircle";
+                                           // _styleCircle = "border: 2px solid " + _circle_color + ";";
+
+
+                                          //  _styleText = "";
+                                        }
+                                        else
+                                        {
+                                            _task_status = "circle";
+                                          //  _styleCircle = "background: " + _circle_color + ";";
+                                          //  _styleText = "";
+                                        }
+
+                                        //red dot
+                                        if (_tasks[i].HasNewActivity())
+                                        {
+                                            littleDot_red = "littleDot";
+                                   //         littleDot_red = "littleDot red";
+
+                                        }
+                                        else
+                                        {
+                                            littleDot_red = "littleDot";  // new activity
+                                        }
+
+                                    
+                                    
+                                        if (_tasks[i].HasNewActivity())
+                                        {
+                                            // @_tasks[i].TaskTitle should be bold
+                                        }
+                                        else
+                                        {
+                                            //@_tasks[i].TaskTitle should be regular ?Open Sans
+                                        }
+                                    
+                                    
+                                    
+                                    <li>
+                                        <div class="left @_task_grey">
+                                            <i class="@_task_status @_circle_color "></i>
+                                            @_tasks[i].TaskTitle
+                                            <span class="@littleDot_red"></span>
+                                        </div>
+                                        <div class="right textRight">
+                                            @_tasks[i].TaskAssignee
+                                        </div>
+
+                                    </li>
+
+                                    }
+                            </ul>
+                        </a>
+                        }
+
+                    </li>
+                }
+                if (last_message.MessageID != 0)
+                {
+                    string _message_target = "Messages";
+                    if (last_message._message.reporter_access == 1)
+                    {
+                        _message_target = "Reporter";
+                    }
+                    if (last_message._message.reporter_access == 3)
+                    {
+                        _message_target = "Legal";
+                    }
+                    <li>
+                        <a class="contanatTable" href=@Url.Content("~/Case/" + _message_target+ "/" +report_id)>
+                            <div class="positionSecondBlock">
+                                <div class="taskIcon">
+                                    <div id="iconMessages"></div>
+                                </div>
+                                <div class="blockPhoto">
+                                    @if ((_last_message_poster != null) && (_last_message_poster.photo_path.Length > 0))
+                                    {
+                                        if (_last_message_poster.role_id == 5)
+                                        {
+                                            <div class="status"></div>
+                                        }
+
+                                        <div class="photoPersonal">
+                                            <img src='@Url.Content(_last_message_poster.photo_path)' title=@last_message.MessagePoster.Replace(" ", "_") />
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div id="anonimousReporterIcon"></div>
+                                    }
+                                </div>
+                                <div class="positionMessages">
+                                    <div class="messageFrom">
+                                        @if ((_last_message_poster != null) && (_last_message_poster.user_id == user_id))
+                                        {
+                                            @GlobalRes.You;
+                                        }
+                                        else
+                                        {
+                                            @last_message.MessagePoster
+                                        }
+                                        <div class="right textRight">@glb.ConvertDateToShortString(last_message._message.created_dt.Value)</div>
+                                    </div>
+                                    <div class="beginMessage"> @last_message.MessageBody</div>
+                                </div>
+                            </div>
+                        </a>
+
+                    </li>
+                }
+            }
+            @if (flag == 2)
+            {
+                @*only for completedCases caseResolvedBtn*@
+                <li class="infoCasesBlock">
+                    <div class="contanatTable">
+                        <div class="infoIcon">
+                            @if ((rm._investigation_status == Constant.investigation_status_completed) || ((rm._investigation_status == Constant.investigation_status_closed) && (rm._previous_investigation_status_id == Constant.investigation_status_completed)))
+                            {
+                                <img src='@Url.Content("/Content/Icons/caseNotResolvedIcons.png")' />
+                            }
+                            else
+                            {
+                                <img src='@Url.Content("/Content/Icons/caseResolvedIcon.png")'>
+                            }
+                        </div>
+                        <ul class="infoCases">
+                            @if ((rm._investigation_status == Constant.investigation_status_completed) || (rm._investigation_status == Constant.investigation_status_resolution))
+                            {
+                                // not confirmed resolved/completed
+                                ris = rm._last_investigation_status();
+                                UserModel temp_um = new UserModel(ris.user_id);
+
+                                <li>
+                                    <div class="leftBlockWithPhoto">
+                                        <div class="blockPhoto">
+                                            @if (temp_um.ID != 0)
+                                            {
+                                                @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", ris.user_id }, { "is_owner", true } })
+                                            }
+                                            else
+                                            {
+                                                <div class="status"></div>
+                                                <div class="anonimousReporterIcon"></div>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="textRight">
+                                        @if (rm._investigation_status == Constant.investigation_status_completed)
+                                        {
+                                            <div class="CaseCantBeResolved title">@GlobalRes.CaseCantBeResolved.</div>
+                                        }
+                                        else
+                                        {
+                                            <div class="caseResolved title">@GlobalRes.CaseResolved.</div>
+                                        }
+
+                                        <div class="textInfo">
+                                            <p class="headerTitle">@temp_um._user.first_nm @temp_um._user.last_nm,   @glb.ConvertDateToLongMonthString(ris.created_date):</p>
+                                            <p class="textAll">
+                                                @ris.description
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                            else
+                            {
+                                if (((rm._investigation_status == Constant.investigation_status_closed) && (rm._previous_investigation_status_id == Constant.investigation_status_resolution)) || ((rm._investigation_status == Constant.investigation_status_closed) && (rm._previous_investigation_status_id == Constant.investigation_status_completed)))
+                                {
+                                    {
+                                        // confirmed resolved/completed
+                                        for (int j = 0; j < 2; j++)
+                                        {
+
+                                            if (j == 0)
+                                            {
+                                                ris = rm._previous_investigation_status();
+                                            }
+                                            else
+                                            {
+                                                ris = rm._last_investigation_status();
+                                            }
+
+                                            UserModel temp_um = new UserModel(ris.user_id);
+
+                                            <li>
+                                                <div class="leftBlockWithPhoto">
+                                                    <div class="blockPhoto">
+
+                                                        @if (temp_um.ID != 0)
+                                                        {
+                                                            @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", ris.user_id }, { "is_owner", true } })
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="status"></div>
+                                                            <div class="anonimousReporterIcon"></div>
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div class="textRight">
+                                                    @if (j == 0)
+                                                    {
+                                                        if ((rm._investigation_status == Constant.investigation_status_closed) && (rm._previous_investigation_status_id == Constant.investigation_status_completed))
+                                                        {
+                                                            <div class="CaseCantBeResolved title">@GlobalRes.CaseCantBeResolved.</div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="caseResolved title">@GlobalRes.CaseResolved</div>
+                                                        }
+
+                                                    }
+                                                    else if (j == 1)
+                                                    {
+                                                        <div class="title caseApproved">@GlobalRes.Approved.</div>
+
+                                                    }
+                                                    <div class="textInfo">
+                                                        <p class="headerTitle">@temp_um._user.first_nm @temp_um._user.last_nm,    @glb.ConvertDateToLongMonthString(ris.created_date):</p>
+                                                        <p class="textAll">
+                                                            @ris.description
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </li>
+
+                                        }
+                                    }
+                                }
+                            }
+                        </ul>
+                    </div>
+                </li>
+            }
+            @if (flag == 3)
+            {
+                @*Only for Spam*@
+                <li class="infoCasesBlock">
+                    <div class="contanatTable">
+                        <div class="infoIcon">
+                        </div>
+                        <ul class="infoCases">
+                            @if (rm._investigation_status == Constant.investigation_status_spam)
+                            {
+                                // not confirmed spam
+                                ris = rm._last_investigation_status();
+                                UserModel temp_um = new UserModel(ris.user_id);
+
+                                <li>
+                                    <div class="leftBlockWithPhoto">
+                                        <div class="blockPhoto">
+
+                                            @if (temp_um.ID != 0)
+                                            {
+                                                @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", ris.user_id }, { "is_owner", true } })
+                                            }
+                                            else
+                                            {
+                                                <div class="status"></div>
+                                                <div class="anonimousReporterIcon"></div>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="textRight">
+                                        <div class="title">@GlobalRes.Spam</div>
+                                        <div class="textInfo">
+                                            <p class="headerTitle">@temp_um._user.first_nm @temp_um._user.last_nm, @glb.ConvertDateToShortString(ris.created_date):</p>
+                                            <p class="textAll">
+                                                @ris.description
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                            else
+                            {
+                                if ((rm._investigation_status == Constant.investigation_status_closed) && (rm._previous_investigation_status_id == Constant.investigation_status_spam))
+                                {
+                                    for (int j = 0; j < 2; j++)
+                                    {
+
+                                        if (j == 0)
+                                        {
+                                            ris = rm._previous_investigation_status();
+                                        }
+                                        else
+                                        {
+                                            ris = rm._last_investigation_status();
+                                        }
+                                        // confirmed spam
+                                        //ris = rm._last_investigation_status();
+                                        UserModel temp_um = new UserModel(ris.user_id);
+                                        <li>
+                                            <div class="leftBlockWithPhoto">
+                                                <div class="blockPhoto">
+                                                    @if (temp_um.ID != 0)
+                                                    {
+                                                        @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", ris.user_id }, { "is_owner", true } })
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="status"></div>
+                                                        <div class="anonimousReporterIcon"></div>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div class="textRight">
+                                                @if (j == 0)
+                                                {
+                                                    <div class="title">@GlobalRes.Spam.</div>
+                                                }
+                                                else if (j == 1)
+                                                {
+                                                    <div class="title caseApproved">@GlobalRes.Approved.</div>
+                                                }
+
+                                                <div class="textInfo">
+                                                    <p class="headerTitle">@temp_um._user.first_nm @temp_um._user.last_nm,   @glb.ConvertDateToLongMonthString(ris.created_date):</p>
+                                                    <p class="textAll">
+                                                        @ris.description
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+                                }
+                            }
+                        </ul>
+                    </div>
+                </li>
+            }
+            @if (mediators_with_access.Count > 0 && flag != 3)
+            {
+                <li>
+                    @if (involved_mediators.Count > 0)
+                    {
+                        lastelement = "contanatTableNoLast";
+                    }
+                    <div class="contanatTable @lastelement">
+                        <div class="taskIcon">
+                            <div id="pepper-sm-faded"></div>
+                        </div>
+                        <ul class="tasks blockPersonal">
+
+                            @foreach (EC.Models.Database.user _user in mediators_with_access)
+                            {
+                                <li>
+                                    @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", @_user.id }, { "is_owner", true } })
+                                </li>
+                            }
+                            <li>
+                            </li>
+                        </ul>
+                    </div><!--contanatTable-->
+                </li>
+            }
+
+            @if (involved_mediators.Count > 0 && flag != 3)
+            {
+                <li>
+                    <div class="contanatTable contanatTableLast">
+                        <div class="taskIcon">
+                            <div id="pepper-sm-faded-red"></div>
+                        </div>
+                        <ul class="tasks blockPersonal">
+                            @foreach (EC.Models.Database.user _user in involved_mediators)
+                            {
+                                <li>
+                                    @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", @_user.id }, { "is_owner", false } })
+                                </li>
+                            }
+                        </ul>
+                    </div><!--contanatTable-->
+                </li>
+            }
+
+        </ul>
+
+    </div>
+</div>
+<!--spamCases-->

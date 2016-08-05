@@ -1,0 +1,4400 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="_No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="_OrderType" xml:space="preserve">
+    <value>Order Type</value>
+  </data>
+  <data name="_Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="_ProjectType" xml:space="preserve">
+    <value>Project Type</value>
+  </data>
+  <data name="_Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="AboutTime_102000" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="AboutTime_302300" xml:space="preserve">
+    <value>The status of one or more appointments could not be updated.</value>
+  </data>
+  <data name="AboutTime_502100" xml:space="preserve">
+    <value>The requested appointment has been cancelled or does not exist.</value>
+  </data>
+  <data name="AboutTime_507100" xml:space="preserve">
+    <value>You do not have access to the requested item.</value>
+  </data>
+  <data name="AboutTime_552101" xml:space="preserve">
+    <value>Appointment has been modifed by another user.</value>
+  </data>
+  <data name="AboutTime_552110" xml:space="preserve">
+    <value>Unable to update appointment status.  The appointment's current status prevents the change to the new status.</value>
+  </data>
+  <data name="AbstractOrderStatus_Problematic" xml:space="preserve">
+    <value>Multiple completion or status change not by assigned worker.</value>
+  </data>
+  <data name="Alert_AppointmentInJeopardyAlert" xml:space="preserve">
+    <value>Order {0} appointment is in jeopardy</value>
+  </data>
+  <data name="Alert_EmergencyOrderCreatedAlert" xml:space="preserve">
+    <value>Emergency order {0} was created</value>
+  </data>
+  <data name="Alert_EmergencyOrderUnacknowledgedAlert" xml:space="preserve">
+    <value>Emergency order {0} is unacknowledged</value>
+  </data>
+  <data name="Alert_EmergencyOrderUnassignedAlert" xml:space="preserve">
+    <value>Emergency order {0} is unassigned</value>
+  </data>
+  <data name="Alert_ErrorParsingMessage" xml:space="preserve">
+    <value>Error parsing Alert message format. Please contact your software provider.</value>
+  </data>
+  <data name="Alert_HostLookupFailed_MH" xml:space="preserve">
+    <value>Host Lookup in Method Handler {0} has failed - Please check Web Message Logs for more details.</value>
+  </data>
+  <data name="Alert_HostLookupFailed_SEH" xml:space="preserve">
+    <value>Host Lookup for Order {0} has failed - Please check Web Message Logs for more details.</value>
+  </data>
+  <data name="Alert_MethodInvocationFailed" xml:space="preserve">
+    <value>Inbound Web Message for Order {0} has been rejected - Please check Web Message Logs for more details.</value>
+  </data>
+  <data name="Alert_Property_IdleDuration_Description" xml:space="preserve">
+    <value>How long (in minutes) a vehicle must be idle before an alert is generated</value>
+  </data>
+  <data name="Alert_Property_LongStopDuration_Category" xml:space="preserve">
+    <value>Misc</value>
+  </data>
+  <data name="Alert_Property_LongStopDuration_Description" xml:space="preserve">
+    <value>Alert after a vehicle has been stopped greater than specified amount of time (minutes)</value>
+  </data>
+  <data name="Alert_Property_NonReportingThreshold_Category" xml:space="preserve">
+    <value>Misc</value>
+  </data>
+  <data name="Alert_Property_NonReportingThreshold_Description" xml:space="preserve">
+    <value>Alert after a vehicle has not reported for more than specified amount of time (minutes)</value>
+  </data>
+  <data name="Alert_Property_OutOfCoverageInterval_Description" xml:space="preserve">
+    <value>Alert after a worker has been out of coverage greater than specified amount of time (minutes)</value>
+  </data>
+  <data name="Alert_Property_Prompt_Description" xml:space="preserve">
+    <value>Enable/Disable the alert notification (prompt) for this alert</value>
+  </data>
+  <data name="Alert_Property_RepeatDuration_Category" xml:space="preserve">
+    <value>Common</value>
+  </data>
+  <data name="Alert_Property_RepeatDuration_Description" xml:space="preserve">
+    <value>Time delay (in minutes) between email alert notifications</value>
+  </data>
+  <data name="Alert_Property_RepeatDuration_Label" xml:space="preserve">
+    <value>RepeatDuration</value>
+  </data>
+  <data name="Alert_Property_RepeatTimes_Category" xml:space="preserve">
+    <value>Common</value>
+  </data>
+  <data name="Alert_Property_RepeatTimes_Description" xml:space="preserve">
+    <value>Number of times to email alert notifications.  Set to 0 to turn off.  Set to -1 to email until alert is closed.</value>
+  </data>
+  <data name="Alert_Property_RepeatTimes_Label" xml:space="preserve">
+    <value>RepeatTimes</value>
+  </data>
+  <data name="Alert_Property_SendAckEmail_Category" xml:space="preserve">
+    <value>Common</value>
+  </data>
+  <data name="Alert_Property_SendAckEmail_Description" xml:space="preserve">
+    <value>Enable or disable email alert notification when alert is acknowledged</value>
+  </data>
+  <data name="Alert_Property_SendAckEmail_Label" xml:space="preserve">
+    <value>SendAckEmail</value>
+  </data>
+  <data name="Alert_Property_SendCloseEmail_Category" xml:space="preserve">
+    <value>Common</value>
+  </data>
+  <data name="Alert_Property_SendCloseEmail_Description" xml:space="preserve">
+    <value>Enable or disable email alert notification when alert is closed</value>
+  </data>
+  <data name="Alert_Property_SendCloseEmail_Label" xml:space="preserve">
+    <value>SendCloseEmail</value>
+  </data>
+  <data name="Alert_Property_SpeedingDuration_Description" xml:space="preserve">
+    <value>Alert only after a vehicle has been speeding for more than 'X' seconds</value>
+  </data>
+  <data name="Alert_SafetyTimerAlert" xml:space="preserve">
+    <value>Safety Timer for {0} has {1}. Please notify supervisor immediately.</value>
+  </data>
+  <data name="Alert_SafetyTimerAlert_Canceled" xml:space="preserve">
+    <value>been canceled</value>
+  </data>
+  <data name="Alert_SafetyTimerAlert_Expired" xml:space="preserve">
+    <value>expired</value>
+  </data>
+  <data name="Alert_SafetyTimerAlert_Requested" xml:space="preserve">
+    <value>been requested</value>
+  </data>
+  <data name="Alert_SafetyTimerRequestAlert" xml:space="preserve">
+    <value>Safety Timer for {0} has {1}.</value>
+  </data>
+  <data name="Alert_TheftAlertMessageFormat" xml:space="preserve">
+    <value>Vehicle {0} has moved while the engine was off. Possible theft detected?</value>
+  </data>
+  <data name="Alert_VehicleAfterHoursUsage" xml:space="preserve">
+    <value>[{1}] Vehicle {0} is being used after hours ({2})</value>
+  </data>
+  <data name="Alert_VehicleDiagnosticsAlert" xml:space="preserve">
+    <value>[{6}] Vehicle {0} diagnostics updated.  {1} {2} {3} {4} {5}</value>
+  </data>
+  <data name="Alert_VehicleDTCAlert" xml:space="preserve">
+    <value>[{2}] Vehicle {0} DTC updated.  Code {1}</value>
+  </data>
+  <data name="Alert_VehicleEneteredFenceDelay" xml:space="preserve">
+    <value>[{2}] Vehicle {0} has entered fenced area {1}</value>
+  </data>
+  <data name="Alert_VehicleEnteredFenceAlertCondition" xml:space="preserve">
+    <value>[{2}] Vehicle {0} has entered fenced area {1}</value>
+  </data>
+  <data name="Alert_VehicleExceededSpeed" xml:space="preserve">
+    <value>[{{3}}] Vehicle [{{0}}] travelling at [{{1}} {0}] exceeded max speed [{{2}} {0}].</value>
+  </data>
+  <data name="Alert_VehicleIdleTooLong" xml:space="preserve">
+    <value>[{1}] Vehicle {0} has been idling for too long</value>
+  </data>
+  <data name="Alert_VehicleLeftFence" xml:space="preserve">
+    <value>[{2}] Vehicle {0} has left fenced area {1}</value>
+  </data>
+  <data name="Alert_VehicleLeftFenceDelay" xml:space="preserve">
+    <value>[{2}] Vehicle {0} has left fenced area {1}</value>
+  </data>
+  <data name="Alert_VehicleLongStop" xml:space="preserve">
+    <value>[{1}] Vehicle {0} has been stopped for too long</value>
+  </data>
+  <data name="Alert_VehicleManDownAlert" xml:space="preserve">
+    <value>[{2}] Vehicle {0} man down {1}</value>
+  </data>
+  <data name="Alert_VehicleMovementWhenPoweredOff" xml:space="preserve">
+    <value>Vehicle {0} has moved while the engine was off.</value>
+  </data>
+  <data name="Alert_VehicleNotReporting" xml:space="preserve">
+    <value>[{2}] Vehicle {0} has not reported for {3:N2} hours.</value>
+  </data>
+  <data name="Alert_VehicleNotReportingAlertFormat" xml:space="preserve">
+    <value>[{2}] Vehicle {0} with modem id {1} has not reported for an extended period of time."</value>
+  </data>
+  <data name="Alert_VehicleOffRouteAlert" xml:space="preserve">
+    <value>[{1}] Vehicle {0} is off route</value>
+  </data>
+  <data name="Alert_VehicleSensorAlert" xml:space="preserve">
+    <value>[{6}] Vehicle {0} sensor updated.  {1} {2} {3} {4} {5}</value>
+  </data>
+  <data name="Alert_VehicleShareAcceptedAlert" xml:space="preserve">
+    <value>Vehicle {0} has been accepted by {1}</value>
+  </data>
+  <data name="Alert_VehicleShareOfferAlert" xml:space="preserve">
+    <value>{0} is offering to loan vehicle {1} to you</value>
+  </data>
+  <data name="Alert_VehicleShareRejectedAlert" xml:space="preserve">
+    <value>Vehicle {0} has been rejected by {1}</value>
+  </data>
+  <data name="Alert_VehicleShareTerminatedAlert" xml:space="preserve">
+    <value>Vehicle {0} sharing has terminated</value>
+  </data>
+  <data name="Alert_VehicleUsedAfterHours" xml:space="preserve">
+    <value>Vehicle {0} is being used after hours</value>
+  </data>
+  <data name="Alert_WebMessageFailed" xml:space="preserve">
+    <value>Outbound Web Message for Order {0} has been rejected - Please check Web Message Logs for more details.</value>
+  </data>
+  <data name="Alert_WebMessageFailed_Inbound" xml:space="preserve">
+    <value>Inbound Web Message for Order {0} has been rejected - Please check Web Message Logs for more details.</value>
+  </data>
+  <data name="Alert_WebMessageFailed_Outbound" xml:space="preserve">
+    <value>Outbound Web Message for Order {0} has been rejected - Please check Web Message Logs for more details.</value>
+  </data>
+  <data name="Alert_WorkerOutOfCoverTooLong" xml:space="preserve">
+    <value>Worker {0} has been out of coverage for too long.</value>
+  </data>
+  <data name="Alert_WorkOrderUnassigedUnack" xml:space="preserve">
+    <value>Workorder {0} has been unassigned by [{1}] but has not been acknowledged.  Please contact worker [{2}] ASAP</value>
+  </data>
+  <data name="AlertManagement_AckWorkBookAlertOrder" xml:space="preserve">
+    <value>Worker {0} acknowledged alert type {1} for order {2}</value>
+  </data>
+  <data name="AlertManagement_AckWorkBookAlertUnknown" xml:space="preserve">
+    <value>Worker {0} acknowledged alert type {1} for unknown entity type {2}</value>
+  </data>
+  <data name="AlertManagement_AckWorkBookAlertUnsupported" xml:space="preserve">
+    <value>Worker {0} acknowledged alert type {1} for unsupported entity type {2}</value>
+  </data>
+  <data name="AlertManagement_AckWorkBookAlertUser" xml:space="preserve">
+    <value>Worker {0} acknowledged alert type {1}</value>
+  </data>
+  <data name="AlertProperty_SendExpiredEmail_Category" xml:space="preserve">
+    <value>Common</value>
+  </data>
+  <data name="AlertProperty_SendExpiredEmail_Description" xml:space="preserve">
+    <value>Enable or disable email alert notification when alert is expired</value>
+  </data>
+  <data name="AlertProperty_SendExpiredEmail_Label" xml:space="preserve">
+    <value>SendExpiredEmail</value>
+  </data>
+  <data name="AlertProperty_SendRequestedEmail_Category" xml:space="preserve">
+    <value>Common</value>
+  </data>
+  <data name="AlertProperty_SendRequestedEmail_Description" xml:space="preserve">
+    <value>Enable or disable email alert notification when alert is expired</value>
+  </data>
+  <data name="AlertProperty_SendRequestedEmail_Label" xml:space="preserve">
+    <value>SendRequestedEmail</value>
+  </data>
+  <data name="AlertSettingManagement_MediaAlreadyExists" xml:space="preserve">
+    <value>Media [{0}] already exists</value>
+  </data>
+  <data name="AlertSettingManagement_RepeatSoundInterval_10min" xml:space="preserve">
+    <value>10 min</value>
+  </data>
+  <data name="AlertSettingManagement_RepeatSoundInterval_15min" xml:space="preserve">
+    <value>15 min</value>
+  </data>
+  <data name="AlertSettingManagement_RepeatSoundInterval_15sec" xml:space="preserve">
+    <value>15 s</value>
+  </data>
+  <data name="AlertSettingManagement_RepeatSoundInterval_1h" xml:space="preserve">
+    <value>1 h</value>
+  </data>
+  <data name="AlertSettingManagement_RepeatSoundInterval_1min" xml:space="preserve">
+    <value>1 min</value>
+  </data>
+  <data name="AlertSettingManagement_RepeatSoundInterval_2min" xml:space="preserve">
+    <value>2 min</value>
+  </data>
+  <data name="AlertSettingManagement_RepeatSoundInterval_30min" xml:space="preserve">
+    <value>30 min</value>
+  </data>
+  <data name="AlertSettingManagement_RepeatSoundInterval_30sec" xml:space="preserve">
+    <value>30 s</value>
+  </data>
+  <data name="AlertSettingManagement_RepeatSoundInterval_5min" xml:space="preserve">
+    <value>5 min</value>
+  </data>
+  <data name="AlertSettingManagement_Severity_High" xml:space="preserve">
+    <value>High</value>
+  </data>
+  <data name="AlertSettingManagement_Severity_Low" xml:space="preserve">
+    <value>Low</value>
+  </data>
+  <data name="AlertSettingManagement_Severity_Medium" xml:space="preserve">
+    <value>Medium</value>
+  </data>
+  <data name="AppSlotSet_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="ApptSlotSet_JobCodeInUse" xml:space="preserve">
+    <value>Selected job code(s) is already used by another appointment slot set</value>
+  </data>
+  <data name="ApptSlotSet_NameEmpty" xml:space="preserve">
+    <value>Name required</value>
+  </data>
+  <data name="ApptSlotSet_NameNotUnique" xml:space="preserve">
+    <value>Unique Appointment Set Name is required</value>
+  </data>
+  <data name="ApptSlotSet_NoStartTime" xml:space="preserve">
+    <value>Start Time is required</value>
+  </data>
+  <data name="ApptSlotSet_NotOneSlotSet" xml:space="preserve">
+    <value>At least one slot set required</value>
+  </data>
+  <data name="ApptSlotSet_NotUniqueStartTime" xml:space="preserve">
+    <value>Start time in the same group must be unique</value>
+  </data>
+  <data name="ApptSlotSet_OverOneDay" xml:space="preserve">
+    <value>Appointment Slot Duration must be within 24 hours</value>
+  </data>
+  <data name="ApptSlotSetManagement_ApptSlotSetAlreadyExists" xml:space="preserve">
+    <value>Appt Slot Set [{0}] already exists</value>
+  </data>
+  <data name="Area_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Area_NameEmpty" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="Area_TravelTime" xml:space="preserve">
+    <value>Travel Time</value>
+  </data>
+  <data name="Area_TravelTimeTooLarge" xml:space="preserve">
+    <value>Travel Time is too large. Can not be greater than {0}</value>
+  </data>
+  <data name="Area_TravelTimeTooSmall" xml:space="preserve">
+    <value>Travel Time must be greater than or equal to 0 minutes</value>
+  </data>
+  <data name="AreaBgUserAssociation" xml:space="preserve">
+    <value>Area is current used by User {0}, cannot remove Business Group</value>
+  </data>
+  <data name="AreaBgWOAssociation" xml:space="preserve">
+    <value>Area is currently referenced by {0} WorkOrders, cannot remove Business Group</value>
+  </data>
+  <data name="AreaManagement_AreaAlreadyExists" xml:space="preserve">
+    <value>Area [{0}] already exists</value>
+  </data>
+  <data name="AreaManagement_AreaReferenced" xml:space="preserve">
+    <value>Area referenced</value>
+  </data>
+  <data name="AreaShiftRotationBgAssociation" xml:space="preserve">
+    <value>Area is currently referenced in {0} Shift Rotations, cannot remove Business Group</value>
+  </data>
+  <data name="AreaUserBgAssociation" xml:space="preserve">
+    <value>Area is current referenced by User {0}, cannot remove Business Group</value>
+  </data>
+  <data name="Attribute_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Attribute_NameEmpty" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="AttributeAssociation" xml:space="preserve">
+    <value>Attributes</value>
+  </data>
+  <data name="AttributeBgAssociation" xml:space="preserve">
+    <value>Attribute is currently used in {0} {1}, cannot remove Business Group</value>
+  </data>
+  <data name="AttributeManagement_AttributeAlreadyExists" xml:space="preserve">
+    <value>Attribute [{0}] already exists</value>
+  </data>
+  <data name="AuditConfigManagement_AddDupeError" xml:space="preserve">
+    <value>An Audit Configuration already exists for the selected Worker and Order Type.</value>
+  </data>
+  <data name="AuditConfigManagement_AuditRuleAlreadyExists" xml:space="preserve">
+    <value>Audit rule already exists.</value>
+  </data>
+  <data name="AuditConfigManagement_AuditRuleNotFound" xml:space="preserve">
+    <value>The Audit rule was not found.</value>
+  </data>
+  <data name="AuditConfigManagement_ConfigDupeStarted" xml:space="preserve">
+    <value>The Audit Rule Duplication is successful.</value>
+  </data>
+  <data name="AuditConfigManagement_DeletePeriodError" xml:space="preserve">
+    <value>Unable to delete Audit Period.  The Audit Period is in use.</value>
+  </data>
+  <data name="AuditConfigManagement_SaveError" xml:space="preserve">
+    <value>Unexpected error occured while trying to {0} Audit Configuration.</value>
+  </data>
+  <data name="AuditProblematic" xml:space="preserve">
+    <value>Under audit review</value>
+  </data>
+  <data name="AuditRule_AlreadyExist" xml:space="preserve">
+    <value>The audit rule has already existed.</value>
+  </data>
+  <data name="AuditRule_NoOrderType" xml:space="preserve">
+    <value>No ordertype is selected.</value>
+  </data>
+  <data name="AuditRule_NoWorkerSelected" xml:space="preserve">
+    <value>No worker is selected.</value>
+  </data>
+  <data name="AuditRule_OneDayGap" xml:space="preserve">
+    <value>Two or more audit periods have more than one day gap</value>
+  </data>
+  <data name="AuditRule_OnePeriod" xml:space="preserve">
+    <value>There should be at least one audit period</value>
+  </data>
+  <data name="AuditRule_OverLapPeriod" xml:space="preserve">
+    <value>Two or more audit periods have overlapped</value>
+  </data>
+  <data name="AuditRule_PercentageInRange" xml:space="preserve">
+    <value>The audit period percentage has to be 1% to 100% inclusive</value>
+  </data>
+  <data name="BgAssociationInvalid" xml:space="preserve">
+    <value>{0} is associated to a Business Group that you do not belong to.</value>
+  </data>
+  <data name="BgAssociationRequired" xml:space="preserve">
+    <value>At least one Business Group association is required for this {0}.</value>
+  </data>
+  <data name="BlackoutManagement_BlackoutRegionAlreadyExist" xml:space="preserve">
+    <value>Blackout Region already exists.</value>
+  </data>
+  <data name="BlackoutManagement_BlackoutRegionReferenced" xml:space="preserve">
+    <value>Blackout Region referenced.</value>
+  </data>
+  <data name="BlockedRangeEntry_InvalidRange" xml:space="preserve">
+    <value>BlockedRangeEntry has invalid date range {0} to {1}</value>
+  </data>
+  <data name="BlockedSchedule_InvalidParameter" xml:space="preserve">
+    <value>Invalid Blocked Schedule {0} {1}</value>
+  </data>
+  <data name="BusinessGroup_ExternalASPathEmpty" xml:space="preserve">
+    <value>AS Path is required</value>
+  </data>
+  <data name="BusinessGroup_NameEmpty" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="BusinessGroupAssociation" xml:space="preserve">
+    <value>Business Groups</value>
+  </data>
+  <data name="BusinessGroupManagement_AddBusinessGroupSettingErr" xml:space="preserve">
+    <value>Could not add Business Group Setting "{0}"</value>
+  </data>
+  <data name="BusinessGroupManagement_BlankProperty" xml:space="preserve">
+    <value>Property name cannot be blank.</value>
+  </data>
+  <data name="BusinessGroupManagement_BusinessGroupAlreadyExists" xml:space="preserve">
+    <value>Business Group [{0}] already exists</value>
+  </data>
+  <data name="BusinessGroupManagement_DeleteAssociation" xml:space="preserve">
+    <value>Cannot delete Business Group {0}, there are {1} entities associated</value>
+  </data>
+  <data name="BusinessGroupManagement_DeleteLast" xml:space="preserve">
+    <value>There is only one Business Group configured, it cannot be removed</value>
+  </data>
+  <data name="BusinessGroupManagement_DeleteVehicle" xml:space="preserve">
+    <value>Cannot delete Business Group {0}, there are {1} Vehicles associated</value>
+  </data>
+  <data name="BusinessGroupManagement_DeleteWO" xml:space="preserve">
+    <value>Cannot delete Business Group {0}, there are {1} Work Orders associated</value>
+  </data>
+  <data name="BusinessGroupManagement_DupeBusinessGroupSetting" xml:space="preserve">
+    <value>Business Group Setting "{0}" already exists, name must be unique</value>
+  </data>
+  <data name="BusinessGroupManagement_OrderHasAssociated" xml:space="preserve">
+    <value>Order has associated {0} that does not belong in the same Business Group ({1})</value>
+  </data>
+  <data name="BusinessGroupManagement_OrderRequiresBusinessGroup" xml:space="preserve">
+    <value>Order {0} ({1}) requires Business Group to be specified</value>
+  </data>
+  <data name="BusinessGroupManagement_ValidateAssociations" xml:space="preserve">
+    <value>This {0} has an associated {1} ({2}) that does not belong to all of the selected Business Groups.</value>
+  </data>
+  <data name="ConfigSetting_NameEmpty" xml:space="preserve">
+    <value>Config Setting name can not be empty.</value>
+  </data>
+  <data name="ConfigSettingManagement_ConfigSettingAlreadyExists" xml:space="preserve">
+    <value>Config Setting [{0}] already exists.</value>
+  </data>
+  <data name="Crew_AlertFK" xml:space="preserve">
+    <value>Alert exists</value>
+  </data>
+  <data name="Crew_NameEmpty" xml:space="preserve">
+    <value>Name Required</value>
+  </data>
+  <data name="Crew_OrderLogError" xml:space="preserve">
+    <value>User Order Log exists</value>
+  </data>
+  <data name="Crew_TimerInvalid" xml:space="preserve">
+    <value>User Timer exists</value>
+  </data>
+  <data name="Crew_UserLogError" xml:space="preserve">
+    <value>User Log exists</value>
+  </data>
+  <data name="Crew_VehicleWorkerAssgm" xml:space="preserve">
+    <value>Worker Vehicle Assignment exists</value>
+  </data>
+  <data name="Crew_WorkerBGInvalid" xml:space="preserve">
+    <value>User does not belong to all of the crew's business groups.</value>
+  </data>
+  <data name="Crew_WorkOrderAssociation" xml:space="preserve">
+    <value>Order Association exists</value>
+  </data>
+  <data name="CrewAssociation_MisMatchedBGs" xml:space="preserve">
+    <value>Cannot save crew association for worker {0} in crew {1} - worker does not belong to all the same business groups as the crew</value>
+  </data>
+  <data name="CrewAssociation_MultipleCrewChiefs" xml:space="preserve">
+    <value>Cannot save crew association for worker {0} in crew {1} starting at {2} - there cannot be multiple crew chiefs for a single crew at the same time</value>
+  </data>
+  <data name="CrewAssociation_Overlapping" xml:space="preserve">
+    <value>Cannot save crew association for worker {0} in crew {1} starting at {2} - worker is already associated with a crew</value>
+  </data>
+  <data name="CrewNameFormat" xml:space="preserve">
+    <value>{0}</value>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="DiagnoisticLog_NameEmpty" xml:space="preserve">
+    <value>Diagnostic Log Type name is empty</value>
+  </data>
+  <data name="DiagnosticBusType_NameEmpty" xml:space="preserve">
+    <value>Diagnostic Bus Type name is empty</value>
+  </data>
+  <data name="DispatchUsernameFormat" xml:space="preserve">
+    <value>{1}, {0} ({2})</value>
+  </data>
+  <data name="DistListManagement_DistListAlreadyExist" xml:space="preserve">
+    <value>Distribution List / Email [{0}] already exists.</value>
+  </data>
+  <data name="DistListManagement_DistListInUse" xml:space="preserve">
+    <value>Distribution List is in Use in Job {0}</value>
+  </data>
+  <data name="EmailManagement_EmailValidationFailed" xml:space="preserve">
+    <value>Failed email address validation</value>
+  </data>
+  <data name="EmailManagement_InvalidEmailAddress" xml:space="preserve">
+    <value>Email address is invalid</value>
+  </data>
+  <data name="Entity_Alert" xml:space="preserve">
+    <value>Alert</value>
+  </data>
+  <data name="Entity_Alerts" xml:space="preserve">
+    <value>Alerts</value>
+  </data>
+  <data name="Entity_ApptSlotSet" xml:space="preserve">
+    <value>Appt Slot Set</value>
+  </data>
+  <data name="Entity_Area" xml:space="preserve">
+    <value>Area</value>
+  </data>
+  <data name="Entity_Areas" xml:space="preserve">
+    <value>Areas</value>
+  </data>
+  <data name="Entity_Attribute" xml:space="preserve">
+    <value>Attribute</value>
+  </data>
+  <data name="Entity_Attributes" xml:space="preserve">
+    <value>Attributes</value>
+  </data>
+  <data name="Entity_AuditRule" xml:space="preserve">
+    <value>Audit Rule</value>
+  </data>
+  <data name="Entity_AuditRules" xml:space="preserve">
+    <value>Audit Rules</value>
+  </data>
+  <data name="Entity_AVLServer" xml:space="preserve">
+    <value>AVLServer</value>
+  </data>
+  <data name="Entity_BlackoutRegion" xml:space="preserve">
+    <value>Blackout Region</value>
+  </data>
+  <data name="Entity_BlackoutRegions" xml:space="preserve">
+    <value>Blackout Regions</value>
+  </data>
+  <data name="Entity_BusinessGroup" xml:space="preserve">
+    <value>Business Group</value>
+  </data>
+  <data name="Entity_BusinessGroups" xml:space="preserve">
+    <value>Business Groups</value>
+  </data>
+  <data name="Entity_ColumnsConfig" xml:space="preserve">
+    <value>Columns Configuration</value>
+  </data>
+  <data name="Entity_ConfigHandler" xml:space="preserve">
+    <value>Config Handler</value>
+  </data>
+  <data name="Entity_ConfigHandlers" xml:space="preserve">
+    <value>Config Handlers</value>
+  </data>
+  <data name="Entity_ConfigSetting" xml:space="preserve">
+    <value>Config Setting</value>
+  </data>
+  <data name="Entity_CrewAssociation" xml:space="preserve">
+    <value>Crew Association</value>
+  </data>
+  <data name="Entity_DistList" xml:space="preserve">
+    <value>Distribution List</value>
+  </data>
+  <data name="Entity_DistList_NameForDistributionListRequired" xml:space="preserve">
+    <value>Name for distribution list required.</value>
+  </data>
+  <data name="Entity_DistLists" xml:space="preserve">
+    <value>Distribution Lists</value>
+  </data>
+  <data name="Entity_EntityGroup" xml:space="preserve">
+    <value>Entity Group</value>
+  </data>
+  <data name="Entity_EntityGroups" xml:space="preserve">
+    <value>Entity Groups</value>
+  </data>
+  <data name="Entity_Equipment" xml:space="preserve">
+    <value>Equipment</value>
+  </data>
+  <data name="Entity_EquipmentItems" xml:space="preserve">
+    <value>Equipment Items</value>
+  </data>
+  <data name="Entity_ExportFormat" xml:space="preserve">
+    <value>Export Format</value>
+  </data>
+  <data name="Entity_FilterQueryCriteria" xml:space="preserve">
+    <value>Filter Setting</value>
+  </data>
+  <data name="Entity_GarminTextMessage" xml:space="preserve">
+    <value>Garmin Text Message</value>
+  </data>
+  <data name="Entity_GeoFence" xml:space="preserve">
+    <value>Geo Fence</value>
+  </data>
+  <data name="Entity_GeoFenceAlert" xml:space="preserve">
+    <value>Geo Fence Alert</value>
+  </data>
+  <data name="Entity_GlobalSettings" xml:space="preserve">
+    <value>Global Settings</value>
+  </data>
+  <data name="Entity_GruntWorkerTask" xml:space="preserve">
+    <value>Grunt Worker Task</value>
+  </data>
+  <data name="Entity_GruntWorkerTasks" xml:space="preserve">
+    <value>Grunt Worker Tasks</value>
+  </data>
+  <data name="Entity_Holiday" xml:space="preserve">
+    <value>Holiday</value>
+  </data>
+  <data name="Entity_Holidays" xml:space="preserve">
+    <value>Holidays</value>
+  </data>
+  <data name="Entity_HostMessageConfig" xml:space="preserve">
+    <value>Host Message Configuration</value>
+  </data>
+  <data name="Entity_HostMessageConfigs" xml:space="preserve">
+    <value>Host Message Configurations</value>
+  </data>
+  <data name="Entity_HostSystem" xml:space="preserve">
+    <value>Host System</value>
+  </data>
+  <data name="Entity_Icon" xml:space="preserve">
+    <value>Icon</value>
+  </data>
+  <data name="Entity_Icons" xml:space="preserve">
+    <value>Icons</value>
+  </data>
+  <data name="Entity_Inventory" xml:space="preserve">
+    <value>Inventory</value>
+  </data>
+  <data name="Entity_InventoryWarranty" xml:space="preserve">
+    <value>Inventory Warranty</value>
+  </data>
+  <data name="Entity_JobCode" xml:space="preserve">
+    <value>Job Code</value>
+  </data>
+  <data name="Entity_JobCodes" xml:space="preserve">
+    <value>Job Codes</value>
+  </data>
+  <data name="Entity_JobOfferingSet" xml:space="preserve">
+    <value>Job Offering Set</value>
+  </data>
+  <data name="Entity_JobProfile" xml:space="preserve">
+    <value>Job Profile</value>
+  </data>
+  <data name="Entity_JobProfiles" xml:space="preserve">
+    <value>Job Profiles</value>
+  </data>
+  <data name="Entity_Location" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="Entity_Locations" xml:space="preserve">
+    <value>Locations</value>
+  </data>
+  <data name="Entity_MapDocument" xml:space="preserve">
+    <value>Map Document</value>
+  </data>
+  <data name="Entity_MapServiceURL" xml:space="preserve">
+    <value>Map Service URL</value>
+  </data>
+  <data name="Entity_MethodHandler" xml:space="preserve">
+    <value>Method Handler</value>
+  </data>
+  <data name="Entity_MethodHandlers" xml:space="preserve">
+    <value>Method Handlers</value>
+  </data>
+  <data name="Entity_MethodInvocation" xml:space="preserve">
+    <value>Method Invocation</value>
+  </data>
+  <data name="Entity_MethodInvocations" xml:space="preserve">
+    <value>Method Invocations</value>
+  </data>
+  <data name="Entity_Order" xml:space="preserve">
+    <value>Order</value>
+  </data>
+  <data name="Entity_OrderCategories" xml:space="preserve">
+    <value>Order Categories</value>
+  </data>
+  <data name="Entity_OrderCategory" xml:space="preserve">
+    <value>Order Category</value>
+  </data>
+  <data name="Entity_OrderColumnsConfig" xml:space="preserve">
+    <value>Order Columns Configuration</value>
+  </data>
+  <data name="Entity_OrderColumnsConfigs" xml:space="preserve">
+    <value>Order Columns Configurations</value>
+  </data>
+  <data name="Entity_OrderFormType" xml:space="preserve">
+    <value>Order Form Type</value>
+  </data>
+  <data name="Entity_Orders" xml:space="preserve">
+    <value>Orders</value>
+  </data>
+  <data name="Entity_OrderType" xml:space="preserve">
+    <value>Order Type</value>
+  </data>
+  <data name="Entity_OrderTypePublishTemplate" xml:space="preserve">
+    <value>Order Type Publish Template</value>
+  </data>
+  <data name="Entity_OrderTypePublishTemplates" xml:space="preserve">
+    <value>Order Type Publish Templates</value>
+  </data>
+  <data name="Entity_Organization" xml:space="preserve">
+    <value>Organization</value>
+  </data>
+  <data name="Entity_PeerSystem" xml:space="preserve">
+    <value>Vehicle Sharing System</value>
+  </data>
+  <data name="Entity_PeerSystems" xml:space="preserve">
+    <value>Vehicle Sharing Systems</value>
+  </data>
+  <data name="Entity_Priorities" xml:space="preserve">
+    <value>Priorities</value>
+  </data>
+  <data name="Entity_Priority" xml:space="preserve">
+    <value>Priority</value>
+  </data>
+  <data name="Entity_Registration" xml:space="preserve">
+    <value>Registration</value>
+  </data>
+  <data name="Entity_Report" xml:space="preserve">
+    <value>Report</value>
+  </data>
+  <data name="Entity_Reports" xml:space="preserve">
+    <value>Reports</value>
+  </data>
+  <data name="Entity_ReportSystemJob" xml:space="preserve">
+    <value>Report Schedule</value>
+  </data>
+  <data name="Entity_Reservation" xml:space="preserve">
+    <value>Reservation</value>
+  </data>
+  <data name="Entity_Role" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="Entity_Roles" xml:space="preserve">
+    <value>Roles</value>
+  </data>
+  <data name="Entity_Route" xml:space="preserve">
+    <value>Route</value>
+  </data>
+  <data name="Entity_RouteVehicleAssociation" xml:space="preserve">
+    <value>Route Vehicle Association</value>
+  </data>
+  <data name="Entity_Scenario" xml:space="preserve">
+    <value>Scenario</value>
+  </data>
+  <data name="Entity_Scenarios" xml:space="preserve">
+    <value>Scenarios</value>
+  </data>
+  <data name="Entity_SchedulingType" xml:space="preserve">
+    <value>Scheduling Type</value>
+  </data>
+  <data name="Entity_Sensor" xml:space="preserve">
+    <value>Sensor</value>
+  </data>
+  <data name="Entity_Sensor_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Entity_Sensor_EquateZeroToTrue" xml:space="preserve">
+    <value>Equate 0 Value To True</value>
+  </data>
+  <data name="Entity_Sensor_FalseLabel" xml:space="preserve">
+    <value>False Label</value>
+  </data>
+  <data name="Entity_Sensor_IsPTOPort" xml:space="preserve">
+    <value>PTO Sensor</value>
+    <comment>Sensor</comment>
+  </data>
+  <data name="Entity_Sensor_Multiplier" xml:space="preserve">
+    <value>Multiplier</value>
+  </data>
+  <data name="Entity_Sensor_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Entity_Sensor_TriggerManDownAlert" xml:space="preserve">
+    <value>Trigger Man Down Alert</value>
+    <comment>Sensor</comment>
+  </data>
+  <data name="Entity_Sensor_TrueLabel" xml:space="preserve">
+    <value>True Label</value>
+  </data>
+  <data name="Entity_Sensor_Unit" xml:space="preserve">
+    <value>Unit</value>
+  </data>
+  <data name="Entity_Sensors" xml:space="preserve">
+    <value>Sensors</value>
+  </data>
+  <data name="Entity_Shift" xml:space="preserve">
+    <value>Shift</value>
+  </data>
+  <data name="Entity_ShiftAssignment" xml:space="preserve">
+    <value>Shift assignment</value>
+  </data>
+  <data name="Entity_ShiftRotation" xml:space="preserve">
+    <value>Shift Rotation</value>
+  </data>
+  <data name="Entity_ShiftRotationAssignment" xml:space="preserve">
+    <value>Shift Rotation Assignment</value>
+  </data>
+  <data name="Entity_ShiftRotationAssignments" xml:space="preserve">
+    <value>Shift Rotation Assignments</value>
+  </data>
+  <data name="Entity_ShiftRotationDayAssignments" xml:space="preserve">
+    <value>Shift Rotation Day Assignments</value>
+  </data>
+  <data name="Entity_ShiftRotations" xml:space="preserve">
+    <value>Shift Rotations</value>
+  </data>
+  <data name="Entity_ShiftRotationSet" xml:space="preserve">
+    <value>Shift Rotation Set</value>
+  </data>
+  <data name="Entity_ShiftRotationSets" xml:space="preserve">
+    <value>Shift Rotation Sets</value>
+  </data>
+  <data name="Entity_ShiftRotSetAsgmt" xml:space="preserve">
+    <value>Shift Rotation Set Assignment</value>
+  </data>
+  <data name="Entity_Shifts" xml:space="preserve">
+    <value>Shifts</value>
+  </data>
+  <data name="Entity_ShipmentControlFile" xml:space="preserve">
+    <value>Shipment Control File</value>
+  </data>
+  <data name="Entity_ShipmentControlFileFormat" xml:space="preserve">
+    <value>Shipment Control File Format</value>
+  </data>
+  <data name="Entity_SortQueryCriteria" xml:space="preserve">
+    <value>Sort setting</value>
+  </data>
+  <data name="Entity_SpecialIndicator" xml:space="preserve">
+    <value>Special Indicator</value>
+  </data>
+  <data name="Entity_StorageLocation" xml:space="preserve">
+    <value>Storage Location</value>
+  </data>
+  <data name="Entity_SystemJob" xml:space="preserve">
+    <value>System Task</value>
+  </data>
+  <data name="Entity_SystemJobRunHistorys" xml:space="preserve">
+    <value>System Task Run Histories</value>
+  </data>
+  <data name="Entity_SystemJobs" xml:space="preserve">
+    <value>System Tasks</value>
+  </data>
+  <data name="Entity_SystemWork" xml:space="preserve">
+    <value>System Work</value>
+  </data>
+  <data name="Entity_SystemWorks" xml:space="preserve">
+    <value>System Works</value>
+  </data>
+  <data name="Entity_Timer" xml:space="preserve">
+    <value>Safety Timer</value>
+  </data>
+  <data name="Entity_Timers" xml:space="preserve">
+    <value>Safety Timers</value>
+  </data>
+  <data name="Entity_Timesheet" xml:space="preserve">
+    <value>Timesheet</value>
+  </data>
+  <data name="Entity_Timesheets" xml:space="preserve">
+    <value>Timesheets</value>
+  </data>
+  <data name="Entity_UnavailableTime" xml:space="preserve">
+    <value>Unavailable Time</value>
+  </data>
+  <data name="Entity_User" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="Entity_Users" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="Entity_UserSession" xml:space="preserve">
+    <value>User Session</value>
+  </data>
+  <data name="Entity_UserSettings" xml:space="preserve">
+    <value>User Settings</value>
+  </data>
+  <data name="Entity_ValueList" xml:space="preserve">
+    <value>Value List</value>
+  </data>
+  <data name="Entity_Vehicle" xml:space="preserve">
+    <value>Vehicle</value>
+  </data>
+  <data name="Entity_Vehicle_SharingStatusBorrowed" xml:space="preserve">
+    <value>Borrowed</value>
+  </data>
+  <data name="Entity_Vehicle_SharingStatusLoaned" xml:space="preserve">
+    <value>Loaned</value>
+  </data>
+  <data name="Entity_VehicleGroup" xml:space="preserve">
+    <value>Vehicle Group</value>
+  </data>
+  <data name="Entity_Vehicles" xml:space="preserve">
+    <value>Vehicles</value>
+  </data>
+  <data name="Entity_VehicleServiceLog" xml:space="preserve">
+    <value>Vehicle Maintenance Log</value>
+  </data>
+  <data name="Entity_VehicleServiceNextAppt" xml:space="preserve">
+    <value>Vehicle Service Next Appointment</value>
+  </data>
+  <data name="Entity_VehicleServiceSchedule" xml:space="preserve">
+    <value>Vehicle Maintenance Schedule</value>
+  </data>
+  <data name="Entity_VehicleServiceTemplate" xml:space="preserve">
+    <value>Vehicle Maintenance Template</value>
+  </data>
+  <data name="Entity_VehicleServiceTemplateItem" xml:space="preserve">
+    <value>Vehicle Maintenance Template Item</value>
+  </data>
+  <data name="Entity_VehicleServiceTemplates" xml:space="preserve">
+    <value>Vehicle Maintenance Templates</value>
+  </data>
+  <data name="Entity_VehicleServiceType" xml:space="preserve">
+    <value>Vehicle Maintenance Type</value>
+  </data>
+  <data name="Entity_VehicleServiceTypes" xml:space="preserve">
+    <value>Vehicle Maintenance Types</value>
+  </data>
+  <data name="Entity_VehicleSharingLog_EndDateTimeEarlierThanStartDateTime" xml:space="preserve">
+    <value>Sharing end datetime should be later than sharing start datetime {0}.</value>
+  </data>
+  <data name="Entity_VehicleSharingLogs" xml:space="preserve">
+    <value>Vehicle Sharing Logs</value>
+  </data>
+  <data name="Entity_VehicleType" xml:space="preserve">
+    <value>Vehicle Type</value>
+  </data>
+  <data name="Entity_VehicleTypes" xml:space="preserve">
+    <value>Vehicle types</value>
+  </data>
+  <data name="Entity_ViewConfiguration" xml:space="preserve">
+    <value>View Configuration</value>
+  </data>
+  <data name="Entity_Warehouse" xml:space="preserve">
+    <value>Warehouse</value>
+  </data>
+  <data name="Entity_Warehouses" xml:space="preserve">
+    <value>Warehouses</value>
+  </data>
+  <data name="Entity_WorkOrderMapping" xml:space="preserve">
+    <value>Order Mapping</value>
+  </data>
+  <data name="Entity_WorkOrderMappingFields" xml:space="preserve">
+    <value>Order Mapping Fields</value>
+  </data>
+  <data name="EntityAction_Add" xml:space="preserve">
+    <value>add</value>
+  </data>
+  <data name="EntityAction_Delete" xml:space="preserve">
+    <value>delete</value>
+  </data>
+  <data name="EntityAction_Save" xml:space="preserve">
+    <value>update</value>
+  </data>
+  <data name="EntityGroup_EntityTypeEmpty" xml:space="preserve">
+    <value>Entity Type Empty</value>
+  </data>
+  <data name="EntityGroup_NameEmpty" xml:space="preserve">
+    <value>Name Empty</value>
+  </data>
+  <data name="EntityGroupManagement_EntityGroupAlreadyExists" xml:space="preserve">
+    <value>Entity Group [{0}] already exists.</value>
+  </data>
+  <data name="EntityManagement_AddEntityFail" xml:space="preserve">
+    <value>Add {0} failed.</value>
+  </data>
+  <data name="EntityManagement_AddEntitySuccess" xml:space="preserve">
+    <value>Added {0} {1}.</value>
+  </data>
+  <data name="EntityManagement_AddEntitySuccessWithErrors" xml:space="preserve">
+    <value>Add {0}: {1} success, {2} failed.</value>
+  </data>
+  <data name="EntityManagement_DeleteEntityFail" xml:space="preserve">
+    <value>Delete {0} failed.</value>
+  </data>
+  <data name="EntityManagement_DeleteEntitySuccess" xml:space="preserve">
+    <value>Deleted {0} {1}.</value>
+  </data>
+  <data name="EntityManagement_DeleteEntitySuccessWithErrors" xml:space="preserve">
+    <value>Delete {0}: {1} success, {2} failed.</value>
+  </data>
+  <data name="EntityManagement_EntityExist" xml:space="preserve">
+    <value>{0} {1} failed: {1} {2} already exists.</value>
+  </data>
+  <data name="EntityManagement_EntityFail" xml:space="preserve">
+    <value>{0} {1} {2} failed.</value>
+  </data>
+  <data name="EntityManagement_EntityInUse" xml:space="preserve">
+    <value>{0} {1} failed: {1} {2} referenced.</value>
+  </data>
+  <data name="EntityManagement_EntityNotExist" xml:space="preserve">
+    <value>{0} {1} failed: {1} {2} does not exist.</value>
+  </data>
+  <data name="EntityManagement_FeildExist" xml:space="preserve">
+    <value>{0} {1} already exists.</value>
+  </data>
+  <data name="EntityManagement_InvalidCharsFound" xml:space="preserve">
+    <value>Invalid characters found</value>
+  </data>
+  <data name="EntityManagement_NameEmpty" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="EntityManagement_NameTooLong" xml:space="preserve">
+    <value>The length of the name must be less than {0}</value>
+  </data>
+  <data name="EntityManagement_PasswordTooLong" xml:space="preserve">
+    <value>Password is too long</value>
+  </data>
+  <data name="EntityManagement_ShiftAssignmentFail" xml:space="preserve">
+    <value>Shift assignments failed.</value>
+  </data>
+  <data name="EntityManagement_ShiftAssignmentSuccess" xml:space="preserve">
+    <value>Shift assignments completed.</value>
+  </data>
+  <data name="EntityManagement_UpdateEntityFail" xml:space="preserve">
+    <value>Update {0} failed.</value>
+  </data>
+  <data name="EntityManagement_UpdateEntitySuccess" xml:space="preserve">
+    <value>Updated {0} {1}.</value>
+  </data>
+  <data name="EntityManagement_UpdateEntitySuccessWithErrors" xml:space="preserve">
+    <value>Update {0}: {1} success, {2} failed.</value>
+  </data>
+  <data name="Equipment_EquipmentAlreadyExists" xml:space="preserve">
+    <value>Equipment Item [{0}] already exists</value>
+  </data>
+  <data name="Equipment_NameEmpty" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="Equipment_Scheduled" xml:space="preserve">
+    <value>Equipment Item [{0}] is currently scheduled</value>
+  </data>
+  <data name="FieldMapping_Building" xml:space="preserve">
+    <value>Building</value>
+  </data>
+  <data name="FieldMapping_Exists" xml:space="preserve">
+    <value>A field mapping field a field "{0}" already exists.</value>
+  </data>
+  <data name="FieldMapping_Failed" xml:space="preserve">
+    <value>Failed</value>
+  </data>
+  <data name="FieldMapping_Stopped" xml:space="preserve">
+    <value>Mapping failed due to server stopping or restarting.</value>
+  </data>
+  <data name="GenericManager_InvalidURI" xml:space="preserve">
+    <value>Invalid URI: The format of the URI could not be determined.</value>
+  </data>
+  <data name="GenericManagment_ASpecificServiceWasNotLocated" xml:space="preserve">
+    <value>A specific service was not located at the provided URL</value>
+  </data>
+  <data name="GenericManagment_AUserAndPasswordIsRquired" xml:space="preserve">
+    <value>A username and password is required to access the specified URL</value>
+  </data>
+  <data name="GenericManagment_AUserOrPasswordWrong" xml:space="preserve">
+    <value>The username or password is incorrect</value>
+  </data>
+  <data name="GenericManagment_ErrorLocatingServiceAtTheProvidedURL" xml:space="preserve">
+    <value>Error locating service at the provided URL</value>
+  </data>
+  <data name="GenericManagment_URLIsRequired" xml:space="preserve">
+    <value>URL is required</value>
+  </data>
+  <data name="GeoFence_NameEmpty" xml:space="preserve">
+    <value>Name is required.</value>
+  </data>
+  <data name="Holiday_NameEmpty" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="HolidayManagement_HolidayAlreadyExists" xml:space="preserve">
+    <value>Holiday [{0}] already exists</value>
+  </data>
+  <data name="HolidayManagement_HolidayDateAlreadyUsed" xml:space="preserve">
+    <value>Holiday Date [{0}] already used</value>
+  </data>
+  <data name="HolidayManagement_HolidayDateInvalid" xml:space="preserve">
+    <value>Holiday Date is invalid</value>
+  </data>
+  <data name="HostLink_AddOrder" xml:space="preserve">
+    <value>Added order {0}</value>
+  </data>
+  <data name="HostLink_AddProject" xml:space="preserve">
+    <value>Added project {0}</value>
+  </data>
+  <data name="HostLink_AssignError" xml:space="preserve">
+    <value>Assign order error</value>
+  </data>
+  <data name="HostLink_AssignOrder" xml:space="preserve">
+    <value>Assigned order {0}</value>
+  </data>
+  <data name="HostLink_CancelError" xml:space="preserve">
+    <value>Cancel order exception</value>
+  </data>
+  <data name="HostLink_CancelOrder" xml:space="preserve">
+    <value>Cancelled order {0}</value>
+  </data>
+  <data name="HostLink_ChangeOrderStatus" xml:space="preserve">
+    <value>Changed {0} order status</value>
+  </data>
+  <data name="HostLink_ChangeStatusError" xml:space="preserve">
+    <value>Change order status exception</value>
+  </data>
+  <data name="HostLink_ConfigNotFound" xml:space="preserve">
+    <value>Config {0} not found</value>
+  </data>
+  <data name="HostLink_CreateInvalid" xml:space="preserve">
+    <value>Order {0} exists already or missing HostOrderNumber.</value>
+  </data>
+  <data name="HostLink_ErrorParseField" xml:space="preserve">
+    <value>Error parsing field {0}</value>
+  </data>
+  <data name="HostLink_Exception" xml:space="preserve">
+    <value>Host Link exception error</value>
+  </data>
+  <data name="HostLink_ExceptionError" xml:space="preserve">
+    <value>{0} {1}</value>
+  </data>
+  <data name="HostLink_ExportNone" xml:space="preserve">
+    <value>No order is found eligible for this export request.</value>
+  </data>
+  <data name="HostLink_FieldDataTypeUnsupported" xml:space="preserve">
+    <value>FieldDataType {0} not supported</value>
+  </data>
+  <data name="HostLink_FieldInvalidData" xml:space="preserve">
+    <value>Field {0} has invalid value</value>
+  </data>
+  <data name="HostLink_FieldMissing" xml:space="preserve">
+    <value>Missing Field: {0}</value>
+  </data>
+  <data name="HostLink_FieldUnknown" xml:space="preserve">
+    <value>Field {0} is unknown</value>
+  </data>
+  <data name="HostLink_FromHostConfigDataInvalid" xml:space="preserve">
+    <value>Missing fromhost config {0} data</value>
+  </data>
+  <data name="HostLink_FromHostDisabled" xml:space="preserve">
+    <value>FromHost disabled, request not processed</value>
+  </data>
+  <data name="HostLink_FromHostNameMissing" xml:space="preserve">
+    <value>&lt;FromHost name&gt; missing</value>
+  </data>
+  <data name="HostLink_GetNameKeyError" xml:space="preserve">
+    <value>Error getting name key for field {0}</value>
+  </data>
+  <data name="HostLink_HostOrderNumberExist" xml:space="preserve">
+    <value>HostOrderNumber {0} exists already</value>
+  </data>
+  <data name="HostLink_HostOrderNumberMissing" xml:space="preserve">
+    <value>Missing HostOrderNumber</value>
+  </data>
+  <data name="HostLink_HostProjectNumberMissing" xml:space="preserve">
+    <value>Missing HostProjectNumber</value>
+  </data>
+  <data name="HostLink_InvalidMsgDatetime" xml:space="preserve">
+    <value>Invalid MsgDatetime</value>
+  </data>
+  <data name="HostLink_MandatoryFieldMissing" xml:space="preserve">
+    <value>Mandatory field {0} missing</value>
+  </data>
+  <data name="HostLink_MessageTypeInvalid" xml:space="preserve">
+    <value>Config {0} has invalid message type {1}</value>
+  </data>
+  <data name="HostLink_MissingMFFRequest" xml:space="preserve">
+    <value>Missing &lt;MFFRequest&gt; node</value>
+  </data>
+  <data name="HostLink_MissingNode" xml:space="preserve">
+    <value>Missing &lt;MsgDatetime&gt; or &lt;MsgId&gt; node</value>
+  </data>
+  <data name="HostLink_ModifyError" xml:space="preserve">
+    <value>Modify order exception</value>
+  </data>
+  <data name="HostLink_ModifyInvalid" xml:space="preserve">
+    <value>Cannot modify completed or cancelled order.</value>
+  </data>
+  <data name="HostLink_ModifyOrder" xml:space="preserve">
+    <value>Modified order {0}</value>
+  </data>
+  <data name="HostLink_ModifyRestricted" xml:space="preserve">
+    <value>Restricted field {0}</value>
+  </data>
+  <data name="HostLink_NodeMissing" xml:space="preserve">
+    <value>Node &lt;{0}&gt; missing</value>
+  </data>
+  <data name="HostLink_OrderNotFound" xml:space="preserve">
+    <value>Order not found</value>
+  </data>
+  <data name="HostLink_OrderTypeInvalid" xml:space="preserve">
+    <value>Mismatch OrderType name, config {0} ordertype {1}</value>
+  </data>
+  <data name="HostLink_OrderTypeNotFound" xml:space="preserve">
+    <value>OrderType {0} not found</value>
+  </data>
+  <data name="HostLink_ProcessStateChange" xml:space="preserve">
+    <value>Order {0} change state</value>
+  </data>
+  <data name="HostLink_ProcessStateChangeError" xml:space="preserve">
+    <value>State change failed.</value>
+  </data>
+  <data name="HostLink_ProjectMustBeUnique" xml:space="preserve">
+    <value>Host Project Number {0} must be unique</value>
+  </data>
+  <data name="HostLink_ProjectOrderNotFound" xml:space="preserve">
+    <value>Project order {0} not found</value>
+  </data>
+  <data name="HostLink_ReassignError" xml:space="preserve">
+    <value>Reassign order error</value>
+  </data>
+  <data name="HostLink_ReassignOrder" xml:space="preserve">
+    <value>Reassigned order {0}</value>
+  </data>
+  <data name="HostLink_ScheduleError" xml:space="preserve">
+    <value>Schedule order error</value>
+  </data>
+  <data name="HostLink_ScheduleOrder" xml:space="preserve">
+    <value>Scheduled order {0}</value>
+  </data>
+  <data name="HostLink_ToHostFileInfo" xml:space="preserve">
+    <value>Generated ToHost file {0} for {1} orders (size {2} bytes)</value>
+  </data>
+  <data name="HostLink_TxCodeInvalid" xml:space="preserve">
+    <value>Mismatch TxCode, config {0}, &lt;TxCode&gt; {1}</value>
+  </data>
+  <data name="HostLink_UnassignError" xml:space="preserve">
+    <value>Unassign order error</value>
+  </data>
+  <data name="HostLink_UnassignOrder" xml:space="preserve">
+    <value>Unassigned order {0}</value>
+  </data>
+  <data name="HostLink_ValueListInvalidData" xml:space="preserve">
+    <value>Invalid valuelist value for field {0}</value>
+  </data>
+  <data name="HostLink_ValueListNotFound" xml:space="preserve">
+    <value>Valuelist for field {0} not found</value>
+  </data>
+  <data name="HostLookupCol_CreationDatetime" xml:space="preserve">
+    <value>Creation Datetime</value>
+  </data>
+  <data name="HostLookupCol_FailMessage" xml:space="preserve">
+    <value>Error Message</value>
+  </data>
+  <data name="HostLookupCol_MessageStatus" xml:space="preserve">
+    <value>Message Status</value>
+  </data>
+  <data name="HostLookupCol_MethodHandlerName" xml:space="preserve">
+    <value>Method Handler Name</value>
+  </data>
+  <data name="HostLookupCol_MethodName" xml:space="preserve">
+    <value>Method Name</value>
+  </data>
+  <data name="IconSpecialIndicatorBgAssociation" xml:space="preserve">
+    <value>Icon is currently referenced by {0} Special Indicators, cannot remove Business Group</value>
+  </data>
+  <data name="IconSpecialIndicatorIconBgAssociation" xml:space="preserve">
+    <value>Icon is currently referenced by {0} Special Indicator Icons, cannot remove Business Group</value>
+  </data>
+  <data name="IconVehicleTypeBgAssociation" xml:space="preserve">
+    <value>Icon is currently referenced by {0} Vehicle Types, cannot remove Business Group</value>
+  </data>
+  <data name="Inventory_PartCannotBeChanged" xml:space="preserve">
+    <value>Part can not be changed for Inventory in Fielded, Fitted, or Consumed</value>
+  </data>
+  <data name="Inventory_SerialDuplicate" xml:space="preserve">
+    <value>Duplicate serial number "{0}"</value>
+  </data>
+  <data name="Inventory_SerialNoRegex" xml:space="preserve">
+    <value>Serial No. {0} is not in the correct format ({1})</value>
+  </data>
+  <data name="Inventory_SerialRegex" xml:space="preserve">
+    <value>Serial number "{0}" does not match pattern {1}</value>
+  </data>
+  <data name="InventoryCol_InventoryStatusId" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="InventoryCol_IsSerializedFlag" xml:space="preserve">
+    <value>Is Serialized</value>
+  </data>
+  <data name="InventoryCol_Name" xml:space="preserve">
+    <value>Part</value>
+  </data>
+  <data name="InventoryCol_SerialNo1" xml:space="preserve">
+    <value>Serial No. 1</value>
+  </data>
+  <data name="InventoryCol_StatusChangeTimestamp" xml:space="preserve">
+    <value>Changed</value>
+  </data>
+  <data name="InventoryCol_StorageLocationIdentifier" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="InventoryManagement_DeleteInventory" xml:space="preserve">
+    <value>Unexpected error trying to delete inventory</value>
+  </data>
+  <data name="InventoryStatus_10" xml:space="preserve">
+    <value>Received</value>
+  </data>
+  <data name="InventoryStatus_100" xml:space="preserve">
+    <value>Consumed</value>
+  </data>
+  <data name="InventoryStatus_110" xml:space="preserve">
+    <value>Disposed</value>
+  </data>
+  <data name="InventoryStatus_120" xml:space="preserve">
+    <value>Pictured</value>
+  </data>
+  <data name="InventoryStatus_130" xml:space="preserve">
+    <value>Receiving Exception</value>
+  </data>
+  <data name="InventoryStatus_20" xml:space="preserve">
+    <value>Quarantined</value>
+  </data>
+  <data name="InventoryStatus_30" xml:space="preserve">
+    <value>Available</value>
+  </data>
+  <data name="InventoryStatus_40" xml:space="preserve">
+    <value>RMA</value>
+  </data>
+  <data name="InventoryStatus_50" xml:space="preserve">
+    <value>Defective</value>
+  </data>
+  <data name="InventoryStatus_60" xml:space="preserve">
+    <value>Reserved</value>
+  </data>
+  <data name="InventoryStatus_70" xml:space="preserve">
+    <value>Unavailable</value>
+  </data>
+  <data name="InventoryStatus_80" xml:space="preserve">
+    <value>Fielded</value>
+  </data>
+  <data name="InventoryStatus_90" xml:space="preserve">
+    <value>Fitted</value>
+  </data>
+  <data name="JobCode_AttributeAssociationsInvalid" xml:space="preserve">
+    <value>The first attribute must be assigned</value>
+  </data>
+  <data name="JobCode_CompletionTime" xml:space="preserve">
+    <value>Completion Time</value>
+  </data>
+  <data name="JobCode_CompletionTimeTooLarge" xml:space="preserve">
+    <value>Completion Time must be less than 5 years</value>
+  </data>
+  <data name="JobCode_CompletionTimeTooSmall" xml:space="preserve">
+    <value>Completion Time is too small</value>
+  </data>
+  <data name="JobCode_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="JobCode_DescriptionEmpty" xml:space="preserve">
+    <value>Description is required</value>
+  </data>
+  <data name="JobCode_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="JobCode_NameEmpty" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="JobCode_Priority" xml:space="preserve">
+    <value>Priority</value>
+  </data>
+  <data name="JobCodeBGWOAssociation" xml:space="preserve">
+    <value>Job Code is currently referenced by {0} WorkOrders, cannot remove Business Group</value>
+  </data>
+  <data name="JobCodeJobOfferingSetBgAssociation" xml:space="preserve">
+    <value>JobCode is currently referenced in {0} Job Offering Sets, cannot remove Business Group</value>
+  </data>
+  <data name="JobCodeManagement_JobCodeAlreadyExist" xml:space="preserve">
+    <value>Job Code [{0}] already exists.</value>
+  </data>
+  <data name="JobCodeManagement_JobCodePriorityRequired" xml:space="preserve">
+    <value>A valid priority value is required</value>
+  </data>
+  <data name="JobCodeManagement_JobCodeReferenced" xml:space="preserve">
+    <value>Job Code referenced.</value>
+  </data>
+  <data name="JobCodeShiftRotationBgAssociation" xml:space="preserve">
+    <value>Job Code is currently referenced in {0} Shift Rotations, cannot remove Business Group</value>
+  </data>
+  <data name="Location_LatitudeOutOfBounds" xml:space="preserve">
+    <value>Latitude must be &gt; -90 and &lt; 90</value>
+  </data>
+  <data name="Location_LongitudeOutOfBounds" xml:space="preserve">
+    <value>Longitude must be &gt; -180 and &lt; 180</value>
+  </data>
+  <data name="Location_NameEmpty" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="Location_TypeInvalid" xml:space="preserve">
+    <value>Invalid location type</value>
+  </data>
+  <data name="LocationBgUserEndAssociation" xml:space="preserve">
+    <value>Location is current used by User {0} as an end location, cannot remove Business Group</value>
+  </data>
+  <data name="LocationBgUserStartAssociation" xml:space="preserve">
+    <value>Location is current used by User {0} as a start location, cannot remove Business Group</value>
+  </data>
+  <data name="LocationCol_Address1" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="LocationCol_Address2" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="LocationCol_City" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="LocationCol_Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="LocationCol_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="LocationCol_State" xml:space="preserve">
+    <value>State/Prov</value>
+  </data>
+  <data name="LocationCol_Zip" xml:space="preserve">
+    <value>Zip</value>
+  </data>
+  <data name="LocationManagement_LocationAlreadyExist" xml:space="preserve">
+    <value>Location [{0}] already exists</value>
+  </data>
+  <data name="Manufacturer_IdentifierEmpty" xml:space="preserve">
+    <value>Manufacturer identifier required.</value>
+  </data>
+  <data name="Manufacturer_InvalidEmail" xml:space="preserve">
+    <value>Email address {0} is invalid</value>
+  </data>
+  <data name="ManufacturerManagement_ManufacturerAlreadyExists" xml:space="preserve">
+    <value>Manufacturer [{0}] already exists.</value>
+  </data>
+  <data name="MapServiceURL_CrossDomainProxyRequired" xml:space="preserve">
+    <value>Cross Domain Proxy is required</value>
+  </data>
+  <data name="MapServiceURL_DescriptionEmpty" xml:space="preserve">
+    <value>Description is empry</value>
+  </data>
+  <data name="MapServiceURL_InvalidTransparencyRange" xml:space="preserve">
+    <value>Invalid transparency range, must be numeric value between 0 and 100</value>
+  </data>
+  <data name="MapServiceURL_InvalidURLFormat" xml:space="preserve">
+    <value>URL invalid format</value>
+  </data>
+  <data name="MapServiceURL_InvalidZIndex" xml:space="preserve">
+    <value>Invalid Z-Index range, must be numeric value between 0 and 100</value>
+  </data>
+  <data name="MapServiceURL_MapServiceURL_URLEmpty" xml:space="preserve">
+    <value>URL is empty</value>
+  </data>
+  <data name="Media_DataTooLarge" xml:space="preserve">
+    <value>[Media file cannot exceed {0} bytes]</value>
+  </data>
+  <data name="Media_FilenameEmpty" xml:space="preserve">
+    <value>Filename is required</value>
+  </data>
+  <data name="Media_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Media_NameEmpty" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="Media_TypeEmpty" xml:space="preserve">
+    <value>Type is required</value>
+  </data>
+  <data name="MethodInvocationCol_BusinessGroupName" xml:space="preserve">
+    <value>Business Group Name</value>
+  </data>
+  <data name="MethodInvocationCol_CreationDatetime" xml:space="preserve">
+    <value>Creation Datetime</value>
+  </data>
+  <data name="MethodInvocationCol_EntityData1" xml:space="preserve">
+    <value>Order Type</value>
+  </data>
+  <data name="MethodInvocationCol_EntityData2" xml:space="preserve">
+    <value>Host Order Number</value>
+  </data>
+  <data name="MethodInvocationCol_EntityName" xml:space="preserve">
+    <value>Order Number</value>
+  </data>
+  <data name="MethodInvocationCol_EntityType" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="MethodInvocationCol_FailMessage" xml:space="preserve">
+    <value>Error Message</value>
+  </data>
+  <data name="MethodInvocationCol_MethodName" xml:space="preserve">
+    <value>Method Name</value>
+  </data>
+  <data name="MethodInvocationCol_Priority" xml:space="preserve">
+    <value>Priority</value>
+  </data>
+  <data name="MethodInvocationCol_ServerName" xml:space="preserve">
+    <value>Server Name</value>
+  </data>
+  <data name="MethodInvocationCol_ServerVersion" xml:space="preserve">
+    <value>Server Version</value>
+  </data>
+  <data name="MethodInvocationCol_Status" xml:space="preserve">
+    <value>Message Status</value>
+  </data>
+  <data name="MethodInvocationCol_Timestamp" xml:space="preserve">
+    <value>Last Retry Datetime</value>
+  </data>
+  <data name="MethodInvocationManagement_ParameterExceedsMax" xml:space="preserve">
+    <value>Inbound Web Message has a parameter {0} that exceeds {1} bytes [server name: {2}, server version: {3}, method name: {4}]</value>
+  </data>
+  <data name="MethodInvocationManagement_ParameterExceedsMaxNotDisplayed" xml:space="preserve">
+    <value>The content of this parameter is too long to display and has been intentionally removed</value>
+  </data>
+  <data name="ModemType_NameEmpty" xml:space="preserve">
+    <value>Modem Type name is empty</value>
+  </data>
+  <data name="ObjectState_Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="ObjectState_Insert" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="ObjectState_Update" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="OrderCategory_ColorInvalid" xml:space="preserve">
+    <value>Color is invalid</value>
+  </data>
+  <data name="OrderCategory_NameRequired" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="OrderCategory_OTBusinessGroupMismatch" xml:space="preserve">
+    <value>Order Type {0} does not belong to selected Business Groups</value>
+  </data>
+  <data name="OrderCategory_OTEmpty" xml:space="preserve">
+    <value>Order Type is required.</value>
+  </data>
+  <data name="OrderCategory_OTListInvalid" xml:space="preserve">
+    <value>Order Type list is invalid</value>
+  </data>
+  <data name="OrderCategoryManagement_OrderCategoryAlreadyExists" xml:space="preserve">
+    <value>Order Category [{0}] already exists</value>
+  </data>
+  <data name="OrderCol_CustomerAddress1" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="OrderCol_CustomerCity" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="OrderCol_HostOrderNumber" xml:space="preserve">
+    <value>Host order #</value>
+  </data>
+  <data name="OrderCol_OrderNumber" xml:space="preserve">
+    <value>Order #</value>
+  </data>
+  <data name="OrderCol_OrderStatusId" xml:space="preserve">
+    <value>Order status</value>
+  </data>
+  <data name="OrderCol_OrderTypeName" xml:space="preserve">
+    <value>Order type</value>
+  </data>
+  <data name="OrderCol_WorkerName" xml:space="preserve">
+    <value>Worker</value>
+  </data>
+  <data name="OrderEvent_Acknowledged" xml:space="preserve">
+    <value>After Acknowledged</value>
+  </data>
+  <data name="OrderEvent_AfterBooking" xml:space="preserve">
+    <value>After Booking</value>
+  </data>
+  <data name="OrderEvent_AfterOwnershipChange" xml:space="preserve">
+    <value>After Ownership Change</value>
+  </data>
+  <data name="OrderEvent_Assign" xml:space="preserve">
+    <value>After Assign</value>
+  </data>
+  <data name="OrderEvent_Attach" xml:space="preserve">
+    <value>After Attach</value>
+  </data>
+  <data name="OrderEvent_AttachmentSaved" xml:space="preserve">
+    <value>After Attachment Saved</value>
+  </data>
+  <data name="OrderEvent_BeforeAcknowledged" xml:space="preserve">
+    <value>Before Acknowledged</value>
+  </data>
+  <data name="OrderEvent_BeforeAssign" xml:space="preserve">
+    <value>Before Assign</value>
+  </data>
+  <data name="OrderEvent_BeforeBooking" xml:space="preserve">
+    <value>Before Booking</value>
+  </data>
+  <data name="OrderEvent_BeforeBookingCancel" xml:space="preserve">
+    <value>Before Booking Cancel</value>
+  </data>
+  <data name="OrderEvent_BeforeCancel" xml:space="preserve">
+    <value>Before Cancel</value>
+  </data>
+  <data name="OrderEvent_BeforeComplete" xml:space="preserve">
+    <value>Before Complete</value>
+  </data>
+  <data name="OrderEvent_BeforeCreate" xml:space="preserve">
+    <value>Before Create</value>
+  </data>
+  <data name="OrderEvent_BeforeMobileSave" xml:space="preserve">
+    <value>Before Mobile Save</value>
+  </data>
+  <data name="OrderEvent_BeforeModify" xml:space="preserve">
+    <value>Before Modify</value>
+  </data>
+  <data name="OrderEvent_BeforeProcessStatus" xml:space="preserve">
+    <value>Before Process Status</value>
+  </data>
+  <data name="OrderEvent_BeforeResolve" xml:space="preserve">
+    <value>Before Resolve</value>
+  </data>
+  <data name="OrderEvent_BeforeSchedule" xml:space="preserve">
+    <value>Before Schedule</value>
+  </data>
+  <data name="OrderEvent_BeforeSetEta" xml:space="preserve">
+    <value>Before Set ETA</value>
+  </data>
+  <data name="OrderEvent_BeforeSetProblematic" xml:space="preserve">
+    <value>Before Set Problematic</value>
+  </data>
+  <data name="OrderEvent_BeforeSkip" xml:space="preserve">
+    <value>Before Skip</value>
+  </data>
+  <data name="OrderEvent_BeforeStatusChange" xml:space="preserve">
+    <value>Before Status Change</value>
+  </data>
+  <data name="OrderEvent_BeforeSuspend" xml:space="preserve">
+    <value>Before Suspend</value>
+  </data>
+  <data name="OrderEvent_BeforeUnassign" xml:space="preserve">
+    <value>Before Unassign</value>
+  </data>
+  <data name="OrderEvent_BookingCancel" xml:space="preserve">
+    <value>After Booking Cancel</value>
+  </data>
+  <data name="OrderEvent_Cancel" xml:space="preserve">
+    <value>After Cancel</value>
+  </data>
+  <data name="OrderEvent_Complete" xml:space="preserve">
+    <value>After Complete</value>
+  </data>
+  <data name="OrderEvent_Create" xml:space="preserve">
+    <value>After Create</value>
+  </data>
+  <data name="OrderEvent_MobileSave" xml:space="preserve">
+    <value>After Mobile Save</value>
+  </data>
+  <data name="OrderEvent_Modify" xml:space="preserve">
+    <value>After Modify</value>
+  </data>
+  <data name="OrderEvent_None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="OrderEvent_OnDemand" xml:space="preserve">
+    <value>On Demand</value>
+  </data>
+  <data name="OrderEvent_PrefillNewOrder" xml:space="preserve">
+    <value>After Prefill New Order</value>
+  </data>
+  <data name="OrderEvent_ProcessStatus" xml:space="preserve">
+    <value>After Process Status</value>
+  </data>
+  <data name="OrderEvent_Resolve" xml:space="preserve">
+    <value>After Resolve</value>
+  </data>
+  <data name="OrderEvent_Schedule" xml:space="preserve">
+    <value>After Schedule</value>
+  </data>
+  <data name="OrderEvent_ScheduleTentative" xml:space="preserve">
+    <value>After Schedule Tentative</value>
+  </data>
+  <data name="OrderEvent_SetEta" xml:space="preserve">
+    <value>After Set ETA</value>
+  </data>
+  <data name="OrderEvent_SetProblematic" xml:space="preserve">
+    <value>After Set Problematic</value>
+  </data>
+  <data name="OrderEvent_Skip" xml:space="preserve">
+    <value>After Skip</value>
+  </data>
+  <data name="OrderEvent_StatusChange" xml:space="preserve">
+    <value>After Status Change</value>
+  </data>
+  <data name="OrderEvent_Suspend" xml:space="preserve">
+    <value>After Suspend</value>
+  </data>
+  <data name="OrderEvent_Unassign" xml:space="preserve">
+    <value>After Unassign</value>
+  </data>
+  <data name="OrderEventHelper_BgNotFound" xml:space="preserve">
+    <value>Business Group "{0}" not found</value>
+  </data>
+  <data name="OrderEventHelper_SaveNewOrderArgEx" xml:space="preserve">
+    <value>This order is not new, should not be calling SaveNewOrder.</value>
+  </data>
+  <data name="OrderFormManagement_AddOrderFormEx" xml:space="preserve">
+    <value>Unexpected error occured while trying to add OrderForm.</value>
+  </data>
+  <data name="OrderFormManagement_AddOrderFormSqlEx" xml:space="preserve">
+    <value>Database error occured while trying to add OrderForm.</value>
+  </data>
+  <data name="OrderFormManagement_GetOrderFormSummariesEx" xml:space="preserve">
+    <value>Unexpected framework error occured while trying to load OrderForms for Order: {0}</value>
+  </data>
+  <data name="OrderFormManagement_GetOrderFormSummaryEx" xml:space="preserve">
+    <value>Unexpected framework error occured while trying to load OrderForm: {0}</value>
+  </data>
+  <data name="OrderFormManagement_GetOrderFormSummaryFcEx" xml:space="preserve">
+    <value>Could not construct filter to load OrderForm: {0}</value>
+  </data>
+  <data name="OrderStatus_0" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="OrderStatus_10" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="OrderStatus_100" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+  <data name="OrderStatus_110" xml:space="preserve">
+    <value>Verified</value>
+  </data>
+  <data name="OrderStatus_120" xml:space="preserve">
+    <value>Incomplete</value>
+  </data>
+  <data name="OrderStatus_130" xml:space="preserve">
+    <value>Skipped</value>
+  </data>
+  <data name="OrderStatus_140" xml:space="preserve">
+    <value>Project Unassigned</value>
+  </data>
+  <data name="OrderStatus_150" xml:space="preserve">
+    <value>Project Assigned</value>
+  </data>
+  <data name="OrderStatus_160" xml:space="preserve">
+    <value>Project In-progress</value>
+  </data>
+  <data name="OrderStatus_170" xml:space="preserve">
+    <value>Project Completed</value>
+  </data>
+  <data name="OrderStatus_180" xml:space="preserve">
+    <value>Project Closed</value>
+  </data>
+  <data name="OrderStatus_185" xml:space="preserve">
+    <value>Project Cancelled</value>
+  </data>
+  <data name="OrderStatus_190" xml:space="preserve">
+    <value>Scheduled</value>
+  </data>
+  <data name="OrderStatus_20" xml:space="preserve">
+    <value>Unassigned</value>
+  </data>
+  <data name="OrderStatus_200" xml:space="preserve">
+    <value>Tentative Schedule</value>
+  </data>
+  <data name="OrderStatus_210" xml:space="preserve">
+    <value>In Progress</value>
+  </data>
+  <data name="OrderStatus_30" xml:space="preserve">
+    <value>Unacknowledged</value>
+  </data>
+  <data name="OrderStatus_40" xml:space="preserve">
+    <value>Assigned</value>
+  </data>
+  <data name="OrderStatus_50" xml:space="preserve">
+    <value>Problematic</value>
+  </data>
+  <data name="OrderStatus_60" xml:space="preserve">
+    <value>Enroute</value>
+  </data>
+  <data name="OrderStatus_70" xml:space="preserve">
+    <value>Onsite</value>
+  </data>
+  <data name="OrderStatus_80" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+  <data name="OrderStatus_90" xml:space="preserve">
+    <value>Suspended</value>
+  </data>
+  <data name="OrderTypeHelperManagement_HandleOnAttachException" xml:space="preserve">
+    <value>{0} encountered an unexpected error while handling order {1}, project order {2}.</value>
+  </data>
+  <data name="OrderTypeHelperManagement_HandleOnException" xml:space="preserve">
+    <value>{0} encountered an unexpected error while handling order {1}.</value>
+  </data>
+  <data name="OrderTypeHelperManagement_NullOrder" xml:space="preserve">
+    <value>Order submitted to {0} method was null, cannot perform helper method</value>
+  </data>
+  <data name="OrderTypeHelperManagement_NullUser" xml:space="preserve">
+    <value>User submitted to {0} method was null for order {1}, cannot perform helper method</value>
+  </data>
+  <data name="OrderTypeManagement_ExistingFieldMismatch" xml:space="preserve">
+    <value>Field "{0}" in {1} [data type "{2}", max length "{3}"] must match "{4}" in {5} "{6}"  [data type "{7}", max length "{8}"]</value>
+  </data>
+  <data name="OrderTypeManagement_NameInUse" xml:space="preserve">
+    <value>Order type with name {0} already exists</value>
+  </data>
+  <data name="OrderTypeManagement_NewFields" xml:space="preserve">
+    <value>New fields have been added to this order type. An order type with new fields cannot be uploaded when orders of the same order type exist on mobile devices.</value>
+  </data>
+  <data name="OrderTypeManagement_OtTypeChangeFail" xml:space="preserve">
+    <value>Unable to change field data type</value>
+  </data>
+  <data name="OrderTypeManagement_TypeChange" xml:space="preserve">
+    <value>Field "{0}" data type "{1}" cannot be changed to "{2}"</value>
+  </data>
+  <data name="OrganizationManagement_OrganizationInUse" xml:space="preserve">
+    <value>Organization "{0}" is currently in use. Cannot delete at this time.</value>
+  </data>
+  <data name="OrganizationManagement_UpdateFailed" xml:space="preserve">
+    <value>Error occured during Organization update. Changes have not been applied.</value>
+  </data>
+  <data name="Part_CannotChangeManufacturer" xml:space="preserve">
+    <value>Manufacturer cannot be changed because inventory of this part type already exists.</value>
+  </data>
+  <data name="Part_CannotChangeMultiUse" xml:space="preserve">
+    <value>Multi-Use cannot be changed because inventory of this part type already exists.</value>
+  </data>
+  <data name="Part_CannotChangeType" xml:space="preserve">
+    <value>Serialized type cannot be changed because inventory of this part type already exists.</value>
+  </data>
+  <data name="Part_CostNegative" xml:space="preserve">
+    <value>Cost must be greater than 0</value>
+  </data>
+  <data name="Part_IdentifierEmpty" xml:space="preserve">
+    <value>Part identifier required</value>
+  </data>
+  <data name="Part_ManufacturerEmpty" xml:space="preserve">
+    <value>The Manufacturer must be supplied.</value>
+  </data>
+  <data name="Part_MaxStockLevelLessThanMin" xml:space="preserve">
+    <value>Max stock level must be greater than or equal to Min stock level</value>
+  </data>
+  <data name="Part_MaxStockLevelNegative" xml:space="preserve">
+    <value>Max stock level must be greater than 0</value>
+  </data>
+  <data name="Part_MinStockLevelNegative" xml:space="preserve">
+    <value>Min stock level must be greater than 0</value>
+  </data>
+  <data name="Part_NameEmpty" xml:space="preserve">
+    <value>Part name required</value>
+  </data>
+  <data name="Part_QuantityInWarehouseNegative" xml:space="preserve">
+    <value>Quantity in warehouse was be greater than 0</value>
+  </data>
+  <data name="Part_ReorderQuantityNegative" xml:space="preserve">
+    <value>Re-order quantity must be greater than 0</value>
+  </data>
+  <data name="PartManagement_ManufacturerDoesNotExist" xml:space="preserve">
+    <value>The specified manufacturer does not exist.</value>
+  </data>
+  <data name="PartManagement_PartAlreadyExists" xml:space="preserve">
+    <value>Part [{0}] already exists.</value>
+  </data>
+  <data name="PartManagement_SupplierDoesNotExist" xml:space="preserve">
+    <value>The specified supplier does not exist.</value>
+  </data>
+  <data name="PeerSystem_InvalidURL" xml:space="preserve">
+    <value>URL is invalid</value>
+  </data>
+  <data name="PeerSystem_URLEmpty" xml:space="preserve">
+    <value>URL is required</value>
+  </data>
+  <data name="PeerSystem_URLTooLong" xml:space="preserve">
+    <value>The length of URL must be less than 256</value>
+  </data>
+  <data name="PeerSystemManagement_PeerSystemAlreadyExist" xml:space="preserve">
+    <value>Vehicle Sharing System "{0}" already exists, name must be unique</value>
+  </data>
+  <data name="PeerSystemVehicleBgAssociation" xml:space="preserve">
+    <value>Vehicle Sharing System is current referenced by Vehicle {0}, cannot remove Business Group</value>
+  </data>
+  <data name="Permissions_AcknowledgeAlerts" xml:space="preserve">
+    <value>Alerts Acknowledge</value>
+  </data>
+  <data name="Permissions_AddBusinessGroupSettings" xml:space="preserve">
+    <value>Business Group Setting Add</value>
+  </data>
+  <data name="Permissions_AddEditArea" xml:space="preserve">
+    <value>Area Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditAttribute" xml:space="preserve">
+    <value>Attribute Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditBlockoutDates" xml:space="preserve">
+    <value>Blockout Date Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditBusinessGroup" xml:space="preserve">
+    <value>Business Group Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditCrew" xml:space="preserve">
+    <value>Crew Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditDistList" xml:space="preserve">
+    <value>Distribution List Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditEquipment" xml:space="preserve">
+    <value>Equipment Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditExportFormat" xml:space="preserve">
+    <value>Export Format Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditGeoFences" xml:space="preserve">
+    <value>Geo Fences Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditGeoRoute" xml:space="preserve">
+    <value>Add Edit Geo Route</value>
+  </data>
+  <data name="Permissions_AddEditHoliday" xml:space="preserve">
+    <value>Holiday Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditHostSystem" xml:space="preserve">
+    <value>Add Edit Host System</value>
+  </data>
+  <data name="Permissions_AddEditIcon" xml:space="preserve">
+    <value>Icon Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditInventory" xml:space="preserve">
+    <value>Inventory Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditJobCode" xml:space="preserve">
+    <value>Job Code Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditJobOfferingSet" xml:space="preserve">
+    <value>Job Offering Set Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditLocation" xml:space="preserve">
+    <value>Location Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditMapData" xml:space="preserve">
+    <value>Map Data Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditMapServiceURL" xml:space="preserve">
+    <value>Add Edit Map Service URL</value>
+  </data>
+  <data name="Permissions_AddEditModemSensors" xml:space="preserve">
+    <value>Add Edit Modem Sensors</value>
+  </data>
+  <data name="Permissions_AddEditOrderCategory" xml:space="preserve">
+    <value>Order Category Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditPeerSystem" xml:space="preserve">
+    <value>Vehicle Sharing System Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditPriority" xml:space="preserve">
+    <value>Priority Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditReportJob" xml:space="preserve">
+    <value>Report Schedule Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditRole" xml:space="preserve">
+    <value>Role Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditScenario" xml:space="preserve">
+    <value>Scenario Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditShift" xml:space="preserve">
+    <value>Shift Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditShiftRotation" xml:space="preserve">
+    <value>Shift Rotation Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditShiftRotationAssignment" xml:space="preserve">
+    <value>Shift Rotation Assignment Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditShiftRotationSet" xml:space="preserve">
+    <value>Shift Rotation Set Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditSpecialIndicator" xml:space="preserve">
+    <value>Special Indicator Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditSystemJob" xml:space="preserve">
+    <value>System Job Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditUnavailableTime" xml:space="preserve">
+    <value>Unavailable Time Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditUser" xml:space="preserve">
+    <value>User Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditVehicle" xml:space="preserve">
+    <value>Vehicle Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditVehicleGroup" xml:space="preserve">
+    <value>Vehicle Group Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditVehicleServiceSchedule" xml:space="preserve">
+    <value>Vehicle Service Schedule Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditVehicleServiceTemplates" xml:space="preserve">
+    <value>Vehicle Service Template Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditVehicleServiceTypes" xml:space="preserve">
+    <value>Vehicle Service Type Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditVehicleTypes" xml:space="preserve">
+    <value>Vehicle Type Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditWarranty" xml:space="preserve">
+    <value>Warranty Add/Edit</value>
+  </data>
+  <data name="Permissions_AddEditWorkOrderFieldMapping" xml:space="preserve">
+    <value>Work Order Mapping Field Add/Edit</value>
+  </data>
+  <data name="Permissions_AdmService" xml:space="preserve">
+    <value>Adm Service</value>
+  </data>
+  <data name="Permissions_AnyClientLogin" xml:space="preserve">
+    <value>Client Login - Any</value>
+  </data>
+  <data name="Permissions_AppointmentBooking" xml:space="preserve">
+    <value>Appointment Booking</value>
+  </data>
+  <data name="Permissions_AppointmentBookingOverride" xml:space="preserve">
+    <value>Appointment Booking Override</value>
+  </data>
+  <data name="Permissions_AssignDispatchOrder" xml:space="preserve">
+    <value>Order Assign</value>
+  </data>
+  <data name="Permissions_AssignReports" xml:space="preserve">
+    <value>Assign Report</value>
+  </data>
+  <data name="Permissions_AuditConfig" xml:space="preserve">
+    <value>Audit Config</value>
+  </data>
+  <data name="Permissions_AuditOrder" xml:space="preserve">
+    <value>Audit Order</value>
+  </data>
+  <data name="Permissions_BusinessGroupAdmin" xml:space="preserve">
+    <value>Business Group Administrator</value>
+  </data>
+  <data name="Permissions_CancelOrder" xml:space="preserve">
+    <value>Order Cancel</value>
+  </data>
+  <data name="Permissions_CancelProject" xml:space="preserve">
+    <value>Cancel Project</value>
+  </data>
+  <data name="Permissions_ChangePassword" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="Permissions_ChangeWorkOrderBusinessGroup" xml:space="preserve">
+    <value>Change WorkOrder Business Group</value>
+  </data>
+  <data name="Permissions_CloseAlerts" xml:space="preserve">
+    <value>Alerts Close</value>
+  </data>
+  <data name="Permissions_CompleteProject" xml:space="preserve">
+    <value>Complete Project</value>
+  </data>
+  <data name="Permissions_CompleteVehicleServiceAppt" xml:space="preserve">
+    <value>Complete Vehicle Service Appt</value>
+  </data>
+  <data name="Permissions_ConfigurationClientLogin" xml:space="preserve">
+    <value>Client Login - Configuration</value>
+  </data>
+  <data name="Permissions_CreateOrder" xml:space="preserve">
+    <value>Order Create</value>
+  </data>
+  <data name="Permissions_CreateProject" xml:space="preserve">
+    <value>Project Create</value>
+  </data>
+  <data name="Permissions_CSMClientLogin" xml:space="preserve">
+    <value>CSM Login</value>
+  </data>
+  <data name="Permissions_DeleteArea" xml:space="preserve">
+    <value>Area Delete</value>
+  </data>
+  <data name="Permissions_DeleteAttribute" xml:space="preserve">
+    <value>Attribute Delete</value>
+  </data>
+  <data name="Permissions_DeleteBusinessGroup" xml:space="preserve">
+    <value>Business Group Delete</value>
+  </data>
+  <data name="Permissions_DeleteCrew" xml:space="preserve">
+    <value>Crew Delete</value>
+  </data>
+  <data name="Permissions_DeleteDistList" xml:space="preserve">
+    <value>Distribution List Delete</value>
+  </data>
+  <data name="Permissions_DeleteEquipment" xml:space="preserve">
+    <value>Equipment Delete</value>
+  </data>
+  <data name="Permissions_DeleteExportFormat" xml:space="preserve">
+    <value>Export Format Delete</value>
+  </data>
+  <data name="Permissions_DeleteHoliday" xml:space="preserve">
+    <value>Holiday Delete</value>
+  </data>
+  <data name="Permissions_DeleteHostMessageConfig" xml:space="preserve">
+    <value>Host Message Config Delete</value>
+  </data>
+  <data name="Permissions_DeleteIcon" xml:space="preserve">
+    <value>Icon Delete</value>
+  </data>
+  <data name="Permissions_DeleteJobCode" xml:space="preserve">
+    <value>Job Code Delete</value>
+  </data>
+  <data name="Permissions_DeleteJobOfferingSet" xml:space="preserve">
+    <value>Job Offering Set Delete</value>
+  </data>
+  <data name="Permissions_DeleteLocation" xml:space="preserve">
+    <value>Location Delete</value>
+  </data>
+  <data name="Permissions_DeleteMapData" xml:space="preserve">
+    <value>Map Data Delete</value>
+  </data>
+  <data name="Permissions_DeleteMapServiceURL" xml:space="preserve">
+    <value>Delete Map Service URL</value>
+  </data>
+  <data name="Permissions_DeleteModemSensors" xml:space="preserve">
+    <value>Delete Modem Sensors</value>
+  </data>
+  <data name="Permissions_DeleteOrderCategory" xml:space="preserve">
+    <value>Order Category Delete</value>
+  </data>
+  <data name="Permissions_DeleteOrderColumnConfig" xml:space="preserve">
+    <value>Order Column Delete</value>
+  </data>
+  <data name="Permissions_DeleteOrderFilterConfig" xml:space="preserve">
+    <value>Order Filter Delete</value>
+  </data>
+  <data name="Permissions_DeleteOrderSortConfig" xml:space="preserve">
+    <value>Order Sort Delete</value>
+  </data>
+  <data name="Permissions_DeletePeerSystem" xml:space="preserve">
+    <value>Vehicle Sharing System Delete</value>
+  </data>
+  <data name="Permissions_DeletePriority" xml:space="preserve">
+    <value>Priority Delete</value>
+  </data>
+  <data name="Permissions_DeleteReportJob" xml:space="preserve">
+    <value>Report Schedule Delete</value>
+  </data>
+  <data name="Permissions_DeleteRole" xml:space="preserve">
+    <value>Role Delete</value>
+  </data>
+  <data name="Permissions_DeleteScenario" xml:space="preserve">
+    <value>Scenario Delete</value>
+  </data>
+  <data name="Permissions_DeleteShift" xml:space="preserve">
+    <value>Shift Delete</value>
+  </data>
+  <data name="Permissions_DeleteShiftRotation" xml:space="preserve">
+    <value>Shift Rotation Delete</value>
+  </data>
+  <data name="Permissions_DeleteShiftRotationAssignment" xml:space="preserve">
+    <value>Shift Rotation Assignment Delete</value>
+  </data>
+  <data name="Permissions_DeleteShiftRotationSet" xml:space="preserve">
+    <value>Shift Rotation Set Delete</value>
+  </data>
+  <data name="Permissions_DeleteSpecialIndicator" xml:space="preserve">
+    <value>Special Indicator Delete</value>
+  </data>
+  <data name="Permissions_DeleteSystemJob" xml:space="preserve">
+    <value>System Job Delete</value>
+  </data>
+  <data name="Permissions_DeleteUnavailableTime" xml:space="preserve">
+    <value>Unavailable Time Delete</value>
+  </data>
+  <data name="Permissions_DeleteUser" xml:space="preserve">
+    <value>User Delete</value>
+  </data>
+  <data name="Permissions_DeleteVehicle" xml:space="preserve">
+    <value>Vehicle Delete</value>
+  </data>
+  <data name="Permissions_DeleteVehicleGroup" xml:space="preserve">
+    <value>Vehicle Group Delete</value>
+  </data>
+  <data name="Permissions_DeleteVehicleServiceSchedule" xml:space="preserve">
+    <value>Vehicle Service Schedule Delete</value>
+  </data>
+  <data name="Permissions_DeleteVehicleServiceTemplates" xml:space="preserve">
+    <value>Vehicle Service Template Delete</value>
+  </data>
+  <data name="Permissions_DeleteVehicleServiceTypes" xml:space="preserve">
+    <value>Vehicle Service Type Delete</value>
+  </data>
+  <data name="Permissions_DeleteVehicleTypes" xml:space="preserve">
+    <value>Vehicle Type Delete</value>
+  </data>
+  <data name="Permissions_DeleteWebMessage" xml:space="preserve">
+    <value>Web Message Delete</value>
+  </data>
+  <data name="Permissions_DispatchClientLogin" xml:space="preserve">
+    <value>Client Login - Dispatch</value>
+  </data>
+  <data name="Permissions_DispatchCompleteOrder" xml:space="preserve">
+    <value>Order Dispatch Complete</value>
+  </data>
+  <data name="Permissions_DispatchMapping" xml:space="preserve">
+    <value>Dispatch Mapping</value>
+  </data>
+  <data name="Permissions_EditAlertSettings" xml:space="preserve">
+    <value>Alert Setting Edit</value>
+  </data>
+  <data name="Permissions_EditProactiveQueue" xml:space="preserve">
+    <value>Proactive Queue Edit</value>
+  </data>
+  <data name="Permissions_EditShiftAssignment" xml:space="preserve">
+    <value>Shift Assignment Edit</value>
+  </data>
+  <data name="Permissions_EditWebMessage" xml:space="preserve">
+    <value>Web Message Edit</value>
+  </data>
+  <data name="Permissions_GenerateHostFiles" xml:space="preserve">
+    <value>Generate Host File</value>
+  </data>
+  <data name="Permissions_GeocodeOrder" xml:space="preserve">
+    <value>Order Geo-code</value>
+  </data>
+  <data name="Permissions_HostService" xml:space="preserve">
+    <value>Host Service</value>
+  </data>
+  <data name="Permissions_InventoryControlFileManagement" xml:space="preserve">
+    <value>Control File Management</value>
+  </data>
+  <data name="Permissions_InventoryLoadControlFile" xml:space="preserve">
+    <value>Inventory Load Control File</value>
+  </data>
+  <data name="Permissions_InventoryLockManagement" xml:space="preserve">
+    <value>Lock Management</value>
+  </data>
+  <data name="Permissions_ManageGeoRoutes" xml:space="preserve">
+    <value>Manage Geo Routes</value>
+  </data>
+  <data name="Permissions_ManageOrderAttachment" xml:space="preserve">
+    <value>Manage Order Attachment</value>
+  </data>
+  <data name="Permissions_ManageQuarantinedMessages" xml:space="preserve">
+    <value>Manage Quarantined Message</value>
+  </data>
+  <data name="Permissions_ManageReports" xml:space="preserve">
+    <value>Manage Report</value>
+  </data>
+  <data name="Permissions_MobileClientLogin" xml:space="preserve">
+    <value>Client Login - Mobile</value>
+  </data>
+  <data name="Permissions_MobileWorker" xml:space="preserve">
+    <value>Mobile Worker</value>
+  </data>
+  <data name="Permissions_ModifyByOrderEvent" xml:space="preserve">
+    <value>Modify by History</value>
+  </data>
+  <data name="Permissions_ModifyOrder" xml:space="preserve">
+    <value>Order Modify</value>
+  </data>
+  <data name="Permissions_OpenOrderTypeFile" xml:space="preserve">
+    <value>Open Order Type File</value>
+  </data>
+  <data name="Permissions_ProblematicOrder" xml:space="preserve">
+    <value>Problematic Order</value>
+  </data>
+  <data name="Permissions_ProjectAttachOrder" xml:space="preserve">
+    <value>Project Attach Order</value>
+  </data>
+  <data name="Permissions_ProjectDetachOrder" xml:space="preserve">
+    <value>Project Detach Order</value>
+  </data>
+  <data name="Permissions_ReassignOrder" xml:space="preserve">
+    <value>Re-assign Order</value>
+  </data>
+  <data name="Permissions_RecommendWorker" xml:space="preserve">
+    <value>Recommend Worker</value>
+  </data>
+  <data name="Permissions_ReleaseOrder" xml:space="preserve">
+    <value>Release Order</value>
+  </data>
+  <data name="Permissions_ResequenceOrders" xml:space="preserve">
+    <value>Resequence Order</value>
+  </data>
+  <data name="Permissions_ResolveOrder" xml:space="preserve">
+    <value>Resolve Order</value>
+  </data>
+  <data name="Permissions_RetrieveOrderTypeFile" xml:space="preserve">
+    <value>Retrieve Order Type File</value>
+  </data>
+  <data name="Permissions_RunSchedulingType" xml:space="preserve">
+    <value>Run Scheduling Type</value>
+  </data>
+  <data name="Permissions_RunViewReports" xml:space="preserve">
+    <value>Run/View Report</value>
+  </data>
+  <data name="Permissions_SaveApplicationSettings" xml:space="preserve">
+    <value>Save Application Setting</value>
+  </data>
+  <data name="Permissions_SaveHostSetting" xml:space="preserve">
+    <value>Save Host Setting</value>
+  </data>
+  <data name="Permissions_SaveOrderColumnConfig" xml:space="preserve">
+    <value>Order Column Save</value>
+  </data>
+  <data name="Permissions_SaveOrderFilterConfig" xml:space="preserve">
+    <value>Order Filter Save</value>
+  </data>
+  <data name="Permissions_SaveOrderSortConfig" xml:space="preserve">
+    <value>Order Sort Save</value>
+  </data>
+  <data name="Permissions_SaveOrderTypeFile" xml:space="preserve">
+    <value>Save Order Type File</value>
+  </data>
+  <data name="Permissions_ScheduleOrder" xml:space="preserve">
+    <value>Order Schedule</value>
+  </data>
+  <data name="Permissions_Scheduling" xml:space="preserve">
+    <value>Order Scheduling View</value>
+  </data>
+  <data name="Permissions_SetOrderCategory" xml:space="preserve">
+    <value>Order Set Category</value>
+  </data>
+  <data name="Permissions_SetProcessStatus" xml:space="preserve">
+    <value>Set Process Status</value>
+  </data>
+  <data name="Permissions_SetProjectOwnership" xml:space="preserve">
+    <value>Set Project Ownership</value>
+  </data>
+  <data name="Permissions_Timesheet" xml:space="preserve">
+    <value>Timesheet</value>
+  </data>
+  <data name="Permissions_UnassignOrder" xml:space="preserve">
+    <value>Order Unassign</value>
+  </data>
+  <data name="Permissions_UndoSentToHost" xml:space="preserve">
+    <value>Order Undo Sent to Host</value>
+  </data>
+  <data name="Permissions_UpdateOrderIndexes" xml:space="preserve">
+    <value>Update Order Index</value>
+  </data>
+  <data name="Permissions_UpdateOrganization" xml:space="preserve">
+    <value>Organization Edit</value>
+  </data>
+  <data name="Permissions_UpdateReferenceData" xml:space="preserve">
+    <value>Reference Data Edit</value>
+  </data>
+  <data name="Permissions_UploadOrderTypeFile" xml:space="preserve">
+    <value>Upload Order Type File</value>
+  </data>
+  <data name="Permissions_VehicleBreadcrumbReport" xml:space="preserve">
+    <value>Vehicle History Report</value>
+  </data>
+  <data name="Permissions_VehiclePostIncidentReport" xml:space="preserve">
+    <value>Vehicle Post Incident Report</value>
+  </data>
+  <data name="Permissions_ViewAlerts" xml:space="preserve">
+    <value>Alerts View</value>
+  </data>
+  <data name="Permissions_ViewApplicationSettings" xml:space="preserve">
+    <value>Application Setting Management</value>
+  </data>
+  <data name="Permissions_ViewAreaManagement" xml:space="preserve">
+    <value>Area Management</value>
+  </data>
+  <data name="Permissions_ViewAttributeManagement" xml:space="preserve">
+    <value>Attribute Management</value>
+  </data>
+  <data name="Permissions_ViewAuditLogManagement" xml:space="preserve">
+    <value>Audit Log</value>
+  </data>
+  <data name="Permissions_ViewBlockoutDates" xml:space="preserve">
+    <value>View Blockout Date</value>
+  </data>
+  <data name="Permissions_ViewBusinessGroupManagement" xml:space="preserve">
+    <value>Business Group Management</value>
+  </data>
+  <data name="Permissions_ViewCrewManagement" xml:space="preserve">
+    <value>Crew Management</value>
+  </data>
+  <data name="Permissions_ViewDistList" xml:space="preserve">
+    <value>Distribution List Management</value>
+  </data>
+  <data name="Permissions_ViewEquipmentManagement" xml:space="preserve">
+    <value>Equipment Management</value>
+  </data>
+  <data name="Permissions_ViewExportFormatManagement" xml:space="preserve">
+    <value>Export Format Management</value>
+  </data>
+  <data name="Permissions_ViewFieldIndexing" xml:space="preserve">
+    <value>Field Indexing Management</value>
+  </data>
+  <data name="Permissions_ViewFieldMapping" xml:space="preserve">
+    <value>Field Mapping Management</value>
+  </data>
+  <data name="Permissions_ViewGeofencingAlerts" xml:space="preserve">
+    <value>Geo-fencing Alerts</value>
+  </data>
+  <data name="Permissions_ViewHolidayManagement" xml:space="preserve">
+    <value>Holiday Management</value>
+  </data>
+  <data name="Permissions_ViewHostSettingManagement" xml:space="preserve">
+    <value>Host Setting View</value>
+  </data>
+  <data name="Permissions_ViewHostSystems" xml:space="preserve">
+    <value>View Host Systems</value>
+  </data>
+  <data name="Permissions_ViewInventory" xml:space="preserve">
+    <value>Inventory Management</value>
+  </data>
+  <data name="Permissions_ViewJobCodeManagement" xml:space="preserve">
+    <value>Job Code Management</value>
+  </data>
+  <data name="Permissions_ViewJobOfferingSetManagement" xml:space="preserve">
+    <value>Job Offering Set Management</value>
+  </data>
+  <data name="Permissions_ViewLocation" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="Permissions_ViewLocations" xml:space="preserve">
+    <value>Locations</value>
+  </data>
+  <data name="Permissions_ViewLocationsManagement" xml:space="preserve">
+    <value>Locations Management</value>
+  </data>
+  <data name="Permissions_ViewLoginLogManagement" xml:space="preserve">
+    <value>Login Log</value>
+  </data>
+  <data name="Permissions_ViewMapDataManagement" xml:space="preserve">
+    <value>ViewMapDataManagement</value>
+  </data>
+  <data name="Permissions_ViewMapServiceURLs" xml:space="preserve">
+    <value>View Map Service URLs</value>
+  </data>
+  <data name="Permissions_ViewMessages" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="Permissions_ViewModemSensorManagement" xml:space="preserve">
+    <value>View Modem Sensor Management</value>
+  </data>
+  <data name="Permissions_ViewOrder" xml:space="preserve">
+    <value>Order View</value>
+  </data>
+  <data name="Permissions_ViewOrderCategoriesManagement" xml:space="preserve">
+    <value>Order Category Management</value>
+  </data>
+  <data name="Permissions_ViewOrderHistory" xml:space="preserve">
+    <value>Order History View</value>
+  </data>
+  <data name="Permissions_ViewOrderLogManagement" xml:space="preserve">
+    <value>Order Log View</value>
+  </data>
+  <data name="Permissions_ViewOrganizationManagement" xml:space="preserve">
+    <value>Organizations Management</value>
+  </data>
+  <data name="Permissions_ViewPeerSystems" xml:space="preserve">
+    <value>Vehicle Sharing Systems</value>
+  </data>
+  <data name="Permissions_ViewPollMessages" xml:space="preserve">
+    <value>Poll Message</value>
+  </data>
+  <data name="Permissions_ViewPriorityManagement" xml:space="preserve">
+    <value>Priority Management</value>
+  </data>
+  <data name="Permissions_ViewProactiveQueue" xml:space="preserve">
+    <value>Proactive Queue</value>
+  </data>
+  <data name="Permissions_ViewReportJobManagement" xml:space="preserve">
+    <value>Report Schedule Management</value>
+  </data>
+  <data name="Permissions_ViewRoleManagement" xml:space="preserve">
+    <value>Role Management</value>
+  </data>
+  <data name="Permissions_ViewRouteManagement" xml:space="preserve">
+    <value>View Route Management</value>
+  </data>
+  <data name="Permissions_ViewScenarioManagement" xml:space="preserve">
+    <value>Scenario Management</value>
+  </data>
+  <data name="Permissions_ViewShiftAssignment" xml:space="preserve">
+    <value>Shift Assignment View</value>
+  </data>
+  <data name="Permissions_ViewShiftManagement" xml:space="preserve">
+    <value>Shift Management</value>
+  </data>
+  <data name="Permissions_ViewShiftRotationAssignment" xml:space="preserve">
+    <value>Shift Rotation Assignment View</value>
+  </data>
+  <data name="Permissions_ViewShiftRotationManagement" xml:space="preserve">
+    <value>Shift Rotation Management</value>
+  </data>
+  <data name="Permissions_ViewShiftRotationSetManagement" xml:space="preserve">
+    <value>Shift Rotation Set Management</value>
+  </data>
+  <data name="Permissions_ViewSpecialIndicatorManagement" xml:space="preserve">
+    <value>Special Indicator Management</value>
+  </data>
+  <data name="Permissions_ViewSystemTasksManagement" xml:space="preserve">
+    <value>System Job Management</value>
+  </data>
+  <data name="Permissions_ViewUnavailableTimeManagement" xml:space="preserve">
+    <value>Unavailable Time Management</value>
+  </data>
+  <data name="Permissions_ViewUserManagement" xml:space="preserve">
+    <value>User Management</value>
+  </data>
+  <data name="Permissions_ViewVehicleDiagnostics" xml:space="preserve">
+    <value>Vehicle Diagnostic View</value>
+  </data>
+  <data name="Permissions_ViewVehicleManagement" xml:space="preserve">
+    <value>Vehicle Management</value>
+  </data>
+  <data name="Permissions_ViewVehicleServiceSchedule" xml:space="preserve">
+    <value>Vehicle Service Schedule View</value>
+  </data>
+  <data name="Permissions_ViewVehicleServiceSummary" xml:space="preserve">
+    <value>Vehicle Service Summary View</value>
+  </data>
+  <data name="Permissions_ViewVehicleServiceTemplates" xml:space="preserve">
+    <value>Vehicle Service Template View</value>
+  </data>
+  <data name="Permissions_ViewVehicleServiceTypes" xml:space="preserve">
+    <value>Vehicle Service Type View</value>
+  </data>
+  <data name="Permissions_ViewVehiclesManagement" xml:space="preserve">
+    <value>Vehicle Management</value>
+  </data>
+  <data name="Permissions_ViewVehicleSummary" xml:space="preserve">
+    <value>Vehicle Summary View</value>
+  </data>
+  <data name="Permissions_ViewWebMessage" xml:space="preserve">
+    <value>Web Message View</value>
+  </data>
+  <data name="Permissions_ViewWorker" xml:space="preserve">
+    <value>Worker View</value>
+  </data>
+  <data name="Permissions_WarrantyManagement" xml:space="preserve">
+    <value>Warranty Management</value>
+  </data>
+  <data name="Permissions_WebAVLClientLogin" xml:space="preserve">
+    <value>Client Login - WebAVL</value>
+  </data>
+  <data name="Permissions_WorkerBreadcrumbReport" xml:space="preserve">
+    <value>Worker Breadcrumb Report</value>
+  </data>
+  <data name="Permissions_WorkerPostIncidentReport" xml:space="preserve">
+    <value>Worker Post Incident Report</value>
+  </data>
+  <data name="Priority_Degree" xml:space="preserve">
+    <value>Degree</value>
+  </data>
+  <data name="Priority_DegreeInvalid" xml:space="preserve">
+    <value>Priority degree should be an integer between 0 and 1000000000</value>
+  </data>
+  <data name="Priority_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Priority_NameEmpty" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="PriorityBgJcAssociation" xml:space="preserve">
+    <value>Priority is currently used by JobCode {0}, cannot remove Business Group</value>
+  </data>
+  <data name="PriorityBgWOAssociation" xml:space="preserve">
+    <value>Priority is currently referenced by {0} WorkOrders, cannot remove Business Group</value>
+  </data>
+  <data name="PriorityManagement_PriorityAlreadyExist" xml:space="preserve">
+    <value>Priority already exists.</value>
+  </data>
+  <data name="PriorityManagement_PriorityAlreadyExists" xml:space="preserve">
+    <value>Priority [{0}] already exists</value>
+  </data>
+  <data name="PriorityManagement_PriorityReferenced" xml:space="preserve">
+    <value>Priority [{0}] is referenced.</value>
+  </data>
+  <data name="ProjectOrderManagement_attachUpdateFailed" xml:space="preserve">
+    <value>Could not attach order {0} to project order {1}.</value>
+  </data>
+  <data name="ProjectOrderManagement_notProjectOrder" xml:space="preserve">
+    <value>Order "{0}" is not a project order.</value>
+  </data>
+  <data name="ProjectOrderManagement_orderAlreadyAttached" xml:space="preserve">
+    <value>Order "{0}" is already attached to project "{1}"</value>
+  </data>
+  <data name="ProjectOrderManagement_orderDoesntExist" xml:space="preserve">
+    <value>Order {0} does not exist.</value>
+  </data>
+  <data name="ProjectOrderManagement_orderNotBelongToProjectOrderType" xml:space="preserve">
+    <value>Order "{0}" is not belong to project order type "{1}". Attach order failed!</value>
+  </data>
+  <data name="ProjectOrderManagement_projectDoesntExist" xml:space="preserve">
+    <value>Project order {0} does not exist.</value>
+  </data>
+  <data name="ProjectOrderManagement_setOwnershipException" xml:space="preserve">
+    <value>Unexpected error occured while trying to set ownership to project(s) {0} ownerKey: {1}</value>
+  </data>
+  <data name="ProjectOrderManagement_takeOwnershipFailed" xml:space="preserve">
+    <value>Could not take ownership of project "{0}".</value>
+  </data>
+  <data name="QueryCriteria" xml:space="preserve">
+    <value>Query Criteria</value>
+  </data>
+  <data name="QueryCriteriaManagement_AddFilterException" xml:space="preserve">
+    <value>Unexpected error occured while trying to add Filter</value>
+  </data>
+  <data name="QueryCriteriaManagement_CriteriaNotFound" xml:space="preserve">
+    <value>Filter {0} not found, it may have been deleted.</value>
+  </data>
+  <data name="QueryCriteriaManagement_DeleteFilterException" xml:space="preserve">
+    <value>Unexpected error occured while trying to delete Filter</value>
+  </data>
+  <data name="QueryCriteriaManagement_DeleteNoFilter" xml:space="preserve">
+    <value>No filter has been selected for delete.</value>
+  </data>
+  <data name="QueryCriteriaManagement_FilterAlreadyExists" xml:space="preserve">
+    <value>Filter {0} already exists, filter not added.</value>
+  </data>
+  <data name="QueryCriteriaManagement_FilterNameExists" xml:space="preserve">
+    <value>A filter with the name {0} already exists, filter not updated.</value>
+  </data>
+  <data name="QueryCriteriaManagement_NoDeletePermission" xml:space="preserve">
+    <value>Insufficient permission to delete the shared filter {0}</value>
+  </data>
+  <data name="QueryCriteriaManagement_NoModifyPermission" xml:space="preserve">
+    <value>Insufficient permission to modify the shared filter {0}</value>
+  </data>
+  <data name="QueryCriteriaManagement_UpdateFilterException" xml:space="preserve">
+    <value>Unexpected error occured while trying to update Filter</value>
+  </data>
+  <data name="Report_FileEmpty" xml:space="preserve">
+    <value>File is required</value>
+  </data>
+  <data name="Report_NameEmpty" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="Report_NameInvalid" xml:space="preserve">
+    <value>Name must contain letters and numbers only</value>
+  </data>
+  <data name="Report_PathEmpty" xml:space="preserve">
+    <value>Path is required</value>
+  </data>
+  <data name="Report_PathInvalid" xml:space="preserve">
+    <value>Path must contain letters and numbers only</value>
+  </data>
+  <data name="Report_PathStandardReportPath" xml:space="preserve">
+    <value>Path must not be a standard report path</value>
+  </data>
+  <data name="Report_ReportAlreadyExists" xml:space="preserve">
+    <value>Report already exists.</value>
+  </data>
+  <data name="Report_Update_Warning" xml:space="preserve">
+    <value>{0}  Warning: This Report is scheduled to run automatically and Report details may have been changed. Please review the Report Schedule and update as required.</value>
+  </data>
+  <data name="ReportingEmailng_BusinessGroupRequired" xml:space="preserve">
+    <value>Business Group required</value>
+  </data>
+  <data name="ReportingEmailng_OrderTypeRequired" xml:space="preserve">
+    <value>Order Type required</value>
+  </data>
+  <data name="ReportingEmailng_UserRequired" xml:space="preserve">
+    <value>User required</value>
+  </data>
+  <data name="ReportingEmailng_VehicleGroupRequired" xml:space="preserve">
+    <value>Vehicle Group required</value>
+  </data>
+  <data name="ReportingEmailng_VehicleRequired" xml:space="preserve">
+    <value>Vehicle required</value>
+  </data>
+  <data name="ReportingEmailng_WorkerRequired" xml:space="preserve">
+    <value>Worker required</value>
+  </data>
+  <data name="ReportManagement_AddReportFail" xml:space="preserve">
+    <value>Could not add report to Report Server</value>
+  </data>
+  <data name="ReportManagement_CannotAddStandardReport" xml:space="preserve">
+    <value>Cannot add a standard report</value>
+  </data>
+  <data name="ReportManagement_CannotDeleteStandardReport" xml:space="preserve">
+    <value>Cannot delete a standard report</value>
+  </data>
+  <data name="ReportManagement_ReportAlreadyExists" xml:space="preserve">
+    <value>Report name {0} and path {1} already exist</value>
+  </data>
+  <data name="ReportManagement_ReportNotFound" xml:space="preserve">
+    <value>Report does not exist</value>
+  </data>
+  <data name="ReportManagement_UpdateReportFactoryFail" xml:space="preserve">
+    <value>Unable to update report to SSRS</value>
+  </data>
+  <data name="ReportMenu_Custom" xml:space="preserve">
+    <value>Custom</value>
+  </data>
+  <data name="ReportMenuSort0" xml:space="preserve">
+    <value>AVL</value>
+  </data>
+  <data name="ReportMenuSort1" xml:space="preserve">
+    <value>MFF</value>
+  </data>
+  <data name="ReportParametersModel_DateRange" xml:space="preserve">
+    <value>Date Range</value>
+  </data>
+  <data name="ReportParametersModel_DateStartAndEnd" xml:space="preserve">
+    <value>Start &amp; End</value>
+  </data>
+  <data name="Role_NameEmpty" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="Role_RolePermissionsInvalid" xml:space="preserve">
+    <value>Role Permissions are invalid</value>
+  </data>
+  <data name="Route_RouteAlreadyExists" xml:space="preserve">
+    <value>Route [{0}] already exists</value>
+  </data>
+  <data name="RouteManagement_VehicleRouteAssignmentFail" xml:space="preserve">
+    <value>Vehicle {0} already has existing route for the vehicle</value>
+  </data>
+  <data name="RouteManagement_VehicleRouteAssignmentFailBG" xml:space="preserve">
+    <value>Vehicle {0} is not in the route's business group(s).</value>
+  </data>
+  <data name="SafetyTimerManagement_Dupe" xml:space="preserve">
+    <value>Safety Timer is already active for {0}. New Safety Timer not added.</value>
+  </data>
+  <data name="ScheduleEngine_MustBeSameTimezone" xml:space="preserve">
+    <value>Order(s) must be in the same Time Zone - cannot be scheduled.</value>
+  </data>
+  <data name="ScheduleEngine_NoResourcesFound" xml:space="preserve">
+    <value>No resource(s) is found</value>
+  </data>
+  <data name="ScheduleEngine_PlausibleSolutionsFound" xml:space="preserve">
+    <value>Plausible solution(s) found.</value>
+  </data>
+  <data name="ScheduleEngine_ScenarioProblem" xml:space="preserve">
+    <value>Scenario problem.  Please contact Administrator.</value>
+  </data>
+  <data name="ScheduleEngine_WrongStateForScheduling" xml:space="preserve">
+    <value>Order(s) in wrong state, cannot be scheduled.</value>
+  </data>
+  <data name="ScheduleEngine_WrongTimeForScheduling" xml:space="preserve">
+    <value>Order(s) has wrong appointment time, cannot be scheduled.</value>
+  </data>
+  <data name="SecurityManagement_cannotDeleteSuperAdmin" xml:space="preserve">
+    <value>Super administrator role cannot be deleted.</value>
+  </data>
+  <data name="SecurityManagement_NoPermission" xml:space="preserve">
+    <value>No permission to perform function: {0}</value>
+  </data>
+  <data name="SecurityManagement_RoleAlreadyExists" xml:space="preserve">
+    <value>Role [{0}] already exists</value>
+  </data>
+  <data name="SEH_OnDemand_Error" xml:space="preserve">
+    <value>SEH failed - please consult server log file for details</value>
+  </data>
+  <data name="SEH_OnDemand_NotHandled" xml:space="preserve">
+    <value>No SEH named {0} for this order</value>
+  </data>
+  <data name="Sensor_ConvReadingEmpty" xml:space="preserve">
+    <value>Reading conversion is required.</value>
+  </data>
+  <data name="Sensor_ConvReadingLabelEmpty" xml:space="preserve">
+    <value>Reading conversion label is required.</value>
+  </data>
+  <data name="Sensor_FalseLabelEmpty" xml:space="preserve">
+    <value>False label value is required for a digital output sensor</value>
+  </data>
+  <data name="Sensor_MultiplierEmpty" xml:space="preserve">
+    <value>A numeric value is required for an analog output sensor</value>
+  </data>
+  <data name="Sensor_NameEmpty" xml:space="preserve">
+    <value>Sensor name is required.</value>
+  </data>
+  <data name="Sensor_TrueLabelEmpty" xml:space="preserve">
+    <value>True label value is required for a digital output sensor</value>
+  </data>
+  <data name="Sensor_UnitEmpty" xml:space="preserve">
+    <value>A unit description is required for an analog output sensor</value>
+  </data>
+  <data name="SensorManagement_SensorAlreadyExists" xml:space="preserve">
+    <value>Sensor [{0}] already exists</value>
+  </data>
+  <data name="Shift_24HourGap" xml:space="preserve">
+    <value>Shift cannot have more than 24 hours difference between the start time and the end time</value>
+  </data>
+  <data name="Shift_BreakOutOfShift" xml:space="preserve">
+    <value>Shift has breaks that fall outside of shift</value>
+  </data>
+  <data name="Shift_InvalidTimeFormat" xml:space="preserve">
+    <value>Time Format must be in 24 hour format (HH:MM)</value>
+  </data>
+  <data name="Shift_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Shift_NameEmpty" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="Shift_NameNotUnique" xml:space="preserve">
+    <value>Unique shift name is required</value>
+  </data>
+  <data name="Shift_NoDuration" xml:space="preserve">
+    <value>Shift cannot have breaks with no duration</value>
+  </data>
+  <data name="Shift_TimeNotEqual" xml:space="preserve">
+    <value>Shift cannot have the start time equal or later than the end time</value>
+  </data>
+  <data name="ShiftBgUserAssociation" xml:space="preserve">
+    <value>Shift is current used by {0} Users, cannot remove Business Group</value>
+  </data>
+  <data name="ShiftManagement_ShiftAlreadyExists" xml:space="preserve">
+    <value>Shift [{0}] already exists</value>
+  </data>
+  <data name="ShiftRotation_CapacityRange" xml:space="preserve">
+    <value>A day capacity is between 0 to 100 inclusively</value>
+  </data>
+  <data name="ShiftRotation_DayNumberRange" xml:space="preserve">
+    <value>The day number should only be between 1 to 255 inclusively.  Too many days are added</value>
+  </data>
+  <data name="ShiftRotation_NameEmpty" xml:space="preserve">
+    <value>Name required</value>
+  </data>
+  <data name="ShiftRotation_NameNotUnique" xml:space="preserve">
+    <value>Unique shift rotation name is required</value>
+  </data>
+  <data name="ShiftRotation_NotOneDay" xml:space="preserve">
+    <value>At least one rotation day must be defined</value>
+  </data>
+  <data name="ShiftRotation_SelectDayArea" xml:space="preserve">
+    <value>A day area is not selected</value>
+  </data>
+  <data name="ShiftRotationAssignment_EndBeforeStart" xml:space="preserve">
+    <value>End Date must be the same day or after the start date.</value>
+  </data>
+  <data name="ShiftRotationAssignment_NoEndDate" xml:space="preserve">
+    <value>End Date has to be a date</value>
+  </data>
+  <data name="ShiftRotationAssignment_NoShiftRotation" xml:space="preserve">
+    <value>Shift Rotation is required</value>
+  </data>
+  <data name="ShiftRotationAssignment_NoStartDate" xml:space="preserve">
+    <value>Start Date has to be a date</value>
+  </data>
+  <data name="ShiftRotationAssignment_NotOneWorker" xml:space="preserve">
+    <value>At least one worker should be selected</value>
+  </data>
+  <data name="ShiftRotationAssignment_PastStartDate" xml:space="preserve">
+    <value>Start Date has to be within two months in the past or a day in the future</value>
+  </data>
+  <data name="ShiftRotationAssignment_WorkerAlreadyAssigned" xml:space="preserve">
+    <value>Worker(s) [{0}] has already been assigned to another shift rotation for this time period</value>
+  </data>
+  <data name="ShiftRotationAssignmentManagement_ShiftRotationAssignmentAlreadyExists" xml:space="preserve">
+    <value>Shift Rotation Assignment  [{0}] already exists</value>
+  </data>
+  <data name="ShiftRotationDayAssignment_CreatNewDayAssignmentExit" xml:space="preserve">
+    <value>CreateNextShiftRotationDayAssignments() run exit. Max Date Out: {0}, Shift Rotation End Date: {1}, Shift Rotation Assignment Id: {2}, Worker Assignment Id: {3}</value>
+  </data>
+  <data name="ShiftRotationDayAssignment_ShiftRotationDayAssignmentAlreadyExists" xml:space="preserve">
+    <value>Shift Rotation Day Assignment  [{0}] already exists.  WorkerId : [{1}]</value>
+  </data>
+  <data name="ShiftRotationManagement_ShiftRotationAlreadyExists" xml:space="preserve">
+    <value>Shift Rotation [{0}] already exists</value>
+  </data>
+  <data name="ShipmentControlFile_ControlSerialNoEmpty" xml:space="preserve">
+    <value>Control serial number is required.</value>
+  </data>
+  <data name="ShipmentControlFile_IdentifierEmpty" xml:space="preserve">
+    <value>Identifier is required.</value>
+  </data>
+  <data name="ShipmentControlFileFormat_DuplicateFieldName" xml:space="preserve">
+    <value>Field names must be unique.</value>
+  </data>
+  <data name="ShipmentControlFileFormat_FieldNameEmpty" xml:space="preserve">
+    <value>Field names cannot be empty.</value>
+  </data>
+  <data name="ShipmentControlFileFormat_FileTypeEmpty" xml:space="preserve">
+    <value>File type is required.</value>
+  </data>
+  <data name="ShipmentControlFileFormat_LengthEmpty" xml:space="preserve">
+    <value>Lengths must be specified.</value>
+  </data>
+  <data name="ShipmentControlFileFormat_LengthNotInBounds" xml:space="preserve">
+    <value>Lengths must be between 1 and 50.</value>
+  </data>
+  <data name="ShipmentControlFileFormat_MoreThanOnePrimary" xml:space="preserve">
+    <value>There can be only one primary field.</value>
+  </data>
+  <data name="ShipmentControlFileFormat_MoreThanThreeAlternates" xml:space="preserve">
+    <value>There can be at most 3 alternate serial number fields.</value>
+  </data>
+  <data name="ShipmentControlFileFormat_NameEmpty" xml:space="preserve">
+    <value>Name is required.</value>
+  </data>
+  <data name="ShipmentControlFileFormat_NoPrimary" xml:space="preserve">
+    <value>There is no primary serial number field.</value>
+  </data>
+  <data name="ShipmentControlFileFormat_PrimaryAndAlternate" xml:space="preserve">
+    <value>A field cannot be primary and alternate.</value>
+  </data>
+  <data name="ShipmentControlFileManagement_ControlSerialNoAlreadyExists" xml:space="preserve">
+    <value>Control serial number is already in use.</value>
+  </data>
+  <data name="ShipmentControlFileManagement_IdentifierInUse" xml:space="preserve">
+    <value>File identifier is already in use.</value>
+  </data>
+  <data name="ShipmentControlFileManagement_NameAlreadyExists" xml:space="preserve">
+    <value>The format name is already in use.</value>
+  </data>
+  <data name="ShipmentControlFileManagement_ShipmentControlFileFormatMissing" xml:space="preserve">
+    <value>Cannot find shipment control file format.</value>
+  </data>
+  <data name="SpecialIndicator_DuplicateSpecialIndicator" xml:space="preserve">
+    <value>Special Indicator must be unique.</value>
+  </data>
+  <data name="SpecialIndicator_NameRequired" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="SpecialIndicator_OrderSummaryIconRequired" xml:space="preserve">
+    <value>Order Summary Icon is required</value>
+  </data>
+  <data name="SpecialIndicator_WebIconRequired" xml:space="preserve">
+    <value>Web Icon is required.</value>
+  </data>
+  <data name="SpecialIndicatorWoBgAssociation" xml:space="preserve">
+    <value>Special Indicator is currently being used by {0} Work Orders, cannot remove Business Group</value>
+  </data>
+  <data name="SSRSFactory_ReportExecutionUrl_Error" xml:space="preserve">
+    <value>Please check the ReportExecutionUrl is configured properly.</value>
+  </data>
+  <data name="StorageLocation_IdentifierEmpty" xml:space="preserve">
+    <value>Identifier is required for Storage Location</value>
+  </data>
+  <data name="StorageLocation_WarehouseEmpty" xml:space="preserve">
+    <value>Warehouse is required for Storage Location, add new Warehouse if none are available</value>
+  </data>
+  <data name="StorageLocationManagement_StorageLocationAlreadyExists" xml:space="preserve">
+    <value>Storage Location [{0}] already exists</value>
+  </data>
+  <data name="Supplier_IdentifierEmpty" xml:space="preserve">
+    <value>Supplier identifier required.</value>
+  </data>
+  <data name="SupplierManagement_SupplierAlreadyExists" xml:space="preserve">
+    <value>Supplier [{0}] already exists.</value>
+  </data>
+  <data name="System" xml:space="preserve">
+    <value>[System]</value>
+  </data>
+  <data name="SystemJob_NameEmpty" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="SystemJobManagement_ReportSchedAlreadyExists" xml:space="preserve">
+    <value>Report Schedule [{0}] already exists.</value>
+  </data>
+  <data name="SystemJobManagement_SystemJobAlreadyExists" xml:space="preserve">
+    <value>System Job [{0}] already exists.</value>
+  </data>
+  <data name="SystemTask_SetOrdersPending_OrderTypesInvalid" xml:space="preserve">
+    <value>OrderTypeNames parameter is invalid, aborted.</value>
+  </data>
+  <data name="Task_AssignScheduledOrders" xml:space="preserve">
+    <value>AssignScheduledOrders</value>
+  </data>
+  <data name="Task_AutoDispatch" xml:space="preserve">
+    <value>Auto Dispatch</value>
+  </data>
+  <data name="Task_AVLDataArchive" xml:space="preserve">
+    <value>AVL Data Archive</value>
+  </data>
+  <data name="Task_AVLDataPurge" xml:space="preserve">
+    <value>AVL Data Purge</value>
+  </data>
+  <data name="Task_AVLDataScrubber" xml:space="preserve">
+    <value>AVL Data Scrubber</value>
+  </data>
+  <data name="Task_CleanupWsMessages" xml:space="preserve">
+    <value>Cleanup Ws Messages</value>
+  </data>
+  <data name="Task_ExportToHostFile" xml:space="preserve">
+    <value>Export to Host File</value>
+  </data>
+  <data name="Task_OrderDataPurge" xml:space="preserve">
+    <value>Order Data Purge</value>
+  </data>
+  <data name="Task_OrderHistoryCompressionMigration" xml:space="preserve">
+    <value>Order History Compression Migration</value>
+  </data>
+  <data name="Task_PushAVLData" xml:space="preserve">
+    <value>Push AVL Data</value>
+  </data>
+  <data name="Task_RDImport" xml:space="preserve">
+    <value>RD Import</value>
+  </data>
+  <data name="Task_SetOrdersPending" xml:space="preserve">
+    <value>Set Orders Pending</value>
+  </data>
+  <data name="Task_ShiftRotationDayAssignmentDataPurge" xml:space="preserve">
+    <value>Shift Assignment Day Rotation</value>
+  </data>
+  <data name="Task_TaskBuildBookAvailSlot" xml:space="preserve">
+    <value>Build Book Avail Slot</value>
+  </data>
+  <data name="Task_TaskCleanupDb" xml:space="preserve">
+    <value>Cleanup Db</value>
+  </data>
+  <data name="Task_TaskGenReport" xml:space="preserve">
+    <value>Gen Report</value>
+  </data>
+  <data name="Task_TaskSGVDataPurge" xml:space="preserve">
+    <value>SGV Data Purge</value>
+  </data>
+  <data name="Task_TaskSyncMilsoftCauseCodes" xml:space="preserve">
+    <value>Sync Milsoft Cause Codes</value>
+  </data>
+  <data name="Task_TaskSyncNISCServiceOrders" xml:space="preserve">
+    <value>Sync NISC Service Orders</value>
+  </data>
+  <data name="Task_TaskVehicleLogRepairer" xml:space="preserve">
+    <value>Vehicle Log Repairer</value>
+  </data>
+  <data name="Task_UpdateSafeWorkPeriod" xml:space="preserve">
+    <value>Update Safe Work Period</value>
+  </data>
+  <data name="TaskAVLDataArchive_ArchiveMessage" xml:space="preserve">
+    <value>Archived {0} rows from {1} table in file(s):  {2};</value>
+  </data>
+  <data name="TaskAVLDataArchive_DelimiterError" xml:space="preserve">
+    <value>The Delimiter is not one character;</value>
+  </data>
+  <data name="TaskAVLDataArchive_EmailException" xml:space="preserve">
+    <value>Exception was thrown while trying to archive AVL data: {0}{1}Exception message: {2}{3}Exception stack trace: {4}</value>
+  </data>
+  <data name="TaskAVLDataArchive_EmailSubject" xml:space="preserve">
+    <value>AVL Data Purge Task failed:  {0}</value>
+  </data>
+  <data name="TaskAVLDataArchive_FilePrefixAlphanumeric" xml:space="preserve">
+    <value>The FilePrefix can only be alphanumeric;</value>
+  </data>
+  <data name="TaskAVLDataArchive_FilePrefixEmpty" xml:space="preserve">
+    <value>The FilePrefix cannot be blank;</value>
+  </data>
+  <data name="TaskAVLDataArchive_FilePrefixTooLong" xml:space="preserve">
+    <value>The FilePrefix cannot be longer than five characters;</value>
+  </data>
+  <data name="TaskAVLDataArchive_MaxFileSizeInKBLessThan" xml:space="preserve">
+    <value>The MaxFileSize valid range is 5MB to 100MB;</value>
+  </data>
+  <data name="TaskAVLDataArchive_MaxRecordsToArchiveLessThanOrEqualZero" xml:space="preserve">
+    <value>The Multiplier cannot be less than or equal to zero;</value>
+  </data>
+  <data name="TaskAVLDataArchive_StorageLocationEmpty" xml:space="preserve">
+    <value>The StorageLocation cannot be blank;</value>
+  </data>
+  <data name="TaskAVLDataArchive_StorageLocationError" xml:space="preserve">
+    <value>Issue with storageLocation;</value>
+  </data>
+  <data name="TaskAVLDataPurge_ArchiveMessage" xml:space="preserve">
+    <value>Archived {0} rows from {1} table;</value>
+  </data>
+  <data name="TaskAVLDataPurge_EmailException" xml:space="preserve">
+    <value>Exception was thrown while trying to purge AVL data: {0}{1}Exception message: {2}{3}Exception stack trace: {4}</value>
+  </data>
+  <data name="TaskAVLDataPurge_EmailSubject" xml:space="preserve">
+    <value>AVL Data Purge Task failed:  {0}</value>
+  </data>
+  <data name="TaskAVLDataPurge_MaxRecordsToPurgeLessThanOrEqualZero" xml:space="preserve">
+    <value>The MaxRecordsToPurge cannot be less than or equal to zero;</value>
+  </data>
+  <data name="TaskAVLDataPurge_MultiplierLessThanOrEqualZero" xml:space="preserve">
+    <value>The Multiplier cannot be less than or equal to zero;</value>
+  </data>
+  <data name="TaskAVLDataPurge_NonPeakBegin_HourOutOfRange" xml:space="preserve">
+    <value>The NonPeakBegin hour is out of range;</value>
+  </data>
+  <data name="TaskAVLDataPurge_NonPeakBegin_MinuteOutOfRange" xml:space="preserve">
+    <value>The NonPeakBegin minute is out of range;</value>
+  </data>
+  <data name="TaskAVLDataPurge_NonPeakBegin_NonPeakEnd_Same" xml:space="preserve">
+    <value>The NonPeakBegin and NonPeakEnd should not be the same value;</value>
+  </data>
+  <data name="TaskAVLDataPurge_NonPeakEnd_HourOutOfRange" xml:space="preserve">
+    <value>The NonPeakEnd hour is out of range;</value>
+  </data>
+  <data name="TaskAVLDataPurge_NonPeakEnd_MinuteOutOfRange" xml:space="preserve">
+    <value>The NonPeakEnd minute is out of range;</value>
+  </data>
+  <data name="TaskAVLDataPurge_PurgeMessage" xml:space="preserve">
+    <value>Purged {0} rows from {1} table;</value>
+  </data>
+  <data name="TaskAVLDataPurge_PurgeOlderThanZero" xml:space="preserve">
+    <value>The PurgeOlderThan cannot be zero;</value>
+  </data>
+  <data name="TaskGenReport_NoPermission" xml:space="preserve">
+    <value>No report permission to run {0} for {1} schedule.</value>
+  </data>
+  <data name="TaskOrderDataPurge_ArchiveMessage" xml:space="preserve">
+    <value>Archived {0} rows from {1} table;</value>
+  </data>
+  <data name="TaskOrderDataPurge_EmailException" xml:space="preserve">
+    <value>Exception was thrown while trying to purge Order data: {0}{1}Exception message: {2}{3}Exception stack trace: {4}</value>
+  </data>
+  <data name="TaskOrderDataPurge_EmailSubject" xml:space="preserve">
+    <value>Order Data Purge Task failed:  {0}</value>
+  </data>
+  <data name="TaskOrderDataPurge_MaxRecordsToPurgeLessThanOrEqualZero" xml:space="preserve">
+    <value>The MaxRecordsToPurge cannot be less than or equal to zero;</value>
+  </data>
+  <data name="TaskOrderDataPurge_MultiplierLessThanOrEqualZero" xml:space="preserve">
+    <value>The Multiplier cannot be less than or equal to zero;</value>
+  </data>
+  <data name="TaskOrderDataPurge_NonPeakBegin_HourOutOfRange" xml:space="preserve">
+    <value>The NonPeakBegin hour is out of range;</value>
+  </data>
+  <data name="TaskOrderDataPurge_NonPeakBegin_MinuteOutOfRange" xml:space="preserve">
+    <value>The NonPeakBegin minute is out of range;</value>
+  </data>
+  <data name="TaskOrderDataPurge_NonPeakBegin_NonPeakEnd_Same" xml:space="preserve">
+    <value>The NonPeakBegin and NonPeakEnd should not be the same value;</value>
+  </data>
+  <data name="TaskOrderDataPurge_NonPeakEnd_HourOutOfRange" xml:space="preserve">
+    <value>The NonPeakEnd hour is out of range;</value>
+  </data>
+  <data name="TaskOrderDataPurge_NonPeakEnd_MinuteOutOfRange" xml:space="preserve">
+    <value>The NonPeakEnd minute is out of range;</value>
+  </data>
+  <data name="TaskOrderDataPurge_PurgeMessage" xml:space="preserve">
+    <value>Purged {0} rows from {1} table;</value>
+  </data>
+  <data name="TaskOrderDataPurge_PurgeOlderThanZero" xml:space="preserve">
+    <value>The PurgeOlderThan cannot be zero;</value>
+  </data>
+  <data name="TaskRDImport_DeleteFileError" xml:space="preserve">
+    <value>Unexpected error deleting files.  Error: {0}.</value>
+  </data>
+  <data name="TaskRDImport_DeleteFileErrorFtp" xml:space="preserve">
+    <value>Error deleting file {0} status [code: {1}, description: {2}]</value>
+  </data>
+  <data name="TaskRDImport_EmptyFile" xml:space="preserve">
+    <value>File [{0}] is empty. File skipped.</value>
+  </data>
+  <data name="TaskRDImport_FileLocationNotSet" xml:space="preserve">
+    <value>File location is not set.  Cannot import reference data.</value>
+  </data>
+  <data name="TaskRDImport_GetFileFtp" xml:space="preserve">
+    <value>Error downloading file {0} response [code: {1}, description: {2}]</value>
+  </data>
+  <data name="TaskRDImport_GetFileLastModifiedTimestampErrorFtp" xml:space="preserve">
+    <value>Error getting date timestamp for file {0} response [code: {1}, description: {2}]</value>
+  </data>
+  <data name="TaskRDImport_GetFileList" xml:space="preserve">
+    <value>Error getting list of files from {0}.</value>
+  </data>
+  <data name="TaskRDImport_GetFileListFtp" xml:space="preserve">
+    <value>Error getting list of files from FTP Server {0}</value>
+  </data>
+  <data name="TaskRDImport_GetFilesError" xml:space="preserve">
+    <value>Unexpected error getting files.  Error: {0}.</value>
+  </data>
+  <data name="TaskRDImport_GetFileSizeFtp" xml:space="preserve">
+    <value>Error getting size of file {0} response [code: {1}, description: {2}]</value>
+  </data>
+  <data name="TaskRDImport_IncompleteFile" xml:space="preserve">
+    <value>File {0} size is {1} bytes but expected {2} bytes.  File skipped.</value>
+  </data>
+  <data name="TaskRDImport_InvalidHeader" xml:space="preserve">
+    <value>Error processing header in file [{0}].  File skipped.</value>
+  </data>
+  <data name="TaskRDImport_InvalidHeaderError" xml:space="preserve">
+    <value>Error processing header in file [{0}].  File skipped.  Error: {1}.</value>
+  </data>
+  <data name="TaskRDImport_InvalidName" xml:space="preserve">
+    <value>Error processing file [{0}].  Validation failed.  File skipped.</value>
+  </data>
+  <data name="TaskRDImport_InvalidNameNumbers" xml:space="preserve">
+    <value>Name [{0}] is invalid.  Name contains numbers.</value>
+  </data>
+  <data name="TaskRDImport_InvalidNameSpecialChars" xml:space="preserve">
+    <value>Name [{0}] is invalid.  Name contains special characters.</value>
+  </data>
+  <data name="TaskRDImport_InvalidNameUnderscore" xml:space="preserve">
+    <value>Name [{0}] is invalid.  Name starts with an underscore '_'.</value>
+  </data>
+  <data name="TaskRDImport_InvalidNameUnderscores" xml:space="preserve">
+    <value>Name [{0}] is invalid.  Name has more than one consecutive underscore '_'.</value>
+  </data>
+  <data name="TaskRDImport_ModifyReservedTable" xml:space="preserve">
+    <value>Error processing file [{0}].  Reference data type [{1}] cannot be modified.</value>
+  </data>
+  <data name="TaskRDImport_MoveFileError" xml:space="preserve">
+    <value>Unexpected error moving files.  Error: {0}.</value>
+  </data>
+  <data name="TaskRDImport_MoveFilePermissions" xml:space="preserve">
+    <value>Permission denied.  Cannot move files.  Error: {0}.</value>
+  </data>
+  <data name="TaskRDImport_MoveProcessedFileError" xml:space="preserve">
+    <value>Error moving processed file {0} to {1}.  Error: {2}.</value>
+  </data>
+  <data name="TaskRDImport_MoveProcessedFileErrorFtp" xml:space="preserve">
+    <value>Error moving file {0} to {1} response [code: {2}, description: {3}]</value>
+  </data>
+  <data name="TaskRDImport_NoBusinessGroups" xml:space="preserve">
+    <value>No business groups found.  Cannot import reference data.</value>
+  </data>
+  <data name="TaskRDImport_NoFiles" xml:space="preserve">
+    <value>No files found.</value>
+  </data>
+  <data name="TaskRDImport_ObjectExists" xml:space="preserve">
+    <value>A file named {0} exists.  Unable to create directory with the same name.  Delete the file and try again.</value>
+  </data>
+  <data name="TaskRDImport_ProcessFileBGError" xml:space="preserve">
+    <value>Error processing file [{0}] for business group {1}.  Error: {2}</value>
+  </data>
+  <data name="TaskRDImport_ProcessFileError" xml:space="preserve">
+    <value>Error processing file [{0}].  Error: {1}.</value>
+  </data>
+  <data name="TaskRDImport_ProcessRecordError" xml:space="preserve">
+    <value>Error processing record.  Record skipped for business group {0}.  Error message: {1}\nRecord #[{2}]</value>
+  </data>
+  <data name="TaskRDImport_ProtocolNotSupported" xml:space="preserve">
+    <value>Protocol {0} not recognized.  Cannot get files for system job {1}.</value>
+  </data>
+  <data name="TaskRDImport_SummaryEmailBodyFail" xml:space="preserve">
+    <value>System job {0} failed.</value>
+  </data>
+  <data name="TaskRDImport_SummaryEmailBodyFailed" xml:space="preserve">
+    <value>Failed : {0}</value>
+  </data>
+  <data name="TaskRDImport_SummaryEmailBodyFinished" xml:space="preserve">
+    <value>Finished : {0}</value>
+  </data>
+  <data name="TaskRDImport_SummaryEmailBodyReason" xml:space="preserve">
+    <value>Reason: {0}</value>
+  </data>
+  <data name="TaskRDImport_SummaryEmailBodyStarted" xml:space="preserve">
+    <value>Started : {0}</value>
+  </data>
+  <data name="TaskRDImport_SummaryEmailBodySuccess" xml:space="preserve">
+    <value>System job {0} completed successfully.</value>
+  </data>
+  <data name="TaskRDImport_SummaryEmailFilesBG" xml:space="preserve">
+    <value>Business group: {0}</value>
+  </data>
+  <data name="TaskRDImport_SummaryEmailFilesDeletedHeading" xml:space="preserve">
+    <value>Deleted Files older than {0} days</value>
+  </data>
+  <data name="TaskRDImport_SummaryEmailFilesErrorsHeading" xml:space="preserve">
+    <value>Errors</value>
+  </data>
+  <data name="TaskRDImport_SummaryEmailFilesItem" xml:space="preserve">
+    <value>{0}. Filename: {1}</value>
+  </data>
+  <data name="TaskRDImport_SummaryEmailFilesItemError" xml:space="preserve">
+    <value>{0} error</value>
+  </data>
+  <data name="TaskRDImport_SummaryEmailFilesItemErrors" xml:space="preserve">
+    <value>{0} errors</value>
+  </data>
+  <data name="TaskRDImport_SummaryEmailFilesItemMoved" xml:space="preserve">
+    <value>Moved to: {0}/{1}</value>
+  </data>
+  <data name="TaskRDImport_SummaryEmailFilesProcessed" xml:space="preserve">
+    <value>Files processed: {0}</value>
+  </data>
+  <data name="TaskRDImport_SummaryEmailFilesProcessedHeading" xml:space="preserve">
+    <value>Processed Files</value>
+  </data>
+  <data name="TaskRDImport_SummaryEmailFilesRejected" xml:space="preserve">
+    <value>Files rejected: {0}</value>
+  </data>
+  <data name="TaskRDImport_SummaryEmailFilesRejectedHeading" xml:space="preserve">
+    <value>Rejected Files</value>
+  </data>
+  <data name="TaskRDImport_SummaryEmailFilesRowDetails" xml:space="preserve">
+    <value>Rows added: {0}, updated: {1}, deleted: {2}</value>
+  </data>
+  <data name="TaskRDImport_SummaryEmailFilesRowDuplicates" xml:space="preserve">
+    <value>Duplicate rows detected: {0}</value>
+  </data>
+  <data name="TaskRDImport_SummaryEmailSubjectFail" xml:space="preserve">
+    <value>[FAILED] System job {0} failed at {1}</value>
+  </data>
+  <data name="TaskRDImport_SummaryEmailSubjectSuccess" xml:space="preserve">
+    <value>[SUCCESS] System job {0} completed at {1}</value>
+  </data>
+  <data name="TaskRDImport_UnexpectedError" xml:space="preserve">
+    <value>ExecuteTask() - TaskRDImport - unexpected error</value>
+  </data>
+  <data name="TaskRDImport_UnknownRDType" xml:space="preserve">
+    <value>Unknown reference data type [{0}].</value>
+  </data>
+  <data name="TaskShiftRotationDayAssignmentDataPurge_EmailException" xml:space="preserve">
+    <value>Exception was thrown while trying to purge ShiftRotation Day Assignment Data: {0}{1}Exception message: {2}{3}Exception stack trace: {4}</value>
+  </data>
+  <data name="TaskShiftRotationDayAssignmentDataPurge_EmailSubject" xml:space="preserve">
+    <value>ShiftRotation Day Assignment Data Purge Task failed:  {0}</value>
+  </data>
+  <data name="TaskShiftRotationDayAssignmentDataPurge_PurgeMessage" xml:space="preserve">
+    <value>Purged {0} rows from {1} table;</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_AddOrderError" xml:space="preserve">
+    <value>Error adding order.  {0}</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_BGDoesNotExist" xml:space="preserve">
+    <value>Business group {0} does not exist.  Task {1} cannot continue.</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_BGNotForHMC" xml:space="preserve">
+    <value>Business group {0} is not associated with host message config {1}.  Task {2} cannot continue.</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_BusinessGroupName" xml:space="preserve">
+    <value>Business Group Name</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_CancelledServiceOrderView" xml:space="preserve">
+    <value>Cancelled Service Order View</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_CancelOrdersError" xml:space="preserve">
+    <value>Error while cancelling order {0}.  {1}</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_CancelOrdersUnexpectedError" xml:space="preserve">
+    <value>Unexpected error occurred [host order number: {0}, cancel reason: {1}]</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_CancelReasonField" xml:space="preserve">
+    <value>Cancel Reason Field</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_CreateOrdersError" xml:space="preserve">
+    <value>Error while creating order {0}.  {1}</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_DaysAhead" xml:space="preserve">
+    <value>Days Ahead</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_DaysAheadInvalid" xml:space="preserve">
+    <value>{0} {1} is not in the valid range of 0 and {2} days.</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_DBConnectionString" xml:space="preserve">
+    <value>Database Connection String</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_DefaultCancelReason" xml:space="preserve">
+    <value>Cancelled from NISC</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_DuplicateJobCode" xml:space="preserve">
+    <value>Duplicate job code found in configuration.  Orders with job code {0} were not created.</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_Error" xml:space="preserve">
+    <value>TaskSyncNISCServiceOrders - encountered an error.  {0}</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_GetCancelOrderNumbersError" xml:space="preserve">
+    <value>Error while getting cancel order numbers [schema: {0}, view: {1}, order number field: {2}].  {3}</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_GetNewOrderNumbersError" xml:space="preserve">
+    <value>Error while getting new order numbers [schema: {0}, view: {1}, order number field: {2}].  {3}</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_GetOrderRecordError" xml:space="preserve">
+    <value>Error while getting order record [schema: {0}, view: {1}, order number field: {2}].  {3}</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_GetRecordsError" xml:space="preserve">
+    <value>Error while getting records [schema: {0}, view: {1}, order number field: {2}].  {3}</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_NeededByDateField" xml:space="preserve">
+    <value>Needed By Date Field</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_NewServiceOrderView" xml:space="preserve">
+    <value>New Service Order View</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_NoHMC" xml:space="preserve">
+    <value>No host message config {0} found.  Task {1} cannot continue.</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_NoHMCsConfigured" xml:space="preserve">
+    <value>Could not find valid Service Order HMC and Job Codes configuration.  Task {0} cannot continue.</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_OrderDoesNotExist" xml:space="preserve">
+    <value>Cannot cancel order.  Order {0} not found.</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_OrderExists" xml:space="preserve">
+    <value>Order with host order number {0} already exists.  A new order was not created.</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_ParameterEmpty" xml:space="preserve">
+    <value>{0} cannot be empty for system task TaskSyncNISCServiceOrders.  Task {1} cannot continue.</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_Schema" xml:space="preserve">
+    <value>Schema</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_ServiceOrderHMC" xml:space="preserve">
+    <value>Server Order HMC</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_ServiceOrderNumberField" xml:space="preserve">
+    <value>Service Order Number Field</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_ServiceOrderRecordNotFound" xml:space="preserve">
+    <value>Could not get service order record for {0}.  Order not created.</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_ServiceOrderView" xml:space="preserve">
+    <value>Service Order View</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_SummaryEmailErrorsHeading" xml:space="preserve">
+    <value>Errors</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_SummaryEmailOrdersCancelFailedHeading" xml:space="preserve">
+    <value>Order(s) Not Cancelled</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_SummaryEmailOrdersCancelled" xml:space="preserve">
+    <value>Orders cancelled: {0}, failed: {1}</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_SummaryEmailOrdersCancelledHeading" xml:space="preserve">
+    <value>Order(s) Cancelled</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_SummaryEmailOrdersCreated" xml:space="preserve">
+    <value>Orders created: {0}, failed: {1}</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_SummaryEmailOrdersCreatedHeading" xml:space="preserve">
+    <value>Order(s) Created</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_SummaryEmailOrdersCreateFailedHeading" xml:space="preserve">
+    <value>Order(s) Not Created</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_ToWorkOrderError" xml:space="preserve">
+    <value>Error while converting to WorkOrder [order type: {0}, order number: {1}].  {2}</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_ToWorkOrderFailed" xml:space="preserve">
+    <value>Could not convert {0} to WorkOrder [order type: {1}]</value>
+  </data>
+  <data name="TaskSyncNISCServiceOrders_ToWorkOrderHMCError" xml:space="preserve">
+    <value>Could not get value for field {0} for order type {1}.  {2}</value>
+  </data>
+  <data name="Time_Annually" xml:space="preserve">
+    <value>Annually</value>
+  </data>
+  <data name="Time_BiWeekly" xml:space="preserve">
+    <value>BiWeekly</value>
+  </data>
+  <data name="Time_Daily" xml:space="preserve">
+    <value>Daily</value>
+  </data>
+  <data name="Time_Every15Minutes" xml:space="preserve">
+    <value>Every 15 minutes</value>
+  </data>
+  <data name="Time_EveryHalfHour" xml:space="preserve">
+    <value>Every half hour</value>
+  </data>
+  <data name="Time_EveryMinute" xml:space="preserve">
+    <value>Every minute</value>
+  </data>
+  <data name="Time_FirstDayOfTheMonth" xml:space="preserve">
+    <value>First Day of the Month</value>
+  </data>
+  <data name="Time_Hourly" xml:space="preserve">
+    <value>Hourly</value>
+  </data>
+  <data name="Time_LastDayOfTheMonth" xml:space="preserve">
+    <value>LastDayOfTheMonth</value>
+  </data>
+  <data name="Time_Monthly" xml:space="preserve">
+    <value>Monthly</value>
+  </data>
+  <data name="Time_OnceOnly" xml:space="preserve">
+    <value>Once Only</value>
+  </data>
+  <data name="Time_SemiAnnually" xml:space="preserve">
+    <value>SemiAnnually</value>
+  </data>
+  <data name="Time_Weekly" xml:space="preserve">
+    <value>Weekly</value>
+  </data>
+  <data name="UnassignStatus_CannotEnterUnassignedState" xml:space="preserve">
+    <value>Order {0} Cannot enter Unassigned state from {1}</value>
+  </data>
+  <data name="UnavailableTime_EndDateTimeInFuture" xml:space="preserve">
+    <value>End DateTime must be in future.</value>
+  </data>
+  <data name="UnavailableTime_InvalidEndDateTime" xml:space="preserve">
+    <value>EndDateTime cannot be before StartDateTime</value>
+  </data>
+  <data name="UnavailableTime_LocationBGInvalid" xml:space="preserve">
+    <value>Location does not belong to any of the unavailable time business groups.</value>
+  </data>
+  <data name="UnavailableTime_ReasonEmpty" xml:space="preserve">
+    <value>Reason is required.</value>
+  </data>
+  <data name="UnavailableTime_WorkerBGInvalid" xml:space="preserve">
+    <value>Worker does not belong to any of the unavailable time business groups.</value>
+  </data>
+  <data name="User_BgChangeAssignedOrders" xml:space="preserve">
+    <value>Cannot remove Business Group from worker. Work Orders are currently assigned.</value>
+  </data>
+  <data name="User_ExternalIdEmpty" xml:space="preserve">
+    <value>External ID is required</value>
+  </data>
+  <data name="User_FirstNameEmpty" xml:space="preserve">
+    <value>First Name cannot be blank</value>
+  </data>
+  <data name="User_LastNameEmpty" xml:space="preserve">
+    <value>Last Name cannot be blank</value>
+  </data>
+  <data name="User_NameEmpty" xml:space="preserve">
+    <value>Name cannot be blank</value>
+  </data>
+  <data name="User_RoleEmpty" xml:space="preserve">
+    <value>User Role is required</value>
+  </data>
+  <data name="User_UsernameEmpty" xml:space="preserve">
+    <value>User Name cannot be blank</value>
+  </data>
+  <data name="UserManagement_ConfirmNewPassword" xml:space="preserve">
+    <value>Confirm New Password</value>
+  </data>
+  <data name="UserManagement_InvalidCurrentPassword" xml:space="preserve">
+    <value>Invalid current password</value>
+  </data>
+  <data name="UserManagement_InvalidLogin" xml:space="preserve">
+    <value>Invalid login username or password.</value>
+  </data>
+  <data name="UserManagement_NameAlreadyExists" xml:space="preserve">
+    <value>Name [{0} {1}] already exists</value>
+  </data>
+  <data name="UserManagement_NewPassword" xml:space="preserve">
+    <value>New Password</value>
+  </data>
+  <data name="UserManagement_NewPasswordRequired" xml:space="preserve">
+    <value>New password is required</value>
+  </data>
+  <data name="UserManagement_NewPasswordsMismatch" xml:space="preserve">
+    <value>Must match New Password</value>
+  </data>
+  <data name="UserManagement_NoAvailableConcurrentLogins" xml:space="preserve">
+    <value>There are no remaining concurrent logins available.</value>
+  </data>
+  <data name="UserManagement_NoAvailableConcurrentSessions" xml:space="preserve">
+    <value>There are no remaining concurrent sessions available.</value>
+  </data>
+  <data name="UserManagement_OldPassword" xml:space="preserve">
+    <value>Old Password</value>
+  </data>
+  <data name="UserManagement_OldPasswordDifferent" xml:space="preserve">
+    <value>Your old password must be different from your new password</value>
+  </data>
+  <data name="UserManagement_OldPasswordRequired" xml:space="preserve">
+    <value>Old password is required</value>
+  </data>
+  <data name="UserManagement_PasswordExpired" xml:space="preserve">
+    <value>Password has expired.</value>
+  </data>
+  <data name="UserManagement_PasswordMismatch" xml:space="preserve">
+    <value>The Old Password is incorrect.</value>
+  </data>
+  <data name="UserManagement_PasswordValidationFailed" xml:space="preserve">
+    <value>Failed password validation</value>
+  </data>
+  <data name="UserManagement_SessionNotValid" xml:space="preserve">
+    <value>Session is not valid.</value>
+  </data>
+  <data name="UserManagement_UserAlreadyExists" xml:space="preserve">
+    <value>Username {0} already exists</value>
+  </data>
+  <data name="UserManagement_UserDisabled" xml:space="preserve">
+    <value>User is disabled.</value>
+  </data>
+  <data name="UserManagement_UserNotExist" xml:space="preserve">
+    <value>User does not exist.</value>
+  </data>
+  <data name="UserManagement_UserReferenced" xml:space="preserve">
+    <value>User Referenced.</value>
+  </data>
+  <data name="UserManagement_ValidatePasswordNeedDigit" xml:space="preserve">
+    <value>a number</value>
+  </data>
+  <data name="UserManagement_ValidatePasswordNeedLowerCase" xml:space="preserve">
+    <value>a lowercase letter</value>
+  </data>
+  <data name="UserManagement_ValidatePasswordNeedSpecialChar" xml:space="preserve">
+    <value>a special character</value>
+  </data>
+  <data name="UserManagement_ValidatePasswordNeedUpperCase" xml:space="preserve">
+    <value>an uppercase letter</value>
+  </data>
+  <data name="UserManagement_ValidatePasswordPastDuration" xml:space="preserve">
+    <value>This password has been used in the past {0} days.</value>
+  </data>
+  <data name="UserManagement_ValidatePasswordPolicy" xml:space="preserve">
+    <value>Password does not meet password policy: {0} are required</value>
+  </data>
+  <data name="UserManagement_ValidatePasswordTooShort" xml:space="preserve">
+    <value>Password is too short. Must be at least {0} characters.</value>
+  </data>
+  <data name="UsernameFormat" xml:space="preserve">
+    <value>{0} {1}</value>
+  </data>
+  <data name="ValidOTChecklist" xml:space="preserve">
+    <value>Order Types</value>
+  </data>
+  <data name="Vehicle_MaxSpeedTooSmall" xml:space="preserve">
+    <value>MaxSpeed must be greater than 0</value>
+  </data>
+  <data name="Vehicle_ModemIdInUse" xml:space="preserve">
+    <value>GPS Modem ID "{0}" already in use.</value>
+  </data>
+  <data name="Vehicle_NameEmpty" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="Vehicle_NoVehicle" xml:space="preserve">
+    <value>testeeee</value>
+  </data>
+  <data name="Vehicle_OdometerTooSmall" xml:space="preserve">
+    <value>Odometer must be greater than or equal to 0</value>
+  </data>
+  <data name="Vehicle_TypeInvalid" xml:space="preserve">
+    <value>Vehicle Type is invalid</value>
+  </data>
+  <data name="VehicleAfterHoursUsageAlert" xml:space="preserve">
+    <value>VehicleAfterHoursUsageAlert</value>
+  </data>
+  <data name="VehicleCol_Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="VehicleCol_AssignedWorkerList" xml:space="preserve">
+    <value>Occupants</value>
+  </data>
+  <data name="VehicleCol_BucketUpTime" xml:space="preserve">
+    <value>Bucket Up Duration</value>
+  </data>
+  <data name="VehicleCol_City" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="VehicleCol_Connected" xml:space="preserve">
+    <value>Connected</value>
+  </data>
+  <data name="VehicleCol_CurrentBearing" xml:space="preserve">
+    <value>Last Known Bearing</value>
+  </data>
+  <data name="VehicleCol_CurrentLatitude" xml:space="preserve">
+    <value>Last Known Latitude</value>
+  </data>
+  <data name="VehicleCol_CurrentLongitude" xml:space="preserve">
+    <value>Last Known Longitude</value>
+  </data>
+  <data name="VehicleCol_CurrentSpeedString" xml:space="preserve">
+    <value>Last Known Speed</value>
+  </data>
+  <data name="VehicleCol_EngineStatus" xml:space="preserve">
+    <value>Engine</value>
+  </data>
+  <data name="VehicleCol_GPSFix" xml:space="preserve">
+    <value>GPS Lock</value>
+  </data>
+  <data name="VehicleCol_GPSModemId" xml:space="preserve">
+    <value>Modem Id</value>
+  </data>
+  <data name="VehicleCol_IdleDuration" xml:space="preserve">
+    <value>Idle Duration</value>
+  </data>
+  <data name="VehicleCol_IdleStatus" xml:space="preserve">
+    <value>Idle</value>
+  </data>
+  <data name="VehicleCol_LastGPSUpdateDateTime" xml:space="preserve">
+    <value>Last Fix Date/Time</value>
+  </data>
+  <data name="VehicleCol_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="VehicleCol_Odometer" xml:space="preserve">
+    <value>Current Odometer</value>
+  </data>
+  <data name="VehicleCol_PTOStatus" xml:space="preserve">
+    <value>PTO</value>
+  </data>
+  <data name="VehicleCol_State" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="VehicleCol_StopStatus" xml:space="preserve">
+    <value>Stopped</value>
+  </data>
+  <data name="VehicleCol_VehicleTypeImage" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="VehicleCol_VehicleTypeName" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="VehicleCol_WorkingPeriod" xml:space="preserve">
+    <value>Allowable Usage</value>
+  </data>
+  <data name="VehicleCol_Zip" xml:space="preserve">
+    <value>Zip</value>
+  </data>
+  <data name="VehicleHistoryReport_Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="VehicleHistoryReport_City" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="VehicleHistoryReport_DateTime" xml:space="preserve">
+    <value>DateTime</value>
+  </data>
+  <data name="VehicleHistoryReport_Direction" xml:space="preserve">
+    <value>Direction</value>
+  </data>
+  <data name="VehicleHistoryReport_Latitude" xml:space="preserve">
+    <value>Latitude</value>
+  </data>
+  <data name="VehicleHistoryReport_Longitude" xml:space="preserve">
+    <value>Longitude</value>
+  </data>
+  <data name="VehicleHistoryReport_Occupant" xml:space="preserve">
+    <value>Occupant(s)</value>
+  </data>
+  <data name="VehicleHistoryReport_Speed" xml:space="preserve">
+    <value>Speed</value>
+  </data>
+  <data name="VehicleHistoryReport_Speed_KPH" xml:space="preserve">
+    <value>Speed (KPH)</value>
+  </data>
+  <data name="VehicleHistoryReport_Speed_MPH" xml:space="preserve">
+    <value>Speed (MPH)</value>
+  </data>
+  <data name="VehicleHistoryReport_State" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="VehicleHistoryReport_Zip" xml:space="preserve">
+    <value>Zip</value>
+  </data>
+  <data name="VehicleManagement_VehicleAlreadyExist" xml:space="preserve">
+    <value>Vehicle [{0}] already exists</value>
+  </data>
+  <data name="VehicleService_CompletionDateNull" xml:space="preserve">
+    <value>CompletionDate can not be null.</value>
+  </data>
+  <data name="VehicleService_DueAtDateNull" xml:space="preserve">
+    <value>Due at Date can not be null.</value>
+  </data>
+  <data name="VehicleService_DueAtEngineHoursNegative" xml:space="preserve">
+    <value>Due At Engine Hours can not be negative.</value>
+  </data>
+  <data name="VehicleService_DueAtOdometerNegative" xml:space="preserve">
+    <value>Due At Odometer must not be negative.</value>
+  </data>
+  <data name="VehicleService_EngineHoursNegative" xml:space="preserve">
+    <value>Engine Hours can not be negative.</value>
+  </data>
+  <data name="VehicleService_LastEngineHoursNegative" xml:space="preserve">
+    <value>Last Engine Hours can not be negative.</value>
+  </data>
+  <data name="VehicleService_LastOdometerNegative" xml:space="preserve">
+    <value>Last odometer can not be negative.</value>
+  </data>
+  <data name="VehicleService_LastServiceDateNull" xml:space="preserve">
+    <value>Last Maintenance Date can not be null.</value>
+  </data>
+  <data name="VehicleService_OdometerIntervalNegative" xml:space="preserve">
+    <value>Odometer Interval must not be negative.</value>
+  </data>
+  <data name="VehicleService_OdometerNegative" xml:space="preserve">
+    <value>Odometer can not be negative.</value>
+  </data>
+  <data name="VehicleService_UserDoesNotExist" xml:space="preserve">
+    <value>User does not exist.</value>
+  </data>
+  <data name="VehicleService_VehicleDoesNotExist" xml:space="preserve">
+    <value>Vehicle does not exist.</value>
+  </data>
+  <data name="VehicleService_VehicleServiceScheduleDoesNotExist" xml:space="preserve">
+    <value>Vehicle Maintenance Schedule does not exist.</value>
+  </data>
+  <data name="VehicleService_VehicleServiceTemplateDoesNotExist" xml:space="preserve">
+    <value>Vehicle Maintenance Template does not exist.</value>
+  </data>
+  <data name="VehicleService_VehicleServiceTypeBGInvalid" xml:space="preserve">
+    <value>Type does not belong to all of the template's business groups.</value>
+  </data>
+  <data name="VehicleService_VehicleServiceTypeDoesNotExist" xml:space="preserve">
+    <value>Vehicle Maintenance Type does not exist.</value>
+  </data>
+  <data name="VehicleServiceNextAppt_DueAtEngineHoursNegative" xml:space="preserve">
+    <value>Due At Engine Hours must not be negative.</value>
+  </data>
+  <data name="VehicleServiceNextAppt_DueAtOdometerNegative" xml:space="preserve">
+    <value>Due At Odometer must not be negative.</value>
+  </data>
+  <data name="VehicleServiceNextAppt_LastEngineHoursNegative" xml:space="preserve">
+    <value>Last Engine Hours must not be negative.</value>
+  </data>
+  <data name="VehicleServiceNextAppt_LastOdometerNegative" xml:space="preserve">
+    <value>Last Odometer Reading must not be negative.</value>
+  </data>
+  <data name="VehicleServiceSchedule_EngineHoursNegative" xml:space="preserve">
+    <value>Engine Hours Interval must be greater than 0.</value>
+  </data>
+  <data name="VehicleServiceSchedule_LastEngineHoursNegative" xml:space="preserve">
+    <value>Last Engine Hours must not be negative.</value>
+  </data>
+  <data name="VehicleServiceSchedule_LastOdometerNegative" xml:space="preserve">
+    <value>Last Odometer Reading must be greater than 0.</value>
+  </data>
+  <data name="VehicleServiceSchedule_OdometerIntervalNegative" xml:space="preserve">
+    <value>Odometer Interval must be greater than 0.</value>
+  </data>
+  <data name="VehicleServiceSchedule_TimeIntervalNegative" xml:space="preserve">
+    <value>Time Interval must be greater than 0.</value>
+  </data>
+  <data name="VehicleServiceTemplate_AlreadyExist" xml:space="preserve">
+    <value>Vehicle Maintenance Template [{0}] already exists.</value>
+  </data>
+  <data name="VehicleServiceTemplate_NameEmpty" xml:space="preserve">
+    <value>Name is required.</value>
+  </data>
+  <data name="VehicleServiceTemplateItem_OdometerIntervalNegative" xml:space="preserve">
+    <value>Odometer Interval must be greater than 0.</value>
+  </data>
+  <data name="VehicleServiceTemplateItem_TimeIntervalNegative" xml:space="preserve">
+    <value>Time Interval must be greater than 0.</value>
+  </data>
+  <data name="VehicleServiceType_AlreadyExist" xml:space="preserve">
+    <value>Vehicle Service Type [{0}] already exists.</value>
+  </data>
+  <data name="VehicleServiceType_NameEmpty" xml:space="preserve">
+    <value>Name is required.</value>
+  </data>
+  <data name="VehicleServiceTypeBgMaintenanceTypeAssociation" xml:space="preserve">
+    <value>Maintenance Type is currently used by Maintenance Template {0}, cannot remove Business Group</value>
+  </data>
+  <data name="VehicleServiceTypeBgServiceScheduleAssociation" xml:space="preserve">
+    <value>Maintenance Type is currently used by the Maintenance Schedule of Vehicle {0}, cannot remove Business Group</value>
+  </data>
+  <data name="VehicleServiceTypeManagement_DeleteEntityFail" xml:space="preserve">
+    <value>Unexpected error trying to delete type</value>
+  </data>
+  <data name="VehicleServiceTypeManagement_DeleteServiceTypeInUseError" xml:space="preserve">
+    <value>Unable to delete.  The selected type is in use.</value>
+  </data>
+  <data name="VehicleType_DisplayNameEmpty" xml:space="preserve">
+    <value>Vehicle Type display name is required</value>
+  </data>
+  <data name="VehicleType_IconKeyEmpty" xml:space="preserve">
+    <value>Icon is required</value>
+  </data>
+  <data name="VehicleType_InvalidName" xml:space="preserve">
+    <value>Name cannot contain special characters ({0})</value>
+  </data>
+  <data name="VehicleType_NameEmpty" xml:space="preserve">
+    <value>Vehicle Type name is required</value>
+  </data>
+  <data name="VehicleType_WebIconFilenameEmpty" xml:space="preserve">
+    <value>Web icon selection is required</value>
+  </data>
+  <data name="VehicleTypeVehicleBgAssociation" xml:space="preserve">
+    <value>Vehicle Type is currently being used by {0} Vehicles, cannot remove Business Group</value>
+  </data>
+  <data name="Warehouse_IdentifierEmpty" xml:space="preserve">
+    <value>Identifier is required for Warehouse</value>
+  </data>
+  <data name="Warehouse_InvalidEmail" xml:space="preserve">
+    <value>Email address {0} is invalid</value>
+  </data>
+  <data name="WarehouseManagement_WarehouseAlreadyExists" xml:space="preserve">
+    <value>Warehouse [{0}] already exists</value>
+  </data>
+  <data name="Warranty_IdentifierEmpty" xml:space="preserve">
+    <value>Identifier is required.</value>
+  </data>
+  <data name="WarrantyDetail_IdentifierEmpty" xml:space="preserve">
+    <value>Identifier is required.</value>
+  </data>
+  <data name="WarrantyManagement_InventoryWarrantyManualAdd" xml:space="preserve">
+    <value>Inventory Warranty manually applied.</value>
+  </data>
+  <data name="WarrantyManagement_WarrantyAlreadyExist" xml:space="preserve">
+    <value>A warranty with this identifier already exists.</value>
+  </data>
+  <data name="WarrantyManagement_WarrantyDetailExistsForInventory" xml:space="preserve">
+    <value>Warranty detail {0} already exists for this inventory item</value>
+  </data>
+  <data name="WebMessageCol_BusinessGroupName" xml:space="preserve">
+    <value>Business Group Name</value>
+  </data>
+  <data name="WebMessageCol_CreationDatetime" xml:space="preserve">
+    <value>Creation Datetime</value>
+  </data>
+  <data name="WebMessageCol_EntityData1" xml:space="preserve">
+    <value>Order Type</value>
+  </data>
+  <data name="WebMessageCol_EntityData2" xml:space="preserve">
+    <value>Host Order Number</value>
+  </data>
+  <data name="WebMessageCol_EntityName" xml:space="preserve">
+    <value>Order Number</value>
+  </data>
+  <data name="WebMessageCol_EntityType" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="WebMessageCol_FailMessage" xml:space="preserve">
+    <value>Error Message</value>
+  </data>
+  <data name="WebMessageCol_MessageStatus" xml:space="preserve">
+    <value>Message Status</value>
+  </data>
+  <data name="WebMessageCol_MessageType" xml:space="preserve">
+    <value>Message Type</value>
+  </data>
+  <data name="WebMessageCol_MethodName" xml:space="preserve">
+    <value>Method Name</value>
+  </data>
+  <data name="WebMessageCol_ServerName" xml:space="preserve">
+    <value>Server Name</value>
+  </data>
+  <data name="WebMessageCol_ServerVersion" xml:space="preserve">
+    <value>Server Version</value>
+  </data>
+  <data name="WebMessageCol_Timestamp" xml:space="preserve">
+    <value>Last Retry Datetime</value>
+  </data>
+  <data name="WebMessageCol_URL" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="WebMsgManagement_NetFailDistList" xml:space="preserve">
+    <value>WebMessageNetErrorTo</value>
+  </data>
+  <data name="WebMsgManagement_NetFailEmailBody" xml:space="preserve">
+    <value>Error sending web message to url:{0}{1}</value>
+  </data>
+  <data name="WebMsgManagement_NetFailEmailSbj" xml:space="preserve">
+    <value>Network error sending web message</value>
+  </data>
+  <data name="Worker_InCoverage" xml:space="preserve">
+    <value>In Coverage</value>
+  </data>
+  <data name="Worker_NotInCoverage" xml:space="preserve">
+    <value>Not In Coverage</value>
+  </data>
+  <data name="WorkerCol_AreaName" xml:space="preserve">
+    <value>Area</value>
+  </data>
+  <data name="WorkerCol_Available" xml:space="preserve">
+    <value>Available</value>
+  </data>
+  <data name="WorkerCol_CurrentDownloadedNumOrders" xml:space="preserve">
+    <value>Downloaded Orders</value>
+  </data>
+  <data name="WorkerCol_DeviceId" xml:space="preserve">
+    <value>Device</value>
+  </data>
+  <data name="WorkerCol_Emergency" xml:space="preserve">
+    <value>Emergency</value>
+  </data>
+  <data name="WorkerCol_Enabled" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="WorkerCol_InCoverage" xml:space="preserve">
+    <value>InCoverage</value>
+  </data>
+  <data name="WorkerCol_Offline" xml:space="preserve">
+    <value>Offline</value>
+  </data>
+  <data name="WorkerCol_Online" xml:space="preserve">
+    <value>Online</value>
+  </data>
+  <data name="WorkerCol_ThresholdNumOrders" xml:space="preserve">
+    <value>Order threshold</value>
+  </data>
+  <data name="WorkerCol_WorkerName" xml:space="preserve">
+    <value>WorkerName</value>
+  </data>
+  <data name="WorkerCol_WorkerStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="WorkerManagement_AssignWorkerToVehErr" xml:space="preserve">
+    <value>Could not assign worker {0} to vehicle</value>
+  </data>
+  <data name="WorkerManagement_DeleteVehicleAssignmentError" xml:space="preserve">
+    <value>Failed to remove {0} from assignment list</value>
+  </data>
+  <data name="WorkOrder_CantReassignMulti" xml:space="preserve">
+    <value>This order type cannot be multi-assigned.</value>
+  </data>
+  <data name="WorkOrder_CantReassignStatus" xml:space="preserve">
+    <value>Order is currently {0} cannot be re-assigned.</value>
+  </data>
+  <data name="WorkOrder_InvalidLatLong" xml:space="preserve">
+    <value>Invalid Latitude/Longitude for order {0}</value>
+  </data>
+  <data name="WorkOrderManagement_AssignBgFail" xml:space="preserve">
+    <value>Worker {0} does not belong to Work Order's ({1}) Business Group ({2})</value>
+  </data>
+  <data name="WorkOrderManagement_AssignFail" xml:space="preserve">
+    <value>Assign order failed.</value>
+  </data>
+  <data name="WorkOrderManagement_AssignInvalid" xml:space="preserve">
+    <value>Cannot assign order, order already assigned.</value>
+  </data>
+  <data name="WorkOrderManagement_AssignOrdersFail" xml:space="preserve">
+    <value>Assign orders failed.</value>
+  </data>
+  <data name="WorkOrderManagement_AssignOrdersSuccess" xml:space="preserve">
+    <value>Assigned {0} orders.</value>
+  </data>
+  <data name="WorkOrderManagement_AssignOrdersWithErrors" xml:space="preserve">
+    <value>Assign orders: {0} success, {1} failed.</value>
+  </data>
+  <data name="WorkOrderManagement_AssignStatusFail" xml:space="preserve">
+    <value>Invalid order status {0}, order {1} not assigned</value>
+  </data>
+  <data name="WorkOrderManagement_AttachmentExists" xml:space="preserve">
+    <value>Order {0} already has a file attachment named {1}.</value>
+  </data>
+  <data name="WorkOrderManagement_AttachmentOrderNotFound" xml:space="preserve">
+    <value>UploadAttachment error: order {0} not found</value>
+  </data>
+  <data name="WorkOrderManagement_BlackoutScheduleNotExist" xml:space="preserve">
+    <value>Blackout schedule does not exist.</value>
+  </data>
+  <data name="WorkOrderManagement_CancelFail" xml:space="preserve">
+    <value>Cancel order failed.</value>
+  </data>
+  <data name="WorkOrderManagement_CancelInvalid" xml:space="preserve">
+    <value>Cannot cancel order. Only active orders may be cancelled.</value>
+  </data>
+  <data name="WorkOrderManagement_CancelledProjectUnexpectedError" xml:space="preserve">
+    <value>Unexpected error occured while trying to cancel the project</value>
+  </data>
+  <data name="WorkOrderManagement_CancelOrdersFail" xml:space="preserve">
+    <value>Cancel orders failed.</value>
+  </data>
+  <data name="WorkOrderManagement_CancelOrdersSuccess" xml:space="preserve">
+    <value>Cancelled {0} orders.</value>
+  </data>
+  <data name="WorkOrderManagement_CancelOrdersWithErrors" xml:space="preserve">
+    <value>Cancel orders: {0} success, {1} failed.</value>
+  </data>
+  <data name="WorkOrderManagement_CannotDuplicateProject" xml:space="preserve">
+    <value>Project order cannot be duplicated</value>
+  </data>
+  <data name="WorkOrderManagement_ChangeBusinessGroupInvalidArea" xml:space="preserve">
+    <value>Could not set order business group to {0}. Area is not in the business group.</value>
+  </data>
+  <data name="WorkOrderManagement_ChangeBusinessGroupInvalidCategory" xml:space="preserve">
+    <value>Could not set order business group to {0}. Category is not in the business group.</value>
+  </data>
+  <data name="WorkOrderManagement_ChangeBusinessGroupInvalidCrewChief" xml:space="preserve">
+    <value>Could not set order business group to {0}. Crew Chief is not in the business group.</value>
+  </data>
+  <data name="WorkOrderManagement_ChangeBusinessGroupInvalidJobCode" xml:space="preserve">
+    <value>Could not set order business group to {0}. Job Code is not in the business group.</value>
+  </data>
+  <data name="WorkOrderManagement_ChangeBusinessGroupInvalidOrderType" xml:space="preserve">
+    <value>Could not set order business group to {0}. OrderType is not in the business group.</value>
+  </data>
+  <data name="WorkOrderManagement_ChangeBusinessGroupInvalidPriority" xml:space="preserve">
+    <value>Could not set order business group to {0}. Priority is not in the business group.</value>
+  </data>
+  <data name="WorkOrderManagement_ChangeBusinessGroupInvalidSpecialIndicator" xml:space="preserve">
+    <value>Could not set order business group to {0}. Special Indicator is not in the business group.</value>
+  </data>
+  <data name="WorkOrderManagement_ChangeBusinessGroupInvalidWorker" xml:space="preserve">
+    <value>Could not set order business group to {0}. Worker is not in the business group.</value>
+  </data>
+  <data name="WorkOrderManagement_ChangeOrderStatus" xml:space="preserve">
+    <value>Change order status success</value>
+  </data>
+  <data name="WorkOrderManagement_ChangeStatusAfterComp" xml:space="preserve">
+    <value>Attempt to change status after order is completed</value>
+  </data>
+  <data name="WorkOrderManagement_ChangeStatusFailed" xml:space="preserve">
+    <value>Change order status failed</value>
+  </data>
+  <data name="WorkOrderManagement_ChangeStatusWrongWorker" xml:space="preserve">
+    <value>Completion from unassigned worker {0}</value>
+  </data>
+  <data name="WorkOrderManagement_CompletedProjectUnexpectedError" xml:space="preserve">
+    <value>Unexpected error occured while trying to complete the project</value>
+  </data>
+  <data name="WorkOrderManagement_CouldNotAssign" xml:space="preserve">
+    <value>Order {0} Cannot be assigned from the state {1}</value>
+  </data>
+  <data name="WorkOrderManagement_CouldSetCategory" xml:space="preserve">
+    <value>Could not set category for orders: </value>
+  </data>
+  <data name="WorkOrderManagement_FailsUserDefinedRule" xml:space="preserve">
+    <value>Fails user defined validations.</value>
+  </data>
+  <data name="WorkOrderManagement_HostOrderExist" xml:space="preserve">
+    <value>Host Order {0} exists already.</value>
+  </data>
+  <data name="WorkOrderManagement_InvalidArea" xml:space="preserve">
+    <value>Unable to assign order. Order not in user's assigned areas.</value>
+  </data>
+  <data name="WorkOrderManagement_InvalidBusinessGroup" xml:space="preserve">
+    <value>Unable to assign order. Order not in user's assigned business groups.</value>
+  </data>
+  <data name="WorkOrderManagement_InvalidOrder" xml:space="preserve">
+    <value>Invalid order {0}.</value>
+  </data>
+  <data name="WorkOrderManagement_InvalidOrderType" xml:space="preserve">
+    <value>Invalid order type key.</value>
+  </data>
+  <data name="WorkOrderManagement_NoOrderNumber" xml:space="preserve">
+    <value>Missing order number.</value>
+  </data>
+  <data name="WorkOrderManagement_OrderAlreadyExist" xml:space="preserve">
+    <value>Order already exists.</value>
+  </data>
+  <data name="WorkOrderManagement_OrderExist" xml:space="preserve">
+    <value>Order {0} exists already.</value>
+  </data>
+  <data name="WorkOrderManagement_OrderHistoryMismatch" xml:space="preserve">
+    <value>Order history {0} and order {1} mismatch.</value>
+  </data>
+  <data name="WorkOrderManagement_OrderHistoryNotExist" xml:space="preserve">
+    <value>Order history does not exist.</value>
+  </data>
+  <data name="WorkOrderManagement_OrderNotExist" xml:space="preserve">
+    <value>Order does not exist.</value>
+  </data>
+  <data name="WorkOrderManagement_OrderNotFound" xml:space="preserve">
+    <value>Order {0} not found</value>
+  </data>
+  <data name="WorkOrderManagement_OrdersNotCompleted" xml:space="preserve">
+    <value>Could not complete the project.  All child order(s) must be completed, verified, or cancelled.</value>
+  </data>
+  <data name="WorkOrderManagement_OrderTypeKeyNodeEmpty" xml:space="preserve">
+    <value>OrderTypeKey was not specified for order create.</value>
+  </data>
+  <data name="WorkOrderManagement_OrderTypeKeyNodeNull" xml:space="preserve">
+    <value>OrderTypeKey node was null.</value>
+  </data>
+  <data name="WorkOrderManagement_OrderTypeNotExist" xml:space="preserve">
+    <value>Order type ({0}) does not exist.</value>
+  </data>
+  <data name="WorkOrderManagement_PrepareOrderFail" xml:space="preserve">
+    <value>Failed to prepare order.</value>
+  </data>
+  <data name="WorkOrderManagement_ProjectCancellationError" xml:space="preserve">
+    <value>Error cancelling the project.  There are no child orders to cancel.</value>
+  </data>
+  <data name="WorkOrderManagement_ReassignFail" xml:space="preserve">
+    <value>Reassign order failed.</value>
+  </data>
+  <data name="WorkOrderManagement_ReassignInvalid" xml:space="preserve">
+    <value>Cannot reassign order. Order not in an assigned state.</value>
+  </data>
+  <data name="WorkOrderManagement_ReassignOrdersFail" xml:space="preserve">
+    <value>Reassign orders failed.</value>
+  </data>
+  <data name="WorkOrderManagement_ReassignOrdersSuccess" xml:space="preserve">
+    <value>Reassigned {0} orders.</value>
+  </data>
+  <data name="WorkOrderManagement_ReassignOrdersWithErrors" xml:space="preserve">
+    <value>Reassign orders: {0} success, {1} failed.</value>
+  </data>
+  <data name="WorkOrderManagement_ReferAssigned" xml:space="preserve">
+    <value>Order no longer assigned to worker.</value>
+  </data>
+  <data name="WorkOrderManagement_ReferFail" xml:space="preserve">
+    <value>Refer order failed.</value>
+  </data>
+  <data name="WorkOrderManagement_ReferInvalid" xml:space="preserve">
+    <value>Cannot refer order.</value>
+  </data>
+  <data name="WorkOrderManagement_ReferSameWorker" xml:space="preserve">
+    <value>Cannot refer order to the same worker.</value>
+  </data>
+  <data name="WorkOrderManagement_ReferUnassigned" xml:space="preserve">
+    <value>Order no longer assigned to worker, no action.</value>
+  </data>
+  <data name="WorkOrderManagement_ResequenceOrdersFailed" xml:space="preserve">
+    <value>Resequence orders failed.</value>
+  </data>
+  <data name="WorkOrderManagement_ResequenceOrdersSuccess" xml:space="preserve">
+    <value>Resequenced orders.</value>
+  </data>
+  <data name="WorkOrderManagement_ResequenceOrdersWithErrors" xml:space="preserve">
+    <value>Resequence orders: {0} success, {1} failed.</value>
+  </data>
+  <data name="WorkOrderManagement_ResolveInvalid" xml:space="preserve">
+    <value>Cannot resolve order. Order is not in a problematic state</value>
+  </data>
+  <data name="WorkOrderManagement_ResolveOrderFail" xml:space="preserve">
+    <value>Unexpected error occured while trying to resolve order. {0}</value>
+  </data>
+  <data name="WorkOrderManagement_ResolveOrderSuccess" xml:space="preserve">
+    <value>Resolved order.</value>
+  </data>
+  <data name="WorkOrderManagement_ResolveOrderValidationFailed" xml:space="preserve">
+    <value>Some fields are not valid.</value>
+  </data>
+  <data name="WorkOrderManagement_ResolveUnassignedOrderValidationFailed" xml:space="preserve">
+    <value>Some fields are not valid.</value>
+  </data>
+  <data name="WorkOrderManagement_ScheduleOrdersFail" xml:space="preserve">
+    <value>Schedule assignment failed.</value>
+  </data>
+  <data name="WorkOrderManagement_ScheduleOrderSuccess" xml:space="preserve">
+    <value>Resources scheduled.</value>
+  </data>
+  <data name="WorkOrderManagement_ScheduleOrdersWithErrors" xml:space="preserve">
+    <value>Error(s) occurred during schedule assignment.</value>
+  </data>
+  <data name="WorkOrderManagement_ScheduleStatusFail" xml:space="preserve">
+    <value>Invalid order status {0}, order {1} not scheduled</value>
+  </data>
+  <data name="WorkOrderManagement_SetBusinessGroupFail" xml:space="preserve">
+    <value>Set business group fail</value>
+  </data>
+  <data name="WorkOrderManagement_SetOrderBusinessGroupProblem" xml:space="preserve">
+    <value>Could not set order business group to {0}. Order not found?</value>
+  </data>
+  <data name="WorkOrderManagement_SetOrderCategoryFail" xml:space="preserve">
+    <value>Set order category fail.</value>
+  </data>
+  <data name="WorkOrderManagement_SetOrderCategoryInvalidBG" xml:space="preserve">
+    <value>Could not set category to {0} for order {1}. Category is not in the order's business group.</value>
+  </data>
+  <data name="WorkOrderManagement_SetOrderCategoryInvalidOt" xml:space="preserve">
+    <value>Could not set category to {0} for order {1}. Category is not associated to Order Type {2}.</value>
+  </data>
+  <data name="WorkOrderManagement_SetOrderCategoryProblem" xml:space="preserve">
+    <value>Unexpected error while updating order category.  Please contact Administrator.</value>
+  </data>
+  <data name="WorkOrderManagement_SetOwnershipInvalidBusinessGroup" xml:space="preserve">
+    <value>Unable to set ownership. Order not in user's assigned business groups.</value>
+  </data>
+  <data name="WorkOrderManagement_SetProblematicInvalid" xml:space="preserve">
+    <value>Cannot change the state for order {0} to problematic.</value>
+  </data>
+  <data name="WorkOrderManagement_SetScheduledInvalid" xml:space="preserve">
+    <value>Cannot change the state for order {0} to scheduled.</value>
+  </data>
+  <data name="WorkOrderManagement_SetUnassignedInvalid" xml:space="preserve">
+    <value>Cannot change the state for order {0} to unassigned.</value>
+  </data>
+  <data name="WorkOrderManagement_SetVerifiedInvalid" xml:space="preserve">
+    <value>Cannot change the state for order {0} to verified.</value>
+  </data>
+  <data name="WorkOrderManagement_UnassignFail" xml:space="preserve">
+    <value>Unassign order failed.</value>
+  </data>
+  <data name="WorkOrderManagement_UnassignInvalid" xml:space="preserve">
+    <value>Cannot unassign order.</value>
+  </data>
+  <data name="WorkOrderManagement_UnassignOrdersFail" xml:space="preserve">
+    <value>Unassign orders failed.</value>
+  </data>
+  <data name="WorkOrderManagement_UnassignOrdersSuccess" xml:space="preserve">
+    <value>Unassigned {0} orders.</value>
+  </data>
+  <data name="WorkOrderManagement_UnassignOrdersWithErrors" xml:space="preserve">
+    <value>Unassign orders: {0} success, {1} failed.</value>
+  </data>
+  <data name="WorkOrderManagement_UndoSentToHostNotSent" xml:space="preserve">
+    <value>Order {0} not sent to host</value>
+  </data>
+  <data name="WorkOrderManagement_UndoSentToHostProblems" xml:space="preserve">
+    <value>Undo sent to host failed for {0} of {1} orders</value>
+  </data>
+  <data name="WorkOrderManagement_UndoSentToHostSuccess" xml:space="preserve">
+    <value>Undo sent to host completed successfully for {0} {1}</value>
+  </data>
+  <data name="WorkOrderManagement_UpdateFail" xml:space="preserve">
+    <value>Update order failed.</value>
+  </data>
+  <data name="WorkOrderManagement_UpdateInvalid" xml:space="preserve">
+    <value>Cannot update order.</value>
+  </data>
+  <data name="WorkOrderManagement_UpdateStatusInvalid" xml:space="preserve">
+    <value>Cannot change order status.</value>
+  </data>
+  <data name="WorkOrderManagement_UpdateTZInvalid" xml:space="preserve">
+    <value>Cannot change order's time zone.</value>
+  </data>
+  <data name="WorkOrderManagement_UpdateWindowInvalid" xml:space="preserve">
+    <value>Invalid work period.</value>
+  </data>
+  <data name="WorkOrderManagement_UserNotInBg" xml:space="preserve">
+    <value>User {0} is not in the order's business group {1}.</value>
+  </data>
+  <data name="WorkOrderManagement_WorkerNotExist" xml:space="preserve">
+    <value>Worker does not exist.</value>
+  </data>
+  <data name="QueryCriteriaManagement_DeleteFilterInUse" xml:space="preserve">
+    <value>Named filter is currently being used in one or more Advanced Filters.  Filter in use in {0}.</value>
+  </data>
+</root>

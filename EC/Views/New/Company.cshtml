@@ -1,0 +1,118 @@
+﻿@using System.Collections;
+@using EC.Models;
+@using EC.Models.Database;
+@using EC.App_LocalResources;
+@{
+    <link rel="stylesheet" type="text/css" href="/Content/styleReportDashboard.css">
+    ViewBag.Title = GlobalRes.NewCompanyRegistration;
+    var _code = ViewBag.code;
+
+
+    UserModel um = new UserModel();
+    CompanyModel cm = new CompanyModel();
+    int company_id = 0;
+    <style>
+        .fullContainer {
+            max-width: none;
+        }
+    </style>
+}
+
+<div class="blockSettings contentCompanyProfile">
+    <div class="titleNewUser">
+        <h1 class="helloUser">@GlobalRes.NewCompanyRegistration:</h1>
+    </div>
+    <div class="contentSettings">
+        <p class="helloUser" id="hello">@GlobalRes.FillTheFollowingFields.</p>
+
+        <div class="blockPersonalPhotoSetting">
+            <div class="blockPhotoSetting">
+                <img class="PersonalPhotoBlock" src='@Url.Content("~/Content/img/logo.png")' />
+            </div>
+            <div class="blockHoverPhoto">
+                <label class="close"></label>
+                <label class="newImageBtn">@GlobalRes.Newimage</label>
+            </div>
+        </div>
+        <div>
+            <div class="personalBlock" id="registration">
+                <div class="blockPersonalSettings">
+                    <p class="title">@GlobalRes.InvitationCode</p>
+                    @Html.TextBox("code")
+
+                </div>
+                <div class="blockPersonalSettings">
+                    <p class="title">@GlobalRes.CompanyNameUp</p>
+                    @Html.TextBox("company_name")
+                </div>
+                <div class="blockPersonalSettings">
+                    <p class="title">@GlobalRes.PrimaryLocationUp</p>
+                    <input type="text" id="location" />
+                </div>
+                <div class="blockPersonalSettings">
+                    <p class="title">@GlobalRes.NumberEmployees</p>
+                    <input type="text" id="number" />
+                </div>
+                <div class="blockPersonalSettings">
+                    <p class="title">@GlobalRes.PrimaryLanguageUp</p>
+
+                    <div class="rowBlock inputMediator">
+                        <div class="freeBlock inputRadio mediator active">
+                            <label class="inputBlock" for="freeIncident">
+                                <input id="oneIncident" type="radio" name="language_id" value="1">
+                                <span class="radioTitle">@GlobalRes.English</span>
+                            </label>
+                        </div>
+                    </div><!--rowBlock-->
+                </div>
+
+                <div class="blockPersonalSettings">
+                    <p class="title">@GlobalRes.YourRoleUp</p>
+
+                    <div class="rowBlock inputMediator">
+                        <div class="freeBlock inputRadio adminMediator active">
+                            <label class="inputBlock" for="freeIncident">
+                                <input id="oneIncident" type="radio" name="role_id" value="5">
+                                <span class="radioTitle">@GlobalRes.AdminMediator</span>
+                            </label>
+                        </div>
+                    </div><!--rowBlock-->
+                </div>
+
+                <div class="blockPersonalSettings">
+                    <p class="title">@GlobalRes.FirstNameUp</p>
+                    <input type="text" id="first" />
+                </div>
+                <div class="blockPersonalSettings">
+                    <p class="title">@GlobalRes.LastNameUp</p>
+                    <input type="text" id="last" />
+                </div>
+                <div class="blockPersonalSettings">
+                    <p class="title">@GlobalRes.Email</p>
+                    <input type="text" id="email" />
+                </div>
+                <div class="blockPersonalSettings">
+                    <p class="title">@GlobalRes.Title</p>
+                    <input type="text" id="title" />
+                </div>
+                <div class="blockPersonalSettings">
+                    <p class="title">@GlobalRes.Departments</p>
+                    <input type="text" id="description" />
+                </div>
+                <div class="blockUpdateProfile">
+                    <div class="updateProfileBtn">
+                        <input type="submit" value="create" />
+                        <span style="display: none;">@GlobalRes.CreateProfileUp.ToLower()</span>
+                    </div>
+                </div>
+                @Html.Hidden("company_exist")
+            </div>
+
+        </div>
+
+    </div>
+    <!--</form>-->
+</div>
+
+<script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/View/newCompany.js"></script>

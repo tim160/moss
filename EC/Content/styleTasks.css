@@ -1,0 +1,351 @@
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+@font-face {
+    font-family: OpenSansSemibold;
+     src: url('fonts/OpenSans-Semibold.eot?') format('embedded-opentype'),
+     url(fonts/OpenSans-Semibold.ttf) format('truetype');
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    /*background: #e5ebeb;*/
+    background: #fff;
+}
+
+/*===================== START HEADER =================*/
+.blockAllTasks #menu {
+  /*padding: 30px;*/
+  float: left;
+  padding-bottom: 0px;
+}
+.blockAllTasks .caseesTab.active {
+  font-family: OpenSansSemibold;
+  /*font-size: 20px;*/
+}
+.blockAllTasks .caseesTab {
+  font-family: 'Open Sans';
+  /*font-size: 20px;*/
+}
+.blockAllTasks .caseesTab span {
+  font-family: 'Open Sans';
+  /*font-size: 20px;*/
+  border: 1px solid #d7dbdb;
+  padding-left: 7px;
+  padding-right: 7px;
+  border-radius: 50%;
+  margin-left: 14px;
+    font-size: 18px;
+}
+.blockAllTasks .caseesTab:hover span {
+  background: #d7dbdb;
+  color: #a6b1b3;
+}
+.blockAllTasks .caseesTab.active span {
+  border: 1px solid #049787;
+  background: #049787;
+  color: #ffffff;
+}
+.contentTasks {
+  display: table;
+  background: #ffffff;
+  width: 100%;
+}
+.myTasks .blockTask {
+  border: 1px solid #e0e5e6;
+}
+.myTasks .contentTasks .contentBlockTask:last-child{
+  border: none;
+}
+.myTasks header { 
+  color: #727c7e;
+  color: #3c3e3f;
+  font-size: 12px;
+  border: 1px solid #e0e5e6;
+  border-bottom: none;
+}
+.myTasks header .menuTasks{ 
+  background: #ebf1f1;
+  display: table;
+  width: 100%;
+}
+.myTasks header .menuTasks .caseTasksName{ 
+  float: left;
+  width: 54%;
+  background: #ebf1f1;
+  background: #d6dcdc;
+  padding-top: 8px;
+  padding-bottom: 5px;
+  padding-left: 5%;
+  margin-right: 1%;
+  cursor: pointer;
+}
+.myTasks header .menuTasks .assignedMediator{ 
+  float: left;
+  padding-top: 8px;
+  padding-bottom: 5px;
+}
+.myTasks header .menuTasks .dueDate{  
+  float: right;
+  background: #d6dcdc;
+  background: #ebf1f1;
+  padding-top: 8px;
+  padding-bottom: 5px;
+  padding-left: 25px;
+  padding-right: 25px;
+  cursor: pointer;
+}
+.myTasks header .menuTasks .dueDate .labelArrow{
+    display: none;
+}
+.myTasks header .menuTasks span:hover {
+  text-decoration: underline;
+}
+.contentBlockTask {
+    display: table;
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 96%;
+    height: 80px;
+    border-bottom: 1px solid #e0e5e6;
+}
+
+.contentBlockTasks .contentBlockTask:last-child {
+  border-bottom: none;
+}
+.contentBlockTask .blockTitle {
+  float: left;
+  width: 60%;
+  height: 60px;
+  margin-bottom: 1px;
+}
+.contentBlockTask .info {
+  float: right;
+}
+.contentBlockTask .date {
+  float: right;
+  height: 40px;
+  text-align: right;
+  margin-right: 7px;
+  margin-top: 38px;
+  color: #aeb5b7;
+  font-size: 12px;
+  font-family: OpenSansSemibold;
+}
+.blockTask span.bigDot {
+  width: 12px;
+  padding-top: 12px;
+  float: left;
+  margin-top: 39px;
+  margin-left: 10px;
+  margin-right: 8px;
+  border-radius: 50%;
+}
+.blockTask span.taskName {
+  font-family: 'Open Sans';
+  float: left;
+  font-size: 18px;
+  color: #3c3e3f;
+  margin-top: 35px;
+  line-height: 18px;
+  padding-right: 5px;
+}
+.blockTitle span.taskName span.titleTask {
+  float: left;
+  /*max-width: 370px;не помещались в 2 строки адреса*/
+  max-width: 500px;
+  padding-bottom: 25px;
+}
+.taskName.fontSamibold .text{    
+    display: inline-block;
+    max-width: 124px;
+    padding-bottom: 25px;
+}
+.blockTitle span.taskName span.labelArrow {
+  -ms-transform: rotate(45deg); /* IE 9 */
+  -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+  -moz-transform: rotate(45deg); /* Firefox */
+  transform: rotate(45deg);
+  background-color: transparent;
+  color: transparent;
+  width: 9px;
+  height: 9px;
+  border-top: 1px solid #aeb3b4;
+  border-right: 1px solid #aeb3b4;
+  float: left;
+  margin-top: 3px;
+  margin-right: 15px;
+  margin-left: 20px;
+}
+.contentBlockTask .blockTitle span.notShadedCircle {
+  width: 8px;
+  height: 8px;
+  -moz-border-radius: 100%;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+  float: left;
+  margin-top: 39px;
+  margin-left: 10px;
+  margin-right: 8px;
+}
+.contentBlockTask .blockTitle span.littleDotShow {
+  width: 6px;
+  padding-top: 6px;
+  float: left;
+  background: #ee5a36;
+  margin-top: 42px;
+  -moz-border-radius: 100%;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+}
+.contentBlockTask .blockTitle span.littleDot {
+  display: none;
+}
+.colorTextGrey{
+    color: #aeb3b4;
+}
+.taskName.fontSamibold .titleTask,
+.taskName.fontSamibold .text {
+    font-family: OpensansSemibold;
+}
+.contentBlockTask .blockPeople {
+  float: left;
+}
+.contentBlockTask .blockPeople img{
+  float: left;
+  height: 32px;
+  width: 32px;
+  margin-top: 27px;
+  margin-right: 7px;
+  -moz-border-radius: 100%;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+}
+.contentBlockTask .blockPeople label.name {
+  float: left;
+  font-size: 12px;
+  color: #848a8b;
+  margin-top: 38px;
+}
+.info .textInfo,
+.info .textDays,
+.info .file{    
+    display: none;
+}
+
+.info.blockExpired .textInfo{
+  display: block;
+  float: left;
+  font-size: 12px;
+  color: #fff;
+  background-color: #ee5a36;
+  margin-top: 34px;
+  margin-right: 19px;
+  padding: 4px 11px 2px 11px;
+  border-radius: 2px;
+}
+.info.blockDays .textDays{
+  display: block;
+  float: left;
+  font-size: 12px;
+  color: #fff;
+  background-color: #abb9bb;
+  margin-top: 35px;
+  margin-right: 19px;
+  padding: 4px 11px 2px 11px;
+  border-radius: 2px;
+  height: auto;
+  width: auto;
+}
+.myCompletedTasks.myTasks .info.blockDays .textDays{
+  color: #aeb5b7;
+  background-color: #fff;
+}
+.info.blockFile .file{
+  display: block;
+  margin-right: 30px;
+  margin-top: 35px;
+}
+.contentBlockTask.tasksForMain .blockTitle {
+  float: left;
+  width: 55%;
+  padding-left: 42px;
+}
+.contentBlockTask.contentMainTask {
+  background-color: #ebf1f1;
+  margin-left: 0px;
+  margin-right: 0px;
+  width: auto;
+  display: block;
+  border-top: 1px solid #e0e5e6;
+  border-bottom: 1px solid #e0e5e6;
+  height: 60px;
+}
+.contentBlockTasks:first-child .contentBlockTask.contentMainTask {
+  border-top: none;
+}
+.trololo:hover {
+    background-color: #f2f7f7;
+}
+.trololo:hover .text {
+    text-decoration: underline;
+}
+.contentBlockTask.contentMainTask .headerContentTask {
+  display: table;
+  width: 94%;
+  height: 61px;
+  padding-left: 20px;
+  height: 62px;
+  margin-top: -1px;
+}
+.contentBlockTasks:first-child .headerContentTask {
+  height: 61px;
+  margin-top: 0px;
+}
+.contentBlockTask.contentMainTask:hover{
+  background-color: #e8eeee;
+}
+.contentBlockTask.contentMainTask:hover .headerContentTask span.titleTask{
+  text-decoration: underline;
+}
+.contentBlockTask.contentMainTask span.taskName {
+  margin-top: 25px;
+  font-family: OpenSansSemibold;
+  cursor: pointer;
+}
+.contentBlockTask.contentMainTask .blockTitle span.taskName span.labelArrow{
+  -ms-transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+  -moz-transform: rotate(135deg);
+  transform: rotate(135deg);
+  margin-top: 1px;
+  margin-left: 60px;
+}
+
+.myTasks header .menuTasks span.labelArrow {
+  -ms-transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+  -moz-transform: rotate(135deg);
+  transform: rotate(135deg);
+  width: 5px;
+  height: 5px;
+  background-color: transparent;
+  color: transparent;
+  border-top: 2px solid #3c3e3f;
+  border-right: 2px solid #3c3e3f;
+  margin-top: 4px;
+  margin-left: 12px;
+}
+.myTasks header .menuTasks span {
+  float: left;
+}
+
+/*===================== END HEADER =================*/
+
+.blockTask span.taskName a {
+    outline: none;
+    text-decoration: none;
+    color: #3c3e3f;
+}

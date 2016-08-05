@@ -1,0 +1,470 @@
+﻿.menuCasesBlock .headerBlockTextLeft{
+    display: none;
+}
+.menuCasesBlock{
+    padding: 0px;
+}
+#EmployeeAwarenessBlock{
+    background-color: #e5ebeb;
+}
+#EmployeeAwarenessBlock .topHeader {
+    background: #fff;
+    color: #aeb3b4;
+    font-size: 20px;
+    font-family: 'Open Sans';
+    font-weight: 400;
+    padding: 42px 40px;
+    box-shadow: 0 1px 1px 0 #c4c7c6;
+    position: relative;
+    z-index: 1;
+}
+#EmployeeAwarenessBlock .mainContent {
+    width: 100%;
+    display: table;
+}
+#EmployeeAwarenessBlock .leftContent {
+    width: 290px;
+    background: #d8dcdb;
+    display: table-cell;
+}
+#EmployeeAwarenessBlock .blockMenu {
+    padding-left: 40px;
+    padding-right: 34px;
+    padding-top: 26px;
+    padding-bottom: 40px;
+}
+#EmployeeAwarenessBlock .title {
+    display: inline-block;
+    width: 100%;
+    float: none;
+    font-size: 16px;
+    color: #3c3e3f;
+    font-family: OpenSansSemibold;
+    padding-bottom: 12px;
+}
+#EmployeeAwarenessBlock .itemSelect {
+    padding: 9px 15px;
+    color: #727c7e;
+    font-size: 14px;
+    font-family: 'Open Sans';
+    font-weight: 300;
+    border-radius: 50px;
+    margin: 2px;
+    cursor: pointer;
+}
+#EmployeeAwarenessBlock .itemSelect.active {
+    padding: 9px 15px;
+    color: #fff;
+    font-size: 14px;
+    font-family: 'Open Sans';
+    font-weight: 300;
+    background-color: #05b5a2;
+    border-radius: 50px;
+    margin: 2px;
+}
+
+
+
+
+
+#EmployeeAwarenessBlock .rightContent {
+    display: table-cell;
+    width: calc(100% - 286px);
+    vertical-align: top;
+}
+#EmployeeAwarenessBlock .topBlockFilters {
+    background: #ebf1f1;
+    border-bottom: 1px solid #dce2e3;
+    padding: 25px 130px 25px 30px;
+    position: relative;
+}
+#EmployeeAwarenessBlock .info {
+    color: #3c3e3f;
+    font-family: 'Open Sans';
+    font-size: 16px;
+    font-weight: 300;
+    display: inline-block;
+    vertical-align: middle;
+}
+#EmployeeAwarenessBlock .calcItems {
+    position: absolute;
+    right: 40px;
+    top: 25px;
+    color: #727c7e;
+    font-size: 14px;
+    font-family: 'Open Sans';
+    font-weight: 300;
+}
+#EmployeeAwarenessBlock .rezoultItems {
+    width: 100%;
+    display: table;
+    padding: 20px 30px;
+    box-sizing: border-box;
+}
+#EmployeeAwarenessBlock .blockInformation {
+    border: 1px solid #e0e5e6;
+    display: inline-block;
+    width: 200px;
+    box-sizing: border-box;
+    vertical-align: top;
+    position: relative;
+    background-color: #fff;
+    margin: 20px 30px;
+}
+#EmployeeAwarenessBlock .blockInformation .filtersBlock {
+    min-height: 200px;
+    width: 100%;
+    position: relative;
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 9px 0;
+}
+#EmployeeAwarenessBlock .blockInformation .filter {
+    background: rgba(0,0,0,0.6);
+    display: table;
+    color: #fff;
+    font-size: 10px;
+    font-family: 'Open Sans';
+    font-weight: 400;
+    line-height: 1;
+    text-transform: uppercase;
+    padding: 8px 10px 8px 5px;
+    margin: 1px 0;
+}
+#EmployeeAwarenessBlock .greenBlock {
+    background: #05b5a2;
+    color: #fff;
+    font-size: 10px;
+    font-family: 'Open Sans';
+    font-weight: 400;
+    text-transform: uppercase;
+    padding: 4px;
+    line-height: 11px;
+}
+#EmployeeAwarenessBlock .infoItem {
+    padding: 12px 10px 12px 23px;
+    position: relative;
+    color: #3c3e3f;
+    font-family: 'Open Sans';
+    font-size: 16px;
+    font-weight: 400;
+}
+#EmployeeAwarenessBlock .infoItem:after,
+#EmployeeAwarenessBlock .infoItem::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 100%;
+    background-color: #3c3e3f;
+    top: 19px;
+    left: 10px;
+}
+#EmployeeAwarenessBlock .img1{
+    background-image: url('/Content/img/EmployeeAwareness/img1.png');
+}
+#EmployeeAwarenessBlock .img2{
+    background-image: url('/Content/img/EmployeeAwareness/img2.png');
+}
+#EmployeeAwarenessBlock .img3{
+    background-image: url('/Content/img/EmployeeAwareness/img3.png');
+}
+#EmployeeAwarenessBlock .img4{
+    background-image: url('/Content/img/EmployeeAwareness/img4.png');
+}
+#EmployeeAwarenessBlock .img5{
+    background-image: url('/Content/img/EmployeeAwareness/img5.png');
+}
+#EmployeeAwarenessBlock .img6{
+    background-image: url('/Content/img/EmployeeAwareness/img6.png');
+}
+#EmployeeAwarenessBlock .img7{
+    background-image: url('/Content/img/EmployeeAwareness/img7.png');
+}
+#EmployeeAwarenessBlock .img8{
+    background-image: url('/Content/img/EmployeeAwareness/img8.png');
+}
+#EmployeeAwarenessBlock .img9{
+    background-image: url('/Content/img/EmployeeAwareness/img9.png');
+}
+#EmployeeAwarenessBlock .img10{
+    background-image: url('/Content/img/EmployeeAwareness/img10.png');
+}
+#EmployeeAwarenessBlock .img11{
+    background-image: url('/Content/img/EmployeeAwareness/img11.png');
+}
+#EmployeeAwarenessBlock .itemFilter {
+    display: inline-block;
+    padding: 4px 23px 4px 15px;
+    color: #fff;
+    font-size: 14px;
+    font-family: 'Open Sans';
+    font-weight: 300;
+    background-color: #abb9bb;
+    border-radius: 50px;
+    margin: 2px;
+    position: relative;
+}
+
+#EmployeeAwarenessBlock .itemFilter .imgClose {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    height: 8px;
+    width: 8px;
+    margin-top: -4px;
+    cursor: pointer;
+    background-image: url('/Content/Icons/closeWhite.png');
+
+}
+
+#EmployeeAwarenessBlock .mainImg {
+    display: inline-block;
+    width: 62.5%;
+    vertical-align: top;
+    /* max-width: 640px; */
+    border: 1px solid #aebcbe;
+    box-sizing: border-box;
+}
+
+#EmployeeAwarenessBlock .mainImg img{
+    width: 100%;
+    display: inline-block;
+    box-sizing: border-box;
+    vertical-align: top;
+    height: auto;
+    padding: 0;
+    margin: 0;
+}
+#EmployeeAwarenessBlock .rightInfoSelect{
+    display: inline-block;
+    width: 37.5%;
+    padding-left: 38px;
+    box-sizing: border-box;
+    vertical-align: top;
+}
+#EmployeeAwarenessBlock .downloadPdf {
+    width: 100%;
+    text-align: center;
+    background-color: #05b5a2;
+    box-sizing: border-box;
+    padding: 24px;
+    font-size: 14px;
+    color: #fff;
+    text-transform: uppercase;
+    font-family: 'OpenSans-Bold';
+    cursor: pointer;
+}
+#EmployeeAwarenessBlock .downloadPdf:hover, #EmployeeAwarenessBlock .downloadPdf:focus {
+    background-color: #08ab99;
+}
+#EmployeeAwarenessBlock .downloadPdf:active {
+    background-color: #049787;
+}
+#EmployeeAwarenessBlock .titleFormat {
+    font-family: 'OpenSansSemibold';
+    font-size: 16px;
+    color: #3c3e3f;
+    padding: 28px 0 14px 38px;
+}
+#EmployeeAwarenessBlock .titleBlockFormat {
+    font-size: 14px;
+    font-family: 'Open Sans';
+    font-weight: 300;
+    color: #727c7e;
+    padding-top: 16px;
+    padding-left: 38px;
+}
+#EmployeeAwarenessBlock .titleBlockFormat.active {
+    color: #05b5a2;
+    font-weight: 700;
+    position: relative;
+}
+#EmployeeAwarenessBlock .titleBlockFormat.active:before {
+    content: '';
+    -moz-transform: rotate(45deg);
+    transform: rotate(45deg);
+    background-color: transparent;
+    color: transparent;
+    width: 4px;
+    height: 4px;
+    border-top: 2px solid #05b5a2;
+    border-right: 2px solid #05b5a2;
+    position: absolute;
+    left: 26px;
+    top: 23px;
+}
+#EmployeeAwarenessBlock  .itemsFormat {
+    padding: 24px 0 0 52px;
+    box-sizing: border-box;
+    width: 100%;
+}
+#EmployeeAwarenessBlock .itemFormat {    
+    width: 24%;
+    display: inline-block;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    min-width: 90px;
+    vertical-align: top;
+    height: 82px;
+    position: relative;
+    cursor: pointer;
+}
+#EmployeeAwarenessBlock .size {    
+    color: #727c7e;
+    font-size: 14px;
+    font-family: 'Open Sans';
+    font-weight: 300;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 8px 16px;
+    border-radius: 30px;
+    line-height: 14px;
+}
+#EmployeeAwarenessBlock .format {
+    border: 4px solid #abb9bb;
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: top;
+}
+#EmployeeAwarenessBlock .format1 {
+    width: 20px;
+    height: 25px;
+}
+#EmployeeAwarenessBlock .format2 {
+    width: 24px;
+    height: 31px;
+}
+#EmployeeAwarenessBlock .format3 {
+    width: 30px;
+    height: 37px;
+}
+#EmployeeAwarenessBlock .format4 {
+    width: 36px;
+    height: 45px;
+}
+#EmployeeAwarenessBlock .itemFormat.active .format {    
+    border-color: #05b5a2;
+    background-color: #fff;
+}
+#EmployeeAwarenessBlock .itemFormat.active .size{    
+    background-color: #05b5a2;
+    color: #fff;
+}
+#EmployeeAwarenessBlock .blockFormat.blockOption {
+    padding: 6px 0 0 52px;
+    box-sizing: border-box;
+    width: 100%;
+}
+#EmployeeAwarenessBlock .blockFormat.blockOption .itemFormat {
+    width: 140px;
+    height: 90px;
+}
+#EmployeeAwarenessBlock .blockFormat.blockOption .itemFormat:nth-child(1){
+    width: 90px;
+}
+#EmployeeAwarenessBlock .blockFormat.blockOption .format {
+    width: 77px;
+    height: 46px;
+    overflow: hidden;
+    position: relative;
+}
+#EmployeeAwarenessBlock .blockFormat.blockOption .noLogo:before {    
+    content: '';
+    -moz-transform: rotate(28deg);
+    transform: rotate(28deg);
+    background-color: transparent;
+    color: transparent;
+    width: 80px;
+    height: 46px;
+    border-top: 2px solid #05b5a2;
+    position: absolute;
+    left: -15px;
+    top: 16px;
+}
+#EmployeeAwarenessBlock .blockFormat.blockOption .noLogo:after {
+    content: '';
+    -moz-transform: rotate(-29deg);
+    transform: rotate(-29deg);
+    background-color: transparent;
+    color: transparent;
+    width: 80px;
+    height: 46px;
+    border-top: 2px solid #05b5a2;
+    position: absolute;
+    left: 5px;
+    top: 16px;
+}
+#EmployeeAwarenessBlock .topBlockFilters .toBack {
+    color: #05b5a2;
+    font-family: 'Open Sans';
+    font-size: 14px;
+    outline: none;
+    position: relative;
+    text-decoration: none;
+    padding-left: 20px;
+    height: 22px;
+    display: inline-block;
+    vertical-align: middle;
+    padding-right: 31px;
+    border-right: 1px solid #b5bebf;
+}
+#EmployeeAwarenessBlock .toBack:before {
+    content: '';    
+    position: absolute;
+    -ms-transform: rotate(225deg);
+    -webkit-transform: rotate(225deg);
+    -moz-transform: rotate(225deg);
+    transform: rotate(225deg);
+    background-color: transparent;
+    color: transparent;
+    width: 7px;
+    height: 7px;
+    border-top: 2px solid #05b5a2;
+    border-right: 2px solid #05b5a2;
+    left: 3px;
+    top: 6px;
+}
+
+
+#EmployeeAwarenessBlock .topBlockFilters .textShot {    
+    font-size: 14px;
+    font-family: 'Open sans';
+    font-weight: 300;
+    color: #727c7e;
+    padding: 0 26px;
+    position: relative;
+}
+#EmployeeAwarenessBlock .textShot:before {
+    position: absolute;
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    transform: rotate(45deg);
+    background-color: transparent;
+    color: transparent;
+    width: 7px;
+    height: 7px;
+    border-top: 2px solid #b5bebf;
+    border-right: 2px solid #b5bebf;
+    right: 3px;
+    top: 6px;
+}
+#EmployeeAwarenessBlock .rez{
+    color: #3c3e3f;   
+    font-size: 14px;
+    font-family: 'Open sans';
+    font-weight: 300;
+    padding: 0 14px 0 22px;
+}
+#EmployeeAwarenessBlock .rezCalc{
+    color: #727c7e;   
+    font-size: 14px;
+    font-family: 'Open sans';
+    font-weight: 300;
+}

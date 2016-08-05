@@ -1,0 +1,250 @@
+﻿@using EC.Models;
+@using EC.Models.Database;
+@using EC.App_LocalResources;
+@{
+    ViewBag.Title = GlobalRes.CompanyMediatorsSettings;
+    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+
+    var um = (UserModel)ViewBag.um;
+    CompanyModel cm = (CompanyModel)ViewBag.cm;
+    int user_id = um.ID;
+    UserModel _temp_um = new UserModel();
+
+    bool is_cc = ViewBag.is_cc;
+    String class_ext = ViewBag.cc_extension;
+
+    //bool is_cc = true;
+    //String class_ext = "";
+    //if (is_cc)
+    //{
+    //    class_ext = "_cc";
+    //}
+    
+    //19
+}
+
+
+<div class="blockSettings">
+    <div id="casesHeared">
+        <div id="menu">
+            <h2 class="mainTitle">@GlobalRes.Menu:</h2>
+            <div>
+                <a href="/Settings/Index" class="caseesTab">@GlobalRes.MyProfile</a>
+                <a href="/Settings/Password" class="caseesTab">@GlobalRes.Password</a>
+                <a href="/Settings/Company" class="caseesTab">@GlobalRes.CompanyProfile</a>
+                <a class="caseesTab active">@GlobalRes.CompanyMediators</a>
+                <a href="/Settings/Cases" class="caseesTab">@GlobalRes.CaseManagementDeadlines</a>
+            </div>
+        </div>
+        @*<div class="positionActivityIcon">
+            <div id="activityIcon"></div>
+        </div>*@
+    </div><!--casesHeared-->
+
+    <div class="contentSettings secondHeader">
+        <div class="headerCompanyProfile">
+            @if (is_cc)
+            {
+                <div class="headerBlock">
+                    <div class="blockText">
+                        <p class="title">Invite new college mediator by email</p>
+                    </div>
+                </div>
+                <div class="blockSendEmail blockSendEmail_cc greyBorder">
+                    <input type="text" id="sendEmail" name="newLocationName" placeholder="email@yourcompany.com" required="" value="">
+                    <div class="closeIcon"></div>
+                    <textarea placeholder="Enter message to colleague about joining the mediation team"></textarea>
+                    <input id="sendMessage" type="submit" />
+                    <span class="sendBtn">@GlobalRes.Send.ToLower()</span>
+                </div>
+            }
+            else
+            {
+                <div class="headerBlock">
+                    <div class="blockText">
+                        <p class="title">@GlobalRes.invite_new_mediator</p>
+                    </div>
+                </div>
+                <div class="blockSendEmail greyBorder">
+                    <input type="text" id="sendEmail" name="newLocationName" placeholder="email@yourcompany.com" required="" value="">
+                    <div class="closeIcon"></div>
+                    <input id="sendMessage" type="submit" />
+                    <span class="sendBtn">@GlobalRes.Send.ToLower()</span>
+                </div>
+            }
+
+ 
+            
+            
+
+        </div>
+    </div><!--contentSettings.secondHeader-->
+
+    <div class="contentCompanyProfiel">
+        <div class="contentSettings">
+            <div class="blockWithTeam">
+                <div class="contentMediators blockTeam">
+                    @foreach (user _user in cm.AllMediators(cm._company.id, false, null))
+                    {
+                        if ((_user.role_id == 4) || (_user.role_id == 5) || (_user.role_id == 6) || (_user.role_id == 7))
+                        {
+                            _temp_um = new UserModel(_user.id);
+
+                            <div class="blockIteamTeam blockIteamTeam@{@class_ext}">
+                                <div class="blockHeaderTeam">
+                                    <a class="contanatTable" href="~/settings/user/@_user.id">
+                                        <div class="blockPhoto">
+                                            <div class="photoPersonal">
+                                                @if (_user.photo_path.Trim().Length == 0)
+                                                {
+                                                    <img src='@Url.Content("~/Content/Icons/anonimousReporterIcon.png")' />
+                                                }
+                                                else
+                                                {
+                                                    <img src='@Url.Content(_user.photo_path.Trim())' />
+                                                }
+                                            </div><!--blockPhoto-->
+                                        </div>
+                                        <div class="blockHeaderText">
+                                            <p>@_user.first_nm @_user.last_nm</p>
+                                            <p>@_user.title_ds</p>
+                                        </div>
+                                        <label class="close"></label>
+                                    </a>
+                                </div>
+                                @if (_user.role_id == 4)
+                                {
+                                    <p class="blockMediator escalation">
+                                        <span>@GlobalRes.EscalationMediator.ToLower()</span>
+                                    </p>
+                                }
+                                @if (_user.role_id == 5)
+                                {
+                                    <p class="blockMediator admin admin@{@class_ext}">
+                                        <span>@GlobalRes.AdminMediator.ToLower()</span>
+                                    </p>
+                                }
+                                @if (_user.role_id == 6)
+                                {
+                                    <p class="blockMediator">
+                                        <span>@GlobalRes.Mediator.ToLower()</span>
+                                    </p>
+                                }
+                                @if (_user.role_id == 7)
+                                {
+                                    <p class="blockMediator">
+                                        <span>@GlobalRes.Legalcounsel.ToLower()</span>
+                                    </p>
+                                }
+                                @if ((_user.notepad_tx != null) && (_user.notepad_tx.Trim().Length > 0))
+                                {
+                                    <p class="blockTextMediator">@_user.notepad_tx</p>
+                                }
+                                else
+                                {
+                                    <p class="blockTextMediator">&nbsp;</p>
+                                }
+
+                                <div class="blocksInfo">
+                                    <div class="blockInfo">
+                                        <img src='@Url.Content("/Content/Icons/blockInfo_img1" + @class_ext + ".png")'>
+                                        <label>@_temp_um._location_string</label>
+                                    </div>
+                                    <div class="blockInfo">
+                                        <img src='@Url.Content("/Content/Icons/blockInfo_img2"+@class_ext+".png")'>
+                                        <label>@_user.email</label>
+                                    </div>
+
+                                </div>
+                            </div><!--blockIteamTeam-->
+
+                        }
+                    }
+                </div>
+            </div>
+        </div><!--contentSettings-->
+    </div><!--contentCompanyProfile-->
+</div>
+
+@*<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>*@
+@*<script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>*@
+<script>
+    $(document).ready(function () {
+        //START Open mini menu for mobile
+        function blockActivityHeight() {
+            if ($('#menu').height() < 50) {
+                $('.positionActivityIcon').height(89);
+            }
+            else {
+                $('.positionActivityIcon').height($('#casesHeared').height());
+            }
+        }
+        $('.mainTitle').click(function () {
+            $('.mainTitle + div').toggle();
+            blockActivityHeight();
+        });
+        //----------------END Open mini menu for mobile---------------------------
+
+        function focusEmailSend() {
+            $('.blockSendEmail input,.blockSendEmail textarea')
+             .focus(function () {
+                 var thisElement = $(this);
+                 thisElement.parent('.blockSendEmail').removeClass('greyBorder redBorder').addClass('greenBorder');
+                 thisElement.parent('.blockSendEmail').find('.closeIcon').show();
+                 thisElement.parent('.blockSendEmail').find('span.sendBtn').show();
+             });    
+        }
+        function focusoutEmailSend() {
+            $('.blockSendEmail').on('mouseleave', function () {
+                var thisElement = $(this);
+                thisElement.removeClass('greenBorder').addClass('greyBorder');
+                thisElement.find('.closeIcon').hide();
+                thisElement.find('span.sendBtn').hide();
+                $('.blockSendEmail input,.blockSendEmail textarea').focusout();
+            });
+        }
+
+        function sendEmail() {
+            $('.blockSendEmail span').click(function () {
+                console.log('sendClick');
+                if ($("#sendEmail").val().trim().length > 0) {
+                    $('.blockSendEmail input').click();
+                    var email = $("#sendEmail").val().trim();
+                    console.log(email);
+                    createInvitation();
+                }
+                else {
+                    $(this).parent('.blockSendEmail').addClass('redBorder');
+                }
+            });
+        }
+        
+        function createInvitation() {
+            $.ajax({
+                method: "POST",
+                url: "/Settings/InviteMediator",
+                data: {
+                    email: $("#sendEmail").val().trim(),
+                }
+            }).done(function (data) {//data from server
+                if (data != 'completed') {
+                    alert(data);
+                    //console.log(data);
+                }
+                else {
+                    $("#sendEmail").val('');
+                    //    location.reload();
+                    alert('@GlobalRes.InvitationSuccessfull');
+                }
+            }).fail(function (error) {
+                console.log(error);
+            });
+        }
+
+
+        focusEmailSend();
+        focusoutEmailSend();
+        sendEmail();
+    });
+
+</script>

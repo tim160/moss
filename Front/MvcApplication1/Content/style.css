@@ -1,0 +1,1666 @@
+html, body {
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+@font-face {
+    font-family: OpenSansBold;
+     src: url('fonts/opensansbold-webfont.eot?') format('embedded-opentype'),
+     url(fonts/OpenSans-Bold.ttf) format('truetype');
+}
+@font-face {
+    font-family: OpenSans;
+    src: url('fonts/opensans-webfont.eot?') format('embedded-opentype'),
+     url(fonts/OpenSans.ttf) format('truetype');
+}
+@font-face {
+    font-family: OpenSans-Light;
+    src: url('fonts/opensans-light-webfont.eot?') format('embedded-opentype'),
+     url(fonts/OpenSans-Light.ttf) format('truetype');
+}
+@font-face {
+    font-family: LatoHeavy;
+    src: url(fonts/lato-heavy.ttf);
+}
+@font-face {
+    font-family: LatoLight; 
+    src: url(fonts/Lato-Light.ttf);
+}
+@font-face {
+    font-family: LatoBlack;
+    src: url(fonts/Lato-Black.ttf);
+}
+@font-face {
+    font-family: LatoSemibold;
+    src: url(fonts/Lato-Semibold.ttf);
+}
+@font-face {
+    font-family: LatoLightItalic;
+    src: url(fonts/Lato-LightItalic.ttf);
+}
+@font-face {
+    font-family: LatoMedium;
+    src: url(fonts/Lato-Medium.ttf);
+}
+    
+#main {
+    width: 100%;
+    /*max-width: 1440px;*/
+    height: 100%;
+    margin: 0 auto;
+}
+#wrap {
+    width: 100%;
+    height: 100%;
+    background-image: url(img/website-report.jpg);
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
+}
+@font-face {
+    font-family: LatoRegular; 
+    src: url(fonts/Lato-Regular.ttf); 
+}
+#header {
+  background-color: rgba(255, 255, 255, 0.7);
+  width: 100%;
+  height: 70px;
+  margin: 0 auto;
+}
+.positionLogo {
+    position: relative;
+    float: left;
+    margin-top: 20px;
+    margin-left: 80px;
+}
+.positionButton {
+    position: relative;
+    float: right;
+    margin-top: 22px;
+    margin-right: 80px;
+}
+.blueLogo {
+    background: url(img/logo.png);
+    background-repeat: no-repeat;
+    width: 202px;
+    height: 36px;
+    cursor: pointer;
+}
+.positionButtonGreen {
+    position: relative;
+    float: right;
+    margin-top: 22px;
+    margin-right: 80px;
+}
+.bigButtonGreen span {
+  text-align: center;
+  display: block;
+  padding: 5px;
+  cursor: pointer;
+}
+.bigButtonGreen {
+    color: #FFFFFF;
+    width: 160px;
+    height: 30px;
+    background-color: rgb(85, 149, 156);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(66, 117, 122);
+    border-radius: 2px;
+    font-size: 14px;
+    font-family: OpenSans;
+    font-weight: bold;
+}
+.bigButtonGreen:hover {
+    background-color: #42757a;
+    border-color: #305458;
+}
+    .bigButtonGreen:active {
+        background-color: #345c60;
+        border-color: #345c60;
+    }
+.bigButtonGreen a {
+      text-decoration: none;
+    text-align: center;
+    display: block;
+    padding: 5px;
+    cursor: pointer;
+      margin: 0 auto;
+  background-color: rgb(251, 94, 45);
+  border-color: rgb(199, 75, 36);
+    color: #FFFFFF;
+}
+.bigButton {
+    color: #FFFFFF;
+    background-color: rgb(251, 94, 45);
+    border-color: rgb(199, 75, 36);
+    width: 170px;
+    height: 40px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 2px;
+    font-size: 16px;
+    font-family: OpenSans;
+    font-weight: bold;
+    display: block;
+    box-sizing: border-box;
+}
+.bigButton:hover {
+    background-color: #e74918;
+    border-color: #c74b24;
+}
+    .bigButton:active {
+        background-color: #db3a08;
+        border-color: #ba350b;
+    }
+.bigButton a {
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    padding-top: 7px;
+    cursor: pointer;
+    margin: 0 auto;
+    color: #FFFFFF;
+}
+
+.positionLogin {
+    position: relative;
+    float: left;
+    margin-top: 27px;
+    margin-right: 95px;
+}
+.leftText p {
+  margin-right: 20%;
+}
+.login {
+    color: rgb(5, 181, 162);
+    font-family: OpenSansBold;
+    cursor: pointer;
+}
+.login:hover {
+    color: #42757a;
+    text-decoration: underline;
+}
+.login:active {
+    text-decoration: none;
+    color: #345c60;
+}
+#topBody {
+    margin: 0 auto;
+    height: 355px;
+    font-family: 'Lato', sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    color: #FFFFFF;
+    text-align: center;
+}
+#topBodyLanding {
+    margin: 0 auto;
+    height: 270px;
+    color: #FFFFFF;
+    text-align: center;
+    cursor: default;
+    display: table;
+}
+.firstTitle {
+    font-weight: bold;
+    padding-top: 95px;
+    font-size: 40px;
+    padding-bottom: 6px;
+    font-family: LatoHeavy;
+}
+.secondTitle {
+    font-weight: 100;
+    font-size: 26px;
+    font-family: LatoRegular;
+    opacity: 0.8;
+}
+.thirdTitle {
+    margin-top: 50px;
+}
+.fourthTitle {
+    padding-top: 35px;
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+    color: #05b5a2;
+    font-size: 32px;
+    font-weight: bold;
+}
+.positionIcons {
+    width: 100%;
+    height: 100px;
+    position: relative;
+}
+.IE10.centerBlock2 {
+    display: block;
+}
+.IE11.centerBlock2 {
+    display: block;
+}
+#specialInput {
+    width: 432px;
+    text-decoration: none;
+    height: 40px;
+    font-size: 20px;
+    padding: 2px;
+    margin-left: -87px;
+    font-family: 'OpenSans-Light';
+    padding-left: 20px;
+    color: rgba(75, 104,108,0.5);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5) inset;
+    border: 1px solid #666;
+}
+#specialInput:focus {
+    font-family: 'OpenSans-Light';
+    text-transform: uppercase;
+    color: rgba(56,73,77, 1);
+    font-weight: bold;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.5) inset;
+    border: 1px solid #666;
+}
+#buttonStart {
+    width: 87px;
+    height: 46px;
+    background-color: rgb(251, 94, 45);
+    display: inline;
+    position: absolute;
+}
+#buttonStart:hover {
+    background-color: rgb(231, 73, 24);
+}
+.buttonStartText {
+    display: block;
+    padding: 13px;
+    font-family: OpenSans;
+    font-weight: bold;
+}
+#bottomBody {
+    height: 420px;
+    background-color: rgba(34, 79, 79, 0.5);
+}
+#footer4 {
+    background-color: #edf0f0;
+    font-size: 14px;
+    font-family: LatoRegular;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    align-content: stretch;
+    height: 280px;
+}
+.employeeConfidential2 {
+    opacity: 0.5;
+    font-size: 12px;
+}
+ #footer4 div a {
+    padding: 0.8em;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #4b686c;
+    text-decoration: none;
+}
+
+.greenLogo {
+    background: url(img/logo2.png);
+    background-repeat: no-repeat;
+    width: 215px;
+    height: 37px;
+}
+
+.paddingFooter a {
+    text-decoration: none; 
+    padding-left: 95px;
+}
+.icons {
+    margin: 25px auto;
+    width: 75%;
+    text-align: center;
+    height: 72%;
+}
+.centerBlock {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    color: rgba(255,255,255,0.6);
+}
+.positionFirstBlock {
+    margin: 0 auto;
+    float: left;
+    word-wrap: inherit;
+    height: 100%;
+    width: 25%;
+    min-width: 157px;
+}
+.hoverClassFirstBlock {
+    margin: 0 auto;
+    width: 80%;
+    height: 100%;
+    min-width: 157px;
+}
+.hoverClassFirstBlock:hover {
+    color: rgba(255,255,255,0.8);
+    background-color: rgba(20, 68, 70, 0.8);
+}
+.hoverClassFirstBlock:hover #firstIcon{
+    background-position-x: -120px;
+    background-position-y: 0px;
+}
+.hoverClassSecondBlock {
+    margin: 0 auto;
+    width: 80%;
+    height: 100%;
+    min-width: 157px;
+}
+.hoverClassSecondBlock:hover {
+    color: rgba(255,255,255,0.8);
+    background-color: rgba(20, 68, 70, 0.8);
+}
+.hoverClassSecondBlock:hover #secondIcon{
+    background-position: 533px 0;
+}
+.hoverClassThirdBlock {
+    margin: 0 auto;
+    width: 80%;
+    height: 100%;
+    min-width: 157px;
+}
+.hoverClassThirdBlock:hover {
+    color: rgba(255,255,255,0.8);
+    background-color: rgba(20, 68, 70, 0.8);
+}
+.hoverClassThirdBlock:hover #thirdIcon{
+    background-position: 301px 1px;
+}
+.hoverClassFourthBlock {
+    margin: 0 auto;
+    width: 80%;
+    height: 100%;
+    min-width: 157px;
+}
+.hoverClassFourthBlock:hover {
+    color: rgba(255,255,255,0.8);
+    background-color: rgba(20, 68, 70, 0.8);
+}
+.hoverClassFourthBlock:hover #fourthIcon {
+    background-position: 172px 0px;
+}
+.positionSecondBlock {
+    margin: 0 auto;
+    float: left;
+    word-wrap: inherit;
+    width: 25%;
+    height: 100%;
+    min-width: 157px;
+}
+.positionThirdBlock {
+    margin: 0 auto;
+    float: left;
+    word-wrap: inherit;
+    width: 25%;
+    height: 100%;
+    min-width: 157px;
+}
+.positionFourthBlock {
+    margin: 0 auto;
+    float: left;
+    word-wrap: inherit;
+    width: 25%;
+    height: 100%;
+    min-width: 157px;
+}
+.positionFifthBlock {
+    margin: 0 auto;
+    float: left;
+    word-wrap: inherit;
+    width: 25%;
+    height: 100%;
+    min-width: 157px;
+}
+.empty {
+    height: 10px;
+    width: 1px;
+}
+/*#firstIcon {
+    background: url(img/iconHover.png) no-repeat;
+    background-position-x: 0px;
+    background-position-y: 0px;
+    width: 98px;
+    height: 65px;
+    margin: 0 auto;
+    max-width: 98px;
+}
+#secondIcon {
+    background: url(img/iconHover.png);
+    background-position: 681px 0;
+    width: 138px;
+    height: 73px;
+    margin: 0 auto;
+    max-width: 138px;
+}
+#thirdIcon {
+    background: url(img/iconHover.png);
+    background-position: 381px 0;
+    width: 75px;
+    height: 78px;
+    margin: 0 auto;
+    max-width: 75px;
+}
+#fourthIcon {
+    background: url(img/iconHover.png);
+    background-position: 80px 0;
+    width: 80px;
+    height: 82px;
+    margin: 0 auto;
+    max-width: 80px;
+}*/
+.title {
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: #FFFFFF;
+}
+.textBlock {
+    font-family: LatoRegular;
+    font-size: 16px;
+    display: inline-block;
+    max-width: 270px;
+    padding: 20px 50px 0 50px;
+    overflow: hidden;
+}
+
+#positionThirdAndFourth  {
+    width: 100%;
+    height: 100%;
+}
+.casesBlockContentLeft,
+.casesBlockContentRight{
+    float: left;
+    width: 50%;
+}
+.casesBlockContentLeft .caseBlock{
+    width: 490px;
+    /*width: 51.5%;*/
+    background: #ffffff;
+    float: right;
+    margin-right: 70px;
+}
+.centerBlock2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+#benefits .positionFirstBlock,
+#benefits .positionSecondBlock,
+#benefits .positionThirdBlock,
+#benefits .positionFourthBlock,
+#benefits .positionFifthBlock {
+    text-align: center;
+    width: 20%;
+}
+.second {
+    width: 100%;
+    height: 200px;
+}
+.second .bigButton {
+    margin: 0 auto;
+    margin-top: 80px;
+}
+
+@media (max-width: 1000px) {
+
+    .centerBlock2 {
+        flex-direction: column;
+    }
+    .centerBlock2 .title {
+        float: left;
+        text-align: center;
+        width: 100%;
+    }
+    #benefits .positionFirstBlock, #benefits .positionSecondBlock, #benefits .positionThirdBlock, #benefits .positionFourthBlock, #benefits .positionFifthBlock {
+        width: 100%;
+        padding-top: 30px;
+        padding-bottom: 20px;
+    }
+    .secondTitle {
+        padding: 0 10px 0 10px;
+    }
+    #casesBlock {
+        display: table;
+        padding-bottom: 30px;
+        margin: 0 auto;
+    }
+    
+    .casesBlockContentLeft .caseBlock,
+    .casesBlockContentRight .caseBlock {
+        float: none !important;
+        margin: auto !important;
+    }
+        #casesBlock h1.title {
+  font-size: 30px !important;
+  /*padding-left: 5% !important;*/
+}
+
+    #casesBlock p.title {
+  /*padding-left: 5% !important;*/
+  padding-bottom: 50px;
+}
+    .casesBlockContentLeft {
+        float: none;
+        margin: 0 auto;
+        width: 90%;
+    }
+    .casesBlockContentRight {
+        float: none;
+        margin: 0 auto;
+        width: 90%;
+        padding-top: 30px;
+    }
+
+}
+
+@media screen and (max-width: 872px) {
+    .icons {
+        width: 90%;
+    }
+    .hoverClassFirstBlock {
+        height: 75%;
+    }
+    .hoverClassSecondBlock {
+        height: 75%;
+    }
+    .positionThirdBlock {
+        height: 80%;
+    }
+    .positionFourthBlock {
+        height: 85%;
+    }
+
+}
+@media screen and (max-width: 700px) {
+    #secondIcon {
+        background-size: auto;
+    }
+    .positionButtonGreen {
+        margin-right: 10px;
+    }
+
+}
+#medianLossBlock .blockTop{
+    width: 70%;
+    margin: 0 auto;
+    display: table;
+    padding-top: 50px;
+    margin-bottom: 130px;
+}
+@media screen and (max-width: 717px) {
+    #bottomBody {
+        display: table;
+        width: 100%;
+    }
+    #medianLossBlock .blockTop {
+        width: 80%;
+    }
+
+}
+
+@media screen and (max-width: 580px) {
+    #bottomBody {
+        display: table;
+    }
+    #positionThirdAndFourth {
+        float: left;
+    }
+
+}
+@media screen and (max-width: 580px) {
+    #specialInput {
+        width: 65%;
+    }
+}
+@media screen and (max-width: 365px) {
+    .positionFirstBlock {
+        width: 100%;
+    }
+    .positionSecondBlock {
+        width: 100%;
+    }
+    .positionThirdBlock {
+        width: 100%;
+    }
+    .positionFourthBlock {
+        width: 100%;
+    }
+}
+#footer ul {
+    width: 100%;
+  height: 100%;
+  text-align: center;
+}
+#footer li {
+    float: left;
+}
+li {list-style-type: none;}
+li a {
+    text-decoration: none;
+    color: #4b686c;
+}
+li a:visited {
+    text-decoration: none;
+    color: #4b686c;
+}
+li a:hover {
+    text-decoration: none;
+    color: #4b686c;
+}
+#contact {
+    margin-left: 8%;
+    float: left;
+    padding-top: 56px;
+}
+#privacy {
+    margin-left: 8%;
+    float: left;
+    padding-top: 56px;
+}
+#terms {
+    margin-left: 10%;
+    float: left;
+    padding-top: 56px;
+}
+#firstLogo {
+    margin-left: 2%;
+    padding-top: 30px;
+}
+#secondLogo {
+    margin-left: 4%;
+    padding-top: 30px;
+}
+#benefits {
+    min-height: 560px;
+    cursor: default;
+    display: table;
+    width: 100%;
+}
+.positionTitle {
+    text-align: center;
+    padding-top: 47px;
+}
+.greenTitle {
+    font-family: LatoRegular;
+    font-size: 30px;
+    color: rgb(5, 181, 162);
+}
+.secondPositionTitle {
+    text-align: center;
+    font-weight: 100;
+    font-size: 18px;
+    font-family: LatoRegular;
+    opacity: 0.8;
+    color: #4b686c;
+}
+.positionIcons2 {
+    padding-top: 60px;
+    margin: 0 auto;
+    width: 1360px;
+}
+#benefits #firstIcon {
+    background: url(icons/first.png) no-repeat;
+    width: 98px;
+    height: 54px;
+    max-width: 98px;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+}
+#benefits #secondIcon {
+    background: url(icons/second.png) no-repeat;
+    width: 73px;
+    height: 80px;
+    margin: 0 auto;
+    max-width: 73px;
+}
+#benefits #thirdIcon {
+    background: url(icons/third.png) no-repeat;
+    width: 80px;
+    height: 72px;
+    margin: 0 auto;
+    max-width: 80px;
+}
+#benefits #fourthIcon {
+    background: url(icons/fourth.png) no-repeat;
+    width: 64px;
+    height: 77px;
+    margin: 0 auto;
+    max-width: 64px;
+}
+#benefits #fifthIcon {
+    background: url(icons/fifth.png) no-repeat;
+    width: 87px;
+    height: 77px;
+    margin: 0 auto;
+    max-width: 87px;
+}
+#benefitsIcons {
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 65px;
+    height: 50%;
+}
+
+#benefits .title {
+    color: rgb(5, 181, 162);
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+}
+#benefits .textBlock {
+    color: rgb(75, 104, 108);
+}
+#benefits .positionButton {
+    float: none;
+    margin: 40px auto;
+}
+#benefits .bigButton {
+    margin: 0 auto;
+    background-color: rgb(251, 94, 45);
+    border-color: rgb(199, 75, 36);
+}
+#howItWorks {
+    background-color: rgb(229, 243, 242);
+    width: 100%;
+    cursor: default;
+    display: table;
+}
+
+.latoHeavyText {
+    font-family: LatoBlack;
+    font-size: 24px;
+    text-align: right;
+    text-transform: uppercase;
+    padding-bottom: 30px;
+    color: rgb(5, 181, 162);
+}
+.heavyTextBlock {
+    margin-right: 20%;
+    margin-left: 20%;
+    text-align: right;
+    font-family: LatoRegular;
+    font-size: 20px;
+    color: rgb(75, 104, 108);
+}
+#response .latoHeavyText, #analysis .latoHeavyText {
+    color: rgb(229, 243, 242);
+    margin-left: 20%;
+    text-align: left;
+}
+.positionScreen {
+    float: left;
+    margin-right: 10px;
+}
+#firstScreen {
+    float: left;
+    width: 100%;
+}
+    #firstScreen img {
+        width: 100%;
+    }
+#response {
+    display: table;
+    width: 100%;
+    cursor: default;
+    background-color: rgb(140, 201, 195);
+}
+#secondScreen {
+    width: 100%;
+}
+#secondScreen img{
+    width: 100%;
+}
+.positionResponse {
+    padding-top: 100px;
+}
+.leftText {
+    float: left;
+    width: 52%;
+}
+.rightText {
+    float: left;
+    width: 52%;
+}
+.rigthImage {
+    float: left;
+    /*width: 800px;*/
+    width: 42%;
+    margin-right: 10px;
+}
+.leftImage {
+    float: left;
+    width: 42%;
+    margin-left: 6%;
+}
+/*
+@media (min-width: 640px) and (max-width: 800px) {
+    .leftText {
+        width: 100%;
+        margin: 0 auto;
+    }
+    .rightText {
+        width: 100%;
+        margin: 0 auto;
+    }
+    .rigthImage {
+        float: right;
+        width: 600px;
+    }
+    .leftImage {
+        float: left;
+        width: 600px;
+    }
+}
+    */
+#response .heavyTextBlock,
+#analysis .heavyTextBlock {
+    color: rgb(229, 243, 242);
+    text-align: left;
+}
+.casesBlockContentRight .caseBlock{
+    width: 490px;
+    /*width: 51.5%;*/
+    background: #ffffff;
+    float: left;
+    margin-left: 70px;
+}
+#privateCompanies .viewHouse{
+  width: 550px;
+  margin: 30px auto;
+  text-align: center;
+}
+#privateCompanies .text {
+    display: table;
+    width: 555px;
+}
+#medianLossBlock .block {
+    width: 33%;
+    float: left;
+    text-align: center;
+}
+
+.positionSecondScreen {
+    float: left;
+    margin-left: 10px;
+}
+
+#investigation {
+    width: 100%;
+    /*height: 578px;*/
+    display: table;
+    background-color: rgb(229, 243, 242);
+    cursor: default;
+}
+#thirdScreen {
+    width: 100%;
+}
+#thirdScreen img{
+    width: 100%;
+}
+#fourthScreen {
+    width: 100%;
+}
+#fourthScreen img{
+    width: 100%;
+}
+#analysis {
+    /*height: 570px;*/
+    display: table;
+    width: 100%;
+    background-color: rgb(140, 201, 195);
+    cursor: default;
+}
+.second .positionButton {
+    float: none;
+    margin: 0 auto;    
+    margin-left:auto;
+    margin-right:auto;
+    width:160px;
+    height:30px;
+}
+/*.second .positionButton .bigButton {
+    background-color: rgb(251, 94, 45);
+  border-color: rgb(199, 75, 36);
+  margin: auto;
+}*/
+.first {
+    width: 100%;
+    padding-top: 100px;
+    height: 130px;
+    background-color: rgb(74, 104, 108);
+    margin-bottom: 0px;
+    padding-bottom: 3px;
+}
+.first .positionButton {
+    float: none;
+    margin: 0 auto;
+}
+.first .bigButton {
+    margin: 0 auto;
+}
+.emptyBlock {
+    width: 100%;
+    height: 232px;
+}
+#hero {
+    background: url(img/123.jpg) no-repeat;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+}
+.bigButton span {
+  text-align: center;
+  display: block;
+  padding: 5px;
+  cursor: pointer;
+}
+#startBuilding .positionButton{
+    float: none;
+    margin-top: 0px;
+    margin-right: 0px;
+}
+.emptyBlock{
+    background-color: rgb(140, 201, 195);
+}
+.emptyBlock p, .emptyBlockSecond p{
+    font-family: LatoLight;
+    color: #ffffff;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 26px;
+    font-weight: normal;
+    padding-top: 73px;
+    padding-bottom: 10px;
+    margin-top: 0px;
+    cursor: default;
+}
+
+/*Cases Block*/
+#casesBlock{
+    background: url("img/casesBackground.png");
+    width: 100%;
+    height: 950px;
+    cursor: default;
+    background-size: cover;
+}
+#casesBlock h1.title{
+    font-family: LatoHeavy;
+    margin-top: 0px;
+    font-size: 39px;
+    color: #ffffff;
+    padding-left: 15%;
+    padding-top: 135px;
+    margin-bottom: 10px;
+}
+#casesBlock p.title{
+    font-family: LatoRegular;
+    margin-top: 0px;
+    font-size: 25px;
+    color: #ffffff;
+    padding-left: 15%;
+    padding-bottom: 90px;
+}
+#casesBlock .caseTop h1{
+    font-family: LatoSemibold;
+    margin-top: 0px;
+    font-size: 23px;
+    color: #05b5a2;
+}
+#casesBlock .caseTop p{
+    font-family: LatoRegular;
+    margin-top: 0px;
+    font-size: 15px;
+    color: #4b686c;
+    margin-bottom: 0px;
+    padding-left: 10px;
+}
+#casesBlock .caseTop {
+    padding-top: 50px;
+    padding-left: 44px;
+    padding-right: 44px;
+    padding-bottom: 50px;
+}
+#casesBlock .caseMiddle {
+    background: #6f8689;
+    text-align: center;
+    color: #ffffff;
+    padding-top: 28px;
+    padding-left: 75px;
+    padding-right: 75px;
+    padding-bottom: 50px;
+}
+#casesBlock .caseMiddle h1{
+    margin-top: 0px;
+    margin-bottom: 25px;
+    font-size: 30px;
+    font-family: LatoSemibold;
+}
+#casesBlock .caseMiddle p{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-family: LatoLightItalic;
+    font-size: 20px;
+}
+#casesBlock .caseBottom{
+    font-family: LatoRegular;
+    font-size: 13px;
+    text-align: left;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    /*padding-right: 40px;*/
+    width: 100%;
+}
+.textCaseBottom {
+    color: #4b686c;
+    padding-left: 250px;
+    text-align: left;
+    padding-left: 230px;
+}
+#casesBlock .caseBottom span,
+#casesBlock .caseBottom a{
+    color: #05b5a2;
+    cursor: pointer;
+}
+#casesBlock .casesBlockContentRight .caseTop{
+    padding-bottom: 68px;
+}
+.arrow:before {
+    color: #05b5a2;
+    content: "\2192";
+    font-size: 15px;
+}
+.textCaseBottom:hover + .arrow {
+    padding-right: 20px !important;
+}
+#casesBlock .caseBottom .arrow{
+    margin-left: 10px;
+    float: right;
+    cursor: pointer;
+    padding-right: 40px;
+}
+#screen {
+    padding-top: 18px;
+}
+#screen3 {
+    padding-top: 6px;
+}
+/*House Block*/
+#privateCompanies{
+    cursor: default;
+}
+#privateCompanies h1.title{
+    text-align: center;
+    font-family: LatoRegular;
+    font-size: 25px;
+    color: rgb(5, 181, 162);
+    padding-top: 70px;
+    text-transform: uppercase;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+#privateCompanies p.title{
+    text-align: center;
+    font-family: LatoRegular;
+    font-size: 23px;
+    color: #4b686c;
+    padding-top: 80px;
+    margin-top: 0px;
+}
+
+#privateCompanies .text p{
+    /*width: 47%;*/
+    float: left;
+    margin-top: 0px;
+}
+
+#privateCompanies .text p:first-child{
+    width: 255px;
+    font-size: 26px;
+    line-height: 26px;
+    text-align: right;
+    padding-right: 10px;
+    color: #fb5e2d;
+    font-family: LatoRegular;
+}
+#privateCompanies .text p:last-child{
+    width: 270px;
+    font-size: 18px;
+    line-height: 25px;
+    text-align: left;
+    margin-top: 5px;
+    padding-left: 10px;
+    color: #4b686c;
+    font-family: LatoRegular;
+}
+#privateCompanies .blockImg {
+    text-align: center;
+    padding-bottom: 90px;
+    padding-top: 10px;
+}
+/*medianLoss*/
+#medianLoss{
+    background: url("img/backgroundMedianLoss.png");
+    width: 100%;
+    cursor: default;
+}
+#medianLoss p{
+    text-align: center;
+    font-family: LatoRegular;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 25px;
+    font-style: normal;
+    color: #4b686c;
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+/*medianLossBlock*/
+#medianLossBlock{
+    cursor: default;
+}
+
+#medianLossBlock .block .blockImg {
+    height: 115px;
+}
+
+#medianLossBlock .block .price{
+    font-size: 30px;
+    color: #fb5e2d;
+    font-family: LatoRegular;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+#medianLossBlock .block .text{
+    font-size: 13px;
+    color: #4b686c;
+    font-family: LatoMedium;
+    margin-bottom: 0px;
+    margin-top: 8px;
+}
+#medianLossBlock .blockBottom{
+    width: 60%;
+    margin: 0 auto;
+    display: table;
+}
+#noneFloat {
+    height: 100%;
+    width: 900px;
+    margin: 0 auto;
+    display: table;
+}
+@media screen and (max-width: 1141px) {
+    .casesBlockContentLeft .caseBlock {
+        margin-left: 10px;
+    }
+    .casesBlockContentRight .caseBlock {
+        margin-left: 10px;
+    }
+}
+#medianLossBlock .blockBottom .blockLeft,
+#medianLossBlock .blockBottom .blockRight{
+    padding-right: 0px;
+    padding-left: 0px;
+    width: 50%;
+    float: left;
+    text-align: center;
+}
+#medianLossBlock .blockBottom .blockLeft img,
+#medianLossBlock .blockBottom .blockRight img{
+    float: left;
+}
+#medianLossBlock .blockBottom .blockLeft .content,
+#medianLossBlock .blockBottom .blockRight .content{
+    float: right;
+    width: 73%;
+    text-align: left;
+}
+#medianLossBlock .source{
+    color: #b3bdbe;
+    font-family: LatoRegular;
+    font-size: 13px;
+    padding-top: 80px;
+    text-align: center;
+}
+#medianLossBlock .blockBottom .title{
+    font-family: LatoRegular;
+    color: #4b686c;
+    font-size: 24px;
+    margin-bottom: 35px;
+    padding-right: 50px;
+    margin-top: 0px;
+}
+#medianLossBlock .blockBottom .content .title{
+    font-family: LatoRegular;
+    color: #fb5e2d;
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+#medianLossBlock .blockBottom .content .text,
+#medianLossBlock .blockBottom .content .miniText{
+    font-family: LatoRegular;
+    color: #4b686c;
+    font-size: 18px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    width: 284px;
+}
+#medianLossBlock .blockBottom .content .miniText{
+    font-family: LatoRegular;
+    color: #b3bdbe;
+    font-size: 12px;
+    margin-bottom: 0px;
+    margin-top: 18px;
+}
+.loginFormHeader {
+    margin: 0 auto;
+    width: 420px;
+    height: 80px;
+    background-color:#4B686C;
+}
+.loginFormHeader p {
+    color: white;
+    padding-top: 15px;
+      font-family: OpenSans;
+  font-weight: bold;
+    border-width: 1px;
+}
+.emptyBlockSecond {
+    background-color: rgb(140, 201, 195);
+    width: 100%;
+    height: 730px;
+    display: table;
+}
+.loginForm {
+    padding-top: 20px;
+    margin: 0 auto;
+    width: 420px;
+    height: 450px;
+    background-color:#587C7E;
+    color: #305458;
+    font-family: LatoSemibold;
+    display: table;
+}
+.loginForm div {
+    background: #eff2f2;
+    margin-left: 21px;
+    margin-right: 17px;
+}
+.loginForm div input{
+        -webkit-appearance: none;
+    border-radius: 0;
+    width: 372px;
+    height: 50px;
+    padding-top: 0px;
+    padding-left: 8px;
+    margin-left: 0px;
+    text-indent: 2px;
+    background-color: #eff2f2;
+    outline: none;
+    line-height: 0px;
+    border: none;
+    border-bottom: 1px solid #ced7d8;
+    font-size: 18px;
+    color: #305458;
+}
+.loginForm label {
+    top: 0px; 
+    right: 0px; 
+    padding-left: 10px;
+    font-size: 14px;
+    opacity: 0.5;
+}
+
+
+.parent {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: auto;
+    background: none;
+    border: none;
+    outline: none;
+}
+/*
+.bigButton a:hover {
+      background-color: #e74918;
+}
+.bigButton a:active {
+      background-color: #db3a08;
+}*/
+/*.loginForm div.selected {
+    border: 1px solid #05b5a2;
+    background-color: white;
+} 
+.loginForm div.selected input {
+    background-color: white;
+}*/
+
+/*work*/
+.loginForm div:hover {
+    border: 1px solid #05b5a2;
+    background-color: white;
+} 
+.loginForm div:hover input {
+    background-color: white;
+}
+
+/*end work*/
+@media (max-width: 945px) {
+    #medianLossBlock .blockBottom {
+        width: 90%;
+    }
+    #noneFloat {
+        width: 100%;
+    }
+}
+@media (max-width: 810px) {
+    #medianLossBlock .blockBottom .blockLeft,
+    #medianLossBlock .blockBottom .blockRight {
+        width: 90%;
+        margin: auto;
+        display: table;
+        float: none;
+        margin-top: 15px;
+    }
+    #medianLossBlock .blockTop {
+        margin-bottom: 90px;
+    }
+    #medianLossBlock .blockBottom .title {
+        padding-right: 0px;
+    }
+    #medianLossBlock .blockBottom .blockLeft .content,
+    #medianLossBlock .blockBottom .blockRight .content {
+        width: 60% !important;
+    }
+    #noneFloat img{
+        margin-left: 17%;
+    }
+    #medianLossBlock .blockBottom .blockRight{
+        padding-top: 45px;
+    }
+}
+@media (max-width: 687px) {
+    #header {
+        display: table;
+        padding-bottom: 15px;
+    }
+
+    .positionLogin,
+    .positionButton {
+        margin-right: 15px;
+    }
+    #medianLossBlock .blockBottom .blockLeft img,
+    #medianLossBlock .blockBottom .blockRight img {
+        margin-left: 17%;
+    }
+    .emptyBlock p,
+    .emptyBlockSecond p {
+        font-size: 24px;
+    }
+}
+
+/**For IE use*/
+#benefitsIE {
+    min-height: 500px;
+    width: 100%;
+    cursor: default;
+}
+#benefitsIE .positionFirstBlock,
+#benefitsIE .positionSecondBlock,
+#benefitsIE .positionThirdBlock,
+#benefitsIE .positionFourthBlock,
+#benefitsIE .positionFifthBlock {
+    text-align: center;
+    width: 20%;
+}
+@media (max-width: 980px) {
+    .positionLogo {
+        margin-left: 10px;
+    }
+}
+
+@media (max-width: 700px) {
+    .positionFirstBlock,
+    .positionSecondBlock,
+    .positionThirdBlock,
+    .positionFourthBlock {
+        width: 50%;
+    }
+    #positionThirdAndFourth,
+    .centerBlock {
+        display: table;
+    }
+}
+
+
+@media (max-width: 680px) {
+    .blueLogo {
+        margin: auto;
+    }
+
+    #footer .positionLogo {
+        width: 100%;
+        display: table;
+        margin-left: 0px;
+    }
+    #footer div{
+        float: none !important;
+    }
+
+    #footer ul {
+        display: table;
+        display: table;
+        width: 300px;
+        margin: auto;
+        padding-left: 0px;
+    }
+    #footer li {
+        margin-left: 0px;
+        width: 100px;
+        padding-top: 0px;
+    }
+    #footer a {
+        padding-top: 20px;
+        width: 100%;
+        text-align: center;
+    }
+    .employeeConfidential {
+        text-align: center;
+        margin-right: 0px;
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+}
+
+@media (max-width: 490px) {
+    #header {
+        display: table;
+    }
+    .positionLogo {
+        margin-left: 0px;
+        width: 100%;
+    }
+    .blueLogo {
+        margin: auto;
+    }
+    .positionButton {
+        margin-right: 0px;
+    }
+    #header .positionLogo + div {
+        float: none !important;
+        margin: auto;
+        width: 300px;
+        display: table;
+        padding-top: 10px;
+        padding-bottom: 20px;
+    }
+    .positionLogin {
+        margin-right: 0px;
+        margin-left: 20px;
+    }
+    #footer4 {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 430px) {
+    .positionFirstBlock,
+    .positionSecondBlock,
+    .positionThirdBlock,
+    .positionFourthBlock {
+        width: 100%;
+        padding-bottom: 30px;
+    }
+    #specialInput {
+        width: 55%;
+    }
+}
+.loginForm .position {
+    margin: 0 auto;
+    background-color: #587C7E;
+    padding-top: 28px;
+    display: table;
+      box-sizing: border-box;
+}
+/*еще одна бородка*/
+/*@media (max-width: 1500px) {
+    .leftText,
+    .rightText {
+        width: 100%;
+    }
+    .leftImage,
+    .rigthImage {
+        margin: 0 auto;
+        display: block;
+        position: static;
+        top: 60px;
+        right: 1.5rem;
+        float: none;
+    }
+    .latoHeavyText {
+        margin-left: 0!important;
+        margin-right: 0!important;
+    }
+    .leftText p,
+    .rightText p {
+        text-align: center!important;
+    }
+}*/
+/**/
+/**новая Борода*/
+@media (max-width: 640px) {
+    .loginForm .position {
+          padding-bottom: 10px;
+    }
+    .textCaseBottom {
+        padding-left: 10px;
+    }
+    .leftText p, .rightText p {
+        margin: 0 auto;
+    }
+    .leftText,
+    .rightText {
+        width: 100%;
+        float: none;
+    }
+    /**/
+    .latoHeavyText {
+        text-align: center;
+        width: 100%;
+    }
+    .heavyTextBlock {
+        text-align: center !important;
+        width: 100%;
+    }
+    .rigthImage,
+    .leftImage {
+        float: none;
+        width: 100%;
+        margin: 0;
+    }
+    #response .latoHeavyText,
+    #analysis .latoHeavyText {
+        text-align: center;
+        margin: 0 auto;
+    }
+    #medianLossBlock .blockBottom .blockLeft img, #medianLossBlock .blockBottom .blockRight img {
+        float: none;
+        margin: 0 auto;
+        }
+    #privateCompanies .blockImg img{
+        width: 100%;
+    }
+    #privateCompanies .viewHouse img {
+        width: 100%;
+    }
+    #privateCompanies .text {
+        width: 320px;
+    }
+    #casesBlock p.title {
+        margin: 0;
+    }
+    .casesBlockContentLeft .caseBlock,
+    .casesBlockContentRight .caseBlock {
+        width: 90%;
+    }
+    #privateCompanies .viewHouse {
+        width: 320px;
+    }
+    #medianLossBlock .block {
+        width: 100%;
+    }
+    #medianLossBlock .blockBottom .content .text,
+    #medianLossBlock .blockBottom .content .miniText {
+        width: 100%;
+    }
+    #medianLossBlock .blockBottom .blockLeft .content,
+    #medianLossBlock .blockBottom .blockRight .content {
+        float: none;
+        text-align: center;
+        margin: 0 auto;
+    }   
+    .loginFormHeader, 
+    .loginForm {
+        width: 320px;
+    }
+    .loginForm div input {
+        width: 269px;
+        padding-left: 0px;
+        -webkit-appearance: none;
+        -webkit-border-radius:0; 
+        border-radius:0;
+    }
+    #casesBlock .caseMiddle h1 {
+        font-size: 20px;
+    }
+    #casesBlock .caseMiddle {
+        padding-left: 0px;
+        padding-right: 0px;   
+    }
+    #casesBlock .caseTop {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    #casesBlock .caseBottom .arrow {
+        padding-right: 22px;
+    }
+}
+
+/***end*/

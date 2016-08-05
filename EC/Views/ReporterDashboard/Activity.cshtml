@@ -1,0 +1,192 @@
+﻿@using EC.Models;
+@using EC.Models.Database;
+@using EC.App_LocalResources;
+@{
+    ViewBag.Title = GlobalRes.Activity;
+    Layout = "~/Views/Shared/IndexPages/ReporterDashboard.cshtml";
+
+    int user_id = (Int32)ViewBag.user_id;
+    int report_id = (Int32)ViewBag.report_id;
+    ReportModel rm = new ReportModel(report_id);
+    UserModel um = new UserModel(user_id);
+
+    int unread_message_number = um.Unread_Messages_Quantity(report_id, 1);
+
+    List<report_log> actions_log = rm.ReportActions(user_id, rm._report.id);
+
+    string _month_name = "";
+    string _sender_name = "";
+    string _sender_title = "";
+    string _second_name = "";
+    string _string_to_add = "";
+    user _user;
+    user _second_user;
+    action _action;
+    GlobalFunctions glb = new GlobalFunctions();
+    Dictionary<int, string> month = glb.ShortMonth();
+}
+
+@if ((rm._report != null) && (rm._report.id != 0))
+{
+   <div class="settingMenu">
+        <div class="settingMenuItems">
+            <h2 class="mainTitle">@GlobalRes.Menu:</h2>
+            <div>
+                <a href="/ReporterDashboard/Index/@user_id" class="menuItem" style="padding-right:14px;">@GlobalRes.ReportSummaryUp</a>
+                @if (unread_message_number > 0)
+                {
+                    <a href="/ReporterDashboard/Messages/@user_id" class="menuItem" style="padding-right:15px;">
+                        @GlobalRes.Messages
+                        <span>@unread_message_number</span>
+                    </a>
+                }
+                else
+                {
+                    <a href="/ReporterDashboard/Messages/@user_id" class="menuItem" style="padding-right:50px;">
+                        @GlobalRes.Messages
+                    </a>
+                }
+                <a href="/ReporterDashboard/Activity/@user_id" class="menuItem active">@GlobalRes.Activity</a>
+                <a href="/ReporterDashboard/Settings/@user_id" class="menuItem settings" style="margin-right:-2px;">@GlobalRes.Settings</a>
+            </div>
+        </div>
+    </div><!--settingMenu-->
+
+    List<user> mediators = rm._mediators_whoHasAccess_toReport;
+
+    <div class="blockActivity">
+        <div class="headerActivity">
+            <div class="blockCaseMediators">
+                @if (mediators.Count > 0)
+                {
+                    <p class="titleCaseMediators">@GlobalRes.Casemediators:</p>
+
+                    <div class="displayMediators">
+                        @foreach (user _mediator in mediators)
+                        {
+                            <div class="blockMediator">
+                                <div class="blockPhoto">
+                                    <div class="photoPersonal">
+
+                                        @if (_mediator.photo_path.Trim() != "")
+                                        {
+                                            <img src='@Url.Content(_mediator.photo_path.Trim())' />
+                                        }
+                                        else
+                                        {
+                                            <img src='@Url.Content("/Content/Icons/noPhoto.png")'>
+                                        }
+
+                                        
+                                    </div>
+                                </div>
+                                <div class="personalText">
+                                    <p class="title">@_mediator.first_nm @_mediator.last_nm,</p>
+                                    <p class="text">@_mediator.title_ds</p>
+                                </div>
+                            </div><!--blockMediator-->
+                        }
+                    </div><!--displayMediators-->
+                }
+            </div><!--blockCaseMediators-->
+        </div><!--headerActivity-->
+        @foreach (report_log _log in actions_log)
+        {
+            _user = um.GetById(_log.user_id);
+            _month_name = glb.GetShortMonth(_log.created_dt.Month);
+            _action = glb.GetActionById(_log.action_id.Value);
+            _second_name = "";
+            _string_to_add = "";
+            
+            if (_log.second_user_id.HasValue)
+            {
+                _second_user = um.GetById(_log.second_user_id.Value);
+                _second_name = (_second_user.first_nm + " " + _second_user.last_nm).Trim();
+            }
+
+            _sender_name = "";
+            _sender_title = "";
+
+            if (_log.user_id == user_id)
+            {
+                _sender_name =GlobalRes.You + ",";
+            }
+            else
+            {
+                _sender_name = (_user.first_nm + " " + _user.last_nm).Trim() + ",";
+            }
+
+            if (_user.role_id == 8)
+            {
+                if ((rm._report.incident_anonymity_id == 1) || (rm._report.incident_anonymity_id == 2))
+                {
+                    _sender_title = "(" + GlobalRes.anonymous_reporter + ")";
+                }
+                else
+                {
+                    _sender_title = " (" + GlobalRes.Reporter + ")";
+                }
+            }
+            else
+            {
+                _sender_title = _user.title_ds.Trim();
+            }
+
+
+
+            <div class="contentActivity">
+                <div class="contentBlockActivity">
+                    <div class="blockImg">
+                        <img src='@Url.Content(_action.icon_path)'>
+                    </div>
+                    <div class="blockInfo">
+                        <div class="topText">
+                            <span class="title">
+                                <span class="reviewStage">@_action.description_en</span>
+                                @if (_second_name.Length > 0) { _second_name = ": " + _second_name; }    @_second_name
+                                @if ((_log.string_to_add != null) && (_log.string_to_add.Trim().Length > 0))
+                                {
+                                    _string_to_add = ": " +  _log.string_to_add;
+                                }
+                                @_string_to_add
+                            </span>
+
+                            <span class="date">@_log.created_dt.Day.ToString() @_month_name</span>
+                        </div>
+                        <p class="text"><span class="personalName">@_sender_name</span> @_sender_title</p>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div><!--blockActivity-->
+
+}
+
+
+
+
+
+<script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+               
+        //Open mini menu for mobile
+        $('.mainTitle').click(function(){
+            $('.mainTitle+div').toggle();
+        });
+
+        //radioButton
+        var radioBlock = $('.inputBlock');
+        radioBlock.click(function () {
+            var self = $(this);
+            var arrows = self.parent('.inputRadio').parent('.rowBlock').parent('.blockSetting');
+            arrows.find('.rowBlock').find('.inputRadio').css('background', 'rgb(255, 255, 255)');
+            arrows.find('.rowBlock').find('.inputRadio').find('.radioTitle').css('color', 'rgb(174, 181, 183)');
+
+            self.parent('.inputRadio').css('background', 'rgb(242, 247, 247)');
+            self.find('.radioTitle').css('color', 'rgb(60, 62, 63)');
+        });
+    });
+</script>
+

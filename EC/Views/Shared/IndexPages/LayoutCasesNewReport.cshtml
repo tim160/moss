@@ -1,0 +1,642 @@
+﻿@using EC.Models;
+@using EC.Models.Database;
+@using EC.App_LocalResources;
+@{
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
+    String class_ext = ViewBag.cc_extension;
+    //19
+    //bool is_cc = true;
+    //String class_ext = "";
+    //if (is_cc)
+    //{
+    //    class_ext = "_cc";
+    //}
+    
+    
+    //var um2 = (UserModel)ViewBag.um;
+    var user_id = ViewBag.user_id;
+
+    string hrefURL_1 = Request.Url.AbsoluteUri.ToLower();
+
+    EC.Models.UserModel um = new EC.Models.UserModel(user_id);
+    EC.Models.CompanyModel cm = new EC.Models.CompanyModel(um._user.company_id);
+    EC.Models.ReportModel rm = new EC.Models.ReportModel();
+
+        
+    var unread_report_number = um.UnreadReport(0, 0).ToList().Count();
+    var unread_report_number_string = "";
+    string page_subtitle = "";
+    if (unread_report_number > 0)
+    { 
+        unread_report_number_string = unread_report_number.ToString();
+    }
+
+    int unread_message_number = um.Unread_Messages_Quantity(0, 1) + um.Unread_Messages_Quantity(0, 2) + um.Unread_Messages_Quantity(0, 3);
+    var unread_message_number_string = "";
+    if (unread_message_number > 0)
+    { 
+        unread_message_number_string = unread_message_number.ToString(); 
+    }
+
+    int unread_task_number = um.UserTasks( 0, 0,true).ToList().Count();
+    var unread_task_number_string = "";
+    if (unread_task_number > 0)
+    {
+        unread_task_number_string = unread_task_number.ToString();
+    }
+
+    EC.Models.Database.user _user = um.GetById(user_id);
+    EC.Models.Database.company _company = cm.GetById(_user.company_id);
+
+    string report_name = "Case";
+
+    int _report_id = 0;
+    int investigationstatus = 1;
+    string report_color = "", report_color_code = "", report_name_code = "";
+    if ((ViewBag.report_id != null) && ((int)ViewBag.report_id != 0))
+    {
+        _report_id = (int)ViewBag.report_id;
+        rm = new EC.Models.ReportModel(_report_id);
+        
+        report_name = rm._secondary_type_string + " - " + rm._location_string + " - #" + rm._report.display_name;
+        report_name_code = GlobalRes.Newreport + ": #" + rm._report.display_name;
+        report_color = rm._color_descr;
+        report_color_code = rm._color_code;
+        investigationstatus = rm._investigation_status;
+    }
+
+    //EC.Models.ReportModel rm1 = new EC.Models.ReportModel(ViewBag.report_id);
+    string[] _statuses = { GlobalRes.PreReviewUp, GlobalRes.Review, GlobalRes.Investigation, GlobalRes.Resolution, GlobalRes.Closed };
+    string[] _statuses_not_resolved = { GlobalRes.PreReviewUp, GlobalRes.Review, GlobalRes.Investigation, GlobalRes.Resolution, GlobalRes.Closed };
+
+    //string page_subtitle = "Cases"; 
+    //if (ViewBag.page_subtitle != null)
+    //{
+    //    page_subtitle = ViewBag.page_subtitle;
+    //}
+    
+}
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+
+    @*<link href="~/Content/fonts.css" rel="stylesheet" type="text/css">*@
+    <link rel="stylesheet" type="text/css" href="~/Content/main.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/styleReportDashboard.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/styleTasks.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/stylePageMessages.css">
+    <link rel="shortcut icon" type="image/x-icon" src="~/favicon.ico" />
+
+    <link href="~/Content/jquery-ui.css" rel="stylesheet">   
+
+    <title>@ViewBag.Title</title>
+    <!--<link href="styleReportDashboard.min.css" rel="stylesheet">-->
+
+    <script type="text/javascript" src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/lib/jquery-ui.min.js"></script>
+
+    <script src="~/Scripts/View/reportSummary.js"></script>
+</head>
+<body>
+    <input type="hidden" id="_report_id" value="@Html.Raw(_report_id)" />
+    <input type="hidden" id="user_id" value="@Html.Raw(user_id)" />
+
+    <input type="hidden" id="" value="" />
+    
+    <div id="header" class="header@{@class_ext}">
+        <div class="positionLogo">
+            <a href="/cases">
+                <div class="blueLogo"></div>
+            </a>
+        </div>
+        <div class="headerPadding">
+            @{
+                string mainURL = Request.Url.AbsoluteUri.ToLower();
+                string _menuAnalytics = "", _menuTasks = "", _menuMessages = "", _menuCases = "";
+                // Case/Task      - cases and tasks
+                if ((mainURL.Contains("tasks")) || (mainURL.Contains("task/")))
+                {
+                    if ((!mainURL.Contains("analytics")) && (!mainURL.Contains("/case/")))
+                    {
+                        _menuTasks = "active";
+                    }
+                }
+
+                if ((mainURL.Contains("cases")) || (mainURL.Contains("newreport/")) || (mainURL.Contains("case/")))
+                {
+                    _menuCases = "active";
+                }
+
+                if (mainURL.Contains("analytics"))
+                {
+                    _menuAnalytics = "active";
+                }
+                if (mainURL.Contains("messages") && !mainURL.Contains("case/messages/"))
+                {
+                    _menuMessages = "active";
+                }
+            }
+            <div class="position @_menuAnalytics">
+                <a href="/analytics/Index">
+                    <div class="centerPostition">
+                        <div class="positionIconStatistic">
+                            <div id="iconStatistic"></div>
+                        </div>
+                        <span class="textHeader">@GlobalRes.Analytics</span>
+                    </div>
+                </a>
+            </div><!-- end positionStatistic -->
+
+            <div class="position @_menuTasks">
+                <a href="/tasks/Index">
+                    <div class="centerPostition">
+                        <div class="positionIconTasks">
+                            <div id="iconTasks"></div>
+                        </div>
+                        <span class="textHeader">@GlobalRes.Tasks</span>
+                        @if (unread_task_number_string.Length > 0)
+                        {
+                            <span class="badge">@unread_task_number_string</span>
+                        }
+                    </div>
+                </a>
+            </div><!-- end positionStatistic -->
+
+            <div class="positionSpecial @_menuMessages">
+                <a href="/messages/Index">
+                    <div class="centerPostition">
+                        <div class="positionIconMessages">
+                            <div id="iconMessages"></div>
+                        </div>
+
+                        <div class="floatLeft">
+                            <span class="textHeader">@GlobalRes.Messages</span>
+                            @if (unread_message_number_string.Length > 0)
+                            {
+                                <span class="badge">@unread_message_number_string</span>
+                            }
+                        </div>
+                    </div>
+                </a>
+            </div><!-- end positionStatistic -->
+
+            <div class="position @_menuCases">
+                <a href="/cases/Index">
+                    <div class="centerPostition">
+                        <div class="positionIconCases">
+                            <div id="iconCases"></div>
+                        </div>
+                        <span class="textHeader">@GlobalRes.Cases</span>
+                        @if (unread_report_number_string.Length > 0)
+                        {
+                            <span class="badge">@unread_report_number_string</span>
+                        }
+                    </div><!-- end centerPostition -->
+                </a>
+            </div><!-- end positionStatistic -->
+        </div><!-- end headerPadding -->
+
+        <div class="leftLogo">
+            <div class="leftLogoBorder" style=""></div>
+            <div class="aui-header onclick-menu" tabindex="0">
+                <div class="centerBlock">
+                    @if ((um._user != null) && (um._user.photo_path.Trim() != ""))
+                    {
+                        <img class="secondLogo" src='@Url.Content(um._user.photo_path.Trim())' />
+                    }
+                    else
+                    {
+                        <img src='@Url.Content("/Content/Icons/anonimousReporterIcon.png")' />
+                    }
+                    <ul class="onclick-menu-content">
+                        <li>
+                            <a href="/settings/index/">@GlobalRes.Settings</a>
+                            <!--<button>Settings</button>-->
+                        </li>
+                        <li>
+                            <form action="@Url.Action("Logout", "Base")">
+                                <button>@GlobalRes.Logout</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+                <div class="triangles"></div>
+            </div>
+
+        </div><!--end LeftLogo-->
+    </div><!-- end header -->
+    <div class="menuCasesBlock">
+        <div class="headerBlockTextLeft">
+            @{
+                string hrefURL = Request.Url.AbsoluteUri.ToLower();
+                if (hrefURL.Contains("/settings"))
+                {
+                    hrefURL = "/settings/index";
+                    page_subtitle = GlobalRes.Settings;
+                }
+                if ((hrefURL.Contains("/tasks")))
+                {
+                    if (!mainURL.Contains("analytics"))
+                    {
+                        hrefURL = "/tasks/index";
+                        page_subtitle = GlobalRes.Tasks;
+                    }
+                }
+                if ((hrefURL.Contains("case/")) || (hrefURL.Contains("/cases")) || (hrefURL.Contains("/newreport") || (hrefURL.Contains("case/task/"))))
+                {
+                    hrefURL = "/cases/index";
+                    page_subtitle = GlobalRes.Cases;
+                }
+
+                if (hrefURL.Contains("/analytics"))
+                {
+                    hrefURL = "/analytics/index";
+                    page_subtitle = GlobalRes.Analytics;
+                }
+
+                if (hrefURL.Contains("/messages"))
+                {
+                    hrefURL = "/messages/index";
+                    page_subtitle = GlobalRes.Messages;
+                }
+            }
+            @*<a href="/cases/Index/@{if (String.IsNullOrEmpty(ViewBag.redirect)) { @ViewBag.redirect; }}">*@
+            <a href=@hrefURL>
+                <span class="labelCases">@page_subtitle</span>
+            </a>
+            <span class="labelArrow">></span>
+
+            @if (_report_id != 0)
+            {
+                string overlay_title = GlobalRes.Resolvecase;
+                string textbox_title = GlobalRes.Caseresolution;
+                string normal_button_promotion = GlobalRes.ResolveCaseUp;
+                string left_button_promotion = "";
+
+                string normal_button_value =  Constant.investigation_status_resolution.ToString();
+                string left_button_value = "";// Constant.investigation_status_completed.ToString();
+                
+
+                rm = new ReportModel(_report_id);
+                List<user> mediators = rm._mediators_whoHasAccess_toReport;
+                //<span class="casesDot @report_color"> <span></span></span>
+                <span class="casesDot"> <span style="background: #@report_color_code"></span></span>
+                @Html.Raw("</div>");
+                <div class="headerBlockTextRight">
+                    @{
+                                   hrefURL = Request.Url.AbsoluteUri.ToLower();
+                                   if (hrefURL.Contains("newreport"))
+                                   {
+                                    <span class="text">@report_name_code</span>
+                                   }
+                                   else
+                                   {
+                                    <span class="text">@report_name</span>
+                                   }
+                    }
+
+                </div>
+                if ((investigationstatus > 2 && investigationstatus < 7) || (investigationstatus == 9))
+                {
+                    string Res_or_comp = GlobalRes.Resolve.ToUpper();
+                    if (investigationstatus == 3)
+                    {
+                  ////      left_button_promotion = GlobalRes.CaseCantBeResolved;
+                //////        left_button_value = Constant.investigation_status_completed.ToString();
+                    }
+                  //  if ((investigationstatus == 4) || (investigationstatus == 5) || (investigationstatus == 6))
+                    if ((investigationstatus == 4) || (investigationstatus == 6))
+                    {
+                        Res_or_comp = "";
+                        normal_button_value = "";
+                        left_button_value = "";
+                    }
+                        
+                        
+                    if ((investigationstatus == 9) && (_user.role_id == 4 || _user.role_id == 5))
+                    {
+                        Res_or_comp = GlobalRes.Reopen.ToUpper();
+                        overlay_title = GlobalRes.ReopenCase;
+                        textbox_title = GlobalRes.Description;
+                        normal_button_promotion = GlobalRes.ReopenCaseUp;
+                        normal_button_value = Constant.investigation_status_investigation.ToString();
+
+                    }
+
+
+                    
+                    @Html.Partial("~/Views/Shared/EditorTemplates/CreateTaskModal.cshtml", new ViewDataDictionary {
+                           { "normal_button_promotion", normal_button_promotion },
+                           { "Res_or_comp", Res_or_comp },
+                           { "overlay_title", overlay_title },
+                           { "textbox_title", textbox_title },
+                           {"investigationstatus", investigationstatus },
+                           {"left_button_promotion", left_button_promotion },
+                           {"normal_button_value", normal_button_value },
+                           {"left_button_value", left_button_value }
+                       })
+
+                   @Html.Partial("~/Views/Shared/EditorTemplates/ApproveDialogModal.cshtml", new ViewDataDictionary {
+                           
+                       })
+
+                    if (((rm._investigation_status == Constant.investigation_status_completed || rm._investigation_status == Constant.investigation_status_resolution)) && um._user.role_id != Constant.level_escalation_mediator)
+                    {
+                        <div id="resoveCompletedTopmessage">
+                            <div class="buttonNoneBorderGray">
+                                <div class="textInButton">
+                                    @GlobalRes.Awaitingapproval
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+
+                        if(Res_or_comp.Trim().Length > 0)
+                        { 
+                            <span id="resoveCompletedTopBtn" class="acceptCaseBtn resolveCase">@Res_or_comp</span>
+                        }   
+                    }
+                    if (mediators.Count > 0)
+                    {
+                        <div class="displayMediators">
+                            @foreach (user _mediator in mediators)
+                            {
+                                @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", _mediator.id }, { "is_owner", true } })
+                            }
+                        </div><!--displayMediators-->
+                    }
+                }
+            }
+            else
+            {
+                string CurrentURL = Request.Url.AbsoluteUri.ToLower();
+                string _temp = "";
+                bool flag = false;
+                if (CurrentURL.Contains("/cases"))
+                {
+                    _temp = GlobalRes.Allcases;
+                    flag = true;
+                }
+                if (CurrentURL.Contains("/cases/completed"))
+                {
+                    _temp = GlobalRes.ClosedCases;
+                    flag = true;
+                }
+                if (CurrentURL.Contains("/cases/spam"))
+                {
+                    _temp = GlobalRes.Spamcases;
+                    flag = true;
+                }
+
+                if (CurrentURL.Contains("settings/"))
+                {
+                    _temp = GlobalRes.MyProfile;
+                    flag = true;
+                }
+                if (CurrentURL.Contains("settings/company"))
+                {
+                    _temp = GlobalRes.CompanyProfile;
+                    flag = true;
+                }
+                if (CurrentURL.Contains("settings/mediators"))
+                {
+                    _temp = GlobalRes.CompanyMediators;
+                    flag = true;
+                }
+                if (CurrentURL.Contains("settings/password"))
+                {
+                    _temp = GlobalRes.Password;
+                    flag = true;
+                }
+                if (CurrentURL.Contains("settings/cases"))
+                {
+                    _temp = GlobalRes.CaseSettings;
+                    flag = true;
+                }
+                if (CurrentURL.Contains("settings/user"))
+                {
+                    _temp = GlobalRes.Profile;
+                    flag = true;
+                }
+
+                if (CurrentURL.Contains("tasks/"))
+                {
+                    _temp = GlobalRes.Mytasks;
+                    flag = true;
+                }
+                if (CurrentURL.Contains("tasks/completed"))
+                {
+                    _temp = GlobalRes.Closedtasks;
+                    flag = true;
+
+                }
+                if (CurrentURL.Contains("analytics/index"))
+                {
+                    _temp = GlobalRes.Cases;
+                    flag = true;
+                }
+                if (CurrentURL.Contains("analytics/tasks"))
+                {
+                    _temp = GlobalRes.Tasks;
+                    flag = true;
+                }
+                if (CurrentURL.Contains("analytics/mediators"))
+                {
+                    _temp = GlobalRes.Mediators;
+                    flag = true;
+                }
+                if (CurrentURL.Contains("messages/"))
+                {
+                    _temp = GlobalRes.Allmessages;
+                    flag = true;
+                }
+                if (flag)
+                {
+                    @*<span></span><span></span>*@
+                    @Html.Raw("</div>");
+
+                <div class="headerBlockTextRight">
+                    <span class="text">@_temp</span>
+                </div>
+                }
+            }
+
+            @if ((hrefURL.Contains("/case/")) && (_report_id != 0))
+            {
+                int _investigation_status = rm._investigation_status;
+                if (_investigation_status == 6)
+                {
+                    _investigation_status = 4;
+                }
+
+                <div class="headerPos">
+                    @for (int i = 0; i < 5; i++)
+                    {
+                        if (i < _investigation_status)
+                        {
+                            <div class="positionN active@{@class_ext}">
+                                <span>@_statuses[i]</span>
+                            </div>
+
+                            <div class="polos"></div>
+                        }
+                        else
+                        {
+                            <div class="positionN">
+                                <span>@_statuses[i]</span>
+                            </div>
+                            <div class="polos"></div>
+                        }
+
+                    }
+                </div><!--headerPos-->
+            }
+        </div>
+
+
+        @RenderBody()
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                //var button = $(".acceptCaseBtn.resolveCase");
+                var textareaPopup = $('textarea#txtResolve');
+
+                function overlay() {
+                    el = document.getElementById("anotherDialog");
+                    el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+                }
+
+
+                var textareaNewPopup = $('textarea#txtEscalate');
+
+                function overlay_approve() {
+                    el = document.getElementById("approveDialog");
+                    el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+                }
+
+                //, textareaPopup.val(), 1);
+                //function resolveCaseStartWork(){
+                //    button.click(function() {
+                //        overlay();
+                //    });
+                //    $("#dialog-form .close").on('click', function() {
+                //        overlay();
+                //    });
+                //    $(".closeResolved").click(function() {
+                //        $(".blockCreateTaskResolved").hide();
+                //        button.show();
+                //    });
+                //}
+                /*popup*/
+                //dialog = $( "#dialog-form" ).dialog();
+                //function resolveCase(report_id, user_id, description, promotion_id) {
+                //    $.ajax({
+                //        method: "POST",
+                //        url: "/Case/NewStatus",
+                //        data: { report_id : report_id, user_id: user_id, description: description, promotion_id: promotion_id}
+                //    }).done(function(data) {//data from server
+                //        console.log('data', data);
+                //        var str = window.location.href;
+                //        window.location.href = str;
+                //    }).fail(function(error){
+                //        console.log(error);
+                //    });
+                //}
+                /*this need delete if necessary*/
+                @*function resoorcompleteCaseStart(){
+            $('.acceptCaseBtn.promoteCase').click(function(){
+                if(textareaPopup.val() == ""){
+                    textareaPopup.css({'border-color':'red', 'box-shadow':'red'});
+                }
+                else
+                {
+                    resolveCase(@Html.Raw(_report_id), @Html.Raw(user_id), textareaPopup.val(), 0);
+                }
+            });
+        }*@
+                /*this need delete if necessary*/
+                @*function cannotbeResolved(){
+            $('.acceptCaseBtn.cannotBeResolved').click(function(){
+                if(textareaPopup.val() == ""){
+                    textareaPopup.css({'border-color':'red', 'box-shadow':'red'});
+                }
+                else
+                {
+                    resolveCase(@Html.Raw(_report_id), @Html.Raw(user_id), textareaPopup.val(), 1);
+                }
+            });
+        }*@
+                function startClick(){
+                    $('.logButtonModal').click(
+                        function(){
+                            if(textareaPopup[0].value==""){
+                                textareaPopup.css({'border-color':'red', 'box-shadow':'red'});
+                            }
+                            else{
+                                console.log('logButtonModal click - _report_id = ' + @_report_id);
+                            }
+                        }
+                    );
+                    $('.repButtonModal').click(
+                        function(){
+                            if(textareaPopup[0].value==""){
+                                textarea.css({'border-color':'red', 'box-shadow':'red'});
+                            }
+                            else{
+                                console.log('repButtonModal click - _report_id = ' + @_report_id);
+                            }
+                        }
+                    );
+                }
+                //function textareaPopupStyle(){
+                //    textareaPopup
+                //   .focus(
+                //       function(){
+                //           textareaPopup.css({'border-color':'#05b5a2', 'font-weight':'600'});
+                //       }
+                //   )
+                //   .focusout(
+                //       function(){
+                //           if(textareaPopup.val()=="")
+                //               textareaPopup.css('font-weight','400');
+                //       }
+                //   );
+                //}
+
+                //resolveCaseStartWork();
+                //resoorcompleteCaseStart();
+                //cannotbeResolved();
+                startClick();
+                //textareaPopupStyle();
+            });
+        </script>
+
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
+
+
+

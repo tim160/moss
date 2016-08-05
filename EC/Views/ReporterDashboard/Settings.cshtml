@@ -1,0 +1,274 @@
+﻿@using EC.Models;
+@using EC.Models.Database;
+@using EC.App_LocalResources;
+@{
+    ViewBag.Title = GlobalRes.Settings;
+    Layout = "~/Views/Shared/IndexPages/ReporterDashboard.cshtml";
+
+
+    int user_id = (Int32)ViewBag.user_id;
+    int report_id = (Int32)ViewBag.report_id;
+    ReportModel rm = new ReportModel(report_id);
+    UserModel um = new UserModel(user_id);
+
+    int unread_message_number = um.Unread_Messages_Quantity(report_id, 1);
+
+    string confidentiality_level = (string)ViewBag.anon_level;
+    CompanyModel cm = new CompanyModel(rm._report.company_id);
+
+    string confidentiality_description = GlobalRes.Youarecompletelyconfidential;
+    if (rm._report.incident_anonymity_id == 2)
+    {
+        confidentiality_description = string.Format(GlobalRes.Noinformationissharedwith0, cm._company.company_nm);  
+    }
+    if (rm._report.incident_anonymity_id == 3)
+    {
+        confidentiality_description = string.Format(GlobalRes.Wesharecontactwith0, cm._company.company_nm);
+    }
+}
+
+@if ((rm._report != null) && (rm._report.id != 0))
+{
+    <div class="settingMenu">
+        <div class="settingMenuItems">
+            <h2 class="mainTitle">@GlobalRes.Menu:</h2>
+            <div>
+                <a href="/ReporterDashboard/Index/@user_id" class="menuItem" style="padding-right:14px;">@GlobalRes.ReportSummaryUp</a>
+                @if (unread_message_number > 0)
+                {
+                    <a href="/ReporterDashboard/Messages/@user_id" class="menuItem" style="padding-right:15px;">
+                        @GlobalRes.Messages
+                        <span>@unread_message_number</span>
+                    </a>
+                }
+                else
+                {
+                    <a href="/ReporterDashboard/Messages/@user_id" class="menuItem" style="padding-right:50px;">
+                        @GlobalRes.Messages
+                    </a>
+                }
+                <a href="/ReporterDashboard/Activity/@user_id" class="menuItem">@GlobalRes.Activity</a>
+                <a href="/ReporterDashboard/Settings/@user_id" class="menuItem settings active" style="margin-right:-2px;">@GlobalRes.Settings</a>
+            </div>
+        </div>
+    </div><!--settingMenu-->
+
+     <div class="blockSettings">
+        <div class="headerSettings">
+            <div class="titleHeaderSettings">@GlobalRes.ConfidentialityLevel:</div>
+            <div class="blockText">
+                <p class="title">
+                    @confidentiality_level
+                </p>
+                <p class="text">@confidentiality_description</p>
+            </div>
+        </div><!--headerActivity-->
+        @model user
+        @using (Html.BeginForm("UpdateSettings", "ReporterDashboard", Model, FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Hidden("user_id", user_id)
+            
+            <div class="contentSettings">
+                <div class="contentBlockSettings">
+                    <div class="blockSetting">
+                        <p>@GlobalRes.Firstname <span>@GlobalRes.Saved.ToLower()</span></p>
+                        @Html.EditorFor(model => model.first_nm, new { first_nm = "first_nm" })
+                    </div>
+                    <div class="blockSetting">
+                        <p>@GlobalRes.Lastname <span>@GlobalRes.Saved.ToLower()</span></p>
+                        @Html.EditorFor(model => model.last_nm, new { last_nm = "last_nm" })
+                    </div>
+                    <div class="blockSetting">
+                        <p>@GlobalRes.Email<span>@GlobalRes.Saved.ToLower()</span></p>
+                        @Html.EditorFor(model => model.email, new { email = "email" })
+                        <!--<input class="validate text-box single-line" id="email" name="email" type="text" data-validate="email">-->
+                    </div>
+                    <div class="blockSetting">
+                        <p>@GlobalRes.DoYouWantToReceiveUpdates <span>@GlobalRes.Saved.ToLower()</span></p>
+                        @*<input type="text" name="fname" required="">*@
+
+                        <div class="rowBlock">
+                            <div class="fourBlock inputRadio">
+                                <label class="inputBlock" for="1">
+                                    <input id="1" type="radio" name="radioName"><span class="radioButton"></span><span class="radioTitle">@GlobalRes.Yes (@GlobalRes.Instantly)</span>
+                                </label>
+                            </div>
+                            <div class="fourBlock inputRadio">
+                                <label class="inputBlock" for="2">
+                                    <input id="2" type="radio" name="radioName"><span class="radioButton"></span><span class="radioTitle">@GlobalRes.Yes (@GlobalRes.Daily)</span>
+                                </label>
+                            </div>
+                            <div class="fourBlock inputRadio">
+                                <label class="inputBlock" for="3">
+                                    <input id="3" type="radio" name="radioName"><span class="radioButton"></span><span class="radioTitle">@GlobalRes.No</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="post">
+                    <div class="dataPosts">
+                        <div class=" leftblock">
+                            <div class="addDetailsBlock">
+                                <div>
+                                    <div id="saveButton" target="false">@GlobalRes.Saved.ToUpper()</div>
+                                    <input type="button" class="greenButton" value="Update" target="false" />
+                                    <input type="button" class="greenButton" value="Cancel" />
+                                </div>
+                            </div><!--reportBlock-->
+
+                        </div><!--leftBlock-->
+                    </div><!--dataPosts-->
+                </div><!--post-->
+            </div><!--content-->
+
+        }
+    </div><!--blockSettings-->
+
+}
+
+
+    
+
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var form = $(".contentSettings"),
+            cancelButton = $(".greenButton[value=Cancel]"),
+            updateButton = $(".greenButton[value=Update]"),
+            saveDiv = document.getElementById('saveButton'),
+            radioBlock =  form.find('.inputBlock');
+
+
+        @*//Menu
+        //
+        $('.blockReportSummary').css('display', 'none');
+        $('.blockMessages').css('display', 'none');
+        $('.blockActivity').css('display', 'none');
+        $('.blockSettings').css('display', 'table');
+
+        $('h2.menuItem:nth-child(4)').click(function () {
+            location.href = "/ReporterDashboard/Settings/" + @user_id;
+        });
+
+        $('h2.menuItem:nth-child(3)').click(function () {
+            location.href = "/ReporterDashboard/Activity/" + @user_id;
+        });
+
+        $('h2.menuItem:nth-child(2)').click(function () {
+            location.href = "/ReporterDashboard/Messages/" + @user_id;
+        });
+
+        $('h2.menuItem:nth-child(1)').click(function () {
+            location.href = "/ReporterDashboard/Index/" + @user_id;
+        });*@
+
+
+        //Open mini menu for mobile
+        $('.mainTitle').click(function(){
+            $('.mainTitle+div').toggle();
+        });
+
+        $('.blockSetting input')
+            .focus(function(){
+                $(this).parent('.blockSetting').css({'border':'2px solid #05b5a2','width':'99.8%'});
+            })
+            .focusout(function(){
+                $(this).parent('.blockSetting').css({'border':'1px solid #e0e5e6','width':'100%'});
+            });
+        //set value checkBox from database;
+        function setDefaultCheckBox() {
+            var myValue ="#" + "@Html.Raw( um._user.notification_new_reports_flag )";
+            if(myValue) {
+                form.find(myValue).click();
+            }
+        }
+        
+        //radioButton
+        
+        radioBlock.click(function () {
+            var self = $(this);
+            var arrows = self.parent('.inputRadio').parent('.rowBlock').parent('.blockSetting');
+            arrows.find('.rowBlock').find('.inputRadio').css('background', 'rgb(255, 255, 255)');
+            arrows.find('.rowBlock').find('.inputRadio').find('.radioTitle').css('color', 'rgb(174, 181, 183)');
+
+            self.parent('.inputRadio').css('background', 'rgb(242, 247, 247)');
+            self.find('.radioTitle').css('color', 'rgb(60, 62, 63)');
+            self.parents(".blockSetting").css("border", "1px solid rgb(224, 229, 230)");
+        });
+        setDefaultCheckBox();
+        var checkBox = $(".rowBlock input");
+        checkBox.on("click", function () {
+            var temp = $(this);
+            temp.val(temp.attr("id"));
+        });
+
+
+        /*Cancel*/
+        cancelButton.on("click", function () {
+            showMessage("console.log(\"!!!\");");
+        });
+
+        /*Update*/
+        updateButton.on("click", function () {
+            var firstName = document.getElementById('first_nm').value,
+                lastName = document.getElementById('last_nm').value,
+                email = document.getElementById('email').value,
+                checkBox = $(".rowBlock input:checked").attr("id");
+                var data = {
+                    'firstName': firstName,
+                    'lastName' : lastName,
+                    'email' : email,
+                    'checkBox' : checkBox
+                };
+                sendAjax(data);
+        });
+
+        function sendAjax(data) {
+            if (data) {
+                var userId = document.getElementById('userId').getAttribute('data-value');
+                var result = false;
+                $.ajax({
+                    data: { userId: userId, data: data },
+                    url: '@Url.Action("SaveFields", "ReporterDashboard")',
+                    success: function (result) {
+                        console.log(result);
+                        if (result === "True") {
+                            changeButton();
+                        }
+                    }
+                });
+            }
+        }//end function sendAjax()  
+        
+        function saveButtonFunction() {
+            if(saveButton.getAttribute("target") == "true") {
+                changeButton();
+            }
+        }
+        function changeButton() {
+            switch(saveButton.getAttribute("target")) {
+                case "false":
+                    updateButton.hide();
+                    saveDiv.style.display = 'block';
+                    $(".contentSettings input").on('focusout',saveButtonFunction);
+                    $(".inputBlock input").on("change", saveButtonFunction);
+                    saveButton.setAttribute("target", "true");
+                    break;
+                case "true":
+                    updateButton.show();
+                    saveDiv.style.display = 'none';
+                    saveButton.setAttribute("target", "false");
+                    $(".contentSettings input").unbind('focusout', saveButtonFunction);
+                    $(".inputBlock input").unbind("change", saveButtonFunction);
+                    break;
+            }
+        }
+    });
+</script>

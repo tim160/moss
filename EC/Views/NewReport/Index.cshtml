@@ -1,0 +1,617 @@
+﻿@using EC.Models;
+@using EC.Models.Database;
+@using EC.App_LocalResources;
+@{
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
+    String class_ext = ViewBag.cc_extension;
+    //19
+    //bool is_cc = true;
+    //String class_ext = "";
+    //if (is_cc)
+    //{
+    //    class_ext = "_cc";
+    //}
+    
+    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+
+    var user_id = (Int32)ViewBag.user_id;
+    int report_id = (Int32)ViewBag.report_id;
+
+    ReportModel rm = new ReportModel(report_id);
+    UserModel um = new UserModel(user_id);
+
+    bool is_spam = ((rm._investigation_status != 1) && (rm._investigation_status != 2));
+    GlobalFunctions glb = new GlobalFunctions();
+
+    UserModel _last_user_promotion_model = new UserModel();
+    if ((is_spam) && (rm._last_promotion != null))
+    {
+        _last_user_promotion_model = new UserModel(rm._last_promotion.user_id);
+    }
+
+    string[] _statuses = rm.ReportNormalFlowStatusesList();
+    string[] _statuses_not_resolved = rm.ReportNotResolvedFlowStatusesList();
+
+    string report_name = " - #" + rm._report.display_name + " - " + rm._secondary_type_string + " - " + rm._location_string;
+    ViewBag.Title = GlobalRes.NewReportUp + report_name;
+}
+
+<body>
+    <div class="headerPos">
+        @if (report_id != 0)
+{
+    for (int i = 0; i < 5; i++)
+    {
+        if (i < rm._investigation_status)
+        {
+            <div class="positionN active@{@class_ext}">
+                <span>@_statuses[i]</span>
+            </div>
+            <div class="polos"></div>
+        }
+        else
+        {
+                    <div class="positionN">
+                        <span>@_statuses[i]</span>
+                    </div>
+                    <div class="polos"></div>
+                }
+            }
+        }
+        else
+        {
+            <div style="color: #38494d;">@GlobalRes.no_permission</div>
+            <div style="color: #38494d;">@GlobalRes.use_top_panel</div>
+        }
+
+    </div><!--headerPos-->
+    @if (rm._report != null)
+    {
+        <div id="viewReport">
+            <div class="contentViewReport">
+                <div class=" firstposition">
+                    <div class="positionReportIcon">
+                        <div id="reportIcon"></div>
+                    </div>
+                    <div class="position">
+                        <div class="positionTitle">
+                            @if (!is_spam)
+                            {
+                                if (rm._step_days_left == 1)
+                                {
+                                    <div class="title">
+                                        @GlobalRes.report_review_1day
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="title">
+                                        @GlobalRes.report_review @rm._step_days_left.ToString() @GlobalRes.daysleft
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="title">
+                                    @GlobalRes.report_review.
+                                </div>
+                            }
+
+                        </div>
+                        <table id="timeReport">
+                            <tr>
+                                <td class="openSans">@GlobalRes.Reported:</td>
+                                <td class="openSansSemibold">@glb.ConvertDateToLongMonthString(rm._report.reported_dt)</td>
+                            </tr>
+                            <tr>
+                                @if (!is_spam)
+                                {
+                                    <td class="openSans">@GlobalRes.Timeelapsed:</td>
+                                }
+                                else
+                                {
+                                    <td class="openSans">@GlobalRes.Totaltime:</td>
+                                }
+                                @if (rm._total_days == 1)
+                                {
+                                    <td class="openSansSemibold">1 @GlobalRes.day</td>
+                                }
+                                else
+                                {
+                                    <td class="openSansSemibold">@rm._total_days.ToString() @GlobalRes.days1</td>
+                                }
+                            </tr>
+                        </table>
+
+                    </div>
+                </div><!--firstPosition-->
+                @*@if (is_spam)
+                    {
+                        <td class="openSans">Case marked as spam.</td>
+
+                    }*@
+                @if ((is_spam) && (rm._last_promotion != null))
+                {
+                    <div class="blockInfoSpam">
+                        <div class="blockPhoto">
+                            <div class="photoPersonal">
+                                @if (_last_user_promotion_model._user.photo_path.Trim().Length == 0)
+                                {
+                                    <img src='@Url.Content("~/Content/Icons/noPhoto.png")' />
+                                }
+                                else
+                                {
+                                    <img src='@Url.Content(_last_user_promotion_model._user.photo_path.Trim())' />
+                                }
+                            </div><!--blockPhoto-->
+                        </div>
+                        <div class="blockInfoTextSpam">
+                            <p class="textSpamTitle">@GlobalRes.Casemarkedasspam.</p>
+                            <p class="textSpamDate">@_last_user_promotion_model._user.first_nm @_last_user_promotion_model._user.last_nm,@glb.ConvertDateToShortString(@rm._last_promoted_date):</p>
+                            <p class="textSpam">@rm._last_promotion.description</p>
+                        </div>
+
+                    </div>
+                }
+
+
+                @if (!is_spam)
+                {
+                    <!-- accept_case button -->
+                    if (is_cc.Value)
+                    {
+                        <label class="acceptCaseBtn acceptCaseBtn_cc">@GlobalRes.Acceptcase.ToLower()</label>
+                    }
+                    else
+                    {
+                        <label class="acceptCaseBtn">@GlobalRes.Acceptcase.ToLower()</label>
+                    }
+                    <input id="accept_case" type="submit" name="accept_case" />
+                    <!-- mark_spam button -->
+                    <label class="markSpamBtn">@GlobalRes.Markspam.ToLower()</label>
+                    <input id="mark_spam" type="submit" name="mark_spam" />
+                }
+                else
+                {
+                    <div class="buttonBlock">
+                    @*    <label class="spamBtn">@GlobalRes.Spam.ToUpper()</label>
+                        <input id="spam_case" type="submit" name="spam_case" />*@
+
+                        <!-- mark_spam button -->
+
+                        @if (is_cc.Value){
+                            <label class="acceptCaseBtn acceptCaseBtn_cc">@GlobalRes.Reopen.ToUpper()</label>
+                        }
+                        else
+                        {
+                             <label class="acceptCaseBtn">@GlobalRes.Reopen.ToUpper()</label>
+                        }
+                       
+                        <input id="reopen_case" type="submit" name="reopen_case" />
+                    </div>
+                }
+            </div>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                @model message
+
+            <!-- ============================== START Accept case ==================================== -->
+
+                <div class="contentViewReport blockAcceptCase" style="display: none;">
+                    <div class="headerblockButtons">
+                        <!-- mark_spam button -->
+
+                        <div class="closeIcon"></div>
+                    </div>
+                    <div class="contentBlockCase">
+                        <p class="titleCase">@GlobalRes.Acceptcase</p>
+                        <p class="textCace">@GlobalRes.Notification_will_sent_reporter</p>
+                    </div>
+
+                    <form action="" method="post">
+                        <div class="addComment addComment2@{@class_ext}">
+                            <div class="blockPersonal">
+
+                                <div class="blockPhoto">
+                                    @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", user_id }, { "is_owner", true } })
+
+
+                                </div>
+                                <div class="arrow green"></div>
+                            </div>
+
+
+                            <div class="messageText acceptCaseNote">
+                                <textarea cols="20" id="body_text" class="green" name="body_tx" rows="2" autofocus></textarea>
+                            </div>
+                        </div>
+                        <div class="newMessageBtn">
+                            @if (is_cc.Value)
+                            {
+                                <span class="acceptNewCase acceptNewCase_cc">@GlobalRes.Acceptcase.ToLower()</span>
+                            }
+                            else
+                            {
+                                <span class="acceptNewCase">@GlobalRes.Acceptcase.ToLower()</span>                                
+                            }
+                            <input type="submit" value="new message" style="display: none;">
+                        </div>
+                    </form>
+
+                </div>
+
+
+            <!-- ============================== END Accept case ==================================== -->
+            <!-- ============================== START Mark case as spam ==================================== -->
+
+                <div class="contentViewReport blockSpamCase" style="display: none;">
+                    <div class="headerblockButtons">
+
+                        <div class="closeIcon"></div>
+                    </div>
+                    <div class="contentBlockCase">
+                        <p class="titleCase">@GlobalRes.Mark_case_spam</p>
+                        <p class="textCace">@GlobalRes.Notification_will_sent_reporter</p>
+                    </div>
+
+                    <form action="" method="post">
+                        <div class="addComment addComment2@{@class_ext}">
+                            <div class="blockPersonal">
+                                <div class="blockPhoto">
+                                    @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", user_id }, { "is_owner", true } })
+
+
+                                </div>
+                                <div class="arrow green"></div>
+                            </div>
+                            <div class="messageText spamMessage">
+                                <textarea cols="20" id="body_text" class="green" name="body_tx" rows="2" autofocus></textarea>
+                            </div>
+                        </div>
+                        <div class="newMessageBtn">
+                            <span class="markAsSpam">@GlobalRes.Mark_case_spam</span>
+                            <input type="submit" value="new message" style="display: none;">
+                        </div>
+                    </form>
+
+                </div>
+
+    <!-- ============================== END Mark case as spam ==================================== -->
+            }
+        </div><!-- end viewReport-->
+
+        <div id="generalInfo">
+            <div class="firstPosition">
+                <div class="blockGeneralInformation">
+                    <span class="title">@GlobalRes.GeneralInformation</span>
+                    <table class="generalInformation">
+                        <tr>
+                            <td>@GlobalRes.ReportingFrom:</td>
+                            <td>@rm._country_string</td>
+                        </tr>
+                        <tr>
+                            <td>@GlobalRes.Reporterwouldliketostay:</td>
+                            <td>@rm._anonymousLevel_mediatorVersionByCaller(user_id)</td>
+                        </tr>
+                        @if (rm.Get_reporter_name(user_id).ToLower() != EC.App_LocalResources.GlobalRes.anonymous_reporter.ToLower())
+                        {
+                            <tr>
+                                <td>@GlobalRes.Reportername</td>
+                                <td>@rm.Get_reporter_name(user_id)</td>
+                            </tr>
+                        }
+                        <tr>
+                            <td>@GlobalRes.Reporteris:</td>
+                            <td>@rm._reporter_company_relation_short</td>
+                        </tr>
+                        @if (!String.IsNullOrEmpty(rm._report.not_current_employee))
+                        {
+                            <tr>
+                                <td></td>
+                                <td>@rm._report.not_current_employee</td>
+                            </tr>
+                        }
+
+                        <tr>
+                            <td>@GlobalRes.TheIncidentHappenedIn:</td>
+                            <td>@rm._location_string</td>
+                        </tr>
+                        <tr>
+                            <td>@GlobalRes.AffectedDepartment:</td>
+                            <td>@rm._departments_string</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="blockCaseInformation">
+                    <span class="title">@GlobalRes.CaseInformation</span>
+                    <table class="caseInformation">
+                        <tr>
+                            <td>@GlobalRes.ReportingAbout:</td>
+                            <td>@rm._secondary_type_string</td>
+                        </tr>
+                        <tr>
+                            <td>@GlobalRes.IncidentDate:</td>
+                            <td>@rm._incident_date_string</td>
+                        </tr>
+                        <tr>
+                            <td>@GlobalRes.isOngoing:</td>
+                            <td>@rm._is_ongoing</td>
+                        </tr>
+                        @if (!String.IsNullOrEmpty(rm._report.report_frequency_text))
+                        {
+                            <tr>
+                                <td></td>
+                                <td>@rm._report.report_frequency_text</td>
+                            </tr>
+                        }
+
+                        <tr>
+                            <td>@GlobalRes.incidentResult:</td>
+                            <td>@rm._has_injury_damage</td>
+                        </tr>
+                        @if (!String.IsNullOrEmpty(rm._report.injury_damage))
+                        {
+                            <tr>
+                                <td></td>
+                                <td>@rm._report.injury_damage</td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+
+                <div class="incidentDescription">
+                    <p class="titleIncidentDescription">@GlobalRes.IncidentDescription:</p>
+                    <div class="text">
+                        @rm._report.description
+                    </div>
+                </div>
+
+                <div class="blockPartiesInformation">
+                    <span class="title">@GlobalRes.PartiesInvolved</span>
+                    @if (rm._witnesses.Count > 0)
+                    {
+                        @*<div class="incidentDescription">*@
+                        <table class="partiesInformation">
+                            @foreach (report_non_mediator_involved _involved in rm._witnesses)
+                            {
+                                <tr>
+                                    <td>@_involved.Role</td>
+                                    <td>@_involved.Name @_involved.last_name, @_involved.Title</td>
+                                </tr>
+                            }
+                        </table>
+                        @*</div>*@
+                    }
+
+                    @if (rm._involved_mediators_user_list.Count > 0)
+                    {
+                        <table class="generalInformation">
+                            <tr>
+                                <td>@GlobalRes.Mediatorsinvolved</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            @foreach (user mediators_involved in rm._involved_mediators_user_list)
+                             {
+                                <tr>
+                                    <td>@mediators_involved.first_nm @mediators_involved.last_nm</td>
+                                    <td>@mediators_involved.title_ds</td>
+                                </tr>
+                            }
+                            </table>
+                    }
+                            <table class="generalInformation">
+                                <tr>
+                                    <td>@GlobalRes.Doesmanagementknowaboutthisincident</td>
+                                    <td>@rm._management_know_string</td>
+                                </tr>
+                         @if (!String.IsNullOrEmpty(rm._report.management_know_text))
+                        {
+                                    <tr>
+                                        <td></td>
+                                        <td>@rm._report.management_know_text</td>
+                                    </tr>
+                        }
+                            </table>
+
+                            <table class="generalInformation">
+                                <tr>
+                                    <td>@GlobalRes.Incidentreportedoutside_q</td>
+                                    <td>@rm._is_reported_outside</td>
+                                </tr>
+                                @if (!String.IsNullOrEmpty(rm._report.reported_outside_text))
+                        {
+                        <tr>
+                            <td></td>
+                            <td>@rm._report.reported_outside_text</td>
+                        </tr>
+                        }
+                                <tr>
+                                    <td>@GlobalRes.IsReportUrgent</td>
+                                    <td>@rm._is_reported_urgent</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                        <div class="contentDownloadDoc">
+
+                            @foreach (EC.Models.Database.attachment file in ViewBag.attachmentFiles)
+                {
+                                <div class="blockDownloadDoc">
+                                    <div class="blockImg">
+                                        <img src='@Url.Content("/Content/Icons/viewDoc1.png")'>
+                                    </div>
+                                    <div class="infoBlock">
+                                        <p>@file.file_nm</p>
+                                        <a href="@file.path_nm" download>@GlobalRes.Download.ToLower()</a>
+                                    </div>
+                                </div>
+                }
+                        </div>
+                    </div><!-- end generalInfo-->
+
+                        <div class="helpBlock">
+                            <span></span>
+                        </div>
+    }
+                </body>
+                <!--Unknown-->
+                <p>@ViewBag.id</p>
+                <!-- Messages-->
+                <div>
+                    <p>@ViewBag.companyName</p>
+                </div>
+
+                <div>
+                    <p>@ViewBag.generatedName</p>
+                </div>
+
+
+
+                <script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
+                <script>
+    $(document).ready(function () {
+        //$        //name="spamMessage
+        function showBlockDocs(){
+            if($('.contentDownloadDoc').html().trim()=="")
+                $('.contentDownloadDoc').hide();
+        }
+
+        function sendMessageSpam(){
+                        $('.markAsSpam').click(function(){
+                            var self = $(this);
+                            var spamMessage = $('.spamMessage textarea').val();
+                            console.log(spamMessage);
+                            markAsSpam(@Html.Raw(report_id), @Html.Raw(user_id), spamMessage);
+
+                                            var str = '@Url.Content("~/Cases/Spam")';
+                                            window.location.href = str;
+                                        });
+                        }
+
+                        function markAsSpam(report_id, user_id, message) {
+                            $.ajax({
+                                method: "POST",
+                                url: "/NewReport/SendSpamMessage",
+                                data: { report_id : report_id, user_id: user_id, spamMessage: message }
+                            }).done(function(data) {//data from server
+                                console.log(data.login_nm);// alert(data);
+                            }).fail(function(error){
+                                console.log(error);
+                            });
+                        }
+
+                        $('.acceptNewCase').click(function(){
+                            var self = $(this);
+                            var description = $('.acceptCaseNote textarea').val();
+                            console.log(description);
+
+                            reopenOrAcceptCase(@Html.Raw(report_id), @Html.Raw(user_id), description);
+
+            var str = window.location.href;
+            window.location.href = str;
+        });
+
+
+        function reopenOrAcceptCase(report_id, user_id, description) {
+            $.ajax({
+                method: "POST",
+                url: "/NewReport/AcceptOrReopenCase",
+                data: { report_id : report_id, user_id: user_id, description : description }
+            }).done(function(data) {//data from server
+                // console.log(data.login_nm);// alert(data);
+
+            }).fail(function(error){
+                console.log(error);
+            });
+        }
+
+
+        function showBlockSpamCase(){
+            $('#viewReport .contentViewReport:first-child .markSpamBtn').click(function () {
+                //$('#viewReport .contentViewReport #mark_spam').click();
+
+                $('#viewReport .contentViewReport:first-child').css('display', 'none');
+                $('.contentViewReport.blockSpamCase').css('display', 'block');
+            });
+        }
+        function hideAcceptOrSpamCase(){
+            $('.contentViewReport .headerblockButtons .closeIcon').click(function () {
+                $('.contentViewReport').css('display', 'none');
+                $('#viewReport .contentViewReport:first-child').css('display', 'block');
+            });
+        }
+        function showBlockAcceptCase(){
+            $('#viewReport .contentViewReport:first-child .acceptCaseBtn').click(function () {
+                $('#viewReport .contentViewReport:first-child').css('display', 'none');
+                $('.contentViewReport.blockAcceptCase').css('display', 'block');
+
+                //$('#viewReport .contentViewReport #accept_case').click();
+            });
+        }
+
+        function styleTextArea(){
+            $('textarea')
+                .focus(function () {
+                    var self = $(this);
+                    self.addClass('green').removeClass('grey');
+                    self.attr("placeholder", "");
+                    self.parents('.addComment').find('.arrow').addClass('green').removeClass('grey');
+                })
+                .focusout(function () {
+                    //$(this).css('border', '2px solid #b2bfc3');
+                    //$(this).attr("placeholder", "");
+                    //$(this).parent().parent().find('.blockPersonal').find('.arrow').css('border-right', '5px solid #b2bfc3');
+                    
+                    var self = $(this);
+                    self.removeClass('green').addClass('grey');
+                    self.attr("placeholder", "");
+                    self.parents('.addComment').find('.arrow').removeClass('green').addClass('grey');
+                });
+
+        }
+
+
+        function clickBtnSpamOrReopen(){
+            $('#viewReport .contentViewReport .buttonBlock .acceptCaseBtn').click(function () {
+                $('#viewReport .contentViewReport #reopen_case').click();
+            });
+            $('#viewReport .contentViewReport .buttonBlock .spamBtn').click(function () {
+                $('#viewReport .contentViewReport #spam_case').click();
+            });
+        }
+
+        function acceptCaseBtnClick(){
+            $('#viewReport .blockSpamCase .acceptCaseBtn, #viewReport .blockAcceptCase .acceptCaseBtn').click(function () {
+                console.log('acceptCaseBtnClick');
+                $('input#acceptCase').click();
+            });
+        }
+        function spamCaseBtnClick(){
+            $('#viewReport .blockSpamCase .markSpamBtn, #viewReport .blockAcceptCase .markSpamBtn').click(function () {
+                console.log('spamCaseBtnClick');
+                $('input#markSpam').click();
+            });
+        }
+        showBlockDocs();
+        sendMessageSpam();
+        styleTextArea();
+        showBlockAcceptCase();
+        showBlockSpamCase();
+        hideAcceptOrSpamCase();
+
+        acceptCaseBtnClick();
+        spamCaseBtnClick();
+        clickBtnSpamOrReopen();
+    });
+
+                </script>

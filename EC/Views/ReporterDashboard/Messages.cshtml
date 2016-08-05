@@ -1,0 +1,144 @@
+﻿@using EC.Models;
+@using EC.Models.Database;
+@using EC.App_LocalResources;
+@using EC.Models.ViewModel;
+@using EC.Models.App.Case;
+
+@{
+    ViewBag.Title = GlobalRes.Messages;
+    Layout = "~/Views/Shared/IndexPages/ReporterDashboard.cshtml";
+
+    int user_id = (Int32)ViewBag.user_id;
+    int report_id = (Int32)ViewBag.report_id;
+    ReportModel rm = ViewBag.rm;
+    UserModel um = ViewBag.um;
+    int unread_message_number = ViewBag.unread_message_number;
+    
+    user _user;
+}
+@model CaseMessagesModel
+
+@if ((rm._report != null) && (rm._report.id != 0))
+{
+    <div class="settingMenu">
+        <div class="settingMenuItems">
+            <h2 class="mainTitle">@GlobalRes.Menu:</h2>
+            <div>
+                <a href="/ReporterDashboard/Index/@user_id" class="menuItem" style="padding-right:14px;">@GlobalRes.ReportSummaryUp</a>
+
+
+                @if (unread_message_number > 0)
+                {
+                    <a href="/ReporterDashboard/Messages/@user_id" class="menuItem active" style="padding-right:15px;">
+                        @GlobalRes.Messages
+                        <span>@unread_message_number</span>
+                    </a>
+                }
+                else
+                {
+                    <a href="/ReporterDashboard/Messages/@user_id" class="menuItem active" style="padding-right:50px;">@GlobalRes.Messages</a>
+                }
+                <a href="/ReporterDashboard/Activity/@user_id" class="menuItem">@GlobalRes.Activity</a>
+                <a href="/ReporterDashboard/Settings/@user_id" class="menuItem settings" style="margin-right:-2px;">@GlobalRes.Settings</a>
+            </div>
+        </div>
+    </div><!--settingMenu-->
+
+    <div class="blockMessages">
+        <div class="blockMessagesTable" id="__messages">
+            @foreach (var _messageViewModel in Model.AllMessagesList)
+            {
+                @Html.Partial("~/Views/Shared/Helpers/_SingleMessage.cshtml", _messageViewModel)
+            }
+        </div>
+
+        @if ((rm._investigation_status != Constant.investigation_status_closed) && (rm._investigation_status != Constant.investigation_status_spam))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="addComment">
+                <div class="content">
+                    <div class="blockPersonal">
+                        <div class="blockPhoto">
+                            @{
+                                _user = um.GetById(user_id);
+                                    if ((_user != null) && (_user.id != 0))
+                                    {
+                                        if (_user.photo_path.Trim() != "")
+                                        {
+                                                    <img src='@Url.Content(_user.photo_path.Trim())' />
+                                        }
+                                        else
+                                        {
+                                                    <img src='@Url.Content("/Content/Icons/anonimousReporterIcon.png")' />
+                                        }
+                                    }
+                            }
+                        </div>
+                        <div class="arrow gray"></div>
+                    </div>
+                    <div class="messageText">
+                        @Html.TextAreaFor(model => model.body_tx, new { body_tx = "body_tx", @class="gray" })
+                    </div>
+                </div>
+                <div class="newMessageBtn">
+                    <span>@GlobalRes.NewMessage.ToLower()</span>
+                    <input type="submit" value="new message" style="display: none;" />
+                </div>
+            </div>
+        }
+    </div>
+}
+
+
+<script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        @using Newtonsoft.Json;
+        $('.newMessageBtn span').click(function () {
+            if ($("#body_tx").val().trim().length > 0) {
+                addMessage(@Html.Raw(user_id), @Html.Raw(rm._report.id), $("#body_tx").val().trim());
+            } else {
+
+                $('textarea').css('border', '2px solid red');
+            }
+        });
+
+        //Open mini menu for mobile
+        $('.mainTitle').click(function () {
+            $('.mainTitle+div').toggle();
+        });
+
+        //START stile for textarea
+        $('textarea')
+            .focus(function () {
+                $(this).css('border', '2px solid #05b5a2');
+                $(this).attr("placeholder", "");
+                $(this).parent().parent().find('.blockPersonal').find('.arrow').css('border-right', '5px solid #05b5a2');
+            })
+            .focusout(function () {
+                $(this).css('border', '2px solid #b2bfc3');
+                $(this).attr("placeholder", "");
+                $(this).parent().parent().find('.blockPersonal').find('.arrow').css('border-right', '5px solid #b2bfc3');
+            });
+
+
+        function addMessage(user_id, report_id, body_tx) {
+            $.ajax({
+                // Get PartialView
+                async: false,
+                url: "/ReporterDashboard/AddedMessages",
+                data: { report_id: report_id, sender_id: user_id, reporter_access: 1, body_tx: body_tx },
+                success: function (result) {
+
+                    $("#__messages").append(result);
+                    $("#body_tx").val('');
+                },
+                error: function () {
+                    console.log("Error adding message", error.data);
+                }
+            });
+        }
+        //END stile for textarea
+    });
+</script>

@@ -1,0 +1,174 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+#main {
+    width: 100%;
+    /*max-width: 1440px;*/
+    height: 100%;
+    margin: 0 auto;
+}
+#header {
+    width: 100%;
+    height: 60px;
+    background-color: rgb(233, 242, 242);
+}
+#infoReport {
+    width: 100%;
+    height: 110px;
+    background-color: rgb(255, 255, 255);
+}
+#newReport {
+    height: 40px;
+    background-color: rgb(193, 143, 191);
+
+}
+#activeForm {
+    height: 60px;
+    background-color: rgb(187, 197, 199);
+}
+#wrap {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(229, 235, 235);
+}
+.positionLogo {
+    position: relative;
+    float: left;
+    margin-top: 14px;
+    margin-left: 40px;
+}
+.blueLogo {
+    background: url(Icons/logo.png);
+    background-repeat: no-repeat;
+    width: 223px;
+    height: 37px;
+    border-right: 1px solid rgb(186, 194, 194);
+}
+.headerPadding {
+    font-family: 'OpenSansSemibold';
+    font-size: 14px;
+    color: #7e9297;
+    width: 85%;
+    height: 100%;
+}
+.position {
+    float: left;
+    width: 144px;
+    height: 100%;
+}
+.positionSpecial {
+    float: left;
+    width: 134px;
+    height: 100%;
+    
+}
+.positionSpecial:hover {
+    background-color: rgb(215, 227, 228);
+}
+.centerPostition {
+    margin: 0 auto;
+    padding-top: 20px;
+}
+.position:hover {
+    background-color: rgb(215, 227, 228);
+}
+.position:active {
+    color: rgb(56, 73, 77);
+
+}
+    .position:hover #iconStatistic {
+        background: url(Icons/statisticHover.png);
+    }
+    .position:active #iconStatistic {
+        background: url(Icons/statisticActive.png);
+    }
+    .position:hover #iconTasks {
+        background: url(Icons/TasksHover.png);
+    }
+    .position:active #iconTasks {
+        background: url(Icons/TasksActive.png);
+    }
+    .positionSpecial:hover #iconMessages {
+    background: url(icons/messagesHover.png) no-repeat;
+    }
+    .positionSpecial:active #iconMessages {
+    background: url(icons/messagesActive.png) no-repeat;
+    }
+    .position:hover #iconCases {
+        background: url(icons/casesHover.png) no-repeat;
+    }
+    .position:active #iconCases {
+        background: url(icons/casesActive.png) no-repeat;
+    }
+.positionIconStatistic {
+    float: left;
+    margin-left: 30px;
+}
+#iconStatistic {
+    background: url(Icons/statistic.png);
+    width: 17px;
+    height: 16px;
+    display: inline-block;
+}
+.textHeader{
+    margin-left: 10px;
+}
+@font-face {
+    font-family: OpenSansSemibold; /* Имя шрифта */
+    src: url(../fonts/OpenSansSemibold.ttf); /* Путь к файлу со шрифтом */
+}
+#iconTasks{
+    background: url(icons/tasks.png);
+    width: 16px;
+    height: 17px;
+    display: inline-block
+}
+.positionIconTasks {
+    float: left;
+    margin-left: 50px;
+}
+.positionIconMessages {
+    float: left;
+}
+
+
+#iconMessages {
+    background: url(icons/messages.png) no-repeat;
+    width: 17px;
+    height: 16px;
+    display: inline-block;
+    margin-left: 16px;
+}
+#numMessages {
+    width: 15px;
+    height: 15px;
+    background: red;
+    border-radius: 50px;
+    color: #ffffff;
+    display: inline-block;
+    position: relative;
+    top: 3px;
+}
+#countMessage{
+    position: relative;
+    top: -2px;
+    left: 4px;
+}
+.floatLeft {
+    float: left;
+}
+
+#iconCases {
+    background: url(icons/cases.png) no-repeat;
+    width: 16px;
+    height: 17px;
+    display: inline-block;
+    margin-left: 50px;
+
+}
+.positionIconCases {
+    float: left;
+}

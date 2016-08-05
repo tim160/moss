@@ -1,0 +1,367 @@
+﻿@using EC.Models;
+@using EC.Models.ECModel;
+@using EC.Models.Database;
+@using EC.App_LocalResources;
+@{
+
+    <link href="~/Content/styleAnalitics.min.css" rel="stylesheet" />
+
+    ViewBag.Title = GlobalRes.TaskAnalyticsUp;
+    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+    int user_id = (Int32)ViewBag.user_id;
+    ReportModel rm = new ReportModel();
+    int[] _today_spanshot = ViewBag._today_spanshot;
+    int[] _month_end_spanshot = ViewBag._month_end_spanshot;
+    int difference = 0;
+
+    string _today = ViewBag._today;
+
+
+    string[] _titleHeaderLegend = { "Pre-Review", "Review", "Investigation", "Resolution", "Escalation" };
+    string[] _miniSquareColor = { "#D6F9F6", "#c0ece8", "#82dad0", "#44c8b9", "#05b5a2" };
+
+    UserModel um = new UserModel(user_id);
+    List<report> _reports = um.ReportsSearch(null, 0);
+
+    var _dtAnalyticsTimeline = ViewBag._dtAnalyticsTimeline;
+    var _dtTasksColored = ViewBag._dtTasksColored;
+    var dt_series = ViewBag.dt_series;
+
+}
+
+<div class="blockSettings blockAnalitics">
+    <div id="casesHeared">
+        <div id="menu">
+            <h2 class="mainTitle">@GlobalRes.Menu:</h2>
+            <div>
+                <a href="/Analytics/Index" class="caseesTab">@GlobalRes.Cases</a>
+                <a class="caseesTab active">@GlobalRes.Tasks</a>
+            </div>
+        </div>
+    @*    <div class="positionActivityIcon">
+            <div id="activityIcon"></div>
+        </div>*@
+    </div><!--casesHeared-->
+
+    <!---->
+
+    <!---->
+    <div class="contentSettings contentActivity">
+        <!-- 1 All cases -->
+        <div class="blockAllCases">
+            <div class="headerBlockActivity">
+                <div class="titleBlock">@GlobalRes.Allcases</div>
+                @for (var i = 0; i < 5; i++)
+                {
+                    <div class="itemLegend">
+                        <div class="miniSquare" style="background-color: @_miniSquareColor[i];"></div>
+                        <span>@_titleHeaderLegend[i]</span>
+                    </div>
+                }
+            </div>
+
+            <div id="chartContainer" @*style="width: 90%; height: 300px; margin: auto;"*@></div>
+        </div>
+        <!-- 2 Today -->
+        <div class="blockToday">
+            <div class="headerBlockActivity">
+                <div class="titleBlock">@GlobalRes.Today: @_today</div>
+                <div class="blockTodayContant analyticsTasks">
+                    @for (var i = 0; i < 5; i++)
+                    {
+                        <div class="itemLegend">
+                            <div class="headerLegend">
+                                <div class="miniSquare" style="background-color: @_miniSquareColor[i];"></div>
+                                <span>@_titleHeaderLegend[i]</span>
+                            </div>
+                            <div class="contentLegend">
+                                <label>@_today_spanshot[i]</label>
+
+                                @if (_today_spanshot[i] > _month_end_spanshot[i])
+                                {
+                                    difference = _today_spanshot[i] - _month_end_spanshot[i];
+                                    <span class="plus">(+@difference)</span>
+                                }
+                                @if (_today_spanshot[i] < _month_end_spanshot[i])
+                                {
+                                    difference = _month_end_spanshot[i] - _today_spanshot[i];
+                                    <span class="mines">(-@difference)</span>
+                                }
+                                @if (_today_spanshot[i] == _month_end_spanshot[i])
+                                {
+                                    <span class="closed">(-)</span>
+                                }
+                            </div>
+                        </div>
+                    }
+
+
+                </div>
+            </div>
+
+        </div>
+        <!-- 3 Time on task, days -->
+
+        <div class="blockAverage">
+            <div class="headerBlockActivity">
+                <div class="titleBlock">@GlobalRes.Timeontask<span>, @GlobalRes.days1</span></div>
+                @*<div class="timeOnTask"></div>*@
+                <div id="timeOnTask"></div>
+            </div>
+        </div>
+
+        <!-- 4 Type of incident & Reporter -->
+        <div class="bigBlock">
+            <!-- 4_1 Type of incident -->
+            <div class="blockTypeOfIncident">
+                <div class="headerBlockActivity">
+                    <div class="titleBlock">@GlobalRes.Taskspercase</div>
+                </div>
+                <div class="allBlockLines">
+
+                    @foreach (report _report in _reports)
+                    {
+                        rm = new ReportModel(_report.id);
+                        if (rm.ReportTasks(0).Count() > 0)
+                        {
+                            <div class="blockLinesItem">
+                                <p>@rm._secondary_type_string - @rm._location_string - @GlobalRes.Report # @rm._report.display_name</p>
+                                <div class="linesShow">
+                                    <div class="blockLineFirst" style="border-bottom-color: #@rm._color_code;"></div>
+                                    <label>@rm.ReportTasks(0).Count()</label>
+                                    <span>
+                                        (
+                                        @if (rm.ReportTaskByMonthEnd(0).Count() == 0)
+                                        {
+                                            @Html.Raw("-");
+                                        }
+                                        else
+                                        {
+                                            @Html.Raw("+");
+                                            @rm.ReportTaskByMonthEnd(0).Count()
+                                        }
+
+                                        )
+                                    </span>
+                                    <div class="blockLineSecond" style="border-bottom-color: #@rm._color_secondary_code;"></div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+                <!--allBlockLines-->
+            </div>
+            <!-- 4_2 Reporter -->
+            <div class="blockReporter">
+                <div class="headerBlockActivity">
+                    <div class="titleBlock">@GlobalRes.Timepertask</div>
+                </div>
+
+                <div class="allBlockLines">
+
+                    @foreach (report _report in _reports)
+                    {
+                        rm = new ReportModel(_report.id);
+                        if (rm.ReportTasks(0).Count() > 0)
+                        {
+                            foreach (task _task in rm.ReportTasks(0))
+                            {
+                                TaskExtended _extended_task = new TaskExtended(_task.id, user_id);
+
+                                <div class="blockLinesItem">
+                                    <p><label>@rm._secondary_type_string - @rm._location_string - @GlobalRes.Report # @rm._report.display_name</label><label>></label>@_extended_task.TaskTitle</p>
+                                    <div class="linesShow">
+                                        <div class="blockLineFirst" style="border-bottom-color: #@rm._color_code;"></div>
+
+                                        <label>@_extended_task.TaskLength</label>
+                                        <span>
+                                            (
+                                            @if (_extended_task.TaskLengthPreviousMonth - _extended_task.TaskLength == 0)
+                                            {
+                                                @Html.Raw("-");
+                                            }
+                                            else
+                                            {
+                                                {
+                                                    @Html.Raw("+");
+                                                    @(_extended_task.TaskLength - _extended_task.TaskLengthPreviousMonth)
+                                                }
+                                            }
+
+                                            )
+                                        </span>
+
+                                        <div class="blockLineSecond" style="border-bottom-color: #@rm._color_secondary_code;"></div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
+
+                </div>
+                <!--allBlockLines-->
+            </div>
+
+
+        </div>
+    </div><!--contentSettings-->
+
+</div>
+
+@*<script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>*@
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<script type='text/javascript' src='http://code.jquery.com/jquery-1.9.1.js'></script>
+<script type='text/javascript' src="http://ajax.aspnetcdn.com/ajax/globalize/0.1.1/globalize.min.js"></script>
+<script type='text/javascript' src="http://cdn3.devexpress.com/jslib/13.1.5/js/dx.chartjs.js"></script>
+@*<script src="~/Scripts/Chart.min.js"></script>*@
+<script>
+    $(document).ready(function () {
+
+        //START Open mini menu for mobile
+        function blockActivityHeight() {
+            if ($('#menu').height() < 50) {
+                $('.positionActivityIcon').height(89);
+            }
+            else {
+                $('.positionActivityIcon').height($('#casesHeared').height());
+            }
+        }
+        $('.mainTitle').click(function () {
+            $('.mainTitle + div').toggle();
+            blockActivityHeight();
+        });
+        //----------------END Open mini menu for mobile---------------------------
+
+        //------------------------------------- START All cases -----------------------------------------------
+
+        var data = @Html.Raw(_dtAnalyticsTimeline);
+
+        $("#chartContainer").dxChart({
+            dataSource: data,
+            series: [
+                {
+                    argumentField: 'month',
+                    valueField: 'pending',
+                    type: 'area',
+                    color: '#D6F9F6'
+                },
+                {
+                    argumentField: 'month',
+                    valueField: 'review',
+                    type: 'area',
+                    color: '#c0ece8'
+                },
+                {
+                    argumentField: 'month',
+                    valueField: 'investigation',
+                    type: 'area',
+                    color: '#82dad0'
+                },
+                {
+                    argumentField: 'month',
+                    valueField: 'resolution',
+                    type: 'area',
+                    color: '#44c8b9'
+                },
+                {
+                    argumentField: 'month',
+                    valueField: 'escalation',
+                    type: 'area',
+                    color: '#05b5a2'
+                }
+            ],
+            legend: { visible: false },
+            argumentAxis: {
+                valueMarginsEnabled: false
+            }
+        });
+        //------------------------------------- END All cases -----------------------------------------------
+
+
+        //------------------------------------ START timeOnTask ---------------------------------------------
+
+        var dataSource = @Html.Raw(_dtTasksColored);
+        var dataSeries = @Html.Raw(dt_series);
+    //    for (i=0; i<17; i++){
+   //         dataSource[i].case208=Math.random()*200+1;
+   //     }
+
+        $("#timeOnTask").dxChart({
+            dataSource: dataSource,
+            commonSeriesSettings: {
+                argumentField: "day",
+                type: "stackedBar"
+            },
+            series: dataSeries,
+            legend: {
+                verticalAlignment: "bottom",
+                horizontalAlignment: "center"
+            },
+            tooltip: {
+                enabled: true
+            }
+        });
+        //------------------------------------  END timeOnTask  ---------------------------------------------
+
+
+
+        //------------------------ Type of incident AND Reporter --------------------------
+        function maxForArray(arr) {
+            var max = 0;
+            for (var i = 0; i < arr.length; i++) {
+                if (max < arr[i]) {
+                    max = arr[i];
+                }
+            }
+            return max;
+        }
+        function WidthHeaderLine(elementName, AllDay, day) {
+            var elementWidth = 60;
+            var widthX = (day * elementWidth) / AllDay;
+
+            $(elementName).css('width', widthX + '%');
+        }
+
+        function TypeOfIncident_Reporter(NameClass) {
+            var allDay = [], day = [];
+            for (var i = 0; i < allDay.length; i++) {
+                allDay[i] = 0;
+            }
+            var maxLenght;
+            var temp_days;
+            $(NameClass + ' .blockLinesItem .linesShow label').each(function (indx, element) {
+                allDay[indx] = parseInt($(element).text());
+            });
+            $(NameClass + ' .blockLinesItem span').each(function (indx, element) {
+                if ($(element).text().indexOf("-") > -1) {
+                    day[indx] = allDay[indx] - 0;
+                }
+                else {
+                    temp_days = $(element).text();
+                    if(isNaN(temp_days))
+                    {
+                        temp_days = temp_days.replace("(", "").replace(")", "").replace("+", "").trim();
+                    }
+
+                    day[indx] = allDay[indx] -  parseInt(temp_days);
+                    if(isNaN( day[indx]))
+                        day[indx] = 0;
+                }
+            });
+            //console.log("day = " + day);
+            maxLenght = maxForArray(allDay);
+            $(NameClass + ' .blockLineFirst').each(function (indx, element) {
+                WidthHeaderLine($(element), maxLenght, allDay[indx]);
+            });
+            $(NameClass + ' .blockLineSecond').each(function (indx, element) {
+                WidthHeaderLine($(element), maxLenght, day[indx]);
+            });
+        }
+
+        TypeOfIncident_Reporter('.blockTypeOfIncident');
+        TypeOfIncident_Reporter('.blockReporter');
+
+    });
+
+
+</script>

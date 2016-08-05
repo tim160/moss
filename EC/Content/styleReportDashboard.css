@@ -1,0 +1,2618 @@
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+@font-face {
+    font-family: OpenSansSemibold;
+     src: url('fonts/OpenSans-Semibold.eot?') format('embedded-opentype'),
+     url(fonts/OpenSans-Semibold.ttf) format('truetype');
+}
+@font-face {
+     font-family: OpenSans-Bold;
+     src: url('fonts/OpenSansBold.eot?') format('embedded-opentype'),
+     url(fonts/OpenSans-Bold.ttf) format('truetype');
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+#viewReport {
+    width: 100%;
+    height: 140px;
+    background-color: rgb(229, 235, 235);
+    display: table;
+}
+#generalInfo {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(242, 247, 247);
+    display: table;
+}
+#viewReport .firstPosition {
+    /*padding-left: 191px;*/
+    /*padding-top: 40px;*/
+    float: left;
+    cursor: default;
+}
+.positionReportIcon {
+    float: left;
+}
+#reportIcon {
+    background: url(icons/report-icon.png);
+    width: 20px;
+    height: 25px;
+}
+.position {
+    margin-left: 20px;
+    display: table;
+}
+#timeReport {
+    margin-left: 30px;
+    padding-top: 10px;
+}
+/*.positionText {
+    margin-left: 20px;
+}*/
+.positionTitle {
+    padding-left: 20px;
+}
+.openSansSemibold {
+    font-size: 12px;
+    /*width: 95px;*/
+    font-family: OpenSansSemibold;
+    color: #727c7e;
+}
+.openSans {
+    font-family: 'Open Sans';
+    font-size: 12px;
+    color: #727c7e;
+    width: 98px;
+}
+.title {
+    font-family: OpenSansSemibold;
+    font-size: 20px;
+    color: rgb(56, 73, 77);
+    float: left;
+}
+#closeIcon {
+    background: url(icons/close.png);
+    width: 14px;
+    height: 14px;
+    float: left;
+    position: relative;
+    top: 8px;
+    left: 11px;
+    cursor: pointer;
+}
+.rectangle {
+    width: 300px;
+    height: 40px;
+    background: #abb9bb;
+    position: absolute;
+    font-family: 'Open Sans';
+    color: #ffffff;
+}
+.textCenter {
+    margin: 0 auto;
+    padding-left: 30px;
+    padding-top: 9px;
+    font-size: 14px;
+}
+.textCenter span{
+    padding-right: 10px;
+}
+#generalInfo .title {
+    font-family: 'Open Sans';
+    width: 100%;
+    padding-left: 12px;
+}
+
+
+/*=================================================================*/
+#generalInfo .firstPosition,
+.contentViewReport{
+    padding-left: 0px;
+    padding-top: 28px;
+    float: none;
+    cursor: default;
+    width: 800px;
+    margin: auto;
+}
+.generalInformation,
+.partiesInformation,
+.caseInformation{
+    width: 95%;
+    margin-left: 21px;
+}
+.generalInformation tr td:first-child,
+.partiesInformation tr td:first-child,
+.caseInformation tr td:first-child{
+    font-family: 'Open Sans';
+    font-size: 12px;
+    color: #848a8b;
+    width: 200px;
+    padding-top: 21px;
+    padding-right: 10px;
+}
+.generalInformation tr td:last-child,
+.partiesInformation tr td:last-child,
+.caseInformation tr td:last-child{
+    font-family: OpenSansSemibold;
+    font-size: 16px;
+    color: #727c7e;
+    padding-top: 20px;
+}
+.blockGeneralInformation{
+    border-bottom: 1px solid #e0e5e6;
+    margin-bottom: 32px;
+    padding-bottom: 17px;
+    display: table;
+    width: 100%;
+}
+.blockPartiesInformation{
+    display: table;
+    width: 100%;
+    border-bottom: 1px solid #e0e5e6;
+    border-top: 1px solid #e0e5e6;
+    margin-top: 17px;
+    padding-top: 35px;
+    margin-bottom: 32px;
+    padding-bottom: 17px;
+}
+.blockCaseInformation{
+    display: table;
+    width: 100%;
+}
+.firstPosition .blockPartiesInformation div,
+.incidentDescription p.titleIncidentDescription{
+    font-family: 'Open Sans';
+    font-size: 12px;
+    color: #848a8b;
+    width: 95%;
+    padding-top: 27px;
+    margin-left: 21px;
+}
+.incidentDescription p.titleIncidentDescription{
+    margin-bottom: 3px;
+}
+.incidentDescription .text{
+    font-family: OpenSansSemibold;
+    font-size: 14px;
+    color: #727c7e;
+    padding-left: 43px;
+    padding-right: 20px;
+}
+#viewReport .contentViewReport{
+    width: 853px;
+}
+#viewReport .contentViewReport .blockInfoSpam {  
+  float: left;
+  display: table;
+  width: 100%;
+  margin-top: 39px;
+  margin-bottom: 40px;
+}
+#viewReport .blockInfoTextSpam {
+  display: table;
+  float: left;
+  width: 80%;
+}
+#viewReport .blockInfoTextSpam .textSpamTitle{
+  font-family: 'Open Sans';
+  font-weight: bold;
+  color: #38494d;
+  margin-top: 1px;
+  margin-left: 14px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+#viewReport .blockInfoTextSpam .textSpamDate{
+    font-family: OpenSansSemibold;
+    margin-left: 13px;
+    margin-top: 0px;
+    font-size: 12px;
+    color: #b1b8b9;
+    margin-bottom: 0;
+}
+#viewReport .blockInfoTextSpam .textSpam{
+  font-family: 'Open Sans';
+  margin-left: 13px;
+  margin-top: 0px;
+  font-size: 16px;
+  margin-bottom: 0px;
+  color: #38494d;
+}
+.contentViewReport .buttonBlock {
+  float: right;
+  padding-bottom: 20px;
+}
+.contentViewReport .buttonBlock .spamBtn{
+  font-family: 'Open Sans';
+  font-weight: bold;
+  color: #abb9bb;
+  font-size: 14px;
+  background-color: #e5ebeb;
+  border: 1px solid;
+  border-radius: 2px;
+  padding: 5px 13px 5px 13px;
+  float: left;
+  cursor: pointer;
+}
+
+#viewReport .contentViewReport .firstposition {
+  float: left;
+}
+.contentViewReport.blockAcceptCase .headerblockButtons,
+.contentViewReport.blockSpamCase .headerblockButtons {
+  display: table;
+  width: 100%;
+}
+.contentViewReport.blockSpamCase, .contentViewReport.blockAcceptCase{
+    padding-top: 41px;
+}
+.headerblockButtons .closeIcon {
+  background: url(Icons/close.png);
+  width: 14px;
+  height: 14px;
+  float: right;
+  position: relative;
+  top: 8px;
+  /*left: 15px;*/
+  cursor: pointer;
+  margin-right: 2%;
+}
+#viewReport .contentViewReport.blockAcceptCase .headerblockButtons label.acceptCaseBtn,
+#viewReport .contentViewReport.blockSpamCase label.acceptCaseBtn {
+  float: left;
+  margin-left: 0px;
+}
+#viewReport .contentViewReport.blockAcceptCase .headerblockButtons label.markSpamBtn{
+  float: left;
+  margin-left: 0px;
+  margin-right: 15px;
+  margin-left: 47px;
+}
+#viewReport .contentViewReport.blockSpamCase label.markSpamBtn {
+  float: left;
+  margin-left: 0px;
+  margin-right: 15px;
+  margin-left: 47px;
+  border: 1px solid #97A2A5;
+  color: #FFFFFF;
+  background: #B2BFC3;
+}
+#viewReport .contentViewReport.blockSpamCase label.markSpamBtn:hover {
+  color: #848a8b;
+  background: #f2f7f7;
+  border: 1px solid #c7cdcd;
+}
+#viewReport .contentViewReport.blockSpamCase label.markSpamBtn:active {
+  color: #848a8b;
+  background: #d6dcdc;
+  border: 1px solid #c7cdcd;
+}
+#viewReport .contentViewReport .addComment {
+  /*background: #f2f7f7;*/
+  width: 100%;
+  display: inline-block;
+  margin-bottom: 5px;
+}
+#viewReport .contentViewReport .blockPersonal {
+  float: left;
+  width: 45px;
+  /*padding-left: 15px;*/
+}
+.contentViewReport .blockPersonal .blockPhoto img {
+  border-radius: 100%;
+  height: 35px;
+}
+.contentViewReport .blockPersonal .arrow {
+  width: 0;
+  height: 0;
+  margin-top: 10px;
+  border-top: 6px solid transparent;
+  border-right: 5px solid #02B4A1;
+  border-bottom: 6px solid transparent;
+  margin-left: 2px;
+  float: right;
+}
+.contentViewReport .messageText textarea {
+  min-height: 86px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  min-width: 90%;
+  max-width: 665px;
+  outline: none;
+  font-family: 'Open Sans';
+  font-family: OpenSansSemibold;
+  font-size: 16px;
+  border: 2px solid #02B4A1;
+  overflow: auto;
+  resize: none;
+}
+.contentViewReport .addComment2 textarea.green{    
+    border: 2px solid #02B4A1;
+}
+.contentViewReport .addComment2 textarea.grey{    
+    border: 2px solid #b2bfc3;
+}
+.contentViewReport .addComment2 .arrow.green{    
+    border-right: 5px solid #02B4A1;
+}
+.contentViewReport .addComment2 .arrow.grey{    
+    border-right: 5px solid #b2bfc3;
+}
+
+
+.contentViewReport .addComment2_cc textarea.green{    
+    border: 2px solid #4da456;
+}
+.contentViewReport .addComment2_cc textarea.grey{    
+    border: 2px solid #b2bfc3;
+}
+.contentViewReport .addComment2_cc .arrow.green{    
+    border-right: 5px solid #4da456;
+}
+.contentViewReport .addComment2_cc .arrow.grey{    
+    border-right: 5px solid #b2bfc3;
+}
+.contentBlockCase{
+    display: table;
+    width: 100%;
+}
+.contentBlockCase p.titleCase {
+  font-size: 24px;
+  font-family: 'Open Sans';
+  color: #38494d;
+  margin-top: 45px;
+  margin-bottom: 11px;
+  margin-left: 50px;
+}
+.contentViewReport.blockSpamCase p.titleCase, .contentViewReport.blockAcceptCase p.titleCase{
+  margin-top: 39px;
+  margin-bottom: 6px;
+}
+.contentBlockCase p.textCace {
+  font-size: 16px;
+  font-family: 'Open Sans';
+  color: #727c7e;
+  margin-top: 0px;
+  margin-bottom: 28px;
+  margin-left: 50px;
+}
+.contentViewReport .newMessageBtn span,
+#viewReport .contentViewReport.blockAcceptCase label.acceptCaseBtn{
+  background: #05b5a2;
+  color: #ffffff;
+  font-family: 'Open Sans';
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: uppercase;
+  border: 1px solid #049787;
+  cursor: pointer;
+  border-radius: 2px;
+  display: table;
+  float: right;
+  padding: 5px 13px 5px 13px;
+}
+.contentViewReport .newMessageBtn span:hover,
+#viewReport .contentViewReport.blockAcceptCase label.acceptCaseBtn:hover{
+  background: #049f8e;
+  border: 1px solid #048d7e;
+}
+.contentViewReport .newMessageBtn span:active,
+#viewReport .contentViewReport.blockAcceptCase label.acceptCaseBtn:active{
+  background: #049182;
+  border: 1px solid #048173;
+}
+
+.contentViewReport .newMessageBtn span,
+.contentViewReport .acceptNewCase.acceptNewCase_cc,
+#viewReport .contentViewReport.blockAcceptCase label.acceptCaseBtn_cc{
+  background: #4da456;
+  border-color: #2e7037;
+}
+.contentViewReport .newMessageBtn span:hover,
+.contentViewReport .acceptNewCase.acceptNewCase_cc:hover,
+#viewReport .contentViewReport.blockAcceptCase label.acceptCaseBtn_cc:hover{
+  background: #3C8445;
+  border-color: #2e7037;
+}
+.contentViewReport .newMessageBtn span:active,
+.contentViewReport .acceptNewCase.acceptNewCase_cc:active,
+#viewReport .contentViewReport.blockAcceptCase label.acceptCaseBtn_cc:active{
+  background: #2e7037;
+  border-color: #2e7037;
+}
+
+.contentViewReport .newMessageBtn {
+  margin-bottom: 32px;
+  display: table;
+  width: 98%;
+}
+
+
+
+
+/*======================contentDownloadDoc=======================*/
+.contentDownloadDoc{
+    width: 820px;
+    margin: 0 auto;
+    border-bottom: 1px solid #e0e5e6;
+    cursor: default;
+    margin-bottom: 67px;
+    display: table;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+.contentDownloadDoc .blockDownloadDoc{
+    padding-left: 60px;
+    width: 330px;
+    float: left;
+    margin-bottom: 5px;
+}
+.contentDownloadDoc .blockImg {
+    float: left;
+}
+.contentDownloadDoc .infoBlock {
+    padding-top: 8px;
+    padding-left: 24px;
+    float: left;
+}
+.contentDownloadDoc .infoBlock p{
+    font-family: OpenSansSemibold;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 14px;
+}
+.contentDownloadDoc .infoBlock a{
+    font-family: 'Open Sans';
+    color: #05b5a2;
+    cursor: pointer;
+    font-size: 12px;
+    text-decoration: underline;
+}
+
+
+/*=====================helpBlock==============*/
+.helpBlock{
+    width: 100%;
+    background-color: rgb(242, 247, 247);
+    padding-bottom: 25px;
+    padding-top: 25px;
+    cursor: default;
+    text-align: right;
+}
+.helpBlock span{
+    font-family: 'Open Sans';
+    color: #848a8b;
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-right: 15%;
+    cursor: pointer;
+}
+
+/*=========reportBlock==============*/
+.reportBlock{
+    background-color: rgb(242, 247, 247);
+    width: 100%;
+    min-height: 300px;
+    display: table;
+    cursor: default;
+}
+.reportBlock .reportContent{
+    width: 820px;
+    margin: auto;
+}
+.reportBlock .reportContent p{
+    color: #05b5a2;
+    font-family: 'Open Sans';
+    font-weight: bold;
+    padding-left: 60px;
+    margin-top: 0px;
+    margin-bottom: 31px;
+}
+.reportBlock .messageText textarea{
+    min-height: 126px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    min-width: 737px;
+    max-width: 737px;
+    outline: none;
+    font-family: 'Open Sans';
+    border: 2px solid #b2bfc3;
+}
+.reportBlock .content .blockPersonal .arrow{
+    width: 0;
+    height: 0;
+    margin-top: 10px;
+    border-top: 6px solid transparent;
+    border-right: 5px solid #b2bfc3;
+    border-bottom: 6px solid transparent;
+    float: left;
+}
+.reportContent .sendMessageBtn{
+    text-align: right;
+}
+.reportBlock .content .blockPersonal {
+  float: left;
+}
+.reportBlock .content .messageText {
+  float: left;
+}
+.reportContent .sendMessageBtn span{
+    background: #05b5a2;
+    color: #ffffff;
+    font-family: 'Open Sans';
+    font-weight: bold;
+    text-transform: uppercase;
+    border: 1px solid #049787;
+    cursor: pointer;
+    padding-left: 11px;
+    padding-right: 11px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    border-radius: 2px;
+}
+.reportBlock .content{
+    padding-bottom: 20px;
+    padding-left: 0px;
+}
+.reportBlock .blockPersonal .blockPhoto{
+    float: left;
+    padding-left: 15px;
+}
+
+#viewReport .contentViewReport .markSpamBtn,
+#viewReport .contentViewReport .acceptCaseBtn,
+.menuCasesBlock .acceptCaseBtn {
+    float: right;
+    font-family: 'Open Sans';
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    border-radius: 2px;
+    font-size: 14px;
+    padding: 5px 13px 5px 13px;
+}
+.contentViewReport input{
+    display: none;
+}
+#viewReport .contentViewReport .markSpamBtn{
+    border: 1px solid #c7cdcd;
+    color: #848a8b;
+    padding-left: 11px;
+    padding-right: 11px;
+    margin-left: 15px;
+}
+#viewReport .contentViewReport .markSpamBtn:hover{
+    background: #f2f7f7;
+}
+#viewReport .contentViewReport .markSpamBtn:active{
+    background: #d6dcdc;
+}
+#viewReport .contentViewReport .acceptCaseBtn ,
+.menuCasesBlock .acceptCaseBtn{
+    border: 1px solid #6ccec3;
+    color: #05b5a2;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 15px;
+        font-size: 10pt;
+    padding: 5px 13px 5px 13px;
+}
+#viewReport .contentViewReport .acceptCaseBtn:hover,
+.menuCasesBlock .acceptCaseBtn:hover{
+    background: #05b5a2;
+    color: #ffffff;
+    border: 1px solid #049787;
+}
+#viewReport .contentViewReport .acceptCaseBtn:active,
+.menuCasesBlock .acceptCaseBtn:active {
+    background: #049787;
+    color: #ffffff;
+}
+#viewReport .contentViewReport .acceptCaseBtn:active {
+    border-color: #049787;
+}
+
+
+#viewReport .contentViewReport .acceptCaseBtn_cc ,
+.menuCasesBlock .acceptCaseBtn_cc{
+    border: 1px solid #8ac092;
+    color: #4da456;
+}
+#viewReport .contentViewReport .acceptCaseBtn_cc:hover,
+.menuCasesBlock .acceptCaseBtn_cc:hover{
+    background: #4da456;
+    color: #ffffff;
+    border: 1px solid #2e7037;
+}
+#viewReport .contentViewReport .acceptCaseBtn_cc:active,
+.menuCasesBlock .acceptCaseBtn_cc:active {
+    background: #2e7037;
+    color: #ffffff;
+}
+#viewReport .contentViewReport .acceptCaseBtn_cc:active {
+    border-color: #2e7037;
+}
+
+span.acceptCaseBtn {
+    margin-left: 30px;
+}
+.secondaryMenu ul li {
+    cursor: pointer;
+    color: rgb(146,160,163);
+    display: inline;
+    padding: 18px 9% 0px 8%;
+    border-bottom: 3px solid rgb(215,227,228);
+    font-size: 12px;  
+}
+.secondaryMenu ul li:hover {
+  color: rgb(120,120,120);
+  border-bottom: 3px solid rgb(5,181,162);
+}
+  
+
+h2.mainTitle {
+  padding-left: 30px;  
+  padding-bottom: 10px;
+  display: none;
+}
+
+
+/*================= START blockSettings =======================*/
+.blockSettings {
+    background: #e5ebeb;
+    width: 100%;
+    cursor: default;
+}
+.blockSettings .contentSettings{    
+  width: 70%;
+  margin: auto;
+  padding-top: 40px;
+  padding-bottom: 10%;
+  display: table;
+}
+
+.contentSettings .personalBlock{ 
+  width: 85%;
+  display: table;
+}
+.contentSettings .PersonalPhotoBlock{    
+  width: 138px;
+  /*height: 138px;*/
+  border: 1px solid #e0e5e6;
+  float: left;
+}
+.contentSettings .blockPersonalSettings{    
+  background: #ffffff;
+  height: 138px;
+  width: 100%;
+  border-width: 3px;
+  border-style: solid;
+  border-color: transparent transparent #e0e5e6 transparent;
+  box-sizing: border-box;
+}
+
+.contentSettings .blockPersonalSettings.greyBorder{       
+    border: 1px solid #e0e5e6; 
+}
+.contentSettings .blockPersonalSettings.greenBorder{        
+    border: 2px solid #05b5a2;   
+}
+.contentSettings .blockPersonalSettings.greenBorder{         
+    border: 2px solid #4da456;  
+}
+.contentSettings .blockPersonalSettings p.title{
+    color: #727c7e;
+    font-family: 'Open Sans';
+    font-size: 14px;
+    padding-left: 28px;
+    padding-top: 30px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    font-weight: bold;
+    cursor: default;
+    float: none;
+}
+.contentSettings .blockPersonalSettings input:-webkit-autofill{    
+    background-color: #fff !important;
+    -webkit-box-shadow: inset 0 0 0 50px #fff;
+    -webkit-text-fill-color: #000;
+}
+/*------------------------------------------------------------*/
+.inputBlock input[type="radio"]{
+    display: none;
+}
+
+.inputBlock span.radioButton {
+    background: url('/Content/img/radio.png') no-repeat;
+    padding-left: 22px;		/* Ширина картинки + пара пикселей отступа от нее до текста */
+    line-height: 12px;
+    height: 12px;
+    display: block;
+    float: left;
+    margin-top: 6px;
+}
+.inputBlock .radioTitle{
+    font-size: 18px;
+    font-family: OpenSansSemibold;
+    color: rgb(174, 181, 183);
+    display: table;
+}
+/* Смещения для невыбранной и выбранной радиокнопки */
+
+.inputBlock input[type="radio"] + span {
+    background-position: top left;
+}
+
+.inputBlock input[type="radio"]:checked + span {
+    background-position: bottom left;
+}
+.blockPersonalSettings .inputBlock {
+  min-height: 20px;
+  display: block;
+  /*display: inline-flex;*/
+  cursor: pointer;
+  min-width: 120px;
+}
+.blockPersonalSettings .freeBlock {
+  width: 20%;
+  float: left;
+  padding: 13px 20px;
+  margin-left: 40px;
+  margin-top: 19px;
+  margin-bottom: 28px;
+  display: table;
+  cursor: pointer;
+  white-space: nowrap;
+/*line-height: 30px; */
+ border-radius: 2px;}
+
+.blockPersonalSettings .rowBlock {
+  width: 100%;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+/*.blockPersonalSettings .freeBlock.inputRadio:hover {    
+  background: #eff0f1;
+}*/
+/*.blockPersonalSettings .freeBlock.inputRadio {    
+  background: #eff0f1 !important;
+}*/
+.blockPersonalSettings input[type="text"] {
+  font-family: OpenSansSemibold;
+  color: #3c3e3f;
+  font-size: 18px;
+  padding-top: 30px;
+  padding-left: 38px;
+  padding-bottom: 30px;
+  padding-right: 3%;
+  width: 92%;
+  outline: none;
+  border: none;
+}
+.rowBlock.inputMediator .inputBlock input[type="radio"] + span {
+  margin: auto;
+}
+.rowBlock.inputMediator .freeBlock {
+    background: #eff0f1;
+    width: 25%;
+    margin-left: 3%;
+    margin-right: 0px;
+}
+.inputRadio.mediator.active{
+    background: #aeb5b7 !important;
+}
+.inputRadio.adminMediator.active{
+    background: #05b5a2 !important;
+}
+.inputRadio.adminMediator.adminMediator_cc.active{
+    background: #05b5a2 !important;
+}
+.inputRadio.escalationMediator.active{
+    background: #e17257 !important;
+}
+.rowBlock.inputMediator .active .radioTitle{    
+    color: #ffffff !important;
+}
+.blockPersonalPhotoSetting .blockHoverPhoto{
+    width: 140px;
+    position: absolute;
+    background-color: rgba(0,0,0,0.6);
+    top: 0;
+    bottom: 0;
+    /*margin-top: -144px;*/
+    display: none;
+}
+.contentSettings .blockPersonalPhotoSetting {
+  float: left;
+  position: relative;
+}
+.blockPersonalPhotoSetting:hover .blockHoverPhoto{
+  display: block;
+}
+.blockHoverPhoto .close:after {
+    content: "\00d7";
+    position: absolute;
+    float: right;
+    margin-left: 14px;
+    margin-top: -4px;
+    color: #ffffff;
+    font-size: 28px;
+    cursor: pointer;
+}
+.blockHoverPhoto label.close{    
+  padding-bottom: 70px;
+  float: right;
+  margin-right: 7px;
+  cursor: pointer;
+    font-family: 'Open Sans';
+    color: #e5ebeb;
+}
+.blockHoverPhoto label.newImageBtn{
+    border: 1px solid #e5ebeb;
+    cursor: pointer;
+    color: #e5ebeb;
+    font-size: 11px;
+    font-weight: bold;
+    font-family: 'Open Sans';
+    text-transform: uppercase;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    border-radius: 1px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    width: 70%;
+    text-align: center;
+    margin: -15px auto;
+}
+.blockHoverPhoto label.newImageBtn:hover {
+    background: #BBC5C7;
+    color: white;
+}
+/*create input*/
+/*.blockUpdateProfile .updateProfileBtn input {
+  background: #05b5a2;
+  color: #ffffff;
+  font-family: 'Open Sans';
+  font-weight: bold;
+  font-size: 10pt;
+  text-transform: uppercase;
+  border: 1px solid #049787;
+  cursor: pointer;
+  padding-left: 11px;
+  padding-right: 11px;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  border-radius: 2px;
+  display: table;
+  float: right;
+  padding: 5px 13px 5px 13px;
+  outline: none;
+}
+.blockUpdateProfile .updateProfileBtn input:hover{
+  background: #049787;
+}
+.blockUpdateProfile .updateProfileBtn input:active{
+  background: #049787;
+}*/
+/*end create input*/
+.blockUpdateProfile .updateProfileBtn span {
+  background: #05b5a2;
+  color: #ffffff;
+  font-family: 'Open Sans';
+  font-weight: bold;
+  font-size: 10pt;
+  text-transform: uppercase;
+  border: 1px solid #049787;
+  cursor: pointer;
+  padding-left: 11px;
+  padding-right: 11px;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  border-radius: 2px;
+  display: table;
+  float: right;
+  padding: 5px 13px 5px 13px;
+}
+.blockUpdateProfile .updateProfileBtn span:hover{
+  background: #049787;
+}
+.blockUpdateProfile .updateProfileBtn span:active{
+  background: #049787;
+}
+.blockUpdateProfile {
+  display: table;
+  width: 100%;
+  padding-top: 35px;
+}
+/*------------------------------------------------------------------------------------------------------------------------*/
+
+
+/*======================================== Company Profile =========================================*/
+.headerCompanyProfile {
+  display: flex;
+  width: 100%;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}
+.headerCompanyProfile .headerBlock {
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+}
+.headerCompanyProfile .headerBlock .blockImg {
+  margin-right: 35px;
+}
+.headerCompanyProfile .headerBlock .blockText {
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}
+.headerCompanyProfile .headerBlock .blockText p.title {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-bottom: 19px;
+}
+.headerCompanyProfile .headerBlock .blockText a {
+  color: #3c3e3f;
+    font-family: 'Open Sans';
+  font-size: 16px;
+}
+.contentSettings.secondHeader {
+  padding-bottom: 0px;
+}
+.menuCompanyProfile {
+  width: 100%;
+  display: table;
+  cursor: default;
+  height: 45px;
+  margin-top: 35px;
+}
+.menuCompanyProfile div.settingMenuItems {
+  padding-left: 35px;
+  padding-top: 6px;
+  padding-right: 20px;
+}
+.menuItem {
+  color: #909495;
+  display: inline-block;
+  margin-right: 20px;
+  /*width: 165px;*/
+  width: auto;
+  position: relative;
+  text-align: center;
+  font-size: 20px;
+    font-family: 'Open Sans';
+  font-weight: normal;
+  cursor: pointer;
+}
+.menuItem.active {
+  color: #3c3e3f;
+  font-family: OpenSansSemibold;
+  cursor: default;
+}
+.menuItem:hover {
+  color: #3c3e3f;
+  font-family: OpenSansSemibold;
+}
+.menuItem.active::after {
+  content: '';
+  position: absolute;
+  left: 0px;
+  bottom: -12px;
+  border: 8px solid transparent;
+  border-bottom: 8px solid rgb(242, 247, 247);
+  margin-left: 40%;
+}
+.contentCompanyProfile {
+    background: rgb(242, 247, 247);
+    display: table;
+    width: 100%;
+}
+/**Work*/
+#addIncBtn,
+#addRepBtn,
+#addDepBtn,
+#addLocBtn {
+    display: none;
+    float: none;
+    height: 50px;
+}
+.bigCheckBox {
+    width:50px;
+    height:50px;
+    margin-top:12px;
+}
+
+/*end Work*/
+.contentCompanyProfile .blockLanguages,
+.contentCompanyProfile .blockLocations,
+.contentCompanyProfile .blockIncidentTypes,
+.contentCompanyProfile .blockReporterTypes,
+.contentCompanyProfile .blockDepartmens{    
+  width: 100%;
+  margin-bottom: 30px;
+}
+.contentCompanyProfile .blockLanguages,
+.contentCompanyProfile .blockIncidentTypes,
+.contentCompanyProfile .blockReporterTypes,
+.contentCompanyProfile .blockDepartmens {
+    display: none;
+ }
+.contentCompanyProfile .tableLanguage,
+.contentCompanyProfile .tableLocation,
+.contentCompanyProfile .tableIncidentType,
+.contentCompanyProfile .tableReporterType,
+.contentCompanyProfile .tableDepartment {
+  background: #ffffff;
+  border: 1px solid #e0e5e6;
+  width: 930px;
+  width: 95%;
+}
+.contentCompanyProfile .tableLanguage p ,
+.contentCompanyProfile .tableLocation p ,
+.contentCompanyProfile .tableIncidentType p ,
+.contentCompanyProfile .tableReporterType p ,
+.contentCompanyProfile .tableDepartment p {
+  margin-left: 19px;
+  margin-right: 10px;
+  border-bottom: 1px solid #e0e5e6;
+  padding-left: 20px;
+  padding-bottom: 17px;
+  padding-top: 35px;
+  padding-right: 20px;
+  color: #3c3e3f;
+  font-family: OpenSansSemibold;
+  font-size: 18px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  width:94%;
+}
+.contentCompanyProfile .tableLanguage div:last-child p,
+/*.contentCompanyProfile .tableLanguage p:last-child,*/
+.contentCompanyProfile .tableLocation div:last-child p,
+.contentCompanyProfile .tableIncidentType div:last-child p,
+.contentCompanyProfile .tableReporterType div:last-child p,
+.contentCompanyProfile .tableDepartment div:last-child p{
+  border-bottom: none;
+}
+
+.deleteLocation, .deleteIncidentType, .deleteReporterType, .deleteDepartment {
+    width: 14px;
+    height: 14px;
+    background-image: url(Icons/close.png);
+    position: absolute;
+    margin-left: -29px;
+    margin-top: 35px;
+    cursor:pointer;
+}
+
+.contentCompanyProfile .contentSettings{    
+  /*-webkit-flex-wrap: wrap;
+  flex-wrap: wrap;*/
+  display: table;
+}
+.contentCompanyProfile .addLanguageBtn p,
+.contentCompanyProfile .addLocationBtn p,
+.contentCompanyProfile .addIncidentTypeBtn p,
+.contentCompanyProfile .addReporterTypeBtn p,
+.contentCompanyProfile .addDepartmentBtn p {
+  border: 1px solid #6ccec3;
+  color: #05b5a2;
+  padding: 9px 10px 9px 10px;
+  font-family: 'Open Sans';
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 2px;
+  margin: 0px 0px 0px 30px;
+  float: left;
+  font-size: 14px;
+  /*min-width: 181px;*/
+  text-align: center;
+  white-space: nowrap;
+}
+
+.contentCompanyProfile_cc .addLanguageBtn p,
+.contentCompanyProfile_cc .addLocationBtn p,
+.contentCompanyProfile_cc .addIncidentTypeBtn p,
+.contentCompanyProfile_cc .addReporterTypeBtn p,
+.contentCompanyProfile_cc .addDepartmentBtn p {
+  border: 1px solid #8fc596;
+  color: #4da456;
+}
+.contentCompanyProfile .addLanguageBtn p:hover,
+.contentCompanyProfile .addLocationBtn p:hover,
+.contentCompanyProfile .addIncidentTypeBtn p:hover,
+.contentCompanyProfile .addReporterTypeBtn p:hover,
+.contentCompanyProfile .addDepartmentBtn p:hover{
+    background: #05b5a2;
+    color: #fff;
+}
+.contentCompanyProfile_cc .addLanguageBtn p:hover,
+.contentCompanyProfile_cc .addLocationBtn p:hover,
+.contentCompanyProfile_cc .addIncidentTypeBtn p:hover,
+.contentCompanyProfile_cc .addReporterTypeBtn p:hover,
+.contentCompanyProfile_cc .addDepartmentBtn p:hover {
+    background-color: #4da456;
+    border-color: #2e7037;
+    color: #fff;
+}
+.contentCompanyProfile .addLanguageBtn p:active,
+.contentCompanyProfile .addLocationBtn p:active,
+.contentCompanyProfile .addIncidentTypeBtn p:active,
+.contentCompanyProfile .addReporterTypeBtn p:active,
+.contentCompanyProfile .addDepartmentBtn p:active{
+    background: #049787;
+    color: #fff;
+}
+
+.contentCompanyProfile_cc .addLanguageBtn p:active,
+.contentCompanyProfile_cc .addLocationBtn p:active,
+.contentCompanyProfile_cc .addIncidentTypeBtn p:active,
+.contentCompanyProfile_cc .addReporterTypeBtn p:active,
+.contentCompanyProfile_cc .addDepartmentBtn p:active {
+    background-color: #2e7037;
+    border-color: #2e7037;
+    color: #fff;
+}
+.addLanguageBtn.inactive p,
+.addLanguageBtn.inactive p:hover,
+.addLanguageBtn.inactive p:active,
+.addLocationBtn.inactive p,
+.addLocationBtn.inactive p:hover,
+.addLocationBtn.inactive p:active,
+.addIncidentTypeBtn.inactive p,
+.addIncidentTypeBtn.inactive p:hover,
+.addIncidentTypeBtn.inactive p:active,
+.addReporterTypeBtn.inactive p,
+.addReporterTypeBtn.inactive p:hover,
+.addReporterTypeBtn.inactive p:active,
+.addDepartmentBtn.inactive p,
+.addDepartmentBtn.inactive p:hover,
+.addDepartmentBtn.inactive p:active {
+    border: 1px solid #c7cdcd;
+    color: #848a8b;
+    background: none;
+    white-space: nowrap;
+    cursor: default;
+}
+.contentCompanyProfile .addLanguageBtn,
+.contentCompanyProfile .addLocationBtn,
+.contentCompanyProfile .addDepartmentBtn,
+.contentCompanyProfile .addReporterTypeBtn,
+.contentCompanyProfile .addIncidentTypeBtn {
+  display: table;
+  width: 100%;
+  padding-bottom: 20px;
+  padding-top: 10px;
+}
+.addNewLanguage .closeIcon,
+.addNewLocation .closeIcon,
+.addNewIncidentType .closeIcon,
+.addNewReporterType .closeIcon,
+.addNewDepartment .closeIcon {
+  background: url(Icons/close.png);
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+}
+.contentCompanyProfile .addNewLanguage,
+.contentCompanyProfile .addNewLocation,
+.contentCompanyProfile .addNewIncidentType,
+.contentCompanyProfile .addNewReporterType,
+.contentCompanyProfile .addNewDepartment {
+  display: flex;
+  border: 2px solid #05b5a2;
+  /*width: 860px;*/
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  background: #ffffff;
+  height: 105px;
+  /*padding-left: 54px;
+  padding-right: 14px;*/  
+  width: 90%;
+  padding-left: 4%;
+  padding-right: 1%;
+  display: none;
+}
+.contentCompanyProfile.contentCompanyProfile_cc .addNewLanguage,
+.contentCompanyProfile.contentCompanyProfile_cc .addNewLocation,
+.contentCompanyProfile.contentCompanyProfile_cc .addNewIncidentType,
+.contentCompanyProfile.contentCompanyProfile_cc .addNewReporterType,
+.contentCompanyProfile.contentCompanyProfile_cc .addNewDepartment {
+  border: 2px solid #4da456;
+}
+.contentCompanyProfile .addNewLanguage input,
+.contentCompanyProfile .addNewLocation input,
+.contentCompanyProfile .addNewIncidentType input,
+.contentCompanyProfile .addNewReporterType input,
+.contentCompanyProfile .addNewDepartment input{    
+  width: 95%;
+  color: #3c3e3f;
+  font-family: OpenSansSemibold;
+  font-size: 18px;
+  border: none;
+  outline: none;
+}
+.blockImg {
+    position: relative;
+}
+#hoverCompanyPhoto {
+    display: none;
+    position: absolute;
+    background-color: rgba(0,0,0,0.6);
+    top: 0;
+    bottom: 0;
+    width: 241px;
+    height: 110px;
+}
+
+.blockImg:hover #hoverCompanyPhoto {
+    display: block;
+}
+#hoverCompanyPhoto .newImageBtn{
+    border: 1px solid #e5ebeb;
+    cursor: pointer;
+    color: #e5ebeb;
+    font-size: 11px;
+    font-weight: bold;
+    font-family: 'Open Sans';
+    text-transform: uppercase;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    border-radius: 1px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    width: 70%;
+    text-align: center;
+    margin: -15px auto;
+}
+#hoverCompanyPhoto .newImageBtn:hover{
+    background: #BBC5C7;
+    color: white;
+}
+
+
+
+
+
+
+/*-------------------------------------------- END Company Profile -------------------------------------------------------*/
+
+
+/*---------------------------------------------Case workflow----------------------------------------------------------------*/
+.backgroundCaseWorkflow {
+  background: #f2f7f7;
+}
+.blockCaseWorkflow {
+  background: #ffffff;
+  border: 1px solid #e0e5e6;
+  padding: 3%;
+  /* display: flex; */
+  /* -webkit-flex-direction: column; */
+  /* flex-direction: column; */
+  width: 94%;
+}
+.headerText {
+  /* display: flex; */
+  /* -webkit-justify-content: space-between; */
+  /* justify-content: space-between; */
+  display: table;
+  width: 100%;
+}
+.headerText .headerLeftText {
+  float: left;
+}
+.headerLeftText label {
+  font-size: 14px;
+    font-family: 'Open Sans';
+  font-weight: bold;
+  color: #727c7e;
+}
+.headerRightText {
+  /* display: flex; */
+  /* -webkit-flex-direction: column; */
+  /* flex-direction: column; */
+  /* text-align: right; */
+  /* -webkit-justify-content: flex-end; */
+  /* justify-content: flex-end; */
+  display: table;
+  float: right;
+  font-family: 'Open Sans';
+  color: #727c7e;
+  font-size: 12px;
+  text-align: right;
+}
+.headerRightText span{
+  font-family: OpenSansSemibold;
+}
+.blockCaseWorkflow .headerRightText div{   
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* align-items: flex-end; */
+  display: table;
+  /* float: right; */
+  width: 100%;
+  text-align: right;
+}
+.blockCaseWorkflow .headerRightText div p {
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+.blockCaseWorkflow .blockWorkflow {
+  height: 220px;
+}
+.blockCaseWorkflow .blockWorkflow .line {
+  width: 100%;
+  border-bottom: 4px solid #aeb5b7;
+  height: 108px;
+}
+.blockCaseWorkflow .blockWorkflow .blockSections {
+  position: relative;
+  width: 100%;
+  margin-top: -100px;
+}
+
+.blockSection .dot.first,
+.blockSection .dot.third {
+  height: 12px;
+  width: 12px;
+  background: #9be1da;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  margin-left: 10%;
+  float: left;
+  margin-top: 50px;
+}
+.blockSection .dot.third {
+  background: #f8c0b2;
+}
+.blockSection .dot.dot_cc.first {
+  background: #b8dbbb;
+}
+.blockSection {
+  margin-top: 39px;
+  width: 50%;
+  float: left;
+}
+.blockSection label.completeStage ,
+.blockSection label.startEscalation {
+  display: inline-table;
+  white-space: nowrap;
+  position: absolute;
+  cursor: pointer;
+}
+.blockSection label.completeStage {
+  padding-bottom: 19px;
+ left: 12%;
+}
+.blockSection label.startEscalation {
+  margin-top: 78px;
+  /*margin-left: -153px;
+  left: 12%;*/
+}
+
+
+/*.blockSection label.completeStage span.day {
+  color: #3c3e3f;
+  font-family: OpenSansSemibold;
+  font-size: 18px;
+  background-color: #ffffff;
+  border: 1px solid #05b5a2;
+  padding-left: 15px;
+  padding-bottom: 8px;
+  padding-top: 5px;
+  padding-right: 15px;
+  line-height: 18px;
+}*/
+.blockSection label.completeStage input {
+  color: #3c3e3f;
+  font-family: OpenSansSemibold;
+  font-size: 18px;
+  background-color: #ffffff;
+  border: 1px solid #05b5a2;
+  padding: 5px 3px 8px;
+  line-height: 18px;
+  width: 40px;
+  outline: none;
+  text-align: center;
+  -moz-appearance:textfield;
+}
+.blockSection label.completeStage.completeStage_cc input {
+    border-color: #4da456;
+}
+
+.blockSection label.completeStage span.text::after {
+  content: '';
+  position: absolute;
+  margin-left: 25px;
+  bottom: 0px;
+  border: 10px solid transparent;
+  border-top: 10px solid #05b5a2;
+}
+.blockSection label.completeStage.completeStage_cc span.text::after{
+  border-top: 10px solid #4da456;
+}
+/*.blockSection label.completeStage span.day::after {
+  content: '';
+  position: absolute;
+  margin-left: -15px;
+  bottom: -10px;
+  border: 10px solid transparent;
+  border-top: 10px solid #05b5a2;
+}*/
+
+.blockSection label.completeStage::after {
+  height: 12px;
+  width: 12px;
+  background: #05b5a2;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  margin-left: -30px;
+  margin-top: 50px;
+  content: '';
+  position: absolute;
+}
+.blockSection label.completeStage.completeStage_cc::after {
+    background: #4da456;
+}
+.blockSections .blockSection span.text {
+  color: #727c7e;
+  font-family: OpenSansSemibold;
+  font-size: 14px;
+  background-color: #eff0f1;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+}
+
+.blockSection label.startEscalation input {  
+  color: #3c3e3f;
+  font-family: OpenSansSemibold;
+  font-size: 18px;
+  background-color: #ffffff;
+  border: 1px solid #ee613f;
+  padding: 5px 3px 8px;
+  line-height: 18px;
+  width: 40px;
+  outline: none;
+  text-align: center;
+  -moz-appearance:textfield;
+}
+.blockSection label.startEscalation input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+.blockSection label.completeStage input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+.blockSection label.startEscalation input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+.blockSection label.completeStage input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+/*.blockSection label.startEscalation span.day {
+  color: #3c3e3f;
+  font-family: OpenSansSemibold;
+  font-size: 18px;
+  background-color: #ffffff;
+  border: 1px solid #ee613f;
+  padding-left: 15px;
+  padding-bottom: 8px;
+  padding-top: 5px;
+  padding-right: 15px;
+  line-height: 18px;
+}
+.blockSection label.startEscalation span.day::before {
+  content: '';
+  position: absolute;
+  margin-left: -5px;
+  top: -28px;
+  border: 10px solid transparent;
+  border-bottom: 10px solid #ee613f;
+}*/
+.blockSection label.startEscalation span.text::before {
+  content: '';
+  position: absolute;
+  margin-left: 166px;
+  top: -20px;
+  border: 10px solid transparent;
+  border-bottom: 10px solid #ee613f;
+}
+
+.blockSection label.startEscalation::after {
+  height: 12px;
+  width: 12px;
+  background: #ee613f;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  margin-left: -33px;
+  margin-top: -28px;
+  content: '';
+  position: absolute;
+}
+
+.caseesTab.active::after {
+  bottom: -12px;
+}
+
+
+.headerCaseWorkflow .contentSettings{
+    padding-bottom: 0px;
+}
+.headerCaseWorkflow .contentSettings p.title {
+  font-family: OpenSansSemibold;
+  font-size: 20px;
+  color: #3c3e3f;
+  margin-top: 0px;
+  margin-bottom: 27px;
+}
+.headerCaseWorkflow .contentSettings p.headerText  {
+  font-family: 'Open Sans';
+  font-size: 16px;
+  color: #3c3e3f;
+  margin-bottom: 0px;
+}
+p.headerText span {
+  font-weight: bold;
+}
+.allBlockLineHeader {
+  display: table;
+  width: 100%;
+  padding-top: 56px;
+  padding-bottom: 60px;
+}
+.blockLineHeader {
+  float: left;
+  border-bottom: 4px solid #05b5a2;
+  margin-right: 1%;
+  width: 19%;
+}
+.blockLineHeader.blockLineHeader_cc {
+  border-color: #4da456;
+}
+.blockLineHeader:last-child {
+  margin-right: 0%;
+  width: 20%;
+}
+/*.blockLineHeader.first {
+  width: 7%;
+}
+.blockLineHeader.second {
+  width: 37%;
+}
+.blockLineHeader.third {
+  width: 30%;
+}
+.blockLineHeader.fourth {
+  width: 23%;
+}
+
+.blockLineHeader.fifth {
+  width: 23%;
+  margin-right: 0%;
+}*/
+
+.blockLineHeader label {
+  position: absolute;
+  color: #abb9bb;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-family: 'Open Sans';
+  font-weight: bold;
+}
+.blockLineHeader.first label,
+.blockLineHeader.third label, 
+.blockLineHeader.fifth label {
+  margin-top: -18px;
+}
+.blockLineHeader.second label,
+.blockLineHeader.fourth label {
+  margin-top: 4px;
+}
+/*--------------------------------------------- END Case workflow----------------------------------------------------------------*/
+
+
+/*==================== STARTCompany Mediators==================*/
+
+.blockIteamTeam{
+  width: 258px;
+  background: #ffffff;
+  border: 1px solid #e0e5e6;
+  display: table;
+  min-height: 270px;
+  margin-left: 47px;
+  margin-top: 0px;
+  margin-bottom: 42px;
+  cursor: default;
+  -webkit-align-content: stretch;
+  align-content: stretch;
+  float: left;
+  margin-left: 0px;
+  margin-right: 5%;
+}
+.blockIteamTeam .blockHeaderTeam{  
+  display: table;
+  width: 234px;
+  padding: 12px;
+  min-height: 46px;
+}
+.blockHeaderTeam .blockHeaderText{    
+  display: table;
+  float: left;
+  padding-left: 15px;
+  width: 175px;
+}
+.blockIteamTeam .blockPhoto .photoPersonal {
+  width: 40px;
+  height: 40px;
+}
+.blockHeaderTeam .blockHeaderText p{  
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.blockHeaderTeam .blockHeaderText p:first-child{  
+  color: #3c3e3f;
+  font-size: 18px;
+    font-family: 'Open Sans';
+    width: 168px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.blockHeaderTeam .blockHeaderText p:last-child{  
+  color: #aeb5b7;
+  font-size: 14px;
+  font-family: OpenSansSemibold;
+}
+.blockIteamTeam p.blockMediator{     
+    margin-top: 10px;
+    margin-bottom: 0px;
+    height: 20px;
+}
+.blockIteamTeam .blockMediator span{ 
+  color: #ffffff;
+  background: #aeb5b7;
+  font-family: OpenSansSemibold;
+  font-size: 11px;
+  text-transform: uppercase;
+  padding: 3px 10px 2px 18px;
+}
+.blockIteamTeam .blockMediator.admin span{ 
+  background: #05b5a2;
+}
+.blockIteamTeam .blockMediator.admin.admin_cc span{ 
+  background: #4da456;
+}
+.blockIteamTeam .blockMediator.escalation span{ 
+  background: #ee613f;
+}
+.blockIteamTeam p.blockTextMediator{   
+  margin-top: 0px;
+  margin-bottom: 0px;
+  display: table;
+  padding: 25px 19px 32px 19px;
+  font-family: OpenSansSemibold;
+  color: #848a8b;
+  font-size: 16px;
+}
+.blockIteamTeam .blockCircles{    
+  display: flex;
+  margin: auto;
+  text-align: center;
+  flex-direction: inherit;
+  width: 100%;
+  justify-content: space-around;
+}
+.blockIteamTeam .blockDays .textDays p:first-child {    
+    margin-bottom: 0px;
+    margin-top: 0px;
+    line-height: 20px;
+}
+.blockIteamTeam .blockDays .textDays p:last-child {
+  font-size: 10px;
+  margin-top: 0px;
+  color: #848a8b;
+  margin-bottom: 0px;
+  line-height: 10px;
+}
+.blockIteamTeam .blocksInfo {
+  margin-left: 10px;
+  margin-right: 10px;
+  border-top: 1px solid #e8eaeb;
+  padding: 15px 0px 10px 13px;
+}
+.blockIteamTeam .blockInfo label {
+  font-size: 14px;
+  color: #848a8b;
+  padding-left: 5px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-bottom: -2px;
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.blockIteamTeam .blockInfo img {
+    display: inline-block;
+    vertical-align: middle;
+}
+.rightBlockContent .contentMediators {
+  display: flex;
+  width: 70%;
+  margin: auto;
+  margin-right: 7%;
+  flex-direction: row;
+  /* padding-top: 40px; */
+  flex-wrap: wrap;
+  cursor: default;
+  padding-right: 10%;
+}
+.rightBlockContent .contentMediators.addToTeam{
+    display: none;
+}
+p.addMoreMediatorsBtn {
+  text-align: center;
+  margin-top: 40px;
+  width: 90%;
+  /* margin-right: 7%; */
+}
+
+.contentMediators.addToTeam p.title{
+  float: none;
+  width: 90%;
+  text-align: center;
+  display: table;
+  font-weight: bold;
+  color: #05b5a2;
+  font-size: 18px;
+    font-family: 'Open Sans';
+  margin-top: 50px;
+}
+/*.contentMediators.addToTeam .blockMediator span{
+  margin-top: 0px;
+  margin-bottom: 0px;
+}*/
+.contentMediators.addToTeam .blockMediator span{
+  border: 1px solid #d3d7d8;
+  color: #aeb5b7;
+  font-family: 'Open Sans';
+  font-weight: bold;
+  font-size: 11px;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 7px 10px 7px 10px;
+  border-radius: 2px;
+  height: 41px;
+  background: #fff;
+  margin-left: 10px;
+}
+.contentMediators.addToTeam .blockMediator span:hover{
+    background: #05b5a2;
+    color: #ffffff;
+    border-color: #049787;
+}
+.contentMediators.addToTeam .blockMediator span:active{
+    background: #049787;
+    color: #ffffff;
+    border-color: #049787;
+}
+#attachments {
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+#logoCompany {
+    width: 240px;
+    height: 110px;
+}
+
+.headerCompanyProfile .blockSendEmail {  
+    width: 1172px;
+    height: 26px;
+    margin-bottom: 30px;
+    border: 2px solid #e0e5e6;
+    display: table;
+    /* border: 2px solid #05b5a2; */
+    align-items: center;
+    background: #ffffff;
+    padding-left: 54px;
+    position: relative;
+    padding: 20px 54px;
+}
+.headerCompanyProfile .blockSendEmail.blockSendEmail_cc{    
+    padding: 20px;
+}
+.headerCompanyProfile .blockSendEmail.greyBorder{
+  border: 2px solid #e0e5e6;
+}
+.headerCompanyProfile .blockSendEmail.greenBorder{
+  border: 2px solid #05b5a2;
+}
+.headerCompanyProfile .blockSendEmail.blockSendEmail_cc.greenBorder{
+  border: 2px solid #4da456;
+}
+
+.headerCompanyProfile .blockSendEmail.greyBorder.redBorder,
+.headerCompanyProfile .blockSendEmail.greenBorder.redBorder, 
+.headerCompanyProfile .blockSendEmail.blockSendEmail_cc.greenBorder.redBorder{
+  border: 2px solid red;
+}
+.headerCompanyProfile .blockSendEmail input[type="text"] {
+    width: 100%;
+    color: #3c3e3f;
+    font-family: OpenSansSemibold;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    height: 24px;
+    display: block;
+}
+.headerCompanyProfile .blockSendEmail.blockSendEmail_cc input[type="text"]{    
+    font-family: 'Open Sans';
+    font-size: 14px;
+    padding: 0 14px;
+    box-sizing: border-box;
+}
+.headerCompanyProfile .blockSendEmail.blockSendEmail_cc textarea{ 
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    display: inline-block;
+    margin-top: 17px;
+    box-sizing: border-box;
+    padding: 14px 14px 4px;
+    color: #3c3e3f;
+    font-family: Open Sans;
+    font-size: 14px;
+    border: none;
+    outline: none;
+    border-top: 1px solid #aeb5b7;
+    resize: none;
+}
+.headerCompanyProfile .blockSendEmail .closeIcon {    
+    display: none;
+    background: url(Icons/close.png) no-repeat center;
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    position: absolute;
+    top: 27px;
+    right: 120px;
+}
+.headerCompanyProfile .blockSendEmail input[type="submit"] {
+    display: none;
+}
+.headerCompanyProfile .blockSendEmail span.sendBtn {
+  display: none;
+    border: 1px solid #049787;
+    font-family: 'Open Sans';
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 2px;
+    font-size: 14px;
+    background: #05b5a2;
+    color: #fff;
+    position: absolute;
+    top: 14px;
+    height: 20px;
+    right: 36px;
+}
+
+
+.headerCompanyProfile .blockSendEmail span.sendBtn:hover, .headerCompanyProfile .blockSendEmail span.sendBtn:focus{
+    background-color: #049787;
+}
+.headerCompanyProfile .blockSendEmail span.sendBtn:active{
+    border-color: #345c60;
+    background-color: #345c60;
+}
+.headerCompanyProfile .blockSendEmail.blockSendEmail_cc span.sendBtn{    
+    background-color: #4da456;
+    border-color: #2e7037;
+}
+.headerCompanyProfile .blockSendEmail.blockSendEmail_cc span.sendBtn:hover, .headerCompanyProfile .blockSendEmail.blockSendEmail_cc span.sendBtn:focus{    
+    background-color: #3C8445;
+    border-color: #2e7037;
+}
+.headerCompanyProfile .blockSendEmail.blockSendEmail_cc span.sendBtn:active{    
+    background-color: #2e7037;
+    border-color: #2e7037;
+}
+.blockSettings .contentCompanyProfiel {
+  background-color: #f2f7f7;
+}
+.blockSettings .contentCompanyProfiel .contentSettings{
+    padding-top: 17px;
+}
+
+
+#viewReport .addComment .messageText textarea::-webkit-input-placeholder{
+  color: #3c3e3f;
+}
+#viewReport .addComment .messageText textarea:-ms-input-placeholder{
+  color: #3c3e3f;
+}
+#viewReport .addComment .messageText textarea:-moz-placeholder{
+  color: #3c3e3f;
+}
+#viewReport .addComment .messageText textarea::-moz-placeholder{
+  color: #3c3e3f;
+}
+
+.blockHeaderTeam .close {
+    float: none;
+    padding-right: 0px;
+}
+.blockHeaderTeam .close:after {
+    content: "\00d7";
+    position: absolute;
+    float: right;
+    margin-left: -8px;
+    margin-top: -15px;
+    color: #ffffff;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.contentMediators.blockTeam  .blockIteamTeam:hover .blockHeaderTeam {
+    background-color: #05b5a2;
+}
+.contentMediators.blockTeam  .blockIteamTeam:hover .blockHeaderTeam .blockHeaderText p {
+    color: #ffffff;
+}
+.contentMediators.blockTeam .blockIteamTeam:hover .blockHeaderTeam {
+    background-color: #05b5a2;
+}
+.contentMediators.blockTeam .blockIteamTeam.blockIteamTeam_cc:hover .blockHeaderTeam {
+    background-color: #4da456;
+}
+/*==================== END Company Mediators ==================*/
+/*================= END blockSettings =======================*/
+
+.saveSettings {
+    margin-top: 30px;
+}
+
+.greenButton {
+    -webkit-appearance: none;
+    color:rgb(255, 255 ,255);
+    height: 32px;
+    border-radius: 2px;
+    border:1px solid;
+    border-color: #049787;
+    background-color: #05b5a2;
+    float:right;
+    font-family:OpenSans-Bold;
+    font-size:14px;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-left: 15px;
+    min-width: 120px;
+    outline: none;
+}
+.greenButton:hover, .greenButton:focus{
+    background-color: #049787;
+}
+.greenButton:active{
+    border-color: #345c60;
+    background-color: #345c60;
+}
+.greenButton.greenButton_cc{    
+    background-color: #4da456;
+    border-color: #2e7037;
+}
+.greenButton.greenButton_cc:hover, .greenButton.greenButton_cc:focus{    
+    background-color: #3C8445;
+    border-color: #2e7037;
+}
+.greenButton.greenButton_cc:active{    
+    background-color: #2e7037;
+    border-color: #2e7037;
+}
+
+#saveButton {
+    color: rgb(4, 151, 135);
+    float: right;
+    font-family: OpenSans-Bold;
+    font-size: 14px;
+    display: none;
+    margin-top: 5px;
+    min-width: 69.3438px;
+    margin-left: 20px;
+}
+/*.blockPhotoSetting {
+  float: left;
+}*/
+.blockPhotoSetting {
+    display: table-cell;
+    vertical-align: middle;
+    height: 140px;
+    background-color: #E0E5E6;
+}
+
+/*---------------------- Start New User ---------------------------*/
+p.helloUser {
+    color: #727c7e;
+    font-family: 'Open Sans';
+    font-size: 16px;
+    margin-bottom: 30px;
+    margin-top: 0px;
+    font-weight: bold;
+    /* padding-left: 30px; */
+}
+.titleNewUser h1.helloUser {
+    width: 90%;
+    color: #fff;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: normal;
+    display: block;
+    font-family: 'Open Sans', sans-serif;
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+.titleNewUser {
+    background-color: rgb(187, 197, 199);
+    padding-bottom: 5px;
+    padding-top: 15px;
+}
+/*---------------------- End New User ---------------------------*/
+/*---------------------- Start New Company ---------------------------*/
+.blockSettings.contentCompanyProfile img.PersonalPhotoBlock{
+    width: 245px;
+}
+.blockSettings.contentCompanyProfile .blockHoverPhoto{
+    width: 247px;
+}
+.blockSettings.contentCompanyProfile .contentSettings .personalBlock {
+    width: 70%;
+}
+.blockSettings.contentCompanyProfile {
+    background: #e5ebeb;
+}
+/*---------------------- End New Company ---------------------------*/
+
+/*=============================START MEDIA======================*/
+/*----------------------Start My Profile ----------------------*/
+@media (max-width: 1700px){
+    .blockSettings .contentSettings {
+        width: 88%;
+        margin-left: 40px;
+    }
+    /*.contentCompanyProfile .addNewLanguage,
+    .contentCompanyProfile .addNewLocation, 
+    .contentCompanyProfile .addNewDepartment {
+      width: 94.8%;
+    }*/
+}
+@media (max-width: 1300px) {
+    .rowBlock.inputMediator .freeBlock {
+        width: 23%;
+    }
+}
+@media (max-width: 1162px) {
+    /*.blockSettings .caseesTab {
+        width: 170px;
+    }*/
+    .blockSettings .contentSettings {
+        width: 90%;
+    }
+    .blockSettings .caseesTab {
+      width: 202px;
+      margin-right: 0px;
+    }
+
+}
+@media (max-width: 1002px) {
+    .contentSettings .blockPersonalSettings {
+        display: table;
+    }
+    .rowBlock.inputMediator .inputBlock input[type="radio"] + span {
+        text-align: center;
+    }
+
+}
+@media (max-width: 970px) {
+    .blockSettings .caseesTab {
+      width: 99px;
+      margin-right: 40px;
+    }
+    #casesHeared,
+    .positionActivityIcon {
+      /*height: 89px;*/
+    }
+    #activityIcon {
+      /*margin-top: 38px;*/
+    }
+}
+@media (max-width: 930px) {
+    .contentSettings .personalBlock,    
+    .blockSettings.contentCompanyProfile .contentSettings .personalBlock {
+      width: 100%;
+      display: table;
+    }
+    .contentSettings .blockPersonalPhotoSetting {
+      float: left;
+      width: 100%;
+    }
+}
+@media (max-width: 848px) {
+    .rowBlock.inputMediator .freeBlock {
+      width: 17%;
+    }
+    .contentSettings .blockPersonalSettings p.title{        
+      padding-left: 4%;
+    }
+}
+@media (max-width: 715px) {
+    .blockSettings .caseesTab {
+      margin-right: 20px;
+    }    
+    .contentSettings.secondHeader .settingMenuItems .menuItem {
+      width: 130px;
+    }
+}
+@media (max-width: 694px) {    
+    .rowBlock.inputMediator .freeBlock {
+      width: 50%;
+      float: none;
+      margin: 10px auto;
+    }
+}
+@media (max-width: 630px) {    
+   .blockSettings #casesHeared #menu,
+   #casesHeared.pageCases #menu {
+      width: 85%;
+    }
+}
+@media (min-width: 620px){
+    .blockLineHeader {
+      float: left;
+      margin-right: 1%;
+      width: 19% !important;
+    }
+    .blockLineHeader:last-child {
+      width: 20% !important;
+    }
+}
+@media (max-width: 620px) {    
+   .blockSettings .caseesTab,
+   .pageCases .caseesTab {
+      margin-right: 0px;
+      margin-left: 0px;
+      float: none;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+   .caseesTab.active::after {
+      left: 20%;
+      bottom: 7px;
+      border: 6px solid transparent;
+      border-left: 10px solid rgb(229, 235, 235);
+      margin-left: 0px;
+    }
+   h2.mainTitle {
+       display: block;
+       cursor: pointer;
+    }
+   h2.mainTitle + div {
+       display: none;
+    }
+   
+   .headerCompanyProfile .headerBlock{       
+      display: block;
+      text-align: center;
+      margin: auto;
+   }
+   .contentSettings.secondHeader .settingMenuItems .menuItem {
+      width: 100%;
+      margin-left: 0px;
+      margin-right: 0px;
+      margin-top: 0px;
+      padding-bottom: 10px;
+    }
+   .contentSettings.secondHeader .settingMenuItems .menuItem.active::after {
+      margin-left: 25%;
+      bottom: 18px;
+      border: 6px solid transparent;
+      border-left: 10px solid rgb(242, 247, 247);
+    }
+   .menuCompanyProfile {
+      margin-bottom: 10px;
+    }
+   .headerCompanyProfile .headerBlock .blockImg {
+      margin-right: 0px;
+    }
+   .blockLineHeader.first label, 
+   .blockLineHeader.second label,
+   .blockLineHeader.third label,
+   .blockLineHeader.fourth label,
+   .blockLineHeader.fifth label {
+      margin-top: 0px;
+    }
+   .blockLineHeader {
+      height: 19px;
+      float: none;
+      margin-bottom: 10px;
+    }
+   .allBlockLineHeader {
+      padding-top: 25px;
+      padding-bottom: 30px;
+    }
+   .headerRightText {
+      margin-top: 3px;
+    }
+
+   .contentCompanyProfile .addNewLanguage,
+   .contentCompanyProfile .addNewLocation,
+   .contentCompanyProfile .addNewDepartment{       
+        width: 95%;
+   }
+   .contentCompanyProfile .tableLanguage, 
+   .contentCompanyProfile .tableLocation, 
+   .contentCompanyProfile .tableDepartment {
+      width: 100%;
+    }
+
+}
+@media (max-width: 551px) {
+   .blockSettings #casesHeared #menu,
+   .pageCases #casesHeared #menu {
+      width: 80%;
+    }  
+   .caseesTab.active::after {
+      left: 10%;
+    }
+   .blockSection label.completeStage {
+      left: 5%;
+    }
+   .blockSection label.startEscalation {
+      left: 45%;
+    }
+}
+
+@media (max-width: 440px) {    
+   .blockSection label.startEscalation {
+      left: 35%;
+    }   
+   .blockSection label.completeStage {
+      left: 2%;
+    }
+    .blockPersonalSettings .freeBlock {
+      width: 40%;
+      width: 0%;
+      float: none;
+      margin: 10px auto;
+    }
+    .blockSection .dot.third {
+      margin-left: 30%;
+    }
+   .blockSettings #casesHeared #menu {
+      width: 85%;
+    }
+   .positionActivityIcon {
+      width: 40px;
+    }
+   .caseesTab.active::after {
+      left: 5%;
+    }
+   .blockSettings .caseesTab {
+      padding-left: 10px;
+    }
+   
+   .contentSettings.secondHeader .settingMenuItems .menuItem.active::after {
+      margin-left: 10%;
+    }
+}
+
+/*----------------------End My Profile ----------------------*/
+
+/*---------------------- Start Company Mediators ----------------------*/
+@media (max-width: 1874px){
+    .headerCompanyProfile .blockSendEmail {
+        width: 845px;
+    }
+}
+@media (max-width: 1700px){
+    .headerCompanyProfile .blockSendEmail {
+        width: 1172px;
+    }
+}
+@media (max-width: 1641px){
+    .headerCompanyProfile .blockSendEmail {
+        width: 845px;
+    }
+    .blockIteamTeam {
+        margin-right: 65px;
+    }
+}
+@media (max-width: 1235px){
+    .headerCompanyProfile .blockSendEmail {
+        width: 1172px;
+    }
+}
+@media (max-width: 1641px){
+    .headerCompanyProfile .blockSendEmail {
+        width: 780px;
+    }
+    .blockIteamTeam {
+        margin-right: 35px;
+    }
+}
+@media (max-width: 1000px){
+    .headerCompanyProfile .blockSendEmail {
+        width: 740px;
+    }
+    .blockIteamTeam {
+        margin-right: 15px;
+    }
+}
+@media (max-width: 933px){
+    .headerCompanyProfile .blockSendEmail {
+          width: 90%;
+    }
+}
+@media (max-width: 630px) {
+    .blockIteamTeam {
+        margin-right: 0px;
+        float: none;
+        margin: auto;
+        margin-bottom: 30px;
+    }
+    .headerCompanyProfile .blockSendEmail .closeIcon {
+        margin-right: 5%;
+    }
+    .headerCompanyProfile .blockSendEmail span.sendBtn {
+        margin-right: 2%;
+    }
+    .headerCompanyProfile .blockSendEmail {
+        padding-left: 3%;
+        width: 90%;
+        padding-right: 2%;
+        margin: auto;
+        margin-bottom: 30px;
+    }
+    .headerCompanyProfile .blockSendEmail input[type="text"] {
+        width: 65%;
+    }
+    #casesHeared #menu {
+        width: 100%;
+    }
+    #activityIcon{
+        /*margin: auto;
+        margin-top: 28px;
+        margin-bottom: 17px;*/
+    }
+}
+@media (max-width: 370px) {
+    .headerCompanyProfile .blockSendEmail span.sendBtn,
+    .headerCompanyProfile .blockSendEmail .closeIcon {
+        margin-right: 0%;
+    }
+    .headerCompanyProfile .blockSendEmail input[type="text"] {
+        width: 65%;
+    }
+    .blockSection label.completeStage {
+      left: -1%;
+    }
+    .blockSection label.startEscalation {
+      left: 26%;
+    }
+    .blockSection .dot.third {
+      margin-left: 43%;
+    }
+}
+/*----------------------End Company Mediators ----------------------*/
+
+/*------------------------------------------------NewReport page START MEDIA---------------------------------------*/
+@media (max-width: 900px){
+    #viewReport .contentViewReport,
+    #generalInfo .firstPosition,
+    #generalInfo .contentDownloadDoc {
+      width: 600px;
+    }
+    .contentDownloadDoc .blockDownloadDoc {
+      padding-left: 45px;
+      width: 40%;
+    }
+    .contentViewReport .messageText textarea{        
+        min-width: 86.5%;
+    }
+}
+@media (max-width: 660px){
+    #viewReport .contentViewReport,
+    #generalInfo .firstPosition,
+    #generalInfo .contentDownloadDoc {
+      width: 500px;
+    }
+    .contentDownloadDoc .blockDownloadDoc {
+      padding-left: 45px;
+      width: 90%;
+      margin-top: 15px;
+    }
+    .contentDownloadDoc .blockDownloadDoc:first-child {
+      margin-top: 0px;
+    }
+    #viewReport .contentViewReport .markSpamBtn {
+      padding-left: 15px;
+      padding-right: 15px;
+      margin-top: 15px;
+    }
+    .helpBlock span {
+      margin-right: 10%;
+    }    
+    .contentViewReport .messageText textarea{        
+        min-width: 84.5%;
+    }
+    #viewReport .contentViewReport .headerblockButtons .markSpamBtn {
+      margin-top: 0px;
+    }
+}
+
+@media (max-width: 550px){
+    #viewReport .contentViewReport {
+      width: 300px;
+    }
+    #generalInfo .firstPosition,
+    #generalInfo .contentDownloadDoc {
+      width: 85%;
+    }
+    #viewReport {
+      display: table;
+      padding-bottom: 20px;
+    }
+    #viewReport .firstPosition {
+      display: table;
+      margin-bottom: 30px;
+    }
+    #viewReport .contentViewReport .markSpamBtn{
+        float: left;
+        margin-left: 0px;
+        margin-top: 0px;
+    }
+    .generalInformation tr td,
+    .partiesInformation tr td,
+    .caseInformation tr td {        
+      display: block;
+      width: 100%;
+      margin-right: 0px;
+     }
+    .generalInformation tr td:last-child, 
+    .partiesInformation tr td:last-child, 
+    .caseInformation tr td:last-child{
+        padding-top: 5px;
+    }
+    #viewReport .contentViewReport .firstposition {
+      float: left;
+      padding-bottom: 20px;
+    }
+    #viewReport .contentViewReport.blockSpamCase .headerblockButtons label.markSpamBtn,
+    #viewReport .contentViewReport.blockAcceptCase .headerblockButtons label.markSpamBtn,
+    .contentBlockCase p.titleCase,
+    .contentBlockCase p.textCace{
+      margin-left: 25px;
+    }
+    .contentViewReport .messageText textarea {
+      min-width: 75.5%;
+    }
+}
+@media (max-width: 400px){    
+    #viewReport .contentViewReport {
+      width: 260px;
+    }
+    .menuCasesBlock + .headerPos .positionN {
+      width: 32.5%;
+      display: table;
+      text-align: center;
+      float: left;
+      height: 21px;
+    }
+    .menuCasesBlock + .headerPos .positionN + .polos {
+      margin-top: 18px;
+      float: left;
+    }
+    .menuCasesBlock + .headerPos{        
+      display: table;
+      width: 100%;
+      float: left;
+    }
+    #viewReport .contentViewReport.blockSpamCase .headerblockButtons label.markSpamBtn,
+    #viewReport .contentViewReport.blockAcceptCase .headerblockButtons label.markSpamBtn,
+    .contentBlockCase p.titleCase,
+    .contentBlockCase p.textCace{
+      margin-left: 10px;
+      margin-right: 5px;
+    }
+    .contentViewReport .messageText textarea {
+      min-width: 70%;
+      max-width: 185px;
+    }
+    #viewReport .contentViewReport.blockSpamCase .headerblockButtons label.markSpamBtn,
+    #viewReport .contentViewReport.blockAcceptCase .headerblockButtons label.markSpamBtn/*,
+    .contentViewReport .headerblockButtons label.markSpamBtn*/{        
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    #viewReport .contentViewReport.blockSpamCase .headerblockButtons label.acceptCaseBtn,
+    #viewReport .contentViewReport.blockAcceptCase .headerblockButtons label.acceptCaseBtn {        
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-bottom: 6px;
+    }
+
+    .addLanguageBtn.inactive + div p,  
+    .addLocationBtn.inactive + div p, 
+    .addReporterTypeBtn.inactive + div p,
+    .addIncidentTypeBtn.inactive + div p,
+    .addDepartmentBtn.inactive + div p{
+      margin-left: 36%;
+      margin-bottom: 20px;
+    }
+}
+
+
+/*------------------------------------------------NewReport page END MEDIA---------------------------------------*/
+
+
+@media (min-width: 621px) and (max-width: 970px) {
+    #casesHeared, 
+    .positionActivityIcon {
+      /*height: 89px !important;*/
+    }
+    h2.mainTitle + div{
+        display: block !important;
+    }
+    #casesHeared.pageCases, 
+    .pageCases .positionActivityIcon {
+        height: 50px !important;
+        padding-bottom: 10px;
+    }
+    .pageCases #activityIcon {
+      /*margin-top: 28px;*/
+    }
+    .pageCases #menu .caseesTab:first-child{
+      width: 160px;
+    }
+    .pageCases #menu .caseesTab:last-child{
+      width: 110px;
+    }
+}
+@media (min-width: 970px) {
+    #casesHeared, 
+    .positionActivityIcon {
+      /*height: 64px !important;*/
+    }
+    h2.mainTitle + div{
+        display: block !important;
+    }    
+    #casesHeared.pageCases, 
+    .pageCases .positionActivityIcon {
+        height: 50px !important;
+        padding-bottom: 10px;
+    }
+    .pageCases #activityIcon {
+      /*margin-top: 28px;*/
+    }
+}
+/*=============================END MEDIA======================*/

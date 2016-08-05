@@ -1,0 +1,524 @@
+﻿@using EC.Models.Database;
+@using EC.Models;
+@using EC.App_LocalResources;
+@{
+    int report_id = (Int32)ViewBag.report_id;
+    int user_id = (Int32)ViewBag.user_id;
+    List<attachment> attachmentFiles = (List<attachment>)ViewBag.attachmentFiles;
+
+    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+
+    ReportModel rm = (ReportModel)ViewBag.rm;
+    UserModel um = new UserModel(user_id);
+
+    GlobalFunctions glb = new GlobalFunctions();
+    user _assigner = new user();
+    string _month_name = "";
+    string temp_space = "&nbsp;&nbsp;";
+
+    int message_quantity = 0;
+    int task_quantity = 0;
+    int action_quantity = 0;
+
+
+    List<user> _involved_mediators_user_list = ViewBag._involved_mediators_user_list;
+    List<user> _mediators_whoHasAccess_toReport = ViewBag._mediators_whoHasAccess_toReport;
+    List<user> _available_toAssign_mediators = ViewBag._available_toAssign_mediators;
+
+    string report_name = " - #" + rm._report.display_name + " - " + rm._secondary_type_string + " - " + rm._location_string;
+    ViewBag.Title = GlobalRes.CaseTeamUp + report_name;
+
+    <link type="text/css" href="~/Content/caseTasks.css" rel="stylesheet">
+    string popup = null;
+    if (ViewBag.popup != null)
+    {
+        popup = ViewBag.popup;
+    }
+}
+<body>
+
+    <div class="blockContent">
+        <!--leftBlockContent-->
+        @Html.Partial("~/Views/PartialViews/_ReportDetailsLeft.cshtml",
+                        new ViewDataDictionary { { "report_id", report_id },
+                                                { "user_id", user_id },
+                                                { "attachmentFiles", attachmentFiles } })
+
+        <div class="rightBlockContent">
+            <div id="slider"><div class="reportIconWhite"></div></div>
+            <div id="casesHeared">
+                <div id="menu">
+                    @Html.Partial("~/Views/PartialViews/_ReportTopMenu.cshtml",
+                        new ViewDataDictionary { { "report_id", report_id },
+                                                { "user_id", user_id },
+                                                { "selected_item", 3 } ,{ "popup", popup }})
+                </div>
+                <div class="positionActivityIcon">
+                    <div id="activityIcon"></div>
+                </div>
+
+
+            </div>
+            <div class="blockWithTeam">
+
+                <div id="rightRight">
+                    @Html.Action("GetAjaxActivity", "Case", Html.Raw(report_id))
+                </div>
+
+                <div class="contentMediators blockTeam">
+                    @foreach (user _user in _mediators_whoHasAccess_toReport)
+                    {
+                        um = new UserModel(_user.id);
+                        task_quantity = um.CaseTasksQuantity(report_id);
+                        message_quantity = @um.CaseMessagesQuantity(report_id);
+                        action_quantity = @um.CaseActionsQuantity(report_id);
+
+
+                        <div class="blockIteamTeam">
+                            <div class="blockHeaderTeam">
+                                <div class="blockPhoto">
+                                    <div class="photoPersonal">
+                                        @if (um._user.photo_path.Trim().Length == 0)
+                                        {
+                                    <img src='@Url.Content("~/Content/Icons/anonimousReporterIcon.png")' />
+                                        }
+                                        else
+                                        {
+                                    <img src='@Url.Content(um._user.photo_path.Trim())' />
+                                        }
+                                    </div><!--blockPhoto-->
+                                </div>
+                                <div class="blockHeaderText">
+                                    <p>@um._user.first_nm @um._user.last_nm</p>
+                                    <p>@um._user.title_ds</p>
+                                </div>
+
+                                @if (((_user.role_id == 6) || (_user.role_id == 7)) && (rm._investigation_status != Constant.investigation_status_closed))
+                                {
+                                <label class="close" data-userid="@_user.id"></label>
+                                }
+
+                            </div>
+                            @if (um._user.role_id == 4)
+                            {
+                    <p class="blockMediator escalation">
+                        <span>@GlobalRes.EscalationMediator.ToLower()</span>
+                    </p>
+                            }
+                            @if (um._user.role_id == 5)
+                            {
+                    <p class="blockMediator admin">
+                        <span>@GlobalRes.AdminMediator.ToLower()</span>
+                    </p>
+                            }
+                            @if (um._user.role_id == 6)
+                            {
+                    <p class="blockMediator">
+                        <span>@GlobalRes.Mediator.ToLower()</span>
+                    </p>
+                            }
+                            @if (um._user.role_id == 7)
+                            {
+                    <p class="blockMediator">
+                        <span>@GlobalRes.Legalcounsel.ToLower()</span>
+                    </p>
+                            }
+
+                            @if ((um._user != null) && (um._user.notepad_tx != null) && (um._user.notepad_tx.Trim().Length > 0))
+                            {
+                    <p class="blockTextMediator">@um._user.notepad_tx</p>
+                            }
+                            else
+                            {
+                    <p class="blockTextMediator">&nbsp;</p>
+                            }
+
+                            <div class="blockCircles">
+                                <div class="blockDays">
+                                    <div class="circleDays">
+                                        <div class="triangle">
+                                            <canvas class="canvas" height="60px" width="60px"></canvas>
+                                            <div class="textDays">
+                                                <p>@task_quantity</p>
+                                                @if (task_quantity == 1)
+                                                {
+                                                <p>@GlobalRes.Task.ToLower()</p>
+                                                }
+                                                else
+                                                {
+                                                <p>@GlobalRes.Tasks.ToLower()</p>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="blockDays">
+                                    <div class="circleDays">
+                                        <div class="triangle">
+                                            <canvas class="canvas" height="60px" width="60px"></canvas>
+                                            <div class="textDays">
+                                                <p>@message_quantity</p>
+                                                @if (message_quantity == 1)
+                                                {
+                                                <p>@GlobalRes.Message.ToLower()</p>
+                                                }
+                                                else
+                                                {
+                                                <p>@GlobalRes.Messages.ToLower()</p>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="blockDays">
+                                    <div class="circleDays">
+                                        <div class="triangle">
+                                            <canvas class="canvas" height="60px" width="60px"></canvas>
+                                            <div class="textDays">
+                                                <p>@action_quantity</p>
+                                                @if (action_quantity == 1)
+                                                {
+                                                <p>@GlobalRes.Action.ToLower()</p>
+                                                }
+                                                else
+                                                {
+                                                <p>@GlobalRes.Actions.ToLower()</p>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="blocksInfo">
+                                @if (um._location_string.Length > 0)
+                                {
+                                <div class="blockInfo">
+                                    <img src='@Url.Content("~/Content/Icons/blockInfo_img1.png")' />
+                                    <label>@um._location_string</label>
+                                </div>
+                                }
+                                @if (um._user.email.Length > 0)
+                                {
+                                <div class="blockInfo">
+                                    <img src='@Url.Content("~/Content/Icons/blockInfo_img2.png")' />
+                                    <label>@um._user.email</label>
+                                </div>
+                                }
+                            </div>
+                        </div><!--blockIteamTeam-->
+                    }
+
+                </div><!--contentMediators-->
+                @if (_involved_mediators_user_list.Count > 0)
+                {
+                    <div class="contentMediators blockTeam">
+                        <p class="title">@GlobalRes.InvolvedMediators.ToUpper()</p>
+                        <br />
+                        @foreach (user _user in _involved_mediators_user_list)
+                        {
+                            um = new UserModel(_user.id);
+
+                            <div class="blockIteamTeam">
+                                <div class="blockHeaderTeam">
+                                    <div class="blockPhoto">
+                                        <div class="photoPersonal">
+                                            @if (@um._user.photo_path.Trim().Length == 0)
+                                            {
+                                        <img src='@Url.Content("~/Content/Icons/noPhoto.png")' />
+                                            }
+                                            else
+                                            {
+                                        <img src='@Url.Content(um._user.photo_path.Trim())' />
+                                            }
+                                        </div><!--blockPhoto-->
+                                    </div>
+                                    <div class="blockHeaderText">
+                                        <p>@um._user.first_nm @um._user.last_nm</p>
+                                        <p>@um._user.title_ds</p>
+                                    </div>
+
+                                </div>
+                                <p class="blockTextMediator">
+                                    @if (!string.IsNullOrEmpty(um._user.notepad_tx))
+                                    {
+                                    @um._user.notepad_tx
+                                    }
+                                    else
+                                    {
+                                    @Html.Raw(temp_space)
+                                    }
+                                </p>
+                                <div class="blocksInfo">
+                                    @if (um._location_string.Length > 0)
+                                    {
+                                    <div class="blockInfo">
+                                        <img src='@Url.Content("~/Content/Icons/blockInfo_img1.png")' />
+                                        <label>@um._location_string</label>
+                                    </div>
+                                    }
+                                    @if (um._user.email.Length > 0)
+                                    {
+                                    <div class="blockInfo">
+                                        <img src='@Url.Content("~/Content/Icons/blockInfo_img2.png")' />
+                                        <label>@um._user.email</label>
+                                    </div>
+                                    }
+
+                                </div>
+                            </div><!--blockIteamTeam-->
+                        }
+
+                    </div><!--involvedMediators-->
+                }
+
+                @if ((_available_toAssign_mediators.Count > 0) && (rm._investigation_status != Constant.investigation_status_closed))
+                {
+                    <p class="addMoreMediatorsBtn">
+                        <span>@GlobalRes.Addmoremediators.ToLower()</span>
+                    </p>
+                    <div class="contentMediators addToTeam">
+                        <p class="title">@GlobalRes.Selectmediatorstoaddtothisteam.ToUpper()</p>
+                        @foreach (user _user in _available_toAssign_mediators)
+                        {
+                            um = new UserModel(_user.id);
+                            task_quantity = um.CaseTasksQuantity(report_id);
+                            message_quantity = um.CaseMessagesQuantity(report_id);
+                            action_quantity = um.CaseActionsQuantity(report_id);
+
+                <div class="blockIteamTeam">
+                    <div class="blockHeaderTeam">
+                        <div class="blockPhoto">
+                            <div class="photoPersonal">
+                                @if (@um._user.photo_path.Trim().Length == 0)
+                                            {
+                                        <img src='@Url.Content("~/Content/Icons/noPhoto.png")' />
+                                            }
+                                            else
+                                            {
+                                        <img src='@Url.Content(um._user.photo_path.Trim())' />
+                                            }
+                            </div><!--blockPhoto-->
+                        </div>
+                        <div class="blockHeaderText">
+                            <p>@um._user.first_nm @um._user.last_nm</p>
+                            <p>@um._user.title_ds</p>
+                        </div>
+
+                    </div>
+                    <p class="blockMediator" data-userid="@_user.id">
+                        <span>@GlobalRes.Addtoteam</span>
+                    </p>
+                    <p class="blockTextMediator">
+                        @if (!string.IsNullOrEmpty(um._user.notepad_tx))
+                                    {
+                                    @um._user.notepad_tx
+                                    }
+                                    else
+                                    {
+                                    @Html.Raw(temp_space)
+                                    }
+                    </p>
+                    <div class="blockCircles">
+                        <div class="blockDays">
+                            <div class="circleDays">
+                                <div class="triangle">
+                                    <canvas class="canvas" height="60px" width="60px"></canvas>
+                                    <div class="textDays">
+                                        <p>@task_quantity</p>
+                                        @if (task_quantity == 1)
+                                                    {
+                                                    <p>@GlobalRes.Task.ToLower()</p>
+                                                    }
+                                                    else
+                                                    {
+                                                    <p>@GlobalRes.Tasks.ToLower()</p>
+                                                    }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="blockDays">
+                            <div class="circleDays">
+                                <div class="triangle">
+                                    <canvas class="canvas" height="60px" width="60px"></canvas>
+                                    <div class="textDays">
+                                        <p>@message_quantity</p>
+                                        @if (message_quantity == 1)
+                                                    {
+                                                    <p>@GlobalRes.Message.ToLower()</p>
+                                                    }
+                                                    else
+                                                    {
+                                                    <p>@GlobalRes.Messages.ToLower()</p>
+                                                    }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="blockDays">
+                            <div class="circleDays">
+                                <div class="triangle">
+                                    <canvas class="canvas" height="60px" width="60px"></canvas>
+                                    <div class="textDays">
+                                        <p>@action_quantity</p>
+                                        @if (action_quantity == 1)
+                                                    {
+                                                    <p>@GlobalRes.Action.ToLower()</p>
+                                                    }
+                                                    else
+                                                    {
+                                                    <p>@GlobalRes.Actions.ToLower()</p>
+                                                    }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blocksInfo">
+                        @if (um._location_string.Length > 0)
+                                    {
+                                    <div class="blockInfo">
+                                        <img src='@Url.Content("~/Content/Icons/blockInfo_img1.png")' />
+                                        <label>@um._location_string</label>
+                                    </div>
+                                    }
+                        @if (um._user.email.Length > 0)
+                                    {
+                                    <div class="blockInfo">
+                                        <img src='@Url.Content("~/Content/Icons/blockInfo_img2.png")' />
+                                        <label>@um._user.email</label>
+                                    </div>
+                                    }
+
+                    </div>
+                </div><!--blockIteamTeam-->
+                        }
+
+                    </div><!--available to assing Mediators-->
+                }
+
+            </div>
+        </div><!--rightBlockContent-->
+    </div>
+
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.headTask span.createNewTaskBtn').click(function () { $('.blockCreateTask').show(); $('.headTask span.createNewTaskBtn').hide(); });
+        $('.headerCreateTask label.close').click(function () { $('.blockCreateTask').hide(); $('.headTask span.createNewTaskBtn').show(); });
+
+
+        function removeMediator(id, report_id) {
+            var user_id = id;
+            $.ajax({
+                method: "POST",
+                url: "/Case/RemoveMediator",
+                data: { user_id: id, report_id: report_id }
+            }).done(function (data) {//data from server
+                if(data == 0)
+                {
+                    var str = window.location.href;
+                    window.location.href = str;
+                }
+                if(data > 0)
+                {
+                    console.log('data', data);
+
+                    alert('@GlobalRes.ReassignMediatorTaskWarning');
+                }
+                if(data == -1)
+                {
+                    // need to re-login
+                    console.log('Need to login');
+                }
+                //  console.log(data.login_nm);
+                @{
+               //         um = new UserModel(user_id);
+               //         _mediators_whoHasAccess_toReport.Remove(um._user);
+                    }
+                // alert(data);
+            }).fail(function (error) {
+                console.log(error);
+            });
+        }
+
+
+        $('p.addMoreMediatorsBtn span').click(function () {
+            $('p.addMoreMediatorsBtn').hide();
+            $('.rightBlockContent .contentMediators.addToTeam').css('display', 'flex');
+        });
+
+        function blockTeamCircle(block, color1, color2) {
+            //var canvas = document.getElementById("canvas");
+            var canvasTeam = block.find('.canvas');
+            for (i = 0; i < canvasTeam.length; i++) {
+                var x = 1.25;
+                if (x > 0.5) {
+                    x = x - 0.5;
+                }
+                var context = canvasTeam[i].getContext("2d");
+
+                context.beginPath();
+                context.lineWidth = 1;
+                context.strokeStyle = color1;
+                context.arc(30, 30, 29, 1.5 * Math.PI, x * Math.PI);
+                context.stroke();
+
+                context.beginPath();
+                context.lineWidth = 1;
+                context.strokeStyle = color2;
+                context.arc(30, 30, 29, (x + 0.03) * Math.PI, 1.47 * Math.PI);
+                context.stroke();
+            }
+        }
+
+            $(".positionActivityIcon").on('click', function showR() {
+                $("#rightRight").toggle(300);
+            });
+
+        function addToTeam(){
+            $(".addToTeam .blockMediator").click(function(){
+                if (confirm("@GlobalRes.want_to_add")){
+                    var self = $(this);
+                    var parent = self.parent('.userId');
+                    var id =  $(this).attr('data-userId');
+                    addToMediators(id, @Html.Raw(report_id));
+                        var str = window.location.href;
+                        window.location.href = str;
+                    }
+                });
+            }
+            function addToMediators(id, report_id) {
+                $.ajax({
+                    method: "POST",
+                    url: "/Case/AddToMediators",
+                    data: { user_id: id, report_id: report_id }
+                }).done(function (data) {//data from server
+                    console.log('data', data);
+                    // alert(data);
+                }).fail(function (error) {
+                    console.log(error);
+                });
+            }
+
+            function closeMediator(){
+                $('.close').click(function(){
+                    var self = $(this);
+                    var id =  self.attr('data-userId');
+
+                if (confirm("@GlobalRes.want_to_remove")){
+                    removeMediator(id, @Html.Raw(report_id));
+                    var str = window.location.href;
+                    window.location.href = str;
+                }
+            });
+        }
+
+
+        blockTeamCircle($('.blockTeam'), "#0ab6a4", "#ba83b8");
+        blockTeamCircle($('.addToTeam'), "#b2b9bb", "#b2b9bb");
+        addToTeam();
+        closeMediator();
+    });
+    </script>
+</body>

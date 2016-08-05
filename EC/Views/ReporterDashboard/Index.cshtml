@@ -1,0 +1,294 @@
+﻿@using EC.Models;
+@using EC.Models.Database;
+@using EC.App_LocalResources;
+@{
+    ViewBag.Title = GlobalRes.ReporterDashboard;
+    Layout = "~/Views/Shared/IndexPages/ReporterDashboard.cshtml";
+
+    int user_id = (Int32)ViewBag.user_id;
+    int report_id = (Int32)ViewBag.report_id;
+    ReportModel rm = new ReportModel(report_id);
+    UserModel um = new UserModel(user_id);
+
+    int unread_message_number = um.Unread_Messages_Quantity(report_id, 1);
+    GlobalFunctions glb = new GlobalFunctions();
+}
+
+@if ((rm._report != null) && (rm._report.id != 0))
+{
+    <div class="settingMenu">
+        <div class="settingMenuItems">
+            <h2 class="mainTitle">@GlobalRes.Menu:</h2>
+            <div>
+                <a href="/ReporterDashboard/Index/@user_id" class="menuItem active" style="padding-right:14px;">@GlobalRes.ReportSummaryUp</a>
+
+                
+                @if (unread_message_number > 0)
+                {
+                    <a href="/ReporterDashboard/Messages/@user_id" class="menuItem" style="padding-right:15px;">
+                        @GlobalRes.Messages
+                        <span>@unread_message_number</span>
+                    </a>
+                }
+                else
+                {
+                    <a href="/ReporterDashboard/Messages/@user_id" class="menuItem" style="padding-right:50px;">
+                        @GlobalRes.Messages
+                    </a>
+                }
+                <a href="/ReporterDashboard/Activity/@user_id" class="menuItem">@GlobalRes.Activity</a>
+                <a href="/ReporterDashboard/Settings/@user_id" class="menuItem settings" style="margin-right:-2px;" >@GlobalRes.Settings</a>
+            </div>
+        </div>
+    </div><!--settingMenu-->
+
+    <div class="blockReportSummary">
+
+        <div class="selectedMenu">
+            <div class="data">
+                <div class="leftBlock">
+                    <div class="listHead" style="font-weight: bold">@GlobalRes.Casestatus: <span class="review padText">@rm._investigation_status_string</span></div>
+                    <div class="listLeft">
+                        <p style="padding-top:4px">@GlobalRes.Datereported:</p>
+                        <p style="padding-top:4px">@GlobalRes.Timeelapsed:</p>
+                    </div>
+                    <div class="listRight">
+                        <p> @glb.ConvertDateToLongMonthString(rm._report.reported_dt)</p>
+                        @if (rm._total_days == 1)
+                        {
+                            <p> @rm._total_days.ToString() @GlobalRes.day</p>
+
+                        }
+                        else
+                        {
+                            <p> @rm._total_days.ToString() @GlobalRes.days1</p>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div><!--selectedMenu-->
+
+
+    </div><!--blockReportSummary-->
+
+    <div class="blockReportSummary">
+
+        <div class="content">
+            <div class="post">
+                <div class="dataPosts">
+                    <div class="leftBlock">
+                        <div class="listHead"> @GlobalRes.GeneralInformation:</div>
+                        <div class="reportBlock">
+                            <div class="report">
+                                <div class="titleReport">@GlobalRes.ReportingFrom:</div>
+                                <div class="reportText">@rm._country_string</div>
+                            </div>
+                            <div class="report">
+                                <div class="titleReport">@GlobalRes.ConfidentialityLevel:</div>
+                                <div class="reportText">@rm._anonymousLevel_reporterVersion</div>
+                            </div>
+
+
+                            @if ((rm._report.incident_anonymity_id == 2 || rm._report.incident_anonymity_id == 3))
+                            {
+                                <div class="report">
+                                    <div class="titleReport">@GlobalRes.Name:</div>
+                                    <div class="reportText">
+                                        @rm._reporter_name
+                                    </div>
+                                </div>
+                            }
+
+
+
+                            <div class="report">
+                                <div class="titleReport">@GlobalRes.Reportedas:</div>
+                                <div class="reportText">@rm._reporter_company_relation_short</div>
+
+                            </div>
+                            @if (!String.IsNullOrEmpty(rm._report.not_current_employee))
+                            {
+                                <div class="report">
+                                    <div class="titleReport">&nbsp;</div>
+                                    <div class="reportText">
+                                        @rm._report.not_current_employee
+                                    </div>
+                                </div>
+                            }
+                            <div class="report">
+                                <div class="titleReport">@GlobalRes.Incidentlocation:</div>
+                                <div class="reportText">@rm._location_string</div>
+                            </div>
+                            <div class="report">
+                                <div class="titleReport">@GlobalRes.AffectedDepartment:</div>
+                                <div class="reportText">@rm._departments_string</div>
+                            </div>
+                        </div><!--reportBlock-->
+                    </div><!--leftBlock-->
+                </div><!--dataPosts-->
+            </div><!--post-->
+        </div><!--content-->
+
+        <div class="content">
+            <div class="post">
+                <div class="dataPosts">
+                    <div class="leftBlock">
+
+                        <div class="listHead"> @GlobalRes.PartiesInvolved</div>
+                        <div class="reportBlock">
+                            @if (rm._witnesses != null && rm._witnesses.Count > 0)
+                            {
+                                <div class="report">
+                                    @foreach (EC.Models.Database.report_non_mediator_involved witness in rm._witnesses)
+                                    {
+                                        <div class="titleReport">
+                                            @Html.Raw(@witness.Name + " " + @witness.last_name)
+                                        </div>
+                                        <div class="reportText">@Html.Raw(@witness.Title + ", " + @witness.Role)</div>
+                                    }
+                                </div>
+                            }
+
+                            @if (rm._involved_mediators_user_list.Count > 0)
+                            {
+                                <div class="report">
+                                    <div class="titleReport">@GlobalRes.Mediatorsinvolved</div>
+                                    <div class="reportText">&nbsp;</div>
+
+                                    @foreach (user witness in rm._involved_mediators_user_list)
+                                    {
+                                        <div class="titleReport">@witness.first_nm @witness.last_nm</div>
+                                        <div class="reportText"> @witness.title_ds  @witness.notepad_tx</div>
+                                    }
+                                </div>
+                            }
+                            <div class="report">
+                                <div class="titleReport">@GlobalRes.Ismanagementinformed?</div>
+                                <div class="reportText">
+                                    @rm._management_know_string
+                                </div>
+                            </div>
+                            @if (!String.IsNullOrEmpty(rm._report.management_know_text))
+                            {
+                                <div class="report">
+                                    <div class="titleReport">&nbsp;</div>
+                                    <div class="reportText">
+                                        @rm._report.management_know_text
+                                    </div>
+                                </div>
+                            }
+
+
+                            <div class="report">
+                                <div class="titleReport">@GlobalRes.Hascasereportedoutside</div>
+                                <div class="reportText" style="height: 55px; ">@rm._is_reported_outside</div>
+                                @if (!String.IsNullOrEmpty(rm._report.reported_outside_text))
+                                {
+                                    <div class="titleReport">&nbsp;</div>
+                                    <div class="reportText">
+                                        @rm._report.reported_outside_text
+                                    </div>
+                                }
+                            </div>
+                            <div class="report">
+                                <div class="titleReport">@GlobalRes.IsCaseUrgent_q</div>
+                                <div class="reportText">@rm._is_reported_urgent</div>
+                            </div>
+
+
+                        </div><!--reportBlock-->
+
+                    </div><!--leftBlock-->
+                </div><!--dataPosts-->
+            </div><!--post-->
+        </div><!--content-->
+
+        <div class="content">
+            <div class="post">
+                <div class="dataPosts">
+                    <div class="leftBlock">
+                        <div class="listHead"> @GlobalRes.CaseInformation</div>
+                        <div class="reportBlock">
+                            <div class="report">
+                                <div class="titleReport">@GlobalRes.IncidentType:</div>
+                                <div class="reportText"> @rm._secondary_type_string</div>
+
+                                <div class="titleReport">@GlobalRes.IncidentDateUp:</div>
+                                <div class="reportText">@rm._incident_date_string</div>
+
+                                <div class="titleReport">@GlobalRes.isOngoing:</div>
+                                <div class="reportText">@rm._is_ongoing</div>
+                                @if (!String.IsNullOrEmpty(rm._report.report_frequency_text))
+                                {
+                                    <div class="titleReport">&nbsp;</div>
+                                    <div class="reportText">
+                                        @rm._report.report_frequency_text
+                                    </div>
+                                }
+
+                                <div class="titleReport">@GlobalRes.incidentResult:</div>
+                                <div class="reportText">@rm._has_injury_damage</div>
+                                @if (!String.IsNullOrEmpty(rm._report.injury_damage))
+                                {
+                                    <div class="reportText">
+                                        @rm._report.injury_damage
+                                    </div>
+                                }
+                                <div class="titleReportAll">
+                                    <div class="incidentDescription">
+                                        <p class="titleIncidentDescription">@GlobalRes.IncidentDescription:</p>
+                                        <div class="text" style="float: left;padding-top:10px">
+                                            @rm._report.description
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="files">
+                                    @foreach (attachment file in ViewBag.attachmentFiles)
+                                    {
+                                        <div class="item">
+                                            <div class="imgCorner">
+                                                <img src='@Url.Content("/Content/Icons/generic-file.png")'>
+                                                <div class="square"></div>
+                                                <div class="treangle"></div>
+                                            </div>
+                                            <div class="description">
+                                                @file.file_nm
+                                                <div class="download">
+                                                    <a href="@file.path_nm">@GlobalRes.Download.ToLower()</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--content-->
+
+    </div><!--blockReportSummary-->
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //Open mini menu for mobile
+        $('.mainTitle').click(function () {
+            $('.mainTitle+div').toggle();
+        });
+
+        //radioButton
+        var radioBlock = $('.inputBlock');
+        radioBlock.click(function () {
+            var self = $(this);
+            var arrows = self.parent('.inputRadio').parent('.rowBlock').parent('.blockSetting');
+            arrows.find('.rowBlock').find('.inputRadio').css('background', 'rgb(255, 255, 255)');
+            arrows.find('.rowBlock').find('.inputRadio').find('.radioTitle').css('color', 'rgb(174, 181, 183)');
+
+            self.parent('.inputRadio').css('background', 'rgb(242, 247, 247)');
+            self.find('.radioTitle').css('color', 'rgb(60, 62, 63)');
+        });
+    });
+</script>

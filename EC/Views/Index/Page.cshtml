@@ -1,0 +1,137 @@
+﻿@using EC.App_LocalResources
+@using EC.Controllers.Utils
+@using EC.Models
+@using EC.App_LocalResources;
+@{
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
+    String class_ext = ViewBag.cc_extension;
+    //bool? is_cc = true;
+    //String class_ext = "";
+    //if (is_cc)
+    //{
+    //    class_ext = "_cc";
+    //}
+    //19
+    ViewBag.Title = GlobalRes.increportingandcasemanag;
+    //Layout = "~/Views/Shared/_MainHTML.cshtml";
+    Layout = "~/Views/Shared/HeaderFooterFrontPages.cshtml";
+    ViewBag.background = "background-image: url(/Content/img/website-report" + class_ext + ".jpg);";
+    ViewBag.cssStyle = "/Content/MainStyle.css";
+}
+
+<div id="bodyInc" class="indexPage">
+    <div class="secondMenu">
+        <img class="secLogo" src='@Url.Content("~/Content/img/secondLogo.jpg")' />
+        <div class="statusTitle">
+            <div class="titleInc">@GlobalRes.increportingandcasemanag</div>
+        </div>
+    </div>
+
+    <div class="repLoginBlock@{@class_ext}">
+        <div class="repBlock">
+            <img src='@Url.Content("~/Content/img/subd-index1" + @class_ext + ".png")' />
+            <div class="btn">
+                <span class="btnsRepLog repButton"><a href="/Report/new?companyCode=STA2015">@GlobalRes.FileNewReport.ToUpper()</a></span>
+            </div>
+            <div class="accept">
+                <img class="check">
+                <img class="checked">
+                <input hidden value="false" id="checkBox" />
+                <a href="#">@GlobalRes.Accepttermsconditions</a>
+            </div>
+        </div>
+        <div class="logBlock">
+            <img src='@Url.Content("~/Content/img/subd-index2"+@class_ext+".png")' />
+            <div class="btn">
+                <span class="btnsRepLog logButton"><a href="/Login">@GlobalRes.Login.ToUpper()</a></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="bottomBody@{@class_ext}">
+
+    <div class="fourthTitle">
+        @GlobalRes.DontSilentBystander
+    </div>
+    <div class="icons">
+        <div class="centerBlock">
+            <div class="itemBlock">
+                <div class="empty"></div>
+                <div class="positionIcons">
+                    <div id="firstIcon"></div>
+                </div>
+                <span class="title">@GlobalRes.ActEarly,<br />@GlobalRes.ActEthically</span><br />
+                <span class="textBlock">
+                    @GlobalRes.Ifyouwitness
+                </span>
+            </div>
+
+            <div class="itemBlock">
+                <div class="empty"></div>
+                <div class="positionIcons">
+                    <div id="secondIcon"></div>
+                </div>
+                <span class="title">@GlobalRes.ReportWeb, <br />@GlobalRes.TabletMobile</span><br />
+                <span class="textBlock">
+                    @GlobalRes.Useonline
+                </span>
+            </div>
+
+            <div class="itemBlock">
+                <div class="empty"></div>
+                <div class="positionIcons">
+                    <div id="thirdIcon"></div>
+                </div>
+                <span class="title">@GlobalRes.Chooseyour  <br />@GlobalRes.ConfidentialityLevel</span><br />
+                <span class="textBlock">
+                    @GlobalRes.ReportAnon
+                </span>
+            </div>
+
+            <div class="itemBlock">
+                <div class="empty"></div>
+                <div class="positionIcons">
+                    <div id="fourthIcon"></div>
+                </div>
+                <span class="title">@GlobalRes.Expecta <br />@GlobalRes.Response</span><br />
+                <span class="textBlock">
+                    @GlobalRes.Mediatorswillgetback
+                </span>
+            </div>
+        </div><!-- end centerBlock-->
+    </div><!--end icons-->
+</div><!--end bottomBody-->
+<script>
+    $(document).ready(function () {
+        var str = $("#checkBox");
+        str.val(0);
+
+        $(".accept").on('click', function () {
+            if (str.val() === "0") {
+                str.val(1);
+                $('.check').hide();
+                $('.checked').show();
+                $('.accept').css('border', 'none');
+
+            } else {
+                str.val(0);
+                $('.check').show();
+                $('.checked').hide();
+            }
+        });
+
+
+        $('div span.repButton a').on('click', function () {
+            if (str.val() == 0) {
+                $('.accept').css('border', '2px solid red');
+                return false;
+            }
+        });
+
+    });
+</script>

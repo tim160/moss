@@ -1,0 +1,97 @@
+﻿@using System.Collections;
+@using EC.Models;
+@using EC.Models.Database;
+@using EC.App_LocalResources;
+@{
+    <link rel="stylesheet" type="text/css" href="/Content/styleReportDashboard.min.css">
+    ViewBag.Title = "Registration Details";
+    string user_nm = ViewBag.user_nm;
+    string password = ViewBag.password;
+    string company_nm = ViewBag.company_nm;
+    string logo = ViewBag.logo;
+    string code = ViewBag.code;
+    string redirect_string = GlobalRes.ToDashboardUp.ToLower();
+    if (code.Length > 0)
+    {
+        redirect_string = GlobalRes.Continue.ToLower();
+    }
+    <style>
+        .fullContainer {
+            max-width: none;
+        }
+    </style>
+}
+
+<div class="blockSettings contentCompanyProfile">
+    <div class="titleNewUser">
+        <h1 class="helloUser">@GlobalRes.YourRegistrationDetailsUp:</h1>
+    </div>
+    <div class="contentSettings">
+        <div class="blockPersonalPhotoSetting">
+            <div class="blockPhotoSetting">
+                @if (logo.Length > 0)
+                {
+                    <img class="PersonalPhotoBlock" src='@Url.Content(logo)' />
+                }
+                else
+                {
+                    <img class="PersonalPhotoBlock" src='@Url.Content("~/Content/img/logo.png")' />
+                }
+            </div>
+        </div>
+        <div>
+
+
+            <div class="personalBlock" id="registration">
+                <div class="blockPersonalSettings">
+                    <p class="title">@GlobalRes.Company</p>
+                    @Html.TextBox("company_nm", company_nm, new Dictionary<string, object>() { { "readonly", "true" } })
+                </div>
+                @if (code.Length > 0)
+                {
+                    <div class="blockPersonalSettings">
+                        <p class="title">@GlobalRes.EasyCodeUp</p>
+                        @Html.TextBox("code", code, new Dictionary<string, object>(){{"readonly", "true"}})
+                    </div>
+                }
+                <div class="blockPersonalSettings">
+                    <p class="title">@GlobalRes.LoginNameUp</p>
+                    @Html.TextBox("user_nm", user_nm, new Dictionary<string, object>(){{"readonly", "true"}})
+                </div>
+                <div class="blockPersonalSettings">
+                    <p class="title">@GlobalRes.Password</p>
+                    @Html.TextBox("password", password, new Dictionary<string, object>() { { "readonly", "true" } })
+                </div>
+                <div class="blockUpdateProfile">
+                    <div class="updateProfileBtn">
+                        <input type="submit" value="@redirect_string" />
+                        <span style="display: none;">@redirect_string</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!--</form>-->
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.blockUpdateProfile, .updateProfileBtn span').click(function () {
+            if (code.Length == 0) {
+                window.location.href = "/cases";
+            }
+            else {
+                window.location.href = "/settings/company?first=1";
+
+            }
+
+
+        });
+
+        $('.updateProfileBtn, .updateProfileBtn span').on('click', function () {
+        });
+    });
+
+</script>

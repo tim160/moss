@@ -1,0 +1,161 @@
+﻿@using EC.App_LocalResources;
+@using EC.Models;
+@using EC.Models.Database;
+
+@{
+    string Res_or_comp = ViewBag.Res_or_comp;
+    string overlay_title = ViewBag.overlay_title;
+    string textbox_title = ViewBag.textbox_title;
+    string normal_button_promotion = ViewBag.normal_button_promotion;
+    string normal_button_value = ViewBag.normal_button_value;
+    int investigationstatus = (int)ViewBag.investigationstatus;
+
+    string left_button_promotion = ViewBag.left_button_promotion; // @GlobalRes.Returnnvestigation.ToUpper()
+    string left_button_value = ViewBag.left_button_value;
+    
+    GlobalFunctions glb = new GlobalFunctions();
+    List<outcome> _all_outcomes = glb.GetOutcomesWithStatus();
+}
+<div id="anotherDialog">
+    <div id="anotherDialog2">
+        <div id="dialog-form">
+            <div class="modal-header2">
+                <div class="resolve">@overlay_title</div>
+                <label class="close"></label>
+                <div class="closeIcon" onclick='overlay()'></div>
+            </div>
+            <div class="caseResolution">
+                <textarea class="form-control" type="text" name="txtResolve" id="txtResolve" placeholder="@textbox_title"></textarea>
+            </div>
+
+            @if (((normal_button_value == Constant.investigation_status_resolution.ToString())) || (normal_button_value == Constant.investigation_status_closed.ToString()))
+            { 
+                <div class="caseResolution custom">
+                    <div class="outcomeText">@GlobalRes.Outcome:</div>
+                    <div class="dropdown2">
+                        <label id="ddlOutcome" data-value="">Select an option...</label><span class="arrow-down"></span>
+                        <ul>
+                            @foreach (outcome _outcome in _all_outcomes)
+                            {
+                                <li data-value=@_outcome.id>@_outcome.outcome_en</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="caseResolution">
+                    <textarea class="form-control" type="text" name="txtOutcome" id="txtOutcome" placeholder="@GlobalRes.Pleaseexplain"></textarea>
+                </div>
+            }
+            <div class="modal-footer2">
+                @if (normal_button_promotion.Length > 0)
+                {
+                    @*<button type="submit" class="btn btn-sm btn-success" id="resolve_btn" value=@normal_button_value>@normal_button_promotion.ToUpper()</button>*@
+                    <button type="submit" id="resolve_btn" class="btn btn-sm btn-success" value=@normal_button_value>@normal_button_promotion.ToUpper()</button>
+                }
+                @if (left_button_promotion.Length > 0)
+                {
+                    <button type="submit" class="btn btn-sm btn-white" id="not_resolve_btn" value=@left_button_value>@left_button_promotion.ToUpper()</button>
+                }
+            </div>
+            @*<div class="footerCreateTask2">
+                <div class="postionButtons positionCaseButtons">
+                    <div class="secondButton">
+                        <div class="secondButton2" id="closeCase">@GlobalRes.Closecase.ToUpper()</div>
+                    </div>
+                    <div class="firstButton">
+                        <div class="secondButton2">@GlobalRes.Returnnvestigation.ToUpper()</div>
+                    </div>
+                </div>
+                <div class="createNewTaskBlock">
+                    <span class="acceptCaseBtn promoteCase">@normalpromotion_button.ToUpper()</span>
+                </div>
+                @if (investigationstatus == 3)
+                {
+                    <div class="createNewTaskBlock">
+                        <span class="acceptCaseBtn cannotBeResolved">@GlobalRes.CaseCantBeResolved.ToUpper()</span>
+                    </div>
+                }
+            </div>*@
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        var selectedItem = "";
+        $("#ddlOutcome").on("click", function (event) {
+            var temp = $(event.currentTarget);
+            temp.siblings('ul').slideDown(300);
+        });
+
+        $(".dropdown2 li").on("click", function (event) {
+            var temp = $(event.currentTarget);
+            var allOptions = temp.parents('ul ');
+            allOptions.find('li').removeClass('selected');
+            temp.addClass('selected');
+            $(".dropdown2 #ddlOutcome").html(temp.text());
+            $(".dropdown2 #ddlOutcome").attr('data-value', temp.attr('data-value'));
+            $(".dropdown2 ul").slideUp();
+        });
+        $("#anotherDialog .close").on('click', function () {
+            $("#anotherDialog").toggle();
+        });
+        var button = "";
+        $("#not_resolve_btn").on('click', function (event) {
+            button = $(event.currentTarget).val();
+            sendAjax(button);
+        });
+        $("#resolve_btn").on('click', function (event) {
+            button = $(event.currentTarget).val();
+            sendAjax(button);
+        });
+        function sendAjax(promotion_value) {
+            var description = $("#txtResolve").val();
+            var _report_id = $("#_report_id").val();
+            var user_id = $("#user_id").val();
+            var outcome_id = $("#ddlOutcome").attr('data-value');
+            var outcome = $("#txtOutcome").val();
+            if (outcome_id == '9' && outcome == "") {
+                $("#txtOutcome").css("border", "2px solid red");
+                $("#txtOutcome").on('focusin', function () {
+                    $("#txtOutcome").css("border", "none");
+                });
+            }
+            if (description != "") {
+
+                if (_report_id > 0 && user_id > 0 && promotion_value != "") {
+                    console.log('description', description);
+                    $.ajax({
+                        method: "POST",
+                        url: "/Case/CloseCase",
+                        data: { user_id: user_id, report_id: _report_id, description: description, promotion_value: promotion_value,outcome_id:outcome_id, outcome: outcome, }
+                    }).done(function (data) {//data from server
+                        console.log('data', data);
+
+                        if (data == -1) {
+                            // need to re-login
+                            console.log('Need to login');
+                        }
+
+                        if(data == 1)
+                        {
+                            var str = window.location.href;
+                            window.location.href = str;
+                        }
+                        if(data == 0)
+                        {
+                        }
+                    }).fail(function (error) {
+                        console.log(error);
+                    });
+                   
+            }
+            } else {
+                $("#txtResolve").css({ "border": "2px solid red"});
+                $("#txtResolve").on('focusin', function () {
+                    $("#txtResolve").css({ "border": "2px solid transparent" });
+                });
+            }
+        }
+    });
+</script>

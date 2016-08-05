@@ -1,0 +1,228 @@
+﻿@using EC.App_LocalResources;
+@using EC.App_LocalResources;
+@{
+    string overlay_title = GlobalRes.CloseCaseUp;
+    string textbox_title = GlobalRes.Description;
+    string normal_button_promotion = GlobalRes.CloseCaseUp;
+    int normal_button_value = 9;
+
+
+}
+<style>
+        .modal-footer .btn + .btn {
+            margin-bottom: 0;
+            margin-left: 5px;
+        }
+
+        .btn.btn-success {
+            color: #fff;
+            background: #05B5A2;
+            border-color: #05B5A2;
+        }
+
+            .btn.btn-success:hover {
+                color: #05B5A2;
+                background: #fff;
+                border-color: #05B5A2;
+            }
+
+        .btn {
+            font-weight: 300;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+        }
+
+        .btn-group-sm > .btn, .btn-sm {
+            padding: 5px 10px;
+            font-size: 12px;
+            line-height: 1.5;
+            border-radius: 3px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .modal-footer {
+            padding: 15px;
+            text-align: right;
+            border-top: 1px solid #e5e5e5;
+            width: 90%;
+            margin: 0 auto;
+            background-color: #f2f7f7;
+        }
+
+        #approveDialog *{
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        /*textarea.form-control {
+        height: auto;
+    }*/
+        .form-control {
+            border: 1px solid #ccd0d4;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            font-size: 12px;
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+        }
+
+        .form-control {
+            display: block;
+            width: 100%;
+            height: 34px;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        }
+
+        textarea {
+            overflow: auto;
+        }
+
+        .btn-white {
+            font-family: 'Open Sans';
+            font-weight: bold;
+            color: #05b5a2;
+            background-color: white;
+            border: 1px solid #05b5a2;
+        }
+
+            .btn-white:hover {
+                color: white;
+                background-color: #05b5a2;
+            }
+
+        .modal-header {
+            padding: 12px 15px;
+        }
+
+        .err {
+            border: 2px solid red;
+        }
+</style>
+
+<div id="approveDialog">
+    <div id="approveDialog2">
+        <div id="dialog-form">
+            <div class="modal-header">
+                <div class="resolve" id="_overlay_title">@overlay_title</div>
+                <label class="close"></label>
+                <div class="closeIcon" onclick='overlay_approve()'></div>
+            </div>
+            <div class="caseResolution">
+                <textarea class="form-control" type="text" name="txtEscalate" id="txtEscalate" style="width: 630px;margin: 0 35px;" placeholder="@textbox_title"></textarea>
+            </div>
+            <div class="modal-footer">
+                    <button type="submit" id="escalate_btn" class="btn btn-sm btn-success" value=@normal_button_value>@normal_button_promotion.ToUpper()</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        var selectedItem = "";
+
+
+        //$(".rightBlockContent .textInButton").on('click', function (event) {
+        //    var temp = $(event.currentTarget);
+        //    selectedItem = temp.text();
+        //    el = document.getElementById("approveDialog");
+        //    el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+        //});
+        $("#approveDialog .close").on('click', function () {
+            $("#approveDialog").toggle();
+        });
+        var button = "";
+        $("#escalate_btn").on('click', function (event) {
+            console.log('escalate_btn in popup');
+            button = $(event.currentTarget).val();
+            console.log('escalate_btn', button);
+
+            sendAjax(button);
+        });
+        function sendAjax(promotion_value) {
+            var description = $("#txtEscalate").val();
+            var _report_id = $("#_report_id").val();
+            var user_id = $("#user_id").val();
+
+            if (description != "") {
+
+                if (_report_id > 0 && user_id > 0 && promotion_value != "") {
+                    console.log('description', description);
+                    $.ajax({
+                        method: "POST",
+                        url: "/Case/CloseCase",
+                        data: { user_id: user_id, report_id: _report_id, description: description, promotion_value: promotion_value }
+                    }).done(function (data) {//data from server
+                        console.log('data', data);
+
+                        if (data == -1) {
+                            // need to re-login
+                            console.log('Need to login');
+                        }
+
+                        if (data == 1) {
+                            var str = window.location.href;
+                            window.location.href = str;
+                        }
+                        if (data == 0) {
+                        }
+                        //  console.log(data.login_nm);
+                        // alert(data);
+                    }).fail(function (error) {
+                        console.log(error);
+                    });
+
+                }
+            } else {
+                $("#txtEscalate").css({ "border": "2px solid red", "border-bottom": "none" });
+                //$(".footerCreateTask2").css("border-top", "1px solid red");
+                $("#txtEscalate").on('focusin', function () {
+                    $("#txtEscalate").css({ "border": "2px solid #05b5a2", "border-bottom": "none" });
+                    //$(".footerCreateTask2").css("border-top", "1px solid #e0e5e6");
+                });
+            }
+        }
+
+
+        function SetValues(promotion_value)
+        {
+            //$("#escalate_btn").text = "11";
+
+        }
+    });
+</script>

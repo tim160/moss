@@ -1,0 +1,428 @@
+﻿@using EC.Models;
+@using EC.Models.ECModel;
+@using EC.Models.Database;
+@using EC.App_LocalResources;
+@{
+    GlobalFunctions glb = new GlobalFunctions();
+
+    ViewBag.Title = GlobalRes.Mytasks;
+    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+    int user_id = (Int32)ViewBag.user_id;
+    List<TaskExtended> tasks = (List<TaskExtended>)ViewBag.tasks;
+    ReportModel rm = new ReportModel();
+    UserModel um = new UserModel(user_id);
+    
+    List<report> reports = (List<report>)ViewBag.reports;
+    string _nameBlockShow = "";
+    int unread_tasks = um.UserTasks(1, 0, true).ToList().Count();
+}
+
+<div class="blockSettings blockAllTasks">
+    <div id="casesHeared">
+        <div id="menu">
+            <a href="/tasks/Index" class="caseesTab active">@GlobalRes.Myactivetasks @if(unread_tasks > 0){<span>@unread_tasks</span>}</a>
+            <a href="/tasks/Completed" class="caseesTab">@GlobalRes.Mycompletedtasks</a>
+        </div>
+  @*      <div class="positionActivityIcon">
+                <div id="activityIcon"></div>
+            </div>*@
+        </div><!--casesHeared-->
+
+
+        <div class="contentSettings">
+            <!--START myActiveTasks-->
+            @if(tasks.Where(m => m._task.assigned_to == user_id).Count() > 0)
+            {
+            <div class="myActiveTasks myTasks">
+                <header>
+                    <div class="menuTasks">
+                        <div class="caseTasksName">
+                            <span>@GlobalRes.Case > @GlobalRes.Taskname</span>
+                            <span class="labelArrow">></span>
+                        </div>
+                        <div class="assignedMediator">@GlobalRes.Assignedby</div>
+                        <div class="dueDate">
+                            <span>@GlobalRes.Duedate</span>
+                            <span class="labelArrow">></span>
+                        </div>
+                    </div>
+                </header>
+                <div class="contentTasks">
+                    @{
+                        string _classCircle, _styleCircle, _colorTextAfter, _colorTextBefore, _smallCircle, _fontName;
+
+                        _classCircle = "bigDot";
+                        _styleCircle = "background: #3099be;";
+
+                        _colorTextBefore = ""; //not grey
+                        _colorTextBefore = "colorTextGrey"; //grey
+
+                        _colorTextAfter = "colorTextGrey"; //grey
+                        _colorTextAfter = ""; //not grey
+
+                        //little red dot
+                        _smallCircle = "littleDotShow"; //show
+                        _smallCircle = "littleDot"; //hide
+                        //If we have red dot than need to change font in taskName
+                        _fontName = "fontSamibold"; //change
+                        _fontName = ""; //not changed
+
+                        //----------- 4 types of block before date-------------------------
+                        _nameBlockShow = "blockDays"; //show 2 days left
+                        _nameBlockShow = "blockFile"; //show file attach
+                        _nameBlockShow = ""; //empty
+                        _nameBlockShow = "blockExpired"; //"Expired"
+
+                    }
+                    <div class="blockTask taskByDate" style="display: none;">
+                        @foreach (TaskExtended _task in tasks.OrderBy(m => m.TaskDueDate))
+                        {
+                            rm = new ReportModel(_task.TaskReportID);
+                            _nameBlockShow = "";
+
+                            string _circle_color = "#" + _task.TaskColorCode;
+
+
+                            if (_task.IsCompleted())
+                            {
+                                _circle_color = "grey";
+                            }
+                            else
+                            {
+                            }
+                            
+                            
+                            if (_task.IsRead() && (!_task.HasNewActivity()))
+                            {
+                                _classCircle = "notShadedCircle";
+                                _styleCircle = "border: 2px solid " + _circle_color + ";";
+                            }
+                            else
+                            {
+                                _classCircle = "bigDot";
+                                _styleCircle = "background: " + _circle_color + ";";
+
+                            }
+                            
+                            
+                            
+                            
+                            if (_task.IsCompleted())
+                            {
+                                _colorTextBefore = "colorTextGrey";
+                                _colorTextAfter = "";
+                                _classCircle = "notShadedCircle";
+                                _styleCircle = "border: 2px solid #" + @_task.TaskColorCode + ";";
+                            }
+                            else
+                            {
+                                _colorTextBefore = "colorTextGrey";
+                                _colorTextAfter = "";
+                                _classCircle = "bigDot";
+                                _styleCircle = "background: #" + @_task.TaskColorCode + ";";
+                            }
+
+                            if (_task.HasNewActivity())
+                            {
+                                _smallCircle = "littleDotShow";
+                                _fontName = "fontSamibold";
+                            }
+                            else
+                            {
+                                _smallCircle = "littleDot";
+                                _fontName = "";
+                            }
+                            if (_task.IsRead())
+                            {
+                               // _fontName = "fontSamibold";
+                            }
+                            else
+                            {
+                               // _fontName = "";
+                            }
+                            if (_task.IsExpired)
+                            {
+                                    //    _colorTextAfter = "colorTextGrey";
+                                     //   _colorTextBefore = "colorTextGrey";
+                            }
+                            <div class="contentBlockTask">
+                                <div class="blockTitle">
+                                    <span class="@_classCircle" style="@_styleCircle"></span>
+                                    <span class="taskName @_fontName">
+                                        <span class="titleTask @_colorTextBefore">
+                                            @rm._report.display_name - @rm._location_string
+                                        </span>
+                                        <span class="labelArrow">></span>
+                                        <a href="/Case/Task/@_task.TaskID">
+                                            <span class="text @_colorTextAfter">@_task._task.title</span>
+                                        </a>
+                                    </span>
+                                    <span class="@_smallCircle"></span>
+                                </div>
+                                <div class="blockPeople">
+
+                                    @if (@_task.TaskAssignerPhoto.Trim().Length > 0)
+                                    {
+                                        <img src='@Url.Content(_task.TaskAssignerPhoto)'>
+                                    }
+                                    else
+                                    {
+                                        <img src='@Url.Content("/Content/Icons/noPhoto.png")'>
+                                    }
+                                    <label class="name">@_task.TaskAssigner</label>
+                                </div>
+
+                                @if (_task.IsExpired)
+                                {
+                                    _nameBlockShow = "blockExpired";
+                                }
+                                else
+                                {
+                                    if (_task.TaskDueDate.HasValue)
+                                    {
+                                        DateTime dt = DateTime.Today;
+                                        int total_days = (_task.TaskDueDate.Value - dt).Days;
+                                        if ((total_days > 0) && (total_days < 6))
+                                        {
+                                            _nameBlockShow = "blockDays";
+                                        }
+                                    }
+                                }
+
+                                <div class="date">@_task.TaskDueDateString</div>
+                                <div class="info @_nameBlockShow">
+                                    <div class="file">
+                                        <img src='@Url.Content("/Content/Icons/fileCases.png")'>
+                                    </div>
+
+                                    @if (_task.IsExpired)
+                                    {
+                                        if (!_task.IsCompleted())
+                                        {
+                                            // expired
+                                            <span class="textInfo">@GlobalRes.Expired.ToLower()</span>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (_task.TaskDueDate.HasValue)
+                                        {
+                                            DateTime dt = DateTime.Today;
+                                            int total_days = (_task.TaskDueDate.Value - dt).Days;
+                                            if ((total_days > 1) && (total_days < 6))
+                                            {
+                                                <span class="textDays">@total_days @GlobalRes.dayslate</span>
+                                            }
+                                            if ((total_days == 1))
+                                            {
+                                                <span class="textDays">@total_days @GlobalRes.dayleft</span>
+                                            }
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <div class="blockTask taskByName" style="display: block;">
+                        @foreach (report _report in reports.OrderBy(m => m.display_name))
+                        {
+                            rm = new ReportModel(_report.id);
+
+                            List<task> _report_tasks = rm.ReportTasks(1);
+
+                            if (_report_tasks.Where(m => m.assigned_to == user_id).Count() > 0)
+                            {
+                                <div class="contentBlockTasks">
+                                    <div class="contentBlockTask contentMainTask">
+                                        <div class="headerContentTask" style="border-left: 10px solid #@rm._color_code; ">
+                                            <div class="blockTitle">
+                                                <span class="taskName">
+                                                    <span class="titleTask">@rm._report.display_name - @rm._location_string</span>
+                                                    <span class="labelArrow">></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div><!--contentMainTask-->
+                                    @foreach (task _tasks in _report_tasks.Where(m => m.assigned_to == user_id))
+                                    {
+                                        TaskExtended tsk = new TaskExtended(_tasks.id, user_id);
+
+                                        _colorTextAfter = "";
+                                        _colorTextBefore = "";
+                                        _classCircle = "bigDot";
+                                        _styleCircle = "background: #";// + @rm._color_code + ";";
+
+
+                                        if (tsk.IsCompleted())
+                                        {
+                                            _colorTextAfter = "colorTextGrey";
+                                            _colorTextBefore = "colorTextGrey";
+                                            _classCircle = "notShadedCircle";
+                                            _styleCircle = "border: 2px solid #";// + @rm._color_code + ";";
+                                        }
+                                        if (tsk.HasNewActivity())
+                                        {
+                                            _smallCircle = "littleDotShow";
+                                        }
+                                        else
+                                        {
+                                            _smallCircle = "littleDot";
+                                        }
+
+                                        if (tsk.IsRead())
+                                        {
+                                            _fontName = "";
+                                        }
+                                        else
+                                        {
+                                            _fontName = "fontSamibold";
+                                        }
+                                        if (tsk.IsExpired)
+                                        {
+                                            //   _colorTextAfter = "";
+                                            //  _colorTextBefore = "";
+                                        }
+
+                                        if ((rm._investigation_status == 7) || (rm._investigation_status == 6))
+                                        {
+                                            // if spam or completed - report is grey
+                                            _colorTextBefore = "colorTextGrey";
+                                        }
+                                        <div class="trololo">
+                                            <div class="contentBlockTask tasksForMain">
+                                                <div class="blockTitle">
+                                                    <span class="@_classCircle" style="@_styleCircle@rm._color_code;"></span>
+                                                    <span class="taskName @_fontName">
+                                                        <a href="/Case/Task/@tsk.TaskID">
+                                                            <span class="text @_colorTextAfter">@_tasks.title</span>
+                                                        </a>
+                                                    </span>
+                                                    <span class="@_smallCircle"></span>
+                                                </div>
+                                                <div class="blockPeople">
+                                                    @if (@tsk.TaskAssignerPhoto.Trim().Length > 0)
+                                                {
+                                                <img src='@Url.Content(tsk.TaskAssignerPhoto)'>
+                                                }
+                                                else
+                                                {
+                                                <img src='@Url.Content("/Content/Icons/noPhoto.png")'>
+                                                }
+                                                    <label class="name">@tsk.TaskAssigner</label>
+                                                </div>
+
+                                                <div class="date"> @tsk.TaskDueDateString</div>
+
+                                                @if (tsk.IsExpired)
+                                            {
+                                                _nameBlockShow = "blockExpired";
+                                            }
+                                            else
+                                            {
+                                                if (tsk.TaskDueDate.HasValue)
+                                                {
+                                                    DateTime dt = DateTime.Today;
+                                                    int total_days = (tsk.TaskDueDate.Value - dt).Days;
+                                                    if ((total_days > 0) && (total_days < 6))
+                                                    {
+                                                        _nameBlockShow = "blockDays";
+                                                    }
+                                                }
+                                            }
+
+                                                <div class="info @_nameBlockShow">
+                                                    <div class="file">
+                                                        <img src='@Url.Content("/Content/Icons/fileCases.png")'>
+                                                    </div>
+
+                                                    @if (tsk.IsExpired)
+                                                {
+                                                    if (!tsk.IsCompleted())
+                                                    {
+                                                        // expired
+                                                <span class="textInfo">@GlobalRes.Expired.ToLower()</span>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    if (tsk.TaskDueDate.HasValue)
+                                                    {
+                                                        DateTime dt = DateTime.Today;
+                                                        int total_days = (tsk.TaskDueDate.Value - dt).Days;
+                                                        if ((total_days > 1) && (total_days < 6))
+                                                        {
+                                                <span class="textDays">@total_days @GlobalRes.daysleft</span>
+                                                        }
+                                                        if ((total_days == 1))
+                                                        {
+                                                <span class="textDays">@total_days @GlobalRes.dayleft</span>
+                                                        }
+                                                    }
+                                                }
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    }
+
+                                </div>
+                            }
+                        }
+                    </div><!--END BLOCK "blockTask.taskByName"-->
+
+                </div>
+            </div>
+            <!--END myActiveTasks-->
+            }
+        </div><!--contentSettings-->
+    </div>
+
+
+    <script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.menuTasks .dueDate span').click(function () {
+                $('.blockTask.taskByDate').show();
+                $('.blockTask.taskByName').hide();
+                $('.myTasks header .menuTasks .dueDate .labelArrow').show();
+                $('.myTasks header .menuTasks .dueDate').css('background', '#d6dcdc');
+                $('.myTasks header .menuTasks .caseTasksName .labelArrow').hide();
+                $('.myTasks header .menuTasks .caseTasksName').css('background', '#ebf1f1');
+            });
+            $('.menuTasks .caseTasksName span').click(function () {
+                $('.blockTask.taskByDate').hide();
+                $('.blockTask.taskByName').show();
+                $('.myTasks header .menuTasks .dueDate .labelArrow').hide();
+                $('.myTasks header .menuTasks .caseTasksName .labelArrow').show();
+                $('.myTasks header .menuTasks .dueDate').css('background', '#ebf1f1');
+                $('.myTasks header .menuTasks .caseTasksName').css('background', '#d6dcdc');
+            });
+
+
+            $('.contentMainTask').click(function () {
+                $(this).parent().find('.tasksForMain').toggle();
+                var element = $(this).find('.labelArrow');
+                var styleElement = element.css('transform');
+                if (styleElement == "matrix(-0.707106781186548, 0.707106781186548, -0.707106781186548, -0.707106781186548, 0, 0)") {
+
+                    element.css({
+                        '-ms-transform': 'rotate(45deg)',
+                        '-webkit-transform': 'rotate(45deg)',
+                        '-moz-transform': 'rotate(45deg)',
+                        'transform': 'rotate(45deg)'
+                    });
+                }
+                else {
+                    element.css({
+                        '-ms-transform': 'rotate(135deg)',
+                        '-webkit-transform': 'rotate(135deg)',
+                        '-moz-transform': 'rotate(135deg)',
+                        'transform': 'rotate(135deg)'
+                    });
+                }
+            });
+
+        });
+
+    </script>

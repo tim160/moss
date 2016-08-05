@@ -1,0 +1,224 @@
+﻿@using EC.Models;
+@using EC.Models.Database;
+@using EC.App_LocalResources;
+@{
+
+    <link rel="stylesheet" href="~/Content/EmployeeAwareness.css" />
+
+    ViewBag.Title = GlobalRes.EmployeeAwarenessUp;
+    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+
+    var um = (UserModel)ViewBag.um;
+    var user_id = um.ID;
+    //var user_id = 2;
+}
+
+
+<div id="EmployeeAwarenessBlock" class="blockSettings">
+    <div class="topHeader">Awareness materials</div>
+    <div class="mainContent">
+        <div class="leftContent">
+            <div class="blockMenu">
+                <div class="title">Industry</div>
+                <div class="itemSelect">Aviation</div>
+                <div class="itemSelect active">E-commerce</div>
+                <div class="itemSelect">Hospital And Food</div>
+                <div class="itemSelect">Manufacturing</div>
+            </div>
+            <div class="blockMenu">
+                <div class="title">Message</div>
+                <div class="itemSelect">Company culture</div>
+                <div class="itemSelect active">Customer support</div>
+                <div class="itemSelect">Data security</div>
+            </div>
+            <div class="blockMenu">
+                <div class="title">Available format</div>
+                <div class="itemSelect">Poster</div>
+                <div class="itemSelect active">Wallet-size card</div>
+                <div class="itemSelect">Digital assets</div>
+            </div>
+            <div class="blockMenu">
+                <div class="title">Language</div>
+                <div class="itemSelect">English</div>
+                <div class="itemSelect active">Français</div>
+                <div class="itemSelect">Русский</div>
+            </div>
+        </div>
+        <div class="rightContent">
+            <div class="topBlockFilters">
+                <div class="info">Employee awareness materials</div>
+                <div class="itemFilter">E-commerce <div class="imgClose"></div></div>
+                <div class="itemFilter">E-commerce <div class="imgClose"></div></div>
+                <div class="itemFilter">E-commerce <div class="imgClose"></div></div>
+                <div class="itemFilter">E-commerce <div class="imgClose"></div></div>
+                <div class="itemFilter">E-commerce <div class="imgClose"></div></div>
+                <div class="itemFilter">E-commerce <div class="imgClose"></div></div>
+                <div class="itemFilter">E-commerce <div class="imgClose"></div></div>
+                <div class="itemFilter">E-commerce <div class="imgClose"></div></div>
+                <div class="itemFilter">E-commerce <div class="imgClose"></div></div>
+                <div class="calcItems">11 items</div>
+            </div>
+
+            <div class="rezoultItems">
+
+                <div class="blockInformation">
+                    <div class="filtersBlock img1">
+                        <div class="filter">e-commerce</div>
+                        <div class="filter">manufacturing</div>
+                    </div>
+                    <div class="greenBlock">company culture</div>
+                    <div class="bottomInfo">
+                        <div class="infoItem">Communication is a  Two-Way Street</div>
+                    </div>
+                </div>
+
+
+                <div class="blockInformation">
+                    <div class="filtersBlock img2">
+                        <div class="filter">aviation</div>
+                        <div class="filter">manufacturing</div>
+                    </div>
+                    <div class="greenBlock">customer support</div>
+                    <div class="bottomInfo">
+                        <div class="infoItem">How solid is your  integrity?</div>
+                    </div>
+                </div>
+
+
+                <div class="blockInformation">
+                    <div class="filtersBlock img3">
+                        <div class="filter">Hospital And Food </div>
+                        <div class="filter">Healthcare</div>
+                    </div>
+                    <div class="greenBlock">customer support</div>
+                    <div class="bottomInfo">
+                        <div class="infoItem">When the right thing  to do isn’t clear…  Focus on integrity</div>
+                    </div>
+                </div>
+
+
+                <div class="blockInformation">
+                    <div class="filtersBlock img4">
+                        <div class="filter">healthcare</div>
+                    </div>
+                    <div class="greenBlock">company culture</div>
+                    <div class="bottomInfo">
+                        <div class="infoItem">When the right thing  to do isn’t clear…  Focus on integrity</div>
+                    </div>
+                </div>
+
+
+                <div class="blockInformation">
+                    <div class="filtersBlock img5">
+                        <div class="filter">education</div>
+                        <div class="filter">e-commerce</div>
+                    </div>
+                    <div class="greenBlock">customer support</div>
+                    <div class="bottomInfo">
+                        <div class="infoItem">Don’t stay silent.  Report your concerns</div>
+                    </div>
+                </div>
+
+
+                <div class="blockInformation">
+                    <div class="filtersBlock img6">
+                        <div class="filter">education</div>
+                        <div class="filter">Healthcare</div>
+                    </div>
+                    <div class="greenBlock">customer support</div>
+                    <div class="bottomInfo">
+                        <div class="infoItem">Don’t stay silent.  Report your concerns</div>
+                    </div>
+                </div>
+
+
+                <div class="blockInformation">
+                    <div class="filtersBlock img7">
+                        <div class="filter">e-commerce</div>
+                        <div class="filter">healthcare</div>
+                    </div>
+                    <div class="greenBlock">company culture</div>
+                    <div class="bottomInfo">
+                        <div class="infoItem">Building an Ethical  Workplace. Together.</div>
+                    </div>
+                </div>
+
+
+                <div class="blockInformation">
+                    <div class="filtersBlock img8">
+                        <div class="filter">healthcare</div>
+                    </div>
+                    <div class="greenBlock">customer support</div>
+                    <div class="bottomInfo">
+                        <div class="infoItem">Communication is a   Two-Way Street</div>
+                    </div>
+                </div>
+
+
+                <div class="blockInformation">
+                    <div class="filtersBlock img9">
+                        <div class="filter">manufacturing</div>
+                    </div>
+                    <div class="greenBlock">customer support</div>
+                    <div class="bottomInfo">
+                        <div class="infoItem">Reducing our Impact  on the Environment is a Team Effort</div>
+                    </div>
+                </div>
+
+
+                <div class="blockInformation">
+                    <div class="filtersBlock img10">
+                        <div class="filter">e-commerce</div>
+                        <div class="filter">manufacturing</div>
+                    </div>
+                    <div class="greenBlock">company culture</div>
+                    <div class="bottomInfo">
+                        <div class="infoItem">Доверие строится  путем открытого и  честного диалога</div>
+                    </div>
+                </div>
+
+
+                <div class="blockInformation">
+                    <div class="filtersBlock img11">
+                        <div class="filter">aviation</div>
+                        <div class="filter">manufacturing</div>
+                        <div class="filter">e-commerce</div>
+                    </div>
+                    <div class="greenBlock">data security</div>
+                    <div class="bottomInfo">
+                        <div class="infoItem">Do the right thing</div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        function blocksHeight() {
+            var maxHeightBlock = Math.max.apply(Math, $(".blockInformation").map(function () {
+                return $(this).height()
+            }).get()); $(".blockInformation").height(maxHeightBlock);
+        }
+
+        function selectblockMenu() {
+            $('.blockMenu .itemSelect').click(function () {
+                var self = $(this);
+                if (self.hasClass('active')) {
+                    self.removeClass('active');
+                }
+                else {
+                    self.addClass('active');
+                }
+            });
+        }
+        
+        blocksHeight();
+        selectblockMenu();
+    });
+</script>

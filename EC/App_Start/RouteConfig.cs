@@ -1,0 +1,324 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Routing;
+using Microsoft.AspNet.FriendlyUrls;
+
+namespace EC
+{
+    public static class RouteConfig
+    {
+        public static void RegisterRoutes(RouteCollection routes)
+        {
+            var settings = new FriendlyUrlSettings();
+            settings.AutoRedirectMode = RedirectMode.Permanent;
+            routes.EnableFriendlyUrls(settings);
+
+            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+
+            #region /Case
+            routes.MapRoute(
+        name: "CaseMessages",
+        url: "Case/Messages/{id}",
+        defaults: new
+        {
+            controller = "Case",
+            action = "Messages",
+            id = UrlParameter.Optional
+        }
+    );
+
+            routes.MapRoute(
+name: "CaseTask",
+url: "Case/Task/{id}",
+defaults: new
+{
+    controller = "Case",
+    action = "Task",
+    id = UrlParameter.Optional
+}
+);
+
+            routes.MapRoute(
+            name: "CaseReporter",
+            url: "Case/Reporter/{id}",
+            defaults: new
+            {
+                controller = "Case",
+                action = "Reporter",
+                id = UrlParameter.Optional
+            }
+        );
+
+            routes.MapRoute(
+    name: "CaseActivity",
+    url: "Case/Activity/{id}",
+    defaults: new
+    {
+        controller = "Case",
+        action = "Activity",
+        id = UrlParameter.Optional
+    }
+);
+
+
+            routes.MapRoute(
+    name: "SaveLoginChanges",
+    url: "Report/SaveLoginChanges",
+     defaults: new
+     {
+         controller = "Report",
+         action = "SaveLoginChanges",
+         id = UrlParameter.Optional
+     });
+
+            routes.MapRoute(
+            name: "CaseTeam",
+            url: "Case/Team/{id}",
+            defaults: new
+            {
+                controller = "Case",
+                action = "Team",
+                id = UrlParameter.Optional
+            }
+        );
+            routes.MapRoute(
+                name: "AddToMediators",
+                url: "Case/AddToMediators",
+                 defaults: new
+                 {
+                     controller = "Case",
+                     action = "AddToMediators",
+                     id = UrlParameter.Optional
+                 });
+
+            routes.MapRoute(
+                name: "CloseTask",
+                url: "Case/CloseTask",
+                 defaults: new
+                 {
+                     controller = "Case",
+                     action = "CloseTask",
+                     id = UrlParameter.Optional
+                 });
+
+            routes.MapRoute(
+                name: "ResolveCase",
+                url: "Case/ResolveCase",
+                 defaults: new
+                 {
+                     controller = "Case",
+                     action = "ResolveCase",
+                     id = UrlParameter.Optional
+                 });
+
+            routes.MapRoute(
+                name: "ReassignTask",
+                url: "Case/ReassignTask",
+                 defaults: new
+                 {
+                     controller = "Case",
+                     action = "ReassignTask",
+                     id = UrlParameter.Optional
+                 });
+
+            routes.MapRoute(
+                name: "SendSpamMessage",
+                url: "NewReport/SendSpamMessage",
+                defaults: new
+                {
+                    controller = "NewReport",
+                    action = "SendSpamMessage",
+                    id = UrlParameter.Optional
+                }
+            );
+
+            routes.MapRoute(
+                name: "AcceptOrReopenCase",
+                url: "NewReport/AcceptOrReopenCase",
+                defaults: new
+                {
+                    controller = "NewReport",
+                    action = "AcceptOrReopenCase",
+                    id = UrlParameter.Optional
+                }
+            );
+            
+            routes.MapRoute(
+                name: "CaseClose",
+                url: "Case/CloseCase",
+                 defaults: new
+                 {
+                     controller = "Case",
+                     action = "CloseCase",
+                     id = UrlParameter.Optional
+                 });
+
+            routes.MapRoute(
+                name: "RemoveMediator",
+                url: "Case/RemoveMediator",
+                 defaults: new
+                 {
+                     controller = "Case",
+                     action = "RemoveMediator",
+                     id = UrlParameter.Optional
+                 });
+
+
+            routes.MapRoute(
+                name: "CreateNewTask",
+                url: "Case/CreateNewTask",
+                 defaults: new
+                 {
+                     controller = "Case",
+                     action = "CreateNewTask",
+                     id = UrlParameter.Optional
+                 });
+            routes.MapRoute(
+                name: "CloseCase",
+                url: "Case/CloseCase",
+                 defaults: new
+                 {
+                     controller = "Case",
+                     action = "CloseCase",
+                     report_id = UrlParameter.Optional
+                 });
+
+
+            routes.MapRoute(
+            name: "NewStatus",
+            url: "Case/NewStatus",
+             defaults: new
+             {
+                 controller = "Case",
+                 action = "NewStatus",
+                 id = UrlParameter.Optional
+             });
+
+            routes.MapRoute(
+              name: "Case",
+              url: "Case/{id}",
+              defaults: new
+              {
+                  controller = "Case",
+                  action = "Index",
+                  id = UrlParameter.Optional
+              });
+
+            
+            #endregion
+
+            routes.MapRoute(
+                name: "NewReport",
+                url: "NewReport/{id}",
+                defaults: new
+                {
+                    controller = "NewReport",
+                    action = "Index",
+                    id = UrlParameter.Optional
+                }
+            );
+
+            routes.MapRoute(
+               name: "ReporterDashboardMessages",
+               url: "ReporterDashboard/Messages/{id}",
+               defaults: new
+               {
+                   controller = "ReporterDashboard",
+                   action = "Messages",
+                   id = UrlParameter.Optional
+               }
+           );
+            routes.MapRoute(
+                name: "ReporterDashboardActivity",
+                url: "ReporterDashboard/Activity/{id}",
+                defaults: new
+                {
+                    controller = "ReporterDashboard",
+                    action = "Activity",
+                    id = UrlParameter.Optional
+                }
+            );
+           routes.MapRoute(
+                name: "ReporterDashboardAddedMessages",
+                url: "ReporterDashboard/AddedMessages",
+                defaults: new
+                {
+                    controller = "ReporterDashboard",
+                    action = "AddedMessages"
+                }
+            );
+
+            
+            routes.MapRoute(
+                name: "UpdateDelays",
+                url: "Settings/UpdateDelays",
+                 defaults: new
+                 {
+                     controller = "Settings",
+                     action = "UpdateDelays",
+                     id = UrlParameter.Optional
+                 });
+
+            routes.MapRoute(
+                name: "ReporterDashboardSettings",
+                url: "ReporterDashboard/Settings/{id}",
+                defaults: new
+                {
+                    controller = "ReporterDashboard",
+                    action = "Settings",
+                    id = UrlParameter.Optional
+                }
+            );
+
+            routes.MapRoute(
+                 name: "ReporterDashboardSave",
+                 url: "ReporterDashboard/SaveFields",
+                 defaults: new
+                 {
+                     controller = "ReporterDashboard",
+                     action = "SaveFields",
+                     id = UrlParameter.Optional
+                 }
+             );
+
+
+            routes.MapRoute(
+                name: "ReporterDashboard",
+                url: "ReporterDashboard/{id}",
+                defaults: new
+                {
+                    controller = "ReporterDashboard",
+                    action = "Index",
+                    id = UrlParameter.Optional
+                }
+            );
+            routes.MapRoute(
+                name: "CompanyDepartmentReportAdvanced",
+                url: "Analytics/CompanyDepartmentReportAdvanced",
+                defaults: new
+                {
+                    controller = "Analytics",
+                    action = "CompanyDepartmentReportAdvanced",
+                    id = UrlParameter.Optional
+                }
+            );
+
+            routes.MapRoute(
+                name: "lang",
+                url: "{lang}/{controller}/{action}/{id}",
+                defaults: new { controller = "Index", action = "Index", id = UrlParameter.Optional },
+                constraints: new { lang = @"ru|en" },
+                namespaces: new[] { "EC.Controllers.Controllers" }
+            );
+
+            routes.MapRoute(
+                    name: "Default",
+                    url: "{controller}/{action}/{id}",
+                    defaults: new { Controller = "Index", action = "Index", id = UrlParameter.Optional }
+                );
+        }
+    }
+}

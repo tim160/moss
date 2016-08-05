@@ -1,0 +1,99 @@
+﻿@using EC.App_LocalResources
+@using EC.Controllers.Utils
+@using EC.Models
+
+@{
+    ViewBag.Title = "Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<body style="background-color: #666666;">
+
+    <div id="leftBar">
+        <div class="acme">
+            <p style='color: black; padding: 5.1em 0; text-align: center;'>ACME Inc</p>
+        </div>
+        
+
+        <div id="caseSubmitted">
+            <!--5 window begins-->
+
+            <div class="header">
+                <p>@GlobalRes.CaseSubmitted</p>
+            </div>
+            <h2>@GlobalRes.Case @ViewBag.CaseNumber @GlobalRes.wasSubmittedSucessfully</h2>
+            <p>@GlobalRes.caseWorking</p>
+
+            <p>@GlobalRes.detailsCase</p>
+            <!--<p class="checkCaseNumber">@GlobalRes.CheckCaseNumber</p>-->
+            <table class="caseProgress">
+                <tr>
+                    <td>@GlobalRes.CaseNumber</td>
+                    <td><input type="text" disabled value="@ViewBag.CaseNumber"></td>
+                </tr>
+                <tr>
+                    <td>@GlobalRes.Login</td>
+                    <td><input type="text" name="login" class="validate" data-validate="login" disabled value="@ViewBag.CaseNumber"></td>
+                </tr>
+                <tr>
+                    <td>@GlobalRes.Password</td>
+                    <td><input type="text" name="password" class="validate" data-validate="password" disabled value="@ViewBag.CaseNumber"></td>
+                    <td>
+                        <div>Change</div>
+                    </td>
+                </tr>
+            </table>
+            @if (ViewBag.Email != null && ViewBag.Email.Length != 0)
+            {
+                <p>@GlobalRes.CaseUpdates</p>
+                <p>@ViewBag.Email</p>
+            }
+
+
+        </div>
+    </div>
+
+    <div id="rightBar">
+        <div id="map">
+            <!--list 1 2 3 4-->
+
+            <p>@GlobalRes.NewIncidentReport</p>
+
+            <div class="tabOption gInfo">
+                <div class="circle passiveCircle">
+                    <span class="include">1</span>
+                </div>
+
+                <p>@GlobalRes.GeneralInformation</p>
+            </div>
+            <div class="tabOption pInvolved">
+                <div class="circle passiveCircle">
+                    <span class="include">2</span>
+                </div>
+                <p>@GlobalRes.PartiesInvolved</p>
+            </div>
+            <div class="tabOption cInformation">
+                <div class="circle passiveCircle">
+                    <span class="include">3</span>
+                </div>
+                <p>@GlobalRes.CaseInformation</p>
+            </div>
+            <div class="tabOption cSummary">
+                <div class="circle passiveCircle">
+                    <span class="include">4</span>
+                </div>
+                <p>@GlobalRes.CaseSummary</p>
+            </div>
+            <div class="tabOption cLogin active">
+                <div class="circle passiveCircle">
+                    <span class="include">5</span>
+                </div>
+                <p>Login Information</p>
+            </div>
+        </div>
+    </div>
+</body> 
+

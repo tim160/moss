@@ -1,0 +1,113 @@
+﻿@{
+    ViewBag.Title = "GetAjaxActivity";
+}
+
+@using EC.Models.Database;
+@using EC.Models;
+@using EC.App_LocalResources;
+@{
+
+    var report_id = (Int32)ViewBag.report_id;
+    var user_id = (Int32)ViewBag.user_id;
+    List<attachment> attachmentFiles = (List<attachment>)ViewBag.attachmentFiles;
+
+
+    ReportModel rm = new ReportModel(report_id);
+    UserModel um = new UserModel(user_id);
+
+    GlobalFunctions glb = new GlobalFunctions();
+    user _assigner = new user();
+    string _month_name = "";
+
+    List<report_log> actions_log = rm.ReportActions(user_id, rm._report.id);
+
+    string _sender_name = "";
+    string _sender_title = "";
+    string _second_name = "";
+    string _string_to_add = "";
+    user _user;
+    user _second_user;
+    action _action;
+    Dictionary<int, string> month = glb.ShortMonth();
+}
+
+
+@if ((rm._report != null) && (rm._report.id != 0))
+{
+    List<user> mediators = rm._mediators_whoHasAccess_toReport;
+    <div class="blockActivity">
+        @foreach (report_log _log in actions_log)
+        {
+            _user = um.GetById(_log.user_id);
+            _month_name = glb.GetShortMonth(_log.created_dt.Month);
+            _action = glb.GetActionById(_log.action_id.Value);
+            _second_name = "";
+            _string_to_add = "";
+
+            if (_log.second_user_id.HasValue)
+            {
+                _second_user = um.GetById(_log.second_user_id.Value);
+                _second_name = (_second_user.first_nm + " " + _second_user.last_nm).Trim();
+            }
+
+            _sender_name = "";
+            _sender_title = "";
+
+            if (_log.user_id == user_id)
+            {
+                _sender_name = "You,";
+            }
+            else
+            {
+                _sender_name = (_user.first_nm + " " + _user.last_nm).Trim() + ",";
+            }
+
+            if (_user.role_id == 8)
+            {
+                if ((rm._report.incident_anonymity_id == 1) || (rm._report.incident_anonymity_id == 2))
+                {
+                    _sender_title = "(" + GlobalRes.anonymous_reporter + ")";
+                    _sender_name = "";
+                }
+                else
+                {
+                    _sender_title = " (" + GlobalRes.Reporter + ")";
+                    _sender_name = "";
+                }
+            }
+            else
+            {
+                _sender_title = _user.title_ds.Trim();
+            }
+
+            <div class="contentActivity">
+                <div class="contentBlockActivity">
+                    <div class="blockImg">
+                        <img src='@Url.Content(_action.icon_path)'>
+                    </div>
+                    <div class="blockInfo">
+                        <div class="topText">
+                            <p class="date">@_log.created_dt.Day.ToString() @_month_name</p>
+                            <span class="title">
+                                <span class="reviewStage">@_action.description_en</span>
+                                @if (_second_name.Length > 0) { _second_name = ": " + _second_name; }    @_second_name
+                                @if ((_log.string_to_add != null) && (_log.string_to_add.Trim().Length > 0))
+                                {
+                                    _string_to_add = ": " + _log.string_to_add;
+                                }
+                                @_string_to_add
+                            </span>
+                        </div>
+                        <p class="personalName">@_sender_name</p>
+                        <p class="text"> @_sender_title</p>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div><!--blockActivity-->
+}
+
+
+
+

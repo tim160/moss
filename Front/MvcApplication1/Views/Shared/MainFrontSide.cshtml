@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="~/Content/style.css">
+
+
+    @RenderBody()
+</head>
+<body>
+<div id="main">
+    <div id="wrap">
+        <div id="header">
+            <div class="positionLogo">
+                <div class="blueLogo"></div>
+            </div>
+            <div style="float: right">
+                <div class="positionLogin">
+                    <div class="login">LOGIN</div>
+                </div>
+                <div class="positionButton">
+                    <div class="bigButton"><span>FILE A REPORT</span></div>
+                </div>
+            </div>
+        </div><!--end header-->
+        <div id="topBodyLanding">
+            <div class="firstTitle">
+                Build an Ethical Workplace
+            </div>
+            <div class="secondTitle">
+                Employee Confidential provides companies with an anonymous and secure system
+            </div>
+            <div class="secondTitle">
+                for employees, contractors and suppliers to report concerns in the work environment
+            </div>
+        </div><!--end topBody-->
+
+
+    </div><!-- end wrap -->
+    <div id="benefits">
+
+        <div class="positionTitle">
+            <div class="greenTitle">BENEFITS</div>
+        </div>
+        <div class="secondPositionTitle">of an Incident Reporting and Case Management System</div>
+        <div id="benefitsIcons">
+            <div class="centerBlock">
+                <div class="positionFirstBlock">
+                    <div class="positionIcons">
+                        <div id="firstIcon"></div>
+                    </div>
+
+                    <span class="title">Early Warning</span>
+                    <span class="textBlock">
+                            Help your organization address problems before they progress.
+                        </span>
+                </div>
+
+                <div class="positionSecondBlock">
+                    <div class="positionIcons">
+                        <div id="secondIcon"></div>
+                    </div>
+
+                    <span class="title">Meet Standards</span>
+                    <span class="textBlock">
+                            Enable an effective compliance program to meet regulatory standards set forth by USFSG, OECD and FCPA.
+                        </span>
+                </div>
+
+                <div class="positionThirdBlock">
+                    <div class="positionIcons">
+                        <div id="thirdIcon"></div>
+                    </div>
+
+                    <span class="title">Minimize Risk</span>
+                    <span class="textBlock">
+                            Reduce financial and reputational losses. Identify potential risk areas for your business via standard reporting and robust analytics.
+                        </span>
+                </div>
+
+                <div class="positionFourthBlock">
+                    <div class="positionIcons">
+                        <div id="fourthIcon"></div>
+                    </div>
+
+                    <span class="title">Increase Trust</span>
+                    <span class="textBlock">
+                            Increase employee trust in the entire process. Reduce fear of retaliation through prompt handling of allegations, keeping the reporter informed and always being transparent.
+                        </span>
+                </div>
+
+                <div class="positionFifthBlock">
+                    <div class="positionIcons">
+                        <div id="fifthIcon"></div>
+                    </div>
+
+                    <span class="title">Prevent Lawsuits</span>
+                    <span class="textBlock">
+                            Help prevent legal action against your company for negligence. Provide an alternative to whistleblowing.
+                        </span>
+                </div>
+            </div>
+
+        </div>
+    </div><!-- end benefits -->
+    @RenderSection("pageScripts", required: false)
+</div><!-- end main -->
+</body>
+</html>
+<!--<script src="~/Scripts/jquery-1.8.2.min.js"></script>-->
+
+<script>
+    $(document).ready(function () {
+        $("#header .bigButton").on('click', function () {
+            window.location.href = "http://stackoverflow.com";
+        });
+        $("#header .login").on('click', function () {
+            window.location.href = "http://stackoverflow.com";
+        });
+    });
+
+</script>

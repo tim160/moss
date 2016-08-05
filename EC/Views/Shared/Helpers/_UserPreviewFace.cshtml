@@ -1,0 +1,55 @@
+﻿@using EC.Models;
+@using EC.Models.ECModel;
+@using EC.Models.Database;
+
+@{    
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
+    String class_ext = ViewBag.cc_extension;
+    //19
+    //bool is_cc = true;
+    //String class_ext = "";
+    //if (is_cc)
+    //{
+    //    class_ext = "_cc";
+    //}
+    
+    int user_id = (Int32)ViewBag.user_id;
+    bool is_owner = (bool)ViewBag.is_owner;
+
+    UserModel um = new UserModel(user_id);
+    string _sb_full_name = um._user.first_nm + " " + um._user.last_nm;
+   }
+
+
+<div class="blockPhoto">
+    @if (is_owner)
+{
+    if (um._user.role_id == 5)
+    {
+        if (is_cc.Value)
+        {
+            <div class="status status_cc"></div>
+        }
+        else
+        {
+                <div class="status"></div>
+            }
+        }
+    }
+    <div class="photoPersonal">
+        @*<a href="/settings/user/@um._user.id"><img src='@Url.Content("~/Content/Icons/noPhoto.png")' title=@_sb_full_name.ToString().Replace(" ", "_") /></a>*@
+        
+        @if (um._user.photo_path.Trim() == "")
+        {
+            <a href="/settings/user/@um._user.id"><img src='@Url.Content("~/Content/Icons/noPhoto.png")' title=@_sb_full_name.ToString().Replace(" ", "_") /></a>
+        }
+        else
+        {
+            <a href="/settings/user/@um._user.id"><img src='@Url.Content(um._user.photo_path)' title=@_sb_full_name.ToString().Replace(" ", "_") /></a>
+        }
+</div>
+</div>

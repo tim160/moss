@@ -1,0 +1,529 @@
+﻿@using EC.Models;
+@using EC.Models.Database;
+@using EC.App_LocalResources;
+@{
+    ViewBag.Title = GlobalRes.CaseFlowSettings;
+    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+
+    var um = (UserModel)ViewBag.um;
+    var user_id = um.ID;
+    int _total = 0, step1Delay = 0, step2Delay = 0, step3Delay = 0, step4Delay = 0, step5Delay = 0,
+        step1Postpone, step2Postpone, step3Postpone, step4Postpone, step5Postpone;
+
+    bool is_cc = ViewBag.is_cc;
+    String class_ext = ViewBag.cc_extension;
+
+    //bool is_cc = true;
+    //String class_ext = "";
+    //if (is_cc)
+    //{
+    //    class_ext = "_cc";
+    //}
+    //19
+}
+
+@model  company
+<div class="companyId">
+@using (Html.BeginForm("UpdateCompany", "SettingsController", Model, FormMethod.Post))
+    {
+        _total = Model.step1_delay + Model.step2_delay + Model.step3_delay + Model.step4_delay + Model.step5_delay;
+        step1Delay = Model.step1_delay;
+        step2Delay = Model.step2_delay;
+        step3Delay = Model.step3_delay;
+        step4Delay = Model.step4_delay;
+        step5Delay = Model.step5_delay;
+
+        step1Postpone = Model.step1_postpone;
+        step2Postpone = Model.step2_postpone;
+        step3Postpone = Model.step3_postpone;
+        step4Postpone = Model.step4_postpone;
+        step5Postpone = Model.step5_postpone;
+        @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(model => model.id, new {@class = "companyIdHidden" })
+    <div class="blockSettings">
+        <div id="casesHeared">
+            <div id="menu">
+                <h2 class="mainTitle">@GlobalRes.Menu:</h2>
+                <div>
+                    <a href="/Settings/Index" class="caseesTab">@GlobalRes.MyProfile</a>
+                    <a href="/Settings/Password" class="caseesTab">@GlobalRes.Password</a>
+                    <a href="/Settings/Company" class="caseesTab">@GlobalRes.CompanyProfile</a>
+                    <a href="/Settings/Mediators" class="caseesTab">@GlobalRes.CompanyMediators</a>
+                    <a class="caseesTab active">@GlobalRes.CaseManagementDeadlines</a>
+                </div>
+            </div>
+            @*<div class="positionActivityIcon">
+                <div id="activityIcon"></div>
+            </div>*@
+        </div><!--casesHeared-->
+
+        
+        <div class="headerCaseWorkflow">
+            <div class="contentSettings">
+                <p class="title">@GlobalRes.Caseworkflow</p>
+                <p class="headerText">@GlobalRes.Totaltimeoncase: <span id="totalTime">@_total.ToString()</span> <span> @GlobalRes.days</span> (@GlobalRes.Recommended - 30 @GlobalRes.days1)</p>
+                <div class="allBlockLineHeader">
+                    <div class="blockLineHeader blockLineHeader@{@class_ext} first">
+                        <label id="step1">@GlobalRes.PreReviewUp.ToLower(): @Html.DisplayFor(model => model.step1_delay) @GlobalRes.days</label>
+                    </div>
+                    <div class="blockLineHeader blockLineHeader@{@class_ext} second">
+                        <label id="step2">@GlobalRes.Review: @Html.DisplayFor(model => model.step2_delay) @GlobalRes.days</label>
+                    </div>
+                    <div class="blockLineHeader blockLineHeader@{@class_ext} third">
+                        <label id="step3">@GlobalRes.Investigation.ToUpper(): @Html.DisplayFor(model => model.step3_delay) @GlobalRes.days</label>
+                    </div>
+                    <div class="blockLineHeader blockLineHeader@{@class_ext} fourth">
+                        <label id="step4">@GlobalRes.Resolution.ToUpper(): @Html.DisplayFor(model => model.step4_delay) @GlobalRes.days</label>
+                    </div>
+                    <div class="blockLineHeader blockLineHeader@{@class_ext} fifth">
+                        <label id="step5">@GlobalRes.Escalation.ToUpper(): @Html.DisplayFor(model => model.step5_delay) @GlobalRes.days</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="backgroundCaseWorkflow">
+            <div class="contentSettings allBlocksCaseWorkflow">
+
+                <!-- 1 -->
+          
+                <div class="blockCaseWorkflow">
+                    <div class="headerText">
+                        <div class="headerLeftText">
+                            <label>1. @GlobalRes.Reviewstage</label>
+                        </div>
+                        <div class="headerRightText">
+                            <label>@GlobalRes.ECrecommendations:</label>
+                            <div>
+                                <p>@GlobalRes.Completiontime: <span>2 @GlobalRes.days</span></p>
+                                <p>@GlobalRes.Pastnotificationtoteam: <span>2 @GlobalRes.days</span></p>
+                            </div>
+                        </div>
+                    </div><!--headerLeftText-->
+
+                    <div class="blockWorkflow">
+                        <div class="line"></div>
+                        <div class="blockSections">
+                            <div class="blockSection">
+                                <label class="completeStage completeStage@{@class_ext}" for="second">
+                                    <span class="text">@GlobalRes.Completiontime</span>
+                                    @Html.EditorFor(model => model.step2_delay, new { htmlAttributes = new { @min = "1", @max = "60" } })
+                                </label>
+                                <div class="dot dot@{@class_ext} first"></div>
+                            </div><!--blockSection-->
+
+                            <div class="blockSection">
+                                <div class="dot dot@{@class_ext} third"></div>
+
+                                <label class="startEscalation" for="fourth">
+                                    <span class="text">@GlobalRes.DeadlineNotification</span>
+                                    @Html.EditorFor(model => model.step2_postpone, new { htmlAttributes = new { @min = "1", @max = "60" } })
+                                </label>
+                            </div><!--blockSection-->
+                        </div><!--blockSections-->
+                    </div><!--blockWorkflow-->
+                </div><!--blockCaseWorkflow-->
+                <!-- 2 -->
+
+                <div class="blockCaseWorkflow">
+                    <div class="headerText">
+                        <div class="headerLeftText">
+                            <label>2. @GlobalRes.Investigationstage</label>
+                        </div>
+                        <div class="headerRightText">
+                            <label>@GlobalRes.ECrecommendations:</label>
+                            <div>
+                                <p>@GlobalRes.Completiontime: <span>14 @GlobalRes.days</span></p>
+                                <p>@GlobalRes.Pastnotificationtoteam: <span>2 @GlobalRes.days</span></p>
+                            </div>
+                        </div>
+                    </div><!--headerLeftText-->
+
+                    <div class="blockWorkflow">
+                        <div class="line"></div>
+                        <div class="blockSections">
+                            <div class="blockSection">
+                                <label class="completeStage completeStage@{@class_ext}" for="second">
+                                    <span class="text">@GlobalRes.Completiontime</span>
+                                    @Html.EditorFor(model => model.step3_delay, new { htmlAttributes = new { @min = "1", @max = "60" } })
+                                </label>
+                                <div class="dot  dot@{@class_ext} first"></div>
+                            </div><!--blockSection-->
+
+                            <div class="blockSection">
+                                <div class="dot  dot@{@class_ext} third"></div>
+
+                                <label class="startEscalation" for="fourth">
+                                    <span class="text">@GlobalRes.DeadlineNotification</span>
+                                    @Html.EditorFor(model => model.step3_postpone, new { htmlAttributes = new { @min = "1", @max = "9" } })
+                                </label>
+                            </div><!--blockSection-->
+                        </div><!--blockSections-->
+                    </div><!--blockWorkflow-->
+                </div><!--blockCaseWorkflow-->
+                <!-- 3 -->
+
+                <div class="blockCaseWorkflow">
+                    <div class="headerText">
+                        <div class="headerLeftText">
+                            <label>3. @GlobalRes.Resolutionstage</label>
+                        </div>
+                        <div class="headerRightText">
+                            <label>@GlobalRes.ECrecommendations:</label>
+                            <div>
+                                <p>@GlobalRes.Completiontime: <span>5 @GlobalRes.days</span></p>
+                                <p>@GlobalRes.Pastnotificationtoteam: <span>2 @GlobalRes.days</span></p>
+                            </div>
+                        </div>
+                    </div><!--headerLeftText-->
+
+                    <div class="blockWorkflow">
+                        <div class="line"></div>
+                        <div class="blockSections">
+                            <div class="blockSection">
+                                <label class="completeStage completeStage@{@class_ext}" for="second">
+                                    <span class="text">@GlobalRes.Completiontime</span>
+                                    @Html.EditorFor(model => model.step4_delay, new { htmlAttributes = new { @min = "1", @max = "19" } })
+                                </label>
+                                <div class="dot dot@{@class_ext} first"></div>
+                            </div><!--blockSection-->
+
+                            <div class="blockSection">
+                                <div class="dot dot@{@class_ext} third"></div>
+
+                                <label class="startEscalation" for="fourth">
+                                    <span class="text">@GlobalRes.DeadlineNotification</span>
+                                    @Html.EditorFor(model => model.step4_postpone, new { htmlAttributes = new { @min = "1", @max = "9" } })
+                                </label>
+                            </div><!--blockSection-->
+                        </div><!--blockSections-->
+                    </div><!--blockWorkflow-->
+                </div><!--blockCaseWorkflow-->
+
+                <!--4 -->
+                <div class="blockCaseWorkflow">
+                    <div class="headerText">
+                        <div class="headerLeftText">
+                            <label>4. @GlobalRes.Escalationstage</label>
+                        </div>
+                        <div class="headerRightText">
+                            <label>@GlobalRes.ECrecommendations:</label>
+                            <div>
+                                <p>@GlobalRes.Completiontime: <span>7 @GlobalRes.days</span></p>
+                                <p>@GlobalRes.Pastnotificationtoteam: <span>2 @GlobalRes.days</span></p>
+                            </div>
+                        </div>
+                    </div><!--headerLeftText-->
+
+                    <div class="blockWorkflow">
+                        <div class="line"></div>
+                        <div class="blockSections">
+                            <div class="blockSection">
+                                <label class="completeStage completeStage@{@class_ext}" for="second">
+                                    <span class="text">@GlobalRes.Completiontime</span>
+                                    @Html.EditorFor(model => model.step5_delay, new { htmlAttributes = new { @min = "1", @max = "9" } })
+                                </label>
+                                <div class="dot dot@{@class_ext} first"></div>
+                            </div><!--blockSection-->
+
+                            <div class="blockSection">
+                                <div class="dot dot@{@class_ext} third"></div>
+
+                                <label class="startEscalation" for="fourth">
+                                    <span class="text">@GlobalRes.DeadlineNotification</span>
+                                    @Html.EditorFor(model => model.step5_postpone, new { htmlAttributes = new { @min = "1", @max = "9" } })
+                                </label>
+                            </div><!--blockSection-->
+                        </div><!--blockSections-->
+                    </div><!--blockWorkflow-->
+                </div><!--blockCaseWorkflow-->
+                <div class="saveSettings">
+                    <div id="saveButton" target="false">@GlobalRes.Saved</div>
+                    <input type="button" class="greenButton greenButton@{@class_ext}" id="updateButton" value="Update" target="false" />
+                    <input type="button" class="greenButton greenButton@{@class_ext}" id="cancelButton" value="Cancel" target="false" />
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    }
+    </div>
+        @*<script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>*@
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/jquery-ui.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                //START Open mini menu for mobile
+                function blockActivityHeight() {
+                    if ($('#menu').height() < 50) {
+                        $('.positionActivityIcon').height(89);
+                    }
+                    else {
+                        $('.positionActivityIcon').height($('#casesHeared').height());
+                    }
+                }
+                $('.mainTitle').click(function () {
+                    $('.mainTitle + div').toggle();
+                    blockActivityHeight();
+                });
+                //----------------END Open mini menu for mobile---------------------------
+
+                //to move completeStage
+                var test = [0,0];
+                $('.completeStage').each(function(indx, element){
+                    $(element).draggable({
+                        axis: "x", containment: "parent",
+                        create: function( event, ui ) {
+                            var wid = $(".blockSection").width()-180;// - ui.helper.width();
+                            var onePart = wid / 61;
+                            var index = indx+2;
+                            var str = "#step" + index + "_delay";
+                            var temp = $(str).val();
+                            temp = temp * onePart;
+                            $(str).parents('.completeStage').css({"left":temp});
+                            //$(".completeStage.ui-draggable").css({"left":temp});
+                        },
+                        drag: function( event, ui ) {
+                            //test[0]++;
+                            //$("#step1").text(test[0]);
+                            var wid = $(".blockSection").width() - ui.helper.width();
+                            var valueInput = parseInt(ui.helper.find('input').val());
+                            var onePart = wid / 61;
+                            var temp = onePart * valueInput;
+                            var currentWidth = ui.helper.position().left
+                            if(currentWidth-temp>=onePart) {
+                                valueInput++;
+                                ui.helper.find('input').val(valueInput)
+                            } else if(temp-currentWidth<onePart){
+                                valueInput--;
+                                ui.helper.find('input').val(valueInput);
+                            }
+                        }
+                    });
+                });
+                //$('.startEscalation').each(function(indx, element){
+                //    $(element).draggable({
+                //        axis: "x", containment: "parent",
+                //        create: function( event, ui ) {
+                //            var t = $(this);
+                //            var wid = $(".blockSection").width()//-180;// - ui.helper.width();
+                //            var onePart = wid / 7;
+                //            var index = indx+2;
+                //            var str = "#step" + index + "_postpone";
+                //            var temp = $(str).val();
+                //            temp = temp * onePart;
+                //            $(str).parents('.startEscalation').css({"right":temp});
+                //        },
+                //        drag: function( event, ui ) {
+                //            //test[1]++;
+                //            //$("#step2").text(test[1]);
+                //            var wid = $(".blockSection").width() - ui.helper.width();
+                //            var valueInput = parseInt(ui.helper.find('input').val());   
+                //            var onePart = wid / 7;
+                //            var temp = onePart * valueInput;
+                //            var currentWidth = ui.helper.position().left
+                //            if(currentWidth-temp>=onePart) {
+                //                valueInput--;
+                //                ui.helper.find('input').val(valueInput)
+                //            } else if(temp-currentWidth<onePart){
+                //                valueInput++;
+                //                ui.helper.find('input').val(valueInput);
+                //            }
+                //        }
+                //    });
+                //});
+   
+                $('.startEscalation').each(function(indx, element){
+                    $(element).draggable({
+                        axis: "x", containment: "parent",
+                        create: function( event, ui ) {
+                            var temp = $(this);
+                            var widthBlock = $(".blockSection").width() - 180;
+                            var onePart =  widthBlock / 7;
+                            var valueInput  = temp.find('input').val();
+                            var widthElem = onePart * valueInput + $(".blockSection").width();
+                            temp.css("left", widthElem);
+                        },
+                        drag: function( event, ui ) {
+                            //var widthBlock = $(".blockSection").width();
+                            //var onePart =  widthBlock / 7;
+                            //var temp = $(this);
+                            //var currentLeft = temp.css("left");
+                            //currentLeft = currentLeft.split('.')[0] - widthBlock;
+                            //var currentInputValue = (currentLeft / onePart).toFixed();
+                            //temp.find('input').val(currentInputValue);
+
+                            var widthBlock = $(".blockSection").width();
+                            var onePart =  (widthBlock-200) / 7;
+                            var temp = $(this);
+                            var currentLeft = temp.css("left");
+                            currentLeft = currentLeft.split('.')[0] - widthBlock;
+                            var currentInputValue = (currentLeft / onePart).toFixed();
+                            temp.find('input').val(currentInputValue);
+                        }
+                    });
+                });
+
+                var step1Delay = 2;
+                var step1Postpone = 2;
+
+                var step2Delay = @step2Delay;
+                var step2Postpone = @step2Postpone;
+
+                var step3Delay = @step3Delay;
+                var step3Postpone = @step3Postpone;
+
+                var step4Delay = @step4Delay;
+                var step4Postpone = @step4Postpone;
+
+                var step5Delay = @step5Delay;
+                var step5Postpone = @step5Postpone;
+
+                var total = step1Delay + step2Delay + step3Delay + step4Delay + step5Delay;
+
+
+                //WidthHeaderLine - Пересчет ширины, в зависимости от количества дней в заголовке,
+
+                function WidthHeaderMiniLine(elementName, AllDay, day) {
+                    var elementWidth = 96;
+                    var widthX = (day * elementWidth) / AllDay;
+
+                    $(elementName).css('width', widthX + '%');
+                }
+                
+                //WidthHeaderMiniLine - Для расширения экрана меньше 620px
+                function maxForStepDelay(){
+                    var masStepDelay = [ step1Delay, step2Delay, step3Delay, step4Delay, step5Delay];
+                    var max = 0;
+                    for (var i = 0; i < masStepDelay.length; i++){
+                        if(max < masStepDelay[i]){
+                            max = masStepDelay[i];
+                        }
+                    }
+                    return max;
+                }
+                function WidthHeaderLine(elementName, AllDay, day) {
+                    var elementWidth = 100;
+                    var widthX = (day * elementWidth) / AllDay;
+
+                    $(elementName).css('width', widthX + '%');
+                }
+                function showMiniGreenLine(){
+                    var maxDay = maxForStepDelay();
+                    if ($('.contentSettings').width() <= '542'){
+                        WidthHeaderLine('.blockLineHeader.first', maxDay, step1Delay);
+                        WidthHeaderLine('.blockLineHeader.second', maxDay, step2Delay);
+                        WidthHeaderLine('.blockLineHeader.third', maxDay, step3Delay);
+                        WidthHeaderLine('.blockLineHeader.fourth', maxDay, step4Delay);
+                        WidthHeaderLine('.blockLineHeader.fifth', maxDay, step5Delay);
+                    }
+                }                    
+                showMiniGreenLine();
+
+
+
+
+                $('.text-box').on('keypress', function (e) {
+                    return (/[0-9]/.test(String.fromCharCode(e.charCode)));
+                });
+                $('#cancelButton').click(function(){
+                    $('.completeStage #step1_delay').val(step1Delay);
+                    $('.startEscalation #step1_postpone').val(step1Postpone);
+
+                    $('.completeStage #step2_delay').val(step2Delay);
+                    $('.startEscalation #step2_postpone').val(step2Postpone);
+
+                    $('.completeStage #step3_delay').val(step3Delay);
+                    $('.startEscalation #step3_postpone').val(step3Postpone);
+
+                    $('.completeStage #step4_delay').val(step4Delay);
+                    $('.startEscalation #step4_postpone').val(step4Postpone);
+
+                    $('.completeStage #step5_delay').val(step5Delay);
+                    $('.startEscalation #step5_postpone').val(step5Postpone);
+                });
+
+                $('#updateButton').click(function(){
+
+                    var company_id = $('.companyIdHidden').val();
+                    var step1_delayMin = $('.completeStage #step1_delay').val();
+                    var step1_delayMax = $('.startEscalation #step1_postpone').val();
+
+                    var step2_delayMin = $('.completeStage #step2_delay').val();
+                    var step2_delayMax = $('.startEscalation #step2_postpone').val();
+
+                    var step3_delayMin = $('.completeStage #step3_delay').val();
+                    var step3_delayMax = $('.startEscalation #step3_postpone').val();
+
+                    var step4_delayMin = $('.completeStage #step4_delay').val();
+                    var step4_delayMax = $('.startEscalation #step4_postpone').val();
+
+                    var step5_delayMin = $('.completeStage #step5_delay').val();
+                    var step5_delayMax = $('.startEscalation #step5_postpone').val();
+
+                    $.ajax({
+                        method: "POST",
+                        url: "/Settings/UpdateDelays",
+                        data: { company_id : company_id,
+                            step1_delayMin : step1_delayMin, step1_delayMax: step1_delayMax,
+                            step2_delayMin : step2_delayMin, step2_delayMax: step2_delayMax,
+                            step3_delayMin : step3_delayMin, step3_delayMax: step3_delayMax,
+                            step4_delayMin : step4_delayMin, step4_delayMax: step4_delayMax,
+                            step5_delayMin : step5_delayMin, step5_delayMax: step5_delayMax
+                        }
+                    }).done(function(data) {//data from server
+                        console.log();// alert(data);
+                        $('#updateButton').css('display', 'none');
+                        $('#saveButton').css('display', 'block');
+
+                        step1Delay = Number($('.completeStage #step1_delay').val());
+                        step1Postpone = Number($('.startEscalation #step1_postpone').val());
+
+                        step2Delay = Number($('.completeStage #step2_delay').val());
+                        step2Postpone = Number($('.startEscalation #step2_postpone').val());
+
+                        step3Delay = Number($('.completeStage #step3_delay').val());
+                        step3Postpone = Number($('.startEscalation #step3_postpone').val());
+
+                        step4Delay = Number($('.completeStage #step4_delay').val());
+                        step4Postpone = Number($('.startEscalation #step4_postpone').val());
+
+                        step5Delay = Number($('.completeStage #step5_delay').val());
+                        step5Postpone = Number($('.startEscalation #step5_postpone').val());
+
+                        total = Number(step1Delay) +
+                            Number(step2Delay) +
+                            Number(step3Delay) +
+                            Number(step4Delay) +
+                            Number(step5Delay);
+
+                        WidthHeaderLine('.blockLineHeader.first'  ,total, step1Delay);
+                        WidthHeaderLine('.blockLineHeader.second' ,total, step2Delay);
+                        WidthHeaderLine('.blockLineHeader.third'  ,total, step3Delay);
+                        WidthHeaderLine('.blockLineHeader.fourth' ,total, step4Delay);
+                        WidthHeaderLine('.blockLineHeader.fifth'  ,total, step5Delay);
+
+                        $('#totalTime').text(total);
+                        $('#step1').text("Pre-Review: " + step1Delay + " day(s)");
+                        $('#step2').text("Review: " + step2Delay + " day(s)");
+                        $('#step3').text("INVESTIGATION: " + step3Delay + " day(s)");
+                        $('#step4').text("RESOLUTION: " + step4Delay + " day(s)");
+                        $('#step5').text("ESCALATION: " + step5Delay + " day(s)");
+
+                    }).fail(function(error){
+                        console.log(error);
+                    });
+                });
+
+                $('.text-box').on('change',
+                    function(){
+                        $('#updateButton').css('display', 'block');
+                        $('#saveButton').css('display', 'none');
+                    });
+
+            });
+
+        </script>
