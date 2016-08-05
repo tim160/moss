@@ -285,7 +285,7 @@
 }
 .prev, .next {
 	width: 58%;
-	height: 14px;
+	height: 7px;
 	display: block;
 }
 table:first-child tr:first-child td {

@@ -48,7 +48,7 @@
                 data: { companyId: companyId, userId: userId, types: types }
             }).done(function (data) {//data from server
                 var temp = $.parseJSON(data);
-                if (temp['LocationTable'] != null && temp['LocationTable'].length > 1) {
+                if (temp['LocationTable'] != null && temp['LocationTable'].length >= 1) {
                     _dtCompanyLocationReport(temp['LocationTable']);
                 }
                 if (temp['DepartmentTable'] != null && temp['DepartmentTable'].length > 1) {
