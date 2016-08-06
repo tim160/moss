@@ -600,6 +600,10 @@
     <Content Include="Views\Shared\EditorTemplates\ApproveDialogModal.cshtml" />
     <Content Include="Views\EmployeeAwareness\Index.cshtml" />
     <Content Include="Views\EmployeeAwareness\Poster.cshtml" />
+    <Content Include="Views\Shared\Helpers\_CasePreview.cshtml" />
+    <Content Include="Views\Shared\Helpers\_CaseStatus.cshtml" />
+    <Content Include="Views\Shared\Helpers\_SingleMessage.cshtml" />
+    <Content Include="Views\Cases\Closed.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
