@@ -34,10 +34,12 @@ namespace EC
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                             "~/Scripts/modernizr-*"));
 
+          //  bundles.Add(new StyleBundle("~/Content/Styles")
+           //     .Include("~/Content/*.css"));
 
-            bundles.Add(new ScriptBundle("~/bundles/css").Include(
+            bundles.Add(new StyleBundle("~/Content/Styles").Include(
                 "~/Content/*.css"));
-            bundles.Add(new ScriptBundle("~/bundles/css").Include(
+            bundles.Add(new StyleBundle("~/bundles/css").Include(
                 "~/Content/fonts/*.ttf"));
 
             ScriptManager.ScriptResourceMapping.AddDefinition(
