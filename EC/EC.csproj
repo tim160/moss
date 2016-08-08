@@ -254,6 +254,7 @@
     <Content Include="Content\Icons\casesHover.png" />
     <Content Include="Content\Icons\close.png" />
     <Content Include="Content\Icons\closeWhite.png" />
+    <Content Include="Content\Icons\EC-logo-2x.png" />
     <Content Include="Content\Icons\exclamationmark.png" />
     <Content Include="Content\Icons\fifth.png" />
     <Content Include="Content\Icons\fileCases.png" />
@@ -301,6 +302,7 @@
     <Content Include="Content\Icons\TonyStark.png" />
     <Content Include="Content\Icons\viewDoc1.png" />
     <Content Include="Content\Icons\viewDoc2.png" />
+    <Content Include="Content\Icons\X.png" />
     <Content Include="Content\Icons\yes.png" />
     <Content Include="Content\img\arrowSelect.png" />
     <Content Include="Content\img\back.jpg" />
@@ -604,6 +606,7 @@
     <Content Include="Views\Shared\Helpers\_CaseStatus.cshtml" />
     <Content Include="Views\Shared\Helpers\_SingleMessage.cshtml" />
     <Content Include="Views\Cases\Closed.cshtml" />
+    <Content Include="Views\Case\GetAjaxActivity.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
