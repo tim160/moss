@@ -39,7 +39,9 @@ namespace EC
 
             bundles.Add(new StyleBundle("~/Content/Styles").Include(
                 "~/Content/*.css"));
-            bundles.Add(new StyleBundle("~/bundles/css").Include(
+            bundles.Add(new ScriptBundle("~/Content/Scripts").Include(
+                "~/Content/*.js"));
+            bundles.Add(new StyleBundle("~/bundles/Fonts").Include(
                 "~/Content/fonts/*.ttf"));
 
             ScriptManager.ScriptResourceMapping.AddDefinition(
@@ -49,6 +51,8 @@ namespace EC
                     Path = "~/Scripts/respond.min.js",
                     DebugPath = "~/Scripts/respond.js",
                 });
+
+            BundleTable.EnableOptimizations = true;
         }
     }
 }

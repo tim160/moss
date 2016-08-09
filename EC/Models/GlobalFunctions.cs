@@ -1624,6 +1624,15 @@ public class GlobalFunctions
         //List<string> result = names.Split(',').ToList();
         UserModel um = new UserModel(user_id);
         List<report> _all_reports_old = um.ReportsSearch(company_id, 0);
+        if (dtReportCreationStartDate.HasValue)
+        {
+            _all_reports_old = _all_reports_old.Where(t => t.reported_dt.Date >= dtReportCreationStartDate.Value.Date).ToList();
+        }
+        if (dtReportCreationEndDate.HasValue)
+        {
+            _all_reports_old = _all_reports_old.Where(t => t.reported_dt.Date <= dtReportCreationEndDate.Value.Date).ToList();
+        }
+
         List<report> _all_reports = new List<report>();
         #region Get the list of ReportIDs allowed
         List<int> ReportsSecondaryTypesIDs = new List<int>();
@@ -1663,9 +1672,9 @@ public class GlobalFunctions
                 _flag3 = false;
             if ((ReportsLocationIDs.Count > 0) && (!ReportsLocationIDs.Contains(_report.id)))
                 _flag4 = false;
-            if ((dtReportCreationStartDate.HasValue) && (dtReportCreationStartDate >= _report.reported_dt))
+            if ((dtReportCreationStartDate.HasValue) && (dtReportCreationStartDate.Value.Date >= _report.reported_dt.Date))
                 _flag5 = false;
-            if ((dtReportCreationEndDate.HasValue) && (dtReportCreationEndDate <= _report.reported_dt))
+            if ((dtReportCreationEndDate.HasValue) && (dtReportCreationEndDate.Value.Date <= _report.reported_dt.Date))
                 _flag6 = false;
             if (_flag1 & _flag2 && _flag3 & _flag4 && _flag5 & _flag6)
                 _all_reports.Add(_report);
@@ -1774,9 +1783,9 @@ public class GlobalFunctions
                     _flag3 = false;
             if ((ReportsLocationIDs.Count > 0) && (!ReportsLocationIDs.Contains(_report.id)))
                     _flag4 = false;
-            if ((dtReportCreationStartDate.HasValue) && (dtReportCreationStartDate >= _report.reported_dt))
+            if ((dtReportCreationStartDate.HasValue) && (dtReportCreationStartDate.Value.Date >= _report.reported_dt.Date))
                 _flag5 = false;
-            if ((dtReportCreationEndDate.HasValue) && (dtReportCreationEndDate <= _report.reported_dt))
+            if ((dtReportCreationEndDate.HasValue) && (dtReportCreationEndDate.Value.Date <= _report.reported_dt.Date))
                 _flag6 = false;
             if (_flag1 & _flag2 && _flag3 & _flag4 && _flag5 & _flag6)
                 _all_reports.Add(_report);
@@ -2113,9 +2122,9 @@ public class GlobalFunctions
                 _flag3 = false;
             if ((ReportsLocationIDs.Count > 0) && (!ReportsLocationIDs.Contains(_report.id)))
                 _flag4 = false;
-            if ((dtReportCreationStartDate.HasValue) && (dtReportCreationStartDate >= _report.reported_dt))
+            if ((dtReportCreationStartDate.HasValue) && (dtReportCreationStartDate.Value.Date >= _report.reported_dt.Date))
                 _flag5 = false;
-            if ((dtReportCreationEndDate.HasValue) && (dtReportCreationEndDate <= _report.reported_dt))
+            if ((dtReportCreationEndDate.HasValue) && (dtReportCreationEndDate.Value.Date <= _report.reported_dt.Date))
                 _flag6 = false;
             if (_flag1 & _flag2 && _flag3 & _flag4 && _flag5 & _flag6)
                 _all_reports.Add(_report);
@@ -2272,9 +2281,9 @@ public class GlobalFunctions
                 _flag3 = false;
             if ((ReportsLocationIDs.Count > 0) && (!ReportsLocationIDs.Contains(_report.id)))
                 _flag4 = false;
-            if ((dtReportCreationStartDate.HasValue) && (dtReportCreationStartDate >= _report.reported_dt))
+            if ((dtReportCreationStartDate.HasValue) && (dtReportCreationStartDate.Value.Date >= _report.reported_dt.Date))
                 _flag5 = false;
-            if ((dtReportCreationEndDate.HasValue) && (dtReportCreationEndDate <= _report.reported_dt))
+            if ((dtReportCreationEndDate.HasValue) && (dtReportCreationEndDate.Value.Date <= _report.reported_dt.Date))
                 _flag6 = false;
             if (_flag1 & _flag2 && _flag3 & _flag4 && _flag5 & _flag6)
                 _all_reports.Add(_report);
