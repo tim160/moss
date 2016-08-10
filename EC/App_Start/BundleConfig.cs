@@ -34,15 +34,22 @@ namespace EC
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                             "~/Scripts/modernizr-*"));
 
+
+
+            bundles.Add(new ScriptBundle("~/bundles/css").Include(
+                "~/Content/*.css"));
+            bundles.Add(new ScriptBundle("~/bundles/css").Include(
+                "~/Content/fonts/*.ttf"));
+
           //  bundles.Add(new StyleBundle("~/Content/Styles")
            //     .Include("~/Content/*.css"));
 
-            bundles.Add(new StyleBundle("~/Content/Styles").Include(
-                "~/Content/*.css"));
-            bundles.Add(new ScriptBundle("~/Content/Scripts").Include(
-                "~/Content/*.js"));
-            bundles.Add(new StyleBundle("~/bundles/Fonts").Include(
-                "~/Content/fonts/*.ttf"));
+   //         bundles.Add(new StyleBundle("~/Content/Styles").Include(
+   //             "~/Content/*.css"));
+   //         bundles.Add(new ScriptBundle("~/Content/Scripts").Include(
+   //             "~/Content/*.js"));
+     //       bundles.Add(new StyleBundle("~/bundles/Fonts").Include(
+  //              "~/Content/fonts/*.ttf"));
 
             ScriptManager.ScriptResourceMapping.AddDefinition(
                 "respond",

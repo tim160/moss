@@ -383,9 +383,7 @@
       <DependentUpon>style.css</DependentUpon>
     </Content>
     <Content Include="Content\styleAnalitics.css" />
-    <Content Include="Content\styleAnalitics.min.css">
-      <DependentUpon>styleAnalitics.css</DependentUpon>
-    </Content>
+    <Content Include="Content\styleAnalitics.min.css" />
     <Content Include="Content\styleLogin.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\styleLogin.min.css">
@@ -400,7 +398,6 @@
       <DependentUpon>styleReportDashboard.css</DependentUpon>
     </Content>
     <Content Include="Content\styleTasks.css" />
-    <Content Include="Content\styleAnalitics.css" />
     <Content Include="Content\styleTasks.min.css">
       <DependentUpon>styleTasks.css</DependentUpon>
     </Content>

@@ -3,7 +3,8 @@
 @using EC.App_LocalResources;
 
 @{
-    @Styles.Render("~/Content/Styles");
+    <link rel="stylesheet" type="text/css" href="/Content/styleReportDashboard.css">
+  //  @Styles.Render("~/Content/Styles");
     ViewBag.Title = GlobalRes.NewUserRegistration;
     var _code = ViewBag.code;
     var _email = ViewBag.email;
