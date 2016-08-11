@@ -402,9 +402,7 @@
                                 //Case Information
                                 $('.addedFilesList').empty();
                                 for (var i = 0; i < attachmentsFiles.length; i++) {
-                                    $('.addedFilesList').append
-                                        ("<img src=/Content/Icons/generic-file.png>    " +
-                                        "<span id=attachedFiles>" + attachmentsFiles[i].name + "</span><br>");
+                                    $('.addedFilesList').append("<img src=/Content/Icons/generic-file.png><span id=attachedFiles>" + attachmentsFiles[i].name + "</span><br>");
                                 }
                                 if (attachmentsFiles.length == 0) {
                                     $(".attachedFilesTitle").hide();
@@ -920,8 +918,10 @@
         });
     };
 
-    document.querySelector('#attachments').onchange = function (e) {
+    document.querySelector('#attachments').onchange = function (event) {
         attachmentsFiles = this.files;
+        $('.attach').append("<table class='attachedFilesTitle' style='color: #3c3e3f;font-size: 14px;'><tr><th><img src=/Content/Icons/generic-file.png></th> <th>" + this.files[0].name + "</th></tr></table>");
+        //$('.attach').append("<div><img src=/Content/Icons/generic-file.png>" + this.files[0].name + "</div>");
     }
 
     function setDropdown() {
