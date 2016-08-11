@@ -5,13 +5,11 @@
 }
 
 .blockAnalitics .contentSettings {
-  background-color: #ffffff;
-  width: 88%;
-  padding-top: 35px;
-  float: left;
-  margin-top: 40px;
-  margin-left: 3%;
-  padding-bottom: 1%;
+    background-color: #ffffff;
+    width: 100%;
+    padding-top: 35px;
+    margin-top: 82px;
+    padding-bottom: 1%;
 }
 .titleBlock {
   font-size: 16px;
@@ -290,10 +288,12 @@ html, body {
 }
 
 .wrapper {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 100%;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding-left: 54px;
+    padding-right: 40px;
 }
 .table {
   width: 100%;
@@ -472,8 +472,6 @@ table:first-child tr:first-child td {
 .dropDownMenu {
     width: 100%;
     height: 70px;
-    background-color:#ebf1f1;
-    border-bottom: 1px solid #dce2e3;
 }
 .menuItem {
     width: 250px;
@@ -565,3 +563,14 @@ table:first-child tr:first-child td {
 }
 /*end drop dwon menu*/
 
+.borderAnalit {
+    padding-left: 40px;
+    padding-right: 120px;
+    background-color: #e5ebeb;
+
+}
+.dropDownMenuPadding {
+    padding-left: 40px;
+    background-color: #ebf1f1;
+    border-bottom: 1px solid #dce2e3;
+}
