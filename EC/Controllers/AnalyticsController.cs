@@ -47,11 +47,11 @@ namespace EC.Controllers
             string _today = glb.ConvertDateToShortString(DateTime.Today);
             ViewBag._today = _today;
 
-            DataTable dtSecondaryTypes = glb.SecondaryTypesByDate( um._user.company_id, um._user.id);
-            DataTable dtCompanyRelationships = glb.RelationshipToCompanyByDate( um._user.company_id, um._user.id);
+     //       DataTable dtSecondaryTypes = glb.SecondaryTypesByDate( um._user.company_id, um._user.id);
+    //        DataTable dtCompanyRelationships = glb.RelationshipToCompanyByDate( um._user.company_id, um._user.id);
             
-            ViewBag._dtSecondaryTypes = dtSecondaryTypes;
-            ViewBag._dtCompanyRelationships = dtCompanyRelationships;
+      //      ViewBag._dtSecondaryTypes = dtSecondaryTypes;
+       //     ViewBag._dtCompanyRelationships = dtCompanyRelationships;
 
             //int[] _company_average_days = glb.AverageStageDays(um._user.company_id, um._user.id);
             //int[] _average_stage_days = new int[] { _company_average_days[0] - 2, _company_average_days[1] - 3, _company_average_days[2] - 5, _company_average_days[3] - 5, _company_average_days[4] - 7 };
@@ -59,10 +59,10 @@ namespace EC.Controllers
             //ViewBag._company_average_days = _company_average_days;
             //ViewBag._average_stage_days = _average_stage_days;
 
-            DataTable dtCompanyLocationReport = glb.CompanyLocationReport(um._user.company_id, um._user.id);
+       //     DataTable dtCompanyLocationReport = glb.CompanyLocationReport(um._user.company_id, um._user.id);
             //ViewBag._dtCompanyLocationReport = glb.ConvertDataTabletoString(dtCompanyLocationReport);
 
-            DataTable dtCompanyDepartmentReport = glb.CompanyDepartmentReport( um._user.company_id, um._user.id);
+         //   DataTable dtCompanyDepartmentReport = glb.CompanyDepartmentReport( um._user.company_id, um._user.id);
             //ViewBag._dtCompanyDepartmentReport = glb.ConvertDataTabletoString(dtCompanyDepartmentReport);
 
             DataTable dtAnalyticsTimeline = glb.AnalyticsTimeline(um._user.company_id, um._user.id);
