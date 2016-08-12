@@ -8,7 +8,7 @@
     background-color: #ffffff;
     width: 100%;
     padding-top: 35px;
-    margin-top: 82px;
+    margin-top: 33px;
     padding-bottom: 1%;
 }
 .titleBlock {
@@ -573,4 +573,33 @@ table:first-child tr:first-child td {
     padding-left: 40px;
     background-color: #ebf1f1;
     border-bottom: 1px solid #dce2e3;
+}
+/*8/12/2016*/
+.filter {
+    padding-top: 14px;
+}
+.filterUp {
+    font-family: 'Open Sans';
+    font-size: 16px;
+    padding-left: 10px;
+    color: #3c3e3f;
+    font-weight: 500;
+    padding-right: 22px;
+}
+.sales {
+    background-color: #dce2e3;
+    padding-left:19px;
+    padding:8px;
+    border-radius:14px;
+    cursor: pointer;
+}
+.sales img, .clearAll img {
+    padding-left: 10px;
+}
+.clearAll {
+    cursor: pointer;
+    text-decoration: underline;
+}
+.filter table th{
+    padding-right: 34px;
 }

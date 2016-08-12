@@ -303,6 +303,7 @@
     <Content Include="Content\Icons\viewDoc1.png" />
     <Content Include="Content\Icons\viewDoc2.png" />
     <Content Include="Content\Icons\X.png" />
+    <Content Include="Content\Icons\Xanal.gif" />
     <Content Include="Content\Icons\yes.png" />
     <Content Include="Content\img\arrowSelect.png" />
     <Content Include="Content\img\back.jpg" />
