@@ -13,11 +13,36 @@
                 $(element).find('div.liItem').removeClass('selected');
             });
             temp.addClass('selected');
-            //menuUi.slideUp();
         }
+        updateFilter();
         updateGraphics();
     });
+    function updateFilter() {
+        var tableFilter = $("#tableFilter").find('.sales');
+        tableFilter.each(function (index, element) {
+            $(element).closest('th').remove();
+        });
 
+        var arraySelected = $(".selected");
+        var template = '';
+
+        $(".selected").each(function (index, element) {
+            var str = $.trim($(element).text());
+            template = '<th><div class="sales">' + str + '<img src="/Content/Icons/Xanal.gif" /></div></th>';
+            $(".filterUp").after(template);
+        });
+        $(".sales").on('click', function (event) {
+            var temp = $(event.currentTarget);
+            var name = $.trim(temp.text());
+            $(".selected").each(function (index, element) {
+                var currentElement = $(element);
+                if ($.trim(currentElement.text()) == name) {
+                    currentElement.removeClass('selected');
+                }
+            });
+            temp.closest('th').remove();
+        });
+    }
     function updateGraphics() {
         var userId = $("#user_id");
         var companyId = $("#companyId");
