@@ -554,8 +554,7 @@
         }
     }
     $('#daterange').dateRangePicker(configObject);
-    $('.daterange.menuItem').click(function(evt)
-    {
+    $('.daterange.menuItem').click(function (evt) {
         evt.stopPropagation();
         $("#daterange").show();
         $('#daterange').data('dateRangePicker').open();
@@ -563,4 +562,14 @@
         $(".prev").html("");
         $(".next").html("");
     });
+    $(".clearAll").on('click', function () {
+        $(".selected").each(function (index, element) {
+            $(element).removeClass('selected');
+        });
+        $(".sales").each(function (index, element) {
+            var temp = $(element);
+            temp.closest('th').remove();
+        });
+        updateGraphics();
+    })
 });
