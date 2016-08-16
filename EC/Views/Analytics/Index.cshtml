@@ -27,7 +27,7 @@
     //int[] _company_average_days = ViewBag._company_average_days;
     //int[] _average_stage_days = ViewBag._average_stage_days;
 
-    string[] _titleHeaderLegend = { "Pre-Review", "Review", "Investigation", "Resolution", "Completed", "Closed" };
+    string[] _titleHeaderLegend = { "Pre-Review", "Review", "Investigation", "Resolution",  "Completed", "Closed" };
     string[] _miniSquareColor = { "#D6F9F6", "#c0ece8", "#82dad0", "#44c8b9", "#44c8b9", "#e5eeee" };
 
     var _dtAnalyticsTimeline = ViewBag._dtAnalyticsTimeline;
@@ -217,7 +217,7 @@
                 <!-- 2 Today -->
                 <div class="blockToday">
                     <div class="headerBlockActivity">
-                        <div class="titleBlock">@GlobalRes.Number_cases_stage: @_today</div>
+                        <div class="titleBlock">@GlobalRes.Today: @_today</div>
                         <div class="blockTodayContant">
                             <div class="itemLegend">
                                 <div class="headerLegend">
@@ -225,26 +225,26 @@
                                     <span>@GlobalRes.Spam</span>
                                 </div>
                                 <div class="contentLegend">
-                                    <label>@_today_spanshot[6]</label>
-                                    @if (_today_spanshot[6] > _month_end_spanshot[6])
+                                    <label>@_today_spanshot[5]</label>
+                                    @if (_today_spanshot[5] > _month_end_spanshot[5])
                                 {
-                                    difference = _today_spanshot[6] - _month_end_spanshot[6];
+                                    difference = _today_spanshot[5] - _month_end_spanshot[5];
                                 <span class="plus">(+@difference)</span>
                                 }
-                                    @if (_today_spanshot[6] < _month_end_spanshot[6])
+                                    @if (_today_spanshot[5] < _month_end_spanshot[5])
                                 {
-                                    difference = _month_end_spanshot[6] - _today_spanshot[6];
+                                    difference = _month_end_spanshot[5] - _today_spanshot[5];
                                 <span class="mines">(-@difference)</span>
                                 }
-                                    @if (_today_spanshot[6] == _month_end_spanshot[6])
+                                    @if (_today_spanshot[5] == _month_end_spanshot[5])
                                 {
                                 <span class="closed">(-)</span>
                                 }
                                 </div>
                             </div>
-                            @for (var i = 0; i < 7; i++)
+                            @for (var i = 0; i < 6; i++)
                         {
-                            if (i != 4)
+                      //      if (i != 4)
                             {
                         <div class="itemLegend">
                             <div class="headerLegend">
@@ -712,12 +712,6 @@
                     valueField: 'resolution',
                     type: 'area',
                     color: '#44c8b9'
-                },
-                {
-                    argumentField: 'month',
-                    valueField: 'escalation',
-                    type: 'area',
-                    color: '#05b5a2'
                 },
                 {
                     argumentField: 'month',
