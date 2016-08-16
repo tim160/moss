@@ -597,6 +597,7 @@ table:first-child tr:first-child td {
     padding-left: 10px;
 }
 .clearAll {
+    display: none;
     cursor: pointer;
     text-decoration: underline;
 }
