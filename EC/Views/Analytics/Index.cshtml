@@ -27,8 +27,8 @@
     //int[] _company_average_days = ViewBag._company_average_days;
     //int[] _average_stage_days = ViewBag._average_stage_days;
 
-    string[] _titleHeaderLegend = { "Pre-Review", "Review", "Investigation", "Resolution", "Escalation", "Completed", "Closed" };
-    string[] _miniSquareColor = { "#D6F9F6", "#c0ece8", "#82dad0", "#44c8b9", "#05b5a2", "#44c8b9", "#e5eeee" };
+    string[] _titleHeaderLegend = { "Pre-Review", "Review", "Investigation", "Resolution", "Completed", "Closed" };
+    string[] _miniSquareColor = { "#D6F9F6", "#c0ece8", "#82dad0", "#44c8b9", "#44c8b9", "#e5eeee" };
 
     var _dtAnalyticsTimeline = ViewBag._dtAnalyticsTimeline;
 }
@@ -203,7 +203,7 @@
                 <div class="blockAllCases">
                     <div class="headerBlockActivity">
                         <div class="titleBlock">@GlobalRes.Allcases</div>
-                        @for (var i = 0; i < 7; i++)
+                        @for (var i = 0; i < 6; i++)
                     {
                     <div class="itemLegend">
                         <div class="miniSquare" style="background-color: @_miniSquareColor[i];"></div>
@@ -217,7 +217,7 @@
                 <!-- 2 Today -->
                 <div class="blockToday">
                     <div class="headerBlockActivity">
-                        <div class="titleBlock">@GlobalRes.Today: @_today</div>
+                        <div class="titleBlock">@GlobalRes.Number_cases_stage: @_today</div>
                         <div class="blockTodayContant">
                             <div class="itemLegend">
                                 <div class="headerLegend">

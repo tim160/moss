@@ -3139,6 +3139,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Number of cases per stage.
+        /// </summary>
+        public static string Number_cases_stage {
+            get {
+                return ResourceManager.GetString("Number_cases_stage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Number of Employees.
         /// </summary>
         public static string NumberEmployees {

@@ -1576,4 +1576,7 @@
   <data name="Exclude" xml:space="preserve">
     <value>Exclude</value>
   </data>
+  <data name="Number_cases_stage" xml:space="preserve">
+    <value>Number of cases per stage</value>
+  </data>
 </root>

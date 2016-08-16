@@ -17,8 +17,8 @@
     string _today = ViewBag._today;
 
 
-    string[] _titleHeaderLegend = { "Pre-Review", "Review", "Investigation", "Resolution", "Escalation" };
-    string[] _miniSquareColor = { "#D6F9F6", "#c0ece8", "#82dad0", "#44c8b9", "#05b5a2" };
+    string[] _titleHeaderLegend = { "Pre-Review", "Review", "Investigation", "Resolution" };
+    string[] _miniSquareColor = { "#D6F9F6", "#c0ece8", "#82dad0", "#44c8b9" };
 
     UserModel um = new UserModel(user_id);
     List<report> _reports = um.ReportsSearch(null, 0);
@@ -51,7 +51,7 @@
         <div class="blockAllCases">
             <div class="headerBlockActivity">
                 <div class="titleBlock">@GlobalRes.Allcases</div>
-                @for (var i = 0; i < 5; i++)
+                @for (var i = 0; i < 4; i++)
                 {
                     <div class="itemLegend">
                         <div class="miniSquare" style="background-color: @_miniSquareColor[i];"></div>
@@ -67,7 +67,7 @@
             <div class="headerBlockActivity">
                 <div class="titleBlock">@GlobalRes.Today: @_today</div>
                 <div class="blockTodayContant analyticsTasks">
-                    @for (var i = 0; i < 5; i++)
+                    @for (var i = 0; i < 4; i++)
                     {
                         <div class="itemLegend">
                             <div class="headerLegend">
