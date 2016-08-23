@@ -192,12 +192,63 @@
         <div class="borderAnalit">
             <div class="filter">
                 <table>
-                    <tr id="tableFilter">
-                        <th class="filterUp">Filter:</th>
-                        <th class="clearAll">Clear all<img src="~/Content/Icons/Xanal.gif" /></th>
+                    <tr>
+                        <td class="filterUp">Search:</td>
+                        <td>
+                            <table id="filterTable">
+                                <tr>
+                                    <td>Deaprtments</td>
+                                    <td><div class="sales">Toronto, ON, Canada<img src="/Content/Icons/Xanal.gif"></div></td>
+                                    <td class="clearAll">Clear<img src="~/Content/Icons/Xanal.gif" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Deaprtments</td>
+                                    <td><div class="sales inTheBall">Toronto, ON, Canada<img src="/Content/Icons/Xanal.gif"></div></td>
+                                    <td class="clearAll">Clear<img src="~/Content/Icons/Xanal.gif" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Deaprtments</td>
+                                    <td><div class="sales">Toronto, ON, Canada<img src="/Content/Icons/Xanal.gif"></div></td>
+                                    <td class="clearAll">Clear<img src="~/Content/Icons/Xanal.gif" /></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="clearAll">Clear all<img src="~/Content/Icons/Xanal.gif" /></div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
                     </tr>
                 </table>
             </div>
+                        @*
+
+        <td>
+                    <p>Departments:</p>
+                    <p>Locations:</p>
+                    <div class="clearAll">Clear all<img src="~/Content/Icons/Xanal.gif" /></div>
+                </td>
+                <td>
+                    <div class="sales">Toronto, ON, Canada<img src="/Content/Icons/Xanal.gif"></div>
+                    <div class="sales">Toronto, ON, Canada<img src="/Content/Icons/Xanal.gif"></div>
+                </td>
+                <td class="clearAll" type="ReportsLocationIDStrings">Clear<img src="~/Content/Icons/Xanal.gif" /></td>
+
+                        *@
+
+            @*<div class="filter">
+                <table>
+                    <tr id="tableFilter">
+                        <th class="filterUp">Filter:</th>
+                        <th class="clearAll">Clear all<img src="~/Content/Icons/Xanal.gif" /></th>
+                        <th class="clearAll" type="ReportsLocationIDStrings">Clear locations<img src="~/Content/Icons/Xanal.gif" /></th>
+                        <th class="clearAll" type="ReportsDepartmentIDStringss">Clear departmetns<img src="~/Content/Icons/Xanal.gif" /></th>
+                        <th class="clearAll" type="ReportsSecondaryTypesIDStrings">Clear Incident Type<img src="~/Content/Icons/Xanal.gif" /></th>
+                        <th class="clearAll" type="ReportsRelationTypesIDStrings">Clear Reporter Type<img src="~/Content/Icons/Xanal.gif" /></th>
+                        <th class="clearAll" type="dateRange">Clear Date range<img src="~/Content/Icons/Xanal.gif" /></th>
+                    </tr>
+                </table>
+            </div>*@
             <div class="contentSettings contentActivity">
                 <!-- 1 All cases -->
                 <div class="blockAllCases">

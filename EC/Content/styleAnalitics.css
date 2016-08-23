@@ -8,7 +8,6 @@
     background-color: #ffffff;
     width: 100%;
     padding-top: 35px;
-    margin-top: 33px;
     padding-bottom: 1%;
 }
 .titleBlock {
@@ -575,9 +574,7 @@ table:first-child tr:first-child td {
     border-bottom: 1px solid #dce2e3;
 }
 /*8/12/2016*/
-.filter {
-    padding-top: 14px;
-}
+
 .filterUp {
     font-family: 'Open Sans';
     font-size: 16px;
