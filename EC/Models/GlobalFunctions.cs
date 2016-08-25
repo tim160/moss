@@ -31,7 +31,7 @@ public class GlobalFunctions
 
     public bool IsSubdomain(string url)
     {
-        if (url.ToLower().Contains("localhost") || url.ToLower().Contains("stark.") || url.ToLower().Contains("democompany.") || url.ToLower().Contains("report."))
+        if (url.ToLower().Contains("localhost") || url.ToLower().Contains("stark.") || url.ToLower().Contains("democompany.") || url.ToLower().Contains("report.") || url.ToLower().Contains("cai."))
         {
             return true;
         }

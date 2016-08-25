@@ -7,12 +7,17 @@
     });
 
     function LoginHere(login, password) {
+
+      //  console.log(login);
+       // console.log(password);
+
+
         $.ajax({
             method: "POST",
             url: "/Login/Login",
             data: { login: login, password: password }
         }).done(function (data) {//data from server
-            console.log(data);
+          //  console.log(data);
 
             if (data != '') {
                 var str = window.location.href;

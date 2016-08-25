@@ -1,0 +1,200 @@
+﻿@using EC.App_LocalResources
+@using EC.Controllers.Utils
+@using EC.Models
+@using EC.App_LocalResources;
+@{
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
+    ViewBag.Title = "Cai - " + GlobalRes.SelectYourCompany;
+    String class_ext = ViewBag.cc_extension;
+    Layout = "~/Views/Shared/HeaderFooterFrontPages.cshtml";
+    ViewBag.background = "background-image: url(/Content/img/website-report" + class_ext + ".jpg);";
+    ViewBag.cssStyle = "/Content/MainStyle.css";
+    ViewBag.cssStyle = "/Content/cai.css";
+}
+<div id="headerCai">
+    <a href="/" class="blueLogo"></a>
+    <a href="/Login/Company" class="linkLogin">Client login</a>
+    <div class="info">Ethics Reporting & Case Management Cloudware.</div>
+</div>
+
+<div class="mainBlock">
+
+    <div id="bodyInc">
+        @*<img class="logoShow" src='@Url.Content("~/Content/img/secondLogo.jpg")' />*@
+        <img class="logoShow" src='@Url.Content("~/Content/img/cai_logo.png")' />
+        <div class="blockInputs">
+            <div class="block">
+                <h1>File a New Report:</h1>
+                <div class="text">Find an organization by company name or code</div>
+                <div class="loginForm">
+                    <div class="div">
+                        <label>Company name or code</label>
+                        <input id="specialInput" type="text" name="text" required="" autocomplete="off">
+                    </div>
+                    <div class="button">
+                        <input id="startBtn" type="button" value="start" />
+                    </div>
+                </div>
+            </div>
+            <div class="block">
+                <h1>Check Report Status:</h1>
+                <div class="text">
+                    To review the status of your previously submitted report, please enter
+                    the username and password that were assigned to you when you made
+                    your original report.
+                </div>
+                <div class="loginForm">
+                    <div class="div">
+                        <label>Username</label>
+                        <input type="text" name="login" autocomplete="off">
+                    </div>
+                    <div class="div">
+                        <label>Password</label>
+                        <input type="password" name="password" autocomplete="off">
+                    </div>
+                    <div class="button">
+                        <input id="submit" type="button" value="LOGIN" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="fourthTitle">
+            @GlobalRes.DontSilentBystander
+        </div>
+    </div>
+
+    <div id="bottomBody@{@class_ext}">
+        <div class="itemBlock">
+            <div class="empty"></div>
+            <div class="positionIcons">
+                <div id="firstIcon"></div>
+            </div>
+            <span class="title">@GlobalRes.ActEarly,<br />@GlobalRes.ActEthically</span><br />
+            <span class="textBlock">
+                @GlobalRes.Ifyouwitness
+            </span>
+        </div>
+
+        <div class="itemBlock">
+            <div class="empty"></div>
+            <div class="positionIcons">
+                <div id="secondIcon"></div>
+            </div>
+            <span class="title">@GlobalRes.ReportWeb, <br />@GlobalRes.TabletMobile</span><br />
+            <span class="textBlock">
+                @GlobalRes.Useonline
+            </span>
+        </div>
+
+        <div class="itemBlock">
+            <div class="empty"></div>
+            <div class="positionIcons">
+                <div id="thirdIcon"></div>
+            </div>
+            <span class="title">@GlobalRes.Chooseyour  <br />@GlobalRes.ConfidentialityLevel</span><br />
+            <span class="textBlock">
+                @GlobalRes.ReportAnon
+            </span>
+        </div>
+
+        <div class="itemBlock">
+            <div class="empty"></div>
+            <div class="positionIcons">
+                <div id="fourthIcon"></div>
+            </div>
+            <span class="title">@GlobalRes.Expecta <br />@GlobalRes.Response</span><br />
+            <span class="textBlock">
+                @GlobalRes.Mediatorswillgetback
+            </span>
+        </div>
+    </div><!--end bottomBody-->
+</div>
+
+<input id="companyCode" type="hidden" value="false" />
+<script>
+    $(document).ready(function () {
+        $('.div input')
+           .focus(function () {
+               $(this).parent('.div').css({ 'border': '2px solid #05b5a2' });
+           })
+            .focusout(function () {
+                $(this).parent('.div').css({ 'border': '1px solid #e0e5e6' });
+            });
+    });
+</script>
+
+<script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+<script>
+    $(document).ready(function() {
+        $("#header .bigButton").on('click', function() {
+            window.location.href = "/";
+        });
+        $("#header .login").on('click', function() {
+            window.location.href = "/login";
+        });
+        $("#startBtn").on('click', function() {
+            var companyCode = $('#companyCode').val();
+            if (companyCode != 'false') {
+                window.location.href = "/Report/new?companyCode=" + companyCode;
+            } else {
+                //    window.location.href = "/Report/new?companyCode=" + $('#specialInput').val();
+            }
+        });
+    });
+
+    $(function() {
+        var str =  @Html.Raw(ViewBag.newListComp);
+        $("#specialInput").autocomplete({
+            source: str,
+            select: function(event, ui) {
+                $('#specialInput').val(ui.item.label);
+                $('#companyCode').val(ui.item.value);
+                return false;
+            }
+        });
+    });
+
+
+    $('#submit').on('click', function () {
+        if (($('input[name=login]').val() != "") && ($('input[name=password]').val() != "")) {
+
+            LoginHere($('input[name=login]').val(), $('input[name=password]').val());
+        }
+    });
+
+    function LoginHere(login, password) {
+
+        //  console.log(login);
+        // console.log(password);
+
+
+        $.ajax({
+            method: "POST",
+            url: "/Login/Login",
+            data: { login: login, password: password }
+        }).done(function (data) {//data from server
+            //  console.log(data);
+
+            if (data != '') {
+                var str = window.location.href;
+            //    str = str.toLocaleLowerCase().split("login");
+
+
+                window.location.href = "/" + data;
+            }
+            else
+                $('input[name=password]').val() = '';
+            console.log(data);// alert(data);
+        }).fail(function (error) {
+            console.log(error);
+        });
+    }
+
+</script>

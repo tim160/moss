@@ -55,9 +55,13 @@ namespace EC.Controllers
        //     temp = Resources.GetString(m_CultureInfo, "_Completed");
 
             string CurrentURL = Request.Url.AbsoluteUri.ToLower();
-            if (CurrentURL.Contains("stark"))
+            if (CurrentURL.Contains("stark."))
             {
                 return RedirectToAction("Index", "Index/Page");
+            }
+            else if (CurrentURL.Contains("cai."))
+            {
+                return RedirectToAction("Index", "Index/Start");
             }
             else
             {
@@ -106,6 +110,39 @@ namespace EC.Controllers
             return View();
         }
 
+        public ActionResult Start()
+        {
+            Session.Clear();
+            #region EC-CC Viewbag
+            ViewBag.is_cc = is_cc;
+            string cc_ext = "";
+            if (is_cc) cc_ext = "_cc";
+            ViewBag.cc_extension = cc_ext;
+            #endregion
+            List<company> list = companyModel.GeCompaniesWithStatus();
+            List<SearchCompanyDto> searchCompanyDto = new List<SearchCompanyDto>();
+
+            string CurrentURL = Request.Url.AbsoluteUri.ToLower();
+            if (!CurrentURL.Contains("registration"))
+            {
+                foreach (var item in list)
+                {
+                    SearchCompanyDto searchCompany = new SearchCompanyDto();
+                    searchCompany.value = item.company_code;
+                    searchCompany.label = item.company_nm;
+                    searchCompanyDto.Add(searchCompany);
+                }
+            }
+
+            ViewBag.listCompanies = list;
+            //JSON goes v View
+            var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            EcAuthorizedAttribute attr = new EcAuthorizedAttribute();
+
+            ViewBag.newListComp = serializer.Serialize(searchCompanyDto.ToArray());
+
+            return View();
+        }
        // [EcAuthorized("admin, moderator")]
         public ActionResult Test()
         {
@@ -120,6 +157,17 @@ namespace EC.Controllers
             //var user = SessionManager.inst.User.email;
             return View("Index");
         }
-       
+
+        private void SignIn(user user)
+        {
+            AuthHelper.SetCookies(user, HttpContext);
+            Session[Constants.CurrentUserMarcker] = user;
+        }
+
+        private void SingOut()
+        {
+            Session.Clear();
+            FormsAuthentication.SignOut();
+        }
     }
 }

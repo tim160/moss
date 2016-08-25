@@ -210,6 +210,17 @@ defaults: new
             
             #endregion
 
+           routes.MapRoute(
+                name: "Start",
+                url: "Index/Start/{id}",
+                defaults: new
+                {
+                    controller = "Index",
+                    action = "Start",
+                    id = UrlParameter.Optional
+                }
+            );
+
             routes.MapRoute(
                 name: "NewReport",
                 url: "NewReport/{id}",
