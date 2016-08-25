@@ -2479,6 +2479,143 @@ public class GlobalFunctions
 
         return _array;
     }
+
+
+    public DataTable AnalyticsTimelineAdvanced(int company_id, int user_id, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
+    {
+        DataTable dt = dtAnalyticsTimeLineTable();
+        DataRow dr = dt.NewRow();
+
+        #region Initial Row
+        dr["month"] = "";
+        dr["pending"] = 0;
+        dr["review"] = 0;
+        dr["investigation"] = 0;
+        dr["resolution"] = 0;
+        dr["escalation"] = 0;
+        dr["closed"] = 0;
+        dr["spam"] = 0;
+        dt.Rows.Add(dr);
+
+        #endregion
+
+        int _month = DateTime.Today.Month;
+        int temp_month = 0;
+        int year = DateTime.Today.Year - 1;
+        if (_month == 12)
+            year = DateTime.Today.Year;
+
+        DateTime _start = DateTime.Today;
+
+        for (int i = 1; i < 13; i++)
+        {
+            dr = dt.NewRow();
+            temp_month = _month + i;
+            if (temp_month > 12)
+            {
+                temp_month = temp_month - 12;
+                year = DateTime.Today.Year;
+            }
+            _start = new DateTime(year, temp_month, 1);
+
+
+            dr = AnalyticsTimeLineRowAdvanced(_start, company_id, user_id,  ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
+            dt.Rows.Add(dr.ItemArray);
+        }
+
+        dr = AnalyticsTimeLineRowAdvanced(DateTime.Today, company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
+        dr[0] = " ";
+        dt.Rows.Add(dr.ItemArray);
+
+        return dt;
+    }
+    private DataRow AnalyticsTimeLineRowAdvanced(DateTime _start, int company_id, int user_id, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
+    {
+        DataRow dr = dtAnalyticsTimeLineTable().NewRow();
+
+        #region month_name
+        int month = _start.Month;
+        string month_s = "";
+        Dictionary<int, string> Monthes = FullMonth();
+        if ((month > 0) && (month < 13))
+            Monthes.TryGetValue(month, out month_s);
+        #endregion
+
+        dr["month"] = month_s;
+        dr["pending"] = 0;
+        dr["review"] = 0;
+        dr["investigation"] = 0;
+        dr["resolution"] = 0;
+        dr["escalation"] = 0;
+        dr["completed"] = 0;
+        dr["spam"] = 0;
+        dr["closed"] = 0;
+        dr["notused"] = 0;
+        UserModel um = new UserModel(user_id);
+        ReportModel rm = new ReportModel();
+
+        List<report> _all_reports_old = um.ReportsSearch(company_id, 0);
+        List<report> _all_reports = new List<report>();
+        #region Get the list of ReportIDs allowed
+        List<int> ReportsSecondaryTypesIDs = new List<int>();
+        List<int> ReportsRelationTypesIDs = new List<int>();
+        List<int> ReportsDepartmentIDs = new List<int>();
+        List<int> ReportsLocationIDs = new List<int>();
+
+        if (ReportsSecondaryTypesIDStrings.Trim().Length > 0)
+            ReportsSecondaryTypesIDs = ReportsSecondaryTypesIDStrings.Split(',').Select(Int32.Parse).ToList();
+        if (ReportsRelationTypesIDStrings.Trim().Length > 0)
+            ReportsRelationTypesIDs = ReportsRelationTypesIDStrings.Split(',').Select(Int32.Parse).ToList();
+        if (ReportsDepartmentIDStringss.Trim().Length > 0)
+            ReportsDepartmentIDs = ReportsDepartmentIDStringss.Split(',').Select(Int32.Parse).ToList();
+        if (ReportsLocationIDStrings.Trim().Length > 0)
+            ReportsLocationIDs = ReportsLocationIDStrings.Split(',').Select(Int32.Parse).ToList();
+
+        bool _flag1 = true;
+        bool _flag2 = true;
+        bool _flag3 = true;
+        bool _flag4 = true;
+        bool _flag5 = true;
+        bool _flag6 = true;
+
+        foreach (report _report in _all_reports_old)
+        {
+            _flag1 = true;
+            _flag2 = true;
+            _flag3 = true;
+            _flag4 = true;
+            _flag5 = true;
+            _flag6 = true;
+            if ((ReportsSecondaryTypesIDs.Count > 0) && (!ReportsSecondaryTypesIDs.Contains(_report.id)))
+                _flag1 = false;
+            if ((ReportsRelationTypesIDs.Count > 0) && (!ReportsRelationTypesIDs.Contains(_report.id)))
+                _flag2 = false;
+            if ((ReportsDepartmentIDs.Count > 0) && (!ReportsDepartmentIDs.Contains(_report.id)))
+                _flag3 = false;
+            if ((ReportsLocationIDs.Count > 0) && (!ReportsLocationIDs.Contains(_report.id)))
+                _flag4 = false;
+            if ((dtReportCreationStartDate.HasValue) && (dtReportCreationStartDate >= _report.reported_dt))
+                _flag5 = false;
+            if ((dtReportCreationEndDate.HasValue) && (dtReportCreationEndDate <= _report.reported_dt))
+                _flag6 = false;
+            if (_flag1 & _flag2 && _flag3 & _flag4 && _flag5 & _flag6)
+                _all_reports.Add(_report);
+        }
+        #endregion
+
+        int _status = 0;
+        foreach (report _report in _all_reports)
+        {
+            rm = new ReportModel(_report.id);
+            _status = rm.report_status_id_by_date(_start);
+            if (_status != 0)
+            {
+                dr[_status] = (Int32)dr[_status] + 1;
+            }
+        }
+
+        return dr;
+    }
     #endregion
 
 
@@ -2498,9 +2635,9 @@ public class GlobalFunctions
             + ", \"RelationTable\":" + RelationshipToCompanyByDateAdvancedJson(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate)
             + ", \"SecondaryTypeTable\":" + SecondaryTypesByDateAdvancedJson(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate)
             + ", \"AverageStageDaysTable\":" + AverageStageDaysAdvancedJson(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate)
-               + ", \"TodaySnapshotTable\":" + _today_spanshot
-               + ", \"MonthEndSnapshotTable\":" + _month_end_spanshot
-         
+        ///       + ", \"TodaySnapshotTable\":" + _today_spanshot
+       ///        + ", \"MonthEndSnapshotTable\":" + _month_end_spanshot
+         ///         + ", \"AnalyticsTimeline\":" + AnalyticsTimelineAdvancedJson(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate)
             + "}";
 
        return _all_json;
@@ -2574,6 +2711,12 @@ public class GlobalFunctions
         return _json;
         
         //return DataTableToJSONWithJavaScriptSerializer(dt);
+    }
+
+    public string AnalyticsTimelineAdvancedJson(int company_id, int user_id, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
+    {
+        DataTable dt = AnalyticsTimelineAdvanced(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
+        return DataTableToJSONWithJavaScriptSerializer(dt);
     }
 
     public string DataTableToJSONWithJavaScriptSerializer(DataTable table)
