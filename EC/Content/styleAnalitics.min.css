@@ -319,7 +319,7 @@ table:first-child tr:first-child td {
 .sales img, .clearAll img {
     padding-left: 10px;
 }
-.clearAll {
+#clearAll, .clearAll {
     cursor: pointer;
     text-decoration: underline;
 }

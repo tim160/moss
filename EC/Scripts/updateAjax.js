@@ -15,51 +15,12 @@
         //updateFilter(temp);
         updateGraphics();
     });
-    //function updateFilter(currentElement) {
-    //    var table = $("#filterTable");
-    //    table.remove();
-    //    $(".menuItem .selected").each(function (indx, element) {
-    //        var temp = $(element);
-    //        temp.parents(".menuItem")
-    //        $(".menuItem")
-    //    });
-    //};
-    //function updateFilter(currentElement) {
-    //    var tableFilter = $("#tableFilter").find('.sales');
-    //    tableFilter.each(function (index, element) {
-    //        $(element).closest('th').remove();
-    //    });
 
-    //    var arraySelected = $(".selected");
-    //    var template = '';
-
-    //    $(".selected").each(function (index, element) {
-    //        var str = $.trim($(element).text());
-    //        template = '<th><div class="sales">' + str + '<img src="/Content/Icons/Xanal.gif" /></div></th>';
-    //        $(".filterUp").after(template);
-    //    });
-    //    $(".sales").on('click', function (event) {
-    //        var temp = $(event.currentTarget);
-    //        var name = $.trim(temp.text());
-    //        $(".selected").each(function (index, element) {
-    //            var currentElement = $(element);
-    //            if ($.trim(currentElement.text()) == name) {
-    //                currentElement.removeClass('selected');
-    //            }
-    //        });
-    //        temp.closest('th').remove();
-    //        if ($(".sales").length == 0) {
-    //            $(".clearAll").hide();
-    //        }
-    //    });
-    //}
-    
     function updateGraphics() {
         var userId = $("#user_id");
         var companyId = $("#companyId");
         var types = {};
-        $("#filterTable").html("");
-
+        $("#filterTable").html('');
         $(".menuItem").each(function (indx, element) {
             var selected = $(element).find('.selected');
             if (selected.length >= 1) {
@@ -78,57 +39,88 @@
         });
         console.log(types);
         
-        //sendAjax(userId.val(), companyId.val(), types);
+        sendAjax(userId.val(), companyId.val(), types);
     }
     function upadteFilterAgain(textDropDown, elementSelected) {
         var table = $("#filterTable");
         var flag = true;
-        var counterSelected = $(".selected").length;
-        if (counterSelected > 1) {
-            table.find('tr').each(function (indx, element) {
-                var temp = $(element);
-                if (temp.attr('name') == textDropDown) {
-                    flag = false;
-                    var some = temp.find('.sales');///найти куда вставлять паралельно с div class sales
-                    some = $(some);
-                    some.after(addTdSales(elementSelected.text()));
-                    //здесь добавим 
-                }
-            });
-            if (flag) {
-                table.append(addTrNew(textDropDown, elementSelected));
+
+        table.find('tr').each(function (indx, element) {
+            var temp = $(element);
+            if (temp.attr('name') == textDropDown) {
+                flag = false;
+                var some = temp.find('.sales');///найти куда вставлять паралельно с div class sales
+                some = some.parent();
+                some.append(addTdSales(elementSelected.text()));
+                //здесь добавим 
             }
-        } else {
-            table.append(addTrNew(textDropDown, elementSelected));
-        }
-
-        
-
-        //if (table.find('tr').length > 0) {
-        //    var flag = true;
-        //    table.find('tr').each(function (indx, element) {
-        //        var temp = $(element);
-        //        if (temp.attr('name') == textDropDown) {
-        //            flag = false;
-        //            temp.find();///найти куда вставлять паралельно с div class sales
-        //            addTdSales(elementSelected.text());
-        //            //здесь добавим 
-        //        }
-        //    });
-        //    if (flag) {
-        //        addTrNew(textDropDown, elementSelected);
-        //    }
-        //} else {
-        //    /*create first tr if nother else*/
-        //    addTrNew(textDropDown, elementSelected);
-        //}
-        $('.clearAll').on('click', function () {
-            alert("Hello World!!!");
         });
-        $('.sales').on('click', function () {
-            alert("Hello World!!!2");
+        if (flag) {
+            if ($("#clearAll").length > 0) {
+                $("#clearAll").remove();
+            }
+            table.append(addTrNew(textDropDown, elementSelected) + '<tr><td><div id="clearAll" class="clearAll">Clear all<img src="/Content/Icons/Xanal.gif"></div></td></tr>');
+        }
+        $('.clearAll').unbind('click');
+        $('.clearAll').on('click', function (event) {
+            clearRowItems($(event.currentTarget));
+        });
+        $('.sales').unbind('click');
+        $('.sales').on('click', function (event) {
+            clearItemOne($(event.currentTarget));
+        });
+        $("#clearAll").on('click', function () {
+            clearAll();
         });
     }
+    function clearItemOne(item) {
+        var nameCurrentItem = item.text().trim();
+        var nameGroup = item.parents('tr').attr('name');
+        if (nameCurrentItem != "" && nameGroup != "") {
+            $(".dropMenuText").each(function (indx, element) {
+                if (nameGroup == $(element).text().trim()) {
+                    var menuItem = $(element).parents('.menuItem');
+                    var ul = menuItem.find('.menuUl li');
+                    ul.each(function (indx, element) {
+                        if ($(element).text().trim() == nameCurrentItem) {
+                            $(element).find('.liItem').removeClass('selected');
+                        }
+                    });
+                }
+            });
+        }
+        item.unbind('click');
+        item.remove();
+        if ($('.sales').length == 0) {
+            $("#filterTable").html('');
+        }
+    }
+    function clearRowItems(item) {
+        var nameCurrentItem = item.text().trim();
+        var nameGroup = item.parents('tr').attr('name');
+        if (nameCurrentItem != "" && nameGroup != "") {
+            $(".dropMenuText").each(function (indx, element) {
+                if (nameGroup == $(element).text().trim()) {
+                    var menuItem = $(element).parents('.menuItem');
+                    menuItem.find('.selected').removeClass('selected');
+                }
+            });
+        }
+        item.parent().remove();
+        if ($('.sales').length == 0) {
+            $("#filterTable").html('');
+        }
+    }
+    function clearAll() {
+        var allSelected = $(".selected");
+        if (allSelected.length > 0) {
+            allSelected.each(function (indx, element) {
+                $(element).removeClass('selected');
+            });
+            $("#filterTable").html("");
+        }
+    }
+
     function addTrNew(textDropDown, elementSelected) {
         var html = '<tr name="' + textDropDown + '">';
         html += '<td>' + textDropDown + '</td><td>';
