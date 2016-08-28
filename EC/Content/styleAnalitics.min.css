@@ -185,6 +185,8 @@ table:first-child tr:first-child td {
     color: #3c3e3f;
     font-size: 16px;
     font-family: OpenSans-Light;
+    width:200px;
+    position: relative;
 }
 /**drop down menu*/
 
