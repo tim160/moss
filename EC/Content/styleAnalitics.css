@@ -1,7 +1,14 @@
 @font-face {
-    font-family: OpenSans-Light;
-    src: url('fonts/OpenSansLight.eot?') format('embedded-opentype'),
-         url('fonts/OpenSans-Light.ttf') format('truetype');
+    font-family: 'OpenSans-Regular';
+    src: url('fonts/OpenSans/OpenSans-Regular.ttf');
+}
+@font-face {
+    font-family: 'OpenSans-Semibold';
+    src: url('fonts/OpenSans/OpenSans-Semibold.ttf');
+}
+@font-face {
+    font-family: 'OpenSans-Light';
+    src: url('fonts/OpenSans/OpenSans-Light.ttf');
 }
 
 .blockAnalitics .contentSettings {

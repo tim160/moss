@@ -1,30 +1,52 @@
-﻿/*@font-face {
-    font-family: OpenSans;
-    src: url('fonts/eVX6sX1i.ttf') format('truetype');
+﻿@font-face {
+    font-family: 'OpenSans-Regular';
+    src: url('fonts/OpenSans/OpenSans-Regular.ttf');
 }
-@import url(http://fonts.googleapis.com/css?family=Open+Sans);*/
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,800italic,800,700italic,700,600italic,400italic,300italic);
 @font-face {
-    font-family: OpenSansSemibold;
-    src: url('fonts/OpenSans-Semibold.eot?') format('embedded-opentype'),
-    url(fonts/OpenSans-Semibold.ttf) format('truetype');
+    font-family: 'OpenSans-Semibold';
+    src: url('fonts/OpenSans/OpenSans-Semibold.ttf');
 }
+@font-face {
+    font-family: 'OpenSans-Bold';
+    src: url('fonts/OpenSans/OpenSans-Bold.ttf');
+}
+@font-face {
+    font-family: 'OpenSans-Light';
+    src: url('fonts/OpenSans/OpenSans-Light.ttf');
+}
+@font-face {
+    font-family: 'Lato-Heavy';
+    src: url('fonts/lato-heavy.ttf');
+}
+@font-face {
+    font-family: 'Lato-Regular';
+    src: url('fonts/Lato-Regular.ttf');
+}
+@font-face {
+    font-family: 'Lato-Semibold';
+    src: url('fonts/Lato-Semibold.ttf');
+}
+@font-face {
+    font-family: 'Lato-Bold';
+    src: url('fonts/Lato-Bold.ttf');
+}
+
 html, body, h1,h2,h3,h4,h5,h6 {
     height: 100%;
     width: 100%;
     margin: 0px;
     padding: 0px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
 }
 h3 {
     font-size: 13pt;
-    color: #ffffff;
+    color: #fff;
     font-weight: 200;
 }
 
 h2 {
     font-size: 17px;
-    color: #ffffff;
+    color: #fff;
     font-weight: 200;
 }
 ul {
@@ -49,7 +71,7 @@ ul {
 }
 .header .topContent{
     font-size: 18px;
-    font-weight: 600;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     padding-top: 15px;
     padding-left: 17px;
     padding-bottom: 5px;
@@ -85,7 +107,7 @@ ul {
 .header .topContent span {
     font-size: 12px;
     color: #aeb5b7;
-    font-weight: 600;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 }
 
 .headerContent .topContent .text {
@@ -124,10 +146,9 @@ ul {
 
 .blockDays .textDays p:last-child{
     font-size: 10px;
-    /*font-family: 'OpenSansSemibold';*/
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     margin-top: 0px;
     color: #848a8b;
-    font-weight: 600;
 }
 .headerContent ul.lines {
     width: 96%;
@@ -155,7 +176,7 @@ ul {
     padding-bottom: 20px;
 }
 .headerContent .bottomContent span {
-    font-weight: 600;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 }
 #infoReport {
     width: 100%;
@@ -176,7 +197,7 @@ ul {
     float: left;
     margin-left: 40px;
     font-size: 16px;
-    font-weight: 600;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 }
 .newReport:hover .content{
     text-decoration: underline;
@@ -235,241 +256,240 @@ ul {
     /*font-weight: 600;*/
 }
 .caseesTab.active {
-    color: #ffffff;
+    color: #fff;
     cursor: default;
-    font-weight: 600;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 }
 #casesHeared #menu {
     padding-bottom: 0px;
 }
 
-  .firstHeader {
-      width: 100%;
-      background-color: #05b5a2;
-      position: relative;
-      font-size: 24px;
-      padding-left: 26px;
-      color: #fff;
-      padding-top:22px;
-      padding-bottom: 9px;
-      box-sizing: border-box;
-  }
-            .dropDownfirstHeader {
-                    -ms-transform: rotate(45deg);
-                -webkit-transform: rotate(45deg);
-                -moz-transform: rotate(45deg);
-                transform: rotate(45deg);
-                background-color: transparent;
-                color: transparent;
-                width: 9px;
-                height: 9px;
-                border-top: 1px solid #fff;
-                border-right: 1px solid #fff;
-                float: left;
-                margin-top: 15px;
-                margin-right: 20px;
-                margin-left: -5px;
-            }
-            .positionDropDown {
-                position: relative;
-                top: 50%;
-                float: right;
-                right: 8%;
-            }
-            .firstHeader2 {
-                    max-width: 1415px;                    
-                    width: calc(100% - 105px);
-            }
-            .littleText {
-                font-size: 16px;
-                padding-top: 14px;
-            }
+.firstHeader {
+    width: 100%;
+    background-color: #05b5a2;
+    position: relative;
+    font-size: 24px;
+    padding-left: 26px;
+    color: #fff;
+    padding-top:22px;
+    padding-bottom: 9px;
+    box-sizing: border-box;
+}
+.dropDownfirstHeader {
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    transform: rotate(45deg);
+    background-color: transparent;
+    color: transparent;
+    width: 9px;
+    height: 9px;
+    border-top: 1px solid #fff;
+    border-right: 1px solid #fff;
+    float: left;
+    margin-top: 15px;
+    margin-right: 20px;
+    margin-left: -5px;
+}
+.positionDropDown {
+    position: relative;
+    top: 50%;
+    float: right;
+    right: 8%;
+}
+.firstHeader2 {
+    max-width: 1415px;
+    width: calc(100% - 105px);
+}
+.littleText {
+    font-size: 16px;
+    padding-top: 14px;
+}
 
-            .closeCustom {
-                position: absolute;
-                right: 35px;
-                top: -23px;
-                width: 32px;
-                height: 32px;
-                opacity: 1;
-                z-index: 1;
-            }
-            .closeCustom:hover {
-              opacity: 1;
-            }
-            .closeCustom:before, .closeCustom:after {
-              position: absolute;
-              left: 15px;
-              content: ' ';
-              height: 18px;
-              width: 2px;
-              background-color: #fff;
-            }
-            .closeCustom:before {
-              transform: rotate(45deg);
-            }
-            .closeCustom:after {
-              transform: rotate(-45deg);
-            }
-            .caseMediator {
-                width: 100%;
-                height: 135px;
-                background-color: #049787;
-                max-width: 1415px;
-                position:relative;
-            }
-            .caseMediator .displayMediators {
-                position: absolute;
-                left: 50px;
-                top: 32px;
-            }
-            .forText {
-                padding-left: 106px;
-                padding-top: 28px;
-                color: #fff;
-                padding-bottom: 28px;
-            }
-            .boldText {
-                font-size: 16px;
-                font-family: OpenSans-Bold;
-            }
-            .regularText {
-                font-size: 12px;
-                color: #82cbc3;
-                padding-top: 3px;
-                font-family: OpenSansSemibold;
-            }
-            .openSansText {
-                font-size: 16px;
-                line-height: 18px;
-            }
-            .border{
-                border-bottom: 1px solid #05b5a2;
-                max-width: 1415px;
-            }
-           .caseMediator .caseResolution {
-                width: 100%;
-                float: left;
-                /*height: 260px;*/
-                background-color: #05b5a2;
-                max-width: 1415px;
-                position:relative;
-            }
-            .buttonNoneBorderGray {
-                background-color:#e5ebeb;
-                color:#abb9bb;
-            }
-            div#resoveCompletedTopmessage {
-                float: none;
-                display: inline-block;
-                vertical-align: middle;
-                padding: 2px 13px 2px 13px;
-                position: absolute;
-                /* margin-top: 7px; */
-            }
-            .positionDropDown .dropDownfirstHeader {
-                            z-index: 1;
-                            right: 10px;
-                            top: -19px;
-                            position: absolute;
-                            margin: 0px;
-                            cursor: pointer;
-                        }
-                        .positionDropDown .closeCustom {
-                            display: none;
-                            right: -1px;
-                            cursor: pointer;
-                        }
-            .textInButton {
-                font-family: OpenSans-Bold;
-                font-size: 14px;
-                text-transform: uppercase;
-                padding:4px 9px;
-            }
-            .firstButton, .secondButton {
-                float:right;
-                border: 2px solid #fff;
-                border-radius: 2px;
-                color: #fff;
-                cursor: pointer;
-            }
-            .firstButton {
-                margin-right: 28px;
-            }
-            .firstButton:hover, .secondButton:hover {
-                color: #05b5a2;
-                background-color: #fff;
-            }
-            .firstButton:active, .secondButton:active {
-                border-color:#049787;
-                background-color:#049787;
-                color:#fff;
-            }
+.closeCustom {
+    position: absolute;
+    right: 35px;
+    top: -23px;
+    width: 32px;
+    height: 32px;
+    opacity: 1;
+    z-index: 1;
+}
+.closeCustom:hover {
+    opacity: 1;
+}
+.closeCustom:before, .closeCustom:after {
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 18px;
+    width: 2px;
+    background-color: #fff;
+}
+.closeCustom:before {
+    transform: rotate(45deg);
+}
+.closeCustom:after {
+    transform: rotate(-45deg);
+}
+.caseMediator {
+    width: 100%;
+    height: 135px;
+    background-color: #049787;
+    max-width: 1415px;
+    position:relative;
+}
+.caseMediator .displayMediators {
+    position: absolute;
+    left: 50px;
+    top: 32px;
+}
+.forText {
+    padding-left: 106px;
+    padding-top: 28px;
+    color: #fff;
+    padding-bottom: 28px;
+}
+.boldText {
+    font-size: 16px;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
+}
+.regularText {
+    font-size: 12px;
+    color: #82cbc3;
+    padding-top: 3px;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+}
+.openSansText {
+    font-size: 16px;
+    line-height: 18px;
+}
+.border{
+    border-bottom: 1px solid #05b5a2;
+    max-width: 1415px;
+}
+.caseMediator .caseResolution {
+    width: 100%;
+    float: left;
+    /*height: 260px;*/
+    background-color: #05b5a2;
+    max-width: 1415px;
+    position:relative;
+}
+.buttonNoneBorderGray {
+    background-color:#e5ebeb;
+    color:#abb9bb;
+}
+div#resoveCompletedTopmessage {
+    float: none;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 2px 13px 2px 13px;
+    position: absolute;
+    /* margin-top: 7px; */
+}
+.positionDropDown .dropDownfirstHeader {
+    z-index: 1;
+    right: 10px;
+    top: -19px;
+    position: absolute;
+    margin: 0px;
+    cursor: pointer;
+}
+.positionDropDown .closeCustom {
+    display: none;
+    right: -1px;
+    cursor: pointer;
+}
+.textInButton {
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
+    font-size: 14px;
+    text-transform: uppercase;
+    padding:4px 9px;
+}
+.firstButton, .secondButton {
+    float:right;
+    border: 2px solid #fff;
+    border-radius: 2px;
+    color: #fff;
+    cursor: pointer;
+}
+.firstButton {
+    margin-right: 28px;
+}
+.firstButton:hover, .secondButton:hover {
+    color: #05b5a2;
+    background-color: #fff;
+}
+.firstButton:active, .secondButton:active {
+    border-color:#049787;
+    background-color:#049787;
+    color:#fff;
+}
 
-             .postionButtons {
-                 text-align:right; padding-right:20px;padding-top:26px;padding-bottom:10px;height:31px;
-             }
-               .caseMediator .createTaskBottom {
-                                padding-left: 18px;
-                                padding-right: 35px;
-                            }
-                            .caseMediator .createTaskBottom input {
-                                width: 100%;
-                                outline: none;
-                                padding-bottom: 84px;
-                                font-family: 'Open Sans', sans-serif;
-                                font-size: 16px;
-                                padding-left: 15px;
-                                padding-top: 20px;
-                                border: none;
-                            }
-                            .footerCaseResolution {
-                                background-color: #f2f7f7;
-                                height : 57px;
-                                width: 100%;
-                                padding-left:15px;
-                                text-transform: uppercase;
-                                border-top: 1px solid #e0e5e6;
-                            }
-                            .positionCaseButtons {
-                                padding: 14px 13px 14px 10px;
-                                font-family: 'Open Sans';
-                                font-weight: bold;
-                                text-transform: uppercase;
-                                font-size: 12px;
-                            }
-                           .positionCaseButtons .firstButton2 {
-                                float: left;
-                                border: 1px solid #c7cdcd;
-                                color: #848a8b;
-                                cursor: pointer;
-                                border-radius: 2px;
-                                padding: 5px 13px;
-                                outline: none;
-                            }
-                            .positionCaseButtons .secondButton2 {
-                                color: #fff;
-                                background-color: #05b5a2;
-                                float: right;
-                                padding: 4px 10px;
-                                border: 1px solid #049787;
-                                border-radius: 2px;
-                                cursor: pointer;
-                                outline: none;
-                            }
-                             
-                            .positionCaseButtons .firstButton2:hover {
-                                background-color: #d6dcdc;
-                            }
-                            .positionCaseButtons .firstButton2:hover .img {
-                                background-position: -15px 1px;
-                            }
-                            .positionCaseButtons .secondButton2:hover {
-                                background-color: #049f8e;
-                            }
-                            .positionCaseButtons .secondButton2:active {
-                                background-color: #049182;
-                            }
+.postionButtons {
+    text-align:right; padding-right:20px;padding-top:26px;padding-bottom:10px;height:31px;
+}
+.caseMediator .createTaskBottom {
+    padding-left: 18px;
+    padding-right: 35px;
+}
+.caseMediator .createTaskBottom input {
+    width: 100%;
+    outline: none;
+    padding-bottom: 84px;
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+    font-size: 16px;
+    padding-left: 15px;
+    padding-top: 20px;
+    border: none;
+}
+.footerCaseResolution {
+    background-color: #f2f7f7;
+    height : 57px;
+    width: 100%;
+    padding-left:15px;
+    text-transform: uppercase;
+    border-top: 1px solid #e0e5e6;
+}
+.positionCaseButtons {
+    padding: 14px 13px 14px 10px;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+.positionCaseButtons .firstButton2 {
+    float: left;
+    border: 1px solid #c7cdcd;
+    color: #848a8b;
+    cursor: pointer;
+    border-radius: 2px;
+    padding: 5px 13px;
+    outline: none;
+}
+.positionCaseButtons .secondButton2 {
+    color: #fff;
+    background-color: #05b5a2;
+    float: right;
+    padding: 4px 10px;
+    border: 1px solid #049787;
+    border-radius: 2px;
+    cursor: pointer;
+    outline: none;
+}
+
+.positionCaseButtons .firstButton2:hover {
+    background-color: #d6dcdc;
+}
+.positionCaseButtons .firstButton2:hover .img {
+    background-position: -15px 1px;
+}
+.positionCaseButtons .secondButton2:hover {
+    background-color: #049f8e;
+}
+.positionCaseButtons .secondButton2:active {
+    background-color: #049182;
+}
 
 
 
@@ -523,7 +543,7 @@ ul {
     background-position: left;
 }
 .headerPadding {
-    font-family: 'OpenSansSemibold';
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     font-size: 14px;
     color: #7e9297;
     width: 50%;
@@ -533,7 +553,7 @@ ul {
 #header .headerPadding {
     height: 59px;
 }
-    
+
 #header .position {
     /*float: left;*/
     margin-left: 0;
@@ -697,7 +717,7 @@ ul {
     display: inline-block;
 }
 .textHeader{
-    font-family: "OpenSansSemibold";
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     font-size: 14px;
     color: #7E9297;
     margin-left: 10px;
@@ -743,8 +763,8 @@ ul {
     display: inline;
     vertical-align: middle;
     text-align: center;
-    font-family: OpenSansSemibold;
-    color: #ffffff;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+    color: #fff;
     background: #ee5a36;
     font-size: 12px;
     line-height: 16px;
@@ -834,7 +854,7 @@ ul {
     height: 20%;
     display: table;
     border-bottom: solid #e8eaeb 1px;
-    background: #ffffff;
+    background: #fff;
     cursor: default;
 }
 .caseComtainer li {
@@ -886,7 +906,7 @@ ul {
     float: left;
     font-size: 14px;
     color: #3c3e3f;
-    font-family: OpenSansSemibold;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 }
 .caseComtainer .tasks .left.textGrey{
     color: #aeb5b7;
@@ -901,9 +921,8 @@ ul {
     padding-right: 10px;
 }
 #wrap .messageFrom .textRight {
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     font-size: 12px;
-    font-weight: 600;
 }
 .caseComtainer .tasks .circle {
     width: 7px;
@@ -1031,13 +1050,11 @@ ul {
     color: #aeb5b7;
     font-size: 12px;
     padding-bottom: 2px;
-    font-family: 'Open Sans';
-    font-weight: 600;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 }
 .beginMessage {
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     font-size: 14px;
-    font-weight: 600;
 }
 .positionSecondBlock {
     padding-top: 25px;
@@ -1070,8 +1087,7 @@ ul {
 }
 
 #footer {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 600;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     color: black;
     /*opacity: 0.6;*/
 }
@@ -1097,7 +1113,7 @@ ul {
     padding-top: 1px;
 }
 .content span{
-    font-weight: 600;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 }
 #iconLeft {
     background: url(icons/left.png) no-repeat;
@@ -1142,10 +1158,9 @@ ul {
 }
 .completedCases .blockButtonAndDate p.caseBtn {
     margin: 0 auto;
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
     font-size: 14px;
     text-transform: uppercase;
-    font-weight: 700;
     padding-top: 10px;
     padding-bottom: 10px;
     margin-bottom: 0px;
@@ -1198,7 +1213,7 @@ ul {
     background: #f2f7f7;
 }
 .completedCases .contentItems{
-    background: #ffffff;
+    background: #fff;
 }
 .completedCases .caseComtainer .contanatTable {
     border-top: 1px solid #e0e5e6;
@@ -1234,7 +1249,7 @@ ul {
     height: 32px;
     overflow: hidden;
     background: #aeb5b7;
-    background: #ffffff;
+    background: #fff;
     border-radius: 100%;
 }
 /*.completedCases */
@@ -1263,8 +1278,7 @@ ul {
 
 .completedCases .title{
     padding-bottom: 10px;
-    font-family: 'Open Sans';
-    font-weight: 700;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
     font-size: 16px;
     width: 100%;
 }
@@ -1274,13 +1288,13 @@ ul {
 }
 .completedCases .textInfo p.headerTitle {
     color: #aeb5b7;
-    font-weight: 600;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     font-size: 12px;
     margin: 0px;
 }
 .completedCases .textInfo p.textAll {
     color: #3c3e3f;
-    font-weight: 400;
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     font-size: 14px;
     margin: 0px;
     padding-right: 20px;
@@ -1298,7 +1312,7 @@ ul.infoCases .textRight {
     color: #05b5a2;
 }
 .completedCases .caseApproved.title{
-    color: #3c3e3f;    
+    color: #3c3e3f;
 }
 .completedCases .blockContent .date{
     color: #aeb5b7;
@@ -1351,43 +1365,40 @@ ul.infoCases .textRight {
 
 .blockDays .textDays p:first-child{
     font-size: 20px;
-    /*font-family: 'OpenSansSemibold';*/
     margin-bottom: 5px;
     color: #848a8b;
     line-height: 16px;
     margin-top: 15px;
-    font-weight: 600;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 }
 .blockDays .textDays p:last-child{
     font-size: 10px;
-    /*font-family: 'OpenSansSemibold';*/
     margin-top: 0px;
     color: #848a8b;
     line-height: 8px;
-    font-weight: 600;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 }
 
 .caseesTab span {
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     border: 1px solid #d7dbdb;
     padding-left: 5px;
     padding-right: 6px;
     border-radius: 50%;
     margin-left: 14px;
-    font-weight: 400;
     font-size: 14px;
     height: 22px;
     width: 21px;
 }
 .caseesTab:hover span {
-  background: #d7dbdb;
-  color: #a6b1b3;
+    background: #d7dbdb;
+    color: #a6b1b3;
 }
 .caseesTab.active span {
-  border: 1px solid #049787;
-  background: #049787;
-  color: #ffffff;
-  padding-left: 5px;
+    border: 1px solid #049787;
+    background: #049787;
+    color: #fff;
+    padding-left: 5px;
 }
 .infoIcon {
     width: 45px;
@@ -1411,12 +1422,12 @@ ul.infoCases {
 .caseClosed ul.infoCases li:last-child, .caseResolved ul.infoCases li:last-child{
     border-bottom: none;
 }
-/*.caseComtainer li,*/ 
-/*.caseComtainer li:hover,*/ 
-li.infoCasesBlock, 
-.caseClosed ul.infoCases li:last-child, 
+/*.caseComtainer li,*/
+/*.caseComtainer li:hover,*/
+li.infoCasesBlock,
+.caseClosed ul.infoCases li:last-child,
 .caseResolved ul.infoCases li:last-child,
-li.infoCasesBlock:hover, 
+li.infoCasesBlock:hover,
 .caseClosed ul.infoCases li:hover,
 .caseResolved ul.infoCases li:hover,
 li.infoCasesBlock:first-child:hover li {
@@ -1456,7 +1467,7 @@ li.infoCasesBlock:first-child:hover li .status {
 .spamCases .headerContent .topContent .text {
     width: 320px;
     color: #aeb5b7;
-    font-weight: 600;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 }
 .spamCases .headerContent .topContent .text a {
     text-decoration: none;
@@ -1466,14 +1477,13 @@ li.infoCasesBlock:first-child:hover li .status {
     font-size: 12px;
     color: #aeb5b7;
     margin: 0 auto;
-    font-weight: 400;
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
 }
 
 .spamCases .blockButtonAndDate p.caseBtn {
     margin: 0 auto;
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
     text-transform: uppercase;
-    font-weight: 700;
     padding-top: 5px;
     padding-bottom: 5px;
     margin-bottom: 5px;
@@ -1487,7 +1497,7 @@ li.infoCasesBlock:first-child:hover li .status {
     font-size: 14px;
 }
 .spamCases .caseComtainer:hover .blockButtonAndDate p.caseBtn.caseSpamBtn:after{
-    color: #ffffff;
+    color: #fff;
     background: #afbdbe;
 }
 .spamCases .caseComtainer > .header{
@@ -1514,86 +1524,9 @@ li.infoCasesBlock:first-child:hover li .status {
     background: #fff;
     border-bottom: none;
 }
-/*
-    .spamCases .contentItems div.taskIcon {
-    float: left;
-    width: 32px;
-    height: 32px;
-    padding-top: 25px;
-}
-.spamCases .contentItems .caseBlock {
-    float: left;
-    width: 415px;
-}
-.spamCases .contentItems .blockPhoto {
-    width: 50px;
-    height: 50px;
-    display: table;
-    float: left;
-}
-.spamCases .blockPhoto .photoPersonal{
-    width: 35px;
-    height: 35px;
-    overflow: hidden;
-    background: #aeb5b7;
-    background: #ffffff;
-    border-radius: 100%;
-}
-.spamCases .photoPersonal img{
-    width: 35px;
-    height: auto;
-    width: 100%;
-    height: 100%;
-}
-.spamCases .contentItems .textContent {
-    float: left;
-    width: 365px;
-}
-.spamCases .contentItems .blockContent .textContent p{
-    margin-top: 0px;
-    margin-bottom: 0px;
-}
-.spamCases .contentItems .blockContent .caseBlock{
-    padding-bottom: 21px;
-}
-.spamCases .contentItems .blockContent:first-child .caseBlock:first-child{
-    border-top: none;
-}
-
-.spamCases .blockContent .title{
-    color: #ee5a36;
-    padding-bottom: 15px;
-    font-family: 'Open Sans';
-    font-weight: 600;
-}
-.spamCases .caseSpam .title{
-    color: #abb9bb;
-}
-.spamCases .blockContent .date{
-    color: #aeb5b7;
-    font-size: 10px;
-    font-family: OpenSansSemibold;
-    padding-bottom: 7px;
-}
-.spamCases .caseComtainer{
-    height: auto;
-}
-    
-.spamCases .status, .completedCases .status {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background:#05b5a2;
-    border-radius: 100%;
-    border: 2px solid #fff;
-    margin-left: 23px;
-}
-
-    */
 .spamCases .textRight .title {
     color: #abb9bb;
     font-size: 16px;
-    /*font-weight: 700;*/    
     width: 100%;
     padding-bottom: 12px;
     line-height: 16px;
@@ -1601,13 +1534,13 @@ li.infoCasesBlock:first-child:hover li .status {
 .spamCases .textInfo .headerTitle{
     color: #aeb5b7;
     font-size: 12px;
-    font-weight: 600;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     margin: 0;
 }
 .spamCases .textInfo .textAll{
     color: #3c3e3f;
     font-size: 14px;
-    font-weight: 400;
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     margin: 0;
 }
 .spamCases .status, .completedCases .status {
@@ -1664,8 +1597,7 @@ li.infoCasesBlock:first-child:hover li .status {
     float: left;
     line-height: 42px;
     padding-right: 20px;
-    font-family: 'Open Sans';
-    font-weight: 300;
+    font-family: 'OpenSans-Light', arial, verdana, sans-serif;
 }
 .menuCasesBlock span.labelCases:hover {
     text-decoration: underline;
@@ -1711,7 +1643,7 @@ li.infoCasesBlock:first-child:hover li .status {
     display: flex;
     width: 100%;
     height: 21px;
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     font-size: 12px;
     margin-top: -21px;
     background-color: #ffffff;
@@ -1831,7 +1763,7 @@ li.infoCasesBlock:first-child:hover li .status {
     cursor: pointer;
     display: block;
     margin: 0 auto;
-    font-family: "OpenSansSemibold";
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     font-size: 16px;
     color: #7E9297;
 }
@@ -1846,7 +1778,7 @@ li.infoCasesBlock:first-child:hover li .status {
     outline: none;
     text-align: center;
     display: block;
-    font-family: "OpenSansSemibold";
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     font-size: 16px;
     color: #7E9297;
 }
@@ -1865,21 +1797,21 @@ li.infoCasesBlock:first-child:hover li .status {
     height:100%;
     z-index: 1000;
 }
-   #anotherDialog, #approveDialog {
-           display:none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 2; /* Sit on top */
-            padding-top: 100px; /* Location of the box */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            /*overflow: auto;*/ /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-            overflow-x: hidden;
-        overflow-y: auto;
-        }
+#anotherDialog, #approveDialog {
+    display:none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 2; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    /*overflow: auto;*/ /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    overflow-x: hidden;
+    overflow-y: auto;
+}
 #anotherDialog2, #approveDialog2 {
     position: relative;
     width: 740px;
@@ -1918,8 +1850,7 @@ li.infoCasesBlock:first-child:hover li .status {
     text-transform: uppercase;
     cursor: pointer;
     border-radius: 2px;
-    font-family: 'Open Sans';
-    font-weight: 600;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     border: 1px solid #fff;
     color: #fff;
     background-color: #05b5a2;
@@ -1996,7 +1927,7 @@ li.infoCasesBlock:first-child:hover li .status {
 }
 .dropdown2 ul li:hover,
 .dropdown2 ul li.selected {
-	background: #e5ebeb;
+    background: #e5ebeb;
     color: #3c3e3f;
 }
 /*end modal window*/
@@ -2057,8 +1988,7 @@ li.infoCasesBlock:first-child:hover li .status {
     color: #848a8b;
 }
 .caseResolution textarea {
-    font-family: 'Open Sans';
-    font-weight: 400;
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     font-size: 16px;
     color: #305458;
     padding: 10px 10px 10px 23px;
@@ -2361,7 +2291,7 @@ li.infoCasesBlock:first-child:hover li .status {
         padding-bottom: 20px;
     }
 }
-#escalateTopBtn{    
+#escalateTopBtn{
     float: none;
     display: inline-block;
     vertical-align: middle;
@@ -2372,7 +2302,7 @@ li.infoCasesBlock:first-child:hover li .status {
 
 .mainCase {
     width: 488px;
-    font-family: "OpenSansSemibold";
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     border: 1px solid #e0e5e6;
     margin: 40px;
     /*display: table;*/
@@ -2412,15 +2342,14 @@ li.infoCasesBlock:first-child:hover li .status {
     float: left;
     position: relative;
     bottom: 8px;
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
     display: inline-block;
-    font-weight: bold;
-}    
+}
 
 .mainCase .text2 span {
     text-transform: none;
     color: #aeb5b7;
-    font-weight: 600;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 }
 
 .mainCase .timeScale {
@@ -2520,8 +2449,7 @@ li.infoCasesBlock:first-child:hover li .status {
     width: 100px;
     float: left;
     font-size: 10px;
-    font-family: 'Open Sans';
-    font-weight: 400;
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     padding-top: 2px;
 }
 
@@ -2529,8 +2457,7 @@ li.infoCasesBlock:first-child:hover li .status {
     margin-left: 180px;
     color: #848a8b;
     font-size: 14px;
-    font-family: 'Open Sans';
-    font-weight: 600;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     margin-top: -3px;
 }
 .mainCase .location .col1 {
@@ -2551,8 +2478,7 @@ li.infoCasesBlock:first-child:hover li .status {
     color: #848a8b;
     padding-top: 24px;
     padding-bottom: 54px;
-    font-family: 'Open Sans';
-    font-weight: 400;
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
 }
 
 .mainCase .flex-block {
@@ -2588,8 +2514,7 @@ li.infoCasesBlock:first-child:hover li .status {
     font-size: 10px;
     color: #aeb5b7;
     text-transform: uppercase;
-    font-family: 'Open Sans';
-    font-weight: 600;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 }
 
 .mainCase .flex1, .flex3 {
@@ -2684,11 +2609,11 @@ li.infoCasesBlock:first-child:hover li .status {
     text-transform: none;
     color: #aeb5b7;
     font-size: 12px;
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     padding-top: 10px;
 }
 .descriptionCasePosition .text {
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     font-size: 15px;
     padding-top: 5px;
 }
@@ -2739,46 +2664,18 @@ li.infoCasesBlock:first-child:hover li .status {
 #dialog-form .modal-footer .btn {
     outline: none;
     border-radius: 2px;
-    font-family: 'OpenSansSemibold';
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 }
-/*#dialog-form .caseResolution:nth-child(3) {    
-    padding: 20px 0 20px 10px;
-    line-height: 24px;
-    vertical-align: middle;
-    color: #fff;
-    font-family: 'OpensansSemibold';
-    font-size: 18px;
-}*/
- /*#ddlOutcome {
-     border: none !important;
-     height: 60px;
-     width: 84.3%;
- }
- #ddlOutcome .selected {
-    font-size: 18px;
-    color: #aeb3b4;
-    font-family: 'Open Sans';
-    position: relative;
-    top: 10px;
- }
- #ddlOutcome.dropdown li:hover {
-    color: #3c3e3f;
-    background-color:#e5ebeb;
+
+#txtResolve {
+    border: 2px solid transparent;
 }
-#ddlOutcome.dropdown li {
-    
-    font-family: OpenSansSemibold;
-    font-size: 18px;
-}*/
- #txtResolve {
-     border: 2px solid transparent;
- }
- #txtOutcome {
-     border: 2px solid transparent;
- }
+#txtOutcome {
+    border: 2px solid transparent;
+}
 
 #dialog-form .dropdown,#dialog-form .dropdown:hover,#dialog-form .dropdown:focus,#dialog-form .dropdown:active {
-    background: #FFFFFF;
+    background: #fff;
     border: 1px solid #c7cdcd;
     padding: 4px 10px;
     outline: none;
@@ -2790,12 +2687,6 @@ li.infoCasesBlock:first-child:hover li .status {
     cursor: pointer;
 }
 
-/*#ddlOutcome.dropdown.subject.open ul {
-    display: block;
-    top: 61px;
-    border: 1px solid #e0e5e6;
-    left: 1px;
-}*/
 .select-style {
     padding: 0;
     margin: 0;
@@ -2807,7 +2698,7 @@ li.infoCasesBlock:first-child:hover li .status {
     margin-left:110px;
 }
 .select-style option {
-        padding-top: 20px;
+    padding-top: 20px;
     min-height: 20px;
     padding-bottom: 20px;
 }
@@ -2819,8 +2710,8 @@ li.infoCasesBlock:first-child:hover li .status {
     background-color: transparent;
     background-image: none;
     -webkit-appearance: none;
-       -moz-appearance: none;
-            appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 .select-style select:focus {
@@ -2837,7 +2728,7 @@ li.infoCasesBlock:first-child:hover li .status {
 }
 .caseResolution.custom {
     background-color: #fff;
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     font-size: 16px;
     border-top: 1px solid #e0e5e6;
     border-bottom: 1px solid #e0e5e6;
@@ -2847,12 +2738,12 @@ li.infoCasesBlock:first-child:hover li .status {
 
 /*modal window*/
 #dialog-form .modal-footer2 .btn {
-        outline: none;
+    outline: none;
     border-radius: 2px;
-    font-family: OpenSans-Bold;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
 }
 #anotherDialog2 .btn-white {
-    font-weight: bold;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
     color: white;
     background-color: #05b5a2;
     border: 1px solid white;
@@ -2862,37 +2753,37 @@ li.infoCasesBlock:first-child:hover li .status {
     float: right;
 }
 .modal-footer2 .btn+.btn {
-        margin-bottom: 0;
-        margin-left: 5px;
-    }
-    .btn.btn-success {
-        color: #fff;
-        background: #05B5A2;
-        border-color: #05B5A2;
-    }
-    .btn.btn-success:hover {
-        color: #05B5A2;
-        background: #fff;
-        border-color: #05B5A2;
-    }
-    .btn {
-        font-weight: 300;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        border-radius: 3px;
-    }
-    .btn-group-sm>.btn, .btn-sm {
-        padding: 5px 10px;
-        font-size: 12px;
-        line-height: 1.5;
-        border-radius: 3px;
-    }
-    .btn {
+    margin-bottom: 0;
+    margin-left: 5px;
+}
+.btn.btn-success {
+    color: #fff;
+    background: #05B5A2;
+    border-color: #05B5A2;
+}
+.btn.btn-success:hover {
+    color: #05B5A2;
+    background: #fff;
+    border-color: #05B5A2;
+}
+.btn {
+    font-family: 'OpenSans-Light', arial, verdana, sans-serif;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+.btn-group-sm>.btn, .btn-sm {
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+.btn {
     display: inline-block;
     padding: 6px 12px;
     margin-bottom: 0;
     font-size: 14px;
-    font-weight: 400;
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     line-height: 1.42857143;
     text-align: center;
     white-space: nowrap;
@@ -2907,26 +2798,14 @@ li.infoCasesBlock:first-child:hover li .status {
     background-image: none;
     border: 1px solid transparent;
     border-radius: 4px;
-    font-family: 'Open Sans', sans-serif;
 }
-/*.modal-footer {
-    padding: 15px;
-    text-align: right;
-    border-top: 1px solid #e5e5e5;
-    width: 700px;
-    margin: 0 auto;
-    background-color: #f2f7f7;
-}*/
 #anotherDialog *{
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-/*textarea.form-control {
-    height: auto;
-}*/
 .form-control {
-        border: 1px solid #ccd0d4;
+    border: 1px solid #ccd0d4;
     -webkit-box-shadow: none;
     box-shadow: none;
     font-size: 12px;
@@ -2956,15 +2835,14 @@ textarea {
     overflow: auto;
 }
 .btn-white {
-    font-family: 'Open Sans';
-    font-weight: bold;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
     color: #05b5a2;
-    background-color: white; 
+    background-color: white;
     border: 1px solid #05b5a2;
 }
 .btn-white:hover {
     color: white;
-    background-color: #05b5a2; 
+    background-color: #05b5a2;
 }
 
 .err {
@@ -2989,7 +2867,7 @@ textarea {
     background-repeat: no-repeat;
     cursor: pointer;
     position: relative;
-    font-family: "OpenSans";
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     font-size: 18px;
 }
 .arrow-down {

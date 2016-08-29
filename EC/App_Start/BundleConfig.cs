@@ -36,20 +36,20 @@ namespace EC
 
 
 
-            bundles.Add(new ScriptBundle("~/bundles/css").Include(
+      //      bundles.Add(new ScriptBundle("~/bundles/css").Include(
+      //          "~/Content/*.css"));
+      //      bundles.Add(new ScriptBundle("~/bundles/css").Include(
+            //        "~/Content/fonts/*.ttf"));fonts/OpenSans/OpenSans-Light.ttf
+
+          //  bundles.Add(new StyleBundle("~/bundles/Styles")
+          //     .Include("~/Content/*.css"));
+
+            bundles.Add(new StyleBundle("~/bundles/Styles").Include(
                 "~/Content/*.css"));
-            bundles.Add(new ScriptBundle("~/bundles/css").Include(
-                "~/Content/fonts/*.ttf"));
-
-          //  bundles.Add(new StyleBundle("~/Content/Styles")
-           //     .Include("~/Content/*.css"));
-
-   //         bundles.Add(new StyleBundle("~/Content/Styles").Include(
-   //             "~/Content/*.css"));
    //         bundles.Add(new ScriptBundle("~/Content/Scripts").Include(
    //             "~/Content/*.js"));
-     //       bundles.Add(new StyleBundle("~/bundles/Fonts").Include(
-  //              "~/Content/fonts/*.ttf"));
+        //    bundles.Add(new StyleBundle("~/bundles/Fonts").Include(
+         //       "~/Content/fonts/*.ttf").Include("~/Content/fonts/OpenSans/*.ttf"));
 
             ScriptManager.ScriptResourceMapping.AddDefinition(
                 "respond",

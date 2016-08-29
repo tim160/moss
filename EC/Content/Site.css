@@ -1,27 +1,34 @@
 ﻿@font-face {
-    font-family: "OpenSans-Regular";
-    src: url('fonts/OpenSans-Regular-webfont.eot?') format('embedded-opentype'),
-         url('fonts/OpenSans-Regular.ttf') format('truetype');
-
+    font-family: 'OpenSans-Regular';
+    src: url('fonts/OpenSans/OpenSans-Regular.ttf');
 }
 @font-face {
-    font-family: "OpenSans-Semibold";
-    src: url('fonts/OpenSans-Semibold.eot?') format('embedded-opentype'),
-         url('fonts/OpenSansSemibold.ttf') format('truetype');    
-
+    font-family: 'OpenSans-Semibold';
+    src: url('fonts/OpenSans/OpenSans-Semibold.ttf');
 }
 @font-face {
-    font-family: "OpenSans-Bold";
-    src: url('fonts/OpenSansBold.eot?') format('embedded-opentype'),
-        url("fonts/OpenSans-Bold.ttf") format('truetype');
+    font-family: 'OpenSans-Bold';
+    src: url('fonts/OpenSans/OpenSans-Bold.ttf');
 }
 @font-face {
-    font-family: OpenSans;
-    src: url(eVX6sX1i.ttf);
+    font-family: 'OpenSans-Light';
+    src: url('fonts/OpenSans/OpenSans-Light.ttf');
 }
-
 @font-face {
-    font-family: OpenSans-Regular;
+    font-family: 'Lato-Heavy';
+    src: url('fonts/lato-heavy.ttf');
+}
+@font-face {
+    font-family: 'Lato-Regular';
+    src: url('fonts/Lato-Regular.ttf');
+}
+@font-face {
+    font-family: 'Lato-Semibold';
+    src: url('fonts/Lato-Semibold.ttf');
+}
+@font-face {
+    font-family: 'Lato-Bold';
+    src: url('fonts/Lato-Bold.ttf');
 }
 
 body{
@@ -90,7 +97,7 @@ body{
 }
 
 .headerBlock .firstBlock .report span{
-    font-family: "OpenSans-Semibold";
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     font-size: 14px;
     color: rgb(56, 73, 77);
 }
@@ -108,7 +115,7 @@ body{
 }
 
 .headerBlock .secondBlock .titlePage{
-    font-family: "OpenSans-Regular";
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     font-size: 26px;
     color: rgb(56, 73, 77);
     float: left;
@@ -122,7 +129,7 @@ body{
 .fullContainer .leftBlock .titleMenu{
     color: rgb(255, 255, 255);
     font-size: 20px;
-    font-family: "OpenSans-Regular";
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     padding: 30px 20px;
     margin: 0;
     background: rgb(41, 47, 51);
@@ -133,7 +140,7 @@ body{
 }
 
 .fullContainer .leftBlock .verticalMenu > li{
-    font-family: "OpenSans-Semibold";
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     font-size: 16px;
     padding: 15px 0;
     position: relative;
@@ -150,7 +157,7 @@ body{
 }
 
 .fullContainer .leftBlock .verticalMenu > li:hover{
-     cursor: pointer;
+    cursor: pointer;
 }
 
 .fullContainer .leftBlock .verticalMenu > li.clicked:before{
@@ -185,9 +192,9 @@ body{
     border-style: solid;
     border-color: transparent transparent #E5EBEB transparent;
     /*it's for focus*/
-     outline: none;
-     padding-left: 25px;
-     box-sizing: border-box;
+    outline: none;
+    padding-left: 25px;
+    box-sizing: border-box;
 }
 .contentBlockChild {
     /*width:30px;*/
@@ -206,23 +213,22 @@ body{
     border: 2px solid #E5EBEB;
 }
 .content .contentBlock .title{
-    font-family: "OpenSans-Bold";
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
     font-size: 14px;
     color: rgb(60, 62, 63);
 }
 
 .titleMediators{
-    font-family: "OpenSans-Semibold";
-    /*font-family: "OpenSans-Bold";*/
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     font-size: 20px;
     /*font-size: 18px;*/
     color: rgb(56, 73, 77);
     margin-top: 80px;
-    margin-bottom: 30px;      
+    margin-bottom: 30px;
 }
 
 .titleMediatorsDescrition{
-    font-family: "OpenSans";
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     /*font-size: 18px;*/
     font-size: 16px;
     color: rgb(56, 73, 77);
@@ -232,42 +238,28 @@ body{
 .contentBlock select{
     border: 1px solid rgb(224, 229, 230);
     padding: 10px 0 10px 20px;
-    font-family: "OpenSans-Regular";
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     font-size: 18px;
-    /*background: rgb(242, 247, 247);*/
     max-width: 410px;
     width:85%;
     color: rgb(192, 199, 200);
-
     background: url(img/down_arrow_select.png) no-repeat right rgb(242, 247, 247);
     -webkit-appearance: button;
-    /*-webkit-border-radius: 2px;
-    -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);*/
     -webkit-padding-end: 20px;
     -webkit-padding-start: 2px;
     -webkit-user-select: none;
     background-position: 97% center;
-    /*background-image: url(img/down_arrow_select.png);
-    background-color: rgb(242, 247, 247);
-    
-    background-repeat: no-repeat;
-    margin: 20px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;*/
-
 }
 
 .dropDownList {
     background-color: white;
     color: rgb(114, 124, 126);
-    font-family: "OpenSans-Semibold";
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     font-size: 18px;
 }
 
 .contentBlock select::selection{
-   background-color:red;
-
+    background-color:red;
 }
 
 .contentBlock .selectBlock{
@@ -287,7 +279,7 @@ body{
 }
 
 .contentBlock .description{
-    font-family: "OpenSans-Regular";
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     font-size: 12px;
     color: rgb(60, 62, 63);
     width:85%;
@@ -308,7 +300,7 @@ body{
     display: table;
 }
 .freeBlockReportAbout.option:hover {
-      background: rgb(242, 247, 247);
+    background: rgb(242, 247, 247);
 }
 
 .contentBlock .inputRadio:hover{
@@ -334,7 +326,7 @@ body{
     background: url(img/radio_cc.png) no-repeat;
     position: relative;
 }
-.rightBlock_cc .inputBlock input[type="radio"]:checked + span:after{    
+.rightBlock_cc .inputBlock input[type="radio"]:checked + span:after{
     content: '';
     position: absolute;
     width: 12px;
@@ -346,7 +338,7 @@ body{
     border: 1px solid #4da456;
     box-sizing: border-box;
 }
-.rightBlock_cc .inputBlock input[type="radio"]:checked + span:before{    
+.rightBlock_cc .inputBlock input[type="radio"]:checked + span:before{
     content: '';
     position: absolute;
     width: 6px;
@@ -360,7 +352,7 @@ body{
     z-index: 1;
 }
 .inputBlock input[type="radio"] {
-  display: none;
+    display: none;
 }
 
 .inputBlock input[type="radio"] + span {
@@ -394,7 +386,7 @@ body{
 }
 .contentBlock .radioTitle{
     font-size: 18px;
-    font-family: "OpenSans-Semibold";
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     color: rgb(174, 181, 183);
     display:table;
     margin-left:31px;
@@ -412,12 +404,12 @@ body{
 }
 
 .contentBlock input[type="radio"]:active, .contentBlock input[type="radio"]:focus{
-   color: rgb(60, 62, 63);
+    color: rgb(60, 62, 63);
 }
 
 .contentBlock .descriptionRadio{
     font-size: 12px;
-    font-family: "OpenSans-Regular";
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     color: rgb(60, 62, 63);
     padding-left: 35px;
 }
@@ -441,7 +433,7 @@ body{
     height: 70px;
     resize: none;
     font-size:18px;
-    font-family:"OpenSans-Semibold";
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     color:rgb(60, 62, 63);
     overflow: hidden;
 }
@@ -466,36 +458,36 @@ body{
     color: rgb(5, 181, 162);
     text-transform: uppercase;
     text-decoration: none;
-    font-family: "OpenSans-Bold";
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
     font-size: 14px;
     background-color:rgb(229, 235, 235);
     outline: none;
     cursor: pointer;
 }
- u.button {
-        background-color: #fff;
-    }
-  span.button {
-        background-color: #fff;
-    }
+u.button {
+    background-color: #fff;
+}
+span.button {
+    background-color: #fff;
+}
 .button.display{
     display: inline-block;
     margin-bottom: 30px;
 }
 /*add border for add person new report*/
 
-.buttonBlock_cc .button, .addPerson_cc .button, .file_upload_cc .button{    
+.buttonBlock_cc .button, .addPerson_cc .button, .file_upload_cc .button{
     border: 1px solid #8ac092;
     color: #4da456;
 }
-.buttonBlock_cc .button:hover, .addPerson_cc .button:hover, .file_upload_cc .button:hover{   
+.buttonBlock_cc .button:hover, .addPerson_cc .button:hover, .file_upload_cc .button:hover{
     background: #4da456;
-    color: #ffffff;
+    color: #fff;
     border: 1px solid #2e7037;
 }
-.buttonBlock_cc .button:active, .addPerson_cc .button:active, .file_upload_cc .button:active{      
+.buttonBlock_cc .button:active, .addPerson_cc .button:active, .file_upload_cc .button:active{
     background: #2e7037;
-    color: #ffffff;
+    color: #fff;
     border: 1px solid #2e7037;
 }
 #tmpl {
@@ -519,7 +511,7 @@ body{
     background-color: rgb(5, 181, 162);
     text-transform: uppercase;
     text-decoration: none;
-    font-family: "OpenSans-Bold";
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
     font-size: 14px;
     height: 45px;
     text-align: center;
@@ -532,8 +524,8 @@ body{
     width: 25%;
 }
 .PersonNameTable{
-height:76px;
-border: 1px;
+    height:76px;
+    border: 1px;
 }
 
 .dateInputBox {
@@ -554,13 +546,13 @@ border: 1px;
 }
 
 .file_upload > input {
-    width:1px; 
+    width:1px;
     height: 1px;
     opacity:0;
 }
 
 .assignedTitle {
-    font-family: "OpenSans-Bold";
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
     font-size: 14pt;
     padding-bottom: 15px;
 }
@@ -590,7 +582,7 @@ border: 1px;
 
 /*Summary*/
 .listHead{
-    font-family: 'OpenSans-Regular';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     font-size: 20px;
     color: rgb(56,73,77);
 }
@@ -612,7 +604,7 @@ titleReportTable {
     color: rgb(132,138,139);
     font-weight: normal;
     font-size: 12px;
-    font-family: OpenSans-Regular;
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     float:left;
     width: 100%;
     margin-bottom: 30px;
@@ -625,9 +617,8 @@ titleReportTable {
     color: rgb(114,124,126);
     padding-top: 15px;
     padding-bottom: 15px;
-    font-family: "OpenSans-Semibold";
-	font-size: 12pt;
-	font-weight:bold;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
+    font-size: 12pt;
     float:left;
 }
 
@@ -635,18 +626,16 @@ titleReportTable {
     color: rgb(114,124,126);
     padding-top: 15px;
     padding-bottom: 15px;
-    font-family: "OpenSans-Semibold";
-	font-size: 12pt;
-	font-weight:bold;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
+    font-size: 12pt;
 }
 
 .reportTextTable{
     color: rgb(114,124,126);
     padding-top: 15px;
     padding-bottom: 15px;
-    font-family: "OpenSans-Semibold";
-	font-size: 16px;
-	font-weight:bold;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
+    font-size: 16px;
     width: 75%;
     float:left;
     padding-left: 30px;
@@ -660,8 +649,8 @@ titleReportTable {
 .reportDescriptionText {
     color: rgb(114,124,126);
     padding-bottom: 15px;
-    font-size: 16px;report
-    font-family: OpenSans-Semibold;
+    font-size: 16px;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     width: 92%;
     float: left;
     margin-left: 26px;
@@ -670,13 +659,13 @@ titleReportTable {
     margin-top: 75px;
     margin-bottom: 20px;
     font-size: 22px;
-    font-family: "OpenSans-Semibold";
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     color: rgb(56,73,77);
 }
 
 .listText{
-	/*width:150px;*/
-	float:left;
+    /*width:150px;*/
+    float:left;
 }
 
 .listHR{
@@ -696,42 +685,42 @@ titleReportTable {
 .listInput{
     -webkit-appearance: none;
     border-radius: 0;
-	float:left;
-	width : 46px;
-	height: 26px;
-	margin-right : 20px;
+    float:left;
+    width : 46px;
+    height: 26px;
+    margin-right : 20px;
     background-color: rgb(242, 247, 247) !important;
     border: 1px solid rgb(199, 205, 205);
     color: rgb(132, 138, 139);
     border-radius: 2px;
-    font-family: OpenSans-Semibold;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     cursor: pointer;
     outline: none;
 }
 .listInput:hover, .listInput:focus{
     background-color: #e0e5e6 !important;
 }
-.listInput:active{    
+.listInput:active{
     background-color: rgb(132, 138, 139) !important;
     color: #fff;
 }
 
 .mediatorsName{
-    font-family:"OpenSans-Semibold";
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     font-size:24px;
     margin-bottom:15px;
     color:rgb(60,62,63);
 }
 
 .mediatorsInfo{
-    font-family:"OpenSans-Semibold";
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     font-size:16px;
     color:rgb(60,62,63);
 }
 
 .mediator {
-     margin-right: 50px;
-     margin-bottom:20px;
+    margin-right: 50px;
+    margin-bottom:20px;
 }
 
 .checkboxMediatorInvolved {
@@ -743,7 +732,7 @@ titleReportTable {
 }
 
 .involvedArea {
-    font-family: "OpenSans-Bold";
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
     float:right;
     margin-top:8px;
     font-size:14px;
@@ -762,31 +751,29 @@ titleReportTable {
     border: 1px solid rgb(5, 181, 162);
     border-radius: 2px;
     padding: 5px 15px;
-    /*color: rgb(5, 181, 162);*/
-    /*color: rgb(255, 255, 255);*/
     text-transform: uppercase;
     text-decoration: none;
-    font-family: "OpenSans-Bold";
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
     font-size: 14px;
     width:100%;
     height:60px;
     margin-top:35px;
-        color: rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
     background: rgb(5, 181, 162);
     outline: none;
     cursor: pointer;
 }
 
-.buttonSubmitBlock_cc .buttonSubmit{    
+.buttonSubmitBlock_cc .buttonSubmit{
     background-color: #4da456;
     border-color: #2e7037;
 }
 .buttonSubmitBlock_cc .buttonSubmit:hover,
-.buttonSubmitBlock_cc .buttonSubmit:focus{   
+.buttonSubmitBlock_cc .buttonSubmit:focus{
     background-color: #3C8445;
     border-color: #2e7037;
 }
-.buttonSubmitBlock_cc .buttonSubmit:active{ 
+.buttonSubmitBlock_cc .buttonSubmit:active{
     background-color: #2e7037;
     border-color: #2e7037;
 }
@@ -809,35 +796,35 @@ titleReportTable {
 .steps{
     display:none;
 }
-   
+
 .addPersonName{
-	height:86px;
-	width: 20%;
-	float:left;
-	border:2px solid transparent;
+    height:86px;
+    width: 20%;
+    float:left;
+    border:2px solid transparent;
     margin-bottom: 10px;
 }
 
 .addPersonInfo{
-	height:86px;
-	width: 25%;
-	float:left;
-	border:2px solid transparent;
+    height:86px;
+    width: 25%;
+    float:left;
+    border:2px solid transparent;
 }
 
 .personData{
-	margin-top:25px;
-	margin-left:20px;
-	margin-bottom:15px;
+    margin-top:25px;
+    margin-left:20px;
+    margin-bottom:15px;
 }
 
 .addPersonName:hover, .addPersonInfo:hover{
-	border: 2px solid rgb(5, 181, 162);
-	float:left;
+    border: 2px solid rgb(5, 181, 162);
+    float:left;
 }
 
 .witnessPersone_cc .addPersonName:hover, .addPersonInfo:hover{
-	border: 2px solid #4da456;
+    border: 2px solid #4da456;
 }
 
 .addPerson {
@@ -845,8 +832,8 @@ titleReportTable {
 }
 
 .personTitle{
-	margin-top:15px;
-	margin-left:10px;
+    margin-top:15px;
+    margin-left:10px;
 }
 
 .personData{
@@ -862,7 +849,7 @@ titleReportTable {
     border: none !important;
     height: 30px !important;
     outline: none;
-    font-family:"OpenSans-Bold";
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
     font-size: 18px;
     color: rgb(60, 62, 63);
 }
@@ -881,10 +868,10 @@ titleReportTable {
     }
     .newReportCaseNumber {
         padding: 15px !important;
-        
+
     }
 }
-    
+
 
 @media screen and (max-width: 640px) {
 
@@ -979,7 +966,7 @@ titleReportTable {
         margin-right: 0px;
         width:100%;
     }
-    
+
     .button{
         /*font-size: 30px;*/
         font-size: 20px;
@@ -1000,17 +987,17 @@ titleReportTable {
         width:90%;
         font-size:20px;
     }
-   
+
     .selectedStep.clicked:before{
-      content: "";
-      position: absolute;
-      border: 4px solid transparent;
-      border-width: 0px 7px 10px 6px;
-      top: 118px;
-      margin-top: 14px;
-      border-width: 0px 6px 9px 6px;
-      border-style: solid;
-      border-color: rgb(5, 181, 162) transparent;
+        content: "";
+        position: absolute;
+        border: 4px solid transparent;
+        border-width: 0px 7px 10px 6px;
+        top: 118px;
+        margin-top: 14px;
+        border-width: 0px 6px 9px 6px;
+        border-style: solid;
+        border-color: rgb(5, 181, 162) transparent;
     }
 
     freeBlockReportAbout {
@@ -1019,12 +1006,12 @@ titleReportTable {
 
     .listHead {
         font-size: 20px;
-        font-family: "OpenSans-Semibold";
+        font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     }
 
     .titleReportTable {
         font-size: 12px;
-        font-family: "OpenSans-Regular";
+        font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
         color: rgb(114,124,126);
         padding-top: 15px;
         padding-bottom: 15px;
@@ -1033,8 +1020,7 @@ titleReportTable {
 
     .reportTextTable {
         font-size: 20px;
-        font-weight: bold;
-        font-family: "OpenSans-Semibold";
+        font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
         color: rgb(114,124,126);
         padding-top: 15px;
         padding-bottom: 15px;
@@ -1111,7 +1097,7 @@ titleReportTable {
     }
 
     .newReportCaseNumber {
-          padding: 15px !important;
+        padding: 15px !important;
     }
 
     .headerBlock .secondBlock .titlePage p {
@@ -1171,20 +1157,20 @@ titleReportTable {
 
 .ui-datepicker-month, .ui-datepicker-year {
     font-size:18px;
-    font-family:OpenSans-Semibold;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     color: rgb(114, 124, 126);
 }
 
 .ui-state-default {
     color:rgb(60, 62, 63) !important;
     font-size:18px;
-    font-family:OpenSans-Semibold;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     border: 1px solid transparent !important;
 }
 
 .ui-state-default:hover {
     font-size:18px;
-    font-family:OpenSans-Semibold;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     background: #05b5a2!important;
     border: 1px solid transparent !important;
     color: white!important;/*for datapicker*/
@@ -1211,7 +1197,7 @@ titleReportTable {
 }
 
 .ui-icon-circle-triangle-w {
-  background-position: 5px 0px !important;
+    background-position: 5px 0px !important;
 }
 
 .ui-icon {
@@ -1254,13 +1240,13 @@ titleReportTable {
 }
 
 .summaryReportInfo {
-    font-family:"OpenSans-Regular";
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     font-size:16px;
     color:rgb(60, 62, 63);
 }
 
 .reportNumber {
-    font-family:"OpenSans-Regular";
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     font-size:24px;
     color:rgb(56, 73, 77);
     margin-left:10px;
@@ -1268,7 +1254,7 @@ titleReportTable {
 }
 
 .accessInfo {
-    font-family:"OpenSans-Semibold";
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     font-size:18px;
     color:rgb(60, 62, 63);
     margin-left:10px;
@@ -1281,7 +1267,7 @@ titleReportTable {
 
 
 .reportNumberBlock {
-        background-color:rgb(229, 235, 235);
+    background-color:rgb(229, 235, 235);
 }
 
 .contentBorder {
@@ -1331,14 +1317,14 @@ titleReportTable {
 .newReportNumber {
     float: right;
     margin-right: 30px;
-    font-family: "OpenSans-Semibold";
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     font-size: 14px;
     color:rgb(56, 73, 77);
 }
 
 .calendarText{
     font-size: 18px;
-    font-family: "OpenSans-Regular";
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     color: rgb(114, 124, 126);
 }
 
@@ -1349,7 +1335,7 @@ titleReportTable {
 .fullContainer .leftBlock .titleMenu{
     color: rgb(255, 255, 255);
     font-size: 20px;
-    font-family: "OpenSans-Regular";
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     padding: 30px 20px;
     margin: 0;
     background: rgb(41, 47, 51);
@@ -1361,7 +1347,7 @@ titleReportTable {
 
 .fullContainer .leftBlock .verticalMenu > li.selection{
     list-style-type: square;
-    list-style-image: url("C:/Users/Artem/Desktop/snegana/img/selectButton.png");
+    list-style-image: url("/Content/img/selectButton.jpg");
 }
 
 .fullContainer .leftBlock .verticalMenu > li:hover:before{
@@ -1393,7 +1379,7 @@ titleReportTable {
 
 @-moz-document url-prefix()
 {
-	.fullContainer .rowContent {
+    .fullContainer .rowContent {
         display: flex;
     }
 
@@ -1402,16 +1388,16 @@ titleReportTable {
     }
 }
 
- .check{
+.check{
     margin-top: 1px;
     width: 20px;
     height: 20px;
     background: url('/Content/img/send_Updates_unchecked.png');
     cursor: pointer;
     float:left;
-  }
+}
 
- .checked {
+.checked {
     display: none;
     margin-top: 1px;
     width: 20px;
@@ -1421,14 +1407,14 @@ titleReportTable {
     float:left;
 }
 
- .borderTriangle {
-  border: 6px solid transparent;
-  border-top: 6px solid rgb(132, 138, 139);
-  left: 200px;
-  top: 6px;
-  position: absolute;
-  height: 0px;
-  background: transparent;
+.borderTriangle {
+    border: 6px solid transparent;
+    border-top: 6px solid rgb(132, 138, 139);
+    left: 200px;
+    top: 6px;
+    position: absolute;
+    height: 0px;
+    background: transparent;
 }
 
 .stepDone {
@@ -1457,7 +1443,7 @@ input[type=checkbox].checkboxMediatorInvolved {
     margin-left: -24px;
     margin-top: 10px;
     display:block;
-} 
+}
 
 input[type=checkbox].checkboxMediatorInvolved + span{
     background-image: url("../Content/img/reporterUnchecked.png");
@@ -1483,7 +1469,7 @@ input[type=checkbox]:checked.checkboxMediatorInvolved + span{
     background-repeat: no-repeat;
     cursor: pointer;
     position: relative;
-    font-family: "OpenSans";
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     font-size: 18px;
 }
 .arrow-down {
@@ -1541,9 +1527,8 @@ input[type=checkbox]:checked.checkboxMediatorInvolved + span{
     color: rgb(114,124,126);
     padding-top: 13px;
     padding-bottom: 15px;
-    font-family: "OpenSans-Semibold";
     font-size: 16px;
-    font-weight: bold;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
     padding-left: 26px;
     clear: both;
 }
@@ -1557,172 +1542,172 @@ input[type=checkbox]:checked.checkboxMediatorInvolved + span{
     font-size:14px;
 }
 
-   /*table*/
-        .table {
-            width: 100%;
-            max-width: 100%;
-            margin-bottom: 20px;
-            border-color: #e2e7eb;
-            -webkit-border-radius: 3px;
-            -moz-border-radius: 3px;
-            border-radius: 3px;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-        }
-        table {
-            background-color: transparent;
-        }
-        table {
-            border-spacing: 0;
-            border-collapse: collapse;
-        }
-        .table>thead>tr>th {
-            border-color: #e2e7eb;
-            padding: 10px 15px;
-            color: #242a30;
-            font-weight: 600;
-            border-bottom: 2px solid #e2e7eb!important;
-            text-align: left;
-        }
-        .table>tbody>tr>td {
-            border-color: #e2e7eb;
-            padding: 10px 15px;
-            padding: 8px;
-            line-height: 1.42857143;
-            vertical-align: top;
-            border-top: 1px solid #ddd;
-
-                        -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-        }
-        /*table*/
-        .modal {
-            position: fixed;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            z-index: 1050;
-            display: none;
-            overflow: hidden;
-            -webkit-overflow-scrolling: touch;
-            outline: 0;
-            background-color: rgba(0,0,0,0.4);
-            overflow-x: hidden;
-           overflow-y: auto;
-        }
-        .fade {
-            opacity: 0;
-            -webkit-transition: opacity .15s linear;
-            -o-transition: opacity .15s linear;
-            transition: opacity .15s linear;
-        }
-        .fade.in {
-            opacity: 1;
-        }
-        .fade {
-            opacity: 0;
-            -webkit-transition: opacity .3s linear;
-            transition: opacity .3s linear;
-                -webkit-box-sizing: border-box;
+/*table*/
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    border-color: #e2e7eb;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-        }
-        .modal.in .modal-dialog {
-            -webkit-transform: translate(0,0);
-            -ms-transform: translate(0,0);
-            -o-transform: translate(0,0);
-            transform: translate(0,0);
-        }
-        .modal.fade .modal-dialog {
-            -webkit-transition: -webkit-transform .3s ease-out;
-            -o-transition: -o-transform .3s ease-out;
-            transition: transform .3s ease-out;
-            -webkit-transform: translate(0,-25%);
-            -ms-transform: translate(0,-25%);
-            -o-transform: translate(0,-25%);
-            transform: translate(0,-25%);
-        }
-        .modal-dialog {
-            position: relative;
-            width: 600px;
-            margin: 200px auto;
-        }
-        #modal-dialog {
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-        }
-        .modal-content {
-            border: none;
-            -webkit-box-shadow: 0 5px 15px rgba(0,0,0,.3);
-            box-shadow: 0 5px 15px rgba(0,0,0,.3);
-            -webkit-border-radius: 3px;
-            -moz-border-radius: 3px;
-            border-radius: 3px;
-                        -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-            padding: 15px;
-        }
+}
+table {
+    background-color: transparent;
+}
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+.table>thead>tr>th {
+    border-color: #e2e7eb;
+    padding: 10px 15px;
+    color: #242a30;
+    font-weight: 600;
+    border-bottom: 2px solid #e2e7eb!important;
+    text-align: left;
+}
+.table>tbody>tr>td {
+    border-color: #e2e7eb;
+    padding: 10px 15px;
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
 
-        .modal-content {
-            position: relative;
-            background-color: #fff;
-            -webkit-background-clip: padding-box;
-            background-clip: padding-box;
-            border: 1px solid #999;
-            border: 1px solid rgba(0,0,0,.2);
-            border-radius: 6px;
-            outline: 0;
-            -webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5);
-            box-shadow: 0 3px 9px rgba(0,0,0,.5);
-        }
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+/*table*/
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1050;
+    display: none;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+    background-color: rgba(0,0,0,0.4);
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.fade {
+    opacity: 0;
+    -webkit-transition: opacity .15s linear;
+    -o-transition: opacity .15s linear;
+    transition: opacity .15s linear;
+}
+.fade.in {
+    opacity: 1;
+}
+.fade {
+    opacity: 0;
+    -webkit-transition: opacity .3s linear;
+    transition: opacity .3s linear;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.modal.in .modal-dialog {
+    -webkit-transform: translate(0,0);
+    -ms-transform: translate(0,0);
+    -o-transform: translate(0,0);
+    transform: translate(0,0);
+}
+.modal.fade .modal-dialog {
+    -webkit-transition: -webkit-transform .3s ease-out;
+    -o-transition: -o-transform .3s ease-out;
+    transition: transform .3s ease-out;
+    -webkit-transform: translate(0,-25%);
+    -ms-transform: translate(0,-25%);
+    -o-transform: translate(0,-25%);
+    transform: translate(0,-25%);
+}
+.modal-dialog {
+    position: relative;
+    width: 600px;
+    margin: 200px auto;
+}
+#modal-dialog {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.modal-content {
+    border: none;
+    -webkit-box-shadow: 0 5px 15px rgba(0,0,0,.3);
+    box-shadow: 0 5px 15px rgba(0,0,0,.3);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 15px;
+}
 
-        button.close {
-            -webkit-appearance: none;
-            padding: 0;
-            cursor: pointer;
-            background: 0 0;
-            border: 0;
-        }
-        .close {
-            float: right;
-            font-size: 21px;
-            font-weight: 700;
-            line-height: 1;
-            color: #000;
-            text-shadow: 0 1px 0 #fff;
-            filter: alpha(opacity=20);
-            opacity: .2;
-        }
-        button, select {
-            text-transform: none;
-        }
-        button {
-            overflow: visible;
-        }
+.modal-content {
+    position: relative;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #999;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 6px;
+    outline: 0;
+    -webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5);
+    box-shadow: 0 3px 9px rgba(0,0,0,.5);
+}
+
+button.close {
+    -webkit-appearance: none;
+    padding: 0;
+    cursor: pointer;
+    background: 0 0;
+    border: 0;
+}
+.close {
+    float: right;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: .2;
+}
+button, select {
+    text-transform: none;
+}
+button {
+    overflow: visible;
+}
 @media screen {
-  #printSection {
-      display: none;
-  }
+    #printSection {
+        display: none;
+    }
 }
 
 @media print {
-        
-  body * {
-    visibility:hidden;
-  }
-  #printSection, #printSection * {
-    visibility:visible;
-  }
-  #printSection {
-    position:absolute;
-    left:0;
-    top:0;
-  }
+
+    body * {
+        visibility:hidden;
+    }
+    #printSection, #printSection * {
+        visibility:visible;
+    }
+    #printSection {
+        position:absolute;
+        left:0;
+        top:0;
+    }
 
 }
 .printable { display: none; }

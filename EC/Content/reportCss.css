@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'OpenSans-Semibold';
+    src: url('fonts/OpenSans/OpenSans-Semibold.ttf');
+}
+
 html, body {
     height: 100%;
     width: 100%;
@@ -48,7 +53,7 @@ html, body {
     border-right: 1px solid rgb(186, 194, 194);
 }
 .headerPadding {
-    font-family: 'OpenSansSemibold';
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     font-size: 14px;
     color: #7e9297;
     width: 85%;
@@ -63,7 +68,7 @@ html, body {
     float: left;
     width: 134px;
     height: 100%;
-    
+
 }
 .positionSpecial:hover {
     background-color: rgb(215, 227, 228);
@@ -79,30 +84,30 @@ html, body {
     color: rgb(56, 73, 77);
 
 }
-    .position:hover #iconStatistic {
-        background: url(Icons/statisticHover.png);
-    }
-    .position:active #iconStatistic {
-        background: url(Icons/statisticActive.png);
-    }
-    .position:hover #iconTasks {
-        background: url(Icons/TasksHover.png);
-    }
-    .position:active #iconTasks {
-        background: url(Icons/TasksActive.png);
-    }
-    .positionSpecial:hover #iconMessages {
+.position:hover #iconStatistic {
+    background: url(Icons/statisticHover.png);
+}
+.position:active #iconStatistic {
+    background: url(Icons/statisticActive.png);
+}
+.position:hover #iconTasks {
+    background: url(Icons/TasksHover.png);
+}
+.position:active #iconTasks {
+    background: url(Icons/TasksActive.png);
+}
+.positionSpecial:hover #iconMessages {
     background: url(icons/messagesHover.png) no-repeat;
-    }
-    .positionSpecial:active #iconMessages {
+}
+.positionSpecial:active #iconMessages {
     background: url(icons/messagesActive.png) no-repeat;
-    }
-    .position:hover #iconCases {
-        background: url(icons/casesHover.png) no-repeat;
-    }
-    .position:active #iconCases {
-        background: url(icons/casesActive.png) no-repeat;
-    }
+}
+.position:hover #iconCases {
+    background: url(icons/casesHover.png) no-repeat;
+}
+.position:active #iconCases {
+    background: url(icons/casesActive.png) no-repeat;
+}
 .positionIconStatistic {
     float: left;
     margin-left: 30px;
@@ -116,10 +121,7 @@ html, body {
 .textHeader{
     margin-left: 10px;
 }
-@font-face {
-    font-family: OpenSansSemibold; /* Имя шрифта */
-    src: url(../fonts/OpenSansSemibold.ttf); /* Путь к файлу со шрифтом */
-}
+
 #iconTasks{
     background: url(icons/tasks.png);
     width: 16px;

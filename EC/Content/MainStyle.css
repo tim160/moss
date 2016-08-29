@@ -1,42 +1,34 @@
 @font-face {
-    font-family: OpenSansSemibold;
-
-    src: url('fonts/OpenSans-Semibold.eot?') format('embedded-opentype'),
-         url('fonts/OpenSans-Semibold.ttf') format('truetype');    
+    font-family: 'OpenSans-Regular';
+    src: url('fonts/OpenSans/OpenSans-Regular.ttf');
 }
-
 @font-face {
-    font-family: OpenSans;
-    src: url('fonts/OpenSansBold.eot?') format('embedded-opentype'),
-         url('fonts/fyKNU6PN.ttf') format('truetype');
+    font-family: 'OpenSans-Semibold';
+    src: url('fonts/OpenSans/OpenSans-Semibold.ttf');
 }
-
 @font-face {
-    font-family: OpenSans-Light;
-    src: url('fonts/OpenSansLight.eot?') format('embedded-opentype'),
-         url('fonts/OpenSans-Light.ttf') format('truetype');
+    font-family: 'OpenSans-Bold';
+    src: url('fonts/OpenSans/OpenSans-Bold.ttf');
 }
-
-
 @font-face {
-    font-family: OpenSans-Regular;
-    src: url('fonts/OpenSans-Regular-webfont.eot?') format('embedded-opentype'),
-         url('fonts/OpenSans-Regular.ttf') format('truetype');
+    font-family: 'OpenSans-Light';
+    src: url('fonts/OpenSans/OpenSans-Light.ttf');
 }
-
 @font-face {
-    font-family: LatoHeavy; /* Имя шрифта */
-    src: url(fonts/lato-heavy.ttf); /* Путь к файлу со шрифтом */
+    font-family: 'Lato-Heavy';
+    src: url('fonts/lato-heavy.ttf');
 }
-
 @font-face {
-    font-family: LatoRegular; /* Имя шрифта */
-    src: url(fonts/Lato-Regular.ttf); /* Путь к файлу со шрифтом */
+    font-family: 'Lato-Regular';
+    src: url('fonts/Lato-Regular.ttf');
 }
-
 @font-face {
-    font-family: Lato-Semibold;
-    src: url(fonts/Lato-Semibold.ttf);
+    font-family: 'Lato-Semibold';
+    src: url('fonts/Lato-Semibold.ttf');
+}
+@font-face {
+    font-family: 'Lato-Bold';
+    src: url('fonts/Lato-Bold.ttf');
 }
 
 #wrap {
@@ -50,16 +42,13 @@
     margin-left: 80px;
 }
 
-@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
-
-       
 #topBody {
     margin: 0 auto;
     height: 355px;
-    font-family: 'Lato', sans-serif;
+    font-family: 'Lato-Regular', arial, verdana, sans-serif;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
-    color: #FFFFFF;
+    color: #fff;
     text-align: center;
 }
 
@@ -75,13 +64,13 @@
     padding-top: 95px;
     font-size: 40px;
     padding-bottom: 6px;
-    font-family: LatoHeavy;
+    font-family: 'Lato-Heavy', arial, verdana, sans-serif;
 }
 
 .secondTitle {
     font-weight: 100;
     font-size: 26px;
-    font-family: LatoRegular;
+    font-family: 'Lato-Regular', arial, verdana, sans-serif;
     opacity: 0.8;
 }
 
@@ -91,11 +80,10 @@
 
 .fourthTitle {
     padding-top: 35px;
-    font-family: 'Lato', sans-serif;
+    font-family: 'Lato-Bold', arial, verdana, sans-serif;
     text-align: center;
     color: #05b5a2;
     font-size: 32px;
-    font-weight: bold;
 }
 
 #specialInput {
@@ -105,7 +93,7 @@
     font-size: 20px;
     padding: 2px;
     margin-left: -87px;
-    font-family: 'OpenSans-Light';
+    font-family: 'OpenSans-Light', arial, verdana, sans-serif;
     padding-left: 20px;
     color: rgba(75, 104,108,0.5);
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.5) inset;
@@ -113,7 +101,7 @@
 }
 
 #specialInput:focus {
-    font-family: 'OpenSans-Light';
+    font-family: 'OpenSans-Light', arial, verdana, sans-serif;
     text-transform: uppercase;
     color: rgba(56,73,77, 1);
     font-weight: bold;
@@ -136,8 +124,7 @@
 .buttonStartText {
     display: block;
     padding: 13px;
-    font-family: 'Open Sans';
-    font-weight: bold;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
 }
 
 #footer {
@@ -172,7 +159,7 @@
     margin-right: 39px;
     margin-top: 74px;
     color: #4b686c;
-    font-family: 'Lato', sans-serif;
+    font-family: 'Lato-Regular', arial, verdana, sans-serif;
     opacity: 0.9;
     margin-left: 17%;
     color: gray;
@@ -226,7 +213,7 @@
 }
 
 .textBlock {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Lato-Regular', arial, verdana, sans-serif;
     font-size: 16px;
     display: inline-block;
     letter-spacing: 1px;
@@ -235,70 +222,70 @@
     overflow: hidden;
 }
 
-        @media screen and (max-width: 1645px) {
-            .textBlock {
-                font-size: 14px;
-            }
-        }
+@media screen and (max-width: 1645px) {
+    .textBlock {
+        font-size: 14px;
+    }
+}
 
-        @media screen and (max-width: 1345px) {
-            .textBlock {
-                font-size: 12px;
-            }
-        }
+@media screen and (max-width: 1345px) {
+    .textBlock {
+        font-size: 12px;
+    }
+}
 
-        @media screen and (max-width: 872px) {
-            .icons {
-                width: 90%;
-            }
+@media screen and (max-width: 872px) {
+    .icons {
+        width: 90%;
+    }
 
-            .positionThirdBlock {
-                height: 80%;
-            }
+    .positionThirdBlock {
+        height: 80%;
+    }
 
-            .positionFourthBlock {
-                height: 85%;
-            }
-        }
+    .positionFourthBlock {
+        height: 85%;
+    }
+}
 
-        @media screen and (max-width: 717px) {
-            #bottomBody {
-                display: table;
-                width: 100%;
-            }
-        }
+@media screen and (max-width: 717px) {
+    #bottomBody {
+        display: table;
+        width: 100%;
+    }
+}
 
-        @media screen and (max-width: 580px) {
-            #bottomBody {
-                display: table;
-            }
+@media screen and (max-width: 580px) {
+    #bottomBody {
+        display: table;
+    }
 
-            #positionThirdAndFourth {
-                float: left;
-            }
-            #specialInput {
-                width: 65%;
-            }
-        }
+    #positionThirdAndFourth {
+        float: left;
+    }
+    #specialInput {
+        width: 65%;
+    }
+}
 
-        @media screen and (max-width: 365px) {
-            .positionFirstBlock {
-                width: 100%;
-            }
+@media screen and (max-width: 365px) {
+    .positionFirstBlock {
+        width: 100%;
+    }
 
-            .positionSecondBlock {
-                width: 100%;
-            }
+    .positionSecondBlock {
+        width: 100%;
+    }
 
-            .positionThirdBlock {
-                width: 100%;
-            }
+    .positionThirdBlock {
+        width: 100%;
+    }
 
-            .positionFourthBlock {
-                width: 100%;
-            }
-        }
-        
+    .positionFourthBlock {
+        width: 100%;
+    }
+}
+
 #footer li {
     float: left;
 }
@@ -313,13 +300,13 @@ li a {
 }
 
 li a:visited {
-     text-decoration: none;
-     color: #4b686c;
+    text-decoration: none;
+    color: #4b686c;
 }
 
 li a:hover {
-     text-decoration: none;
-     color: #4b686c;
+    text-decoration: none;
+    color: #4b686c;
 }
 
 #contact {
@@ -360,7 +347,7 @@ li a:hover {
 }
 
 .greenTitle {
-    font-family: LatoRegular;
+    font-family: 'Lato-Regular', arial, verdana, sans-serif;
     font-size: 30px;
     color: rgb(5, 181, 162);
 }
@@ -369,7 +356,7 @@ li a:hover {
     text-align: center;
     font-weight: 100;
     font-size: 18px;
-    font-family: LatoRegular;
+    font-family: 'Lato-Regular', arial, verdana, sans-serif;
     opacity: 0.8;
 }
 
@@ -435,8 +422,7 @@ li a:hover {
 
 #benefits .title {
     color: rgb(5, 181, 162);
-    font-family: 'Lato', sans-serif;
-    font-weight: bold;
+    font-family: 'Lato-Bold', arial, verdana, sans-serif;
 }
 
 #benefits .textBlock {
@@ -449,7 +435,7 @@ li a:hover {
     text-decoration: none;
     color: #4b686c;
     font-size: 14px;
-    font-family: LatoRegular;
+    font-family: 'Lato-Regular', arial, verdana, sans-serif;
 }
 
 #footer a {
@@ -459,91 +445,91 @@ li a:hover {
     color: #4b686c;
 }
 
-        @media (max-width: 1425px) {
-            #footer li {
-                margin-left: 7.5%;
-            }
-        }
-        @media (max-width: 1280px) {
-            #footer li {
-                margin-left: 5%;
-            }
-        }
-        @media (max-width: 1155px) {
-            #footer li {
-                margin-left: 2.5%;
-            }
-        }
-        @media (max-width: 1070px) {
-            .positionLogo {
-                margin-left: 40px;
-            }
-        }
-        @media (max-width: 980px) {
-            .positionLogo {
-                margin-left: 10px;
-            }
-            #firstLogo .blueLogo {
-                margin-left: -40px;
-            }
+@media (max-width: 1425px) {
+    #footer li {
+        margin-left: 7.5%;
+    }
+}
+@media (max-width: 1280px) {
+    #footer li {
+        margin-left: 5%;
+    }
+}
+@media (max-width: 1155px) {
+    #footer li {
+        margin-left: 2.5%;
+    }
+}
+@media (max-width: 1070px) {
+    .positionLogo {
+        margin-left: 40px;
+    }
+}
+@media (max-width: 980px) {
+    .positionLogo {
+        margin-left: 10px;
+    }
+    #firstLogo .blueLogo {
+        margin-left: -40px;
+    }
 
-            #bodyInc {
-                width:83% !important;
-            }
+    #bodyInc {
+        width:83% !important;
+    }
 
-            .titleInc {
-                margin-top: 0px !important;
-                width:50% !important;
-            }
-           /* 
-            .indexPage {
-                height: 675px !important;
-            }*/
-        }
+    .titleInc {
+        margin-top: 0px !important;
+        width:50% !important;
+    }
+    /* 
+     .indexPage {
+         height: 675px !important;
+     }*/
+}
 
-        @media (max-width: 920px) {
-            #firstLogo .blueLogo {
-                margin-left: -55px;
-            }
-        }
+@media (max-width: 920px) {
+    #firstLogo .blueLogo {
+        margin-left: -55px;
+    }
+}
 
-        @media (max-width: 600px) {
-            .titleInc {
-                font-size: 20px !important;
-                width:40% !important;
-            }
-        }
+@media (max-width: 600px) {
+    .titleInc {
+        font-size: 20px !important;
+        width:40% !important;
+    }
+}
 
-        @media (max-width: 505px) {
-            .secondMenu img {
-                width: 100% !important;
-                float: none !important;
-            }
+@media (max-width: 505px) {
+    .secondMenu img {
+        width: 100% !important;
+        float: none !important;
+    }
 
-            .loginCompany {
-                height: 525px !important;
-            }
+    .loginCompany {
+        height: 525px !important;
+    }
 
-            .repBlock, .logBlock {
-                width: 100% !important;
-            }
+    .repBlock, .logBlock {
+        width: 100% !important;
+    }
 
-            .titleInc {
-                margin-top:10px;
-                margin-bottom:10px;
-                width: 100% !important;
-                font-size: 14pt !important;
-            }
+    .titleInc {
+        margin-top:10px;
+        margin-bottom:10px;
+        width: 100% !important;
+        font-size: 14pt !important;
+    }
 
-             .indexPage {
-                height: 800px !important;
-            }
+    .indexPage {
+        height: 800px !important;
+    }
 
-            .loginFormFooter {
-                height: 52px !important;
-            }
-        }
-         
+    .loginFormFooter {
+        height: 52px !important;
+    }
+}
+
 
 .greenLogo {
     margin-left: -15px;
@@ -570,7 +556,7 @@ li a:hover {
     font-size: 26px;
     color: rgb(56,73,77);
     cursor: default;
-    font-family: 'OpenSans-Regular';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     width: 66%;
     font-weight: 400;
 }
@@ -588,8 +574,7 @@ span.logButton, span.repButton {
     color: #05b5a2;
     padding-left: 10px;
     padding-right: 10px;
-    font-family: 'Open Sans';
-    font-weight: bold;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
     text-transform: uppercase;
     cursor: pointer;
     padding-top: 9px;
@@ -630,13 +615,13 @@ span.logButton, span.repButton {
 
 span.logButton:hover, span.repButton:hover {
     background: #05b5a2;
-    color: #ffffff;
+    color: #fff;
     border-color:rgb(4, 151, 135);
 }
 
 span.logButton:active, span.repButton:active {
     background: #049787;
-    color: #ffffff;
+    color: #fff;
 }
 
 .repLoginBlock {
@@ -675,7 +660,7 @@ span.logButton:active, span.repButton:active {
     float: left;
     text-align: left;
 }
- .check{
+.check{
     margin-right: 10px;
     width: 15px;
     height: 15px;
@@ -683,10 +668,10 @@ span.logButton:active, span.repButton:active {
     cursor: pointer;
     display: block;
     float:left;
-  }
+}
 
- .checked {
-     display: none;
+.checked {
+    display: none;
     margin-right: 10px;
     width: 15px;
     height: 15px;
@@ -717,7 +702,7 @@ input[type="checkbox"] + label {
 
 .repBlock:hover span, .logBlock:hover span {
     background: #05b5a2;
-    color: #ffffff;
+    color: #fff;
     border-color:rgb(4, 151, 135);
 }
 
@@ -726,7 +711,7 @@ input[type="checkbox"] + label {
 }
 
 .repBlock:hover a, .logBlock:hover .btnsRepLog a {
-    color: #ffffff;
+    color: #fff;
 }
 
 .repLoginBlock img {
@@ -736,7 +721,7 @@ input[type="checkbox"] + label {
 .accept a {
     color: #aeb5b7;
     text-decoration: none;
-    font-family: OpenSansSemibold;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     font-size: 14px;
 }
 
@@ -753,41 +738,41 @@ span.logButton a, span.repButton a {
 }
 
 span.logButton a:hover, span.repButton a:hover {
-    color: #ffffff;
+    color: #fff;
 }
 
-        @media (max-width: 1485px) {
-            
-            .accept {
-                margin-left: 19px;
-                margin-top: 25px !important;
-            }
-        }
+@media (max-width: 1485px) {
 
-        @media (max-width: 1300px) {
-            .accept {
-                margin-left: 19px;
-            }
-        }
+    .accept {
+        margin-left: 19px;
+        margin-top: 25px !important;
+    }
+}
 
-        @media (max-width: 1240px) {
-            .accept {
-                margin-left: 15px;
-            }
-        }
+@media (max-width: 1300px) {
+    .accept {
+        margin-left: 19px;
+    }
+}
+
+@media (max-width: 1240px) {
+    .accept {
+        margin-left: 15px;
+    }
+}
 
 .bodyIncCompany {
     background-color: #EAF0F0;
-    font-family: 'OpenSans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     box-shadow: 0px 0px 1px #DFE4E5;
 }
 
 .loginTitle {
-  margin-top: 0px;
-  padding-top: 20px;
-  font-weight: bolder;
-  font-size: 20px;
-  font-family: LatoRegular;
+    margin-top: 0px;
+    padding-top: 20px;
+    font-weight: bolder;
+    font-size: 20px;
+    font-family: 'Lato-Regular', arial, verdana, sans-serif;
 }
 
 .loginForm {
@@ -796,7 +781,7 @@ span.logButton a:hover, span.repButton a:hover {
     width: 100%;
     height: 210px;
     color: #305458;
-    font-family: LatoSemibold;
+    font-family: 'Lato-Semibold', arial, verdana, sans-serif;
 }
 
 .loginForm div {
@@ -804,7 +789,7 @@ span.logButton a:hover, span.repButton a:hover {
     margin-bottom:0px;
     margin-top:0px;
     max-width: 372px;
-    }
+}
 
 .loginForm label {
     top: 0px;
@@ -837,13 +822,19 @@ span.logButton a:hover, span.repButton a:hover {
     margin-top: -20px;
     margin-bottom: 3px;
 }
+.loginForm div input:-webkit-autofill {
+    background-color: #fff !important;
+    -webkit-box-shadow: inset 0 0 0 50px #fff !important;
+    -webkit-text-fill-color: #305458 !important;
+    color: #305458 !important;
+}
 
 .loginForm div input:focus {
     margin-left: -2px;
     background-color: #FFFFFF;
     border: 2px solid #02B4A1;
     margin-top: -23px;
-    }
+}
 
 .loginForm #submit {
     outline: none;
@@ -854,8 +845,7 @@ span.logButton a:hover, span.repButton a:hover {
     border-color: rgb(199, 75, 36);
     color: white;
     font-size: 16px;
-    font-family: 'Open Sans';
-    font-weight: bold;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif !important;
     border-width: 1px;
     border-style: solid;
     cursor: pointer;
@@ -864,12 +854,12 @@ span.logButton a:hover, span.repButton a:hover {
 .loginForm #submit:hover {
     background-color: #e74918;
     border-color: #c74b24;
-    }
+}
 
 .loginForm #submit:active {
     background-color: #db3a08;
     border-color: #ba350b;
-    }
+}
 
 .loginFormFooter {
     position: relative;
@@ -889,7 +879,7 @@ span.logButton a:hover, span.repButton a:hover {
 
 #bodyInc .loginFormFooter a {
     text-decoration: underline;
-    font-family: Lato-Semibold;
+    font-family: 'Lato-Semibold', arial, verdana, sans-serif;
 }
 
 #bottomBody {
@@ -901,16 +891,16 @@ span.logButton a:hover, span.repButton a:hover {
     height: 420px;
     background-color: transparent;
 }
- .check{
+.check{
     margin-right: 10px;
     width: 15px;
     height: 15px;
     background: url('/Content/img/checkbox.png');
     cursor: pointer;
-  }
+}
 
- .checked {
-     display: none;
+.checked {
+    display: none;
     margin-right: 10px;
     width: 15px;
     height: 15px;

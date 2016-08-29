@@ -1,19 +1,20 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans);
 @font-face {
-    font-family: OpenSansSemibold;
-    src: url('fonts/OpenSans-Semibold.eot?') format('embedded-opentype'),
-    url(fonts/OpenSans-Semibold.ttf) format('truetype');
+    font-family: 'OpenSans-Regular';
+    src: url('fonts/OpenSans/OpenSans-Regular.ttf');
 }
 @font-face {
-    font-family: OpenSans-Light;
-    src: url('fonts/OpenSansLight.eot?') format('embedded-opentype'),
-    url('fonts/OpenSans-Light.ttf') format('truetype');
+    font-family: 'OpenSans-Semibold';
+    src: url('fonts/OpenSans/OpenSans-Semibold.ttf');
 }
 @font-face {
-    font-family: OpenSans-Regular;
-    src: url('fonts/OpenSans-Regular-webfont.eot?') format('embedded-opentype'),
-    url('fonts/OpenSans-Regular.ttf') format('truetype');
+    font-family: 'OpenSans-Bold';
+    src: url('fonts/OpenSans/OpenSans-Bold.ttf');
 }
+@font-face {
+    font-family: 'OpenSans-Light';
+    src: url('fonts/OpenSans/OpenSans-Light.ttf');
+}
+
 
 .blockContent {
     background: #e5ebeb;
@@ -31,7 +32,7 @@
     cursor: default;
     display: table-cell;
 }
-.leftBlockContent + .rightBlockContent #casesHeared{    
+.leftBlockContent + .rightBlockContent #casesHeared{
     margin-left: -2px;
     border-left: 2px solid rgb(137, 148, 150);
     /*margin-top: 3px;*/
@@ -70,7 +71,7 @@
     width: 100%;
 }
 .leftHeader .openSans {
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     font-size: 12px;
     color: #727c7e;
     width: 95px;
@@ -80,7 +81,7 @@
     font-size: 12px;
     line-height: 19px;
     width: 95px;
-    font-family: OpenSansSemibold;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     color: #727c7e;
 }
 .leftBlockContent .leftContent{
@@ -121,7 +122,7 @@
     cursor: pointer;
 }
 .leftHeader .blockTop label.title {
-    font-family: OpenSansSemibold;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     font-size: 20px;
     color: rgb(56, 73, 77);
     /*float: left;*/
@@ -132,7 +133,7 @@ p.addMoreMediatorsBtn span,
     border: 1px solid #6ccec3;
     color: #05b5a2;
     padding: 5px 13px 5px 13px;
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     font-size: 14px;
     font-weight: 700;
     text-transform: uppercase;
@@ -145,12 +146,12 @@ span.contactReportBtn.contactReportBtn_cc{
     border: 1px solid #8ac092;
     color: #4da456;
 }
-span.contactReportBtn.contactReportBtn_cc:hover{    
+span.contactReportBtn.contactReportBtn_cc:hover{
     background: #4da456;
     color: #ffffff;
     border: 1px solid #2e7037;
 }
-span.contactReportBtn.contactReportBtn_cc:active{    
+span.contactReportBtn.contactReportBtn_cc:active{
     background: #2e7037;
     color: #ffffff;
     border: 1px solid #2e7037;
@@ -168,7 +169,7 @@ span.createNewTaskBtn{
     color: #fffefe;
     padding: 5px 13px 5px 13px;
     /*padding: 3px 10px 3px 10px;*/
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     font-size: 12px;
     font-weight: bold;
     text-transform: uppercase;
@@ -188,7 +189,7 @@ span.createNewTaskBtn:active{
     border: 1px solid #6ccec3;
     color: #05b5a2;
     padding: 0px 13px 0px 13px;
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     font-size: 11pt;
     font-weight: bold;
     text-transform: uppercase;
@@ -246,12 +247,12 @@ span.logButton:active, span.contactReportBtn:active,
     font-size: 14px;
     padding-right: 7px;
     color: #ffffff;
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     padding-top: 1px;
 }
 .leftHeader .blockInfoDays span.days {
     font-size: 16px;
-    font-family: OpenSansSemibold;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 }
 .leftHeader .blockInfoDays span.daysRight {
     float: right;
@@ -259,7 +260,7 @@ span.logButton:active, span.contactReportBtn:active,
     padding-top: 3px;
     font-size: 12px;
     color: #ffffff;
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
 }
 .leftContent #generalInfo {
     display: table;
@@ -314,7 +315,7 @@ span.logButton:active, span.contactReportBtn:active,
     padding-top: 32px;
 }
 .leftContent #generalInfo .title {
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     padding-left: 12px;
     font-size: 20px;
     color: rgb(56, 73, 77);
@@ -323,7 +324,7 @@ span.logButton:active, span.contactReportBtn:active,
 .leftContent #generalInfo div.generalInformation p.title,
 .leftContent #generalInfo div.blockPartiesInformation p.title,
 .leftContent #generalInfo div.blockCaseInformation p.title{
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     font-size: 12px;
     color: #848a8b;
     padding-top: 12px;
@@ -335,7 +336,7 @@ span.logButton:active, span.contactReportBtn:active,
 .leftContent #generalInfo div.generalInformation p.text,
 .leftContent #generalInfo div.blockPartiesInformation p.text,
 .leftContent #generalInfo div.blockCaseInformation p.text{
-    font-family: OpenSansSemibold;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     font-size: 12pt;
     color: #727c7e;
     padding-top: 0px;
@@ -344,13 +345,13 @@ span.logButton:active, span.contactReportBtn:active,
     padding-left: 43px;
 }
 .leftContent div.blockPartiesInformation p.title span{
-    font-family: OpenSansSemibold;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     font-size: 14px;
     color: #727c7e;
 }
 .blockPartiesInformation div,
 .incidentDescription p.titleIncidentDescription {
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     font-size: 12px;
     color: #848a8b;
     width: 100%;
@@ -361,7 +362,7 @@ span.logButton:active, span.contactReportBtn:active,
 }
 
 .incidentDescription .text {
-    font-family: OpenSansSemibold;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     font-size: 14px;
     color: #727c7e;
     padding-left: 43px;
@@ -385,13 +386,13 @@ span.logButton:active, span.contactReportBtn:active,
     display: table;
 }
 .contentDownloadDoc .infoBlock p {
-    font-family: OpenSansSemibold;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     margin-top: 0px;
     margin-bottom: 0px;
     font-size: 14px;
 }
 .contentDownloadDoc .infoBlock a {
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     color: #05b5a2;
     cursor: pointer;
     font-size: 12px;
@@ -428,8 +429,8 @@ span.logButton:active, span.contactReportBtn:active,
 }
 
 .activitySection {
-    color: #ffffff;
-    font-family: OpenSansSemibold;
+    color: #fff;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     font-size: 16pt;
     margin-top: 20px;
     position:absolute;
@@ -500,15 +501,15 @@ span.logButton:active, span.contactReportBtn:active,
     padding-right: 11px;
 }
 .headerCreateTask .startTitle{
-    color: #ffffff;
+    color: #fff;
     font-size: 18px;
-    font-family: OpenSansSemibold;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     padding-left: 31px;
 }
 .headerCreateTask .endTitle{
     color: #ffffff;
     font-size: 18px;
-    font-family: OpenSans-Light;
+    font-family: 'OpenSans-Light', arial, verdana, sans-serif;
 }
 .headerCreateTask label.close {
     float: right;
@@ -538,7 +539,7 @@ span.logButton:active, span.contactReportBtn:active,
 }
 .contentCreateTask .attachFile span {
     font-size: 12px;
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     color: #727c7e;
 }
 .blockCreateTask .contentCreateTask .createTaskTop {
@@ -552,7 +553,7 @@ span.logButton:active, span.contactReportBtn:active,
     padding-bottom: 32px;
 }
 .contentCreateTask input[type="text"] {
-    font-family: OpenSansSemibold;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     padding-top: 17px;
     padding-bottom: 17px;
     font-size: 14px;
@@ -562,16 +563,16 @@ span.logButton:active, span.contactReportBtn:active,
     padding-left: 10px;
 }
 .contentCreateTask input[type="text"]::-webkit-input-placeholder{
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
 }
 .contentCreateTask input[type="text"]:-ms-input-placeholder{
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
 }
 .contentCreateTask input[type="text"]:-moz-placeholder{
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
 }
 .contentCreateTask input[type="text"]::-moz-placeholder{
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
 }
 .footerCreateTask {
     display: table;
@@ -589,7 +590,7 @@ span.hideCompletedBtn.dueDateBtn {
     padding: 6.5px 27px 6.5px 13px;
 }
 .footerCreateTask .dropdown {
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     font-size: 12px;
     margin-top: 5px;
 }
@@ -620,8 +621,7 @@ span.hideCompletedBtn.dueDateBtn:active .img {
 .footerCreateTask form.selectBlock {
     float: left;
     float: left;
-    font-family: 'Open Sans';
-    font-weight: bold;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
     text-transform: uppercase;
     cursor: pointer;
     border-radius: 2px;
@@ -709,7 +709,7 @@ span.hideCompletedBtn.dueDateBtn:active .img {
 .blockTask span.text {
     float: left;
     font-size: 18px;
-    font-family: OpenSansSemibold;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     color: #3c3e3f;
     margin-top: 35px;
     line-height: 18px;
@@ -813,8 +813,7 @@ span.hideCompletedBtn {
     border: 1px solid #d6dcdc;
     color: #848a8b;
     padding: 6.5px 13px 6.5px 13px;
-    font-family: 'Open Sans';
-    font-weight: bold;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
     text-transform: uppercase;
     cursor: pointer;
     border-radius: 2px;
@@ -827,7 +826,7 @@ span.hideCompletedBtn {
     display: inline-block;
     margin-left: 10px;
 }
-.hideCompletedBlock #datepicker{    
+.hideCompletedBlock #datepicker{
     width: 73px;
 }
 span.hideCompletedBtn:hover {
@@ -843,8 +842,7 @@ span.hideCompletedBtn:hover #datepicker{
 }
 .headTask .selectBlock{
     float: left;
-    font-family: 'Open Sans';
-    font-weight: bold;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
     text-transform: uppercase;
     cursor: pointer;
     border-radius: 2px;
@@ -872,8 +870,7 @@ span.hideCompletedBtn:hover #datepicker{
 }
 .topMessagesMenu .messagesTab{
     font-size: 12px;
-    font-family: 'Open Sans';
-    font-weight: bold;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
     color: #aeb5b7;
     text-transform: uppercase;
     text-decoration: initial;
@@ -906,7 +903,7 @@ span.hideCompletedBtn:hover #datepicker{
 }
 .topMessagesMenu .number{
     float: left;
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     font-size: 11px;
     border: 1px solid #aeb5b7;
     padding-left: 4px;
@@ -914,10 +911,10 @@ span.hideCompletedBtn:hover #datepicker{
     border-radius: 50%;
     margin-left: 6px;
     background-color: #aeb5b7;
-    color: #ffffff;
+    color: #fff;
 }
 .topMessagesMenu .messagesTab.active .number{
-    color: #ffffff;
+    color: #fff;
     background-color: #05b5a2;
     border-color: #05b5a2;
 }
@@ -981,7 +978,7 @@ span.hideCompletedBtn:hover #datepicker{
     margin-top: 0px;
 }
 .blockComment .headerComment {
-    font-family: OpenSansSemibold;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     font-size: 14px;
     color: #aeb5b7;
 }
@@ -989,7 +986,7 @@ span.hideCompletedBtn:hover #datepicker{
     float: right;
 }
 .blockComment p.textComment {
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     font-size: 16px;
     color: #3c3e3f;
     padding-top: 3px;
@@ -1010,7 +1007,7 @@ span.hideCompletedBtn:hover #datepicker{
 }
 .headerTextarea {
     font-size: 14px;
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     color: #ffffff;
     background-color: #b2bfc3;
     padding-left: 7px;
@@ -1061,7 +1058,7 @@ span.hideCompletedBtn:hover #datepicker{
     padding-right: 10px;
     padding-top: 5px;
     outline: none;
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     border: 2px solid #b2bfc3;
     margin: 0px;
     height: 86px;
@@ -1092,7 +1089,7 @@ span.hideCompletedBtn:hover #datepicker{
     background-repeat: no-repeat;
     cursor: pointer;
     position: relative;
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     font-size: 12px;
     margin-top: 2px;
     border-radius: 2px;
@@ -1114,7 +1111,7 @@ span.hideCompletedBtn:hover #datepicker{
 .dropdown .aboutMediator label:last-child{
     display: none;
     color: #aeb5b7;
-    font-family: OpenSansSemibold;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     font-size: 12px;
 }
 
@@ -1151,7 +1148,7 @@ span.hideCompletedBtn:hover #datepicker{
     text-transform: capitalize;
     color: #3c3e3f;
     font-size: 14px;
-    font-family: OpenSansSemibold;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 }
 .dropdown span.selected span{
     color: #848a8b;
@@ -1253,12 +1250,12 @@ span.hideCompletedBtn:hover #datepicker{
 .blockHeaderTeam .blockHeaderText p:first-child{
     color: #3c3e3f;
     font-size: 18px;
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
 }
 .blockHeaderTeam .blockHeaderText p:last-child{
     color: #aeb5b7;
     font-size: 14px;
-    font-family: OpenSansSemibold;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 }
 .blockIteamTeam .blockMediator.escalation span{
     background: #ee613f;
@@ -1405,7 +1402,7 @@ p.addMoreMediatorsBtn {
     margin-top: 0px;
     margin-bottom: 0px;
     font-size: 19px;
-    font-family: OpenSansSemibold;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 }
 .headerActivity .displayMediators {
     padding-left: 10px;
@@ -1467,19 +1464,19 @@ p.addMoreMediatorsBtn {
 }
 .contentBlockActivity .topText span.title {
     color: #3c3e3f;
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     font-size: 16px;
     float: none;
 }
 .contentBlockActivity .topText span.title .reviewStage {
-    font-family: OpenSansSemibold;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     font-size: 16px;
 }
 .contentBlockActivity .topText span.date {
     float: right;
     color: #aeb5b7;
     font-size: 12px;
-    font-family: OpenSansSemibold;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 }
 .contentBlockActivity .blockInfo p.text {
     margin-top: 5px;
@@ -1583,13 +1580,13 @@ p.addMoreMediatorsBtn {
 }
 .blockTasks .assignedTo span.assignedToText {
     font-size: 12px;
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     color: #aeb5b7;
     margin-left: 10px;
 }
 .blockTasks .assignedTo span.assignedToName {
     font-size: 12px;
-    font-family: OpenSansSemibold;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     color: #05b5a2;
     margin-left: 8px;
 }
@@ -1639,7 +1636,7 @@ p.addMoreMediatorsBtn {
     padding-right: 15px;
     padding-top: 5px;
     outline: none;
-    font-family: OpenSansSemibold;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     border: 2px solid #b2bfc3;
     margin: 0px;
     height: 86px;
@@ -1677,9 +1674,8 @@ p.addMoreMediatorsBtn {
     background: #05b5a2;
     color: #fffefe;
     padding: 5px 13px 5px 13px;
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
     font-size: 11pt;
-    font-weight: bold;
     text-transform: uppercase;
     cursor: pointer;
     border-radius: 2px;
@@ -1729,7 +1725,7 @@ p.addMoreMediatorsBtn {
     padding-left: 20px;
     font-size: 18px;
     padding-right: 15px;
-    font-family: OpenSans-Regular;
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     color: #aeb3b4;
     float: left;
     line-height: 42px;
@@ -1739,7 +1735,7 @@ p.addMoreMediatorsBtn {
     padding-left: 20px;
     font-size: 18px;
     padding-right: 15px;
-    font-family: OpenSans-Regular;
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
 }
 
 .blockTasks .headTask span.labelArrow {
@@ -1752,7 +1748,7 @@ p.addMoreMediatorsBtn {
     margin-right: 10px;
 }
 .rightBlockContent .blockTasks .headTask span.casesDot span {
-margin-right: 10px;
+    margin-right: 10px;
 }
 .blockTasks .headTask span.casesDot span{
     width: 12px;
@@ -1763,12 +1759,12 @@ margin-right: 10px;
     font-size: 18px;
     padding-left: 0px;
     margin-top: 9px;
-    font-family: OpenSansSemibold;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     min-width: 100px;
 }
 .blockTasks .headerBlockTextRight span.textDate {
     font-size: 12px;
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     color: #aeb5b7;
     padding-left: 2px;
 }
@@ -1797,8 +1793,7 @@ form.selectBlock.assignedToSelect:hover {
 form.selectBlock.assignedToSelect p.labelAssignedTo {
     text-align: center;
     font-size: 12px;
-    font-family: 'Open sans';
-    font-weight: bold;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
     margin-top: 0px;
     margin-bottom: 0px;
     padding-bottom: 7px;
@@ -1872,7 +1867,7 @@ li#textAssigntaskTo {
     margin: auto;
     color: #848a8b;
     font-size: 12px;
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     text-transform: uppercase;
     display: block;
     height: 13px;
@@ -1918,18 +1913,18 @@ form.selectBlock.assignedToSelect .dropdown li .blockPhoto {
 #rightRight .contentBlockActivity .topText p.date {
     color: #D7DBDB;
     font-size: 12px;
-    font-family: OpenSansSemibold;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     margin-top: 0px;
     margin-bottom: 0px;
 }
 #rightRight .contentBlockActivity .topText span.title {
     color: #FFF;
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     font-size: 14px;
     float: none;
 }
 #rightRight .contentBlockActivity .topText span.title .reviewStage {
-    font-family: OpenSansSemibold;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     font-size: 14px;
 }
 #rightRight .contentBlockActivity .blockImg {
@@ -1975,7 +1970,7 @@ form.selectBlock.assignedToSelect .dropdown li .blockPhoto {
 }
 .positionActivityIcon.active span{
     color: #ffffff;
-    font-family: OpenSansSemibold;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     font-size: 16pt;
     position: absolute;
     top: 0;
@@ -2010,8 +2005,7 @@ form.selectBlock.assignedToSelect .dropdown li .blockPhoto {
     color: #848a8b;
     background: rgb(242, 247, 247);
     border: none;
-    font-weight: bold;
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
     text-transform: uppercase;
     cursor: pointer;
 }
@@ -2032,17 +2026,17 @@ form.selectBlock.assignedToSelect .dropdown li .blockPhoto {
 }
 .ui-datepicker-month, .ui-datepicker-year {
     font-size:18px;
-    font-family:OpenSansSemibold;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     color: rgb(114, 124, 126);
 }
 .ui-state-default {
     color:rgb(60, 62, 63) !important;
     font-size:18px;
-    font-family:OpenSansSemibold;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 }
 .ui-state-default:hover {
     font-size:18px;
-    font-family:OpenSansSemibold;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     background:rgb(200, 207, 209) !important;
     border:none;
 }
@@ -2079,7 +2073,7 @@ form.selectBlock.assignedToSelect .dropdown li .blockPhoto {
     margin-bottom: 0px;
     width: 100%;
     float: left;
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     font-size: 12px;
 
 
@@ -2345,7 +2339,7 @@ form.selectBlock.assignedToSelect .dropdown li .blockPhoto {
 /*========END HEADER=========*/
 
 .unread {
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     float: left;
     font-size: 18px;
     color: #3c3e3f;
@@ -2468,7 +2462,7 @@ form.selectBlock.assignedToSelect .dropdown li .blockPhoto {
 
 .reassignMediators {
     font-size: 18px;
-    font-family: OpenSansSemibold;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     margin-top: 10px;
     position: absolute;
 }
@@ -2507,7 +2501,7 @@ form.selectBlock.assignedToSelect .dropdown li .blockPhoto {
     border-left: 2px solid #049182;
     margin-left: -2px;
 }
-.blockTasksSmallRight{    
+.blockTasksSmallRight{
     width: calc(97% - 105px);
     margin-left: 3%;
     margin-right: 0;
@@ -2516,19 +2510,19 @@ form.selectBlock.assignedToSelect .dropdown li .blockPhoto {
     right: 45px;
     top: -27px;
 }
-.caseMediatorBig .displayMediators .status{    
+.caseMediatorBig .displayMediators .status{
     border: 2px solid #049787;
 }
 .caseMediatorBig .regularText {
     font-size: 12px;
     color: rgba(255, 255, 255, 0.6);
     padding-top: 8px;
-    font-family: 'OpenSansSemibold';
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 }
 .caseMediatorBig .openSansText {
     font-size: 16px;
     line-height: 18px;
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     padding-bottom: 20px;
 }
 .caseMediatorBig .forText {

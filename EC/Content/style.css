@@ -1,42 +1,43 @@
+@font-face {
+    font-family: 'OpenSans-Regular';
+    src: url('fonts/OpenSans/OpenSans-Regular.ttf');
+}
+@font-face {
+    font-family: 'OpenSans-Bold';
+    src: url('fonts/OpenSans/OpenSans-Bold.ttf');
+}
+@font-face {
+    font-family: 'OpenSans-Light';
+    src: url('fonts/OpenSans/OpenSans-Light.ttf');
+}
+@font-face {
+    font-family: 'Lato-Heavy';
+    src: url('fonts/lato-heavy.ttf');
+}
+@font-face {
+    font-family: 'Lato-Regular';
+    src: url('fonts/Lato-Regular.ttf');
+}
+@font-face {
+    font-family: 'Lato-Semibold';
+    src: url('fonts/Lato-Semibold.ttf');
+}
+@font-face {
+    font-family: 'Lato-Bold';
+    src: url('fonts/Lato-Bold.ttf');
+}
+
 html, body {
     width: 100%;
     margin: 0px;
-    /*height: 100%;*/
     padding: 0px;
 }
 
-@font-face {
-    font-family: OpenSans;
-    src: url(fonts/fyKNU6PN.ttf);
-}
-@font-face {
-    font-family: OpenSans-Light;
-    src: url(fonts/OpenSans-Light.ttf);
-}
-
-@font-face {
-    font-family: LatoHeavy; /* Имя шрифта */
-    src: url(fonts/lato-heavy.ttf); /* Путь к файлу со шрифтом */
-}
-@font-face {
-    font-family: LatoBold; /* Имя шрифта */
-    src: url(fonts/Lato-Bold.ttf); /* Путь к файлу со шрифтом */
-}
-@font-face {
-    font-family: LatoRegular; /* Имя шрифта */
-    src: url(fonts/Lato-Regular.ttf); /* Путь к файлу со шрифтом */
-}
-@font-face {
-    font-family: LatoSemibold; /* Имя шрифта */
-    src: url(fonts/Lato-Semibold.ttf); /* Путь к файлу со шрифтом */
-}
-@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
 #main {
     width: 100%;
-    /*max-width: 1440px;*/
     height: 100%;
-    margin: 0 auto;    
-  cursor: default;
+    margin: 0 auto;
+    cursor: default;
 }
 #wrap {
     width: 100%;
@@ -44,7 +45,6 @@ html, body {
     background-repeat: no-repeat;
     background-position: top center;
     background-size: cover;
-    /*max-width: 1440px;*/
     min-height: 700px;
 }
 #header {
@@ -81,7 +81,7 @@ html, body {
     cursor: pointer;
 }
 .bigButton {
-    color: #FFFFFF;
+    color: #fff;
     width: 160px;
     height: 30px;
     background-color: rgb(85, 149, 156);
@@ -90,8 +90,7 @@ html, body {
     border-color: rgb(66, 117, 122);
     border-radius: 2px;
     font-size: 14px;
-    font-family: 'Open Sans';
-    font-weight: bold;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
     cursor: pointer;
 }
 
@@ -128,7 +127,7 @@ html, body {
 }
 /*Index/Page*/
 .changeFontOpenSans{
-    font-family: 'OpenSans';
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
 }
 .positionLogin {
     position: relative;
@@ -169,7 +168,7 @@ html, body {
 
 .login {
     color: rgb(5, 181, 162);
-    font-family: OpenSans;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
     cursor: pointer;
 }
 
@@ -200,16 +199,16 @@ html, body {
 #topBody {
     margin: 0 auto;
     height: 355px;
-    font-family: 'Lato', sans-serif;
+    font-family: 'Lato-Regular', arial, verdana, sans-serif;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
-    color: #FFFFFF;
+    color: #fff;
     text-align: center;
 }
 #topBodyLanding {
     margin: 0 auto;
     height: 270px;
-    color: #FFFFFF;
+    color: #fff;
     text-align: center;
 }
 .firstTitle {
@@ -217,12 +216,12 @@ html, body {
     padding-top: 95px;
     font-size: 40px;
     padding-bottom: 6px;
-    font-family: LatoHeavy;
+    font-family: 'Lato-Heavy', arial, verdana, sans-serif;
 }
 .secondTitle {
     font-weight: 100;
     font-size: 26px;
-    font-family: LatoRegular;
+    font-family: 'Lato-Regular', arial, verdana, sans-serif;
     opacity: 0.8;
 }
 .thirdTitle {
@@ -230,11 +229,10 @@ html, body {
 }
 .fourthTitle {
     padding-top: 35px;
-    font-family: 'Lato', sans-serif;
+    font-family: 'Lato-Bold', arial, verdana, sans-serif;
     text-align: center;
     color: #05b5a2;
     font-size: 32px;
-    font-weight: bold;
 }
 .positionIcons {
     width: 100%;
@@ -250,7 +248,7 @@ html, body {
     font-size: 20px;
     padding: 2px;
     margin-left: -87px;
-    font-family: 'OpenSans-Light';
+    font-family: 'OpenSans-Light', arial, verdana, sans-serif;
     padding-left: 20px;
     color: rgba(75, 104,108,0.5);
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.5) inset;
@@ -259,7 +257,7 @@ html, body {
     border-bottom-left-radius: 3px;
 }
 #specialInput:focus {
-    font-family: 'OpenSans-Light';
+    font-family: 'OpenSans-Light', arial, verdana, sans-serif;
     /*text-transform: uppercase;*/
     color: rgba(56,73,77, 1);
     font-weight: bold;
@@ -282,12 +280,9 @@ html, body {
     background-color: rgb(231, 73, 24);
 }
 .buttonStartText {
-    /*position: relative;
-    top: 13px;*/
     display: block;
     padding: 12px;
-    font-family: OpenSans;
-    font-weight: bold;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
 }
 #bottomBody {
     height: 420px;
@@ -316,7 +311,7 @@ html, body {
     height: 160px;
     width: 100%;
     font-size: 14px;
-    font-family: LatoRegular;
+    font-family: 'Lato-Regular', arial, verdana, sans-serif;
     color: rgb(75, 104, 108);
     background: #EDF0F0;
 }
@@ -386,7 +381,7 @@ html, body {
     float: right;
     margin-right: 39px;
     color: #4b686c;
-    font-family: 'Lato', sans-serif;
+    font-family: 'Lato-Regular', arial, verdana, sans-serif;
     color: gray;
     opacity: 0.9;
     /* margin-left: 17%; */
@@ -548,12 +543,12 @@ html, body {
     max-width: 80px;
 }
 .title {
-    font-family: 'LatoBold';
+    font-family: 'Lato-Bold', arial, verdana, sans-serif;
     font-size: 18px;
-    color: #FFFFFF;
+    color: #fff;
 }
 .textBlock {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Lato-Regular', arial, verdana, sans-serif;
     font-size: 16px;
     display: inline-block;
     letter-spacing: 1px;
@@ -727,7 +722,7 @@ html, body {
         }
 
         .greenTitle {
-            font-family: LatoRegular;
+            font-family: 'Lato-Regular', arial, verdana, sans-serif;
             font-size: 30px;
             color: rgb(5, 181, 162);
         }
@@ -736,7 +731,7 @@ html, body {
             text-align: center;
             font-weight: 100;
             font-size: 18px;
-            font-family: LatoRegular;
+            font-family: 'Lato-Regular', arial, verdana, sans-serif;
             opacity: 0.8;
         }
 
@@ -802,8 +797,7 @@ html, body {
 
         #benefits .title {
             color: rgb(5, 181, 162);
-            font-family: 'Lato', sans-serif;
-            font-weight: bold;
+            font-family: 'Lato-Bold', arial, verdana, sans-serif;
         }
 
         #benefits .textBlock {
@@ -820,11 +814,11 @@ html, body {
 
         .loginTitle {
             font-size: 24px;
-            font-family: LatoBold;
+            font-family: 'Lato-Bold', arial, verdana, sans-serif;
         }
 
         .loginDate {
-            color: #FFFFFF;
+            color: #fff;
             background-color: rgb(106, 132, 135);
             height: 260px;
         }
@@ -855,7 +849,7 @@ html, body {
         }
 
         .loginFooter {
-            color: #FFFFFF;
+            color: #fff;
             background-color: rgb(152, 173, 175);
             line-height: 40px;
             height: 50px;
@@ -869,13 +863,13 @@ html, body {
             color: rgb(75, 104, 108);
             font-size: 18px;
             text-align: center;
-            font-family: LatoSemibold;
+            font-family: 'Lato-Semibold', arial, verdana, sans-serif;
         }
 
         .loginBox a {
-            color: #FFFFFF;
+            color: #fff;
             text-align: right;
-            font-family: LatoSemibold;
+            font-family: 'Lato-Semibold', arial, verdana, sans-serif;
             font-size: 14px;
         }
 
@@ -890,8 +884,7 @@ html, body {
             position: relative;
             top: 10px;
             font-size: 16px;
-            font-family: OpenSans;
-            font-weight: bold;
+            font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
         }
 
     }

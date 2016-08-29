@@ -1,6 +1,15 @@
+@font-face {
+    font-family: 'OpenSans-Semibold';
+    src: url('fonts/OpenSans/OpenSans-Semibold.ttf');
+}
+@font-face {
+    font-family: 'OpenSans-Bold';
+    src: url('fonts/OpenSans/OpenSans-Bold.ttf');
+}
+
 .myMessages {
     display: table;
-    background: #ffffff;
+    background: #fff;
     width: 100%;
     min-height: 30px;
     margin-bottom: 20px;
@@ -16,7 +25,7 @@
     border-bottom: 1px solid #e8eaeb;
     margin-left: 10px;
     margin-right: 10px;
-    font-family: OpenSansSemibold;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     font-size: 18px;
     color: #3c3e3f;
     padding-top: 26px;
@@ -36,7 +45,7 @@
     margin-top: 0px;
     color: #aeb5b7;
     font-size: 14px;
-    font-family: 'OpenSansSemibold';
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     padding-bottom: 10px;
     line-height: 14px;
 }
@@ -45,8 +54,7 @@
     margin-top: 0px;
     color: #3c3e3f;
     font-size: 18px;
-    font-family: 'Open Sans';
-    font-weight: bold;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
 }
 .myMessages .blockDate {
     display: table-cell;
@@ -55,7 +63,7 @@
     margin-top: 0px;
     color: #aeb5b7;
     font-size: 12px;
-    font-family: 'OpenSansSemibold';
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     text-align: right;
     padding-right: 25px;
     width: 10%;
@@ -101,14 +109,14 @@
 /**/
 
 /*================= START MEDIA ========*/
-@media (max-width: 551px){    
+@media (max-width: 551px){
     .blockPhoto p{
         display: block;
         color: #aeb5b7;
         font-size: 12px;
-        font-family: 'OpenSansSemibold';
+        font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
         text-align: right;
-    text-align: center;
+        text-align: center;
     }
     .myMessages .blockMessage .blockPhoto {
         display: table-cell;
@@ -132,9 +140,9 @@
         text-align: center;
         padding-left: 0px;
     }
-    
-.casesMassage::after {
-    display: none;
-}
+
+    .casesMassage::after {
+        display: none;
+    }
 }
 /*================= END MEDIA ==========*/

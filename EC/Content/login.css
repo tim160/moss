@@ -1,6 +1,18 @@
 ﻿@font-face {
-    font-family: Lato-Semibold;
-    src: url(fonts/Lato-Semibold.ttf);
+    font-family: 'OpenSans-Regular';
+    src: url('fonts/OpenSans/OpenSans-Regular.ttf');
+}
+@font-face {
+    font-family: 'OpenSans-Bold';
+    src: url('fonts/OpenSans/OpenSans-Bold.ttf');
+}
+@font-face {
+    font-family: 'Lato-Regular';
+    src: url('fonts/Lato-Regular.ttf');
+}
+@font-face {
+    font-family: 'Lato-Semibold';
+    src: url('fonts/Lato-Semibold.ttf');
 }
 
 .loginFormHeader {
@@ -8,8 +20,8 @@
     width: 420px;
     height: 80px;
     background-color:#4B686C;
-	margin-top: 6%;
-	cursor: default;
+    margin-top: 6%;
+    cursor: default;
 }
 .loginFormHeader p {
     margin-top: -14px;
@@ -19,7 +31,7 @@
     border-width: 1px;
     padding-top: 26px;
     font-size: 23px;
-    font-family: LatoRegular;
+    font-family: 'Lato-Regular', arial, verdana, sans-serif;
 }
 .emptyBlockSecond {
     background-color: rgb(140, 201, 195);
@@ -34,7 +46,7 @@
     padding-bottom:20px;
     background-color:#587C7E;
     color: #305458;
-    font-family: LatoSemibold;
+    font-family: 'Lato-Semibold', arial, verdana, sans-serif;
 }
 .loginForm div {
     margin-left: 21px;
@@ -42,41 +54,46 @@
     margin-top: 1px;
 }
 .loginForm div input{
-  width: 372px;
-  height: 70px;
-  padding-top: 0px;
-  padding-left: 8px;
-  margin-left: 0px;
-  text-indent: 2px;
-  background-color: #eff2f2;
-  outline: none;
-  line-height: 3em;
-  border: none;
-  border-bottom: 1px solid #ced7d8;
-  font-size: 22px;
-  color: #305458;
-  margin-top: -20px;
+    width: 372px;
+    height: 70px;
+    padding-top: 0px;
+    padding-left: 8px;
+    margin-left: 0px;
+    text-indent: 2px;
+    background-color: #eff2f2;
+    outline: none;
+    line-height: 3em;
+    border: none;
+    border-bottom: 1px solid #ced7d8;
+    font-size: 22px;
+    color: #305458;
+    margin-top: -20px;
 }
-
+.loginForm div input:-webkit-autofill {
+    background-color: #fff !important;
+    -webkit-box-shadow: inset 0 0 0 50px #fff !important;
+    -webkit-text-fill-color: #305458 !important;
+    color: #305458 !important;
+}
 .loginForm div input:focus {
-  width: 372px;
-  height: 67px;
-  padding-top: 0px;
-  padding-left: 8px;
-  margin-left: -2px;
-  text-indent: 2px;
-  background-color: #FFFFFF;
-  outline: none;
-  line-height: 3em;
-  border: 2px solid #02B4A1;
-  font-size: 22px;
-  color: #305458;
-  margin-top: -20px;
+    width: 372px;
+    height: 67px;
+    padding-top: 0px;
+    padding-left: 8px;
+    margin-left: -2px;
+    text-indent: 2px;
+    background-color: #FFFFFF;
+    outline: none;
+    line-height: 3em;
+    border: 2px solid #02B4A1;
+    font-size: 22px;
+    color: #305458;
+    margin-top: -20px;
 }
 
 .loginForm label {
-    top: 0px; 
-    right: 0px; 
+    top: 0px;
+    right: 0px;
     padding-left: 10px;
     font-size: 14px;
     opacity: 0.5;
@@ -92,7 +109,7 @@
     background-color: #db3a08;
     border-color: #ba350b;
 }
-   
+
 .loginForm #submit {
     outline: none;
     width: 177px;
@@ -103,33 +120,32 @@
     border-color: rgb(199, 75, 36);
     color: white;
     font-size: 11pt;
-    font-family: OpenSans;
-    font-weight: bold;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
     border-width: 1px;
     border-style: solid;
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .loginFormFooter {
-  position: relative;
-  margin: 0 auto;
-  width: 420px;
-  height: 50px;
-  background-color: #97ACAE;
-  cursor: default;
+    position: relative;
+    margin: 0 auto;
+    width: 420px;
+    height: 50px;
+    background-color: #97ACAE;
+    cursor: default;
 }
 
 .loginFormFooter a {
-  float: right;
-  color: white;
-  padding: 16px;
-  font-family: Lato-Semibold;
-  font-size: 13px;
+    float: right;
+    color: white;
+    padding: 16px;
+    font-family: 'Lato-Semibold', arial, verdana, sans-serif;
+    font-size: 13px;
 }
 
 .label {
-  position: relative;
-  padding-left: 7px;
-  margin-top: 7px;
-  color: #CFD7D8;
+    position: relative;
+    padding-left: 7px;
+    margin-top: 7px;
+    color: #CFD7D8;
 }

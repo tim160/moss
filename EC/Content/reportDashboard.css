@@ -1,41 +1,27 @@
-﻿/*@font-face {
-    font-family: OpenSans;
-    src: url(fonts/eVX6sX1i.ttf);
+﻿@font-face {
+    font-family: 'OpenSans-Regular';
+    src: url('fonts/OpenSans/OpenSans-Regular.ttf');
 }
 @font-face {
-    font-family: OpenSans;
-     src: url('fonts/OpenSansBold.eot') format('embedded-opentype'),
-     url(fonts/eVX6sX1i.ttf) format('truetype'),
-}*/
-
-@import url(http://fonts.googleapis.com/css?family=Open+Sans);
-
-@font-face {
-     font-family: OpenSans-Bold;
-     src: url('fonts/OpenSansBold.eot?') format('embedded-opentype'),
-     url(fonts/OpenSans-Bold.ttf) format('truetype');
+    font-family: 'OpenSans-Semibold';
+    src: url('fonts/OpenSans/OpenSans-Semibold.ttf');
 }
 @font-face {
-     font-family: OpenSansSemibold;
-     src: url('fonts/OpenSans-Semibold.eot?') format('embedded-opentype'),
-     url(fonts/OpenSans-Semibold.ttf) format('truetype');
-}
-@font-face {
-    font-family: OpenSans;
-    src: url(fonts/eVX6sX1i.ttf);
+    font-family: 'OpenSans-Bold';
+    src: url('fonts/OpenSans/OpenSans-Bold.ttf');
 }
 
 body{
     margin: 0 0 0 0;
-    font-family: 'Open Sans';
-  background: #92a0a3;
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+    background: #92a0a3;
 }
 
 .main{
     max-width: 980px;
     margin: 0 auto;
     height: 100%;
-  /*background: #f2f7f7;*/
+    /*background: #f2f7f7;*/
 }
 .logo{
     float: left;
@@ -72,8 +58,7 @@ body{
     border-left: 1px solid rgb(206,211,211);
     padding: 6px 25px 6px 25px !important;
     color: rgb(56,73,77) !important;
-    font-family: OpenSansSemibold;
-    font-weight: bold;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
 }
 
 .headerMenu ul li:hover{
@@ -87,7 +72,7 @@ body{
 .secondaryMenu{
     height: 110px;
     background-color: rgb(255,255,255);
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     width: 100%;
 }
 .secondLogo{
@@ -109,7 +94,7 @@ body{
     width: 75%;
     height: 34px;
     float: left;
-    font-family: 'Open Sans';
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     font-size: 12px;
     -webkit-box-shadow: 0px 2px 0px 0px rgba(0,0,0,0.11);
     -moz-box-shadow: 0px 2px 0px 0px rgba(0,0,0,0.11);
@@ -121,20 +106,20 @@ body{
 }
 .headerPos .positionN {
     border-bottom: 4px solid #e5f3f2;
-      width: 135px;
-      width: 145px;
-      height: 38px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
+    width: 135px;
+    width: 145px;
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }
- .headerMenuAbout {
+.headerMenuAbout {
     float: left;
     position: absolute;
     height: 100%;
     left: 527px;
-    font-family: "OpenSans";
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     font-size: 14px;
 }
 .headerMenuAbout ul{
@@ -185,7 +170,7 @@ body{
 }
 
 .positionN:hover {
-  font-weight: bolder;
+    font-weight: bolder;
 }
 
 .secondaryMenu ul li.active{
@@ -197,27 +182,27 @@ body{
     width: 100%;
 }
 .secondaryMenu .title{
-  margin-top: 36px;
-  float: left;
-  font-size: 26px;
-  padding-left: 35px;
-  color: rgb(56,73,77);
-  cursor: default;
+    margin-top: 36px;
+    float: left;
+    font-size: 26px;
+    padding-left: 35px;
+    color: rgb(56,73,77);
+    cursor: default;
 }
 .secondaryMenu .status{
     text-align: right;
-  width: 124px;
-  margin: 30px 20px 0px 0px;
-  margin-bottom: 0;
-  color: rgb(56,73,77);
-  float: right;
-  font-size: 12px;
-  cursor: default;
+    width: 124px;
+    margin: 30px 20px 0px 0px;
+    margin-bottom: 0;
+    color: rgb(56,73,77);
+    float: right;
+    font-size: 12px;
+    cursor: default;
 }
 .review{
-  color: rgb(5,181,162);
-  font-size: 20px;
-  line-height: 20px;
+    color: rgb(5,181,162);
+    font-size: 20px;
+    line-height: 20px;
 }
 .settingMenu{
     height: 60px;
@@ -317,16 +302,15 @@ body{
 }
 .listLeft{
     color: rgb(161,168,168);
-    font-weight: normal;
     float:left;
     font-size: 12px;
-    font-family: OpenSans;
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     padding-left: 9px;
 }
 
 .reportBlock{
     color: rgb(161,168,168);
-    font-weight: normal;
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     font-size: 10pt;
     float:left;
     width: 100%;
@@ -347,22 +331,20 @@ body{
     color: rgb(114,124,126);
     padding-top: 14px;
     /*padding-bottom: 15px;*/
-	font-size: 12pt;
-	font-weight:bold;
+    font-size: 12pt;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
     width: 75%;
     float:left;
 }
 .listRight{
     color: rgb(114,124,126);
     padding-left: 20px;
-    font-weight: normal;
-	font-weight:bold;
     float:left;
     font-size:12px;
-    font-family: OpenSansSemibold;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
 }
 .listRight p {
-  margin-top: 16px;
+    margin-top: 16px;
 }
 .titleReportAll{
     padding-top: 15px;
@@ -417,115 +399,112 @@ body{
     float: left;
 }
 .main .footer {
-  background: #92a0a3;
-  text-align: right;
-  padding-top: 26px;
-  padding-bottom: 45px;
-  padding-right: 11px;
-  color: #ffffff;
-  font-weight: bold;
-  cursor: default;
+    background: #92a0a3;
+    text-align: right;
+    padding-top: 26px;
+    padding-bottom: 45px;
+    padding-right: 11px;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: default;
 }
 
 .dataPosts .reportContent{
     padding-bottom: 70px;
 }
 .dataPosts .reportContent p {
-  color: #05b5a2;
-  font-family: 'Open Sans';
-  font-weight: bold;
-  padding-left: 60px;
-  margin-top: 0px;
-  margin-bottom: 31px;
-  text-transform: uppercase;
+    color: #05b5a2;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
+    padding-left: 60px;
+    margin-top: 0px;
+    margin-bottom: 31px;
+    text-transform: uppercase;
 }
 .reportContent .detailsText textarea {
-  min-height: 126px;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 5px;
-  min-width: 737px;
-  max-width: 737px;
-  outline: none;
-  font-family: 'Open Sans';
-  border: 2px solid #b2bfc3;
+    min-height: 126px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    min-width: 737px;
+    max-width: 737px;
+    outline: none;
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+    border: 2px solid #b2bfc3;
 }
 .reportContent .detailsText textarea:hover{
-  border: 2px solid #05b5a2;
+    border: 2px solid #05b5a2;
 }
 .reportContent .detailsText textarea:hover:after{
-  content: "xcvcv";
+    content: "xcvcv";
 }
 .reportContent .detailsText {
-  float: right;
+    float: right;
 }
 .reportContent .sendBtn{
-  padding-top: 10px;
-  width: 100%;
+    padding-top: 10px;
+    width: 100%;
 }
 .reportContent .sendBtn span,
 .blockMessages .newMessageBtn span {
-  background: #05b5a2;
-  color: #ffffff;
-  font-family: 'Open Sans';
-  font-weight: bold;
-  font-size: 14px;
-  text-transform: uppercase;
-  border: 1px solid #049787;
-  cursor: pointer;
-  padding-left: 11px;
-  padding-right: 11px;
-  padding-top: 9px;
-  padding-bottom: 9px;
-  border-radius: 2px;
-  display: table;
-  float: right;
-  padding: 5px 13px 5px 13px;
+    background: #05b5a2;
+    color: #fff;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
+    font-size: 14px;
+    text-transform: uppercase;
+    border: 1px solid #049787;
+    cursor: pointer;
+    padding-left: 11px;
+    padding-right: 11px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    border-radius: 2px;
+    display: table;
+    float: right;
+    padding: 5px 13px 5px 13px;
 }
 .blockMessages .newMessageBtn span {
-    font-family: 'OpenSans-Bold';
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
 }
 .blockMessages .photoPersonal img{
     background: none !important;
 }
 .reportContent .sendBtn span:hover{
-  background: #049787;
+    background: #049787;
 }
 .incidentDescription .text {
-  font-family: OpenSansSemibold;
-  font-size: 14px;
-  color: #727c7e;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-bottom: 35px;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+    font-size: 14px;
+    color: #727c7e;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 35px;
 }
 .reportContent .blockPhoto {
-  float: left;
+    float: left;
 }
 
 .statusPersonal {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  background: #05b5a2;
-  border-radius: 100%;
-  border: 2px solid #ffffff;
-  margin-left: 23px;
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #05b5a2;
+    border-radius: 100%;
+    border: 2px solid #fff;
+    margin-left: 23px;
 }
 .blockPhoto .photoPersonal {
-  width: 35px;
-  height: 35px;
-  overflow: hidden;
-  background: #aeb5b7;
-  background: #ffffff;
-  border-radius: 100%;
+    width: 35px;
+    height: 35px;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 100%;
 }
 .photoPersonal img {
-  width: 35px;
-  height: auto;
-  width: 100%;
-  height: 100%;
-  background: #e5ebeb;
+    width: 35px;
+    height: auto;
+    width: 100%;
+    height: 100%;
+    background: #e5ebeb;
 }
 
 /*============  blockMessages  ==============*/
@@ -535,69 +514,69 @@ body{
     width: 100%;
 }
 .main .blockMessagesTable {
-  margin-left: 10%;
-  margin-right: 10%;
-  margin-top: 25px;
-  margin-bottom: 25px;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 25px;
+    margin-bottom: 25px;
 }
 .main .blockComments {
-  background: #ffffff;
-  padding-left: 30px;
-  padding-top: 24px;
-  padding-right: 20px;
-  margin-bottom: 11px;
-  border: 1px solid #e0e5e6;
+    background: #fff;
+    padding-left: 30px;
+    padding-top: 24px;
+    padding-right: 20px;
+    margin-bottom: 11px;
+    border: 1px solid #e0e5e6;
 }
-.main .blockCommentAndAnswer {    
-  padding-left: 30px;
-  padding-top: 24px;
-  border-left: 10px solid #b2bfc3;
+.main .blockCommentAndAnswer {
+    padding-left: 30px;
+    padding-top: 24px;
+    border-left: 10px solid #b2bfc3;
 }
 .main .blockAnonimous {
-  padding-bottom: 40px;
+    padding-bottom: 40px;
 }
 .main .blockNoAnonimous {
-  padding-bottom: 40px;
+    padding-bottom: 40px;
 }
 .main .blockNoAnonimous .replyBlock{
     display: none;
 }
 .main .blockNoAnonimous:hover {
-  padding-bottom: 40px;
+    padding-bottom: 40px;
 }
 .main .blockNoAnonimous:hover .replyBlock{
     display: block;
 }
 .main .blockComments .blockPhoto {
-  float: left;
+    float: left;
 }
 .main .blockComments .contentComment {
-  display: table;
-  width: 93%;
-  float: right;
+    display: table;
+    width: 93%;
+    float: right;
 }
 .main .blockComments .blockComment {
-  display: table;
-  width: 100%;
-  cursor: default;
+    display: table;
+    width: 100%;
+    cursor: default;
 }
 .main .blockComments .contentComment p{
     margin-bottom: 0px;
     margin-top: 0px;
 }
 .blockComment .headerComment{
-  font-family: OpenSansSemibold;
-  font-size: 12px;
-  color: #aeb5b7;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+    font-size: 12px;
+    color: #aeb5b7;
 }
 .blockComment p.textComment {
-  font-family: 'Open Sans';
-  font-size: 16px;
-  color: #3c3e3f;
-  padding-top: 3px;
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+    font-size: 16px;
+    color: #3c3e3f;
+    padding-top: 3px;
 }
 .blockComment .headerComment span.dateComment {
-  float: right;
+    float: right;
 }
 
 /*.blockMessages .addComment {
@@ -610,185 +589,183 @@ body{
 }*/
 
 .blockMessages .addComment {
-  background: #f2f7f7;
-  width: 79.8%;
-  margin-left: 10%;
-  display: inline-block;
-  padding-bottom: 10px;
-  padding-top: 17px;
-  border: 1px solid #e0e5e6;
-  margin-top: -15px;
-  margin-bottom: 15px;
+    background: #f2f7f7;
+    width: 79.8%;
+    margin-left: 10%;
+    display: inline-block;
+    padding-bottom: 10px;
+    padding-top: 17px;
+    border: 1px solid #e0e5e6;
+    margin-top: -15px;
+    margin-bottom: 15px;
 }
 
 .blockMessages .content .blockPersonal {
-  float: left;
-  padding-left: 15px;
+    float: left;
+    padding-left: 15px;
 }
 .blockMessages .blockPersonal .blockPhoto {
-  float: left;
-  padding-left: 15px;
+    float: left;
+    padding-left: 15px;
 }
 .blockMessages .blockPersonal .blockPhoto img {
-  border-radius: 100%;
-  height: 35px;
+    border-radius: 100%;
+    height: 35px;
 }
 .blockMessages .content .blockPersonal .arrow {
-  width: 0;
-  height: 0;
-  margin-top: 10px;
-  border-top: 6px solid transparent;
-  border-right: 5px solid #02B4A1;
-  border-bottom: 6px solid transparent;
-  float: left;
+    width: 0;
+    height: 0;
+    margin-top: 10px;
+    border-top: 6px solid transparent;
+    border-right: 5px solid #02B4A1;
+    border-bottom: 6px solid transparent;
+    float: left;
 }
 .blockMessages .content .blockPersonal .arrow.gray {
     border-right: 5px solid #B2BFC3;
 }
 .blockMessages .content .messageText {
-  /*float: left;*/
-  margin-bottom: 8px;
+    /*float: left;*/
+    margin-bottom: 8px;
 }
 .blockMessages .messageText textarea {
-  min-height: 86px;
-  padding-left: 10px;
-  padding-right: 14px;
-  padding-top: 5px;
-  min-width: 665px;
-  max-width: 665px;
-  outline: none;
-  font-family: OpenSans;
-  border: 2px solid #02B4A1;
-  overflow: auto;
-  resize: none;
-  font-family: OpenSansSemibold;
-  font-size: 16px;
-}.blockMessages .messageText textarea.gray{
-     border: 2px solid #B2BFC3;
- }
+    min-height: 86px;
+    padding-left: 10px;
+    padding-right: 14px;
+    padding-top: 5px;
+    min-width: 665px;
+    max-width: 665px;
+    outline: none;
+    border: 2px solid #02B4A1;
+    overflow: auto;
+    resize: none;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+    font-size: 16px;
+}
+.blockMessages .messageText textarea.gray{
+    border: 2px solid #B2BFC3;
+}
 
 .blockMessages .messageText textarea::-webkit-input-placeholder{
-  color: #3c3e3f;
+    color: #3c3e3f;
 }
 .blockMessages .messageText textarea:-ms-input-placeholder{
-  color: #3c3e3f;
+    color: #3c3e3f;
 }
 .blockMessages .messageText textarea:-moz-placeholder{
-  color: #3c3e3f;
+    color: #3c3e3f;
 }
 .blockMessages .messageText textarea::-moz-placeholder{
-  color: #3c3e3f;
+    color: #3c3e3f;
 }
 
 .blockMessages .newMessageBtn span {
-  margin-right: 9px;
+    margin-right: 9px;
 }
-.replyBlock span {  
-  background: #ffffff;
-  color: #05b5a2;
-  font-family: 'Open Sans';
-  font-size: 11px;
-  font-weight: bold;
-  text-transform: uppercase;
-  border: 1px solid #05b5a2;
-  cursor: pointer;
-  padding-left: 11px;
-  padding-right: 11px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  border-radius: 2px;
-  /* display: table; */
-  float: right;
-  margin-top: 0px;
-  margin-bottom: 0px;
+.replyBlock span {
+    background: #fff;
+    color: #05b5a2;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    border: 1px solid #05b5a2;
+    cursor: pointer;
+    padding-left: 11px;
+    padding-right: 11px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-radius: 2px;
+    float: right;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
-.replyBlock span:hover{    
-    color: #ffffff;
+.replyBlock span:hover{
+    color: #fff;
     background: #05b5a2;
     border: 1px solid #049787;
 }
-.replyBlock{    
-  padding-bottom: 15px;
-  margin-top: 0px;
+.replyBlock{
+    padding-bottom: 15px;
+    margin-top: 0px;
 }
 .blockAnonimous .replyBlock {
-  display: none;
+    display: none;
 }
 .topComment.blockComment {
-  padding-bottom: 38px;
+    padding-bottom: 38px;
 }
 .main .blockComments .bottomComment{
     padding-bottom: 39px;
 }
 .main .blockComments .bottomComment .arrowComment {
-  width: 12%;
-  height: 30px;
-  display: table;
-  float: left;
+    width: 12%;
+    height: 30px;
+    display: table;
+    float: left;
 }
-.main .blockComments .bottomComment .blockComment {    
-  float: left;
-  width: 88%;
-  border-top: 1px solid #e0e5e6;
-  padding-top: 25px;
-  margin-left: -20px;
-  padding-left: 20px;
+.main .blockComments .bottomComment .blockComment {
+    float: left;
+    width: 88%;
+    border-top: 1px solid #e0e5e6;
+    padding-top: 25px;
+    margin-left: -20px;
+    padding-left: 20px;
 }
-.main .blockComments .bottomComment .blockComment .textComment{    
-  font-weight: bold;
+.main .blockComments .bottomComment .blockComment .textComment{
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
 }
 #iconLeft {
-  background: url(icons/left.png) no-repeat;
-  width: 21px;
-  height: 8px;
-  float: left;
-  margin-top: 5px;
-  margin-left: 20px;
+    background: url(icons/left.png) no-repeat;
+    width: 21px;
+    height: 8px;
+    float: left;
+    margin-top: 5px;
+    margin-left: 20px;
 }
 .iconArrowLeft {
-  background: url(icons/arrowMessage.png) no-repeat;
-  width: 47px;
-  height: 29px;
-  float: left;
-  margin-top: 30px;
-  margin-left: 20px;
-  float: right;
+    background: url(icons/arrowMessage.png) no-repeat;
+    width: 47px;
+    height: 29px;
+    float: left;
+    margin-top: 30px;
+    margin-left: 20px;
+    float: right;
 }
 
 /*============ blockActivity ==============*/
 .main .blockActivity {
-  display: table;
-  background: #f2f7f7;
-  width: 100%;
-  padding-bottom: 200px;
-  cursor: default;
+    display: table;
+    background: #f2f7f7;
+    width: 100%;
+    padding-bottom: 200px;
+    cursor: default;
 }
 .main .blockActivity .headerActivity{
-  display: table;
-  background: #e5ebeb;
-  width: 100%;
+    display: table;
+    background: #e5ebeb;
+    width: 100%;
 }
 .headerActivity .blockCaseMediators{
-  padding-left: 100px;
-  padding-right: 60px;
-  padding-bottom: 35px;
-  padding-top: 30px;
+    padding-left: 100px;
+    padding-right: 60px;
+    padding-bottom: 35px;
+    padding-top: 30px;
 }
-.headerActivity .titleCaseMediators{    
-  margin-top: 0px;
-  margin-bottom: 0px;
-  font-size: 19px;
-  font-family: OpenSansSemibold;
+.headerActivity .titleCaseMediators{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 19px;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 }
 .headerActivity .displayMediators {
-  padding-left: 10px;
-  display: table;
+    padding-left: 10px;
+    display: table;
 }
 .headerActivity .displayMediators .blockMediator {
-  padding-left: 35px;
-  float: left;
-  display: flex;
-  padding-top: 10px;
+    padding-left: 35px;
+    float: left;
+    display: flex;
+    padding-top: 10px;
 }
 .blockMediator .personalText .title{
     margin-top: 0px;
@@ -803,136 +780,135 @@ body{
     font-size: 16px;
 }
 .blockMediator .blockPhoto {
-  float: left;
-  padding-right: 10px;
+    float: left;
+    padding-right: 10px;
 }
 
 /*------------contentActivity---------*/
 .blockActivity .contentActivity {
-  display: table;
-  width: 100%;
+    display: table;
+    width: 100%;
 }
 .blockActivity .contentActivity .contentBlockActivity {
-  display: block;
-  margin-left: 100px;
-  margin-right: 95px;
-  padding-top: 20px;
-  padding-bottom: 36px;
-  padding-left: 19px;
-  padding-right: 9px;
-  border-bottom: 1px solid #e0e5e6;
+    display: block;
+    margin-left: 100px;
+    margin-right: 95px;
+    padding-top: 20px;
+    padding-bottom: 36px;
+    padding-left: 19px;
+    padding-right: 9px;
+    border-bottom: 1px solid #e0e5e6;
 }
 .contentBlockActivity .blockImg {
-  float: left;
+    float: left;
 }
 .contentBlockActivity .blockInfo {
-  display: block;
-  padding-left: 50px;
+    display: block;
+    padding-left: 50px;
 }
 .contentBlockActivity .topText span.title {
-  color: #3c3e3f;
+    color: #3c3e3f;
 }
 .contentBlockActivity .topText span.title .reviewStage {
-  font-family: OpenSansSemibold;
-  font-size: 16px;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+    font-size: 16px;
 }
 .contentBlockActivity .topText span.date {
-  float: right;
-  color: #aeb5b7;
-  font-size: 12px;
-  font-family: OpenSansSemibold;
+    float: right;
+    color: #aeb5b7;
+    font-size: 12px;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 }
 .contentBlockActivity .blockInfo p.text {
-  margin-top: 5px;
-  margin-bottom: 0px;
-  color: #aeb5b7;
-  font-size: 14px;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    color: #aeb5b7;
+    font-size: 14px;
 }
 .contentBlockActivity .blockInfo p.text .personalName{
-  color: #848a8b;
+    color: #848a8b;
 }
-.blockActivity .contentActivity .blockAnonimous{    
-  margin-left: 112px ;
-  padding-left: 7px;
+.blockActivity .contentActivity .blockAnonimous{
+    margin-left: 112px ;
+    padding-left: 7px;
 }
 
 /*=========== Menu ===========*/
 .settingMenu {
-  width: 100%;
-  display: table;
-  cursor: default;  
-  height: 60px;
-  background-color: rgb(171,185,187);
+    width: 100%;
+    display: table;
+    cursor: default;
+    height: 60px;
+    background-color: rgb(171,185,187);
 }
 .menuItem,
 .mainTitle {
-  color: rgb(215, 219, 219);
-  display: inline-block;
-  margin-right: 15px;
-  /*width: 165px;*/
-  position: relative;
-  text-align: center;
-  font-size: 20px;
-  font-family: 'Open Sans';
-  font-weight: normal;
-  cursor: pointer;
-  text-decoration: none;
-  outline: none;
-  margin-top: 10px;
+    color: rgb(215, 219, 219);
+    display: inline-block;
+    margin-right: 15px;
+    /*width: 165px;*/
+    position: relative;
+    text-align: center;
+    font-size: 20px;
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+    cursor: pointer;
+    text-decoration: none;
+    outline: none;
+    margin-top: 10px;
 }
 .menuItem{
     margin-right: 30px;
 }
 .menuItem:hover,
 .mainTitle:hover {
-  color: #ffffff;
-  font-family: OpenSansSemibold;
+    color: #fff;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 }
 
 .menuItem:hover span{
-  font-family: 'Open Sans';
-  background: #d7dbdb;
-  color: #a6b1b3;
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+    background: #d7dbdb;
+    color: #a6b1b3;
 }
 .menuItem span{
-  font-family: 'Open Sans';
-  font-size: 16px;
-  border: 1px solid #d7dbdb;
-  padding-left: 7px;
-  padding-right: 7px;
-  border-radius: 50%;
-  margin-left: 8px;
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+    font-size: 16px;
+    border: 1px solid #d7dbdb;
+    padding-left: 7px;
+    padding-right: 7px;
+    border-radius: 50%;
+    margin-left: 8px;
 }
 .menuItem.active span{
-  font-family: 'Open Sans';
-  border: 1px solid #049787;
-  background: #049787;
-  color: #ffffff;
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+    border: 1px solid #049787;
+    background: #049787;
+    color: #fff;
 }
 .menuItem.active {
-  color: #ffffff;
-  font-family: OpenSansSemibold;
-  cursor: default;
+    color: #fff;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+    cursor: default;
 }
 .menuItem.active::after {
-  content: '';
-  position: absolute;
-  left: 0px;
-  bottom: -13.1px;
-  border: 10px solid transparent;
-  border-bottom: 10px solid rgb(229, 235, 235);
-  margin-left: 40%;
+    content: '';
+    position: absolute;
+    left: 0px;
+    bottom: -13.1px;
+    border: 10px solid transparent;
+    border-bottom: 10px solid rgb(229, 235, 235);
+    margin-left: 40%;
 }
 h2.menuItem:nth-child(4).active::after {
-  margin-left: 70%;
+    margin-left: 70%;
 }
 .mainTitle{
     display: none;
 }
 .settingMenu div.settingMenuItems {
-  padding-left: 28px;
-  padding-top: 14px;
-  padding-right: 20px;
+    padding-left: 28px;
+    padding-top: 14px;
+    padding-right: 20px;
 }
 .settings{
     float: right;
@@ -941,95 +917,95 @@ h2.menuItem:nth-child(4).active::after {
 
 /*============ blockSettings =============*/
 .main .blockSettings {
-  display: table;
-  background: #f2f7f7;
-  width: 100%;
-  padding-bottom: 200px;
-  cursor: default;
+    display: table;
+    background: #f2f7f7;
+    width: 100%;
+    padding-bottom: 200px;
+    cursor: default;
 }
 .main .blockSettings .headerSettings{
-  display: flex;
-  background: #e5ebeb;
-  width: 100%;
-  padding-top: 37px;
+    display: flex;
+    background: #e5ebeb;
+    width: 100%;
+    padding-top: 37px;
 }
-.blockSettings .titleHeaderSettings{  
-  margin-top: 0px;
-  margin-bottom: 0px;
-  font-size: 20px;
-  font-family: OpenSansSemibold;
-  margin-left: 113px;
-  float: left;
+.blockSettings .titleHeaderSettings{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 20px;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+    margin-left: 113px;
+    float: left;
 }
-.headerSettings .blockText{ 
-  float: left;
-  margin-left: 16px;
-  display: table;
-  width: 64%;
+.headerSettings .blockText{
+    float: left;
+    margin-left: 16px;
+    display: table;
+    width: 64%;
 }
 .headerSettings .blockText p.title {
-  font-size: 20px;
-  font-family: OpenSansSemibold;
-  color: #05b5a2;
-  padding-bottom: 11px;
-  margin-top: 0px;
-  margin-bottom: 0px;
+    font-size: 20px;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+    color: #05b5a2;
+    padding-bottom: 11px;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 .headerSettings .blockText p.text {
-  margin-top: 0px;
-  margin-bottom: 0px;
-  padding-bottom: 25px;
-  font-size: 13px;
-  color: #3c3e3f;
-  padding-right: 3%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-bottom: 25px;
+    font-size: 13px;
+    color: #3c3e3f;
+    padding-right: 3%;
 }
 .blockSettings .contentSettings{
-  display: table;
-  width: 100%;
+    display: table;
+    width: 100%;
 }
 .blockSettings .contentSettings .contentBlockSettings{
-  display: block;
-  margin-left: 100px;
-  margin-right: 95px;
-  margin-top: 20px;
+    display: block;
+    margin-left: 100px;
+    margin-right: 95px;
+    margin-top: 20px;
 }
 .contentBlockSettings .blockSetting {
-  width: 100%;
-  background: #ffffff;
-  border: 1px solid #e0e5e6;
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #e0e5e6;
 }
 .contentBlockSettings .blockSetting p {
-  margin-top: 28px;
-  padding-left: 30px;
-  padding-bottom: 45px;
-  margin-bottom: 0px;
-  font-size: 14px;
-  font-family: OpenSansSemibold;
+    margin-top: 28px;
+    padding-left: 30px;
+    padding-bottom: 45px;
+    margin-bottom: 0px;
+    font-size: 14px;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 }
 .contentBlockSettings .blockSetting:last-child p {
-  padding-bottom: 20px;
+    padding-bottom: 20px;
 }
 .contentBlockSettings .blockSetting p span{
-  float: right;
-  padding-right: 20px;
-  color: #05b5a2;
-  font-size: 14px;
-  cursor: pointer;
-  display: none;
+    float: right;
+    padding-right: 20px;
+    color: #05b5a2;
+    font-size: 14px;
+    cursor: pointer;
+    display: none;
 }
 .contentBlockSettings .blockSetting:hover p span{
-  /*display: block;*/
+    /*display: block;*/
 }
 .contentBlockSettings .blockSetting input[type="text"] {
-  outline: none;
-  padding-bottom: 33px;
-  margin-left: 40px;
-  margin-bottom: 1px;
-  width: 90%;
-  font-size: 18px;
-  font-family: OpenSansSemibold;
-  border: none;
-  -webkit-box-shadow: 0 0 0 1000px white inset;
+    outline: none;
+    padding-bottom: 33px;
+    margin-left: 40px;
+    margin-bottom: 1px;
+    width: 90%;
+    font-size: 18px;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+    border: none;
+    -webkit-box-shadow: 0 0 0 1000px white inset;
 }
 
 /*.blockSetting:active{    
@@ -1037,53 +1013,53 @@ h2.menuItem:nth-child(4).active::after {
     border: 2px solid #05b5a2;
 }*/
 .blockSetting .rowBlock {
-  width: 100%;
-  margin-bottom: 28px;
-  display: inline-block;
+    width: 100%;
+    margin-bottom: 28px;
+    display: inline-block;
 }
 .blockSetting .rowBlock .fourBlock {
-  width: 16%;
-  float: left;
-  padding: 10px 18px;
-  margin-left: 48px;
-  margin-right: 48px;
+    width: 16%;
+    float: left;
+    padding: 10px 18px;
+    margin-left: 48px;
+    margin-right: 48px;
 }
-.blockSetting .rowBlock .fourBlock:hover {    
-  /*background: rgb(242, 247, 247) !important;*/
+.blockSetting .rowBlock .fourBlock:hover {
+    /*background: rgb(242, 247, 247) !important;*/
 }
 
 .fourBlock:nth-child(1) .inputBlock{
-  display: table;
-  float: left;
+    display: table;
+    float: left;
 }
 .fourBlock:nth-child(2) .inputBlock{
-  display: table;
-  margin: auto;
+    display: table;
+    margin: auto;
 }
 .fourBlock:nth-child(3) .inputBlock{
-  display: table;
-  /*float: right;*/
-  margin: auto;
-  width: 50px;
+    display: table;
+    /*float: right;*/
+    margin: auto;
+    width: 50px;
 }
 .inputBlock input[type="radio"] {
-  display: none;
+    display: none;
 }
 .inputBlock input[type="radio"] + span {
-  background-position: top left;
+    background-position: top left;
 }
 .inputBlock span.radioButton {
-  background: url(img/radio.png) no-repeat;
+    background: url(img/radio.png) no-repeat;
     padding-left: 22px;		/* Ширина картинки + пара пикселей отступа от нее до текста */
-  line-height: 12px;
-  height: 12px;
-  display: block;
-  float: left;
-  margin-top: 6px;
+    line-height: 12px;
+    height: 12px;
+    display: block;
+    float: left;
+    margin-top: 6px;
 }
 .inputBlock .radioTitle{
     font-size: 18px;
-    font-family: "OpenSansSemibold";
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     color: rgb(174, 181, 183);
     display: table;
 }
@@ -1102,7 +1078,7 @@ h2.menuItem:nth-child(4).active::after {
 #saveButton {
     color: rgb(4, 151, 135);
     float: right;
-    font-family: OpenSans-Bold;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
     font-size: 14px;
     display: none;
     margin-top: 5px;
@@ -1119,7 +1095,7 @@ h2.menuItem:nth-child(4).active::after {
     border-color:rgb(4, 151, 135);
     background-color:rgb(5, 181, 162);
     float:right;
-    font-family:OpenSans-Bold;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
     font-size:14px;
     text-transform: uppercase;
     margin-bottom:70px;
@@ -1280,7 +1256,7 @@ h2.menuItem:nth-child(4).active::after {
         margin-right: 17px;
     }
     .headerPos {
-    width: 100%;
+        width: 100%;
     }
 }
 
@@ -1308,274 +1284,274 @@ h2.menuItem:nth-child(4).active::after {
 
 @media (max-width: 620px) {
     .main .header {
-      display: table;
-      width: 100%;
-      text-align: center;
+        display: table;
+        width: 100%;
+        text-align: center;
     }
     .main .header .logo {
-      margin: 0 auto;
-      width: 162px;
-      float: none;
-      margin-top: 20px;
+        margin: 0 auto;
+        width: 162px;
+        float: none;
+        margin-top: 20px;
     }
     .main .header .headerMenu {
-      float: none;
-      width: 100%;
-      margin: auto;
-      display: table;
-      height: auto;
+        float: none;
+        width: 100%;
+        margin: auto;
+        display: table;
+        height: auto;
     }
     .main .header .headerMenu ul {
-      padding-left: 10px;
-      display: table;
-      width: 315px;
-      margin: auto;
-      padding-top: 20px;
-      padding-bottom: 20px;
+        padding-left: 10px;
+        display: table;
+        width: 315px;
+        margin: auto;
+        padding-top: 20px;
+        padding-bottom: 20px;
     }
     .main .headerMenu ul li {
-      padding-top: 0px;
-      padding-bottom: 0px;
+        padding-top: 0px;
+        padding-bottom: 0px;
     }
     .main .headerMenu .logIn {
-      padding: 0px 0px 0px 12px !important;
+        padding: 0px 0px 0px 12px !important;
     }
     .main .secondaryMenu {
-      display: flex;
-      flex-wrap: wrap;
-      height: auto;
+        display: flex;
+        flex-wrap: wrap;
+        height: auto;
     }
     .secondaryMenu .statusTitle {
-      display: table;
+        display: table;
     }
     .secondaryMenu .title {
-      padding-left: 5px;
-      width: 250px;
+        padding-left: 5px;
+        width: 250px;
     }
     .secondaryMenu .status {
-      margin: 30px 5px 0px 0px;
+        margin: 30px 5px 0px 0px;
     }
     .settingMenuItems .menuItem {
-      text-align: center;
-      margin-right: 0px;
+        text-align: center;
+        margin-right: 0px;
     }
-    .settingMenuItems .menuItem:nth-child(3),    
+    .settingMenuItems .menuItem:nth-child(3),
     .settingMenuItems .menuItem:last-child {
-      width: 60px;
+        width: 60px;
     }
     h2.menuItem:nth-child(4).active::after {
-      margin-left: 35%;
+        margin-left: 35%;
     }
     .settingMenu div.settingMenuItems {
-      padding-left: 4px;
-      padding-right: 4px;
+        padding-left: 4px;
+        padding-right: 4px;
     }
     .reportBlock {
-      width: 99%;
+        width: 99%;
     }
     .report {
-      display: table;
-      width: 97%;
+        display: table;
+        width: 97%;
     }
     .titleReportAll {
-      width: 98%;
+        width: 98%;
     }
     .incidentDescription .text {
-      padding-left: 15px;
-      padding-right: 15px;
+        padding-left: 15px;
+        padding-right: 15px;
     }
     .files .item {
-      width: 90%;
-      padding-bottom: 25px;
+        width: 90%;
+        padding-bottom: 25px;
     }
     .files .item:last-child {
-      padding-bottom: 45px;
+        padding-bottom: 45px;
     }
     .files {
-      display: table;
-      width: 99%;
+        display: table;
+        width: 99%;
     }
     .main .blockComments {
-      padding-left: 15px;
-      padding-right: 15px;
+        padding-left: 15px;
+        padding-right: 15px;
     }
     .main .blockMessagesTable {
-      margin-left: 5%;
-      margin-right: 5%;
+        margin-left: 5%;
+        margin-right: 5%;
     }
     .blockMessages .addComment {
-      width: 89.8%;
-      margin-left: 5%;
+        width: 89.8%;
+        margin-left: 5%;
     }
     .blockMessages .content .blockPersonal {
-      padding-left: 0px;
+        padding-left: 0px;
     }
     .blockMessages .messageText textarea {
-      min-width: 76%;
-      max-width: 345px;
+        min-width: 76%;
+        max-width: 345px;
     }
     .blockSettings .contentSettings .contentBlockSettings,
     .blockActivity .contentActivity .contentBlockActivity {
-      margin-left: 20px;
-      margin-right: 20px;
-      padding-left: 10px;
+        margin-left: 20px;
+        margin-right: 20px;
+        padding-left: 10px;
     }
     .contentBlockActivity .blockInfo {
-      padding-left: 35px;
+        padding-left: 35px;
     }
     .contentBlockActivity .blockInfo .topText {
-      display: table;      
-      width: 100%;
+        display: table;
+        width: 100%;
     }
     .headerActivity .blockCaseMediators {
-      padding-left: 35px;
-      padding-right: 15px;
+        padding-left: 35px;
+        padding-right: 15px;
     }
     .headerActivity .displayMediators .blockMediator {
-      padding-left: 5%;
-      width: 90%;
+        padding-left: 5%;
+        width: 90%;
     }
     .main .blockSettings .headerSettings {
-      display: table;
+        display: table;
     }
     .blockSettings .titleHeaderSettings {
-      margin-left: 15px;
-      width: 93%;
-      padding-bottom: 13px;
-      float: left;
+        margin-left: 15px;
+        width: 93%;
+        padding-bottom: 13px;
+        float: left;
     }
     .headerSettings .blockText {
-      float: left;
-      margin-left: 15px;
-      display: table;
-      width: 94%;
+        float: left;
+        margin-left: 15px;
+        display: table;
+        width: 94%;
     }
     .headerSettings .blockText p.text {
-      padding-right: 5%;
+        padding-right: 5%;
     }
     .contentBlockSettings .blockSetting input[type="text"] {
-      width: 87%;
+        width: 87%;
     }
     .blockSetting .rowBlock {
-      display: table;
+        display: table;
     }
     .blockSetting .rowBlock .fourBlock {
-      width: 200px;
-      margin: auto;
-      float: none;
-      display: table;
+        width: 200px;
+        margin: auto;
+        float: none;
+        display: table;
     }
     .fourBlock:nth-child(2) .inputBlock,
     .fourBlock:nth-child(3) .inputBlock {
-      float: left;
+        float: left;
     }
 }
 
 
 
-@media (max-width: 510px) {    
+@media (max-width: 510px) {
     .blockMessages .messageText textarea {
-      min-width: 70%;
-      max-width: 345px;
+        min-width: 70%;
+        max-width: 345px;
     }
-    
+
     .headerPos .positionN {
-      width: 32.5%;
-      display: table;
-      text-align: center;
-      float: left;
-      height: 21px;
+        width: 32.5%;
+        display: table;
+        text-align: center;
+        float: left;
+        height: 21px;
     }
     .headerPos .positionN + .polos {
-      margin-bottom: 0px;
-      float: left;
-      margin-top: 18px;
+        margin-bottom: 0px;
+        float: left;
+        margin-top: 18px;
     }
     .headerPos {
-      display: table;
-      padding-top: 10px;
+        display: table;
+        padding-top: 10px;
     }
 }
 @media (max-width: 400px) {
-    
+
     .main .headerMenu .logIn {
-      padding: 0px 0px 0px 0px !important;
-      border: none;
+        padding: 0px 0px 0px 0px !important;
+        border: none;
     }
     .main .headerMenu ul li {
-      padding: 0px;
-      width: 50%;
-      float: left;
-      height: 37px;
+        padding: 0px;
+        width: 50%;
+        float: left;
+        height: 37px;
     }
     .main .header .headerMenu ul {
-      width: 95%;
+        width: 95%;
     }
     .secondaryMenu .title {
-      padding-left: 0px;
-      width: 100%;
-      text-align: center;
+        padding-left: 0px;
+        width: 100%;
+        text-align: center;
     }
     .secondaryMenu .status {
-      margin: 10px 0px 20px 0px;
-      width: 100%;
-      text-align: center;
+        margin: 10px 0px 20px 0px;
+        width: 100%;
+        text-align: center;
     }
-    .settingMenuItems .menuItem,    
-    .settingMenuItems .menuItem:nth-child(3),    
+    .settingMenuItems .menuItem,
+    .settingMenuItems .menuItem:nth-child(3),
     .settingMenuItems .menuItem:last-child {
-      width: 100%;   
-      float: none;
-      display: block;
-      text-align: center;
-      padding-bottom: 8px;
+        width: 100%;
+        float: none;
+        display: block;
+        text-align: center;
+        padding-bottom: 8px;
     }
     .menuItem.active::after{
-      left: 20%;
-      bottom: 4px;
-      border: 6px solid transparent;
-      border-left: 10px solid rgb(229, 235, 235);
-      margin-left: 0px;
+        left: 20%;
+        bottom: 4px;
+        border: 6px solid transparent;
+        border-left: 10px solid rgb(229, 235, 235);
+        margin-left: 0px;
     }
     .mainTitle{
         display: block;
         text-align: left;
         padding-left: 10%;
-        width: 90%;        
+        width: 90%;
         font-size: 17px;
     }
     .settingMenuItems div{
         display: none;
     }
     h2.menuItem:nth-child(4).active::after {
-      margin-left: 0px;
+        margin-left: 0px;
     }
     .reportBlock .reportText {
-      width: 90%;
-      padding-top: 0px;
-      padding-bottom: 5px;
+        width: 90%;
+        padding-top: 0px;
+        padding-bottom: 5px;
     }
     .reportBlock .titleReport {
-      width: 95%;
-      padding-bottom: 5px;
+        width: 95%;
+        padding-bottom: 5px;
     }
     .main .blockComments .contentComment {
-      width: 83%;
+        width: 83%;
     }
     .blockMessages .messageText textarea {
-      min-width: 61%;
-      max-width: 200px;
+        min-width: 61%;
+        max-width: 200px;
     }
     .contentBlockSettings .blockSetting p {
-      margin-top: 18px;
-      padding-left: 15px;
-      padding-bottom: 35px;
+        margin-top: 18px;
+        padding-left: 15px;
+        padding-bottom: 35px;
     }
     .contentBlockSettings .blockSetting input[type="text"] {
-      margin-left: 15px;
-      width: 90%;
+        margin-left: 15px;
+        width: 90%;
     }
     .blockSetting .rowBlock .fourBlock {
-      width: 150px;
+        width: 150px;
     }
 }

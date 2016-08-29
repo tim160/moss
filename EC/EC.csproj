@@ -210,9 +210,6 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\cai.css" />
     <Content Include="Content\caseTasks.css" />
-    <Content Include="Content\caseTasks.min.css">
-      <DependentUpon>caseTasks.css</DependentUpon>
-    </Content>
     <Content Include="Content\daterangepicker.css" />
     <Content Include="Content\daterangepickerAnalit.css" />
     <Content Include="Content\emails\CaseReopened.html" />
@@ -359,51 +356,18 @@
     <Content Include="Content\img\website-report_cc.jpg" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\login.css" />
-    <Content Include="Content\login.min.css">
-      <DependentUpon>login.css</DependentUpon>
-    </Content>
     <Content Include="Content\main.css" />
-    <Content Include="Content\main.min.css">
-      <DependentUpon>main.css</DependentUpon>
-    </Content>
     <Content Include="Content\MainStyle.css" />
-    <Content Include="Content\MainStyle.min.css">
-      <DependentUpon>MainStyle.css</DependentUpon>
-    </Content>
     <Content Include="Content\reportCss.css" />
-    <Content Include="Content\reportCss.min.css">
-      <DependentUpon>reportCss.css</DependentUpon>
-    </Content>
     <Content Include="Content\reportDashboard.css" />
-    <Content Include="Content\reportDashboard.min.css">
-      <DependentUpon>reportDashboard.css</DependentUpon>
-    </Content>
     <Content Include="Content\Site.css" />
-    <Content Include="Content\Site.min.css">
-      <DependentUpon>Site.css</DependentUpon>
-    </Content>
-    <Content Include="Content\style.min.css">
-      <DependentUpon>style.css</DependentUpon>
-    </Content>
     <Content Include="Content\styleAnalitics.css" />
     <Content Include="Content\styleAnalitics.min.css" />
     <Content Include="Content\styleLogin.css" />
     <Content Include="Content\style.css" />
-    <Content Include="Content\styleLogin.min.css">
-      <DependentUpon>styleLogin.css</DependentUpon>
-    </Content>
     <Content Include="Content\stylePageMessages.css" />
-    <Content Include="Content\stylePageMessages.min.css">
-      <DependentUpon>stylePageMessages.css</DependentUpon>
-    </Content>
     <Content Include="Content\styleReportDashboard.css" />
-    <Content Include="Content\styleReportDashboard.min.css">
-      <DependentUpon>styleReportDashboard.css</DependentUpon>
-    </Content>
     <Content Include="Content\styleTasks.css" />
-    <Content Include="Content\styleTasks.min.css">
-      <DependentUpon>styleTasks.css</DependentUpon>
-    </Content>
     <Content Include="Content\the-modal.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Models\Database\ECEntities.Context.tt">
@@ -424,28 +388,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="App_Code\Helpers.cshtml" />
     <Content Include="fonts\OpenSansSemibold.ttf" />
-    <Content Include="Content\fonts\fyKNU6PN.ttf" />
     <Content Include="Content\fonts\lato-heavy.ttf" />
     <Content Include="Content\fonts\Lato-Regular.ttf" />
-    <Content Include="Content\fonts\OpenSans-Light.ttf" />
-    <Content Include="Content\eVX6sX1i.ttf" />
-    <Content Include="Content\fonts\eVX6sX1i.ttf" />
-    <Content Include="Content\fonts\OpenSans-Bold.ttf" />
-    <Content Include="Content\fonts\OpenSans-BoldItalic.ttf" />
-    <Content Include="Content\fonts\OpenSans-ExtraBold.ttf" />
-    <Content Include="Content\fonts\OpenSans-ExtraBoldItalic.ttf" />
-    <Content Include="Content\fonts\OpenSans-Italic.ttf" />
-    <Content Include="Content\fonts\OpenSans-LightItalic.ttf" />
-    <Content Include="Content\fonts\OpenSans-Regular.ttf" />
-    <Content Include="Content\fonts\OpenSans-Semibold.ttf" />
-    <Content Include="Content\fonts\OpenSans-SemiboldItalic.ttf" />
-    <Content Include="Content\fonts\OpenSansSemibold.ttf" />
     <Content Include="Content\fonts\Lato-Bold.ttf" />
     <Content Include="Content\fonts\Lato-Semibold.ttf" />
-    <Content Include="Content\fonts\OpenSans-Regular-webfont.eot" />
-    <Content Include="Content\fonts\OpenSans-Semibold.eot" />
-    <Content Include="Content\fonts\OpenSansBold.eot" />
-    <Content Include="Content\fonts\OpenSansLight.eot" />
     <EntityDeploy Include="Models\Database\ECEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ECEntities.Designer.cs</LastGenOutput>
