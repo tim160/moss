@@ -292,7 +292,6 @@ html, body {
   height: 100%;
   color: green;
 }
-
 .wrapper {
     display: flex;
     align-items: center;
@@ -304,7 +303,7 @@ html, body {
 .table {
   width: 100%;
 }
-table td {
+.table table td {
   height: 1px;
   text-align: center;
   padding: 10px 0 18px 0;
@@ -470,10 +469,10 @@ table:first-child tr:first-child td {
     color: #3c3e3f;
     font-size: 16px;
     font-family: OpenSans-Light;
+    width:200px;
+    position: relative;
 }
-
-/*drop dwon menu*/
-
+/**drop down menu*/
 
 .dropDownMenu {
     width: 100%;
@@ -488,6 +487,7 @@ table:first-child tr:first-child td {
 .parentClass {
     position: relative;
 }
+
 .menuItemOpen {
     color: #3c3e3f;
     background-color: #ffffff;
@@ -527,6 +527,7 @@ table:first-child tr:first-child td {
     position: absolute;
     left: 0;
     top: 49px;
+    z-index:1000;
 }
 .liItem {
      width: 100%;
@@ -567,13 +568,15 @@ table:first-child tr:first-child td {
 .daterangepicker_input, .ranges{
     display: none;
 }
-/*end drop dwon menu*/
+/*end drop down menu*/
 
 .borderAnalit {
     padding-left: 40px;
     padding-right: 120px;
     background-color: #e5ebeb;
-
+    font-size: 14px;
+    font-family: OpenSans-Light;
+    color: #727c7e;
 }
 .dropDownMenuPadding {
     padding-left: 40px;
@@ -581,7 +584,6 @@ table:first-child tr:first-child td {
     border-bottom: 1px solid #dce2e3;
 }
 /*8/12/2016*/
-
 .filterUp {
     font-family: 'Open Sans';
     font-size: 16px;
@@ -589,6 +591,8 @@ table:first-child tr:first-child td {
     color: #3c3e3f;
     font-weight: 500;
     padding-right: 22px;
+    text-align: left;
+    vertical-align: top;
 }
 .sales {
     background-color: #dce2e3;
@@ -596,15 +600,25 @@ table:first-child tr:first-child td {
     padding:8px;
     border-radius:14px;
     cursor: pointer;
+    float:left;
 }
 .sales img, .clearAll img {
     padding-left: 10px;
 }
-.clearAll {
-    display: none;
+#clearAll, .clearAll {
     cursor: pointer;
     text-decoration: underline;
 }
 .filter table th{
     padding-right: 34px;
+}
+/*22 08 16*/
+.filter {
+    width: 100%;
+    min-height: 85px;
+}
+.inTheBall {
+    font-size: 14px;
+    font-family: OpenSans-Light;
+    color: #727c7e;
 }

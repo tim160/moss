@@ -37,6 +37,9 @@
                 });
             }
         });
+        /*try find calendar*/
+        types['dateStart'] = $("#dateStart").attr("value");
+        types['dateEnd'] = $("#dateEnd").attr("value");
         console.log(types);
         
         sendAjax(userId.val(), companyId.val(), types);
@@ -618,10 +621,10 @@
         dayTdAttrs: [],
         applyBtnClass: '',
         singleMonth: 'auto',
-        hoveringTooltip: function(days, startTime, hoveringTime)
-        {
-            return days > 1 ? days + ' ' + lang('days') : '';
-        },
+        //hoveringTooltip: function(days, startTime, hoveringTime)
+        //{
+        //    return days > 1 ? days + ' ' + /*lang('days')*/123 : '';
+        //},
         showTopbar: true,
         swapTime: false,
         selectForward: false,
@@ -640,6 +643,26 @@
         $("#daterange").hide();
         $(".prev").html("");
         $(".next").html("");
+        var dateStart = "";
+        var dateEnd = "";
+        $(".month1 div").on('click', function (event) {
+            var temp = $(event.currentTarget).attr('time');
+            if (dateStart == "" ) {
+                dateStart = temp;
+            } else if(dateStart != "" && dateStart < temp) {
+                dateEnd = dateStart;
+                dateStart = temp;
+            } else if (dateStart != "" && dateStart > temp) {
+                dateEnd = temp;
+            }
+            if (dateStart != "" && dateEnd != "") {
+                $(".apply-btn").click();
+                $("#dateStart").attr("value", dateStart);
+                $("#dateEnd").attr("value", dateEnd);
+                updateGraphics();
+            }
+        });
+        
     });
     $(".clearAll").on('click', function (event) {
         $(event.currentTarget).hide();
