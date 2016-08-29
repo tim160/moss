@@ -185,7 +185,15 @@ namespace EC.Controllers
             _company.step6_delay = 7;
             _company.step6_postpone = 2;
 
-            _company.subdomain = "";
+            string url = Request.Url.AbsoluteUri.ToLower();
+            string _url = "registration";
+            if(url.Contains("cai."))
+                _url = "cai";
+            if (url.Contains("demo."))
+                _url = "demo";
+            if (url.Contains("stark."))
+                _url = "stark";
+            _company.subdomain = _url;
            ////// _company.reseller = client_id;
 
             try

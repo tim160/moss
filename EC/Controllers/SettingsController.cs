@@ -605,6 +605,14 @@ namespace EC.Controllers
             ViewBag.um = um;
             ViewBag.page_subtitle = GlobalRes.Settings;
             ViewBag.user_id = user_id;
+
+            #region EC-CC Viewbag
+            ViewBag.is_cc = is_cc;
+            string cc_ext = "";
+            if (is_cc) cc_ext = "_cc";
+            ViewBag.cc_extension = cc_ext;
+            #endregion
+
             return View("Password", um._user);
         }
     }

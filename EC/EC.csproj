@@ -362,7 +362,6 @@
     <Content Include="Content\reportDashboard.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\styleAnalitics.css" />
-    <Content Include="Content\styleAnalitics.min.css" />
     <Content Include="Content\styleLogin.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\stylePageMessages.css" />
