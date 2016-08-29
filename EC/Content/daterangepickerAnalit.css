@@ -136,7 +136,7 @@
 .date-picker-wrapper table .caption .next,
 .date-picker-wrapper table .caption .prev
 {
-	padding:0 5px;
+	padding:0 0px;
 	cursor:pointer;
 }
 .date-picker-wrapper table .caption .next:hover,

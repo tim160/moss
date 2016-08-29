@@ -19,7 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
-    <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
     <NuGetPackageImportStamp>8acab050</NuGetPackageImportStamp>
     <UseGlobalApplicationHostFile />
   </PropertyGroup>
@@ -362,7 +362,6 @@
     <Content Include="Content\reportDashboard.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\styleAnalitics.css" />
-    <Content Include="Content\styleAnalitics.min.css" />
     <Content Include="Content\styleLogin.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\stylePageMessages.css" />

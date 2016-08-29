@@ -34,6 +34,7 @@ namespace EC.Models.ECModel
             get { return string.IsNullOrEmpty(_reportLocationIDStrings) ? "" : _reportLocationIDStrings; }
             set { _reportLocationIDStrings = value; }
         }
-
+        public long dateStart { get; set; }
+        public long dateEnd { get; set; }
     }
 }
