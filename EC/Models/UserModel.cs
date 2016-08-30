@@ -147,7 +147,6 @@ namespace EC.Models
             return user;
         }
         #endregion
-        ReportModel rm;
 
         public List<user_role> GetAllRoles()
         {
@@ -209,7 +208,6 @@ namespace EC.Models
                 ReportModel temp_rm = new ReportModel();
                 if (flag == 1)
                 {
-                    int temp_status = 0;
                     // active only
                     foreach (report _temp in all_reports)
                     {

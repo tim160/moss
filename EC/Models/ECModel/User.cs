@@ -150,7 +150,7 @@ namespace EC.Models.ECModel
             id = 0;
             
             Database.user _user = db.user.First(a => a.id == user_id);
-            if (_user.id != null && _user.id != 0)
+            if (_user.id != -1 && _user.id != 0)
             {
                 id = _user.id;
                 company_id = _user.company_id;

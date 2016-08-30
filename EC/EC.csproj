@@ -19,7 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
-    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
     <NuGetPackageImportStamp>8acab050</NuGetPackageImportStamp>
     <UseGlobalApplicationHostFile />
   </PropertyGroup>
@@ -207,7 +207,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\fonts\bootstrap.min.css" />
     <Content Include="Content\cai.css" />
     <Content Include="Content\caseTasks.css" />
     <Content Include="Content\daterangepicker.css" />
@@ -234,6 +234,7 @@
     <Content Include="Content\emails\PartnerNewCompanyStatusChange.html" />
     <Content Include="Content\emails\ReporterNewCase.html" />
     <Content Include="Content\EmployeeAwareness.css" />
+    <Content Include="Content\fonts.css" />
     <Content Include="Content\Icons\activityIcon.png" />
     <Content Include="Content\Icons\anonimousReporterIcon.png" />
     <Content Include="Content\Icons\arrowMessage.png" />
@@ -414,18 +415,12 @@
     <Content Include="patches\1_7.sql" />
     <Content Include="PrivacyStatement.html" />
     <Content Include="Scripts\daterangepicker.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Scripts\lib\jquery-1.10.2.intellisense.js" />
     <Content Include="patches\1_4.sql" />
     <Content Include="patches\1_3.sql" />
     <Content Include="patches\1_2.sql" />
     <Content Include="patches\1_1.sql" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Common\helper.js" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery.daterangepicker.min.js" />
     <Content Include="Scripts\jquery.the-modal.js" />
     <Content Include="Scripts\lib\bootstrap.js" />
@@ -1040,9 +1035,6 @@
     <StartupObject />
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
-    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
-  </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />

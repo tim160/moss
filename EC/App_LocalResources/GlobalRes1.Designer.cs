@@ -1672,7 +1672,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invitation to Join Mediation Team.
+        ///   Looks up a localized string similar to Invitation to Join Case Administration Team.
         /// </summary>
         public static string Email_Title_MediatorInvited {
             get {
@@ -1753,7 +1753,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Welcome to [CompanyName] mediation team.
+        ///   Looks up a localized string similar to Welcome to [CompanyName] case administration team.
         /// </summary>
         public static string Email_Title_NewUser {
             get {
@@ -2761,7 +2761,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mediation team.
+        ///   Looks up a localized string similar to Case Administration team.
         /// </summary>
         public static string Mediationteam {
             get {
@@ -2869,7 +2869,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This message board is open and can be viewed by all members of the mediation team.
+        ///   Looks up a localized string similar to This message board is open and can be viewed by all members of the case administration team.
         /// </summary>
         public static string messageboardopen {
             get {

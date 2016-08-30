@@ -12,6 +12,8 @@ namespace EC
         // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkID=303951
         public static void RegisterBundles(BundleCollection bundles)
         {
+            bundles.UseCdn = true;
+            BundleTable.EnableOptimizations = true;
 //            bundles.Add(new ScriptBundle("~/bundles/WebFormsJs").Include(
 //                            "~/Scripts/WebForms/WebForms.js",
 //                            "~/Scripts/WebForms/WebUIValidation.js",
@@ -46,8 +48,8 @@ namespace EC
 
             bundles.Add(new StyleBundle("~/bundles/Styles").Include(
                 "~/Content/*.css"));
-   //         bundles.Add(new ScriptBundle("~/Content/Scripts").Include(
-   //             "~/Content/*.js"));
+            bundles.Add(new Bundle("~/bundles/ScriptsJq").Include(
+                "~/Scripts/lib/jquery-*"));
         //    bundles.Add(new StyleBundle("~/bundles/Fonts").Include(
          //       "~/Content/fonts/*.ttf").Include("~/Content/fonts/OpenSans/*.ttf"));
 
@@ -59,7 +61,7 @@ namespace EC
                     DebugPath = "~/Scripts/respond.js",
                 });
 
-            BundleTable.EnableOptimizations = true;
+            
         }
     }
 }

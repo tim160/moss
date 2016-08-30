@@ -20,9 +20,9 @@
     //Layout = "~/Views/Shared/_MainHTML.cshtml";
     Layout = "~/Views/Shared/HeaderFooterFrontPages.cshtml";
     ViewBag.background = "background-image: url(/Content/img/website-report" + class_ext + ".jpg);";
-    ViewBag.cssStyle = "/Content/MainStyle.css";
- //  @Styles.Render("~/bundles/Styles")
- //   @Styles.Render("~/bundles/Fonts")
+  //  ViewBag.cssStyle = "/Content/MainStyle.css";
+   @Styles.Render("~/bundles/Styles")
+    @Styles.Render("~/bundles/Fonts")
 
 }
 

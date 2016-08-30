@@ -782,7 +782,7 @@
     <value>Message</value>
   </data>
   <data name="messageboardopen" xml:space="preserve">
-    <value>This message board is open and can be viewed by all members of the mediation team</value>
+    <value>This message board is open and can be viewed by all members of the case administration team</value>
   </data>
   <data name="MessageBoardReporter" xml:space="preserve">
     <value>This message board is only for messages to the reporter</value>
@@ -1349,7 +1349,7 @@
     <value>Employee Confidential Case Assignment</value>
   </data>
   <data name="Email_Title_MediatorInvited" xml:space="preserve">
-    <value>Invitation to Join Mediation Team</value>
+    <value>Invitation to Join Case Administration Team</value>
   </data>
   <data name="Email_Title_MediatorRoleChanged" xml:space="preserve">
     <value>Mediator role change</value>
@@ -1376,7 +1376,7 @@
     <value>Employee Confidential Notification – New Task</value>
   </data>
   <data name="Email_Title_NewUser" xml:space="preserve">
-    <value>Welcome to [CompanyName] mediation team</value>
+    <value>Welcome to [CompanyName] case administration team</value>
   </data>
   <data name="Email_Title_NextStep" xml:space="preserve">
     <value>Employee Confidential notification - Case Update</value>
@@ -1541,7 +1541,7 @@
     <value>IF THIS INCIDENT IS LIFE THREATENING, CONTACT YOUR LOCAL POLICE.</value>
   </data>
   <data name="Mediationteam" xml:space="preserve">
-    <value>Mediation team</value>
+    <value>Case Administration team</value>
   </data>
   <data name="ongoingIncident" xml:space="preserve">
     <value>Is the incident ongoing?</value>
