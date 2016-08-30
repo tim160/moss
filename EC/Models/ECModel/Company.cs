@@ -186,7 +186,7 @@ namespace EC.Models.ECModel
         {
             id = 0;
             Database.company _company = db.company.First(a => a.id == company_id);
-            if (_company.id != null && _company.id != 0)
+            if (_company.id != -1 && _company.id != 0)
             {
                 id = _company.id;
                 address_id = _company.address_id;
