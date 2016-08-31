@@ -197,13 +197,19 @@ namespace EC.Controllers
         {
             if (userId > 0 && companyId > 0)
             {
-                DateTime? dt1 = new DateTime(2016, 8,1);
+                DateTime dt1 = new DateTime(2014, 8,1);
                 if (types.dateStart != 0)
                     dt1 = new DateTime(1970, 1, 1).AddTicks(types.dateStart * 10000);
 
-                DateTime? dt2  = DateTime.Today.AddDays(1);
+                DateTime dt2  = DateTime.Today.AddDays(1);
                 if (types.dateEnd != 0)
                     dt2 = new DateTime(1970, 1, 1).AddTicks(types.dateEnd * 10000);
+                if (dt2 < dt1)
+                {
+                    DateTime dt3 = dt2;
+                    dt2 = dt1;
+                    dt1 = dt3;
+                }
 
                 GlobalFunctions func = new GlobalFunctions();
                 JsonResult json = new JsonResult();

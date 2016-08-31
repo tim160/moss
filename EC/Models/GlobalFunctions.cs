@@ -2635,9 +2635,9 @@ public class GlobalFunctions
             + ", \"RelationTable\":" + RelationshipToCompanyByDateAdvancedJson(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate)
             + ", \"SecondaryTypeTable\":" + SecondaryTypesByDateAdvancedJson(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate)
             + ", \"AverageStageDaysTable\":" + AverageStageDaysAdvancedJson(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate)
-        ///       + ", \"TodaySnapshotTable\":" + _today_spanshot
-       ///        + ", \"MonthEndSnapshotTable\":" + _month_end_spanshot
-         ///         + ", \"AnalyticsTimeline\":" + AnalyticsTimelineAdvancedJson(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate)
+            + ", \"TodaySnapshotTable\":" + ListToJsonWithJavaScriptSerializer(new List<int>(_today_spanshot))
+            + ", \"MonthEndSnapshotTable\":" + ListToJsonWithJavaScriptSerializer(new List<int>(_month_end_spanshot))
+            + ", \"AnalyticsTimeline\":" + AnalyticsTimelineAdvancedJson(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate)
             + "}";
 
        return _all_json;
@@ -2717,6 +2717,33 @@ public class GlobalFunctions
     {
         DataTable dt = AnalyticsTimelineAdvanced(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
         return DataTableToJSONWithJavaScriptSerializer(dt);
+    }
+    
+    
+    public string ListToJsonWithJavaScriptSerializer(List<int> _list)
+    {
+      //  for(int i )
+        
+      //  int[]
+
+
+        JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
+
+        var json = jsSerializer.Serialize(_list);
+        return json;
+
+      /*  List<Dictionary<string, object>> parentRow = new List<Dictionary<string, object>>();
+        Dictionary<string, object> childRow;
+        for (int i=0; i< _list.Count(); i++)
+        {
+            childRow = new Dictionary<string, object>();
+            foreach (DataColumn col in table.Columns)
+            {
+                childRow.Add(col.ColumnName, row[col]);
+            }
+            parentRow.Add(childRow);
+        }
+        return jsSerializer.Serialize(parentRow);*/
     }
 
     public string DataTableToJSONWithJavaScriptSerializer(DataTable table)
