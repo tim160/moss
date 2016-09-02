@@ -3013,3 +3013,24 @@ textarea {
     top: 0;
     left: 0;
 }
+.someDropdowns {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+a:active .someDropdowns .show {
+    background-color:#ebf1f1;
+    color: black;
+}
+.someDropdowns .hide {
+    display: none;
+}
+a:active .someDropdowns .hide{
+    display: block;
+    background-color: #ffffff;
+    border-left: 1px solid #ebf1f1;
+    border-right: 1px solid #ebf1f1;
+}
