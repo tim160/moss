@@ -34,7 +34,7 @@
                     <p class="second fontSize14">
                         <span class="right upperCase">
                             <span class="lightgreyText">@GlobalRes.Recommended:</span>
-                            <span class="darkText">30 days</span>
+                            <span class="darkText">23 days</span>
                         </span>
                     </p>
                 </div>
@@ -45,10 +45,12 @@
                     <span class="text">@GlobalRes.PreReview</span>
                     <div class="someDropdowns">
                         <div class="show">
-                            3 <img src="/Content/img/arrowSelect.png">
+                            3 <img src="/Content/img/arrowSelect.png">    
                         </div>
-                        <div class="hide">4</div>
-                        <div class="hide">5</div>
+                        @for (int i = 1; i <= 3; i++)
+                        {
+                            <div class="hide">i</div>
+                        }
                     </div>
                     <span class="bottomText">@GlobalRes.Recommended: <span class="moreBlack">2 days</span></span>
                 </div>
@@ -57,10 +59,12 @@
                     <span class="text">@GlobalRes.Review</span>
                     <div class="someDropdowns">
                         <div class="show">
-                            3 <img src="/Content/img/arrowSelect.png">
+                            3 <img src="/Content/img/arrowSelect.png"> @*vmesto 3 - znachenie levogo slaidera pri zagruzke, 1-ogo sverhu*@
                         </div>
-                        <div class="hide">4</div>
-                        <div class="hide">5</div>
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            <div class="hide">i</div>
+                        }
                     </div>
                     <span class="bottomText">@GlobalRes.Recommended: <span class="moreBlack">2 days</span></span>
                 </div>
@@ -69,24 +73,30 @@
                     <span class="text">@GlobalRes.Investigation</span>
                     <div class="someDropdowns">
                         <div class="show">
-                            3 <img src="/Content/img/arrowSelect.png">
+                            3 <img src="/Content/img/arrowSelect.png"> @*vmesto 3 - znachenie levogo slaidera, 2-ogo sverhu*@
                         </div>
-                        <div class="hide">4</div>
-                        <div class="hide">5</div>
+                        @for (int i = 1; i <= 60; i++)
+                        {
+                            <div class="hide">i</div>
+                        }
+
+
                     </div>
-                    <span class="bottomText">@GlobalRes.Recommended: <span class="moreBlack">2 days</span></span>
+                    <span class="bottomText">@GlobalRes.Recommended: <span class="moreBlack">14 days</span></span>
                 </div>
                 <div class="special">
                     <div class="greenBlock"></div>
                     <span class="text">@GlobalRes.Resolution</span>
                     <div class="someDropdowns">
                         <div class="show">
-                            3 <img src="/Content/img/arrowSelect.png">
+                            3 <img src="/Content/img/arrowSelect.png"> @*vmesto 3 - znachenie levogo slaidera, 3-ogo sverhu*@
                         </div>
-                        <div class="hide">4</div>
-                        <div class="hide">5</div>
+                        @for (int i = 1; i <= 21; i++)
+                        {
+                            <div class="hide">i</div>
+                        }
                     </div>
-                    <span class="bottomText">@GlobalRes.Recommended: <span class="moreBlack">2 days</span></span>
+                    <span class="bottomText">@GlobalRes.Recommended: <span class="moreBlack">5 days</span></span>
                 </div>
             </div>
         </div>
