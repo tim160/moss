@@ -555,6 +555,7 @@
     <Content Include="Views\Cases\Closed.cshtml" />
     <Content Include="Views\Case\GetAjaxActivity.cshtml" />
     <Content Include="Views\Index\Start.cshtml" />
+    <Content Include="Views\Settings\workFlow.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

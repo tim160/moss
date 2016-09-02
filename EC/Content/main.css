@@ -175,7 +175,7 @@ ul {
     padding-right: 2%;
     padding-bottom: 20px;
 }
-.headerContent .bottomContent span {
+.headerContent .bottomContent span, .OpenSansSemibold {
     font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 }
 #infoReport {
@@ -2507,7 +2507,8 @@ li.infoCasesBlock:first-child:hover li .status {
     background-color: #EEF4F4;
 }
 
-.mainCase .flex-block .flexBlockShow .text {
+.mainCase .flex-block .flexBlockShow .text,
+.caseFlowBottom .text {
     position: absolute;
     top: 11px;
     left: 8px;
@@ -2516,7 +2517,19 @@ li.infoCasesBlock:first-child:hover li .status {
     text-transform: uppercase;
     font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 }
+.caseFlowBottom .bottomText {
+    position: absolute;
+    left: 44px;
+    bottom: 10px;
+    font-size: 10px;
+    color: #aeb5b7;
+    text-transform: uppercase;
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+}
+.caseFlowBottom .moreBlack {
+    color: #727c7e;
 
+}
 .mainCase .flex1, .flex3 {
     border-bottom: 1px solid #e8eaeb;
     border-top: 1px solid #e8eaeb;
@@ -2885,3 +2898,91 @@ textarea {
     padding-bottom: 27px;
 }
 /*===================== END cases/Index ================*/
+/*Settings flow*/
+    .caseWorkflowPosition {
+        padding-top: 40px;
+    }
+    .caseFlow {
+        height: 350px;
+        width: 680px;
+        background-color: white;
+        margin: 0 auto;
+    }
+    .caseFlowTop {
+        height:160px;
+        width: 100%;
+        border-bottom: 2px solid #dce2e3;
+    }
+    .caseFlowBottom a{
+        height: 190px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 25%;
+        outline: none;
+        text-decoration: none;
+        position: relative;
+        color: #000 !important;
+        font-size: 22px;
+    }
+    .caseFlowBottom {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+.caseFlowTopContent {
+    padding-left: 23px;
+    padding-right: 20px;
+}
+.caseFlowTopContent .redText {
+    color: #ee5a36;
+}
+.caseFlowTopContent .greyText {
+    color: #848a8b;
+}
+.caseFlowTopContent .lightgreyText {
+    color:#aeb5b7;
+}
+.caseFlowTopContent .darkText {
+    color:#3c3e3f;
+}
+
+.OpenSansBold {
+    font-family: 'OpenSans-Bold';
+}
+.caseFlowTopContent .first {
+    padding-top: 50px;
+}
+.caseFlowTopContent .second {
+    padding-top: 20px;
+}
+.caseFlowTopContent .left {
+    float: left;
+}
+.caseFlowTopContent .right {
+    float: right;
+}
+.OpenSansRegular {
+    font-family: 'OpenSans-Regular';
+}
+.upperCase {
+    text-transform: uppercase;
+}
+.fontSize16 {
+    font-size: 16px;
+}
+.fontSize20 {
+    font-size: 20px;
+}
+.fontSize14 {
+    font-size: 14px;
+}
+.caseFlowBottom .borderLeft {
+    border-left: 1px solid #dce2e3;
+}
+.caseFlowBottom .borderRight {
+    border-right: 1px solid #dce2e3;
+}

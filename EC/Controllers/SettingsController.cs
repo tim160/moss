@@ -615,5 +615,28 @@ namespace EC.Controllers
 
             return View("Password", um._user);
         }
+        public ActionResult workFlow()
+        {
+            user user = (user)Session[Constants.CurrentUserMarcker];
+            if (user == null || user.id == 0)
+                return RedirectToAction("Index", "Account");
+
+            int user_id = user.id;
+
+            #region EC-CC Viewbag
+            ViewBag.is_cc = is_cc;
+            string cc_ext = "";
+            if (is_cc) cc_ext = "_cc";
+            ViewBag.cc_extension = cc_ext;
+            #endregion
+
+
+
+            UserModel um = new UserModel(user_id);
+            ViewBag.um = um;
+            ViewBag.page_subtitle = GlobalRes.Settings;
+            ViewBag.user_id = user_id;
+            return View();
+        }
     }
 }

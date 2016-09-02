@@ -1,0 +1,66 @@
+﻿@using EC.App_LocalResources;
+@{
+    ViewBag.Title = GlobalRes.CaseFlowSettings;
+    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+}
+<div class="blockSettings">
+    <div id="casesHeared">
+        <div id="menu">
+            <h2 class="mainTitle">@GlobalRes.Menu:</h2>
+            <div>
+                <a class="caseesTab active">@GlobalRes.MyProfile</a>
+                <a href="/Settings/Password" class="caseesTab">@GlobalRes.Password</a>
+                <a href="/Settings/Company" class="caseesTab">@GlobalRes.CompanyProfile</a>
+                <a href="/Settings/Mediators" class="caseesTab">@GlobalRes.CompanyMediators</a>
+                <a href="/Settings/Cases" class="caseesTab">@GlobalRes.CaseManagementDeadlines</a>
+                <a href="/Settings/workFlow" class="caseesTab">workFlow</a>
+            </div>
+        </div>
+    </div><!--casesHeared-->
+    <div class="caseWorkflowPosition">
+
+        <div class="caseFlow">
+            <div class="caseFlowTop">
+                <div class="caseFlowTopContent">
+                    <p class="first">
+                        <span class="left OpenSansSemibold fontSize20 darkText">Case workflow</span>
+                        <span class="right fontSize16">
+                            <span class="OpenSansRegular greyText upperCase">total time on case:</span>
+                            <span class="OpenSansBold">
+                                <span class="redText upperCase">60 days</span>
+                            </span>
+                        </span>
+                    </p>
+                    <p class="second fontSize14">
+                        <span class="right upperCase">
+                            <span class="lightgreyText">@GlobalRes.Recommended:</span>
+                            <span class="darkText">30 days</span>
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <div class="caseFlowBottom">
+                <a href="#">
+                    <span class="text">@GlobalRes.PreReview</span>
+                    3
+                    <span class="bottomText">@GlobalRes.Recommended: <span class="moreBlack">2 days</span></span>
+                </a>
+                <a href="#" class="borderLeft borderRight" >
+                    <span class="text">@GlobalRes.Review</span>
+                    123
+                    <span class="bottomText">@GlobalRes.Recommended: <span class="moreBlack">2 days</span></span>
+                </a>
+                <a href="#" class="borderRight">
+                    <span class="text">@GlobalRes.Investigation</span>
+                    123
+                    <span class="bottomText">@GlobalRes.Recommended: <span class="moreBlack">2 days</span></span>
+                </a>
+                <a href="#">
+                    <span class="text">@GlobalRes.Resolution</span>
+                    123
+                    <span class="bottomText">@GlobalRes.Recommended: <span class="moreBlack">2 days</span></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
