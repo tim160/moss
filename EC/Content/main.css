@@ -2913,12 +2913,12 @@ textarea {
         width: 100%;
         border-bottom: 2px solid #dce2e3;
     }
-    .caseFlowBottom a{
+    .caseFlowBottom .special{
         height: 190px;
-        display: flex;
+        /*display: flex;
         flex-direction: row;
         justify-content: center;
-        align-items: center;
+        align-items: center;*/
         width: 25%;
         outline: none;
         text-decoration: none;
@@ -2986,23 +2986,27 @@ textarea {
 .caseFlowBottom .borderRight {
     border-right: 1px solid #dce2e3;
 }
-.caseFlowBottom a:hover .greenBlock {
+.caseFlowBottom .special:hover .greenBlock {
     display: block;
 }
-.caseFlowBottom a:hover .text {
+.caseFlowBottom .special:hover .text {
     color: #ffffff;
 }
-.caseFlowBottom a:hover {
+.caseFlowBottom .special:hover {
     background-color: #eef3f3;
 }
-.caseFlowBottom a img {
-    display: none;
-    position: absolute;
-    right: 50px;
-    top: 49%;
+.caseFlowBottom .special:active {
+    background-color: #ffffff;
 }
-.caseFlowBottom a:hover img{
-    display: block;
+.caseFlowBottom .special img {
+    /*display: none;*/
+        visibility: hidden;
+    /*position: absolute;
+    right: 50px;
+    top: 49%;*/
+}
+.caseFlowBottom .special:hover img{
+    visibility: visible;
 }
 .caseFlowBottom .greenBlock {
     display: none;
@@ -3014,21 +3018,27 @@ textarea {
     left: 0;
 }
 .someDropdowns {
-    display: flex;
+display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    position: relative;
+    position: absolute;
+    top: 50%;
+    left: 41px;
+    z-index: 100;
 }
-
-a:active .someDropdowns .show {
+.someDropdowns div {
+    width: 88px;
+    text-align: center;
+}
+.special:active .someDropdowns .show {
     background-color:#ebf1f1;
     color: black;
 }
 .someDropdowns .hide {
     display: none;
 }
-a:active .someDropdowns .hide{
+.special:active .someDropdowns .hide{
     display: block;
     background-color: #ffffff;
     border-left: 1px solid #ebf1f1;
