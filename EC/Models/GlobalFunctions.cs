@@ -28,7 +28,7 @@ public class GlobalFunctions
     {
 
     }
-
+    // Content/img/cai_logo.png
     public bool IsSubdomain(string url)
     {
         if (url.ToLower().Contains("localhost") || url.ToLower().Contains("stark.") || url.ToLower().Contains("democompany.") || url.ToLower().Contains("report.") || url.ToLower().Contains("cai."))
@@ -51,6 +51,32 @@ public class GlobalFunctions
     }
 
 
+
+    public string LogoBaseUrl(string url)
+    {
+        if (url.ToLower().Contains("campus"))
+        {
+            return "/Content/img/secondLogo.jpg";
+        }
+        else if (url.ToLower().Contains("stark."))
+        {
+            return "/Content/img/secondLogo.jpg";
+        }
+        else if (url.ToLower().Contains("registration."))
+        {
+            return "/Content/img/secondLogo.jpg";
+
+        }
+        else if (url.ToLower().Contains("cai.employeeconfidential.com"))
+        {
+            return "/Content/img/cai_logo.png";
+        }
+        return "/Content/img/secondLogo.jpg";
+
+    }
+
+
+
     /// <summary>
     /// duplicated - the function in EC/Business/Email Body
     /// </summary>
@@ -71,6 +97,10 @@ public class GlobalFunctions
         {
             return "registration.employeeconfidential.com/Index/Page";
 
+        }
+        else if (url.ToLower().Contains("cai.employeeconfidential.com"))
+        {
+            return "cai.employeeconfidential.com/Index/Start";
         }
         return "registration.employeeconfidential.com/Index/Page";
 

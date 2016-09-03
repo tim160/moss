@@ -449,7 +449,10 @@ namespace EC.Business.Actions.Email
             {
                 entrance_link = "registration.employeeconfidential.com";
             }
-
+            else if (url.ToLower().Contains("cai.employeeconfidential.com"))
+            {
+                entrance_link = "cai.employeeconfidential.com";
+            }
             return entrance_link;
         }
     }

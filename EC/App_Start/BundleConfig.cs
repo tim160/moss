@@ -46,6 +46,23 @@ namespace EC
           //  bundles.Add(new StyleBundle("~/bundles/Styles")
           //     .Include("~/Content/*.css"));
 
+            bundles.Add(new StyleBundle("~/Content/bStart").Include(
+                    "~/Content/Main.css",
+                    "~/Content/MainStyle.css"));
+
+
+            bundles.Add(new StyleBundle("~/Content/aStart").Include(
+                    "~/Content/MainStyle.css",
+                    "~/Content/style.css",
+                    "~/Content/jquery-ui.css"));
+               bundles.Add(new StyleBundle("~/Content/caiStart").Include(
+                    "~/Content/cai.css",
+                    "~/Content/style.css",
+                    "~/Content/jquery-ui.css"));
+
+
+
+
             bundles.Add(new StyleBundle("~/bundles/Styles").Include(
                 "~/Content/*.css"));
             bundles.Add(new Bundle("~/bundles/ScriptsJq").Include(

@@ -64,6 +64,8 @@ namespace EC.Controllers
             ViewBag.cc_extension = cc_ext;
             #endregion
             ViewBag.LogoCompany = new EC.Models.CompanyModel().getLogoCompany();
+            ViewBag.LogoPath = glb.LogoBaseUrl(Request.Url.AbsoluteUri.ToLower());
+
             Session.Clear();
             return View();
         }

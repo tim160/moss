@@ -170,7 +170,7 @@
                     }
                 });
             }
-            /* menyat Confidential, Confidential to Stark, Private Info.... */
+            /* change Confidential, Confidential to Stark, Private Info.... */
             $.ajax(
                 {
                     method: "POST",

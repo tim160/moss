@@ -76,11 +76,11 @@
     </div>
     <!--</form>-->
 </div>
-
-<script>
+<script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
     $(document).ready(function () {
         $('.blockUpdateProfile, .updateProfileBtn span').click(function () {
-            if (code.Length == 0) {
+            if (code.value.Length == 0) {
                 window.location.href = "/cases";
             }
             else {
