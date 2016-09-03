@@ -363,36 +363,17 @@ namespace EC.Controllers
                 int company_id = Convert.ToInt16(Request["company_id"]);
 
                 int step1_delayMin = Convert.ToInt16(Request["step1_delayMin"]);
-                int step1_delayMax = Convert.ToInt16(Request["step1_delayMax"]);
-
                 int step2_delayMin = Convert.ToInt16(Request["step2_delayMin"]);
-                int step2_delayMax = Convert.ToInt16(Request["step2_delayMax"]);
-
                 int step3_delayMin = Convert.ToInt16(Request["step3_delayMin"]);
-                int step3_delayMax = Convert.ToInt16(Request["step3_delayMax"]);
-
                 int step4_delayMin = Convert.ToInt16(Request["step4_delayMin"]);
-                int step4_delayMax = Convert.ToInt16(Request["step4_delayMax"]);
 
-                int step5_delayMin = Convert.ToInt16(Request["step5_delayMin"]);
-                int step5_delayMax = Convert.ToInt16(Request["step5_delayMax"]);
 
                 company company_item = db.company.Where(item => (item.id == company_id)).FirstOrDefault();
 
                 company_item.step1_delay = step1_delayMin;
-                company_item.step1_postpone = step1_delayMax;
-
                 company_item.step2_delay = step2_delayMin;
-                company_item.step2_postpone = step2_delayMax;
-
                 company_item.step3_delay = step3_delayMin;
-                company_item.step3_postpone = step3_delayMax;
-
                 company_item.step4_delay = step4_delayMin;
-                company_item.step4_postpone = step4_delayMax;
-
-                company_item.step5_delay = step5_delayMin;
-                company_item.step5_postpone = step5_delayMax;
 
                 db.company.AddOrUpdate(company_item);
                 db.SaveChanges();
@@ -401,7 +382,7 @@ namespace EC.Controllers
             }
             catch (System.Data.DataException ex)
             {
-                Console.WriteLine("Daleys didn't update");
+                Console.WriteLine("Delays were not updated");
                 return false;
             }
         }
