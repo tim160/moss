@@ -102,3 +102,50 @@
         </div>
     </div>
 </div>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/jquery-ui.min.js"></script>
+<script>
+            $(document).ready(function () {
+   $('#updateButton').click(function(){    // make functions instead of button click
+
+                    var company_id = $('.companyIdHidden').val();
+                    var step1_delayMin = $('.completeStage #step1_delay').val();
+                    var step2_delayMin = $('.completeStage #step2_delay').val();
+                    var step3_delayMin = $('.completeStage #step3_delay').val();
+                    var step4_delayMin = $('.completeStage #step4_delay').val();
+
+                 $.ajax({
+                        method: "POST",
+                        url: "/Settings/UpdateDelays",
+                        data: { company_id : company_id,
+                            step1_delayMin : step1_delayMin,
+                            step2_delayMin : step2_delayMin,
+                            step3_delayMin : step3_delayMin,
+                            step4_delayMin : step4_delayMin
+                        }
+                    }).done(function(data) {//data from server
+                        console.log();// alert(data);
+                        $('#updateButton').css('display', 'none');
+                        $('#saveButton').css('display', 'block');
+
+                        step1Delay = Number($('.completeStage #step1_delay').val());
+                        step2Delay = Number($('.completeStage #step2_delay').val());
+                        step3Delay = Number($('.completeStage #step3_delay').val());
+                        step4Delay = Number($('.completeStage #step4_delay').val());
+
+                        total = Number(step1Delay) +
+                            Number(step2Delay) +
+                            Number(step3Delay) +
+                            Number(step4Delay) +
+                            Number(step5Delay);
+                        $('#totalTime').text(total); // where 60 days - update with total
+
+                    }).fail(function(error){
+                        console.log(error);
+                    });
+                });
+            });
+
+</script>
