@@ -618,7 +618,10 @@ namespace EC.Controllers
             ViewBag.page_subtitle = GlobalRes.Settings;
             ViewBag.user_id = user_id;
             ViewBag.companyId = user.company_id;
-            return View();
+
+            CompanyModel cm = new CompanyModel(um._user.company_id);
+            company _comp = cm._company;
+            return View(_comp);
         }
     }
 }

@@ -1,10 +1,27 @@
-﻿@using EC.App_LocalResources;
+﻿@using EC.Models;
+@using EC.Models.Database;
+@using EC.App_LocalResources;
 @{
     ViewBag.Title = GlobalRes.CaseFlowSettings;
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+
+    int _total = 0, step1Delay = 0, step2Delay = 0, step3Delay = 0, step4Delay = 0, step5Delay = 0;
+    bool is_cc = ViewBag.is_cc;
+    String class_ext = ViewBag.cc_extension;
 }
+@model  company
+
 <input type="hidden" value="@ViewBag.companyId" id="companyId" />
 <div class="blockSettings">
+@using (Html.BeginForm("UpdateCompany", "SettingsController", Model, FormMethod.Post))
+{
+    _total = Model.step1_delay + Model.step2_delay + Model.step3_delay + Model.step4_delay + Model.step5_delay;
+    step1Delay = Model.step1_delay;
+    step2Delay = Model.step2_delay;
+    step3Delay = Model.step3_delay;
+    step4Delay = Model.step4_delay;
+    step5Delay = Model.step5_delay;
+    @Html.HiddenFor(model => model.id, new { @class = "companyIdHidden" })
     <div id="casesHeared">
         <div id="menu">
             <h2 class="mainTitle">@GlobalRes.Menu:</h2>
@@ -28,7 +45,7 @@
                         <span class="right fontSize16">
                             <span class="OpenSansRegular greyText upperCase">total time on case:</span>
                             <span class="OpenSansBold">
-                                <span class="redText upperCase">60 days - !!! Update this with total</span> 
+                                <span class="redText upperCase" id="totalTime">@_total</span> days
                             </span>
                         </span>
                     </p>
@@ -46,7 +63,7 @@
                     <span class="text">@GlobalRes.PreReview</span>
                     <div class="someDropdowns">
                         <div class="show">
-                            3 <img src="/Content/img/arrowSelect.png">    
+                            @Html.DisplayFor(model => model.step1_delay) <img src="/Content/img/arrowSelect.png">    
                         </div>
                         @for (int i = 1; i <= 3; i++)
                         {
@@ -60,7 +77,7 @@
                     <span class="text">@GlobalRes.Review</span>
                     <div class="someDropdowns">
                         <div class="show">
-                            3 <img src="/Content/img/arrowSelect.png"> @*vmesto 3 - znachenie levogo slaidera pri zagruzke, 1-ogo sverhu*@
+                            @Html.DisplayFor(model => model.step2_delay) <img src="/Content/img/arrowSelect.png">
                         </div>
                         @for (int i = 1; i <= 5; i++)
                         {
@@ -74,7 +91,7 @@
                     <span class="text">@GlobalRes.Investigation</span>
                     <div class="someDropdowns">
                         <div class="show">
-                            3 <img src="/Content/img/arrowSelect.png"> @*vmesto 3 - znachenie levogo slaidera, 2-ogo sverhu*@
+                            @Html.DisplayFor(model => model.step3_delay) <img src="/Content/img/arrowSelect.png"> 
                         </div>
                         @for (int i = 1; i <= 60; i++)
                         {
@@ -90,7 +107,7 @@
                     <span class="text">@GlobalRes.Resolution</span>
                     <div class="someDropdowns">
                         <div class="show">
-                            3 <img src="/Content/img/arrowSelect.png"> @*vmesto 3 - znachenie levogo slaidera, 3-ogo sverhu*@
+                            @Html.DisplayFor(model => model.step4_delay) <img src="/Content/img/arrowSelect.png">
                         </div>
                         @for (int i = 1; i <= 21; i++)
                         {
@@ -102,6 +119,7 @@
             </div>
         </div>
     </div>
+}
 </div>
 
 <script>
