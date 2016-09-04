@@ -617,6 +617,7 @@ namespace EC.Controllers
             ViewBag.um = um;
             ViewBag.page_subtitle = GlobalRes.Settings;
             ViewBag.user_id = user_id;
+            ViewBag.companyId = user.company_id;
             return View();
         }
     }

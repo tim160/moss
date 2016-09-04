@@ -3018,7 +3018,7 @@ textarea {
     left: 0;
 }
 .someDropdowns {
-display: flex;
+    display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
@@ -3038,9 +3038,24 @@ display: flex;
 .someDropdowns .hide {
     display: none;
 }
-.special:active .someDropdowns .hide{
+.someDropdowns .activeDropDown {
     display: block;
     background-color: #ffffff;
     border-left: 1px solid #ebf1f1;
     border-right: 1px solid #ebf1f1;
 }
+.someDropdowns .activeDropDown:hover{
+    background-color: #ebf1f1;
+}
+.someDropdowns :last-child.activeDropDown  {
+    border-bottom: 1px solid #ebf1f1;
+}
+.someDropdowns :first-child.activeDropDown  {
+    border-top: 1px solid #ebf1f1;
+}
+/*.special:active .someDropdowns .hide{
+    display: block;
+    background-color: #ffffff;
+    border-left: 1px solid #ebf1f1;
+    border-right: 1px solid #ebf1f1;
+}*/
