@@ -328,10 +328,10 @@
     <value>The management does not know about the incident</value>
   </data>
   <data name="MediatorsAssigned" xml:space="preserve">
-    <value>Mediators assigned</value>
+    <value>Case Managers</value>
   </data>
   <data name="MediatorsAssignedSecondOption" xml:space="preserve">
-    <value>The following case administrator(s) will be assigned to start your case. Please remove any case administrators who you think may be involved in the incident.</value>
+    <value>The following case administrator(s) will be assigned to start your case. Please indicate if you wish to exclude any case administrators for possible bias or conflict of interest.</value>
   </data>
   <data name="Replace" xml:space="preserve">
     <value>Replace</value>
