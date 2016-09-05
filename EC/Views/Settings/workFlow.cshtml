@@ -45,7 +45,7 @@
                         <span class="right fontSize16">
                             <span class="OpenSansRegular greyText upperCase">total time on case:</span>
                             <span class="OpenSansBold">
-                                <span class="redText upperCase" id="totalTime">@_total</span> days
+                                <span class="redText upperCase" id="totalTime">@_total days</span> 
                             </span>
                         </span>
                     </p>
@@ -165,17 +165,13 @@
                 console.log();// alert(data);
                 $('#updateButton').css('display', 'none');
                 $('#saveButton').css('display', 'block');
+                var counter = 0;
+                $(".someDropdowns .show").each(function (indx, element) {
+                    counter += Number($(element).text().trim());
+                });
 
-                step1Delay = Number($('.completeStage #step1_delay').val());
-                step2Delay = Number($('.completeStage #step2_delay').val());
-                step3Delay = Number($('.completeStage #step3_delay').val());
-                step4Delay = Number($('.completeStage #step4_delay').val());
 
-                total = Number(step1Delay) +
-                    Number(step2Delay) +
-                    Number(step3Delay) +
-                    Number(step4Delay);
-                $('#totalTime').text(total); // where 60 days - update with total
+                $('#totalTime').text(counter); // where 60 days - update with total
 
             }).fail(function (error) {
                 console.log(error);
