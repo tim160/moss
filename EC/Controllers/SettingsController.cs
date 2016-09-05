@@ -184,8 +184,6 @@ namespace EC.Controllers
         // GET: Settings
         public ActionResult Cases()
         {
-            //int user_id = 2;
-
             user user = (user)Session[Constants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
@@ -200,15 +198,15 @@ namespace EC.Controllers
             #endregion
 
 
-          
-            UserModel um = new UserModel(user_id);
-            ViewBag.page_subtitle = GlobalRes.Settings;
 
+            UserModel um = new UserModel(user_id);
             ViewBag.um = um;
+            ViewBag.page_subtitle = GlobalRes.Settings;
             ViewBag.user_id = user_id;
+            ViewBag.companyId = user.company_id;
+
             CompanyModel cm = new CompanyModel(um._user.company_id);
             company _comp = cm._company;
-            // case flow
             return View(_comp);
         }
         public string addNewfunction()
@@ -596,32 +594,6 @@ namespace EC.Controllers
 
             return View("Password", um._user);
         }
-        public ActionResult workFlow()
-        {
-            user user = (user)Session[Constants.CurrentUserMarcker];
-            if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Account");
 
-            int user_id = user.id;
-
-            #region EC-CC Viewbag
-            ViewBag.is_cc = is_cc;
-            string cc_ext = "";
-            if (is_cc) cc_ext = "_cc";
-            ViewBag.cc_extension = cc_ext;
-            #endregion
-
-
-
-            UserModel um = new UserModel(user_id);
-            ViewBag.um = um;
-            ViewBag.page_subtitle = GlobalRes.Settings;
-            ViewBag.user_id = user_id;
-            ViewBag.companyId = user.company_id;
-
-            CompanyModel cm = new CompanyModel(um._user.company_id);
-            company _comp = cm._company;
-            return View(_comp);
-        }
     }
 }
