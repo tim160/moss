@@ -519,7 +519,14 @@
                 if (self.data("vltarget")) {
                     self.parent(self.data("vltarget")).addClass("vlError");
                 } else {
-                    self.addClass("vlError");
+                    if (self.length > 1 || !self.is(":visible")) {
+                        self.addClass('vlCorrect');
+                        addToAvaible(parseInt(tab.attr('data-id')) + 1);
+                        return true
+                    } else {
+                        self.addClass("vlError");
+                    }
+                    
                 }
 
             });
