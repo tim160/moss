@@ -319,10 +319,15 @@
                                     $('.whoKnow .freeBlock ').on('click', function (event) {
                                         $('.whoKnow input').each(function (indx, element) {
                                             $(element).prop('checked', false);
-                                            $(element).next().css({ "background-position-x": "0%", "background-position-y": "0%" });
+                                            //$(element).next().css({ "background-position-x": "0%", "background-position-y": "0%" });
+                                            $(element).next().css({ "background-position": "0px 0px"});
+                                            //$(element).next().css("background-position-x", "0%");
+                                            //$(element).next().css("background-position-y", "0%");
                                             $(element).parent().find('.radioTitle').css("color", "#AEB5B7");
                                         });
-                                        $(event.currentTarget).find('.radioButton').css({ "background-position-x": "0%", "background-position-y": "100%" });
+                                        //$(event.currentTarget).find('.radioButton').css({ "background-position-x": "0%", "background-position-y": "100%" });
+                                        $(event.currentTarget).find('.radioButton').css({ "background-position": "0px 100%" });
+
                                         $(event.currentTarget).find('.radioTitle').css("color", "#3C3E3F");
                                         if ($(event.currentTarget).find('input').val() == "No") {
                                             $('.contentBlock.reportReferedExplain').hide();
@@ -336,9 +341,11 @@
                                         $('.isReportedOutside').addClass('validate');
                                         $('.whoKnow input').each(function (indx, element) {
                                             $(element).prop('checked', false);
-                                            $(element).find('.radioButton').css({ "background-position-x": "0%", "background-position-y": "0%" });
+                                            //$(element).find('.radioButton').css({ "background-position-x": "0%", "background-position-y": "0%" });
+                                            $(element).find('.radioButton').css({ "background-position": "0px 0px" });
                                         });
-                                        $(event.currentTarget).find('.radioButton').css({ "background-position-x": "0%", "background-position-y": "100%" });
+                                        //$(event.currentTarget).find('.radioButton').css({ "background-position-x": "0%", "background-position-y": "100%" });
+                                        $(event.currentTarget).find('.radioButton').css({ "background-position": "0px 100%" });
                                         $('.contentBlock.reportReferedExplain').show();
                                         $('.reportReferedExplain').find('textarea').focus();
                                         $('#textAreaWhoKnow').click();

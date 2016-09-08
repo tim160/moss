@@ -627,13 +627,13 @@
         isReportRefered.on('change', function () {
             if ($("input:radio[name=isReportRefered]:checked").val() != 'No') {
                 $('.isReportedOutside').addClass('validate');
-                $('.contentBlock.reportReferedExplain').show();
-                $('.contentBlock.reportReferedExplain').find('textarea').focus();
+                //$('.contentBlock.reportReferedExplain').show();
+                //$('.contentBlock.reportReferedExplain').find('textarea').focus();
             }
             else {
                 $('.isReportedOutside').removeClass('validate');
                 $('.isReportedOutside').removeClass('vlError');
-                $('.contentBlock.reportReferedExplain').hide();
+                //$('.contentBlock.reportReferedExplain').hide();
             }
         });
        
