@@ -388,7 +388,7 @@
                                 isReportedOutside.empty();
                                 isReportedOutside.append($(' input[name=isReportRefered]:checked').val());
                                 if ($(' input[name=isReportRefered]:checked').val() != "No"){
-                                    isReportedOutside.append(".<br /> Explanation: " + $('.isReportedOutside').val());
+                                    isReportedOutside.append("<br /> Explanation: " + $('.isReportedOutside').val());
                                 }
 
 
