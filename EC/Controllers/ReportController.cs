@@ -225,11 +225,12 @@ namespace EC.Controllers
 
             }
             ReportViewModel rvm = new ReportViewModel();
-            CaseSubmittedViewModel caseSubmitted = new CaseSubmittedViewModel();
-            caseSubmitted.merge(model, currentReport);
+            //CaseSubmittedViewModel caseSubmitted = new CaseSubmittedViewModel();
+            //caseSubmitted.merge(model, currentReport);
+            rvm.Merge(currentReport);
             ViewBag.companylogo = companyModel._company.path_en;
             
-            return View("CaseSubmitted", caseSubmitted);
+            return View("CaseSubmitted", rvm);
         }
 
         // case details
