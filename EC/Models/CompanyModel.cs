@@ -13,7 +13,7 @@ namespace EC.Models
 {
     public class CompanyModel : BaseModel
     {
-        public static readonly CompanyModel inst = new CompanyModel();
+        public static CompanyModel inst = new CompanyModel();
 
         #region Properties
         public int ID
@@ -313,7 +313,7 @@ namespace EC.Models
 
             if (id != 0)
             {
-                return db.company.FirstOrDefault(item => item.id == id);
+                return db.company.First(item => item.id == id);
             }
             else
                 return null;

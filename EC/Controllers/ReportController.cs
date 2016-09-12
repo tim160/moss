@@ -57,7 +57,7 @@ namespace EC.Controllers
                 ViewBag.cc_extension = cc_ext;
                 #endregion
 
-          
+
                 //    if(id == 1 ) - nado pokazat message reporteru iz psd
                 //         reporter - file report no company
                 ////screen - http://invis.io/QK2VGQNAW
@@ -65,8 +65,9 @@ namespace EC.Controllers
 
 
 
-
-                var currentCompany = CompanyModel.inst.GetById(id);
+                CompanyModel model = new CompanyModel(id);
+                company currentCompany = model.GetById(id);
+                //company currentCompany = CompanyModel.inst.GetById(id);
                 ViewBag.currentCompanyId = currentCompany.id;
 
                 /*caseInformation*/
@@ -80,7 +81,8 @@ namespace EC.Controllers
                     ViewBag.secondary_type_mandatory = reportModel.getSecondaryTypeMandatory();
                 }
 
-                ViewBag.currentCompanySubmitted = CompanyModel.inst.GetById(id).company_nm;
+                //ViewBag.currentCompanySubmitted = CompanyModel.inst.GetById(id).company_nm;
+                ViewBag.currentCompanySubmitted = currentCompany.company_nm;
                 ViewBag.currentCompany = currentCompany.company_nm;
                 //ViewBag.country = currentCompany.address.country.country_nm;
                 ViewBag.locations = HtmlDataHelper.MakeSelect(companyModel.Locations(id), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
