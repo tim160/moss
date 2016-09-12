@@ -885,8 +885,7 @@
         isInjury.click();
 
         setDropdown();
-
-        $(".sendUpdates").on('click', function () {
+        $(".check").add(".sendUpdates").add('.checked').on('click', function () {
 
             if ($('#checkBox').prop("checked")) {
                 $('#checkBox').click();
