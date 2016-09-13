@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F9BD7E38-DB60-47DD-A9F3-1BF488708A06}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EC.Constants</RootNamespace>
+    <AssemblyName>EC.Constants</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AttributeContants.cs" />
+    <Compile Include="AuditConstants.cs" />
+    <Compile Include="CapabilityConstants.cs" />
+    <Compile Include="CaseStatusConstants.cs" />
+    <Compile Include="CollectionConstants.cs" />
+    <Compile Include="CookieConstants.cs" />
+    <Compile Include="EncryptionConstants.cs" />
+    <Compile Include="FileConstants.cs" />
+    <Compile Include="GlobalActivity.cs" />
+    <Compile Include="ImportExportConstants.cs" />
+    <Compile Include="ItemConstants.cs" />
+    <Compile Include="LanguageConstants.cs" />
+    <Compile Include="ModelState.cs" />
+    <Compile Include="NavPageConstants.cs" />
+    <Compile Include="NotificationCategoryConstants.cs" />
+    <Compile Include="NotificationChannelConstants.cs" />
+    <Compile Include="NotificationPriorityConstants.cs" />
+    <Compile Include="NotificationSubCategoryConstants.cs" />
+    <Compile Include="NotificationTemplateNameConstants.cs" />
+    <Compile Include="NotificationTemplateParameterNameConstants.cs" />
+    <Compile Include="NotificationTemplateTypeConstants.cs" />
+    <Compile Include="PasswordConstants.cs" />
+    <Compile Include="PasswordErrorConstants.cs" />
+    <Compile Include="PathConstants.cs" />
+    <Compile Include="PermissionsConstants.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegistrationConstants.cs" />
+    <Compile Include="RegistrationReportConstants.cs" />
+    <Compile Include="SortDirectionEnum.cs" />
+    <Compile Include="SystemConstants.cs" />
+    <Compile Include="TagConstants.cs" />
+    <Compile Include="TimeZoneConstants.cs" />
+    <Compile Include="TransferStateConstants.cs" />
+    <Compile Include="TransferStatesEnum.cs" />
+    <Compile Include="TransferTypesEnum.cs" />
+    <Compile Include="UserConstants.cs" />
+    <Compile Include="UserExceptionConstants.cs" />
+    <Compile Include="UserIdConstants.cs" />
+    <Compile Include="UserLevelConstants.cs" />
+    <Compile Include="WCFHeaderConstants.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
