@@ -737,7 +737,7 @@ namespace EC.Models
 
                 switch (status_id)
                 {
-                    /*  case 1:
+                      case 1:
                           delay_allowed = _company.step1_delay;
                           break;
                       case 2:
@@ -751,7 +751,7 @@ namespace EC.Models
                           break;
                       case 5:
                           delay_allowed = _company.step5_delay;
-                          break;*/
+                          break;
                     default:
                         delay_allowed = 5;
                         break;

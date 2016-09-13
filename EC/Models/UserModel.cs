@@ -338,13 +338,12 @@ namespace EC.Models
         {
             List<int> all_reports_id = new List<int>();
             List<report> reports = new List<report>();
-            //    select rep_id from[Marine].[dbo].[testt]  z
-            //where id in (select max(id) from[Marine].[dbo].[testt] z2 group by z2.rep_id) and z.status_id = 4
             all_reports_id = GetReportIds(null);
 
+            //    select rep_id from[Marine].[dbo].[testt]  z
+            //where id in (select max(id) from[Marine].[dbo].[testt] z2 group by z2.rep_id) and z.status_id = 4
             var refGroupInvestigationStatuses = (from m in db.report_investigation_status
                                  group m by m.report_id into refGroup
-                              //   orderby refGroup.Id descending
                                  select refGroup.OrderByDescending(x =>x.id).FirstOrDefault());
             List<int> statuses_match_all_report_id = new List<int>();
             if (flag == 0)

@@ -39,9 +39,6 @@ namespace EC.Controllers
             List<int> spam_report_ids = um.ReportsSearchIds(um._user.company_id, 3);
             List<int> closed_report_ids = um.ReportsSearchIds(um._user.company_id, 5);
 
-         /*   List<int> all_active_report_ids = new List<int>();// um.ReportsSearchIds(um._user.company_id, 1);
-            List<int> completed_report_ids = new List<int>();// um.ReportsSearchIds(um._user.company_id, 2);
-            List<int> spam_report_ids = new List<int>();// um.ReportsSearchIds(um._user.company_id, 3);*/
             int temp_report_id;
             #region Active Reports
 
@@ -217,20 +214,9 @@ namespace EC.Controllers
             List<int> all_pending_reports_ids = um.ReportsSearchIds(um._user.company_id, 4);
             all_pending_reports_ids.Sort();
             List<int> pending_report_ids = new List<int>();
-            ///////    pending_report_ids.Add(216);
-            int temp_report_id;
+            if(all_pending_reports_ids.Count > 0)
+                pending_report_ids.Add(all_pending_reports_ids[0]);
 
-            //      for (int i = all_pending_reports_ids.Count - 1; i >= 0; i--)
-            for (int i = 0; i < all_pending_reports_ids.Count; i++)
-            {
-                temp_report_id = all_pending_reports_ids[i];
-                if (pending_report_ids.Count < 1)
-                {
-                    ////                  if (temp_report_id == 215 || temp_report_id == 216 || temp_report_id == 217)
-                    //                  if (db.report_user_read.Where(item => ((item.user_id == user_id) && (item.report_id == temp_report.id))).Count() == 0)
-                    pending_report_ids.Add(temp_report_id);
-                }
-            }/**/
             return pending_report_ids;
         }
 
@@ -242,68 +228,41 @@ namespace EC.Controllers
             UserModel um = new UserModel(user_id);
             ReportModel rm = new ReportModel();
 
-            foreach (int i in _report_ids)
-            {
-                rm = new ReportModel(i);
-                if (rm._Is_New_Activity(user_id))
-                    _count++;
+            //    select rep_id from[Marine].[dbo].[testt]  z
+            //where id in (select max(id) from[Marine].[dbo].[testt] z2 group by z2.rep_id) and z.status_id = 4
+            var refGroupReportLogs = (from m in db.report_log
+                                                 group m by m.report_id into refGroup
+                                                 //   orderby refGroup.Id descending
+                                        select refGroup.OrderByDescending(x => x.created_dt).FirstOrDefault());
 
+            var refGroupReportReadDate =  db.report_user_read.Where(item => ((item.user_id == user_id)));
+
+            DateTime dt1, dt2;
+            foreach (int ID in _report_ids)
+            {
+                if (refGroupReportReadDate.Where(item => ((item.report_id == ID))).Count() == 0)
+                {
+                    dt2 = Constant._default_date;
+                }
+                else
+                {
+                    dt2 = refGroupReportReadDate.Where(item => ((item.report_id == ID))).Select(t => t.read_date).FirstOrDefault();
+                }
+
+                if (refGroupReportLogs.Where(item => ((item.report_id == ID))).Count() == 0)
+                {
+                    dt1 = Constant._default_date.AddDays(2);
+                }
+                else
+                {
+                    dt1 = refGroupReportLogs.Where(item => ((item.report_id == ID))).Select(t => t.created_dt).FirstOrDefault();
+                }
+
+                if(dt2 < dt1)
+                    _count++;
             }
             return _count;
         }
 
-        // do not need it? 
-        public int ActiveReportCounters(int user_id)
-        {
-            int _count = 0;
-            
-            UserModel um = new UserModel(user_id);
-            ReportModel rm = new ReportModel();
-
-            List<int> _report_ids = um.ReportsSearchIds(um._user.company_id, 1);
-            foreach (int i in _report_ids)
-            {
-                rm = new ReportModel(i);
-                if (rm._Is_New_Activity(user_id))
-                    _count++;
-            
-            }
-            return _count;
-        }
-
-        public int SpamReportCounters(int user_id)
-        {
-            int _count = 0;
-            UserModel um = new UserModel(user_id);
-            ReportModel rm = new ReportModel();
-
-            List<int> _report_ids = um.ReportsSearchIds(um._user.company_id, 3);
-            foreach (int i in _report_ids)
-            {
-                rm = new ReportModel(i);
-                if (rm._Is_New_Activity(user_id))
-                    _count++;
-
-            }
-
-            return _count;
-        }
-        public int ClosedReportCounters(int user_id)
-        {
-            int _count = 0;
-            UserModel um = new UserModel(user_id);
-            ReportModel rm = new ReportModel();
-
-            List<int> _report_ids = um.ReportsSearchIds(um._user.company_id, 2);
-            foreach (int i in _report_ids)
-            {
-                rm = new ReportModel(i);
-                if (rm._Is_New_Activity(user_id))
-                    _count++;
-
-            }
-
-            return _count;
-        }
     }
 }

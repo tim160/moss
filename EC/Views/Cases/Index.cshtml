@@ -8,14 +8,7 @@
         is_cc = false;
     }
     String class_ext = ViewBag.cc_extension;
-    //19
-    //bool? is_cc = true;
-    //String class_ext = "";
-    //if (is_cc)
-    //{
-    //    class_ext = "_cc";
-    //}
-    
+
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
     ViewBag.Title = GlobalRes.ActiveCasesUp;
     //Layout = "~/Views/Shared/LayoutMediators.cshtml";
@@ -41,8 +34,6 @@
             @Html.Partial("~/Views/PartialViews/_ReportPendingNotification.cshtml", new ViewDataDictionary { { "report_id", _report_id } , { "user_id", user_id } })
         }
     }
-    
-    
 }
 
 <div id="casesHeared" class="pageCases">
@@ -67,47 +58,9 @@
             </a>
         </div>
     </div>
-    @*<div class="positionActivityIcon">
-        <div id="activityIcon"></div>
-    </div>*@
-</div><!--casesHeared-->
+</div>
 
-@*<div id="wrap">
 
-    @{
-
-        // IEnumerable<int> active_report_ids = ViewBag.active_report_ids;
-
-        if (report_ids != null)
-        {
-            for (int i = 0; i < report_ids.Count(); i++)
-            {
-                if ((i % 2) == 0)
-                {
-                    @Html.Raw("<div style='display: table;   width: 100%;'>");
-                    <div class="left">
-                        <div class="rightAlignWrap">@Html.Partial("~/Views/PartialViews/_ReportPreview.cshtml", new ViewDataDictionary { { "report_id", report_ids.ElementAt(i) }, { "user_id", user_id }, { "flag", 1 } })</div>
-                    </div>
-                    if (i == report_ids.Count() - 1)
-                    {
-                        @Html.Raw("</div>");
-                    }
-                }
-                else
-                {
-                    <div class="right">@Html.Partial("~/Views/PartialViews/_ReportPreview.cshtml", new ViewDataDictionary { { "report_id", report_ids.ElementAt(i) }, { "user_id", user_id }, { "flag", 1 } })</div>
-
-                    if (i != report_ids.Count() - 1)
-                    {
-                        @Html.Raw("</div>");
-                    }
-                }
-            }
-        }
-    }
-
-    <div style="clear: both"></div>
-</div>*@
 
 <div class="positionCases">
     @foreach (CasePreviewViewModel _case_previewViewModel in preview_list)
