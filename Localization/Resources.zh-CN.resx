@@ -298,7 +298,7 @@
     <value>Does management know about this incident?</value>
   </data>
   <data name="MediatorsAssigned" xml:space="preserve">
-    <value>Mediators assigned</value>
+    <value>Case Managers</value>
   </data>
   <data name="MediatorsAssignedSecondOption" xml:space="preserve">
     <value>The following mediator(s) will be assigned to start your case. Please remove any mediators who you think may be involved in the incident.</value>

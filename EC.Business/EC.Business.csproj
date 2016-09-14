@@ -87,13 +87,13 @@
     <EmbeddedResource Include="Localization.zh-CN.resx" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EC.Common.Base\EC.Common.Base.csproj">
+      <Project>{eece5e11-2f95-4f21-b108-5c6d12dc5603}</Project>
+      <Name>EC.Common.Base</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EC.Common.Util\EC.Common.Util.csproj">
       <Project>{60f0f82e-fa76-4279-b980-21614256dafb}</Project>
       <Name>EC.Common.Util</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EC.Common\EC.Common.csproj">
-      <Project>{ed0084ca-4544-487f-96e1-215c5cd2bac2}</Project>
-      <Name>EC.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\EC.Framework.Data.Util\EC.Framework.Data.Util.csproj">
       <Project>{c7573cb1-0e71-48db-9238-52c1807f7825}</Project>

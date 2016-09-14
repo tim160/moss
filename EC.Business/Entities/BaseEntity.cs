@@ -5,7 +5,7 @@ using System;
 using System.Xml.Serialization; 
 using EC.Framework.Data;
 using System.Reflection; 
-using EC.Common;
+using EC.Common.Base;
 using System.Collections.Generic;
 using EC.Business.Actions;
 

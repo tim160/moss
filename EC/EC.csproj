@@ -406,6 +406,7 @@
     <Content Include="Content\fonts\OpenSans\OpenSans-Light.ttf" />
     <Content Include="Content\fonts\OpenSans\OpenSans-Regular.ttf" />
     <Content Include="Content\fonts\OpenSans\OpenSans-Semibold.ttf" />
+    <Content Include="App.config" />
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <None Include="Properties\PublishProfiles\ec-code.pubxml" />
     <None Include="Properties\PublishProfiles\ec-dev.pubxml" />
