@@ -5,7 +5,7 @@ using System;
 using System.Xml.Serialization; 
 using EC.Framework.Data;
 using System.Reflection; 
-using EC.Common;
+using EC.Common.Base;
 using System.Collections.Generic;
 using EC.Business.Actions;
 
@@ -35,23 +35,18 @@ namespace EC.Business.Entities
             }
         }
 
-
-        [XmlElement(Namespace = "http://www.mobilefieldforce.com/")]
         public virtual Guid ObjectKey
         {
             get { return m_ObjectKey; }
             set { m_ObjectKey = value; }
         }
 
-        [XmlElement(Namespace = "http://www.mobilefieldforce.com/")]
         public DateTime Timestamp
         {
             get { return m_Timestamp; }
             set { m_Timestamp = value; }
         }
-
-
-        [XmlElement(Namespace = "http://www.mobilefieldforce.com/")]
+        
         public DataAction ObjectState
         {
             get { return m_ObjectState; }

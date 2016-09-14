@@ -435,7 +435,7 @@ namespace EC.Business.Actions.Email
 
         public string GetSubdomainLink(string url)
         {
-            string entrance_link = "registration.employeeconfidential.com";
+            string entrance_link = "report.employeeconfidential.com";
 
             if (URL.ToLower().Contains("campus"))
             {
@@ -445,9 +445,9 @@ namespace EC.Business.Actions.Email
             {
                 entrance_link = "stark.employeeconfidential.com";
             }
-            else if (URL.ToLower().Contains("registration."))
+            else if (URL.ToLower().Contains("report."))
             {
-                entrance_link = "registration.employeeconfidential.com";
+                entrance_link = "report.employeeconfidential.com";
             }
             else if (url.ToLower().Contains("cai.employeeconfidential.com"))
             {

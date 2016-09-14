@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A84CFBFD-9BCD-423A-B8F8-8175C0EA93EF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EC.Errors</RootNamespace>
+    <AssemblyName>EC.Errors</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EC.Errors, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\EC.Errors.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BasicFault.cs" />
+    <Compile Include="CommonExceptions\AlreadyExistsException.cs" />
+    <Compile Include="CommonExceptions\AlreadySetException.cs" />
+    <Compile Include="CommonExceptions\CannotCreateItemException.cs" />
+    <Compile Include="CommonExceptions\CantDecryptDBPasswordException.cs" />
+    <Compile Include="CommonExceptions\CantDecryptPasswordException.cs" />
+    <Compile Include="CommonExceptions\CantEncryptPasswordException.cs" />
+    <Compile Include="CommonExceptions\ConfigurationException.cs" />
+    <Compile Include="CommonExceptions\ConfigurationParameterException.cs" />
+    <Compile Include="CommonExceptions\ContainsWhiteSpaceException.cs" />
+    <Compile Include="CommonExceptions\DataConsistencyException.cs" />
+    <Compile Include="CommonExceptions\EmailFormatException.cs" />
+    <Compile Include="CommonExceptions\EmailSendException.cs" />
+    <Compile Include="CommonExceptions\InvalidDateTimeException.cs" />
+    <Compile Include="CommonExceptions\IsRequiredException.cs" />
+    <Compile Include="CommonExceptions\NotAPathException.cs" />
+    <Compile Include="CommonExceptions\NotFoundException.cs" />
+    <Compile Include="CommonExceptions\NotInitializedException.cs" />
+    <Compile Include="CommonExceptions\OutOfRangeException.cs" />
+    <Compile Include="CommonExceptions\ParameterValidationException.cs" />
+    <Compile Include="CommonExceptions\UowIsolationException.cs" />
+    <Compile Include="CommonExceptions\XMLFormatException.cs" />
+    <Compile Include="ECExceptions\AttributeFormatException.cs" />
+    <Compile Include="ECExceptions\AttributeNotFoundException.cs" />
+    <Compile Include="ECExceptions\AuthenticationExpiredException.cs" />
+    <Compile Include="ECExceptions\AuthenticationRequireException.cs" />
+    <Compile Include="ECExceptions\CannotDeleteException.cs" />
+    <Compile Include="ECExceptions\CapabilityNotFoundException.cs" />
+    <Compile Include="ECExceptions\ContentTypeMismatchException.cs" />
+    <Compile Include="ECExceptions\FileCollectionNotFoundException.cs" />
+    <Compile Include="ECExceptions\FileNotCshtmlException.cs" />
+    <Compile Include="ECExceptions\InvalidCapabilityException.cs" />
+    <Compile Include="ECExceptions\InvalidReferenceException.cs" />
+    <Compile Include="ECExceptions\InvalidUploadTokenException.cs" />
+    <Compile Include="ECExceptions\ItemInUseException.cs" />
+    <Compile Include="ECExceptions\LinkNotFoundInPathException.cs" />
+    <Compile Include="ECExceptions\LinkTypeException.cs" />
+    <Compile Include="ECExceptions\LockFailedException.cs" />
+    <Compile Include="ECExceptions\ModelValidationException.cs" />
+    <Compile Include="ECExceptions\NavPageTagConflictException.cs" />
+    <Compile Include="ECExceptions\NonceAlreadyClaimedException.cs" />
+    <Compile Include="ECExceptions\NotACourseException.cs" />
+    <Compile Include="ECExceptions\NotANavPageLinkException.cs" />
+    <Compile Include="ECExceptions\NotAuthorizedException.cs" />
+    <Compile Include="ECExceptions\NullAttributeException.cs" />
+    <Compile Include="ECExceptions\OrganizationNotFoundException.cs" />
+    <Compile Include="ECExceptions\PageTagException.cs" />
+    <Compile Include="ECExceptions\PathFormatException.cs" />
+    <Compile Include="ECExceptions\RuleFormatException.cs" />
+    <Compile Include="ECExceptions\StillConvertingException.cs" />
+    <Compile Include="ECExceptions\WrongCapabilityAttributeFormat.cs" />
+    <Compile Include="ECExceptions\WrongCourseOfferingException.cs" />
+    <Compile Include="ECExceptions\WrongLinkTypeException.cs" />
+    <Compile Include="ECExceptions\WrongRegistrationException.cs" />
+    <Compile Include="FaultableException.cs" />
+    <Compile Include="FileExceptions\DirectoryAlreadyExistsException.cs" />
+    <Compile Include="FileExceptions\DirectoryCreationException.cs" />
+    <Compile Include="FileExceptions\DirectoryDoesNotExistException.cs" />
+    <Compile Include="FileExceptions\FileAccessException.cs" />
+    <Compile Include="FileExceptions\FileAlreadyExistsException.cs" />
+    <Compile Include="FileExceptions\FileCopyException.cs" />
+    <Compile Include="FileExceptions\FileDeletionException.cs" />
+    <Compile Include="FileExceptions\FileWriteException.cs" />
+    <Compile Include="FileExceptions\FolderOrFileNotFoundException.cs" />
+    <Compile Include="FileExceptions\NotAFileException.cs" />
+    <Compile Include="FileExceptions\PathCombineException.cs" />
+    <Compile Include="FileExceptions\RelativePathException.cs" />
+    <Compile Include="ImportAndSyncExceptions\CantApplySyncPackageException.cs" />
+    <Compile Include="ImportAndSyncExceptions\DuplicateIdException.cs" />
+    <Compile Include="ImportAndSyncExceptions\ImportException.cs" />
+    <Compile Include="ImportAndSyncExceptions\ImportModeNotSupportedException.cs" />
+    <Compile Include="ImportAndSyncExceptions\LinkTargetMissingException.cs" />
+    <Compile Include="ImportAndSyncExceptions\NotSupportedOnMainException.cs" />
+    <Compile Include="ImportAndSyncExceptions\NotSupportedOnRtaException.cs" />
+    <Compile Include="ImportAndSyncExceptions\PackageAlreadyAppliedException.cs" />
+    <Compile Include="ImportAndSyncExceptions\PackageTooOldException.cs" />
+    <Compile Include="ImportAndSyncExceptions\PathsDoNotMatchException.cs" />
+    <Compile Include="ImportAndSyncExceptions\SoftwareUpdateMissingException.cs" />
+    <Compile Include="ImportAndSyncExceptions\WrongPackageException.cs" />
+    <Compile Include="ImportAndSyncExceptions\WrongPackageSizeException.cs" />
+    <Compile Include="ImportAndSyncExceptions\WrongTransferStateException.cs" />
+    <Compile Include="InternalExceptions\ForceShutdownException.cs" />
+    <Compile Include="NotificationExceptions\BadChannelException.cs" />
+    <Compile Include="NotificationExceptions\BadReceiverPropertyException.cs" />
+    <Compile Include="NotificationExceptions\NotificationConfigException.cs" />
+    <Compile Include="NotificationExceptions\NotificationExpressionException.cs" />
+    <Compile Include="OperationFailedException.cs" />
+    <Compile Include="PatchingExceptions\InstallerPatchValidationException.cs" />
+    <Compile Include="PatchingExceptions\ParseDestinaionVersionFromPatchException.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegistrationExceptions\AlreadyRegisteredException.cs" />
+    <Compile Include="RegistrationExceptions\NotRegisteredInOfferingException.cs" />
+    <Compile Include="RegistrationExceptions\OverlappingRegistrationException.cs" />
+    <Compile Include="RegistrationExceptions\RegistrationAgreementFailureException.cs" />
+    <Compile Include="RegistrationExceptions\RegistrationAuditStateException.cs" />
+    <Compile Include="RegistrationExceptions\RegistrationStateException.cs" />
+    <Compile Include="Synchronization\NoConnectionException.cs" />
+    <Compile Include="UserExceptions\AlreadyMemberException.cs" />
+    <Compile Include="UserExceptions\AlreadyOrgMemberException.cs" />
+    <Compile Include="UserExceptions\CookieTheftException.cs" />
+    <Compile Include="UserExceptions\DeletedUserException.cs" />
+    <Compile Include="UserExceptions\DuplicateGroupDefinitionException.cs" />
+    <Compile Include="UserExceptions\ForgotPasswordTokenExpiryException.cs" />
+    <Compile Include="UserExceptions\IllegalLogonCharacterException.cs" />
+    <Compile Include="UserExceptions\InvalidCookieException.cs" />
+    <Compile Include="UserExceptions\NoUserNameException.cs" />
+    <Compile Include="UserExceptions\OrganizationLogonStateException.cs" />
+    <Compile Include="UserExceptions\PasswordComplexityException.cs" />
+    <Compile Include="UserExceptions\PasswordHistoryException.cs" />
+    <Compile Include="UserExceptions\UserException.cs" />
+    <Compile Include="UserExceptions\UsersBelongToSubGroupsException.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EC.Constants\EC.Constants.csproj">
+      <Project>{f9bd7e38-db60-47dd-a9f3-1bf488708a06}</Project>
+      <Name>EC.Constants</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

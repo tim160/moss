@@ -62,7 +62,7 @@ public class GlobalFunctions
         {
             return "/Content/img/secondLogo.jpg";
         }
-        else if (url.ToLower().Contains("registration."))
+        else if (url.ToLower().Contains("report."))
         {
             return "/Content/img/secondLogo.jpg";
 
@@ -93,17 +93,15 @@ public class GlobalFunctions
         {
             return "stark.employeeconfidential.com/Index/Page";
         }
-        else if (url.ToLower().Contains("registration."))
+        else if (url.ToLower().Contains("report."))
         {
-            return "registration.employeeconfidential.com/Index/Page";
-
+            return "report.employeeconfidential.com/Index/Page";
         }
         else if (url.ToLower().Contains("cai.employeeconfidential.com"))
         {
             return "cai.employeeconfidential.com/Index/Start";
         }
-        return "registration.employeeconfidential.com/Index/Page";
-
+        return "report.employeeconfidential.com/Index/Page";
     }
 
     #region Months
@@ -2862,7 +2860,7 @@ public class GlobalFunctions
         UserModel um = new UserModel(user_id);
         ReportModel rm = new ReportModel();
 
-        List<Int32> _report_ids = um.ReportsSearch(company_id, 0).Select(t => t.id).ToList();
+        List<Int32> _report_ids = um.ReportsSearchIds(company_id, 0);
 
         List<int> mandatory_types_ids = new List<int>();
         List<int> secondary_types_ids = new List<int>();
@@ -3025,7 +3023,7 @@ public class GlobalFunctions
         UserModel um = new UserModel(user_id);
         ReportModel rm = new ReportModel();
 
-        List<Int32> _report_ids = um.ReportsSearch(company_id, 0).Select(t => t.id).ToList();
+        List<Int32> _report_ids = um.ReportsSearchIds(company_id, 0);
 
         List<int> mandatory_relation_ids = new List<int>();
         List<int> company_relation_ids = new List<int>();
@@ -3178,7 +3176,7 @@ public class GlobalFunctions
         UserModel um = new UserModel(user_id);
         ReportModel rm = new ReportModel();
 
-        List<Int32> _report_ids = um.ReportsSearch(company_id, 0).Select(t => t.id).ToList();
+        List<Int32> _report_ids = um.ReportsSearchIds(company_id, 0);
 
         List<int> departments_ids = db.report_department.Where(item => (_report_ids.Contains(item.report_id))).Select(item => item.department_id).Distinct().ToList();
 
@@ -3200,7 +3198,7 @@ public class GlobalFunctions
 
         UserModel um = new UserModel(user_id);
         ReportModel rm = new ReportModel();
-        List<Int32> _user_report_ids = um.ReportsSearch(company_id, 0).Select(t => t.id).ToList();
+        List<Int32> _user_report_ids = um.ReportsSearchIds(company_id, 0);
 
         List<int> location_ids = db.report.Where(item => (_user_report_ids.Contains(item.id) && item.location_id.HasValue)).Select(item => item.location_id.Value).Distinct().ToList();
         foreach (int _loc_id in location_ids)

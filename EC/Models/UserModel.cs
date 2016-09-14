@@ -334,6 +334,176 @@ namespace EC.Models
             return all_report_ids;
         }
 
+        public List<int> ReportsSearchIds(int? company_id, int flag)
+        {
+            List<int> all_reports_id = new List<int>();
+            List<report> reports = new List<report>();
+            all_reports_id = GetReportIds(null);
+
+            //    select rep_id from[Marine].[dbo].[testt]  z
+            //where id in (select max(id) from[Marine].[dbo].[testt] z2 group by z2.rep_id) and z.status_id = 4
+            var refGroupInvestigationStatuses = (from m in db.report_investigation_status
+                                 group m by m.report_id into refGroup
+                                 select refGroup.OrderByDescending(x =>x.id).FirstOrDefault());
+            List<int> statuses_match_all_report_id = new List<int>();
+            if (flag == 0)
+            {
+                statuses_match_all_report_id = (from m in refGroupInvestigationStatuses
+                                                select m.report_id).ToList();
+            }
+            if (flag == 1)
+            {
+                //active
+                statuses_match_all_report_id = (from m in refGroupInvestigationStatuses
+                                                where m.investigation_status_id == Constant.investigation_status_investigation
+                                                select m.report_id).ToList();
+            }
+            if (flag == 2)
+            {
+                // completed
+                statuses_match_all_report_id = (from m in refGroupInvestigationStatuses
+                                                where m.investigation_status_id == Constant.investigation_status_resolution || m.investigation_status_id == Constant.investigation_status_completed
+                                                select m.report_id).ToList();
+            }
+            if (flag == 3)
+            {
+                //spam
+                statuses_match_all_report_id = (from m in refGroupInvestigationStatuses
+                                                where m.investigation_status_id == Constant.investigation_status_spam
+                                                select m.report_id).ToList();
+            }
+            if (flag == 4)
+            {
+                //pending
+                statuses_match_all_report_id = (from m in refGroupInvestigationStatuses
+                                                where m.investigation_status_id == Constant.investigation_status_pending || m.investigation_status_id == Constant.investigation_status_review 
+                                                select m.report_id).ToList();
+
+                List<int> reports_with_history = (from m in refGroupInvestigationStatuses
+                                                  where m.investigation_status_id > 0
+                                                  select m.report_id).ToList();
+                IEnumerable<int> excluded = all_reports_id.Except(reports_with_history);
+
+                statuses_match_all_report_id.AddRange(excluded);
+
+            }
+            if (flag == 5)
+            {
+                //closed
+                statuses_match_all_report_id = (from m in refGroupInvestigationStatuses
+                                                where m.investigation_status_id == 1 || m.investigation_status_id == 2
+                                               
+                                                select m.report_id).ToList();
+            }
+
+            IEnumerable<int> both = all_reports_id.Intersect(statuses_match_all_report_id);
+            //.Where(j => (j.investigation_status_id == 4))
+            //var refGroupInvestigationStatuses = (from m in db.report_investigation_status
+            int t1 = 0;
+         /*   var query = report_investigation_status.GroupBy(p => p.report_id)
+                  .Select(g => g.OrderByDescending(p => p.id).FirstOrDefault()
+                   );
+            var query1 = query.Select(decimal ) // where status = 4.
+            */
+
+
+
+            /*      from row in Posts
+                  group row by row.type
+                  into g
+                  select new
+                  {
+                      Content = (from row2 in g orderby row2.date descending select row2.content).FirstOrDefault(),
+                      Type = g.Key
+                  }*/
+
+            //https://msdn.microsoft.com/en-us/library/bb738512(v=vs.100).aspx
+            // http://stackoverflow.com/questions/16273485/entity-framework-select-one-of-each-group-by-date
+
+            ///
+            /// IEnumerable<int> both = id1.Intersect(id2);
+
+            ///     foreach (int id in both)
+            ////         Console.WriteLine(id);
+
+/*
+            if (all_reports_id.Count > 0)
+            {
+                ReportModel temp_rm = new ReportModel();
+                if (flag == 1)
+                {
+                    // active only
+                    foreach (report _temp in all_reports)
+                    {
+                        //     rm = ReportModel(_temp.id);
+                        //   temp_status = new ReportModel(_temp.id)._investigation_status;
+
+                        temp_rm = new ReportModel(_temp.id);
+                        if ((!temp_rm.IsSpamScreen) && (!temp_rm.IsPendingScreen) && (!temp_rm.IsClosedScreen) && (!temp_rm.IsCompletedScreen))
+                            //  if ((temp_status == 3) || (temp_status == 4) || (temp_status == 5))
+                            reports.Add(_temp);
+                    }
+                }
+                else if (flag == 2)
+                {
+                    
+
+                    // closed
+                    foreach (report _temp in all_reports)
+                    {
+                        if (new ReportModel(_temp.id).IsCompletedScreen)
+                            reports.Add(_temp);
+
+                        //  if (new ReportModel(_temp.id)._investigation_status == 6)
+                        //      reports.Add(_temp);
+                    }
+                }
+                else if (flag == 3)
+                {
+                    // spam
+                    foreach (report _temp in all_reports)
+                    {
+                        if (new ReportModel(_temp.id).IsSpamScreen)
+                            reports.Add(_temp);
+                        //  if (new ReportModel(_temp.id)._investigation_status == 7)
+                        ///     reports.Add(_temp);
+                    }
+                }
+                else if (flag == 4)
+                {
+                    // pending
+                    foreach (report _temp in all_reports)
+                    {
+                        if (new ReportModel(_temp.id).IsPendingScreen)
+                            reports.Add(_temp);
+                        //   if ((new ReportModel(_temp.id)._investigation_status == 1) || (new ReportModel(_temp.id)._investigation_status == 2))
+                        //       reports.Add(_temp);
+                    }
+                }
+                else if (flag == 5)
+                {
+                    // pending
+                    foreach (report _temp in all_reports)
+                    {
+                        if (new ReportModel(_temp.id).IsClosedScreen)
+                            reports.Add(_temp);
+                        //   if ((new ReportModel(_temp.id)._investigation_status == 1) || (new ReportModel(_temp.id)._investigation_status == 2))
+                        //       reports.Add(_temp);
+                    }
+                }
+                else
+                {
+                    reports = all_reports;
+                }
+            }
+            else
+                reports = all_reports;
+            */
+            return both.ToList();
+        }
+
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -377,7 +547,7 @@ namespace EC.Models
         /// <param name="report_id"></param>
         /// <param name="flag">0 - all reports, 1 - active, 2 - closed, 3 - spam, 4 - pending only</param>
         /// <returns></returns>
-        public List<int> ReportsSearchIds(int? company_id, int flag)
+        public List<int> ReportsSearchIds_bkp(int? company_id, int flag)
         {
             List<report> _reportsSearch = ReportsSearch(company_id, flag).ToList();
 

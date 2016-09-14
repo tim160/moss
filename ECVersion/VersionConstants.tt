@@ -1,0 +1,222 @@
+<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ output extension=".g.cs" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
+<#
+    // update this value to a custom version properties path if needed
+    const string VersionPropertiesFilePath = @"..\..\version.properties";
+
+    // DO NOT EDIT BELOW THIS LINE
+    // ===============================================================
+
+    var path = ResolvePath(VersionPropertiesFilePath);
+    var file = new FileInfo(path);
+
+    var properties = GetProperties(file);
+#>
+// Automatically Generated File
+// Generated at <#= DateTimeOffset.Now #>
+// Source: <#= VersionPropertiesFilePath #> (<#= file.FullName #>)
+
+using MarineLMS.Version;
+using System;
+
+public static class VersionConstants
+{
+    #region Raw Property Values
+
+<#
+    foreach (var prop in properties)
+    {
+#>
+    public const string <#= prop.Key #> = "<#= prop.Value #>";
+<#
+    }
+
+    if (file.Exists == false)
+    {
+#>
+    // WARNING: version.properties file missing (<#= file.FullName #>)
+<#
+    }
+#>
+
+    #endregion
+
+    #region Numeric Version Constants
+
+    public const int BUILD_VERSION_MAJOR = <#= GetValue<int>(properties, "CI_BUILD_VERSION_MAJOR") #>;
+    public const int BUILD_VERSION_MINOR = <#= GetValue<int>(properties, "CI_BUILD_VERSION_MINOR") #>;
+    public const int BUILD_VERSION_PATCH = <#= GetValue<int>(properties, "CI_BUILD_VERSION_PATCH") #>;
+    public const int BUILD_VERSION_BUILD_NUMBER = <#= GetValue<int>(properties, "CI_BUILD_VERSION_BUILD_NUMBER") #>;
+    public const long BUILD_TIMESTAMP_UTC_TICKS = <#= GetValue<long>(properties, "BUILD_TIMESTAMP_UTC_TICKS", DateTimeOffset.UtcNow.Ticks) #>;
+
+    #endregion
+
+    #region Alpha-Numeric Version Constants
+
+    public const string BUILD_VERSION_RELEASE = "<#= GetValue<string>(properties, "CI_BUILD_VERSION_RELEASE", "") #>";
+    public const string BUILD_VERSION_BRANCH = "<#= GetValue<string>(properties, "CI_BUILD_VERSION_BRANCH", "") #>";
+    public const string BUILD_VERSION_LABEL = "<#= GetValue<string>(properties, "CI_BUILD_VERSION_LABEL", "") #>";
+    public const string BUILD_VERSION_COMMIT = "<#= GetValue<string>(properties, "CI_BUILD_VERSION_COMMIT", "") #>";
+    public const string BUILD_VERSION_COMMIT_SHORT = "<#= string.Concat(GetValue<string>(properties, "CI_BUILD_VERSION_COMMIT", "").Take(7)) #>";
+
+    #endregion
+
+    #region Misc Constants
+
+    public const string ShortAssemblyVersion = "<#= GetValue(properties, "CI_BUILD_VERSION_MAJOR", "0") #>.<#= GetValue(properties, "CI_BUILD_VERSION_MINOR", "0") #>.<#= GetValue(properties, "CI_BUILD_VERSION_PATCH", "0") #>";
+    public const string AssemblyVersion = ShortAssemblyVersion + ".<#= GetValue(properties, "CI_BUILD_VERSION_BUILD_NUMBER", "0") #>";
+    public const string SemanticMetadata = "<#= GetSemanticMetadata(properties) #>";
+    public const string SemanticVersion = ShortAssemblyVersion + SemanticMetadata;
+
+    public const bool HasNoVersion = BUILD_VERSION_MAJOR == 0 && BUILD_VERSION_MINOR == 0 && BUILD_VERSION_PATCH == 0 && BUILD_VERSION_BUILD_NUMBER == 0;
+
+    public static readonly Version BuildVersion = new Version(AssemblyVersion);
+    public static readonly DateTimeOffset BuildTimestamp = new DateTimeOffset(BUILD_TIMESTAMP_UTC_TICKS, TimeSpan.Zero);
+
+    public static readonly int PackedVersion = BuildVersion.Pack();
+
+    public static readonly string CurrentVersionInfo = $"{(HasNoVersion ? "Manual Build" : $"v{SemanticVersion} Build {BUILD_VERSION_BUILD_NUMBER} ({PackedVersion})")} @ {BuildTimestamp.ToLocalTime()}";
+
+    #endregion
+}
+<#+
+
+// Our T4 tempate code lives below here
+
+// Simple helper to write out an exception at the top of the generated file
+public void WriteException(Exception e)
+{
+    WriteLine(string.Format("/*{0}{1}{0}*/", System.Environment.NewLine, e));
+}
+
+// Simple helper to convert a string to a real host path (and handle errors)
+public string ResolvePath(string path)
+{
+    var result = path;
+
+    try
+    {
+        // try the safe method first
+        // this allows us to see the full attempted path if the file doesn't exist
+        var cwd = Host.ResolvePath(".");
+        result = Path.Combine(cwd, path);
+
+        // now try to resolve the path directly
+        result = Host.ResolvePath(path);
+    }
+    catch (Exception e)
+    {
+        WriteException(e);
+    }
+
+    return result;
+}
+
+// Convert a file reference to a properties dictionary
+// This function will always return a dictionary (empty if an error occurs)
+public IDictionary<string, string> GetProperties(FileInfo file)
+{
+    var source = Enumerable.Empty<string>();
+
+    try
+    {
+        if (file.Exists)
+        {
+            source = File.ReadAllLines(file.FullName);
+        }
+    }
+    catch (Exception e)
+    {
+        WriteException(e);
+    }
+
+    var lines = source
+        .Select(line => line.Split('='))
+        .Select(x => new { Key = x[0].Trim(), Value = x.Length > 1 ? x[1].Trim() : string.Empty })
+        .Where(x => x.Key.Length > 0 && x.Key[0] != '#');
+
+    var properties = new Dictionary<string, string>();
+    
+    foreach (var line in lines)
+    {
+        if (properties.ContainsKey(line.Key))
+        {
+            // WARN
+            properties[line.Key + "asdf"] = line.Value;
+        }
+        else
+        {
+            properties.Add(line.Key, line.Value);
+        }
+    }
+
+    return properties;
+}
+
+// Get a value from the dictionary and convert its type
+// If the key doesn't exist then return the supplied default value (or the type's default value)
+public T GetValue<T>(IDictionary<string, string> properties, string key, T defaultValue = default(T))
+{
+    T value = defaultValue;
+
+    try
+    {
+        if (properties.ContainsKey(key))
+        {
+            value = (T)Convert.ChangeType(properties[key], typeof(T));
+        }
+    }
+    catch (Exception e)
+    {
+        WriteException(e);
+    }
+
+    return value;
+}
+
+// Produce the SemVer metadata string
+public string GetSemanticMetadata(IDictionary<string, string> properties)
+{
+    var metadata = new List<string>();
+
+    var branch = GetValue(properties, "CI_BUILD_VERSION_BRANCH", "");
+    var label = GetValue(properties, "CI_BUILD_VERSION_LABEL", "");
+    var commit = GetValue(properties, "CI_BUILD_VERSION_COMMIT", "");
+
+    if (string.IsNullOrEmpty(branch) == false)
+    {
+        // this Regex removes the version component from a release version branch
+        // i.e., production/0.12.2 -> production/
+        branch = Regex.Replace(branch, @"(\d+(\.\d+){0,2})$", "");
+        // This Regex replaces any invalid characters with a "-"
+        branch = Regex.Replace(branch, "[^0-9A-Za-z-]", "-");
+        // This Regex replaces any consecutive dashes with a single dash
+        metadata.Add(Regex.Replace(branch, "--+", "-").Trim('-'));
+    }
+
+    // TODO: make sure no invalid chars
+    if (string.IsNullOrEmpty(label) == false)
+    {
+        // This Regex replaces any invalid characters with a "-"
+        label = Regex.Replace(label, "[^0-9A-Za-z-]", "-");
+        // This Regex replaces any consecutive dashes with a single dash
+        label = Regex.Replace(label, "--+", "-").Trim('-');
+
+        metadata.Add(label);
+    }
+
+    if (string.IsNullOrEmpty(commit) == false)
+    {
+        metadata.Add(commit.Substring(0, 7));
+    }
+
+    return metadata.Count > 0 ? ("+" + string.Join("-", metadata)) : string.Empty;
+}
+
+#>

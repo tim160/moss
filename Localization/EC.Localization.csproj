@@ -57,7 +57,9 @@
     <EmbeddedResource Include="Resources.es-MX.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources.fr.resx" />
+    <EmbeddedResource Include="Resources.fr.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
