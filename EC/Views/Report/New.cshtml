@@ -842,9 +842,17 @@
                                class="personDataTextBox witnessTitle" />
                     </div>
                 </div>
-
                 <div class="addPersonInfo">
-                    <div class="personTitle title">@GlobalRes.Role</div>
+                    <div class="personTitle title">
+                        @GlobalRes.Role 
+                        <div class="help" title="">
+                            ?
+                            <div class="hoverElement">
+                                <div class="triangleHover position"></div>
+                                <div class="spec position">The role of an involved party could be that of a witness, victim, subject, reporter or other. </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="personData">
                         <input type="text" name="personRole[NUM]"
                                class="personDataTextBox witnessRole" />
@@ -869,9 +877,23 @@
 
 
 <script type="text/javascript">
-    $(document).ready(function () {
-            $(".button.nextSepButton").on('click', function(){
-                window.scrollTo(0, 0);
-        });
-    });
+    //$(document).ready(function () {
+    //        $(".button.nextSepButton").on('click', function(){
+    //            window.scrollTo(0, 0);
+    //        });
+    //        $(document).tooltip({
+    //            position: {
+    //                my: "center bottom-20",
+    //                at: "center top",
+    //                using: function (position, feedback) {
+    //                    $(this).css(position);
+    //                    $('<div id="specHover">')
+    //                      .addClass("arrowCustom")
+    //                      .addClass(feedback.vertical)
+    //                      .addClass(feedback.horizontal)
+    //                      .appendTo(this);
+    //                }
+    //            }
+    //        });
+    //});
 </script>
