@@ -62,7 +62,7 @@ public class GlobalFunctions
         {
             return "/Content/img/secondLogo.jpg";
         }
-        else if (url.ToLower().Contains("registration."))
+        else if (url.ToLower().Contains("report."))
         {
             return "/Content/img/secondLogo.jpg";
 
@@ -93,17 +93,15 @@ public class GlobalFunctions
         {
             return "stark.employeeconfidential.com/Index/Page";
         }
-        else if (url.ToLower().Contains("registration."))
+        else if (url.ToLower().Contains("report."))
         {
-            return "registration.employeeconfidential.com/Index/Page";
-
+            return "report.employeeconfidential.com/Index/Page";
         }
         else if (url.ToLower().Contains("cai.employeeconfidential.com"))
         {
             return "cai.employeeconfidential.com/Index/Start";
         }
-        return "registration.employeeconfidential.com/Index/Page";
-
+        return "report.employeeconfidential.com/Index/Page";
     }
 
     #region Months
