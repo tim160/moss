@@ -37,14 +37,7 @@
 <div id="bodyInc" class="loginCompany">
 
     <div class="secondMenu">
-        @if (ViewBag.LogoCompany != null)
-        {
-            <img class="secLogo" src='@Url.Content(ViewBag.LogoCompany)' />
-        }
-        else
-        {
             <img class="secLogo" src='@Url.Content(logo_path)' />
-        }
         
         <div class="statusTitle">
             <div class="titleInc">@GlobalRes.increportingandcasemanag</div>
