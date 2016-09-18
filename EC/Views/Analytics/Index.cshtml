@@ -741,47 +741,47 @@
             blockActivityHeight();
         });
         var data =@Html.Raw(_dtAnalyticsTimeline);
-        $("#chartContainer").dxChart({
-            dataSource: data,
-            series: [
-                {
-                    argumentField: 'month',
-                    valueField: 'pending',
-                    type: 'area',
-                    color: '#D6F9F6'
-                },
-                {
-                    argumentField: 'month',
-                    valueField: 'review',
-                    type: 'area',
-                    color: '#c0ece8'
-                },
-                {
-                    argumentField: 'month',
-                    valueField: 'investigation',
-                    type: 'area',
-                    color: '#82dad0'
-                },
-                {
-                    argumentField: 'month',
-                    valueField: 'resolution',
-                    type: 'area',
-                    color: '#44c8b9'
-                },
-                {
-                    argumentField: 'month',
-                    valueField: 'closed',
-                    type: 'area',
-                    color: '#e5eeee',
-                    opacity: '0.8'/*,
-                    hoverMode: "none"*/
-                }
-            ],
-            legend: { visible: false },
-            argumentAxis: {
-                valueMarginsEnabled: false
-            }
-        });
+        //$("#chartContainer").dxChart({
+        //    dataSource: data,
+        //    series: [
+        //        {
+        //            argumentField: 'month',
+        //            valueField: 'pending',
+        //            type: 'area',
+        //            color: '#D6F9F6'
+        //        },
+        //        {
+        //            argumentField: 'month',
+        //            valueField: 'review',
+        //            type: 'area',
+        //            color: '#c0ece8'
+        //        },
+        //        {
+        //            argumentField: 'month',
+        //            valueField: 'investigation',
+        //            type: 'area',
+        //            color: '#82dad0'
+        //        },
+        //        {
+        //            argumentField: 'month',
+        //            valueField: 'resolution',
+        //            type: 'area',
+        //            color: '#44c8b9'
+        //        },
+        //        {
+        //            argumentField: 'month',
+        //            valueField: 'closed',
+        //            type: 'area',
+        //            color: '#e5eeee',
+        //            opacity: '0.8'/*,
+        //            hoverMode: "none"*/
+        //        }
+        //    ],
+        //    legend: { visible: false },
+        //    argumentAxis: {
+        //        valueMarginsEnabled: false
+        //    }
+        //});
     });
 </script>
 <script src="~/Scripts/updateAjax.js"></script>

@@ -40,7 +40,6 @@
         /*try find calendar*/
         types['dateStart'] = $("#dateStart").attr("value");
         types['dateEnd'] = $("#dateEnd").attr("value");
-        console.log(types);
         
         sendAjax(userId.val(), companyId.val(), types);
     }
@@ -151,10 +150,11 @@
             $.ajax({
                 method: "POST",
                 url: "/Analytics/CompanyDepartmentReportAdvanced",
-                //dataType: 'json',
                 data: { companyId: companyId, userId: userId, types: types }
             }).done(function (data) {//data from server
                 var temp = $.parseJSON(data);
+                console.log(temp);
+
                 if (temp['LocationTable'] != null && temp['LocationTable'].length >= 1) {
                     _dtCompanyLocationReport(temp['LocationTable']);
                 }
@@ -171,11 +171,9 @@
                     blockTypeOfIncident(parentBlock, temp["RelationTable"]);
                     TypeOfIncident_Reporter('.blockReporter');
                 }
-                //if() top _dtAnalyticsTimeline
-                //_dtCompanyLocationReport($.parseJSON(data)); 
-
-
-
+                if (temp["AnalyticsTimeline"] != null && temp["AnalyticsTimeline"].length > 1) {
+                    _dtAnalyticsTimeline(temp["AnalyticsTimeline"]);
+                }
                 var averOfDays = temp['AverageStageDaysTable'];
                 var preReview = averOfDays[0].val;
                 var review = averOfDays[1].val;
@@ -186,8 +184,6 @@
                 AverageOfDaysPerStageBackUp();
                 init(review, investigation, resolution, escalation);
                 addNumberCenter();
-            }).fail(function (error) {
-                // alert(data);
             });
         }
 
