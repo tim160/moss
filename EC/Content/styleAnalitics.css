@@ -277,13 +277,22 @@
 .titleBlock span{
     font-family: OpenSans-Light;
 }
-{
+.table *{
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
 }
+.wrapperSpec {
+    width: auto !important;
+}
+.table td {
+    height: 1px;
+    text-align: center;
+    padding: 10px 0 18px 0;
+    width: 200px;
+}
 
-html, body {
+/*html, body {
   background: white;
   font: 18px 'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
   line-height: 18px;
@@ -291,7 +300,7 @@ html, body {
   width: 100%;
   height: 100%;
   color: green;
-}
+}*/
 .wrapper {
     display: flex;
     align-items: center;
@@ -314,7 +323,7 @@ table, th, td {
   border: none;
   border-collapse: collapse;
 }
-table:first-child tr:first-child td {
+table.table:first-child tr:first-child td {
   border-bottom: 1px solid #eaeeee;
 }
 .parentDiv {

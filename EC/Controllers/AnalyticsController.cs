@@ -66,8 +66,8 @@ namespace EC.Controllers
          //   DataTable dtCompanyDepartmentReport = glb.CompanyDepartmentReport( um._user.company_id, um._user.id);
             //ViewBag._dtCompanyDepartmentReport = glb.ConvertDataTabletoString(dtCompanyDepartmentReport);
 
-            DataTable dtAnalyticsTimeline = glb.AnalyticsTimeline(um._user.company_id, um._user.id);
-            ViewBag._dtAnalyticsTimeline = glb.ConvertDataTabletoString(dtAnalyticsTimeline);
+            //DataTable dtAnalyticsTimeline = glb.AnalyticsTimeline(um._user.company_id, um._user.id);
+            //ViewBag._dtAnalyticsTimeline = glb.ConvertDataTabletoString(dtAnalyticsTimeline);
 
             GlobalFunctions f = new GlobalFunctions();
             List<Tuple<string, string>> temp_tuple = f.DepartmentsListDistinct(user.company_id, user.id);

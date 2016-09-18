@@ -30,7 +30,7 @@
     string[] _titleHeaderLegend = { "Pre-Review", "Review", "Investigation", "Resolution",  "Completed", "Closed" };
     string[] _miniSquareColor = { "#D6F9F6", "#c0ece8", "#82dad0", "#44c8b9", "#44c8b9", "#e5eeee" };
 
-    var _dtAnalyticsTimeline = ViewBag._dtAnalyticsTimeline;
+    //var _dtAnalyticsTimeline = ViewBag._dtAnalyticsTimeline;
 }
 
 @*<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>*@
@@ -337,7 +337,7 @@
                 <div class="blockAverage">
                     <!--work begin-->
                     <div class="titleBlock">@GlobalRes.AverageNumberDaysPerStage</div>
-                    <div class="wrapper">
+                    <div class="wrapper wrapperSpec">
                         <table class="table">
                             <tr>
                                 <td colspan="4" class="headerBorder"></td>
@@ -740,7 +740,7 @@
             $('.mainTitle + div').toggle();
             blockActivityHeight();
         });
-        var data =@Html.Raw(_dtAnalyticsTimeline);
+        //var data =@*Html.Raw(_dtAnalyticsTimeline);*@
         //$("#chartContainer").dxChart({
         //    dataSource: data,
         //    series: [
