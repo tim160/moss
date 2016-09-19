@@ -174,6 +174,16 @@
                 if (temp["AnalyticsTimeline"] != null && temp["AnalyticsTimeline"].length > 1) {
                     _dtAnalyticsTimeline(temp["AnalyticsTimeline"]);
                 }
+                if (temp["MonthEndSnapshotTable"] != null && temp["MonthEndSnapshotTable"].length > 1 && temp["TodaySnapshotTable"] != null && temp["TodaySnapshotTable"].length > 1 && temp["MonthEndSnapshotTable"].length == temp["TodaySnapshotTable"].length) {
+                    var items = $(".blockTodayContant .itemLegend");
+                    for (var i = 0; i < temp["MonthEndSnapshotTable"].length; i++) {
+                        var currentItem = $(items[i]);
+                        var today = currentItem.find('label');
+                        var currentMonthEnd = currentItem.find('.closed');
+                        today.text('(' + temp["TodaySnapshotTable"][i] + ')');
+                        currentMonthEnd.text('(' + temp["MonthEndSnapshotTable"][i] + ')');
+                    }
+                }
                 var averOfDays = temp['AverageStageDaysTable'];
                 var preReview = averOfDays[0].val;
                 var review = averOfDays[1].val;
