@@ -15,6 +15,8 @@ namespace EC.Constants
 
     public static class PasswordConstants
     {
+        public const int ENCRYPTION_WORKLOAD = 5;
+
         /// <summary>
         /// System.Security.PasswordComplexity.MinLength: Minimum length required for the password
         /// </summary>

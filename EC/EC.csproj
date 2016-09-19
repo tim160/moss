@@ -45,6 +45,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\EC.Common.Interfaces.dll</HintPath>
     </Reference>
+    <Reference Include="EC.Model.Impl">
+      <HintPath>..\EC.Model.Impl\bin\Debug\EC.Model.Impl.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
