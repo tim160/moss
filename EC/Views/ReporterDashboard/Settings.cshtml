@@ -13,18 +13,24 @@
 
     int unread_message_number = um.Unread_Messages_Quantity(report_id, 1);
 
+    string showSettings = "";
+    if (rm._report.incident_anonymity_id == 1)
+    {
+        showSettings = "none";
+    }
+
     string confidentiality_level = (string)ViewBag.anon_level;
     CompanyModel cm = new CompanyModel(rm._report.company_id);
 
-    string confidentiality_description = GlobalRes.Youarecompletelyconfidential;
-    if (rm._report.incident_anonymity_id == 2)
-    {
-        confidentiality_description = string.Format(GlobalRes.Noinformationissharedwith0, cm._company.company_nm);  
-    }
-    if (rm._report.incident_anonymity_id == 3)
-    {
-        confidentiality_description = string.Format(GlobalRes.Wesharecontactwith0, cm._company.company_nm);
-    }
+    //string confidentiality_description = GlobalRes.Youarecompletelyconfidential;
+    //if (rm._report.incident_anonymity_id == 2)
+    //{
+    //    confidentiality_description = string.Format(GlobalRes.Noinformationissharedwith0, cm._company.company_nm);  
+    //}
+    //if (rm._report.incident_anonymity_id == 3)
+    //{
+    //    confidentiality_description = string.Format(GlobalRes.Wesharecontactwith0, cm._company.company_nm);
+    //}
 }
 
 @if ((rm._report != null) && (rm._report.id != 0))
@@ -60,7 +66,7 @@
                 <p class="title">
                     @confidentiality_level
                 </p>
-                <p class="text">@confidentiality_description</p>
+                @*<p class="text">@confidentiality_description</p>*@
             </div>
         </div><!--headerActivity-->
         @model user
@@ -71,22 +77,21 @@
             
             <div class="contentSettings">
                 <div class="contentBlockSettings">
-                    <div class="blockSetting">
+                    <div class="blockSetting" style="display:@Html.Raw(showSettings);">
                         <p>@GlobalRes.Firstname <span>@GlobalRes.Saved.ToLower()</span></p>
                         @Html.EditorFor(model => model.first_nm, new { first_nm = "first_nm" })
                     </div>
-                    <div class="blockSetting">
+                    <div class="blockSetting" style="display:@Html.Raw(showSettings);">
                         <p>@GlobalRes.Lastname <span>@GlobalRes.Saved.ToLower()</span></p>
                         @Html.EditorFor(model => model.last_nm, new { last_nm = "last_nm" })
                     </div>
-                    <div class="blockSetting">
+                    <div class="blockSetting" style="display:@Html.Raw(showSettings);">
                         <p>@GlobalRes.Email<span>@GlobalRes.Saved.ToLower()</span></p>
                         @Html.EditorFor(model => model.email, new { email = "email" })
                         <!--<input class="validate text-box single-line" id="email" name="email" type="text" data-validate="email">-->
                     </div>
                     <div class="blockSetting">
                         <p>@GlobalRes.DoYouWantToReceiveUpdates <span>@GlobalRes.Saved.ToLower()</span></p>
-                        @*<input type="text" name="fname" required="">*@
 
                         <div class="rowBlock">
                             <div class="fourBlock inputRadio">
@@ -117,7 +122,7 @@
                                 <div>
                                     <div id="saveButton" target="false">@GlobalRes.Saved.ToUpper()</div>
                                     <input type="button" class="greenButton" value="Update" target="false" />
-                                    <input type="button" class="greenButton" value="Cancel" />
+                                    <input type="button" class="greenButton greyButton" value="Cancel" />
                                 </div>
                             </div><!--reportBlock-->
 
