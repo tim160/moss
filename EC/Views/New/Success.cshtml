@@ -79,16 +79,12 @@
 <script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        $('.blockUpdateProfile, .updateProfileBtn span').click(function () {
-            if (code.value.Length == 0) {
+        $('.blockUpdateProfile, .updateProfileBtn span').click(function (event) {
+            if ($("#code").length > 0) {
                 window.location.href = "/cases";
-            }
-            else {
+            } else {
                 window.location.href = "/settings/company?first=1";
-
             }
-
-
         });
 
         $('.updateProfileBtn, .updateProfileBtn span').on('click', function () {
