@@ -35,14 +35,14 @@
         unread_report_number_string = unread_report_number.ToString();
     }
 
-    int unread_message_number = um.Unread_Messages_Quantity(0, 1) + um.Unread_Messages_Quantity(0, 2) + um.Unread_Messages_Quantity(0, 3);
+    int unread_message_number = um.Unread_Messages_Quantity(null, 1) + um.Unread_Messages_Quantity(null, 2) + um.Unread_Messages_Quantity(null, 3);
     var unread_message_number_string = "";
     if (unread_message_number > 0)
     { 
         unread_message_number_string = unread_message_number.ToString(); 
     }
 
-    int unread_task_number = um.UserTasks( 0, 0,true).ToList().Count();
+    int unread_task_number = um.UserTasks(0, null, true).ToList().Count();
     var unread_task_number_string = "";
     if (unread_task_number > 0)
     {

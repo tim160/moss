@@ -32,7 +32,8 @@ namespace EC.Controllers
             System.Configuration.KeyValueConfigurationElement customSetting =
                     rootWebConfig1.AppSettings.Settings["DisableWebMessage"];
 
-
+            UserModel um = new UserModel(977);
+            int t = um.Unread_Messages_Quantity(0, 1) + um.Unread_Messages_Quantity(0, 2) + um.Unread_Messages_Quantity(0, 3);
  /*
     //       how to send email ( from newrequest@ec.com)
             List<string> to = new List<string>();
@@ -105,7 +106,8 @@ namespace EC.Controllers
             ViewBag.cc_extension = cc_ext;
             #endregion
 
-          
+            ViewBag.LogoPath = glb.LogoBaseUrl(Request.Url.AbsoluteUri.ToLower());
+
             return View();
         }
 
