@@ -387,9 +387,14 @@
                                 var isReportedOutside = content.find('#isReportedOutside');
                                 isReportedOutside.empty();
                                 isReportedOutside.append($(' input[name=isReportRefered]:checked').val());
-                                if ($(' input[name=isReportRefered]:checked').val() != "No"){
-                                    isReportedOutside.append("<br /> Explanation: " + $('.isReportedOutside').val());
+                                if ($(".whoKnow .active input").val() != "No") {
+                                    isReportedOutside.append($(".whoKnow .active input").val() + "<br />" + $('.isReportedOutside').val());
+                                } else {
+                                    isReportedOutside.append("<br /> No");
                                 }
+                                //if ($(' input[name=isReportRefered]:checked').val() != "No"){
+                                //    isReportedOutside.append("<br /> Explanation: " + $('.isReportedOutside').val());
+                                //}
 
 
                                 var isReportUrgent = content.find('#isReportUrgent');

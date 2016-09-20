@@ -33,7 +33,6 @@ namespace EC.Controllers
                     rootWebConfig1.AppSettings.Settings["DisableWebMessage"];
 
 
-            int a = 1;
  /*
     //       how to send email ( from newrequest@ec.com)
             List<string> to = new List<string>();
