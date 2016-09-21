@@ -11,7 +11,7 @@ using Castle.Facilities.WcfIntegration;
 using Castle.MicroKernel;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using MarineLMS.Core.Base;
+using EC.Common.Base;
 using EC.Common.Interfaces;
 using System.Threading.Tasks;
 using EC.Errors;

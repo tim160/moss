@@ -1,5 +1,5 @@
 ﻿using System;
-using MarineLMS.Core.Base;
+using EC.Common.Base;
 using System.Threading;
 
 namespace EC.Core.Common

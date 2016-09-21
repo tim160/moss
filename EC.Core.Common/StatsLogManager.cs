@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Castle.Core;
 using Castle.Core.Logging;
 using Castle.MicroKernel;
-using MarineLMS.Core.Base;
+using EC.Common.Base;
 using EC.Common.Interfaces;
 using EC.Constants;
 

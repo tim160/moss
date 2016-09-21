@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 using System.Threading;
-using MarineLMS.Core.Base;
+using EC.Common.Base;
 using EC.Common.Interfaces;
 using EC.Errors;
 

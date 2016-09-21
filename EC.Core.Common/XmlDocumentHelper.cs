@@ -1,4 +1,4 @@
-﻿using MarineLMS.Core.Base;
+﻿using EC.Common.Base;
 using EC.Common.Interfaces;
 using System;
 using System.Collections.Generic;

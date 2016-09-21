@@ -5,7 +5,7 @@ using Castle.MicroKernel;
 using Castle.Windsor;
 using Castle.Core.Logging;
 using EC.Common.Interfaces;
-using MarineLMS.Core.Base;
+using EC.Common.Base;
 
 namespace EC.Core.Common
 {

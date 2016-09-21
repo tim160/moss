@@ -28,7 +28,7 @@ using log4net.Appender;
 using log4net.Core;
 using log4net.Util;
 using Castle.Core.Logging;
-using MarineLMS.Core.Base;
+using EC.Common.Base;
 using EC.Common.Interfaces;
 
 namespace EC.Core.Common

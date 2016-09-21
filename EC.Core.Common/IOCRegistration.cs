@@ -8,7 +8,7 @@ using System.ServiceModel;
 using Castle.MicroKernel.Registration;
 using Castle.Facilities.WcfIntegration;
 using Castle.Core.Logging;
-using MarineLMS.Core.Base;
+using EC.Common.Base;
 using EC.Common.Interfaces;
 
 namespace EC.Core.Common

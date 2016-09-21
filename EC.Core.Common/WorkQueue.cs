@@ -5,7 +5,7 @@ using System.Threading;
 using Castle.Core;
 using Castle.Windsor;
 using Castle.Core.Logging;
-using MarineLMS.Core.Base;
+using EC.Common.Base;
 using EC.Common.Interfaces;
 
 namespace EC.Core.Common

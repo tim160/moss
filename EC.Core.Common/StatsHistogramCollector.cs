@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 using System.Linq;
 using Castle.MicroKernel;
 using Castle.Core.Logging;
-using MarineLMS.Core.Base;
+using EC.Common.Base;
 using EC.Common.Interfaces;
 using System.Collections.Generic;
 using System.Diagnostics;

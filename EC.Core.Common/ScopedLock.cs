@@ -1,6 +1,6 @@
 using System;
 using System.Reflection;
-using MarineLMS.Core.Base;
+using EC.Common.Base;
 using EC.Common.Interfaces;
 using EC.Errors;
 

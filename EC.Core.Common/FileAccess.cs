@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Runtime.InteropServices.ComTypes;
-using MarineLMS.Core.Base;
+using EC.Common.Base;
 using Castle.Core.Logging;
 using EC.Common.Interfaces;
 using DotNetSystem = System.Configuration;
