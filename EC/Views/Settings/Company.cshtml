@@ -9,7 +9,12 @@
     var um = (UserModel)ViewBag.um;
     var user_id = um.ID;
     var role_id = um._user.role_id;
-
+    bool is_valid_mediator = false;
+    if (role_id == Constant.level_escalation_mediator || role_id == Constant.level_supervising_mediator)
+    {
+        is_valid_mediator = true;
+    }
+        
     var cm = (CompanyModel)ViewBag.cm;
     int company_id = cm._company.id;
     if(string.IsNullOrEmpty(cm._company.path_en))
@@ -59,9 +64,12 @@
                         <img id="logoCompany" src='@Url.Content(cm._company.path_en)' />
                         <input type="file" accept="image/*" id="_file" name="_file" multiple="multiple" style="width: 1px;height: 1px;opacity: 0;" />
                     </form>
+                    @if (is_valid_mediator)
+                    { 
                     <div id="hoverCompanyPhoto">
                         <label class="newImageBtn">@GlobalRes.Newimage</label>
                     </div>
+                    }
                 </label>
 
                 <div class="blockText">
@@ -84,10 +92,13 @@
     <div class="contentCompanyProfile contentCompanyProfile@{@class_ext}">
         <div class="contentSettings">
             <div class="blockLocations">
-                <div class="addLocationBtn" id="addInputLoc">
-                    <!--After click Btn - add class inactive-->
-                    <p>@GlobalRes.addnewLocation</p>
-                </div>
+                    @if (is_valid_mediator)
+                    {
+                    <div class="addLocationBtn" id="addInputLoc">
+                        <!--After click Btn - add class inactive-->
+                        <p>@GlobalRes.addnewLocation</p>
+                    </div>
+                    }
                 <div class="addLocationBtn" id="addLocBtn" style="width: auto;">
                     <!--After click Btn - add class inactive-->
                     <p style=" min-width: 50px;">@GlobalRes.Add</p>
@@ -101,7 +112,10 @@
                     {
                         <div style="display: flex;">
                             <p>@_location.location_en</p>
-                            <div data-value="@_location.id" class="deleteLocation"></div>
+                            @if (is_valid_mediator)
+                            {
+                                <div data-value="@_location.id" class="deleteLocation"></div>
+                            }
                         </div>
                     }
                 </div>
@@ -110,10 +124,13 @@
 
 
             <div class="blockDepartmens" style="display: none;">
+                    @if (is_valid_mediator)
+                    {
                 <div class="addDepartmentBtn" id="addInputDep">
                     <!--After click Btn - add class inactive-->
                     <p>@GlobalRes.addnewDepartment</p>
                 </div>
+                    }
                 <div class="addDepartmentBtn" id="addDepBtn" style="width: auto;">
                     <!--After click Btn - add class inactive-->
                     <p style="min-width: 50px;">@GlobalRes.Add</p>
@@ -127,7 +144,10 @@
                     {
                         <div style="display: flex;">
                             <p>@_department.department_en</p>
-                            <div data-value="@_department.id" class="deleteDepartment"></div>
+                            @if (is_valid_mediator)
+                             {
+                                <div data-value="@_department.id" class="deleteDepartment"></div>
+                            }
                         </div>
                     }
                 </div>
@@ -154,10 +174,13 @@
 
 
             <div class="blockIncidentTypes" style="display: none;">
+                 @if (is_valid_mediator)
+                    {
                 <div class="addIncidentTypeBtn" id="addInputIncType">
                     <!--After click Btn - add class inactive-->
                     <p>@GlobalRes.addnewIncidentType</p>
                 </div>
+                }
                 <div class="addIncidentTypeBtn" id="addIncBtn" style="width: auto;">
                     <!--After click Btn - add class inactive-->
                     <p style=" min-width: 50px;">@GlobalRes.Add</p>
@@ -171,7 +194,10 @@
                     {
                         <div style="display: flex;">
                             <p>@_entry.Value</p>
-                            <div class="deleteIncidentType" data-value="@_entry.Key"></div>
+                            @if (is_valid_mediator)
+                            {
+                                <div class="deleteIncidentType" data-value="@_entry.Key"></div>
+                            }
                         </div>
                     }
 
@@ -179,10 +205,13 @@
             </div><!--blockIncidentTypes-->
 
             <div class="blockReporterTypes" style="display: none;">
-                <div class="addReporterTypeBtn" id="addInputRepType">
-                    <!--After click Btn - add class inactive-->
-                    <p>@GlobalRes.addnewReporterType</p>
-                </div>
+                    @if (is_valid_mediator)
+                    {
+                    <div class="addReporterTypeBtn" id="addInputRepType">
+                        <!--After click Btn - add class inactive-->
+                        <p>@GlobalRes.addnewReporterType</p>
+                    </div>
+                    }
                 <div class="addReporterTypeBtn" id="addRepBtn" style="width: auto;">
                     <!--After click Btn - add class inactive-->
                     <p style=" min-width: 50px;">@GlobalRes.Add</p>
@@ -196,7 +225,10 @@
                     {
                         <div style="display: flex;">
                             <p>@_entry.Value</p>
-                            <div data-value="@_entry.Key" class="deleteReporterType"></div>
+                            @if (is_valid_mediator)
+                            {
+                                <div data-value="@_entry.Key" class="deleteReporterType"></div>
+                            }
                         </div>
                     }
 
