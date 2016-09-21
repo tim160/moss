@@ -29,8 +29,6 @@ html, body {
     display: table;
 }
 #viewReport .firstPosition {
-    /*padding-left: 191px;*/
-    /*padding-top: 40px;*/
     float: left;
     cursor: default;
 }
@@ -50,9 +48,6 @@ html, body {
     margin-left: 30px;
     padding-top: 10px;
 }
-/*.positionText {
-    margin-left: 20px;
-}*/
 .positionTitle {
     padding-left: 20px;
 }
@@ -690,6 +685,70 @@ h2.mainTitle {
     border-color: transparent transparent #e0e5e6 transparent;
     box-sizing: border-box;
 }
+#personeAgain .title {
+    color: #727c7e;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
+    font-size: 14px;
+    padding-left: 28px;
+    padding-top: 30px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    cursor: default;
+    float: none;
+}
+#personeAgain {
+    display: flex;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
+    font-size: 14px;
+    color: rgb(60, 62, 63);
+}
+#personeAgain .help{
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: #c7cdcd;
+    display: flex;
+    justify-content: center;
+    margin-left: 10px;
+    margin-top:30px;
+}
+.hoverElement {
+    position: relative;
+    display: none;
+}
+.help:hover .hoverElement {
+    display: block;
+}
+.triangleHover.position {
+    position: absolute;
+    left: -28px;
+    top: 20px;
+}
+.triangleHover {
+    width: 0px;
+    height: 0px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #333b40;
+    opacity: 0.8;
+}
+.spec.position {
+    position: absolute;
+    top: 25px;
+    right: -30px;
+}
+.spec {
+    width: 180px;
+    height: auto;
+    background-color: #333b40;
+    opacity: 0.8;
+    color: white;
+    padding: 12px;
+    font-family: 'OpenSans-Regular';
+    font-size: 12px;
+    z-index: 100;
+}
+
 
 .contentSettings .blockPersonalSettings.greyBorder{
     border: 1px solid #e0e5e6;
