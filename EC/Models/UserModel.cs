@@ -117,7 +117,8 @@ namespace EC.Models
             if (_user != null)
             {
                 // uncomment when database would be updateds
-                // _user.previous_login_dt = _user.last_login_dt;
+                if(_user.last_login_dt.HasValue)
+                    _user.previous_login_dt = _user.last_login_dt;
                 _user.last_login_dt = DateTime.Now;
                 // _user.save();
             }
