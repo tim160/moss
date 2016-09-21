@@ -394,7 +394,23 @@
                 <div class="content">
 
                     <div class="contentBlock" tabindex="1">
-                        <p class="title">@GlobalRes.YouReport</p>
+                        <div id="personeAgain">
+                            <div class="title">@GlobalRes.YouReport</div>
+                            <div class="help" title="">
+                                ?
+                                <div class="hoverElement">
+                                    <div class="triangleHover position"></div>
+                                    <div class="spec position">
+                                        •	Accounting, Auditing and Financial Reporting (i.e. financial misconduct, internal controls, expense reporting)<br />
+                                        •	Business Integrity (i.e. bribery, falsification of documents, fraud, COI, vendor/customer issues, HIPAA)<br />
+                                        •	HR, Diversity and Workplace Respect (i.e. discrimination, harassment, compensation, general HR and cases marked as “other”)<br />
+                                        •	Environment, Health and Safety (i.e. EPA compliance, assault, safety, OSHA, substance abuse)<br />
+                                        •	Misuse, Misappropriation of Corporate Assets (i.e. employee theft, time clock abuse)<br />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                         <div class="rowBlock caseInformationReport">
                             <input type="hidden" class="validate" value="false" name="caseInformationReport" data-vltarget=".caseInformationReport" data-validate="notEmpty" />
                             @if (ViewBag.secondary_type_mandatory != null)
