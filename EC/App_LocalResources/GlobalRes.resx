@@ -1639,4 +1639,7 @@
   <data name="PreReview" xml:space="preserve">
     <value>Pre-Review</value>
   </data>
+  <data name="OfficersExcludedByReporter" xml:space="preserve">
+    <value>Case officer excluded at request of reporter</value>
+  </data>
 </root>
