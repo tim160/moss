@@ -510,6 +510,7 @@ namespace EC.Controllers
                 return App_LocalResources.GlobalRes.AlreadyRegistered;
 
             int invitation_id = 0;
+
             if (!db.invitation.Any(t => ((t.email.ToLower().Trim() == email.ToLower().Trim()) && (t.used_flag == 0) && (t.code.Trim().ToLower() == code.Trim().ToLower()))))
                 return App_LocalResources.GlobalRes.InvitationCodeMismatch;
             else

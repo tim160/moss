@@ -1721,7 +1721,8 @@ button {
 #persone .personTitle.title {
     display: flex;
 }
-#persone .help {
+#persone .help,
+#personeAgain .help {
     width: 18px;
     height: 18px;
     border-radius: 50%;
@@ -1732,13 +1733,14 @@ button {
 }
 .spec {
     width: 180px;
-    height: 80px;
+    height: auto;
     background-color: #333b40;
     opacity: 0.8;
     color: white;
     padding: 12px;
     font-family: 'OpenSans-Regular';
     font-size: 12px;
+    z-index: 100;
 }
 .spec.position {
     position: absolute;
@@ -1749,10 +1751,10 @@ button {
     position: relative;
     display: none;
 }
-#persone .help:hover .hoverElement {
+.help:hover .hoverElement {
     display: block;
 }
-#persone .triangleHover.position {
+.triangleHover.position {
     position: absolute;
     left: -8px;
     top: 20px;
@@ -1765,6 +1767,12 @@ button {
     border-right: 5px solid transparent;
     border-bottom: 5px solid #333b40;
     opacity: 0.8;
+}
+#personeAgain {
+    display: flex;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
+    font-size: 14px;
+    color: rgb(60, 62, 63);
 }
    /*#specHover .ui-tooltip, .arrowCustom:after {
         background: black;
