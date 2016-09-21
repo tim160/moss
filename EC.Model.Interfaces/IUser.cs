@@ -708,6 +708,21 @@ namespace EC.Model.Interfaces
                 #endregion
 
                 #endregion*/
+
+        /// <summary>
+        /// Verify Password.
+        /// </summary>
+        bool VerifyPassword(string password);
+
+        /// <summary>
+        /// Validate Password and check it against password lockout rules and lock user if necessary.
+        /// </summary>
+        /// <remarks>
+        /// SuperUsers and non-interactive users are exempted from the lockout rules.
+        /// </remarks>
+        /// <returns>Return <c>true</c> if logon was valid. Return <c>false</c> if the user is either locked out or the password was wrong</returns>
+        bool ValidatePasswordAndUpdateLockoutState(string password);
+
     }
 
     /// <summary>
