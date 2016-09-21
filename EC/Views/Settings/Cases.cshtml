@@ -17,7 +17,7 @@
     {
         is_valid_mediator = true;
     }
-    
+
 }
 @model  company
 
@@ -134,23 +134,27 @@
 <script>
     $(document).ready(function () {
         updateTOTALTIMEONCASE();
-        $(".show").on('click', function (event) {
-            var clickedDrop = $(event.currentTarget);
-            var dropDownList = clickedDrop.siblings('.hide');
-            clickedDrop.addClass('activeDropDown');
-            dropDownList.addClass('activeDropDown');
-            dropDownList.on('click', function (event) {
-                var clickedDropDown = $(event.currentTarget);
-                var valueClicked = clickedDropDown.text().trim();
-                valueClicked += '<img src="/Content/img/arrowSelect.png">';
-                var main = clickedDropDown.siblings('.show');
-                main.html(valueClicked);
-                main.removeClass('activeDropDown');
-                dropDownList.removeClass('activeDropDown');
-                dropDownList.unbind('click');
-                sendAjaxItems();
+        var isValidMed = "@is_valid_mediator";
+        if(isValidMed != "False") {
+            $(".show").on('click', function (event) {
+                var clickedDrop = $(event.currentTarget);
+                var dropDownList = clickedDrop.siblings('.hide');
+                clickedDrop.addClass('activeDropDown');
+                dropDownList.addClass('activeDropDown');
+                dropDownList.on('click', function (event) {
+                    var clickedDropDown = $(event.currentTarget);
+                    var valueClicked = clickedDropDown.text().trim();
+                    valueClicked += '<img src="/Content/img/arrowSelect.png">';
+                    var main = clickedDropDown.siblings('.show');
+                    main.html(valueClicked);
+                    main.removeClass('activeDropDown');
+                    dropDownList.removeClass('activeDropDown');
+                    dropDownList.unbind('click');
+                    sendAjaxItems();
+                });
             });
-        });
+        }
+
         function updateTOTALTIMEONCASE() {
             var counter = 0;
             $(".someDropdowns .show").each(function (indx, element) {
