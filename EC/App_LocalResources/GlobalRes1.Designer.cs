@@ -4426,7 +4426,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to was submitted sucessfully.
+        ///   Looks up a localized string similar to was submitted successfully.
         /// </summary>
         public static string wasSubmittedSucessfully {
             get {

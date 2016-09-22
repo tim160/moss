@@ -45,7 +45,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\EC.Common.Interfaces.dll</HintPath>
     </Reference>
-    <Reference Include="EC.Model.Impl">
+    <Reference Include="EC.Model.Impl, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\EC.Model.Impl\bin\Debug\EC.Model.Impl.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">

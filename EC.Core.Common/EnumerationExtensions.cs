@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace EC.Core.Common
 {
-    public static class EnumerableExtensions
+    public static class EnumerationExtensions
     {
         /// <summary>
         /// Breaks an enumerable into a list of sub-list chunks where each chunk has at most <paramref name="chunkSize"/> items.

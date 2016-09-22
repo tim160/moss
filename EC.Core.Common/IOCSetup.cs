@@ -286,8 +286,8 @@ namespace EC.Core.Common
         {
             try
             {
-                container.AddFacility<LoggingFacility>(f => f.LogUsing(LoggerImplementation.Log4net).WithConfig("log4netConfig.xml"));
-                container.AddFacility<WcfFacility>(f => f.CloseTimeout = TimeSpan.FromMilliseconds(500));
+        //        container.AddFacility<LoggingFacility>(f => f.LogUsing(LoggerImplementation.Log4net).WithConfig("log4netConfig.xml"));
+        //        container.AddFacility<WcfFacility>(f => f.CloseTimeout = TimeSpan.FromMilliseconds(500));
                 container.AddFacility<TypedFactoryFacility>();
             }
             catch (Exception ex)

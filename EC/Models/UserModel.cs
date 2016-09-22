@@ -12,6 +12,7 @@ using EC.Models.Database;
 using EC.Models;
 using EC.Models.ECModel;
 
+
 namespace EC.Models
 {
     public class UserModel : BaseModel
@@ -112,6 +113,14 @@ namespace EC.Models
 
         public user Login(string login, string password)
         {
+            ///UserItems
+            ///
+         //   EC.Model.im
+           // userit
+         /*   UserItems ui = new UserItems();
+            ui.Password = 
+
+            */
 
             user _user = db.user.FirstOrDefault(item => item.login_nm == login && item.password == password);
             if (_user != null)

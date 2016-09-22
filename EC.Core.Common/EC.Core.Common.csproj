@@ -39,9 +39,6 @@
     <Reference Include="EC.Common.Base">
       <HintPath>..\EC.Common.Base\bin\Debug\EC.Common.Base.dll</HintPath>
     </Reference>
-    <Reference Include="EC.Common.Interfaces">
-      <HintPath>..\EC.Common.Interfaces\bin\Debug\EC.Common.Interfaces.dll</HintPath>
-    </Reference>
     <Reference Include="EC.Constants">
       <HintPath>..\EC.Constants\bin\Debug\EC.Constants.dll</HintPath>
     </Reference>
@@ -54,6 +51,8 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -113,6 +112,12 @@
     <Compile Include="UtilityThread.cs" />
     <Compile Include="WorkQueue.cs" />
     <Compile Include="XmlDocumentHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EC.Common.Interfaces\EC.Common.Interfaces.csproj">
+      <Project>{1b096edd-7575-4bbb-a93b-deb482acfbcd}</Project>
+      <Name>EC.Common.Interfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
