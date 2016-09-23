@@ -4,8 +4,8 @@
 @{
     ViewBag.Title = GlobalRes.MySettings;
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
-    
-   
+
+
     UserModel um = (UserModel)ViewBag.um;
     var user_id = um.ID;
     int checkBoxActiveCases = um._user.notification_messages_actions_flag;
@@ -13,34 +13,37 @@
     string mediator_active = string.Empty;
     string adminMediator_active = string.Empty;
     string escalationMediator_active = string.Empty;
-    var a=10;
-    if(um._user.role_id != null ) {
+    var a = 10;
+    if (um._user.role_id != null)
+    {
 
-        switch(um._user.role_id) {
-            case(4):
+        switch (um._user.role_id)
+        {
+            case (4):
                 mediator_active = "active";
                 break;
-            case(5):
+            case (5):
                 adminMediator_active = "active";
                 break;
-            case(6):
+            case (6):
                 escalationMediator_active = "active";
                 break;
         }
     }
-    if (um._user.photo_path == null || um._user.photo_path == String.Empty) {
+    if (um._user.photo_path == null || um._user.photo_path == String.Empty)
+    {
         um._user.photo_path = "/Content/Icons/settingsPersonalNOPhoto.png";
     }
     bool is_cc = ViewBag.is_cc;
     String class_ext = ViewBag.cc_extension;
-    
+
     //bool is_cc = true;
     //String class_ext = "";
     //if (is_cc)
     //{
     //    class_ext = "_cc";
     //}
-        //19
+    //19
 }
 
 <div class="blockSettings">
@@ -56,12 +59,11 @@
             </div>
         </div>
         @*<div class="positionActivityIcon">
-            <div id="activityIcon"></div>
-        </div>*@
+                <div id="activityIcon"></div>
+            </div>*@
     </div><!--casesHeared-->
-
-    
-@using (Html.BeginForm("UpdateUser", "Settings", Model, FormMethod.Post)) { 
+    @using (Html.BeginForm("UpdateUser", "Settings", Model, FormMethod.Post))
+    {
     <!--<form enctype="multipart/form-data" method="POST" action="@Url.Action("UpdateUser", "Settings")">-->
 
 
@@ -72,7 +74,7 @@
             <div class="blockPersonalPhotoSetting">
                 <div class="blockPhotoSetting">
                     <img id="logoUser" class="PersonalPhotoBlock" src="@um._user.photo_path" />
-                    <input type="file" accept="image/*" id="_file" name="_file" multiple="multiple" style="width: 1px;height: 1px;opacity: 0;" />                    
+                    <input type="file" accept="image/*" id="_file" name="_file" multiple="multiple" style="width: 1px;height: 1px;opacity: 0;" />
                 </div>
                 <div class="blockHoverPhoto">
                     <label class="close"></label>
@@ -97,7 +99,7 @@
                 </div>
                 <div class="blockPersonalSettings">
                     <p class="title">@GlobalRes.Department</p>
-                    @Html.EditorFor(model => Model.notepad_tx, new {notepad_tx = "notepad_tx" })
+                    @Html.EditorFor(model => Model.notepad_tx, new { notepad_tx = "notepad_tx" })
                 </div>
                 <div class="blockPersonalSettings">
                     <div id="personeAgain">
@@ -107,15 +109,22 @@
                             <div class="hoverElement">
                                 <div class="triangleHover position"></div>
                                 <div class="spec position">
-                                    •	A Case Office is assigned to a specific case.<br />
-                                    •	A Case Manager is responsible for and manages the Employee Confidential system and assigns all the cases (typically an HR manager).<br />
-                                    •	A Case Executive (most often a C-suite executive) handles only escalation issues and signs off on case resolutions and closure applications.<br />
+
+                                    <ul>
+                                        <li>A Case Office is assigned to a specific case.</li>
+                                        <li>A Case Manager is responsible for and manages the Employee Confidential system and assigns all the cases (typically an HR manager).</li>
+                                        <li>A Case Executive (most often a C-suite executive) handles only escalation issues and signs off on case resolutions and closure applications.</li>
+                                    </ul>
+
+                                    @*•	A Case Office is assigned to a specific case.<br />
+                                        •	A Case Manager is responsible for and manages the Employee Confidential system and assigns all the cases (typically an HR manager).<br />
+                                        •	A Case Executive (most often a C-suite executive) handles only escalation issues and signs off on case resolutions and closure applications.<br />*@
 
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="rowBlock inputMediator">
                         <div class="freeBlock inputRadio mediator @mediator_active">
                             <label class="inputBlock" for="freeIncident">
@@ -132,7 +141,7 @@
                         <div class="freeBlock inputRadio escalationMediator @escalationMediator_active">
                             @*<label class="inputBlock" for="fourIncident">*@
                             <label class="inputBlock" for="freeIncident">
-                                <input id="threeIncident" type="radio" name="role_id" value="4" >
+                                <input id="threeIncident" type="radio" name="role_id" value="4">
                                 <span class="radioTitle">@GlobalRes.EscalationMediator</span>
                             </label>
                         </div>
@@ -165,7 +174,7 @@
                 <div class="blockPersonalSettings">
                     <p class="title">@GlobalRes.often_notifications_new</p>
                     <div class="rowBlock" id="checkBoxNewReports">
-                        <div class="freeBlock inputRadio" data-valueFlag="0">
+                        <div class="freeBlock inputRadio" data-valueflag="0">
                             <label class="inputBlock" for="thirdIncident">
                                 @Html.RadioButtonFor(model => model.notification_messages_actions_flag, "1")
                                 @*<input id="thirdIncident" type="radio" name="stay2">*@
@@ -173,7 +182,7 @@
                                 <span class="radioTitle">@GlobalRes.Instantly</span>
                             </label>
                         </div>
-                        <div class="freeBlock inputRadio" data-valueFlag="1">
+                        <div class="freeBlock inputRadio" data-valueflag="1">
                             <label class="inputBlock" for="fourIncident">
                                 @Html.RadioButtonFor(m => m.notification_messages_actions_flag, "2")
                                 @*<input id="fourIncident" type="radio" name="stay2">*@
@@ -185,14 +194,14 @@
                 </div>
                 <div class="blockUpdateProfile">
                     <div class="updateProfileBtn">
-                        <input class="greenButton" type="submit" value="update"  />
+                        <input class="greenButton" type="submit" value="update" />
                         <span style="display: none;">@GlobalRes.UpdateProfile.ToLower()</span>
                     </div>
                 </div>
 
             </div>
         </div>
-        }
+    }
     <!--</form>-->
 </div>
 
@@ -254,21 +263,20 @@
 
         $('.blockPersonalSettings input')
            .focus(function () {
-              /* $('.blockPersonalSettings').css({ 'border': '1px solid #e0e5e6', 'width': '100%' });
-               $(this).parent('.blockPersonalSettings').css({ 'border': '2px solid #05b5a2', 'width': '99.8%' });*/
-               $('.blockPersonalSettings').css({ 'border-color': 'transparent transparent #e0e5e6 transparent'});
-               $(this).parent('.blockPersonalSettings').css({ 'border-color': '#05b5a2'});
+               /* $('.blockPersonalSettings').css({ 'border': '1px solid #e0e5e6', 'width': '100%' });
+                $(this).parent('.blockPersonalSettings').css({ 'border': '2px solid #05b5a2', 'width': '99.8%' });*/
+               $('.blockPersonalSettings').css({ 'border-color': 'transparent transparent #e0e5e6 transparent' });
+               $(this).parent('.blockPersonalSettings').css({ 'border-color': '#05b5a2' });
            })
             .focusout(function () {
                 //$(this).parent('.blockPersonalSettings').css({ 'border': '1px solid #e0e5e6', 'width': '100%' });
-                $(this).parent('.blockPersonalSettings').css({ 'border-color': 'transparent transparent #e0e5e6 transparent'});
+                $(this).parent('.blockPersonalSettings').css({ 'border-color': 'transparent transparent #e0e5e6 transparent' });
             });
 
 
 
         $('.newMessageBtn span').click(function () {
-            if (($("#first_nm").val().trim.length > 0) && ($("#last_nm").val().trim.length > 0) && ($("#title_ds").val().trim.length > 0) && ($("#email").val().trim.length > 0))
-            {
+            if (($("#first_nm").val().trim.length > 0) && ($("#last_nm").val().trim.length > 0) && ($("#title_ds").val().trim.length > 0) && ($("#email").val().trim.length > 0)) {
                 $('.newMessageBtn input').click();
             }
         });
@@ -303,7 +311,7 @@
             $('.blockPersonalSettings').css({ 'border': '1px solid #e0e5e6', 'width': '100%' });
             self.parents('.blockPersonalSettings').css({ 'border': '2px solid #05b5a2', 'width': '99.8%' });
             OldClick(self);
-            
+
         });
     });
 
