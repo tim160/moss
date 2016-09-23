@@ -294,7 +294,7 @@ namespace EC.Controllers
 
                     if (_role_change)
                     {
-                        if ((_updateuser.email.Trim().Length > 0) && glb.IsValidEmail(_updateuser.email.Trim()))
+                        if ((_updateuser.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_updateuser.email.Trim()))
                         {
                             to = new List<string>();
                             cc = new List<string>();
@@ -314,7 +314,7 @@ namespace EC.Controllers
                     }
                     if (_status_change)
                     {
-                        if ((_updateuser.email.Trim().Length > 0) && glb.IsValidEmail(_updateuser.email.Trim()))
+                        if ((_updateuser.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_updateuser.email.Trim()))
                         {
                             to = new List<string>();
                             cc = new List<string>();
@@ -485,7 +485,7 @@ namespace EC.Controllers
             {
                 return App_LocalResources.GlobalRes.EmptyData;
             }
-            if (!glb.IsValidEmail(email))
+            if (!m_EmailHelper.IsValidEmail(email))
             {
                 return App_LocalResources.GlobalRes.EmailInvalid;
             }
@@ -526,7 +526,7 @@ namespace EC.Controllers
             // send email with code to email address
 
 
-            if ((email.Trim().Length > 0) && glb.IsValidEmail(email.Trim()))
+            if ((email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(email.Trim()))
             {
                 List<string> to = new List<string>();
                 List<string> cc = new List<string>();

@@ -382,7 +382,7 @@
     <value>You can always check the case progress using the following details</value>
   </data>
   <data name="wasSubmittedSucessfully" xml:space="preserve">
-    <value>was submitted sucessfully</value>
+    <value>was submitted successfully</value>
   </data>
   <data name="Confidential" xml:space="preserve">
     <value>Confidential</value>
@@ -1581,5 +1581,8 @@
   </data>
   <data name="OfficersExcludedByReporter" xml:space="preserve">
     <value>Case officer excluded at request of reporter</value>
+  </data>
+  <data name="RoleInReportExpla" xml:space="preserve">
+    <value>The role of an involved party could be that of a witness, victim, subject, reporter or other.</value>
   </data>
 </root>

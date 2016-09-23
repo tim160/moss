@@ -21,17 +21,17 @@ namespace EC.Core.Common
                 if ((propertyRefExpr.Body.NodeType == ExpressionType.Convert) || (propertyRefExpr.Body.NodeType == ExpressionType.ConvertChecked))
                 {
                     var unaryExpression = propertyRefExpr.Body as UnaryExpression;
-               //////tim     memberExpression = (unaryExpression?.Operand) as MemberExpression;
+          ////          memberExpression = (unaryExpression?.Operand) as MemberExpression;
                 }
                 else
                 {
                     memberExpression = propertyRefExpr.Body as MemberExpression;
                 }
-           ////     if (memberExpression == null)
+        //////        if (memberExpression == null)
                 {
-             /////       throw new ParameterValidationException("propertyRefExpr", "You must pass a lambda of the form: 'c => c.Property'");
+            //////        throw new ParameterValidationException("propertyRefExpr", "You must pass a lambda of the form: 'c => c.Property'");
                 }
-                return "";//////// memberExpression.Member.Name;
+                return "";// memberExpression.Member.Name;
             }
             catch (Exception)
             {

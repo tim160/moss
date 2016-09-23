@@ -24,7 +24,7 @@ namespace EC.Core.Common
         /// <returns>Return <c>true</c> if correct email address format. Return <c>false</c> if not a valid email address and <c>throwException</c> is <c>false</c>.</returns>
         /// <exception cref="EmailFormatException">If email address has a wrong format and <c>throwException</c> is <c>true</c>.</exception>
 
-        public bool CheckEmailAddressFormat(string emailAddress, bool throwException = true)
+        public bool IsValidEmail(string emailAddress, bool throwException = true)
         {
             if (string.IsNullOrWhiteSpace(emailAddress))
             {
@@ -40,9 +40,9 @@ namespace EC.Core.Common
 
             // The email address must be of a valid format...
             // Source for regular expression: http://www.regular-expressions.info/email.html
-            //Regex rx = new Regex("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", RegexOptions.CultureInvariant);
+            Regex rx = new Regex("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", RegexOptions.CultureInvariant);
             //Regex rx = new Regex(".+@.+\\..+", RegexOptions.CultureInvariant);
-            Regex rx = new Regex(".+@+", RegexOptions.CultureInvariant);
+      ////      Regex rx = new Regex(".+@+", RegexOptions.CultureInvariant);
             var m = rx.Match(emailAddress);
             if (!m.Success)
             {

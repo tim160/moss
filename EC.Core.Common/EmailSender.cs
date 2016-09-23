@@ -36,8 +36,8 @@ namespace EC.Core.Common
             }
 
             // Check email addresses...
-            addressHelper.CheckEmailAddressFormat(from);
-            addressHelper.CheckEmailAddressFormat(to);
+            addressHelper.IsValidEmail(from);
+            addressHelper.IsValidEmail(to);
             
             //Send the Message
             MailMessage message = new MailMessage(from, to, subject, body);

@@ -5,12 +5,14 @@ using System.Web;
 using EC.Models.Database;
 using EC.App_LocalResources;
 using EC.Models.App;
-
+using EC.Core.Common;
+using EC.Common.Interfaces;
 
 namespace EC.Models.ViewModel
 {
     public class CasePreviewViewModel
     {
+        protected IDateTimeHelper m_DateTimeHelper;
 
         public int report_id { get; set; }
         public string case_secondary_types { get; set; }
@@ -129,7 +131,7 @@ namespace EC.Models.ViewModel
                 this.last_sender_id = ris.user_id;
                 temp_um = new UserModel(ris.user_id);
                 this.last_sender_name = temp_um._user.first_nm + " " + temp_um._user.last_nm;
-                this.last_sender_date = glb.ConvertDateToLongMonthString(ris.created_date);
+                this.last_sender_date = m_DateTimeHelper.ConvertDateToLongMonthString(ris.created_date);
                 this.last_status_message = ris.description;
 
                 if ((rm._investigation_status == Constant.investigation_status_completed))
@@ -155,7 +157,7 @@ namespace EC.Models.ViewModel
                 this.previous_sender_id = ris.user_id;
                 temp_um = new UserModel(ris.user_id);
                 this.previous_sender_name = temp_um._user.first_nm + " " + temp_um._user.last_nm;
-                this.previous_sender_date = glb.ConvertDateToLongMonthString(ris.created_date);
+                this.previous_sender_date = DateTimeHelper.ConvertDateToLongMonthString(ris.created_date);
                 this.previous_status_message = ris.description;
                 this.previous_investigation_status_number = ris.investigation_status_id;
 
@@ -175,7 +177,7 @@ namespace EC.Models.ViewModel
                 this.last_sender_id = ris.user_id;
                 temp_um = new UserModel(ris.user_id);
                 this.last_sender_name = temp_um._user.first_nm + " " + temp_um._user.last_nm;
-                this.last_sender_date = glb.ConvertDateToLongMonthString(ris.created_date);
+                this.last_sender_date = DateTimeHelper.ConvertDateToLongMonthString(ris.created_date);
                 this.last_status_message = ris.description;
 
                 if ((rm._investigation_status == Constant.investigation_status_completed))

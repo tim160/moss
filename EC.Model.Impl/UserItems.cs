@@ -6,15 +6,22 @@ using System.Threading.Tasks;
 using EC.Model.Interfaces;
 using EC.Constants;
 
+
 namespace EC.Model.Impl
 {
-    class UserItems : IUser
+    public class UserItems : IUser
     {
-
+        public void SetUserDetails(int id, string password, string login_nm)
+        {
+            Id = id;
+            Password = password;
+            LoginName = login_nm;
+        
+        }
         public void SetPasswordHash(string newPasswordHash)
         {
-            if (Password == newPasswordHash) { return; }
-            Password = newPasswordHash;
+            if (Password + PasswordConstants.PASSWORD_SALT == newPasswordHash) { return; }
+            Password = newPasswordHash + PasswordConstants.PASSWORD_SALT;
         }
 
         /// <summary>
@@ -24,10 +31,10 @@ namespace EC.Model.Impl
 
         public void SetPasswordAndValidate(string newPassword)
         {
-            if (Password != null && BCrypt.Net.BCrypt.Verify(newPassword, Password)) { return; }
+            if (Password != null && BCrypt.Net.BCrypt.Verify(newPassword + PasswordConstants.PASSWORD_SALT, Password)) { return; }
          //   var hasComplexityRule = m_OrganizationHelper.HasPasswordComplexityRuleSet(efOrganization) || m_OrganizationHelper.HasPasswordHistoryRuleSet(efOrganization);
         //    if (hasComplexityRule) { m_OrganizationHelper.ValidatePasswordComplexityAndHistory(efOrganization, newPassword, this); }
-            var passwordHash = BCrypt.Net.BCrypt.HashPassword(newPassword, PasswordConstants.ENCRYPTION_WORKLOAD);
+            var passwordHash = BCrypt.Net.BCrypt.HashPassword(newPassword + PasswordConstants.PASSWORD_SALT, PasswordConstants.ENCRYPTION_WORKLOAD);
             Password = passwordHash;
         }
 
@@ -39,8 +46,8 @@ namespace EC.Model.Impl
 
         public void SetPasswordNoValidation(string newPassword)
         {
-            if (Password != null && BCrypt.Net.BCrypt.Verify(newPassword, Password)) { return; }
-            Password = BCrypt.Net.BCrypt.HashPassword(newPassword, EncryptionConstants.ENCRYPTION_WORKLOAD);
+            if (Password != null && BCrypt.Net.BCrypt.Verify(newPassword + PasswordConstants.PASSWORD_SALT, Password)) { return; }
+            Password = BCrypt.Net.BCrypt.HashPassword(newPassword + PasswordConstants.PASSWORD_SALT, PasswordConstants.ENCRYPTION_WORKLOAD);
         }
 
 
@@ -52,7 +59,7 @@ namespace EC.Model.Impl
 
         public bool VerifyPassword(string password)
         {
-            return BCrypt.Net.BCrypt.Verify(password, Password);
+            return BCrypt.Net.BCrypt.Verify(password + PasswordConstants.PASSWORD_SALT, Password);
         }
 
         /// <summary>
@@ -109,8 +116,15 @@ namespace EC.Model.Impl
 
 
 
-        // ------------------------------- Mapped Scalars --------------------------------------
+     /*   public UserItems(string loginName)
+        {
+            user _user = db.user.FirstOrDefault(item => item.login_nm == login);
+        }*/
 
+        // ------------------------------- Mapped Scalars --------------------------------------
+        public virtual Int32 Id { get; protected set; }
+        public virtual string LoginName { get; protected set; }
         public virtual string Password { get; protected set; }
+
     }
 }

@@ -31,10 +31,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Castle.Core">
-      <HintPath>..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
+      <HintPath>C:\Marine\src\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Facilities.WcfIntegration">
+      <HintPath>..\packages\Castle.WcfIntegrationFacility.3.2.0\lib\net45\Castle.Facilities.WcfIntegration.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Windsor">
-      <HintPath>..\packages\Castle.Windsor.3.2.1\lib\net45\Castle.Windsor.dll</HintPath>
+      <HintPath>..\packages\Castle.Windsor.3.2.1\lib\net35\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="EC.Common.Base">
+      <HintPath>..\EC.Common.Base\bin\Debug\EC.Common.Base.dll</HintPath>
     </Reference>
     <Reference Include="EC.Constants">
       <HintPath>..\EC.Constants\bin\Debug\EC.Constants.dll</HintPath>
@@ -115,10 +121,6 @@
     <Compile Include="XmlDocumentHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EC.Common.Base\EC.Common.Base.csproj">
-      <Project>{eece5e11-2f95-4f21-b108-5c6d12dc5603}</Project>
-      <Name>EC.Common.Base</Name>
-    </ProjectReference>
     <ProjectReference Include="..\EC.Common.Interfaces\EC.Common.Interfaces.csproj">
       <Project>{1b096edd-7575-4bbb-a93b-deb482acfbcd}</Project>
       <Name>EC.Common.Interfaces</Name>

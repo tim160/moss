@@ -20,7 +20,7 @@ using System.Web.Script.Serialization;
 public class GlobalFunctions
 {
     ECEntities db = new ECEntities();
-    private  const int PasswordLenght = 6;
+    private  const int PasswordLength = 6;
     private const int PasswordExtraSubmolsCount = 0;
 
 
@@ -51,7 +51,6 @@ public class GlobalFunctions
     }
 
 
-
     public string LogoBaseUrl(string url)
     {
         if (url.ToLower().Contains("campus"))
@@ -74,7 +73,6 @@ public class GlobalFunctions
         return "/Content/img/secondLogo.jpg";
 
     }
-
 
 
     /// <summary>
@@ -176,7 +174,7 @@ public class GlobalFunctions
 
     public string GeneretedPassword()
     {
-        string password = System.Web.Security.Membership.GeneratePassword(PasswordLenght, PasswordExtraSubmolsCount);
+        string password = System.Web.Security.Membership.GeneratePassword(PasswordLength, PasswordExtraSubmolsCount);
         password = ReplaceForUI(password);
         return password;
     }
@@ -254,7 +252,6 @@ public class GlobalFunctions
     //    ht.Add("@country_id", strCountryID);
      //   sce.BindDropDownList(System.Web.HttpContext.Current.Session[Constants.session_connection_string_name].ToString(), ddl_province, "spc_GetProvinceList", "province_nm", "id", ht);
     }
-
 
 
     public action GetActionById(int id)
@@ -337,59 +334,7 @@ public class GlobalFunctions
 
     /*
 
-    /// <summary>
-    /// MM/dd/yyyy
-    /// </summary>
-    /// <param name="dt"></param>
-    /// <returns></returns>
-    public string ConvertDateToString(DateTime dt)
-    {
-        string sDate = "";
-        string Month = dt.Month.ToString();
-        string Day = dt.Day.ToString();
-        if (Month.Length == 1)
-            Month = "0" + Month;
-        if (Day.Length == 1)
-            Day = "0" + Day;
-        sDate = Month + "/" + Day + "/" + dt.Year.ToString();
-        return sDate;
-    }
-
-    /// <summary>
-    /// YYYYMMDD
-    /// </summary>
-    /// <param name="dt"></param>
-    /// <returns></returns>
-    public string ConvertDateToDataBaseString(DateTime dt)
-    {
-        string sDate = "";
-        string Month = dt.Month.ToString();
-        string Day = dt.Day.ToString();
-        if (Month.Length == 1)
-            Month = "0" + Month;
-        if (Day.Length == 1)
-            Day = "0" + Day;
-        sDate = dt.Year.ToString() + Month + Day;
-        return sDate;
-    }
-
-    /// <summary>
-    /// YYYY/MM/DD
-    /// </summary>
-    /// <param name="dt"></param>
-    /// <returns></returns>
-    public string ConvertDateToDataBaseStringWithDashes(DateTime dt)
-    {
-        string sDate = "";
-        string Month = dt.Month.ToString();
-        string Day = dt.Day.ToString();
-        if (Month.Length == 1)
-            Month = "0" + Month;
-        if (Day.Length == 1)
-            Day = "0" + Day;
-        sDate = dt.Year.ToString() + "/" + Month + "/" + Day;
-        return sDate;
-    }
+   
 
  
     /// <summary>
@@ -726,101 +671,6 @@ public class GlobalFunctions
         return input;
     }
 
-
-    #region DateConversion
-    /// <summary>
-    /// MM/dd/yyyy
-    /// </summary>
-    /// <param name="dt"></param>
-    /// <returns></returns>
-    public string ConvertDateToString(DateTime dt)
-    {
-        string sDate = "";
-        string Month = dt.Month.ToString();
-        string Day = dt.Day.ToString();
-        if (Month.Length == 1)
-            Month = "0" + Month;
-        if (Day.Length == 1)
-            Day = "0" + Day;
-        sDate = Month + "/" + Day + "/" + dt.Year.ToString();
-        return sDate;
-    }
-
-    /// <summary>
-    /// YYYYMMDD
-    /// </summary>
-    /// <param name="dt"></param>
-    /// <returns></returns>
-    public string ConvertDateToDataBaseString(DateTime dt)
-    {
-        string sDate = "";
-        string Month = dt.Month.ToString();
-        string Day = dt.Day.ToString();
-        if (Month.Length == 1)
-            Month = "0" + Month;
-        if (Day.Length == 1)
-            Day = "0" + Day;
-        sDate = dt.Year.ToString() + Month + Day;
-        return sDate;
-    }
-
-    /// <summary>
-    /// YYYY/MM/DD
-    /// </summary>
-    /// <param name="dt"></param>
-    /// <returns></returns>
-    public string ConvertDateToDataBaseStringWithDashes(DateTime dt)
-    {
-        string sDate = "";
-        string Month = dt.Month.ToString();
-        string Day = dt.Day.ToString();
-        if (Month.Length == 1)
-            Month = "0" + Month;
-        if (Day.Length == 1)
-            Day = "0" + Day;
-        sDate = dt.Year.ToString() + "/" + Month + "/" + Day;
-        return sDate;
-    }
-
-    /// <summary>
-    /// Feb dd, yyyy
-    /// </summary>
-    /// <param name="dt"></param>
-    /// <returns></returns>
-    public string ConvertDateToShortString(DateTime dt)
-    {
-        string sDate = "";
-        string Month = GetShortMonth(dt.Month);
-        string Day = dt.Day.ToString();
-        if (Month.Length == 1)
-            Month = "0" + Month;
-        if (Day.Length == 1)
-            Day = "0" + Day;
-        //sDate = Month + " " + Day + ", " + dt.Year.ToString();
-        sDate = Month + " " + Day + ", " + dt.Year.ToString();
-        return sDate;
-    }
-
-
-    /// <summary>
-    /// February 2, 2015
-    /// </summary>
-    /// <param name="dt"></param>
-    /// <returns></returns>
-    public string ConvertDateToLongMonthString(DateTime dt)
-    {
-        string sDate = "";
-        string Month = GetFullMonth(dt.Month);
-        string Day = dt.Day.ToString();
-        if (Month.Length == 1)
-            Month = "0" + Month;
-        if (Day.Length == 1)
-            Day = "0" + Day;
-        //sDate = Month + " " + Day + ", " + dt.Year.ToString();
-        sDate = Month + " " + Day + ", " + dt.Year.ToString();
-        return sDate;
-    } 
-    #endregion
 
     /// <summary>
     /// 
@@ -3372,41 +3222,9 @@ public class GlobalFunctions
           .Select(s => s[random.Next(s.Length)]).ToArray());
     }
 
-    public bool IsValidEmail(string email)
-    {
-        string pattern = @"^[a-z][a-z|0-9|]*([_][a-z|0-9]+)*([.][a-z|0-9]+([_][a-z|0-9]+)*)?@[a-z][a-z|0-9|]*\.([a-z][a-z|0-9]*(\.[a-z][a-z|0-9]*)?)$";
-        Match match = Regex.Match(email.Trim(), pattern, RegexOptions.IgnoreCase);
-        if (!match.Success)
-        {
-            return false;
-        }
-        return true;
-    }
-
-    public string RoleInReport(int role_id)
-    {
-        string role = EC.App_LocalResources.GlobalRes.Witness;
-
-     /*   if (_report != null)
-        {
-             injuryOrDamage =
-                db.injury_damage.Where(item => item.id == _report.injury_damage_id).FirstOrDefault();
-            if (injuryOrDamage != null)
-            {
-                injury_damage = injuryOrDamage.text_en;
-                if (_report.reported_outside_id.Value == 2)
-                {
-                    injury_damage = injury_damage + ". Description : " + _report.injury_damage;
-                }
-            }
-        }*/
-        return role;
-
-
-    }
     public static string IsValidPass(string password)
     {
-        if(password!= "" && password.Length >= PasswordLenght)
+        if(password!= "" && password.Length >= PasswordLength)
         {
             return "Success";
         }

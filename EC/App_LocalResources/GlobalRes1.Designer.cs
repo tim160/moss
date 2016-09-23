@@ -3814,6 +3814,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The role of an involved party could be that of a witness, victim, subject, reporter or other..
+        /// </summary>
+        public static string RoleInReportExpla {
+            get {
+                return ResourceManager.GetString("RoleInReportExpla", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sales.
         /// </summary>
         public static string Sales {
@@ -4426,7 +4435,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to was submitted sucessfully.
+        ///   Looks up a localized string similar to was submitted successfully.
         /// </summary>
         public static string wasSubmittedSucessfully {
             get {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using EC.Models.Database;
-
+using EC.Core.Common;
 
 namespace EC.Models.ECModel
 {
@@ -40,7 +40,7 @@ namespace EC.Models.ECModel
             {
                 if (TaskDueDate.HasValue)
                 {
-                    return glb.ConvertDateToShortString(TaskDueDate.Value);
+                    return DateTimeHelper.ConvertDateToShortString(TaskDueDate.Value);
                 }
                 else
                     return "";
