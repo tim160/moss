@@ -716,7 +716,7 @@ namespace EC.Common.Interfaces
         /// in the ping implementation if they are not within a MaxRTAClockDifference app setting log and error,
         /// and prevent the RTA from sync'ing.
         /// </summary>
-        int MaxRTAClockDifference { get; }
+    //////    int MaxRTAClockDifference { get; }
 
         /// <summary>
         /// Allow all user to logon to root

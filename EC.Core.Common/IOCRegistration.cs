@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Web;
 using System.ServiceModel;
 using Castle.MicroKernel.Registration;
-using Castle.Facilities.WcfIntegration;
+////tim using Castle.Facilities.WcfIntegration;
 using Castle.Core.Logging;
 using EC.Common.Base;
 using EC.Common.Interfaces;

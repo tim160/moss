@@ -5,9 +5,9 @@ using System.Reflection;
 using System.Threading;
 using Castle.Core;
 using Castle.Core.Logging;
-using Castle.Facilities.Logging;
+////timusing Castle.Facilities.Logging;
 using Castle.Facilities.TypedFactory;
-using Castle.Facilities.WcfIntegration;
+////timusing Castle.Facilities.WcfIntegration;
 using Castle.MicroKernel;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
@@ -200,7 +200,7 @@ namespace EC.Core.Common
                     component = component.ImplementedBy(implementationClass);
                     if (IsSingletonType(implementationClass)) { component = component.LifestyleSingleton(); }
                     if (IsTransientType(implementationClass)) { component = component.LifestyleTransient(); }
-                    if (IsPerWCFRequestType(implementationClass)) { component = component.LifestylePerWcfOperation(); }
+                    ////tim         if (IsPerWCFRequestType(implementationClass)) { component = component.LifestylePerWcfOperation(); }
                     if (IsRegisteredAsFactory(implementationClass)) { RegisterFactoryForClass(w, implementationClass); }
                     if (registration.RegistrationName != null) { component = component.Named(registration.RegistrationName); }
                     component = SetupNamedDependencies(component, implementationClass);
@@ -286,8 +286,8 @@ namespace EC.Core.Common
         {
             try
             {
-                container.AddFacility<LoggingFacility>(f => f.LogUsing(LoggerImplementation.Log4net).WithConfig("log4netConfig.xml"));
-                container.AddFacility<WcfFacility>(f => f.CloseTimeout = TimeSpan.FromMilliseconds(500));
+                ////tim      container.AddFacility<LoggingFacility>(f => f.LogUsing(LoggerImplementation.Log4net).WithConfig("log4netConfig.xml"));
+                ////tim       container.AddFacility<WcfFacility>(f => f.CloseTimeout = TimeSpan.FromMilliseconds(500));
                 container.AddFacility<TypedFactoryFacility>();
             }
             catch (Exception ex)
