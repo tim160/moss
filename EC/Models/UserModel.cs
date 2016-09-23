@@ -11,7 +11,8 @@ using System.Web.Mvc;
 using EC.Models.Database;
 using EC.Models;
 using EC.Models.ECModel;
-
+using EC.Model.Impl;
+using EC.Model.Interfaces;
 
 namespace EC.Models
 {
@@ -19,6 +20,7 @@ namespace EC.Models
     {
         public static readonly UserModel inst = new UserModel();
         GlobalFunctions glb = new GlobalFunctions();
+        UserItems ui = new UserItems();
 
         #region Properties
         public int ID
@@ -104,7 +106,11 @@ namespace EC.Models
         {
             ID = id;
             if (id != 0)
+            {
+                user _user = db.user.FirstOrDefault(item => item.id == id);
+                ui.SetUserDetails(_user.id, _user.password, _user.login_nm);
                 return db.user.FirstOrDefault(item => item.id == id);
+            }
             else
             {
                 return null;
@@ -113,25 +119,24 @@ namespace EC.Models
 
         public user Login(string login, string password)
         {
-            ///UserItems
-            ///
-         //   EC.Model.im
-           // userit
-         /*   UserItems ui = new UserItems();
-            ui.Password = 
+            user _user = db.user.FirstOrDefault(item => item.login_nm == login);
 
-            */
-
-            user _user = db.user.FirstOrDefault(item => item.login_nm == login && item.password == password);
             if (_user != null)
             {
-                // uncomment when database would be updateds
-                if(_user.last_login_dt.HasValue)
-                    _user.previous_login_dt = _user.last_login_dt;
-                _user.last_login_dt = DateTime.Now;
-                // _user.save();
+                ui.SetUserDetails(_user.id, _user.password, _user.login_nm);
+                bool is_valid_pass = ui.VerifyPassword(password);
+                // uncomment when database would be updated
+                if (is_valid_pass)
+                {
+                    if (_user.last_login_dt.HasValue)
+                        _user.previous_login_dt = _user.last_login_dt;
+                    _user.last_login_dt = DateTime.Now;
+                    return _user;
+
+                  //  _user.save();
+                }
             }
-            return _user;
+            return null;
         }
 
 
@@ -147,7 +152,10 @@ namespace EC.Models
 
         public user GetUserByLogin(string login)
         {
-            return db.user.FirstOrDefault(item => item.login_nm == login);
+            user _user = db.user.FirstOrDefault(item => item.login_nm == login);
+            ui.SetUserDetails(_user.id, _user.password, _user.login_nm);
+
+            return _user;
         }
 
         public user Add(user user)
@@ -960,7 +968,7 @@ namespace EC.Models
                 UserModel um = new UserModel(assignTo);
                 ReportModel _rm = new ReportModel(report_id);
 
-                if ((um._user.email.Trim().Length > 0) && glb.IsValidEmail(um._user.email.Trim()))
+                if ((um._user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(um._user.email.Trim()))
                 {
                     List<string> to = new List<string>();
                     List<string> cc = new List<string>();
@@ -1110,7 +1118,7 @@ namespace EC.Models
                 UserModel um = new UserModel(mediator_id);
                 ReportModel _rm = new ReportModel(tsk.TaskReportID);
 
-                if ((um._user.email.Trim().Length > 0) && glb.IsValidEmail(um._user.email.Trim()))
+                if ((um._user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(um._user.email.Trim()))
                 {
                     List<string> to = new List<string>();
                     List<string> cc = new List<string>();

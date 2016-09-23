@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using EC.Models;
 using EC.Models.Database;
+using EC.Common.Interfaces;
 
 namespace EC.Controllers
 {
@@ -12,6 +13,7 @@ namespace EC.Controllers
     {
         ECEntities db = new ECEntities();
         GlobalFunctions glb = new GlobalFunctions();
+        private IEmailAddressHelper m_EmailHelper;
 
         // GET: New
         public ActionResult Index(string code, string email)
@@ -110,7 +112,7 @@ namespace EC.Controllers
             {
                 return App_LocalResources.GlobalRes.CompanyInUse;
             }
-            if (!glb.IsValidEmail(email))
+            if (!m_EmailHelper.IsValidEmail(email))
             {
                 return App_LocalResources.GlobalRes.EmailInvalid;
             }
@@ -457,7 +459,7 @@ namespace EC.Controllers
 
                 #region Email to Case Admin
 
-                if ((user.email.Trim().Length > 0) && glb.IsValidEmail(user.email.Trim()))
+                if ((user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(user.email.Trim()))
                 {
                     List<string> to = new List<string>();
                     List<string> cc = new List<string>();
@@ -501,7 +503,7 @@ namespace EC.Controllers
                 return App_LocalResources.GlobalRes.EmptyData;
             }
 
-            if (!glb.IsValidEmail(email))
+            if (!m_EmailHelper.IsValidEmail(email))
             {
                 return App_LocalResources.GlobalRes.EmailInvalid;
             }
@@ -616,7 +618,7 @@ namespace EC.Controllers
 
                 #region Email to Case Admin
 
-                if ((user.email.Trim().Length > 0) && glb.IsValidEmail(user.email.Trim()))
+                if ((user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(user.email.Trim()))
                 {
                     List<string> to = new List<string>();
                     List<string> cc = new List<string>();
@@ -639,7 +641,7 @@ namespace EC.Controllers
                     #region New Mediator Arrived - message to all Supervising mediators
                     foreach (user _user in cm.AllSupervisingMediators(cm._company.id, true))
                     {
-                        if ((_user.email.Trim().Length > 0) && glb.IsValidEmail(_user.email.Trim()))
+                        if ((_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_user.email.Trim()))
                         {
                             to = new List<string>();
                             cc = new List<string>();

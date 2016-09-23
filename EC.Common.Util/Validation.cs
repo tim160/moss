@@ -7,9 +7,9 @@ namespace EC.Common.Util
 {
     public class Validation
     {
-        public static bool IsEmailValid(string test)
+        public static bool IsEmailValid(string email)
         {
-            Regex regex = new Regex("^[a-zA-Z0-9._-]+@([a-zA-Z0-9.-]+.)+[a-zA-Z0-9.-]{2,4}$");
+           /* Regex regex = new Regex("^[a-zA-Z0-9._-]+@([a-zA-Z0-9.-]+.)+[a-zA-Z0-9.-]{2,4}$");
             if (regex.IsMatch(test))
             {
                 return true; 
@@ -17,7 +17,16 @@ namespace EC.Common.Util
             else
             {
                 return false; 
+            }*/
+
+            string pattern = @"^[a-z][a-z|0-9|]*([_][a-z|0-9]+)*([.][a-z|0-9]+([_][a-z|0-9]+)*)?@[a-z][a-z|0-9|]*\.([a-z][a-z|0-9]*(\.[a-z][a-z|0-9]*)?)$";
+            Match match = Regex.Match(email.Trim(), pattern, RegexOptions.IgnoreCase);
+            if (!match.Success)
+            {
+                return false;
             }
+            return true;
+
         }
 
         public static IList<T> Intersect<T>(IList<T> lhs, IList<T> rhs)

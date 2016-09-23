@@ -709,14 +709,6 @@ namespace EC.Common.Interfaces
 
         bool SyncNoSoftware { get; }
 
-        /// <summary>
-        /// For manual sync package we must check the RTA system time and ensure it is within MaxRTAClockDifference (1 hour default) of main.
-        /// 
-        /// AutoSync ping must grow two DateTime parameters (the RTA sys and mono times) and on main, 
-        /// in the ping implementation if they are not within a MaxRTAClockDifference app setting log and error,
-        /// and prevent the RTA from sync'ing.
-        /// </summary>
-        int MaxRTAClockDifference { get; }
 
         /// <summary>
         /// Allow all user to logon to root

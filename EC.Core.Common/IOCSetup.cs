@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Threading;
 using Castle.Core;
 using Castle.Core.Logging;
-using Castle.Facilities.Logging;
+//using Castle.Facilities.Logging;
 using Castle.Facilities.TypedFactory;
 using Castle.Facilities.WcfIntegration;
 using Castle.MicroKernel;

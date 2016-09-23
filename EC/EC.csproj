@@ -45,10 +45,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\EC.Common.Interfaces.dll</HintPath>
     </Reference>
-    <Reference Include="EC.Model.Impl, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\EC.Model.Impl\bin\Debug\EC.Model.Impl.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -1013,9 +1009,17 @@
       <Project>{41f69955-26be-4a77-832e-109f2d88654e}</Project>
       <Name>EC.Business</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EC.Common.Base\EC.Common.Base.csproj">
+      <Project>{eece5e11-2f95-4f21-b108-5c6d12dc5603}</Project>
+      <Name>EC.Common.Base</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EC.Common.Util\EC.Common.Util.csproj">
       <Project>{60f0f82e-fa76-4279-b980-21614256dafb}</Project>
       <Name>EC.Common.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EC.Core.Common\EC.Core.Common.csproj">
+      <Project>{a6dc770d-89c5-483b-b73c-077df5c7fefe}</Project>
+      <Name>EC.Core.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\EC.Framework.Data.Util\EC.Framework.Data.Util.csproj">
       <Project>{c7573cb1-0e71-48db-9238-52c1807f7825}</Project>
@@ -1024,6 +1028,14 @@
     <ProjectReference Include="..\EC.Framework.Email\EC.Framework.Email.csproj">
       <Project>{f17c0764-8c0b-4290-b7c3-e647ce65e96f}</Project>
       <Name>EC.Framework.Email</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EC.Model.Impl\EC.Model.Impl.csproj">
+      <Project>{ff040d47-bd8a-4c3c-a285-0d6f2f11754c}</Project>
+      <Name>EC.Model.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EC.Model.Interfaces\EC.Model.Interfaces.csproj">
+      <Project>{0e38125a-c76e-4cb3-b9e1-1339b55e0a86}</Project>
+      <Name>EC.Model.Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\Localization\EC.Localization.csproj">
       <Project>{2403521e-4e55-43c3-a91c-2d4454488003}</Project>

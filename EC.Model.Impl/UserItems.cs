@@ -6,11 +6,18 @@ using System.Threading.Tasks;
 using EC.Model.Interfaces;
 using EC.Constants;
 
+
 namespace EC.Model.Impl
 {
     public class UserItems : IUser
     {
-
+        public void SetUserDetails(int id, string password, string login_nm)
+        {
+            Id = id;
+            Password = password;
+            LoginName = login_nm;
+        
+        }
         public void SetPasswordHash(string newPasswordHash)
         {
             if (Password + PasswordConstants.PASSWORD_SALT == newPasswordHash) { return; }
@@ -109,8 +116,15 @@ namespace EC.Model.Impl
 
 
 
-        // ------------------------------- Mapped Scalars --------------------------------------
+     /*   public UserItems(string loginName)
+        {
+            user _user = db.user.FirstOrDefault(item => item.login_nm == login);
+        }*/
 
+        // ------------------------------- Mapped Scalars --------------------------------------
+        public virtual Int32 Id { get; protected set; }
+        public virtual string LoginName { get; protected set; }
         public virtual string Password { get; protected set; }
+
     }
 }

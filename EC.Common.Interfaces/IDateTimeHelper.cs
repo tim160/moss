@@ -51,5 +51,78 @@ namespace EC.Common.Interfaces
         /// <returns></returns>
        
         TimeSpan ParseTime(string timeString);
+
+        /// <summary>
+        /// Will return the just Date MM/dd/yyyy
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+
+        string ConvertDateToString(DateTime dt);
+
+        /// <summary>
+        /// YYYYMMDD
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+
+        string ConvertDateToDataBaseString(DateTime dt);
+
+        /// <summary>
+        /// YYYY/MM/DD
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+
+        string ConvertDateToDataBaseStringWithDashes(DateTime dt);
+
+        /// <summary>
+        /// Feb dd, yyyy
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+
+        string ConvertDateToShortString(DateTime date);
+
+        /// <summary>
+        /// February 2, 2015
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+
+        string ConvertDateToLongMonthString(DateTime date);
+
+        /// <summary>
+        /// All Month names
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+
+        Dictionary<int, string> FullMonth();
+
+        /// <summary>
+        /// Jan,Feb, Mar
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+
+        Dictionary<int, string> ShortMonth();
+
+
+        /// <summary>
+        /// returns February
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+
+        string GetFullMonth(int month);
+
+        /// <summary>
+        /// Feb
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+
+        string GetShortMonth(int month);
     }
 }

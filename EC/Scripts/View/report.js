@@ -146,8 +146,6 @@
             if (countryId) {
                 
                 if (countryId == 198 || countryId == 171) {
-                    /* to emu anonimnuu opciu ( Completely Confidential)  nado ubrat ( eto luchshe) ili disable ( eto huje). */
-                    //alert("HEllo World!!!");
                     var temp = $(".rowBlock.anType");
                     temp.removeClass("vlCorrect");
                     temp.find("input name[incident_anonymity_id]").removeClass("vlCorrect");
@@ -503,9 +501,7 @@
 
 
         gInfoBtn.click(function () {
-            /**здесь было закомментировано
-             * /
-             */
+
             addToAvaible(generalInfo.attr('data-id'));
             menuItemClicked(generalInfo.attr('data-id'));
             setOpacity();

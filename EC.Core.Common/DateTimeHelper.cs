@@ -82,5 +82,171 @@ namespace EC.Core.Common
             TimeSpan newTime = new TimeSpan(hour, min, 0);
             return newTime;
         }
+
+
+        #region String Dates
+        /// <summary>
+        /// MM/dd/yyyy
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public string ConvertDateToString(DateTime dt)
+        {
+            string sDate = "";
+            string Month = dt.Month.ToString();
+            string Day = dt.Day.ToString();
+            if (Month.Length == 1)
+                Month = "0" + Month;
+            if (Day.Length == 1)
+                Day = "0" + Day;
+            sDate = Month + "/" + Day + "/" + dt.Year.ToString();
+            return sDate;
+        }
+
+        /// <summary>
+        /// YYYYMMDD
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public string ConvertDateToDataBaseString(DateTime dt)
+        {
+            string sDate = "";
+            string Month = dt.Month.ToString();
+            string Day = dt.Day.ToString();
+            if (Month.Length == 1)
+                Month = "0" + Month;
+            if (Day.Length == 1)
+                Day = "0" + Day;
+            sDate = dt.Year.ToString() + Month + Day;
+            return sDate;
+        }
+
+        /// <summary>
+        /// YYYY/MM/DD
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public string ConvertDateToDataBaseStringWithDashes(DateTime dt)
+        {
+            string sDate = "";
+            string Month = dt.Month.ToString();
+            string Day = dt.Day.ToString();
+            if (Month.Length == 1)
+                Month = "0" + Month;
+            if (Day.Length == 1)
+                Day = "0" + Day;
+            sDate = dt.Year.ToString() + "/" + Month + "/" + Day;
+            return sDate;
+        }
+
+        /// <summary>
+        /// Feb dd, yyyy
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public string ConvertDateToShortString(DateTime dt)
+        {
+            string sDate = "";
+            string Month = GetShortMonth(dt.Month);
+            string Day = dt.Day.ToString();
+            if (Month.Length == 1)
+                Month = "0" + Month;
+            if (Day.Length == 1)
+                Day = "0" + Day;
+            //sDate = Month + " " + Day + ", " + dt.Year.ToString();
+            sDate = Month + " " + Day + ", " + dt.Year.ToString();
+            return sDate;
+        }
+
+
+        /// <summary>
+        /// February 2, 2015
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public string ConvertDateToLongMonthString(DateTime dt)
+        {
+            string sDate = "";
+            string Month = "";// GetFullMonth(dt.Month);
+            string Day = dt.Day.ToString();
+            if (Month.Length == 1)
+                Month = "0" + Month;
+            if (Day.Length == 1)
+                Day = "0" + Day;
+            //sDate = Month + " " + Day + ", " + dt.Year.ToString();
+            sDate = Month + " " + Day + ", " + dt.Year.ToString();
+            return sDate;
+        }
+
+        #endregion
+
+        #region Months
+
+        public Dictionary<int, string> FullMonth()
+        {
+            Dictionary<int, string> month = new Dictionary<int, string>();
+
+            month.Add(1, "January");
+            month.Add(2, "February");
+            month.Add(3, "March");
+            month.Add(4, "April");
+            month.Add(5, "May");
+            month.Add(6, "June");
+            month.Add(7, "July");
+            month.Add(8, "August");
+            month.Add(9, "September");
+            month.Add(10, "October");
+            month.Add(11, "November");
+            month.Add(12, "December");
+
+            return month;
+        }
+        public Dictionary<int, string> ShortMonth()
+        {
+            Dictionary<int, string> month = new Dictionary<int, string>();
+
+            month.Add(1, "Jan");
+            month.Add(2, "Feb");
+            month.Add(3, "Mar");
+            month.Add(4, "Apr");
+            month.Add(5, "May");
+            month.Add(6, "Jun");
+            month.Add(7, "Jul");
+            month.Add(8, "Aug");
+            month.Add(9, "Sep");
+            month.Add(10, "Oct");
+            month.Add(11, "Nov");
+            month.Add(12, "Dec");
+
+            return month;
+        }
+
+        /// <summary>
+        /// returns February
+        /// </summary>
+        /// <param name="month"></param>
+        /// <returns></returns>
+        public string GetFullMonth(int month)
+        {
+            string month_s = "";
+            Dictionary<int, string> Monthes = FullMonth();
+            if ((month > 0) && (month < 13))
+                Monthes.TryGetValue(month, out month_s);
+
+            return month_s;
+
+        }
+        public string GetShortMonth(int month)
+        {
+            string month_s = "";
+            Dictionary<int, string> Monthes = ShortMonth();
+            if ((month > 0) && (month < 13))
+                Monthes.TryGetValue(month, out month_s);
+
+            return month_s;
+
+        }
+        #endregion
+
     }
 }

@@ -9,11 +9,15 @@ using EC.Models;
 using EC.Models.Database;
 using EC.Models.ECModel;
 using System.Data.SqlClient;
+using EC.Core.Common;
+using EC.Common.Interfaces;
 
 namespace EC.Controllers
 {
     public class AnalyticsController : BaseController
     {
+        protected IDateTimeHelper DateTimeHelper;
+
         // GET: Analytics
         public ActionResult Index()
         {
@@ -45,7 +49,7 @@ namespace EC.Controllers
             int[] _month_end_spanshot = glb.AnalyticsByDate(null, _month_end_date, um._user.company_id, um._user.id);
             ViewBag._month_end_spanshot = _month_end_spanshot;
 
-            string _today = glb.ConvertDateToShortString(DateTime.Today);
+            string _today = DateTimeHelper.ConvertDateToShortString(DateTime.Today);
             ViewBag._today = _today;
 
      //       DataTable dtSecondaryTypes = glb.SecondaryTypesByDate( um._user.company_id, um._user.id);
@@ -114,7 +118,7 @@ namespace EC.Controllers
             int[] _month_end_spanshot = glb.AnalyticsByDate(null, _month_end_date, um._user.company_id, um._user.id);
             ViewBag._month_end_spanshot = _month_end_spanshot;
 
-            string _today = glb.ConvertDateToShortString(DateTime.Today);
+            string _today = DateTimeHelper.ConvertDateToShortString(DateTime.Today);
             ViewBag._today = _today;
 
             DataTable dtAnalyticsTimeline = glb.AnalyticsTimeline(um._user.company_id, um._user.id);

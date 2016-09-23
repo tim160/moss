@@ -3,6 +3,7 @@ using EC.Models.Database;
 using System.Linq;
 using System;
 
+
 namespace EC.Models
 {
     public class LoginModel : BaseModel
@@ -15,7 +16,7 @@ namespace EC.Models
             {
                 if (email != null && email.Length > 0)
                 {
-                    if (glb.IsValidEmail(email.Trim()))
+                    if (m_EmailHelper.IsValidEmail(email.Trim()))
                     {
                         user_change_password _ucp = (db.user_change_password.Where(t => t.password_token.ToLower().Trim() == token.ToLower().Trim())).FirstOrDefault();
                         if (_ucp != null)
