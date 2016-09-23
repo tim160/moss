@@ -3243,4 +3243,45 @@ public class GlobalFunctions
         }
         return VisitorsIPAddr;
     }
+
+    /// <summary>
+    /// Feb dd, yyyy
+    /// </summary>
+    /// <param name="dt"></param>
+    /// <returns></returns>
+    public string ConvertDateToShortString(DateTime dt)
+    {
+        string sDate = "";
+        string Month = GetShortMonth(dt.Month);
+        string Day = dt.Day.ToString();
+        if (Month.Length == 1)
+            Month = "0" + Month;
+        if (Day.Length == 1)
+            Day = "0" + Day;
+        //sDate = Month + " " + Day + ", " + dt.Year.ToString();
+        sDate = Month + " " + Day + ", " + dt.Year.ToString();
+        return sDate;
+    }
+
+    /// <summary>
+    /// February 2, 2015
+    /// </summary>
+    /// <param name="dt"></param>
+    /// <returns></returns>
+    public string ConvertDateToLongMonthString(DateTime dt)
+    {
+        string sDate = "";
+        string Month = "";// GetFullMonth(dt.Month);
+        string Day = dt.Day.ToString();
+        if (Month.Length == 1)
+            Month = "0" + Month;
+        if (Day.Length == 1)
+            Day = "0" + Day;
+        //sDate = Month + " " + Day + ", " + dt.Year.ToString();
+        sDate = Month + " " + Day + ", " + dt.Year.ToString();
+        return sDate;
+    }
+
+       
+
 }

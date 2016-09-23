@@ -119,14 +119,14 @@ namespace EC.Models
 
         public user Login(string login, string password)
         {
-            user _user = db.user.FirstOrDefault(item => item.login_nm == login);
+            user _user = db.user.FirstOrDefault(item => item.login_nm == login && item.password == password);
 
             if (_user != null)
             {
                 ui.SetUserDetails(_user.id, _user.password, _user.login_nm);
-                bool is_valid_pass = ui.VerifyPassword(password);
+       //////////         bool is_valid_pass = ui.VerifyPassword(password);
                 // uncomment when database would be updated
-                if (is_valid_pass)
+        ////////        if (is_valid_pass)
                 {
                     if (_user.last_login_dt.HasValue)
                         _user.previous_login_dt = _user.last_login_dt;

@@ -40,7 +40,7 @@ namespace EC.Models.ECModel
             {
                 if (TaskDueDate.HasValue)
                 {
-                    return DateTimeHelper.ConvertDateToShortString(TaskDueDate.Value);
+                    return glb.ConvertDateToShortString(TaskDueDate.Value);
                 }
                 else
                     return "";

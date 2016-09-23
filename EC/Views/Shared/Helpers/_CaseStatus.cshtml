@@ -1,10 +1,11 @@
 ﻿@using EC.Models;
 @using EC.Models.ECModel;
 @using EC.Models.Database;
-
-
+@using EC.Common.Interfaces;
+@using EC.Core.Common;
 @using EC.App_LocalResources;
 @{
+    IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
     int report_id = (Int32)ViewBag.report_id;
     int user_id = (Int32)ViewBag.user_id;
     ReportModel rm = (ReportModel)ViewBag.rm;
@@ -84,7 +85,7 @@
                     @GlobalRes.CaseCantBeResolved
                 </div>
                 <div class="regularText">
-                    @temp_um._user.first_nm @temp_um._user.last_nm, @glb.ConvertDateToLongMonthString(ris.created_date):
+                    @temp_um._user.first_nm @temp_um._user.last_nm, @m_DateTimeHelper.ConvertDateToLongMonthString(ris.created_date):
                 </div>
                 <div class="openSansText">
                     @ris.description
@@ -183,7 +184,7 @@ else if (rm._investigation_status == Constant.investigation_status_closed)
                     }
                 </div>
                 <div class="regularText">
-                    @temp_um._user.first_nm @temp_um._user.last_nm,    @glb.ConvertDateToLongMonthString(ris.created_date):
+                    @temp_um._user.first_nm @temp_um._user.last_nm,    @m_DateTimeHelper.ConvertDateToLongMonthString(ris.created_date):
                 </div>
                 <div class="openSansText">
                     @ris.description
@@ -211,7 +212,7 @@ else if (rm._investigation_status == Constant.investigation_status_closed)
                                 @GlobalRes.Approved
                             </div>
                             <div class="regularText">
-                                @temp_um._user.first_nm @temp_um._user.last_nm,    @glb.ConvertDateToLongMonthString(ris.created_date):
+                                @temp_um._user.first_nm @temp_um._user.last_nm,    @m_DateTimeHelper.ConvertDateToLongMonthString(ris.created_date):
                             </div>
                             <div class="openSansText">
                                 @ris.description

@@ -16,7 +16,7 @@ namespace EC.Controllers
 {
     public class AnalyticsController : BaseController
     {
-        protected IDateTimeHelper DateTimeHelper;
+        protected IDateTimeHelper DateTimeHelper = new DateTimeHelper();
 
         // GET: Analytics
         public ActionResult Index()

@@ -1,6 +1,9 @@
 ﻿@using EC.Models;
 @using EC.Models.Database;
 @using EC.App_LocalResources;
+@using EC.Common.Interfaces;
+@using EC.Core.Common;
+
 @{
     bool? is_cc = ViewBag.is_cc;
     if (!is_cc.HasValue)
@@ -15,7 +18,7 @@
     //{
     //    class_ext = "_cc";
     //}
-    
+    IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
 
     var user_id = (Int32)ViewBag.user_id;
@@ -105,7 +108,7 @@
                         <table id="timeReport">
                             <tr>
                                 <td class="openSans">@GlobalRes.Reported:</td>
-                                <td class="openSansSemibold">@glb.ConvertDateToLongMonthString(rm._report.reported_dt)</td>
+                                <td class="openSansSemibold">@m_DateTimeHelper.ConvertDateToLongMonthString(rm._report.reported_dt)</td>
                             </tr>
                             <tr>
                                 @if (!is_spam)

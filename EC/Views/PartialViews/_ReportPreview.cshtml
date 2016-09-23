@@ -2,9 +2,12 @@
 @using EC.Models.ECModel;
 @using EC.Models.Database;
 @using EC.App_LocalResources;
+@using EC.Common.Interfaces;
+@using EC.Core.Common;
+
 @{
     GlobalFunctions glb = new GlobalFunctions();
-
+    IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
     var report_id = (Int32)ViewBag.report_id;
     var user_id = (Int32)ViewBag.user_id;
     var flag = (Int32)ViewBag.flag;
@@ -111,14 +114,14 @@
                         }
                         <div class="blockButtonAndDate">
                             <p class="caseBtn @caseStatusBtn"></p><!-- and class = caseResolvedBtn -->
-                            <p class="data">@glb.ConvertDateToLongMonthString(rm._last_investigation_status().created_date)</p>
+                            <p class="data">@m_DateTimeHelper.ConvertDateToLongMonthString(rm._last_investigation_status().created_date)</p>
                         </div>
                     }
                     @if (flag == 3)
                     {
                         <div class="blockButtonAndDate">
                             <p class="caseBtn caseSpamBtn"></p>
-                            <p class="data">@glb.ConvertDateToLongMonthString(rm._last_investigation_status().created_date)</p>
+                            <p class="data">@m_DateTimeHelper.ConvertDateToLongMonthString(rm._last_investigation_status().created_date)</p>
                         </div>
                     }
                 </div>
@@ -340,7 +343,7 @@
                                         }
 
                                         <div class="textInfo">
-                                            <p class="headerTitle">@temp_um._user.first_nm @temp_um._user.last_nm,   @glb.ConvertDateToLongMonthString(ris.created_date):</p>
+                                            <p class="headerTitle">@temp_um._user.first_nm @temp_um._user.last_nm,   @m_DateTimeHelper.ConvertDateToLongMonthString(ris.created_date):</p>
                                             <p class="textAll">
                                                 @ris.description
                                             </p>
@@ -402,7 +405,7 @@
 
                                                     }
                                                     <div class="textInfo">
-                                                        <p class="headerTitle">@temp_um._user.first_nm @temp_um._user.last_nm,    @glb.ConvertDateToLongMonthString(ris.created_date):</p>
+                                                        <p class="headerTitle">@temp_um._user.first_nm @temp_um._user.last_nm,    @m_DateTimeHelper.ConvertDateToLongMonthString(ris.created_date):</p>
                                                         <p class="textAll">
                                                             @ris.description
                                                         </p>
@@ -501,7 +504,7 @@
                                                 }
 
                                                 <div class="textInfo">
-                                                    <p class="headerTitle">@temp_um._user.first_nm @temp_um._user.last_nm,   @glb.ConvertDateToLongMonthString(ris.created_date):</p>
+                                                    <p class="headerTitle">@temp_um._user.first_nm @temp_um._user.last_nm,   @m_DateTimeHelper.ConvertDateToLongMonthString(ris.created_date):</p>
                                                     <p class="textAll">
                                                         @ris.description
                                                     </p>

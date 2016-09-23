@@ -773,7 +773,7 @@
     <value>Mediator</value>
   </data>
   <data name="Mediatorsinvolved" xml:space="preserve">
-    <value>Mediators involved</value>
+    <value>Mediators excluded</value>
   </data>
   <data name="Menu" xml:space="preserve">
     <value>Menu</value>
@@ -944,7 +944,7 @@
     <value>Total time</value>
   </data>
   <data name="Totaltimeoncase" xml:space="preserve">
-    <value>Total time on case</value>
+    <value>Case Management Turnaraound Time</value>
   </data>
   <data name="Typeofincident" xml:space="preserve">
     <value>Type of incident</value>

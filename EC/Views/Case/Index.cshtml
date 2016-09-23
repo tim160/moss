@@ -3,7 +3,11 @@
 @using EC.Models.Database;
 @using EC.App_LocalResources;
 @using EC.Common.Base;
+@using EC.Common.Interfaces;
+@using EC.Core.Common;
+
 @{
+    IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
     
     bool? is_cc = ViewBag.is_cc;
     if (!is_cc.HasValue)
@@ -128,7 +132,7 @@
                                     @temp_resolved_or_not
                             </div>
                             <div class="regularText">
-                                @temp_um._user.first_nm @temp_um._user.last_nm, @DateTimeHelper.ConvertDateToLongMonthString(ris.created_date):
+                                @temp_um._user.first_nm @temp_um._user.last_nm, @m_DateTimeHelper.ConvertDateToLongMonthString(ris.created_date):
                             </div>
                             <div class="openSansText">
                                 @ris.description
@@ -209,7 +213,7 @@
                                 }
                                 </div>
                                 <div class="regularText">
-                                    @temp_um._user.first_nm @temp_um._user.last_nm, @DateTimeHelper.ConvertDateToLongMonthString(ris.created_date):
+                                    @temp_um._user.first_nm @temp_um._user.last_nm, @m_DateTimeHelper.ConvertDateToLongMonthString(ris.created_date):
                                 </div>
                                 <div class="openSansText">
                                     @ris.description
@@ -248,7 +252,7 @@
                                     @GlobalRes.Approved
                                 </div>
                                 <div class="regularText">
-                                    @temp_um._user.first_nm @temp_um._user.last_nm,    @DateTimeHelper.ConvertDateToLongMonthString(ris.created_date):
+                                    @temp_um._user.first_nm @temp_um._user.last_nm,    @m_DateTimeHelper.ConvertDateToLongMonthString(ris.created_date):
                                 </div>
                                 <div class="openSansText">
                                     @ris.description

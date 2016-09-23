@@ -1,7 +1,11 @@
 ﻿@using EC.Models.ViewModel;
 @using EC.App_LocalResources;
 @using EC.Models;
+@using EC.Common.Interfaces;
+@using EC.Core.Common;
+
 @{
+    IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
     string color = "";
     string position ="";
     if(Model.investigation_status_number == Constant.investigation_status_resolution || Model.investigation_status_number == Constant.investigation_status_completed || Model.investigation_status_number == Constant.investigation_status_closed) {
@@ -131,7 +135,7 @@
                         @Model.current_status
                     </div>
                     <div class="completedPosition">
-                        <span>@glb.ConvertDateToLongMonthString(rm._last_investigation_status().created_date)</span>
+                        <span>@m_DateTimeHelper.ConvertDateToLongMonthString(rm._last_investigation_status().created_date)</span>
                     </div>
 
                 }
