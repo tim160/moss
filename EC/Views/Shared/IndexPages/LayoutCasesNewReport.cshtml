@@ -27,7 +27,7 @@
     EC.Models.ReportModel rm = new EC.Models.ReportModel();
 
         
-    var unread_report_number = um.UnreadReport(0, 0).ToList().Count();
+    var unread_report_number = um.UnreadReport(0, 0).Count;
     var unread_report_number_string = "";
     string page_subtitle = "";
     if (unread_report_number > 0)

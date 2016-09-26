@@ -516,7 +516,6 @@
                         $('.acceptNewCase').click(function(){
                             var self = $(this);
                             var description = $('.acceptCaseNote textarea').val();
-                            console.log(description);
 
                             reopenOrAcceptCase(@Html.Raw(report_id), @Html.Raw(user_id), description);
 
