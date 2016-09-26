@@ -2815,7 +2815,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mediators involved.
+        ///   Looks up a localized string similar to Mediators excluded.
         /// </summary>
         public static string Mediatorsinvolved {
             get {
@@ -3153,6 +3153,15 @@ namespace EC.App_LocalResources {
         public static string NumberEmployees {
             get {
                 return ResourceManager.GetString("NumberEmployees", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Case officer excluded at request of reporter.
+        /// </summary>
+        public static string OfficersExcludedByReporter {
+            get {
+                return ResourceManager.GetString("OfficersExcludedByReporter", resourceCulture);
             }
         }
         
@@ -3805,6 +3814,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The role of an involved party could be that of a witness, victim, subject, reporter or other..
+        /// </summary>
+        public static string RoleInReportExpla {
+            get {
+                return ResourceManager.GetString("RoleInReportExpla", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sales.
         /// </summary>
         public static string Sales {
@@ -4264,7 +4282,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Total time on case.
+        ///   Looks up a localized string similar to Case Management Turnaraound Time.
         /// </summary>
         public static string Totaltimeoncase {
             get {
@@ -4417,7 +4435,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to was submitted sucessfully.
+        ///   Looks up a localized string similar to was submitted successfully.
         /// </summary>
         public static string wasSubmittedSucessfully {
             get {

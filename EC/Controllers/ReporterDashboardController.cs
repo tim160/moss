@@ -229,7 +229,7 @@ namespace EC.Controllers
 
                 foreach (user _user in rm._mediators_whoHasAccess_toReport)
                 {
-                    if ((_user.email.Trim().Length > 0) && glb.IsValidEmail(_user.email.Trim()))
+                    if ((_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_user.email.Trim()))
                     {
                         List<string> to = new List<string>();
                         List<string> cc = new List<string>();

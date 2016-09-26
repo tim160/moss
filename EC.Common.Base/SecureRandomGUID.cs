@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Security.Cryptography;
 
-namespace MarineLMS.Core.Base
+namespace EC.Common.Base
 {
     /// <summary>
     /// Generate a strongly random Guid.

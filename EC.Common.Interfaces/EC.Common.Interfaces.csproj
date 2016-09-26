@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F8E5914C-DC00-460A-827A-6CADBC8A7E24}</ProjectGuid>
+    <ProjectGuid>{1B096EDD-7575-4BBB-A93B-DEB482ACFBCD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>EC.Common.Interfaces</RootNamespace>
@@ -30,6 +30,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.3.3.0\lib\net35\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\packages\Castle.Windsor.3.2.1\lib\net35\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="EC.Errors">
+      <HintPath>..\EC.Errors\bin\Debug\EC.Errors.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,8 +48,45 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums.cs" />
+    <Compile Include="ForceLoad.cs" />
+    <Compile Include="IAppSettings.cs" />
+    <Compile Include="IBackgroundThread.cs" />
+    <Compile Include="IBaseExpressionHelper.cs" />
+    <Compile Include="ICleanupFilesAndFolders.cs" />
+    <Compile Include="ICommandTable.cs" />
+    <Compile Include="ICryptographyHelper.cs" />
+    <Compile Include="ICultureHelper.cs" />
+    <Compile Include="IDateTimeHelper.cs" />
+    <Compile Include="IEmailAddressHelper.cs" />
+    <Compile Include="IEmailSender.cs" />
+    <Compile Include="IFileAccess.cs" />
+    <Compile Include="IFileItem.cs" />
+    <Compile Include="IGenericTypeFactory.cs" />
+    <Compile Include="IHtmlUtility.cs" />
+    <Compile Include="ILock.cs" />
+    <Compile Include="IManageRequestContexts.cs" />
+    <Compile Include="IMarineLMSClient.cs" />
+    <Compile Include="IMLSTask.cs" />
+    <Compile Include="IPageInfo.cs" />
+    <Compile Include="IPdfHelper.cs" />
+    <Compile Include="IRequestContext.cs" />
+    <Compile Include="IServiceValidator.cs" />
+    <Compile Include="ISplitExpression.cs" />
+    <Compile Include="IStatsHelper.cs" />
+    <Compile Include="IStatsLogger.cs" />
+    <Compile Include="ITimeZoneHelper.cs" />
+    <Compile Include="IUtilityThread.cs" />
+    <Compile Include="IWCFHelpers.cs" />
+    <Compile Include="IWorkQueue.cs" />
+    <Compile Include="IXmlDocumentHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceProcessHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EC.Common.Base\EC.Common.Base.csproj">
+      <Project>{eece5e11-2f95-4f21-b108-5c6d12dc5603}</Project>
+      <Name>EC.Common.Base</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

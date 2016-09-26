@@ -8,6 +8,7 @@ using EC.Models.Database;
 using EC.Controllers.utils;
 using EC.App_LocalResources;
 using System.Text.RegularExpressions;
+//using EC.Common.Util;
 
 namespace EC.Controllers
 {
@@ -86,7 +87,7 @@ namespace EC.Controllers
         {
             if (email != null && email.Length > 0)
             {
-                if (glb.IsValidEmail(email.Trim()))
+                if (m_EmailHelper.IsValidEmail(email.Trim()))
                 {
                     ECEntities db = new ECEntities();
                     if (db.user.Any(t => (t.email.ToLower().Trim() == email.ToLower().Trim()) && (t.role_id != 8)))

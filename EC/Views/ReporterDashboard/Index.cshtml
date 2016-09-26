@@ -1,7 +1,11 @@
 ﻿@using EC.Models;
 @using EC.Models.Database;
 @using EC.App_LocalResources;
+@using EC.Common.Interfaces;
+@using EC.Core.Common;
+
 @{
+    IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
     ViewBag.Title = GlobalRes.ReporterDashboard;
     Layout = "~/Views/Shared/IndexPages/ReporterDashboard.cshtml";
 
@@ -53,7 +57,7 @@
                         <p style="padding-top:4px">@GlobalRes.Timeelapsed:</p>
                     </div>
                     <div class="listRight">
-                        <p> @glb.ConvertDateToLongMonthString(rm._report.reported_dt)</p>
+                        <p> @m_DateTimeHelper.ConvertDateToLongMonthString(rm._report.reported_dt)</p>
                         @if (rm._total_days == 1)
                         {
                             <p> @rm._total_days.ToString() @GlobalRes.day</p>

@@ -382,7 +382,7 @@
     <value>You can always check the case progress using the following details</value>
   </data>
   <data name="wasSubmittedSucessfully" xml:space="preserve">
-    <value>was submitted sucessfully</value>
+    <value>was submitted successfully</value>
   </data>
   <data name="Confidential" xml:space="preserve">
     <value>Confidential</value>
@@ -752,7 +752,7 @@
     <value>Case Administrator</value>
   </data>
   <data name="Mediatorsinvolved" xml:space="preserve">
-    <value>Mediators involved</value>
+    <value>Mediators excluded</value>
   </data>
   <data name="Menu" xml:space="preserve">
     <value>Menu</value>
@@ -923,7 +923,7 @@
     <value>Total time</value>
   </data>
   <data name="Totaltimeoncase" xml:space="preserve">
-    <value>Total time on case</value>
+    <value>Case Management Turnaraound Time</value>
   </data>
   <data name="Typeofincident" xml:space="preserve">
     <value>Type of incident</value>
@@ -1578,5 +1578,11 @@
   </data>
   <data name="Number_cases_stage" xml:space="preserve">
     <value>Number of cases per stage</value>
+  </data>
+  <data name="OfficersExcludedByReporter" xml:space="preserve">
+    <value>Case officer excluded at request of reporter</value>
+  </data>
+  <data name="RoleInReportExpla" xml:space="preserve">
+    <value>The role of an involved party could be that of a witness, victim, subject, reporter or other.</value>
   </data>
 </root>

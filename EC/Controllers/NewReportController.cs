@@ -237,7 +237,7 @@ namespace EC.Controllers.ViewModel
                 #region Email To Mediators About Case Approved
                 foreach (user _user in rm._mediators_whoHasAccess_toReport)
                 {
-                    if ((_user.email.Trim().Length > 0) && glb.IsValidEmail(_user.email.Trim()))
+                    if ((_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_user.email.Trim()))
                     {
                         to = new List<string>();
                         cc = new List<string>();
@@ -255,7 +255,7 @@ namespace EC.Controllers.ViewModel
 
                 #region Email to Reporter About case been Approved
 
-                if ((rm._reporter_user.email.Trim().Length > 0) && glb.IsValidEmail(rm._reporter_user.email.Trim()))
+                if ((rm._reporter_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(rm._reporter_user.email.Trim()))
                 {
                     to = new List<string>();
                     cc = new List<string>();
@@ -280,7 +280,7 @@ namespace EC.Controllers.ViewModel
                 #region Email To Mediators About Case re-opening
                 foreach (user _user in rm._mediators_whoHasAccess_toReport)
                 {
-                    if ((_user.email.Trim().Length > 0) && glb.IsValidEmail(_user.email.Trim()))
+                    if ((_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_user.email.Trim()))
                     {
                         to = new List<string>();
                         cc = new List<string>();
@@ -298,7 +298,7 @@ namespace EC.Controllers.ViewModel
                 #endregion
 
                 #region Email to Reporter About case been reopened
-                if ((rm._reporter_user.email.Trim().Length > 0) && glb.IsValidEmail(rm._reporter_user.email.Trim()))
+                if ((rm._reporter_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(rm._reporter_user.email.Trim()))
                 {
                     to = new List<string>();
                     cc = new List<string>();
@@ -316,8 +316,8 @@ namespace EC.Controllers.ViewModel
                 #endregion
             }
 
-            glb.UpdateReportLog(user_id, 20, report_id, App_LocalResources.GlobalRes._Completed, null, description);
-            glb.UpdateReportLog(user_id, 21, report_id, App_LocalResources.GlobalRes._Started, null, "");
+       /////     glb.UpdateReportLog(user_id, 20, report_id, App_LocalResources.GlobalRes._Completed, null, description);
+        //////    glb.UpdateReportLog(user_id, 21, report_id, App_LocalResources.GlobalRes._Started, null, "");
 
             return true;
         }

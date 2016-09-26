@@ -45,12 +45,12 @@
 
     var avaible = ['1'];
     var tmplStoredge = $('#tmpl');
-    
+
     var attachmentsFiles = [];
 
     function base() {
         vl.init($('form'));
-     //   cmp.CustomSelect(generalInfo.find('select.reportFrom'));
+        //   cmp.CustomSelect(generalInfo.find('select.reportFrom'));
     }
 
     function setOpacity() {
@@ -90,7 +90,7 @@
 
     }
     function removeFromAvaible(id) {
-        
+
         if (avaible.indexOf('' + id) != -1) {
             avaible.pop('' + id);
         }
@@ -121,7 +121,7 @@
                 button.removeClass('active');
             }
         });
-        
+
         otherIncident.on('change', function () {
             if (($(this).val().toLowerCase() == "other") || ($(this).val().toLowerCase().indexOf("former") > -1)) {
                 $('.explainReportType').addClass('validate');
@@ -144,7 +144,7 @@
             var activeElement2 = generalInfo.find(".reportFrom :selected").val();
 
             if (countryId) {
-                
+
                 if (countryId == 198 || countryId == 171) {
                     /* to emu anonimnuu opciu ( Completely Confidential)  nado ubrat ( eto luchshe) ili disable ( eto huje). */
                     //alert("HEllo World!!!");
@@ -162,9 +162,9 @@
                         element.show();
                         $('.description').append(element);
                         if (element.html().length > 100) {
-                            $(".description").css({ "width": "95%" ,  "max-width": "none" });
+                            $(".description").css({ "width": "95%", "max-width": "none" });
                         } else {
-                            $(".description").css({ "width": "85%" ,  "max-width": "410px" });
+                            $(".description").css({ "width": "85%", "max-width": "410px" });
                         }
                         return false;
                     }
@@ -187,7 +187,7 @@
 
         });
 
-        caseDescription.change(function() {
+        caseDescription.change(function () {
             if (caseDescription.val() !== '') {
                 partiesInvolvedBtn.show();
                 generalInfo.find('.isPreviusReported').hide();
@@ -206,7 +206,7 @@
                 partiesInvolvedBtn.show();
             }
         });
-        
+
         cmp.OptionSelect(reporterType);
         partiesInvolvedBtn.hide();
         cmp.OptionSelect(anType);
@@ -214,7 +214,7 @@
         var departmenBuff = tmplStoredge.find('#departmentInvolvedTmpl').html().trim();
         var departmentInvolvedNum = generalInfo.find('.departmentInvolvedNum');
         function delecteDeertmentSelect(self) {
-            if (departmentInvolvedContainer.find('select').length == 1)return;
+            if (departmentInvolvedContainer.find('select').length == 1) return;
             self.parent().remove();
             departmentInvolvedContainer.find('select').unbind('change');
             departmentInvolvedContainer.find('select:last').change(function () {
@@ -230,7 +230,7 @@
             });
             newItem.find('.selected').text('Add another department');
             vl.init(newItem);
-            newItem.find('.delete').click(function() {
+            newItem.find('.delete').click(function () {
                 delecteDeertmentSelect($(this));
             });
             newItem.find('select').attr('name', newItem.find('select').attr('name') + lastDepartmentNum);
@@ -259,8 +259,8 @@
             var str_anon = $(document.getElementById('str_anon'));
             var str_anon_val = getAnon(currentCompanyId, country_id);
             str_anon.val(str_anon_val);
-   //         anonymityStatus.empty();
-  //          anonymityStatus.append(generalInfo.find("input:radio[name=stay]:checked").val());
+            //         anonymityStatus.empty();
+            //          anonymityStatus.append(generalInfo.find("input:radio[name=stay]:checked").val());
 
 
         });
@@ -297,7 +297,7 @@
                     var liElement = $(this);
                     var content = mediatorsAssigned.find('.content');
                     $('.tab').each(function () {
-                        
+
                         if ($(this).attr('data-id') == liElement.attr('data-id') && (avaible.indexOf(liElement.attr('data-id')) != -1)) {
                             if (liElement.attr('data-id') == '4') {
                                 //Choose confidentiality level:
@@ -305,8 +305,8 @@
                                 var value = generalInfo.find("input[name=incident_anonymity_id]").val();
                                 if (value === 1) {
                                     displayBlock.hide();
-                                } else if(value == 3) {
-                                    
+                                } else if (value == 3) {
+
                                 }
 
                                 //General Information
@@ -337,13 +337,12 @@
                                 var departments = content.find('#departments');
                                 departments.empty();
                                 var elem = 0;
-                                $('.departmentInvolved').each(function()
-                                {
+                                $('.departmentInvolved').each(function () {
                                     elem++;
                                     if ($(this).parent().find('span').text() != "Select department") {
                                         if (elem > 1) departments.append(", ");
                                         departments.append($(this).parent().find('span').text());
-                                        }
+                                    }
                                 });
 
                                 //Parties involved
@@ -370,8 +369,8 @@
                                     if ($(this).parent().hasClass('addPersonContainer')) {
                                         $('.partiesInvolvedBlock')
                                             .append("<div class='FirstLastNames'>" +
-                                            $(this).find('.fName').val() + '&nbsp;' + 
-                                            $(this).find('.lName').val()  + "</div>");
+                                            $(this).find('.fName').val() + '&nbsp;' +
+                                            $(this).find('.lName').val() + "</div>");
 
                                         $('.partiesInvolvedBlock')
                                             .append("<div class='titleReport'>" +
@@ -473,7 +472,7 @@
                             $(this).show();
                             $('.titlePage p').text(liElement.text());
 
-                            $('.selectedStep').css({'border-color' : 'rgb(132, 138, 139)', 'color': 'rgb(132, 138, 139)'});
+                            $('.selectedStep').css({ 'border-color': 'rgb(132, 138, 139)', 'color': 'rgb(132, 138, 139)' });
                             $('.selectedStep').removeClass('clicked');
 
                             $('.selectedStep[data-val=' + $(this).attr('data-id') + ']').css({ 'border-color': 'rgb(5, 181, 162)', 'color': 'rgb(5, 181, 162)' });
@@ -495,7 +494,7 @@
 
         currentStep.click(function () {
             menuItemClicked($(this).attr('data-val'));
-        });        
+        });
 
         $('.goToStep1').on('click', function () { menuItemClicked(1) });
         $('.goToStep2').on('click', function () { menuItemClicked(2) });
@@ -531,7 +530,7 @@
                     } else {
                         self.addClass("vlError");
                     }
-                    
+
                 }
 
             });
@@ -541,16 +540,16 @@
             addErrors(tab);
             $('.tab').each(function () {
                 if ($(this).find('.vlError').length > 0) {
-                    removeFromAvaible(parseInt($(this).attr('data-id'))+1);
+                    removeFromAvaible(parseInt($(this).attr('data-id')) + 1);
                 }
             });
-            
+
             if (tab.find('.vlError').length == 0) {
                 //addToAvaible(parseInt(tab.attr('data-id')) + 1);
                 return true;
             }
             else return false;
-         }
+        }
         function nextTab(tab) {
             var button = tab.find('input.nextSepButton.tabOption');
             if (button.hasClass("active")) {
@@ -565,11 +564,11 @@
                 stepChecked(0);
                 pInvolvedBtn.addClass('active');
             }
-            
+
             else pInvolvedBtn.removeClass('active');
             setOpacity();
             nextTab(generalInfo);
-            
+
         });
         cInformationBtn.click(function () {
             if (validateTab(passiveCircle) == true) {
@@ -589,7 +588,7 @@
             setOpacity();
             nextTab(caseInformation);
         });
-        
+
     }
 
 
@@ -641,18 +640,18 @@
                 //$('.contentBlock.reportReferedExplain').hide();
             }
         });
-       
+
         passiveCircle.find('.addPerson').click(function () {
             personCount++;
-            
+
             if (personCount > 0) {
                 passiveCircle.find('.display.button').text('Add another person');
-                passiveCircle.find('.display.button').css({ "border-color": "#AEB5B7", "color": "#AEB5B7", "background":"transparent" });
+                passiveCircle.find('.display.button').css({ "border-color": "#AEB5B7", "color": "#AEB5B7", "background": "transparent" });
             }
             else {
                 passiveCircle.find('.display.button').text('Add person');
             }
-            
+
             var buff = tmpl.render(addPersonTempl, { 'num': ++num });
             personNameNum.val(num);
             personLastNameNum.val(num);
@@ -661,7 +660,7 @@
             buff.find('.delete').click(function () {
                 $(this).closest('#persone').remove();
                 personCount--;
-                
+
                 if (personCount > 0) {
                     passiveCircle.find('.display.button').text('Add another person');
                 }
@@ -699,7 +698,7 @@
             }
         });
         urgenRadio.change(function () {
-            if ($(this).val()=="1") {
+            if ($(this).val() == "1") {
                 passiveCircle.find('#emergency').show();
             } else {
                 passiveCircle.find('#emergency').hide();
@@ -722,8 +721,8 @@
         cmp.OptionSelect(caseInformationReport);
         cmp.OptionSelect(incidentResultReport);
         cmp.OptionSelect(isAccidentOngoing);
-        
-        
+
+
         caseInformationReport.on('change', function () {
             if ($("input:radio[name=whatHappened]:checked").val() == 'Other') {
                 $('.reportAbout').addClass('validate');
@@ -769,7 +768,7 @@
         });
         $("#datepicker").on('click', function () {
             var temp = $(event.currentTarget).parents('.contentBlock');
-                temp.css("border-color", "rgb(5, 181, 162)");
+            temp.css("border-color", "rgb(5, 181, 162)");
         })
         .on('focusout', function () {
             var temp = $(event.currentTarget).parents('.contentBlock');
@@ -780,7 +779,7 @@
             adviceManagement.find('textarea').show();
             adviceManagement.find('div').css({ "padding-left": "49px", "text-align": "initial" });
         });
-        
+
         anyQuestions.on('click', function (events) {
             var anyQuestionsTextArea = $('#AnyQuestionsTextArea');
             anyQuestionsTextArea.css({ "width": "750px", "height": "155px" });
@@ -793,7 +792,7 @@
             } else {
                 caseInformation.find('.incidentFrequency').hide();
                 isOnGoing.val(0);
-            } 
+            }
         });
         caseInformation.find('input.validate').change(function () {
             if (vl.check(caseInformation)) {
@@ -823,16 +822,16 @@
         });
     }
 
-    function loginInformationProcess (){
-        
+    function loginInformationProcess() {
+
     }
-    
+
     function summaryPage() {
-        function setHoverBlock(item){
+        function setHoverBlock(item) {
             $(this).parent().find('img, input').addClass('hover');
         }
 
-        function setUnHoverBlock(item){
+        function setUnHoverBlock(item) {
             $(this).parent().find('img, input').removeClass('hover');
         }
 
@@ -845,7 +844,7 @@
         summaryButtons.mouseout(setUnHoverBlock)
         summaryImages.mouseout(setUnHoverBlock);
     }
-   
+
     function setDefaultVaues() {
         var toStay = $('.anType div[data-val=1] input');
         /*var staff = $('.reporterType div[data-val=1] input');*/
@@ -985,10 +984,10 @@
             data: { company_id: company_id, country_id: country_id }
         }).done(function (data) {//data from server
 
-            
-       //     console.log(data);
-       //     console.log(data.length);
-             
+
+            //     console.log(data);
+            //     console.log(data.length);
+
             return data;
             if (data != '') {
                 //  window.location.href = data;
@@ -1000,8 +999,7 @@
         });
     }
 
-    function PrintReport()
-    {
+    function PrintReport() {
         //Creating new page
         var pp = window.open();
         //Adding HTML opening tag with <HEAD> … </HEAD> portion 
@@ -1018,7 +1016,7 @@
         //Ending Tag of </form>, </body> and </HTML>
         pp.document.writeln('</form></body></HTML>');
     }
-	base();
+    base();
     taSwitcher();
     generalInfoProcess();
     partiesInvolvedProcess();
@@ -1028,6 +1026,6 @@
     summaryPage();
     gInfoBtn.click();
     setOpacity();
- 
+
     setDefaultVaues();
 });

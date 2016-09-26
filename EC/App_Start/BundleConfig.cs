@@ -62,6 +62,22 @@ namespace EC
 
 
 
+               bundles.Add(new StyleBundle("~/Content/styleAnalytics").Include(
+                    "~/Content/styleAnalitics.css",
+                    "~/Content/daterangepickerAnalit.css"));
+
+               bundles.Add(new StyleBundle("~/Content/lcnr").Include(
+                    "~/Content/main.css",
+                    "~/Content/styleReportDashboard.css",
+                    "~/Content/styleTasks.css",
+                     "~/Content/stylePageMessages.css",
+                     "~/Content/jquery-ui.css"));
+
+               bundles.Add(new StyleBundle("~/Content/hffp").Include(
+                    "~/Content/style.css",
+                    "~/Content/jquery-ui.css"));
+
+
 
             bundles.Add(new StyleBundle("~/bundles/Styles").Include(
                 "~/Content/*.css"));

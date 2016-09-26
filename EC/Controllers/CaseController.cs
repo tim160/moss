@@ -16,6 +16,7 @@ using EC.Models.ECModel;
 using EC.Controllers.ViewModel;
 using EC.Models.ViewModel;
 using EC.Models.App.Case;
+using EC.Common.Interfaces;
 
 namespace EC.Controllers
 {
@@ -25,6 +26,8 @@ namespace EC.Controllers
         private readonly UserModel userModel = UserModel.inst;
         private readonly CompanyModel companyModel = CompanyModel.inst;
         private readonly ReportModel reportModel = ReportModel.inst;
+        private IEmailAddressHelper m_EmailHelper;
+
 
         public ActionResult Index(int? id, string popup)
         {
@@ -159,7 +162,7 @@ namespace EC.Controllers
 
                     foreach (user _user in rm._mediators_whoHasAccess_toReport)
                     {
-                        if ((_user.email.Trim().Length > 0) && glb.IsValidEmail(_user.email.Trim()) && (_user.id != newMessage.sender_id))
+                        if ((_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_user.email.Trim()) && (_user.id != newMessage.sender_id))
                         {
                             List<string> to = new List<string>();
                             List<string> cc = new List<string>();
@@ -262,7 +265,7 @@ namespace EC.Controllers
 
                     foreach (user _user in rm._mediators_whoHasAccess_toReport)
                     {
-                        if ((_user.email.Trim().Length > 0) && glb.IsValidEmail(_user.email.Trim()) && (_user.id != newMessage.sender_id))
+                        if ((_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_user.email.Trim()) && (_user.id != newMessage.sender_id))
                         {
                             List<string> to = new List<string>();
                             List<string> cc = new List<string>();
@@ -283,7 +286,7 @@ namespace EC.Controllers
 
                     #region Send email to reporter
                     user _reporter = rm._reporter_user;
-                    if ((_reporter.email.Trim().Length > 0) && glb.IsValidEmail(_reporter.email.Trim()))
+                    if ((_reporter.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_reporter.email.Trim()))
                     {
                         List<string> to = new List<string>();
                         List<string> cc = new List<string>();
@@ -655,7 +658,7 @@ namespace EC.Controllers
 
             #region Email to Newly Assigned Mediator
 
-            if ((_um._user.email.Trim().Length > 0) && glb.IsValidEmail(_um._user.email.Trim()))
+            if ((_um._user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_um._user.email.Trim()))
             {
                 List<string> to = new List<string>();
                 List<string> cc = new List<string>();
