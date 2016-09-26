@@ -59,7 +59,7 @@ namespace EC.Core.Common
     /// </para>
     /// </remarks>
    
-    public sealed class AsyncAppender : IBulkAppender, IOptionHandler, IAppenderAttachable
+    public sealed class AsyncAppender :  IOptionHandler, IAppenderAttachable
     {
         public void Close()
         {
