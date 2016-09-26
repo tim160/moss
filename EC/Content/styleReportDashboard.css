@@ -738,15 +738,18 @@ h2.mainTitle {
     right: -30px;
 }
 .spec {
-    width: 180px;
+    width: 240px;
     height: auto;
     background-color: #333b40;
     opacity: 0.8;
     color: white;
-    padding: 12px;
+    padding: 26px;
     font-family: 'OpenSans-Regular';
     font-size: 12px;
     z-index: 100;
+}
+.spec ul {
+    list-style-type: disc;
 }
 
 

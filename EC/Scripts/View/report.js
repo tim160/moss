@@ -352,7 +352,7 @@
                                 isManagementKnow.append($(' input[name=managementKnow]:checked').val());
                                 if ($(' input[name=managementKnow]:checked').val() == "Yes" ||
                                     $(' input[name=managementKnow]:checked').val() == "Do not want to involve") {
-                                    isManagementKnow.append(".<br /> Explanation: " + $('.managementIsKnown').val());
+                                    isManagementKnow.append(".<br />" + $('.managementIsKnown').val());
                                 }
 
 
@@ -428,14 +428,14 @@
                                 isIncidentOngoing.empty();
                                 isIncidentOngoing.append($(' input[name=isIncidentOngoing]:checked').val());
                                 if ($(' input[name=isIncidentOngoing]:checked').val() == "Yes") {
-                                    isIncidentOngoing.append(".<br /> Explanation: " + $('.incidentOngoingDescription').val());
+                                    isIncidentOngoing.append(".<br />" + $('.incidentOngoingDescription').val());
                                 }
 
                                 var hasInjury = content.find('#hasInjury');
                                 hasInjury.empty();
                                 hasInjury.append($(' input[name=resultInjury]:checked').val());
                                 if ($(' input[name=resultInjury]:checked').val() == "Yes") {
-                                    hasInjury.append(".<br /> Explanation: " + $('#injury_damage').val());
+                                    hasInjury.append(".<br />" + $('#injury_damage').val());
                                 }
 
                                 var incidentDescription = content.find('#incidentDescription');
