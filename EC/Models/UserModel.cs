@@ -636,7 +636,7 @@ namespace EC.Models
         /// <param name="status_id">if status_id = 0 - all tasks, or can be just active/inactive</param>
         /// 
         /// <returns></returns>
-        public int UnreadTasksQuantity1(int? report_id, bool is_user_only, int status_id)
+        public int UnreadTasksQuantity(int? report_id, bool is_user_only, int status_id)
         {
             int tasks_quantity = 0;
 
