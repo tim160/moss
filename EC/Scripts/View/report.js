@@ -228,7 +228,7 @@
             newItem.change(function () {
                 processDepertmeptSelect($(this));
             });
-            newItem.find('.selected').text('Add another department');
+            //newItem.find('.selected').text('Add another department');
             vl.init(newItem);
             newItem.find('.delete').click(function () {
                 delecteDeertmentSelect($(this));
