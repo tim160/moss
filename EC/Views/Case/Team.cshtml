@@ -211,9 +211,8 @@
                 </div><!--contentMediators-->
                 @if (_involved_mediators_user_list.Count > 0)
                 {
-                    <div class="contentMediators blockTeam">
-                        <p class="title">@GlobalRes.OfficersExcludedByReporter.ToUpper()</p>
-                        <br />
+                    <div class="contentMediators blockTeam" style="flex-direction:column">
+                        <p class="title" style="text-align:center">@GlobalRes.OfficersExcludedByReporter</p>
                         @foreach (user _user in _involved_mediators_user_list)
                         {
                             um = new UserModel(_user.id);
