@@ -27,7 +27,7 @@
     EC.Models.ReportModel rm = new EC.Models.ReportModel();
 
         
-    var unread_report_number = um.UnreadReport(0, 0).ToList().Count();
+    var unread_report_number = um.UnreadReport(0, 0).Count;
     var unread_report_number_string = "";
     string page_subtitle = "";
     if (unread_report_number > 0)
@@ -42,7 +42,7 @@
         unread_message_number_string = unread_message_number.ToString(); 
     }
 
-    int unread_task_number = um.UserTasks(0, null, true).ToList().Count();
+    int unread_task_number = um.UnreadActivityUserTaskQuantity( null, true);
     var unread_task_number_string = "";
     if (unread_task_number > 0)
     {
