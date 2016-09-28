@@ -42,7 +42,7 @@
         unread_message_number_string = unread_message_number.ToString(); 
     }
 
-    int unread_task_number = um.UnreadActivityUserTaskQuantity( null, true);
+    int unread_task_number = um.UnreadTasksQuantity(0, true, 1);
     var unread_task_number_string = "";
     if (unread_task_number > 0)
     {
