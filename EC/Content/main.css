@@ -1895,10 +1895,13 @@ li.infoCasesBlock:first-child:hover li .status {
 }
 /*modal window*/
 .dropdown2 {
-    margin-left: 110px;
+    /*margin-left: 110px;
     position: relative;
     width: calc(100% - 40px);
-    max-width: 589px;
+    max-width: 589px;*/
+    margin-left: 304px;
+    position: relative;
+    width: 396px;
 }
 .dropdown2 label {
     display: block;
@@ -2734,7 +2737,7 @@ li.infoCasesBlock:first-child:hover li .status {
     color: #aeb3b4;
     font-size: 16px;
     float: left;
-    width: 110px;
+    /*width: 110px;*/
     position: absolute;
     left: 25px;
     top: 21px;
