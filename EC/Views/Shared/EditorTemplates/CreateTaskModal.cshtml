@@ -24,16 +24,12 @@
                 <label class="close"></label>
                 <div class="closeIcon" onclick='overlay()'></div>
             </div>
-            <div class="caseResolution">
-                <textarea class="form-control" type="text" name="txtResolve" id="txtResolve" placeholder="@textbox_title"></textarea>
-            </div>
-
             @if (((normal_button_value == Constant.investigation_status_resolution.ToString())) || (normal_button_value == Constant.investigation_status_closed.ToString()))
             { 
                 <div class="caseResolution custom">
-                    <div class="outcomeText">@GlobalRes.Outcome:</div>
+                    <div class="outcomeText">@GlobalRes.RecommendedActionOutcome:</div>
                     <div class="dropdown2">
-                        <label id="ddlOutcome" data-value="">Select an option...</label><span class="arrow-down"></span>
+                        <label id="ddlOutcome" data-value="">@GlobalRes.Selectanoption...</label><span class="arrow-down"></span>
                         <ul>
                             @foreach (outcome _outcome in _all_outcomes)
                             {
@@ -110,18 +106,18 @@
             sendAjax(button);
         });
         function sendAjax(promotion_value) {
-            var description = $("#txtResolve").val();
+            var description = "";
             var _report_id = $("#_report_id").val();
             var user_id = $("#user_id").val();
             var outcome_id = $("#ddlOutcome").attr('data-value');
             var outcome = $("#txtOutcome").val();
-            if (outcome_id == '9' && outcome == "") {
+            if (outcome == "") {
                 $("#txtOutcome").css("border", "2px solid red");
                 $("#txtOutcome").on('focusin', function () {
                     $("#txtOutcome").css("border", "none");
                 });
             }
-            if (description != "") {
+            if (outcome != "") {
 
                 if (_report_id > 0 && user_id > 0 && promotion_value != "") {
                     console.log('description', description);
@@ -151,9 +147,9 @@
                    
             }
             } else {
-                $("#txtResolve").css({ "border": "2px solid red"});
-                $("#txtResolve").on('focusin', function () {
-                    $("#txtResolve").css({ "border": "2px solid transparent" });
+                $("#txtOutcome").css({ "border": "2px solid red" });
+                $("#txtOutcome").on('focusin', function () {
+                    $("#txtOutcome").css({ "border": "2px solid transparent" });
                 });
             }
         }

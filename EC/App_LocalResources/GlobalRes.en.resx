@@ -1600,4 +1600,7 @@
   <data name="RequestCloseCase" xml:space="preserve">
     <value>Request to close case</value>
   </data>
+  <data name="Selectanoption" xml:space="preserve">
+    <value>Select an option</value>
+  </data>
 </root>

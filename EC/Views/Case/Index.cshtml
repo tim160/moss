@@ -53,15 +53,6 @@
     string flag = "61px";
 
     report_investigation_status ris = new report_investigation_status();
-    string temp_resolved_or_not = "";
-    if (rm._investigation_status == Constant.investigation_status_resolution)
-    {
-        temp_resolved_or_not = GlobalRes.CaseResolved;
-    }
-    if (rm._investigation_status == Constant.investigation_status_completed)
-    {
-        temp_resolved_or_not = GlobalRes.CaseCantBeResolved;
-    }
 }
 <body>
     @*<link type="text/css" href="~/Content/caseTasks.css" rel="stylesheet">*@
@@ -86,17 +77,8 @@
                 flag = "101px";
                 <div class="firstHeader resolveSoledBlock">
 
-                    @*@Kif ((rm._investigation_status == Constant.investigation_status_resolution))
-                    {*@
+                    
                     <div class="caseWaitApp">@GlobalRes.CaseResolutionRequestUp</div>
-                    @*}
-                    else
-                    {
-                        <div class="caseWaitApp">@GlobalRes.CaseCompleted - @GlobalRes.WaitingApprovement</div>
-                        <div class="littleText">
-                            @GlobalRes.CaseCantBeResolved
-                        </div>
-                    }*@
 
                     <div class="positionDropDown">
                         <span class="dropDownfirstHeader flag"></span>
@@ -129,14 +111,9 @@
                         </div>
                         <div class="forText">
                             <div class="boldText">
-                                    @temp_resolved_or_not
-                            </div>
-                            <div class="regularText">
                                 @temp_um._user.first_nm @temp_um._user.last_nm, @m_DateTimeHelper.ConvertDateToLongMonthString(ris.created_date):
                             </div>
-                            <div class="openSansText">
-                                @ris.description
-                            </div>
+
                             @if(ris.outcome_id.HasValue)
                             { 
                                 <div class="boldText">
@@ -605,297 +582,299 @@
 
     <script type="text/javascript">
 
-        $(document).ready(function () {
-            $('.firstButton2').on('click',function(){
-                $('#files2').click();
+    $(document).ready(function () {
+        $('.firstButton2').on('click',function(){
+            $('#files2').click();
+        });
+
+        $(".positionDropDown").on('click',function(){
+            $(".positionDropDown .flag").toggle();
+            $(".caseMediatorBig").slideToggle();
+        });
+        function activeButtons(){
+            $('.headTask span.createNewTaskBtn').click(function () {
+                $('.blockCreateTask').show();
+                $('.headTask span.createNewTaskBtn').hide();
+            });
+            $('.headerCreateTask label.close').click(function () {
+                $('.blockCreateTask').hide();
+                $('.headTask span.createNewTaskBtn').show();
+            });
+            $('.attachFiles').on('click',function(){
+                $('#files').click();
             });
 
-            $(".positionDropDown").on('click',function(){
-                $(".positionDropDown .flag").toggle();
-                $(".caseMediatorBig").slideToggle();
-            });
-            function activeButtons(){
-                $('.headTask span.createNewTaskBtn').click(function () {
-                    $('.blockCreateTask').show();
-                    $('.headTask span.createNewTaskBtn').hide();
-                });
-                $('.headerCreateTask label.close').click(function () {
-                    $('.blockCreateTask').hide();
-                    $('.headTask span.createNewTaskBtn').show();
-                });
-                $('.attachFiles').on('click',function(){
-                    $('#files').click();
-                });
+        }
 
+        function handleFileSelect(evt) {
+            var files = evt.target.files; // FileList object
+
+            // files is a FileList of File objects. List some properties.
+            var output = [];
+            for (var i = 0, f; f = files[i]; i++) {
+                output.push('<li><span>', f.name, '</span> <img src="/Content/Icons/fileCases.png" /> </li>');
             }
+            document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
+        }
 
-            function handleFileSelect(evt) {
-                var files = evt.target.files; // FileList object
-
-                // files is a FileList of File objects. List some properties.
-                var output = [];
-                for (var i = 0, f; f = files[i]; i++) {
-                    output.push('<li><span>', f.name, '</span> <img src="/Content/Icons/fileCases.png" /> </li>');
-                }
-                document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
-            }
-
-            if(document.getElementById('files')) {
-                document.getElementById('files').addEventListener('change', handleFileSelect, false);
-            }
+        if(document.getElementById('files')) {
+            document.getElementById('files').addEventListener('change', handleFileSelect, false);
+        }
 
 
-            $(function() {
-                $( "#datepicker" ).datepicker();
-            });
+        $(function() {
+            $( "#datepicker" ).datepicker();
+        });
 
-            function createTaskStart(){
-                $('.createTask').click(function(){
-                    var taskName = $('.createTaskTop input').val();
-                    var taskDescription = $('.createTaskBottom input').val();
-                    var taskAssignTo = $('.taskAssignTo').val();
-                    var dueDate = $("#datepicker").val();
+        function createTaskStart(){
+            $('.createTask').click(function(){
+                var taskName = $('.createTaskTop input').val();
+                var taskDescription = $('.createTaskBottom input').val();
+                var taskAssignTo = $('.taskAssignTo').val();
+                var dueDate = $("#datepicker").val();
 
-                    if(taskName.length > 0 && taskName.length < 30)
+                if(taskName.length > 0 && taskName.length < 30)
+                {
+                    $('.createTaskTop input').css('border', '');
+
+                    if(taskDescription.length > 0)
                     {
-                        $('.createTaskTop input').css('border', '');
-
-                        if(taskDescription.length > 0)
+                        $('.createTaskBottom input').css('border', '');
+                        if((taskAssignTo != undefined) && (taskAssignTo != 'general'))
                         {
-                            $('.createTaskBottom input').css('border', '');
-                            if((taskAssignTo != undefined) && (taskAssignTo != 'general'))
-                            {
-                                //         console.log(dueDate);
-                                var spamMessage = $('.spamMessage textarea').val()
-                                createNewTask(
-                                    @Html.Raw(report_id),
-                                    @Html.Raw(user_id),
-                                        taskName,
-                                        taskDescription,
-                                        taskAssignTo,
-                                        dueDate);
-                                $('.blockCreateTask').hide();
-                                $('.headTask span.createNewTaskBtn').show
-                            }
-                            else
-                            {
-                                alert('@GlobalRes.Taskshouldbeassigned');
-                            }
+                            //         console.log(dueDate);
+                            var spamMessage = $('.spamMessage textarea').val()
+                            createNewTask(
+                                @Html.Raw(report_id),
+                                @Html.Raw(user_id),
+                                    taskName,
+                                    taskDescription,
+                                    taskAssignTo,
+                                    dueDate);
+                            $('.blockCreateTask').hide();
+                            $('.headTask span.createNewTaskBtn').show
                         }
                         else
                         {
-                            $('.createTaskBottom input').css('border', '2px solid red');
-
+                            alert('@GlobalRes.Taskshouldbeassigned');
                         }
                     }
                     else
                     {
-                        $('.createTaskTop input').css('border', '2px solid red');
+                        $('.createTaskBottom input').css('border', '2px solid red');
+
                     }
-                });
+                }
+                else
+                {
+                    $('.createTaskTop input').css('border', '2px solid red');
+                }
+            });
 
-            }
+        }
 
-            function createNewTask(report_id, user_id, taskName, taskDescription, taskAssignTo, dueDate) {
-                var $input = $("#files");
-                var fd = new FormData;
-                for(var i = 0; i < $input.prop('files').length; i++)
-                    fd.append('files', $input.prop('files')[i]);
+        function createNewTask(report_id, user_id, taskName, taskDescription, taskAssignTo, dueDate) {
+            var $input = $("#files");
+            var fd = new FormData;
+            for(var i = 0; i < $input.prop('files').length; i++)
+                fd.append('files', $input.prop('files')[i]);
 
-                fd.append('report_id', report_id);
-                fd.append('user_id', user_id);
-                fd.append('taskName',taskName);
-                fd.append('taskDescription',taskDescription);
-                fd.append('taskAssignTo',taskAssignTo);
-                fd.append('dueDate',dueDate);
+            fd.append('report_id', report_id);
+            fd.append('user_id', user_id);
+            fd.append('taskName',taskName);
+            fd.append('taskDescription',taskDescription);
+            fd.append('taskAssignTo',taskAssignTo);
+            fd.append('dueDate',dueDate);
 
-                $.ajax({
-                    method: "POST",
-                    contentType: false,
-                    processData: false,
-                    cache: false,
-                    url: "/Case/CreateNewTask",
-                    data: fd
-                }).done(function(data) {
-                    var str = window.location.href;
-                    window.location.href = str;
-                }).fail(function(error){
-                    console.log(error);
-                });
-            }
+            $.ajax({
+                method: "POST",
+                contentType: false,
+                processData: false,
+                cache: false,
+                url: "/Case/CreateNewTask",
+                data: fd
+            }).done(function(data) {
+                var str = window.location.href;
+                window.location.href = str;
+            }).fail(function(error){
+                console.log(error);
+            });
+        }
 
-            function selectForName() {
-                var name = $('.headTask .selected .textSpan').text();
-                var showBlock = $('.headTask .hideCompletedBtn').text();
+        function selectForName() {
+            var name = $('.headTask .selected .textSpan').text();
+            var showBlock = $('.headTask .hideCompletedBtn').text();
 
-                if (name != "All case administrators" && name != "Sort by Mediator") {
-                    $('.blockTask').hide();
-                    $('.contentBlockTask .name').each(function (index, element) {
-                        var temp = $(element);
-                        if (temp.text() == name) {
-                            if (showBlock == "Show All") {
-                                temp_class_circle = temp.parents('.blockTask').find('.blockTitle').find('span:first-child').attr('class');
-                                if (temp_class_circle == "bigDot") {
-                                    temp.parents('.blockTask').show();
-                                }
-                                else if (temp_class_circle == "notShadedCircle") {
-                                    temp.parents('.blockTask').hide();
-                                }
-                            }
-                            else if (showBlock == "Hide completed") {
+            if (name != "All case administrators" && name != "Sort by Mediator") {
+                $('.blockTask').hide();
+                $('.contentBlockTask .name').each(function (index, element) {
+                    var temp = $(element);
+                    if (temp.text() == name) {
+                        if (showBlock == "Show All") {
+                            temp_class_circle = temp.parents('.blockTask').find('.blockTitle').find('span:first-child').attr('class');
+                            if (temp_class_circle == "bigDot") {
                                 temp.parents('.blockTask').show();
                             }
+                            else if (temp_class_circle == "notShadedCircle") {
+                                temp.parents('.blockTask').hide();
+                            }
                         }
-                    });
-                }
-                else {
-                    $('.blockTask').show();
-                    if (showBlock == "Show All") {
-                        $('.notShadedCircle').parents('.blockTask').hide();
+                        else if (showBlock == "Hide completed") {
+                            temp.parents('.blockTask').show();
+                        }
                     }
-                    else if (showBlock == "Hide completed") {
-                        $('.notShadedCircle').parents('.blockTask').show();
-                    }
-                }
-            }
-
-            function showBlocks(buttonClick) {
-                if (buttonClick.text() == "Hide completed") {
-                    buttonClick.text("Show All");
-                }
-                else if (buttonClick.text() == "Show All") {
-                    buttonClick.text("Hide completed");
-                }
-                selectForName();
-            }
-
-            function hideComplited(){
-                $('.headTask .hideCompletedBtn').click(function () {
-                    showBlocks($(this));
                 });
             }
-            //setDropdown();
-            function setDropdown() {
-                $('.dropdown').unbind('click');
-                $('.dropdown ul li').unbind('click');
+            else {
+                $('.blockTask').show();
+                if (showBlock == "Show All") {
+                    $('.notShadedCircle').parents('.blockTask').hide();
+                }
+                else if (showBlock == "Hide completed") {
+                    $('.notShadedCircle').parents('.blockTask').show();
+                }
+            }
+        }
 
-                $('.dropdown')
-                .on('click',
+        function showBlocks(buttonClick) {
+            if (buttonClick.text() == "Hide completed") {
+                buttonClick.text("Show All");
+            }
+            else if (buttonClick.text() == "Show All") {
+                buttonClick.text("Hide completed");
+            }
+            selectForName();
+        }
+
+        function hideComplited(){
+            $('.headTask .hideCompletedBtn').click(function () {
+                showBlocks($(this));
+            });
+        }
+        //setDropdown();
+        function setDropdown() {
+            $('.dropdown').unbind('click');
+            $('.dropdown ul li').unbind('click');
+
+            $('.dropdown')
+            .on('click',
+            function () {
+                $(this).children('ul').slideToggle(150);
+                if ($(this).hasClass('open')) {
+                    $(this).removeClass('open');
+                    return false;
+                } else {
+                    $(this).addClass('open');
+                    return false;
+                }
+
+                return false;
+            })
+
+            .hover(
+            function () {
+
+            },
+            function () {
+                $(this).children('ul').slideUp(150);
+                $(this).removeClass('open');
+            });
+
+            $('.dropdown ul li')
+                    .click(
+                    function () {
+                        var sitem = $(this).html();
+                        var sid = $(this).attr('value');
+
+                        $(this).siblings('li').removeClass('selected');
+                        $(this).addClass('selected');
+                        $(this).parent('ul').siblings('span.selected').html(sitem);
+                        $(this).parent('ul').siblings('input').val(sid);
+                        $(this).parent('ul').parent('.subject').change();
+                        $(this).parent('ul').parent('.subject').find('.validate').change();
+                    });
+        }
+
+
+        function dropdawnWork(){
+            $('.dropdown')
+                .click(
                 function () {
-                    $(this).children('ul').slideToggle(150);
-                    if ($(this).hasClass('open')) {
-                        $(this).removeClass('open');
+                    var thisElement = $(this);
+                    thisElement.children('ul').slideToggle(150);
+
+                    if (thisElement.hasClass('open')) {
+                        thisElement.removeClass('open');
+                        thisElement.hover(
+                            function () {
+                                $(this).find('span.selected img:first-child').attr('src', '/Content/Icons/peopleBlockSelectBlack.png');
+                            },
+                            function () {
+                                var thisElement = $(this);
+                                thisElement.children('ul').slideUp(150);
+                                thisElement.removeClass('open');
+                                thisElement.find('span.selected img:first-child').attr('src', '/Content/Icons/peopleBlockSelect.png');
+                            });
                         return false;
                     } else {
-                        $(this).addClass('open');
+                        thisElement.addClass('open');
+                        thisElement.find('span.selected img:first-child').attr('src', '/Content/Icons/peopleBlockSelectBlue.png');
                         return false;
                     }
-
                     return false;
                 })
-
                 .hover(
                 function () {
-
+                    $(this).find('span.selected img:first-child').attr('src', '/Content/Icons/peopleBlockSelectBlack.png');
                 },
                 function () {
-                    $(this).children('ul').slideUp(150);
-                    $(this).removeClass('open');
+                    var thisElement = $(this);
+                    thisElement.children('ul').slideUp(150);
+                    thisElement.removeClass('open');
+                    thisElement.find('span.selected img:first-child').attr('src', '/Content/Icons/peopleBlockSelect.png');
                 });
-
-                $('.dropdown ul li')
-                        .click(
-                        function () {
-                            var sitem = $(this).html();
-                            var sid = $(this).attr('value');
-
-                            $(this).siblings('li').removeClass('selected');
-                            $(this).addClass('selected');
-                            $(this).parent('ul').siblings('span.selected').html(sitem);
-                            $(this).parent('ul').siblings('input').val(sid);
-                            $(this).parent('ul').parent('.subject').change();
-                            $(this).parent('ul').parent('.subject').find('.validate').change();
-                        });
-            }
-
-
-            function dropdawnWork(){
-                $('.dropdown')
+        }
+        function dropdawnSelect(){
+            $('.dropdown ul li')
                     .click(
                     function () {
                         var thisElement = $(this);
-                        thisElement.children('ul').slideToggle(150);
+                        var sitem = thisElement.find('.aboutMediator').find('label:first-child').text();
+                        var sid = thisElement.attr('id');
 
-                        if (thisElement.hasClass('open')) {
-                            thisElement.removeClass('open');
-                            thisElement.hover(
-                                function () {
-                                    $(this).find('span.selected img:first-child').attr('src', '/Content/Icons/peopleBlockSelectBlack.png');
-                                },
-                                function () {
-                                    var thisElement = $(this);
-                                    thisElement.children('ul').slideUp(150);
-                                    thisElement.removeClass('open');
-                                    thisElement.find('span.selected img:first-child').attr('src', '/Content/Icons/peopleBlockSelect.png');
-                                });
-                            return false;
-                        } else {
-                            thisElement.addClass('open');
-                            thisElement.find('span.selected img:first-child').attr('src', '/Content/Icons/peopleBlockSelectBlue.png');
-                            return false;
-                        }
-                        return false;
-                    })
-                    .hover(
-                    function () {
-                        $(this).find('span.selected img:first-child').attr('src', '/Content/Icons/peopleBlockSelectBlack.png');
-                    },
-                    function () {
-                        var thisElement = $(this);
-                        thisElement.children('ul').slideUp(150);
-                        thisElement.removeClass('open');
-                        thisElement.find('span.selected img:first-child').attr('src', '/Content/Icons/peopleBlockSelect.png');
+                        thisElement.siblings('li').removeClass('selected');
+                        thisElement.addClass('selected');
+                        thisElement.parent('ul').siblings('span.selected').find('span.textSpan').text(sitem);
+                        thisElement.parent('ul').siblings('input').val(sid);
+                        selectForName();
                     });
-            }
-            function dropdawnSelect(){
-                $('.dropdown ul li')
-                        .click(
-                        function () {
-                            var thisElement = $(this);
-                            var sitem = thisElement.find('.aboutMediator').find('label:first-child').text();
-                            var sid = thisElement.attr('id');
-
-                            thisElement.siblings('li').removeClass('selected');
-                            thisElement.addClass('selected');
-                            thisElement.parent('ul').siblings('span.selected').find('span.textSpan').text(sitem);
-                            thisElement.parent('ul').siblings('input').val(sid);
-                            selectForName();
-                        });
-            }
-            $(".positionActivityIcon").on('click', function() {
-                $("#rightRight").toggle(300);
-            });
-            $("#resoveCompletedTopBtn").on('click', function(el){
-                $("#anotherDialog").toggle();
-            });
+        }
+        $(".positionActivityIcon").on('click', function() {
+            $("#rightRight").toggle(300);
+        });
+        $("#resoveCompletedTopBtn").on('click', function(el){
+            $("#anotherDialog").toggle();
+        });
 
 
-            $("#escalateTopBtn").on('click', function(el){
+        $("#escalateTopBtn").on('click', function(el){
 
-                $("#approveDialog").toggle();
+            $("#approveDialog").toggle();
 
-                $("#escalate_btn").text("@Html.Raw(GlobalRes.Escalate)");
-                $("#escalate_btn").val(5);
-                $("#_overlay_title").text("@Html.Raw(GlobalRes.Escalation)");
+            $("#escalate_btn").text("@Html.Raw(GlobalRes.Escalate)");
+            $("#escalate_btn").val(5);
+            $("#_overlay_title").text("@Html.Raw(GlobalRes.Escalation)");
 
-            });
-            $("#return_investigation").on('click', function(el){
+        });
+        $("#return_investigation").on('click', function(el){
 
                 $("#approveDialog").toggle();
 
                 $("#escalate_btn").text("@Html.Raw(GlobalRes.Returnnvestigation)");
                 $("#escalate_btn").val(3);
                 $("#_overlay_title").text("@Html.Raw(GlobalRes.Returnnvestigation)");
+                $("#textbox_title").text("@Html.Raw(GlobalRes.AddReasonWhy)");
+                
                 //
 
             });
@@ -906,18 +885,19 @@
                 $("#escalate_btn").text("@Html.Raw(GlobalRes.CloseCaseUp)");
                 $("#escalate_btn").val(9);
                 $("#_overlay_title").text("@Html.Raw(GlobalRes.CloseCaseUp)");
-                //
-            });
-
-
-            activeButtons();
-
-            createTaskStart();
-            hideComplited();
-            dropdawnWork();
-            dropdawnSelect();
-            $(".closeCustom.flag").click();
-             
+                $("#textbox_title").text("@Html.Raw(GlobalRes.AddFurtherNotes)");
+            //
         });
+
+
+        activeButtons();
+
+        createTaskStart();
+        hideComplited();
+        dropdawnWork();
+        dropdawnSelect();
+        $(".closeCustom.flag").click();
+
+    });
     </script>
 </body>
