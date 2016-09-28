@@ -18,7 +18,7 @@ namespace EC.Models
                 if(newSetting.userId > 0 && newSetting.newSetting != "" && newSetting.data != "" && newSetting.data.ToLower() != "other")
                 {
                     newSetting.data = newSetting.data.Trim();
-                    newSetting.data = newSetting.data.ToLower();
+                   // newSetting.data = newSetting.data.ToLower();
                     switch (newSetting.newSetting)
                     {
                         case "Location":

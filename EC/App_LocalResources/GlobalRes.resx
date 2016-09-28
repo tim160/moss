@@ -1645,4 +1645,19 @@
   <data name="RoleInReportExpla" xml:space="preserve">
     <value>The role of an involved party could be that of a witness, victim, subject, reporter or other.</value>
   </data>
+  <data name="AddFurtherNotes" xml:space="preserve">
+    <value>Add any further notes regarding approval of case closure.</value>
+  </data>
+  <data name="AddReasonWhy" xml:space="preserve">
+    <value>Add reason why the case requires further investigation.</value>
+  </data>
+  <data name="CaseResolutionRequestUp" xml:space="preserve">
+    <value>Case Resolution Request</value>
+  </data>
+  <data name="RecommendedActionOutcome" xml:space="preserve">
+    <value>Recommended Action and Outcome</value>
+  </data>
+  <data name="RequestCloseCase" xml:space="preserve">
+    <value>Request to close case</value>
+  </data>
 </root>
