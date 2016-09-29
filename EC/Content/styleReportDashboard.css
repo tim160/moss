@@ -732,6 +732,9 @@ h2.mainTitle {
     border-bottom: 5px solid #333b40;
     opacity: 0.8;
 }
+#personeAgain li {
+    padding-bottom: 10px;
+}
 .spec.position {
     position: absolute;
     top: 25px;
