@@ -1640,7 +1640,7 @@
     <value>Pre-Review</value>
   </data>
   <data name="OfficersExcludedByReporter" xml:space="preserve">
-    <value>Case officer excluded at request of reporter</value>
+    <value>Case administrator excluded at request of reporter</value>
   </data>
   <data name="RoleInReportExpla" xml:space="preserve">
     <value>The role of an involved party could be that of a witness, victim, subject, reporter or other.</value>
