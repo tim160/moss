@@ -499,7 +499,7 @@ namespace EC.Controllers
             _company_user_allowed = (db.user.Where(t => ((t.company_id == um._user.company_id) && (t.role_id != Constant.level_informant))).Select(t => t.id)).ToList();
 
             if (_company_user_emails.Contains(email))
-                return App_LocalResources.GlobalRes.MediatorAlreadyRegistered;
+                return App_LocalResources.GlobalRes.MediatorAlreadyRegistered + "!";
 
             if ((db.invitation.Any(t => ((t.email.ToLower().Trim() == email) && (t.used_flag == 1) && (_company_user_allowed.Contains(t.sent_by_user_id))))) || (db.user.Any(u => ((u.email.ToLower().Trim() == email.ToLower().Trim() && u.role_id != 8)))))
                 return App_LocalResources.GlobalRes.MediatorAlreadyRegistered;

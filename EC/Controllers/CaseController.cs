@@ -17,6 +17,7 @@ using EC.Controllers.ViewModel;
 using EC.Models.ViewModel;
 using EC.Models.App.Case;
 using EC.Common.Interfaces;
+using EC.Core.Common;
 
 namespace EC.Controllers
 {
@@ -26,7 +27,7 @@ namespace EC.Controllers
         private readonly UserModel userModel = UserModel.inst;
         private readonly CompanyModel companyModel = CompanyModel.inst;
         private readonly ReportModel reportModel = ReportModel.inst;
-        private IEmailAddressHelper m_EmailHelper;
+        private IEmailAddressHelper m_EmailHelper = new EmailAddressHelper();
 
 
         public ActionResult Index(int? id, string popup)

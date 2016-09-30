@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using EC.Models;
 using EC.Models.Database;
 using EC.Common.Interfaces;
+using EC.Core.Common;
 
 namespace EC.Controllers
 {
@@ -13,7 +14,7 @@ namespace EC.Controllers
     {
         ECEntities db = new ECEntities();
         GlobalFunctions glb = new GlobalFunctions();
-        private IEmailAddressHelper m_EmailHelper;
+        private IEmailAddressHelper m_EmailHelper = new EmailAddressHelper();
 
         // GET: New
         public ActionResult Index(string code, string email)

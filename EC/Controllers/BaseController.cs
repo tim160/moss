@@ -11,6 +11,7 @@ using EC.Models.Database;
 using EC.Controllers.utils;
 using EC.Models;
 using EC.Common.Interfaces;
+using EC.Core.Common;
 
 namespace EC.Controllers
 {
@@ -23,7 +24,7 @@ namespace EC.Controllers
         public GlobalFunctions glb = new GlobalFunctions();
         public string CurrentLangCode { get; protected set; }
         private SessionManager sessionManager = SessionManager.inst;
-        internal IEmailAddressHelper m_EmailHelper;
+        internal IEmailAddressHelper m_EmailHelper = new EmailAddressHelper();
         internal bool is_cc
         {
             get { return glb.IsCC(Request.Url.AbsoluteUri.ToLower()); }
