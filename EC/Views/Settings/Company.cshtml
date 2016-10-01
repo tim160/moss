@@ -62,7 +62,10 @@
                 <label class="blockImg">
                     <form action="@Url.Action("AddLogoCompany")" method="post" enctype="multipart/form-data" onsubmit="return handleSubmit(this);">
                         <img id="logoCompany" src='@Url.Content(cm._company.path_en)' />
-                        <input type="file" accept="image/*" id="_file" name="_file" multiple="multiple" style="width: 1px;height: 1px;opacity: 0;" />
+                        @if (is_valid_mediator)
+                        {
+                            <input type="file" accept="image/*" id="_file" name="_file" multiple="multiple" style="width: 1px;height: 1px;opacity: 0;" />
+                        }
                     </form>
                     @if (is_valid_mediator)
                     { 
@@ -264,7 +267,8 @@
 <script>
     $(document).ready(function () {
         /*for upload files add foto*/
-        $("#hoverCompanyPhoto label").on('click', function () {
+        $('.newImageBtn').click(
+            function () {
             $("#_file").click();
         });
         function ajaxUploadFiles() {
