@@ -86,7 +86,6 @@
                 }
                 else if (Model.investigation_status_number == Constant.investigation_status_spam)
                 {
-                    // vrode tak vse - sudya po http://report.employeeconfidential.com/Cases/Spam
                     <div class="greyLabel"></div>
                     <div class="greyLabel"></div>
                     <div class="greyLabel"></div>
@@ -345,7 +344,7 @@
         </div>
         <div class="bottom date">
             <div class="col1"></div>
-            <div class="col2">@GlobalRes.Date.ToLower()</div>
+            <div class="col2">@GlobalRes.IncidentDateUp.ToLower()</div>
             <div class="col3">@Model.case_dt</div>
         </div>
         <div class="bottom department">

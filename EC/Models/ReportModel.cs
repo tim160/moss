@@ -1220,7 +1220,7 @@ namespace EC.Models
 
             GlobalFunctions gfFunctions = new GlobalFunctions();
             int notification = Convert.ToInt16(model.sendUpdates);
-            //esli necheknutii = 3, esli cheknuli = 1
+            //if not checked = 3, if  check = 1
             if (notification == 1)
             {
                 notification = 1;
@@ -1255,7 +1255,7 @@ namespace EC.Models
             newUser = db.user.Add(newUser);
             db.SaveChanges();
 
-            newUser.login_nm = nameOfEmail + newUser.id;
+            newUser.login_nm = glb.GenerateReporterLogin(newUser.id);
 
             currentReport = model.Merge(currentReport);
             currentReport.user_id = newUser.id;
