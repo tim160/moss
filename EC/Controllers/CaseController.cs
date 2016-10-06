@@ -753,8 +753,6 @@ namespace EC.Controllers
 
         public bool NewStatus()
         {
-
-
             user user = (user)Session[Constants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return false;
