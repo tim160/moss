@@ -627,6 +627,7 @@
     <Compile Include="Controllers\ViewModel\MessagesViewModel.cs" />
     <Compile Include="Controllers\ViewModel\ReporterDashboardViewModel.cs" />
     <Compile Include="Controllers\ViewModel\LoginViewModel.cs" />
+    <Compile Include="Controllers\ViewModel\ReportSubmit.cs" />
     <Compile Include="Controllers\ViewModel\ReportViewModel.cs" />
     <Compile Include="Controllers\ViewModel\SettingsViewModel.cs" />
     <Compile Include="Global.asax.cs">

@@ -22,7 +22,6 @@ namespace EC.Controllers
         private readonly UserModel userModel = UserModel.inst;
         private readonly CompanyModel companyModel = CompanyModel.inst;
         private readonly ReportModel reportModel = ReportModel.inst;
-        
         //
         // GET: /Report/
         [HttpGet]
@@ -92,7 +91,7 @@ namespace EC.Controllers
                 ViewBag.countries = HtmlDataHelper.MakeSelect(arr, item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.country_nm.ToString()));
                 ViewBag.countriesDescription = arr;
                 ViewBag.reportedOutsides = companyModel.getReportedOutside();
-                List<anonymity> list_anon = companyModel.GetAnonymities(id, 0);
+                List<anonymity> list_anon = companyModel.GetAnonymities(id, 0); 
                 foreach (anonymity _anon in list_anon)
                 {
                     _anon.anonymity_company_en = string.Format(_anon.anonymity_company_en, currentCompany.company_nm);
@@ -170,68 +169,12 @@ namespace EC.Controllers
                 GlobalFunctions glb = new GlobalFunctions();
                 glb.UpdateReportLog(user.id, 2, currentReport.id, "", null, "");
                 glb.UpdateReportLog(user.id, 28, currentReport.id, App_LocalResources.GlobalRes._Started, null, "");
-                //ViewBag.companylogo = currentCompany.path_en;
-
-                //#region Email to Case Admin
-                //ReportModel rm = new ReportModel(currentReport.id);
-
-                //foreach (user _user in rm._mediators_whoHasAccess_toReport)
-                //{
-                //    if ((_user.email.Trim().Length > 0) && glb.IsValidEmail(_user.email.Trim()))
-                //    {
-                //        List<string> to = new List<string>();
-                //        List<string> cc = new List<string>();
-                //        List<string> bcc = new List<string>();
-
-                //        to.Add(_user.email.Trim());
-                //        ///     bcc.Add("timur160@hotmail.com");
-
-                //        EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
-                //        EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
-                //        if (rm._involved_mediators_user_list.Count == 0)
-                //        {
-                //            eb.NewCase(_user.first_nm, _user.last_nm, rm._report.display_name);
-                //            string body = eb.Body;
-                //            em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_NewCase, body, true);
-                //        }
-                //        else
-                //        {
-                //            eb.NewCaseInvolved(_user.first_nm, _user.last_nm, rm._report.display_name);
-                //            string body = eb.Body;
-                //            em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_NewCaseInvolved, body, true);
-                //        }
-                //    }
-                //}
-
-                //#endregion
-
-                //#region Email to reporter
-                //if (user.email.Trim().Length > 0)
-                //{
-                //    // need to send email to reporter about report submission
-                //    List<string> to = new List<string>();
-                //    List<string> cc = new List<string>();
-                //    List<string> bcc = new List<string>();
-
-                //    to.Add(user.email.Trim());
-                //    ///     bcc.Add("timur160@hotmail.com");
-
-                //    EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
-                //    EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
-                //    eb.ReporterNewCase(user.login_nm, user.password, rm._report.display_name);
-                //    string body = eb.Body;
-                //    em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_NewCase, body, true);
-
-                //}
-                //#endregion
-
             }
             ReportViewModel rvm = new ReportViewModel();
-            //CaseSubmittedViewModel caseSubmitted = new CaseSubmittedViewModel();
-            //caseSubmitted.merge(model, currentReport);
             rvm.Merge(currentReport);
             ViewBag.companylogo = companyModel._company.path_en;
-            
+            ReportSubmit submit = new ReportSubmit();
+            submit.merge(rvm, companyModel, reportModel, model);
             return View("CaseSubmitted", rvm);
         }
 

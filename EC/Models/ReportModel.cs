@@ -1205,6 +1205,7 @@ namespace EC.Models
         public report AddReport(ReportViewModel model)
         {
             var currentReport = new report();
+            //currentReport.reporterTypeDetail = model.reporterTypeDetail;
             /**
              * addUserID to the getAttachment.user_id, add report_id to the getAttachment.report_id
              * */
@@ -1217,7 +1218,7 @@ namespace EC.Models
                 mail = new MailAddress(model.userEmail);
                 nameOfEmail = mail.User;
             }
-
+            currentReport.incident_anonymity_id = model.incident_anonymity_id;
             GlobalFunctions gfFunctions = new GlobalFunctions();
             int notification = Convert.ToInt16(model.sendUpdates);
             //if not checked = 3, if  check = 1
