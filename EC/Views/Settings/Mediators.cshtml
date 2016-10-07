@@ -13,6 +13,12 @@
     bool is_cc = ViewBag.is_cc;
     String class_ext = ViewBag.cc_extension;
 
+    var role_id = um._user.role_id;
+    bool is_valid_mediator = false;
+    if (role_id == Constant.level_supervising_mediator)
+    {
+        is_valid_mediator = true;
+    }
     //bool is_cc = true;
     //String class_ext = "";
     //if (is_cc)
@@ -43,7 +49,7 @@
 
     <div class="contentSettings secondHeader">
         <div class="headerCompanyProfile">
-            @if (is_cc)
+            @if (is_cc && is_valid_mediator)
             {
                 <div class="headerBlock">
                     <div class="blockText">
@@ -60,22 +66,21 @@
             }
             else
             {
-                <div class="headerBlock">
-                    <div class="blockText">
-                        <p class="title">@GlobalRes.invite_new_mediator</p>
+                @if (is_valid_mediator)
+                { 
+                    <div class="headerBlock">
+                        <div class="blockText">
+                            <p class="title">@GlobalRes.invite_new_mediator</p>
+                        </div>
                     </div>
-                </div>
-                <div class="blockSendEmail greyBorder">
-                    <input type="text" id="sendEmail" name="newLocationName" placeholder="email@yourcompany.com" required="" value="">
-                    <div class="closeIcon"></div>
-                    <input id="sendMessage" type="submit" />
-                    <span class="sendBtn">@GlobalRes.Send.ToLower()</span>
-                </div>
+                    <div class="blockSendEmail greyBorder">
+                        <input type="text" id="sendEmail" name="newLocationName" placeholder="email@yourcompany.com" required="" value="">
+                        <div class="closeIcon"></div>
+                        <input id="sendMessage" type="submit" />
+                        <span class="sendBtn">@GlobalRes.Send.ToLower()</span>
+                    </div>
+                }
             }
-
- 
-            
-            
 
         </div>
     </div><!--contentSettings.secondHeader-->

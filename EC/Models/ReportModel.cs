@@ -1255,8 +1255,15 @@ namespace EC.Models
 
             newUser = db.user.Add(newUser);
             db.SaveChanges();
+            string reporter_login = glb.GenerateReporterLogin(newUser.id);
 
-            newUser.login_nm = glb.GenerateReporterLogin(newUser.id);
+            while (glb.isLoginInUse(reporter_login))
+            {
+                reporter_login = glb.GenerateReporterLogin(newUser.id);
+            }
+            
+
+            newUser.login_nm = reporter_login;
 
             currentReport = model.Merge(currentReport);
             currentReport.user_id = newUser.id;

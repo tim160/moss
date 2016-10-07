@@ -203,7 +203,7 @@ public class GlobalFunctions
         {
             reporter_login = reporter_login + rd.Next(0, 9).ToString();
         }
-        while ((reporter_login.Length) < 6 && isLoginInUse("EC" + reporter_login));
+        while (reporter_login.Length < 6);
 
    //     ?while ((reporter_login.Length + report_id.ToString().Length) < 6);
 
