@@ -582,6 +582,7 @@
     <TypeScriptCompile Include="Scripts\Common\test.ts" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\TempV.cs" />
     <Compile Include="App_LocalResources\GlobalRes.en1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
