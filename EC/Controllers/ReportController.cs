@@ -175,7 +175,7 @@ namespace EC.Controllers
             ViewBag.companylogo = companyModel._company.path_en;
             ReportSubmit submit = new ReportSubmit();
             submit.merge(rvm, companyModel, reportModel, model);
-            return View("CaseSubmitted", rvm);
+            return View("CaseSubmitted", submit);
         }
 
         // case details

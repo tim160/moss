@@ -3,7 +3,7 @@
 @using EC.Models
 @using EC.Models.Database
 @using EC.Models.ECModel
-@model EC.Controllers.ViewModel.ReportViewModel
+@model EC.Controllers.ViewModel.ReportSubmit
 @{
     ViewBag.Title = "Report";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -191,26 +191,26 @@
                                 <table style="width: 100%;padding-left:9px;">
                                     <tbody>
                                         <tr>
-                                            <td class=" titlereporttable" style="width: 25%;">
+                                            <td class="titlereporttable" style="width: 25%;">
                                                 @GlobalRes.ReportingFrom:
                                             </td>
-                                            <td class="reportTextTable" id="reportingFrom">test test test</td>
+                                            <td class="reportTextTable" id="reportingFrom">@Html.DisplayFor(m => m.reportingFrom)</td>
                                         </tr>
                                         <tr>
                                             <td class="titleReportTable">@GlobalRes.ConfidentialityLevel:</td>
-                                            <td class="reportTextTable" id="anonymityStatus">test test test</td>
+                                            <td class="reportTextTable" id="anonymityStatus">@Html.DisplayFor(m => m.confidentialLevel)</td>
                                         </tr>
                                         <tr>
                                             <td class="titleReportTable">@GlobalRes.Reportedas:</td>
-                                            <td class="reportTextTable" id="formalRole">test test test</td>
+                                            <td class="reportTextTable" id="formalRole">@Html.DisplayFor(m => m.reportedAs)</td>
                                         </tr>
                                         <tr>
                                             <td class="titleReportTable">@GlobalRes.Incidentlocation:</td>
-                                            <td class="reportTextTable" id="incedentHappenedIn"> test test test</td>
+                                            <td class="reportTextTable" id="incedentHappenedIn">@Html.DisplayFor(m => m.incidentLocation)</td>
                                         </tr>
                                         <tr>
                                             <td class="titleReportTable">@GlobalRes.AffectedDepartment:</td>
-                                            <td class="reportTextTable" id="departments"> test test test</td>
+                                            <td class="reportTextTable" id="departments">@Html.DisplayFor(m => m.affectedDepartments)</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -240,17 +240,17 @@
                                             <td class=" titlereportTable" style="width: 25%;">
                                                 @GlobalRes.Doesmanagementknowaboutthisincident
                                             </td>
-                                            <td class="reportTextTable" id="isManagementKnow">test test test</td>
+                                            <td class="reportTextTable" id="isManagementKnow">@Html.DisplayFor(m => m.managamentKnow)</td>
                                         </tr>
                                         <tr>
                                             <td class=" titlereportTable">
                                                 @GlobalRes.ReportedOutside
                                             </td>
-                                            <td class="reportTextTable" id="isReportedOutside">test test test</td>
+                                            <td class="reportTextTable" id="isReportedOutside">@Html.DisplayFor(m => m.outOrganization)</td>
                                         </tr>
                                         <tr>
                                             <td class="titleReportTable">@GlobalRes.IsCaseUrgent_q</td>
-                                            <td class="reportTextTable" id="isReportUrgent">test test test</td>
+                                            <td class="reportTextTable" id="isReportUrgent">@Html.DisplayFor(m => m.isCaseUrgent)</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -273,23 +273,23 @@
                                         <tbody>
                                             <tr>
                                                 <td class=" titlereporttable" style="width: 25%;">@GlobalRes.IncidentType:</td>
-                                                <td class="reportTextTable" id="reportAbout"></td>
+                                                <td class="reportTextTable" id="reportAbout">@Html.DisplayFor(m => m.IncidentType)</td>
                                             </tr>
                                             <tr>
                                                 <td class="titleReportTable">@GlobalRes.IncidentDate:</td>
-                                                <td class="reportTextTable" id="incidentHappendDate">test test test</td>
+                                                <td class="reportTextTable" id="incidentHappendDate">@Html.DisplayFor(m => m.IncidentDate)</td>
                                             </tr>
                                             <tr>
                                                 <td class="titleReportTable">@GlobalRes.ongoingIncident</td>
-                                                <td class="reportTextTable" id="isIncidentOngoing">test test test</td>
+                                                <td class="reportTextTable" id="isIncidentOngoing">@Html.DisplayFor(m => m.incidentOngoing)</td>
                                             </tr>
                                             <tr>
                                                 <td class="titleReportTable">@GlobalRes.IncidentResultInjury</td>
-                                                <td class="reportTextTable" id="hasInjury">test test test</td>
+                                                <td class="reportTextTable" id="hasInjury">@Html.DisplayFor(m => m.incidentResult)</td>
                                             </tr>
                                             <tr>
                                                 <td class="titleReportTable">@GlobalRes.IncidentDescription:</td>
-                                                <td class="reportTextTable">test test test</td>
+                                                <td class="reportTextTable">@Html.DisplayFor(m => m.incidentDescription)</td>
                                             </tr>
                                         </tbody>
                                     </table>

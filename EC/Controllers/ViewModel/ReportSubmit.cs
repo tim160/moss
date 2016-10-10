@@ -1,4 +1,5 @@
-﻿using EC.Models;
+﻿using EC.App_LocalResources;
+using EC.Models;
 using EC.Models.Database;
 using System;
 using System.Collections.Generic;
@@ -16,16 +17,16 @@ namespace EC.Controllers.ViewModel
         public string affectedDepartments { get; set; }//
 
 
-        public string managamentKnow { get; set; }
-        public bool outOrganization { get; set; }
-        public bool isCaseUrgent { get; set; }
+        public string managamentKnow { get; set; } //
+        public string outOrganization { get; set; }//
+        public bool isCaseUrgent { get; set; } //
 
 
-        public string IncidentType { get; set; }
-        public string IncidentDate { get; set; }
-        public bool incidentOngoing { get; set; }
-        public bool incidentResult { get; set; }
-        public string incidentDescription { get; set; }
+        public string IncidentType { get; set; } //
+        public string IncidentDate { get; set; } //
+        public string incidentOngoing { get; set; } //
+        public string incidentResult { get; set; } //
+        public string incidentDescription { get; set; } //
 
 
         public void merge(ReportViewModel rvm, CompanyModel companyModel, ReportModel reportModel, ReportViewModel model)
@@ -101,17 +102,39 @@ namespace EC.Controllers.ViewModel
                            where n.id == model.managamentKnowId
                            select n.text_en;
                 managamentKnow = temp.FirstOrDefault();
-                //management_know item = temp.FirstOrDefault();
             }
-            //model.managamentKnowId
+            List<reported_outside> reported_outside = companyModel.getReportedOutside();
+            if(model.reported_outside_id > 0 && reported_outside!=null)
+            {
+                var temp = from n in reported_outside where n.id == model.reported_outside_id select n;
+                outOrganization = temp.FirstOrDefault().description_en;
+            }
 
-            //var departments = companyModel.CompanyDepartmentsActive(companyModel._company.id).ToList();
-            //if(departments != null)
-            //{
-            //    var temp = from n in departments where n.id == model.
-            //}
-            int a = 10;
-            //ViewBag.locationsOfIncident = HtmlDataHelper.MakeSelect(companyModel.LocationsOfIncident(id).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
+            if(model.isUrgent == 0)
+            {
+                isCaseUrgent = false;
+            } else
+            {
+                isCaseUrgent = true;
+            }
+
+            //model.whatHappened 
+            IncidentType = model.whatHappened;
+            IncidentDate = model.dateIncidentHappened.ToShortDateString();
+            switch (model.isOnGoing)
+            {
+                case 1:
+                    incidentOngoing = GlobalRes.No;
+                    break;
+                case 2:
+                    incidentOngoing = GlobalRes.Yes;
+                    break;
+                case 3:
+                    incidentOngoing = GlobalRes.NotSureUp;
+                    break;
+            }
+            incidentResult = model.injury_damage;
+            incidentDescription = model.describeHappened;
         }
     }
 }
