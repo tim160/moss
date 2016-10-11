@@ -132,8 +132,8 @@ namespace EC.Controllers.ViewModel
             }
             else
             {
-                //data.incident_anonymity_id = incident_anonymity_id; непонятны зачем они ...в моем случе обнуляло переменную
-                incident_anonymity_id = data.incident_anonymity_id; 
+                data.incident_anonymity_id = incident_anonymity_id; 
+                //incident_anonymity_id = data.incident_anonymity_id; 
                 data.reporter_country_id = reportFrom;
                 if (locationsOfIncident > 0)
                 {

@@ -40,7 +40,7 @@ namespace EC.Controllers.ViewModel
             List<anonymity> list_anon = companyModel.GetAnonymities(companyModel._company.id, 0);
             if (list_anon != null)
             {
-                var temp = from n in list_anon where n.id == rvm.incident_anonymity_id select n;
+                var temp = from n in list_anon where n.id == model.incident_anonymity_id select n;
                 anonymity anon = temp.FirstOrDefault();
                 confidentialLevel = anon.anonymity_company_en;
             }
