@@ -9,6 +9,7 @@ using EC.Models.Database;
 using EC.Models.ECModel;
 using EC.Models.Utils;
 using EC.App_LocalResources;
+using System.Data.Entity.Validation;
 
 namespace EC.Models
 {
@@ -1204,203 +1205,226 @@ namespace EC.Models
 
         public report AddReport(ReportViewModel model)
         {
-            var currentReport = new report();
-            //currentReport.reporterTypeDetail = model.reporterTypeDetail;
-            /**
-             * addUserID to the getAttachment.user_id, add report_id to the getAttachment.report_id
-             * */
-            attachment getAttachment = FileUtils.SaveFile(model.files, "attachDocuments", "attachDocuments");
-            MailAddress mail = null;
-            string nameOfEmail = String.Empty;
-
-            if (model.userEmail != null)
+            try
             {
-                mail = new MailAddress(model.userEmail);
-                nameOfEmail = mail.User;
-            }
-            currentReport.incident_anonymity_id = model.incident_anonymity_id;
-            GlobalFunctions gfFunctions = new GlobalFunctions();
-            int notification = Convert.ToInt16(model.sendUpdates);
-            //if not checked = 3, if  check = 1
-            if (notification == 1)
-            {
-                notification = 1;
-            } else
-            {
-                notification = 3;
-            }
-            user newUser = new user()
-            {
-                company_id = model.currentCompanyId,
-                role_id = 8,
-                status_id = 2,
-                address_id = 0,
-                first_nm = model.userName == null ? "" : model.userName,
-                last_nm = model.userLastName == null ? "" : model.userLastName,
-                login_nm = "",
-                password = glb.GeneretedPassword(),
-                email = model.userEmail == null ? "" : model.userEmail,
-                preferred_contact_method_id = 2,
-                question_ds = "",
-                answer_ds = "",
-                user_id = 0,
-                last_update_dt = DateTime.Now,
-                preferred_email_language_id = 1,
-                photo_path = "",
-                notification_messages_actions_flag = notification,
-                notification_new_reports_flag = 1,
-                notification_marketing_flag = 1,
-                notification_summary_period = 1
-            };
-
-            newUser = db.user.Add(newUser);
-            db.SaveChanges();
-            string reporter_login = glb.GenerateReporterLogin(newUser.id);
-
-            while (glb.isLoginInUse(reporter_login))
-            {
-                reporter_login = glb.GenerateReporterLogin(newUser.id);
-            }
-            
-
-            newUser.login_nm = reporter_login;
-
-            currentReport = model.Merge(currentReport);
-            currentReport.user_id = newUser.id;
-            currentReport.reporter_user_id = newUser.id;
-
-            //db.user.AddOrUpdate(newUser);
-            currentReport = db.report.Add(currentReport);
-            db.SaveChanges();
-            currentReport.display_name = gfFunctions.GenerateCaseNumber(currentReport.id, currentReport.company_id, currentReport.company_nm);
-            currentReport.report_color_id = gfFunctions.GetNextColor(currentReport.company_id, currentReport.id);
-
-            if (getAttachment != null)
-            {
-                getAttachment.report_id = currentReport.id;
-                getAttachment.user_id = newUser.id;
-                db.attachment.Add(getAttachment);
-                db.SaveChanges();
-            }
-
-            if (model.mediatorsInvolved != null)
-            {
-                foreach (string mediatorId in model.mediatorsInvolved)
+                var currentReport = new report();
+                using (ECEntities adv = new ECEntities())
                 {
-                    report_mediator_involved result = new report_mediator_involved()
+                    /**
+                     * addUserID to the getAttachment.user_id, add report_id to the getAttachment.report_id
+                     * */
+                    attachment getAttachment = FileUtils.SaveFile(model.files, "attachDocuments", "attachDocuments");
+                    MailAddress mail = null;
+                    string nameOfEmail = String.Empty;
+
+                    if (model.userEmail != null)
                     {
-                        user_id = 1,
-                        mediator_id = Convert.ToInt32(mediatorId),
+                        mail = new MailAddress(model.userEmail);
+                        nameOfEmail = mail.User;
+                    }
+
+                    GlobalFunctions gfFunctions = new GlobalFunctions();
+                    int notification = Convert.ToInt16(model.sendUpdates);
+                    //if not checked = 3, if  check = 1
+                    if (notification == 1)
+                    {
+                        notification = 1;
+                    }
+                    else
+                    {
+                        notification = 3;
+                    }
+                    user newUser = new user()
+                    {
+                        company_id = model.currentCompanyId,
+                        role_id = 8,
                         status_id = 2,
+                        address_id = 0,
+                        first_nm = model.userName == null ? "" : model.userName,
+                        last_nm = model.userLastName == null ? "" : model.userLastName,
+                        login_nm = "",
+                        password = glb.GeneretedPassword(),
+                        email = model.userEmail == null ? "" : model.userEmail,
+                        preferred_contact_method_id = 2,
+                        question_ds = "",
+                        answer_ds = "",
+                        user_id = 0,
                         last_update_dt = DateTime.Now,
-                        report_id = currentReport.id
+                        preferred_email_language_id = 1,
+                        photo_path = "",
+                        notification_messages_actions_flag = notification,
+                        notification_new_reports_flag = 1,
+                        notification_marketing_flag = 1,
+                        notification_summary_period = 1
                     };
 
-                    db.report_mediator_involved.Add(result);
-                }
-            }
+                    newUser = adv.user.Add(newUser);
+                    int t = 0;
+                    t = adv.SaveChanges();
+                    string reporter_login = glb.GenerateReporterLogin(newUser.id);
 
-            List<report_department> departments = model.GetReportDepartment(currentReport.id);
-            foreach (report_department department in departments)
-            {
-                AddReportDepartment(department);
-            }
-            //savind secondary type
-            //здесь проверяем на other если оно не заполнено, то 
-            if(model.caseInformationReportDetail != null)
-            {
-                report_secondary_type type = new report_secondary_type()
-                {
-                    report_id = currentReport.id,
-                    mandatory_secondary_type_id = null,
-                    secondary_type_id = 0,
-                    secondary_type_nm = model.caseInformationReportDetail,
-                    user_id = 1,
-                    last_update_dt = DateTime.Now
-                };
-                db.report_secondary_type.Add(type);
-            }
-            else
-            {
-                ReportModel reportModel = ReportModel.inst;
-                if (!reportModel.isCustomIncidentTypes(model.currentCompanyId))
-                {
-                    int defaultType = db.secondary_type_mandatory.Where(item => item.secondary_type_en == model.caseInformationReport).Select(item => item.id).FirstOrDefault();
-                    if(defaultType >0)
+                    while (glb.isLoginInUse(reporter_login))
                     {
-                        report_secondary_type putDefaultType = new report_secondary_type
-                        {
-                            report_id = currentReport.id,
-                            mandatory_secondary_type_id = defaultType,
-                            secondary_type_id = 0,
-                            secondary_type_nm = "",
-                            last_update_dt = DateTime.Now,
-                            user_id = 1
-                        };
-                        db.report_secondary_type.Add(putDefaultType);
+                        reporter_login = glb.GenerateReporterLogin(newUser.id);
                     }
-                }
-                else
-                {
-                    int customType = db.company_secondary_type.Where(item => item.secondary_type_en == model.caseInformationReport).Select(item => item.id).FirstOrDefault();
-                    if (customType > 0)
+
+                    newUser.login_nm = reporter_login;
+                    currentReport = model.Merge(currentReport);
+                    currentReport.user_id = newUser.id;
+                    currentReport.reporter_user_id = newUser.id;
+
+                    //db.user.AddOrUpdate(newUser);
+                    currentReport = adv.report.Add(currentReport);
+                    t = adv.SaveChanges();
+                    //  t = db.SaveChanges();
+                    currentReport.display_name = gfFunctions.GenerateCaseNumber(currentReport.id, currentReport.company_id, currentReport.company_nm);
+                    currentReport.report_color_id = gfFunctions.GetNextColor(currentReport.company_id, currentReport.id);
+                    t = adv.SaveChanges();
+
+                    if (getAttachment != null)
                     {
-                        report_secondary_type putCustomType = new report_secondary_type
+                        getAttachment.report_id = currentReport.id;
+                        getAttachment.user_id = newUser.id;
+                        db.attachment.Add(getAttachment);
+                        t = adv.SaveChanges();
+                    }
+
+                    if (model.mediatorsInvolved != null)
+                    {
+                        foreach (string mediatorId in model.mediatorsInvolved)
+                        {
+                            report_mediator_involved result = new report_mediator_involved()
+                            {
+                                user_id = 1,
+                                mediator_id = Convert.ToInt32(mediatorId),
+                                status_id = 2,
+                                last_update_dt = DateTime.Now,
+                                report_id = currentReport.id
+                            };
+
+                            adv.report_mediator_involved.Add(result);
+                        }
+                    }
+
+                    List<report_department> departments = model.GetReportDepartment(currentReport.id);
+                    foreach (report_department department in departments)
+                    {
+                        AddReportDepartment(department);
+                    }
+                    //savind secondary type
+                    //здесь проверяем на other если оно не заполнено, то 
+                    if (model.caseInformationReportDetail != null)
+                    {
+                        report_secondary_type type = new report_secondary_type()
                         {
                             report_id = currentReport.id,
                             mandatory_secondary_type_id = null,
-                            secondary_type_id = customType,
-                            secondary_type_nm = "",
-                            last_update_dt = DateTime.Now,
-                            user_id = 1
+                            secondary_type_id = 0,
+                            secondary_type_nm = model.caseInformationReportDetail,
+                            user_id = 1,
+                            last_update_dt = DateTime.Now
                         };
-                        db.report_secondary_type.Add(putCustomType);
+                        db.report_secondary_type.Add(type);
                     }
+                    else
+                    {
+                        ReportModel reportModel = ReportModel.inst;
+                        if (!reportModel.isCustomIncidentTypes(model.currentCompanyId))
+                        {
+                            int defaultType = db.secondary_type_mandatory.Where(item => item.secondary_type_en == model.caseInformationReport).Select(item => item.id).FirstOrDefault();
+                            if (defaultType > 0)
+                            {
+                                report_secondary_type putDefaultType = new report_secondary_type
+                                {
+                                    report_id = currentReport.id,
+                                    mandatory_secondary_type_id = defaultType,
+                                    secondary_type_id = 0,
+                                    secondary_type_nm = "",
+                                    last_update_dt = DateTime.Now,
+                                    user_id = 1
+                                };
+                                db.report_secondary_type.Add(putDefaultType);
+                            }
+                        }
+                        else
+                        {
+                            int customType = db.company_secondary_type.Where(item => item.secondary_type_en == model.caseInformationReport).Select(item => item.id).FirstOrDefault();
+                            if (customType > 0)
+                            {
+                                report_secondary_type putCustomType = new report_secondary_type
+                                {
+                                    report_id = currentReport.id,
+                                    mandatory_secondary_type_id = null,
+                                    secondary_type_id = customType,
+                                    secondary_type_nm = "",
+                                    last_update_dt = DateTime.Now,
+                                    user_id = 1
+                                };
+                                adv.report_secondary_type.Add(putCustomType);
+                            }
 
+                        }
+                    }
+                    /*report_relationship*/
+                    report_relationship rep = new report_relationship();
+                    rep.report_id = currentReport.id;
+                    rep.user_id = currentReport.user_id;
+                    rep.last_update_dt = DateTime.Now;
+
+                    if (currentReport.not_current_employee != null && currentReport.not_current_employee.Trim().Length > 0)
+                    {
+                        //other
+                        rep.relationship_nm = currentReport.not_current_employee.Trim();
+                        rep.relationship_id = null;
+                        if (currentReport.company_relationship_id == 2)
+                        {
+                            //'Former Employee'
+                            rep.company_relationship_id = 2;
+                        }
+                    }
+                    else
+                    {
+                        //проверить на custom
+                        int count = db.company_relationship.Where(rel => rel.status_id == 2).Count();
+                        if (count > 0)
+                        {
+                            //custom
+                            rep.company_relationship_id = currentReport.company_relationship_id;
+                        }
+                        else
+                        {
+                            rep.relationship_id = currentReport.company_relationship_id;
+                        }
+                    }
+                    adv.report_relationship.Add(rep);
                 }
-            }
-            /*report_relationship*/
-            report_relationship rep = new report_relationship();
-            rep.report_id = currentReport.id;
-            rep.user_id = currentReport.user_id;
-            rep.last_update_dt = DateTime.Now;
 
-            if (currentReport.not_current_employee!=null && currentReport.not_current_employee.Trim().Length > 0)
-            {
-                //other
-                rep.relationship_nm = currentReport.not_current_employee.Trim();
-                rep.relationship_id = null;
-                if(currentReport.company_relationship_id == 2)
+
+                List<report_non_mediator_involved> mediators = model.GetModeMediatorInvolveds();
+                foreach (var item in mediators)
                 {
-                    //'Former Employee'
-                    rep.company_relationship_id = 2;
+                    AddReportNonMediatorInvolved(item, currentReport);
                 }
-            } else
+
+                int t2 = db.SaveChanges();
+                return currentReport;
+            }
+            catch (DbEntityValidationException e)
             {
-                //проверить на custom
-                int count = db.company_relationship.Where(rel => rel.status_id == 2).Count();
-                if (count > 0)
+                foreach (var eve in e.EntityValidationErrors)
                 {
-                    //custom
-                    rep.company_relationship_id = currentReport.company_relationship_id;
-                } else
-                {
-                    rep.relationship_id = currentReport.company_relationship_id;
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
                 }
+                throw;
             }
-            db.report_relationship.Add(rep);
-
-
-        List<report_non_mediator_involved> mediators = model.GetModeMediatorInvolveds();
-            foreach (var item in mediators)
-            {
-                AddReportNonMediatorInvolved(item, currentReport);
-            }
-
-            db.SaveChanges();
-            return currentReport;
+            return null;
         }
-
         public report_non_mediator_involved AddReportNonMediatorInvolved(report_non_mediator_involved item, report currentReport)
         {
             item.report = currentReport;
