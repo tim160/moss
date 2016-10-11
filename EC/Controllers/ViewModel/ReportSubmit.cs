@@ -28,6 +28,8 @@ namespace EC.Controllers.ViewModel
         public string incidentResult { get; set; } //
         public string incidentDescription { get; set; } //
 
+        public List<string> namesFile { get; set; }
+        public string attachFiles { get; set; }
 
         public void merge(ReportViewModel rvm, CompanyModel companyModel, ReportModel reportModel, ReportViewModel model)
         {
@@ -133,8 +135,28 @@ namespace EC.Controllers.ViewModel
                     incidentOngoing = GlobalRes.NotSureUp;
                     break;
             }
-            incidentResult = model.injury_damage;
+
+
+
+            List<injury_damage> injuryDamage = companyModel.GetInjuryDamages().ToList();
+            if(injuryDamage!=null && injuryDamage.Count > 0 && model.incidentResultReport > 0)
+            {
+                var temp = from n in injuryDamage where n.id == model.incidentResultReport select n;
+                incidentResult = temp.FirstOrDefault().text_en;
+            }
+
+
             incidentDescription = model.describeHappened;
+
+            if(model.files.Count > 0)
+            {
+                HttpFileCollectionBase files = model.files;
+                var fileItem = files["attachDocuments"];
+                if(fileItem!=null)
+                {
+                    attachFiles = fileItem.FileName;
+                }
+            }
         }
     }
 }

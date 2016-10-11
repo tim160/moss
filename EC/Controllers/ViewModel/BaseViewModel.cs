@@ -26,6 +26,7 @@ namespace EC.Controllers.ViewModel
             {
                 var attr = ((ListEntety[])property.GetCustomAttributes(typeof(ListEntety), false))[0];
                 var name = attr.Name;
+                //namesFile.Add(name);
                 var itemType = attr.Type;
                 var list = new List<object>();
                 int count;

@@ -155,6 +155,7 @@ namespace EC.Controllers
         [HttpPost]
         public ActionResult New(ReportViewModel model)
         {
+            
             model.Process(Request.Form, Request.Files);
             var currentReport = reportModel.AddReport(model);
             ViewBag.CaseNumber = currentReport.display_name;//Request.Form["caseNumber"];model.caseNumber
