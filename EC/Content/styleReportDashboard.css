@@ -1933,7 +1933,6 @@ p.addMoreMediatorsBtn {
     resize: none;
 }
 .headerCompanyProfile .blockSendEmail .closeIcon {
-    display: none;
     background: url(Icons/close.png) no-repeat center;
     width: 14px;
     height: 14px;
@@ -1946,7 +1945,6 @@ p.addMoreMediatorsBtn {
     display: none;
 }
 .headerCompanyProfile .blockSendEmail span.sendBtn {
-    display: none;
     border: 1px solid #049787;
     font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
     text-transform: uppercase;

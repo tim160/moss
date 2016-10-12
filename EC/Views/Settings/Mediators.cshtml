@@ -190,40 +190,54 @@
         });
         //----------------END Open mini menu for mobile---------------------------
 
-        function focusEmailSend() {
-            $('.blockSendEmail input,.blockSendEmail textarea')
-             .focus(function () {
-                 var thisElement = $(this);
-                 thisElement.parent('.blockSendEmail').removeClass('greyBorder redBorder').addClass('greenBorder');
-                 thisElement.parent('.blockSendEmail').find('.closeIcon').show();
-                 thisElement.parent('.blockSendEmail').find('span.sendBtn').show();
-             });    
-        }
-        function focusoutEmailSend() {
-            $('.blockSendEmail').on('mouseleave', function () {
-                var thisElement = $(this);
-                thisElement.removeClass('greenBorder').addClass('greyBorder');
-                thisElement.find('.closeIcon').hide();
-                thisElement.find('span.sendBtn').hide();
-                $('.blockSendEmail input,.blockSendEmail textarea').focusout();
-            });
-        }
+        //function focusEmailSend() {
+        //    $('.blockSendEmail input,.blockSendEmail textarea')
+        //     .focus(function () {
+        //         var thisElement = $(this);
+        //         thisElement.parent('.blockSendEmail').removeClass('greyBorder redBorder').addClass('greenBorder');
+        //         thisElement.parent('.blockSendEmail').find('.closeIcon').show();
+        //         thisElement.parent('.blockSendEmail').find('span.sendBtn').show();
+        //     });    
+        //}
+        //function focusoutEmailSend() {
+        //    $('.blockSendEmail').on('mouseleave', function () {
+        //        var thisElement = $(this);
+        //        thisElement.removeClass('greenBorder').addClass('greyBorder');
+        //        thisElement.find('.closeIcon').hide();
+        //        thisElement.find('span.sendBtn').hide();
+        //        $('.blockSendEmail input,.blockSendEmail textarea').focusout();
+        //    });
+        //}
 
-        function sendEmail() {
-            $('.blockSendEmail span').click(function () {
-                console.log('sendClick');
-                if ($("#sendEmail").val().trim().length > 0) {
-                    $('.blockSendEmail input').click();
-                    var email = $("#sendEmail").val().trim();
-                    console.log(email);
-                    createInvitation();
-                }
-                else {
-                    $(this).parent('.blockSendEmail').addClass('redBorder');
-                }
-            });
-        }
-        
+        //function sendEmail() {
+        //    $('.blockSendEmail span').click(function () {
+        //        console.log('sendClick');
+        //        if ($("#sendEmail").val().trim().length > 0) {
+        //            $('.blockSendEmail input').click();
+        //            var email = $("#sendEmail").val().trim();
+        //            console.log(email);
+        //            createInvitation();
+        //        }
+        //        else {
+        //            $(this).parent('.blockSendEmail').addClass('redBorder');
+        //        }
+        //    });
+        //}
+        $(".closeIcon").on('click', function (event) {
+            $("#sendEmail").val("");
+        });
+        $(".sendBtn").on('click', function (event) {
+            var val = $("#sendEmail").val();
+            if ($("#sendEmail").val().trim().length > 0) {
+                $('.blockSendEmail input').click();
+                var email = $("#sendEmail").val().trim();
+                console.log(email);
+                createInvitation();
+            }
+            else {
+                $(event.currentTarget).parent('.blockSendEmail').addClass('redBorder');
+            }
+        });
         function createInvitation() {
             $.ajax({
                 method: "POST",
@@ -247,9 +261,9 @@
         }
 
 
-        focusEmailSend();
-        focusoutEmailSend();
-        sendEmail();
+        //focusEmailSend();
+        //focusoutEmailSend();
+        //sendEmail();
     });
 
 </script>

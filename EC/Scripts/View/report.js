@@ -27,6 +27,8 @@
         var temp = $(event.currentTarget);
         temp.css("border", "3px solid transparent transparent #E5EBEB transparent");
     });
+
+    
     var generalInfo = $('.tab.generalInfo');
     var passiveCircle = $('.tab.partiesInvolved');
     var caseInformation = $('.tab.caseInformation');
@@ -828,6 +830,7 @@
     }
 
     function summaryPage() {
+        //$("#userName").unbind('change');
         function setHoverBlock(item) {
             $(this).parent().find('img, input').addClass('hover');
         }
