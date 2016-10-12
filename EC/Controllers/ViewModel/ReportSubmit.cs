@@ -81,6 +81,9 @@ namespace EC.Controllers.ViewModel
                     if (temp > 0)
                     {
                         departmentsInt.Add(temp);
+                    } else if(temp == 0)
+                    {
+                        departmentsInt.Add(0);
                     }
                 }
                 catch (Exception) { }
@@ -95,6 +98,7 @@ namespace EC.Controllers.ViewModel
                 {
                     affectedDepartments = String.Join(", ", item);
                 }
+
             }
 
             List<management_know> managament = companyModel.getManagamentKnow();

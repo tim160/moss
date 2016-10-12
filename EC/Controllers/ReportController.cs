@@ -115,10 +115,17 @@ namespace EC.Controllers
                 {
                     ViewBag.relationship = companyModel.getRelationships();
                 }
-                
-               
+
+
                 //  ViewBag.departments = HtmlDataHelper.MakeSelect(currentCompany.company_department.ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("department")));
-                ViewBag.departments = HtmlDataHelper.MakeSelect(companyModel.CompanyDepartmentsActive(id).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("department")));
+                var departmentsActive = companyModel.CompanyDepartmentsActive(id).ToList();
+
+                company_department empty = new company_department();
+                empty.department_en = App_LocalResources.GlobalRes.notListed;
+                empty.id = 0;
+                departmentsActive.Add(empty);
+                ViewBag.departments = HtmlDataHelper.MakeSelect(departmentsActive, item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("department")));
+
 
                 ViewBag.locationsOfIncident = HtmlDataHelper.MakeSelect(companyModel.LocationsOfIncident(id).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
 

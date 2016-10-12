@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    $("#describeHappened").val("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, ")
+    //$("#describeHappened").val("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, ")
     $(".contentBlock").focus(function (event) {
         var temp = $(event.currentTarget);
         if (temp.parents('.rightBlock').hasClass('rightBlock_cc')) {
@@ -971,7 +971,15 @@
                 function () {
                     var sitem = $(this).html();
                     var sid = $(this).attr('value');
-
+                    if ($(this).attr('data-id') == "Not Listed") {
+                        $(this).siblings('li').removeClass('selected');
+                        $(this).addClass('selected');
+                        $(this).parent('ul').siblings('span.selected').html(sitem);
+                        $(this).parent('ul').siblings('input').val(sid);
+                        $(this).parent('ul').parent('.subject').change();
+                        $(this).parent('ul').parent('.subject').find('.validate').addClass('vlCorrect');
+                        return;
+                    }
                     $(this).siblings('li').removeClass('selected');
                     $(this).addClass('selected');
                     $(this).parent('ul').siblings('span.selected').html(sitem);
