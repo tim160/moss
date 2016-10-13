@@ -135,6 +135,10 @@ namespace EC.Business.Actions.Email
                     // new mediator registered - message for admin mediator 
                     m_filename = "NewUserArrived";
                     break;
+                case 15:
+                    // case promoted - individual message for mediators in case
+                    m_filename = "SeniorMediatorCaseConfirm";
+                    break;
 
                 case 20:
                     // new company invitation sent - message for new company ( cc for partner??)
