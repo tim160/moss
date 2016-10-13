@@ -47,16 +47,21 @@ namespace EC.Controllers
             List<task> tasks = um.UserTasks(1, null, true);
             List<TaskExtended> list_tsk = new List<TaskExtended>();
             int task_id = 0;
+            int unread_tasks = 0;
             foreach (task _task in tasks)
             {
                 task_id = _task.id;
                 TaskExtended tsk = new TaskExtended(_task.id, user_id);
+                
+                if (!tsk.IsRead())
+                    unread_tasks++;
+
                 list_tsk.Add(tsk);
             }
-            ViewBag.tasks = list_tsk;
+            ViewBag.tasks = list_tsk.OrderBy(m => m.TaskDueDate);
             ViewBag.user_id = user_id;
             ViewBag.um = um;
-
+            ViewBag.unread_tasks = unread_tasks;
             List<report> reports =  um.ReportsSearch(0, 0);
             ViewBag.reports = reports;
 
@@ -81,7 +86,8 @@ namespace EC.Controllers
             ViewBag.cc_extension = cc_ext;
             #endregion
 
-          
+
+
             //  List<task> tasks = um.UserTasks(0, null);
             List<task> tasks = um.UserTasks(2, null, true);
             List<TaskExtended> list_tsk = new List<TaskExtended>();
@@ -95,6 +101,21 @@ namespace EC.Controllers
             ViewBag.tasks = list_tsk;
             ViewBag.user_id = user_id;
             ViewBag.um = um;
+
+
+            List<task> tasks_active = um.UserTasks(1, null, true);
+            int unread_tasks = 0;
+
+            //redo this shit
+            foreach (task _task in tasks_active)
+            {
+                task_id = _task.id;
+                TaskExtended tsk = new TaskExtended(_task.id, user_id);
+
+                if (!tsk.IsRead())
+                    unread_tasks++;
+            }
+            ViewBag.unread_tasks = unread_tasks;
 
             List<report> reports = um.ReportsSearch(0, 0);
             ViewBag.reports = reports;

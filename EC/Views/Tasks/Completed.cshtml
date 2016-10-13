@@ -14,7 +14,7 @@
     List<report> reports = (List<report>)ViewBag.reports;
     //  string _nameBlockShow = "";
     UserModel um = new UserModel(user_id);
-    int unread_tasks = um.UserTasks(1, 0, true).ToList().Count();
+    int unread_tasks = ViewBag.unread_tasks;
     
 }
 

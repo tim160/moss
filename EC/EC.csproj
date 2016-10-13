@@ -91,8 +91,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
@@ -223,6 +223,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\emails\SeniorMediatorCaseConfirm.html" />
     <Content Include="Content\fonts\bootstrap.min.css" />
     <Content Include="Content\cai.css" />
     <Content Include="Content\caseTasks.css" />
@@ -432,6 +433,7 @@
     <Content Include="patches\1_7.sql" />
     <Content Include="PrivacyStatement.html" />
     <Content Include="Scripts\daterangepicker.js" />
+    <None Include="Properties\PublishProfiles\test.pubxml" />
     <None Include="Scripts\lib\jquery-1.10.2.intellisense.js" />
     <Content Include="patches\1_4.sql" />
     <Content Include="patches\1_3.sql" />
@@ -582,7 +584,6 @@
     <TypeScriptCompile Include="Scripts\Common\test.ts" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Code\TempV.cs" />
     <Compile Include="App_LocalResources\GlobalRes.en1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
