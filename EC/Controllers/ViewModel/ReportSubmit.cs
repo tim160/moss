@@ -19,7 +19,7 @@ namespace EC.Controllers.ViewModel
 
         public string managamentKnow { get; set; } //
         public string outOrganization { get; set; }//
-        public bool isCaseUrgent { get; set; } //
+        public string isCaseUrgent { get; set; } //
 
 
         public string IncidentType { get; set; } //
@@ -98,7 +98,10 @@ namespace EC.Controllers.ViewModel
                 {
                     affectedDepartments = String.Join(", ", item);
                 }
-
+                if(affectedDepartments == null)
+                {
+                    affectedDepartments = GlobalRes.notListed;
+                }
             }
 
             List<management_know> managament = companyModel.getManagamentKnow();
@@ -118,10 +121,10 @@ namespace EC.Controllers.ViewModel
 
             if(model.isUrgent == 0)
             {
-                isCaseUrgent = false;
+                isCaseUrgent = GlobalRes.No;
             } else
             {
-                isCaseUrgent = true;
+                isCaseUrgent = GlobalRes.Yes;
             }
 
             //model.whatHappened 

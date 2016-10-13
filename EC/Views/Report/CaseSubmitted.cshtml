@@ -237,25 +237,25 @@
                                 <table style="width: 100%; padding-left: 9px;">
                                     <tbody>
                                         <tr>
-                                            <td class=" titlereportTable" style="width: 25%;">
+                                            <td class="titlereportTable" style="width: 25%;">
                                                 @GlobalRes.Doesmanagementknowaboutthisincident
                                             </td>
                                             <td class="reportTextTable" id="isManagementKnow">@Html.DisplayFor(m => m.managamentKnow)</td>
                                         </tr>
                                         <tr>
-                                            <td class=" titlereportTable">
+                                            <td class="titlereportTable">
                                                 @GlobalRes.ReportedOutside
                                             </td>
                                             <td class="reportTextTable" id="isReportedOutside">@Html.DisplayFor(m => m.outOrganization)</td>
                                         </tr>
                                         <tr>
                                             <td class="titleReportTable">@GlobalRes.IsCaseUrgent_q</td>
-                                            <td class="reportTextTable" id="isReportUrgent">@Html.DisplayFor(m => m.isCaseUrgent)</td>
+                                            @*<td class="reportTextTable" id="isReportUrgent2">@Html.DisplayFor(m => m.isCaseUrgent)</td>*@
+                                            <td class="reportTextTable">@Html.DisplayFor(m => m.isCaseUrgent)</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-
                             <table>
                                 <tr>
                                     <td class="demoTD listText">
@@ -272,7 +272,7 @@
                                     <table style="width: 100%;">
                                         <tbody>
                                             <tr>
-                                                <td class=" titlereporttable" style="width: 25%;">@GlobalRes.IncidentType:</td>
+                                                <td class="titlereporttable" style="width: 25%;">@GlobalRes.IncidentType:</td>
                                                 <td class="reportTextTable" id="reportAbout">@Html.DisplayFor(m => m.IncidentType)</td>
                                             </tr>
                                             <tr>
