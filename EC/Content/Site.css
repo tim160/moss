@@ -1732,7 +1732,7 @@ button {
     margin-left: 10px;
 }
 .spec {
-width: 240px;
+    width: 898px;
     height: auto;
     background-color: #333b40;
     opacity: 0.8;
@@ -1753,6 +1753,7 @@ width: 240px;
     position: relative;
     display: none;
 }
+.help:active .hoverElement,
 .help:hover .hoverElement {
     display: block;
 }
