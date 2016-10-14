@@ -35,7 +35,7 @@
         unread_report_number_string = unread_report_number.ToString();
     }
 
-    int unread_message_number = um.Unread_Messages_Quantity(null, 1) + um.Unread_Messages_Quantity(null, 2) + um.Unread_Messages_Quantity(null, 3);
+    int unread_message_number = um.Unread_Messages_Quantity(0, 1) + um.Unread_Messages_Quantity(0, 2) + um.Unread_Messages_Quantity(0, 3);
     var unread_message_number_string = "";
     if (unread_message_number > 0)
     { 
