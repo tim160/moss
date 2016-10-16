@@ -1577,11 +1577,19 @@ public class GlobalFunctions
 
             foreach (report_department _temp_dep in _c_departments)
             {
-                temp_c_dep = db.company_department.Where(item => item.id == _temp_dep.department_id).FirstOrDefault();
-                if (temp_c_dep != null)
+                if (_temp_dep.department_id != 0)
+                {
+                    temp_c_dep = db.company_department.Where(item => item.id == _temp_dep.department_id).FirstOrDefault();
+                    if (temp_c_dep != null)
+                    {
+                        one_department_added = true;
+                        _dep_names.Add(temp_c_dep.department_en.Trim());
+                    }
+                }
+                else
                 {
                     one_department_added = true;
-                    _dep_names.Add(temp_c_dep.department_en.Trim());
+                    _dep_names.Add(GlobalRes.notListed.Trim());
                 }
             }
 
@@ -3040,6 +3048,11 @@ public class GlobalFunctions
             return_array.Add(new Tuple<string, string>(_temp_company_department.department_en, string.Join(",", report_ids_by_dept_id.ToArray())));
         }
 
+        if (departments_ids.Contains(0))
+        {
+            List<int> report_ids_by_dept_id = db.report_department.Where(item => (_report_ids.Contains(item.report_id) && item.department_id == 0)).Select(item => item.report_id).ToList();
+            return_array.Add(new Tuple<string, string>(GlobalRes.notListed, string.Join(",", report_ids_by_dept_id.ToArray())));
+        }
         return return_array;
     }
 
