@@ -865,7 +865,12 @@ namespace EC.Controllers
             {
                 return -1;
             }
-
+            if (promotion_value == Constant.investigation_status_resolution)
+            {
+                CompanyModel cm = new CompanyModel(um._user.company_id);
+                if (cm.AllMediators(cm._company.id, true, Constant.level_escalation_mediator).Count == 0)
+                    return 0;
+            }
 
 
             switch (promotion_value)
@@ -894,7 +899,7 @@ namespace EC.Controllers
                 case 9:
                     if(rm._investigation_status == 6)
                         glb.UpdateReportLog(user.id, 27, report_id, App_LocalResources.GlobalRes._Completed, null, description);
-                    else if (rm._investigation_status == 6)
+                    else if (rm._investigation_status == 4)
                         glb.UpdateReportLog(user.id, 22, report_id, App_LocalResources.GlobalRes._Completed, null, description);
                     
                         glb.UpdateReportLog(user.id, 25, report_id, "", null, description);
@@ -907,6 +912,7 @@ namespace EC.Controllers
 
 
             bool _new = userModel.ResolveCase(report_id, mediator_id, description, promotion_value, outcome_id, outcome);
+
             return 1;
         }
     }
