@@ -234,34 +234,47 @@
                 $('.newMessageBtn input').click();
             }
         });
+
+
+        var levelId = @Html.Raw(um._user.role_id);
+
         //RadioButton
-        var radioBlock = $('.inputBlock');
 
-        radioBlock.click(function () {
+        if(levelId == 5) {
+            var radioBlock = $('.inputBlock');
 
-            var self = $(this);
-            var arrows = self.parent('.inputRadio').parent('.rowBlock');
-            arrows.find('.inputRadio').css('background', 'rgb(255, 255, 255)');
-            arrows.find('.inputRadio').find('.radioTitle').css('color', 'rgb(174, 181, 183)');
+            radioBlock.click(function () {
 
-            self.parent('.inputRadio').css('background', 'rgb(242, 247, 247)');
-            self.find('.radioTitle').css('color', 'rgb(60, 62, 63)');
-        });
+                var self = $(this);
+                var arrows = self.parent('.inputRadio').parent('.rowBlock');
+                arrows.find('.inputRadio').css('background', 'rgb(255, 255, 255)');
+                arrows.find('.inputRadio').find('.radioTitle').css('color', 'rgb(174, 181, 183)');
+
+                self.parent('.inputRadio').css('background', 'rgb(242, 247, 247)');
+                self.find('.radioTitle').css('color', 'rgb(60, 62, 63)');
+            });
+
+        }
 
 
 
+
+
+        var levelId = @Html.Raw(um._user.role_id);
+
+        if(levelId == 5) {
+            var RadioButton = $('.inputBlock');
+            RadioButton.click(function () {
+                var mediatorBtn = $(this).parent();
+                var mediatorAllBtn = $(this).parent().parent();
+                mediatorAllBtn.find('.inputRadio').removeClass('active');
+                mediatorBtn.addClass('active');
+                mediatorBtn.find("input").prop('checked', true);
+
+            });
+        }
         //RadioButton Mediator
-        var RadioButton = $('.inputBlock');
 
-        RadioButton.click(function () {
-
-            var mediatorBtn = $(this).parent();
-            var mediatorAllBtn = $(this).parent().parent();
-            mediatorAllBtn.find('.inputRadio').removeClass('active');
-            mediatorBtn.addClass('active');
-            mediatorBtn.find("input").prop('checked', true);
-
-        });
 
 
 

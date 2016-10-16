@@ -273,39 +273,41 @@
                 $('.newMessageBtn input').click();
             }
         });
+        var levelId = @Html.Raw(um._user.role_id);
+
+
         //RadioButton
         var radioBlock = $('.inputBlock');
+        if(levelId == 5) { 
+            radioBlock.click(function () {
 
-        radioBlock.click(function () {
+                var self = $(this);
+                var arrows = self.parent('.inputRadio').parent('.rowBlock');
+                //arrows.find('.inputRadio').css('background', 'rgb(255, 255, 255)');
+                arrows.find('.inputRadio').find('.radioTitle').css('color', 'rgb(174, 181, 183)');
 
-            var self = $(this);
-            var arrows = self.parent('.inputRadio').parent('.rowBlock');
-            //arrows.find('.inputRadio').css('background', 'rgb(255, 255, 255)');
-            arrows.find('.inputRadio').find('.radioTitle').css('color', 'rgb(174, 181, 183)');
+                //self.parent('.inputRadio').css('background', 'rgb(242, 247, 247)');
+                self.find('.radioTitle').css('color', 'rgb(60, 62, 63)');
+            });
 
-            //self.parent('.inputRadio').css('background', 'rgb(242, 247, 247)');
-            self.find('.radioTitle').css('color', 'rgb(60, 62, 63)');
-        });
+            //RadioButton Mediator
+            var RadioButton = $('.inputBlock');
+            function OldClick(self) {
+                var mediatorBtn = self.parent();
+                var mediatorAllBtn = self.parent().parent();
+                mediatorAllBtn.find('.inputRadio').removeClass('active');
+                mediatorBtn.addClass('active');
+                mediatorBtn.find("input").prop('checked', true);
 
+            }
+            RadioButton.click(function () {
+                var self = $(this);
+                $('.blockPersonalSettings').css({ 'border': '1px solid #e0e5e6', 'width': '100%' });
+                self.parents('.blockPersonalSettings').css({ 'border': '2px solid #05b5a2', 'width': '99.8%' });
+                OldClick(self);
 
-
-        //RadioButton Mediator
-        var RadioButton = $('.inputBlock');
-        function OldClick(self) {
-            var mediatorBtn = self.parent();
-            var mediatorAllBtn = self.parent().parent();
-            mediatorAllBtn.find('.inputRadio').removeClass('active');
-            mediatorBtn.addClass('active');
-            mediatorBtn.find("input").prop('checked', true);
-
+            });
         }
-        RadioButton.click(function () {
-            var self = $(this);
-            $('.blockPersonalSettings').css({ 'border': '1px solid #e0e5e6', 'width': '100%' });
-            self.parents('.blockPersonalSettings').css({ 'border': '2px solid #05b5a2', 'width': '99.8%' });
-            OldClick(self);
-            
-        });
     });
 
 </script>
