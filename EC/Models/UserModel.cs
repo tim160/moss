@@ -763,6 +763,11 @@ namespace EC.Models
                     // to legal messages
                     all_messages = (db.message.Where(item => (all_report_ids.Contains(item.report_id) && (item.reporter_access == 3)))).ToList();
                 }
+                else if (thread_id == 0)
+                {
+                    // all messages
+                    all_messages = (db.message.Where(item => (all_report_ids.Contains(item.report_id)))).ToList();
+                }
                 else
                 {
                     all_messages = (db.message.Where(item => (all_report_ids.Contains(item.report_id) && (item.reporter_access == 2)))).ToList();
