@@ -724,8 +724,17 @@
         cmp.OptionSelect(caseInformationReport);
         cmp.OptionSelect(incidentResultReport);
         cmp.OptionSelect(isAccidentOngoing);
+        var wid = $($(".contentBlock")[0]).width();
 
+        $("#persone .spec.position").each(function (indx, element) {
+            //var wid = $($(".contentBlock")[0]).width();
 
+            $(element).css({ "width": wid - 365 });
+        });
+ 
+        $("#personeAgain .spec.position").css({ "width": wid - 150 });
+
+        //$("#persone .spec.position").css({ "width": wid - 365 });
         caseInformationReport.on('change', function () {
             if ($("input:radio[name=whatHappened]:checked").val() == 'Other') {
                 $('.reportAbout').addClass('validate');
