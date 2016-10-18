@@ -3286,7 +3286,7 @@ public class GlobalFunctions
     public string ConvertDateToLongMonthString(DateTime dt)
     {
         string sDate = "";
-        string Month = "";// GetFullMonth(dt.Month);
+        string Month =  GetFullMonth(dt.Month);
         string Day = dt.Day.ToString();
         if (Month.Length == 1)
             Month = "0" + Month;

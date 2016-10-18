@@ -1376,7 +1376,7 @@
     <value>Employee Confidential Notification – New Task</value>
   </data>
   <data name="Email_Title_NewUser" xml:space="preserve">
-    <value>Welcome to [CompanyName] case administration team</value>
+    <value>New Case Officer has registered</value>
   </data>
   <data name="Email_Title_NextStep" xml:space="preserve">
     <value>Employee Confidential notification - Case Update</value>

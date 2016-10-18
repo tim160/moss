@@ -219,7 +219,7 @@
                                 <div class="reportText"> @rm._secondary_type_string</div>
 
                                 <div class="titleReport">@GlobalRes.IncidentDateUp:</div>
-                                <div class="reportText">@rm._incident_date_string</div>
+                                <div class="reportText">@m_DateTimeHelper.ConvertDateToLongMonthString(rm._report.incident_dt)</div>
 
                                 <div class="titleReport">@GlobalRes.isOngoing:</div>
                                 <div class="reportText">@rm._is_ongoing</div>

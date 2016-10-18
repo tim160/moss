@@ -409,7 +409,7 @@ namespace EC.Models
             {
                 //closed
                 statuses_match_all_report_id = (from m in refGroupInvestigationStatuses
-                                                where m.investigation_status_id == 1 || m.investigation_status_id == 2
+                                                where m.investigation_status_id == Constant.investigation_status_closed
                                                
                                                 select m.report_id).ToList();
             }
