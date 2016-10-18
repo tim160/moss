@@ -589,10 +589,10 @@
     <value>Company Settings</value>
   </data>
   <data name="Completedcases" xml:space="preserve">
-    <value>Completed cases</value>
+    <value>Cases awaiting sign-off</value>
   </data>
   <data name="CompletedcasesUp" xml:space="preserve">
-    <value>Completed Cases</value>
+    <value>Cases Awaiting Sign-off</value>
   </data>
   <data name="Completedon" xml:space="preserve">
     <value>Completed on</value>
@@ -1608,5 +1608,11 @@
   </data>
   <data name="notListed" xml:space="preserve">
     <value>Not Listed</value>
+  </data>
+  <data name="HideCompletedUp" xml:space="preserve">
+    <value>Hide Completed</value>
+  </data>
+  <data name="SavePasswordChangeUp" xml:space="preserve">
+    <value>Save Password Change</value>
   </data>
 </root>
