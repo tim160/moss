@@ -99,6 +99,6 @@
             });
         }
     }
-
+    /*end click modal window*/
 
 });
