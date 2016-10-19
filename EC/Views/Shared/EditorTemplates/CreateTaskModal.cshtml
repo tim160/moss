@@ -101,58 +101,58 @@
             button = $(event.currentTarget).val();
             sendAjax(button);
         });
-        $("#resolve_btn").on('click', function (event) {
-            button = $(event.currentTarget).val();
-            sendAjax(button);
-        });
-        function sendAjax(promotion_value) {
-            var description = "";
-            var _report_id = $("#_report_id").val();
-            var user_id = $("#user_id").val();
-            var outcome_id = $("#ddlOutcome").attr('data-value');
-            var outcome = $("#txtOutcome").val();
-            if (outcome == "") {
-                $("#txtOutcome").css("border", "2px solid red");
-                $("#txtOutcome").on('focusin', function () {
-                    $("#txtOutcome").css("border", "none");
-                });
-            }
-            if (outcome != "") {
+        //$("#resolve_btn").on('click', function (event) {
+        //    button = $(event.currentTarget).val();
+        //    sendAjax(button);
+        //});
+        //function sendAjax(promotion_value) {
+        //    var description = "";
+        //    var _report_id = $("#_report_id").val();
+        //    var user_id = $("#user_id").val();
+        //    var outcome_id = $("#ddlOutcome").attr('data-value');
+        //    var outcome = $("#txtOutcome").val();
+        //    if (outcome == "") {
+        //        $("#txtOutcome").css("border", "2px solid red");
+        //        $("#txtOutcome").on('focusin', function () {
+        //            $("#txtOutcome").css("border", "none");
+        //        });
+        //    }
+        //    if (outcome != "") {
 
-                if (_report_id > 0 && user_id > 0 && promotion_value != "") {
-                    console.log('description', description);
-                    $.ajax({
-                        method: "POST",
-                        url: "/Case/CloseCase",
-                        data: { user_id: user_id, report_id: _report_id, description: description, promotion_value: promotion_value,outcome_id:outcome_id, outcome: outcome, }
-                    }).done(function (data) {//data from server
-                        console.log('data', data);
+        //        if (_report_id > 0 && user_id > 0 && promotion_value != "") {
+        //            console.log('description', description);
+        //            $.ajax({
+        //                method: "POST",
+        //                url: "/Case/CloseCase",
+        //                data: { user_id: user_id, report_id: _report_id, description: description, promotion_value: promotion_value,outcome_id:outcome_id, outcome: outcome, }
+        //            }).done(function (data) {//data from server
+        //                console.log('data', data);
 
-                        if (data == -1) {
-                            // need to re-login
-                            console.log('Need to login');
-                        }
+        //                if (data == -1) {
+        //                    // need to re-login
+        //                    console.log('Need to login');
+        //                }
 
-                        if(data == 1)
-                        {
-                            var str = window.location.href;
-                            window.location.href = str;
-                        }
-                        if(data == 0)
-                        {
-                            alert('Error: Please add a Case Executive to your team. Your case cannot be approved for resolution or closure unless a member of your executive leadership is brought on board as a Case Executive. If one of your existing Case Officers is an executive leader (i.e. CEO, CHRO, COO, CFO, CRO, CSO or CLO), then please change their role in their profile to Case Executive.');
-                        }
-                    }).fail(function (error) {
-                        console.log(error);
-                    });
+        //                if(data == 1)
+        //                {
+        //                    var str = window.location.href;
+        //                    window.location.href = str;
+        //                }
+        //                if(data == 0)
+        //                {
+        //                    alert('Error: Please add a Case Executive to your team. Your case cannot be approved for resolution or closure unless a member of your executive leadership is brought on board as a Case Executive. If one of your existing Case Officers is an executive leader (i.e. CEO, CHRO, COO, CFO, CRO, CSO or CLO), then please change their role in their profile to Case Executive.');
+        //                }
+        //            }).fail(function (error) {
+        //                console.log(error);
+        //            });
                    
-            }
-            } else {
-                $("#txtOutcome").css({ "border": "2px solid red" });
-                $("#txtOutcome").on('focusin', function () {
-                    $("#txtOutcome").css({ "border": "2px solid transparent" });
-                });
-            }
-        }
+        //    }
+        //    } else {
+        //        $("#txtOutcome").css({ "border": "2px solid red" });
+        //        $("#txtOutcome").on('focusin', function () {
+        //            $("#txtOutcome").css({ "border": "2px solid transparent" });
+        //        });
+        //    }
+        //}
     });
 </script>
