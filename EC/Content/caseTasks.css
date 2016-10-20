@@ -876,7 +876,7 @@ span.hideCompletedBtn:hover #datepicker{
     text-decoration: initial;
     display: table;
     /*width: 33%;*/
-    width: 160px;
+    width: 175px;
     float: left;
 }
 .topMessagesMenu .messagesTab.active{
