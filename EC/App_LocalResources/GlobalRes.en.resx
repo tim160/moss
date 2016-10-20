@@ -375,9 +375,6 @@
   <data name="CaseUpdates" xml:space="preserve">
     <value>We will send you case updates to</value>
   </data>
-  <data name="caseWorking" xml:space="preserve">
-    <value>Please give us 24 hours to start working on the case.</value>
-  </data>
   <data name="detailsCase" xml:space="preserve">
     <value>You can always check the case progress using the following details</value>
   </data>
@@ -1620,5 +1617,11 @@
   </data>
   <data name="Reporter_Notification_Email" xml:space="preserve">
     <value>Please take note of your login information NOW. Write it down somewhere safe (or enter it into your password protected smartphone) so that you can access it later to check on the status of your report. For your security, we do not send your login information via email. This is the last opportunity for you to record your login information.</value>
+  </data>
+  <data name="canAccess" xml:space="preserve">
+    <value>Please take note of your login information NOW. Write it down somewhere safe (or enter it into your password protected smartphone) so that you can access it later to check the status of your report. </value>
+  </data>
+  <data name="lastOpportunity" xml:space="preserve">
+    <value>This is the last opportunity for you to record your login information</value>
   </data>
 </root>
