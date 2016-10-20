@@ -1615,4 +1615,10 @@
   <data name="SavePasswordChangeUp" xml:space="preserve">
     <value>Save Password Change</value>
   </data>
+  <data name="Reporter_Notification" xml:space="preserve">
+    <value>Please take note of your login information NOW. Write it down somewhere safe (or enter it into your password protected smartphone) so that you can access it later to check on the status of your report. Since you have reported this information anonymously, this is the last opportunity for you to record your login information</value>
+  </data>
+  <data name="Reporter_Notification_Email" xml:space="preserve">
+    <value>Please take note of your login information NOW. Write it down somewhere safe (or enter it into your password protected smartphone) so that you can access it later to check on the status of your report. For your security, we do not send your login information via email. This is the last opportunity for you to record your login information.</value>
+  </data>
 </root>
