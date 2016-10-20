@@ -2185,6 +2185,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Go to report dashboard.
+        /// </summary>
+        public static string GoToReportDashboard {
+            get {
+                return ResourceManager.GetString("GoToReportDashboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The incident happened in.
         /// </summary>
         public static string happenedIn {
@@ -3423,6 +3432,15 @@ namespace EC.App_LocalResources {
         public static string PrimaryLocationUp {
             get {
                 return ResourceManager.GetString("PrimaryLocationUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Print report.
+        /// </summary>
+        public static string PrintReport {
+            get {
+                return ResourceManager.GetString("PrintReport", resourceCulture);
             }
         }
         

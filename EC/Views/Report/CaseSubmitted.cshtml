@@ -116,7 +116,8 @@
         <div class="rightBlock sumResp" id="summareResponce">
 
             <div class="sumResp">
-                <div class="summaryReportInfo">@GlobalRes.canAccess <span style="font-weight: bold;"> @GlobalRes.lastOpportunity.</span></div>
+                <div class="summaryReportInfo">@GlobalRes.canAccess</div>
+                <div class="summaryReportInfo"><span style="font-weight: bold;"> @GlobalRes.lastOpportunity.</span></div>
                 <div class="summaryReportInfo">@GlobalRes.detailsCase</div>
                 <p></p>
                 @if (ViewBag.Email != null && ViewBag.Email.Length != 0)
@@ -152,12 +153,12 @@
                 <div class="printPanel">
                     <div class="reportAction">
                         <img class="summaryImages" id="printImage">
-                        <input type="button" id="printReport" class="button summaryButtons" value="Print report">
+                        <input type="button" id="printReport" class="button summaryButtons" value="@GlobalRes.PrintReport">
                     </div>
 
                     <div class="reportAction">
                         <img class="summaryImages" id="dashboardImage">
-                        <input type="button" id="reportDashboard" class="button summaryButtons" value="Go to report dashboard">
+                        <input type="button" id="reportDashboard" class="button summaryButtons" value="@GlobalRes.GoToReportDashboard">
                     </div>
                 </div>
             </div>
@@ -250,7 +251,6 @@
                                         </tr>
                                         <tr>
                                             <td class="titleReportTable">@GlobalRes.IsCaseUrgent_q</td>
-                                            @*<td class="reportTextTable" id="isReportUrgent2">@Html.DisplayFor(m => m.isCaseUrgent)</td>*@
                                             <td class="reportTextTable">@Html.DisplayFor(m => m.isCaseUrgent)</td>
                                         </tr>
                                     </tbody>

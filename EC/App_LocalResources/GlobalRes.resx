@@ -1684,7 +1684,13 @@
   <data name="canAccess" xml:space="preserve">
     <value>Please take note of your login information NOW. Write it down somewhere safe (or enter it into your password protected smartphone) so that you can access it later to check the status of your report.</value>
   </data>
+  <data name="GoToReportDashboard" xml:space="preserve">
+    <value>Go to report dashboard</value>
+  </data>
   <data name="lastOpportunity" xml:space="preserve">
     <value>This is the last opportunity for you to record your login information</value>
+  </data>
+  <data name="PrintReport" xml:space="preserve">
+    <value>Print report</value>
   </data>
 </root>
