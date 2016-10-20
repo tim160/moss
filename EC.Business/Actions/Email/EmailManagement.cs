@@ -146,14 +146,14 @@ namespace EC.Business.Actions.Email
        //     m_Username = Config.GetConfig("Username");
        //     string port = Config.GetConfig("Port");
          //   m_FromAddress = "test@voteplayers.com";
-            m_FromAddress = "ec@employeeconfidential.com";
+            m_FromAddress = "employeeconfidential@employeeconfidential.com";
 
             SmtpClient smtpClient = new SmtpClient("employeeconfidential.com");
 
            // smtpClient.Credentials = new System.Net.NetworkCredential("test@voteplayers.com", "123456");
           //  smtpClient.Send(mailMessage);
             m_Server = "employeeconfidential.com";
-            m_Username = "ec@employeeconfidential.com";
+            m_Username = "employeeconfidential@employeeconfidential.com";
             m_Password = "confidentialConfidential1$3";
             m_Port = 25;
             /*

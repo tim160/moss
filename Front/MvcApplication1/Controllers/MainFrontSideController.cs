@@ -40,7 +40,7 @@ namespace Front.Controllers
                         SmtpClient smtpClient = new SmtpClient("employeeconfidential.com");
 
                         smtpClient.Credentials = new System.Net.NetworkCredential
-                        ("ec@employeeconfidential.com", "confidentialConfidential1$3");
+                        ("employeeconfidential@employeeconfidential.com", "confidentialConfidential1$3");
 
                     ///    m_FromAddress = "newrequest@employeeconfidential.com";
 

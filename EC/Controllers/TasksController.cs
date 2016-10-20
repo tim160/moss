@@ -58,7 +58,7 @@ namespace EC.Controllers
 
                 list_tsk.Add(tsk);
             }
-            ViewBag.tasks = list_tsk.OrderBy(m => m.TaskDueDate);
+            ViewBag.tasks = (list_tsk.OrderBy(m => m.TaskDueDate)).ToList();
             ViewBag.user_id = user_id;
             ViewBag.um = um;
             ViewBag.unread_tasks = unread_tasks;
