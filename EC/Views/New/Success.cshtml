@@ -80,15 +80,16 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('.blockUpdateProfile, .updateProfileBtn span').click(function (event) {
-            if ($("#code").length > 0) {
-                window.location.href = "/cases";
-            } else {
-                window.location.href = "/settings/company?first=1";
-            }
+            window.location.href = "/settings/company?first=1";
+            //if ($("#code").length > 0) {
+            //    window.location.href = "/cases";
+            //} else {
+            //    window.location.href = "/settings/company?first=1";
+            //}
         });
 
-        $('.updateProfileBtn, .updateProfileBtn span').on('click', function () {
-        });
+        //$('.updateProfileBtn, .updateProfileBtn span').on('click', function () {
+        //});
     });
 
 </script>
