@@ -708,17 +708,17 @@
             var showBlock = $('.headTask .hideCompletedBtn').text();
 
             if (name != "All case administrators" && name != "Sort by Mediator") {
-                $('.blockTask').hide();
+                $('.blockTask.grey').hide();
                 $('.contentBlockTask .name').each(function (index, element) {
                     var temp = $(element);
                     if (temp.text() == name) {
                         if (showBlock == "Show All") {
                             temp_class_circle = temp.parents('.blockTask').find('.blockTitle').find('span:first-child').attr('class');
                             if (temp_class_circle == "bigDot") {
-                                temp.parents('.blockTask').show();
+                                temp.parents('.blockTask.grey').show();
                             }
                             else if (temp_class_circle == "notShadedCircle") {
-                                temp.parents('.blockTask').hide();
+                                temp.parents('.blockTask.grey').hide();
                             }
                         }
                         else if (showBlock == "Hide completed") {
@@ -730,10 +730,11 @@
             else {
                 $('.blockTask').show();
                 if (showBlock == "Show All") {
-                    $('.notShadedCircle').parents('.blockTask').hide();
+                    $('.notShadedCircle').parents('.blockTask.grey').hide();
                 }
                 else if (showBlock == "Hide completed") {
-                    $('.notShadedCircle').parents('.blockTask').show();
+                    //$('.notShadedCircle').parents('.blockTask').show();
+                    $('.notShadedCircle').parents('.blockTask.grey').show();
                 }
             }
         }
