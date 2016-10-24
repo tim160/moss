@@ -136,19 +136,19 @@
 
                     <div class="rowBlock inputMediator">
                         <div class="freeBlock inputRadio mediator @mediator_active">
-                            <label class="inputBlock" for="freeIncident">
+                            <label class="inputBlock inputBlock2" for="freeIncident">
                                 <input id="oneIncident" type="radio" name="role_id" value="6">
                                 <span class="radioTitle">@GlobalRes.Mediator</span>
                             </label>
                         </div>
                         <div class="freeBlock inputRadio adminMediator @adminMediator_active">
-                            <label class="inputBlock" for="freeIncident">
+                            <label class="inputBlock inputBlock2" for="freeIncident">
                                 <input id="twoIncident" type="radio" name="role_id" value="5">
                                 <span class="radioTitle">@GlobalRes.AdminMediator</span>
                             </label>
                         </div>
                         <div class="freeBlock inputRadio escalationMediator @escalationMediator_active">
-                            <label class="inputBlock" for="fourIncident">
+                            <label class="inputBlock inputBlock2" for="fourIncident">
                                 <input id="threeIncident" type="radio" name="role_id" value="4">
                                 <span class="radioTitle">@GlobalRes.EscalationMediator</span>
                             </label>
@@ -239,9 +239,9 @@
         var levelId = @Html.Raw(um._user.role_id);
 
         //RadioButton
-
+        //pod katei vse knopki najimautsya. Mne nado, chtobi eta ne najimalas nikogda
         if(levelId == 5) {
-            var radioBlock = $('.inputBlock');
+            var radioBlock = $('.inputBlock2');
 
             radioBlock.click(function () {
 
@@ -255,15 +255,10 @@
             });
 
         }
-
-
-
-
-
         var levelId = @Html.Raw(um._user.role_id);
 
         if(levelId == 5) {
-            var RadioButton = $('.inputBlock');
+            var RadioButton = $('.inputBlock2');
             RadioButton.click(function () {
                 var mediatorBtn = $(this).parent();
                 var mediatorAllBtn = $(this).parent().parent();
