@@ -93,7 +93,7 @@
                                     <p>@um._user.title_ds</p>
                                 </div>
 
-                                @if (((_user.role_id == 6) || (_user.role_id == 7)) && (rm._investigation_status != Constant.investigation_status_closed))
+                                @if (((_user.role_id == 6) || (_user.role_id == 7)) && (rm._investigation_status != Constant.investigation_status_closed) && (um._user.role_id != Constant.level_mediator))
                                 {
                                 <label class="close" data-userid="@_user.id"></label>
                                 }

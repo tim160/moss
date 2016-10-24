@@ -85,15 +85,19 @@ namespace EC.Controllers.ViewModel
 
             if ((rm._investigation_status == 1) && (user.role_id == 4 || user.role_id == 5|| user.role_id == 6|| user.role_id == 7))
             {
-                // need to update investigation status from pending to review after first mediator accessed the report
-                report_investigation_status _review_status = new report_investigation_status();
-                _review_status.created_date = DateTime.Now;
-                _review_status.investigation_status_id = 2;
-                _review_status.report_id = report_id;
-                _review_status.user_id = user_id;
-                db.report_investigation_status.Add(_review_status);
-                glb.UpdateReportLog(user_id, 28, report_id, App_LocalResources.GlobalRes._Completed, null, "");
-                glb.UpdateReportLog(user_id, 20, report_id, App_LocalResources.GlobalRes._Started, null, "");
+
+                if (!db.report_log.Any(item => ((item.action_id == 28) && (item.report_id == report_id) && (item.string_to_add == App_LocalResources.GlobalRes._Completed)))
+                {
+                    // need to update investigation status from pending to review after first mediator accessed the report
+                    report_investigation_status _review_status = new report_investigation_status();
+                    _review_status.created_date = DateTime.Now;
+                    _review_status.investigation_status_id = 2;
+                    _review_status.report_id = report_id;
+                    _review_status.user_id = user_id;
+                    db.report_investigation_status.Add(_review_status);
+                    glb.UpdateReportLog(user_id, 28, report_id, App_LocalResources.GlobalRes._Completed, null, "");
+                    glb.UpdateReportLog(user_id, 20, report_id, App_LocalResources.GlobalRes._Started, null, "");
+                }
             }
 
 

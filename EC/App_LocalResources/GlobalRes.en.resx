@@ -1466,7 +1466,7 @@
     <value>Return for Investigation</value>
   </data>
   <data name="WaitingApprovement" xml:space="preserve">
-    <value>waiting for approvement</value>
+    <value>awaiting for closure approval</value>
   </data>
   <data name="CheckCaseSummary" xml:space="preserve">
     <value>Please check your case summary and submit when ready</value>
@@ -1514,7 +1514,7 @@
     <value>Location</value>
   </data>
   <data name="CaseSentToEsacaltionMediatorForReview" xml:space="preserve">
-    <value>Case  was sent to escalation mediator for review.</value>
+    <value>Case  was sent to Case Executive for review.</value>
   </data>
   <data name="Outcome" xml:space="preserve">
     <value>Outcome</value>
