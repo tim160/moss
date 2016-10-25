@@ -72,14 +72,13 @@
             <!--work began-->
             @if ((rm._investigation_status == Constant.investigation_status_resolution) || (rm._investigation_status == Constant.investigation_status_completed))
             {
-                ris = rm._last_investigation_status();
-                UserModel temp_um = new UserModel(ris.user_id);
-                flag = "101px";
-                <div class="firstHeader resolveSoledBlock">
-
-                    
+                //ris = rm._last_investigation_status();
+                //UserModel temp_um = new UserModel(ris.user_id);
+                //flag = "101px";
+                
+                @Html.Partial("~/Views/Case/PartialView/GreenBarCaseResolutionRequest.cshtml");
+                @*<div class="firstHeader resolveSoledBlock">
                     <div class="caseWaitApp">@GlobalRes.CaseResolutionRequestUp</div>
-
                     <div class="positionDropDown">
                         <span class="dropDownfirstHeader flag"></span>
                         <a href="#" class="closeCustom flag"></a>
@@ -150,7 +149,7 @@
                         </div>
 
                     </div>
-                </div>
+                </div>*@
             }
             else if (rm._investigation_status == Constant.investigation_status_closed)
             {
@@ -587,10 +586,6 @@
             $('#files2').click();
         });
 
-        $(".positionDropDown").on('click',function(){
-            $(".positionDropDown .flag").toggle();
-            $(".caseMediatorBig").slideToggle();
-        });
         function activeButtons(){
             $('.headTask span.createNewTaskBtn').click(function () {
                 $('.blockCreateTask').show();
