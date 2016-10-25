@@ -575,6 +575,7 @@
     <Content Include="Views\Case\GetAjaxActivity.cshtml" />
     <Content Include="Views\Index\Start.cshtml" />
     <Content Include="Views\Settings\WorkFlow.cshtml" />
+    <Content Include="Views\Case\PartialView\GreenBarCaseResolutionRequest.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

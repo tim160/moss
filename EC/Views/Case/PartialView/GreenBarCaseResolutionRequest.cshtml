@@ -1,0 +1,106 @@
+﻿@using EC.App_LocalResources;
+@using EC.Common.Interfaces;
+@using EC.Core.Common;
+@using EC.Models.Database;
+@using EC.Models;
+@{ 
+    var report_id = (Int32)ViewBag.report_id;
+    var user_id = (Int32)ViewBag.user_id;
+    ReportModel rm = new ReportModel(report_id);
+    UserModel um = new UserModel(user_id);
+    GlobalFunctions glb = new GlobalFunctions();
+    IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
+    report_investigation_status ris = new report_investigation_status();
+    ris = rm._last_investigation_status();
+    UserModel temp_um = new UserModel(ris.user_id);
+    //string flag = "101px";
+    string popup = null;
+    if (ViewBag.popup != null)
+    {
+        popup = ViewBag.popup;
+    }
+}
+
+<div class="firstHeader resolveSoledBlock">
+
+
+    <div class="caseWaitApp">@GlobalRes.CaseResolutionRequestUp</div>
+
+    <div class="positionDropDown">
+        <span class="dropDownfirstHeader flag"></span>
+        <a href="#" class="closeCustom flag"></a>
+    </div>
+    <div class="positionActivityIcon">
+        <div id="activityIcon"></div>
+        <span>@GlobalRes.Activity</span>
+    </div>
+</div>
+
+<div class="caseMediatorBig" style="display: none;">
+    <div class="littleText">
+        @GlobalRes.CaseSentToEsacaltionMediatorForReview
+    </div>
+
+    <div class="caseMediator">
+        <div class="displayMediators">
+            <div class="blockPhoto">
+                @if (temp_um.ID != 0)
+                {
+                    @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", ris.user_id }, { "is_owner", true } })
+                }
+                else
+                {
+                    <div class="status"></div>
+                                    <div class="anonimousReporterIcon"></div>
+                }
+            </div>
+        </div>
+        <div class="forText">
+            <div class="boldText">
+                @temp_um._user.first_nm @temp_um._user.last_nm, @m_DateTimeHelper.ConvertDateToLongMonthString(ris.created_date)
+            </div>
+
+            @if (ris.outcome_id.HasValue)
+            {
+                <div class="boldText">
+                    @GlobalRes.Outcome: @glb.GetOutcomeNameById(ris.outcome_id.Value)
+                </div>
+                                <div class="openSansText">
+                                    @ris.outcome_message
+                                </div>
+            }
+        </div>
+        <div class="caseResolution">
+            <div class="postionButtons">
+                @if ((um._user.role_id != 6) && (um._user.role_id != 5))
+                {
+                    <div class="secondButton">
+                        <div class="textInButton" id="approve_close">@GlobalRes.Approve.ToLower()</div>
+                    </div>
+                                    <div class="firstButton">
+                                        <div class="textInButton" id="return_investigation">@GlobalRes.Returnnvestigation.ToLower()</div>
+                                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="firstHeader2">
+    <div id="casesHeared">
+        <div id="menu">
+            @Html.Partial("~/Views/PartialViews/_ReportTopMenu.cshtml",
+                        new ViewDataDictionary { { "report_id", report_id },
+                                                { "user_id", user_id },
+                                                { "selected_item", 1 } ,{ "popup", popup } })
+        </div>
+
+    </div>
+</div>
+<script>
+
+    $(".positionDropDown").on('click', function () {
+        $(".positionDropDown .flag").toggle();
+        $(".caseMediatorBig").slideToggle();
+    });
+</script>
