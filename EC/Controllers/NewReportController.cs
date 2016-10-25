@@ -86,7 +86,7 @@ namespace EC.Controllers.ViewModel
             if ((rm._investigation_status == 1) && (user.role_id == 4 || user.role_id == 5|| user.role_id == 6|| user.role_id == 7))
             {
 
-                if (!db.report_log.Any(item => ((item.action_id == 28) && (item.report_id == report_id) && (item.string_to_add == App_LocalResources.GlobalRes._Completed)))
+                if (!db.report_log.Any(item => ((item.action_id == 28) && (item.report_id == report_id) && (item.string_to_add == App_LocalResources.GlobalRes._Completed))))
                 {
                     // need to update investigation status from pending to review after first mediator accessed the report
                     report_investigation_status _review_status = new report_investigation_status();
