@@ -40,7 +40,27 @@
 
         <div class="rightBlockContent">
             <div id="slider"><div class="reportIconWhite"></div></div>
-            <div id="casesHeared">
+
+            @if ((rm._investigation_status == Constant.investigation_status_resolution) || (rm._investigation_status == Constant.investigation_status_completed))
+            {
+                @Html.Partial("~/Views/Case/PartialView/GreenBarCaseResolutionRequest.cshtml")
+            }
+
+            <div class="firstHeader2">
+                <div id="casesHeared">
+                    <div id="menu">
+                        @Html.Partial("~/Views/PartialViews/_ReportTopMenu.cshtml",
+                        new ViewDataDictionary { { "report_id", report_id },
+                                                { "user_id", user_id },
+                                                { "selected_item", 1 } ,{ "popup", popup } })
+                    </div>
+                </div>
+            </div>
+            <div class="positionActivityIcon" style="height:61px;">
+                <div id="activityIcon"></div>
+                <span>@GlobalRes.Activity</span>
+            </div>
+            @*<div id="casesHeared">
                 <div id="menu">
                     @Html.Partial("~/Views/PartialViews/_ReportTopMenu.cshtml",
                         new ViewDataDictionary { { "report_id", report_id },
@@ -51,7 +71,7 @@
                     <div id="activityIcon"></div>
                     <span>@GlobalRes.Activity</span>
                 </div>
-            </div>
+            </div>*@
 
 
 
@@ -167,8 +187,6 @@
             $("#rightRight").toggle(300);
         });
 
-    
-
         function addMessage(user_id, report_id, body_tx) {
             $.ajax({
                 // Get PartialView
@@ -185,6 +203,11 @@
                 }
             });
         }
+        /*update header triangle*/
+        var links = $("#menu a");
+        links.removeClass("active");
+        $(links[1]).addClass('active');
+        /*update header triangle*/
     });
     </script>
 </body>

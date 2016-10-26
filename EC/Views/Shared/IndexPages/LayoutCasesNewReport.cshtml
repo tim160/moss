@@ -618,6 +618,30 @@
                 startClick();
                 //textareaPopupStyle();
             });
+
+            $("#return_investigation").on('click', function(el){
+
+                $("#approveDialog").toggle();
+                $("#txtEscalate").attr('placeholder', "@Html.Raw(GlobalRes.AddReasonWhy)");
+
+                $("#escalate_btn").text("@Html.Raw(GlobalRes.Returnnvestigation)");
+                $("#escalate_btn").val(3);
+                $("#_overlay_title").text("@Html.Raw(GlobalRes.Returnnvestigation)");
+                $("#textbox_title").text("@Html.Raw(GlobalRes.AddReasonWhy)");
+
+                //
+
+            });
+            $("#approve_close").on('click', function(el){
+
+                $("#approveDialog").toggle();
+                $("#txtEscalate").attr('placeholder', "@Html.Raw(GlobalRes.AddFurtherNotes)");
+                $("#escalate_btn").text("@Html.Raw(GlobalRes.CloseCaseUp)");
+                $("#escalate_btn").val(9);
+                $("#_overlay_title").text("@Html.Raw(GlobalRes.CloseCaseUp)");
+                $("#textbox_title").text("@Html.Raw(GlobalRes.AddFurtherNotes)");
+                //
+            });
         </script>
 
 </body>

@@ -50,6 +50,20 @@
             {
                 @Html.Partial("~/Views/Case/PartialView/GreenBarCaseResolutionRequest.cshtml")
             }
+            <div class="firstHeader2">
+                <div id="casesHeared">
+                    <div id="menu">
+                        @Html.Partial("~/Views/PartialViews/_ReportTopMenu.cshtml",
+                        new ViewDataDictionary { { "report_id", report_id },
+                                                { "user_id", user_id },
+                                                { "selected_item", 1 } ,{ "popup", popup } })
+                    </div>
+                </div>
+            </div>
+            <div class="positionActivityIcon" style="height:61px;">
+                <div id="activityIcon"></div>
+                <span>@GlobalRes.Activity</span>
+            </div>
             @*<div id="casesHeared">
                 <div id="menu">
                     @Html.Partial("~/Views/PartialViews/_ReportTopMenu.cshtml",
@@ -408,6 +422,12 @@
         $('.headTask span.createNewTaskBtn').click(function () { $('.blockCreateTask').show(); $('.headTask span.createNewTaskBtn').hide(); });
         $('.headerCreateTask label.close').click(function () { $('.blockCreateTask').hide(); $('.headTask span.createNewTaskBtn').show(); });
 
+
+        /*update header triangle*/
+        var links = $("#menu a");
+        links.removeClass("active");
+        $(links[2]).addClass('active');
+        /*update header triangle*/
 
         function removeMediator(id, report_id) {
             var user_id = id;
