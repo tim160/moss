@@ -880,6 +880,10 @@
         dropdawnWork();
         dropdawnSelect();
         $(".closeCustom.flag").click();
+        $(".positionDropDown").on('click', function () {
+            $(".positionDropDown .flag").toggle();
+            $(".caseMediatorBig").slideToggle();
+        });
 
     });
     </script>
