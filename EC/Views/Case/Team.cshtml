@@ -1,13 +1,15 @@
 ﻿@using EC.Models.Database;
 @using EC.Models;
 @using EC.App_LocalResources;
+@using EC.Common.Interfaces;
+@using EC.Core.Common;
 @{
     int report_id = (Int32)ViewBag.report_id;
     int user_id = (Int32)ViewBag.user_id;
     List<attachment> attachmentFiles = (List<attachment>)ViewBag.attachmentFiles;
 
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
-
+    IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
     ReportModel rm = (ReportModel)ViewBag.rm;
     UserModel um = new UserModel(user_id);
 
@@ -34,6 +36,7 @@
     {
         popup = ViewBag.popup;
     }
+    report_investigation_status ris = new report_investigation_status();
 }
 <body>
 
@@ -50,6 +53,109 @@
             {
                 @Html.Partial("~/Views/Case/PartialView/GreenBarCaseResolutionRequest.cshtml")
             }
+
+            @*start*@
+            @if (rm._investigation_status == Constant.investigation_status_closed)
+            {
+                <div class="firstHeader resolveSoledBlock">
+                    <div class="caseWaitApp">@GlobalRes.CaseClosed</div>
+                    <div class="positionDropDown">
+                        <span class="dropDownfirstHeader flag" style="top: -19px;"></span>
+                        <a href="#" class="closeCustom flag"></a>
+                    </div>
+                    <div class="positionActivityIcon">
+                        <div id="activityIcon"></div>
+                        <span>@GlobalRes.Activity</span>
+                    </div>
+                </div>
+
+                if (((rm._investigation_status == Constant.investigation_status_closed) && (rm._previous_investigation_status_id == Constant.investigation_status_resolution)) || ((rm._investigation_status == Constant.investigation_status_closed) && (rm._previous_investigation_status_id == Constant.investigation_status_completed)))
+                {
+                    ris = rm._previous_investigation_status();
+                    UserModel temp_um = new UserModel(ris.user_id);
+
+                    <div class="caseMediatorBig" style="display: none;">
+                        <div class="caseMediator">
+                            <div class="displayMediators">
+                                <div class="blockPhoto">
+                                    @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", ris.user_id }, { "is_owner", true } })
+                                </div>
+                            </div>
+                            <div class="forText">
+                                <div class="boldText">
+                                    @if (ris.investigation_status_id == Constant.investigation_status_completed)
+                                    {
+                                        @GlobalRes.CaseCantBeResolved
+                                    }
+                                    else if (ris.investigation_status_id == Constant.investigation_status_resolution)
+                                    {
+                                        @GlobalRes.CaseResolved
+                                    }
+                                </div>
+                                <div class="regularText">
+                                    @temp_um._user.first_nm @temp_um._user.last_nm, @m_DateTimeHelper.ConvertDateToLongMonthString(ris.created_date):
+                                </div>
+                                <div class="openSansText">
+                                    @ris.description
+                                </div>
+
+                                @if (ris.outcome_id.HasValue)
+                                {
+                                    <div class="boldText">
+                                        @GlobalRes.Outcome: @glb.GetOutcomeNameById(ris.outcome_id.Value)
+                                    </div>
+                                    <div class="openSansText">
+                                        @ris.outcome_message
+                                    </div>
+                                }
+
+                            </div>
+                            <div class="border"></div>
+                        </div>
+                        @{
+                            ris = rm._last_investigation_status();
+                            temp_um = new UserModel(ris.user_id);
+                        }
+
+                        <div class="caseMediator">
+                            <div class="displayMediators">
+                                <div class="blockPhoto">
+                                    <div class="blockPhoto">
+                                        <div class="blockPhoto">
+                                            @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", ris.user_id }, { "is_owner", true } })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="forText">
+                                <div class="boldText">
+                                    @GlobalRes.Approved
+                                </div>
+                                <div class="regularText">
+                                    @temp_um._user.first_nm @temp_um._user.last_nm,    @m_DateTimeHelper.ConvertDateToLongMonthString(ris.created_date):
+                                </div>
+                                <div class="openSansText">
+                                    @ris.description
+                                </div>
+
+                                @if (ris.outcome_id.HasValue)
+                                {
+                                    <div class="boldText">
+                                        @GlobalRes.Outcome: @glb.GetOutcomeNameById(ris.outcome_id.Value)
+                                    </div>
+                                    <div class="openSansText">
+                                        @ris.outcome_message
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                                }
+
+
+                            }
+
+                            @*end*@
             <div class="firstHeader2">
                 <div id="casesHeared">
                     <div id="menu">
@@ -540,6 +646,10 @@
         blockTeamCircle($('.addToTeam'), "#b2b9bb", "#b2b9bb");
         addToTeam();
         closeMediator();
+        $(".positionDropDown").on('click', function () {
+            $(".positionDropDown .flag").toggle();
+            $(".caseMediatorBig").slideToggle();
+        });
     });
     </script>
 </body>
