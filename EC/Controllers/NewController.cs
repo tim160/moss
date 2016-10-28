@@ -188,6 +188,8 @@ namespace EC.Controllers
             _company.step6_delay = 7;
             _company.step6_postpone = 2;
 
+            _company.guid = new Guid();
+
             string url = Request.Url.AbsoluteUri.ToLower();
             string _url = "registration";
             if(url.Contains("cai."))
@@ -364,7 +366,8 @@ namespace EC.Controllers
             }
             #endregion
 
-
+            #region Create Folder for Company
+            #endregion
 
             #region Anonymity
             if (company_id != 0)
@@ -431,6 +434,7 @@ namespace EC.Controllers
                 _user.company_location_id = location_id;
                 _user.location_nm = "";
                 _user.sign_in_code = null;
+                _user.guid = new Guid();
 
                 try
                 {
@@ -591,6 +595,7 @@ namespace EC.Controllers
                 _user.company_location_id = location_id;
                 _user.location_nm = "";
                 _user.sign_in_code = null;
+                _user.guid = new Guid();
 
                 try
                 {
@@ -602,6 +607,9 @@ namespace EC.Controllers
                 {
                     return App_LocalResources.GlobalRes.UserSavingFailed;
                 }
+
+                #region Create Folder for User
+                #endregion
             }
             else
             {

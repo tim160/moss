@@ -16,7 +16,6 @@ using EC.App_LocalResources;
 
 namespace EC.Controllers
 {
-
     public class SettingsController : BaseController
     {
         private readonly CompanyModel companyModel = CompanyModel.inst;
@@ -36,8 +35,6 @@ namespace EC.Controllers
             if (is_cc) cc_ext = "_cc";
             ViewBag.cc_extension = cc_ext;
             #endregion
-
-          
 
             UserModel um = new UserModel(user_id);
             ViewBag.um = um;
@@ -70,8 +67,6 @@ namespace EC.Controllers
             if (is_cc) cc_ext = "_cc";
             ViewBag.cc_extension = cc_ext;
             #endregion
-
-
           
             ViewBag.user_id = user_id;
             int company_id = user.company_id;
@@ -463,7 +458,6 @@ namespace EC.Controllers
             catch (Exception ex)
             {
                 result = ex.ToString();
-
             }
             return result;
         }
@@ -539,11 +533,9 @@ namespace EC.Controllers
                 EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
 
                 CompanyModel cm = new CompanyModel(_user.company_id);
-
-                eb.MediatorInvited(_user.first_nm, _user.last_nm, _user.first_nm, _user.last_nm, cm._company.company_nm, generated_code, "http://stark.employeeconfidential.com/new/?code=" + generated_code + "&email=" + email);
+                eb.MediatorInvited(_user.first_nm, _user.last_nm, _user.first_nm, _user.last_nm, cm._company.company_nm, generated_code, eb.GetSubdomainLink(Request.Url.AbsoluteUri.ToLower()) + "/new/?code=" + generated_code + "&email=" + email);
                 string body = eb.Body;
                 em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_MediatorInvited, body, true);
-
             }
 
             return App_LocalResources.GlobalRes._Completed.ToLower();
@@ -562,8 +554,6 @@ namespace EC.Controllers
             if (is_cc) cc_ext = "_cc";
             ViewBag.cc_extension = cc_ext;
             #endregion
-
-          
 
             UserModel um = new UserModel(user_id);
             ViewBag.um = um;

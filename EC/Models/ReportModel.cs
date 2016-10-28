@@ -1255,6 +1255,7 @@ namespace EC.Models
                         notification_messages_actions_flag = notification,
                         notification_new_reports_flag = 1,
                         notification_marketing_flag = 1,
+                        guid = new Guid(),
                         notification_summary_period = 1
                     };
 
