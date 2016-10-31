@@ -152,12 +152,12 @@
             <div style="clear: both; margin-top: 150px;">
                 <div class="printPanel">
                     <div class="reportAction">
-                        <img class="summaryImages" id="printImage">
+                        <img class="summaryImages" id="printImage" src="~/Content/img/print.png">
                         <input type="button" id="printReport" class="button summaryButtons" value="@GlobalRes.PrintReport">
                     </div>
 
                     <div class="reportAction">
-                        <img class="summaryImages" id="dashboardImage">
+                        <img class="summaryImages" id="dashboardImage" src="~/Content/img/printSelected.png">
                         <input type="button" id="reportDashboard" class="button summaryButtons" value="@GlobalRes.GoToReportDashboard">
                     </div>
                 </div>
@@ -309,7 +309,11 @@
         $("#printReport").on('click', function () {
             //$("#modal-dialog").toggle();
             printElement(document.getElementById("modal-dialog"));
+            $(".fullContainer").hide();
+            $(".footer").hide();
             window.print();
+            $(".fullContainer").show();
+            $(".footer").show();
         });
         $(".close").on('click', function () {
             $("#modal-dialog").toggle();
@@ -335,7 +339,6 @@
                             $printSection.appendChlid(delimiter);
                         }
                     }
-            var a = 10;
             $printSection.appendChild(domClone);
         }
     </script>

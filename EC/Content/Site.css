@@ -1285,7 +1285,7 @@ titleReportTable {
 #printImage {
     content:url('/Content/img/print.png');
 }
-#printImage.hover{
+#printImage.hover {
     content: url('/Content/img/printSelected.png');
 }
 
