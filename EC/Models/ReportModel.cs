@@ -1304,6 +1304,7 @@ namespace EC.Models
                             };
 
                             adv.report_mediator_involved.Add(result);
+                            t = adv.SaveChanges();
                         }
                     }
 
@@ -1311,6 +1312,7 @@ namespace EC.Models
                     foreach (report_department department in departments)
                     {
                         AddReportDepartment(department);
+                        t = adv.SaveChanges();
                     }
                     //savind secondary type
                     //здесь проверяем на other если оно не заполнено, то 
@@ -1326,6 +1328,7 @@ namespace EC.Models
                             last_update_dt = DateTime.Now
                         };
                         db.report_secondary_type.Add(type);
+                        t = adv.SaveChanges();
                     }
                     else
                     {
@@ -1345,6 +1348,7 @@ namespace EC.Models
                                     user_id = 1
                                 };
                                 db.report_secondary_type.Add(putDefaultType);
+                                t = adv.SaveChanges();
                             }
                         }
                         else
@@ -1362,6 +1366,7 @@ namespace EC.Models
                                     user_id = 1
                                 };
                                 adv.report_secondary_type.Add(putCustomType);
+                                t = adv.SaveChanges();
                             }
 
                         }
@@ -1398,6 +1403,7 @@ namespace EC.Models
                         }
                     }
                     adv.report_relationship.Add(rep);
+                    t = adv.SaveChanges();
                 }
 
 
@@ -1405,6 +1411,7 @@ namespace EC.Models
                 foreach (var item in mediators)
                 {
                     AddReportNonMediatorInvolved(item, currentReport);
+                   
                 }
 
                 int t2 = db.SaveChanges();
