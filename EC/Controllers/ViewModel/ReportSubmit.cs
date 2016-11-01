@@ -35,7 +35,9 @@ namespace EC.Controllers.ViewModel
         {
             if(companyModel != null && rvm != null)
             {
-                reportingFrom = companyModel._company.company_nm;
+                CountryModel country = new CountryModel();
+                country selectedCountry = country.loadById(model.reportFrom);
+                reportingFrom = selectedCountry.country_nm;
             }
             List<anonymity> list_anon = companyModel.GetAnonymities(companyModel._company.id, 0);
             if (list_anon != null)
@@ -62,9 +64,6 @@ namespace EC.Controllers.ViewModel
                 var temp = from n in locations where n.id == model.locationsOfIncident select n.location_en;
                 if(temp !=null)
                 {
-                    //foreach(string item in temp) {
-                    //    incidentLocation += ',' + item;
-                    //}
                     incidentLocation = String.Join(", ", temp);
                 } 
             }
@@ -126,8 +125,6 @@ namespace EC.Controllers.ViewModel
             {
                 isCaseUrgent = GlobalRes.Yes;
             }
-
-            //model.whatHappened 
             IncidentType = model.whatHappened;
             IncidentDate = model.dateIncidentHappened.ToShortDateString();
             switch (model.isOnGoing)
