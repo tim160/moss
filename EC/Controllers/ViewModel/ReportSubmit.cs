@@ -10,6 +10,11 @@ namespace EC.Controllers.ViewModel
 {
     public class ReportSubmit
     {
+        public string name { get; set; }
+        public string surname { get; set; }
+        public string email { get; set; }
+
+
         public string reportingFrom { get; set; }//
         public string confidentialLevel { get; set; } //
         public string reportedAs { get; set; } //
@@ -33,6 +38,14 @@ namespace EC.Controllers.ViewModel
 
         public void merge(ReportViewModel rvm, CompanyModel companyModel, ReportModel reportModel, ReportViewModel model)
         {
+
+            if(model.incident_anonymity_id != 1)
+            {
+                name = model.userName;
+                surname = model.userLastName;
+                email = model.userEmail;
+            }
+
             if(companyModel != null && rvm != null)
             {
                 CountryModel country = new CountryModel();

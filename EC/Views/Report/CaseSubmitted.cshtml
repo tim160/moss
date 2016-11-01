@@ -299,9 +299,35 @@
                                     </table>
                                 </div>
                             </div>
+
+                            @if (Model.name != null && Model.surname != null && Model.email != null)
+                            {
+                                <div class="reportBlock">
+                                    <div class="report">
+                                        <table style="width: 100%;">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="titlereporttable">@GlobalRes.Firstname:</td>
+                                                    <td class="reportTextTable" id="reportAbout">@Html.DisplayFor(m => m.name)</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td class="titlereporttable">@GlobalRes.Lastname:</td>
+                                                    <td class="reportTextTable" id="reportAbout">@Html.DisplayFor(m => m.surname)</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="titlereporttable">@GlobalRes.Email:</td>
+                                                    <td class="reportTextTable" id="reportAbout">@Html.DisplayFor(m => m.email)</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            }
+
+
                         </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

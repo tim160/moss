@@ -96,10 +96,5 @@ namespace EC.Models.Database
         public virtual DbSet<user_role> user_role { get; set; }
         public virtual DbSet<validation_type> validation_type { get; set; }
         public virtual DbSet<tmp_raph_client> tmp_raph_client { get; set; }
-        public virtual DbSet<zzbilling_info> zzbilling_info { get; set; }
-        public virtual DbSet<zzcase_type> zzcase_type { get; set; }
-        public virtual DbSet<zzmediator_secondary_type> zzmediator_secondary_type { get; set; }
-        public virtual DbSet<zzreport_action_type> zzreport_action_type { get; set; }
-        public virtual DbSet<zzzzreport_message_attachment> zzzzreport_message_attachment { get; set; }
     }
 }

@@ -391,13 +391,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ECEntities.edmx</DependentUpon>
       <LastGenOutput>ECEntities.Context.cs</LastGenOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Models\Database\ECEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ECEntities.edmx</DependentUpon>
       <LastGenOutput>ECEntities.cs</LastGenOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -409,21 +407,19 @@
     <Content Include="Content\fonts\Lato-Regular.ttf" />
     <Content Include="Content\fonts\Lato-Bold.ttf" />
     <Content Include="Content\fonts\Lato-Semibold.ttf" />
-    <EntityDeploy Include="Models\Database\ECEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ECEntities.Designer.cs</LastGenOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EntityDeploy>
-    <Content Include="Models\Database\ECEntities.edmx.diagram">
-      <DependentUpon>ECEntities.edmx</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Content\fonts\OpenSans\OpenSans-Bold.ttf" />
     <Content Include="Content\fonts\OpenSans\OpenSans-ExtraBold.ttf" />
     <Content Include="Content\fonts\OpenSans\OpenSans-Light.ttf" />
     <Content Include="Content\fonts\OpenSans\OpenSans-Regular.ttf" />
     <Content Include="Content\fonts\OpenSans\OpenSans-Semibold.ttf" />
     <Content Include="App.config" />
+    <EntityDeploy Include="Models\Database\ECEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ECEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Database\ECEntities.edmx.diagram">
+      <DependentUpon>ECEntities.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <None Include="Properties\PublishProfiles\ec-code.pubxml" />
     <None Include="Properties\PublishProfiles\ec-dev.pubxml" />
@@ -642,325 +638,231 @@
     <Compile Include="Models\CountryModel.cs" />
     <Compile Include="Models\Database\action.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\address.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\anonymity.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\attachment.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\billing_option.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\client.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\color.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\company.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\company_anonymity.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\company_custom_question.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\company_department.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\company_invitation.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\company_location.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\company_relationship.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\company_secondary_type.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\company_type.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\company_unread_report_reminder.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\country.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\custom_question.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\custom_question_answer.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\demoq_request.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\ECEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ECEntities.Context.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\ECEntities.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\ECEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ECEntities.edmx</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\frequency.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\industry.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\injury_damage.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\investigation_status.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\invitation.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\language.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\login_history.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\management_know.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\message.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\message_user_read.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\notification_summary_period.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\ongoing.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\outcome.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\partner.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\preferred_contact_method.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\priority.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\province.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\relationship.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\report.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\reported_outside.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\report_department.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\report_investigation_status.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\report_log.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\report_mediator_assigned.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\report_mediator_involved.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\report_non_mediator_involved.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\report_owner.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\report_relationship.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\report_resolution.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\report_secondary_type.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\report_type_mandatory_question.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\report_user_read.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\resolution.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\role_in_report.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\secondary_type_mandatory.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\source.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\status.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\task.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\task_comment.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\task_comment_user_read.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\task_user_read.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\time_zone.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\tmp_raph_client.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\type.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\unread_report_reminder.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\unread_report_reminder_sent.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\user.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\user_change_password.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\user_role.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\Database\validation_type.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="Models\Database\zzbilling_info.cs">
-      <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="Models\Database\zzcase_type.cs">
-      <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="Models\Database\zzmediator_secondary_type.cs">
-      <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="Models\Database\zzreport_action_type.cs">
-      <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="Models\Database\zzzzreport_message_attachment.cs">
-      <DependentUpon>ECEntities.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\DataObjects\SearchCompanyDto.cs" />
     <Compile Include="Models\ECModel\MessageExtended.cs" />

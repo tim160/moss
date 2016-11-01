@@ -26,5 +26,12 @@ namespace EC.Models.Database
         public string secondary_type_ja { get; set; }
         public System.DateTime last_update_dt { get; set; }
         public int user_id { get; set; }
+        public string description_en { get; set; }
+        public string description_fr { get; set; }
+        public string description_ge { get; set; }
+        public string description_ru { get; set; }
+        public string description_ar { get; set; }
+        public string description_jp { get; set; }
+        public string description_es { get; set; }
     }
 }
