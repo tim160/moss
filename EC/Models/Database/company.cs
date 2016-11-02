@@ -72,6 +72,7 @@ namespace EC.Models.Database
         public Nullable<System.DateTime> invitation_confirmation_dt { get; set; }
         public Nullable<int> invitation_confirmation_user_id { get; set; }
         public Nullable<int> reseller { get; set; }
+        public Nullable<System.Guid> guid { get; set; }
     
         public virtual address address { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
