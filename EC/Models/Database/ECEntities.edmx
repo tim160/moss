@@ -177,6 +177,7 @@
           <Property Name="invitation_confirmation_dt" Type="datetime" />
           <Property Name="invitation_confirmation_user_id" Type="int" />
           <Property Name="reseller" Type="int" />
+          <Property Name="guid" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="company_anonymity">
           <Key>
@@ -295,6 +296,13 @@
           <Property Name="secondary_type_ar" Type="nvarchar" MaxLength="150" />
           <Property Name="last_update_dt" Type="smalldatetime" Nullable="false" />
           <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="description_en" Type="nvarchar" MaxLength="255" />
+          <Property Name="description_fr" Type="nvarchar" MaxLength="255" />
+          <Property Name="description_de" Type="nvarchar" MaxLength="255" />
+          <Property Name="description_ru" Type="nvarchar" MaxLength="255" />
+          <Property Name="description_ar" Type="nvarchar" MaxLength="255" />
+          <Property Name="description_jp" Type="nvarchar" MaxLength="255" />
+          <Property Name="description_es" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="company_type">
           <Key>
@@ -859,6 +867,13 @@
           <Property Name="secondary_type_ja" Type="nvarchar" MaxLength="255" />
           <Property Name="last_update_dt" Type="smalldatetime" Nullable="false" />
           <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="description_en" Type="nvarchar" MaxLength="255" />
+          <Property Name="description_fr" Type="nvarchar" MaxLength="255" />
+          <Property Name="description_ge" Type="nvarchar" MaxLength="255" />
+          <Property Name="description_ru" Type="nvarchar" MaxLength="255" />
+          <Property Name="description_ar" Type="nvarchar" MaxLength="255" />
+          <Property Name="description_jp" Type="nvarchar" MaxLength="255" />
+          <Property Name="description_es" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="source">
           <Key>
@@ -1031,6 +1046,7 @@ warning 6002: The table/view 'EC.dbo.tmp_raph_client' does not have a primary ke
           <Property Name="company_location_id" Type="int" />
           <Property Name="location_nm" Type="nvarchar(max)" />
           <Property Name="sign_in_code" Type="nvarchar(max)" />
+          <Property Name="guid" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="user_change_password">
           <Key>
@@ -1074,126 +1090,6 @@ warning 6002: The table/view 'EC.dbo.tmp_raph_client' does not have a primary ke
           <Property Name="last_update_dt" Type="smalldatetime" Nullable="false" />
           <Property Name="user_id" Type="int" Nullable="false" />
           <Property Name="code" Type="nvarchar" MaxLength="50" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'EC.dbo.zzbilling_info' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="zzbilling_info">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="client_id" />
-            <PropertyRef Name="address_id" />
-            <PropertyRef Name="status_id" />
-            <PropertyRef Name="email" />
-            <PropertyRef Name="credit_level_id" />
-            <PropertyRef Name="last_update_dt" />
-            <PropertyRef Name="user_id" />
-          </Key>
-          <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="client_id" Type="int" Nullable="false" />
-          <Property Name="address_id" Type="int" Nullable="false" />
-          <Property Name="billing_option_id" Type="int" />
-          <Property Name="status_id" Type="int" Nullable="false" />
-          <Property Name="billing_info_nm" Type="nvarchar" MaxLength="50" />
-          <Property Name="business_type_nm" Type="nvarchar" MaxLength="50" />
-          <Property Name="principle_nm" Type="nvarchar" MaxLength="50" />
-          <Property Name="contact_nm" Type="nvarchar" MaxLength="50" />
-          <Property Name="email" Type="nvarchar" MaxLength="120" Nullable="false" />
-          <Property Name="bank_nm" Type="nvarchar" MaxLength="50" />
-          <Property Name="bank_work_no" Type="nchar" MaxLength="15" />
-          <Property Name="branch_nm" Type="nvarchar" MaxLength="50" />
-          <Property Name="reference_nm" Type="nvarchar" MaxLength="50" />
-          <Property Name="reference_work_no" Type="nvarchar" MaxLength="50" />
-          <Property Name="credit_level_id" Type="int" Nullable="false" />
-          <Property Name="card_no" Type="nchar" MaxLength="16" />
-          <Property Name="verify_no" Type="nchar" MaxLength="10" />
-          <Property Name="expiry_dt" Type="nchar" MaxLength="10" />
-          <Property Name="last_update_dt" Type="smalldatetime" Nullable="false" />
-          <Property Name="user_id" Type="int" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'EC.dbo.zzcase_type' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="zzcase_type">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="status_id" />
-            <PropertyRef Name="negative_in" />
-            <PropertyRef Name="case_type_nm" />
-            <PropertyRef Name="case_type_nf" />
-            <PropertyRef Name="case_type_ns" />
-            <PropertyRef Name="case_type_nr" />
-            <PropertyRef Name="last_update_dt" />
-            <PropertyRef Name="user_id" />
-          </Key>
-          <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="status_id" Type="int" Nullable="false" />
-          <Property Name="negative_in" Type="int" Nullable="false" />
-          <Property Name="case_type_nm" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="case_type_nf" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="case_type_ns" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="case_type_nr" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="case_type_na" Type="nvarchar" MaxLength="255" />
-          <Property Name="case_type_nj" Type="nvarchar" MaxLength="255" />
-          <Property Name="last_update_dt" Type="smalldatetime" Nullable="false" />
-          <Property Name="user_id" Type="int" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'EC.dbo.zzmediator_secondary_type' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="zzmediator_secondary_type">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="mediator_id" />
-            <PropertyRef Name="secondary_type_id" />
-            <PropertyRef Name="last_update_dt" />
-            <PropertyRef Name="user_id" />
-          </Key>
-          <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="client_int" Type="int" />
-          <Property Name="company_id" Type="int" />
-          <Property Name="mediator_id" Type="int" Nullable="false" />
-          <Property Name="secondary_type_id" Type="int" Nullable="false" />
-          <Property Name="last_update_dt" Type="datetime" Nullable="false" />
-          <Property Name="user_id" Type="int" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'EC.dbo.zzreport_action_type' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="zzreport_action_type">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="action_type_nm" />
-            <PropertyRef Name="last_update_dt" />
-            <PropertyRef Name="user_id" />
-          </Key>
-          <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="action_type_nm" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="action_type_nf" Type="nvarchar" MaxLength="100" />
-          <Property Name="action_type_ns" Type="nvarchar" MaxLength="100" />
-          <Property Name="action_type_nr" Type="nvarchar" MaxLength="100" />
-          <Property Name="action_type_na" Type="nvarchar" MaxLength="100" />
-          <Property Name="last_update_dt" Type="smalldatetime" Nullable="false" />
-          <Property Name="user_id" Type="int" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'EC.dbo.zzzzreport_message_attachment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="zzzzreport_message_attachment">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="report_message_id" />
-            <PropertyRef Name="path_nm" />
-            <PropertyRef Name="file_nm" />
-            <PropertyRef Name="file_extension_nm" />
-            <PropertyRef Name="status_id" />
-            <PropertyRef Name="last_update_dt" />
-            <PropertyRef Name="user_id" />
-          </Key>
-          <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="report_message_id" Type="int" Nullable="false" />
-          <Property Name="path_nm" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="file_nm" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="file_extension_nm" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="file_stream" Type="binary" MaxLength="255" />
-          <Property Name="status_id" Type="int" Nullable="false" />
-          <Property Name="last_update_dt" Type="smalldatetime" Nullable="false" />
-          <Property Name="user_id" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Address_Country">
           <End Role="country" Type="Self.country" Multiplicity="1" />
@@ -1390,82 +1286,6 @@ warning 6002: The table/view 'EC.dbo.zzzzreport_message_attachment' does not hav
     [tmp_raph_client].[user_nm] AS [user_nm], 
     [tmp_raph_client].[login_nm] AS [login_nm]
     FROM [dbo].[tmp_raph_client] AS [tmp_raph_client]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="zzbilling_info" EntityType="Self.zzbilling_info" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [zzbilling_info].[id] AS [id], 
-    [zzbilling_info].[client_id] AS [client_id], 
-    [zzbilling_info].[address_id] AS [address_id], 
-    [zzbilling_info].[billing_option_id] AS [billing_option_id], 
-    [zzbilling_info].[status_id] AS [status_id], 
-    [zzbilling_info].[billing_info_nm] AS [billing_info_nm], 
-    [zzbilling_info].[business_type_nm] AS [business_type_nm], 
-    [zzbilling_info].[principle_nm] AS [principle_nm], 
-    [zzbilling_info].[contact_nm] AS [contact_nm], 
-    [zzbilling_info].[email] AS [email], 
-    [zzbilling_info].[bank_nm] AS [bank_nm], 
-    [zzbilling_info].[bank_work_no] AS [bank_work_no], 
-    [zzbilling_info].[branch_nm] AS [branch_nm], 
-    [zzbilling_info].[reference_nm] AS [reference_nm], 
-    [zzbilling_info].[reference_work_no] AS [reference_work_no], 
-    [zzbilling_info].[credit_level_id] AS [credit_level_id], 
-    [zzbilling_info].[card_no] AS [card_no], 
-    [zzbilling_info].[verify_no] AS [verify_no], 
-    [zzbilling_info].[expiry_dt] AS [expiry_dt], 
-    [zzbilling_info].[last_update_dt] AS [last_update_dt], 
-    [zzbilling_info].[user_id] AS [user_id]
-    FROM [dbo].[zzbilling_info] AS [zzbilling_info]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="zzcase_type" EntityType="Self.zzcase_type" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [zzcase_type].[id] AS [id], 
-    [zzcase_type].[status_id] AS [status_id], 
-    [zzcase_type].[negative_in] AS [negative_in], 
-    [zzcase_type].[case_type_nm] AS [case_type_nm], 
-    [zzcase_type].[case_type_nf] AS [case_type_nf], 
-    [zzcase_type].[case_type_ns] AS [case_type_ns], 
-    [zzcase_type].[case_type_nr] AS [case_type_nr], 
-    [zzcase_type].[case_type_na] AS [case_type_na], 
-    [zzcase_type].[case_type_nj] AS [case_type_nj], 
-    [zzcase_type].[last_update_dt] AS [last_update_dt], 
-    [zzcase_type].[user_id] AS [user_id]
-    FROM [dbo].[zzcase_type] AS [zzcase_type]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="zzmediator_secondary_type" EntityType="Self.zzmediator_secondary_type" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [zzmediator_secondary_type].[id] AS [id], 
-    [zzmediator_secondary_type].[client_int] AS [client_int], 
-    [zzmediator_secondary_type].[company_id] AS [company_id], 
-    [zzmediator_secondary_type].[mediator_id] AS [mediator_id], 
-    [zzmediator_secondary_type].[secondary_type_id] AS [secondary_type_id], 
-    [zzmediator_secondary_type].[last_update_dt] AS [last_update_dt], 
-    [zzmediator_secondary_type].[user_id] AS [user_id]
-    FROM [dbo].[zzmediator_secondary_type] AS [zzmediator_secondary_type]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="zzreport_action_type" EntityType="Self.zzreport_action_type" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [zzreport_action_type].[id] AS [id], 
-    [zzreport_action_type].[action_type_nm] AS [action_type_nm], 
-    [zzreport_action_type].[action_type_nf] AS [action_type_nf], 
-    [zzreport_action_type].[action_type_ns] AS [action_type_ns], 
-    [zzreport_action_type].[action_type_nr] AS [action_type_nr], 
-    [zzreport_action_type].[action_type_na] AS [action_type_na], 
-    [zzreport_action_type].[last_update_dt] AS [last_update_dt], 
-    [zzreport_action_type].[user_id] AS [user_id]
-    FROM [dbo].[zzreport_action_type] AS [zzreport_action_type]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="zzzzreport_message_attachment" EntityType="Self.zzzzreport_message_attachment" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [zzzzreport_message_attachment].[id] AS [id], 
-    [zzzzreport_message_attachment].[report_message_id] AS [report_message_id], 
-    [zzzzreport_message_attachment].[path_nm] AS [path_nm], 
-    [zzzzreport_message_attachment].[file_nm] AS [file_nm], 
-    [zzzzreport_message_attachment].[file_extension_nm] AS [file_extension_nm], 
-    [zzzzreport_message_attachment].[file_stream] AS [file_stream], 
-    [zzzzreport_message_attachment].[status_id] AS [status_id], 
-    [zzzzreport_message_attachment].[last_update_dt] AS [last_update_dt], 
-    [zzzzreport_message_attachment].[user_id] AS [user_id]
-    FROM [dbo].[zzzzreport_message_attachment] AS [zzzzreport_message_attachment]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Address_Country" Association="Self.FK_Address_Country">
             <End Role="country" EntitySet="country" />
@@ -1675,6 +1495,7 @@ warning 6002: The table/view 'EC.dbo.zzzzreport_message_attachment' does not hav
           <Property Name="invitation_confirmation_dt" Type="DateTime" Precision="3" />
           <Property Name="invitation_confirmation_user_id" Type="Int32" />
           <Property Name="reseller" Type="Int32" />
+          <Property Name="guid" Type="Guid" />
           <NavigationProperty Name="address" Relationship="Self.FK_Company_Address" FromRole="company" ToRole="address" />
           <NavigationProperty Name="company_department" Relationship="Self.FK_Department_Company" FromRole="company" ToRole="company_department" />
         </EntityType>
@@ -1796,6 +1617,13 @@ warning 6002: The table/view 'EC.dbo.zzzzreport_message_attachment' does not hav
           <Property Name="secondary_type_ar" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="last_update_dt" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="description_en" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="description_fr" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="description_de" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="description_ru" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="description_ar" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="description_jp" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="description_es" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="company_type">
           <Key>
@@ -2367,6 +2195,13 @@ warning 6002: The table/view 'EC.dbo.zzzzreport_message_attachment' does not hav
           <Property Name="secondary_type_ja" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="last_update_dt" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="description_en" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="description_fr" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="description_ge" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="description_ru" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="description_ar" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="description_jp" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="description_es" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="source">
           <Key>
@@ -2519,6 +2354,7 @@ warning 6002: The table/view 'EC.dbo.zzzzreport_message_attachment' does not hav
           <Property Name="company_location_id" Type="Int32" />
           <Property Name="location_nm" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="sign_in_code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="guid" Type="Guid" />
           <NavigationProperty Name="report" Relationship="Self.FK_Report_User" FromRole="user" ToRole="report" />
         </EntityType>
         <EntityType Name="user_change_password">
@@ -2582,116 +2418,6 @@ warning 6002: The table/view 'EC.dbo.zzzzreport_message_attachment' does not hav
           <Property Name="user_id" Type="Int32" Nullable="false" />
           <Property Name="user_nm" Type="String" MaxLength="101" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="login_nm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
-        <EntityType Name="zzbilling_info">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="client_id" />
-            <PropertyRef Name="address_id" />
-            <PropertyRef Name="status_id" />
-            <PropertyRef Name="email" />
-            <PropertyRef Name="credit_level_id" />
-            <PropertyRef Name="last_update_dt" />
-            <PropertyRef Name="user_id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="client_id" Type="Int32" Nullable="false" />
-          <Property Name="address_id" Type="Int32" Nullable="false" />
-          <Property Name="billing_option_id" Type="Int32" />
-          <Property Name="status_id" Type="Int32" Nullable="false" />
-          <Property Name="billing_info_nm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="business_type_nm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="principle_nm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="contact_nm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="email" Type="String" MaxLength="120" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="bank_nm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="bank_work_no" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
-          <Property Name="branch_nm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="reference_nm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="reference_work_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="credit_level_id" Type="Int32" Nullable="false" />
-          <Property Name="card_no" Type="String" MaxLength="16" FixedLength="true" Unicode="true" />
-          <Property Name="verify_no" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="expiry_dt" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="last_update_dt" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="user_id" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="zzcase_type">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="status_id" />
-            <PropertyRef Name="negative_in" />
-            <PropertyRef Name="case_type_nm" />
-            <PropertyRef Name="case_type_nf" />
-            <PropertyRef Name="case_type_ns" />
-            <PropertyRef Name="case_type_nr" />
-            <PropertyRef Name="last_update_dt" />
-            <PropertyRef Name="user_id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="status_id" Type="Int32" Nullable="false" />
-          <Property Name="negative_in" Type="Int32" Nullable="false" />
-          <Property Name="case_type_nm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="case_type_nf" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="case_type_ns" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="case_type_nr" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="case_type_na" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="case_type_nj" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="last_update_dt" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="user_id" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="zzmediator_secondary_type">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="mediator_id" />
-            <PropertyRef Name="secondary_type_id" />
-            <PropertyRef Name="last_update_dt" />
-            <PropertyRef Name="user_id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="client_int" Type="Int32" />
-          <Property Name="company_id" Type="Int32" />
-          <Property Name="mediator_id" Type="Int32" Nullable="false" />
-          <Property Name="secondary_type_id" Type="Int32" Nullable="false" />
-          <Property Name="last_update_dt" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="user_id" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="zzreport_action_type">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="action_type_nm" />
-            <PropertyRef Name="last_update_dt" />
-            <PropertyRef Name="user_id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="action_type_nm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="action_type_nf" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="action_type_ns" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="action_type_nr" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="action_type_na" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="last_update_dt" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="user_id" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="zzzzreport_message_attachment">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="report_message_id" />
-            <PropertyRef Name="path_nm" />
-            <PropertyRef Name="file_nm" />
-            <PropertyRef Name="file_extension_nm" />
-            <PropertyRef Name="status_id" />
-            <PropertyRef Name="last_update_dt" />
-            <PropertyRef Name="user_id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="report_message_id" Type="Int32" Nullable="false" />
-          <Property Name="path_nm" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="file_nm" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="file_extension_nm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="file_stream" Type="Binary" MaxLength="255" FixedLength="true" />
-          <Property Name="status_id" Type="Int32" Nullable="false" />
-          <Property Name="last_update_dt" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="user_id" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_Address_Country">
           <End Role="country" Type="Self.country" Multiplicity="1" />
@@ -2849,11 +2575,6 @@ warning 6002: The table/view 'EC.dbo.zzzzreport_message_attachment' does not hav
           <EntitySet Name="user_role" EntityType="Self.user_role" />
           <EntitySet Name="validation_type" EntityType="Self.validation_type" />
           <EntitySet Name="tmp_raph_client" EntityType="Self.tmp_raph_client" />
-          <EntitySet Name="zzbilling_info" EntityType="Self.zzbilling_info" />
-          <EntitySet Name="zzcase_type" EntityType="Self.zzcase_type" />
-          <EntitySet Name="zzmediator_secondary_type" EntityType="Self.zzmediator_secondary_type" />
-          <EntitySet Name="zzreport_action_type" EntityType="Self.zzreport_action_type" />
-          <EntitySet Name="zzzzreport_message_attachment" EntityType="Self.zzzzreport_message_attachment" />
           <AssociationSet Name="FK_Address_Country" Association="Self.FK_Address_Country">
             <End Role="country" EntitySet="country" />
             <End Role="address" EntitySet="address" />
@@ -3067,6 +2788,7 @@ warning 6002: The table/view 'EC.dbo.zzzzreport_message_attachment' does not hav
                 <ScalarProperty Name="invitation_confirmation_dt" ColumnName="invitation_confirmation_dt" />
                 <ScalarProperty Name="invitation_confirmation_user_id" ColumnName="invitation_confirmation_user_id" />
                 <ScalarProperty Name="reseller" ColumnName="reseller" />
+                <ScalarProperty Name="guid" ColumnName="guid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3192,6 +2914,13 @@ warning 6002: The table/view 'EC.dbo.zzzzreport_message_attachment' does not hav
                 <ScalarProperty Name="secondary_type_ar" ColumnName="secondary_type_ar" />
                 <ScalarProperty Name="last_update_dt" ColumnName="last_update_dt" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="description_en" ColumnName="description_en" />
+                <ScalarProperty Name="description_fr" ColumnName="description_fr" />
+                <ScalarProperty Name="description_de" ColumnName="description_de" />
+                <ScalarProperty Name="description_ru" ColumnName="description_ru" />
+                <ScalarProperty Name="description_ar" ColumnName="description_ar" />
+                <ScalarProperty Name="description_jp" ColumnName="description_jp" />
+                <ScalarProperty Name="description_es" ColumnName="description_es" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3797,6 +3526,13 @@ warning 6002: The table/view 'EC.dbo.zzzzreport_message_attachment' does not hav
                 <ScalarProperty Name="secondary_type_ja" ColumnName="secondary_type_ja" />
                 <ScalarProperty Name="last_update_dt" ColumnName="last_update_dt" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="description_en" ColumnName="description_en" />
+                <ScalarProperty Name="description_fr" ColumnName="description_fr" />
+                <ScalarProperty Name="description_ge" ColumnName="description_ge" />
+                <ScalarProperty Name="description_ru" ColumnName="description_ru" />
+                <ScalarProperty Name="description_ar" ColumnName="description_ar" />
+                <ScalarProperty Name="description_jp" ColumnName="description_jp" />
+                <ScalarProperty Name="description_es" ColumnName="description_es" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3959,6 +3695,7 @@ warning 6002: The table/view 'EC.dbo.zzzzreport_message_attachment' does not hav
                 <ScalarProperty Name="company_location_id" ColumnName="company_location_id" />
                 <ScalarProperty Name="location_nm" ColumnName="location_nm" />
                 <ScalarProperty Name="sign_in_code" ColumnName="sign_in_code" />
+                <ScalarProperty Name="guid" ColumnName="guid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4019,92 +3756,6 @@ warning 6002: The table/view 'EC.dbo.zzzzreport_message_attachment' does not hav
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="user_nm" ColumnName="user_nm" />
                 <ScalarProperty Name="login_nm" ColumnName="login_nm" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="zzbilling_info">
-            <EntityTypeMapping TypeName="ECModel.zzbilling_info">
-              <MappingFragment StoreEntitySet="zzbilling_info">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="client_id" ColumnName="client_id" />
-                <ScalarProperty Name="address_id" ColumnName="address_id" />
-                <ScalarProperty Name="billing_option_id" ColumnName="billing_option_id" />
-                <ScalarProperty Name="status_id" ColumnName="status_id" />
-                <ScalarProperty Name="billing_info_nm" ColumnName="billing_info_nm" />
-                <ScalarProperty Name="business_type_nm" ColumnName="business_type_nm" />
-                <ScalarProperty Name="principle_nm" ColumnName="principle_nm" />
-                <ScalarProperty Name="contact_nm" ColumnName="contact_nm" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="bank_nm" ColumnName="bank_nm" />
-                <ScalarProperty Name="bank_work_no" ColumnName="bank_work_no" />
-                <ScalarProperty Name="branch_nm" ColumnName="branch_nm" />
-                <ScalarProperty Name="reference_nm" ColumnName="reference_nm" />
-                <ScalarProperty Name="reference_work_no" ColumnName="reference_work_no" />
-                <ScalarProperty Name="credit_level_id" ColumnName="credit_level_id" />
-                <ScalarProperty Name="card_no" ColumnName="card_no" />
-                <ScalarProperty Name="verify_no" ColumnName="verify_no" />
-                <ScalarProperty Name="expiry_dt" ColumnName="expiry_dt" />
-                <ScalarProperty Name="last_update_dt" ColumnName="last_update_dt" />
-                <ScalarProperty Name="user_id" ColumnName="user_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="zzcase_type">
-            <EntityTypeMapping TypeName="ECModel.zzcase_type">
-              <MappingFragment StoreEntitySet="zzcase_type">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="status_id" ColumnName="status_id" />
-                <ScalarProperty Name="negative_in" ColumnName="negative_in" />
-                <ScalarProperty Name="case_type_nm" ColumnName="case_type_nm" />
-                <ScalarProperty Name="case_type_nf" ColumnName="case_type_nf" />
-                <ScalarProperty Name="case_type_ns" ColumnName="case_type_ns" />
-                <ScalarProperty Name="case_type_nr" ColumnName="case_type_nr" />
-                <ScalarProperty Name="case_type_na" ColumnName="case_type_na" />
-                <ScalarProperty Name="case_type_nj" ColumnName="case_type_nj" />
-                <ScalarProperty Name="last_update_dt" ColumnName="last_update_dt" />
-                <ScalarProperty Name="user_id" ColumnName="user_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="zzmediator_secondary_type">
-            <EntityTypeMapping TypeName="ECModel.zzmediator_secondary_type">
-              <MappingFragment StoreEntitySet="zzmediator_secondary_type">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="client_int" ColumnName="client_int" />
-                <ScalarProperty Name="company_id" ColumnName="company_id" />
-                <ScalarProperty Name="mediator_id" ColumnName="mediator_id" />
-                <ScalarProperty Name="secondary_type_id" ColumnName="secondary_type_id" />
-                <ScalarProperty Name="last_update_dt" ColumnName="last_update_dt" />
-                <ScalarProperty Name="user_id" ColumnName="user_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="zzreport_action_type">
-            <EntityTypeMapping TypeName="ECModel.zzreport_action_type">
-              <MappingFragment StoreEntitySet="zzreport_action_type">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="action_type_nm" ColumnName="action_type_nm" />
-                <ScalarProperty Name="action_type_nf" ColumnName="action_type_nf" />
-                <ScalarProperty Name="action_type_ns" ColumnName="action_type_ns" />
-                <ScalarProperty Name="action_type_nr" ColumnName="action_type_nr" />
-                <ScalarProperty Name="action_type_na" ColumnName="action_type_na" />
-                <ScalarProperty Name="last_update_dt" ColumnName="last_update_dt" />
-                <ScalarProperty Name="user_id" ColumnName="user_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="zzzzreport_message_attachment">
-            <EntityTypeMapping TypeName="ECModel.zzzzreport_message_attachment">
-              <MappingFragment StoreEntitySet="zzzzreport_message_attachment">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="report_message_id" ColumnName="report_message_id" />
-                <ScalarProperty Name="path_nm" ColumnName="path_nm" />
-                <ScalarProperty Name="file_nm" ColumnName="file_nm" />
-                <ScalarProperty Name="file_extension_nm" ColumnName="file_extension_nm" />
-                <ScalarProperty Name="file_stream" ColumnName="file_stream" />
-                <ScalarProperty Name="status_id" ColumnName="status_id" />
-                <ScalarProperty Name="last_update_dt" ColumnName="last_update_dt" />
-                <ScalarProperty Name="user_id" ColumnName="user_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

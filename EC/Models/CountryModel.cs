@@ -8,13 +8,8 @@ namespace EC.Models
 {
     public class CountryModel : BaseModel
     {
-        public static readonly CountryModel inst = new CountryModel();
  
 
-        protected CountryModel()
-        {
-
-        }
 
         public List<country> Countries()
         {
