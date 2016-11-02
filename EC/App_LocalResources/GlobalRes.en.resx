@@ -1091,7 +1091,7 @@
     <value>Case resolution</value>
   </data>
   <data name="CaseResolved" xml:space="preserve">
-    <value>Case Resolved</value>
+    <value>Case Awaiting Sign-off</value>
   </data>
   <data name="Closed" xml:space="preserve">
     <value>Closed</value>
