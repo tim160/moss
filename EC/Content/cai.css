@@ -126,8 +126,11 @@
     position: relative;
     padding: 10px 0 0 0;
 }
+#bodyInc .fourthTitle {
+    color: #ffffff !important;
+}
 .fourthTitle {
-    color: #fff;
+    color: #ffffff;
     padding: 20px 0;
 }
 #bodyInc .blockInputs {
