@@ -1741,7 +1741,9 @@ button {
     font-family: 'OpenSans-Regular';
     font-size: 12px;
     z-index: 100;
-
+}
+#persone .spec {
+    width: 503px;
 }
 .spec.position {
     position: absolute;

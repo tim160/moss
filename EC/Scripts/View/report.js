@@ -647,6 +647,7 @@
         passiveCircle.find('.addPerson').click(function () {
             personCount++;
 
+
             if (personCount > 0) {
                 passiveCircle.find('.display.button').text('Add another person');
                 passiveCircle.find('.display.button').css({ "border-color": "#AEB5B7", "color": "#AEB5B7", "background": "transparent" });
@@ -679,7 +680,11 @@
             personNum.val(num);
 
             cm.setInput(personNum, num);
+            var wid = $($(".contentBlock")[0]).width();
 
+            $("#persone .spec.position").each(function (indx, element) {
+                $(element).css({ "width": wid });
+            });
             //var inputs = $(addPersonContainer.find('input'));
             //inputs.on('change', function (event) {
             //    var temp = $(event.currentTarget);
@@ -726,13 +731,10 @@
         cmp.OptionSelect(isAccidentOngoing);
         var wid = $($(".contentBlock")[0]).width();
 
-        $("#persone .spec.position").each(function (indx, element) {
-            $(element).css({ "width": wid - 365 });
-        });
  
         $("#personeAgain .spec.position").css({ "width": wid - 150 });
         if (wid < 870) {
-            $("#personeAgain .spec.position").css({ "left": -220});
+            $("#personeAgain .spec.position").css({ "left": -220 });
         }
         //$("#persone .spec.position").css({ "width": wid - 365 });
         caseInformationReport.on('change', function () {
