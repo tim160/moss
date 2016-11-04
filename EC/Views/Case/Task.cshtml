@@ -297,7 +297,7 @@
 
                 <div>
 
-                    <!--ADD ACTIVITY BLOCK -->
+                    @*<!--ADD ACTIVITY BLOCK -->
                     @if ((rm._report != null) && (rm._report.id != 0))
                     {
                         List<user> mediators = rm._mediators_whoHasAccess_toReport;
@@ -365,12 +365,6 @@
 
                                 if (_userActivity.role_id == 8)
                                 {
-                                   /* if ((rm._report.incident_anonymity_id == 1) || (rm._report.incident_anonymity_id == 2))
-                                    {
-                                        _sender_title = "(" + GlobalRes.anonymous_reporter + ")";
-                                        _sender_name = "";
-                                    }
-                                    else*/
                                     {
                                         _sender_title = " (" + GlobalRes.Reporter + ")";
                                         _sender_name = "";
@@ -416,7 +410,7 @@
                             }
 
                         </div><!--blockActivity-->
-                    }
+                    }*@
 
                     <!--END ADD A BLOCK-->
                     @*@Html.Partial("~/Views/PartialViews/_ReportDetailsLeft.cshtml",
