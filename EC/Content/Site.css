@@ -1779,7 +1779,7 @@ button {
     font-size: 14px;
     color: rgb(60, 62, 63);
 }
-   /*#specHover .ui-tooltip, .arrowCustom:after {
+   #specHover .ui-tooltip, .arrowCustom:after {
         background: black;
         border: 2px solid white;
     }
@@ -1828,4 +1828,52 @@ button {
         .arrowCustom.top:after {
             bottom: -20px;
             top: auto;
-        }*/
+        }
+        @media only screen and (min-width: 320px) {
+            .spec.position {
+                width: 280px;
+                left: -214px;
+            }
+            #persone .spec {
+                    width: 235px;
+    left: -97px;
+            }
+        }
+            @media only screen and (min-width: 375px) {
+        .spec.position {
+            width: 320px;
+                            left: -214px;
+        }
+            #persone .spec {
+    width: 274px;
+    left: -91px;
+    }
+    }
+@media only screen and (min-width: 375px) {
+    #persone .spec {
+        width: 327px;
+        left: -94px;
+    }
+}
+    @media only screen and (min-width: 768px) {
+        .spec.position {
+            width: 464px;
+            left: -200px;
+        }
+        #persone .spec {
+            width: 406px;
+            left: -377px;
+        }
+    }
+        @media only screen and (min-width: 1024px) {
+        .spec.position {
+            width: 709px;
+            left: -200px;
+        }
+    }
+    @media only screen and (min-width: 1440px) {
+        .spec.position {
+            width: 892px;
+            left: -200px;
+        }
+    }
