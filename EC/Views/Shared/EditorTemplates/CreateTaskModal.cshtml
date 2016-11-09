@@ -21,7 +21,7 @@
         <div id="dialog-form">
             <div class="modal-header2">
                 <div class="resolve">@overlay_title</div>
-                <label class="close"></label>
+                <label class="close1"></label>
                 <div class="closeIcon" onclick='overlay()'></div>
             </div>
             @if (((normal_button_value == Constant.investigation_status_resolution.ToString())) || (normal_button_value == Constant.investigation_status_closed.ToString()))
@@ -93,7 +93,7 @@
             $(".dropdown2 #ddlOutcome").attr('data-value', temp.attr('data-value'));
             $(".dropdown2 ul").slideUp();
         });
-        $("#anotherDialog .close").on('click', function () {
+        $("#anotherDialog .close1").on('click', function () {
             $("#anotherDialog").toggle();
         });
         var button = "";

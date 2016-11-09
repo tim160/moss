@@ -1970,11 +1970,12 @@ li.infoCasesBlock:first-child:hover li .status {
     margin-left: 0px;
 }
 
-.close {
+.close, .close1 {
     float: right;
     padding-right: 1px;
 }
-.close:after {
+.close:after,
+.close1:after {
     content: "\00d7";
     position: absolute;
     float: right;
