@@ -188,7 +188,7 @@ namespace EC.Controllers
             _company.step6_delay = 7;
             _company.step6_postpone = 2;
 
-            _company.guid = new Guid();
+            _company.guid = Guid.NewGuid(); ;
 
             string url = Request.Url.AbsoluteUri.ToLower();
             string _url = "registration";
@@ -434,7 +434,7 @@ namespace EC.Controllers
                 _user.company_location_id = location_id;
                 _user.location_nm = "";
                 _user.sign_in_code = null;
-                _user.guid = new Guid();
+                _user.guid = Guid.NewGuid();
 
                 try
                 {
@@ -595,7 +595,7 @@ namespace EC.Controllers
                 _user.company_location_id = location_id;
                 _user.location_nm = "";
                 _user.sign_in_code = null;
-                _user.guid = new Guid();
+                _user.guid = Guid.NewGuid();
 
                 try
                 {

@@ -45,14 +45,12 @@
 
     if (rm._investigation_status == Constant.investigation_status_completed)
     {  // Case resolved - waiting for approvement
-        // - eto vipadaushaya nijnyaya vkladka - "Case cannot be resolved" = @GlobalRes.CaseCantBeResolved Pepper Pots zagrujaem
-        // https://projects.invisionapp.com/d/#/console/2453713/74269426/
         // not confirmed resolved/completed
         ris = rm._last_investigation_status();
         UserModel temp_um = new UserModel(ris.user_id);
         flag = "101px";
         <div class="firstHeader">
-            <div class="caseWaitApp">Case resolved - @GlobalRes.WaitingApprovement</div>
+            <div class="caseWaitApp">@GlobalRes.CaseResolved - @GlobalRes.WaitingApprovement</div>
             <div class="littleText">
                 @GlobalRes.CaseCantBeResolved
             </div>

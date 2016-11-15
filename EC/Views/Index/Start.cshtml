@@ -8,13 +8,18 @@
     {
         is_cc = false;
     }
-    ViewBag.Title = "Cai - " + GlobalRes.SelectYourCompany;
+    ViewBag.Title = GlobalRes.SelectYourCompany;
     String class_ext = ViewBag.cc_extension;
     Layout = "~/Views/Shared/HeaderFooterFrontPages.cshtml";
     ViewBag.background = "background-image: url(/Content/img/website-report" + class_ext + ".jpg);";
     ViewBag.cssStyle = "/Content/caiStart";
-    
-    
+
+    string logo_path = "~/Content/img/secondLogo.jpg";
+
+    if (ViewBag.LogoPath != "")
+    {
+        logo_path =  ViewBag.LogoPath;
+    }
    // ViewBag.cssStyle = "/Content/MainStyle.css";
    // ViewBag.cssStyle = "/Content/cai.css";
 }
@@ -28,7 +33,7 @@
 
     <div id="bodyInc">
         @*<img class="logoShow" src='@Url.Content("~/Content/img/secondLogo.jpg")' />*@
-        <img class="logoShow" src='@Url.Content("~/Content/img/cai_logo.png")' />
+        <img class="logoShow" src='@Url.Content(logo_path)' />
         <div class="blockInputs">
             <div class="block">
                 <h1>File a New Report:</h1>

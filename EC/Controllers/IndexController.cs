@@ -27,13 +27,22 @@ namespace EC.Controllers
         public ActionResult Index()
         {
             Session.Clear();
-            System.Configuration.Configuration rootWebConfig1 =
-                System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration(null);
-            System.Configuration.KeyValueConfigurationElement customSetting =
-                    rootWebConfig1.AppSettings.Settings["DisableWebMessage"];
+         //   System.Configuration.Configuration rootWebConfig1 =
+          //      System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration(null);
+         //   System.Configuration.KeyValueConfigurationElement customSetting =
+          //          rootWebConfig1.AppSettings.Settings["DisableWebMessage"];
 
-            UserModel um = new UserModel(977);
-            int t = um.Unread_Messages_Quantity(0, 1) + um.Unread_Messages_Quantity(0, 2) + um.Unread_Messages_Quantity(0, 3);
+        //    UserModel um = new UserModel(977);
+           // int t = um.Unread_Messages_Quantity(0, 1) + um.Unread_Messages_Quantity(0, 2) + um.Unread_Messages_Quantity(0, 3);
+          //  for (int i = 0; i < db.company.Count(); i++)
+            //{
+        ///    foreach (var item in db.user)
+          //  {
+            ////    item.guid = Guid.NewGuid();
+
+               
+         //   }
+         ////   db.SaveChanges();
  /*
     //       how to send email ( from newrequest@ec.com)
             List<string> to = new List<string>();
@@ -123,8 +132,10 @@ namespace EC.Controllers
             List<company> list = companyModel.GeCompaniesWithStatus();
             List<SearchCompanyDto> searchCompanyDto = new List<SearchCompanyDto>();
 
+            ViewBag.LogoPath = glb.LogoBaseUrl(Request.Url.AbsoluteUri.ToLower());
+
             string CurrentURL = Request.Url.AbsoluteUri.ToLower();
-            if (!CurrentURL.Contains("registration"))
+    //        if (!CurrentURL.Contains("report"))
             {
                 foreach (var item in list)
                 {
@@ -141,7 +152,7 @@ namespace EC.Controllers
             EcAuthorizedAttribute attr = new EcAuthorizedAttribute();
 
             ViewBag.newListComp = serializer.Serialize(searchCompanyDto.ToArray());
-
+            ViewBag.CurrentURL = CurrentURL;
             return View();
         }
        // [EcAuthorized("admin, moderator")]
