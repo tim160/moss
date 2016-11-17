@@ -133,7 +133,10 @@ namespace EC.Controllers
             List<SearchCompanyDto> searchCompanyDto = new List<SearchCompanyDto>();
 
             ViewBag.LogoPath = glb.LogoBaseUrl(Request.Url.AbsoluteUri.ToLower());
-
+            if (Request.Url.AbsoluteUri.ToLower().Contains("report"))
+            {
+                ViewBag.LogoPath = "";
+            }
             string CurrentURL = Request.Url.AbsoluteUri.ToLower();
     //        if (!CurrentURL.Contains("report"))
             {

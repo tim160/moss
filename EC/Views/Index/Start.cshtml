@@ -14,7 +14,7 @@
     ViewBag.background = "background-image: url(/Content/img/website-report" + class_ext + ".jpg);";
     ViewBag.cssStyle = "/Content/caiStart";
 
-    string logo_path = "~/Content/img/secondLogo.jpg";
+    string logo_path = "";
 
     if (ViewBag.LogoPath != "")
     {
@@ -33,7 +33,10 @@
 
     <div id="bodyInc">
         @*<img class="logoShow" src='@Url.Content("~/Content/img/secondLogo.jpg")' />*@
-        <img class="logoShow" src='@Url.Content(logo_path)' />
+        @if(logo_path.Trim().Length > 0)
+        { 
+            <img class="logoShow" src='@Url.Content(logo_path)' />
+        }
         <div class="blockInputs">
             <div class="block">
                 <h1>File a New Report:</h1>
