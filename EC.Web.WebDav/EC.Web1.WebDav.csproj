@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FF040D47-BD8A-4C3C-A285-0D6F2F11754C}</ProjectGuid>
+    <ProjectGuid>{288CD28A-18D4-4F88-A905-AA8146FCEC41}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EC.Model.Impl</RootNamespace>
-    <AssemblyName>EC.Model.Impl</AssemblyName>
+    <RootNamespace>EC.Web.WebDav</RootNamespace>
+    <AssemblyName>EC.Web.WebDav</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,14 +30,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BCrypt.Net">
-      <HintPath>..\..\..\moss\packages\BCrypt-Official.0.1.107\lib\BCrypt.Net.dll</HintPath>
+    <Reference Include="EC.Common.Base">
+      <HintPath>..\..\..\moss\EC.Common.Base\bin\Debug\EC.Common.Base.dll</HintPath>
     </Reference>
-    <Reference Include="EC.Constants">
-      <HintPath>..\EC.Constants\bin\Debug\EC.Constants.dll</HintPath>
-    </Reference>
-    <Reference Include="EC.Model.Interfaces">
-      <HintPath>..\EC.Model.Interfaces\bin\Debug\EC.Model.Interfaces.dll</HintPath>
+    <Reference Include="EC.Common.Interfaces">
+      <HintPath>..\..\..\moss\EC.Common.Interfaces\bin\Debug\EC.Common.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -48,14 +45,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomAuthenticationModule.cs" />
+    <Compile Include="ECBasic.cs" />
+    <Compile Include="IOCRegistration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserItems.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\EC.Common.Interfaces\EC.Common.Interfaces.csproj">
-      <Project>{1b096edd-7575-4bbb-a93b-deb482acfbcd}</Project>
-      <Name>EC.Common.Interfaces</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

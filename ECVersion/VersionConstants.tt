@@ -22,7 +22,7 @@
 // Generated at <#= DateTimeOffset.Now #>
 // Source: <#= VersionPropertiesFilePath #> (<#= file.FullName #>)
 
-using MarineLMS.Version;
+using EC.Version;
 using System;
 
 public static class VersionConstants

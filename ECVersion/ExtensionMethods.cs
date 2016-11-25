@@ -1,6 +1,6 @@
 using System;
 
-namespace MarineLMS.Version
+namespace EC.Version
 {
     /// <summary>
     /// These extension methods help pack and unpack versions and packed integers
