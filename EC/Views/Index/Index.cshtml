@@ -101,17 +101,17 @@
             window.location.href = "/login";
         });
         $("#buttonStart").on('click', function() {
-           /* var companyCode = $('#companyCode').val();
+            var companyCode = $('#companyCode').val();
             if (companyCode != 'false') {
               window.location.href = "/Report/new?companyCode=" + companyCode;
                 } else {
                 window.location.href = "/Report/new?companyCode=" + $('#specialInput').val();
-            }*/
+            }
         });
     });
 
     $(function() {
-       /* var str =  @Html.Raw(ViewBag.newListComp);
+        var str =  @Html.Raw(ViewBag.newListComp);
         $("#specialInput").autocomplete({
             source: str,
             select: function(event, ui) {
@@ -119,7 +119,7 @@
                 $('#companyCode').val(ui.item.value);
                 return false;
             }
-        });*/
+        });
     });
 
 </script>

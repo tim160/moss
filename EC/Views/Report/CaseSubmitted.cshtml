@@ -291,10 +291,13 @@
                                                 <td class="titleReportTable">@GlobalRes.IncidentDescription:</td>
                                                 <td class="reportTextTable">@Html.DisplayFor(m => m.incidentDescription)</td>
                                             </tr>
-                                            <tr>
-                                                <td class="titleReportTable">@GlobalRes.AttachDocuments:</td>
-                                                <td class="reportTextTable">@Html.DisplayFor(m => m.attachFiles)</td>
-                                            </tr>
+                                            @if (Model.attachFiles.Length > 1)
+                                            {
+                                                <tr>
+                                                    <td class="titleReportTable">@GlobalRes.AttachDocuments:</td>
+                                                    <td class="reportTextTable">@Html.DisplayFor(m => m.attachFiles)</td>
+                                                </tr>
+                                            }
                                         </tbody>
                                     </table>
                                 </div>
