@@ -170,9 +170,9 @@ namespace EC.Controllers
             {
                 var user = companyModel.GetUser(currentReport.user_id);
                 ViewBag.UserId = user.id;
-                model.userName = ViewBag.Login = user.login_nm;
-                model.password = ViewBag.Password = user.password;
-                model.userEmail = ViewBag.Email = user.email;
+                /*model.userName = */ViewBag.Login = user.login_nm;
+                /*model.password = */ViewBag.Password = user.password;
+                /*model.userEmail = */ViewBag.Email = user.email;
                 SignIn(user);
                 GlobalFunctions glb = new GlobalFunctions();
                 glb.UpdateReportLog(user.id, 2, currentReport.id, "", null, "");
