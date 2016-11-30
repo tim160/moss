@@ -305,6 +305,20 @@
 
                             @if (Model.name != null && Model.surname != null && Model.email != null)
                             {
+                                if (Model.confidentialLevelInt == 2)
+                                {
+                                    <table>
+                                        <tr>
+                                            <td class="demoTD listText">
+                                                <span class="listText listHead">@GlobalRes.forEmployeeConfidentialOnly </span>
+                                            </td>
+                                            <td class="demoTD" style="width: 49%;"><hr class="listHR"></td>
+                                            <td class="demoTD goToStep3"></td>
+                                        </tr>
+                                    </table>
+                                }
+
+
                                 <div class="reportBlock">
                                     <div class="report">
                                         <table style="width: 100%;">

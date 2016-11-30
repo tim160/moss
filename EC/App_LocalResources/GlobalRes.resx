@@ -1693,4 +1693,7 @@
   <data name="PrintReport" xml:space="preserve">
     <value>Print report</value>
   </data>
+  <data name="forEmployeeConfidentialOnly" xml:space="preserve">
+    <value>FOR EMPLOYEE CONFIDENTIAL ONLY</value>
+  </data>
 </root>

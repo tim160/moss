@@ -16,7 +16,8 @@ namespace EC.Controllers.ViewModel
 
 
         public string reportingFrom { get; set; }//
-        public string confidentialLevel { get; set; } //
+        public string confidentialLevel { get; set; } //]
+        public int confidentialLevelInt { get; set; }
         public string reportedAs { get; set; } //
         public string incidentLocation { get; set; } //
         public string affectedDepartments { get; set; }//
@@ -38,8 +39,9 @@ namespace EC.Controllers.ViewModel
 
         public void merge(ReportViewModel rvm, CompanyModel companyModel, ReportModel reportModel, ReportViewModel model)
         {
+            this.confidentialLevelInt = model.incident_anonymity_id;
 
-            if(model.incident_anonymity_id != 1)
+            if (model.incident_anonymity_id != 1)
             {
                 name = model.userName;
                 surname = model.userLastName;
