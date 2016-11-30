@@ -9,7 +9,6 @@
         is_cc = false;
     }
     String class_ext = ViewBag.cc_extension;
-    //19
     //bool? is_cc = true;
     //String class_ext = "";
     //if (is_cc)
@@ -99,26 +98,6 @@
         });
         $("#header .login").on('click', function() {
             window.location.href = "/login";
-        });
-        $("#buttonStart").on('click', function() {
-            var companyCode = $('#companyCode').val();
-            if (companyCode != 'false') {
-              window.location.href = "/Report/new?companyCode=" + companyCode;
-                } else {
-                window.location.href = "/Report/new?companyCode=" + $('#specialInput').val();
-            }
-        });
-    });
-
-    $(function() {
-        var str =  @Html.Raw(ViewBag.newListComp);
-        $("#specialInput").autocomplete({
-            source: str,
-            select: function(event, ui) {
-                $('#specialInput').val(ui.item.label);
-                $('#companyCode').val(ui.item.value);
-                return false;
-            }
         });
     });
 
