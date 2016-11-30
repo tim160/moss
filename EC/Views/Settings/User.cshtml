@@ -68,7 +68,13 @@
 }
 
 <div class="blockSettings">
-    <div id="casesHeared">
+
+    <!--casesHeared-->
+    @{
+        int active = 0;
+    }
+    @Html.Partial("~/Views/Settings/partial/casesHeared.cshtml", active)
+    @*<div id="casesHeared">
         <div id="menu">
             <h2 class="mainTitle">@GlobalRes.Menu:</h2>
             <div>
@@ -79,10 +85,9 @@
                 <a href="/Settings/Cases" class="caseesTab">@GlobalRes.CaseManagementDeadlines</a>
             </div>
         </div>
-        @*<div class="positionActivityIcon">
-            <div id="activityIcon"></div>
-        </div>*@
-    </div><!--casesHeared-->
+    </div>*@
+    
+    <!--casesHeared-->
     @using (Html.BeginForm("UpdateMediator", "Settings", Model, FormMethod.Post))
     {
         @Html.AntiForgeryToken()

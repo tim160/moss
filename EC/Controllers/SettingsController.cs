@@ -584,6 +584,9 @@ namespace EC.Controllers
 
             return View("Password", um._user);
         }
-
+        public ActionResult casesHeared ()
+        {
+            return PartialView("~/Views/Settings/partial/casesHeared.cshtml");
+        }
     }
 }

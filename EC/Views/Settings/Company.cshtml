@@ -40,21 +40,27 @@
 <div id="companyId" data-value="@company_id"></div>
 <div id="userId" data-value="@user_id"></div>
 <div class="blockSettings">
-    <div id="casesHeared">
-        <div id="menu">
-            <h2 class="mainTitle">@GlobalRes.Menu:</h2>
-            <div>
-                <a href="/Settings/Index" class="caseesTab">@GlobalRes.MyProfile</a>
-                <a href="/Settings/Password" class="caseesTab">@GlobalRes.Password</a>
-                <a class="caseesTab active">@GlobalRes.CompanyProfile</a>
-                <a href="/Settings/Mediators" class="caseesTab">@GlobalRes.CompanyMediators</a>
-                <a href="/Settings/Cases" class="caseesTab">@GlobalRes.CaseManagementDeadlines</a>
-            </div>
+    <!--casesHeared-->
+    @{
+        int active = 3;
+    }
+    @Html.Partial("~/Views/Settings/partial/casesHeared.cshtml", active)
+    @*<div id="casesHeared">
+    <div id="menu">
+        <h2 class="mainTitle">@GlobalRes.Menu:</h2>
+        <div>
+            <a href="/Settings/Index" class="caseesTab">@GlobalRes.MyProfile</a>
+            <a href="/Settings/Password" class="caseesTab">@GlobalRes.Password</a>
+            <a class="caseesTab active">@GlobalRes.CompanyProfile</a>
+            <a href="/Settings/Mediators" class="caseesTab">@GlobalRes.CompanyMediators</a>
+            <a href="/Settings/Cases" class="caseesTab">@GlobalRes.CaseManagementDeadlines</a>
         </div>
-        @*<div class="positionActivityIcon">
-                <div id="activityIcon"></div>
-            </div>*@
-    </div><!--casesHeared-->
+    </div>
+
+    </div>*@
+
+
+<!--casesHeared-->
 
     <div class="contentSettings secondHeader">
         <div class="headerCompanyProfile">

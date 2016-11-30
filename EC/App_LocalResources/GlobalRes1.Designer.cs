@@ -727,7 +727,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Case Management Deadlines.
+        ///   Looks up a localized string similar to Case Deadlines.
         /// </summary>
         public static string CaseManagementDeadlines {
             get {
@@ -1051,7 +1051,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Company Case Administrators.
+        ///   Looks up a localized string similar to Company Administrators.
         /// </summary>
         public static string CompanyMediators {
             get {

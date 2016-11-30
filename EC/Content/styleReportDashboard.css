@@ -2157,10 +2157,10 @@ p.helloUser {
     .blockSettings .contentSettings {
         width: 90%;
     }
-    .blockSettings .caseesTab {
+    /*.blockSettings .caseesTab { //need uprrove
         width: 202px;
         margin-right: 0px;
-    }
+    }*/
 
 }
 @media (max-width: 1002px) {
@@ -2619,9 +2619,12 @@ p.helloUser {
     .positionActivityIcon {
         /*height: 89px !important;*/
     }
-    h2.mainTitle + div{
-        display: block !important;
+    #menu {
+        width: 5%;
     }
+    /*h2.mainTitle + div{
+        display: block !important;/*need uprove*/
+    }*/
     #casesHeared.pageCases,
     .pageCases .positionActivityIcon {
         height: 50px !important;
@@ -2640,11 +2643,11 @@ p.helloUser {
 @media (min-width: 970px) {
     #casesHeared,
     .positionActivityIcon {
-        /*height: 64px !important;*/
+        /*height: 64px !important;*/ /*need uprove*/
     }
-    h2.mainTitle + div{
+    /*h2.mainTitle + div{
         display: block !important;
-    }
+    }*/
     #casesHeared.pageCases,
     .pageCases .positionActivityIcon {
         height: 50px !important;

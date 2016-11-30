@@ -32,7 +32,12 @@
         step4Delay = Model.step4_delay;
         step5Delay = Model.step5_delay;
         @Html.HiddenFor(model => model.id, new { @class = "companyIdHidden" })
-        <div id="casesHeared">
+
+        <!--casesHeared-->
+            int active = 5;
+
+        @Html.Partial("~/Views/Settings/partial/casesHeared.cshtml", active)
+        @*<div id="casesHeared">
             <div id="menu">
                 <h2 class="mainTitle">@GlobalRes.Menu:</h2>
                 <div>
@@ -43,7 +48,10 @@
                     <a class="caseesTab active">@GlobalRes.CaseManagementDeadlines</a>
                 </div>
             </div>
-        </div><!--casesHeared-->
+        </div>*@
+    
+        
+        <!--casesHeared-->
         <div class="caseWorkflowPosition">
 
             <div class="caseFlow">
