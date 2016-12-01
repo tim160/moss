@@ -2065,12 +2065,12 @@ namespace EC.Models
                 }
                 catch (Exception ex)
                 {
-                    return GlobalRes.ErrorSavingLoginPass;
+                    return "Cannot update password " + ex.ToString();// GlobalRes.ErrorSavingLoginPass;
                 }
             }
             else
             {
-                return GlobalRes.ErrorSavingLoginPass;
+                return "Cannot update your password "; // GlobalRes.ErrorSavingLoginPass;
             }
         }
     }
