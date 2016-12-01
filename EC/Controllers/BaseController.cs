@@ -65,7 +65,7 @@ namespace EC.Controllers
         {
             HttpContextBase httpContext = new HttpContextWrapper(HttpContext.ApplicationInstance.Context);
             httpContext.Response.Cookies.Remove(Constants.AuthUserCookies);
-            return RedirectToAction("Index", "Index");
+            return RedirectToAction("Start", "Index");
         }
 	}
 }
