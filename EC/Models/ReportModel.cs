@@ -1436,23 +1436,32 @@ namespace EC.Models
         public report_non_mediator_involved AddReportNonMediatorInvolved(report_non_mediator_involved item, report currentReport)
         {
             item.report = currentReport;
+            using (ECEntities adv = new ECEntities())
+            {
+                adv.report_non_mediator_involved.Add(item);
+                adv.SaveChanges();
+            }
 
-            db.report_non_mediator_involved.Add(item);
-            db.SaveChanges();
             return item;
         }
 
         public management_know AddManagementKnow(management_know item)
         {
-            db.management_know.Add(item);
-            db.SaveChanges();
+            using (ECEntities adv = new ECEntities())
+            {
+                adv.management_know.Add(item);
+                adv.SaveChanges();
+            }
             return item;
         }
 
         public report_department AddReportDepartment(report_department item)
         {
-            db.report_department.Add(item);
-            db.SaveChanges();
+            using (ECEntities adv = new ECEntities())
+            {
+                adv.report_department.Add(item);
+                adv.SaveChanges();
+            }
             return item;
         }
 
@@ -2046,15 +2055,23 @@ namespace EC.Models
                     string result = GlobalFunctions.IsValidPass(password);
                     if (result.ToLower() == "success")
                     {
+
                         user user = db.user.FirstOrDefault(item => (item.id == userId));
                         if(user != null)
                         {
-                            user.password = password;
-                            user.last_update_dt = DateTime.Now;
-                            db.user.AddOrUpdate(user);
-                            db.SaveChanges();
+                            using (ECEntities adv = new ECEntities())
+                            {
+                                user.password = password;
+                                user.last_update_dt = DateTime.Now;
+                                adv.user.AddOrUpdate(user);
+                                adv.SaveChanges();
+
+                              //  db.user.AddOrUpdate(user);
+                              //  db.SaveChanges();
+                            }
                             return result;
-                        } else
+                        }
+                        else
                         {
                             return GlobalRes.NoUserFound;
                         }
