@@ -106,6 +106,9 @@
     text-decoration: none;
     color: #3c3e3f;
 }
+.myMessages.oldMessage .textMessage p.text a {
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+}
 /**/
 
 /*================= START MEDIA ========*/
