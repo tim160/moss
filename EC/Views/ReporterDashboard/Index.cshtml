@@ -88,6 +88,8 @@
                                 <div class="titleReport">@GlobalRes.ReportingFrom:</div>
                                 <div class="reportText">@rm._country_string</div>
                             </div>
+
+
                             <div class="report">
                                 <div class="titleReport">@GlobalRes.ConfidentialityLevel:</div>
                                 <div class="reportText">@rm._anonymousLevel_reporterVersion</div>
@@ -97,7 +99,19 @@
                             @if ((rm._report.incident_anonymity_id == 2 || rm._report.incident_anonymity_id == 3))
                             {
                                 <div class="report">
-                                    <div class="titleReport">@GlobalRes.Name:</div>
+                                    <div class="titleReport">
+                                        @GlobalRes.Name
+                                        @if (rm._report.incident_anonymity_id != 2)
+                                        {
+                                            <text>:</text>
+                                        }
+                                        
+                                        @if (rm._report.incident_anonymity_id == 2)
+                                        {
+                                            @GlobalRes.forEmployeeConfidentialOnly
+                                            <text>:</text>
+                                        }
+                                    </div>
                                     <div class="reportText">
                                         @rm._reporter_name
                                     </div>
