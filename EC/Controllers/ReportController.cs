@@ -19,14 +19,26 @@ namespace EC.Controllers
 {
     public class ReportController : BaseController
     {
+      //  UserModel userModel = new UserModel();
+    //    CompanyModel companyModel = new CompanyModel();
+     //   ReportModel reportModel = new ReportModel();
+
         private readonly UserModel userModel = UserModel.inst;
         private readonly CompanyModel companyModel = CompanyModel.inst;
         private readonly ReportModel reportModel = ReportModel.inst;
+      
         //
         // GET: /Report/
         [HttpGet]
         public ActionResult New(string companyCode)
         {
+        ///    private readonly UserModel userModel = UserModel.inst;
+        ///    
+
+        ///    reportModel = new ReportModel();
+       ///     userModel = new UserModel();
+         ////   companyModel = new CompanyModel();
+
             int id = 0;
             if (companyCode != null)
             {
