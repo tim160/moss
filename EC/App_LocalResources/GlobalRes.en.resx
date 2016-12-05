@@ -574,7 +574,7 @@
     <value>Case workflow</value>
   </data>
   <data name="CompanyMediators" xml:space="preserve">
-    <value>Company Case Administrators</value>
+    <value>Company Administrators</value>
   </data>
   <data name="CompanyMediatorsSettings" xml:space="preserve">
     <value>Company Case Administrator Settings</value>
@@ -1379,7 +1379,7 @@
     <value>Department</value>
   </data>
   <data name="CaseManagementDeadlines" xml:space="preserve">
-    <value>Case Management Deadlines</value>
+    <value>Case Deadlines</value>
   </data>
   <data name="Escalationstage" xml:space="preserve">
     <value>Escalation stage</value>
