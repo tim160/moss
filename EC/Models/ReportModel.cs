@@ -1411,10 +1411,10 @@ namespace EC.Models
                 foreach (var item in mediators)
                 {
                     AddReportNonMediatorInvolved(item, currentReport);
-                   
                 }
 
                 int t2 = db.SaveChanges();
+
                 return currentReport;
             }
             catch (DbEntityValidationException e)
@@ -1435,7 +1435,7 @@ namespace EC.Models
         }
         public report_non_mediator_involved AddReportNonMediatorInvolved(report_non_mediator_involved item, report currentReport)
         {
-            item.report = currentReport;
+            item.report_id = currentReport.id;
             using (ECEntities adv = new ECEntities())
             {
                 adv.report_non_mediator_involved.Add(item);
