@@ -891,6 +891,7 @@
                 $("textarea[name=locationOfIncidentInput]").on('change', function (event) {
                     if (event.currentTarget.value.length >= 2) {
                         $(".dropdown.selectBlock").removeClass('vlError');
+                        $(".locationsOfIncident.selectBlock").removeClass('validate');
                         $(".locationsOfIncident.selectBlock").addClass('vlCorrect');
                         $(".selectBlock.location").addClass('vlCorrect');
                     }
