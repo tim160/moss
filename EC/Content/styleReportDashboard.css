@@ -1555,26 +1555,6 @@ h2.mainTitle {
 .blockSection label.completeStage input::-webkit-outer-spin-button {
     -webkit-appearance: none;
 }
-/*.blockSection label.startEscalation span.day {
-  color: #3c3e3f;
-	font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
-  font-size: 18px;
-  background-color: #fff;
-  border: 1px solid #ee613f;
-  padding-left: 15px;
-  padding-bottom: 8px;
-  padding-top: 5px;
-  padding-right: 15px;
-  line-height: 18px;
-}
-.blockSection label.startEscalation span.day::before {
-  content: '';
-  position: absolute;
-  margin-left: -5px;
-  top: -28px;
-  border: 10px solid transparent;
-  border-bottom: 10px solid #ee613f;
-}*/
 .blockSection label.startEscalation span.text::before {
     content: '';
     position: absolute;
@@ -1595,11 +1575,9 @@ h2.mainTitle {
     content: '';
     position: absolute;
 }
-
 .caseesTab.active::after {
     bottom: -12px;
 }
-
 
 .headerCaseWorkflow .contentSettings{
     padding-bottom: 0px;
@@ -1639,23 +1617,6 @@ p.headerText span {
     margin-right: 0%;
     width: 20%;
 }
-/*.blockLineHeader.first {
-  width: 7%;
-}
-.blockLineHeader.second {
-  width: 37%;
-}
-.blockLineHeader.third {
-  width: 30%;
-}
-.blockLineHeader.fourth {
-  width: 23%;
-}
-
-.blockLineHeader.fifth {
-  width: 23%;
-  margin-right: 0%;
-}*/
 
 .blockLineHeader label {
     position: absolute;
@@ -2131,6 +2092,18 @@ p.helloUser {
     background: #e5ebeb;
 }
 /*---------------------- End New Company ---------------------------*/
+ .blockPersonalSettings .pass {
+            font-family: OpenSansSemibold;
+            color: #3c3e3f;
+            font-size: 18px;
+            padding-top: 30px;
+            padding-left: 38px;
+            padding-bottom: 30px;
+            padding-right: 3%;
+            width: 92%;
+            outline: none;
+            border: none;
+        }
 
 /*=============================START MEDIA======================*/
 /*----------------------Start My Profile ----------------------*/
@@ -2173,10 +2146,10 @@ p.helloUser {
 
 }
 @media (max-width: 970px) {
-    .blockSettings .caseesTab {
+    /*.blockSettings .caseesTab {
         width: 99px;
         margin-right: 40px;
-    }
+    }*/
     #casesHeared,
     .positionActivityIcon {
         /*height: 89px;*/

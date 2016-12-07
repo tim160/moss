@@ -1,27 +1,40 @@
 ﻿@using EC.App_LocalResources;
-<style>
-    .dispFlex {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
-    }
-</style>
 @*active*@
 @{ 
     int temp = Model;
 }
+<div class="dispFlex">
+    <table>
+        <tr>
+            <td>
+                <a href="/Settings/Index" class="caseesTab">@GlobalRes.MyProfile</a>
+                <div class="divCasesTabActive @(temp == 1 ? "active":"")">
+                </div>
+            </td>
+            <td>
+                <a href="/Settings/Password" class="caseesTab">@GlobalRes.Password</a>
+                <div class="divCasesTabActive @(temp == 2 ? "active":"")">
+                </div>
+            </td>
+            <td>
+                <a href="/Settings/Company" class="caseesTab">@GlobalRes.CompanyProfile</a>
+                <div class="divCasesTabActive @(temp == 3 ? "active":"")">
+                </div>
+            </td>
+            <td>
+                <a href="/Settings/Mediators" class="caseesTab">@GlobalRes.CompanyMediators</a>
+                <div class="divCasesTabActive @(temp == 4 ? "active":"")">
+                </div>
+            </td>
+            <td>
+                <a href="/Settings/Cases" class="caseesTab">@GlobalRes.CaseManagementDeadlines</a>
+                <div class="divCasesTabActive @(temp == 5 ? "active":"")">
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
 
-@*  *@
-<div id="casesHeared">
-        <div id="menu">
-            <h2 class="mainTitle">@GlobalRes.Menu:</h2>
-            <div class="dispFlex">
-                <a href="/Settings/Index" class="caseesTab @(temp == 1 ? "active":"") ">@GlobalRes.MyProfile</a>
-                <a href="/Settings/Password" class="caseesTab @(temp == 2 ? "active":"")">@GlobalRes.Password</a>
-                <a href="/Settings/Company" class="caseesTab @(temp == 3 ? "active":"")">@GlobalRes.CompanyProfile</a>
-                <a href="/Settings/Mediators" class="caseesTab @(temp == 4 ? "active":"")">@GlobalRes.CompanyMediators</a>
-                <a href="/Settings/Cases" class="caseesTab @(temp == 5 ? "active":"")">@GlobalRes.CaseManagementDeadlines</a>
-            </div>
-        </div>
-    </div><!--casesHeared-->
+    <!--casesHeared-->
+
+
