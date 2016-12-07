@@ -241,6 +241,9 @@ ul {
 }
 
 /*menu*/
+    .caseesTab1{
+        padding: 14px 34px;
+    }
     .dispFlex {
             font-size: 20px;
             cursor: default;
@@ -248,9 +251,7 @@ ul {
             background-color: #ABB9BB;
             position:relative;
         }
-        .caseesTab {
-            padding: 14px 34px;
-        }
+
         .forBefore {
             position: relative;
         }
@@ -279,6 +280,18 @@ ul {
             color: #d7dbdb;
         }
 
+        .caseesTab {
+    color: rgb(215, 219, 219);
+    display: inline-block;
+    margin-right: 20px;
+    /*width: 170px;*/
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    padding-left: 3%;
+    padding-right: 0%;
+}
 .caseesTab:hover{
     color: white;
 }
