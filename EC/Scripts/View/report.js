@@ -886,6 +886,16 @@
         $('.dropdown').on('change', function (event) {
             if ($('.dropdown .locationsOfIncident').val() == "Not listed") {
                 $('.otherLocation').show();
+                $(".selectBlock.location").removeClass('vlCorrect');
+                $(".locationsOfIncident.selectBlock").removeClass('vlCorrect');
+                $("textarea[name=locationOfIncidentInput]").on('change', function (event) {
+                    if (event.currentTarget.value.length >= 2) {
+                        $(".dropdown.selectBlock").removeClass('vlError');
+                        $(".locationsOfIncident.selectBlock").addClass('vlCorrect');
+                        $(".selectBlock.location").addClass('vlCorrect');
+                    }
+                });
+                
             }
             else {
                 $('.otherLocation').hide();
