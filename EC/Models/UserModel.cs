@@ -658,7 +658,7 @@ namespace EC.Models
                 if ((_user.role_id == 4) || (_user.role_id == 5) || (_user.role_id == 6) || (_user.role_id == 7))
                     all_task_ids = UserTasks(status_id, null, is_user_only).Where(x => x.created_by != _user.id).Select(t => t.id).ToList();
 
-                read_task_ids = (db.task_user_read.Where(item => (all_task_ids.Contains(item.task_id) && (item.user_id == ID))).Select(item => item.id)).ToList();
+                read_task_ids = (db.task_user_read.Where(item => (all_task_ids.Contains(item.task_id) && (item.user_id == ID))).Select(item => item.task_id)).ToList();
 
                 //all_message_ids
                 //   unread_message_ids = all_message_ids.Except(read_message_ids);
