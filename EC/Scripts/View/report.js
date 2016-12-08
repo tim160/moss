@@ -368,20 +368,27 @@
 
                                 var witnessPersone = $('.witnessPersone');
                                 $('.partiesInvolvedBlock').empty();
-                                witnessPersone.each(function () {
-                                    if ($(this).parent().hasClass('addPersonContainer')) {
+                                witnessPersone.each(function (indx, element) {
+                                    var temp = $(element); i
+                                    var fname = temp.find('.fName').val();
+                                    var lName = temp.find('.lName').val();
+                                    var witnessRole = temp.find('.witnessRole').val();
+                                    var witnessTitle = temp.find('.witnessTitle').val();
+
+                                    if (temp.parent().hasClass('addPersonContainer')
+                                        && fname != "" && lName != "" && witnessRole != "" && witnessTitle != "") {
                                         $('.partiesInvolvedBlock')
                                             .append("<div class='FirstLastNames'>" +
-                                            $(this).find('.fName').val() + '&nbsp;' +
-                                            $(this).find('.lName').val() + "</div>");
+                                            temp.find('.fName').val() + '&nbsp;' +
+                                            temp.find('.lName').val() + "</div>");
 
                                         $('.partiesInvolvedBlock')
                                             .append("<div class='titleReport'>" +
-                                            $(this).find('.witnessTitle').val() + "</div>");
+                                            temp.find('.witnessTitle').val() + "</div>");
 
                                         $('.partiesInvolvedBlock')
                                             .append("<div class='reportText'>" +
-                                            $(this).find('.witnessRole').val() + "</div>");
+                                            temp.find('.witnessRole').val() + "</div>");
                                     }
                                 });
 
