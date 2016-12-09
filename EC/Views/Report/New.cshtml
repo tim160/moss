@@ -833,7 +833,7 @@
         <div id="addPersonTmpl">
 
             <div id="persone" class="witnessPersone witnessPersone@{@class_ext}">
-                <div class="addPersonName">
+                <div class="addPersonName sampleContainer">
                     <div class="personTitle title">@GlobalRes.FirstNameUp</div>
                     <div class="personData">
                         <input name="personName[NUM]"
@@ -841,7 +841,7 @@
                     </div>
                 </div>
 
-                <div class="addPersonName">
+                <div class="addPersonName sampleContainer">
                     <div class="personTitle title">@GlobalRes.LastNameUp</div>
                     <div class="personData">
                         <input name="personLastName[NUM]"
@@ -849,14 +849,14 @@
                     </div>
                 </div>
 
-                <div class="addPersonInfo">
+                <div class="addPersonInfo sampleContainer">
                     <div class="personTitle title">@GlobalRes.Title</div>
                     <div class="personData">
                         <input type="text" name="personTitle[NUM]"
                                class="personDataTextBox witnessTitle" />
                     </div>
                 </div>
-                <div class="addPersonInfo">
+                <div class="addPersonInfo sampleContainer">
                     <div class="personTitle title">
                         @GlobalRes.Role 
                         <div class="help" title="" onclick="">
@@ -888,26 +888,3 @@
 
     </div>
 </form>
-
-
-<script type="text/javascript">
-    //$(document).ready(function () {
-    //        $(".button.nextSepButton").on('click', function(){
-    //            window.scrollTo(0, 0);
-    //        });
-    //        $(document).tooltip({
-    //            position: {
-    //                my: "center bottom-20",
-    //                at: "center top",
-    //                using: function (position, feedback) {
-    //                    $(this).css(position);
-    //                    $('<div id="specHover">')
-    //                      .addClass("arrowCustom")
-    //                      .addClass(feedback.vertical)
-    //                      .addClass(feedback.horizontal)
-    //                      .appendTo(this);
-    //                }
-    //            }
-    //        });
-    //});
-</script>

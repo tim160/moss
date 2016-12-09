@@ -546,7 +546,21 @@
             });
         }
         function validateTab(tab) {
-
+            var containerWithness = $(".addPersonContainer");
+            if (containerWithness.find('.witnessPersone').length != 0) {
+                containerWithness.find('.sampleContainer').each(function(indx, element){
+                    element = $(element);
+                    if (element.find('input').val() == "") {
+                        element.addClass('vlError');
+                        element.on('change', function (event) {
+                            var event = $(event.currentTarget);
+                            if (event.find('input').val() != "") {
+                                event.removeClass('vlError');
+                            }
+                        });
+                    }
+                });
+            }
             addErrors(tab);
             $('.tab').each(function () {
                 if ($(this).find('.vlError').length > 0) {
@@ -581,6 +595,7 @@
 
         });
         cInformationBtn.click(function () {
+            //need to add validation custom
             if (validateTab(passiveCircle) == true) {
                 stepChecked(1);
                 cInformationBtn.addClass('active');
