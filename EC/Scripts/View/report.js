@@ -759,6 +759,10 @@
         //    $("#personeAgain .spec.position").css({ "left": -220 });
         //}
         //$("#persone .spec.position").css({ "width": wid - 365 });
+
+        $(".addFileButton").on('onclick', function (event) {
+            $("#attachments").click();
+        });
         caseInformationReport.on('change', function () {
             if ($("input:radio[name=whatHappened]:checked").val() == 'Other') {
                 $('.reportAbout').addClass('validate');

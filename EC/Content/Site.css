@@ -548,7 +548,8 @@ span.button {
 .file_upload > input {
     width:1px;
     height: 1px;
-    opacity:0;
+    /*opacity:0;*/
+    overflow: hidden;
 }
 
 .assignedTitle {
