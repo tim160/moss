@@ -46,6 +46,11 @@
     <Compile Include="CaseStatusConstants.cs" />
     <Compile Include="CollectionConstants.cs" />
     <Compile Include="CookieConstants.cs" />
+    <Compile Include="ECActionConstants.cs" />
+    <Compile Include="ECGlobalConstants.cs" />
+    <Compile Include="ECLanguageConstants.cs" />
+    <Compile Include="ECLevelConstants.cs" />
+    <Compile Include="ECSessionConstants.cs" />
     <Compile Include="EncryptionConstants.cs" />
     <Compile Include="FileConstants.cs" />
     <Compile Include="GlobalActivity.cs" />
@@ -80,6 +85,12 @@
     <Compile Include="UserIdConstants.cs" />
     <Compile Include="UserLevelConstants.cs" />
     <Compile Include="WCFHeaderConstants.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Localization\EC.Localization.csproj">
+      <Project>{2403521e-4e55-43c3-a91c-2d4454488003}</Project>
+      <Name>EC.Localization</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -36,7 +36,7 @@ namespace EC.Framework.Email
         }
     }
 
-
+    // notification: id, subject, text, receiver(s), cc, bcc, is_processed, created_dt, 
     public class MailWrapper
     {
  ////       private static readonly ICustomLog m_Log =
