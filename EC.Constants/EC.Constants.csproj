@@ -86,6 +86,12 @@
     <Compile Include="UserLevelConstants.cs" />
     <Compile Include="WCFHeaderConstants.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Localization\EC.Localization.csproj">
+      <Project>{2403521e-4e55-43c3-a91c-2d4454488003}</Project>
+      <Name>EC.Localization</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
