@@ -560,13 +560,26 @@ li a:hover {
     width: 66%;
     font-weight: 400;
 }
+.titleIncPosition {
+    margin: 0 auto;
+    padding-right: 40px;
+}
 
 .secondMenu {
-    display: table;
+        display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items:center;
+    height: 110px;
     width: 100%;
     border-bottom: 2px solid #EEEEEE;
     box-shadow: 0 0 1px #FAFAFA;
     padding-bottom: 0px;
+    /*display: table;*/
+    /*width: 100%;
+    border-bottom: 2px solid #EEEEEE;
+    box-shadow: 0 0 1px #FAFAFA;
+    padding-bottom: 0px;*/
 }
 
 span.logButton, span.repButton {
@@ -608,8 +621,8 @@ span.logButton, span.repButton {
     color: #fff;
 }
 .secondMenu img {
-    width: 240px;
-    height: 110px;
+    /*width: 240px;
+    height: 110px;*/
     float: left;
 }
 
