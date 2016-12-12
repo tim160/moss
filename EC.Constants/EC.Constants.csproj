@@ -46,6 +46,11 @@
     <Compile Include="CaseStatusConstants.cs" />
     <Compile Include="CollectionConstants.cs" />
     <Compile Include="CookieConstants.cs" />
+    <Compile Include="ECActionConstants.cs" />
+    <Compile Include="ECGlobalConstants.cs" />
+    <Compile Include="ECLanguageConstants.cs" />
+    <Compile Include="ECLevelConstants.cs" />
+    <Compile Include="ECSessionConstants.cs" />
     <Compile Include="EncryptionConstants.cs" />
     <Compile Include="FileConstants.cs" />
     <Compile Include="GlobalActivity.cs" />
