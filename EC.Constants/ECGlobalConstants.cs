@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EC.Localization;
+using System.Runtime.Serialization;
 
 namespace EC.Constants
 {
@@ -37,7 +38,19 @@ namespace EC.Constants
         public const int anonymity_Anonymous = 1;
         public const int anonymity_Anonymous_to_company_only = 2;
         public const int anonymity_Shared_info = 3;
-        public const string[] AnonymousArray = { Localization.Resources.GetString("Anonymous"), Localization.Resources.GetString("ConfidentialToZero"), Localization.Resources.GetString("ContactInfoShared") };
+  //      public string[] AnonymousArray = { Localization.Resources.GetString("Anonymous"), Localization.Resources.GetString("ConfidentialToZero"), Localization.Resources.GetString("ContactInfoShared") };
+
+     /*   public enum AnonymousArray
+        {
+            [EnumMember]
+            Anonymous = Localization.Resources.GetString("Anonymous"),
+
+            [EnumMember]
+            ConfidentialToZero = Localization.Resources.GetString("ConfidentialToZero"),
+
+            [EnumMember]
+            ContactInfoShared = Localization.Resources.GetString("ContactInfoShared")
+        }*/
 
     }
 }
