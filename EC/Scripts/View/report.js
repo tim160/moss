@@ -1,5 +1,4 @@
 ﻿$(document).ready(function () {
-    //$("#describeHappened").val("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, ")
     $(".contentBlock").focus(function (event) {
         var temp = $(event.currentTarget);
         if (temp.parents('.rightBlock').hasClass('rightBlock_cc')) {
@@ -283,16 +282,7 @@
             cInformationBtn.removeClass('active');
             cSummaryBtn.removeClass('active');
         }
-        /*
-        generalInfo.find('.validate').change(function () {
-            var button = generalInfo.find('.nextSepButton.tabOption.pInvolved');//эта кнопка для перехода на следующую вкладку
-            if (vl.check(generalInfo)) {
-                button.addClass('active');
-            } else {
-                button.removeClass('active');
-            }
-        });
-        */
+
         function menuItemClicked(id) {
             id = '' + id;
             verticalMenu.each(function () {
@@ -580,6 +570,7 @@
                 menuItemClicked(parseInt(tab.attr('data-id')) + 1);
                 setOpacity();
             }
+            window.scrollTo(0, 0);
         }
 
         pInvolvedBtn.click(function () {
@@ -640,6 +631,8 @@
         var managementKnow = passiveCircle.find('input:radio[name="managementKnow"]');
         var isReportRefered = passiveCircle.find('input:radio[name="isReportRefered"]');
 
+        
+
         managementKnow.on('change', function () {
             if ($("input:radio[name=managementKnow]:checked").val() == 'Yes' || $("input:radio[name=managementKnow]:checked").val() == 'Do not want to involve') {
                 $('.managementIsKnown').addClass('validate');
@@ -656,13 +649,10 @@
         isReportRefered.on('change', function () {
             if ($("input:radio[name=isReportRefered]:checked").val() != 'No') {
                 $('.isReportedOutside').addClass('validate');
-                //$('.contentBlock.reportReferedExplain').show();
-                //$('.contentBlock.reportReferedExplain').find('textarea').focus();
             }
             else {
                 $('.isReportedOutside').removeClass('validate');
                 $('.isReportedOutside').removeClass('vlError');
-                //$('.contentBlock.reportReferedExplain').hide();
             }
         });
 
@@ -703,23 +693,6 @@
 
             cm.setInput(personNum, num);
             var wid = $($(".contentBlock")[0]).width();
-
-            //$("#persone .spec.position").each(function (indx, element) {
-            //    $(element).css({ "width": wid });
-            //});
-            //var inputs = $(addPersonContainer.find('input'));
-            //inputs.on('change', function (event) {
-            //    var temp = $(event.currentTarget);
-            //    if (temp.parent().hasClass("change") == false) {
-            //        temp.parent().addClass("change");
-            //        var counterPerson = temp.parent("#persone").attr("data-personCounter");
-            //        counterPerson++;
-            //        temp.parent("#persone").attr("data-personCounter", counterPerson);
-            //        if (counterPerson == 3) {
-            //            passiveCircle.find('.display.button').css({ "border-color": "#AEB5B7", "color": "#AEB5B7", "background": "transparent" });
-            //        }
-            //    }
-            //});
         });
         passiveCircle.find('input.validate').change(function () {
             if (vl.check(passiveCircle)) {
@@ -751,15 +724,6 @@
         cmp.OptionSelect(caseInformationReport);
         cmp.OptionSelect(incidentResultReport);
         cmp.OptionSelect(isAccidentOngoing);
-        //var wid = $($(".contentBlock")[0]).width();
-
- 
-        //$("#personeAgain .spec.position").css({ "width": wid - 150 });
-        //if (wid < 870) {
-        //    $("#personeAgain .spec.position").css({ "left": -220 });
-        //}
-        //$("#persone .spec.position").css({ "width": wid - 365 });
-
         $(".addFileButton").on('onclick', function (event) {
             $("#attachments").click();
         });
@@ -983,7 +947,6 @@
     document.querySelector('#attachments').onchange = function (event) {
         attachmentsFiles = this.files;
         $('.attach').append("<table class='attachedFilesTitle' style='color: #3c3e3f;font-size: 14px;'><tr><th><img src=/Content/Icons/generic-file.png></th> <th>" + this.files[0].name + "</th></tr></table>");
-        //$('.attach').append("<div><img src=/Content/Icons/generic-file.png>" + this.files[0].name + "</div>");
     }
 
     function setDropdown() {
@@ -1043,17 +1006,9 @@
             url: "/Report/GetAnon",
             data: { company_id: company_id, country_id: country_id }
         }).done(function (data) {//data from server
-
-
-            //     console.log(data);
-            //     console.log(data.length);
-
             return data;
             if (data != '') {
-                //  window.location.href = data;
             }
-            //   else
-            //   $('input[name=password]').val() = '';
         }).fail(function (error) {
             console.log(error);
         });
@@ -1089,83 +1044,3 @@
 
     setDefaultVaues();
 });
-/*function for hovers*/
-//$(function () {
-//    $(document).tooltip({
-//        hide: {
-//            effect: "slideDown",
-//            delay: 20000
-//        }
-//    });
-//});
-
-
-
-//$(function () {
-//    var targets = $('[rel~=tooltip]'),
-//    target = false,
-//    tooltip = false,
-//    title = false;
-
-//    targets.bind('mouseenter', function () {
-//        target = $(this);
-//        tip = target.attr('title');
-//        tooltip = $('<div id="tooltip"></div>');
-
-//        if (!tip || tip == '')
-//            return false;
-
-//        target.removeAttr('title');
-//        tooltip.css('opacity', 0)
-//        .html(tip)
-//        .appendTo('body');
-
-//        var init_tooltip = function () {
-//            if ($(window).width() < tooltip.outerWidth() * 1.5)
-//                tooltip.css('max-width', $(window).width() / 2);
-//            else
-//                tooltip.css('max-width', 340);
-
-//            var pos_left = target.offset().left + (target.outerWidth() / 2) - (tooltip.outerWidth() / 2),
-//            pos_top = target.offset().top - tooltip.outerHeight() - 20;
-
-//            if (pos_left < 0) {
-//                pos_left = target.offset().left + target.outerWidth() / 2 - 20;
-//                tooltip.addClass('left');
-//            }
-//            else
-//                tooltip.removeClass('left');
-
-//            if (pos_left + tooltip.outerWidth() > $(window).width()) {
-//                pos_left = target.offset().left - tooltip.outerWidth() + target.outerWidth() / 2 + 20;
-//                tooltip.addClass('right');
-//            }
-//            else
-//                tooltip.removeClass('right');
-
-//            if (pos_top < 0) {
-//                var pos_top = target.offset().top + target.outerHeight();
-//                tooltip.addClass('top');
-//            }
-//            else
-//                tooltip.removeClass('top');
-
-//            tooltip.css({ left: pos_left, top: pos_top })
-//            .animate({ top: '+=10', opacity: 1 }, 50);
-//        };
-
-//        init_tooltip();
-//        $(window).resize(init_tooltip);
-
-//        var remove_tooltip = function () {
-//            tooltip.animate({ top: '-=10', opacity: 0 }, 50, function () {
-//                $(this).remove();
-//            });
-
-//            target.attr('title', tip);
-//        };
-
-//        target.bind('mouseleave', remove_tooltip);
-//        tooltip.bind('click', remove_tooltip);
-//    });
-//});

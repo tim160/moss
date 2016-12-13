@@ -624,6 +624,7 @@ span.logButton, span.repButton {
     /*width: 240px;
     height: 110px;*/
     float: left;
+    margin-left: 10px;
 }
 
 span.logButton:hover, span.repButton:hover {
