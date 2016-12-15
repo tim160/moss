@@ -3344,4 +3344,13 @@
   <data name="Holiday_Date" xml:space="preserve">
     <value>Holiday Date</value>
   </data>
+  <data name="Anonymous" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ConfidentialToZero" xml:space="preserve">
+    <value>Confidential to {0}</value>
+  </data>
+  <data name="ContactInfoShared" xml:space="preserve">
+    <value>Contact info shared</value>
+  </data>
 </root>

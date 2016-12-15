@@ -7,7 +7,7 @@ using EC.App_LocalResources;
 using EC.Models.App;
 using EC.Core.Common;
 using EC.Common.Interfaces;
-using EC.Core.Common;
+
 
 namespace EC.Models.ViewModel
 {

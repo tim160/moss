@@ -55,6 +55,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EC.Core.Common", "EC.Core.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EC.Common.Interfaces", "EC.Common.Interfaces\EC.Common.Interfaces.csproj", "{1B096EDD-7575-4BBB-A93B-DEB482ACFBCD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServicesExternal", "ServicesExternal", "{F1E0D3DD-D579-4C0A-ABE6-0E657BA2252F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServicesExternalEmail", "ServicesExternalEmail\ServicesExternalEmail.csproj", "{246DAF23-7233-4619-AEC6-ED96E253690D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -145,6 +149,10 @@ Global
 		{1B096EDD-7575-4BBB-A93B-DEB482ACFBCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B096EDD-7575-4BBB-A93B-DEB482ACFBCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B096EDD-7575-4BBB-A93B-DEB482ACFBCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{246DAF23-7233-4619-AEC6-ED96E253690D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{246DAF23-7233-4619-AEC6-ED96E253690D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{246DAF23-7233-4619-AEC6-ED96E253690D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{246DAF23-7233-4619-AEC6-ED96E253690D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -169,5 +177,6 @@ Global
 		{FF040D47-BD8A-4C3C-A285-0D6F2F11754C} = {42ECF568-8D1E-4669-9397-20004471C326}
 		{A6DC770D-89C5-483B-B73C-077DF5C7FEFE} = {84C380E9-D3D8-4D73-8DE1-AB174DEEF72D}
 		{1B096EDD-7575-4BBB-A93B-DEB482ACFBCD} = {84C380E9-D3D8-4D73-8DE1-AB174DEEF72D}
+		{246DAF23-7233-4619-AEC6-ED96E253690D} = {F1E0D3DD-D579-4C0A-ABE6-0E657BA2252F}
 	EndGlobalSection
 EndGlobal
