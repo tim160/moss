@@ -21,6 +21,10 @@ namespace ServicesExternalEmail
         {
             InitializeComponent();
             EmailProcess ep = new EmailProcess();
+
+            if(ConfigurationSettings.AppSettings["GDfromAddress"] == "1")
+                ep.Initialize_GD();
+
             ep.CheckEmails();
         }
 
@@ -88,22 +92,18 @@ namespace ServicesExternalEmail
             }
             #endregion
 
-            public void CheckEmails()
+            internal void Initialize_GD()
             {
 
-                m_FromAddress = ConfigurationSettings.AppSettings["fromAddress"];
-                SmtpClient smtpClient = new SmtpClient(ConfigurationSettings.AppSettings["smtpClient"]);
+                m_FromAddress = ConfigurationSettings.AppSettings["GDfromAddress"];
+                SmtpClient smtpClient = new SmtpClient(ConfigurationSettings.AppSettings["GDsmtpClient"]);
 
                 // smtpClient.Credentials = new System.Net.NetworkCredential("test@voteplayers.com", "123456");
                 //  smtpClient.Send(mailMessage);
-                m_Server = ConfigurationSettings.AppSettings["server"];
-                m_Username = ConfigurationSettings.AppSettings["username"];
-                m_Password = ConfigurationSettings.AppSettings["password"];
-                m_Port = Convert.ToInt16(ConfigurationSettings.AppSettings["port"]);
-
-
-
-
+                m_Server = ConfigurationSettings.AppSettings["GDserver"];
+                m_Username = ConfigurationSettings.AppSettings["GDusername"];
+                m_Password = ConfigurationSettings.AppSettings["GDpassword"];
+                m_Port = Convert.ToInt16(ConfigurationSettings.AppSettings["GDport"]);
 
                 /*
                 m_FromAddress = "employeeconfidential@employeeconfidential.com";
@@ -115,6 +115,9 @@ namespace ServicesExternalEmail
                 m_Username = "employeeconfidential@employeeconfidential.com";
                 m_Password = "confidentialConfidential1$3";
                 m_Port = 25;*/
+            }
+            public void CheckEmails()
+            {
 
                 /*     ////   using EC.Models.Database;
 
