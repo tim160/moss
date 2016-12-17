@@ -15,7 +15,7 @@
     <AssemblyName>EC</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44392</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -375,7 +375,9 @@
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\login.css" />
     <Content Include="Content\main.css" />
-    <Content Include="Content\MainStyle.css" />
+    <Content Include="Content\MainStyle.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\reportCss.css" />
     <Content Include="Content\reportDashboard.css" />
     <Content Include="Content\Site.css" />
@@ -459,6 +461,7 @@
     <Content Include="Scripts\View\newIndex.js" />
     <Content Include="Scripts\View\report.js" />
     <Content Include="Scripts\View\reportSummary.js" />
+    <Content Include="Scripts\View\Settings.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />
     <Content Include="Scripts\WebForms\Focus.js" />
     <Content Include="Scripts\WebForms\GridView.js" />
@@ -572,6 +575,7 @@
     <Content Include="Views\Index\Start.cshtml" />
     <Content Include="Views\Settings\WorkFlow.cshtml" />
     <Content Include="Views\Case\PartialView\GreenBarCaseResolutionRequest.cshtml" />
+    <Content Include="Views\Settings\partial\casesHeared.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

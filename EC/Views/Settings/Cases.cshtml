@@ -34,26 +34,12 @@
         @Html.HiddenFor(model => model.id, new { @class = "companyIdHidden" })
 
         <!--casesHeared-->
-            int active = 5;
-
+        int active = 5;
         @Html.Partial("~/Views/Settings/partial/casesHeared.cshtml", active)
-        @*<div id="casesHeared">
-            <div id="menu">
-                <h2 class="mainTitle">@GlobalRes.Menu:</h2>
-                <div>
-                    <a href="/Settings/Index" class="caseesTab">@GlobalRes.MyProfile</a>
-                    <a href="/Settings/Password" class="caseesTab">@GlobalRes.Password</a>
-                    <a href="/Settings/Company" class="caseesTab">@GlobalRes.CompanyProfile</a>
-                    <a href="/Settings/Mediators" class="caseesTab">@GlobalRes.CompanyMediators</a>
-                    <a class="caseesTab active">@GlobalRes.CaseManagementDeadlines</a>
-                </div>
-            </div>
-        </div>*@
-    
-        
         <!--casesHeared-->
-        <div class="caseWorkflowPosition">
 
+
+        <div class="caseWorkflowPosition">
             <div class="caseFlow">
                 <div class="caseFlowTop">
                     <div class="caseFlowTopContent">
@@ -138,67 +124,3 @@
         </div>
     }
 </div>
-
-<script>
-    $(document).ready(function () {
-        updateTOTALTIMEONCASE();
-        var isValidMed = "@is_valid_mediator";
-        if(isValidMed != "False") {
-            $(".show").on('click', function (event) {
-                var clickedDrop = $(event.currentTarget);
-                var dropDownList = clickedDrop.siblings('.hide');
-                clickedDrop.addClass('activeDropDown');
-                dropDownList.addClass('activeDropDown');
-                dropDownList.on('click', function (event) {
-                    var clickedDropDown = $(event.currentTarget);
-                    var valueClicked = clickedDropDown.text().trim();
-                    valueClicked += '<img src="/Content/img/arrowSelect.png">';
-                    var main = clickedDropDown.siblings('.show');
-                    main.html(valueClicked);
-                    main.removeClass('activeDropDown');
-                    dropDownList.removeClass('activeDropDown');
-                    dropDownList.unbind('click');
-                    sendAjaxItems();
-                });
-            });
-        }
-
-        function updateTOTALTIMEONCASE() {
-            var counter = 0;
-            $(".someDropdowns .show").each(function (indx, element) {
-                counter += Number($(element).text().trim());
-            });
-            $('#totalTime').text(counter + " days"); // where 60 days - update with total
-        }
-        function sendAjaxItems() {
-            var array = {};
-            $(".show").each(function (indx, element) {
-                array[indx] = $(element).text().trim();
-            });
-            var step1_delayMin = array[0];
-            var step2_delayMin = array[1];
-            var step3_delayMin = array[2];
-            var step4_delayMin = array[3];
-            var company_id = $("#companyId").val();
-            $.ajax({
-                method: "POST",
-                url: "/Settings/UpdateDelays",
-                data: {
-                    company_id: company_id,
-                    step1_delayMin: step1_delayMin,
-                    step2_delayMin: step2_delayMin,
-                    step3_delayMin: step3_delayMin,
-                    step4_delayMin: step4_delayMin
-                }
-            }).done(function (data) {//data from server
-                $('#updateButton').css('display', 'none');
-                $('#saveButton').css('display', 'block');
-                updateTOTALTIMEONCASE();
-            }).fail(function (error) {
-                console.log(error);
-            });
-        }
-
-    });
-
-</script>

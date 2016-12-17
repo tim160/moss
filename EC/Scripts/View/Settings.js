@@ -1,0 +1,352 @@
+﻿$(document).ready(function () {
+    /*page cases begin*/
+    updateTOTALTIMEONCASE();
+    var isValidMed = "@is_valid_mediator";
+    if (isValidMed != "False") {
+        $(".show").on('click', function (event) {
+            var clickedDrop = $(event.currentTarget);
+            var dropDownList = clickedDrop.siblings('.hide');
+            clickedDrop.addClass('activeDropDown');
+            dropDownList.addClass('activeDropDown');
+            dropDownList.on('click', function (event) {
+                var clickedDropDown = $(event.currentTarget);
+                var valueClicked = clickedDropDown.text().trim();
+                valueClicked += '<img src="/Content/img/arrowSelect.png">';
+                var main = clickedDropDown.siblings('.show');
+                main.html(valueClicked);
+                main.removeClass('activeDropDown');
+                dropDownList.removeClass('activeDropDown');
+                dropDownList.unbind('click');
+                sendAjaxItems();
+            });
+        });
+    }
+
+    function updateTOTALTIMEONCASE() {
+        var counter = 0;
+        $(".someDropdowns .show").each(function (indx, element) {
+            counter += Number($(element).text().trim());
+        });
+        $('#totalTime').text(counter + " days"); // where 60 days - update with total
+    }
+    function sendAjaxItems() {
+        var array = {};
+        $(".show").each(function (indx, element) {
+            array[indx] = $(element).text().trim();
+        });
+        var step1_delayMin = array[0];
+        var step2_delayMin = array[1];
+        var step3_delayMin = array[2];
+        var step4_delayMin = array[3];
+        var company_id = $("#companyId").val();
+        $.ajax({
+            method: "POST",
+            url: "/Settings/UpdateDelays",
+            data: {
+                company_id: company_id,
+                step1_delayMin: step1_delayMin,
+                step2_delayMin: step2_delayMin,
+                step3_delayMin: step3_delayMin,
+                step4_delayMin: step4_delayMin
+            }
+        }).done(function (data) {//data from server
+            $('#updateButton').css('display', 'none');
+            $('#saveButton').css('display', 'block');
+            updateTOTALTIMEONCASE();
+        }).fail(function (error) {
+            console.log(error);
+        });
+    }
+    /*page cases end*/
+
+
+    /*page company*/
+            /*for upload files add foto*/
+    $('.newImageBtn').click(function () {
+            console.log("entered in newImageBtn click");
+            $("#_file").click();
+            console.log("click(); end");
+        });
+        function ajaxUploadFiles() {
+            $("#_file").on('change', function (e) {
+
+                var urlAjaxUploadFiles = $("#urlAjaxUploadFiles").val();
+                console.log("try get value in urlAjaxUploadFiles" + urlAjaxUploadFiles);
+                var files = e.target.files;
+                console.log("get files" + files);
+
+                if (files.length > 0) {
+                    console.log("files.length = " + files.length);
+                    var fd = new FormData();
+                    fd.append("from", "Company");
+                    console.log("add fd.append = " + files.length);
+
+                    var file = document.getElementById('_file');
+                    console.log("getElementById('_file') = " + file);
+
+
+                    for (var i = 0; i < file.files.length; i++) {
+                        fd.append('_file', file.files[i]);
+                        console.log("file.files[i] = " + file.files[i]);
+                    }
+
+                    $.ajax({
+                        type: "POST",
+                        url: urlAjaxUploadFiles,
+                        contentType: false,
+                        processData: false,
+                        data: fd,
+                        success: function (result) {
+                            console.log("result " + result);
+                            $("#logoCompany").attr("src", result);
+                        },
+                        error: function (xhr, status, p3, p4) {
+                            var err = "Error " + " " + status + " " + p3 + " " + p4;
+                            if (xhr.responseText && xhr.responseText[0] == "{")
+                                err = JSON.parse(xhr.responseText).Message;
+                            console.log(err);
+                        }
+                    });
+                } else {
+                    alert("This browser doesn't support HTML5 file uploads!");
+                }
+            });
+        }
+
+        function blockActivityHeight() {
+            if ($('#menu').height() < 50) {
+                $('.positionActivityIcon').height(89);
+            }
+            else {
+                $('.positionActivityIcon').height($('#casesHeared').height());
+            }
+        }
+
+        function miniMenu() {
+            $('.mainTitle').click(function () {
+                $('.mainTitle + div').toggle();
+                blockActivityHeight();
+            });
+        }
+        var contentCompanyProfile = $('.contentCompanyProfile');
+
+        $(".menuCompanyProfile .settingMenuItems .menuItem").click(function (element) {
+            $(".menuItem.active").removeClass("active");
+            $(element.target).addClass("active");
+            $("#menu .caseesTab:nth-child(3)").addClass("active");
+        });
+
+
+        function hideBlock() {
+            $('.blockLanguages').hide();
+            $('.blockLocations').hide();
+            $('.blockDepartmens').hide();
+            $('.blockIncidentTypes').hide();
+            $('.blockReporterTypes').hide();
+            $('.blockAnonymity').hide();
+        }
+
+        function contentCompanyProfileShow() {
+
+            $('.menuItem:nth-child(6)').click(function () {
+                hideBlock();
+                $('.blockAnonymity').show();
+            });
+            $('.menuItem:nth-child(5)').click(function () {
+                hideBlock();
+                $('.blockReporterTypes').show();
+            });
+            $('.menuItem:nth-child(4)').click(function () {
+                hideBlock();
+                $('.blockIncidentTypes').show();
+            });
+            $('.menuItem:nth-child(3)').click(function () {
+                hideBlock();
+                $('.blockLanguages').show();
+            });
+            $('.menuItem:nth-child(2)').click(function () {
+                hideBlock();
+                $('.blockDepartmens').show();
+            });
+            $('.menuItem:nth-child(1)').click(function () {
+                hideBlock();
+                $('.blockLocations').show();
+            });
+        }
+
+
+
+        miniMenu();
+        ajaxUploadFiles();
+        contentCompanyProfileShow();
+
+        /**
+        Department
+        Location
+        Language
+        IncidentType
+        */
+        function close(nameObject, data, id) {
+            var nameTable = ".table" + nameObject;
+            contentCompanyProfile.find(".table" + nameObject).prepend('<div style="display:flex"><p>' + data + '</p>' + '<div class="delete' + nameObject + '" data-value=' + id + '>' + '</div></div>');
+            closeIcon(nameObject);
+        }
+        function closeIcon(nameObject) {
+            contentCompanyProfile.find(".addNew" + nameObject + " input").val('');
+            contentCompanyProfile.find(".addNew" + nameObject).hide();
+            contentCompanyProfile.find(".add" + nameObject + "Btn").removeClass("inactive");
+            contentCompanyProfile.find(".add" + nameObject + "Btn").css('float', 'none');
+            contentCompanyProfile.find("#add" + nameObject.charAt(0) + nameObject.charAt(1) + nameObject.charAt(2) + "Btn").hide();
+        }
+
+
+        $('.addLanguageBtn p').click(function () {
+            $(this).parent().addClass("inactive");
+            $('.addNewLanguage').css('display', 'flex');
+        });
+
+        $('.addNewLanguage .closeIcon').click(function () {
+            $(".addLanguageBtn").removeClass("inactive");
+            $('.addNewLanguage').hide();
+        });
+        $('.addNewDepartment .closeIcon').click(function () {
+            closeIcon("Department");
+        });
+        $('.addNewIncidentType .closeIcon').click(function () {
+            closeIcon("IncidentType");
+        });
+        $('.addNewReporterType .closeIcon').click(function () {
+            closeIcon("ReporterType");
+        });
+        $('.addNewLocation .closeIcon').click(function () {
+            closeIcon("Location");
+        });
+        /* Adding Location*/
+        $('#addInputLoc p').click(function () {
+            var temp = $(this).parent();
+            adding("Location", temp);
+        });
+        $('#addLocBtn').click(function () {
+            var data = $(".addNewLocation input").val();
+            if (data.length > 0) {
+                sendAjax("Location", data, function (id) {
+                    close("Location", data, id);
+                });
+                if (!data) {
+                    close("Location", data);
+                }
+            } else {
+                $('.addNewLocation').css('border-color', 'red');
+            }
+        });
+
+        function adding(newSetting, temp) {
+            temp.addClass("inactive");
+            temp.css({ 'width': '20%', 'float': 'left' });
+            temp.parent().find(".addNew" + newSetting).css('display', 'flex');
+            var btn = document.getElementById("add" + newSetting.charAt(0) + newSetting.charAt(1) + newSetting.charAt(2) + "Btn");
+            btn.style.display = 'block';
+            btn.style.styleFloat = 'left';
+        }
+        /* Adding Departments*/
+
+        $('#addInputDep p').click(function () {
+            var temp = $(this).parent();
+            adding("Department", temp);
+        });
+
+        $('#addInputIncType p').click(function () {
+            var temp = $(this).parent();
+            adding("IncidentType", temp);
+        });
+        $('#addInputRepType p').click(function () {
+            var temp = $(this).parent();
+            adding("ReporterType", temp);
+        });
+        $('#addDepBtn').click(function () {
+            var data = $(".addNewDepartment input").val();
+            if (data.length > 0) {
+                sendAjax("Department", data, function (id) {
+                    close("Department", data, id);
+                });
+            } else {
+                $('.addNewDepartment').css('border-color', 'red');
+            }
+        });
+        $('#addIncBtn').click(function () {
+            var data = $(".addNewIncidentType input").val();
+            if (data.length > 0) {
+                sendAjax("IncidentType", data, function (id) {
+                    close("IncidentType", data, id);
+                });
+            } else {
+                $('.addNewIncidentType').css('border-color', 'red');
+            }
+        });
+        /*add Reporter types*/
+        $('#addRepBtn p').click(function () {
+            var data = $(".addNewReporterType input").val();
+            if (data.length > 0) {
+                sendAjax("addReporterType", data, function (id) {
+                    close("ReporterType", data, id);
+                });
+            } else {
+                $('.addNewReporterType').css('border-color', 'red');
+            }
+        });
+        function sendAjax(newSetting, data, action) {
+            if (newSetting && data.toLowerCase() != "other") {
+                var companyId = $("#companyId").data('value');
+                var userId = $("#userId").data('value');
+
+                var result = false;
+                var sendAjax = $("#sendAjax").val();
+                if (data.length > 0) {
+                    $.ajax({
+                        data: { companyId: companyId, userId: userId, data: data, newSetting: newSetting },
+                        url: sendAjax,
+                        success: function (result) {
+                            if (result !== "false") {
+                                action(result);
+                            } else {
+                                alert('Error deleting');
+                            }
+                        }
+                    });
+                }
+            }
+        }//end function sendAjax()
+        /*delete incident Type*/
+        $(".tableIncidentType").on('click', '.deleteIncidentType', function (element) {
+            var temp = $(element.target);
+            var id = $(element.target).attr("data-value");
+            sendAjax("deleteIncidentType", id, function () {
+                temp.parent().hide(200);
+            });
+        });
+        /*delete reporter Types*/
+        $(".tableReporterType").on('click', '.deleteReporterType', function (element) {
+            var temp = $(element.target);
+            var id = temp.attr("data-value");
+            sendAjax("deleteReporterType", id, function () {
+                temp.parent().hide(200);
+            });
+        });
+        /*delete deleteDepartment*/
+        $(".tableDepartment").on('click', '.deleteDepartment', function (element) {
+            var temp = $(element.target);
+            var id = temp.attr("data-value");
+            sendAjax("deleteDepartment", id, function () {
+                temp.parent().hide(200);
+            });
+        });
+        /*delete deleteLocation*/
+        $(".tableLocation").on('click', '.deleteLocation', function (element) {
+            var temp = $(element.target);
+            var id = temp.attr("data-value");
+            sendAjax("deleteLocation", id, function () {
+                temp.parent().hide(200);
+            });
+        });
+    /*end page company*/
+});

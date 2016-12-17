@@ -14,27 +14,14 @@
     {
         is_valid_mediator = true;
     }
-        
     var cm = (CompanyModel)ViewBag.cm;
     int company_id = cm._company.id;
     if(string.IsNullOrEmpty(cm._company.path_en))
     {
         cm._company.path_en = "~/Content/img/logoDefaultCompany.png";
     }
-    // CompanyModel cm = new CompanyModel(company_id);
-    // cm.CompanyDepartments
-
     bool is_cc = ViewBag.is_cc;
     String class_ext = ViewBag.cc_extension;
-
-    //bool is_cc = true;
-    //String class_ext = "";
-    //if (is_cc)
-    //{
-    //    class_ext = "_cc";
-    //}
-
-    //19
 }
 
 <div id="companyId" data-value="@company_id"></div>
@@ -45,22 +32,7 @@
         int active = 3;
     }
     @Html.Partial("~/Views/Settings/partial/casesHeared.cshtml", active)
-    @*<div id="casesHeared">
-    <div id="menu">
-        <h2 class="mainTitle">@GlobalRes.Menu:</h2>
-        <div>
-            <a href="/Settings/Index" class="caseesTab">@GlobalRes.MyProfile</a>
-            <a href="/Settings/Password" class="caseesTab">@GlobalRes.Password</a>
-            <a class="caseesTab active">@GlobalRes.CompanyProfile</a>
-            <a href="/Settings/Mediators" class="caseesTab">@GlobalRes.CompanyMediators</a>
-            <a href="/Settings/Cases" class="caseesTab">@GlobalRes.CaseManagementDeadlines</a>
-        </div>
-    </div>
-
-    </div>*@
-
-
-<!--casesHeared-->
+    <!--casesHeared-->
 
     <div class="contentSettings secondHeader">
         <div class="headerCompanyProfile">
@@ -164,16 +136,7 @@
 
             <div class="blockLanguages" style="display: none;">
                 <p>This version is only available in English</p>
-                <!--   <div class="addLanguageBtn">
-                     After click Btn - add class inactive - that's a comment line
-                      <p>GlobalRes.addnewLanguage</p>
-                  </div>-->
-                <!--   <div class="addNewLanguage">
-                     <input type="text" name="newLanguageName" required="" value="">
-                     <div class="closeIcon"></div>
-                 </div>-->
                 <div class="tableLanguage">
-
                     <div style="display: flex;">
                         <p>@GlobalRes.English</p>
                     </div>
@@ -266,288 +229,5 @@
     </div><!--contentCompanyProfile-->
 
 </div>
-
-
-
-<script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
-<script>
-    $(document).ready(function () {
-        /*for upload files add foto*/
-        $('.newImageBtn').click(
-            function () {
-            $("#_file").click();
-        });
-        function ajaxUploadFiles() {
-            $("#_file").on('change', function (e) {
-                var files = e.target.files;
-                if (files.length > 0) {
-                    var fd = new FormData();
-                    fd.append("from", "Company");
-                    var file = document.getElementById('_file');
-                    for (var i = 0; i < file.files.length; i++) {
-                        fd.append('_file', file.files[i]);
-                    }
-
-                    $.ajax({
-                        type: "POST",
-                        url: '@Url.Action("AddLogoCompany", "Settings")',
-                        contentType: false,
-                        processData: false,
-                        data: fd,
-                        success: function (result) {
-                            $("#logoCompany").attr("src", result);
-                        },
-                        error: function (xhr, status, p3, p4) {
-                            var err = "Error " + " " + status + " " + p3 + " " + p4;
-                            if (xhr.responseText && xhr.responseText[0] == "{")
-                                err = JSON.parse(xhr.responseText).Message;
-                            console.log(err);
-                        }
-                    });
-                } else {
-                    alert("This browser doesn't support HTML5 file uploads!");
-                }
-            });
-        }
-
-        function blockActivityHeight() {
-            if ($('#menu').height() < 50) {
-                $('.positionActivityIcon').height(89);
-            }
-            else {
-                $('.positionActivityIcon').height($('#casesHeared').height());
-            }
-        }
-
-        function miniMenu() {
-            $('.mainTitle').click(function () {
-                $('.mainTitle + div').toggle();
-                blockActivityHeight();
-            });
-        }
-        var contentCompanyProfile = $('.contentCompanyProfile');
-
-        $(".menuCompanyProfile .settingMenuItems .menuItem").click(function (element) {
-            $(".menuItem.active").removeClass("active");
-            $(element.target).addClass("active");
-            //$(".active").removeClass("active");
-            $("#menu .caseesTab:nth-child(3)").addClass("active");
-        });
-
-
-        function hideBlock() {
-            $('.blockLanguages').hide();
-            $('.blockLocations').hide();
-            $('.blockDepartmens').hide();
-            $('.blockIncidentTypes').hide();
-            $('.blockReporterTypes').hide();
-            $('.blockAnonymity').hide();
-
-        }
-
-        function contentCompanyProfileShow() {
-
-            $('.menuItem:nth-child(6)').click(function () {
-                hideBlock();
-                $('.blockAnonymity').show();
-            });
-            $('.menuItem:nth-child(5)').click(function () {
-                hideBlock();
-                $('.blockReporterTypes').show();
-            });
-            $('.menuItem:nth-child(4)').click(function () {
-                hideBlock();
-                $('.blockIncidentTypes').show();
-            });
-            $('.menuItem:nth-child(3)').click(function () {
-                hideBlock();
-                $('.blockLanguages').show();
-            });
-            $('.menuItem:nth-child(2)').click(function () {
-                hideBlock();
-                $('.blockDepartmens').show();
-            });
-            $('.menuItem:nth-child(1)').click(function () {
-                hideBlock();
-                $('.blockLocations').show();
-            });
-        }
-
-
-
-        miniMenu();
-        ajaxUploadFiles();
-        contentCompanyProfileShow();
-
-        /**
-        Department
-        Location
-        Language
-        IncidentType
-        */
-        function close(nameObject, data, id) {
-            var nameTable = ".table" + nameObject;
-            contentCompanyProfile.find(".table" + nameObject).prepend('<div style="display:flex"><p>' + data + '</p>' + '<div class="delete' + nameObject + '" data-value=' + id + '>' + '</div></div>');
-            closeIcon(nameObject);
-        }
-        function closeIcon(nameObject) {
-            contentCompanyProfile.find(".addNew" + nameObject + " input").val('');
-            contentCompanyProfile.find(".addNew" + nameObject).hide();
-            contentCompanyProfile.find(".add" + nameObject + "Btn").removeClass("inactive");
-            contentCompanyProfile.find(".add" + nameObject + "Btn").css('float', 'none');
-            contentCompanyProfile.find("#add" + nameObject.charAt(0) + nameObject.charAt(1) + nameObject.charAt(2) + "Btn").hide();
-        }
-
-
-        $('.addLanguageBtn p').click(function () {
-            $(this).parent().addClass("inactive");
-            $('.addNewLanguage').css('display', 'flex');
-        });
-
-        $('.addNewLanguage .closeIcon').click(function () {
-            $(".addLanguageBtn").removeClass("inactive");
-            $('.addNewLanguage').hide();
-        });
-        $('.addNewDepartment .closeIcon').click(function () {
-            closeIcon("Department");
-        });
-        $('.addNewIncidentType .closeIcon').click(function () {
-            closeIcon("IncidentType");
-        });
-        $('.addNewReporterType .closeIcon').click(function () {
-            closeIcon("ReporterType");
-        });
-        $('.addNewLocation .closeIcon').click(function () {
-            closeIcon("Location");
-        });
-        /* Adding Location*/
-        $('#addInputLoc p').click(function () {
-            var temp = $(this).parent();
-            adding("Location", temp);
-        });
-        $('#addLocBtn').click(function () {
-            var data = $(".addNewLocation input").val();
-            if (data.length > 0) {
-                sendAjax("Location", data, function (id) {
-                    close("Location", data, id);
-                });
-                if (!data) {
-                    close("Location", data);
-                }
-            } else {
-                $('.addNewLocation').css('border-color', 'red');
-            }
-        });
-
-        function adding(newSetting, temp) {
-            temp.addClass("inactive");
-            temp.css({ 'width': '20%', 'float': 'left' });
-            temp.parent().find(".addNew" + newSetting).css('display', 'flex');
-            var btn = document.getElementById("add" + newSetting.charAt(0) + newSetting.charAt(1) + newSetting.charAt(2) + "Btn");
-            btn.style.display = 'block';
-            btn.style.styleFloat = 'left';
-        }
-        /* Adding Departments*/
-
-        $('#addInputDep p').click(function () {
-            var temp = $(this).parent();
-            adding("Department", temp);
-        });
-
-        $('#addInputIncType p').click(function () {
-            var temp = $(this).parent();
-            adding("IncidentType", temp);
-        });
-        $('#addInputRepType p').click(function () {
-            var temp = $(this).parent();
-            adding("ReporterType", temp);
-        });
-        $('#addDepBtn').click(function () {
-            var data = $(".addNewDepartment input").val();
-            if (data.length > 0) {
-                sendAjax("Department", data, function (id) {
-                    close("Department", data, id);
-                });
-            } else {
-                $('.addNewDepartment').css('border-color', 'red');
-            }
-        });
-        $('#addIncBtn').click(function () {
-            var data = $(".addNewIncidentType input").val();
-            if (data.length > 0) {
-                sendAjax("IncidentType", data, function (id) {
-                    close("IncidentType", data, id);
-                });
-            } else {
-                $('.addNewIncidentType').css('border-color', 'red');
-            }
-        });
-        /*add Reporter types*/
-        $('#addRepBtn p').click(function () {
-            var data = $(".addNewReporterType input").val();
-            if (data.length > 0) {
-                sendAjax("addReporterType", data, function (id) {
-                    close("ReporterType", data, id);
-                });
-            } else {
-                $('.addNewReporterType').css('border-color', 'red');
-            }
-        });
-        function sendAjax(newSetting, data, action) {
-            if (newSetting && data.toLowerCase() != "other") {
-                var companyId = $("#companyId").data('value');
-                var userId = $("#userId").data('value');
-
-                var result = false;
-
-                if (data.length > 0) {
-                    $.ajax({
-                        data: { companyId: companyId, userId: userId, data: data, newSetting: newSetting },
-                        url: '@Url.Action("addNewfunction", "Settings")',
-                        success: function (result) {
-                            if (result !== "false") {
-                                action(result);
-                            } else {
-                                alert('Error deleting');
-                            }
-                        }
-                    });
-                }
-            }
-        }//end function sendAjax()
-        /*delete incident Type*/
-        $(".tableIncidentType").on('click', '.deleteIncidentType', function (element) {
-            var temp = $(element.target);
-            var id = $(element.target).attr("data-value");
-            sendAjax("deleteIncidentType", id, function () {
-                temp.parent().hide(200);
-            });
-        });
-        /*delete reporter Types*/
-        $(".tableReporterType").on('click', '.deleteReporterType', function (element) {
-            var temp = $(element.target);
-            var id = temp.attr("data-value");
-            sendAjax("deleteReporterType", id, function () {
-                temp.parent().hide(200);
-            });
-        });
-        /*delete deleteDepartment*/
-        $(".tableDepartment").on('click', '.deleteDepartment', function (element) {
-            var temp = $(element.target);
-            var id = temp.attr("data-value");
-            sendAjax("deleteDepartment", id, function () {
-                temp.parent().hide(200);
-            });
-        });
-        /*delete deleteLocation*/
-        $(".tableLocation").on('click', '.deleteLocation', function (element) {
-            var temp = $(element.target);
-            var id = temp.attr("data-value");
-            sendAjax("deleteLocation", id, function () {
-                temp.parent().hide(200);
-            });
-        });
-    });
-
-</script>
-
+<input type="hidden" id="urlAjaxUploadFiles" value="@Url.Action("AddLogoCompany", "Settings")" />
+<input type="hidden" id="sendAjax" value="@Url.Action("addNewfunction", "Settings")"/>

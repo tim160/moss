@@ -504,7 +504,7 @@
 
 
         @RenderBody()
-
+        <script src="~/Scripts/View/Settings.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
                 //var button = $(".acceptCaseBtn.resolveCase");
@@ -523,58 +523,6 @@
                     el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
                 }
 
-                //, textareaPopup.val(), 1);
-                //function resolveCaseStartWork(){
-                //    button.click(function() {
-                //        overlay();
-                //    });
-                //    $("#dialog-form .close").on('click', function() {
-                //        overlay();
-                //    });
-                //    $(".closeResolved").click(function() {
-                //        $(".blockCreateTaskResolved").hide();
-                //        button.show();
-                //    });
-                //}
-                /*popup*/
-                //dialog = $( "#dialog-form" ).dialog();
-                //function resolveCase(report_id, user_id, description, promotion_id) {
-                //    $.ajax({
-                //        method: "POST",
-                //        url: "/Case/NewStatus",
-                //        data: { report_id : report_id, user_id: user_id, description: description, promotion_id: promotion_id}
-                //    }).done(function(data) {//data from server
-                //        console.log('data', data);
-                //        var str = window.location.href;
-                //        window.location.href = str;
-                //    }).fail(function(error){
-                //        console.log(error);
-                //    });
-                //}
-                /*this need delete if necessary*/
-                @*function resoorcompleteCaseStart(){
-            $('.acceptCaseBtn.promoteCase').click(function(){
-                if(textareaPopup.val() == ""){
-                    textareaPopup.css({'border-color':'red', 'box-shadow':'red'});
-                }
-                else
-                {
-                    resolveCase(@Html.Raw(_report_id), @Html.Raw(user_id), textareaPopup.val(), 0);
-                }
-            });
-        }*@
-                /*this need delete if necessary*/
-                @*function cannotbeResolved(){
-            $('.acceptCaseBtn.cannotBeResolved').click(function(){
-                if(textareaPopup.val() == ""){
-                    textareaPopup.css({'border-color':'red', 'box-shadow':'red'});
-                }
-                else
-                {
-                    resolveCase(@Html.Raw(_report_id), @Html.Raw(user_id), textareaPopup.val(), 1);
-                }
-            });
-        }*@
                 function startClick(){
                     $('.logButtonModal').click(
                         function(){
@@ -597,26 +545,7 @@
                         }
                     );
                 }
-                //function textareaPopupStyle(){
-                //    textareaPopup
-                //   .focus(
-                //       function(){
-                //           textareaPopup.css({'border-color':'#05b5a2', 'font-weight':'600'});
-                //       }
-                //   )
-                //   .focusout(
-                //       function(){
-                //           if(textareaPopup.val()=="")
-                //               textareaPopup.css('font-weight','400');
-                //       }
-                //   );
-                //}
-
-                //resolveCaseStartWork();
-                //resoorcompleteCaseStart();
-                //cannotbeResolved();
                 startClick();
-                //textareaPopupStyle();
             });
 
             $("#return_investigation").on('click', function(el){
@@ -628,9 +557,6 @@
                 $("#escalate_btn").val(3);
                 $("#_overlay_title").text("@Html.Raw(GlobalRes.Returnnvestigation)");
                 $("#textbox_title").text("@Html.Raw(GlobalRes.AddReasonWhy)");
-
-                //
-
             });
             $("#approve_close").on('click', function(el){
 
@@ -640,10 +566,8 @@
                 $("#escalate_btn").val(9);
                 $("#_overlay_title").text("@Html.Raw(GlobalRes.CloseCaseUp)");
                 $("#textbox_title").text("@Html.Raw(GlobalRes.AddFurtherNotes)");
-                //
             });
         </script>
-
 </body>
 
 
