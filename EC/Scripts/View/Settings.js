@@ -61,7 +61,9 @@
 
 
     /*page company*/
-            /*for upload files add foto*/
+
+    /*this function works for index page - update user foto too*/
+    /*for upload files add foto*/
     $('.newImageBtn').click(function () {
             console.log("entered in newImageBtn click");
             $("#_file").click();
@@ -71,6 +73,7 @@
             $("#_file").on('change', function (e) {
 
                 var urlAjaxUploadFiles = $("#urlAjaxUploadFiles").val();
+                var from = $("#urlAjaxUploadFiles").attr("from");
                 console.log("try get value in urlAjaxUploadFiles" + urlAjaxUploadFiles);
                 var files = e.target.files;
                 console.log("get files" + files);
@@ -78,7 +81,13 @@
                 if (files.length > 0) {
                     console.log("files.length = " + files.length);
                     var fd = new FormData();
-                    fd.append("from", "Company");
+                    if (from != "") {
+                        console.log("from = " + from);
+                        fd.append("from", from);
+                    } else {
+                        console.log("error from = " + from);
+                    }
+                    
                     console.log("add fd.append = " + files.length);
 
                     var file = document.getElementById('_file');
@@ -98,7 +107,13 @@
                         data: fd,
                         success: function (result) {
                             console.log("result " + result);
-                            $("#logoCompany").attr("src", result);
+                            var from = $("#urlAjaxUploadFiles").attr("from");
+                            if (from == "User") {
+                                $("#logoUser").attr("src", result);
+                            } else {
+                                $("#logoCompany").attr("src", result);
+                            }
+                            
                         },
                         error: function (xhr, status, p3, p4) {
                             var err = "Error " + " " + status + " " + p3 + " " + p4;
@@ -349,4 +364,47 @@
             });
         });
     /*end page company*/
+
+    /*page index*/
+    //----------------END Open mini menu for mobile---------------------------
+        $('.blockPersonalSettings input')
+           .focus(function () {
+               $('.blockPersonalSettings').css({ 'border-color': 'transparent transparent #e0e5e6 transparent' });
+               $(this).parent('.blockPersonalSettings').css({ 'border-color': '#05b5a2' });
+           })
+            .focusout(function () {
+                $(this).parent('.blockPersonalSettings').css({ 'border-color': 'transparent transparent #e0e5e6 transparent' });
+            });
+        var levelId = $("#levelId").val();
+
+
+    //RadioButton
+        var radioBlock = $('.inputBlock');
+        if (levelId == 5) {
+            radioBlock.click(function () {
+                var self = $(this);
+                var arrows = self.parent('.inputRadio').parent('.rowBlock');
+                arrows.find('.inputRadio').find('.radioTitle').css('color', 'rgb(174, 181, 183)');
+                self.find('.radioTitle').css('color', 'rgb(60, 62, 63)');
+            });
+
+            //RadioButton Mediator
+            var RadioButton = $('.inputBlock');
+            function OldClick(self) {
+                var mediatorBtn = self.parent();
+                var mediatorAllBtn = self.parent().parent();
+                mediatorAllBtn.find('.inputRadio').removeClass('active');
+                mediatorBtn.addClass('active');
+                mediatorBtn.find("input").prop('checked', true);
+
+            }
+            RadioButton.click(function () {
+                var self = $(this);
+                $('.blockPersonalSettings').css({ 'border': '1px solid #e0e5e6', 'width': '100%' });
+                self.parents('.blockPersonalSettings').css({ 'border': '2px solid #05b5a2', 'width': '99.8%' });
+                OldClick(self);
+
+            });
+        }
+    /*end page index*/
 });

@@ -48,28 +48,11 @@
     @{ 
         int active = 1;
     }
-    @*Html.Partial("~/Views/Settings/partial/casesHeared.cshtml", new ViewDataDictionary { { "id", active } })*@
     @Html.Partial("~/Views/Settings/partial/casesHeared.cshtml", active)
-    @*<div id="casesHeared">
-        <div id="menu">
-            <h2 class="mainTitle">@GlobalRes.Menu:</h2>
-            <div>
-                <a class="caseesTab active">@GlobalRes.MyProfile</a>
-                <a href="/Settings/Password" class="caseesTab">@GlobalRes.Password</a>
-                <a href="/Settings/Company" class="caseesTab">@GlobalRes.CompanyProfile</a>
-                <a href="/Settings/Mediators" class="caseesTab">@GlobalRes.CompanyMediators</a>
-                <a href="/Settings/Cases" class="caseesTab">@GlobalRes.CaseManagementDeadlines</a>
-            </div>
-        </div>
-    </div>*@
-    
     <!--casesHeared-->
 
     
 @using (Html.BeginForm("UpdateUser", "Settings", Model, FormMethod.Post)) { 
-    <!--<form enctype="multipart/form-data" method="POST" action="@Url.Action("UpdateUser", "Settings")">-->
-
-
         @Html.AntiForgeryToken()
         @model user
         @Html.HiddenFor(model => Model.id)
@@ -174,7 +157,6 @@
                         <div class="freeBlock inputRadio" data-valueFlag="0">
                             <label class="inputBlock" for="thirdIncident">
                                 @Html.RadioButtonFor(model => model.notification_messages_actions_flag, "1")
-                                @*<input id="thirdIncident" type="radio" name="stay2">*@
                                 <span class="radioButton"></span>
                                 <span class="radioTitle">@GlobalRes.Instantly</span>
                             </label>
@@ -182,7 +164,6 @@
                         <div class="freeBlock inputRadio" data-valueFlag="1">
                             <label class="inputBlock" for="fourIncident">
                                 @Html.RadioButtonFor(m => m.notification_messages_actions_flag, "2")
-                                @*<input id="fourIncident" type="radio" name="stay2">*@
                                 <span class="radioButton"></span>
                                 <span class="radioTitle">@GlobalRes.Onceaday</span>
                             </label>
@@ -202,117 +183,5 @@
     <!--</form>-->
 </div>
 
-
-<script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('.newImageBtn').click(
-            function () {
-                $('#_file').click();
-            }
-          );
-        //ajax Upload files
-        $("#_file").on('change', function (e) {
-            var files = e.target.files;
-            if (files.length > 0) {
-                var fd = new FormData();
-                fd.append("from", "User");
-                var file = document.getElementById('_file');
-                for (var i = 0; i < file.files.length; i++) {
-                    fd.append('_file', file.files[i]);
-                }
-
-                $.ajax({
-                    type: "POST",
-                    url: '@Url.Action("AddLogoCompany", "Settings")',
-                    contentType: false,
-                    processData: false,
-                    data: fd,
-                    success: function (result) {
-                        $("#logoUser").attr("src", result);
-                    },
-                    error: function (xhr, status, p3, p4) {
-                        var err = "Error " + " " + status + " " + p3 + " " + p4;
-                        if (xhr.responseText && xhr.responseText[0] == "{")
-                            err = JSON.parse(xhr.responseText).Message;
-                        console.log(err);
-                    }
-                });
-            } else {
-                alert("This browser doesn't support HTML5 file uploads!");
-            }
-        });
-
-        //START Open mini menu for mobile
-        function blockActivityHeight() {
-            if ($('#menu').height() < 50) {
-                $('.positionActivityIcon').height(89);
-            }
-            else {
-                $('.positionActivityIcon').height($('#casesHeared').height());
-            }
-        }
-        $('.mainTitle').click(function () {
-            $('.mainTitle + div').toggle();
-            blockActivityHeight();
-        });
-        //----------------END Open mini menu for mobile---------------------------
-
-        $('.blockPersonalSettings input')
-           .focus(function () {
-              /* $('.blockPersonalSettings').css({ 'border': '1px solid #e0e5e6', 'width': '100%' });
-               $(this).parent('.blockPersonalSettings').css({ 'border': '2px solid #05b5a2', 'width': '99.8%' });*/
-               $('.blockPersonalSettings').css({ 'border-color': 'transparent transparent #e0e5e6 transparent'});
-               $(this).parent('.blockPersonalSettings').css({ 'border-color': '#05b5a2'});
-           })
-            .focusout(function () {
-                //$(this).parent('.blockPersonalSettings').css({ 'border': '1px solid #e0e5e6', 'width': '100%' });
-                $(this).parent('.blockPersonalSettings').css({ 'border-color': 'transparent transparent #e0e5e6 transparent'});
-            });
-
-
-
-        $('.newMessageBtn span').click(function () {
-            if (($("#first_nm").val().trim.length > 0) && ($("#last_nm").val().trim.length > 0) && ($("#title_ds").val().trim.length > 0) && ($("#email").val().trim.length > 0))
-            {
-                $('.newMessageBtn input').click();
-            }
-        });
-        var levelId = @Html.Raw(um._user.role_id);
-
-
-        //RadioButton
-        var radioBlock = $('.inputBlock');
-        if(levelId == 5) { 
-            radioBlock.click(function () {
-
-                var self = $(this);
-                var arrows = self.parent('.inputRadio').parent('.rowBlock');
-                //arrows.find('.inputRadio').css('background', 'rgb(255, 255, 255)');
-                arrows.find('.inputRadio').find('.radioTitle').css('color', 'rgb(174, 181, 183)');
-
-                //self.parent('.inputRadio').css('background', 'rgb(242, 247, 247)');
-                self.find('.radioTitle').css('color', 'rgb(60, 62, 63)');
-            });
-
-            //RadioButton Mediator
-            var RadioButton = $('.inputBlock');
-            function OldClick(self) {
-                var mediatorBtn = self.parent();
-                var mediatorAllBtn = self.parent().parent();
-                mediatorAllBtn.find('.inputRadio').removeClass('active');
-                mediatorBtn.addClass('active');
-                mediatorBtn.find("input").prop('checked', true);
-
-            }
-            RadioButton.click(function () {
-                var self = $(this);
-                $('.blockPersonalSettings').css({ 'border': '1px solid #e0e5e6', 'width': '100%' });
-                self.parents('.blockPersonalSettings').css({ 'border': '2px solid #05b5a2', 'width': '99.8%' });
-                OldClick(self);
-
-            });
-        }
-    });
-
-</script>
+<input type="hidden" id="urlAjaxUploadFiles" from="User" value="@Url.Action("AddLogoCompany", "Settings")" />
+<input type="hidden" id="levelId" value="@Html.Raw(um._user.role_id)" />
