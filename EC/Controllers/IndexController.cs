@@ -14,7 +14,7 @@ using EC.Models;
 using EC.Controllers.Utils;
 using EC.Controllers.utils;
 using Resources = EC.Localization.Resources;
-
+using log4net;
 
 namespace EC.Controllers
 {
@@ -26,6 +26,12 @@ namespace EC.Controllers
         //[EcAuthorized("admin, moderator, mediator")] //раскоментировать когда будет использоваться авторизация! и в BaseController
         public ActionResult Index()
         {
+
+            ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+             logger.Info("info message to logger");
+             logger.Error("error message to logger");
+            
+   
             Session.Clear();
          //   System.Configuration.Configuration rootWebConfig1 =
           //      System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration(null);

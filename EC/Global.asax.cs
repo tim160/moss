@@ -23,11 +23,11 @@ namespace EC
 
             ViewEngines.Engines.Clear();
             ViewEngines.Engines.Add(new RazorViewEngine());
+            log4net.Config.XmlConfigurator.Configure();
         }
 
         void Application_BeginRequest(object sender, EventArgs e)
         {
-            int a = 9;
         }
     }
 }

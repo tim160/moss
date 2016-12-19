@@ -12,12 +12,15 @@ using EC.Controllers.utils;
 using EC.Models;
 using EC.Common.Interfaces;
 using EC.Core.Common;
+using log4net;
 
 namespace EC.Controllers
 {
     public class BaseController : Controller
     {
        /// var culture = Culture.GetCulture();
+  ////      ILog logger = LogManager.GetLogger(typeof((_Default));
+
 
         public ECEntities db = new ECEntities();
         public CultureInfo m_CultureInfo = null;
