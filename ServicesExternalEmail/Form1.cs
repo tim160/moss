@@ -12,6 +12,7 @@ using System.Net.Mail;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Configuration;
+using ServicesExternalEmail.DBModel;
 
 namespace ServicesExternalEmail
 {
@@ -22,7 +23,7 @@ namespace ServicesExternalEmail
             InitializeComponent();
             EmailProcess ep = new EmailProcess();
 
-            if(ConfigurationSettings.AppSettings["GDfromAddress"] == "1")
+            if(ConfigurationSettings.AppSettings["GD"] == "1")
                 ep.Initialize_GD();
 
             ep.CheckEmails();
@@ -118,43 +119,46 @@ namespace ServicesExternalEmail
             }
             public void CheckEmails()
             {
+                ECEntities db = new ECEntities();
+                ////   using EC.Models.Database;
 
-                /*     ////   using EC.Models.Database;
+                ////   using EC.Models.Database;
+                ////   System.Data.Entity.DbSet<company> _company1 = new System.Data.Entity.DbSet<company>();
 
-        ////   using EC.Models.Database;
-        ////   System.Data.Entity.DbSet<company> _company1 = new System.Data.Entity.DbSet<company>();
-
-        EC.Models.Database.company _company1 = new company();
-        foreach (EC.Models.Database.company _company in db.company.Where(t => t.alert_en ==""))
-        {
-                // need to process email
-                // string body = eb.Body;
-                // em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_NewTask, body, true);
-              //  if(_company)
-      ///////      bool _send_email = Send(_company.To.Split(';').ToList(), _company.Cc.Split(';').ToList(), _company.Subject, _company.Body, true);
-            if(_send_email)
-            {
-                
-                using (ECEntities adv = new ECEntities())
+                foreach (notification_processed _np in db.notification_processed.Where(t => t.is_processed == false))
                 {
-                    _company.alert_en = "1";
-                    adv.SaveChanges();
+                    // need to process email
+                    string body = _np.notification_text;
+                    // Send(to, cc, App_LocalResources.GlobalRes.Email_Title_NewTask, body, true);
+                    //  if(_company)
+                    try
+                    {
+                        string result = Send(_np.receivers.Split(';').ToList(), _np.cc.Split(';').ToList(), _np.subject, _np.notification_text, false);
+                        if(result == "")
+                        using (ECEntities adv = new ECEntities())
+                        {
+                            _np.is_processed = true;
+                            adv.SaveChanges();
+                        }
+                    }
+                    catch (Exception ex)
+                    { }
+
                 }
-            }
-        }
-        foreach (EC.Models.Database.company _company in db.company.Where(t => t.alert_en == "" && t.last_update_dt < DateTime.Today.AddDays(-3)))
-        {
-                 using (ECEntities adv = new ECEntities())
+                // later - redo for cleaning
+            /*    foreach (notification_processed _np in db.notification_processed.Where(t => t.is_processed == true && t.created_dt < DateTime.Today.AddDays(-3)))
                 {
-                    adv.company.Attach(_company);
-                    adv.company.Remove(_company); 
-                    adv.SaveChanges();
-                }
-        }
-        
-        }*/
+                    using (ECEntities adv = new ECEntities())
+                    {
+                        adv.notification_processed.Attach(_np);
+                        adv.notification_processed.Remove(_np);
+                        adv.SaveChanges();
+                    }
+                }*/
 
             }
+
+            
 
             public string ParseEmailAddress(string inputString)
             {
@@ -288,7 +292,7 @@ namespace ServicesExternalEmail
             }
 
 
-            public void Send(List<string> to, List<string> CC, string messageSubject, string messageBody, bool isHTml)
+            public string Send(List<string> to, List<string> CC, string messageSubject, string messageBody, bool isHTml)
             {
                 StringBuilder emailTo = new StringBuilder();
                 StringBuilder emailCC = new StringBuilder();
@@ -309,7 +313,8 @@ namespace ServicesExternalEmail
                         emailCC.Append(";");
                     }
                 }
-                Send(AddressFrom, emailTo.ToString(), emailCC.ToString(), messageSubject, messageBody, new string[0], isHTml);
+                string result = Send(AddressFrom, emailTo.ToString(), emailCC.ToString(), messageSubject, messageBody, new string[0], isHTml);
+                return result;
             }
 
             public void Send(List<string> to, List<string> CC, string messageSubject, string messageBody, bool isHTml, string from)
@@ -387,7 +392,7 @@ namespace ServicesExternalEmail
                    return Send(AddressFrom, to, cc, messageSubject, messageBody, attachments, isBodyHtml);
                }
             */
-            public void Send(string fromAddress, string to, string cc, string messageSubject, string messageBody, string[] attachments, bool isBodyHtml)
+            public string Send(string fromAddress, string to, string cc, string messageSubject, string messageBody, string[] attachments, bool isBodyHtml)
             {
                 string toAddress = ParseEmailAddress(to);
                 string ccAddress = ParseEmailAddress(cc);
@@ -404,7 +409,7 @@ namespace ServicesExternalEmail
                 else
                     ccAddressArray = new String[0];
 
-                Send(fromAddress, toAddressArray, messageSubject, messageBody, ccAddressArray, attachments, isBodyHtml);
+                string result = Send(fromAddress, toAddressArray, messageSubject, messageBody, ccAddressArray, attachments, isBodyHtml);
                 ////       if (result.ReturnCode == ReturnCode.Success || result.ReturnCode == ReturnCode.SuccessWithErrors)
                 {
                     // Log this email
@@ -414,7 +419,7 @@ namespace ServicesExternalEmail
                     //           notificationLogManagement.AddNotificationLogs(notificationLogs);
                 }
 
-                ////      return result;
+                 return result;
             }
 
             public void Send(string to, string cc, string subject, string subjectTemplate, string bodyTemplate, string[] attachments)
@@ -534,7 +539,7 @@ namespace ServicesExternalEmail
 
                     msg.Attachments.Dispose();
 
-                    return e.Message;
+                    return e.Message + " - " + e.InnerException;
                 }
             }
 
