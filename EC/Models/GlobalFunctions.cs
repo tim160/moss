@@ -69,7 +69,7 @@ public class GlobalFunctions
         {
             return "/Content/img/cai_logo.png";
         }
-        return "Content/Icons/logo.png";
+        return "/Content/Icons/logo.png";
 
     }
 
