@@ -11,6 +11,22 @@
     <AssemblyName>ServicesExternalEmail</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\Users\timura\Desktop\Published\EmailEC\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,6 +47,18 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>1F6EBA855596F84A7225A85966E115F3EF88A583</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>ServicesExternalEmail_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -41,6 +69,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,6 +81,237 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DBModel\action.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\address.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\anonymity.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\attachment.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\billing_option.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\client.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\color.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\company.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\company_anonymity.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\company_custom_question.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\company_department.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\company_invitation.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\company_location.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\company_relationship.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\company_secondary_type.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\company_type.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\company_unread_report_reminder.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\country.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\custom_question.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\custom_question_answer.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\demoq_request.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\ECModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ECModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\ECModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\ECModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ECModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\frequency.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\industry.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\injury_damage.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\investigation_status.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\invitation.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\language.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\login_history.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\management_know.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\message.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\message_user_read.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\notification_processed.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\notification_summary_period.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\ongoing.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\outcome.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\partner.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\preferred_contact_method.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\priority.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\province.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\relationship.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\report.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\reported_outside.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\report_department.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\report_investigation_status.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\report_log.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\report_mediator_assigned.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\report_mediator_involved.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\report_non_mediator_involved.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\report_owner.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\report_relationship.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\report_resolution.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\report_secondary_type.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\report_type_mandatory_question.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\report_user_read.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\resolution.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\role_in_report.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\secondary_type_mandatory.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\source.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\status.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\sysdiagram.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\task.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\task_comment.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\task_comment_user_read.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\task_user_read.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\time_zone.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\type.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\unread_report_reminder.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\unread_report_reminder_sent.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\user.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\user_change_password.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\user_role.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\validation_type.cs">
+      <DependentUpon>ECModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EmailProcess.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -69,6 +330,23 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EntityDeploy Include="DBModel\ECModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ECModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DBModel\ECModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ECModel.edmx</DependentUpon>
+      <LastGenOutput>ECModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="DBModel\ECModel.edmx.diagram">
+      <DependentUpon>ECModel.edmx</DependentUpon>
+    </None>
+    <None Include="DBModel\ECModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ECModel.edmx</DependentUpon>
+      <LastGenOutput>ECModel.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -79,6 +357,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="ServicesExternalEmail_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -88,6 +367,26 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Emails\EmailTemplate.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
