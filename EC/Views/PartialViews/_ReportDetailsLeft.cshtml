@@ -1,6 +1,8 @@
 ﻿@using EC.Models;
 @using EC.Models.Database;
 @using EC.App_LocalResources;
+@using EC.Constants;
+
 @{
     var report_id = (Int32)ViewBag.report_id;
     var user_id = (Int32)ViewBag.user_id;
@@ -73,7 +75,7 @@
                 <span class="daysRight">@rm._step_days_left.ToString() @GlobalRes.days_left</span>
             }
         </div>
-        @if (rm._investigation_status != Constant.investigation_status_closed)
+        @if (rm._investigation_status != ECGlobalConstants.investigation_status_closed)
         {
             <div class="blockContactReportBtn">
                 <a id="reporter_link" href="~/case/reporter/@report_id">

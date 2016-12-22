@@ -1,6 +1,8 @@
 ﻿@using EC.Models;
 @using EC.Models.Database;
 @using EC.App_LocalResources;
+@using EC.Constants;
+
 @{
     bool? is_cc = ViewBag.is_cc;
     if (!is_cc.HasValue)
@@ -280,7 +282,7 @@
                 string normal_button_promotion = GlobalRes.RequestCloseCase; //ResolveCaseUp
                 string left_button_promotion = "";
 
-                string normal_button_value =  Constant.investigation_status_resolution.ToString();
+                string normal_button_value = ECGlobalConstants.investigation_status_resolution.ToString();
                 string left_button_value = "";// Constant.investigation_status_completed.ToString();
                 
 
@@ -326,7 +328,7 @@
                         overlay_title = GlobalRes.ReopenCase;
                         textbox_title = GlobalRes.Description;
                         normal_button_promotion = GlobalRes.ReopenCaseUp;
-                        normal_button_value = Constant.investigation_status_investigation.ToString();
+                        normal_button_value = ECGlobalConstants.investigation_status_investigation.ToString();
 
                     }
 
@@ -347,7 +349,7 @@
                            
                        })
 
-                    if (((rm._investigation_status == Constant.investigation_status_completed || rm._investigation_status == Constant.investigation_status_resolution)))
+                    if (((rm._investigation_status == ECGlobalConstants.investigation_status_completed || rm._investigation_status == ECGlobalConstants.investigation_status_resolution)))
                     {
                         <div id="resoveCompletedTopmessage">
                             <div class="buttonNoneBorderGray">

@@ -9,6 +9,8 @@ using EC.Models.Database;
 using EC.Models.ECModel;
 using EC.Controllers.ViewModel;
 using EC.Models.ViewModel;
+using EC.Constants;
+
 
 namespace EC.Controllers
 {
@@ -242,7 +244,7 @@ namespace EC.Controllers
             {
                 if (refGroupReportReadDate.Where(item => ((item.report_id == ID))).Count() == 0)
                 {
-                    dt2 = Constant._default_date;
+                    dt2 = ECGlobalConstants._default_date;
                 }
                 else
                 {
@@ -251,7 +253,7 @@ namespace EC.Controllers
 
                 if (refGroupReportLogs.Where(item => ((item.report_id == ID))).Count() == 0)
                 {
-                    dt1 = Constant._default_date.AddDays(2);
+                    dt1 = ECGlobalConstants._default_date.AddDays(2);
                 }
                 else
                 {

@@ -13,6 +13,8 @@ using EC.Models;
 using EC.Models.ECModel;
 using EC.Model.Impl;
 using EC.Model.Interfaces;
+using EC.Constants;
+
 
 namespace EC.Models
 {
@@ -373,28 +375,28 @@ namespace EC.Models
             {
                 //active
                 statuses_match_all_report_id = (from m in refGroupInvestigationStatuses
-                                                where m.investigation_status_id == Constant.investigation_status_investigation
+                                                where m.investigation_status_id == ECGlobalConstants.investigation_status_investigation
                                                 select m.report_id).ToList();
             }
             if (flag == 2)
             {
                 // completed
                 statuses_match_all_report_id = (from m in refGroupInvestigationStatuses
-                                                where m.investigation_status_id == Constant.investigation_status_resolution || m.investigation_status_id == Constant.investigation_status_completed
+                                                where m.investigation_status_id == ECGlobalConstants.investigation_status_resolution || m.investigation_status_id == ECGlobalConstants.investigation_status_completed
                                                 select m.report_id).ToList();
             }
             if (flag == 3)
             {
                 //spam
                 statuses_match_all_report_id = (from m in refGroupInvestigationStatuses
-                                                where m.investigation_status_id == Constant.investigation_status_spam
+                                                where m.investigation_status_id == ECGlobalConstants.investigation_status_spam
                                                 select m.report_id).ToList();
             }
             if (flag == 4)
             {
                 //pending
                 statuses_match_all_report_id = (from m in refGroupInvestigationStatuses
-                                                where m.investigation_status_id == Constant.investigation_status_pending || m.investigation_status_id == Constant.investigation_status_review 
+                                                where m.investigation_status_id == ECGlobalConstants.investigation_status_pending || m.investigation_status_id == ECGlobalConstants.investigation_status_review 
                                                 select m.report_id).ToList();
 
                 List<int> reports_with_history = (from m in refGroupInvestigationStatuses
@@ -409,7 +411,7 @@ namespace EC.Models
             {
                 //closed
                 statuses_match_all_report_id = (from m in refGroupInvestigationStatuses
-                                                where m.investigation_status_id == Constant.investigation_status_closed
+                                                where m.investigation_status_id == ECGlobalConstants.investigation_status_closed
                                                
                                                 select m.report_id).ToList();
             }
@@ -417,7 +419,9 @@ namespace EC.Models
             IEnumerable<int> both = all_reports_id.Intersect(statuses_match_all_report_id);
             //.Where(j => (j.investigation_status_id == 4))
             //var refGroupInvestigationStatuses = (from m in db.report_investigation_status
-            int t1 = 0;
+
+
+
          /*   var query = report_investigation_status.GroupBy(p => p.report_id)
                   .Select(g => g.OrderByDescending(p => p.id).FirstOrDefault()
                    );

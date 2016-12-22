@@ -1,6 +1,8 @@
 ﻿@using EC.Models;
 @using EC.Models.Database;
 @using EC.App_LocalResources;
+@using EC.Constants;
+
 @{
     ViewBag.Title = GlobalRes.CompanyMediatorsSettings;
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
@@ -15,7 +17,7 @@
 
     var role_id = um._user.role_id;
     bool is_valid_mediator = false;
-    if (role_id == Constant.level_supervising_mediator)
+    if (role_id == ECLevelConstants.level_supervising_mediator)
     {
         is_valid_mediator = true;
     }

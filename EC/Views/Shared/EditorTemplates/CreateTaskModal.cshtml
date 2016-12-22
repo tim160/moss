@@ -1,6 +1,7 @@
 ﻿@using EC.App_LocalResources;
 @using EC.Models;
 @using EC.Models.Database;
+@using EC.Constants;
 
 @{
     string Res_or_comp = ViewBag.Res_or_comp;
@@ -24,7 +25,7 @@
                 <label class="close1"></label>
                 <div class="closeIcon" onclick='overlay()'></div>
             </div>
-            @if (((normal_button_value == Constant.investigation_status_resolution.ToString())) || (normal_button_value == Constant.investigation_status_closed.ToString()))
+            @if (((normal_button_value == ECGlobalConstants.investigation_status_resolution.ToString())) || (normal_button_value == ECGlobalConstants.investigation_status_closed.ToString()))
             { 
                 <div class="caseResolution custom">
                     <div class="outcomeText">@GlobalRes.RecommendedActionOutcome:</div>

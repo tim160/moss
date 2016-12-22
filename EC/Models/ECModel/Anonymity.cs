@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using EC.Constants;
 
 namespace EC.Models.ECModel
 {
@@ -43,25 +44,25 @@ namespace EC.Models.ECModel
                 anonymity_description = _anonymity.anonymity_ds_en;
 
                 #region Region Languages
-                if ((language_id.Value != null) && (language_id.Value.ToString() == Constant.LanguageFrench))
+                if ((language_id.HasValue) && (language_id.Value.ToString() == ECLanguageConstants.LanguageFrench))
                 {
                     anonymity = _anonymity.anonymity_fr;
                     anonymity_for_company = _anonymity.anonymity_fr_company;
                     anonymity_description = _anonymity.anonymity_ds_fr;
                 }
-                else if ((language_id.Value != null) && (language_id.Value.ToString() == Constant.LanguageSpanish))
+                else if ((language_id.HasValue) && (language_id.Value.ToString() == ECLanguageConstants.LanguageSpanish))
                 {
                     anonymity = _anonymity.anonymity_es;
                     anonymity_for_company = _anonymity.anonymity_es_company;
                     anonymity_description = _anonymity.anonymity_ds_es;
                 }
-                else if ((language_id.Value != null) && (language_id.Value.ToString() == Constant.LanguageRussian))
+                else if ((language_id.HasValue) && (language_id.Value.ToString() == ECLanguageConstants.LanguageRussian))
                 {
                     anonymity = _anonymity.anonymity_ru;
                     anonymity_for_company = _anonymity.anonymity_ru_company;
                     anonymity_description = _anonymity.anonymity_ds_ru;
                 }
-                else if ((language_id.Value != null) && (language_id.Value.ToString() == Constant.LanguageArabic))
+                else if ((language_id.HasValue) && (language_id.Value.ToString() == ECLanguageConstants.LanguageArabic))
                 {
                     anonymity = _anonymity.anonymity_ar;
                     anonymity_for_company = _anonymity.anonymity_ar_company;

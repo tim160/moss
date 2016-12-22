@@ -13,6 +13,7 @@ using EC.Models.ECModel;
 using EC.Controllers.ViewModel;
 using System.Data.Entity.Migrations;
 using EC.App_LocalResources;
+using EC.Constants;
 
 namespace EC.Controllers
 {
@@ -487,10 +488,10 @@ namespace EC.Controllers
             UserModel um = new UserModel(_user.id);
 
             List<string> _company_user_emails = new List<string>();
-            _company_user_emails = (db.user.Where(t => ((t.company_id == um._user.company_id) && (t.role_id != Constant.level_informant))).Select(t => t.email.Trim().ToLower())).ToList();
+            _company_user_emails = (db.user.Where(t => ((t.company_id == um._user.company_id) && (t.role_id != ECLevelConstants.level_informant))).Select(t => t.email.Trim().ToLower())).ToList();
 
             List<int> _company_user_allowed = new List<int>();
-            _company_user_allowed = (db.user.Where(t => ((t.company_id == um._user.company_id) && (t.role_id != Constant.level_informant))).Select(t => t.id)).ToList();
+            _company_user_allowed = (db.user.Where(t => ((t.company_id == um._user.company_id) && (t.role_id != ECLevelConstants.level_informant))).Select(t => t.id)).ToList();
 
             if (_company_user_emails.Contains(email))
                 return App_LocalResources.GlobalRes.MediatorAlreadyRegistered + "!";

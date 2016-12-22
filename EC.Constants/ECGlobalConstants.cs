@@ -10,6 +10,8 @@ namespace EC.Constants
 {
     public static class ECGlobalConstants
     {
+        public static DateTime _default_date = new DateTime(1900, 1, 1);
+
         public const string FormerEmployeeID = "2";
 
         public const string UnknownCompanyId = "1";

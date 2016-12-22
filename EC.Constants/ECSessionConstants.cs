@@ -8,6 +8,15 @@ namespace EC.Constants
 {
     public static class ECSessionConstants
     {
+
+        public static int status_pending = 1;
+        public static int status_active = 2;
+        public static int status_inactive = 3;
+        public static int status_reopened = 4;
+        public static int status_responded = 5;
+        public static int status_closed = 6;
+        public static int status_assigned = 7;
+        public static int status_escalated = 8;
         public static String session_login_nm = "login_nm";
         public static String session_client_nm = "client_nm";
         public static String session_client_id = "client_id";

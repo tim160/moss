@@ -516,7 +516,7 @@ public class GlobalFunctions
     }
     public bool IsInternalUser(string level_id)
     {
-        if ((level_id == Constants.level_Reviewer.ToString()) || (level_id == Constants.level_Primary_Reviewer.ToString()) || (level_id == Constants.level_Reporter.ToString())|| (level_id == Constants.level_Administrator.ToString()))
+        if ((level_id == Constants.level_Reviewer.ToString()) || (level_id == Constants.level_Primary_Reviewer.ToString()) || (level_id == Constants.level_Reporter.ToString())|| (level_id == ECLevelConstants.level_Administrator.ToString()))
         {
             return false;
         }
@@ -3294,6 +3294,7 @@ public class GlobalFunctions
         //sDate = Month + " " + Day + ", " + dt.Year.ToString();
         sDate = Month + " " + Day + ", " + dt.Year.ToString();
         return sDate;
+
     }
 
        

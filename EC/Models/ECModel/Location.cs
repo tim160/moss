@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using EC.Constants;
 
 namespace EC.Models.ECModel
 {
@@ -31,19 +32,19 @@ namespace EC.Models.ECModel
                 location_nm = _location.location_en;
 
                 #region Region Languages
-                if ((language_id.Value != null) && (language_id.Value.ToString() == Constant.LanguageFrench))
+                if ((language_id.Value != null) && (language_id.Value.ToString() == ECLanguageConstants.LanguageFrench))
                 {
                     location_nm = _location.location_fr;
                 }
-                else if ((language_id.Value != null) && (language_id.Value.ToString() == Constant.LanguageSpanish))
+                else if ((language_id.Value != null) && (language_id.Value.ToString() == ECLanguageConstants.LanguageSpanish))
                 {
                     location_nm = _location.location_es;
                 }
-                else if ((language_id.Value != null) && (language_id.Value.ToString() == Constant.LanguageRussian))
+                else if ((language_id.Value != null) && (language_id.Value.ToString() == ECLanguageConstants.LanguageRussian))
                 {
                     location_nm = _location.location_ru;
                 }
-                else if ((language_id.Value != null) && (language_id.Value.ToString() == Constant.LanguageArabic))
+                else if ((language_id.Value != null) && (language_id.Value.ToString() == ECLanguageConstants.LanguageArabic))
                 {
                     location_nm = _location.location_ar;
                 }
