@@ -37,7 +37,7 @@ namespace EC.Controllers
                 return RedirectToAction("Index", "Cases");
 
             //int user_id = 2;
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
@@ -98,7 +98,7 @@ namespace EC.Controllers
                 return RedirectToAction("Index", "Cases");
 
             //int user_id = 2;
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
@@ -203,7 +203,7 @@ namespace EC.Controllers
                 return RedirectToAction("Index", "Cases");
 
             //int user_id = 2;
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
@@ -326,7 +326,7 @@ namespace EC.Controllers
                 return RedirectToAction("Index", "Cases");
 
             //int user_id = 2;
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
@@ -427,7 +427,7 @@ namespace EC.Controllers
                 return RedirectToAction("Index", "Cases");
 
             //int user_id = 2;
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
@@ -468,7 +468,7 @@ namespace EC.Controllers
                 return RedirectToAction("Index", "Case");
 
             //int user_id = 2;
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
        ///     if (user == null || user.id == 0)
        ////         return RedirectToAction("Index", "Account");
 
@@ -500,7 +500,7 @@ namespace EC.Controllers
                 return RedirectToAction("Index", "Cases");
 
             //int user_id = 2;
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
@@ -575,7 +575,7 @@ namespace EC.Controllers
                 return RedirectToAction("Index", "Cases");
 
             //int user_id = 2;
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
@@ -645,7 +645,7 @@ namespace EC.Controllers
 
         public bool AddToMediators()
         {
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return false;
 
@@ -691,7 +691,7 @@ namespace EC.Controllers
 
         public int RemoveMediator()
         {
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return -1;
 
@@ -754,7 +754,7 @@ namespace EC.Controllers
 
         public bool NewStatus()
         {
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return false;
 
@@ -840,7 +840,7 @@ namespace EC.Controllers
         public int CloseCase()
         {
          //   return 2;
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return -1;
 

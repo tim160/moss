@@ -11,6 +11,7 @@ using EC.Models;
 using EC.Models.Database;
 using EC.Models.ECModel;
 using EC.Controllers.ViewModel;
+using EC.Constants;
 
 namespace EC.Controllers
 {
@@ -26,7 +27,7 @@ namespace EC.Controllers
         public ActionResult Index()
         {
 
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
@@ -70,7 +71,7 @@ namespace EC.Controllers
 
         public ActionResult Completed()
         {
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 

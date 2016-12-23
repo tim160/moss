@@ -15,7 +15,7 @@
     <AssemblyName>EC</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>44392</IISExpressSSLPort>
+    <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -375,9 +375,7 @@
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\login.css" />
     <Content Include="Content\main.css" />
-    <Content Include="Content\MainStyle.css">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Content\MainStyle.css" />
     <Content Include="Content\reportCss.css" />
     <Content Include="Content\reportDashboard.css" />
     <Content Include="Content\Site.css" />
@@ -575,7 +573,6 @@
     <Content Include="Views\Index\Start.cshtml" />
     <Content Include="Views\Settings\WorkFlow.cshtml" />
     <Content Include="Views\Case\PartialView\GreenBarCaseResolutionRequest.cshtml" />
-    <Content Include="Views\Settings\partial\casesHeared.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -942,6 +939,10 @@
     <ProjectReference Include="..\EC.Common.Util\EC.Common.Util.csproj">
       <Project>{60f0f82e-fa76-4279-b980-21614256dafb}</Project>
       <Name>EC.Common.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EC.Constants\EC.Constants.csproj">
+      <Project>{f9bd7e38-db60-47dd-a9f3-1bf488708a06}</Project>
+      <Name>EC.Constants</Name>
     </ProjectReference>
     <ProjectReference Include="..\EC.Core.Common\EC.Core.Common.csproj">
       <Project>{a6dc770d-89c5-483b-b73c-077df5c7fefe}</Project>

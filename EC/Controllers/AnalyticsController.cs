@@ -11,6 +11,8 @@ using EC.Models.ECModel;
 using System.Data.SqlClient;
 using EC.Core.Common;
 using EC.Common.Interfaces;
+using EC.Constants;
+
 
 namespace EC.Controllers
 {
@@ -23,7 +25,7 @@ namespace EC.Controllers
         {
             //int user_id = 2;
 
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
@@ -94,8 +96,8 @@ namespace EC.Controllers
         public ActionResult Tasks()
         {
             //int user_id = 2;
-            
-            user user = (user)Session[Constants.CurrentUserMarcker];
+
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
             #region EC-CC Viewbag
@@ -174,7 +176,7 @@ namespace EC.Controllers
         {
             //int user_id = 2;
 
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
             #region EC-CC Viewbag

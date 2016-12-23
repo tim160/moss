@@ -6,7 +6,7 @@ using System.Web.Security;
 
 using EC.Models;
 using EC.Models.Database;
-
+using EC.Constants;
 
 namespace EC.Controllers.utils
 {
@@ -23,7 +23,7 @@ namespace EC.Controllers.utils
                string.Empty,
                FormsAuthentication.FormsCookiePath);
             var encTicket = FormsAuthentication.Encrypt(ticket);
-            var AuthCookie = new HttpCookie(Constants.AuthUserCookies)
+            var AuthCookie = new HttpCookie(ECGlobalConstants.AuthUserCookies)
             {
                 Value = encTicket,
                 Expires = DateTime.Now.Add(FormsAuthentication.Timeout)
@@ -34,7 +34,7 @@ namespace EC.Controllers.utils
 
         public static user GetCookies(HttpContextBase httpContext)
         {
-           HttpCookie authCookie = httpContext.Request.Cookies.Get(Constants.AuthUserCookies);
+            HttpCookie authCookie = httpContext.Request.Cookies.Get(ECGlobalConstants.AuthUserCookies);
            if (authCookie == null || string.IsNullOrEmpty(authCookie.Value)) return null;
            var ticket = FormsAuthentication.Decrypt(authCookie.Value);
            return UserModel.inst.GetUserByLogin(ticket.Name);

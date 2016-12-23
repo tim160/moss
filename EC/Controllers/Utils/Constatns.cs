@@ -7,7 +7,5 @@ namespace EC.Controllers
 {
     public class Constants
     {
-        public const string CurrentUserMarcker = "CurentUser";
-        public const string AuthUserCookies = "temp_templ_store";
-    }
+       }
 }

@@ -75,7 +75,7 @@ namespace EC.Controllers
 
             }
             //int user_id = 2;
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
@@ -458,7 +458,7 @@ namespace EC.Controllers
                 UserModel userModel = new UserModel();
                 var user = userModel.Login(login, pass);
                 EC.Controllers.utils.AuthHelper.SetCookies(user, HttpContext);
-                Session[Constants.CurrentUserMarcker] = user;
+                Session[ECGlobalConstants.CurrentUserMarcker] = user;
                 Session["userName"] = "";
                 Session["userId"] = user.id;
 
@@ -622,7 +622,7 @@ namespace EC.Controllers
                 UserModel userModel = new UserModel();
                 var user = userModel.Login(login, pass);
                 EC.Controllers.utils.AuthHelper.SetCookies(user, HttpContext);
-                Session[Constants.CurrentUserMarcker] = user;
+                Session[ECGlobalConstants.CurrentUserMarcker] = user;
                 Session["userName"] = "";
                 Session["userId"] = user.id;
 
