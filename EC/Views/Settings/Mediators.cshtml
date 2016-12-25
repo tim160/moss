@@ -21,14 +21,6 @@
     {
         is_valid_mediator = true;
     }
-    //bool is_cc = true;
-    //String class_ext = "";
-    //if (is_cc)
-    //{
-    //    class_ext = "_cc";
-    //}
-    
-    //19
 }
 
 
@@ -38,20 +30,6 @@
         int active = 4;
     }
     @Html.Partial("~/Views/Settings/partial/casesHeared.cshtml", active)
-    @*<div id="casesHeared">
-    <div id="menu">
-        <h2 class="mainTitle">@GlobalRes.Menu:</h2>
-        <div>
-            <a href="/Settings/Index" class="caseesTab">@GlobalRes.MyProfile</a>
-            <a href="/Settings/Password" class="caseesTab">@GlobalRes.Password</a>
-            <a href="/Settings/Company" class="caseesTab">@GlobalRes.CompanyProfile</a>
-            <a class="caseesTab active">@GlobalRes.CompanyMediators</a>
-            <a href="/Settings/Cases" class="caseesTab">@GlobalRes.CaseManagementDeadlines</a>
-        </div>
-    </div>
-    </div>*@
-
-        <!--casesHeared-->
 
     <div class="contentSettings secondHeader">
         <div class="headerCompanyProfile">
@@ -175,100 +153,4 @@
         </div><!--contentSettings-->
     </div><!--contentCompanyProfile-->
 </div>
-
-@*<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>*@
-@*<script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>*@
-<script>
-    $(document).ready(function () {
-        //START Open mini menu for mobile
-        function blockActivityHeight() {
-            if ($('#menu').height() < 50) {
-                $('.positionActivityIcon').height(89);
-            }
-            else {
-                $('.positionActivityIcon').height($('#casesHeared').height());
-            }
-        }
-        $('.mainTitle').click(function () {
-            $('.mainTitle + div').toggle();
-            blockActivityHeight();
-        });
-        //----------------END Open mini menu for mobile---------------------------
-
-        //function focusEmailSend() {
-        //    $('.blockSendEmail input,.blockSendEmail textarea')
-        //     .focus(function () {
-        //         var thisElement = $(this);
-        //         thisElement.parent('.blockSendEmail').removeClass('greyBorder redBorder').addClass('greenBorder');
-        //         thisElement.parent('.blockSendEmail').find('.closeIcon').show();
-        //         thisElement.parent('.blockSendEmail').find('span.sendBtn').show();
-        //     });    
-        //}
-        //function focusoutEmailSend() {
-        //    $('.blockSendEmail').on('mouseleave', function () {
-        //        var thisElement = $(this);
-        //        thisElement.removeClass('greenBorder').addClass('greyBorder');
-        //        thisElement.find('.closeIcon').hide();
-        //        thisElement.find('span.sendBtn').hide();
-        //        $('.blockSendEmail input,.blockSendEmail textarea').focusout();
-        //    });
-        //}
-
-        //function sendEmail() {
-        //    $('.blockSendEmail span').click(function () {
-        //        console.log('sendClick');
-        //        if ($("#sendEmail").val().trim().length > 0) {
-        //            $('.blockSendEmail input').click();
-        //            var email = $("#sendEmail").val().trim();
-        //            console.log(email);
-        //            createInvitation();
-        //        }
-        //        else {
-        //            $(this).parent('.blockSendEmail').addClass('redBorder');
-        //        }
-        //    });
-        //}
-        $(".closeIcon").on('click', function (event) {
-            $("#sendEmail").val("");
-        });
-        $(".sendBtn").on('click', function (event) {
-            var val = $("#sendEmail").val();
-            if ($("#sendEmail").val().trim().length > 0) {
-                $('.blockSendEmail input').click();
-                var email = $("#sendEmail").val().trim();
-                console.log(email);
-                createInvitation();
-            }
-            else {
-                $(event.currentTarget).parent('.blockSendEmail').addClass('redBorder');
-            }
-        });
-        function createInvitation() {
-            $.ajax({
-                method: "POST",
-                url: "/Settings/InviteMediator",
-                data: {
-                    email: $("#sendEmail").val().trim(),
-                }
-            }).done(function (data) {//data from server
-                if (data != 'completed') {
-                    alert(data);
-                    //console.log(data);
-                }
-                else {
-                    $("#sendEmail").val('');
-                    //    location.reload();
-                    alert('@GlobalRes.InvitationSuccessfull');
-                }
-            }).fail(function (error) {
-                console.log(error);
-            });
-        }
-
-
-        //focusEmailSend();
-        //focusoutEmailSend();
-        //sendEmail();
-    });
-
-</script>
+<input type="hidden" id="InvitationSuccessfull" value="@GlobalRes.InvitationSuccessfull" />

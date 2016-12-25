@@ -407,4 +407,73 @@
             });
         }
     /*end page index*/
+
+    /*start mediators*/
+
+    //START Open mini menu for mobile
+        function blockActivityHeight() {
+            if ($('#menu').height() < 50) {
+                $('.positionActivityIcon').height(89);
+            }
+            else {
+                $('.positionActivityIcon').height($('#casesHeared').height());
+            }
+        }
+        $('.mainTitle').click(function () {
+            $('.mainTitle + div').toggle();
+            blockActivityHeight();
+        });
+
+        $(".closeIcon").on('click', function (event) {
+            $("#sendEmail").val("");
+        });
+        $(".sendBtn").on('click', function (event) {
+            var val = $("#sendEmail").val();
+            if ($("#sendEmail").val().trim().length > 0) {
+                $('.blockSendEmail input').click();
+                var email = $("#sendEmail").val().trim();
+                console.log(email);
+                createInvitation();
+            }
+            else {
+                $(event.currentTarget).parent('.blockSendEmail').addClass('redBorder');
+            }
+        });
+        function createInvitation() {
+            var InvitationSuccessfull = $("#InvitationSuccessfull").val();
+            $.ajax({
+                method: "POST",
+                url: "/Settings/InviteMediator",
+                data: {
+                    email: $("#sendEmail").val().trim(),
+                }
+            }).done(function (data) {//data from server
+                if (data != 'completed') {
+                    alert(data);
+                }
+                else {
+                    $("#sendEmail").val('');
+                    alert(InvitationSuccessfull);
+                }
+            }).fail(function (error) {
+                console.log(error);
+            });
+        }
+    /*end mediators*/
+
+    /*Password view start*/
+        var status = $("#status").val();
+        
+        if (typeof status != 'undefined' && status != "") {
+            alert(status);
+        }
+        $('.blockPersonalSettings input')
+            .focus(function () {
+                $(this).parent('.blockPersonalSettings').addClass('greenBorder').removeClass('greyBorder');
+            })
+            .focusout(function () {
+                $(this).parent('.blockPersonalSettings').addClass('greyBorder').removeClass('greenBorder');
+            });
+    /*Password view end*/
+
 });
