@@ -15,6 +15,7 @@ using EC.Controllers.Utils;
 using EC.Controllers.utils;
 using Resources = EC.Localization.Resources;
 using log4net;
+using EC.Constants;
 
 namespace EC.Controllers
 {
@@ -182,7 +183,7 @@ namespace EC.Controllers
         private void SignIn(user user)
         {
             AuthHelper.SetCookies(user, HttpContext);
-            Session[Constants.CurrentUserMarcker] = user;
+            Session[ECGlobalConstants.CurrentUserMarcker] = user;
         }
 
         private void SingOut()

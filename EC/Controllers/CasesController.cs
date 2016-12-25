@@ -28,7 +28,7 @@ namespace EC.Controllers
         {
             //   List<report> unread_report = UserModel.inst.UnreadReport(user_id, 0);
             //   ViewBag.pending_report_ids = PendingReports();
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
@@ -75,7 +75,7 @@ namespace EC.Controllers
 
         public ActionResult Completed()
         {
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
@@ -121,7 +121,7 @@ namespace EC.Controllers
 
         public ActionResult Closed()
         {
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
@@ -166,7 +166,7 @@ namespace EC.Controllers
         public ActionResult Spam()
         {
 
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
@@ -210,7 +210,7 @@ namespace EC.Controllers
 
         public List<int> PendingReports()
         {
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             UserModel um = new UserModel(user.id);
 
             List<int> all_pending_reports_ids = um.ReportsSearchIds(um._user.company_id, 4);

@@ -11,6 +11,7 @@ using EC.Controllers.ViewModel;
 using EC.Controllers.utils;
 using EC.Models.ViewModel;
 using EC.Models.App.Case;
+using EC.Constants;
 
 namespace EC.Controllers
 {
@@ -20,7 +21,7 @@ namespace EC.Controllers
         // GET: ReporterDashboard
         public ActionResult Index(int? id)
         {
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             user = AuthHelper.GetCookies(HttpContext);
             if (user == null || user.id == 0 || user.role_id == 4 || user.role_id == 5 || user.role_id ==6  || user.role_id == 7)
                 return RedirectToAction("Index", "Account");
@@ -57,7 +58,7 @@ namespace EC.Controllers
         // GET: Reporter Messages
         public ActionResult Messages(int? id)
         {
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0 || user.role_id == 4 || user.role_id == 5 || user.role_id == 6 || user.role_id == 7)
                 return RedirectToAction("Index", "Account");
 
@@ -153,7 +154,7 @@ namespace EC.Controllers
 */
             }
 
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0 || user.role_id == 4 || user.role_id == 5 || user.role_id == 6 || user.role_id == 7)
                 return RedirectToAction("Index", "Account");
 
@@ -189,7 +190,7 @@ namespace EC.Controllers
 
         public PartialViewResult AddedMessages()
         {
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
       //      if (user == null || user.id == 0 || user.role_id == 4 || user.role_id == 5 || user.role_id == 6 || user.role_id == 7)
      //           return RedirectToAction("Index", "Account");
             int sender_id = Convert.ToInt16(Request["sender_id"]);
@@ -264,7 +265,7 @@ namespace EC.Controllers
         // GET: Reporter Messages
         public ActionResult Settings(int? id)
         {
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0 || user.role_id == 4 || user.role_id == 5 || user.role_id == 6 || user.role_id == 7)
                 return RedirectToAction("Index", "Account");
 
@@ -305,7 +306,7 @@ namespace EC.Controllers
         // GET: Reporter Messages
         public ActionResult Activity(int? id)
         {
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0 || user.role_id == 4 || user.role_id == 5 || user.role_id == 6 || user.role_id == 7)
                 return RedirectToAction("Index", "Account");
 
@@ -359,7 +360,7 @@ namespace EC.Controllers
             if (Request.IsAjaxRequest() && Session["incidentAnonymity"]!=null)
             {
                 int incidentAnonymity = (int) Session["incidentAnonymity"];
-                user userSession = (user)Session[Constants.CurrentUserMarcker];
+                user userSession = (user)Session[ECGlobalConstants.CurrentUserMarcker];
                 if(incidentAnonymity > 0) 
                 return ReporterDashboardModel.inst.UpdateUser(Request, userSession, incidentAnonymity);
             }

@@ -14,6 +14,7 @@ using EC.Models.Database;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
+using EC.Constants;
 
 namespace EC.Controllers
 {
@@ -79,7 +80,7 @@ namespace EC.Controllers
         private void SignIn(user user)
         {
             AuthHelper.SetCookies(user, HttpContext);
-            Session[Constants.CurrentUserMarcker] = user;
+            Session[ECGlobalConstants.CurrentUserMarcker] = user;
         }
 
         private void SingOut()

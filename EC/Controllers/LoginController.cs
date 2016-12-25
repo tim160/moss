@@ -9,6 +9,7 @@ using EC.Controllers.utils;
 using EC.App_LocalResources;
 using System.Text.RegularExpressions;
 //using EC.Common.Util;
+using EC.Constants;
 
 namespace EC.Controllers
 {
@@ -147,7 +148,7 @@ namespace EC.Controllers
         private void SignIn(user user)
         {
             AuthHelper.SetCookies(user, HttpContext);
-            Session[Constants.CurrentUserMarcker] = user;
+            Session[ECGlobalConstants.CurrentUserMarcker] = user;
         }
 
 

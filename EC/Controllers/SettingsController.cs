@@ -24,7 +24,7 @@ namespace EC.Controllers
         // GET: Settings
         public ActionResult Index()
         {
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
@@ -50,7 +50,7 @@ namespace EC.Controllers
         {
             //int user_id = 2;
 
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
@@ -82,7 +82,7 @@ namespace EC.Controllers
         {
             //int user_id = 2;
 
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
@@ -117,7 +117,7 @@ namespace EC.Controllers
             {
                 return RedirectToAction("Index", "Settings");
             }
-            user _user = (user)Session[Constants.CurrentUserMarcker];
+            user _user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (_user == null || _user.id == 0)
                 return RedirectToAction("Index", "Account");
 
@@ -180,7 +180,7 @@ namespace EC.Controllers
         // GET: Settings
         public ActionResult Cases()
         {
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
@@ -253,7 +253,7 @@ namespace EC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult UpdateMediator([Bind(Include = "id,status_id,role_id")] user _user)
         {
-            user session_user = (user)Session[Constants.CurrentUserMarcker];
+            user session_user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (session_user == null || session_user.id == 0)
                 return RedirectToAction("Index", "Account");
 
@@ -411,7 +411,7 @@ namespace EC.Controllers
             string result = "false";
             HttpPostedFileBase photo = Request.Files["_file"];
             /*попробую получить юзера из сессии и id компании*/
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return result;
             int user_id = user.id;
@@ -467,7 +467,7 @@ namespace EC.Controllers
         {
             email = email.ToLower().Trim();
 
-            user _user = (user)Session[Constants.CurrentUserMarcker];
+            user _user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (_user == null || _user.id == 0)
                 return App_LocalResources.GlobalRes.EmptyData;
 
@@ -543,7 +543,7 @@ namespace EC.Controllers
         }
         public ActionResult Password()
         {
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
@@ -566,7 +566,7 @@ namespace EC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ChangePass(string oldPass, string newPass, string confPass)
         {
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
             int user_id = user.id;

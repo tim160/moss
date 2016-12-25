@@ -7,6 +7,7 @@ using EC.Controllers.Utils;
 using EC.Models;
 using EC.Models.Database;
 using EC.Models.ECModel;
+using EC.Constants;
 
 namespace EC.Controllers
 {
@@ -15,7 +16,7 @@ namespace EC.Controllers
         // GET: EmployeeAwareness
         public ActionResult Index()
         {
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
@@ -37,7 +38,7 @@ namespace EC.Controllers
 
         public ActionResult Poster()
         {
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
