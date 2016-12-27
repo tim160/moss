@@ -74,19 +74,7 @@
         int active = 0;
     }
     @Html.Partial("~/Views/Settings/partial/casesHeared.cshtml", active)
-    @*<div id="casesHeared">
-        <div id="menu">
-            <h2 class="mainTitle">@GlobalRes.Menu:</h2>
-            <div>
-                <a href="/Settings/Index" class="caseesTab">@GlobalRes.MyProfile</a>
-                <a href="/Settings/Password" class="caseesTab">@GlobalRes.Password</a>
-                <a href="/Settings/Company" class="caseesTab">@GlobalRes.CompanyProfile</a>
-                <a href="/Settings/Mediators" class="caseesTab active">@GlobalRes.CompanyMediators</a>
-                <a href="/Settings/Cases" class="caseesTab">@GlobalRes.CaseManagementDeadlines</a>
-            </div>
-        </div>
-    </div>*@
-    
+   
     <!--casesHeared-->
     @using (Html.BeginForm("UpdateMediator", "Settings", Model, FormMethod.Post))
     {
@@ -192,7 +180,7 @@
                 {
                     <div class="blockUpdateProfile">
                         <div class="updateProfileBtn">
-                            <input type="submit" value="update" />
+                            <input type="submit" class="greenButton" value="update" />
                             <span style="display: none;">@GlobalRes.UpdateProfile.ToLower()</span>
                         </div>
                     </div>
@@ -203,76 +191,75 @@
     }
     <!--</form>-->
 </div>
-
+<input type="hidden" id="levelId" value="@Html.Raw(um._user.role_id)" />
 
 <script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
 <script>
     $(document).ready(function () {
 
-        //START Open mini menu for mobile
-        function blockActivityHeight() {
-            if ($('#menu').height() < 50) {
-                $('.positionActivityIcon').height(89);
-            }
-            else {
-                $('.positionActivityIcon').height($('#casesHeared').height());
-            }
-        }
-        $('.mainTitle').click(function () {
-            $('.mainTitle + div').toggle();
-            blockActivityHeight();
-        });
+        ////START Open mini menu for mobile
+        //function blockActivityHeight() {
+        //    if ($('#menu').height() < 50) {
+        //        $('.positionActivityIcon').height(89);
+        //    }
+        //    else {
+        //        $('.positionActivityIcon').height($('#casesHeared').height());
+        //    }
+        //}
+        //$('.mainTitle').click(function () {
+        //    $('.mainTitle + div').toggle();
+        //    blockActivityHeight();
+        //});
         //----------------END Open mini menu for mobile---------------------------
 
-        $('.blockPersonalSettings input')
-           .focus(function () {
-               $(this).parent('.blockPersonalSettings').css({ 'border': '2px solid #05b5a2', 'width': '99.8%' });
-           })
-            .focusout(function () {
-                $(this).parent('.blockPersonalSettings').css({ 'border': '1px solid #e0e5e6', 'width': '100%' });
-            });
+        //$('.blockPersonalSettings input')
+        //   .focus(function () {
+        //       $(this).parent('.blockPersonalSettings').css({ 'border': '2px solid #05b5a2', 'width': '99.8%' });
+        //   })
+        //    .focusout(function () {
+        //        $(this).parent('.blockPersonalSettings').css({ 'border': '1px solid #e0e5e6', 'width': '100%' });
+        //    });
 
 
 
-        $('.newMessageBtn span').click(function () {
-            if (($("#first_nm").val().trim.length > 0) && ($("#last_nm").val().trim.length > 0) && ($("#title_ds").val().trim.length > 0) && ($("#email").val().trim.length > 0)) {
-                $('.newMessageBtn input').click();
-            }
-        });
+        //$('.newMessageBtn span').click(function () {
+        //    if (($("#first_nm").val().trim.length > 0) && ($("#last_nm").val().trim.length > 0) && ($("#title_ds").val().trim.length > 0) && ($("#email").val().trim.length > 0)) {
+        //        $('.newMessageBtn input').click();
+        //    }
+        //});
 
 
-        var levelId = @Html.Raw(um._user.role_id);
 
         //RadioButton
         //pod katei vse knopki najimautsya. Mne nado, chtobi eta ne najimalas nikogda
-        if(levelId == 5) {
-            var radioBlock = $('.inputBlock2');
+        //if(levelId == 5) {
+        //    var radioBlock = $('.inputBlock2');
 
-            radioBlock.click(function () {
+        //    radioBlock.click(function () {
 
-                var self = $(this);
-                var arrows = self.parent('.inputRadio').parent('.rowBlock');
-                arrows.find('.inputRadio').css('background', 'rgb(255, 255, 255)');
-                arrows.find('.inputRadio').find('.radioTitle').css('color', 'rgb(174, 181, 183)');
+        //        var self = $(this);
+        //        var arrows = self.parent('.inputRadio').parent('.rowBlock');
+        //        arrows.find('.inputRadio').css('background', 'rgb(255, 255, 255)');
+        //        arrows.find('.inputRadio').find('.radioTitle').css('color', 'rgb(174, 181, 183)');
 
-                self.parent('.inputRadio').css('background', 'rgb(242, 247, 247)');
-                self.find('.radioTitle').css('color', 'rgb(60, 62, 63)');
-            });
+        //        self.parent('.inputRadio').css('background', 'rgb(242, 247, 247)');
+        //        self.find('.radioTitle').css('color', 'rgb(60, 62, 63)');
+        //    });
 
-        }
-        var levelId = @Html.Raw(um._user.role_id);
+        //}
+        //var levelId = $("#levelId").val();
 
-        if(levelId == 5) {
-            var RadioButton = $('.inputBlock2');
-            RadioButton.click(function () {
-                var mediatorBtn = $(this).parent();
-                var mediatorAllBtn = $(this).parent().parent();
-                mediatorAllBtn.find('.inputRadio').removeClass('active');
-                mediatorBtn.addClass('active');
-                mediatorBtn.find("input").prop('checked', true);
+        //if(levelId == 5) {
+        //    var RadioButton = $('.inputBlock2');
+        //    RadioButton.click(function () {
+        //        var mediatorBtn = $(this).parent();
+        //        var mediatorAllBtn = $(this).parent().parent();
+        //        mediatorAllBtn.find('.inputRadio').removeClass('active');
+        //        mediatorBtn.addClass('active');
+        //        mediatorBtn.find("input").prop('checked', true);
 
-            });
-        }
+        //    });
+        //}
         //RadioButton Mediator
 
 
