@@ -7,7 +7,7 @@ using EC.App_LocalResources;
 using EC.Models.App;
 using EC.Core.Common;
 using EC.Common.Interfaces;
-
+using EC.Constants;
 
 namespace EC.Models.ViewModel
 {
@@ -121,7 +121,7 @@ namespace EC.Models.ViewModel
             this.new_tasks = um.UnreadActivityUserTaskQuantity(rm._report.id, false);
 
 
-            if ((rm._investigation_status == Constant.investigation_status_completed) || (rm._investigation_status == Constant.investigation_status_resolution))
+            if ((rm._investigation_status == ECGlobalConstants.investigation_status_completed) || (rm._investigation_status == ECGlobalConstants.investigation_status_resolution))
             {
                 // completed  // cannot be resolved
                 this.show_previous_status = false;
@@ -135,7 +135,7 @@ namespace EC.Models.ViewModel
                 this.last_sender_date = m_DateTimeHelper.ConvertDateToLongMonthString(ris.created_date);
                 this.last_status_message = ris.description;
 
-                if ((rm._investigation_status == Constant.investigation_status_completed))
+                if ((rm._investigation_status == ECGlobalConstants.investigation_status_completed))
                 {
                     this.previous_header_message = GlobalRes.CaseCantBeResolved;
                 }
@@ -146,7 +146,7 @@ namespace EC.Models.ViewModel
             }
 
 
-            if(((rm._investigation_status == Constant.investigation_status_closed) && (rm._previous_investigation_status_id == Constant.investigation_status_completed)) ||((rm._investigation_status == Constant.investigation_status_closed) && (rm._previous_investigation_status_id == Constant.investigation_status_resolution)))
+            if (((rm._investigation_status == ECGlobalConstants.investigation_status_closed) && (rm._previous_investigation_status_id == ECGlobalConstants.investigation_status_completed)) || ((rm._investigation_status == ECGlobalConstants.investigation_status_closed) && (rm._previous_investigation_status_id == ECGlobalConstants.investigation_status_resolution)))
             {
                 //resolved-closed  +  completed-closed
 
@@ -162,7 +162,7 @@ namespace EC.Models.ViewModel
                 this.previous_status_message = ris.description;
                 this.previous_investigation_status_number = ris.investigation_status_id;
 
-                if ((rm._investigation_status == Constant.investigation_status_completed))
+                if ((rm._investigation_status == ECGlobalConstants.investigation_status_completed))
                 {
                     this.previous_header_message = GlobalRes.CaseCantBeResolved;
                 }
@@ -181,7 +181,7 @@ namespace EC.Models.ViewModel
                 this.last_sender_date = m_DateTimeHelper.ConvertDateToLongMonthString(ris.created_date);
                 this.last_status_message = ris.description;
 
-                if ((rm._investigation_status == Constant.investigation_status_completed))
+                if ((rm._investigation_status == ECGlobalConstants.investigation_status_completed))
                 {
                     this.last_header_message = GlobalRes.CaseCantBeResolved;
                 }

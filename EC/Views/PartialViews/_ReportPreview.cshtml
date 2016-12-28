@@ -4,6 +4,7 @@
 @using EC.App_LocalResources;
 @using EC.Common.Interfaces;
 @using EC.Core.Common;
+@using EC.Constants;
 
 @{
     GlobalFunctions glb = new GlobalFunctions();
@@ -45,7 +46,7 @@
     if (flag == 2)
     {
         statusclass = "completedCases";
-        if ((rm._investigation_status == Constant.investigation_status_closed) || (rm._previous_investigation_status_id == Constant.investigation_status_completed))
+        if ((rm._investigation_status == ECGlobalConstants.investigation_status_closed) || (rm._previous_investigation_status_id == ECGlobalConstants.investigation_status_completed))
         {
             typeCases = "caseClosed";
         }
@@ -100,15 +101,15 @@
                     @if (flag == 2)
                     {
                         string caseStatusBtn = "";
-                        if (rm._investigation_status == Constant.investigation_status_closed)
+                        if (rm._investigation_status == ECGlobalConstants.investigation_status_closed)
                         {
                             caseStatusBtn = "caseClosedBtn";
                         }
-                        else if (rm._investigation_status == Constant.investigation_status_completed)
+                        else if (rm._investigation_status == ECGlobalConstants.investigation_status_completed)
                         {
                             caseStatusBtn = "caseCompletedBtn";
-                        }                   
-                        else// if (rm._investigation_status == Constant.investigation_status_resolution)
+                        }
+                        else// if (rm._investigation_status == ECGlobalConstants.investigation_status_resolution)
                         {
                             caseStatusBtn = "caseResolvedBtn";
                         }
@@ -302,7 +303,7 @@
                 <li class="infoCasesBlock">
                     <div class="contanatTable">
                         <div class="infoIcon">
-                            @if ((rm._investigation_status == Constant.investigation_status_completed) || ((rm._investigation_status == Constant.investigation_status_closed) && (rm._previous_investigation_status_id == Constant.investigation_status_completed)))
+                            @if ((rm._investigation_status == ECGlobalConstants.investigation_status_completed) || ((rm._investigation_status == ECGlobalConstants.investigation_status_closed) && (rm._previous_investigation_status_id == ECGlobalConstants.investigation_status_completed)))
                             {
                                 <img src='@Url.Content("/Content/Icons/caseNotResolvedIcons.png")' />
                             }
@@ -312,7 +313,7 @@
                             }
                         </div>
                         <ul class="infoCases">
-                            @if ((rm._investigation_status == Constant.investigation_status_completed) || (rm._investigation_status == Constant.investigation_status_resolution))
+                            @if ((rm._investigation_status == ECGlobalConstants.investigation_status_completed) || (rm._investigation_status == ECGlobalConstants.investigation_status_resolution))
                             {
                                 // not confirmed resolved/completed
                                 ris = rm._last_investigation_status();
@@ -333,7 +334,7 @@
                                         </div>
                                     </div>
                                     <div class="textRight">
-                                        @if (rm._investigation_status == Constant.investigation_status_completed)
+                                        @if (rm._investigation_status == ECGlobalConstants.investigation_status_completed)
                                         {
                                             <div class="CaseCantBeResolved title">@GlobalRes.CaseCantBeResolved.</div>
                                         }
@@ -353,7 +354,7 @@
                             }
                             else
                             {
-                                if (((rm._investigation_status == Constant.investigation_status_closed) && (rm._previous_investigation_status_id == Constant.investigation_status_resolution)) || ((rm._investigation_status == Constant.investigation_status_closed) && (rm._previous_investigation_status_id == Constant.investigation_status_completed)))
+                                if (((rm._investigation_status == ECGlobalConstants.investigation_status_closed) && (rm._previous_investigation_status_id == ECGlobalConstants.investigation_status_resolution)) || ((rm._investigation_status == ECGlobalConstants.investigation_status_closed) && (rm._previous_investigation_status_id == ECGlobalConstants.investigation_status_completed)))
                                 {
                                     {
                                         // confirmed resolved/completed
@@ -389,7 +390,7 @@
                                                 <div class="textRight">
                                                     @if (j == 0)
                                                     {
-                                                        if ((rm._investigation_status == Constant.investigation_status_closed) && (rm._previous_investigation_status_id == Constant.investigation_status_completed))
+                                                        if ((rm._investigation_status == ECGlobalConstants.investigation_status_closed) && (rm._previous_investigation_status_id == ECGlobalConstants.investigation_status_completed))
                                                         {
                                                             <div class="CaseCantBeResolved title">@GlobalRes.CaseCantBeResolved.</div>
                                                         }
@@ -429,7 +430,7 @@
                         <div class="infoIcon">
                         </div>
                         <ul class="infoCases">
-                            @if (rm._investigation_status == Constant.investigation_status_spam)
+                            @if (rm._investigation_status == ECGlobalConstants.investigation_status_spam)
                             {
                                 // not confirmed spam
                                 ris = rm._last_investigation_status();
@@ -463,7 +464,7 @@
                             }
                             else
                             {
-                                if ((rm._investigation_status == Constant.investigation_status_closed) && (rm._previous_investigation_status_id == Constant.investigation_status_spam))
+                                if ((rm._investigation_status == ECGlobalConstants.investigation_status_closed) && (rm._previous_investigation_status_id == ECGlobalConstants.investigation_status_spam))
                                 {
                                     for (int j = 0; j < 2; j++)
                                     {

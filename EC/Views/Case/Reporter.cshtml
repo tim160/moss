@@ -3,6 +3,8 @@
 @using EC.App_LocalResources;
 @using EC.Models.ViewModel;
 @using EC.Models.App.Case;
+@using EC.Constants;
+
 @{
 
     @*<link type="text/css" href="~/Content/caseTasks.min.css" rel="stylesheet">*@
@@ -41,7 +43,7 @@
         <div class="rightBlockContent">
             <div id="slider"><div class="reportIconWhite"></div></div>
 
-            @if ((rm._investigation_status == Constant.investigation_status_resolution) || (rm._investigation_status == Constant.investigation_status_completed))
+            @if ((rm._investigation_status == ECGlobalConstants.investigation_status_resolution) || (rm._investigation_status == ECGlobalConstants.investigation_status_completed))
             {
                 @Html.Partial("~/Views/Case/PartialView/GreenBarCaseResolutionRequest.cshtml")
             }
@@ -90,7 +92,7 @@
                         }
                     </div>
 
-                @if (rm._investigation_status != Constant.investigation_status_closed)
+                @if (rm._investigation_status != ECGlobalConstants.investigation_status_closed)
                 {
                     using (Html.BeginForm())
                     {

@@ -6,6 +6,8 @@ using System.Linq;
 using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
+using EC.Constants;
+
 
 namespace EC.Controllers
 {
@@ -16,7 +18,7 @@ namespace EC.Controllers
         {
             base.OnActionExecuted(filterContext);
             HttpContextBase httpContext = new HttpContextWrapper(HttpContext.ApplicationInstance.Context);
-            user user = (user)httpContext.Session[Constants.CurrentUserMarcker];
+            user user = (user)httpContext.Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null)
             {
                 user = AuthHelper.GetCookies(httpContext);

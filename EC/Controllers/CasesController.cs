@@ -9,6 +9,8 @@ using EC.Models.Database;
 using EC.Models.ECModel;
 using EC.Controllers.ViewModel;
 using EC.Models.ViewModel;
+using EC.Constants;
+
 
 namespace EC.Controllers
 {
@@ -26,7 +28,7 @@ namespace EC.Controllers
         {
             //   List<report> unread_report = UserModel.inst.UnreadReport(user_id, 0);
             //   ViewBag.pending_report_ids = PendingReports();
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
@@ -73,7 +75,7 @@ namespace EC.Controllers
 
         public ActionResult Completed()
         {
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
@@ -119,7 +121,7 @@ namespace EC.Controllers
 
         public ActionResult Closed()
         {
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
@@ -164,7 +166,7 @@ namespace EC.Controllers
         public ActionResult Spam()
         {
 
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
@@ -208,7 +210,7 @@ namespace EC.Controllers
 
         public List<int> PendingReports()
         {
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             UserModel um = new UserModel(user.id);
 
             List<int> all_pending_reports_ids = um.ReportsSearchIds(um._user.company_id, 4);
@@ -242,7 +244,7 @@ namespace EC.Controllers
             {
                 if (refGroupReportReadDate.Where(item => ((item.report_id == ID))).Count() == 0)
                 {
-                    dt2 = Constant._default_date;
+                    dt2 = ECGlobalConstants._default_date;
                 }
                 else
                 {
@@ -251,7 +253,7 @@ namespace EC.Controllers
 
                 if (refGroupReportLogs.Where(item => ((item.report_id == ID))).Count() == 0)
                 {
-                    dt1 = Constant._default_date.AddDays(2);
+                    dt1 = ECGlobalConstants._default_date.AddDays(2);
                 }
                 else
                 {

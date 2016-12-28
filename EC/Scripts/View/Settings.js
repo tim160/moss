@@ -1,4 +1,20 @@
 ﻿$(document).ready(function () {
+    /*global functions for SETTINGS PAGE*/
+    function blockActivityHeight() {
+        if ($('#menu').height() < 50) {
+            $('.positionActivityIcon').height(89);
+        }
+        else {
+            $('.positionActivityIcon').height($('#casesHeared').height());
+        }
+    }
+    $('.mainTitle').click(function () {
+        $('.mainTitle + div').toggle();
+        blockActivityHeight();
+    });
+    /*end global functions*/
+
+
     /*page cases begin*/
     updateTOTALTIMEONCASE();
     var isValidMed = "@is_valid_mediator";
@@ -128,21 +144,21 @@
             });
         }
 
-        function blockActivityHeight() {
-            if ($('#menu').height() < 50) {
-                $('.positionActivityIcon').height(89);
-            }
-            else {
-                $('.positionActivityIcon').height($('#casesHeared').height());
-            }
-        }
+        //function blockActivityHeight() {
+        //    if ($('#menu').height() < 50) {
+        //        $('.positionActivityIcon').height(89);
+        //    }
+        //    else {
+        //        $('.positionActivityIcon').height($('#casesHeared').height());
+        //    }
+        //}
 
-        function miniMenu() {
-            $('.mainTitle').click(function () {
-                $('.mainTitle + div').toggle();
-                blockActivityHeight();
-            });
-        }
+        //function miniMenu() {
+        //    $('.mainTitle').click(function () {
+        //        $('.mainTitle + div').toggle();
+        //        blockActivityHeight();
+        //    });
+        //}
         var contentCompanyProfile = $('.contentCompanyProfile');
 
         $(".menuCompanyProfile .settingMenuItems .menuItem").click(function (element) {
@@ -191,7 +207,7 @@
 
 
 
-        miniMenu();
+        //miniMenu();
         ajaxUploadFiles();
         contentCompanyProfileShow();
 
@@ -407,4 +423,141 @@
             });
         }
     /*end page index*/
+
+    /*start mediators*/
+
+    //START Open mini menu for mobile
+        //function blockActivityHeight() {
+        //    if ($('#menu').height() < 50) {
+        //        $('.positionActivityIcon').height(89);
+        //    }
+        //    else {
+        //        $('.positionActivityIcon').height($('#casesHeared').height());
+        //    }
+        //}
+        //$('.mainTitle').click(function () {
+        //    $('.mainTitle + div').toggle();
+        //    blockActivityHeight();
+        //});
+
+        $(".closeIcon").on('click', function (event) {
+            $("#sendEmail").val("");
+        });
+        $(".sendBtn").on('click', function (event) {
+            var val = $("#sendEmail").val();
+            if ($("#sendEmail").val().trim().length > 0) {
+                $('.blockSendEmail input').click();
+                var email = $("#sendEmail").val().trim();
+                console.log(email);
+                createInvitation();
+            }
+            else {
+                $(event.currentTarget).parent('.blockSendEmail').addClass('redBorder');
+            }
+        });
+        function createInvitation() {
+            var InvitationSuccessfull = $("#InvitationSuccessfull").val();
+            $.ajax({
+                method: "POST",
+                url: "/Settings/InviteMediator",
+                data: {
+                    email: $("#sendEmail").val().trim(),
+                }
+            }).done(function (data) {//data from server
+                if (data != 'completed') {
+                    alert(data);
+                }
+                else {
+                    $("#sendEmail").val('');
+                    alert(InvitationSuccessfull);
+                }
+            }).fail(function (error) {
+                console.log(error);
+            });
+        }
+    /*end mediators*/
+
+    /*Password view start*/
+        var status = $("#status").val();
+        
+        if (typeof status != 'undefined' && status != "") {
+            alert(status);
+        }
+        $('.blockPersonalSettings input')
+            .focus(function () {
+                $(this).parent('.blockPersonalSettings').addClass('greenBorder').removeClass('greyBorder');
+            })
+            .focusout(function () {
+                $(this).parent('.blockPersonalSettings').addClass('greyBorder').removeClass('greenBorder');
+            });
+    /*Password view end*/
+
+
+    /*workFlowProcess*/
+
+
+    /*workFlowProcessend*/
+
+    /*user process*/
+
+    //----------------END Open mini menu for mobile---------------------------
+
+        //$('.blockPersonalSettings input')
+        //   .focus(function () {
+        //       $(this).parent('.blockPersonalSettings').css({ 'border': '2px solid #05b5a2', 'width': '99.8%' });
+        //   })
+        //    .focusout(function () {
+        //        $(this).parent('.blockPersonalSettings').css({ 'border': '1px solid #e0e5e6', 'width': '100%' });
+        //    });
+
+    //START Open mini menu for mobile
+        //function blockActivityHeight() {
+        //    if ($('#menu').height() < 50) {
+        //        $('.positionActivityIcon').height(89);
+        //    }
+        //    else {
+        //        $('.positionActivityIcon').height($('#casesHeared').height());
+        //    }
+        //}
+        //$('.mainTitle').click(function () {
+        //    $('.mainTitle + div').toggle();
+        //    blockActivityHeight();
+        //});
+
+
+        $('.newMessageBtn span').click(function () {
+            if (($("#first_nm").val().trim.length > 0) && ($("#last_nm").val().trim.length > 0) && ($("#title_ds").val().trim.length > 0) && ($("#email").val().trim.length > 0)) {
+                $('.newMessageBtn input').click();
+            }
+        });
+        //RadioButton
+        //pod katei vse knopki najimautsya. Mne nado, chtobi eta ne najimalas nikogda
+
+        var levelId = $("#levelId").val();
+
+        if (levelId == 5) {
+            var RadioButton = $('.inputBlock2');
+            RadioButton.click(function () {
+                var mediatorBtn = $(this).parent();
+                var mediatorAllBtn = $(this).parent().parent();
+                mediatorAllBtn.find('.inputRadio').removeClass('active');
+                mediatorBtn.addClass('active');
+                mediatorBtn.find("input").prop('checked', true);
+
+            });
+            ////need to work
+            var radioBlock = $('.inputBlock2');
+
+            radioBlock.click(function () {
+
+                var self = $(this);
+                var arrows = self.parent('.inputRadio').parent('.rowBlock');
+                arrows.find('.inputRadio').css('background', 'rgb(255, 255, 255)');
+                arrows.find('.inputRadio').find('.radioTitle').css('color', 'rgb(174, 181, 183)');
+
+                self.parent('.inputRadio').css('background', 'rgb(242, 247, 247)');
+                self.find('.radioTitle').css('color', 'rgb(60, 62, 63)');
+            });
+        }
+    /*user end process*/
 });

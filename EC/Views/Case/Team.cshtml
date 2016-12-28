@@ -3,6 +3,8 @@
 @using EC.App_LocalResources;
 @using EC.Common.Interfaces;
 @using EC.Core.Common;
+@using EC.Constants;
+
 @{
     int report_id = (Int32)ViewBag.report_id;
     int user_id = (Int32)ViewBag.user_id;
@@ -49,13 +51,13 @@
 
         <div class="rightBlockContent">
             <div id="slider"><div class="reportIconWhite"></div></div>
-            @if ((rm._investigation_status == Constant.investigation_status_resolution) || (rm._investigation_status == Constant.investigation_status_completed))
+            @if ((rm._investigation_status == ECGlobalConstants.investigation_status_resolution) || (rm._investigation_status == ECGlobalConstants.investigation_status_completed))
             {
                 @Html.Partial("~/Views/Case/PartialView/GreenBarCaseResolutionRequest.cshtml")
             }
 
             @*start*@
-            @if (rm._investigation_status == Constant.investigation_status_closed)
+            @if (rm._investigation_status == ECGlobalConstants.investigation_status_closed)
             {
                 <div class="firstHeader resolveSoledBlock">
                     <div class="caseWaitApp">@GlobalRes.CaseClosed</div>
@@ -69,7 +71,7 @@
                     </div>
                 </div>
 
-                if (((rm._investigation_status == Constant.investigation_status_closed) && (rm._previous_investigation_status_id == Constant.investigation_status_resolution)) || ((rm._investigation_status == Constant.investigation_status_closed) && (rm._previous_investigation_status_id == Constant.investigation_status_completed)))
+                if (((rm._investigation_status == ECGlobalConstants.investigation_status_closed) && (rm._previous_investigation_status_id == ECGlobalConstants.investigation_status_resolution)) || ((rm._investigation_status == ECGlobalConstants.investigation_status_closed) && (rm._previous_investigation_status_id == ECGlobalConstants.investigation_status_completed)))
                 {
                     ris = rm._previous_investigation_status();
                     UserModel temp_um = new UserModel(ris.user_id);
@@ -83,11 +85,11 @@
                             </div>
                             <div class="forText">
                                 <div class="boldText">
-                                    @if (ris.investigation_status_id == Constant.investigation_status_completed)
+                                    @if (ris.investigation_status_id == ECGlobalConstants.investigation_status_completed)
                                     {
                                         @GlobalRes.CaseCantBeResolved
                                     }
-                                    else if (ris.investigation_status_id == Constant.investigation_status_resolution)
+                                    else if (ris.investigation_status_id == ECGlobalConstants.investigation_status_resolution)
                                     {
                                         @GlobalRes.CaseResolved
                                     }
@@ -215,7 +217,7 @@
                                     <p>@um._user.title_ds</p>
                                 </div>
 
-                                @if (((_user.role_id == 6) || (_user.role_id == 7)) && (rm._investigation_status != Constant.investigation_status_closed) && (um._user.role_id != Constant.level_mediator))
+                                @if (((_user.role_id == 6) || (_user.role_id == 7)) && (rm._investigation_status != ECGlobalConstants.investigation_status_closed) && (um._user.role_id != ECLevelConstants.level_mediator))
                                 {
                                 <label class="close" data-userid="@_user.id"></label>
                                 }
@@ -392,7 +394,7 @@
                     </div><!--involvedMediators-->
                 }
 
-                @if ((_available_toAssign_mediators.Count > 0) && (rm._investigation_status != Constant.investigation_status_closed))
+                @if ((_available_toAssign_mediators.Count > 0) && (rm._investigation_status != ECGlobalConstants.investigation_status_closed))
                 {
                     <p class="addMoreMediatorsBtn">
                         <span>@GlobalRes.Addmoremediators.ToLower()</span>

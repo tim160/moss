@@ -7,6 +7,7 @@ using EC.Models;
 using EC.Models.Database;
 using EC.Common.Interfaces;
 using EC.Core.Common;
+using EC.Constants;
 
 namespace EC.Controllers
 {
@@ -74,7 +75,7 @@ namespace EC.Controllers
 
             }
             //int user_id = 2;
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
@@ -457,7 +458,7 @@ namespace EC.Controllers
                 UserModel userModel = new UserModel();
                 var user = userModel.Login(login, pass);
                 EC.Controllers.utils.AuthHelper.SetCookies(user, HttpContext);
-                Session[Constants.CurrentUserMarcker] = user;
+                Session[ECGlobalConstants.CurrentUserMarcker] = user;
                 Session["userName"] = "";
                 Session["userId"] = user.id;
 
@@ -532,10 +533,10 @@ namespace EC.Controllers
                     company_id = cm._company.id;
 
                     List<string> _company_user_emails = new List<string>();
-                    _company_user_emails = (db.user.Where(t => ((t.company_id == company_id) && (t.role_id != Constant.level_informant))).Select(t => t.email.Trim().ToLower())).ToList();
+                    _company_user_emails = (db.user.Where(t => ((t.company_id == company_id) && (t.role_id != ECLevelConstants.level_informant))).Select(t => t.email.Trim().ToLower())).ToList();
 
                     List<int> _company_user_ids = new List<int>();
-                    _company_user_ids = (db.user.Where(t => ((t.company_id == company_id) && (t.role_id != Constant.level_informant))).Select(t => t.id)).ToList();
+                    _company_user_ids = (db.user.Where(t => ((t.company_id == company_id) && (t.role_id != ECLevelConstants.level_informant))).Select(t => t.id)).ToList();
 
                     if (db.user.Any(u => ((u.email.ToLower().Trim() == email.ToLower().Trim() && u.role_id != 8 && _company_user_ids.Contains(u.id)))))
                         return App_LocalResources.GlobalRes.AlreadyRegistered;
@@ -621,7 +622,7 @@ namespace EC.Controllers
                 UserModel userModel = new UserModel();
                 var user = userModel.Login(login, pass);
                 EC.Controllers.utils.AuthHelper.SetCookies(user, HttpContext);
-                Session[Constants.CurrentUserMarcker] = user;
+                Session[ECGlobalConstants.CurrentUserMarcker] = user;
                 Session["userName"] = "";
                 Session["userId"] = user.id;
 

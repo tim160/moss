@@ -12,7 +12,7 @@ using System.Net.Mail;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Configuration;
-using ServicesExternalEmail.DBModel;
+/////using ServicesExternalEmail.DBModel;
 
 namespace ServicesExternalEmail
 {
@@ -119,7 +119,7 @@ namespace ServicesExternalEmail
             }
             public void CheckEmails()
             {
-                ECEntities db = new ECEntities();
+          /*      ECEntities db = new ECEntities();
                 ////   using EC.Models.Database;
 
                 ////   using EC.Models.Database;
@@ -144,7 +144,7 @@ namespace ServicesExternalEmail
                     catch (Exception ex)
                     { }
 
-                }
+                }*/
                 // later - redo for cleaning
             /*    foreach (notification_processed _np in db.notification_processed.Where(t => t.is_processed == true && t.created_dt < DateTime.Today.AddDays(-3)))
                 {

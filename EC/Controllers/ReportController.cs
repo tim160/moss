@@ -13,6 +13,7 @@ using EC.Models.Database;
 using EC.Models.ECModel;
 using EC.Controllers.ViewModel;
 using EC.Controllers.utils;
+using EC.Constants;
 
 
 namespace EC.Controllers
@@ -361,7 +362,7 @@ namespace EC.Controllers
         public void SignIn(user user)
         {
             AuthHelper.SetCookies(user, HttpContext);
-            Session[Constants.CurrentUserMarcker] = user;
+            Session[ECGlobalConstants.CurrentUserMarcker] = user;
         }
 
         public List<anonymity> GetAnon(int company_id, int country_id)

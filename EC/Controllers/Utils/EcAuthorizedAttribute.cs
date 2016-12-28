@@ -9,6 +9,8 @@ using EC.Controllers.utils;
 using EC.Models.Database;
 using WebGrease.Css.Extensions;
 using EC.Models;
+using EC.Constants;
+
 
 namespace EC.Utils.Auth
 {
@@ -29,8 +31,8 @@ namespace EC.Utils.Auth
 
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
-            
-            user user = (user) httpContext.Session[Constants.CurrentUserMarcker];
+
+            user user = (user)httpContext.Session[ECSessionConstants.CurrentUserMarcker];
             if (user == null)
             {
                 user = AuthHelper.GetCookies(httpContext);

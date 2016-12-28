@@ -5,6 +5,7 @@
 @using EC.Common.Base;
 @using EC.Common.Interfaces;
 @using EC.Core.Common;
+@using EC.Constants;
 
 @{
     IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
@@ -70,7 +71,7 @@
                 <div class="reportIconWhite"></div>
             </div><!--end slider-->
             <!--work began-->
-            @if ((rm._investigation_status == Constant.investigation_status_resolution) || (rm._investigation_status == Constant.investigation_status_completed))
+            @if ((rm._investigation_status == ECGlobalConstants.investigation_status_resolution) || (rm._investigation_status == ECGlobalConstants.investigation_status_completed))
             {
                 //ris = rm._last_investigation_status();
                 //UserModel temp_um = new UserModel(ris.user_id);
@@ -162,7 +163,7 @@
                     </div>
                 </div>
             }
-            else if (rm._investigation_status == Constant.investigation_status_closed)
+            else if (rm._investigation_status == ECGlobalConstants.investigation_status_closed)
             {
                 <div class="firstHeader resolveSoledBlock">
                     <div class="caseWaitApp">@GlobalRes.CaseClosed</div>
@@ -176,7 +177,7 @@
                     </div>
                 </div>
 
-                if (((rm._investigation_status == Constant.investigation_status_closed) && (rm._previous_investigation_status_id == Constant.investigation_status_resolution)) || ((rm._investigation_status == Constant.investigation_status_closed) && (rm._previous_investigation_status_id == Constant.investigation_status_completed)))
+                if (((rm._investigation_status == ECGlobalConstants.investigation_status_closed) && (rm._previous_investigation_status_id == ECGlobalConstants.investigation_status_resolution)) || ((rm._investigation_status == ECGlobalConstants.investigation_status_closed) && (rm._previous_investigation_status_id == ECGlobalConstants.investigation_status_completed)))
                 {
                     ris = rm._previous_investigation_status();
                     UserModel temp_um = new UserModel(ris.user_id);
@@ -190,11 +191,11 @@
                             </div>
                             <div class="forText">
                                 <div class="boldText">
-                                    @if (ris.investigation_status_id == Constant.investigation_status_completed)
+                                    @if (ris.investigation_status_id == ECGlobalConstants.investigation_status_completed)
                                 {
                                         @GlobalRes.CaseCantBeResolved
                                 }
-                                else if (ris.investigation_status_id == Constant.investigation_status_resolution)
+                                    else if (ris.investigation_status_id == ECGlobalConstants.investigation_status_resolution)
                                 {
                                     @GlobalRes.CaseResolved
                                 }
@@ -293,7 +294,7 @@
                         <!--work end-->
 
                         <div class="blockTasks blockTasksSmallRight">
-                            @if (rm._investigation_status != Constant.investigation_status_closed)
+                            @if (rm._investigation_status != ECGlobalConstants.investigation_status_closed)
                 {
                                 <div class="blockCreateTask" style="display: none;">
                                     <div class="headerCreateTask">
@@ -440,7 +441,7 @@
                                         <span class="hideCompletedBtn">@GlobalRes.Hidecompleted</span>
                                     </div>
                     }
-                                @if (rm._investigation_status != Constant.investigation_status_closed)
+                                @if (rm._investigation_status != ECGlobalConstants.investigation_status_closed)
                     {
                                     <div class="createNewTaskBlock">
                                         <span class="createNewTaskBtn">@GlobalRes.Createnewtask.ToUpper()</span>

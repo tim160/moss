@@ -18,6 +18,7 @@ using EC.Models.ViewModel;
 using EC.Models.App.Case;
 using EC.Common.Interfaces;
 using EC.Core.Common;
+using EC.Constants;
 
 namespace EC.Controllers
 {
@@ -36,7 +37,7 @@ namespace EC.Controllers
                 return RedirectToAction("Index", "Cases");
 
             //int user_id = 2;
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
@@ -97,7 +98,7 @@ namespace EC.Controllers
                 return RedirectToAction("Index", "Cases");
 
             //int user_id = 2;
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
@@ -202,7 +203,7 @@ namespace EC.Controllers
                 return RedirectToAction("Index", "Cases");
 
             //int user_id = 2;
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
@@ -325,7 +326,7 @@ namespace EC.Controllers
                 return RedirectToAction("Index", "Cases");
 
             //int user_id = 2;
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
@@ -426,7 +427,7 @@ namespace EC.Controllers
                 return RedirectToAction("Index", "Cases");
 
             //int user_id = 2;
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
@@ -467,7 +468,7 @@ namespace EC.Controllers
                 return RedirectToAction("Index", "Case");
 
             //int user_id = 2;
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
        ///     if (user == null || user.id == 0)
        ////         return RedirectToAction("Index", "Account");
 
@@ -499,7 +500,7 @@ namespace EC.Controllers
                 return RedirectToAction("Index", "Cases");
 
             //int user_id = 2;
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
@@ -574,7 +575,7 @@ namespace EC.Controllers
                 return RedirectToAction("Index", "Cases");
 
             //int user_id = 2;
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
@@ -644,7 +645,7 @@ namespace EC.Controllers
 
         public bool AddToMediators()
         {
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return false;
 
@@ -690,7 +691,7 @@ namespace EC.Controllers
 
         public int RemoveMediator()
         {
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return -1;
 
@@ -753,7 +754,7 @@ namespace EC.Controllers
 
         public bool NewStatus()
         {
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return false;
 
@@ -775,16 +776,16 @@ namespace EC.Controllers
             {
                 return false;
             }
-            if ((user.role_id != 4) && (user.role_id != 5) && (rm._investigation_status == Constant.investigation_status_closed))
+            if ((user.role_id != 4) && (user.role_id != 5) && (rm._investigation_status == ECGlobalConstants.investigation_status_closed))
             {
                 return false;
             }
 
             int new_status_id = 3;
 
-            if ((promotion_id == 1) && (rm._investigation_status == Constant.investigation_status_investigation))
+            if ((promotion_id == 1) && (rm._investigation_status == ECGlobalConstants.investigation_status_investigation))
             {
-                new_status_id = Constant.investigation_status_completed;
+                new_status_id = ECGlobalConstants.investigation_status_completed;
                 glb.UpdateReportLog(user.id, 21, report_id, App_LocalResources.GlobalRes._Completed, null, description);
                 glb.UpdateReportLog(user.id, 27, report_id, App_LocalResources.GlobalRes._Started, null, "");
             }
@@ -795,38 +796,38 @@ namespace EC.Controllers
                 switch (rm._investigation_status)
                 {
                     case 1:
-                        new_status_id = Constant.investigation_status_review;
+                        new_status_id = ECGlobalConstants.investigation_status_review;
                         break;
                     case 2:
-                        new_status_id = Constant.investigation_status_investigation;
+                        new_status_id = ECGlobalConstants.investigation_status_investigation;
                         break;
                     case 3:
-                        new_status_id = Constant.investigation_status_resolution;
+                        new_status_id = ECGlobalConstants.investigation_status_resolution;
                         glb.UpdateReportLog(user.id, 21, report_id, App_LocalResources.GlobalRes._Completed, null, description);
                         glb.UpdateReportLog(user.id, 22, report_id, App_LocalResources.GlobalRes._Started, null, "");
                         break;
                     case 4:
                         glb.UpdateReportLog(user.id, 22, report_id, App_LocalResources.GlobalRes._Completed, null, description);
                         glb.UpdateReportLog(user.id, 25, report_id,"", null, "");
-                        new_status_id = Constant.investigation_status_closed;
+                        new_status_id = ECGlobalConstants.investigation_status_closed;
                         break;
                     case 6:
-                        new_status_id = Constant.investigation_status_closed;
+                        new_status_id = ECGlobalConstants.investigation_status_closed;
                         glb.UpdateReportLog(user.id, 27, report_id, App_LocalResources.GlobalRes._Completed, null, description);
                         glb.UpdateReportLog(user.id, 25, report_id,"", null, "");
                         break;
                     case 9:
-                        new_status_id = Constant.investigation_status_investigation;
+                        new_status_id = ECGlobalConstants.investigation_status_investigation;
                         glb.UpdateReportLog(user.id, 29, report_id, "", null, description);
                         break;
                     default:
-                        new_status_id = Constant.investigation_status_investigation;
+                        new_status_id = ECGlobalConstants.investigation_status_investigation;
                         break;
                 }
             }
             if ((promotion_id == 2))
             {
-                new_status_id = Constant.investigation_status_spam;
+                new_status_id = ECGlobalConstants.investigation_status_spam;
             }
 
 
@@ -839,7 +840,7 @@ namespace EC.Controllers
         public int CloseCase()
         {
          //   return 2;
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return -1;
 
@@ -865,10 +866,10 @@ namespace EC.Controllers
             {
                 return -1;
             }
-            if (promotion_value == Constant.investigation_status_resolution)
+            if (promotion_value == ECGlobalConstants.investigation_status_resolution)
             {
                 CompanyModel cm = new CompanyModel(um._user.company_id);
-                if (cm.AllMediators(cm._company.id, true, Constant.level_escalation_mediator).Count == 0)
+                if (cm.AllMediators(cm._company.id, true, ECLevelConstants.level_escalation_mediator).Count == 0)
                     return 0;
             }
 

@@ -13,6 +13,7 @@ using EC.Models;
 using EC.Common.Interfaces;
 using EC.Core.Common;
 using log4net;
+using EC.Constants;
 
 namespace EC.Controllers
 {
@@ -37,7 +38,7 @@ namespace EC.Controllers
         {
             base.OnActionExecuting(filterContext);
             HttpContextBase httpContext = new HttpContextWrapper(HttpContext.ApplicationInstance.Context);
-            user user = (user)Session[Constants.CurrentUserMarcker]; // (user)httpContext.Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker]; // (user)httpContext.Session[Constants.CurrentUserMarcker];
             if (user == null)
             {
                 //sessionManager.User = AuthHelper.GetCookies(httpContext); расскоментировать когда будет использоваться авторизация! и в IndexController
@@ -67,7 +68,7 @@ namespace EC.Controllers
         public ActionResult Logout()
         {
             HttpContextBase httpContext = new HttpContextWrapper(HttpContext.ApplicationInstance.Context);
-            httpContext.Response.Cookies.Remove(Constants.AuthUserCookies);
+            httpContext.Response.Cookies.Remove(ECGlobalConstants.AuthUserCookies);
             return RedirectToAction("Start", "Index");
         }
 	}

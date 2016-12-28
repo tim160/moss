@@ -10,6 +10,8 @@ using EC.Models.ECModel;
 using EC.Models.Utils;
 using EC.App_LocalResources;
 using System.Data.Entity.Validation;
+using EC.Constants;
+
 
 namespace EC.Models
 {
@@ -844,7 +846,7 @@ namespace EC.Models
 
             if (db.report_user_read.Where(item => ((item.user_id == user_id) && (item.report_id == ID))).Count() == 0)
             {
-                return Constant._default_date;
+                return ECGlobalConstants._default_date;
             }
             //unread_report.Add(temp_report);
 
@@ -852,7 +854,7 @@ namespace EC.Models
             if (_list_read.Count > 0)
                 return _list_read[0].read_date;
             else
-                return Constant._default_date;
+                return ECGlobalConstants._default_date;
         }
 
         public bool IsSpamScreen
@@ -860,7 +862,7 @@ namespace EC.Models
             get
             {
                 bool is_spam = false;
-                if((_investigation_status == Constant.investigation_status_spam)  || (_previous_investigation_status_id == Constant.investigation_status_spam && _investigation_status == Constant.investigation_status_closed))
+                if ((_investigation_status == ECGlobalConstants.investigation_status_spam) || (_previous_investigation_status_id == ECGlobalConstants.investigation_status_spam && _investigation_status == ECGlobalConstants.investigation_status_closed))
                 {
                     is_spam = true;
                     // at least its spam
@@ -879,7 +881,7 @@ namespace EC.Models
             get
             {
                 bool is_completed = false;
-                if ((_investigation_status == Constant.investigation_status_completed) || (_investigation_status == Constant.investigation_status_resolution))
+                if ((_investigation_status == ECGlobalConstants.investigation_status_completed) || (_investigation_status == ECGlobalConstants.investigation_status_resolution))
                 {
                     is_completed = true;
                     /*    // at least its spam
@@ -896,7 +898,7 @@ namespace EC.Models
             get
             {
                 bool is_closed = false;
-                if (((_investigation_status == Constant.investigation_status_closed) && (_previous_investigation_status_id != Constant.investigation_status_spam)))
+                if (((_investigation_status == ECGlobalConstants.investigation_status_closed) && (_previous_investigation_status_id != ECGlobalConstants.investigation_status_spam)))
                 {
                     is_closed = true;
                 /*    // at least its spam
@@ -913,7 +915,7 @@ namespace EC.Models
             get
             {
                 bool is_closed = false;
-                if ((_investigation_status == Constant.investigation_status_pending) || (_investigation_status == Constant.investigation_status_review))
+                if ((_investigation_status == ECGlobalConstants.investigation_status_pending) || (_investigation_status == ECGlobalConstants.investigation_status_review))
                 {
                     is_closed = true;
                     /*    // at least its spam
@@ -931,13 +933,13 @@ namespace EC.Models
             if ((_report == null) || (ID == 0))
             {
                 // error in report or its not created yet
-                return Constant._default_date;
+                return ECGlobalConstants._default_date;
             }
-            List<int> _active_classes =new List<int>(); 
-            _active_classes.Add(Constant.investigation_status_investigation);
-            _active_classes.Add(Constant.investigation_status_resolution);
-            _active_classes.Add(Constant.investigation_status_completed);
-            _active_classes.Add(Constant.investigation_status_closed);
+            List<int> _active_classes =new List<int>();
+            _active_classes.Add(ECGlobalConstants.investigation_status_investigation);
+            _active_classes.Add(ECGlobalConstants.investigation_status_resolution);
+            _active_classes.Add(ECGlobalConstants.investigation_status_completed);
+            _active_classes.Add(ECGlobalConstants.investigation_status_closed);
             
             report_investigation_status last_status = new report_investigation_status();
             if (db.report_investigation_status.Any(item => (item.report_id == ID)))
@@ -962,7 +964,7 @@ namespace EC.Models
                     if (last_active_status_place < 0)
                     {
                         // no active statuses
-                        return Constant._default_date;
+                        return ECGlobalConstants._default_date;
                     }
                     else
                     {
@@ -978,17 +980,17 @@ namespace EC.Models
                         if (first_non_active_status_place < 0)
                         {
                             // no active statuses
-                            return Constant._default_date;
+                            return ECGlobalConstants._default_date;
                         }
                         return _statuses[first_non_active_status_place + 1].created_date;
                     }
  
                 }
                 else
-                    return Constant._default_date;
+                    return ECGlobalConstants._default_date;
             }
             else
-                return Constant._default_date;
+                return ECGlobalConstants._default_date;
 
             //          return 0;
         }
@@ -1016,7 +1018,7 @@ namespace EC.Models
             if ((_report == null) || (ID == 0))
             {
                 // error in report or its not created yet
-                return Constant._default_date;
+                return ECGlobalConstants._default_date;
             }
 
             report_investigation_status last_status = new report_investigation_status();
@@ -1030,10 +1032,10 @@ namespace EC.Models
                     return last_status.created_date;
                 }
                 else
-                    return Constant._default_date;
+                    return ECGlobalConstants._default_date;
             }
             else
-                return Constant._default_date;
+                return ECGlobalConstants._default_date;
 
             //          return 0;
         }
@@ -1043,7 +1045,7 @@ namespace EC.Models
             if ((_report == null) || (ID == 0))
             {
                 // error in report or its not created yet
-                return Constant._default_date;
+                return ECGlobalConstants._default_date;
             }
             report_log last_status_log = new report_log();
             if (db.report_log.Any(item => (item.report_id == ID)))
@@ -1056,10 +1058,10 @@ namespace EC.Models
                     return last_status_log.created_dt;
                 }
                 else
-                    return Constant._default_date;
+                    return ECGlobalConstants._default_date;
             }
             else
-                return Constant._default_date;
+                return ECGlobalConstants._default_date;
 
         }
 

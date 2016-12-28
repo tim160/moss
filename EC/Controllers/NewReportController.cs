@@ -10,6 +10,7 @@ using EC.Models.ECModel;
 using EC.Controllers.ViewModel;
 using EC.Localization;
 using Resources = EC.Localization.Resources;
+using EC.Constants;
 
 namespace EC.Controllers.ViewModel
 {
@@ -35,7 +36,7 @@ namespace EC.Controllers.ViewModel
             else
                 report_id = id.Value;// 167-171??
 
-            user user = (user)Session[Constants.CurrentUserMarcker];
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
