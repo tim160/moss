@@ -195,7 +195,7 @@ namespace EC.Models
                         if (_c_location != null)
                             location = _c_location.location_en;
                     }
-                    else if (_report.other_location_name.Trim().Length > 0)
+                    else if ((_report!=null) && (_report.other_location_name != null) && (_report.other_location_name.Trim().Length > 0))
                         location = _report.other_location_name.Trim();
                 }
 
