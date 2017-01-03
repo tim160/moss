@@ -56,7 +56,7 @@ body{
 }
 .headerMenu .logIn{
     border-left: 1px solid rgb(206,211,211);
-    padding: 6px 25px 6px 25px !important;
+    padding: 6px 19px 6px 25px !important;
     color: rgb(56,73,77) !important;
     font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
 }
@@ -262,7 +262,7 @@ body{
 .dataPosts{
     max-width: 820px;
     margin: 0 auto;
-    padding-top:30px;
+    padding-top:29px;
     display: table;
     width: 100%;
     border-bottom: 1px solid rgb(224,229,230);
@@ -314,7 +314,7 @@ body{
     font-size: 10pt;
     float:left;
     width: 100%;
-    padding-top: 18px;
+    padding-top: 8px;
     padding-bottom: 17px;
 }
 .report{
@@ -322,7 +322,7 @@ body{
     clear: both;
 }
 .titleReport{
-    padding-top: 17px;
+    padding-top: 22px;
     /*padding-bottom: 15px;*/
     width: 25%;
     float: left;
