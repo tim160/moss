@@ -65,9 +65,12 @@ public class GlobalFunctions
         {
             return "/Content/Icons/logo.png";
         }
-        else if (url.ToLower().Contains("cai.employeeconfidential.com"))
+        else if (url.ToLower().Contains("cai.employeeconfidential"))
         {
-            return "/Content/img/cai_logo.png";
+            return "";
+            /////  return "/Content/Icons/logo.png";
+
+           ////// return "/Content/img/cai_logo.png";
         }
         return "/Content/Icons/logo.png";
 
