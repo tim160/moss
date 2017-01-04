@@ -1768,6 +1768,7 @@ li.infoCasesBlock:first-child:hover li .status {
 .onclick-menu {
     position: absolute;
     display: inline-block;
+    z-index: 150;
 }
 .onclick-menu:focus {
     /* clicking on label should toggle the menu */
