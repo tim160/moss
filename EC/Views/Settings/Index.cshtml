@@ -70,24 +70,23 @@
 
 
             <div class="personalBlock">
-
-                <div class="blockPersonalSettings">
+                <div class="blockPersonalSettings greyBorder">
                     <p class="title">@GlobalRes.Firstname</p>
                     @Html.EditorFor(model => model.first_nm, new { first_nm = "first_nm" })
                 </div>
-                <div class="blockPersonalSettings">
+                <div class="blockPersonalSettings greyBorder">
                     <p class="title">@GlobalRes.Lastname</p>
                     @Html.EditorFor(model => model.last_nm, new { last_nm = "last_nm" })
                 </div>
-                <div class="blockPersonalSettings">
+                <div class="blockPersonalSettings greyBorder">
                     <p class="title">@GlobalRes.Title</p>
                     @Html.EditorFor(model => model.title_ds, new { title_ds = "title_ds" })
                 </div>
-                <div class="blockPersonalSettings">
+                <div class="blockPersonalSettings greyBorder">
                     <p class="title">@GlobalRes.Department</p>
                     @Html.EditorFor(model => Model.notepad_tx, new {notepad_tx = "notepad_tx" })
                 </div>
-                <div class="blockPersonalSettings">
+                <div class="blockPersonalSettings greyBorder">
                     <div id="personeAgain">
                         <div class="title">@GlobalRes.Role</div>
                         <div class="help" title="">
@@ -127,11 +126,11 @@
                         </div>
                     </div><!--rowBlock-->
                 </div>
-                <div class="blockPersonalSettings">
+                <div class="blockPersonalSettings greyBorder">
                     <p class="title">@GlobalRes.Email</p>
                     @Html.TextBoxFor(model => model.email, new { email = "email" })
                 </div>
-                <div class="blockPersonalSettings">
+                <div class="blockPersonalSettings greyBorder">
                     <p class="title">@GlobalRes.often_notifications_active</p>
                     <div class="rowBlock" id="checkBoxActiveCases">
                         <div class="freeBlock inputRadio" data-valueflag="0">
@@ -151,7 +150,7 @@
                     </div><!--rowBlock-->
                 </div>
 
-                <div class="blockPersonalSettings">
+                <div class="blockPersonalSettings greyBorder">
                     <p class="title">@GlobalRes.often_notifications_new</p>
                     <div class="rowBlock" id="checkBoxNewReports">
                         <div class="freeBlock inputRadio" data-valueFlag="0">

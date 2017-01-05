@@ -383,19 +383,35 @@
 
     /*page index*/
     //----------------END Open mini menu for mobile---------------------------
-        $('.blockPersonalSettings input')
-           .focus(function () {
-               $('.blockPersonalSettings').css({ 'border-color': 'transparent transparent #e0e5e6 transparent' });
-               $(this).parent('.blockPersonalSettings').css({ 'border-color': '#05b5a2' });
-           })
-            .focusout(function () {
-                $(this).parent('.blockPersonalSettings').css({ 'border-color': 'transparent transparent #e0e5e6 transparent' });
-            });
+        //$('.blockPersonalSettings input')
+        //   .focus(function () {
+        //       $('.blockPersonalSettings').css({ 'border-color': 'transparent transparent #e0e5e6 transparent' });
+        //       $(this).parent('.blockPersonalSettings').css({ 'border-color': '#05b5a2' });
+        //   })
+        //    .focusout(function () {
+        //        $(this).parent('.blockPersonalSettings').css({ 'border-color': 'transparent transparent #e0e5e6 transparent' });
+        //    });
         var levelId = $("#levelId").val();
 
 
     //RadioButton
+
+    /**/
+
         var radioBlock = $('.inputBlock');
+        
+        radioBlock.on('click', function (event) {
+            var temp = $(event.currentTarget);
+            $('.blockPersonalSettings.greenBorder').removeClass('greenBorder').addClass('greyBorder');
+
+            temp.parents('.blockPersonalSettings').addClass('greenBorder');
+        });
+        //radioBlock.on('focusout',function (event) {
+        //    var temp = $(event.currentTarget);
+        //    temp.parents('.blockPersonalSettings').addClass('greyBorder').removeClass('greenBorder');
+        //});
+
+
         if (levelId == 5) {
             radioBlock.click(function () {
                 var self = $(this);
@@ -416,10 +432,8 @@
             }
             RadioButton.click(function () {
                 var self = $(this);
-                $('.blockPersonalSettings').css({ 'border': '1px solid #e0e5e6', 'width': '100%' });
-                self.parents('.blockPersonalSettings').css({ 'border': '2px solid #05b5a2', 'width': '99.8%' });
+                //self.parents('.blockPersonalSettings').css({ 'border': '2px solid #05b5a2', 'width': '99.8%' });
                 OldClick(self);
-
             });
         }
     /*end page index*/
@@ -483,13 +497,26 @@
         if (typeof status != 'undefined' && status != "") {
             alert(status);
         }
-        $('.blockPersonalSettings input')
-            .focus(function () {
-                $(this).parent('.blockPersonalSettings').addClass('greenBorder').removeClass('greyBorder');
-            })
-            .focusout(function () {
-                $(this).parent('.blockPersonalSettings').addClass('greyBorder').removeClass('greenBorder');
-            });
+        $('.blockPersonalSettings input').on('focus', function (event) {
+            var temp = $(event.currentTarget);
+            $('.blockPersonalSettings.greenBorder').removeClass('greenBorder').addClass('greyBorder');
+            temp.parent('.blockPersonalSettings').addClass('greenBorder').removeClass('greyBorder');
+        });
+        $('.blockPersonalSettings input').on('focusout', function (event) {
+            var temp = $(event.currentTarget);
+            temp.parent('.blockPersonalSettings').addClass('greyBorder').removeClass('greenBorder');
+        });
+        //$('.blockPersonalSettings input').focus(function () {
+        //    $(this).parent('.blockPersonalSettings').addClass('greenBorder').removeClass('greyBorder');
+        //});
+
+        //$('.blockPersonalSettings input')
+        //    .focus(function () {
+        //        $(this).parent('.blockPersonalSettings').addClass('greenBorder').removeClass('greyBorder');
+        //    })
+        //    .focusout(function () {
+        //        $(this).parent('.blockPersonalSettings').addClass('greyBorder').removeClass('greenBorder');
+        //    });
     /*Password view end*/
 
 

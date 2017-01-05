@@ -757,14 +757,14 @@ h2.mainTitle {
 
 
 .contentSettings .blockPersonalSettings.greyBorder{
-    border: 1px solid #e0e5e6;
+    border: 2px solid #e0e5e6;
 }
 .contentSettings .blockPersonalSettings.greenBorder{
     border: 2px solid #05b5a2;
 }
-.contentSettings .blockPersonalSettings.greenBorder{
+/*.contentSettings .blockPersonalSettings.greenBorder{
     border: 2px solid #4da456;
-}
+}*/
 .contentSettings .blockPersonalSettings p.title{
     color: #727c7e;
     font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
