@@ -1,0 +1,227 @@
+﻿h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, cite, code, del, dfn, em, img, q, s, samp, small, strike, strong, sub, sup, tt, var, dd, dl, dt, li, ol, ul, fieldset, form, label, legend, button, table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 100%;
+    line-height: 1;
+    font-family: inherit;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: "Lato", "Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+}
+
+body {
+    min-width: 320px;
+    text-rendering: optimizeLegibility;
+    display: block;
+}
+
+header {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    clear: both;
+    margin: 0;
+    min-width: 320px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    border: 0;
+}
+
+#main {
+    width: 100%;
+    height: 100%;
+    background: #05b5a2;
+    background: -moz-linear-gradient(top,#05b5a2 0,#1487b7 100%);
+    background: -webkit-linear-gradient(top,#05b5a2 0,#1487b7 100%);
+    background: linear-gradient(to bottom,#05b5a2 0,#1487b7 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#05b5a2',endColorstr='#1487b7',GradientType=0);
+}
+
+#main .content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%); 
+    width: 80%;
+    max-width: 760px; 
+    font-size:62.5%;
+    text-align: center;
+}
+
+#main .content h1 {
+    color: #fff;
+    font-family: 'Lato',"Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+    font-size: 9.8em;
+    line-height: 1;
+    font-weight: 700;
+    margin-bottom: 11px;
+    text-align: center;
+    padding: 0;
+}
+
+#main .content h2 {
+    color: #fff;
+    font-family: 'Lato',"Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+    font-size: 3.6em;
+    line-height: 1.2em;
+    text-align: center;
+    margin-bottom: 21px;
+    font-weight: 400;
+    width: 100%;
+    padding: 0;
+}
+
+#main .content p {
+    color: #d4f2ff;
+    width: 100%;
+    margin: 0;
+    padding: 0 0 30px 0;
+    text-align: center;
+    font-family: 'Lato',"Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+    font-size: 1.8em;
+    line-height: 1.5em;
+}
+@media only screen and (max-width:767px) {
+    #main .content p {
+    display: none;
+}
+}
+
+.content p, .content ol, .content ul, .content address {
+    float: left;
+}
+
+.btn {
+    padding: 8px 30px 9px;
+    background-color: transparent;
+    -khtml-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    border: 1px solid #fff;
+    font-size: 1.3em;
+    line-height: 1.62em;
+    font-weight: 700;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.1);
+    -webkit-box-shadow: 0 1px 0 0 rgba(0,0,0,0.1);
+    -moz-box-shadow: 0 1px 0 0 rgba(0,0,0,0.1);
+    box-shadow: 0 1px 0 0 rgba(0,0,0,0.1);
+    letter-spacing: .05em; 
+    display: inline-block;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.btn.white {
+    color: #05b5a2;
+    background-color: #fff;
+    min-width: 170px;
+    margin-top: 21px;
+}
+
+.btn.login {
+    margin-top: 16px;
+    font-size: 1.1em;
+    color: #fff;
+}
+@media only screen and (max-width:767px) {
+    .btn.login {
+    display: none;
+}
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+header .central {
+    position: static;
+}
+.central {
+    margin: 0 auto;
+    width: 90%;
+    max-width: 1000px;
+    clear: both;
+    z-index: 2;
+}
+
+header #mainNav {
+    font-size: 62.5%;
+    line-height: 1.5em;
+}
+
+header #topBar #eclogo {
+    float: left;
+    padding: 16px 0 0 0;
+    background: 0;
+    margin: 0;
+    text-indent: -9999px;
+    width: 183px;
+    overflow: hidden;
+}
+
+header #topBar #eclogo a {
+    width: 183px;
+    height: 32px;
+    display: block;
+}
+
+header #topBar #eclogo a svg {
+    display: block;
+}
+
+.logo-color {
+    fill: #fff;
+}
+
+header ul#second {
+    float: right;
+    right: 0;
+    list-style: none;
+}
+
+@media only screen and (max-width:580px){#main .content h1{font-size:16.88vw}}
+
+@media only screen and (max-width:450px){#main .content h2{font-size:8vw}}
+
+@media only screen and (max-width:450px){#main .content p{font-size:1.6em}}
+
+@media only screen and (max-width:520px){.content h1{font-size:2.6em}}
+@media only screen and (max-width:520px){.content h2{font-size:2.1em}}
+
+header #topBar a.login-icon{display:none}
+
+@media only screen and (max-width:767px){
+    header #topBar a.login-icon{
+        width: 24px;
+        display:block;
+        float:right;
+        position:relative;
+        top:20px;
+        }
+}
+
+
+
+
