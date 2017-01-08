@@ -155,7 +155,7 @@
             if (companyCode != 'false') {
                 window.location.href = "/Report/new?companyCode=" + companyCode;
             } else {
-                //    window.location.href = "/Report/new?companyCode=" + $('#specialInput').val();
+                   // window.location.href = "/Report/new?companyCode=" + $('#specialInput').val();
             }
         });
     });
@@ -163,6 +163,7 @@
     $(function() {
         var str =  @Html.Raw(ViewBag.newListComp);
         $("#specialInput").autocomplete({
+            minLength: 3,
             source: str,
             select: function(event, ui) {
                 $('#specialInput').val(ui.item.label);
