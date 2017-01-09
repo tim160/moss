@@ -15,10 +15,10 @@
     <AssemblyName>EC</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
-    <IISExpressUseClassicPipelineMode />
+    <IISExpressSSLPort>44392</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
     <NuGetPackageImportStamp>8acab050</NuGetPackageImportStamp>
     <UseGlobalApplicationHostFile />
@@ -65,9 +65,9 @@
     <Reference Include="HtmlAgilityPack">
       <HintPath>..\packages\HtmlAgilityPack.1.4.6\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
-    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+    <Reference Include="log4net, Version=1.2.9.0, Culture=neutral, PublicKeyToken=b32731d11ce58905">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
+      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="NLog">
@@ -387,6 +387,11 @@
     <Content Include="Content\styleTasks.css" />
     <Content Include="Content\the-modal.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="html\404.css" />
+    <Content Include="html\404.html" />
+    <Content Include="html\500.html" />
+    <Content Include="html\503.html" />
+    <Content Include="html\reset.css" />
     <Content Include="Models\Database\ECEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ECEntities.edmx</DependentUpon>
@@ -419,6 +424,7 @@
     </EntityDeploy>
     <Content Include="Models\Database\ECEntities.edmx.diagram">
       <DependentUpon>ECEntities.edmx</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <None Include="Properties\PublishProfiles\ec-code.pubxml" />
@@ -573,6 +579,10 @@
     <Content Include="Views\Index\Start.cshtml" />
     <Content Include="Views\Settings\WorkFlow.cshtml" />
     <Content Include="Views\Case\PartialView\GreenBarCaseResolutionRequest.cshtml" />
+    <Content Include="Views\Settings\partial\casesHeared.cshtml" />
+    <Content Include="Views\Errors\Index.cshtml" />
+    <Content Include="Views\Errors\NotFound.cshtml" />
+    <Content Include="Views\Errors\Unavailable.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -604,6 +614,7 @@
     <Compile Include="Controllers\CaseController.cs" />
     <Compile Include="Controllers\CasesController.cs" />
     <Compile Include="Controllers\EmployeeAwarenessController.cs" />
+    <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\NewController.cs" />
@@ -745,6 +756,9 @@
     <Compile Include="Models\Database\message_user_read.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Database\notification_processed.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Database\notification_summary_period.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
@@ -826,6 +840,9 @@
     <Compile Include="Models\Database\status.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Database\sysdiagrams.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Database\task.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
@@ -839,9 +856,6 @@
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\time_zone.cs">
-      <DependentUpon>ECEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Database\tmp_raph_client.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\type.cs">
