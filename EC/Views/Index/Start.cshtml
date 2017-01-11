@@ -155,7 +155,9 @@
             if (companyCode != 'false') {
                 window.location.href = "/Report/new?companyCode=" + companyCode;
             } else {
-                   // window.location.href = "/Report/new?companyCode=" + $('#specialInput').val();
+                var single_code = TakeCompany($("#specialInput").val());
+                if(single_code.length > 0)
+                    window.location.href = "/Report/new?companyCode=" + single_code;
             }
         });
     });
@@ -182,11 +184,6 @@
     });
 
     function LoginHere(login, password) {
-
-        //  console.log(login);
-        // console.log(password);
-
-
         $.ajax({
             method: "POST",
             url: "/Login/Login",
@@ -197,16 +194,27 @@
             if (data != '') {
                 var str = window.location.href;
             //    str = str.toLocaleLowerCase().split("login");
-
-
                 window.location.href = "/" + data;
             }
             else
                 $('input[name=password]').val() = '';
-            console.log(data);// alert(data);
         }).fail(function (error) {
-            console.log(error);
         });
+    }
+
+    function TakeCompany(selname) {
+        var str =  @Html.Raw(ViewBag.newListComp);
+        var matches = $.grep(str, function(e) { return e.label.toLocaleLowerCase().startsWith(selname.toLocaleLowerCase());  });
+
+        if (matches.length == 0) {
+            return '';
+        } else if (matches.length == 1) {
+            // access the value property using matches[0].foo
+            return matches[0].value;
+        } else {
+            // multiple items found
+            return '';
+        }
     }
 
 </script>
