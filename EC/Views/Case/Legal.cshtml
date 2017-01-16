@@ -3,6 +3,8 @@
 @using EC.App_LocalResources;
 @using EC.Models.ViewModel;
 @using EC.Models.App.Case;
+@using EC.Constants;
+
 @{
     
     @*<link type="text/css" href="~/Content/caseTasks.min.css" rel="stylesheet">*@
@@ -69,7 +71,7 @@
                         @Html.Partial("~/Views/Shared/Helpers/_SingleMessage.cshtml", _messageViewModel)
                     }
                 </div>
-                @if(rm._investigation_status != Constant.investigation_status_closed)
+                @if (rm._investigation_status != ECGlobalConstants.investigation_status_closed)
                  {
                      using (Html.BeginForm())
                       {

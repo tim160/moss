@@ -2,6 +2,8 @@
 @using EC.Models.ECModel;
 @using EC.Models.Database;
 @using EC.App_LocalResources;
+@using EC.Constants;
+
 @{
 
     int report_id = (Int32)ViewBag.report_id;
@@ -241,7 +243,7 @@
 
                     </div>
                     <!-- ================================================================================================================== -->
-                    @if (rm._investigation_status != Constant.investigation_status_closed)
+                    @if (rm._investigation_status != ECGlobalConstants.investigation_status_closed)
                     {
                         using (Html.BeginForm())
                         {
