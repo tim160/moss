@@ -425,7 +425,10 @@ namespace EC.Controllers
                 {
                     if (Request.Form["from"] != null && Request.Form["from"] != String.Empty)
                     {
+                        string temp = Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port);
                         string UploadedDirectory = "Upload\\" + Request.Form["from"] + "Logo";
+                        string pathLogo = temp + "//" + "Upload//" + Request.Form["from"] + "Logo";
+                        //UploadedDirectory = temp + "\\" + UploadedDirectory;
                         string Root = System.Web.Hosting.HostingEnvironment.MapPath("~/");
                         string UploadTarget = Root + UploadedDirectory + @"\";
                         bool tempResult = false;
@@ -433,25 +436,28 @@ namespace EC.Controllers
                         {
                             var fileName = company_id + "_" + DateTime.Now.Ticks + System.IO.Path.GetExtension(photo.FileName);
                             string path = @"\" + UploadedDirectory + @"\" + fileName;
-                            result = "/Upload/" + Request.Form["from"] + "Logo/" + fileName;
+                            //result = "/Upload/" + Request.Form["from"] + "Logo/" + fileName;
+                            pathLogo += "/" + fileName;
                             CompanyModel model = new CompanyModel();
-                            tempResult = model.addLogoCompany(company_id, result);
+                            tempResult = model.addLogoCompany(company_id, pathLogo);
                             if (tempResult)
                             {
                                 photo.SaveAs(UploadTarget + fileName);
                             }
-
+                            result = pathLogo;
                         }
                         if (Request.Form["from"] == "User")
                         {
                             var fileName = user_id + "_" + DateTime.Now.Ticks + System.IO.Path.GetExtension(photo.FileName);
-                            result = "/Upload/" + Request.Form["from"] + "Logo/" + fileName;
+                            //result = "/Upload/" + Request.Form["from"] + "Logo/" + fileName;
+                            pathLogo += "/" + fileName;
                             UserModel model = new UserModel();
-                            tempResult = model.updateLogoUser(user_id, result);
+                            tempResult = model.updateLogoUser(user_id, pathLogo);
                             if (tempResult)
                             {
                                 photo.SaveAs(UploadTarget + fileName);
                             }
+                            result = pathLogo;
                         }
                     }
                 }
