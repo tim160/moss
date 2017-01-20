@@ -84,65 +84,63 @@
             console.log("entered in newImageBtn click");
             $("#_file").click();
             console.log("click(); end");
-        });
-        function ajaxUploadFiles() {
-            $("#_file").on('change', function (e) {
+    });
+    $("#_file").on('change', function (e) {
 
-                var urlAjaxUploadFiles = $("#urlAjaxUploadFiles").val();
-                var from = $("#urlAjaxUploadFiles").attr("from");
-                console.log("try get value in urlAjaxUploadFiles" + urlAjaxUploadFiles);
-                var files = e.target.files;
-                console.log("get files" + files);
+        var urlAjaxUploadFiles = $("#urlAjaxUploadFiles").val();
+        var from = $("#urlAjaxUploadFiles").attr("from");
+        console.log("try get value in urlAjaxUploadFiles" + urlAjaxUploadFiles);
+        var files = e.target.files;
+        console.log("get files" + files);
 
-                if (files.length > 0) {
-                    console.log("files.length = " + files.length);
-                    var fd = new FormData();
-                    if (from != "") {
-                        console.log("from = " + from);
-                        fd.append("from", from);
+        if (files.length > 0) {
+            console.log("files.length = " + files.length);
+            var fd = new FormData();
+            if (from != "") {
+                console.log("from = " + from);
+                fd.append("from", from);
+            } else {
+                console.log("error from = " + from);
+            }
+
+            console.log("add fd.append = " + files.length);
+
+            var file = document.getElementById('_file');
+            console.log("getElementById('_file') = " + file);
+
+
+            for (var i = 0; i < file.files.length; i++) {
+                fd.append('_file', file.files[i]);
+                console.log("file.files[i] = " + file.files[i]);
+            }
+
+            $.ajax({
+                type: "POST",
+                url: urlAjaxUploadFiles,
+                contentType: false,
+                processData: false,
+                data: fd,
+                success: function (result) {
+                    console.log("result " + result);
+                    var from = $("#urlAjaxUploadFiles").attr("from");
+                    if (from == "User") {
+                        $("#logoUser").attr("src", result);
                     } else {
-                        console.log("error from = " + from);
-                    }
-                    
-                    console.log("add fd.append = " + files.length);
-
-                    var file = document.getElementById('_file');
-                    console.log("getElementById('_file') = " + file);
-
-
-                    for (var i = 0; i < file.files.length; i++) {
-                        fd.append('_file', file.files[i]);
-                        console.log("file.files[i] = " + file.files[i]);
+                        $("#logoCompany").attr("src", result);
                     }
 
-                    $.ajax({
-                        type: "POST",
-                        url: urlAjaxUploadFiles,
-                        contentType: false,
-                        processData: false,
-                        data: fd,
-                        success: function (result) {
-                            console.log("result " + result);
-                            var from = $("#urlAjaxUploadFiles").attr("from");
-                            if (from == "User") {
-                                $("#logoUser").attr("src", result);
-                            } else {
-                                $("#logoCompany").attr("src", result);
-                            }
-                            
-                        },
-                        error: function (xhr, status, p3, p4) {
-                            var err = "Error " + " " + status + " " + p3 + " " + p4;
-                            if (xhr.responseText && xhr.responseText[0] == "{")
-                                err = JSON.parse(xhr.responseText).Message;
-                            console.log(err);
-                        }
-                    });
-                } else {
-                    alert("This browser doesn't support HTML5 file uploads!");
+                },
+                error: function (xhr, status, p3, p4) {
+                    var err = "Error " + " " + status + " " + p3 + " " + p4;
+                    if (xhr.responseText && xhr.responseText[0] == "{")
+                        err = JSON.parse(xhr.responseText).Message;
+                    console.log(err);
                 }
             });
+        } else {
+            alert("This browser doesn't support HTML5 file uploads!");
         }
+    });
 
         //function blockActivityHeight() {
         //    if ($('#menu').height() < 50) {
@@ -208,7 +206,6 @@
 
 
         //miniMenu();
-        ajaxUploadFiles();
         contentCompanyProfileShow();
 
         /**
