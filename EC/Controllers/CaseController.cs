@@ -178,6 +178,18 @@ namespace EC.Controllers
                             eb.NewMessage(_user.first_nm, _user.last_nm, rm._report.display_name);
                             string body = eb.Body;
                             em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_NewMessage, body, true);
+
+                            /* /////tim Added email saving
+                            notification_processed np = new notification_processed();
+                            np.receivers = _user.email.Trim();
+                            np.notification_text = body;
+                            np.subject = App_LocalResources.GlobalRes.Email_Title_NewMessage;
+                            db.notification_processed.Add(np);
+                            using (ECEntities adv = new ECEntities())
+                            {
+                                adv.SaveChanges();
+                            }
+                            */
                         }
                     }
 
