@@ -10,7 +10,6 @@ using System.Configuration;
 using System.Collections;
 using System.Web;
 using System.Data.SqlClient;
-////using System.Web.Configuration;
 using System.Net.Mail;
 using System.Net;
 using System.Net.Mime;
@@ -184,12 +183,12 @@ namespace LavaBlast.Util.CreditCards
 		{
 			Dictionary<RequestFieldNames, string> request = new Dictionary<RequestFieldNames, string>();
             /////tim - Add values from WebConfig.
-	/*		request.Add(RequestFieldNames.merchant_id, ConfigurationManager.AppSettings["Beanstream_Merchant_id"]);
-			request.Add(RequestFieldNames.serviceVersion, ConfigurationManager.AppSettings["Beanstream_Version"]);
+            request.Add(RequestFieldNames.merchant_id, ConfigurationManager.AppSettings["Beanstream_Merchant_id"]);
+            request.Add(RequestFieldNames.serviceVersion, ConfigurationManager.AppSettings["Beanstream_Version"]);
 
-			request.Add(RequestFieldNames.username, ConfigurationManager.AppSettings["Beanstream_Login"]);
-			request.Add(RequestFieldNames.password, ConfigurationManager.AppSettings["Beanstream_Pass"]);
-            */
+            request.Add(RequestFieldNames.username, ConfigurationManager.AppSettings["Beanstream_Login"]);
+            request.Add(RequestFieldNames.password, ConfigurationManager.AppSettings["Beanstream_Pass"]);
+            
 			return request;
 		}
 
