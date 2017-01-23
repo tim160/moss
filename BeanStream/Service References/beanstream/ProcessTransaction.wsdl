@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:stk="http://schemas.microsoft.com/soap-toolkit/wsdl-extension" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdlns="http://tempuri.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:typens="http://tempuri.org/type" name="ProcessTransaction" targetNamespace="http://tempuri.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/type" />
+  </types>
+  <message name="TransClass.TransactionProcess">
+    <part name="inputTrans" type="xsd:string" />
+  </message>
+  <message name="TransClass.TransactionProcessResponse">
+    <part name="Result" type="xsd:string" />
+  </message>
+  <message name="TransClass.TransactionProcessAuth">
+    <part name="inputTrans" type="xsd:string" />
+  </message>
+  <message name="TransClass.TransactionProcessAuthResponse">
+    <part name="Result" type="xsd:string" />
+  </message>
+  <portType name="TransClassSoapPort">
+    <operation name="TransactionProcess" parameterOrder="inputTrans">
+      <input message="wsdlns:TransClass.TransactionProcess" />
+      <output message="wsdlns:TransClass.TransactionProcessResponse" />
+    </operation>
+    <operation name="TransactionProcessAuth" parameterOrder="inputTrans">
+      <input message="wsdlns:TransClass.TransactionProcessAuth" />
+      <output message="wsdlns:TransClass.TransactionProcessAuthResponse" />
+    </operation>
+  </portType>
+  <binding name="TransClassSoapBinding" type="wsdlns:TransClassSoapPort">
+    <stk:binding preferredEncoding="UTF-8" />
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <operation name="TransactionProcess">
+      <soap:operation soapAction="http://tempuri.org/action/TransClass.TransactionProcess" />
+      <input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="TransactionProcessAuth">
+      <soap:operation soapAction="http://tempuri.org/action/TransClass.TransactionProcessAuth" />
+      <input>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="http://tempuri.org/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="ProcessTransaction">
+    <port name="TransClassSoapPort" binding="wsdlns:TransClassSoapBinding">
+      <soap:address location="https://www.beanstream.com/soap/ProcessTransaction.wsdl" />
+    </port>
+  </service>
+</definitions>
