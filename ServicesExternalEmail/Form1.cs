@@ -23,7 +23,7 @@ namespace ServicesExternalEmail
             InitializeComponent();
             EmailProcess ep = new EmailProcess();
 
-            if(ConfigurationSettings.AppSettings["GD"] == "1")
+            if (ConfigurationManager.AppSettings["GD"] == "1")
                 ep.Initialize_GD();
 
             ep.CheckEmails();
@@ -96,15 +96,15 @@ namespace ServicesExternalEmail
             internal void Initialize_GD()
             {
 
-                m_FromAddress = ConfigurationSettings.AppSettings["GDfromAddress"];
-                SmtpClient smtpClient = new SmtpClient(ConfigurationSettings.AppSettings["GDsmtpClient"]);
+                m_FromAddress = ConfigurationManager.AppSettings["GDfromAddress"];
+                SmtpClient smtpClient = new SmtpClient(ConfigurationManager.AppSettings["GDsmtpClient"]);
 
                 // smtpClient.Credentials = new System.Net.NetworkCredential("test@voteplayers.com", "123456");
                 //  smtpClient.Send(mailMessage);
-                m_Server = ConfigurationSettings.AppSettings["GDserver"];
-                m_Username = ConfigurationSettings.AppSettings["GDusername"];
-                m_Password = ConfigurationSettings.AppSettings["GDpassword"];
-                m_Port = Convert.ToInt16(ConfigurationSettings.AppSettings["GDport"]);
+                m_Server = ConfigurationManager.AppSettings["GDserver"];
+                m_Username = ConfigurationManager.AppSettings["GDusername"];
+                m_Password = ConfigurationManager.AppSettings["GDpassword"];
+                m_Port = Convert.ToInt16(ConfigurationManager.AppSettings["GDport"]);
 
                 /*
                 m_FromAddress = "employeeconfidential@employeeconfidential.com";
