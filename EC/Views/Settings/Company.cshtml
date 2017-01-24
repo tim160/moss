@@ -39,7 +39,7 @@
     <div class="contentSettings secondHeader">
         <div class="headerCompanyProfile">
             <div class="headerBlock">
-                <label class="blockImg">
+                <div class="blockImg">
                     <form action="@Url.Action("AddLogoCompany")" method="post" enctype="multipart/form-data" onsubmit="return handleSubmit(this);">
                         <img id="logoCompany" src='@Url.Content(cm._company.path_en)' />
                         @if (is_valid_mediator)
@@ -53,7 +53,7 @@
                         <label class="newImageBtn">@GlobalRes.Newimage</label>
                     </div>
                     }
-                </label>
+                </div>
 
                 <div class="blockText">
                     <p class="title">@cm._company.company_nm</p>
@@ -62,8 +62,8 @@
             </div>
             <div class="menuCompanyProfile">
                 <div class="settingMenuItems">
-                    <h2 class="menuItem active">@GlobalRes.Locations</h2>
-                    <h2 class="menuItem">@GlobalRes.Departments</h2>
+                    <h2 class="menuItem active">@GlobalRes.Departments</h2>
+                    <h2 class="menuItem">@GlobalRes.Locations</h2>
                     <h2 class="menuItem">@GlobalRes.Languages</h2>
                     <h2 class="menuItem">@GlobalRes.IncidentTypes</h2>
                     <h2 class="menuItem">@GlobalRes.ReporterTypes</h2>
@@ -74,6 +74,40 @@
     </div><!--contentSettings.secondHeader-->
     <div class="contentCompanyProfile contentCompanyProfile@{@class_ext}">
         <div class="contentSettings">
+            <!--blockDepartmens-->
+            <div class="blockDepartmens" style="display: none;">
+                @if (is_valid_mediator)
+                {
+                    <div class="addDepartmentBtn" id="addInputDep">
+                        <!--After click Btn - add class inactive-->
+                        <p>@GlobalRes.addnewDepartment</p>
+                    </div>
+                }
+                <div class="addDepartmentBtn" id="addDepBtn" style="width: auto;">
+                    <!--After click Btn - add class inactive-->
+                    <p style="min-width: 50px;">@GlobalRes.Add</p>
+                </div>
+                <div class="addNewDepartment">
+                    <input type="text" name="newDepartmenName" required="" value="">
+                    <div class="closeIcon"></div>
+                </div>
+                <div class="tableDepartment">
+                    @foreach (company_department _department in cm.CompanyDepartmentsActive(company_id))
+                    {
+                        <div style="display: flex;">
+                            <p>@_department.department_en</p>
+                            @if (is_valid_mediator)
+                            {
+                                <div data-value="@_department.id" class="deleteDepartment"></div>
+                            }
+                        </div>
+                    }
+                </div>
+            </div><!--blockDepartmens-->
+
+
+
+            <!--blockLocations-->
             <div class="blockLocations">
                     @if (is_valid_mediator)
                     {
@@ -106,35 +140,6 @@
             </div><!--blockLocations-->
 
 
-            <div class="blockDepartmens" style="display: none;">
-                    @if (is_valid_mediator)
-                    {
-                <div class="addDepartmentBtn" id="addInputDep">
-                    <!--After click Btn - add class inactive-->
-                    <p>@GlobalRes.addnewDepartment</p>
-                </div>
-                    }
-                <div class="addDepartmentBtn" id="addDepBtn" style="width: auto;">
-                    <!--After click Btn - add class inactive-->
-                    <p style="min-width: 50px;">@GlobalRes.Add</p>
-                </div>
-                <div class="addNewDepartment">
-                    <input type="text" name="newDepartmenName" required="" value="">
-                    <div class="closeIcon"></div>
-                </div>
-                <div class="tableDepartment">
-                    @foreach (company_department _department in cm.CompanyDepartmentsActive(company_id))
-                    {
-                        <div style="display: flex;">
-                            <p>@_department.department_en</p>
-                            @if (is_valid_mediator)
-                             {
-                                <div data-value="@_department.id" class="deleteDepartment"></div>
-                            }
-                        </div>
-                    }
-                </div>
-            </div><!--blockDepartmens-->
 
             <div class="blockLanguages" style="display: none;">
                 <p>This version is only available in English</p>
