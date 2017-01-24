@@ -215,12 +215,20 @@
         IncidentType
         */
         function close(nameObject, data, id) {
+            console.log('close nameObject' + nameObject);
+            console.log('close data' + data);
+            console.log('close id' + id);
+
             var nameTable = ".table" + nameObject;
+            console.log('nameTable' + nameTable);
+
             contentCompanyProfile.find(".table" + nameObject).prepend('<div style="display:flex"><p>' + data + '</p>' + '<div class="delete' + nameObject + '" data-value=' + id + '>' + '</div></div>');
             closeIcon(nameObject);
         }
         function closeIcon(nameObject) {
             contentCompanyProfile.find(".addNew" + nameObject + " input").val('');
+            console.log('closeIcon');
+
             contentCompanyProfile.find(".addNew" + nameObject).hide();
             contentCompanyProfile.find(".add" + nameObject + "Btn").removeClass("inactive");
             contentCompanyProfile.find(".add" + nameObject + "Btn").css('float', 'none');
@@ -252,12 +260,15 @@
         /* Adding Location*/
         $('#addInputLoc p').click(function () {
             var temp = $(this).parent();
+            console.log("temp = " + temp);
             adding("Location", temp);
         });
         $('#addLocBtn').click(function () {
             var data = $(".addNewLocation input").val();
+            console.log("data = " + data);
             if (data.length > 0) {
                 sendAjax("Location", data, function (id) {
+                    console.log("sendAjax = " + id);
                     close("Location", data, id);
                 });
                 if (!data) {
