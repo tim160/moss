@@ -3245,8 +3245,9 @@ public class GlobalFunctions
         {
             return "Success";
         }
-        return "The password should be at least 6 characters long";
+        return String.Format("The password should be at least {0} characters long", PasswordLength.ToString());
     }
+
     public static string GetUser_IP()
     {
         string VisitorsIPAddr = string.Empty;

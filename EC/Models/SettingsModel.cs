@@ -15,14 +15,14 @@ namespace EC.Models
 
             try
             {
-                if(newSetting.userId > 0 && newSetting.newSetting != "" && newSetting.data != "" && newSetting.data.ToLower() != "other")
+                if (newSetting.userId > 0 && newSetting.newSetting != "" && newSetting.data != "" && newSetting.data.ToLower() != "other")
                 {
                     newSetting.data = newSetting.data.Trim();
-                   // newSetting.data = newSetting.data.ToLower();
+                    // newSetting.data = newSetting.data.ToLower();
                     switch (newSetting.newSetting)
                     {
                         case "Location":
-                                flag = this.addLocationCompany(newSetting);
+                            flag = this.addLocationCompany(newSetting);
                             break;
                         case "deleteLocation":
                             flag = this.deleteLocation(newSetting);
@@ -65,24 +65,25 @@ namespace EC.Models
                 if (newSetting.companyId > 0 && newSetting.userId > 0 && newSetting.data != null)
                 {
                     int count = db.company_location.Where(item => item.company_id == newSetting.companyId && item.status_id == 2).Count();
-                    if(count <= 1)
+                    if (count <= 1)
                     {
                         return "false";
                     }
                     int idSetting = Int32.Parse(newSetting.data);
                     company_location oldLocation = db.company_location.Where(item => item.id == idSetting).FirstOrDefault();
-                    if(oldLocation!=null)
+                    if (oldLocation != null)
                     {
                         oldLocation.status_id = 1;
                         oldLocation.last_update_dt = DateTime.Now;
                         db.SaveChanges();
                     }
-                } else
+                }
+                else
                 {
                     return "false";
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return "false";
             }
@@ -101,14 +102,15 @@ namespace EC.Models
                     }
                     int idDepartment = Int32.Parse(newSetting.data);
                     company_department oldDepartmnet = db.company_department.Where(item => item.id == idDepartment).FirstOrDefault();
-                    if(oldDepartmnet!=null)
+                    if (oldDepartmnet != null)
                     {
                         oldDepartmnet.status_id = 1;
                         oldDepartmnet.user_id = newSetting.userId;
                         oldDepartmnet.last_update_dt = DateTime.Now;
                         db.SaveChanges();
                     }
-                } else
+                }
+                else
                 {
                     return "false";
                 }
@@ -124,16 +126,17 @@ namespace EC.Models
             string id = null;
             try
             {
-                if(newSetting.companyId>0 && newSetting.userId >0 && newSetting.data != null)
+                if (newSetting.companyId > 0 && newSetting.userId > 0 && newSetting.data != null)
                 {
 
-                    company_department oldDepartment = db.company_department.Where(item => item.department_en == newSetting.data).FirstOrDefault();
-                    if(oldDepartment!=null)
+                    company_department oldDepartment = db.company_department.Where(item => item.department_en.Trim().ToLower() == newSetting.data.Trim().ToLower() && item.company_id == newSetting.companyId).FirstOrDefault();
+                    if (oldDepartment != null)
                     {
                         oldDepartment.status_id = 2;
                         db.SaveChanges();
                         id = oldDepartment.id.ToString();
-                    } else
+                    }
+                    else
                     {
                         company_department department = new company_department();
                         department.user_id = newSetting.userId;
@@ -146,11 +149,13 @@ namespace EC.Models
                         db.SaveChanges();
                         id = department.id.ToString();
                     }
-                } else
+                }
+                else
                 {
                     return "false";
                 }
-            } catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return "false";
             }
@@ -187,13 +192,14 @@ namespace EC.Models
             string id = null;
             try
             {
-                company_relationship idContain = db.company_relationship.Where(item => item.relationship_en == newSetting.data).FirstOrDefault();
-                if(idContain != null)
+                company_relationship idContain = db.company_relationship.Where(item => item.relationship_en.Trim().ToLower() == newSetting.data.Trim().ToLower() && item.company_id == newSetting.companyId).FirstOrDefault();
+                if (idContain != null)
                 {
                     idContain.status_id = 2;
                     db.SaveChanges();
                     return idContain.id.ToString();
-                } else
+                }
+                else
                 {
                     company_relationship custom = new company_relationship
                     {
@@ -223,18 +229,37 @@ namespace EC.Models
             string id = null;
             try
             {
-                company_location location = new company_location
+
+                if (newSetting.companyId > 0 && newSetting.userId > 0 && newSetting.data != null)
                 {
-                    client_id = newSetting.userId,
-                    company_id = newSetting.companyId,
-                    status_id = 2,
-                    location_en = newSetting.data,
-                    last_update_dt = DateTime.Now,
-                    user_id = 1,
-                };
-                location = db.company_location.Add(location);
-                db.SaveChanges();
-                id = location.id.ToString();
+                    company_location oldLocation = db.company_location.Where(item => item.location_en.Trim().ToLower() == newSetting.data.Trim().ToLower() && item.company_id == newSetting.companyId).FirstOrDefault();
+                    if (oldLocation != null)
+                    {
+                        oldLocation.status_id = 2;
+                        db.SaveChanges();
+                        id = oldLocation.id.ToString();
+                    }
+                    else
+                    {
+                        company_location location = new company_location
+                        {
+                            client_id = newSetting.userId,
+                            company_id = newSetting.companyId,
+                            status_id = 2,
+                            location_en = newSetting.data,
+                            last_update_dt = DateTime.Now,
+                            user_id = 1,
+
+                        };
+                        location = db.company_location.Add(location);
+                        db.SaveChanges();
+                        id = location.id.ToString();
+                    }
+                }
+                else
+                {
+                    return "false";
+                }
             }
             catch (System.Data.DataException ex)
             {
@@ -242,20 +267,21 @@ namespace EC.Models
             }
             return id;
         }
-        public company_secondary_type isAncydentTypeCreated(string secondary_type_en)
+        public company_secondary_type isIncydentTypeCreated(string secondary_type_en, int company_id)
         {
-            return db.company_secondary_type.Where(item => item.secondary_type_en == secondary_type_en).FirstOrDefault();
+            return db.company_secondary_type.Where(item => item.secondary_type_en.Trim().ToLower() == secondary_type_en.Trim().ToLower() && item.company_id == company_id).FirstOrDefault();
         }
-        public string addIncidentType (SettingsViewModel newSetting)
+        public string addIncidentType(SettingsViewModel newSetting)
         {
             string id = null;
-            company_secondary_type temp = isAncydentTypeCreated(newSetting.data);
+            company_secondary_type temp = isIncydentTypeCreated(newSetting.data, newSetting.companyId);
             if (temp != null)
             {
                 temp.status_id = 2;
                 db.SaveChanges();
                 return temp.id.ToString();
-            } else
+            }
+            else
             {
                 try
                 {
@@ -295,7 +321,7 @@ namespace EC.Models
                 var order = (from o in db.company_secondary_type
                              where o.id == id
                              select o).First();
-                if(order!=null)
+                if (order != null)
                 {
                     order.status_id = 1;
                     db.SaveChanges();
@@ -309,17 +335,17 @@ namespace EC.Models
         }
         public string IsValidPass(string oldPass, string newPass, string confPass, int user_id)
         {
-            string result = "Saved success";
+            string result = "Saved successfully";
             if (oldPass == "" || newPass == "" || confPass == "")
             {
-                return "Some fields empty!";
+                return "Some fields are empty!";
             }
             result = GlobalFunctions.IsValidPass(newPass);
             if (result == "Success")
             {
                 if (newPass != confPass)
                 {
-                    return "Password and Confirm Password not match";
+                    return "Password and Confirm Password do not match";
                 }
                 user user = db.user.Where(item => item.id == user_id).FirstOrDefault();
                 if (user.password == oldPass)
@@ -327,7 +353,8 @@ namespace EC.Models
                     //try save
                     user.password = newPass;
                     db.SaveChanges();
-                } else
+                }
+                else
                 {
                     return "Wrong old password";
                 }
