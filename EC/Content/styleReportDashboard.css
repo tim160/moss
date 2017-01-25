@@ -1090,14 +1090,14 @@ h2.mainTitle {
 .contentCompanyProfile .blockLocations,
 .contentCompanyProfile .blockIncidentTypes,
 .contentCompanyProfile .blockReporterTypes,
-.contentCompanyProfile .blockDepartmens{
+.contentCompanyProfile .blockDepartments{
     width: 100%;
     margin-bottom: 30px;
 }
 .contentCompanyProfile .blockLanguages,
 .contentCompanyProfile .blockIncidentTypes,
 .contentCompanyProfile .blockReporterTypes,
-.contentCompanyProfile .blockDepartmens {
+.contentCompanyProfile .blockDepartments {
     display: none;
 }
 .contentCompanyProfile .tableLanguage,

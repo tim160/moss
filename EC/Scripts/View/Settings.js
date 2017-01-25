@@ -169,7 +169,7 @@
         function hideBlock() {
             $('.blockLanguages').hide();
             $('.blockLocations').hide();
-            $('.blockDepartmens').hide();
+            $('.blockDepartments').hide();
             $('.blockIncidentTypes').hide();
             $('.blockReporterTypes').hide();
             $('.blockAnonymity').hide();
@@ -195,11 +195,11 @@
             });
             $('.menuItem:nth-child(2)').click(function () {
                 hideBlock();
-                $('.blockDepartmens').show();
+                $('.blockLocations').show();
             });
             $('.menuItem:nth-child(1)').click(function () {
                 hideBlock();
-                $('.blockLocations').show();
+                $('.blockDepartments').show();
             });
         }
 
