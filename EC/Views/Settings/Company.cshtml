@@ -75,7 +75,7 @@
     <div class="contentCompanyProfile contentCompanyProfile@{@class_ext}">
         <div class="contentSettings">
             <!--blockDepartments-->
-            <div class="blockDepartments" style="display: none;">
+            <div class="blockDepartments">
                 @if (is_valid_mediator)
                 {
                     <div class="addDepartmentBtn" id="addInputDep">
@@ -108,14 +108,14 @@
 
 
             <!--blockLocations-->
-            <div class="blockLocations">
-                    @if (is_valid_mediator)
-                    {
+            <div class="blockLocations" style="display: none;">
+                @if (is_valid_mediator)
+                {
                     <div class="addLocationBtn" id="addInputLoc">
                         <!--After click Btn - add class inactive-->
                         <p>@GlobalRes.addnewLocation</p>
                     </div>
-                    }
+                }
                 <div class="addLocationBtn" id="addLocBtn" style="width: auto;">
                     <!--After click Btn - add class inactive-->
                     <p style=" min-width: 50px;">@GlobalRes.Add</p>

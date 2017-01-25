@@ -281,20 +281,6 @@
                                 </div>
                                 <div class="contentLegend">
                                     <label>@_today_spanshot[5]</label>
-                                    @if (_today_spanshot[5] > _month_end_spanshot[5])
-                                {
-                                    difference = _today_spanshot[5] - _month_end_spanshot[5];
-                                <span class="plus">(+@difference)</span>
-                                }
-                                    @if (_today_spanshot[5] < _month_end_spanshot[5])
-                                {
-                                    difference = _month_end_spanshot[5] - _today_spanshot[5];
-                                <span class="mines">(-@difference)</span>
-                                }
-                                    @if (_today_spanshot[5] == _month_end_spanshot[5])
-                                {
-                                <span class="closed">(-)</span>
-                                }
                                 </div>
                             </div>
                             @for (var i = 0; i < 6; i++)
@@ -309,20 +295,7 @@
                             <div class="contentLegend">
                                 <label>@_today_spanshot[i]</label>
 
-                                @if (_today_spanshot[i] > _month_end_spanshot[i])
-                                        {
-                                            difference = _today_spanshot[i] - _month_end_spanshot[i];
-                                        <span class="plus">(+@difference)</span>
-                                        }
-                                @if (_today_spanshot[i] < _month_end_spanshot[i])
-                                        {
-                                            difference = _month_end_spanshot[i] - _today_spanshot[i];
-                                        <span class="mines">(-@difference)</span>
-                                        }
-                                @if (_today_spanshot[i] == _month_end_spanshot[i])
-                                        {
-                                        <span class="closed">(-)</span>
-                                        }
+                               
                             </div>
                         </div>
                             }
@@ -665,15 +638,6 @@
                                     <div class="linesShow">
                                         <div class="blockLineFirst"></div>
                                         <label>@dr["value"]</label>
-                                        @if ((Int32)(dr["value"]) > (Int32)(dr["prev"]))
-                                        {
-                                            difference = (Int32)(dr["value"]) - (Int32)(dr["prev"]);
-                                            <span>(+@difference)</span>
-                                        }
-                                        @if ((Int32)(dr["value"]) == (Int32)(dr["prev"]))
-                                        {
-                                            <span>(-)</span>
-                                        }
                                         <div class="blockLineSecond"></div>
                                     </div>
                                 </div>
@@ -696,15 +660,6 @@
                                     <div class="linesShow">
                                         <div class="blockLineFirst"></div>
                                         <label>@dr["value"]</label>
-                                        @if ((Int32)(dr["value"]) > (Int32)(dr["prev"]))
-                                        {
-                                            difference = (Int32)(dr["value"]) - (Int32)(dr["prev"]);
-                                            <span>(+@difference)</span>
-                                        }
-                                        @if ((Int32)(dr["value"]) == (Int32)(dr["prev"]))
-                                        {
-                                            <span>(-)</span>
-                                        }
                                         <div class="blockLineSecond"></div>
                                     </div>
                                 </div>
