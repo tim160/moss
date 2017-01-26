@@ -1,0 +1,313 @@
+/*@font-face {
+    font-family: 'OpenSans-Semibold';
+    src: url('fonts/OpenSans/OpenSans-Semibold.ttf');
+}
+@font-face {
+    font-family: 'OpenSans-Bold';
+    src: url('fonts/OpenSans/OpenSans-Bold.ttf');
+}
+@font-face {
+    font-family: 'Lato-Heavy';
+    src: url('fonts/lato-heavy.ttf');
+}
+@font-face {
+    font-family: 'Lato-Regular';
+    src: url('fonts/Lato-Regular.ttf');
+}*/
+@font-face {
+    font-family: 'Lato-Semibold';
+    src: url('fonts/Lato-Semibold.ttf');
+}
+
+#header {
+    display: none;
+}
+#headerCai {
+    background-color: rgba(255,255,255,0.75);
+    width: 100%;
+    height: 80px;
+    box-sizing: border-box;
+    padding: 20px 80px 0;
+    position: relative;
+}
+#headerCai .blueLogo {
+    display: block;
+    position: relative;
+}
+#headerCai a.linkLogin {
+    position: absolute;
+    right: 90px;
+    top: 30px;
+    text-transform: uppercase;
+    font-family: 'Open Sans', arial, verdana, sans-serif;
+    font-weight: 700;
+    color: #fb5e2d;
+    font-size: 14px;
+}
+#headerCai .info {
+    font-size: 12px;
+    color: #05b5a2;
+    padding-left: 44px;
+    text-transform: uppercase;
+    font-family: 'Open Sans', arial, verdana, sans-serif;
+    font-weight: 600;
+    line-height: 12px;
+    padding-top: 6px;
+}
+.mainBlock {
+    width: 100%;
+    display: table;
+    padding: 50px 0 0;
+    box-sizing: border-box;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+#wrap{
+    min-height: auto;
+}
+.itemBlock{
+    padding-bottom: 40px;
+    height: 340px;
+    width: 25%;
+    box-sizing: border-box;
+    padding-top: 30px;
+}
+.loginForm {
+    padding-top: 20px;
+    margin: 0 auto;
+    width: 420px;
+    height: 450px;
+    background-color:#587C7E;
+    color: #305458;
+    font-family: 'Lato-Semibold', arial, verdana, sans-serif;
+    display: table;
+}
+.loginForm .div {
+    background: #fff;
+    border: 1px solid #e0e5e6;
+    box-sizing: border-box;
+    height: 71px;
+    width: 100%;
+    overflow: hidden;
+}
+.loginForm .div input{
+    -webkit-appearance: none;
+    border-radius: 0;
+    width: 100%;
+    height: 50px;
+    padding-top: 0px;
+    padding-left: 8px;
+    margin-left: 0px;
+    text-indent: 2px;
+    background-color: #fff !important;
+    outline: none;
+    line-height: 0px;
+    border: none;
+    font-size: 18px;
+    color: #305458;
+    box-sizing: border-box;
+}
+.loginForm .div input:-webkit-autofill {
+    background-color: #fff !important;
+    -webkit-box-shadow: inset 0 0 0 50px #fff !important; /* Цвет фона */
+    -webkit-text-fill-color: #305458 !important; /* цвет текста */
+    color: #305458 !important; /* цвет текста */
+}
+.loginForm label {
+    top: 0px;
+    right: 0px;
+    padding-left: 10px;
+    font-size: 14px;
+    opacity: 0.5;
+    font-family: 'Lato-Semibold', arial, verdana, sans-serif;
+    padding-top: 5px;
+    display: block;
+}
+#bodyInc {
+    background-color: rgba(5, 181, 162, 0.8);
+    position: relative;
+    padding: 10px 0 0 0;
+}
+#bodyInc .fourthTitle {
+    color: #ffffff !important;
+}
+.fourthTitle {
+    color: #ffffff;
+    padding: 20px 0;
+}
+#bodyInc .blockInputs {
+    width: 100%;
+    display: table;
+    background-color: #e9f2f2;
+    padding: 50px 0 20px;
+    font-size: 0px;
+}
+#bodyInc .blockInputs .block {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+    box-sizing: border-box;
+    padding-left: 90px;
+    padding-right: 40px;
+}
+#bodyInc .blockInputs .button {
+    width: 100%;
+    display: table;
+    text-align: right;
+    padding-top: 10px;
+}
+#bodyInc .button input[type="button"] {
+    background: #fb5e2d;
+    border: 1px solid #fb5e2d;
+    color: #fff;
+    text-transform: uppercase;
+    font-family: 'Open Sans', arial, verdana, sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    border-radius: 1px;
+    width: 180px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+}
+#bodyInc  #startBtn{
+    width: 88px;
+}
+#bodyInc .button input[type="button"]:active {
+    background: #e74918;
+    border: 1px solid #c74b24;
+}
+#bodyInc .button input[type="button"]:hover,
+#bodyInc .button input[type="button"]:focus {
+    background: #db3a08;
+    border: 1px solid #ba350b;
+}
+#bodyInc h1 {
+    color: #38494d;
+    font-size: 20px;
+    line-height: 20px;
+    font-family: 'Lato', arial, verdana, sans-serif;
+    font-weight: 900;
+    margin: 0;
+}
+#bodyInc .text {
+    color: #38494d;
+    font-size: 14px;
+    font-family: 'Lato', arial, verdana, sans-serif;
+    font-weight: 400;
+    padding-top: 5px;
+    height: 50px;
+}
+#bodyInc .loginForm {
+    background: none;
+    width: 100%;
+    height: auto;
+    padding-right: 54px;
+    box-sizing: border-box;
+}
+#bottomBody {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    color: rgba(255,255,255,0.6);
+    display: table;
+    font-size: 0;
+}
+#bodyInc img.logoShow {
+    height: 60px;
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: -30px;
+}
+
+.loginForm .div #specialInput {
+    border-radius: 0;
+    width: 100%;
+    height: 50px;
+    padding-top: 0px;
+    padding-left: 8px;
+    margin-left: 0px;
+    border: none;
+    font-size: 18px;
+    color: #305458;
+    font-family: 'Lato-Semibold', arial, verdana, sans-serif;
+    box-shadow: none;
+}
+
+@media (max-width: 1240px){
+    .mainBlock{
+        max-width: 766px;
+    }
+    #bodyInc .blockInputs .block{
+        width: 100%;
+        min-height: 280px;
+    }
+    .itemBlock{
+        width: 50%;
+        height: auto;
+    }
+}
+@media (max-width: 780px){
+    .mainBlock{
+        min-width: 280px;
+        width: 75%;
+    }
+    .itemBlock{
+        width: 100%;
+        height: auto;
+    }
+
+
+    #bodyInc .blockInputs .block {
+        padding: 0 20px;
+    }
+    #bodyInc .loginForm{
+        padding-right: 0;
+    }
+    #bodyInc .text {
+        color: #38494d;
+        font-size: 14px;
+        font-family: 'Lato', arial, verdana, sans-serif;
+        font-weight: 400;
+        padding-top: 5px;
+        height: 50px;
+        width: 100%;
+        display: table;
+    }
+}
+@media (max-width: 680px){
+    #headerCai {
+        display: table;
+        padding: 20px 20px 40px;
+        text-align: left;
+    }
+    #headerCai a.linkLogin{
+        bottom: 20px;
+        top: auto;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        display: inline-block;
+        text-align: center;
+    }
+    #headerCai .info{
+        padding: 10px;
+        text-align: center;
+    }
+    #footer .positionLogo {
+        padding: 0 0 20px;
+        margin: 0;
+    }
+    #footer ul{
+        height: auto;
+    }
+    #footer{
+        display: table;
+    }
+}

@@ -223,9 +223,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\caiNew.css" />
     <Content Include="Content\emails\SeniorMediatorCaseConfirm.html" />
     <Content Include="Content\fonts\bootstrap.min.css" />
-    <Content Include="Content\cai.css" />
+    <Content Include="Content\caiOLD.css" />
     <Content Include="Content\caseTasks.css" />
     <Content Include="Content\daterangepicker.css" />
     <Content Include="Content\daterangepickerAnalit.css" />
@@ -379,9 +380,10 @@
     <Content Include="Content\reportCss.css" />
     <Content Include="Content\reportDashboard.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\style2.css" />
     <Content Include="Content\styleAnalitics.css" />
     <Content Include="Content\styleLogin.css" />
-    <Content Include="Content\style.css" />
+    <Content Include="Content\styleOLD.css" />
     <Content Include="Content\stylePageMessages.css" />
     <Content Include="Content\styleReportDashboard.css" />
     <Content Include="Content\styleTasks.css" />
@@ -838,9 +840,6 @@
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\status.cs">
-      <DependentUpon>ECEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Database\sysdiagrams.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\task.cs">

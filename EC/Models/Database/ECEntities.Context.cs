@@ -95,6 +95,6 @@ namespace EC.Models.Database
         public virtual DbSet<user_change_password> user_change_password { get; set; }
         public virtual DbSet<user_role> user_role { get; set; }
         public virtual DbSet<validation_type> validation_type { get; set; }
-        public virtual DbSet<tmp_raph_client> tmp_raph_client { get; set; }
+        //public virtual DbSet<tmp_raph_client> tmp_raph_client { get; set; }
     }
 }

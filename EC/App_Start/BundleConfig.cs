@@ -56,7 +56,7 @@ namespace EC
                     "~/Content/style.css",
                     "~/Content/jquery-ui.css"));
                bundles.Add(new StyleBundle("~/Content/caiStart").Include(
-                    "~/Content/cai.css",
+                    "~/Content/caiNew.css",
                     "~/Content/style.css",
                     "~/Content/jquery-ui.css"));
 
