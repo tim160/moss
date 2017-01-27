@@ -22,6 +22,7 @@
     font-family: 'Lato-Bold';
     src: url('fonts/Lato-Bold.ttf');
 }*/
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700,900|Open+Sans:300,600,700');
 @font-face {
     font-family: 'Lato-Semibold';
     src: url('fonts/Lato-Semibold.ttf');
@@ -46,6 +47,7 @@ html, body {
     background-position: top center;
     background-size: cover;
     min-height: 700px;
+    background-image: url('/Content/img/website-report.jpg');
 }
 #header {
     background-color: rgba(255, 255, 255, 0.7);

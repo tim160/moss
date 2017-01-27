@@ -2,7 +2,7 @@
 @using EC.App_LocalResources;
 @using Resources = EC.Localization.Resources
 @{
-    
+
     bool? is_cc = ViewBag.is_cc;
     if (!is_cc.HasValue)
     {
@@ -18,7 +18,7 @@
 
     ViewBag.Title = GlobalRes.SelectYourCompany;
     Layout = "~/Views/Shared/HeaderFooterFrontPages.cshtml";
-    ViewBag.background = "background-image: url(/Content/img/website-report" + class_ext + ".jpg);";
+    //ViewBag.background = "background-image: url(/Content/img/website-report" + class_ext + ".jpg);";
 }
 
 <div id="topBody">
@@ -88,7 +88,10 @@
 </div><!--end bottomBody-->
 <input id="companyCode" type="hidden" value="false" />
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/ssmoothness/jquery-ui.css">
+@*<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/ssmoothness/jquery-ui.css">*@
+@section pageScripts{ 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script>
     $(document).ready(function() {
         $("#header .bigButton").on('click', function() {
@@ -98,9 +101,9 @@
             window.location.href = "/login";
         });
     });
-
 </script>
 
+}
 
 
 

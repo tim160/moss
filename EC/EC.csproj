@@ -585,6 +585,7 @@
     <Content Include="Views\Errors\Index.cshtml" />
     <Content Include="Views\Errors\NotFound.cshtml" />
     <Content Include="Views\Errors\Unavailable.cshtml" />
+    <Content Include="Views\Shared\HeaderFooterFrontPagesBgColor.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
