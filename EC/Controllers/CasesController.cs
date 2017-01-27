@@ -10,7 +10,7 @@ using EC.Models.ECModel;
 using EC.Controllers.ViewModel;
 using EC.Models.ViewModel;
 using EC.Constants;
-
+using log4net;
 
 namespace EC.Controllers
 {
@@ -18,7 +18,7 @@ namespace EC.Controllers
     {
         //
         // GET: /Cases/
-
+        int total_report_count = 2;
         private readonly ActiveCasesModel casesModel = new ActiveCasesModel();
         private readonly ReportModel reportModel = ReportModel.inst;
         List<CasePreviewViewModel> preview_list = new List<CasePreviewViewModel>();
@@ -33,7 +33,6 @@ namespace EC.Controllers
                 return RedirectToAction("Index", "Account");
 
             ViewBag.pending_report_ids = PendingReports();
-      ///      ViewBag.pending_report_ids = new List<int>();// PendingReports();
 
             UserModel um = new UserModel(user.id);
             List<int> all_active_report_ids = um.ReportsSearchIds(um._user.company_id, 1);
@@ -41,27 +40,32 @@ namespace EC.Controllers
             List<int> spam_report_ids = um.ReportsSearchIds(um._user.company_id, 3);
             List<int> closed_report_ids = um.ReportsSearchIds(um._user.company_id, 5);
 
-            int temp_report_id;
             #region Active Reports
+            List<int> temp_all_active_report_ids = all_active_report_ids;
+            int temp_report_count = total_report_count;
+            if (all_active_report_ids.Count() < temp_report_count)
+                temp_report_count = all_active_report_ids.Count();
 
-            preview_list = new List<CasePreviewViewModel>();
-            for (int i = all_active_report_ids.Count - 1; i >= 0; i--)
+            int temp_report_id;
+            for (int i = 0; i < temp_report_count; i++)
             {
                 temp_report_id = all_active_report_ids[i];
                 temp_preview_case = new CasePreviewViewModel(temp_report_id, user.id);
                 preview_list.Add(temp_preview_case);
+                temp_all_active_report_ids.Remove(all_active_report_ids[i]);
             }
-            ViewBag.ReportPreviewVM = preview_list;
-            ViewBag.active_report_ids = all_active_report_ids.OrderBy(t => t.ToString());
+
+            ViewBag.ReportPreviewStart = preview_list;
+            ViewBag.ReportPreviewVM = temp_all_active_report_ids;
 
             #endregion
 
             ViewBag.um = um;
             ViewBag.user_id = user.id;
-            ViewBag.active_report_counters =  UnreadActiveReportNumber(all_active_report_ids, user.id);
-            ViewBag.completed_report_counters = UnreadActiveReportNumber(completed_report_ids, user.id);
-            ViewBag.spam_report_counters = UnreadActiveReportNumber(spam_report_ids, user.id);
-            ViewBag.closed_report_counters = UnreadActiveReportNumber(closed_report_ids, user.id);
+            ViewBag.active_report_counters = UnreadReportsInProgressNumber(all_active_report_ids, user.id);
+            ViewBag.completed_report_counters = UnreadReportsInProgressNumber(completed_report_ids, user.id);
+            ViewBag.spam_report_counters = UnreadReportsInProgressNumber(spam_report_ids, user.id);
+            ViewBag.closed_report_counters = UnreadReportsInProgressNumber(closed_report_ids, user.id);
 
             #region EC-CC Viewbag
             ViewBag.is_cc = is_cc;
@@ -100,11 +104,11 @@ namespace EC.Controllers
 
             ViewBag.um = um;
             ViewBag.user_id = user.id;
-            ViewBag.active_report_counters = UnreadActiveReportNumber(all_active_report_ids, user.id);
-            ViewBag.completed_report_counters = UnreadActiveReportNumber(completed_report_ids, user.id);
-            ViewBag.spam_report_counters = UnreadActiveReportNumber(spam_report_ids, user.id);
-            ViewBag.closed_report_counters = UnreadActiveReportNumber(closed_report_ids, user.id);
-            
+            ViewBag.active_report_counters = UnreadReportsInProgressNumber(all_active_report_ids, user.id);
+            ViewBag.completed_report_counters = UnreadReportsInProgressNumber(completed_report_ids, user.id);
+            ViewBag.spam_report_counters = UnreadReportsInProgressNumber(spam_report_ids, user.id);
+            ViewBag.closed_report_counters = UnreadReportsInProgressNumber(closed_report_ids, user.id);
+
             int temp_report_id;
             preview_list = new List<CasePreviewViewModel>();
             for (int i = completed_report_ids.Count - 1; i >= 0; i--)
@@ -144,10 +148,10 @@ namespace EC.Controllers
 
             ViewBag.um = um;
             ViewBag.user_id = user.id;
-            ViewBag.active_report_counters = UnreadActiveReportNumber(all_active_report_ids, user.id);
-            ViewBag.completed_report_counters = UnreadActiveReportNumber(completed_report_ids, user.id);
-            ViewBag.spam_report_counters = UnreadActiveReportNumber(spam_report_ids, user.id);
-            ViewBag.closed_report_counters = UnreadActiveReportNumber(closed_report_ids, user.id);
+            ViewBag.active_report_counters = UnreadReportsInProgressNumber(all_active_report_ids, user.id);
+            ViewBag.completed_report_counters = UnreadReportsInProgressNumber(completed_report_ids, user.id);
+            ViewBag.spam_report_counters = UnreadReportsInProgressNumber(spam_report_ids, user.id);
+            ViewBag.closed_report_counters = UnreadReportsInProgressNumber(closed_report_ids, user.id);
 
             int temp_report_id;
             preview_list = new List<CasePreviewViewModel>();
@@ -188,10 +192,10 @@ namespace EC.Controllers
 
             ViewBag.user_id = user.id;
             ViewBag.um = um;
-            ViewBag.active_report_counters = UnreadActiveReportNumber(all_active_report_ids, user.id);
-            ViewBag.completed_report_counters = UnreadActiveReportNumber(completed_report_ids, user.id);
-            ViewBag.spam_report_counters = UnreadActiveReportNumber(spam_report_ids, user.id);
-            ViewBag.closed_report_counters = UnreadActiveReportNumber(closed_report_ids, user.id);
+            ViewBag.active_report_counters = UnreadReportsInProgressNumber(all_active_report_ids, user.id);
+            ViewBag.completed_report_counters = UnreadReportsInProgressNumber(completed_report_ids, user.id);
+            ViewBag.spam_report_counters = UnreadReportsInProgressNumber(spam_report_ids, user.id);
+            ViewBag.closed_report_counters = UnreadReportsInProgressNumber(closed_report_ids, user.id);
 
             ViewBag.spam_report_ids = spam_report_ids;
             preview_list = new List<CasePreviewViewModel>();
@@ -214,30 +218,29 @@ namespace EC.Controllers
             UserModel um = new UserModel(user.id);
 
             List<int> all_pending_reports_ids = um.ReportsSearchIds(um._user.company_id, 4);
-            all_pending_reports_ids.Sort();
             List<int> pending_report_ids = new List<int>();
-            if(all_pending_reports_ids.Count > 0)
+            if (all_pending_reports_ids.Count > 0)
+            {
+                all_pending_reports_ids.Sort();
                 pending_report_ids.Add(all_pending_reports_ids[0]);
+            }
 
             return pending_report_ids;
         }
 
 
-        public int UnreadActiveReportNumber(List<int> _report_ids, int user_id)
+        public int UnreadReportsInProgressNumber(List<int> _report_ids, int user_id)
         {
             int _count = 0;
-
-            UserModel um = new UserModel(user_id);
-            ReportModel rm = new ReportModel();
 
             //    select rep_id from[Marine].[dbo].[testt]  z
             //where id in (select max(id) from[Marine].[dbo].[testt] z2 group by z2.rep_id) and z.status_id = 4
             var refGroupReportLogs = (from m in db.report_log
-                                                 group m by m.report_id into refGroup
-                                                 //   orderby refGroup.Id descending
-                                        select refGroup.OrderByDescending(x => x.created_dt).FirstOrDefault());
+                                      group m by m.report_id into refGroup
+                                      //   orderby refGroup.Id descending
+                                      select refGroup.OrderByDescending(x => x.created_dt).FirstOrDefault());
 
-            var refGroupReportReadDate =  db.report_user_read.Where(item => ((item.user_id == user_id)));
+            var refGroupReportReadDate = db.report_user_read.Where(item => ((item.user_id == user_id)));
 
             DateTime dt1, dt2;
             foreach (int ID in _report_ids)
@@ -260,11 +263,19 @@ namespace EC.Controllers
                     dt1 = refGroupReportLogs.Where(item => ((item.report_id == ID))).Select(t => t.created_dt).FirstOrDefault();
                 }
 
-                if(dt2 < dt1)
+                if (dt2 < dt1)
                     _count++;
             }
             return _count;
         }
 
+        public ActionResult Preview(int case_id)
+        {
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            ReportModel rm = new ReportModel(case_id);
+            UserModel um = new UserModel(user.id);
+            CasePreviewViewModel cpvm = new CasePreviewViewModel(rm, um);
+            return PartialView("~/Views/Shared/Helpers/_CasePreview.cshtml", cpvm);
+        }
     }
 }

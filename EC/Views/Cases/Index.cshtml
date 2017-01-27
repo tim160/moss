@@ -12,16 +12,15 @@
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
     ViewBag.Title = GlobalRes.ActiveCasesUp;
     //Layout = "~/Views/Shared/LayoutMediators.cshtml";
-    IEnumerable<int> report_ids = ViewBag.active_report_ids;
 
     Int32 report_ids_Completed = ViewBag.completed_report_counters;
     Int32 report_ids_Spam = ViewBag.spam_report_counters;
     Int32 report_ids_Active = ViewBag.active_report_counters;
     Int32 report_ids_Closed = ViewBag.closed_report_counters;
 
-    List<CasePreviewViewModel> preview_list = ViewBag.ReportPreviewVM;
+    //List<CasePreviewViewModel> preview_start_list = ViewBag.ReportPreviewStart;
+    //List<int> preview_list = ViewBag.ReportPreviewVM;
 
-        
     <script src="~/Scripts/View/menuWork.js"></script>
     <script src="~/Scripts/View/CaseCircleDraw.js"></script>
 
@@ -31,7 +30,7 @@
     {
         foreach (int _report_id in pending_report_ids)
         {
-            @Html.Partial("~/Views/PartialViews/_ReportPendingNotification.cshtml", new ViewDataDictionary { { "report_id", _report_id } , { "user_id", user_id } })
+            @Html.Partial("~/Views/PartialViews/_ReportPendingNotification.cshtml", new ViewDataDictionary { { "report_id", _report_id }, { "user_id", user_id } })
         }
     }
 }
@@ -60,12 +59,19 @@
     </div>
 </div>
 
-
-
 <div class="positionCases">
-    @foreach (CasePreviewViewModel _case_previewViewModel in preview_list)
+    @foreach (CasePreviewViewModel _case_previewViewModel in ViewBag.ReportPreviewStart)
     {
-        @Html.Partial("~/Views/Shared/Helpers/_CasePreview.cshtml", _case_previewViewModel)
+        <div class="mainCaseParent">
+            @Html.Partial("~/Views/Shared/Helpers/_CasePreview.cshtml", _case_previewViewModel)
+        </div>
+    }
+
+    @foreach (int _case_id in ViewBag.ReportPreviewVM)
+    {
+        <div class="mainCaseParent" data-url="/cases/Preview?case_id=@_case_id">
+            <img src="~/Content/Icons/Xanal.gif" /> Loading....
+        </div>
     }
 </div>
 
@@ -79,4 +85,17 @@
     $(".bottom").each(function (indx, element) {
         $(element).height(heightTemp);
     });
+
+
+    $(document).ready(function (e) {
+        $(".mainCaseParent").each(function (index, item) {
+            var url = $(item).data("url");
+
+            if (url && url.length > 0) {
+                $(item).load(url);
+            }
+        });
+    });
+
+
 </script>

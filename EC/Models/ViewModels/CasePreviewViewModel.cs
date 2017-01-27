@@ -8,6 +8,7 @@ using EC.Models.App;
 using EC.Core.Common;
 using EC.Common.Interfaces;
 using EC.Constants;
+using log4net;
 
 namespace EC.Models.ViewModel
 {
@@ -52,7 +53,7 @@ namespace EC.Models.ViewModel
         public int previous_sender_id { get; set; }
         public string previous_sender_date { get; set; }
         public string previous_status_message { get; set; }
-        #endregion 
+        #endregion
 
         #region Reaction2
         public bool show_last_status { get; set; }
@@ -61,7 +62,7 @@ namespace EC.Models.ViewModel
         public int last_sender_id { get; set; }
         public string last_sender_date { get; set; }
         public string last_status_message { get; set; }
-        #endregion 
+        #endregion
 
         private report_investigation_status ris;
         private UserModel temp_um = new UserModel();
@@ -72,12 +73,20 @@ namespace EC.Models.ViewModel
         public CasePreviewViewModel(int report_id, int caller_id)
         {
             ReportModel rm = new ReportModel(report_id);
-            BindCaseModelToCasePreviewViewModel(rm, caller_id);
+            UserModel um = new UserModel(caller_id);
+
+            BindCaseModelToCasePreviewViewModel(rm, um);
         }
 
-        public CasePreviewViewModel BindCaseModelToCasePreviewViewModel(ReportModel rm, int caller_id)
+        public CasePreviewViewModel(ReportModel rm, UserModel um)
         {
-            UserModel um = new UserModel(caller_id);
+            BindCaseModelToCasePreviewViewModel(rm, um);
+        }
+
+        public CasePreviewViewModel BindCaseModelToCasePreviewViewModel(ReportModel rm, UserModel um)
+        {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+
 
             GlobalFunctions glb = new GlobalFunctions();
             CasePreviewViewModel vm_case = new CasePreviewViewModel();
@@ -94,6 +103,7 @@ namespace EC.Models.ViewModel
             this.case_secondary_types = rm._secondary_type_string;
             this.case_color_code = rm._color_code;
 
+
             this.reported_by_whom = rm._reporter_company_relation_short;
             this.days_left = rm._step_days_left;
 
@@ -105,9 +115,8 @@ namespace EC.Models.ViewModel
             this.team_invovled = (rm._involved_mediators_user_list.Count() > 0);
 
             string names = "";
-            foreach(user _inv_mediator in rm._involved_mediators_user_list)
+            foreach (user _inv_mediator in rm._involved_mediators_user_list)
             {
-
                 names = names + _inv_mediator.first_nm + "_" + _inv_mediator.last_nm + ",";
             }
 
@@ -116,6 +125,7 @@ namespace EC.Models.ViewModel
                 names = names.Remove(names.Length - 1);
             }
             this.team_involved_names = names;
+
 
             this.new_messages = um.Unread_Messages_Quantity(rm._report.id, 0);
             this.new_tasks = um.UnreadActivityUserTaskQuantity(rm._report.id, false);
@@ -194,14 +204,11 @@ namespace EC.Models.ViewModel
 
             }
 
-         
-      /*      else if ((rm._investigation_status == Constant.investigation_status_spam) || ((rm._investigation_status == Constant.investigation_status_closed) && (rm._previous_investigation_status_id == Constant.investigation_status_spam)))
-            {
-                // spam, closed+spam
-            }*/
 
-         
-
+            /*      else if ((rm._investigation_status == Constant.investigation_status_spam) || ((rm._investigation_status == Constant.investigation_status_closed) && (rm._previous_investigation_status_id == Constant.investigation_status_spam)))
+                  {
+                      // spam, closed+spam
+                  }*/
             return vm_case;
 
         }

@@ -126,16 +126,16 @@ namespace EC.Models
             if (_user != null)
             {
                 ui.SetUserDetails(_user.id, _user.password, _user.login_nm);
-       //////////         bool is_valid_pass = ui.VerifyPassword(password);
+                //////////         bool is_valid_pass = ui.VerifyPassword(password);
                 // uncomment when database would be updated
-        ////////        if (is_valid_pass)
+                ////////        if (is_valid_pass)
                 {
                     if (_user.last_login_dt.HasValue)
                         _user.previous_login_dt = _user.last_login_dt;
                     _user.last_login_dt = DateTime.Now;
                     return _user;
 
-                  //  _user.save();
+                    //  _user.save();
                 }
             }
             return null;
@@ -363,8 +363,8 @@ namespace EC.Models
             //    select rep_id from[Marine].[dbo].[testt]  z
             //where id in (select max(id) from[Marine].[dbo].[testt] z2 group by z2.rep_id) and z.status_id = 4
             var refGroupInvestigationStatuses = (from m in db.report_investigation_status
-                                 group m by m.report_id into refGroup
-                                 select refGroup.OrderByDescending(x =>x.id).FirstOrDefault());
+                                                 group m by m.report_id into refGroup
+                                                 select refGroup.OrderByDescending(x => x.id).FirstOrDefault());
             List<int> statuses_match_all_report_id = new List<int>();
             if (flag == 0)
             {
@@ -396,7 +396,7 @@ namespace EC.Models
             {
                 //pending
                 statuses_match_all_report_id = (from m in refGroupInvestigationStatuses
-                                                where m.investigation_status_id == ECGlobalConstants.investigation_status_pending || m.investigation_status_id == ECGlobalConstants.investigation_status_review 
+                                                where m.investigation_status_id == ECGlobalConstants.investigation_status_pending || m.investigation_status_id == ECGlobalConstants.investigation_status_review
                                                 select m.report_id).ToList();
 
                 List<int> reports_with_history = (from m in refGroupInvestigationStatuses
@@ -412,7 +412,7 @@ namespace EC.Models
                 //closed
                 statuses_match_all_report_id = (from m in refGroupInvestigationStatuses
                                                 where m.investigation_status_id == ECGlobalConstants.investigation_status_closed
-                                               
+
                                                 select m.report_id).ToList();
             }
 
@@ -422,11 +422,11 @@ namespace EC.Models
 
 
 
-         /*   var query = report_investigation_status.GroupBy(p => p.report_id)
-                  .Select(g => g.OrderByDescending(p => p.id).FirstOrDefault()
-                   );
-            var query1 = query.Select(decimal ) // where status = 4.
-            */
+            /*   var query = report_investigation_status.GroupBy(p => p.report_id)
+                     .Select(g => g.OrderByDescending(p => p.id).FirstOrDefault()
+                      );
+               var query1 = query.Select(decimal ) // where status = 4.
+               */
 
 
 
@@ -448,80 +448,80 @@ namespace EC.Models
             ///     foreach (int id in both)
             ////         Console.WriteLine(id);
 
-/*
-            if (all_reports_id.Count > 0)
-            {
-                ReportModel temp_rm = new ReportModel();
-                if (flag == 1)
-                {
-                    // active only
-                    foreach (report _temp in all_reports)
-                    {
-                        //     rm = ReportModel(_temp.id);
-                        //   temp_status = new ReportModel(_temp.id)._investigation_status;
+            /*
+                        if (all_reports_id.Count > 0)
+                        {
+                            ReportModel temp_rm = new ReportModel();
+                            if (flag == 1)
+                            {
+                                // active only
+                                foreach (report _temp in all_reports)
+                                {
+                                    //     rm = ReportModel(_temp.id);
+                                    //   temp_status = new ReportModel(_temp.id)._investigation_status;
 
-                        temp_rm = new ReportModel(_temp.id);
-                        if ((!temp_rm.IsSpamScreen) && (!temp_rm.IsPendingScreen) && (!temp_rm.IsClosedScreen) && (!temp_rm.IsCompletedScreen))
-                            //  if ((temp_status == 3) || (temp_status == 4) || (temp_status == 5))
-                            reports.Add(_temp);
-                    }
-                }
-                else if (flag == 2)
-                {
+                                    temp_rm = new ReportModel(_temp.id);
+                                    if ((!temp_rm.IsSpamScreen) && (!temp_rm.IsPendingScreen) && (!temp_rm.IsClosedScreen) && (!temp_rm.IsCompletedScreen))
+                                        //  if ((temp_status == 3) || (temp_status == 4) || (temp_status == 5))
+                                        reports.Add(_temp);
+                                }
+                            }
+                            else if (flag == 2)
+                            {
                     
 
-                    // closed
-                    foreach (report _temp in all_reports)
-                    {
-                        if (new ReportModel(_temp.id).IsCompletedScreen)
-                            reports.Add(_temp);
+                                // closed
+                                foreach (report _temp in all_reports)
+                                {
+                                    if (new ReportModel(_temp.id).IsCompletedScreen)
+                                        reports.Add(_temp);
 
-                        //  if (new ReportModel(_temp.id)._investigation_status == 6)
-                        //      reports.Add(_temp);
-                    }
-                }
-                else if (flag == 3)
-                {
-                    // spam
-                    foreach (report _temp in all_reports)
-                    {
-                        if (new ReportModel(_temp.id).IsSpamScreen)
-                            reports.Add(_temp);
-                        //  if (new ReportModel(_temp.id)._investigation_status == 7)
-                        ///     reports.Add(_temp);
-                    }
-                }
-                else if (flag == 4)
-                {
-                    // pending
-                    foreach (report _temp in all_reports)
-                    {
-                        if (new ReportModel(_temp.id).IsPendingScreen)
-                            reports.Add(_temp);
-                        //   if ((new ReportModel(_temp.id)._investigation_status == 1) || (new ReportModel(_temp.id)._investigation_status == 2))
-                        //       reports.Add(_temp);
-                    }
-                }
-                else if (flag == 5)
-                {
-                    // pending
-                    foreach (report _temp in all_reports)
-                    {
-                        if (new ReportModel(_temp.id).IsClosedScreen)
-                            reports.Add(_temp);
-                        //   if ((new ReportModel(_temp.id)._investigation_status == 1) || (new ReportModel(_temp.id)._investigation_status == 2))
-                        //       reports.Add(_temp);
-                    }
-                }
-                else
-                {
-                    reports = all_reports;
-                }
-            }
-            else
-                reports = all_reports;
-            */
-            return both.ToList();
+                                    //  if (new ReportModel(_temp.id)._investigation_status == 6)
+                                    //      reports.Add(_temp);
+                                }
+                            }
+                            else if (flag == 3)
+                            {
+                                // spam
+                                foreach (report _temp in all_reports)
+                                {
+                                    if (new ReportModel(_temp.id).IsSpamScreen)
+                                        reports.Add(_temp);
+                                    //  if (new ReportModel(_temp.id)._investigation_status == 7)
+                                    ///     reports.Add(_temp);
+                                }
+                            }
+                            else if (flag == 4)
+                            {
+                                // pending
+                                foreach (report _temp in all_reports)
+                                {
+                                    if (new ReportModel(_temp.id).IsPendingScreen)
+                                        reports.Add(_temp);
+                                    //   if ((new ReportModel(_temp.id)._investigation_status == 1) || (new ReportModel(_temp.id)._investigation_status == 2))
+                                    //       reports.Add(_temp);
+                                }
+                            }
+                            else if (flag == 5)
+                            {
+                                // pending
+                                foreach (report _temp in all_reports)
+                                {
+                                    if (new ReportModel(_temp.id).IsClosedScreen)
+                                        reports.Add(_temp);
+                                    //   if ((new ReportModel(_temp.id)._investigation_status == 1) || (new ReportModel(_temp.id)._investigation_status == 2))
+                                    //       reports.Add(_temp);
+                                }
+                            }
+                            else
+                            {
+                                reports = all_reports;
+                            }
+                        }
+                        else
+                            reports = all_reports;
+                        */
+            return both.OrderByDescending(t => t).ToList();
         }
 
 
@@ -1070,7 +1070,7 @@ namespace EC.Models
                         investigation_status_id = new_status,
                         created_date = DateTime.Now,
                         user_id = mediator_id,
-                        description = description, 
+                        description = description,
                         outcome_message = ""
                     };
                 }
