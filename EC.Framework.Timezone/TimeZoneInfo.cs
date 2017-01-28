@@ -15,7 +15,7 @@ namespace EC.Framework.TimeZone
     public class TimeZoneInfo : IComparer
     {
         #region Member(s) and Property(s)
-        private static readonly ICustomLog Log = CustomLogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+       /// private static readonly ICustomLog Log = CustomLogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private static TimeZoneInfo[] m_TimeZoneInfosAll = null;
         private static TimeZoneInfo[] m_TimeZoneInfosActive = null;
         private static Dictionary<int, TimeZoneInfo> m_IndexDictionary = new Dictionary<int, TimeZoneInfo>();
@@ -176,7 +176,7 @@ namespace EC.Framework.TimeZone
                     m_ShortStandardName = m_StandardName; 
                 }
             }
-            Log.Debug(this.ToString()); 
+         //   Log.Debug(this.ToString()); 
         }
         #endregion
 
@@ -220,12 +220,12 @@ namespace EC.Framework.TimeZone
                         return zones[idx];
                     }
                 }
-                Log.WarnFormat("Timezone was not found, standard name: {0}, bias: {1}, standard bias: {2}, daylight name: {3}, daylight bias: {4}, returning UTC", 
+          /*      Log.WarnFormat("Timezone was not found, standard name: {0}, bias: {1}, standard bias: {2}, daylight name: {3}, daylight bias: {4}, returning UTC", 
                     tziNative.StandardName, 
                     tziNative.Bias, 
                     tziNative.StandardBias, 
                     tziNative.DaylightName, 
-                    tziNative.DaylightBias);
+                    tziNative.DaylightBias);*/
                 return zones[29];
             }
         }
@@ -347,9 +347,9 @@ namespace EC.Framework.TimeZone
                                 timeZoneInfo.DaylightName = regTzi.DaylightName;
                             }
                             zones.Add(timeZoneInfo);
-                            if (m_IndexDictionary.ContainsKey(timeZoneInfo.Index))
-                                Log.WarnFormat("Timezone index {0} ({1}) was already added to index dictionary, being replaced with {2}",
-                                    timeZoneInfo.Index, m_IndexDictionary[timeZoneInfo.Index].DisplayName, timeZoneInfo.DisplayName); 
+                         //   if (m_IndexDictionary.ContainsKey(timeZoneInfo.Index))
+                         ///       Log.WarnFormat("Timezone index {0} ({1}) was already added to index dictionary, being replaced with {2}",
+                          ///          timeZoneInfo.Index, m_IndexDictionary[timeZoneInfo.Index].DisplayName, timeZoneInfo.DisplayName); 
                             m_IndexDictionary[timeZoneInfo.Index] = timeZoneInfo;
                         }
 

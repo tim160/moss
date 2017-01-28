@@ -9,7 +9,7 @@
         is_cc = false;
     }
     String class_ext = ViewBag.cc_extension;
-    //19
+ 
     //bool? is_cc = true;
     //String class_ext = "";
     //if (is_cc)
@@ -37,8 +37,7 @@
     Int32 report_ids_Active = ViewBag.active_report_counters;
     Int32 report_ids_Closed = ViewBag.closed_report_counters;
     
-    List<CasePreviewViewModel> preview_list = ViewBag.ReportPreviewVM;
-    
+   
 }
 
 <div id="casesHeared" class="pageCases">
@@ -63,45 +62,22 @@
             </a>
         </div>
     </div>
-    @*<div class="positionActivityIcon">
-        <div id="activityIcon"></div>
-    </div>*@
+
 </div><!--casesHeared-->
-@*
-    <div id="wrap">
-        @{
-            if (report_ids != null)
-            {
-                for (int i = 0; i < report_ids.Count(); i++)
-                {
-                    if ((i % 2) == 0)
-                    {
-                        @Html.Raw("<div style='display: table;   width: 100%;'>");
-                        <div class="left"><div class="rightAlignWrap">@Html.Partial("~/Views/PartialViews/_ReportPreview.cshtml", new ViewDataDictionary { { "report_id", report_ids.ElementAt(i) }, { "user_id", user_id }, { "flag", 3 } })</div></div>
-                        if (i == report_ids.Count() - 1)
-                        {
-                            @Html.Raw("</div>");
-                        }
-                    }
-                    else
-                    {
-                        <div class="right">@Html.Partial("~/Views/PartialViews/_ReportPreview.cshtml", new ViewDataDictionary { { "report_id", report_ids.ElementAt(i) }, { "user_id", user_id }, { "flag", 3 } })</div>
-                        if (i != report_ids.Count() - 1)
-                        {
-                            @Html.Raw("</div>");
-                        }
-                    }
-                }
-            }
-        }
-        <div style="clear: both"></div>
-    </div>
-*@
 
 <div class="positionCases">
-    @foreach (CasePreviewViewModel _case_previewViewModel in preview_list)
+    @foreach (CasePreviewViewModel _case_previewViewModel in ViewBag.ReportPreviewStart)
     {
-        @Html.Partial("~/Views/Shared/Helpers/_CasePreview.cshtml", _case_previewViewModel)
+        <div class="mainCaseParent">
+            @Html.Partial("~/Views/Shared/Helpers/_CasePreview.cshtml", _case_previewViewModel)
+        </div>
+    }
+
+    @foreach (int _case_id in ViewBag.ReportPreviewVM)
+    {
+        <div class="mainCaseParent" data-url="/cases/Preview?case_id=@_case_id">
+            <img src="~/Content/Icons/Xanal.gif" /> Loading....
+        </div>
     }
 </div>
 
@@ -138,5 +114,15 @@
     });
     $(".bottom").each(function (indx, element) {
         $(element).height(heightTemp);
+    });
+
+    $(document).ready(function (e) {
+        $(".mainCaseParent").each(function (index, item) {
+            var url = $(item).data("url");
+
+            if (url && url.length > 0) {
+                $(item).load(url);
+            }
+        });
     });
 </script>

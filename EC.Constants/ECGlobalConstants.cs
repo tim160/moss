@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EC.Localization;
+//using EC.Localization;
 using System.Runtime.Serialization;
 
 namespace EC.Constants
