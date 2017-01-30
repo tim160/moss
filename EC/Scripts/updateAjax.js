@@ -180,8 +180,8 @@
                         var currentItem = $(items[i]);
                         var today = currentItem.find('label');
                         var currentMonthEnd = currentItem.find('.closed');
-                        today.text('(' + temp["TodaySnapshotTable"][i] + ')');
-                        currentMonthEnd.text('(' + temp["MonthEndSnapshotTable"][i] + ')');
+                        today.text(temp["TodaySnapshotTable"][i]);
+                        currentMonthEnd.text(temp["MonthEndSnapshotTable"][i]);
                     }
                 }
                 var averOfDays = temp['AverageStageDaysTable'];
@@ -211,14 +211,7 @@
                 str += '<div class="linesShow">';
                 str += '<div class="blockLineFirst"></div>';
                 str += "<label>" + item.value + "</label>";
-                if (item.value > item.prev) {
-                    var diff = item.value - item.prev;
-                    str += "<span>+" + diff + "<span>";
-                } else {
-                    str += "<span>(-)</span>";
-                }
-                str += '<div class="blockLineSecond"></div>';
-                str += '</div></div>';
+
             });
             
             parentBlock.find(".allBlockLines").html(str);
@@ -268,9 +261,6 @@
         maxLenght = maxForArray(allDay);
         $(NameClass + ' .blockLineFirst').each(function (indx, element) {
             WidthHeaderLine($(element), maxLenght, allDay[indx]);
-        });
-        $(NameClass + ' .blockLineSecond').each(function (indx, element) {
-            WidthHeaderLine($(element), maxLenght, day[indx]);
         });
     }
 
