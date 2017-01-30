@@ -7,7 +7,7 @@ namespace EC.Models.DataObjects
 {
     public class SearchCompanyDto
     {
-        public string label;
-        public string value;
+        public string company_nm;
+        public string company_code;
     }
 }

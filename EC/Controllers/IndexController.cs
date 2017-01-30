@@ -96,8 +96,8 @@ namespace EC.Controllers
                     foreach (var item in list)
                     {
                         SearchCompanyDto searchCompany = new SearchCompanyDto();
-                        searchCompany.value = item.company_code;
-                        searchCompany.label = item.company_nm;
+                        searchCompany.company_code = item.company_code;
+                        searchCompany.company_nm = item.company_nm;
                         searchCompanyDto.Add(searchCompany);
                     }
                 }
@@ -150,8 +150,8 @@ namespace EC.Controllers
                 foreach (var item in list)
                 {
                     SearchCompanyDto searchCompany = new SearchCompanyDto();
-                    searchCompany.value = item.company_code;
-                    searchCompany.label = item.company_nm;
+                    searchCompany.company_code = item.company_code;
+                    searchCompany.company_nm = item.company_nm;
                     searchCompanyDto.Add(searchCompany);
                 }
             }
@@ -197,20 +197,26 @@ namespace EC.Controllers
         /// </summary>
         /// <param name="lookup"></param>
         /// <returns></returns>
-        public List<SearchCompanyDto> CompanyLookup(string lookup)
+        [HttpPost]
+        public JsonResult CompanyLookup(string lookup)
         {
             List<SearchCompanyDto> searchCompanyDto = new List<SearchCompanyDto>();
             List<company> list = companyModel.GeCompaniesWithStatus(lookup);
             foreach (var item in list)
             {
                 SearchCompanyDto searchCompany = new SearchCompanyDto();
-                searchCompany.value = item.company_code;
-                searchCompany.label = item.company_nm;
+                searchCompany.company_code = item.company_code;
+                searchCompany.company_nm = item.company_nm;
                 searchCompanyDto.Add(searchCompany);
             }
 
+            searchCompanyDto = new List<SearchCompanyDto>();
+            SearchCompanyDto searchCompany2 = new SearchCompanyDto();
+            searchCompany2.company_code = "sddsd";
+            searchCompany2.company_nm = "sddasdassd";
+            searchCompanyDto.Add(searchCompany2);
 
-            return searchCompanyDto;
+            return Json(searchCompanyDto);
         }
     }
 }

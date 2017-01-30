@@ -220,6 +220,16 @@ defaults: new
                     id = UrlParameter.Optional
                 }
             );
+            routes.MapRoute(
+                 name: "CompanySearch",
+                 url: "Index/Start/{lookup}",
+                 defaults: new
+                 {
+                     controller = "Index",
+                     action = "CompanyLookup",
+                     lookup = UrlParameter.Optional
+                 }
+             );
 
             routes.MapRoute(
                 name: "NewReport",

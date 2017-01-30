@@ -90,7 +90,7 @@
 
 @*<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/ssmoothness/jquery-ui.css">*@
 @section pageScripts{ 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script>
     $(document).ready(function() {
@@ -101,7 +101,37 @@
             window.location.href = "/login";
         });
     });
-</script>
+</script>*@
+
+    <script>
+        var input = document.getElementById("specialInput");
+        input.oninput = function (event) {
+            let lookup = event.currentTarget.value;
+            let len = event.currentTarget.value.length;
+            if (len >= 3) {
+                //go ajax call
+                let temp = loadDoc(lookup);
+                if (temp.length > 0) {
+
+                }
+            }
+            //document.getElementById('result').innerHTML = input.value;
+        };
+        
+        function loadDoc(lookup) {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                xmlhttp.onreadystatechange = function (event) {
+                    if (this.readyState == 4 && this.status == 200) {
+                        return JSON.parse(event.currentTarget.response);
+                    }
+                };
+            };
+            let link = window.location.href + "Index/CompanyLookup?lookup=" + lookup;
+            xmlhttp.open("POST", link, true);
+            xmlhttp.send();
+        }
+    </script>
 
 }
 
