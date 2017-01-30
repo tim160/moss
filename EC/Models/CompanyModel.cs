@@ -428,6 +428,14 @@ namespace EC.Models
             return db.company.Where(item => item.status_id == 2).ToList();   
         }
 
+        public List<company> GeCompaniesWithStatus(string company_name)
+        {
+            if (company_name.Trim().Length > 3)
+                return db.company.Where(item => item.status_id == 2 && item.company_nm.ToLower().Trim().Contains(company_name.ToLower().Trim())).ToList();
+            else
+                return new List<company>();
+        }
+
         public int GetCompanyByCode(string companyCode)
         {
             company getInfoCompany = db.company.FirstOrDefault(item => item.company_code.ToLower() == companyCode.ToLower());

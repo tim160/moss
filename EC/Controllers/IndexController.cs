@@ -29,7 +29,7 @@ namespace EC.Controllers
         {
 
             ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-             logger.Info("info message to logger");
+     /////        logger.Info("info message to logger");
              logger.Error("error message to logger");
             
    
@@ -190,6 +190,27 @@ namespace EC.Controllers
         {
             Session.Clear();
             FormsAuthentication.SignOut();
+        }
+
+        /// <summary>
+        /// returns commpanies' list
+        /// </summary>
+        /// <param name="lookup"></param>
+        /// <returns></returns>
+        public List<SearchCompanyDto> CompanyLookup(string lookup)
+        {
+            List<SearchCompanyDto> searchCompanyDto = new List<SearchCompanyDto>();
+            List<company> list = companyModel.GeCompaniesWithStatus(lookup);
+            foreach (var item in list)
+            {
+                SearchCompanyDto searchCompany = new SearchCompanyDto();
+                searchCompany.value = item.company_code;
+                searchCompany.label = item.company_nm;
+                searchCompanyDto.Add(searchCompany);
+            }
+
+
+            return searchCompanyDto;
         }
     }
 }
