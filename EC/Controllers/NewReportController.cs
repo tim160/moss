@@ -160,6 +160,7 @@ namespace EC.Controllers.ViewModel
                 }
                 catch (Exception ex)
                 {
+                    logger.Error(ex.ToString());
                     return View(newStatus);
                 }
                 return RedirectToAction("Case/Index/" + newStatus.report_id.ToString());

@@ -22,7 +22,7 @@ namespace EC.Controllers
        /// var culture = Culture.GetCulture();
   ////      ILog logger = LogManager.GetLogger(typeof((_Default));
 
-
+        public ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public ECEntities db = new ECEntities();
         public CultureInfo m_CultureInfo = null;
         public GlobalFunctions glb = new GlobalFunctions();

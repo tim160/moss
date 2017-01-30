@@ -2084,6 +2084,7 @@ namespace EC.Models
                 }
                 catch (Exception ex)
                 {
+                    logger.Error(ex.ToString());
                     return "Cannot update password " + ex.ToString();// GlobalRes.ErrorSavingLoginPass;
                 }
             }

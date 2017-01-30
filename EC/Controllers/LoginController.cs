@@ -129,6 +129,7 @@ namespace EC.Controllers
                             }
                             catch (Exception ex)
                             {
+                                 logger.Error(ex.ToString());
                                 return ex.ToString();
                             }
                             return GlobalRes.Success.ToLower();

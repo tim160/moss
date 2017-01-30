@@ -52,7 +52,7 @@ namespace EC.Models
                 }
                 catch (Exception ex)
                 {
-
+                    logger.Error(ex.ToString());
                 }
 
                 return report_id;
@@ -847,6 +847,7 @@ namespace EC.Models
             }
             catch (System.Data.DataException ex)
             {
+                logger.Error(ex.ToString());
                 Console.WriteLine("Meditor didn't add");
                 return false;
             }
@@ -882,6 +883,7 @@ namespace EC.Models
             }
             catch (System.Data.DataException ex)
             {
+                logger.Error(ex.ToString());
                 Console.WriteLine("Meditor didn't removed");
                 return false;
             }
@@ -982,6 +984,7 @@ namespace EC.Models
             }
             catch (System.Data.DataException ex)
             {
+                logger.Error(ex.ToString());
                 Console.WriteLine("Task/Attachments didn't add");
                 Console.WriteLine(ex.Data);
                 return false;
@@ -1009,6 +1012,7 @@ namespace EC.Models
             }
             catch (System.Data.DataException ex)
             {
+                logger.Error(ex.ToString());
                 Console.WriteLine("Task wasn't close");
                 Console.WriteLine(ex.Data);
                 return false;
@@ -1039,6 +1043,7 @@ namespace EC.Models
             }
             catch (System.Data.DataException ex)
             {
+                logger.Error(ex.ToString());
                 Console.WriteLine("Case wasn't resolved. Ex:" + ex.Data);
                 return false;
             }
@@ -1086,6 +1091,7 @@ namespace EC.Models
             }
             catch (System.Data.DataException ex)
             {
+                logger.Error(ex.ToString());
                 Console.WriteLine("Case wasn't resolved. Ex:" + ex.Data);
                 return false;
             }
@@ -1132,6 +1138,7 @@ namespace EC.Models
             }
             catch (System.Data.DataException ex)
             {
+                logger.Error(ex.ToString());
                 Console.WriteLine("Task wasn't reassigned");
                 Console.WriteLine(ex.Data);
                 return false;

@@ -253,6 +253,7 @@ namespace EC.Controllers
             }
             catch (Exception ex)
             {
+                logger.Error(ex.ToString());
                 ///// return or log error?? 
             }
 

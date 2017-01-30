@@ -376,6 +376,7 @@ namespace EC.Controllers
             }
             catch (System.Data.DataException ex)
             {
+                logger.Error(ex.ToString());
                 Console.WriteLine("Delays were not updated");
                 return false;
             }
@@ -401,6 +402,7 @@ namespace EC.Controllers
             }
             catch (FormatException ex)
             {
+                logger.Error(ex.ToString());
                 Console.WriteLine("Some exception catched.");
             }
 
@@ -464,6 +466,7 @@ namespace EC.Controllers
             }
             catch (Exception ex)
             {
+                logger.Error(ex.ToString());
                 result = ex.ToString();
             }
             return result;

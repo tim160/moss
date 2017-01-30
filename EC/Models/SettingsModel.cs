@@ -183,6 +183,7 @@ namespace EC.Models
             }
             catch (System.Data.DataException ex)
             {
+                logger.Error(ex.ToString());
                 return "false";
             }
             return "true";
@@ -220,6 +221,7 @@ namespace EC.Models
             }
             catch (System.Data.DataException ex)
             {
+                logger.Error(ex.ToString());
                 return "false";
             }
             return id;
@@ -263,6 +265,7 @@ namespace EC.Models
             }
             catch (System.Data.DataException ex)
             {
+                logger.Error(ex.ToString());
                 return "false";
             }
             return id;
@@ -302,6 +305,7 @@ namespace EC.Models
                 }
                 catch (System.Data.DataException ex)
                 {
+                    logger.Error(ex.ToString());
                     return "false";
                 }
                 return id;
@@ -329,6 +333,7 @@ namespace EC.Models
             }
             catch (System.Data.DataException ex)
             {
+                logger.Error(ex.ToString());
                 return "false";
             }
             return "true";
