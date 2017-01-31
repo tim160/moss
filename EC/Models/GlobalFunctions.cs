@@ -14,6 +14,8 @@ using EC.Models;
 using System.Text.RegularExpressions;
 using EC.App_LocalResources;
 using System.Web.Script.Serialization;
+using log4net;
+
 /// <summary>
 /// Global Functions for EC Project
 /// </summary>
@@ -22,7 +24,7 @@ public class GlobalFunctions
     ECEntities db = new ECEntities();
     private  const int PasswordLength = 6;
     private const int PasswordExtraSubmolsCount = 0;
-
+    ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
     public GlobalFunctions()
     {
@@ -704,6 +706,7 @@ public class GlobalFunctions
         }
         catch (Exception ex)
         {
+            logger.Error(ex.ToString());
         }
     
     }
@@ -727,6 +730,7 @@ public class GlobalFunctions
             }
             catch (Exception ex)
             {
+                logger.Error(ex.ToString());
             }
         }
         else
@@ -754,6 +758,7 @@ public class GlobalFunctions
             }
             catch (Exception ex)
             {
+                logger.Error(ex.ToString());
             }
         }
         else
@@ -781,6 +786,7 @@ public class GlobalFunctions
             }
             catch (Exception ex)
             {
+                logger.Error(ex.ToString());
             }
         }
     }
@@ -820,6 +826,7 @@ public class GlobalFunctions
                 }
                 catch (Exception ex)
                 {
+                    logger.Error(ex.ToString());
                 }
 
             }
@@ -850,6 +857,7 @@ public class GlobalFunctions
             }
             catch (Exception ex)
             {
+                logger.Error(ex.ToString());
             }
         }
     } 

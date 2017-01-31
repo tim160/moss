@@ -198,6 +198,8 @@ namespace EC.Controllers
                 }
                 catch (Exception ex)
                 {
+                    logger.Error(ex.ToString());
+
                     return View(newMessage);
                 }
 
@@ -321,6 +323,7 @@ namespace EC.Controllers
                 }
                 catch (Exception ex)
                 {
+                    logger.Error(ex.ToString());
                     return View(newMessage);
                 }
                 return RedirectToAction("Reporter/" + newMessage.report_id.ToString());
@@ -397,10 +400,10 @@ namespace EC.Controllers
                 }
                 catch (Exception ex)
                 {
+                    logger.Error(ex.ToString());
                    return View(newMessage);
                 }
                 return RedirectToAction("Legal/" + newMessage.report_id.ToString());
-             // return RedirectToAction("Reporter/208");
             }
 
             return View(newMessage);
@@ -423,6 +426,7 @@ namespace EC.Controllers
                 }
                 catch (Exception ex)
                 {
+                    logger.Error(ex.ToString());
                     return View();
                 }
                 return RedirectToAction("Task/" + newTask.task_id.ToString());

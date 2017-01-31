@@ -30,7 +30,7 @@ namespace EC.Controllers
 
             ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
      /////        logger.Info("info message to logger");
-             logger.Error("error message to logger");
+       ///      logger.Error("error message to logger");
             
    
             Session.Clear();

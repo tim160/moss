@@ -8,6 +8,7 @@ using EC.Models.Database;
 using EC.Common.Interfaces;
 using EC.Core.Common;
 using EC.Constants;
+using log4net;
 
 namespace EC.Controllers
 {
@@ -16,6 +17,7 @@ namespace EC.Controllers
         ECEntities db = new ECEntities();
         GlobalFunctions glb = new GlobalFunctions();
         private IEmailAddressHelper m_EmailHelper = new EmailAddressHelper();
+        ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         // GET: New
         public ActionResult Index(string code, string email)
@@ -210,6 +212,7 @@ namespace EC.Controllers
             }
             catch (Exception ex)
             {
+                logger.Error(ex.ToString());
                 return App_LocalResources.GlobalRes.CompanySavingFailed;
             } 
             #endregion
@@ -237,6 +240,7 @@ namespace EC.Controllers
                 }
                 catch (Exception ex)
                 {
+                    logger.Error(ex.ToString());
                     return App_LocalResources.GlobalRes.LocationSavingFailed;
                 } 
             }
@@ -284,6 +288,7 @@ namespace EC.Controllers
                         }
                         catch (Exception ex)
                         {
+                            logger.Error(ex.ToString());
                             return App_LocalResources.GlobalRes.DepartmentSavingFailed;
                         }
                     }
@@ -323,6 +328,8 @@ namespace EC.Controllers
                         }
                         catch (Exception ex)
                         {
+                            ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+                            logger.Error(ex.ToString());
                             return App_LocalResources.GlobalRes.IncidentTypeSavingFailed;
                         }
                     }
@@ -360,6 +367,7 @@ namespace EC.Controllers
                         }
                         catch (Exception ex)
                         {
+                            logger.Error(ex.ToString());
                             return App_LocalResources.GlobalRes.RelationshipsSavingFailed;
                         }
                     }
@@ -393,6 +401,7 @@ namespace EC.Controllers
                         }
                         catch (Exception ex)
                         {
+                            logger.Error(ex.ToString());
                             return App_LocalResources.GlobalRes.AnonymitySavingFailed;
                         }
                     }
@@ -445,6 +454,7 @@ namespace EC.Controllers
                 }
                 catch (Exception ex)
                 {
+                    logger.Error(ex.ToString());
                     return App_LocalResources.GlobalRes.UserSavingFailed;
                 } 
             }
@@ -606,6 +616,7 @@ namespace EC.Controllers
                 }
                 catch (Exception ex)
                 {
+                    logger.Error(ex.ToString());
                     return App_LocalResources.GlobalRes.UserSavingFailed;
                 }
 
