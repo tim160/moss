@@ -126,8 +126,14 @@
 </div>
 
 <input id="companyCode" type="hidden" value="false" />
+
+@section pageScripts {  
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
+
         $('.div input')
            .focus(function () {
                $(this).parent('.div').css({ 'border': '2px solid #05b5a2' });
@@ -135,15 +141,7 @@
             .focusout(function () {
                 $(this).parent('.div').css({ 'border': '1px solid #e0e5e6' });
             });
-    });
-</script>
 
-@*<script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">*@
-
-<script>
-    $(document).ready(function() {
         $("#header .bigButton").on('click', function() {
             window.location.href = "/";
         });
@@ -165,8 +163,8 @@
     $(function() {
         var str =  @Html.Raw(ViewBag.newListComp);
         $("#specialInput").autocomplete({
-            minLength: 3,
             source: str,
+            minLength: 3,
             select: function(event, ui) {
                 $('#specialInput').val(ui.item.label);
                 $('#companyCode').val(ui.item.value);
@@ -174,7 +172,6 @@
             }
         });
     });
-
 
     $('#submit').on('click', function () {
         if (($('input[name=login]').val() != "") && ($('input[name=password]').val() != "")) {
@@ -218,3 +215,4 @@
     }
 
 </script>
+    }

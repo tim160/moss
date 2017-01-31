@@ -96,8 +96,8 @@ namespace EC.Controllers
                     foreach (var item in list)
                     {
                         SearchCompanyDto searchCompany = new SearchCompanyDto();
-                        searchCompany.company_code = item.company_code;
-                        searchCompany.company_nm = item.company_nm;
+                        searchCompany.label = item.company_nm;
+                        searchCompany.value = item.company_code;
                         searchCompanyDto.Add(searchCompany);
                     }
                 }
@@ -150,8 +150,8 @@ namespace EC.Controllers
                 foreach (var item in list)
                 {
                     SearchCompanyDto searchCompany = new SearchCompanyDto();
-                    searchCompany.company_code = item.company_code;
-                    searchCompany.company_nm = item.company_nm;
+                    searchCompany.label = item.company_nm;
+                    searchCompany.value = item.company_code;
                     searchCompanyDto.Add(searchCompany);
                 }
             }
@@ -205,15 +205,15 @@ namespace EC.Controllers
             foreach (var item in list)
             {
                 SearchCompanyDto searchCompany = new SearchCompanyDto();
-                searchCompany.company_code = item.company_code;
-                searchCompany.company_nm = item.company_nm;
+                searchCompany.label = item.company_code;
+                searchCompany.value = item.company_nm;
                 searchCompanyDto.Add(searchCompany);
             }
 
             searchCompanyDto = new List<SearchCompanyDto>();
             SearchCompanyDto searchCompany2 = new SearchCompanyDto();
-            searchCompany2.company_code = "sddsd";
-            searchCompany2.company_nm = "sddasdassd";
+            searchCompany2.label = "sddsd";
+            searchCompany2.value = "sddasdassd";
             searchCompanyDto.Add(searchCompany2);
 
             return Json(searchCompanyDto);
