@@ -29,8 +29,13 @@
         @GlobalRes.FindOrganization
     </div>
     <div class="thirdTitle">
-        <input id="specialInput" placeholder="Company name or code">
-        <div id="buttonStart"><span class="buttonStartText">@GlobalRes.Start.ToUpper()</span></div>
+        <div class="widthThirdTitle">
+            <input id="specialInput" placeholder="Company name or code">
+            <div id="buttonStart"><span class="buttonStartText">@GlobalRes.Start.ToUpper()</span></div>
+            <ul id="dropDownList" style="display: none">
+
+            </ul>
+        </div>
     </div>
 </div><!--end topBody-->
 <div id="bottomBody@{@class_ext}">
@@ -106,14 +111,11 @@
     <script>
         var input = document.getElementById("specialInput");
         input.oninput = function (event) {
-            let lookup = event.currentTarget.value;
-            let len = event.currentTarget.value.length;
+            let lookup = {'event':event.currentTarget.value } ;
+            let len = lookup.event.length;
             if (len >= 3) {
                 //go ajax call
                 let temp = loadDoc(lookup);
-                if (temp.length > 0) {
-
-                }
             }
             //document.getElementById('result').innerHTML = input.value;
         };
@@ -123,13 +125,32 @@
             xmlhttp.onreadystatechange = function () {
                 xmlhttp.onreadystatechange = function (event) {
                     if (this.readyState == 4 && this.status == 200) {
-                        return JSON.parse(event.currentTarget.response);
+                        lookup.result = JSON.parse(event.currentTarget.response);
+                        if (lookup.result.length > 0) {
+                            lookup.result.forEach(function (item, i, arr) {
+                                addElementDropDownList(item.label, item.value);
+                            });
+                        }
                     }
                 };
             };
-            let link = window.location.href + "Index/CompanyLookup?lookup=" + lookup;
+            let link = window.location.href + "Index/CompanyLookup?lookup=" + lookup.event;
             xmlhttp.open("POST", link, true);
             xmlhttp.send();
+        }
+        function addElementDropDownList(label, value) {
+            var listLi = document.getElementById("dropDownList");
+            if(label != "" && value != "") {
+                listLi.style.display = "block";
+                var node = document.createElement("LI");
+                var textnode = document.createTextNode(label);
+                node.setAttribute("value", value);
+                node.appendChild(textnode);
+                //node.innerHTML(htmlPage);
+                //let htmlPage = "<li value='" + value + "'>" + label + "</li>";
+                listLi.appendChild(node);
+            }
+            
         }
     </script>
 

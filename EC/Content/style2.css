@@ -576,6 +576,33 @@ html, body {
     width: 100%;
     height: 100%;
 }
+
+.widthThirdTitle {
+    width: 432px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.widthThirdTitle ul {
+    height: 10px;
+    width: 453px;
+    text-align: left;
+    list-style-type: none;
+    left: 0px;
+    margin-left: -94px;
+    margin-top: 0px;
+    z-index: 1000;
+    font-family: 'Open Sans', arial, verdana, sans-serif;
+    font-weight: 300;
+}
+    .widthThirdTitle li {
+        height: 10px;
+        background-color: white;
+        color: black;
+        font-family: 'Lato-Semibold',arial,verdana,sans-serif;
+        padding: 15px;
+        margin: 0px;
+    }
 @media (max-width: 1645px) {
     .textBlock {
         font-size: 14px;
