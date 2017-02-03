@@ -233,7 +233,7 @@
     <Content Include="App\components\scrollFixedToContainer\scrollFixedToContainer.js" />
     <Content Include="App\components\timePicker\timePicker.js" />
     <Content Include="App\ec\app.js" />
-    <Content Include="App\ec\components\addEA\addEA.js" />
+    <Content Include="App\ec\components\EAShow\EAShow.js" />
     <Content Include="App\ec\components\addOffering\addOffering.js" />
     <Content Include="App\ec\components\addParticipant\addParticipant.js" />
     <Content Include="App\ec\components\cancellationPopup\cancellationPopup.js" />
@@ -245,7 +245,7 @@
     <Content Include="App\ec\components\eventDetails\eventDetails.js" />
     <Content Include="App\ec\components\filter\filter.js" />
     <Content Include="App\ec\components\listCoursesFilter\listCoursesFilter.js" />
-    <Content Include="App\ec\components\ListEA\listEA.js" />
+    <Content Include="App\ec\components\EAList\EAlist.js" />
     <Content Include="App\ec\components\listCoursesMain\listCoursesMain.js" />
     <Content Include="App\ec\components\listCourses\listCourses.js" />
     <Content Include="App\ec\components\mailPopup\mailPopup.js" />
@@ -542,8 +542,8 @@
     <Content Include="App\ec\components\weekBookings\weekBookings.cshtml" />
     <Content Include="App\ec\components\weekCalendar\weekCalendar.cshtml" />
     <Content Include="App\ec\components\yearCalendar\yearCalendar.cshtml" />
-    <Content Include="App\ec\components\addEA\addEA.cshtml" />
-    <Content Include="App\ec\components\ListEA\listEA.cshtml" />
+    <Content Include="App\ec\components\EAShow\EAShow.cshtml" />
+    <Content Include="App\ec\components\EAList\EAList.cshtml" />
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <None Include="Properties\PublishProfiles\ec-code.pubxml" />
     <None Include="Properties\PublishProfiles\ec-dev.pubxml" />
