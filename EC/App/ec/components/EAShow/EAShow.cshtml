@@ -1,0 +1,511 @@
+@inherits System.Web.Mvc.WebViewPage
+@{
+    Layout = null;
+}
+<div ng-if="show">
+    <div class="span5">
+        <div ng-if="scheduling"><h4><i class="icon-spinner icon-spin"></i> Scheduling New Event...</h4></div>
+        <div ng-if="!scheduling">
+            <div class="pull-right" ng-if="!subPanel">
+               <button 
+                   class="btn btn-primary"
+                   ng-disabled="posting || addEAForm.$invalid"
+                   confirm-click="createOffering()"
+                   confirm-title="Create event?"
+                   confirm="Do you want to create this event?">
+                        Create 
+                        <i ng-if="posting" class="icon-spinner icon-spin"></i> 
+                    </button>
+                    <button 
+                        confirm-click="cancel()" 
+                        confirm-title="Discard changes?"
+                        confirm="You have made some changes to the event. Are you sure you would like to discard these changes?"
+                        confirm-on="(addEAForm.$dirty || changed)"
+                        class="btn">
+                            <span ng-if="(addEAForm.$dirty || changed)">Cancel</span>
+                            <span ng-if="!(addEAForm.$dirty || changed)">Close</span>
+                    </button>
+            </div>
+            <h5>New Event for
+                <small>
+                    <span class="label" ng-bind="getDayByDate(event.Booking.BookingTimes[0].Start,'ddd d, MMM')"></span> 
+                    <span ng-if="event.Booking.BookingTimes.length > 1">- <span class="label" ng-bind="getDayByDate(event.Booking.BookingTimes[event.Booking.BookingTimes.length - 1].End,'ddd d, MMM')"></span></span>
+                </small>
+            </h5>
+            <h4 ng-bind="event.DisplayName"></h4>
+
+            <form novalidate name="addEAForm" class="form form-horizontal">
+
+                @*Sub View*@
+                <div class="text-right control-group well well-small">
+                    <em>Edit other information for this Event</em>
+                    <i class="icon-save" 
+                        ng-if="(editOfferingForm.$dirty || changed)" 
+                        tooltip="You have made some changes to the event. Before editing other details about the event, please save your changes." ></i>
+                    &nbsp;
+                    <div class="btn-group text-left ">
+                        <button 
+                            class="btn dropdown-toggle" 
+                            data-toggle="dropdown" 
+                            ng-disabled="subPanel" >
+                            <span ng-show="!subPanel">Edit <span class="caret"></span></span>
+                            <span ng-show="subPanel">Editing 
+                                <span data-ng-bind="possibleSubViews[subPanel].text"></span>
+                            </span>
+                        </button>
+                        <ul class="dropdown-menu pull-right">
+                            <li data-ng-repeat="subviewName in allSubViews"><a ng-click="toggleView(subviewName)">
+                            <i ng-class="possibleSubViews[subviewName].icon"></i>&nbsp;<span ng-bind="possibleSubViews[subviewName].text"></span></a></li></ul>
+                    </div>
+                </div>
+                @*End of Sub View*@
+
+                <div class="control-group" ng-if="csmart.permissions.admin">
+                    <div class="control-label">
+                        <label>Published</label>
+                    </div>
+                    <div class="controls">
+                        <label class="checkbox inline">
+                            <input type="checkbox" ng-model="event.IsPublished" ng-disabled="subPanel" />
+                            <i class="icon-stack text-small" ng-if="!event.IsPublished" tooltip="This event is not published"><i class="icon-circle icon-stack-base"></i><i class="icon-minus icon-light"></i></i>
+                        </label>
+                    </div>
+                </div>
+                @*<div class="control-group">
+                    <div class="control-label">
+                        <label>Display Name</label>
+                    </div>
+                    <div class="controls">
+                        <input type="text" 
+                            ng-model="event.DisplayName" 
+                            ng-disabled="subPanel" 
+                            required />
+                    </div>
+                </div>*@
+
+                @* Add ResourceBooking*@
+                <div ng-repeat="resourceBooking in orderResourceBookings(event.Booking.ResourcesBookings)" ng-class="{ 'control-group' : true , 'removed' : (resourceBooking.BookingType === resourceBookingTypeEnum.None) }">
+                    <div class="control-label">
+                        <label><span ng-bind="resourceBooking.ResourceType.DisplayName"></span> <span ng-bind="resourceBooking.Index"></span></label>
+                    </div>
+                    <div class="controls">
+                        <select 
+                            ng-model="resourceBooking.ResourceSelection" class="span9" 
+                            ng-change="resourceChanged(resourceBooking)" 
+                            ng-disabled="subPanel"
+                            ng-options="resourceInstance.Name group by resourceInstance.Availability for resourceInstance in resourceBooking.PossibleResourceSelections  | orderBy: ['Availability','Name']">
+                        </select>
+                        <i class="icon-stack text-small" ng-if="resourceBooking.BookingType === resourceBookingTypeEnum.Postponed" tooltip="This decision has been postponed"><i class="icon-circle icon-stack-base"></i><i class="icon-reply icon-light"></i></i>
+                        <i class="icon-stack text-small" ng-if="resourceBooking.ResourceSelection.Availability === 'Unavailable'" tooltip="There is conflict for this resource"><i class="icon-warning-sign icon-stack-base"></i></i>
+                        <div ng-Form="resourceSubForm">
+                        <input 
+                            type="text" 
+                            placeholder="Specify an External Resource" 
+                            ng-if="resourceBooking.BookingType === resourceBookingTypeEnum.External" 
+                            ng-model="resourceBooking.External"
+                            ng-required="resourceBooking.BookingType === resourceBookingTypeEnum.External"
+                            class="span12" style="margin-top:7px"  />                        
+                        <i class="icon-stack text-small"  ng-if="resourceSubForm.$invalid" tooltip="Please enter external resource value"><i class="icon-warning-sign icon-stack-base"></i></i>                                                
+                    </div>
+                </div>
+                </div>
+                <p ng-if="!event.Booking.ResourcesBookings.length" class="muted text-center" >
+                    There are no resources for this event
+                </p>
+                <div class="control-group">
+                    <div class="controls btn-group">
+                        <button ng-click="add" class="btn btn-link dropdown-toggle" data-toggle="dropdown"  ng-disabled="subPanel" ><i class="icon-plus"></i>&nbsp;Resource <span class="caret"></span></button>
+                        <ul class="dropdown-menu scroll-dropdown-menu">
+                            <li ng-repeat="resourcetype in csmart.resourcetypes"><a ng-click="addResourceBooking(resourcetype)"  ng-bind="resourcetype.DisplayName"></a></li>
+                        </ul>
+                    </div>
+                </div>
+                @*Operating Lines*@
+                <table class="table table-bordered table-rounded table-stripped">
+                    <thead>
+                        <tr>
+                            <th width="160">Operating Line</th>
+                            <th></th>
+                            <th width="24"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="cc in event.LineDetails">
+                            <td>
+                                <select 
+                                    class="span12" 
+                                    ng-model="cc.OperatingLine"  
+                                    ng-disabled="subPanel"
+                                    ng-options="client.Name for client in uniqueClients(cc.OperatingLine)"
+                                    >
+                                </select>
+                            </td>
+                            <td ng-Form="subForm">
+                                <input 
+                                    class="span12" 
+                                    type="number" 
+                                    ng-model="cc.Allocation"
+                                    min="0"
+                                    max="{{event.MaxSeats}}"
+                                    ng-click="resetRedBorder()"
+                                    ng-change="resetRedBorder()"
+                                    placeholder="Seats"  
+                                    ng-disabled="subPanel" />
+                                <i class="icon-stack text-small"  ng-if="subForm.$invalid" tooltip="Invalid seat allocation"><i class="icon-warning-sign icon-stack-base"></i></i>                                                
+                            </td>
+                            <td>
+                                <button class="btn btn-mini" 
+                                    ng-click="removeClient(cc)" 
+                                    ng-disabled="subPanel"><i class="icon-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <button 
+                                    class="btn btn-mini" 
+                                    ng-click="addClient()" 
+                                    ng-disabled="subPanel || !uniqueClients().length " ><i class="icon-plus"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div ng-class="{'control-group':true, 'error': !validTotal}">
+                    <div class="control-label">
+                        <label>Max Seats</label>
+                    </div>
+                    <div class="controls">
+                        <input 
+                            name="maxSeats"
+                            type="number" 
+                            class="input-small"
+                            min="0"
+                            ng-click="resetRedBorder()"
+                            ng-change="resetRedBorder()"
+                            ng-model="event.MaxSeats" 
+                            ng-disabled="subPanel" /> <i class="icon-info-sign" tooltip="This is the maximum enrollment for this event across all participants. Leave this field blank to remove this limit." ></i>
+                        <i class="icon-stack text-small" ng-if="addEAForm['maxSeats'].$invalid" tooltip="Invalid max seats"><i class="icon-warning-sign icon-stack-base"></i></i>
+                        <i class="icon-stack text-small" ng-if="!validTotal" tooltip="Total seats allocated to each operating line cannot exceed 'Max Seats'"><i class="icon-warning-sign icon-stack-base"></i></i>
+                    </div>
+                </div>
+                <div ng-class="control-group">
+                    <div class="control-label">
+                        <label>Event Owner</label>
+                    </div>
+                    <div class="controls">
+                        <select class="span12"
+                                    ng-model="event.EventOwner"
+                                    ng-options="client.Name for client in csmart.rawoperatinglines | filter:{IsAny:false} track by client.Id"
+                                    ng-disabled="subPanel"
+                            >
+                            <option value="">None</option>
+                                </select>
+                    </div>
+                </div>
+
+            </form>
+            <div class="form-actions text-right" ng-if="!subPanel">
+                    <button 
+                        class="btn btn-primary"
+                        ng-disabled="posting || addEAForm.$invalid"
+                        confirm-on="checkTotal()"
+                        confirm-click="createOffering()" 
+                        confirm-title="Create event?"
+                        confirm="Do you want to create this event?">
+                        Create 
+                        <i ng-if="posting" class="icon-spinner icon-spin"></i> 
+                    </button>
+                    <button 
+                        confirm-click="cancel()" 
+                        confirm-title="Discard changes?"
+                        confirm="You have made some changes to the event. Are you sure you would like to discard these changes?"
+                        confirm-on="(addEAForm.$dirty || changed)"
+                        class="btn">
+                            <span ng-if="(addEAForm.$dirty || changed)">Cancel</span>
+                            <span ng-if="!(addEAForm.$dirty || changed)">Close</span>
+                    </button>
+                </div>
+        </div>
+    </div>
+    <div class="span7" id="extra-view" ng-show="subPanel" ng-switch="subPanel" ng-animate="{ show : 'fade-enter' , hide : 'fade-leave' }">
+        <div ng-switch-when="details">
+            <div class="pull-right">
+                <button 
+                    ng-disabled="!subPanelChanged || postingEditorAsDefault" 
+                    confirm-click="saveEditor('editorDetails')"
+                    confirm-title="Save changes?"
+                    confirm="Do you want to save the changes?"
+                    class="btn btn-primary">
+                    Save
+                </button>
+                <button 
+                    confirm-click="toggleView()"  
+                    confirm-title="Discard changes?"
+                    confirm="You have made some changes to the details. Are you sure you would like to discard these changes?" 
+                    confirm-on="subPanelChanged" 
+                    class="btn">
+                        <span ng-if="subPanelChanged">Cancel</span>
+                        <span ng-if="!subPanelChanged">Close</span>
+                </button>
+            </div>
+            <h3>Event Details</h3>
+            <div class="alert alert-info">
+                These event details will be visible to <span class="label label-inverse">Operating Line Course Coordinators</span> and <span class="label label-inverse" >Participants</span> in this booking.
+            </div>
+            <textarea editor editor-id="editorDetails" editor-delay-save ng-model="event.Details" ng-animate="'fade'"></textarea>
+            <div class="form-actions text-right">
+                <div class="pull-left">
+                    <button
+                        ng-disabled="postingEditor || postingEditorAsDefault" 
+                        confirm-click="saveEditorAsDefault('editorDetails')" 
+                        confirm-title="Save as Default?"
+                        confirm="Are you sure you want to save these details as the default details for this events template?"
+                        class="btn" >
+                        Save as Default
+                        <i ng-if="postingEditorAsDefault" class="icon-spinner icon-spin"></i>
+                    </button>
+                    <button
+                        ng-disabled="postingEditor || postingEditorAsDefault" 
+                        confirm-click="loadDefaultDetails('editorDetails')" 
+                        confirm-title="Load Default Details"
+                        confirm="Are you sure you want to load the default details for this events template?"
+                        class="btn" >
+                        Load Default
+                        <i ng-if="postingEditorAsDefault" class="icon-spinner icon-spin"></i>
+                    </button>
+                </div>
+                <button 
+                    ng-disabled="!subPanelChanged || postingEditorAsDefault" 
+                    confirm-click="saveEditor('editorDetails')"
+                    confirm-title="Save changes?"
+                    confirm="Do you want to save the changes?"
+                    class="btn btn-primary">
+                    Save
+                </button>
+                <button 
+                    confirm-click="toggleView()"  
+                    confirm-title="Discard changes?"
+                    confirm="You have made some changes to the details. Are you sure you would like to discard these changes?" 
+                    confirm-on="subPanelChanged" 
+                    class="btn">
+                        <span ng-if="subPanelChanged">Cancel</span>
+                        <span ng-if="!subPanelChanged">Close</span>
+                </button>
+            </div>
+        </div>
+        <div ng-switch-when="courseDetails">
+            <div class="pull-right">
+                <button 
+                    ng-disabled="!subPanelChanged || postingEditor || postingEditorAsDefault" 
+                    confirm-click="saveEditorAsDefault('editorCourseDetails');toggleView();" 
+                    confirm-title="Save changes?"
+                    confirm="Do you want to save the changes?"
+                    class="btn btn-primary">
+                    Save 
+                    <i ng-if="postingEditor" class="icon-spinner icon-spin"></i> 
+                </button>
+                <button
+                    confirm-click="toggleView()"
+                    confirm-title="Discard changes?"
+                    confirm="You have made some changes to the course details. Are you sure you would like to discard these changes?"
+                    confirm-on="subPanelChanged"
+                    class="btn">
+                        <span ng-if="subPanelChanged">Cancel</span>
+                        <span ng-if="!subPanelChanged">Close</span>
+
+                </button>
+            </div>
+            <h3>Course Details</h3>
+            <div class="alert alert-info">
+                These course details will be visible to <span class="label label-inverse">Operating Line Course Coordinators</span> and <span class="label label-inverse">Participants</span> in this booking.
+            </div>
+            <textarea editor editor-id="editorCourseDetails" editor-delay-save ng-model="event.Template.CourseDetails" ng-animate="'fade'"></textarea>
+            <div class="form-actions text-right">                
+                <button 
+                    ng-disabled="!subPanelChanged || postingEditor || postingEditorAsDefault" 
+                    confirm-click="saveEditorAsDefault('editorCourseDetails');toggleView();"
+                    confirm-title="Save changes?"
+                    confirm="Do you want to save the changes?"
+                    class="btn btn-primary">
+                    Save
+                    <i ng-if="postingEditor" class="icon-spinner icon-spin"></i> 
+                </button>
+                <button
+                    confirm-click="toggleView()"
+                    confirm-title="Discard changes?"
+                    confirm="You have made some changes to the details. Are you sure you would like to discard these changes?"
+                    confirm-on="subPanelChanged"
+                    class="btn">
+                        <span ng-if="subPanelChanged">Cancel</span>
+                        <span ng-if="!subPanelChanged">Close</span>
+                </button>
+            </div>
+        </div>
+        <div ng-switch-when="criteria">
+            <div class="pull-right">
+                <button 
+                    ng-disabled="!subPanelChanged || postingEditorAsDefault" 
+                    confirm-click="saveEditor('editorCriteria')"
+                    confirm-title="Save changes?"
+                    confirm="Do you want to save the changes?"
+                    class="btn btn-primary">
+                    Save
+                </button>
+                <button 
+                    confirm-click="toggleView()"  
+                    confirm-title="Discard changes?"
+                    confirm="You have made some changes to the criteria. Are you sure you would like to discard these changes?" 
+                    confirm-on="subPanelChanged" 
+                    class="btn">
+                        <span ng-if="subPanelChanged">Cancel</span>
+                        <span ng-if="!subPanelChanged">Close</span>
+                </button>
+            </div>
+            <h3>Criteria</h3>
+            <div class="alert alert-info">
+                These criteria will be visible to <span class="label label-inverse">Operating Line Course Coordinators</span> when they place participants in this booking.<br />
+                <strong>They will be required to approve these requirements.</strong>
+            </div>
+            <textarea editor editor-id="editorCriteria" editor-delay-save ng-model="event.Criteria" ng-animate="'fade'"></textarea>
+            <div class="form-actions text-right">
+                <div class="pull-left">
+                    <button
+                        ng-disabled="postingEditor || postingEditorAsDefault" 
+                        confirm-click="saveEditorAsDefault('editorCriteria')" 
+                        confirm-title="Save as Default?"
+                        confirm="Are you sure you want to save this criteria as the default critera for this events template?"
+                        class="btn" >
+                        Save as Default
+                        <i ng-if="postingEditorAsDefault" class="icon-spinner icon-spin"></i>
+                    </button>
+                    <button
+                        ng-disabled="postingEditor || postingEditorAsDefault" 
+                        confirm-click="loadDefaultCriteria('editorCriteria')" 
+                        confirm-title="Load Default Criteria"
+                        confirm="Are you sure you want to load the default criteria for this events template?"
+                        class="btn" >
+                        Load Default
+                        <i ng-if="postingEditorAsDefault" class="icon-spinner icon-spin"></i>
+                    </button>
+                </div>
+                <button 
+                    ng-disabled="!subPanelChanged || postingEditorAsDefault" 
+                    confirm-click="saveEditor('editorCriteria')"
+                    confirm-title="Save changes?"
+                    confirm="Do you want to save the changes?"
+                    class="btn btn-primary">Save</button>
+                <button 
+                    confirm-click="toggleView()"  
+                    confirm-title="Discard changes?"
+                    confirm="You have made some changes to the criteria. Are you sure you would like to discard these changes?" 
+                    confirm-on="subPanelChanged" 
+                    class="btn">
+                        <span ng-if="subPanelChanged">Cancel</span>
+                        <span ng-if="!subPanelChanged">Close</span>
+                </button>
+            </div>
+        </div>
+        <div ng-switch-when="notes">
+            <div class="pull-right">
+                <button 
+                    ng-disabled="!subPanelChanged || postingEditorAsDefault" 
+                    confirm-click="saveEditor('editorNotes')"
+                    confirm-title="Save changes?"
+                    confirm="Do you want to save the changes?"
+                    class="btn  btn-primary">
+                    Save
+                </button>
+                <button 
+                    confirm-click="toggleView()" 
+                    confirm-title="Discard changes?"
+                    confirm="You have made some changes to the notes. Are you sure you would like to discard these changes?" 
+                    confirm-on="subPanelChanged" 
+                    class="btn">
+                        <span ng-if="subPanelChanged">Cancel</span>
+                        <span ng-if="!subPanelChanged">Close</span>
+                </button>
+            </div>
+            <h3>Notes</h3>
+            <div class="alert alert-info">
+                This note will be visible to only other <span class="label label-inverse">CSMART</span> users.
+            </div>
+            <textarea editor editor-id="editorNotes" editor-delay-save ng-model="event.Booking.Notes" ng-animate="'fade'"></textarea>
+            <div class="form-actions text-right">
+                <div class="pull-left">
+                    <button
+                        ng-disabled="postingEditor || postingEditorAsDefault" 
+                        confirm-click="saveEditorAsDefault('editorNotes')" 
+                        confirm-title="Save as Default?"
+                        confirm="Are you sure you want to save these notes as the default notes for this events template?"
+                        class="btn" >
+                        Save as Default
+                        <i ng-if="postingEditorAsDefault" class="icon-spinner icon-spin"></i>
+                    </button>
+                    <button
+                        ng-disabled="postingEditor || postingEditorAsDefault" 
+                        confirm-click="loadDefaultNotes('editorNotes')" 
+                        confirm-title="Load Default Notes"
+                        confirm="Are you sure you want to load the default notes for this events template?"
+                        class="btn" >
+                        Load Default
+                        <i ng-if="postingEditorAsDefault" class="icon-spinner icon-spin"></i>
+                    </button>
+                </div>
+                <button 
+                    ng-disabled="!subPanelChanged || postingEditorAsDefault" 
+                    confirm-click="saveEditor('editorNotes')"
+                    confirm-title="Save changes?"
+                    confirm="Do you want to save the changes?"
+                    class="btn btn-primary">
+                    Save
+                </button>
+                <button 
+                    confirm-click="toggleView()" 
+                    confirm-title="Discard changes?"
+                    confirm="You have made some changes to the notes. Are you sure you would like to discard these changes?" 
+                    confirm-on="subPanelChanged" 
+                    class="btn">
+                        <span ng-if="subPanelChanged">Cancel</span>
+                        <span ng-if="!subPanelChanged">Close</span>
+                </button>
+            </div>
+        </div>
+        <div ng-switch-when="calendar">
+            <div class="pull-right">
+                <button 
+                    ng-disabled="!subPanelChanged" 
+                    confirm-click="saveCalendar()"
+                    confirm-title="Save changes?"
+                    confirm="Do you want to save the changes?"
+                    class="btn btn-primary">Save</button>
+                <button 
+                    confirm-click="toggleView()"
+                    confirm-title="Discard changes?"
+                    confirm="You have made some changes to the schedule. Are you sure you would like to discard these changes?"
+                    confirm-on="subPanelChanged"
+                    class="btn">
+                        <span ng-if="subPanelChanged">Cancel</span>
+                        <span ng-if="!subPanelChanged">Close</span>
+                </button>
+            </div>
+            <h3>Schedule <small ng-bind="calendarTitle"></small></h3>
+            <div week-calendar grid="30"  ng-animate="'fade'"></div>
+            <div class="form-actions text-right">
+                <button 
+                    ng-disabled="!subPanelChanged" 
+                    confirm-click="saveCalendar()"
+                    confirm-title="Save changes?"
+                    confirm="Do you want to save the changes?"
+                    class="btn btn-primary">Save</button>
+                <button 
+                    confirm-click="toggleView()"
+                    confirm-title="Discard changes?"
+                    confirm="You have made some changes to the schedule. Are you sure you would like to discard these changes?"
+                    confirm-on="subPanelChanged"
+                    class="btn">
+                        <span ng-if="subPanelChanged">Cancel</span>
+                        <span ng-if="!subPanelChanged">Close</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

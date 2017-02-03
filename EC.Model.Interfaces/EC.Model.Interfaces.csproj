@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICase.cs" />
     <Compile Include="IUser.cs" />
     <Compile Include="IValidate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

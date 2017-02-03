@@ -45,9 +45,6 @@
     <Reference Include="EC.Common.Base">
       <HintPath>..\EC.Common.Base\bin\Debug\EC.Common.Base.dll</HintPath>
     </Reference>
-    <Reference Include="EC.Constants">
-      <HintPath>..\EC.Constants\bin\Debug\EC.Constants.dll</HintPath>
-    </Reference>
     <Reference Include="EC.Errors">
       <HintPath>..\EC.Errors\bin\Debug\EC.Errors.dll</HintPath>
     </Reference>
@@ -127,6 +124,10 @@
     <ProjectReference Include="..\EC.Common.Interfaces\EC.Common.Interfaces.csproj">
       <Project>{1b096edd-7575-4bbb-a93b-deb482acfbcd}</Project>
       <Name>EC.Common.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EC.Constants\EC.Constants.csproj">
+      <Project>{f9bd7e38-db60-47dd-a9f3-1bf488708a06}</Project>
+      <Name>EC.Constants</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
