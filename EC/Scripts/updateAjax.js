@@ -157,9 +157,11 @@
 
                 if (temp['LocationTable'] != null && temp['LocationTable'].length >= 1) {
                     _dtCompanyLocationReport(temp['LocationTable']);
+                    addValDep($("#containerLocation tspan"), temp['LocationTable']);
                 }
                 if (temp['DepartmentTable'] != null && temp['DepartmentTable'].length > 1) {
                     _dtCompanyDepartmentReport(temp['DepartmentTable']);
+                    addValDep($("#containerDepartments tspan"), temp['DepartmentTable']);
                 }
                 if (temp["SecondaryTypeTable"] != null && temp["SecondaryTypeTable"].length > 1) {
                     var parentBlock = $(".blockTypeOfIncident");
@@ -460,6 +462,19 @@
     //------------------------------------- END All cases -----------------------------------------------
 
     //----------------------------- START Departments ----------------------------
+    function addValDep(dep, data) {
+        for (var i = 0; i < dep.length; i++) {
+            let temp = dep[i].textContent.trim();
+            for (var j = 0; j < data.length; j++) {
+                if (data[j].name.trim() === temp) {
+                    dep[i].textContent = temp + " - " + data[j].val;
+                    data.splice(j, 1);
+                    break;
+                }
+            }
+        }
+    }
+
     function _dtCompanyDepartmentReport(data) {
         //example data
         //var dataSource = [{
@@ -479,6 +494,8 @@
         if (pieChart.length > 1) {
             pieChart = $("#containerDepartments").dxPieChart('instance');
             pieChart.clearSelection();
+
+
         }
         $("#containerDepartments").dxPieChart({
             dataSource: data,
