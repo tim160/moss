@@ -83,7 +83,6 @@ html, body {
     cursor: pointer;
 }
 .bigButton {
-    color: #fff;
     width: 160px;
     height: 30px;
     background-color: rgb(85, 149, 156);
@@ -96,7 +95,10 @@ html, body {
     font-weight: 700;
     cursor: pointer;
 }
-
+.bigButton a {
+    text-decoration: none;
+    color: #fff;
+}
 
 .bigButton:hover, .bigButton:focus {
     background-color: #42757a;
@@ -170,14 +172,15 @@ html, body {
     }
 }
 
-.login {
+.login a{
     color: rgb(5, 181, 162);
     font-family: 'Open Sans', arial, verdana, sans-serif;
     cursor: pointer;
     font-weight: 700;
+    text-decoration: none;
 }
 
-.login:hover, .login:focus {
+.login a:hover, .login a:focus {
     color: #42757a;
     text-decoration: underline;
 }
