@@ -30,10 +30,9 @@
     </div>
     <div class="thirdTitle">
         <div class="widthThirdTitle">
-            <input id="specialInput" placeholder="Company name or code">
+            <input id="specialInput" placeholder="Company name or code" type="text">
             <div id="buttonStart"><span class="buttonStartText">@GlobalRes.Start.ToUpper()</span></div>
             <ul id="dropDownList" style="display: none">
-
             </ul>
         </div>
     </div>
@@ -92,22 +91,7 @@
     </div><!--end icons-->
 </div><!--end bottomBody-->
 <input id="companyCode" type="hidden" value="false" />
-
-@*<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/ssmoothness/jquery-ui.css">*@
-@section pageScripts{ 
-@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $("#header .bigButton").on('click', function() {
-            window.location.href = "/";
-        });
-        $("#header .login").on('click', function() {
-            window.location.href = "/login";
-        });
-    });
-</script>*@
-
+@section pageScripts{
     <script>
         var input = document.getElementById("specialInput");
         input.oninput = function (event) {
@@ -143,13 +127,34 @@
             if(label != "" && value != "") {
                 listLi.style.display = "block";
                 var node = document.createElement("LI");
-                var textnode = document.createTextNode(label);
-                node.setAttribute("value", value);
-                node.appendChild(textnode);
-                //node.innerHTML(htmlPage);
-                //let htmlPage = "<li value='" + value + "'>" + label + "</li>";
+                node.innerHTML = "<div>" + value + "</div>"; 
+                node.setAttribute("value", label);
+                node.onclick = function (event) {
+                    document.getElementById("dropDownList").innerHTML = "";
+                    let textContent = event.currentTarget.textContent;
+                    let value = event.currentTarget.getAttribute('value');
+                    document.getElementById("companyCode").setAttribute('value', value);
+                    SetInputStart(textContent);
+                };
                 listLi.appendChild(node);
             }
+            
+            
+        }
+        function SetInputStart(textContent) {
+            if (textContent.length > 1) {
+                document.getElementById("specialInput").value = textContent;
+
+                //buttonStartText
+                
+                document.getElementById("buttonStart").onclick = function () {
+                    var companyCode = document.getElementById("companyCode").getAttribute('value');
+                    if (companyCode != "") {
+                        window.location.href = "/Report/new?companyCode=" + companyCode;
+                    }
+                }
+            }
+            
             
         }
     </script>

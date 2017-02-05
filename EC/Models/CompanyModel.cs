@@ -430,7 +430,7 @@ namespace EC.Models
 
         public List<company> GeCompaniesWithStatus(string company_name)
         {
-            if (company_name !=null && company_name.Trim().Length > 3)
+            if (company_name !=null && company_name.Trim().Length >= 3)
                 return db.company.Where(item => item.status_id == 2 && item.company_nm.ToLower().Trim().Contains(company_name.ToLower().Trim())).ToList();
             else
                 return new List<company>();

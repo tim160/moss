@@ -599,12 +599,17 @@ html, body {
     font-weight: 300;
 }
     .widthThirdTitle li {
-        height: 10px;
         background-color: white;
         color: black;
         font-family: 'Lato-Semibold',arial,verdana,sans-serif;
-        padding: 15px;
+        padding: 10px;
         margin: 0px;
+    }
+    .widthThirdTitle li div {
+        border: solid transparent 1px;
+    }
+    .widthThirdTitle li div:hover {
+        border: solid rgba(0, 0, 0, 0.5) 1px;
     }
 @media (max-width: 1645px) {
     .textBlock {
