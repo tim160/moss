@@ -9,8 +9,8 @@
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
 
     var um = (UserModel)ViewBag.um;
-    var user_id = um.ID;
-    //var user_id = 2;
+    var user_id = ViewBag.user_id;
+    int company_id = um._user.company_id;
 }
 
 
@@ -40,8 +40,6 @@
             <div class="blockMenu">
                 <div class="title">Language</div>
                 <div class="itemSelect">English</div>
-                <div class="itemSelect active">Français</div>
-                <div class="itemSelect">Русский</div>
             </div>
         </div>
         <div class="rightContent">
