@@ -9,6 +9,7 @@ using EC.Models.Database;
 using EC.Models.ECModel;
 using EC.Constants;
 using System.IO;
+using EC.Model.Impl;
 
 namespace EC.Controllers
 {
@@ -31,8 +32,10 @@ namespace EC.Controllers
             int user_id = user.id;
             UserModel um = new UserModel(user_id);
             ViewBag.um = um;
+            CompanyModel cm = new CompanyModel(um._user.company_id);
 
             ViewBag.user_id = user_id;
+            ViewBag.all_posters = cm.GetAllPosters();
 
             return View();
         }
@@ -136,6 +139,14 @@ namespace EC.Controllers
             return names;
         }
 
+        public List<PosterItem> GetAllPosters()
+        {
+            List<PosterItem> list = new List<PosterItem>();
+            PosterItem _test = new PosterItem();
+            list.Add(_test);
+            return list;
+        }
+
         public void DownloadPDF(string path)
         {
        /*     string path = Server.MapPath("PDFs");
@@ -158,6 +169,6 @@ namespace EC.Controllers
             }*/
         }
 
-
+     //   public class PosterCategory <int, string>
     }
 }
