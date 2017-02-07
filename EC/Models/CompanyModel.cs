@@ -9,6 +9,8 @@ using EC.Models.ECModel;
 using EC.Models.Utils;
 using System.Data.Entity.Migrations;
 using EC.Constants;
+using EC.Model.Interfaces;
+using EC.Model.Impl;
 
 namespace EC.Models
 {
@@ -550,6 +552,16 @@ namespace EC.Models
         public string getLogoCompany()
         {
             return db.company.Where(m => m.id == 2).Select(m => m.path_en).FirstOrDefault();
+        }
+
+
+        public List<PosterItem> GetAllPosters()
+        {
+            List<PosterItem> list = new List<PosterItem>();
+            PosterItem _test = new PosterItem();
+          //  _test.posterName = ""
+            list.Add(_test);
+            return list;
         }
     }
 }
