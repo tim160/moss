@@ -18,10 +18,10 @@
 
     if (ViewBag.LogoPath != "")
     {
-        logo_path =  ViewBag.LogoPath;
+        logo_path = ViewBag.LogoPath;
     }
-   // ViewBag.cssStyle = "/Content/MainStyle.css";
-   // ViewBag.cssStyle = "/Content/cai.css";
+    // ViewBag.cssStyle = "/Content/MainStyle.css";
+    // ViewBag.cssStyle = "/Content/cai.css";
 }
 <div id="headerCai">
     <a href="/" class="blueLogo"></a>
@@ -33,8 +33,8 @@
 
     <div id="bodyInc">
         @*<img class="logoShow" src='@Url.Content("~/Content/img/secondLogo.jpg")' />*@
-        @if(logo_path.Trim().Length > 0)
-        { 
+        @if (logo_path.Trim().Length > 0)
+        {
             <img class="logoShow" src='@Url.Content(logo_path)' />
         }
         <div class="blockInputs">
@@ -42,10 +42,9 @@
                 <h1>File a New Report:</h1>
                 <div class="text">Find an organization by company name or code</div>
                 <div class="loginForm">
-                    <div class="div widthThirdTitle">
+                    <div class="div">
                         <label>Company name or code</label>
                         <input id="specialInput" type="text" name="text" required="" autocomplete="off">
-                        <ul id="dropDownList" style="display: none"></ul>
                     </div>
                     <div class="button">
                         <input id="startBtn" type="button" value="start" />
@@ -127,93 +126,95 @@
 </div>
 
 <input id="companyCode" type="hidden" value="false" />
-@section pageScripts {
-    <script>
-        /*custom for this page*/
-        window.onload = focusDiv;
-        function focusDiv() {
-            let inputs = document.getElementsByClassName("div");
-            for (var i = 0; i < inputs.length; i++) {
-                var temp = inputs[i].getElementsByTagName('input')[0];
-                temp.addEventListener("focus", myFocusFunction, true);
-                temp.addEventListener("blur", myBlurFunction, true);
-            }
-        }
-        function myFocusFunction(event) {
-            event.currentTarget.parentElement.style.border = "2px solid #05b5a2";
-        }
-
-        function myBlurFunction(event) {
-            event.currentTarget.parentElement.style.border = "1px solid #e0e5e6";
-        }
-
-        /**/
-
-        var input = document.getElementById("specialInput");
-        input.oninput = function (event) {
-            let lookup = {'event':event.currentTarget.value } ;
-            let len = lookup.event.length;
-            if (len >= 3) {
-                //go ajax call
-                let temp = loadDoc(lookup);
-            }
-        };
-
-        function loadDoc(lookup) {
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function () {
-                xmlhttp.onreadystatechange = function (event) {
-                    if (this.readyState == 4 && this.status == 200) {
-                        lookup.result = JSON.parse(event.currentTarget.response);
-                        if (lookup.result.length > 0) {
-                            lookup.result.forEach(function (item, i, arr) {
-                                addElementDropDownList(item.label, item.value);
-                            });
-                        }
-                    }
-                };
-            };
-            //let link = window.location.href + "Index/CompanyLookup?lookup=" + lookup.event;
-            let link = window.location.origin + "/Index/CompanyLookup?lookup=" + lookup.event;
-            xmlhttp.open("POST", link, true);
-            xmlhttp.send();
-        }
-        function addElementDropDownList(label, value) {
-            var listLi = document.getElementById("dropDownList");
-            if(label != "" && value != "") {
-                listLi.style.display = "block";
-                var node = document.createElement("LI");
-                node.innerHTML = "<div>" + value + "</div>";
-                node.setAttribute("value", label);
-                node.onclick = function (event) {
-                    document.getElementById("dropDownList").innerHTML = "";
-                    let textContent = event.currentTarget.textContent;
-                    let value = event.currentTarget.getAttribute('value');
-                    document.getElementById("companyCode").setAttribute('value', value);
-                    SetInputStart(textContent);
-                };
-                listLi.appendChild(node);
-            }
-
-
-        }
-        function SetInputStart(textContent) {
-            if (textContent.length > 1) {
-                document.getElementById("specialInput").value = textContent;
-
-                //buttonStartText
-
-                document.getElementById("buttonStart").onclick = function () {
-                    var companyCode = document.getElementById("companyCode").getAttribute('value');
-                    if (companyCode != "") {
-                        window.location.href = window.location.origin + "/Index/CompanyLookup?lookup=" + companyCode;
-                        
-                        //window.location.href = "/Report/new?companyCode=" + companyCode;
-                    }
-                }
-            }
-
-
-        }
+<script>
+    $(document).ready(function () {
+        $('.div input')
+           .focus(function () {
+               $(this).parent('.div').css({ 'border': '2px solid #05b5a2' });
+           })
+            .focusout(function () {
+                $(this).parent('.div').css({ 'border': '1px solid #e0e5e6' });
+            });
+    });
 </script>
+
+<script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+<script>
+    $(document).ready(function() {
+        $("#header .bigButton").on('click', function() {
+            window.location.href = "/";
+        });
+        $("#header .login").on('click', function() {
+            window.location.href = "/login";
+        });
+        $("#startBtn").on('click', function() {
+            var companyCode = $('#companyCode').val();
+            if (companyCode != 'false') {
+                window.location.href = "/Report/new?companyCode=" + companyCode;
+            } else {
+                var single_code = TakeCompany($("#specialInput").val());
+                if(single_code.length > 0)
+                    window.location.href = "/Report/new?companyCode=" + single_code;
+            }
+        });
+    });
+
+    $(function() {
+        var str =  @Html.Raw(ViewBag.newListComp);
+        $("#specialInput").autocomplete({
+            minLength: 3,
+            source: str,
+            select: function(event, ui) {
+                $('#specialInput').val(ui.item.label);
+                $('#companyCode').val(ui.item.value);
+                return false;
+            }
+        });
+    });
+
+
+    $('#submit').on('click', function () {
+        if (($('input[name=login]').val() != "") && ($('input[name=password]').val() != "")) {
+
+            LoginHere($('input[name=login]').val(), $('input[name=password]').val());
+        }
+    });
+
+    function LoginHere(login, password) {
+        $.ajax({
+            method: "POST",
+            url: "/Login/Login",
+            data: { login: login, password: password }
+        }).done(function (data) {//data from server
+            //  console.log(data);
+
+            if (data != '') {
+                var str = window.location.href;
+            //    str = str.toLocaleLowerCase().split("login");
+                window.location.href = "/" + data;
+            }
+            else
+                $('input[name=password]').val() = '';
+        }).fail(function (error) {
+        });
     }
+
+    function TakeCompany(selname) {
+        var str =  @Html.Raw(ViewBag.newListComp);
+        var matches = $.grep(str, function(e) { return e.label.toLocaleLowerCase().startsWith(selname.toLocaleLowerCase());  });
+
+        if (matches.length == 0) {
+            return '';
+        } else if (matches.length == 1) {
+            // access the value property using matches[0].foo
+            return matches[0].value;
+        } else {
+            // multiple items found
+            return '';
+        }
+    }
+
+</script>
