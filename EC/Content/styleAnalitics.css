@@ -60,7 +60,7 @@
   margin: auto;
 }
 #chartContainer .v-axis .axis-elements{
-    display: none;
+    /*display: none;*/
 }
 .bigBlock{
     width: 100%;
