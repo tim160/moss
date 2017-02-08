@@ -554,7 +554,6 @@ namespace EC.Models
             return db.company.Where(m => m.id == 2).Select(m => m.path_en).FirstOrDefault();
         }
 
-
         public List<PosterItem> GetAllPosters()
         {
             List<PosterItem> list = new List<PosterItem>();
