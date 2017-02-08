@@ -1,5 +1,6 @@
 ﻿@using EC.Models;
 @using EC.Models.Database;
+@using EC.Model.Impl;
 @using EC.App_LocalResources;
 @{
 
@@ -11,6 +12,8 @@
     var um = (UserModel)ViewBag.um;
     var user_id = ViewBag.user_id;
     int company_id = um._user.company_id;
+
+    List<PosterItem> allPosters = ViewBag.all_posters;
 }
 
 
@@ -18,28 +21,28 @@
     <div class="topHeader">Awareness materials</div>
     <div class="mainContent">
         <div class="leftContent">
-            <div class="blockMenu">
+            <div class="blockMenu posterCategoryNames">
                 <div class="title">Industry</div>
-                <div class="itemSelect">Aviation</div>
-                <div class="itemSelect active">E-commerce</div>
-                <div class="itemSelect">Hospital And Food</div>
-                <div class="itemSelect">Manufacturing</div>
+                <div class="itemSelect" value="1">Aviation</div>
+                <div class="itemSelect active" value="2">E-commerce</div>
+                <div class="itemSelect" value="3">Hospital And Food</div>
+                <div class="itemSelect" value="4">Manufacturing</div>
             </div>
-            <div class="blockMenu">
+            <div class="blockMenu posterMessage">
                 <div class="title">Message</div>
-                <div class="itemSelect">Company culture</div>
-                <div class="itemSelect active">Customer support</div>
-                <div class="itemSelect">Data security</div>
+                <div class="itemSelect" value="1">Company culture</div>
+                <div class="itemSelect active" value="2">Customer support</div>
+                <div class="itemSelect" value="3">Data security</div>
             </div>
             <div class="blockMenu">
                 <div class="title">Available format</div>
-                <div class="itemSelect">Poster</div>
-                <div class="itemSelect active">Wallet-size card</div>
-                <div class="itemSelect">Digital assets</div>
+                <div class="itemSelect" value="1">Poster</div>
+                <div class="itemSelect active" value="2">Wallet-size card</div>
+                <div class="itemSelect" value="3">Digital assets</div>
             </div>
             <div class="blockMenu">
                 <div class="title">Language</div>
-                <div class="itemSelect">English</div>
+                <div class="itemSelect active">English</div>
             </div>
         </div>
         <div class="rightContent">
@@ -59,7 +62,23 @@
 
             <div class="rezoultItems">
 
-                <div class="blockInformation">
+                @foreach (PosterItem pi in allPosters)
+                {
+                    <div class="blockInformation" href="/poster/@pi.Id">
+                        <div class="filtersBlock @pi.imageName">
+                            @foreach (PosterCategory pc in pi.posterCategoryNames)
+                            {   
+                                <div class="filter @pc.Id">@pc.posterCategoryName</div>
+                            }
+                        </div>
+                        <div class="greenBlock @pi.posterMessage.Id">@pi.posterMessage.posterMessageName</div>
+                        <div class="bottomInfo">
+                            <div class="infoItem">@pi.posterName</div>
+                        </div>
+                    </div>
+
+                }
+              @*  <div class="blockInformation">
                     <div class="filtersBlock img1">
                         <div class="filter">e-commerce</div>
                         <div class="filter">manufacturing</div>
@@ -187,7 +206,7 @@
                         <div class="infoItem">Do the right thing</div>
                     </div>
                 </div>
-
+                ***@
             </div>
 
         </div>

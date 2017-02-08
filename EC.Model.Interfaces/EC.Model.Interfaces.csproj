@@ -41,7 +41,6 @@
   <ItemGroup>
     <Compile Include="ICase.cs" />
     <Compile Include="IPoster.cs" />
-    <Compile Include="IPosterCategory.cs" />
     <Compile Include="IUser.cs" />
     <Compile Include="IValidate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
