@@ -24,7 +24,7 @@
             <div class="blockMenu posterCategoryNames">
                 <div class="title">Industry</div>
                 <div class="itemSelect" value="1">Aviation</div>
-                <div class="itemSelect active" value="2">E-commerce</div>
+                <div class="itemSelect" value="2">E-commerce</div> <!--itemSelect active-->
                 <div class="itemSelect" value="3">Hospital And Food</div>
                 <div class="itemSelect" value="4">Manufacturing</div>
             </div>
@@ -48,6 +48,9 @@
         <div class="rightContent">
             <div class="topBlockFilters">
                 <div class="info">Employee awareness materials</div>
+
+
+                @*<div class="itemFilter">E-commerce <div class="imgClose"></div></div>
                 <div class="itemFilter">E-commerce <div class="imgClose"></div></div>
                 <div class="itemFilter">E-commerce <div class="imgClose"></div></div>
                 <div class="itemFilter">E-commerce <div class="imgClose"></div></div>
@@ -55,8 +58,9 @@
                 <div class="itemFilter">E-commerce <div class="imgClose"></div></div>
                 <div class="itemFilter">E-commerce <div class="imgClose"></div></div>
                 <div class="itemFilter">E-commerce <div class="imgClose"></div></div>
-                <div class="itemFilter">E-commerce <div class="imgClose"></div></div>
-                <div class="itemFilter">E-commerce <div class="imgClose"></div></div>
+                <div class="itemFilter">E-commerce <div class="imgClose"></div></div>*@
+
+
                 <div class="calcItems">11 items</div>
             </div>
 
@@ -78,140 +82,9 @@
                     </div>
 
                 }
-              @*  <div class="blockInformation">
-                    <div class="filtersBlock img1">
-                        <div class="filter">e-commerce</div>
-                        <div class="filter">manufacturing</div>
-                    </div>
-                    <div class="greenBlock">company culture</div>
-                    <div class="bottomInfo">
-                        <div class="infoItem">Communication is a  Two-Way Street</div>
-                    </div>
-                </div>
-
-
-                <div class="blockInformation">
-                    <div class="filtersBlock img2">
-                        <div class="filter">aviation</div>
-                        <div class="filter">manufacturing</div>
-                    </div>
-                    <div class="greenBlock">customer support</div>
-                    <div class="bottomInfo">
-                        <div class="infoItem">How solid is your  integrity?</div>
-                    </div>
-                </div>
-
-
-                <div class="blockInformation">
-                    <div class="filtersBlock img3">
-                        <div class="filter">Hospital And Food </div>
-                        <div class="filter">Healthcare</div>
-                    </div>
-                    <div class="greenBlock">customer support</div>
-                    <div class="bottomInfo">
-                        <div class="infoItem">When the right thing  to do isn’t clear…  Focus on integrity</div>
-                    </div>
-                </div>
-
-
-                <div class="blockInformation">
-                    <div class="filtersBlock img4">
-                        <div class="filter">healthcare</div>
-                    </div>
-                    <div class="greenBlock">company culture</div>
-                    <div class="bottomInfo">
-                        <div class="infoItem">When the right thing  to do isn’t clear…  Focus on integrity</div>
-                    </div>
-                </div>
-
-
-                <div class="blockInformation">
-                    <div class="filtersBlock img5">
-                        <div class="filter">education</div>
-                        <div class="filter">e-commerce</div>
-                    </div>
-                    <div class="greenBlock">customer support</div>
-                    <div class="bottomInfo">
-                        <div class="infoItem">Don’t stay silent.  Report your concerns</div>
-                    </div>
-                </div>
-
-
-                <div class="blockInformation">
-                    <div class="filtersBlock img6">
-                        <div class="filter">education</div>
-                        <div class="filter">Healthcare</div>
-                    </div>
-                    <div class="greenBlock">customer support</div>
-                    <div class="bottomInfo">
-                        <div class="infoItem">Don’t stay silent.  Report your concerns</div>
-                    </div>
-                </div>
-
-
-                <div class="blockInformation">
-                    <div class="filtersBlock img7">
-                        <div class="filter">e-commerce</div>
-                        <div class="filter">healthcare</div>
-                    </div>
-                    <div class="greenBlock">company culture</div>
-                    <div class="bottomInfo">
-                        <div class="infoItem">Building an Ethical  Workplace. Together.</div>
-                    </div>
-                </div>
-
-
-                <div class="blockInformation">
-                    <div class="filtersBlock img8">
-                        <div class="filter">healthcare</div>
-                    </div>
-                    <div class="greenBlock">customer support</div>
-                    <div class="bottomInfo">
-                        <div class="infoItem">Communication is a   Two-Way Street</div>
-                    </div>
-                </div>
-
-
-                <div class="blockInformation">
-                    <div class="filtersBlock img9">
-                        <div class="filter">manufacturing</div>
-                    </div>
-                    <div class="greenBlock">customer support</div>
-                    <div class="bottomInfo">
-                        <div class="infoItem">Reducing our Impact  on the Environment is a Team Effort</div>
-                    </div>
-                </div>
-
-
-                <div class="blockInformation">
-                    <div class="filtersBlock img10">
-                        <div class="filter">e-commerce</div>
-                        <div class="filter">manufacturing</div>
-                    </div>
-                    <div class="greenBlock">company culture</div>
-                    <div class="bottomInfo">
-                        <div class="infoItem">Доверие строится  путем открытого и  честного диалога</div>
-                    </div>
-                </div>
-
-
-                <div class="blockInformation">
-                    <div class="filtersBlock img11">
-                        <div class="filter">aviation</div>
-                        <div class="filter">manufacturing</div>
-                        <div class="filter">e-commerce</div>
-                    </div>
-                    <div class="greenBlock">data security</div>
-                    <div class="bottomInfo">
-                        <div class="infoItem">Do the right thing</div>
-                    </div>
-                </div>
-                ***@
             </div>
-
         </div>
     </div>
-
 </div>
 
 <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
@@ -236,6 +109,39 @@
         }
         
         blocksHeight();
-        selectblockMenu();
+        //selectblockMenu();
+        function findActiveFilter(selector,value, action) {
+            $(selector).each(function (indx, element) {
+                if (element.getAttribute('value') === value) {
+                    if (action == "remove") {
+                        $(element).remove();
+                    } else if (action == "hideActive") {
+                        $(element).removeClass("active");
+                    }
+                }
+            });
+
+        }
+        
+        $('.topBlockFilters').delegate('.imgClose', 'click', function (event) {
+            let currentItem = $(event.currentTarget);
+           // let value = currentItem.parent().attr('value');
+            findActiveFilter(".itemSelect.active", currentItem.parent().attr('value'), "hideActive")
+            currentItem.parent().remove();
+        });
+
+        $(".itemSelect").on('click', function (event) {
+            let itemSelected = $(event.currentTarget);
+            if(itemSelected.hasClass('active')) {
+                itemSelected.removeClass('active');
+                findActiveFilter(".itemFilter", itemSelected.attr('value'), "remove");
+            } else {
+                itemSelected.addClass('active');
+                let html = '<div class="itemFilter" value="' + itemSelected.attr('value') + '">' + itemSelected.text() + ' <div class="imgClose"></div></div>';
+                $(".topBlockFilters").append(html);
+            }
+            
+
+        });
     });
 </script>
