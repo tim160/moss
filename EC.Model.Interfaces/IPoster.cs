@@ -13,6 +13,8 @@ namespace EC.Model.Interfaces
         int Id { get; set; }
         List<IPosterCategory> posterCategoryNames { get; set; }
         IPosterMessage posterMessage { get; set; }
+        string imageName { get; set; }
+        string imagePath { get; set; }
     }
 
     public interface IPosterCategory

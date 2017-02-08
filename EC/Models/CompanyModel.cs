@@ -562,15 +562,20 @@ namespace EC.Models
             _test.posterName = "Communication is a Two-Way Street";
             _test.fileName = "communication_two_way";
             _test.Id = 1;
+            _test.imageName = "img1";
 
             IPosterCategory ipc = new PosterCategory();
+            List<IPosterCategory> ipc_list = new List<IPosterCategory>();
             ipc.Id = 1;
             ipc.posterCategoryName = "E-Commerce";
-            _test.posterCategoryNames.Add(ipc);
+            ipc_list.Add(ipc);
+
             ipc = new PosterCategory();
             ipc.Id = 2;
             ipc.posterCategoryName = "MANUFACTURING";
-            _test.posterCategoryNames.Add(ipc);
+            ipc_list.Add(ipc);
+            _test.posterCategoryNames = ipc_list;
+
 
             IPosterMessage ipm = new PosterMessage();
             ipm.Id = 1;
@@ -584,15 +589,18 @@ namespace EC.Models
             _test.posterName = "How solid is your integrity?";
             _test.fileName = "how_solid_integrity?";
             _test.Id = 2;
+            _test.imageName = "img2";
 
+            ipc_list = new List<IPosterCategory>();
             ipc = new PosterCategory();
             ipc.Id = 3;
             ipc.posterCategoryName = "AVIATION";
-            _test.posterCategoryNames.Add(ipc);
+            ipc_list.Add(ipc);
             ipc = new PosterCategory();
             ipc.Id = 2;
             ipc.posterCategoryName = "MANUFACTURING";
-            _test.posterCategoryNames.Add(ipc);
+            ipc_list.Add(ipc);
+            _test.posterCategoryNames = ipc_list;
 
             ipm = new PosterMessage();
             ipm.Id = 2;
@@ -606,15 +614,18 @@ namespace EC.Models
             _test.posterName = "When the right thing to do isn’t clear… Focus on integrity";
             _test.fileName = "focus_on_integrity";
             _test.Id = 3;
+            _test.imageName = "img3";
 
+            ipc_list = new List<IPosterCategory>();
             ipc = new PosterCategory();
             ipc.Id = 4;
             ipc.posterCategoryName = "HOSPITAL AND FOOD";
-            _test.posterCategoryNames.Add(ipc);
+            ipc_list.Add(ipc);
             ipc = new PosterCategory();
             ipc.Id = 5;
             ipc.posterCategoryName = "HEALTHCARE";
-            _test.posterCategoryNames.Add(ipc);
+            ipc_list.Add(ipc);
+            _test.posterCategoryNames = ipc_list;
 
             ipm = new PosterMessage();
             ipm.Id = 2;
@@ -628,11 +639,14 @@ namespace EC.Models
             _test.posterName = "When the right thing to do isn’t clear… Focus on integrity";
             _test.fileName = "focus_on_integrity2";
             _test.Id = 4;
+            _test.imageName = "img4";
 
+            ipc_list = new List<IPosterCategory>();
             ipc = new PosterCategory();
             ipc.Id = 5;
             ipc.posterCategoryName = "HEALTHCARE";
-            _test.posterCategoryNames.Add(ipc);
+            ipc_list.Add(ipc);
+            _test.posterCategoryNames = ipc_list;
 
             ipm = new PosterMessage();
             ipm.Id = 1;
