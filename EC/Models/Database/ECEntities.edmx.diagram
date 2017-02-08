@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d25d9dbe5c1748e2b2d3fdfccfed8228" Name="Diagram1">
+      <Diagram DiagramId="b3e5657af820495ab857647ffa3acb52" Name="Diagram1">
         <EntityTypeShape EntityType="ECModel.action" Width="1.5" PointX="5.75" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ECModel.address" Width="1.5" PointX="12.25" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ECModel.anonymity" Width="1.5" PointX="5.75" PointY="13.375" IsExpanded="true" />
@@ -36,46 +36,46 @@
         <EntityTypeShape EntityType="ECModel.management_know" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
         <EntityTypeShape EntityType="ECModel.message" Width="1.5" PointX="18.75" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ECModel.message_user_read" Width="1.5" PointX="18.75" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECModel.notification_summary_period" Width="1.5" PointX="18.75" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECModel.ongoing" Width="1.5" PointX="19.75" PointY="15.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECModel.outcome" Width="1.5" PointX="19.75" PointY="19.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECModel.partner" Width="1.5" PointX="19.75" PointY="23.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECModel.preferred_contact_method" Width="1.5" PointX="20.75" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECModel.priority" Width="1.5" PointX="2.75" PointY="24.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECModel.province" Width="1.5" PointX="20.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECModel.notification_processed" Width="1.5" PointX="18.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECModel.notification_summary_period" Width="1.5" PointX="19.75" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECModel.ongoing" Width="1.5" PointX="19.75" PointY="19.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECModel.outcome" Width="1.5" PointX="19.75" PointY="23.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECModel.partner" Width="1.5" PointX="20.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECModel.preferred_contact_method" Width="1.5" PointX="2.75" PointY="24.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECModel.priority" Width="1.5" PointX="20.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECModel.province" Width="1.5" PointX="20.75" PointY="11.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ECModel.relationship" Width="1.5" PointX="10.75" PointY="24.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ECModel.report" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECModel.report_department" Width="1.5" PointX="20.75" PointY="12.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECModel.report_investigation_status" Width="1.5" PointX="12.75" PointY="24.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECModel.report_log" Width="1.5" PointX="4.75" PointY="25.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECModel.report_mediator_assigned" Width="1.5" PointX="6.75" PointY="25.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECModel.report_mediator_involved" Width="1.5" PointX="21.75" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECModel.report_department" Width="1.5" PointX="12.75" PointY="24.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECModel.report_investigation_status" Width="1.5" PointX="4.75" PointY="25.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECModel.report_log" Width="1.5" PointX="6.75" PointY="25.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECModel.report_mediator_assigned" Width="1.5" PointX="21.75" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECModel.report_mediator_involved" Width="1.5" PointX="14.75" PointY="25.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ECModel.report_non_mediator_involved" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECModel.report_owner" Width="1.5" PointX="14.75" PointY="25.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECModel.report_relationship" Width="1.5" PointX="21.75" PointY="19.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECModel.report_resolution" Width="1.5" PointX="16.75" PointY="25.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECModel.report_secondary_type" Width="1.5" PointX="21.75" PointY="23.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECModel.report_type_mandatory_question" Width="1.5" PointX="22.75" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECModel.report_user_read" Width="1.5" PointX="22.75" PointY="10.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECModel.reported_outside" Width="1.5" PointX="18.75" PointY="26.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECModel.resolution" Width="1.5" PointX="23.75" PointY="13.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECModel.role_in_report" Width="1.5" PointX="23.75" PointY="17.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECModel.secondary_type_mandatory" Width="1.5" PointX="23.75" PointY="20.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECModel.source" Width="1.5" PointX="20.75" PointY="27.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECModel.report_owner" Width="1.5" PointX="21.75" PointY="19.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECModel.report_relationship" Width="1.5" PointX="16.75" PointY="25.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECModel.report_resolution" Width="1.5" PointX="21.75" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECModel.report_secondary_type" Width="1.5" PointX="22.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECModel.report_type_mandatory_question" Width="1.5" PointX="22.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECModel.report_user_read" Width="1.5" PointX="21.75" PointY="26.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECModel.reported_outside" Width="1.5" PointX="23.75" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECModel.resolution" Width="1.5" PointX="23.75" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECModel.role_in_report" Width="1.5" PointX="23.75" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECModel.secondary_type_mandatory" Width="1.5" PointX="18.75" PointY="27.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECModel.source" Width="1.5" PointX="23.75" PointY="25.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ECModel.status" Width="1.5" PointX="7.75" PointY="9.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECModel.task" Width="1.5" PointX="23.75" PointY="26.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECModel.task_comment" Width="1.5" PointX="24.75" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECModel.task_comment_user_read" Width="1.5" PointX="0.75" PointY="28.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECModel.task_user_read" Width="1.5" PointX="24.75" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECModel.time_zone" Width="1.5" PointX="24.75" PointY="10.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECModel.type" Width="1.5" PointX="8.75" PointY="28.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECModel.unread_report_reminder" Width="1.5" PointX="2.75" PointY="29.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECModel.unread_report_reminder_sent" Width="1.5" PointX="4.75" PointY="29.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECModel.task" Width="1.5" PointX="24.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECModel.task_comment" Width="1.5" PointX="0.75" PointY="28.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECModel.task_comment_user_read" Width="1.5" PointX="24.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECModel.task_user_read" Width="1.5" PointX="8.75" PointY="28.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECModel.time_zone" Width="1.5" PointX="10.75" PointY="28.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECModel.type" Width="1.5" PointX="25.75" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECModel.unread_report_reminder" Width="1.5" PointX="25.75" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECModel.unread_report_reminder_sent" Width="1.5" PointX="12.75" PointY="29.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ECModel.user" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECModel.user_change_password" Width="1.5" PointX="25.75" PointY="13.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECModel.user_role" Width="1.5" PointX="10.75" PointY="29.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECModel.validation_type" Width="1.5" PointX="12.75" PointY="29.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECModel.tmp_raph_client" Width="1.5" PointX="25.75" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECModel.user_change_password" Width="1.5" PointX="14.75" PointY="29.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECModel.user_role" Width="1.5" PointX="25.75" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECModel.validation_type" Width="1.5" PointX="25.75" PointY="24.375" IsExpanded="true" />
         <AssociationConnector Association="ECModel.FK_Address_Country" ManuallyRouted="false" />
         <AssociationConnector Association="ECModel.FK_Company_Address" ManuallyRouted="false" />
         <AssociationConnector Association="ECModel.FK_Department_Company" ManuallyRouted="false" />

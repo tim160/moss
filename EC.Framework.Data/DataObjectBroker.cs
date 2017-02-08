@@ -1049,7 +1049,7 @@ namespace EC.Framework.Data
                 }
             }
             catch {
-                m_Log.Error(string.Format("LoadObjectIds() - Id: {0}", id == null || id == DBNull.Value ? string.Empty:id.ToString()));                
+                //m_Log.Error(string.Format("LoadObjectIds() - Id: {0}", id == null || id == DBNull.Value ? string.Empty:id.ToString()));                
                 throw; 
             }
 
@@ -1978,11 +1978,11 @@ namespace EC.Framework.Data
                         }
                         catch (IndexOutOfRangeException idxex)
                         {
-                            m_Log.Warn(string.Format("Could not set property: {0}, may not exist in entity type {1}", propertyName, AppInfo.GetTableName(persistentType)), idxex);
+                            //m_Log.Warn(string.Format("Could not set property: {0}, may not exist in entity type {1}", propertyName, AppInfo.GetTableName(persistentType)), idxex);
                         }
                         catch (Exception ex)
                         {
-                            m_Log.Error(string.Format("Unexpected error {0}.{1}", persistentType.Name, propertyName), ex);
+                            //m_Log.Error(string.Format("Unexpected error {0}.{1}", persistentType.Name, propertyName), ex);
                             throw;
                         }
                     }
@@ -1993,10 +1993,10 @@ namespace EC.Framework.Data
             }
             catch (Exception ex)
             {
-                m_Log.Error(string.Format("Problem handling {0}", propertyName), ex);
+                //m_Log.Error(string.Format("Problem handling {0}", propertyName), ex);
                 if (i > -1)
                 {
-                    m_Log.Error(string.Format("Of type: {0}", propertyInfos[i].PropertyType)); 
+                    //m_Log.Error(string.Format("Of type: {0}", propertyInfos[i].PropertyType)); 
                 } 
             } 
             return entity;
@@ -2073,7 +2073,7 @@ namespace EC.Framework.Data
             sql = CleanSqlStmt(sql);
 
 #if (DEBUG)
-            m_Log.Debug(sql);
+            //m_Log.Debug(sql);
 #endif
 
             command.CommandText = sql;

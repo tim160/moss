@@ -30,7 +30,7 @@ namespace EC.Framework.Data
             {
                 string message = string.Format("Property {0} does not exist for object type {1}", 
                     propertyName, entity.GetType().Name); 
-                m_Log.Error(message);
+                //m_Log.Error(message);
                 throw new ArgumentException(message); 
             }
             return pi; 

@@ -31,7 +31,7 @@ namespace EC.Framework.Data
             Assembly genDLAsm = Assembly.LoadFile(searchPath);
             if (genDLAsm == null)
             {
-                log.WarnFormat("GenDL {0} not found at path {1}", genDLassemblyName, searchPath); 
+                //log.WarnFormat("GenDL {0} not found at path {1}", genDLassemblyName, searchPath); 
             }
             Type[] types = genDLAsm.GetTypes();
             int typeCount = 0;
@@ -40,7 +40,7 @@ namespace EC.Framework.Data
                 if (type.GetInterface("IGenDL") != null)
                 {
                     typeCount++;
-                    log.DebugFormat("Found IGenDL in type {0}, name: {1}, genDLassemblyName: {2}", typeCount, type.FullName, genDLassemblyName);
+                    //log.DebugFormat("Found IGenDL in type {0}, name: {1}, genDLassemblyName: {2}", typeCount, type.FullName, genDLassemblyName);
                     _GenDLInstances[genDLassemblyName] = (IGenDL)type.InvokeMember("Instance", BindingFlags.Public | BindingFlags.Static | BindingFlags.GetProperty, null, null, new object[0]);
                     initialized = true; 
                     break;
@@ -57,7 +57,7 @@ namespace EC.Framework.Data
                 {
                     throw new InvalidOperationException("GenDLFactory.Initialize(...) must be called first"); 
                 }
-                log.WarnFormat("GenDLFactory does not contain assembly {0}, not good, returning null", genDLassemblyName);
+                //log.WarnFormat("GenDLFactory does not contain assembly {0}, not good, returning null", genDLassemblyName);
                 return null; 
             }
             else

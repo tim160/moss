@@ -504,6 +504,21 @@
           <Property Name="message_id" Type="int" Nullable="false" />
           <Property Name="read_date" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="notification_processed">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="notification_id" Type="int" Nullable="false" />
+          <Property Name="subs" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="subject" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="notification_text" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="receivers" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="cc" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="bcc" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="is_processed" Type="bit" Nullable="false" />
+          <Property Name="created_dt" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="notification_summary_period">
           <Key>
             <PropertyRef Name="id" />
@@ -956,27 +971,6 @@
           <Property Name="time_zone_value" Type="float" />
           <Property Name="abbreviation" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'EC.dbo.tmp_raph_client' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="tmp_raph_client">
-          <Key>
-            <PropertyRef Name="client_id" />
-            <PropertyRef Name="client_nm" />
-            <PropertyRef Name="company_id" />
-            <PropertyRef Name="company_nm" />
-            <PropertyRef Name="user_id" />
-            <PropertyRef Name="user_nm" />
-            <PropertyRef Name="login_nm" />
-          </Key>
-          <Property Name="client_id" Type="int" Nullable="false" />
-          <Property Name="client_nm" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="company_id" Type="int" Nullable="false" />
-          <Property Name="company_nm" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="registration_dt" Type="smalldatetime" />
-          <Property Name="user_id" Type="int" Nullable="false" />
-          <Property Name="user_nm" Type="nvarchar" MaxLength="101" Nullable="false" />
-          <Property Name="login_nm" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
         <EntityType Name="type">
           <Key>
             <PropertyRef Name="id" />
@@ -1236,6 +1230,7 @@ warning 6002: The table/view 'EC.dbo.tmp_raph_client' does not have a primary ke
           <EntitySet Name="management_know" EntityType="Self.management_know" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="message" EntityType="Self.message" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="message_user_read" EntityType="Self.message_user_read" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="notification_processed" EntityType="Self.notification_processed" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="notification_summary_period" EntityType="Self.notification_summary_period" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ongoing" EntityType="Self.ongoing" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="outcome" EntityType="Self.outcome" Schema="dbo" store:Type="Tables" />
@@ -1275,18 +1270,6 @@ warning 6002: The table/view 'EC.dbo.tmp_raph_client' does not have a primary ke
           <EntitySet Name="user_change_password" EntityType="Self.user_change_password" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="user_role" EntityType="Self.user_role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="validation_type" EntityType="Self.validation_type" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tmp_raph_client" EntityType="Self.tmp_raph_client" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [tmp_raph_client].[client_id] AS [client_id], 
-    [tmp_raph_client].[client_nm] AS [client_nm], 
-    [tmp_raph_client].[company_id] AS [company_id], 
-    [tmp_raph_client].[company_nm] AS [company_nm], 
-    [tmp_raph_client].[registration_dt] AS [registration_dt], 
-    [tmp_raph_client].[user_id] AS [user_id], 
-    [tmp_raph_client].[user_nm] AS [user_nm], 
-    [tmp_raph_client].[login_nm] AS [login_nm]
-    FROM [dbo].[tmp_raph_client] AS [tmp_raph_client]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Address_Country" Association="Self.FK_Address_Country">
             <End Role="country" EntitySet="country" />
             <End Role="address" EntitySet="address" />
@@ -1827,6 +1810,21 @@ warning 6002: The table/view 'EC.dbo.tmp_raph_client' does not have a primary ke
           <Property Name="user_id" Type="Int32" Nullable="false" />
           <Property Name="message_id" Type="Int32" Nullable="false" />
           <Property Name="read_date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="notification_processed">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="notification_id" Type="Int32" Nullable="false" />
+          <Property Name="subs" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="subject" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="notification_text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="receivers" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cc" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="bcc" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="is_processed" Type="Boolean" Nullable="false" />
+          <Property Name="created_dt" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="notification_summary_period">
           <Key>
@@ -2400,25 +2398,6 @@ warning 6002: The table/view 'EC.dbo.tmp_raph_client' does not have a primary ke
           <Property Name="user_id" Type="Int32" Nullable="false" />
           <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="tmp_raph_client">
-          <Key>
-            <PropertyRef Name="client_id" />
-            <PropertyRef Name="client_nm" />
-            <PropertyRef Name="company_id" />
-            <PropertyRef Name="company_nm" />
-            <PropertyRef Name="user_id" />
-            <PropertyRef Name="user_nm" />
-            <PropertyRef Name="login_nm" />
-          </Key>
-          <Property Name="client_id" Type="Int32" Nullable="false" />
-          <Property Name="client_nm" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="company_id" Type="Int32" Nullable="false" />
-          <Property Name="company_nm" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="registration_dt" Type="DateTime" Precision="0" />
-          <Property Name="user_id" Type="Int32" Nullable="false" />
-          <Property Name="user_nm" Type="String" MaxLength="101" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="login_nm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
         <Association Name="FK_Address_Country">
           <End Role="country" Type="Self.country" Multiplicity="1" />
           <End Role="address" Type="Self.address" Multiplicity="*" />
@@ -2535,6 +2514,7 @@ warning 6002: The table/view 'EC.dbo.tmp_raph_client' does not have a primary ke
           <EntitySet Name="management_know" EntityType="Self.management_know" />
           <EntitySet Name="message" EntityType="Self.message" />
           <EntitySet Name="message_user_read" EntityType="Self.message_user_read" />
+          <EntitySet Name="notification_processed" EntityType="Self.notification_processed" />
           <EntitySet Name="notification_summary_period" EntityType="Self.notification_summary_period" />
           <EntitySet Name="ongoing" EntityType="Self.ongoing" />
           <EntitySet Name="outcome" EntityType="Self.outcome" />
@@ -2574,7 +2554,6 @@ warning 6002: The table/view 'EC.dbo.tmp_raph_client' does not have a primary ke
           <EntitySet Name="user_change_password" EntityType="Self.user_change_password" />
           <EntitySet Name="user_role" EntityType="Self.user_role" />
           <EntitySet Name="validation_type" EntityType="Self.validation_type" />
-          <EntitySet Name="tmp_raph_client" EntityType="Self.tmp_raph_client" />
           <AssociationSet Name="FK_Address_Country" Association="Self.FK_Address_Country">
             <End Role="country" EntitySet="country" />
             <End Role="address" EntitySet="address" />
@@ -3137,6 +3116,22 @@ warning 6002: The table/view 'EC.dbo.tmp_raph_client' does not have a primary ke
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="message_id" ColumnName="message_id" />
                 <ScalarProperty Name="read_date" ColumnName="read_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="notification_processed">
+            <EntityTypeMapping TypeName="ECModel.notification_processed">
+              <MappingFragment StoreEntitySet="notification_processed">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="notification_id" ColumnName="notification_id" />
+                <ScalarProperty Name="subs" ColumnName="subs" />
+                <ScalarProperty Name="subject" ColumnName="subject" />
+                <ScalarProperty Name="notification_text" ColumnName="notification_text" />
+                <ScalarProperty Name="receivers" ColumnName="receivers" />
+                <ScalarProperty Name="cc" ColumnName="cc" />
+                <ScalarProperty Name="bcc" ColumnName="bcc" />
+                <ScalarProperty Name="is_processed" ColumnName="is_processed" />
+                <ScalarProperty Name="created_dt" ColumnName="created_dt" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3742,20 +3737,6 @@ warning 6002: The table/view 'EC.dbo.tmp_raph_client' does not have a primary ke
                 <ScalarProperty Name="last_update_dt" ColumnName="last_update_dt" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="code" ColumnName="code" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tmp_raph_client">
-            <EntityTypeMapping TypeName="ECModel.tmp_raph_client">
-              <MappingFragment StoreEntitySet="tmp_raph_client">
-                <ScalarProperty Name="client_id" ColumnName="client_id" />
-                <ScalarProperty Name="client_nm" ColumnName="client_nm" />
-                <ScalarProperty Name="company_id" ColumnName="company_id" />
-                <ScalarProperty Name="company_nm" ColumnName="company_nm" />
-                <ScalarProperty Name="registration_dt" ColumnName="registration_dt" />
-                <ScalarProperty Name="user_id" ColumnName="user_id" />
-                <ScalarProperty Name="user_nm" ColumnName="user_nm" />
-                <ScalarProperty Name="login_nm" ColumnName="login_nm" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

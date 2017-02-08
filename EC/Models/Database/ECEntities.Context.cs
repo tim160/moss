@@ -56,6 +56,7 @@ namespace EC.Models.Database
         public virtual DbSet<management_know> management_know { get; set; }
         public virtual DbSet<message> message { get; set; }
         public virtual DbSet<message_user_read> message_user_read { get; set; }
+        public virtual DbSet<notification_processed> notification_processed { get; set; }
         public virtual DbSet<notification_summary_period> notification_summary_period { get; set; }
         public virtual DbSet<ongoing> ongoing { get; set; }
         public virtual DbSet<outcome> outcome { get; set; }
@@ -95,6 +96,5 @@ namespace EC.Models.Database
         public virtual DbSet<user_change_password> user_change_password { get; set; }
         public virtual DbSet<user_role> user_role { get; set; }
         public virtual DbSet<validation_type> validation_type { get; set; }
-        //public virtual DbSet<tmp_raph_client> tmp_raph_client { get; set; }
     }
 }

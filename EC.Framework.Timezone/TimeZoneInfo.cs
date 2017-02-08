@@ -15,7 +15,7 @@ namespace EC.Framework.TimeZone
     public class TimeZoneInfo : IComparer
     {
         #region Member(s) and Property(s)
-       /// private static readonly ICustomLog Log = CustomLogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ICustomLog Log = CustomLogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private static TimeZoneInfo[] m_TimeZoneInfosAll = null;
         private static TimeZoneInfo[] m_TimeZoneInfosActive = null;
         private static Dictionary<int, TimeZoneInfo> m_IndexDictionary = new Dictionary<int, TimeZoneInfo>();
@@ -176,7 +176,7 @@ namespace EC.Framework.TimeZone
                     m_ShortStandardName = m_StandardName; 
                 }
             }
-         //   Log.Debug(this.ToString()); 
+            //Log.Debug(this.ToString()); 
         }
         #endregion
 
@@ -188,24 +188,12 @@ namespace EC.Framework.TimeZone
         {
             get
             {
-                // The currently selected time zone information can
-                // be retrieved using the Win32 GetTimeZoneInformation call,
-                // but it only gives us names, offsets and dates - crucially,
-                // not the Index.
 
                 TIME_ZONE_INFORMATION tziNative;
                 TimeZoneInfo[] zones = EnumZones();
 
                 NativeMethods.GetTimeZoneInformation(out tziNative);
 
-                // Getting the identity is tricky; the best we can do
-                // is a match on the properties.
-
-                // If the OS 'Automatically adjust clock for daylight saving changes' checkbox
-                // is unchecked, the structure returned by GetTimeZoneInformation has
-                // the DaylightBias and DaylightName members set the same as the corresponding
-                // Standard members. Therefore we check against both values in case this has
-                // been done.
 
                 for (int idx = 0; idx < zones.Length; ++idx)
                 {
@@ -220,13 +208,7 @@ namespace EC.Framework.TimeZone
                         return zones[idx];
                     }
                 }
-          /*      Log.WarnFormat("Timezone was not found, standard name: {0}, bias: {1}, standard bias: {2}, daylight name: {3}, daylight bias: {4}, returning UTC", 
-                    tziNative.StandardName, 
-                    tziNative.Bias, 
-                    tziNative.StandardBias, 
-                    tziNative.DaylightName, 
-                    tziNative.DaylightBias);*/
-                return zones[29];
+                return null;
             }
         }
 
@@ -347,10 +329,10 @@ namespace EC.Framework.TimeZone
                                 timeZoneInfo.DaylightName = regTzi.DaylightName;
                             }
                             zones.Add(timeZoneInfo);
-                         //   if (m_IndexDictionary.ContainsKey(timeZoneInfo.Index))
-                         ///       Log.WarnFormat("Timezone index {0} ({1}) was already added to index dictionary, being replaced with {2}",
-                          ///          timeZoneInfo.Index, m_IndexDictionary[timeZoneInfo.Index].DisplayName, timeZoneInfo.DisplayName); 
-                            m_IndexDictionary[timeZoneInfo.Index] = timeZoneInfo;
+                            //if (m_IndexDictionary.ContainsKey(timeZoneInfo.Index))
+                            //    Log.WarnFormat("Timezone index {0} ({1}) was already added to index dictionary, being replaced with {2}",
+                            //        timeZoneInfo.Index, m_IndexDictionary[timeZoneInfo.Index].DisplayName, timeZoneInfo.DisplayName); 
+                            //m_IndexDictionary[timeZoneInfo.Index] = timeZoneInfo;
                         }
 
                         zones.Sort(new TimeZoneInfo());
