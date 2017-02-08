@@ -631,3 +631,27 @@ table.table:first-child tr:first-child td {
     font-family: OpenSans-Light;
     color: #727c7e;
 }
+.containerCenter {
+    text-align: center;
+    position: relative;
+    padding-top: 15px;
+}
+.containerCenter table {
+    margin: 0 auto;
+}
+.containerCenter table td {
+    padding-right: 15px;
+}
+.containerCenter .square {
+	width: 10px;
+	height: 20px;
+	background: #d5dcdd;
+    display: inline-block;
+}
+.containerCenter .text {
+    padding-right: 30px;
+}
+.addTheLegend {
+    margin-top: 15px;
+    border-top: 1px solid #eaeeee;
+}

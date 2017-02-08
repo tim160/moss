@@ -209,13 +209,6 @@ namespace EC.Controllers
                 searchCompany.value = item.company_nm;
                 searchCompanyDto.Add(searchCompany);
             }
-
-            searchCompanyDto = new List<SearchCompanyDto>();
-            SearchCompanyDto searchCompany2 = new SearchCompanyDto();
-            searchCompany2.label = "sddsd";
-            searchCompany2.value = "sddasdassd";
-            searchCompanyDto.Add(searchCompany2);
-
             return Json(searchCompanyDto);
         }
     }
