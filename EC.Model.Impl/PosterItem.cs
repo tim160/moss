@@ -11,6 +11,20 @@ namespace EC.Model.Impl
     {
         public virtual Int32 Id { get; set; }
         public virtual string posterName { get; set; }
+        public virtual string fileName { get; set; }
+
         public virtual List<IPosterCategory> posterCategoryNames { get; set; }
+        public virtual IPosterMessage posterMessage { get; set; }
+    }
+    public class PosterCategory : IPosterCategory
+    {
+        public virtual Int32 Id { get; set; }
+        public virtual string posterCategoryName { get; set; }
+    }
+
+    public class PosterMessage : IPosterMessage
+    {
+        public virtual Int32 Id { get; set; }
+        public virtual string posterMessageName { get; set; }
     }
 }
