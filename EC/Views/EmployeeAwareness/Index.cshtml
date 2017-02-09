@@ -72,7 +72,7 @@
                         <div class="filtersBlock @pi.imageName">
                             @foreach (PosterCategory pc in pi.posterCategoryNames)
                             {   
-                                <div class="filter @pc.Id">@pc.posterCategoryName</div>
+                                <div class="filter @pc.Id" value="@pc.Id">@pc.posterCategoryName</div>
                             }
                         </div>
                         <div class="greenBlock @pi.posterMessage.Id">@pi.posterMessage.posterMessageName</div>
@@ -131,17 +131,39 @@
         });
 
         $(".itemSelect").on('click', function (event) {
+            let arraySeletedValues = [];
             let itemSelected = $(event.currentTarget);
             if(itemSelected.hasClass('active')) {
                 itemSelected.removeClass('active');
                 findActiveFilter(".itemFilter", itemSelected.attr('value'), "remove");
             } else {
                 itemSelected.addClass('active');
+                arraySeletedValues.push(itemSelected.text().trim().toLowerCase());
                 let html = '<div class="itemFilter" value="' + itemSelected.attr('value') + '">' + itemSelected.text() + ' <div class="imgClose"></div></div>';
                 $(".topBlockFilters").append(html);
             }
+            if (arraySeletedValues.length > 0) {
+                setPosterValues(arraySeletedValues);
+            }
             
-
         });
+        /*
+        две функции затулить
+        первая бежит по массиву $(".filter") и отмечает значения, сравниваех их по строке. ставит значения checked = true; 
+        вторая функция бежит и проверяет количество в каждом постере значений. и если их количество равно то показывает их
+        если количество не равно то прячет их
+        */
+
+        function setPosterValues(arrayValues) {
+            $(".filter").each(function (indx, element) {
+                let temp = $(element).text().trim().toLowerCase();
+                /*найти соответ в массиве строк выбранных и сущ фильтров*/
+                if (arrayValues.indexOf(temp) > 0) {
+                    alert("Hello World!!!");
+                }
+                
+                //heights.push($(element).height());
+            });
+        }
     });
 </script>
