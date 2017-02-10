@@ -3222,6 +3222,9 @@ public class GlobalFunctions
         better_text = better_text.Replace('J', 'W');
         better_text = better_text.Replace('j', 'w');
 
+        better_text = better_text.Replace('L', 'S');
+        better_text = better_text.Replace('l', 's');
+
         return better_text;
     }
     public bool isCodeInUse(string code)

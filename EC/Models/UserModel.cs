@@ -121,7 +121,7 @@ namespace EC.Models
 
         public user Login(string login, string password)
         {
-            user _user = db.user.FirstOrDefault(item => item.login_nm == login && item.password == password);
+            user _user = db.user.FirstOrDefault(item => item.login_nm.Trim() == login && item.password.Trim() == password);
 
             if (_user != null)
             {
