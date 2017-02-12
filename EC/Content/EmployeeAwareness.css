@@ -96,14 +96,23 @@
     font-weight: 300;
 }
 #EmployeeAwarenessBlock .rezoultItems {
-    width: 100%;
+    /*width: 100%;
     display: table;
     padding: 20px 30px;
+    box-sizing: border-box;*/
+
+        width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 20px 30px;
+    justify-content: flex-start;
     box-sizing: border-box;
+    align-items: center;
 }
 #EmployeeAwarenessBlock .blockInformation {
+    display: none;
     border: 1px solid #e0e5e6;
-    display: inline-block;
+    /*display: inline-block;*/
     width: 200px;
     box-sizing: border-box;
     vertical-align: top;

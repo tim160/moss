@@ -48,19 +48,6 @@
         <div class="rightContent">
             <div class="topBlockFilters">
                 <div class="info">Employee awareness materials</div>
-
-
-                @*<div class="itemFilter">E-commerce <div class="imgClose"></div></div>
-                <div class="itemFilter">E-commerce <div class="imgClose"></div></div>
-                <div class="itemFilter">E-commerce <div class="imgClose"></div></div>
-                <div class="itemFilter">E-commerce <div class="imgClose"></div></div>
-                <div class="itemFilter">E-commerce <div class="imgClose"></div></div>
-                <div class="itemFilter">E-commerce <div class="imgClose"></div></div>
-                <div class="itemFilter">E-commerce <div class="imgClose"></div></div>
-                <div class="itemFilter">E-commerce <div class="imgClose"></div></div>
-                <div class="itemFilter">E-commerce <div class="imgClose"></div></div>*@
-
-
                 <div class="calcItems">11 items</div>
             </div>
 
@@ -87,7 +74,6 @@
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script>
     $(document).ready(function () {
         function blocksHeight() {
@@ -107,14 +93,13 @@
                 }
             });
         }
-        
         blocksHeight();
-        //selectblockMenu();
         function findActiveFilter(selector,value, action) {
             $(selector).each(function (indx, element) {
-                if (element.getAttribute('value') === value) {
+                if (element.textContent.trim().toLowerCase() === value) {
                     if (action == "remove") {
                         $(element).remove();
+                        updateCalcItems();
                     } else if (action == "hideActive") {
                         $(element).removeClass("active");
                     }
@@ -125,8 +110,7 @@
         
         $('.topBlockFilters').delegate('.imgClose', 'click', function (event) {
             let currentItem = $(event.currentTarget);
-           // let value = currentItem.parent().attr('value');
-            findActiveFilter(".itemSelect.active", currentItem.parent().attr('value'), "hideActive")
+            findActiveFilter(".itemSelect.active", currentItem.text().trim().toLowerCase(), "hideActive");
             currentItem.parent().remove();
         });
 
@@ -135,35 +119,56 @@
             let itemSelected = $(event.currentTarget);
             if(itemSelected.hasClass('active')) {
                 itemSelected.removeClass('active');
-                findActiveFilter(".itemFilter", itemSelected.attr('value'), "remove");
+                itemSelected = itemSelected.text().trim().toLowerCase();
+                findActiveFilter(".itemFilter", itemSelected, "remove");
+                delPosterValues(itemSelected);
             } else {
                 itemSelected.addClass('active');
                 arraySeletedValues.push(itemSelected.text().trim().toLowerCase());
                 let html = '<div class="itemFilter" value="' + itemSelected.attr('value') + '">' + itemSelected.text() + ' <div class="imgClose"></div></div>';
                 $(".topBlockFilters").append(html);
+                updateCalcItems();
             }
             if (arraySeletedValues.length > 0) {
                 setPosterValues(arraySeletedValues);
             }
-            
         });
-        /*
-        две функции затулить
-        первая бежит по массиву $(".filter") и отмечает значения, сравниваех их по строке. ставит значения checked = true; 
-        вторая функция бежит и проверяет количество в каждом постере значений. и если их количество равно то показывает их
-        если количество не равно то прячет их
-        */
+
+        function delPosterValues(textSelected) {
+            $(".filter").each(function (indx, element) {
+                let el = $(element);
+                if (el.text().trim().toLowerCase() === textSelected.trim().toLowerCase()) {
+                    el.removeClass('checked');
+                    checkParentsForDisplay(el);
+                }
+            });
+        }
+        function checkParentsForDisplay(el) {
+            let parents = el.parents(".blockInformation");
+            if (parents.find('.checked').length == parents.find('.filter').length) {
+                parents.show();
+            } else {
+                parents.hide();
+            }
+        }
+
 
         function setPosterValues(arrayValues) {
             $(".filter").each(function (indx, element) {
                 let temp = $(element).text().trim().toLowerCase();
-                /*найти соответ в массиве строк выбранных и сущ фильтров*/
-                if (arrayValues.indexOf(temp) > 0) {
-                    alert("Hello World!!!");
+                if (arrayValues.indexOf(temp) >= 0) {
+                    let el = $(element);
+                    el.addClass('checked');
+                    checkParentsForDisplay(el);
                 }
-                
-                //heights.push($(element).height());
             });
         }
+        function updateCalcItems() {
+            $(".calcItems").text($(".topBlockFilters .itemFilter").length + " items");
+        }
+        $(".topBlockFilters .itemFilter").on('change', function () {
+            alert("Hello World!!!");
+        });
+        updateCalcItems();
     });
 </script>
