@@ -297,24 +297,104 @@
         });
     }
     var buffer = 0;
-    function init(review, investigation, resolution, escalation) {
-        //var review = 3;
-        //var investigation = 21;
-        //var resolution = 1;
-        //var escalation = 2;
-        if ((review + investigation + resolution + escalation) > 28) {
-            review = Math.round(review / 10);
-            investigation = Math.round(investigation / 10);
-            resolution = Math.round(resolution / 10);
-            escalation = Math.round(escalation / 10);
-        }
-
+    initGreyBlocks();
+    function initGreyBlocks() {
+        var review = 2;
+        var investigation = 19;
+        var resolution = 3;
+        var escalation = 3;
 
         var table = $(".wrapper table");
         var backup = $("#base");
         backup.html("");
         backup.html(table.html());
 
+        var reviewTr = $(table.find('tr')[1]);
+        var investigationTr = $(table.find('tr')[2]);
+        var resolutionTr = $(table.find('tr')[3]);
+        var escalationTr = $(table.find('tr')[4]);
+
+        putBlockGrey(buffer, review, reviewTr, 1);
+        putBlockGrey(buffer, investigation, investigationTr, 2);
+        putBlockGrey(buffer, resolution, resolutionTr, 3);
+        putBlockGrey(buffer, escalation, escalationTr, 4);
+
+
+    }
+
+    function putBlockGrey(start, end, block, indexBlock) {
+        buffer += end;
+        for (var i = start + 1; i <= buffer; i++) {
+            if (block) {
+                var temp = $(block.find('td')[i]);
+                if (temp) {
+                    let arrayTd = $(".wrapper table tr:first td");
+                    //if (i == (start + 1)) {
+                    //    //это первый блок нужна цифирка сверху
+                    //    let first = $(arrayTd[i]);
+                    //    first.append('<div class="parentDivHeader"><div class="headerBrown"> ' + i + ' </div></div>');
+                    //}
+
+                    //надеюсь последний блок
+                    if (i == buffer) {
+                        if (indexBlock == 4) {
+                            let first = $(arrayTd[i]);
+                            first.append('<div class="base greyBase"><div class="letters">' + buffer + '<span class="specialBorder">&nbsp;</span></div></div>');
+                        } else {
+                            let first = $(arrayTd[i]);
+                            first.append('<div class="parentDivHeader"><div class="headerBrown"> ' + i + ' <span class="specialBorder">&nbsp;</span></div></div>');
+                        }
+
+                    }
+
+                    /*что то связано полоски рисующиея в начале и конце оранжевых блоков*/
+                    //if (i == start + 1) {
+                    //    addBorderHead(temp, i, 'startRedLine');
+                    //}
+                    //if (i == buffer) {
+                    //    addBorderHead(temp, buffer, 'endRedLine');
+                    //}
+
+                    /*здесь вставим в ячейку парент див и броун див*/
+                    temp.append("<div class='parentDiv'><div class='brownDiv'></div></div>");
+                    //var parentDiv = temp.find('.parentDiv');
+                    //var className = "redDiv";
+                    //if (indexBlock >= 3) {
+                    //    className = "greenDiv";
+                    //}
+                    //if (parentDiv.length > 0) {
+                    //    parentDiv.append("<div class='" + className + "'></div>");
+                    //} else {
+                    //    var parentDivHtml = "<div class='parentDiv'><div class='" + className + "'></div></div>"
+                    //    temp.append(parentDivHtml);
+                    //}
+                }
+            }
+        }
+    }
+
+    function init(review, investigation, resolution, escalation) {
+        var review = 3;
+        var investigation = 21;
+        var resolution = 1;
+        var escalation = 3;
+
+        
+
+
+        //if ((review + investigation + resolution + escalation) > 28) {
+        //    review = Math.round(review / 10);
+        //    investigation = Math.round(investigation / 10);
+        //    resolution = Math.round(resolution / 10);
+        //    escalation = Math.round(escalation / 10);
+        //}
+
+
+        var table = $(".wrapper table");
+        var backup = $("#base");
+        backup.html("");
+        backup.html(table.html());
+        buffer = 0;
 
         var reviewTr = $(table.find('tr')[1]);
         var investigationTr = $(table.find('tr')[2]);
@@ -375,7 +455,31 @@
                         $(temp).append('<div class="parentDivHeader"><div class="headerBrown darker">' + index + '</div></div>');
                     }
                 } else {
-                    $(temp).append('<div class="base"><div class="letters">' + index + '</div></div>');
+                    let curItem = $(temp);
+                    let arrayTd = $(".wrapper table tr:first td");
+                    let base = arrayTd.find('.base .letters');
+                    if (base.length > 0) {
+                        let greyValue = parseInt(base.text());
+                        if (index == greyValue) {
+                            //если серая штука и зеленая совпадает, серую удалим
+                            curItem.find('.base').removeClass("greyBase");
+                        } else if (index < greyValue) {
+                            //если вложились в срок
+                            curItem.append('<div class="base"><div class="letters">' + index + '</div></div>');
+                        } else if (index > greyValue) {
+                            //Если не вложились
+                            //curItem.find('.base').removeClass("greyBase").addClass("orangeBase");
+                            curItem.append('<div class="base orangeBase"><div class="letters">' + index + '</div></div>');
+                        }
+                    }
+
+                    
+                    //if (curItem.find('.base').length > 0) {
+                        
+                    //} else {
+                        
+                    //}
+                    
                     heightOF = 4;
                     for (var i = buff; i > 0; i--) {
                         var temp = $(listItems[i]);

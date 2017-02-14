@@ -356,8 +356,10 @@ table.table:first-child tr:first-child td {
   position: absolute;
   height: 100%;
   background-color: white;
-  top: 0px;
-  right: -5px;
+  /*top: 0px;
+  right: -5px;*/
+  top: 2px;
+  right: -9px;
   color: #aeb5b7;
 }
 .parentDivHeader {
@@ -413,9 +415,14 @@ table.table:first-child tr:first-child td {
   top: 3px;
   left: 3px;
 }
+.orangeBase {
+    background: #f17b5d!important;
+}
+.orangeBase:before {
+  border-top: 4px solid #f17b5d!important;
+}
 .greyBase {
   background: #abb9bb!important;
-
 }
 .greyBase:before {
   border-top: 4px solid #abb9bb!important;
@@ -426,6 +433,7 @@ table.table:first-child tr:first-child td {
   background-color: white;
   top: 2px;
   right: -9px;
+  /*right: -5px;*/
 }
 .specialBorder2{
   background-color: #eaeeee;
