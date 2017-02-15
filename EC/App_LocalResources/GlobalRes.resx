@@ -1696,4 +1696,22 @@
   <data name="forEmployeeConfidentialOnly" xml:space="preserve">
     <value>FOR EMPLOYEE CONFIDENTIAL ONLY</value>
   </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="CreditCardNumber" xml:space="preserve">
+    <value>Credit Card Number</value>
+  </data>
+  <data name="CSVCode" xml:space="preserve">
+    <value>CSV Code</value>
+  </data>
+  <data name="MM" xml:space="preserve">
+    <value>MM</value>
+  </data>
+  <data name="NameonCard" xml:space="preserve">
+    <value>Name on Card</value>
+  </data>
+  <data name="YY" xml:space="preserve">
+    <value>YY</value>
+  </data>
 </root>

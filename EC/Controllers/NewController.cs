@@ -687,6 +687,11 @@ namespace EC.Controllers
             #endregion
         }
 
+        /// <summary>
+        /// checks if company already registered
+        /// </summary>
+        /// <param name="company_nm"></param>
+        /// <returns></returns>
         public JsonResult IsCompanyAvailable(string company_nm)
         {
             JsonResult result_company = new JsonResult();
@@ -705,6 +710,26 @@ namespace EC.Controllers
             {
                 result_company.Data = 1;
             }
+            return result_company;
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public JsonResult ReturnAmount(string code)
+        {
+            JsonResult result_company = new JsonResult();
+            int amount = 0;
+
+            if (code.Trim().ToLower() == "ec1")
+            {
+                amount = 1300;
+            }
+
+            result_company.Data = amount;
             return result_company;
 
         }
