@@ -446,14 +446,32 @@
         var investigationTr = $(table.find('tr')[2]);
         var resolutionTr = $(table.find('tr')[3]);
         var escalationTr = $(table.find('tr')[4]);
+        //try set color of line 
+        if (totalDaysAll.totalDaysSettings.reviewSettings >= review) {
+            putBlock(buffer, review, reviewTr, 1, "greenDiv");
+        } else {
+            putBlock(buffer, review, reviewTr, 1, "redDiv");
+        }
 
-        putBlock(buffer, review, reviewTr, 1);
-        putBlock(buffer, investigation, investigationTr, 2);
-        putBlock(buffer, resolution, resolutionTr, 3);
-        putBlock(buffer, escalation, escalationTr, 4);
+        if (totalDaysAll.totalDaysSettings.reviewInvestigation >= investigation) {
+            putBlock(buffer, investigation, investigationTr, 2, "greenDiv");
+        } else {
+            putBlock(buffer, investigation, investigationTr, 2, "redDiv");
+        }
+        
+        if (totalDaysAll.totalDaysSettings.reviewResolution >= resolution) {
+            putBlock(buffer, resolution, resolutionTr, 3, "greenDiv");
+        } else {
+            putBlock(buffer, resolution, resolutionTr, 3, "redDiv");
+        }
 
+        if (totalDaysAll.totalDaysSettings.reviewEscalation >= escalation) {
+            putBlock(buffer, escalation, escalationTr, 4, "greenDiv");
+        } else {
+            putBlock(buffer, escalation, escalationTr, 4, "redDiv");
+        }
     }
-    function putBlock(start, end, block, indexBlock) {
+    function putBlock(start, end, block, indexBlock, color) {
         buffer += end;
         for (var i = start + 1; i <= buffer; i++) {
             if (block) {
@@ -466,10 +484,15 @@
                         addBorderHead(temp, buffer, 'endRedLine');
                     }
                     var parentDiv = temp.find('.parentDiv');
-                    var className = "redDiv";
-                    if (indexBlock >= 3) {
-                        className = "greenDiv";
-                    }
+                    var className = color;
+                    //var className = "redDiv";
+                    //if (color == "green") {
+                    //       className = "greenDiv";
+                    //}
+                    //var className = "redDiv";
+                    //if (indexBlock >= 3) {
+                    //    className = "greenDiv";
+                    //}
                     if (parentDiv.length > 0) {
                         parentDiv.append("<div class='" + className + "'></div>");
                     } else {
