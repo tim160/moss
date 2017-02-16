@@ -144,6 +144,9 @@
         }
         return str;
     }
+    let totalDaysAll = {};
+    let totalDaysSettings = {};
+    let totalDays = {};
     //drop down list
     function sendAjax(userId, companyId, types) {
         if (userId && companyId) {
@@ -187,14 +190,51 @@
                     }
                 }
                 var averOfDays = temp['AverageStageDaysTable'];
+
                 var preReview = averOfDays[0].val;
                 var review = averOfDays[1].val;
                 var investigation = averOfDays[2].val;
                 var resolution = averOfDays[3].val;
                 var escalation = averOfDays[4].val;
 
+                
+                let totalDaysAll = {};
+                let totalDaysSettings = {};
+                let totalDays = {};
+
+                
+                let reviewSettings = 2;
+                let reviewInvestigation = 19;
+                let reviewResolution = 3;
+                let reviewEscalation = 3;
+
+                totalDaysSettings.reviewSettings = reviewSettings;
+                totalDaysSettings.reviewInvestigation = reviewInvestigation;
+                totalDaysSettings.reviewResolution = reviewResolution;
+                totalDaysSettings.reviewEscalation = reviewEscalation;
+
+                totalDays.preReview = preReview;
+                totalDays.review = review;
+                totalDays.investigation = investigation;
+                totalDays.resolution = resolution;
+                totalDays.escalation = escalation;
+
+                totalDaysAll.totalDaysSettings = totalDaysSettings;
+                totalDaysAll.totalDays = totalDays;
+
                 AverageOfDaysPerStageBackUp();
-                init(review, investigation, resolution, escalation);
+                //var init = {
+                //    "review": review,
+                //    "investigation": investigation,
+                //    "resolution": resolution,
+                //    "escalation": escalation
+                //};
+
+
+                //init(review, investigation, resolution, escalation);
+                init(totalDaysAll);
+                initGreyBlocks(totalDaysAll);
+
                 addNumberCenter();
             });
         }
@@ -297,12 +337,12 @@
         });
     }
     var buffer = 0;
-    initGreyBlocks();
-    function initGreyBlocks() {
-        var review = 2;
-        var investigation = 19;
-        var resolution = 3;
-        var escalation = 3;
+    //initGreyBlocks();
+    function initGreyBlocks(totalDaysAll) {
+        //var review = 2;
+        //var investigation = 19;
+        //var resolution = 3;
+        //var escalation = 3;
 
         var table = $(".wrapper table");
         var backup = $("#base");
@@ -313,13 +353,11 @@
         var investigationTr = $(table.find('tr')[2]);
         var resolutionTr = $(table.find('tr')[3]);
         var escalationTr = $(table.find('tr')[4]);
-
-        putBlockGrey(buffer, review, reviewTr, 1);
-        putBlockGrey(buffer, investigation, investigationTr, 2);
-        putBlockGrey(buffer, resolution, resolutionTr, 3);
-        putBlockGrey(buffer, escalation, escalationTr, 4);
-
-
+        buffer = 0;
+        putBlockGrey(buffer, totalDaysAll.totalDaysSettings.reviewSettings, reviewTr, 1);
+        putBlockGrey(buffer, totalDaysAll.totalDaysSettings.reviewInvestigation, investigationTr, 2);
+        putBlockGrey(buffer, totalDaysAll.totalDaysSettings.reviewResolution, resolutionTr, 3);
+        putBlockGrey(buffer, totalDaysAll.totalDaysSettings.reviewEscalation, escalationTr, 4);
     }
 
     function putBlockGrey(start, end, block, indexBlock) {
@@ -356,7 +394,14 @@
                     //}
 
                     /*здесь вставим в ячейку парент див и броун див*/
-                    temp.append("<div class='parentDiv'><div class='brownDiv'></div></div>");
+                    if (temp.find('.parentDiv').length > 0) {
+                        temp.find('.parentDiv').append("<div class='brownDiv'></div>");
+                    } else {
+                        temp.append("<div class='parentDiv'><div class='brownDiv'></div></div>");
+                    }
+                    
+
+                    
                     //var parentDiv = temp.find('.parentDiv');
                     //var className = "redDiv";
                     //if (indexBlock >= 3) {
@@ -373,21 +418,22 @@
         }
     }
 
-    function init(review, investigation, resolution, escalation) {
-        var review = 3;
-        var investigation = 21;
-        var resolution = 1;
-        var escalation = 3;
+    function init(totalDaysAll) {
+
+        let review = totalDaysAll.totalDays.review;
+        let investigation = totalDaysAll.totalDays.investigation;
+        let resolution = totalDaysAll.totalDays.resolution;
+        let escalation = totalDaysAll.totalDays.escalation;
 
         
 
 
-        //if ((review + investigation + resolution + escalation) > 28) {
-        //    review = Math.round(review / 10);
-        //    investigation = Math.round(investigation / 10);
-        //    resolution = Math.round(resolution / 10);
-        //    escalation = Math.round(escalation / 10);
-        //}
+        if ((review + investigation + resolution + escalation) > 28) {
+            review = Math.round(review / 10);
+            investigation = Math.round(investigation / 10);
+            resolution = Math.round(resolution / 10);
+            escalation = Math.round(escalation / 10);
+        }
 
 
         var table = $(".wrapper table");
