@@ -421,6 +421,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Amount.
+        /// </summary>
+        public static string Amount {
+            get {
+                return ResourceManager.GetString("Amount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Analytics.
         /// </summary>
         public static string Analytics {
@@ -1321,11 +1330,29 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Credit Card Number.
+        /// </summary>
+        public static string CreditCardNumber {
+            get {
+                return ResourceManager.GetString("CreditCardNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Criminal activity.
         /// </summary>
         public static string CriminalActivity {
             get {
                 return ResourceManager.GetString("CriminalActivity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CSV Code.
+        /// </summary>
+        public static string CSVCode {
+            get {
+                return ResourceManager.GetString("CSVCode", resourceCulture);
             }
         }
         
@@ -2977,6 +3004,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MM.
+        /// </summary>
+        public static string MM {
+            get {
+                return ResourceManager.GetString("MM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to My active tasks.
         /// </summary>
         public static string Myactivetasks {
@@ -3027,6 +3063,15 @@ namespace EC.App_LocalResources {
         public static string Name {
             get {
                 return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name on Card.
+        /// </summary>
+        public static string NameonCard {
+            get {
+                return ResourceManager.GetString("NameonCard", resourceCulture);
             }
         }
         
@@ -4791,6 +4836,15 @@ namespace EC.App_LocalResources {
         public static string YourRoleUp {
             get {
                 return ResourceManager.GetString("YourRoleUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to YY.
+        /// </summary>
+        public static string YY {
+            get {
+                return ResourceManager.GetString("YY", resourceCulture);
             }
         }
     }

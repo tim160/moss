@@ -96,6 +96,33 @@
                     <p class="title">@GlobalRes.Departments</p>
                     <input type="text" id="description" />
                 </div>
+
+                <div id="PayByCard" type="hidden">
+                    <div class="blockPersonalSettings">
+                        <p class="title">@GlobalRes.Amount</p>
+                        <input type="text" id="amount" value="0" />
+                    </div>
+
+                    <div class="blockPersonalSettings">
+                        <p class="title">@GlobalRes.CreditCardNumber</p>
+                        <input type="text" id="cardnumber" />
+                    </div>
+                    <div class="blockPersonalSettings">
+                        <p class="title">@GlobalRes.NameonCard</p>
+                        <input type="text" id="description" />
+                    </div>
+
+
+                    <div class="blockPersonalSettings">
+                        <p class="title">@GlobalRes.ExpiryDate</p>
+                        <input type="text" id="mm" numbers_only-01-12 mask="__" />/<input type="text" id="yy" mask="__" numbers_only17andmore />
+                    </div>
+                    <div class="blockPersonalSettings">
+                        <p class="title">@GlobalRes.CSVCode</p>
+                        <input type="text" id="csv" numbers_only />
+                    </div>
+                </div>
+
                 <div class="blockUpdateProfile">
                     <div class="updateProfileBtn">
                         <input type="submit" value="create" />
