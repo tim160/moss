@@ -147,6 +147,10 @@
     let totalDaysAll = {};
     let totalDaysSettings = {};
     let totalDays = {};
+
+
+
+
     //drop down list
     function sendAjax(userId, companyId, types) {
         if (userId && companyId) {
@@ -202,11 +206,12 @@
                 let totalDaysSettings = {};
                 let totalDays = {};
 
-                
-                let reviewSettings = 2;
-                let reviewInvestigation = 19;
-                let reviewResolution = 3;
-                let reviewEscalation = 3;
+                let reviewSettings = parseInt($("#step1_delay").attr("value"));
+                let reviewInvestigation = parseInt($("#step2_delay").attr("value"));
+                let reviewResolution = parseInt($("#step3_delay").attr("value"));
+                let reviewEscalation = parseInt($("#step4_delay").attr("value"));
+
+
 
                 totalDaysSettings.reviewSettings = reviewSettings;
                 totalDaysSettings.reviewInvestigation = reviewInvestigation;
