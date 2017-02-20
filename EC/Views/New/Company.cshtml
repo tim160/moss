@@ -115,11 +115,13 @@
 
                     <div class="blockPersonalSettings">
                         <p class="title">@GlobalRes.ExpiryDate</p>
-                        <input type="text" id="mm" numbers_only-01-12 mask="__" />/<input type="text" id="yy" mask="__" numbers_only17andmore />
+                        <input type="number" placeholder="mm" id="mm" min="1" pattern="\d*" max="2" maxlength="2"  numbers_only-01-12 mask="__" style="width:45%; float:left" />
+                        /
+                        <input type="number" placeholder="yy" id="yy" max="2" maxlength="2" style="width:50%;" mask="__" numbers_only17andmore />
                     </div>
                     <div class="blockPersonalSettings">
                         <p class="title">@GlobalRes.CSVCode</p>
-                        <input type="text" id="csv" numbers_only />
+                        <input type="number" id="csv" max="3" maxlength="3" />
                     </div>
                 </div>
 

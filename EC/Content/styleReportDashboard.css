@@ -841,7 +841,7 @@ h2.mainTitle {
 /*.blockPersonalSettings .freeBlock.inputRadio {    
   background: #eff0f1 !important;
 }*/
-.blockPersonalSettings input[type="text"] {
+.blockPersonalSettings input[type="text"], .blockPersonalSettings input[type="number"]  {
     font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     color: #3c3e3f;
     font-size: 18px;
