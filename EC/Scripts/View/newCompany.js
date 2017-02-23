@@ -145,4 +145,40 @@
     editStyleInput();
     clickCreate();
 
+
+    var changeTimer = false;
+    $("#amount").on('change', function (event) {
+        var temp = $(event.currentTarget);
+        parseInt(temp);
+    });
+    $("#code").on("change", function (event) {
+        if (changeTimer !== false) clearTimeout(changeTimer);
+        changeTimer = setTimeout(function () {
+            /* your ajax here */
+            LoginHere($("#code").val());
+            changeTimer = false;
+        }, 3000);
+    });
+
+    function LoginHere(code) {
+
+        //  console.log(login);
+        // console.log(password);
+        let temp = window.location.protocol + "/new/ReturnAmount";
+        
+        $.ajax({
+            method: "POST",
+            url: temp,
+            data: { code: code }
+        }).done(function (data) {//data from server
+              console.log(data);
+              if (data === 0) {
+                  $("#PayByCard").hide();
+              } else {
+                  $("#PayByCard").show();
+              }
+        }).fail(function (error) {
+            console.log(error);
+        });
+    }
 });

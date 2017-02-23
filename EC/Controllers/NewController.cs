@@ -719,6 +719,8 @@ namespace EC.Controllers
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
+        /// 
+        [HttpPost]
         public JsonResult ReturnAmount(string code)
         {
             JsonResult result_company = new JsonResult();
