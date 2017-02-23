@@ -2631,3 +2631,17 @@ p.helloUser {
     }
 }
 /*=============================END MEDIA======================*/
+
+.positioncreditCardSelect {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 33px;
+}
+.creditCardSelect {
+    border-color: transparent;
+    width: 45%;
+    outline:0;
+    height: 40px;
+}
