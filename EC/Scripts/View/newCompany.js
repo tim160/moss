@@ -181,4 +181,15 @@
             console.log(error);
         });
     }
+    $("#csv").on('keypress', function (event) {
+        if ($(event.currentTarget).val().length == 3) {
+            event.preventDefault();
+        }
+        var key_code = event.keyCode;
+        if ((key_code >= 48 && key_code <= 57) || (key_code >= 96 && key_code <= 105)) {
+            return;
+        } else if ((key_code === 8) || (key_code >= 35 && key_code <= 40) || key_code === 46 || key_code === 9 || key_code === 13) {  // Backspace, cursor keys, PgUp, PgDown, Delete, Tab, Enter
+            return;
+        }
+    });
 });
