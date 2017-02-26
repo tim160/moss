@@ -587,4 +587,46 @@
             });
         }
     /*user end process*/
+
+    /*this is second page*/
+
+        function selectblockMenu() {
+            $('.itemFormat').click(function (event) {
+                var self = $(event.currentTarget);
+                //var parent = 
+                self.parent().find('.itemFormat').removeClass('active');
+                self.addClass('active');
+                if (self.parents('.blockFormat').length > 0) {
+                    var text = "download " + self.text().trim() + " poster (pdf)";
+                    $(".downloadPdf").text(text);
+                }
+            });
+        }
+
+        selectblockMenu();
+
+        $(".downloadPdf").on('click', function () {
+            var availableFormat = $(".availableFormat .itemFormat.active").text().trim();
+            var blockFormat = $(".blockOption.blockFormat .active").text().trim();
+            if (availableFormat.length > 0 && blockFormat.length > 0) {
+                $.ajax({
+                    method: "POST",
+                    url: "/Settings/UpdateDelays",
+                    data: {
+                        availableFormat: availableFormat,
+                        blockFormat: blockFormat
+                    }
+                }).done(function (data) {//data from server
+                    //$('#updateButton').css('display', 'none');
+                    //$('#saveButton').css('display', 'block');
+                    updateTOTALTIMEONCASE();
+                }).fail(function (error) {
+                    console.log(error);
+                });
+            }
+        });
+        //$("#EmployeeAwarenessBlock .")
+
+
+    /**/
 });
