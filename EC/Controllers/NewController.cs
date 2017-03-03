@@ -721,15 +721,87 @@ namespace EC.Controllers
         /// <returns></returns>
         /// 
         [HttpPost]
-        public JsonResult ReturnAmount(string code)
+        public JsonResult ReturnAmount(string code, string emplquant)
         {
+            int empl_quant = 0;
+            if (emplquant != null && emplquant != "")
+            {
+                if (!Int32.TryParse(emplquant, out empl_quant))
+                    empl_quant = 0;
+            }
+
             JsonResult result_company = new JsonResult();
-            int amount = 0;
+            double amount = 0;
 
             if (code.Trim().ToLower() == "ec1")
             {
                 amount = 1300;
             }
+
+            int reseller_type = 1;
+            int reseller_level = 1;
+
+            if (!db.company_invitation.Any(item => ((item.invitation_code.ToLower().Trim() == code.Trim().ToLower()))))
+            {
+                // no inv code in the system
+            }
+            else
+            {
+                company_invitation ci = db.company_invitation.Where(item => ((item.invitation_code.ToLower().Trim() == code.Trim().ToLower()))).FirstOrDefault();
+                if (ci.reseller_type_id.HasValue)
+                    reseller_type = ci.reseller_type_id.Value;
+                if (ci.reseller_level.HasValue)
+                    reseller_level = ci.reseller_level.Value;
+            }
+
+            if (reseller_type == 1)
+            {
+                double pepy = 0;
+                if (empl_quant <= 500)
+                    pepy = 20;
+                if (empl_quant > 500 && empl_quant < 1000)
+                    pepy = 8;
+                if (empl_quant > 1000 && empl_quant < 5000)
+                    pepy = 4;
+                if (empl_quant > 5000 && empl_quant < 10000)
+                    pepy = 3.5;
+                if (empl_quant > 10000 && empl_quant < 25000)
+                    pepy = 2.5;
+                if (empl_quant > 25000 && empl_quant < 50000)
+                    pepy = 2;
+                if (empl_quant > 50000 && empl_quant < 100000)
+                    pepy = 1.5;
+                if (empl_quant > 100000 && empl_quant < 200000)
+                    pepy = 1;
+                if (empl_quant > 200000)
+                    pepy = 1;
+
+                if (empl_quant == 0)
+                    amount = 0;
+                else
+                    amount = pepy * empl_quant;
+            }
+            else if (reseller_type == 2)
+            {
+                if (reseller_level == 1)
+                    amount = 1015;
+                if (reseller_level == 2)
+                    amount = 435;
+                if (reseller_level == 3)
+                    amount = 290;
+                if (reseller_level == 4)
+                    amount = 145;
+                if (reseller_level == 5)
+                    amount = 87;
+                if (reseller_level == 6)
+                    amount = 58;
+                if (reseller_level == 5)
+                    amount = 29;
+                if (reseller_level == 6)
+                    amount = 15;
+            }
+            else
+                amount = 1000;
 
             result_company.Data = amount;
             return result_company;

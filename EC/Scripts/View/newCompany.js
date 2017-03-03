@@ -147,8 +147,10 @@
     editStyleInput();
     clickCreate();
 
+    
 
     var changeTimer = false;
+
     $("#amount").on('change', function (event) {
         var temp = $(event.currentTarget);
         parseInt(temp);
@@ -158,18 +160,29 @@
         if (changeTimer !== false) clearTimeout(changeTimer);
 
         changeTimer = setTimeout(function () {
-            CheckCode($("#code").val());
+            CheckCode($("#code").val(), $("#number").val());
+            changeTimer = false;
+        }, 3000);
+    });
+    $("#number").on("change", function (event) {
+
+        if (changeTimer !== false) clearTimeout(changeTimer);
+
+        changeTimer = setTimeout(function () {
+            CheckCode($("#code").val(), $("#number").val());
             changeTimer = false;
         }, 3000);
     });
 
-    function CheckCode(code) {
+
+
+    function CheckCode(code, emplquant) {
         let temp = window.location.protocol + "/new/ReturnAmount";
         
         $.ajax({
             method: "POST",
             url: temp,
-            data: { code: code }
+            data: { code: code, emplquant: emplquant }
         }).done(function (data) {//data from server
               console.log(data);
               if (data === 0) {
