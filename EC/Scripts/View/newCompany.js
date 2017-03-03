@@ -1,4 +1,6 @@
 ﻿$(document).ready(function () {
+    $("#PayByCard").hide();
+
     function valTB_rv(personInfo, rv) {
         if (personInfo.val().trim() == '' || !rv.test(personInfo.val().trim())) {
             personInfo.addClass('error');
@@ -152,18 +154,16 @@
         parseInt(temp);
     });
     $("#code").on("change", function (event) {
+
         if (changeTimer !== false) clearTimeout(changeTimer);
+
         changeTimer = setTimeout(function () {
-            /* your ajax here */
-            LoginHere($("#code").val());
+            CheckCode($("#code").val());
             changeTimer = false;
         }, 3000);
     });
 
-    function LoginHere(code) {
-
-        //  console.log(login);
-        // console.log(password);
+    function CheckCode(code) {
         let temp = window.location.protocol + "/new/ReturnAmount";
         
         $.ajax({
@@ -174,7 +174,9 @@
               console.log(data);
               if (data === 0) {
                   $("#PayByCard").hide();
+                  $("#amount").val(0);
               } else {
+                  $("#amount").val(data);
                   $("#PayByCard").show();
               }
         }).fail(function (error) {
@@ -182,7 +184,7 @@
         });
     }
     $("#csv").on('keypress', function (event) {
-        if ($(event.currentTarget).val().length == 3) {
+        if ($(event.currentTarget).val().length == 4) {
             event.preventDefault();
         }
         var key_code = event.keyCode;
