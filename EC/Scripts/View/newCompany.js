@@ -39,8 +39,8 @@
         valTB(valCompanyName);
         valTB(valLocation);
         valTB(valNumber);
-        valTB_rv(valFirst, rv_onlyText);
-        valTB_rv(valLast, rv_onlyText);
+        valTB(valFirst);
+        valTB(valLast);
         valTB_rv(valEmail, rv_email);
         valTB(valTitle);
 
