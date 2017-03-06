@@ -52,40 +52,28 @@
                 <div class="contentTasks">
                     @{
                         string _classCircle, _styleCircle, _colorTextAfter, _colorTextBefore, _smallCircle, _fontName, _nameBlockShow;
-                        //------------Закрашенный и не закрашенный кружок---------------------------------------------------
-                        //Если нужен закрашенный кружок нужен следующий класс и стиль, в котором можно изменять цвет круга
                         _classCircle = "bigDot";
                         _styleCircle = "background: #3099be;";
 
-                        //Если нужен НЕ закрашенный кружок нужен следующий класс и стиль, в котором можно изменять цвет контура круга
                         //_classCircle = "notShadedCircle";
                         //_styleCircle = "border: 2px solid #d47472;";
 
-                        //------------Текст серого цвета--------------------------------------------------------------------
-                        //Для серого цвета текста необходимо добавить класс "colorTextGrey"
 
-                        //Tекст серого цвета ДО СТРЕЛОЧКИ становится, если следующая переменная имеет следующие значения:
-                        _colorTextBefore = ""; //Не серого цвета
-                        _colorTextBefore = "colorTextGrey"; //Серого цвета
+                        _colorTextBefore = ""; 
+                        _colorTextBefore = "colorTextGrey"; 
 
-                        // @_colorTextBefore в myCompletedTasks, указан в главном блоке, чтобы сделать текст серым, при необходимости
 
-                        //Tекст серого цвета ПОСЛЕ СТРЕЛОЧКИ становится, если следующая переменная имеет следующие значения:
-                        _colorTextAfter = "colorTextGrey"; //Серого цвета
-                        _colorTextAfter = ""; //Не серого цвета
+                        _colorTextAfter = "colorTextGrey"; 
+                        _colorTextAfter = ""; 
 
-                        //------------Текст и маленький красный кружок--------------------------------------------------------------------
-                        //Маленький красный кружок:
-                        _smallCircle = "littleDotShow"; //Видно
-                        _smallCircle = "littleDot"; //Невидно
-                        //Если есть красный кружок, то нужно изменить шрифт в блоке taskName
-                        _fontName = "fontSamibold"; //Меняем
-                        _fontName = ""; //Не меняем
+                        _smallCircle = "littleDotShow"; 
+                        _smallCircle = "littleDot"; 
+                        _fontName = "fontSamibold"; 
+                        _fontName = ""; 
 
-                        //------------Блок перед блоком вывода даты может иметь ЗДЕСЬ 3 вида--------------------------------------------------------------------
-                        _nameBlockShow = "blockFile"; //Видно значек файла - скрпеку
-                        _nameBlockShow = ""; //Блок пустой
-                        _nameBlockShow = "blockDays"; //Видно надпись "3 days late"
+                        _nameBlockShow = "blockFile";
+                        _nameBlockShow = "";
+                        _nameBlockShow = "blockDays"; 
                     }
 
                     <div class="blockTask taskByDate" style="display: none;">
