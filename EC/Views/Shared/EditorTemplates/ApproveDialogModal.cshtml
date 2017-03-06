@@ -168,10 +168,7 @@
         });
         var button = "";
         $("#escalate_btn").on('click', function (event) {
-            console.log('escalate_btn in popup');
             button = $(event.currentTarget).val();
-            console.log('escalate_btn', button);
-
             sendAjax(button);
         });
         function sendAjax(promotion_value) {
@@ -182,17 +179,14 @@
             if (description != "") {
 
                 if (_report_id > 0 && user_id > 0 && promotion_value != "") {
-                    console.log('description', description);
                     $.ajax({
                         method: "POST",
                         url: "/Case/CloseCase",
                         data: { user_id: user_id, report_id: _report_id, description: description, promotion_value: promotion_value }
                     }).done(function (data) {//data from server
-                        console.log('data', data);
 
                         if (data == -1) {
                             // need to re-login
-                            console.log('Need to login');
                         }
 
                         if (data == 1) {

@@ -81,37 +81,24 @@
     /*this function works for index page - update user foto too*/
     /*for upload files add foto*/
     $('.newImageBtn').click(function () {
-            console.log("entered in newImageBtn click");
             $("#_file").click();
-            console.log("click(); end");
     });
     $("#_file").on('change', function (e) {
 
         var urlAjaxUploadFiles = $("#urlAjaxUploadFiles").val();
         var from = $("#urlAjaxUploadFiles").attr("from");
-        console.log("try get value in urlAjaxUploadFiles" + urlAjaxUploadFiles);
         var files = e.target.files;
-        console.log("get files" + files);
 
         if (files.length > 0) {
-            console.log("files.length = " + files.length);
             var fd = new FormData();
             if (from != "") {
-                console.log("from = " + from);
                 fd.append("from", from);
             } else {
-                console.log("error from = " + from);
             }
 
-            console.log("add fd.append = " + files.length);
-
             var file = document.getElementById('_file');
-            console.log("getElementById('_file') = " + file);
-
-
             for (var i = 0; i < file.files.length; i++) {
                 fd.append('_file', file.files[i]);
-                console.log("file.files[i] = " + file.files[i]);
             }
 
             $.ajax({
@@ -121,7 +108,6 @@
                 processData: false,
                 data: fd,
                 success: function (result) {
-                    console.log("result " + result);
                     var from = $("#urlAjaxUploadFiles").attr("from");
                     if (from == "User") {
                         $("#logoUser").attr("src", result);
@@ -252,15 +238,12 @@
         /* Adding Location*/
         $('#addInputLoc p').click(function () {
             var temp = $(this).parent();
-            console.log("temp = " + temp);
             adding("Location", temp);
         });
         $('#addLocBtn').click(function () {
             var data = $(".addNewLocation input").val();
-            console.log("data = " + data);
             if (data.length > 0) {
                 sendAjax("Location", data, function (id) {
-                    console.log("sendAjax = " + id);
                     close("Location", data, id);
                 });
                 if (!data) {
@@ -462,7 +445,6 @@
             if ($("#sendEmail").val().trim().length > 0) {
                 $('.blockSendEmail input').click();
                 var email = $("#sendEmail").val().trim();
-                console.log(email);
                 createInvitation();
             }
             else {

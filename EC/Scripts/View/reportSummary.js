@@ -9,8 +9,6 @@
             });
             $("#messages_menu a").each(function (indx, element) {
                 var temp = $(element).attr("href");
-                console.log(temp);
-
                 temp = temp.replace('true', 'false');
                 $(element).attr("href", temp);
             });
@@ -28,9 +26,7 @@
                     $(element).attr("href", temp);
                 });
                 $("#messages_menu a").each(function (indx, element) {
-                   
                     var temp = $(element).attr("href");
-                    console.log(temp);
                     temp = temp.replace('false', 'true');
                     $(element).attr("href", temp);
                 });
@@ -67,17 +63,15 @@
         if (outcome != "") {
 
             if (_report_id > 0 && user_id > 0 && promotion_value != "") {
-                console.log('description', description);
                 $.ajax({
                     method: "POST",
                     url: "/Case/CloseCase",
                     data: { user_id: user_id, report_id: _report_id, description: description, promotion_value: promotion_value, outcome_id: outcome_id, outcome: outcome, }
                 }).done(function (data) {//data from server
-                    console.log('data', data);
 
                     if (data == -1) {
                         // need to re-login
-                        console.log('Need to login');
+                        //console.log('Need to login');
                     }
 
                     if (data == 1) {

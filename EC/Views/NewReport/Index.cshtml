@@ -493,7 +493,6 @@
                         $('.markAsSpam').click(function(){
                             var self = $(this);
                             var spamMessage = $('.spamMessage textarea').val();
-                            console.log(spamMessage);
                             markAsSpam(@Html.Raw(report_id), @Html.Raw(user_id), spamMessage);
 
                                             var str = '@Url.Content("~/Cases/Spam")';
@@ -507,7 +506,6 @@
                                 url: "/NewReport/SendSpamMessage",
                                 data: { report_id : report_id, user_id: user_id, spamMessage: message }
                             }).done(function(data) {//data from server
-                                console.log(data.login_nm);// alert(data);
                             }).fail(function(error){
                                 console.log(error);
                             });
@@ -530,8 +528,6 @@
                 url: "/NewReport/AcceptOrReopenCase",
                 data: { report_id : report_id, user_id: user_id, description : description }
             }).done(function(data) {//data from server
-                // console.log(data.login_nm);// alert(data);
-
             }).fail(function(error){
                 console.log(error);
             });
@@ -594,13 +590,11 @@
 
         function acceptCaseBtnClick(){
             $('#viewReport .blockSpamCase .acceptCaseBtn, #viewReport .blockAcceptCase .acceptCaseBtn').click(function () {
-                console.log('acceptCaseBtnClick');
                 $('input#acceptCase').click();
             });
         }
         function spamCaseBtnClick(){
             $('#viewReport .blockSpamCase .markSpamBtn, #viewReport .blockAcceptCase .markSpamBtn').click(function () {
-                console.log('spamCaseBtnClick');
                 $('input#markSpam').click();
             });
         }

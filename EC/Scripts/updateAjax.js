@@ -160,7 +160,6 @@
                 data: { companyId: companyId, userId: userId, types: types }
             }).done(function (data) {//data from server
                 var temp = $.parseJSON(data);
-                console.log(temp);
 
                 if (temp['LocationTable'] != null && temp['LocationTable'].length >= 1) {
                     _dtCompanyLocationReport(temp['LocationTable']);

@@ -217,7 +217,6 @@
 
         /*Cancel*/
         cancelButton.on("click", function () {
-            showMessage("console.log(\"!!!\");");
         });
 
         /*Update*/
@@ -243,7 +242,6 @@
                     data: { userId: userId, data: data },
                     url: '@Url.Action("SaveFields", "ReporterDashboard")',
                     success: function (result) {
-                        console.log(result);
                         if (result === "True") {
                             changeButton();
                         }

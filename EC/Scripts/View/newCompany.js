@@ -52,7 +52,6 @@
             !valLast.hasClass('error') &&
             !valEmail.hasClass('error') &&
             !valTitle.hasClass('error') && ($("#company_exist").val().length > 0)) {
-            console.log(11);
             createCompany();
         }
     }
@@ -131,7 +130,6 @@
         }).done(function (data) {//data from server
             if (data != 'completed') {
                 alert(data);
-                //console.log(data);
             }
             else {
                 //    location.reload();
@@ -184,7 +182,6 @@
             url: temp,
             data: { code: code, emplquant: emplquant }
         }).done(function (data) {//data from server
-              console.log(data);
               if (data === 0) {
                   $("#PayByCard").hide();
                   $("#amount").val(0);

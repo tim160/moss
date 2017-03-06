@@ -534,7 +534,6 @@
                         url: "/Case/ReassignTask",
                         data: { task_id: @task_id, user_id: assignedToMediator }
                     }).done(function(data) {//data from server
-                        console.log(data.login_nm);
                         // alert(data);
                     }).fail(function(error){
                         console.log(error);
@@ -547,7 +546,6 @@
                             var sitem = $(this).find('.aboutMediator').find('label:first-child').text();
                             var sid = $(this).attr('id');
                             var photo = $(this).find('.photoPersonal img').attr('src');
-                            console.log("photo:   " + photo);
 
                             $(this).siblings('li').removeClass('selected');
                             $(this).addClass('selected');

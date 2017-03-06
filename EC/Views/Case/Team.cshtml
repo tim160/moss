@@ -551,16 +551,12 @@
                 }
                 if(data > 0)
                 {
-                    console.log('data', data);
-
                     alert('@GlobalRes.ReassignMediatorTaskWarning');
                 }
                 if(data == -1)
                 {
                     // need to re-login
-                    console.log('Need to login');
                 }
-                //  console.log(data.login_nm);
                 @{
                //         um = new UserModel(user_id);
                //         _mediators_whoHasAccess_toReport.Remove(um._user);
@@ -623,7 +619,6 @@
                     url: "/Case/AddToMediators",
                     data: { user_id: id, report_id: report_id }
                 }).done(function (data) {//data from server
-                    console.log('data', data);
                     // alert(data);
                 }).fail(function (error) {
                     console.log(error);

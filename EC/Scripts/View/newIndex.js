@@ -41,7 +41,6 @@
             !valLast.hasClass('error') &&
             !valEmail.hasClass('error') &&
             !valTitle.hasClass('error')) {
-            console.log(11);
             updateProfile();
         }
     }
@@ -68,7 +67,6 @@
         }).done(function (data) {//data from server
             if (data != 'completed') {
                 alert(data);
-                //console.log(data);
             }
             else {
                 //    location.reload();
