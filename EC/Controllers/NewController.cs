@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -9,6 +10,7 @@ using EC.Common.Interfaces;
 using EC.Core.Common;
 using EC.Constants;
 using log4net;
+using LavaBlast.Util.CreditCards;
 
 namespace EC.Controllers
 {
@@ -101,7 +103,7 @@ namespace EC.Controllers
 
             return View();
         }
-        public string CreateCompany(string code, string location, string company_name, string number, string first, string last, string email, string title, string description)
+        public string CreateCompany(string code, string location, string company_name, string number, string first, string last, string email, string title, string description, string amount, string cardnumber, string cardname, string csv)
         {
             int company_id = 0;
             int user_id = 0;
@@ -120,6 +122,45 @@ namespace EC.Controllers
             {
                 return App_LocalResources.GlobalRes.EmailInvalid;
             }
+
+            int _amount = 0;
+            if (!string.IsNullOrEmpty(amount) && amount != "0")
+            {
+                // amount more than 0 -> we have a registration
+                
+                int.TryParse(amount, out _amount);
+
+            }
+
+            if (_amount > 0)
+            {
+                if ((string.IsNullOrEmpty(cardnumber)) || (string.IsNullOrEmpty(cardname)) || (string.IsNullOrEmpty(csv)))
+                {
+                    return App_LocalResources.GlobalRes.EmptyData;
+                }
+            }
+            #region Credit Card
+            if (_amount > 0)
+            {
+                /// amount, string cardnumber, string cardname, string csv
+                BeanStream.beanstream.TransactionProcessRequest tpr = new BeanStream.beanstream.TransactionProcessRequest();
+                BeanStream.beanstream.TransactionProcessAuthRequest tpar = new BeanStream.beanstream.TransactionProcessAuthRequest();
+
+                // to do - move constants to AppSettingsConstants
+                BeanStreamProcessing bsp = new BeanStreamProcessing(ConfigurationManager.AppSettings["bs_merchant_id"]);
+                string error_message = "";
+                string auth_code = "";
+
+                Dictionary<BeanStreamProcessing.RequestFieldNames, string> _dictionary = new Dictionary<BeanStreamProcessing.RequestFieldNames, string>();
+                bsp.ProcessRequest(_dictionary, out error_message, out auth_code);
+                if (error_message.Trim().Length > 0)
+                {
+                    return error_message;
+                }
+            }
+
+            #endregion
+
             #region CompanySaving
             int company_invitation_id = 0;
             int client_id = 0;
@@ -195,14 +236,14 @@ namespace EC.Controllers
 
             string url = Request.Url.AbsoluteUri.ToLower();
             string _url = "registration";
-            if(url.Contains("cai."))
+            if (url.Contains("cai."))
                 _url = "cai";
             if (url.Contains("demo."))
                 _url = "demo";
             if (url.Contains("stark."))
                 _url = "stark";
             _company.subdomain = _url;
-           ////// _company.reseller = client_id;
+            ////// _company.reseller = client_id;
 
             try
             {
@@ -214,7 +255,7 @@ namespace EC.Controllers
             {
                 logger.Error(ex.ToString());
                 return App_LocalResources.GlobalRes.CompanySavingFailed;
-            } 
+            }
             #endregion
 
             #region Location Saving
@@ -242,14 +283,14 @@ namespace EC.Controllers
                 {
                     logger.Error(ex.ToString());
                     return App_LocalResources.GlobalRes.LocationSavingFailed;
-                } 
+                }
             }
             else
             {
                 return App_LocalResources.GlobalRes.CompanySavingFailed;
             }
 
-           #endregion
+            #endregion
 
             #region Departments
             /// easy part - Administrative, Accounting, Management, Sales and Support 
@@ -300,7 +341,7 @@ namespace EC.Controllers
             if (company_id != 0)
             {
                 List<string> list_types = db.secondary_type_mandatory.Where(t => t.type_id == 1 && t.status_id == 2).Select(item => item.secondary_type_en).ToList();
-               // list_types.Add(App_LocalResources.GlobalRes.Administrative);
+                // list_types.Add(App_LocalResources.GlobalRes.Administrative);
 
                 foreach (string _types in list_types)
                 {
@@ -406,8 +447,11 @@ namespace EC.Controllers
                         }
                     }
                 }
-            } 
+            }
             #endregion
+
+
+
 
             string login = glb.GenerateLoginName(first, last);
             string pass = glb.GeneretedPassword();
@@ -456,7 +500,7 @@ namespace EC.Controllers
                 {
                     logger.Error(ex.ToString());
                     return App_LocalResources.GlobalRes.UserSavingFailed;
-                } 
+                }
             }
             else
             {
@@ -490,7 +534,7 @@ namespace EC.Controllers
                     string body = eb.Body;
                     em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_NewCompany, body, true);
                 }
-                
+
 
                 #endregion
 
@@ -499,11 +543,11 @@ namespace EC.Controllers
             else
                 return App_LocalResources.GlobalRes.UserSavingFailed;
             #endregion
-       
 
 
 
-          //  return user_id.ToString();
+
+            //  return user_id.ToString();
 
         }
 
@@ -733,10 +777,7 @@ namespace EC.Controllers
             JsonResult result_company = new JsonResult();
             double amount = 0;
 
-            if (code.Trim().ToLower() == "ec1")
-            {
-                amount = 1300;
-            }
+
 
             int reseller_type = 1;
             int reseller_level = 1;
@@ -795,17 +836,27 @@ namespace EC.Controllers
                     amount = 87;
                 if (reseller_level == 6)
                     amount = 58;
-                if (reseller_level == 5)
+                if (reseller_level == 7)
                     amount = 29;
-                if (reseller_level == 6)
+                if (reseller_level == 8)
                     amount = 15;
             }
             else
                 amount = 1000;
 
+            if (code.Trim().ToLower() == "ec")
+            {
+                amount = 0;
+            }
+            if (code.Trim().ToLower() == "ec1")
+            {
+                amount = 1300;
+            }
+
             result_company.Data = amount;
             return result_company;
 
         }
+
     }
 }

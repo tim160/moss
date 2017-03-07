@@ -975,6 +975,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BeanStream\BeanStream.csproj">
+      <Project>{93d23c6d-54f6-4886-9c0b-6b70295eabe2}</Project>
+      <Name>BeanStream</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EC.Business\EC.Business.csproj">
       <Project>{41f69955-26be-4a77-832e-109f2d88654e}</Project>
       <Name>EC.Business</Name>
