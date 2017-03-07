@@ -610,6 +610,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Authorization Code.
+        /// </summary>
+        public static string AuthCode {
+            get {
+                return ResourceManager.GetString("AuthCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Average # of days per stage.
         /// </summary>
         public static string AverageNumberDaysPerStage {

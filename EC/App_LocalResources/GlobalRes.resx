@@ -1714,4 +1714,7 @@
   <data name="YY" xml:space="preserve">
     <value>YY</value>
   </data>
+  <data name="AuthCode" xml:space="preserve">
+    <value>Authorization Code</value>
+  </data>
 </root>
