@@ -1,8 +1,72 @@
 ﻿
+@using System.Collections;
+@using EC.Models;
+@using EC.Models.Database;
+@using EC.App_LocalResources;
 @{
-    ViewBag.Title = "Receipt";
-    Layout = "Index";
-}
+    // @Styles.Render("~/Content/Styles");
+    <link rel="stylesheet" type="text/css" href="/Content/styleReportDashboard.css">
 
-<h2>Receipt</h2>
+    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+
+    company_payments cp = ViewBag.cp;
+
+    GlobalFunctions glb = new GlobalFunctions();
+    ViewBag.Title = GlobalRes.PaymentReceipt + " - " + cp.payment_date.Day + " " + glb.GetShortMonth(cp.payment_date.Month) + ", " + cp.payment_date.Year;
+    string name = "";
+    if(cp.user_id.HasValue)
+    { 
+        UserModel um = new UserModel(cp.user_id.Value);
+        name = um._user.first_nm + " " + um._user.last_nm;
+    }
+    <style>
+        .fullContainer {
+            max-width: none;
+        }
+    </style>
+}
+<div class="blockSettings contentCompanyProfile">
+    <div class="titleNewUser">
+        <h1 class="helloUser">@GlobalRes.Receipt:</h1>
+    </div>
+    <div class="contentSettings">
+        <div class="blockPersonalPhotoSetting">
+            <div class="blockPhotoSetting">
+            </div>
+        </div>
+        <div>
+
+            <div class="personalBlock">
+                <div class="blockPersonalSettings">
+                    <p class="title">@GlobalRes.Amount</p>
+                    @Html.TextBox("amount", cp.amount, new Dictionary<string, object>() { { "readonly", "true" } })
+                </div>
+                <div class="blockPersonalSettings">
+                    <p class="title">@GlobalRes.PaymentDate</p>
+                    @Html.TextBox("payment_date", cp.payment_date.Day + " " + glb.GetShortMonth(cp.payment_date.Month) + ", " + cp.payment_date.Year, new Dictionary<string, object>() { { "readonly", "true" } })
+                </div>
+                
+                @if (name.Length>0)
+                { 
+                    <div class="blockPersonalSettings">
+                        <p class="title">@GlobalRes.PaidBy</p>
+                        @Html.TextBox("name", name, new Dictionary<string, object>() { { "readonly", "true" } })
+                    </div>
+                }
+                <div class="blockPersonalSettings">
+                    <p class="title">@GlobalRes.CreditCardNumber</p>
+                    @Html.TextBox("payment_date", cp.cc_number, new Dictionary<string, object>() { { "readonly", "true" } })
+                </div>
+                <div class="blockPersonalSettings">
+                    <p class="title">@GlobalRes.AuthCode</p>
+                    @Html.TextBox("payment_date", cp.auth_code, new Dictionary<string, object>() { { "readonly", "true" } })
+                </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!--</form>-->
+</div>
 

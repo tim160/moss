@@ -3373,6 +3373,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Paid By.
+        /// </summary>
+        public static string PaidBy {
+            get {
+                return ResourceManager.GetString("PaidBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Parties involved.
         /// </summary>
         public static string PartiesInvolved {
@@ -3405,6 +3414,24 @@ namespace EC.App_LocalResources {
         public static string Pastnotificationtoteam {
             get {
                 return ResourceManager.GetString("Pastnotificationtoteam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payment Date.
+        /// </summary>
+        public static string PaymentDate {
+            get {
+                return ResourceManager.GetString("PaymentDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payment Receipt.
+        /// </summary>
+        public static string PaymentReceipt {
+            get {
+                return ResourceManager.GetString("PaymentReceipt", resourceCulture);
             }
         }
         
@@ -3522,6 +3549,15 @@ namespace EC.App_LocalResources {
         public static string ReassignMediatorTaskWarning {
             get {
                 return ResourceManager.GetString("ReassignMediatorTaskWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Receipt.
+        /// </summary>
+        public static string Receipt {
+            get {
+                return ResourceManager.GetString("Receipt", resourceCulture);
             }
         }
         

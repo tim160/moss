@@ -305,6 +305,35 @@ defaults: new
                  }
              );
 
+           routes.MapRoute(
+                name: "PaymentHistory",
+                url: "Payment/History",
+                defaults: new
+                {
+                    controller = "Payment",
+                    action = "History"
+                }
+            );
+           routes.MapRoute(
+                name: "PaymentIndex",
+                url: "Payment/Index",
+                defaults: new
+                {
+                    controller = "Payment",
+                    action = "History"
+                }
+            );
+            routes.MapRoute(
+                name: "PaymentReceipt",
+                url: "Payment/Receipt/{id}",
+                defaults: new
+                {
+                    controller = "Payment",
+                    action = "Receipt",
+                    id = UrlParameter.Optional
+                }
+            );
+
 
             routes.MapRoute(
                 name: "ReporterDashboard",
