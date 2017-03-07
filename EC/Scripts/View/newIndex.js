@@ -31,8 +31,8 @@
         //var rv_tel = /[0-9]{5,20}$/;
 
         valTB_rv(valEmail, rv_email);
-        valTB_rv(valFirst, rv_onlyText);
-        valTB_rv(valLast, rv_onlyText);
+        valTB(valFirst);
+        valTB(valLast);
         valTB(valTitle);
         valTB(valCode);
 
