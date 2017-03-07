@@ -58,7 +58,7 @@
 
     function clickCreate() {
         $('.updateProfileBtn input').click(function () {
-            validationForm();
+            //validationForm();
             $('html, body').animate({ scrollTop: 0 }, 500);
         });
     }
@@ -182,12 +182,14 @@
             url: temp,
             data: { code: code, emplquant: emplquant }
         }).done(function (data) {//data from server
-              if (data === 0) {
+            var amount = parseInt(data);
+            if (amount == 0) {
                   $("#PayByCard").hide();
                   $("#amount").val(0);
-              } else {
+            } else if (amount > 0) {
                   $("#amount").val(data);
                   $("#PayByCard").show();
+                  validationForm();
               }
         }).fail(function (error) {
             console.log(error);
