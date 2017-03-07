@@ -194,9 +194,9 @@
         });
     }
     $("#csv").on('keypress', function (event) {
-        if ($(event.currentTarget).val().length == 4) {
-            event.preventDefault();
-        }
+        //if ($(event.currentTarget).val().length == 4) {
+        //    event.preventDefault();
+        //}
         var key_code = event.keyCode;
         if ((key_code >= 48 && key_code <= 57) || (key_code >= 96 && key_code <= 105)) {
             return;
