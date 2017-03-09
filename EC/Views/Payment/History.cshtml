@@ -1,8 +1,59 @@
 ﻿
+
+
+@using System.Collections;
+@using EC.Models;
+@using EC.Models.Database;
+@using EC.App_LocalResources;
 @{
+    // @Styles.Render("~/Content/Styles");
+    <link rel="stylesheet" type="text/css" href="/Content/styleReportDashboard.css">
     ViewBag.Title = "Payment History";
-    Layout = "Index";
+    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+    string user_nm = ViewBag.user_nm;
+    List<company_payments> all_payments =  ViewBag.payments;
+    GlobalFunctions glb = new GlobalFunctions();
+    <style>
+        .fullContainer {
+            max-width: none;
+        }
+    </style>
 }
 
 <h2>History</h2>
 
+    @if (all_payments.Count > 0)
+    { 
+                <div class="contentSettings">
+                @foreach (company_payments _payment in all_payments)
+                {
+                    string name = "";
+                    if (_payment.user_id.HasValue)
+                    {
+                        UserModel um = new UserModel(_payment.user_id.Value);
+                        name = um._user.first_nm + " " + um._user.last_nm;
+                    }
+                    <div class="myMessages">
+                        <div class="headerMessages" style="border-left: 10px solid">
+                            <div class="topBlock">
+                                <p class="titleMessages">@_payment.auth_code</p>
+                            </div>
+                        </div>
+                        <div class="blockMessage withStaticBorder">
+                            <div class="textMessage">
+                                <p class="personalName">@name</p>
+                                <p class="text"><a href="/Payment/Receipt/@_payment.id">@_payment.amount</a></p>
+                            </div>
+                            <div class="blockDate">
+                                <p>@_payment.payment_date.Day  @glb.GetShortMonth(_payment.payment_date.Month) @_payment.payment_date.Year</p>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+                </div>
+    }
+    else
+    {
+        <h3>Your payments has not yet been done.</h3>
+    }

@@ -101,6 +101,20 @@ namespace EC.Controllers
             }
             ViewBag.logo = cm._company.path_en;
 
+
+            string auth = "";
+            decimal amount = 0;
+            if (Session["Auth"] != null)
+                auth = Session["Auth"].ToString();
+            if (Session["Amount"] != null)
+                amount = Convert.ToDecimal(Session["Amount"]);
+
+            ViewBag.auth = auth;
+            if (amount > 0)
+                ViewBag.amount = string.Format("{0:0.00}", amount);
+            else
+                ViewBag.amount = 0;
+
             return View();
         }
         public string CreateCompany(string code, string location, string company_name, string number, string first, string last, string email, string title, string description, string amount, string cardnumber, string cardname, string csv)
@@ -123,13 +137,11 @@ namespace EC.Controllers
                 return App_LocalResources.GlobalRes.EmailInvalid;
             }
 
-            int _amount = 0;
+            decimal _amount = 0;
             if (!string.IsNullOrEmpty(amount) && amount != "0")
             {
                 // amount more than 0 -> we have a registration
-                
-                int.TryParse(amount, out _amount);
-
+                decimal.TryParse(amount, out _amount);
             }
 
             if (_amount > 0)
@@ -140,6 +152,8 @@ namespace EC.Controllers
                 }
             }
             #region Credit Card
+            string auth_code = "";
+
             if (_amount > 0)
             {
                 /// amount, string cardnumber, string cardname, string csv
@@ -148,14 +162,14 @@ namespace EC.Controllers
 
                 // to do - move constants to AppSettingsConstants
                 BeanStreamProcessing bsp = new BeanStreamProcessing(ConfigurationManager.AppSettings["bs_merchant_id"]);
-                string error_message = "";
-                string auth_code = "";
+                string cc_error_message = "";
+
 
                 Dictionary<BeanStreamProcessing.RequestFieldNames, string> _dictionary = new Dictionary<BeanStreamProcessing.RequestFieldNames, string>();
-                bsp.ProcessRequest(_dictionary, out error_message, out auth_code);
-                if (error_message.Trim().Length > 0)
+                bsp.ProcessRequest(_dictionary, out cc_error_message, out auth_code);
+                if (cc_error_message.Trim().Length > 0)
                 {
-                    return error_message;
+                    return cc_error_message;
                 }
             }
 
@@ -452,7 +466,6 @@ namespace EC.Controllers
 
 
 
-
             string login = glb.GenerateLoginName(first, last);
             string pass = glb.GeneretedPassword();
 
@@ -538,7 +551,7 @@ namespace EC.Controllers
 
                 #endregion
 
-                return App_LocalResources.GlobalRes._Completed.ToLower();
+
             }
             else
                 return App_LocalResources.GlobalRes.UserSavingFailed;
@@ -546,6 +559,39 @@ namespace EC.Controllers
 
 
 
+            #region Saving CC_Payment
+            if (_amount > 0)
+            {
+                company_payments _cp = new company_payments();
+                _cp.amount = _amount;
+                _cp.auth_code = auth_code.Trim();
+                _cp.cc_csv = Convert.ToInt32(csv);
+
+                _cp.cc_month = Convert.ToInt32(1);
+                _cp.cc_year = Convert.ToInt32(2017);
+
+                _cp.cc_name = cardname.Trim();
+                _cp.cc_number = cardnumber.Trim();
+
+                _cp.company_id = company_id;
+                _cp.payment_date = DateTime.Today;
+                _cp.id = new Guid();
+                _cp.user_id = user_id;
+
+                try
+                {
+                    db.company_payments.Add(_cp);
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    logger.Error(ex.ToString());
+                }
+            }
+            #endregion
+            Session["Auth"] = auth_code;
+            Session["Amount"] = _amount;
+            return App_LocalResources.GlobalRes._Completed.ToLower();
 
             //  return user_id.ToString();
 

@@ -1642,4 +1642,19 @@
   <data name="YY" xml:space="preserve">
     <value>YY</value>
   </data>
+  <data name="AuthCode" xml:space="preserve">
+    <value>Authorization Code</value>
+  </data>
+  <data name="PaymentReceipt" xml:space="preserve">
+    <value>Payment Receipt</value>
+  </data>
+  <data name="Receipt" xml:space="preserve">
+    <value>Receipt</value>
+  </data>
+  <data name="PaidBy" xml:space="preserve">
+    <value>Paid By</value>
+  </data>
+  <data name="PaymentDate" xml:space="preserve">
+    <value>Payment Date</value>
+  </data>
 </root>

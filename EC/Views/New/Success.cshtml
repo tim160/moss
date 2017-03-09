@@ -12,6 +12,9 @@
     string logo = ViewBag.logo;
     string code = ViewBag.code;
     string redirect_string = GlobalRes.ToDashboardUp.ToLower();
+    string auth_code = ViewBag.authCode;
+    int amount = ViewBag.amount;
+    
     if (code.Length > 0)
     {
         redirect_string = GlobalRes.Continue.ToLower();
@@ -63,6 +66,20 @@
                     <p class="title">@GlobalRes.Password</p>
                     @Html.TextBox("password", password, new Dictionary<string, object>() { { "readonly", "true" } })
                 </div>
+                @if(auth_code != "")
+                { 
+                    <div class="blockPersonalSettings">
+                        <p class="title">@GlobalRes.AuthCode</p>
+                        @Html.TextBox("auth_code", auth_code, new Dictionary<string, object>() { { "readonly", "true" } })
+                    </div>
+                }
+                @if (amount > 0)
+                {
+                    <div class="blockPersonalSettings">
+                        <p class="title">@GlobalRes.Amount</p>
+                        @Html.TextBox("amount", amount, new Dictionary<string, object>() { { "readonly", "true" } })
+                    </div>
+                }
                 <div class="blockUpdateProfile">
                     <div class="updateProfileBtn">
                         <input type="submit" value="@redirect_string" />
