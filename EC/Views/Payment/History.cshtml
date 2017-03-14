@@ -13,6 +13,26 @@
     string user_nm = ViewBag.user_nm;
     List<company_payments> all_payments =  ViewBag.payments;
     GlobalFunctions glb = new GlobalFunctions();
+    CompanyModel cm = ViewBag.cm;
+    
+    int next_payment = 0;
+    DateTime dt_next_payment = DateTime.Today;
+    
+    if (cm._company.next_payment_date.HasValue && cm._company.next_payment_amount.HasValue)
+    { 
+        DateTime dt = cm._company.next_payment_date.Value;
+        if (dt < DateTime.Today.AddMonths(1))
+        {
+            dt_next_payment = cm._company.next_payment_date.Value;
+            next_payment = 1;
+        }
+        if(dt < DateTime.Today)
+        {
+            dt_next_payment = cm._company.next_payment_date.Value;
+            next_payment = 2;
+        }
+    }
+    
     <style>
         .fullContainer {
             max-width: none;
@@ -20,7 +40,7 @@
     </style>
 }
 
-<h2>History</h2>
+<h2>@GlobalRes.History</h2>
 
     @if (all_payments.Count > 0)
     { 
@@ -55,5 +75,38 @@
     }
     else
     {
-        <h3>Your payments has not yet been done.</h3>
+        <h3>@GlobalRes.NoPaymentsYet</h3>
     }
+        @if (next_payment == 1)
+        {
+            <h4>@GlobalRes.UpcomingPaymentNotice</h4>
+        }
+        @if (next_payment == 2)
+        { 
+            <h4>Payment Due Reminder</h4>
+        }
+
+        @if (next_payment == 1 || next_payment == 2)
+        {
+            <div>@GlobalRes.Date: </div> @dt_next_payment.Day  @glb.GetShortMonth(dt_next_payment.Month) @dt_next_payment.Year
+            <div>@GlobalRes.Amount: </div> @cm._company.next_payment_date.Value
+            <div class="blockUpdateProfile">
+                <div class="updateProfileBtn">
+                    <input type="submit" value="gotopayment" />
+                    <span style="display: none;">@GlobalRes.MakePayment</span>
+                </div>
+            </div>
+        }
+        
+<script>
+    $(document).ready(function () {
+
+        function clickCreate() {
+            $('.updateProfileBtn input').click(function () {
+                // redirect to Payment/View
+                
+            });
+        };
+    }
+    );
+        </script>

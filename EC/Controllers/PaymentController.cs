@@ -19,10 +19,12 @@ namespace EC.Controllers
                 return RedirectToAction("Index", "Start");
 
             UserModel um = new UserModel(user.id);
+            CompanyModel cm = new CompanyModel(um._user.company_id);
 
             List<company_payments> all_payments = db.company_payments.Where(t => t.company_id == um._user.company_id).ToList();
             ViewBag.payments = all_payments;
             ViewBag.user_id = user.id;
+            ViewBag.cm = cm;
             return View();
         }
 
@@ -62,6 +64,34 @@ namespace EC.Controllers
             company_payments cp = all_payments[0];
 
             ViewBag.cp = cp;
+            return View();
+        }
+
+        public ActionResult View()
+        {
+            // to make payment
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            if (user == null || user.id == 0)
+                return RedirectToAction("Index", "Start");
+
+            UserModel um = new UserModel(user.id);
+            CompanyModel cm = new CompanyModel(um._user.company_id);
+
+            decimal _amount = 0;
+
+            if (cm._company.next_payment_date.HasValue && cm._company.next_payment_amount.HasValue)
+            {
+                DateTime dt = cm._company.next_payment_date.Value;
+                if (dt < DateTime.Today.AddMonths(1) || dt < DateTime.Today)
+                {
+                    _amount = cm._company.next_payment_amount.Value;
+                }
+            }
+
+            ViewBag.user_id = user.id;
+            ViewBag.cm = cm;
+            ViewBag.amount = _amount;
+
             return View();
         }
     }

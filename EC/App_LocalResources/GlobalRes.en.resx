@@ -1657,4 +1657,19 @@
   <data name="PaymentDate" xml:space="preserve">
     <value>Payment Date</value>
   </data>
+  <data name="History" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="MakePayment" xml:space="preserve">
+    <value>Make Payment</value>
+  </data>
+  <data name="NoPaymentsYet" xml:space="preserve">
+    <value>Your payments has not yet been done.</value>
+  </data>
+  <data name="PaymentDueReminder" xml:space="preserve">
+    <value>Payment Due Reminder</value>
+  </data>
+  <data name="UpcomingPaymentNotice" xml:space="preserve">
+    <value>Upcoming Payment Notice</value>
+  </data>
 </root>

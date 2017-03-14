@@ -2302,6 +2302,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to History.
+        /// </summary>
+        public static string History {
+            get {
+                return ResourceManager.GetString("History", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to If not reported via Employee Confidential please provide case description.
         /// </summary>
         public static string IfNotReportedViaEmployeeConfidentialPleaseProvideCaseDescription {
@@ -2806,6 +2815,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Make Payment.
+        /// </summary>
+        public static string MakePayment {
+            get {
+                return ResourceManager.GetString("MakePayment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The management does not know about the incident.
         /// </summary>
         public static string ManagamentIncidentParties {
@@ -3238,6 +3256,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your payments has not yet been done..
+        /// </summary>
+        public static string NoPaymentsYet {
+            get {
+                return ResourceManager.GetString("NoPaymentsYet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notification will be sent to reporter..
         /// </summary>
         public static string Notification_will_sent_reporter {
@@ -3423,6 +3450,15 @@ namespace EC.App_LocalResources {
         public static string PaymentDate {
             get {
                 return ResourceManager.GetString("PaymentDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payment Due Reminder.
+        /// </summary>
+        public static string PaymentDueReminder {
+            get {
+                return ResourceManager.GetString("PaymentDueReminder", resourceCulture);
             }
         }
         
@@ -4602,6 +4638,15 @@ namespace EC.App_LocalResources {
         public static string unknown_secondary_type {
             get {
                 return ResourceManager.GetString("unknown_secondary_type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upcoming Payment Notice.
+        /// </summary>
+        public static string UpcomingPaymentNotice {
+            get {
+                return ResourceManager.GetString("UpcomingPaymentNotice", resourceCulture);
             }
         }
         

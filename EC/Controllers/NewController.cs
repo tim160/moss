@@ -258,6 +258,11 @@ namespace EC.Controllers
                 _url = "stark";
             _company.subdomain = _url;
             ////// _company.reseller = client_id;
+            if (_amount > 0)
+            {
+                _company.next_payment_amount = _amount;
+                _company.next_payment_date = DateTime.Today.AddYears(1);
+            }
 
             try
             {

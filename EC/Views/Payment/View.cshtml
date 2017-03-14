@@ -1,8 +1,90 @@
-﻿
+﻿@using System.Collections;
+@using EC.Models;
+@using EC.Models.Database;
+@using EC.App_LocalResources;
 @{
-    ViewBag.Title = "View";
-    Layout = "Index";
+    // @Styles.Render("~/Content/Styles");
+    <link rel="stylesheet" type="text/css" href="/Content/styleReportDashboard.css">
+    ViewBag.Title = "Make Payment";
+    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+    string user_nm = ViewBag.user_nm;
+
+    GlobalFunctions glb = new GlobalFunctions();
+    CompanyModel cm = ViewBag.cm;
+    Decimal _amount = ViewBag.amount;
+
+    <style>
+        .fullContainer {
+            max-width: none;
+        }
+    </style>
 }
 
-<h2>View</h2>
+<div class="blockSettings contentCompanyProfile">
+    <div class="contentSettings">
+        <p class="helloUser" id="hello">@GlobalRes.FillTheFollowingFields.</p>
 
+
+        <div id="PayByCard">
+            <div class="blockPersonalSettings">
+                <p class="title">@GlobalRes.Amount</p>
+                <input type="text" id="amount" value=@_amount />
+            </div>
+
+            <div class="blockPersonalSettings">
+                <p class="title">@GlobalRes.CreditCardNumber</p>
+                <input type="text" id="cardnumber" />
+            </div>
+            <div class="blockPersonalSettings">
+                <p class="title">@GlobalRes.NameonCard</p>
+                <input type="text" id="cardname" />
+            </div>
+
+
+            <div class="blockPersonalSettings">
+                <p class="title">@GlobalRes.ExpiryDate</p>
+                <div class="positioncreditCardSelect">
+                    <select class="creditCardSelect">
+                        <option selected="selected" disabled>mm</option>
+                        <option>01</option>
+                        <option>02</option>
+                        <option>03</option>
+                        <option>04</option>
+                        <option>05</option>
+                        <option>06</option>
+                        <option>07</option>
+                        <option>08</option>
+                        <option>09</option>
+                        <option>10</option>
+                        <option>11</option>
+                        <option>12</option>
+                    </select>
+                    <select class="creditCardSelect">
+                        <option selected="selected" disabled>yyyy</option>
+                        @{
+                            for (int i = DateTime.Today.Year; i <= 2030; i++)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="blockPersonalSettings">
+                <p class="title">@GlobalRes.CSVCode</p>
+                <input type="number" id="csv" max="3" maxlength="3" />
+            </div>
+        </div>
+
+        <div class="blockUpdateProfile">
+            <div class="updateProfileBtn">
+                <input type="submit" value="create" />
+                <span style="display: none;">@GlobalRes.CreateProfileUp.ToLower()</span>
+            </div>
+        </div>
+
+
+
+    </div>
+    <!--</form>-->
+</div>
