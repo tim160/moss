@@ -189,7 +189,11 @@
             } else if (amount > 0) {
                   $("#amount").val(data);
                   $("#PayByCard").show();
-                  validationForm();
+                //validationForm();
+                  $('.updateProfileBtn input').click(function () {
+                      validationForm();
+                      //$('html, body').animate({ scrollTop: 0 }, 500);
+                  });
               }
         }).fail(function (error) {
             console.log(error);
