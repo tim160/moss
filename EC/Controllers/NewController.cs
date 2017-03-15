@@ -117,13 +117,14 @@ namespace EC.Controllers
 
             return View();
         }
-        public string CreateCompany(string code, string location, string company_name, string number, string first, string last, string email, string title, string description, string amount, string cardnumber, string cardname, string csv)
+        public string CreateCompany(string code, string location, string company_name, string number, string first, string last, string email, string title, string description, string amount, string cardnumber, string cardname, string csv, string selectedMonth, string selectedYear)
         {
             int company_id = 0;
             int user_id = 0;
             int location_id = 0;
             int language_id = 1;
 
+            
             if ((string.IsNullOrEmpty(code)) || (string.IsNullOrEmpty(location)) || (string.IsNullOrEmpty(company_name)) || (string.IsNullOrEmpty(number)) || (string.IsNullOrEmpty(first)) || (string.IsNullOrEmpty(last)) || (string.IsNullOrEmpty(email)) || (string.IsNullOrEmpty(title)))
             {
                 return App_LocalResources.GlobalRes.EmptyData;
@@ -140,13 +141,13 @@ namespace EC.Controllers
             decimal _amount = 0;
             if (!string.IsNullOrEmpty(amount) && amount != "0")
             {
-                // amount more than 0 -> we have a registration
+                // amount more than 0 -> we have a registration with money involved
                 decimal.TryParse(amount, out _amount);
             }
 
             if (_amount > 0)
             {
-                if ((string.IsNullOrEmpty(cardnumber)) || (string.IsNullOrEmpty(cardname)) || (string.IsNullOrEmpty(csv)))
+                if ((string.IsNullOrEmpty(cardnumber)) || (string.IsNullOrEmpty(cardname)) || (string.IsNullOrEmpty(csv)) || (string.IsNullOrEmpty(selectedMonth)) || (string.IsNullOrEmpty(selectedYear)))
                 {
                     return App_LocalResources.GlobalRes.EmptyData;
                 }
@@ -164,6 +165,16 @@ namespace EC.Controllers
                 BeanStreamProcessing bsp = new BeanStreamProcessing(ConfigurationManager.AppSettings["bs_merchant_id"]);
                 string cc_error_message = "";
 
+                int _month = 0;
+                int _year = 0;
+                if (selectedMonth.StartsWith("0"))
+                    selectedMonth = selectedMonth[1].ToString();
+
+                int.TryParse(selectedMonth, out _month);
+                int.TryParse(selectedYear, out _year);
+
+                if(_month == 0 || _year == 0)
+                    return App_LocalResources.GlobalRes.EmptyData;
 
                 Dictionary<BeanStreamProcessing.RequestFieldNames, string> _dictionary = new Dictionary<BeanStreamProcessing.RequestFieldNames, string>();
                 bsp.ProcessRequest(_dictionary, out cc_error_message, out auth_code);
