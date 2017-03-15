@@ -24,7 +24,8 @@
             if (personInfo.hasClass('blockPersonalSettings')) {
                 personInfo.addClass('error');
             } else {
-                personInfo.parents('.blockPersonalSettings').addClass('error');
+                personInfo.addClass('error');
+                personInfo.parents('.blockPersonalSettings').css('border', '2px solid red');
             }
             
         }
@@ -131,9 +132,12 @@
             var in_use = companyInUse($("#company_name").val().trim());
         });
     }
-
+    $(".blockPersonalSettings select").on('change', function (event) {
+        var temp = $(event.currentTarget);
+        temp.parents('.blockPersonalSettings').css({ 'border': '1px solid #e0e5e6' });
+    });
     function editStyleInput() {
-        $('.blockPersonalSettings input')
+        $('.blockPersonalSettings input, .blockPersonalSettings select')
       .focus(function () {
           $(this).parent('.blockPersonalSettings').css({ 'border': '2px solid #05b5a2', 'width': '99.8%' });
       })
