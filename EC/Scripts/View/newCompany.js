@@ -12,13 +12,23 @@
     }
 
     function valTB(personInfo) {
-        if (personInfo.val().trim() == '') {
-            personInfo.addClass('error');
-            personInfo.parent().css('border', '2px solid red');
+        if (typeof personInfo.val() != 'undefined' && personInfo.val() != null) {
+            if (personInfo.val().trim() == '') {
+                personInfo.addClass('error');
+                personInfo.parent().css('border', '2px solid red');
+            }
+            else {
+                personInfo.removeClass('error');
+            }
+        } else {
+            if (personInfo.hasClass('blockPersonalSettings')) {
+                personInfo.addClass('error');
+            } else {
+                personInfo.parents('.blockPersonalSettings').addClass('error');
+            }
+            
         }
-        else {
-            personInfo.removeClass('error');
-        }
+
     }
 
     function validationForm() {
@@ -30,6 +40,12 @@
         var valLast = $("#last");
         var valEmail = $("#email");
         var valTitle = $("#title");
+
+        var csv = $("#csv");
+        var cardname = $("#cardname");
+        var cardnumber = $("#cardnumber");
+        var selectedMonth = $("#selectedMonth");
+        var selectedYear = $("#selectedYear");
 
         var rv_onlyText = /^[a-zA-Zа-яА-Я\. ]+$/;
         var rv_email = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/;
@@ -44,6 +60,12 @@
         valTB_rv(valEmail, rv_email);
         valTB(valTitle);
 
+        valTB(csv);
+        valTB(cardname);
+        valTB(cardnumber);
+        valTB(selectedMonth);
+        valTB(selectedYear);
+
         if (!valCode.hasClass('error') &&
             !valCompanyName.hasClass('error') &&
             !valLocation.hasClass('error') &&
@@ -51,6 +73,13 @@
             !valFirst.hasClass('error') &&
             !valLast.hasClass('error') &&
             !valEmail.hasClass('error') &&
+
+            !csv.hasClass('error') &&
+            !cardname.hasClass('error') &&
+            !cardnumber.hasClass('error') &&
+            !selectedMonth.hasClass('error') &&
+            !selectedYear.hasClass('error') &&
+
             !valTitle.hasClass('error') && ($("#company_exist").val().length > 0)) {
             createCompany();
         }
@@ -58,6 +87,7 @@
 
     function clickCreate() {
         $('.updateProfileBtn input').click(function () {
+            createCompany();
             //validationForm();
             $('html, body').animate({ scrollTop: 0 }, 500);
         });
@@ -125,7 +155,14 @@
                 last: $("#last").val().trim(),
                 email: $("#email").val().trim(),
                 title: $("#title").val().trim(),
-                description: $("#description").val().trim()
+                csv: $("#csv").val().trim(),
+                cardname: $("#cardname").val().trim(),
+                cardnumber: $("#cardnumber").val().trim(),
+                selectedMonth: $("#selectedMonth").val(),
+                selectedYear: $("#selectedYear").val(),
+                //description: $("#description").val().trim()
+                description: $("#description").text().trim(),
+
             }
         }).done(function (data) {//data from server
             if (data != 'completed') {
@@ -190,9 +227,10 @@
                   $("#amount").val(data);
                   $("#PayByCard").show();
                 //validationForm();
+                  $('.updateProfileBtn input').unbind();
                   $('.updateProfileBtn input').click(function () {
                       validationForm();
-                      //$('html, body').animate({ scrollTop: 0 }, 500);
+                      $('html, body').animate({ scrollTop: 0 }, 500);
                   });
               }
         }).fail(function (error) {

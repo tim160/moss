@@ -116,7 +116,7 @@
                     <div class="blockPersonalSettings">
                         <p class="title">@GlobalRes.ExpiryDate</p>
                         <div class="positioncreditCardSelect">
-                            <select class="creditCardSelect">
+                            <select class="creditCardSelect" id="selectedMonth">
                                 <option selected="selected" disabled>mm</option>
                                 <option>01</option>
                                 <option>02</option>
@@ -134,7 +134,7 @@
                             @*<input type="number" placeholder="mm" id="mm" min="1" pattern="\d*" max="2" maxlength="2"  numbers_only-01-12 mask="__" style="width:45%; float:left" />*@
                             /
                             @*<input type="number" placeholder="yy" id="yy" max="2" maxlength="2" style="width:50%;" mask="__" numbers_only17andmore />*@
-                            <select class="creditCardSelect">
+                            <select class="creditCardSelect"  id="selectedYear">
                                 <option selected="selected" disabled>yyyy</option>
                                 @{
                                     for (int i = DateTime.Today.Year; i <= 2030; i++)
