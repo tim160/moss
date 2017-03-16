@@ -67,7 +67,7 @@ namespace EC.Controllers
             return View();
         }
 
-        public ActionResult View()
+        public ActionResult NewPayment()
         {
             // to make payment
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];

@@ -618,7 +618,8 @@
     <Content Include="Views\Payment\History.cshtml" />
     <Content Include="Views\Payment\PrintReceipt.cshtml" />
     <Content Include="Views\Payment\Receipt.cshtml" />
-    <Content Include="Views\Payment\View.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Payment\NewPayment.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
