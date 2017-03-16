@@ -109,7 +109,7 @@ namespace EC.Controllers
             if (Session["Amount"] != null)
                 amount = Convert.ToDecimal(Session["Amount"]);
 
-            ViewBag.auth = auth;
+            ViewBag.authCode = auth;
             if (amount > 0)
                 ViewBag.amount = string.Format("{0:0.00}", amount);
             else
@@ -117,7 +117,7 @@ namespace EC.Controllers
 
             return View();
         }
-        public string CreateCompany(string code, string location, string company_name, string number, string first, string last, string email, string title, string description, string amount, string cardnumber, string cardname, string csv, string selectedMonth, string selectedYear)
+        public string CreateCompany(string code, string location, string company_name, string number, string first, string last, string email, string title, string departments, string amount, string cardnumber, string cardname, string csv, string selectedMonth, string selectedYear)
         {
             int company_id = 0;
             int user_id = 0;
@@ -137,6 +137,9 @@ namespace EC.Controllers
             {
                 return App_LocalResources.GlobalRes.EmailInvalid;
             }
+
+            if (!db.company_invitation.Any(t => ((t.is_active == 1) && (t.invitation_code.Trim().ToLower() == code.Trim().ToLower()))))
+                return App_LocalResources.GlobalRes.InvalidCode;
 
             decimal _amount = 0;
             if (!string.IsNullOrEmpty(amount) && amount != "0")
@@ -176,12 +179,14 @@ namespace EC.Controllers
                 if(_month == 0 || _year == 0)
                     return App_LocalResources.GlobalRes.EmptyData;
 
-                Dictionary<BeanStreamProcessing.RequestFieldNames, string> _dictionary = new Dictionary<BeanStreamProcessing.RequestFieldNames, string>();
+                var random = new Random();
+                auth_code = "INV_" + random.Next(1001, 9999).ToString(); 
+            /*    Dictionary<BeanStreamProcessing.RequestFieldNames, string> _dictionary = new Dictionary<BeanStreamProcessing.RequestFieldNames, string>();
                 bsp.ProcessRequest(_dictionary, out cc_error_message, out auth_code);
                 if (cc_error_message.Trim().Length > 0)
                 {
                     return cc_error_message;
-                }
+                }*/
             }
 
             #endregion
@@ -189,16 +194,13 @@ namespace EC.Controllers
             #region CompanySaving
             int company_invitation_id = 0;
             int client_id = 0;
-            if (!db.company_invitation.Any(t => ((t.is_active == 1) && (t.invitation_code.Trim().ToLower() == code.Trim().ToLower()))))
-                return App_LocalResources.GlobalRes.InvalidCode;
-            else
-            {
+
                 List<company_invitation> invitations = db.company_invitation.Where(t => ((t.is_active == 1) && (t.invitation_code.Trim().ToLower() == code.Trim().ToLower()))).ToList();
                 company_invitation _invitation = invitations[0];
                 company_invitation_id = _invitation.id;
                 client_id = _invitation.created_by_company_id;
 
-            }
+            
 
             string company_code = glb.GenerateCompanyCode(company_name);
 
@@ -502,7 +504,7 @@ namespace EC.Controllers
                 _user.preferred_contact_method_id = 1;
                 _user.title_ds = title.Trim();
                 _user.employee_no = "";
-                _user.notepad_tx = description.Trim();
+                _user.notepad_tx = departments.Trim();
                 _user.question_ds = "";
                 _user.answer_ds = "";
                 _user.previous_login_dt = DateTime.Now;
@@ -591,7 +593,7 @@ namespace EC.Controllers
 
                 _cp.company_id = company_id;
                 _cp.payment_date = DateTime.Today;
-                _cp.id = new Guid();
+                _cp.id = Guid.NewGuid();
                 _cp.user_id = user_id;
 
                 try

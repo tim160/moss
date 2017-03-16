@@ -13,8 +13,11 @@
     string code = ViewBag.code;
     string redirect_string = GlobalRes.ToDashboardUp.ToLower();
     string auth_code = ViewBag.authCode;
-    int amount = ViewBag.amount;
-    
+    decimal amount = 0;
+    if (ViewBag.amount != null && ViewBag.amount != "" && ViewBag.amount != "0")
+    {
+        decimal.TryParse(ViewBag.amount, out amount);
+    }
     if (code.Length > 0)
     {
         redirect_string = GlobalRes.Continue.ToLower();

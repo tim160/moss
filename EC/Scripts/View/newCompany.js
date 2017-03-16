@@ -153,6 +153,7 @@
             data: {
                 code: $("#code").val().trim(),
                 location: $("#location").val().trim(),
+                departments: $("#departments").val().trim(),
                 company_name: $("#company_name").val().trim(),
                 number: $("#number").val().trim(),
                 first: $("#first").val().trim(),
@@ -164,7 +165,7 @@
                 cardnumber: $("#cardnumber").val().trim(),
                 selectedMonth: $("#selectedMonth").val(),
                 selectedYear: $("#selectedYear").val(),
-                //description: $("#description").val().trim()
+                amount: $("#amount").val().trim(),
                 description: $("#description").text().trim(),
 
             }
