@@ -1744,4 +1744,7 @@
   <data name="UpcomingPaymentNotice" xml:space="preserve">
     <value>Upcoming Payment Notice</value>
   </data>
+  <data name="newpayment" xml:space="preserve">
+    <value>New payment</value>
+  </data>
 </root>

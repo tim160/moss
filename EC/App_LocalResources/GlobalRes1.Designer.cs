@@ -3157,6 +3157,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New payment.
+        /// </summary>
+        public static string newpayment {
+            get {
+                return ResourceManager.GetString("newpayment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New report.
         /// </summary>
         public static string Newreport {

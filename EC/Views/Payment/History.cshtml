@@ -1,58 +1,61 @@
-﻿
-
-
-@using System.Collections;
-@using EC.Models;
+﻿@using EC.Models;
 @using EC.Models.Database;
 @using EC.App_LocalResources;
 @{
-    // @Styles.Render("~/Content/Styles");
+// @Styles.Render("~/Content/Styles");
     <link rel="stylesheet" type="text/css" href="/Content/styleReportDashboard.css">
     ViewBag.Title = "Payment History";
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
     string user_nm = ViewBag.user_nm;
-    List<company_payments> all_payments =  ViewBag.payments;
+    List<company_payments> all_payments = ViewBag.payments;
     GlobalFunctions glb = new GlobalFunctions();
     CompanyModel cm = ViewBag.cm;
-    
+
     int next_payment = 0;
     DateTime dt_next_payment = DateTime.Today;
-    
+
     if (cm._company.next_payment_date.HasValue && cm._company.next_payment_amount.HasValue)
-    { 
+    {
         DateTime dt = cm._company.next_payment_date.Value;
         if (dt < DateTime.Today.AddMonths(1))
         {
             dt_next_payment = cm._company.next_payment_date.Value;
             next_payment = 1;
         }
-        if(dt < DateTime.Today)
+        if (dt < DateTime.Today)
         {
             dt_next_payment = cm._company.next_payment_date.Value;
             next_payment = 2;
         }
     }
-    
-    <style>
+
+    @*<style>
         .fullContainer {
             max-width: none;
         }
-    </style>
+    </style>*@
 }
-
-<h2>@GlobalRes.History</h2>
+<div class="blockSettings blockAllTasks">
+    <div id="casesHeared">
+        <div id="menu">
+            <a class="caseesTab active casesMassage">
+                All history @if (all_payments.Count > 0)
+                {<span>@all_payments.Count</span>}
+            </a>
+        </div>
+    </div><!--casesHeared-->
 
     @if (all_payments.Count > 0)
-    { 
-                <div class="contentSettings">
-                @foreach (company_payments _payment in all_payments)
+    {
+        <div class="contentSettings">
+            @foreach (company_payments _payment in all_payments)
+            {
+                string name = "";
+                if (_payment.user_id.HasValue)
                 {
-                    string name = "";
-                    if (_payment.user_id.HasValue)
-                    {
-                        UserModel um = new UserModel(_payment.user_id.Value);
-                        name = um._user.first_nm + " " + um._user.last_nm;
-                    }
+                    UserModel um = new UserModel(_payment.user_id.Value);
+                    name = um._user.first_nm + " " + um._user.last_nm;
+                }
                     <div class="myMessages">
                         <div class="headerMessages" style="border-left: 10px solid">
                             <div class="topBlock">
@@ -60,7 +63,7 @@
                             </div>
                         </div>
                         <div class="blockMessage withStaticBorder">
-                            <div class="textMessage">
+                            <div class="textMessage" style="padding-left:5%">
                                 <p class="personalName">@name</p>
                                 <p class="text"><a href="/Payment/Receipt/@_payment.id">@_payment.amount</a></p>
                             </div>
@@ -70,43 +73,48 @@
                         </div>
                     </div>
 
-                }
+            }
+            <div class="blockUpdateProfile">
+                <div class="updateProfileBtn">
+                    <input class="greenButton" type="submit" value="@GlobalRes.MakePayment">
+                    <span style="display: none;">update profile</span>
                 </div>
+            </div>
+        </div>
+
     }
     else
     {
         <h3>@GlobalRes.NoPaymentsYet</h3>
     }
-        @if (next_payment == 1)
-        {
-            <h4>@GlobalRes.UpcomingPaymentNotice</h4>
-        }
-        @if (next_payment == 2)
-        { 
-            <h4>Payment Due Reminder</h4>
-        }
-
-        @if (next_payment == 1 || next_payment == 2)
-        {
-            <div>@GlobalRes.Date: </div> @dt_next_payment.Day  @glb.GetShortMonth(dt_next_payment.Month) @dt_next_payment.Year
-            <div>@GlobalRes.Amount: </div> @cm._company.next_payment_date.Value
-            <div class="blockUpdateProfile">
-                <div class="updateProfileBtn">
-                    <input type="submit" value="gotopayment" />
-                    <span style="display: none;">@GlobalRes.MakePayment</span>
-                </div>
-            </div>
-        }
-        
-<script>
-    $(document).ready(function () {
-
-        function clickCreate() {
-            $('.updateProfileBtn input').click(function () {
-                // redirect to Payment/NewPayment
-                
-            });
-        };
+    @if (next_payment == 1)
+    {
+        <h4>@GlobalRes.UpcomingPaymentNotice</h4>
     }
-    );
-        </script>
+    @if (next_payment == 2)
+    {
+        <h4>Payment Due Reminder</h4>
+    }
+
+    @if (next_payment == 1 || next_payment == 2)
+    {
+        <div>@GlobalRes.Date: </div> @dt_next_payment.Day  @glb.GetShortMonth(dt_next_payment.Month) @dt_next_payment.Year
+        <div>@GlobalRes.Amount: </div> @cm._company.next_payment_date.Value
+        <div class="blockUpdateProfile">
+            <div class="updateProfileBtn">
+                <input type="submit" value="gotopayment" />
+                <span style="display: none;">@GlobalRes.MakePayment</span>
+                
+            </div>
+        </div>
+        }
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('.greenButton').click(function () {
+                window.location = "NewPayment"
+            });
+        }
+        );
+    </script>

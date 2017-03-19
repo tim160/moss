@@ -278,6 +278,12 @@
                     hrefURL = "/messages/index";
                     page_subtitle = GlobalRes.Messages;
                 }
+
+                if (hrefURL.Contains("/payment"))
+                {
+                    hrefURL = "/Payment/History";
+                    page_subtitle = GlobalRes.History;
+                }
             }
             @*<a href="/cases/Index/@{if (String.IsNullOrEmpty(ViewBag.redirect)) { @ViewBag.redirect; }}">*@
             <a href=@hrefURL>
@@ -469,6 +475,21 @@
                 if (CurrentURL.Contains("messages/"))
                 {
                     _temp = GlobalRes.Allmessages;
+                    flag = true;
+                }
+                if (CurrentURL.Contains("payment/history"))
+                {
+                    _temp = GlobalRes.History;
+                    flag = true;
+                }
+                if (CurrentURL.Contains("payment/receipt"))
+                {
+                    _temp = GlobalRes.Receipt;
+                    flag = true;
+                }
+                if (CurrentURL.Contains("payment/newpayment"))
+                {
+                    _temp = GlobalRes.newpayment;
                     flag = true;
                 }
                 if (flag)
