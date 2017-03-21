@@ -3205,6 +3205,30 @@ public class GlobalFunctions
         return _first_short + _last_short;
     }
 
+    public string GenerateInvoiceNumber()
+    {
+
+        string _number = "INV_";
+        string _invoice_ext = "";
+
+        do
+        {
+            var random = new Random();
+            _invoice_ext = random.Next(10001, 99999).ToString();
+        }
+        while (isInvoiceInUse(_number + _invoice_ext));
+
+        return _number + _invoice_ext;
+    }
+
+    public bool isInvoiceInUse(string invoice)
+    {
+        if (db.company_payments.Any(t => t.auth_code.Trim().ToLower() == invoice.Trim().ToLower()))
+            return true;
+        else
+            return false;
+    }
+
     public string ReplaceForUI(string text)
     {
         string better_text = text.Trim();
@@ -3312,6 +3336,17 @@ public class GlobalFunctions
 
     }
 
-       
 
+    /// <summary>
+    /// 21.03
+    /// </summary>
+    /// <param name="dt"></param>
+    /// <returns></returns>
+    public string ConvertDecimalToStringAmount(decimal _amount)
+    {
+        string sAmount = String.Format("{0:C2}", Convert.ToInt32(_amount));
+        sAmount = sAmount.Replace("$", "");
+        return sAmount;
+
+    }
 }

@@ -12,7 +12,7 @@
     company_payments cp = ViewBag.cp;
 
     GlobalFunctions glb = new GlobalFunctions();
-    ViewBag.Title = GlobalRes.PaymentReceipt + " - " + cp.payment_date.Day + " " + glb.GetShortMonth(cp.payment_date.Month) + ", " + cp.payment_date.Year;
+    ViewBag.Title = GlobalRes.PaymentReceipt + " - " + glb.ConvertDateToLongMonthString(cp.payment_date);
     string name = "";
     if(cp.user_id.HasValue)
     { 
@@ -39,11 +39,11 @@
             <div class="personalBlock">
                 <div class="blockPersonalSettings">
                     <p class="title">@GlobalRes.Amount</p>
-                    @Html.TextBox("amount", cp.amount, new Dictionary<string, object>() { { "readonly", "true" } })
+                    @Html.TextBox("amount", glb.ConvertDecimalToStringAmount(cp.amount), new Dictionary<string, object>() { { "readonly", "true" } })
                 </div>
                 <div class="blockPersonalSettings">
                     <p class="title">@GlobalRes.PaymentDate</p>
-                    @Html.TextBox("payment_date", cp.payment_date.Day + " " + glb.GetShortMonth(cp.payment_date.Month) + ", " + cp.payment_date.Year, new Dictionary<string, object>() { { "readonly", "true" } })
+                    @Html.TextBox("payment_date", glb.ConvertDateToLongMonthString(cp.payment_date), new Dictionary<string, object>() { { "readonly", "true" } })
                 </div>
                 
                 @if (name.Length>0)

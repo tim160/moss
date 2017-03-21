@@ -157,7 +157,7 @@ namespace EC.Controllers
             }
             #region Credit Card
             string auth_code = "";
-
+            string payment_auth_code = "";
             if (_amount > 0)
             {
                 /// amount, string cardnumber, string cardname, string csv
@@ -180,7 +180,11 @@ namespace EC.Controllers
                     return App_LocalResources.GlobalRes.EmptyData;
 
                 var random = new Random();
-                auth_code = "INV_" + random.Next(1001, 9999).ToString(); 
+                payment_auth_code = glb.GenerateInvoiceNumber(); // "INV_" + random.Next(10001, 99999).ToString(); 
+
+
+
+                auth_code = payment_auth_code;
             /*    Dictionary<BeanStreamProcessing.RequestFieldNames, string> _dictionary = new Dictionary<BeanStreamProcessing.RequestFieldNames, string>();
                 bsp.ProcessRequest(_dictionary, out cc_error_message, out auth_code);
                 if (cc_error_message.Trim().Length > 0)
@@ -583,6 +587,7 @@ namespace EC.Controllers
                 company_payments _cp = new company_payments();
                 _cp.amount = _amount;
                 _cp.auth_code = auth_code.Trim();
+                _cp.local_invoice_number = payment_auth_code.Trim();
                 _cp.cc_csv = Convert.ToInt32(csv);
 
                 _cp.cc_month = Convert.ToInt32(1);
@@ -839,7 +844,7 @@ namespace EC.Controllers
             }
 
             JsonResult result_company = new JsonResult();
-            double amount = 0;
+            decimal amount = 0;
 
 
 
@@ -861,7 +866,7 @@ namespace EC.Controllers
 
             if (reseller_type == 1)
             {
-                double pepy = 0;
+                decimal pepy = 0;
                 if (empl_quant <= 500)
                     pepy = 20;
                 if (empl_quant > 500 && empl_quant < 1000)
@@ -869,13 +874,13 @@ namespace EC.Controllers
                 if (empl_quant > 1000 && empl_quant < 5000)
                     pepy = 4;
                 if (empl_quant > 5000 && empl_quant < 10000)
-                    pepy = 3.5;
+                    pepy = 3.50m;
                 if (empl_quant > 10000 && empl_quant < 25000)
-                    pepy = 2.5;
+                    pepy = 2.50m;
                 if (empl_quant > 25000 && empl_quant < 50000)
                     pepy = 2;
                 if (empl_quant > 50000 && empl_quant < 100000)
-                    pepy = 1.5;
+                    pepy = 1.50m;
                 if (empl_quant > 100000 && empl_quant < 200000)
                     pepy = 1;
                 if (empl_quant > 200000)
@@ -917,7 +922,7 @@ namespace EC.Controllers
                 amount = 1300;
             }
 
-            result_company.Data = amount;
+            result_company.Data = glb.ConvertDecimalToStringAmount(amount);
             return result_company;
 
         }

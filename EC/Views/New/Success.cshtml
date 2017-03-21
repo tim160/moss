@@ -5,6 +5,7 @@
 @{
     // @Styles.Render("~/Content/Styles");
     <link rel="stylesheet" type="text/css" href="/Content/styleReportDashboard.css">
+    GlobalFunctions glb = new GlobalFunctions();
     ViewBag.Title = "Registration Details";
     string user_nm = ViewBag.user_nm;
     string password = ViewBag.password;
@@ -80,7 +81,7 @@
                 {
                     <div class="blockPersonalSettings">
                         <p class="title">@GlobalRes.Amount</p>
-                        @Html.TextBox("amount", amount, new Dictionary<string, object>() { { "readonly", "true" } })
+                        @Html.TextBox("amount", glb.ConvertDecimalToStringAmount(amount), new Dictionary<string, object>() { { "readonly", "true" } })
                     </div>
                 }
                 <div class="blockUpdateProfile">
