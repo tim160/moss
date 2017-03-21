@@ -922,5 +922,22 @@ namespace EC.Controllers
 
         }
 
+        public ActionResult Quote(string code)
+        {
+            string _code = "";
+            if (!string.IsNullOrEmpty(code))
+                _code = code;
+
+            ViewBag.code = _code;
+            #region EC-CC Viewbag
+            bool is_cc = glb.IsCC(Request.Url.AbsoluteUri.ToLower());
+            ViewBag.is_cc = is_cc;
+            string cc_ext = "";
+            if (is_cc) cc_ext = "_cc";
+            ViewBag.cc_extension = cc_ext;
+            #endregion
+            return View();
+        }
+
     }
 }

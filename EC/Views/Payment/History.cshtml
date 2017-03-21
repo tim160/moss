@@ -39,7 +39,7 @@
     <div id="casesHeared">
         <div id="menu">
             <a class="caseesTab active casesMassage">
-                All history @if (all_payments.Count > 0)
+                @GlobalRes.PaymentsHistoryUp @if (all_payments.Count > 0)
                 {<span>@all_payments.Count</span>}
             </a>
         </div>
@@ -59,7 +59,7 @@
                     <div class="myMessages">
                         <div class="headerMessages" style="border-left: 10px solid">
                             <div class="topBlock">
-                                <p class="titleMessages">@_payment.auth_code</p>
+                                <p class="titleMessages">@_payment.auth_code - @GlobalRes.AnnualSubscriptionFeeUp</p>
                             </div>
                         </div>
                         <div class="blockMessage withStaticBorder">
@@ -77,7 +77,7 @@
             <div class="blockUpdateProfile">
                 <div class="updateProfileBtn">
                     <input class="greenButton" type="submit" value="@GlobalRes.MakePayment">
-                    <span style="display: none;">update profile</span>
+                    <span style="display: none;">@GlobalRes.MakePayment</span>
                 </div>
             </div>
         </div>

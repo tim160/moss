@@ -1672,4 +1672,25 @@
   <data name="UpcomingPaymentNotice" xml:space="preserve">
     <value>Upcoming Payment Notice</value>
   </data>
+  <data name="AnnualSubscriptionFeeUp" xml:space="preserve">
+    <value>Annual Subscription Fee</value>
+  </data>
+  <data name="GetQuoteMessage" xml:space="preserve">
+    <value>Fill in the following fields and click "Get Quote" to get your free quote.</value>
+  </data>
+  <data name="MakePamentNotice" xml:space="preserve">
+    <value>MakePamentNotice	Fill in the following fields and click "Make Payment" to renew subscription.</value>
+  </data>
+  <data name="NewQuoteUp" xml:space="preserve">
+    <value>New Quote</value>
+  </data>
+  <data name="PaymentsHistoryUp" xml:space="preserve">
+    <value>Payments History</value>
+  </data>
+  <data name="RequestQuoteUp" xml:space="preserve">
+    <value>Request Quote</value>
+  </data>
+  <data name="Subscription" xml:space="preserve">
+    <value>Subscription</value>
+  </data>
 </root>
