@@ -1768,4 +1768,88 @@
   <data name="Subscription" xml:space="preserve">
     <value>Subscription</value>
   </data>
+  <data name="AvailableFormat" xml:space="preserve">
+    <value>Available format</value>
+  </data>
+  <data name="AvailableFormat_1" xml:space="preserve">
+    <value>Poster</value>
+  </data>
+  <data name="AvailableFormat_2" xml:space="preserve">
+    <value>Wallet-size card</value>
+  </data>
+  <data name="AvailableFormat_3" xml:space="preserve">
+    <value>Digital assets</value>
+  </data>
+  <data name="AwarenessMaterials" xml:space="preserve">
+    <value>Awareness materialss</value>
+  </data>
+  <data name="BackToResults" xml:space="preserve">
+    <value>Back to results</value>
+  </data>
+  <data name="DownloadPosterPDF" xml:space="preserve">
+    <value>download {0} poster (pdf)</value>
+  </data>
+  <data name="EmployeeAwarenessMaterials" xml:space="preserve">
+    <value>Employee awareness materials</value>
+  </data>
+  <data name="format_1" xml:space="preserve">
+    <value>11" X 17"</value>
+  </data>
+  <data name="format_2" xml:space="preserve">
+    <value>16" X 20"</value>
+  </data>
+  <data name="format_3" xml:space="preserve">
+    <value>18" X 24"</value>
+  </data>
+  <data name="format_4" xml:space="preserve">
+    <value>22" X 28"</value>
+  </data>
+  <data name="Industry" xml:space="preserve">
+    <value>Industry</value>
+  </data>
+  <data name="Industry_1" xml:space="preserve">
+    <value>Aviation</value>
+  </data>
+  <data name="Industry_2" xml:space="preserve">
+    <value>E-commerce</value>
+  </data>
+  <data name="Industry_3" xml:space="preserve">
+    <value>Hospital And Food</value>
+  </data>
+  <data name="Industry_4" xml:space="preserve">
+    <value>Manufacturing</value>
+  </data>
+  <data name="Itemss" xml:space="preserve">
+    <value>{0} Item(s)</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Message_1" xml:space="preserve">
+    <value>Company culture</value>
+  </data>
+  <data name="Message_2" xml:space="preserve">
+    <value>Customer support</value>
+  </data>
+  <data name="Message_3" xml:space="preserve">
+    <value>Data security</value>
+  </data>
+  <data name="Nologo" xml:space="preserve">
+    <value>No logo</value>
+  </data>
+  <data name="Options" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="PaymentDueReminderUp" xml:space="preserve">
+    <value>Payment Due Reminder</value>
+  </data>
+  <data name="Poster" xml:space="preserve">
+    <value>Poster</value>
+  </data>
+  <data name="Usecurrentlogo" xml:space="preserve">
+    <value>Use current logo</value>
+  </data>
+  <data name="yyyy" xml:space="preserve">
+    <value>yyyy</value>
+  </data>
 </root>

@@ -45,7 +45,7 @@
                 <p class="title">@GlobalRes.ExpiryDate</p>
                 <div class="positioncreditCardSelect">
                     <select class="creditCardSelect">
-                        <option selected="selected" disabled>mm</option>
+                        <option selected="selected" disabled>@GlobalRes.MM.ToLower()</option>
                         <option>01</option>
                         <option>02</option>
                         <option>03</option>
@@ -60,7 +60,7 @@
                         <option>12</option>
                     </select>
                     <select class="creditCardSelect">
-                        <option selected="selected" disabled>yyyy</option>
+                        <option selected="selected" disabled>@GlobalRes.yyyy</option>
                         @{
                             for (int i = DateTime.Today.Year; i <= 2030; i++)
                             {
