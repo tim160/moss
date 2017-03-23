@@ -594,7 +594,7 @@ namespace EC.Controllers
                 _cp.cc_year = Convert.ToInt32(2017);
 
                 _cp.cc_name = cardname.Trim();
-                _cp.cc_number = cardnumber.Trim();
+                _cp.cc_number = glb.ConvertCCInfoToLast4DigitsInfo(cardnumber.Trim());
 
                 _cp.company_id = company_id;
                 _cp.payment_date = DateTime.Today;

@@ -30,6 +30,7 @@ namespace EC.Controllers
 
             Session.Clear();
             GlobalFunctions glb = new GlobalFunctions();
+            
             if (glb.IsSubdomain(Request.Url.AbsoluteUri.ToLower()))
             {
                 if (loginField != null && loginField.Length > 0)
@@ -43,7 +44,9 @@ namespace EC.Controllers
                         //   return RedirectToAction("Index", "ReporterDashboard");
                         return Redirect("~/ReporterDashboard");
                     }
-                    return Redirect("~/Cases");
+                    return Redirect("~/EmployeeAwareness/Index");
+                 //   return Redirect("~/Payment/NewPayment");
+
                     //  return RedirectToAction("Index", "Cases");
 
 
@@ -171,7 +174,9 @@ namespace EC.Controllers
                         //   return RedirectToAction("Index", "ReporterDashboard");
                         return "ReporterDashboard";
                     }
-                    return "Cases";
+                 ////   return "Cases";
+                    return "Payment/History";
+
                     //  return RedirectToAction("Index", "Cases");
 
 

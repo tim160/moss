@@ -3349,4 +3349,19 @@ public class GlobalFunctions
         return sAmount;
 
     }
+
+    public string ConvertCCInfoToLast4DigitsInfo(string cc_number)
+    {
+        string saved_cc_number = "";
+        for (int i = 0; i < cc_number.Length; i++ )
+        {
+            if (i + 4 < cc_number.Length)
+                saved_cc_number = saved_cc_number + "X";
+            else
+                saved_cc_number = saved_cc_number + cc_number[i];
+        
+        }
+        return saved_cc_number.ToString();
+    
+    }
 }
