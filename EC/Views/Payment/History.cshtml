@@ -76,25 +76,44 @@
             }
             @if (next_payment == 1)
             {
+                <br />
+                <br />
+                <br />
                 <h4>@GlobalRes.UpcomingPaymentNotice</h4>
             }
-            @if (next_payment == 2)
-            {
-                <h4>@GlobalRes.PaymentDueReminderUp</h4>
-            }
-
-            @if (next_payment == 1 || next_payment == 2)
-            {
-                <div>@GlobalRes.Date: </div> @dt_next_payment.Day @glb.GetShortMonth(dt_next_payment.Month) @dt_next_payment.Year
-                <div>@GlobalRes.Amount: </div> @glb.ConvertDecimalToStringAmount(cm._company.next_payment_amount.Value)
-                <div class="blockUpdateProfile">
-                    <div class="updateProfileBtn">
-                        <input class="greenButton" type="submit" value="@GlobalRes.MakePayment">
-                        <span style="display: none;">@GlobalRes.MakePayment</span>
-
+            <div class="myMessages">
+                @if (next_payment == 2)
+                {
+                    <div class="headerMessages" style="border-left: 10px solid">
+                        <div class="topBlock">
+                            <p class="titleMessages">@GlobalRes.PaymentDueReminderUp</p>
+                        </div>
                     </div>
+                }
+
+                @if (next_payment == 1 || next_payment == 2)
+                {
+
+
+                    <div class="blockMessage withStaticBorder">
+                        <div class="textMessage" style="padding-left:5%">
+                            <p class="personalName">@GlobalRes.Amount:</p>
+                            <p class="text">@glb.ConvertDecimalToStringAmount(cm._company.next_payment_amount.Value)</p>
+                        </div>
+                        <div class="blockDate">
+                            <p><div>@GlobalRes.Date: </div> @dt_next_payment.Day @glb.GetShortMonth(dt_next_payment.Month) @dt_next_payment.Year</p>
+                        </div>
+                    </div>
+
+                }
+            </div>
+            <div class="blockUpdateProfile">
+                <div class="updateProfileBtn">
+                    <input class="greenButton" type="submit" value="@GlobalRes.MakePayment">
+                    <span style="display: none;">@GlobalRes.MakePayment</span>
+
                 </div>
-            }
+            </div>
         </div>
 
     }
