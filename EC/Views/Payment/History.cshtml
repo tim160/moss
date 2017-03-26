@@ -98,7 +98,8 @@
                     <div class="blockMessage withStaticBorder">
                         <div class="textMessage" style="padding-left:5%">
                             <p class="personalName">@GlobalRes.Amount:</p>
-                            <p class="text">@glb.ConvertDecimalToStringAmount(cm._company.next_payment_amount.Value)</p>
+                            <p class="text"><a href="">@glb.ConvertDecimalToStringAmount(cm._company.next_payment_amount.Value)</a></p>
+                            @*<p class="text"><a href="/Payment/Receipt/@_payment.id">@glb.ConvertDecimalToStringAmount(_payment.amount)</a></p>*@
                         </div>
                         <div class="blockDate">
                             <p><div>@GlobalRes.Date: </div> @dt_next_payment.Day @glb.GetShortMonth(dt_next_payment.Month) @dt_next_payment.Year</p>

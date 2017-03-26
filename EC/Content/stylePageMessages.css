@@ -103,7 +103,7 @@
 
 /*for href /messages/Index*/
 .myMessages .textMessage p.text a {
-    text-decoration: none;
+    /*text-decoration: none;*/
     color: #3c3e3f;
 }
 .myMessages.oldMessage .textMessage p.text a {
