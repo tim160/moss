@@ -181,7 +181,6 @@
                     url: "/Report/getAjaxCountry",
                 }
                 ).done(function (data) {//data from server
-                    alert("Hello World!!!");
                 }).fail(function (error) {
                     console.log(error);
                 });
@@ -685,7 +684,6 @@
                 }
             });
             $(personNameNum).on('change', function () {
-                alert("Hello World!!!");
             });
 
             addPersonContainer.append(buff);
