@@ -282,7 +282,7 @@
                 if (hrefURL.Contains("/payment"))
                 {
                     hrefURL = "/Payment/History";
-                    page_subtitle = GlobalRes.History;
+                    page_subtitle = GlobalRes.Payment;
                 }
             }
             @*<a href="/cases/Index/@{if (String.IsNullOrEmpty(ViewBag.redirect)) { @ViewBag.redirect; }}">*@
@@ -477,7 +477,7 @@
                     _temp = GlobalRes.Allmessages;
                     flag = true;
                 }
-                if (CurrentURL.Contains("payment/history"))
+                if (CurrentURL.Contains("payment/history") || CurrentURL.Contains("payment"))
                 {
                     _temp = GlobalRes.History;
                     flag = true;

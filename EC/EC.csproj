@@ -494,6 +494,7 @@
     <Content Include="Scripts\View\menuWork.js" />
     <Content Include="Scripts\View\newCompany.js" />
     <Content Include="Scripts\View\newIndex.js" />
+    <Content Include="Scripts\View\newPayment.js" />
     <Content Include="Scripts\View\report.js" />
     <Content Include="Scripts\View\reportSummary.js" />
     <Content Include="Scripts\View\Settings.js" />

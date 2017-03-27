@@ -39,7 +39,7 @@
     <div id="casesHeared">
         <div id="menu">
             <a class="caseesTab active casesMassage">
-                @GlobalRes.PaymentsHistoryUp @if (all_payments.Count > 0)
+                @GlobalRes.Payments @if (all_payments.Count > 0)
                 {<span>@all_payments.Count</span>}
             </a>
         </div>
@@ -81,40 +81,42 @@
                 <br />
                 <h4>@GlobalRes.UpcomingPaymentNotice</h4>
             }
-            <div class="myMessages">
-                @if (next_payment == 2)
-                {
-                    <div class="headerMessages" style="border-left: 10px solid">
-                        <div class="topBlock">
-                            <p class="titleMessages">@GlobalRes.PaymentDueReminderUp</p>
-                        </div>
-                    </div>
-                }
+            @if (next_payment == 2)
+            {
+                <br />
+                <br />
+                <br />
+                <h4>@GlobalRes.PaymentDueReminderUp</h4>
+            }
 
                 @if (next_payment == 1 || next_payment == 2)
                 {
+                      <div class="myMessages">
+
+         
 
 
                     <div class="blockMessage withStaticBorder">
                         <div class="textMessage" style="padding-left:5%">
                             <p class="personalName">@GlobalRes.Amount:</p>
-                            <p class="text"><a href="">@glb.ConvertDecimalToStringAmount(cm._company.next_payment_amount.Value)</a></p>
+                            <p class="text">@glb.ConvertDecimalToStringAmount(cm._company.next_payment_amount.Value)</p>
                             @*<p class="text"><a href="/Payment/Receipt/@_payment.id">@glb.ConvertDecimalToStringAmount(_payment.amount)</a></p>*@
                         </div>
                         <div class="blockDate">
-                            <p><div>@GlobalRes.Date: </div> @dt_next_payment.Day @glb.GetShortMonth(dt_next_payment.Month) @dt_next_payment.Year</p>
+                            <p> @dt_next_payment.Day @glb.GetShortMonth(dt_next_payment.Month) @dt_next_payment.Year</p>
                         </div>
                     </div>
 
-                }
+                
             </div>
-            <div class="blockUpdateProfile">
+                     <div class="blockUpdateProfile">
                 <div class="updateProfileBtn">
                     <input class="greenButton" type="submit" value="@GlobalRes.MakePayment">
                     <span style="display: none;">@GlobalRes.MakePayment</span>
 
                 </div>
             </div>
+                }
         </div>
 
     }

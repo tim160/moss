@@ -5,7 +5,7 @@
 @{
     // @Styles.Render("~/Content/Styles");
     <link rel="stylesheet" type="text/css" href="/Content/styleReportDashboard.css">
-    ViewBag.Title = "Make Payment";
+    ViewBag.Title = GlobalRes.newpayment;
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
     string user_nm = ViewBag.user_nm;
 
@@ -22,7 +22,7 @@
 
 <div class="blockSettings contentCompanyProfile">
     <div class="contentSettings">
-        <p class="helloUser" id="hello">@GlobalRes.MakePamentNotice.</p>
+        <p class="helloUser" id="hello">@GlobalRes.MakePamentNotice</p>
 
 
         <div id="PayByCard">
@@ -44,22 +44,22 @@
             <div class="blockPersonalSettings">
                 <p class="title">@GlobalRes.ExpiryDate</p>
                 <div class="positioncreditCardSelect">
-                    <select class="creditCardSelect">
+                    <select class="creditCardSelect" id="selectedMonth">
                         <option selected="selected" disabled>@GlobalRes.MM.ToLower()</option>
-                        <option>01</option>
-                        <option>02</option>
-                        <option>03</option>
-                        <option>04</option>
-                        <option>05</option>
-                        <option>06</option>
-                        <option>07</option>
-                        <option>08</option>
-                        <option>09</option>
-                        <option>10</option>
-                        <option>11</option>
-                        <option>12</option>
+                        <option value="1">01</option>
+                        <option value="2">02</option>
+                        <option value="3">03</option>
+                        <option value="4">04</option>
+                        <option value="5">05</option>
+                        <option value="6">06</option>
+                        <option value="7">07</option>
+                        <option value="8">08</option>
+                        <option value="9">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
                     </select>
-                    <select class="creditCardSelect">
+                    <select class="creditCardSelect" id="selectedYear">
                         <option selected="selected" disabled>@GlobalRes.yyyy</option>
                         @{
                             for (int i = DateTime.Today.Year; i <= 2030; i++)
@@ -72,13 +72,13 @@
             </div>
             <div class="blockPersonalSettings">
                 <p class="title">@GlobalRes.CSVCode</p>
-                <input type="number" id="csv" max="3" maxlength="3" />
+                <input type="number" id="csv"  />
             </div>
         </div>
 
         <div class="blockUpdateProfile">
             <div class="updateProfileBtn">
-                <input type="submit" value="create" />
+                <input type="submit" value=@GlobalRes.Submit />
                 <span style="display: none;">@GlobalRes.MakePayment.ToLower()</span>
             </div>
         </div>
@@ -88,3 +88,5 @@
     </div>
     <!--</form>-->
 </div>
+<script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/View/newPayment.js"></script>

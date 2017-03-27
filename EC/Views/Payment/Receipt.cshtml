@@ -12,7 +12,7 @@
     company_payments cp = ViewBag.cp;
 
     GlobalFunctions glb = new GlobalFunctions();
-    ViewBag.Title = GlobalRes.PaymentReceipt + " - " + glb.ConvertDateToLongMonthString(cp.payment_date);
+    ViewBag.Title = GlobalRes.Payment + " - " + glb.ConvertDateToLongMonthString(cp.payment_date);
     string name = "";
     if(cp.user_id.HasValue)
     { 
