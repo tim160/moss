@@ -55,7 +55,7 @@
 
                 @foreach (PosterItem pi in allPosters)
                 {
-                    <div class="blockInformation" href="/poster/@pi.Id">
+                    <div class="blockInformation" href="poster/@pi.Id">
                         <div class="filtersBlock @pi.imageName">
                             @foreach (PosterCategory pc in pi.posterCategoryNames)
                             {   
@@ -147,12 +147,21 @@
             let parents = el.parents(".blockInformation");
             if (parents.find('.checked').length == parents.find('.filter').length) {
                 parents.show();
+                setPosterLink(parents);
             } else {
                 parents.hide();
             }
         }
 
+        function setPosterLink(parents) {
+            if (parents != null) {
+                parents.on('click', function (event) {
+                    var temp = $(event.currentTarget);
+                    window.location.href = temp.attr('href');
+                });
+            }
 
+        }
         function setPosterValues(arrayValues) {
             $(".filter").each(function (indx, element) {
                 let temp = $(element).text().trim().toLowerCase();
