@@ -8,10 +8,6 @@
     ViewBag.Title = GlobalRes.NewQuoteUp;
     var _code = ViewBag.code;
 
-
-    UserModel um = new UserModel();
-    CompanyModel cm = new CompanyModel();
-    int company_id = 0;
     <style>
         .fullContainer {
             max-width: none;
@@ -21,7 +17,7 @@
 
 <div class="blockSettings contentCompanyProfile">
     <div class="titleNewUser">
-        <h1 class="helloUser">@GlobalRes.NewCompanyRegistration:</h1>
+        <h1 class="helloUser">@GlobalRes.NewQuoteUp:</h1>
     </div>
     <div class="contentSettings">
         <p class="helloUser" id="hello">@GlobalRes.GetQuoteMessage.</p>
@@ -62,12 +58,12 @@
                 </div>
                 <div class="blockPersonalSettings">
                     <p class="title">@GlobalRes.Title</p>
-                    <input type="text" id="title" />
+                    <input type="text" id="title"  />
                 </div>
-
+                <input type="text" id="amount" hidden="hidden" />
                 <div class="blockUpdateProfile">
                     <div class="updateProfileBtn">
-                        <input type="submit" value=@GlobalRes.Submit />
+                        <input type="submit" value=@GlobalRes.RequestQuoteUp />
                         <span style="display: none;">@GlobalRes.RequestQuoteUp.ToLower()</span>
                     </div>
                 </div>
@@ -81,4 +77,4 @@
 </div>
 
 <script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/View/newCompany.js"></script>
+<script src="~/Scripts/View/newQuote.js"></script>

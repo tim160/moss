@@ -61,8 +61,8 @@
 
     function clickCreate() {
         $('.updateProfileBtn input').click(function () {
-            makePayment();
-            //validationForm();
+           // makePayment();
+            validationForm();
             $('html, body').animate({ scrollTop: 0 }, 500);
         });
     }

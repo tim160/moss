@@ -5,22 +5,11 @@
 @{
     // @Styles.Render("~/Content/Styles");
     <link rel="stylesheet" type="text/css" href="/Content/styleReportDashboard.css">
-    ViewBag.Title = "Registration Details";
-    string user_nm = ViewBag.user_nm;
-    string password = ViewBag.password;
-    string company_nm = ViewBag.company_nm;
-    string logo = ViewBag.logo;
-    string code = ViewBag.code;
-    string redirect_string = GlobalRes.ToDashboardUp.ToLower();
-    string auth_code = ViewBag.authCode;
+    ViewBag.Title = "Quote details";
     decimal amount = 0;
     if (ViewBag.amount != null && ViewBag.amount != "" && ViewBag.amount != "0")
     {
         decimal.TryParse(ViewBag.amount, out amount);
-    }
-    if (code.Length > 0)
-    {
-        redirect_string = GlobalRes.Continue.ToLower();
     }
     <style>
         .fullContainer {
@@ -31,51 +20,18 @@
 
 <div class="blockSettings contentCompanyProfile">
     <div class="titleNewUser">
-        <h1 class="helloUser">@GlobalRes.YourRegistrationDetailsUp:</h1>
+        <h1 class="helloUser">@GlobalRes.NewQuoteUp:</h1>
     </div>
     <div class="contentSettings">
         <div class="blockPersonalPhotoSetting">
             <div class="blockPhotoSetting">
-                @if (logo.Length > 0)
-                {
-                    <img class="PersonalPhotoBlock" src='@Url.Content(logo)' />
-                }
-                else
-                {
                     <img class="PersonalPhotoBlock" src='@Url.Content("~/Content/img/logo.png")' />
-                }
             </div>
         </div>
         <div>
 
 
             <div class="personalBlock" id="registration">
-                <div class="blockPersonalSettings">
-                    <p class="title">@GlobalRes.Company</p>
-                    @Html.TextBox("company_nm", company_nm, new Dictionary<string, object>() { { "readonly", "true" } })
-                </div>
-                @if (code.Length > 0)
-                {
-                    <div class="blockPersonalSettings">
-                        <p class="title">@GlobalRes.EasyCodeUp</p>
-                        @Html.TextBox("code", code, new Dictionary<string, object>() { { "readonly", "true" } })
-                    </div>
-                }
-                <div class="blockPersonalSettings">
-                    <p class="title">@GlobalRes.LoginNameUp</p>
-                    @Html.TextBox("user_nm", user_nm, new Dictionary<string, object>() { { "readonly", "true" } })
-                </div>
-                <div class="blockPersonalSettings">
-                    <p class="title">@GlobalRes.Password</p>
-                    @Html.TextBox("password", password, new Dictionary<string, object>() { { "readonly", "true" } })
-                </div>
-                @if (auth_code != "")
-                {
-                    <div class="blockPersonalSettings">
-                        <p class="title">@GlobalRes.AuthCode</p>
-                        @Html.TextBox("auth_code", auth_code, new Dictionary<string, object>() { { "readonly", "true" } })
-                    </div>
-                }
                 @if (amount > 0)
                 {
                     <div class="blockPersonalSettings">
@@ -85,8 +41,8 @@
                 }
                 <div class="blockUpdateProfile">
                     <div class="updateProfileBtn">
-                        <input type="submit" value="@redirect_string" />
-                        <span style="display: none;">@redirect_string</span>
+                        <input type="submit" value="@GlobalRes.NewCompanyRegistration" />
+                        <span style="display: none;">@GlobalRes.NewCompanyRegistration</span>
                     </div>
                 </div>
             </div>
@@ -100,11 +56,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('.blockUpdateProfile, .updateProfileBtn span').click(function (event) {
-            if (event.currentTarget.textContent.trim() == "to dashboard") {
-                window.location.href = "/settings/index?first=1";
-            } else {
-                window.location.href = "/settings/company?first=1";
-            }
+                      window.location.href = "/new/company";
             //if ($("#code").length > 0) {
             //    window.location.href = "/cases";
             //} else {

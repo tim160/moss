@@ -944,5 +944,32 @@ namespace EC.Controllers
             return View();
         }
 
+        public ActionResult QuoteSuccess(string amount)
+        {
+            #region EC-CC Viewbag
+            bool is_cc = glb.IsCC(Request.Url.AbsoluteUri.ToLower());
+            ViewBag.is_cc = is_cc;
+            string cc_ext = "";
+            if (is_cc) cc_ext = "_cc";
+            ViewBag.cc_extension = cc_ext;
+            #endregion
+
+            decimal _amount = 0;
+            if ((amount != null) && (amount != ""))
+            {
+                try
+                {
+                    decimal.TryParse(amount, out _amount);
+                }
+                catch
+                {
+                    return RedirectToAction("Quote", "New");
+                }
+            }
+            ViewBag.amount = glb.ConvertDecimalToStringAmount(_amount);
+
+            return View();
+        }
+
     }
 }
