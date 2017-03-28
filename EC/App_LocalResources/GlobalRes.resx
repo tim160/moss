@@ -1751,7 +1751,7 @@
     <value>Annual Subscription Fee</value>
   </data>
   <data name="GetQuoteMessage" xml:space="preserve">
-    <value>Fill in the following fields and click "Get Quote" to get your free quote.</value>
+    <value>Fill in the following fields and click "Request" to get your free quote.</value>
   </data>
   <data name="MakePamentNotice" xml:space="preserve">
     <value>Fill in the following fields and click "Submit" to renew subscription.</value>
