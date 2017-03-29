@@ -1094,12 +1094,12 @@ h2.mainTitle {
     width: 100%;
     margin-bottom: 30px;
 }
-.contentCompanyProfile .blockLanguages,
+/*.contentCompanyProfile .blockLanguages,
 .contentCompanyProfile .blockIncidentTypes,
 .contentCompanyProfile .blockReporterTypes,
 .contentCompanyProfile .blockDepartments {
     display: none;
-}
+}*/
 .contentCompanyProfile .tableLanguage,
 .contentCompanyProfile .tableLocation,
 .contentCompanyProfile .tableIncidentType,
