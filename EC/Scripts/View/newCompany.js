@@ -217,11 +217,10 @@
 
 
     function CheckCode(code, emplquant) {
-        let temp = window.location.protocol + "/new/ReturnAmount";
         
         $.ajax({
             method: "POST",
-            url: temp,
+            url: "/new/ReturnAmount",
             data: { code: code, emplquant: emplquant }
         }).done(function (data) {//data from server
             var amount = parseInt(data);

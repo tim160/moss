@@ -44,13 +44,18 @@ namespace EC.Controllers
             if (all_active_report_ids.Count() < temp_report_count)
                 temp_report_count = all_active_report_ids.Count();
 
+            List<int> removedIDs = new List<int>();
             int temp_report_id;
             for (int i = 0; i < temp_report_count; i++)
             {
                 temp_report_id = all_active_report_ids[i];
                 temp_preview_case = new CasePreviewViewModel(temp_report_id, user.id);
                 preview_list.Add(temp_preview_case);
-                temp_all_active_report_ids.Remove(all_active_report_ids[i]);
+                removedIDs.Add(temp_report_id);
+            }
+            for (int i = 0; i < removedIDs.Count; i++)
+            {
+                temp_all_active_report_ids.Remove(removedIDs[i]);
             }
 
             ViewBag.ReportPreviewStart = preview_list;
@@ -107,13 +112,18 @@ namespace EC.Controllers
             if (completed_report_ids.Count() < temp_report_count)
                 temp_report_count = completed_report_ids.Count();
 
+            List<int> removedIDs = new List<int>();
             int temp_report_id;
             for (int i = 0; i < temp_report_count; i++)
             {
                 temp_report_id = completed_report_ids[i];
                 temp_preview_case = new CasePreviewViewModel(temp_report_id, user.id);
                 preview_list.Add(temp_preview_case);
-                temp_all_completed_report_ids.Remove(completed_report_ids[i]);
+                removedIDs.Add(temp_report_id);
+            }
+            for (int i = 0; i < removedIDs.Count; i++)
+            {
+                temp_all_completed_report_ids.Remove(removedIDs[i]);
             }
 
             ViewBag.ReportPreviewStart = preview_list;
@@ -160,13 +170,18 @@ namespace EC.Controllers
             if (closed_report_ids.Count() < temp_report_count)
                 temp_report_count = closed_report_ids.Count();
 
+            List<int> removedIDs = new List<int>();
             int temp_report_id;
             for (int i = 0; i < temp_report_count; i++)
             {
                 temp_report_id = closed_report_ids[i];
                 temp_preview_case = new CasePreviewViewModel(temp_report_id, user.id);
                 preview_list.Add(temp_preview_case);
-                temp_all_closed_report_ids.Remove(closed_report_ids[i]);
+                removedIDs.Add(temp_report_id);
+            }
+            for (int i = 0; i < removedIDs.Count; i++)
+            {
+                temp_all_closed_report_ids.Remove(removedIDs[i]);
             }
 
             ViewBag.ReportPreviewStart = preview_list;
@@ -220,13 +235,20 @@ namespace EC.Controllers
                 temp_report_count = spam_report_ids.Count();
 
             int temp_report_id;
+            List<int> removedIDs = new List<int>();
+
             for (int i = 0; i < temp_report_count; i++)
             {
                 temp_report_id = spam_report_ids[i];
                 temp_preview_case = new CasePreviewViewModel(temp_report_id, user.id);
                 preview_list.Add(temp_preview_case);
-                temp_all_spam_report_ids.Remove(spam_report_ids[i]);
+                removedIDs.Add(temp_report_id);
             }
+            for (int i = 0; i < removedIDs.Count; i++)
+            {
+                temp_all_spam_report_ids.Remove(removedIDs[i]);
+            }
+
 
             ViewBag.ReportPreviewStart = preview_list;
             ViewBag.ReportPreviewVM = temp_all_spam_report_ids;

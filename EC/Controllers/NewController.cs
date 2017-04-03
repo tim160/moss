@@ -113,7 +113,7 @@ namespace EC.Controllers
             if (amount > 0)
                 ViewBag.amount = string.Format("{0:0.00}", amount);
             else
-                ViewBag.amount = 0;
+                ViewBag.amount = "0";
 
             return View();
         }

@@ -39,6 +39,13 @@
                         @Html.TextBox("amount", amount, new Dictionary<string, object>() { { "readonly", "true" } })
                     </div>
                 }
+                else
+                {
+                    <div class="blockPersonalSettings">
+                        <p class="title">@GlobalRes.Amount</p>
+                        @Html.TextBox("amount", amount, new Dictionary<string, object>() { { "readonly", "true" } })
+                    </div>
+                }
                 <div class="blockUpdateProfile">
                     <div class="updateProfileBtn">
                         <input type="submit" value="@GlobalRes.NewCompanyRegistration" />

@@ -44,10 +44,11 @@ namespace EC.Controllers
                         //   return RedirectToAction("Index", "ReporterDashboard");
                         return Redirect("~/ReporterDashboard");
                     }
-                    return Redirect("~/EmployeeAwareness/Index");
-                 //   return Redirect("~/Payment/NewPayment");
+                  //  return Redirect("~/EmployeeAwareness/Index");
+                 //   return Redirect("~/Payment");
+                 //   return RedirectToAction("NewPayment", "Payment");
 
-                    //  return RedirectToAction("Index", "Cases");
+                      return RedirectToAction("Index", "Cases");
 
 
                 }
@@ -174,8 +175,8 @@ namespace EC.Controllers
                         //   return RedirectToAction("Index", "ReporterDashboard");
                         return "ReporterDashboard";
                     }
-                 ////   return "Cases";
-                    return "Payment/History";
+                    return "Cases";
+                //    return "Payment/History";
 
                     //  return RedirectToAction("Index", "Cases");
 
