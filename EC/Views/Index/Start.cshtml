@@ -194,13 +194,20 @@
         }).done(function (data) {//data from server
             //  console.log(data);
 
-            if (data != '') {
-                var str = window.location.href;
-            //    str = str.toLocaleLowerCase().split("login");
-                window.location.href = "/" + data;
+            if (data.includes("cases")) {
+                window.location.href = str[0] + data;
+            } else {
+                $(".text.red").show();
+                return false;
             }
-            else
-                $('input[name=password]').val() = '';
+            //if (data != '') {
+            //    var str = window.location.href;
+            //    //    str = str.toLocaleLowerCase().split("login");
+            //    $(".text.red").show();
+            //    window.location.href = "/" + data;
+            //}
+            //else
+            //    $('input[name=password]').val() = '';
         }).fail(function (error) {
         });
     }
