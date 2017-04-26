@@ -73,6 +73,10 @@
             console.log(error);
         });
     }
+    $(".text3").on('click', function (event) {
+        var temp = $(event.currentTarget);
+        window.location.href = temp.siblings('.header').find('a').attr('href');
+    });
     /*page cases end*/
 
 
