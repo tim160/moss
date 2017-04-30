@@ -907,7 +907,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Case  was sent to Case Executive for review..
+        ///   Looks up a localized string similar to Case Closure Request was sent for approval..
         /// </summary>
         public static string CaseSentToEsacaltionMediatorForReview {
             get {

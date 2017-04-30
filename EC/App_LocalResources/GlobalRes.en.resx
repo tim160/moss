@@ -1514,7 +1514,7 @@
     <value>Location</value>
   </data>
   <data name="CaseSentToEsacaltionMediatorForReview" xml:space="preserve">
-    <value>Case  was sent to Case Executive for review.</value>
+    <value>Case Closure Request was sent for approval.</value>
   </data>
   <data name="Outcome" xml:space="preserve">
     <value>Outcome</value>
