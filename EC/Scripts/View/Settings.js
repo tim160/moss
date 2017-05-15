@@ -622,4 +622,29 @@
 
 
     /**/
+    /*outcomes */
+        $('#addInputOutcome p').click(function () {
+            var temp = $(this).parent();
+            adding("Outcome", temp);
+        });
+        $('#addOutBtn').click(function () {
+            var data = $(".addNewOutcome input").val();
+            if (data.length > 0) {
+                sendAjax("Outcome", data, function (id) {
+                    close("Outcome", data, id);
+                });
+            } else {
+                $('.addNewOutcome').css('border-color', 'red');
+            }
+        });
+
+    /*delete deleteDepartment*/
+        $(".tableOutcome").on('click', '.deleteDepartment', function (element) {
+            var temp = $(element.target);
+            var id = temp.attr("data-value");
+            sendAjax("deleteOutcome", id, function () {
+                temp.parent().hide(200);
+            });
+        });
+    /*end outcomes */
 });

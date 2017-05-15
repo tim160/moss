@@ -1074,7 +1074,9 @@ h2.mainTitle {
 #addIncBtn,
 #addRepBtn,
 #addDepBtn,
-#addLocBtn {
+#addLocBtn,
+#addOutBtn
+{
     display: none;
     float: none;
     height: 50px;
@@ -1138,7 +1140,7 @@ h2.mainTitle {
     border-bottom: none;
 }
 
-.deleteLocation, .deleteIncidentType, .deleteReporterType, .deleteDepartment {
+.deleteLocation, .deleteIncidentType, .deleteReporterType, .deleteDepartment, .deleteOutcome{
     width: 14px;
     height: 14px;
     background-image: url(Icons/close.png);
@@ -1157,7 +1159,8 @@ h2.mainTitle {
 .contentCompanyProfile .addLocationBtn p,
 .contentCompanyProfile .addIncidentTypeBtn p,
 .contentCompanyProfile .addReporterTypeBtn p,
-.contentCompanyProfile .addDepartmentBtn p {
+.contentCompanyProfile .addDepartmentBtn p,
+.contentCompanyProfile .addOutcomeBtn p {
     border: 1px solid #6ccec3;
     color: #05b5a2;
     padding: 9px 10px 9px 10px;
@@ -1230,7 +1233,10 @@ h2.mainTitle {
 .addReporterTypeBtn.inactive p:active,
 .addDepartmentBtn.inactive p,
 .addDepartmentBtn.inactive p:hover,
-.addDepartmentBtn.inactive p:active {
+.addDepartmentBtn.inactive p:active,
+.addOutcomeBtn.inactive p:active, 
+.addOutcomeBtn.inactive p,
+.addOutcomeBtn.inactive p:hover {
     border: 1px solid #c7cdcd;
     color: #848a8b;
     background: none;
@@ -1241,7 +1247,8 @@ h2.mainTitle {
 .contentCompanyProfile .addLocationBtn,
 .contentCompanyProfile .addDepartmentBtn,
 .contentCompanyProfile .addReporterTypeBtn,
-.contentCompanyProfile .addIncidentTypeBtn {
+.contentCompanyProfile .addIncidentTypeBtn,
+.blockOutcomes .addOutcomeBtn {
     display: table;
     width: 100%;
     padding-bottom: 20px;
@@ -1251,7 +1258,8 @@ h2.mainTitle {
 .addNewLocation .closeIcon,
 .addNewIncidentType .closeIcon,
 .addNewReporterType .closeIcon,
-.addNewDepartment .closeIcon {
+.addNewDepartment .closeIcon,
+.addNewOutcome .closeIcon {
     background: url(Icons/close.png);
     width: 14px;
     height: 14px;
@@ -1261,7 +1269,8 @@ h2.mainTitle {
 .contentCompanyProfile .addNewLocation,
 .contentCompanyProfile .addNewIncidentType,
 .contentCompanyProfile .addNewReporterType,
-.contentCompanyProfile .addNewDepartment {
+.contentCompanyProfile .addNewDepartment, 
+.contentCompanyProfile .addNewOutcome {
     display: flex;
     border: 2px solid #05b5a2;
     /*width: 860px;*/
@@ -1289,7 +1298,8 @@ h2.mainTitle {
 .contentCompanyProfile .addNewLocation input,
 .contentCompanyProfile .addNewIncidentType input,
 .contentCompanyProfile .addNewReporterType input,
-.contentCompanyProfile .addNewDepartment input{
+.contentCompanyProfile .addNewDepartment input,
+.contentCompanyProfile .addNewOutcome input {
     width: 95%;
     color: #3c3e3f;
     font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
