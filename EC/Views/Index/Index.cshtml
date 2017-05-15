@@ -108,51 +108,17 @@
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function () {
                 xmlhttp.onreadystatechange = function (event) {
-                    if (this.readyState == 4 && this.status == 200) {
-                        lookup.result = JSON.parse(event.currentTarget.response);
-                        if (lookup.result.length > 0) {
-                            lookup.result.forEach(function (item, i, arr) {
-                                addElementDropDownList(item.label, item.value);
-                            });
-                        }
-                    }
+
                 };
             };
             let link = window.location.href + "Index/CompanyLookup?lookup=" + lookup.event;
             xmlhttp.open("POST", link, true);
             xmlhttp.send();
         }
-        function addElementDropDownList(label, value) {
-            var listLi = document.getElementById("dropDownList");
-            if(label != "" && value != "") {
-                listLi.style.display = "block";
-                var node = document.createElement("LI");
-                node.innerHTML = "<div>" + value + "</div>"; 
-                node.setAttribute("value", label);
-                node.onclick = function (event) {
-                    document.getElementById("dropDownList").innerHTML = "";
-                    let textContent = event.currentTarget.textContent;
-                    let value = event.currentTarget.getAttribute('value');
-                    document.getElementById("companyCode").setAttribute('value', value);
-                    SetInputStart(textContent);
-                };
-                listLi.appendChild(node);
-            }
-            
-            
-        }
         function SetInputStart(textContent) {
             if (textContent.length > 1) {
                 document.getElementById("specialInput").value = textContent;
 
-                //buttonStartText
-                
-                document.getElementById("buttonStart").onclick = function () {
-                    var companyCode = document.getElementById("companyCode").getAttribute('value');
-                    if (companyCode != "") {
-                        window.location.href = "/Report/new?companyCode=" + companyCode;
-                    }
-                }
             }
             
             

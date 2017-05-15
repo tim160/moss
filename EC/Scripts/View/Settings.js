@@ -163,10 +163,14 @@
             $('.blockIncidentTypes').hide();
             $('.blockReporterTypes').hide();
             $('.blockAnonymity').hide();
+            $('.blockOutcomes').hide();
         }
 
         function contentCompanyProfileShow() {
-
+            $('.menuItem:nth-child(7)').click(function () {
+                hideBlock();
+                $('.blockOutcomes').show();
+            });
             $('.menuItem:nth-child(6)').click(function () {
                 hideBlock();
                 $('.blockAnonymity').show();
@@ -235,6 +239,9 @@
         });
         $('.addNewReporterType .closeIcon').click(function () {
             closeIcon("ReporterType");
+        });
+        $('.addNewOutcome .closeIcon').click(function () {
+            closeIcon("Outcome");
         });
         $('.addNewLocation .closeIcon').click(function () {
             closeIcon("Location");

@@ -1861,4 +1861,31 @@
   <data name="Payments" xml:space="preserve">
     <value>Payments</value>
   </data>
+  <data name="addnewOutcome" xml:space="preserve">
+    <value>add new Outcome</value>
+  </data>
+  <data name="OutcomeCompany1" xml:space="preserve">
+    <value>Discipline step 1: Verbal Counseling</value>
+  </data>
+  <data name="OutcomeCompany2" xml:space="preserve">
+    <value>Discipline step 2: Written Warning</value>
+  </data>
+  <data name="OutcomeCompany3" xml:space="preserve">
+    <value>Discipline step 3: Decision-Making Leave</value>
+  </data>
+  <data name="OutcomeCompany4" xml:space="preserve">
+    <value>Discipline step 4: Termination</value>
+  </data>
+  <data name="OutcomeCompany5" xml:space="preserve">
+    <value>Financial</value>
+  </data>
+  <data name="OutcomeCompany6" xml:space="preserve">
+    <value>Legal</value>
+  </data>
+  <data name="OutcomeCompany7" xml:space="preserve">
+    <value>Prosecution</value>
+  </data>
+  <data name="Outcomes" xml:space="preserve">
+    <value>Outcomes</value>
+  </data>
 </root>

@@ -103,7 +103,16 @@ namespace EC.Models
         public List<company_location> LocationsOfIncident(int companyId) {
             return db.company_location.Where(s => (s.company_id == companyId)).ToList();
         }
-        
+
+        public List<company_outcome> Outcomes(int companyId, int? statusId = null)
+        {
+            if (statusId.HasValue)
+                return db.company_outcome.Where(s => (s.company_id == companyId && s.status_id == statusId)).ToList();
+            else
+                return db.company_outcome.Where(s => s.company_id == companyId).ToList();
+
+        }
+
         /*
         public List<ECModel.User> Company_All_Mediators(int company_id, bool active_only_flag, int? role_id)
         {

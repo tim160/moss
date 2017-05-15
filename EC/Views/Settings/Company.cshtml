@@ -68,6 +68,7 @@
                     <h2 class="menuItem">@GlobalRes.IncidentTypes</h2>
                     <h2 class="menuItem">@GlobalRes.ReporterTypes</h2>
                     <h2 class="menuItem">@GlobalRes.Anonymity</h2>
+                    <h2 class="menuItem">@GlobalRes.Outcomes</h2>
                 </div>
             </div><!--menuCompanyProfile-->
         </div>
@@ -231,6 +232,37 @@
                     }
                 </div>
             </div><!--blockReporterType-->
+
+            <div class="blockOutcomes" style="display: none;">
+                @if (is_valid_mediator)
+                {
+                    <div class="addOutcomeBtn" id="addInputOutcome">
+                        <!--After click Btn - add class inactive-->
+                        <p>@GlobalRes.addnewOutcome</p>
+                    </div>
+                }
+                <div class="addOutcomeBtn" id="addOutBtn" style="width: auto;">
+                    <!--After click Btn - add class inactive-->
+                    <p style=" min-width: 50px;">@GlobalRes.Add</p>
+                </div>
+                <div class="addNewOutcome">
+                    <input type="text" name="newOutcomeName" required="" value="">
+                    <div class="closeIcon"></div>
+                </div>
+                <div class="tableOutcome">
+                    @foreach (company_outcome _outcome in cm.Outcomes(company_id, 2))
+                    {
+                        <div style="display: flex;">
+                            <p>@_outcome.outcome_en</p>
+                            @if (is_valid_mediator)
+                            {
+                                <div data-value="@_outcome.id" class="deleteOutcome"></div>
+                            }
+                        </div>
+                    }
+
+                </div>
+            </div><!--blockOutcome->
 
         </div><!--contentSettings-->
     </div><!--contentCompanyProfile-->
