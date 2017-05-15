@@ -486,7 +486,49 @@ namespace EC.Controllers
             }
             #endregion
 
+            #region Relationship
+            if (company_id != 0)
+            {
+                List<string> list_outcomes = new List<string>();
+                list_outcomes.Add(App_LocalResources.GlobalRes.OutcomeCompany1);
+                list_outcomes.Add(App_LocalResources.GlobalRes.OutcomeCompany2);
+                list_outcomes.Add(App_LocalResources.GlobalRes.OutcomeCompany3);
+                list_outcomes.Add(App_LocalResources.GlobalRes.OutcomeCompany4);
+                list_outcomes.Add(App_LocalResources.GlobalRes.OutcomeCompany5);
+                list_outcomes.Add(App_LocalResources.GlobalRes.OutcomeCompany6);
+                list_outcomes.Add(App_LocalResources.GlobalRes.OutcomeCompany7);
 
+
+
+                foreach (string _outcome in list_outcomes)
+                {
+                    if ((_outcome.Trim().Length > 0) && (_outcome.Trim().ToLower() != "other"))
+                    {
+                        company_outcome _company_outcome = new company_outcome();
+                        _company_outcome.outcome_en = _outcome.Trim();
+                        _company_outcome.outcome_ar = _outcome.Trim();
+                        _company_outcome.outcome_es = _outcome.Trim();
+                        _company_outcome.outcome_fr = _outcome.Trim();
+                        _company_outcome.outcome_jp = _outcome.Trim();
+                        _company_outcome.outcome_ru = _outcome.Trim();
+                        _company_outcome.company_id = company_id;
+                        _company_outcome.last_update_dt = DateTime.Now;
+                        _company_outcome.status_id = 2;
+                        _company_outcome.user_id = 1;
+                        try
+                        {
+                            db.company_outcome.Add(_company_outcome);
+                            db.SaveChanges();
+                        }
+                        catch (Exception ex)
+                        {
+                            logger.Error(ex.ToString());
+                            return App_LocalResources.GlobalRes.RelationshipsSavingFailed;
+                        }
+                    }
+                }
+            }
+            #endregion
 
             string login = glb.GenerateLoginName(first, last);
             string pass = glb.GeneretedPassword();
