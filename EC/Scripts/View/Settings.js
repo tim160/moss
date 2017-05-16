@@ -638,8 +638,8 @@
             }
         });
 
-    /*delete deleteDepartment*/
-        $(".tableOutcome").on('click', '.deleteDepartment', function (element) {
+    /*delete deleteOutcome*/
+        $(".tableOutcome").on('click', '.deleteOutcome', function (element) {
             var temp = $(element.target);
             var id = temp.attr("data-value");
             sendAjax("deleteOutcome", id, function () {
