@@ -52,7 +52,7 @@ namespace EC.Models
                             flag = this.addOutcome(newSetting);
                             break;
                         case "deleteOutcome":
-                            flag = this.deleteOutcome(newString);
+                            flag = this.deleteOutcome(newSetting);
                             break;
                     }
                 }
@@ -98,10 +98,27 @@ namespace EC.Models
         {
             try
             {
-
-            }catch (Exception e)
+                if (newSetting.companyId > 0 && newSetting.userId > 0 && newSetting.data != null)
+                {
+                    int count = db.company_outcome.Where(item => item.company_id == newSetting.companyId && item.status_id == 2).Count();
+                    if (count <= 1)
+                    {
+                        return "false";
+                    }
+                    int idSetting = Int32.Parse(newSetting.data);
+                    company_outcome deleteOutcome = db.company_outcome.Where(item => item.id == idSetting).FirstOrDefault();
+                    if (deleteOutcome != null)
+                    {
+                        deleteOutcome.status_id = 1;
+                        deleteOutcome.last_update_dt = DateTime.Now;
+                        db.SaveChanges();
+                    }
+                }
+                return "true";
+            }
+            catch (Exception e)
             {
-
+                return "false";
             }
         }
         public string deleteLocation(SettingsViewModel newSetting)
