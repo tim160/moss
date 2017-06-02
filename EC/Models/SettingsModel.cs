@@ -48,6 +48,12 @@ namespace EC.Models
                         case "deleteReporterType":
                             flag = this.deleteReporterType(newSetting);
                             break;
+                        case "Outcome":
+                            flag = this.addOutcome(newSetting);
+                            break;
+                        case "deleteOutcome":
+                            flag = this.deleteOutcome(newSetting);
+                            break;
                     }
                 }
             }
@@ -57,6 +63,63 @@ namespace EC.Models
             }
 
             return flag;
+        }
+        
+        public string addOutcome(SettingsViewModel newSetting)
+        {
+            try
+            {
+                if (newSetting.companyId > 0 && newSetting.userId > 0 && newSetting.data != null)
+                {
+                    company_outcome oldOutcome = db.company_outcome.Where(item => item.outcome_en.Trim().ToLower() == newSetting.data.Trim().ToLower()).FirstOrDefault();
+                    if(oldOutcome == null)
+                    {
+                        oldOutcome = new company_outcome();
+                    }
+                    oldOutcome.status_id = 2;
+                    oldOutcome.company_id = newSetting.companyId;
+                    oldOutcome.outcome_en = newSetting.data.Trim().ToLower();
+                    oldOutcome.outcome_fr = newSetting.data.Trim().ToLower();
+                    oldOutcome.outcome_es = newSetting.data.Trim().ToLower();
+                    oldOutcome.outcome_ru = newSetting.data.Trim().ToLower();
+                    oldOutcome.outcome_ar = newSetting.data.Trim().ToLower();
+                    oldOutcome.outcome_jp = newSetting.data.Trim().ToLower();
+                    oldOutcome.last_update_dt = DateTime.Now;
+                    db.company_outcome.Add(oldOutcome);
+                    db.SaveChanges();
+                }
+            } catch (Exception e)
+            {
+                return "false";
+            }
+            return "true";
+        }
+        public string deleteOutcome(SettingsViewModel newSetting)
+        {
+            try
+            {
+                if (newSetting.companyId > 0 && newSetting.userId > 0 && newSetting.data != null)
+                {
+                    int count = db.company_outcome.Where(item => item.company_id == newSetting.companyId && item.status_id == 2).Count();
+                    if (count <= 1)
+                    {
+                        return "false";
+                    }
+                    int idSetting = Int32.Parse(newSetting.data);
+                    company_outcome deleteOutcome = db.company_outcome.Where(item => item.id == idSetting).FirstOrDefault();
+                    if (deleteOutcome != null)
+                    {
+                        deleteOutcome.status_id = 1;
+                        deleteOutcome.last_update_dt = DateTime.Now;
+                        db.SaveChanges();
+                    }
+                }
+                return "true";
+            }
+            catch (Exception e)
+            {
+                return "false";
+            }
         }
         public string deleteLocation(SettingsViewModel newSetting)
         {
