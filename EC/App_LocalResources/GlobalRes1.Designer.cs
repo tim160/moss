@@ -682,6 +682,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invitation email sent. Awaiting registration..
+        /// </summary>
+        public static string Awaiting_registration {
+            get {
+                return ResourceManager.GetString("Awaiting_registration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Awaiting approval.
         /// </summary>
         public static string Awaitingapproval {

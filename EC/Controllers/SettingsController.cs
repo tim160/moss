@@ -105,6 +105,32 @@ namespace EC.Controllers
             ViewBag.user_id = user_id;
             ViewBag.um = um;
             ViewBag.cm = cm;
+            List<user> all_users = cm.AllMediators(cm._company.id, false, null);
+
+            List<string> _company_user_emails = new List<string>();
+            _company_user_emails = (db.user.Where(t => ((t.company_id == company_id) && (t.role_id != ECLevelConstants.level_informant))).Select(t => t.email.Trim().ToLower())).ToList();
+
+            List<int> _company_user_ids = new List<int>();
+            _company_user_ids = (db.user.Where(t => ((t.company_id == company_id) && (t.role_id != ECLevelConstants.level_informant))).Select(t => t.id)).ToList();
+
+
+            List<invitation> company_invitations = db.invitation.Where(t => ((!_company_user_emails.Contains(t.email.ToLower().Trim()) && (t.used_flag == 0) && (_company_user_ids.Contains(t.sent_by_user_id))))).ToList();
+
+            foreach (invitation _inv in company_invitations)
+            {
+                user _user = new user();
+                _user.id = 0;
+                _user.role_id = 0;
+                _user.first_nm = _inv.email;
+                _user.email = _inv.email;
+                _user.last_nm = "";
+                _user.location_nm = "";
+                _user.photo_path = "";
+                _user.title_ds = "";
+                _user.notepad_tx = App_LocalResources.GlobalRes.Awaiting_registration;
+                all_users.Add(_user);
+            }
+            ViewBag.AllUser = all_users;
 
             return View();
         }

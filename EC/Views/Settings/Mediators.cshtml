@@ -21,6 +21,7 @@
     {
         is_valid_mediator = true;
     }
+    List<user> AllUsers = ViewBag.AllUser;
 }
 
 
@@ -73,15 +74,18 @@
         <div class="contentSettings">
             <div class="blockWithTeam">
                 <div class="contentMediators blockTeam">
-                    @foreach (user _user in cm.AllMediators(cm._company.id, false, null))
+                    @foreach (user _user in AllUsers)
                     {
-                        if ((_user.role_id == 4) || (_user.role_id == 5) || (_user.role_id == 6) || (_user.role_id == 7))
+                        string link = "/settings/user/" + _user.id;
+                        if (_user.role_id == 0) { link = ""; }
+                            
+                        if ((_user.role_id == 4) || (_user.role_id == 5) || (_user.role_id == 6) || (_user.role_id == 7) || (_user.role_id == 0))
                         {
                             _temp_um = new UserModel(_user.id);
 
                             <div class="blockIteamTeam blockIteamTeam@{@class_ext}">
                                 <div class="blockHeaderTeam">
-                                    <a class="contanatTable" href="~/settings/user/@_user.id">
+                                    <a class="contanatTable"  href="@link">
                                         <div class="blockPhoto">
                                             <div class="photoPersonal">
                                                 @if (_user.photo_path.Trim().Length == 0)
@@ -135,8 +139,11 @@
 
                                 <div class="blocksInfo">
                                     <div class="blockInfo">
-                                        <img src='@Url.Content("/Content/Icons/blockInfo_img1" + @class_ext + ".png")'>
-                                        <label>@_temp_um._location_string</label>
+                                        @if(_user.role_id != 0)
+                                        { 
+                                            <img src='@Url.Content("/Content/Icons/blockInfo_img1" + @class_ext + ".png")'>
+                                            <label>@_temp_um._location_string</label>
+                                        }
                                     </div>
                                     <div class="blockInfo">
                                         <img src='@Url.Content("/Content/Icons/blockInfo_img2"+@class_ext+".png")'>

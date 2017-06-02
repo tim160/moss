@@ -1813,4 +1813,7 @@
   <data name="Outcomes" xml:space="preserve">
     <value>Outcomes</value>
   </data>
+  <data name="Awaiting_registration" xml:space="preserve">
+    <value>Invitation email sent. Awaiting registration.</value>
+  </data>
 </root>

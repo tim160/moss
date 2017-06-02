@@ -703,7 +703,7 @@ namespace EC.Controllers
                     List<int> _company_user_ids = new List<int>();
                     _company_user_ids = (db.user.Where(t => ((t.company_id == company_id) && (t.role_id != ECLevelConstants.level_informant))).Select(t => t.id)).ToList();
 
-                    if (db.user.Any(u => ((u.email.ToLower().Trim() == email.ToLower().Trim() && u.role_id != 8 && _company_user_ids.Contains(u.id)))))
+                    if (db.user.Any(u => ((u.email.ToLower().Trim() == email.ToLower().Trim() && u.role_id != ECLevelConstants.level_informant && _company_user_ids.Contains(u.id)))))
                         return App_LocalResources.GlobalRes.AlreadyRegistered;
                 }
                 catch
