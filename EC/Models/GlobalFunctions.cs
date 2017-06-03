@@ -238,6 +238,13 @@ public class GlobalFunctions
         return db.outcome.Where(item => item.is_active == 1).ToList();
     }
 
+    public List<case_closure_reason> GetCaseClosureReasonsWithStatus()
+    {
+        //[company_nm]
+        //return (from comp in db.company where comp.status_id == 2 select comp.company_nm, comp.id).ToList();
+        return db.case_closure_reason.Where(item => item.status_id == 2).ToList();
+    }
+
     public string GetOutcomeNameById(int id)
     {
         if (id != 0)

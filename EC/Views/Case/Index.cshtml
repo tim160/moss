@@ -807,7 +807,7 @@
         }
 
 
-        function dropdawnWork(){
+        function dropdownWork(){
             $('.dropdown')
                 .click(
                 function () {
@@ -845,7 +845,7 @@
                     thisElement.find('span.selected img:first-child').attr('src', '/Content/Icons/peopleBlockSelect.png');
                 });
         }
-        function dropdawnSelect(){
+        function dropdownSelect(){
             $('.dropdown ul li')
                     .click(
                     function () {
@@ -879,8 +879,8 @@
 
         createTaskStart();
         hideComplited();
-        dropdawnWork();
-        dropdawnSelect();
+        dropdownWork();
+        dropdownSelect();
         $(".closeCustom.flag").click();
         $(".positionDropDown").on('click', function () {
             $(".positionDropDown .flag").toggle();

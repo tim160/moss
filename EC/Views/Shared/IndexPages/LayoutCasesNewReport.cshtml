@@ -303,7 +303,10 @@
                 
 
                 rm = new ReportModel(_report_id);
+                List<company_outcome> company_outcomes = cm.Outcomes(_user.company_id, 2);
+
                 List<user> mediators = rm._mediators_whoHasAccess_toReport;
+               
                 //<span class="casesDot @report_color"> <span></span></span>
                 <span class="casesDot"> <span style="background: #@report_color_code"></span></span>
                 @Html.Raw("</div>");
@@ -323,7 +326,7 @@
                 </div>
                 if ((investigationstatus > 2 && investigationstatus < 7) || (investigationstatus == 9))
                 {
-                    string Res_or_comp = GlobalRes.Resolve.ToUpper();
+                    string Res_or_comp = GlobalRes.CloseCaseUp.ToUpper();
                     if (investigationstatus == 3)
                     {
                   ////      left_button_promotion = GlobalRes.CaseCantBeResolved;
@@ -358,7 +361,8 @@
                            {"investigationstatus", investigationstatus },
                            {"left_button_promotion", left_button_promotion },
                            {"normal_button_value", normal_button_value },
-                           {"left_button_value", left_button_value }
+                           {"left_button_value", left_button_value },
+                           {"company_outcomes", company_outcomes }
                        })
 
                    @Html.Partial("~/Views/Shared/EditorTemplates/ApproveDialogModal.cshtml", new ViewDataDictionary {

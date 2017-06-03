@@ -15,7 +15,7 @@
     string left_button_value = ViewBag.left_button_value;
     
     GlobalFunctions glb = new GlobalFunctions();
-    List<outcome> _all_outcomes = glb.GetOutcomesWithStatus();
+    List<company_outcome> _all_outcomes = ViewBag.company_outcomes;
 }
 <div id="anotherDialog">
     <div id="anotherDialog2">
@@ -26,13 +26,26 @@
                 <div class="closeIcon" onclick='overlay()'></div>
             </div>
             @if (((normal_button_value == ECGlobalConstants.investigation_status_resolution.ToString())) || (normal_button_value == ECGlobalConstants.investigation_status_closed.ToString()))
-            { 
+            {
                 <div class="caseResolution custom">
-                    <div class="outcomeText">@GlobalRes.RecommendedActionOutcome:</div>
+                    <div class="outcomeText">@GlobalRes.ReasonForCaseClosure:</div>
+                    <div class="dropdown2">
+                        <label id="ddlReasonClosure" data-value="">@GlobalRes.Selectanoption...</label><span class="arrow-down"></span>
+                        <ul>
+                            @foreach (case_closure_reason _reason in glb.GetCaseClosureReasonsWithStatus())
+                            {
+                                <li data-value=@_reason.id>@_reason.case_closure_reason_en</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="caseResolution custom">
+                    <div class="outcomeText">@GlobalRes.SuggestedOutcomeUp:</div>
                     <div class="dropdown2">
                         <label id="ddlOutcome" data-value="">@GlobalRes.Selectanoption...</label><span class="arrow-down"></span>
                         <ul>
-                            @foreach (outcome _outcome in _all_outcomes)
+                            @foreach (company_outcome _outcome in _all_outcomes)
                             {
                                 <li data-value=@_outcome.id>@_outcome.outcome_en</li>
                             }
@@ -40,9 +53,38 @@
                     </div>
                 </div>
 
+                <div>@GlobalRes.CaseClosureReport:</div>
+                
                 <div class="caseResolution">
-                    <textarea class="form-control" type="text" name="txtOutcome" id="txtOutcome" placeholder="@GlobalRes.Pleaseexplain"></textarea>
+                    <textarea class="form-control" type="text" name="txtOutcome" id="txtOutcome"></textarea>
                 </div>
+
+                <div>@GlobalRes.ExecutiveSummary:</div>
+
+                <div class="caseResolution">
+                    <textarea class="form-control" type="text" name="txtExecutiveSummary" id="txtExecutiveSummary"></textarea>
+                </div>
+                <div>@GlobalRes.FactsEstablished:</div>
+
+                <div class="caseResolution">
+                    <textarea class="form-control" type="text" name="txtFactsEstablished" id="txtFactsEstablished"></textarea>
+                </div>
+                <div>@GlobalRes.InvestigationMethodology:</div>
+
+                <div class="caseResolution">
+                    <textarea class="form-control" type="text" name="txtInvestigationMethodology" id="txtInvestigationMethodology"></textarea>
+                </div>
+                <div>@GlobalRes.DescriptionOutcome:</div>
+
+                <div class="caseResolution">
+                    <textarea class="form-control" type="text" name="txtDescriptionOutcome" id="txtDescriptionOutcome"></textarea>
+                </div>
+                <div>@GlobalRes.RecommendedActions:</div>
+
+                <div class="caseResolution">
+                    <textarea class="form-control" type="text" name="txtRecommendedActions" id="txtRecommendedActions"></textarea>
+                </div>
+                
             }
             <div class="modal-footer2">
                 @if (normal_button_promotion.Length > 0)
@@ -94,6 +136,23 @@
             $(".dropdown2 #ddlOutcome").attr('data-value', temp.attr('data-value'));
             $(".dropdown2 ul").slideUp();
         });
+
+        $("#ddlReasonClosure").on("click", function (event) {
+            var _temp = $(event.currentTarget);
+            _temp.siblings('ul').slideDown(300);
+        });
+
+        $(".dropdown2 li").on("click", function (event) {
+            var temp = $(event.currentTarget);
+            var _allOptions = temp.parents('ul ');
+            _allOptions.find('li').removeClass('selected');
+            temp.addClass('selected');
+            $(".dropdown2 #ddlReasonClosure").html(temp.text());
+            $(".dropdown2 #ddlReasonClosure").attr('data-value', temp.attr('data-value'));
+            $(".dropdown2 ul").slideUp();
+        });
+
+
         $("#anotherDialog .close1").on('click', function () {
             $("#anotherDialog").toggle();
         });

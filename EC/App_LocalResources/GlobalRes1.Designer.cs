@@ -799,6 +799,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Case Closure Report.
+        /// </summary>
+        public static string CaseClosureReport {
+            get {
+                return ResourceManager.GetString("CaseClosureReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Case Awaiting Sign-off.
         /// </summary>
         public static string CaseCompleted {
@@ -1672,6 +1681,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Description of outcome for each subject.
+        /// </summary>
+        public static string DescriptionOutcome {
+            get {
+                return ResourceManager.GetString("DescriptionOutcome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You can always check the case progress using the following details.
         /// </summary>
         public static string detailsCase {
@@ -2140,6 +2158,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Executive Summary.
+        /// </summary>
+        public static string ExecutiveSummary {
+            get {
+                return ResourceManager.GetString("ExecutiveSummary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Expect a.
         /// </summary>
         public static string Expecta {
@@ -2181,6 +2208,15 @@ namespace EC.App_LocalResources {
         public static string ExplainFurtherOutcome {
             get {
                 return ResourceManager.GetString("ExplainFurtherOutcome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Facts Established.
+        /// </summary>
+        public static string FactsEstablished {
+            get {
+                return ResourceManager.GetString("FactsEstablished", resourceCulture);
             }
         }
         
@@ -2721,6 +2757,15 @@ namespace EC.App_LocalResources {
         public static string Investigation {
             get {
                 return ResourceManager.GetString("Investigation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Investigation Methodology, including witness list.
+        /// </summary>
+        public static string InvestigationMethodology {
+            get {
+                return ResourceManager.GetString("InvestigationMethodology", resourceCulture);
             }
         }
         
@@ -3976,6 +4021,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reason for Case Closure.
+        /// </summary>
+        public static string ReasonForCaseClosure {
+            get {
+                return ResourceManager.GetString("ReasonForCaseClosure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Warning! Before removing a case administrator from a case, please reassign outstanding tasks to other team members.
         /// </summary>
         public static string ReassignMediatorTaskWarning {
@@ -4008,6 +4062,15 @@ namespace EC.App_LocalResources {
         public static string RecommendedActionOutcome {
             get {
                 return ResourceManager.GetString("RecommendedActionOutcome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recommended actions for witnesses and reporter.
+        /// </summary>
+        public static string RecommendedActions {
+            get {
+                return ResourceManager.GetString("RecommendedActions", resourceCulture);
             }
         }
         

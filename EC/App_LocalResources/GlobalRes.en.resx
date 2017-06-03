@@ -1816,4 +1816,25 @@
   <data name="Awaiting_registration" xml:space="preserve">
     <value>Invitation email sent. Awaiting registration.</value>
   </data>
+  <data name="CaseClosureReport" xml:space="preserve">
+    <value>Case Closure Report</value>
+  </data>
+  <data name="DescriptionOutcome" xml:space="preserve">
+    <value>Description of outcome for each subject</value>
+  </data>
+  <data name="ExecutiveSummary" xml:space="preserve">
+    <value>Executive Summary</value>
+  </data>
+  <data name="FactsEstablished" xml:space="preserve">
+    <value>Facts Established</value>
+  </data>
+  <data name="InvestigationMethodology" xml:space="preserve">
+    <value>Investigation Methodology, including witness list</value>
+  </data>
+  <data name="ReasonForCaseClosure" xml:space="preserve">
+    <value>Reason for Case Closure</value>
+  </data>
+  <data name="RecommendedActions" xml:space="preserve">
+    <value>Recommended actions for witnesses and reporter</value>
+  </data>
 </root>
