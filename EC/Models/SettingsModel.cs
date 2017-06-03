@@ -67,6 +67,8 @@ namespace EC.Models
         
         public string addOutcome(SettingsViewModel newSetting)
         {
+            string id = null;
+
             try
             {
                 if (newSetting.companyId > 0 && newSetting.userId > 0 && newSetting.data != null)
@@ -87,12 +89,14 @@ namespace EC.Models
                     oldOutcome.last_update_dt = DateTime.Now;
                     db.company_outcome.Add(oldOutcome);
                     db.SaveChanges();
+                    id = oldOutcome.id.ToString();
                 }
             } catch (Exception e)
             {
                 return "false";
             }
-            return "true";
+            return id;
+
         }
         public string deleteOutcome(SettingsViewModel newSetting)
         {
