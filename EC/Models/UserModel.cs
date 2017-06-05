@@ -1068,7 +1068,7 @@ namespace EC.Models
                 string recommended_actions_str = "";
                 recommended_actions_str = (recommended_actions == null) ? "" : recommended_actions;
                 string outcome_message_str = "";
-
+                //  outcome_message = outcome,   outcome acts like a case_closure_report. We would need to change this in future
 
                 report_investigation_status report_investigation_status;
                 if (outcome_id.HasValue)

@@ -774,11 +774,21 @@ namespace EC.Controllers
             {
                 reason_id = Convert.ToInt16(Request["case_closure_reason_id"]);
             }
-            string executive_summary = Request["executive_summary"].ToString().Trim();
-            string facts_established = Request["facts_established"].ToString().Trim();
-            string investigation_methodology = Request["investigation_methodology"].ToString().Trim();
-            string description_outcome = Request["description_outcome"].ToString().Trim();
-            string recommended_actions = Request["recommended_actions"].ToString().Trim();
+            string executive_summary = "";
+            if(Request["executive_summary"]!= null)
+                executive_summary = Request["executive_summary"].ToString().Trim();
+            string facts_established = "";
+            if (Request["facts_established"] != null)
+                facts_established = Request["facts_established"].ToString().Trim();
+            string investigation_methodology = "";
+            if (Request["investigation_methodology"] != null)
+                investigation_methodology = Request["investigation_methodology"].ToString().Trim();
+            string description_outcome = "";
+            if (Request["description_outcome"] != null)
+                description_outcome = Request["description_outcome"].ToString().Trim();
+            string recommended_actions = "";
+            if (Request["recommended_actions"] != null)
+                recommended_actions = Request["recommended_actions"].ToString().Trim();
 
             return userModel.ResolveCase(report_id, mediator_id, description, new_status, outcome_id, outcome, reason_id, executive_summary, facts_established, investigation_methodology, description_outcome, recommended_actions);
 
@@ -806,11 +816,21 @@ namespace EC.Controllers
             {
                 reason_id = Convert.ToInt16(Request["case_closure_reason_id"]);
             }
-            string executive_summary = Request["executive_summary"].ToString().Trim();
-            string facts_established = Request["facts_established"].ToString().Trim();
-            string investigation_methodology = Request["investigation_methodology"].ToString().Trim();
-            string description_outcome = Request["description_outcome"].ToString().Trim();
-            string recommended_actions = Request["recommended_actions"].ToString().Trim();
+            string executive_summary = "";
+            if (Request["executive_summary"] != null)
+                executive_summary = Request["executive_summary"].ToString().Trim();
+            string facts_established = "";
+            if (Request["facts_established"] != null)
+                facts_established = Request["facts_established"].ToString().Trim();
+            string investigation_methodology = "";
+            if (Request["investigation_methodology"] != null)
+                investigation_methodology = Request["investigation_methodology"].ToString().Trim();
+            string description_outcome = "";
+            if (Request["description_outcome"] != null)
+                description_outcome = Request["description_outcome"].ToString().Trim();
+            string recommended_actions = "";
+            if (Request["recommended_actions"] != null)
+                recommended_actions = Request["recommended_actions"].ToString().Trim();
 
 
             if(mediator_id != user.id)
@@ -915,11 +935,22 @@ namespace EC.Controllers
             {
                 reason_id = Convert.ToInt16(Request["case_closure_reason_id"]);
             }
-            string executive_summary = Request["executive_summary"].ToString().Trim();
-            string facts_established = Request["facts_established"].ToString().Trim();
-            string investigation_methodology = Request["investigation_methodology"].ToString().Trim();
-            string description_outcome = Request["description_outcome"].ToString().Trim();
-            string recommended_actions = Request["recommended_actions"].ToString().Trim();
+
+            string executive_summary = "";
+            if (Request["executive_summary"] != null)
+                executive_summary = Request["executive_summary"].ToString().Trim();
+            string facts_established = "";
+            if (Request["facts_established"] != null)
+                facts_established = Request["facts_established"].ToString().Trim();
+            string investigation_methodology = "";
+            if (Request["investigation_methodology"] != null)
+                investigation_methodology = Request["investigation_methodology"].ToString().Trim();
+            string description_outcome = "";
+            if (Request["description_outcome"] != null)
+                description_outcome = Request["description_outcome"].ToString().Trim();
+            string recommended_actions = "";
+            if (Request["recommended_actions"] != null)
+                recommended_actions = Request["recommended_actions"].ToString().Trim();
 
 
 
