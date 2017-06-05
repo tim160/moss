@@ -250,8 +250,20 @@ public class GlobalFunctions
         if (id != 0)
         {
            // EC.Models.Database.outcome _outcome = db.outcomes.FirstOrDefault(item => item.id == id);
-            var item = db.outcome.Find(id);
+            var item = db.company_outcome.Find(id);
             return item.outcome_en;
+        }
+        else
+            return "";
+
+    }
+    public string GetCaseClosureReasonById(int id)
+    {
+        if (id != 0)
+        {
+            // EC.Models.Database.outcome _outcome = db.outcomes.FirstOrDefault(item => item.id == id);
+            var item = db.case_closure_reason.Find(id);
+            return item.case_closure_reason_en;
         }
         else
             return "";

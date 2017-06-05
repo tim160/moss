@@ -1974,6 +1974,47 @@ li.infoCasesBlock:first-child:hover li .status {
     background: #e5ebeb;
     color: #3c3e3f;
 }
+
+.dropdown3 {
+    /*margin-left: 110px;
+    position: relative;
+    width: calc(100% - 40px);
+    max-width: 589px;*/
+    margin-left: 304px;
+    position: relative;
+    width: 396px;
+}
+.dropdown3 label {
+    display: block;
+    padding: 21px 23px;
+    background: #f2f7f7;
+    color: #aeb3b4;
+    cursor: pointer;
+    font-size: 16px;
+}
+.dropdown3 ul {
+    display:none;
+    list-style: none;
+    position: absolute;
+    width: 100%;
+    z-index: 10000;
+}
+.dropdown3 ul li {
+    padding: 8px 16px;
+    background: #fff;
+    color: #727c7e;
+    height: 50px;
+    overflow: hidden;
+    cursor: pointer;
+    font-size: 18px;
+    transition: height 0.1s linear 0s;
+}
+.dropdown3 ul li:hover,
+.dropdown3 ul li.selected {
+    background: #e5ebeb;
+    color: #3c3e3f;
+}
+
 /*end modal window*/
 #dialog-form .caseResolution input {
     box-shadow: 0 0 2px #dfe4e5;

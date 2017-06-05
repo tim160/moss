@@ -53,6 +53,8 @@
         var _report_id = $("#_report_id").val();
         var user_id = $("#user_id").val();
         var outcome_id = $("#ddlOutcome").attr('data-value');
+        var reason_id = $("#ddlReasonClosure").attr('data-value');
+        
         var outcome = $("#txtOutcome").val();
         if (outcome == "") {
             $("#txtOutcome").css("border", "2px solid red");
@@ -60,13 +62,43 @@
                 $("#txtOutcome").css("border", "none");
             });
         }
+        if (outcome_id == "") {
+            $("#ddlOutcome").css("border", "2px solid red");
+            $("#ddlOutcome").on('focusin', function () {
+                $("#ddlOutcome").css("border", "none");
+            });
+        } else {
+            $("#ddlOutcome").css("border", "none");
+        }
+
+        if (reason_id == "") {
+            $("#ddlReasonClosure").css("border", "2px solid red");
+            $("#ddlReasonClosure").on('focusin', function () {
+                $("#ddlReasonClosure").css("border", "none");
+            });
+        }
+        else {
+            $("#ddlReasonClosure").css("border", "none");
+        }
+        console.log('r', reason_id);
+        console.log('o', outcome_id);
+
+        var executive_summary = $("#txtExecutiveSummary").val();
+        var facts_established = $("#txtFactsEstablished").val();
+        var investigation_methodology = $("#txtInvestigationMethodology").val();
+        var description_outcome = $("#txtDescriptionOutcome").val();
+        var recommended_actions = $("#txtRecommendedActions").val();
+
         if (outcome != "") {
 
             if (_report_id > 0 && user_id > 0 && promotion_value != "") {
                 $.ajax({
                     method: "POST",
                     url: "/Case/CloseCase",
-                    data: { user_id: user_id, report_id: _report_id, description: description, promotion_value: promotion_value, outcome_id: outcome_id, outcome: outcome, }
+                    data: {
+                        user_id: user_id, report_id: _report_id, description: description, promotion_value: promotion_value, outcome_id: outcome_id, outcome: outcome,
+                        case_closure_reason_id: reason_id, executive_summary: executive_summary, facts_established: facts_established, investigation_methodology: investigation_methodology, description_outcome: description_outcome, recommended_actions: recommended_actions
+                    }
                 }).done(function (data) {//data from server
 
                     if (data == -1) {

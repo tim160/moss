@@ -29,7 +29,7 @@
             {
                 <div class="caseResolution custom">
                     <div class="outcomeText">@GlobalRes.ReasonForCaseClosure:</div>
-                    <div class="dropdown2">
+                    <div class="dropdown3">
                         <label id="ddlReasonClosure" data-value="">@GlobalRes.Selectanoption...</label><span class="arrow-down"></span>
                         <ul>
                             @foreach (case_closure_reason _reason in glb.GetCaseClosureReasonsWithStatus())
@@ -39,7 +39,7 @@
                         </ul>
                     </div>
                 </div>
-                
+                <div>&nbsp;</div>
                 <div class="caseResolution custom">
                     <div class="outcomeText">@GlobalRes.SuggestedOutcomeUp:</div>
                     <div class="dropdown2">
@@ -142,14 +142,14 @@
             _temp.siblings('ul').slideDown(300);
         });
 
-        $(".dropdown2 li").on("click", function (event) {
+        $(".dropdown3 li").on("click", function (event) {
             var temp = $(event.currentTarget);
             var _allOptions = temp.parents('ul ');
             _allOptions.find('li').removeClass('selected');
             temp.addClass('selected');
-            $(".dropdown2 #ddlReasonClosure").html(temp.text());
-            $(".dropdown2 #ddlReasonClosure").attr('data-value', temp.attr('data-value'));
-            $(".dropdown2 ul").slideUp();
+            $(".dropdown3 #ddlReasonClosure").html(temp.text());
+            $(".dropdown3 #ddlReasonClosure").attr('data-value', temp.attr('data-value'));
+            $(".dropdown3 ul").slideUp();
         });
 
 

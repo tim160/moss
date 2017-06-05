@@ -756,7 +756,6 @@ namespace EC.Controllers
             int mediator_id = Convert.ToInt16(Request["user_id"]);
             int report_id = Convert.ToInt16(Request["report_id"]);
             string description = Request["description"].ToString().Trim();
-            int? outcome_id = Convert.ToInt16(Request["outcome_id"]);
             string outcome = Request["outcome"].ToString().Trim();
 
             ReportModel rm = new ReportModel(report_id);
@@ -765,7 +764,24 @@ namespace EC.Controllers
             if (new_status == 5)
                 new_status = 6;
       //      return true;
-            return userModel.ResolveCase(report_id, mediator_id, description, new_status, outcome_id, outcome);
+            int? outcome_id = 0;
+            if (Request["outcome_id"] != "")
+            {
+                outcome_id = Convert.ToInt16(Request["outcome_id"]);
+            }
+            int? reason_id = 0;
+            if (Request["case_closure_reason_id"] != "")
+            {
+                reason_id = Convert.ToInt16(Request["case_closure_reason_id"]);
+            }
+            string executive_summary = Request["executive_summary"].ToString().Trim();
+            string facts_established = Request["facts_established"].ToString().Trim();
+            string investigation_methodology = Request["investigation_methodology"].ToString().Trim();
+            string description_outcome = Request["description_outcome"].ToString().Trim();
+            string recommended_actions = Request["recommended_actions"].ToString().Trim();
+
+            return userModel.ResolveCase(report_id, mediator_id, description, new_status, outcome_id, outcome, reason_id, executive_summary, facts_established, investigation_methodology, description_outcome, recommended_actions);
+
         }
 
         public bool NewStatus()
@@ -778,8 +794,24 @@ namespace EC.Controllers
             int report_id = Convert.ToInt16(Request["report_id"]);
             int promotion_id = Convert.ToInt16(Request["promotion_id"]);
             string description = Request["description"].ToString().Trim();
-            int? outcome_id = Convert.ToInt16(Request["outcome_id"]);
             string outcome = Request["outcome"].ToString().Trim();
+
+            int? outcome_id = 0;
+            if (Request["outcome_id"] != "")
+            {
+                outcome_id = Convert.ToInt16(Request["outcome_id"]);
+            }
+            int reason_id = 0;
+            if (Request["case_closure_reason_id"] != "")
+            {
+                reason_id = Convert.ToInt16(Request["case_closure_reason_id"]);
+            }
+            string executive_summary = Request["executive_summary"].ToString().Trim();
+            string facts_established = Request["facts_established"].ToString().Trim();
+            string investigation_methodology = Request["investigation_methodology"].ToString().Trim();
+            string description_outcome = Request["description_outcome"].ToString().Trim();
+            string recommended_actions = Request["recommended_actions"].ToString().Trim();
+
 
             if(mediator_id != user.id)
                 return false;
@@ -846,8 +878,8 @@ namespace EC.Controllers
                 new_status_id = ECGlobalConstants.investigation_status_spam;
             }
 
+            bool _new = userModel.ResolveCase(report_id, mediator_id, description, new_status_id, outcome_id, outcome, reason_id, executive_summary, facts_established, investigation_methodology, description_outcome, recommended_actions);
 
-            bool _new = userModel.ResolveCase(report_id, mediator_id, description, new_status_id, outcome_id, outcome);
             return true;
 
         }
@@ -865,12 +897,32 @@ namespace EC.Controllers
             int report_id = Convert.ToInt16(Request["report_id"]);
             int promotion_value = Convert.ToInt16(Request["promotion_value"]);
             string description = Request["description"].ToString().Trim();
-            int outcome_id = Convert.ToInt16(Request["outcome_id"]);
+
+
             string outcome = String.Empty;
             if (Request["outcome"]!=null)
             {
                 outcome = Request["outcome"].ToString().Trim();
             }
+
+            int outcome_id = 0;
+            if (Request["outcome_id"] != "")
+            {
+                outcome_id = Convert.ToInt16(Request["outcome_id"]);
+            }
+            int reason_id = 0;
+            if (Request["case_closure_reason_id"] != "")
+            {
+                reason_id = Convert.ToInt16(Request["case_closure_reason_id"]);
+            }
+            string executive_summary = Request["executive_summary"].ToString().Trim();
+            string facts_established = Request["facts_established"].ToString().Trim();
+            string investigation_methodology = Request["investigation_methodology"].ToString().Trim();
+            string description_outcome = Request["description_outcome"].ToString().Trim();
+            string recommended_actions = Request["recommended_actions"].ToString().Trim();
+
+
+
 
             if (mediator_id != user.id)
                 return -1;
@@ -882,16 +934,19 @@ namespace EC.Controllers
             {
                 return -1;
             }
-            if (promotion_value == ECGlobalConstants.investigation_status_resolution)
+            // we don't need this error anymore
+       /*     if (promotion_value == ECGlobalConstants.investigation_status_resolution)
             {
                 CompanyModel cm = new CompanyModel(um._user.company_id);
                 if (cm.AllMediators(cm._company.id, true, ECLevelConstants.level_escalation_mediator).Count == 0)
                     return 0;
             }
-
+            */
+            bool _new = userModel.ResolveCase(report_id, mediator_id, description, promotion_value, outcome_id, outcome, reason_id, executive_summary, facts_established, investigation_methodology, description_outcome, recommended_actions);
 
             switch (promotion_value)
             {
+
                 case 3:
                     if (rm._investigation_status == 9)
                         glb.UpdateReportLog(user.id, 29, report_id, "", null, description);
@@ -924,12 +979,11 @@ namespace EC.Controllers
 
 
             }
-            
 
 
 
-            bool _new = userModel.ResolveCase(report_id, mediator_id, description, promotion_value, outcome_id, outcome);
 
+       
             return 1;
         }
     }

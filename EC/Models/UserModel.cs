@@ -1049,10 +1049,27 @@ namespace EC.Models
             }
         }
 
-        public bool ResolveCase(int report_id, int mediator_id, string description, int new_status, int? outcome_id, string outcome)
+        public bool ResolveCase(int report_id, int mediator_id, string description, int new_status, int? outcome_id, string outcome, int? reason_id, string executive_summary, string facts_established, string investigation_methodology, string description_outcome, string recommended_actions)
         {
             try
             {
+                int case_closure_reason_id = 0;
+                if (reason_id.HasValue)
+                    case_closure_reason_id = reason_id.Value;
+
+                string executive_summary_str = "";
+                executive_summary_str = (executive_summary == null) ? "": executive_summary;
+                string facts_established_str = "";
+                facts_established_str = (facts_established == null) ? "" : facts_established;
+                string investigation_methodology_str = "";
+                investigation_methodology_str = (investigation_methodology == null) ? "" : investigation_methodology;
+                string description_outcome_str = "";
+                description_outcome_str = (description_outcome == null) ? "" : description_outcome;
+                string recommended_actions_str = "";
+                recommended_actions_str = (recommended_actions == null) ? "" : recommended_actions;
+                string outcome_message_str = "";
+
+
                 report_investigation_status report_investigation_status;
                 if (outcome_id.HasValue)
                 {
@@ -1064,7 +1081,13 @@ namespace EC.Models
                         user_id = mediator_id,
                         description = description,
                         outcome_id = outcome_id,
-                        outcome_message = outcome
+                        outcome_message = outcome,
+                        case_closure_reason_id = case_closure_reason_id,
+                        executive_summary = executive_summary_str,
+                        facts_established = facts_established_str,
+                        investigation_methodology = investigation_methodology_str,
+                        description_outcome = description_outcome_str,
+                        recommended_actions = recommended_actions_str
                     };
                 }
                 else
@@ -1076,7 +1099,13 @@ namespace EC.Models
                         created_date = DateTime.Now,
                         user_id = mediator_id,
                         description = description,
-                        outcome_message = ""
+                        outcome_message = "",
+                        case_closure_reason_id = case_closure_reason_id,
+                        executive_summary = executive_summary_str,
+                        facts_established = facts_established_str,
+                        investigation_methodology = investigation_methodology_str,
+                        description_outcome = description_outcome_str,
+                        recommended_actions = recommended_actions_str
                     };
                 }
 
