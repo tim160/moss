@@ -2473,7 +2473,7 @@ form.selectBlock.assignedToSelect .dropdown li .blockPhoto {
 }
 .caseMediatorBig {
     width: calc(100% - 105px);
-    display: table;
+    /*display: table;*/
     border-left: 2px solid #03796c;
     margin-left: -2px;
 }
@@ -2526,6 +2526,9 @@ form.selectBlock.assignedToSelect .dropdown li .blockPhoto {
     padding-bottom: 20px;
 }
 .caseMediatorBig .forText {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
     background-color: #049787;
 }
 .caseMediatorBig .openSansText:last-child{
