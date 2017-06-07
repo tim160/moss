@@ -56,13 +56,13 @@
         var outcome_id = $("#ddlOutcome").attr('data-value');
         var reason_id = $("#ddlReasonClosure").attr('data-value');
         
-        var outcome = $("#txtOutcome").val();
-        if (outcome == "") {
-            $("#txtOutcome").css("border", "2px solid red");
-            $("#txtOutcome").on('focusin', function () {
-                $("#txtOutcome").css("border", "none");
-            });
-        }
+    ///    var outcome = $("#txtOutcome").val();
+     ///   if (outcome == "") {
+   ///         $("#txtOutcome").css("border", "2px solid red");
+    ///        $("#txtOutcome").on('focusin', function () {
+     //           $("#txtOutcome").css("border", "none");
+     ///       });
+    ///    }
         if (outcome_id == "") {
             $("#ddlOutcome").css("border", "2px solid red");
             $("#ddlOutcome").on('focusin', function () {
@@ -88,14 +88,14 @@
         var description_outcome = $("#txtDescriptionOutcome").val();
         var recommended_actions = $("#txtRecommendedActions").val();
 
-        if (outcome != "") {
+
 
             if (_report_id > 0 && user_id > 0 && promotion_value != "") {
                 $.ajax({
                     method: "POST",
                     url: "/Case/CloseCase",
                     data: {
-                        user_id: user_id, report_id: _report_id, description: description, promotion_value: promotion_value, outcome_id: outcome_id, outcome: outcome,
+                        user_id: user_id, report_id: _report_id, description: description, promotion_value: promotion_value, outcome_id: outcome_id, outcome: '',
                         case_closure_reason_id: reason_id, executive_summary: executive_summary, facts_established: facts_established, investigation_methodology: investigation_methodology, description_outcome: description_outcome, recommended_actions: recommended_actions
                     }
                 }).done(function (data) {//data from server
@@ -116,13 +116,8 @@
                     console.log(error);
                 });
 
-            }
-        } else {
-            $("#txtOutcome").css({ "border": "2px solid red" });
-            $("#txtOutcome").on('focusin', function () {
-                $("#txtOutcome").css({ "border": "2px solid transparent" });
-            });
-        }
+            
+        } 
     }
     /*end click modal window*/
 

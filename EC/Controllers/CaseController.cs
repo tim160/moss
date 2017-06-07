@@ -756,7 +756,11 @@ namespace EC.Controllers
             int mediator_id = Convert.ToInt16(Request["user_id"]);
             int report_id = Convert.ToInt16(Request["report_id"]);
             string description = Request["description"].ToString().Trim();
-            string outcome = Request["outcome"].ToString().Trim();
+            string outcome = String.Empty;
+            if (Request["outcome"] != null)
+            {
+                outcome = Request["outcome"].ToString().Trim();
+            }
 
             ReportModel rm = new ReportModel(report_id);
             int new_status = rm._investigation_status + 1;
@@ -804,7 +808,12 @@ namespace EC.Controllers
             int report_id = Convert.ToInt16(Request["report_id"]);
             int promotion_id = Convert.ToInt16(Request["promotion_id"]);
             string description = Request["description"].ToString().Trim();
-            string outcome = Request["outcome"].ToString().Trim();
+
+            string outcome = String.Empty;
+            if (Request["outcome"] != null)
+            {
+                outcome = Request["outcome"].ToString().Trim();
+            }
 
             int? outcome_id = 0;
             if (Request["outcome_id"] != "")
