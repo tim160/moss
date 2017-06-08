@@ -25,7 +25,15 @@
                 <label class="close1"></label>
                 <div class="closeIcon" onclick='overlay()'></div>
             </div>
-            @if (((normal_button_value == ECGlobalConstants.investigation_status_resolution.ToString())) || (normal_button_value == ECGlobalConstants.investigation_status_closed.ToString()))
+            @if (overlay_title == GlobalRes.ReopenCase)
+            {
+                <div>&nbsp;</div>
+                <div>@GlobalRes.AddReasonWhy</div>
+                <div class="caseResolution">
+                    <textarea class="form-control" type="text" name="txtDescription" id="txtDescription"></textarea>
+                </div>
+            }
+            @if (((normal_button_value == ECGlobalConstants.investigation_status_resolution.ToString())) )
             {
                 <div class="caseResolution custom">
                     <div class="outcomeText">@GlobalRes.ReasonForCaseClosure:</div>
@@ -52,10 +60,10 @@
                         </ul>
                     </div>
                 </div>
-
+                <div>&nbsp;</div>
                 <div class="resolve">@GlobalRes.CaseClosureReport:</div>
 
-    <div>&nbsp;</div>
+                <div>&nbsp;</div>
                 <div>@GlobalRes.ExecutiveSummary:</div>
 
                 <div class="caseResolution">
@@ -94,25 +102,6 @@
                     <button type="submit" class="btn btn-sm btn-white" id="not_resolve_btn" value=@left_button_value>@left_button_promotion.ToUpper()</button>
                 }
             </div>
-            @*<div class="footerCreateTask2">
-                <div class="postionButtons positionCaseButtons">
-                    <div class="secondButton">
-                        <div class="secondButton2" id="closeCase">@GlobalRes.Closecase.ToUpper()</div>
-                    </div>
-                    <div class="firstButton">
-                        <div class="secondButton2">@GlobalRes.Returnnvestigation.ToUpper()</div>
-                    </div>
-                </div>
-                <div class="createNewTaskBlock">
-                    <span class="acceptCaseBtn promoteCase">@normalpromotion_button.ToUpper()</span>
-                </div>
-                @if (investigationstatus == 3)
-                {
-                    <div class="createNewTaskBlock">
-                        <span class="acceptCaseBtn cannotBeResolved">@GlobalRes.CaseCantBeResolved.ToUpper()</span>
-                    </div>
-                }
-            </div>*@
         </div>
     </div>
 </div>

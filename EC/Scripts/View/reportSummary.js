@@ -81,14 +81,29 @@
         else {
             $("#ddlReasonClosure").css("border", "none");
         }
-
-        var executive_summary = $("#txtExecutiveSummary").val();
-        var facts_established = $("#txtFactsEstablished").val();
-        var investigation_methodology = $("#txtInvestigationMethodology").val();
-        var description_outcome = $("#txtDescriptionOutcome").val();
-        var recommended_actions = $("#txtRecommendedActions").val();
-
-
+        if ($('#txtDescription').length > 0) {
+            description = $("#txtDescription").val();
+        }
+        var executive_summary = '';
+        if ($('#txtExecutiveSummary').length > 0) {
+            executive_summary = $("#txtExecutiveSummary").val();
+        }
+        var facts_established = '';
+        if ($('#txtFactsEstablished').length > 0) {
+            facts_established = $("#txtFactsEstablished").val();
+        }
+        var investigation_methodology = '';
+        if ($('#txtInvestigationMethodology').length > 0) {
+            investigation_methodology = $("#txtInvestigationMethodology").val();
+        }
+        var description_outcome = '';
+        if ($('#txtDescriptionOutcome').length > 0) {
+            description_outcome = $("#txtDescriptionOutcome").val();
+        }
+        var recommended_actions = '';
+        if ($('#txtRecommendedActions').length > 0) {
+            recommended_actions = $("#txtRecommendedActions").val();
+        }
 
             if (_report_id > 0 && user_id > 0 && promotion_value != "") {
                 $.ajax({

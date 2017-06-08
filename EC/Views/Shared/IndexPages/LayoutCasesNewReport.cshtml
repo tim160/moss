@@ -327,12 +327,7 @@
                 if ((investigationstatus > 2 && investigationstatus < 7) || (investigationstatus == 9))
                 {
                     string Res_or_comp = GlobalRes.CloseCaseUp.ToUpper();
-                    if (investigationstatus == 3)
-                    {
-                  ////      left_button_promotion = GlobalRes.CaseCantBeResolved;
-                //////        left_button_value = Constant.investigation_status_completed.ToString();
-                    }
-                  //  if ((investigationstatus == 4) || (investigationstatus == 5) || (investigationstatus == 6))
+
                     if ((investigationstatus == 4) || (investigationstatus == 6))
                     {
                         Res_or_comp = "";
@@ -567,7 +562,7 @@
                                 textareaPopup.css({'border-color':'red', 'box-shadow':'red'});
                             }
                             else{
-                                console.log('logButtonModal click - _report_id = ' + @_report_id);
+                              //  console.log('logButtonModal click - _report_id = ' + @_report_id);
                             }
                         }
                     );
@@ -577,7 +572,7 @@
                                 textarea.css({'border-color':'red', 'box-shadow':'red'});
                             }
                             else{
-                                console.log('repButtonModal click - _report_id = ' + @_report_id);
+                            //    console.log('repButtonModal click - _report_id = ' + @_report_id);
                             }
                         }
                     );
