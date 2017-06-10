@@ -69,7 +69,7 @@
         <div class="caseMediator" style="display: none;">
             <div class="displayMediators">
                 <div class="blockPhoto">
-                    @if (temp_um.ID != 0)
+                    @if (temp_um.ID != 0 && ris != null && ris.user_id != 0)
                     {
                         @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", ris.user_id }, { "is_owner", true } })
                     }
@@ -201,7 +201,15 @@ else if (rm._investigation_status == ECGlobalConstants.investigation_status_clos
                             <div class="blockPhoto">
                                 <div class="blockPhoto">
                                     <div class="blockPhoto">
-                                        @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", ris.user_id }, { "is_owner", true } })
+                                        @if (ris != null && ris.user_id != 0)
+                                        {
+                                            @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", ris.user_id }, { "is_owner", true } })
+                                        }
+                                        else
+                                        {
+                                            <div class="status"></div>
+                                            <div class="anonimousReporterIcon"></div>
+                                        }
                                     </div>
                                 </div>
                             </div>

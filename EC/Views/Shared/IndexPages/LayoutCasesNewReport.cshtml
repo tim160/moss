@@ -387,7 +387,17 @@
                         <div class="displayMediators">
                             @foreach (user _mediator in mediators)
                             {
-                                @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", _mediator.id }, { "is_owner", true } })
+                                
+                                if (_mediator != null && _mediator.id != 0)
+                                {
+                                    @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", _mediator.id }, { "is_owner", true } })
+                                }
+                                else
+                                {
+                                    <div class="status"></div>
+                                    <div class="anonimousReporterIcon"></div>
+                                }
+                                
                             }
                         </div><!--displayMediators-->
                     }

@@ -1116,6 +1116,8 @@ namespace EC.Models
                 report.last_update_dt = DateTime.Now;
 
                 db.SaveChanges();
+
+
                 return true;
             }
             catch (System.Data.DataException ex)

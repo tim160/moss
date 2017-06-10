@@ -794,7 +794,40 @@ namespace EC.Controllers
             if (Request["recommended_actions"] != null)
                 recommended_actions = Request["recommended_actions"].ToString().Trim();
 
-            return userModel.ResolveCase(report_id, mediator_id, description, new_status, outcome_id, outcome, reason_id, executive_summary, facts_established, investigation_methodology, description_outcome, recommended_actions);
+            bool _new = userModel.ResolveCase(report_id, mediator_id, description, new_status, outcome_id, outcome, reason_id, executive_summary, facts_established, investigation_methodology, description_outcome, recommended_actions);
+            if (_new)
+            {
+                #region Email Ready
+                List<string> to = new List<string>();
+                List<string> cc = new List<string>();
+                List<string> bcc = new List<string>();
+
+                EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
+                EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+                string body = "";
+                #endregion
+
+                #region Email To Mediators About Case Update
+                rm = new ReportModel(report_id);
+                foreach (user _user in rm._mediators_whoHasAccess_toReport)
+                {
+                    if ((_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_user.email.Trim()))
+                    {
+                        to = new List<string>();
+                        cc = new List<string>();
+                        bcc = new List<string>();
+
+                        to.Add(_user.email.Trim());
+
+                        eb.NextStep(_user.first_nm, _user.last_nm, rm._report.display_name);
+                        body = eb.Body;
+
+                        em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_NextStep, body, true);
+                    }
+                }
+                #endregion
+            }
+            return _new;
 
         }
 
@@ -909,6 +942,41 @@ namespace EC.Controllers
 
             bool _new = userModel.ResolveCase(report_id, mediator_id, description, new_status_id, outcome_id, outcome, reason_id, executive_summary, facts_established, investigation_methodology, description_outcome, recommended_actions);
 
+            if (_new)
+            {
+                #region Email Ready
+                List<string> to = new List<string>();
+                List<string> cc = new List<string>();
+                List<string> bcc = new List<string>();
+
+                EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
+                EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+                string body = "";
+                #endregion
+
+                #region Email To Mediators About Case Update
+                rm = new ReportModel(report_id);
+                foreach (user _user in rm._mediators_whoHasAccess_toReport)
+                {
+                    if ((_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_user.email.Trim()))
+                    {
+                        to = new List<string>();
+                        cc = new List<string>();
+                        bcc = new List<string>();
+
+                        to.Add(_user.email.Trim());
+
+                        eb.NextStep(_user.first_nm, _user.last_nm, rm._report.display_name);
+                        body = eb.Body;
+
+                        em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_NextStep, body, true);
+                    }
+                }
+                #endregion
+            
+            
+            
+            }
             return true;
 
         }
@@ -984,6 +1052,37 @@ namespace EC.Controllers
             */
             bool _new = userModel.ResolveCase(report_id, mediator_id, description, promotion_value, outcome_id, outcome, reason_id, executive_summary, facts_established, investigation_methodology, description_outcome, recommended_actions);
 
+            if (_new)
+            {
+                #region Email Ready
+                List<string> to = new List<string>();
+                List<string> cc = new List<string>();
+                List<string> bcc = new List<string>();
+
+                EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
+                EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+                string body = "";
+                #endregion
+
+                #region Email To Mediators About Case Update
+                foreach (user _user in rm._mediators_whoHasAccess_toReport)
+                {
+                    if ((_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_user.email.Trim()))
+                    {
+                        to = new List<string>();
+                        cc = new List<string>();
+                        bcc = new List<string>();
+
+                        to.Add(_user.email.Trim());
+
+                        eb.NextStep(_user.first_nm, _user.last_nm, rm._report.display_name);
+                        body = eb.Body;
+
+                        em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_NextStep, body, true);
+                    }
+                }
+                #endregion
+            }
             switch (promotion_value)
             {
 

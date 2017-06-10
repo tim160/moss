@@ -322,7 +322,7 @@
                                 <li>
                                     <div class="leftBlockWithPhoto">
                                         <div class="blockPhoto">
-                                            @if (temp_um.ID != 0)
+                                            @if (temp_um.ID != 0 && ris != null && ris.user_id != 0)
                                             {
                                                 @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", ris.user_id }, { "is_owner", true } })
                                             }
@@ -376,7 +376,7 @@
                                                 <div class="leftBlockWithPhoto">
                                                     <div class="blockPhoto">
 
-                                                        @if (temp_um.ID != 0)
+                                                        @if (temp_um.ID != 0 && ris != null && ris.user_id != 0)
                                                         {
                                                             @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", ris.user_id }, { "is_owner", true } })
                                                         }
@@ -440,7 +440,7 @@
                                     <div class="leftBlockWithPhoto">
                                         <div class="blockPhoto">
 
-                                            @if (temp_um.ID != 0)
+                                            @if (temp_um.ID != 0 && ris != null && ris.user_id != 0)
                                             {
                                                 @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", ris.user_id }, { "is_owner", true } })
                                             }
@@ -483,7 +483,7 @@
                                         <li>
                                             <div class="leftBlockWithPhoto">
                                                 <div class="blockPhoto">
-                                                    @if (temp_um.ID != 0)
+                                                    @if (temp_um.ID != 0 && ris != null && ris.user_id != 0)
                                                     {
                                                         @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", ris.user_id }, { "is_owner", true } })
                                                     }

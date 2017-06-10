@@ -182,7 +182,7 @@
                 <div class="column3">
                     <div class="leftBlockWithPhoto">
                         <div class="blockPhoto">
-                            @if (true)
+                            @if (Model.last_sender_id != 0)
                             {
                                 @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", Model.last_sender_id }, { "is_owner", true } })
                                 <div class="circle green"></div>
@@ -229,7 +229,7 @@
                 <div class="column3">
                     <div class="leftBlockWithPhoto">
                         <div class="blockPhoto">
-                            @if (true)
+                            @if (Model.previous_sender_id != null && Model.previous_sender_id != 0)
                             {
                                 @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", Model.previous_sender_id }, { "is_owner", true } })
                                 <div class="circle green"></div>
@@ -273,7 +273,7 @@
                 <div class="column3">
                     <div class="leftBlockWithPhoto">
                         <div class="blockPhoto">
-                            @if (true)
+                            @if (Model.last_sender_id != null)
                             {
                                 @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", Model.last_sender_id }, { "is_owner", true } })
                                 <div class="circle green"></div>
@@ -312,7 +312,7 @@
                 <div class="column3">
                     <div class="leftBlockWithPhoto">
                         <div class="blockPhoto">
-                            @if (true)
+                            @if (Model.last_sender_id != 0)
                             {
                                 @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", Model.last_sender_id }, { "is_owner", true } })
                                 <div class="circle green"></div>
