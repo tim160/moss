@@ -17,24 +17,34 @@
     //    class_ext = "_cc";
     //}
     
-    int user_id = (Int32)ViewBag.user_id;
-    bool is_owner = (bool)ViewBag.is_owner;
+    int _user_id = 0;
+    bool is_owner = false;
+    
+    if(ViewBag.user_id != null)
+    { 
+        _user_id = (Int32)ViewBag.user_id;
+    }
+    if (ViewBag.is_owner != null)
+    {
+        is_owner = (bool)ViewBag.is_owner;
+    }
+    
 
-    UserModel um = new UserModel(user_id);
+    UserModel um = new UserModel(_user_id);
     string _sb_full_name = ""; 
     string _photo_path = "~/Content/Icons/noPhoto.png";
-    int _user_id = 0;
+
     if(um != null && um._user != null)
     {
         if (um._user.first_nm.Length > 0 || um._user.last_nm.Length > 0)
         {
             _sb_full_name = (um._user.first_nm + " " + um._user.last_nm).Replace(" ", "_");
         }
-        if (um._user.photo_path.Trim() == "")
+        if (um._user.photo_path.Trim() != "")
         {
             _photo_path = um._user.photo_path;
         }
-        _user_id = um._user.id;
+        //_user_id = um._user.id;
     }
    }
 
@@ -55,7 +65,7 @@
         }
     }
     <div class="photoPersonal">
-        @if (user_id != 0)
+        @if (_user_id != 0)
         {
             <a href="/settings/user/@_user_id"><img src='@Url.Content(_photo_path)' title=@_sb_full_name /></a>
         }
