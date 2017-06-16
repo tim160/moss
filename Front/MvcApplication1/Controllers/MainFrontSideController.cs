@@ -37,12 +37,16 @@ namespace Front.Controllers
                         mailMessage.Subject = "New user in http://employeeconfidential.com/";
                         mailMessage.Body = "Hello,\n\n new request in http://employeeconfidential.com/ \n\n First name is " + fname +
                             "\n\n Last Name is " + lname + "\n\n Company name is " + cname + "\n\n Phone is " + phone + "\n\n email is " + email;
-                        SmtpClient smtpClient = new SmtpClient("employeeconfidential.com");
 
-                        smtpClient.Credentials = new System.Net.NetworkCredential
-                        ("employeeconfidential@employeeconfidential.com", "confidentialConfidential1$3");
+                        SmtpClient smtpClient = new SmtpClient("dedrelay.secureserver.net");
+                        smtpClient.UseDefaultCredentials = true;
+                        
+                      //  SmtpClient smtpClient = new SmtpClient("employeeconfidential.com");
+                    //    smtpClient.UseDefaultCredentials = false;
+                    ////    smtpClient.Credentials = new System.Net.NetworkCredential
+                    //    ("employeeconfidential@employeeconfidential.com", "confidentialConfidential1$3");
 
-                    ///    m_FromAddress = "newrequest@employeeconfidential.com";
+                        
 
                   /*      SmtpClient smtpClient = new SmtpClient("voteplayers.com");
 
