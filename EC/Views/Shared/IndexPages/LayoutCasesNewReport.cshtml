@@ -410,17 +410,27 @@
                 bool flag = false;
                 if (CurrentURL.Contains("/cases"))
                 {
-                    _temp = GlobalRes.Allcases;
+                    _temp = GlobalRes.ActiveCasesUp;
+                    flag = true;
+                }
+                if (CurrentURL.Contains("/cases/index"))
+                {
+                    _temp = GlobalRes.ActiveCasesUp;
                     flag = true;
                 }
                 if (CurrentURL.Contains("/cases/completed"))
                 {
-                    _temp = GlobalRes.ClosedCases;
+                    _temp = GlobalRes.CompletedcasesUp;
+                    flag = true;
+                }
+                if (CurrentURL.Contains("/cases/closed"))
+                {
+                    _temp = GlobalRes.ClosedCasesUp;
                     flag = true;
                 }
                 if (CurrentURL.Contains("/cases/spam"))
                 {
-                    _temp = GlobalRes.Spamcases;
+                    _temp = GlobalRes.SpamcasesUp;
                     flag = true;
                 }
 

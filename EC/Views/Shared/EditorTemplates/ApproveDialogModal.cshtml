@@ -168,11 +168,12 @@
         });
         var button = "";
         $("#escalate_btn").on('click', function (event) {
-            console.log(11);
+
             button = $(event.currentTarget).val();
             sendAjax(button);
-            var str = window.location.href;
-            window.location.href = str;
+
+
+
         });
         function sendAjax(promotion_value) {
             var description = $("#txtEscalate").val();
@@ -197,8 +198,16 @@
                         }
 
                         if (data == 1) {
-                            var str = window.location.href;
-                            window.location.href = str;
+                                console.log('approvedModal', promotion_value);
+                                var str = window.location.href;
+                                if (promotion_value == 3)
+                                    str = '/cases/index';
+                                if (promotion_value == 4)
+                                    str = '/cases/completed';
+                                if (promotion_value == 9)
+                                    str = '/cases/closed';
+
+                                window.location.href = str;
                         }
                         if (data == 0) {
                         }

@@ -1159,7 +1159,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Company Administrators.
+        ///   Looks up a localized string similar to Case Admins.
         /// </summary>
         public static string CompanyMediators {
             get {

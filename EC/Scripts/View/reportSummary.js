@@ -46,7 +46,10 @@
 
     $("#resolve_btn").on('click', function (event) {
         button = $(event.currentTarget).val();
-        sendAjax(button);
+        var data = sendAjax(button);
+        var promotion_value = button;
+        console.log('approvedModal', promotion_value);
+
 
     });
     function sendAjax(promotion_value) {
@@ -104,7 +107,7 @@
         if ($('#txtRecommendedActions').length > 0) {
             recommended_actions = $("#txtRecommendedActions").val();
         }
-
+        debugger;
             if (_report_id > 0 && user_id > 0 && promotion_value != "") {
                 $.ajax({
                     method: "POST",
@@ -122,6 +125,14 @@
 
                     if (data == 1) {
                         var str = window.location.href;
+
+                            if (promotion_value == 3)
+                                str = '/cases/index';
+                            if (promotion_value == 4)
+                                str = '/cases/completed';
+                            if (promotion_value == 9)
+                                str = '/cases/closed';
+
                         window.location.href = str;
                     }
                     if (data == 0) {
@@ -129,10 +140,12 @@
                     }
                 }).fail(function (error) {
                     console.log(error);
+                    return -1;
                 });
 
             
-        } 
+            }
+            return 0;
     }
     /*end click modal window*/
 

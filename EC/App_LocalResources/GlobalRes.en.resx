@@ -574,7 +574,7 @@
     <value>Case workflow</value>
   </data>
   <data name="CompanyMediators" xml:space="preserve">
-    <value>Company Administrators</value>
+    <value>Case Admins</value>
   </data>
   <data name="CompanyMediatorsSettings" xml:space="preserve">
     <value>Company Case Administrator Settings</value>
