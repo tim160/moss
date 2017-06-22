@@ -47,10 +47,6 @@
     $("#resolve_btn").on('click', function (event) {
         button = $(event.currentTarget).val();
         var data = sendAjax(button);
-        var promotion_value = button;
-        console.log('approvedModal', promotion_value);
-
-
     });
     function sendAjax(promotion_value) {
         var description = "";
@@ -107,8 +103,7 @@
         if ($('#txtRecommendedActions').length > 0) {
             recommended_actions = $("#txtRecommendedActions").val();
         }
-        debugger;
-            if (_report_id > 0 && user_id > 0 && promotion_value != "") {
+             if (_report_id > 0 && user_id > 0 && promotion_value != "") {
                 $.ajax({
                     method: "POST",
                     url: "/Case/CloseCase",

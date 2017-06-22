@@ -247,6 +247,7 @@
     <Content Include="App\util\parentController.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\caiNew.css" />
+    <Content Include="Content\emails\CaseCloseApprove.html" />
     <Content Include="Content\emails\SeniorMediatorCaseConfirm.html" />
     <Content Include="Content\fonts\bootstrap.min.css" />
     <Content Include="Content\caiOLD.css" />
@@ -705,6 +706,9 @@
     <Compile Include="Models\Database\billing_option.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Database\case_closure_reason.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Database\client.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
@@ -727,6 +731,9 @@
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\company_location.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\company_outcome.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\company_payments.cs">

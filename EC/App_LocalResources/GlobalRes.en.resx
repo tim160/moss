@@ -1837,4 +1837,10 @@
   <data name="RecommendedActions" xml:space="preserve">
     <value>Recommended actions for witnesses and reporter</value>
   </data>
+  <data name="RecommendSecond1" xml:space="preserve">
+    <value>Please note: We stongly recommend that you invite a second reviewer to read the case report and approve the request for closure.</value>
+  </data>
+  <data name="RecommendSecond2" xml:space="preserve">
+    <value>It is not best practise to have the same person create the closure report and approve the request to close the case.</value>
+  </data>
 </root>

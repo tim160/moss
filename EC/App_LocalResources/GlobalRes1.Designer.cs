@@ -4075,6 +4075,24 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please note: We stongly recommend that you invite a second reviewer to read the case report and approve the request for closure..
+        /// </summary>
+        public static string RecommendSecond1 {
+            get {
+                return ResourceManager.GetString("RecommendSecond1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It is not best practise to have the same person create the closure report and approve the request to close the case..
+        /// </summary>
+        public static string RecommendSecond2 {
+            get {
+                return ResourceManager.GetString("RecommendSecond2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please, re-enter email and token.
         /// </summary>
         public static string reEnterEmailToken {
