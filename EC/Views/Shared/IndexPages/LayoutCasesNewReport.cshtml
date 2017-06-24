@@ -75,10 +75,10 @@
     string[] _statuses = { GlobalRes.PreReviewUp, GlobalRes.Review, GlobalRes.Investigation, GlobalRes.Resolution, GlobalRes.Closed };
     string[] _statuses_not_resolved = { GlobalRes.PreReviewUp, GlobalRes.Review, GlobalRes.Investigation, GlobalRes.Resolution, GlobalRes.Closed };
 
-    string same_mediator_warning = "";
+    string same_mediator_warning = GlobalRes.AddFurtherNotes;
     if (user_id == rm._last_investigation_status().user_id)
     {
-        same_mediator_warning = " " + GlobalRes.RecommendSecond1 + " " + GlobalRes.RecommendSecond2;
+        same_mediator_warning = GlobalRes.RecommendSecond1 + " " + GlobalRes.RecommendSecond2;
     }
     //string page_subtitle = "Cases"; 
     //if (ViewBag.page_subtitle != null)
@@ -618,11 +618,11 @@
             $("#approve_close").on('click', function(el){
 
                 $("#approveDialog").toggle();
-                $("#txtEscalate").attr('placeholder', "@Html.Raw(GlobalRes.AddFurtherNotes + same_mediator_warning)");
+                $("#txtEscalate").attr('placeholder', "@Html.Raw(same_mediator_warning)");
                 $("#escalate_btn").text("@Html.Raw(GlobalRes.CloseCaseUp)");
                 $("#escalate_btn").val(9);
                 $("#_overlay_title").text("@Html.Raw(GlobalRes.CloseCaseUp)");
-                $("#textbox_title").text("@Html.Raw(GlobalRes.AddFurtherNotes + same_mediator_warning)");
+                $("#textbox_title").text("@Html.Raw(same_mediator_warning)");
             });
         </script>
 </body>
