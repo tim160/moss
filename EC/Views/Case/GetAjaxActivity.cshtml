@@ -97,7 +97,12 @@
                                 }
                                 @_string_to_add
                             </span>
+
                         </div>
+                        @if (_log!= null && _log.action_ds != null && _log.action_ds.Length > 0)
+                        { 
+                            <p class="text"> @_log.action_ds</p>
+                        }
                         <p class="personalName">@_sender_name</p>
                         <p class="text"> @_sender_title</p>
                     </div>
