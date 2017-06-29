@@ -183,6 +183,7 @@
                     UserModel temp_um = new UserModel(ris.user_id);
 
                     <div class="caseMediatorBig" style="display: none;">
+                        @* start work *@
                         <div class="caseMediator">
                             <div class="displayMediators">
                                 <div class="blockPhoto">
@@ -320,6 +321,153 @@
 
                             </div>
                         </div>
+
+
+
+                        @* this is dublicate scenario for triangle down 29.06.17 *@
+
+                        <div class="caseMediator">
+                            
+                            <div class="positionTriangleClosedCase triangles"></div>
+                            <div class="displayMediators">
+                                <div class="blockPhoto">
+                                    @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", ris.user_id }, { "is_owner", true } })
+                                </div>
+                            </div>
+                            <div class="forText">
+                                <div class="boldText">
+                                    @if (ris.investigation_status_id == ECGlobalConstants.investigation_status_completed)
+                                    {
+                                        @GlobalRes.CaseCantBeResolved
+                                    }
+                                    else if (ris.investigation_status_id == ECGlobalConstants.investigation_status_resolution)
+                                    {
+                                        @GlobalRes.CaseResolved
+                                    }
+                                </div>
+                                <div class="regularText">
+                                    @temp_um._user.first_nm @temp_um._user.last_nm, @m_DateTimeHelper.ConvertDateToLongMonthString(ris.created_date):
+                                </div>
+
+                                @if (ris.case_closure_reason_id.HasValue)
+                                {
+                                    <div class="boldText">
+                                        @GlobalRes.ReasonForCaseClosure: @glb.GetCaseClosureReasonById(ris.case_closure_reason_id.Value)
+                                    </div>
+                                    <div class="openSansText">
+                                        &nbsp;
+                                    </div>
+                                }
+
+                                @if (ris.outcome_id.HasValue)
+                                {
+                                    <div class="boldText">
+                                        @GlobalRes.SuggestedOutcomeUp: @glb.GetOutcomeNameById(ris.outcome_id.Value)
+                                    </div>
+                                    <div class="openSansText">
+                                        &nbsp;
+                                    </div>
+                                }
+                                @if (ris.outcome_message != null && ris.outcome_message.Length > 0)
+                                {
+                                    <div class="boldText">
+                                        @GlobalRes.CaseClosureReport:
+                                    </div>
+                                    <div class="openSansText">
+                                        @ris.outcome_message
+                                    </div>
+                                }
+                                @if (ris.executive_summary != null && ris.executive_summary.Length > 0)
+                                {
+                                    <div class="boldText">
+                                        @GlobalRes.ExecutiveSummary:
+                                    </div>
+                                    <div class="openSansText">
+                                        @ris.executive_summary
+                                    </div>
+                                }
+                                @if (ris.facts_established != null && ris.facts_established.Length > 0)
+                                {
+                                    <div class="boldText">
+                                        @GlobalRes.FactsEstablished:
+                                    </div>
+                                    <div class="openSansText">
+                                        @ris.facts_established
+                                    </div>
+                                }
+
+                                @if (ris.investigation_methodology != null && ris.investigation_methodology.Length > 0)
+                                {
+                                    <div class="boldText">
+                                        @GlobalRes.InvestigationMethodology:
+                                    </div>
+                                    <div class="openSansText">
+                                        @ris.investigation_methodology
+                                    </div>
+                                }
+                                @if (ris.description_outcome != null && ris.description_outcome.Length > 0)
+                                {
+                                    <div class="boldText">
+                                        @GlobalRes.DescriptionOutcome:
+                                    </div>
+                                    <div class="openSansText">
+                                        @ris.description_outcome
+                                    </div>
+                                }
+                                @if (ris.recommended_actions != null && ris.recommended_actions.Length > 0)
+                                {
+                                    <div class="boldText">
+                                        @GlobalRes.RecommendedActions:
+                                    </div>
+                                    <div class="openSansText">
+                                        @ris.recommended_actions
+                                    </div>
+                                }
+
+                            </div>
+                            <div class="border"></div>
+                        </div>
+                        @{
+                            ris = rm._last_investigation_status();
+                            temp_um = new UserModel(ris.user_id);
+                        }
+
+                        <div class="caseMediator">
+                            <div class="displayMediators">
+                                <div class="blockPhoto">
+                                    <div class="blockPhoto">
+                                        <div class="blockPhoto">
+                                            @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", ris.user_id }, { "is_owner", true } })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="forText">
+                                <div class="boldText">
+                                    @GlobalRes.Approved
+                                </div>
+                                <div class="regularText">
+                                    @temp_um._user.first_nm @temp_um._user.last_nm,    @m_DateTimeHelper.ConvertDateToLongMonthString(ris.created_date):
+                                </div>
+
+
+                                @if (ris.description != null && ris.description.Length > 0)
+                                {
+                                    <div class="boldText">
+                                        &nbsp;
+                                    </div>
+                                    <div class="openSansText">
+                                        @ris.description
+                                    </div>
+                                }
+
+
+
+                            </div>
+                        </div>
+
+
+                        @* end work *@
                     </div>
                         }
                         <div class="firstHeader2">
