@@ -1843,4 +1843,10 @@
   <data name="RecommendSecond2" xml:space="preserve">
     <value>It is not best practise to have the same person create the closure report and approve the request to close the case.</value>
   </data>
+  <data name="CaseReOpened" xml:space="preserve">
+    <value>Case re-opened</value>
+  </data>
+  <data name="CaseReturnedFutherInvestigation" xml:space="preserve">
+    <value>Case returned for futher investigation</value>
+  </data>
 </root>

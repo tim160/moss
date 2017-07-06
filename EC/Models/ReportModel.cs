@@ -11,7 +11,8 @@ using EC.Models.Utils;
 using EC.App_LocalResources;
 using System.Data.Entity.Validation;
 using EC.Constants;
-
+using EC.Models.ViewModels;
+using Newtonsoft.Json;
 
 namespace EC.Models
 {
@@ -2092,6 +2093,103 @@ namespace EC.Models
             {
                 return "Cannot update your password "; // GlobalRes.ErrorSavingLoginPass;
             }
+        }
+
+        public List<CaseInvestigationStatusViewModel> CaseClosuresMessages()
+        {
+            List<report_investigation_status> dbReport_Investigation_statuses = db.report_investigation_status.Where(item =>  item.report_id == ID).OrderBy(item => item.created_date).ToList();
+            List<CaseInvestigationStatusViewModel> investiogationStatusesList = new List<CaseInvestigationStatusViewModel>();
+
+            foreach (report_investigation_status ris in dbReport_Investigation_statuses)
+            {
+                ///  cannot cast directly -> casting through json   CaseInvestigationStatusViewModel cisvm = (CaseInvestigationStatusViewModel)ris;
+                var serializedParent = JsonConvert.SerializeObject(ris);
+                CaseInvestigationStatusViewModel cisvm = JsonConvert.DeserializeObject<CaseInvestigationStatusViewModel>(serializedParent);
+
+                cisvm.previous_investigation_status = 0;
+                cisvm.investigation_status_name = "";
+                cisvm.query_new_investigation_status_name = "";
+
+                investiogationStatusesList.Add(cisvm);
+            }
+            
+            if (investiogationStatusesList.Count > 0)
+            {
+                CaseInvestigationStatusViewModel cisvm = investiogationStatusesList[0];
+                if(cisvm.investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Resolution)
+                    cisvm.query_new_investigation_status_name = App_LocalResources.GlobalRes.CaseSentToEsacaltionMediatorForReview;
+
+            }
+
+            for (int i = 1; i < investiogationStatusesList.Count(); i++)
+            {
+                CaseInvestigationStatusViewModel cisvm = investiogationStatusesList[i];
+                CaseInvestigationStatusViewModel cisvm_prev = investiogationStatusesList[i-1];
+
+                cisvm.previous_investigation_status = cisvm_prev.investigation_status_id;
+                if (cisvm.investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Resolution)
+                    cisvm.query_new_investigation_status_name = App_LocalResources.GlobalRes.CaseSentToEsacaltionMediatorForReview;
+
+                //case just closed
+                if (cisvm.investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Closed)
+                    cisvm.query_new_investigation_status_name = App_LocalResources.GlobalRes.Approved;
+
+                //case just sent to investigation
+                if (cisvm.investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Investigation && (cisvm.previous_investigation_status == 0 || cisvm.previous_investigation_status == 1 || cisvm.previous_investigation_status == 2 || cisvm.previous_investigation_status == 7))
+                    cisvm.query_new_investigation_status_name = "";
+
+                //case just sent to investigation
+                if (cisvm.investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Investigation && cisvm.previous_investigation_status == (Int32)CaseStatusConstants.CaseStatusValues.Resolution)
+                    cisvm.query_new_investigation_status_name = App_LocalResources.GlobalRes.CaseReturnedFutherInvestigation;
+
+                //case just sent to investigation
+                if (cisvm.investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Investigation && cisvm.previous_investigation_status == (Int32)CaseStatusConstants.CaseStatusValues.Closed)
+                    cisvm.query_new_investigation_status_name = App_LocalResources.GlobalRes.CaseReOpened;
+
+            }
+            return investiogationStatusesList;
+        }
+
+        public string CaseStatusGreenBarTitle()
+        {
+            string _green_bar_status = "";
+            
+            //case just closed
+            if (_last_investigation_status().investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Closed)
+                _green_bar_status = GlobalRes.CaseClosed;
+
+            //current - investigation, previous - closed => Re-opened
+            if (_last_investigation_status().investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Investigation && _previous_investigation_status().investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Closed)
+            {
+                _green_bar_status = GlobalRes.CaseReOpened;
+            }
+
+            //current - investigation, previous - Resolution => Returned for futher investigation
+            if (_last_investigation_status().investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Investigation && _previous_investigation_status().investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Resolution)
+            {
+                _green_bar_status = GlobalRes.CaseReturnedFutherInvestigation;
+            }
+
+            //current - Resolution
+            if (_last_investigation_status().investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Resolution)
+            {
+                _green_bar_status = GlobalRes.CaseClosureReport;
+            }
+
+
+            return _green_bar_status;
+        }
+
+        public string CaseStatusGreenBarSubTitle()
+        {
+            string _green_bar_status = "";
+            //current - Resolution
+            if (_last_investigation_status().investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Resolution)
+            {
+                _green_bar_status = GlobalRes.CaseSentToEsacaltionMediatorForReview;
+            }
+
+            return _green_bar_status;
         }
     }
 }
