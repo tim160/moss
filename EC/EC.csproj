@@ -706,9 +706,6 @@
     <Compile Include="Models\Database\billing_option.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Database\case_closure_reason.cs">
-      <DependentUpon>ECEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Database\client.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
@@ -731,12 +728,6 @@
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\company_location.cs">
-      <DependentUpon>ECEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Database\company_outcome.cs">
-      <DependentUpon>ECEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Database\company_payments.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\company_relationship.cs">
@@ -890,9 +881,6 @@
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\status.cs">
-      <DependentUpon>ECEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Database\sysdiagrams.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\task.cs">
