@@ -14,6 +14,7 @@ using EC.Constants;
 using EC.Models.ViewModels;
 using Newtonsoft.Json;
 
+
 namespace EC.Models
 {
     public class ReportModel : BaseModel
