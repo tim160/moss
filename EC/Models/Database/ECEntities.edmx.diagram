@@ -83,6 +83,9 @@
         <AssociationConnector Association="ECModel.FK_Report_ManagementKnow" ManuallyRouted="false" />
         <AssociationConnector Association="ECModel.FK_Report_User" ManuallyRouted="false" />
         <AssociationConnector Association="ECModel.FK_ReportNonMediatorInvolved_Report" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ECModel.case_closure_reason" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ECModel.company_outcome" Width="1.5" PointX="27.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ECModel.company_payments" Width="1.5" PointX="27.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -21,5 +21,9 @@ namespace EC.Models.Database
         public System.DateTime created_dt { get; set; }
         public int is_active { get; set; }
         public string comments { get; set; }
+        public Nullable<int> reseller_type_id { get; set; }
+        public Nullable<int> reseller_level { get; set; }
+        public Nullable<int> reseller_comission { get; set; }
+        public Nullable<int> reseller_discount { get; set; }
     }
 }

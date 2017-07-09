@@ -706,6 +706,9 @@
     <Compile Include="Models\Database\billing_option.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Database\case_closure_reason.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Database\client.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
@@ -728,6 +731,12 @@
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\company_location.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\company_outcome.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\company_payments.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\company_relationship.cs">
@@ -945,6 +954,7 @@
     <Compile Include="Models\ECModel\User.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Utils\FileUtils.cs" />
+    <Compile Include="Models\ViewModels\CaseInvestigationStatusViewModel.cs" />
     <Compile Include="Models\ViewModels\CaseMessagesViewModel.cs" />
     <Compile Include="Models\ViewModels\CasePreviewViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
