@@ -16,6 +16,13 @@
         is_cc = false;
     }
     String class_ext = ViewBag.cc_extension;
+    //19
+    //bool? is_cc = true;
+    //String class_ext = "";
+    //if (is_cc)
+    //{
+    //    class_ext = "_cc";
+    //}
     GlobalFunctions glb = new GlobalFunctions();
 
     var report_id = (Int32)ViewBag.report_id;
@@ -64,8 +71,74 @@
                 <div class="reportIconWhite"></div>
             </div><!--end slider-->
             <!--work began-->
-               
+            @if ((rm._investigation_status == ECGlobalConstants.investigation_status_resolution) || (rm._investigation_status == ECGlobalConstants.investigation_status_completed))
+            {
+                //ris = rm._last_investigation_status();
+                //UserModel temp_um = new UserModel(ris.user_id);
+                //flag = "101px";
+                
                 @Html.Partial("~/Views/Case/PartialView/GreenBarCaseResolutionRequest.cshtml");
+                @*<div class="firstHeader resolveSoledBlock">
+                    <div class="caseWaitApp">@GlobalRes.CaseResolutionRequestUp</div>
+                    <div class="positionDropDown">
+                        <span class="dropDownfirstHeader flag"></span>
+                        <a href="#" class="closeCustom flag"></a>
+                    </div>
+                    <div class="positionActivityIcon">
+                        <div id="activityIcon"></div>
+                        <span>@GlobalRes.Activity</span>
+                    </div>
+                </div>
+
+                <div class="caseMediatorBig" style="display: none;">
+                    <div class="littleText">
+                            @GlobalRes.CaseSentToEsacaltionMediatorForReview
+                        </div>
+
+                    <div class="caseMediator">
+                        <div class="displayMediators">
+                            <div class="blockPhoto">
+                                @if (temp_um.ID != 0)
+                                {
+                                    @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", ris.user_id }, { "is_owner", true } })
+                                }
+                                else
+                                {
+                                    <div class="status"></div>
+                                    <div class="anonimousReporterIcon"></div>
+                                }
+                            </div>
+                        </div>
+                        <div class="forText">
+                            <div class="boldText">
+                                @temp_um._user.first_nm @temp_um._user.last_nm, @m_DateTimeHelper.ConvertDateToLongMonthString(ris.created_date)
+                            </div>
+
+                            @if(ris.outcome_id.HasValue)
+                            { 
+                                <div class="boldText">
+                                    @GlobalRes.Outcome: @glb.GetOutcomeNameById(ris.outcome_id.Value)
+                                </div>
+                                <div class="openSansText">
+                                    @ris.outcome_message
+                                </div>
+                            }
+                        </div>
+                        <div class="caseResolution">
+                            <div class="postionButtons">
+                                @if ((um._user.role_id != 6) && (um._user.role_id != 5))
+                                {
+                                    <div class="secondButton">
+                                        <div class="textInButton" id="approve_close">@GlobalRes.Approve.ToLower()</div>
+                                    </div>
+                                    <div class="firstButton">
+                                        <div class="textInButton" id="return_investigation">@GlobalRes.Returnnvestigation.ToLower()</div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="firstHeader2">
                     <div id="casesHeared">
@@ -77,9 +150,357 @@
                         </div>
 
                     </div>
+                </div>*@
+                <div class="firstHeader2">
+                    <div id="casesHeared">
+                        <div id="menu">
+                            @Html.Partial("~/Views/PartialViews/_ReportTopMenu.cshtml",
+                        new ViewDataDictionary { { "report_id", report_id },
+                                                { "user_id", user_id },
+                                                { "selected_item", 1 } ,{ "popup", popup } })
+                        </div>
+
+                    </div>
+                </div>
+            }
+            else if (rm._investigation_status == ECGlobalConstants.investigation_status_closed)
+            {
+                <div class="firstHeader resolveSoledBlock">
+                    <div class="caseWaitApp">@GlobalRes.CaseClosed</div>
+                    <div class="positionDropDown">
+                        <span class="dropDownfirstHeader flag" style="top: -19px;"></span>
+                        <a href="#" class="closeCustom flag"></a>
+                    </div>
+                    <div class="positionActivityIcon">
+                        <div id="activityIcon"></div>
+                        <span>@GlobalRes.Activity</span>
+                    </div>
                 </div>
 
+                if (((rm._investigation_status == ECGlobalConstants.investigation_status_closed) && (rm._previous_investigation_status_id == ECGlobalConstants.investigation_status_resolution)) || ((rm._investigation_status == ECGlobalConstants.investigation_status_closed) && (rm._previous_investigation_status_id == ECGlobalConstants.investigation_status_completed)))
+                {
+                    ris = rm._previous_investigation_status();
+                    UserModel temp_um = new UserModel(ris.user_id);
 
+                    <div class="caseMediatorBig" style="display: none;">
+                        @* start work *@
+                        <div class="caseMediator">
+                            <div class="displayMediators">
+                                <div class="blockPhoto">
+                                    @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", ris.user_id }, { "is_owner", true } })
+                                </div>
+                            </div>
+                            <div class="forText">
+                                <div class="boldText">
+                                    @if (ris.investigation_status_id == ECGlobalConstants.investigation_status_completed)
+                                {
+                                        @GlobalRes.CaseCantBeResolved
+                                }
+                                    else if (ris.investigation_status_id == ECGlobalConstants.investigation_status_resolution)
+                                {
+                                    @GlobalRes.CaseResolved
+                                }
+                                </div>
+                                <div class="regularText">
+                                    @temp_um._user.first_nm @temp_um._user.last_nm, @m_DateTimeHelper.ConvertDateToLongMonthString(ris.created_date):
+                                </div>
+
+                                @if (ris.case_closure_reason_id.HasValue)
+                                {
+                                    <div class="boldText">
+                                        @GlobalRes.ReasonForCaseClosure: @glb.GetCaseClosureReasonById(ris.case_closure_reason_id.Value)
+                                    </div>
+                                    <div class="openSansText">
+                                        &nbsp;
+                                    </div>
+                                }
+
+                                @if (ris.outcome_id.HasValue)
+                                {
+                                    <div class="boldText">
+                                        @GlobalRes.SuggestedOutcomeUp: @glb.GetOutcomeNameById(ris.outcome_id.Value)
+                                    </div>
+                                    <div class="openSansText">
+                                        &nbsp;
+                                    </div>
+                                }
+                                @if (ris.outcome_message != null && ris.outcome_message.Length > 0)
+                                {
+                                    <div class="boldText">
+                                        @GlobalRes.CaseClosureReport:
+                                    </div>
+                                    <div class="openSansText">
+                                        @ris.outcome_message
+                                    </div>
+                                }
+                                @if (ris.executive_summary != null && ris.executive_summary.Length > 0)
+                                {
+                                    <div class="boldText">
+                                        @GlobalRes.ExecutiveSummary:
+                                    </div>
+                                    <div class="openSansText">
+                                        @ris.executive_summary
+                                    </div>
+                                }
+                                @if (ris.facts_established != null && ris.facts_established.Length > 0)
+                                {
+                                    <div class="boldText">
+                                        @GlobalRes.FactsEstablished:
+                                    </div>
+                                    <div class="openSansText">
+                                        @ris.facts_established
+                                    </div>
+                                }
+
+                                @if (ris.investigation_methodology != null && ris.investigation_methodology.Length > 0)
+                                {
+                                    <div class="boldText">
+                                        @GlobalRes.InvestigationMethodology:
+                                    </div>
+                                    <div class="openSansText">
+                                        @ris.investigation_methodology
+                                    </div>
+                                }
+                                @if (ris.description_outcome != null && ris.description_outcome.Length > 0)
+                                {
+                                    <div class="boldText">
+                                        @GlobalRes.DescriptionOutcome:
+                                    </div>
+                                    <div class="openSansText">
+                                        @ris.description_outcome
+                                    </div>
+                                }
+                                @if (ris.recommended_actions != null && ris.recommended_actions.Length > 0)
+                                {
+                                    <div class="boldText">
+                                        @GlobalRes.RecommendedActions:
+                                    </div>
+                                    <div class="openSansText">
+                                        @ris.recommended_actions
+                                    </div>
+                                }
+                                
+                            </div>
+                            <div class="border"></div>
+                        </div>
+                        @{                            
+                            ris = rm._last_investigation_status();
+                            temp_um = new UserModel(ris.user_id);
+                            }
+
+                        <div class="caseMediator">
+                            <div class="displayMediators">
+                                <div class="blockPhoto">
+                                    <div class="blockPhoto">
+                                        <div class="blockPhoto">
+                                            @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", ris.user_id }, { "is_owner", true } })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="forText">
+                                <div class="boldText">
+                                    @GlobalRes.Approved
+                                </div>
+                                <div class="regularText">
+                                    @temp_um._user.first_nm @temp_um._user.last_nm,    @m_DateTimeHelper.ConvertDateToLongMonthString(ris.created_date):
+                                </div>
+
+
+                                @if (ris.description != null && ris.description.Length > 0)
+                                {
+                                    <div class="boldText">
+                                        &nbsp;
+                                    </div>
+                                    <div class="openSansText">
+                                        @ris.description
+                                    </div>
+                                }
+
+                               
+
+                            </div>
+                        </div>
+
+
+
+                        @* this is dublicate scenario for triangle down 29.06.17 *@
+
+                        <div class="caseMediator">
+                            
+                            <div class="positionTriangleClosedCase triangles"></div>
+                            <div class="displayMediators">
+                                <div class="blockPhoto">
+                                    @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", ris.user_id }, { "is_owner", true } })
+                                </div>
+                            </div>
+                            <div class="forText">
+                                <div class="boldText">
+                                    @if (ris.investigation_status_id == ECGlobalConstants.investigation_status_completed)
+                                    {
+                                        @GlobalRes.CaseCantBeResolved
+                                    }
+                                    else if (ris.investigation_status_id == ECGlobalConstants.investigation_status_resolution)
+                                    {
+                                        @GlobalRes.CaseResolved
+                                    }
+                                </div>
+                                <div class="regularText">
+                                    @temp_um._user.first_nm @temp_um._user.last_nm, @m_DateTimeHelper.ConvertDateToLongMonthString(ris.created_date):
+                                </div>
+
+                                @if (ris.case_closure_reason_id.HasValue)
+                                {
+                                    <div class="boldText">
+                                        @GlobalRes.ReasonForCaseClosure: @glb.GetCaseClosureReasonById(ris.case_closure_reason_id.Value)
+                                    </div>
+                                    <div class="openSansText">
+                                        &nbsp;
+                                    </div>
+                                }
+
+                                @if (ris.outcome_id.HasValue)
+                                {
+                                    <div class="boldText">
+                                        @GlobalRes.SuggestedOutcomeUp: @glb.GetOutcomeNameById(ris.outcome_id.Value)
+                                    </div>
+                                    <div class="openSansText">
+                                        &nbsp;
+                                    </div>
+                                }
+                                @if (ris.outcome_message != null && ris.outcome_message.Length > 0)
+                                {
+                                    <div class="boldText">
+                                        @GlobalRes.CaseClosureReport:
+                                    </div>
+                                    <div class="openSansText">
+                                        @ris.outcome_message
+                                    </div>
+                                }
+                                @if (ris.executive_summary != null && ris.executive_summary.Length > 0)
+                                {
+                                    <div class="boldText">
+                                        @GlobalRes.ExecutiveSummary:
+                                    </div>
+                                    <div class="openSansText">
+                                        @ris.executive_summary
+                                    </div>
+                                }
+                                @if (ris.facts_established != null && ris.facts_established.Length > 0)
+                                {
+                                    <div class="boldText">
+                                        @GlobalRes.FactsEstablished:
+                                    </div>
+                                    <div class="openSansText">
+                                        @ris.facts_established
+                                    </div>
+                                }
+
+                                @if (ris.investigation_methodology != null && ris.investigation_methodology.Length > 0)
+                                {
+                                    <div class="boldText">
+                                        @GlobalRes.InvestigationMethodology:
+                                    </div>
+                                    <div class="openSansText">
+                                        @ris.investigation_methodology
+                                    </div>
+                                }
+                                @if (ris.description_outcome != null && ris.description_outcome.Length > 0)
+                                {
+                                    <div class="boldText">
+                                        @GlobalRes.DescriptionOutcome:
+                                    </div>
+                                    <div class="openSansText">
+                                        @ris.description_outcome
+                                    </div>
+                                }
+                                @if (ris.recommended_actions != null && ris.recommended_actions.Length > 0)
+                                {
+                                    <div class="boldText">
+                                        @GlobalRes.RecommendedActions:
+                                    </div>
+                                    <div class="openSansText">
+                                        @ris.recommended_actions
+                                    </div>
+                                }
+
+                            </div>
+                            <div class="border"></div>
+                        </div>
+                        @{
+                            ris = rm._last_investigation_status();
+                            temp_um = new UserModel(ris.user_id);
+                        }
+
+                        <div class="caseMediator">
+                            <div class="displayMediators">
+                                <div class="blockPhoto">
+                                    <div class="blockPhoto">
+                                        <div class="blockPhoto">
+                                            @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", ris.user_id }, { "is_owner", true } })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="forText">
+                                <div class="boldText">
+                                    @GlobalRes.Approved
+                                </div>
+                                <div class="regularText">
+                                    @temp_um._user.first_nm @temp_um._user.last_nm,    @m_DateTimeHelper.ConvertDateToLongMonthString(ris.created_date):
+                                </div>
+
+
+                                @if (ris.description != null && ris.description.Length > 0)
+                                {
+                                    <div class="boldText">
+                                        &nbsp;
+                                    </div>
+                                    <div class="openSansText">
+                                        @ris.description
+                                    </div>
+                                }
+
+
+
+                            </div>
+                        </div>
+
+
+                        @* end work *@
+                    </div>
+                        }
+                        <div class="firstHeader2">
+                            <div id="casesHeared">
+                                <div id="menu">
+                                    @Html.Partial("~/Views/PartialViews/_ReportTopMenu.cshtml",
+                        new ViewDataDictionary { { "report_id", report_id },
+                                                { "user_id", user_id },
+                                                { "selected_item", 1 } ,{ "popup", popup } })
+                                </div>
+
+                            </div>
+                        </div>
+
+                        }
+                        else
+                        {
+                        <div class="firstHeader2">
+                            <div id="casesHeared">
+                                <div id="menu">
+                                    @Html.Partial("~/Views/PartialViews/_ReportTopMenu.cshtml",
+                        new ViewDataDictionary { { "report_id", report_id },
+                                                { "user_id", user_id },
+                                                { "selected_item", 1 } ,{ "popup", popup } })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="positionActivityIcon" style="height:61px;">
+                            <div id="activityIcon"></div>
+                            <span>@GlobalRes.Activity</span>
+                        </div>
+                        }
 
                         <!--work end-->
 

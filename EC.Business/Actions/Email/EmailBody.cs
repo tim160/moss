@@ -119,10 +119,6 @@ namespace EC.Business.Actions.Email
                     // case reopened - individual message for mediators in case
                     m_filename = "CaseReopened";
                     break;
-                case 9:
-                    // case needs to be signed-off ( by 2 top mediator levels only)
-                    m_filename = "CaseCloseApprove";
-                    break;
                 case 11:
                     // case escalated - don't have red button to escalate yet
                     m_filename = "EscalatedCase";
@@ -309,13 +305,6 @@ namespace EC.Business.Actions.Email
 
 
         }
-        public void CaseCloseApprove(string case_number)
-        {
-            GetBody(9);
-
-            m_body = m_body.Replace("[CaseNumber]", case_number.Trim());
-        }
-
         public void EscalatedCase(string first, string last, string escalated_first, string escalated_last, string case_number)
         {
             GetBody(11);

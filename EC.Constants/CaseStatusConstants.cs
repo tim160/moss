@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EC.Constants
 {
-    public class CaseStatusConstants
+    class CaseStatusConstants
     {
         public const string Pending = "Pending";
         public const string Review = "Review";
@@ -24,7 +24,7 @@ namespace EC.Constants
             Investigation = 3,
             Resolution = 4,
             Escalation = 5,
-            Closed = 9,
+            Closed = 6,
             Spam = 7,
             Closed_Not_Resolved = 8,
 
