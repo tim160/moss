@@ -101,6 +101,7 @@
     <Compile Include="HtmlUtility.cs" />
     <Compile Include="IBatcher.cs" />
     <Compile Include="IComponentInstaller.cs" />
+    <Compile Include="IEnumerableExtensions.cs" />
     <Compile Include="IHashHelper.cs" />
     <Compile Include="IOCRegistration.cs" />
     <Compile Include="IOCSetup.cs" />

@@ -222,6 +222,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="angular\app.js" />
+    <Content Include="angular\controllers\EmployeeAwarenessController.js" />
+    <Content Include="angular\services\EmployeeAwarenessService.js" />
     <Content Include="App\components\activeHover\activeHover.js" />
     <Content Include="App\components\affix\affix.js" />
     <Content Include="App\components\confirm\confirm.js" />
@@ -414,6 +417,7 @@
     <Content Include="Content\styleTasks.css" />
     <Content Include="Content\the-modal.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="gulpfile.js" />
     <Content Include="html\404.css" />
     <Content Include="html\404.html" />
     <Content Include="html\500.html" />
@@ -458,6 +462,8 @@
     <Content Include="App\Web.config" />
     <Content Include="App\ec\components\EAShow\EAShow.cshtml" />
     <Content Include="App\ec\components\EAList\EAList.cshtml" />
+    <Content Include="bower.json" />
+    <Content Include="package.json" />
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <None Include="Properties\PublishProfiles\ec-code.pubxml" />
     <None Include="Properties\PublishProfiles\ec-dev.pubxml" />
@@ -651,6 +657,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AnalyticsController.cs" />
+    <Compile Include="Controllers\API\EmployeeAwarenessController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CaseController.cs" />
@@ -971,6 +978,7 @@
     <Compile Include="Utils\Auth\UserIndentity .cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="angular\factories\" />
     <Folder Include="App_Data\" />
     <Folder Include="Upload\CompanyLogo\" />
     <Folder Include="Views\ActiveCasesModel\" />

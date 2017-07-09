@@ -17,65 +17,60 @@
 }
 
 
-<div id="EmployeeAwarenessBlock" class="blockSettings">
+<div id="EmployeeAwarenessBlock" class="blockSettings" ng-controller="EmployeeAwarenessController">
     <div class="topHeader">@GlobalRes.AwarenessMaterials</div>
     <div class="mainContent">
         <div class="leftContent">
             <div class="blockMenu posterCategoryNames">
                 <div class="title">@GlobalRes.Industry</div>
-                <div class="itemSelect" value="1">@GlobalRes.Industry_1</div>
-                <div class="itemSelect" value="2">@GlobalRes.Industry_2</div> <!--itemSelect active-->
-                <div class="itemSelect" value="3">@GlobalRes.Industry_3</div>
-                <div class="itemSelect" value="4">@GlobalRes.Industry_4</div>
+                <div ng-repeat="category in categories">
+                    <div class="itemSelect" ng-class="{'active' : category.Selected}" ng-click="category.Selected = !category.Selected" value="{{category.Id}}">{{category.posterCategoryName}}</div>
+                </div>
             </div>
             <div class="blockMenu posterMessage">
                 <div class="title">@GlobalRes.Message</div>
-                <div class="itemSelect" value="1">@GlobalRes.Message_1</div>
-                <div class="itemSelect active" value="2">@GlobalRes.Message_2</div>
-                <div class="itemSelect" value="3">@GlobalRes.Message_3</div>
+                <div ng-repeat="message in messages">
+                    <div class="itemSelect" ng-class="{'active' : message.Selected}" ng-click="message.Selected = !message.Selected" value="{{message.Id}}">{{message.Name}}</div>
+                </div>
             </div>
             <div class="blockMenu">
                 <div class="title">@GlobalRes.AvailableFormat</div>
-                <div class="itemSelect" value="1">@GlobalRes.AvailableFormat_1</div>
-                <div class="itemSelect active" value="2">@GlobalRes.AvailableFormat_2</div>
-                <div class="itemSelect" value="3">@GlobalRes.AvailableFormat_3</div>
+                <div ng-repeat="avaibleFormat in avaibleFormats">
+                    <div class="itemSelect" ng-class="{'active' : avaibleFormat.Selected}" ng-click="avaibleFormat.Selected = !avaibleFormat.Selected" value="{{avaibleFormat.Id}}">{{avaibleFormat.Name}}</div>
+                </div>
             </div>
             <div class="blockMenu">
                 <div class="title">@GlobalRes.Language</div>
-                <div class="itemSelect active">@GlobalRes.English</div>
+                <div class="itemSelect">@GlobalRes.English</div>
             </div>
         </div>
         <div class="rightContent">
             <div class="topBlockFilters">
-                <div class="info">@GlobalRes.EmployeeAwarenessMaterials</div>
-                <div class="calcItems">@String.Format(GlobalRes.Itemss, 11)</div>
+                <div class="info">
+                    @GlobalRes.EmployeeAwarenessMaterials
+                </div>
+                <div ng-repeat="category in categories" class="itemFilter" ng-show="category.Selected" value="{{category.Id}}">{{category.posterCategoryName}}<div class="imgClose" ng-click="category.Selected = false"></div></div>
+                <div class="calcItems"><span>{{selectedItemsCount()}}</span>@String.Format(GlobalRes.Itemss, "")</div>
             </div>
 
             <div class="rezoultItems">
 
-                @foreach (PosterItem pi in allPosters)
-                {
-                    <div class="blockInformation" href="/employeeawareness/poster/@pi.Id">
-                        <div class="filtersBlock @pi.imageName">
-                            @foreach (PosterCategory pc in pi.posterCategoryNames)
-                            {   
-                                <div class="filter @pc.Id" value="@pc.Id">@pc.posterCategoryName</div>
-                            }
-                        </div>
-                        <div class="greenBlock @pi.posterMessage.Id">@pi.posterMessage.posterMessageName</div>
-                        <div class="bottomInfo">
-                            <div class="infoItem">@pi.posterName</div>
-                        </div>
+                <div ng-repeat="poster in posters" class="blockInformation" ng-style="poster.IsVisible == true ? {'display': 'block' } : {'display' : 'none' }" href="/employeeawareness/poster/{{poster.Id}}">
+                    <div class="filtersBlock {{poster.imageName}}">
+                        <div ng-repeat="category in poster.posterCategoryNames" class="filter" ng-class="{{'c' + category.Id}}" value="{{category.Id}}">{{category.posterCategoryName}}</div>
                     </div>
-
-                }
+                    <div class="greenBlock {{poster.posterMessage.Id}}">{{poster.posterMessage.posterMessageName}}</div>
+                    <div class="bottomInfo">
+                        <div class="infoItem">{{poster.posterName}}</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    $(document).ready(function () {
+    /*$(document).ready(function () {
         function blocksHeight() {
             var maxHeightBlock = Math.max.apply(Math, $(".blockInformation").map(function () {
                 return $(this).height()
@@ -107,7 +102,7 @@
             });
 
         }
-        
+
         $('.topBlockFilters').delegate('.imgClose', 'click', function (event) {
             let currentItem = $(event.currentTarget);
             findActiveFilter(".itemSelect.active", currentItem.text().trim().toLowerCase(), "hideActive");
@@ -178,5 +173,5 @@
         $(".topBlockFilters .itemFilter").on('change', function () {
         });
         updateCalcItems();
-    });
+    });*/
 </script>

@@ -1,0 +1,9 @@
+{
+  "name": "EC",
+  "dependencies": {
+    "angular": "^1.6.5",
+    "angular-resource": "^1.6.5",
+    "angular-http": "^1.0.2",
+    "angular-messages": "^1.6.5"
+  }
+}
