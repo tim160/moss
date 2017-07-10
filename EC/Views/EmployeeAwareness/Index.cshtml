@@ -55,14 +55,16 @@
 
             <div class="rezoultItems">
 
-                <div ng-repeat="poster in posters" class="blockInformation" ng-style="poster.IsVisible == true ? {'display': 'block' } : {'display' : 'none' }" href="/employeeawareness/poster/{{poster.Id}}">
-                    <div class="filtersBlock {{poster.imageName}}">
-                        <div ng-repeat="category in poster.posterCategoryNames" class="filter" ng-class="{{'c' + category.Id}}" value="{{category.Id}}">{{category.posterCategoryName}}</div>
-                    </div>
-                    <div class="greenBlock {{poster.posterMessage.Id}}">{{poster.posterMessage.posterMessageName}}</div>
-                    <div class="bottomInfo">
-                        <div class="infoItem">{{poster.posterName}}</div>
-                    </div>
+                <div ng-repeat="poster in posters" class="blockInformation" ng-style="poster.IsVisible == true ? {'display': 'block' } : {'display' : 'none' }">
+                    <a href="/employeeawareness/poster/{{poster.Id}}">
+                        <div class="filtersBlock {{poster.imageName}}">
+                            <div ng-repeat="category in poster.posterCategoryNames" class="filter" ng-class="{{'c' + category.Id}}" value="{{category.Id}}">{{category.posterCategoryName}}</div>
+                        </div>
+                        <div class="greenBlock {{poster.posterMessage.Id}}">{{poster.posterMessage.posterMessageName}}</div>
+                        <div class="bottomInfo">
+                            <div class="infoItem">{{poster.posterName}}</div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
