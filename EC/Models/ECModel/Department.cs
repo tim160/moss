@@ -22,7 +22,7 @@ namespace EC.Models.ECModel
         }
         #endregion
 
-
+        public Department() { }
         #region constructor - department by id
         public Department(int department_id, int? language_id)
         {

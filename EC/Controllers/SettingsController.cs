@@ -38,6 +38,8 @@ namespace EC.Controllers
             #endregion
 
             UserModel um = new UserModel(user_id);
+            Company ecModelCompany = new Models.ECModel.Company();
+            um.listDepartments = ecModelCompany.CompanyDepartments(user.company_id, 1);
             ViewBag.um = um;
             ViewBag.page_subtitle = GlobalRes.Settings;
             ViewBag.user_id = user_id;
@@ -195,7 +197,13 @@ namespace EC.Controllers
             {
                 can_edit = true;
             }
-
+            if(_user.company_department_id == null || _user.company_department_id == 0)
+            {
+                viewd_user.selectedDepartment = App_LocalResources.GlobalRes.Other;
+            } else
+            {
+                viewd_user.selectedDepartment = new Department(_user.company_department_id.GetValueOrDefault(), 1).department_nm;
+            }
             if (can_edit)
                 ViewBag.ce = 1;
             else
@@ -248,7 +256,7 @@ namespace EC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UpdateUser([Bind(Include = "id,status_id,role_id,first_nm,last_nm,title_ds,notepad_tx,email,notification_messages_actions_flag,notification_new_reports_flag")] user _user)
+        public ActionResult UpdateUser([Bind(Include = "id,status_id,role_id,first_nm,last_nm,title_ds,notepad_tx,email,notification_messages_actions_flag,notification_new_reports_flag,company_department_id")] user _user)
         {
             if (ModelState.IsValid)
             {
@@ -263,7 +271,7 @@ namespace EC.Controllers
                     _updateuser.email = _user.email;
                     _updateuser.notification_messages_actions_flag = _user.notification_messages_actions_flag;
                     _updateuser.notification_new_reports_flag = _user.notification_new_reports_flag;
-
+                    _updateuser.company_department_id = _user.company_department_id;
                     db1.SaveChanges();
                     return RedirectToAction("Index");
                 }

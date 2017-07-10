@@ -332,7 +332,9 @@ namespace EC.Models.ECModel
                 _new_department = new Department(_departments_list[i].id, language_id);
                 company_departments.Add(_new_department);
             }
-
+            /*adding other deparment*/
+            ECModel.Department otherDeparment = new Department { id = 0, department_nm = EC.App_LocalResources.GlobalRes.Other };
+            company_departments.Add(otherDeparment);
             return company_departments;
 
         }
