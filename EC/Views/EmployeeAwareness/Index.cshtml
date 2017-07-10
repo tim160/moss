@@ -56,7 +56,7 @@
             <div class="rezoultItems">
 
                 <div ng-repeat="poster in posters" class="blockInformation" ng-style="poster.IsVisible == true ? {'display': 'block' } : {'display' : 'none' }">
-                    <a href="/employeeawareness/poster/{{poster.Id}}">
+                    <a ng-href="/employeeawareness/poster/{{poster.Id}}" style="text-decoration: none">
                         <div class="filtersBlock {{poster.imageName}}">
                             <div ng-repeat="category in poster.posterCategoryNames" class="filter" ng-class="{{'c' + category.Id}}" value="{{category.Id}}">{{category.posterCategoryName}}</div>
                         </div>
