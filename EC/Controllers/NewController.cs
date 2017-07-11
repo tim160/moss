@@ -331,6 +331,7 @@ namespace EC.Controllers
             #region Departments
             /// easy part - Administrative, Accounting, Management, Sales and Support 
             /// 
+            company_department selectedDepartment = null;
             List<string> list_departments = new List<string>();
             list_departments.Add(App_LocalResources.GlobalRes.Administrative);
             list_departments.Add(App_LocalResources.GlobalRes.Accounting);
@@ -338,9 +339,9 @@ namespace EC.Controllers
             list_departments.Add(App_LocalResources.GlobalRes.Sales);
             list_departments.Add(App_LocalResources.GlobalRes.Support);
 
-
             if (company_id != 0)
             {
+                List<company_department> departmentsNewCompany = new List<company_department>();
                 foreach (string _dep in list_departments)
                 {
                     if (_dep.Trim().Length > 0)
@@ -356,17 +357,58 @@ namespace EC.Controllers
                         _department.company_id = company_id;
                         _department.last_update_dt = DateTime.Now;
                         _department.status_id = 2;
+                        departmentsNewCompany.Add(_department);
+                    }
+                }
+                /*saving List Departments*/
+                try
+                {
+                    db.company_department.AddRange(departmentsNewCompany);
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    logger.Error(ex.ToString());
+                    return App_LocalResources.GlobalRes.DepartmentSavingFailed;
+                }
 
+                /*check other deparment*/
+                if (departments != null && departments != "")
+                {
+                    departments = departments.Trim();
+                    string tempDepartment = departments.ToLower();
+                    company_department otherDepartment = departmentsNewCompany.Where(m => m.department_en.Trim().ToLower() == tempDepartment).SingleOrDefault();
+
+                    if (otherDepartment != null)
+                    {
+                        selectedDepartment = otherDepartment;
+                    }
+                    else
+                    {
+                        //создаем other department
+
+                        company_department other_department = new company_department();
+                        other_department.department_en = departments.Trim();
+                        other_department.department_ar = departments.Trim();
+                        other_department.department_es = departments.Trim();
+                        other_department.department_fr = departments.Trim();
+                        other_department.department_ru = departments.Trim();
+
+                        other_department.client_id = client_id;
+                        other_department.company_id = company_id;
+                        other_department.last_update_dt = DateTime.Now;
+                        other_department.status_id = 2;
 
                         try
                         {
-                            db.company_department.Add(_department);
+                            db.company_department.Add(other_department);
                             db.SaveChanges();
+                            selectedDepartment = other_department;
                         }
                         catch (Exception ex)
                         {
                             logger.Error(ex.ToString());
-                            return App_LocalResources.GlobalRes.DepartmentSavingFailed;
+                            return App_LocalResources.GlobalRes.OtherDepartmentSavingFailed;
                         }
                     }
                 }
@@ -550,7 +592,6 @@ namespace EC.Controllers
                 _user.preferred_contact_method_id = 1;
                 _user.title_ds = title.Trim();
                 _user.employee_no = "";
-                _user.notepad_tx = departments.Trim();
                 _user.question_ds = "";
                 _user.answer_ds = "";
                 _user.previous_login_dt = DateTime.Now;
@@ -566,6 +607,7 @@ namespace EC.Controllers
                 _user.location_nm = "";
                 _user.sign_in_code = null;
                 _user.guid = Guid.NewGuid();
+                _user.company_department_id = selectedDepartment.id;
 
                 try
                 {
