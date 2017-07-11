@@ -598,7 +598,7 @@
 
         selectblockMenu();
 
-        $(".downloadPdf").on('click', function () {
+        /*$(".downloadPdf").on('click', function () {
             var availableFormat = $(".availableFormat .itemFormat.active").text().trim();
             var blockFormat = $(".blockOption.blockFormat .active").text().trim();
             if (availableFormat.length > 0 && blockFormat.length > 0) {
@@ -617,7 +617,7 @@
                     console.log(error);
                 });
             }
-        });
+        });*/
         //$("#EmployeeAwarenessBlock .")
 
 

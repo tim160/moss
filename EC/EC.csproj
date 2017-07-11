@@ -223,7 +223,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="angular\app.js" />
+    <Content Include="angular\controllers\EmployeeAwarenessPosterController.js" />
     <Content Include="angular\controllers\EmployeeAwarenessController.js" />
+    <Content Include="angular\services\EmployeeAwarenessPosterService.js" />
     <Content Include="angular\services\EmployeeAwarenessService.js" />
     <Content Include="App\components\activeHover\activeHover.js" />
     <Content Include="App\components\affix\affix.js" />
@@ -657,6 +659,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AnalyticsController.cs" />
+    <Compile Include="Controllers\API\EmployeeAwarenessPosterController.cs" />
     <Compile Include="Controllers\API\EmployeeAwarenessController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
