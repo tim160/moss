@@ -77,3 +77,4 @@ _[Ss]cripts
 EC/Libs/
 EC/node_modules/
 EC/Scripts/dis.js
+EC/Web.config.local
