@@ -27,7 +27,8 @@ namespace EC.Models
         #region Properties
         public int ID
         { get; set; }
-
+        public List<Department> listDepartments { get; set; }
+        public string selectedDepartment { get; set; }
         public user _user
         {
             get

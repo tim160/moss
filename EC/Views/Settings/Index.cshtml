@@ -33,14 +33,6 @@
     }
     bool is_cc = ViewBag.is_cc;
     String class_ext = ViewBag.cc_extension;
-
-    //bool is_cc = true;
-    //String class_ext = "";
-    //if (is_cc)
-    //{
-    //    class_ext = "_cc";
-    //}
-    //19
 }
 
 <div class="blockSettings">
@@ -84,7 +76,7 @@
                 </div>
                 <div class="blockPersonalSettings greyBorder">
                     <p class="title">@GlobalRes.Department</p>
-                    @Html.EditorFor(model => Model.notepad_tx, new {notepad_tx = "notepad_tx" })
+                    @Html.DropDownListFor(model => Model.company_department_id, new SelectList(um.listDepartments, "id", "department_nm"))
                 </div>
                 <div class="blockPersonalSettings greyBorder">
                     <div id="personeAgain">
