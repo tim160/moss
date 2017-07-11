@@ -898,15 +898,6 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Case re-opened.
-        /// </summary>
-        public static string CaseReOpened {
-            get {
-                return ResourceManager.GetString("CaseReOpened", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Case resolution.
         /// </summary>
         public static string Caseresolution {
@@ -930,15 +921,6 @@ namespace EC.App_LocalResources {
         public static string CaseResolved {
             get {
                 return ResourceManager.GetString("CaseResolved", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Case returned for futher investigation.
-        /// </summary>
-        public static string CaseReturnedFutherInvestigation {
-            get {
-                return ResourceManager.GetString("CaseReturnedFutherInvestigation", resourceCulture);
             }
         }
         
@@ -5475,6 +5457,28 @@ namespace EC.App_LocalResources {
         public static string yyyy {
             get {
                 return ResourceManager.GetString("yyyy", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to CaseReOpened.
+        /// </summary>
+        public static string CaseReOpened
+        {
+            get
+            {
+                return ResourceManager.GetString("CaseReOpened", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to CaseReturnedFutherInvestigation.
+        /// </summary>
+        public static string CaseReturnedFutherInvestigation
+        {
+            get
+            {
+                return ResourceManager.GetString("CaseReturnedFutherInvestigation", resourceCulture);
             }
         }
     }

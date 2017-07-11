@@ -106,7 +106,9 @@
                 </div>
                 <div class="blockPersonalSettings">
                     <p class="title">@GlobalRes.Description</p>
-                    @Html.TextBoxFor(model => Model.notepad_tx, new { @readonly = "readonly" })
+                    <input type="text" readonly="readonly" value="@viewd_user.selectedDepartment" />
+                    
+                    @*@Html.TextBoxFor(model => , new { @readonly = "readonly" })*@
                 </div>
 
                 <div class="blockPersonalSettings">

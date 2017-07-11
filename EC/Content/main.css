@@ -384,6 +384,9 @@ ul {
     left: 50px;
     top: 32px;
 }
+.positionTriangleClosedCase {
+    left: 50%;
+}
 .forText {
     padding-left: 106px;
     padding-top: 28px;
