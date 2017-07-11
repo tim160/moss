@@ -32,12 +32,28 @@ namespace EC.Controllers
             ViewBag.cc_extension = cc_ext;
             #endregion
 
-
-            string _code = "";
             if (!string.IsNullOrEmpty(code))
-                _code = code;
+            {
+                ViewBag.code = code;
+                company selectedCompany = db.company.Where(m => m.company_code == code).FirstOrDefault();
+                if (selectedCompany != null)
+                {
+                     List<company_department> currentDepartmens = db.company_department.Where(m => m.company_id == selectedCompany.id).ToList();
+                    /*put drop daun*/
+                    List<SelectListItem> items = new List<SelectListItem>();
+                    foreach(var item in currentDepartmens)
+                    {
+                        SelectListItem dep = new SelectListItem { Text = item.department_en, Value = item.id.ToString() };
+                        items.Add(dep);
+                    }
+                    /*put other*/
+                    SelectListItem temp = new SelectListItem { Text = App_LocalResources.GlobalRes.Other, Value = "0" };
+                    items.Add(temp);
+                    ViewBag.currentDepartmens = items;
+                }
+            }
 
-            ViewBag.code = _code;
+
             string _email = "";
             if (!string.IsNullOrEmpty(email))
                 _email = email;
@@ -704,7 +720,7 @@ namespace EC.Controllers
 
         }
 
-        public string CreateUser(string code, string first, string last, string email, string title, string description)
+        public string CreateUser(string code, string first, string last, string email, string title, int currentDepartmens)
         {
             int company_id = 0;
             int user_id = 0;
@@ -788,7 +804,7 @@ namespace EC.Controllers
                 _user.preferred_contact_method_id = 1;
                 _user.title_ds = title.Trim();
                 _user.employee_no = "";
-                _user.notepad_tx = description.Trim();
+                _user.company_department_id = currentDepartmens;
                 _user.question_ds = "";
                 _user.answer_ds = "";
                 _user.previous_login_dt = DateTime.Now;

@@ -58,7 +58,8 @@
             </div>
             <div class="blockPersonalSettings">
                 <p class="title">@GlobalRes.Department</p>
-                <input type="text" id="description" />
+                @Html.DropDownList("currentDepartmens", ViewBag.currentDepartmens as SelectList)
+                @*<input type="text" id="description" />*@
             </div>
 
             <div class="blockPersonalSettings">
