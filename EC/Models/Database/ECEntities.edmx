@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ECModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ECModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="action">
           <Key>
             <PropertyRef Name="id" />
@@ -98,6 +98,20 @@
           <Property Name="user_id" Type="int" Nullable="false" />
           <Property Name="code" Type="nvarchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="case_closure_reason">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="case_closure_reason_en" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="case_closure_reason_fr" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="case_closure_reason_es" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="case_closure_reason_ru" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="case_closure_reason_jp" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="case_closure_reason_ar" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="status_id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="client">
           <Key>
             <PropertyRef Name="id" />
@@ -178,6 +192,8 @@
           <Property Name="invitation_confirmation_user_id" Type="int" />
           <Property Name="reseller" Type="int" />
           <Property Name="guid" Type="uniqueidentifier" />
+          <Property Name="next_payment_date" Type="datetime" />
+          <Property Name="next_payment_amount" Type="decimal" Precision="19" Scale="4" />
         </EntityType>
         <EntityType Name="company_anonymity">
           <Key>
@@ -246,6 +262,10 @@
           <Property Name="created_dt" Type="datetime" Nullable="false" />
           <Property Name="is_active" Type="int" Nullable="false" />
           <Property Name="comments" Type="nvarchar(max)" />
+          <Property Name="reseller_type_id" Type="int" />
+          <Property Name="reseller_level" Type="int" />
+          <Property Name="reseller_comission" Type="int" />
+          <Property Name="reseller_discount" Type="int" />
         </EntityType>
         <EntityType Name="company_location">
           <Key>
@@ -262,6 +282,39 @@
           <Property Name="location_ar" Type="nvarchar" MaxLength="200" />
           <Property Name="last_update_dt" Type="smalldatetime" Nullable="false" />
           <Property Name="user_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="company_outcome">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="status_id" Type="int" Nullable="false" />
+          <Property Name="outcome_en" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="outcome_fr" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="outcome_es" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="outcome_ru" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="outcome_ar" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="outcome_jp" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="last_update_dt" Type="datetime" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="company_payments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="payment_date" Type="datetime" Nullable="false" />
+          <Property Name="cc_name" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="cc_number" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="cc_month" Type="int" Nullable="false" />
+          <Property Name="cc_year" Type="int" Nullable="false" />
+          <Property Name="cc_csv" Type="int" Nullable="false" />
+          <Property Name="amount" Type="decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="auth_code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="local_invoice_number" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="company_relationship">
           <Key>
@@ -408,6 +461,16 @@
           <Property Name="industry_name_ar" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="code" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="industry_posters">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="status" Type="int" Nullable="false" />
+          <Property Name="industry_posters_en" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="industry_posters_es" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="industry_posters_fr" Type="nvarchar" MaxLength="150" Nullable="false" />
+        </EntityType>
         <EntityType Name="injury_damage">
           <Key>
             <PropertyRef Name="id" />
@@ -495,6 +558,16 @@
           <Property Name="ip_ds" Type="nvarchar" MaxLength="50" />
           <Property Name="sent_to_id" Type="int" />
         </EntityType>
+        <EntityType Name="message_posters">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="status" Type="int" Nullable="false" />
+          <Property Name="message_posters_en" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="message_posters_fr" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="message_posters_es" Type="nvarchar" MaxLength="150" Nullable="false" />
+        </EntityType>
         <EntityType Name="message_user_read">
           <Key>
             <PropertyRef Name="id" />
@@ -564,6 +637,28 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="partner_name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="partner_code" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="poster">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="poster_name" Type="nvarchar" MaxLength="150" />
+          <Property Name="poster_img" Type="nvarchar" MaxLength="150" />
+          <Property Name="poster_message_posters_id" Type="int" Nullable="false" />
+          <Property Name="image_name" Type="nvarchar" MaxLength="150" />
+          <Property Name="image_path" Type="nvarchar(max)" />
+          <Property Name="status" Type="int" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="poster_industry_posters">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="poster_id" Type="int" Nullable="false" />
+          <Property Name="industry_posters_id" Type="int" Nullable="false" />
+          <Property Name="status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="preferred_contact_method">
           <Key>
@@ -697,6 +792,13 @@
           <Property Name="outcome_id" Type="int" />
           <Property Name="outcome_message" Type="nvarchar(max)" />
           <Property Name="outcome_other" Type="nvarchar(max)" />
+          <Property Name="case_closure_reason_id" Type="int" />
+          <Property Name="case_closure_report" Type="nvarchar(max)" />
+          <Property Name="executive_summary" Type="nvarchar(max)" />
+          <Property Name="facts_established" Type="nvarchar(max)" />
+          <Property Name="investigation_methodology" Type="nvarchar(max)" />
+          <Property Name="description_outcome" Type="nvarchar(max)" />
+          <Property Name="recommended_actions" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="report_log">
           <Key>
@@ -1041,6 +1143,7 @@
           <Property Name="location_nm" Type="nvarchar(max)" />
           <Property Name="sign_in_code" Type="nvarchar(max)" />
           <Property Name="guid" Type="uniqueidentifier" />
+          <Property Name="company_department_id" Type="int" />
         </EntityType>
         <EntityType Name="user_change_password">
           <Key>
@@ -1204,6 +1307,7 @@
           <EntitySet Name="anonymity" EntityType="Self.anonymity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="attachment" EntityType="Self.attachment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="billing_option" EntityType="Self.billing_option" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="case_closure_reason" EntityType="Self.case_closure_reason" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="client" EntityType="Self.client" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="color" EntityType="Self.color" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="company" EntityType="Self.company" Schema="dbo" store:Type="Tables" />
@@ -1212,6 +1316,8 @@
           <EntitySet Name="company_department" EntityType="Self.company_department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="company_invitation" EntityType="Self.company_invitation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="company_location" EntityType="Self.company_location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="company_outcome" EntityType="Self.company_outcome" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="company_payments" EntityType="Self.company_payments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="company_relationship" EntityType="Self.company_relationship" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="company_secondary_type" EntityType="Self.company_secondary_type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="company_type" EntityType="Self.company_type" Schema="dbo" store:Type="Tables" />
@@ -1222,6 +1328,7 @@
           <EntitySet Name="demoq_request" EntityType="Self.demoq_request" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="frequency" EntityType="Self.frequency" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="industry" EntityType="Self.industry" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="industry_posters" EntityType="Self.industry_posters" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="injury_damage" EntityType="Self.injury_damage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="investigation_status" EntityType="Self.investigation_status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="invitation" EntityType="Self.invitation" Schema="dbo" store:Type="Tables" />
@@ -1229,12 +1336,15 @@
           <EntitySet Name="login_history" EntityType="Self.login_history" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="management_know" EntityType="Self.management_know" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="message" EntityType="Self.message" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="message_posters" EntityType="Self.message_posters" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="message_user_read" EntityType="Self.message_user_read" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="notification_processed" EntityType="Self.notification_processed" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="notification_summary_period" EntityType="Self.notification_summary_period" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ongoing" EntityType="Self.ongoing" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="outcome" EntityType="Self.outcome" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="partner" EntityType="Self.partner" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="poster" EntityType="Self.poster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="poster_industry_posters" EntityType="Self.poster_industry_posters" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="preferred_contact_method" EntityType="Self.preferred_contact_method" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="priority" EntityType="Self.priority" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="province" EntityType="Self.province" Schema="dbo" store:Type="Tables" />
@@ -1299,8 +1409,7 @@
             <End Role="report_non_mediator_involved" EntitySet="report_non_mediator_involved" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ECModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1481,6 +1590,8 @@
           <Property Name="guid" Type="Guid" />
           <NavigationProperty Name="address" Relationship="Self.FK_Company_Address" FromRole="company" ToRole="address" />
           <NavigationProperty Name="company_department" Relationship="Self.FK_Department_Company" FromRole="company" ToRole="company_department" />
+          <Property Name="next_payment_date" Type="DateTime" Precision="3" />
+          <Property Name="next_payment_amount" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
         <EntityType Name="company_anonymity">
           <Key>
@@ -1550,6 +1661,10 @@
           <Property Name="created_dt" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="is_active" Type="Int32" Nullable="false" />
           <Property Name="comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="reseller_type_id" Type="Int32" />
+          <Property Name="reseller_level" Type="Int32" />
+          <Property Name="reseller_comission" Type="Int32" />
+          <Property Name="reseller_discount" Type="Int32" />
         </EntityType>
         <EntityType Name="company_location">
           <Key>
@@ -2007,6 +2122,13 @@
           <Property Name="outcome_id" Type="Int32" />
           <Property Name="outcome_message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="outcome_other" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="case_closure_reason_id" Type="Int32" />
+          <Property Name="case_closure_report" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="executive_summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="facts_established" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="investigation_methodology" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="description_outcome" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="recommended_actions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="report_log">
           <Key>
@@ -2354,6 +2476,7 @@
           <Property Name="sign_in_code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="guid" Type="Guid" />
           <NavigationProperty Name="report" Relationship="Self.FK_Report_User" FromRole="user" ToRole="report" />
+          <Property Name="company_department_id" Type="Int32" />
         </EntityType>
         <EntityType Name="user_change_password">
           <Key>
@@ -2582,7 +2705,103 @@
             <End Role="report" EntitySet="report" />
             <End Role="report_non_mediator_involved" EntitySet="report_non_mediator_involved" />
           </AssociationSet>
+          <EntitySet Name="case_closure_reason" EntityType="ECModel.case_closure_reason" />
+          <EntitySet Name="company_outcome" EntityType="ECModel.company_outcome" />
+          <EntitySet Name="company_payments" EntityType="ECModel.company_payments" />
+          <EntitySet Name="industry_posters" EntityType="ECModel.industry_posters" />
+          <EntitySet Name="message_posters" EntityType="ECModel.message_posters" />
+          <EntitySet Name="poster" EntityType="ECModel.poster" />
+          <EntitySet Name="poster_industry_posters" EntityType="ECModel.poster_industry_posters" />
         </EntityContainer>
+        <EntityType Name="case_closure_reason">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="case_closure_reason_en" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="case_closure_reason_fr" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="case_closure_reason_es" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="case_closure_reason_ru" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="case_closure_reason_jp" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="case_closure_reason_ar" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="status_id" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="company_outcome">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="status_id" Type="Int32" Nullable="false" />
+          <Property Name="outcome_en" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="outcome_fr" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="outcome_es" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="outcome_ru" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="outcome_ar" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="outcome_jp" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="last_update_dt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="company_payments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="payment_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="cc_name" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="cc_number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cc_month" Type="Int32" Nullable="false" />
+          <Property Name="cc_year" Type="Int32" Nullable="false" />
+          <Property Name="cc_csv" Type="Int32" Nullable="false" />
+          <Property Name="amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="auth_code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="local_invoice_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="industry_posters">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="status" Type="Int32" Nullable="false" />
+          <Property Name="industry_posters_en" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="industry_posters_es" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="industry_posters_fr" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="message_posters">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="status" Type="Int32" Nullable="false" />
+          <Property Name="message_posters_en" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="message_posters_fr" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="message_posters_es" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="poster">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="poster_name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="poster_img" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="poster_message_posters_id" Type="Int32" Nullable="false" />
+          <Property Name="image_name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="image_path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Int32" Nullable="false" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="poster_industry_posters">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="poster_id" Type="Int32" Nullable="false" />
+          <Property Name="industry_posters_id" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2715,6 +2934,8 @@
           <EntitySetMapping Name="company">
             <EntityTypeMapping TypeName="ECModel.company">
               <MappingFragment StoreEntitySet="company">
+                <ScalarProperty Name="next_payment_amount" ColumnName="next_payment_amount" />
+                <ScalarProperty Name="next_payment_date" ColumnName="next_payment_date" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="client_id" ColumnName="client_id" />
                 <ScalarProperty Name="address_id" ColumnName="address_id" />
@@ -2833,6 +3054,10 @@
           <EntitySetMapping Name="company_invitation">
             <EntityTypeMapping TypeName="ECModel.company_invitation">
               <MappingFragment StoreEntitySet="company_invitation">
+                <ScalarProperty Name="reseller_discount" ColumnName="reseller_discount" />
+                <ScalarProperty Name="reseller_comission" ColumnName="reseller_comission" />
+                <ScalarProperty Name="reseller_level" ColumnName="reseller_level" />
+                <ScalarProperty Name="reseller_type_id" ColumnName="reseller_type_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="invitation_code" ColumnName="invitation_code" />
                 <ScalarProperty Name="created_by_company_id" ColumnName="created_by_company_id" />
@@ -3310,6 +3535,13 @@
           <EntitySetMapping Name="report_investigation_status">
             <EntityTypeMapping TypeName="ECModel.report_investigation_status">
               <MappingFragment StoreEntitySet="report_investigation_status">
+                <ScalarProperty Name="recommended_actions" ColumnName="recommended_actions" />
+                <ScalarProperty Name="description_outcome" ColumnName="description_outcome" />
+                <ScalarProperty Name="investigation_methodology" ColumnName="investigation_methodology" />
+                <ScalarProperty Name="facts_established" ColumnName="facts_established" />
+                <ScalarProperty Name="executive_summary" ColumnName="executive_summary" />
+                <ScalarProperty Name="case_closure_report" ColumnName="case_closure_report" />
+                <ScalarProperty Name="case_closure_reason_id" ColumnName="case_closure_reason_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="report_id" ColumnName="report_id" />
                 <ScalarProperty Name="investigation_status_id" ColumnName="investigation_status_id" />
@@ -3660,6 +3892,7 @@
           <EntitySetMapping Name="user">
             <EntityTypeMapping TypeName="ECModel.user">
               <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="company_department_id" ColumnName="company_department_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="company_id" ColumnName="company_id" />
                 <ScalarProperty Name="address_id" ColumnName="address_id" />
@@ -3737,6 +3970,102 @@
                 <ScalarProperty Name="last_update_dt" ColumnName="last_update_dt" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="code" ColumnName="code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="case_closure_reason">
+            <EntityTypeMapping TypeName="ECModel.case_closure_reason">
+              <MappingFragment StoreEntitySet="case_closure_reason">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="case_closure_reason_ar" ColumnName="case_closure_reason_ar" />
+                <ScalarProperty Name="case_closure_reason_jp" ColumnName="case_closure_reason_jp" />
+                <ScalarProperty Name="case_closure_reason_ru" ColumnName="case_closure_reason_ru" />
+                <ScalarProperty Name="case_closure_reason_es" ColumnName="case_closure_reason_es" />
+                <ScalarProperty Name="case_closure_reason_fr" ColumnName="case_closure_reason_fr" />
+                <ScalarProperty Name="case_closure_reason_en" ColumnName="case_closure_reason_en" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="company_outcome">
+            <EntityTypeMapping TypeName="ECModel.company_outcome">
+              <MappingFragment StoreEntitySet="company_outcome">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="last_update_dt" ColumnName="last_update_dt" />
+                <ScalarProperty Name="outcome_jp" ColumnName="outcome_jp" />
+                <ScalarProperty Name="outcome_ar" ColumnName="outcome_ar" />
+                <ScalarProperty Name="outcome_ru" ColumnName="outcome_ru" />
+                <ScalarProperty Name="outcome_es" ColumnName="outcome_es" />
+                <ScalarProperty Name="outcome_fr" ColumnName="outcome_fr" />
+                <ScalarProperty Name="outcome_en" ColumnName="outcome_en" />
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="company_payments">
+            <EntityTypeMapping TypeName="ECModel.company_payments">
+              <MappingFragment StoreEntitySet="company_payments">
+                <ScalarProperty Name="local_invoice_number" ColumnName="local_invoice_number" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="auth_code" ColumnName="auth_code" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="cc_csv" ColumnName="cc_csv" />
+                <ScalarProperty Name="cc_year" ColumnName="cc_year" />
+                <ScalarProperty Name="cc_month" ColumnName="cc_month" />
+                <ScalarProperty Name="cc_number" ColumnName="cc_number" />
+                <ScalarProperty Name="cc_name" ColumnName="cc_name" />
+                <ScalarProperty Name="payment_date" ColumnName="payment_date" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="industry_posters">
+            <EntityTypeMapping TypeName="ECModel.industry_posters">
+              <MappingFragment StoreEntitySet="industry_posters">
+                <ScalarProperty Name="industry_posters_fr" ColumnName="industry_posters_fr" />
+                <ScalarProperty Name="industry_posters_es" ColumnName="industry_posters_es" />
+                <ScalarProperty Name="industry_posters_en" ColumnName="industry_posters_en" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="message_posters">
+            <EntityTypeMapping TypeName="ECModel.message_posters">
+              <MappingFragment StoreEntitySet="message_posters">
+                <ScalarProperty Name="message_posters_es" ColumnName="message_posters_es" />
+                <ScalarProperty Name="message_posters_fr" ColumnName="message_posters_fr" />
+                <ScalarProperty Name="message_posters_en" ColumnName="message_posters_en" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="poster">
+            <EntityTypeMapping TypeName="ECModel.poster">
+              <MappingFragment StoreEntitySet="poster">
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="image_path" ColumnName="image_path" />
+                <ScalarProperty Name="image_name" ColumnName="image_name" />
+                <ScalarProperty Name="poster_message_posters_id" ColumnName="poster_message_posters_id" />
+                <ScalarProperty Name="poster_img" ColumnName="poster_img" />
+                <ScalarProperty Name="poster_name" ColumnName="poster_name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="poster_industry_posters">
+            <EntityTypeMapping TypeName="ECModel.poster_industry_posters">
+              <MappingFragment StoreEntitySet="poster_industry_posters">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="industry_posters_id" ColumnName="industry_posters_id" />
+                <ScalarProperty Name="poster_id" ColumnName="poster_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

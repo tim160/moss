@@ -26,5 +26,12 @@ namespace EC.Models.Database
         public Nullable<int> outcome_id { get; set; }
         public string outcome_message { get; set; }
         public string outcome_other { get; set; }
+        public Nullable<int> case_closure_reason_id { get; set; }
+        public string case_closure_report { get; set; }
+        public string executive_summary { get; set; }
+        public string facts_established { get; set; }
+        public string investigation_methodology { get; set; }
+        public string description_outcome { get; set; }
+        public string recommended_actions { get; set; }
     }
 }

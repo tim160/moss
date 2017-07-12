@@ -96,5 +96,12 @@ namespace EC.Models.Database
         public virtual DbSet<user_change_password> user_change_password { get; set; }
         public virtual DbSet<user_role> user_role { get; set; }
         public virtual DbSet<validation_type> validation_type { get; set; }
+        public virtual DbSet<case_closure_reason> case_closure_reason { get; set; }
+        public virtual DbSet<company_outcome> company_outcome { get; set; }
+        public virtual DbSet<company_payments> company_payments { get; set; }
+        public virtual DbSet<industry_posters> industry_posters { get; set; }
+        public virtual DbSet<message_posters> message_posters { get; set; }
+        public virtual DbSet<poster> poster { get; set; }
+        public virtual DbSet<poster_industry_posters> poster_industry_posters { get; set; }
     }
 }
