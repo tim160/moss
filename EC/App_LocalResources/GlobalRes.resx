@@ -1924,4 +1924,7 @@
   <data name="CaseReturnedFutherInvestigation" xml:space="preserve">
     <value>Case returned for futher investigation</value>
   </data>
+  <data name="OtherDepartmentSavingFailed" xml:space="preserve">
+    <value>Failed to save other departments</value>
+  </data>
 </root>

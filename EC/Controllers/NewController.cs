@@ -32,12 +32,28 @@ namespace EC.Controllers
             ViewBag.cc_extension = cc_ext;
             #endregion
 
-
-            string _code = "";
             if (!string.IsNullOrEmpty(code))
-                _code = code;
+            {
+                ViewBag.code = code;
+                company selectedCompany = db.company.Where(m => m.company_code == code).FirstOrDefault();
+                if (selectedCompany != null)
+                {
+                     List<company_department> currentDepartmens = db.company_department.Where(m => m.company_id == selectedCompany.id).ToList();
+                    /*put drop daun*/
+                    List<SelectListItem> items = new List<SelectListItem>();
+                    foreach(var item in currentDepartmens)
+                    {
+                        SelectListItem dep = new SelectListItem { Text = item.department_en, Value = item.id.ToString() };
+                        items.Add(dep);
+                    }
+                    /*put other*/
+                    SelectListItem temp = new SelectListItem { Text = App_LocalResources.GlobalRes.Other, Value = "0" };
+                    items.Add(temp);
+                    ViewBag.currentDepartmens = items;
+                }
+            }
 
-            ViewBag.code = _code;
+
             string _email = "";
             if (!string.IsNullOrEmpty(email))
                 _email = email;
@@ -331,6 +347,7 @@ namespace EC.Controllers
             #region Departments
             /// easy part - Administrative, Accounting, Management, Sales and Support 
             /// 
+            company_department selectedDepartment = null;
             List<string> list_departments = new List<string>();
             list_departments.Add(App_LocalResources.GlobalRes.Administrative);
             list_departments.Add(App_LocalResources.GlobalRes.Accounting);
@@ -338,9 +355,9 @@ namespace EC.Controllers
             list_departments.Add(App_LocalResources.GlobalRes.Sales);
             list_departments.Add(App_LocalResources.GlobalRes.Support);
 
-
             if (company_id != 0)
             {
+                List<company_department> departmentsNewCompany = new List<company_department>();
                 foreach (string _dep in list_departments)
                 {
                     if (_dep.Trim().Length > 0)
@@ -356,17 +373,58 @@ namespace EC.Controllers
                         _department.company_id = company_id;
                         _department.last_update_dt = DateTime.Now;
                         _department.status_id = 2;
+                        departmentsNewCompany.Add(_department);
+                    }
+                }
+                /*saving List Departments*/
+                try
+                {
+                    db.company_department.AddRange(departmentsNewCompany);
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    logger.Error(ex.ToString());
+                    return App_LocalResources.GlobalRes.DepartmentSavingFailed;
+                }
 
+                /*check other deparment*/
+                if (departments != null && departments != "")
+                {
+                    departments = departments.Trim();
+                    string tempDepartment = departments.ToLower();
+                    company_department otherDepartment = departmentsNewCompany.Where(m => m.department_en.Trim().ToLower() == tempDepartment).SingleOrDefault();
+
+                    if (otherDepartment != null)
+                    {
+                        selectedDepartment = otherDepartment;
+                    }
+                    else
+                    {
+                        //создаем other department
+
+                        company_department other_department = new company_department();
+                        other_department.department_en = departments.Trim();
+                        other_department.department_ar = departments.Trim();
+                        other_department.department_es = departments.Trim();
+                        other_department.department_fr = departments.Trim();
+                        other_department.department_ru = departments.Trim();
+
+                        other_department.client_id = client_id;
+                        other_department.company_id = company_id;
+                        other_department.last_update_dt = DateTime.Now;
+                        other_department.status_id = 2;
 
                         try
                         {
-                            db.company_department.Add(_department);
+                            db.company_department.Add(other_department);
                             db.SaveChanges();
+                            selectedDepartment = other_department;
                         }
                         catch (Exception ex)
                         {
                             logger.Error(ex.ToString());
-                            return App_LocalResources.GlobalRes.DepartmentSavingFailed;
+                            return App_LocalResources.GlobalRes.OtherDepartmentSavingFailed;
                         }
                     }
                 }
@@ -550,7 +608,6 @@ namespace EC.Controllers
                 _user.preferred_contact_method_id = 1;
                 _user.title_ds = title.Trim();
                 _user.employee_no = "";
-                _user.notepad_tx = departments.Trim();
                 _user.question_ds = "";
                 _user.answer_ds = "";
                 _user.previous_login_dt = DateTime.Now;
@@ -566,6 +623,7 @@ namespace EC.Controllers
                 _user.location_nm = "";
                 _user.sign_in_code = null;
                 _user.guid = Guid.NewGuid();
+                _user.company_department_id = selectedDepartment.id;
 
                 try
                 {
@@ -662,7 +720,7 @@ namespace EC.Controllers
 
         }
 
-        public string CreateUser(string code, string first, string last, string email, string title, string description)
+        public string CreateUser(string code, string first, string last, string email, string title, int currentDepartmens)
         {
             int company_id = 0;
             int user_id = 0;
@@ -746,7 +804,7 @@ namespace EC.Controllers
                 _user.preferred_contact_method_id = 1;
                 _user.title_ds = title.Trim();
                 _user.employee_no = "";
-                _user.notepad_tx = description.Trim();
+                _user.company_department_id = currentDepartmens;
                 _user.question_ds = "";
                 _user.answer_ds = "";
                 _user.previous_login_dt = DateTime.Now;
