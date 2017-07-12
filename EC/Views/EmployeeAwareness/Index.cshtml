@@ -24,13 +24,13 @@
             <div class="blockMenu posterCategoryNames">
                 <div class="title">@GlobalRes.Industry</div>
                 <div ng-repeat="category in categories">
-                    <div class="itemSelect" ng-class="{'active' : category.Selected}" ng-click="category.Selected = !category.Selected" value="{{category.Id}}">{{category.posterCategoryName}}</div>
+                    <div class="itemSelect" ng-class="{'active' : category.Selected}" ng-click="category.Selected = !category.Selected" value="{{category.Id}}">{{categoryName(category)}}</div>
                 </div>
             </div>
             <div class="blockMenu posterMessage">
                 <div class="title">@GlobalRes.Message</div>
                 <div ng-repeat="message in messages">
-                    <div class="itemSelect" ng-class="{'active' : message.Selected}" ng-click="message.Selected = !message.Selected" value="{{message.Id}}">{{message.Name}}</div>
+                    <div class="itemSelect" ng-class="{'active' : message.Selected}" ng-click="message.Selected = !message.Selected" value="{{message.Id}}">{{messageName(message)}}</div>
                 </div>
             </div>
             <div class="blockMenu">
@@ -49,20 +49,20 @@
                 <div class="info">
                     @GlobalRes.EmployeeAwarenessMaterials
                 </div>
-                <div ng-repeat="category in categories" class="itemFilter" ng-show="category.Selected" value="{{category.Id}}">{{category.posterCategoryName}}<div class="imgClose" ng-click="category.Selected = false"></div></div>
+                <div ng-repeat="category in categories" class="itemFilter" ng-show="category.Selected" value="{{category.Id}}">{{categoryName(category)}}<div class="imgClose" ng-click="category.Selected = false"></div></div>
                 <div class="calcItems"><span>{{selectedItemsCount()}}</span>@String.Format(GlobalRes.Itemss, "")</div>
             </div>
 
             <div class="rezoultItems">
 
                 <div ng-repeat="poster in posters" class="blockInformation" ng-style="poster.IsVisible == true ? {'display': 'block' } : {'display' : 'none' }">
-                    <a ng-href="/employeeawareness/poster/{{poster.Id}}" style="text-decoration: none">
-                        <div class="filtersBlock {{poster.imageName}}">
-                            <div ng-repeat="category in poster.posterCategoryNames" class="filter" ng-class="{{'c' + category.Id}}" value="{{category.Id}}">{{category.posterCategoryName}}</div>
+                    <a ng-href="/employeeawareness/poster/{{poster.poster.id}}" style="text-decoration: none">
+                        <div class="filtersBlock {{poster.poster.imageName}}">
+                            <div ng-repeat="category in poster.posterCategoryNames" class="filter" ng-class="{{'c' + category.id}}" value="{{category.id}}">{{categoryName(category.id)}}</div>
                         </div>
-                        <div class="greenBlock {{poster.posterMessage.Id}}">{{poster.posterMessage.posterMessageName}}</div>
+                        <div class="greenBlock {{poster.poster.message.id}}">{{messageName(poster.message)}}</div>
                         <div class="bottomInfo">
-                            <div class="infoItem">{{poster.posterName}}</div>
+                            <div class="infoItem">{{poster.poster.poster_name}}</div>
                         </div>
                     </a>
                 </div>

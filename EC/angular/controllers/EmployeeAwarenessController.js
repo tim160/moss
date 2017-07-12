@@ -20,6 +20,25 @@
             $scope.avaibleFormats = data.avaibleFormats;
         });
 
+        $scope.categoryName = function (category) {
+            if (category === null) {
+                return '';
+            }
+            if (typeof (category) === 'object') {
+                return category.industry_posters_en;
+            } else {
+                return $scope.categoryName($filter('getBy')($scope.categories, 'id', category));
+            }
+        };
+
+        $scope.categoryById = function (id) {
+            return category.industry_posters_en;
+        };
+
+        $scope.messageName = function (message) {
+            return message.message_posters_en;
+        };
+
         $scope.selectedItemsCount = function () {
             var count = 0;
 
@@ -43,7 +62,7 @@
 
                     angular.forEach($scope.categories, function (category) {
                         if (category.Selected) {
-                            if ($filter('getBy')(poster.posterCategoryNames, 'Id', category.Id) != null) {
+                            if ($filter('getBy')(poster.posterCategoryNames, 'id', category.id) != null) {
                                 poster.IsVisible = true;
                             }
                         }
@@ -51,7 +70,7 @@
 
                     angular.forEach($scope.messages, function (message) {
                         if (message.Selected) {
-                            if (poster.posterMessage.Id === message.Id) {
+                            if (poster.poster.poster_message_posters_id === message.id) {
                                 poster.IsVisible = true;
                             }
                         }

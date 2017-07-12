@@ -86,6 +86,10 @@
         <EntityTypeShape EntityType="ECModel.case_closure_reason" Width="1.5" PointX="3.375" PointY="0.75" />
         <EntityTypeShape EntityType="ECModel.company_outcome" Width="1.5" PointX="27.375" PointY="0.75" />
         <EntityTypeShape EntityType="ECModel.company_payments" Width="1.5" PointX="27.375" PointY="4.75" />
+        <EntityTypeShape EntityType="ECModel.industry_posters" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ECModel.message_posters" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ECModel.poster" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ECModel.poster_industry_posters" Width="1.5" PointX="11.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

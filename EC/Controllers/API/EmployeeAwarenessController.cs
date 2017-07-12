@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -14,7 +15,7 @@ using EC.App_LocalResources;
 
 namespace EC.Controllers.API
 {
-    public class EmployeeAwarenessController : ApiController
+    public class EmployeeAwarenessController : BaseAipController
     {
 
         [HttpGet]
@@ -27,25 +28,40 @@ namespace EC.Controllers.API
                 return null;
             }
 
-            var um = new UserModel(user.id);
-            var cm = new CompanyModel(um._user.company_id);
-            var posters = cm.GetAllPosters();
+            var posters = DB.poster.AsNoTracking().ToList();
+            var messages = DB.message_posters.AsNoTracking().ToList();
 
-            return new {
-                posters = posters,
-                categories = posters.SelectMany(x => x.posterCategoryNames).DistinctBy(x => x.Id).OrderBy(x => x.posterCategoryName),
-                messages = new [] {
-                    new { Id = 1, Name = GlobalRes.Message_1 },
-                    new { Id = 2, Name = GlobalRes.Message_2 },
-                    new { Id = 3, Name = GlobalRes.Message_3 },
-                },
-                avaibleFormats = new[] {
-                    new { Id = 1, Name = GlobalRes.AvailableFormat_1 },
-                    new { Id = 2, Name = GlobalRes.AvailableFormat_2 },
-                    new { Id = 3, Name = GlobalRes.AvailableFormat_3 },
-                },
-                
-            };
+            try
+            {
+                var m = new
+                {
+
+                    posters = DB.poster
+                        .ToList()
+                        .Select(x => new {
+                            poster = x,
+                            message = messages.FirstOrDefault(z => z.id == x.poster_message_posters_id),
+                            posterCategoryNames = DB.poster_industry_posters.Where(z => z.poster_id == x.id).ToList()
+                        })
+                        .ToList(),
+
+                    categories = DB.industry_posters.ToList(),
+
+                    messages = messages,
+
+                    avaibleFormats = new[] {
+                        new { Id = 1, Name = GlobalRes.AvailableFormat_1 },
+                        new { Id = 2, Name = GlobalRes.AvailableFormat_2 },
+                        new { Id = 3, Name = GlobalRes.AvailableFormat_3 },
+                    },
+                };
+
+                return ResponseObject2Json(m);
+            }
+            catch(Exception exc)
+            {
+                return "EXC! " + exc.Message;
+            }
         }
     }
 }
