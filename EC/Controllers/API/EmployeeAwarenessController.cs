@@ -15,7 +15,7 @@ using EC.App_LocalResources;
 
 namespace EC.Controllers.API
 {
-    public class EmployeeAwarenessController : BaseAipController
+    public class EmployeeAwarenessController : BaseApiController
     {
 
         [HttpGet]

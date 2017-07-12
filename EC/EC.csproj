@@ -659,7 +659,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AnalyticsController.cs" />
-    <Compile Include="Controllers\API\BaseAipController.cs" />
+    <Compile Include="Controllers\API\BaseApiController.cs" />
     <Compile Include="Controllers\API\EmployeeAwarenessPosterController.cs" />
     <Compile Include="Controllers\API\EmployeeAwarenessController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />

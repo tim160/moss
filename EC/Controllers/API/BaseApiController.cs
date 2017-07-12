@@ -10,7 +10,7 @@ using System.Web.Http;
 
 namespace EC.Controllers.API
 {
-    public class BaseAipController : ApiController
+    public class BaseApiController : ApiController
     {
         private ECEntities db = null;
         internal ECEntities DB
