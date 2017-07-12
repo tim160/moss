@@ -31,17 +31,22 @@ namespace EC.Controllers
             if (is_cc) cc_ext = "_cc";
             ViewBag.cc_extension = cc_ext;
             #endregion
-
             if (!string.IsNullOrEmpty(code))
             {
                 ViewBag.code = code;
-                company selectedCompany = db.company.Where(m => m.company_code == code).FirstOrDefault();
+                List<invitation> invitations = db.invitation.Where(t => ((t.email.ToLower().Trim() == email.ToLower().Trim())
+                && (t.used_flag == 0) && (t.code.Trim().ToLower() == code.Trim().ToLower()))).ToList();
+                invitation _invitation = invitations[0];
+                var invitation_id = _invitation.id;
+                UserModel um = new UserModel(_invitation.sent_by_user_id);
+
+                company selectedCompany = db.company.Where(m => m.id == um._user.company_id).FirstOrDefault();
                 if (selectedCompany != null)
                 {
-                     List<company_department> currentDepartmens = db.company_department.Where(m => m.company_id == selectedCompany.id).ToList();
+                    List<company_department> currentDepartmens = db.company_department.Where(m => m.company_id == selectedCompany.id).ToList();
                     /*put drop daun*/
                     List<SelectListItem> items = new List<SelectListItem>();
-                    foreach(var item in currentDepartmens)
+                    foreach (var item in currentDepartmens)
                     {
                         SelectListItem dep = new SelectListItem { Text = item.department_en, Value = item.id.ToString() };
                         items.Add(dep);
