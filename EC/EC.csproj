@@ -19,7 +19,7 @@
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
-    <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>2.1</TypeScriptToolsVersion>
     <NuGetPackageImportStamp>8acab050</NuGetPackageImportStamp>
     <UseGlobalApplicationHostFile />
   </PropertyGroup>
@@ -222,6 +222,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="angular\app.js" />
+    <Content Include="angular\controllers\EmployeeAwarenessPosterController.js" />
+    <Content Include="angular\controllers\EmployeeAwarenessController.js" />
+    <Content Include="angular\services\EmployeeAwarenessPosterService.js" />
+    <Content Include="angular\services\EmployeeAwarenessService.js" />
     <Content Include="App\components\activeHover\activeHover.js" />
     <Content Include="App\components\affix\affix.js" />
     <Content Include="App\components\confirm\confirm.js" />
@@ -414,6 +419,7 @@
     <Content Include="Content\styleTasks.css" />
     <Content Include="Content\the-modal.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="gulpfile.js" />
     <Content Include="html\404.css" />
     <Content Include="html\404.html" />
     <Content Include="html\500.html" />
@@ -458,6 +464,8 @@
     <Content Include="App\Web.config" />
     <Content Include="App\ec\components\EAShow\EAShow.cshtml" />
     <Content Include="App\ec\components\EAList\EAList.cshtml" />
+    <Content Include="bower.json" />
+    <Content Include="package.json" />
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <None Include="Properties\PublishProfiles\ec-code.pubxml" />
     <None Include="Properties\PublishProfiles\ec-dev.pubxml" />
@@ -651,6 +659,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AnalyticsController.cs" />
+    <Compile Include="Controllers\API\BaseApiController.cs" />
+    <Compile Include="Controllers\API\EmployeeAwarenessPosterController.cs" />
+    <Compile Include="Controllers\API\EmployeeAwarenessController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CaseController.cs" />
@@ -784,6 +795,9 @@
     <Compile Include="Models\Database\industry.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Database\industry_posters.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Database\injury_damage.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
@@ -805,6 +819,9 @@
     <Compile Include="Models\Database\message.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Database\message_posters.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Database\message_user_read.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
@@ -821,6 +838,12 @@
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\partner.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\poster.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\poster_industry_posters.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\preferred_contact_method.cs">
@@ -892,9 +915,6 @@
     <Compile Include="Models\Database\status.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Database\sysdiagrams.cs">
-      <DependentUpon>ECEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Database\task.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
@@ -957,6 +977,7 @@
     <Compile Include="Models\ECModel\User.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Utils\FileUtils.cs" />
+    <Compile Include="Models\ViewModels\CaseInvestigationStatusViewModel.cs" />
     <Compile Include="Models\ViewModels\CaseMessagesViewModel.cs" />
     <Compile Include="Models\ViewModels\CasePreviewViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -973,6 +994,7 @@
     <Compile Include="Utils\Auth\UserIndentity .cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="angular\factories\" />
     <Folder Include="App_Data\" />
     <Folder Include="Upload\CompanyLogo\" />
     <Folder Include="Views\ActiveCasesModel\" />
@@ -1057,7 +1079,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>25440</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
@@ -1067,7 +1089,7 @@
           <CustomServerUrl>
           </CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
-          <servers defaultServer="SelfHostServer">
+          <servers defaultServer="">
             <server name="SelfHostServer" exePath="" cmdArgs="" url="http://localhost:25403/" workingDir="" />
           </servers>
         </WebProjectProperties>

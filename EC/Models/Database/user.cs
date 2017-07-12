@@ -51,6 +51,7 @@ namespace EC.Models.Database
         public string location_nm { get; set; }
         public string sign_in_code { get; set; }
         public Nullable<System.Guid> guid { get; set; }
+        public Nullable<int> company_department_id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<report> report { get; set; }

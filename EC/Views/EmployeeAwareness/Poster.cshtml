@@ -15,7 +15,7 @@
 }
 
 
-<div id="EmployeeAwarenessBlock" class="blockSettings">
+<div id="EmployeeAwarenessBlock" class="blockSettings" ng-controller="EmployeeAwarenessPosterController">
     <div class="topHeader">@GlobalRes.AwarenessMaterials</div>
     <div class="mainContent">
         <div class="rightContent">
@@ -29,28 +29,28 @@
             <div class="rezoultItems">
 
                 <div class="mainImg">
-                    <img src="~/Content/img/employeeAwarenessPoster.jpg" />
+                    <img ng-src="{{mainImage}}" />
                 </div>
                 <div class="rightInfoSelect">
-                    <div class="downloadPdf">@string.Format(GlobalRes.DownloadPosterPDF, GlobalRes.format_1)</div>
+                    <div class="downloadPdf" ng-click="Process()">@string.Format(GlobalRes.DownloadPosterPDF, GlobalRes.format_1)</div>
                     <div class="availableFormat">
                         <div class="titleFormat">@GlobalRes.AvailableFormat: </div>
                         <div class="blockFormat">
                             <div class="titleBlockFormat active">@GlobalRes.Poster</div>
                             <div class="itemsFormat">
-                                <div class="itemFormat active">
+                                <div class="itemFormat active" ng-click="SelectedSize = 1">
                                     <div class="format format1"></div>
                                     <div class="size">@GlobalRes.format_1</div>
                                 </div>
-                                <div class="itemFormat">
+                                <div class="itemFormat" ng-click="SelectedSize = 2">
                                     <div class="format format2"></div>
                                     <div class="size">@GlobalRes.format_2</div>
                                 </div>
-                                <div class="itemFormat">
+                                <div class="itemFormat" ng-click="SelectedSize = 3">
                                     <div class="format format3"></div>
                                     <div class="size">@GlobalRes.format_3</div>
                                 </div>
-                                <div class="itemFormat">
+                                <div class="itemFormat" ng-click="SelectedSize = 4">
                                     <div class="format format4"></div>
                                     <div class="size">@GlobalRes.format_4</div>
                                 </div>
@@ -61,11 +61,11 @@
 
                     <div class="titleFormat">@GlobalRes.Options: </div>
                     <div class="blockFormat blockOption">
-                        <div class="itemFormat active">
+                        <div class="itemFormat active" ng-click="SelectedLogo = 1">
                             <div class="format noLogo"></div>
                             <div class="size">@GlobalRes.Nologo</div>
                         </div>
-                        <div class="itemFormat">
+                        <div class="itemFormat" ng-click="SelectedLogo = 2">
                             <div class="format useCurrentLogo"></div>
                             <div class="size">@GlobalRes.Usecurrentlogo</div>
                         </div>

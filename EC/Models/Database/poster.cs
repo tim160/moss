@@ -12,19 +12,15 @@ namespace EC.Models.Database
     using System;
     using System.Collections.Generic;
     
-    public partial class company_payments
+    public partial class poster
     {
-        public System.Guid id { get; set; }
+        public int id { get; set; }
+        public string poster_name { get; set; }
+        public string poster_img { get; set; }
+        public int poster_message_posters_id { get; set; }
+        public string image_name { get; set; }
+        public string image_path { get; set; }
+        public int status { get; set; }
         public int company_id { get; set; }
-        public System.DateTime payment_date { get; set; }
-        public string cc_name { get; set; }
-        public string cc_number { get; set; }
-        public int cc_month { get; set; }
-        public int cc_year { get; set; }
-        public int cc_csv { get; set; }
-        public decimal amount { get; set; }
-        public string auth_code { get; set; }
-        public Nullable<int> user_id { get; set; }
-        public string local_invoice_number { get; set; }
     }
 }

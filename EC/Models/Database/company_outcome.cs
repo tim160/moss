@@ -12,19 +12,18 @@ namespace EC.Models.Database
     using System;
     using System.Collections.Generic;
     
-    public partial class company_payments
+    public partial class company_outcome
     {
-        public System.Guid id { get; set; }
+        public int id { get; set; }
         public int company_id { get; set; }
-        public System.DateTime payment_date { get; set; }
-        public string cc_name { get; set; }
-        public string cc_number { get; set; }
-        public int cc_month { get; set; }
-        public int cc_year { get; set; }
-        public int cc_csv { get; set; }
-        public decimal amount { get; set; }
-        public string auth_code { get; set; }
-        public Nullable<int> user_id { get; set; }
-        public string local_invoice_number { get; set; }
+        public int status_id { get; set; }
+        public string outcome_en { get; set; }
+        public string outcome_fr { get; set; }
+        public string outcome_es { get; set; }
+        public string outcome_ru { get; set; }
+        public string outcome_ar { get; set; }
+        public string outcome_jp { get; set; }
+        public System.DateTime last_update_dt { get; set; }
+        public int user_id { get; set; }
     }
 }
