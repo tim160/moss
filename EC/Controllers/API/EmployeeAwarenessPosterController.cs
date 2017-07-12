@@ -11,11 +11,19 @@ using EC.Models.Database;
 using EC.Constants;
 using EC.Core.Common;
 using EC.App_LocalResources;
+using System.IO;
+using System.Net.Http.Headers;
 
 namespace EC.Controllers.API
 {
-    public class EmployeeAwarenessPosterController : ApiController
+    public class EmployeeAwarenessPosterController : BaseApiController
     {
+        public class Filter
+        {
+            public int type { get; set; }
+            public int size { get; set; }
+            public int logo { get; set; }
+        }
 
         [HttpGet]
         public object Get(int id)
@@ -27,15 +35,25 @@ namespace EC.Controllers.API
                 return null;
             }
 
+            var poster = DB.poster.FirstOrDefault(x => x.id == id);
+
             return new {
-                mainImage = Url.Content("~/Content/img/employeeAwarenessPoster.jpg")
+                //mainImage = Url.Content("~/Content/img/employeeAwarenessPoster.jpg")
+                mainImage = $"{poster.image_path}{poster.image_name}"
             };
         }
 
         [HttpPost]
-        public object Post(int size, int logo)
+        public object Post([FromBody]Filter filter)
         {
-            return null;
+            var poster = DB.poster.FirstOrDefault(x => x.id == filter.type);
+
+            return new {
+                //file = $"{poster.image_path}{poster.image_name}",
+                file = ("/Content/img/TestPdf.pdf"),
+                name = $"type:{filter.type} size:{filter.size} logo:{filter.logo}"
+            };
+
         }
    }
 }

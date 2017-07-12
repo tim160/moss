@@ -8,6 +8,7 @@
     function EmployeeAwarenessPosterService($resource) {
         return $resource('/api/EmployeeAwarenessPoster', {}, {
             get: { method: 'GET', params: {}, isArray: false },
+            post: { method: 'POST', params: {}, isArray: false },
         });
     };
 })();
