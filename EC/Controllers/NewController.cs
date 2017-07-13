@@ -432,6 +432,12 @@ namespace EC.Controllers
                             return App_LocalResources.GlobalRes.OtherDepartmentSavingFailed;
                         }
                     }
+                } else
+                {
+                    selectedDepartment = new company_department
+                    {
+                        id = 0
+                    };
                 }
             }
             #endregion
