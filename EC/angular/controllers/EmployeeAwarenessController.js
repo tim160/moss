@@ -11,6 +11,7 @@
         $scope.posters = [];
         $scope.categories = [];
         $scope.messages = [];
+        $scope.languages = [];
         $scope.avaibleFormats = [];
 
         EmployeeAwarenessService.get({}, function (data) {
@@ -18,6 +19,7 @@
             $scope.categories = data.categories;
             $scope.messages = data.messages;
             $scope.avaibleFormats = data.avaibleFormats;
+            $scope.languages = data.languages;
         });
 
         $scope.categoryName = function (category) {

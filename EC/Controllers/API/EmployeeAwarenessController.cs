@@ -45,9 +45,13 @@ namespace EC.Controllers.API
                         })
                         .ToList(),
 
-                    categories = DB.industry_posters.ToList(),
+                    categories = DB.industry_posters.Where(x => x.status == 2).ToList(),
 
-                    messages = messages,
+                    messages = messages.Where(x => x.status == 2).ToList(),
+
+                    languages = new [] {
+                        new { Id = 1, Name = GlobalRes.English },                        
+                    },
 
                     avaibleFormats = new[] {
                         new { Id = 1, Name = GlobalRes.AvailableFormat_1 },
