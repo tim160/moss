@@ -40,8 +40,10 @@
                 </div>
             </div>
             <div class="blockMenu">
-                <div class="title">@GlobalRes.Language</div>
-                <div class="itemSelect">@GlobalRes.English</div>
+                <div ng-repeat="language in languages">
+                    <div class="title">{{language.Name}}</div>
+                    <div class="itemSelect" ng-class="{'active' : language.Selected}" ng-click="language.Selected = !language.Selected" value="{{language.Id}}">{{language.Name}}</div>
+                </div>
             </div>
         </div>
         <div class="rightContent">
@@ -50,6 +52,9 @@
                     @GlobalRes.EmployeeAwarenessMaterials
                 </div>
                 <div ng-repeat="category in categories" class="itemFilter" ng-show="category.Selected" value="{{category.Id}}">{{categoryName(category)}}<div class="imgClose" ng-click="category.Selected = false"></div></div>
+                <div ng-repeat="message in messages" class="itemFilter" ng-show="message.Selected" value="{{message.Id}}">{{messageName(message)}}<div class="imgClose" ng-click="message.Selected = false"></div></div>
+                <div ng-repeat="avaibleFormat in avaibleFormats" class="itemFilter" ng-show="avaibleFormat.Selected" value="{{avaibleFormat.Id}}">{{avaibleFormat.Name}}<div class="imgClose" ng-click="avaibleFormat.Selected = false"></div></div>
+                <div ng-repeat="language in languages" class="itemFilter" ng-show="language.Selected" value="{{language.Id}}">{{language.Name}}<div class="imgClose" ng-click="language.Selected = false"></div></div>
                 <div class="calcItems"><span>{{selectedItemsCount()}}</span>@String.Format(GlobalRes.Itemss, "")</div>
             </div>
 
@@ -57,7 +62,7 @@
 
                 <div ng-repeat="poster in posters" class="blockInformation" ng-style="poster.IsVisible == true ? {'display': 'block' } : {'display' : 'none' }">
                     <a ng-href="/employeeawareness/poster/{{poster.poster.id}}" style="text-decoration: none">
-                        <div class="filtersBlock {{poster.poster.imageName}}">
+                        <div class="filtersBlock {{poster.poster.imageName}}" style="background-image: url({{poster.poster.image_path}}{{poster.poster.image_name}})">
                             <div ng-repeat="category in poster.posterCategoryNames" class="filter" ng-class="{{'c' + category.id}}" value="{{category.id}}">{{categoryName(category.id)}}</div>
                         </div>
                         <div class="greenBlock {{poster.poster.message.id}}">{{messageName(poster.message)}}</div>
