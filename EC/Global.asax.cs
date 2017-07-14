@@ -41,5 +41,9 @@ namespace EC
         {
             return HttpContext.Current.Request.AppRelativeCurrentExecutionFilePath.StartsWith("~/api");
         }
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            //Server.GetLastError().Message
+        }
     }
 }

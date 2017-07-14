@@ -89,7 +89,7 @@ namespace EC.Controllers
                 #endregion
 
           
-                List<company> list = companyModel.GeCompaniesWithStatus();
+                /*List<company> list = companyModel.GeCompaniesWithStatus();
                 List<SearchCompanyDto> searchCompanyDto = new List<SearchCompanyDto>();
                 if (!CurrentURL.Contains("registration"))
                 {
@@ -107,9 +107,20 @@ namespace EC.Controllers
                 var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
                 EcAuthorizedAttribute attr = new EcAuthorizedAttribute();
 
-                ViewBag.newListComp = serializer.Serialize(searchCompanyDto.ToArray());
+                ViewBag.newListComp = serializer.Serialize(searchCompanyDto.ToArray());*/
                 return View();
             }
+        }
+
+        [AllowAnonymous]
+        public JsonResult SeekCompany(string term)
+        {
+            var list = companyModel.GeCompaniesWithStatusAndTerm(term).Select(x => new {
+                label = x.company_nm,
+                value = x.company_code
+            });
+
+            return Json(list, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Page()

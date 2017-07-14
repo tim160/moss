@@ -62,12 +62,13 @@ namespace EC.Controllers
             if (user != null)
             {
                 SignIn(user);
-                if(user.role_id == 8)
+                if (user.role_id == 8)
+                {
                     return Redirect("~/ReporterDashboard");
+                }
                 return Redirect("~/Cases");
-
-                Session["userName"] = "";
-                Session["userId"] = user.id;
+                //Session["userName"] = "";
+                //Session["userId"] = user.id;
             }
             else
             {

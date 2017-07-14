@@ -438,6 +438,10 @@ namespace EC.Models
             //return (from comp in db.company where comp.status_id == 2 select comp.company_nm, comp.id).ToList();
             return db.company.Where(item => item.status_id == 2).ToList();   
         }
+        public List<company> GeCompaniesWithStatusAndTerm(string term)
+        {
+            return db.company.Where(item => item.status_id == 2 && item.company_nm.ToLower().Contains(term.ToLower())).ToList();
+        }
 
         public List<company> GeCompaniesWithStatus(string company_name)
         {

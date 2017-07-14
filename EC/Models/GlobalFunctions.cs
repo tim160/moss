@@ -33,7 +33,7 @@ public class GlobalFunctions
     // Content/img/cai_logo.png
     public bool IsSubdomain(string url)
     {
-        if (url.ToLower().Contains("localhost") || url.ToLower().Contains("stark.") || url.ToLower().Contains("democompany.") || url.ToLower().Contains("report.") || url.ToLower().Contains("cai."))
+        if (url.ToLower().Contains("localhost") || url.ToLower().Contains("local2host")  || url.ToLower().Contains("stark.") || url.ToLower().Contains("democompany.") || url.ToLower().Contains("report.") || url.ToLower().Contains("cai."))
         {
             return true;
         }

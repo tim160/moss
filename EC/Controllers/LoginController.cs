@@ -157,7 +157,7 @@ namespace EC.Controllers
         }
 
 
-        public string Login(string login, string password)
+        public string Login(string login, string password, string company)
         {
             Session.Clear();
             GlobalFunctions glb = new GlobalFunctions();
@@ -173,9 +173,9 @@ namespace EC.Controllers
                     if (user.role_id == 8)
                     {
                         //   return RedirectToAction("Index", "ReporterDashboard");
-                        return "ReporterDashboard";
+                        return Url.Action("Index", "ReporterDashboard");
                     }
-                    return "Cases";
+                    return Url.Action("Index", "Cases");
                 //    return "Payment/History";
 
                     //  return RedirectToAction("Index", "Cases");

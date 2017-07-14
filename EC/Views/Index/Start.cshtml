@@ -129,24 +129,21 @@
 </div>
 
 <input id="companyCode" type="hidden" value="false" />
-<script>
-    $(document).ready(function () {
-        $('.div input')
-           .focus(function () {
-               $(this).parent('.div').css({ 'border': '2px solid #05b5a2' });
-           })
-            .focusout(function () {
-                $(this).parent('.div').css({ 'border': '1px solid #e0e5e6' });
-            });
-    });
-</script>
 
 <script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.min.css">
 
 <script>
     $(document).ready(function() {
+        $('.div input')
+            .focus(function () {
+                $(this).parent('.div').css({ 'border': '2px solid #05b5a2' });
+            })
+            .focusout(function () {
+                $(this).parent('.div').css({ 'border': '1px solid #e0e5e6' });
+            });
+
         $("#header .bigButton").on('click', function() {
             window.location.href = "/";
         });
@@ -158,18 +155,18 @@
             if (companyCode != 'false') {
                 window.location.href = "/Report/new?companyCode=" + companyCode;
             } else {
-                var single_code = TakeCompany($("#specialInput").val());
-                if(single_code.length > 0)
-                    window.location.href = "/Report/new?companyCode=" + single_code;
+                TakeCompany();
+                //var single_code = TakeCompany($("#specialInput").val());
+                //if(single_code.length > 0)
+                    //window.location.href = "/Report/new?companyCode=" + single_code;
             }
         });
     });
 
     $(function() {
-        var str =  @Html.Raw(ViewBag.newListComp);
         $("#specialInput").autocomplete({
             minLength: 3,
-            source: str,
+            source: '@Url.Action("SeekCompany", "Index")',
             select: function(event, ui) {
                 $('#specialInput').val(ui.item.label);
                 $('#companyCode').val(ui.item.value);
@@ -180,51 +177,35 @@
 
 
     $('#submit').on('click', function () {
-        if (($('input[name=login]').val() != "") && ($('input[name=password]').val() != "")) {
-
-            LoginHere($('input[name=login]').val(), $('input[name=password]').val());
-        }
+        LoginHere($('input[name=login]').val(), $('input[name=password]').val());
     });
 
     function LoginHere(login, password) {
         $.ajax({
             method: "POST",
             url: "/Login/Login",
-            data: { login: login, password: password }
+            data: { login: login, password: password, company: $('#companyCode').val() }
         }).done(function (data) {//data from server
-            //  console.log(data);
-
-            if (data.includes("cases")) {
-                window.location.href = str[0] + data;
+            if (data != '') {
+                window.location.href = data;
             } else {
                 $(".text.red").show();
                 return false;
             }
-            //if (data != '') {
-            //    var str = window.location.href;
-            //    //    str = str.toLocaleLowerCase().split("login");
-            //    $(".text.red").show();
-            //    window.location.href = "/" + data;
-            //}
-            //else
-            //    $('input[name=password]').val() = '';
         }).fail(function (error) {
         });
     }
 
     function TakeCompany(selname) {
-        var str =  @Html.Raw(ViewBag.newListComp);
-        var matches = $.grep(str, function(e) { return e.label.toLocaleLowerCase().startsWith(selname.toLocaleLowerCase());  });
-
-        if (matches.length == 0) {
-            return '';
-        } else if (matches.length == 1) {
-            // access the value property using matches[0].foo
-            return matches[0].value;
-        } else {
-            // multiple items found
-            return '';
-        }
+        $.ajax({
+            method: 'POST',
+            url: '@Url.Action("SeekCompany", "Index")',
+            data: { term: $('#specialInput').val() }
+        }).done(function (data) {
+            if (data.length > 0) {
+                window.location.href = "/Report/new?companyCode=" + data[0].value;
+            }
+        });
     }
 
 </script>
