@@ -867,9 +867,26 @@
                             </div>
                         </div>
                     </div>
+                                        @*
+                            <select class="selectedRoleInReport" id="selectedRoleInReport" name="selectedRoleInReport"><option selected="selected" value="0">Other</option>
+        <option value="1">Witness</option>
+        <option value="2">Involved</option>
+        <option value="3">Other</option>
+        </select>
+
+                                        *@
+
                     <div class="personData">
-                        <input type="text" name="personRole[NUM]"
-                               class="personDataTextBox witnessRole" />
+                        <select name="personRole[NUM]" class="selectedRoleInReport">
+                            @foreach (SelectListItem item in ViewBag.selectedRoleInReport)
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        </select>
+
+                        @*@Html.DropDownList("selectedRoleInReport", ViewBag.selectedRoleInReport as SelectList, new { @class = "selectedRoleInReport" })*@
+                        
+                        @*<input type="text" name="personRole[NUM]"   class="personDataTextBox witnessRole" />*@
                     </div>
                 </div>
 
