@@ -59,22 +59,50 @@
     </div>
 </div>
 
-<div class="positionCases">
-    @foreach (CasePreviewViewModel _case_previewViewModel in ViewBag.ReportPreviewStart)
-    {
-        <div class="mainCaseParent">
-            @Html.Partial("~/Views/Shared/Helpers/_CasePreview.cshtml", _case_previewViewModel)
-        </div>
-    }
-
-    @foreach (int _case_id in ViewBag.ReportPreviewVM)
-    {
-        <div class="mainCaseParent" data-url="/cases/Preview?case_id=@_case_id">
-            <img src="~/Content/Icons/Xanal.gif" /> Loading....
-        </div>
-    }
+<div>
+    @Html.ActionLink("List", "Index", new { listView = true})
+    @Html.ActionLink("Grid", "Index", new { })
 </div>
 
+@if (ViewBag.ListView == null) //Grid
+{
+    <div class="div-table">
+        <div class="div-table-row">
+            <div class="div-table-col">Case</div>
+            <div class="div-table-col">Stage</div>
+            <div class="div-table-col">Age</div>
+            <div class="div-table-col">Incident Type</div>
+            <div class="div-table-col">Location</div>
+            <div class="div-table-col">Messages</div>
+            <div class="div-table-col">Tasks</div>
+            <div class="div-table-col">Team</div>
+        </div>
+        @foreach (CasePreviewViewModel _case_previewViewModel in ViewBag.ReportPreviewStart)
+        {
+            <div class="mainCaseParent div-table-row">
+                @Html.Partial("~/Views/Shared/Helpers/_CasePreview.cshtml", _case_previewViewModel)
+            </div>
+        }        
+    </div>
+}
+else
+{
+    <div class="positionCases">
+        @foreach (CasePreviewViewModel _case_previewViewModel in ViewBag.ReportPreviewStart)
+        {
+            <div class="mainCaseParent">
+                @Html.Partial("~/Views/Shared/Helpers/_CasePreviewList.cshtml", _case_previewViewModel)
+            </div>
+        }
+
+        @foreach (int _case_id in ViewBag.ReportPreviewVM)
+        {   
+            <div class="mainCaseParent" data-url="/cases/Preview?case_id=@_case_id">
+                <img src="~/Content/Icons/Xanal.gif" /> Loading....
+            </div>
+        }
+    </div>
+}
 
 <script>
     var heightTemp = $(".bottom").height();

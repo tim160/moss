@@ -24,13 +24,14 @@ namespace EC.Controllers
         List<CasePreviewViewModel> preview_list = new List<CasePreviewViewModel>();
         CasePreviewViewModel temp_preview_case;
 
-        public ActionResult Index()
+        public ActionResult Index(bool? listView)
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
             ViewBag.pending_report_ids = PendingReports();
+            ViewBag.ListView = listView;
 
             UserModel um = new UserModel(user.id);
             List<int> all_active_report_ids = um.ReportsSearchIds(um._user.company_id, 1);
@@ -40,7 +41,7 @@ namespace EC.Controllers
 
             #region Active Reports
             List<int> temp_all_active_report_ids = all_active_report_ids.OrderBy(t => t).ToList();
-            int temp_report_count = total_report_count;
+            int temp_report_count = listView.HasValue ? 2 : int.MaxValue;
             if (all_active_report_ids.Count() < temp_report_count)
                 temp_report_count = all_active_report_ids.Count();
 
@@ -320,13 +321,17 @@ namespace EC.Controllers
             return _count;
         }
 
-        public ActionResult Preview(int case_id)
+        public ActionResult Preview(int case_id, bool? grid)
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             ReportModel rm = new ReportModel(case_id);
             UserModel um = new UserModel(user.id);
             CasePreviewViewModel cpvm = new CasePreviewViewModel(rm, um);
-            return PartialView("~/Views/Shared/Helpers/_CasePreview.cshtml", cpvm);
+            if ((grid.HasValue) && (grid.Value))
+            {
+                return PartialView("~/Views/Shared/Helpers/_CasePreview.cshtml", cpvm);
+            }
+            return PartialView("~/Views/Shared/Helpers/_CasePreviewList.cshtml", cpvm);
         }
     }
 }
