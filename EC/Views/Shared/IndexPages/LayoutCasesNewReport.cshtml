@@ -76,7 +76,7 @@
     string[] _statuses_not_resolved = { GlobalRes.PreReviewUp, GlobalRes.Review, GlobalRes.Investigation, GlobalRes.Resolution, GlobalRes.Closed };
 
     string same_mediator_warning = GlobalRes.AddFurtherNotes;
-    if (user_id == rm._last_investigation_status().user_id)
+    if (rm !=null && rm._last_investigation_status() !=null && user_id == rm._last_investigation_status().user_id)
     {
         same_mediator_warning = GlobalRes.RecommendSecond1 + " " + GlobalRes.RecommendSecond2;
     }
