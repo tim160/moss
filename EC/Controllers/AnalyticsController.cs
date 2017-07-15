@@ -229,7 +229,43 @@ namespace EC.Controllers
 
                 GlobalFunctions func = new GlobalFunctions();
                 JsonResult json = new JsonResult();
+                //VERSION 1 - Cachebale
+                //ReportModel.Cache = new Dictionary<int, report>();
                 json.Data = func.ReportAdvancedJson(companyId, userId, types.ReportsSecondaryTypesIDStrings, types.ReportsRelationTypesIDStrings, types.ReportsDepartmentIDStringss, types.ReportsLocationIDStrings, dt1, dt2);
+                //json.Data = EC.Common.Base.DebugUtils.PerfomanceEstimate("Query", () => func.ReportAdvancedJson(companyId, userId, types.ReportsSecondaryTypesIDStrings, types.ReportsRelationTypesIDStrings, types.ReportsDepartmentIDStringss, types.ReportsLocationIDStrings, dt1, dt2));
+                //ReportModel.Cache = null;
+
+                /*UserModel um = new UserModel(userId);
+                List<report> _all_reports_old = um.ReportsSearch(companyId, 0);
+                ECEntities db = new ECEntities();
+
+                var reportIds = _all_reports_old.Select(x => x.id);
+                var locationsIds = _all_reports_old.Select(x => x.location_id).Distinct();
+                var departmentIds = db.report_department.Where(x => reportIds.Contains(x.report_id)).Select(x => x.id).Distinct().ToList();
+                var report_relationshipIds = db.report_relationship.Where(x => reportIds.Contains(x.report_id)).Select(x => x.id).Distinct().ToList();
+
+                json.Data = new
+                {
+                    LocationTable = db.company_location
+                        .Where(x => locationsIds.Contains(x.id))
+                        .Select(x => new { name  = x.location_en, val = x.id}),
+
+                    DepartmentTable = db.company_department
+                        .Where(x => departmentIds.Contains(x.id))
+                        .Select(x => new { name = x.department_en, val = x.id }),
+
+                    RelationTable = db.report_relationship
+                        .Where(x => report_relationshipIds.Contains(x.id))
+                        .Select(x => new { name = x.relationship_nm, val = x.id }),
+
+                    SecondaryTypeTable = db.report_secondary_type
+                        .Where(x => reportIds.Contains(x.report_id))
+                        .Select(x => new { name = x.secondary_type_nm, val = x.id, prev = x.id }),
+
+                    //AverageStageDaysTable = 
+
+                };*/
+
                 return json;
             }
             else
