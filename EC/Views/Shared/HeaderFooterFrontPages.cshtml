@@ -34,57 +34,58 @@
     <link rel="icon" href="~/favicon.ico" />
 </head>
 <body>
-<div id="main">
-    <div id="wrap">
-        <div id="header@{@class_ext}">
-            <div class="positionLogo">
-                <a href="http://employeeconfidential.com/">
-                    <div class="blueLogo">
-                    </div>
-                </a>
-            </div>
-            <div style="float: right">
-                <div class="positionLogin">
-                    <div class="login"><a href="/login">LOGIN</a></div>
+    <div id="main" class="main@{@class_ext}">
+        <div id="wrap" class="wrap@{@class_ext}">
+            <div id="header@{@class_ext}">
+                <div class="positionLogo">
+                    <a href="http://employeeconfidential.com/">
+                        <div class="blueLogo">
+                        </div>
+                    </a>
                 </div>
-                <div class="positionButton">
+                <div style="float: right">
+                    <div class="positionLogin">
+                        <div class="login"><a href="/login">LOGIN</a></div>
+                    </div>
+                    <div class="positionButton">
 
-                    <div class="bigButton changeFontOpenSans">
-                        <a href="/Report/new?">
-                            <span>FILE A REPORT</span>
-                        </a>
-                        
+                        <div class="bigButton changeFontOpenSans">
+                            <a href="/Report/new?">
+                                <span>FILE A REPORT</span>
+                            </a>
+
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div><!--end header-->
-        @RenderBody()
-    </div><!--end wrap-->
-    <div id="footer">
-        <div style="float: left">
-            <div class="positionLogo">
-                <div class="blueLogo"></div>
-            </div>
-            <div class="positionLogo">
+            </div><!--end header-->
+            @RenderBody()
+        </div><!--end wrap-->
+        <div id="footer">
+            <div style="float: left">
+                <div class="positionLogo">
+                    <div class="blueLogo"></div>
+                </div>
+                <div class="positionLogo">
 
+                </div>
             </div>
-        </div>
-        <ul>
-            <li id="terms">
-                <a target="_blank" href="http://employeeconfidential.com/TermsOfService.html">Terms</a>
-            </li>
-            <li id="privacy">
-                <a target="_blank" href="http://employeeconfidential.com/PrivacyStatement.html">Privacy</a>
-            </li>
-            <li id="contact">
-                <a target="_blank" href="http://employeeconfidential.com/#footer">Contact</a>
-            </li>
-        </ul>
-        <div class="employeeConfidential">
-            © 2015 @if(DateTime.Today.Year>2015){<span> - @DateTime.Today.Year</span>} Employee Confidential LLC
-        </div>
-    </div><!--end footer-->
-</div>
+            <ul>
+                <li id="terms">
+                    <a target="_blank" href="http://employeeconfidential.com/TermsOfService.html">Terms</a>
+                </li>
+                <li id="privacy">
+                    <a target="_blank" href="http://employeeconfidential.com/PrivacyStatement.html">Privacy</a>
+                </li>
+                <li id="contact">
+                    <a target="_blank" href="http://employeeconfidential.com/#footer">Contact</a>
+                </li>
+            </ul>
+            <div class="employeeConfidential">
+                © 2015 @if (DateTime.Today.Year > 2015)
+                {<span> - @DateTime.Today.Year</span>} Employee Confidential LLC
+            </div>
+        </div><!--end footer-->
+    </div>
 
 @RenderSection("pageScripts", required: false)
 
