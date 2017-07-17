@@ -1277,7 +1277,7 @@ namespace EC.Models
                     currentReport = model.Merge(currentReport);
                     currentReport.user_id = newUser.id;
                     currentReport.reporter_user_id = newUser.id;
-
+                    currentReport.report_by_myself = model.report_by_myself;
                     //db.user.AddOrUpdate(newUser);
                     currentReport = adv.report.Add(currentReport);
                     t = adv.SaveChanges();
@@ -1581,7 +1581,18 @@ namespace EC.Models
             get
             {
                 List<report_non_mediator_involved> result = (db.report_non_mediator_involved.Where(item => (item.report_id == ID))).ToList();
-
+                foreach(var item in result)
+                {
+                    int temp;
+                    Int32.TryParse(item.Role,out temp);
+                    if(temp == 0)
+                    {
+                        item.Role = App_LocalResources.GlobalRes.Other;
+                    } else
+                    {
+                        item.Role = db.role_in_report.First(m => m.id == temp).role_en;
+                    }
+                }
                 return result;
             }
         }
