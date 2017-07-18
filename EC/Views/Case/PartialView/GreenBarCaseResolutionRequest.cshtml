@@ -187,7 +187,7 @@
         <div class="caseMediator">
              <div class="caseResolution">
             <div class="postionButtons">
-                @if ((rm._last_investigation_status().investigation_status_id == 4) && ((um._user.role_id == 4) || (um._user.role_id == 5)))
+                @if ((rm._investigation_status == 4) && ((um._user.role_id == 4) || (um._user.role_id == 5)))
                 {
                 <div class="secondButton">
                     <div class="textInButton" id="approve_close">@GlobalRes.Approve.ToLower()</div>
