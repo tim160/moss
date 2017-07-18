@@ -114,71 +114,7 @@ namespace EC.Models
         /// </summary>
         /// <param name="report_id"></param>
         /// <returns></returns>
-        public int _investigation_status
-        {
-            get
-            {
-                report_investigation_status last_status = _last_investigation_status();
-                if(_last_investigation_status() != null)
-                {
-                    return last_status.investigation_status_id;
-                }
-                else
-                    return 1;
-            }
-        }
-
-        /// <summary>
-        /// returns the investigation status of report in string.
-        /// </summary>
-        /// <param name="report_id"></param>
-        /// <returns></returns>
-        public string _investigation_status_string
-        {
-            get
-            {
-                string status = "";
-
-                investigation_status _status = db.investigation_status.Where(item => item.id == _investigation_status).FirstOrDefault();
-                if (_status != null)
-                {
-                    status = _status.investigation_status_en;
-                }
-
-                return status.Trim();
-            }
-        }
-
-        /// <summary>
-        /// return last, but 1 status. need it to check where case came from
-        /// </summary>
-        public int _previous_investigation_status_id
-        {
-            get
-            {
-
-                report_investigation_status last_status = new report_investigation_status();
-                report_investigation_status previous_last_status = new report_investigation_status();
-
-                if (db.report_investigation_status.Any(item => item.report_id == ID))
-                {
-                   List<report_investigation_status> statuses = db.report_investigation_status.Where(item => item.report_id == ID).OrderByDescending(x => x.id).ToList();
-                   if (statuses.Count > 1)
-                   {
-                       previous_last_status = statuses[1];
-                       return previous_last_status.investigation_status_id;
-                   }
-                   else
-                       return 0;
-                }
-                else
-                    return 0;
-
-
-               
-            }
-        }
-
+    
         /// <summary>
         /// Returns the location of report in string
         /// </summary>
@@ -1920,6 +1856,45 @@ namespace EC.Models
             return report_actions;
         }
 
+        #region Last Investigation Status
+        public int _investigation_status
+        {
+            get
+            {
+                report_investigation_status last_status = _last_investigation_status();
+                if (_last_investigation_status() != null)
+                {
+                    return last_status.investigation_status_id;
+                }
+                else
+                    return 1;
+            }
+        }
+
+        /// <summary>
+        /// returns the investigation status of report in string.
+        /// </summary>
+        /// <param name="report_id"></param>
+        /// <returns></returns>
+        public string _investigation_status_string
+        {
+            get
+            {
+                string status = "";
+
+                investigation_status _status = db.investigation_status.Where(item => item.id == _investigation_status).FirstOrDefault();
+                if (_status != null)
+                {
+                    status = _status.investigation_status_en;
+                }
+
+                return status.Trim();
+            }
+        }
+
+
+
+
         public report_investigation_status _last_investigation_status()
         {
             report_investigation_status last_status = new report_investigation_status();
@@ -1932,6 +1907,75 @@ namespace EC.Models
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// User of last investigation status
+        /// </summary>
+        /// <returns></returns>
+        public int _last_investigation_status_user_id
+        {
+            get
+            {
+                report_investigation_status last_status = _last_investigation_status();
+
+                if (last_status != null)
+                {
+                    return last_status.user_id;
+                }
+
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// User of last investigation status
+        /// </summary>
+        /// <returns></returns>
+        public DateTime? _last_investigation_status_date
+        {
+            get
+            {
+                report_investigation_status last_status = _last_investigation_status();
+
+                if (last_status != null)
+                {
+                    return last_status.created_date;
+                }
+
+                return null;
+            }
+        }
+        #endregion
+
+
+        #region Previous Investigation Status
+
+        /// <summary>
+        /// return last, but 1 status. need it to check where case came from
+        /// </summary>
+        public int _previous_investigation_status_id
+        {
+            get
+            {
+
+                report_investigation_status last_status = new report_investigation_status();
+                report_investigation_status previous_last_status = new report_investigation_status();
+
+                if (db.report_investigation_status.Any(item => item.report_id == ID))
+                {
+                    List<report_investigation_status> statuses = db.report_investigation_status.Where(item => item.report_id == ID).OrderByDescending(x => x.id).ToList();
+                    if (statuses.Count > 1)
+                    {
+                        previous_last_status = statuses[1];
+                        return previous_last_status.investigation_status_id;
+                    }
+                    else
+                        return 0;
+                }
+                else
+                    return 0;
+            }
         }
 
         public report_investigation_status _previous_investigation_status()
@@ -1947,6 +1991,22 @@ namespace EC.Models
 
             return null;
         }
+        public int _previous_investigation_status_user_id
+        {
+            get
+            {
+                report_investigation_status _status = _previous_investigation_status();
+
+                if (_status != null)
+                {
+                    return _status.user_id;
+                }
+
+                return 0;
+            }
+        } 
+        #endregion
+
 
         public int report_status_id_by_date(DateTime dt)
         {
@@ -2167,23 +2227,23 @@ namespace EC.Models
             string _green_bar_status = "";
             
             //case just closed
-            if (_last_investigation_status().investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Closed)
+            if (_investigation_status == (Int32)CaseStatusConstants.CaseStatusValues.Closed)
                 _green_bar_status = GlobalRes.CaseClosed;
 
             //current - investigation, previous - closed => Re-opened
-            if (_last_investigation_status().investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Investigation && _previous_investigation_status().investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Closed)
+            if (_investigation_status == (Int32)CaseStatusConstants.CaseStatusValues.Investigation && _previous_investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Closed)
             {
                 _green_bar_status = GlobalRes.CaseReOpened;
             }
 
             //current - investigation, previous - Resolution => Returned for futher investigation
-            if (_last_investigation_status().investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Investigation && _previous_investigation_status().investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Resolution)
+            if (_investigation_status == (Int32)CaseStatusConstants.CaseStatusValues.Investigation && _previous_investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Resolution)
             {
                 _green_bar_status = GlobalRes.CaseReturnedFutherInvestigation;
             }
 
             //current - Resolution
-            if (_last_investigation_status().investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Resolution)
+            if (_investigation_status == (Int32)CaseStatusConstants.CaseStatusValues.Resolution)
             {
                 _green_bar_status = GlobalRes.CaseClosureReport;
             }
@@ -2196,7 +2256,7 @@ namespace EC.Models
         {
             string _green_bar_status = "";
             //current - Resolution
-            if (_last_investigation_status().investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Resolution)
+            if (_investigation_status == (Int32)CaseStatusConstants.CaseStatusValues.Resolution)
             {
                 _green_bar_status = GlobalRes.CaseSentToEsacaltionMediatorForReview;
             }

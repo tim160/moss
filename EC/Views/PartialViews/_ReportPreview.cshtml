@@ -115,14 +115,14 @@
                         }
                         <div class="blockButtonAndDate">
                             <p class="caseBtn @caseStatusBtn"></p><!-- and class = caseResolvedBtn -->
-                            <p class="data">@m_DateTimeHelper.ConvertDateToLongMonthString(rm._last_investigation_status().created_date)</p>
+                            <p class="data">@m_DateTimeHelper.ConvertDateToLongMonthString(rm._last_investigation_status_date)</p>
                         </div>
                     }
                     @if (flag == 3)
                     {
                         <div class="blockButtonAndDate">
                             <p class="caseBtn caseSpamBtn"></p>
-                            <p class="data">@m_DateTimeHelper.ConvertDateToLongMonthString(rm._last_investigation_status().created_date)</p>
+                            <p class="data">@m_DateTimeHelper.ConvertDateToLongMonthString(rm._last_investigation_status_date)</p>
                         </div>
                     }
                 </div>
