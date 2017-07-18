@@ -8,10 +8,10 @@
     var user_id = (Int32)ViewBag.user_id;
 
     EC.Models.ReportModel rm = new ReportModel(report_id);
-
+    List<report_non_mediator_involved> _involved = rm._witnesses;
     bool? is_cc = ViewBag.is_cc;
     if (!is_cc.HasValue)
-    { 
+    {
         is_cc = false;
     }
     String class_ext = ViewBag.cc_extension;
@@ -22,7 +22,7 @@
     //{
     //    class_ext = "_cc";
     //}
-    
+
 }
 
 
@@ -121,7 +121,7 @@
                     <span class="title">@GlobalRes.PartiesInvolved</span>
                     <div class="partiesInformation">
 
-                        @foreach (EC.Models.Database.report_non_mediator_involved witness in rm._witnesses)
+                        @foreach (var witness in _involved)
                         {
                     <p class="title">
                         @witness.Name &nbsp; @witness.last_name

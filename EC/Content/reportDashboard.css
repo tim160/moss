@@ -317,6 +317,10 @@ body{
     padding-top: 8px;
     padding-bottom: 17px;
 }
+.reportBlock table {
+    width: 100%;
+    padding-left: 9px;
+}
 .report{
     padding-left: 9px;
     clear: both;
@@ -335,6 +339,17 @@ body{
     font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
     width: 75%;
     float:left;
+}
+.positionReportText {
+    width: 75%;
+}
+.positionTitleReport {
+    width: 25%;
+}
+.reportTextBlack {
+    color: rgb(114,124,126);
+    font-size: 12pt;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
 }
 .listRight{
     color: rgb(114,124,126);
