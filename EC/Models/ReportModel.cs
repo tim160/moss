@@ -1131,7 +1131,6 @@ namespace EC.Models
         #endregion
 
         #region Base constructors
-        public static readonly ReportModel inst = new ReportModel();
         GlobalFunctions glb = new GlobalFunctions();
         public ReportModel()
         {
@@ -1254,63 +1253,95 @@ namespace EC.Models
                         AddReportDepartment(department);
                         t = adv.SaveChanges();
                     }
-                    //savind secondary type
-                    //здесь проверяем на other если оно не заполнено, то 
-                    if (model.caseInformationReportDetail != null)
-                    {
-                        report_secondary_type type = new report_secondary_type()
-                        {
-                            report_id = currentReport.id,
-                            mandatory_secondary_type_id = null,
-                            secondary_type_id = 0,
-                            secondary_type_nm = model.caseInformationReportDetail,
-                            user_id = 1,
-                            last_update_dt = DateTime.Now
-                        };
-                        db.report_secondary_type.Add(type);
-                        t = adv.SaveChanges();
-                    }
-                    else
-                    {
-                        ReportModel reportModel = ReportModel.inst;
-                        if (!reportModel.isCustomIncidentTypes(model.currentCompanyId))
-                        {
-                            int defaultType = db.secondary_type_mandatory.Where(item => item.secondary_type_en == model.caseInformationReport).Select(item => item.id).FirstOrDefault();
-                            if (defaultType > 0)
-                            {
-                                report_secondary_type putDefaultType = new report_secondary_type
-                                {
-                                    report_id = currentReport.id,
-                                    mandatory_secondary_type_id = defaultType,
-                                    secondary_type_id = 0,
-                                    secondary_type_nm = "",
-                                    last_update_dt = DateTime.Now,
-                                    user_id = 1
-                                };
-                                db.report_secondary_type.Add(putDefaultType);
-                                t = adv.SaveChanges();
-                            }
-                        }
-                        else
-                        {
-                            int customType = db.company_secondary_type.Where(item => item.secondary_type_en == model.caseInformationReport).Select(item => item.id).FirstOrDefault();
-                            if (customType > 0)
-                            {
-                                report_secondary_type putCustomType = new report_secondary_type
-                                {
-                                    report_id = currentReport.id,
-                                    mandatory_secondary_type_id = null,
-                                    secondary_type_id = customType,
-                                    secondary_type_nm = "",
-                                    last_update_dt = DateTime.Now,
-                                    user_id = 1
-                                };
-                                adv.report_secondary_type.Add(putCustomType);
-                                t = adv.SaveChanges();
-                            }
 
+                    //savind secondary type 
+
+                    /*CustomSecondaryType == false*/
+                    List<report_secondary_type> secondaryTypeList = new List<report_secondary_type>();
+                    foreach (var item in model.whatHappened)
+                    {
+                        report_secondary_type temp = new report_secondary_type();
+                        temp.report_id = currentReport.id;
+                        //check is it custom
+                        if(model.CustomSecondaryType)
+                        {
+                            temp.mandatory_secondary_type_id = item;
+                        } else
+                        {
+                            temp.secondary_type_id = item;
                         }
+                        //check is it other
+                        if (item == 0 && model.caseInformationReportDetail != null)
+                        {
+                            temp.secondary_type_nm = model.caseInformationReportDetail;
+                        }
+
+                        temp.last_update_dt = DateTime.Now;
+                        temp.user_id = 1;
+                        secondaryTypeList.Add(temp);
                     }
+                    db.report_secondary_type.AddRange(secondaryTypeList);
+                    t = adv.SaveChanges();
+
+                    ///*CustomSecondaryType == true*/
+
+                    //if (model.caseInformationReportDetail != null)
+                    //{
+                    //    report_secondary_type type = new report_secondary_type()
+                    //    {
+                    //        report_id = currentReport.id,
+                    //        mandatory_secondary_type_id = null,
+                    //        secondary_type_id = 0,
+                    //        secondary_type_nm = model.caseInformationReportDetail,
+                    //        user_id = 1,
+                    //        last_update_dt = DateTime.Now
+                    //    };
+                    //    db.report_secondary_type.Add(type);
+                    //    t = adv.SaveChanges();
+                    //}
+                    //else
+                    //{
+                    //    ReportModel reportModel = new ReportModel();
+
+                    //    /*if custom*/
+                    //    if (!reportModel.isCustomIncidentTypes(model.currentCompanyId))
+                    //    {
+                    //        int defaultType = db.secondary_type_mandatory.Where(item => item.secondary_type_en == model.caseInformationReport).Select(item => item.id).FirstOrDefault();
+                    //        if (defaultType > 0)
+                    //        {
+                    //            report_secondary_type putDefaultType = new report_secondary_type
+                    //            {
+                    //                report_id = currentReport.id,
+                    //                mandatory_secondary_type_id = defaultType,
+                    //                secondary_type_id = 0,
+                    //                secondary_type_nm = "",
+                    //                last_update_dt = DateTime.Now,
+                    //                user_id = 1
+                    //            };
+                    //            db.report_secondary_type.Add(putDefaultType);
+                    //            t = adv.SaveChanges();
+                    //        }
+                    //    }
+                    //    else
+                    //    {
+                    //        int customType = db.company_secondary_type.Where(item => item.secondary_type_en == model.caseInformationReport).Select(item => item.id).FirstOrDefault();
+                    //        if (customType > 0)
+                    //        {
+                    //            report_secondary_type putCustomType = new report_secondary_type
+                    //            {
+                    //                report_id = currentReport.id,
+                    //                mandatory_secondary_type_id = null,
+                    //                secondary_type_id = customType,
+                    //                secondary_type_nm = "",
+                    //                last_update_dt = DateTime.Now,
+                    //                user_id = 1
+                    //            };
+                    //            adv.report_secondary_type.Add(putCustomType);
+                    //            t = adv.SaveChanges();
+                    //        }
+
+                    //    }
+                    //}
                     /*report_relationship*/
                     report_relationship rep = new report_relationship();
                     rep.report_id = currentReport.id;
@@ -1330,7 +1361,6 @@ namespace EC.Models
                     }
                     else
                     {
-                        //проверить на custom
                         int count = db.company_relationship.Where(rel => rel.status_id == 2).Count();
                         if (count > 0)
                         {

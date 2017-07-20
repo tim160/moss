@@ -437,6 +437,9 @@
                             </div>
 
                         </div>
+                        <input type="hidden" value="@ViewBag.CustomSecondaryType" name="CustomSecondaryType" />
+
+                        
                         <div class="rowBlock caseInformationReport">
                             <input type="hidden" class="validate" value="false" name="caseInformationReport" data-vltarget=".caseInformationReport" data-validate="notEmpty" />
                             @if (ViewBag.secondary_type_mandatory != null)
@@ -448,8 +451,8 @@
 
                                     <div class="freeBlock inputRadio option" data-val="@String.Concat(@item.secondary_type_en)">
                                         <label class="inputBlock" for="@String.Concat(@item.secondary_type_en)">
-                                            <input id="@String.Concat(@item.secondary_type_en)" type="radio" name="whatHappened" value="@item.secondary_type_en" />
-                                            <span class="radioButton"></span>
+                                            <input id="@String.Concat(@item.secondary_type_en)" type="checkbox" name="whatHappened" value="@item.id" />
+                                            @*<span class="radioButton"></span>*@
                                             <span class="radioTitle">@item.secondary_type_en</span>
                                         </label>
                                     </div>
@@ -461,7 +464,9 @@
                             }
                             <div class="freeBlock inputRadio option" data-val="OtherIncident">
                                 <label class="inputBlock" for="OtherIncident">
-                                    <input id="OtherIncident" type="radio" name="whatHappened" value="@GlobalRes.Other" /><span class="radioButton"></span><span class="radioTitle">@GlobalRes.Other</span>
+                                    <input id="OtherIncident" type="checkbox" name="whatHappened" value="0" />
+                                    @*<span class="radioButton"></span>*@
+                                    <span class="radioTitle">@GlobalRes.Other</span>
                                 </label>
                             </div>
                         </div>

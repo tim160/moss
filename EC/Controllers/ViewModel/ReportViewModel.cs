@@ -37,7 +37,7 @@ namespace EC.Controllers.ViewModel
         public DateTime dateIncidentHappened { get; set; }
         public int incidentFrequency { get; set; }
         public string describeHappened { get; set; }
-        public string whatHappened { get; set; }
+        public ICollection<int> whatHappened { get; set; }
 
         public int isOnGoing { get; set; }
         public bool witnessFlag { get; set; }
@@ -60,7 +60,7 @@ namespace EC.Controllers.ViewModel
         public string report_frequency_text { get; set; }
         public int reported_outside_id { get; set; }
         public string reported_outside_text { get; set; }
-
+        public bool CustomSecondaryType { get; set; }
         public string caseInformationReportDetail { get; set; }
 
         // supervising mediators, who are not involved
@@ -118,7 +118,7 @@ namespace EC.Controllers.ViewModel
             data.reported_dt = DateTime.Now;
             data.type_id = 2;
             data.other_department_name = "";
-            data.other_secondary_type_name = whatHappened;
+//            data.other_secondary_type_name = whatHappened;
             data.last_update_dt = DateTime.Now;
             data.ip = "";
             data.previously_reported_accepted = false;
@@ -178,7 +178,7 @@ namespace EC.Controllers.ViewModel
                     data.witness_names = witnessNames;
                     data.witness_will_cooperate = witnessWillCooperate;
                 } 
-                //incidentResultReport; задан вопрос
+                //incidentResultReport;
                 data.injury_damage_id = incidentResultReport;
                 
             }
@@ -236,9 +236,6 @@ namespace EC.Controllers.ViewModel
 
         public report_secondary_type GetRecordSecondaryType(int reportId)
         {
-            /**
-             * id zaglushka secondary_type_id, user_id
-             * */
             report_secondary_type result = new report_secondary_type()
             {
                 report_id = reportId,

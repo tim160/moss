@@ -26,8 +26,8 @@ namespace EC.Controllers
     {
 
         private readonly UserModel userModel = UserModel.inst;
-        private readonly CompanyModel companyModel = CompanyModel.inst;
-        private readonly ReportModel reportModel = ReportModel.inst;
+        private readonly CompanyModel companyModel =new CompanyModel();
+        private readonly ReportModel reportModel =new ReportModel();
         private IEmailAddressHelper m_EmailHelper = new EmailAddressHelper();
 
 

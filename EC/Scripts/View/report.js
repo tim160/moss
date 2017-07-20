@@ -414,8 +414,16 @@
                                 }
                                 var reportAbout = content.find('#reportAbout');
                                 reportAbout.empty();
-                                reportAbout.append($("input:radio[name=whatHappened]:checked").val());
-
+                                //reportAbout.append($("input:radio[name=whatHappened]:checked").val());
+                                var str = "";
+                                $("input:checkbox[name=whatHappened]:checked").each(function (indx, element) {
+                                    if (indx + 1 == $("input:checkbox[name=whatHappened]:checked").length) {
+                                        str += element.id;
+                                    } else {
+                                        str += element.id + ', ';
+                                    }
+                                });
+                                reportAbout.append(str);
 
                                 var incidentHappendDate = content.find('#incidentHappendDate');
                                 incidentHappendDate.empty();
