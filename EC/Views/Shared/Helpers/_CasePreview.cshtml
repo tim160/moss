@@ -27,14 +27,371 @@
 }
 @model CasePreviewViewModel
 
-<div class="div-table-col">
-    @*<div class="rectangle" style="background-color:#@Model.case_color_code"></div>*@
-    <span>@Model.case_number</span>
+<div class="mainCase">
+    <div class="rectangle" style="background-color:#@Model.case_color_code"></div>
+    <div class="header">
+        <a href="/Case/Index/@Model.report_id">
+            <div class="text1">
+                @Model.case_secondary_types
+                <span>@Model.case_number</span>
+            </div>
+        </a>
+        <div class="timeScale">
+            @if (Model.investigation_status_number == ECGlobalConstants.investigation_status_investigation)
+            {
+
+                <div class="greenLabel"></div>
+                <div class="greenLabel"></div>
+                <div class="greenLabel"></div>
+                <div class="circle"></div>
+                <div class="greyLabel"></div>
+                <div class="greyLabel"></div>
+            }
+            else if (Model.investigation_status_number == ECGlobalConstants.investigation_status_escalation)
+            {
+                // hez
+                <div class="orangeLabel"></div>
+                <div class="orangeLabel"></div>
+                <div class="orangeLabel"></div>
+                <div class="orangeLabel"></div>
+                <div class="orangeLabel"></div>
+                <div class="circle orange"></div>
+            }
+            else if (Model.investigation_status_number == ECGlobalConstants.investigation_status_resolution)
+            {
+                <div class="greenLabel"></div>
+                <div class="greenLabel"></div>
+                <div class="greenLabel"></div>
+                <div class="greenLabel"></div>
+                <div class="circle"></div>
+                <div class="greyLabel"></div>
+            }
+            else if (Model.investigation_status_number == ECGlobalConstants.investigation_status_completed)
+            {
+                // <p class="caseBtn caseCompletedBtn"></p>
+                <div class="greenLabel orangeLabel"></div>
+                <div class="greenLabel orangeLabel"></div>
+                <div class="greenLabel orangeLabel"></div>
+                <div class="greenLabel orangeLabel"></div>
+                <div class="circle orange"></div>
+                <div class="greyLabel"></div>
+            }
+            else if (Model.investigation_status_number == ECGlobalConstants.investigation_status_closed)
+            {
+                // vmesto greyLabel - caseClosedBtn
+                <div class="redLabel"></div>
+                <div class="circle red"></div>
+                <div class="redLabel"></div>
+                <div class="circle red"></div>
+                <div class="redLabel"></div>
+                <div class="circle red"></div>
+                <div class="redLabel"></div>
+                <div class="circle red"></div>
+                <div class="redLabel"></div>
+                <div class="circle red"></div>
+            }
+            else if (Model.investigation_status_number == ECGlobalConstants.investigation_status_spam)
+            {
+                <div class="greyLabel"></div>
+                <div class="greyLabel"></div>
+                <div class="greyLabel"></div>
+                <div class="greyLabel"></div>
+                <div class="greyLabel"></div>
+                <div class="circle grey"></div>
+            }
+        </div>
+        <div class="text2 @position">
+
+            @if (Model.investigation_status_number == ECGlobalConstants.investigation_status_investigation)
+            {
+                <div>
+                    @Model.current_status
+                </div>
+            }
+            else if ((Model.investigation_status_number == ECGlobalConstants.investigation_status_resolution))
+            {
+                // cvet takoi je kak investigation
+                <div class="buttonForCase resolvedButton">
+                    @Model.current_status
+                </div>
+            }
+            else if ((Model.investigation_status_number == ECGlobalConstants.investigation_status_completed))
+            {
+                // <p class="caseBtn caseCompletedBtn"></p>
+                @* case resolved *@
+                <div class="buttonForCase completedButton">
+                    @Model.current_status
+                </div>
+            }
+            else if (Model.investigation_status_number == ECGlobalConstants.investigation_status_escalation)
+            {
+                <div class="orangeLabel">
+                    @Model.current_status
+                </div>
+            }
+            else if (Model.investigation_status_number == ECGlobalConstants.investigation_status_closed)
+            {
+
+                //  caseClosedBtn
+                @*<div class="@color">
+
+                    </div>*@
+                <div class="buttonForCase closedButton">
+                    @Model.current_status
+                </div>
+                <div class="completedPosition">
+                    <span>@m_DateTimeHelper.ConvertDateToLongMonthString(rm._last_investigation_status_date)</span>
+                </div>
+
+            }
+            else if (Model.investigation_status_number == ECGlobalConstants.investigation_status_spam)
+            {
+                //
+                <div class="greyLabel">
+                    @Model.current_status
+                </div>
+            }
+
+
+            <span>
+                @if ((Model.investigation_status_number != ECGlobalConstants.investigation_status_closed) && (Model.investigation_status_number != ECGlobalConstants.investigation_status_spam))
+                {
+                    if (Model.days_left == 1)
+                    {
+                        @Model.days_left@Html.Raw("&nbsp;")@GlobalRes.dayleft
+                    }
+                    else
+                    {
+                        @Model.days_left@Html.Raw("&nbsp;")@GlobalRes.daysleft
+                    }
+                }
+            </span>
+        </div>
+    </div>
+    <div class="text3">
+        Reported by @Model.reported_by_whom.ToLower() on @Model.reported_dt
+    </div>
+    @if (Model.investigation_status_number == ECGlobalConstants.investigation_status_completed)
+    {
+        @* work here *@
+        <div class="descriptionCasePosition">
+            <div class="column1">
+                <img src="~/Content/Icons/caseNotResolvedIcons.png" />
+            </div>
+            <div class="column2">
+                <div class="column3">
+                    <div class="leftBlockWithPhoto">
+                        <div class="blockPhoto">
+                            @if (Model.last_sender_id != 0)
+                            {
+                                @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", Model.last_sender_id }, { "is_owner", true } })
+                                <div class="circle green"></div>
+                            }
+                            else
+                            {
+                                <div class="status"></div>
+                                <div class="anonimousReporterIcon"></div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="column4">
+                    <div class="negative">
+                        @GlobalRes.CaseCantBeResolved.
+                    </div>
+                    <div class="dates">
+                        @Model.last_sender_name, @Model.last_sender_date:
+                    </div>
+                    <div class="text">
+                        @Model.last_status_message
+                    </div>
+                </div>
+                <div class="borderColumn"></div>
+            </div>
+            <div style="padding-top:25px;"></div>
+
+        </div>
+    }
+    else if (Model.investigation_status_number == ECGlobalConstants.investigation_status_closed)
+    {
+        <div class="descriptionCasePosition">
+            <div class="column1">
+                @if (Model.previous_investigation_status_number == ECGlobalConstants.investigation_status_completed)
+                {
+                    <img src="~/Content/Icons/caseNotResolvedIcons.png" />
+                }
+                else if (Model.previous_investigation_status_number == ECGlobalConstants.investigation_status_resolution)
+                {
+                    <img src="~/Content/Icons/yes.png" />
+                }
+            </div>
+            <div class="column2">
+                <div class="column3">
+                    <div class="leftBlockWithPhoto">
+                        <div class="blockPhoto">
+                            @if (Model.previous_sender_id != null && Model.previous_sender_id != 0)
+                            {
+                                @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", Model.previous_sender_id }, { "is_owner", true } })
+                                <div class="circle green"></div>
+                            }
+                            else
+                            {
+                                <div class="status"></div>
+                                <div class="anonimousReporterIcon"></div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="column4">
+
+
+                    @if (Model.previous_investigation_status_number == ECGlobalConstants.investigation_status_completed)
+                    {
+                        <div class="negative">
+                            @GlobalRes.CaseCantBeResolved.
+                        </div>
+                    }
+                    else if (Model.previous_investigation_status_number == ECGlobalConstants.investigation_status_resolution)
+                    {
+                        <div class="positive">
+                            @GlobalRes.CaseResolved.
+                        </div>
+                    }
+
+
+                    <div class="dates">
+                        @Model.previous_sender_name, @Model.previous_sender_date:
+                    </div>
+                    <div class="text">
+                        @Model.previous_status_message
+                    </div>
+                </div>
+                <div class="borderColumn"></div>
+            </div>
+            <div style="padding-top:25px;"></div>
+            <div class="column2">
+                <div class="column3">
+                    <div class="leftBlockWithPhoto">
+                        <div class="blockPhoto">
+                            @if (Model.last_sender_id != null)
+                            {
+                                @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", Model.last_sender_id }, { "is_owner", true } })
+                                <div class="circle green"></div>
+                            }
+                            else
+                            {
+                                <div class="status"></div>
+                                <div class="anonimousReporterIcon"></div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="column4">
+                    <div class="negative">
+                        @GlobalRes.CaseClosed
+                    </div>
+                    <div class="dates">
+                        @Model.last_sender_name, @Model.last_sender_date:
+                    </div>
+                    <div class="text">
+                        @Model.last_status_message
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    }
+    else if (Model.investigation_status_number == ECGlobalConstants.investigation_status_resolution)
+    {
+
+        <div class="descriptionCasePosition">
+            <div class="column1">
+                <img src="~/Content/Icons/yes.png" />
+            </div>
+            <div class="column2">
+                <div class="column3">
+                    <div class="leftBlockWithPhoto">
+                        <div class="blockPhoto">
+                            @if (Model.last_sender_id != 0)
+                            {
+                                @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", Model.last_sender_id }, { "is_owner", true } })
+                                <div class="circle green"></div>
+                            }
+                            else
+                            {
+                                <div class="status"></div>
+                                <div class="anonimousReporterIcon"></div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="column4">
+                    <div class="positive">
+                        @GlobalRes.CaseResolved.
+                    </div>
+                    <div class="dates">
+                        @Model.last_sender_name, @Model.last_sender_date:
+                    </div>
+                    <div class="text">
+                        @Model.last_status_message
+                    </div>
+                </div>
+                <div class="borderColumn"></div>
+            </div>
+            <div style="padding-top:25px;"></div>
+        </div>
+
+    }
+
+    <div class="bottom location">
+        <div class="col1"></div>
+        <div class="col2">@GlobalRes.Location.ToLower()</div>
+        <div class="col3">@Model.location</div>
+    </div>
+    <div class="bottom date">
+        <div class="col1"></div>
+        <div class="col2">@GlobalRes.IncidentDateUp.ToLower()</div>
+        <div class="col3">@Model.case_dt</div>
+    </div>
+    <div class="bottom department">
+        <div class="col1"></div>
+        <div class="col2">@GlobalRes.Departments.ToLower()</div>
+        <div class="col3">@Model.departments</div>
+    </div>
+    <div class="flex-block">
+        <a class="flex3 flexBlockShow" href="/Case/Index/@Model.report_id">
+            @if (Model.new_tasks > 0)
+            {
+                <span class="text green">@GlobalRes.Tasks.ToLower() - @Model.new_tasks new </span>
+                @Model.tasks_number
+            }
+            else
+            {
+                <span class="text">@GlobalRes.Tasks.ToLower()</span>
+                @Model.tasks_number
+            }
+        </a>
+
+        <a class="flex2 flexBlockShow" href="/Case/Messages/@Model.report_id">
+            @if (Model.new_messages > 0)
+            {
+                <span class="text green">@GlobalRes.Messages.ToLower() - @Model.new_messages new </span>
+                @Model.messages_number
+            }
+            else
+            {
+                <span class="text">@GlobalRes.Messages.ToLower()</span>@Model.messages_number
+            }
+        </a>
+
+        <a class="flex1 flexBlockShow" href="/Case/Team/@Model.report_id">
+            <span class="text">@GlobalRes.Team.ToLower()</span>
+            @if (Model.team_invovled)
+            {
+                <span class="exclamationmark" title=@Model.team_involved_names></span>
+            }
+            @Model.team_number
+        </a>
+    </div>
+
 </div>
-<div class="div-table-col">@Model.current_status</div>
-<div class="div-table-col">@Model.days_left days</div>
-<div class="div-table-col">@Model.case_secondary_types</div>
-<div class="div-table-col">@Model.location</div>
-<div class="div-table-col">@Model.messages_number</div>
-<div class="div-table-col">@Model.tasks_number</div>
-<div class="div-table-col">@Model.team_number</div>

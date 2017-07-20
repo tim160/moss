@@ -104,6 +104,17 @@ namespace EC.Controllers
                 ViewBag.countries = HtmlDataHelper.MakeSelect(arr, item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.country_nm.ToString()));
                 ViewBag.countriesDescription = arr;
                 ViewBag.reportedOutsides = companyModel.getReportedOutside();
+                List<role_in_report> roleInReport = db.role_in_report.ToList();
+                List<SelectListItem> selectedRoleInReport = new List<SelectListItem>();
+                /*put other*/
+                SelectListItem temp = new SelectListItem { Text = App_LocalResources.GlobalRes.Other, Value = "0", Selected = true };
+                selectedRoleInReport.Add(temp);
+                foreach (var item in roleInReport)
+                {
+                    SelectListItem role = new SelectListItem { Text = item.role_en, Value = item.id.ToString() };
+                    selectedRoleInReport.Add(role);
+                }
+                ViewBag.selectedRoleInReport = selectedRoleInReport;
                 List<anonymity> list_anon = companyModel.GetAnonymities(id, 0); 
                 foreach (anonymity _anon in list_anon)
                 {

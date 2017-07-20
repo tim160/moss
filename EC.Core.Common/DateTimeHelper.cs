@@ -90,17 +90,21 @@ namespace EC.Core.Common
         /// </summary>
         /// <param name="dt"></param>
         /// <returns></returns>
-        public string ConvertDateToString(DateTime dt)
+        public string ConvertDateToString(DateTime? dt)
         {
-            string sDate = "";
-            string Month = dt.Month.ToString();
-            string Day = dt.Day.ToString();
-            if (Month.Length == 1)
-                Month = "0" + Month;
-            if (Day.Length == 1)
-                Day = "0" + Day;
-            sDate = Month + "/" + Day + "/" + dt.Year.ToString();
-            return sDate;
+            if (dt.HasValue)
+            {
+                string sDate = "";
+                string Month = dt.Value.Month.ToString();
+                string Day = dt.Value.Day.ToString();
+                if (Month.Length == 1)
+                    Month = "0" + Month;
+                if (Day.Length == 1)
+                    Day = "0" + Day;
+                sDate = Month + "/" + Day + "/" + dt.Value.Year.ToString();
+                return sDate;
+            }
+            return "N/A";
         }
 
         /// <summary>
@@ -164,18 +168,22 @@ namespace EC.Core.Common
         /// </summary>
         /// <param name="dt"></param>
         /// <returns></returns>
-        public string ConvertDateToLongMonthString(DateTime dt)
+        public string ConvertDateToLongMonthString(DateTime? dt)
         {
-            string sDate = "";
-            string Month =  GetFullMonth(dt.Month);
-            string Day = dt.Day.ToString();
-            if (Month.Length == 1)
-                Month = "0" + Month;
-            if (Day.Length == 1)
-                Day = "0" + Day;
-            //sDate = Month + " " + Day + ", " + dt.Year.ToString();
-            sDate = Month + " " + Day + ", " + dt.Year.ToString();
-            return sDate;
+            if (dt.HasValue)
+            {
+                string sDate = "";
+                string Month = GetFullMonth(dt.Value.Month);
+                string Day = dt.Value.Day.ToString();
+                if (Month.Length == 1)
+                    Month = "0" + Month;
+                if (Day.Length == 1)
+                    Day = "0" + Day;
+                //sDate = Month + " " + Day + ", " + dt.Year.ToString();
+                sDate = Month + " " + Day + ", " + dt.Value.Year.ToString();
+                return sDate;
+            }
+            return "N/A";
         }
 
         #endregion

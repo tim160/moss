@@ -25,6 +25,7 @@
     int report_id = (Int32)ViewBag.report_id;
 
     ReportModel rm = new ReportModel(report_id);
+    List<report_non_mediator_involved> _involved = rm._witnesses;
     UserModel um = new UserModel(user_id);
 
     bool is_spam = ((rm._investigation_status != 1) && (rm._investigation_status != 2));
@@ -380,15 +381,15 @@
 
                 <div class="blockPartiesInformation">
                     <span class="title">@GlobalRes.PartiesInvolved</span>
-                    @if (rm._witnesses.Count > 0)
+                    @if (_involved.Count > 0)
                     {
                         @*<div class="incidentDescription">*@
                         <table class="partiesInformation">
-                            @foreach (report_non_mediator_involved _involved in rm._witnesses)
+                            @foreach (var item in _involved)
                             {
                                 <tr>
-                                    <td>@_involved.Role</td>
-                                    <td>@_involved.Name @_involved.last_name, @_involved.Title</td>
+                                    <td>@item.Role</td>
+                                    <td>@item.Name @item.last_name, @item.Title</td>
                                 </tr>
                             }
                         </table>

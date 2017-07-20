@@ -258,7 +258,30 @@
             <!--partiesInvolved-->
             <div class="partiesInvolved tab" data-id="2">
                 <div class="content">
+                    <div class="contentBlock">
+                        <div class="rowBlock">
+                            <p class="title">Are you reporting on behalf of yourself or someone else?</p>
+                            @*Are you reporting on behalf of yourself or someone else?”   - radiobutton s dvumya opciyami - "Myself" "Someone else". po defoltu ne vibrano nichego, required ( validaciya nujna)*@
 
+                            <div class="rowBlock report_by_myself">
+                                <input type="hidden" class="report_by_myself validate" name="report_by_myself" value="1" data-validate="notEmpty" data-vltarget=".report_by_myself">
+                                <div class="freeBlock inputRadio option"  data-val="true">
+                                    <label class="inputBlock" for="Myself">
+                                        <input id="Myself" type="radio" name="report_by_myself" value="true" data-val="1">
+                                        <span class="radioButton"></span>
+                                        <span class="radioTitle">Myself</span>
+                                    </label>
+                                </div>
+                                <div class="freeBlock inputRadio option" data-val="false">
+                                    <label class="inputBlock" for="Someone else">
+                                        <input id="Someone else" type="radio" name="report_by_myself" value="false" data-val="0">
+                                        <span class="radioButton"></span>
+                                        <span class="radioTitle">Someone else</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="contentBlock" tabindex="1">
                         <p class="title">@GlobalRes.NamesOfWitnesses</p>
                         <div class="inputAddPerson">
@@ -867,9 +890,26 @@
                             </div>
                         </div>
                     </div>
+                                        @*
+                            <select class="selectedRoleInReport" id="selectedRoleInReport" name="selectedRoleInReport"><option selected="selected" value="0">Other</option>
+        <option value="1">Witness</option>
+        <option value="2">Involved</option>
+        <option value="3">Other</option>
+        </select>
+
+                                        *@
+
                     <div class="personData">
-                        <input type="text" name="personRole[NUM]"
-                               class="personDataTextBox witnessRole" />
+                        <select name="personRole[NUM]" class="selectedRoleInReport">
+                            @foreach (SelectListItem item in ViewBag.selectedRoleInReport)
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        </select>
+
+                        @*@Html.DropDownList("selectedRoleInReport", ViewBag.selectedRoleInReport as SelectList, new { @class = "selectedRoleInReport" })*@
+                        
+                        @*<input type="text" name="personRole[NUM]"   class="personDataTextBox witnessRole" />*@
                     </div>
                 </div>
 

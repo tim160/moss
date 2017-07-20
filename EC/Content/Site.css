@@ -234,7 +234,6 @@ body{
     color: rgb(56, 73, 77);
     margin-bottom: 20px;
 }
-
 .contentBlock select{
     border: 1px solid rgb(224, 229, 230);
     padding: 10px 0 10px 20px;
@@ -250,7 +249,9 @@ body{
     -webkit-user-select: none;
     background-position: 97% center;
 }
-
+.contentBlock select.selectedRoleInReport {
+    padding: 0;
+}
 .dropDownList {
     background-color: white;
     color: rgb(114, 124, 126);

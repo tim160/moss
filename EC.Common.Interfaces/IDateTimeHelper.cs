@@ -58,7 +58,7 @@ namespace EC.Common.Interfaces
         /// <param name="date"></param>
         /// <returns></returns>
 
-        string ConvertDateToString(DateTime dt);
+        string ConvertDateToString(DateTime? dt);
 
         /// <summary>
         /// YYYYMMDD
@@ -90,7 +90,7 @@ namespace EC.Common.Interfaces
         /// <param name="date"></param>
         /// <returns></returns>
 
-        string ConvertDateToLongMonthString(DateTime date);
+        string ConvertDateToLongMonthString(DateTime? date);
 
         /// <summary>
         /// All Month names

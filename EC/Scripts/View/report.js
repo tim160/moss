@@ -610,6 +610,9 @@
     function partiesInvolvedProcess() {
         var managementIncident = passiveCircle.find('.managementIncident');
         cmp.OptionSelect(managementIncident);
+        var report_by_myself = passiveCircle.find('.report_by_myself');
+        cmp.OptionSelect(report_by_myself);
+
         var whoKnow = passiveCircle.find('.whoKnow');
         cmp.OptionSelect(whoKnow);
         var isReportUrgent = passiveCircle.find('.isReportUrgent');
