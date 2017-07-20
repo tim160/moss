@@ -22,15 +22,17 @@ namespace EC.Localization
         #endregion
 
         #region Method(s)
-        
+
         /// <summary>
         /// Gets the string
         /// </summary>
         /// <param name="key">The key</param>
         /// <param name="culture">The culture info</param>
         /// <returns></returns>
-        public static string GetString(string key, CultureInfo culture)
+        public static string GetString(string key, CultureInfo culture, bool is_cc = false)
         {
+            if (is_cc) { key = key + "_CC"; }
+
             string value = LocalizationResource.ResourceManager.GetString(key, culture);
             if (value != null)
                 return value;
@@ -43,8 +45,10 @@ namespace EC.Localization
         /// </summary>
         /// <param name="key">The key</param>
         /// <returns></returns>
-        public static string GetString(string key)
+        public static string GetString(string key, bool is_cc = false)
         {
+            if (is_cc) { key = key + "_CC"; }
+
             return GetString(key, Culture);
         }
 
@@ -54,8 +58,10 @@ namespace EC.Localization
         /// <param name="key">The key</param>
         /// <param name="value">The value</param>
         /// <returns></returns>
-        public static string GetString(string key, object value)
+        public static string GetString(string key, object value, bool is_cc = false)
         {
+            if (is_cc) { key = key + "_CC"; }
+
             string valuestring = GetString(key, Culture);
             if (value != null)
                 valuestring = String.Format(valuestring, value);
@@ -69,8 +75,10 @@ namespace EC.Localization
         /// <param name="key">The key</param>
         /// <param name="value">The value</param>
         /// <returns></returns>
-        public static string GetString(CultureInfo culture, string key, object value)
+        public static string GetString(CultureInfo culture, string key, object value, bool is_cc = false)
         {
+            if (is_cc) { key = key + "_CC"; }
+
             string valuestring = GetString(key, culture);
             if (value != null)
                 valuestring = String.Format(valuestring, value);
@@ -83,8 +91,10 @@ namespace EC.Localization
         /// <param name="key">The key</param>
         /// <param name="value">The values</param>
         /// <returns></returns>
-        public static string GetString(string key, params string[] values)
+        public static string GetString(string key, bool is_cc = false, params string[] values)
         {
+            if (is_cc) { key = key + "_CC"; }
+
             string valuestring = GetString(key, Culture);
             if (values != null)
                 valuestring = String.Format(valuestring, values);
@@ -98,8 +108,10 @@ namespace EC.Localization
         /// <param name="key">The key</param>
         /// <param name="value">The values</param>
         /// <returns></returns>
-        public static string GetString(CultureInfo culture, string key, params string[] values)
+        public static string GetString(CultureInfo culture, string key, bool is_cc = false, params string[] values)
         {
+            if (is_cc) { key = key + "_CC"; }
+
             string valuestring = GetString(key, culture);
             if (values != null)
                 valuestring = String.Format(valuestring, values);
@@ -112,8 +124,10 @@ namespace EC.Localization
         /// <param name="key">The key</param>
         /// <param name="paramList">The param list</param>
         /// <returns></returns>
-        public static string GetString(string key, object[] paramList)
+        public static string GetString(string key, object[] paramList, bool is_cc = false)
         {
+            if (is_cc) { key = key + "_CC"; }
+
             string valuestring = GetString(key, Culture);
             if (paramList != null)
                 valuestring = String.Format(valuestring, paramList);
@@ -127,8 +141,10 @@ namespace EC.Localization
         /// <param name="key">The key</param>
         /// <param name="paramList">The param list</param>
         /// <returns></returns>
-        public static string GetString(CultureInfo culture, string key, object[] paramList)
+        public static string GetString(CultureInfo culture, string key, object[] paramList, bool is_cc = false)
         {
+            if (is_cc) { key = key + "_CC"; }
+
             string valuestring = GetString(key, culture);
             if (paramList != null)
                 valuestring = String.Format(valuestring, paramList);

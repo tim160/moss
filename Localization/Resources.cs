@@ -32,10 +32,10 @@ namespace EC.Localization
         /// </summary>
         /// <param name="key">The key.</param>
         /// <returns></returns>
-        public static string GetString(string key)
+        public static string GetString(string key, bool is_cc = false)
         {
             Assembly ca = Assembly.GetCallingAssembly();
-            return GetString(key, m_Culture, ca);
+            return GetString(key, m_Culture, ca, is_cc);
         }
 
         /// <summary>
@@ -44,10 +44,10 @@ namespace EC.Localization
         /// <param name="culture">The culture info.</param>
         /// <param name="key">The key.</param>
         /// <returns></returns>
-        public static string GetString(CultureInfo culture, string key)
+        public static string GetString(CultureInfo culture, string key, bool is_cc = false)
         {
             Assembly ca = Assembly.GetCallingAssembly();
-            return GetString(key, culture, ca);
+            return GetString(key, culture, ca, is_cc);
         }
 
         /// <summary>
@@ -57,12 +57,13 @@ namespace EC.Localization
         /// <param name="culture">The culture info.</param>
         /// <param name="callingAssembly">The calling assembly.</param>
         /// <returns></returns>
-        private static string GetString(string key, CultureInfo culture, Assembly callingAssembly)
+        private static string GetString(string key, CultureInfo culture, Assembly callingAssembly, bool is_cc = false)
         {
             try
             {
                 ResourceManager rm = GetResourceManager(callingAssembly);
                 if (rm == null) return key;
+                if(is_cc) { key = key + "_CC"; }
 
                 string value = rm.GetString(key, culture);
                 if (value != null)
@@ -82,10 +83,10 @@ namespace EC.Localization
         /// <param name="key">The key.</param>
         /// <param name="value">The value.</param>
         /// <returns></returns>
-        public static string GetString(string key, object value)
+        public static string GetString(string key, object value, bool is_cc = false)
         {
             Assembly ca = Assembly.GetCallingAssembly();
-            string valuestring = GetString(key, m_Culture, ca);
+            string valuestring = GetString(key, m_Culture, ca, is_cc);
             if (value != null)
                 valuestring = String.Format(valuestring, value);
             return valuestring;
@@ -98,10 +99,10 @@ namespace EC.Localization
         /// <param name="value">The value.</param>
         /// <param name="value">The assembly to reference.</param>
         /// <returns></returns>
-        public static string GetString(string key, object value, Assembly referenceAssembly)
+        public static string GetString(string key, object value, Assembly referenceAssembly, bool is_cc = false)
         {
             Assembly ca = referenceAssembly;
-            string valuestring = GetString(key, m_Culture, ca);
+            string valuestring = GetString(key, m_Culture, ca, is_cc);
             if (value != null)
                 valuestring = String.Format(valuestring, value);
             return valuestring;
@@ -114,10 +115,10 @@ namespace EC.Localization
         /// <param name="key">The key.</param>
         /// <param name="value">The value.</param>
         /// <returns></returns>
-        public static string GetString(CultureInfo culture, string key, object value)
+        public static string GetString(CultureInfo culture, string key, object value, bool is_cc = false)
         {
             Assembly ca = Assembly.GetCallingAssembly();
-            string valuestring = GetString(key, culture, ca);
+            string valuestring = GetString(key, culture, ca, is_cc);
             if (value != null)
                 valuestring = String.Format(valuestring, value);
             return valuestring;
@@ -129,10 +130,10 @@ namespace EC.Localization
         /// <param name="key">The key.</param>
         /// <param name="value">The values.</param>
         /// <returns></returns>
-        public static string GetString(string key, params string[] values)
+        public static string GetString(string key, bool is_cc = false, params string[] values)
         {
             Assembly ca = Assembly.GetCallingAssembly();
-            string valuestring = GetString(key, m_Culture, ca);
+            string valuestring = GetString(key, m_Culture, ca, is_cc);
             if (values != null)
                 valuestring = String.Format(valuestring, values);
             return valuestring;
@@ -145,12 +146,12 @@ namespace EC.Localization
         /// <param name="key">The key.</param>
         /// <param name="value">The values.</param>
         /// <returns></returns>
-        public static string GetString(CultureInfo culture, string key, params string[] values)
+        public static string GetString(CultureInfo culture, string key, bool is_cc = false, params string[] values)
         {
             try
             {
                 Assembly ca = Assembly.GetCallingAssembly();
-                string valuestring = GetString(key, culture, ca);
+                string valuestring = GetString(key, culture, ca, is_cc);
                 if (values != null)
                     valuestring = String.Format(valuestring, values);
                 return valuestring;
@@ -167,10 +168,10 @@ namespace EC.Localization
         /// <param name="key">The key.</param>
         /// <param name="paramList">The param list.</param>
         /// <returns></returns>
-        public static string GetString(string key, object[] paramList)
+        public static string GetString(string key, object[] paramList, bool is_cc = false)
         {
             Assembly ca = Assembly.GetCallingAssembly();
-            string valuestring = GetString(key, m_Culture, ca);
+            string valuestring = GetString(key, m_Culture, ca, is_cc);
             if (paramList != null)
                 valuestring = String.Format(valuestring, paramList);
             return valuestring;
@@ -183,10 +184,10 @@ namespace EC.Localization
         /// <param name="key">The key.</param>
         /// <param name="paramList">The param list.</param>
         /// <returns></returns>
-        public static string GetString(CultureInfo culture, string key, object[] paramList)
+        public static string GetString(CultureInfo culture, string key, object[] paramList, bool is_cc = false)
         {
             Assembly ca = Assembly.GetCallingAssembly();
-            string valuestring = GetString(key, culture, ca);
+            string valuestring = GetString(key, culture, ca, is_cc);
             if (paramList != null)
                 valuestring = String.Format(valuestring, paramList);
             return valuestring;
