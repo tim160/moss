@@ -75,6 +75,14 @@ namespace EC.Models.Database
         public Nullable<System.Guid> guid { get; set; }
         public Nullable<System.DateTime> next_payment_date { get; set; }
         public Nullable<decimal> next_payment_amount { get; set; }
+        public string cc_campus_alert_manager_first_name { get; set; }
+        public string cc_campus_alert_manager_last_name { get; set; }
+        public string cc_campus_alert_manager_email { get; set; }
+        public string cc_campus_alert_manager_phone { get; set; }
+        public string cc_daily_crime_log_manager_first_name { get; set; }
+        public string cc_daily_crime_log_manager_last_name { get; set; }
+        public string cc_daily_crime_log_manager_email { get; set; }
+        public string cc_daily_crime_log_manager_phone { get; set; }
     
         public virtual address address { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

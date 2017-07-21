@@ -13,12 +13,14 @@ using System.Data.Entity.Validation;
 using EC.Constants;
 using EC.Models.ViewModels;
 using Newtonsoft.Json;
-
+using EC.Common.Base;
 
 namespace EC.Models
 {
     public class ReportModel : BaseModel
     {
+
+        //public static Dictionary<int, report> Cache = null;
 
         #region Properties
         public int ID
@@ -28,6 +30,20 @@ namespace EC.Models
         {
             get
             {
+                /*if ((Cache != null) && (Cache.ContainsKey(ID)))
+                {
+                    return Cache[ID];
+                }
+
+                var r = ReportById(ID);
+
+                if (Cache != null)
+                {
+                    Cache.Add(ID, r);
+                }
+
+                return r;*/
+
                 return ReportById(ID);
             }
         }
