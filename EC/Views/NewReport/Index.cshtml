@@ -206,6 +206,9 @@
 
                 @model message
 
+                var allScopes = (List<scope>)ViewBag.AllScopes;
+                var allSeverities = (List<severity>)ViewBag.AllSeverities;
+
             <!-- ============================== START Accept case ==================================== -->
 
                 <div class="contentViewReport blockAcceptCase" style="display: none;">
@@ -216,10 +219,39 @@
                     </div>
                     <div class="contentBlockCase">
                         <p class="titleCase">@GlobalRes.Acceptcase</p>
-                        <p class="textCace">@GlobalRes.Notification_will_sent_reporter</p>
                     </div>
 
                     <form action="" method="post">
+                        <div class="contentBlockCase">
+                            <p class="titleCase">@EC.Localization.Resources.GetString("Scope")</p>
+                        </div>
+                        <div class="contentBlockCase">
+                            <div class="textCace">
+                                @foreach (var scope in allScopes)
+                                {
+                                    <div class="freeBlock inputRadio option active" data-val="@scope.id">
+                                        <label class="inputBlock" for="@("scope" + scope.id)">
+                                            <input id="@("scope" + scope.id)" type="radio" name="scopeId" value="@scope.id" />
+                                            <span class="radioButton"></span>
+                                            <span class="radioTitle">@scope.scope_en</span>
+                                        </label>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="contentBlockCase">
+                            <p class="titleCase">@EC.Localization.Resources.GetString("Severity")</p>
+                        </div>
+                        <div class="contentBlockCase">
+                            <div class="textCace">
+                                @Html.DropDownList("SeverityId", new SelectList(allSeverities, "id", "severity_en"), new { @class = "" })
+                            </div>
+                        </div>
+
+                        <div class="contentBlockCase">
+                            <p class="textCace">@GlobalRes.Notification_will_sent_reporter</p>
+                        </div>
                         <div class="addComment addComment2@{@class_ext}">
                             <div class="blockPersonal">
 
@@ -481,8 +513,8 @@
 
 
 
-                <script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
-                <script>
+<script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
+<script>
     $(document).ready(function () {
         //$        //name="spamMessage
         function showBlockDocs(){
@@ -517,18 +549,29 @@
                             var description = $('.acceptCaseNote textarea').val();
 
                             reopenOrAcceptCase(@Html.Raw(report_id), @Html.Raw(user_id), description);
-
-            var str = window.location.href;
-            window.location.href = str;
-        });
+                        });
 
 
         function reopenOrAcceptCase(report_id, user_id, description) {
+            if ($('input:radio[name=scopeId]:checked').val() == undefined) {
+                $('input:radio[name=scopeId]').closest('.inputRadio').addClass('err');
+                return;
+            }
+            $('input:radio[name=scopeId]').closest('.inputRadio').removeClass('err');
+
             $.ajax({
                 method: "POST",
                 url: "/NewReport/AcceptOrReopenCase",
-                data: { report_id : report_id, user_id: user_id, description : description }
-            }).done(function(data) {//data from server
+                data: { 
+                    report_id : report_id, 
+                    user_id: user_id, 
+                    description : description, 
+                    scopeId : $('input:radio[name=scopeId]:checked').val(),
+                    severityId: $('#SeverityId').val()
+                }
+            }).done(function(data) {
+                var str = window.location.href;
+                window.location.href = str;
             }).fail(function(error){
                 console.log(error);
             });
@@ -599,6 +642,54 @@
                 $('input#markSpam').click();
             });
         }
+
+        function setDropdown() {
+            $('.dropdown').unbind('click');
+            $('.dropdown ul li').unbind('click');
+
+            $('.dropdown').on('click',function () {
+                $(this).children('ul').slideToggle(150);
+                if ($(this).hasClass('open')) {
+                    $(this).removeClass('open');
+                    return false;
+                } else {
+                    $(this).addClass('open');
+                    return false;
+                }
+
+                return false;
+            })
+
+            .hover(
+            function () {
+
+            },
+            function () {
+                $(this).children('ul').slideUp(150);
+                $(this).removeClass('open');
+            });
+
+            $('.dropdown ul li').click(function () {
+                var sitem = $(this).html();
+                var sid = $(this).attr('value');
+                if ($(this).attr('data-id') == "Not Listed") {
+                    $(this).siblings('li').removeClass('selected');
+                    $(this).addClass('selected');
+                    $(this).parent('ul').siblings('span.selected').html(sitem);
+                    $(this).parent('ul').siblings('input').val(sid);
+                    $(this).parent('ul').parent('.subject').change();
+                    $(this).parent('ul').parent('.subject').find('.validate').addClass('vlCorrect');
+                    return;
+                }
+                $(this).siblings('li').removeClass('selected');
+                $(this).addClass('selected');
+                $(this).parent('ul').siblings('span.selected').html(sitem);
+                $(this).parent('ul').siblings('input').val(sid);
+                $(this).parent('ul').parent('.subject').change();
+                $(this).parent('ul').parent('.subject').find('.validate').change();
+            });
+        }
+
         showBlockDocs();
         sendMessageSpam();
         styleTextArea();
@@ -609,6 +700,7 @@
         acceptCaseBtnClick();
         spamCaseBtnClick();
         clickBtnSpamOrReopen();
+        setDropdown();
     });
 
-                </script>
+</script>

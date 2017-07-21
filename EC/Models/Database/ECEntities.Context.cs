@@ -103,5 +103,7 @@ namespace EC.Models.Database
         public virtual DbSet<message_posters> message_posters { get; set; }
         public virtual DbSet<poster> poster { get; set; }
         public virtual DbSet<poster_industry_posters> poster_industry_posters { get; set; }
+        public virtual DbSet<scope> scope { get; set; }
+        public virtual DbSet<severity> severity { get; set; }
     }
 }

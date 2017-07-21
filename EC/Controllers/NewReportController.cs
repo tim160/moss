@@ -73,6 +73,8 @@ namespace EC.Controllers.ViewModel
 
             ViewBag.attachmentFiles = getAttachmentFiles(id.Value);
             ViewBag.getNonMediatorsInvolved = getNonMediatorsInvolved(id.Value);
+            ViewBag.AllScopes = db.scope.OrderBy(x => x.scope_en).ToList();
+            ViewBag.AllSeverities = db.severity.OrderBy(x => x.severity_en).ToList();
 
             bool has_access = rm.HasAccessToReport(user_id);
 
@@ -200,6 +202,8 @@ namespace EC.Controllers.ViewModel
             int report_id = Convert.ToInt16(Request["report_id"]);
             int user_id = Convert.ToInt16(Request["user_id"]);
             string description = Request["description"];
+            int scopeId = Convert.ToInt16(Request["scopeId"]);
+            int severityId = Convert.ToInt16(Request["severityId"]);
 
 
             report_investigation_status addStatus =
@@ -215,6 +219,10 @@ namespace EC.Controllers.ViewModel
             db.report_investigation_status.Add(addStatus);
             db.SaveChanges();
 
+            var report = db.report.FirstOrDefault(x => x.id == report_id);
+            report.scope_id = scopeId;
+            report.severity_id = severityId;
+            db.SaveChanges();
 
             // Case accepted
             glb.UpdateReportLog(user_id, 17, report_id, description, null, "");
@@ -224,6 +232,7 @@ namespace EC.Controllers.ViewModel
             report_log _log = new report_log();
 
             ReportModel rm = new ReportModel(report_id);
+
             CompanyModel cm = new CompanyModel(rm._report.company_id);
             UserModel um = new UserModel(user_id);
             #region Email Ready

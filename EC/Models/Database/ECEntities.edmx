@@ -984,6 +984,16 @@
           <Property Name="role_es" Type="nvarchar(max)" Nullable="false" />
           <Property Name="role_ar" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
+        <EntityType Name="scope">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="scope_en" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="scope_fr" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="scope_es" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="status_id" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="secondary_type_mandatory">
           <Key>
             <PropertyRef Name="id" />
@@ -1007,6 +1017,16 @@
           <Property Name="description_ar" Type="nvarchar" MaxLength="255" />
           <Property Name="description_jp" Type="nvarchar" MaxLength="255" />
           <Property Name="description_es" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="severity">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="severity_en" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="severity_fr" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="severity_es" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="status_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="source">
           <Key>
@@ -1381,7 +1401,9 @@
           <EntitySet Name="reported_outside" EntityType="Self.reported_outside" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="resolution" EntityType="Self.resolution" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="role_in_report" EntityType="Self.role_in_report" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="scope" EntityType="Self.scope" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="secondary_type_mandatory" EntityType="Self.secondary_type_mandatory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="severity" EntityType="Self.severity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="source" EntityType="Self.source" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="status" EntityType="Self.status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="task" EntityType="Self.task" Schema="dbo" store:Type="Tables" />
@@ -2744,6 +2766,8 @@
           <EntitySet Name="message_posters" EntityType="ECModel.message_posters" />
           <EntitySet Name="poster" EntityType="ECModel.poster" />
           <EntitySet Name="poster_industry_posters" EntityType="ECModel.poster_industry_posters" />
+          <EntitySet Name="scope" EntityType="ECModel.scope" />
+          <EntitySet Name="severity" EntityType="ECModel.severity" />
         </EntityContainer>
         <EntityType Name="case_closure_reason">
           <Key>
@@ -2833,6 +2857,26 @@
           <Property Name="poster_id" Type="Int32" Nullable="false" />
           <Property Name="industry_posters_id" Type="Int32" Nullable="false" />
           <Property Name="status" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="scope">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="scope_en" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="scope_fr" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="scope_es" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="status_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="severity">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="severity_en" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="severity_fr" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="severity_es" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="status_id" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4113,6 +4157,28 @@
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="industry_posters_id" ColumnName="industry_posters_id" />
                 <ScalarProperty Name="poster_id" ColumnName="poster_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="scope">
+            <EntityTypeMapping TypeName="ECModel.scope">
+              <MappingFragment StoreEntitySet="scope">
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="scope_es" ColumnName="scope_es" />
+                <ScalarProperty Name="scope_fr" ColumnName="scope_fr" />
+                <ScalarProperty Name="scope_en" ColumnName="scope_en" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="severity">
+            <EntityTypeMapping TypeName="ECModel.severity">
+              <MappingFragment StoreEntitySet="severity">
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="severity_es" ColumnName="severity_es" />
+                <ScalarProperty Name="severity_fr" ColumnName="severity_fr" />
+                <ScalarProperty Name="severity_en" ColumnName="severity_en" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
