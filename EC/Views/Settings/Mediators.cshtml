@@ -32,60 +32,30 @@
     }
     @Html.Partial("~/Views/Settings/partial/casesHeared.cshtml", active)
 
-    <div class="contentSettings secondHeader">
-        <div class="headerCompanyProfile">
-            @if (is_cc && is_valid_mediator)
-            {
-                <div class="headerBlock">
-                    <div class="blockText">
-                        <p class="title">Invite new college mediator by email</p>
-                    </div>
-                </div>
-                <div class="blockSendEmail blockSendEmail_cc greyBorder">
-                    <input type="text" id="sendEmail" name="newLocationName" placeholder="email@yourcompany.com" required="" value="">
-                    <div class="closeIcon"></div>
-                    <textarea placeholder="Enter message to colleague about joining the case administration team"></textarea>
-                    <input id="sendMessage" type="submit" />
-                    <span class="sendBtn">@GlobalRes.Send.ToLower()</span>
-                </div>
-            }
-            else
-            {
-                if (is_valid_mediator)
-                { 
-                    <div class="headerBlock">
-                        <div class="blockText">
-                            <p class="title">@GlobalRes.invite_new_mediator</p>
-                        </div>
-                    </div>
-                    <div class="blockSendEmail greyBorder">
-                        <input type="text" id="sendEmail" name="newLocationName" placeholder="email@yourcompany.com" required="" value="">
-                        <div class="closeIcon"></div>
-                        <input id="sendMessage" type="submit" />
-                        <span class="sendBtn">@GlobalRes.Send.ToLower()</span>
-                    </div>
-                }
-            }
-
-        </div>
-    </div><!--contentSettings.secondHeader-->
 
     <div class="contentCompanyProfiel">
         <div class="contentSettings">
             <div class="blockWithTeam">
                 <div class="contentMediators blockTeam">
+                    <!--empty block-->
+                    <div class="blockIteamTeam footerInputStyle">
+
+
+                        <a href="#" class="positionLinkIviteMediator greenButton greenButtonCustom disableUnderline">setup case administrator</a>
+                    </div>
+                    <!--end empty block-->
                     @foreach (user _user in AllUsers)
                     {
                         string link = "/settings/user/" + _user.id;
                         if (_user.role_id == 0) { link = ""; }
-                            
+
                         if ((_user.role_id == 4) || (_user.role_id == 5) || (_user.role_id == 6) || (_user.role_id == 7) || (_user.role_id == 0))
                         {
                             _temp_um = new UserModel(_user.id);
 
                             <div class="blockIteamTeam blockIteamTeam@{@class_ext}">
                                 <div class="blockHeaderTeam">
-                                    <a class="contanatTable"  href="@link">
+                                    <a class="contanatTable" href="@link">
                                         <div class="blockPhoto">
                                             <div class="photoPersonal">
                                                 @if (_user.photo_path.Trim().Length == 0)
@@ -115,7 +85,7 @@
                                     <p class="blockMediator admin admin@{@class_ext}">
                                         <span>@GlobalRes.AdminMediator.ToLower()</span>
                                     </p>
-                                }
+    }
                                 @if (_user.role_id == 6)
                                 {
                                     <p class="blockMediator">
@@ -139,8 +109,8 @@
 
                                 <div class="blocksInfo">
                                     <div class="blockInfo">
-                                        @if(_user.role_id != 0)
-                                        { 
+                                        @if (_user.role_id != 0)
+                                        {
                                             <img src='@Url.Content("/Content/Icons/blockInfo_img1" + @class_ext + ".png")'>
                                             <label>@_temp_um._location_string</label>
                                         }
@@ -153,11 +123,51 @@
                                 </div>
                             </div><!--blockIteamTeam-->
 
-                        }
-                    }
+        }
+    }
                 </div>
             </div>
         </div><!--contentSettings-->
+        <div class="footerInputPosition footerInputStyle">
+            <div class="contentSettings secondHeader">
+                <div class="headerCompanyProfile">
+                    @if (is_cc && is_valid_mediator)
+            {
+                        <div class="headerBlock">
+                            <div class="blockText">
+                                <p class="title">Invite new college mediator by email</p>
+                            </div>
+                        </div>
+                        <div class="blockSendEmail blockSendEmail_cc greyBorder">
+                            <input type="text" id="sendEmail" name="newLocationName" placeholder="email@yourcompany.com" required="" value="">
+                            <div class="closeIcon"></div>
+                            <textarea placeholder="Enter message to colleague about joining the case administration team"></textarea>
+                            <input id="sendMessage" type="submit" />
+                            <span class="sendBtn">@GlobalRes.Send.ToLower()</span>
+                        </div>
+                    }
+                    else
+                    {
+                        if (is_valid_mediator)
+                        {
+                            <div class="headerBlock">
+                                <div class="blockText">
+                                    <p class="title">@GlobalRes.invite_new_mediator</p>
+                                </div>
+                            </div>
+                            <div class="blockSendEmail greyBorder">
+                                <input type="text" id="sendEmail" name="newLocationName" placeholder="email@yourcompany.com" required="" value="">
+                                <div class="closeIcon"></div>
+                                <input id="sendMessage" type="submit" />
+                                <span class="sendBtn">@GlobalRes.Send.ToLower()</span>
+                            </div>
+                        }
+                    }
+
+                </div>
+            </div><!--contentSettings.secondHeader-->
+        </div>
+
     </div><!--contentCompanyProfile-->
 </div>
 <input type="hidden" id="InvitationSuccessfull" value="@GlobalRes.InvitationSuccessfull" />
