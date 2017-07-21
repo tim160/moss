@@ -3148,3 +3148,32 @@ textarea {
     border-left: 1px solid #ebf1f1;
     border-right: 1px solid #ebf1f1;
 }*/
+
+#positionIconCases {
+    float: right;
+    position: relative;
+    width: 30px;
+    height: 100%;
+    margin-right: 48px;
+    margin-top: 32px;
+}
+
+.rectangleIcon {
+    width: 16px;
+    height: 2px;
+    background: white;
+}
+
+.positionFirstRectangle {
+    position: absolute;
+}
+
+.positionSecondRectangle {
+    position: absolute;
+    top: 4px;
+}
+
+.positionThirdRectangle {
+    position: absolute;
+    top: 8px;
+}
