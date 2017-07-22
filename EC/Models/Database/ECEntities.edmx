@@ -194,6 +194,14 @@
           <Property Name="guid" Type="uniqueidentifier" />
           <Property Name="next_payment_date" Type="datetime" />
           <Property Name="next_payment_amount" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="cc_campus_alert_manager_first_name" Type="nvarchar" MaxLength="100" />
+          <Property Name="cc_campus_alert_manager_last_name" Type="nvarchar" MaxLength="100" />
+          <Property Name="cc_campus_alert_manager_email" Type="nvarchar" MaxLength="100" />
+          <Property Name="cc_campus_alert_manager_phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="cc_daily_crime_log_manager_first_name" Type="nvarchar" MaxLength="100" />
+          <Property Name="cc_daily_crime_log_manager_last_name" Type="nvarchar" MaxLength="100" />
+          <Property Name="cc_daily_crime_log_manager_email" Type="nvarchar" MaxLength="100" />
+          <Property Name="cc_daily_crime_log_manager_phone" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="company_anonymity">
           <Key>
@@ -767,6 +775,14 @@
           <Property Name="previously_reported_accepted" Type="bit" Nullable="false" />
           <Property Name="last_update_dt" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="incident_dt" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="scope_id" Type="int" />
+          <Property Name="scope_user_id" Type="int" />
+          <Property Name="severity_id" Type="int" />
+          <Property Name="severity_user_id" Type="int" />
+          <Property Name="cc_is_clear_act_crime" Type="bit" />
+          <Property Name="cc_crime_statistics_category_id" Type="int" />
+          <Property Name="cc_crime_statistics_location_id" Type="int" />
+          <Property Name="report_by_myself" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="report_department">
           <Key>
@@ -968,6 +984,16 @@
           <Property Name="role_es" Type="nvarchar(max)" Nullable="false" />
           <Property Name="role_ar" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
+        <EntityType Name="scope">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="scope_en" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="scope_fr" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="scope_es" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="status_id" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="secondary_type_mandatory">
           <Key>
             <PropertyRef Name="id" />
@@ -991,6 +1017,16 @@
           <Property Name="description_ar" Type="nvarchar" MaxLength="255" />
           <Property Name="description_jp" Type="nvarchar" MaxLength="255" />
           <Property Name="description_es" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="severity">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="severity_en" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="severity_fr" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="severity_es" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="status_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="source">
           <Key>
@@ -1365,7 +1401,9 @@
           <EntitySet Name="reported_outside" EntityType="Self.reported_outside" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="resolution" EntityType="Self.resolution" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="role_in_report" EntityType="Self.role_in_report" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="scope" EntityType="Self.scope" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="secondary_type_mandatory" EntityType="Self.secondary_type_mandatory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="severity" EntityType="Self.severity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="source" EntityType="Self.source" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="status" EntityType="Self.status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="task" EntityType="Self.task" Schema="dbo" store:Type="Tables" />
@@ -1592,6 +1630,14 @@
           <NavigationProperty Name="company_department" Relationship="Self.FK_Department_Company" FromRole="company" ToRole="company_department" />
           <Property Name="next_payment_date" Type="DateTime" Precision="3" />
           <Property Name="next_payment_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="cc_campus_alert_manager_first_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="cc_campus_alert_manager_last_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="cc_campus_alert_manager_email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="cc_campus_alert_manager_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cc_daily_crime_log_manager_first_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="cc_daily_crime_log_manager_last_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="cc_daily_crime_log_manager_email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="cc_daily_crime_log_manager_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="company_anonymity">
           <Key>
@@ -2097,6 +2143,14 @@
           <NavigationProperty Name="management_know" Relationship="Self.FK_Report_ManagementKnow" FromRole="report" ToRole="management_know" />
           <NavigationProperty Name="user" Relationship="Self.FK_Report_User" FromRole="report" ToRole="user" />
           <NavigationProperty Name="report_non_mediator_involved" Relationship="Self.FK_ReportNonMediatorInvolved_Report" FromRole="report" ToRole="report_non_mediator_involved" />
+          <Property Name="scope_id" Type="Int32" />
+          <Property Name="scope_user_id" Type="Int32" />
+          <Property Name="severity_id" Type="Int32" />
+          <Property Name="severity_user_id" Type="Int32" />
+          <Property Name="cc_is_clear_act_crime" Type="Boolean" />
+          <Property Name="cc_crime_statistics_category_id" Type="Int32" />
+          <Property Name="cc_crime_statistics_location_id" Type="Int32" />
+          <Property Name="report_by_myself" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="report_department">
           <Key>
@@ -2712,6 +2766,8 @@
           <EntitySet Name="message_posters" EntityType="ECModel.message_posters" />
           <EntitySet Name="poster" EntityType="ECModel.poster" />
           <EntitySet Name="poster_industry_posters" EntityType="ECModel.poster_industry_posters" />
+          <EntitySet Name="scope" EntityType="ECModel.scope" />
+          <EntitySet Name="severity" EntityType="ECModel.severity" />
         </EntityContainer>
         <EntityType Name="case_closure_reason">
           <Key>
@@ -2801,6 +2857,26 @@
           <Property Name="poster_id" Type="Int32" Nullable="false" />
           <Property Name="industry_posters_id" Type="Int32" Nullable="false" />
           <Property Name="status" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="scope">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="scope_en" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="scope_fr" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="scope_es" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="status_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="severity">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="severity_en" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="severity_fr" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="severity_es" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="status_id" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2934,6 +3010,14 @@
           <EntitySetMapping Name="company">
             <EntityTypeMapping TypeName="ECModel.company">
               <MappingFragment StoreEntitySet="company">
+                <ScalarProperty Name="cc_daily_crime_log_manager_phone" ColumnName="cc_daily_crime_log_manager_phone" />
+                <ScalarProperty Name="cc_daily_crime_log_manager_email" ColumnName="cc_daily_crime_log_manager_email" />
+                <ScalarProperty Name="cc_daily_crime_log_manager_last_name" ColumnName="cc_daily_crime_log_manager_last_name" />
+                <ScalarProperty Name="cc_daily_crime_log_manager_first_name" ColumnName="cc_daily_crime_log_manager_first_name" />
+                <ScalarProperty Name="cc_campus_alert_manager_phone" ColumnName="cc_campus_alert_manager_phone" />
+                <ScalarProperty Name="cc_campus_alert_manager_email" ColumnName="cc_campus_alert_manager_email" />
+                <ScalarProperty Name="cc_campus_alert_manager_last_name" ColumnName="cc_campus_alert_manager_last_name" />
+                <ScalarProperty Name="cc_campus_alert_manager_first_name" ColumnName="cc_campus_alert_manager_first_name" />
                 <ScalarProperty Name="next_payment_amount" ColumnName="next_payment_amount" />
                 <ScalarProperty Name="next_payment_date" ColumnName="next_payment_date" />
                 <ScalarProperty Name="id" ColumnName="id" />
@@ -3473,6 +3557,14 @@
           <EntitySetMapping Name="report">
             <EntityTypeMapping TypeName="ECModel.report">
               <MappingFragment StoreEntitySet="report">
+                <ScalarProperty Name="report_by_myself" ColumnName="report_by_myself" />
+                <ScalarProperty Name="cc_crime_statistics_location_id" ColumnName="cc_crime_statistics_location_id" />
+                <ScalarProperty Name="cc_crime_statistics_category_id" ColumnName="cc_crime_statistics_category_id" />
+                <ScalarProperty Name="cc_is_clear_act_crime" ColumnName="cc_is_clear_act_crime" />
+                <ScalarProperty Name="severity_user_id" ColumnName="severity_user_id" />
+                <ScalarProperty Name="severity_id" ColumnName="severity_id" />
+                <ScalarProperty Name="scope_user_id" ColumnName="scope_user_id" />
+                <ScalarProperty Name="scope_id" ColumnName="scope_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="company_nm" ColumnName="company_nm" />
                 <ScalarProperty Name="submitted_company_nm" ColumnName="submitted_company_nm" />
@@ -4065,6 +4157,28 @@
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="industry_posters_id" ColumnName="industry_posters_id" />
                 <ScalarProperty Name="poster_id" ColumnName="poster_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="scope">
+            <EntityTypeMapping TypeName="ECModel.scope">
+              <MappingFragment StoreEntitySet="scope">
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="scope_es" ColumnName="scope_es" />
+                <ScalarProperty Name="scope_fr" ColumnName="scope_fr" />
+                <ScalarProperty Name="scope_en" ColumnName="scope_en" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="severity">
+            <EntityTypeMapping TypeName="ECModel.severity">
+              <MappingFragment StoreEntitySet="severity">
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="severity_es" ColumnName="severity_es" />
+                <ScalarProperty Name="severity_fr" ColumnName="severity_fr" />
+                <ScalarProperty Name="severity_en" ColumnName="severity_en" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
