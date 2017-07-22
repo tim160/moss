@@ -208,9 +208,13 @@
 
                 var allScopes = (List<scope>)ViewBag.AllScopes;
                 var allSeverities = (List<severity>)ViewBag.AllSeverities;
+                var allDepartments = (List<company_department>)ViewBag.AllDepartments;
+                var allIncidets = (List<company_secondary_type>)ViewBag.AllIncidets;
+                var allOwners = (List<user>)ViewBag.AllOwners;
+                var allPolicies = (List<KeyValuePair<string, string>>)ViewBag.AllPolicies;                
 
-            <!-- ============================== START Accept case ==================================== -->
 
+                <!-- ============================== START Accept case ==================================== -->
 
 
                 <style>
@@ -240,35 +244,20 @@
                                         <tr>
                                             <td>Incydent Type :</td>
                                             <td>
-                                                <select>
-                                                    <option value="1">1</option>
-                                                    <option value="1">1</option>
-                                                    <option value="1">1</option>
-                                                    <option value="1">1</option>
-                                                </select>
+                                                @Html.DropDownList("IncydentId", new SelectList(allIncidets, "id", "secondary_type_en"), new { @class = "" })
                                             </td>
                                         </tr>
                                        
                                         <tr>
                                             <td>Department: </td>
                                             <td>
-                                                <select>
-                                                    <option value="1">1</option>
-                                                    <option value="1">1</option>
-                                                    <option value="1">1</option>
-                                                    <option value="1">1</option>
-                                                </select>
+                                                @Html.DropDownList("DepartmentId", new SelectList(allDepartments, "id", "department_en"), new { @class = "" })
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Scope:</td>
                                             <td>
-                                                <select>
-                                                    <option value="1">1</option>
-                                                    <option value="1">1</option>
-                                                    <option value="1">1</option>
-                                                    <option value="1">1</option>
-                                                </select>
+                                                @Html.DropDownList("ScopeId", new SelectList(allScopes, "id", "scope_en"), new { @class = "" })
                                             </td>
                                         </tr>
 
@@ -283,28 +272,23 @@
                                         <tr>
                                             <td>Severity:</td>
                                             <td>
-                                                <select>
-                                                    <option value="1">1</option>
-                                                    <option value="1">1</option>
-                                                    <option value="1">1</option>
-                                                    <option value="1">1</option>
-                                                </select>
+                                                @Html.DropDownList("SeverityId", new SelectList(allSeverities, "id", "severity_en"), new { @class = "" })
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Issue Owner:</td>
                                             <td>
-                                                <select>
-                                                    <option value="1">1</option>
-                                                    <option value="1">1</option>
-                                                    <option value="1">1</option>
-                                                    <option value="1">1</option>
-                                                </select>
+                                                @Html.DropDownList("OwnerId", new SelectList(allOwners, "id", "first_nm"), new { @class = "" })
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Policy:</td>
-                                            <td>1 pdf</td>
+                                            <td>
+                                                @foreach (var item in allPolicies)
+                                                {
+                                                    <div>@item.Value</div>
+                                                }
+                                            </td>
                                         </tr>
                                     </table>
                                 </td>
@@ -312,7 +296,33 @@
                         </tbody>
                     </table>
 
+                    <div class="addComment addComment2@{@class_ext}">
+                        <div class="blockPersonal">
 
+                            <div class="blockPhoto">
+                                @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", user_id }, { "is_owner", true } })
+
+
+                            </div>
+                            <div class="arrow green"></div>
+                        </div>
+
+
+                        <div class="messageText acceptCaseNote">
+                            <textarea cols="20" id="body_text" class="green" name="body_tx" rows="2" autofocus></textarea>
+                        </div>
+                    </div>
+                    <div class="newMessageBtn">
+                        @if (is_cc.Value)
+                        {
+                            <span class="acceptNewCase acceptNewCase_cc">@GlobalRes.Acceptcase.ToLower()</span>
+                        }
+                        else
+                        {
+                            <span class="acceptNewCase">@GlobalRes.Acceptcase.ToLower()</span>
+                        }
+                        <input type="submit" value="new message" style="display: none;">
+                    </div>
 
                     @*<div class="headerblockButtons">
                             <div class="closeIcon"></div>
@@ -686,12 +696,6 @@
 
 
         function reopenOrAcceptCase(report_id, user_id, description) {
-            if ($('input:radio[name=scopeId]:checked').val() == undefined) {
-                $('input:radio[name=scopeId]').closest('.inputRadio').addClass('err');
-                return;
-            }
-            $('input:radio[name=scopeId]').closest('.inputRadio').removeClass('err');
-
             $.ajax({
                 method: "POST",
                 url: "/NewReport/AcceptOrReopenCase",
@@ -699,8 +703,11 @@
                     report_id : report_id, 
                     user_id: user_id, 
                     description : description, 
-                    scopeId : $('input:radio[name=scopeId]:checked').val(),
-                    severityId: $('#SeverityId').val()
+                    incydentId : $('#IncydentId').val(),
+                    departmentId: $('#DepartmentId').val(),
+                    scopeId : $('#ScopeId').val(),
+                    severityId: $('#SeverityId').val(),
+                    ownerId: $('#OwnerId').val()
                 }
             }).done(function(data) {
                 var str = window.location.href;
