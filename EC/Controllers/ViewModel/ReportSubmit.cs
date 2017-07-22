@@ -140,7 +140,7 @@ namespace EC.Controllers.ViewModel
             {
                 isCaseUrgent = GlobalRes.Yes;
             }
-            IncidentType = model.whatHappened;
+            //IncidentType = model.whatHappened;
             IncidentDate = model.dateIncidentHappened.ToShortDateString();
             switch (model.isOnGoing)
             {
