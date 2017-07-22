@@ -231,9 +231,13 @@ namespace EC.Controllers.ViewModel
             db.report_investigation_status.Add(addStatus);
             db.SaveChanges();
 
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+
             var report = db.report.FirstOrDefault(x => x.id == report_id);
             report.scope_id = scopeId;
             report.severity_id = severityId;
+            report.severity_user_id = user.id;
+            report.scope_user_id = user.id;
             db.SaveChanges();
 
 
