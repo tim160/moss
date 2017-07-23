@@ -43,7 +43,7 @@ public class GlobalFunctions
     public bool IsCC(string url)
     {
         // uncomment for campus-confidential testing
-      //  return true;
+    ///    return true;
         if ( (url.ToLower().Contains("campus"))  || (url.ToLower().Contains("cc.employeeconfidential")) )
         {
             return true;

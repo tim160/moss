@@ -68,7 +68,7 @@
                                 <p class="text"><a href="/Payment/Receipt/@_payment.id">@glb.ConvertDecimalToStringAmount(_payment.amount)</a></p>
                             </div>
                             <div class="blockDate">
-                                <p>@_payment.payment_date.Day  @glb.GetShortMonth(_payment.payment_date.Month) @_payment.payment_date.Year</p>
+                                <p>@glb.GetShortMonth(_payment.payment_date.Month) @_payment.payment_date.Day, @_payment.payment_date.Year</p>
                             </div>
                         </div>
                     </div>
@@ -103,7 +103,7 @@
                             @*<p class="text"><a href="/Payment/Receipt/@_payment.id">@glb.ConvertDecimalToStringAmount(_payment.amount)</a></p>*@
                         </div>
                         <div class="blockDate">
-                            <p> @dt_next_payment.Day @glb.GetShortMonth(dt_next_payment.Month) @dt_next_payment.Year</p>
+                            <p>@glb.GetShortMonth(dt_next_payment.Month) @dt_next_payment.Day, @dt_next_payment.Year</p>
                         </div>
                     </div>
 

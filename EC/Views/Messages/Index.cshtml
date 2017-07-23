@@ -61,7 +61,7 @@
                                 <p class="text"><a href="/Case/@message_type/@_message.MessageCaseID">@_message._message.body_tx</a></p>
                             </div>
                             <div class="blockDate">
-                                <p>@_message._message.created_dt.Value.Day  @glb.GetShortMonth(_message._message.created_dt.Value.Month)</p>
+                                <p>@glb.GetShortMonth(_message._message.created_dt.Value.Month) @_message._message.created_dt.Value.Day</p>
                             </div>
                         </div>
                     </div>
