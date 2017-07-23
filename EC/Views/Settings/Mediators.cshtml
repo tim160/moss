@@ -40,8 +40,7 @@
                     <!--empty block-->
                     <div class="blockIteamTeam footerInputStyle">
 
-
-                        <a href="#" class="positionLinkIviteMediator greenButton greenButtonCustom disableUnderline">setup case administrator</a>
+                        @Html.ActionLink("setup case administrator", "User", new { id = 0 }, new { @class = "positionLinkIviteMediator greenButton greenButtonCustom disableUnderline" })
                     </div>
                     <!--end empty block-->
                     @foreach (user _user in AllUsers)

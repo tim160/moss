@@ -140,12 +140,21 @@ namespace EC.Controllers
         // GET: Settings
         public ActionResult User(int? id)
         {
+            user _user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            if (_user == null || _user.id == 0)
+                return RedirectToAction("Index", "Account");
+
+            //UserModel um = new UserModel(_user.id);
+            //ViewBag.um = um;
+            ViewBag.user_id = _user.id;
+
+            return View();
+
             //int user_id = 2;
             if (id == null)
             {
                 return RedirectToAction("Index", "Settings");
             }
-            user _user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (_user == null || _user.id == 0)
                 return RedirectToAction("Index", "Account");
 
