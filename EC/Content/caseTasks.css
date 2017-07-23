@@ -2469,7 +2469,7 @@ form.selectBlock.assignedToSelect .dropdown li .blockPhoto {
 /*--- END Modal Window -----*/
 .rightBlockContent .resolveSoledBlock .positionDropDown .closeCustom.flag {
     right: 45px;
-    top: -27px;
+    top: -15px;
 }
 .caseMediatorBig {
     width: calc(100% - 105px);

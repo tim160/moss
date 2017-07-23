@@ -49,6 +49,9 @@ html, body {
     min-height: 700px;
     background-image: url('/Content/img/website-report.jpg');
 }
+#wrap.wrap_cc {    
+    background-image: url('/Content/img/website-report-cc.jpg');
+}
 #header {
     background-color: rgba(255, 255, 255, 0.7);
     width: 100%;
@@ -94,6 +97,7 @@ html, body {
     font-family: 'Open Sans', arial, verdana, sans-serif;
     font-weight: 700;
     cursor: pointer;
+    transition: 1s;
 }
 .bigButton a {
     text-decoration: none;
@@ -178,6 +182,7 @@ html, body {
     cursor: pointer;
     font-weight: 700;
     text-decoration: none;
+    transition: 1s;
 }
 
 .login a:hover, .login a:focus {
@@ -185,21 +190,21 @@ html, body {
     text-decoration: underline;
 }
 
-.login:active{
+.login a:active{
     text-decoration: none;
     color: #345c60;
 }
 
-#header_cc .login {
+#header_cc .login a {
     color: #4da456;
 }
 
-#header_cc .login:hover, #header_cc .login:focus {
+#header_cc .login a:hover, #header_cc .login a:focus {
     color: #4da456;
     text-decoration: underline;
 }
 
-#header_cc .login:active {
+#header_cc .login a:active {
     text-decoration: none;
     color: #2e7037;
 }
@@ -300,11 +305,23 @@ html, body {
 }
 
 #bottomBody_cc {
-    height: 420px;
     background-color: transparent;
+    height: 420px;
+    text-align: center;
+}
+#bottomBody_cc .itemBlock {
+    transition: 1s;
+    width: 33%;
+}
+#bottomBody_cc .textBlock {
+    color: #9ab7b7;
 }
 #bottomBody_cc .fourthTitle, #bottomBody_cc .itemBlock:nth-child(2){
     display: none;
+}
+
+.wrap_cc .fourthTitle {
+    margin-bottom: 100px;
 }
 /*#footer {
     background-color:rgba(255, 255, 255, 0.7);
