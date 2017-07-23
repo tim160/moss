@@ -313,7 +313,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Only Case Managers and Case Executives can remove locations..
+        ///   Looks up a localized string similar to Only Platform Managers and Case Reviewers can remove locations..
         /// </summary>
         public static string admin_escalation_warning {
             get {
@@ -322,7 +322,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Administration Mediator.
+        ///   Looks up a localized string similar to Platform Manager.
         /// </summary>
         public static string AdministrationMediator {
             get {
@@ -340,7 +340,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Case Manager.
+        ///   Looks up a localized string similar to Platform Manager.
         /// </summary>
         public static string AdminMediator {
             get {
@@ -412,7 +412,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mediator already invited.
+        ///   Looks up a localized string similar to Case Administrator already invited.
         /// </summary>
         public static string AlreadyInvited {
             get {
@@ -592,7 +592,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Assign Mediator.
+        ///   Looks up a localized string similar to Assign Case Investigator.
         /// </summary>
         public static string AssignMediator {
             get {
@@ -745,6 +745,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Campus Alert Manager.
+        /// </summary>
+        public static string CampusAlertManager {
+            get {
+                return ResourceManager.GetString("CampusAlertManager", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please take note of your login information NOW. Write it down somewhere safe (or enter it into your password protected smartphone) so that you can access it later to check the status of your report..
         /// </summary>
         public static string canAccess {
@@ -813,6 +822,15 @@ namespace EC.App_LocalResources {
         public static string CaseCompleted {
             get {
                 return ResourceManager.GetString("CaseCompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Case File.
+        /// </summary>
+        public static string CaseFile {
+            get {
+                return ResourceManager.GetString("CaseFile", resourceCulture);
             }
         }
         
@@ -898,7 +916,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Case re-opened.
+        ///   Looks up a localized string similar to Case Re-Opened.
         /// </summary>
         public static string CaseReOpened {
             get {
@@ -934,11 +952,20 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Case returned for futher investigation.
+        ///   Looks up a localized string similar to Case returned for futher investigation..
         /// </summary>
         public static string CaseReturnedFutherInvestigation {
             get {
                 return ResourceManager.GetString("CaseReturnedFutherInvestigation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Case Routing.
+        /// </summary>
+        public static string CaseRouting {
+            get {
+                return ResourceManager.GetString("CaseRouting", resourceCulture);
             }
         }
         
@@ -1051,6 +1078,24 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Categories for Crime Statistics.
+        /// </summary>
+        public static string CategoriesCrimeStatistics {
+            get {
+                return ResourceManager.GetString("CategoriesCrimeStatistics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Categories of Geographic Locations.
+        /// </summary>
+        public static string CategoriesGeographicLocations {
+            get {
+                return ResourceManager.GetString("CategoriesGeographicLocations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change.
         /// </summary>
         public static string Change {
@@ -1092,6 +1137,15 @@ namespace EC.App_LocalResources {
         public static string Chooseyour {
             get {
                 return ResourceManager.GetString("Chooseyour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clery Act Crime Statistics Report.
+        /// </summary>
+        public static string CleryActCrimeStatisticsReport {
+            get {
+                return ResourceManager.GetString("CleryActCrimeStatisticsReport", resourceCulture);
             }
         }
         
@@ -1168,11 +1222,29 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Educational Instituition.
+        /// </summary>
+        public static string Company_CC {
+            get {
+                return ResourceManager.GetString("Company_CC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Company name is already in use..
         /// </summary>
         public static string CompanyInUse {
             get {
                 return ResourceManager.GetString("CompanyInUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name of Educational Institution is already in use..
+        /// </summary>
+        public static string CompanyInUse_CC {
+            get {
+                return ResourceManager.GetString("CompanyInUse_CC", resourceCulture);
             }
         }
         
@@ -1204,11 +1276,29 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name of educational institution.
+        /// </summary>
+        public static string Companyname_CC {
+            get {
+                return ResourceManager.GetString("Companyname_CC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Company Name.
         /// </summary>
         public static string CompanyNameUp {
             get {
                 return ResourceManager.GetString("CompanyNameUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name of Educational Institution.
+        /// </summary>
+        public static string CompanyNameUp_CC {
+            get {
+                return ResourceManager.GetString("CompanyNameUp_CC", resourceCulture);
             }
         }
         
@@ -1222,6 +1312,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Profile of Educational Institution.
+        /// </summary>
+        public static string CompanyProfile_CC {
+            get {
+                return ResourceManager.GetString("CompanyProfile_CC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to save company.
         /// </summary>
         public static string CompanySavingFailed {
@@ -1231,11 +1330,29 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to save Educational Institution.
+        /// </summary>
+        public static string CompanySavingFailed_CC {
+            get {
+                return ResourceManager.GetString("CompanySavingFailed_CC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Company Settings.
         /// </summary>
         public static string CompanySettings {
             get {
                 return ResourceManager.GetString("CompanySettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string CompanySettings_CC {
+            get {
+                return ResourceManager.GetString("CompanySettings_CC", resourceCulture);
             }
         }
         
@@ -1497,6 +1614,15 @@ namespace EC.App_LocalResources {
         public static string Daily {
             get {
                 return ResourceManager.GetString("Daily", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Daily Crime Log Manager.
+        /// </summary>
+        public static string DailyCrimeLogManager {
+            get {
+                return ResourceManager.GetString("DailyCrimeLogManager", resourceCulture);
             }
         }
         
@@ -1807,11 +1933,20 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EmployeeConfidential recommends.
+        ///   Looks up a localized string similar to Employee Confidential recommends.
         /// </summary>
         public static string ECrecommendations {
             get {
                 return ResourceManager.GetString("ECrecommendations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Campus Confidential recommends.
+        /// </summary>
+        public static string ECrecommendations_CC {
+            get {
+                return ResourceManager.GetString("ECrecommendations_CC", resourceCulture);
             }
         }
         
@@ -1843,6 +1978,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Campus Confidential Notification - Case Escalated.
+        /// </summary>
+        public static string Email_Title_CaseEscalated_CC {
+            get {
+                return ResourceManager.GetString("Email_Title_CaseEscalated_CC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Employee Confidential Notification - Case Escalated.
         /// </summary>
         public static string Email_Title_CaseEscalatedTimeline {
@@ -1852,11 +1996,29 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Campus Confidential Notification - Case Escalated.
+        /// </summary>
+        public static string Email_Title_CaseEscalatedTimeline_CC {
+            get {
+                return ResourceManager.GetString("Email_Title_CaseEscalatedTimeline_CC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Employee Confidential Notification - Case Reopened.
         /// </summary>
         public static string Email_Title_CaseReopened {
             get {
                 return ResourceManager.GetString("Email_Title_CaseReopened", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Campus Confidential Notification - Case Reopened.
+        /// </summary>
+        public static string Email_Title_CaseReopened_CC {
+            get {
+                return ResourceManager.GetString("Email_Title_CaseReopened_CC", resourceCulture);
             }
         }
         
@@ -1879,6 +2041,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Campus Confidential Case Assignment.
+        /// </summary>
+        public static string Email_Title_MediatorAssigned_CC {
+            get {
+                return ResourceManager.GetString("Email_Title_MediatorAssigned_CC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invitation to Join Case Administration Team.
         /// </summary>
         public static string Email_Title_MediatorInvited {
@@ -1888,7 +2059,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mediator role change.
+        ///   Looks up a localized string similar to Case Administrator role change.
         /// </summary>
         public static string Email_Title_MediatorRoleChanged {
             get {
@@ -1897,7 +2068,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mediator status change.
+        ///   Looks up a localized string similar to Case Administrator status change.
         /// </summary>
         public static string Email_Title_MediatorStatusChanged {
             get {
@@ -1915,11 +2086,29 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New report has been filed with Campus Confidential.
+        /// </summary>
+        public static string Email_Title_NewCase_CC {
+            get {
+                return ResourceManager.GetString("Email_Title_NewCase_CC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New report has been filed with Employee Confidential.
         /// </summary>
         public static string Email_Title_NewCaseInvolved {
             get {
                 return ResourceManager.GetString("Email_Title_NewCaseInvolved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New report has been filed with Campus Confidential.
+        /// </summary>
+        public static string Email_Title_NewCaseInvolved_CC {
+            get {
+                return ResourceManager.GetString("Email_Title_NewCaseInvolved_CC", resourceCulture);
             }
         }
         
@@ -1933,11 +2122,29 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Registration with Campus Confidential.
+        /// </summary>
+        public static string Email_Title_NewCompany_CC {
+            get {
+                return ResourceManager.GetString("Email_Title_NewCompany_CC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Employee Confidential Notification - New Message.
         /// </summary>
         public static string Email_Title_NewMessage {
             get {
                 return ResourceManager.GetString("Email_Title_NewMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Campus Confidential Notification - New Message.
+        /// </summary>
+        public static string Email_Title_NewMessage_CC {
+            get {
+                return ResourceManager.GetString("Email_Title_NewMessage_CC", resourceCulture);
             }
         }
         
@@ -1960,7 +2167,16 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New Case Officer has registered.
+        ///   Looks up a localized string similar to Campus Confidential Notification – New Task.
+        /// </summary>
+        public static string Email_Title_NewTask_CC {
+            get {
+                return ResourceManager.GetString("Email_Title_NewTask_CC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Case Administrator has registered.
         /// </summary>
         public static string Email_Title_NewUser {
             get {
@@ -1974,6 +2190,15 @@ namespace EC.App_LocalResources {
         public static string Email_Title_NextStep {
             get {
                 return ResourceManager.GetString("Email_Title_NextStep", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Campus Confidential notification - Case Update.
+        /// </summary>
+        public static string Email_Title_NextStep_CC {
+            get {
+                return ResourceManager.GetString("Email_Title_NextStep_CC", resourceCulture);
             }
         }
         
@@ -2023,6 +2248,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Campus awareness.
+        /// </summary>
+        public static string EmployeeAwareness_CC {
+            get {
+                return ResourceManager.GetString("EmployeeAwareness_CC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Employee awareness materials.
         /// </summary>
         public static string EmployeeAwarenessMaterials {
@@ -2032,11 +2266,29 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Campus awareness materials.
+        /// </summary>
+        public static string EmployeeAwarenessMaterials_CC {
+            get {
+                return ResourceManager.GetString("EmployeeAwarenessMaterials_CC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Employee Awareness.
         /// </summary>
         public static string EmployeeAwarenessUp {
             get {
                 return ResourceManager.GetString("EmployeeAwarenessUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Campus Awareness.
+        /// </summary>
+        public static string EmployeeAwarenessUp_CC {
+            get {
+                return ResourceManager.GetString("EmployeeAwarenessUp_CC", resourceCulture);
             }
         }
         
@@ -2055,6 +2307,15 @@ namespace EC.App_LocalResources {
         public static string EmployeeConfidentialCaseNumber {
             get {
                 return ResourceManager.GetString("EmployeeConfidentialCaseNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Campus Confidential Case number.
+        /// </summary>
+        public static string EmployeeConfidentialCaseNumber_CC {
+            get {
+                return ResourceManager.GetString("EmployeeConfidentialCaseNumber_CC", resourceCulture);
             }
         }
         
@@ -2293,6 +2554,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Find an Educational Institute by name or code.
+        /// </summary>
+        public static string FindOrganization_CC {
+            get {
+                return ResourceManager.GetString("FindOrganization_CC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to First name.
         /// </summary>
         public static string Firstname {
@@ -2370,6 +2640,15 @@ namespace EC.App_LocalResources {
         public static string FormerEmployee {
             get {
                 return ResourceManager.GetString("FormerEmployee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Former Student.
+        /// </summary>
+        public static string FormerEmployee_CC {
+            get {
+                return ResourceManager.GetString("FormerEmployee_CC", resourceCulture);
             }
         }
         
@@ -2464,6 +2743,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Has case been reported to anyone outside the educational institution?.
+        /// </summary>
+        public static string Hascasereportedoutside_CC {
+            get {
+                return ResourceManager.GetString("Hascasereportedoutside_CC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Has this incident been previosly reported.
         /// </summary>
         public static string HasThisIncidentBeenPrevioslyReported {
@@ -2518,11 +2806,29 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to If not reported via Campus Confidential please provide case description.
+        /// </summary>
+        public static string IfNotReportedViaEmployeeConfidentialPleaseProvideCaseDescription_CC {
+            get {
+                return ResourceManager.GetString("IfNotReportedViaEmployeeConfidentialPleaseProvideCaseDescription_CC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to If you witness (or know of) an incident that compromises your organization, contribute to the solution. Report it..
         /// </summary>
         public static string Ifyouwitness {
             get {
                 return ResourceManager.GetString("Ifyouwitness", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you witness (or know of) an incident that compromises your educational institution, contribute to the solution. Report it..
+        /// </summary>
+        public static string Ifyouwitness_CC {
+            get {
+                return ResourceManager.GetString("Ifyouwitness_CC", resourceCulture);
             }
         }
         
@@ -2869,7 +3175,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Involved Mediators.
+        ///   Looks up a localized string similar to Involved Case Administrators.
         /// </summary>
         public static string InvolvedMediators {
             get {
@@ -2883,6 +3189,15 @@ namespace EC.App_LocalResources {
         public static string IsCaseUrgent_q {
             get {
                 return ResourceManager.GetString("IsCaseUrgent_q", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is this a Clery Act Crime?.
+        /// </summary>
+        public static string IsCleryActCrime {
+            get {
+                return ResourceManager.GetString("IsCleryActCrime", resourceCulture);
             }
         }
         
@@ -3184,7 +3499,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mediator.
+        ///   Looks up a localized string similar to Case admin.
         /// </summary>
         public static string Mediator {
             get {
@@ -3193,7 +3508,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mediator already registered.
+        ///   Looks up a localized string similar to Case Administrator already registered.
         /// </summary>
         public static string MediatorAlreadyRegistered {
             get {
@@ -3202,7 +3517,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mediators.
+        ///   Looks up a localized string similar to Case Administrators.
         /// </summary>
         public static string Mediators {
             get {
@@ -3211,7 +3526,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Case Managers.
+        ///   Looks up a localized string similar to Case Administrators.
         /// </summary>
         public static string MediatorsAssigned {
             get {
@@ -3229,7 +3544,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mediators excluded.
+        ///   Looks up a localized string similar to Case Administrators excluded.
         /// </summary>
         public static string Mediatorsinvolved {
             get {
@@ -3238,7 +3553,16 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mediators Messages.
+        ///   Looks up a localized string similar to Case Administrators excluded.
+        /// </summary>
+        public static string Mediatorsinvolved_CC {
+            get {
+                return ResourceManager.GetString("Mediatorsinvolved_CC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Case Admins Messages.
         /// </summary>
         public static string MediatorsMessagesUp {
             get {
@@ -3247,11 +3571,20 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mediators will get back to you quickly and keep you updated on the status of the case. All companies that use Employee Confidential are required to have a C-Suite Escalation Process..
+        ///   Looks up a localized string similar to Case Administrators will get back to you quickly and keep you updated on the status of the case. All companies that use Employee Confidential are required to have a C-Suite Escalation Process..
         /// </summary>
         public static string Mediatorswillgetback {
             get {
                 return ResourceManager.GetString("Mediatorswillgetback", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Case Administrators will get back to you quickly and keep you updated on the status of the case. All companies that use Campus Confidential are required to have a C-Suite Escalation Process..
+        /// </summary>
+        public static string Mediatorswillgetback_CC {
+            get {
+                return ResourceManager.GetString("Mediatorswillgetback_CC", resourceCulture);
             }
         }
         
@@ -3261,6 +3594,15 @@ namespace EC.App_LocalResources {
         public static string MemerOfPublic {
             get {
                 return ResourceManager.GetString("MemerOfPublic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Visitor.
+        /// </summary>
+        public static string MemerOfPublic_CC {
+            get {
+                return ResourceManager.GetString("MemerOfPublic_CC", resourceCulture);
             }
         }
         
@@ -3288,6 +3630,15 @@ namespace EC.App_LocalResources {
         public static string Message_1 {
             get {
                 return ResourceManager.GetString("Message_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Educational Institution culture.
+        /// </summary>
+        public static string Message_1_CC {
+            get {
+                return ResourceManager.GetString("Message_1_CC", resourceCulture);
             }
         }
         
@@ -3661,6 +4012,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Number of students, faculty and staff.
+        /// </summary>
+        public static string NumberEmployees_CC {
+            get {
+                return ResourceManager.GetString("NumberEmployees_CC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Case administrator excluded at request of reporter.
         /// </summary>
         public static string OfficersExcludedByReporter {
@@ -3733,7 +4093,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to save other departments.
+        ///   Looks up a localized string similar to Saving Other Deparment failed..
         /// </summary>
         public static string OtherDepartmentSavingFailed {
             get {
@@ -4624,11 +4984,29 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Scope.
+        /// </summary>
+        public static string Scope {
+            get {
+                return ResourceManager.GetString("Scope", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select an option.
         /// </summary>
         public static string Selectanoption {
             get {
                 return ResourceManager.GetString("Selectanoption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Case Reviewer to Sign-Off.
+        /// </summary>
+        public static string SelectCaseReviewerToSignoff {
+            get {
+                return ResourceManager.GetString("SelectCaseReviewerToSignoff", resourceCulture);
             }
         }
         
@@ -4768,7 +5146,25 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sort by Mediator.
+        ///   Looks up a localized string similar to Setup Case Administrator Profiles:.
+        /// </summary>
+        public static string SetupMediatorProfiles {
+            get {
+                return ResourceManager.GetString("SetupMediatorProfiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Severity.
+        /// </summary>
+        public static string Severity {
+            get {
+                return ResourceManager.GetString("Severity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sort by case admins.
         /// </summary>
         public static string SortByMediator {
             get {
@@ -5011,7 +5407,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to These mediator(s) could possibly access your report. Mark off any mediators who you think may be involved in the incident..
+        ///   Looks up a localized string similar to These case administrator(s) could possibly access your report. Mark off any case administrator who you think may be involved in the incident..
         /// </summary>
         public static string ThismediatorsCould {
             get {
@@ -5025,6 +5421,15 @@ namespace EC.App_LocalResources {
         public static string Timeelapsed {
             get {
                 return ResourceManager.GetString("Timeelapsed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timeline.
+        /// </summary>
+        public static string Timeline {
+            get {
+                return ResourceManager.GetString("Timeline", resourceCulture);
             }
         }
         
@@ -5223,6 +5628,15 @@ namespace EC.App_LocalResources {
         public static string Useonline {
             get {
                 return ResourceManager.GetString("Useonline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Permissions.
+        /// </summary>
+        public static string UserPermissions {
+            get {
+                return ResourceManager.GetString("UserPermissions", resourceCulture);
             }
         }
         

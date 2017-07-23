@@ -12,6 +12,7 @@
     int user_id = (Int32)ViewBag.user_id;
     int report_id = (Int32)ViewBag.report_id;
     ReportModel rm = new ReportModel(report_id);
+    List<report_non_mediator_involved> _involved = rm._witnesses;
     UserModel um = new UserModel(user_id);
 
     int unread_message_number = um.Unread_Messages_Quantity(report_id, 1);
@@ -155,17 +156,19 @@
 
                         <div class="listHead"> @GlobalRes.PartiesInvolved</div>
                         <div class="reportBlock">
-                            @if (rm._witnesses != null && rm._witnesses.Count > 0)
+                            @if (_involved != null && _involved.Count > 0)
                             {
-                                <div class="report">
-                                    @foreach (EC.Models.Database.report_non_mediator_involved witness in rm._witnesses)
-                                    {
-                                        <div class="titleReport">
-                                            @Html.Raw(@witness.Name + " " + @witness.last_name)
-                                        </div>
-                                        <div class="reportText">@Html.Raw(@witness.Title + ", " + @witness.Role)</div>
-                                    }
-                                </div>
+                                <table>
+                                    <tbody>
+                                            @foreach (var witness in _involved)
+                                            {
+                                                <tr>
+                                                    <td class="positionTitleReport">@Html.Raw(@witness.Name + " " + @witness.last_name)</td>
+                                                    <td class="positionReportText reportTextBlack">@Html.Raw(@witness.Title + ", " + @witness.Role)</td>
+                                                </tr>
+                                            }
+                                    </tbody>
+                                </table>
                             }
 
                             @if (rm._involved_mediators_user_list.Count > 0)
@@ -229,7 +232,46 @@
                         <div class="listHead"> @GlobalRes.CaseInformation</div>
                         <div class="reportBlock">
                             <div class="report">
-                                <div class="titleReport">@GlobalRes.IncidentType:</div>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td class="positionTitleReport">@GlobalRes.IncidentType:</td>
+                                            <td class="positionReportText reportTextBlack">@rm._secondary_type_string</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="positionTitleReport">@GlobalRes.IncidentDateUp:</td>
+                                            <td class="positionReportText reportTextBlack">@m_DateTimeHelper.ConvertDateToLongMonthString(rm._report.incident_dt)</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="positionTitleReport">@GlobalRes.isOngoing:</td>
+                                            <td class="positionReportText reportTextBlack">@rm._is_ongoing</td>
+                                        </tr>
+                                        @if (!String.IsNullOrEmpty(rm._report.report_frequency_text))
+                                        {
+                                            <tr>
+                                                <td class="positionTitleReport">&nbsp;</td>
+                                                <td class="positionReportText reportTextBlack">
+                                                    @rm._report.report_frequency_text
+                                                </td>
+                                            </tr>
+                                        }
+                                        <tr>
+                                            <td class="positionTitleReport">@GlobalRes.incidentResult:</td>
+                                            <td class="positionReportText reportTextBlack">@rm._has_injury_damage</td>
+                                        </tr>
+
+                                        @if (!String.IsNullOrEmpty(rm._report.injury_damage))
+                                        {
+                                            <tr>
+                                                <td class="positionReportText reportTextBlack">
+                                                    @rm._report.injury_damage
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+
+                                @*<div class="titleReport">@GlobalRes.IncidentType:</div>
                                 <div class="reportText"> @rm._secondary_type_string</div>
 
                                 <div class="titleReport">@GlobalRes.IncidentDateUp:</div>
@@ -247,12 +289,13 @@
 
                                 <div class="titleReport">@GlobalRes.incidentResult:</div>
                                 <div class="reportText">@rm._has_injury_damage</div>
+
                                 @if (!String.IsNullOrEmpty(rm._report.injury_damage))
                                 {
                                     <div class="reportText">
                                         @rm._report.injury_damage
                                     </div>
-                                }
+                                }*@
                                 <div class="titleReportAll">
                                     <div class="incidentDescription">
                                         <p class="titleIncidentDescription">@GlobalRes.IncidentDescription:</p>

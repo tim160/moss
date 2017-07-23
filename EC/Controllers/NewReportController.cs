@@ -73,6 +73,17 @@ namespace EC.Controllers.ViewModel
 
             ViewBag.attachmentFiles = getAttachmentFiles(id.Value);
             ViewBag.getNonMediatorsInvolved = getNonMediatorsInvolved(id.Value);
+            ViewBag.AllScopes = db.scope.OrderBy(x => x.scope_en).ToList();
+            ViewBag.AllSeverities = db.severity.OrderBy(x => x.severity_en).ToList();
+            ViewBag.AllDepartments = db.company_department.Where(x => x.company_id == um._user.company_id).OrderBy(x => x.department_en).ToList();
+            ViewBag.AllIncidets = db.company_secondary_type.Where(x => x.company_id == um._user.company_id).OrderBy(x => x.secondary_type_en).ToList();
+            ViewBag.AllOwners = rm._mediators_whoHasAccess_toReport.OrderBy(x => x.first_nm).ToList();
+            ViewBag.AllPolicies = new List<KeyValuePair<string, string>>()
+            {
+                new KeyValuePair<string, string>("1", "some_file_1.pdf"),
+                new KeyValuePair<string, string>("1", "some_file_2.pdf"),
+                new KeyValuePair<string, string>("2", "some_file_3.pdf"),
+            };
 
             bool has_access = rm.HasAccessToReport(user_id);
 
@@ -200,6 +211,11 @@ namespace EC.Controllers.ViewModel
             int report_id = Convert.ToInt16(Request["report_id"]);
             int user_id = Convert.ToInt16(Request["user_id"]);
             string description = Request["description"];
+            int scopeId = Convert.ToInt32(Request["scopeId"]);
+            int severityId = Convert.ToInt32(Request["severityId"]);
+            int departmentId = Convert.ToInt32(Request["departmentId"]);
+            int incydentId = Convert.ToInt32(Request["incydentId"]);
+            int ownerId = Convert.ToInt32(Request["ownerId"]);
 
 
             report_investigation_status addStatus =
@@ -213,6 +229,15 @@ namespace EC.Controllers.ViewModel
                 };
 
             db.report_investigation_status.Add(addStatus);
+            db.SaveChanges();
+
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+
+            var report = db.report.FirstOrDefault(x => x.id == report_id);
+            report.scope_id = scopeId;
+            report.severity_id = severityId;
+            report.severity_user_id = user.id;
+            report.scope_user_id = user.id;
             db.SaveChanges();
 
 

@@ -26,7 +26,7 @@ namespace EC.Controllers
 
         private readonly UserModel userModel = UserModel.inst;
         private readonly CompanyModel companyModel = CompanyModel.inst;
-        private readonly ReportModel reportModel = ReportModel.inst;
+        private readonly ReportModel reportModel = new ReportModel();
       
         //
         // GET: /Report/
@@ -87,10 +87,12 @@ namespace EC.Controllers
                 if(reportModel.isCustomIncidentTypes(ViewBag.currentCompanyId)) {
                     /*custom types*/
                     ViewBag.secondary_type_mandatory = reportModel.getCompanySecondaryType(ViewBag.currentCompanyId);
+                    ViewBag.CustomSecondaryType = true;
                 } else
                 {
                     /*default*/
                     ViewBag.secondary_type_mandatory = reportModel.getSecondaryTypeMandatory();
+                    ViewBag.CustomSecondaryType = false;
                 }
 
                 //ViewBag.currentCompanySubmitted = CompanyModel.inst.GetById(id).company_nm;

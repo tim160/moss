@@ -206,20 +206,196 @@
 
                 @model message
 
-            <!-- ============================== START Accept case ==================================== -->
+                var allScopes = (List<scope>)ViewBag.AllScopes;
+                var allSeverities = (List<severity>)ViewBag.AllSeverities;
+                var allDepartments = (List<company_department>)ViewBag.AllDepartments;
+                var allIncidets = (List<company_secondary_type>)ViewBag.AllIncidets;
+                var allOwners = (List<user>)ViewBag.AllOwners;
+                var allPolicies = (List<KeyValuePair<string, string>>)ViewBag.AllPolicies;                
 
+
+                <!-- ============================== START Accept case ==================================== -->
+
+
+                <style>
+                    .blockAcceptCase table {
+                        width: 100%;
+                    }
+
+                    .blockAcceptCase select {
+                        width: 220px;
+                        height: 40px;
+                        margin-left: 12px;
+                    }
+                </style>
                 <div class="contentViewReport blockAcceptCase" style="display: none;">
-                    <div class="headerblockButtons">
-                        <!-- mark_spam button -->
 
-                        <div class="closeIcon"></div>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td class="floatLeft"><p>@GlobalRes.Acceptcase</p></td>
+                                <td class="headerblockButtons"><div class="closeIcon"></div></td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <!--table left-->
+                                    <table>
+                                        <tr>
+                                            <td>Incydent Type :</td>
+                                            <td>
+                                                @Html.DropDownList("IncydentId", new SelectList(allIncidets, "id", "secondary_type_en"), new { @class = "" })
+                                            </td>
+                                        </tr>
+                                       
+                                        <tr>
+                                            <td>Department: </td>
+                                            <td>
+                                                @Html.DropDownList("DepartmentId", new SelectList(allDepartments, "id", "department_en"), new { @class = "" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Scope:</td>
+                                            <td>
+                                                @Html.DropDownList("ScopeId", new SelectList(allScopes, "id", "scope_en"), new { @class = "" })
+                                            </td>
+                                        </tr>
+
+                                       
+                                    </table>
+
+
+                                </td>
+                                <td>
+                                    <!--table right-->
+                                    <table>
+                                        <tr>
+                                            <td>Severity:</td>
+                                            <td>
+                                                @Html.DropDownList("SeverityId", new SelectList(allSeverities, "id", "severity_en"), new { @class = "" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Issue Owner:</td>
+                                            <td>
+                                                @Html.DropDownList("OwnerId", new SelectList(allOwners, "id", "first_nm"), new { @class = "" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Policy:</td>
+                                            <td>
+                                                @foreach (var item in allPolicies)
+                                                {
+                                                    <div>@item.Value</div>
+                                                }
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="addComment addComment2@{@class_ext}">
+                        <div class="blockPersonal">
+
+                            <div class="blockPhoto">
+                                @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", user_id }, { "is_owner", true } })
+
+
+                            </div>
+                            <div class="arrow green"></div>
+                        </div>
+
+
+                        <div class="messageText acceptCaseNote">
+                            <textarea cols="20" id="body_text" class="green" name="body_tx" rows="2" autofocus></textarea>
+                        </div>
                     </div>
+                    <div class="newMessageBtn">
+                        @if (is_cc.Value)
+                        {
+                            <span class="acceptNewCase acceptNewCase_cc">@GlobalRes.Acceptcase.ToLower()</span>
+                        }
+                        else
+                        {
+                            <span class="acceptNewCase">@GlobalRes.Acceptcase.ToLower()</span>
+                        }
+                        <input type="submit" value="new message" style="display: none;">
+                    </div>
+
+                    @*<div class="headerblockButtons">
+                            <div class="closeIcon"></div>
+                        </div>
+                        <div class="contentBlockCase">
+                            <p class="titleCase">@GlobalRes.Acceptcase</p>
+                        </div>*@
+                    @*<div class="headerblockButtons">
+                        <div class="closeIcon"></div>
+                    </div>*@
                     <div class="contentBlockCase">
-                        <p class="titleCase">@GlobalRes.Acceptcase</p>
-                        <p class="textCace">@GlobalRes.Notification_will_sent_reporter</p>
+                        <p class="titleCase"></p>
                     </div>
 
                     <form action="" method="post">
+                        @*<div class="contentBlockCase">
+                                <p class="titleCase">@EC.Localization.Resources.GetString("Scope")</p>
+                            </div>
+                            <div class="contentBlockCase">
+                                <div class="textCace">
+                                    @foreach (var scope in allScopes)
+                                    {
+                                        <div class="freeBlock inputRadio option active" data-val="@scope.id">
+                                            <label class="inputBlock" for="@("scope" + scope.id)">
+                                                <input id="@("scope" + scope.id)" type="radio" name="scopeId" value="@scope.id" />
+                                                <span class="radioButton"></span>
+                                                <span class="radioTitle">@scope.scope_en</span>
+                                            </label>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="contentBlockCase">
+                                <p class="titleCase">@EC.Localization.Resources.GetString("Severity")</p>
+                            </div>
+                            <div class="contentBlockCase">
+                                <div class="textCace">
+                                    @Html.DropDownList("SeverityId", new SelectList(allSeverities, "id", "severity_en"), new { @class = "" })
+                                </div>
+                            </div>
+
+                            <div class="contentBlockCase">
+                                <p class="textCace">@GlobalRes.Notification_will_sent_reporter</p>
+                            </div>
+                        <div class="contentBlockCase">
+                            <p class="titleCase"></p>
+                        </div>
+                        <div class="contentBlockCase">
+                            <div class="textCace">
+                                <div class="freeBlock inputRadio option active" data-val="@scope.id">
+                                    <label class="inputBlock" for="@(" scope" + scope.id)">
+                                        <input id="@(" scope" + scope.id)" type="radio" name="scopeId" value="@scope.id" />
+                                        <span class="radioButton"></span>
+                                        <span class="radioTitle"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="contentBlockCase">
+                            <p class="titleCase"></p>
+                        </div>
+                        <div class="contentBlockCase">
+                            <div class="textCace">
+                            </div>
+                        </div>
+
+                        <div class="contentBlockCase">
+                            <p class="textCace"></p>
+                        </div>
+
+
                         <div class="addComment addComment2@{@class_ext}">
                             <div class="blockPersonal">
 
@@ -243,10 +419,10 @@
                             }
                             else
                             {
-                                <span class="acceptNewCase">@GlobalRes.Acceptcase.ToLower()</span>                                
+                                <span class="acceptNewCase">@GlobalRes.Acceptcase.ToLower()</span>
                             }
                             <input type="submit" value="new message" style="display: none;">
-                        </div>
+                        </div>*@
                     </form>
 
                 </div>
@@ -481,8 +657,8 @@
 
 
 
-                <script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
-                <script>
+<script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
+<script>
     $(document).ready(function () {
         //$        //name="spamMessage
         function showBlockDocs(){
@@ -517,18 +693,26 @@
                             var description = $('.acceptCaseNote textarea').val();
 
                             reopenOrAcceptCase(@Html.Raw(report_id), @Html.Raw(user_id), description);
-
-            var str = window.location.href;
-            window.location.href = str;
-        });
+                        });
 
 
         function reopenOrAcceptCase(report_id, user_id, description) {
             $.ajax({
                 method: "POST",
                 url: "/NewReport/AcceptOrReopenCase",
-                data: { report_id : report_id, user_id: user_id, description : description }
-            }).done(function(data) {//data from server
+                data: { 
+                    report_id : report_id, 
+                    user_id: user_id, 
+                    description : description, 
+                    incydentId : $('#IncydentId').val(),
+                    departmentId: $('#DepartmentId').val(),
+                    scopeId : $('#ScopeId').val(),
+                    severityId: $('#SeverityId').val(),
+                    ownerId: $('#OwnerId').val()
+                }
+            }).done(function(data) {
+                var str = window.location.href;
+                window.location.href = str;
             }).fail(function(error){
                 console.log(error);
             });
@@ -599,6 +783,54 @@
                 $('input#markSpam').click();
             });
         }
+
+        function setDropdown() {
+            $('.dropdown').unbind('click');
+            $('.dropdown ul li').unbind('click');
+
+            $('.dropdown').on('click',function () {
+                $(this).children('ul').slideToggle(150);
+                if ($(this).hasClass('open')) {
+                    $(this).removeClass('open');
+                    return false;
+                } else {
+                    $(this).addClass('open');
+                    return false;
+                }
+
+                return false;
+            })
+
+            .hover(
+            function () {
+
+            },
+            function () {
+                $(this).children('ul').slideUp(150);
+                $(this).removeClass('open');
+            });
+
+            $('.dropdown ul li').click(function () {
+                var sitem = $(this).html();
+                var sid = $(this).attr('value');
+                if ($(this).attr('data-id') == "Not Listed") {
+                    $(this).siblings('li').removeClass('selected');
+                    $(this).addClass('selected');
+                    $(this).parent('ul').siblings('span.selected').html(sitem);
+                    $(this).parent('ul').siblings('input').val(sid);
+                    $(this).parent('ul').parent('.subject').change();
+                    $(this).parent('ul').parent('.subject').find('.validate').addClass('vlCorrect');
+                    return;
+                }
+                $(this).siblings('li').removeClass('selected');
+                $(this).addClass('selected');
+                $(this).parent('ul').siblings('span.selected').html(sitem);
+                $(this).parent('ul').siblings('input').val(sid);
+                $(this).parent('ul').parent('.subject').change();
+                $(this).parent('ul').parent('.subject').find('.validate').change();
+            });
+        }
+
         showBlockDocs();
         sendMessageSpam();
         styleTextArea();
@@ -609,6 +841,7 @@
         acceptCaseBtnClick();
         spamCaseBtnClick();
         clickBtnSpamOrReopen();
+        setDropdown();
     });
 
-                </script>
+</script>

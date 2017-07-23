@@ -20,7 +20,7 @@ namespace EC.Controllers
         // GET: /Cases/
         int total_report_count = 2;
         private readonly ActiveCasesModel casesModel = new ActiveCasesModel();
-        private readonly ReportModel reportModel = ReportModel.inst;
+        private ReportModel reportModel = new ReportModel();
         List<CasePreviewViewModel> preview_list = new List<CasePreviewViewModel>();
         CasePreviewViewModel temp_preview_case;
 

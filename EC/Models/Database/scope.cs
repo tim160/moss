@@ -7,21 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ServicesExternalEmail.DBModel
+namespace EC.Models.Database
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class province
+    public partial class scope
     {
         public int id { get; set; }
-        public int country_id { get; set; }
-        public string province_cl { get; set; }
-        public string province_nm { get; set; }
-        public string province_nf { get; set; }
-        public string province_ns { get; set; }
-        public string province_nr { get; set; }
-        public System.DateTime last_update_dt { get; set; }
-        public int user_id { get; set; }
+        public string scope_en { get; set; }
+        public string scope_fr { get; set; }
+        public string scope_es { get; set; }
+        public int status_id { get; set; }
     }
 }

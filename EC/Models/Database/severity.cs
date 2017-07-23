@@ -7,22 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ServicesExternalEmail.DBModel
+namespace EC.Models.Database
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class company_relationship
+    public partial class severity
     {
         public int id { get; set; }
-        public int company_id { get; set; }
-        public int client_id { get; set; }
+        public string severity_en { get; set; }
+        public string severity_fr { get; set; }
+        public string severity_es { get; set; }
         public int status_id { get; set; }
-        public string relationship_en { get; set; }
-        public string relationship_fr { get; set; }
-        public string relationship_es { get; set; }
-        public string relationship_ru { get; set; }
-        public string relationship_ar { get; set; }
-        public string relationship_jp { get; set; }
     }
 }

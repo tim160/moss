@@ -114,71 +114,7 @@ namespace EC.Models
         /// </summary>
         /// <param name="report_id"></param>
         /// <returns></returns>
-        public int _investigation_status
-        {
-            get
-            {
-                report_investigation_status last_status = _last_investigation_status();
-                if(_last_investigation_status() != null)
-                {
-                    return last_status.investigation_status_id;
-                }
-                else
-                    return 1;
-            }
-        }
-
-        /// <summary>
-        /// returns the investigation status of report in string.
-        /// </summary>
-        /// <param name="report_id"></param>
-        /// <returns></returns>
-        public string _investigation_status_string
-        {
-            get
-            {
-                string status = "";
-
-                investigation_status _status = db.investigation_status.Where(item => item.id == _investigation_status).FirstOrDefault();
-                if (_status != null)
-                {
-                    status = _status.investigation_status_en;
-                }
-
-                return status.Trim();
-            }
-        }
-
-        /// <summary>
-        /// return last, but 1 status. need it to check where case came from
-        /// </summary>
-        public int _previous_investigation_status_id
-        {
-            get
-            {
-
-                report_investigation_status last_status = new report_investigation_status();
-                report_investigation_status previous_last_status = new report_investigation_status();
-
-                if (db.report_investigation_status.Any(item => item.report_id == ID))
-                {
-                   List<report_investigation_status> statuses = db.report_investigation_status.Where(item => item.report_id == ID).OrderByDescending(x => x.id).ToList();
-                   if (statuses.Count > 1)
-                   {
-                       previous_last_status = statuses[1];
-                       return previous_last_status.investigation_status_id;
-                   }
-                   else
-                       return 0;
-                }
-                else
-                    return 0;
-
-
-               
-            }
-        }
-
+    
         /// <summary>
         /// Returns the location of report in string
         /// </summary>
@@ -1195,7 +1131,6 @@ namespace EC.Models
         #endregion
 
         #region Base constructors
-        public static readonly ReportModel inst = new ReportModel();
         GlobalFunctions glb = new GlobalFunctions();
         public ReportModel()
         {
@@ -1318,63 +1253,95 @@ namespace EC.Models
                         AddReportDepartment(department);
                         t = adv.SaveChanges();
                     }
-                    //savind secondary type
-                    //здесь проверяем на other если оно не заполнено, то 
-                    if (model.caseInformationReportDetail != null)
-                    {
-                        report_secondary_type type = new report_secondary_type()
-                        {
-                            report_id = currentReport.id,
-                            mandatory_secondary_type_id = null,
-                            secondary_type_id = 0,
-                            secondary_type_nm = model.caseInformationReportDetail,
-                            user_id = 1,
-                            last_update_dt = DateTime.Now
-                        };
-                        db.report_secondary_type.Add(type);
-                        t = adv.SaveChanges();
-                    }
-                    else
-                    {
-                        ReportModel reportModel = ReportModel.inst;
-                        if (!reportModel.isCustomIncidentTypes(model.currentCompanyId))
-                        {
-                            int defaultType = db.secondary_type_mandatory.Where(item => item.secondary_type_en == model.caseInformationReport).Select(item => item.id).FirstOrDefault();
-                            if (defaultType > 0)
-                            {
-                                report_secondary_type putDefaultType = new report_secondary_type
-                                {
-                                    report_id = currentReport.id,
-                                    mandatory_secondary_type_id = defaultType,
-                                    secondary_type_id = 0,
-                                    secondary_type_nm = "",
-                                    last_update_dt = DateTime.Now,
-                                    user_id = 1
-                                };
-                                db.report_secondary_type.Add(putDefaultType);
-                                t = adv.SaveChanges();
-                            }
-                        }
-                        else
-                        {
-                            int customType = db.company_secondary_type.Where(item => item.secondary_type_en == model.caseInformationReport).Select(item => item.id).FirstOrDefault();
-                            if (customType > 0)
-                            {
-                                report_secondary_type putCustomType = new report_secondary_type
-                                {
-                                    report_id = currentReport.id,
-                                    mandatory_secondary_type_id = null,
-                                    secondary_type_id = customType,
-                                    secondary_type_nm = "",
-                                    last_update_dt = DateTime.Now,
-                                    user_id = 1
-                                };
-                                adv.report_secondary_type.Add(putCustomType);
-                                t = adv.SaveChanges();
-                            }
 
+                    //savind secondary type 
+
+                    /*CustomSecondaryType == false*/
+                    List<report_secondary_type> secondaryTypeList = new List<report_secondary_type>();
+                    foreach (var item in model.whatHappened)
+                    {
+                        report_secondary_type temp = new report_secondary_type();
+                        temp.report_id = currentReport.id;
+                        //check is it custom
+                        if(model.CustomSecondaryType)
+                        {
+                            temp.mandatory_secondary_type_id = item;
+                        } else
+                        {
+                            temp.secondary_type_id = item;
                         }
+                        //check is it other
+                        if (item == 0 && model.caseInformationReportDetail != null)
+                        {
+                            temp.secondary_type_nm = model.caseInformationReportDetail;
+                        }
+
+                        temp.last_update_dt = DateTime.Now;
+                        temp.user_id = 1;
+                        secondaryTypeList.Add(temp);
                     }
+                    db.report_secondary_type.AddRange(secondaryTypeList);
+                    t = adv.SaveChanges();
+
+                    ///*CustomSecondaryType == true*/
+
+                    //if (model.caseInformationReportDetail != null)
+                    //{
+                    //    report_secondary_type type = new report_secondary_type()
+                    //    {
+                    //        report_id = currentReport.id,
+                    //        mandatory_secondary_type_id = null,
+                    //        secondary_type_id = 0,
+                    //        secondary_type_nm = model.caseInformationReportDetail,
+                    //        user_id = 1,
+                    //        last_update_dt = DateTime.Now
+                    //    };
+                    //    db.report_secondary_type.Add(type);
+                    //    t = adv.SaveChanges();
+                    //}
+                    //else
+                    //{
+                    //    ReportModel reportModel = new ReportModel();
+
+                    //    /*if custom*/
+                    //    if (!reportModel.isCustomIncidentTypes(model.currentCompanyId))
+                    //    {
+                    //        int defaultType = db.secondary_type_mandatory.Where(item => item.secondary_type_en == model.caseInformationReport).Select(item => item.id).FirstOrDefault();
+                    //        if (defaultType > 0)
+                    //        {
+                    //            report_secondary_type putDefaultType = new report_secondary_type
+                    //            {
+                    //                report_id = currentReport.id,
+                    //                mandatory_secondary_type_id = defaultType,
+                    //                secondary_type_id = 0,
+                    //                secondary_type_nm = "",
+                    //                last_update_dt = DateTime.Now,
+                    //                user_id = 1
+                    //            };
+                    //            db.report_secondary_type.Add(putDefaultType);
+                    //            t = adv.SaveChanges();
+                    //        }
+                    //    }
+                    //    else
+                    //    {
+                    //        int customType = db.company_secondary_type.Where(item => item.secondary_type_en == model.caseInformationReport).Select(item => item.id).FirstOrDefault();
+                    //        if (customType > 0)
+                    //        {
+                    //            report_secondary_type putCustomType = new report_secondary_type
+                    //            {
+                    //                report_id = currentReport.id,
+                    //                mandatory_secondary_type_id = null,
+                    //                secondary_type_id = customType,
+                    //                secondary_type_nm = "",
+                    //                last_update_dt = DateTime.Now,
+                    //                user_id = 1
+                    //            };
+                    //            adv.report_secondary_type.Add(putCustomType);
+                    //            t = adv.SaveChanges();
+                    //        }
+
+                    //    }
+                    //}
                     /*report_relationship*/
                     report_relationship rep = new report_relationship();
                     rep.report_id = currentReport.id;
@@ -1394,7 +1361,6 @@ namespace EC.Models
                     }
                     else
                     {
-                        //проверить на custom
                         int count = db.company_relationship.Where(rel => rel.status_id == 2).Count();
                         if (count > 0)
                         {
@@ -1920,6 +1886,45 @@ namespace EC.Models
             return report_actions;
         }
 
+        #region Last Investigation Status
+        public int _investigation_status
+        {
+            get
+            {
+                report_investigation_status last_status = _last_investigation_status();
+                if (_last_investigation_status() != null)
+                {
+                    return last_status.investigation_status_id;
+                }
+                else
+                    return 1;
+            }
+        }
+
+        /// <summary>
+        /// returns the investigation status of report in string.
+        /// </summary>
+        /// <param name="report_id"></param>
+        /// <returns></returns>
+        public string _investigation_status_string
+        {
+            get
+            {
+                string status = "";
+
+                investigation_status _status = db.investigation_status.Where(item => item.id == _investigation_status).FirstOrDefault();
+                if (_status != null)
+                {
+                    status = _status.investigation_status_en;
+                }
+
+                return status.Trim();
+            }
+        }
+
+
+
+
         public report_investigation_status _last_investigation_status()
         {
             report_investigation_status last_status = new report_investigation_status();
@@ -1932,6 +1937,75 @@ namespace EC.Models
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// User of last investigation status
+        /// </summary>
+        /// <returns></returns>
+        public int _last_investigation_status_user_id
+        {
+            get
+            {
+                report_investigation_status last_status = _last_investigation_status();
+
+                if (last_status != null)
+                {
+                    return last_status.user_id;
+                }
+
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// User of last investigation status
+        /// </summary>
+        /// <returns></returns>
+        public DateTime? _last_investigation_status_date
+        {
+            get
+            {
+                report_investigation_status last_status = _last_investigation_status();
+
+                if (last_status != null)
+                {
+                    return last_status.created_date;
+                }
+
+                return null;
+            }
+        }
+        #endregion
+
+
+        #region Previous Investigation Status
+
+        /// <summary>
+        /// return last, but 1 status. need it to check where case came from
+        /// </summary>
+        public int _previous_investigation_status_id
+        {
+            get
+            {
+
+                report_investigation_status last_status = new report_investigation_status();
+                report_investigation_status previous_last_status = new report_investigation_status();
+
+                if (db.report_investigation_status.Any(item => item.report_id == ID))
+                {
+                    List<report_investigation_status> statuses = db.report_investigation_status.Where(item => item.report_id == ID).OrderByDescending(x => x.id).ToList();
+                    if (statuses.Count > 1)
+                    {
+                        previous_last_status = statuses[1];
+                        return previous_last_status.investigation_status_id;
+                    }
+                    else
+                        return 0;
+                }
+                else
+                    return 0;
+            }
         }
 
         public report_investigation_status _previous_investigation_status()
@@ -1947,6 +2021,22 @@ namespace EC.Models
 
             return null;
         }
+        public int _previous_investigation_status_user_id
+        {
+            get
+            {
+                report_investigation_status _status = _previous_investigation_status();
+
+                if (_status != null)
+                {
+                    return _status.user_id;
+                }
+
+                return 0;
+            }
+        } 
+        #endregion
+
 
         public int report_status_id_by_date(DateTime dt)
         {
@@ -2167,23 +2257,23 @@ namespace EC.Models
             string _green_bar_status = "";
             
             //case just closed
-            if (_last_investigation_status().investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Closed)
+            if (_investigation_status == (Int32)CaseStatusConstants.CaseStatusValues.Closed)
                 _green_bar_status = GlobalRes.CaseClosed;
 
             //current - investigation, previous - closed => Re-opened
-            if (_last_investigation_status().investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Investigation && _previous_investigation_status().investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Closed)
+            if (_investigation_status == (Int32)CaseStatusConstants.CaseStatusValues.Investigation && _previous_investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Closed)
             {
                 _green_bar_status = GlobalRes.CaseReOpened;
             }
 
             //current - investigation, previous - Resolution => Returned for futher investigation
-            if (_last_investigation_status().investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Investigation && _previous_investigation_status().investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Resolution)
+            if (_investigation_status == (Int32)CaseStatusConstants.CaseStatusValues.Investigation && _previous_investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Resolution)
             {
                 _green_bar_status = GlobalRes.CaseReturnedFutherInvestigation;
             }
 
             //current - Resolution
-            if (_last_investigation_status().investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Resolution)
+            if (_investigation_status == (Int32)CaseStatusConstants.CaseStatusValues.Resolution)
             {
                 _green_bar_status = GlobalRes.CaseClosureReport;
             }
@@ -2196,7 +2286,7 @@ namespace EC.Models
         {
             string _green_bar_status = "";
             //current - Resolution
-            if (_last_investigation_status().investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Resolution)
+            if (_investigation_status == (Int32)CaseStatusConstants.CaseStatusValues.Resolution)
             {
                 _green_bar_status = GlobalRes.CaseSentToEsacaltionMediatorForReview;
             }
