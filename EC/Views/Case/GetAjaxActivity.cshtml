@@ -87,7 +87,8 @@
                     </div>
                     <div class="blockInfo">
                         <div class="topText">
-                            <p class="date">@_log.created_dt.Day.ToString() @_month_name</p>
+                            <p class="date">@_month_name @_log.created_dt.Day.ToString(), @_log.created_dt.Year</p>
+                            <p class="date">@_log.created_dt.Hour.ToString():@_log.created_dt.Minute</p>
                             <span class="title">
                                 <span class="reviewStage">@_action.description_en</span>
                                 @if (_second_name.Length > 0) { _second_name = ": " + _second_name; }    @_second_name
