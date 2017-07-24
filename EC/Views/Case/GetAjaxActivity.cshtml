@@ -35,6 +35,8 @@
 @if ((rm._report != null) && (rm._report.id != 0))
 {
     List<user> mediators = rm._mediators_whoHasAccess_toReport;
+
+<p class="upperCaseTimeline">@GlobalRes.Timeline</p>
     <div class="blockActivity">
         @foreach (report_log _log in actions_log)
         {
@@ -79,7 +81,6 @@
             {
                 _sender_title = _user.title_ds.Trim();
             }
-
             <div class="contentActivity">
                 <div class="contentBlockActivity">
                     <div class="blockImg">
