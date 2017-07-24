@@ -31,6 +31,12 @@ namespace EC.Controllers
             if (is_cc) cc_ext = "_cc";
             ViewBag.cc_extension = cc_ext;
             #endregion
+
+            List<SelectListItem> temp_items = new List<SelectListItem>();
+            SelectListItem _temp_department = new SelectListItem { Text = App_LocalResources.GlobalRes.Other, Value = "0" };
+            temp_items.Add(_temp_department);
+            ViewBag.currentDepartmens = temp_items;
+
             if (!string.IsNullOrEmpty(code))
             {
                 ViewBag.code = code;

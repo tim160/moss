@@ -1280,7 +1280,7 @@ namespace EC.Models
                         temp.user_id = 1;
                         secondaryTypeList.Add(temp);
                     }
-                    db.report_secondary_type.AddRange(secondaryTypeList);
+                    adv.report_secondary_type.AddRange(secondaryTypeList);
                     t = adv.SaveChanges();
 
                     ///*CustomSecondaryType == true*/

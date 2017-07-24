@@ -38,8 +38,8 @@ namespace EC.Controllers
             #endregion
 
             UserModel um = new UserModel(user_id);
-            Company ecModelCompany = new Models.ECModel.Company();
-            um.listDepartments = ecModelCompany.CompanyDepartments(user.company_id, 1);
+            Company ecModelCompany = new Company();
+            um.listDepartments = ecModelCompany.CompanyDepartments(user.company_id, 1, true);
             ViewBag.um = um;
             ViewBag.page_subtitle = GlobalRes.Settings;
             ViewBag.user_id = user_id;

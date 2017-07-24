@@ -295,14 +295,23 @@ namespace EC.Models.ECModel
         /// <param name="company_id"></param>
         /// <param name="language_id"></param>
         /// <returns></returns>
-        public List<ECModel.Location> CompanyLocations(int company_id, int? language_id)
+        public List<Location> CompanyLocations(int company_id, int? language_id, bool is_active)
         {
             List<ECModel.Location> company_locations = new List<ECModel.Location>();
             List<Database.company_location> _locations_list = new List<Database.company_location>();
             Location _new_location;
 
-            _locations_list = db.company_location.Where(s => s.company_id == company_id).ToList();
-            
+          
+            if (is_active)
+            {
+                _locations_list = db.company_location.Where(s => s.company_id == company_id && s.status_id == 2).ToList();
+            }
+            else
+            {
+                _locations_list = db.company_location.Where(s => s.company_id == company_id).ToList();
+
+            }
+
             for (int i = 0; i < _locations_list.Count; i++)
             {
                 _new_location = new Location(_locations_list[i].id, language_id);
@@ -319,13 +328,20 @@ namespace EC.Models.ECModel
         /// <param name="company_id"></param>
         /// <param name="language_id"></param>
         /// <returns></returns>
-        public List<ECModel.Department> CompanyDepartments(int company_id, int? language_id)
+        public List<Department> CompanyDepartments(int company_id, int? language_id, bool is_active)
         {
             List<ECModel.Department> company_departments = new List<ECModel.Department>();
             List<Database.company_department> _departments_list = new List<Database.company_department>();
             Department _new_department;
 
-            _departments_list = db.company_department.Where(s => s.company_id == company_id).ToList();
+            if (is_active)
+            {
+                _departments_list = db.company_department.Where(s => s.company_id == company_id && s.status_id == 2).ToList();
+            }
+            else
+            {
+                _departments_list = db.company_department.Where(s => s.company_id == company_id).ToList();
+            }
 
             for (int i = 0; i < _departments_list.Count; i++)
             {
