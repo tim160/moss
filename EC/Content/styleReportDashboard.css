@@ -2689,3 +2689,6 @@ p.helloUser {
 .disableUnderline {
     text-decoration: none;
 }
+.contentSettings.secondHeader table {
+   width: 100%;
+}

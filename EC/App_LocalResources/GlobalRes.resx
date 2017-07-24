@@ -2065,4 +2065,7 @@
   <data name="OtherDepartmentSavingFailed" xml:space="preserve">
     <value>Saving Other Deparment failed.</value>
   </data>
+  <data name="Update" xml:space="preserve">
+    <value>Update</value>
+  </data>
 </root>
