@@ -3195,3 +3195,8 @@ textarea {
   width: 200px;         
   background-color: #ccc;  
 }
+.makeButtonTextCenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
