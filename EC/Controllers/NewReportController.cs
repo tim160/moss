@@ -11,6 +11,7 @@ using EC.Controllers.ViewModel;
 using EC.Localization;
 using Resources = EC.Localization.Resources;
 using EC.Constants;
+using EC.Model.Impl;
 
 namespace EC.Controllers.ViewModel
 {
@@ -74,10 +75,25 @@ namespace EC.Controllers.ViewModel
             ViewBag.attachmentFiles = getAttachmentFiles(id.Value);
             ViewBag.getNonMediatorsInvolved = getNonMediatorsInvolved(id.Value);
             ViewBag.AllScopes = db.scope.OrderBy(x => x.scope_en).ToList();
-            ViewBag.AllSeverities = db.severity.OrderBy(x => x.severity_en).ToList();
-            ViewBag.AllDepartments = db.company_department.Where(x => x.company_id == um._user.company_id).OrderBy(x => x.department_en).ToList();
-            ViewBag.AllIncidets = db.company_secondary_type.Where(x => x.company_id == um._user.company_id).OrderBy(x => x.secondary_type_en).ToList();
-            ViewBag.AllOwners = rm._mediators_whoHasAccess_toReport.OrderBy(x => x.first_nm).ToList();
+            ViewBag.AllSeverities = db.severity.OrderBy(x => x.id).ToList();
+            ViewBag.AllDepartments = db.company_department.Where(x => x.company_id == um._user.company_id && x.status_id == 2).OrderBy(x => x.department_en).ToList();
+            ViewBag.AllIncidets = db.company_secondary_type.Where(x => x.company_id == um._user.company_id && x.status_id == 2).OrderBy(x => x.secondary_type_en).ToList();
+            //   ViewBag.AllOwners = rm._mediators_whoHasAccess_toReport.OrderBy(x => x.first_nm).ToList();
+            CompanyModel cm = new CompanyModel(um._user.company_id);
+            List<user> available_users = cm.AllMediators(um._user.company_id, true, null).OrderBy(x => x.first_nm).ToList();
+            List<UserItems> _users = new List<UserItems>();
+
+            foreach (user _user in available_users)
+            {
+                UserItems _new_user = new UserItems();
+                _new_user.FirstName = _user.first_nm;
+                _new_user.LastName = _user.last_nm;
+                _new_user.Id = _user.id;
+                _users.Add(_new_user);
+            }
+
+            ViewBag.AllOwners = _users;
+
             ViewBag.AllPolicies = new List<KeyValuePair<string, string>>()
             {
                 new KeyValuePair<string, string>("1", "some_file_1.pdf"),
@@ -214,7 +230,7 @@ namespace EC.Controllers.ViewModel
             int scopeId = Convert.ToInt32(Request["scopeId"]);
             int severityId = Convert.ToInt32(Request["severityId"]);
             int departmentId = Convert.ToInt32(Request["departmentId"]);
-            int incydentId = Convert.ToInt32(Request["incydentId"]);
+            int incidentId = Convert.ToInt32(Request["incidentId"]);
             int ownerId = Convert.ToInt32(Request["ownerId"]);
 
 

@@ -3,7 +3,7 @@
 @using EC.App_LocalResources;
 @using EC.Common.Interfaces;
 @using EC.Core.Common;
-
+@using EC.Model.Impl;
 @{
     bool? is_cc = ViewBag.is_cc;
     if (!is_cc.HasValue)
@@ -11,7 +11,6 @@
         is_cc = false;
     }
     String class_ext = ViewBag.cc_extension;
-    //19
     //bool is_cc = true;
     //String class_ext = "";
     //if (is_cc)
@@ -133,11 +132,6 @@
 
                     </div>
                 </div><!--firstPosition-->
-                @*@if (is_spam)
-                    {
-                        <td class="openSans">Case marked as spam.</td>
-
-                    }*@
                 @if ((is_spam) && (rm._last_promotion != null))
                 {
                     <div class="blockInfoSpam">
@@ -210,7 +204,7 @@
                 var allSeverities = (List<severity>)ViewBag.AllSeverities;
                 var allDepartments = (List<company_department>)ViewBag.AllDepartments;
                 var allIncidets = (List<company_secondary_type>)ViewBag.AllIncidets;
-                var allOwners = (List<user>)ViewBag.AllOwners;
+                var allOwners = (List<UserItems>)ViewBag.AllOwners;
                 var allPolicies = (List<KeyValuePair<string, string>>)ViewBag.AllPolicies;                
 
 
@@ -242,14 +236,14 @@
                                     <!--table left-->
                                     <table>
                                         <tr>
-                                            <td>Incydent Type :</td>
+                                            <td>@GlobalRes.IncidentType:</td>
                                             <td>
-                                                @Html.DropDownList("IncydentId", new SelectList(allIncidets, "id", "secondary_type_en"), new { @class = "" })
+                                                @Html.DropDownList("IncidentId", new SelectList(allIncidets, "id", "secondary_type_en"), new { @class = "" })
                                             </td>
                                         </tr>
                                        
                                         <tr>
-                                            <td>Department: </td>
+                                            <td>@GlobalRes.Department: </td>
                                             <td>
                                                 @Html.DropDownList("DepartmentId", new SelectList(allDepartments, "id", "department_en"), new { @class = "" })
                                             </td>
@@ -270,7 +264,7 @@
                                     <!--table right-->
                                     <table>
                                         <tr>
-                                            <td>Severity:</td>
+                                            <td>@GlobalRes.Severity:</td>
                                             <td>
                                                 @Html.DropDownList("SeverityId", new SelectList(allSeverities, "id", "severity_en"), new { @class = "" })
                                             </td>
@@ -278,7 +272,7 @@
                                         <tr>
                                             <td>Issue Owner:</td>
                                             <td>
-                                                @Html.DropDownList("OwnerId", new SelectList(allOwners, "id", "first_nm"), new { @class = "" })
+                                                @Html.DropDownList("OwnerId", new SelectList(allOwners, "Id", "FullName"), new { @class = "" })
                                             </td>
                                         </tr>
                                         <tr>
@@ -323,106 +317,11 @@
                         }
                         <input type="submit" value="new message" style="display: none;">
                     </div>
-
-                    @*<div class="headerblockButtons">
-                            <div class="closeIcon"></div>
-                        </div>
-                        <div class="contentBlockCase">
-                            <p class="titleCase">@GlobalRes.Acceptcase</p>
-                        </div>*@
-                    @*<div class="headerblockButtons">
-                        <div class="closeIcon"></div>
-                    </div>*@
                     <div class="contentBlockCase">
                         <p class="titleCase"></p>
                     </div>
 
                     <form action="" method="post">
-                        @*<div class="contentBlockCase">
-                                <p class="titleCase">@EC.Localization.Resources.GetString("Scope")</p>
-                            </div>
-                            <div class="contentBlockCase">
-                                <div class="textCace">
-                                    @foreach (var scope in allScopes)
-                                    {
-                                        <div class="freeBlock inputRadio option active" data-val="@scope.id">
-                                            <label class="inputBlock" for="@("scope" + scope.id)">
-                                                <input id="@("scope" + scope.id)" type="radio" name="scopeId" value="@scope.id" />
-                                                <span class="radioButton"></span>
-                                                <span class="radioTitle">@scope.scope_en</span>
-                                            </label>
-                                        </div>
-                                    }
-                                </div>
-                            </div>
-
-                            <div class="contentBlockCase">
-                                <p class="titleCase">@EC.Localization.Resources.GetString("Severity")</p>
-                            </div>
-                            <div class="contentBlockCase">
-                                <div class="textCace">
-                                    @Html.DropDownList("SeverityId", new SelectList(allSeverities, "id", "severity_en"), new { @class = "" })
-                                </div>
-                            </div>
-
-                            <div class="contentBlockCase">
-                                <p class="textCace">@GlobalRes.Notification_will_sent_reporter</p>
-                            </div>
-                        <div class="contentBlockCase">
-                            <p class="titleCase"></p>
-                        </div>
-                        <div class="contentBlockCase">
-                            <div class="textCace">
-                                <div class="freeBlock inputRadio option active" data-val="@scope.id">
-                                    <label class="inputBlock" for="@(" scope" + scope.id)">
-                                        <input id="@(" scope" + scope.id)" type="radio" name="scopeId" value="@scope.id" />
-                                        <span class="radioButton"></span>
-                                        <span class="radioTitle"></span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="contentBlockCase">
-                            <p class="titleCase"></p>
-                        </div>
-                        <div class="contentBlockCase">
-                            <div class="textCace">
-                            </div>
-                        </div>
-
-                        <div class="contentBlockCase">
-                            <p class="textCace"></p>
-                        </div>
-
-
-                        <div class="addComment addComment2@{@class_ext}">
-                            <div class="blockPersonal">
-
-                                <div class="blockPhoto">
-                                    @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", user_id }, { "is_owner", true } })
-
-
-                                </div>
-                                <div class="arrow green"></div>
-                            </div>
-
-
-                            <div class="messageText acceptCaseNote">
-                                <textarea cols="20" id="body_text" class="green" name="body_tx" rows="2" autofocus></textarea>
-                            </div>
-                        </div>
-                        <div class="newMessageBtn">
-                            @if (is_cc.Value)
-                            {
-                                <span class="acceptNewCase acceptNewCase_cc">@GlobalRes.Acceptcase.ToLower()</span>
-                            }
-                            else
-                            {
-                                <span class="acceptNewCase">@GlobalRes.Acceptcase.ToLower()</span>
-                            }
-                            <input type="submit" value="new message" style="display: none;">
-                        </div>*@
                     </form>
 
                 </div>
@@ -704,7 +603,7 @@
                     report_id : report_id, 
                     user_id: user_id, 
                     description : description, 
-                    incydentId : $('#IncydentId').val(),
+                    incidentId : $('#IncidentId').val(),
                     departmentId: $('#DepartmentId').val(),
                     scopeId : $('#ScopeId').val(),
                     severityId: $('#SeverityId').val(),

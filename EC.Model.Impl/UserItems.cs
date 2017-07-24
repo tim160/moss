@@ -114,17 +114,26 @@ namespace EC.Model.Impl
             return false;
         }
 
+        /// <summary>
+        ///  Returns full Name of user
+        /// </summary>
+        public string FullName
+        { 
+             get { return FirstName + " " + LastName; }
+                
+        }
 
-
-     /*   public UserItems(string loginName)
-        {
-            user _user = db.user.FirstOrDefault(item => item.login_nm == login);
-        }*/
+        /*   public UserItems(string loginName)
+           {
+               user _user = db.user.FirstOrDefault(item => item.login_nm == login);
+           }*/
 
         // ------------------------------- Mapped Scalars --------------------------------------
-        public virtual Int32 Id { get; protected set; }
-        public virtual string LoginName { get; protected set; }
-        public virtual string Password { get; protected set; }
-
+        public virtual Int32 Id { get; set; }
+        public virtual string LoginName { get; set; }
+        public virtual string Password { get; set; }
+        public virtual string FirstName { get; set; }
+        public virtual string LastName { get; set; }
+        public virtual string RoleId { get; set; }
     }
 }
