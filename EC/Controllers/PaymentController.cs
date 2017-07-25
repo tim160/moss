@@ -8,6 +8,7 @@ using EC.Constants;
 using EC.Models;
 using LavaBlast.Util.CreditCards;
 using System.Configuration;
+using CommonUtil = EC.Common.Util;
 
 namespace EC.Controllers
 {
@@ -50,7 +51,7 @@ namespace EC.Controllers
                 {
                     _id = new Guid(id);
                 }
-                catch 
+                catch
                 {
                     return RedirectToAction("History", "Payment");
                 }
@@ -59,8 +60,8 @@ namespace EC.Controllers
                 return RedirectToAction("History", "Payment");
 
             List<company_payments> all_payments = db.company_payments.Where(t => t.company_id == um._user.company_id && t.id == _id).ToList();
-            
-            if(all_payments.Count == 0)
+
+            if (all_payments.Count == 0)
                 return RedirectToAction("History", "Payment");
 
             company_payments cp = all_payments[0];
@@ -97,7 +98,7 @@ namespace EC.Controllers
             return View();
         }
 
-        public string Pay( string amount, string cardnumber, string cardname, string csv, string selectedMonth, string selectedYear)
+        public string Pay(string amount, string cardnumber, string cardname, string csv, string selectedMonth, string selectedYear)
         {
 
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
@@ -173,7 +174,7 @@ namespace EC.Controllers
                 _cp.cc_year = Convert.ToInt32(2017);
 
                 _cp.cc_name = cardname.Trim();
-                _cp.cc_number = glb.ConvertCCInfoToLast4DigitsInfo(cardnumber.Trim());
+                _cp.cc_number = CommonUtil.StringUtil.ConvertCCInfoToLast4DigitsInfo(cardnumber.Trim());
 
                 _cp.company_id = user.company_id;
                 _cp.payment_date = DateTime.Today;

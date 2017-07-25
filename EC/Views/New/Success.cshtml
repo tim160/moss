@@ -2,6 +2,7 @@
 @using EC.Models;
 @using EC.Models.Database;
 @using EC.App_LocalResources;
+@using EC.Common.Util;
 @{
     // @Styles.Render("~/Content/Styles");
     <link rel="stylesheet" type="text/css" href="/Content/styleReportDashboard.css">
@@ -81,7 +82,7 @@
                 {
                     <div class="blockPersonalSettings">
                         <p class="title">@GlobalRes.Amount</p>
-                        @Html.TextBox("amount", glb.ConvertDecimalToStringAmount(amount), new Dictionary<string, object>() { { "readonly", "true" } })
+                        @Html.TextBox("amount", StringUtil.ConvertDecimalToStringAmount(amount), new Dictionary<string, object>() { { "readonly", "true" } })
                     </div>
                 }
                 <div class="blockUpdateProfile">

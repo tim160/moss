@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using EC.Models.Database;
 using EC.App_LocalResources;
+using EC.Common.Interfaces;
+using EC.Core.Common;
 
 namespace EC.Models.ViewModel
 {
@@ -20,6 +22,7 @@ namespace EC.Models.ViewModel
 
         public CaseMessagesViewModel BindMessageToViewMessage(message _message, int caller_id)
         {
+            IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
             GlobalFunctions glb = new GlobalFunctions();
             UserModel um = new UserModel(caller_id);
             CaseMessagesViewModel vm_message = new CaseMessagesViewModel();
@@ -80,7 +83,7 @@ namespace EC.Models.ViewModel
             vm_message.created_dt = "";
             if (_message.created_dt.HasValue)
             {
-                _month_name = glb.GetShortMonth(_message.created_dt.Value.Month);
+                _month_name = m_DateTimeHelper.GetShortMonth(_message.created_dt.Value.Month);
                 vm_message.created_dt = _message.created_dt.Value.Day.ToString() + " " + _month_name;
             }
             #endregion

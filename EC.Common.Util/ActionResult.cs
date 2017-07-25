@@ -31,7 +31,7 @@ namespace EC.Common.Util
 
         public void Fail(string returnMessage)
         {
-            Fail(returnMessage, null); 
+            Fail(returnMessage, null);
         }
 
         public void Fail(string returnMessage, List<ReturnProblem> problems)
@@ -39,7 +39,7 @@ namespace EC.Common.Util
             ReturnCode = ReturnCode.Fail;
             ReturnMessage = returnMessage;
             if (problems != null && problems.Count > 0)
-                ReturnProblems.AddRange(problems); 
+                ReturnProblems.AddRange(problems);
         }
 
         public void AddProblem(Guid key, string problemMessage)
@@ -55,8 +55,8 @@ namespace EC.Common.Util
 
         public void AddProblem(long id, string tag, string problemMessage)
         {
-            ReturnProblems.Add(new ReturnProblem(id, tag, problemMessage)); 
-        } 
+            ReturnProblems.Add(new ReturnProblem(id, tag, problemMessage));
+        }
 
         public override string ToString()
         {
@@ -229,7 +229,7 @@ namespace EC.Common.Util
         InvalidSession = 2,
         ProcessingFailed = 3,
         ProcessException = 4,
-        NoAvailableSession = 5, 
+        NoAvailableSession = 5,
         UserDisabled = 6
     }
 

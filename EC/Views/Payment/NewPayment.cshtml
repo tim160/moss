@@ -2,6 +2,7 @@
 @using EC.Models;
 @using EC.Models.Database;
 @using EC.App_LocalResources;
+@using EC.Common.Util;
 @{
     // @Styles.Render("~/Content/Styles");
     <link rel="stylesheet" type="text/css" href="/Content/styleReportDashboard.css">
@@ -12,7 +13,7 @@
     GlobalFunctions glb = new GlobalFunctions();
     CompanyModel cm = ViewBag.cm;
     Decimal _amount = ViewBag.amount;
-    String sAmount = glb.ConvertDecimalToStringAmount(_amount);
+    String sAmount = StringUtil.ConvertDecimalToStringAmount(_amount);
     <style>
         .fullContainer {
             max-width: none;

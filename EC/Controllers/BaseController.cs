@@ -19,8 +19,8 @@ namespace EC.Controllers
 {
     public class BaseController : Controller
     {
-       /// var culture = Culture.GetCulture();
-  ////      ILog logger = LogManager.GetLogger(typeof((_Default));
+        /// var culture = Culture.GetCulture();
+        ////      ILog logger = LogManager.GetLogger(typeof((_Default));
 
         public ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public ECEntities db = new ECEntities();
@@ -29,6 +29,8 @@ namespace EC.Controllers
         public string CurrentLangCode { get; protected set; }
         private SessionManager sessionManager = SessionManager.inst;
         internal IEmailAddressHelper m_EmailHelper = new EmailAddressHelper();
+        protected IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
+
         internal bool is_cc
         {
             get { return glb.IsCC(Request.Url.AbsoluteUri.ToLower()); }
@@ -71,5 +73,5 @@ namespace EC.Controllers
             httpContext.Response.Cookies.Remove(ECGlobalConstants.AuthUserCookies);
             return RedirectToAction("Start", "Index");
         }
-	}
+    }
 }

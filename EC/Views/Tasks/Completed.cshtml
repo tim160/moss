@@ -2,8 +2,12 @@
 @using EC.Models.ECModel;
 @using EC.Models.Database;
 @using EC.App_LocalResources;
+@using EC.Common.Interfaces;
+@using EC.Core.Common;
 @{
     GlobalFunctions glb = new GlobalFunctions();
+    IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
+
     ViewBag.Title = GlobalRes.Mycompletedtasks;
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
 
@@ -12,28 +16,28 @@
     ReportModel rm = new ReportModel();
 
     List<report> reports = (List<report>)ViewBag.reports;
-    //  string _nameBlockShow = "";
     UserModel um = new UserModel(user_id);
     int unread_tasks = ViewBag.unread_tasks;
-    
+
 }
 
 <div class="blockSettings blockAllTasks">
     <div id="casesHeared">
         <div id="menu">
 
-            <a href="/tasks/Index" class="caseesTab">@GlobalRes.Myactivetasks @if(unread_tasks>0){<span>@unread_tasks</span>}</a>
+            <a href="/tasks/Index" class="caseesTab">@GlobalRes.Myactivetasks @if (unread_tasks > 0)
+            {<span>@unread_tasks</span>}</a>
             <a href="/tasks/Completed" class="caseesTab active">@GlobalRes.Mycompletedtasks</a>
         </div>
-   @*     <div class="positionActivityIcon">
+        @*     <div class="positionActivityIcon">
                 <div id="activityIcon"></div>
             </div>*@
-        </div><!--casesHeared-->
+    </div><!--casesHeared-->
 
 
-        <div class="contentSettings">
-            <!--START myCompletedTasks-->
-        @if(tasks.Where(m => m._task.assigned_to == user_id).Count() > 0)
+    <div class="contentSettings">
+        <!--START myCompletedTasks-->
+        @if (tasks.Where(m => m._task.assigned_to == user_id).Count() > 0)
         {
             <div class="myCompletedTasks myTasks">
                 <header>
@@ -59,21 +63,21 @@
                         //_styleCircle = "border: 2px solid #d47472;";
 
 
-                        _colorTextBefore = ""; 
-                        _colorTextBefore = "colorTextGrey"; 
+                        _colorTextBefore = "";
+                        _colorTextBefore = "colorTextGrey";
 
 
-                        _colorTextAfter = "colorTextGrey"; 
-                        _colorTextAfter = ""; 
+                        _colorTextAfter = "colorTextGrey";
+                        _colorTextAfter = "";
 
-                        _smallCircle = "littleDotShow"; 
-                        _smallCircle = "littleDot"; 
-                        _fontName = "fontSamibold"; 
-                        _fontName = ""; 
+                        _smallCircle = "littleDotShow";
+                        _smallCircle = "littleDot";
+                        _fontName = "fontSamibold";
+                        _fontName = "";
 
                         _nameBlockShow = "blockFile";
                         _nameBlockShow = "";
-                        _nameBlockShow = "blockDays"; 
+                        _nameBlockShow = "blockDays";
                     }
 
                     <div class="blockTask taskByDate" style="display: none;">
@@ -120,7 +124,7 @@
                                 <div class="date">
                                     @if (_task._task.completed_on.HasValue)
                                     {
-                                        @glb.ConvertDateToShortString(_task._task.completed_on.Value)
+                                        @m_DateTimeHelper.ConvertDateToShortString(_task._task.completed_on.Value)
                                     }
                                 </div>
                                 <div class="info @_nameBlockShow">
@@ -209,11 +213,11 @@
                                             </div>
 
                                             <div class="date">
-                                            @if (tsk._task.completed_on.HasValue)
-                                            {
-                                                @glb.ConvertDateToShortString(tsk._task.completed_on.Value)
-                                            }
-                                        </div>
+                                                @if (tsk._task.completed_on.HasValue)
+                                                {
+                                                    @m_DateTimeHelper.ConvertDateToShortString(tsk._task.completed_on.Value)
+                                                }
+                                            </div>
                                             <div class="info @_nameBlockShow">
                                                 <div class="file">
                                                     <img src='@Url.Content("/Content/Icons/fileCases.png")'>
@@ -243,12 +247,12 @@
 
             </div>
             <!--END myCompletedTasks-->
-        }
-        </div><!--contentSettings-->
-    </div>
+                        }
+    </div><!--contentSettings-->
+</div>
 
-    <script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
-    <script>
+<script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
+<script>
         $(document).ready(function () {
 
             $('.menuTasks .caseTasksName span').click(function () {
@@ -295,4 +299,4 @@
 
         });
 
-    </script>
+</script>

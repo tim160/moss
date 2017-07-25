@@ -38,9 +38,9 @@ namespace EC.Core.Common
         /// commands to be marked as 'for testing only' and they are typically suppressed in
         /// command listings.
         /// </summary>
-        
+
         public void AddCommand(string name, CommandHandler handler, bool test, bool readOnly)
-        { 
+        {
             string usageText = GetUsageAttribute(handler);
             string description = GetCommandDescription(handler);
             AddCommand(name, handler, test, usageText, description, readOnly);
@@ -50,7 +50,7 @@ namespace EC.Core.Common
         /// Register a command. Once registered, a command will then appear in the results of
         /// other methods such as GetCommands() etc. 
         /// </summary>
-        
+
         public void AddCommand(string name, CommandHandler handler, bool readOnly)
         {
             string usageText = this.GetUsageAttribute(handler);
@@ -85,11 +85,11 @@ namespace EC.Core.Common
             {
                 var lookupResult = LookupCommand(cmd);
                 if (lookupResult.CommendToExecute != null) { return ExecuteCommand(lookupResult.CommendToExecute, tokens, commandRecorder, line); }
-                if (lookupResult.MatchesExist())           { return DisplayMatches(cmd, lookupResult); }
-                if (cmd.ToLower() == "help")               { return DisplayHelp(); }
-                if (cmd.ToLower() == "testhelp")           { return DisplayHelpWithTestCommands(); }
-                if (cmd.ToLower().StartsWith("?"))         { return DisplayMatchingCommands(cmd.Substring(1)); }
-                if (true)                                  { return DisplayAllCommands(cmd); }
+                if (lookupResult.MatchesExist()) { return DisplayMatches(cmd, lookupResult); }
+                if (cmd.ToLower() == "help") { return DisplayHelp(); }
+                if (cmd.ToLower() == "testhelp") { return DisplayHelpWithTestCommands(); }
+                if (cmd.ToLower().StartsWith("?")) { return DisplayMatchingCommands(cmd.Substring(1)); }
+                if (true) { return DisplayAllCommands(cmd); }
             }
             catch (Exception e)
             {
@@ -116,28 +116,28 @@ namespace EC.Core.Common
             cmdText = cmdText.ToLower();
 
             // Exact
-            if (CommandMap.Keys.Contains(cmdText))      
+            if (CommandMap.Keys.Contains(cmdText))
             {
-                return new CommandLookupResult(CommandMap[cmdText]); 
+                return new CommandLookupResult(CommandMap[cmdText]);
             }
 
             // Camel Case
             var matchesbyCamelCase = GetCommandsByCamelCase(cmdText, true);
 
             if (matchesbyCamelCase.Count() == 1)
-            { 
-                return new CommandLookupResult(matchesbyCamelCase.First()); 
+            {
+                return new CommandLookupResult(matchesbyCamelCase.First());
             }
 
             // Prefix
             var matchesByPrefix = GetCommandsByPrefix(cmdText, true);
 
             if (matchesByPrefix.Count() == 1)
-            { 
-                return new CommandLookupResult(matchesByPrefix.First()); 
+            {
+                return new CommandLookupResult(matchesByPrefix.First());
             }
 
-            return new CommandLookupResult(matchesByPrefix : matchesByPrefix, matchesByCamelCase : matchesbyCamelCase);
+            return new CommandLookupResult(matchesByPrefix: matchesByPrefix, matchesByCamelCase: matchesbyCamelCase);
         }
 
         /// <summary>
@@ -147,7 +147,7 @@ namespace EC.Core.Common
 
         private static IEnumerable<string> ParseArguments(string commandLine)
         {
-            char[] parmChars = commandLine.ReplaceSmartQuotes().ToCharArray();
+            char[] parmChars = commandLine.ToCharArray();
             bool inQuote = false;
 
             for (int index = 0; index < parmChars.Length; index++)
@@ -171,14 +171,14 @@ namespace EC.Core.Common
             if (!includeTest) { commands = commands.Where(c => !c.Test); }
             List<Command> result = new List<Command>();
             result.AddRange(commands);
-            result.Sort((c1,c2) => c1.CasePreservedName.CompareTo(c2.CasePreservedName));
+            result.Sort((c1, c2) => c1.CasePreservedName.CompareTo(c2.CasePreservedName));
             return result;
         }
 
         /// <summary>
         /// Return the set of commands that match the given prefix 
         /// </summary>
-        
+
         public List<Command> GetCommandsByPrefix(string prefix, bool includeTest)
         {
             prefix = prefix.ToLower();
@@ -192,7 +192,7 @@ namespace EC.Core.Common
         /// <summary>
         /// Return the set of commands that match the given camel-case shorthand.
         /// </summary>
-        
+
         private List<Command> GetCommandsByCamelCase(string cmdText, bool includeTest)
         {
             cmdText = cmdText.ToLower();
@@ -262,12 +262,12 @@ namespace EC.Core.Common
         /// Get description text from optional attribute of the handler. Returns null if the
         /// attribute does not exist for the handler.
         /// </summary>
-        
+
         private string GetCommandDescription(CommandHandler handler)
         {
             string usageText = null;
             var attrs = handler.Method.GetCustomAttributes(typeof(CommandDescription), false);
-            if (attrs.Length == 1) {  usageText = ((CommandDescription)attrs[0]).Description;  }
+            if (attrs.Length == 1) { usageText = ((CommandDescription)attrs[0]).Description; }
             return usageText;
         }
 
@@ -336,7 +336,7 @@ namespace EC.Core.Common
         /// <summary>
         /// Displays a lust of all commands.
         /// </summary>
-        
+
         private List<string> DisplayHelp()
         {
             var result = new List<string>();
@@ -365,7 +365,7 @@ namespace EC.Core.Common
     /// <summary>
     /// Attribute for supplying command usage message.
     /// </summary>
-    
+
     [AttributeUsage(AttributeTargets.Method)]
     public class CommandUsage : Attribute
     {
@@ -379,7 +379,7 @@ namespace EC.Core.Common
     /// <summary>
     /// Attribute for supplying command description
     /// </summary>
-    
+
     [AttributeUsage(AttributeTargets.Method)]
     public class CommandDescription : Attribute
     {
@@ -389,5 +389,5 @@ namespace EC.Core.Common
             Description = description;
         }
     }
-    
+
 }

@@ -14,6 +14,7 @@ using EC.Controllers.ViewModel;
 using System.Data.Entity.Migrations;
 using EC.App_LocalResources;
 using EC.Constants;
+using CommonUtil = EC.Common.Util;
 
 namespace EC.Controllers
 {
@@ -70,7 +71,7 @@ namespace EC.Controllers
             if (is_cc) cc_ext = "_cc";
             ViewBag.cc_extension = cc_ext;
             #endregion
-          
+
             ViewBag.user_id = user_id;
             int company_id = user.company_id;
             CompanyModel cm = new CompanyModel(company_id);
@@ -103,7 +104,7 @@ namespace EC.Controllers
             ViewBag.cc_extension = cc_ext;
             #endregion
 
-          
+
             ViewBag.user_id = user_id;
             ViewBag.um = um;
             ViewBag.cm = cm;
@@ -170,7 +171,7 @@ namespace EC.Controllers
             ViewBag.cc_extension = cc_ext;
             #endregion
 
-          
+
             if (_user.id == id.Value)
                 return RedirectToAction("Index", "Settings");
 
@@ -206,10 +207,11 @@ namespace EC.Controllers
             {
                 can_edit = true;
             }
-            if(_user.company_department_id == null || _user.company_department_id == 0)
+            if (_user.company_department_id == null || _user.company_department_id == 0)
             {
                 viewd_user.selectedDepartment = App_LocalResources.GlobalRes.Other;
-            } else
+            }
+            else
             {
                 viewd_user.selectedDepartment = new Department(_user.company_department_id.GetValueOrDefault(), 1).department_nm;
             }
@@ -555,7 +557,7 @@ namespace EC.Controllers
                 return App_LocalResources.GlobalRes.AlreadyInvited;
 
 
-            string generated_code = GlobalFunctions.RandomString(6);
+            string generated_code = CommonUtil.StringUtil.RandomString(6);
             // create invitation in db
 
             invitation _invitation = new invitation();
@@ -637,7 +639,7 @@ namespace EC.Controllers
 
             return View("Password", um._user);
         }
-        public ActionResult casesHeared ()
+        public ActionResult casesHeared()
         {
             return PartialView("~/Views/Settings/partial/casesHeared.cshtml");
         }

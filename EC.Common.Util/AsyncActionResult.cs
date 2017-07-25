@@ -12,7 +12,7 @@ namespace EC.Common.Util
             set;
         }
 
-        
+
         public int PercentComplete
         {
             get;
@@ -55,7 +55,7 @@ namespace EC.Common.Util
             RaisedDateTime = DateTime.Now;
             RequestId = requestId;
         }
-       
+
         public override string ToString()
         {
             return Result.ToString();

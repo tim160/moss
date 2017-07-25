@@ -13,8 +13,11 @@ using System.Linq;
 using EC.Models;
 using System.Text.RegularExpressions;
 using EC.App_LocalResources;
+using EC.Common.Interfaces;
+using EC.Core.Common;
 using System.Web.Script.Serialization;
 using log4net;
+using EC.Common.Util;
 
 /// <summary>
 /// Global Functions for EC Project
@@ -22,7 +25,9 @@ using log4net;
 public class GlobalFunctions
 {
     ECEntities db = new ECEntities();
-    private  const int PasswordLength = 6;
+    IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
+
+    private const int PasswordLength = 6;
     private const int PasswordExtraSubmolsCount = 0;
     ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -33,7 +38,7 @@ public class GlobalFunctions
     // Content/img/cai_logo.png
     public bool IsSubdomain(string url)
     {
-        if (url.ToLower().Contains("localhost") || url.ToLower().Contains("local2host")  || url.ToLower().Contains("stark.") || url.ToLower().Contains("democompany.") || url.ToLower().Contains("report.") || url.ToLower().Contains("cai."))
+        if (url.ToLower().Contains("localhost") || url.ToLower().Contains("local2host") || url.ToLower().Contains("stark.") || url.ToLower().Contains("democompany.") || url.ToLower().Contains("report.") || url.ToLower().Contains("cai."))
         {
             return true;
         }
@@ -43,8 +48,8 @@ public class GlobalFunctions
     public bool IsCC(string url)
     {
         // uncomment for campus-confidential testing
-    ///    return true;
-        if ( (url.ToLower().Contains("campus"))  || (url.ToLower().Contains("cc.employeeconfidential")) )
+        ///    return true;
+        if ((url.ToLower().Contains("campus")) || (url.ToLower().Contains("cc.employeeconfidential")))
         {
             return true;
         }
@@ -72,114 +77,18 @@ public class GlobalFunctions
             return "";
             /////  return "/Content/Icons/logo.png";
 
-           ////// return "/Content/img/cai_logo.png";
+            ////// return "/Content/img/cai_logo.png";
         }
         return "/Content/Icons/logo.png";
 
     }
-
-
-    /// <summary>
-    /// duplicated - the function in EC/Business/Email Body
-    /// </summary>
-    /// <param name="url"></param>
-    /// <param name="flag"></param>
-    /// <returns></returns>
-    public string EmailBaseUrl(string url, int flag)
-    {
-        if (url.ToLower().Contains("campus"))
-        {
-            return "campus-confidential.com/Index/Page";
-        }
-        else if(url.ToLower().Contains("stark."))
-        {
-            return "stark.employeeconfidential.com/Index/Page";
-        }
-        else if (url.ToLower().Contains("report."))
-        {
-            return "report.employeeconfidential.com/Index/Page";
-        }
-        else if (url.ToLower().Contains("cai.employeeconfidential.com"))
-        {
-            return "cai.employeeconfidential.com/Index/Start";
-        }
-        return "report.employeeconfidential.com/Index/Page";
-    }
-
-    #region Months
-
-    public Dictionary<int, string> FullMonth()
-    {
-        Dictionary<int, string> month = new Dictionary<int, string>();
-
-        month.Add(1, "January");
-        month.Add(2, "February");
-        month.Add(3, "March");
-        month.Add(4, "April");
-        month.Add(5, "May");
-        month.Add(6, "June");
-        month.Add(7, "July");
-        month.Add(8, "August");
-        month.Add(9, "September");
-        month.Add(10, "October");
-        month.Add(11, "November");
-        month.Add(12, "December");
-
-        return month;
-    }
-    public Dictionary<int, string> ShortMonth()
-    {
-        Dictionary<int, string> month = new Dictionary<int, string>();
-
-        month.Add(1, "Jan");
-        month.Add(2, "Feb");
-        month.Add(3, "Mar");
-        month.Add(4, "Apr");
-        month.Add(5, "May");
-        month.Add(6, "Jun");
-        month.Add(7, "Jul");
-        month.Add(8, "Aug");
-        month.Add(9, "Sep");
-        month.Add(10, "Oct");
-        month.Add(11, "Nov");
-        month.Add(12, "Dec");
-
-        return month;
-    }
-
-    /// <summary>
-    /// returns February
-    /// </summary>
-    /// <param name="month"></param>
-    /// <returns></returns>
-    public string GetFullMonth(int month)
-    {
-        string month_s = "";
-        Dictionary<int, string> Monthes = FullMonth();
-        if ((month > 0) && (month < 13))
-            Monthes.TryGetValue(month, out month_s);
-
-        return month_s;
-
-    } 
-    public string GetShortMonth(int month)
-    {
-        string month_s = "";
-        Dictionary<int, string> Monthes = ShortMonth();
-        if ((month > 0) && (month < 13))
-            Monthes.TryGetValue(month, out month_s);
-
-        return month_s;
-
-    } 
-    #endregion
 
     #region ReportGeneration
 
     public string GeneretedPassword()
     {
         string password = System.Web.Security.Membership.GeneratePassword(PasswordLength, PasswordExtraSubmolsCount);
-        password = ReplaceForUI(password);
+        password = StringUtil.ReplaceForUI(password);
         return password;
     }
 
@@ -194,7 +103,7 @@ public class GlobalFunctions
             letter = "STA";
         int number = 22000 + report_id;
         string case_number = number.ToString() + "-" + letter + "-" + company_id.ToString();
-        
+
         return case_number;
     }
 
@@ -209,11 +118,11 @@ public class GlobalFunctions
         }
         while (reporter_login.Length < 6);
 
-   //     ?while ((reporter_login.Length + report_id.ToString().Length) < 6);
+        //     ?while ((reporter_login.Length + report_id.ToString().Length) < 6);
 
         return "EC" + reporter_login;
     }
-    
+
     #endregion
 
     public string GetCountryNameByID(string country_id, int? language_id)
@@ -225,7 +134,7 @@ public class GlobalFunctions
         {
             //Record exists.Let's read the Name property value
             country_nm = item.country_nm;
-           
+
         }
 
         return country_nm;
@@ -249,7 +158,7 @@ public class GlobalFunctions
     {
         if (id != 0)
         {
-           // EC.Models.Database.outcome _outcome = db.outcomes.FirstOrDefault(item => item.id == id);
+            // EC.Models.Database.outcome _outcome = db.outcomes.FirstOrDefault(item => item.id == id);
             var item = db.company_outcome.Find(id);
             return item.outcome_en;
         }
@@ -270,15 +179,6 @@ public class GlobalFunctions
 
     }
 
-    public void Load_Provinces(string strCountryID, DropDownList ddl_province)
-    {
-
-    //    Hashtable ht = new Hashtable();
-    //    ht.Add("@country_id", strCountryID);
-     //   sce.BindDropDownList(System.Web.HttpContext.Current.Session[Constants.session_connection_string_name].ToString(), ddl_province, "spc_GetProvinceList", "province_nm", "id", ht);
-    }
-
-
     public action GetActionById(int id)
     {
         return db.action.FirstOrDefault(item => item.id == id);
@@ -293,18 +193,18 @@ public class GlobalFunctions
     /// <param name="company_id">pass null or 0 if you need all reports. Pass company_id if user_role=1,2,3 is looking for specific company</param>
     /// <returns></returns>
     public List<report> ReportsSearch(int user_id, int? company_id)
-    { 
+    {
         List<report> reports = new List<report>();
 
         user _user = db.user.FirstOrDefault(item => item.id == user_id);
 
         if ((_user != null) && (_user.id != 0))
-        { 
+        {
             // if user is from Ec - we can show all reports
             if ((_user.role_id == 1) && (_user.role_id == 2) && (_user.role_id == 3))
             {
-                if ((company_id.HasValue) && (company_id.Value!=0))
-                    reports = (db.report.Where(item =>(item.company_id == company_id.Value))).ToList();
+                if ((company_id.HasValue) && (company_id.Value != 0))
+                    reports = (db.report.Where(item => (item.company_id == company_id.Value))).ToList();
                 else
                     reports = (db.report).ToList();
 
@@ -346,356 +246,15 @@ public class GlobalFunctions
         // nado izvlech descrition iz table action
         // i 2 userza  _log.user_id - chel, kotorii sdelal deistvie
         // i _log.second_user_id (int? - obichno net ego ) - 2-oi uzer, kotorogo mojet ne bit' - naprimer kogda odin mediator assing/remove drugogo
-        
+
         foreach (report_log _log in log)
-        { 
-        
+        {
+
         }
 
         return log;
     }
     #endregion
-
-
-    /*
-
-   
-
- 
-    /// <summary>
-    /// Shows a pop-up Dialog box with a message
-    /// </summary>
-    /// <param name="message">Text of the Message</param>
-    public void ShowMessage(string message, Page page)
-    {
-        message = message.Replace("'", "");
-        if (message != "")
-        {
-            string Msg = "<script language='javascript'> window.alert('" + message + "'); </script>";
-            ScriptManager.RegisterStartupScript(page, page.GetType(), "js_msg", Msg, false);
-        }
-    }
-
-    /// <summary>
-    /// returns current Language or just default language
-    /// </summary>
-    /// <returns></returns>
-    public string CurrentLanguage()
-    {
-            string lang = ConfigurationManager.AppSettings["Default Language"];
-            if (System.Web.HttpContext.Current.Session[Constants.session_language_cl] != null)
-            {
-                lang = System.Web.HttpContext.Current.Session[Constants.session_language_cl].ToString();
-            }
-            else
-                System.Web.HttpContext.Current.Session[Constants.session_language_cl] = lang;
-            return lang;
-    }
-
-    public void CreateConnectionString()
-    {
-
-        if (System.Web.HttpContext.Current.Session[Constants.session_connection_string_name] == null)
-        {
-            string strUrl = HttpContext.Current.Request.Url.ToString();
-            if (strUrl.ToLower().Contains("vp.") == true)
-                System.Web.HttpContext.Current.Session[Constants.session_connection_string_name] = "VBDEMO";
-            else
-                System.Web.HttpContext.Current.Session[Constants.session_connection_string_name] = "VB";
-        }
-    }
-
-    public string CreateConnectionString(object connection)
-    {
-        string connection_string = "";
-
-        if (connection == null)
-        {
-            string strUrl = HttpContext.Current.Request.Url.ToString();
-            if (strUrl.ToLower().Contains("demo.") == true)
-            {
-                System.Web.HttpContext.Current.Session[Constants.session_connection_string_name] = "VBDEMO";
-                connection_string = "VBDEMO";
-            }
-            else
-            {
-                System.Web.HttpContext.Current.Session[Constants.session_connection_string_name] = "VB";
-                connection_string = "VB";
-            }
-        }
-        return connection_string;
-    }
-
-    public string GetCurrentPageName()
-    {
-        string strPath = System.Web.HttpContext.Current.Request.Url.AbsolutePath;
-        System.IO.FileInfo oInfo = new System.IO.FileInfo(strPath);
-        string strPageName = oInfo.Name;
-        return strPageName.ToLower();
-    }
-
-
-    public bool DownloadFile(string strReportFullName, bool something)
-    {
-        bool bResult = false;
-
-        string strExtensionName = Path.GetExtension(strReportFullName);
-        string strError = "";
-
-        try
-        {
-            switch (strExtensionName)
-            {
-                case ".txt":
-                    {
-                        HttpContext.Current.Response.ContentType = "application/txt";
-                        bResult = true;
-                        break;
-                    }
-                case ".doc":
-                    {
-                        HttpContext.Current.Response.ContentType = "application/msword";
-                        bResult = true;
-                        break;
-                    }
-                case ".docx":
-                    {
-                        HttpContext.Current.Response.ContentType = "application/msword";
-                        bResult = true;
-                        break;
-                    }
-                case ".xls":
-                    {
-                        HttpContext.Current.Response.ContentType = "application/xls";
-                        bResult = true;
-                        break;
-                    }
-                case ".pdf":
-                    {
-                        HttpContext.Current.Response.ContentType = "application/pdf";
-                        bResult = true;
-                        break;
-                    }
-                case ".rtf":
-                    {
-                        HttpContext.Current.Response.ContentType = "application/msword";
-                        bResult = true;
-                        break;
-                    }
-                case ".msg":
-                    {
-                        HttpContext.Current.Response.ContentType = "application/msoutlook";
-                        bResult = true;
-                        break;
-                    }
-                case ".jpg":
-                    {
-                        HttpContext.Current.Response.ContentType = "application/jpg";
-                        bResult = true;
-                        break;
-                    }
-                case ".jpeg":
-                    {
-                        HttpContext.Current.Response.ContentType = "application/jpg";
-                        bResult = true;
-                        break;
-                    }
-                case ".png":
-                    {
-                        HttpContext.Current.Response.ContentType = "application/png";
-                        bResult = true;
-                        break;
-                    }
-                default:
-                    {
-                        bResult = false;
-                        strError = "Format doesn't supporting.";
-                        break;
-                    }
-            }
-        }
-        catch (Exception ex)
-        {
-            strError = ex.Message;
-            bResult = false;
-        }
-
-        if (bResult)
-        {
-            if (something)
-            {
-                HttpContext.Current.Response.AddHeader("Content-Disposition", "attachment; filename = " + System.IO.Path.GetFileName(strReportFullName));
-                HttpContext.Current.Response.WriteFile(strReportFullName);
-                HttpContext.Current.Response.End();
-            }
-            else
-            {
-                HttpContext.Current.Response.AddHeader("Content-Disposition", "inline; filename = " + System.IO.Path.GetFileName(strReportFullName));
-                HttpContext.Current.Response.WriteFile(strReportFullName);
-                HttpContext.Current.Response.End();
-            }
-        }
-
-        return bResult;
-    }
-    public bool IsInternalUser(string level_id)
-    {
-        if ((level_id == Constants.level_Reviewer.ToString()) || (level_id == Constants.level_Primary_Reviewer.ToString()) || (level_id == Constants.level_Reporter.ToString())|| (level_id == ECLevelConstants.level_Administrator.ToString()))
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
-    }
-
-
-
-
-    public string GetProvinceByID(string province_id, string country_id, string connection)
-    {
-        string province_nm = "";
-        Hashtable ht = new Hashtable();
-        ht.Add("@country_id", country_id.Trim());
-
-        DataTable dt = sce.ExecuteDataTable("spc_GetProvinceList", ht, connection);
-        foreach (DataRow dr in dt.Rows)
-        {
-            if (dr["province_id"].ToString() == province_id)
-                province_nm = dr["province_nm"].ToString();
-        }
-
-        return province_nm;
-    }
-
-    public string GetClientStatusNameByID(string status_id, string language, string connection)
-    {
-        string status_nm = "";
-        Hashtable ht = new Hashtable();
-        ht.Add("@language_cl", language);
-
-        DataTable dt = sce.ExecuteDataTable("spc_GetClientStatuses", ht, connection);
-        foreach (DataRow dr in dt.Rows)
-        {
-            if (dr["status_id"].ToString() == status_id)
-                status_nm = dr["status_nm"].ToString();
-        }
-
-        return status_nm;
-    }
-
-    public string GetPrefferedContactMethodsByID(string preffered_method_id, string language, string connection)
-    {
-        string prefferred_method_nm = "";
-        Hashtable ht = new Hashtable();
-        ht.Add("@language_cl", language);
-
-        DataTable dt = sce.ExecuteDataTable("spc_GetClientStatuses", ht, connection);
-        foreach (DataRow dr in dt.Rows)
-        {
-            if (dr["prefferred_method_id"].ToString() == preffered_method_id)
-                prefferred_method_nm = dr["prefferred_method_nm"].ToString();
-        }
-
-        return prefferred_method_nm;
-    }
-
-    public string GetIncidentStatusNameByID(string status_id, string language, string connection)
-    {
-        string status_nm = "";
-        Hashtable ht = new Hashtable();
-        ht.Add("@language_cl", language);
-
-        DataTable dt = sce.ExecuteDataTable("spi_GetIncidentStatuses", ht, connection);
-        foreach (DataRow dr in dt.Rows)
-        {
-            if (dr["status_id"].ToString() == status_id)
-                status_nm = dr["status_nm"].ToString();
-        }
-
-        return status_nm;
-    }
-
-    public string GetIncidentPriorityNameByID(string incident_priority_id, string language, string connection)
-    {
-        string incident_priority_nm = "";
-        Hashtable ht = new Hashtable();
-        ht.Add("@language_cl", language);
-
-        DataTable dt = sce.ExecuteDataTable("spi_GetIncidentPriorities", ht, connection);
-        foreach (DataRow dr in dt.Rows)
-        {
-            if (dr["incident_priority_id"].ToString() == incident_priority_id)
-                incident_priority_nm = dr["incident_priority_nm"].ToString();
-        }
-
-        return incident_priority_nm;
-    }
-
-    public string GetIncidentSourceTypeNameByID(string source_type_id, string language, string connection)
-    {
-        string source_type_nm = "";
-        Hashtable ht = new Hashtable();
-        ht.Add("@language_cl", language);
-
-        DataTable dt = sce.ExecuteDataTable("spi_GetIncidentPriorities", ht, connection);
-        foreach (DataRow dr in dt.Rows)
-        {
-            if (dr["source_type_id"].ToString() == source_type_id)
-                source_type_nm = dr["source_type_nm"].ToString();
-        }
-
-        return source_type_nm;
-    }
-
-    public string GetShortLanguageNameByID(string language_id, string connection, out string language_nm)
-    {
-   //     string language_nm = "";
-        string short_language_nm = "";
-        language_nm = "";
-
-        Hashtable ht = new Hashtable();
-        ht.Add("@language_id", language_id);
-
-        DataTable dt = sce.ExecuteDataTable("spa_GetLanguageByID", ht, connection);
-        if (dt.Rows.Count == 1)
-        {
-            language_nm = dt.Rows[0]["language_ds"].ToString();
-            short_language_nm= dt.Rows[0]["language_cl"].ToString();
-        }
-
-        return short_language_nm;
-    }*/
-
-    public string FirstWords(string input, int numberWords)
-    {
-        try
-        {
-            // Number of words we still want to display.
-            int words = numberWords;
-            // Loop through entire summary.
-            for (int i = 0; i < input.Length; i++)
-            {
-                // Increment words on a space.
-                if (input[i] == ' ')
-                {
-                    words--;
-                }
-                // If we have no more words to display, return the substring.
-                if (words == 0)
-                {
-                    return input.Substring(0, i);
-                }
-            }
-        }
-        catch (Exception)
-        {
-            // Log the error.
-        }
-        return input;
-    }
-
 
     /// <summary>
     /// 
@@ -727,9 +286,9 @@ public class GlobalFunctions
         {
             logger.Error(ex.ToString());
         }
-    
+
     }
-    
+
     #region Update Read Status for Report, Message, Task, Task Comment
 
     public void UpdateReportRead(int user_id, int report_id)
@@ -822,9 +381,9 @@ public class GlobalFunctions
 
         List<int> _message_ids = db.message.Where(t => (t.report_id == report_id && t.reporter_access == thread_id)).Select(t => t.id).ToList();
 
-        foreach(int _id in _message_ids)
+        foreach (int _id in _message_ids)
         {
-            if(db.message_user_read.Any(t=>t.message_id == _id && t.user_id == user_id))
+            if (db.message_user_read.Any(t => t.message_id == _id && t.user_id == user_id))
             {
                 // message already read in db
                 // we could update read date
@@ -851,11 +410,11 @@ public class GlobalFunctions
             }
         }
 
-      //  if (!db.message_user_read.Any(item => ((item.user_id == user_id) && (item.message_id == message_id))))
+        //  if (!db.message_user_read.Any(item => ((item.user_id == user_id) && (item.message_id == message_id))))
         {
         }
-    
-    
+
+
     }
 
 
@@ -879,7 +438,7 @@ public class GlobalFunctions
                 logger.Error(ex.ToString());
             }
         }
-    } 
+    }
     #endregion
 
     public int GetNextColor(int company_id, int report_id)
@@ -891,7 +450,7 @@ public class GlobalFunctions
 
         if (db.report.Any(item => ((item.company_id == company_id) && (item.id != report_id))))
             reports = (db.report.Where(item => ((item.company_id == company_id) && (item.id != report_id))).OrderByDescending(item => item.id)).ToList();
-        
+
         if (reports.Count > 0)
         {
             report _report = reports[0];
@@ -996,7 +555,7 @@ public class GlobalFunctions
         List<Int32> _previous_report_ids = _previous_reports.Select(t => t.id).ToList();
 
         DataTable dt = dtAnalyticsTable();
-     
+
         List<company_secondary_type> _c_secondary_types = db.company_secondary_type.Where(item => item.company_id == company_id).ToList();
 
         foreach (company_secondary_type _temp_secondary_types in _c_secondary_types)
@@ -1008,7 +567,7 @@ public class GlobalFunctions
             if (count > 0)
             {
                 DataRow dr;
-              //  prev_count = _previous_reports.Where(item => (item.type_id == _type.id)).Count();
+                //  prev_count = _previous_reports.Where(item => (item.type_id == _type.id)).Count();
                 dr = dt.NewRow();
                 dr["name"] = _temp_secondary_types.secondary_type_en;
                 dr["value"] = count;
@@ -1020,7 +579,7 @@ public class GlobalFunctions
 
 
         List<report_secondary_type> _all_types = db.report_secondary_type.Where(item => (_report_ids.Contains(item.report_id)) && ((item.secondary_type_id == 0 || item.secondary_type_id == -1))).ToList();
-        
+
         foreach (report_secondary_type _type in _all_types)
         {
             string _temp_secondary_type_nm = _type.secondary_type_nm;
@@ -1229,7 +788,7 @@ public class GlobalFunctions
         #region month_name
         int month = _start.Month;
         string month_s = "";
-        Dictionary<int, string> Monthes = FullMonth();
+        Dictionary<int, string> Monthes = m_DateTimeHelper.FullMonth();
         if ((month > 0) && (month < 13))
             Monthes.TryGetValue(month, out month_s);
         #endregion
@@ -1496,7 +1055,7 @@ public class GlobalFunctions
             }
 
             if (!one_department_added)
-            { 
+            {
                 _dep_names.Add(GlobalRes.unknown_departments);
             }
         }
@@ -1527,7 +1086,7 @@ public class GlobalFunctions
 
 
     #region Analytics Helpers - new version
-  
+
     public DataTable CompanyDepartmentReportAdvanced(int company_id, int user_id, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
     {
         //List<string> result = names.Split(',').ToList();
@@ -1693,13 +1252,13 @@ public class GlobalFunctions
             _flag5 = true;
             _flag6 = true;
             if ((ReportsSecondaryTypesIDs.Count > 0) && (!ReportsSecondaryTypesIDs.Contains(_report.id)))
-                    _flag1 = false;
+                _flag1 = false;
             if ((ReportsRelationTypesIDs.Count > 0) && (!ReportsRelationTypesIDs.Contains(_report.id)))
-                    _flag2 = false;
+                _flag2 = false;
             if ((ReportsDepartmentIDs.Count > 0) && (!ReportsDepartmentIDs.Contains(_report.id)))
-                    _flag3 = false;
+                _flag3 = false;
             if ((ReportsLocationIDs.Count > 0) && (!ReportsLocationIDs.Contains(_report.id)))
-                    _flag4 = false;
+                _flag4 = false;
             if ((dtReportCreationStartDate.HasValue) && (dtReportCreationStartDate.Value.Date >= _report.reported_dt.Date))
                 _flag5 = false;
             if ((dtReportCreationEndDate.HasValue) && (dtReportCreationEndDate.Value.Date <= _report.reported_dt.Date))
@@ -1708,7 +1267,7 @@ public class GlobalFunctions
                 _all_reports.Add(_report);
         }
         #endregion
-    
+
         ReportModel rm = new ReportModel();
 
         DataTable dt = dtDoughnutTable();
@@ -2358,7 +1917,7 @@ public class GlobalFunctions
                 _all_reports.Add(_report);
         }
         #endregion
-    
+
         DateTime _real_start, _real_end;
 
         if (_start.HasValue)
@@ -2436,7 +1995,7 @@ public class GlobalFunctions
             _start = new DateTime(year, temp_month, 1);
 
 
-            dr = AnalyticsTimeLineRowAdvanced(_start, company_id, user_id,  ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
+            dr = AnalyticsTimeLineRowAdvanced(_start, company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
             dt.Rows.Add(dr.ItemArray);
         }
 
@@ -2453,7 +2012,7 @@ public class GlobalFunctions
         #region month_name
         int month = _start.Month;
         string month_s = "";
-        Dictionary<int, string> Monthes = FullMonth();
+        Dictionary<int, string> Monthes = m_DateTimeHelper.FullMonth();
         if ((month > 0) && (month < 13))
             Monthes.TryGetValue(month, out month_s);
         #endregion
@@ -2543,7 +2102,7 @@ public class GlobalFunctions
         int[] _today_spanshot = AnalyticsByDateAdvanced(null, null, company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
 
         DateTime _month_end_date = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1).AddDays(-1);
-        int[] _month_end_spanshot = AnalyticsByDateAdvanced(null, _month_end_date, company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate) ;
+        int[] _month_end_spanshot = AnalyticsByDateAdvanced(null, _month_end_date, company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
 
 
 
@@ -2557,7 +2116,7 @@ public class GlobalFunctions
             + ", \"AnalyticsTimeline\":" + AnalyticsTimelineAdvancedJson(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate)
             + "}";
 
-       return _all_json;
+        return _all_json;
     }
 
 
@@ -2580,7 +2139,7 @@ public class GlobalFunctions
         return DataTableToJSONWithJavaScriptSerializer(dt);
     }
 
-    
+
     public string SecondaryTypesByDateAdvancedJson(int company_id, int user_id, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
     {
         DataTable dt = SecondaryTypesByDateAdvanced(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
@@ -2589,7 +2148,7 @@ public class GlobalFunctions
 
     public string AverageStageDaysAdvancedJson(int company_id, int user_id, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
     {
-        
+
         int[] _array = AverageStageDaysAdvanced(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
 
         string _json = "[";
@@ -2605,7 +2164,7 @@ public class GlobalFunctions
         {
             if (i == 0)
             {
-                _json += "{ \"name\": \"Pre-Review\",\"val\":" + _array[i].ToString()+ "},";
+                _json += "{ \"name\": \"Pre-Review\",\"val\":" + _array[i].ToString() + "},";
             }
             else if (i == 1)
             {
@@ -2626,7 +2185,7 @@ public class GlobalFunctions
         }
         _json += "]";
         return _json;
-        
+
         //return DataTableToJSONWithJavaScriptSerializer(dt);
     }
 
@@ -2635,13 +2194,13 @@ public class GlobalFunctions
         DataTable dt = AnalyticsTimelineAdvanced(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
         return DataTableToJSONWithJavaScriptSerializer(dt);
     }
-    
-    
+
+
     public string ListToJsonWithJavaScriptSerializer(List<int> _list)
     {
-      //  for(int i )
-        
-      //  int[]
+        //  for(int i )
+
+        //  int[]
 
 
         JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
@@ -2649,18 +2208,18 @@ public class GlobalFunctions
         var json = jsSerializer.Serialize(_list);
         return json;
 
-      /*  List<Dictionary<string, object>> parentRow = new List<Dictionary<string, object>>();
-        Dictionary<string, object> childRow;
-        for (int i=0; i< _list.Count(); i++)
-        {
-            childRow = new Dictionary<string, object>();
-            foreach (DataColumn col in table.Columns)
-            {
-                childRow.Add(col.ColumnName, row[col]);
-            }
-            parentRow.Add(childRow);
-        }
-        return jsSerializer.Serialize(parentRow);*/
+        /*  List<Dictionary<string, object>> parentRow = new List<Dictionary<string, object>>();
+          Dictionary<string, object> childRow;
+          for (int i=0; i< _list.Count(); i++)
+          {
+              childRow = new Dictionary<string, object>();
+              foreach (DataColumn col in table.Columns)
+              {
+                  childRow.Add(col.ColumnName, row[col]);
+              }
+              parentRow.Add(childRow);
+          }
+          return jsSerializer.Serialize(parentRow);*/
     }
 
     public string DataTableToJSONWithJavaScriptSerializer(DataTable table)
@@ -2744,7 +2303,7 @@ public class GlobalFunctions
     public List<Tuple<string, string>> SecondaryTypesListDistinct(int company_id, int user_id)
     {
         /// string - name, int - id, int -1 - primary, 2- secondary, 3 - 'Other', bool - to merge
-        List<Tuple<string,int,int, bool>> _list_types = new List<Tuple<string,int,int, bool>>();
+        List<Tuple<string, int, int, bool>> _list_types = new List<Tuple<string, int, int, bool>>();
 
         UserModel um = new UserModel(user_id);
         ReportModel rm = new ReportModel();
@@ -2758,7 +2317,7 @@ public class GlobalFunctions
         List<report_secondary_type> _all_secondary_types_for_company = db.report_secondary_type.Where(item => (_report_ids.Contains(item.report_id))).ToList();
         foreach (report_secondary_type _secondary_type in _all_secondary_types_for_company)
         {
-         ////   _list_types.Add(new Tuple<string, int, int, bool>(_secondary_type.secondary_type_nm, _secondary_type.secondary_type_id, 1, true));
+            ////   _list_types.Add(new Tuple<string, int, int, bool>(_secondary_type.secondary_type_nm, _secondary_type.secondary_type_id, 1, true));
             if ((_secondary_type.secondary_type_nm != null) && (_secondary_type.secondary_type_nm.Trim() != ""))
             {
                 other_types_names.Add(_secondary_type.secondary_type_nm.Trim());
@@ -2786,7 +2345,7 @@ public class GlobalFunctions
         List<secondary_type_mandatory> _all_mandatory_types = db.secondary_type_mandatory.Where(item => (mandatory_types_ids.Contains(item.id))).ToList();
         foreach (secondary_type_mandatory _temp_secondary_type_mandatory in _all_mandatory_types)
         {
-       ///     _list_types.Add(new Tuple<string, int, int, bool>(_temp_secondary_type_mandatory.secondary_type_en, _temp_secondary_type_mandatory.id, 1, true));
+            ///     _list_types.Add(new Tuple<string, int, int, bool>(_temp_secondary_type_mandatory.secondary_type_en, _temp_secondary_type_mandatory.id, 1, true));
             _list_types.Add(new Tuple<string, int, int, bool>(_temp_secondary_type_mandatory.secondary_type_en, _temp_secondary_type_mandatory.id, 1, true));
 
         }
@@ -2794,7 +2353,7 @@ public class GlobalFunctions
         List<company_secondary_type> _all_secondary_types = db.company_secondary_type.Where(item => (secondary_types_ids.Contains(item.id))).ToList();
         foreach (company_secondary_type _temp_company_secondary_type in _all_secondary_types)
         {
-        ///    _list_types.Add(new Tuple<string, int, int, bool>(_temp_company_secondary_type.secondary_type_en, _temp_company_secondary_type.id, 2, true));
+            ///    _list_types.Add(new Tuple<string, int, int, bool>(_temp_company_secondary_type.secondary_type_en, _temp_company_secondary_type.id, 2, true));
             _list_types.Add(new Tuple<string, int, int, bool>(_temp_company_secondary_type.secondary_type_en, _temp_company_secondary_type.id, 2, true));
 
         }
@@ -2809,7 +2368,7 @@ public class GlobalFunctions
 
             List<int> temp_list = new List<int>();
             int temp_index = -1;
-            for (int j = 0; j < _secondary_types.Count; j++ )
+            for (int j = 0; j < _secondary_types.Count; j++)
             {
                 Tuple<string, List<int>> _temp_item = _secondary_types[j];
                 if (_temp_item.Item1.Trim().ToLower() == _current_item.Item1.Trim().ToLower())
@@ -2829,7 +2388,7 @@ public class GlobalFunctions
                     _secondary_types.Add(new Tuple<string, List<int>>(_current_item.Item1, temp_list));
                 }
 
-               
+
             }
             else
             {
@@ -2883,9 +2442,9 @@ public class GlobalFunctions
                 {
                     _secondary_types.Add(new Tuple<string, List<int>>(_current_item.Item1, temp_list));
                 }
-   
+
             }
-            
+
         }
 
 
@@ -3029,7 +2588,7 @@ public class GlobalFunctions
             else if (_current_item.Item3 == 1)
             {
                 //primary
-                List<report_relationship> mandatory_relationships_in_reports = db.report_relationship.Where(item => (_report_ids.Contains(item.report_id) && item.relationship_id == _current_item.Item2  && item.company_relationship_id == -1 && item.company_relationship_id == 0)).ToList();
+                List<report_relationship> mandatory_relationships_in_reports = db.report_relationship.Where(item => (_report_ids.Contains(item.report_id) && item.relationship_id == _current_item.Item2 && item.company_relationship_id == -1 && item.company_relationship_id == 0)).ToList();
                 for (int k = 0; k < mandatory_relationships_in_reports.Count; k++)
                 {
                     report_relationship _temp_secondary_types_in_reports = mandatory_relationships_in_reports[k];
@@ -3073,7 +2632,7 @@ public class GlobalFunctions
         List<company_department> _all_departments = db.company_department.Where(item => (departments_ids.Contains(item.id))).ToList();
         foreach (company_department _temp_company_department in _all_departments)
         {
-            List<int> report_ids_by_dept_id = db.report_department.Where(item => (_report_ids.Contains(item.report_id) && item.department_id == _temp_company_department.id)).Select(item=>item.report_id).ToList();
+            List<int> report_ids_by_dept_id = db.report_department.Where(item => (_report_ids.Contains(item.report_id) && item.department_id == _temp_company_department.id)).Select(item => item.report_id).ToList();
             return_array.Add(new Tuple<string, string>(_temp_company_department.department_en, string.Join(",", report_ids_by_dept_id.ToArray())));
         }
 
@@ -3159,7 +2718,7 @@ public class GlobalFunctions
         string _first_short = "";
         string _last_short = "";
 
-        if(first.Length > 0)
+        if (first.Length > 0)
         {
             _first_short = first.ToCharArray()[0].ToString();
         }
@@ -3173,8 +2732,8 @@ public class GlobalFunctions
         }
         string _login_text_part = _first_short + _last_short;
 
-        _login_text_part = (_login_text_part + RandomLetter(6 - _login_text_part.Length)).ToLower();
-        _login_text_part = ReplaceForUI(_login_text_part);
+        _login_text_part = (_login_text_part + StringUtil.RandomLetter(6 - _login_text_part.Length)).ToLower();
+        _login_text_part = StringUtil.ReplaceForUI(_login_text_part);
 
         string _login_int_part = "";
 
@@ -3182,7 +2741,7 @@ public class GlobalFunctions
         {
             var random = new Random();
             _login_int_part = random.Next(10, 99).ToString();
-            _login_int_part = ReplaceForUI(_login_int_part);
+            _login_int_part = StringUtil.ReplaceForUI(_login_int_part);
 
         }
         while (isLoginInUse(_login_text_part + _login_int_part));
@@ -3208,16 +2767,16 @@ public class GlobalFunctions
             _first_short = company_nm;
         }
 
-        _first_short = (_first_short + RandomLetter(3 - _first_short.Length)).ToUpper().Trim();
+        _first_short = (_first_short + StringUtil.RandomLetter(3 - _first_short.Length)).ToUpper().Trim();
 
-        _first_short = ReplaceForUI(_first_short);
+        _first_short = StringUtil.ReplaceForUI(_first_short);
 
 
         do
         {
             var random = new Random();
             _last_short = random.Next(1001, 9999).ToString();
-            _last_short = ReplaceForUI(_last_short);
+            _last_short = StringUtil.ReplaceForUI(_last_short);
         }
         while (isCodeInUse(_first_short + _last_short));
 
@@ -3248,28 +2807,7 @@ public class GlobalFunctions
             return false;
     }
 
-    public string ReplaceForUI(string text)
-    {
-        string better_text = text.Trim();
 
-        better_text = better_text.Replace('O', 'K');
-        better_text = better_text.Replace('o', 'K');
-
-
-        better_text = better_text.Replace('1', '8');
-        better_text = better_text.Replace('0', '5');
-
-        better_text = better_text.Replace('I', 'A');
-        better_text = better_text.Replace('i', 'a');
-
-        better_text = better_text.Replace('J', 'W');
-        better_text = better_text.Replace('j', 'w');
-
-        better_text = better_text.Replace('L', 'S');
-        better_text = better_text.Replace('l', 's');
-
-        return better_text;
-    }
     public bool isCodeInUse(string code)
     {
         if (db.company.Any(t => t.company_code.Trim().ToLower() == code.Trim().ToLower()))
@@ -3277,25 +2815,11 @@ public class GlobalFunctions
         else
             return false;
     }
-    public static string RandomLetter(int length)
-    {
-        const string chars = "ABCDEFGHKLMNPQRSTUVWXYZ";
-        var random = new Random();
-        return new string(Enumerable.Repeat(chars, length)
-          .Select(s => s[random.Next(s.Length)]).ToArray());
-    }
 
-    public static string RandomString(int length)
-    {
-        const string chars = "ABCDEFGHKLMNPQRSTUVWXYZ23456789";
-        var random = new Random();
-        return new string(Enumerable.Repeat(chars, length)
-          .Select(s => s[random.Next(s.Length)]).ToArray());
-    }
 
     public static string IsValidPass(string password)
     {
-        if(password!= "" && password.Length >= PasswordLength)
+        if (password != "" && password.Length >= PasswordLength)
         {
             return "Success";
         }
@@ -3316,71 +2840,7 @@ public class GlobalFunctions
         return VisitorsIPAddr;
     }
 
-    /// <summary>
-    /// Feb dd, yyyy
-    /// </summary>
-    /// <param name="dt"></param>
-    /// <returns></returns>
-    public string ConvertDateToShortString(DateTime dt)
-    {
-        string sDate = "";
-        string Month = GetShortMonth(dt.Month);
-        string Day = dt.Day.ToString();
-        if (Month.Length == 1)
-            Month = "0" + Month;
-        if (Day.Length == 1)
-            Day = "0" + Day;
-        //sDate = Month + " " + Day + ", " + dt.Year.ToString();
-        sDate = Month + " " + Day + ", " + dt.Year.ToString();
-        return sDate;
-    }
-
-    /// <summary>
-    /// February 2, 2015
-    /// </summary>
-    /// <param name="dt"></param>
-    /// <returns></returns>
-    public string ConvertDateToLongMonthString(DateTime dt)
-    {
-        string sDate = "";
-        string Month =  GetFullMonth(dt.Month);
-        string Day = dt.Day.ToString();
-        if (Month.Length == 1)
-            Month = "0" + Month;
-        if (Day.Length == 1)
-            Day = "0" + Day;
-        //sDate = Month + " " + Day + ", " + dt.Year.ToString();
-        sDate = Month + " " + Day + ", " + dt.Year.ToString();
-        return sDate;
-
-    }
 
 
-    /// <summary>
-    /// 21.03
-    /// </summary>
-    /// <param name="dt"></param>
-    /// <returns></returns>
-    public string ConvertDecimalToStringAmount(decimal _amount)
-    {
-        string sAmount = String.Format("{0:C2}", Convert.ToInt32(_amount));
-        sAmount = sAmount.Replace("$", "");
-        return sAmount;
 
-    }
-
-    public string ConvertCCInfoToLast4DigitsInfo(string cc_number)
-    {
-        string saved_cc_number = "";
-        for (int i = 0; i < cc_number.Length; i++ )
-        {
-            if (i + 4 < cc_number.Length)
-                saved_cc_number = saved_cc_number + "X";
-            else
-                saved_cc_number = saved_cc_number + cc_number[i];
-        
-        }
-        return saved_cc_number.ToString();
-    
-    }
 }

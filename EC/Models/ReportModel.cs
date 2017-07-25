@@ -13,7 +13,8 @@ using System.Data.Entity.Validation;
 using EC.Constants;
 using EC.Models.ViewModels;
 using Newtonsoft.Json;
-
+using EC.Common.Interfaces;
+using EC.Core.Common;
 
 namespace EC.Models
 {
@@ -447,7 +448,7 @@ namespace EC.Models
                 if (_report != null)
                 {
                     dt = _report.incident_dt;
-                    date_string = glb.GetShortMonth(dt.Month) + " " + dt.Day.ToString() + ", " + dt.Year.ToString();
+                    date_string = m_DateTimeHelper.GetShortMonth(dt.Month) + " " + dt.Day.ToString() + ", " + dt.Year.ToString();
                 }
 
                 if (date_string.Trim().Length == 0)
@@ -471,7 +472,7 @@ namespace EC.Models
                 if (_report != null)
                 {
                     dt = _report.incident_dt;
-                    date_string = glb.GetFullMonth(dt.Month) + " " + dt.Day.ToString() + ", " + dt.Year.ToString();
+                    date_string = m_DateTimeHelper.GetFullMonth(dt.Month) + " " + dt.Day.ToString() + ", " + dt.Year.ToString();
                 }
 
                 if (date_string.Trim().Length == 0)
@@ -494,7 +495,7 @@ namespace EC.Models
                 if (_report != null)
                 {
                     dt = _report.reported_dt;
-                    date_string = glb.GetShortMonth(dt.Month) + " " + dt.Day.ToString() + ", " + dt.Year.ToString();
+                    date_string = m_DateTimeHelper.GetShortMonth(dt.Month) + " " + dt.Day.ToString() + ", " + dt.Year.ToString();
                 }
 
                 if (date_string.Trim().Length == 0)
@@ -517,7 +518,7 @@ namespace EC.Models
                 if (_report != null)
                 {
                     dt = _report.reported_dt;
-                    date_string = glb.GetFullMonth(dt.Month) + " " + dt.Day.ToString() + ", " + dt.Year.ToString();
+                    date_string = m_DateTimeHelper.GetFullMonth(dt.Month) + " " + dt.Day.ToString() + ", " + dt.Year.ToString();
                 }
 
                 if (date_string.Trim().Length == 0)

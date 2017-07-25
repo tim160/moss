@@ -1,18 +1,22 @@
 ﻿@using EC.Models;
 @using EC.Models.Database;
 @using EC.App_LocalResources;
+@using EC.Common.Interfaces;
+@using EC.Core.Common;
+@using EC.Common.Util;
 @{
-// @Styles.Render("~/Content/Styles");
+        // @Styles.Render("~/Content/Styles");
+    IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
     <link rel="stylesheet" type="text/css" href="/Content/styleReportDashboard.css">
-    ViewBag.Title = "Payment History";
+            ViewBag.Title = "Payment History";
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
     string user_nm = ViewBag.user_nm;
-    List<company_payments> all_payments = ViewBag.payments;
-    GlobalFunctions glb = new GlobalFunctions();
-    CompanyModel cm = ViewBag.cm;
+            List<company_payments> all_payments = ViewBag.payments;
+            GlobalFunctions glb = new GlobalFunctions();
+            CompanyModel cm = ViewBag.cm;
 
-    int next_payment = 0;
-    DateTime dt_next_payment = DateTime.Today;
+            int next_payment = 0;
+            DateTime dt_next_payment = DateTime.Today;
 
     if (cm._company.next_payment_date.HasValue && cm._company.next_payment_amount.HasValue)
     {
@@ -65,10 +69,10 @@
                         <div class="blockMessage withStaticBorder">
                             <div class="textMessage" style="padding-left:5%">
                                 <p class="personalName">@name</p>
-                                <p class="text"><a href="/Payment/Receipt/@_payment.id">@glb.ConvertDecimalToStringAmount(_payment.amount)</a></p>
+                                <p class="text"><a href="/Payment/Receipt/@_payment.id">@StringUtil.ConvertDecimalToStringAmount(_payment.amount)</a></p>
                             </div>
                             <div class="blockDate">
-                                <p>@glb.GetShortMonth(_payment.payment_date.Month) @_payment.payment_date.Day, @_payment.payment_date.Year</p>
+                                <p>@m_DateTimeHelper.GetShortMonth(_payment.payment_date.Month) @_payment.payment_date.Day, @_payment.payment_date.Year</p>
                             </div>
                         </div>
                     </div>
@@ -99,11 +103,11 @@
                     <div class="blockMessage withStaticBorder">
                         <div class="textMessage" style="padding-left:5%">
                             <p class="personalName">@GlobalRes.Amount:</p>
-                            <p class="text">@glb.ConvertDecimalToStringAmount(cm._company.next_payment_amount.Value)</p>
-                            @*<p class="text"><a href="/Payment/Receipt/@_payment.id">@glb.ConvertDecimalToStringAmount(_payment.amount)</a></p>*@
+                            <p class="text">@StringUtil.ConvertDecimalToStringAmount(cm._company.next_payment_amount.Value)</p>
+                            @*<p class="text"><a href="/Payment/Receipt/@_payment.id">@StringUtil.ConvertDecimalToStringAmount(_payment.amount)</a></p>*@
                         </div>
                         <div class="blockDate">
-                            <p>@glb.GetShortMonth(dt_next_payment.Month) @dt_next_payment.Day, @dt_next_payment.Year</p>
+                            <p>@m_DateTimeHelper.GetShortMonth(dt_next_payment.Month) @dt_next_payment.Day, @dt_next_payment.Year</p>
                         </div>
                     </div>
 

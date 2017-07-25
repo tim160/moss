@@ -12,6 +12,9 @@ using EC.Localization;
 using Resources = EC.Localization.Resources;
 using EC.Constants;
 using EC.Model.Impl;
+using EC.Core.Common;
+using EC.Common.Interfaces;
+
 
 namespace EC.Controllers.ViewModel
 {
@@ -67,7 +70,7 @@ namespace EC.Controllers.ViewModel
           
             UserModel um = new UserModel(user_id);
 
-            Dictionary<int, string> month = glb.ShortMonth();
+            Dictionary<int, string> month = m_DateTimeHelper.ShortMonth();
 
             ViewBag.user_id = user_id;
             ViewBag.um = um;

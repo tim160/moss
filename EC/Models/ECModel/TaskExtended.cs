@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using EC.Models.Database;
 using EC.Core.Common;
+using EC.Common.Util;
 
 namespace EC.Models.ECModel
 {
@@ -40,7 +41,7 @@ namespace EC.Models.ECModel
             {
                 if (TaskDueDate.HasValue)
                 {
-                    return glb.ConvertDateToShortString(TaskDueDate.Value);
+                    return m_DateTimeHelper.ConvertDateToShortString(TaskDueDate.Value);
                 }
                 else
                     return "";
@@ -67,7 +68,7 @@ namespace EC.Models.ECModel
 
         }
 
-        private int TaskCallerID; 
+        private int TaskCallerID;
         #endregion
         public bool IsExpired
         {
@@ -129,13 +130,13 @@ namespace EC.Models.ECModel
                 List<task_comment> _comments = db.task_comment.Where(item => item.task_id == TaskID).ToList();
 
                 bool temp = false;
-                foreach(task_comment _comment in _comments)
+                foreach (task_comment _comment in _comments)
                 {
                     temp = db.task_comment_user_read.Any(item => ((item.task_comment_id == _comment.id) && (item.user_id == TaskCallerID)));
                     if (temp)
                         _new_activity = true;
                 }
-                
+
                 return _new_activity;
             }
 
@@ -147,7 +148,7 @@ namespace EC.Models.ECModel
             get
             {
                 if (TaskReportID != 0)
-                { 
+                {
                     ReportModel rm = new ReportModel(TaskReportID);
                     return rm._color_descr;
                 }
@@ -247,7 +248,7 @@ namespace EC.Models.ECModel
                     TaskAssigner = _user.first_nm.Trim() + " " + _user.last_nm.Trim();
                 if (_user != null)
                 {
-                    if(_user.photo_path.Trim().Length > 0)
+                    if (_user.photo_path.Trim().Length > 0)
                         TaskAssignerPhoto = _user.photo_path;
                     TaskAssignerID = _user.id;
                 }
@@ -271,16 +272,16 @@ namespace EC.Models.ECModel
 
                 #region TaskTitle
                 TaskTitle = _task_original.title;
-                TaskTitle = glb.FirstWords(TaskTitle, 3).Trim();
+                TaskTitle = StringUtil.FirstWords(TaskTitle, 3).Trim();
                 if (TaskTitle.Length < _task_original.title.Trim().Length)
                     TaskTitle = (TaskTitle + "....").Trim();
                 #endregion
 
                 #region TaskDescription
                 TaskDescr = _task_original.description;
-                TaskDescr = glb.FirstWords(TaskDescr, 3).Trim();
+                TaskDescr = StringUtil.FirstWords(TaskDescr, 3).Trim();
                 if (TaskDescr.Length < _task_original.description.Trim().Length)
-                    TaskDescr = (TaskDescr + "....").Trim(); 
+                    TaskDescr = (TaskDescr + "....").Trim();
                 #endregion
 
                 #region Task Due Date/Due date string
@@ -288,7 +289,7 @@ namespace EC.Models.ECModel
                 if (due_date.HasValue)
                 {
                     TaskDueDate = due_date;
-                } 
+                }
                 #endregion
 
 
@@ -321,6 +322,6 @@ namespace EC.Models.ECModel
 
             return task_comments;
         }
-     
+
     }
 }

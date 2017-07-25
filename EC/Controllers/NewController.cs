@@ -12,6 +12,8 @@ using EC.Constants;
 using log4net;
 using LavaBlast.Util.CreditCards;
 
+using CommonUtil = EC.Common.Util;
+
 namespace EC.Controllers
 {
     public class NewController : Controller
@@ -151,7 +153,7 @@ namespace EC.Controllers
             int location_id = 0;
             int language_id = 1;
 
-            
+
             if ((string.IsNullOrEmpty(code)) || (string.IsNullOrEmpty(location)) || (string.IsNullOrEmpty(company_name)) || (string.IsNullOrEmpty(number)) || (string.IsNullOrEmpty(first)) || (string.IsNullOrEmpty(last)) || (string.IsNullOrEmpty(email)) || (string.IsNullOrEmpty(title)))
             {
                 return App_LocalResources.GlobalRes.EmptyData;
@@ -203,7 +205,7 @@ namespace EC.Controllers
                 int.TryParse(selectedMonth, out _month);
                 int.TryParse(selectedYear, out _year);
 
-                if(_month == 0 || _year == 0)
+                if (_month == 0 || _year == 0)
                     return App_LocalResources.GlobalRes.EmptyData;
 
                 var random = new Random();
@@ -212,12 +214,12 @@ namespace EC.Controllers
 
 
                 auth_code = payment_auth_code;
-            /*    Dictionary<BeanStreamProcessing.RequestFieldNames, string> _dictionary = new Dictionary<BeanStreamProcessing.RequestFieldNames, string>();
-                bsp.ProcessRequest(_dictionary, out cc_error_message, out auth_code);
-                if (cc_error_message.Trim().Length > 0)
-                {
-                    return cc_error_message;
-                }*/
+                /*    Dictionary<BeanStreamProcessing.RequestFieldNames, string> _dictionary = new Dictionary<BeanStreamProcessing.RequestFieldNames, string>();
+                    bsp.ProcessRequest(_dictionary, out cc_error_message, out auth_code);
+                    if (cc_error_message.Trim().Length > 0)
+                    {
+                        return cc_error_message;
+                    }*/
             }
 
             #endregion
@@ -226,12 +228,12 @@ namespace EC.Controllers
             int company_invitation_id = 0;
             int client_id = 0;
 
-                List<company_invitation> invitations = db.company_invitation.Where(t => ((t.is_active == 1) && (t.invitation_code.Trim().ToLower() == code.Trim().ToLower()))).ToList();
-                company_invitation _invitation = invitations[0];
-                company_invitation_id = _invitation.id;
-                client_id = _invitation.created_by_company_id;
+            List<company_invitation> invitations = db.company_invitation.Where(t => ((t.is_active == 1) && (t.invitation_code.Trim().ToLower() == code.Trim().ToLower()))).ToList();
+            company_invitation _invitation = invitations[0];
+            company_invitation_id = _invitation.id;
+            client_id = _invitation.created_by_company_id;
 
-            
+
 
             string company_code = glb.GenerateCompanyCode(company_name);
 
@@ -438,7 +440,8 @@ namespace EC.Controllers
                             return App_LocalResources.GlobalRes.OtherDepartmentSavingFailed;
                         }
                     }
-                } else
+                }
+                else
                 {
                     selectedDepartment = new company_department
                     {
@@ -711,7 +714,7 @@ namespace EC.Controllers
                 _cp.cc_year = Convert.ToInt32(2017);
 
                 _cp.cc_name = cardname.Trim();
-                _cp.cc_number = glb.ConvertCCInfoToLast4DigitsInfo(cardnumber.Trim());
+                _cp.cc_number = CommonUtil.StringUtil.ConvertCCInfoToLast4DigitsInfo(cardnumber.Trim());
 
                 _cp.company_id = company_id;
                 _cp.payment_date = DateTime.Today;
@@ -801,8 +804,8 @@ namespace EC.Controllers
             {
                 #region Lowest Company Location ID
 
-                List<company_location> company_locations = db.company_location.Where(t => ((t.status_id == 2))).OrderBy( t=> t.id).ToList();
-                if(company_locations.Count > 0)
+                List<company_location> company_locations = db.company_location.Where(t => ((t.status_id == 2))).OrderBy(t => t.id).ToList();
+                if (company_locations.Count > 0)
                     location_id = company_locations[0].id;
 
                 #endregion
@@ -905,7 +908,7 @@ namespace EC.Controllers
                             body = eb.Body;
                             em.Send(to, cc, email_title, body, true);
                         }
-                    } 
+                    }
                     #endregion
                 }
                 #endregion
@@ -1039,7 +1042,7 @@ namespace EC.Controllers
                 amount = 1300;
             }
 
-            result_company.Data = glb.ConvertDecimalToStringAmount(amount);
+            result_company.Data = CommonUtil.StringUtil.ConvertDecimalToStringAmount(amount);
             return result_company;
 
         }
@@ -1083,7 +1086,7 @@ namespace EC.Controllers
                     return RedirectToAction("Quote", "New");
                 }
             }
-            ViewBag.amount = glb.ConvertDecimalToStringAmount(_amount);
+            ViewBag.amount = CommonUtil.StringUtil.ConvertDecimalToStringAmount(_amount);
 
             return View();
         }

@@ -3,6 +3,9 @@
 @using EC.Models.Database;
 @using EC.Controllers.ViewModel;
 @using EC.App_LocalResources;
+@using EC.Common.Interfaces;
+@using EC.Core.Common;
+
 @{
     ViewBag.Title = "My Messages";
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
@@ -12,6 +15,7 @@
     GlobalFunctions glb = new GlobalFunctions();
     UserModel um = new UserModel();
     string _old = "";
+    IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
 }
 
 <div class="blockSettings blockAllTasks">
@@ -61,7 +65,7 @@
                                 <p class="text"><a href="/Case/@message_type/@_message.MessageCaseID">@_message._message.body_tx</a></p>
                             </div>
                             <div class="blockDate">
-                                <p>@glb.GetShortMonth(_message._message.created_dt.Value.Month) @_message._message.created_dt.Value.Day</p>
+                                <p>@m_DateTimeHelper.GetShortMonth(_message._message.created_dt.Value.Month) @_message._message.created_dt.Value.Day</p>
                             </div>
                         </div>
                     </div>

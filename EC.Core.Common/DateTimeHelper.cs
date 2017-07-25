@@ -12,8 +12,8 @@ namespace EC.Core.Common
 {
     [TransientType]
     [RegisterAsType(typeof(IDateTimeHelper))]
-    
-    public class DateTimeHelper: IDateTimeHelper
+
+    public class DateTimeHelper : IDateTimeHelper
     {
         public DateTime FirstDateOfWeek(int year, int weekOfYear)
         {
@@ -78,7 +78,7 @@ namespace EC.Core.Common
         {
             string[] timeAry = timeString.Split(':');
             int hour = Convert.ToInt32(timeAry[0]);
-            int min = Convert.ToInt32(timeAry[1]);            
+            int min = Convert.ToInt32(timeAry[1]);
             TimeSpan newTime = new TimeSpan(hour, min, 0);
             return newTime;
         }

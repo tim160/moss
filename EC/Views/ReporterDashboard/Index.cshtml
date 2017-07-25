@@ -27,7 +27,7 @@
             <div>
                 <a href="/ReporterDashboard/Index/@user_id" class="menuItem active" style="padding-right:14px;">@GlobalRes.ReportSummaryUp</a>
 
-                
+
                 @if (unread_message_number > 0)
                 {
                     <a href="/ReporterDashboard/Messages/@user_id" class="menuItem" style="padding-right:15px;">
@@ -42,7 +42,7 @@
                     </a>
                 }
                 <a href="/ReporterDashboard/Activity/@user_id" class="menuItem">@GlobalRes.Activity</a>
-                <a href="/ReporterDashboard/Settings/@user_id" class="menuItem settings" style="margin-right:-2px;" >@GlobalRes.Settings</a>
+                <a href="/ReporterDashboard/Settings/@user_id" class="menuItem settings" style="margin-right:-2px;">@GlobalRes.Settings</a>
             </div>
         </div>
     </div><!--settingMenu-->
@@ -106,7 +106,7 @@
                                         {
                                             <text>:</text>
                                         }
-                                        
+
                                         @if (rm._report.incident_anonymity_id == 2)
                                         {
                                             @GlobalRes.forEmployeeConfidentialOnly
@@ -160,13 +160,13 @@
                             {
                                 <table>
                                     <tbody>
-                                            @foreach (var witness in _involved)
-                                            {
-                                                <tr>
-                                                    <td class="positionTitleReport">@Html.Raw(@witness.Name + " " + @witness.last_name)</td>
-                                                    <td class="positionReportText reportTextBlack">@Html.Raw(@witness.Title + ", " + @witness.Role)</td>
-                                                </tr>
-                                            }
+                                        @foreach (var witness in _involved)
+                                        {
+                                            <tr>
+                                                <td class="positionTitleReport">@Html.Raw(@witness.Name + " " + @witness.last_name)</td>
+                                                <td class="positionReportText reportTextBlack">@Html.Raw(@witness.Title + ", " + @witness.Role)</td>
+                                            </tr>
+                                        }
                                     </tbody>
                                 </table>
                             }
@@ -272,30 +272,30 @@
                                 </table>
 
                                 @*<div class="titleReport">@GlobalRes.IncidentType:</div>
-                                <div class="reportText"> @rm._secondary_type_string</div>
+                                    <div class="reportText"> @rm._secondary_type_string</div>
 
-                                <div class="titleReport">@GlobalRes.IncidentDateUp:</div>
-                                <div class="reportText">@m_DateTimeHelper.ConvertDateToLongMonthString(rm._report.incident_dt)</div>
+                                    <div class="titleReport">@GlobalRes.IncidentDateUp:</div>
+                                    <div class="reportText">@m_DateTimeHelper.ConvertDateToLongMonthString(rm._report.incident_dt)</div>
 
-                                <div class="titleReport">@GlobalRes.isOngoing:</div>
-                                <div class="reportText">@rm._is_ongoing</div>
-                                @if (!String.IsNullOrEmpty(rm._report.report_frequency_text))
-                                {
-                                    <div class="titleReport">&nbsp;</div>
-                                    <div class="reportText">
-                                        @rm._report.report_frequency_text
-                                    </div>
-                                }
+                                    <div class="titleReport">@GlobalRes.isOngoing:</div>
+                                    <div class="reportText">@rm._is_ongoing</div>
+                                    @if (!String.IsNullOrEmpty(rm._report.report_frequency_text))
+                                    {
+                                        <div class="titleReport">&nbsp;</div>
+                                        <div class="reportText">
+                                            @rm._report.report_frequency_text
+                                        </div>
+                                    }
 
-                                <div class="titleReport">@GlobalRes.incidentResult:</div>
-                                <div class="reportText">@rm._has_injury_damage</div>
+                                    <div class="titleReport">@GlobalRes.incidentResult:</div>
+                                    <div class="reportText">@rm._has_injury_damage</div>
 
-                                @if (!String.IsNullOrEmpty(rm._report.injury_damage))
-                                {
-                                    <div class="reportText">
-                                        @rm._report.injury_damage
-                                    </div>
-                                }*@
+                                    @if (!String.IsNullOrEmpty(rm._report.injury_damage))
+                                    {
+                                        <div class="reportText">
+                                            @rm._report.injury_damage
+                                        </div>
+                                    }*@
                                 <div class="titleReportAll">
                                     <div class="incidentDescription">
                                         <p class="titleIncidentDescription">@GlobalRes.IncidentDescription:</p>

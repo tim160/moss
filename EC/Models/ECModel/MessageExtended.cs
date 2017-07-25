@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using EC.Models.Database;
+using EC.Common.Util;
 
 namespace EC.Models.ECModel
 {
-    public class MessageExtended: BaseEntity
+    public class MessageExtended : BaseEntity
     {
         public int MessageID;
         public string MessagePoster;
@@ -17,7 +18,7 @@ namespace EC.Models.ECModel
         public int MessageStatus;
         public int MessageCaseID;
         public string MessageStatusString
-        { 
+        {
             get
             {
                 switch (MessageStatus)
@@ -28,7 +29,7 @@ namespace EC.Models.ECModel
                         return "Read";
                 }
             }
-        
+
         }
 
         private int MessageCallerID;
@@ -98,9 +99,9 @@ namespace EC.Models.ECModel
 
                 #region Body
                 MessageBody = _message.body_tx;
-                MessageBody = glb.FirstWords(MessageBody, 10).Trim();
+                MessageBody = StringUtil.FirstWords(MessageBody, 10).Trim();
                 if (MessageBody.Length < _message.body_tx.Trim().Length)
-                    MessageBody = MessageBody + "...."; 
+                    MessageBody = MessageBody + "....";
                 #endregion
 
                 DateTime? dt = _message.created_dt;

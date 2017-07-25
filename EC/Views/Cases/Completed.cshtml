@@ -1,122 +1,301 @@
-﻿@using EC.App_LocalResources;
-@using EC.Models.ViewModel;
+﻿@using EC.Models;
+@using EC.Models.ECModel;
+@using EC.Models.Database;
+@using EC.App_LocalResources;
+@using EC.Common.Interfaces;
+@using EC.Core.Common;
 @{
-    bool? is_cc = ViewBag.is_cc;
-    if (!is_cc.HasValue)
-    {
-        is_cc = false;
-    }
-    String class_ext = ViewBag.cc_extension;
+    GlobalFunctions glb = new GlobalFunctions();
+    IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
 
-    //bool? is_cc = true;
-    //String class_ext = "";
-    //if (is_cc)
-    //{
-    //    class_ext = "_cc";
-    //}
-    
-    ViewBag.Title = GlobalRes.Completedcases;
+    ViewBag.Title = GlobalRes.Mycompletedtasks;
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
-    IEnumerable<int> report_ids = ViewBag.completed_report_ids;
-   
-    var user_id = (Int32)ViewBag.user_id;
-    IEnumerable<int> pending_report_ids = ViewBag.pending_report_ids;
-    if (pending_report_ids != null)
-    {
-        foreach (int _report_id in pending_report_ids)
-        {
-            @Html.Partial("~/Views/PartialViews/_ReportPendingNotification.cshtml", new ViewDataDictionary { { "report_id", _report_id }, { "user_id", user_id } })
-        }
-    }
 
-    Int32 report_ids_Completed = ViewBag.completed_report_counters;
-    Int32 report_ids_Spam = ViewBag.spam_report_counters;
-    Int32 report_ids_Active = ViewBag.active_report_counters;
-    Int32 report_ids_Closed = ViewBag.closed_report_counters;
+    int user_id = (Int32)ViewBag.user_id;
+    List<TaskExtended> tasks = (List<TaskExtended>)ViewBag.tasks;
+    ReportModel rm = new ReportModel();
+
+    List<report> reports = (List<report>)ViewBag.reports;
+    UserModel um = new UserModel(user_id);
+    int unread_tasks = ViewBag.unread_tasks;
 
 }
 
-<div id="casesHeared" class="pageCases">
-    <div id="menu">
-        <h2 class="mainTitle">@GlobalRes.Menu:</h2>
-        <div>
-            <a href="/Cases/Index" class="caseesTab">
-                @GlobalRes.Activecases@if (report_ids_Active > 0)
-                {<span>@report_ids_Active</span>}
-            </a>
-            <a href="/Cases/Completed" class="caseesTab active">
-                @GlobalRes.Completedcases@if (report_ids_Completed > 0)
-                {<span>@report_ids_Completed</span>}
-            </a>
-            <a href="/Cases/Closed" class="caseesTab">
-                @GlobalRes.ClosedCases@if (report_ids_Closed > 0)
-                {<span>@report_ids_Closed</span>}
-            </a>
-            <a href="/Cases/Spam" class="caseesTab">
-                @GlobalRes.Spam@if (report_ids_Spam > 0)
-                {<span>@report_ids_Spam</span>}
-            </a>
+<div class="blockSettings blockAllTasks">
+    <div id="casesHeared">
+        <div id="menu">
+
+            <a href="/tasks/Index" class="caseesTab">@GlobalRes.Myactivetasks @if(unread_tasks>0){<span>@unread_tasks</span>}</a>
+            <a href="/tasks/Completed" class="caseesTab active">@GlobalRes.Mycompletedtasks</a>
         </div>
+   @*     <div class="positionActivityIcon">
+                <div id="activityIcon"></div>
+            </div>*@
+        </div><!--casesHeared-->
+
+
+        <div class="contentSettings">
+            <!--START myCompletedTasks-->
+        @if(tasks.Where(m => m._task.assigned_to == user_id).Count() > 0)
+        {
+            <div class="myCompletedTasks myTasks">
+                <header>
+                    <div class="menuTasks">
+                        <div class="caseTasksName">
+                            <span>@GlobalRes.Case > @GlobalRes.Taskname</span>
+                            <span class="labelArrow">></span>
+                        </div>
+                        <div class="assignedMediator">@GlobalRes.Assignedby</div>
+                        <div class="dueDate">
+                            <span>@GlobalRes.Completedon</span>
+                            <span class="labelArrow">></span>
+                        </div>
+                    </div>
+                </header>
+                <div class="contentTasks">
+                    @{
+                        string _classCircle, _styleCircle, _colorTextAfter, _colorTextBefore, _smallCircle, _fontName, _nameBlockShow;
+                        _classCircle = "bigDot";
+                        _styleCircle = "background: #3099be;";
+
+                        //_classCircle = "notShadedCircle";
+                        //_styleCircle = "border: 2px solid #d47472;";
+
+
+                        _colorTextBefore = ""; 
+                        _colorTextBefore = "colorTextGrey"; 
+
+
+                        _colorTextAfter = "colorTextGrey"; 
+                        _colorTextAfter = ""; 
+
+                        _smallCircle = "littleDotShow"; 
+                        _smallCircle = "littleDot"; 
+                        _fontName = "fontSamibold"; 
+                        _fontName = ""; 
+
+                        _nameBlockShow = "blockFile";
+                        _nameBlockShow = "";
+                        _nameBlockShow = "blockDays"; 
+                    }
+
+                    <div class="blockTask taskByDate" style="display: none;">
+                        @foreach (TaskExtended _task in tasks.Where(m => m._task.assigned_to == user_id).OrderBy(m => m._task.completed_on))
+                        {
+                            rm = new ReportModel(_task.TaskReportID);
+                            _nameBlockShow = "";
+                            _colorTextAfter = "colorTextGrey";
+                            _colorTextBefore = "colorTextGrey";
+                            _classCircle = "notShadedCircle";
+                            _styleCircle = "border: 2px solid #" + @_task.TaskColorCode + ";";
+
+
+                            _smallCircle = "littleDot";
+                            _fontName = "";
+
+                            <div class="contentBlockTask">
+                                <div class="blockTitle">
+                                    <span class="@_classCircle" style="@_styleCircle"></span>
+                                    <span class="taskName @_fontName">
+                                        <span class="titleTask @_colorTextBefore">
+                                            @rm._report.display_name - @rm._location_string
+                                        </span>
+                                        <span class="labelArrow">></span>
+                                        <a href="/Case/Task/@_task.TaskID">
+                                            <span class="text @_colorTextAfter">@_task._task.title</span>
+                                        </a>
+                                    </span>
+                                    <span class="@_smallCircle"></span>
+                                </div>
+                                <div class="blockPeople">
+
+                                    @if (@_task.TaskAssignerPhoto.Trim().Length > 0)
+                                    {
+                                        <img src='@Url.Content(_task.TaskAssignerPhoto)'>
+                                    }
+                                    else
+                                    {
+                                        <img src='@Url.Content("/Content/Icons/noPhoto.png")'>
+                                    }
+                                    <label class="name">@_task.TaskAssigner</label>
+                                </div>
+
+                                <div class="date">
+                                    @if (_task._task.completed_on.HasValue)
+                                    {
+                                        @m_DateTimeHelper.ConvertDateToShortString(_task._task.completed_on.Value)
+                                    }
+                                </div>
+                                <div class="info @_nameBlockShow">
+                                    <div class="file">
+                                        <img src='@Url.Content("/Content/Icons/fileCases.png")'>
+                                    </div>
+                                    @if ((_task.TaskDueDate.HasValue) && (_task._task.completed_on.HasValue))
+                                    {
+                                        DateTime dt = _task._task.completed_on.Value;
+                                        int total_days = (_task.TaskDueDate.Value - dt).Days;
+                                        if ((total_days > 1))
+                                        {
+                                            <span class="textDays">@total_days @GlobalRes.dayslate</span>
+                                        }
+                                        if ((total_days == 1))
+                                        {
+                                            <span class="textDays">@total_days @GlobalRes.daylate</span>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+
+                    <div class="blockTask taskByName" style="display: block;">
+                        @foreach (report _report in reports.OrderBy(m => m.display_name))
+                        {
+                            rm = new ReportModel(_report.id);
+
+                            List<task> _report_tasks = rm.ReportTasks(2);
+
+                            if (_report_tasks.Where(m => m.assigned_to == user_id).Count() > 0)
+                            {
+                                <div class="contentBlockTasks">
+                                    <div class="contentBlockTask contentMainTask">
+                                        <div class="headerContentTask" style="border-left: 10px solid #@rm._color_code; ">
+                                            <div class="blockTitle">
+                                                <span class="taskName">
+                                                    <span class="titleTask">@rm._report.display_name - @rm._location_string</span>
+                                                    <span class="labelArrow">></span>
+                                                </span>
+                                            </div>
+
+                                        </div>
+                                    </div><!--contentMainTask-->
+                                    @foreach (task _tasks in _report_tasks.Where(m => m.assigned_to == user_id))
+                                    {
+                                        TaskExtended tsk = new TaskExtended(_tasks.id, user_id);
+
+                                        _colorTextAfter = "";
+                                        _colorTextBefore = "";
+                                        _classCircle = "bigDot";
+                                        _styleCircle = "background: #";// + @rm._color_code + ";";
+                                        _colorTextAfter = "colorTextGrey";
+                                        _colorTextBefore = "colorTextGrey";
+                                        _classCircle = "notShadedCircle";
+                                        _styleCircle = "border: 2px solid #";// + @rm._color_code + ";";
+
+
+                                        if (tsk.IsRead())
+                                        {
+                                            _fontName = "";
+                                        }
+
+                                        <div class="contentBlockTask tasksForMain">
+                                            <div class="blockTitle">
+                                                <span class="@_classCircle" style="@_styleCircle@rm._color_code;"></span>
+                                                <span class="taskName @_fontName">
+                                                    <a href="/Case/Task/@tsk.TaskID">
+                                                        <span class="text @_colorTextAfter">@_tasks.title</span>
+                                                    </a>
+                                                </span>
+                                                <span class="@_smallCircle"></span>
+                                            </div>
+                                            <div class="blockPeople">
+                                                @if (@tsk.TaskAssignerPhoto.Trim().Length > 0)
+                                                {
+                                                    <img src='@Url.Content(tsk.TaskAssignerPhoto)'>
+                                                }
+                                                else
+                                                {
+                                                    <img src='@Url.Content("/Content/Icons/noPhoto.png")'>
+                                                }
+                                                <label class="name">@tsk.TaskAssigner</label>
+                                            </div>
+
+                                            <div class="date">
+                                            @if (tsk._task.completed_on.HasValue)
+                                            {
+                                                @m_DateTimeHelper.ConvertDateToShortString(tsk._task.completed_on.Value)
+                                            }
+                                        </div>
+                                            <div class="info @_nameBlockShow">
+                                                <div class="file">
+                                                    <img src='@Url.Content("/Content/Icons/fileCases.png")'>
+                                                </div>
+                                                @if ((tsk.TaskDueDate.HasValue) && (tsk._task.completed_on.HasValue))
+                                                {
+                                                    DateTime dt = tsk._task.completed_on.Value;
+                                                    int total_days = (tsk.TaskDueDate.Value - dt).Days;
+                                                    if ((total_days > 1))
+                                                    {
+                                                        <span class="textDays">@total_days @GlobalRes.dayslate</span>
+                                                    }
+                                                    if ((total_days == 1))
+                                                    {
+                                                        <span class="textDays">@total_days @GlobalRes.daylate</span>
+                                                    }
+                                                }
+                                            </div>
+                                        </div>
+                                    }
+
+                                </div>
+                            }
+                        }
+                    </div><!--END BLOCK "blockTask.taskByName"-->
+                </div>
+
+            </div>
+            <!--END myCompletedTasks-->
+        }
+        </div><!--contentSettings-->
     </div>
 
-</div><!--casesHeared-->
+    <script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('.menuTasks .caseTasksName span').click(function () {
+                $('.blockTask.taskByDate').hide();
+                $('.blockTask.taskByName').show();
+                $('.myTasks header .menuTasks .dueDate .labelArrow').hide();
+                $('.myTasks header .menuTasks .caseTasksName .labelArrow').show();
+                $('.myTasks header .menuTasks .dueDate').css('background', '#ebf1f1');
+                $('.myTasks header .menuTasks .caseTasksName').css('background', '#d6dcdc');
+            });
+            $('.menuTasks .dueDate span').click(function () {
+                $('.blockTask.taskByDate').show();
+                $('.blockTask.taskByName').hide();
+                $('.myTasks header .menuTasks .dueDate .labelArrow').show();
+                $('.myTasks header .menuTasks .dueDate').css('background', '#d6dcdc');
+                $('.myTasks header .menuTasks .caseTasksName .labelArrow').hide();
+                $('.myTasks header .menuTasks .caseTasksName').css('background', '#ebf1f1');
+            });
 
 
-<div class="positionCases">
-    @foreach (CasePreviewViewModel _case_previewViewModel in ViewBag.ReportPreviewStart)
-    {
-        <div class="mainCaseParent">
-            @Html.Partial("~/Views/Shared/Helpers/_CasePreview.cshtml", _case_previewViewModel)
-        </div>
-    }
 
-    @foreach (int _case_id in ViewBag.ReportPreviewVM)
-    {
-        <div class="mainCaseParent" data-url="/cases/Preview?case_id=@_case_id">
-            <img src="~/Content/Icons/Xanal.gif" /> Loading....
-        </div>
-    }
-</div>
+            $('.contentMainTask').click(function () {
+                $(this).parent().find('.tasksForMain').toggle();
+                var element = $(this).find('.labelArrow');
+                var styleElement = element.css('transform');
+                if (styleElement == "matrix(-0.707107, 0.707107, -0.707107, -0.707107, 0, 0)") {
 
+                    element.css({
+                        '-ms-transform': 'rotate(45deg)',
+                        '-webkit-transform': 'rotate(45deg)',
+                        '-moz-transform': 'rotate(45deg)',
+                        'transform': 'rotate(45deg)'
+                    });
+                }
+                else {
+                    element.css({
+                        '-ms-transform': 'rotate(135deg)',
+                        '-webkit-transform': 'rotate(135deg)',
+                        '-moz-transform': 'rotate(135deg)',
+                        'transform': 'rotate(135deg)'
+                    });
+                }
+            });
 
-<script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
-<script>
-    $(document).ready(function () {
-
-        //START Open mini menu for mobile
-        function blockActivityHeight() {
-            if ($('#menu').height() < 50) {
-                $('.positionActivityIcon').height(89);
-            }
-            else {
-                $('.positionActivityIcon').height($('#casesHeared').height());
-            }
-        }
-        $('.mainTitle').click(function () {
-            $('.mainTitle + div').toggle();
-            blockActivityHeight();
         });
-        //----------------END Open mini menu for mobile---------------------------
-    });
 
-</script>
-<script>
-    var heightTemp = $(".bottom").height();
-    $(".bottom").each(function (indx, element) {
-        var h = $(element).height();
-        heightTemp = h > heightTemp ? h : heightTemp;
-    });
-    $(".bottom").each(function (indx, element) {
-        $(element).height(heightTemp);
-    });
-    $(document).ready(function (e) {
-        $(".mainCaseParent").each(function (index, item) {
-            var url = $(item).data("url");
-
-            if (url && url.length > 0) {
-                $(item).load(url);
-            }
-        });
-    });
-
-</script>
+    </script>

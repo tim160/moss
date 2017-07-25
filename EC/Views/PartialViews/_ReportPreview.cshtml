@@ -159,12 +159,12 @@
                     <li>
                         @if (_tasks.Count > 0)
                         {
-                        <a class="contanatTable" href="~/Case/Index/@report_id">
-                            <div class="taskIcon">
-                                <img src='@Url.Content("/Content/Icons/tasks.png")'>
-                            </div>
-                            <ul class="tasks">
-                                @for (int i = 0; i < _tasks.Count; i++)
+                            <a class="contanatTable" href="~/Case/Index/@report_id">
+                                <div class="taskIcon">
+                                    <img src='@Url.Content("/Content/Icons/tasks.png")'>
+                                </div>
+                                <ul class="tasks">
+                                    @for (int i = 0; i < _tasks.Count; i++)
                                     {
                                         string _circle_color = _color_descr;
                                         littleDot_red = "";
@@ -187,23 +187,23 @@
                                         if (_tasks[i].IsRead() && (!_tasks[i].HasNewActivity()))
                                         {
                                             _task_status = "notShadedCircle";
-                                           // _styleCircle = "border: 2px solid " + _circle_color + ";";
+                                            // _styleCircle = "border: 2px solid " + _circle_color + ";";
 
 
-                                          //  _styleText = "";
+                                            //  _styleText = "";
                                         }
                                         else
                                         {
                                             _task_status = "circle";
-                                          //  _styleCircle = "background: " + _circle_color + ";";
-                                          //  _styleText = "";
+                                            //  _styleCircle = "background: " + _circle_color + ";";
+                                            //  _styleText = "";
                                         }
 
                                         //red dot
                                         if (_tasks[i].HasNewActivity())
                                         {
                                             littleDot_red = "littleDot";
-                                   //         littleDot_red = "littleDot red";
+                                            //         littleDot_red = "littleDot red";
 
                                         }
                                         else
@@ -211,8 +211,8 @@
                                             littleDot_red = "littleDot";  // new activity
                                         }
 
-                                    
-                                    
+
+
                                         if (_tasks[i].HasNewActivity())
                                         {
                                             // @_tasks[i].TaskTitle should be bold
@@ -221,24 +221,24 @@
                                         {
                                             //@_tasks[i].TaskTitle should be regular ?Open Sans
                                         }
-                                    
-                                    
-                                    
-                                    <li>
-                                        <div class="left @_task_grey">
-                                            <i class="@_task_status @_circle_color "></i>
-                                            @_tasks[i].TaskTitle
-                                            <span class="@littleDot_red"></span>
-                                        </div>
-                                        <div class="right textRight">
-                                            @_tasks[i].TaskAssignee
-                                        </div>
 
-                                    </li>
+
+
+                                        <li>
+                                            <div class="left @_task_grey">
+                                                <i class="@_task_status @_circle_color "></i>
+                                                @_tasks[i].TaskTitle
+                                                <span class="@littleDot_red"></span>
+                                            </div>
+                                            <div class="right textRight">
+                                                @_tasks[i].TaskAssignee
+                                            </div>
+
+                                        </li>
 
                                     }
-                            </ul>
-                        </a>
+                                </ul>
+                            </a>
                         }
 
                     </li>
@@ -287,7 +287,7 @@
                                         {
                                             @last_message.MessagePoster
                                         }
-                                        <div class="right textRight">@glb.ConvertDateToShortString(last_message._message.created_dt.Value)</div>
+                                        <div class="right textRight">@m_DateTimeHelper.ConvertDateToShortString(last_message._message.created_dt.Value)</div>
                                     </div>
                                     <div class="beginMessage"> @last_message.MessageBody</div>
                                 </div>
@@ -454,7 +454,7 @@
                                     <div class="textRight">
                                         <div class="title">@GlobalRes.Spam</div>
                                         <div class="textInfo">
-                                            <p class="headerTitle">@temp_um._user.first_nm @temp_um._user.last_nm, @glb.ConvertDateToShortString(ris.created_date):</p>
+                                            <p class="headerTitle">@temp_um._user.first_nm @temp_um._user.last_nm, @m_DateTimeHelper.ConvertDateToShortString(ris.created_date):</p>
                                             <p class="textAll">
                                                 @ris.description
                                             </p>

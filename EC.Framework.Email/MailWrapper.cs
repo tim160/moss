@@ -18,7 +18,7 @@ namespace EC.Framework.Email
         private string m_BodyUri;
         private string m_Subject;
 
-        public string BodyUri 
+        public string BodyUri
         {
             get { return m_BodyUri; }
         }
@@ -29,7 +29,7 @@ namespace EC.Framework.Email
         }
 
 
-        public EmailTemplateInfo(string bodyUri,string subject)
+        public EmailTemplateInfo(string bodyUri, string subject)
         {
             m_BodyUri = bodyUri;
             m_Subject = subject;
@@ -39,8 +39,8 @@ namespace EC.Framework.Email
     // notification: id, subject, text, receiver(s), cc, bcc, is_processed, created_dt, 
     public class MailWrapper
     {
- ////       private static readonly ICustomLog m_Log =
-  ///          CustomLogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        ////       private static readonly ICustomLog m_Log =
+        ///          CustomLogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private Dictionary<string, EmailTemplateInfo> m_EmailTemplates = new Dictionary<string, EmailTemplateInfo>();
 
@@ -59,7 +59,7 @@ namespace EC.Framework.Email
         private int m_Port;
         private string m_FromAddress;
         private bool m_ImpersonateDispatcher = false;
-        private SmtpDeliveryMethod m_DeliveryMethod = SmtpDeliveryMethod.Network; 
+        private SmtpDeliveryMethod m_DeliveryMethod = SmtpDeliveryMethod.Network;
 
         public string Server
         {
@@ -116,7 +116,7 @@ namespace EC.Framework.Email
 
         public bool ImpersonateDispatcher
         {
-            get { return m_ImpersonateDispatcher ; }
+            get { return m_ImpersonateDispatcher; }
         }
 
         private bool m_Inintialized = false;
@@ -193,13 +193,13 @@ namespace EC.Framework.Email
 
             return Send(m_FromAddress, toAddressArray, messageSubject, messageBody, ccAddressArray, attachments, isBodyHtml);
         }
-        
+
         public ActionResult Send(string fromAddress, string[] to, string messageSubject, string messageBody, string[] cc, string[] attachments, bool isBodyHtml)
         {
             if (!m_Inintialized)
             {
                 string err = "Send() - EmailWrapper module has not been initialized";
-     /////           m_Log.Error(err);
+                /////           m_Log.Error(err);
                 return new ActionResult(ReturnCode.Fail, err);
             }
 
@@ -210,9 +210,9 @@ namespace EC.Framework.Email
                 msg.From = new MailAddress(fromAddress);
                 foreach (string toAddress in to)
                 {
-                    msg.To.Add(new MailAddress(toAddress));    
+                    msg.To.Add(new MailAddress(toAddress));
                 }
-                
+
                 msg.Subject = messageSubject;
                 msg.Body = messageBody;
 
@@ -280,14 +280,14 @@ namespace EC.Framework.Email
                     }
                     catch (Exception e1)
                     {
-                ////        m_Log.Error("Send() - Error setting mail server credentials.", e1);
+                        ////        m_Log.Error("Send() - Error setting mail server credentials.", e1);
                     }
 
                 }
                 smtpClient.Send(msg);
 
-          ////      m_Log.Info(
-          ///          string.Format("Send() - Email sent: recipient [{0}], subject line [{1}]", String.Join(";", to), messageSubject));
+                ////      m_Log.Info(
+                ///          string.Format("Send() - Email sent: recipient [{0}], subject line [{1}]", String.Join(";", to), messageSubject));
 
                 msg.Attachments.Dispose();
 
@@ -295,10 +295,10 @@ namespace EC.Framework.Email
             }
             catch (Exception e)
             {
-          ////      m_Log.Error(
-           ///         string.Format("Send() - Error sending email: server [{0}], recipient [{1}], message subject line [{2}]",
-           ///                       m_Server, String.Join(";", to), messageSubject),
-            ////                e);
+                ////      m_Log.Error(
+                ///         string.Format("Send() - Error sending email: server [{0}], recipient [{1}], message subject line [{2}]",
+                ///                       m_Server, String.Join(";", to), messageSubject),
+                ////                e);
 
                 msg.Attachments.Dispose();
 
@@ -314,7 +314,7 @@ namespace EC.Framework.Email
                 string assemblyPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
 
                 XmlDocument config = new XmlDocument();
-               
+
                 if (System.IO.File.Exists(AppDomain.CurrentDomain.RelativeSearchPath + '\\' +
                     assemblyName.Substring(0, assemblyName.IndexOf(',')) + ".xml"))
                 {
@@ -322,18 +322,18 @@ namespace EC.Framework.Email
                     config.Load(AppDomain.CurrentDomain.RelativeSearchPath + '\\' +
                         assemblyName.Substring(0, assemblyName.IndexOf(',')) + ".xml");
                 }
-                else if (System.IO.File.Exists(System.IO.Path.GetDirectoryName(assemblyPath) + '\\' + 
+                else if (System.IO.File.Exists(System.IO.Path.GetDirectoryName(assemblyPath) + '\\' +
                     assemblyName.Substring(0, assemblyName.IndexOf(',')) + ".xml"))
                 {
-                    config.Load(System.IO.Path.GetDirectoryName(assemblyPath) + '\\' + 
+                    config.Load(System.IO.Path.GetDirectoryName(assemblyPath) + '\\' +
                         assemblyName.Substring(0, assemblyName.IndexOf(',')) + ".xml");
                 }
-                    
-                
-                
+
+
+
 
                 XmlElement root = config.DocumentElement;
-                
+
                 m_Server = root.GetElementsByTagName("Server")[0].InnerText.Trim();
                 m_Username = root.GetElementsByTagName("Username")[0].InnerText.Trim();
                 try
@@ -346,10 +346,10 @@ namespace EC.Framework.Email
                 }
                 if (m_Username.Length > 0)
                 {
-    /////                m_Username = Cryptics.Decrypt(m_Username);
-    ///                m_Password = root.GetElementsByTagName("Password")[0].InnerText.Trim();
-     ////               if (m_Password.Length > 0)
-      ////                  m_Password = Cryptics.Decrypt(m_Password);
+                    /////                m_Username = Cryptics.Decrypt(m_Username);
+                    ///                m_Password = root.GetElementsByTagName("Password")[0].InnerText.Trim();
+                    ////               if (m_Password.Length > 0)
+                    ////                  m_Password = Cryptics.Decrypt(m_Password);
                 }
                 if (root.SelectSingleNode("DeliveryMode") != null)
                 {
@@ -358,12 +358,12 @@ namespace EC.Framework.Email
                     {
                         m_DeliveryMethod = (SmtpDeliveryMethod)Enum.Parse(typeof(SmtpDeliveryMethod), method);
                     }
-                    catch(ArgumentException invalidDeliveryMethod)
+                    catch (ArgumentException invalidDeliveryMethod)
                     {
-         /////               m_Log.Warn("Initialize() - Invalid delivery method configured, method = " + method, invalidDeliveryMethod);
+                        /////               m_Log.Warn("Initialize() - Invalid delivery method configured, method = " + method, invalidDeliveryMethod);
                         m_DeliveryMethod = SmtpDeliveryMethod.PickupDirectoryFromIis;
                     }
-                        
+
                 }
 
                 if (root.SelectSingleNode("ImpersonateDispatcher") != null)
@@ -388,7 +388,7 @@ namespace EC.Framework.Email
             }
             catch (Exception e)
             {
-    /////            m_Log.Error("Initialize() - Error initializing Email module.", e);
+                /////            m_Log.Error("Initialize() - Error initializing Email module.", e);
                 return false;
             }
         }
@@ -443,7 +443,7 @@ namespace EC.Framework.Email
             modifiedhtml = html;
             linkedResources = new List<LinkedResource>();
 
-            Uri localUri = new Uri(AppDomain.CurrentDomain.RelativeSearchPath + "\\EmailTemplates\\" );
+            Uri localUri = new Uri(AppDomain.CurrentDomain.RelativeSearchPath + "\\EmailTemplates\\");
 
             List<string> imageNames = ExtractImageNames(html);
 

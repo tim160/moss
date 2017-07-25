@@ -1,10 +1,13 @@
-﻿
-@using System.Collections;
+﻿@using System.Collections;
 @using EC.Models;
 @using EC.Models.Database;
 @using EC.App_LocalResources;
+@using EC.Common.Interfaces;
+@using EC.Core.Common;
+@using EC.Common.Util;
+
 @{
-    // @Styles.Render("~/Content/Styles");
+// @Styles.Render("~/Content/Styles");
     <link rel="stylesheet" type="text/css" href="/Content/styleReportDashboard.css">
 
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
@@ -12,10 +15,12 @@
     company_payments cp = ViewBag.cp;
 
     GlobalFunctions glb = new GlobalFunctions();
-    ViewBag.Title = GlobalRes.Payment + " - " + glb.ConvertDateToLongMonthString(cp.payment_date);
+    IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
+
+    ViewBag.Title = GlobalRes.Payment + " - " + m_DateTimeHelper.ConvertDateToLongMonthString(cp.payment_date);
     string name = "";
-    if(cp.user_id.HasValue)
-    { 
+    if (cp.user_id.HasValue)
+    {
         UserModel um = new UserModel(cp.user_id.Value);
         name = um._user.first_nm + " " + um._user.last_nm;
     }
@@ -39,15 +44,15 @@
             <div class="personalBlock">
                 <div class="blockPersonalSettings">
                     <p class="title">@GlobalRes.Amount</p>
-                    @Html.TextBox("amount", glb.ConvertDecimalToStringAmount(cp.amount), new Dictionary<string, object>() { { "readonly", "true" } })
+                    @Html.TextBox("amount", StringUtil.ConvertDecimalToStringAmount(cp.amount), new Dictionary<string, object>() { { "readonly", "true" } })
                 </div>
                 <div class="blockPersonalSettings">
                     <p class="title">@GlobalRes.PaymentDate</p>
-                    @Html.TextBox("payment_date", glb.ConvertDateToLongMonthString(cp.payment_date), new Dictionary<string, object>() { { "readonly", "true" } })
+                    @Html.TextBox("payment_date", m_DateTimeHelper.ConvertDateToLongMonthString(cp.payment_date), new Dictionary<string, object>() { { "readonly", "true" } })
                 </div>
-                
-                @if (name.Length>0)
-                { 
+
+                @if (name.Length > 0)
+                {
                     <div class="blockPersonalSettings">
                         <p class="title">@GlobalRes.PaidBy</p>
                         @Html.TextBox("name", name, new Dictionary<string, object>() { { "readonly", "true" } })
@@ -61,12 +66,12 @@
                     <p class="title">@GlobalRes.AuthCode</p>
                     @Html.TextBox("payment_date", cp.auth_code, new Dictionary<string, object>() { { "readonly", "true" } })
                 </div>
-                </div>
             </div>
-
         </div>
 
     </div>
-    <!--</form>-->
+
+</div>
+<!--</form>-->
 </div>
 
