@@ -1263,8 +1263,10 @@ namespace EC.Models
                     {
                         report_secondary_type temp = new report_secondary_type();
                         temp.report_id = currentReport.id;
+                        temp.secondary_type_nm = "";
+                        temp.secondary_type_id = 0;
                         //check is it custom
-                        if(model.CustomSecondaryType)
+                        if (model.CustomSecondaryType)
                         {
                             temp.mandatory_secondary_type_id = item;
                         } else
@@ -1279,70 +1281,10 @@ namespace EC.Models
 
                         temp.last_update_dt = DateTime.Now;
                         temp.user_id = 1;
-                        secondaryTypeList.Add(temp);
+                     
+                        AddSecondaryType(temp);
                     }
-                    adv.report_secondary_type.AddRange(secondaryTypeList);
-                    t = adv.SaveChanges();
 
-                    ///*CustomSecondaryType == true*/
-
-                    //if (model.caseInformationReportDetail != null)
-                    //{
-                    //    report_secondary_type type = new report_secondary_type()
-                    //    {
-                    //        report_id = currentReport.id,
-                    //        mandatory_secondary_type_id = null,
-                    //        secondary_type_id = 0,
-                    //        secondary_type_nm = model.caseInformationReportDetail,
-                    //        user_id = 1,
-                    //        last_update_dt = DateTime.Now
-                    //    };
-                    //    db.report_secondary_type.Add(type);
-                    //    t = adv.SaveChanges();
-                    //}
-                    //else
-                    //{
-                    //    ReportModel reportModel = new ReportModel();
-
-                    //    /*if custom*/
-                    //    if (!reportModel.isCustomIncidentTypes(model.currentCompanyId))
-                    //    {
-                    //        int defaultType = db.secondary_type_mandatory.Where(item => item.secondary_type_en == model.caseInformationReport).Select(item => item.id).FirstOrDefault();
-                    //        if (defaultType > 0)
-                    //        {
-                    //            report_secondary_type putDefaultType = new report_secondary_type
-                    //            {
-                    //                report_id = currentReport.id,
-                    //                mandatory_secondary_type_id = defaultType,
-                    //                secondary_type_id = 0,
-                    //                secondary_type_nm = "",
-                    //                last_update_dt = DateTime.Now,
-                    //                user_id = 1
-                    //            };
-                    //            db.report_secondary_type.Add(putDefaultType);
-                    //            t = adv.SaveChanges();
-                    //        }
-                    //    }
-                    //    else
-                    //    {
-                    //        int customType = db.company_secondary_type.Where(item => item.secondary_type_en == model.caseInformationReport).Select(item => item.id).FirstOrDefault();
-                    //        if (customType > 0)
-                    //        {
-                    //            report_secondary_type putCustomType = new report_secondary_type
-                    //            {
-                    //                report_id = currentReport.id,
-                    //                mandatory_secondary_type_id = null,
-                    //                secondary_type_id = customType,
-                    //                secondary_type_nm = "",
-                    //                last_update_dt = DateTime.Now,
-                    //                user_id = 1
-                    //            };
-                    //            adv.report_secondary_type.Add(putCustomType);
-                    //            t = adv.SaveChanges();
-                    //        }
-
-                    //    }
-                    //}
                     /*report_relationship*/
                     report_relationship rep = new report_relationship();
                     rep.report_id = currentReport.id;
@@ -1431,6 +1373,16 @@ namespace EC.Models
             using (ECEntities adv = new ECEntities())
             {
                 adv.report_department.Add(item);
+                adv.SaveChanges();
+            }
+            return item;
+        }
+
+        public report_secondary_type AddSecondaryType(report_secondary_type item)
+        {
+            using (ECEntities adv = new ECEntities())
+            {
+                adv.report_secondary_type.Add(item);
                 adv.SaveChanges();
             }
             return item;
@@ -2111,14 +2063,14 @@ namespace EC.Models
         }
         public string[] ReportNormalFlowStatusesList()
         {
-            string[] _statuses = new string[] { "Pre-Review", "Review", "Investigation", "Resolution", "Closed" };
+            string[] _statuses = new string[] { "New Report", "New Case", "Under Investigation", "Awaiting Sign-Off", "Closed" };
             return _statuses;
         }
 
         // we don't have any differences anymore
         public string[] ReportNotResolvedFlowStatusesList()
         {
-            string[] _statuses = new string[] { "Pre-Review", "Review", "Investigation", "Resolution", "Closed" };
+            string[] _statuses = new string[] { "New Report", "New Case", "Under Investigation", "Awaiting Sign-Off", "Closed" };
             return _statuses;
         }
         public bool isCustomIncidentTypes(int companyId)
