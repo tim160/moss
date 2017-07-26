@@ -1,20 +1,20 @@
 ﻿@using EC.App_LocalResources;
 @{
-    
+
     bool? is_cc = ViewBag.is_cc;
     if (!is_cc.HasValue)
     {
         is_cc = false;
     }
     String class_ext = ViewBag.cc_extension;
-    //19
+
     //bool is_cc = true;
     //String class_ext = "";
     //if (is_cc)
     //{
     //    class_ext = "_cc";
     //}
-    
+
     ViewBag.Title = GlobalRes.ReporterDashboard;
     var user_id = (Int32)ViewBag.user_id;
     EC.Models.UserModel um = new EC.Models.UserModel(user_id);
@@ -22,11 +22,10 @@
     int report_id = um._reporter_report_id;
     EC.Models.ReportModel rm = new EC.Models.ReportModel(report_id);
     EC.Models.CompanyModel cm = new EC.Models.CompanyModel();
-    string[] _statuses = rm.ReportNormalFlowStatusesList();
-    string[] _statuses_not_resolved = rm.ReportNotResolvedFlowStatusesList();
+    string[] _statuses = EC.Constants.ECGlobalConstants.ReportFlowStatusesList;
     int _investigation_status = rm._investigation_status;
     if (_investigation_status == 6)
-    { 
+    {
         _investigation_status = 4;
     }
 }
@@ -53,81 +52,80 @@
         })();
     </script>
     <!-- End Inspectlet Embed Code -->
-@if(report_id != 0)
-{
-
-    if (rm._report != null)
+    @if (report_id != 0)
     {
-        int company_id = rm._report.company_id;
-        EC.Models.Database.company _company = cm.GetById(rm._report.company_id);
 
-        EC.Models.Database.attachment _attachment;
-        
-        string _logo = _company.path_en;
-        if (_logo.Trim().Length == 0)
+        if (rm._report != null)
         {
-            _logo = "http://report.employeeconfidential.com/Content/img/secondLogo.jpg";
-        }
-         <div class="main">
-        <div class="header">
-            <img class="logo" src='@Url.Content("~/Content/img/ReportDashboardLogo.png")' />
-            @*<div class="headerMenuAbout">
-                <ul>
-                    <li style="padding-right: 32px;">
-                        <a href="http://employeeconfidential.com/#footer">@GlobalRes.About</a>
-                    </li>
-                    <li style="padding-right: 26px;"><a href="http://employeeconfidential.com/PrivacyStatement.html">@GlobalRes.Faq</a></li>
-                    <li><a href="http://employeeconfidential.com/TermsOfService.html">@GlobalRes.TermsAndConditions</a></li>
-                </ul>
-            </div>*@
-            <div class="headerMenu">
-                <ul>
-                    <li class="logIn">@GlobalRes.Logout</li>
-                </ul>
-            </div>
-        </div>
+            int company_id = rm._report.company_id;
+            EC.Models.Database.company _company = cm.GetById(rm._report.company_id);
 
-        <div class="secondaryMenu">
-            <img class="secondLogo" src='@Url.Content(_logo)' />
-            <div class="statusTitle">
+            EC.Models.Database.attachment _attachment;
 
-                <div class="title">@GlobalRes.Case @rm._report.display_name</div>
-                <div class="status">
-                    @GlobalRes.Casestatus<br />
-                    <span class="review">@rm._investigation_status_string</span>
+            string _logo = _company.path_en;
+            if (_logo.Trim().Length == 0)
+            {
+                _logo = "http://report.employeeconfidential.com/Content/img/secondLogo.jpg";
+            }
+            <div class="main">
+                <div class="header">
+                    <img class="logo" src='@Url.Content("~/Content/img/ReportDashboardLogo.png")' />
+                    @*<div class="headerMenuAbout">
+                            <ul>
+                                <li style="padding-right: 32px;">
+                                    <a href="http://employeeconfidential.com/#footer">@GlobalRes.About</a>
+                                </li>
+                                <li style="padding-right: 26px;"><a href="http://employeeconfidential.com/PrivacyStatement.html">@GlobalRes.Faq</a></li>
+                                <li><a href="http://employeeconfidential.com/TermsOfService.html">@GlobalRes.TermsAndConditions</a></li>
+                            </ul>
+                        </div>*@
+                    <div class="headerMenu">
+                        <ul>
+                            <li class="logIn">@GlobalRes.Logout</li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div class="headerPos">
 
-                 @for (int i = 0; i < 5; i++)
-                 {
-                    if (i < _investigation_status)
-                    {
-                        <div class="positionN active@{@class_ext}">
-                            <span style="color: #38494d;">@_statuses[i]</span>
+                <div class="secondaryMenu">
+                    <img class="secondLogo" src='@Url.Content(_logo)' />
+                    <div class="statusTitle">
+
+                        <div class="title">@GlobalRes.Case @rm._report.display_name</div>
+                        <div class="status">
+                            @GlobalRes.Casestatus<br />
+                            <span class="review">@rm._investigation_status_string</span>
                         </div>
-                                                          <div class="polos"></div>
-                    }
-                     else
-                     {
+                    </div>
+                    <div class="headerPos">
 
-                         <div class="positionN">
-                             <span style="color: #b4b9ba;">@_statuses[i]</span>
-                         </div>
-                         <div class="polos"></div>
-                     }
-
-                }
-                
-            </div><!--headerPos-->
-
-        </div>
-    @RenderBody()
-    </div>
-    <div class="footer" style="height:150px">
-    </div>
+                        @for (int i = 0; i < 5; i++)
+                        {
+                            if (i < _investigation_status)
+                            {
+                                <div class="positionN active@{@class_ext}">
+                                    <span style="color: #38494d;">@_statuses[i]</span>
+                                </div>
+                                <div class="polos"></div>
     }
-}
+    else
+    {
+
+        <div class="positionN">
+            <span style="color: #b4b9ba;">@_statuses[i]</span>
+        </div>
+                        <div class="polos"></div>
+        }
+    }
+
+                    </div><!--headerPos-->
+
+                </div>
+                @RenderBody()
+            </div>
+            <div class="footer" style="height:150px">
+            </div>
+        }
+    }
     <div id="userId" data-value="@user_id"></div>
 </body>
 
@@ -137,15 +135,6 @@
         $(".logIn").click(function () {
             location.href = '@Url.Action("Logout", "Base")';
         });
-       
-        
-      
-        /*.blockSetting .rowBlock .fourBlock:hover {    
-            background: rgb(242, 247, 247) !important;
-        }
-        .contentBlockSettings .blockSetting:hover p span{
-            display: block;
-        }*/
     });
 </script>
 

@@ -321,6 +321,9 @@
   <data name="Awaitingapproval" xml:space="preserve">
     <value>Awaiting approval</value>
   </data>
+  <data name="AwaitingSignOff" xml:space="preserve">
+    <value>Awaiting Sign-Off</value>
+  </data>
   <data name="Awaiting_registration" xml:space="preserve">
     <value>Invitation email sent. Awaiting registration.</value>
   </data>
@@ -375,6 +378,9 @@
   <data name="CaseInformation" xml:space="preserve">
     <value>Case Information</value>
   </data>
+  <data name="CaseInvestigator" xml:space="preserve">
+    <value>Case Investigator</value>
+  </data>
   <data name="CaseManagementDeadlines" xml:space="preserve">
     <value>Case Deadlines</value>
   </data>
@@ -396,6 +402,9 @@
   <data name="CaseOutcomeUp" xml:space="preserve">
     <value>Case Outcome</value>
   </data>
+  <data name="CaseReOpened" xml:space="preserve">
+    <value>Case Re-Opened</value>
+  </data>
   <data name="Caseresolution" xml:space="preserve">
     <value>Case resolution</value>
   </data>
@@ -404,6 +413,12 @@
   </data>
   <data name="CaseResolved" xml:space="preserve">
     <value>Case Awaiting Sign-off</value>
+  </data>
+  <data name="CaseReturnedFutherInvestigation" xml:space="preserve">
+    <value>Case returned for futher investigation.</value>
+  </data>
+  <data name="CaseReviewer" xml:space="preserve">
+    <value>Case Reviewer</value>
   </data>
   <data name="CaseRouting" xml:space="preserve">
     <value>Case Routing</value>
@@ -1342,6 +1357,9 @@
   <data name="NamesOfWitnesses" xml:space="preserve">
     <value>Name(s) of witness(es) or people involved in the incident</value>
   </data>
+  <data name="NewCase" xml:space="preserve">
+    <value>New Case</value>
+  </data>
   <data name="NewCompanyRegistration" xml:space="preserve">
     <value>New Company Registration</value>
   </data>
@@ -1450,6 +1468,9 @@
   <data name="Other" xml:space="preserve">
     <value>Other</value>
   </data>
+  <data name="OtherDepartmentSavingFailed" xml:space="preserve">
+    <value>Saving Other Deparment failed.</value>
+  </data>
   <data name="Outcome" xml:space="preserve">
     <value>Outcome</value>
   </data>
@@ -1522,6 +1543,9 @@
   <data name="Pendingstagemilestones" xml:space="preserve">
     <value>Pending stage milestones</value>
   </data>
+  <data name="PlatformManager" xml:space="preserve">
+    <value>Platform Manager</value>
+  </data>
   <data name="PleaseAttach" xml:space="preserve">
     <value>Please attach any relevant documents, photos or videos to this report.</value>
   </data>
@@ -1532,13 +1556,13 @@
     <value>Poster</value>
   </data>
   <data name="PreReview" xml:space="preserve">
-    <value>Pre-Review</value>
+    <value>New report</value>
   </data>
   <data name="PreReviewStage" xml:space="preserve">
-    <value>Pre-Review stage</value>
+    <value>New Report stage</value>
   </data>
   <data name="PreReviewUp" xml:space="preserve">
-    <value>Pre-Review</value>
+    <value>New Report</value>
   </data>
   <data name="PrimaryLanguageUp" xml:space="preserve">
     <value>Primary Language</value>
@@ -1748,7 +1772,7 @@
     <value>Scope</value>
   </data>
   <data name="Selectanoption" xml:space="preserve">
-    <value>Select an option</value>
+    <value>Select an option...</value>
   </data>
   <data name="SelectCaseReviewerToSignoff" xml:space="preserve">
     <value>Select Case Reviewer to Sign-Off</value>
@@ -1927,6 +1951,9 @@
   <data name="Unassigned" xml:space="preserve">
     <value>Unassigned</value>
   </data>
+  <data name="UnderInvestigation" xml:space="preserve">
+    <value>Under Investigation</value>
+  </data>
   <data name="unknown" xml:space="preserve">
     <value>Unknown</value>
   </data>
@@ -2055,15 +2082,6 @@
   </data>
   <data name="_Started" xml:space="preserve">
     <value>Started</value>
-  </data>
-  <data name="CaseReOpened" xml:space="preserve">
-    <value>Case Re-Opened</value>
-  </data>
-  <data name="CaseReturnedFutherInvestigation" xml:space="preserve">
-    <value>Case returned for futher investigation.</value>
-  </data>
-  <data name="OtherDepartmentSavingFailed" xml:space="preserve">
-    <value>Saving Other Deparment failed.</value>
   </data>
   <data name="Update" xml:space="preserve">
     <value>Update</value>

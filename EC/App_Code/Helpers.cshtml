@@ -1,50 +1,50 @@
-﻿@using EC.Controllers.Utils
+﻿@using EC.Common.Base
 @helper Select(HtmlDataHelper.SelectViewModel content, string field, string name, string defName = "", string parametr = "", string dataValidate = "")
 {
     @*<select class="@name" name="@name.Split(' ')[0]" data-validate="@dataValidate">
-        @if (content != null && content.Items != null && content.Items.Count > 0)
-        {
-            if (defName != "")
+            @if (content != null && content.Items != null && content.Items.Count > 0)
             {
-                <option selected="selected" value="">@defName</option>
-            }
+                if (defName != "")
+                {
+                    <option selected="selected" value="">@defName</option>
+                }
 
-            foreach (var item in content.Items)
-            {
-                if (parametr != "")
+                foreach (var item in content.Items)
                 {
-                    <option selected value="none">@parametr</option>
-                    parametr = "";
-                }
-                if (item.Value == content.Selected)
-                {
-                    <option class="dropDownList" selected value="@item.Value">@item.Name</option>
-                }
-                else
-                {
-                    <option class="dropDownList" value="@item.Value">@item.Name</option>
+                    if (parametr != "")
+                    {
+                        <option selected value="none">@parametr</option>
+                        parametr = "";
+                    }
+                    if (item.Value == content.Selected)
+                    {
+                        <option class="dropDownList" selected value="@item.Value">@item.Name</option>
+                    }
+                    else
+                    {
+                        <option class="dropDownList" value="@item.Value">@item.Name</option>
+                    }
                 }
             }
-        }
-    </select>
+        </select>
     *@
-        <div class="dropdown subject selectBlock @field">
-            <div class="arrow-down"></div>
-            @if (parametr != "")
-            {
-                <span class="selected">@parametr</span>
-            }
-            else
-            {
-                <span class="selected">@defName</span>
-            }
+    <div class="dropdown subject selectBlock @field">
+        <div class="arrow-down"></div>
+        @if (parametr != "")
+        {
+            <span class="selected">@parametr</span>
+        }
+        else
+        {
+            <span class="selected">@defName</span>
+        }
 
-            <input type="hidden" class="@name" name="@name.Split(' ')[0]" value="general"
-                   data-validate="@dataValidate" data-vltarget=".@field">
+        <input type="hidden" class="@name" name="@name.Split(' ')[0]" value="general"
+               data-validate="@dataValidate" data-vltarget=".@field">
         <ul>
             @if (defName != "")
             {
-                <li class="dropDownList"  id="" class="selected" value="@defName">@defName</li>
+                <li class="dropDownList" id="" class="selected" value="@defName">@defName</li>
             }
             @foreach (var item in content.Items)
             {

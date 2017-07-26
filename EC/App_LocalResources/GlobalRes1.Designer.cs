@@ -700,6 +700,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Awaiting Sign-Off.
+        /// </summary>
+        public static string AwaitingSignOff {
+            get {
+                return ResourceManager.GetString("AwaitingSignOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Awareness materialss.
         /// </summary>
         public static string AwarenessMaterials {
@@ -853,6 +862,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Case Investigator.
+        /// </summary>
+        public static string CaseInvestigator {
+            get {
+                return ResourceManager.GetString("CaseInvestigator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Case Deadlines.
         /// </summary>
         public static string CaseManagementDeadlines {
@@ -957,6 +975,15 @@ namespace EC.App_LocalResources {
         public static string CaseReturnedFutherInvestigation {
             get {
                 return ResourceManager.GetString("CaseReturnedFutherInvestigation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Case Reviewer.
+        /// </summary>
+        public static string CaseReviewer {
+            get {
+                return ResourceManager.GetString("CaseReviewer", resourceCulture);
             }
         }
         
@@ -3769,6 +3796,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New Case.
+        /// </summary>
+        public static string NewCase {
+            get {
+                return ResourceManager.GetString("NewCase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New Company Registration.
         /// </summary>
         public static string NewCompanyRegistration {
@@ -4318,6 +4354,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Platform Manager.
+        /// </summary>
+        public static string PlatformManager {
+            get {
+                return ResourceManager.GetString("PlatformManager", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please attach any relevant documents, photos or videos to this report..
         /// </summary>
         public static string PleaseAttach {
@@ -4345,7 +4390,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pre-Review.
+        ///   Looks up a localized string similar to New report.
         /// </summary>
         public static string PreReview {
             get {
@@ -4354,7 +4399,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pre-Review stage.
+        ///   Looks up a localized string similar to New Report stage.
         /// </summary>
         public static string PreReviewStage {
             get {
@@ -4363,7 +4408,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pre-Review.
+        ///   Looks up a localized string similar to New Report.
         /// </summary>
         public static string PreReviewUp {
             get {
@@ -4993,7 +5038,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select an option.
+        ///   Looks up a localized string similar to Select an option....
         /// </summary>
         public static string Selectanoption {
             get {
@@ -5529,6 +5574,15 @@ namespace EC.App_LocalResources {
         public static string Unassigned {
             get {
                 return ResourceManager.GetString("Unassigned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Under Investigation.
+        /// </summary>
+        public static string UnderInvestigation {
+            get {
+                return ResourceManager.GetString("UnderInvestigation", resourceCulture);
             }
         }
         

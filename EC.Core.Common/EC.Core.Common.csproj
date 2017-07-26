@@ -120,7 +120,6 @@
     <Compile Include="StatsLogManager.cs" />
     <Compile Include="StatsRollingAverageCollector.cs" />
     <Compile Include="StatsRollingRateCollector.cs" />
-    <Compile Include="StringExtensions.cs" />
     <Compile Include="TaskServices.cs" />
     <Compile Include="TimeZoneHelper.cs" />
     <Compile Include="UtilityThread.cs" />

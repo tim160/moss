@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using EC.Controllers.Utils;
 using EC.Models.Database;
+using EC.Common.Util;
 
 namespace EC.Controllers.ViewModel
 {
@@ -15,16 +16,16 @@ namespace EC.Controllers.ViewModel
         public HttpFileCollectionBase files;
         public BaseViewModel()
         {
-             type = GetType();
+            type = GetType();
         }
 
         public void Process(NameValueCollection form, HttpFileCollectionBase files)
         {
             this.files = files;
-            var properties = type.GetProperties().Where(prop => prop.IsDefined(typeof(ListEntety), false)).ToList();
+            var properties = type.GetProperties().Where(prop => prop.IsDefined(typeof(ListEntity), false)).ToList();
             foreach (var property in properties)
             {
-                var attr = ((ListEntety[])property.GetCustomAttributes(typeof(ListEntety), false))[0];
+                var attr = ((ListEntity[])property.GetCustomAttributes(typeof(ListEntity), false))[0];
                 var name = attr.Name;
                 //namesFile.Add(name);
                 var itemType = attr.Type;
@@ -37,12 +38,12 @@ namespace EC.Controllers.ViewModel
                         if (form[name + i] != null) list.Add(form[name + i]);
                     }
 
-                    if (itemType == typeof (string))
+                    if (itemType == typeof(string))
                     {
                         property.SetValue(this, list.OfType<string>().ToList());
 
                     }
-                    else if (itemType == typeof (int))
+                    else if (itemType == typeof(int))
                     {
                         property.SetValue(this, list.OfType<int>().ToList());
                     }

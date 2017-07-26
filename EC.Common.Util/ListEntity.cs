@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace EC.Controllers.Utils
+namespace EC.Common.Util
 {
-    public class ListEntety : Attribute
+    public class ListEntity : Attribute
     {
-        public ListEntety(string name, Type type)
+        public ListEntity(string name, Type type)
         {
             Name = name;
             Type = type;

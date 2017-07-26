@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//using EC.Localization;
+using EC.Localization;
 using System.Runtime.Serialization;
 
 namespace EC.Constants
@@ -23,6 +23,10 @@ namespace EC.Constants
         public const string CountryIdUSA = "1";
         public const string CountryIdCanada = "2";
 
+
+        public static readonly string[] ReportFlowStatusesList = { LocalizationGetter.GetString("NewReport"), LocalizationGetter.GetString("NewCase"), LocalizationGetter.GetString("UnderInvestigation"), LocalizationGetter.GetString("AwaitingSignOff"), LocalizationGetter.GetString("Closed") };
+
+
         #region Status Constants
         public const int status_active = 2;
         public const int status_inactive = 3;
@@ -30,7 +34,7 @@ namespace EC.Constants
         public const int status_responded = 5;
         public const int status_closed = 6;
         public const int status_assigned = 7;
-        public const int status_escalated = 8; 
+        public const int status_escalated = 8;
         #endregion
 
 
@@ -43,25 +47,25 @@ namespace EC.Constants
         public const int investigation_status_completed = 6;
         public const int investigation_status_spam = 7;
         public const int investigation_status_completed_not_resolved_to_remove = 8;
-        public const int investigation_status_closed = 9; 
+        public const int investigation_status_closed = 9;
         #endregion
 
         public const int anonymity_Anonymous = 1;
         public const int anonymity_Anonymous_to_company_only = 2;
         public const int anonymity_Shared_info = 3;
-  //      public string[] AnonymousArray = { Localization.Resources.GetString("Anonymous"), Localization.Resources.GetString("ConfidentialToZero"), Localization.Resources.GetString("ContactInfoShared") };
+        //      public string[] AnonymousArray = { Localization.Resources.GetString("Anonymous"), Localization.Resources.GetString("ConfidentialToZero"), Localization.Resources.GetString("ContactInfoShared") };
 
-     /*   public enum AnonymousArray
-        {
-            [EnumMember]
-            Anonymous = Localization.Resources.GetString("Anonymous"),
+        /*   public enum AnonymousArray
+           {
+               [EnumMember]
+               Anonymous = Localization.Resources.GetString("Anonymous"),
 
-            [EnumMember]
-            ConfidentialToZero = Localization.Resources.GetString("ConfidentialToZero"),
+               [EnumMember]
+               ConfidentialToZero = Localization.Resources.GetString("ConfidentialToZero"),
 
-            [EnumMember]
-            ContactInfoShared = Localization.Resources.GetString("ContactInfoShared")
-        }*/
+               [EnumMember]
+               ContactInfoShared = Localization.Resources.GetString("ContactInfoShared")
+           }*/
 
     }
 }

@@ -108,14 +108,14 @@ namespace EC.Models
                 name = App_LocalResources.GlobalRes.anonymous_reporter;
 
             return name.Trim();
-        
+
         }
         /// <summary>
         /// green line on top of report - Review, Investigation, etc
         /// </summary>
         /// <param name="report_id"></param>
         /// <returns></returns>
-    
+
         /// <summary>
         /// Returns the location of report in string
         /// </summary>
@@ -134,7 +134,7 @@ namespace EC.Models
                         if (_c_location != null)
                             location = _c_location.location_en;
                     }
-                    else if ((_report!=null) && (_report.other_location_name != null) && (_report.other_location_name.Trim().Length > 0))
+                    else if ((_report != null) && (_report.other_location_name != null) && (_report.other_location_name.Trim().Length > 0))
                         location = _report.other_location_name.Trim();
                 }
 
@@ -181,7 +181,8 @@ namespace EC.Models
                         if (reported_outside != null)
                         {
                             report_outside = reported_outside.description_en;
-                            if (_report.reported_outside_id.Value != 1) {
+                            if (_report.reported_outside_id.Value != 1)
+                            {
                                 report_outside = report_outside;// +". Description : " + _report.reported_outside_text;
                             }
                         }
@@ -291,7 +292,7 @@ namespace EC.Models
                 return departments;
             }
         }
-      
+
         /// <summary>
         /// do we need it?
         /// </summary>
@@ -324,14 +325,14 @@ namespace EC.Models
                         if (_report_relationship.relationship_nm != null && _report_relationship.relationship_nm.Trim().Length > 0)
                         {
                             relationship_text = _report_relationship.relationship_nm.Trim();
-                         /*   if ((relationship_text.Trim().ToLower() == App_LocalResources.GlobalRes.FormerEmployee.Trim().ToLower()) || (relationship_text.Trim().ToLower() == App_LocalResources.GlobalRes.Other.Trim().ToLower()))
-                            {
-                                relationship_text = relationship_text + " " + _report_relationship.relationship_nm.Trim();
-                            }
-                            else
-                            {
-                                relationship_text = _report_relationship.relationship_nm.Trim();
-                            }*/
+                            /*   if ((relationship_text.Trim().ToLower() == App_LocalResources.GlobalRes.FormerEmployee.Trim().ToLower()) || (relationship_text.Trim().ToLower() == App_LocalResources.GlobalRes.Other.Trim().ToLower()))
+                               {
+                                   relationship_text = relationship_text + " " + _report_relationship.relationship_nm.Trim();
+                               }
+                               else
+                               {
+                                   relationship_text = _report_relationship.relationship_nm.Trim();
+                               }*/
                         }
 
                     }
@@ -602,7 +603,7 @@ namespace EC.Models
                         color_code = _color.secondary_color_code;
                     else
                     {
-                        
+
                         _color = db.color.Where(item => item.id == 1).FirstOrDefault();
                         color_code = _color.secondary_color_code;
                     }
@@ -679,21 +680,21 @@ namespace EC.Models
 
                 switch (status_id)
                 {
-                      case 1:
-                          delay_allowed = _company.step1_delay;
-                          break;
-                      case 2:
-                          delay_allowed = _company.step2_delay;
-                          break;
-                      case 3:
-                          delay_allowed = _company.step3_delay;
-                          break;
-                      case 4:
-                          delay_allowed = _company.step4_delay;
-                          break;
-                      case 5:
-                          delay_allowed = _company.step5_delay;
-                          break;
+                    case 1:
+                        delay_allowed = _company.step1_delay;
+                        break;
+                    case 2:
+                        delay_allowed = _company.step2_delay;
+                        break;
+                    case 3:
+                        delay_allowed = _company.step3_delay;
+                        break;
+                    case 4:
+                        delay_allowed = _company.step4_delay;
+                        break;
+                    case 5:
+                        delay_allowed = _company.step5_delay;
+                        break;
                     default:
                         delay_allowed = 5;
                         break;
@@ -746,7 +747,7 @@ namespace EC.Models
 
 
                 DateTime promoted_date = _last_promoted_date;
-               
+
                 double days_ongoing = 0;
                 days_ongoing = (DateTime.Today - promoted_date).TotalDays;
                 days_left = delay_allowed - days_ongoing;
@@ -806,10 +807,10 @@ namespace EC.Models
                     is_spam = true;
                     // at least its spam
 
-           /*         if (promotion_status_date(Constant.investigation_status_spam) > _last_read_date(user_id))
-                    {
-                        is_spam = true;
-                    }*/
+                    /*         if (promotion_status_date(Constant.investigation_status_spam) > _last_read_date(user_id))
+                             {
+                                 is_spam = true;
+                             }*/
 
                 }
                 return is_spam;
@@ -840,11 +841,11 @@ namespace EC.Models
                 if (((_investigation_status == ECGlobalConstants.investigation_status_closed) && (_previous_investigation_status_id != ECGlobalConstants.investigation_status_spam)))
                 {
                     is_closed = true;
-                /*    // at least its spam
-                    if (promotion_status_date(Constant.investigation_status_closed) > _last_read_date(user_id))
-                    {
-                        is_closed = true;
-                    }*/
+                    /*    // at least its spam
+                        if (promotion_status_date(Constant.investigation_status_closed) > _last_read_date(user_id))
+                        {
+                            is_closed = true;
+                        }*/
                 }
                 return is_closed;
             }
@@ -874,22 +875,22 @@ namespace EC.Models
                 // error in report or its not created yet
                 return ECGlobalConstants._default_date;
             }
-            List<int> _active_classes =new List<int>();
+            List<int> _active_classes = new List<int>();
             _active_classes.Add(ECGlobalConstants.investigation_status_investigation);
             _active_classes.Add(ECGlobalConstants.investigation_status_resolution);
             _active_classes.Add(ECGlobalConstants.investigation_status_completed);
             _active_classes.Add(ECGlobalConstants.investigation_status_closed);
-            
+
             report_investigation_status last_status = new report_investigation_status();
             if (db.report_investigation_status.Any(item => (item.report_id == ID)))
             {
-                List<report_investigation_status> _statuses = db.report_investigation_status.Where(item => (item.report_id == ID )).OrderByDescending(x => x.created_date).ToList();
+                List<report_investigation_status> _statuses = db.report_investigation_status.Where(item => (item.report_id == ID)).OrderByDescending(x => x.created_date).ToList();
 
                 if (_statuses.Count > 0)
                 {
                     int first_non_active_status_place = -1;
                     int last_active_status_place = -1;
-                    
+
                     int count = _statuses.Count;
                     while ((last_active_status_place < 0) && (count >= 0))
                     {
@@ -897,7 +898,7 @@ namespace EC.Models
                         {
                             last_active_status_place = count;
                         }
-                    
+
                         count--;
                     }
                     if (last_active_status_place < 0)
@@ -909,8 +910,8 @@ namespace EC.Models
                     {
                         count = last_active_status_place;
                         // we need to go and find last active status before not active
-                        while ((count > 0) &&(_active_classes.Contains(_statuses[count - 1].investigation_status_id)) )
-                        {                          
+                        while ((count > 0) && (_active_classes.Contains(_statuses[count - 1].investigation_status_id)))
+                        {
                             count--;
                         }
                         first_non_active_status_place = count;
@@ -923,7 +924,7 @@ namespace EC.Models
                         }
                         return _statuses[first_non_active_status_place + 1].created_date;
                     }
- 
+
                 }
                 else
                     return ECGlobalConstants._default_date;
@@ -937,7 +938,7 @@ namespace EC.Models
 
         public report_investigation_status _last_promotion
         {
-            get 
+            get
             {
                 int status_id = _investigation_status;
                 if (db.report_investigation_status.Any(item => ((item.report_id == ID) && (item.investigation_status_id == status_id))))
@@ -964,7 +965,7 @@ namespace EC.Models
             if (db.report_investigation_status.Any(item => (item.report_id == ID && item.investigation_status_id == status_id)))
             {
                 List<report_investigation_status> _statuses = db.report_investigation_status.Where(item => (item.report_id == ID && item.investigation_status_id == status_id)).OrderByDescending(x => x.created_date).ToList();
-                
+
                 if (_statuses.Count > 0)
                 {
                     last_status = _statuses[0];
@@ -1073,39 +1074,39 @@ namespace EC.Models
         public string _anonymousLevel_mediatorVersionByCaller(int caller_id)
         {
 
-                string anon_level = "";
-                int anon_level_id = 0;
+            string anon_level = "";
+            int anon_level_id = 0;
 
-                if (_report != null)
+            if (_report != null)
+            {
+                anon_level_id = _report.incident_anonymity_id;
+                anonymity _anonymity = db.anonymity.Where(item => (item.id == anon_level_id)).FirstOrDefault();
+
+                if (_anonymity != null)
                 {
-                    anon_level_id = _report.incident_anonymity_id;
-                    anonymity _anonymity = db.anonymity.Where(item => (item.id == anon_level_id)).FirstOrDefault();
-
-                    if (_anonymity != null)
+                    if ((anon_level_id == 1) || (anon_level_id == 3))
+                        anon_level = _anonymity.anonymity_en;
+                    if (anon_level_id == 2)
                     {
-                        if ((anon_level_id == 1) || (anon_level_id == 3))
-                            anon_level = _anonymity.anonymity_en;
-                        if (anon_level_id == 2)
+                        UserModel um = new UserModel(caller_id);
+                        int role_id = um._user.role_id;
+                        if ((role_id > 3) && (role_id < 8))
                         {
-                            UserModel um = new UserModel(caller_id);
-                            int role_id = um._user.role_id;
-                            if ((role_id > 3) && (role_id < 8))
-                            {
-                                return EC.App_LocalResources.GlobalRes.anonymous_reporter;
-                            }
-                            if ((role_id > 0) && (role_id < 4))
-                            {
-                                return String.Format(_anonymity.anonymity_en, _company_name);
-                            }
                             return EC.App_LocalResources.GlobalRes.anonymous_reporter;
-
                         }
-                            
-                    }
-                }
+                        if ((role_id > 0) && (role_id < 4))
+                        {
+                            return String.Format(_anonymity.anonymity_en, _company_name);
+                        }
+                        return EC.App_LocalResources.GlobalRes.anonymous_reporter;
 
-                return anon_level;
-            
+                    }
+
+                }
+            }
+
+            return anon_level;
+
         }
         public bool _has_attachments
         {
@@ -1269,7 +1270,8 @@ namespace EC.Models
                         if (model.CustomSecondaryType)
                         {
                             temp.mandatory_secondary_type_id = item;
-                        } else
+                        }
+                        else
                         {
                             temp.secondary_type_id = item;
                         }
@@ -1281,7 +1283,7 @@ namespace EC.Models
 
                         temp.last_update_dt = DateTime.Now;
                         temp.user_id = 1;
-                     
+
                         AddSecondaryType(temp);
                     }
 
@@ -1398,16 +1400,16 @@ namespace EC.Models
             ID = id;
 
             if (id != 0)
-            { 
+            {
                 return db.report.Where(item => item.id == id).FirstOrDefault();
             }
             else
                 return null;
-                //    return null;
+            //    return null;
             ; //db.report.FirstOrDefault(item => item.id == id);
-        } 
+        }
         #endregion
-      
+
         #region User - Report
         /// <summary>
         /// mediators who has access to report already = goes on top of "add more mediators" button
@@ -1472,7 +1474,7 @@ namespace EC.Models
                 return result;
             }
         }
-        
+
         public List<report_mediator_assigned> _assigned_mediators
         {
             get
@@ -1500,14 +1502,15 @@ namespace EC.Models
             get
             {
                 List<report_non_mediator_involved> result = (db.report_non_mediator_involved.Where(item => (item.report_id == ID))).ToList();
-                foreach(var item in result)
+                foreach (var item in result)
                 {
                     int temp;
-                    Int32.TryParse(item.Role,out temp);
-                    if(temp == 0)
+                    Int32.TryParse(item.Role, out temp);
+                    if (temp == 0)
                     {
                         item.Role = App_LocalResources.GlobalRes.Other;
-                    } else
+                    }
+                    else
                     {
                         item.Role = db.role_in_report.First(m => m.id == temp).role_en;
                     }
@@ -1527,8 +1530,8 @@ namespace EC.Models
                 {
                     mediator_id = mediators[i].mediator_id;
                     _users = db.user.Where(item => item.id == mediator_id).ToList();
-                    if(_users.Count > 0)
-                    result.Add(_users[0]);
+                    if (_users.Count > 0)
+                        result.Add(_users[0]);
                 }
 
                 return result;
@@ -1610,9 +1613,9 @@ namespace EC.Models
                 {
                     if (um._user.role_id != 8)
                     {
-                        if (db.message.Any(item => (item.report_id == ID) && ((item.reporter_access!= 3)||(  (item.reporter_access == 3) && ((item.sent_to_id == user_id || item.sender_id == user_id))))))
+                        if (db.message.Any(item => (item.report_id == ID) && ((item.reporter_access != 3) || ((item.reporter_access == 3) && ((item.sent_to_id == user_id || item.sender_id == user_id))))))
                         {
-                            _message = db.message.Where(item => (item.report_id == ID) && ((item.reporter_access!= 3)||(  (item.reporter_access == 3) && ((item.sent_to_id == user_id || item.sender_id == user_id))))).OrderByDescending(item => item.created_dt).First();
+                            _message = db.message.Where(item => (item.report_id == ID) && ((item.reporter_access != 3) || ((item.reporter_access == 3) && ((item.sent_to_id == user_id || item.sender_id == user_id))))).OrderByDescending(item => item.created_dt).First();
                             message_id = _message.id;
                         }
                     }
@@ -1697,7 +1700,7 @@ namespace EC.Models
                 if (db.task.Any(item => (item.report_id == ID)))
                 {
                     _task_list = db.task.Where(item => (item.report_id == ID)).OrderByDescending(item => item.created_on).Take(3).ToList();
-                    foreach(task _task in _task_list)
+                    foreach (task _task in _task_list)
                     {
                         task_id = _task.id;
                         TaskExtended tsk = new TaskExtended(_task.id, user_id);
@@ -1743,11 +1746,11 @@ namespace EC.Models
             if (ID != 0)
             {
                 if (task_status == 0)
-                    all_tasks = db.task.Where(item => item.report_id == ID).OrderByDescending(t=>t.created_by).ToList();
+                    all_tasks = db.task.Where(item => item.report_id == ID).OrderByDescending(t => t.created_by).ToList();
                 if (task_status == 1)
                     all_tasks = db.task.Where(item => item.report_id == ID && item.is_completed == false).OrderByDescending(t => t.created_by).ToList();
                 if (task_status == 2)
-                    all_tasks = db.task.Where(item => item.report_id == ID && item.is_completed == true).OrderByDescending(t=>t.created_by).ToList();
+                    all_tasks = db.task.Where(item => item.report_id == ID && item.is_completed == true).OrderByDescending(t => t.created_by).ToList();
             }
 
             return all_tasks;
@@ -1791,7 +1794,7 @@ namespace EC.Models
         {
             user _user = db.user.FirstOrDefault(item => item.id == user_id);
             if ((_user != null) && (_user.id != 0))
-            { 
+            {
                 // if user is from Ec - it's always true
                 if ((_user.role_id == 1) && (_user.role_id == 2) && (_user.role_id == 3))
                 {
@@ -1814,17 +1817,17 @@ namespace EC.Models
                 }
 
                 //legal cannot access any report
-            ///  if (_user.role_id == 7)
-              ///      return false;
+                ///  if (_user.role_id == 7)
+                ///      return false;
 
             }
             return false;
-        } 
+        }
 
         public List<report_log> ReportActions(int user_id, int report_id)
         {
             user _user = db.user.FirstOrDefault(item => item.id == user_id);
-            
+
             List<report_log> report_actions = new List<report_log>();
 
             if (_user.role_id == 8)
@@ -1987,9 +1990,8 @@ namespace EC.Models
 
                 return 0;
             }
-        } 
+        }
         #endregion
-
 
         public int report_status_id_by_date(DateTime dt)
         {
@@ -2014,71 +2016,15 @@ namespace EC.Models
             else
                 return 1;
 
-  //          return 0;
+            //          return 0;
         }
 
-    
-        public bool _is_not_resolved
-        {
-            get
-            {
-                bool _not_resolved = false;
-
-                if ((_report == null) || (ID == 0))
-                {
-                    // error in report or its 0
-                    return _not_resolved;
-                }
-
-                if (db.report_investigation_status.Any(item => item.report_id == ID))
-                {
-                    List<report_investigation_status> _report_statuses = db.report_investigation_status.Where(item => item.report_id == ID).OrderByDescending(x => x.created_date).ToList();
-                    if (_report_statuses.Count > 0)
-                    {
-                   ///     last_status = _statuses[0];
-                   ///     return last_status.investigation_status_id;
-                        // we need to check if 2 last statuses are equal to 'complete=not resolved'
-                        if (_report_statuses[0].investigation_status_id == 6)
-                            _not_resolved = true;
-                        if ((_report_statuses.Count > 1) && (_report_statuses[1].investigation_status_id == 6) && (_report_statuses[0].investigation_status_id != 5) && (_report_statuses[0].investigation_status_id != 7) && (_report_statuses[0].investigation_status_id != 3))
-                        {
-                            _not_resolved = true;
-                        }
-                        return _not_resolved;
-                    }
-                    else
-                        return _not_resolved;
-                }
-                else
-                    return _not_resolved;
-
-            }
-        
-        }
-
-        public string[] ReportStatusesList()
-        {
-            string[] _statuses = new string[] { "Pre-Review", "Review", "Investigation", "Resolution", "Escalation", "Closed", "Spam" };
-            return _statuses;
-        }
-        public string[] ReportNormalFlowStatusesList()
-        {
-            string[] _statuses = new string[] { "New Report", "New Case", "Under Investigation", "Awaiting Sign-Off", "Closed" };
-            return _statuses;
-        }
-
-        // we don't have any differences anymore
-        public string[] ReportNotResolvedFlowStatusesList()
-        {
-            string[] _statuses = new string[] { "New Report", "New Case", "Under Investigation", "Awaiting Sign-Off", "Closed" };
-            return _statuses;
-        }
         public bool isCustomIncidentTypes(int companyId)
         {
             bool flag = false;
             int array = 0;
             array = db.company_secondary_type.Where(item => item.company_id == companyId && item.status_id == 2).Count();
-            if(array > 0)
+            if (array > 0)
             {
                 flag = true;
             }
@@ -2115,7 +2061,7 @@ namespace EC.Models
                     {
 
                         user user = db.user.FirstOrDefault(item => (item.id == userId));
-                        if(user != null)
+                        if (user != null)
                         {
                             using (ECEntities adv = new ECEntities())
                             {
@@ -2124,8 +2070,8 @@ namespace EC.Models
                                 adv.user.AddOrUpdate(user);
                                 adv.SaveChanges();
 
-                              //  db.user.AddOrUpdate(user);
-                              //  db.SaveChanges();
+                                //  db.user.AddOrUpdate(user);
+                                //  db.SaveChanges();
                             }
                             return result;
                         }
@@ -2152,7 +2098,7 @@ namespace EC.Models
 
         public List<CaseInvestigationStatusViewModel> CaseClosuresMessages()
         {
-            List<report_investigation_status> dbReport_Investigation_statuses = db.report_investigation_status.Where(item =>  item.report_id == ID).OrderBy(item => item.created_date).ToList();
+            List<report_investigation_status> dbReport_Investigation_statuses = db.report_investigation_status.Where(item => item.report_id == ID).OrderBy(item => item.created_date).ToList();
             List<CaseInvestigationStatusViewModel> investiogationStatusesList = new List<CaseInvestigationStatusViewModel>();
 
             foreach (report_investigation_status ris in dbReport_Investigation_statuses)
@@ -2167,11 +2113,11 @@ namespace EC.Models
 
                 investiogationStatusesList.Add(cisvm);
             }
-            
+
             if (investiogationStatusesList.Count > 0)
             {
                 CaseInvestigationStatusViewModel cisvm = investiogationStatusesList[0];
-                if(cisvm.investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Resolution)
+                if (cisvm.investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Resolution)
                     cisvm.query_new_investigation_status_name = App_LocalResources.GlobalRes.CaseSentToEsacaltionMediatorForReview;
 
             }
@@ -2179,7 +2125,7 @@ namespace EC.Models
             for (int i = 1; i < investiogationStatusesList.Count(); i++)
             {
                 CaseInvestigationStatusViewModel cisvm = investiogationStatusesList[i];
-                CaseInvestigationStatusViewModel cisvm_prev = investiogationStatusesList[i-1];
+                CaseInvestigationStatusViewModel cisvm_prev = investiogationStatusesList[i - 1];
 
                 cisvm.previous_investigation_status = cisvm_prev.investigation_status_id;
                 if (cisvm.investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Resolution)
@@ -2208,7 +2154,7 @@ namespace EC.Models
         public string CaseStatusGreenBarTitle()
         {
             string _green_bar_status = "";
-            
+
             //case just closed
             if (_investigation_status == (Int32)CaseStatusConstants.CaseStatusValues.Closed)
                 _green_bar_status = GlobalRes.CaseClosed;

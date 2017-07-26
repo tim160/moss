@@ -685,7 +685,6 @@
     <Compile Include="Controllers\Utils\Constatns.cs" />
     <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Controllers\Utils\HtmlDataHelper.cs" />
-    <Compile Include="Controllers\Utils\ListEntety.cs" />
     <Compile Include="Controllers\Utils\SessionManager.cs" />
     <Compile Include="Controllers\ViewModel\ActiveCasesViewModel.cs" />
     <Compile Include="Controllers\ViewModel\AnonimityViewModel.cs" />

@@ -18,6 +18,7 @@ using EC.Core.Common;
 using System.Web.Script.Serialization;
 using log4net;
 using EC.Common.Util;
+using EC.Common.Base;
 
 /// <summary>
 /// Global Functions for EC Project
@@ -30,6 +31,7 @@ public class GlobalFunctions
     private const int PasswordLength = 6;
     private const int PasswordExtraSubmolsCount = 0;
     ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+    JsonUtil jsonUtil = new JsonUtil();
 
     public GlobalFunctions()
     {
@@ -48,7 +50,7 @@ public class GlobalFunctions
     public bool IsCC(string url)
     {
         // uncomment for campus-confidential testing
-        ///    return true;
+        //      return true;
         if ((url.ToLower().Contains("campus")) || (url.ToLower().Contains("cc.employeeconfidential")))
         {
             return true;
@@ -2111,8 +2113,8 @@ public class GlobalFunctions
             + ", \"RelationTable\":" + RelationshipToCompanyByDateAdvancedJson(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate)
             + ", \"SecondaryTypeTable\":" + SecondaryTypesByDateAdvancedJson(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate)
             + ", \"AverageStageDaysTable\":" + AverageStageDaysAdvancedJson(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate)
-            + ", \"TodaySnapshotTable\":" + ListToJsonWithJavaScriptSerializer(new List<int>(_today_spanshot))
-            + ", \"MonthEndSnapshotTable\":" + ListToJsonWithJavaScriptSerializer(new List<int>(_month_end_spanshot))
+            + ", \"TodaySnapshotTable\":" + jsonUtil.ListToJsonWithJavaScriptSerializer(new List<int>(_today_spanshot))
+            + ", \"MonthEndSnapshotTable\":" + jsonUtil.ListToJsonWithJavaScriptSerializer(new List<int>(_month_end_spanshot))
             + ", \"AnalyticsTimeline\":" + AnalyticsTimelineAdvancedJson(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate)
             + "}";
 
@@ -2124,26 +2126,26 @@ public class GlobalFunctions
     public string CompanyLocationReportAdvancedJson(int company_id, int user_id, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
     {
         DataTable dt = CompanyLocationReportAdvanced(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
-        return DataTableToJSONWithJavaScriptSerializer(dt);
+        return jsonUtil.DataTableToJSONWithJavaScriptSerializer(dt);
     }
 
     public string CompanyDepartmentReportAdvancedJson(int company_id, int user_id, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
     {
         DataTable dt = CompanyDepartmentReportAdvanced(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
-        return DataTableToJSONWithJavaScriptSerializer(dt);
+        return jsonUtil.DataTableToJSONWithJavaScriptSerializer(dt);
     }
 
     public string RelationshipToCompanyByDateAdvancedJson(int company_id, int user_id, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
     {
         DataTable dt = RelationshipToCompanyByDateAdvanced(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
-        return DataTableToJSONWithJavaScriptSerializer(dt);
+        return jsonUtil.DataTableToJSONWithJavaScriptSerializer(dt);
     }
 
 
     public string SecondaryTypesByDateAdvancedJson(int company_id, int user_id, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
     {
         DataTable dt = SecondaryTypesByDateAdvanced(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
-        return DataTableToJSONWithJavaScriptSerializer(dt);
+        return jsonUtil.DataTableToJSONWithJavaScriptSerializer(dt);
     }
 
     public string AverageStageDaysAdvancedJson(int company_id, int user_id, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
@@ -2164,23 +2166,23 @@ public class GlobalFunctions
         {
             if (i == 0)
             {
-                _json += "{ \"name\": \"Pre-Review\",\"val\":" + _array[i].ToString() + "},";
+                _json += "{ \"name\": \"New Report\",\"val\":" + _array[i].ToString() + "},";
             }
             else if (i == 1)
             {
-                _json += "{ \"name\": \"Review\",\"val\":" + _array[i].ToString() + "},";
+                _json += "{ \"name\": \"New Case\",\"val\":" + _array[i].ToString() + "},";
             }
             else if (i == 2)
             {
-                _json += "{ \"name\": \"Investigation\",\"val\":" + _array[i].ToString() + "},";
+                _json += "{ \"name\": \"Under Investigation\",\"val\":" + _array[i].ToString() + "},";
             }
             else if (i == 3)
             {
-                _json += "{ \"name\": \"Resolution\",\"val\":" + _array[i].ToString() + "},";
+                _json += "{ \"name\": \"Awaiting Sign-Off\",\"val\":" + _array[i].ToString() + "},";
             }
             else if (i == 4)
             {
-                _json += "{ \"name\": \"Escalation\",\"val\":" + _array[i].ToString() + "}";
+                _json += "{ \"name\": \"Closed\",\"val\":" + _array[i].ToString() + "}";
             }
         }
         _json += "]";
@@ -2192,11 +2194,11 @@ public class GlobalFunctions
     public string AnalyticsTimelineAdvancedJson(int company_id, int user_id, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
     {
         DataTable dt = AnalyticsTimelineAdvanced(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
-        return DataTableToJSONWithJavaScriptSerializer(dt);
+        return jsonUtil.DataTableToJSONWithJavaScriptSerializer(dt);
     }
 
 
-    public string ListToJsonWithJavaScriptSerializer(List<int> _list)
+    public string ListToJsonWithJavaScriptSerializer1(List<int> _list)
     {
         //  for(int i )
 
@@ -2222,7 +2224,7 @@ public class GlobalFunctions
           return jsSerializer.Serialize(parentRow);*/
     }
 
-    public string DataTableToJSONWithJavaScriptSerializer(DataTable table)
+    public string DataTableToJSONWithJavaScriptSerializer1(DataTable table)
     {
         JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
         List<Dictionary<string, object>> parentRow = new List<Dictionary<string, object>>();
@@ -2672,7 +2674,9 @@ public class GlobalFunctions
         return return_array;
     }
     #endregion
-    public string ConvertDataTabletoString(DataTable dt)
+
+
+    public string ConvertDataTabletoString1(DataTable dt)
     {
         System.Web.Script.Serialization.JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
         List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();

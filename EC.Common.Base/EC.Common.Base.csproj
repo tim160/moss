@@ -46,6 +46,7 @@
     <Compile Include="FatalException.cs" />
     <Compile Include="FileSizeHelper.cs" />
     <Compile Include="GuidTools.cs" />
+    <Compile Include="HtmlDataHelper.cs" />
     <Compile Include="IPathElement.cs" />
     <Compile Include="LambdaEqualityComparer.cs" />
     <Compile Include="OperationFailedException.cs" />

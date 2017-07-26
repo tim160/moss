@@ -14,6 +14,7 @@ using EC.Common.Interfaces;
 using EC.Core.Common;
 using log4net;
 using EC.Constants;
+using utilities = EC.Common.Util;
 
 namespace EC.Controllers
 {
@@ -30,6 +31,8 @@ namespace EC.Controllers
         private SessionManager sessionManager = SessionManager.inst;
         internal IEmailAddressHelper m_EmailHelper = new EmailAddressHelper();
         protected IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
+        protected utilities.JsonUtil jsonUtil = new utilities.JsonUtil();
+        protected utilities.JsonUtil stringUtil = new utilities.JsonUtil();
 
         internal bool is_cc
         {

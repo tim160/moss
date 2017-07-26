@@ -14,7 +14,7 @@ namespace EC.Controllers.utils
     {
         public static void SetCookies(user user, HttpContextBase httpContext)
         {
-            var ticket = new FormsAuthenticationTicket(
+      /*      var ticket = new FormsAuthenticationTicket(
                1,
                user.login_nm,
                DateTime.Now,
@@ -29,7 +29,7 @@ namespace EC.Controllers.utils
                 Expires = DateTime.Now.Add(FormsAuthentication.Timeout)
             };
             httpContext.Response.Cookies.Set(AuthCookie);
-            
+            */
         }
 
         public static user GetCookies(HttpContextBase httpContext)

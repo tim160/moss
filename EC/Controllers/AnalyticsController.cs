@@ -134,10 +134,10 @@ namespace EC.Controllers
             ViewBag._today = _today;
 
             DataTable dtAnalyticsTimeline = glb.AnalyticsTimeline(um._user.company_id, um._user.id);
-            ViewBag._dtAnalyticsTimeline = glb.ConvertDataTabletoString(dtAnalyticsTimeline);
+            ViewBag._dtAnalyticsTimeline = stringUtil.ConvertDataTabletoString(dtAnalyticsTimeline);
 
             DataTable dtTasksColored = glb.TasksPerDay(um._user.company_id, um._user.id);
-            ViewBag._dtTasksColored = glb.ConvertDataTabletoString(dtTasksColored);
+            ViewBag._dtTasksColored = stringUtil.ConvertDataTabletoString(dtTasksColored);
 
             DataTable dt_series = new DataTable();
             dt_series.Columns.Add("valueField", typeof(string));
@@ -175,7 +175,7 @@ namespace EC.Controllers
                         }
                     }
             }
-            ViewBag.dt_series = glb.ConvertDataTabletoString(dt_series);
+            ViewBag.dt_series = stringUtil.ConvertDataTabletoString(dt_series);
 
 
             
@@ -204,7 +204,7 @@ namespace EC.Controllers
             ViewBag.user_id = user_id;
 
             DataTable dtAnalyticsTimeline = glb.AnalyticsTimeline(um._user.company_id, um._user.id);
-            ViewBag._dtAnalyticsTimeline = glb.ConvertDataTabletoString(dtAnalyticsTimeline);
+            ViewBag._dtAnalyticsTimeline = stringUtil.ConvertDataTabletoString(dtAnalyticsTimeline);
 
             return View();
         }

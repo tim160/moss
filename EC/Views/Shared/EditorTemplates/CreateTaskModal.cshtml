@@ -13,9 +13,12 @@
 
     string left_button_promotion = ViewBag.left_button_promotion; // @GlobalRes.Returnnvestigation.ToUpper()
     string left_button_value = ViewBag.left_button_value;
-    
+
     GlobalFunctions glb = new GlobalFunctions();
     List<company_outcome> _all_outcomes = ViewBag.company_outcomes;
+    ReportModel rm = ViewBag.rm;
+    bool is_cc = ViewBag.is_cc;
+
 }
 <div id="anotherDialog">
     <div id="anotherDialog2">
@@ -33,8 +36,22 @@
                     <textarea class="form-control" type="text" name="txtDescription" id="txtDescription"></textarea>
                 </div>
             }
-            @if (((normal_button_value == ECGlobalConstants.investigation_status_resolution.ToString())) )
+            @if (((normal_button_value == ECGlobalConstants.investigation_status_resolution.ToString())))
             {
+                <div class="caseResolution custom">
+                    <div class="outcomeText">@GlobalRes.SelectCaseReviewerToSignoff:</div>
+                    <div class="dropdown3">
+                        <label id="ddlSignOffMediator" data-value="">@GlobalRes.Selectanoption</label><span class="arrow-down"></span>
+                        <ul>
+                            @foreach (user _user in rm._mediators_whoHasAccess_toReport.Where(t => t.role_id == 4))
+                            {
+                                <li data-value=@_user.id>@_user.first_nm @_user.last_nm</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <div>&nbsp;</div>
+
                 <div class="caseResolution custom">
                     <div class="outcomeText">@GlobalRes.ReasonForCaseClosure:</div>
                     <div class="dropdown3">
@@ -51,7 +68,7 @@
                 <div class="caseResolution custom">
                     <div class="outcomeText">@GlobalRes.SuggestedOutcomeUp:</div>
                     <div class="dropdown2">
-                        <label id="ddlOutcome" data-value="">@GlobalRes.Selectanoption...</label><span class="arrow-down"></span>
+                        <label id="ddlOutcome" data-value="">@GlobalRes.Selectanoption</label><span class="arrow-down"></span>
                         <ul>
                             @foreach (company_outcome _outcome in _all_outcomes)
                             {
@@ -89,7 +106,50 @@
                 <div class="caseResolution">
                     <textarea class="form-control" type="text" name="txtRecommendedActions" id="txtRecommendedActions"></textarea>
                 </div>
-                
+
+                if (is_cc)
+                {
+                    <div class="caseResolution custom">
+                        <div class="outcomeText">@GlobalRes.IsCleryActCrime:</div>
+                        <div class="dropdown3">
+                            <label id="rblIsCleryActCrime" data-value="">@GlobalRes.Selectanoption</label><span class="arrow-down"></span>
+                            <ul>
+                                @foreach (case_closure_reason _reason in glb.GetCaseClosureReasonsWithStatus())
+                                {
+                                    <li data-value=@_reason.id>@_reason.case_closure_reason_en</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+
+                        <div class="caseResolution custom">
+                            <div class="outcomeText">@GlobalRes.CategoriesCrimeStatistics:</div>
+                            <div class="dropdown3">
+                                <label id="ddlCrimeStatistics" data-value="">@GlobalRes.Selectanoption</label><span class="arrow-down"></span>
+                                <ul>
+                                    @foreach (case_closure_reason _reason in glb.GetCaseClosureReasonsWithStatus())
+                                    {
+                                        <li data-value=@_reason.id>@_reason.case_closure_reason_en</li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="caseResolution custom">
+                            <div class="outcomeText">@GlobalRes.CategoriesGeographicLocations:</div>
+                            <div class="dropdown3">
+                                <label id="ddlGeographicLocations" data-value="">@GlobalRes.Selectanoption</label><span class="arrow-down"></span>
+                                <ul>
+                                    @foreach (case_closure_reason _reason in glb.GetCaseClosureReasonsWithStatus())
+                                    {
+                                        <li data-value=@_reason.id>@_reason.case_closure_reason_en</li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                }
+
+
             }
             <div class="modal-footer2">
                 @if (normal_button_promotion.Length > 0)

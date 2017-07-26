@@ -14,31 +14,31 @@ using EC.Models.ECModel;
 using EC.Controllers.ViewModel;
 using EC.Controllers.utils;
 using EC.Constants;
-
+using EC.Common.Base;
 
 namespace EC.Controllers
 {
     public class ReportController : BaseController
     {
-      //  UserModel userModel = new UserModel();
-    //    CompanyModel companyModel = new CompanyModel();
-     //   ReportModel reportModel = new ReportModel();
+        //  UserModel userModel = new UserModel();
+        //    CompanyModel companyModel = new CompanyModel();
+        //   ReportModel reportModel = new ReportModel();
 
         private readonly UserModel userModel = UserModel.inst;
         private readonly CompanyModel companyModel = CompanyModel.inst;
         private readonly ReportModel reportModel = new ReportModel();
-      
+
         //
         // GET: /Report/
         [HttpGet]
         public ActionResult New(string companyCode)
         {
-        ///    private readonly UserModel userModel = UserModel.inst;
-        ///    
+            ///    private readonly UserModel userModel = UserModel.inst;
+            ///    
 
-        ///    reportModel = new ReportModel();
-       ///     userModel = new UserModel();
-         ////   companyModel = new CompanyModel();
+            ///    reportModel = new ReportModel();
+            ///     userModel = new UserModel();
+            ////   companyModel = new CompanyModel();
 
             int id = 0;
             if (companyCode != null)
@@ -84,11 +84,13 @@ namespace EC.Controllers
 
                 /*caseInformation*/
 
-                if(reportModel.isCustomIncidentTypes(ViewBag.currentCompanyId)) {
+                if (reportModel.isCustomIncidentTypes(ViewBag.currentCompanyId))
+                {
                     /*custom types*/
                     ViewBag.secondary_type_mandatory = reportModel.getCompanySecondaryType(ViewBag.currentCompanyId);
                     ViewBag.CustomSecondaryType = true;
-                } else
+                }
+                else
                 {
                     /*default*/
                     ViewBag.secondary_type_mandatory = reportModel.getSecondaryTypeMandatory();
@@ -117,7 +119,7 @@ namespace EC.Controllers
                     selectedRoleInReport.Add(role);
                 }
                 ViewBag.selectedRoleInReport = selectedRoleInReport;
-                List<anonymity> list_anon = companyModel.GetAnonymities(id, 0); 
+                List<anonymity> list_anon = companyModel.GetAnonymities(id, 0);
                 foreach (anonymity _anon in list_anon)
                 {
                     _anon.anonymity_company_en = string.Format(_anon.anonymity_company_en, currentCompany.company_nm);
@@ -171,24 +173,25 @@ namespace EC.Controllers
                 if (!System.IO.Directory.Exists(path + companyLogo))
                 {
                     ViewBag.companylogo = companyLogo;
-                } else
+                }
+                else
                 {
                     ViewBag.companyLogo = null;
                 }
                 //
             }
             else
-            { 
+            {
                 // esli u nas net company_code, znachit reportera nado redirect na index/company_selector
                 return RedirectToAction("index", "Index");
             }
-         
+
             return View();
         }
         [HttpPost]
         public ActionResult New(ReportViewModel model)
         {
-            
+
             model.Process(Request.Form, Request.Files);
             var currentReport = reportModel.AddReport(model);
             ViewBag.CaseNumber = currentReport.display_name;//Request.Form["caseNumber"];model.caseNumber
@@ -196,9 +199,12 @@ namespace EC.Controllers
             {
                 var user = companyModel.GetUser(currentReport.user_id);
                 ViewBag.UserId = user.id;
-                /*model.userName = */ViewBag.Login = user.login_nm;
-                /*model.password = */ViewBag.Password = user.password;
-                /*model.userEmail = */ViewBag.Email = user.email;
+                /*model.userName = */
+                ViewBag.Login = user.login_nm;
+                /*model.password = */
+                ViewBag.Password = user.password;
+                /*model.userEmail = */
+                ViewBag.Email = user.email;
                 SignIn(user);
                 GlobalFunctions glb = new GlobalFunctions();
                 glb.UpdateReportLog(user.id, 2, currentReport.id, "", null, "");
@@ -222,10 +228,10 @@ namespace EC.Controllers
             ViewBag.cc_extension = cc_ext;
             #endregion
 
-          
+
 
             int id = 1;
-          var currentCompany = CompanyModel.inst.GetById(id);
+            var currentCompany = CompanyModel.inst.GetById(id);
             ViewBag.currentCompany = currentCompany.company_nm;
             ViewBag.currentCompanyId = currentCompany.id;
             ViewBag.currentCompanySubmitted = currentCompany.company_nm;
@@ -241,12 +247,12 @@ namespace EC.Controllers
             ViewBag.relationship = companyModel.getRelationships();
             ViewBag.departments = HtmlDataHelper.MakeSelect(currentCompany.company_department.ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("department")));
             ViewBag.locationsOfIncident = HtmlDataHelper.MakeSelect(companyModel.LocationsOfIncident(id).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
-            
+
             ViewBag.injury_damage = companyModel.GetInjuryDamages().ToList();
 
             ViewBag.supervisingMediators = companyModel.AllSupervisingMediators(id, true); // HtmlDataHelper.MakeSelect(companyModel.AllSupervisingMediators(id, true).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.last_nm));
             ViewBag.nonSupervisingMediators = companyModel.AllNonSupervisingMediators(id, true); // HtmlDataHelper.MakeSelect(companyModel.AllSupervisingMediators(id, true).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.last_nm));
-          
+
             return View();
         }
 
@@ -260,7 +266,7 @@ namespace EC.Controllers
             ViewBag.cc_extension = cc_ext;
             #endregion
 
-          
+
 
             int id = 1;
             var currentCompany = CompanyModel.inst.GetById(id);
@@ -298,7 +304,7 @@ namespace EC.Controllers
             ViewBag.cc_extension = cc_ext;
             #endregion
 
-          
+
             int id = 1;
             var currentCompany = CompanyModel.inst.GetById(id);
             ViewBag.currentCompany = currentCompany.company_nm;
@@ -324,7 +330,7 @@ namespace EC.Controllers
 
             return View();
         }
-        
+
         // messages for reporter in the case
         public ActionResult MessagesWithReporter(int case_id = 1, int user_id = 2)
         {
@@ -335,7 +341,7 @@ namespace EC.Controllers
             ViewBag.cc_extension = cc_ext;
             #endregion
 
-          
+
             int id = 1;
             var currentCompany = CompanyModel.inst.GetById(id);
             ViewBag.currentCompany = currentCompany.company_nm;
@@ -401,6 +407,6 @@ namespace EC.Controllers
             //bool result = glb.isCompanyInUse(IdCountry);
             return result_company;
         }
-	}
+    }
 
 }

@@ -2,6 +2,7 @@
 @using EC.Models.Database;
 @using EC.App_LocalResources;
 @using EC.Common.Interfaces;
+@using EC.Localization;
 @using EC.Core.Common;
 @using EC.Model.Impl;
 @{
@@ -36,8 +37,8 @@
         _last_user_promotion_model = new UserModel(rm._last_promotion.user_id);
     }
 
-    string[] _statuses = rm.ReportNormalFlowStatusesList();
-    string[] _statuses_not_resolved = rm.ReportNotResolvedFlowStatusesList();
+    string[] _statuses = EC.Constants.ECGlobalConstants.ReportFlowStatusesList;
+
 
     string report_name = " - #" + rm._report.display_name + " - " + rm._secondary_type_string + " - " + rm._location_string;
     ViewBag.Title = GlobalRes.NewReportUp + report_name;
@@ -46,30 +47,30 @@
 <body>
     <div class="headerPos">
         @if (report_id != 0)
-{
-    for (int i = 0; i < 5; i++)
-    {
-        if (i < rm._investigation_status)
         {
-            <div class="positionN active@{@class_ext}">
-                <span>@_statuses[i]</span>
-            </div>
-            <div class="polos"></div>
-        }
-        else
-        {
-                    <div class="positionN">
+            for (int i = 0; i < 5; i++)
+            {
+                if (i < rm._investigation_status)
+                {
+                    <div class="positionN active@{@class_ext}">
                         <span>@_statuses[i]</span>
                     </div>
                     <div class="polos"></div>
-                }
+    }
+    else
+    {
+        <div class="positionN">
+            <span>@_statuses[i]</span>
+        </div>
+                    <div class="polos"></div>
             }
         }
-        else
-        {
-            <div style="color: #38494d;">@GlobalRes.no_permission</div>
+    }
+    else
+    {
+        <div style="color: #38494d;">@GlobalRes.no_permission</div>
             <div style="color: #38494d;">@GlobalRes.use_top_panel</div>
-        }
+    }
 
     </div><!--headerPos-->
     @if (rm._report != null)
@@ -176,19 +177,20 @@
                 else
                 {
                     <div class="buttonBlock">
-                    @*    <label class="spamBtn">@GlobalRes.Spam.ToUpper()</label>
-                        <input id="spam_case" type="submit" name="spam_case" />*@
+                        @*    <label class="spamBtn">@GlobalRes.Spam.ToUpper()</label>
+                            <input id="spam_case" type="submit" name="spam_case" />*@
 
                         <!-- mark_spam button -->
 
-                        @if (is_cc.Value){
+                        @if (is_cc.Value)
+                        {
                             <label class="acceptCaseBtn acceptCaseBtn_cc">@GlobalRes.Reopen.ToUpper()</label>
                         }
                         else
                         {
-                             <label class="acceptCaseBtn">@GlobalRes.Reopen.ToUpper()</label>
+                            <label class="acceptCaseBtn">@GlobalRes.Reopen.ToUpper()</label>
                         }
-                       
+
                         <input id="reopen_case" type="submit" name="reopen_case" />
                     </div>
                 }
@@ -205,7 +207,7 @@
                 var allDepartments = (List<company_department>)ViewBag.AllDepartments;
                 var allIncidets = (List<company_secondary_type>)ViewBag.AllIncidets;
                 var allOwners = (List<UserItems>)ViewBag.AllOwners;
-                var allPolicies = (List<KeyValuePair<string, string>>)ViewBag.AllPolicies;                
+                var allPolicies = (List<KeyValuePair<string, string>>)ViewBag.AllPolicies;
 
 
                 <!-- ============================== START Accept case ==================================== -->
@@ -234,14 +236,14 @@
                             <tr>
                                 <td>
                                     <!--table left-->
-                                    <table  class="generalInformation">
+                                    <table class="generalInformation">
                                         <tr>
                                             <td>@GlobalRes.IncidentType:</td>
                                             <td>
                                                 @Html.DropDownList("IncidentId", new SelectList(allIncidets, "id", "secondary_type_en"), new { @class = "" })
                                             </td>
                                         </tr>
-                                       
+
                                         <tr>
                                             <td>@GlobalRes.Department: </td>
                                             <td>
@@ -255,7 +257,7 @@
                                             </td>
                                         </tr>
 
-                                       
+
                                     </table>
 
 
@@ -321,8 +323,7 @@
                         <p class="titleCase"></p>
                     </div>
 
-                    <form action="" method="post">
-                    </form>
+                    <form action="" method="post"></form>
 
                 </div>
 
@@ -363,7 +364,7 @@
                 </div>
 
     <!-- ============================== END Mark case as spam ==================================== -->
-            }
+    }
         </div><!-- end viewReport-->
 
         <div id="generalInfo">
@@ -458,101 +459,103 @@
                     <span class="title">@GlobalRes.PartiesInvolved</span>
                     @if (_involved.Count > 0)
                     {
-                        @*<div class="incidentDescription">*@
-                        <table class="partiesInformation">
-                            @foreach (var item in _involved)
-                            {
-                                <tr>
-                                    <td>@item.Role</td>
-                                    <td>@item.Name @item.last_name, @item.Title</td>
-                                </tr>
-                            }
-                        </table>
-                        @*</div>*@
+                        @*<div class="incidentDescription">*@<div class="incidentDescription">
+
+                            <table class="partiesInformation">
+                                @foreach (var item in _involved)
+                                {
+                                    <tr>
+                                        <td>@item.Role</td>
+                                        <td>@item.Name @item.last_name, @item.Title</td>
+                                    </tr>
+                                }
+                            </table>
+                            @*</div>*@
+                        </div>
                     }
 
                     @if (rm._involved_mediators_user_list.Count > 0)
                     {
                         <table class="generalInformation">
                             <tr>
-                                <td>@GlobalRes.Mediatorsinvolved</td>
+                                <td>@LocalizationGetter.GetString("Mediatorsinvolved", is_cc)</td>
                                 <td>&nbsp;</td>
                             </tr>
                             @foreach (user mediators_involved in rm._involved_mediators_user_list)
-                             {
+                            {
                                 <tr>
                                     <td>@mediators_involved.first_nm @mediators_involved.last_nm</td>
                                     <td>@mediators_involved.title_ds</td>
                                 </tr>
                             }
-                            </table>
+                        </table>
                     }
-                            <table class="generalInformation">
-                                <tr>
-                                    <td>@GlobalRes.Doesmanagementknowaboutthisincident</td>
-                                    <td>@rm._management_know_string</td>
-                                </tr>
-                         @if (!String.IsNullOrEmpty(rm._report.management_know_text))
-                        {
-                                    <tr>
-                                        <td></td>
-                                        <td>@rm._report.management_know_text</td>
-                                    </tr>
-                        }
-                            </table>
-
-                            <table class="generalInformation">
-                                <tr>
-                                    <td>@GlobalRes.Incidentreportedoutside_q</td>
-                                    <td>@rm._is_reported_outside</td>
-                                </tr>
-                                @if (!String.IsNullOrEmpty(rm._report.reported_outside_text))
-                        {
+                    <table class="generalInformation">
                         <tr>
-                            <td></td>
-                            <td>@rm._report.reported_outside_text</td>
+                            <td>@GlobalRes.Doesmanagementknowaboutthisincident</td>
+                            <td>@rm._management_know_string</td>
                         </tr>
+                        @if (!String.IsNullOrEmpty(rm._report.management_know_text))
+                        {
+                            <tr>
+                                <td></td>
+                                <td>@rm._report.management_know_text</td>
+                            </tr>
                         }
-                                <tr>
-                                    <td>@GlobalRes.IsReportUrgent</td>
-                                    <td>@rm._is_reported_urgent</td>
-                                </tr>
-                            </table>
+                    </table>
+
+                    <table class="generalInformation">
+                        <tr>
+                            <td>@GlobalRes.Incidentreportedoutside_q</td>
+                            <td>@rm._is_reported_outside</td>
+                        </tr>
+                        @if (!String.IsNullOrEmpty(rm._report.reported_outside_text))
+                        {
+                            <tr>
+                                <td></td>
+                                <td>@rm._report.reported_outside_text</td>
+                            </tr>
+                        }
+                        <tr>
+                            <td>@GlobalRes.IsReportUrgent</td>
+                            <td>@rm._is_reported_urgent</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="contentDownloadDoc">
+
+                @foreach (EC.Models.Database.attachment file in ViewBag.attachmentFiles)
+                {
+                    <div class="blockDownloadDoc">
+                        <div class="blockImg">
+                            <img src='@Url.Content("/Content/Icons/viewDoc1.png")'>
+                        </div>
+                        <div class="infoBlock">
+                            <p>@file.file_nm</p>
+                            <a href="@file.path_nm" download>@GlobalRes.Download.ToLower()</a>
                         </div>
                     </div>
-
-                        <div class="contentDownloadDoc">
-
-                            @foreach (EC.Models.Database.attachment file in ViewBag.attachmentFiles)
-                {
-                                <div class="blockDownloadDoc">
-                                    <div class="blockImg">
-                                        <img src='@Url.Content("/Content/Icons/viewDoc1.png")'>
-                                    </div>
-                                    <div class="infoBlock">
-                                        <p>@file.file_nm</p>
-                                        <a href="@file.path_nm" download>@GlobalRes.Download.ToLower()</a>
-                                    </div>
-                                </div>
                 }
-                        </div>
-                    </div><!-- end generalInfo-->
+            </div>
+        </div><!-- end generalInfo-->
 
-                        <div class="helpBlock">
-                            <span></span>
-                        </div>
+        <div class="helpBlock">
+            <span></span>
+        </div>
     }
-                </body>
-                <!--Unknown-->
-                <p>@ViewBag.id</p>
-                <!-- Messages-->
-                <div>
-                    <p>@ViewBag.companyName</p>
-                </div>
+</body>
+<!--Unknown-->
+<p>@ViewBag.id</p>
+<!-- Messages-->
+<div>
+    <p>@ViewBag.companyName</p>
+</div>
 
-                <div>
-                    <p>@ViewBag.generatedName</p>
-                </div>
+<div>
+    <p>@ViewBag.generatedName</p>
+</div>
 
 
 
@@ -599,10 +602,10 @@
             $.ajax({
                 method: "POST",
                 url: "/NewReport/AcceptOrReopenCase",
-                data: { 
-                    report_id : report_id, 
-                    user_id: user_id, 
-                    description : description, 
+                data: {
+                    report_id : report_id,
+                    user_id: user_id,
+                    description : description,
                     incidentId : $('#IncidentId').val(),
                     departmentId: $('#DepartmentId').val(),
                     scopeId : $('#ScopeId').val(),
@@ -653,7 +656,7 @@
                     //$(this).css('border', '2px solid #b2bfc3');
                     //$(this).attr("placeholder", "");
                     //$(this).parent().parent().find('.blockPersonal').find('.arrow').css('border-right', '5px solid #b2bfc3');
-                    
+
                     var self = $(this);
                     self.removeClass('green').addClass('grey');
                     self.attr("placeholder", "");

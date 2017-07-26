@@ -17,7 +17,7 @@
     string _today = ViewBag._today;
 
 
-    string[] _titleHeaderLegend = { "Pre-Review", "Review", "Investigation", "Resolution" };
+    string[] _titleHeaderLegend = { GlobalRes.NewReportUp, GlobalRes.NewCase, GlobalRes.UnderInvestigation, GlobalRes.AwaitingSignOff };
     string[] _miniSquareColor = { "#D6F9F6", "#c0ece8", "#82dad0", "#44c8b9" };
 
     UserModel um = new UserModel(user_id);
@@ -38,13 +38,11 @@
                 <a class="caseesTab active">@GlobalRes.Tasks</a>
             </div>
         </div>
-    @*    <div class="positionActivityIcon">
-            <div id="activityIcon"></div>
-        </div>*@
+        @*    <div class="positionActivityIcon">
+                <div id="activityIcon"></div>
+            </div>*@
     </div><!--casesHeared-->
-
     <!---->
-
     <!---->
     <div class="contentSettings contentActivity">
         <!-- 1 All cases -->

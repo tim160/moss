@@ -6,10 +6,11 @@ using System.Web.UI;
 using EC.Controllers.Utils;
 using EC.Models.Database;
 using System.Globalization;
+using EC.Common.Util;
+
 
 namespace EC.Controllers.ViewModel
 {
- 
     public class ReportViewModel : BaseViewModel
     {
         public bool isPreviusReported { get; set; }
@@ -72,25 +73,25 @@ namespace EC.Controllers.ViewModel
         #region 2 page
 
 
-        [ListEntety("personName", typeof(string))]
-        public List<string> personsNames{ get; set; }
+        [ListEntity("personName", typeof(string))]
+        public List<string> personsNames { get; set; }
 
-        [ListEntety("personLastName", typeof(string))]
+        [ListEntity("personLastName", typeof(string))]
         public List<string> personsLastNames { get; set; }
 
-        [ListEntety("personTitle", typeof(string))]
-        public List<string> personsTitles{ get; set; }
-        [ListEntety("personRole", typeof(string))]
+        [ListEntity("personTitle", typeof(string))]
+        public List<string> personsTitles { get; set; }
+        [ListEntity("personRole", typeof(string))]
         public List<string> personsRoles { get; set; }
 
-        [ListEntety("departmentInvolved", typeof(string))]
+        [ListEntity("departmentInvolved", typeof(string))]
         public List<string> departments { get; set; }
 
 
-        [ListEntety("caseMediatorsInvolved", typeof(string))]
+        [ListEntity("caseMediatorsInvolved", typeof(string))]
         public List<string> mediatorsInvolved { get; set; }
 
-        [ListEntety("caseOwners", typeof(string))]
+        [ListEntity("caseOwners", typeof(string))]
         public List<string> mediatorsOwners { get; set; }
         #endregion
 
@@ -103,7 +104,7 @@ namespace EC.Controllers.ViewModel
             //data.reported_dt = DateTime.Today;
             //data.incident_dt
             //var a = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd hh:mm:ss", null);
-            
+
             data.assign_company_flag = 0;
             data.display_name = "";
             data.report_name_generic = "";
@@ -112,19 +113,19 @@ namespace EC.Controllers.ViewModel
             data.priority_id = isUrgent;
             data.injury_damage = injury_damage;
             data.management_know_text = management_know_text;
-           // data.refferred_outside_organization = "";
+            // data.refferred_outside_organization = "";
             data.outcome_action_ds = null;
-            data.reporter_user_id = 2;  
+            data.reporter_user_id = 2;
             data.reported_dt = DateTime.Now;
             data.type_id = 2;
             data.other_department_name = "";
-//            data.other_secondary_type_name = whatHappened;
+            //            data.other_secondary_type_name = whatHappened;
             data.last_update_dt = DateTime.Now;
             data.ip = "";
             data.previously_reported_accepted = false;
             data.report_frequency_text = report_frequency_text;
             data.reported_outside_id = reported_outside_id;
-            data.reported_outside_text = reported_outside_text;            
+            data.reported_outside_text = reported_outside_text;
 
             data.previously_reported = isPreviusReported;
             if (isPreviusReported)
@@ -134,7 +135,7 @@ namespace EC.Controllers.ViewModel
             }
             else
             {
-                data.incident_anonymity_id = incident_anonymity_id; 
+                data.incident_anonymity_id = incident_anonymity_id;
                 //incident_anonymity_id = data.incident_anonymity_id; 
                 data.reporter_country_id = reportFrom;
                 if (locationsOfIncident > 0)
@@ -150,11 +151,11 @@ namespace EC.Controllers.ViewModel
 
 
                 data.company_relationship_id = reporterTypeDetail;
-                if(reporterTypeDetail == 0 || companyRelationshipOther != null)
+                if (reporterTypeDetail == 0 || companyRelationshipOther != null)
                 {
                     data.not_current_employee = companyRelationshipOther;
                 }
-                
+
                 //next page
 
                 /**
@@ -167,7 +168,7 @@ namespace EC.Controllers.ViewModel
 
                 data.is_ongoing = isOnGoing;
 
-                if (isOnGoing>0)
+                if (isOnGoing > 0)
                 {
                     data.report_frequency_id = incidentFrequency;
                 }
@@ -177,10 +178,10 @@ namespace EC.Controllers.ViewModel
                 {
                     data.witness_names = witnessNames;
                     data.witness_will_cooperate = witnessWillCooperate;
-                } 
+                }
                 //incidentResultReport;
                 data.injury_damage_id = incidentResultReport;
-                
+
             }
             return data;
         }
@@ -218,7 +219,8 @@ namespace EC.Controllers.ViewModel
         {
             List<report_non_mediator_involved> result = new List<report_non_mediator_involved>();
 
-            if (personsRoles != null) { 
+            if (personsRoles != null)
+            {
 
                 for (int i = 0; i < personsRoles.Count; i++)
                 {
