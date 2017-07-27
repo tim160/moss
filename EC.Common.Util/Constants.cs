@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EC.Common.Util
 {
-    public class Constants
+    public class Constants1
     {
         public static readonly Guid Password = new Guid("50A1D150-F52A-4F9B-BEBA-B0246548A55A");
 
@@ -111,7 +111,7 @@ namespace EC.Common.Util
 
         public static Dictionary<Int64, string> VehicleEventNames = new Dictionary<Int64, string>();
         // can't do static dictionary with default values PDA/Vernon is not happy
-        static Constants()
+        static Constants1()
         {
             VehicleEventNames.Add(VehicleBucketUpEvent, "VehicleBucketUpEvent");
             VehicleEventNames.Add(VehicleBucketDownEvent, "VehicleBucketDownEvent");

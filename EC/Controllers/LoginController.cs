@@ -8,7 +8,7 @@ using EC.Models.Database;
 using EC.Controllers.utils;
 using EC.App_LocalResources;
 using System.Text.RegularExpressions;
-//using EC.Common.Util;
+using EC.Common.Util;
 using EC.Constants;
 
 namespace EC.Controllers
@@ -31,7 +31,7 @@ namespace EC.Controllers
             Session.Clear();
             GlobalFunctions glb = new GlobalFunctions();
             
-            if (glb.IsSubdomain(Request.Url.AbsoluteUri.ToLower()))
+            if (DomainUtil.IsSubdomain(Request.Url.AbsoluteUri.ToLower()))
             {
                 if (loginField != null && loginField.Length > 0)
                 {
@@ -70,7 +70,7 @@ namespace EC.Controllers
             ViewBag.cc_extension = cc_ext;
             #endregion
             ViewBag.LogoCompany = new EC.Models.CompanyModel().getLogoCompany();
-            ViewBag.LogoPath = glb.LogoBaseUrl(Request.Url.AbsoluteUri.ToLower());
+            ViewBag.LogoPath = DomainUtil.LogoBaseUrl(Request.Url.AbsoluteUri.ToLower());
 
             Session.Clear();
             return View();
@@ -162,7 +162,7 @@ namespace EC.Controllers
             Session.Clear();
             GlobalFunctions glb = new GlobalFunctions();
 
-            if (glb.IsSubdomain(Request.Url.AbsoluteUri.ToLower()))
+            if (DomainUtil.IsSubdomain(Request.Url.AbsoluteUri.ToLower()))
             {
                 if (login != null && login.Length > 0)
                 {

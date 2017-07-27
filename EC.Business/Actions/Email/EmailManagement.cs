@@ -352,9 +352,9 @@ namespace EC.Business.Actions.Email
             }
         }
 
-        public ActionResult ValidateEmailAddress(string email)
+        public ActionResultExtended ValidateEmailAddress(string email)
         {
-            ActionResult actionResult = new ActionResult();
+            ActionResultExtended actionResult = new ActionResultExtended();
             List<ReturnProblem> problems = new List<ReturnProblem>();
 
             if (!string.IsNullOrWhiteSpace(email) && !EmailManagement.IsValidEmailAddress(email))
@@ -377,7 +377,7 @@ namespace EC.Business.Actions.Email
         }
 
 
-        public ActionResult Send(List<string> to, List<string> CC, string messageSubject, string messageBody)
+        public ActionResultExtended Send(List<string> to, List<string> CC, string messageSubject, string messageBody)
         {
             StringBuilder emailTo = new StringBuilder();
             StringBuilder emailCC = new StringBuilder();
@@ -402,7 +402,7 @@ namespace EC.Business.Actions.Email
         }
 
 
-        public ActionResult Send(List<string> to, List<string> CC, string messageSubject, string messageBody, bool isHTml)
+        public ActionResultExtended Send(List<string> to, List<string> CC, string messageSubject, string messageBody, bool isHTml)
         {
             StringBuilder emailTo = new StringBuilder();
             StringBuilder emailCC = new StringBuilder();
@@ -426,7 +426,7 @@ namespace EC.Business.Actions.Email
             return Send(AddressFrom, emailTo.ToString(), emailCC.ToString(), messageSubject, messageBody, new string[0], isHTml);
         }
 
-        public ActionResult Send(List<string> to, List<string> CC, string messageSubject, string messageBody, bool isHTml, string from)
+        public ActionResultExtended Send(List<string> to, List<string> CC, string messageSubject, string messageBody, bool isHTml, string from)
         {
             StringBuilder emailTo = new StringBuilder();
             StringBuilder emailCC = new StringBuilder();
@@ -450,22 +450,22 @@ namespace EC.Business.Actions.Email
             return Send(from, emailTo.ToString(), emailCC.ToString(), messageSubject, messageBody, new string[0], isHTml);
         }
 
-        public ActionResult Send(string to, string messageSubject, string messageBody)
+        public ActionResultExtended Send(string to, string messageSubject, string messageBody)
         {
             return Send(AddressFrom, to, string.Empty, messageSubject, messageBody, new string[0], false);
         }
 
-        public ActionResult Send(string to, string cc, string messageSubject, string messageBody)
+        public ActionResultExtended Send(string to, string cc, string messageSubject, string messageBody)
         {
             return Send(AddressFrom, to, cc, messageSubject, messageBody, new string[0], false);
         }
 
-        public ActionResult Send(string to, string cc, string messageSubject, string messageBody, byte[] attachmentData, String attachmentFileName, bool isBodyHtml)
+        public ActionResultExtended Send(string to, string cc, string messageSubject, string messageBody, byte[] attachmentData, String attachmentFileName, bool isBodyHtml)
         {
             return Send(to, cc, messageSubject, messageBody, new byte[][] { attachmentData }, new string[] { attachmentFileName }, isBodyHtml);
         }
 
-        public ActionResult Send(string to, string cc, string messageSubject, string messageBody, byte[][] attachmentDatas, String[] attachmentFileNames, bool isBodyHtml)
+        public ActionResultExtended Send(string to, string cc, string messageSubject, string messageBody, byte[][] attachmentDatas, String[] attachmentFileNames, bool isBodyHtml)
         {
             if (attachmentDatas == null || attachmentFileNames == null || attachmentDatas.Length != attachmentFileNames.Length)
                 attachmentFileNames = new String[0];
@@ -488,7 +488,7 @@ namespace EC.Business.Actions.Email
                 }
             }
 
-            ActionResult result = Send(AddressFrom, to, cc, messageSubject, messageBody, attachmentFileNames, isBodyHtml);
+            ActionResultExtended result = Send(AddressFrom, to, cc, messageSubject, messageBody, attachmentFileNames, isBodyHtml);
 
             for (int i = 0; i < attachmentFileNames.Length; i++)
                 File.Delete(attachmentFileNames[i]);
@@ -496,12 +496,12 @@ namespace EC.Business.Actions.Email
             return result;
         }
 
-        public ActionResult Send(string to, string cc, string messageSubject, string messageBody, string[] attachments, bool isBodyHtml)
+        public ActionResultExtended Send(string to, string cc, string messageSubject, string messageBody, string[] attachments, bool isBodyHtml)
         {
             return Send(AddressFrom, to, cc, messageSubject, messageBody, attachments, isBodyHtml);
         }
 
-        public ActionResult Send(string fromAddress, string to, string cc, string messageSubject, string messageBody, string[] attachments, bool isBodyHtml)
+        public ActionResultExtended Send(string fromAddress, string to, string cc, string messageSubject, string messageBody, string[] attachments, bool isBodyHtml)
         {
             string toAddress = ParseEmailAddress(to);
             string ccAddress = ParseEmailAddress(cc);
@@ -518,7 +518,7 @@ namespace EC.Business.Actions.Email
             else
                 ccAddressArray = new String[0];
 
-            ActionResult result = Send(fromAddress, toAddressArray, messageSubject, messageBody, ccAddressArray, attachments, isBodyHtml);
+            ActionResultExtended result = Send(fromAddress, toAddressArray, messageSubject, messageBody, ccAddressArray, attachments, isBodyHtml);
             if (result.ReturnCode == ReturnCode.Success || result.ReturnCode == ReturnCode.SuccessWithErrors)
             {
                 // Log this email
@@ -531,7 +531,7 @@ namespace EC.Business.Actions.Email
             return result;
         }
 
-        public ActionResult Send(string to, string cc, string subject, string subjectTemplate, string bodyTemplate, string[] attachments)
+        public ActionResultExtended Send(string to, string cc, string subject, string subjectTemplate, string bodyTemplate, string[] attachments)
         { 
             bool isBodyHtml = false;
             
@@ -580,7 +580,7 @@ namespace EC.Business.Actions.Email
         #endregion
         #region MailWrapper Methods
 
-        public ActionResult Send(string toAddress, string messageSubject, string messageBody, bool isBodyHtml)
+        public ActionResultExtended Send(string toAddress, string messageSubject, string messageBody, bool isBodyHtml)
         {
             string[] toAddressArray;
             if (toAddress != string.Empty)
@@ -591,7 +591,7 @@ namespace EC.Business.Actions.Email
             return Send(m_FromAddress, toAddressArray, messageSubject, messageBody, new string[0], new string[0], isBodyHtml);
         }
 
-        public ActionResult Send(string toAddress, string messageSubject, string messageBody, string[] cc, bool isBodyHtml)
+        public ActionResultExtended Send(string toAddress, string messageSubject, string messageBody, string[] cc, bool isBodyHtml)
         {
             string[] toAddressArray;
             if (toAddress != string.Empty)
@@ -602,7 +602,7 @@ namespace EC.Business.Actions.Email
             return Send(m_FromAddress, toAddressArray, messageSubject, messageBody, cc, new string[0], isBodyHtml);
         }
 
-        public ActionResult Send(string toAddress, string messageSubject, string messageBody, string ccAddress, bool isBodyHtml)
+        public ActionResultExtended Send(string toAddress, string messageSubject, string messageBody, string ccAddress, bool isBodyHtml)
         {
             string[] toAddressArray;
             if (toAddress != string.Empty)
@@ -619,7 +619,7 @@ namespace EC.Business.Actions.Email
             return Send(m_FromAddress, toAddressArray, messageSubject, messageBody, ccAddressArray, new string[0], isBodyHtml);
         }
 
-        public ActionResult Send(string fromAddress, string[] to, string messageSubject, string messageBody, string[] cc, string[] attachments, bool isBodyHtml)
+        public ActionResultExtended Send(string fromAddress, string[] to, string messageSubject, string messageBody, string[] cc, string[] attachments, bool isBodyHtml)
         {
             //if (!m_TemplatesInitialized)
             //{
@@ -710,7 +710,7 @@ namespace EC.Business.Actions.Email
 
                 msg.Attachments.Dispose();
 
-                return new ActionResult(ReturnCode.Success, string.Empty);
+                return new ActionResultExtended(ReturnCode.Success, string.Empty);
             }
             catch (Exception e)
             {
@@ -721,7 +721,7 @@ namespace EC.Business.Actions.Email
 
                 msg.Attachments.Dispose();
 
-                return new ActionResult(ReturnCode.Fail,
+                return new ActionResultExtended(ReturnCode.Fail,
                                         string.Format("Error sending email: {0}", e.Message));
             }
         }

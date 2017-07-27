@@ -14,12 +14,13 @@ using EC.Controllers.ViewModel;
 using System.Data.Entity.Migrations;
 using EC.App_LocalResources;
 using EC.Constants;
-using CommonUtil = EC.Common.Util;
+using EC.Common.Util;
 
 namespace EC.Controllers
 {
     public class SettingsController : BaseController
     {
+
         private readonly CompanyModel companyModel = CompanyModel.inst;
         private SettingsModel SettingsModel = new SettingsModel();
         // GET: Settings
@@ -557,7 +558,7 @@ namespace EC.Controllers
                 return App_LocalResources.GlobalRes.AlreadyInvited;
 
 
-            string generated_code = CommonUtil.StringUtil.RandomString(6);
+            string generated_code = StringUtil.RandomString(6);
             // create invitation in db
 
             invitation _invitation = new invitation();
@@ -588,7 +589,7 @@ namespace EC.Controllers
                 EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
 
                 CompanyModel cm = new CompanyModel(_user.company_id);
-                eb.MediatorInvited(_user.first_nm, _user.last_nm, _user.first_nm, _user.last_nm, cm._company.company_nm, generated_code, eb.GetSubdomainLink(Request.Url.AbsoluteUri.ToLower()) + "/new/?code=" + generated_code + "&email=" + email);
+                eb.MediatorInvited(_user.first_nm, _user.last_nm, _user.first_nm, _user.last_nm, cm._company.company_nm, generated_code, DomainUtil.GetSubdomainLink(Request.Url.AbsoluteUri.ToLower()) + "/new/?code=" + generated_code + "&email=" + email);
                 string body = eb.Body;
                 em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_MediatorInvited, body, true);
             }

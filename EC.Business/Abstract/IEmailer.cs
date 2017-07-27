@@ -9,7 +9,7 @@ namespace EC.Business.Actions
 {
     public interface IEmailer
     {
-        ActionResult Send(List<string> to, List<string> CC, string messageSubject, string messageBody);
-        ActionResult Send(string to, string messageSubject, string messageBody);
+        ActionResultExtended Send(List<string> to, List<string> CC, string messageSubject, string messageBody);
+        ActionResultExtended Send(string to, string messageSubject, string messageBody);
     }
 }

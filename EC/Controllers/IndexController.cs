@@ -16,6 +16,7 @@ using EC.Controllers.utils;
 using Resources = EC.Localization.Resources;
 using log4net;
 using EC.Constants;
+using EC.Common.Util;
 
 namespace EC.Controllers
 {
@@ -133,7 +134,7 @@ namespace EC.Controllers
             ViewBag.cc_extension = cc_ext;
             #endregion
 
-            ViewBag.LogoPath = glb.LogoBaseUrl(Request.Url.AbsoluteUri.ToLower());
+            ViewBag.LogoPath = DomainUtil.LogoBaseUrl(Request.Url.AbsoluteUri.ToLower());
 
             return View();
         }
@@ -150,7 +151,7 @@ namespace EC.Controllers
             List<company> list = companyModel.GeCompaniesWithStatus();
             List<SearchCompanyDto> searchCompanyDto = new List<SearchCompanyDto>();
 
-            ViewBag.LogoPath = glb.LogoBaseUrl(Request.Url.AbsoluteUri.ToLower());
+            ViewBag.LogoPath = DomainUtil.LogoBaseUrl(Request.Url.AbsoluteUri.ToLower());
             if (Request.Url.AbsoluteUri.ToLower().Contains("report"))
             {
                 ViewBag.LogoPath = "";

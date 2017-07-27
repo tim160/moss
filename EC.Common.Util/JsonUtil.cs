@@ -12,7 +12,7 @@ namespace EC.Common.Util
 {
     public class JsonUtil
     {
-        public string ListToJsonWithJavaScriptSerializer(List<int> _list)
+        public static string ListToJsonWithJavaScriptSerializer(List<int> _list)
         {
             //  for(int i )
 
@@ -25,7 +25,7 @@ namespace EC.Common.Util
             return json;
         }
 
-        public string DataTableToJSONWithJavaScriptSerializer(DataTable table)
+        public static string DataTableToJSONWithJavaScriptSerializer(DataTable table)
         {
             JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
             List<Dictionary<string, object>> parentRow = new List<Dictionary<string, object>>();
@@ -41,29 +41,5 @@ namespace EC.Common.Util
             }
             return jsSerializer.Serialize(parentRow);
         }
-
-        /// <summary>
-        /// ConvertDataTabletoString
-        /// </summary>
-        /// <param name="dt"></param>
-        /// <returns></returns>
-        public string ConvertDataTabletoString(DataTable dt)
-        {
-            System.Web.Script.Serialization.JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
-            List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
-            Dictionary<string, object> row;
-            foreach (DataRow dr in dt.Rows)
-            {
-                row = new Dictionary<string, object>();
-                foreach (DataColumn col in dt.Columns)
-                {
-                    row.Add(col.ColumnName, dr[col]);
-                }
-                rows.Add(row);
-            }
-            return serializer.Serialize(rows);
-        }
-
-
     }
 }

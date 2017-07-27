@@ -6,7 +6,7 @@ namespace EC.Common.Util
 {
     public class AsyncActionResult
     {
-        public ActionResult Result
+        public ActionResultExtended Result
         {
             get;
             set;
@@ -47,7 +47,7 @@ namespace EC.Common.Util
         }
 
 
-        public AsyncActionResult(ActionResult result, Int32 userId, string sessionId, Guid? requestId = null)
+        public AsyncActionResult(ActionResultExtended result, Int32 userId, string sessionId, Guid? requestId = null)
         {
             Result = result;
             UserId = userId;

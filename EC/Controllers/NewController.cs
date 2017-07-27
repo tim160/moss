@@ -11,23 +11,18 @@ using EC.Core.Common;
 using EC.Constants;
 using log4net;
 using LavaBlast.Util.CreditCards;
-
-using CommonUtil = EC.Common.Util;
+using EC.Common.Util;
 
 namespace EC.Controllers
 {
-    public class NewController : Controller
+    public class NewController : BaseController
     {
-        ECEntities db = new ECEntities();
-        GlobalFunctions glb = new GlobalFunctions();
-        private IEmailAddressHelper m_EmailHelper = new EmailAddressHelper();
-        ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         // GET: New
         public ActionResult Index(string code, string email)
         {
             #region EC-CC Viewbag
-            bool is_cc = glb.IsCC(Request.Url.AbsoluteUri.ToLower());
+            //     bool is_cc = glb.IsCC(Request.Url.AbsoluteUri.ToLower());
             ViewBag.is_cc = is_cc;
             string cc_ext = "";
             if (is_cc) cc_ext = "_cc";
@@ -82,7 +77,7 @@ namespace EC.Controllers
 
             ViewBag.code = _code;
             #region EC-CC Viewbag
-            bool is_cc = glb.IsCC(Request.Url.AbsoluteUri.ToLower());
+            bool is_cc = DomainUtil.IsCC(Request.Url.AbsoluteUri.ToLower());
             ViewBag.is_cc = is_cc;
             string cc_ext = "";
             if (is_cc) cc_ext = "_cc";
@@ -94,7 +89,7 @@ namespace EC.Controllers
         public ActionResult Success(string show)
         {
             #region EC-CC Viewbag
-            bool is_cc = glb.IsCC(Request.Url.AbsoluteUri.ToLower());
+            bool is_cc = DomainUtil.IsCC(Request.Url.AbsoluteUri.ToLower());
             ViewBag.is_cc = is_cc;
             string cc_ext = "";
             if (is_cc) cc_ext = "_cc";
@@ -714,7 +709,7 @@ namespace EC.Controllers
                 _cp.cc_year = Convert.ToInt32(2017);
 
                 _cp.cc_name = cardname.Trim();
-                _cp.cc_number = CommonUtil.StringUtil.ConvertCCInfoToLast4DigitsInfo(cardnumber.Trim());
+                _cp.cc_number = StringUtil.ConvertCCInfoToLast4DigitsInfo(cardnumber.Trim());
 
                 _cp.company_id = company_id;
                 _cp.payment_date = DateTime.Today;
@@ -1042,7 +1037,7 @@ namespace EC.Controllers
                 amount = 1300;
             }
 
-            result_company.Data = CommonUtil.StringUtil.ConvertDecimalToStringAmount(amount);
+            result_company.Data = StringUtil.ConvertDecimalToStringAmount(amount);
             return result_company;
 
         }
@@ -1055,7 +1050,7 @@ namespace EC.Controllers
 
             ViewBag.code = _code;
             #region EC-CC Viewbag
-            bool is_cc = glb.IsCC(Request.Url.AbsoluteUri.ToLower());
+            bool is_cc = DomainUtil.IsCC(Request.Url.AbsoluteUri.ToLower());
             ViewBag.is_cc = is_cc;
             string cc_ext = "";
             if (is_cc) cc_ext = "_cc";
@@ -1067,7 +1062,7 @@ namespace EC.Controllers
         public ActionResult QuoteSuccess(string amount)
         {
             #region EC-CC Viewbag
-            bool is_cc = glb.IsCC(Request.Url.AbsoluteUri.ToLower());
+            bool is_cc = DomainUtil.IsCC(Request.Url.AbsoluteUri.ToLower());
             ViewBag.is_cc = is_cc;
             string cc_ext = "";
             if (is_cc) cc_ext = "_cc";
@@ -1086,10 +1081,9 @@ namespace EC.Controllers
                     return RedirectToAction("Quote", "New");
                 }
             }
-            ViewBag.amount = CommonUtil.StringUtil.ConvertDecimalToStringAmount(_amount);
+            ViewBag.amount = StringUtil.ConvertDecimalToStringAmount(_amount);
 
             return View();
         }
-
     }
 }

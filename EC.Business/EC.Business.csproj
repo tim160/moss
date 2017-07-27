@@ -67,10 +67,6 @@
     <Compile Include="Entities\ObjectKeyUpdatedArgs.cs" />
     <Compile Include="Entities\Setting.cs" />
     <Compile Include="Entities\SortQueryCriteria.cs" />
-    <Compile Include="Localization.Designer.cs" />
-    <Compile Include="Localization.en-US.Designer.cs" />
-    <Compile Include="Localization.es-MX.Designer.cs" />
-    <Compile Include="Localization.zh-CN.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SortCriteria.cs" />
   </ItemGroup>
@@ -78,10 +74,6 @@
     <EmbeddedResource Include="IconResources.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Localization.en-US.resx" />
-    <EmbeddedResource Include="Localization.es-MX.resx" />
-    <EmbeddedResource Include="Localization.resx" />
-    <EmbeddedResource Include="Localization.zh-CN.resx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EC.Common.Base\EC.Common.Base.csproj">

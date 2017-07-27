@@ -23,13 +23,13 @@ namespace EC.Controllers.ViewModel
 
         // GET: ReporterDashboard
 
-       /* public ActionResult Index(int? id)
-        {
-            if (!id.HasValue)
-                id = 166;
-            NewReportModel reporterDashboard = new NewReportModel();
-            ViewBag.user_id = id.Value; // 167-171
-        }*/
+        /* public ActionResultExtended Index(int? id)
+         {
+             if (!id.HasValue)
+                 id = 166;
+             NewReportModel reporterDashboard = new NewReportModel();
+             ViewBag.user_id = id.Value; // 167-171
+         }*/
         public ActionResult Index(int? id)
         {
 
@@ -67,7 +67,7 @@ namespace EC.Controllers.ViewModel
             ViewBag.cc_extension = cc_ext;
             #endregion
 
-          
+
             UserModel um = new UserModel(user_id);
 
             Dictionary<int, string> month = m_DateTimeHelper.ShortMonth();
@@ -114,7 +114,7 @@ namespace EC.Controllers.ViewModel
                 ViewBag.report_id = report_id;
 
 
-            if ((rm._investigation_status == 1) && (user.role_id == 4 || user.role_id == 5|| user.role_id == 6|| user.role_id == 7))
+            if ((rm._investigation_status == 1) && (user.role_id == 4 || user.role_id == 5 || user.role_id == 6 || user.role_id == 7))
             {
 
                 if (!db.report_log.Any(item => ((item.action_id == 28) && (item.report_id == report_id) && (item.string_to_add == App_LocalResources.GlobalRes._Completed))))
@@ -184,7 +184,7 @@ namespace EC.Controllers.ViewModel
                 db.report_investigation_status.Add(newStatus);
                 try
                 {
-               //     db.SaveChanges();
+                    //     db.SaveChanges();
                     // need to save new row to report_log about 
                     //glb.UpdateReportLog(newStatus.user_id, 20, newStatus.report_id, App_LocalResources.GlobalRes._Completed , null, newStatus.description);
                 }
@@ -271,14 +271,14 @@ namespace EC.Controllers.ViewModel
             CompanyModel cm = new CompanyModel(rm._report.company_id);
             UserModel um = new UserModel(user_id);
             #region Email Ready
-		             List<string> to = new List<string>();
-                    List<string> cc = new List<string>();
-                    List<string> bcc = new List<string>();
+            List<string> to = new List<string>();
+            List<string> cc = new List<string>();
+            List<string> bcc = new List<string>();
 
-                    EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
-                    EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
-                    string body = ""; 
-	        #endregion
+            EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
+            EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+            string body = "";
+            #endregion
 
             if (!db.report_log.Any(item => ((item.action_id == 19) && (item.report_id == report_id))))
             {
@@ -295,7 +295,7 @@ namespace EC.Controllers.ViewModel
                         bcc = new List<string>();
 
                         to.Add(_user.email.Trim());
- 
+
                         eb.NextStep(_user.first_nm, _user.last_nm, rm._report.display_name);
                         body = eb.Body;
 
@@ -345,7 +345,7 @@ namespace EC.Controllers.ViewModel
 
                         em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_CaseReopened, body, true);
                     }
-                } 
+                }
                 #endregion
 
                 #region Email to Reporter About case been reopened
@@ -358,7 +358,7 @@ namespace EC.Controllers.ViewModel
                     to.Add(rm._reporter_user.email.Trim());
                     ///     bcc.Add("timur160@hotmail.com");
 
-                    eb.ReporterCaseReopened( rm._report.display_name);
+                    eb.ReporterCaseReopened(rm._report.display_name);
                     body = eb.Body;
 
                     em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_CaseReopened, body, true);
@@ -367,8 +367,8 @@ namespace EC.Controllers.ViewModel
                 #endregion
             }
 
-       /////     glb.UpdateReportLog(user_id, 20, report_id, App_LocalResources.GlobalRes._Completed, null, description);
-        //////    glb.UpdateReportLog(user_id, 21, report_id, App_LocalResources.GlobalRes._Started, null, "");
+            /////     glb.UpdateReportLog(user_id, 20, report_id, App_LocalResources.GlobalRes._Completed, null, description);
+            //////    glb.UpdateReportLog(user_id, 21, report_id, App_LocalResources.GlobalRes._Started, null, "");
 
             return true;
         }

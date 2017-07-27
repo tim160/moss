@@ -7,6 +7,6 @@ namespace EC.Business.API.Interfaces
 {
     public interface IEmailManager
     {
-        ActionResult Send(string to, string messageSubject, string messageBody);
+        ActionResultExtended Send(string to, string messageSubject, string messageBody);
     }
 }

@@ -69,10 +69,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActionResult.cs" />
+    <Compile Include="ActionResultExtended.cs" />
     <Compile Include="AsyncActionResult.cs" />
     <Compile Include="BlockedDateType.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="DomainUtil.cs" />
     <Compile Include="IValues.cs" />
     <Compile Include="JsonUtil.cs" />
     <Compile Include="ListEntity.cs" />

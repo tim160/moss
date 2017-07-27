@@ -5,7 +5,7 @@ using System.Text;
 namespace EC.Common.Util
 {
     [Serializable]
-    public class ActionResult
+    public class ActionResultExtended
     {
         public List<ReturnProblem> ReturnProblems = new List<ReturnProblem>();
         public ReturnCode ReturnCode = ReturnCode.Success;
@@ -13,11 +13,11 @@ namespace EC.Common.Util
         public string ExceptionMessage = string.Empty;
         public object ReturnObject = null;
 
-        public ActionResult()
+        public ActionResultExtended()
         {
         }
 
-        public ActionResult(ReturnCode returnCode, string returnMessage)
+        public ActionResultExtended(ReturnCode returnCode, string returnMessage)
         {
             ReturnCode = returnCode;
             ReturnMessage = returnMessage;
@@ -60,7 +60,7 @@ namespace EC.Common.Util
 
         public override string ToString()
         {
-            StringBuilder builder = new StringBuilder("[ActionResult]");
+            StringBuilder builder = new StringBuilder("[ActionResultExtended]");
             builder.Append("\r\n");
             builder.Append("ReturnCode: ").Append(ReturnCode);
             builder.Append(", ReturnMessage: ").Append(ReturnMessage);

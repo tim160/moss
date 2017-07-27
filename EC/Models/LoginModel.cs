@@ -2,13 +2,13 @@
 using EC.Models.Database;
 using System.Linq;
 using System;
-
+using EC.Common.Util;
 
 namespace EC.Models
 {
     public class LoginModel : BaseModel
     {
-        public string restorePass (string token, string email)
+        public string restorePass(string token, string email)
         {
             GlobalFunctions glb = new GlobalFunctions();
 
@@ -48,7 +48,7 @@ namespace EC.Models
         {
             if (restorePass(token, email) == "success")
             {
-                if(password == confirmPassword)
+                if (password == confirmPassword)
                 {
                     string result = GlobalFunctions.IsValidPass(password);
                     if (result == "Success")
@@ -58,22 +58,25 @@ namespace EC.Models
                         {
                             _ucp.password_updated = 1;
                             _ucp.updated_on = DateTime.Now;
-                            _ucp.updated_user_ip = GlobalFunctions.GetUser_IP();
+                            _ucp.updated_user_ip = DomainUtil.GetUser_IP();
                             db.SaveChanges();
                             user uptUser = db.user.Where(item => item.id == _ucp.user_id).FirstOrDefault();
                             uptUser.password = password;
                             db.SaveChanges();
                             return "Success";
                         }
-                    } else
+                    }
+                    else
                     {
                         return result;
                     }
-                } else
+                }
+                else
                 {
                     return GlobalRes.notMatchConfPassandPass;
                 }
-            } else
+            }
+            else
             {
                 return GlobalRes.reEnterEmailToken;
             }

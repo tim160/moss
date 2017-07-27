@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using EC.Common.Util;
 
 namespace EC.Business.Actions.Email
 {
     public class EmailBody
     {
+        DomainUtil domainUtil = new DomainUtil();
+
         #region Properties
         private string m_filename;
         public string FileName
@@ -212,7 +215,7 @@ namespace EC.Business.Actions.Email
                 string text = System.IO.File.ReadAllText(path);
                 m_body = text;
 
-                string entrance_link = GetSubdomainLink(path) + "/Index/Page";
+                string entrance_link = DomainUtil.GetSubdomainLink(path) + "/Index/Start";
 
                 m_body = m_body.Replace("[BaseUrl]", entrance_link);
             }
@@ -443,33 +446,10 @@ namespace EC.Business.Actions.Email
         {
             GetBody(50);
 
-            m_body = m_body.Replace("[RestorePass]", (GetSubdomainLink(url) + "/login/restore" + "?email=" + email + "&token=" + code).Trim());
+            m_body = m_body.Replace("[RestorePass]", (DomainUtil.GetSubdomainLink(url) + "/login/restore" + "?email=" + email + "&token=" + code).Trim());
 
         }
         #endregion
-
-        public string GetSubdomainLink(string url)
-        {
-            string entrance_link = "report.employeeconfidential.com";
-
-            if (URL.ToLower().Contains("campus"))
-            {
-                entrance_link = "campus-confidential.com";
-            }
-            else if (URL.ToLower().Contains("stark."))
-            {
-                entrance_link = "stark.employeeconfidential.com";
-            }
-            else if (URL.ToLower().Contains("report."))
-            {
-                entrance_link = "report.employeeconfidential.com";
-            }
-            else if (url.ToLower().Contains("cai.employeeconfidential.com"))
-            {
-                entrance_link = "cai.employeeconfidential.com";
-            }
-            return entrance_link;
-        }
     }
 
 }

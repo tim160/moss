@@ -14,16 +14,17 @@ using EC.Common.Interfaces;
 using EC.Core.Common;
 using log4net;
 using EC.Constants;
-using utilities = EC.Common.Util;
+using EC.Common.Util;
 
 namespace EC.Controllers
 {
     public class BaseController : Controller
     {
         /// var culture = Culture.GetCulture();
-        ////      ILog logger = LogManager.GetLogger(typeof((_Default));
-
+        //  ILog logger = LogManager.GetLogger(typeof((_Default));
         public ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+
         public ECEntities db = new ECEntities();
         public CultureInfo m_CultureInfo = null;
         public GlobalFunctions glb = new GlobalFunctions();
@@ -31,12 +32,10 @@ namespace EC.Controllers
         private SessionManager sessionManager = SessionManager.inst;
         internal IEmailAddressHelper m_EmailHelper = new EmailAddressHelper();
         protected IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
-        protected utilities.JsonUtil jsonUtil = new utilities.JsonUtil();
-        protected utilities.JsonUtil stringUtil = new utilities.JsonUtil();
 
         internal bool is_cc
         {
-            get { return glb.IsCC(Request.Url.AbsoluteUri.ToLower()); }
+            get { return DomainUtil.IsCC(Request.Url.AbsoluteUri.ToLower()); }
         }
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)

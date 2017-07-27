@@ -16,7 +16,7 @@ namespace EC.Business
         ConfigSetting GetConfigSetting(Guid objectKey);
         ConfigSetting[] GetConfigSettings();
         ConfigSetting GetConfigSetting(string name);
-        ActionResult UpdateConfigSettings(ConfigSetting[] settings);
+        ActionResultExtended UpdateConfigSettings(ConfigSetting[] settings);
     }
 
     public class ConfigRepository :  IConfigRepository
@@ -52,9 +52,9 @@ namespace EC.Business
             return null;
         }
 
-        public ActionResult UpdateConfigSettings(ConfigSetting[] settings)
+        public ActionResultExtended UpdateConfigSettings(ConfigSetting[] settings)
         {
-            ActionResult actionResult = new ActionResult();
+            ActionResultExtended actionResult = new ActionResultExtended();
 
 
             return actionResult;

@@ -126,7 +126,7 @@ namespace EC.Framework.Email
             m_Inintialized = Initialize();
         }
 
-        public ActionResult Send(string toAddress, string messageSubject, string messageBody)
+        public ActionResultExtended Send(string toAddress, string messageSubject, string messageBody)
         {
             string[] toAddressArray;
             if (toAddress != string.Empty)
@@ -137,7 +137,7 @@ namespace EC.Framework.Email
             return Send(m_FromAddress, toAddressArray, messageSubject, messageBody, new string[0], new string[0], false);
         }
 
-        public ActionResult Send(string toAddress, string messageSubject, string messageBody, bool isBodyHtml)
+        public ActionResultExtended Send(string toAddress, string messageSubject, string messageBody, bool isBodyHtml)
         {
             string[] toAddressArray;
             if (toAddress != string.Empty)
@@ -148,7 +148,7 @@ namespace EC.Framework.Email
             return Send(m_FromAddress, toAddressArray, messageSubject, messageBody, new string[0], new string[0], isBodyHtml);
         }
 
-        public ActionResult Send(string toAddress, string messageSubject, string messageBody, string[] cc, bool isBodyHtml)
+        public ActionResultExtended Send(string toAddress, string messageSubject, string messageBody, string[] cc, bool isBodyHtml)
         {
             string[] toAddressArray;
             if (toAddress != string.Empty)
@@ -159,7 +159,7 @@ namespace EC.Framework.Email
             return Send(m_FromAddress, toAddressArray, messageSubject, messageBody, cc, new string[0], isBodyHtml);
         }
 
-        public ActionResult Send(string toAddress, string messageSubject, string messageBody, string ccAddress, bool isBodyHtml)
+        public ActionResultExtended Send(string toAddress, string messageSubject, string messageBody, string ccAddress, bool isBodyHtml)
         {
             string[] toAddressArray;
             if (toAddress != string.Empty)
@@ -177,7 +177,7 @@ namespace EC.Framework.Email
         }
 
 
-        public ActionResult Send(string toAddress, string messageSubject, string messageBody, string ccAddress, string[] attachments, bool isBodyHtml)
+        public ActionResultExtended Send(string toAddress, string messageSubject, string messageBody, string ccAddress, string[] attachments, bool isBodyHtml)
         {
             string[] toAddressArray;
             if (toAddress != string.Empty)
@@ -194,13 +194,13 @@ namespace EC.Framework.Email
             return Send(m_FromAddress, toAddressArray, messageSubject, messageBody, ccAddressArray, attachments, isBodyHtml);
         }
 
-        public ActionResult Send(string fromAddress, string[] to, string messageSubject, string messageBody, string[] cc, string[] attachments, bool isBodyHtml)
+        public ActionResultExtended Send(string fromAddress, string[] to, string messageSubject, string messageBody, string[] cc, string[] attachments, bool isBodyHtml)
         {
             if (!m_Inintialized)
             {
                 string err = "Send() - EmailWrapper module has not been initialized";
                 /////           m_Log.Error(err);
-                return new ActionResult(ReturnCode.Fail, err);
+                return new ActionResultExtended(ReturnCode.Fail, err);
             }
 
             MailMessage msg = new MailMessage();
@@ -291,7 +291,7 @@ namespace EC.Framework.Email
 
                 msg.Attachments.Dispose();
 
-                return new ActionResult(ReturnCode.Success, string.Empty);
+                return new ActionResultExtended(ReturnCode.Success, string.Empty);
             }
             catch (Exception e)
             {
@@ -302,7 +302,7 @@ namespace EC.Framework.Email
 
                 msg.Attachments.Dispose();
 
-                return new ActionResult(ReturnCode.Fail,
+                return new ActionResultExtended(ReturnCode.Fail,
                                         string.Format("Error sending email: {0}", e.Message));
             }
         }

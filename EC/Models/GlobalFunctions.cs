@@ -31,57 +31,9 @@ public class GlobalFunctions
     private const int PasswordLength = 6;
     private const int PasswordExtraSubmolsCount = 0;
     ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-    JsonUtil jsonUtil = new JsonUtil();
 
     public GlobalFunctions()
     {
-
-    }
-    // Content/img/cai_logo.png
-    public bool IsSubdomain(string url)
-    {
-        if (url.ToLower().Contains("localhost") || url.ToLower().Contains("local2host") || url.ToLower().Contains("stark.") || url.ToLower().Contains("democompany.") || url.ToLower().Contains("report.") || url.ToLower().Contains("cai."))
-        {
-            return true;
-        }
-        return false;
-    }
-
-    public bool IsCC(string url)
-    {
-        // uncomment for campus-confidential testing
-        //      return true;
-        if ((url.ToLower().Contains("campus")) || (url.ToLower().Contains("cc.employeeconfidential")))
-        {
-            return true;
-        }
-
-        return false;
-    }
-
-
-    public string LogoBaseUrl(string url)
-    {
-        if (url.ToLower().Contains("campus"))
-        {
-            return "/Content/img/secondLogo.jpg";
-        }
-        else if (url.ToLower().Contains("stark."))
-        {
-            return "/Content/img/secondLogo.jpg";
-        }
-        else if (url.ToLower().Contains("report."))
-        {
-            return "/Content/Icons/logo.png";
-        }
-        else if (url.ToLower().Contains("cai.employeeconfidential"))
-        {
-            return "";
-            /////  return "/Content/Icons/logo.png";
-
-            ////// return "/Content/img/cai_logo.png";
-        }
-        return "/Content/Icons/logo.png";
 
     }
 
@@ -2113,8 +2065,8 @@ public class GlobalFunctions
             + ", \"RelationTable\":" + RelationshipToCompanyByDateAdvancedJson(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate)
             + ", \"SecondaryTypeTable\":" + SecondaryTypesByDateAdvancedJson(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate)
             + ", \"AverageStageDaysTable\":" + AverageStageDaysAdvancedJson(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate)
-            + ", \"TodaySnapshotTable\":" + jsonUtil.ListToJsonWithJavaScriptSerializer(new List<int>(_today_spanshot))
-            + ", \"MonthEndSnapshotTable\":" + jsonUtil.ListToJsonWithJavaScriptSerializer(new List<int>(_month_end_spanshot))
+            + ", \"TodaySnapshotTable\":" + JsonUtil.ListToJsonWithJavaScriptSerializer(new List<int>(_today_spanshot))
+            + ", \"MonthEndSnapshotTable\":" + JsonUtil.ListToJsonWithJavaScriptSerializer(new List<int>(_month_end_spanshot))
             + ", \"AnalyticsTimeline\":" + AnalyticsTimelineAdvancedJson(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate)
             + "}";
 
@@ -2126,26 +2078,26 @@ public class GlobalFunctions
     public string CompanyLocationReportAdvancedJson(int company_id, int user_id, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
     {
         DataTable dt = CompanyLocationReportAdvanced(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
-        return jsonUtil.DataTableToJSONWithJavaScriptSerializer(dt);
+        return JsonUtil.DataTableToJSONWithJavaScriptSerializer(dt);
     }
 
     public string CompanyDepartmentReportAdvancedJson(int company_id, int user_id, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
     {
         DataTable dt = CompanyDepartmentReportAdvanced(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
-        return jsonUtil.DataTableToJSONWithJavaScriptSerializer(dt);
+        return JsonUtil.DataTableToJSONWithJavaScriptSerializer(dt);
     }
 
     public string RelationshipToCompanyByDateAdvancedJson(int company_id, int user_id, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
     {
         DataTable dt = RelationshipToCompanyByDateAdvanced(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
-        return jsonUtil.DataTableToJSONWithJavaScriptSerializer(dt);
+        return JsonUtil.DataTableToJSONWithJavaScriptSerializer(dt);
     }
 
 
     public string SecondaryTypesByDateAdvancedJson(int company_id, int user_id, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
     {
         DataTable dt = SecondaryTypesByDateAdvanced(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
-        return jsonUtil.DataTableToJSONWithJavaScriptSerializer(dt);
+        return JsonUtil.DataTableToJSONWithJavaScriptSerializer(dt);
     }
 
     public string AverageStageDaysAdvancedJson(int company_id, int user_id, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
@@ -2194,52 +2146,9 @@ public class GlobalFunctions
     public string AnalyticsTimelineAdvancedJson(int company_id, int user_id, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
     {
         DataTable dt = AnalyticsTimelineAdvanced(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
-        return jsonUtil.DataTableToJSONWithJavaScriptSerializer(dt);
+        return JsonUtil.DataTableToJSONWithJavaScriptSerializer(dt);
     }
 
-
-    public string ListToJsonWithJavaScriptSerializer1(List<int> _list)
-    {
-        //  for(int i )
-
-        //  int[]
-
-
-        JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
-
-        var json = jsSerializer.Serialize(_list);
-        return json;
-
-        /*  List<Dictionary<string, object>> parentRow = new List<Dictionary<string, object>>();
-          Dictionary<string, object> childRow;
-          for (int i=0; i< _list.Count(); i++)
-          {
-              childRow = new Dictionary<string, object>();
-              foreach (DataColumn col in table.Columns)
-              {
-                  childRow.Add(col.ColumnName, row[col]);
-              }
-              parentRow.Add(childRow);
-          }
-          return jsSerializer.Serialize(parentRow);*/
-    }
-
-    public string DataTableToJSONWithJavaScriptSerializer1(DataTable table)
-    {
-        JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
-        List<Dictionary<string, object>> parentRow = new List<Dictionary<string, object>>();
-        Dictionary<string, object> childRow;
-        foreach (DataRow row in table.Rows)
-        {
-            childRow = new Dictionary<string, object>();
-            foreach (DataColumn col in table.Columns)
-            {
-                childRow.Add(col.ColumnName, row[col]);
-            }
-            parentRow.Add(childRow);
-        }
-        return jsSerializer.Serialize(parentRow);
-    }
     #endregion
 
     #region ReportsDataTables
@@ -2675,24 +2584,6 @@ public class GlobalFunctions
     }
     #endregion
 
-
-    public string ConvertDataTabletoString1(DataTable dt)
-    {
-        System.Web.Script.Serialization.JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
-        List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
-        Dictionary<string, object> row;
-        foreach (DataRow dr in dt.Rows)
-        {
-            row = new Dictionary<string, object>();
-            foreach (DataColumn col in dt.Columns)
-            {
-                row.Add(col.ColumnName, dr[col]);
-            }
-            rows.Add(row);
-        }
-        return serializer.Serialize(rows);
-    }
-
     public bool isLoginInUse(string login)
     {
         if (db.user.Any(t => t.login_nm.Trim().ToLower() == login.Trim().ToLower()))
@@ -2829,22 +2720,5 @@ public class GlobalFunctions
         }
         return String.Format("The password should be at least {0} characters long", PasswordLength.ToString());
     }
-
-    public static string GetUser_IP()
-    {
-        string VisitorsIPAddr = string.Empty;
-        if (HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] != null)
-        {
-            VisitorsIPAddr = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"].ToString();
-        }
-        else if (HttpContext.Current.Request.UserHostAddress.Length != 0)
-        {
-            VisitorsIPAddr = HttpContext.Current.Request.UserHostAddress;
-        }
-        return VisitorsIPAddr;
-    }
-
-
-
 
 }
