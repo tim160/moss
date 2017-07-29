@@ -260,23 +260,21 @@
                 <div class="content">
                     <div class="contentBlock">
                         <div class="rowBlock">
-                            <p class="title">Are you reporting on behalf of yourself or someone else?</p>
-                            @*Are you reporting on behalf of yourself or someone else?”   - radiobutton s dvumya opciyami - "Myself" "Someone else". po defoltu ne vibrano nichego, required ( validaciya nujna)*@
-
+                            <p class="title">@GlobalRes.report_by_myself</p>
                             <div class="rowBlock report_by_myself">
                                 <input type="hidden" class="report_by_myself validate" name="report_by_myself" value="1" data-validate="notEmpty" data-vltarget=".report_by_myself">
                                 <div class="freeBlock inputRadio option"  data-val="true">
                                     <label class="inputBlock" for="Myself">
                                         <input id="Myself" type="radio" name="report_by_myself" value="true" data-val="1">
                                         <span class="radioButton"></span>
-                                        <span class="radioTitle">Myself</span>
+                                        <span class="radioTitle">@GlobalRes.Myself</span>
                                     </label>
                                 </div>
                                 <div class="freeBlock inputRadio option" data-val="false">
                                     <label class="inputBlock" for="Someone else">
                                         <input id="Someone else" type="radio" name="report_by_myself" value="false" data-val="0">
                                         <span class="radioButton"></span>
-                                        <span class="radioTitle">Someone else</span>
+                                        <span class="radioTitle">@GlobalRes.SomeoneElse</span>
                                     </label>
                                 </div>
                             </div>
@@ -672,7 +670,13 @@
                             <table style="width: 100%; padding-left: 9px;">
                                 <tbody>
                                     <tr>
-                                        <td class=" titlereportTable" style="width: 25%;">
+                                        <td class="titlereportTable" style="width: 25%;">
+                                            @GlobalRes.report_by_myself
+                                        </td>
+                                        <td class="reportTextTable" id="report_by_myself"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="titlereportTable" style="width: 25%;">
                                             @GlobalRes.Doesmanagementknowaboutthisincident
                                         </td>
                                         <td class="reportTextTable" id="isManagementKnow"></td>

@@ -23,34 +23,34 @@
             </div>
             <div class="blockHoverPhoto">
                 <label class="close"></label>
-                <label class="newImageBtn">New image</label>
+                <label class="newImageBtn">@GlobalRes.Newimage</label>
             </div>
         </div>
 
 
         <div class="personalBlock">
             <div class="blockPersonalSettings greyBorder" ng-class="{error: val_first_nm }">
-                <p class="title">First name</p>
+                <p class="title">@GlobalRes.Firstname</p>
                 <input class="text-box single-line" id="first_nm" name="first_nm" type="text" ng-model="first_nm">
             </div>
             <div class="blockPersonalSettings greyBorder" ng-class="{error: val_last_nm }">
-                <p class="title">Last name</p>
+                <p class="title">@GlobalRes.Lastname</p>
                 <input class="text-box single-line" id="last_nm" name="last_nm" type="text" ng-model="last_nm">
             </div>
             <div class="blockPersonalSettings greyBorder" ng-class="{error: val_title_ds }">
-                <p class="title">Title</p>
+                <p class="title">@GlobalRes.Title</p>
                 <input class="text-box single-line" id="title_ds" name="title_ds" type="text" ng-model="title_ds">
             </div>
             <div class="blockPersonalSettings greyBorder"  ng-class="{error: val_departmentId }">
-                <p class="title">Department</p>
+                <p class="title">@GlobalRes.Department</p>
                 <select ng-model="departmentId">
                     <option ng-repeat="item in departments" ng-value="{{item.id}}" ng-selected="departmentId == item.id" >{{item.department_en}}</option>                    
-                    <option value="0">Other</option>
+                    <option value="0">@GlobalRes.Other</option>
                 </select>
             </div>
             <div class="blockPersonalSettings greyBorder">
                 <div id="personeAgain">
-                    <div class="title">Role</div>
+                    <div class="title">@GlobalRes.Role</div>
                     <div class="help" title="">
                         ?
                         <div class="hoverElement">
@@ -70,32 +70,32 @@
                     <div class="freeBlock inputRadio mediator" ng-class="{active: role == 6 }" ng-click="role = 6">
                         <label class="inputBlock" for="freeIncident">
                             <input id="oneIncident" type="radio" name="role_id" value="6">
-                            <span class="radioTitle">Case admin</span>
+                            <span class="radioTitle">@GlobalRes.Mediator</span>
                         </label>
                     </div>
                     <div class="freeBlock inputRadio adminMediator adminMediator" ng-class="{active: role == 5 }" ng-click="role = 5">
                         <label class="inputBlock" for="freeIncident">
                             <input id="twoIncident" type="radio" name="role_id" value="5">
-                            <span class="radioTitle">Platform Manager</span>
+                            <span class="radioTitle">@GlobalRes.AdminMediator</span>
                         </label>
                     </div>
                     <div class="freeBlock inputRadio escalationMediator" ng-class="{active: role == 4 }" ng-click="role = 4">
                         <label class="inputBlock" for="freeIncident">
                             <input id="threeIncident" type="radio" name="role_id" value="4">
-                            <span class="radioTitle">Case Executive</span>
+                            <span class="radioTitle">@GlobalRes.EscalationMediator</span>
                         </label>
                     </div>
                 </div><!--rowBlock-->
             </div>
             <div class="blockPersonalSettings greyBorder" ng-class="{error: val_email }">
-                <p class="title">E-mail</p>
+                <p class="title">@GlobalRes.Email</p>
                 <input email="email" id="email" name="email" type="text" ng-model="email">
             </div>
 
             <div class="blockUpdateProfile">
                 <div class="updateProfileBtn">
                     <input class="greenButton" type="submit" value="update" ng-click="post()">
-                    <span style="display: none;">save</span>
+                    <span style="display: none;">@GlobalRes.Save</span>
                 </div>
             </div>
 

@@ -902,7 +902,7 @@
     <value>Escalation</value>
   </data>
   <data name="EscalationMediator" xml:space="preserve">
-    <value>Case Executive</value>
+    <value>Case Reviewer</value>
   </data>
   <data name="Escalationstage" xml:space="preserve">
     <value>Escalation stage</value>
@@ -1268,7 +1268,7 @@
     <value>Case Administration team</value>
   </data>
   <data name="Mediator" xml:space="preserve">
-    <value>Case admin</value>
+    <value>Case Investigator</value>
   </data>
   <data name="MediatorAlreadyRegistered" xml:space="preserve">
     <value>Case Administrator already registered</value>
@@ -2085,5 +2085,17 @@
   </data>
   <data name="Update" xml:space="preserve">
     <value>Update</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Myself" xml:space="preserve">
+    <value>Myself</value>
+  </data>
+  <data name="report_by_myself" xml:space="preserve">
+    <value>Are you reporting on behalf of yourself or someone else?</value>
+  </data>
+  <data name="SomeoneElse" xml:space="preserve">
+    <value>Someone else</value>
   </data>
 </root>

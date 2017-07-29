@@ -345,8 +345,9 @@
                                     $(' input[name=managementKnow]:checked').val() == "Do not want to involve") {
                                     isManagementKnow.append(".<br />" + $('.managementIsKnown').val());
                                 }
-
-
+                                var report_by_myself = content.find("#report_by_myself");
+                                report_by_myself.empty();
+                                report_by_myself.append($('input[name=report_by_myself]:checked').siblings(".radioTitle").text());
                                 //if (generalInfo.find("input:radio[name=managementKnow]:checked").val() === "No") {
                                 if ($("input:radio[name=managementKnow]:checked").val() === "No") {
                                     content.find('#managementFalse').show();

@@ -2428,7 +2428,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Case Executive.
+        ///   Looks up a localized string similar to Case Reviewer.
         /// </summary>
         public static string EscalationMediator {
             get {
@@ -3526,7 +3526,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Case admin.
+        ///   Looks up a localized string similar to Case Investigator.
         /// </summary>
         public static string Mediator {
             get {
@@ -3747,6 +3747,15 @@ namespace EC.App_LocalResources {
         public static string MyProfile {
             get {
                 return ResourceManager.GetString("MyProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Myself.
+        /// </summary>
+        public static string Myself {
+            get {
+                return ResourceManager.GetString("Myself", resourceCulture);
             }
         }
         
@@ -4588,6 +4597,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you reporting on behalf of yourself or someone else?.
+        /// </summary>
+        public static string report_by_myself {
+            get {
+                return ResourceManager.GetString("report_by_myself", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Report review.
         /// </summary>
         public static string report_review {
@@ -5011,6 +5029,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Saved.
         /// </summary>
         public static string Saved {
@@ -5205,6 +5232,15 @@ namespace EC.App_LocalResources {
         public static string Severity {
             get {
                 return ResourceManager.GetString("Severity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Someone else.
+        /// </summary>
+        public static string SomeoneElse {
+            get {
+                return ResourceManager.GetString("SomeoneElse", resourceCulture);
             }
         }
         
