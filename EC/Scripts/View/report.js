@@ -359,26 +359,26 @@
                                 var witnessPersone = $('.witnessPersone');
                                 $('.partiesInvolvedBlock').empty();
                                 witnessPersone.each(function (indx, element) {
-                                    var temp = $(element); i
+                                    var temp = $(element);
                                     var fname = temp.find('.fName').val();
                                     var lName = temp.find('.lName').val();
-                                    var witnessRole = temp.find('.witnessRole').val();
+                                    var witnessRole = temp.find('.selectedRoleInReport option:selected').text();
                                     var witnessTitle = temp.find('.witnessTitle').val();
 
                                     if (temp.parent().hasClass('addPersonContainer')
                                         && fname != "" && lName != "" && witnessRole != "" && witnessTitle != "") {
                                         $('.partiesInvolvedBlock')
                                             .append("<div class='FirstLastNames'>" +
-                                            temp.find('.fName').val() + '&nbsp;' +
-                                            temp.find('.lName').val() + "</div>");
+                                            fname + '&nbsp;' +
+                                            lName + "</div>");
 
                                         $('.partiesInvolvedBlock')
                                             .append("<div class='titleReport'>" +
-                                            temp.find('.witnessTitle').val() + "</div>");
+                                            witnessTitle + "</div>");
 
                                         $('.partiesInvolvedBlock')
                                             .append("<div class='reportText'>" +
-                                            temp.find('.witnessRole').val() + "</div>");
+                                            witnessRole + "</div>");
                                     }
                                 });
 
