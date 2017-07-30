@@ -67,6 +67,7 @@ namespace EC.Models.Database
         public bool previously_reported_accepted { get; set; }
         public System.DateTime last_update_dt { get; set; }
         public System.DateTime incident_dt { get; set; }
+        public bool report_by_myself { get; set; }
         public Nullable<int> scope_id { get; set; }
         public Nullable<int> scope_user_id { get; set; }
         public Nullable<int> severity_id { get; set; }
@@ -74,7 +75,6 @@ namespace EC.Models.Database
         public Nullable<bool> cc_is_clear_act_crime { get; set; }
         public Nullable<int> cc_crime_statistics_category_id { get; set; }
         public Nullable<int> cc_crime_statistics_location_id { get; set; }
-        public bool report_by_myself { get; set; }
     
         public virtual management_know management_know { get; set; }
         public virtual user user { get; set; }

@@ -23,6 +23,7 @@ namespace EC.Controllers.ViewModel
         public string affectedDepartments { get; set; }//
 
 
+        public string report_by_myself { get;set; } 
         public string managamentKnow { get; set; } //
         public string outOrganization { get; set; }//
         public string isCaseUrgent { get; set; } //
@@ -176,6 +177,7 @@ namespace EC.Controllers.ViewModel
                     attachFiles = fileItem.FileName;
                 }
             }
+            this.report_by_myself = model.report_by_myself == true ? GlobalRes.Myself : GlobalRes.SomeoneElse;
         }
     }
 }

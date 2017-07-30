@@ -7,7 +7,6 @@ using System.Web.Security;
 
 using System.Web.Mvc;
 using EC.Models.Database;
-using EC.Models.DataObjects;
 using EC.Models.ECModel;
 using EC.Utils.Auth;
 using EC.Models;
@@ -17,6 +16,7 @@ using Resources = EC.Localization.Resources;
 using log4net;
 using EC.Constants;
 using EC.Common.Util;
+using EC.Models.DataObjects;
 
 namespace EC.Controllers
 {
