@@ -2692,3 +2692,7 @@ p.helloUser {
 .contentSettings.secondHeader table {
    width: 100%;
 }
+.textMediators {
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+    color: #fff;
+}
