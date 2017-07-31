@@ -16,7 +16,12 @@
 
     GlobalFunctions glb = new GlobalFunctions();
     List<company_outcome> _all_outcomes = ViewBag.company_outcomes;
-    ReportModel rm = ViewBag.rm;
+    int report_id = ViewBag.report_id;
+    if (ViewBag.report_id == null)
+    {
+        report_id = 0;
+    }
+    ReportModel rm = new ReportModel(report_id);
     bool is_cc = ViewBag.is_cc;
 
 }
@@ -107,17 +112,14 @@
                     <textarea class="form-control" type="text" name="txtRecommendedActions" id="txtRecommendedActions"></textarea>
                 </div>
 
-                if (is_cc)
+                if (is_cc || true)
                 {
                     <div class="caseResolution custom">
-                        <div class="outcomeText">@GlobalRes.IsCleryActCrime:</div>
+                        <div class="outcomeText">@GlobalRes.IsCleryActCrime</div>
                         <div class="dropdown3">
                             <label id="rblIsCleryActCrime" data-value="">@GlobalRes.Selectanoption</label><span class="arrow-down"></span>
                             <ul>
-                                @foreach (case_closure_reason _reason in glb.GetCaseClosureReasonsWithStatus())
-                                {
-                                    <li data-value=@_reason.id>@_reason.case_closure_reason_en</li>
-                                }
+                                yes or no
                             </ul>
                         </div>
                     </div>
