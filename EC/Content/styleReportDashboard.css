@@ -2696,3 +2696,12 @@ p.helloUser {
     font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     color: #fff;
 }
+#customChangeEmail {
+    margin-right: 28%;
+    text-decoration: none;
+}
+#buttonEmailChange {
+    position: absolute;
+    right: -170px;
+    bottom: 45px;
+}

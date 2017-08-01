@@ -120,7 +120,8 @@
                 </div>
                 <div class="blockPersonalSettings greyBorder">
                     <p class="title">@GlobalRes.Email</p>
-                    @Html.TextBoxFor(model => model.email, new { email = "email" })
+                    @Html.TextBoxFor(model => model.email, new { email = "email", @style = "width:50%" })
+                    <a href="#" id="customChangeEmail" class="greenButton greenButtonCustom">123456</a>
                 </div>
                 <div class="blockPersonalSettings greyBorder">
                     <p class="title">@GlobalRes.often_notifications_active</p>
