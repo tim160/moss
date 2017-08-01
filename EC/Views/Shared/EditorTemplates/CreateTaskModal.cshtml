@@ -117,14 +117,16 @@
                     <div class="caseResolution custom">
                         <div class="outcomeText">@GlobalRes.IsCleryActCrime</div>
                         <div class="dropdown3">
-                            <label id="rblIsCleryActCrime" data-value="">@GlobalRes.Selectanoption</label><span class="arrow-down"></span>
-                            <ul>
-                                yes or no
+                            <label id="rblIsCleryActCrime" data-value="no">@GlobalRes.No</label>
+                            <span class="arrow-down"></span>
+                            <ul style="display:none">
+                                <li data-value="yes">@GlobalRes.Yes</li>
+                                <li data-value="no">@GlobalRes.No</li>
                             </ul>
                         </div>
                     </div>
 
-                        <div class="caseResolution custom">
+                        <div class="caseResolution custom defaultHide">
                             <div class="outcomeText">@GlobalRes.CategoriesCrimeStatistics:</div>
                             <div class="dropdown3">
                                 <label id="ddlCrimeStatistics" data-value="">@GlobalRes.Selectanoption</label><span class="arrow-down"></span>
@@ -136,8 +138,8 @@
                                 </ul>
                             </div>
                         </div>
-
-                        <div class="caseResolution custom">
+                         
+                        <div class="caseResolution custom defaultHide">
                             <div class="outcomeText">@GlobalRes.CategoriesGeographicLocations:</div>
                             <div class="dropdown3">
                                 <label id="ddlGeographicLocations" data-value="">@GlobalRes.Selectanoption</label><span class="arrow-down"></span>
@@ -149,6 +151,7 @@
                                 </ul>
                             </div>
                         </div>
+
                 }
 
 
@@ -167,47 +170,4 @@
         </div>
     </div>
 </div>
-<script>
-    $(document).ready(function () {
-        var selectedItem = "";
-        $("#ddlOutcome").on("click", function (event) {
-            var temp = $(event.currentTarget);
-            temp.siblings('ul').slideDown(300);
-        });
-
-        $(".dropdown2 li").on("click", function (event) {
-            var temp = $(event.currentTarget);
-            var allOptions = temp.parents('ul ');
-            allOptions.find('li').removeClass('selected');
-            temp.addClass('selected');
-            $(".dropdown2 #ddlOutcome").html(temp.text());
-            $(".dropdown2 #ddlOutcome").attr('data-value', temp.attr('data-value'));
-            $(".dropdown2 ul").slideUp();
-        });
-
-        $("#ddlReasonClosure").on("click", function (event) {
-            var _temp = $(event.currentTarget);
-            _temp.siblings('ul').slideDown(300);
-        });
-
-        $(".dropdown3 li").on("click", function (event) {
-            var temp = $(event.currentTarget);
-            var _allOptions = temp.parents('ul ');
-            _allOptions.find('li').removeClass('selected');
-            temp.addClass('selected');
-            $(".dropdown3 #ddlReasonClosure").html(temp.text());
-            $(".dropdown3 #ddlReasonClosure").attr('data-value', temp.attr('data-value'));
-            $(".dropdown3 ul").slideUp();
-        });
-
-
-        $("#anotherDialog .close1").on('click', function () {
-            $("#anotherDialog").toggle();
-        });
-        var button = "";
-        $("#not_resolve_btn").on('click', function (event) {
-            button = $(event.currentTarget).val();
-            sendAjax(button);
-        });
-    });
-</script>
+<script src="~/Scripts/View/customSelectModalIndexCase.js"></script>
