@@ -139,6 +139,25 @@ namespace EC.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Mediators(company company)
+        {
+            var cm = db.company.FirstOrDefault(x => x.id == company.id);
+            cm.cc_campus_alert_manager_email = company.cc_campus_alert_manager_email;
+            cm.cc_campus_alert_manager_first_name = company.cc_campus_alert_manager_first_name;
+            cm.cc_campus_alert_manager_last_name = company.cc_campus_alert_manager_last_name;
+            cm.cc_campus_alert_manager_phone = company.cc_campus_alert_manager_phone;
+
+            cm.cc_daily_crime_log_manager_email = company.cc_daily_crime_log_manager_email;
+            cm.cc_daily_crime_log_manager_first_name = company.cc_daily_crime_log_manager_first_name;
+            cm.cc_daily_crime_log_manager_last_name = company.cc_daily_crime_log_manager_last_name;
+            cm.cc_daily_crime_log_manager_phone = company.cc_daily_crime_log_manager_phone;
+
+            db.SaveChanges();
+
+            return RedirectToAction("Mediators");
+        }
+
         // GET: Settings
         public ActionResult User(int? id)
         {

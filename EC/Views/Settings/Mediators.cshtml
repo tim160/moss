@@ -9,10 +9,12 @@
 
     var um = (UserModel)ViewBag.um;
     CompanyModel cm = (CompanyModel)ViewBag.cm;
+    var company = cm._company;
     int user_id = um.ID;
     UserModel _temp_um = new UserModel();
 
     bool is_cc = ViewBag.is_cc;
+    //is_cc = true;
     String class_ext = ViewBag.cc_extension;
 
     var role_id = um._user.role_id;
@@ -131,50 +133,71 @@
         </div><!--contentSettings-->
             @if (is_cc)
             {
-                <div class="footerInputPosition footerInputStyle">
-                    <div class="contentSettings secondHeader">
-                        <div class="headerCompanyProfile">
-                            <div class="headerBlock">
-                                <div class="blockText">
-                                    <p class="title">Campus Alert and Daily Crime Log managers info</p>
+                using (Html.BeginForm(null, null, FormMethod.Post, new { id = "AlertDailyCrimeLogManagers" }))
+                {
+
+                    @Html.HiddenFor(x => company.id)
+                    <div class="footerInputPosition footerInputStyle">
+                        <div class="contentSettings secondHeader">
+                            <div class="headerCompanyProfile">
+                                <div class="headerBlock">
+                                    <div class="blockText">
+                                        <p class="title">Campus Alert and Daily Crime Log managers info</p>
+                                    </div>
                                 </div>
                             </div>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <table>
+                                            <tr>
+                                                <td>Campus Alert Manager </td>
+                                                <td>Name</td>
+                                                <td>
+                                                    @Html.TextBoxFor(x => company.cc_campus_alert_manager_first_name, new { placeholder = "" })
+                                                </td>
+                                                <td>Last Name</td>
+                                                <td>
+                                                    @Html.TextBoxFor(x => company.cc_campus_alert_manager_last_name, new { placeholder = "Last Name" })
+                                                </td>
+                                                <td>Email</td>
+                                                <td>
+                                                    @Html.TextBoxFor(x => company.cc_campus_alert_manager_email, new { placeholder = "Email" })
+                                                </td>
+                                                <td>Phone</td>
+                                                <td>
+                                                    @Html.TextBoxFor(x => company.cc_campus_alert_manager_phone, new { placeholder = "Phone" })
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Daily Crime Log Manager </td>
+                                                <td>Name</td>
+                                                <td>
+                                                    @Html.TextBoxFor(x => company.cc_daily_crime_log_manager_first_name, new { placeholder = "" })
+                                                </td>
+                                                <td>Last Name</td>
+                                                <td>
+                                                    @Html.TextBoxFor(x => company.cc_daily_crime_log_manager_last_name, new { placeholder = "Last Name" })
+                                                </td>
+                                                <td>Email</td>
+                                                <td>
+                                                    @Html.TextBoxFor(x => company.cc_daily_crime_log_manager_email, new { placeholder = "Email" })
+                                                </td>
+                                                <td>Phone</td>
+                                                <td>
+                                                    @Html.TextBoxFor(x => company.cc_daily_crime_log_manager_phone, new { placeholder = "Phone" })
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                            <button type="submit" style="margin-right: 41px;" class="greenButton makeButtonTextCenter">@GlobalRes.Update</button>                
                         </div>
-                        <table>
-                            <tr>
-                                <td>
-                                    <table>
-                                        <tr>
-                                            <td>Campus Alert Manager </td>
-                                            <td>Name</td>
-                                            <td><input type="text" /></td>
-                                            <td>Last Name</td>
-                                            <td><input type="text" placeholder="Last Name" /></td>
-                                            <td>Email</td>
-                                            <td><input type="text" placeholder="Email" /></td>
-                                            <td>Phone</td>
-                                            <td><input type="text" placeholder="Phone" /></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Daily Crime Log Manager </td>
-                                            <td>Name</td>
-                                            <td><input type="text" /></td>
-                                            <td>Last Name</td>
-                                            <td><input type="text" placeholder="Last Name" /></td>
-                                            <td>Email</td>
-                                            <td><input type="text" placeholder="Email" /></td>
-                                            <td>Phone</td>
-                                            <td><input type="text" placeholder="Phone" /></td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td></td>
-                            </tr>
-                        </table>
-                        <span style="margin-right: 41px;" class="greenButton makeButtonTextCenter">@GlobalRes.Update</span>                
                     </div>
-                </div>
-            }
+                    }
+                }
         <div class="footerInputPosition footerInputStyle">
             <div class="contentSettings secondHeader">
                 <div class="headerCompanyProfile">
@@ -218,3 +241,25 @@
     </div><!--contentCompanyProfile-->
 </div>
 <input type="hidden" id="InvitationSuccessfull" value="@GlobalRes.InvitationSuccessfull" />
+
+<script>
+    $(function () {
+
+        $('#AlertDailyCrimeLogManagers').submit(function () {
+            $(this).find('input').removeClass('err');
+            var empty = $(this).find('input').filter(function () {
+                if (this.value === "") {
+                    $(this).addClass('err');
+                    return true;
+                }
+                return false;
+            });
+
+            if (empty.length !== 0) {
+                return false;
+            }
+
+            return true;
+        });
+    })
+</script>
