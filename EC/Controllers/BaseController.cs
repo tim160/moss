@@ -32,16 +32,26 @@ namespace EC.Controllers
         private SessionManager sessionManager = SessionManager.inst;
         internal IEmailAddressHelper m_EmailHelper = new EmailAddressHelper();
         protected IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
-
+        protected user _user = null;
         internal bool is_cc
         {
-            get { return DomainUtil.IsCC(Request.Url.AbsoluteUri.ToLower()); }
+           // get { return true; }
+
+             get { return DomainUtil.IsCC(Request.Url.AbsoluteUri.ToLower()); }
         }
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             base.OnActionExecuting(filterContext);
             HttpContextBase httpContext = new HttpContextWrapper(HttpContext.ApplicationInstance.Context);
+
+            ViewBag.is_cc = is_cc;
+            string cc_ext = "";
+            if (is_cc) cc_ext = "_cc";
+            ViewBag.cc_extension = cc_ext;
+
+
+
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker]; // (user)httpContext.Session[Constants.CurrentUserMarcker];
             if (user == null)
             {

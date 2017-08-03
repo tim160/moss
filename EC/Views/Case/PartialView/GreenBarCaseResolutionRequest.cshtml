@@ -1,10 +1,12 @@
 ﻿@using EC.App_LocalResources;
 @using EC.Common.Interfaces;
 @using EC.Core.Common;
-@using EC.Models.Database;
+@using EC.Constants
 @using EC.Models;
 @using EC.Models.ViewModels;
-@{ 
+@using EC.Models.Database;
+
+@{
     var report_id = (Int32)ViewBag.report_id;
     var user_id = (Int32)ViewBag.user_id;
     UserModel um = new UserModel(user_id);
@@ -17,17 +19,21 @@
     {
         popup = ViewBag.popup;
     }
+    report_investigation_status _previous_ris = rm._previous_investigation_status();
+
 }
 
 <div class="firstHeader resolveSoledBlock">
 
+    @if ((_previous_ris != null) && (_previous_ris.investigation_status_id != ECGlobalConstants.investigation_status_review && _previous_ris.investigation_status_id != ECGlobalConstants.investigation_status_pending))
+    {
+        <div class="caseWaitApp">@rm.CaseStatusGreenBarTitle()</div>
 
-    <div class="caseWaitApp">@rm.CaseStatusGreenBarTitle()</div>
-
-    <div class="positionDropDown">
-        <span class="dropDownfirstHeader flag"></span>
-        <a href="#" class="closeCustom flag"></a>
-    </div>
+        <div class="positionDropDown">
+            <span class="dropDownfirstHeader flag"></span>
+            <a href="#" class="closeCustom flag"></a>
+        </div>
+    }
     <div class="positionActivityIcon">
         <div id="activityIcon"></div>
         <span>@GlobalRes.Activity</span>
@@ -41,8 +47,9 @@
             @rm.CaseStatusGreenBarSubTitle()
         </div>
     }
-
-        @foreach (CaseInvestigationStatusViewModel cisvm in rm.CaseClosuresMessages())
+    @if ( (_previous_ris != null) && (_previous_ris.investigation_status_id != ECGlobalConstants.investigation_status_review && _previous_ris.investigation_status_id != ECGlobalConstants.investigation_status_pending))
+    {
+        foreach (CaseInvestigationStatusViewModel cisvm in rm.CaseClosuresMessages())
         {
             UserModel temp_um = new UserModel(cisvm.user_id);
             <div class="caseMediator">
@@ -60,8 +67,8 @@
                </div>
                 </div>
                 @if (cisvm.description.Length == 0)
-                { 
-                
+                {
+
                   <div class="forText">
                     <div class="boldText">
                         @temp_um._user.first_nm @temp_um._user.last_nm, @m_DateTimeHelper.ConvertDateToLongMonthString(cisvm.created_date)
@@ -142,7 +149,7 @@
                         </div>
                     }
                 </div>
-                
+
                 }
                 else
                 {
@@ -182,7 +189,7 @@
 
                 }
             </div>
-            
+
         }
         <div class="caseMediator">
              <div class="caseResolution">
@@ -199,5 +206,6 @@
             </div>
         </div>
         </div>
+    }
     </div>
 

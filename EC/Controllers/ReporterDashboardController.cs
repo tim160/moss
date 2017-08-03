@@ -22,7 +22,7 @@ namespace EC.Controllers
         public ActionResult Index(int? id)
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
-            user = AuthHelper.GetCookies(HttpContext);
+  //////////tim          user = AuthHelper.GetCookies(HttpContext);
             if (user == null || user.id == 0 || user.role_id == 4 || user.role_id == 5 || user.role_id ==6  || user.role_id == 7)
                 return RedirectToAction("Index", "Account");
 
