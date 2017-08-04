@@ -1133,5 +1133,11 @@ namespace EC.Controllers
        
             return 1;
         }
+        public ActionResult Attachments()
+        {
+            ViewBag.report_id = 649;
+            ViewBag.user_id = 2;
+            return View();
+        }
     }
 }
