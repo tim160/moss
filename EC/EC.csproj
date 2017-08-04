@@ -223,10 +223,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="angular\app.js" />
+    <Content Include="angular\controllers\CasesController.js" />
     <Content Include="angular\controllers\SettingsUserEditController.js" />
     <Content Include="angular\controllers\EmployeeAwarenessPosterController.js" />
     <Content Include="angular\controllers\EmployeeAwarenessController.js" />
     <Content Include="angular\services\EmployeeAwarenessPosterService.js" />
+    <Content Include="angular\services\CasesService.js" />
     <Content Include="angular\services\SettingsUserEditService.js" />
     <Content Include="angular\services\EmployeeAwarenessService.js" />
     <Content Include="App\components\activeHover\activeHover.js" />
@@ -663,6 +665,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AnalyticsController.cs" />
     <Compile Include="Controllers\API\BaseApiController.cs" />
+    <Compile Include="Controllers\API\CasesController.cs" />
     <Compile Include="Controllers\API\SettingsUserEditController.cs" />
     <Compile Include="Controllers\API\EmployeeAwarenessPosterController.cs" />
     <Compile Include="Controllers\API\EmployeeAwarenessController.cs" />
