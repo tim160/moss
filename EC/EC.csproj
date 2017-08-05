@@ -501,6 +501,7 @@
     <Content Include="Scripts\updateAjax.js" />
     <Content Include="Scripts\View\blockActivityRight.js" />
     <Content Include="Scripts\View\CaseCircleDraw.js" />
+    <Content Include="Scripts\View\customSelectModalIndexCase.js" />
     <Content Include="Scripts\View\LoginHereCompany.js" />
     <Content Include="Scripts\View\menuWork.js" />
     <Content Include="Scripts\View\newCompany.js" />
