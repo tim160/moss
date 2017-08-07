@@ -3256,3 +3256,30 @@ textarea {
             background-color: red;
         }
 
+.squareIcon {
+    width: 8px;
+    height: 8px;
+    background: white;
+}
+
+.firstPositionSquareIcon {
+    top: 0px;
+    position: absolute;
+}
+
+.secondPositionSquareIcon {
+    position: absolute;
+    top: 13px;
+}
+
+.thirdPositionSquareIcon {
+    position: absolute;
+    top: 0px;
+    left: 13px;
+}
+
+.fourthPositionSquareIcon {
+    position: absolute;
+    top: 13px;
+    left: 13px;
+}

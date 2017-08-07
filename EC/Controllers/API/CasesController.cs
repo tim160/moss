@@ -13,6 +13,7 @@ using EC.Constants;
 using EC.Core.Common;
 using EC.App_LocalResources;
 using EC.Models.ViewModel;
+using EC.Common.Interfaces;
 
 namespace EC.Controllers.API
 {
@@ -40,13 +41,25 @@ namespace EC.Controllers.API
             List<int> spam_report_ids = um.ReportsSearchIds(um._user.company_id, 3);
             List<int> closed_report_ids = um.ReportsSearchIds(um._user.company_id, 5);
 
+            var reports = report_ids.Select(x => new CasePreviewViewModel(x, user.id)).ToList();
+
+            IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
+            var userIds = reports.Select(x => x.last_sender_id).ToList();
+
             var m = new
             {
                 Mode = filter.ReportFlag,
 
-                Reports = report_ids
-                    .Select(x => new CasePreviewViewModel(x, user.id))
-                    .ToList(),
+                Reports = reports,
+
+                ReportsAdv = reports
+                    .Select(x => new {
+                        id = x.report_id,
+                        last_investigation_status_date = m_DateTimeHelper.ConvertDateToLongMonthString(new ReportModel(x.report_id)._last_investigation_status_date)
+                    }).ToList(),
+
+                Users = DB.user.Where(x => userIds.Contains(x.id)).ToList(),
+                UserIds = userIds,
 
                 Counts = new
                 {

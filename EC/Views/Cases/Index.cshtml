@@ -1,5 +1,6 @@
 ﻿@using EC.App_LocalResources;
 @using EC.Models.ViewModel;
+@using EC.Models;
 
 @{
     bool? is_cc = ViewBag.is_cc;
@@ -33,6 +34,34 @@
             @Html.Partial("~/Views/PartialViews/_ReportPendingNotification.cshtml", new ViewDataDictionary { { "report_id", _report_id }, { "user_id", user_id } })
         }
     }
+
+    int _user_id = 0;
+    bool is_owner = false;
+
+    if (ViewBag.user_id != null)
+    {
+        _user_id = (Int32)ViewBag.user_id;
+    }
+    if (ViewBag.is_owner != null)
+    {
+        is_owner = (bool)ViewBag.is_owner;
+    }
+    UserModel um = new UserModel(_user_id);
+    string _sb_full_name = "";
+    string _photo_path = "~/Content/Icons/noPhoto.png";
+
+    if (um != null && um._user != null)
+    {
+        if (um._user.first_nm.Length > 0 || um._user.last_nm.Length > 0)
+        {
+            _sb_full_name = (um._user.first_nm + " " + um._user.last_nm).Replace(" ", "_");
+        }
+        if (um._user.photo_path.Trim() != "")
+        {
+            _photo_path = um._user.photo_path;
+        }
+        //_user_id = um._user.id;
+    }
 }
 
 <div ng-controller="CasesController">
@@ -40,33 +69,40 @@
         <div id="menu">
             <h2 class="mainTitle">@GlobalRes.Menu:</h2>
             <div>
-                <a href="#" class="caseesTab" ng-class="{'active': mode == 1}" ng-click="Refresh(1)">
+                <a href="#" class="caseesTab" ng-class="{'active': mode == 1}" ng-click="refresh(1)">
                     @GlobalRes.Activecases
                     <span>{{counts.Active}}</span>
                 </a>
-                <a href="#" class="caseesTab" ng-class="{'active': mode == 2}" ng-click="Refresh(2)">
+                <a href="#" class="caseesTab" ng-class="{'active': mode == 2}" ng-click="refresh(2)">
                     @GlobalRes.Completedcases
                     <span>{{counts.Completed}}</span>
                 </a>
-                <a href="#" class="caseesTab" ng-class="{'active': mode == 5}" ng-click="Refresh(5)">
+                <a href="#" class="caseesTab" ng-class="{'active': mode == 5}" ng-click="refresh(5)">
                     @GlobalRes.ClosedCases
                     <span>{{counts.Closed}}</span>
                 </a>
-                <a href="#" class="caseesTab" ng-class="{'active': mode == 3}" ng-click="Refresh(3)">
+                <a href="#" class="caseesTab" ng-class="{'active': mode == 3}" ng-click="refresh(3)">
                     @GlobalRes.Spam
                     <span>{{counts.Spam}}</span>
                 </a>
             </div>
         </div>
         <div id="positionIconCases">
-            <div class="squareIcon firstPositionSquareIcon"></div>
-            <div class="squareIcon secondPositionSquareIcon"></div>
-            <div class="squareIcon thirdPositionSquareIcon"></div>
-            <div class="squareIcon fourthPositionSquareIcon"></div>
+            <div ng-show="showAsGrid" ng-click="showAsGrid = !showAsGrid" style="cursor: pointer; width: 16px; height:16px;">
+                <div class="squareIcon firstPositionSquareIcon"></div>
+                <div class="squareIcon secondPositionSquareIcon"></div>
+                <div class="squareIcon thirdPositionSquareIcon"></div>
+                <div class="squareIcon fourthPositionSquareIcon"></div>
+            </div>
+            <div ng-show="!showAsGrid" ng-click="showAsGrid = !showAsGrid" style="cursor: pointer; width: 16px; height:16px;">
+                <div class="rectangleIcon positionFirstRectangle"></div>
+                <div class="rectangleIcon positionSecondRectangle"></div>
+                <div class="rectangleIcon positionThirdRectangle"></div>
+            </div>
         </div>
     </div>
 
-    <div id="casesIndex">
+    <div id="casesIndex" ng-show="showAsGrid">
         <div class="positionTableCases">
             <table class="tableCasesIndex">
                 <thead>
@@ -98,6 +134,387 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+    </div>
+
+    <div class="positionCases" ng-show="!showAsGrid">
+        <div class="mainCaseParent" ng-repeat="report in reports">
+            <div class="mainCase">
+                <div class="rectangle" style="background-color:#{{report.case_color_code}}"></div>
+                <div class="header">
+                    <a href="/Case/Index/{{report.report_id}}">
+                        <div class="text1">
+                            {{report.case_secondary_types}}
+                            <span>{{report.case_number}}</span>
+                        </div>
+                    </a>
+
+                    <div class="timeScale" ng-show="report.investigation_status_number == 3">
+                        <div class="greenLabel"></div>
+                        <div class="greenLabel"></div>
+                        <div class="greenLabel"></div>
+                        <div class="circle"></div>
+                        <div class="greyLabel"></div>
+                        <div class="greyLabel"></div>
+                    </div>
+
+                    <div class="timeScale" ng-show="report.investigation_status_number == 5">
+                        <div class="orangeLabel"></div>
+                        <div class="orangeLabel"></div>
+                        <div class="orangeLabel"></div>
+                        <div class="orangeLabel"></div>
+                        <div class="orangeLabel"></div>
+                        <div class="circle orange"></div>
+                    </div>
+
+                    <div class="timeScale" ng-show="report.investigation_status_number == 4">
+
+                        <div class="greenLabel"></div>
+                        <div class="greenLabel"></div>
+                        <div class="greenLabel"></div>
+                        <div class="greenLabel"></div>
+                        <div class="circle"></div>
+                        <div class="greyLabel"></div>
+                    </div>
+
+                    <div class="timeScale" ng-show="report.investigation_status_number == 6">
+
+                        <div class="greenLabel orangeLabel"></div>
+                        <div class="greenLabel orangeLabel"></div>
+                        <div class="greenLabel orangeLabel"></div>
+                        <div class="greenLabel orangeLabel"></div>
+                        <div class="circle orange"></div>
+                        <div class="greyLabel"></div>
+                    </div>
+
+                    <div class="timeScale" ng-show="report.investigation_status_number == 9">
+                        <div class="redLabel"></div>
+                        <div class="circle red"></div>
+                        <div class="redLabel"></div>
+                        <div class="circle red"></div>
+                        <div class="redLabel"></div>
+                        <div class="circle red"></div>
+                        <div class="redLabel"></div>
+                        <div class="circle red"></div>
+                        <div class="redLabel"></div>
+                        <div class="circle red"></div>
+                    </div>
+
+                    <div class="timeScale" ng-show="report.investigation_status_number == 7">
+                        <div class="greyLabel"></div>
+                        <div class="greyLabel"></div>
+                        <div class="greyLabel"></div>
+                        <div class="greyLabel"></div>
+                        <div class="greyLabel"></div>
+                        <div class="circle grey"></div>
+                    </div>
+
+                    <div class="text2 {{report.investigation_status_number == 4 || report.investigation_status_number == 6 || report.investigation_status_number == 9 ? 'completedPosition' : ''}}">
+                        <div ng-show="report.investigation_status_number == 3">
+                            {{report.current_status}}
+                        </div>
+
+                        <div class="buttonForCase resolvedButton" ng-show="report.investigation_status_number == 4">
+                            {{report.current_status}}
+                        </div>
+
+                        <div class="buttonForCase completedButton" ng-show="report.investigation_status_number == 6">
+                            {{report.current_status}}
+                        </div>
+
+                        <div class="orangeLabel" ng-show="report.investigation_status_number == 5">
+                            {{report.current_status}}
+                        </div>
+
+                        <div ng-show="report.investigation_status_number == 9">
+                            <div class="buttonForCase closedButton">
+                                {{report.current_status}}
+                            </div>
+                            <div class="completedPosition">
+                                <span>{{advData(report.report_id, 'last_investigation_status_date')}}</span>
+                            </div>
+                        </div>
+
+                        <div class="greyLabel" ng-show="report.investigation_status_number == 7">
+                            {{report.current_status}}
+                        </div>
+
+                        <span ng-show="report.investigation_status_number != 9 && report.investigation_status_number != 7 && report.days_left == 1">
+                            {{report.days_left}}&nbsp;@GlobalRes.dayleft
+                        </span>
+                        <span ng-show="report.investigation_status_number != 9 && report.investigation_status_number != 7 && report.days_left != 1">
+                            {{report.days_left}}&nbsp;@GlobalRes.daysleft
+                        </span>
+                    </div>
+                </div>
+
+                <div class="text3">
+                    Reported by {{report.reported_by_whom.toLower()}} on {{report.reported_dt}}
+                </div>
+
+                <div class="descriptionCasePosition" ng-show="report.investigation_status_number == 6">
+                    <div class="column1">
+                        <img src="~/Content/Icons/caseNotResolvedIcons.png" />
+                    </div>
+                    <div class="column2">
+                        <div class="column3">
+                            <div class="leftBlockWithPhoto">
+                                <div class="blockPhoto">
+                                    <div ng-show="report.last_sender_id != 0">
+                                        @*Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", Model.last_sender_id }, { "is_owner", true } })*@
+                                        <div class="blockPhoto">
+                                            @if (is_owner)
+                                            {
+                                                if (is_cc.Value)
+                                                {
+                                                    <div class="status status_cc" ng-show="userData(report.last_sender_id, 'role_id') == 5"></div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="status" ng-show="userData(report.last_sender_id, 'role_id') != 5"></div>
+                                                }
+                                            }
+                                            <div class="photoPersonal">
+                                                <a href="/settings/user/@_user_id"><img src='@Url.Content(_photo_path)' title=@_sb_full_name ng-show="report.last_sender_id != 0" /></a>
+                                                <img src='@Url.Content("~/Content/Icons/noPhoto.png")' ng-show="report.last_sender_id == 0" />
+                                            </div>
+                                        </div>
+                                        <div class="circle green"></div>
+                                    </div>
+                                    <div ng-show="report.last_sender_id == 0">
+                                        <div class="status"></div>
+                                        <div class="anonimousReporterIcon"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column4">
+                            <div class="negative">
+                                @GlobalRes.CaseCantBeResolved.
+                            </div>
+                            <div class="dates">
+                                {{report.last_sender_name}}, {{report.last_sender_date}}:
+                            </div>
+                            <div class="text">
+                                {{report.last_status_message}}
+                            </div>
+                        </div>
+                        <div class="borderColumn"></div>
+                    </div>
+                    <div style="padding-top:25px;"></div>
+                </div>
+
+                <div class="descriptionCasePosition" ng-show="report.investigation_status_number == 9">
+                    <div class="descriptionCasePosition">
+                        <div class="column1">
+                            <img src="~/Content/Icons/caseNotResolvedIcons.png" ng-show="report.previous_investigation_status_number == 6" />
+                            <img src="~/Content/Icons/yes.png" ng-show="report.previous_investigation_status_number == 4" />
+                        </div>
+                        <div class="column2">
+                            <div class="column3">
+                                <div class="leftBlockWithPhoto">
+                                    <div class="blockPhoto">
+                                        <div ng-show="report.previous_sender_id != 0">
+                                            @*Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", Model.previous_sender_id }, { "is_owner", true } })*@
+                                            <div class="blockPhoto">
+                                                @if (is_owner)
+                                                {
+                                                    if (is_cc.Value)
+                                                    {
+                                                        <div class="status status_cc" ng-show="userData(report.previous_sender_id, 'role_id') == 5"></div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="status" ng-show="userData(report.previous_sender_id, 'role_id') != 5"></div>
+                                                    }
+                                                }
+                                                <div class="photoPersonal">
+                                                    <a href="/settings/user/@_user_id"><img src='@Url.Content(_photo_path)' title=@_sb_full_name ng-show="report.previous_sender_id != 0" /></a>
+                                                    <img src='@Url.Content("~/Content/Icons/noPhoto.png")' ng-show="report.previous_sender_id == 0" />
+                                                </div>
+                                            </div>
+                                            <div class="circle green"></div>
+                                        </div>
+                                        <div ng-show="report.previous_sender_id == 0">
+                                            <div class="status"></div>
+                                            <div class="anonimousReporterIcon"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column4">
+                                <div class="negative" ng-show="report.previous_investigation_status_number == 6">
+                                    @GlobalRes.CaseCantBeResolved.
+                                </div>
+                                <div class="positive" ng-show="report.previous_investigation_status_number == 4">
+                                    @GlobalRes.CaseResolved.
+                                </div>
+
+                                <div class="dates">
+                                    {{report.previous_sender_name}}, {{report.previous_sender_date}}:
+                                </div>
+                                <div class="text">
+                                    {{report.previous_status_message}}
+                                </div>
+                            </div>
+                            <div class="borderColumn"></div>
+                        </div>
+                        <div style="padding-top:25px;"></div>
+                        <div class="column2">
+                            <div class="column3">
+                                <div class="leftBlockWithPhoto">
+                                    <div class="blockPhoto">
+                                        <div ng-show="report.last_sender_id != 0">
+                                            @*Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", Model.last_sender_id }, { "is_owner", true } })*@
+                                            <div class="blockPhoto">
+                                                @if (is_owner)
+                                                {
+                                                    if (is_cc.Value)
+                                                    {
+                                                        <div class="status status_cc" ng-show="userData(report.last_sender_id, 'role_id') == 5"></div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="status" ng-show="userData(report.last_sender_id, 'role_id') != 5"></div>
+                                                    }
+                                                }
+                                                <div class="photoPersonal">
+                                                    <a href="/settings/user/@_user_id"><img src='@Url.Content(_photo_path)' title=@_sb_full_name ng-show="report.last_sender_id != 0" /></a>
+                                                    <img src='@Url.Content("~/Content/Icons/noPhoto.png")' ng-show="report.last_sender_id == 0" />
+                                                </div>
+                                            </div>
+                                            <div class="circle green"></div>
+                                        </div>
+                                        <div ng-show="report.last_sender_id == 0">
+                                            <div class="status"></div>
+                                            <div class="anonimousReporterIcon"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column4">
+                                <div class="negative">
+                                    @GlobalRes.CaseClosed
+                                </div>
+                                <div class="dates">
+                                    {{report.last_sender_name}}, {{report.last_sender_date}}:
+                                </div>
+                                <div class="text">
+                                    {{report.last_status_message}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="descriptionCasePosition" ng-show="report.investigation_status_number == 4">
+                    <div class="column1">
+                        <img src="~/Content/Icons/yes.png" />
+                    </div>
+                    <div class="column2">
+                        <div class="column3">
+                            <div class="leftBlockWithPhoto">
+                                <div class="blockPhoto">
+                                    <div ng-show="report.last_sender_id != 0">
+                                        @*Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", Model.last_sender_id }, { "is_owner", true } })*@
+                                        <div class="blockPhoto">
+                                            @if (is_owner)
+                                            {
+                                                if (um != null && um._user != null && um._user.role_id == 5)
+                                                {
+                                                    if (is_cc.Value)
+                                                    {
+                                                        <div class="status status_cc"></div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="status"></div>
+                                                    }
+                                                }
+                                            }
+                                            <div class="photoPersonal">
+                                                @if (_user_id != 0)
+                                                {
+                                                    <a href="/settings/user/@_user_id"><img src='@Url.Content(_photo_path)' title=@_sb_full_name /></a>
+                                                }
+                                                else
+                                                {
+                                                    <img src='@Url.Content("~/Content/Icons/noPhoto.png")' />
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="circle green"></div>
+                                    </div>
+                                    <div ng-show="report.last_sender_id == 0">
+                                        <div class="status"></div>
+                                        <div class="anonimousReporterIcon"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column4">
+                            <div class="positive">
+                                @GlobalRes.CaseResolved.
+                            </div>
+                            <div class="dates">
+                                {{report.last_sender_name}}, {{report.last_sender_date}}:
+                            </div>
+                            <div class="text">
+                                {{report.last_status_message}}
+                            </div>
+                        </div>
+                        <div class="borderColumn"></div>
+                    </div>
+                    <div style="padding-top:25px;"></div>
+                </div>
+
+                <div class="bottom location">
+                    <div class="col1"></div>
+                    <div class="col2">@GlobalRes.Location.ToLower()</div>
+                    <div class="col3">{{report.location}}</div>
+                </div>
+                
+                <div class="bottom date">
+                    <div class="col1"></div>
+                    <div class="col2">@GlobalRes.IncidentDateUp.ToLower()</div>
+                    <div class="col3">{{report.case_dt}}</div>
+                </div>
+                
+                <div class="bottom department">
+                    <div class="col1"></div>
+                    <div class="col2">@GlobalRes.Departments.ToLower()</div>
+                    <div class="col3">{{report.departments}}</div>
+                </div>
+
+                <div class="flex-block">
+                    <a class="flex3 flexBlockShow" href="/Case/Index/{{report.report_id}}">
+                        <span ng-show="report.new_tasks > 0">
+                            <span class="text green">@GlobalRes.Tasks.ToLower() - {{report.new_tasks}} new </span>
+                            {{report.tasks_number}}
+                        </span>
+                        <span ng-show="report.new_tasks <= 0">
+                            <span class="text">@GlobalRes.Tasks.ToLower()</span>
+                            {{report.tasks_number}}
+                        </span>
+                    </a>
+
+                    <a class="flex2 flexBlockShow" href="/Case/Messages/{{report.report_id}}">
+                        <span ng-show="report.new_messages > 0">
+                            <span class="text green">@GlobalRes.Messages.ToLower() - {{report.new_messages}} new </span>
+                            {{report.messages_number}}
+                        </span>
+                        <span ng-show="report.new_messages <= 0">
+                            <span class="text">@GlobalRes.Messages.ToLower()</span>{{report.messages_number}}
+                        </span>
+                    </a>
+
+                    <a class="flex1 flexBlockShow" href="/Case/Team/{{report.report_id}}">
+                        <span class="text">@GlobalRes.Team.ToLower()</span>
+                        <span ng-show="report.team_invovled" class="exclamationmark" title="{{report.team_involved_names}}"></span>
+                        {{report.team_number}}
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
