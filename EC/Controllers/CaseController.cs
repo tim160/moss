@@ -1133,10 +1133,12 @@ namespace EC.Controllers
        
             return 1;
         }
-        public ActionResult Attachments()
+        public ActionResult Attachments(int id)
         {
+            ViewBag.rm = new ReportModel(id);
             ViewBag.report_id = 649;
             ViewBag.user_id = 2;
+            ViewBag.attachmentFiles = new List<attachment>();
             return View();
         }
     }

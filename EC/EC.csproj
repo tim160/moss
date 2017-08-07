@@ -455,19 +455,18 @@
     <Content Include="App.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="App\Web.config" />
+    <Content Include="App\ec\components\EAShow\EAShow.cshtml" />
+    <Content Include="App\ec\components\EAList\EAList.cshtml" />
+    <Content Include="bower.json" />
+    <Content Include="package.json" />
     <EntityDeploy Include="Models\Database\ECEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ECEntities.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <Content Include="Models\Database\ECEntities.edmx.diagram">
       <DependentUpon>ECEntities.edmx</DependentUpon>
-      <SubType>Designer</SubType>
     </Content>
-    <Content Include="App\Web.config" />
-    <Content Include="App\ec\components\EAShow\EAShow.cshtml" />
-    <Content Include="App\ec\components\EAList\EAList.cshtml" />
-    <Content Include="bower.json" />
-    <Content Include="package.json" />
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <None Include="Properties\PublishProfiles\ec-code.pubxml" />
     <None Include="Properties\PublishProfiles\ec-dev.pubxml" />
@@ -637,6 +636,7 @@
     <Content Include="Views\New\Quote.cshtml" />
     <Content Include="Views\New\QuoteSuccess.cshtml" />
     <Content Include="Views\Settings\User - Copy.cshtml" />
+    <Content Include="Views\Case\Attachments.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -724,6 +724,12 @@
     <Compile Include="Models\Database\case_closure_reason.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Database\cc_crime_statistics_category.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\cc_crime_statistics_location.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Database\client.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
@@ -758,6 +764,9 @@
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\company_secondary_type.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\company_third_level_type.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\company_type.cs">
@@ -898,6 +907,9 @@
     <Compile Include="Models\Database\report_secondary_type.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Database\report_third_level_type.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Database\report_type_mandatory_question.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
@@ -923,6 +935,9 @@
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\status.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\sysdiagrams.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\task.cs">

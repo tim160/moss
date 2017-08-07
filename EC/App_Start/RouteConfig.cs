@@ -31,15 +31,26 @@ namespace EC
     );
 
             routes.MapRoute(
-name: "CaseTask",
-url: "Case/Task/{id}",
-defaults: new
-{
-    controller = "Case",
-    action = "Task",
-    id = UrlParameter.Optional
-}
-);
+                name: "CaseTask",
+                url: "Case/Task/{id}",
+                defaults: new
+                {
+                    controller = "Case",
+                    action = "Task",
+                    id = UrlParameter.Optional
+                }
+            );
+
+            routes.MapRoute(
+                name: "CaseAttachments",
+                url: "Case/Attachments/{id}",
+                defaults: new
+                {
+                    controller = "Case",
+                    action = "Attachments",
+                    id = UrlParameter.Optional
+                }
+            );
 
             routes.MapRoute(
             name: "CaseReporter",
@@ -145,7 +156,7 @@ defaults: new
                     id = UrlParameter.Optional
                 }
             );
-            
+
             routes.MapRoute(
                 name: "CaseClose",
                 url: "Case/CloseCase",
@@ -207,19 +218,19 @@ defaults: new
                   id = UrlParameter.Optional
               });
 
-            
+
             #endregion
 
-           routes.MapRoute(
-                name: "Start",
-                url: "Index/Start/{id}",
-                defaults: new
-                {
-                    controller = "Index",
-                    action = "Start",
-                    id = UrlParameter.Optional
-                }
-            );
+            routes.MapRoute(
+                 name: "Start",
+                 url: "Index/Start/{id}",
+                 defaults: new
+                 {
+                     controller = "Index",
+                     action = "Start",
+                     id = UrlParameter.Optional
+                 }
+             );
             routes.MapRoute(
                  name: "CompanySearch",
                  url: "Index/Start/{lookup}",
@@ -262,17 +273,17 @@ defaults: new
                     id = UrlParameter.Optional
                 }
             );
-           routes.MapRoute(
-                name: "ReporterDashboardAddedMessages",
-                url: "ReporterDashboard/AddedMessages",
-                defaults: new
-                {
-                    controller = "ReporterDashboard",
-                    action = "AddedMessages"
-                }
-            );
+            routes.MapRoute(
+                 name: "ReporterDashboardAddedMessages",
+                 url: "ReporterDashboard/AddedMessages",
+                 defaults: new
+                 {
+                     controller = "ReporterDashboard",
+                     action = "AddedMessages"
+                 }
+             );
 
-            
+
             routes.MapRoute(
                 name: "UpdateDelays",
                 url: "Settings/UpdateDelays",
@@ -305,24 +316,24 @@ defaults: new
                  }
              );
 
-           routes.MapRoute(
-                name: "PaymentHistory",
-                url: "Payment/History",
-                defaults: new
-                {
-                    controller = "Payment",
-                    action = "History"
-                }
-            );
-           routes.MapRoute(
-                name: "PaymentIndex",
-                url: "Payment/Index",
-                defaults: new
-                {
-                    controller = "Payment",
-                    action = "History"
-                }
-            );
+            routes.MapRoute(
+                 name: "PaymentHistory",
+                 url: "Payment/History",
+                 defaults: new
+                 {
+                     controller = "Payment",
+                     action = "History"
+                 }
+             );
+            routes.MapRoute(
+                 name: "PaymentIndex",
+                 url: "Payment/Index",
+                 defaults: new
+                 {
+                     controller = "Payment",
+                     action = "History"
+                 }
+             );
             routes.MapRoute(
                 name: "PaymentReceipt",
                 url: "Payment/Receipt/{id}",
