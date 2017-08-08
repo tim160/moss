@@ -35,7 +35,7 @@
         }
     }
 
-    int _user_id = 0;
+    @*int _user_id = 0;
     bool is_owner = false;
 
     if (ViewBag.user_id != null)
@@ -61,7 +61,7 @@
             _photo_path = um._user.photo_path;
         }
         //_user_id = um._user.id;
-    }
+    }*@
 }
 
 <div ng-controller="CasesController">
@@ -231,7 +231,7 @@
                                 {{report.current_status}}
                             </div>
                             <div class="completedPosition">
-                                <span>{{advData(report.report_id, 'last_investigation_status_date')}}</span>
+                                <span>{{report.AdvInfo.last_investigation_status_date}}</span>
                             </div>
                         </div>
 
@@ -263,19 +263,16 @@
                                     <div ng-show="report.last_sender_id != 0">
                                         @*Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", Model.last_sender_id }, { "is_owner", true } })*@
                                         <div class="blockPhoto">
-                                            @if (is_owner)
+                                            @if (is_cc.Value)
                                             {
-                                                if (is_cc.Value)
-                                                {
-                                                    <div class="status status_cc" ng-show="userData(report.last_sender_id, 'role_id') == 5"></div>
-                                                }
-                                                else
-                                                {
-                                                    <div class="status" ng-show="userData(report.last_sender_id, 'role_id') != 5"></div>
-                                                }
+                                                <div class="status status_cc" ng-show="report.Last_sender.role_id == 5"></div>
+                                            }
+                                            else
+                                            {
+                                                <div class="status" ng-show="report.Last_sender.role_id != 5"></div>
                                             }
                                             <div class="photoPersonal">
-                                                <a href="/settings/user/@_user_id"><img src='@Url.Content(_photo_path)' title=@_sb_full_name ng-show="report.last_sender_id != 0" /></a>
+                                                <a href="/settings/user/{{report.last_sender_id}}"><img src="{{report.Last_sender.photo_path}}" title="{{report.Last_sender.photo_path.sb_full_name}}" ng-show="report.last_sender_id != 0" /></a>
                                                 <img src='@Url.Content("~/Content/Icons/noPhoto.png")' ng-show="report.last_sender_id == 0" />
                                             </div>
                                         </div>
@@ -317,19 +314,16 @@
                                         <div ng-show="report.previous_sender_id != 0">
                                             @*Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", Model.previous_sender_id }, { "is_owner", true } })*@
                                             <div class="blockPhoto">
-                                                @if (is_owner)
+                                                @if (is_cc.Value)
                                                 {
-                                                    if (is_cc.Value)
-                                                    {
-                                                        <div class="status status_cc" ng-show="userData(report.previous_sender_id, 'role_id') == 5"></div>
-                                                    }
-                                                    else
-                                                    {
-                                                        <div class="status" ng-show="userData(report.previous_sender_id, 'role_id') != 5"></div>
-                                                    }
+                                                    <div class="status status_cc" ng-show="report.Previous_sender.role_id == 5"></div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="status" ng-show="report.Previous_sender.role_id != 5"></div>
                                                 }
                                                 <div class="photoPersonal">
-                                                    <a href="/settings/user/@_user_id"><img src='@Url.Content(_photo_path)' title=@_sb_full_name ng-show="report.previous_sender_id != 0" /></a>
+                                                    <a href="/settings/user/{{report.previous_sender_id}}"><img src="{{report.Previous_sender.photo_path}}" title="{{report.Previous_sender.photo_path.sb_full_name}}" ng-show="report.previous_sender_id != 0" /></a>
                                                     <img src='@Url.Content("~/Content/Icons/noPhoto.png")' ng-show="report.previous_sender_id == 0" />
                                                 </div>
                                             </div>
@@ -367,19 +361,16 @@
                                         <div ng-show="report.last_sender_id != 0">
                                             @*Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", Model.last_sender_id }, { "is_owner", true } })*@
                                             <div class="blockPhoto">
-                                                @if (is_owner)
+                                                @if (is_cc.Value)
                                                 {
-                                                    if (is_cc.Value)
-                                                    {
-                                                        <div class="status status_cc" ng-show="userData(report.last_sender_id, 'role_id') == 5"></div>
-                                                    }
-                                                    else
-                                                    {
-                                                        <div class="status" ng-show="userData(report.last_sender_id, 'role_id') != 5"></div>
-                                                    }
+                                                    <div class="status status_cc" ng-show="report.Last_sender.role_id == 5"></div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="status" ng-show="report.Last_sender.role_id != 5"></div>
                                                 }
                                                 <div class="photoPersonal">
-                                                    <a href="/settings/user/@_user_id"><img src='@Url.Content(_photo_path)' title=@_sb_full_name ng-show="report.last_sender_id != 0" /></a>
+                                                    <a href="/settings/user/{{report.last_sender_id}}"><img src="{{report.Last_sender.photo_path}}" title="{{report.Last_sender.photo_path.sb_full_name}}" ng-show="report.last_sender_id != 0" /></a>
                                                     <img src='@Url.Content("~/Content/Icons/noPhoto.png")' ng-show="report.last_sender_id == 0" />
                                                 </div>
                                             </div>
@@ -418,29 +409,17 @@
                                     <div ng-show="report.last_sender_id != 0">
                                         @*Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", Model.last_sender_id }, { "is_owner", true } })*@
                                         <div class="blockPhoto">
-                                            @if (is_owner)
+                                            @if (is_cc.Value)
                                             {
-                                                if (um != null && um._user != null && um._user.role_id == 5)
-                                                {
-                                                    if (is_cc.Value)
-                                                    {
-                                                        <div class="status status_cc"></div>
-                                                    }
-                                                    else
-                                                    {
-                                                        <div class="status"></div>
-                                                    }
-                                                }
+                                                <div class="status status_cc" ng-show="report.Last_sender.role_id == 5"></div>
+                                            }
+                                            else
+                                            {
+                                                <div class="status" ng-show="report.Last_sender.role_id != 5"></div>
                                             }
                                             <div class="photoPersonal">
-                                                @if (_user_id != 0)
-                                                {
-                                                    <a href="/settings/user/@_user_id"><img src='@Url.Content(_photo_path)' title=@_sb_full_name /></a>
-                                                }
-                                                else
-                                                {
-                                                    <img src='@Url.Content("~/Content/Icons/noPhoto.png")' />
-                                                }
+                                                <a href="/settings/user/{{report.last_sender_id}}"><img src="{{report.Last_sender.photo_path}}" title="{{report.Last_sender.photo_path.sb_full_name}}" ng-show="report.last_sender_id != 0" /></a>
+                                                <img src='@Url.Content("~/Content/Icons/noPhoto.png")' ng-show="report.last_sender_id == 0" />
                                             </div>
                                         </div>
                                         <div class="circle green"></div>
