@@ -3713,6 +3713,18 @@ textarea {
             border-bottom: 1px solid #e8eaeb;
             cursor: pointer;
         }
+        #casesIndex .tableCasesIndex .grey{
+            color: #aeb5b7;
+        }
+        .OpenSansSemibold {
+            font-family: OpenSansSemibold;
+        }
+        .red {
+            color: #ee5a36;
+        }
+        .green {
+            color: #4da456;
+        }
         #casesIndex .tableCasesIndex tbody td:first-child {
             text-align: center;
             width: 145px;
@@ -3771,4 +3783,8 @@ textarea {
 
 #icon {
     background: url(icons/activityIcon.png) no-repeat;
+}
+
+.timeStatus {
+    
 }
