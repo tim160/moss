@@ -121,7 +121,7 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="report in reports">
-                        <td class="firstColumn">{{report.case_number}}</td>
+                        <td class="firstColumn"><div class="rectangle"></div>{{report.case_number}}</td>
                         <td>{{report.current_status}}<span> {{report.days_left}} days left</span></td>
                         <td>{{days_left}}</td>
                         <td>{{report.case_secondary_types}}</td>
