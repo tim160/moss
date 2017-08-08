@@ -77,5 +77,4 @@ EC/Web.config.local
 EC/Libs/
 .vs/config/applicationhost.config
 EC/node_modules/
-EC/Scripts/dis.js
 EC/Content/img/TestPdf.pdf
