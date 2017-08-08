@@ -34,34 +34,6 @@
             @Html.Partial("~/Views/PartialViews/_ReportPendingNotification.cshtml", new ViewDataDictionary { { "report_id", _report_id }, { "user_id", user_id } })
         }
     }
-
-    @*int _user_id = 0;
-    bool is_owner = false;
-
-    if (ViewBag.user_id != null)
-    {
-        _user_id = (Int32)ViewBag.user_id;
-    }
-    if (ViewBag.is_owner != null)
-    {
-        is_owner = (bool)ViewBag.is_owner;
-    }
-    UserModel um = new UserModel(_user_id);
-    string _sb_full_name = "";
-    string _photo_path = "~/Content/Icons/noPhoto.png";
-
-    if (um != null && um._user != null)
-    {
-        if (um._user.first_nm.Length > 0 || um._user.last_nm.Length > 0)
-        {
-            _sb_full_name = (um._user.first_nm + " " + um._user.last_nm).Replace(" ", "_");
-        }
-        if (um._user.photo_path.Trim() != "")
-        {
-            _photo_path = um._user.photo_path;
-        }
-        //_user_id = um._user.id;
-    }*@
 }
 
 <div ng-controller="CasesController">
@@ -120,7 +92,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="report in reports">
+                    <tr ng-repeat="report in reports" ng-click="openCase(report.report_id)" style="cursor: pointer;">
                         <td class="firstColumn">{{report.case_number}}</td>
                         <td>{{report.current_status}}<span> {{report.days_left}} days left</span></td>
                         <td>{{days_left}}</td>
