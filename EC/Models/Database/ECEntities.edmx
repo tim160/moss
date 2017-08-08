@@ -112,6 +112,26 @@
           <Property Name="status_id" Type="int" Nullable="false" />
           <Property Name="user_id" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="cc_crime_statistics_category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="crime_statistics_category_en" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="crime_statistics_category_fr" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="crime_statistics_category_es" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="status_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cc_crime_statistics_location">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="crime_statistics_location_en" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="crime_statistics_location_fr" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="crime_statistics_location_es" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="status_id" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="client">
           <Key>
             <PropertyRef Name="id" />
@@ -364,6 +384,19 @@
           <Property Name="description_ar" Type="nvarchar" MaxLength="255" />
           <Property Name="description_jp" Type="nvarchar" MaxLength="255" />
           <Property Name="description_es" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="company_third_level_type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="client_id" Type="int" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="secondary_type_id" Type="int" />
+          <Property Name="third_level_type_name_en" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="third_level_type_name_fr" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="third_level_type_name_es" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="status_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="company_type">
           <Key>
@@ -916,6 +949,14 @@
           <Property Name="last_update_dt" Type="smalldatetime" Nullable="false" />
           <Property Name="user_id" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="report_third_level_type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="report_id" Type="int" Nullable="false" />
+          <Property Name="company_third_level_type_id" Type="int" />
+        </EntityType>
         <EntityType Name="report_type_mandatory_question">
           <Key>
             <PropertyRef Name="id" />
@@ -1344,6 +1385,8 @@
           <EntitySet Name="attachment" EntityType="Self.attachment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="billing_option" EntityType="Self.billing_option" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="case_closure_reason" EntityType="Self.case_closure_reason" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cc_crime_statistics_category" EntityType="Self.cc_crime_statistics_category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cc_crime_statistics_location" EntityType="Self.cc_crime_statistics_location" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="client" EntityType="Self.client" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="color" EntityType="Self.color" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="company" EntityType="Self.company" Schema="dbo" store:Type="Tables" />
@@ -1356,6 +1399,7 @@
           <EntitySet Name="company_payments" EntityType="Self.company_payments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="company_relationship" EntityType="Self.company_relationship" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="company_secondary_type" EntityType="Self.company_secondary_type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="company_third_level_type" EntityType="Self.company_third_level_type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="company_type" EntityType="Self.company_type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="company_unread_report_reminder" EntityType="Self.company_unread_report_reminder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="country" EntityType="Self.country" Schema="dbo" store:Type="Tables" />
@@ -1396,6 +1440,7 @@
           <EntitySet Name="report_relationship" EntityType="Self.report_relationship" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="report_resolution" EntityType="Self.report_resolution" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="report_secondary_type" EntityType="Self.report_secondary_type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="report_third_level_type" EntityType="Self.report_third_level_type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="report_type_mandatory_question" EntityType="Self.report_type_mandatory_question" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="report_user_read" EntityType="Self.report_user_read" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="reported_outside" EntityType="Self.reported_outside" Schema="dbo" store:Type="Tables" />
@@ -2768,6 +2813,10 @@
           <EntitySet Name="poster_industry_posters" EntityType="ECModel.poster_industry_posters" />
           <EntitySet Name="scope" EntityType="ECModel.scope" />
           <EntitySet Name="severity" EntityType="ECModel.severity" />
+          <EntitySet Name="cc_crime_statistics_category" EntityType="ECModel.cc_crime_statistics_category" />
+          <EntitySet Name="cc_crime_statistics_location" EntityType="ECModel.cc_crime_statistics_location" />
+          <EntitySet Name="company_third_level_type" EntityType="ECModel.company_third_level_type" />
+          <EntitySet Name="report_third_level_type" EntityType="ECModel.report_third_level_type" />
         </EntityContainer>
         <EntityType Name="case_closure_reason">
           <Key>
@@ -2877,6 +2926,47 @@
           <Property Name="severity_fr" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="severity_es" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="status_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cc_crime_statistics_category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="crime_statistics_category_en" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="crime_statistics_category_fr" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="crime_statistics_category_es" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="status_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cc_crime_statistics_location">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="crime_statistics_location_en" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="crime_statistics_location_fr" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="crime_statistics_location_es" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="status_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="company_third_level_type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="client_id" Type="Int32" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="secondary_type_id" Type="Int32" />
+          <Property Name="third_level_type_name_en" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="third_level_type_name_fr" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="third_level_type_name_es" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="status_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="report_third_level_type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="report_id" Type="Int32" Nullable="false" />
+          <Property Name="company_third_level_type_id" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4179,6 +4269,51 @@
                 <ScalarProperty Name="severity_es" ColumnName="severity_es" />
                 <ScalarProperty Name="severity_fr" ColumnName="severity_fr" />
                 <ScalarProperty Name="severity_en" ColumnName="severity_en" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cc_crime_statistics_category">
+            <EntityTypeMapping TypeName="ECModel.cc_crime_statistics_category">
+              <MappingFragment StoreEntitySet="cc_crime_statistics_category">
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="crime_statistics_category_es" ColumnName="crime_statistics_category_es" />
+                <ScalarProperty Name="crime_statistics_category_fr" ColumnName="crime_statistics_category_fr" />
+                <ScalarProperty Name="crime_statistics_category_en" ColumnName="crime_statistics_category_en" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cc_crime_statistics_location">
+            <EntityTypeMapping TypeName="ECModel.cc_crime_statistics_location">
+              <MappingFragment StoreEntitySet="cc_crime_statistics_location">
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="crime_statistics_location_es" ColumnName="crime_statistics_location_es" />
+                <ScalarProperty Name="crime_statistics_location_fr" ColumnName="crime_statistics_location_fr" />
+                <ScalarProperty Name="crime_statistics_location_en" ColumnName="crime_statistics_location_en" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="company_third_level_type">
+            <EntityTypeMapping TypeName="ECModel.company_third_level_type">
+              <MappingFragment StoreEntitySet="company_third_level_type">
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="third_level_type_name_es" ColumnName="third_level_type_name_es" />
+                <ScalarProperty Name="third_level_type_name_fr" ColumnName="third_level_type_name_fr" />
+                <ScalarProperty Name="third_level_type_name_en" ColumnName="third_level_type_name_en" />
+                <ScalarProperty Name="secondary_type_id" ColumnName="secondary_type_id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="report_third_level_type">
+            <EntityTypeMapping TypeName="ECModel.report_third_level_type">
+              <MappingFragment StoreEntitySet="report_third_level_type">
+                <ScalarProperty Name="company_third_level_type_id" ColumnName="company_third_level_type_id" />
+                <ScalarProperty Name="report_id" ColumnName="report_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

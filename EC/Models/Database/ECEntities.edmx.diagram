@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b3e5657af820495ab857647ffa3acb52" Name="Diagram1" ZoomLevel="93">
+      <Diagram DiagramId="b3e5657af820495ab857647ffa3acb52" Name="Diagram1" ZoomLevel="84">
         <EntityTypeShape EntityType="ECModel.action" Width="1.5" PointX="5.75" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ECModel.address" Width="1.5" PointX="12.25" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ECModel.anonymity" Width="1.5" PointX="5.75" PointY="13.375" IsExpanded="true" />
@@ -92,6 +92,10 @@
         <EntityTypeShape EntityType="ECModel.poster_industry_posters" Width="1.5" PointX="11.375" PointY="0.75" />
         <EntityTypeShape EntityType="ECModel.scope" Width="1.5" PointX="13.375" PointY="0.75" />
         <EntityTypeShape EntityType="ECModel.severity" Width="1.5" PointX="15.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ECModel.cc_crime_statistics_category" Width="1.5" PointX="17.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ECModel.cc_crime_statistics_location" Width="1.5" PointX="19.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ECModel.company_third_level_type" Width="1.5" PointX="21.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ECModel.report_third_level_type" Width="1.5" PointX="23.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -105,5 +105,9 @@ namespace EC.Models.Database
         public virtual DbSet<poster_industry_posters> poster_industry_posters { get; set; }
         public virtual DbSet<scope> scope { get; set; }
         public virtual DbSet<severity> severity { get; set; }
+        public virtual DbSet<cc_crime_statistics_category> cc_crime_statistics_category { get; set; }
+        public virtual DbSet<cc_crime_statistics_location> cc_crime_statistics_location { get; set; }
+        public virtual DbSet<company_third_level_type> company_third_level_type { get; set; }
+        public virtual DbSet<report_third_level_type> report_third_level_type { get; set; }
     }
 }
