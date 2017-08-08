@@ -224,35 +224,35 @@
                         margin-left: 12px;
                     }
                 </style>
-                <div class="contentViewReport blockAcceptCase" style="display: none;">
+                <div id="blockAcceptCase" class="contentViewReport blockAcceptCase" style="display: none;">
 
                     <table>
                         <tbody>
                             <tr>
-                                <td class="floatLeft"><p class="title">@GlobalRes.Acceptcase</p></td>
+                                <td class="floatLeft"><p class="header">@GlobalRes.Acceptcase</p></td>
                                 <td class="headerblockButtons"><div class="closeIcon"></div></td>
                             </tr>
 
                             <tr>
                                 <td>
                                     <!--table left-->
-                                    <table class="generalInformation">
+                                    <table class="">
                                         <tr>
-                                            <td>@GlobalRes.IncidentType:</td>
-                                            <td>
+                                            <td class="aroundSelect">@GlobalRes.IncidentType:</td>
+                                            <td class="inSelect">
                                                 @Html.DropDownList("IncidentId", new SelectList(allIncidets, "id", "secondary_type_en"), new { @class = "" })
                                             </td>
                                         </tr>
 
                                         <tr>
-                                            <td>@GlobalRes.Department: </td>
-                                            <td>
+                                            <td class="aroundSelect">@GlobalRes.Department: </td>
+                                            <td class="inSelect">
                                                 @Html.DropDownList("DepartmentId", new SelectList(allDepartments, "id", "department_en"), new { @class = "" })
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Scope:</td>
-                                            <td>
+                                            <td class="aroundSelect">@GlobalRes.Scope:</td>
+                                            <td class="inSelect">
                                                 @Html.DropDownList("ScopeId", new SelectList(allScopes, "id", "scope_en"), new { @class = "" })
                                             </td>
                                         </tr>
@@ -264,22 +264,22 @@
                                 </td>
                                 <td>
                                     <!--table right-->
-                                    <table class="generalInformation">
+                                    <table>
                                         <tr>
-                                            <td>@GlobalRes.Severity:</td>
-                                            <td>
+                                            <td class="aroundSelect">@GlobalRes.Severity:</td>
+                                            <td class="inSelect">
                                                 @Html.DropDownList("SeverityId", new SelectList(allSeverities, "id", "severity_en"), new { @class = "" })
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Issue Owner:</td>
-                                            <td>
+                                            <td class="aroundSelect">Issue Owner:</td>
+                                            <td class="inSelect">
                                                 @Html.DropDownList("OwnerId", new SelectList(allOwners, "Id", "FullName"), new { @class = "" })
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Policy:</td>
-                                            <td>
+                                            <td class="aroundSelect">Policy:</td>
+                                            <td class="linkPdf">
                                                 @foreach (var item in allPolicies)
                                                 {
                                                     <div>@item.Value</div>
@@ -293,7 +293,7 @@
                     </table>
                                
 
-                    <p>
+                    <p class="someAlert">
                         A campus alert will be sent to the designated Campus Security Authority for Purposes of the Clery Act.
                     </p>
                     <div style="padding: 20px;">

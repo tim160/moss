@@ -242,6 +242,47 @@ html, body {
 .contentViewReport.blockSpamCase, .contentViewReport.blockAcceptCase{
     padding-top: 41px;
 }
+#blockAcceptCase {
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+}
+#blockAcceptCase .header {
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+    color: #38494d;
+    font-size: 24px;
+}
+#blockAcceptCase .aroundSelect {
+    color: #727c7e;
+    font-size: 16px;
+}
+#blockAcceptCase .inSelect {
+    color: #3c3e3f;
+    font-size: 14px;
+}
+#blockAcceptCase select {
+    background-color: #f2f7f7;
+}
+#blockAcceptCase td {
+    padding-bottom: 40px;
+}
+#blockAcceptCase select:focus, input:focus{
+    outline: none;
+    border: none;
+}
+#blockAcceptCase select, input {
+    outline: none;
+    border: none;
+    padding-left: 17px;
+}
+#blockAcceptCase .linkPdf {
+    text-decoration: underline;
+    font-size: 14px;
+    color: #3c3e3f;
+    text-align: center;
+}
+#blockAcceptCase .someAlert {
+    font-size: 16px;
+    color: #727c7e;
+}
 .headerblockButtons .closeIcon {
     background: url(Icons/close.png);
     width: 14px;
