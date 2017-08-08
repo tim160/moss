@@ -9,7 +9,7 @@
 
 @{
     IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
-    
+
     bool? is_cc = ViewBag.is_cc;
     if (!is_cc.HasValue)
     {
@@ -49,7 +49,6 @@
     report_investigation_status ris = new report_investigation_status();
 }
 <body>
-    @*<link type="text/css" href="~/Content/caseTasks.css" rel="stylesheet">*@
     <link type="text/css" href="~/Content/caseTasks.css" rel="stylesheet">
 
     <div class="blockContent">
@@ -63,190 +62,187 @@
             <div id="slider">
                 <div class="reportIconWhite"></div>
             </div><!--end slider-->
-            <!--work began-->
-               
-                @Html.Partial("~/Views/Case/PartialView/GreenBarCaseResolutionRequest.cshtml")
+            @Html.Partial("~/Views/Case/PartialView/GreenBarCaseResolutionRequest.cshtml")
 
-                <div class="firstHeader2">
-                    <div id="casesHeared">
-                        <div id="menu">
-                            @Html.Partial("~/Views/PartialViews/_ReportTopMenu.cshtml",
+            <div class="firstHeader2">
+                <div id="casesHeared">
+                    <div id="menu">
+                        @Html.Partial("~/Views/PartialViews/_ReportTopMenu.cshtml",
                         new ViewDataDictionary { { "report_id", report_id },
                                                 { "user_id", user_id },
                                                 { "selected_item", 1 } ,{ "popup", popup } })
-                        </div>
-
                     </div>
+
                 </div>
+            </div>
 
 
 
-                        <!--work end-->
 
-                        <div class="blockTasks blockTasksSmallRight">
-                            @if (rm._investigation_status != ECGlobalConstants.investigation_status_closed)
+            <div class="blockTasks blockTasksSmallRight">
+                @if (rm._investigation_status != ECGlobalConstants.investigation_status_closed)
                 {
-                                <div class="blockCreateTask" style="display: none;">
-                                    <div class="headerCreateTask">
-                                        <span class="startTitle">@GlobalRes.Createnewtask.</span>
-                                        <span class="endTitle"> @GlobalRes.Dontforgettoassign!</span>
-                                        <label class="close"></label>
-                                    </div>
-                                    <div class="contentCreateTask">
-                                        <div class="createTaskTop">
-                                            <input type="text" maxlength="30" placeholder="Task name" name="task_name" />
-                                        </div>
-                                        <div class="createTaskBottom">
-                                            <input type="text" placeholder="Task description" name="task_description" />
-                                        </div>
+                    <div class="blockCreateTask" style="display: none;">
+                        <div class="headerCreateTask">
+                            <span class="startTitle">@GlobalRes.Createnewtask.</span>
+                            <span class="endTitle"> @GlobalRes.Dontforgettoassign!</span>
+                            <label class="close"></label>
+                        </div>
+                        <div class="contentCreateTask">
+                            <div class="createTaskTop">
+                                <input type="text" maxlength="30" placeholder="Task name" name="task_name" />
+                            </div>
+                            <div class="createTaskBottom">
+                                <input type="text" placeholder="Task description" name="task_description" />
+                            </div>
 
-                                        <div class="attachFile">
-                                            <output id="list"></output>
-                                        </div>
-                                    </div>
-                                    <div class="footerCreateTask">
-                                        <div class="hideCompletedBlock">
-                                            <span class="hideCompletedBtn attachFiles">
-                                                <span class="img"></span>
-                                                @GlobalRes.Attachfiles.ToLower()
-                                                @*<input type="file" id="files" name="files[]" multiple />*@
-                                            </span>
+                            <div class="attachFile">
+                                <output id="list"></output>
+                            </div>
+                        </div>
+                        <div class="footerCreateTask">
+                            <div class="hideCompletedBlock">
+                                <span class="hideCompletedBtn attachFiles">
+                                    <span class="img"></span>
+                                    @GlobalRes.Attachfiles.ToLower()
+                                    @*<input type="file" id="files" name="files[]" multiple />*@
+                                </span>
 
-                                            <input type="file" id="files" name="file1" multiple="multiple" style="display: none;" />
-                                        </div>
+                                <input type="file" id="files" name="file1" multiple="multiple" style="display: none;" />
+                            </div>
 
-                                        <form action="#" method="post" class="selectBlock">
-                                            <div class="tratata dropdown subject ">
-                                                <span class="selected">
+                            <form action="#" method="post" class="selectBlock">
+                                <div class="tratata dropdown subject ">
+                                    <span class="selected">
+                                        <img src='@Url.Content("~/Content/Icons/peopleBlockSelect.png")' />
+                                        <span>:   </span>
+                                        <span class="textSpan">@GlobalRes.AssignMediator.ToLower()</span>
+                                        <img src='@Url.Content("~/Content/Icons/arrowSelect.png")' />
+                                    </span>
+                                    <input type="hidden" name="subject" class="taskAssignTo" value="general">
+                                    <ul style="display: none;">
+                                        <li id="general" class="selected">
+                                            <div class="blockPhoto">
+                                                <div class="photoPersonal">
                                                     <img src='@Url.Content("~/Content/Icons/peopleBlockSelect.png")' />
-                                                    <span>:   </span>
-                                                    <span class="textSpan">@GlobalRes.AssignMediator.ToLower()</span>
-                                                    <img src='@Url.Content("~/Content/Icons/arrowSelect.png")' />
-                                                </span>
-                                                <input type="hidden" name="subject" class="taskAssignTo" value="general">
-                                                <ul style="display: none;">
-                                                    <li id="general" class="selected">
-                                                        <div class="blockPhoto">
-                                                            <div class="photoPersonal">
-                                                                <img src='@Url.Content("~/Content/Icons/peopleBlockSelect.png")' />
-                                                            </div>
-                                                        </div><!--blockPhoto-->
-                                                        <div class="aboutMediator">
-                                                            <label>@GlobalRes.Allmediators</label>
-                                                            <label></label>
-                                                        </div>
-                                                    </li>
-                                                    @foreach (user _user in _mediators_whoHasAccess_toReport)
+                                                </div>
+                                            </div><!--blockPhoto-->
+                                            <div class="aboutMediator">
+                                                <label>@GlobalRes.Allmediators</label>
+                                                <label></label>
+                                            </div>
+                                        </li>
+                                        @foreach (user _user in _mediators_whoHasAccess_toReport)
                                         {
-                                                        <li id=@_user.id>
-                                                            <div class="blockPhoto">
-                                                                <div class="photoPersonal">
-                                                                    @if (_user.photo_path.Trim() != "")
+                                            <li id=@_user.id>
+                                                <div class="blockPhoto">
+                                                    <div class="photoPersonal">
+                                                        @if (_user.photo_path.Trim() != "")
                                                         {
-                                                                        <img src='@Url.Content(_user.photo_path.Trim())' />
+                                                            <img src='@Url.Content(_user.photo_path.Trim())' />
                                                         }
                                                         else
                                                         {
-                                                                        <img src='@Url.Content("~/Content/Icons/noPhoto.png")' />
+                                                            <img src='@Url.Content("~/Content/Icons/noPhoto.png")' />
                                                         }
-                                                                </div>
-                                                            </div><!--blockPhoto-->
-                                                            <div class="aboutMediator">
-                                                                <label>@_user.first_nm @_user.last_nm</label>
-                                                                <label>@_user.title_ds</label>
-                                                            </div>
-
-                                                        </li>
-                                        }
-                                                </ul>
-
-                                            </div>
-                                        </form>
-
-                                        <div class="hideCompletedBlock">
-                                            <span class="hideCompletedBtn dueDateBtn">
-                                                <span class="img"></span>
-                                                <input type="text" id="datepicker" value="Due date">
-                                            </span>
-                                        </div>
-
-                                        <div class="createNewTaskBlock">
-                                            <span id="newButton" class="createNewTaskBtn createTask">@GlobalRes.Createtask.ToUpper()</span>
-                                        </div>
-
-                                    </div>
-                                </div>
-                }
-                            <div class="headTask">
-                                @if (tasks.Count > 0)
-                    {
-                                    <form action="#" method="post" class="selectBlock">
-                                        <div class="dropdown subject">
-                                            <span class="selected">
-                                                <img src='@Url.Content("~/Content/Icons/peopleBlockSelect.png")' />
-                                                <span>:   </span>
-                                                <span class="textSpan">@GlobalRes.SortByMediator</span>
-                                                <img src='@Url.Content("~/Content/Icons/arrowSelect.png")' />
-                                            </span>
-                                            <input type="hidden" name="subject" value="general">
-                                            <ul style="display: none;">
-                                                <li id="general" class="selected">
-                                                    <div class="blockPhoto">
-                                                        <div class="photoPersonal">
-                                                            <img src='@Url.Content("~/Content/Icons/peopleBlockSelect.png")' />
-                                                        </div>
-                                                    </div><!--blockPhoto-->
-                                                    <div class="aboutMediator">
-                                                        <label>@GlobalRes.Allmediators</label>
-                                                        <label></label>
                                                     </div>
-                                                </li>
-                                                @foreach (user _user in _mediators_whoHasAccess_toReport)
+                                                </div><!--blockPhoto-->
+                                                <div class="aboutMediator">
+                                                    <label>@_user.first_nm @_user.last_nm</label>
+                                                    <label>@_user.title_ds</label>
+                                                </div>
+
+                                            </li>
+                                        }
+                                    </ul>
+
+                                </div>
+                            </form>
+
+                            <div class="hideCompletedBlock">
+                                <span class="hideCompletedBtn dueDateBtn">
+                                    <span class="img"></span>
+                                    <input type="text" id="datepicker" value="Due date">
+                                </span>
+                            </div>
+
+                            <div class="createNewTaskBlock">
+                                <span id="newButton" class="createNewTaskBtn createTask">@GlobalRes.Createtask.ToUpper()</span>
+                            </div>
+
+                        </div>
+                    </div>
+                }
+                <div class="headTask">
+                    @if (tasks.Count > 0)
+                    {
+                        <form action="#" method="post" class="selectBlock">
+                            <div class="dropdown subject">
+                                <span class="selected">
+                                    <img src='@Url.Content("~/Content/Icons/peopleBlockSelect.png")' />
+                                    <span>:   </span>
+                                    <span class="textSpan">@GlobalRes.SortByMediator</span>
+                                    <img src='@Url.Content("~/Content/Icons/arrowSelect.png")' />
+                                </span>
+                                <input type="hidden" name="subject" value="general">
+                                <ul style="display: none;">
+                                    <li id="general" class="selected">
+                                        <div class="blockPhoto">
+                                            <div class="photoPersonal">
+                                                <img src='@Url.Content("~/Content/Icons/peopleBlockSelect.png")' />
+                                            </div>
+                                        </div><!--blockPhoto-->
+                                        <div class="aboutMediator">
+                                            <label>@GlobalRes.Allmediators</label>
+                                            <label></label>
+                                        </div>
+                                    </li>
+                                    @foreach (user _user in _mediators_whoHasAccess_toReport)
                                     {
-                                                    <li id=@_user.id>
-                                                        <div class="blockPhoto">
-                                                            <div class="photoPersonal">
-                                                                @if (_user.photo_path.Trim() != "")
+                                        <li id=@_user.id>
+                                            <div class="blockPhoto">
+                                                <div class="photoPersonal">
+                                                    @if (_user.photo_path.Trim() != "")
                                                     {
-                                                                    <img src='@Url.Content(_user.photo_path.Trim())' />
+                                                        <img src='@Url.Content(_user.photo_path.Trim())' />
                                                     }
                                                     else
                                                     {
-                                                                    <img src='@Url.Content("~/Content/Icons/noPhoto.png")' />
+                                                        <img src='@Url.Content("~/Content/Icons/noPhoto.png")' />
                                                     }
-                                                            </div>
-                                                        </div><!--blockPhoto-->
-                                                        <div class="aboutMediator">
-                                                            <label>@_user.first_nm @_user.last_nm</label>
-                                                            <label>@_user.title_ds</label>
-                                                        </div>
+                                                </div>
+                                            </div><!--blockPhoto-->
+                                            <div class="aboutMediator">
+                                                <label>@_user.first_nm @_user.last_nm</label>
+                                                <label>@_user.title_ds</label>
+                                            </div>
 
-                                                    </li>
+                                        </li>
                                     }
-                                            </ul>
+                                </ul>
 
-                                        </div>
-                                    </form>
+                            </div>
+                        </form>
                                     <div class="hideCompletedBlock">
                                         <span class="hideCompletedBtn">@GlobalRes.Hidecompleted</span>
                                     </div>
                     }
-                                @if (rm._investigation_status != ECGlobalConstants.investigation_status_closed)
+                    @if (rm._investigation_status != ECGlobalConstants.investigation_status_closed)
                     {
-                                    <div class="createNewTaskBlock">
-                                        <span class="createNewTaskBtn">@GlobalRes.Createnewtask.ToUpper()</span>
-                                    </div>
+                        <div class="createNewTaskBlock">
+                            <span class="createNewTaskBtn">@GlobalRes.Createnewtask.ToUpper()</span>
+                        </div>
                     }
-                            </div><!--headTask-->
-                            @if (tasks.Count > 0)
+                </div><!--headTask-->
+                @if (tasks.Count > 0)
                 {
-                                <div class="blockHeaderTask">
-                                    <div class="blockTitle">@GlobalRes.Taskname</div>
-                                    <div class="blockPeople">@GlobalRes.Assignedto</div>
-                                    <div class="date">@GlobalRes.ExpiryDate</div>
-                                </div><!--blockHeaderTask-->
+                    <div class="blockHeaderTask">
+                        <div class="blockTitle">@GlobalRes.Taskname</div>
+                        <div class="blockPeople">@GlobalRes.Assignedto</div>
+                        <div class="date">@GlobalRes.ExpiryDate</div>
+                    </div><!--blockHeaderTask-->
                 }
-                            @foreach (TaskExtended _task in tasks)
+                @foreach (TaskExtended _task in tasks)
                 {
                     _assignee = um.GetById(_task.TaskAssigneeID);
 
@@ -331,351 +327,352 @@
                         //@_task._task.title should be regular   Open Sans??
                     }
 
-                                <a href="/Case/Task/@_task.TaskID" class="blockTask @_task_grey">
-                                    <div class="contentBlockTask" style="position: relative">
+                    <a href="/Case/Task/@_task.TaskID" class="blockTask @_task_grey">
+                        <div class="contentBlockTask" style="position: relative">
 
-                                        <div class="blockTitle">
-                                            <span class="@_classCircle" style="@_styleCircle"></span>
-                                            <span class=@read_task style="@_styleText">@_task._task.title</span>
-                                            <span class="@littleDot_red"></span>
-                                        </div>
+                            <div class="blockTitle">
+                                <span class="@_classCircle" style="@_styleCircle"></span>
+                                <span class=@read_task style="@_styleText">@_task._task.title</span>
+                                <span class="@littleDot_red"></span>
+                            </div>
 
-                                        <div class="blockPeople">
-                                            @if (_assignee.photo_path.Trim() != "")
+                            <div class="blockPeople">
+                                @if (_assignee.photo_path.Trim() != "")
                                 {
-                                                <img src='@Url.Content(_assignee.photo_path.Trim())' />
+                                    <img src='@Url.Content(_assignee.photo_path.Trim())' />
                                 }
                                 else
                                 {
-                                                <img src='@Url.Content("~/Content/Icons/noPhoto.png")' />
+                                    <img src='@Url.Content("~/Content/Icons/noPhoto.png")' />
                                 }
-                                            <label class="name">@_assignee.first_nm @_assignee.last_nm</label>
-                                        </div>
-                                        @if (_task.file == true)
+                                <label class="name">@_assignee.first_nm @_assignee.last_nm</label>
+                            </div>
+                            @if (_task.file == true)
                             {
-                                            <div class="file">
-                                                <img src='@Url.Content("~/Content/Icons/fileCases.png")' />
-                                            </div>
+                                <div class="file">
+                                    <img src='@Url.Content("~/Content/Icons/fileCases.png")' />
+                                </div>
                             }
 
 
-                                        @if (_task.TaskDueDate.HasValue)
+                            @if (_task.TaskDueDate.HasValue)
                             {
-                                            <div class="date">@_task.TaskDueDateString</div>
+                                <div class="date">@_task.TaskDueDateString</div>
                             }
                             else
                             {
-                                            <div class="date">@GlobalRes.Willneverexpire</div>
+                                <div class="date">@GlobalRes.Willneverexpire</div>
                             }
-                                    </div>
-                                </a>
+                        </div>
+                    </a>
 
                 }
 
-                        </div><!--blockTasks-->
-                        <!--div id="rightRight" style="top:@flag;"-->
-                        <div id="rightRight">  @Html.Action("GetAjaxActivity", "Case", Html.Raw(report_id))
-                        </div>
-                    </div><!--rightBlockContent-->
+            </div><!--blockTasks-->
+            <!--div id="rightRight" style="top:@flag;"-->
+            <div id="rightRight">
+                @Html.Action("GetAjaxActivity", "Case", Html.Raw(report_id))
+            </div>
+        </div><!--rightBlockContent-->
 
     </div>
 
     <script type="text/javascript">
 
-    $(document).ready(function () {
-        $('.firstButton2').on('click',function(){
-            $('#files2').click();
-        });
-
-        function activeButtons(){
-            $('.headTask span.createNewTaskBtn').click(function () {
-                $('.blockCreateTask').show();
-                $('.headTask span.createNewTaskBtn').hide();
-            });
-            $('.headerCreateTask label.close').click(function () {
-                $('.blockCreateTask').hide();
-                $('.headTask span.createNewTaskBtn').show();
-            });
-            $('.attachFiles').on('click',function(){
-                $('#files').click();
+        $(document).ready(function () {
+            $('.firstButton2').on('click',function(){
+                $('#files2').click();
             });
 
-        }
+            function activeButtons(){
+                $('.headTask span.createNewTaskBtn').click(function () {
+                    $('.blockCreateTask').show();
+                    $('.headTask span.createNewTaskBtn').hide();
+                });
+                $('.headerCreateTask label.close').click(function () {
+                    $('.blockCreateTask').hide();
+                    $('.headTask span.createNewTaskBtn').show();
+                });
+                $('.attachFiles').on('click',function(){
+                    $('#files').click();
+                });
 
-        function handleFileSelect(evt) {
-            var files = evt.target.files; // FileList object
-
-            // files is a FileList of File objects. List some properties.
-            var output = [];
-            for (var i = 0, f; f = files[i]; i++) {
-                output.push('<li><span>', f.name, '</span> <img src="/Content/Icons/fileCases.png" /> </li>');
             }
-            document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
-        }
 
-        if(document.getElementById('files')) {
-            document.getElementById('files').addEventListener('change', handleFileSelect, false);
-        }
+            function handleFileSelect(evt) {
+                var files = evt.target.files; // FileList object
+
+                // files is a FileList of File objects. List some properties.
+                var output = [];
+                for (var i = 0, f; f = files[i]; i++) {
+                    output.push('<li><span>', f.name, '</span> <img src="/Content/Icons/fileCases.png" /> </li>');
+                }
+                document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
+            }
+
+            if(document.getElementById('files')) {
+                document.getElementById('files').addEventListener('change', handleFileSelect, false);
+            }
 
 
-        $(function() {
-            $( "#datepicker" ).datepicker({
-               minDate: "D"
+            $(function() {
+                $( "#datepicker" ).datepicker({
+                    minDate: "D"
+                });
             });
-        });
 
-        function createTaskStart(){
-            $('.createTask').click(function(){
-                var taskName = $('.createTaskTop input').val();
-                var taskDescription = $('.createTaskBottom input').val();
-                var taskAssignTo = $('.taskAssignTo').val();
-                var dueDate = $("#datepicker").val();
+            function createTaskStart(){
+                $('.createTask').click(function(){
+                    var taskName = $('.createTaskTop input').val();
+                    var taskDescription = $('.createTaskBottom input').val();
+                    var taskAssignTo = $('.taskAssignTo').val();
+                    var dueDate = $("#datepicker").val();
 
-                if(taskName.length > 0 && taskName.length < 30)
-                {
-                    $('.createTaskTop input').css('border', '');
-
-                    if(taskDescription.length > 0)
+                    if(taskName.length > 0 && taskName.length < 30)
                     {
-                        $('.createTaskBottom input').css('border', '');
-                        if((taskAssignTo != undefined) && (taskAssignTo != 'general'))
+                        $('.createTaskTop input').css('border', '');
+
+                        if(taskDescription.length > 0)
                         {
-                            var spamMessage = $('.spamMessage textarea').val()
-                            createNewTask(
-                                @Html.Raw(report_id),
-                                @Html.Raw(user_id),
-                                    taskName,
-                                    taskDescription,
-                                    taskAssignTo,
-                                    dueDate);
-                            $('.blockCreateTask').hide();
-                            $('.headTask span.createNewTaskBtn').show
+                            $('.createTaskBottom input').css('border', '');
+                            if((taskAssignTo != undefined) && (taskAssignTo != 'general'))
+                            {
+                                var spamMessage = $('.spamMessage textarea').val()
+                                createNewTask(
+                                    @Html.Raw(report_id),
+                                    @Html.Raw(user_id),
+                                        taskName,
+                                        taskDescription,
+                                        taskAssignTo,
+                                        dueDate);
+                                $('.blockCreateTask').hide();
+                                $('.headTask span.createNewTaskBtn').show
+                            }
+                            else
+                            {
+                                alert('@GlobalRes.Taskshouldbeassigned');
+                            }
                         }
                         else
                         {
-                            alert('@GlobalRes.Taskshouldbeassigned');
+                            $('.createTaskBottom input').css('border', '2px solid red');
+
                         }
                     }
                     else
                     {
-                        $('.createTaskBottom input').css('border', '2px solid red');
-
-                    }
-                }
-                else
-                {
-                    $('.createTaskTop input').css('border', '2px solid red');
-                }
-            });
-
-        }
-
-        function createNewTask(report_id, user_id, taskName, taskDescription, taskAssignTo, dueDate) {
-            var $input = $("#files");
-            var fd = new FormData;
-            for(var i = 0; i < $input.prop('files').length; i++)
-                fd.append('files', $input.prop('files')[i]);
-
-            fd.append('report_id', report_id);
-            fd.append('user_id', user_id);
-            fd.append('taskName',taskName);
-            fd.append('taskDescription',taskDescription);
-            fd.append('taskAssignTo',taskAssignTo);
-            fd.append('dueDate',dueDate);
-
-            $.ajax({
-                method: "POST",
-                contentType: false,
-                processData: false,
-                cache: false,
-                url: "/Case/CreateNewTask",
-                data: fd
-            }).done(function(data) {
-                var str = window.location.href;
-                window.location.href = str;
-            }).fail(function(error){
-                console.log(error);
-            });
-        }
-
-        function selectForName() {
-            var name = $('.headTask .selected .textSpan').text();
-            var showBlock = $('.headTask .hideCompletedBtn').text();
-
-            if (name != "All case administrators" && name != "Sort by Mediator") {
-                $('.blockTask.grey').hide();
-                $('.contentBlockTask .name').each(function (index, element) {
-                    var temp = $(element);
-                    if (temp.text() == name) {
-                        if (showBlock == "Show All") {
-                            temp_class_circle = temp.parents('.blockTask').find('.blockTitle').find('span:first-child').attr('class');
-                            if (temp_class_circle == "bigDot") {
-                                temp.parents('.blockTask.grey').show();
-                            }
-                            else if (temp_class_circle == "notShadedCircle") {
-                                temp.parents('.blockTask.grey').hide();
-                            }
-                        }
-                        else if (showBlock == "Hide completed") {
-                            temp.parents('.blockTask').show();
-                        }
-                    } else {
-                        temp.parents('.blockTask').hide();
+                        $('.createTaskTop input').css('border', '2px solid red');
                     }
                 });
+
             }
-            else {
-                $('.blockTask').show();
-                if (showBlock == "Show All") {
-                    $('.notShadedCircle').parents('.blockTask.grey').hide();
-                }
-                else if (showBlock == "Hide completed") {
-                    //$('.notShadedCircle').parents('.blockTask').show();
-                    $('.notShadedCircle').parents('.blockTask.grey').show();
-                }
+
+            function createNewTask(report_id, user_id, taskName, taskDescription, taskAssignTo, dueDate) {
+                var $input = $("#files");
+                var fd = new FormData;
+                for(var i = 0; i < $input.prop('files').length; i++)
+                    fd.append('files', $input.prop('files')[i]);
+
+                fd.append('report_id', report_id);
+                fd.append('user_id', user_id);
+                fd.append('taskName',taskName);
+                fd.append('taskDescription',taskDescription);
+                fd.append('taskAssignTo',taskAssignTo);
+                fd.append('dueDate',dueDate);
+
+                $.ajax({
+                    method: "POST",
+                    contentType: false,
+                    processData: false,
+                    cache: false,
+                    url: "/Case/CreateNewTask",
+                    data: fd
+                }).done(function(data) {
+                    var str = window.location.href;
+                    window.location.href = str;
+                }).fail(function(error){
+                    console.log(error);
+                });
             }
-        }
 
-        function showBlocks(buttonClick) {
-            if (buttonClick.text() == "Hide completed") {
-                buttonClick.text("Show All");
-            }
-            else if (buttonClick.text() == "Show All") {
-                buttonClick.text("Hide completed");
-            }
-            selectForName();
-        }
+            function selectForName() {
+                var name = $('.headTask .selected .textSpan').text();
+                var showBlock = $('.headTask .hideCompletedBtn').text();
 
-        function hideComplited(){
-            $('.headTask .hideCompletedBtn').click(function () {
-                showBlocks($(this));
-            });
-        }
-        //setDropdown();
-        function setDropdown() {
-            $('.dropdown').unbind('click');
-            $('.dropdown ul li').unbind('click');
-
-            $('.dropdown')
-            .on('click',
-            function () {
-                $(this).children('ul').slideToggle(150);
-                if ($(this).hasClass('open')) {
-                    $(this).removeClass('open');
-                    return false;
-                } else {
-                    $(this).addClass('open');
-                    return false;
-                }
-
-                return false;
-            })
-
-            .hover(
-            function () {
-
-            },
-            function () {
-                $(this).children('ul').slideUp(150);
-                $(this).removeClass('open');
-            });
-
-            $('.dropdown ul li')
-                    .click(
-                    function () {
-                        var sitem = $(this).html();
-                        var sid = $(this).attr('value');
-
-                        $(this).siblings('li').removeClass('selected');
-                        $(this).addClass('selected');
-                        $(this).parent('ul').siblings('span.selected').html(sitem);
-                        $(this).parent('ul').siblings('input').val(sid);
-                        $(this).parent('ul').parent('.subject').change();
-                        $(this).parent('ul').parent('.subject').find('.validate').change();
+                if (name != "All case administrators" && name != "Sort by Mediator") {
+                    $('.blockTask.grey').hide();
+                    $('.contentBlockTask .name').each(function (index, element) {
+                        var temp = $(element);
+                        if (temp.text() == name) {
+                            if (showBlock == "Show All") {
+                                temp_class_circle = temp.parents('.blockTask').find('.blockTitle').find('span:first-child').attr('class');
+                                if (temp_class_circle == "bigDot") {
+                                    temp.parents('.blockTask.grey').show();
+                                }
+                                else if (temp_class_circle == "notShadedCircle") {
+                                    temp.parents('.blockTask.grey').hide();
+                                }
+                            }
+                            else if (showBlock == "Hide completed") {
+                                temp.parents('.blockTask').show();
+                            }
+                        } else {
+                            temp.parents('.blockTask').hide();
+                        }
                     });
-        }
+                }
+                else {
+                    $('.blockTask').show();
+                    if (showBlock == "Show All") {
+                        $('.notShadedCircle').parents('.blockTask.grey').hide();
+                    }
+                    else if (showBlock == "Hide completed") {
+                        //$('.notShadedCircle').parents('.blockTask').show();
+                        $('.notShadedCircle').parents('.blockTask.grey').show();
+                    }
+                }
+            }
 
+            function showBlocks(buttonClick) {
+                if (buttonClick.text() == "Hide completed") {
+                    buttonClick.text("Show All");
+                }
+                else if (buttonClick.text() == "Show All") {
+                    buttonClick.text("Hide completed");
+                }
+                selectForName();
+            }
 
-        function dropdownWork(){
-            $('.dropdown')
-                .click(
+            function hideComplited(){
+                $('.headTask .hideCompletedBtn').click(function () {
+                    showBlocks($(this));
+                });
+            }
+            //setDropdown();
+            function setDropdown() {
+                $('.dropdown').unbind('click');
+                $('.dropdown ul li').unbind('click');
+
+                $('.dropdown')
+                .on('click',
                 function () {
-                    var thisElement = $(this);
-                    thisElement.children('ul').slideToggle(150);
-
-                    if (thisElement.hasClass('open')) {
-                        thisElement.removeClass('open');
-                        thisElement.hover(
-                            function () {
-                                $(this).find('span.selected img:first-child').attr('src', '/Content/Icons/peopleBlockSelectBlack.png');
-                            },
-                            function () {
-                                var thisElement = $(this);
-                                thisElement.children('ul').slideUp(150);
-                                thisElement.removeClass('open');
-                                thisElement.find('span.selected img:first-child').attr('src', '/Content/Icons/peopleBlockSelect.png');
-                            });
+                    $(this).children('ul').slideToggle(150);
+                    if ($(this).hasClass('open')) {
+                        $(this).removeClass('open');
                         return false;
                     } else {
-                        thisElement.addClass('open');
-                        thisElement.find('span.selected img:first-child').attr('src', '/Content/Icons/peopleBlockSelectBlue.png');
+                        $(this).addClass('open');
                         return false;
                     }
+
                     return false;
                 })
+
                 .hover(
                 function () {
-                    $(this).find('span.selected img:first-child').attr('src', '/Content/Icons/peopleBlockSelectBlack.png');
+
                 },
                 function () {
-                    var thisElement = $(this);
-                    thisElement.children('ul').slideUp(150);
-                    thisElement.removeClass('open');
-                    thisElement.find('span.selected img:first-child').attr('src', '/Content/Icons/peopleBlockSelect.png');
+                    $(this).children('ul').slideUp(150);
+                    $(this).removeClass('open');
                 });
-        }
-        function dropdownSelect(){
-            $('.dropdown ul li')
+
+                $('.dropdown ul li')
+                        .click(
+                        function () {
+                            var sitem = $(this).html();
+                            var sid = $(this).attr('value');
+
+                            $(this).siblings('li').removeClass('selected');
+                            $(this).addClass('selected');
+                            $(this).parent('ul').siblings('span.selected').html(sitem);
+                            $(this).parent('ul').siblings('input').val(sid);
+                            $(this).parent('ul').parent('.subject').change();
+                            $(this).parent('ul').parent('.subject').find('.validate').change();
+                        });
+            }
+
+
+            function dropdownWork(){
+                $('.dropdown')
                     .click(
                     function () {
                         var thisElement = $(this);
-                        var sitem = thisElement.find('.aboutMediator').find('label:first-child').text();
-                        var sid = thisElement.attr('id');
+                        thisElement.children('ul').slideToggle(150);
 
-                        thisElement.siblings('li').removeClass('selected');
-                        thisElement.addClass('selected');
-                        thisElement.parent('ul').siblings('span.selected').find('span.textSpan').text(sitem);
-                        thisElement.parent('ul').siblings('input').val(sid);
-                        selectForName();
+                        if (thisElement.hasClass('open')) {
+                            thisElement.removeClass('open');
+                            thisElement.hover(
+                                function () {
+                                    $(this).find('span.selected img:first-child').attr('src', '/Content/Icons/peopleBlockSelectBlack.png');
+                                },
+                                function () {
+                                    var thisElement = $(this);
+                                    thisElement.children('ul').slideUp(150);
+                                    thisElement.removeClass('open');
+                                    thisElement.find('span.selected img:first-child').attr('src', '/Content/Icons/peopleBlockSelect.png');
+                                });
+                            return false;
+                        } else {
+                            thisElement.addClass('open');
+                            thisElement.find('span.selected img:first-child').attr('src', '/Content/Icons/peopleBlockSelectBlue.png');
+                            return false;
+                        }
+                        return false;
+                    })
+                    .hover(
+                    function () {
+                        $(this).find('span.selected img:first-child').attr('src', '/Content/Icons/peopleBlockSelectBlack.png');
+                    },
+                    function () {
+                        var thisElement = $(this);
+                        thisElement.children('ul').slideUp(150);
+                        thisElement.removeClass('open');
+                        thisElement.find('span.selected img:first-child').attr('src', '/Content/Icons/peopleBlockSelect.png');
                     });
-        }
-        $(".positionActivityIcon").on('click', function() {
-            $("#rightRight").toggle(300);
+            }
+            function dropdownSelect(){
+                $('.dropdown ul li')
+                        .click(
+                        function () {
+                            var thisElement = $(this);
+                            var sitem = thisElement.find('.aboutMediator').find('label:first-child').text();
+                            var sid = thisElement.attr('id');
+
+                            thisElement.siblings('li').removeClass('selected');
+                            thisElement.addClass('selected');
+                            thisElement.parent('ul').siblings('span.selected').find('span.textSpan').text(sitem);
+                            thisElement.parent('ul').siblings('input').val(sid);
+                            selectForName();
+                        });
+            }
+            $(".positionActivityIcon").on('click', function() {
+                $("#rightRight").toggle(300);
+            });
+            $("#escalateTopBtn").on('click', function(el){
+
+                $("#approveDialog").toggle();
+
+                $("#escalate_btn").text("@Html.Raw(GlobalRes.Escalate)");
+                $("#escalate_btn").val(5);
+                $("#_overlay_title").text("@Html.Raw(GlobalRes.Escalation)");
+
+            });
+
+
+
+            activeButtons();
+
+            createTaskStart();
+            hideComplited();
+            dropdownWork();
+            dropdownSelect();
+            $(".closeCustom.flag").click();
+            $(".positionDropDown").on('click', function () {
+                $(".positionDropDown .flag").toggle();
+                $(".caseMediatorBig").slideToggle();
+            });
+            $(".positionDropDown").click();//show closed task default open
         });
-        $("#escalateTopBtn").on('click', function(el){
-
-            $("#approveDialog").toggle();
-
-            $("#escalate_btn").text("@Html.Raw(GlobalRes.Escalate)");
-            $("#escalate_btn").val(5);
-            $("#_overlay_title").text("@Html.Raw(GlobalRes.Escalation)");
-
-        });
-
-
-
-        activeButtons();
-
-        createTaskStart();
-        hideComplited();
-        dropdownWork();
-        dropdownSelect();
-        $(".closeCustom.flag").click();
-        $(".positionDropDown").on('click', function () {
-            $(".positionDropDown .flag").toggle();
-            $(".caseMediatorBig").slideToggle();
-        });
-        $(".positionDropDown").click();//show closed task default open
-    });
     </script>
 </body>

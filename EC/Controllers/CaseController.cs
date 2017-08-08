@@ -1136,9 +1136,11 @@ namespace EC.Controllers
         public ActionResult Attachments(int id)
         {
             ViewBag.rm = new ReportModel(id);
-            ViewBag.report_id = 649;
-            ViewBag.user_id = 2;
-            ViewBag.attachmentFiles = new List<attachment>();
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            ViewBag.report_id = id;
+            ViewBag.user_id = user.id;
+            ViewBag.attachmentFiles = getAttachmentFiles(id);
+            ViewBag.popup = null;
             return View();
         }
     }
