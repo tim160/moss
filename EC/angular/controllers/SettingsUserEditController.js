@@ -7,7 +7,7 @@
         .controller('SettingsUserEditController',
             ['$scope', '$filter', '$location', 'SettingsUserEditService', SettingsUserEditController]);
 
-    function SettingsUserEditController($scope, $filter, $location, SettingsUserEditService, SettingsUserEditController) {
+    function SettingsUserEditController($scope, $filter, $location, SettingsUserEditService) {
         $scope.first_nm = '';
         $scope.last_nm = '';
         $scope.title_ds = '';
@@ -70,7 +70,7 @@
                     role_id: $scope.role,
                     company_department_id: $scope.departmentId,
                 };
-                SettingsUserEditService.post(model, function (data) {
+                SettingsUserEditService.post(model, function () {
                     if ($scope.id !== 0) {
                         window.location = window.location;
                     } else {

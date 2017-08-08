@@ -33,7 +33,7 @@
             }
         };
 
-        $scope.categoryById = function (id) {
+        $scope.categoryById = function () {
             return category.industry_posters_en;
         };
 

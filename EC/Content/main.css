@@ -3195,6 +3195,7 @@ textarea {
   width: 200px;         
   background-color: #ccc;  
 }
+
 .makeButtonTextCenter {
     display: flex;
     align-items: center;
@@ -3202,4 +3203,83 @@ textarea {
 }
 .defaultHide {
     display: none;
+}
+
+#casesIndex {
+    background-color: #f2f7f7;
+    width: 100%;
+    height: auto;
+    padding-bottom: 60px;
+}
+
+    #casesIndex .positionTableCases {
+        padding-left: 41px;
+        padding-top: 40px;
+        padding-right: 29px;
+        padding-bottom: 111px;
+        background-color: #e5ebeb;
+    }
+
+    #casesIndex .tableCasesIndex {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        #casesIndex .tableCasesIndex thead {
+            background-color: #f2f7f7;
+            border: 1px solid #e0e5e6;
+        }
+
+        #casesIndex .tableCasesIndex thead {
+            background-color: #f2f7f7;
+            border: 0px 1px 1px 1px solid #e0e5e6;
+        }
+
+            #casesIndex .tableCasesIndex thead td {
+                border: none;
+                padding: 0;
+                margin: 0;
+            }
+
+        #casesIndex .tableCasesIndex tbody {
+            background-color: #ffffff;
+        }
+
+        #casesIndex .tableCasesIndex .firstColumn {
+            position: relative;
+        }
+
+        #casesIndex .tableCasesIndex :before .firstColumn {
+            position: absolute;
+            width: 3px;
+            height: 100%;
+            background-color: red;
+        }
+
+.squareIcon {
+    width: 8px;
+    height: 8px;
+    background: white;
+}
+
+.firstPositionSquareIcon {
+    top: 0px;
+    position: absolute;
+}
+
+.secondPositionSquareIcon {
+    position: absolute;
+    top: 13px;
+}
+
+.thirdPositionSquareIcon {
+    position: absolute;
+    top: 0px;
+    left: 13px;
+}
+
+.fourthPositionSquareIcon {
+    position: absolute;
+    top: 13px;
+    left: 13px;
 }
