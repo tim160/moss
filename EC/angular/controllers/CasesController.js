@@ -56,5 +56,9 @@
             });
         };
         $scope.refresh($scope.mode);
+
+        $scope.openCase = function (id) {
+            window.location ='/Case/Index/' + id;
+        };
     }
 }());

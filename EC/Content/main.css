@@ -3693,10 +3693,6 @@ textarea {
             height: 28px;
         }
 
-        #casesIndex .tableCasesIndex thead tr {
-            height: 28px;
-        }
-
         #casesIndex .tableCasesIndex thead td {
             text-transform: capitalize;
             border: none;
