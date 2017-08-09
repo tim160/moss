@@ -46,61 +46,9 @@ public class GlobalFunctions
         return password;
     }
 
-    public string GenerateCaseNumber(int report_id, int company_id, string company_name)
-    {
-        string letter = "EMP";
-        if (company_name.Length > 0)
-            letter = company_name[0].ToString().ToUpper();
-        if (company_id == 1)
-            letter = "UNK";
-        if (company_id == 2)
-            letter = "STA";
-        int number = 22000 + report_id;
-        string case_number = number.ToString() + "-" + letter + "-" + company_id.ToString();
-
-        return case_number;
-    }
-
-    public string GenerateReporterLogin(int report_id)
-    {
-        Random rd = new Random();
-        string reporter_login = "";
-
-        do
-        {
-            reporter_login = reporter_login + rd.Next(0, 9).ToString();
-        }
-        while (reporter_login.Length < 6);
-
-        //     ?while ((reporter_login.Length + report_id.ToString().Length) < 6);
-
-        return "EC" + reporter_login;
-    }
-
     #endregion
 
-    public string GetCountryNameByID(string country_id, int? language_id)
-    {
-        string country_nm = "";
-
-        var item = db.country.Find(country_id);
-        if (item != null)
-        {
-            //Record exists.Let's read the Name property value
-            country_nm = item.country_nm;
-
-        }
-
-        return country_nm;
-    }
-
-    public List<outcome> GetOutcomesWithStatus()
-    {
-        //[company_nm]
-        //return (from comp in db.company where comp.status_id == 2 select comp.company_nm, comp.id).ToList();
-        return db.outcome.Where(item => item.is_active == 1).ToList();
-    }
-
+    //Used in EC\Views\Shared\EditorTemplates\CreateTaskModal.cshtml 
     public List<case_closure_reason> GetCaseClosureReasonsWithStatus()
     {
         //[company_nm]
@@ -108,6 +56,10 @@ public class GlobalFunctions
         return db.case_closure_reason.Where(item => item.status_id == 2).ToList();
     }
 
+    //Used in 
+    //EC\Views\Case\Messages.cshtml 
+    //EC\Views\Case\PartialView\GreenBarCaseResolutionRequest.cshtml 
+    //EC\Views\Case\Team.cshtml
     public string GetOutcomeNameById(int id)
     {
         if (id != 0)
@@ -120,6 +72,11 @@ public class GlobalFunctions
             return "";
 
     }
+
+    //Used in 
+    //EC\Views\Case\Messages.cshtml 
+    //EC\Views\Case\PartialView\GreenBarCaseResolutionRequest.cshtml 
+    //EC\Views\Case\Team.cshtml
     public string GetCaseClosureReasonById(int id)
     {
         if (id != 0)
@@ -133,82 +90,15 @@ public class GlobalFunctions
 
     }
 
+    //used in
+    //EC\Views\Case\Activity.cshtml 
+    //EC\Views\Case\GetAjaxActivity.cshtml 
+    //EC\Views\Case\Task.cshtml 
+    //EC\Views\ReporterDashboard\Activity.cshtml
     public action GetActionById(int id)
     {
         return db.action.FirstOrDefault(item => item.id == id);
     }
-
-    #region mediators from company, who are involved or have access to report
-
-    /// <summary>
-    /// list of all reports user can access.
-    /// </summary>
-    /// <param name="user_id">just pass id of user to look for.</param>
-    /// <param name="company_id">pass null or 0 if you need all reports. Pass company_id if user_role=1,2,3 is looking for specific company</param>
-    /// <returns></returns>
-    public List<report> ReportsSearch(int user_id, int? company_id)
-    {
-        List<report> reports = new List<report>();
-
-        user _user = db.user.FirstOrDefault(item => item.id == user_id);
-
-        if ((_user != null) && (_user.id != 0))
-        {
-            // if user is from Ec - we can show all reports
-            if ((_user.role_id == 1) && (_user.role_id == 2) && (_user.role_id == 3))
-            {
-                if ((company_id.HasValue) && (company_id.Value != 0))
-                    reports = (db.report.Where(item => (item.company_id == company_id.Value))).ToList();
-                else
-                    reports = (db.report).ToList();
-
-            }
-            // if user is top mediator - we can show all reports from company where user is not involved
-            if ((_user.role_id == 4) || (_user.role_id == 5))
-            {
-                List<int> involved_report_ids = (db.report_mediator_involved.Where(item => (item.mediator_id == _user.id)).Select(item => item.report_id)).ToList();
-                reports = (db.report.Where(item => ((item.company_id == _user.company_id) && (!involved_report_ids.Contains(item.id))))).ToList();
-            }
-            // if user is regular mediator / legal - we show only reports where he is assigned and hide all others
-            if ((_user.role_id == 6) || (_user.role_id == 7))
-            {
-                List<int> assigned_report_ids = (db.report_mediator_assigned.Where(item => (item.mediator_id == _user.id)).Select(item => item.report_id)).ToList();
-                reports = (db.report.Where(item => assigned_report_ids.Contains(item.id))).ToList();
-            }
-
-            // if user is reporter - we can only show his report
-            if ((_user.role_id == 8))
-            {
-                reports = (db.report.Where(item => item.reporter_user_id == _user.id)).ToList();
-            }
-        }
-
-        return reports;
-    }
-
-    /// <summary>
-    /// report log ( report history for user) - 
-    /// </summary>
-    /// <param name="user_id"></param>
-    /// <param name="report_id"></param>
-    /// <returns></returns>
-    public List<report_log> ReportActivity(int user_id, int report_id)
-    {
-        // list of log string for report.
-        List<report_log> log = db.report_log.Where(item => item.report_id == report_id).ToList();
-
-        // nado izvlech descrition iz table action
-        // i 2 userza  _log.user_id - chel, kotorii sdelal deistvie
-        // i _log.second_user_id (int? - obichno net ego ) - 2-oi uzer, kotorogo mojet ne bit' - naprimer kogda odin mediator assing/remove drugogo
-
-        foreach (report_log _log in log)
-        {
-
-        }
-
-        return log;
-    }
-    #endregion
 
     /// <summary>
     /// 
@@ -301,28 +191,6 @@ public class GlobalFunctions
         }
     }
 
-    public void UpdateMessageRead(int user_id, int message_id)
-    {
-        message_user_read _user_read = new message_user_read();
-        _user_read.message_id = message_id;
-        _user_read.user_id = user_id;
-        _user_read.read_date = DateTime.Now;
-
-        if (!db.message_user_read.Any(item => ((item.user_id == user_id) && (item.message_id == message_id))))
-        {
-            db.message_user_read.Add(_user_read);
-            try
-            {
-                db.SaveChanges();
-                // need to save new row to _user_read about 
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex.ToString());
-            }
-        }
-    }
-
     /// <summary>
     /// 
     /// </summary>
@@ -367,12 +235,11 @@ public class GlobalFunctions
         //  if (!db.message_user_read.Any(item => ((item.user_id == user_id) && (item.message_id == message_id))))
         {
         }
-
-
     }
 
-
-    public void UpdateTaskCommentRead(int user_id, int task_comment_id)
+    //Used in
+    //EC\Views\Case\Task.cshtml 
+    public void UpdateTaskCommentRead2(int user_id, int task_comment_id)
     {
         task_comment_user_read _user_read = new task_comment_user_read();
         _user_read.task_comment_id = task_comment_id;
@@ -394,33 +261,6 @@ public class GlobalFunctions
         }
     }
     #endregion
-
-    public int GetNextColor(int company_id, int report_id)
-    {
-        int color_id = 1;
-
-        List<report> reports = new List<report>();
-
-
-        if (db.report.Any(item => ((item.company_id == company_id) && (item.id != report_id))))
-            reports = (db.report.Where(item => ((item.company_id == company_id) && (item.id != report_id))).OrderByDescending(item => item.id)).ToList();
-
-        if (reports.Count > 0)
-        {
-            report _report = reports[0];
-            color_id = _report.report_color_id;
-            int _all_colors_count = db.color.Count();
-
-            if (color_id < _all_colors_count)
-            {
-                color_id++;
-            }
-            else
-                color_id = 1;
-        }
-
-        return color_id;
-    }
 
     #region Analytics Helpers
 
@@ -2720,5 +2560,4 @@ public class GlobalFunctions
         }
         return String.Format("The password should be at least {0} characters long", PasswordLength.ToString());
     }
-
 }
