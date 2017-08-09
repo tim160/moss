@@ -1050,7 +1050,7 @@ namespace EC.Models
             }
         }
 
-        public bool ResolveCase(int report_id, int mediator_id, string description, int new_status, int? outcome_id, string outcome, int? reason_id, string executive_summary, string facts_established, string investigation_methodology, string description_outcome, string recommended_actions)
+        public bool ResolveCase(int report_id, int mediator_id, string description, int new_status, int? outcome_id, string outcome, int? reason_id, string executive_summary, string facts_established, string investigation_methodology, string description_outcome, string recommended_actions, int sign_off_mediator_id, bool? is_clery_act_crime, int crime_statistics_category_id, int crime_statistics_location_id)
         {
             try
             {
@@ -1112,9 +1112,23 @@ namespace EC.Models
 
                 db.report_investigation_status.Add(report_investigation_status);
 
-                report report = db.report.Where(item => (item.id == report_id)).FirstOrDefault();
-                report.status_id = 1;
-                report.last_update_dt = DateTime.Now;
+                report _report = db.report.Where(item => (item.id == report_id)).FirstOrDefault();
+                _report.status_id = 1;
+                _report.last_update_dt = DateTime.Now;
+
+                _report.cc_crime_statistics_category_id = null;
+                if (crime_statistics_category_id == 0)
+                    _report.cc_crime_statistics_category_id = crime_statistics_category_id;
+
+                _report.cc_crime_statistics_location_id = null;
+                if (crime_statistics_location_id == 0)
+                    _report.cc_crime_statistics_category_id = crime_statistics_location_id;
+
+                _report.cc_is_clear_act_crime = null;
+                if (is_clery_act_crime != null)
+                {
+                    _report.cc_is_clear_act_crime = is_clery_act_crime;
+                }
 
                 db.SaveChanges();
 

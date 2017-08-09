@@ -103,13 +103,20 @@
         if ($('#txtRecommendedActions').length > 0) {
             recommended_actions = $("#txtRecommendedActions").val();
         }
+
+        var sign_off_mediator_id = $("#ddlSignOffMediator").attr('data-value');
+        var is_clery_act_crime = $("#rblIsCleryActCrime").attr('data-value');
+        var crime_statistics_id = $("#ddlCrimeStatistics").attr('data-value');
+        var geographic_locations_id = $("#ddlGeographicLocations").attr('data-value');
+
              if (_report_id > 0 && user_id > 0 && promotion_value != "") {
                 $.ajax({
                     method: "POST",
                     url: "/Case/CloseCase",
                     data: {
                         user_id: user_id, report_id: _report_id, description: description, promotion_value: promotion_value, outcome_id: outcome_id, outcome: '',
-                        case_closure_reason_id: reason_id, executive_summary: executive_summary, facts_established: facts_established, investigation_methodology: investigation_methodology, description_outcome: description_outcome, recommended_actions: recommended_actions
+                        case_closure_reason_id: reason_id, executive_summary: executive_summary, facts_established: facts_established, investigation_methodology: investigation_methodology, description_outcome: description_outcome, recommended_actions: recommended_actions,
+                        sign_off_mediator_id: sign_off_mediator_id, is_clery_act_crime: is_clery_act_crime, crime_statistics_id: crime_statistics_id, geographic_locations_id: geographic_locations_id
                     }
                 }).done(function (data) {//data from server
 
