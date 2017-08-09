@@ -294,8 +294,8 @@
                                
 
                     <p class="someAlert">
-                        A campus alert will be sent to the designated Campus Security Authority for Purposes of the Clery Act.
-                    </p>
+                        Does this incident represent a threat to the health or safety of students or employees on the campus?
+                     </p>
                     <div style="padding: 20px;">
                         <label class="inputBlock" for="Anonymous">
                             <input id="Anonymous" type="radio" name="stay" value="Anonymous">
@@ -307,7 +307,9 @@
                             <span class="radioButton"></span>
                             <span class="radioTitle">No</span>
                         </label>
-
+                        <p class="someAlert">
+                            A campus alert will be sent to the designated Campus Security Authority for Purposes of the Clery Act.
+                        </p>
                     </div>
                     <div class="addComment addComment2@{@class_ext}">
                         <div class="blockPersonal">
@@ -495,7 +497,7 @@
                     {
                         <table class="generalInformation">
                             <tr>
-                                <td>@LocalizationGetter.GetString("Mediatorsinvolved", is_cc)</td>
+                                <td>@Resources.GetString("Mediatorsinvolved", is_cc)</td>
                                 <td>&nbsp;</td>
                             </tr>
                             @foreach (user mediators_involved in rm._involved_mediators_user_list)

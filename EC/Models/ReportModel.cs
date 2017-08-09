@@ -1203,11 +1203,11 @@ namespace EC.Models
                     newUser = adv.user.Add(newUser);
                     int t = 0;
                     t = adv.SaveChanges();
-                    string reporter_login = glb.GenerateReporterLogin(newUser.id);
+                    string reporter_login = GenerateReporterLogin(newUser.id);
 
                     while (glb.isLoginInUse(reporter_login))
                     {
-                        reporter_login = glb.GenerateReporterLogin(newUser.id);
+                        reporter_login = GenerateReporterLogin(newUser.id);
                     }
 
                     newUser.login_nm = reporter_login;
@@ -1219,8 +1219,8 @@ namespace EC.Models
                     currentReport = adv.report.Add(currentReport);
                     t = adv.SaveChanges();
                     //  t = db.SaveChanges();
-                    currentReport.display_name = gfFunctions.GenerateCaseNumber(currentReport.id, currentReport.company_id, currentReport.company_nm);
-                    currentReport.report_color_id = gfFunctions.GetNextColor(currentReport.company_id, currentReport.id);
+                    currentReport.display_name = GenerateCaseNumber(currentReport.id, currentReport.company_id, currentReport.company_nm);
+                    currentReport.report_color_id = GetNextColor(currentReport.company_id, currentReport.id);
                     t = adv.SaveChanges();
 
                     if (getAttachment != null)
@@ -2191,6 +2191,64 @@ namespace EC.Models
             }
 
             return _green_bar_status;
+        }
+
+        private string GenerateCaseNumber(int report_id, int company_id, string company_name)
+        {
+            string letter = "EMP";
+            if (company_name.Length > 0)
+                letter = company_name[0].ToString().ToUpper();
+            if (company_id == 1)
+                letter = "UNK";
+            if (company_id == 2)
+                letter = "STA";
+            int number = 22000 + report_id;
+            string case_number = number.ToString() + "-" + letter + "-" + company_id.ToString();
+
+            return case_number;
+        }
+
+        private string GenerateReporterLogin(int report_id)
+        {
+            Random rd = new Random();
+            string reporter_login = "";
+
+            do
+            {
+                reporter_login = reporter_login + rd.Next(0, 9).ToString();
+            }
+            while (reporter_login.Length < 6);
+
+            //     ?while ((reporter_login.Length + report_id.ToString().Length) < 6);
+
+            return "EC" + reporter_login;
+        }
+
+        private int GetNextColor(int company_id, int report_id)
+        {
+            int color_id = 1;
+
+            List<report> reports = new List<report>();
+
+
+            if (db.report.Any(item => ((item.company_id == company_id) && (item.id != report_id))))
+                reports = (db.report.Where(item => ((item.company_id == company_id) && (item.id != report_id))).OrderByDescending(item => item.id)).ToList();
+
+            if (reports.Count > 0)
+            {
+                report _report = reports[0];
+                color_id = _report.report_color_id;
+                int _all_colors_count = db.color.Count();
+
+                if (color_id < _all_colors_count)
+                {
+                    color_id++;
+                }
+                else
+                    color_id = 1;
+            }
+
+            return color_id;
         }
     }
 }

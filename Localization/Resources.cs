@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Reflection;
 using System.Resources;
 using System.Text;
-
+using EC;
 namespace EC.Localization
 {
     public class Resources
@@ -61,19 +61,37 @@ namespace EC.Localization
         {
             try
             {
-                ResourceManager rm = GetResourceManager(callingAssembly);
-                if (rm == null) return key;
-                if(is_cc) { key = key + "_CC"; }
+                if (is_cc) { key = key + "_CC"; }
+                string value = App_GlobalResources.Resources.ResourceManager.GetString(key);
 
-                string value = rm.GetString(key, culture);
                 if (value != null)
                     return value;
                 else
                     return key;
+
+
+                /*
+                EC_App_LocalResources_GlobalRes_resources res = new EC_App_LocalResources_GlobalRes_resources();
+                 
+                ///       EC.Localization.EC_App_LocalResources_GlobalRes_resources.NewReportUp rm = new EC_App_LocalResources_GlobalRes_resources.ResourceManager();
+              ////  value = Resources.ResourceManager.GetObject(fileName, Properties.Resources.Culture);
+          ResourceManager rm = GetResourceManager(callingAssembly);
+
+
+
+
+           /////     if (rm == null) return key;
+                if(is_cc) { key = key + "_CC"; }
+                string value = EC_App_LocalResources_GlobalRes_resources.ResourceManager.GetString(key);
+            ///    string value = rm.GetString(key, culture);
+                if (value != null)
+                    return value;
+                else
+                    return key;*/
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return "[" + key + ": Failed to retrieve resource string]";
+                return key;// "[" + key + ": Failed to retrieve resource string]";
             }
         }
 
