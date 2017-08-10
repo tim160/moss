@@ -235,7 +235,7 @@ namespace EC.Controllers.ViewModel
             int departmentId = Convert.ToInt32(Request["departmentId"]);
             int incidentId = Convert.ToInt32(Request["incidentId"]);
             int ownerId = Convert.ToInt32(Request["ownerId"]);
-
+            bool lifeThreat = Convert.ToBoolean(Request["isLifeThreat"]);
 
             report_investigation_status addStatus =
                 new report_investigation_status()
@@ -257,6 +257,9 @@ namespace EC.Controllers.ViewModel
             report.severity_id = severityId;
             report.severity_user_id = user.id;
             report.scope_user_id = user.id;
+            report.cc_is_life_threating = lifeThreat;
+            report.cc_is_life_threating_created_date = DateTime.Now;
+            report.cc_is_life_threating_user_id = user.id;
             db.SaveChanges();
 
 
