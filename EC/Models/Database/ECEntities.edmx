@@ -83,6 +83,8 @@
           <Property Name="last_update_dt" Type="smalldatetime" Nullable="false" />
           <Property Name="user_id" Type="int" Nullable="false" />
           <Property Name="report_task_message_id" Type="int" />
+          <Property Name="visible_reporter" Type="bit" />
+          <Property Name="visible_mediators_only" Type="bit" />
         </EntityType>
         <EntityType Name="billing_option">
           <Key>
@@ -392,11 +394,11 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="client_id" Type="int" />
           <Property Name="company_id" Type="int" Nullable="false" />
-          <Property Name="secondary_type_id" Type="int" />
           <Property Name="third_level_type_name_en" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="third_level_type_name_fr" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="third_level_type_name_es" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="status_id" Type="int" Nullable="false" />
+          <Property Name="company_secondary_type_id" Type="int" />
         </EntityType>
         <EntityType Name="company_type">
           <Key>
@@ -816,6 +818,12 @@
           <Property Name="cc_crime_statistics_category_id" Type="int" />
           <Property Name="cc_crime_statistics_location_id" Type="int" />
           <Property Name="report_by_myself" Type="bit" Nullable="false" />
+          <Property Name="cc_is_life_threating" Type="bit" />
+          <Property Name="cc_is_life_threating_user_id" Type="int" />
+          <Property Name="cc_is_life_threating_created_date" Type="smalldatetime" />
+          <Property Name="signoff_mediator_id" Type="int" />
+          <Property Name="signoff_created_by_user_id" Type="int" />
+          <Property Name="signoff_created_date" Type="smalldatetime" />
         </EntityType>
         <EntityType Name="report_department">
           <Key>
@@ -1576,6 +1584,8 @@
           <Property Name="last_update_dt" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="user_id" Type="Int32" Nullable="false" />
           <Property Name="report_task_message_id" Type="Int32" />
+          <Property Name="visible_reporter" Type="Boolean" />
+          <Property Name="visible_mediators_only" Type="Boolean" />
         </EntityType>
         <EntityType Name="billing_option">
           <Key>
@@ -2196,6 +2206,12 @@
           <Property Name="cc_crime_statistics_category_id" Type="Int32" />
           <Property Name="cc_crime_statistics_location_id" Type="Int32" />
           <Property Name="report_by_myself" Type="Boolean" Nullable="false" />
+          <Property Name="cc_is_life_threating" Type="Boolean" />
+          <Property Name="cc_is_life_threating_user_id" Type="Int32" />
+          <Property Name="cc_is_life_threating_created_date" Type="DateTime" Precision="0" />
+          <Property Name="signoff_mediator_id" Type="Int32" />
+          <Property Name="signoff_created_by_user_id" Type="Int32" />
+          <Property Name="signoff_created_date" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="report_department">
           <Key>
@@ -2954,11 +2970,11 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="client_id" Type="Int32" />
           <Property Name="company_id" Type="Int32" Nullable="false" />
-          <Property Name="secondary_type_id" Type="Int32" />
           <Property Name="third_level_type_name_en" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="third_level_type_name_fr" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="third_level_type_name_es" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="status_id" Type="Int32" Nullable="false" />
+          <Property Name="company_secondary_type_id" Type="Int32" />
         </EntityType>
         <EntityType Name="report_third_level_type">
           <Key>
@@ -3041,6 +3057,8 @@
           <EntitySetMapping Name="attachment">
             <EntityTypeMapping TypeName="ECModel.attachment">
               <MappingFragment StoreEntitySet="attachment">
+                <ScalarProperty Name="visible_mediators_only" ColumnName="visible_mediators_only" />
+                <ScalarProperty Name="visible_reporter" ColumnName="visible_reporter" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="report_id" ColumnName="report_id" />
                 <ScalarProperty Name="report_message_id" ColumnName="report_message_id" />
@@ -3647,6 +3665,12 @@
           <EntitySetMapping Name="report">
             <EntityTypeMapping TypeName="ECModel.report">
               <MappingFragment StoreEntitySet="report">
+                <ScalarProperty Name="signoff_created_date" ColumnName="signoff_created_date" />
+                <ScalarProperty Name="signoff_created_by_user_id" ColumnName="signoff_created_by_user_id" />
+                <ScalarProperty Name="signoff_mediator_id" ColumnName="signoff_mediator_id" />
+                <ScalarProperty Name="cc_is_life_threating_created_date" ColumnName="cc_is_life_threating_created_date" />
+                <ScalarProperty Name="cc_is_life_threating_user_id" ColumnName="cc_is_life_threating_user_id" />
+                <ScalarProperty Name="cc_is_life_threating" ColumnName="cc_is_life_threating" />
                 <ScalarProperty Name="report_by_myself" ColumnName="report_by_myself" />
                 <ScalarProperty Name="cc_crime_statistics_location_id" ColumnName="cc_crime_statistics_location_id" />
                 <ScalarProperty Name="cc_crime_statistics_category_id" ColumnName="cc_crime_statistics_category_id" />
@@ -4298,11 +4322,11 @@
           <EntitySetMapping Name="company_third_level_type">
             <EntityTypeMapping TypeName="ECModel.company_third_level_type">
               <MappingFragment StoreEntitySet="company_third_level_type">
+                <ScalarProperty Name="company_secondary_type_id" ColumnName="company_secondary_type_id" />
                 <ScalarProperty Name="status_id" ColumnName="status_id" />
                 <ScalarProperty Name="third_level_type_name_es" ColumnName="third_level_type_name_es" />
                 <ScalarProperty Name="third_level_type_name_fr" ColumnName="third_level_type_name_fr" />
                 <ScalarProperty Name="third_level_type_name_en" ColumnName="third_level_type_name_en" />
-                <ScalarProperty Name="secondary_type_id" ColumnName="secondary_type_id" />
                 <ScalarProperty Name="company_id" ColumnName="company_id" />
                 <ScalarProperty Name="client_id" ColumnName="client_id" />
                 <ScalarProperty Name="id" ColumnName="id" />

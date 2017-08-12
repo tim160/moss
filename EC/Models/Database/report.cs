@@ -75,6 +75,12 @@ namespace EC.Models.Database
         public Nullable<int> cc_crime_statistics_category_id { get; set; }
         public Nullable<int> cc_crime_statistics_location_id { get; set; }
         public bool report_by_myself { get; set; }
+        public Nullable<bool> cc_is_life_threating { get; set; }
+        public Nullable<int> cc_is_life_threating_user_id { get; set; }
+        public Nullable<System.DateTime> cc_is_life_threating_created_date { get; set; }
+        public Nullable<int> signoff_mediator_id { get; set; }
+        public Nullable<int> signoff_created_by_user_id { get; set; }
+        public Nullable<System.DateTime> signoff_created_date { get; set; }
     
         public virtual management_know management_know { get; set; }
         public virtual user user { get; set; }

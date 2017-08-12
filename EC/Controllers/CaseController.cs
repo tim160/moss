@@ -1184,15 +1184,71 @@ namespace EC.Controllers
        
             return 1;
         }
+
         public ActionResult Attachments(int id)
         {
-            ViewBag.rm = new ReportModel(id);
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            // DEBUG
+            //user = user ?? db.user.FirstOrDefault(x => x.id == 2);
+            //
+            if (user == null || user.id == 0)
+                return RedirectToAction("Index", "Account");
+
+            ViewBag.rm = new ReportModel(id);
             ViewBag.report_id = id;
             ViewBag.user_id = user.id;
             ViewBag.attachmentFiles = getAttachmentFiles(id);
             ViewBag.popup = null;
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Attachments(int id, string mode, string type)
+        {
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            // DEBUG
+            //user = user ?? db.user.FirstOrDefault(x => x.id == 2);
+            //
+            if (user == null || user.id == 0)
+                return RedirectToAction("Index", "Account");
+
+            if (mode == "upload")
+            {
+                for(int i = 0; i < Request.Files.Count; i++)
+                {
+                    var file = Request.Files[i];
+                    var report = db.report.FirstOrDefault(x => x.id == id);
+
+                    var a = new attachment();
+                    a.file_nm = file.FileName;
+                    a.extension_nm = System.IO.Path.GetExtension(file.FileName);
+                    a.path_nm = "";
+                    a.report_id = id;
+                    a.status_id = 2;
+                    a.effective_dt = DateTime.Now;
+                    a.expiry_dt = DateTime.Now;
+                    a.last_update_dt = DateTime.Now;
+                    a.user_id = user.id;
+
+                    a.visible_reporter = type == "reporter" ? true : false;
+                    a.visible_mediators_only = type == "staff" ? true : false;
+
+                    db.attachment.Add(a);
+                    db.SaveChanges();
+
+                    var dir = Server.MapPath(String.Format("~/upload/reports/{0}", report.display_name));
+                    var filename = String.Format("{0}_{1}{2}", user.id, DateTime.Now.Ticks, System.IO.Path.GetExtension(file.FileName));
+                    a.path_nm = String.Format("\\upload\\reports\\{0}\\{1}", report.display_name, filename);
+                    db.SaveChanges();
+
+                    if (!System.IO.Directory.Exists(dir))
+                    {
+                        System.IO.Directory.CreateDirectory(dir);
+                    }
+                    file.SaveAs(string.Format("{0}\\{1}", dir, filename));
+                }
+            }
+            return RedirectToAction("Attachments", new { id = id});
         }
     }
 }

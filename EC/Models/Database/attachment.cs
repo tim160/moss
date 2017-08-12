@@ -27,5 +27,7 @@ namespace EC.Models.Database
         public System.DateTime last_update_dt { get; set; }
         public int user_id { get; set; }
         public Nullable<int> report_task_message_id { get; set; }
+        public Nullable<bool> visible_reporter { get; set; }
+        public Nullable<bool> visible_mediators_only { get; set; }
     }
 }

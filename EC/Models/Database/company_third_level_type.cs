@@ -17,10 +17,10 @@ namespace EC.Models.Database
         public int id { get; set; }
         public Nullable<int> client_id { get; set; }
         public int company_id { get; set; }
-        public Nullable<int> secondary_type_id { get; set; }
         public string third_level_type_name_en { get; set; }
         public string third_level_type_name_fr { get; set; }
         public string third_level_type_name_es { get; set; }
         public int status_id { get; set; }
+        public Nullable<int> company_secondary_type_id { get; set; }
     }
 }
