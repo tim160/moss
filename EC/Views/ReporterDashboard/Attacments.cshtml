@@ -1,0 +1,86 @@
+﻿@using EC.Models;
+@using EC.Models.Database;
+@using EC.App_LocalResources;
+@{
+    ViewBag.Title = GlobalRes.Activity;
+    Layout = "~/Views/Shared/IndexPages/ReporterDashboard.cshtml";
+    int user_id = (Int32)ViewBag.user_id;
+    int report_id = (Int32)ViewBag.report_id;
+    ReportModel rm = new ReportModel(report_id);
+    UserModel um = new UserModel(user_id);
+    int unread_message_number = um.Unread_Messages_Quantity(report_id, 1);
+}
+@if ((rm._report != null) && (rm._report.id != 0))
+{
+    <div class="settingMenu">
+        <div class="settingMenuItems">
+            <h2 class="mainTitle">@GlobalRes.Menu:</h2>
+            <div>
+                <a href="/ReporterDashboard/Index/@user_id" class="menuItem" style="padding-right:14px;">@GlobalRes.ReportSummaryUp</a>
+                @if (unread_message_number > 0)
+                {
+                    <a href="/ReporterDashboard/Messages/@user_id" class="menuItem" style="padding-right:15px;">
+                        @GlobalRes.Messages
+                        <span>@unread_message_number</span>
+                    </a>
+                }
+                else
+                {
+                    <a href="/ReporterDashboard/Messages/@user_id" class="menuItem" style="padding-right:50px;">
+                        @GlobalRes.Messages
+                    </a>
+                }
+                <a href="/ReporterDashboard/Activity/@user_id" class="menuItem ">@GlobalRes.Activity</a>
+                <a href="/ReporterDashboard/Attacments/@user_id" class="menuItem settings active" style="margin-right:-2px;">@GlobalRes.Attacments</a>
+            </div>
+        </div>
+    </div><!--settingMenu-->
+
+    <div id="attachmentPage">
+
+        <div class="dragAndDropContainer">
+            <div class="dottedContainer">
+                <p class="semiboldText">Drag and drop files here</p>
+                <p class="secondSemiboldText">or</p>
+                <div>
+                    <div class="selectFiles">
+                        select files to upload
+                    </div>
+                    <input type="file" name="files" multiple="" style="display: none;">
+                </div>
+
+            </div>
+            <input type="submit" name="Submit" id="Submit" value="Upload">
+        </div>
+
+        <table>
+            <tbody>
+                <tr>
+                    <td class="image">
+                        <img src="/Content/Icons/viewDoc2.png">
+                    </td>
+                    <td class="customWidth">
+                        <p class="secondRow">
+                        </p><div class="secondRowReporter">Anonimous reporter</div>
+
+                        <p></p>
+                    </td>
+                    <td>
+                        <p class="recipient">
+                            FOR STAFF
+                        </p>
+                    </td>
+                    <td>
+                        <p class="date">
+                            23 Feb
+                        </p>
+                        <p class="download">
+                            <a href="\upload\reports\22737-STA-2\2_636382106584653272">download</a>
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+}

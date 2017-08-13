@@ -367,5 +367,15 @@ namespace EC.Controllers
             }
             return false;
         }
+
+        public ActionResult Attacments(int id)
+        {
+            UserModel um = new UserModel(id);
+            int report_id = um._reporter_report_id;
+            ViewBag.report_id = report_id;
+            ViewBag.user_id = id;
+
+            return View();
+        }
     }
 } 
