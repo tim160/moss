@@ -1236,9 +1236,9 @@ namespace EC.Controllers
                     db.attachment.Add(a);
                     db.SaveChanges();
 
-                    var dir = Server.MapPath(String.Format("~/upload/reports/{0}", report.display_name));
+                    var dir = Server.MapPath(String.Format("~/upload/reports/{0}", report.guid));
                     var filename = String.Format("{0}_{1}{2}", user.id, DateTime.Now.Ticks, System.IO.Path.GetExtension(file.FileName));
-                    a.path_nm = String.Format("\\upload\\reports\\{0}\\{1}", report.display_name, filename);
+                    a.path_nm = String.Format("\\upload\\reports\\{0}\\{1}", report.guid, filename);
                     db.SaveChanges();
 
                     if (!System.IO.Directory.Exists(dir))

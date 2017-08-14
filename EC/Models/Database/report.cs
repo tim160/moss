@@ -81,6 +81,7 @@ namespace EC.Models.Database
         public Nullable<int> signoff_mediator_id { get; set; }
         public Nullable<int> signoff_created_by_user_id { get; set; }
         public Nullable<System.DateTime> signoff_created_date { get; set; }
+        public System.Guid guid { get; set; }
     
         public virtual management_know management_know { get; set; }
         public virtual user user { get; set; }

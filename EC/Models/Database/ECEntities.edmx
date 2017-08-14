@@ -824,6 +824,7 @@
           <Property Name="signoff_mediator_id" Type="int" />
           <Property Name="signoff_created_by_user_id" Type="int" />
           <Property Name="signoff_created_date" Type="smalldatetime" />
+          <Property Name="guid" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="report_department">
           <Key>
@@ -2212,6 +2213,7 @@
           <Property Name="signoff_mediator_id" Type="Int32" />
           <Property Name="signoff_created_by_user_id" Type="Int32" />
           <Property Name="signoff_created_date" Type="DateTime" Precision="0" />
+          <Property Name="guid" Type="Guid" Nullable="false" />
         </EntityType>
         <EntityType Name="report_department">
           <Key>
@@ -3665,6 +3667,7 @@
           <EntitySetMapping Name="report">
             <EntityTypeMapping TypeName="ECModel.report">
               <MappingFragment StoreEntitySet="report">
+                <ScalarProperty Name="guid" ColumnName="guid" />
                 <ScalarProperty Name="signoff_created_date" ColumnName="signoff_created_date" />
                 <ScalarProperty Name="signoff_created_by_user_id" ColumnName="signoff_created_by_user_id" />
                 <ScalarProperty Name="signoff_mediator_id" ColumnName="signoff_mediator_id" />
