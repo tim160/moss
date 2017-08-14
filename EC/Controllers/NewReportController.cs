@@ -229,15 +229,16 @@ namespace EC.Controllers.ViewModel
         {
             int report_id = Convert.ToInt16(Request["report_id"]);
             int user_id = Convert.ToInt16(Request["user_id"]);
-            string description = Request["description"];
+            string description = "";// Request["description"];
             int scopeId = Convert.ToInt32(Request["scopeId"]);
             int severityId = Convert.ToInt32(Request["severityId"]);
             int departmentId = Convert.ToInt32(Request["departmentId"]);
             int incidentId = Convert.ToInt32(Request["incidentId"]);
             int ownerId = Convert.ToInt32(Request["ownerId"]);
             bool lifeThreat = Convert.ToBoolean(Request["isLifeThreat"]);
-
-            report_investigation_status addStatus =
+            using (ECEntities adv = new ECEntities())
+            { 
+                report_investigation_status addStatus =
                 new report_investigation_status()
                 {
                     report_id = report_id,
@@ -247,22 +248,24 @@ namespace EC.Controllers.ViewModel
                     description = description
                 };
 
-            db.report_investigation_status.Add(addStatus);
-            db.SaveChanges();
+                adv.report_investigation_status.Add(addStatus);
+                adv.SaveChanges();
+            }
+            using (ECEntities adv = new ECEntities())
+            {
+                user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
 
-            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+                var report = adv.report.FirstOrDefault(x => x.id == report_id);
+                report.scope_id = scopeId;
+                report.severity_id = severityId;
+                report.severity_user_id = user.id;
+                report.scope_user_id = user.id;
+                report.cc_is_life_threating = lifeThreat;
+                report.cc_is_life_threating_created_date = DateTime.Now;
+                report.cc_is_life_threating_user_id = user.id;
+                adv.SaveChanges();
 
-            var report = db.report.FirstOrDefault(x => x.id == report_id);
-            report.scope_id = scopeId;
-            report.severity_id = severityId;
-            report.severity_user_id = user.id;
-            report.scope_user_id = user.id;
-            report.cc_is_life_threating = lifeThreat;
-            report.cc_is_life_threating_created_date = DateTime.Now;
-            report.cc_is_life_threating_user_id = user.id;
-            db.SaveChanges();
-
-
+            }
             // Case accepted
             glb.UpdateReportLog(user_id, 17, report_id, description, null, "");
             glb.UpdateReportLog(user_id, 20, report_id, App_LocalResources.GlobalRes._Completed, null, "");
