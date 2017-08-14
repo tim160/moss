@@ -628,11 +628,11 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Attacments.
+        ///   Looks up a localized string similar to Attachments.
         /// </summary>
-        public static string Attacments {
+        public static string Attachments {
             get {
-                return ResourceManager.GetString("Attacments", resourceCulture);
+                return ResourceManager.GetString("Attachments", resourceCulture);
             }
         }
         
