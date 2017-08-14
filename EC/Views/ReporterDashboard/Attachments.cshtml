@@ -37,21 +37,21 @@
     </div><!--settingMenu-->
 
     <div id="attachmentPage">
-
-        <div class="dragAndDropContainer">
-            <div class="dottedContainer">
-                <p class="semiboldText">Drag and drop files here</p>
-                <p class="secondSemiboldText">or</p>
-                <div>
-                    <div class="selectFiles">
-                        select files to upload
-                    </div>
-                    <input type="file" name="files" multiple="" style="display: none;">
+        <form>
+            <div class="dragAndDropContainer">
+                <div class="dottedContainer">
+                    <div class="semiboldText blackText weight18">Drag and drop files here</div>
+                    <div class="secondSemiboldText">or</div>
+                        <div class="selectFiles">
+                            select files to upload
+                            <input type="file" class="hiddenElement" name="files" multiple="">
+                        </div>
+                        
                 </div>
-
+                <input type="submit" name="Submit" class="hiddenElement" id="Submit" value="Upload" >
             </div>
-            <input type="submit" name="Submit" id="Submit" value="Upload">
-        </div>
+        </form>
+
 
         <table>
             <tbody>
