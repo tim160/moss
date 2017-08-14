@@ -14,6 +14,7 @@
     ReportModel rm = new ReportModel(report_id);
     List<report_non_mediator_involved> _involved = rm._witnesses;
     UserModel um = new UserModel(user_id);
+    List<attachment> attachments = (List<attachment>)ViewBag.attachmentFiles;
 
     int unread_message_number = um.Unread_Messages_Quantity(report_id, 1);
     GlobalFunctions glb = new GlobalFunctions();

@@ -22,7 +22,10 @@ namespace EC.Controllers
         public ActionResult Index(int? id)
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
-  //////////tim          user = AuthHelper.GetCookies(HttpContext);
+            //////////tim          user = AuthHelper.GetCookies(HttpContext);
+            // DEBUG
+            //user = db.user.FirstOrDefault(x => x.id == 167);
+            // DEBUG
             if (user == null || user.id == 0 || user.role_id == 4 || user.role_id == 5 || user.role_id ==6  || user.role_id == 7)
                 return RedirectToAction("Index", "Account");
 
@@ -351,7 +354,7 @@ namespace EC.Controllers
         public List<attachment> getAttachmentFiles(int report_id)
         {
             EC.Models.ReportModel rm = new EC.Models.ReportModel(report_id);
-            List<attachment> attachmentFiles = db.attachment.Where(item => (item.report_id == report_id)).ToList();
+            List<attachment> attachmentFiles = db.attachment.Where(item => item.report_id == report_id && item.visible_reporter == true).ToList();
 
             return attachmentFiles;
         }
