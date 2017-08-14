@@ -278,13 +278,16 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="aroundSelect">Policy:</td>
-                                            <td class="linkPdf">
-                                                @foreach (var item in allPolicies)
-                                                {
-                                                    <div>@item.Value</div>
-                                                }
-                                            </td>
+                                            @if (1 == 0)
+                                            {
+                                                <td class="aroundSelect">Policy:</td>
+                                                <td class="linkPdf">
+                                                    @foreach (var item in allPolicies)
+                                                    {
+                                                        <div>@item.Value</div>
+                                                    }
+                                                </td>
+                                            }
                                         </tr>
                                     </table>
                                 </td>
@@ -292,25 +295,27 @@
                         </tbody>
                     </table>
                                
-
-                    <p class="someAlert">
-                        Does this incident represent a threat to the health or safety of students or employees on the campus?
-                     </p>
-                    <div style="padding: 20px;">
-                        <label class="inputBlock" for="Anonymous">
-                            <input id="Anonymous" type="radio" name="stay" value="true">
-                            <span class="radioButton"></span>
-                            <span class="radioTitle">Yes</span>
-                        </label>
-                        <label class="inputBlock" for="no">
-                            <input id="no" type="radio" name="stay" value="false">
-                            <span class="radioButton"></span>
-                            <span class="radioTitle">No</span>
-                        </label>
+                    @if (is_cc.HasValue && is_cc.Value)
+                    {
                         <p class="someAlert">
-                            A campus alert will be sent to the designated Campus Security Authority for Purposes of the Clery Act.
-                        </p>
-                    </div>
+                            Does this incident represent a threat to the health or safety of students or employees on the campus?
+                         </p>
+                        <div style="padding: 20px;">
+                            <label class="inputBlock" for="Anonymous">
+                                <input id="Anonymous" type="radio" name="stay" value="true">
+                                <span class="radioButton"></span>
+                                <span class="radioTitle">Yes</span>
+                            </label>
+                            <label class="inputBlock" for="no">
+                                <input id="no" type="radio" name="stay" value="false">
+                                <span class="radioButton"></span>
+                                <span class="radioTitle">No</span>
+                            </label>
+                            <p class="someAlert">
+                                A campus alert will be sent to the designated Campus Security Authority for Purposes of the Clery Act.
+                            </p>
+                        </div>
+                    }
                     @*<div class="addComment addComment2@{@class_ext}">
                         <div class="blockPersonal">
 
@@ -399,7 +404,7 @@
                             <td>@GlobalRes.Reporterwouldliketostay:</td>
                             <td>@rm._anonymousLevel_mediatorVersionByCaller(user_id)</td>
                         </tr>
-                        @if (rm.Get_reporter_name(user_id).ToLower() != EC.App_LocalResources.GlobalRes.anonymous_reporter.ToLower())
+                        @if (rm.Get_reporter_name(user_id).ToLower() != GlobalRes.anonymous_reporter.ToLower())
                         {
                             <tr>
                                 <td>@GlobalRes.Reportername</td>
