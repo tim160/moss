@@ -646,18 +646,24 @@ namespace EC.Controllers
 
             return View();
         }
-        public List<attachment> getAttachmentFilesTask(int report_id)
+
+        public List<attachment> getAttachmentFilesTask(int task_id)
         {
-            EC.Models.ReportModel rm = new EC.Models.ReportModel(report_id);
-            List<attachment> attachmentFiles = db.attachment.Where(item => (item.report_task_id == report_id)).ToList();
+            List<attachment> attachmentFiles = db.attachment.Where(item => (item.report_task_id == task_id)).ToList();
             return attachmentFiles;
         }
+
+        /// <summary>
+        /// initial report attachments
+        /// </summary>
+        /// <param name="report_id"></param>
+        /// <returns></returns>
         public List<attachment> getAttachmentFiles(int report_id)
         {
-            EC.Models.ReportModel rm = new EC.Models.ReportModel(report_id);
-            List<attachment> attachmentFiles = db.attachment.Where(item => (item.report_id == report_id)).ToList();
+            List<attachment> attachmentFiles = db.attachment.Where(item => (item.report_id == report_id && !item.visible_mediators_only.HasValue && !item.visible_reporter.HasValue)).ToList();
             return attachmentFiles;
         }
+
 
         public bool AddToMediators()
         {

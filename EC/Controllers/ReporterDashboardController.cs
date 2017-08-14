@@ -351,6 +351,21 @@ namespace EC.Controllers
             return unread_message_number_string;
         }
 
+        /// <summary>
+        /// originally attached by reporter - show in ReporterDashboard/Index
+        /// </summary>
+        /// <param name="report_id"></param>
+        /// <returns></returns>
+        public List<attachment> getORIGINALAttachmentFiles(int report_id)
+        {
+            List<attachment> attachmentFiles = db.attachment.Where(item => (item.report_id == report_id && !item.visible_mediators_only.HasValue && !item.visible_reporter.HasValue)).ToList();
+            return attachmentFiles;
+        }
+        /// <summary>
+        /// attached by Reporter or Mediators later - show in Attachements
+        /// </summary>
+        /// <param name="report_id"></param>
+        /// <returns></returns>
         public List<attachment> getAttachmentFiles(int report_id)
         {
             EC.Models.ReportModel rm = new EC.Models.ReportModel(report_id);

@@ -15,6 +15,7 @@ using EC.Models.ViewModels;
 using Newtonsoft.Json;
 using EC.Common.Interfaces;
 using EC.Core.Common;
+using System.IO;
 
 namespace EC.Models
 {
@@ -385,13 +386,10 @@ namespace EC.Models
             {
                 string secondary_type = "";
 
-
                 if (_report != null)
                 {
-
                     if (db.report_secondary_type.Any(t => t.report_id == _report.id))
                     {
-
                         List<report_secondary_type> _report_secondary_type_list = db.report_secondary_type.Where(t => t.report_id == _report.id).ToList();
                         foreach (report_secondary_type _report_secondary_type in _report_secondary_type_list)
                         {
@@ -1124,9 +1122,9 @@ namespace EC.Models
             {
                 List<string> _list = new List<string>();
 
-                if (db.attachment.Any(item => (item.report_id == ID) && (item.status_id == 2)))
+                if (db.attachment.Any(item => (item.report_id == ID) && (item.status_id == 2) && !item.visible_mediators_only.HasValue && !item.visible_reporter.HasValue))
                 {
-                    _list = db.attachment.Where(item1 => (item1.report_id == ID) && (item1.status_id == 2)).Select(item => item.path_nm).ToList();
+                    _list = db.attachment.Where(item1 => (item1.report_id == ID) && (item1.status_id == 2) && !item1.visible_mediators_only.HasValue && !item1.visible_reporter.HasValue).Select(item => item.path_nm).ToList();
                 }
 
                 return _list;
@@ -1150,6 +1148,7 @@ namespace EC.Models
         {
             try
             {
+                Guid _guid = Guid.NewGuid();
                 var currentReport = new report();
                 using (ECEntities adv = new ECEntities())
                 {
@@ -1198,7 +1197,7 @@ namespace EC.Models
                         notification_messages_actions_flag = notification,
                         notification_new_reports_flag = 1,
                         notification_marketing_flag = 1,
-                        guid = Guid.NewGuid(),
+                        guid = _guid,
                         notification_summary_period = 1
                     };
 
@@ -1217,6 +1216,7 @@ namespace EC.Models
                     currentReport.user_id = newUser.id;
                     currentReport.reporter_user_id = newUser.id;
                     currentReport.report_by_myself = model.report_by_myself;
+                    currentReport.guid = Guid.NewGuid();
                     //db.user.AddOrUpdate(newUser);
                     currentReport = adv.report.Add(currentReport);
                     t = adv.SaveChanges();
@@ -1331,7 +1331,12 @@ namespace EC.Models
                 }
 
                 int t2 = db.SaveChanges();
+                #region Create Folder for Report
 
+                Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/Upload/reports/" + _guid));
+
+
+                #endregion
                 return currentReport;
             }
             catch (DbEntityValidationException e)

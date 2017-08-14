@@ -381,7 +381,7 @@ namespace EC.Controllers.ViewModel
 
         public List<attachment> getAttachmentFiles(int report_id)
         {
-            List<attachment> attachmentFiles = db.attachment.Where(item => (item.report_id == report_id)).ToList();
+            List<attachment> attachmentFiles = db.attachment.Where(item => (item.report_id == report_id && !item.visible_mediators_only.HasValue && !item.visible_reporter.HasValue)).ToList();
             return attachmentFiles;
         }
 

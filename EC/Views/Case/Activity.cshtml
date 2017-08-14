@@ -1,7 +1,10 @@
 ﻿@using EC.Models.Database;
 @using EC.Models;
 @using EC.App_LocalResources;
+@using EC.Common.Interfaces;
+@using EC.Core.Common;
 @{
+    IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
     var report_id = (Int32)ViewBag.report_id;
     var user_id = (Int32)ViewBag.user_id;
     List<attachment> attachmentFiles = (List<attachment>)ViewBag.attachmentFiles;
@@ -23,12 +26,12 @@
     user _user;
     user _second_user;
     action _action;
-    Dictionary<int, string> month = glb.ShortMonth();
+    Dictionary<int, string> month = m_DateTimeHelper.ShortMonth();
 
     string report_name = " - #" + rm._report.display_name + " - " + rm._secondary_type_string + " - " + rm._location_string;
     ViewBag.Title = GlobalRes.CaseActivityUp + report_name;
 
-        
+
 }
 
 <body>
@@ -96,7 +99,7 @@
                     @foreach (report_log _log in actions_log)
                     {
                         _user = um.GetById(_log.user_id);
-                        _month_name = glb.GetShortMonth(_log.created_dt.Month);
+                        _month_name = m_DateTimeHelper.GetShortMonth(_log.created_dt.Month);
                         _action = glb.GetActionById(_log.action_id.Value);
                         _second_name = "";
                         _string_to_add = "";

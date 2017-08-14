@@ -239,7 +239,7 @@ public class GlobalFunctions
 
     //Used in
     //EC\Views\Case\Task.cshtml 
-    public void UpdateTaskCommentRead2(int user_id, int task_comment_id)
+    public void UpdateTaskCommentRead(int user_id, int task_comment_id)
     {
         task_comment_user_read _user_read = new task_comment_user_read();
         _user_read.task_comment_id = task_comment_id;
