@@ -83,7 +83,7 @@
                                     <div class="selectFiles">
                                         select files to upload
                                     </div>
-                                    <input type="file" name="files" multiple="" style="display: none;" />
+                                    <input type="file" name="files" multiple="" style="display: none;" onchange="this.form.submit();"/>
                                 </div>
 
                             </div>
@@ -107,7 +107,7 @@
 
                     <table>
                         <tbody>
-                            @foreach (var attachment in attachmentFiles)
+                            @foreach (var attachment in ViewBag.attachmentAdvFiles)
                             {
                                 <tr>
                                     <td class="image">
@@ -152,6 +152,47 @@
 
         $('.selectFiles').on('click', function () {
             $(this).parent().find('input').click();
+        });
+
+        if (typeof (window.FileReader) === 'undefined') {
+            $('.dottedContainer .semiboldText').text('');
+            $('.dottedContainer .secondSemiboldText').text('');
+        }
+        $(".dottedContainer").on("dragover", function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+        });
+
+        $(".dottedContainer").on("dragleave", function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+        });
+
+        $('.dottedContainer').on('drop', function () {
+            event.preventDefault();
+            event.stopPropagation();
+
+            var data = new FormData();
+            data.append('id', '@report_id');
+            data.append('mode', 'upload');
+            data.append('type', $('.inputBlock > input:checked').val());
+            for (var x = 0; x < event.dataTransfer.files.length; x++) {
+                data.append('files' + x, event.dataTransfer.files[x]);
+            }
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("Attachments", "Case")',
+                contentType: false,
+                processData: false,
+                data: data,
+                success: function (result) {
+                    console.log();
+                    window.location = window.location;
+                },
+                error: function (xhr, status, p3, p4) {
+                }
+            });
         });
     });
 </script>
