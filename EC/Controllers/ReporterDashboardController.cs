@@ -54,6 +54,7 @@ namespace EC.Controllers
                  return RedirectToAction("Index", "Account");
 
             ViewBag.attachmentFiles = getAttachmentFiles(report_id);
+            ViewBag.attachmentAdvFiles = db.attachment.Where(item => item.report_id == report_id && item.visible_reporter == true).ToList();
 
             return View();
         }
@@ -352,24 +353,13 @@ namespace EC.Controllers
         }
 
         /// <summary>
-        /// originally attached by reporter - show in ReporterDashboard/Index
-        /// </summary>
-        /// <param name="report_id"></param>
-        /// <returns></returns>
-        public List<attachment> getORIGINALAttachmentFiles(int report_id)
-        {
-            List<attachment> attachmentFiles = db.attachment.Where(item => (item.report_id == report_id && !item.visible_mediators_only.HasValue && !item.visible_reporter.HasValue)).ToList();
-            return attachmentFiles;
-        }
-        /// <summary>
         /// attached by Reporter or Mediators later - show in Attachements
         /// </summary>
         /// <param name="report_id"></param>
         /// <returns></returns>
         public List<attachment> getAttachmentFiles(int report_id)
         {
-            EC.Models.ReportModel rm = new EC.Models.ReportModel(report_id);
-            List<attachment> attachmentFiles = db.attachment.Where(item => item.report_id == report_id && item.visible_reporter == true).ToList();
+            List<attachment> attachmentFiles = db.attachment.Where(item => (item.report_id == report_id && !item.visible_mediators_only.HasValue && !item.visible_reporter.HasValue)).ToList();
 
             return attachmentFiles;
         }
@@ -388,10 +378,18 @@ namespace EC.Controllers
 
         public ActionResult Attachments(int id)
         {
-            UserModel um = new UserModel(id);
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            // DEBUG
+            //user = db.user.FirstOrDefault(x => x.id == 167);
+            // DEBUG
+            if (user == null || user.id == 0 || user.role_id == 4 || user.role_id == 5 || user.role_id == 6 || user.role_id == 7)
+                return RedirectToAction("Index", "Account");
+
+            UserModel um = new UserModel(user.id);
             int report_id = um._reporter_report_id;
             ViewBag.report_id = report_id;
             ViewBag.user_id = id;
+            ViewBag.attachmentAdvFiles = db.attachment.Where(item => item.report_id == report_id && item.visible_reporter == true).ToList();
 
             return View();
         }

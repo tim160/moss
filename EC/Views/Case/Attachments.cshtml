@@ -73,7 +73,7 @@
                 <div class="container">
                     @using (Html.BeginForm("Attachments", "Case", FormMethod.Post, new { enctype = "multipart/form-data" }))
                     {
-                        @Html.Hidden("id", report_id)
+                        @Html.Hidden("report_id", report_id)
                         @Html.Hidden("mode", "upload")
                         <div class="dragAndDropContainer">
                             <div class="dottedContainer">
@@ -101,7 +101,6 @@
                                     <span class="radioTitle">visible to reporter</span>
                                 </label>
                             </div>
-                            <input type="submit" name="Submit" id="Submit" value="Upload" />
                         </div>
                     }
 
@@ -129,7 +128,7 @@
                                             @dth.ConvertDateToShortString(attachment.effective_dt)
                                         </p>
                                         <p class="download">
-                                            <a href="@attachment.path_nm">download</a>                                            
+                                            <a href="@attachment.path_nm">download</a>
                                         </p>
                                     </td>
                                 </tr>
@@ -173,7 +172,7 @@
             event.stopPropagation();
 
             var data = new FormData();
-            data.append('id', '@report_id');
+            data.append('report_id', '@report_id');
             data.append('mode', 'upload');
             data.append('type', $('.inputBlock > input:checked').val());
             for (var x = 0; x < event.dataTransfer.files.length; x++) {
@@ -187,7 +186,6 @@
                 processData: false,
                 data: data,
                 success: function (result) {
-                    console.log();
                     window.location = window.location;
                 },
                 error: function (xhr, status, p3, p4) {

@@ -1210,33 +1210,35 @@ namespace EC.Controllers
         }
 
         [HttpPost]
-        public ActionResult Attachments(int id, string mode, string type)
+        public ActionResult Attachments(int report_id, string mode, string type)
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             // DEBUG
             //user = user ?? db.user.FirstOrDefault(x => x.id == 2);
+            //user = user ?? db.user.FirstOrDefault(x => x.id == 167);
             //
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
-            if (mode == "upload")
+            if ((mode == "upload") || (mode == "upload_rd"))
             {
                 for(int i = 0; i < Request.Files.Count; i++)
                 {
                     var file = Request.Files[i];
-                    var report = db.report.FirstOrDefault(x => x.id == id);
+                    var report = db.report.FirstOrDefault(x => x.id == report_id);
 
                     var a = new attachment();
                     a.file_nm = file.FileName;
                     a.extension_nm = System.IO.Path.GetExtension(file.FileName);
                     a.path_nm = "";
-                    a.report_id = id;
+                    a.report_id = report_id;
                     a.status_id = 2;
                     a.effective_dt = DateTime.Now;
                     a.expiry_dt = DateTime.Now;
                     a.last_update_dt = DateTime.Now;
                     a.user_id = user.id;
 
+                    type = mode == "upload_rd" ? "reporter" : type;
                     a.visible_reporter = type == "reporter" ? true : false;
                     a.visible_mediators_only = type == "staff" ? true : false;
 
@@ -1255,7 +1257,11 @@ namespace EC.Controllers
                     file.SaveAs(string.Format("{0}\\{1}", dir, filename));
                 }
             }
-            return RedirectToAction("Attachments", new { id = id});
+            if (mode == "upload_rd")
+            {
+                return RedirectToAction("Attachments", "ReporterDashboard", new { id = user.id });
+            }
+            return RedirectToAction("Attachments", new { id = report_id });
         }
     }
 }

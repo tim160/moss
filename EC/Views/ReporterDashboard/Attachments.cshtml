@@ -1,6 +1,8 @@
 ﻿@using EC.Models;
 @using EC.Models.Database;
 @using EC.App_LocalResources;
+@using EC.Core.Common;
+
 @{
     ViewBag.Title = GlobalRes.Activity;
     Layout = "~/Views/Shared/IndexPages/ReporterDashboard.cshtml";
@@ -9,7 +11,9 @@
     ReportModel rm = new ReportModel(report_id);
     UserModel um = new UserModel(user_id);
     int unread_message_number = um.Unread_Messages_Quantity(report_id, 1);
+    var dth = new DateTimeHelper();
 }
+
 @if ((rm._report != null) && (rm._report.id != 0))
 {
     <div class="settingMenu">
@@ -37,50 +41,99 @@
     </div><!--settingMenu-->
 
     <div id="attachmentPage">
-        <form>
+        @using (Html.BeginForm("Attachments", "Case", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.Hidden("report_id", report_id)
+            @Html.Hidden("mode", "upload_rd")
             <div class="dragAndDropContainer">
                 <div class="dottedContainer">
                     <div class="semiboldText blackText weight18">Drag and drop files here</div>
                     <div class="secondSemiboldText">or</div>
                         <div class="selectFiles">
                             select files to upload
-                            <input type="file" class="hiddenElement" name="files" multiple="">
+                            <input type="file" class="hiddenElement" name="files" multiple="" onchange="this.form.submit();">
                         </div>
                         
                 </div>
-                <input type="submit" name="Submit" class="hiddenElement" id="Submit" value="Upload" >
             </div>
-        </form>
+        }
 
 
         <table>
             <tbody>
-                <tr>
-                    <td class="image">
-                        <img src="/Content/Icons/viewDoc2.png">
-                    </td>
-                    <td class="customWidth">
-                        <p class="secondRow">
-                        </p><div class="secondRowReporter">Anonimous reporter</div>
-
-                        <p></p>
-                    </td>
-                    <td>
-                        <p class="recipient">
-                            FOR STAFF
-                        </p>
-                    </td>
-                    <td>
-                        <p class="date">
-                            23 Feb
-                        </p>
-                        <p class="download">
-                            <a href="\upload\reports\22737-STA-2\2_636382106584653272">download</a>
-                        </p>
-                    </td>
-                </tr>
+                @foreach (attachment attachment in ViewBag.attachmentAdvFiles)
+                {
+                    <tr>
+                        <td class="image">
+                            <img src="/Content/Icons/viewDoc2.png">
+                        </td>
+                        <td class="customWidth">
+                            <p class="secondRow">
+                            </p><div class="secondRowReporter">Anonimous reporter</div>
+                            @attachment.file_nm
+                            <p></p>
+                        </td>
+                        <td>
+                            <p class="recipient">
+                                @(attachment.visible_reporter == true ? "FOR REPORTER" : "FOR STAFF")
+                            </p>
+                        </td>
+                        <td>
+                            <p class="date">
+                                @dth.ConvertDateToShortString(attachment.effective_dt)
+                            </p>
+                            <p class="download">
+                                <a href="@attachment.path_nm">download</a>
+                            </p>
+                        </td>
+                    </tr>
+                    }
             </tbody>
         </table>
     </div>
 
 }
+
+<script>
+    $(function () {
+        if (typeof (window.FileReader) === 'undefined') {
+            $('.dottedContainer .semiboldText').text('');
+            $('.dottedContainer .secondSemiboldText').text('');
+        }
+        $(".dottedContainer").on("dragover", function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+        });
+
+        $(".dottedContainer").on("dragleave", function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+        });
+
+        $('.dottedContainer').on('drop', function () {
+            event.preventDefault();
+            event.stopPropagation();
+
+            var data = new FormData();
+            data.append('id', '@report_id');
+            data.append('mode', 'upload');
+            data.append('type', $('.inputBlock > input:checked').val());
+            for (var x = 0; x < event.dataTransfer.files.length; x++) {
+                data.append('files' + x, event.dataTransfer.files[x]);
+            }
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("Attachments", "Case")',
+                contentType: false,
+                processData: false,
+                data: data,
+                success: function (result) {
+                    window.location = window.location;
+                },
+                error: function (xhr, status, p3, p4) {
+                }
+            });
+        });
+    });
+</script>
