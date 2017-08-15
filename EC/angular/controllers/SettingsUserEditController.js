@@ -20,6 +20,7 @@
         $scope.val_last_nm = false;
         $scope.val_title_ds = false;
         $scope.val_email = false;
+        $scope.val_departmentId = false;
 
         $scope.id = parseInt($location.absUrl().substring($location.absUrl().indexOf('user/') + 'user/'.length));
         $scope.id = isNaN($scope.id) ? 0 : $scope.id;
@@ -52,7 +53,7 @@
             $scope.val_last_nm = !$scope.validate($scope.last_nm);
             $scope.val_title_ds = !$scope.validate($scope.title_ds);
             $scope.val_email = !$scope.validate($scope.email, /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/);
-            $scope.val_departmentId = !$scope.validate($scope.departmentId.toString());
+            $scope.val_departmentId = $scope.departmentId == null || !$scope.validate($scope.departmentId.toString());
 
             if (!$scope.val_first_nm
                 && !$scope.val_last_nm
