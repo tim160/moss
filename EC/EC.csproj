@@ -485,6 +485,7 @@
     <Content Include="patches\1_2.sql" />
     <Content Include="patches\1_1.sql" />
     <Content Include="Scripts\Common\helper.js" />
+    <Content Include="Scripts\dis.js" />
     <Content Include="Scripts\jquery.daterangepicker.min.js" />
     <Content Include="Scripts\jquery.the-modal.js" />
     <Content Include="Scripts\lib\bootstrap.js" />
@@ -939,9 +940,6 @@
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\status.cs">
-      <DependentUpon>ECEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Database\sysdiagrams.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\task.cs">
