@@ -53,9 +53,15 @@ namespace EC.Controllers.API
                 Reports = reports,
 
                 ReportsAdv = reports
-                    .Select(x => new {
-                        id = x.report_id,
-                        last_investigation_status_date = m_DateTimeHelper.ConvertDateToLongMonthString(new ReportModel(x.report_id)._last_investigation_status_date)
+                    .Select(x =>
+                    {
+                        var rm = new ReportModel(x.report_id);
+                        return new
+                        {
+                            id = x.report_id,
+                            total_days = rm._total_days,
+                            last_investigation_status_date = m_DateTimeHelper.ConvertDateToLongMonthString(rm._last_investigation_status_date)
+                        };
                     }).ToList(),
 
                 Users = DB.user.Where(x => userIds.Contains(x.id)).ToList(),
@@ -69,6 +75,7 @@ namespace EC.Controllers.API
                     Closed = UnreadReportsInProgressNumber(closed_report_ids, user.id),
                 },
             };
+
 
             return ResponseObject2Json(m);
         }

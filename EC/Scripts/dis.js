@@ -82,7 +82,9 @@
             CasesService.get({ ReportFlag: mode, Preload: preload }, function (data) {
                 for (var i = 0; i < data.Reports.length; i++) {
                     var r = $filter('filter')(data.ReportsAdv, { 'id': data.Reports[i].report_id });
-                    data.Reports[i].AdvInfo = r;
+                    if ((r != null) && (r.length > 0)) {
+                        data.Reports[i].AdvInfo = r[0];
+                    }
 
                     var r = $filter('filter')(data.Users, { 'id': data.Reports[i].last_sender_id });
                     r = r.length === 0 ? null : r[0];
