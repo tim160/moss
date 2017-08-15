@@ -1204,7 +1204,7 @@ namespace EC.Controllers
             ViewBag.report_id = id;
             ViewBag.user_id = user.id;
             ViewBag.attachmentFiles = getAttachmentFiles(id);
-            ViewBag.attachmentAdvFiles = db.attachment.Where(item => (item.report_id == id && item.visible_mediators_only.HasValue && item.visible_reporter.HasValue)).ToList();
+            ViewBag.attachmentAdvFiles = db.attachment.Where(item => item.report_id == id && item.visible_mediators_only.HasValue && item.visible_reporter.HasValue).ToList();
             ViewBag.popup = null;
             return View();
         }
@@ -1214,7 +1214,7 @@ namespace EC.Controllers
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             // DEBUG
-            user = user ?? db.user.FirstOrDefault(x => x.id == 2);
+            //user = user ?? db.user.FirstOrDefault(x => x.id == 2);
             //
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
