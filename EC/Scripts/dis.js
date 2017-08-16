@@ -335,7 +335,7 @@
         .service('CasesService', ['$resource', CasesService]);
 
     function CasesService($resource) {
-        return $resource('api/Cases', {}, {
+        return $resource('/api/Cases', {}, {
             get: { method: 'GET', params: {}, isArray: false },
         });
     };
@@ -364,7 +364,7 @@
         .service('EmployeeAwarenessService', ['$resource', EmployeeAwarenessService]);
 
     function EmployeeAwarenessService($resource) {
-        return $resource('api/EmployeeAwareness', {}, {
+        return $resource('/api/EmployeeAwareness', {}, {
             get: { method: 'GET', params: {}, isArray: false },
         });
     };

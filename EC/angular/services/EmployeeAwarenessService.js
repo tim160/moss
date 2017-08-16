@@ -6,7 +6,7 @@
         .service('EmployeeAwarenessService', ['$resource', EmployeeAwarenessService]);
 
     function EmployeeAwarenessService($resource) {
-        return $resource('api/EmployeeAwareness', {}, {
+        return $resource('/api/EmployeeAwareness', {}, {
             get: { method: 'GET', params: {}, isArray: false },
         });
     };

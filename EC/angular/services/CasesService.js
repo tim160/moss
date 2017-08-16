@@ -6,7 +6,7 @@
         .service('CasesService', ['$resource', CasesService]);
 
     function CasesService($resource) {
-        return $resource('api/Cases', {}, {
+        return $resource('/api/Cases', {}, {
             get: { method: 'GET', params: {}, isArray: false },
         });
     };
