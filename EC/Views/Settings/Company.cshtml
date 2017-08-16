@@ -66,6 +66,7 @@
                     <h2 class="menuItem">@GlobalRes.Locations</h2>
                     <h2 class="menuItem">@GlobalRes.Languages</h2>
                     <h2 class="menuItem">@GlobalRes.IncidentTypes</h2>
+                    <h2 class="menuItem">@GlobalRes.CaseRouting</h2>
                     <h2 class="menuItem">@GlobalRes.ReporterTypes</h2>
                     <h2 class="menuItem">@GlobalRes.Anonymity</h2>
                     <h2 class="menuItem">@GlobalRes.Outcomes</h2>
@@ -262,7 +263,114 @@
                     }
 
                 </div>
-            </div><!--blockOutcome->
+            </div><!--blockOutcome-->
+
+            <div id="caseRouting" @*ng-show="showAsGrid"*@ style="display: none;">
+                <div class="positionTableCases">
+                    <table class="tableCasesIndex">
+                        <thead>
+                            <tr>
+                                <td>Incident Type</td>
+                                <td>Department</td>
+                                <td>Issue Owner</td>
+                                <td>Scope</td>
+                                <td>Policy</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- ngRepeat: report in reports -->
+                            <tr>
+                                <td class="ng-binding">300</td>
+                                <td class="inSelect">
+                                    <select class="" id="" name="IncidentId">
+                                        <option value="2714">Alcohol and drug abuse</option>
+                                        <option value="3">Breach of Legal Obligations</option>
+                                        <option value="123">discrimination</option>
+                                        <option value="158">financial</option>
+                                        <option value="2">Financial Reporting and Accounting</option>
+                                        <option value="122">fraud and embezzelment</option>
+                                        <option value="157">safety</option>
+                                    </select>
+                                </td>
+                                <td class="inSelect">
+                                    <select class="" id="" name="IncidentId">
+                                        <option value="2714">Alcohol and drug abuse</option>
+                                        <option value="3">Breach of Legal Obligations</option>
+                                        <option value="123">discrimination</option>
+                                        <option value="158">financial</option>
+                                        <option value="2">Financial Reporting and Accounting</option>
+                                        <option value="122">fraud and embezzelment</option>
+                                        <option value="157">safety</option>
+                                    </select>
+                                </td>
+                                <td class="inSelect">
+                                    <select class="" id="" name="IncidentId">
+                                        <option value="2714">Alcohol and drug abuse</option>
+                                        <option value="3">Breach of Legal Obligations</option>
+                                        <option value="123">discrimination</option>
+                                        <option value="158">financial</option>
+                                        <option value="2">Financial Reporting and Accounting</option>
+                                        <option value="122">fraud and embezzelment</option>
+                                        <option value="157">safety</option>
+                                    </select>
+                                </td>
+                                <td class="ng-binding">
+                                    <div class="button">
+                                        Upload
+                                    </div>
+                                </td>
+                            </tr><!-- end ngRepeat: report in reports -->
+                            <!-- ngRepeat: report in reports -->
+                            <tr>
+                                <td class="ng-binding">300</td>
+                                <td class="inSelect">
+                                    <select class="" id="" name="IncidentId">
+                                        <option value="2714">Alcohol and drug abuse</option>
+                                        <option value="3">Breach of Legal Obligations</option>
+                                        <option value="123">discrimination</option>
+                                        <option value="158">financial</option>
+                                        <option value="2">Financial Reporting and Accounting</option>
+                                        <option value="122">fraud and embezzelment</option>
+                                        <option value="157">safety</option>
+                                    </select>
+                                </td>
+                                <td class="inSelect">
+                                    <select class="" id="" name="IncidentId">
+                                        <option value="2714">Alcohol and drug abuse</option>
+                                        <option value="3">Breach of Legal Obligations</option>
+                                        <option value="123">discrimination</option>
+                                        <option value="158">financial</option>
+                                        <option value="2">Financial Reporting and Accounting</option>
+                                        <option value="122">fraud and embezzelment</option>
+                                        <option value="157">safety</option>
+                                    </select>
+                                </td>
+                                <td class="inSelect">
+                                    <select class="" id="" name="IncidentId">
+                                        <option value="2714">Alcohol and drug abuse</option>
+                                        <option value="3">Breach of Legal Obligations</option>
+                                        <option value="123">discrimination</option>
+                                        <option value="158">financial</option>
+                                        <option value="2">Financial Reporting and Accounting</option>
+                                        <option value="122">fraud and embezzelment</option>
+                                        <option value="157">safety</option>
+                                    </select>
+                                </td>
+                                <td class="ng-binding">
+                                    <div class="button">
+                                        Upload
+                                    </div>
+                                    <ul>
+                                        <li><span class="someText">Alcohol College Policy.pdf</span><img src="~/Content/Icons/caseNotResolvedIcons.png" /></li>
+                                        <li><span class="someText">Alcohol College Policy.pdf</span><img src="~/Content/Icons/caseNotResolvedIcons.png" /></li>
+                                        <li><span class="someText">Alcohol College Policy.pdf</span><img src="~/Content/Icons/caseNotResolvedIcons.png" /></li>
+                                    </ul>
+                                </td>
+                            </tr><!-- end ngRepeat: report in reports -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
         </div><!--contentSettings-->
     </div><!--contentCompanyProfile-->
