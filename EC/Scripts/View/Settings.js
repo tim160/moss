@@ -167,17 +167,21 @@
         }
 
         function contentCompanyProfileShow() {
-            $('.menuItem:nth-child(7)').click(function () {
+            $('.menuItem:nth-child(8)').click(function () {
                 hideBlock();
                 $('.blockOutcomes').show();
             });
-            $('.menuItem:nth-child(6)').click(function () {
+            $('.menuItem:nth-child(7)').click(function () {
                 hideBlock();
                 $('.blockAnonymity').show();
             });
-            $('.menuItem:nth-child(5)').click(function () {
+            $('.menuItem:nth-child(6)').click(function () {
                 hideBlock();
                 $('.blockReporterTypes').show();
+            });
+            $('.menuItem:nth-child(5)').click(function () {
+                hideBlock();
+                $("#caseRouting").show();
             });
             $('.menuItem:nth-child(4)').click(function () {
                 hideBlock();
