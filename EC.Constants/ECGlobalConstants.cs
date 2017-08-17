@@ -24,7 +24,7 @@ namespace EC.Constants
         public const string CountryIdCanada = "2";
 
 
-        public static readonly string[] ReportFlowStatusesList = { Resources.GetString("NewReport"), Resources.GetString("NewCase"), Resources.GetString("UnderInvestigation"), Resources.GetString("AwaitingSignOff"), Resources.GetString("Closed") };
+        public static readonly string[] ReportFlowStatusesList = { Resources.GetString("New Report"), Resources.GetString("NewCase"), Resources.GetString("UnderInvestigation"), Resources.GetString("AwaitingSignOff"), Resources.GetString("Closed") };
 
 
         #region Status Constants
