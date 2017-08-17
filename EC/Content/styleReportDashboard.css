@@ -2168,6 +2168,7 @@ p.helloUser {
     margin-left: 285px;
     color: rgb(56, 73, 77);
     font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+    font-size: 20px;
 }
 /*----------------------Start My Profile ----------------------*/
 @media (max-width: 1700px){
