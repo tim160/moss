@@ -115,8 +115,8 @@
             event.stopPropagation();
 
             var data = new FormData();
-            data.append('id', '@report_id');
-            data.append('mode', 'upload');
+            data.append('report_id', '@report_id');
+            data.append('mode', 'upload_rd');
             data.append('type', $('.inputBlock > input:checked').val());
             for (var x = 0; x < event.dataTransfer.files.length; x++) {
                 data.append('files' + x, event.dataTransfer.files[x]);
