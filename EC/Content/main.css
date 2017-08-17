@@ -4089,3 +4089,10 @@ textarea {
 #attachmentPage .secondSemiboldText {
     color: #aeb5b7;
 }
+        #casesIndex img {
+            width: 15px;
+            height: 15px;
+        }
+        #casesIndex .revertIcon img {
+            transform: rotate(180deg);
+        }
