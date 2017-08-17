@@ -114,6 +114,14 @@
                             <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'team_number'" />
                             team
                         </td>
+                        @if (is_cc == true)
+                        {
+                            <td ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('cc_is_life_threating')">
+                                <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'cc_is_life_threating'" />
+                                is life threat
+                            </td>
+                        }
+
                         <td></td>
                     </tr>
                 </thead>
@@ -128,6 +136,12 @@
                         <td>{{report.new_messages}}</td>
                         <td>{{report.new_tasks}}</td>
                         <td>{{report.team_number}}</td>
+                        @if (is_cc == true)
+                        {
+                            <td>
+                                <img src="@Url.Content("~/Content/img/cc_is_life_threating.png")" ng-show="report.cc_is_life_threating == true" />
+                            </td>                            
+                        }
                         <td></td>
                     </tr>
                 </tbody>

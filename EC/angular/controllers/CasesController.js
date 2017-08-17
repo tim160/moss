@@ -29,6 +29,7 @@
                         data.Reports[i].AdvInfo = r[0];
                         data.Reports[i].total_days = r[0].total_days;
                         data.Reports[i].case_dt_s = r[0].case_dt_s;
+                        data.Reports[i].cc_is_life_threating = r[0].cc_is_life_threating;
                     }
 
                     var r = $filter('filter')(data.Users, { 'id': data.Reports[i].last_sender_id });

@@ -61,6 +61,7 @@ namespace EC.Controllers.API
                             id = x.report_id,
                             total_days = rm._total_days,
                             case_dt_s = rm._report.incident_dt.Ticks,
+                            cc_is_life_threating = rm._report.cc_is_life_threating,
                             last_investigation_status_date = m_DateTimeHelper.ConvertDateToLongMonthString(rm._last_investigation_status_date)
                         };
                     }).ToList(),
