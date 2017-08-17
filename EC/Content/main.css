@@ -4043,7 +4043,7 @@ textarea {
             background-color: red;
         }
 
-    #caseRouting select, input {
+    #caseRouting select, #caseRouting input {
         width: 220px;
         height: 40px;
         margin-left: 12px;
