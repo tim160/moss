@@ -2164,10 +2164,18 @@ p.helloUser {
         }
 
 /*=============================START MEDIA======================*/
+.textMediators {
+    margin-left: 285px;
+    color: rgb(56, 73, 77);
+    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+}
 /*----------------------Start My Profile ----------------------*/
 @media (max-width: 1700px){
     .blockSettings .contentSettings {
         width: 88%;
+        margin-left: 40px;
+    }
+    .textMediators {
         margin-left: 40px;
     }
     /*.contentCompanyProfile .addNewLanguage,
@@ -2732,10 +2740,7 @@ p.helloUser {
 .contentSettings.secondHeader table {
    width: 100%;
 }
-.textMediators {
-    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
-    color: #fff;
-}
+
 #customChangeEmail {
     margin-right: 28%;
     text-decoration: none;
