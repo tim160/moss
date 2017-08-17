@@ -5,12 +5,14 @@
     angular
         .module('EC')
         .controller('CasesController',
-            ['$scope', '$filter', 'CasesService', CasesController]);
+            ['$scope', '$filter', 'orderByFilter', 'CasesService', CasesController]);
 
-    function CasesController($scope, $filter, CasesService) {
+    function CasesController($scope, $filter, orderByFilter, CasesService) {
         $scope.showAsGrid = true;
         $scope.mode = 1;
         $scope.reports = [];
+        $scope.sortColumn = 'case_number';
+        $scope.sortColumnDesc = true;
 
         $scope.counts = {
             Active: 0,
@@ -25,6 +27,8 @@
                     var r = $filter('filter')(data.ReportsAdv, { 'id': data.Reports[i].report_id });
                     if ((r != null) && (r.length > 0)) {
                         data.Reports[i].AdvInfo = r[0];
+                        data.Reports[i].total_days = r[0].total_days;
+                        data.Reports[i].case_dt_s = r[0].case_dt_s;
                     }
 
                     var r = $filter('filter')(data.Users, { 'id': data.Reports[i].last_sender_id });
@@ -61,6 +65,18 @@
 
         $scope.openCase = function (id) {
             window.location ='/Case/Index/' + id;
+        };
+
+        $scope.sort = function (column) {
+            if (column === $scope.sortColumn) {
+                $scope.sortColumnDesc = !$scope.sortColumnDesc;
+            } else {
+                $scope.sortColumn = column;
+                $scope.sortColumnDesc = false;
+            }
+
+            $scope.reports = orderByFilter($scope.reports, $scope.sortColumn, $scope.sortColumnDesc);
+            console.log($scope.reports);
         };
     }
 }());

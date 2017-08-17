@@ -78,16 +78,42 @@
             <table class="tableCasesIndex">
                 <thead>
                     <tr>
-                        <td class="revertIcon">
-                            <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" />case</td>
-                        <td><img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" />stage</td>
-                        <td><img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" />age</td>
-                        <td><img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" />Incident Type</td>
-                        <td><img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" />Location</td>
-                        <td><img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" />Report date</td>
-                        <td><img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" />messages</td>
-                        <td><img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" />task</td>
-                        <td><img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" />team</td>
+                        <td ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('case_number')">
+                            <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'case_number'" />
+                            case
+                        </td>
+                        <td ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('current_status')">
+                            <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'current_status'" />
+                            stage
+                        </td>
+                        <td ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('total_days')">
+                            <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'total_days'" />
+                            age
+                        </td>
+                        <td ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('case_secondary_types')">
+                            <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'case_secondary_types'" />
+                            Incident Type
+                        </td>
+                        <td ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('location')">
+                            <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'location'" />
+                            Location
+                        </td>
+                        <td ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('case_dt_s')">
+                            <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'case_dt_s'" />
+                            Report date
+                        </td>
+                        <td ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('new_messages')">
+                            <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'new_messages'" />
+                            messages
+                        </td>
+                        <td ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('new_tasks')">
+                            <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'new_tasks'" />
+                            task
+                        </td>
+                        <td ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('team_number')">
+                            <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'team_number'" />
+                            team
+                        </td>
                         <td></td>
                     </tr>
                 </thead>
@@ -95,7 +121,7 @@
                     <tr ng-repeat="report in reports" ng-click="openCase(report.report_id)">
                         <td class="firstColumn"><div class="rectangle" style="background-color:#{{report.case_color_code}}"></div>{{report.case_number}}</td>
                         <td><span class="OpenSansBold upperCase grey">{{report.current_status}}</span><br /><span class="timeStatus OpenSansSemibold red"> {{report.days_left}} days left</span></td>
-                        <td>{{report.AdvInfo.total_days}}</td>
+                        <td>{{report.total_days}}</td>
                         <td>{{report.case_secondary_types}}</td>
                         <td>{{report.location}}</td>
                         <td>{{report.case_dt}}</td>

@@ -60,6 +60,7 @@ namespace EC.Controllers.API
                         {
                             id = x.report_id,
                             total_days = rm._total_days,
+                            case_dt_s = rm._report.incident_dt.Ticks,
                             last_investigation_status_date = m_DateTimeHelper.ConvertDateToLongMonthString(rm._last_investigation_status_date)
                         };
                     }).ToList(),
