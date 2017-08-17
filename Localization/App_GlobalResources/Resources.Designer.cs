@@ -3526,7 +3526,7 @@ namespace EC.Localization.App_GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Case admin.
+        ///   Looks up a localized string similar to Case Investigator.
         /// </summary>
         internal static string Mediator {
             get {

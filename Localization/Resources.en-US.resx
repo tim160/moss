@@ -1268,7 +1268,7 @@
     <value>Case Administration team</value>
   </data>
   <data name="Mediator" xml:space="preserve">
-    <value>Case admin</value>
+    <value>Case Investigator</value>
   </data>
   <data name="MediatorAlreadyRegistered" xml:space="preserve">
     <value>Case Administrator already registered</value>
