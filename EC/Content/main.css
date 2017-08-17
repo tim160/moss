@@ -3879,6 +3879,7 @@ textarea {
 
     #attachmentPage .radioButtonContainer {
         padding-left: 30px;
+        padding-top: 56px;
     }
 
 
@@ -4065,3 +4066,26 @@ textarea {
         width: 12px;
     padding-left: 9px;
     }
+
+
+#attachmentPage .weight18 {
+    font-size: 18px;
+}
+
+#attachmentPage .blackText {
+    color: #3c3e3f;
+}
+#attachmentPage .selectFiles {
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #4da456;
+    border: 1px solid #397a40;
+    text-transform: uppercase;
+    padding: 5px 11px;
+    position: relative;
+    font-size: 14px;
+}
+#attachmentPage .secondSemiboldText {
+    color: #aeb5b7;
+}
