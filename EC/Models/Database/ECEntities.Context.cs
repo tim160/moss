@@ -109,5 +109,6 @@ namespace EC.Models.Database
         public virtual DbSet<cc_crime_statistics_location> cc_crime_statistics_location { get; set; }
         public virtual DbSet<company_third_level_type> company_third_level_type { get; set; }
         public virtual DbSet<report_third_level_type> report_third_level_type { get; set; }
+        public virtual DbSet<location_cc_extended> location_cc_extended { get; set; }
     }
 }

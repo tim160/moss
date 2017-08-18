@@ -23,6 +23,7 @@
         cm._company.path_en = "~/Content/img/logoDefaultCompany.png";
     }
     bool is_cc = ViewBag.is_cc;
+    //is_cc = true;
     String class_ext = ViewBag.cc_extension;
 }
 
@@ -107,8 +108,6 @@
                 </div>
             </div><!--blockDepartments-->
 
-
-
             <!--blockLocations-->
             <div class="blockLocations" style="display: none;">
                 @if (is_valid_mediator)
@@ -124,13 +123,28 @@
                 </div>
                 <div class="addNewLocation">
                     <input type="text" name="newLocationName" required="" value="">
+                    @if (is_cc)
+                    {
+                        @Html.DropDownList("location_cc_extended", (SelectList) ViewBag.LocationExtendeds, "Not selected")
+                    }
                     <div class="closeIcon"></div>
                 </div>
                 <div class="tableLocation">
                     @foreach (company_location _location in cm.Locations(company_id, 2))
                     {
                         <div style="display: flex;">
-                            <p>@_location.location_en</p>
+                            <p>
+                                <span class="location_name">@_location.location_en</span>
+                                @if (is_cc)
+                                {
+                                    var list = (SelectList)ViewBag.LocationExtendeds;
+                                    if (_location.location_cc_extended_id.HasValue)
+                                    {
+                                        list = new SelectList(list, "Value", "Text", _location.location_cc_extended_id.Value.ToString());
+                                    }
+                                    @Html.DropDownList("location_cc_extended_" + _location.id, list, "Not selected", new { @class = "location_cc_extended_items" })
+                                }
+                            </p>
                             @if (is_valid_mediator)
                             {
                                 <div data-value="@_location.id" class="deleteLocation"></div>

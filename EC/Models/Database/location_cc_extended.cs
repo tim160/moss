@@ -12,19 +12,12 @@ namespace EC.Models.Database
     using System;
     using System.Collections.Generic;
     
-    public partial class company_location
+    public partial class location_cc_extended
     {
         public int id { get; set; }
-        public int client_id { get; set; }
-        public int company_id { get; set; }
+        public string description_en { get; set; }
+        public string description_fr { get; set; }
+        public string description_es { get; set; }
         public int status_id { get; set; }
-        public string location_en { get; set; }
-        public string location_fr { get; set; }
-        public string location_es { get; set; }
-        public string location_ru { get; set; }
-        public string location_ar { get; set; }
-        public System.DateTime last_update_dt { get; set; }
-        public int user_id { get; set; }
-        public Nullable<int> location_cc_extended_id { get; set; }
     }
 }

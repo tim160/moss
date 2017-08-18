@@ -78,6 +78,7 @@ namespace EC.Controllers
             CompanyModel cm = new CompanyModel(company_id);
             ViewBag.CA = cm.getCA(company_id, 2);
             ViewBag.cm = cm;
+            ViewBag.LocationExtendeds = new SelectList(db.location_cc_extended.OrderBy(x => x.description_en).ToList(), "id", "description_en");
             // company profile
             return View(cm._company);
         }

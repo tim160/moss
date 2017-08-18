@@ -256,18 +256,46 @@
             adding("Location", temp);
         });
         $('#addLocBtn').click(function () {
-            var data = $(".addNewLocation input").val();
-            if (data.length > 0) {
-                sendAjax("Location", data, function (id) {
-                    close("Location", data, id);
+            var name = $('.addNewLocation input[name="newLocationName"]').val();
+            var cc = $('.addNewLocation #location_cc_extended').val();
+            cc = (cc === undefined) || (cc.length == 0) ? 'none' : cc;
+            var data = '' + name + '\n' + cc;
+
+            if ($('.addNewLocation input[name="newLocationName"]').val().length > 0) {
+                sendAjax('Location', data, function (id) {
+                    var s = '<div style="display:flex"><p>';
+                    s += '<span class="location_name">' + name + '</span>';
+                    if ($('#location_cc_extended').length != 0) {
+                        s += '<select class="location_cc_extended_items" id="location_cc_extended_' + id + '" name="location_cc_extended_' + id + '"><option value="">Not selected</option>';
+                        var elem = $('.addNewLocation #location_cc_extended').clone();
+                        s += elem.html();
+                        s += '</select>';
+                    }
+                    s += '<div data-value="' + id + '" class="deleteLocation"></div>';
+                    contentCompanyProfile.find('.tableLocation').prepend(s + '</div>');
+                    if (cc != 'none') {
+                        $('#location_cc_extended_' + id).val(cc);
+                    }
+                    init_location_cc_extended();
+                    closeIcon('Location');
                 });
-                if (!data) {
-                    close("Location", data);
-                }
             } else {
                 $('.addNewLocation').css('border-color', 'red');
             }
         });
+
+        function init_location_cc_extended() {
+            $('.location_cc_extended_items').off().on('change', function () {
+                var name = $(this).parent().find('.location_name').text();
+                var cc = $(this).val();
+                cc = cc === undefined ? 'none' : cc;
+                var data = '' + name + '\n' + cc;
+
+                sendAjax('Location', data, function (id) {
+                });
+            });
+        }
+        init_location_cc_extended();
 
         function adding(newSetting, temp) {
             temp.addClass("inactive");

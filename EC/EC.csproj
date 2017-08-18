@@ -828,6 +828,9 @@
     <Compile Include="Models\Database\language.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Database\location_cc_extended.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Database\login_history.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>

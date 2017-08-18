@@ -298,13 +298,20 @@ namespace EC.Models
             string id = null;
             try
             {
-
-                if (newSetting.companyId > 0 && newSetting.userId > 0 && newSetting.data != null)
+                var data = newSetting.data == null ? new string[0] : newSetting.data.Split('\n');
+                if (newSetting.companyId > 0 && newSetting.userId > 0 && data.Length == 2)
                 {
-                    company_location oldLocation = db.company_location.Where(item => item.location_en.Trim().ToLower() == newSetting.data.Trim().ToLower() && item.company_id == newSetting.companyId).FirstOrDefault();
+                    var name = data[0].ToLower();
+                    int extendId;
+                    if (!int.TryParse(data[1], out extendId))
+                    {
+                        extendId = 0;
+                    }
+                    company_location oldLocation = db.company_location.Where(item => item.location_en.Trim().ToLower() == name && item.company_id == newSetting.companyId).FirstOrDefault();
                     if (oldLocation != null)
                     {
                         oldLocation.status_id = 2;
+                        oldLocation.location_cc_extended_id = extendId == 0 ? null : (int?)extendId;
                         db.SaveChanges();
                         id = oldLocation.id.ToString();
                     }
@@ -315,10 +322,10 @@ namespace EC.Models
                             client_id = newSetting.userId,
                             company_id = newSetting.companyId,
                             status_id = 2,
-                            location_en = newSetting.data,
+                            location_en = data[0],
                             last_update_dt = DateTime.Now,
                             user_id = 1,
-
+                            location_cc_extended_id = extendId == 0 ? null : (int?)extendId,
                         };
                         location = db.company_location.Add(location);
                         db.SaveChanges();

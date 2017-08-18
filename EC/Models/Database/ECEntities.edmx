@@ -312,6 +312,7 @@
           <Property Name="location_ar" Type="nvarchar" MaxLength="200" />
           <Property Name="last_update_dt" Type="smalldatetime" Nullable="false" />
           <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="location_cc_extended_id" Type="int" />
         </EntityType>
         <EntityType Name="company_outcome">
           <Key>
@@ -561,6 +562,22 @@
           <Property Name="user_id" Type="int" Nullable="false" />
           <Property Name="culture" Type="nvarchar" MaxLength="50" />
           <Property Name="language_name_english" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EC.dbo.location_cc_extended' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="location_cc_extended">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="description_en" />
+            <PropertyRef Name="description_fr" />
+            <PropertyRef Name="description_es" />
+            <PropertyRef Name="status_id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="description_en" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="description_fr" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="description_es" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="status_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="login_history">
           <Key>
@@ -1472,6 +1489,15 @@
           <EntitySet Name="user_change_password" EntityType="Self.user_change_password" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="user_role" EntityType="Self.user_role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="validation_type" EntityType="Self.validation_type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="location_cc_extended" EntityType="Self.location_cc_extended" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [location_cc_extended].[id] AS [id], 
+    [location_cc_extended].[description_en] AS [description_en], 
+    [location_cc_extended].[description_fr] AS [description_fr], 
+    [location_cc_extended].[description_es] AS [description_es], 
+    [location_cc_extended].[status_id] AS [status_id]
+    FROM [dbo].[location_cc_extended] AS [location_cc_extended]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Address_Country" Association="Self.FK_Address_Country">
             <End Role="country" EntitySet="country" />
             <End Role="address" EntitySet="address" />
@@ -1783,6 +1809,7 @@
           <Property Name="location_ar" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="last_update_dt" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="location_cc_extended_id" Type="Int32" />
         </EntityType>
         <EntityType Name="company_relationship">
           <Key>
@@ -2835,6 +2862,7 @@
           <EntitySet Name="cc_crime_statistics_location" EntityType="ECModel.cc_crime_statistics_location" />
           <EntitySet Name="company_third_level_type" EntityType="ECModel.company_third_level_type" />
           <EntitySet Name="report_third_level_type" EntityType="ECModel.report_third_level_type" />
+          <EntitySet Name="location_cc_extended" EntityType="ECModel.location_cc_extended" />
         </EntityContainer>
         <EntityType Name="case_closure_reason">
           <Key>
@@ -2985,6 +3013,20 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="report_id" Type="Int32" Nullable="false" />
           <Property Name="company_third_level_type_id" Type="Int32" />
+        </EntityType>
+        <EntityType Name="location_cc_extended">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="description_en" />
+            <PropertyRef Name="description_fr" />
+            <PropertyRef Name="description_es" />
+            <PropertyRef Name="status_id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="description_en" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="description_fr" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="description_es" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="status_id" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3265,6 +3307,7 @@
           <EntitySetMapping Name="company_location">
             <EntityTypeMapping TypeName="ECModel.company_location">
               <MappingFragment StoreEntitySet="company_location">
+                <ScalarProperty Name="location_cc_extended_id" ColumnName="location_cc_extended_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="client_id" ColumnName="client_id" />
                 <ScalarProperty Name="company_id" ColumnName="company_id" />
@@ -4341,6 +4384,17 @@
               <MappingFragment StoreEntitySet="report_third_level_type">
                 <ScalarProperty Name="company_third_level_type_id" ColumnName="company_third_level_type_id" />
                 <ScalarProperty Name="report_id" ColumnName="report_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="location_cc_extended">
+            <EntityTypeMapping TypeName="ECModel.location_cc_extended">
+              <MappingFragment StoreEntitySet="location_cc_extended">
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="description_es" ColumnName="description_es" />
+                <ScalarProperty Name="description_fr" ColumnName="description_fr" />
+                <ScalarProperty Name="description_en" ColumnName="description_en" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -96,6 +96,7 @@
         <EntityTypeShape EntityType="ECModel.cc_crime_statistics_location" Width="1.5" PointX="19.375" PointY="0.75" />
         <EntityTypeShape EntityType="ECModel.company_third_level_type" Width="1.75" PointX="21.375" PointY="0.75" />
         <EntityTypeShape EntityType="ECModel.report_third_level_type" Width="1.5" PointX="23.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ECModel.location_cc_extended" Width="1.5" PointX="28.375" PointY="9.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
