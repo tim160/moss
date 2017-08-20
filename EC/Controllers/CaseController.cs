@@ -1204,7 +1204,10 @@ namespace EC.Controllers
             ViewBag.report_id = id;
             ViewBag.user_id = user.id;
             ViewBag.attachmentFiles = getAttachmentFiles(id);
-            ViewBag.attachmentAdvFiles = db.attachment.Where(item => item.report_id == id && item.visible_mediators_only.HasValue && item.visible_reporter.HasValue).ToList();
+            var files = db.attachment.Where(item => item.report_id == id && item.visible_mediators_only.HasValue && item.visible_reporter.HasValue).ToList(); ;
+            var users = files.Select(x => x.user_id).ToList();
+            ViewBag.attachmentAdvFiles = files;
+            ViewBag.attachmentAdvUsers = db.user.Where(x => users.Contains(x.id)).ToList();
             ViewBag.popup = null;
             return View();
         }

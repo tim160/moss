@@ -106,15 +106,19 @@
 
                     <table>
                         <tbody>
+                            @{ 
+                                var users = (List<user>)ViewBag.attachmentAdvUsers;
+                            }
                             @foreach (var attachment in ViewBag.attachmentAdvFiles)
                             {
+                                var user = users.FirstOrDefault(x => x.id == attachment.user_id);
                                 <tr>
                                     <td class="image">
                                         <img src="~/Content/Icons/viewDoc2.png" />
                                     </td>
                                     <td class="customWidth">
                                         <p class="secondRow">
-                                            <div class="secondRowReporter">Anonymous reporter</div>
+                                            <div class="secondRowReporter">@(user == null ? "Anonymous reporter" : (user.first_nm + " " + user.last_nm).Trim())</div>
                                             @attachment.file_nm
                                         </p>
                                     </td>

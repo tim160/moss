@@ -389,7 +389,10 @@ namespace EC.Controllers
             int report_id = um._reporter_report_id;
             ViewBag.report_id = report_id;
             ViewBag.user_id = id;
-            ViewBag.attachmentAdvFiles = db.attachment.Where(item => item.report_id == report_id && item.visible_reporter == true).ToList();
+            var files = db.attachment.Where(item => item.report_id == report_id && item.visible_reporter == true).ToList();
+            var users = files.Select(x => x.user_id).ToList();
+            ViewBag.attachmentAdvFiles = files;
+            ViewBag.attachmentAdvUsers = db.user.Where(x => users.Contains(x.id)).ToList();
 
             return View();
         }
