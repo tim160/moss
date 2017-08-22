@@ -164,6 +164,7 @@
             $('.blockReporterTypes').hide();
             $('.blockAnonymity').hide();
             $('.blockOutcomes').hide();
+            $('.blockRootCauses').hide();
         }
 
         function contentCompanyProfileShow() {
