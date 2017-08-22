@@ -641,6 +641,7 @@
     <Content Include="Views\Settings\User - Copy.cshtml" />
     <Content Include="Views\Case\Attachments.cshtml" />
     <Content Include="Views\ReporterDashboard\Attachments.cshtml" />
+    <Content Include="Views\NewCase\Report.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -680,6 +681,7 @@
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Controllers\NewCaseController.cs" />
     <Compile Include="Controllers\NewController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
@@ -952,6 +954,9 @@
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\status.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\sysdiagrams.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\task.cs">

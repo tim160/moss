@@ -1,0 +1,103 @@
+﻿@using EC.Models.Database;
+@{
+    var report_id = (Int32)ViewBag.report_id;
+    var user_id = (Int32)ViewBag.user_id;
+    List<attachment> attachmentFiles = (List<attachment>)ViewBag.attachmentFiles;
+    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+    string popup = null;
+}
+
+<body>
+    <link type="text/css" href="~/Content/caseTasks.css" rel="stylesheet">
+
+    <div id="generalInfo">
+        <div class="firstPosition">
+            <div class="blockGeneralInformation">
+                <span class="title">General Information</span>
+                <table class="generalInformation">
+                    <tbody>
+                        <tr>
+                            <td>Reporting From:</td>
+                            <td>Canada</td>
+                        </tr>
+                        <tr>
+                            <td>Reporter would like to stay:</td>
+                            <td>Contact Info Shared</td>
+                        </tr>
+                        <tr>
+                            <td>Reporter name</td>
+                            <td>First Last</td>
+                        </tr>
+                        <tr>
+                            <td>Reporter is:</td>
+                            <td>Member of the public</td>
+                        </tr>
+
+                        <tr>
+                            <td>The incident happened in:</td>
+                            <td>Toronto, ON, Canada</td>
+                        </tr>
+                        <tr>
+                            <td>Affected department(s):</td>
+                            <td>Marketing</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <style>
+                .darkerText {
+                font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+    font-size: 16px;
+    color: #727c7e;
+    padding-top: 20px;
+
+                }
+            </style>
+            <div class="blockPartiesInformation">
+                <span class="title">Parties involved</span>
+
+                <table class="generalInformation">
+                    <tbody>
+                        <tr>
+                            <td><span class="darkerText">(Margot) Cooper</span>$nbsp; CFO </td>
+                            <td>Case Administrators excluded</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">The management doesn’t know about the incident</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="blockCaseInformation">
+                <span class="title">Case Information</span>
+                <table class="caseInformation">
+                    <tbody>
+                        <tr>
+                            <td>Reporting About:</td>
+                            <td>Breach of Legal Obligations</td>
+                        </tr>
+                        <tr>
+                            <td>Incident Date:</td>
+                            <td>Nov 1, 2016</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="incidentDescription">
+                <p class="titleIncidentDescription">Incident description:</p>
+                <div class="text">
+                    What happened?
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="contentDownloadDoc" style="/* display: none; */">
+
+        </div>
+    </div>
+</body>
