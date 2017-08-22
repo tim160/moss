@@ -8,6 +8,7 @@
     {
         is_cc = false;
     }
+    //is_cc = true;
     String class_ext = ViewBag.cc_extension;
 
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
@@ -139,7 +140,8 @@
                         @if (is_cc == true)
                         {
                             <td>
-                                <img src="@Url.Content("~/Content/img/cc_is_life_threating.png")" ng-show="report.cc_is_life_threating == true" />
+                                <img src="@Url.Content("~/Content/img/alarm-active.png")" ng-show="report.cc_is_life_threating == true" />
+                                <img src="@Url.Content("~/Content/img/alarm-default.png")" ng-show="report.cc_is_life_threating != true" />
                             </td>                            
                         }
                         <td></td>
