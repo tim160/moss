@@ -362,6 +362,39 @@
           <Property Name="relationship_ar" Type="nvarchar(max)" Nullable="false" />
           <Property Name="relationship_jp" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
+        <EntityType Name="company_root_cases_behavioral">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="name_en" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="name_fr" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="name_es" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="status_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="company_root_cases_external">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="name_en" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="name_fr" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="name_es" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="status_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="company_root_cases_organizational">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="name_en" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="name_fr" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="name_es" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="status_id" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="company_secondary_type">
           <Key>
             <PropertyRef Name="id" />
@@ -1424,6 +1457,9 @@ warning 6002: The table/view 'EC.dbo.location_cc_extended' does not have a prima
           <EntitySet Name="company_outcome" EntityType="Self.company_outcome" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="company_payments" EntityType="Self.company_payments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="company_relationship" EntityType="Self.company_relationship" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="company_root_cases_behavioral" EntityType="Self.company_root_cases_behavioral" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="company_root_cases_external" EntityType="Self.company_root_cases_external" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="company_root_cases_organizational" EntityType="Self.company_root_cases_organizational" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="company_secondary_type" EntityType="Self.company_secondary_type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="company_third_level_type" EntityType="Self.company_third_level_type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="company_type" EntityType="Self.company_type" Schema="dbo" store:Type="Tables" />
@@ -2863,6 +2899,9 @@ warning 6002: The table/view 'EC.dbo.location_cc_extended' does not have a prima
           <EntitySet Name="company_third_level_type" EntityType="ECModel.company_third_level_type" />
           <EntitySet Name="report_third_level_type" EntityType="ECModel.report_third_level_type" />
           <EntitySet Name="location_cc_extended" EntityType="ECModel.location_cc_extended" />
+          <EntitySet Name="company_root_cases_behavioral" EntityType="ECModel.company_root_cases_behavioral" />
+          <EntitySet Name="company_root_cases_external" EntityType="ECModel.company_root_cases_external" />
+          <EntitySet Name="company_root_cases_organizational" EntityType="ECModel.company_root_cases_organizational" />
         </EntityContainer>
         <EntityType Name="case_closure_reason">
           <Key>
@@ -3026,6 +3065,39 @@ warning 6002: The table/view 'EC.dbo.location_cc_extended' does not have a prima
           <Property Name="description_en" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="description_fr" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="description_es" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="status_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="company_root_cases_behavioral">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="name_en" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="name_fr" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="name_es" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="status_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="company_root_cases_external">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="name_en" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="name_fr" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="name_es" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="status_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="company_root_cases_organizational">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="name_en" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="name_fr" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="name_es" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="status_id" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
@@ -4395,6 +4467,42 @@ warning 6002: The table/view 'EC.dbo.location_cc_extended' does not have a prima
                 <ScalarProperty Name="description_es" ColumnName="description_es" />
                 <ScalarProperty Name="description_fr" ColumnName="description_fr" />
                 <ScalarProperty Name="description_en" ColumnName="description_en" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="company_root_cases_behavioral">
+            <EntityTypeMapping TypeName="ECModel.company_root_cases_behavioral">
+              <MappingFragment StoreEntitySet="company_root_cases_behavioral">
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="name_es" ColumnName="name_es" />
+                <ScalarProperty Name="name_fr" ColumnName="name_fr" />
+                <ScalarProperty Name="name_en" ColumnName="name_en" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="company_root_cases_external">
+            <EntityTypeMapping TypeName="ECModel.company_root_cases_external">
+              <MappingFragment StoreEntitySet="company_root_cases_external">
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="name_es" ColumnName="name_es" />
+                <ScalarProperty Name="name_fr" ColumnName="name_fr" />
+                <ScalarProperty Name="name_en" ColumnName="name_en" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="company_root_cases_organizational">
+            <EntityTypeMapping TypeName="ECModel.company_root_cases_organizational">
+              <MappingFragment StoreEntitySet="company_root_cases_organizational">
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="name_es" ColumnName="name_es" />
+                <ScalarProperty Name="name_fr" ColumnName="name_fr" />
+                <ScalarProperty Name="name_en" ColumnName="name_en" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

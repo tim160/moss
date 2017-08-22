@@ -54,6 +54,24 @@ namespace EC.Models
                         case "deleteOutcome":
                             flag = this.deleteOutcome(newSetting);
                             break;
+                        case "RootCauses1":
+                            flag = this.addRootCauses1(newSetting);
+                            break;
+                        case "RootCauses2":
+                            flag = this.addRootCauses2(newSetting);
+                            break;
+                        case "RootCauses3":
+                            flag = this.addRootCauses3(newSetting);
+                            break;
+                        case "deleteRootCauses1":
+                            flag = this.deleteRootCauses1(newSetting);
+                            break;
+                        case "deleteRootCauses2":
+                            flag = this.deleteRootCauses2(newSetting);
+                            break;
+                        case "deleteRootCauses3":
+                            flag = this.deleteRootCauses3(newSetting);
+                            break;
                     }
                 }
             }
@@ -64,7 +82,187 @@ namespace EC.Models
 
             return flag;
         }
-        
+
+        public string deleteRootCauses1(SettingsViewModel newSetting)
+        {
+            if (newSetting.companyId > 0 && newSetting.userId > 0 && newSetting.data != null)
+            {
+                var item = db.company_root_cases_behavioral.FirstOrDefault(x => x.id.ToString() == newSetting.data.Trim() & x.company_id == newSetting.companyId);
+                if (item != null)
+                {
+                    item.status_id = 1;
+                    db.SaveChanges();
+                }
+            }
+
+            return Newtonsoft.Json.JsonConvert.SerializeObject(new
+            {
+                arr1 = db.company_root_cases_behavioral.Where(x => x.status_id == 2 & x.company_id == newSetting.companyId).OrderBy(x => x.name_en).ToList(),
+                arr2 = db.company_root_cases_external.Where(x => x.status_id == 2 & x.company_id == newSetting.companyId).OrderBy(x => x.name_en).ToList(),
+                arr3 = db.company_root_cases_organizational.Where(x => x.status_id == 2 & x.company_id == newSetting.companyId).OrderBy(x => x.name_en).ToList(),
+            });
+        }
+
+        public string deleteRootCauses2(SettingsViewModel newSetting)
+        {
+            if (newSetting.companyId > 0 && newSetting.userId > 0 && newSetting.data != null)
+            {
+                var item = db.company_root_cases_external.FirstOrDefault(x => x.id.ToString() == newSetting.data.Trim() & x.company_id == newSetting.companyId);
+                if (item != null)
+                {
+                    item.status_id = 1;
+                    db.SaveChanges();
+                }
+            }
+
+            return Newtonsoft.Json.JsonConvert.SerializeObject(new
+            {
+                arr1 = db.company_root_cases_behavioral.Where(x => x.status_id == 2 & x.company_id == newSetting.companyId).OrderBy(x => x.name_en).ToList(),
+                arr2 = db.company_root_cases_external.Where(x => x.status_id == 2 & x.company_id == newSetting.companyId).OrderBy(x => x.name_en).ToList(),
+                arr3 = db.company_root_cases_organizational.Where(x => x.status_id == 2 & x.company_id == newSetting.companyId).OrderBy(x => x.name_en).ToList(),
+            });
+        }
+
+        public string deleteRootCauses3(SettingsViewModel newSetting)
+        {
+            if (newSetting.companyId > 0 && newSetting.userId > 0 && newSetting.data != null)
+            {
+                var item = db.company_root_cases_organizational.FirstOrDefault(x => x.id.ToString() == newSetting.data.Trim() & x.company_id == newSetting.companyId);
+                if (item != null)
+                {
+                    item.status_id = 1;
+                    db.SaveChanges();
+                }
+            }
+
+            return Newtonsoft.Json.JsonConvert.SerializeObject(new
+            {
+                arr1 = db.company_root_cases_behavioral.Where(x => x.status_id == 2 & x.company_id == newSetting.companyId).OrderBy(x => x.name_en).ToList(),
+                arr2 = db.company_root_cases_external.Where(x => x.status_id == 2 & x.company_id == newSetting.companyId).OrderBy(x => x.name_en).ToList(),
+                arr3 = db.company_root_cases_organizational.Where(x => x.status_id == 2 & x.company_id == newSetting.companyId).OrderBy(x => x.name_en).ToList(),
+            });
+        }
+
+        public string addRootCauses1(SettingsViewModel newSetting)
+        {
+            try
+            {
+                if (newSetting.companyId > 0 && newSetting.userId > 0 && newSetting.data != null)
+                {
+                    var item = db.company_root_cases_behavioral.FirstOrDefault(x => x.name_en.Trim().ToLower() == newSetting.data.Trim().ToLower() & x.company_id == newSetting.companyId);
+                    if (item != null)
+                    {
+                        item.status_id = 2;
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        item = new company_root_cases_behavioral
+                        {
+                            name_en = newSetting.data.Trim().ToLower(),
+                            name_es = "",
+                            name_fr = "",
+                            company_id = newSetting.companyId,
+                            status_id = 2
+                        };
+                        db.company_root_cases_behavioral.Add(item);
+                        db.SaveChanges();
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+
+            return Newtonsoft.Json.JsonConvert.SerializeObject(new
+            {
+                arr1 = db.company_root_cases_behavioral.Where(x => x.status_id == 2 & x.company_id == newSetting.companyId).OrderBy(x => x.name_en).ToList(),
+                arr2 = db.company_root_cases_external.Where(x => x.status_id == 2 & x.company_id == newSetting.companyId).OrderBy(x => x.name_en).ToList(),
+                arr3 = db.company_root_cases_organizational.Where(x => x.status_id == 2 & x.company_id == newSetting.companyId).OrderBy(x => x.name_en).ToList(),
+            });
+        }
+
+        public string addRootCauses2(SettingsViewModel newSetting)
+        {
+            try
+            {
+                if (newSetting.companyId > 0 && newSetting.userId > 0 && newSetting.data != null)
+                {
+                    var item = db.company_root_cases_external.FirstOrDefault(x => x.name_en.Trim().ToLower() == newSetting.data.Trim().ToLower() & x.company_id == newSetting.companyId);
+                    if (item != null)
+                    {
+                        item.status_id = 2;
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        item = new company_root_cases_external
+                        {
+                            name_en = newSetting.data.Trim().ToLower(),
+                            name_es = "",
+                            name_fr = "",
+                            company_id = newSetting.companyId,
+                            status_id = 2
+                        };
+                        db.company_root_cases_external.Add(item);
+                        db.SaveChanges();
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+
+            return Newtonsoft.Json.JsonConvert.SerializeObject(new
+            {
+                arr1 = db.company_root_cases_behavioral.Where(x => x.status_id == 2 & x.company_id == newSetting.companyId).OrderBy(x => x.name_en).ToList(),
+                arr2 = db.company_root_cases_external.Where(x => x.status_id == 2 & x.company_id == newSetting.companyId).OrderBy(x => x.name_en).ToList(),
+                arr3 = db.company_root_cases_organizational.Where(x => x.status_id == 2 & x.company_id == newSetting.companyId).OrderBy(x => x.name_en).ToList(),
+            });
+        }
+
+        public string addRootCauses3(SettingsViewModel newSetting)
+        {
+            try
+            {
+                if (newSetting.companyId > 0 && newSetting.userId > 0 && newSetting.data != null)
+                {
+                    var item = db.company_root_cases_organizational.FirstOrDefault(x => x.name_en.Trim().ToLower() == newSetting.data.Trim().ToLower() & x.company_id == newSetting.companyId);
+                    if (item != null)
+                    {
+                        item.status_id = 2;
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        item = new company_root_cases_organizational
+                        {
+                            name_en = newSetting.data.Trim().ToLower(),
+                            name_es = "",
+                            name_fr = "",
+                            company_id = newSetting.companyId,
+                            status_id = 2
+                        };
+                        db.company_root_cases_organizational.Add(item);
+                        db.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+
+            }
+
+            return Newtonsoft.Json.JsonConvert.SerializeObject(new
+            {
+                arr1 = db.company_root_cases_behavioral.Where(x => x.status_id == 2 & x.company_id == newSetting.companyId).OrderBy(x => x.name_en).ToList(),
+                arr2 = db.company_root_cases_external.Where(x => x.status_id == 2 & x.company_id == newSetting.companyId).OrderBy(x => x.name_en).ToList(),
+                arr3 = db.company_root_cases_organizational.Where(x => x.status_id == 2 & x.company_id == newSetting.companyId).OrderBy(x => x.name_en).ToList(),
+            });
+        }
+
         public string addOutcome(SettingsViewModel newSetting)
         {
             string id = null;

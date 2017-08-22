@@ -110,5 +110,8 @@ namespace EC.Models.Database
         public virtual DbSet<company_third_level_type> company_third_level_type { get; set; }
         public virtual DbSet<report_third_level_type> report_third_level_type { get; set; }
         public virtual DbSet<location_cc_extended> location_cc_extended { get; set; }
+        public virtual DbSet<company_root_cases_behavioral> company_root_cases_behavioral { get; set; }
+        public virtual DbSet<company_root_cases_external> company_root_cases_external { get; set; }
+        public virtual DbSet<company_root_cases_organizational> company_root_cases_organizational { get; set; }
     }
 }

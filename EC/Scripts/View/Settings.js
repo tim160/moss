@@ -167,6 +167,10 @@
         }
 
         function contentCompanyProfileShow() {
+            $('.menuItem:nth-child(9)').click(function () {
+                hideBlock();
+                $('.blockRootCauses').show();
+            });
             $('.menuItem:nth-child(8)').click(function () {
                 hideBlock();
                 $('.blockOutcomes').show();
@@ -225,6 +229,95 @@
             contentCompanyProfile.find("#add" + nameObject.charAt(0) + nameObject.charAt(1) + nameObject.charAt(2) + "Btn").hide();
         }
 
+        $('#addNewRootCauses1 p').click(function () {
+            $('.newRootCauses').css('display', 'none');
+            $('#newRootCauses1').css('display', '');
+        });
+        $('#addNewRootCauses2 p').click(function () {
+            $('.newRootCauses').css('display', 'none');
+            $('#newRootCauses2').css('display', '');
+        });
+        $('#addNewRootCauses3 p').click(function () {
+            $('.newRootCauses').css('display', 'none');
+            $('#newRootCauses3').css('display', '');
+        });
+
+        function renderRootCauses(data) {
+            data = JSON.parse(data);
+            var html = '';
+            for (var i = 0; i < Math.max(data.arr1.length, data.arr2.length, data.arr3.length) ; i++) {
+                var item1 = data.arr1.length > i ? data.arr1[i] : null;
+                var item2 = data.arr2.length > i ? data.arr2[i] : null;
+                var item3 = data.arr3.length > i ? data.arr3[i] : null;
+                html += '<tr>';
+                html += '<td width="33%"';
+                html += item1 != null ? ' data-id="' + item1.id + '">' : '>';
+                html += item1 != null ? '<p>' + item1.name_en + '</p>' : '';
+                html += $('#tblRootCauses').data('delete') == 1 && item1 != null ? '<div class="deleteRootCauses"></div>' : '';
+                html += '</td>';
+                html += '<td width="33%"';
+                html += item2 != null ? ' data-id="' + item2.id + '">' : '>';
+                html += item2 != null ? '<p>' + item2.name_en + '</p>' : '';
+                html += $('#tblRootCauses').data('delete') == 1 && item2 != null ? '<div class="deleteRootCauses"></div>' : '';
+                html += '</td>';
+                html += '<td width="33%"';
+                html += item3 != null ? ' data-id="' + item3.id + '">' : '>';
+                html += item3 != null ? '<p>' + item3.name_en + '</p>' : '';
+                html += $('#tblRootCauses').data('delete') == 1 && item3 != null ? '<div class="deleteRootCauses"></div>' : '';
+                html += '</td>';
+                html += '</tr>';
+            }
+            $('#tblRootCauses').html(html);
+            deleteRootCauses();
+        }
+
+        function deleteRootCauses() {
+            $('.deleteRootCauses').off().on('click', function () {
+                data = $(this).closest('td').data('id').toString();
+                sendAjax('deleteRootCauses' + ($(this).closest('td').index() + 1), data, function (json) {
+                    renderRootCauses(json);
+                    $('.newRootCauses').css('display', 'none');
+                });
+            });
+        }
+        deleteRootCauses();
+
+        $('#newRootCauses1 .btnAdd').click(function () {
+            var data = $('#newRootCauses1 input').val();
+            if (data.length > 0) {
+                sendAjax("RootCauses1", data, function (json) {
+                    renderRootCauses(json);
+                    $('.newRootCauses').css('display', 'none');
+                });
+            } else {
+                $('#newRootCauses1').css('border-color', 'red');
+                $('#newRootCauses1').css('border-width', '2px');
+            }
+        });
+        $('#newRootCauses2 .btnAdd').click(function () {
+            var data = $('#newRootCauses2 input').val();
+            if (data.length > 0) {
+                sendAjax("RootCauses2", data, function (json) {
+                    renderRootCauses(json);
+                    $('.newRootCauses').css('display', 'none');
+                });
+            } else {
+                $('#newRootCauses2').css('border-color', 'red');
+                $('#newRootCauses2').css('border-width', '2px');
+            }
+        });
+        $('#newRootCauses3 .btnAdd').click(function () {
+            var data = $('#newRootCauses3 input').val();
+            if (data.length > 0) {
+                sendAjax("RootCauses3", data, function (json) {
+                    renderRootCauses(json);
+                    $('.newRootCauses').css('display', 'none');
+                });
+            } else {
+                $('#newRootCauses3').css('border-color', 'red');
+                $('#newRootCauses3').css('border-width', '2px');
+            }
+        });
 
         $('.addLanguageBtn p').click(function () {
             $(this).parent().addClass("inactive");

@@ -2101,4 +2101,16 @@
   <data name="Attachments" xml:space="preserve">
     <value>Attachments</value>
   </data>
+  <data name="RootCauses" xml:space="preserve">
+    <value>Root Causes</value>
+  </data>
+  <data name="AddNewBehavioralFactors" xml:space="preserve">
+    <value>Add new behavioral factors</value>
+  </data>
+  <data name="AddNewExternalInfluences" xml:space="preserve">
+    <value>Add new external influences</value>
+  </data>
+  <data name="AddNewOrganizationalInfluences" xml:space="preserve">
+    <value>Add new organizational influences</value>
+  </data>
 </root>

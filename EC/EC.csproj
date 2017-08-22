@@ -768,6 +768,15 @@
     <Compile Include="Models\Database\company_relationship.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Database\company_root_cases_behavioral.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\company_root_cases_external.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\company_root_cases_organizational.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Database\company_secondary_type.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>

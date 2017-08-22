@@ -223,11 +223,29 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add new behavioral factors.
+        /// </summary>
+        public static string AddNewBehavioralFactors {
+            get {
+                return ResourceManager.GetString("AddNewBehavioralFactors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to add new Department.
         /// </summary>
         public static string addnewDepartment {
             get {
                 return ResourceManager.GetString("addnewDepartment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add new external influences.
+        /// </summary>
+        public static string AddNewExternalInfluences {
+            get {
+                return ResourceManager.GetString("AddNewExternalInfluences", resourceCulture);
             }
         }
         
@@ -255,6 +273,15 @@ namespace EC.App_LocalResources {
         public static string addnewLocation {
             get {
                 return ResourceManager.GetString("addnewLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add new organizational influences.
+        /// </summary>
+        public static string AddNewOrganizationalInfluences {
+            get {
+                return ResourceManager.GetString("AddNewOrganizationalInfluences", resourceCulture);
             }
         }
         
@@ -5025,6 +5052,15 @@ namespace EC.App_LocalResources {
         public static string RoleInReportExpla {
             get {
                 return ResourceManager.GetString("RoleInReportExpla", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Root Causes.
+        /// </summary>
+        public static string RootCauses {
+            get {
+                return ResourceManager.GetString("RootCauses", resourceCulture);
             }
         }
         

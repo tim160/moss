@@ -97,6 +97,9 @@
         <EntityTypeShape EntityType="ECModel.company_third_level_type" Width="1.75" PointX="21.375" PointY="0.75" />
         <EntityTypeShape EntityType="ECModel.report_third_level_type" Width="1.5" PointX="23.375" PointY="0.75" />
         <EntityTypeShape EntityType="ECModel.location_cc_extended" Width="1.5" PointX="28.375" PointY="9.75" />
+        <EntityTypeShape EntityType="ECModel.company_root_cases_behavioral" Width="1.5" PointX="28.375" PointY="12.75" />
+        <EntityTypeShape EntityType="ECModel.company_root_cases_external" Width="1.5" PointX="28.375" PointY="15.75" />
+        <EntityTypeShape EntityType="ECModel.company_root_cases_organizational" Width="1.5" PointX="28.375" PointY="18.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
