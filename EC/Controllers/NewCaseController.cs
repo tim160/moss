@@ -1,0 +1,35 @@
+﻿using EC.Constants;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using EC.Models.Database;
+
+namespace EC.Controllers
+{
+    
+    public class NewCaseController : Controller
+    {
+        public ECEntities db = new ECEntities();
+        // GET: NewCase
+        public ActionResult Report(int report_id)
+        {
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            if (user == null || user.id == 0)
+                return RedirectToAction("Index", "Account");
+
+            int user_id = user.id;
+            ViewBag.user_id = user_id;
+            ViewBag.report_id = report_id;
+            ViewBag.attachmentFiles = getAttachmentFiles(report_id);
+            return View();
+        }
+        public List<attachment> getAttachmentFiles(int report_id)
+        {
+            List<attachment> attachmentFiles = db.attachment.Where(item => (item.report_id == report_id && !item.visible_mediators_only.HasValue && !item.visible_reporter.HasValue)).ToList();
+            return attachmentFiles;
+        }
+
+    }
+}
