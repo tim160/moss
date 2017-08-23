@@ -5110,6 +5110,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Secondary Type.
+        /// </summary>
+        public static string SecondaryType {
+            get {
+                return ResourceManager.GetString("SecondaryType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select an option....
         /// </summary>
         public static string Selectanoption {

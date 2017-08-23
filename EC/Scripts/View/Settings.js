@@ -165,12 +165,17 @@
             $('.blockAnonymity').hide();
             $('.blockOutcomes').hide();
             $('.blockRootCauses').hide();
+            $('.blockSecondaryType').hide();
         }
 
         function contentCompanyProfileShow() {
             $('.menuItem:nth-child(9)').click(function () {
                 hideBlock();
                 $('.blockRootCauses').show();
+            });
+            $('.menuItem:nth-child(10)').click(function () {
+                hideBlock();
+                $('.blockSecondaryType').show();
             });
             $('.menuItem:nth-child(8)').click(function () {
                 hideBlock();
