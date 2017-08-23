@@ -282,6 +282,9 @@
     <Compile Include="Models\Database\status.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Database\sysdiagrams.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Database\task.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
@@ -406,20 +409,6 @@
     <Compile Include="Models\ECDbModel\validation_type.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <EntityDeploy Include="Models\Database\ECEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ECEntities.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
-    <None Include="Models\Database\ECEntities.edmx.diagram">
-      <DependentUpon>ECEntities.edmx</DependentUpon>
-    </None>
-    <None Include="packages.config" />
-  </ItemGroup>
   <ItemGroup>
     <Content Include="Models\Database\ECEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -431,6 +420,17 @@
       <DependentUpon>ECEntities.edmx</DependentUpon>
       <LastGenOutput>ECEntities.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <EntityDeploy Include="Models\Database\ECEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ECEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\Database\ECEntities.edmx.diagram">
+      <DependentUpon>ECEntities.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

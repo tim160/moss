@@ -17,7 +17,7 @@ namespace EC.Data.Models.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public management_know()
         {
-            this.reports = new HashSet<report>();
+            this.report = new HashSet<report>();
         }
     
         public int id { get; set; }
@@ -29,6 +29,6 @@ namespace EC.Data.Models.Database
         public string code { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<report> reports { get; set; }
+        public virtual ICollection<report> report { get; set; }
     }
 }

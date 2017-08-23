@@ -8,7 +8,37 @@
 }
 
 <body>
+    <style>
+         .headerPos {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0px;
+    width: 100%;
+    float: left;
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+    font-size: 12px;
+    position: absolute;
+    margin-top: 1px;
+    height: auto;
+    bottom: -3px;
+    -webkit-box-shadow: 0px 2px 0px 0px rgba(0,0,0,0.11);
+    -moz-box-shadow: 0px 2px 0px 0px rgba(0,0,0,0.11);
+    box-shadow: 0px 2px 0px 0px rgba(0,0,0,0.11);
+    z-index: 1;
+}
+         .headerPos .positionN + .polos {
+    height: 6px;
+    width: 2px;
+    background: #d7e3e4 none repeat scroll 0% 0%;
+    margin-bottom: -35px;
+}
+    </style>
+
     <link type="text/css" href="~/Content/caseTasks.css" rel="stylesheet">
+
+    @Html.Partial("~/Views/NewCase/Partial/headerPos.cshtml", (EC.Models.ViewModels.HeaderPos)@ViewBag.headerPos)
 
     <div id="generalInfo">
         <div class="firstPosition">

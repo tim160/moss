@@ -12,6 +12,8 @@ namespace EC.Data.Models.Database
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class ECEntities : DbContext
     {
@@ -25,17 +27,17 @@ namespace EC.Data.Models.Database
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<action> actions { get; set; }
-        public virtual DbSet<address> addresses { get; set; }
-        public virtual DbSet<anonymity> anonymities { get; set; }
-        public virtual DbSet<attachment> attachments { get; set; }
+        public virtual DbSet<action> action { get; set; }
+        public virtual DbSet<address> address { get; set; }
+        public virtual DbSet<anonymity> anonymity { get; set; }
+        public virtual DbSet<attachment> attachment { get; set; }
         public virtual DbSet<billing_option> billing_option { get; set; }
         public virtual DbSet<case_closure_reason> case_closure_reason { get; set; }
         public virtual DbSet<cc_crime_statistics_category> cc_crime_statistics_category { get; set; }
         public virtual DbSet<cc_crime_statistics_location> cc_crime_statistics_location { get; set; }
-        public virtual DbSet<client> clients { get; set; }
-        public virtual DbSet<color> colors { get; set; }
-        public virtual DbSet<company> companies { get; set; }
+        public virtual DbSet<client> client { get; set; }
+        public virtual DbSet<color> color { get; set; }
+        public virtual DbSet<company> company { get; set; }
         public virtual DbSet<company_anonymity> company_anonymity { get; set; }
         public virtual DbSet<company_custom_question> company_custom_question { get; set; }
         public virtual DbSet<company_department> company_department { get; set; }
@@ -48,34 +50,34 @@ namespace EC.Data.Models.Database
         public virtual DbSet<company_third_level_type> company_third_level_type { get; set; }
         public virtual DbSet<company_type> company_type { get; set; }
         public virtual DbSet<company_unread_report_reminder> company_unread_report_reminder { get; set; }
-        public virtual DbSet<country> countries { get; set; }
+        public virtual DbSet<country> country { get; set; }
         public virtual DbSet<custom_question> custom_question { get; set; }
         public virtual DbSet<custom_question_answer> custom_question_answer { get; set; }
         public virtual DbSet<demoq_request> demoq_request { get; set; }
-        public virtual DbSet<frequency> frequencies { get; set; }
-        public virtual DbSet<industry> industries { get; set; }
+        public virtual DbSet<frequency> frequency { get; set; }
+        public virtual DbSet<industry> industry { get; set; }
         public virtual DbSet<industry_posters> industry_posters { get; set; }
         public virtual DbSet<injury_damage> injury_damage { get; set; }
         public virtual DbSet<investigation_status> investigation_status { get; set; }
-        public virtual DbSet<invitation> invitations { get; set; }
-        public virtual DbSet<language> languages { get; set; }
+        public virtual DbSet<invitation> invitation { get; set; }
+        public virtual DbSet<language> language { get; set; }
         public virtual DbSet<login_history> login_history { get; set; }
         public virtual DbSet<management_know> management_know { get; set; }
-        public virtual DbSet<message> messages { get; set; }
+        public virtual DbSet<message> message { get; set; }
         public virtual DbSet<message_posters> message_posters { get; set; }
         public virtual DbSet<message_user_read> message_user_read { get; set; }
         public virtual DbSet<notification_processed> notification_processed { get; set; }
         public virtual DbSet<notification_summary_period> notification_summary_period { get; set; }
-        public virtual DbSet<ongoing> ongoings { get; set; }
-        public virtual DbSet<outcome> outcomes { get; set; }
-        public virtual DbSet<partner> partners { get; set; }
-        public virtual DbSet<poster> posters { get; set; }
+        public virtual DbSet<ongoing> ongoing { get; set; }
+        public virtual DbSet<outcome> outcome { get; set; }
+        public virtual DbSet<partner> partner { get; set; }
+        public virtual DbSet<poster> poster { get; set; }
         public virtual DbSet<poster_industry_posters> poster_industry_posters { get; set; }
         public virtual DbSet<preferred_contact_method> preferred_contact_method { get; set; }
-        public virtual DbSet<priority> priorities { get; set; }
-        public virtual DbSet<province> provinces { get; set; }
-        public virtual DbSet<relationship> relationships { get; set; }
-        public virtual DbSet<report> reports { get; set; }
+        public virtual DbSet<priority> priority { get; set; }
+        public virtual DbSet<province> province { get; set; }
+        public virtual DbSet<relationship> relationship { get; set; }
+        public virtual DbSet<report> report { get; set; }
         public virtual DbSet<report_department> report_department { get; set; }
         public virtual DbSet<report_investigation_status> report_investigation_status { get; set; }
         public virtual DbSet<report_log> report_log { get; set; }
@@ -90,24 +92,128 @@ namespace EC.Data.Models.Database
         public virtual DbSet<report_type_mandatory_question> report_type_mandatory_question { get; set; }
         public virtual DbSet<report_user_read> report_user_read { get; set; }
         public virtual DbSet<reported_outside> reported_outside { get; set; }
-        public virtual DbSet<resolution> resolutions { get; set; }
+        public virtual DbSet<resolution> resolution { get; set; }
         public virtual DbSet<role_in_report> role_in_report { get; set; }
-        public virtual DbSet<scope> scopes { get; set; }
+        public virtual DbSet<scope> scope { get; set; }
         public virtual DbSet<secondary_type_mandatory> secondary_type_mandatory { get; set; }
-        public virtual DbSet<severity> severities { get; set; }
-        public virtual DbSet<source> sources { get; set; }
+        public virtual DbSet<severity> severity { get; set; }
+        public virtual DbSet<source> source { get; set; }
         public virtual DbSet<status> status { get; set; }
-        public virtual DbSet<task> tasks { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<task> task { get; set; }
         public virtual DbSet<task_comment> task_comment { get; set; }
         public virtual DbSet<task_comment_user_read> task_comment_user_read { get; set; }
         public virtual DbSet<task_user_read> task_user_read { get; set; }
         public virtual DbSet<time_zone> time_zone { get; set; }
-        public virtual DbSet<type> types { get; set; }
+        public virtual DbSet<type> type { get; set; }
         public virtual DbSet<unread_report_reminder> unread_report_reminder { get; set; }
         public virtual DbSet<unread_report_reminder_sent> unread_report_reminder_sent { get; set; }
-        public virtual DbSet<user> users { get; set; }
+        public virtual DbSet<user> user { get; set; }
         public virtual DbSet<user_change_password> user_change_password { get; set; }
         public virtual DbSet<user_role> user_role { get; set; }
         public virtual DbSet<validation_type> validation_type { get; set; }
+    
+        public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_creatediagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_dropdiagram(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual int sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual int sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var new_diagramnameParameter = new_diagramname != null ?
+                new ObjectParameter("new_diagramname", new_diagramname) :
+                new ObjectParameter("new_diagramname", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
+        }
+    
+        public virtual int sp_upgraddiagrams()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
     }
 }
