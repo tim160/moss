@@ -12,7 +12,7 @@
         is_cc = false;
     }
     String class_ext = ViewBag.cc_extension;
-    //bool is_cc = true;
+    //is_cc = true;
     //String class_ext = "";
     //if (is_cc)
     //{
@@ -310,12 +310,12 @@
                          </p>
                         <div style="padding: 20px;">
                             <label class="inputBlock" for="Anonymous">
-                                <input id="Anonymous" type="radio" name="stay" value="true">
+                                <input id="Anonymous" type="radio" name="isLifeThreat" value="true">
                                 <span class="radioButton"></span>
                                 <span class="radioTitle">Yes</span>
                             </label>
                             <label class="inputBlock" for="no">
-                                <input id="no" type="radio" name="stay" value="false">
+                                <input id="no" type="radio" name="isLifeThreat" value="false">
                                 <span class="radioButton"></span>
                                 <span class="radioTitle">No</span>
                             </label>
@@ -381,8 +381,8 @@
 
 
                                 </div>
-                                <div class="arrow green"></div>
                             </div>
+                                <div class="arrow green"></div>
                             <div class="messageText spamMessage">
                                 <textarea cols="20" id="body_text" class="green" name="body_tx" rows="2" autofocus></textarea>
                             </div>
@@ -643,7 +643,7 @@
                     scopeId : $('#ScopeId').val(),
                     severityId: $('#SeverityId').val(),
                     ownerId: $('#OwnerId').val(),
-                    isLifeThreat: false
+                    isLifeThreat: $('[name="isLifeThreat"]:checked').val()
                 }
             }).done(function(data) {
                 var str = window.location.href;
