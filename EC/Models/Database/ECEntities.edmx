@@ -263,6 +263,19 @@
           <Property Name="user_id" Type="int" Nullable="false" />
           <Property Name="scope_id" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="company_case_routing_attachments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_case_routing_id" Type="int" Nullable="false" />
+          <Property Name="status_id" Type="int" />
+          <Property Name="path_nm" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="file_nm" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="extension_nm" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="upload_dt" Type="smalldatetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="company_custom_question">
           <Key>
             <PropertyRef Name="id" />
@@ -1479,6 +1492,7 @@ warning 6002: The table/view 'EC.dbo.location_cc_extended' does not have a prima
           <EntitySet Name="company_anonymity" EntityType="Self.company_anonymity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="company_case_admin_department" EntityType="Self.company_case_admin_department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="company_case_routing" EntityType="Self.company_case_routing" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="company_case_routing_attachments" EntityType="Self.company_case_routing_attachments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="company_custom_question" EntityType="Self.company_custom_question" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="company_department" EntityType="Self.company_department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="company_invitation" EntityType="Self.company_invitation" Schema="dbo" store:Type="Tables" />
@@ -2933,6 +2947,7 @@ warning 6002: The table/view 'EC.dbo.location_cc_extended' does not have a prima
           <EntitySet Name="company_root_cases_organizational" EntityType="ECModel.company_root_cases_organizational" />
           <EntitySet Name="company_case_admin_department" EntityType="ECModel.company_case_admin_department" />
           <EntitySet Name="company_case_routing" EntityType="ECModel.company_case_routing" />
+          <EntitySet Name="company_case_routing_attachments" EntityType="ECModel.company_case_routing_attachments" />
         </EntityContainer>
         <EntityType Name="case_closure_reason">
           <Key>
@@ -3158,6 +3173,19 @@ warning 6002: The table/view 'EC.dbo.location_cc_extended' does not have a prima
           <Property Name="user_id" Type="Int32" Nullable="false" />
           <Property Name="scope_id" Type="Int32" Nullable="false" />
           </EntityType>
+        <EntityType Name="company_case_routing_attachments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_case_routing_id" Type="Int32" Nullable="false" />
+          <Property Name="status_id" Type="Int32" />
+          <Property Name="path_nm" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="file_nm" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="extension_nm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="upload_dt" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4590,6 +4618,20 @@ warning 6002: The table/view 'EC.dbo.location_cc_extended' does not have a prima
                 <ScalarProperty Name="status_id" ColumnName="status_id" />
                 <ScalarProperty Name="company_id" ColumnName="company_id" />
                 <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="company_case_routing_attachments">
+            <EntityTypeMapping TypeName="ECModel.company_case_routing_attachments">
+              <MappingFragment StoreEntitySet="company_case_routing_attachments">
+                <ScalarProperty Name="upload_dt" ColumnName="upload_dt" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="extension_nm" ColumnName="extension_nm" />
+                <ScalarProperty Name="file_nm" ColumnName="file_nm" />
+                <ScalarProperty Name="path_nm" ColumnName="path_nm" />
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="company_case_routing_id" ColumnName="company_case_routing_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

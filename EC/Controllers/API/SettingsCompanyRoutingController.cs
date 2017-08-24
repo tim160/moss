@@ -14,6 +14,9 @@ using EC.Core.Common;
 using EC.App_LocalResources;
 using EC.Models.ViewModel;
 using EC.Common.Interfaces;
+using System.Threading.Tasks;
+using System.Collections.Specialized;
+using Newtonsoft.Json;
 
 namespace EC.Controllers.API
 {
@@ -47,6 +50,8 @@ namespace EC.Controllers.API
             var scopes = DB.scope.ToList();
             var items = DB.company_case_routing.Where(x => x.company_id == user.company_id).ToList();
             var types = DB.company_secondary_type.Where(x => x.company_id == user.company_id && x.status_id == 2).ToList();
+            var ids = items.Select(x => x.id).ToList();
+            var files = DB.company_case_routing_attachments.Where(x => ids.Contains(x.company_case_routing_id)).ToList();
             types.ForEach(x =>
             {
                 var item = items.FirstOrDefault(z => z.company_secondary_type_id == x.id);
@@ -72,42 +77,73 @@ namespace EC.Controllers.API
                 users = users,
                 scopes = scopes,
                 items = items,
+                files = files,
             };
             return ResponseObject2Json(m);
         }
 
         [HttpPost]
-        public object Post(PostModel model)
+        public async Task<object> Post()
         {
             user user = (user)HttpContext.Current.Session[ECGlobalConstants.CurrentUserMarcker];
 
-            if (user == null || user.id == 0 || model.Model == null)
+            if (user == null || user.id == 0)
             {
                 return Get();
             }
 
+            company_case_routing model;
+            string jsonContent;
+            if (Request.Content.IsMimeMultipartContent())
+            {
+                var parts = await Request.Content.ReadAsMultipartAsync();
+
+                jsonContent = parts.Contents[0].ReadAsStringAsync().Result;
+                model = JsonConvert.DeserializeObject<company_case_routing>(jsonContent);
+
+                var file = HttpContext.Current.Request.Files[0];
+
+                CompanyModel cm = new CompanyModel(user.company_id);
+                var dir = System.Web.Hosting.HostingEnvironment.MapPath(String.Format("~/upload/Company/{0}", cm._company.guid));
+                var filename = String.Format("{0}_{1}{2}", user.id, DateTime.Now.Ticks, System.IO.Path.GetExtension(file.FileName));
+                
+                if (!System.IO.Directory.Exists(dir))
+                {
+                    System.IO.Directory.CreateDirectory(dir);
+                }
+                file.SaveAs(String.Format("{0}\\{1}", dir, filename));
+
+                var itemDb = new company_case_routing_attachments
+                {
+                    company_case_routing_id = model.id,
+                    status_id = 2,
+                    user_id = user.id,
+                    upload_dt = DateTime.Now,
+                    file_nm = file.FileName,
+                    extension_nm = System.IO.Path.GetExtension(file.FileName), 
+                    path_nm = String.Format("\\upload\\Company\\{0}\\{1}", cm._company.guid, filename),
+                };
+                DB.company_case_routing_attachments.Add(itemDb);
+                DB.SaveChanges();
+
+                return Get();
+            }
+
+            jsonContent = Request.Content.ReadAsStringAsync().Result;
+            PostModel pModel = JsonConvert.DeserializeObject<PostModel>(jsonContent);
+
             UserModel um = new UserModel(user.id);
 
             company_case_routing item;
-            /*if (model.DeleteId.HasValue)
-            {
-                item = DB.company_case_routing.FirstOrDefault(x => x.id == model.DeleteId);
-                if (item != null)
-                {
-                    item.status_id = 1;
-                    DB.SaveChanges();
-                }
-                return Get();
-            }*/
 
             item = DB.company_case_routing
-                .FirstOrDefault(x => x.client_id == 1 && x.company_id == user.company_id && x.company_secondary_type_id == model.Model.company_secondary_type_id);
+                .FirstOrDefault(x => x.client_id == 1 && x.company_id == user.company_id && x.company_secondary_type_id == pModel.Model.company_secondary_type_id);
 
             if (item != null)
             {
-                item.company_case_admin_department_id = model.Model.company_case_admin_department_id;
-                item.user_id = model.Model.user_id;
-                item.scope_id = model.Model.scope_id;
+                item.company_case_admin_department_id = pModel.Model.company_case_admin_department_id;
+                item.user_id = pModel.Model.user_id;
+                item.scope_id = pModel.Model.scope_id;
                 DB.SaveChanges();
             }
             else
@@ -118,10 +154,10 @@ namespace EC.Controllers.API
                     company_id = user.company_id,
                     client_id = 1,
                     status_id = 2,
-                    company_case_admin_department_id = model.Model.company_case_admin_department_id,
-                    user_id = model.Model.user_id,
-                    scope_id = model.Model.scope_id,
-                    company_secondary_type_id = model.Model.company_secondary_type_id,
+                    company_case_admin_department_id = pModel.Model.company_case_admin_department_id,
+                    user_id = pModel.Model.user_id,
+                    scope_id = pModel.Model.scope_id,
+                    company_secondary_type_id = pModel.Model.company_secondary_type_id,
                 };
                 DB.company_case_routing.Add(item);
                 DB.SaveChanges();

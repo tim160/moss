@@ -316,10 +316,13 @@
                                     <select ng-change="changeLine(line)" ng-model="line.scope_id" ng-options="item.id as item.scope_en for item in scopes"></select>
                                 </td>
                                 <td class="ng-binding">
-                                    <div class="button" onclick="$(this).parent().find('input').click(); return false;">
+                                    <div class="button" ng-click="fileSelect(line)" onclick="$(this).parent().find('input').click()" >
                                         Upload
                                     </div>
-                                    <input type="file" file-model="myFile" style="display: none;">
+                                    <input type="file" style="display: none;" onchange="angular.element(this).scope().upload(this); return false;">
+                                    <div ng-repeat="file in files | filter: { company_case_routing_id: line.id }">
+                                        <a href="{{file.path_nm}}">{{file.file_nm}}</a>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>

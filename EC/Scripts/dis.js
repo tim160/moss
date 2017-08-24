@@ -304,14 +304,16 @@
     angular
         .module('EC')
         .controller('SettingsCompanyRoutingController',
-            ['$scope', '$filter', 'orderByFilter', 'SettingsCompanyRoutingService', SettingsCompanyRoutingController]);
+            ['$scope', '$filter', 'orderByFilter', '$http', 'SettingsCompanyRoutingService', SettingsCompanyRoutingController]);
 
-    function SettingsCompanyRoutingController($scope, $filter, orderByFilter, SettingsCompanyRoutingService) {
+    function SettingsCompanyRoutingController($scope, $filter, orderByFilter, $http, SettingsCompanyRoutingService) {
         $scope.types = [];
         $scope.departments = [];
         $scope.users = [];
         $scope.scopes = [];
         $scope.items = [];
+        $scope.files = [];
+        $scope.uploadLine = 0;
 
         $scope.refresh = function (data) {
             $scope.types = data.types;
@@ -319,6 +321,7 @@
             $scope.users = data.users;
             $scope.scopes = data.scopes;
             $scope.items = data.items;
+            $scope.files = data.files;
             $scope.departments.splice(0, 0, { id: 0, name_en: 'Select' });
             $scope.users.splice(0, 0, { id: 0, first_nm: 'Select', last_nm: '' });
             $scope.scopes.splice(0, 0, { id: 0, scope_en: 'Select' });
@@ -346,6 +349,29 @@
             SettingsCompanyRoutingService.post({ model: line }, function (data) {
                 $scope.refresh(data);
             });
+        };
+
+        $scope.upload = function (elem) {
+            console.log(1);
+            var data = new FormData();
+            data.append('model', JSON.stringify($scope.uploadLine));
+            data.append('file', elem.files[0]);
+
+            $http({
+                url: '/api/SettingsCompanyRouting',
+                method: 'POST',
+                data: data,
+                headers: { 'Content-Type': undefined }, //this is important
+                transformRequest: angular.identity //also important
+            }).then(function (data) {
+                $scope.refresh(data.data);
+            }).catch(function(response){
+            });
+        };
+
+        $scope.fileSelect = function (line) {
+            console.log(0);
+            $scope.uploadLine = line;
         };
     }
 }());
