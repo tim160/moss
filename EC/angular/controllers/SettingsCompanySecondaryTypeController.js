@@ -33,7 +33,6 @@
 
         $scope.findST = function (id) {
             for (var i = 0; i < $scope.secondaryTypes.length; i++) {
-                console.log(id, $scope.secondaryTypes[i].id, id);
                 if ($scope.secondaryTypes[i].id === id) {
                     return $scope.secondaryTypes[i].secondary_type_en;
                 }

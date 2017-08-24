@@ -236,6 +236,20 @@
           <Property Name="last_update_dt" Type="datetime" Nullable="false" />
           <Property Name="user_id" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="company_case_admin_department">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="client_id" Type="int" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="status_id" Type="int" />
+          <Property Name="name_en" Type="nvarchar" MaxLength="75" />
+          <Property Name="name_fr" Type="nvarchar" MaxLength="150" />
+          <Property Name="name_es" Type="nvarchar" MaxLength="150" />
+          <Property Name="name_ru" Type="nvarchar" MaxLength="150" />
+          <Property Name="name_ar" Type="nvarchar" MaxLength="150" />
+        </EntityType>
         <EntityType Name="company_custom_question">
           <Key>
             <PropertyRef Name="id" />
@@ -1450,6 +1464,7 @@ warning 6002: The table/view 'EC.dbo.location_cc_extended' does not have a prima
           <EntitySet Name="color" EntityType="Self.color" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="company" EntityType="Self.company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="company_anonymity" EntityType="Self.company_anonymity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="company_case_admin_department" EntityType="Self.company_case_admin_department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="company_custom_question" EntityType="Self.company_custom_question" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="company_department" EntityType="Self.company_department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="company_invitation" EntityType="Self.company_invitation" Schema="dbo" store:Type="Tables" />
@@ -2902,6 +2917,7 @@ warning 6002: The table/view 'EC.dbo.location_cc_extended' does not have a prima
           <EntitySet Name="company_root_cases_behavioral" EntityType="ECModel.company_root_cases_behavioral" />
           <EntitySet Name="company_root_cases_external" EntityType="ECModel.company_root_cases_external" />
           <EntitySet Name="company_root_cases_organizational" EntityType="ECModel.company_root_cases_organizational" />
+          <EntitySet Name="company_case_admin_department" EntityType="ECModel.company_case_admin_department" />
         </EntityContainer>
         <EntityType Name="case_closure_reason">
           <Key>
@@ -3099,6 +3115,20 @@ warning 6002: The table/view 'EC.dbo.location_cc_extended' does not have a prima
           <Property Name="name_fr" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="name_es" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="status_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="company_case_admin_department">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="client_id" Type="Int32" Nullable="false" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="status_id" Type="Int32" />
+          <Property Name="name_en" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="name_fr" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="name_es" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="name_ru" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="name_ar" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4503,6 +4533,21 @@ warning 6002: The table/view 'EC.dbo.location_cc_extended' does not have a prima
                 <ScalarProperty Name="name_fr" ColumnName="name_fr" />
                 <ScalarProperty Name="name_en" ColumnName="name_en" />
                 <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="company_case_admin_department">
+            <EntityTypeMapping TypeName="ECModel.company_case_admin_department">
+              <MappingFragment StoreEntitySet="company_case_admin_department">
+                <ScalarProperty Name="name_ar" ColumnName="name_ar" />
+                <ScalarProperty Name="name_ru" ColumnName="name_ru" />
+                <ScalarProperty Name="name_es" ColumnName="name_es" />
+                <ScalarProperty Name="name_fr" ColumnName="name_fr" />
+                <ScalarProperty Name="name_en" ColumnName="name_en" />
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

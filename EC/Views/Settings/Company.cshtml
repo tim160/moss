@@ -81,6 +81,7 @@
                     <h2 class="menuItem">@GlobalRes.Outcomes</h2>
                     <h2 class="menuItem">@GlobalRes.RootCauses</h2>
                     <h2 class="menuItem">@GlobalRes.SecondaryType</h2>
+                    <h2 class="menuItem">@GlobalRes.CaseAdminDepartment</h2>
                 </div>
             </div><!--menuCompanyProfile-->
         </div>
@@ -514,7 +515,7 @@
                 @if (is_valid_mediator)
                 {
                     <div class="addIncidentTypeBtn" ng-show="!addMode">
-                        <p ng-click="addMode = !addMode">@GlobalRes.addnewIncidentType</p>
+                        <p ng-click="addMode = !addMode">Add New Secondary Type</p>
                     </div>
                     <div class="addIncidentTypeBtn" ng-show="addMode">
                         <p style="min-width: 50px;" ng-click="add()">@GlobalRes.Add</p>
@@ -541,12 +542,42 @@
                             <td width="50%">{{findST(item.company_secondary_type_id)}}</td>
                         </tr>
                     </table>
-                    </div>
                 </div>
-            </div><!--blockIncidentTypes-->
-        </div><!--contentSettings-->
-    </div><!--contentCompanyProfile-->
+            </div>
 
-</div>
+            <div class="blockCaseAdminDepartment" style="display: none;" ng-controller="SettingsCompanyCaseAdminDepartmentController">
+                @if (is_valid_mediator)
+                {
+                    <div class="addIncidentTypeBtn" ng-show="!addMode">
+                        <p ng-click="addMode = !addMode">Add New Case Admin Department</p>
+                    </div>
+                    <div class="addIncidentTypeBtn" ng-show="addMode">
+                        <p style="min-width: 50px;" ng-click="add()">@GlobalRes.Add</p>
+                    </div>
+                }
+                <div class="addNewIncidentType" ng-show="addMode" style="display: block;">
+                    <input type="text" name="newIncidentTypeName" required="" value="" ng-model="addName">
+                    <div class="closeIcon"></div>
+                </div>
+                <div class="tableIncidentType">
+                    <table style="width: 100%;">
+                        <tr ng-repeat="item in case_admin_departments">
+                            <td width="50%">
+                                <p>{{item.name_en}}</p>
+                                @if (is_valid_mediator)
+                                {
+                                    <div class="deleteRootCauses" ng-click="delete(item.id)"></div>
+                                }
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div><!--blockIncidentTypes-->
+
+        </div><!--blockIncidentTypes-->
+    </div><!--contentSettings-->
+</div><!--contentCompanyProfile-->
+
 <input type="hidden" id="urlAjaxUploadFiles" from="Company" value="@Url.Action("AddLogoCompany", "Settings")" />
 <input type="hidden" id="sendAjax" value="@Url.Action("addNewfunction", "Settings")"/>

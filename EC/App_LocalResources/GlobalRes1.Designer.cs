@@ -826,6 +826,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Case Admin Department.
+        /// </summary>
+        public static string CaseAdminDepartment {
+            get {
+                return ResourceManager.GetString("CaseAdminDepartment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Case Can&apos;t Be Resolved.
         /// </summary>
         public static string CaseCantBeResolved {

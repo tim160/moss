@@ -2116,4 +2116,7 @@
   <data name="SecondaryType" xml:space="preserve">
     <value>Secondary Type</value>
   </data>
+  <data name="CaseAdminDepartment" xml:space="preserve">
+    <value>Case Admin Department</value>
+  </data>
 </root>
