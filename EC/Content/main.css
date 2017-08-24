@@ -4097,3 +4097,17 @@ textarea {
         #casesIndex .revertIcon img {
             transform: rotate(180deg);
         }
+
+#casesIndex .alarm-active {
+    background-image: url('Icons/alarm-active.png');
+}
+#casesIndex .alarm-default {
+    background-image: url('Icons/alarm-default.png');
+}
+#casesIndex .alarm {
+    background-repeat: no-repeat;
+    background-position-x: 0px;
+    background-position-y: 32px;
+    width: 16px;
+    height: 9px;
+}

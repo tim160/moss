@@ -17,7 +17,7 @@ namespace EC.Data.Models.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public status()
         {
-            this.countries = new HashSet<country>();
+            this.country = new HashSet<country>();
         }
     
         public int id { get; set; }
@@ -29,6 +29,6 @@ namespace EC.Data.Models.Database
         public string code { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<country> countries { get; set; }
+        public virtual ICollection<country> country { get; set; }
     }
 }

@@ -5,13 +5,15 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using EC.Models.Database;
+using EC.Models.ViewModels;
 
 namespace EC.Controllers
 {
     
-    public class NewCaseController : Controller
+    public class NewCaseController : BaseController
     {
         public ECEntities db = new ECEntities();
+        EC.Models.ReportModel rm = new EC.Models.ReportModel();
         // GET: NewCase
         public ActionResult Report(int report_id)
         {
@@ -23,6 +25,15 @@ namespace EC.Controllers
             ViewBag.user_id = user_id;
             ViewBag.report_id = report_id;
             ViewBag.attachmentFiles = getAttachmentFiles(report_id);
+            
+            #region EC-CC Viewbag
+            ViewBag.is_cc = is_cc;
+            string cc_ext = "";
+            if (is_cc) cc_ext = "_cc";
+            #endregion
+            
+            HeaderPos headerPos = new HeaderPos { cc_extension = cc_ext, _investigation_status = rm._investigation_status };
+            ViewBag.headerPos = headerPos;
             return View();
         }
         public List<attachment> getAttachmentFiles(int report_id)
