@@ -786,10 +786,10 @@ h2.mainTitle {
 .spec.position {
     position: absolute;
     top: 25px;
-    right: -30px;
+    left: -222px;
 }
 .spec {
-    width: 480px;
+    width: 1181px;
     height: auto;
     background-color: #333b40;
     opacity: 0.8;
@@ -801,6 +801,16 @@ h2.mainTitle {
 }
 .spec ul {
     list-style-type: disc;
+}
+.spec .radio {
+    background: url(img/radio.png) no-repeat;
+    background-position-x: 0px;
+    background-position-y: -11px;
+    width: 22px;
+    height: 35px;
+}
+.spec table {
+    width: 100%;
 }
 
 
