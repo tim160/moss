@@ -223,12 +223,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="angular\app.js" />
+    <Content Include="angular\controllers\SettingsCompanyRoutingController.js" />
     <Content Include="angular\controllers\SettingsCompanySecondaryTypeController.js" />
     <Content Include="angular\controllers\SettingsCompanyCaseAdminDepartmentController.js" />
     <Content Include="angular\controllers\CasesController.js" />
     <Content Include="angular\controllers\SettingsUserEditController.js" />
     <Content Include="angular\controllers\EmployeeAwarenessPosterController.js" />
     <Content Include="angular\controllers\EmployeeAwarenessController.js" />
+    <Content Include="angular\services\SettingsCompanyRoutingService.js" />
     <Content Include="angular\services\SettingsCompanyCaseAdminDepartmentService.js" />
     <Content Include="angular\services\SettingsCompanySecondaryTypeService.js" />
     <Content Include="angular\services\EmployeeAwarenessPosterService.js" />
@@ -675,6 +677,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AnalyticsController.cs" />
     <Compile Include="Controllers\API\BaseApiController.cs" />
+    <Compile Include="Controllers\API\SettingsCompanyRoutingController.cs" />
     <Compile Include="Controllers\API\SettingsCompanyCaseAdminDepartmentController.cs" />
     <Compile Include="Controllers\API\SettingsCompanySecondaryTypeController.cs" />
     <Compile Include="Controllers\API\CasesController.cs" />
@@ -758,6 +761,9 @@
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\company_case_admin_department.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\company_case_routing.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\company_custom_question.cs">

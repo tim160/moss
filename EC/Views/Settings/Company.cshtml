@@ -288,7 +288,7 @@
                 </div>
             </div><!--blockOutcome-->
 
-            <div id="caseRouting" @*ng-show="showAsGrid"*@ style="display: none;">
+            <div id="caseRouting" @*ng-show="showAsGrid"*@ style="display: none;" ng-controller="SettingsCompanyRoutingController">
                 <div class="positionTableCases">
                     <table class="tableCasesIndex">
                         <thead>
@@ -301,95 +301,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- ngRepeat: report in reports -->
-                            <tr>
-                                <td class="ng-binding">300</td>
+                            <tr ng-repeat="line in items">
+                                <td class="ng-binding">{{typeName(line.company_secondary_type_id).secondary_type_en}}</td>
                                 <td class="inSelect">
-                                    <select class="" id="" name="IncidentId">
-                                        <option value="2714">Alcohol and drug abuse</option>
-                                        <option value="3">Breach of Legal Obligations</option>
-                                        <option value="123">discrimination</option>
-                                        <option value="158">financial</option>
-                                        <option value="2">Financial Reporting and Accounting</option>
-                                        <option value="122">fraud and embezzelment</option>
-                                        <option value="157">safety</option>
+                                    <select ng-change="changeLine(line)" ng-model="line.company_case_admin_department_id" ng-options="item.id as item.name_en for item in departments">
                                     </select>
                                 </td>
                                 <td class="inSelect">
-                                    <select class="" id="" name="IncidentId">
-                                        <option value="2714">Alcohol and drug abuse</option>
-                                        <option value="3">Breach of Legal Obligations</option>
-                                        <option value="123">discrimination</option>
-                                        <option value="158">financial</option>
-                                        <option value="2">Financial Reporting and Accounting</option>
-                                        <option value="122">fraud and embezzelment</option>
-                                        <option value="157">safety</option>
+                                    <select ng-change="changeLine(line)" ng-model="line.user_id" ng-options="item.id as userName(item) for item in users">
+                                        <option value="" ng-if="false"></option>
                                     </select>
                                 </td>
                                 <td class="inSelect">
-                                    <select class="" id="" name="IncidentId">
-                                        <option value="2714">Alcohol and drug abuse</option>
-                                        <option value="3">Breach of Legal Obligations</option>
-                                        <option value="123">discrimination</option>
-                                        <option value="158">financial</option>
-                                        <option value="2">Financial Reporting and Accounting</option>
-                                        <option value="122">fraud and embezzelment</option>
-                                        <option value="157">safety</option>
-                                    </select>
+                                    <select ng-change="changeLine(line)" ng-model="line.scope_id" ng-options="item.id as item.scope_en for item in scopes"></select>
                                 </td>
                                 <td class="ng-binding">
-                                    <div class="button">
+                                    <div class="button" onclick="$(this).parent().find('input').click(); return false;">
                                         Upload
                                     </div>
+                                    <input type="file" file-model="myFile" style="display: none;">
                                 </td>
-                            </tr><!-- end ngRepeat: report in reports -->
-                            <!-- ngRepeat: report in reports -->
-                            <tr>
-                                <td class="ng-binding">300</td>
-                                <td class="inSelect">
-                                    <select class="" id="" name="IncidentId">
-                                        <option value="2714">Alcohol and drug abuse</option>
-                                        <option value="3">Breach of Legal Obligations</option>
-                                        <option value="123">discrimination</option>
-                                        <option value="158">financial</option>
-                                        <option value="2">Financial Reporting and Accounting</option>
-                                        <option value="122">fraud and embezzelment</option>
-                                        <option value="157">safety</option>
-                                    </select>
-                                </td>
-                                <td class="inSelect">
-                                    <select class="" id="" name="IncidentId">
-                                        <option value="2714">Alcohol and drug abuse</option>
-                                        <option value="3">Breach of Legal Obligations</option>
-                                        <option value="123">discrimination</option>
-                                        <option value="158">financial</option>
-                                        <option value="2">Financial Reporting and Accounting</option>
-                                        <option value="122">fraud and embezzelment</option>
-                                        <option value="157">safety</option>
-                                    </select>
-                                </td>
-                                <td class="inSelect">
-                                    <select class="" id="" name="IncidentId">
-                                        <option value="2714">Alcohol and drug abuse</option>
-                                        <option value="3">Breach of Legal Obligations</option>
-                                        <option value="123">discrimination</option>
-                                        <option value="158">financial</option>
-                                        <option value="2">Financial Reporting and Accounting</option>
-                                        <option value="122">fraud and embezzelment</option>
-                                        <option value="157">safety</option>
-                                    </select>
-                                </td>
-                                <td class="ng-binding">
-                                    <div class="button">
-                                        Upload
-                                    </div>
-                                    <ul>
-                                        <li><span class="someText">Alcohol College Policy.pdf</span><img src="~/Content/Icons/caseNotResolvedIcons.png" /></li>
-                                        <li><span class="someText">Alcohol College Policy.pdf</span><img src="~/Content/Icons/caseNotResolvedIcons.png" /></li>
-                                        <li><span class="someText">Alcohol College Policy.pdf</span><img src="~/Content/Icons/caseNotResolvedIcons.png" /></li>
-                                    </ul>
-                                </td>
-                            </tr><!-- end ngRepeat: report in reports -->
+                            </tr>
                         </tbody>
                     </table>
                 </div>
