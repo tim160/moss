@@ -18,6 +18,7 @@ using EC.Common.Util;
 
 namespace EC.Controllers
 {
+    //[EC.Utils.AuthFilter]
     public class SettingsController : BaseController
     {
 

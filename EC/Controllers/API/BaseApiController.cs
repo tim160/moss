@@ -1,4 +1,5 @@
 ﻿using EC.Models.Database;
+using EC.Utils;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Web.Http;
 
 namespace EC.Controllers.API
 {
+    //[AuthFilterApi]
     public class BaseApiController : ApiController
     {
         private ECEntities db = null;
