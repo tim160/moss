@@ -265,6 +265,44 @@
 
     angular
         .module('EC')
+        .controller('SettingsCompanyCaseAdminDepartmentController',
+            ['$scope', '$filter', 'orderByFilter', 'SettingsCompanyCaseAdminDepartmentService', SettingsCompanyCaseAdminDepartmentController]);
+
+    function SettingsCompanyCaseAdminDepartmentController($scope, $filter, orderByFilter, SettingsCompanyCaseAdminDepartmentService) {
+        $scope.case_admin_departments = [];
+        $scope.addMode = false;
+        $scope.addName = '';
+
+        $scope.refresh = function (data) {
+            $scope.case_admin_departments = data.case_admin_departments;
+        };
+
+        SettingsCompanyCaseAdminDepartmentService.get({}, function (data) {
+            $scope.refresh(data);
+        });
+
+        $scope.add = function () {
+            $scope.addMode = false;
+            SettingsCompanyCaseAdminDepartmentService.post({ addName: $scope.addName, addType: $scope.addType }, function (data) {
+                $scope.refresh(data);
+            });
+        };
+
+        $scope.delete = function (id) {
+            $scope.addMode = false;
+            SettingsCompanyCaseAdminDepartmentService.delete({ DeleteId: id }, function (data) {
+                $scope.refresh(data);
+            });
+        };
+    }
+}());
+
+(function () {
+
+    'use strict';
+
+    angular
+        .module('EC')
         .controller('SettingsCompanySecondaryTypeController',
             ['$scope', '$filter', 'orderByFilter', 'SettingsCompanySecondaryTypeService', SettingsCompanySecondaryTypeController]);
 
@@ -294,7 +332,6 @@
 
         $scope.findST = function (id) {
             for (var i = 0; i < $scope.secondaryTypes.length; i++) {
-                console.log(id, $scope.secondaryTypes[i].id, id);
                 if ($scope.secondaryTypes[i].id === id) {
                     return $scope.secondaryTypes[i].secondary_type_en;
                 }
@@ -435,6 +472,22 @@
     function EmployeeAwarenessService($resource) {
         return $resource('/api/EmployeeAwareness', {}, {
             get: { method: 'GET', params: {}, isArray: false },
+        });
+    };
+})();
+
+(function () {
+
+    'use strict';
+
+    angular.module('EC')
+        .service('SettingsCompanyCaseAdminDepartmentService', ['$resource', SettingsCompanyCaseAdminDepartmentService]);
+
+    function SettingsCompanyCaseAdminDepartmentService($resource) {
+        return $resource('/api/SettingsCompanyCaseAdminDepartment', {}, {
+            get: { method: 'GET', params: {}, isArray: false },
+            post: { method: 'POST', params: {}, isArray: false },
+            delete: { method: 'POST', params: {}, isArray: false },
         });
     };
 })();

@@ -100,6 +100,7 @@
         <EntityTypeShape EntityType="ECModel.company_root_cases_behavioral" Width="1.5" PointX="28.375" PointY="12.75" />
         <EntityTypeShape EntityType="ECModel.company_root_cases_external" Width="1.5" PointX="28.375" PointY="15.75" />
         <EntityTypeShape EntityType="ECModel.company_root_cases_organizational" Width="1.5" PointX="28.375" PointY="18.75" />
+        <EntityTypeShape EntityType="ECModel.company_case_admin_department" Width="1.5" PointX="28.375" PointY="21.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -166,6 +166,7 @@
             $('.blockOutcomes').hide();
             $('.blockRootCauses').hide();
             $('.blockSecondaryType').hide();
+            $('.blockCaseAdminDepartment').hide();
         }
 
         function contentCompanyProfileShow() {
@@ -176,6 +177,10 @@
             $('.menuItem:nth-child(10)').click(function () {
                 hideBlock();
                 $('.blockSecondaryType').show();
+            });
+            $('.menuItem:nth-child(11)').click(function () {
+                hideBlock();
+                $('.blockCaseAdminDepartment').show();
             });
             $('.menuItem:nth-child(8)').click(function () {
                 hideBlock();
