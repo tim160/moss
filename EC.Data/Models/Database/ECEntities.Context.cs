@@ -99,7 +99,6 @@ namespace EC.Data.Models.Database
         public virtual DbSet<severity> severity { get; set; }
         public virtual DbSet<source> source { get; set; }
         public virtual DbSet<status> status { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<task> task { get; set; }
         public virtual DbSet<task_comment> task_comment { get; set; }
         public virtual DbSet<task_comment_user_read> task_comment_user_read { get; set; }

@@ -1095,16 +1095,6 @@
           <Property Name="user_id" Type="int" Nullable="false" />
           <Property Name="code" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="task">
           <Key>
             <PropertyRef Name="id" />
@@ -1492,7 +1482,6 @@
           <EntitySet Name="severity" EntityType="Self.severity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="source" EntityType="Self.source" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="status" EntityType="Self.status" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="task" EntityType="Self.task" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="task_comment" EntityType="Self.task_comment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="task_comment_user_read" EntityType="Self.task_comment_user_read" Schema="dbo" store:Type="Tables" />
@@ -2642,16 +2631,6 @@
           <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="country" Relationship="Self.FK_Country_Statuses" FromRole="status" ToRole="country" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
         <EntityType Name="task">
           <Key>
             <PropertyRef Name="id" />
@@ -2980,7 +2959,6 @@
           <EntitySet Name="severity" EntityType="Self.severity" />
           <EntitySet Name="source" EntityType="Self.source" />
           <EntitySet Name="status" EntityType="Self.status" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="task" EntityType="Self.task" />
           <EntitySet Name="task_comment" EntityType="Self.task_comment" />
           <EntitySet Name="task_comment_user_read" EntityType="Self.task_comment_user_read" />
@@ -4217,17 +4195,6 @@
                 <ScalarProperty Name="last_update_dt" ColumnName="last_update_dt" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="code" ColumnName="code" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="ECModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
