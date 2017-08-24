@@ -1036,6 +1036,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Controllers\Utils\EcAuthorizedAttribute.cs" />
+    <Compile Include="Utils\AuthFilter.cs" />
     <Compile Include="Utils\Auth\AuthHttpModule .cs" />
     <Compile Include="Utils\Auth\AuthUser.cs" />
     <Compile Include="Utils\Auth\CookiesAuthentication.cs" />
