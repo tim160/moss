@@ -116,5 +116,6 @@ namespace EC.Models.Database
         public virtual DbSet<company_case_admin_department> company_case_admin_department { get; set; }
         public virtual DbSet<company_case_routing> company_case_routing { get; set; }
         public virtual DbSet<company_case_routing_attachments> company_case_routing_attachments { get; set; }
+        public virtual DbSet<company_case_routing_location> company_case_routing_location { get; set; }
     }
 }

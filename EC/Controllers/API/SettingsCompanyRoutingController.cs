@@ -29,6 +29,7 @@ namespace EC.Controllers.API
         public class PostModel
         {
             public company_case_routing Model { get; set; }
+            public company_case_routing_location ModelLocation { get; set; }            
 
             public int? DeleteId { get; set; }
         }
@@ -70,6 +71,26 @@ namespace EC.Controllers.API
                 }
             });
 
+            var locations = DB.company_location.Where(x => x.company_id == user.company_id && x.status_id == 2).OrderBy(x => x.location_en).ToList();
+            var locationItems = DB.company_case_routing_location.Where(x => x.company_id == user.company_id).ToList();
+            locations.ForEach(x =>
+            {
+                var item = locationItems.FirstOrDefault(z => z.company_location_id == x.id);
+                if (item == null)
+                {
+                    locationItems.Add(new company_case_routing_location
+                    {
+                        id = 0,
+                        client_id = 1,
+                        status_id = 2,
+                        company_location_id = x.id,
+                        user_id = 0,
+                        scope_id = 0,
+                        company_id = user.company_id,
+                    });
+                }
+            });
+
             var m = new
             {
                 types = types,
@@ -78,6 +99,8 @@ namespace EC.Controllers.API
                 scopes = scopes,
                 items = items,
                 files = files,
+                locations = locations,
+                locationItems = locationItems,
             };
             return ResponseObject2Json(m);
         }
@@ -134,33 +157,66 @@ namespace EC.Controllers.API
 
             UserModel um = new UserModel(user.id);
 
-            company_case_routing item;
-
-            item = DB.company_case_routing
-                .FirstOrDefault(x => x.client_id == 1 && x.company_id == user.company_id && x.company_secondary_type_id == pModel.Model.company_secondary_type_id);
-
-            if (item != null)
+            if (pModel.Model != null)
             {
-                item.company_case_admin_department_id = pModel.Model.company_case_admin_department_id;
-                item.user_id = pModel.Model.user_id;
-                item.scope_id = pModel.Model.scope_id;
-                DB.SaveChanges();
-            }
-            else
-            {
+                company_case_routing item;
 
-                item = new company_case_routing
+                item = DB.company_case_routing
+                    .FirstOrDefault(x => x.client_id == 1 && x.company_id == user.company_id && x.company_secondary_type_id == pModel.Model.company_secondary_type_id);
+
+                if (item != null)
                 {
-                    company_id = user.company_id,
-                    client_id = 1,
-                    status_id = 2,
-                    company_case_admin_department_id = pModel.Model.company_case_admin_department_id,
-                    user_id = pModel.Model.user_id,
-                    scope_id = pModel.Model.scope_id,
-                    company_secondary_type_id = pModel.Model.company_secondary_type_id,
-                };
-                DB.company_case_routing.Add(item);
-                DB.SaveChanges();
+                    item.company_case_admin_department_id = pModel.Model.company_case_admin_department_id;
+                    item.user_id = pModel.Model.user_id;
+                    item.scope_id = pModel.Model.scope_id;
+                    DB.SaveChanges();
+                }
+                else
+                {
+
+                    item = new company_case_routing
+                    {
+                        company_id = user.company_id,
+                        client_id = 1,
+                        status_id = 2,
+                        company_case_admin_department_id = pModel.Model.company_case_admin_department_id,
+                        user_id = pModel.Model.user_id,
+                        scope_id = pModel.Model.scope_id,
+                        company_secondary_type_id = pModel.Model.company_secondary_type_id,
+                    };
+                    DB.company_case_routing.Add(item);
+                    DB.SaveChanges();
+                }
+            }
+
+            if (pModel.ModelLocation != null)
+            {
+                company_case_routing_location item;
+                item = DB.company_case_routing_location
+                    .FirstOrDefault(x => x.client_id == 1 && x.company_id == user.company_id && x.company_location_id == pModel.ModelLocation.company_location_id);
+
+                if (item != null)
+                {
+                    item.company_location_id = pModel.ModelLocation.company_location_id;
+                    item.user_id = pModel.ModelLocation.user_id;
+                    item.scope_id = pModel.ModelLocation.scope_id;
+                    DB.SaveChanges();
+                }
+                else
+                {
+
+                    item = new company_case_routing_location
+                    {
+                        company_id = user.company_id,
+                        client_id = 1,
+                        status_id = 2,
+                        company_location_id = pModel.ModelLocation.company_location_id,
+                        user_id = pModel.ModelLocation.user_id,
+                        scope_id = pModel.ModelLocation.scope_id,
+                    };
+                    DB.company_case_routing_location.Add(item);
+                    DB.SaveChanges();
+                }
             }
 
             return Get();

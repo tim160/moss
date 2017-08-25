@@ -769,6 +769,9 @@
     <Compile Include="Models\Database\company_case_routing_attachments.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Database\company_case_routing_location.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Database\company_custom_question.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>

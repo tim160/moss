@@ -276,6 +276,18 @@
           <Property Name="user_id" Type="int" Nullable="false" />
           <Property Name="upload_dt" Type="smalldatetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="company_case_routing_location">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="client_id" Type="int" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="status_id" Type="int" />
+          <Property Name="company_location_id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="scope_id" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="company_custom_question">
           <Key>
             <PropertyRef Name="id" />
@@ -1493,6 +1505,7 @@ warning 6002: The table/view 'EC.dbo.location_cc_extended' does not have a prima
           <EntitySet Name="company_case_admin_department" EntityType="Self.company_case_admin_department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="company_case_routing" EntityType="Self.company_case_routing" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="company_case_routing_attachments" EntityType="Self.company_case_routing_attachments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="company_case_routing_location" EntityType="Self.company_case_routing_location" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="company_custom_question" EntityType="Self.company_custom_question" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="company_department" EntityType="Self.company_department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="company_invitation" EntityType="Self.company_invitation" Schema="dbo" store:Type="Tables" />
@@ -2948,6 +2961,7 @@ warning 6002: The table/view 'EC.dbo.location_cc_extended' does not have a prima
           <EntitySet Name="company_case_admin_department" EntityType="ECModel.company_case_admin_department" />
           <EntitySet Name="company_case_routing" EntityType="ECModel.company_case_routing" />
           <EntitySet Name="company_case_routing_attachments" EntityType="ECModel.company_case_routing_attachments" />
+          <EntitySet Name="company_case_routing_location" EntityType="ECModel.company_case_routing_location" />
         </EntityContainer>
         <EntityType Name="case_closure_reason">
           <Key>
@@ -3185,6 +3199,18 @@ warning 6002: The table/view 'EC.dbo.location_cc_extended' does not have a prima
           <Property Name="extension_nm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="user_id" Type="Int32" Nullable="false" />
           <Property Name="upload_dt" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="company_case_routing_location">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="client_id" Type="Int32" Nullable="false" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="status_id" Type="Int32" />
+          <Property Name="company_location_id" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="scope_id" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4632,6 +4658,19 @@ warning 6002: The table/view 'EC.dbo.location_cc_extended' does not have a prima
                 <ScalarProperty Name="path_nm" ColumnName="path_nm" />
                 <ScalarProperty Name="status_id" ColumnName="status_id" />
                 <ScalarProperty Name="company_case_routing_id" ColumnName="company_case_routing_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="company_case_routing_location">
+            <EntityTypeMapping TypeName="ECModel.company_case_routing_location">
+              <MappingFragment StoreEntitySet="company_case_routing_location">
+                <ScalarProperty Name="scope_id" ColumnName="scope_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="company_location_id" ColumnName="company_location_id" />
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

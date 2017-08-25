@@ -314,6 +314,8 @@
         $scope.items = [];
         $scope.files = [];
         $scope.uploadLine = 0;
+        $scope.locations = [];
+        $scope.locationItems = [];
 
         $scope.refresh = function (data) {
             $scope.types = data.types;
@@ -325,6 +327,8 @@
             $scope.departments.splice(0, 0, { id: 0, name_en: 'Select' });
             $scope.users.splice(0, 0, { id: 0, first_nm: 'Select', last_nm: '' });
             $scope.scopes.splice(0, 0, { id: 0, scope_en: 'Select' });
+            $scope.locations = data.locations;
+            $scope.locationItems = data.locationItems;
         };
 
         SettingsCompanyRoutingService.get({}, function (data) {
@@ -345,8 +349,18 @@
             return $filter('filter')($scope.types, { 'id': id })[0];
         };
 
+        $scope.locationName = function (id) {
+            return $filter('filter')($scope.locations, { 'id': id })[0];
+        };
+
         $scope.changeLine = function (line) {
             SettingsCompanyRoutingService.post({ model: line }, function (data) {
+                $scope.refresh(data);
+            });
+        };
+
+        $scope.changeLineLocation = function (line) {
+            SettingsCompanyRoutingService.post({ modelLocation: line }, function (data) {
                 $scope.refresh(data);
             });
         };

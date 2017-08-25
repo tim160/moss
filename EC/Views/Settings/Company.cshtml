@@ -290,6 +290,30 @@
 
             <div id="caseRouting" @*ng-show="showAsGrid"*@ style="display: none;" ng-controller="SettingsCompanyRoutingController">
                 <div class="positionTableCases">
+                    <p>Routing by Location</p>
+                    <table class="tableCasesIndex">
+                        <thead>
+                            <tr>
+                                <td>Location</td>
+                                <td>Issue Owner</td>
+                                <td>Scope</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="line in locationItems">
+                                <td class="ng-binding">{{locationName(line.company_location_id).location_en}}</td>
+                                <td class="inSelect">
+                                    <select ng-change="changeLineLocation(line)" ng-model="line.user_id" ng-options="item.id as userName(item) for item in users">
+                                    </select>
+                                </td>
+                                <td class="inSelect">
+                                    <select ng-change="changeLineLocation(line)" ng-model="line.scope_id" ng-options="item.id as item.scope_en for item in scopes"></select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <p>Routing by Incident Type</p>
                     <table class="tableCasesIndex">
                         <thead>
                             <tr>
@@ -309,7 +333,6 @@
                                 </td>
                                 <td class="inSelect">
                                     <select ng-change="changeLine(line)" ng-model="line.user_id" ng-options="item.id as userName(item) for item in users">
-                                        <option value="" ng-if="false"></option>
                                     </select>
                                 </td>
                                 <td class="inSelect">
