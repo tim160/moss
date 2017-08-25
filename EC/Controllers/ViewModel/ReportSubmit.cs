@@ -141,7 +141,43 @@ namespace EC.Controllers.ViewModel
             {
                 isCaseUrgent = GlobalRes.Yes;
             }
-            //IncidentType = model.whatHappened;
+
+            if (reportModel.isCustomIncidentTypes(model.currentCompanyId))
+            {
+                /*custom types*/
+                List<company_secondary_type> company_secondary_type = reportModel.getCompanySecondaryType(model.currentCompanyId);
+                foreach(int item in model.whatHappened)
+                {
+                    if(item != 0)
+                    {
+                        var something = company_secondary_type.Where(m => m.id == item).FirstOrDefault();
+                        IncidentType += something.secondary_type_en + ", ";
+                    } else
+                    {
+                        IncidentType += GlobalRes.Other + ", ";
+                    }
+                }
+            }
+            else
+            {
+                /*default*/
+                List<secondary_type_mandatory> secondary_type_mandatory = reportModel.getSecondaryTypeMandatory();
+                foreach (int item in model.whatHappened)
+                {
+
+                    if (item != 0)
+                    {
+                        var something = secondary_type_mandatory.Where(m => m.id == item).FirstOrDefault();
+                        IncidentType += something.secondary_type_en + ", ";
+                    }
+                    else
+                    {
+                        IncidentType += GlobalRes.Other + ", ";
+                    }
+                }
+            }
+            IncidentType = IncidentType.Remove(IncidentType.Length - 2);
+
             IncidentDate = model.dateIncidentHappened.ToShortDateString();
             switch (model.isOnGoing)
             {

@@ -236,21 +236,6 @@ namespace EC.Controllers.ViewModel
             return result;
         }
 
-        public report_secondary_type GetRecordSecondaryType(int reportId)
-        {
-            report_secondary_type result = new report_secondary_type()
-            {
-                report_id = reportId,
-                //secondary_type_id = 0, //(id getFrom [company_secondary_type])
-                secondary_type_nm = caseInformationReport,
-                user_id = 1,
-                // my fixes
-                secondary_type_id = 1,
-                last_update_dt = System.DateTime.Now
-            };
-            return result;
-        }
-
 
         // mediators of the report
         public List<report_mediator_involved> GetReportInvolvedMediators(int reportId)
