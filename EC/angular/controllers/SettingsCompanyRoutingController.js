@@ -80,7 +80,7 @@
                 transformRequest: angular.identity //also important
             }).then(function (data) {
                 $scope.refresh(data.data);
-            }).catch(function(response){
+            }).catch(function(){
             });
         };
 

@@ -40,7 +40,7 @@
 
     @Html.Partial("~/Views/NewCase/Partial/headerPos.cshtml", (EC.Models.ViewModels.HeaderPos)@ViewBag.headerPos)
 
-    <div id="generalInfo">
+    <div id="generalInfo" ng-controller="NewCaseReportController">
         <div class="firstPosition">
             <div class="blockGeneralInformation">
                 <span class="title">General Information</span>
@@ -48,39 +48,38 @@
                     <tbody>
                         <tr>
                             <td>Reporting From:</td>
-                            <td>Canada</td>
+                            <td>{{model.reportingFrom}}</td>
                         </tr>
                         <tr>
                             <td>Reporter would like to stay:</td>
-                            <td>Contact Info Shared</td>
+                            <td>{{model.reporterWouldLike}}</td>
                         </tr>
                         <tr>
                             <td>Reporter name</td>
-                            <td>First Last</td>
+                            <td>{{model.reporterName}}</td>
                         </tr>
                         <tr>
                             <td>Reporter is:</td>
-                            <td>Member of the public</td>
+                            <td>{{model.reporterIs}}</td>
                         </tr>
 
                         <tr>
                             <td>The incident happened in:</td>
-                            <td>Toronto, ON, Canada</td>
+                            <td>{{model.incidentHappenedIn}}</td>
                         </tr>
                         <tr>
                             <td>Affected department(s):</td>
-                            <td>Marketing</td>
+                            <td>{{model.affectedDepartment}}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <style>
                 .darkerText {
-                font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
-    font-size: 16px;
-    color: #727c7e;
-    padding-top: 20px;
-
+                    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+                    font-size: 16px;
+                    color: #727c7e;
+                    padding-top: 20px;
                 }
             </style>
             <div class="blockPartiesInformation">
@@ -89,8 +88,8 @@
                 <table class="generalInformation">
                     <tbody>
                         <tr>
-                            <td><span class="darkerText">(Margot) Cooper</span>$nbsp; CFO </td>
-                            <td>Case Administrators excluded</td>
+                            <td><span class="darkerText">{{model.partiesInvolvedName}}</span>&nbsp; {{model.partiesInvolvedTitle}} </td>
+                            <td>{{model.partiesInvolvedType}}</td>
                         </tr>
                         <tr>
                             <td colspan="2">The management doesn’t know about the incident</td>
@@ -106,11 +105,11 @@
                     <tbody>
                         <tr>
                             <td>Reporting About:</td>
-                            <td>Breach of Legal Obligations</td>
+                            <td>{{model.reportingAbout}}</td>
                         </tr>
                         <tr>
                             <td>Incident Date:</td>
-                            <td>Nov 1, 2016</td>
+                            <td>{{model.incidentDate}}</td>
                         </tr>
                     </tbody>
                 </table>

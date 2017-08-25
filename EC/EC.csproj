@@ -223,6 +223,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="angular\app.js" />
+    <Content Include="angular\controllers\NewCaseReportController.js" />
     <Content Include="angular\controllers\SettingsCompanyRoutingController.js" />
     <Content Include="angular\controllers\SettingsCompanySecondaryTypeController.js" />
     <Content Include="angular\controllers\SettingsCompanyCaseAdminDepartmentController.js" />
@@ -230,6 +231,7 @@
     <Content Include="angular\controllers\SettingsUserEditController.js" />
     <Content Include="angular\controllers\EmployeeAwarenessPosterController.js" />
     <Content Include="angular\controllers\EmployeeAwarenessController.js" />
+    <Content Include="angular\services\NewCaseReportService.js" />
     <Content Include="angular\services\SettingsCompanyRoutingService.js" />
     <Content Include="angular\services\SettingsCompanyCaseAdminDepartmentService.js" />
     <Content Include="angular\services\SettingsCompanySecondaryTypeService.js" />
@@ -677,6 +679,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AnalyticsController.cs" />
     <Compile Include="Controllers\API\BaseApiController.cs" />
+    <Compile Include="Controllers\API\NewCaseReportController.cs" />
     <Compile Include="Controllers\API\SettingsCompanyRoutingController.cs" />
     <Compile Include="Controllers\API\SettingsCompanyCaseAdminDepartmentController.cs" />
     <Compile Include="Controllers\API\SettingsCompanySecondaryTypeController.cs" />

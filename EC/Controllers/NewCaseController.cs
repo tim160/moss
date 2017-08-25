@@ -41,6 +41,5 @@ namespace EC.Controllers
             List<attachment> attachmentFiles = db.attachment.Where(item => (item.report_id == report_id && !item.visible_mediators_only.HasValue && !item.visible_reporter.HasValue)).ToList();
             return attachmentFiles;
         }
-
     }
 }
