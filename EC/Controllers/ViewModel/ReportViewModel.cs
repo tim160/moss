@@ -28,10 +28,10 @@ namespace EC.Controllers.ViewModel
         public string currentCompanySubmitted { get; set; }
         public int currentCompanyId { get; set; }
 
-        public string personName { get; set; }
-        public string personLastName { get; set; }
-        public string personTitle { get; set; }
-        public string personRole { get; set; }
+        public ICollection<string> personName { get; set; }
+        public ICollection<string> personLastName { get; set; }
+        public ICollection<string> personTitle { get; set; }
+        public ICollection<int> personRole { get; set; }
         public int managamentKnowId { get; set; }
         public int isUrgent { get; set; }
         public string caseInformationReport { get; set; }

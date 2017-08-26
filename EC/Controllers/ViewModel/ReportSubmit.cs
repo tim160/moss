@@ -28,12 +28,18 @@ namespace EC.Controllers.ViewModel
         public string outOrganization { get; set; }//
         public string isCaseUrgent { get; set; } //
 
+        public List<string> personName { get; set; }
+        public List<string> personLastName { get; set; }
+        public List<string> personTitle { get; set; }
+        public List<string> personRole { get; set; }
+
 
         public string IncidentType { get; set; } //
         public string IncidentDate { get; set; } //
         public string incidentOngoing { get; set; } //
         public string incidentResult { get; set; } //
         public string incidentDescription { get; set; } //
+
 
         public List<string> namesFile { get; set; }
         public string attachFiles { get; set; }
@@ -214,6 +220,22 @@ namespace EC.Controllers.ViewModel
                 }
             }
             this.report_by_myself = model.report_by_myself == true ? GlobalRes.Myself : GlobalRes.SomeoneElse;
+
+            this.personName = model.personName.ToList();
+            this.personLastName = model.personLastName.ToList();
+            this.personTitle = model.personTitle.ToList();
+
+
+            //this.personRole = model.personRole.ToList();
+            List<int> personRoles = model.personRole.ToList();
+            this.personRole = new List<string>();
+
+            List<role_in_report> roleInReport = ReportModel.getRoleInReport();
+            for(int i=0; i< model.personRole.Count; i++)
+            {
+                role_in_report nameRole = roleInReport.Where(m => m.id == personRoles[i]).FirstOrDefault();
+                personRole.Add(nameRole.role_en);
+            }
         }
     }
 }

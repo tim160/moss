@@ -2257,5 +2257,12 @@ namespace EC.Models
 
             return color_id;
         }
+        public static List<role_in_report> getRoleInReport()
+        {
+            using (ECEntities adv = new ECEntities())
+            {
+                return adv.role_in_report.ToList();
+            }
+        }
     }
 }

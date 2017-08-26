@@ -236,6 +236,20 @@
 
                             <div class="reportBlock">
                                 <table style="width: 100%; padding-left: 9px;">
+                                    @{
+                                        for (int counter = 0; counter < Model.personName.Count; counter++)
+                                        {
+                                            <tr>
+                                                <td>@Model.personName[counter]</td>
+                                                <td>@Model.personLastName[counter]</td>
+                                                <td>@Model.personTitle[counter]</td>
+                                                <td>@Model.personRole[counter]</td>
+                                            </tr>
+                                        }
+                                    }
+                                </table>
+
+                                <table style="width: 100%; padding-left: 9px;">
                                     <tbody>
                                         <tr>
                                             <td class="titlereportTable" style="width: 25%;">

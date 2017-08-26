@@ -679,11 +679,13 @@
                 passiveCircle.find('.display.button').text('Add person');
             }
 
-            var buff = tmpl.render(addPersonTempl, { 'num': ++num });
+            //var buff = tmpl.render(addPersonTempl, { 'num': ++num });
+            var buff = tmpl.render(addPersonTempl, { 'num': '' });
             personNameNum.val(num);
             personLastNameNum.val(num);
             personTitleNum.val(num);
             personRoleNum.val(num);
+
             buff.find('.delete').click(function () {
                 $(this).closest('#persone').remove();
                 personCount--;
@@ -694,8 +696,6 @@
                 else {
                     passiveCircle.find('.display.button').text('Add person');
                 }
-            });
-            $(personNameNum).on('change', function () {
             });
 
             addPersonContainer.append(buff);
