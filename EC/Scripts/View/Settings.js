@@ -197,6 +197,7 @@
             });
             $('.menuItem:nth-child(5)').click(function () {
                 hideBlock();
+                angular.element($('.blockCaseRouting').children().eq(0)).scope().onShow();
                 $(".blockCaseRouting").show();
             });
             $('.menuItem:nth-child(4)').click(function () {
