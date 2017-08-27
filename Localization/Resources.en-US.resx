@@ -2086,4 +2086,22 @@
   <data name="Update" xml:space="preserve">
     <value>Update</value>
   </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="CaseAdministratorDepartment" xml:space="preserve">
+    <value>Case Administrator Department</value>
+  </data>
+  <data name="ChangeSettings" xml:space="preserve">
+    <value>Change Settings</value>
+  </data>
+  <data name="SelectCaseAdministrator" xml:space="preserve">
+    <value>Select Case Administrator</value>
+  </data>
+  <data name="VisibletoReporter" xml:space="preserve">
+    <value>Visible to Reporter</value>
+  </data>
+  <data name="VisibletoStaff" xml:space="preserve">
+    <value>Visible to Staff</value>
+  </data>
 </root>

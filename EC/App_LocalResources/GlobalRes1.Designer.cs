@@ -835,6 +835,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Case Administrator Department.
+        /// </summary>
+        public static string CaseAdministratorDepartment {
+            get {
+                return ResourceManager.GetString("CaseAdministratorDepartment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Case Can&apos;t Be Resolved.
         /// </summary>
         public static string CaseCantBeResolved {
@@ -1173,6 +1182,15 @@ namespace EC.App_LocalResources {
         public static string Change {
             get {
                 return ResourceManager.GetString("Change", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change Settings.
+        /// </summary>
+        public static string ChangeSettings {
+            get {
+                return ResourceManager.GetString("ChangeSettings", resourceCulture);
             }
         }
         
@@ -1695,6 +1713,15 @@ namespace EC.App_LocalResources {
         public static string DailyCrimeLogManager {
             get {
                 return ResourceManager.GetString("DailyCrimeLogManager", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dashboard.
+        /// </summary>
+        public static string Dashboard {
+            get {
+                return ResourceManager.GetString("Dashboard", resourceCulture);
             }
         }
         
@@ -5137,6 +5164,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select Case Administrator.
+        /// </summary>
+        public static string SelectCaseAdministrator {
+            get {
+                return ResourceManager.GetString("SelectCaseAdministrator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select Case Reviewer to Sign-Off.
         /// </summary>
         public static string SelectCaseReviewerToSignoff {
@@ -5808,6 +5844,24 @@ namespace EC.App_LocalResources {
         public static string UserSavingFailed {
             get {
                 return ResourceManager.GetString("UserSavingFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Visible to Reporter.
+        /// </summary>
+        public static string VisibletoReporter {
+            get {
+                return ResourceManager.GetString("VisibletoReporter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Visible to Staff.
+        /// </summary>
+        public static string VisibletoStaff {
+            get {
+                return ResourceManager.GetString("VisibletoStaff", resourceCulture);
             }
         }
         

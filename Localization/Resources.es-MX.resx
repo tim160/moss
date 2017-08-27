@@ -444,4 +444,31 @@
   <data name="ConfidentialToZero" xml:space="preserve">
     <value>Confidential to {0}</value>
   </data>
+  <data name="String1" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="ApproveCaseClosure" xml:space="preserve">
+    <value>Approve Case Closure</value>
+  </data>
+  <data name="CaseAdministratorDepartment" xml:space="preserve">
+    <value>Case Administrator Department</value>
+  </data>
+  <data name="ChangeSettings" xml:space="preserve">
+    <value>Change Settings</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="SelectCaseAdministrator" xml:space="preserve">
+    <value>Select Case Administrator</value>
+  </data>
+  <data name="UserPermissions" xml:space="preserve">
+    <value>User Permissions</value>
+  </data>
+  <data name="VisibletoReporter" xml:space="preserve">
+    <value>Visible to Reporter</value>
+  </data>
+  <data name="VisibletoStaff" xml:space="preserve">
+    <value>Visible to Staff</value>
+  </data>
 </root>
