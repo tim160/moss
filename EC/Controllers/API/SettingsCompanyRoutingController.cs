@@ -156,6 +156,12 @@ namespace EC.Controllers.API
             PostModel pModel = JsonConvert.DeserializeObject<PostModel>(jsonContent);
 
             UserModel um = new UserModel(user.id);
+            if (pModel.DeleteId.HasValue)
+            {
+                var file = DB.company_case_routing_attachments.FirstOrDefault(x => x.id == pModel.DeleteId.Value);
+                DB.company_case_routing_attachments.Remove(file);
+                DB.SaveChanges();
+            }
 
             if (pModel.Model != null)
             {
