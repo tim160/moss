@@ -1,0 +1,173 @@
+﻿@using EC.Models.Database;
+@{
+    var report_id = (Int32)ViewBag.report_id;
+    var user_id = (Int32)ViewBag.user_id;
+    List<attachment> attachmentFiles = (List<attachment>)ViewBag.attachmentFiles;
+    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+    string popup = null;
+}
+<link type="text/css" href="~/Content/caseTasks.css" rel="stylesheet">
+
+<style>
+#investigationNotes {
+    width: 100%;
+    background-color: #f2f7f7;
+    height: 100%;
+}
+#bigPadding {
+    padding: 0 48px;
+}
+#investigationNotes #firstBlock select{
+    outline: none;
+    border: none;
+    padding-left: 17px;
+    width: 220px;
+    height: 40px;
+    margin-left: 12px;
+}
+#investigationNotes #firstBlock {
+    border-bottom: 1px solid #bfc3c2;
+}
+#investigationNotes #firstBlock table {
+            width: 100%;
+    padding-left: 64px;
+    padding-bottom: 28px;
+}
+#secondBlock .positionArea {
+        padding-left: 64px;
+    padding-bottom: 85px;
+}
+#investigationNotes .button {
+        border: 1px solid #6ccec3;
+    color: #05b5a2;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 15px;
+    font-size: 10pt;
+    padding: 5px 13px 5px 13px;
+    width: 65px;
+}
+#secondBlock {
+    border-bottom: 1px solid #bfc3c2;
+}
+</style>
+<div id="investigationNotes">
+    <div id="bigPadding">
+        <div id="firstBlock">
+            <p>Is this a Clery Act Crime?  </p>
+            <table>
+                <tr>
+                    <td>
+                        <label class="inputBlock" for="No">
+                            <input id="No" type="radio" name="radioName" value="No">
+                            <span class="radioButton"></span>
+                            <span class="radioTitle">No</span>
+                        </label>
+                    </td>
+                    <td>
+                        <label class="inputBlock" for="Yes">
+                            <input id="Yes" type="radio" name="radioName" value="Yes">
+                            <span class="radioButton"></span>
+                            <span class="radioTitle">Yes</span>
+                        </label>
+                    </td>
+                    <td>
+                        <select class="" id="IncidentId" name="IncidentId">
+                            <option value="2714">Alcohol and drug abuse</option>
+                            <option value="3">Breach of Legal Obligations</option>
+                            <option value="123">discrimination</option>
+                            <option value="158">financial</option>
+                            <option value="2">Financial Reporting and Accounting</option>
+                            <option value="122">fraud and embezzelment</option>
+                            <option value="157">safety</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="" id="IncidentId" name="IncidentId">
+                            <option value="2714">Alcohol and drug abuse</option>
+                            <option value="3">Breach of Legal Obligations</option>
+                            <option value="123">discrimination</option>
+                            <option value="158">financial</option>
+                            <option value="2">Financial Reporting and Accounting</option>
+                            <option value="122">fraud and embezzelment</option>
+                            <option value="157">safety</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="secondBlock">
+            <p>
+                Executive Summary
+            </p>
+            <textarea class="positionArea">
+
+            </textarea>
+            <div class="button">
+                Add
+            </div>
+        </div>
+        <div id="thirdBlock">
+            <p>
+                Recommended Outcomes for Subject(s)
+            </p>
+            <table>
+                <tr>
+                    <td>James Button</td>
+                    <td>
+                        <select class="" id="IncidentId" name="IncidentId">
+                            <option value="2714">Alcohol and drug abuse</option>
+                            <option value="3">Breach of Legal Obligations</option>
+                            <option value="123">discrimination</option>
+                            <option value="158">financial</option>
+                            <option value="2">Financial Reporting and Accounting</option>
+                            <option value="122">fraud and embezzelment</option>
+                            <option value="157">safety</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div class="button">
+                            Add note
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Eva Morales</td>
+                    <td>
+                        <select class="" id="IncidentId" name="IncidentId">
+                            <option value="2714">Alcohol and drug abuse</option>
+                            <option value="3">Breach of Legal Obligations</option>
+                            <option value="123">discrimination</option>
+                            <option value="158">financial</option>
+                            <option value="2">Financial Reporting and Accounting</option>
+                            <option value="122">fraud and embezzelment</option>
+                            <option value="157">safety</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div class="button">
+                            Add Note
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="fourthBlock">
+            <p>
+                Recommended Recommended Actions for Witnesses and Reporter
+            </p>
+            <select class="" id="IncidentId" name="IncidentId">
+                <option value="2714">Alcohol and drug abuse</option>
+                <option value="3">Breach of Legal Obligations</option>
+                <option value="123">discrimination</option>
+                <option value="158">financial</option>
+                <option value="2">Financial Reporting and Accounting</option>
+                <option value="122">fraud and embezzelment</option>
+                <option value="157">safety</option>
+            </select>
+            <div class="button">
+                Add Note
+            </div>
+        </div>
+    </div>
+</div>
