@@ -75,6 +75,19 @@
                     {
                         @Html.Hidden("report_id", report_id)
                         @Html.Hidden("mode", "upload")
+                        <div class="radioButtonContainer">
+                            @Html.Hidden("type", "staff")
+                            <label class="inputBlock" for="staff" style="float:left; padding-right: 30px;">
+                                <input id="Anonymous" type="radio" name="stay" value="staff" checked>
+                                <span class="radioButton"></span>
+                                <span class="radioTitle">visible to staff</span>
+                            </label>
+                            <label class="inputBlock" for="reporter">
+                                <input id="Anonymous" type="radio" name="stay" value="reporter">
+                                <span class="radioButton"></span>
+                                <span class="radioTitle">visible to reporter</span>
+                            </label>
+                        </div>
                         <div class="dragAndDropContainer">
                             <div class="dottedContainer">
                                 <div class="semiboldText weight18">Drag and drop files here</div>
@@ -86,20 +99,6 @@
                                     <input type="file" name="files" multiple="" style="display: none;" onchange="this.form.submit();"/>
                                 </div>
 
-                            </div>
-
-                            <div class="radioButtonContainer">
-                                @Html.Hidden("type", "staff")
-                                <label class="inputBlock" for="staff" style="float:left; padding-right: 30px;">
-                                    <input id="Anonymous" type="radio" name="stay" value="staff" checked>
-                                    <span class="radioButton"></span>
-                                    <span class="radioTitle">visible to staff</span>
-                                </label>
-                                <label class="inputBlock" for="reporter">
-                                    <input id="Anonymous" type="radio" name="stay" value="reporter">
-                                    <span class="radioButton"></span>
-                                    <span class="radioTitle">visible to reporter</span>
-                                </label>
                             </div>
                         </div>
                     }
@@ -134,6 +133,15 @@
                                         <p class="download">
                                             <a href="@attachment.path_nm">download</a>
                                         </p>
+                                        @if (attachment.user_id == user.id)
+                                        {
+                                            <p class="download">
+                                                @using (Html.BeginForm("AttachmentDelete", null, new { id = attachment.id, report_id }, FormMethod.Post, null))
+                                                {
+                                                    <button type="submit">X</button>
+                                                }
+                                            </p>
+                                        }
                                     </td>
                                 </tr>
                                 }

@@ -89,6 +89,15 @@
                             <p class="download">
                                 <a href="@attachment.path_nm">download</a>
                             </p>
+                            @if (attachment.user_id == user_id)
+                            {
+                                <p class="download">
+                                    @using (Html.BeginForm("AttachmentDelete", null, new { id = attachment.id, report_id }, FormMethod.Post, null))
+                                    {
+                                        <button type="submit">X</button>
+                                    }
+                                </p>
+                            }
                         </td>
                     </tr>
                     }

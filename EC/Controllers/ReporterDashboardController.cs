@@ -389,12 +389,29 @@ namespace EC.Controllers
             int report_id = um._reporter_report_id;
             ViewBag.report_id = report_id;
             ViewBag.user_id = id;
-            var files = db.attachment.Where(item => item.report_id == report_id && item.visible_reporter == true).ToList();
+            var files = db.attachment.Where(item => item.report_id == report_id && item.visible_reporter == true & item.status_id ==2).ToList();
             var users = files.Select(x => x.user_id).ToList();
             ViewBag.attachmentAdvFiles = files;
             ViewBag.attachmentAdvUsers = db.user.Where(x => users.Contains(x.id)).ToList();
 
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult AttachmentDelete(int report_id, int id)
+        {
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            // DEBUG
+            //user = db.user.FirstOrDefault(x => x.id == 167);
+            // DEBUG
+            if (user == null || user.id == 0 || user.role_id == 4 || user.role_id == 5 || user.role_id == 6 || user.role_id == 7)
+                return RedirectToAction("Index", "Account");
+
+            var file = db.attachment.FirstOrDefault(x => x.report_id == report_id & x.id == id & x.user_id == user.id);
+            file.status_id = 1;
+            db.SaveChanges();
+
+            return RedirectToAction("Attachments", new { id = user.id });
         }
     }
 } 

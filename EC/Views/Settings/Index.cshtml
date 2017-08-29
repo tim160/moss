@@ -172,6 +172,7 @@
                     </div><!--rowBlock-->
                 </div>
 
+                <!--
                 <div class="blockPersonalSettings greyBorder">
                     <p class="title">@GlobalRes.often_notifications_new</p>
                     <div class="rowBlock" id="checkBoxNewReports">
@@ -189,8 +190,31 @@
                                 <span class="radioTitle">@GlobalRes.Onceaday</span>
                             </label>
                         </div>
-                    </div><!--rowBlock-->
+                    </div>
                 </div>
+                -->
+                @if (um._user.role_id == 5)
+                {
+                    <div class="blockPersonalSettings greyBorder">
+                        <p class="title">@EC.Localization.Resources.GetString("UserPermissions", is_cc)</p>
+                        <div class="rowBlock" id="checkBoxNewReports">
+                            <div class="freeBlock inputRadio" data-valueFlag="0">
+                                <label class="inputBlock" for="thirdIncident">
+                                    @Html.RadioButtonFor(model => model.notification_messages_actions_flag, "1")
+                                    <span class="radioButton"></span>
+                                    <span class="radioTitle">@EC.Localization.Resources.GetString("ApproveCaseClosure", is_cc)</span>
+                                </label>
+                            </div>
+                            <div class="freeBlock inputRadio" data-valueFlag="1">
+                                <label class="inputBlock" for="fourIncident">
+                                    @Html.RadioButtonFor(m => m.notification_messages_actions_flag, "2")
+                                    <span class="radioButton"></span>
+                                    <span class="radioTitle">@EC.Localization.Resources.GetString("ChangeSettings", is_cc)</span>
+                                </label>
+                            </div>
+                        </div><!--rowBlock-->
+                    </div>
+                }
                 <div class="blockUpdateProfile">
                     <div class="updateProfileBtn">
                         <input class="greenButton" type="submit" value="update"  />

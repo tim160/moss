@@ -1204,7 +1204,7 @@ namespace EC.Controllers
             ViewBag.report_id = id;
             ViewBag.user_id = user.id;
             ViewBag.attachmentFiles = getAttachmentFiles(id);
-            var files = db.attachment.Where(item => item.report_id == id && item.visible_mediators_only.HasValue && item.visible_reporter.HasValue).ToList(); ;
+            var files = db.attachment.Where(item => item.report_id == id && item.visible_mediators_only.HasValue && item.visible_reporter.HasValue & item.status_id == 2).ToList(); ;
             var users = files.Select(x => x.user_id).ToList();
             ViewBag.attachmentAdvFiles = files;
             ViewBag.attachmentAdvUsers = db.user.Where(x => users.Contains(x.id)).ToList();
@@ -1264,6 +1264,24 @@ namespace EC.Controllers
             {
                 return RedirectToAction("Attachments", "ReporterDashboard", new { id = user.id });
             }
+            return RedirectToAction("Attachments", new { id = report_id });
+        }
+
+        [HttpPost]
+        public ActionResult AttachmentDelete(int report_id, int id)
+        {
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            // DEBUG
+            //user = user ?? db.user.FirstOrDefault(x => x.id == 2);
+            //user = user ?? db.user.FirstOrDefault(x => x.id == 167);
+            //
+            if (user == null || user.id == 0)
+                return RedirectToAction("Index", "Account");
+
+            var file = db.attachment.FirstOrDefault(x => x.report_id == report_id & x.id == id);
+            file.status_id = 1;
+            db.SaveChanges();
+
             return RedirectToAction("Attachments", new { id = report_id });
         }
     }
