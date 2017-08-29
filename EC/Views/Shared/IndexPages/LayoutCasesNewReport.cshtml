@@ -280,6 +280,12 @@
                     page_subtitle = GlobalRes.Cases;
                 }
 
+                if (hrefURL.Contains("/cases"))
+                {
+                    hrefURL = "/cases/index";
+                    page_subtitle = GlobalRes.Dashboard;
+                }
+
                 if (hrefURL.Contains("/analytics"))
                 {
                     hrefURL = "/analytics/index";
