@@ -159,7 +159,7 @@ namespace EC.Controllers.API
             if (pModel.DeleteId.HasValue)
             {
                 var file = DB.company_case_routing_attachments.FirstOrDefault(x => x.id == pModel.DeleteId.Value);
-                DB.company_case_routing_attachments.Remove(file);
+                file.status_id = 1;
                 DB.SaveChanges();
             }
 
