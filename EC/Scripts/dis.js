@@ -498,6 +498,8 @@
         $scope.departments = [];
         $scope.role = 5;
         $scope.departmentId = 0;
+        $scope.user_permissions_approve_case_closure = 0;
+        $scope.user_permissions_change_settings = 0;
 
         $scope.val_first_nm = false;
         $scope.val_last_nm = false;
@@ -516,6 +518,8 @@
             $scope.departments = data.departments;
             $scope.role = data.model.role;
             $scope.departmentId = data.model.departmentId;
+            $scope.user_permissions_approve_case_closure = data.model.user_permissions_approve_case_closure.toString();
+            $scope.user_permissions_change_settings = data.model.user_permissions_change_settings.toString();
         });
 
         $scope.validate = function (value, rv) {
@@ -553,6 +557,8 @@
                     email: $scope.email,
                     role_id: $scope.role,
                     company_department_id: $scope.departmentId,
+                    user_permissions_approve_case_closure: $scope.user_permissions_approve_case_closure,
+                    user_permissions_change_settings: $scope.user_permissions_change_settings,
                 };
                 SettingsUserEditService.post(model, function () {
                     if ($scope.id !== 0) {

@@ -4,7 +4,9 @@
 
 @{
     ViewBag.Title = GlobalRes.NewUserRegistration;
+    bool is_cc = ViewBag.is_cc;
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+    UserModel um = new UserModel(ViewBag.user_id);
 }
 
 <style>
@@ -92,13 +94,55 @@
                 <input email="email" id="email" name="email" type="text" ng-model="email">
             </div>
 
+            @if (um._user.role_id == 5)
+            {
+                <div class="blockPersonalSettings greyBorder">
+                    <p class="title">@EC.Localization.Resources.GetString("ApproveCaseClosure", is_cc)</p>
+                    <div class="rowBlock" id="checkBoxApproveCaseClosure">
+                        <div class="freeBlock inputRadio" data-valueFlag="0" ng-click="user_permissions_approve_case_closure = '1'">
+                            <label class="inputBlock" for="thirdIncident">
+                                <input data-val="true" type="radio" value="1" ng-model="user_permissions_approve_case_closure">
+                                <span class="radioButton"></span>
+                                <span class="radioTitle">@EC.Localization.Resources.GetString("Yes", is_cc)</span>
+                            </label>
+                        </div>
+                        <div class="freeBlock inputRadio" data-valueFlag="1" ng-click="user_permissions_approve_case_closure = '2'">
+                            <label class="inputBlock" for="fourIncident">
+                                <input data-val="true" type="radio" value="2" ng-model="user_permissions_approve_case_closure">
+                                <span class="radioButton"></span>
+                                <span class="radioTitle">@EC.Localization.Resources.GetString("No", is_cc)</span>
+                            </label>
+                        </div>
+                    </div><!--rowBlock-->
+                </div>
+
+                <div class="blockPersonalSettings greyBorder">
+                    <p class="title">@EC.Localization.Resources.GetString("ChangeSettings", is_cc)</p>
+                    <div class="rowBlock" id="checkBoxChangeSettings">
+                        <div class="freeBlock inputRadio" data-valueFlag="0">
+                            <label class="inputBlock" for="thirdIncident" ng-click="user_permissions_change_settings = '1'">
+                                <input data-val="true" type="radio" value="1" ng-model="user_permissions_change_settings">
+                                <span class="radioButton"></span>
+                                <span class="radioTitle">@EC.Localization.Resources.GetString("Yes", is_cc)</span>
+                            </label>
+                        </div>
+                        <div class="freeBlock inputRadio" data-valueFlag="1">
+                            <label class="inputBlock" for="fourIncident" ng-click="user_permissions_change_settings = '2'">
+                                <input data-val="true" type="radio" value="2" ng-model="user_permissions_change_settings">
+                                <span class="radioButton"></span>
+                                <span class="radioTitle">@EC.Localization.Resources.GetString("No", is_cc)</span>
+                            </label>
+                        </div>
+                    </div><!--rowBlock-->
+                </div>
+            }
+
             <div class="blockUpdateProfile">
                 <div class="updateProfileBtn">
                     <input class="greenButton" type="submit" value="update" ng-click="post()">
                     <span style="display: none;">@GlobalRes.Save</span>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

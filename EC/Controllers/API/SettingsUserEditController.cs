@@ -34,7 +34,9 @@ namespace EC.Controllers.API
                     title_ds = model == null ? "" : model.title_ds,
                     email = model == null ? "" : model.email,
                     role = model == null ? 5 : model.role_id,
-                    departmentId = model == null ? 0 : model.company_department_id
+                    departmentId = model == null ? 0 : model.company_department_id,
+                    user_permissions_approve_case_closure = model == null ? 0 : model.user_permissions_approve_case_closure,
+                    user_permissions_change_settings = model == null ? 0 : model.user_permissions_change_settings,
                 }
             };
         }
@@ -53,6 +55,8 @@ namespace EC.Controllers.API
                 user.email = model.email;
                 user.role_id = model.role_id;
                 user.company_department_id = model.company_department_id;
+                user.user_permissions_approve_case_closure = model.user_permissions_approve_case_closure;
+                user.user_permissions_change_settings = model.user_permissions_change_settings;
             }
             else
             {
@@ -94,6 +98,8 @@ namespace EC.Controllers.API
                 user.location_nm = "";
                 user.sign_in_code = null;
                 user.guid = Guid.NewGuid();
+                user.user_permissions_approve_case_closure = model.user_permissions_approve_case_closure;
+                user.user_permissions_change_settings = model.user_permissions_change_settings;
                 DB.user.Add(user);
             }
             DB.SaveChanges();

@@ -196,20 +196,40 @@
                 @if (um._user.role_id == 5)
                 {
                     <div class="blockPersonalSettings greyBorder">
-                        <p class="title">@EC.Localization.Resources.GetString("UserPermissions", is_cc)</p>
-                        <div class="rowBlock" id="checkBoxNewReports">
+                        <p class="title">@EC.Localization.Resources.GetString("ApproveCaseClosure", is_cc)</p>
+                        <div class="rowBlock" id="checkBoxApproveCaseClosure">
                             <div class="freeBlock inputRadio" data-valueFlag="0">
                                 <label class="inputBlock" for="thirdIncident">
-                                    @Html.RadioButtonFor(model => model.notification_messages_actions_flag, "1")
+                                    @Html.RadioButtonFor(model => model.user_permissions_approve_case_closure, "1", new { @readonly = "" })
                                     <span class="radioButton"></span>
-                                    <span class="radioTitle">@EC.Localization.Resources.GetString("ApproveCaseClosure", is_cc)</span>
+                                    <span class="radioTitle">@EC.Localization.Resources.GetString("Yes", is_cc)</span>
                                 </label>
                             </div>
                             <div class="freeBlock inputRadio" data-valueFlag="1">
                                 <label class="inputBlock" for="fourIncident">
-                                    @Html.RadioButtonFor(m => m.notification_messages_actions_flag, "2")
+                                    @Html.RadioButtonFor(m => m.user_permissions_approve_case_closure, "2", new { @readonly = "" })
                                     <span class="radioButton"></span>
-                                    <span class="radioTitle">@EC.Localization.Resources.GetString("ChangeSettings", is_cc)</span>
+                                    <span class="radioTitle">@EC.Localization.Resources.GetString("No", is_cc)</span>
+                                </label>
+                            </div>
+                        </div><!--rowBlock-->
+                    </div>
+
+                    <div class="blockPersonalSettings greyBorder">
+                        <p class="title">@EC.Localization.Resources.GetString("ChangeSettings", is_cc)</p>
+                        <div class="rowBlock" id="checkBoxChangeSettings">
+                            <div class="freeBlock inputRadio" data-valueFlag="0">
+                                <label class="inputBlock" for="thirdIncident">
+                                    @Html.RadioButtonFor(model => model.user_permissions_change_settings, "1", new { @readonly = "", disable = "" })
+                                    <span class="radioButton"></span>
+                                    <span class="radioTitle">@EC.Localization.Resources.GetString("Yes", is_cc)</span>
+                                </label>
+                            </div>
+                            <div class="freeBlock inputRadio" data-valueFlag="1">
+                                <label class="inputBlock" for="fourIncident">
+                                    @Html.RadioButtonFor(m => m.user_permissions_change_settings, "2", new { @readonly = "", disable = "" })
+                                    <span class="radioButton"></span>
+                                    <span class="radioTitle">@EC.Localization.Resources.GetString("No", is_cc)</span>
                                 </label>
                             </div>
                         </div><!--rowBlock-->
