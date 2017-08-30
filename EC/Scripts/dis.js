@@ -266,6 +266,36 @@
 
     angular
         .module('EC')
+        .controller('NewCaseCaseClosureReportController',
+            ['$scope', '$filter', 'orderByFilter', 'NewCaseCaseClosureReportService', NewCaseCaseClosureReportController]);
+
+    function NewCaseCaseClosureReportController($scope, $filter, orderByFilter, NewCaseCaseClosureReportService) {
+        NewCaseCaseClosureReportService.get({}, function () {
+        });
+    }
+}());
+
+(function () {
+
+    'use strict';
+
+    angular
+        .module('EC')
+        .controller('NewCaseInvestigationNotesController',
+            ['$scope', '$filter', 'orderByFilter', 'NewCaseInvestigationNotesService', NewCaseInvestigationNotesController]);
+
+    function NewCaseInvestigationNotesController($scope, $filter, orderByFilter, NewCaseInvestigationNotesService) {
+        NewCaseInvestigationNotesService.get({}, function() {
+        });
+    }
+}());
+
+(function () {
+
+    'use strict';
+
+    angular
+        .module('EC')
         .controller('NewCaseReportController',
             ['$scope', '$filter', 'orderByFilter', '$location', 'NewCaseReportService', NewCaseReportController]);
 
@@ -611,6 +641,34 @@
 
     function EmployeeAwarenessService($resource) {
         return $resource('/api/EmployeeAwareness', {}, {
+            get: { method: 'GET', params: {}, isArray: false },
+        });
+    };
+})();
+
+(function () {
+
+    'use strict';
+
+    angular.module('EC')
+        .service('NewCaseCaseClosureReportService', ['$resource', NewCaseCaseClosureReportService]);
+
+    function NewCaseCaseClosureReportService($resource) {
+        return $resource('/api/NewCaseCaseClosureReport', {}, {
+            get: { method: 'GET', params: {}, isArray: false },
+        });
+    };
+})();
+
+(function () {
+
+    'use strict';
+
+    angular.module('EC')
+        .service('NewCaseInvestigationNotesService', ['$resource', NewCaseInvestigationNotesService]);
+
+    function NewCaseInvestigationNotesService($resource) {
+        return $resource('/api/NewCaseInvestigationNotes', {}, {
             get: { method: 'GET', params: {}, isArray: false },
         });
     };
