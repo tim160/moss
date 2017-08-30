@@ -23,6 +23,7 @@
 
         $scope.refresh = function (mode, preload) {
             CasesService.get({ ReportFlag: mode, Preload: preload }, function (data) {
+                $('.headerBlockTextRight > span').text(data.Title);
                 for (var i = 0; i < data.Reports.length; i++) {
                     var r = $filter('filter')(data.ReportsAdv, { 'id': data.Reports[i].report_id });
                     if ((r != null) && (r.length > 0)) {

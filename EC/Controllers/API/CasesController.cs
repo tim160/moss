@@ -46,6 +46,11 @@ namespace EC.Controllers.API
             IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
             var userIds = reports.Select(x => x.last_sender_id).ToList();
 
+            string title = GlobalRes.ActiveCasesUp;
+            title = filter.ReportFlag == 2 ? GlobalRes.CompletedcasesUp : title;
+            title = filter.ReportFlag == 5 ? GlobalRes.ClosedCasesUp : title;
+            title = filter.ReportFlag == 3 ? GlobalRes.SpamcasesUp : title;
+
             var m = new
             {
                 Mode = filter.ReportFlag,
@@ -76,6 +81,8 @@ namespace EC.Controllers.API
                     Spam = UnreadReportsInProgressNumber(spam_report_ids, user.id),
                     Closed = UnreadReportsInProgressNumber(closed_report_ids, user.id),
                 },
+
+                Title = title,
             };
 
 
