@@ -63,5 +63,9 @@ namespace EC.Controllers
             ViewBag.headerPos = headerPos;
             return View();
         }
+        public ActionResult CaseClosureReport(int report_id)
+        {
+            return View();
+        }        
     }
 }

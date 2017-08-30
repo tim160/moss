@@ -651,6 +651,8 @@
     <Content Include="Views\ReporterDashboard\Attachments.cshtml" />
     <Content Include="Views\NewCase\Report.cshtml" />
     <Content Include="Views\NewCase\Partial\headerPos.cshtml" />
+    <Content Include="Views\NewCase\InvestigationNotes.cshtml" />
+    <Content Include="Views\NewCase\CaseClosureReport.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

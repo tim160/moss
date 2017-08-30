@@ -356,6 +356,7 @@ namespace EC
                     id = UrlParameter.Optional
                 }
             );
+
             routes.MapRoute(
                 name: "CompanyDepartmentReportAdvanced",
                 url: "Analytics/CompanyDepartmentReportAdvanced",
@@ -364,6 +365,28 @@ namespace EC
                     controller = "Analytics",
                     action = "CompanyDepartmentReportAdvanced",
                     id = UrlParameter.Optional
+                }
+            );
+
+            routes.MapRoute(
+                name: "NewCaseInvestigationNotes",
+                url: "NewCase/InvestigationNotes/{report_id}",
+                defaults: new
+                {
+                    controller = "NewCase",
+                    action = "InvestigationNotes",
+                    report_id = UrlParameter.Optional
+                }
+            );
+
+            routes.MapRoute(
+                name: "NewCaseCaseClosureReport",
+                url: "NewCase/CaseClosureReport/{report_id}",
+                defaults: new
+                {
+                    controller = "NewCase",
+                    action = "CaseClosureReport",
+                    report_id = UrlParameter.Optional
                 }
             );
 
