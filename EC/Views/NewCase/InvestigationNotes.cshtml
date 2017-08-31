@@ -6,168 +6,192 @@
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
     string popup = null;
 }
-<link type="text/css" href="~/Content/caseTasks.css" rel="stylesheet">
+@*<link type="text/css" href="~/Content/caseTasks.css" rel="stylesheet">*@
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-<style>
-#investigationNotes {
-    width: 100%;
-    background-color: #f2f7f7;
-    height: 100%;
-}
-#bigPadding {
-    padding: 0 48px;
-}
-#investigationNotes #firstBlock select{
-    outline: none;
-    border: none;
-    padding-left: 17px;
-    width: 220px;
-    height: 40px;
-    margin-left: 12px;
-}
-#investigationNotes #firstBlock {
-    border-bottom: 1px solid #bfc3c2;
-}
-#investigationNotes #firstBlock table {
-            width: 100%;
-    padding-left: 64px;
-    padding-bottom: 28px;
-}
-#secondBlock .positionArea {
-        padding-left: 64px;
-    padding-bottom: 85px;
-}
-#investigationNotes .button {
-        border: 1px solid #6ccec3;
-    color: #05b5a2;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-left: 15px;
-    font-size: 10pt;
-    padding: 5px 13px 5px 13px;
-    width: 65px;
-}
-#secondBlock {
-    border-bottom: 1px solid #bfc3c2;
-}
-</style>
-<div id="investigationNotes" ng-controller="NewCaseInvestigationNotesController">
-    <div id="bigPadding">
-        <div id="firstBlock">
-            <p>Is this a Clery Act Crime?  </p>
-            <table>
-                <tr>
-                    <td>
-                        <label class="inputBlock" for="No">
-                            <input id="No" type="radio" name="radioName" value="No">
-                            <span class="radioButton"></span>
-                            <span class="radioTitle">No</span>
-                        </label>
-                    </td>
-                    <td>
-                        <label class="inputBlock" for="Yes">
-                            <input id="Yes" type="radio" name="radioName" value="Yes">
-                            <span class="radioButton"></span>
-                            <span class="radioTitle">Yes</span>
-                        </label>
-                    </td>
-                    <td>
-                        <select class="" id="IncidentId" name="IncidentId">
-                            <option value="2714">Alcohol and drug abuse</option>
-                            <option value="3">Breach of Legal Obligations</option>
-                            <option value="123">discrimination</option>
-                            <option value="158">financial</option>
-                            <option value="2">Financial Reporting and Accounting</option>
-                            <option value="122">fraud and embezzelment</option>
-                            <option value="157">safety</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select class="" id="IncidentId" name="IncidentId">
-                            <option value="2714">Alcohol and drug abuse</option>
-                            <option value="3">Breach of Legal Obligations</option>
-                            <option value="123">discrimination</option>
-                            <option value="158">financial</option>
-                            <option value="2">Financial Reporting and Accounting</option>
-                            <option value="122">fraud and embezzelment</option>
-                            <option value="157">safety</option>
-                        </select>
-                    </td>
-                </tr>
-            </table>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+
+    <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+
+
+
+    </nav>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+
+    <div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Incident types</h2>
+                <p>Academic Misconduct</p>
+                <p>Fraudalent Activities</p>
+                <span class="acceptCaseBtnClass">
+                    Add incident type
+                </span>
+            </div>
+            <div class="col-md-4">
+                <h2>Involved Parties</h2>
+                <p>James Button</p>
+                <p>Eva Morales</p>
+                <span class="acceptCaseBtnClass">
+                    Add person
+                </span>
+            </div>
+            <div class="col-md-4">
+                <h2>Involved Departments</h2>
+                <p>Academic Affairs</p>
+                <div class="dropdown">
+                    <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select one</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div>
+
+            </div>
         </div>
-        <div id="secondBlock">
-            <p>
-                Executive Summary
-            </p>
-            <textarea class="positionArea">
+
+        <hr>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-6 col-sm-4">Facts Established</div>
+        </div>
+        <div class="row">
+            <textarea class="col-md-10 pull-right">
 
             </textarea>
-            <div class="button">
-                Add
-            </div>
         </div>
-        <div id="thirdBlock">
-            <p>
-                Recommended Outcomes for Subject(s)
-            </p>
-            <table>
-                <tr>
-                    <td>James Button</td>
-                    <td>
-                        <select class="" id="IncidentId" name="IncidentId">
-                            <option value="2714">Alcohol and drug abuse</option>
-                            <option value="3">Breach of Legal Obligations</option>
-                            <option value="123">discrimination</option>
-                            <option value="158">financial</option>
-                            <option value="2">Financial Reporting and Accounting</option>
-                            <option value="122">fraud and embezzelment</option>
-                            <option value="157">safety</option>
-                        </select>
-                    </td>
-                    <td>
-                        <div class="button">
-                            Add note
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Eva Morales</td>
-                    <td>
-                        <select class="" id="IncidentId" name="IncidentId">
-                            <option value="2714">Alcohol and drug abuse</option>
-                            <option value="3">Breach of Legal Obligations</option>
-                            <option value="123">discrimination</option>
-                            <option value="158">financial</option>
-                            <option value="2">Financial Reporting and Accounting</option>
-                            <option value="122">fraud and embezzelment</option>
-                            <option value="157">safety</option>
-                        </select>
-                    </td>
-                    <td>
-                        <div class="button">
-                            Add Note
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div id="fourthBlock">
-            <p>
-                Recommended Recommended Actions for Witnesses and Reporter
-            </p>
-            <select class="" id="IncidentId" name="IncidentId">
-                <option value="2714">Alcohol and drug abuse</option>
-                <option value="3">Breach of Legal Obligations</option>
-                <option value="123">discrimination</option>
-                <option value="158">financial</option>
-                <option value="2">Financial Reporting and Accounting</option>
-                <option value="122">fraud and embezzelment</option>
-                <option value="157">safety</option>
-            </select>
-            <div class="button">
-                Add Note
-            </div>
+        <div class="row">
+            <span class="acceptCaseBtnClass pull-right">
+                Save
+            </span>
         </div>
     </div>
-</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-6 col-sm-4">Investigation Methodology</div>
+        </div>
+        <div class="row">
+            <textarea class="col-md-10 pull-right"></textarea>
+        </div>
+        <div class="row">
+            <span class="acceptCaseBtnClass pull-right">
+                Save
+            </span>
+        </div>
+    </div>
+        <hr>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-6 col-sm-4">Investigation Methodology</div>
+            </div>
+            <div class="row">
+                <p class="col-md-3">Academic Misconduct</p>
+                <div class="dropdown col-md-5">
+                    <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select Behavioral Factors</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div>
+                <span class="acceptCaseBtnClass pull-right col-md-1">
+                    Add note
+                </span>
+            </div>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="dropdown col-md-5">
+                    <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select External Influences</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div>
+                <span class="acceptCaseBtnClass pull-right col-md-1">
+                    Add note
+                </span>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="dropdown col-md-5">
+                    <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select Campus Influences </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div>
+                <span class="acceptCaseBtnClass pull-right col-md-1">
+                    Add note
+                </span>
+            </div>
+        </div>
+
+        <div class="container">
+
+            <div class="row">
+                <p class="col-md-3">Fraudalent Activities</p>
+                <div class="dropdown col-md-5">
+                    <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Alcohol consumption</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div>
+                <span class="acceptCaseBtnClass pull-right col-md-1">
+                    Add note
+                </span>
+            </div>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="dropdown col-md-5">
+                    <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Select External Influences</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div>
+                <span class="acceptCaseBtnClass pull-right col-md-1">
+                    Add note
+                </span>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="dropdown col-md-5">
+                    <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select Campus Influences </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div>
+                <span class="acceptCaseBtnClass pull-right col-md-1">
+                    Add note
+                </span>
+            </div>
+        </div>
+
+    </div> <!-- /container -->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>

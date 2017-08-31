@@ -631,7 +631,7 @@ html, body {
     background: #d6dcdc;
 }
 #viewReport .contentViewReport .acceptCaseBtn ,
-.menuCasesBlock .acceptCaseBtn{
+.menuCasesBlock .acceptCaseBtn, .acceptCaseBtnClass{
     border: 1px solid #6ccec3;
     color: #05b5a2;
     padding-left: 10px;
@@ -639,6 +639,18 @@ html, body {
     margin-left: 15px;
     font-size: 10pt;
     padding: 5px 13px 5px 13px;
+}
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 3px 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #292b2c;
+    text-align: inherit;
+    white-space: nowrap;
+    background: 0 0;
+    border: 0;
 }
 #viewReport .contentViewReport .acceptCaseBtn:hover,
 .menuCasesBlock .acceptCaseBtn:hover{
