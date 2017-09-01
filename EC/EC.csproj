@@ -929,6 +929,12 @@
     <Compile Include="Models\Database\reported_outside.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Database\report_case_closure_outcome.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\report_cc_crime.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Database\report_department.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
@@ -987,9 +993,6 @@
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\status.cs">
-      <DependentUpon>ECEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Database\sysdiagrams.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\task.cs">

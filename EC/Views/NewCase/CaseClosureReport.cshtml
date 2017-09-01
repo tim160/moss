@@ -5,6 +5,8 @@
     List<attachment> attachmentFiles = (List<attachment>)ViewBag.attachmentFiles;
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
     string popup = null;
+    bool? is_cc = ViewBag.is_cc;
+    is_cc = true;
 }
 <link type="text/css" href="~/Content/caseTasks.css" rel="stylesheet">
 
@@ -54,56 +56,51 @@
 <div id="investigationNotes" ng-controller="NewCaseCaseClosureReportController">
     <div id="bigPadding">
         <div id="firstBlock">
-            <p>Is this a Clery Act Crime?  </p>
-            <table>
-                <tr>
-                    <td>
-                        <label class="inputBlock" for="No">
-                            <input id="No" type="radio" name="radioName" value="No">
-                            <span class="radioButton"></span>
-                            <span class="radioTitle">No</span>
-                        </label>
-                    </td>
-                    <td>
-                        <label class="inputBlock" for="Yes">
-                            <input id="Yes" type="radio" name="radioName" value="Yes">
-                            <span class="radioButton"></span>
-                            <span class="radioTitle">Yes</span>
-                        </label>
-                    </td>
-                    <td>
-                        <select class="" id="IncidentId" name="IncidentId">
-                            <option value="2714">Alcohol and drug abuse</option>
-                            <option value="3">Breach of Legal Obligations</option>
-                            <option value="123">discrimination</option>
-                            <option value="158">financial</option>
-                            <option value="2">Financial Reporting and Accounting</option>
-                            <option value="122">fraud and embezzelment</option>
-                            <option value="157">safety</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select class="" id="IncidentId" name="IncidentId">
-                            <option value="2714">Alcohol and drug abuse</option>
-                            <option value="3">Breach of Legal Obligations</option>
-                            <option value="123">discrimination</option>
-                            <option value="158">financial</option>
-                            <option value="2">Financial Reporting and Accounting</option>
-                            <option value="122">fraud and embezzelment</option>
-                            <option value="157">safety</option>
-                        </select>
-                    </td>
-                </tr>
-            </table>
+            @if (is_cc == true)
+            {
+                <p>Is this a Clery Act Crime?</p>
+                <table>
+                    <tr>
+                        <td width="100px">
+                            <label class="inputBlock" for="No">
+                                <input id="No" type="radio" name="radioName" value="false" ng-model="model.report_cc_crime.cc_is_clear_act_crime" ng-change="saveCrime()">
+                                <span class="radioButton"></span>
+                                <span class="radioTitle">No</span>
+                            </label>
+                        </td>
+                        <td width="100px">
+                            <label class="inputBlock" for="Yes">
+                                <input id="Yes" type="radio" name="radioName" value="true" ng-model="model.report_cc_crime.cc_is_clear_act_crime" ng-change="saveCrime()">
+                                <span class="radioButton"></span>
+                                <span class="radioTitle">Yes</span>
+                            </label>
+                        </td>
+                        <td>
+                            <select 
+                                    ng-change="saveCrime()"
+                                    ng-show="model.report_cc_crime.cc_is_clear_act_crime == 'true'"
+                                    ng-model="model.report_cc_crime.cc_crime_statistics_category_id"
+                                    ng-options="item.id as item.crime_statistics_category_en for item in model.cc_crime_statistics_categories"></select>
+                        </td>
+                        <td>
+                            <select                        
+                                    ng-change="saveCrime()"
+                                    ng-show="model.report_cc_crime.cc_is_clear_act_crime == 'true'"
+                                    ng-model="model.report_cc_crime.cc_crime_statistics_location_id" 
+                                    ng-options="item.id as item.crime_statistics_location_en for item in model.cc_crime_statistics_locations"></select>
+                        </td>
+                    </tr>
+                </table>
+            }
         </div>
         <div id="secondBlock">
             <p>
                 Executive Summary
             </p>
-            <textarea class="positionArea">
+            <textarea class="positionArea" ng-model="model.report_cc_crime.executive_summary">
 
             </textarea>
-            <div class="button">
+            <div class="button" ng-click="saveCrime()">
                 Add
             </div>
         </div>
@@ -112,61 +109,42 @@
                 Recommended Outcomes for Subject(s)
             </p>
             <table>
-                <tr>
-                    <td>James Button</td>
+                <tr ng-repeat="user in model.report_case_closure_outcomes">
+                    <td>{{user.user.Name}} {{user.user.Title}}</td>
                     <td>
-                        <select class="" id="IncidentId" name="IncidentId">
-                            <option value="2714">Alcohol and drug abuse</option>
-                            <option value="3">Breach of Legal Obligations</option>
-                            <option value="123">discrimination</option>
-                            <option value="158">financial</option>
-                            <option value="2">Financial Reporting and Accounting</option>
-                            <option value="122">fraud and embezzelment</option>
-                            <option value="157">safety</option>
-                        </select>
+                        <select ng-change="saveItem(user)"
+                                ng-model="user.outcome_id"
+                                ng-options="item.id as item.outcome_en for item in model.outcomes"></select>
                     </td>
                     <td>
-                        <div class="button">
+                        <div ng-show="user.isEditNote">
+                            <textarea class="positionArea" ng-model="user.note"></textarea>
+                            <div class="button" ng-click="saveItem(user)">
+                                Save
+                            </div>
+                        </div>
+                        <div class="button" ng-click="user.isEditNote = !user.isEditNote" ng-show="!user.isEditNote">
                             Add note
                         </div>
                     </td>
-                </tr>
-                <tr>
-                    <td>Eva Morales</td>
-                    <td>
-                        <select class="" id="IncidentId" name="IncidentId">
-                            <option value="2714">Alcohol and drug abuse</option>
-                            <option value="3">Breach of Legal Obligations</option>
-                            <option value="123">discrimination</option>
-                            <option value="158">financial</option>
-                            <option value="2">Financial Reporting and Accounting</option>
-                            <option value="122">fraud and embezzelment</option>
-                            <option value="157">safety</option>
-                        </select>
-                    </td>
-                    <td>
-                        <div class="button">
-                            Add Note
-                        </div>
-                    </td>
-                </tr>
+                </tr>                
             </table>
         </div>
         <div id="fourthBlock">
             <p>
                 Recommended Recommended Actions for Witnesses and Reporter
             </p>
-            <select class="" id="IncidentId" name="IncidentId">
-                <option value="2714">Alcohol and drug abuse</option>
-                <option value="3">Breach of Legal Obligations</option>
-                <option value="123">discrimination</option>
-                <option value="158">financial</option>
-                <option value="2">Financial Reporting and Accounting</option>
-                <option value="122">fraud and embezzelment</option>
-                <option value="157">safety</option>
-            </select>
-            <div class="button">
-                Add Note
+            <select ng-change="saveItem(model.reporter)"
+                    ng-model="model.reporter.outcome_id"
+                    ng-options="item.id as item.outcome_en for item in model.outcomes"></select>
+            <div ng-show="model.reporter.isEditNote">
+                <textarea class="positionArea" ng-model="model.reporter.note"></textarea>
+                <div class="button" ng-click="saveItem(model.reporter)">
+                    Save
+                </div>
+            </div>
+            <div class="button" ng-click="model.reporter.isEditNote = !model.reporter.isEditNote" ng-show="!model.reporter.isEditNote">
+                Add note
             </div>
         </div>
     </div>

@@ -65,6 +65,18 @@ namespace EC.Controllers
         }
         public ActionResult CaseClosureReport(int report_id)
         {
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            //DEBUG
+            user = user != null ? user : db.user.FirstOrDefault(x => x.id == 2);
+            //DEBUG
+            if (user == null || user.id == 0)
+                return RedirectToAction("Index", "Account");
+
+            int user_id = user.id;
+            ViewBag.user_id = user_id;
+            ViewBag.report_id = report_id;
+            ViewBag.attachmentFiles = getAttachmentFiles(report_id);
+
             return View();
         }        
     }
