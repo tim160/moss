@@ -52,7 +52,7 @@ namespace EC.Controllers.API
             var items = DB.company_case_routing.Where(x => x.company_id == user.company_id).ToList();
             var types = DB.company_secondary_type.Where(x => x.company_id == user.company_id && x.status_id == 2).ToList();
             var ids = items.Select(x => x.id).ToList();
-            var files = DB.company_case_routing_attachments.Where(x => ids.Contains(x.company_case_routing_id)).ToList();
+            var files = DB.company_case_routing_attachments.Where(x => ids.Contains(x.company_case_routing_id) & x.status_id == 2).ToList();
             types.ForEach(x =>
             {
                 var item = items.FirstOrDefault(z => z.company_secondary_type_id == x.id);
@@ -72,7 +72,8 @@ namespace EC.Controllers.API
             });
 
             var locations = DB.company_location.Where(x => x.company_id == user.company_id && x.status_id == 2).OrderBy(x => x.location_en).ToList();
-            var locationItems = DB.company_case_routing_location.Where(x => x.company_id == user.company_id).ToList();
+            ids = locations.Select(x => x.id).ToList();
+            var locationItems = DB.company_case_routing_location.Where(x => ids.Contains(x.company_location_id) & x.company_id == user.company_id).ToList();
             locations.ForEach(x =>
             {
                 var item = locationItems.FirstOrDefault(z => z.company_location_id == x.id);
