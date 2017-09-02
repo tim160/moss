@@ -32,7 +32,7 @@ namespace EC.Controllers.API
         {
             user user = (user)HttpContext.Current.Session[ECGlobalConstants.CurrentUserMarcker];
             //DEBUG
-            user = user != null ? user : DB.user.FirstOrDefault(x => x.id == 2);
+            //user = user != null ? user : DB.user.FirstOrDefault(x => x.id == 2);
             //DEBUG
             if (user == null || user.id == 0)
             {
@@ -112,7 +112,7 @@ namespace EC.Controllers.API
         {
             user user = (user)HttpContext.Current.Session[ECGlobalConstants.CurrentUserMarcker];
             //DEBUG
-            user = user != null ? user : DB.user.FirstOrDefault(x => x.id == 2);
+            //user = user != null ? user : DB.user.FirstOrDefault(x => x.id == 2);
             //DEBUG
             if (user == null || user.id == 0)
             {
