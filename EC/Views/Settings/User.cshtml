@@ -50,6 +50,10 @@
                     <option value="0">@GlobalRes.Other</option>
                 </select>
             </div>
+            <div class="blockPersonalSettings greyBorder" ng-class="{error: val_email }">
+                <p class="title">@GlobalRes.Email</p>
+                <input email="email" id="email" name="email" type="text" ng-model="email">
+            </div>
             <div class="blockPersonalSettings greyBorder">
                 <div id="personeAgain">
                     <div class="title">@GlobalRes.Role</div>
@@ -89,10 +93,7 @@
                     </div>
                 </div><!--rowBlock-->
             </div>
-            <div class="blockPersonalSettings greyBorder" ng-class="{error: val_email }">
-                <p class="title">@GlobalRes.Email</p>
-                <input email="email" id="email" name="email" type="text" ng-model="email">
-            </div>
+
 
             @if (um._user.role_id == 5)
             {
