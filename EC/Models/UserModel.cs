@@ -1050,7 +1050,52 @@ namespace EC.Models
             }
         }
 
-        public bool ResolveCase(int report_id, int mediator_id, string description, int new_status, int? outcome_id, string outcome, int? reason_id, string executive_summary, string facts_established, string investigation_methodology, string description_outcome, string recommended_actions, int sign_off_mediator_id, bool? is_clery_act_crime, int crime_statistics_category_id, int crime_statistics_location_id)
+        public bool ResolveCase(int report_id, int mediator_id, string description, int new_status, int? reason_id,int sign_off_mediator_id)
+        {
+            try
+            {
+                int case_closure_reason_id = 0;
+                if (reason_id.HasValue)
+                    case_closure_reason_id = reason_id.Value;
+
+
+                //  outcome_message = outcome,   outcome acts like a case_closure_report. We would need to change this in future
+
+                report_investigation_status report_investigation_status;
+
+                report_investigation_status = new report_investigation_status()
+                {
+                    report_id = report_id,
+                    investigation_status_id = new_status,
+                    created_date = DateTime.Now,
+                    user_id = mediator_id,
+                    description = description,
+                    outcome_message = "",
+                    case_closure_reason_id = case_closure_reason_id
+                };
+
+                db.report_investigation_status.Add(report_investigation_status);
+
+                report _report = db.report.Where(item => (item.id == report_id)).FirstOrDefault();
+                _report.status_id = 1;
+                _report.last_update_dt = DateTime.Now;
+
+                _report.cc_crime_statistics_category_id = null;
+
+                db.SaveChanges();
+
+
+                return true;
+            }
+            catch (System.Data.DataException ex)
+            {
+                logger.Error(ex.ToString());
+                Console.WriteLine("Case wasn't resolved. Ex:" + ex.Data);
+                return false;
+            }
+        }
+
+        private bool ResolveCase_bkp(int report_id, int mediator_id, string description, int new_status, int? outcome_id, string outcome, int? reason_id, string executive_summary, string facts_established, string investigation_methodology, string description_outcome, string recommended_actions, int sign_off_mediator_id, bool? is_clery_act_crime, int crime_statistics_category_id, int crime_statistics_location_id)
         {
             try
             {
@@ -1059,7 +1104,7 @@ namespace EC.Models
                     case_closure_reason_id = reason_id.Value;
 
                 string executive_summary_str = "";
-                executive_summary_str = (executive_summary == null) ? "": executive_summary;
+                executive_summary_str = (executive_summary == null) ? "" : executive_summary;
                 string facts_established_str = "";
                 facts_established_str = (facts_established == null) ? "" : facts_established;
                 string investigation_methodology_str = "";
@@ -1142,6 +1187,7 @@ namespace EC.Models
                 return false;
             }
         }
+
 
         public bool ReassignTask(int task_id, int mediator_id)
         {

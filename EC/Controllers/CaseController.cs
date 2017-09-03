@@ -817,7 +817,7 @@ namespace EC.Controllers
                 crime_statistics_category_id = Convert.ToInt32(Request["crime_statistics_category_id"]);
 
 
-            bool _new = userModel.ResolveCase(report_id, mediator_id, description, new_status, outcome_id, outcome, reason_id, executive_summary, facts_established, investigation_methodology, description_outcome, recommended_actions, sign_off_mediator_id, is_clery_act_crime, crime_statistics_category_id, crime_statistics_location_id);
+            bool _new = userModel.ResolveCase(report_id, mediator_id, description, new_status,reason_id, sign_off_mediator_id);
             if (_new)
             {
                 #region Email Ready
@@ -981,7 +981,7 @@ namespace EC.Controllers
                 new_status_id = ECGlobalConstants.investigation_status_spam;
             }
 
-            bool _new = userModel.ResolveCase(report_id, mediator_id, description, new_status_id, outcome_id, outcome, reason_id, executive_summary, facts_established, investigation_methodology, description_outcome, recommended_actions, sign_off_mediator_id, is_clery_act_crime, crime_statistics_category_id, crime_statistics_location_id);
+            bool _new = userModel.ResolveCase(report_id, mediator_id, description, new_status_id, reason_id, sign_off_mediator_id);
 
             if (_new)
             {
@@ -1037,58 +1037,16 @@ namespace EC.Controllers
             string description = Request["description"].ToString().Trim();
 
 
-            string outcome = String.Empty;
-            if (Request["outcome"]!=null)
-            {
-                outcome = Request["outcome"].ToString().Trim();
-            }
-
-            int outcome_id = 0;
-            if (Request["outcome_id"] != "")
-            {
-                outcome_id = Convert.ToInt16(Request["outcome_id"]);
-            }
             int reason_id = 0;
             if (Request["case_closure_reason_id"] != "")
             {
                 reason_id = Convert.ToInt16(Request["case_closure_reason_id"]);
             }
 
-            string executive_summary = "";
-            if (Request["executive_summary"] != null)
-                executive_summary = Request["executive_summary"].ToString().Trim();
-            string facts_established = "";
-            if (Request["facts_established"] != null)
-                facts_established = Request["facts_established"].ToString().Trim();
-            string investigation_methodology = "";
-            if (Request["investigation_methodology"] != null)
-                investigation_methodology = Request["investigation_methodology"].ToString().Trim();
-            string description_outcome = "";
-            if (Request["description_outcome"] != null)
-                description_outcome = Request["description_outcome"].ToString().Trim();
-            string recommended_actions = "";
-            if (Request["recommended_actions"] != null)
-                recommended_actions = Request["recommended_actions"].ToString().Trim();
-
-
             int sign_off_mediator_id = 0;
             if (Request["sign_off_mediator_id"] != null)
                 sign_off_mediator_id = Convert.ToInt32(Request["sign_off_mediator_id"]);
-
-            bool? is_clery_act_crime = null;
-            if (Request["is_clery_act_crime"] != null)
-                is_clery_act_crime = Convert.ToBoolean(Request["is_clery_act_crime"]);
-
-            int crime_statistics_location_id = 0;
-            if (Request["crime_statistics_location_id"] != null)
-                crime_statistics_location_id = Convert.ToInt32(Request["crime_statistics_location_id"]);
-
-            int crime_statistics_category_id = 0;
-            if (Request["crime_statistics_category_id"] != null)
-                crime_statistics_category_id = Convert.ToInt32(Request["crime_statistics_category_id"]);
-
-
-
+            
             if (mediator_id != user.id)
                 return -1;
             ReportModel rm = new ReportModel(report_id);
@@ -1107,7 +1065,7 @@ namespace EC.Controllers
                     return 0;
             }
             */
-            bool _new = userModel.ResolveCase(report_id, mediator_id, description, promotion_value, outcome_id, outcome, reason_id, executive_summary, facts_established, investigation_methodology, description_outcome, recommended_actions, sign_off_mediator_id, is_clery_act_crime, crime_statistics_category_id, crime_statistics_location_id);
+            bool _new = userModel.ResolveCase(report_id, mediator_id, description, promotion_value, reason_id,sign_off_mediator_id);
 
             if (_new)
             {

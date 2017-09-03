@@ -210,7 +210,7 @@
                         <div class="positionIconCases">
                             <div id="iconCases"></div>
                         </div>
-                        <span class="textHeader">@GlobalRes.Cases</span>
+                        <span class="textHeader">@GlobalRes.Dashboard</span>
                         @if (unread_report_number_string.Length > 0)
                         {
                             <span class="badge">@unread_report_number_string</span>
@@ -243,7 +243,6 @@
                         </li>
                         <li>
                         <a href="/Payment/History">@GlobalRes.Subscription</a>
-                            <!--<button>Settings</button>-->
                         </li>
                         <li>
                             <form action="@Url.Action("Logout", "Base")">
