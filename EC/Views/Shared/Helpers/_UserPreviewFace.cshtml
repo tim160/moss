@@ -51,15 +51,15 @@
 
 <div class="blockPhoto">
     @if (is_owner)
-{
-    if (um != null && um._user != null && um._user.role_id == 5)
     {
-        if (is_cc.Value)
+        if (um != null && um._user != null && um._user.role_id == 5)
         {
-            <div class="status status_cc"></div>
-        }
-        else
-        {
+            if (is_cc.Value)
+            {
+                <div class="status status_cc"></div>
+            }
+            else
+            {
                 <div class="status"></div>
             }
         }

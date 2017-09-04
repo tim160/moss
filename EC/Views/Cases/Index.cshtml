@@ -35,6 +35,36 @@
             @Html.Partial("~/Views/PartialViews/_ReportPendingNotification.cshtml", new ViewDataDictionary { { "report_id", _report_id }, { "user_id", user_id } })
         }
     }
+
+    <style>
+        td.case {
+            width: 8%;
+        }
+        td.stage {
+            width: 12%;
+        }
+        td.reportDate {
+            width: 14%;
+        }
+        td.age {
+            width: 3%;
+        }
+        td.incidentType {
+            width: 18%;
+        }
+        td.location {
+            width: 25%;
+        }
+        td.messages {
+            width: 7%;
+        }
+        td.team {
+            width: 3%;
+        }
+        td.tableCasesIndex {
+            width: 4%;
+        }
+    </style>
 }
 
 <div ng-controller="CasesController">
@@ -79,45 +109,45 @@
             <table class="tableCasesIndex">
                 <thead>
                     <tr>
-                        <td ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('case_number')">
+                        <td class="case" ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('case_number')">
                             <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'case_number'" />
                             case
                         </td>
-                        <td ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('current_status')">
+                        <td class="stage" ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('current_status')">
                             <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'current_status'" />
                             stage
                         </td>
-                        <td ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('total_days')">
-                            <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'total_days'" />
-                            age
-                        </td>
-                        <td ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('case_secondary_types')">
-                            <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'case_secondary_types'" />
-                            Incident Type
-                        </td>
-                        <td ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('location')">
-                            <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'location'" />
-                            Location
-                        </td>
-                        <td ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('case_dt_s')">
+                        <td class="reportDate" ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('case_dt_s')">
                             <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'case_dt_s'" />
                             Report date
                         </td>
-                        <td ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('new_messages')">
+                        <td class="age" ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('total_days')">
+                            <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'total_days'" />
+                            age
+                        </td>
+                        <td class="incidentType" ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('case_secondary_types')">
+                            <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'case_secondary_types'" />
+                            Incident Type
+                        </td>
+                        <td class="location" ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('location')">
+                            <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'location'" />
+                            Location
+                        </td>
+                        <td class="messages" ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('new_messages')">
                             <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'new_messages'" />
                             messages
                         </td>
-                        <td ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('new_tasks')">
+                        <td class="task" ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('new_tasks')">
                             <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'new_tasks'" />
                             task
                         </td>
-                        <td ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('team_number')">
+                        <td class="team" ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('team_number')">
                             <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'team_number'" />
                             team
                         </td>
                         @if (is_cc == true)
                         {
-                            <td ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('cc_is_life_threating')">
+                            <td class="campusAlert" ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('cc_is_life_threating')">
                                 <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'cc_is_life_threating'" />
                                 Campus Alert
                             </td>
@@ -130,13 +160,29 @@
                     <tr ng-repeat="report in reports" ng-click="openCase(report.report_id)">
                         <td class="firstColumn"><div class="rectangle" style="background-color:#{{report.case_color_code}}"></div>{{report.case_number}}</td>
                         <td><span class="OpenSansBold upperCase grey">{{report.current_status}}</span><br /><span class="timeStatus OpenSansSemibold red"> {{report.days_left}} days left</span></td>
+                        <td>{{report.case_dt}}</td>
                         <td>{{report.total_days}}</td>
                         <td>{{report.case_secondary_types}}</td>
                         <td>{{report.location}}</td>
-                        <td>{{report.case_dt}}</td>
                         <td>{{report.messages_number}}</td>
                         <td>{{report.tasks_number}}</td>
-                        <td>{{report.team_number}}</td>
+                        <td>
+                            <div>
+                                <div ng-repeat="mediator in report.mediators|limitTo:2">
+                                    <div class="blockPhoto">
+                                        <div class="photoPersonal">
+                                            <a href="/settings/user/{{mediator.id}}">
+                                                <img ng-src="{{mediator.photo_path}}" title="{{mediator.first_nm}}_{{mediator.last_nm}}" ng-show="mediator.id != 0" />
+                                            </a>
+                                            <img src="@Url.Content("~/Content/Icons/noPhoto.png")" ng-show="mediator.id == 0" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-show="report.mediators.length > 2">
+                                    <span>and {{report.mediators.length - 2}} more</span>
+                                </div>
+                            </div>
+                        </td>
                         @if (is_cc == true)
                         {
                             <td class="alarm" ng-class="{'alarm-active' : report.cc_is_life_threating == true, 'alarm-default': report.cc_is_life_threating != true}"></td>
