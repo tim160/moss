@@ -55,21 +55,6 @@
         var outcome_id = $("#ddlOutcome").attr('data-value');
         var reason_id = $("#ddlReasonClosure").attr('data-value');
         
-    ///    var outcome = $("#txtOutcome").val();
-     ///   if (outcome == "") {
-   ///         $("#txtOutcome").css("border", "2px solid red");
-    ///        $("#txtOutcome").on('focusin', function () {
-     //           $("#txtOutcome").css("border", "none");
-     ///       });
-    ///    }
-        if (outcome_id == "") {
-            $("#ddlOutcome").css("border", "2px solid red");
-            $("#ddlOutcome").on('focusin', function () {
-                $("#ddlOutcome").css("border", "none");
-            });
-        } else {
-            $("#ddlOutcome").css("border", "none");
-        }
 
         if (reason_id == "") {
             $("#ddlReasonClosure").css("border", "2px solid red");
@@ -80,43 +65,16 @@
         else {
             $("#ddlReasonClosure").css("border", "none");
         }
-        if ($('#txtDescription').length > 0) {
-            description = $("#txtDescription").val();
-        }
-        var executive_summary = '';
-        if ($('#txtExecutiveSummary').length > 0) {
-            executive_summary = $("#txtExecutiveSummary").val();
-        }
-        var facts_established = '';
-        if ($('#txtFactsEstablished').length > 0) {
-            facts_established = $("#txtFactsEstablished").val();
-        }
-        var investigation_methodology = '';
-        if ($('#txtInvestigationMethodology').length > 0) {
-            investigation_methodology = $("#txtInvestigationMethodology").val();
-        }
-        var description_outcome = '';
-        if ($('#txtDescriptionOutcome').length > 0) {
-            description_outcome = $("#txtDescriptionOutcome").val();
-        }
-        var recommended_actions = '';
-        if ($('#txtRecommendedActions').length > 0) {
-            recommended_actions = $("#txtRecommendedActions").val();
-        }
 
         var sign_off_mediator_id = $("#ddlSignOffMediator").attr('data-value');
-        var is_clery_act_crime = $("#rblIsCleryActCrime").attr('data-value');
-        var crime_statistics_id = $("#ddlCrimeStatistics").attr('data-value');
-        var geographic_locations_id = $("#ddlGeographicLocations").attr('data-value');
 
              if (_report_id > 0 && user_id > 0 && promotion_value != "") {
                 $.ajax({
                     method: "POST",
                     url: "/Case/CloseCase",
                     data: {
-                        user_id: user_id, report_id: _report_id, description: description, promotion_value: promotion_value, outcome_id: outcome_id, outcome: '',
-                        case_closure_reason_id: reason_id, executive_summary: executive_summary, facts_established: facts_established, investigation_methodology: investigation_methodology, description_outcome: description_outcome, recommended_actions: recommended_actions,
-                        sign_off_mediator_id: sign_off_mediator_id, is_clery_act_crime: is_clery_act_crime, crime_statistics_id: crime_statistics_id, geographic_locations_id: geographic_locations_id
+                        user_id: user_id, report_id: _report_id, description: description, promotion_value: promotion_value,
+                        case_closure_reason_id: reason_id, sign_off_mediator_id: sign_off_mediator_id
                     }
                 }).done(function (data) {//data from server
 
