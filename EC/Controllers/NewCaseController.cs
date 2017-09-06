@@ -46,7 +46,7 @@ namespace EC.Controllers
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             //DEBUG
-            user = user != null ? user : db.user.FirstOrDefault(x => x.id == 2);
+            //user = user != null ? user : db.user.FirstOrDefault(x => x.id == 2);
             //DEBUG
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
