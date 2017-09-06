@@ -941,6 +941,9 @@
     <Compile Include="Models\Database\report_investigation_status.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Database\report_inv_notes.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Database\report_log.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
