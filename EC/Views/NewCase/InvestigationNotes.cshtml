@@ -23,37 +23,50 @@
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
 
-    <div class="container">
+    <div class="container" ng-controller="NewCaseInvestigationNotesController">
         <!-- Example row of columns -->
         <div class="row">
             <div class="col-md-4">
                 <h2>Incident types</h2>
-                <p>Academic Misconduct</p>
-                <p>Fraudalent Activities</p>
-                <span class="acceptCaseBtnClass">
+                <p ng-repeat="item in model.report_secondary_type_selected">
+                    <a href="#" ng-click="incidentTypeDelete(item.id)" ng-show="!item.added_by_reporter">X</a>
+                    {{item.secondary_type_en}}
+                </p>
+                <span class="acceptCaseBtnClass" ng-show="!incidentTypeAddMode" ng-click="incidentTypeAddMode = !incidentTypeAddMode">
                     Add incident type
                 </span>
+                <select ng-change="incidentTypeAdd()"
+                        ng-show="incidentTypeAddMode"
+                        ng-model="model.incidentTypeAdd"
+                        ng-options="item.id as item.secondary_type_en for item in model.report_secondary_type_selected_avilable"></select>
             </div>
             <div class="col-md-4">
                 <h2>Involved Parties</h2>
-                <p>James Button</p>
-                <p>Eva Morales</p>
-                <span class="acceptCaseBtnClass">
+                <p ng-repeat="item in model.mediator_involved">
+                    <a href="#" ng-click="mediatorDelete(item.id)" ng-show="!item.added_by_reporter">X</a>
+                    {{item.first_nm}} {{item.last_nm}}
+                </p>
+                <span class="acceptCaseBtnClass" ng-show="!mediatorAddMode" ng-click="mediatorAddMode = !mediatorAddMode">
                     Add person
                 </span>
+                <select ng-change="mediatorAdd()"
+                        ng-show="mediatorAddMode"
+                        ng-model="model.mediatorAdd"
+                        ng-options="item.id as item.first_nm for item in model.mediator_all"></select>
             </div>
             <div class="col-md-4">
                 <h2>Involved Departments</h2>
-                <p>Academic Affairs</p>
-                <div class="dropdown">
-                    <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select one</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown01">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </div>
-
+                <p ng-repeat="item in model.departments_report">
+                    <a href="#" ng-click="departmentDelete(item.id)" ng-show="!item.added_by_reporter">X</a>
+                    {{item.name}}
+                </p>
+                <span class="acceptCaseBtnClass" ng-show="!departmentAddMode" ng-click="departmentAddMode = !departmentAddMode">
+                    Add person
+                </span>
+                <select ng-change="departmentAdd()"
+                        ng-show="departmentAddMode"
+                        ng-model="model.departmentAdd"
+                        ng-options="item.id as item.department_en for item in model.departments_all"></select>
             </div>
         </div>
 
@@ -64,12 +77,10 @@
             <div class="col-6 col-sm-4">Facts Established</div>
         </div>
         <div class="row">
-            <textarea class="col-md-10 pull-right">
-
-            </textarea>
+            <textarea class="col-md-10 pull-right" ng-model="model.note1"></textarea>
         </div>
         <div class="row">
-            <span class="acceptCaseBtnClass pull-right">
+            <span class="acceptCaseBtnClass pull-right" ng-click="saveNote(1)">
                 Save
             </span>
         </div>
@@ -79,10 +90,10 @@
             <div class="col-6 col-sm-4">Investigation Methodology</div>
         </div>
         <div class="row">
-            <textarea class="col-md-10 pull-right"></textarea>
+            <textarea class="col-md-10 pull-right" ng-model="model.note2"></textarea>
         </div>
         <div class="row">
-            <span class="acceptCaseBtnClass pull-right">
+            <span class="acceptCaseBtnClass pull-right" ng-click="saveNote(2)">
                 Save
             </span>
         </div>

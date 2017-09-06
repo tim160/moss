@@ -8,6 +8,7 @@
     function NewCaseInvestigationNotesService($resource) {
         return $resource('/api/NewCaseInvestigationNotes', {}, {
             get: { method: 'GET', params: {}, isArray: false },
+            post: { method: 'POST', params: {}, isArray: false },
         });
     };
 })();
