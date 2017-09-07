@@ -4111,3 +4111,18 @@ textarea {
     width: 16px;
     height: 9px;
 }
+
+/*try disable bootstrap fonts*/
+#header .badge {
+    background-color: #ee5a36;
+}
+.navbarColor {
+    background-color: #acb7b2;
+    border: none;
+}
+.zipperColor {
+    background-color: #92a0a3;
+}
+.navbar {
+  border-radius: 0 !important;
+}
