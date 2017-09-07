@@ -35,6 +35,15 @@ namespace EC.Controllers.API
             public string Note1 { get; set; }
 
             public string Note2 { get; set; }
+
+            public int? inv_meth_st_id { get; set; }
+            public int? inv_meth_bf_id { get; set; }
+            public int? inv_meth_ei_id { get; set; }
+            public int? inv_meth_ci_id { get; set; }
+            public string inv_meth_bf_note { get; set; }
+            public string inv_meth_ei_note { get; set; }
+            public string inv_meth_ci_note { get; set; }
+
         }
 
         [HttpGet]
@@ -50,8 +59,6 @@ namespace EC.Controllers.API
             }
 
             UserModel um = new UserModel(user.id);
-
-            //var rm = new ReportModel(filter.Report_id);
 
             var company_secondary_types = DB.company_secondary_type
                 .Where(x => x.company_id == um._user.company_id)
@@ -128,6 +135,26 @@ namespace EC.Controllers.API
 
                 note2 = DB.report_inv_notes.FirstOrDefault(x => x.report_id == filter.Report_id & x.type == 2)?.note,
 
+                company_root_cases_behavioral = DB.company_root_cases_behavioral
+                    .Where(x => x.company_id == user.company_id)
+                    .OrderBy(x => x.name_en)
+                    .ToList(),
+
+                company_root_cases_external = DB.company_root_cases_external
+                    .Where(x => x.company_id == user.company_id)
+                    .OrderBy(x => x.name_en)
+                    .ToList(),
+
+                company_root_cases_organizational = DB.company_root_cases_organizational
+                    .Where(x => x.company_id == user.company_id)
+                    .OrderBy(x => x.name_en)
+                    .ToList(),
+
+                report_investigation_methodology = DB.report_investigation_methodology
+                    .Where(x => x.report_id == filter.Report_id)
+                    .ToList()
+                    .Where(x => report_secondary_type_selected.Select(z => z.secondary_type_id).ToList().Contains(x.report_secondary_type_id))
+                    .ToList()
             };
 
 
@@ -250,6 +277,58 @@ namespace EC.Controllers.API
                     model.user_id = user.id;
                     model.note = filter.Note1 != null ? filter.Note1 : filter.Note2;
                 }
+                DB.SaveChanges();
+            }
+
+            if (filter.inv_meth_st_id.HasValue)
+            {
+                var model = DB.report_investigation_methodology.FirstOrDefault(x => x.report_id == filter.Report_id & x.report_secondary_type_id == filter.inv_meth_st_id);
+                if (model == null)
+                {
+                    model = new report_investigation_methodology
+                    {
+                        report_id = filter.Report_id,
+                        report_secondary_type_id = filter.inv_meth_st_id.Value
+                    };
+                    DB.report_investigation_methodology.Add(model);
+                }
+                if (filter.inv_meth_bf_id.HasValue)
+                {
+                    model.company_root_cases_behavioral_id = filter.inv_meth_bf_id.Value;
+                    model.company_root_cases_behavioral_update_dt = DateTime.Now;
+                    model.company_root_cases_behavioral_user_id = user.id;
+                }
+                if (filter.inv_meth_ei_id.HasValue)
+                {
+                    model.company_root_cases_external_id = filter.inv_meth_ei_id.Value;
+                    model.company_root_cases_external_update_dt = DateTime.Now;
+                    model.company_root_cases_external_user_id = user.id;
+                }
+                if (filter.inv_meth_ci_id.HasValue)
+                {
+                    model.company_root_cases_organizational_id = filter.inv_meth_ci_id.Value;
+                    model.company_root_cases_organizational_note_update_dt = DateTime.Now;
+                    model.company_root_cases_organizational_note_user_id = user.id;
+                }
+                if (filter.inv_meth_bf_note != null)
+                {
+                    model.company_root_cases_behavioral_note = filter.inv_meth_bf_note;
+                    model.company_root_cases_organizational_update_dt = DateTime.Now;
+                    model.company_root_cases_organizational_user_id = user.id;
+                }
+                if (filter.inv_meth_ei_note != null)
+                {
+                    model.company_root_cases_external_note = filter.inv_meth_ei_note;
+                    model.company_root_cases_organizational_note_update_dt = DateTime.Now;
+                    model.company_root_cases_organizational_note_user_id = user.id;
+                }
+                if (filter.inv_meth_ci_note != null)
+                {
+                    model.company_root_cases_organizational_note = filter.inv_meth_ci_note;
+                    model.company_root_cases_organizational_note_update_dt = DateTime.Now;
+                    model.company_root_cases_organizational_note_user_id = user.id;
+                }
+
                 DB.SaveChanges();
             }
 
