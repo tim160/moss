@@ -657,6 +657,7 @@
     <Content Include="Views\NewCase\Partial\headerPos.cshtml" />
     <Content Include="Views\NewCase\InvestigationNotes.cshtml" />
     <Content Include="Views\NewCase\CaseClosureReport.cshtml" />
+    <Content Include="Views\Shared\Partial\ReporterDashboard.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -999,9 +1000,6 @@
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\status.cs">
-      <DependentUpon>ECEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Database\sysdiagrams.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\task.cs">

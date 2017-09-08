@@ -215,6 +215,7 @@ namespace EC.Controllers
             ViewBag.companylogo = companyModel._company.path_en;
             ReportSubmit submit = new ReportSubmit();
             submit.merge(rvm, companyModel, reportModel, model);
+            ViewBag.ReportModel = new ReportModel(currentReport.id);
             return View("CaseSubmitted", submit);
         }
 
