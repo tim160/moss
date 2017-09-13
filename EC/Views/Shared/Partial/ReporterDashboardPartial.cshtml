@@ -93,6 +93,13 @@
 
                 <div class="listHead"> @GlobalRes.PartiesInvolved</div>
                 <div class="reportBlock">
+                    <div class="report">
+                        <div class="titleReport">@GlobalRes.report_by_myself</div>
+                        <div class="reportText">
+                            @(rm._report.report_by_myself ? @GlobalRes.Myself : @GlobalRes.SomeoneElse)
+                        </div>
+                    </div>
+
                     @if (_involved != null && _involved.Count > 0)
                     {
                         <table>
@@ -122,7 +129,7 @@
                         </div>
                     }
                     <div class="report">
-                        <div class="titleReport">@GlobalRes.Ismanagementinformed?</div>
+                        <div class="titleReport">@GlobalRes.ManagementKnow?</div>
                         <div class="reportText">
                             @rm._management_know_string
                         </div>

@@ -47,19 +47,26 @@
             width: 14%;
         }
         td.age {
-            width: 3%;
+            min-width: 80px;
+            max-width: 80px;
+            width: 80px;
         }
         td.incidentType {
             width: 18%;
         }
         td.location {
-            width: 25%;
+            width: 20%;
+        }
+        td.severity {
+            width: 8%;
         }
         td.messages {
             width: 7%;
         }
         td.team {
-            width: 3%;
+            min-width: 170px;
+            max-width: 170px;
+            width: 170px;
         }
         td.tableCasesIndex {
             width: 4%;
@@ -133,6 +140,10 @@
                             <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'location'" />
                             Location
                         </td>
+                        <td class="severity" ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('severity')">
+                            <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'severity'" />
+                            Severity
+                        </td>                        
                         <td class="messages" ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('new_messages')">
                             <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'new_messages'" />
                             messages
@@ -161,9 +172,10 @@
                         <td class="firstColumn"><div class="rectangle" style="background-color:#{{report.case_color_code}}"></div>{{report.case_number}}</td>
                         <td><span class="OpenSansBold upperCase grey">{{report.current_status}}</span><br /><span class="timeStatus OpenSansSemibold red"> {{report.days_left}} days left</span></td>
                         <td>{{report.case_dt}}</td>
-                        <td>{{report.total_days}}</td>
+                        <td>{{report.total_days}} {{report.total_days == 1 ? ' day' : ' days'}}</td>
                         <td>{{report.case_secondary_types}}</td>
                         <td>{{report.location}}</td>
+                        <td>{{report.severity_s}}</td>
                         <td>{{report.messages_number}}</td>
                         <td>{{report.tasks_number}}</td>
                         <td>

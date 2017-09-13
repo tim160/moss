@@ -32,8 +32,8 @@
                         data.Reports[i].case_dt_s = r[0].case_dt_s;
                         data.Reports[i].cc_is_life_threating = r[0].cc_is_life_threating;
                         data.Reports[i].mediators = r[0].mediators;
+                        data.Reports[i].severity_s = r[0].severity_s;
                     }
-                    console.log(data.Reports[i]);
 
                     var r = $filter('filter')(data.Users, { 'id': data.Reports[i].last_sender_id });
                     r = r.length === 0 ? null : r[0];

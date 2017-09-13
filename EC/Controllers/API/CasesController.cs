@@ -51,6 +51,8 @@ namespace EC.Controllers.API
             title = filter.ReportFlag == 5 ? GlobalRes.ClosedCasesUp : title;
             title = filter.ReportFlag == 3 ? GlobalRes.SpamcasesUp : title;
 
+            var severities = DB.severity.ToList();
+
             var m = new
             {
                 Mode = filter.ReportFlag,
@@ -69,6 +71,8 @@ namespace EC.Controllers.API
                             cc_is_life_threating = rm._report.cc_is_life_threating,
                             last_investigation_status_date = m_DateTimeHelper.ConvertDateToLongMonthString(rm._last_investigation_status_date),
                             mediators = rm._mediators_whoHasAccess_toReport,
+                            severity_id = rm._report.severity_id,
+                            severity_s = !rm._report.severity_id.HasValue ? "" : severities.FirstOrDefault(z => z.id == rm._report.severity_id).severity_en,
                         };
                     }).ToList(),
 

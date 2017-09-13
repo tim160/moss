@@ -73,7 +73,7 @@ namespace EC.Controllers.ViewModel
         #region 2 page
 
 
-        [ListEntity("personName", typeof(string))]
+        /*[ListEntity("personName", typeof(string))]
         public List<string> personsNames { get; set; }
 
         [ListEntity("personLastName", typeof(string))]
@@ -82,7 +82,7 @@ namespace EC.Controllers.ViewModel
         [ListEntity("personTitle", typeof(string))]
         public List<string> personsTitles { get; set; }
         [ListEntity("personRole", typeof(string))]
-        public List<string> personsRoles { get; set; }
+        public List<string> personsRoles { get; set; }*/
 
         [ListEntity("departmentInvolved", typeof(string))]
         public List<string> departments { get; set; }
@@ -219,17 +219,18 @@ namespace EC.Controllers.ViewModel
         {
             List<report_non_mediator_involved> result = new List<report_non_mediator_involved>();
 
-            if (personsRoles != null)
+            if (personRole != null)
             {
 
-                for (int i = 0; i < personsRoles.Count; i++)
+                for (int i = 0; i < personRole.Count; i++)
                 {
                     result.Add(new report_non_mediator_involved()
                     {
-                        Role = personsRoles[i],
-                        Name = personsNames[i],
-                        last_name = personsLastNames[i],
-                        Title = personsTitles[i]
+                        Role = personRole.ToList()[i].ToString(),
+                        Name = personName.ToList()[i],
+                        last_name = personLastName.ToList()[i],
+                        Title = personTitle.ToList()[i],
+                        
                     });
                 }
             }

@@ -1320,6 +1320,20 @@ namespace EC.Models
                         }
                     }
                     adv.report_relationship.Add(rep);
+
+                    /*for(var i = 0; i < model.personName.Count;  i++)
+                    {
+                        var person = new report_non_mediator_involved
+                        {
+                            created_dt = DateTime.Now,
+                            last_name = model.personLastName.ToList()[i],
+                            Name = model.personName.ToList()[i],
+                            report_id = currentReport.id,
+                            Title
+                        };
+                    }*/
+                    //foreach(var person in model.pe)
+
                     t = adv.SaveChanges();
                 }
 

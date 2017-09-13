@@ -657,7 +657,7 @@
     <Content Include="Views\NewCase\Partial\headerPos.cshtml" />
     <Content Include="Views\NewCase\InvestigationNotes.cshtml" />
     <Content Include="Views\NewCase\CaseClosureReport.cshtml" />
-    <Content Include="Views\Shared\Partial\ReporterDashboard.cshtml" />
+    <Content Include="Views\Shared\Partial\ReporterDashboardPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
