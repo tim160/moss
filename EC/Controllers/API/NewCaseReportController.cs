@@ -50,6 +50,26 @@ namespace EC.Controllers.API
                 partiesInvolvedType= "Case Administrators excluded1",
                 reportingAbout= rm._secondary_type_string,
                 incidentDate= rm._incident_date_string,
+                report_by_myself = rm._report.report_by_myself,
+                non_mediator_involved = DB.report_non_mediator_involved
+                    .Where(x => x.report_id == id)
+                    .OrderBy(x => x.Title)
+                    .ToList()
+                    .Select(x => new {
+                        Name = x.Name,
+                        Title = x.Title,
+                        Role = "",
+                    }),
+                management_know_string = rm._management_know_string,
+                is_reported_outside = rm._is_reported_outside,
+                is_reported_urgent = rm._is_reported_urgent,
+                secondary_type_string = rm._secondary_type_string,
+                incident_date_string = rm._incident_date_string,
+                is_ongoing = rm._is_ongoing,
+                report_frequency_text = rm._report.report_frequency_text,
+                has_injury_damage = rm._has_injury_damage,
+                injury_damage = rm._report.injury_damage,
+                description = rm._report.description,
             };
 
 

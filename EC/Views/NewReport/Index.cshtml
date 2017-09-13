@@ -442,53 +442,18 @@
                     </table>
                 </div>
 
-                <div class="blockCaseInformation">
-                    <span class="title">@GlobalRes.CaseInformation</span>
-                    <table class="caseInformation">
-                        <tr>
-                            <td>@GlobalRes.ReportingAbout:</td>
-                            <td>@rm._secondary_type_string</td>
-                        </tr>
-                        <tr>
-                            <td>@GlobalRes.IncidentDate:</td>
-                            <td>@rm._incident_date_string</td>
-                        </tr>
-                        <tr>
-                            <td>@GlobalRes.isOngoing:</td>
-                            <td>@rm._is_ongoing</td>
-                        </tr>
-                        @if (!String.IsNullOrEmpty(rm._report.report_frequency_text))
-                        {
-                            <tr>
-                                <td></td>
-                                <td>@rm._report.report_frequency_text</td>
-                            </tr>
-                        }
-
-                        <tr>
-                            <td>@GlobalRes.incidentResult:</td>
-                            <td>@rm._has_injury_damage</td>
-                        </tr>
-                        @if (!String.IsNullOrEmpty(rm._report.injury_damage))
-                        {
-                            <tr>
-                                <td></td>
-                                <td>@rm._report.injury_damage</td>
-                            </tr>
-                        }
-
-                    </table>
-                </div>
-
-                <div class="incidentDescription">
-                    <p class="titleIncidentDescription">@GlobalRes.IncidentDescription:</p>
-                    <div class="text">
-                        @rm._report.description
-                    </div>
-                </div>
-
                 <div class="blockPartiesInformation">
                     <span class="title">@GlobalRes.PartiesInvolved</span>
+                     <table class="generalInformation">
+                        <tr>
+                            <td>
+                                @GlobalRes.report_by_myself
+                            </td>
+                            <td>
+                                @(rm._report.report_by_myself ? @GlobalRes.Myself : @GlobalRes.SomeoneElse)
+                            </td>
+                        </tr>
+                    </table>
                     @if (_involved.Count > 0)
                     {
                         @*<div class="incidentDescription">*@<div class="incidentDescription">
@@ -553,6 +518,50 @@
                             <td>@rm._is_reported_urgent</td>
                         </tr>
                     </table>
+                </div>
+
+                <div class="blockCaseInformation">
+                    <span class="title">@GlobalRes.CaseInformation</span>
+                    <table class="caseInformation">
+                        <tr>
+                            <td>@GlobalRes.ReportingAbout:</td>
+                            <td>@rm._secondary_type_string</td>
+                        </tr>
+                        <tr>
+                            <td>@GlobalRes.IncidentDate:</td>
+                            <td>@rm._incident_date_string</td>
+                        </tr>
+                        <tr>
+                            <td>@GlobalRes.isOngoing:</td>
+                            <td>@rm._is_ongoing</td>
+                        </tr>
+                        @if (!String.IsNullOrEmpty(rm._report.report_frequency_text))
+                        {
+                            <tr>
+                                <td></td>
+                                <td>@rm._report.report_frequency_text</td>
+                            </tr>
+                        }
+
+                        <tr>
+                            <td>@GlobalRes.incidentResult:</td>
+                            <td>@rm._has_injury_damage</td>
+                        </tr>
+                        @if (!String.IsNullOrEmpty(rm._report.injury_damage))
+                        {
+                            <tr>
+                                <td></td>
+                                <td>@rm._report.injury_damage</td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+
+                <div class="incidentDescription">
+                    <p class="titleIncidentDescription">@GlobalRes.IncidentDescription:</p>
+                    <div class="text">
+                        @rm._report.description
+                    </div>
                 </div>
             </div>
 
