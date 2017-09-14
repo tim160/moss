@@ -16,6 +16,11 @@
     {
         is_valid_mediator = true;
     }
+    if (um._user.user_permissions_change_settings == 1)
+    {
+        is_valid_mediator = true;
+    }
+    var is_invalid_mediator = (!is_valid_mediator).ToString().ToLower();
     var cm = (CompanyModel)ViewBag.cm;
     int company_id = cm._company.id;
     if(string.IsNullOrEmpty(cm._company.path_en))
@@ -302,7 +307,7 @@
                             <tr ng-repeat="line in locationItems">
                                 <td class="ng-binding">{{locationName(line.company_location_id).location_en}}</td>
                                 <td class="inSelect">
-                                    <select ng-change="changeLineLocation(line)" ng-model="line.user_id" ng-options="item.id as userName(item) for item in usersLocation">
+                                    <select ng-change="changeLineLocation(line)" ng-model="line.user_id" ng-options="item.id as userName(item) for item in usersLocation" ng-disabled="@is_invalid_mediator">
                                     </select>
                                 </td>
                             </tr>
@@ -324,18 +329,19 @@
                             <tr ng-repeat="line in items">
                                 <td class="ng-binding">{{typeName(line.company_secondary_type_id).secondary_type_en}}</td>
                                 <td class="inSelect">
-                                    <select ng-change="changeLine(line)" ng-model="line.company_case_admin_department_id" ng-options="item.id as item.name_en for item in departments">
+                                    <select ng-change="changeLine(line)" ng-model="line.company_case_admin_department_id" ng-options="item.id as item.name_en for item in departments" ng-disabled="@is_invalid_mediator">
                                     </select>
                                 </td>
                                 <td class="inSelect">
-                                    <select ng-change="changeLine(line)" ng-model="line.user_id" ng-options="item.id as userName(item) for item in users">
+                                    <select ng-change="changeLine(line)" ng-model="line.user_id" ng-options="item.id as userName(item) for item in users" ng-disabled="@is_invalid_mediator">
                                     </select>
                                 </td>
                                 <td class="inSelect">
-                                    <select ng-change="changeLine(line)" ng-model="line.scope_id" ng-options="item.id as item.scope_en for item in scopes"></select>
+                                    <select ng-change="changeLine(line)" ng-model="line.scope_id" ng-options="item.id as item.scope_en for item in scopes" ng-disabled="@is_invalid_mediator">
+                                    </select>
                                 </td>
                                 <td class="ng-binding">
-                                    <div class="button" ng-click="fileSelect(line)" onclick="$(this).parent().find('input').click()" >
+                                    <div class="button" ng-click="fileSelect(line)" onclick="$(this).parent().find('input').click()" ng-hide="@is_invalid_mediator">
                                         Upload
                                     </div>
                                     <input type="file" style="display: none;" onchange="angular.element(this).scope().upload(this); return false;">
@@ -345,7 +351,7 @@
                                                 <a href="{{file.path_nm}}">{{file.file_nm}}</a>
                                             </span>
                                             <span>
-                                                <a href="#" ng-click="delete(file.id)">X</a>
+                                                <a href="#" ng-click="delete(file.id)" ng-hide="@is_invalid_mediator">X</a>
                                             </span>
                                         </div>
                                     </div>
