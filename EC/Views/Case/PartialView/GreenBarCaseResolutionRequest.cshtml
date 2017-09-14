@@ -194,14 +194,14 @@
         <div class="caseMediator">
              <div class="caseResolution">
             <div class="postionButtons">
-                @if ((rm._investigation_status == 4) && ((um._user.role_id == 4) || (um._user.role_id == 5)))
+                @if ((um._user.role_id == 5) || (um._user.user_permissions_approve_case_closure == 1))
                 {
-                <div class="secondButton">
-                    <div class="textInButton" id="approve_close">@GlobalRes.Approve.ToLower()</div>
-                </div>
-                <div class="firstButton">
-                    <div class="textInButton" id="return_investigation">@GlobalRes.Returnnvestigation.ToLower()</div>
-                </div>
+                    <div class="secondButton">
+                        <div class="textInButton" id="approve_close">@GlobalRes.Approve.ToLower()</div>
+                    </div>
+                    <div class="firstButton">
+                        <div class="textInButton" id="return_investigation">@GlobalRes.Returnnvestigation.ToLower()</div>
+                    </div>
                 }
             </div>
         </div>
