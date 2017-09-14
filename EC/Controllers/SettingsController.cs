@@ -46,6 +46,8 @@ namespace EC.Controllers
             ViewBag.um = um;
             ViewBag.page_subtitle = GlobalRes.Settings;
             ViewBag.user_id = user_id;
+            um._user.user_permissions_approve_case_closure = um._user.user_permissions_approve_case_closure == null ? 2 : um._user.user_permissions_approve_case_closure;
+            um._user.user_permissions_change_settings = um._user.user_permissions_change_settings == null ? 2 : um._user.user_permissions_change_settings;
             // my profile
             return View(um._user);
         }
