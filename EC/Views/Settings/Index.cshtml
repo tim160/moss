@@ -44,7 +44,7 @@
     <!--casesHeared-->
 
     
-@using (Html.BeginForm("UpdateUser", "Settings", Model, FormMethod.Post)) { 
+@using (Html.BeginForm("UpdateUser", "Settings", FormMethod.Post, new { })) {
         @Html.AntiForgeryToken()
         @model user
         @Html.HiddenFor(model => Model.id)
@@ -155,47 +155,6 @@
                     </div><!--rowBlock-->
                 </div>
 
-                <div class="blockPersonalSettings greyBorder">
-                    <p class="title">@GlobalRes.often_notifications_active</p>
-                    <div class="rowBlock" id="checkBoxActiveCases">
-                        <div class="freeBlock inputRadio" data-valueflag="0">
-                            <label class="inputBlock" for="firstIncident">
-                                @Html.RadioButtonFor(model => model.notification_new_reports_flag, "1")
-                                <span class="radioButton"></span>
-                                <span class="radioTitle">@GlobalRes.Instantly</span>
-                            </label>
-                        </div>
-                        <div class="freeBlock inputRadio" data-valueflag="1">
-                            <label class="inputBlock" for="secondIncident">
-                                @Html.RadioButtonFor(model => model.notification_new_reports_flag, "2")
-                                <span class="radioButton"></span>
-                                <span class="radioTitle">@GlobalRes.Onceaday</span>
-                            </label>
-                        </div>
-                    </div><!--rowBlock-->
-                </div>
-
-                <!--
-                <div class="blockPersonalSettings greyBorder">
-                    <p class="title">@GlobalRes.often_notifications_new</p>
-                    <div class="rowBlock" id="checkBoxNewReports">
-                        <div class="freeBlock inputRadio" data-valueFlag="0">
-                            <label class="inputBlock" for="thirdIncident">
-                                @Html.RadioButtonFor(model => model.notification_messages_actions_flag, "1")
-                                <span class="radioButton"></span>
-                                <span class="radioTitle">@GlobalRes.Instantly</span>
-                            </label>
-                        </div>
-                        <div class="freeBlock inputRadio" data-valueFlag="1">
-                            <label class="inputBlock" for="fourIncident">
-                                @Html.RadioButtonFor(m => m.notification_messages_actions_flag, "2")
-                                <span class="radioButton"></span>
-                                <span class="radioTitle">@GlobalRes.Onceaday</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                -->
                 @if (um._user.role_id == 5)
                 {
                     <div class="blockPersonalSettings greyBorder">

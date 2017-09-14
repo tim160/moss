@@ -292,7 +292,7 @@ namespace EC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UpdateUser([Bind(Include = "id,status_id,role_id,first_nm,last_nm,title_ds,notepad_tx,email,notification_messages_actions_flag,notification_new_reports_flag,company_department_id")] user _user)
+        public ActionResult UpdateUser([Bind(Include = "id,first_nm,last_nm,title_ds,email,company_department_id,user_permissions_approve_case_closure,user_permissions_change_settings")] user _user)
         {
             if (ModelState.IsValid)
             {
@@ -303,11 +303,13 @@ namespace EC.Controllers
                     _updateuser.first_nm = _user.first_nm;
                     _updateuser.last_nm = _user.last_nm;
                     _updateuser.title_ds = _user.title_ds;
-                    _updateuser.notepad_tx = _user.notepad_tx;
+                    //_updateuser.notepad_tx = _user.notepad_tx;
                     _updateuser.email = _user.email;
-                    _updateuser.notification_messages_actions_flag = _user.notification_messages_actions_flag;
-                    _updateuser.notification_new_reports_flag = _user.notification_new_reports_flag;
+                    //_updateuser.notification_messages_actions_flag = _user.notification_messages_actions_flag;
+                    //_updateuser.notification_new_reports_flag = _user.notification_new_reports_flag;
                     _updateuser.company_department_id = _user.company_department_id;
+                    _updateuser.user_permissions_approve_case_closure = _user.user_permissions_approve_case_closure;
+                    _updateuser.user_permissions_change_settings = _user.user_permissions_change_settings;
                     db1.SaveChanges();
                     return RedirectToAction("Index");
                 }
