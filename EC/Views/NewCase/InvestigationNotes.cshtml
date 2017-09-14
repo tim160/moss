@@ -24,14 +24,14 @@
     <div class="row">
         <div class="col-md-10">
             <a class="navbar-brand" href="#">Report</a>
-            <a class="navbar-brand" href="#">Ivestigation notes</a>
+            <a class="navbar-brand" href="#">Investigation notes</a>
             <a class="navbar-brand" href="#">Tasks</a>
             <a class="navbar-brand" href="#">Messages</a>
             <a class="navbar-brand" href="#">Team</a>
         </div>
         <div class="col-md-1 ">
             <form class="form-inline my-2 my-lg-0">
-                <a class="navbar-brand " href="#">Team</a>
+                <a class="navbar-brand " href="#">Attachments</a>
             </form>
         </div>
 
@@ -97,11 +97,15 @@
             <div class="col-6 col-sm-4">Facts Established</div>
         </div>
         <div class="row">
-            <textarea class="col-md-10 pull-right" ng-model="model.note1"></textarea>
+            <textarea class="col-md-10 pull-right" ng-model="model.note1" ng-show="isEditNote1"></textarea>
+            <p ng-show="!isEditNote1">{{model.note1}}</p>
         </div>
         <div class="row">
-            <span class="acceptCaseBtnClass pull-right" ng-click="saveNote(1)">
+            <span class="acceptCaseBtnClass pull-right" ng-click="saveNote(1)" ng-show="isEditNote1">
                 Save
+            </span>
+            <span class="acceptCaseBtnClass pull-right" ng-click="isEditNote1 = true" ng-show="!isEditNote1">
+                Edit
             </span>
         </div>
     </div>
@@ -110,11 +114,15 @@
             <div class="col-6 col-sm-4">Investigation Methodology</div>
         </div>
         <div class="row">
-            <textarea class="col-md-10 pull-right" ng-model="model.note2"></textarea>
+            <textarea class="col-md-10 pull-right" ng-model="model.note2" ng-show="isEditNote2"></textarea>
+            <p ng-show="!isEditNote2">{{model.note2}}</p>
         </div>
         <div class="row">
-            <span class="acceptCaseBtnClass pull-right" ng-click="saveNote(2)">
+            <span class="acceptCaseBtnClass pull-right" ng-click="saveNote(2)" ng-show="isEditNote2">
                 Save
+            </span>
+            <span class="acceptCaseBtnClass pull-right" ng-click="isEditNote2 = true" ng-show="!isEditNote2">
+                Edit
             </span>
         </div>
     </div>
@@ -138,7 +146,8 @@
                 <textarea cols="20" rows="5" ng-model="item.inv_meth_bf_note" ng-show="item.behavioralEditMode"></textarea>
                 <p ng-show="!item.behavioralEditMode">{{item.inv_meth_bf_note}}</p>
                 <span class="acceptCaseBtnClass pull-right col-md-1" ng-click="item.behavioralEditMode = !item.behavioralEditMode" ng-show="!item.behavioralEditMode">
-                    Add note
+                    <span ng-show="item.inv_meth_bf_note != ''">Edit note</span>
+                    <span ng-show="item.inv_meth_bf_note == ''">Add note</span>
                 </span>
                 <span class="acceptCaseBtnClass pull-right col-md-1" ng-show="item.behavioralEditMode" ng-click="saveNoteBehavioralFactors(item)">
                     Save
@@ -155,7 +164,8 @@
                 <textarea ng-model="item.inv_meth_ei_note" ng-show="item.externalInfluencesEditMode"></textarea>
                 <p ng-show="!item.externalInfluencesEditMode">{{item.inv_meth_ei_note}}</p>
                 <span class="acceptCaseBtnClass pull-right col-md-1" ng-click="item.externalInfluencesEditMode = !item.externalInfluencesEditMode" ng-show="!item.externalInfluencesEditMode">
-                    Add note
+                    <span ng-show="item.inv_meth_ei_note != ''">Edit note</span>
+                    <span ng-show="item.inv_meth_ei_note == ''">Add note</span>
                 </span>
                 <span class="acceptCaseBtnClass pull-right col-md-1" ng-show="item.externalInfluencesEditMode" ng-click="saveNoteExternalInfluences(item)">
                     Save
@@ -173,7 +183,8 @@
                 <textarea ng-model="item.inv_meth_ci_note" ng-show="item.campusInfluencesEditMode"></textarea>
                 <p ng-show="!item.campusInfluencesEditMode">{{item.inv_meth_ci_note}}</p>
                 <span class="acceptCaseBtnClass pull-right col-md-1" ng-click="item.campusInfluencesEditMode = !item.campusInfluencesEditMode" ng-show="!item.campusInfluencesEditMode">
-                    Add note
+                    <span ng-show="item.inv_meth_ci_note != ''">Edit note</span>
+                    <span ng-show="item.inv_meth_ci_note == ''">Add note</span>
                 </span>
                 <span class="acceptCaseBtnClass pull-right col-md-1" ng-show="item.campusInfluencesEditMode" ng-click="saveNoteCampusInfluences(item)">
                     Save

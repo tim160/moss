@@ -329,6 +329,8 @@
         $scope.departmentAddMode = false;
         $scope.behavioralEditMode = false;
         $scope.externalInfluencesEditMode = false;
+        $scope.isEditNote1 = false;
+        $scope.isEditNote2 = false;
 
         $scope.report_id = parseInt($location.absUrl().substring($location
             .absUrl().toLowerCase().indexOf('InvestigationNotes/'.toLowerCase()) + 'InvestigationNotes/'.toLowerCase().length));
@@ -417,6 +419,12 @@
 
             NewCaseInvestigationNotesService.post(param, function (data) {
                 $scope.refresh(data);
+
+                if (type === 1) {
+                    $scope.isEditNote1 = false;
+                } else {
+                    $scope.isEditNote2 = false;
+                }
             });
         };
 
