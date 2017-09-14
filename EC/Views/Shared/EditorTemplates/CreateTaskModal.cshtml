@@ -48,7 +48,7 @@
                     <div class="dropdown3">
                         <label id="ddlSignOffMediator" data-value="">@GlobalRes.Selectanoption</label><span class="arrow-down"></span>
                         <ul>
-                            @foreach (user _user in rm._mediators_whoHasAccess_toReport.Where(t => t.role_id == 4))
+                            @foreach (user _user in rm._mediators_whoHasAccess_toReport)
                             {
                                 <li data-value=@_user.id>@_user.first_nm @_user.last_nm</li>
                             }

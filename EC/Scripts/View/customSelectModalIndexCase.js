@@ -19,6 +19,10 @@
         var _temp = $(event.currentTarget);
         _temp.siblings('ul').slideDown(300);
     });
+    $("#ddlSignOffMediator").on("click", function (event) {
+        var _temp = $(event.currentTarget);
+        _temp.siblings('ul').slideDown(300);
+    });    
 
     $(".dropdown3 li").on("click", function (event) {
         var temp = $(event.currentTarget);
