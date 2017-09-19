@@ -97,13 +97,6 @@ namespace EC.Controllers.ViewModel
 
             ViewBag.AllOwners = _users;
 
-            ViewBag.AllPolicies = new List<KeyValuePair<string, string>>()
-            {
-                new KeyValuePair<string, string>("1", "some_file_1.pdf"),
-                new KeyValuePair<string, string>("1", "some_file_2.pdf"),
-                new KeyValuePair<string, string>("2", "some_file_3.pdf"),
-            };
-
             bool has_access = rm.HasAccessToReport(user_id);
 
             if ((!has_access) || (user.role_id == 8))
@@ -173,6 +166,16 @@ namespace EC.Controllers.ViewModel
 
             ViewBag.company_location = db.company_location.Where(x => x.company_id == rm._report.company_id).ToList();
             ViewBag.report_mediator_assigned = db.report_mediator_assigned.Where(x => x.report_id == report_id).ToList();
+            ViewBag.report_secondary_type = db.report_secondary_type.Where(x => x.report_id == report_id).ToList();
+            var company_case_routing = db.company_case_routing.Where(x => x.company_id == rm._report.company_id).ToList();
+            ViewBag.company_case_routing = company_case_routing;
+
+            var ids = company_case_routing.Select(x => x.id).ToList();
+            ViewBag.AllPolicies = db.company_case_routing_attachments
+                .Where(x => ids.Contains(x.company_case_routing_id) & x.status_id == 2)
+                .OrderBy(x => x.company_case_routing_id)
+                .ThenBy(x => x.file_nm)
+                .ToList();
 
             return View();
         }

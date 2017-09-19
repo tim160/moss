@@ -206,24 +206,24 @@
                 var allDepartments = (List<company_department>)ViewBag.AllDepartments;
                 var allIncidets = (List<company_secondary_type>)ViewBag.AllIncidets;
                 var allOwners = (List<UserItems>)ViewBag.AllOwners;
-                var allPolicies = (List<KeyValuePair<string, string>>)ViewBag.AllPolicies;
+                var allPolicies = (List<company_case_routing_attachments>)ViewBag.AllPolicies;
                 var allCompanyLocations = (List<company_location>)ViewBag.company_location;
-
+                var allReportSecondaryTypes = (List<report_secondary_type>)ViewBag.report_secondary_type;
+                var allCompanyCaseRoutings = (List<company_case_routing>)ViewBag.company_case_routing;
+                
 
                 <!-- ============================== START Accept case ==================================== -->
+            <style>
+                .blockAcceptCase table {
+                    width: 100%;
+                }
 
-
-                <style>
-                    .blockAcceptCase table {
-                        width: 100%;
-                    }
-
-                    .blockAcceptCase select {
-                        width: 220px;
-                        height: 40px;
-                        margin-left: 12px;
-                    }
-                </style>
+                .blockAcceptCase select {
+                    width: 220px;
+                    height: 40px;
+                    margin-left: 12px;
+                }
+            </style>
                 <div id="blockAcceptCase" class="contentViewReport blockAcceptCase" style="display: none;">
 
                     <table>
@@ -240,7 +240,10 @@
                                         <tr>
                                             <td class="aroundSelect">@GlobalRes.IncidentType:</td>
                                             <td class="inSelect">
-                                                @Html.DropDownList("IncidentId", new SelectList(allIncidets, "id", "secondary_type_en"), new { @class = "" })
+                                                @{
+                                                    var selectedIncidentId = allIncidets.FirstOrDefault(x => allReportSecondaryTypes.FirstOrDefault(z => z.secondary_type_id == x.id) != null).id;
+                                                }
+                                                @Html.DropDownList("IncidentId", new SelectList(allIncidets, "id", "secondary_type_en", selectedIncidentId), new { @class = "" })
                                             </td>
                                         </tr>
 
@@ -253,7 +256,10 @@
                                         <tr>
                                             <td class="aroundSelect">@GlobalRes.Scope:</td>
                                             <td class="inSelect">
-                                                @Html.DropDownList("ScopeId", new SelectList(allScopes, "id", "scope_en"), new { @class = "" })
+                                                @{
+                                                    var selectedScopeId = allScopes.FirstOrDefault(x => allCompanyCaseRoutings.FirstOrDefault(z => z.scope_id == x.id) != null).id;
+                                                }
+                                                @Html.DropDownList("ScopeId", new SelectList(allScopes, "id", "scope_en", selectedScopeId), new { @class = "" })
                                             </td>
                                         </tr>
 
@@ -278,13 +284,15 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            @if (1 == 0)
+                                            @if (1 == 1)
                                             {
                                                 <td class="aroundSelect">Policy:</td>
                                                 <td class="linkPdf">
                                                     @foreach (var item in allPolicies)
                                                     {
-                                                        <div>@item.Value</div>
+                                                        <div>
+                                                            <a href="@Url.Content(item.path_nm)">@item.file_nm</a>
+                                                        </div>                                                        
                                                     }
                                                 </td>
                                             }
