@@ -210,11 +210,15 @@
                 var allCompanyLocations = (List<company_location>)ViewBag.company_location;
                 var allReportSecondaryTypes = (List<report_secondary_type>)ViewBag.report_secondary_type;
                 var allCompanyCaseRoutings = (List<company_case_routing>)ViewBag.company_case_routing;
-                
+                var allMediators = (List<user>)ViewBag.AllMediators;
+                var allReportMediatorAssigned = (List<report_mediator_assigned>)ViewBag.report_mediator_assigned;
+                var allReportMediatorInvolved = (List<report_mediator_involved>)ViewBag.report_mediator_involved;
 
-                <!-- ============================== START Accept case ==================================== -->
-            <style>
-                .blockAcceptCase table {
+            <!-- ============================== START Accept case ==================================== -->
+
+        <style>
+
+            .blockAcceptCase table {
                     width: 100%;
                 }
 
@@ -278,9 +282,26 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="aroundSelect">Issue Owner:</td>
+                                            <td class="aroundSelect">Case Owner:</td>
                                             <td class="inSelect">
-                                                @Html.DropDownList("OwnerId", new SelectList(allOwners, "Id", "FullName"), new { @class = "" })
+                                                @{ 
+                                                    var ids = allReportMediatorAssigned.Select(x => x.mediator_id).ToList(); //All report_mediator_assigned
+                                                    var allOwners2 = allMediators.Where(x => ids.Contains(x.id)).ToList(); //Add all from report_mediator_assigned
+
+                                                    ids = allReportMediatorInvolved.Select(x => x.id).ToList(); //All from report_mediator_involved
+                                                    ids.AddRange(ids); //All already added
+
+                                                    allOwners2.AddRange(allMediators.Where(x => !ids.Contains(x.id) & (x.role_id == 4 | x.role_id == 5)).ToList()); //Add all with role_id 4 an 5 not from report_mediator_involved
+
+                                                    var list2 = allMediators.Where(x => !ids.Contains(x.id) & x.role_id != 4 & x.role_id != 5).ToList();
+                                                    allOwners2.AddRange(list2); //Add all with role_id 6 not from report_mediator_involved
+                                                }
+                                                <select class="" id="OwnerId" name="OwnerId">
+                                                    @foreach (var item in allOwners2)
+                                                    {
+                                                        <option class="@(list2.FirstOrDefault(x => x.id == item.id) == null ? "" : "needquestion")"  value="@item.id">@item.first_nm @item.last_nm</option>
+                                                    }
+                                                </select>
                                             </td>
                                         </tr>
                                         <tr>
@@ -355,9 +376,9 @@
                             {
                                 var location = allCompanyLocations.FirstOrDefault(x => x.id == item.by_location_id);
                                 var incident = allIncidets.FirstOrDefault(x => x.id == item.by_secondary_type_id);
-
+                                var user = allOwners.FirstOrDefault(x => x.Id == item.mediator_id);
                                 <tr >
-                                    <td>@allOwners.FirstOrDefault(x => x.Id == item.mediator_id).FullName</td>
+                                    <td>@(user == null ? "" : user.FullName)</td>
                                     <td>
                                         @(location == null ? "" : "By Location")
                                         @(incident == null ? "" : "By Case Type")
@@ -664,6 +685,13 @@
                         $('.acceptNewCase').click(function(){
                             var self = $(this);
                             var description = $('.acceptCaseNote textarea').val();
+
+                            if ($('#OwnerId').find(":selected").hasClass('needquestion')) {
+                                if (confirm('Add mediator to Case')) {
+                                    reopenOrAcceptCase(@Html.Raw(report_id), @Html.Raw(user_id), description);
+                                }
+                                return;
+                            }
 
                             reopenOrAcceptCase(@Html.Raw(report_id), @Html.Raw(user_id), description);
                         });

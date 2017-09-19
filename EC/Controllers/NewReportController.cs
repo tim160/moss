@@ -81,7 +81,6 @@ namespace EC.Controllers.ViewModel
             ViewBag.AllSeverities = db.severity.OrderBy(x => x.id).ToList();
             ViewBag.AllDepartments = db.company_department.Where(x => x.company_id == um._user.company_id && x.status_id == 2).OrderBy(x => x.department_en).ToList();
             ViewBag.AllIncidets = db.company_secondary_type.Where(x => x.company_id == um._user.company_id && x.status_id == 2).OrderBy(x => x.secondary_type_en).ToList();
-            //   ViewBag.AllOwners = rm._mediators_whoHasAccess_toReport.OrderBy(x => x.first_nm).ToList();
             CompanyModel cm = new CompanyModel(um._user.company_id);
             List<user> available_users = cm.AllMediators(um._user.company_id, true, null).OrderBy(x => x.first_nm).ToList();
             List<UserItems> _users = new List<UserItems>();
@@ -166,6 +165,7 @@ namespace EC.Controllers.ViewModel
 
             ViewBag.company_location = db.company_location.Where(x => x.company_id == rm._report.company_id).ToList();
             ViewBag.report_mediator_assigned = db.report_mediator_assigned.Where(x => x.report_id == report_id).ToList();
+            ViewBag.report_mediator_involved = db.report_mediator_involved.Where(x => x.report_id == report_id).ToList();
             ViewBag.report_secondary_type = db.report_secondary_type.Where(x => x.report_id == report_id).ToList();
             var company_case_routing = db.company_case_routing.Where(x => x.company_id == rm._report.company_id).ToList();
             ViewBag.company_case_routing = company_case_routing;
@@ -175,6 +175,11 @@ namespace EC.Controllers.ViewModel
                 .Where(x => ids.Contains(x.company_case_routing_id) & x.status_id == 2)
                 .OrderBy(x => x.company_case_routing_id)
                 .ThenBy(x => x.file_nm)
+                .ToList();
+
+            var midiators_roles = new int[] { 4, 5, 6 };
+            ViewBag.AllMediators = db.user
+                .Where(x => x.company_id == rm._report.company_id & midiators_roles.Contains(x.role_id))
                 .ToList();
 
             return View();
@@ -256,6 +261,34 @@ namespace EC.Controllers.ViewModel
                 };
 
                 adv.report_investigation_status.Add(addStatus);
+
+                var item = db.report_mediator_assigned.FirstOrDefault(x => x.report_id == report_id & x.mediator_id == ownerId);
+                if (item == null)
+                {
+                    var owner = new report_owner
+                    {
+                        report_id = report_id,
+                        status_id = 2,
+                        user_id = user_id,
+                        created_on = DateTime.Now,
+                    };
+                    db.report_owner.Add(owner);
+                    db.SaveChanges();
+
+                    var report_mediator_assigned = new report_mediator_assigned
+                    {
+                        mediator_id = ownerId,
+                        case_owner_id = owner.id,
+                        assigned_dt = DateTime.Now,
+                        last_update_dt = DateTime.Now,
+                        report_id = report_id,
+                        status_id = 2,
+                        user_id = user_id,
+                    };
+                    db.report_mediator_assigned.Add(report_mediator_assigned);
+                    db.SaveChanges();
+                }
+
                 adv.SaveChanges();
             }
             using (ECEntities adv = new ECEntities())
