@@ -169,7 +169,11 @@ namespace EC.Controllers.ViewModel
 
             //Messages
             ViewBag.messages = reporterDashboard.getMessagesList(report.id);
-            */
+             */
+
+            ViewBag.company_location = db.company_location.Where(x => x.company_id == rm._report.company_id).ToList();
+            ViewBag.report_mediator_assigned = db.report_mediator_assigned.Where(x => x.report_id == report_id).ToList();
+
             return View();
         }
 

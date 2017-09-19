@@ -157,7 +157,6 @@
                     </div>
                 }
 
-
                 @if (!is_spam)
                 {
                     <!-- accept_case button -->
@@ -208,6 +207,7 @@
                 var allIncidets = (List<company_secondary_type>)ViewBag.AllIncidets;
                 var allOwners = (List<UserItems>)ViewBag.AllOwners;
                 var allPolicies = (List<KeyValuePair<string, string>>)ViewBag.AllPolicies;
+                var allCompanyLocations = (List<company_location>)ViewBag.company_location;
 
 
                 <!-- ============================== START Accept case ==================================== -->
@@ -340,6 +340,28 @@
                             <textarea cols="20" id="body_text" class="green" name="body_tx" rows="2" autofocus></textarea>
                         </div>
                     </div>*@
+
+                    <div>
+                        <table>
+                            @foreach (var item in (ViewBag.report_mediator_assigned as List<report_mediator_assigned>))
+                            {
+                                var location = allCompanyLocations.FirstOrDefault(x => x.id == item.by_location_id);
+                                var incident = allIncidets.FirstOrDefault(x => x.id == item.by_secondary_type_id);
+
+                                <tr >
+                                    <td>@allOwners.FirstOrDefault(x => x.Id == item.mediator_id).FullName</td>
+                                    <td>
+                                        @(location == null ? "" : "By Location")
+                                        @(incident == null ? "" : "By Case Type")
+                                    </td>
+                                    <td>
+                                        @(location == null ? "" : location.location_en)
+                                        @(incident == null ? "" : incident.secondary_type_en)
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
                     <div class="newMessageBtn">
                         @if (is_cc.Value)
                         {
