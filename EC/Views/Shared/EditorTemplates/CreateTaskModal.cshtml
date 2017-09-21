@@ -52,6 +52,13 @@
                             {
                                 <li data-value=@_user.id>@_user.first_nm @_user.last_nm</li>
                             }
+                            @foreach (user _user in ViewBag.MediatorWithACC)
+                            {
+                                if (rm._mediators_whoHasAccess_toReport.FirstOrDefault(x => x.id == _user.id) == null)
+                                {
+                                    <li data-value=@_user.id>@_user.first_nm @_user.last_nm</li>
+                                }
+                            }
                         </ul>
                     </div>
                 </div>
