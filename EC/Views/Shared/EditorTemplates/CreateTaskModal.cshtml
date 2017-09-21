@@ -52,7 +52,7 @@
                             {
                                 <li data-value=@_user.id>@_user.first_nm @_user.last_nm</li>
                             }
-                            @foreach (user _user in ViewBag.MediatorWithACC)
+                            @foreach (user _user in rm.MediatorsApproveCaseClosure)
                             {
                                 if (rm._mediators_whoHasAccess_toReport.FirstOrDefault(x => x.id == _user.id) == null)
                                 {

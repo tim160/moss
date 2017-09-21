@@ -2314,5 +2314,16 @@ namespace EC.Models
                 return adv.role_in_report.ToList();
             }
         }
+
+        public List<user> MediatorsApproveCaseClosure
+        {
+            get
+            {
+                return (
+                    from m in db.report_mediator_assigned.Where(x => x.report_id == ID).Select(x => x.mediator_id).Distinct().ToList()
+                    join u in db.user.Where(x => x.user_permissions_approve_case_closure != 1) on m equals u.id
+                    select u).ToList();
+            }
+        }
     }
 }

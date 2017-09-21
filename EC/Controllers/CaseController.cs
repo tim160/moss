@@ -87,11 +87,6 @@ namespace EC.Controllers
             ViewBag.report_id = id; // 167-171
             ViewBag.user_id = user_id;
 
-            ViewBag.MediatorWithACC = (
-                from m in db.report_mediator_assigned.Where(x => x.report_id == id).Select(x => x.mediator_id).Distinct().ToList()
-                join u in db.user.Where(x => x.user_permissions_approve_case_closure != 1) on m equals u.id
-                select u).ToList();
-
             return View();
         }
 
