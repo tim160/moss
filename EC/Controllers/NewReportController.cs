@@ -265,6 +265,13 @@ namespace EC.Controllers.ViewModel
                 var item = db.report_mediator_assigned.FirstOrDefault(x => x.report_id == report_id & x.mediator_id == ownerId);
                 if (item == null)
                 {
+                    //Remove owner
+                    foreach(var rem_owner in db.report_owner.Where(x => x.report_id == report_id).ToList())
+                    {
+                        rem_owner.status_id = 1;
+                    }
+
+                    //New owner
                     var owner = new report_owner
                     {
                         report_id = report_id,
@@ -275,6 +282,7 @@ namespace EC.Controllers.ViewModel
                     db.report_owner.Add(owner);
                     db.SaveChanges();
 
+                    //Add to mediators
                     var report_mediator_assigned = new report_mediator_assigned
                     {
                         mediator_id = ownerId,

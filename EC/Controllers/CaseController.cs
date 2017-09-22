@@ -1242,5 +1242,34 @@ namespace EC.Controllers
 
             return RedirectToAction("Attachments", new { id = report_id });
         }
+
+        [HttpPost]
+        public bool MakeCaseOwner(int user_id, int report_id)
+        {
+            foreach(var item in db.report_owner.Where(x => x.report_id == report_id & x.status_id != 1).ToList())
+            {
+                item.report_id = 1;
+            }
+
+            var owner = db.report_owner.FirstOrDefault(x => x.report_id == report_id  & x.user_id == user_id);
+            if (owner != null)
+            {
+                owner.status_id = 2;
+            }
+            else
+            {
+                owner = new report_owner
+                {
+                    created_on = DateTime.Now,
+                    report_id = report_id,
+                    status_id = 2,
+                    user_id = user_id,
+                };
+                db.report_owner.Add(owner);
+            }
+            db.SaveChanges();
+
+            return true;
+        }
     }
 }

@@ -106,6 +106,16 @@ namespace EC
                  });
 
             routes.MapRoute(
+                name: "MakeCaseOwner",
+                url: "Case/MakeCaseOwner",
+                 defaults: new
+                 {
+                     controller = "Case",
+                     action = "MakeCaseOwner",
+                     id = UrlParameter.Optional
+                 });
+
+            routes.MapRoute(
                 name: "CloseTask",
                 url: "Case/CloseTask",
                  defaults: new

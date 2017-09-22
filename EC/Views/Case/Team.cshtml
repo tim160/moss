@@ -274,44 +274,63 @@
                                     <p>@um._user.title_ds</p>
                                 </div>
 
-                                @if (((_user.role_id == 6) || (_user.role_id == 7)) && (rm._investigation_status != ECGlobalConstants.investigation_status_closed) && (um._user.role_id != ECLevelConstants.level_mediator))
+                                <span></span>
+                                @if (
+                                    ((_user.role_id == 6) || (_user.role_id == 7)) 
+                                    && (rm._investigation_status != ECGlobalConstants.investigation_status_closed) 
+                                    && (um._user.role_id != ECLevelConstants.level_mediator)
+                                    && (rm._report_owners.FirstOrDefault(x => x.user_id == _user.user_id & x.status_id == 2) == null)
+                                    )
                                 {
-                                <label class="close" data-userid="@_user.id"></label>
+                                    <label class="close" data-userid="@_user.id"></label>
                                 }
-
                             </div>
                             @if (um._user.role_id == 4)
                             {
-                    <p class="blockMediator escalation">
-                        <span>@GlobalRes.EscalationMediator.ToLower()</span>
-                    </p>
+                                <p class="blockMediator escalation">
+                                    <span>@GlobalRes.EscalationMediator.ToLower()</span>
+                                </p>
                             }
                             @if (um._user.role_id == 5)
                             {
-                    <p class="blockMediator admin">
-                        <span>@GlobalRes.AdminMediator.ToLower()</span>
-                    </p>
+                                <p class="blockMediator admin">
+                                    <span>@GlobalRes.AdminMediator.ToLower()</span>
+                                </p>
                             }
                             @if (um._user.role_id == 6)
                             {
-                    <p class="blockMediator">
-                        <span>@GlobalRes.Mediator.ToLower()</span>
-                    </p>
+                                <p class="blockMediator">
+                                    <span>@GlobalRes.Mediator.ToLower()</span>
+                                </p>
                             }
                             @if (um._user.role_id == 7)
                             {
-                    <p class="blockMediator">
-                        <span>@GlobalRes.Legalcounsel.ToLower()</span>
-                    </p>
+                                <p class="blockMediator">
+                                    <span>@GlobalRes.Legalcounsel.ToLower()</span>
+                                </p>
                             }
-
+                            @if (rm._report_owners.FirstOrDefault(x => x.user_id == _user.id & x.status_id == 2) != null)
+                            {
+                                <p class="blockMediator">
+                                    <span>Case owner</span>
+                                </p>
+                            }
                             @if ((um._user != null) && (um._user.notepad_tx != null) && (um._user.notepad_tx.Trim().Length > 0))
                             {
-                    <p class="blockTextMediator">@um._user.notepad_tx</p>
+                                <p class="blockTextMediator">@um._user.notepad_tx</p>
                             }
                             else
                             {
-                    <p class="blockTextMediator">&nbsp;</p>
+                                <p class="blockTextMediator">&nbsp;</p>
+                            }
+                            @if (
+                                ((_user.role_id == 4) || (_user.role_id == 5)) 
+                                && (rm._report_owners.FirstOrDefault(x => x.user_id == _user.user_id & x.status_id == 2) == null)
+                            )
+                            {
+                                <p class="addCaseOwner">
+                                    <span data-userid="@_user.id">Make case owner</span>
+                                </p>
                             }
 
                             <div class="blockCircles">
@@ -703,6 +722,18 @@
         $(".positionDropDown").on('click', function () {
             $(".positionDropDown .flag").toggle();
             $(".caseMediatorBig").slideToggle();
+        });
+
+        $('.addCaseOwner span').on('click', function(){
+            $.ajax({
+                method: "POST",
+                url: "/Case/MakeCaseOwner",
+                data: { user_id: $(this).data('userid'), report_id: @Html.Raw(report_id) }
+            }).success(function (data) {
+                var str = window.location.href;
+                window.location.href = str;
+            }).fail(function (error) {
+            });
         });
     });
     </script>

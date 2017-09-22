@@ -2772,3 +2772,21 @@ p.helloUser {
     right: -170px;
     bottom: 45px;
 }
+.addCaseOwner span{
+    border: 1px solid #d3d7d8;
+    color: #aeb5b7;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 7px 10px 7px 10px;
+    border-radius: 2px;
+    height: 41px;
+    background: #fff;
+    margin-left: 10px;
+}
+.addCaseOwner span:hover{
+    background: #05b5a2;
+    color: #fff;
+    border-color: #049787;
+}
