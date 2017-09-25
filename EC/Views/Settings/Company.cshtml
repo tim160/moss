@@ -141,7 +141,7 @@
                     <input type="text" name="newLocationName" required="" value="">
                     @if (is_cc)
                     {
-                        @Html.DropDownList("location_cc_extended", (SelectList) ViewBag.LocationExtendeds, "Not selected")
+                        @Html.DropDownList("location_cc_extended", (SelectList) ViewBag.LocationExtendeds, "Not selected", new { @class = "select-def" })
                     }
                     <div class="closeIcon"></div>
                 </div>
@@ -158,7 +158,7 @@
                                     {
                                         list = new SelectList(list, "Value", "Text", _location.location_cc_extended_id.Value.ToString());
                                     }
-                                    @Html.DropDownList("location_cc_extended_" + _location.id, list, "Not selected", new { @class = "location_cc_extended_items" })
+                                    @Html.DropDownList("location_cc_extended_" + _location.id, list, "Not selected", new { @class = "location_cc_extended_items select-def" })
                                 }
                             </p>
                             @if (is_valid_mediator)

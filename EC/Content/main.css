@@ -4126,3 +4126,13 @@ textarea {
 .navbar {
   border-radius: 0 !important;
 }
+
+.select-def {
+    width: 220px;
+    height: 40px;
+    margin-left: 12px;
+    background-color: #f2f7f7;
+    outline: none;
+    border: none;
+    padding-left: 17px;
+}
