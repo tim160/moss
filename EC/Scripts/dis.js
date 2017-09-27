@@ -658,7 +658,6 @@
         };
 
         $scope.upload = function (elem) {
-            console.log(1);
             var data = new FormData();
             data.append('model', JSON.stringify($scope.uploadLine));
             data.append('file', elem.files[0]);
@@ -676,7 +675,6 @@
         };
 
         $scope.fileSelect = function (line) {
-            console.log(0);
             $scope.uploadLine = line;
         };
     }
