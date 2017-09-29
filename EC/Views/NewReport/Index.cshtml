@@ -236,100 +236,56 @@
                                 <td class="floatLeft"><p class="header">@GlobalRes.Acceptcase</p></td>
                                 <td class="headerblockButtons"><div class="closeIcon"></div></td>
                             </tr>
-
                             <tr>
-                                <td>
-                                    <!--table left-->
-                                    <table class="">
-                                        <tr>
-                                            <td class="aroundSelect">@GlobalRes.IncidentType:</td>
-                                            <td class="inSelect">
-                                                @{
-                                                    var selectedIncidentId = allIncidets.FirstOrDefault(x => allReportSecondaryTypes.FirstOrDefault(z => z.secondary_type_id == x.id) != null).id;
-                                                }
-                                                @Html.DropDownList("IncidentId", new SelectList(allIncidets, "id", "secondary_type_en", selectedIncidentId), new { @class = "" })
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td class="aroundSelect">@GlobalRes.CaseAdministratorDepartment: </td>
-                                            <td class="inSelect">
-                                                @Html.DropDownList("DepartmentId", new SelectList(allDepartments, "id", "department_en"), new { @class = "" })
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="aroundSelect">@GlobalRes.Scope:</td>
-                                            <td class="inSelect">
-                                                @{
-                                                    var selectedScopeId = allScopes.FirstOrDefault(x => allCompanyCaseRoutings.FirstOrDefault(z => z.scope_id == x.id) != null).id;
-                                                }
-                                                @Html.DropDownList("ScopeId", new SelectList(allScopes, "id", "scope_en", selectedScopeId), new { @class = "" })
-                                            </td>
-                                        </tr>
-
-
-                                    </table>
-
-
+                                <td class="aroundSelect">@GlobalRes.Scope:</td>
+                                <td class="inSelect">
+                                    @{
+                                        var selectedScopeId = allScopes.FirstOrDefault(x => allCompanyCaseRoutings.FirstOrDefault(z => z.scope_id == x.id) != null).id;
+                                    }
+                                    @Html.DropDownList("ScopeId", new SelectList(allScopes, "id", "scope_en", selectedScopeId), new { @class = "" })
                                 </td>
-                                <td>
-                                    <!--table right-->
-                                    <table>
-                                        <tr>
-                                            <td class="aroundSelect">@GlobalRes.Severity:</td>
-                                            <td class="inSelect">
-                                                @Html.DropDownList("SeverityId", new SelectList(allSeverities, "id", "severity_en"), new { @class = "" })
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="aroundSelect">Case Owner:</td>
-                                            <td class="inSelect">
-                                                @{ 
-                                                    var ids = allReportMediatorAssigned.Select(x => x.mediator_id).ToList(); //All report_mediator_assigned
-                                                    var allOwners2 = allMediators.Where(x => ids.Contains(x.id)).ToList(); //Add all from report_mediator_assigned
-
-                                                    ids = allReportMediatorInvolved.Select(x => x.id).ToList(); //All from report_mediator_involved
-                                                    ids.AddRange(ids); //All already added
-
-                                                    allOwners2.AddRange(allMediators.Where(x => !ids.Contains(x.id) & (x.role_id == 4 | x.role_id == 5)).ToList()); //Add all with role_id 4 an 5 not from report_mediator_involved
-
-                                                    var list2 = allMediators.Where(x => !ids.Contains(x.id) & x.role_id != 4 & x.role_id != 5).ToList();
-                                                    allOwners2.AddRange(list2); //Add all with role_id 6 not from report_mediator_involved
-                                                }
-                                                <select class="" id="OwnerId" name="OwnerId">
-                                                    @foreach (var item in allOwners2)
-                                                    {
-                                                        <option class="@(list2.FirstOrDefault(x => x.id == item.id) == null ? "" : "needquestion")"  value="@item.id">@item.first_nm @item.last_nm</option>
-                                                    }
-                                                </select>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            @if (1 == 1)
-                                            {
-                                                <td class="aroundSelect">Policy:</td>
-                                                <td class="linkPdf">
-                                                    @foreach (var item in allPolicies)
-                                                    {
-                                                        <div>
-                                                            <a href="@Url.Content(item.path_nm)">@item.file_nm</a>
-                                                        </div>                                                        
-                                                    }
-                                                </td>
-                                            }
-                                            else
-                                            {
-                                                <td class="aroundSelect">&nbsp;</td>
-                                                  <td class="linkPdf">
-                                                      &nbsp;
-                                                   </td>
-                                            }
-
-                                        </tr>
-                                    </table>
+                                <td class="aroundSelect">@GlobalRes.Severity:</td>
+                                <td class="inSelect">
+                                    @Html.DropDownList("SeverityId", new SelectList(allSeverities, "id", "severity_en"), new { @class = "" })
                                 </td>
                             </tr>
-                        </tbody>
+
+                            <tr>
+                                <td class="aroundSelect">Case Owner:</td>
+                                <td class="inSelect" colspan="3">
+                                    <select class="" id="OwnerId" name="OwnerId" style="width: 100%">
+                                        @foreach (var item in rm.MediatorsAcceptCase)
+                                        {
+                                            <option class="@(item.User.role_id != 4 || item.User.role_id != 5 ? "" : "needquestion")" value="@item.User.id">@item.FullNameWithDetail</option>
+                                        }
+                                    </select>
+                            </tr>
+                            <tr>
+                                @if (1 == 1)
+                                {
+                                    <td class="aroundSelect">Policy:</td>
+                                    <td class="linkPdf">
+                                        @if (allPolicies.Count == 0)
+                                        {
+                                            <p>No policy documents uploaded</p>
+                                        }
+                                        else
+                                        {
+                                            foreach (var item in allPolicies)
+                                            {
+                                            <div>
+                                                <a href="@Url.Content(item.path_nm)">@item.file_nm</a>
+                                            </div>
+                                            }
+                                        }
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td class="aroundSelect">&nbsp;</td>
+                                    <td class="linkPdf">&nbsp;</td>
+                                }
+                            </tr>
                     </table>
                                
                     @if (is_cc.HasValue && is_cc.Value)
@@ -353,44 +309,7 @@
                             </p>
                         </div>
                     }
-                    @*<div class="addComment addComment2@{@class_ext}">
-                        <div class="blockPersonal">
-
-                            <div class="blockPhoto">
-                                @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", user_id }, { "is_owner", true } })
-
-
-                            </div>
-                            <div class="arrow green"></div>
-                        </div>
-
-
-                        <div class="messageText acceptCaseNote">
-                            <textarea cols="20" id="body_text" class="green" name="body_tx" rows="2" autofocus></textarea>
-                        </div>
-                    </div>*@
-
-                    <div>
-                        <table>
-                            @foreach (var item in (ViewBag.report_mediator_assigned as List<report_mediator_assigned>))
-                            {
-                                var location = allCompanyLocations.FirstOrDefault(x => x.id == item.by_location_id);
-                                var incident = allIncidets.FirstOrDefault(x => x.id == item.by_secondary_type_id);
-                                var user = allOwners.FirstOrDefault(x => x.Id == item.mediator_id);
-                                <tr >
-                                    <td>@(user == null ? "" : user.FullName)</td>
-                                    <td>
-                                        @(location == null ? "" : "By Location")
-                                        @(incident == null ? "" : "By Case Type")
-                                    </td>
-                                    <td>
-                                        @(location == null ? "" : location.location_en)
-                                        @(incident == null ? "" : incident.secondary_type_en)
-                                    </td>
-                                </tr>
-                            }
-                        </table>
-                    </div>
+                    
                     <div class="newMessageBtn">
                         @if (is_cc.Value)
                         {
@@ -705,8 +624,8 @@
                     report_id : report_id,
                     user_id: user_id,
                     description : '',
-                    incidentId : $('#IncidentId').val(),
-                    departmentId: $('#DepartmentId').val(),
+                    //incidentId : $('#IncidentId').val(),
+                    //departmentId: $('#DepartmentId').val(),
                     scopeId : $('#ScopeId').val(),
                     severityId: $('#SeverityId').val(),
                     ownerId: $('#OwnerId').val(),

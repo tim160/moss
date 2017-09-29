@@ -244,8 +244,8 @@ namespace EC.Controllers.ViewModel
             string description = "";// Request["description"];
             int scopeId = Convert.ToInt32(Request["scopeId"]);
             int severityId = Convert.ToInt32(Request["severityId"]);
-            int departmentId = Convert.ToInt32(Request["departmentId"]);
-            int incidentId = Convert.ToInt32(Request["incidentId"]);
+            //int departmentId = Convert.ToInt32(Request["departmentId"]);
+            //int incidentId = Convert.ToInt32(Request["incidentId"]);
             int ownerId = Convert.ToInt32(Request["ownerId"]);
             bool lifeThreat = Convert.ToBoolean(Request["isLifeThreat"]);
             using (ECEntities adv = new ECEntities())

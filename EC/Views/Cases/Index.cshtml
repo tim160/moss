@@ -128,6 +128,10 @@
                             <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'case_dt_s'" />
                             Report date
                         </td>
+                        <td class="severity" ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('severity')">
+                            <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'severity'" />
+                            Severity
+                        </td>
                         <td class="age" ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('total_days')">
                             <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'total_days'" />
                             age
@@ -140,10 +144,6 @@
                             <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'location'" />
                             Location
                         </td>
-                        <td class="severity" ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('severity')">
-                            <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'severity'" />
-                            Severity
-                        </td>                        
                         <td class="messages" ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('new_messages')">
                             <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'new_messages'" />
                             messages
@@ -172,10 +172,10 @@
                         <td class="firstColumn"><div class="rectangle" style="background-color:#{{report.case_color_code}}"></div>{{report.case_number}}</td>
                         <td><span class="OpenSansBold upperCase grey">{{report.current_status}}</span><br /><span class="timeStatus OpenSansSemibold red"> {{report.days_left}} days left</span></td>
                         <td>{{report.case_dt}}</td>
+                        <td>{{report.severity_s}}</td>
                         <td>{{report.total_days}} {{report.total_days == 1 ? ' day' : ' days'}}</td>
                         <td>{{report.case_secondary_types}}</td>
                         <td>{{report.location}}</td>
-                        <td>{{report.severity_s}}</td>
                         <td>{{report.messages_number}}</td>
                         <td>{{report.tasks_number}}</td>
                         <td>

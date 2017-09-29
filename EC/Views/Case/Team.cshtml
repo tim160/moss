@@ -325,7 +325,7 @@
                             }
                             @if (
                                 ((_user.role_id == 4) || (_user.role_id == 5)) 
-                                && (rm._report_owners.FirstOrDefault(x => x.user_id == _user.user_id & x.status_id == 2) == null)
+                                && (rm._report_owners.FirstOrDefault(x => x.user_id == _user.id & x.status_id == 2) == null)
                             )
                             {
                                 <p class="addCaseOwner">
