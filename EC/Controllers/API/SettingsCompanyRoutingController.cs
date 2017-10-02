@@ -137,6 +137,28 @@ namespace EC.Controllers.API
                 }
                 file.SaveAs(String.Format("{0}\\{1}", dir, filename));
 
+                if (model.id == 0)
+                {
+                    var item = DB.company_case_routing
+                        .FirstOrDefault(x => x.client_id == 1 && x.company_id == user.company_id && x.company_secondary_type_id == model.company_secondary_type_id);
+                    if (item == null)
+                    {
+                        item = new company_case_routing
+                        {
+                            company_id = user.company_id,
+                            company_secondary_type_id = model.company_secondary_type_id,
+                            user_id = 0,
+                            client_id = 1,
+                            status_id = 2,
+                            company_case_admin_department_id = 0,
+                            scope_id = 0,
+                        };
+                        DB.company_case_routing.Add(item);
+                        DB.SaveChanges();
+                    }
+                    model.id = item.id;
+                }
+
                 var itemDb = new company_case_routing_attachments
                 {
                     company_case_routing_id = model.id,
