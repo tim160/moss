@@ -2347,7 +2347,9 @@ namespace EC.Models
                         CL = cl,
                         ST = st
                     }
-                    ).ToList()
+                    )
+                    .Where(x => x.User != null)
+                    .ToList()
                     .Select(x =>
                         new UserViewModel(x.User)
                         {
