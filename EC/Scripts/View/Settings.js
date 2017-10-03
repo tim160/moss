@@ -301,6 +301,7 @@
                 sendAjax("RootCauses1", data, function (json) {
                     renderRootCauses(json);
                     $('.newRootCauses').css('display', 'none');
+                    $('#newRootCauses1 input').val('');
                 });
             } else {
                 $('#newRootCauses1').css('border-color', 'red');
@@ -313,6 +314,7 @@
                 sendAjax("RootCauses2", data, function (json) {
                     renderRootCauses(json);
                     $('.newRootCauses').css('display', 'none');
+                    $('#newRootCauses2 input').val('');
                 });
             } else {
                 $('#newRootCauses2').css('border-color', 'red');
@@ -325,6 +327,7 @@
                 sendAjax("RootCauses3", data, function (json) {
                     renderRootCauses(json);
                     $('.newRootCauses').css('display', 'none');
+                    $('#newRootCauses3 input').val('');
                 });
             } else {
                 $('#newRootCauses3').css('border-color', 'red');
