@@ -9,8 +9,12 @@
         'EC',
     ]);
 
-    angular.module('EC').config([
-        function () {
+    angular.module('EC').config(['$locationProvider',
+        function ($locationProvider) {
+            $locationProvider.html5Mode({
+                enabled: true,
+                requireBase: false
+            });
         }])
     .run(function () {
     });

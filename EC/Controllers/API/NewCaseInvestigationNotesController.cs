@@ -127,7 +127,7 @@ namespace EC.Controllers.API
                     .Select(x => new {
                         id = x.department_id,
                         added_by_reporter = x.added_by_reporter,
-                        name = departments.FirstOrDefault(z => z.id == x.department_id).department_en,
+                        name = departments.FirstOrDefault(z => z.id == x.department_id)?.department_en,
                     })
                     .ToList(),
 

@@ -9,8 +9,12 @@
         'EC',
     ]);
 
-    angular.module('EC').config([
-        function () {
+    angular.module('EC').config(['$locationProvider',
+        function ($locationProvider) {
+            $locationProvider.html5Mode({
+                enabled: true,
+                requireBase: false
+            });
         }])
     .run(function () {
     });
@@ -332,8 +336,7 @@
         $scope.isEditNote1 = false;
         $scope.isEditNote2 = false;
 
-        $scope.report_id = parseInt($location.absUrl().substring($location
-            .absUrl().toLowerCase().indexOf('InvestigationNotes/'.toLowerCase()) + 'InvestigationNotes/'.toLowerCase().length));
+        $scope.report_id = $location.search().report_id;
 
         $scope.refresh = function (data) {
             data.report_secondary_type_selected_avilable.splice(0, 0, { id: 0, secondary_type_en: 'Please select' });
