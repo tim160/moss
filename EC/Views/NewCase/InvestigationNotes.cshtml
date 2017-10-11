@@ -4,22 +4,15 @@
     var user_id = (Int32)ViewBag.user_id;
     List<attachment> attachmentFiles = (List<attachment>)ViewBag.attachmentFiles;
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
-    string popup = null;
 }
-@*<link type="text/css" href="~/Content/caseTasks.css" rel="stylesheet">*@
-<!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700" rel="stylesheet">
 
-<!-- Latest compiled and minified JavaScript -->
+<link href="@Url.Content("~/Content/assets/template/css/reset.css")" rel="stylesheet">
+<link href="@Url.Content("~/Content/assets/template/css/style.css")" rel="stylesheet">
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-
-
-    @*<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
-
-
-
-    </nav>*@
 <div class="container navbar navbarColor col-md-12">
     <div class="row">
         <div class="col-md-10">
@@ -42,6 +35,255 @@
 </div>
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
+
+<section class="types-section left" ng-controller="NewCaseInvestigationNotesController">
+
+    <div class="menu-buttom ninja-btn">
+        <a href="#"></a>
+    </div>
+    <div class="center">
+        <!--Incident types-->
+        <div class="flex incident-types">
+            <div class="item">
+                <p class="fact-title">Incident types</p>
+                <ul>
+                    <li ng-repeat="item in model.report_secondary_type_selected">
+                        <a href="#" ng-click="incidentTypeDelete(item.id)" ng-show="!item.added_by_reporter">X</a>
+                        {{item.secondary_type_en}}
+                    </li>
+                </ul>
+                <a href="#" class="green--button incident-types--button" ng-show="!incidentTypeAddMode" ng-click="incidentTypeAddMode = !incidentTypeAddMode">Add incident type</a>
+                <div class="select" ng-show="incidentTypeAddMode">
+                    <a href="#" class="slct">Select one</a>
+                    <ul class="drop">
+                        <li ng-repeat="item in model.report_secondary_type_selected_avilable">
+                            <a href="" ng-click="incidentTypeAdd(item)">{{item.secondary_type_en}}</a>
+                        </li>
+                    </ul>
+                    <input type="hidden" id="select">
+                </div>
+            </div>
+            <div class="item">
+                <p class="fact-title">Involved Parties</p>
+                <ul>
+                    <li ng-repeat="item in model.mediator_involved">
+                        <a href="#" ng-click="mediatorDelete(item.id)" ng-show="!item.added_by_reporter">X</a>
+                        {{item.first_nm}} {{item.last_nm}}
+                    </li>                    
+                </ul>
+                <a href="#" class="green--button incident-types--button" ng-show="!mediatorAddMode" ng-click="mediatorAddMode = !mediatorAddMode">Add person</a>
+                <div class="select" ng-show="mediatorAddMode">
+                    <a href="#" class="slct">Select one</a>
+                    <ul class="drop">
+                        <li ng-repeat="item in model.mediator_all">
+                            <a href="" ng-click="mediatorAdd(item)">{{item.first_nm}} {{item.last_nm}}</a>
+                        </li>
+                    </ul>
+                    <input type="hidden" id="select">
+                </div>
+            </div>
+            <div class="item">
+                <p class="fact-title">Involved Departments</p>
+                <ul>
+                    <li>Academic Affairs</li>
+                </ul>
+                <div class="select">
+                    <a href="#" class="slct">Select one</a>
+                    <ul class="drop">
+                        <li><a href="">Select one</a></li>
+                        <li><a href="">Select one</a></li>
+                    </ul>
+                    <input type="hidden" id="select">
+                </div>
+            </div>
+        </div>
+
+        <!--Facts Established-->
+        <div class="border-top facts-margin facts-padding facts-established">
+            <p class="fact-title">Facts Established</p>
+            <div class="">
+                <div class="facts-established--text"> </div>
+                <a href="#" class="green--button facts--submit">save</a>
+            </div>
+        </div>
+
+        <!--Investigation Methodology-->
+        <div class="border-top facts-margin facts-padding facts-established">
+            <p class="fact-title">Investigation Methodology</p>
+            <div class="">
+                <div class="facts-established--text"> </div>
+                <a href="#" class="green--button facts--submit">save</a>
+            </div>
+        </div>
+
+        <!--Root Cause Investigation-->
+        <div class="border-top facts-margin facts-padding ">
+            <p class="fact-title">Root Cause Investigation</p>
+            <!--Academic Misconduct-->
+            <div class="investigation flex space-between">
+                <div class="investigation--title">Academic Misconduct</div>
+                <div class="investigation__item flex flex-column">
+                    <div class="investigation__inner">
+                        <div class="select">
+                            <a href="#" class="slct">Select Behavioral Factors</a>
+                            <ul class="drop">
+                                <li><a href="">Select Behavioral Factors</a></li>
+                                <li><a href="">Select Behavioral Factors</a></li>
+                            </ul>
+                            <input type="hidden" id="select">
+                        </div>
+                        <a href="#" class="green--button investigation__item--submit">add note</a>
+                    </div>
+                    <div class="investigation__inner">
+                        <div class="select">
+                            <a href="#" class="slct">Select External Influences</a>
+                            <ul class="drop">
+                                <li><a href="">Select External Influences</a></li>
+                                <li><a href="">Select External Influences</a></li>
+                            </ul>
+                            <input type="hidden" id="select">
+                        </div>
+                        <a href="#" class="green--button investigation__item--submit">add note</a>
+                    </div>
+                    <div class="investigation__inner">
+                        <div class="select">
+                            <a href="#" class="slct">Select Campus Influences </a>
+                            <ul class="drop">
+                                <li><a href="">Select Campus Influences </a></li>
+                                <li><a href="">Select Campus Influences </a></li>
+                            </ul>
+                            <input type="hidden" id="select">
+                        </div>
+                        <a href="#" class="green--button investigation__item--submit">add note</a>
+                    </div>
+
+                </div>
+            </div>
+            <!--Fraudalent Activities-->
+            <div class="investigation flex space-between">
+                <div class="investigation--title">Fraudalent Activities</div>
+                <div class="investigation__item flex flex-column">
+                    <div class="investigation__inner">
+                        <div class="select">
+                            <a href="#" class="slct">Alcohol consumption </a>
+                            <ul class="drop">
+                                <li><a href="">Alcohol consumption </a></li>
+                                <li><a href="">Alcohol consumption </a></li>
+                            </ul>
+                            <input type="hidden" id="select">
+                        </div>
+                        <a href="#" class="green--button investigation__item--submit">add note</a>
+                    </div>
+                    <div class="investigation__inner">
+                        <div class="select">
+                            <a href="#" class="slct">Select External Influences</a>
+                            <ul class="drop">
+                                <li><a href="">Select External Influences</a></li>
+                                <li><a href="">Select External Influences</a></li>
+                            </ul>
+                            <input type="hidden" id="select">
+                        </div>
+                        <a href="#" class="green--button investigation__item--submit">add note</a>
+                    </div>
+                    <div class="investigation__inner">
+                        <div class="select">
+                            <a href="#" class="slct">Select Campus Influences </a>
+                            <ul class="drop">
+                                <li><a href="">Select Campus Influences </a></li>
+                                <li><a href="">Select Campus Influences </a></li>
+                            </ul>
+                            <input type="hidden" id="select">
+                        </div>
+                        <a href="#" class="green--button investigation__item--submit">add note</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Fraudalent Activities-->
+    <div class="panel left">
+        <a class="ninja-btn close-btn"><img src="assets/template/img/close.png" alt="close"></a>
+        <!--Report summary-->
+        <div class="report-summary">
+            <p class="sidebar-title">Report summary</p>
+            <div class="reported">
+                <p><span>Reported:</span> 25 January 2015</p>
+                <p><span>Total time:</span> 38 days</p>
+            </div>
+            <div class="sidebar-investigation">
+                Investigation: <span class="investigation-days">31 days</span> <span class="investigation-daysleft">4 days left</span>
+            </div>
+            <a href="#" class="green--button contact-reporter">CONTACT REPORTER</a>
+        </div>
+        <!--General information-->
+        <div class="general-information sibebar-border">
+            <p class="sidebar-subtitle">General information</p>
+            <ul>
+                <li>
+                    Reporting from:
+                    <p>Canada</p>
+                </li>
+                <li>
+                    Reporter would like to stay:
+                    <p>Anonymous to STARK Enterprizes</p>
+                </li>
+                <li>
+                    Reporter is:
+                    <p>Former employee</p>
+                </li>
+                <li>
+                    The incident happened in:
+                    <p>Stark Tower, NY</p>
+                </li>
+                <li>
+                    Affected departments:
+                    <p>Sales, Accounting</p>
+                </li>
+                <li>
+                    <p></p>
+                </li>
+            </ul>
+        </div>
+        <!--Parties involved-->
+        <div class="general-information sibebar-border">
+            <p class="sidebar-subtitle">Parties involved</p>
+            <ul>
+                <li>
+                    <b>Stan Lee,</b> Title unknown
+                    <p>Witness</p>
+                </li>
+                <li>
+                    The management doesn’t know about the incident
+                </li>
+            </ul>
+        </div>
+
+        <!--Case information-->
+        <div class="general-information sibebar-border">
+            <p class="sidebar-subtitle">Case information</p>
+            <ul>
+                <li>
+                    Reporting about:
+                    <p>Theft</p>
+                </li>
+                <li>
+                    Date:
+                    <p>23 Dec 2014</p>
+                </li>
+                <li>
+                    Incident description:
+                    <p>
+                        Recently constructed by Bruce Cole, it is powered by its own independent arc reactor, capable of sustaining the tower for a year without any cost to the city. The tower's unique power sustainability inspires Loki to select the tower as the prime location to harness the Tesseract and open a wormhole to draw his army to Earth. After the battle between Loki's forces and the Avengers, the upper levels of the tower are destroyed, along with the majority of the 'STARK' insignia that adorned one side of the tower ( the only remaining letter is an 'A', as a nod to the Avengers).
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="panel-overlay"></div>
+
+</section>
 
     <div class="container" ng-controller="NewCaseInvestigationNotesController">
         <!-- Example row of columns -->
@@ -192,12 +434,5 @@
             </div>
         </div>
     </div> <!-- /container -->
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+
+<script src="@Url.Content("~/Content/assets/template/js/select.js")"></script>

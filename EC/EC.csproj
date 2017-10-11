@@ -266,6 +266,12 @@
     <Content Include="App\services\onLeaveService.js" />
     <Content Include="App\util\fireEventsController.js" />
     <Content Include="App\util\parentController.js" />
+    <Content Include="Content\assets\content\logo.jpg" />
+    <Content Include="Content\assets\template\css\reset.css" />
+    <Content Include="Content\assets\template\css\style.css" />
+    <Content Include="Content\assets\template\img\close.png" />
+    <Content Include="Content\assets\template\img\report.png" />
+    <Content Include="Content\assets\template\js\select.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\caiNew.css" />
     <Content Include="Content\emails\CaseCloseApprove.html" />
@@ -482,6 +488,8 @@
     <Content Include="Models\Database\ECEntities.edmx.diagram">
       <DependentUpon>ECEntities.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\assets\content\price.PDF" />
+    <Content Include="Content\assets\template\php\submit.php" />
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <None Include="Properties\PublishProfiles\ec-code.pubxml" />
     <None Include="Properties\PublishProfiles\ec-dev.pubxml" />

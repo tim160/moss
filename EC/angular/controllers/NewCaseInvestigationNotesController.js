@@ -21,9 +21,9 @@
         $scope.report_id = $location.search().report_id;
 
         $scope.refresh = function (data) {
-            data.report_secondary_type_selected_avilable.splice(0, 0, { id: 0, secondary_type_en: 'Please select' });
-            data.mediator_all.splice(0, 0, { id: 0, first_nm: 'Please select' });
-            data.departments_all.splice(0, 0, { id: 0, department_en: 'Please select' });
+            //data.report_secondary_type_selected_avilable.splice(0, 0, { id: 0, secondary_type_en: 'Please select' });
+            //data.mediator_all.splice(0, 0, { id: 0, first_nm: 'Please select' });
+            //data.departments_all.splice(0, 0, { id: 0, department_en: 'Please select' });
 
             data.incidentTypeAdd = 0;
             data.mediatorAdd = 0;
@@ -52,9 +52,9 @@
             $scope.refresh(data);
         });
 
-        $scope.incidentTypeAdd = function () {
+        $scope.incidentTypeAdd = function (item) {
             $scope.incidentTypeAddMode = false;
-            var param = { report_id: $scope.report_id, company_secondary_type_add: $scope.model.incidentTypeAdd };
+            var param = { report_id: $scope.report_id, company_secondary_type_add: item.id };
             NewCaseInvestigationNotesService.post(param, function (data) {
                 $scope.refresh(data);
             });
@@ -67,9 +67,9 @@
             });
         };
 
-        $scope.mediatorAdd = function () {
+        $scope.mediatorAdd = function (item) {
             $scope.mediatorAddMode = false;
-            var param = { report_id: $scope.report_id, mediator_add: $scope.model.mediatorAdd };
+            var param = { report_id: $scope.report_id, mediator_add: item.id };
             NewCaseInvestigationNotesService.post(param, function (data) {
                 $scope.refresh(data);
             });

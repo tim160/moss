@@ -199,7 +199,7 @@ namespace EC.Controllers.API
 
             if (filter.Company_secondary_type_delete.HasValue)
             {
-                var report_secondary_type = DB.report_secondary_type.FirstOrDefault(x => x.report_id == filter.Report_id & x.secondary_type_id == filter.Company_secondary_type_delete.Value & x.added_by_reporter == false);
+                var report_secondary_type = DB.report_secondary_type.FirstOrDefault(x => x.report_id == filter.Report_id & x.secondary_type_id == filter.Company_secondary_type_delete.Value & x.added_by_reporter != true);
                 DB.report_secondary_type.Remove(report_secondary_type);
                 DB.SaveChanges();
             }
