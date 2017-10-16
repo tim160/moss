@@ -105,7 +105,7 @@ input {
 }
 
 .incident-types .item {
-	width: 33.3%;
+	width: 45.3%;
 	padding-left: 64px;
 }
 
@@ -648,4 +648,33 @@ input {
 		margin: 0 auto;
 		width: 310px;
 	}
+}
+.menuCasesBlock span.text {
+    padding-top: 5px;
+}
+#resoveCompletedTopBtn {
+    color: #4da456;
+    padding: 9px!important;
+    border-color: #4da456;
+    margin-top: 1px!important;
+}
+.menuCasesBlock {
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+}
+.navbar-brand {
+    font-size: 20px;
+font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+}
+.flex.incident-types {
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:center;
+
+}
+
+.flex.incident-types.specFlex {
+    justify-content:center;
+}
+.someBorder {
+    border-bottom: solid 1px #bfc3c2;
 }

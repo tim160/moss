@@ -29,12 +29,12 @@
         </div>
 
         <div class="col-md-1 zipperColor">
-                <img src="~/Content/Icons/activityIcon.png" style="padding: 15px;">
+            <img src="~/Content/Icons/activityIcon.png" style="padding: 15px;">
         </div>
     </div>
 </div>
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
+<!-- Main jumbotron for a primary marketing message or call to action -->
 
 <section class="types-section left" ng-controller="NewCaseInvestigationNotesController">
 
@@ -43,7 +43,7 @@
     </div>
     <div class="center">
         <!--Incident types-->
-        <div class="flex incident-types">
+        <div class="flex incident-types someBorder">
             <div class="item">
                 <p class="fact-title">Incident types</p>
                 <ul>
@@ -63,25 +63,7 @@
                     <input type="hidden" id="select">
                 </div>
             </div>
-            <div class="item">
-                <p class="fact-title">Involved Parties</p>
-                <ul>
-                    <li ng-repeat="item in model.mediator_involved">
-                        <a href="#" ng-click="mediatorDelete(item.id)" ng-show="!item.added_by_reporter">X</a>
-                        {{item.first_nm}} {{item.last_nm}}
-                    </li>                    
-                </ul>
-                <a href="#" class="green--button incident-types--button" ng-show="!mediatorAddMode" ng-click="mediatorAddMode = !mediatorAddMode">Add person</a>
-                <div class="select" ng-show="mediatorAddMode">
-                    <a href="#" class="slct">Select one</a>
-                    <ul class="drop">
-                        <li ng-repeat="item in model.mediator_all">
-                            <a href="" ng-click="mediatorAdd(item)">{{item.first_nm}} {{item.last_nm}}</a>
-                        </li>
-                    </ul>
-                    <input type="hidden" id="select">
-                </div>
-            </div>
+
             <div class="item">
                 <p class="fact-title">Involved Departments</p>
                 <ul>
@@ -97,7 +79,27 @@
                 </div>
             </div>
         </div>
-
+        <div class="flex incident-types specFlex">
+            <div class="item">
+                    <p class="fact-title">Involved Parties</p>
+                    <ul>
+                        <li ng-repeat="item in model.mediator_involved">
+                            <a href="#" ng-click="mediatorDelete(item.id)" ng-show="!item.added_by_reporter">X</a>
+                            {{item.first_nm}} {{item.last_nm}}
+                        </li>
+                    </ul>
+                    <a href="#" class="green--button incident-types--button" ng-show="!mediatorAddMode" ng-click="mediatorAddMode = !mediatorAddMode">Add person</a>
+                    <div class="select" ng-show="mediatorAddMode">
+                        <a href="#" class="slct">Select one</a>
+                        <ul class="drop">
+                            <li ng-repeat="item in model.mediator_all">
+                                <a href="" ng-click="mediatorAdd(item)">{{item.first_nm}} {{item.last_nm}}</a>
+                            </li>
+                        </ul>
+                        <input type="hidden" id="select">
+                    </div>
+                </div>
+        </div>
         <!--Facts Established-->
         <div class="border-top facts-margin facts-padding facts-established">
             <p class="fact-title">Facts Established</p>
@@ -285,54 +287,54 @@
 
 </section>
 
-    <div class="container" ng-controller="NewCaseInvestigationNotesController">
-        <!-- Example row of columns -->
-        <div class="row">
-            <div class="col-md-4">
-                <h2>Incident types</h2>
-                <p ng-repeat="item in model.report_secondary_type_selected">
-                    <a href="#" ng-click="incidentTypeDelete(item.id)" ng-show="!item.added_by_reporter">X</a>
-                    {{item.secondary_type_en}}
-                </p>
-                <span class="acceptCaseBtnClass" ng-show="!incidentTypeAddMode" ng-click="incidentTypeAddMode = !incidentTypeAddMode">
-                    Add incident type
-                </span>
-                <select ng-change="incidentTypeAdd()"
-                        ng-show="incidentTypeAddMode"
-                        ng-model="model.incidentTypeAdd"
-                        ng-options="item.id as item.secondary_type_en for item in model.report_secondary_type_selected_avilable"></select>
-            </div>
-            <div class="col-md-4">
-                <h2>Involved Parties</h2>
-                <p ng-repeat="item in model.mediator_involved">
-                    <a href="#" ng-click="mediatorDelete(item.id)" ng-show="!item.added_by_reporter">X</a>
-                    {{item.first_nm}} {{item.last_nm}}
-                </p>
-                <span class="acceptCaseBtnClass" ng-show="!mediatorAddMode" ng-click="mediatorAddMode = !mediatorAddMode">
-                    Add person
-                </span>
-                <select ng-change="mediatorAdd()"
-                        ng-show="mediatorAddMode"
-                        ng-model="model.mediatorAdd"
-                        ng-options="item.id as item.first_nm for item in model.mediator_all"></select>
-            </div>
-            <div class="col-md-4">
-                <h2>Involved Departments</h2>
-                <p ng-repeat="item in model.departments_report">
-                    <a href="#" ng-click="departmentDelete(item.id)" ng-show="!item.added_by_reporter">X</a>
-                    {{item.name}}
-                </p>
-                <span class="acceptCaseBtnClass" ng-show="!departmentAddMode" ng-click="departmentAddMode = !departmentAddMode">
-                    Add person
-                </span>
-                <select ng-change="departmentAdd()"
-                        ng-show="departmentAddMode"
-                        ng-model="model.departmentAdd"
-                        ng-options="item.id as item.department_en for item in model.departments_all"></select>
-            </div>
+<div class="container" ng-controller="NewCaseInvestigationNotesController">
+    <!-- Example row of columns -->
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Incident types</h2>
+            <p ng-repeat="item in model.report_secondary_type_selected">
+                <a href="#" ng-click="incidentTypeDelete(item.id)" ng-show="!item.added_by_reporter">X</a>
+                {{item.secondary_type_en}}
+            </p>
+            <span class="acceptCaseBtnClass" ng-show="!incidentTypeAddMode" ng-click="incidentTypeAddMode = !incidentTypeAddMode">
+                Add incident type
+            </span>
+            <select ng-change="incidentTypeAdd()"
+                    ng-show="incidentTypeAddMode"
+                    ng-model="model.incidentTypeAdd"
+                    ng-options="item.id as item.secondary_type_en for item in model.report_secondary_type_selected_avilable"></select>
         </div>
+        <div class="col-md-4">
+            <h2>Involved Parties</h2>
+            <p ng-repeat="item in model.mediator_involved">
+                <a href="#" ng-click="mediatorDelete(item.id)" ng-show="!item.added_by_reporter">X</a>
+                {{item.first_nm}} {{item.last_nm}}
+            </p>
+            <span class="acceptCaseBtnClass" ng-show="!mediatorAddMode" ng-click="mediatorAddMode = !mediatorAddMode">
+                Add person
+            </span>
+            <select ng-change="mediatorAdd()"
+                    ng-show="mediatorAddMode"
+                    ng-model="model.mediatorAdd"
+                    ng-options="item.id as item.first_nm for item in model.mediator_all"></select>
+        </div>
+        <div class="col-md-4">
+            <h2>Involved Departments</h2>
+            <p ng-repeat="item in model.departments_report">
+                <a href="#" ng-click="departmentDelete(item.id)" ng-show="!item.added_by_reporter">X</a>
+                {{item.name}}
+            </p>
+            <span class="acceptCaseBtnClass" ng-show="!departmentAddMode" ng-click="departmentAddMode = !departmentAddMode">
+                Add person
+            </span>
+            <select ng-change="departmentAdd()"
+                    ng-show="departmentAddMode"
+                    ng-model="model.departmentAdd"
+                    ng-options="item.id as item.department_en for item in model.departments_all"></select>
+        </div>
+    </div>
 
-        <hr>
+    <hr>
 
     <div class="container">
         <div class="row">
@@ -368,71 +370,71 @@
             </span>
         </div>
     </div>
-        <hr>
+    <hr>
 
-        <div class="container">
-            <div class="row">
-                <div class="col-6 col-sm-4">Investigation Methodology</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-6 col-sm-4">Investigation Methodology</div>
+        </div>
+    </div>
+
+    <div class="container" ng-repeat="item in model.report_secondary_type_selected">
+        <div class="row">
+            <p class="col-md-3">{{item.secondary_type_en}}</p>
+            <div class="dropdown col-md-5">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{getBehavioralFactors(item)}}</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <a class="dropdown-item" href="#" ng-repeat="item2 in model.company_root_cases_behavioral" ng-click="changeBehavioralFactors(item, item2)">{{item2.name_en}}</a>
+                </div>
             </div>
+            <textarea cols="20" rows="5" ng-model="item.inv_meth_bf_note" ng-show="item.behavioralEditMode"></textarea>
+            <p ng-show="!item.behavioralEditMode">{{item.inv_meth_bf_note}}</p>
+            <span class="acceptCaseBtnClass pull-right col-md-1" ng-click="item.behavioralEditMode = !item.behavioralEditMode" ng-show="!item.behavioralEditMode">
+                <span ng-show="item.inv_meth_bf_note != ''">Edit note</span>
+                <span ng-show="item.inv_meth_bf_note == ''">Add note</span>
+            </span>
+            <span class="acceptCaseBtnClass pull-right col-md-1" ng-show="item.behavioralEditMode" ng-click="saveNoteBehavioralFactors(item)">
+                Save
+            </span>
+        </div>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="dropdown col-md-5">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{getExternalInfluences(item)}}</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <a class="dropdown-item" href="#" ng-repeat="item2 in model.company_root_cases_external" ng-click="changeExternalInfluences(item, item2)">{{item2.name_en}}</a>
+                </div>
+            </div>
+            <textarea ng-model="item.inv_meth_ei_note" ng-show="item.externalInfluencesEditMode"></textarea>
+            <p ng-show="!item.externalInfluencesEditMode">{{item.inv_meth_ei_note}}</p>
+            <span class="acceptCaseBtnClass pull-right col-md-1" ng-click="item.externalInfluencesEditMode = !item.externalInfluencesEditMode" ng-show="!item.externalInfluencesEditMode">
+                <span ng-show="item.inv_meth_ei_note != ''">Edit note</span>
+                <span ng-show="item.inv_meth_ei_note == ''">Add note</span>
+            </span>
+            <span class="acceptCaseBtnClass pull-right col-md-1" ng-show="item.externalInfluencesEditMode" ng-click="saveNoteExternalInfluences(item)">
+                Save
+            </span>
         </div>
 
-        <div class="container" ng-repeat="item in model.report_secondary_type_selected">
-            <div class="row">
-                <p class="col-md-3">{{item.secondary_type_en}}</p>
-                <div class="dropdown col-md-5">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{getBehavioralFactors(item)}}</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown01">
-                        <a class="dropdown-item" href="#" ng-repeat="item2 in model.company_root_cases_behavioral" ng-click="changeBehavioralFactors(item, item2)">{{item2.name_en}}</a>
-                    </div>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="dropdown col-md-5">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{getCampusInfluences(item)}}</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <a class="dropdown-item" href="#" ng-repeat="item2 in model.company_root_cases_organizational" ng-click="changeCampusInfluences(item, item2)">{{item2.name_en}}</a>
                 </div>
-                <textarea cols="20" rows="5" ng-model="item.inv_meth_bf_note" ng-show="item.behavioralEditMode"></textarea>
-                <p ng-show="!item.behavioralEditMode">{{item.inv_meth_bf_note}}</p>
-                <span class="acceptCaseBtnClass pull-right col-md-1" ng-click="item.behavioralEditMode = !item.behavioralEditMode" ng-show="!item.behavioralEditMode">
-                    <span ng-show="item.inv_meth_bf_note != ''">Edit note</span>
-                    <span ng-show="item.inv_meth_bf_note == ''">Add note</span>
-                </span>
-                <span class="acceptCaseBtnClass pull-right col-md-1" ng-show="item.behavioralEditMode" ng-click="saveNoteBehavioralFactors(item)">
-                    Save
-                </span>
             </div>
-            <div class="row">
-                <div class="col-md-3"></div>
-                <div class="dropdown col-md-5">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{getExternalInfluences(item)}}</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown01">
-                        <a class="dropdown-item" href="#" ng-repeat="item2 in model.company_root_cases_external" ng-click="changeExternalInfluences(item, item2)">{{item2.name_en}}</a>
-                    </div>
-                </div>
-                <textarea ng-model="item.inv_meth_ei_note" ng-show="item.externalInfluencesEditMode"></textarea>
-                <p ng-show="!item.externalInfluencesEditMode">{{item.inv_meth_ei_note}}</p>
-                <span class="acceptCaseBtnClass pull-right col-md-1" ng-click="item.externalInfluencesEditMode = !item.externalInfluencesEditMode" ng-show="!item.externalInfluencesEditMode">
-                    <span ng-show="item.inv_meth_ei_note != ''">Edit note</span>
-                    <span ng-show="item.inv_meth_ei_note == ''">Add note</span>
-                </span>
-                <span class="acceptCaseBtnClass pull-right col-md-1" ng-show="item.externalInfluencesEditMode" ng-click="saveNoteExternalInfluences(item)">
-                    Save
-                </span>
-            </div>
-
-            <div class="row">
-                <div class="col-md-3"></div>
-                <div class="dropdown col-md-5">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{getCampusInfluences(item)}}</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown01">
-                        <a class="dropdown-item" href="#" ng-repeat="item2 in model.company_root_cases_organizational" ng-click="changeCampusInfluences(item, item2)">{{item2.name_en}}</a>
-                    </div>
-                </div>
-                <textarea ng-model="item.inv_meth_ci_note" ng-show="item.campusInfluencesEditMode"></textarea>
-                <p ng-show="!item.campusInfluencesEditMode">{{item.inv_meth_ci_note}}</p>
-                <span class="acceptCaseBtnClass pull-right col-md-1" ng-click="item.campusInfluencesEditMode = !item.campusInfluencesEditMode" ng-show="!item.campusInfluencesEditMode">
-                    <span ng-show="item.inv_meth_ci_note != ''">Edit note</span>
-                    <span ng-show="item.inv_meth_ci_note == ''">Add note</span>
-                </span>
-                <span class="acceptCaseBtnClass pull-right col-md-1" ng-show="item.campusInfluencesEditMode" ng-click="saveNoteCampusInfluences(item)">
-                    Save
-                </span>
-            </div>
+            <textarea ng-model="item.inv_meth_ci_note" ng-show="item.campusInfluencesEditMode"></textarea>
+            <p ng-show="!item.campusInfluencesEditMode">{{item.inv_meth_ci_note}}</p>
+            <span class="acceptCaseBtnClass pull-right col-md-1" ng-click="item.campusInfluencesEditMode = !item.campusInfluencesEditMode" ng-show="!item.campusInfluencesEditMode">
+                <span ng-show="item.inv_meth_ci_note != ''">Edit note</span>
+                <span ng-show="item.inv_meth_ci_note == ''">Add note</span>
+            </span>
+            <span class="acceptCaseBtnClass pull-right col-md-1" ng-show="item.campusInfluencesEditMode" ng-click="saveNoteCampusInfluences(item)">
+                Save
+            </span>
         </div>
-    </div> <!-- /container -->
+    </div>
+</div> <!-- /container -->
 
 <script src="@Url.Content("~/Content/assets/template/js/select.js")"></script>
