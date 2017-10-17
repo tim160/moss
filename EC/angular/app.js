@@ -59,7 +59,7 @@
         };
     });
 
-    angular.module('EC').directive('dropbox', function ($compile) {
+    angular.module('EC').directive('dropbox', function () {
         var directive = {};
 
         directive.restrict = 'E';
@@ -80,9 +80,6 @@
             textexpr: '=ngDropboxTextexpr',
             rootitem: '=ngDropboxRootitem',
             onSelect: '=ngDropboxOnSelect',
-        };
-
-        directive.link = function (scope, element, attr) {
         };
 
         return directive;

@@ -56,11 +56,11 @@
         };
 
         $scope.typeName = function (id) {
-            return $filter('filter')($scope.types, { 'id': id })[0];
+            return $filter('filter')($scope.types, { 'id': id }, true)[0];
         };
 
         $scope.locationName = function (id) {
-            return $filter('filter')($scope.locations, { 'id': id })[0];
+            return $filter('filter')($scope.locations, { 'id': id }, true)[0];
         };
 
         $scope.changeLine = function (line) {

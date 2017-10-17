@@ -31,7 +31,7 @@
                 data.report_secondary_type_selected[i].inv_meth_ci_note = '';
 
                 var r = $filter('filter')(data.report_investigation_methodology,
-                    { 'report_secondary_type_id': data.report_secondary_type_selected[i].id });
+                    { 'report_secondary_type_id': data.report_secondary_type_selected[i].id }, true);
                 if (r.length !== 0) {
                     data.report_secondary_type_selected[i].inv_meth_bf_note =
                         r[0].company_root_cases_behavioral_note === null ? '' : r[0].company_root_cases_behavioral_note;
@@ -110,10 +110,9 @@
         };
 
         $scope.getBehavioralFactors = function (item) {
-            console.log(item);
-            var r = $filter('filter')($scope.model.report_investigation_methodology, { 'report_secondary_type_id': item.id });
+            var r = $filter('filter')($scope.model.report_investigation_methodology, { 'report_secondary_type_id': item.id }, true);
             if (r.length !== 0) {
-                r = $filter('filter')($scope.model.company_root_cases_behavioral, { 'id': r[0].company_root_cases_behavioral_id });
+                r = $filter('filter')($scope.model.company_root_cases_behavioral, { 'id': r[0].company_root_cases_behavioral_id }, true);
                 if (r.length !== 0) {
                     return r[0].name_en;
                 }
@@ -122,9 +121,9 @@
         };
 
         $scope.getExternalInfluences = function (item) {
-            var r = $filter('filter')($scope.model.report_investigation_methodology, { 'report_secondary_type_id': item.id });
+            var r = $filter('filter')($scope.model.report_investigation_methodology, { 'report_secondary_type_id': item.id }, true);
             if (r.length !== 0) {
-                r = $filter('filter')($scope.model.company_root_cases_external, { 'id': r[0].company_root_cases_external_id });
+                r = $filter('filter')($scope.model.company_root_cases_external, { 'id': r[0].company_root_cases_external_id }, true);
                 if (r.length !== 0) {
                     return r[0].name_en;
                 }
@@ -134,9 +133,9 @@
         };
 
         $scope.getCampusInfluences = function (item) {
-            var r = $filter('filter')($scope.model.report_investigation_methodology, { 'report_secondary_type_id': item.id });
+            var r = $filter('filter')($scope.model.report_investigation_methodology, { 'report_secondary_type_id': item.id }, true);
             if (r.length !== 0) {
-                r = $filter('filter')($scope.model.company_root_cases_organizational, { 'id': r[0].company_root_cases_organizational_id });
+                r = $filter('filter')($scope.model.company_root_cases_organizational, { 'id': r[0].company_root_cases_organizational_id }, true);
                 if (r.length !== 0) {
                     return r[0].name_en;
                 }

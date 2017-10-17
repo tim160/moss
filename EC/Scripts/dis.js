@@ -59,7 +59,7 @@
         };
     });
 
-    angular.module('EC').directive('dropbox', function ($compile) {
+    angular.module('EC').directive('dropbox', function () {
         var directive = {};
 
         directive.restrict = 'E';
@@ -80,9 +80,6 @@
             textexpr: '=ngDropboxTextexpr',
             rootitem: '=ngDropboxRootitem',
             onSelect: '=ngDropboxOnSelect',
-        };
-
-        directive.link = function (scope, element, attr) {
         };
 
         return directive;
@@ -133,7 +130,7 @@
             CasesService.get({ ReportFlag: mode, Preload: preload }, function (data) {
                 $('.headerBlockTextRight > span').text(data.Title);
                 for (var i = 0; i < data.Reports.length; i++) {
-                    var r = $filter('filter')(data.ReportsAdv, { 'id': data.Reports[i].report_id });
+                    var r = $filter('filter')(data.ReportsAdv, { 'id': data.Reports[i].report_id }, true);
                     if ((r != null) && (r.length > 0)) {
                         data.Reports[i].AdvInfo = r[0];
                         data.Reports[i].total_days = r[0].total_days;
@@ -143,7 +140,7 @@
                         data.Reports[i].severity_s = r[0].severity_s;
                     }
 
-                    var r = $filter('filter')(data.Users, { 'id': data.Reports[i].last_sender_id });
+                    var r = $filter('filter')(data.Users, { 'id': data.Reports[i].last_sender_id }, true);
                     r = r.length === 0 ? null : r[0];
                     if (r === null) {
                         r = {
@@ -155,7 +152,7 @@
                     r.sb_full_name = (r.first_nm + ' ' + r.last_nm).replace(' ', '_');
                     data.Reports[i].Last_sender = r;
 
-                    var r = $filter('filter')(data.Users, { 'id': data.Reports[i].previous_sender_id });
+                    var r = $filter('filter')(data.Users, { 'id': data.Reports[i].previous_sender_id }, true);
                     r = r.length === 0 ? null : r[0];
                     if (r === null) {
                         r = {
@@ -331,7 +328,7 @@
             data.report_cc_crime.cc_is_clear_act_crime = '' + data.report_cc_crime.cc_is_clear_act_crime;
             for (var i = 0; i < data.report_case_closure_outcomes.length; i++) {
                 var r = $filter('filter')(data.report_non_mediator_involveds,
-                    { 'id': data.report_case_closure_outcomes[i].non_mediator_involved_id });
+                    { 'id': data.report_case_closure_outcomes[i].non_mediator_involved_id }, true);
                 if (r.length !== 0) {
                     data.report_case_closure_outcomes[i].user = r[0];
                 }
@@ -394,7 +391,7 @@
                 data.report_secondary_type_selected[i].inv_meth_ci_note = '';
 
                 var r = $filter('filter')(data.report_investigation_methodology,
-                    { 'report_secondary_type_id': data.report_secondary_type_selected[i].id });
+                    { 'report_secondary_type_id': data.report_secondary_type_selected[i].id }, true);
                 if (r.length !== 0) {
                     data.report_secondary_type_selected[i].inv_meth_bf_note =
                         r[0].company_root_cases_behavioral_note === null ? '' : r[0].company_root_cases_behavioral_note;
@@ -473,10 +470,9 @@
         };
 
         $scope.getBehavioralFactors = function (item) {
-            console.log(item);
-            var r = $filter('filter')($scope.model.report_investigation_methodology, { 'report_secondary_type_id': item.id });
+            var r = $filter('filter')($scope.model.report_investigation_methodology, { 'report_secondary_type_id': item.id }, true);
             if (r.length !== 0) {
-                r = $filter('filter')($scope.model.company_root_cases_behavioral, { 'id': r[0].company_root_cases_behavioral_id });
+                r = $filter('filter')($scope.model.company_root_cases_behavioral, { 'id': r[0].company_root_cases_behavioral_id }, true);
                 if (r.length !== 0) {
                     return r[0].name_en;
                 }
@@ -485,9 +481,9 @@
         };
 
         $scope.getExternalInfluences = function (item) {
-            var r = $filter('filter')($scope.model.report_investigation_methodology, { 'report_secondary_type_id': item.id });
+            var r = $filter('filter')($scope.model.report_investigation_methodology, { 'report_secondary_type_id': item.id }, true);
             if (r.length !== 0) {
-                r = $filter('filter')($scope.model.company_root_cases_external, { 'id': r[0].company_root_cases_external_id });
+                r = $filter('filter')($scope.model.company_root_cases_external, { 'id': r[0].company_root_cases_external_id }, true);
                 if (r.length !== 0) {
                     return r[0].name_en;
                 }
@@ -497,9 +493,9 @@
         };
 
         $scope.getCampusInfluences = function (item) {
-            var r = $filter('filter')($scope.model.report_investigation_methodology, { 'report_secondary_type_id': item.id });
+            var r = $filter('filter')($scope.model.report_investigation_methodology, { 'report_secondary_type_id': item.id }, true);
             if (r.length !== 0) {
-                r = $filter('filter')($scope.model.company_root_cases_organizational, { 'id': r[0].company_root_cases_organizational_id });
+                r = $filter('filter')($scope.model.company_root_cases_organizational, { 'id': r[0].company_root_cases_organizational_id }, true);
                 if (r.length !== 0) {
                     return r[0].name_en;
                 }
@@ -682,11 +678,11 @@
         };
 
         $scope.typeName = function (id) {
-            return $filter('filter')($scope.types, { 'id': id })[0];
+            return $filter('filter')($scope.types, { 'id': id }, true)[0];
         };
 
         $scope.locationName = function (id) {
-            return $filter('filter')($scope.locations, { 'id': id })[0];
+            return $filter('filter')($scope.locations, { 'id': id }, true)[0];
         };
 
         $scope.changeLine = function (line) {
