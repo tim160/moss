@@ -21,10 +21,6 @@
         $scope.report_id = $location.search().report_id;
 
         $scope.refresh = function (data) {
-            //data.report_secondary_type_selected_avilable.splice(0, 0, { id: 0, secondary_type_en: 'Please select' });
-            //data.mediator_all.splice(0, 0, { id: 0, first_nm: 'Please select' });
-            //data.departments_all.splice(0, 0, { id: 0, department_en: 'Please select' });
-
             data.incidentTypeAdd = 0;
             data.mediatorAdd = 0;
             data.departmentAdd = 0;
@@ -82,9 +78,9 @@
             });
         };
 
-        $scope.departmentAdd = function () {
+        $scope.departmentAdd = function (item) {
             $scope.departmentAddMode = false;
-            var param = { report_id: $scope.report_id, department_add: $scope.model.departmentAdd };
+            var param = { report_id: $scope.report_id, department_add: item.id };
             NewCaseInvestigationNotesService.post(param, function (data) {
                 $scope.refresh(data);
             });
@@ -114,6 +110,7 @@
         };
 
         $scope.getBehavioralFactors = function (item) {
+            console.log(item);
             var r = $filter('filter')($scope.model.report_investigation_methodology, { 'report_secondary_type_id': item.id });
             if (r.length !== 0) {
                 r = $filter('filter')($scope.model.company_root_cases_behavioral, { 'id': r[0].company_root_cases_behavioral_id });
@@ -121,7 +118,6 @@
                     return r[0].name_en;
                 }
             }
-
             return 'Select Behavioral Factors';
         };
 

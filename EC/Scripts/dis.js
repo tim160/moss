@@ -5,6 +5,7 @@
 
     angular.module('EC', [
         'ngResource',
+        'ngAnimate',
 
         'EC',
     ]);
@@ -58,6 +59,50 @@
         };
     });
 
+    angular.module('EC').directive('dropbox', function ($compile) {
+        var directive = {};
+
+        directive.restrict = 'E';
+
+        directive.template = function (elem, attr) {
+            var html = '<div class="select" ng-click="active = !active">';
+            html += '<a href="#" class="slct" ng-class="{ active: active }">' + (attr.text || '{{textexpr}}') + '</a>';
+            html += '<ul class="drop slide" ng-class="{ active: active }">';
+            html += '<li ng-repeat="item in list" ng-click="onSelect(rootitem == null ? item : rootitem, item)">';
+            html += '<a href="">' + attr.itemtext + '</a>';
+            html += '</li></ul>';
+            html += '</div>';
+            return html;
+        };
+
+        directive.scope = {
+            list: '=ngDropboxList',
+            textexpr: '=ngDropboxTextexpr',
+            rootitem: '=ngDropboxRootitem',
+            onSelect: '=ngDropboxOnSelect',
+        };
+
+        directive.link = function (scope, element, attr) {
+        };
+
+        return directive;
+    });
+
+    angular.module('EC').animation('.slide', function () {
+        var NG_HIDE_CLASS = 'active';
+        return {
+            beforeAddClass: function (element, className, done) {
+                if (className === NG_HIDE_CLASS) {
+                    element.slideDown(done);
+                }
+            },
+            removeClass: function (element, className, done) {
+                if (className === NG_HIDE_CLASS) {
+                    element.slideUp(done);
+                }
+            }
+        };
+    });
 })();
 
 
@@ -339,10 +384,6 @@
         $scope.report_id = $location.search().report_id;
 
         $scope.refresh = function (data) {
-            //data.report_secondary_type_selected_avilable.splice(0, 0, { id: 0, secondary_type_en: 'Please select' });
-            //data.mediator_all.splice(0, 0, { id: 0, first_nm: 'Please select' });
-            //data.departments_all.splice(0, 0, { id: 0, department_en: 'Please select' });
-
             data.incidentTypeAdd = 0;
             data.mediatorAdd = 0;
             data.departmentAdd = 0;
@@ -400,9 +441,9 @@
             });
         };
 
-        $scope.departmentAdd = function () {
+        $scope.departmentAdd = function (item) {
             $scope.departmentAddMode = false;
-            var param = { report_id: $scope.report_id, department_add: $scope.model.departmentAdd };
+            var param = { report_id: $scope.report_id, department_add: item.id };
             NewCaseInvestigationNotesService.post(param, function (data) {
                 $scope.refresh(data);
             });
@@ -432,6 +473,7 @@
         };
 
         $scope.getBehavioralFactors = function (item) {
+            console.log(item);
             var r = $filter('filter')($scope.model.report_investigation_methodology, { 'report_secondary_type_id': item.id });
             if (r.length !== 0) {
                 r = $filter('filter')($scope.model.company_root_cases_behavioral, { 'id': r[0].company_root_cases_behavioral_id });
@@ -439,7 +481,6 @@
                     return r[0].name_en;
                 }
             }
-
             return 'Select Behavioral Factors';
         };
 

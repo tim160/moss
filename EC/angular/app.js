@@ -5,6 +5,7 @@
 
     angular.module('EC', [
         'ngResource',
+        'ngAnimate',
 
         'EC',
     ]);
@@ -58,5 +59,49 @@
         };
     });
 
+    angular.module('EC').directive('dropbox', function ($compile) {
+        var directive = {};
+
+        directive.restrict = 'E';
+
+        directive.template = function (elem, attr) {
+            var html = '<div class="select" ng-click="active = !active">';
+            html += '<a href="#" class="slct" ng-class="{ active: active }">' + (attr.text || '{{textexpr}}') + '</a>';
+            html += '<ul class="drop slide" ng-class="{ active: active }">';
+            html += '<li ng-repeat="item in list" ng-click="onSelect(rootitem == null ? item : rootitem, item)">';
+            html += '<a href="">' + attr.itemtext + '</a>';
+            html += '</li></ul>';
+            html += '</div>';
+            return html;
+        };
+
+        directive.scope = {
+            list: '=ngDropboxList',
+            textexpr: '=ngDropboxTextexpr',
+            rootitem: '=ngDropboxRootitem',
+            onSelect: '=ngDropboxOnSelect',
+        };
+
+        directive.link = function (scope, element, attr) {
+        };
+
+        return directive;
+    });
+
+    angular.module('EC').animation('.slide', function () {
+        var NG_HIDE_CLASS = 'active';
+        return {
+            beforeAddClass: function (element, className, done) {
+                if (className === NG_HIDE_CLASS) {
+                    element.slideDown(done);
+                }
+            },
+            removeClass: function (element, className, done) {
+                if (className === NG_HIDE_CLASS) {
+                    element.slideUp(done);
+                }
+            }
+        };
+    });
 })();
 

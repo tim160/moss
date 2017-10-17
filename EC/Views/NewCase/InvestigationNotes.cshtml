@@ -52,16 +52,16 @@
                         {{item.secondary_type_en}}
                     </li>
                 </ul>
-                <a href="#" class="green--button incident-types--button" ng-show="!incidentTypeAddMode" ng-click="incidentTypeAddMode = !incidentTypeAddMode">Add incident type</a>
-                <div class="select" ng-show="incidentTypeAddMode">
-                    <a href="#" class="slct">Select one</a>
-                    <ul class="drop">
-                        <li ng-repeat="item in model.report_secondary_type_selected_avilable">
-                            <a href="" ng-click="incidentTypeAdd(item)">{{item.secondary_type_en}}</a>
-                        </li>
-                    </ul>
-                    <input type="hidden" id="select">
-                </div>
+                <a href="#" class="green--button incident-types--button" ng-show="!incidentTypeAddMode && model.report_secondary_type_selected_avilable.length > 0" ng-click="incidentTypeAddMode = !incidentTypeAddMode">
+                Add incident type
+                </a>
+                <dropbox ng-show="incidentTypeAddMode"
+                         text="Select one"
+                         itemText="{{item.secondary_type_en}}"
+                         ng-dropbox-list="model.report_secondary_type_selected_avilable"
+                         ng-dropbox-rootItem=""
+                         ng-dropbox-on-select="incidentTypeAdd">
+                </dropbox>
             </div>
             <div class="item">
                 <p class="fact-title">Involved Parties</p>
@@ -71,30 +71,33 @@
                         {{item.first_nm}} {{item.last_nm}}
                     </li>                    
                 </ul>
-                <a href="#" class="green--button incident-types--button" ng-show="!mediatorAddMode" ng-click="mediatorAddMode = !mediatorAddMode">Add person</a>
-                <div class="select" ng-show="mediatorAddMode">
-                    <a href="#" class="slct">Select one</a>
-                    <ul class="drop">
-                        <li ng-repeat="item in model.mediator_all">
-                            <a href="" ng-click="mediatorAdd(item)">{{item.first_nm}} {{item.last_nm}}</a>
-                        </li>
-                    </ul>
-                    <input type="hidden" id="select">
-                </div>
+                <a href="#" class="green--button incident-types--button" ng-show="!mediatorAddMode && model.mediator_all.length > 0" ng-click="mediatorAddMode = !mediatorAddMode">Add person</a>
+                <dropbox ng-show="mediatorAddMode"
+                         text="Select one"
+                         itemText="{{item.first_nm}} {{item.last_nm}}"
+                         ng-dropbox-list="model.mediator_all"
+                         ng-dropbox-rootItem=""
+                         ng-dropbox-on-select="mediatorAdd">
+                </dropbox>
             </div>
             <div class="item">
                 <p class="fact-title">Involved Departments</p>
                 <ul>
-                    <li>Academic Affairs</li>
+                    <li ng-repeat="item in model.departments_report">
+                        <a href="#" ng-click="departmentDelete(item.id)" ng-show="!item.added_by_reporter">X</a>
+                        {{item.name}}
+                    </li>
                 </ul>
-                <div class="select">
-                    <a href="#" class="slct">Select one</a>
-                    <ul class="drop">
-                        <li><a href="">Select one</a></li>
-                        <li><a href="">Select one</a></li>
-                    </ul>
-                    <input type="hidden" id="select">
-                </div>
+                <a href="#" class="green--button incident-types--button" ng-show="!departmentAddMode && model.departments_all.length > 0" ng-click="departmentAddMode = !departmentAddMode">
+                    Add department
+                </a>
+                <dropbox ng-show="departmentAddMode"
+                         text="Select one"
+                         itemText="{{item.department_en}}"
+                         ng-dropbox-list="model.departments_all"
+                         ng-dropbox-rootItem=""
+                         ng-dropbox-on-select="departmentAdd">
+                </dropbox>
             </div>
         </div>
 
@@ -102,8 +105,8 @@
         <div class="border-top facts-margin facts-padding facts-established">
             <p class="fact-title">Facts Established</p>
             <div class="">
-                <div class="facts-established--text"> </div>
-                <a href="#" class="green--button facts--submit">save</a>
+                <textarea class="facts-established--text" ng-model="model.note1" ng-change="isEditNote1 = true"></textarea>
+                <a href="#" class="green--button facts--submit" ng-click="saveNote(1)" ng-show="isEditNote1">save</a>
             </div>
         </div>
 
@@ -111,8 +114,8 @@
         <div class="border-top facts-margin facts-padding facts-established">
             <p class="fact-title">Investigation Methodology</p>
             <div class="">
-                <div class="facts-established--text"> </div>
-                <a href="#" class="green--button facts--submit">save</a>
+                <textarea class="facts-established--text" ng-model="model.note2" ng-change="isEditNote2 = true"></textarea>
+                <a href="#" class="green--button facts--submit" ng-click="saveNote(2)" ng-show="isEditNote2">save</a>
             </div>
         </div>
 
@@ -120,85 +123,43 @@
         <div class="border-top facts-margin facts-padding ">
             <p class="fact-title">Root Cause Investigation</p>
             <!--Academic Misconduct-->
-            <div class="investigation flex space-between">
-                <div class="investigation--title">Academic Misconduct</div>
+            <div class="investigation flex space-between" ng-repeat="item in model.report_secondary_type_selected">
+                <div class="investigation--title">{{item.secondary_type_en}}</div>
                 <div class="investigation__item flex flex-column">
                     <div class="investigation__inner">
-                        <div class="select">
-                            <a href="#" class="slct">Select Behavioral Factors</a>
-                            <ul class="drop">
-                                <li><a href="">Select Behavioral Factors</a></li>
-                                <li><a href="">Select Behavioral Factors</a></li>
-                            </ul>
-                            <input type="hidden" id="select">
-                        </div>
+                        <dropbox ng-dropbox-textExpr="getBehavioralFactors(item)" 
+                                 itemText="{{item.name_en}}"
+                                 ng-dropbox-list="model.company_root_cases_behavioral"
+                                 ng-dropbox-rootItem="item"
+                                 ng-dropbox-on-select="changeBehavioralFactors"
+                                 >
+                        </dropbox>
                         <a href="#" class="green--button investigation__item--submit">add note</a>
                     </div>
                     <div class="investigation__inner">
-                        <div class="select">
-                            <a href="#" class="slct">Select External Influences</a>
-                            <ul class="drop">
-                                <li><a href="">Select External Influences</a></li>
-                                <li><a href="">Select External Influences</a></li>
-                            </ul>
-                            <input type="hidden" id="select">
-                        </div>
+                        <dropbox ng-dropbox-textExpr="getExternalInfluences(item)"
+                                 itemText="{{item.name_en}}"
+                                 ng-dropbox-list="model.company_root_cases_external"
+                                 ng-dropbox-rootItem="item"
+                                 ng-dropbox-on-select="changeExternalInfluences"
+                                 >
+                        </dropbox>
                         <a href="#" class="green--button investigation__item--submit">add note</a>
                     </div>
                     <div class="investigation__inner">
-                        <div class="select">
-                            <a href="#" class="slct">Select Campus Influences </a>
-                            <ul class="drop">
-                                <li><a href="">Select Campus Influences </a></li>
-                                <li><a href="">Select Campus Influences </a></li>
-                            </ul>
-                            <input type="hidden" id="select">
-                        </div>
+                        <dropbox 
+                                 ng-dropbox-textExpr="getCampusInfluences(item)"
+                                 itemText="{{item.name_en}} {{item.id}}"
+                                 ng-dropbox-list="model.company_root_cases_organizational"
+                                 ng-dropbox-rootItem="item"
+                                 ng-dropbox-on-select="changeCampusInfluences">
+                        </dropbox>
                         <a href="#" class="green--button investigation__item--submit">add note</a>
                     </div>
 
                 </div>
             </div>
-            <!--Fraudalent Activities-->
-            <div class="investigation flex space-between">
-                <div class="investigation--title">Fraudalent Activities</div>
-                <div class="investigation__item flex flex-column">
-                    <div class="investigation__inner">
-                        <div class="select">
-                            <a href="#" class="slct">Alcohol consumption </a>
-                            <ul class="drop">
-                                <li><a href="">Alcohol consumption </a></li>
-                                <li><a href="">Alcohol consumption </a></li>
-                            </ul>
-                            <input type="hidden" id="select">
-                        </div>
-                        <a href="#" class="green--button investigation__item--submit">add note</a>
-                    </div>
-                    <div class="investigation__inner">
-                        <div class="select">
-                            <a href="#" class="slct">Select External Influences</a>
-                            <ul class="drop">
-                                <li><a href="">Select External Influences</a></li>
-                                <li><a href="">Select External Influences</a></li>
-                            </ul>
-                            <input type="hidden" id="select">
-                        </div>
-                        <a href="#" class="green--button investigation__item--submit">add note</a>
-                    </div>
-                    <div class="investigation__inner">
-                        <div class="select">
-                            <a href="#" class="slct">Select Campus Influences </a>
-                            <ul class="drop">
-                                <li><a href="">Select Campus Influences </a></li>
-                                <li><a href="">Select Campus Influences </a></li>
-                            </ul>
-                            <input type="hidden" id="select">
-                        </div>
-                        <a href="#" class="green--button investigation__item--submit">add note</a>
-                    </div>
-
-                </div>
-            </div>
+       
         </div>
     </div>
 
@@ -380,7 +341,7 @@
             <div class="row">
                 <p class="col-md-3">{{item.secondary_type_en}}</p>
                 <div class="dropdown col-md-5">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{getBehavioralFactors(item)}}</a>
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">getBehavioralFactors(item)</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown01">
                         <a class="dropdown-item" href="#" ng-repeat="item2 in model.company_root_cases_behavioral" ng-click="changeBehavioralFactors(item, item2)">{{item2.name_en}}</a>
                     </div>
@@ -435,4 +396,4 @@
         </div>
     </div> <!-- /container -->
 
-<script src="@Url.Content("~/Content/assets/template/js/select.js")"></script>
+@*<script src="@Url.Content("~/Content/assets/template/js/select.js")"></script>*@
