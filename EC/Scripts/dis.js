@@ -431,8 +431,8 @@
             });
         };
 
-        $scope.mediatorDelete = function (id) {
-            var param = { report_id: $scope.report_id, mediator_delete: id };
+        $scope.mediatorDelete = function (id, mode) {
+            var param = { report_id: $scope.report_id, mediator_delete: id, mode: mode };
             NewCaseInvestigationNotesService.post(param, function (data) {
                 $scope.refresh(data);
             });
@@ -544,6 +544,19 @@
         $scope.saveNoteCampusInfluences = function (item) {
             item.campusInfluencesEditMode = false;
             var param = { report_id: $scope.report_id, inv_meth_st_id: item.id, inv_meth_ci_note: item.inv_meth_ci_note, };
+            NewCaseInvestigationNotesService.post(param, function (data) {
+                $scope.refresh(data);
+            });
+        };
+
+        $scope.addNewPerson = function () {
+            $scope.mediatorAddMode = false;
+            var param = {
+                report_id: $scope.report_id,
+                addPersonFirstName: $scope.model.addPersonFirstName,
+                addPersonLastName: $scope.model.addPersonLastName,
+                addPersonTitle: $scope.model.addPersonTitle,
+            };
             NewCaseInvestigationNotesService.post(param, function (data) {
                 $scope.refresh(data);
             });

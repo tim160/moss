@@ -28,6 +28,8 @@ namespace EC.Controllers.API
 
             public int? Mediator_add { get; set; }
             public int? Mediator_delete { get; set; }
+            public int? Mode { get; set; }
+            
 
             public int? Department_add { get; set; }
             public int? Department_delete { get; set; }
@@ -44,6 +46,11 @@ namespace EC.Controllers.API
             public string inv_meth_ei_note { get; set; }
             public string inv_meth_ci_note { get; set; }
 
+
+            /* ADD NEW PERSON */
+            public string addPersonFirstName { get; set; }
+            public string addPersonLastName { get; set; }
+            public string addPersonTitle { get; set; }
         }
 
         [HttpGet]
@@ -76,6 +83,10 @@ namespace EC.Controllers.API
             var mediator_involved = DB.report_mediator_involved
                 .Where(x => x.report_id == filter.Report_id & x.status_id == 2)
                 .ToList();
+
+            var mediator_not_involved = DB.report_non_mediator_involved
+                .Where(x => x.report_id == filter.Report_id)
+                .ToList();            
 
             var mediator_assigned = DB.report_mediator_assigned
                 .Where(x => x.report_id == filter.Report_id & x.status_id == 2)
@@ -110,6 +121,8 @@ namespace EC.Controllers.API
                         last_nm = x.last_nm,
                         added_by_reporter = mediator_involved.FirstOrDefault(z => z.mediator_id == x.id).added_by_reporter,
                     }).ToList(),
+
+                mediator_not_involved = mediator_not_involved,
 
                 mediator_all = all_mediators
                     .Where(x => !mediator_involved.Select(z => z.mediator_id).Contains(x.id) & !mediator_assigned.Select(z => z.mediator_id).Contains(x.id))
@@ -228,8 +241,16 @@ namespace EC.Controllers.API
 
             if (filter.Mediator_delete.HasValue)
             {
-                var model = DB.report_mediator_involved.FirstOrDefault(x => x.report_id == filter.Report_id & x.mediator_id == filter.Mediator_delete.Value & x.added_by_reporter == false);
-                model.status_id = 1;
+                if (filter.Mode == 2)
+                {
+                    var model = DB.report_non_mediator_involved.FirstOrDefault(x => x.report_id == filter.Report_id & x.id == filter.Mediator_delete.Value);
+                    DB.report_non_mediator_involved.Remove(model);
+                }
+                else
+                {
+                    var model = DB.report_mediator_involved.FirstOrDefault(x => x.report_id == filter.Report_id & x.mediator_id == filter.Mediator_delete.Value & x.added_by_reporter == false);
+                    model.status_id = 1;
+                }
                 DB.SaveChanges();
             }
 
@@ -330,6 +351,23 @@ namespace EC.Controllers.API
                 }
 
                 DB.SaveChanges();
+            }
+
+            if (filter.addPersonFirstName != null)
+            {
+                var item = DB.report_non_mediator_involved.FirstOrDefault(x => x.report_id == filter.Report_id & x.Name == filter.addPersonFirstName & x.last_name == filter.addPersonLastName & x.Title == filter.addPersonTitle);
+                if (item == null)
+                {
+                    DB.report_non_mediator_involved.Add(new report_non_mediator_involved
+                    {
+                        created_dt = DateTime.Now,
+                        last_name = filter.addPersonLastName,
+                        Name = filter.addPersonFirstName,
+                        report_id = filter.Report_id,
+                        Title = filter.addPersonTitle,
+                    });
+                    DB.SaveChanges();
+                }
             }
 
             return Get(filter);

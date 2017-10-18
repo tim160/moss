@@ -1,4 +1,6 @@
-﻿@using EC.Models.Database;
+﻿@using EC.App_LocalResources
+@using EC.Models.Database;
+
 @{
     var report_id = (Int32)ViewBag.report_id;
     var user_id = (Int32)ViewBag.user_id;
@@ -92,23 +94,52 @@
                         <a href="#" ng-click="mediatorDelete(item.id)" ng-show="!item.added_by_reporter">X</a>
                         {{item.first_nm}} {{item.last_nm}}
                     </li>
+                    <li ng-repeat="item in model.mediator_not_involved">
+                        <a href="#" ng-click="mediatorDelete(item.id, 2)" ng-show="!item.added_by_reporter">X</a>
+                        {{item.Name}} {{item.last_name}}
+                    </li>                    
                 </ul>
-                <a href="#" class="green--button incident-types--button" ng-show="!mediatorAddMode && model.mediator_all.length > 0" ng-click="mediatorAddMode = !mediatorAddMode">Add person</a>
-                <dropbox ng-show="mediatorAddMode"
+                <a href="#" class="green--button incident-types--button" ng-show="!mediatorAddMode" ng-click="mediatorAddMode = !mediatorAddMode">Add person</a>
+                <dropbox ng-show="mediatorAddMode && model.mediator_all.length > 0"
                          text="Select one"
                          itemText="{{item.first_nm}} {{item.last_nm}}"
                          ng-dropbox-list="model.mediator_all"
                          ng-dropbox-rootItem=""
                          ng-dropbox-on-select="mediatorAdd">
                 </dropbox>
+                <div ng-show="mediatorAddMode">
+                    <div class="addPerson">
+                        <div class="addPersonName sampleContainer">
+                            <div class="personTitle title">@GlobalRes.FirstNameUp</div>
+                            <div class="personData">
+                                <input name="personName" class="personDataTextBox fName" ng-model="model.addPersonFirstName" />
+                            </div>
+                        </div>
+
+                        <div class="addPersonName sampleContainer">
+                            <div class="personTitle title">@GlobalRes.LastNameUp</div>
+                            <div class="personData">
+                                <input name="personLastName" class="personDataTextBox lName" ng-model="model.addPersonLastName" />
+                            </div>
+                        </div>
+
+                        <div class="addPersonInfo sampleContainer">
+                            <div class="personTitle title">@GlobalRes.Title</div>
+                            <div class="personData">
+                                <input type="text" name="personTitle" class="personDataTextBox witnessTitle" ng-model="model.addPersonTitle" />
+                            </div>
+                        </div>
+                        <a href="#" class="green--button incident-types--button" ng-click="addNewPerson()">@GlobalRes.AddPerson</a>
+                    </div>
+                </div>
             </div>
         </div>
         <!--Facts Established-->
         <div class="border-top facts-margin facts-padding facts-established">
             <p class="fact-title">Facts Established</p>
             <div class="">
-                <div class="facts-established--text"> </div>
-                <a href="#" class="green--button facts--submit">save</a>
+                <textarea class="facts-established--text" ng-model="model.note1"> </textarea>
+                <a href="#" class="green--button facts--submit" ng-click="saveNote(1)">save</a>
             </div>
         </div>
 
@@ -116,8 +147,8 @@
         <div class="border-top facts-margin facts-padding facts-established">
             <p class="fact-title">Investigation Methodology</p>
             <div class="">
-                <div class="facts-established--text"> </div>
-                <a href="#" class="green--button facts--submit">save</a>
+                <textarea class="facts-established--text" ng-model="model.note2"> </textarea>
+                <a href="#" class="green--button facts--submit" ng-click="saveNote(2)">save</a>
             </div>
         </div>
 
@@ -136,7 +167,14 @@
                                  ng-dropbox-rootItem="item"
                                  ng-dropbox-on-select="changeBehavioralFactors">
                         </dropbox>
-                        <a href="#" class="green--button investigation__item--submit">add note</a>
+                        <textarea cols="20" rows="5" ng-model="item.inv_meth_bf_note" ng-show="item.behavioralEditMode"></textarea>
+                        <p ng-show="!item.behavioralEditMode">{{item.inv_meth_bf_note}}</p>
+                        <a href="#" class="green--button investigation__item--submit" ng-click="item.behavioralEditMode = !item.behavioralEditMode" ng-show="!item.behavioralEditMode">
+                            {{item.inv_meth_bf_note != '' ? 'Edit note' : 'Add note'}}
+                        </a>
+                        <a href="#" class="green--button investigation__item--submit" ng-show="item.behavioralEditMode" ng-click="saveNoteBehavioralFactors(item)">
+                            Save
+                        </a>
                     </div>
                     <div class="investigation__inner">
                         <dropbox ng-dropbox-textExpr="getExternalInfluences(item)"
@@ -145,7 +183,14 @@
                                  ng-dropbox-rootItem="item"
                                  ng-dropbox-on-select="changeExternalInfluences">
                         </dropbox>
-                        <a href="#" class="green--button investigation__item--submit">add note</a>
+                        <textarea ng-model="item.inv_meth_ei_note" ng-show="item.externalInfluencesEditMode"></textarea>
+                        <p ng-show="!item.externalInfluencesEditMode">{{item.inv_meth_ei_note}}</p>
+                        <span class="green--button investigation__item--submit" ng-click="item.externalInfluencesEditMode = !item.externalInfluencesEditMode" ng-show="!item.externalInfluencesEditMode">
+                            {{item.inv_meth_ei_note != '' ? 'Edit note' : 'Add note'}}
+                        </span>
+                        <a href="#" class="green--button investigation__item--submit" ng-show="item.externalInfluencesEditMode" ng-click="saveNoteExternalInfluences(item)">
+                            Save
+                        </a>
                     </div>
                     <div class="investigation__inner">
                         <dropbox ng-dropbox-textExpr="getCampusInfluences(item)"
@@ -154,7 +199,14 @@
                                  ng-dropbox-rootItem="item"
                                  ng-dropbox-on-select="changeCampusInfluences">
                         </dropbox>
-                        <a href="#" class="green--button investigation__item--submit">add note</a>
+                        <textarea ng-model="item.inv_meth_ci_note" ng-show="item.campusInfluencesEditMode"></textarea>
+                        <p ng-show="!item.campusInfluencesEditMode">{{item.inv_meth_ci_note}}</p>
+                        <span class="green--button investigation__item--submit" ng-click="item.campusInfluencesEditMode = !item.campusInfluencesEditMode" ng-show="!item.campusInfluencesEditMode">
+                            {{item.inv_meth_ci_note != '' ? 'Edit note' : 'Add note'}}
+                        </span>
+                        <a href="#" class="green--button investigation__item--submit" ng-show="item.campusInfluencesEditMode" ng-click="saveNoteCampusInfluences(item)">
+                            Save
+                        </a>
                     </div>
 
                 </div>
@@ -162,237 +214,8 @@
         </div>
     </div>
 
-    <!--Fraudalent Activities-->
-    <div class="panel left">
-        <a class="ninja-btn close-btn"><img src="assets/template/img/close.png" alt="close"></a>
-        <!--Report summary-->
-        <div class="report-summary">
-            <p class="sidebar-title">Report summary</p>
-            <div class="reported">
-                <p><span>Reported:</span> 25 January 2015</p>
-                <p><span>Total time:</span> 38 days</p>
-            </div>
-            <div class="sidebar-investigation">
-                Investigation: <span class="investigation-days">31 days</span> <span class="investigation-daysleft">4 days left</span>
-            </div>
-            <a href="#" class="green--button contact-reporter">CONTACT REPORTER</a>
-        </div>
-        <!--General information-->
-        <div class="general-information sibebar-border">
-            <p class="sidebar-subtitle">General information</p>
-            <ul>
-                <li>
-                    Reporting from:
-                    <p>Canada</p>
-                </li>
-                <li>
-                    Reporter would like to stay:
-                    <p>Anonymous to STARK Enterprizes</p>
-                </li>
-                <li>
-                    Reporter is:
-                    <p>Former employee</p>
-                </li>
-                <li>
-                    The incident happened in:
-                    <p>Stark Tower, NY</p>
-                </li>
-                <li>
-                    Affected departments:
-                    <p>Sales, Accounting</p>
-                </li>
-                <li>
-                    <p></p>
-                </li>
-            </ul>
-        </div>
-        <!--Parties involved-->
-        <div class="general-information sibebar-border">
-            <p class="sidebar-subtitle">Parties involved</p>
-            <ul>
-                <li>
-                    <b>Stan Lee,</b> Title unknown
-                    <p>Witness</p>
-                </li>
-                <li>
-                    The management doesn’t know about the incident
-                </li>
-            </ul>
-        </div>
-
-        <!--Case information-->
-        <div class="general-information sibebar-border">
-            <p class="sidebar-subtitle">Case information</p>
-            <ul>
-                <li>
-                    Reporting about:
-                    <p>Theft</p>
-                </li>
-                <li>
-                    Date:
-                    <p>23 Dec 2014</p>
-                </li>
-                <li>
-                    Incident description:
-                    <p>
-                        Recently constructed by Bruce Cole, it is powered by its own independent arc reactor, capable of sustaining the tower for a year without any cost to the city. The tower's unique power sustainability inspires Loki to select the tower as the prime location to harness the Tesseract and open a wormhole to draw his army to Earth. After the battle between Loki's forces and the Avengers, the upper levels of the tower are destroyed, along with the majority of the 'STARK' insignia that adorned one side of the tower ( the only remaining letter is an 'A', as a nod to the Avengers).
-                    </p>
-                </li>
-            </ul>
-        </div>
-    </div>
     <div class="panel-overlay"></div>
 
 </section>
-
-<div class="container" ng-controller="NewCaseInvestigationNotesController">
-    <!-- Example row of columns -->
-    <div class="row">
-        <div class="col-md-4">
-            <h2>Incident types</h2>
-            <p ng-repeat="item in model.report_secondary_type_selected">
-                <a href="#" ng-click="incidentTypeDelete(item.id)" ng-show="!item.added_by_reporter">X</a>
-                {{item.secondary_type_en}}
-            </p>
-            <span class="acceptCaseBtnClass" ng-show="!incidentTypeAddMode" ng-click="incidentTypeAddMode = !incidentTypeAddMode">
-                Add incident type
-            </span>
-            <select ng-change="incidentTypeAdd()"
-                    ng-show="incidentTypeAddMode"
-                    ng-model="model.incidentTypeAdd"
-                    ng-options="item.id as item.secondary_type_en for item in model.report_secondary_type_selected_avilable"></select>
-        </div>
-        <div class="col-md-4">
-            <h2>Involved Parties</h2>
-            <p ng-repeat="item in model.mediator_involved">
-                <a href="#" ng-click="mediatorDelete(item.id)" ng-show="!item.added_by_reporter">X</a>
-                {{item.first_nm}} {{item.last_nm}}
-            </p>
-            <span class="acceptCaseBtnClass" ng-show="!mediatorAddMode" ng-click="mediatorAddMode = !mediatorAddMode">
-                Add person
-            </span>
-            <select ng-change="mediatorAdd()"
-                    ng-show="mediatorAddMode"
-                    ng-model="model.mediatorAdd"
-                    ng-options="item.id as item.first_nm for item in model.mediator_all"></select>
-        </div>
-        <div class="col-md-4">
-            <h2>Involved Departments</h2>
-            <p ng-repeat="item in model.departments_report">
-                <a href="#" ng-click="departmentDelete(item.id)" ng-show="!item.added_by_reporter">X</a>
-                {{item.name}}
-            </p>
-            <span class="acceptCaseBtnClass" ng-show="!departmentAddMode" ng-click="departmentAddMode = !departmentAddMode">
-                Add person
-            </span>
-            <select ng-change="departmentAdd()"
-                    ng-show="departmentAddMode"
-                    ng-model="model.departmentAdd"
-                    ng-options="item.id as item.department_en for item in model.departments_all"></select>
-        </div>
-    </div>
-
-    <hr>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-6 col-sm-4">Facts Established</div>
-        </div>
-        <div class="row">
-            <textarea class="col-md-10 pull-right" ng-model="model.note1" ng-show="isEditNote1"></textarea>
-            <p ng-show="!isEditNote1">{{model.note1}}</p>
-        </div>
-        <div class="row">
-            <span class="acceptCaseBtnClass pull-right" ng-click="saveNote(1)" ng-show="isEditNote1">
-                Save
-            </span>
-            <span class="acceptCaseBtnClass pull-right" ng-click="isEditNote1 = true" ng-show="!isEditNote1">
-                Edit
-            </span>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-6 col-sm-4">Investigation Methodology</div>
-        </div>
-        <div class="row">
-            <textarea class="col-md-10 pull-right" ng-model="model.note2" ng-show="isEditNote2"></textarea>
-            <p ng-show="!isEditNote2">{{model.note2}}</p>
-        </div>
-        <div class="row">
-            <span class="acceptCaseBtnClass pull-right" ng-click="saveNote(2)" ng-show="isEditNote2">
-                Save
-            </span>
-            <span class="acceptCaseBtnClass pull-right" ng-click="isEditNote2 = true" ng-show="!isEditNote2">
-                Edit
-            </span>
-        </div>
-    </div>
-    <hr>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-6 col-sm-4">Investigation Methodology</div>
-        </div>
-    </div>
-
-    <div class="container" ng-repeat="item in model.report_secondary_type_selected">
-        <div class="row">
-            <p class="col-md-3">{{item.secondary_type_en}}</p>
-            <div class="dropdown col-md-5">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{getBehavioralFactors(item)}}</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown01">
-                    <a class="dropdown-item" href="#" ng-repeat="item2 in model.company_root_cases_behavioral" ng-click="changeBehavioralFactors(item, item2)">{{item2.name_en}}</a>
-                </div>
-            </div>
-            <textarea cols="20" rows="5" ng-model="item.inv_meth_bf_note" ng-show="item.behavioralEditMode"></textarea>
-            <p ng-show="!item.behavioralEditMode">{{item.inv_meth_bf_note}}</p>
-            <span class="acceptCaseBtnClass pull-right col-md-1" ng-click="item.behavioralEditMode = !item.behavioralEditMode" ng-show="!item.behavioralEditMode">
-                <span ng-show="item.inv_meth_bf_note != ''">Edit note</span>
-                <span ng-show="item.inv_meth_bf_note == ''">Add note</span>
-            </span>
-            <span class="acceptCaseBtnClass pull-right col-md-1" ng-show="item.behavioralEditMode" ng-click="saveNoteBehavioralFactors(item)">
-                Save
-            </span>
-        </div>
-        <div class="row">
-            <div class="col-md-3"></div>
-            <div class="dropdown col-md-5">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{getExternalInfluences(item)}}</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown01">
-                    <a class="dropdown-item" href="#" ng-repeat="item2 in model.company_root_cases_external" ng-click="changeExternalInfluences(item, item2)">{{item2.name_en}}</a>
-                </div>
-            </div>
-            <textarea ng-model="item.inv_meth_ei_note" ng-show="item.externalInfluencesEditMode"></textarea>
-            <p ng-show="!item.externalInfluencesEditMode">{{item.inv_meth_ei_note}}</p>
-            <span class="acceptCaseBtnClass pull-right col-md-1" ng-click="item.externalInfluencesEditMode = !item.externalInfluencesEditMode" ng-show="!item.externalInfluencesEditMode">
-                <span ng-show="item.inv_meth_ei_note != ''">Edit note</span>
-                <span ng-show="item.inv_meth_ei_note == ''">Add note</span>
-            </span>
-            <span class="acceptCaseBtnClass pull-right col-md-1" ng-show="item.externalInfluencesEditMode" ng-click="saveNoteExternalInfluences(item)">
-                Save
-            </span>
-        </div>
-
-        <div class="row">
-            <div class="col-md-3"></div>
-            <div class="dropdown col-md-5">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{getCampusInfluences(item)}}</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown01">
-                    <a class="dropdown-item" href="#" ng-repeat="item2 in model.company_root_cases_organizational" ng-click="changeCampusInfluences(item, item2)">{{item2.name_en}}</a>
-                </div>
-            </div>
-            <textarea ng-model="item.inv_meth_ci_note" ng-show="item.campusInfluencesEditMode"></textarea>
-            <p ng-show="!item.campusInfluencesEditMode">{{item.inv_meth_ci_note}}</p>
-            <span class="acceptCaseBtnClass pull-right col-md-1" ng-click="item.campusInfluencesEditMode = !item.campusInfluencesEditMode" ng-show="!item.campusInfluencesEditMode">
-                <span ng-show="item.inv_meth_ci_note != ''">Edit note</span>
-                <span ng-show="item.inv_meth_ci_note == ''">Add note</span>
-            </span>
-            <span class="acceptCaseBtnClass pull-right col-md-1" ng-show="item.campusInfluencesEditMode" ng-click="saveNoteCampusInfluences(item)">
-                Save
-            </span>
-        </div>
-    </div>
-</div> <!-- /container -->
 
 <script src="@Url.Content("~/Content/assets/template/js/select.js")"></script>
