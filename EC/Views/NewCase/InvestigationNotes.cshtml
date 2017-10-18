@@ -160,6 +160,7 @@
             <div class="investigation flex space-between" ng-repeat="item in model.report_secondary_type_selected">
                 <div class="investigation--title">{{item.secondary_type_en}}</div>
                 <div class="investigation__item flex flex-column">
+
                     <div class="investigation__inner">
                         <dropbox ng-dropbox-textExpr="getBehavioralFactors(item)"
                                  itemText="{{item.name_en}}"
@@ -175,6 +176,10 @@
                         <a href="#" class="green--button investigation__item--submit" ng-show="item.behavioralEditMode" ng-click="saveNoteBehavioralFactors(item)">
                             Save
                         </a>
+                    </div>
+                    <div class="">
+                        <textarea class="facts-established--text"> </textarea>
+                        <a href="#" class="green--button facts--submit">save</a>
                     </div>
                     <div class="investigation__inner">
                         <dropbox ng-dropbox-textExpr="getExternalInfluences(item)"
