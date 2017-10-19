@@ -189,15 +189,20 @@
             });
         };
 
+        $scope.addPerson = {
+            Role: { id: 0, role_en: 'Select one' },
+        };
         $scope.addNewPerson = function () {
             $scope.mediatorAddMode = false;
             var param = {
                 report_id: $scope.report_id,
-                addPersonFirstName: $scope.model.addPersonFirstName,
-                addPersonLastName: $scope.model.addPersonLastName,
-                addPersonTitle: $scope.model.addPersonTitle,
+                addPersonFirstName: $scope.addPerson.FirstName,
+                addPersonLastName: $scope.addPerson.LastName,
+                addPersonTitle: $scope.addPerson.Title,
+                addPersonRole: $scope.addPerson.Role.id,
             };
             NewCaseInvestigationNotesService.post(param, function (data) {
+                $scope.addPerson.Role = { id: 0, role_en: 'Select one' };
                 $scope.refresh(data);
             });
         };

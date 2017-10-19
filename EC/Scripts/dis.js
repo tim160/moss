@@ -65,10 +65,11 @@
         directive.restrict = 'E';
 
         directive.template = function (elem, attr) {
-            var html = '<div class="select" ng-click="active = !active">';
-            html += '<a href="#" class="slct" ng-class="{ active: active }">' + (attr.text || '{{textexpr}}') + '</a>';
-            html += '<ul class="drop slide" ng-class="{ active: active }">';
-            html += '<li ng-repeat="item in list" ng-click="onSelect(rootitem == null ? item : rootitem, item)">';
+            var html = '<div class="select" ng-init="expanded = false">';
+            var expr = (attr.text || '{{textexpr}}');
+            html += '<a href="#" class="slct" ng-click="expanded = !expanded" ng-class="{ active: expanded }">' + expr + '</a>';
+            html += '<ul class="drop slide">';
+            html += '<li ng-repeat="item in list" ng-click="onSelectFunction(item)">';
             html += '<a href="">' + attr.itemtext + '</a>';
             html += '</li></ul>';
             html += '</div>';
@@ -76,10 +77,22 @@
         };
 
         directive.scope = {
+            expanded: '&',
             list: '=ngDropboxList',
             textexpr: '=ngDropboxTextexpr',
             rootitem: '=ngDropboxRootitem',
             onSelect: '=ngDropboxOnSelect',
+        };
+
+        directive.link = function(scope, element, attrs) {
+            scope.onSelectFunction = function (item) {
+                var getType = {};
+                if (scope.onSelect && getType.toString.call(scope.onSelect) === '[object Function]') {
+                    scope.onSelect(scope.rootitem || item, item);
+                } else {
+                    scope.onSelect = item;
+                }
+            };
         };
 
         return directive;
@@ -549,15 +562,20 @@
             });
         };
 
+        $scope.addPerson = {
+            Role: { id: 0, role_en: 'Select one' },
+        };
         $scope.addNewPerson = function () {
             $scope.mediatorAddMode = false;
             var param = {
                 report_id: $scope.report_id,
-                addPersonFirstName: $scope.model.addPersonFirstName,
-                addPersonLastName: $scope.model.addPersonLastName,
-                addPersonTitle: $scope.model.addPersonTitle,
+                addPersonFirstName: $scope.addPerson.FirstName,
+                addPersonLastName: $scope.addPerson.LastName,
+                addPersonTitle: $scope.addPerson.Title,
+                addPersonRole: $scope.addPerson.Role.id,
             };
             NewCaseInvestigationNotesService.post(param, function (data) {
+                $scope.addPerson.Role = { id: 0, role_en: 'Select one' };
                 $scope.refresh(data);
             });
         };

@@ -51,6 +51,8 @@ namespace EC.Controllers.API
             public string addPersonFirstName { get; set; }
             public string addPersonLastName { get; set; }
             public string addPersonTitle { get; set; }
+            public int? addPersonRole { get; set; }
+            
         }
 
         [HttpGet]
@@ -167,8 +169,12 @@ namespace EC.Controllers.API
                     .Where(x => x.report_id == filter.Report_id)
                     .ToList()
                     .Where(x => report_secondary_type_selected.Select(z => z.secondary_type_id).ToList().Contains(x.report_secondary_type_id))
-                    .ToList()
+                    .ToList(),
+
+                addNewPersonRoles = DB.role_in_report.OrderBy(x => x.role_en).ToList()
             };
+
+            m.addNewPersonRoles.Insert(0, new role_in_report { id = 0, role_en = App_LocalResources.GlobalRes.Other });
 
 
             return ResponseObject2Json(m);
@@ -365,6 +371,7 @@ namespace EC.Controllers.API
                         Name = filter.addPersonFirstName,
                         report_id = filter.Report_id,
                         Title = filter.addPersonTitle,
+                        role_in_report_id = filter.addPersonRole,
                     });
                     DB.SaveChanges();
                 }

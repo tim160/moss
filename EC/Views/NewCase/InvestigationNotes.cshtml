@@ -77,7 +77,7 @@
                     </li>
                     <li ng-repeat="item in model.mediator_not_involved">
                         <a href="#" ng-click="mediatorDelete(item.id, 2)" ng-show="!item.added_by_reporter">X</a>
-                        {{item.Name}} {{item.last_name}}
+                        {{item.Name}} {{item.last_name}} {{item.Title}}
                     </li>                    
                 </ul>
                 <a href="#" class="green--button incident-types--button" ng-show="!mediatorAddMode" ng-click="mediatorAddMode = !mediatorAddMode">Add person</a>
@@ -93,23 +93,31 @@
                         <div class="addPersonName sampleContainer">
                             <div class="personTitle title">@GlobalRes.FirstNameUp</div>
                             <div class="personData">
-                                <input name="personName" class="personDataTextBox fName" ng-model="model.addPersonFirstName" />
+                                <input name="personName" class="personDataTextBox fName" ng-model="addPerson.FirstName" />
                             </div>
                         </div>
 
                         <div class="addPersonName sampleContainer">
                             <div class="personTitle title">@GlobalRes.LastNameUp</div>
                             <div class="personData">
-                                <input name="personLastName" class="personDataTextBox lName" ng-model="model.addPersonLastName" />
+                                <input name="personLastName" class="personDataTextBox lName" ng-model="addPerson.LastName" />
                             </div>
                         </div>
 
                         <div class="addPersonInfo sampleContainer">
                             <div class="personTitle title">@GlobalRes.Title</div>
                             <div class="personData">
-                                <input type="text" name="personTitle" class="personDataTextBox witnessTitle" ng-model="model.addPersonTitle" />
+                                <input type="text" name="personTitle" class="personDataTextBox witnessTitle" ng-model="addPerson.Title" />
                             </div>
                         </div>
+                        <dropbox
+                                 ng-dropbox-textexpr="addPerson.Role.role_en"
+                                 itemText="{{item.role_en}}"
+                                 ng-dropbox-list="model.addNewPersonRoles"
+                                 ng-dropbox-rootItem=""
+                                 ng-dropbox-on-select="addPerson.Role"
+                                 >
+                        </dropbox>
                         <a href="#" class="green--button incident-types--button" ng-click="addNewPerson()">@GlobalRes.AddPerson</a>
                     </div>
                 </div>
