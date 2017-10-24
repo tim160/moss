@@ -68,7 +68,8 @@
             var html = '<div class="select" ng-init="expanded = false">';
             var expr = (attr.text || '{{textexpr}}');
             html += '<a href="#" class="slct" ng-click="expanded = !expanded" ng-class="{ active: expanded }">' + expr + '</a>';
-            html += '<ul class="drop slide">';
+            //var style = "{ 'display': expanded ? 'block' : 'none' }";
+            html += '<ul class="drop slide" ng-class="{ active: expanded }">';
             html += '<li ng-repeat="item in list" ng-click="onSelectFunction(item)">';
             html += '<a href="">' + attr.itemtext + '</a>';
             html += '</li></ul>';
@@ -84,8 +85,19 @@
             onSelect: '=ngDropboxOnSelect',
         };
 
-        directive.link = function(scope, element, attrs) {
+        directive.link = function (scope, element) {
+            $(document).on('click', function () {
+                var isChild = $(element).has(event.target).length > 0;
+                var isSelf = element[0] === event.target;
+                var isInside = isChild || isSelf;
+                if (!isInside) {
+                    scope.$apply(function () {
+                        scope.expanded = false;
+                    });
+                }
+            });
             scope.onSelectFunction = function (item) {
+                scope.expanded = false;
                 var getType = {};
                 if (scope.onSelect && getType.toString.call(scope.onSelect) === '[object Function]') {
                     scope.onSelect(scope.rootitem || item, item);

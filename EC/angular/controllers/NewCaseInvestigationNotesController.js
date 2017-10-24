@@ -94,6 +94,8 @@
         };
 
         $scope.saveNote = function (type) {
+            $scope.editNote1 = false;
+            $scope.editNote2 = false;
             var param = type === 1 ?
                 { report_id: $scope.report_id, note1: $scope.model.note1 } :
                 { report_id: $scope.report_id, note2: $scope.model.note2 };
@@ -193,6 +195,9 @@
             Role: { id: 0, role_en: 'Select one' },
         };
         $scope.addNewPerson = function () {
+            if ((!$scope.addPerson.FirstName) | (!$scope.addPerson.LastName) | (!$scope.addPerson.Title) | ($scope.addPerson.Role.id === 0)) {
+                return;
+            }
             $scope.mediatorAddMode = false;
             var param = {
                 report_id: $scope.report_id,

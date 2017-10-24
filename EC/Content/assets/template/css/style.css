@@ -678,3 +678,11 @@ font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 .someBorder {
     border-bottom: solid 1px #bfc3c2;
 }
+
+.error {
+    border: solid 1px red;
+}
+
+.errorDropbox > div {
+    border: solid 1px red;
+}

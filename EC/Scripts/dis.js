@@ -68,7 +68,8 @@
             var html = '<div class="select" ng-init="expanded = false">';
             var expr = (attr.text || '{{textexpr}}');
             html += '<a href="#" class="slct" ng-click="expanded = !expanded" ng-class="{ active: expanded }">' + expr + '</a>';
-            html += '<ul class="drop slide">';
+            //var style = "{ 'display': expanded ? 'block' : 'none' }";
+            html += '<ul class="drop slide" ng-class="{ active: expanded }">';
             html += '<li ng-repeat="item in list" ng-click="onSelectFunction(item)">';
             html += '<a href="">' + attr.itemtext + '</a>';
             html += '</li></ul>';
@@ -84,8 +85,19 @@
             onSelect: '=ngDropboxOnSelect',
         };
 
-        directive.link = function(scope, element, attrs) {
+        directive.link = function (scope, element) {
+            $(document).on('click', function () {
+                var isChild = $(element).has(event.target).length > 0;
+                var isSelf = element[0] === event.target;
+                var isInside = isChild || isSelf;
+                if (!isInside) {
+                    scope.$apply(function () {
+                        scope.expanded = false;
+                    });
+                }
+            });
             scope.onSelectFunction = function (item) {
+                scope.expanded = false;
                 var getType = {};
                 if (scope.onSelect && getType.toString.call(scope.onSelect) === '[object Function]') {
                     scope.onSelect(scope.rootitem || item, item);
@@ -467,6 +479,8 @@
         };
 
         $scope.saveNote = function (type) {
+            $scope.editNote1 = false;
+            $scope.editNote2 = false;
             var param = type === 1 ?
                 { report_id: $scope.report_id, note1: $scope.model.note1 } :
                 { report_id: $scope.report_id, note2: $scope.model.note2 };
@@ -566,6 +580,9 @@
             Role: { id: 0, role_en: 'Select one' },
         };
         $scope.addNewPerson = function () {
+            if ((!$scope.addPerson.FirstName) | (!$scope.addPerson.LastName) | (!$scope.addPerson.Title) | ($scope.addPerson.Role.id === 0)) {
+                return;
+            }
             $scope.mediatorAddMode = false;
             var param = {
                 report_id: $scope.report_id,
