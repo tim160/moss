@@ -1158,7 +1158,8 @@ namespace EC.Controllers
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
-            ViewBag.rm = new ReportModel(id);
+            var rm = new ReportModel(id);
+            ViewBag.rm = rm;
             ViewBag.report_id = id;
             ViewBag.user_id = user.id;
             ViewBag.attachmentFiles = getAttachmentFiles(id);
@@ -1167,6 +1168,23 @@ namespace EC.Controllers
             ViewBag.attachmentAdvFiles = files;
             ViewBag.attachmentAdvUsers = db.user.Where(x => users.Contains(x.id)).ToList();
             ViewBag.popup = null;
+
+            var report_secondary_type = db.report_secondary_type.Where(x => x.report_id == id);
+            ViewBag.report_secondary_type = db.company_secondary_type
+                    .Where(x => x.company_id == rm._report.company_id)
+                    .Where(x => report_secondary_type.Select(z => z.secondary_type_id).Contains(x.id))
+                    .OrderBy(x => x.secondary_type_en)
+                    .ToList();
+
+            var company_case_routing = db.company_case_routing.Where(x => x.company_id == rm._report.company_id).ToList();
+            var ids = company_case_routing.Select(x => x.id).ToList();
+            ViewBag.company_case_routing = company_case_routing;
+            ViewBag.company_case_routing_attachments = db.company_case_routing_attachments
+                .Where(x => ids.Contains(x.company_case_routing_id) & x.status_id == 2)
+                .OrderBy(x => x.company_case_routing_id)
+                .ThenBy(x => x.file_nm)
+                .ToList();
+
             return View();
         }
 

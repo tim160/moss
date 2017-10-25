@@ -71,6 +71,32 @@
 
             <div id="attachmentPage">
                 <div class="container">
+                    <div class="someBorder">
+                        <p class="fact-title">Policies</p>
+                        @foreach(var type in (List<company_secondary_type>)ViewBag.report_secondary_type)
+                        {
+                            var listR = (List<company_case_routing>)ViewBag.company_case_routing;
+                            var listA = (List<company_case_routing_attachments>)ViewBag.company_case_routing_attachments;
+                            var exists = listR.Where(x => x.company_secondary_type_id == type.id);
+                            if ((exists.Any()) && (listA.Where(x => exists.Select(z => z.id).Contains(x.company_case_routing_id)).Any()))
+                            {
+                                <p>@type.secondary_type_en</p>
+                                <ul>
+                                    @foreach (var route in listR.Where(x => x.company_secondary_type_id == type.id))
+                                    {
+                                        foreach (var file in listA.Where(x => x.company_case_routing_id == route.id))
+                                        {
+                                        <li>
+                                            <a href="@Url.Content(file.path_nm)" download>@file.file_nm</a>
+                                        </li>
+                                        }
+                                    }
+                                </ul>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="container">
                     @using (Html.BeginForm("Attachments", "Case", FormMethod.Post, new { enctype = "multipart/form-data" }))
                     {
                         @Html.Hidden("report_id", report_id)

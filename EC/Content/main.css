@@ -4146,3 +4146,12 @@ textarea {
     border: none;
     padding-left: 17px;
 }
+
+.someBorder {
+    border-bottom: solid 1px #bfc3c2;
+}
+
+.fact-title {
+	font: 600 16px/18px 'Open Sans', sans-serif;
+	color: #727c7e;
+}
