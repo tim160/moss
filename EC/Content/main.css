@@ -4136,3 +4136,13 @@ textarea {
     border: none;
     padding-left: 17px;
 }
+
+.case_select, .case_input {
+    width: 220px;
+    height: 40px;
+    margin-left: 12px;
+    background-color: #f2f7f7;
+    outline: none;
+    border: none;
+    padding-left: 17px;
+}

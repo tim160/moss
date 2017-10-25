@@ -75,19 +75,6 @@
                     {
                         @Html.Hidden("report_id", report_id)
                         @Html.Hidden("mode", "upload")
-                        <div class="radioButtonContainer">
-                            @Html.Hidden("type", "staff")
-                            <label class="inputBlock" for="staff" style="float:left; padding-right: 30px;">
-                                <input id="Anonymous" type="radio" name="stay" value="staff" checked>
-                                <span class="radioButton"></span>
-                                <span class="radioTitle">visible to staff</span>
-                            </label>
-                            <label class="inputBlock" for="reporter">
-                                <input id="Anonymous" type="radio" name="stay" value="reporter">
-                                <span class="radioButton"></span>
-                                <span class="radioTitle">visible to reporter</span>
-                            </label>
-                        </div>
                         <div class="dragAndDropContainer">
                             <div class="dottedContainer">
                                 <div class="semiboldText weight18">Drag and drop files here</div>
@@ -108,7 +95,7 @@
                             @{ 
                                 var users = (List<user>)ViewBag.attachmentAdvUsers;
                             }
-                            @foreach (var attachment in ViewBag.attachmentAdvFiles)
+                            @foreach (var attachment in (List<attachment>)ViewBag.attachmentAdvFiles)
                             {
                                 var user = users.FirstOrDefault(x => x.id == attachment.user_id);
                                 <tr>
@@ -123,7 +110,10 @@
                                     </td>
                                     <td>
                                         <p class="recipient">
-                                            @(attachment.visible_reporter == true ? "VISIBLE TO REPORTER" : "VISIBLE TO STAFF")
+                                            <select class="attachmentFile case_select" data-id="@attachment.id">
+                                                <option @(attachment.visible_mediators_only == true ? "selected" : "") value="1">visible by mediators</option>
+                                                <option @(attachment.visible_reporter == true ? "selected" : "") value="2">visible by reporter</option>
+                                            </select>
                                         </p>
                                     </td>
                                     <td>
@@ -186,7 +176,6 @@
             var data = new FormData();
             data.append('report_id', '@report_id');
             data.append('mode', 'upload');
-            data.append('type', $('.inputBlock > input:checked').val());
             for (var x = 0; x < event.dataTransfer.files.length; x++) {
                 data.append('files' + x, event.dataTransfer.files[x]);
             }
@@ -203,6 +192,24 @@
                 error: function (xhr, status, p3, p4) {
                 }
             });
+        });
+
+        $('.attachmentFile').on('change', function (e) {
+            if (confirm('You are about to change visibility for the file. Are you sure?')) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("AttachmentType", "Case", new { id = report_id })',
+                    data: {
+                        file_id: $(this).data('id'),
+                        type: $(this).val()
+                    },
+                    success: function (result) {
+                        window.location = window.location;
+                    },
+                    error: function (xhr, status, p3, p4) {
+                    }
+                });
+            }
         });
     });
 </script>

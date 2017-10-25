@@ -1199,7 +1199,7 @@ namespace EC.Controllers
                     a.last_update_dt = DateTime.Now;
                     a.user_id = user.id;
 
-                    type = mode == "upload_rd" ? "reporter" : type;
+                    type = mode == "upload_rd" ? "reporter" : "staff";
                     a.visible_reporter = type == "reporter" ? true : false;
                     a.visible_mediators_only = type == "staff" ? true : false;
 
@@ -1241,6 +1241,25 @@ namespace EC.Controllers
             db.SaveChanges();
 
             return RedirectToAction("Attachments", new { id = report_id });
+        }
+
+        [HttpPost]
+        public ActionResult AttachmentType(int id, int file_id, int type)
+        {
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            // DEBUG
+            //user = user ?? db.user.FirstOrDefault(x => x.id == 2);
+            //user = user ?? db.user.FirstOrDefault(x => x.id == 167);
+            //
+            if (user == null || user.id == 0)
+                return RedirectToAction("Index", "Account");
+
+            var file = db.attachment.FirstOrDefault(x => x.report_id == id & x.id == file_id);
+            file.visible_mediators_only = type == 1;
+            file.visible_reporter = type == 2;
+            db.SaveChanges();
+
+            return RedirectToAction("Attachments", new { id = id });
         }
 
         [HttpPost]
