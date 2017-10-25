@@ -109,6 +109,8 @@ namespace EC.Controllers.API
                         secondary_type_en = x.secondary_type_en,
                         added_by_reporter = report_secondary_type_selected.FirstOrDefault(z => z.secondary_type_id == x.id).added_by_reporter,
                     })
+                    .OrderByDescending(x => x.added_by_reporter)
+                    .ThenBy(x => x.secondary_type_en)
                     .ToList(),
 
                 report_secondary_type_selected_avilable = company_secondary_types
@@ -144,6 +146,8 @@ namespace EC.Controllers.API
                         added_by_reporter = x.added_by_reporter,
                         name = departments.FirstOrDefault(z => z.id == x.department_id)?.department_en,
                     })
+                    .OrderByDescending(x => x.added_by_reporter)
+                    .ThenBy(x => x.name)
                     .ToList(),
 
                 note1 = DB.report_inv_notes.FirstOrDefault(x => x.report_id == filter.Report_id & x.type == 1)?.note,
