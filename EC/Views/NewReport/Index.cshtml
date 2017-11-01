@@ -240,7 +240,17 @@
                                 <td class="aroundSelect">@GlobalRes.Scope:</td>
                                 <td class="inSelect">
                                     @{
-                                        var selectedScopeId = allScopes.FirstOrDefault(x => allCompanyCaseRoutings.FirstOrDefault(z => z.scope_id == x.id) != null).id;
+                                        var selectedScopeId = 0;
+                                        var types = allIncidets.Select(x => x.id).ToList();
+                                        var route = allCompanyCaseRoutings.FirstOrDefault(x => types.Contains(x.company_secondary_type_id));
+                                        if (route != null)
+                                        {
+                                            var scope = allScopes.FirstOrDefault(x => x.id == route.scope_id);
+                                            if (scope != null)
+                                            {
+                                                selectedScopeId = scope.id;
+                                            }
+                                        }
                                     }
                                     @Html.DropDownList("ScopeId", new SelectList(allScopes, "id", "scope_en", selectedScopeId), new { @class = "" })
                                 </td>
