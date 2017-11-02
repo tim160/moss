@@ -24,6 +24,10 @@ namespace EC.Models.ViewModels
         {
             get
             {
+                if (String.IsNullOrEmpty(Detail))
+                {
+                    return $"{User.first_nm} {User.last_nm}";
+                }
                 return $"{User.first_nm} {User.last_nm} [{Detail}]";
             }
         }

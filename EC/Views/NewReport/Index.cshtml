@@ -266,7 +266,7 @@
                                     <select class="" id="OwnerId" name="OwnerId" style="width: 100%">
                                         @foreach (var item in rm.MediatorsAcceptCase)
                                         {
-                                            <option class="@(item.User.role_id != 4 || item.User.role_id != 5 ? "" : "needquestion")" value="@item.User.id">@item.FullNameWithDetail</option>
+                                            <option class="@(String.IsNullOrEmpty(item.Detail) ? "needquestion" : "")" value="@item.User.id">@item.FullNameWithDetail</option>
                                         }
                                     </select>
                             </tr>
@@ -621,7 +621,6 @@
                                 }
                                 return;
                             }
-
                             reopenOrAcceptCase(@Html.Raw(report_id), @Html.Raw(user_id), description);
                         });
 

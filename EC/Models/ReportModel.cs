@@ -2346,7 +2346,7 @@ namespace EC.Models
                 var ids = list1.Where(x => x.role_id != 4 && x.role_id != 5).Select(x => x.id).ToList();
 
                 var list = (
-                    from ma in db.report_mediator_assigned.Where(x => ids.Contains(x.mediator_id))
+                    from ma in db.report_mediator_assigned.Where(x => ids.Contains(x.mediator_id) & x.report_id == ID)
                     join ju in db.user on ma.mediator_id equals ju.id into j1
                     join jcl in db.company_location on ma.by_location_id equals jcl.id into j2
                     join jst in db.company_secondary_type on ma.by_secondary_type_id equals jst.id into j3
@@ -2373,7 +2373,7 @@ namespace EC.Models
 
                 //Other
                 res.AddRange(list2
-                    .Select(x => new UserViewModel(x) { Detail = "Assigned by Level" })
+                    .Select(x => new UserViewModel(x) { Detail = "" })
                     .OrderBy(x => x.FullName)
                     .ToList()
                     );
