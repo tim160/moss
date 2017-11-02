@@ -2325,23 +2325,36 @@ namespace EC.Models
                     select u).ToList();
             }
         }
+
         public List<UserViewModel> MediatorsAcceptCase
         {
             get
             {
                 var res = new List<UserViewModel>();
 
-                res.AddRange(db.user.Where(x => x.company_id == _report.company_id & (x.role_id == 4 | x.role_id == 5)).ToList().Select(x => new UserViewModel(x) { Detail = "Assigned by Level" }));
+                var list1 = _mediators_whoHasAccess_toReport;
+                var list2 = _involved_mediators_user_list;
+
+                //By level
+                res.AddRange(list1
+                    .Where(x => x.role_id == 4 || x.role_id == 5)
+                    .Select(x => new UserViewModel(x) { Detail = "Assigned by Level" })
+                    .OrderBy(x => x.FullName)
+                    .ToList());
+
+                //ids not top level
+                var ids = list1.Where(x => x.role_id != 4 && x.role_id != 5).Select(x => x.id).ToList();
 
                 var list = (
-                    from ma in db.report_mediator_assigned.Where(x => x.report_id == ID)
+                    from ma in db.report_mediator_assigned.Where(x => ids.Contains(x.mediator_id))
                     join ju in db.user on ma.mediator_id equals ju.id into j1
                     join jcl in db.company_location on ma.by_location_id equals jcl.id into j2
                     join jst in db.company_secondary_type on ma.by_secondary_type_id equals jst.id into j3
                     from u in j1.DefaultIfEmpty()
                     from cl in j2.DefaultIfEmpty()
                     from st in j3.DefaultIfEmpty()
-                    select new {
+                    select new
+                    {
                         User = u,
                         MA = ma,
                         CL = cl,
@@ -2353,10 +2366,18 @@ namespace EC.Models
                     .Select(x =>
                         new UserViewModel(x.User)
                         {
-                            Detail = x.MA.by_location_id != null ? "Assigned by Location: " + x.CL.location_en : x.MA.by_secondary_type_id != null ? "Assigned by Incident Type: " + x.ST.secondary_type_en : "" }
+                            Detail = x.MA.by_location_id != null ? "Assigned by Location: " + x.CL.location_en : x.MA.by_secondary_type_id != null ? "Assigned by Incident Type: " + x.ST.secondary_type_en : ""
+                        }
+                    );
+                res.AddRange(list.OrderBy(x => x.FullName).ToList());
+
+                //Other
+                res.AddRange(list2
+                    .Select(x => new UserViewModel(x) { Detail = "Assigned by Level" })
+                    .OrderBy(x => x.FullName)
+                    .ToList()
                     );
 
-                res.AddRange(list);
                 return res.GroupBy(x => x.User.id).Select(x => x.First()).ToList();
             }
         }

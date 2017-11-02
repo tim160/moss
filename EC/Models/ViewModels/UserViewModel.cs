@@ -27,5 +27,13 @@ namespace EC.Models.ViewModels
                 return $"{User.first_nm} {User.last_nm} [{Detail}]";
             }
         }
+
+        public string FullName
+        {
+            get
+            {
+                return String.Format("{0} {1}", User.first_nm, User.last_nm);
+            }
+        }
     }
 }
