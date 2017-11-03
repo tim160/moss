@@ -221,17 +221,22 @@ namespace EC.Controllers.ViewModel
             }
             this.report_by_myself = model.report_by_myself == true ? GlobalRes.Myself : GlobalRes.SomeoneElse;
 
-            this.personName = model.personName.ToList();
-            this.personLastName = model.personLastName.ToList();
-            this.personTitle = model.personTitle.ToList();
-
-
-            //this.personRole = model.personRole.ToList();
-            List<int> personRoles = model.personRole.ToList();
+            this.personName = new List<string>();
+            this.personLastName = new List<string>();
+            this.personTitle = new List<string>();
             this.personRole = new List<string>();
+            var personRoles = new List<int>();
+            if (model.personName != null)
+            {
+                this.personName = model.personName.ToList();
+                this.personLastName = model.personLastName.ToList();
+                this.personTitle = model.personTitle.ToList();
+                personRoles = model.personRole.ToList();
+            }
+
 
             List<role_in_report> roleInReport = ReportModel.getRoleInReport();
-            for(int i=0; i< model.personRole.Count; i++)
+            for(int i=0; i< personRoles.Count; i++)
             {
                 role_in_report nameRole = roleInReport.Where(m => m.id == personRoles[i]).FirstOrDefault();
                 personRole.Add(nameRole.role_en);
