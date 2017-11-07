@@ -378,7 +378,7 @@ namespace EC
                 }
             );
 
-            routes.MapRoute(
+            /*routes.MapRoute(
                 name: "NewCaseInvestigationNotes",
                 url: "NewCase/InvestigationNotes/{report_id}",
                 defaults: new
@@ -387,7 +387,7 @@ namespace EC
                     action = "InvestigationNotes",
                     report_id = UrlParameter.Optional
                 }
-            );
+            );*/
 
             routes.MapRoute(
                 name: "NewCaseCaseClosureReport",

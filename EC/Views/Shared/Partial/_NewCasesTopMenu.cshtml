@@ -4,15 +4,15 @@
 <div class="container navbar navbarColor col-md-12">
     <div class="row">
         <div class="col-md-10">
-            <a class="navbar-brand" href="#">Report</a>
-            <a class="navbar-brand" href="#">Investigation notes</a>
-            <a class="navbar-brand" href="#">Tasks</a>
-            <a class="navbar-brand" href="#">Messages</a>
-            <a class="navbar-brand" href="#">Team</a>
+            <a class="navbar-brand" href="@Url.Action("Report", new { report_id = ViewBag.report_id })">Report</a>
+            <a class="navbar-brand" href="@Url.Action("InvestigationNotes", new { report_id = ViewBag.report_id })">Investigation notes</a>
+            <a class="navbar-brand" href="@Url.Action("Tasks", new { report_id = ViewBag.report_id })">Tasks</a>
+            <a class="navbar-brand" href="@Url.Action("Messages", new { report_id = ViewBag.report_id })">Messages</a>
+            <a class="navbar-brand" href="@Url.Action("Team", new { report_id = ViewBag.report_id })">Team</a>
         </div>
         <div class="col-md-1 ">
             <form class="form-inline my-2 my-lg-0">
-                <a class="navbar-brand " href="#">Attachments</a>
+                <a class="navbar-brand" href="@Url.Action("Attachments", new { report_id = ViewBag.report_id })">Attachments</a>
             </form>
         </div>
 
