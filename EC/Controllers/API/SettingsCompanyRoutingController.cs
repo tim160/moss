@@ -92,17 +92,19 @@ namespace EC.Controllers.API
                 }
             });
 
+            var cm = new CompanyModel(user.company_id);
+
             var m = new
             {
                 types = types,
                 departments = departments,
-                users = users,
+                users = cm.AllMediators(user.company_id, true, null),
                 scopes = scopes,
                 items = items,
                 files = files,
                 locations = locations,
                 locationItems = locationItems,
-            };
+        };
             return ResponseObject2Json(m);
         }
 
