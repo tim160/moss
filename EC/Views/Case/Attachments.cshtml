@@ -141,10 +141,13 @@
                                     </td>
                                     <td>
                                         <p class="recipient">
-                                            <select class="attachmentFile case_select" data-id="@attachment.id">
-                                                <option @(attachment.visible_mediators_only == true ? "selected" : "") value="1">visible by mediators</option>
-                                                <option @(attachment.visible_reporter == true ? "selected" : "") value="2">visible by reporter</option>
-                                            </select>
+                                            @if (attachment.user_id != rm._report.reporter_user_id)
+                                            {
+                                                <select class="attachmentFile case_select" data-id="@attachment.id">
+                                                    <option @(attachment.visible_mediators_only == true ? "selected" : "") value="1">visible by mediators</option>
+                                                    <option @(attachment.visible_reporter == true ? "selected" : "") value="2">visible by reporter</option>
+                                                </select>
+                                            }
                                         </p>
                                     </td>
                                     <td>

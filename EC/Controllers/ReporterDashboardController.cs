@@ -49,12 +49,15 @@ namespace EC.Controllers
             int report_id = um._reporter_report_id;
             ViewBag.report_id = report_id;
             ViewBag.user_id = id.Value;
+            var reporter = new ReportModel(report_id);
 
             if(report_id == 0)
                  return RedirectToAction("Index", "Account");
 
             ViewBag.attachmentFiles = getAttachmentFiles(report_id);
-            ViewBag.attachmentAdvFiles = db.attachment.Where(item => item.report_id == report_id && item.visible_reporter == true).ToList();
+            ViewBag.attachmentAdvFiles = db.attachment
+                .Where(item => item.report_id == report_id && (item.visible_reporter == true || item.user_id == reporter._report.reporter_user_id))
+                .ToList();
 
             return View();
         }
@@ -389,7 +392,11 @@ namespace EC.Controllers
             int report_id = um._reporter_report_id;
             ViewBag.report_id = report_id;
             ViewBag.user_id = id;
-            var files = db.attachment.Where(item => item.report_id == report_id && item.visible_reporter == true & item.status_id ==2).ToList();
+            var reporter = new ReportModel(report_id);
+
+            var files = db.attachment
+                .Where(item => item.report_id == report_id && item.status_id == 2 && (item.visible_reporter == true || item.user_id == reporter._report.reporter_user_id))
+                .ToList();
             var users = files.Select(x => x.user_id).ToList();
             ViewBag.attachmentAdvFiles = files;
             ViewBag.attachmentAdvUsers = db.user.Where(x => users.Contains(x.id)).ToList();
