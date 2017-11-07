@@ -46,7 +46,8 @@ namespace EC.Controllers.API
 
             UserModel um = new UserModel(user.id);
 
-            var departments = DB.company_case_admin_department.Where(x => x.company_id == user.company_id && x.status_id == 2).ToList();
+            //var departments = DB.company_case_admin_department.Where(x => x.company_id == user.company_id && x.status_id == 2).ToList();
+            var departments = DB.company_department.Where(x => x.company_id == user.company_id && x.status_id == 2).ToList();
             var users = DB.user.Where(x => x.company_id == user.company_id && x.status_id == 2 && x.role_id == 6).ToList();
             var scopes = DB.scope.ToList();
             var items = DB.company_case_routing.Where(x => x.company_id == user.company_id).ToList();

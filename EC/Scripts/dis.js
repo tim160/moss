@@ -704,7 +704,7 @@
             $scope.items = data.items;
             $scope.files = data.files;
 
-            $scope.departments.splice(0, 0, { id: 0, name_en: 'Select' });
+            $scope.departments.splice(0, 0, { id: 0, department_en: 'Select' });
             $scope.users.splice(0, 0, { id: 0, first_nm: 'Select', last_nm: '' });
             $scope.scopes.splice(0, 0, { id: 0, scope_en: 'Select' });
 
