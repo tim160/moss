@@ -1,23 +1,57 @@
 ﻿@{
 }
 
-<div class="container navbar navbarColor col-md-12">
-    <div class="row">
-        <div class="col-md-10">
-            <a class="navbar-brand" href="@Url.Action("Report", new { report_id = ViewBag.report_id })">Report</a>
-            <a class="navbar-brand" href="@Url.Action("InvestigationNotes", new { report_id = ViewBag.report_id })">Investigation notes</a>
-            <a class="navbar-brand" href="@Url.Action("Tasks", new { report_id = ViewBag.report_id })">Tasks</a>
-            <a class="navbar-brand" href="@Url.Action("Messages", new { report_id = ViewBag.report_id })">Messages</a>
-            <a class="navbar-brand" href="@Url.Action("Team", new { report_id = ViewBag.report_id })">Team</a>
-        </div>
-        <div class="col-md-1 ">
-            <form class="form-inline my-2 my-lg-0">
-                <a class="navbar-brand" href="@Url.Action("Attachments", new { report_id = ViewBag.report_id })">Attachments</a>
-            </form>
-        </div>
+<div class="container-fluid">
+    <ol class="progress-steps progress-steps_5-steps clearfix">
+        <li class="progress-steps__li done">
+            <div class="progress-steps__text">New report</div>
+        </li>
+        <li class="progress-steps__li done">
+            <div class="progress-steps__text">New case</div>
+        </li>
+        <li class="progress-steps__li ">
+            <div class="progress-steps__text">Under Investigation</div>
+        </li>
+        <li class="progress-steps__li ">
+            <div class="progress-steps__text">Awaiting Sign-Off</div>
+        </li>
+        <li class="progress-steps__li">
+            <div class="progress-steps__text">Closed</div>
+        </li>
+    </ol>
+</div>
+@{ 
+    string action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+}
+<div class="container mainNavigationTabs_color">
+    <div class="mainNavigationTabs clearfix">
+        <ul class="mainNavigationTabs__tabs-ul clearfix">
+            <li class="mainNavigationTabs__tab-link @(action == "report" ? "active" : "")" data-tab="mainTab-1">
+                <div class="mainNavigationTabs__tab-name"><a href="@Url.Action("Report", new { report_id = ViewBag.report_id })">Report</a></div>
+                <div class="mainNavigationTabs__badgeCount"></div>
+            </li>
+            <li class="mainNavigationTabs__tab-link @(action == "investigationnotes" ? "active" : "")" data-tab="mainTab-2">
+                <div class="mainNavigationTabs__tab-name"><a href="@Url.Action("InvestigationNotes", new { report_id = ViewBag.report_id })">Investigation Notes</a></div>
+                <div class="mainNavigationTabs__badgeCount"></div>
+            </li>
+            <li class="mainNavigationTabs__tab-link @(action == "tasks" ? "active" : "")mainNavigationTabs__badgeCount_enable" data-tab="mainTab-3">
+                <div class="mainNavigationTabs__tab-name"><a href="@Url.Action("Tasks", new { report_id = ViewBag.report_id })">Tasks</a></div>
+                <div class="mainNavigationTabs__badgeCount"></div>
+            </li>
+            <li class="mainNavigationTabs__tab-link @(action == "messages" ? "active" : "")mainNavigationTabs__badgeCount_enable" data-tab="mainTab-4">
+                <div class="mainNavigationTabs__tab-name"><a href="@Url.Action("Messages", new { report_id = ViewBag.report_id })">Messages</a></div>
+                <div class="mainNavigationTabs__badgeCount"></div>
+            </li>
+            <li class="mainNavigationTabs__tab-link @(action == "team" ? "active" : "")" data-tab="mainTab-5">
+                <div class="mainNavigationTabs__tab-name"><a href="@Url.Action("Team", new { report_id = ViewBag.report_id })">Team</a></div>
+                <div class="mainNavigationTabs__badgeCount"></div>
+            </li>
+        </ul>
 
-        <div class="col-md-1 zipperColor">
-            <img src="~/Content/Icons/activityIcon.png" style="padding: 15px;">
-        </div>
+        <ul class="mainNavigationTabs__rightLinks-ul clearfix">
+            <li class="mainNavigationTabs__rightLinks-li">
+                <a href="@Url.Action("Attachments", new { report_id = ViewBag.report_id })" class="mainNavigationTabs__rightLinks-a">Attachments</a>
+            </li>
+        </ul>
     </div>
 </div>

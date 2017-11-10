@@ -1,0 +1,397 @@
+﻿@using EC.Models;
+@using EC.Models.Database;
+@using EC.App_LocalResources;
+@using EC.Constants;
+@using EC.Localization;
+@using EC.Constants;
+
+@{
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
+    String class_ext = ViewBag.cc_extension;
+
+    //bool is_cc = true;
+    //String class_ext = "";
+    //if (is_cc)
+    //{
+    //    class_ext = "_cc";
+    //}
+
+
+    //var um2 = (UserModel)ViewBag.um;
+    var user_id = ViewBag.user_id;
+
+    string hrefURL_1 = Request.Url.AbsoluteUri.ToLower();
+
+    EC.Models.UserModel um = new EC.Models.UserModel(user_id);
+    EC.Models.CompanyModel cm = new EC.Models.CompanyModel(um._user.company_id);
+    EC.Models.ReportModel rm = new EC.Models.ReportModel();
+
+
+    var unread_report_number = um.UnreadReport(0, 0).Count;
+    var unread_report_number_string = "";
+    string page_subtitle = "";
+    if (unread_report_number > 0)
+    {
+        unread_report_number_string = unread_report_number.ToString();
+    }
+
+    int unread_message_number = um.Unread_Messages_Quantity(0, 1) + um.Unread_Messages_Quantity(0, 2) + um.Unread_Messages_Quantity(0, 3);
+    var unread_message_number_string = "";
+    if (unread_message_number > 0)
+    {
+        unread_message_number_string = unread_message_number.ToString();
+    }
+
+    int unread_task_number = um.UnreadTasksQuantity(0, true, 1);
+    var unread_task_number_string = "";
+    if (unread_task_number > 0)
+    {
+        unread_task_number_string = unread_task_number.ToString();
+    }
+
+    user _user = um.GetById(user_id);
+    company _company = cm.GetById(_user.company_id);
+
+    string report_name = "Case";
+
+    int _report_id = 0;
+    int investigationstatus = 1;
+    string report_color = "", report_color_code = "", report_name_code = "";
+    if ((ViewBag.report_id != null) && ((int)ViewBag.report_id != 0))
+    {
+        _report_id = (int)ViewBag.report_id;
+        rm = new EC.Models.ReportModel(_report_id);
+
+        report_name = rm._secondary_type_string + " - " + rm._location_string + " - #" + rm._report.display_name;
+        report_name_code = GlobalRes.Newreport + ": #" + rm._report.display_name;
+        report_color = rm._color_descr;
+        report_color_code = rm._color_code;
+        investigationstatus = rm._investigation_status;
+    }
+
+    string[] _statuses = ECGlobalConstants.ReportFlowStatusesList;
+
+    string same_mediator_warning = GlobalRes.AddFurtherNotes;
+    if (rm != null && user_id == rm._last_investigation_status_user_id)
+    {
+        same_mediator_warning = GlobalRes.RecommendSecond1 + " " + GlobalRes.RecommendSecond2;
+    }
+
+}
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" type="text/css" href="~/Content/newCase.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/main.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/styleReportDashboard.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/styleTasks.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/stylePageMessages.css">
+    <link rel="shortcut icon" type="image/x-icon" src="~/favicon.ico" />
+
+    <link href="~/Content/jquery-ui.css" rel="stylesheet">
+
+    <title>@ViewBag.Title</title>
+
+    <script type="text/javascript" src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/lib/jquery-ui.min.js"></script>
+
+    <script src="~/Scripts/View/reportSummary.js"></script>
+
+    <script src="~/Libs/angular/angular.min.js"></script>
+    <script src="~/Libs/angular-http/angular-http.js"></script>
+    <script src="~/Libs/angular-resource/angular-resource.min.js"></script>
+    <script src="~/Libs/angular-animate/angular-animate.min.js"></script>
+    <script src="~/Scripts/dis.js"></script>
+</head>
+<body ng-app="EC">
+    <!-- Begin Inspectlet Embed Code -->
+    <script type="text/javascript" id="inspectletjs">
+        window.__insp = window.__insp || [];
+        __insp.push(['wid', 467767562]);
+        (function() {
+            function ldinsp(){if(typeof window.__inspld != "undefined") return; window.__inspld = 1; var insp = document.createElement('script'); insp.type = 'text/javascript'; insp.async = true; insp.id = "inspsync"; insp.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cdn.inspectlet.com/inspectlet.js'; var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(insp, x); };
+            setTimeout(ldinsp, 500); document.readyState != "complete" ? (window.attachEvent ? window.attachEvent('onload', ldinsp) : window.addEventListener('load', ldinsp, false)) : ldinsp();
+        })();
+    </script>
+    <!-- End Inspectlet Embed Code -->
+    <input type="hidden" id="_report_id" value="@Html.Raw(_report_id)" />
+    <input type="hidden" id="user_id" value="@Html.Raw(user_id)" />
+
+    <input type="hidden" id="" value="" />
+
+    <header class="header">
+        @{
+            string mainURL = Request.Url.AbsoluteUri.ToLower();
+            string _menuAnalytics = "", _menuTasks = "", _menuMessages = "", _menuCases = "";
+            if ((mainURL.Contains("tasks")) || (mainURL.Contains("task/")))
+            {
+                if ((!mainURL.Contains("analytics")) && (!mainURL.Contains("/case/")))
+                {
+                    _menuTasks = "active";
+                }
+            }
+
+            if ((mainURL.Contains("cases")) || (mainURL.Contains("newreport/")) || (mainURL.Contains("case/")))
+            {
+                _menuCases = "active";
+            }
+
+            if (mainURL.Contains("analytics"))
+            {
+                _menuAnalytics = "active";
+            }
+            if (mainURL.Contains("messages") && !mainURL.Contains("case/messages/"))
+            {
+                _menuMessages = "active";
+            }
+        }
+        <div class="container clearfix">
+            <div class="header__leftBlock">
+                <div class="headerTop-logo">
+                    <a href="#" class="headerTop-logo__link">
+                        <div class="headerTop-logo__img"></div>
+                    </a>
+                </div>
+                <ul class="mainNavigation">
+                    <li class="navConteiner @_menuAnalytics">
+                        <a href="/analytics/Index" class="navConteiner__a ">
+                            <span class="navConteiner__icon navConteiner__icon_analytics"></span>
+                            <span class="navConteiner__name">Analytics</span>
+                            <span class="navConteiner__badgeCount "></span>
+                        </a>
+                    </li><!-- /.navConteiner -->
+                    <li class="navConteiner @_menuTasks">
+                        <a href="/tasks/Index" class="navConteiner__a">
+                            <span class="navConteiner__icon navConteiner__icon_tasks"></span>
+                            <span class="navConteiner__name">Tasks</span>
+                            <span class="navConteiner__badgeCount ">@unread_task_number_string</span>
+                        </a>
+                    </li><!-- /.navConteiner -->
+                    <li class="navConteiner @_menuMessages">
+                        <a href="/messages/Index" class="navConteiner__a navConteiner__badgeCount_enable">
+                            <span class="navConteiner__icon navConteiner__icon_messages"></span>
+                            <span class="navConteiner__name">Messages</span>
+                            <span class="navConteiner__badgeCount ">@unread_message_number_string</span>
+                        </a>
+                    </li><!-- /.navConteiner -->
+                    <li class="navConteiner @_menuCases">
+                        <a href="/cases/Index" class="navConteiner__a navConteiner__badgeCount_enable">
+                            <span class="navConteiner__icon navConteiner__icon_dashboard"></span>
+                            <span class="navConteiner__name">Dashboard</span>
+                            <span class="navConteiner__badgeCount ">@unread_report_number_string</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="header__rightBlock">
+                <div class="userNavigation">
+                    <a href="#" class="userNavigation__a">
+                        <div class="userNavigation__info">
+                            <div class="userNavigation__name">@(um._user != null ? um._user.first_nm : "")</div>
+                            <div class="userNavigation__surname">@(um._user != null ? um._user.last_nm : "")</div>
+                        </div>
+                        <div class="userNavigation__logo">
+                            @if ((um._user != null) && (um._user.photo_path.Trim() != ""))
+                            {
+                                <img src="@Url.Content(um._user.photo_path.Trim())" alt="UserLogo" />
+                            }
+                            else
+                            {
+                                <img src="@Url.Content("/Content/Icons/anonimousReporterIcon.png")" alt="UserLogo" />
+                            }
+                        </div>
+                        <div class="userNavigation__triangle"></div>
+                    </a>
+                    <ul class="dropDown-navigation">
+                        <li class="dropDown-navigation__li"><a href="/settings/index/" class="dropDown-navigation__a">@GlobalRes.Settings</a></li>
+                        <li class="dropDown-navigation__li active">
+                            <a href="/settings/password/" class="dropDown-navigation__a">
+                                @GlobalRes.Password
+                            </a>
+                        </li>
+                        <li class="dropDown-navigation__li">
+                            <a href="/Payment/History" class="dropDown-navigation__a">
+                                @GlobalRes.Subscription
+                            </a>
+                        </li>
+                        <li class="dropDown-navigation__li">
+                            <form id="logout_form" action="@Url.Action("Logout", "Base")">
+                                <a href="javascript:{}" onclick="document.getElementById('logout_form').submit();" class="dropDown-navigation__a">
+                                    @GlobalRes.Logout
+                                </a>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    @{
+        string hrefURL = Request.Url.AbsoluteUri.ToLower();
+        if (hrefURL.Contains("/settings"))
+        {
+            hrefURL = "/settings/index";
+            page_subtitle = GlobalRes.Settings;
+        }
+        if ((hrefURL.Contains("/tasks")))
+        {
+            if (!mainURL.Contains("analytics"))
+            {
+                hrefURL = "/tasks/index";
+                page_subtitle = GlobalRes.Tasks;
+            }
+        }
+        if ((hrefURL.Contains("case/")) || (hrefURL.Contains("/cases")) || (hrefURL.Contains("/newreport") || (hrefURL.Contains("case/task/"))))
+        {
+            hrefURL = "/cases/index";
+            page_subtitle = GlobalRes.Cases;
+        }
+
+        if (hrefURL.Contains("/cases"))
+        {
+            hrefURL = "/cases/index";
+            page_subtitle = GlobalRes.Dashboard;
+        }
+
+        if (hrefURL.Contains("/analytics"))
+        {
+            hrefURL = "/analytics/index";
+            page_subtitle = GlobalRes.Analytics;
+        }
+
+        if (hrefURL.Contains("/messages"))
+        {
+            hrefURL = "/messages/index";
+            page_subtitle = GlobalRes.Messages;
+        }
+
+        if (hrefURL.Contains("/payment"))
+        {
+            hrefURL = "/Payment/History";
+            page_subtitle = GlobalRes.Payments;
+        }
+        string Res_or_comp = "";
+        if ((investigationstatus > 2 && investigationstatus < 7) || (investigationstatus == 9))
+        {
+            Res_or_comp = GlobalRes.CloseCaseUp.ToUpper();
+            if ((investigationstatus == 4) || (investigationstatus == 6))
+            {
+                Res_or_comp = "";
+            }
+            if ((investigationstatus == 9) && (_user.role_id == 4 || _user.role_id == 5))
+            {
+                Res_or_comp = GlobalRes.Reopen.ToUpper();
+            }
+        }
+    }
+    <div class="container clearfix">
+        <div class="breadcrumbs clearfix">
+            <div class="breadcrumbs-info clearfix">
+                <a href="@hrefURL" class="breadcrumbs-info__tree-links">@page_subtitle</a>
+                <span class="breadcrumbs-info__links-arrow"></span>
+                <div class="breadcrumbs-info__current-page">
+                    <span class="breadcrumbs-info__current-page-status"></span>
+                    <div class="breadcrumbs-info__current-page-text">@(Request.Url.AbsoluteUri.ToLower().Contains("newreport") ? report_name_code : report_name)</div>
+                </div>
+                <a href="#" class="btn-link">@Res_or_comp</a>
+            </div>
+            <ul class="breadcrumbs-mediators">
+                <li class="breadcrumbs-mediators__li"><a href="#" class="breadcrumbs-mediators__a"><img src="http://report.employeeconfidential.com//Upload//UserLogo/2_636338753935849609.jpg" alt="" class="breadcrumbs-mediators__img" /><span class="profile-status online"></span></a></li><!-- /.breadcrumbs-mediators__li -->
+                <li class="breadcrumbs-mediators__li"><a href="#" class="breadcrumbs-mediators__a"><img src="http://report.employeeconfidential.com//Upload//UserLogo/24_636362867608769531.jpg" alt="" class="breadcrumbs-mediators__img" /><span class="profile-status away"></span></a></li><!-- /.breadcrumbs-mediators__li -->
+                <li class="breadcrumbs-mediators__li"><a href="#" class="breadcrumbs-mediators__a"><img src="http://report.employeeconfidential.com//Upload//UserLogo/2_636338753935849609.jpg" alt="" class="breadcrumbs-mediators__img" /><span class="profile-status "></span></a></li><!-- /.breadcrumbs-mediators__li -->
+            </ul>
+        </div>
+    </div>
+
+    @RenderBody()
+
+    <script src="~/Scripts/View/Settings.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //var button = $(".acceptCaseBtn.resolveCase");
+            var textareaPopup = $('textarea#txtResolve');
+
+            function overlay() {
+                el = document.getElementById("anotherDialog");
+                el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+            }
+
+
+            var textareaNewPopup = $('textarea#txtEscalate');
+
+            function overlay_approve() {
+                el = document.getElementById("approveDialog");
+                el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+            }
+
+            function startClick(){
+                $('.logButtonModal').click(
+                    function(){
+                        if(textareaPopup[0].value==""){
+                            textareaPopup.css({'border-color':'red', 'box-shadow':'red'});
+                        }
+                        else{
+                            //  console.log('logButtonModal click - _report_id = ' + @_report_id);
+                        }
+                    }
+                );
+                $('.repButtonModal').click(
+                    function(){
+                        if(textareaPopup[0].value==""){
+                            textarea.css({'border-color':'red', 'box-shadow':'red'});
+                        }
+                        else{
+                        //    console.log('repButtonModal click - _report_id = ' + @_report_id);
+                        }
+                    }
+                );
+            }
+            startClick();
+        });
+
+        $("#return_investigation").on('click', function(el){
+
+            $("#approveDialog").toggle();
+            $("#txtEscalate").attr('placeholder', "@Html.Raw(GlobalRes.AddReasonWhy)");
+
+            $("#escalate_btn").text("@Html.Raw(GlobalRes.Returnnvestigation)");
+            $("#escalate_btn").val(3);
+            $("#_overlay_title").text("@Html.Raw(GlobalRes.Returnnvestigation)");
+            $("#textbox_title").text("@Html.Raw(GlobalRes.AddReasonWhy)");
+        });
+        $("#approve_close").on('click', function(el){
+
+            $("#approveDialog").toggle();
+            $("#txtEscalate").attr('placeholder', "@Html.Raw(same_mediator_warning)");
+            $("#escalate_btn").text("@Html.Raw(GlobalRes.CloseCaseUp)");
+            $("#escalate_btn").val(9);
+            $("#_overlay_title").text("@Html.Raw(GlobalRes.CloseCaseUp)");
+            $("#textbox_title").text("@Html.Raw(same_mediator_warning)");
+        });
+    </script>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
