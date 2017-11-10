@@ -9,11 +9,9 @@
 
     function NewCaseCaseClosureReportController($scope, $filter, orderByFilter, $location, NewCaseCaseClosureReportService) {
         $scope.model = { };
-        $scope.report_id = parseInt($location.absUrl().substring($location.absUrl().indexOf('CaseClosureReport/') + 'CaseClosureReport/'.length));
+        $scope.report_id = $filter('parseUrl')($location.$$absUrl, 'report_id');
 
         $scope.refresh = function (data) {
-            data.cc_crime_statistics_categories.splice(0, 0, { id: 0, crime_statistics_category_en: 'Please select' });
-            data.cc_crime_statistics_locations.splice(0, 0, { id: 0, crime_statistics_location_en: 'Please select' });
             data.outcomes.splice(0, 0, { id: 0, outcome_en: 'Please select' });
 
             data.report_cc_crime.cc_is_clear_act_crime = '' + data.report_cc_crime.cc_is_clear_act_crime;

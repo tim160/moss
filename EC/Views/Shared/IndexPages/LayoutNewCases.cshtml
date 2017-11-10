@@ -86,17 +86,10 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <link rel="stylesheet" type="text/css" href="~/Content/newCase.css" />
-    <link rel="stylesheet" type="text/css" href="~/Content/main.css">
-    <link rel="stylesheet" type="text/css" href="~/Content/styleReportDashboard.css">
-    <link rel="stylesheet" type="text/css" href="~/Content/styleTasks.css">
-    <link rel="stylesheet" type="text/css" href="~/Content/stylePageMessages.css">
-    <link rel="shortcut icon" type="image/x-icon" src="~/favicon.ico" />
-
-    <link href="~/Content/jquery-ui.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/newCase.css" />
 
     <title>@ViewBag.Title</title>
 
@@ -124,8 +117,6 @@
     <!-- End Inspectlet Embed Code -->
     <input type="hidden" id="_report_id" value="@Html.Raw(_report_id)" />
     <input type="hidden" id="user_id" value="@Html.Raw(user_id)" />
-
-    <input type="hidden" id="" value="" />
 
     <header class="header">
         @{

@@ -27,23 +27,39 @@
     <div class="mainNavigationTabs clearfix">
         <ul class="mainNavigationTabs__tabs-ul clearfix">
             <li class="mainNavigationTabs__tab-link @(action == "report" ? "active" : "")" data-tab="mainTab-1">
-                <div class="mainNavigationTabs__tab-name"><a href="@Url.Action("Report", new { report_id = ViewBag.report_id })">Report</a></div>
+                <a href="@Url.Action("Report", new { report_id = ViewBag.report_id })">
+                    <div class="mainNavigationTabs__tab-name">Report</div>
+                </a>
                 <div class="mainNavigationTabs__badgeCount"></div>
             </li>
             <li class="mainNavigationTabs__tab-link @(action == "investigationnotes" ? "active" : "")" data-tab="mainTab-2">
-                <div class="mainNavigationTabs__tab-name"><a href="@Url.Action("InvestigationNotes", new { report_id = ViewBag.report_id })">Investigation Notes</a></div>
+                <a href="@Url.Action("InvestigationNotes", new { report_id = ViewBag.report_id })">
+                    <div class="mainNavigationTabs__tab-name">Investigation Notes</div>
+                </a>
                 <div class="mainNavigationTabs__badgeCount"></div>
             </li>
             <li class="mainNavigationTabs__tab-link @(action == "tasks" ? "active" : "")mainNavigationTabs__badgeCount_enable" data-tab="mainTab-3">
-                <div class="mainNavigationTabs__tab-name"><a href="@Url.Action("Tasks", new { report_id = ViewBag.report_id })">Tasks</a></div>
+                <a href="@Url.Action("Tasks", new { report_id = ViewBag.report_id })">
+                    <div class="mainNavigationTabs__tab-name">Tasks</div>
+                </a>
                 <div class="mainNavigationTabs__badgeCount"></div>
             </li>
             <li class="mainNavigationTabs__tab-link @(action == "messages" ? "active" : "")mainNavigationTabs__badgeCount_enable" data-tab="mainTab-4">
-                <div class="mainNavigationTabs__tab-name"><a href="@Url.Action("Messages", new { report_id = ViewBag.report_id })">Messages</a></div>
+                <a href="@Url.Action("Messages", new { report_id = ViewBag.report_id })">
+                    <div class="mainNavigationTabs__tab-name">Messages</div>
+                </a>
                 <div class="mainNavigationTabs__badgeCount"></div>
             </li>
             <li class="mainNavigationTabs__tab-link @(action == "team" ? "active" : "")" data-tab="mainTab-5">
-                <div class="mainNavigationTabs__tab-name"><a href="@Url.Action("Team", new { report_id = ViewBag.report_id })">Team</a></div>
+                <a href="@Url.Action("Team", new { report_id = ViewBag.report_id })">
+                    <div class="mainNavigationTabs__tab-name">Team</div>
+                </a>
+                <div class="mainNavigationTabs__badgeCount"></div>
+            </li>
+            <li class="mainNavigationTabs__tab-link @(action == "log" ? "active" : "")" data-tab="mainTab-5">
+                <a href="@Url.Action("Log", new { report_id = ViewBag.report_id })">
+                    <div class="mainNavigationTabs__tab-name">Log</div>
+                </a>
                 <div class="mainNavigationTabs__badgeCount"></div>
             </li>
         </ul>

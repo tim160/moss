@@ -11,12 +11,7 @@
     ]);
 
     angular.module('EC').config(['$locationProvider',
-        function ($locationProvider) {
-            $locationProvider.html5Mode({
-                enabled: true,
-                requireBase: false,
-                rewriteLinks: false,
-            });
+        function () {
         }])
     .run(function () {
     });
@@ -57,6 +52,17 @@
                 return array;
             }
             return null;
+        };
+    });
+
+    angular.module('EC').filter('parseUrl', function () {
+        return function (url, param) {
+            var params = url.split(/(\?|\&)([^=]+)\=([^&]+)/);
+            return params[params.findIndex(function (x) {
+                if (x === param) {
+                    return true;
+                }
+            }) + 1];
         };
     });
 

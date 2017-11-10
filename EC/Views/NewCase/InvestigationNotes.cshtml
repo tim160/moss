@@ -8,216 +8,400 @@
     Layout = "~/Views/Shared/IndexPages/LayoutNewCases.cshtml";
 }
 
-@*
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-*@
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700" rel="stylesheet">
-
-<link href="@Url.Content("~/Content/assets/template/css/reset.css")" rel="stylesheet">
-<link href="@Url.Content("~/Content/assets/template/css/style.css")" rel="stylesheet">
-
+<link rel="stylesheet" href="~/Content/assets/template/css/style.css" />
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 @Html.Partial("~/Views/Shared/Partial/_NewCasesTopMenu.cshtml")
 
-<!-- Main jumbotron for a primary marketing message or call to action -->
-
-<section class="types-section left" ng-controller="NewCaseInvestigationNotesController">
-
-    <div class="menu-buttom ninja-btn">
-        <a href="#"></a>
+<div class="container mainNavigationTabs__tabContent-container">
+    <div id="mainTab-1" class="mainNavigationTabs__tabContent ">
     </div>
-    <div class="center">
-        <!--Incident types-->
-        <div class="flex incident-types someBorder">
-            <div class="item">
-                <p class="fact-title">Incident types</p>
-                <ul>
-                    <li ng-repeat="item in model.report_secondary_type_selected">
-                        <a href="#" ng-click="incidentTypeDelete(item.id)" ng-show="!item.added_by_reporter">X</a>
-                        {{item.secondary_type_en}}
-                    </li>
-                </ul>
-                <a href="#" class="green--button incident-types--button" ng-show="!incidentTypeAddMode && model.report_secondary_type_selected_avilable.length > 0" ng-click="incidentTypeAddMode = !incidentTypeAddMode">
-                    Add incident type
-                </a>
-                <dropbox ng-show="incidentTypeAddMode"
-                         text="Select one"
-                         itemText="{{item.secondary_type_en}}"
-                         ng-dropbox-list="model.report_secondary_type_selected_avilable"
-                         ng-dropbox-rootItem=""
-                         ng-dropbox-on-select="incidentTypeAdd">
-                </dropbox>
-            </div>
+    <div id="mainTab-2" class="mainNavigationTabs__tabContent active">
 
-            <div class="item">
-                <p class="fact-title">Involved Departments</p>
-                <ul>
-                    <li ng-repeat="item in model.departments_report">
-                        <a href="#" ng-click="departmentDelete(item.id)" ng-show="!item.added_by_reporter">X</a>
-                        {{item.name}}
-                    </li>
-                </ul>
-                <a href="#" class="green--button incident-types--button" ng-show="!departmentAddMode && model.departments_all.length > 0" ng-click="departmentAddMode = !departmentAddMode">
-                    Add department
-                </a>
-                <dropbox ng-show="departmentAddMode"
-                         text="Select one"
-                         itemText="{{item.department_en}}"
-                         ng-dropbox-list="model.departments_all"
-                         ng-dropbox-rootItem=""
-                         ng-dropbox-on-select="departmentAdd">
-                </dropbox>
-            </div>
+        <div class="subNavigationTabs clearfix">
+            <ul class="subNavigationTabs__tabs-ul clearfix">
+                <li class="subNavigationTabs__tab-link active" data-tab="subTab-1">
+                    <div class="subNavigationTabs__tab-name">General information</div>
+                </li>
+                <li class="subNavigationTabs__tab-link" data-tab="subTab-2">
+                    <div class="subNavigationTabs__tab-name">Case Closure Report</div>
+                </li>
+            </ul>
         </div>
-        <div class="flex incident-types specFlex">
-            <div class="item">
-                <p class="fact-title">Involved Parties</p>
-                <ul>
-                    <li ng-repeat="item in model.mediator_involved">
-                        <a href="#" ng-click="mediatorDelete(item.id)" ng-show="!item.added_by_reporter">X</a>
-                        {{item.first_nm}} {{item.last_nm}}
-                    </li>
-                    <li ng-repeat="item in model.mediator_not_involved">
-                        <a href="#" ng-click="mediatorDelete(item.id, 2)" ng-show="!item.added_by_reporter">X</a>
-                        {{item.Name}} {{item.last_name}} {{item.Title}}
-                    </li>                    
-                </ul>
-                <a href="#" class="green--button incident-types--button" ng-show="!mediatorAddMode" ng-click="mediatorAddMode = !mediatorAddMode">Add person</a>
-                <div ng-show="mediatorAddMode">
-                    <div class="addPerson">
-                        <div class="addPersonName sampleContainer">
-                            <div class="personTitle title">@GlobalRes.FirstNameUp</div>
-                            <div class="personData">
-                                <input name="personName" class="personDataTextBox fName" ng-class="{error : !addPerson.FirstName}" ng-model="addPerson.FirstName" />
-                            </div>
-                        </div>
+    </div>
+    <div id="mainTab-3" class="mainNavigationTabs__tabContent">
+    </div>
+    <div id="mainTab-4" class="mainNavigationTabs__tabContent">
+    </div>
+    <div id="mainTab-5" class="mainNavigationTabs__tabContent">
+    </div>
+</div>
 
-                        <div class="addPersonName sampleContainer">
-                            <div class="personTitle title">@GlobalRes.LastNameUp</div>
-                            <div class="personData">
-                                <input name="personLastName" class="personDataTextBox lName" ng-class="{error : !addPerson.LastName}" ng-model="addPerson.LastName" />
+<div class="container subNavigationTabs__tabContent-container">
+    <div id="subTab-1" class="subNavigationTabs__tabContent active" ng-controller="NewCaseInvestigationNotesController">
+        <section class="content-container">
+            <div class="content-container__inner">
+                <div class="content-container__inner-additional clearfix">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="row">
+                                <p class="sectionHeader-col">Incident types</p>
+                                <p class="content-container__p" ng-repeat="item in model.report_secondary_type_selected">
+                                    <a href="#" ng-click="incidentTypeDelete(item.id)" ng-show="!item.added_by_reporter">X</a>
+                                    {{item.secondary_type_en}}
+                                </p>
                             </div>
+                            <a href="#" class="btn-link" ng-show="!incidentTypeAddMode && model.report_secondary_type_selected_avilable.length > 0" ng-click="incidentTypeAddMode = !incidentTypeAddMode">
+                                Add incident type
+                            </a>
+                            <dropbox ng-show="incidentTypeAddMode"
+                                     text="Select one"
+                                     itemText="{{item.secondary_type_en}}"
+                                     ng-dropbox-list="model.report_secondary_type_selected_avilable"
+                                     ng-dropbox-rootItem=""
+                                     ng-dropbox-on-select="incidentTypeAdd">
+                            </dropbox>
                         </div>
+                        <div class="col-4">
+                            <div class="row">
+                                <p class="sectionHeader-col">Involved Parties</p>
+                                <p class="content-container__p" ng-repeat="item in model.mediator_involved">
+                                    <a href="#" ng-click="mediatorDelete(item.id)" ng-show="!item.added_by_reporter">X</a>
+                                    {{item.first_nm}} {{item.last_nm}}
+                                </p>
+                                <p class="content-container__p" ng-repeat="item in model.mediator_not_involved">
+                                    <a href="#" ng-click="mediatorDelete(item.id, 2)" ng-show="!item.added_by_reporter">X</a>
+                                    {{item.Name}} {{item.last_name}} {{item.Title}}
+                                </p>
+                            </div>
+                            <a href="#" class="btn-link" ng-show="!mediatorAddMode" ng-click="mediatorAddMode = !mediatorAddMode">Add person</a>
+                            <div ng-show="mediatorAddMode">
+                                <div class="addPerson">
+                                    <div class="addPersonName sampleContainer">
+                                        <div class="personTitle title">@GlobalRes.FirstNameUp</div>
+                                        <div class="personData">
+                                            <input name="personName" class="personDataTextBox fName" ng-class="{error : !addPerson.FirstName}" ng-model="addPerson.FirstName" />
+                                        </div>
+                                    </div>
 
-                        <div class="addPersonInfo sampleContainer">
-                            <div class="personTitle title">@GlobalRes.Title</div>
-                            <div class="personData">
-                                <input type="text" name="personTitle" class="personDataTextBox witnessTitle" ng-class="{error : !addPerson.Title}" ng-model="addPerson.Title" />
+                                    <div class="addPersonName sampleContainer">
+                                        <div class="personTitle title">@GlobalRes.LastNameUp</div>
+                                        <div class="personData">
+                                            <input name="personLastName" class="personDataTextBox lName" ng-class="{error : !addPerson.LastName}" ng-model="addPerson.LastName" />
+                                        </div>
+                                    </div>
+
+                                    <div class="addPersonInfo sampleContainer">
+                                        <div class="personTitle title">@GlobalRes.Title</div>
+                                        <div class="personData">
+                                            <input type="text" name="personTitle" class="personDataTextBox witnessTitle" ng-class="{error : !addPerson.Title}" ng-model="addPerson.Title" />
+                                        </div>
+                                    </div>
+                                    <dropbox ng-class="{errorDropbox : addPerson.Role.id == 0}"
+                                             ng-dropbox-textexpr="addPerson.Role.role_en"
+                                             itemText="{{item.role_en}}"
+                                             ng-dropbox-list="model.addNewPersonRoles"
+                                             ng-dropbox-rootItem=""
+                                             ng-dropbox-on-select="addPerson.Role">
+                                    </dropbox>
+                                    <a href="#" class="btn-link" ng-click="addNewPerson()">@GlobalRes.AddPerson</a>
+                                </div>
                             </div>
                         </div>
-                        <dropbox
-                                 ng-class="{errorDropbox : addPerson.Role.id == 0}" 
-                                 ng-dropbox-textexpr="addPerson.Role.role_en"
-                                 itemText="{{item.role_en}}"
-                                 ng-dropbox-list="model.addNewPersonRoles"
-                                 ng-dropbox-rootItem=""
-                                 ng-dropbox-on-select="addPerson.Role"
-                                 >
-                        </dropbox>
-                        <a href="#" class="green--button incident-types--button" ng-click="addNewPerson()">@GlobalRes.AddPerson</a>
+                        <div class="col-4">
+                            <div class="row">
+                                <p class="sectionHeader-col">Involved Departments</p>
+                                <p class="content-container__p" ng-repeat="item in model.departments_report">
+                                    <a href="#" ng-click="departmentDelete(item.id)" ng-show="!item.added_by_reporter">X</a>
+                                    {{item.name}}
+                                </p>
+                            </div>
+                            <a href="#" class="btn-link" ng-show="!departmentAddMode && model.departments_all.length > 0" ng-click="departmentAddMode = !departmentAddMode">
+                                Add department
+                            </a>
+                            <dropbox ng-show="departmentAddMode"
+                                     text="Select one"
+                                     itemText="{{item.department_en}}"
+                                     ng-dropbox-list="model.departments_all"
+                                     ng-dropbox-rootItem=""
+                                     ng-dropbox-on-select="departmentAdd">
+                            </dropbox>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!--Facts Established-->
-        <div class="border-top facts-margin facts-padding facts-established">
-            <p class="fact-title">Facts Established</p>
-            <div class="">
-                <textarea class="facts-established--text" ng-model="model.note1" ng-show="editNote1"> </textarea>
-                <p ng-show="!editNote1">{{model.note1}}</p>
-                <a href="#" class="green--button facts--submit" ng-show="editNote1" ng-click="saveNote(1)">Save</a>
-                <a href="#" class="green--button facts--submit" ng-show="!editNote1" ng-click="editNote1 = true">
-                    {{model.note1 || '' !== '' ? 'Edit' : 'Add'}}
-                </a>
-            </div>
-        </div>
+        </section>
 
-        <!--Investigation Methodology-->
-        <div class="border-top facts-margin facts-padding facts-established">
-            <p class="fact-title">Investigation Methodology</p>
-            <div class="">
-                <textarea class="facts-established--text" ng-model="model.note2" ng-show="editNote2"> </textarea>
-                <p ng-show="!editNote2">{{model.note2}}</p>
-                <a href="#" class="green--button facts--submit" ng-show="editNote2" ng-click="saveNote(2)">Save</a>
-                <a href="#" class="green--button facts--submit" ng-show="!editNote2" ng-click="editNote2 = true">
-                    {{model.note2 || '' !== '' ? 'Edit' : 'Add'}}
-                </a>
-            </div>
-        </div>
-
-        <!--Root Cause Investigation-->
-        <div class="border-top facts-margin facts-padding ">
-            <p class="fact-title">Root Cause Investigation</p>
-
-            <!--Academic Misconduct-->
-            <div class="investigation flex space-between" ng-repeat="item in model.report_secondary_type_selected">
-                <div class="investigation--title">{{item.secondary_type_en}}</div>
-                <div class="investigation__item flex flex-column">
-
-                    <div class="investigation__inner">
-                        <dropbox ng-dropbox-textExpr="getBehavioralFactors(item)"
-                                 itemText="{{item.name_en}}"
-                                 ng-dropbox-list="model.company_root_cases_behavioral"
-                                 ng-dropbox-rootItem="item"
-                                 ng-dropbox-on-select="changeBehavioralFactors">
-                        </dropbox>
+        <section class="content-container">
+            <div class="content-container__inner">
+                <p class="sectionHeader">Facts Established</p>
+                <div class="content-container__inner-additional">
+                    <div class="row">
+                        <textarea class="facts-established--text" ng-model="model.note1" ng-show="editNote1"> </textarea>
                     </div>
-                    <div class="">
-                        <textarea class="facts-established--text" cols="20" rows="5" ng-model="item.inv_meth_bf_note" ng-show="item.behavioralEditMode"></textarea>
-                        <p ng-show="!item.behavioralEditMode">{{item.inv_meth_bf_note}}</p>
-                        <a href="#" class="green--button facts--submit" ng-click="item.behavioralEditMode = !item.behavioralEditMode" ng-show="!item.behavioralEditMode">
-                            {{item.inv_meth_bf_note != '' ? 'Edit note' : 'Add note'}}
-                        </a>
-                        <a href="#" class="green--button facts--submit" ng-show="item.behavioralEditMode" ng-click="saveNoteBehavioralFactors(item)">
-                            Save
-                        </a>
-
-                    </div>
-                    <div class="investigation__inner">
-                        <dropbox ng-dropbox-textExpr="getExternalInfluences(item)"
-                                 itemText="{{item.name_en}}"
-                                 ng-dropbox-list="model.company_root_cases_external"
-                                 ng-dropbox-rootItem="item"
-                                 ng-dropbox-on-select="changeExternalInfluences">
-                        </dropbox>
-                    </div>
-                    <div class="">
-                        <textarea class="facts-established--text" ng-model="item.inv_meth_ei_note" ng-show="item.externalInfluencesEditMode"></textarea>
-                        <p ng-show="!item.externalInfluencesEditMode">{{item.inv_meth_ei_note}}</p>
-                        <span class="green--button facts--submit" ng-click="item.externalInfluencesEditMode = !item.externalInfluencesEditMode" ng-show="!item.externalInfluencesEditMode">
-                            {{item.inv_meth_ei_note != '' ? 'Edit note' : 'Add note'}}
-                        </span>
-                        <a href="#" class="green--button facts--submit" ng-show="item.externalInfluencesEditMode" ng-click="saveNoteExternalInfluences(item)">
-                            Save
-                        </a>
-                    </div>
-                    <div class="investigation__inner">
-                        <dropbox ng-dropbox-textExpr="getCampusInfluences(item)"
-                                 itemText="{{item.name_en}}"
-                                 ng-dropbox-list="model.company_root_cases_organizational"
-                                 ng-dropbox-rootItem="item"
-                                 ng-dropbox-on-select="changeCampusInfluences">
-                        </dropbox>
-                    </div>
-                    <div class="">
-                        <textarea class="facts-established--text" ng-model="item.inv_meth_ci_note" ng-show="item.campusInfluencesEditMode"></textarea>
-                        <p ng-show="!item.campusInfluencesEditMode">{{item.inv_meth_ci_note}}</p>
-                        <span class="green--button facts--submit" ng-click="item.campusInfluencesEditMode = !item.campusInfluencesEditMode" ng-show="!item.campusInfluencesEditMode">
-                            {{item.inv_meth_ci_note != '' ? 'Edit note' : 'Add note'}}
-                        </span>
-                        <a href="#" class="green--button facts--submit" ng-show="item.campusInfluencesEditMode" ng-click="saveNoteCampusInfluences(item)">
-                            Save
+                    <div class="row clearfix">
+                        <p ng-show="!editNote1">{{model.note1}}</p>
+                        <a href="#" class="green--button facts--submit" ng-show="editNote1" ng-click="saveNote(1)">Save</a>
+                        <a href="#" class="green--button facts--submit" ng-show="!editNote1" ng-click="editNote1 = true">
+                            {{model.note1 || '' !== '' ? 'Edit' : 'Add'}}
                         </a>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <section class="content-container">
+            <div class="content-container__inner">
+                <p class="sectionHeader">Investigation Methodology</p>
+                <div class="content-container__inner-additional">
+                    <div class="row">
+                        <textarea class="facts-established--text" ng-model="model.note2" ng-show="editNote2"> </textarea>
+                    </div><!-- /.row -->
+                    <div class="row clearfix">
+                        <p ng-show="!editNote2">{{model.note2}}</p>
+                        <a href="#" class="green--button facts--submit" ng-show="editNote2" ng-click="saveNote(2)">Save</a>
+                        <a href="#" class="green--button facts--submit" ng-show="!editNote2" ng-click="editNote2 = true">
+                            {{model.note2 || '' !== '' ? 'Edit' : 'Add'}}
+                        </a>
+                    </div><!-- /.row -->
+                </div>
+            </div>
+        </section>
+
+        <section class="content-container">
+            <div class="content-container__inner">
+                <p class="sectionHeader">Root Cause Investigation</p>
+
+                <div class="content-container__inner-additional clearfix" ng-repeat="item in model.report_secondary_type_selected">
+                    <div class="row">
+                        <div class="col-3">
+                            <p class="content-container__p">{{item.secondary_type_en}}</p>
+                        </div>
+                        <div class="col-6">
+                            <div class="investigation__inner">
+                                <dropbox ng-dropbox-textExpr="getBehavioralFactors(item)"
+                                         itemText="{{item.name_en}}"
+                                         ng-dropbox-list="model.company_root_cases_behavioral"
+                                         ng-dropbox-rootItem="item"
+                                         ng-dropbox-on-select="changeBehavioralFactors">
+                                </dropbox>
+                            </div>
+                            <div class="">
+                                <textarea class="facts-established--text" cols="20" rows="5" ng-model="item.inv_meth_bf_note" ng-show="item.behavioralEditMode"></textarea>
+                                <p ng-show="!item.behavioralEditMode">{{item.inv_meth_bf_note}}</p>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <a href="#" class="green--button facts--submit" ng-click="item.behavioralEditMode = !item.behavioralEditMode" ng-show="!item.behavioralEditMode">
+                                {{item.inv_meth_bf_note != '' ? 'Edit note' : 'Add note'}}
+                            </a>
+                            <a href="#" class="green--button facts--submit" ng-show="item.behavioralEditMode" ng-click="saveNoteBehavioralFactors(item)">
+                                Save
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3"></div>
+                        <div class="col-6">
+                            <div class="investigation__inner">
+                                <dropbox ng-dropbox-textExpr="getExternalInfluences(item)"
+                                         itemText="{{item.name_en}}"
+                                         ng-dropbox-list="model.company_root_cases_external"
+                                         ng-dropbox-rootItem="item"
+                                         ng-dropbox-on-select="changeExternalInfluences">
+                                </dropbox>
+                            </div>
+                            <div class="">
+                                <textarea class="facts-established--text" ng-model="item.inv_meth_ei_note" ng-show="item.externalInfluencesEditMode"></textarea>
+                                <p ng-show="!item.externalInfluencesEditMode">{{item.inv_meth_ei_note}}</p>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <span class="green--button facts--submit" ng-click="item.externalInfluencesEditMode = !item.externalInfluencesEditMode" ng-show="!item.externalInfluencesEditMode">
+                                {{item.inv_meth_ei_note != '' ? 'Edit note' : 'Add note'}}
+                            </span>
+                            <a href="#" class="green--button facts--submit" ng-show="item.externalInfluencesEditMode" ng-click="saveNoteExternalInfluences(item)">
+                                Save
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3"></div>
+                        <div class="col-6">
+                            <div class="investigation__inner">
+                                <dropbox ng-dropbox-textExpr="getCampusInfluences(item)"
+                                         itemText="{{item.name_en}}"
+                                         ng-dropbox-list="model.company_root_cases_organizational"
+                                         ng-dropbox-rootItem="item"
+                                         ng-dropbox-on-select="changeCampusInfluences">
+                                </dropbox>
+                            </div>
+                            <div class="">
+                                <textarea class="facts-established--text" ng-model="item.inv_meth_ci_note" ng-show="item.campusInfluencesEditMode"></textarea>
+                                <p ng-show="!item.campusInfluencesEditMode">{{item.inv_meth_ci_note}}</p>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <span class="green--button facts--submit" ng-click="item.campusInfluencesEditMode = !item.campusInfluencesEditMode" ng-show="!item.campusInfluencesEditMode">
+                                {{item.inv_meth_ci_note != '' ? 'Edit note' : 'Add note'}}
+                            </span>
+                            <a href="#" class="green--button facts--submit" ng-show="item.campusInfluencesEditMode" ng-click="saveNoteCampusInfluences(item)">
+                                Save
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-overlay"></div>
+        </section>
     </div>
 
-    <div class="panel-overlay"></div>
+    <div id="subTab-2" class="subNavigationTabs__tabContent" ng-controller="NewCaseCaseClosureReportController">
 
-</section>
-@*
-    <script src="@Url.Content("~/Content/assets/template/js/select.js")"></script>
-*@
+        <section class="content-container">
+            <div class="content-container__inner">
+                <p class="sectionHeader">Is this a Clery Act Crime?</p>
+                <div class="content-container__inner-additional clearfix">
+                    <div class="col-3 CaseClosureReport__radioBlock clearfix">
+                        <label for="Yes" class="inputRadio">
+                            <input type="radio" id="Yes" class="inputRadio__input" value="true" ng-model="model.report_cc_crime.cc_is_clear_act_crime" ng-change="saveCrime()" />
+                            <span class="inputRadio__customnBtn"></span>
+                            <span class="inputRadio__inputTitle">No</span>
+                        </label>
+                        <label for="No" class="inputRadio">
+                            <input type="radio" id="No" class="inputRadio__input" value="false" ng-model="model.report_cc_crime.cc_is_clear_act_crime" ng-change="saveCrime()" />
+                            <span class="inputRadio__customnBtn"></span>
+                            <span class="inputRadio__inputTitle">Yes</span>
+                        </label>
+                    </div>
+                    <div class="col-3">
+                        <dropbox text="Please select"
+                                 itemText="{{item.crime_statistics_category_en}}"
+                                 ng-dropbox-list="model.cc_crime_statistics_categories"
+                                 ng-dropbox-rootItem="item"
+                                 ng-dropbox-on-select="saveCrime">
+                        </dropbox>
+                    </div>
+                    <div class="col-3">
+                        <dropbox text="Please select"
+                                 itemText="{{item.crime_statistics_location_en}}"
+                                 ng-dropbox-list="model.cc_crime_statistics_locations"
+                                 ng-dropbox-rootItem="item"
+                                 ng-dropbox-on-select="saveCrime">
+                        </dropbox>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-container">
+            <div class="content-container__inner">
+                <p class="sectionHeader">Executive Summary</p>
+                <div class="content-container__inner-additional">
+                    <div class="row">
+                        <textarea class="textareaBlock">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero, ea. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem cum quia nobis, consequatur magnam dolor nihil rerum sapiente culpa natus facilis quibusdam aut quas! Cum, culpa, maiores? Iure animi fugit, adipisci, vero ad odit, repudiandae, ullam eum illo perferendis dolorum neque corrupti corporis placeat error quasi nesciunt modi veritatis aperiam unde quibusdam optio assumenda! Nobis aperiam repellendus accusantium at totam asperiores repudiandae adipisci dolor, quia tenetur officia. Consectetur odit natuacilis id perspiciatis quia non distinctio quas, velit doloribus, cum! Sunt eos, facere dicta ipsam eius accusamus suscipit! Possimus vitae fuga dolorem inventore, facere, vel libero sapiente quisquam odit necessitatibus eveniet quas reprehenderit? Aliquid iusto quidem accusamus voluptas, dicta delectus architecto eius eveniet error optio cumque id totam, placeat facere.</textarea>
+                    </div><!-- /.row -->
+                    <div class="row clearfix">
+                        <a href="#" class="btn-link pull-right">Save</a>
+                    </div><!-- /.row -->
+                </div>
+            </div>
+        </section>
+
+        <section class="content-container">
+            <div class="content-container__inner">
+                <p class="sectionHeader">Recommended Recommended Actions for Witnesses and Reporter</p>
+                <div class="content-container__inner-additional clearfix">
+                    <div class="row">
+                        <div class="col-3">
+                            <p class="content-container__p">James Button</p>
+                        </div><!-- /.col-3 -->
+                        <div class="col-6">
+                            <select name="" id="" class="selectList">
+                                <option value="">Select Outcome</option>
+                                <option value="">Non-Campus Properties</option>
+                                <option value="">On-Campus Property</option>
+                                <option value="">On-Campus </option>
+                                <option value="">Public Property</option>
+                            </select>
+                        </div><!-- /.col-6 -->
+                        <div class="col-3">
+                            <a href="#" class="btn-link ">Add Note</a>
+                        </div><!-- /.col-3 -->
+                    </div><!-- /.row -->
+                    <div class="row">
+                        <div class="col-3">
+                            <p class="content-container__p">Eva Morales</p>
+                        </div><!-- /.col-3 -->
+                        <div class="col-6">
+                            <select name="" id="" class="selectList">
+                                <option value="">Select Outcome</option>
+                                <option value="">Non-Campus Properties</option>
+                                <option value="">On-Campus Property</option>
+                                <option value="">On-Campus </option>
+                                <option value="">Public Property</option>
+                            </select>
+                        </div><!-- /.col-6 -->
+                        <div class="col-3">
+                            <a href="#" class="btn-link ">Add Note</a>
+                        </div><!-- /.col-3 -->
+                    </div><!-- /.row -->
+                </div>
+            </div>
+        </section>
+        <section class="content-container">
+            <div class="content-container__inner">
+                <p class="sectionHeader">Recommended Recommended Actions for Witnesses and Reporter</p>
+                <div class="content-container__inner-additional clearfix">
+                    <div class="row">
+                        <div class="col-3">
+                            <p class="content-container__p">Mark Smith</p>
+                        </div><!-- /.col-3 -->
+                        <div class="col-6">
+                            <select name="" id="" class="selectList">
+                                <option value="">Select Outcome</option>
+                                <option value="">Non-Campus Properties</option>
+                                <option value="">On-Campus Property</option>
+                                <option value="">On-Campus </option>
+                                <option value="">Public Property</option>
+                            </select>
+                        </div><!-- /.col-6 -->
+                        <div class="col-3">
+                            <a href="#" class="btn-link ">Add Note</a>
+                        </div><!-- /.col-3 -->
+                    </div><!-- /.row -->
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<script>
+	$(document).ready(function(){
+
+		$('.mainNavigationTabs__tab-link').click(function(){
+			var tab_id = $(this).attr('data-tab');
+
+			$('.mainNavigationTabs__tab-link').removeClass('active');
+			$('.mainNavigationTabs__tabContent').removeClass('active');
+
+			$(this).addClass('active');
+			$("#"+tab_id).addClass('active');
+		})
+
+		// subNavigationTabs
+
+		$('.subNavigationTabs__tab-link').click(function(){
+			var tab_id = $(this).attr('data-tab');
+
+			$('.subNavigationTabs__tab-link').removeClass('active');
+			$('.subNavigationTabs__tabContent').removeClass('active');
+
+			$(this).addClass('active');
+			$("#"+tab_id).addClass('active');
+		})
+
+		$('#subTab-1').removeClass('active');
+		$('#subTab-2').addClass('active');
+	})
+</script>
