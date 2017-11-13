@@ -266,7 +266,6 @@
     <Content Include="App\services\onLeaveService.js" />
     <Content Include="App\util\fireEventsController.js" />
     <Content Include="App\util\parentController.js" />
-    <Content Include="Content\assets\content\logo.jpg" />
     <Content Include="Content\assets\template\css\reset.css" />
     <Content Include="Content\assets\template\css\style.css" />
     <Content Include="Content\assets\template\img\close.png" />
@@ -430,6 +429,7 @@
     <Content Include="Content\login.css" />
     <Content Include="Content\main.css" />
     <Content Include="Content\MainStyle.css" />
+    <Content Include="Content\newCase.css" />
     <Content Include="Content\reportCss.css" />
     <Content Include="Content\reportDashboard.css" />
     <Content Include="Content\Site.css" />
@@ -488,8 +488,6 @@
     <Content Include="Models\Database\ECEntities.edmx.diagram">
       <DependentUpon>ECEntities.edmx</DependentUpon>
     </Content>
-    <Content Include="Content\assets\content\price.PDF" />
-    <Content Include="Content\assets\template\php\submit.php" />
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <None Include="Properties\PublishProfiles\ec-code.pubxml" />
     <None Include="Properties\PublishProfiles\ec-dev.pubxml" />
@@ -666,8 +664,8 @@
     <Content Include="Views\NewCase\InvestigationNotes.cshtml" />
     <Content Include="Views\NewCase\CaseClosureReport.cshtml" />
     <Content Include="Views\Shared\Partial\ReporterDashboardPartial.cshtml" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Partial\_NewCasesTopMenu.cshtml" />
+    <Content Include="Views\Shared\IndexPages\LayoutNewCases.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1096,6 +1094,8 @@
   <ItemGroup>
     <Folder Include="angular\factories\" />
     <Folder Include="App_Data\" />
+    <Folder Include="Content\assets\content\" />
+    <Folder Include="Content\assets\template\php\" />
     <Folder Include="Upload\CompanyLogo\" />
     <Folder Include="Views\ActiveCasesModel\" />
     <Folder Include="Views\App_LocalResources\" />
