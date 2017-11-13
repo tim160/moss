@@ -703,10 +703,11 @@ namespace EC.Business.Actions.Email
                     }
 
                 }
-                smtpClient.Send(msg);
+                //smtpClient.Send(msg);
+                smtpClient.SendAsync(msg, null);
 
      ///           m_Log.Info(
-     // //              string.Format("Send() - Email sent: recipient [{0}], subject line [{1}]", String.Join(";", to), messageSubject));
+                // //              string.Format("Send() - Email sent: recipient [{0}], subject line [{1}]", String.Join(";", to), messageSubject));
 
                 msg.Attachments.Dispose();
 
