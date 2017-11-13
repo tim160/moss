@@ -306,9 +306,11 @@
     <Content Include="Content\fonts.css" />
     <Content Include="Content\Icons\activityIcon.png" />
     <Content Include="Content\Icons\alarm-active.png" />
+    <Content Include="Content\Icons\alarm-default.png" />
     <Content Include="Content\Icons\anonimousReporterIcon.png" />
     <Content Include="Content\Icons\arrowMessage.png" />
     <Content Include="Content\Icons\arrowSelect.png" />
+    <Content Include="Content\Icons\bfa_sort-desc_simple-black_512x512.png" />
     <Content Include="Content\Icons\blockInfo_img1.png" />
     <Content Include="Content\Icons\blockInfo_img1_cc.png" />
     <Content Include="Content\Icons\blockInfo_img2.png" />
@@ -430,6 +432,7 @@
     <Content Include="Content\login.css" />
     <Content Include="Content\main.css" />
     <Content Include="Content\MainStyle.css" />
+    <Content Include="Content\newCase.css" />
     <Content Include="Content\reportCss.css" />
     <Content Include="Content\reportDashboard.css" />
     <Content Include="Content\Site.css" />
@@ -668,6 +671,7 @@
     <Content Include="Views\Shared\Partial\ReporterDashboardPartial.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Partial\_NewCasesTopMenu.cshtml" />
+    <Content Include="Views\Shared\IndexPages\LayoutNewCases.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
