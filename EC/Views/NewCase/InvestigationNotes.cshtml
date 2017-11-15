@@ -6,12 +6,16 @@
     var user_id = (Int32)ViewBag.user_id;
     List<attachment> attachmentFiles = (List<attachment>)ViewBag.attachmentFiles;
     Layout = "~/Views/Shared/IndexPages/LayoutNewCases.cshtml";
+
+    var is_cc = (bool) ViewBag.is_cc;
 }
 
 <link rel="stylesheet" href="~/Content/assets/template/css/style.css" />
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 @Html.Partial("~/Views/Shared/Partial/_NewCasesTopMenu.cshtml")
+
+@Html.Hidden("is_cc", is_cc)
 
 <div class="container mainNavigationTabs__tabContent-container">
     <div id="mainTab-1" class="mainNavigationTabs__tabContent ">

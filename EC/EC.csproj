@@ -305,9 +305,11 @@
     <Content Include="Content\fonts.css" />
     <Content Include="Content\Icons\activityIcon.png" />
     <Content Include="Content\Icons\alarm-active.png" />
+    <Content Include="Content\Icons\alarm-default.png" />
     <Content Include="Content\Icons\anonimousReporterIcon.png" />
     <Content Include="Content\Icons\arrowMessage.png" />
     <Content Include="Content\Icons\arrowSelect.png" />
+    <Content Include="Content\Icons\bfa_sort-desc_simple-black_512x512.png" />
     <Content Include="Content\Icons\blockInfo_img1.png" />
     <Content Include="Content\Icons\blockInfo_img1_cc.png" />
     <Content Include="Content\Icons\blockInfo_img2.png" />
