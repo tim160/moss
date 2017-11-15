@@ -156,28 +156,31 @@
                         <a href="/analytics/Index" class="navConteiner__a ">
                             <span class="navConteiner__icon navConteiner__icon_analytics"></span>
                             <span class="navConteiner__name">Analytics</span>
-                            <span class="navConteiner__badgeCount "></span>
+                            
                         </a>
                     </li><!-- /.navConteiner -->
                     <li class="navConteiner @_menuTasks">
                         <a href="/tasks/Index" class="navConteiner__a">
                             <span class="navConteiner__icon navConteiner__icon_tasks"></span>
                             <span class="navConteiner__name">Tasks</span>
-                            <span class="navConteiner__badgeCount ">@unread_task_number_string</span>
+                            @if (unread_message_number_string.Length > 0)
+                            {<span class="navConteiner__badgeCount ">@unread_task_number_string</span>}
                         </a>
                     </li><!-- /.navConteiner -->
                     <li class="navConteiner @_menuMessages">
                         <a href="/messages/Index" class="navConteiner__a navConteiner__badgeCount_enable">
                             <span class="navConteiner__icon navConteiner__icon_messages"></span>
                             <span class="navConteiner__name">Messages</span>
-                            <span class="navConteiner__badgeCount ">@unread_message_number_string</span>
+                            @if (unread_message_number_string.Length > 0)
+                            { <span class="navConteiner__badgeCount ">@unread_message_number_string</span> }
                         </a>
                     </li><!-- /.navConteiner -->
                     <li class="navConteiner @_menuCases">
                         <a href="/cases/Index" class="navConteiner__a navConteiner__badgeCount_enable">
                             <span class="navConteiner__icon navConteiner__icon_dashboard"></span>
                             <span class="navConteiner__name">Dashboard</span>
-                            <span class="navConteiner__badgeCount ">@unread_report_number_string</span>
+                            @if (unread_report_number_string.Length > 0)
+                            {<span class="navConteiner__badgeCount ">@unread_report_number_string</span>}
                         </a>
                     </li>
                 </ul>
