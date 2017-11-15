@@ -8,172 +8,163 @@
     Layout = "~/Views/Shared/IndexPages/LayoutNewCases.cshtml";
 }
 
-<body>
-    <style>
-         .headerPos {
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
-                align-items: center;
-                margin-bottom: 0px;
-                width: 100%;
-                float: left;
-                font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
-                font-size: 12px;
-                position: absolute;
-                margin-top: 1px;
-                height: auto;
-                bottom: -3px;
-                -webkit-box-shadow: 0px 2px 0px 0px rgba(0,0,0,0.11);
-                -moz-box-shadow: 0px 2px 0px 0px rgba(0,0,0,0.11);
-                box-shadow: 0px 2px 0px 0px rgba(0,0,0,0.11);
-                z-index: 1;
-            }
-            .headerPos .positionN + .polos {
-                height: 6px;
-                width: 2px;
-                background: #d7e3e4 none repeat scroll 0% 0%;
-                margin-bottom: -35px;
-            }
-    </style>
+@Html.Partial("~/Views/Shared/Partial/_NewCasesTopMenu.cshtml")
 
-    <link type="text/css" href="~/Content/caseTasks.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700" rel="stylesheet">
+<div class="container mainNavigationTabs__tabContent-container" ng-controller="NewCaseReportController">
+    <div id="mainTab-1" class="mainNavigationTabs__tabContent active">
+        <section class="content-container content-container_pbn">
+            <div class="content-container__inner">
+                <p class="sectionHeader">General information</p><!-- /.sectionHeader -->
+                <div class="content-container__inner-additional clearfix">
+                    <div class="col-6">
+                        <div class="row row-noP-fl">
+                            <div class="col-6">
+                                <p class="content-container__p">
+                                    Reporting from:
+                                </p><!-- /.content-container__p -->
+                            </div><!-- /.col-4 -->
+                            <div class="col-6">
+                                <p class="content-container__pBold">
+                                    {{model.reportingFrom}}
+                                </p><!-- /.content-container__pBold -->
+                            </div><!-- /.col-4 -->
+                        </div><!-- /.row -->
 
-    <link href="@Url.Content("~/Content/assets/template/css/reset.css")" rel="stylesheet">
-    <link href="@Url.Content("~/Content/assets/template/css/style.css")" rel="stylesheet">
+                        <div class="row row-noP-fl">
+                            <div class="col-6">
+                                <p class="content-container__p">
+                                    Reporter would like to stay:
+                                </p><!-- /.content-container__p -->
+                            </div><!-- /.col-4 -->
+                            <div class="col-6">
+                                <p class="content-container__pBold">
+                                    {{model.reporterWouldLike}}
+                                </p><!-- /.content-container__pBold -->
+                            </div><!-- /.col-4 -->
+                        </div><!-- /.row -->
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+                        <div class="row row-noP-fl">
+                            <div class="col-6">
+                                <p class="content-container__p">
+                                    Reporter is:
+                                </p><!-- /.content-container__p -->
+                            </div><!-- /.col-4 -->
+                            <div class="col-6">
+                                <p class="content-container__pBold">
+                                    {{model.reporterIs}}
+                                </p><!-- /.content-container__pBold -->
+                            </div><!-- /.col-4 -->
+                        </div><!-- /.row -->
 
-    @Html.Partial("~/Views/Shared/Partial/_NewCasesTopMenu.cshtml")
+                    </div><!-- /.col-6 -->
+                </div><!-- /.content-container__inner-additional clearfix -->
+            </div><!-- /.content-container__inner -->
+        </section><!-- /.content-container -->
+        <section class="content-container content-container_pbn">
+            <div class="content-container__inner">
+                <p class="sectionHeader">Parties involved</p><!-- /.sectionHeader -->
+                <div class="content-container__inner-additional clearfix">
+                    <div class="col-6">
+                        <div class="row row-noP-fl" ng-repeat="item in model.non_mediator_involved">
+                            <div class="col-6">
+                                <p class="content-container__p">
+                                    <strong>{{item.Name}},</strong> {{item.Title}}
+                                </p><!-- /.content-container__p -->
+                            </div><!-- /.col-4 -->
+                            <div class="col-6">
+                                <p class="content-container__pBold">
+                                    {{item.Role}}
+                                </p><!-- /.content-container__pBold -->
+                            </div><!-- /.col-4 -->
+                        </div><!-- /.row -->
 
-    <div id="generalInfo" ng-controller="NewCaseReportController">
-        <div class="firstPosition">
-            <div class="blockGeneralInformation">
-                <span class="title">General Information</span>
-                <table class="generalInformation">
-                    <tbody>
-                        <tr>
-                            <td>Reporting From:</td>
-                            <td>{{model.reportingFrom}}</td>
-                        </tr>
-                        <tr>
-                            <td>Reporter would like to stay:</td>
-                            <td>{{model.reporterWouldLike}}</td>
-                        </tr>
-                        <tr>
-                            <td>Reporter name</td>
-                            <td>{{model.reporterName}}</td>
-                        </tr>
-                        <tr>
-                            <td>Reporter is:</td>
-                            <td>{{model.reporterIs}}</td>
-                        </tr>
+                        <div class="row row-noP-fl">
+                            <div class="col-12">
+                                <p class="content-container__p">
+                                    The management doesn't know about the incident
+                                </p><!-- /.content-container__p -->
+                            </div><!-- /.col-12 -->
+                        </div><!-- /.row -->
 
-                        <tr>
-                            <td>The incident happened in:</td>
-                            <td>{{model.incidentHappenedIn}}</td>
-                        </tr>
-                        <tr>
-                            <td>Affected department(s):</td>
-                            <td>{{model.affectedDepartment}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <style>
-                .darkerText {
-                    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
-                    font-size: 16px;
-                    color: #727c7e;
-                    padding-top: 20px;
-                }
-            </style>
-            <div class="blockPartiesInformation">
-                <span class="title">Parties involved</span>
+                    </div><!-- /.col-6 -->
+                </div><!-- /.content-container__inner-additional clearfix -->
+            </div><!-- /.content-container__inner -->
+        </section><!-- /.content-container -->
+        <section class="content-container content-container_pbn">
+            <div class="content-container__inner">
+                <p class="sectionHeader">Case information</p><!-- /.sectionHeader -->
+                <div class="content-container__inner-additional clearfix">
+                    <div class="col-6">
+                        <div class="row row-noP-fl">
+                            <div class="col-6">
+                                <p class="content-container__p">
+                                    Reporting about:
+                                </p><!-- /.content-container__p -->
+                            </div><!-- /.col-4 -->
+                            <div class="col-6">
+                                <p class="content-container__pBold">
+                                    {{model.secondary_type_string}}
+                                </p><!-- /.content-container__pBold -->
+                            </div><!-- /.col-4 -->
+                        </div><!-- /.row -->
 
-                <table class="generalInformation">
-                    <tbody>
-                        <tr>
-                            <td>
-                                @GlobalRes.report_by_myself
-                            </td>
-                            <td>
-                                <span ng-show="model.report_by_myself">@GlobalRes.Myself</span>
-                                <span ng-show="!model.report_by_myself">@GlobalRes.SomeoneElse</span>
-                            </td>
-                        </tr>
-                        <tr ng-repeat="item in model.non_mediator_involved">
-                            <td><span class="darkerText">{{item.Name}}</span>&nbsp; {{item.Title}} </td>
-                            <td>{{item.Role}}</td>
-                        </tr>
-                        <tr>
-                            <td>@GlobalRes.Doesmanagementknowaboutthisincident</td>
-                            <td>
-                                {{model.management_know_string}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>@GlobalRes.Incidentreportedoutside_q</td>
-                            <td>
-                                {{model.is_reported_outside}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>@GlobalRes.IsReportUrgent</td>
-                            <td>
-                                {{model.is_reported_urgent}}
-                            </td>
-                        </tr>                    
-                    </tbody>
-                </table>
-            </div>
+                        <div class="row row-noP-fl">
+                            <div class="col-6">
+                                <p class="content-container__p">
+                                    Date:
+                                </p><!-- /.content-container__p -->
+                            </div><!-- /.col-4 -->
+                            <div class="col-6">
+                                <p class="content-container__pBold">
+                                    {{model.incident_date_string}}
+                                </p><!-- /.content-container__pBold -->
+                            </div><!-- /.col-4 -->
+                        </div><!-- /.row -->
+                        <div class="row row-noP-fl m-0">
+                            <div class="col-12">
+                                <p class="content-container__p">
+                                    Incident description:
+                                </p><!-- /.content-container__p -->
+                            </div><!-- /.col-12 -->
+                        </div><!-- /.row -->
 
-            <div class="blockCaseInformation">
-                <span class="title">Case Information</span>
-                <table class="caseInformation">
-                    <tbody>
-                        <tr>
-                            <td>@GlobalRes.ReportingAbout:</td>
-                            <td>{{model.secondary_type_string}}</td>
-                        </tr>
-                        <tr>
-                            <td>@GlobalRes.IncidentDate:</td>
-                            <td>{{model.incident_date_string}}</td>
-                        </tr>
-                        <tr>
-                            <td>@GlobalRes.isOngoing:</td>
-                            <td>{{model.is_ongoing}}</td>
-                        </tr>
-                        <tr ng-show="model.report_frequency_text">
-                            <td></td>
-                            <td>{{model.report_frequency_text}}</td>
-                        </tr>
-
-                        <tr>
-                            <td>@GlobalRes.incidentResult:</td>
-                            <td>{{model.has_injury_damage}}</td>
-                        </tr>
-                        <tr ng-show="model.injury_damage">
-                            <td></td>
-                            <td>{{model.injury_damage}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="incidentDescription">
-                <p class="titleIncidentDescription">Incident description:</p>
-                <div class="text">
-                    {{model.description}}
-                </div>
-            </div>
-
-
-        </div>
-
-        <div class="contentDownloadDoc" style="/* display: none; */">
-
-        </div>
+                    </div><!-- /.col-6 -->
+                    <div class="row ">
+                        <div class="col-9 p-lr-50">
+                            <p class="content-container__pBold">
+                                {{item.description}}
+                            </p><!-- /.content-container__pBold -->
+                        </div><!-- /.col-6 -->
+                    </div><!-- /.row -->
+                    <div class="row content-container__attachment-row">
+                        <div class="col-4" ng-repeat="item in model.attachments">
+                            <div class="attachmentBlock clearfix">
+                                <div class="attachmentBlock__img">
+                                    <img src="~/Content/Icons/viewDoc2.png" alt="icon" />
+                                </div><!-- /.attachmentBlock__img -->
+                                <div class="attachmentBlock__info">
+                                    <div class="attachmentBlock__name">
+                                        {{item.file_nm}}
+                                    </div><!-- /.attachmentBlock__name -->
+                                    <a href="{{item.path_nm}}" class="attachmentBlock__link">
+                                        download
+                                    </a>
+                                </div><!-- /.attachmentBlock__info -->
+                            </div><!-- /.attachmentBlock -->
+                        </div><!-- /.col-4 -->
+                    </div><!-- /.content-container__attachment-row -->
+                </div><!-- /.content-container__inner-additional clearfix -->
+            </div><!-- /.content-container__inner -->
+        </section><!-- /.content-container -->
+        <div class="divider m-b-15"></div><!-- /.divider -->
+        <div class="content-container__footer clearfix">
+            <div class="content-container__footer-row">
+                <div class="footerNav-content ">
+                    <a href="#" class="footerNav-content__a">
+                        Help and support
+                    </a>
+                </div><!-- /.footerNav-content -->
+            </div><!-- /.content-container__footer-row -->
+        </div><!-- /.content-container__footer -->
     </div>
-</body>
+</div><!-- /.container -->

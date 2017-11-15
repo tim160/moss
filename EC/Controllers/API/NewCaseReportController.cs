@@ -70,6 +70,7 @@ namespace EC.Controllers.API
                 has_injury_damage = rm._has_injury_damage,
                 injury_damage = rm._report.injury_damage,
                 description = rm._report.description,
+                attachments = DB.attachment.Where(x => x.report_id == id).OrderBy(x => x.file_nm),
             };
 
 
