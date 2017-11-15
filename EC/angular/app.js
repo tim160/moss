@@ -75,7 +75,6 @@
             var html = '<div class="select" ng-init="expanded = false">';
             var expr = (attr.text || '{{textexpr}}');
             html += '<a href="#" class="slct" ng-click="expanded = !expanded" ng-class="{ active: expanded }">' + expr + '</a>';
-            //var style = "{ 'display': expanded ? 'block' : 'none' }";
             html += '<ul class="drop slide" ng-class="{ active: expanded }">';
             html += '<li ng-repeat="item in list" ng-click="onSelectFunction(item)">';
             html += '<a href="">' + attr.itemtext + '</a>';

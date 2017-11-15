@@ -135,7 +135,6 @@
         };
 
         $scope.getCampusInfluences = function (item) {
-            console.log(1);
             var r = $filter('filter')($scope.model.report_investigation_methodology, { 'report_secondary_type_id': item.id }, true);
             if (r.length !== 0) {
                 r = $filter('filter')($scope.model.company_root_cases_organizational, { 'id': r[0].company_root_cases_organizational_id }, true);
