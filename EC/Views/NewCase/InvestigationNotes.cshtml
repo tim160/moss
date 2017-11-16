@@ -279,19 +279,19 @@
                         </label>
                     </div>
                     <div class="col-3">
-                        <dropbox text="Please select"
+                        <dropbox ng-dropbox-textExpr="getCrimeCategory(model.report_cc_crime.cc_crime_statistics_category_id)"
                                  itemText="{{item.crime_statistics_category_en}}"
                                  ng-dropbox-list="model.cc_crime_statistics_categories"
                                  ng-dropbox-rootItem="item"
-                                 ng-dropbox-on-select="saveCrime">
+                                 ng-dropbox-on-select="saveCrimeCategory">
                         </dropbox>
                     </div>
                     <div class="col-3">
-                        <dropbox text="Please select"
+                        <dropbox ng-dropbox-textExpr="getCrimeLocation(model.report_cc_crime.cc_crime_statistics_location_id)"
                                  itemText="{{item.crime_statistics_location_en}}"
                                  ng-dropbox-list="model.cc_crime_statistics_locations"
                                  ng-dropbox-rootItem="item"
-                                 ng-dropbox-on-select="saveCrime">
+                                 ng-dropbox-on-select="saveCrimeLocation">
                         </dropbox>
                     </div>
                 </div>
@@ -303,75 +303,68 @@
                 <p class="sectionHeader">Executive Summary</p>
                 <div class="content-container__inner-additional">
                     <div class="row">
-                        <textarea class="textareaBlock">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero, ea. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem cum quia nobis, consequatur magnam dolor nihil rerum sapiente culpa natus facilis quibusdam aut quas! Cum, culpa, maiores? Iure animi fugit, adipisci, vero ad odit, repudiandae, ullam eum illo perferendis dolorum neque corrupti corporis placeat error quasi nesciunt modi veritatis aperiam unde quibusdam optio assumenda! Nobis aperiam repellendus accusantium at totam asperiores repudiandae adipisci dolor, quia tenetur officia. Consectetur odit natuacilis id perspiciatis quia non distinctio quas, velit doloribus, cum! Sunt eos, facere dicta ipsam eius accusamus suscipit! Possimus vitae fuga dolorem inventore, facere, vel libero sapiente quisquam odit necessitatibus eveniet quas reprehenderit? Aliquid iusto quidem accusamus voluptas, dicta delectus architecto eius eveniet error optio cumque id totam, placeat facere.</textarea>
+                        <textarea class="textareaBlock" ng-model="model.report_cc_crime.executive_summary"></textarea>
                     </div><!-- /.row -->
                     <div class="row clearfix">
-                        <a href="#" class="btn-link pull-right">Save</a>
+                        <a href="#" class="btn-link pull-right" ng-click="saveCrime()">Save</a>
                     </div><!-- /.row -->
                 </div>
             </div>
         </section>
 
-        <section class="content-container">
+        <section class="content-container" ng-show="model.report_case_closure_outcome1.length > 0">
             <div class="content-container__inner">
                 <p class="sectionHeader">Recommended Recommended Actions for Witnesses and Reporter</p>
                 <div class="content-container__inner-additional clearfix">
-                    <div class="row">
+                    <div class="row" ng-repeat="item in model.report_case_closure_outcome1">
                         <div class="col-3">
-                            <p class="content-container__p">James Button</p>
+                            <p class="content-container__p">{{item.mediator.Name}}</p>
                         </div><!-- /.col-3 -->
-                        <div class="col-6">
-                            <select name="" id="" class="selectList">
-                                <option value="">Select Outcome</option>
-                                <option value="">Non-Campus Properties</option>
-                                <option value="">On-Campus Property</option>
-                                <option value="">On-Campus </option>
-                                <option value="">Public Property</option>
-                            </select>
+                        <div class="col-3">
+                            <dropbox ng-dropbox-textExpr="item.outcome_c.outcome_en || 'Please select'"
+                                     itemText="{{item.outcome_en}}"
+                                     ng-dropbox-list="model.outcomes"
+                                     ng-dropbox-rootItem="item"
+                                     ng-dropbox-on-select="saveOutcome">
+                            </dropbox>
                         </div><!-- /.col-6 -->
                         <div class="col-3">
-                            <a href="#" class="btn-link ">Add Note</a>
+                            <textarea ng-model="item.outcome.note" ng-show="item.editNote">
+
+                            </textarea>
+                            <p  ng-show="!item.editNote">{{item.outcome.note}}</p>
                         </div><!-- /.col-3 -->
-                    </div><!-- /.row -->
-                    <div class="row">
                         <div class="col-3">
-                            <p class="content-container__p">Eva Morales</p>
-                        </div><!-- /.col-3 -->
-                        <div class="col-6">
-                            <select name="" id="" class="selectList">
-                                <option value="">Select Outcome</option>
-                                <option value="">Non-Campus Properties</option>
-                                <option value="">On-Campus Property</option>
-                                <option value="">On-Campus </option>
-                                <option value="">Public Property</option>
-                            </select>
-                        </div><!-- /.col-6 -->
-                        <div class="col-3">
-                            <a href="#" class="btn-link ">Add Note</a>
+                            <a href="#" class="btn-link " ng-show="item.editNote" ng-click="saveOutcome(item)">Save Note</a>
+                            <a href="#" class="btn-link " ng-show="!item.editNote" ng-click="item.editNote = true">{{item.outcome.note || '' !== '' ? 'Edit Note' : 'Add Note'}}</a>
                         </div><!-- /.col-3 -->
                     </div><!-- /.row -->
                 </div>
             </div>
         </section>
-        <section class="content-container">
+        <section class="content-container" ng-show="model.report_case_closure_outcome2.length > 0">
             <div class="content-container__inner">
-                <p class="sectionHeader">Recommended Recommended Actions for Witnesses and Reporter</p>
+                <p class="sectionHeader">Recommended Outcomes for subjects</p>
                 <div class="content-container__inner-additional clearfix">
-                    <div class="row">
+                    <div class="row" ng-repeat="item in model.report_case_closure_outcome2">
                         <div class="col-3">
-                            <p class="content-container__p">Mark Smith</p>
+                            <p class="content-container__p">{{item.mediator.Name}}</p>
                         </div><!-- /.col-3 -->
-                        <div class="col-6">
-                            <select name="" id="" class="selectList">
-                                <option value="">Select Outcome</option>
-                                <option value="">Non-Campus Properties</option>
-                                <option value="">On-Campus Property</option>
-                                <option value="">On-Campus </option>
-                                <option value="">Public Property</option>
-                            </select>
+                        <div class="col-3">
+                            <dropbox ng-dropbox-textExpr="item.outcome_c.outcome_en || 'Please select'"
+                                     itemText="{{item.outcome_en}}"
+                                     ng-dropbox-list="model.outcomes"
+                                     ng-dropbox-rootItem="item"
+                                     ng-dropbox-on-select="saveOutcome">
+                            </dropbox>
                         </div><!-- /.col-6 -->
                         <div class="col-3">
-                            <a href="#" class="btn-link ">Add Note</a>
+                            <textarea ng-model="item.outcome.note" ng-show="item.editNote"></textarea>
+                            <p ng-show="!item.editNote">{{item.outcome.note}}</p>
+                        </div><!-- /.col-3 -->
+                        <div class="col-3">
+                            <a href="#" class="btn-link " ng-show="item.editNote" ng-click="saveOutcome(item)">Save Note</a>
+                            <a href="#" class="btn-link " ng-show="!item.editNote" ng-click="item.editNote = true">{{item.outcome.note || '' !== '' ? 'Edit Note' : 'Add Note'}}</a>
                         </div><!-- /.col-3 -->
                     </div><!-- /.row -->
                 </div>
@@ -393,8 +386,6 @@
 			$("#"+tab_id).addClass('active');
 		})
 
-		// subNavigationTabs
-
 		$('.subNavigationTabs__tab-link').click(function(){
 			var tab_id = $(this).attr('data-tab');
 
@@ -405,7 +396,7 @@
 			$("#"+tab_id).addClass('active');
 		})
 
-		//$('#subTab-1').removeClass('active');
-		//$('#subTab-2').addClass('active');
+		$('#subTab-1').removeClass('active');
+		$('#subTab-2').addClass('active');
 	})
 </script>
