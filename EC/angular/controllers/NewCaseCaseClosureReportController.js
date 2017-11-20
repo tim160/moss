@@ -55,7 +55,7 @@
                     return r[0].crime_statistics_category_en;
                 }
             }
-            return 'Please select';
+            return 'Crime Reporting';
         };
 
         $scope.getCrimeLocation = function (item) {
@@ -65,7 +65,7 @@
                     return r[0].crime_statistics_location_en;
                 }
             }
-            return 'Please select';
+            return 'Geographic Location Reporting';
         };
 
         $scope.saveOutcome = function (item, outcome) {

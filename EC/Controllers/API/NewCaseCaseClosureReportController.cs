@@ -86,7 +86,7 @@ namespace EC.Controllers.API
                     .OrderBy(x => x.crime_statistics_location_en)
                     .ToList(),
 
-                report_cc_crime = report_cc_crime != null ? report_cc_crime : new report_cc_crime { cc_is_clear_act_crime = false, cc_crime_statistics_category_id = 0, cc_crime_statistics_location_id = 0 },
+                report_cc_crime = report_cc_crime != null ? report_cc_crime : new report_cc_crime { cc_is_clear_act_crime = true, cc_crime_statistics_category_id = 0, cc_crime_statistics_location_id = 0 },
 
                 report_case_closure_outcome = report_case_closure_outcome,
 
