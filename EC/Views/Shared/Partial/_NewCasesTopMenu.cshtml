@@ -1,4 +1,28 @@
 ﻿@{
+    var user_id = ViewBag.user_id;
+    EC.Models.UserModel um = new EC.Models.UserModel(user_id);
+
+    var unread_report_number = um.UnreadReport(0, 0).Count;
+    var unread_report_number_string = "";
+    string page_subtitle = "";
+    if (unread_report_number > 0)
+    {
+        unread_report_number_string = unread_report_number.ToString();
+    }
+
+    int unread_message_number = um.Unread_Messages_Quantity(0, 1) + um.Unread_Messages_Quantity(0, 2) + um.Unread_Messages_Quantity(0, 3);
+    var unread_message_number_string = "";
+    if (unread_message_number > 0)
+    {
+        unread_message_number_string = unread_message_number.ToString();
+    }
+
+    int unread_task_number = um.UnreadTasksQuantity(0, true, 1);
+    var unread_task_number_string = "";
+    if (unread_task_number > 0)
+    {
+        unread_task_number_string = unread_task_number.ToString();
+    }
 }
 
 <div class="container-fluid">
@@ -42,13 +66,19 @@
                 <a href="@Url.Action("Tasks", new { report_id = ViewBag.report_id })">
                     <div class="mainNavigationTabs__tab-name">Tasks</div>
                 </a>
-                <div class="mainNavigationTabs__badgeCount"></div>
+                @if (unread_task_number > 0)
+                {
+                    <div class="mainNavigationTabs__badgeCount">@unread_task_number_string</div>
+                }
             </li>
             <li class="mainNavigationTabs__tab-link @(action == "messages" ? "active" : "")mainNavigationTabs__badgeCount_enable" data-tab="mainTab-4">
                 <a href="@Url.Action("Messages", new { report_id = ViewBag.report_id })">
                     <div class="mainNavigationTabs__tab-name">Messages</div>
                 </a>
-                <div class="mainNavigationTabs__badgeCount"></div>
+                @if (unread_message_number > 0)
+                {
+                    <div class="mainNavigationTabs__badgeCount">@unread_message_number_string</div>
+                }
             </li>
             <li class="mainNavigationTabs__tab-link @(action == "team" ? "active" : "")" data-tab="mainTab-5">
                 <a href="@Url.Action("Team", new { report_id = ViewBag.report_id })">

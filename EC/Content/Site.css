@@ -1877,3 +1877,38 @@ button {
             left: -200px;
         }
     }
+
+/*--------------------checkboxListStyle--------------------------*/
+
+.content .contentBlock.checkboxListStyle{
+    display: block;
+    padding: 25px 25px 0 25px;
+    box-sizing: border-box;
+    max-height: 402px;
+    overflow: auto;
+}
+.contentBlock.checkboxListStyle .freeBlock{
+    float: none;
+    display: inline-block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0;
+}
+.contentBlock.checkboxListStyle .radioTitle{
+    display: inline-block;
+    box-sizing: border-box;
+}
+.contentBlock.checkboxListStyle .inputBlock{
+    min-height: initial;
+    box-sizing: border-box;
+    vertical-align: middle;
+    padding: 10px 20px;
+}
+.contentBlock.checkboxListStyle input{
+    vertical-align: middle;
+}
+.contentBlock.checkboxListStyle .radioTitle{
+    height: initial;
+    box-sizing: border-box;
+    vertical-align: middle;
+}

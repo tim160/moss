@@ -299,9 +299,29 @@
                 <a href="#" class="btn-link">@Res_or_comp</a>
             </div>
             <ul class="breadcrumbs-mediators">
-                <li class="breadcrumbs-mediators__li"><a href="#" class="breadcrumbs-mediators__a"><img src="http://report.employeeconfidential.com//Upload//UserLogo/2_636338753935849609.jpg" alt="" class="breadcrumbs-mediators__img" /><span class="profile-status online"></span></a></li><!-- /.breadcrumbs-mediators__li -->
-                <li class="breadcrumbs-mediators__li"><a href="#" class="breadcrumbs-mediators__a"><img src="http://report.employeeconfidential.com//Upload//UserLogo/24_636362867608769531.jpg" alt="" class="breadcrumbs-mediators__img" /><span class="profile-status away"></span></a></li><!-- /.breadcrumbs-mediators__li -->
-                <li class="breadcrumbs-mediators__li"><a href="#" class="breadcrumbs-mediators__a"><img src="http://report.employeeconfidential.com//Upload//UserLogo/2_636338753935849609.jpg" alt="" class="breadcrumbs-mediators__img" /><span class="profile-status "></span></a></li><!-- /.breadcrumbs-mediators__li -->
+                @foreach (var user in rm._mediators_whoHasAccess_toReport)
+                {
+                    <li class="breadcrumbs-mediators__li">
+                        <a href="#" class="breadcrumbs-mediators__a">
+                            <img src="@(user.photo_path.Trim() != "" ? Url.Content(_user.photo_path.Trim()) : Url.Content("~/Content/Icons/noPhoto.png"))" alt="" class="breadcrumbs-mediators__img" />
+                            <span class="profile-status @(rm._report_owners.FirstOrDefault(x => x.user_id == user.id) == null ? "" : "online")"></span>
+                        </a>
+                    </li>
+                }
+                @*
+                <li class="breadcrumbs-mediators__li">
+                    <a href="#" class="breadcrumbs-mediators__a">
+                        <img src="http://report.employeeconfidential.com//Upload//UserLogo/24_636362867608769531.jpg" alt="" class="breadcrumbs-mediators__img" />
+                        <span class="profile-status away"></span>
+                    </a>
+                </li>
+                <li class="breadcrumbs-mediators__li">
+                    <a href="#" class="breadcrumbs-mediators__a">
+                        <img src="http://report.employeeconfidential.com//Upload//UserLogo/2_636338753935849609.jpg" alt="" class="breadcrumbs-mediators__img" />
+                        <span class="profile-status "></span>
+                    </a>
+                </li>
+                *@
             </ul>
         </div>
     </div>
