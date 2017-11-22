@@ -263,7 +263,7 @@
     <div id="subTab-2" class="subNavigationTabs__tabContent" ng-controller="NewCaseCaseClosureReportController">
         <section class="content-container">
             <div class="content-container__inner">
-                @if (!is_cc)
+                @if (is_cc)
                 {
                     <p class="sectionHeader">Is this a Clery Act Crime?</p>
                     <div class="content-container__inner-additional clearfix">
@@ -397,8 +397,5 @@
 			$(this).addClass('active');
 			$("#"+tab_id).addClass('active');
 		})
-
-		$('#subTab-1').removeClass('active');
-		$('#subTab-2').addClass('active');
 	})
 </script>
