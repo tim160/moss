@@ -40,6 +40,7 @@ namespace EC.Controllers.API
             }
 
             UserModel um = new UserModel(user.id);
+            var rm = new ReportModel(filter.Report_id);
 
             var report = DB.report.FirstOrDefault(x => x.id == filter.Report_id);
 

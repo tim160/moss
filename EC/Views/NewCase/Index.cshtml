@@ -56,6 +56,31 @@
                             </div><!-- /.col-4 -->
                         </div><!-- /.row -->
 
+                        <div class="row row-noP-fl">
+                            <div class="col-6">
+                                <p class="content-container__p">
+                                    @GlobalRes.TheIncidentHappened @GlobalRes.in_:
+                                </p><!-- /.content-container__p -->
+                            </div><!-- /.col-4 -->
+                            <div class="col-6">
+                                <p class="content-container__pBold">
+                                    {{model.incidentHappenedIn}}
+                                </p><!-- /.content-container__pBold -->
+                            </div><!-- /.col-4 -->
+                        </div><!-- /.row -->
+
+                        <div class="row row-noP-fl">
+                            <div class="col-6">
+                                <p class="content-container__p">
+                                    @GlobalRes.AffectedDepartment:
+                                </p><!-- /.content-container__p -->
+                            </div><!-- /.col-4 -->
+                            <div class="col-6">
+                                <p class="content-container__pBold">
+                                    {{model.affectedDepartment}}
+                                </p><!-- /.content-container__pBold -->
+                            </div><!-- /.col-4 -->
+                        </div><!-- /.row -->
                     </div><!-- /.col-6 -->
                 </div><!-- /.content-container__inner-additional clearfix -->
             </div><!-- /.content-container__inner -->
@@ -79,11 +104,40 @@
                         </div><!-- /.row -->
 
                         <div class="row row-noP-fl">
-                            <div class="col-12">
+                            <div class="col-6">
                                 <p class="content-container__p">
-                                    The management doesn't know about the incident
+                                    @GlobalRes.Doesmanagementknowaboutthisincident
                                 </p><!-- /.content-container__p -->
                             </div><!-- /.col-12 -->
+                            <div class="col-6">
+                                <p class="content-container__pBold">
+                                    {{model.management_know_string}}
+                                </p><!-- /.content-container__pBold -->
+                            </div><!-- /.col-4 -->
+                        </div><!-- /.row -->
+                        <div class="row row-noP-fl">
+                            <div class="col-6">
+                                <p class="content-container__p">
+                                    @GlobalRes.Incidentreportedoutside_q
+                                </p><!-- /.content-container__p -->
+                            </div><!-- /.col-12 -->
+                            <div class="col-6">
+                                <p class="content-container__pBold">
+                                    {{model.is_reported_outside}}
+                                </p><!-- /.content-container__pBold -->
+                            </div><!-- /.col-4 -->
+                        </div><!-- /.row -->
+                        <div class="row row-noP-fl">
+                            <div class="col-6">
+                                <p class="content-container__p">
+                                    @GlobalRes.IsReportUrgent_q
+                                </p><!-- /.content-container__p -->
+                            </div><!-- /.col-12 -->
+                            <div class="col-6">
+                                <p class="content-container__pBold">
+                                    {{model.is_reported_urgent}}
+                                </p><!-- /.content-container__pBold -->
+                            </div><!-- /.col-4 -->
                         </div><!-- /.row -->
 
                     </div><!-- /.col-6 -->
@@ -120,22 +174,72 @@
                                 </p><!-- /.content-container__pBold -->
                             </div><!-- /.col-4 -->
                         </div><!-- /.row -->
-                        <div class="row row-noP-fl m-0">
-                            <div class="col-12">
+
+                        <div class="row row-noP-fl">
+                            <div class="col-6">
+                                <p class="content-container__p">
+                                    @GlobalRes.isOngoing?
+                                </p><!-- /.content-container__p -->
+                            </div><!-- /.col-4 -->
+                            <div class="col-6">
+                                <p class="content-container__pBold">
+                                    {{model.is_ongoing}}
+                                </p><!-- /.content-container__pBold -->
+                            </div><!-- /.col-4 -->
+                        </div><!-- /.row -->
+
+                        <div class="row row-noP-fl" ng-show="!model.report_frequency_text">
+                            <div class="col-6">
+                                <p class="content-container__p">
+                                    &nbsp;
+                                </p><!-- /.content-container__p -->
+                            </div><!-- /.col-4 -->
+                            <div class="col-6">
+                                <p class="content-container__pBold">
+                                    {{model.report_frequency_text}}
+                                </p><!-- /.content-container__pBold -->
+                            </div><!-- /.col-4 -->
+                        </div><!-- /.row -->
+
+                        <div class="row row-noP-fl">
+                            <div class="col-6">
+                                <p class="content-container__p">
+                                    @GlobalRes.IncidentResultInjury
+                                </p><!-- /.content-container__p -->
+                            </div><!-- /.col-4 -->
+                            <div class="col-6">
+                                <p class="content-container__pBold">
+                                    {{model.has_injury_damage}}
+                                </p><!-- /.content-container__pBold -->
+                            </div><!-- /.col-4 -->
+                        </div><!-- /.row -->
+
+                        <div class="row row-noP-fl" ng-show="!model.injury_damage">
+                            <div class="col-6">
+                                <p class="content-container__p">
+                                    &nbsp;
+                                </p><!-- /.content-container__p -->
+                            </div><!-- /.col-4 -->
+                            <div class="col-6">
+                                <p class="content-container__pBold">
+                                    {{model.injury_damage}}
+                                </p><!-- /.content-container__pBold -->
+                            </div><!-- /.col-4 -->
+                        </div><!-- /.row -->
+
+                        <div class="row row-noP-fl">
+                            <div class="col-6">
                                 <p class="content-container__p">
                                     Incident description:
                                 </p><!-- /.content-container__p -->
-                            </div><!-- /.col-12 -->
+                            </div><!-- /.col-4 -->
+                            <div class="col-6">
+                                <p class="content-container__pBold">
+                                    {{model.description}}
+                                </p><!-- /.content-container__pBold -->
+                            </div><!-- /.col-4 -->
                         </div><!-- /.row -->
-
                     </div><!-- /.col-6 -->
-                    <div class="row ">
-                        <div class="col-9 p-lr-50">
-                            <p class="content-container__pBold">
-                                {{item.description}}
-                            </p><!-- /.content-container__pBold -->
-                        </div><!-- /.col-6 -->
-                    </div><!-- /.row -->
                     <div class="row content-container__attachment-row">
                         <div class="col-4" ng-repeat="item in model.attachments">
                             <div class="attachmentBlock clearfix">

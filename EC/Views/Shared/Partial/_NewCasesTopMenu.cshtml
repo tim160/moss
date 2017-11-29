@@ -50,8 +50,8 @@
 <div class="container mainNavigationTabs_color">
     <div class="mainNavigationTabs clearfix">
         <ul class="mainNavigationTabs__tabs-ul clearfix">
-            <li class="mainNavigationTabs__tab-link @(action == "report" ? "active" : "")" data-tab="mainTab-1">
-                <a href="@Url.Action("Report", new { report_id = ViewBag.report_id })">
+            <li class="mainNavigationTabs__tab-link @(action == "index" ? "active" : "")" data-tab="mainTab-1">
+                <a href="@Url.Action("Index", new { report_id = ViewBag.report_id })">
                     <div class="mainNavigationTabs__tab-name">Report</div>
                 </a>
                 <div class="mainNavigationTabs__badgeCount"></div>

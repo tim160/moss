@@ -15,7 +15,7 @@ namespace EC.Controllers
         public ECEntities db = new ECEntities();
         EC.Models.ReportModel rm = new EC.Models.ReportModel();
         // GET: NewCase
-        public ActionResult Report(int report_id)
+        public ActionResult Index(int report_id)
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)

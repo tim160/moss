@@ -666,7 +666,7 @@
     <Content Include="Views\Settings\User - Copy.cshtml" />
     <Content Include="Views\Case\Attachments.cshtml" />
     <Content Include="Views\ReporterDashboard\Attachments.cshtml" />
-    <Content Include="Views\NewCase\Report.cshtml" />
+    <Content Include="Views\NewCase\Index.cshtml" />
     <Content Include="Views\NewCase\Partial\headerPos.cshtml" />
     <Content Include="Views\NewCase\InvestigationNotes.cshtml" />
     <Content Include="Views\NewCase\CaseClosureReport.cshtml" />
