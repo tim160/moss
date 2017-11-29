@@ -38,7 +38,10 @@
 <!-- Include Date Range Picker -->
 <script src="~/Scripts/moment.min.js"></script>
 <script src="~/Scripts/jquery.daterangepicker.min.js"></script>
+<link rel="stylesheet" href="~/Libs/nvd3/build/nv.d3.min.css">
+
 <link href="~/Content/daterangepickerAnalit.css" rel="stylesheet" />
+
 <input type="hidden" id="companyId" value="@companyId" />
 <input type="hidden" id="user_id" value="@user_id" />
 <input type="hidden" id="dateStart" value="" />
@@ -49,12 +52,19 @@
 <input type="hidden" id="step3_delay" value="@ViewBag.step3_delay" />
 <input type="hidden" id="step4_delay" value="@ViewBag.step4_delay" />
 
+<style>
+    #menu a {
+        max-width: 500px;
+    }
+</style>
+
 <div class="blockSettings blockAnalitics">
     <div id="casesHeared">
         <div id="menu">
             <h2 class="mainTitle">@GlobalRes.Menu:</h2>
             <div>
-                <a class="caseesTab active">@GlobalRes.Cases</a>
+                <a href="@Url.Action("Index")" class="caseesTab active">@GlobalRes.Cases</a>
+                <a href="@Url.Action("CACSReport")" class="caseesTab">Clery Act Crime Statistics Report</a>
             </div>
         </div>
         @* <div class="positionActivityIcon">
