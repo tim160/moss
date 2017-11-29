@@ -15,7 +15,7 @@ namespace EC.Controllers
         public ECEntities db = new ECEntities();
         EC.Models.ReportModel rm = new EC.Models.ReportModel();
         // GET: NewCase
-        public ActionResult Report(int report_id)
+        public ActionResult Index(int report_id)
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
@@ -81,6 +81,22 @@ namespace EC.Controllers
             ViewBag.attachmentFiles = getAttachmentFiles(report_id);
 
             return View();
-        }        
+        }
+
+        public ActionResult Activity(int report_id)
+        {
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            //DEBUG
+            //user = user != null ? user : db.user.FirstOrDefault(x => x.id == 2);
+            //DEBUG
+            if (user == null || user.id == 0)
+                return RedirectToAction("Index", "Account");
+
+            int user_id = user.id;
+            ViewBag.user_id = user_id;
+            ViewBag.report_id = report_id;
+
+            return View();
+        }
     }
 }

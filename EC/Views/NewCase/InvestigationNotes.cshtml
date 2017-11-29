@@ -25,10 +25,14 @@
         <div class="subNavigationTabs clearfix">
             <ul class="subNavigationTabs__tabs-ul clearfix">
                 <li class="subNavigationTabs__tab-link active" data-tab="subTab-1">
-                    <div class="subNavigationTabs__tab-name">General information</div>
+                    <a href="@Url.Action("InvestigationNotes", new { report_id = report_id})">
+                        <div class="subNavigationTabs__tab-name">General information</div>
+                    </a>
                 </li>
                 <li class="subNavigationTabs__tab-link" data-tab="subTab-2">
-                    <div class="subNavigationTabs__tab-name">Case Closure Report</div>
+                    <a href="@Url.Action("CaseClosureReport", new { report_id = report_id})">
+                        <div class="subNavigationTabs__tab-name">Case Closure Report</div>
+                    </a>
                 </li>
             </ul>
         </div>
@@ -259,146 +263,4 @@
             <div class="panel-overlay"></div>
         </section>
     </div>
-
-    <div id="subTab-2" class="subNavigationTabs__tabContent" ng-controller="NewCaseCaseClosureReportController">
-        <section class="content-container">
-            <div class="content-container__inner">
-                @if (!is_cc)
-                {
-                    <p class="sectionHeader">Is this a Clery Act Crime?</p>
-                    <div class="content-container__inner-additional clearfix">
-                        <div class="col-3 CaseClosureReport__radioBlock clearfix">
-                            <label for="Yes" class="inputRadio">
-                                <input type="radio" id="Yes" class="inputRadio__input" value="true" ng-model="model.report_cc_crime.cc_is_clear_act_crime" ng-change="saveCrime()" />
-                                <span class="inputRadio__customnBtn"></span>
-                                <span class="inputRadio__inputTitle">No</span>
-                            </label>
-                            <label for="No" class="inputRadio">
-                                <input type="radio" id="No" class="inputRadio__input" value="false" ng-model="model.report_cc_crime.cc_is_clear_act_crime" ng-change="saveCrime()" />
-                                <span class="inputRadio__customnBtn"></span>
-                                <span class="inputRadio__inputTitle">Yes</span>
-                            </label>
-                        </div>
-                        <div class="col-3">
-                            <dropbox ng-dropbox-textExpr="getCrimeCategory(model.report_cc_crime.cc_crime_statistics_category_id)"
-                                     itemText="{{item.crime_statistics_category_en}}"
-                                     ng-dropbox-list="model.cc_crime_statistics_categories"
-                                     ng-dropbox-rootItem="item"
-                                     ng-dropbox-on-select="saveCrimeCategory">
-                            </dropbox>
-                        </div>
-                        <div class="col-3">
-                            <dropbox ng-dropbox-textExpr="getCrimeLocation(model.report_cc_crime.cc_crime_statistics_location_id)"
-                                     itemText="{{item.crime_statistics_location_en}}"
-                                     ng-dropbox-list="model.cc_crime_statistics_locations"
-                                     ng-dropbox-rootItem="item"
-                                     ng-dropbox-on-select="saveCrimeLocation">
-                            </dropbox>
-                        </div>
-                    </div>
-                }
-            </div>
-        </section>
-
-        <section class="content-container">
-            <div class="content-container__inner">
-                <p class="sectionHeader">Executive Summary</p>
-                <div class="content-container__inner-additional">
-                    <div class="row">
-                        <textarea class="textareaBlock" ng-model="model.report_cc_crime.executive_summary"></textarea>
-                    </div><!-- /.row -->
-                    <div class="row clearfix">
-                        <a href="#" class="btn-link pull-right" ng-click="saveCrime()">Save</a>
-                    </div><!-- /.row -->
-                </div>
-            </div>
-        </section>
-
-        <section class="content-container" ng-show="model.report_case_closure_outcome1.length > 0">
-            <div class="content-container__inner">
-                <p class="sectionHeader">Recommended Recommended Actions for Witnesses and Reporter</p>
-                <div class="content-container__inner-additional clearfix">
-                    <div class="row" ng-repeat="item in model.report_case_closure_outcome1">
-                        <div class="col-3">
-                            <p class="content-container__p">{{item.mediator.Name}}</p>
-                        </div><!-- /.col-3 -->
-                        <div class="col-3">
-                            <dropbox ng-dropbox-textExpr="item.outcome_c.outcome_en || 'Please select'"
-                                     itemText="{{item.outcome_en}}"
-                                     ng-dropbox-list="model.outcomes"
-                                     ng-dropbox-rootItem="item"
-                                     ng-dropbox-on-select="saveOutcome">
-                            </dropbox>
-                        </div><!-- /.col-6 -->
-                        <div class="col-3">
-                            <textarea ng-model="item.outcome.note" ng-show="item.editNote">
-
-                            </textarea>
-                            <p  ng-show="!item.editNote">{{item.outcome.note}}</p>
-                        </div><!-- /.col-3 -->
-                        <div class="col-3">
-                            <a href="#" class="btn-link " ng-show="item.editNote" ng-click="saveOutcome(item)">Save Note</a>
-                            <a href="#" class="btn-link " ng-show="!item.editNote" ng-click="item.editNote = true">{{item.outcome.note || '' !== '' ? 'Edit Note' : 'Add Note'}}</a>
-                        </div><!-- /.col-3 -->
-                    </div><!-- /.row -->
-                </div>
-            </div>
-        </section>
-        <section class="content-container" ng-show="model.report_case_closure_outcome2.length > 0">
-            <div class="content-container__inner">
-                <p class="sectionHeader">Recommended Outcomes for subjects</p>
-                <div class="content-container__inner-additional clearfix">
-                    <div class="row" ng-repeat="item in model.report_case_closure_outcome2">
-                        <div class="col-3">
-                            <p class="content-container__p">{{item.mediator.Name}}</p>
-                        </div><!-- /.col-3 -->
-                        <div class="col-3">
-                            <dropbox ng-dropbox-textExpr="item.outcome_c.outcome_en || 'Please select'"
-                                     itemText="{{item.outcome_en}}"
-                                     ng-dropbox-list="model.outcomes"
-                                     ng-dropbox-rootItem="item"
-                                     ng-dropbox-on-select="saveOutcome">
-                            </dropbox>
-                        </div><!-- /.col-6 -->
-                        <div class="col-3">
-                            <textarea ng-model="item.outcome.note" ng-show="item.editNote"></textarea>
-                            <p ng-show="!item.editNote">{{item.outcome.note}}</p>
-                        </div><!-- /.col-3 -->
-                        <div class="col-3">
-                            <a href="#" class="btn-link " ng-show="item.editNote" ng-click="saveOutcome(item)">Save Note</a>
-                            <a href="#" class="btn-link " ng-show="!item.editNote" ng-click="item.editNote = true">{{item.outcome.note || '' !== '' ? 'Edit Note' : 'Add Note'}}</a>
-                        </div><!-- /.col-3 -->
-                    </div><!-- /.row -->
-                </div>
-            </div>
-        </section>
-    </div>
 </div>
-
-<script>
-	$(document).ready(function(){
-
-		$('.mainNavigationTabs__tab-link').click(function(){
-			var tab_id = $(this).attr('data-tab');
-
-			$('.mainNavigationTabs__tab-link').removeClass('active');
-			$('.mainNavigationTabs__tabContent').removeClass('active');
-
-			$(this).addClass('active');
-			$("#"+tab_id).addClass('active');
-		})
-
-		$('.subNavigationTabs__tab-link').click(function(){
-			var tab_id = $(this).attr('data-tab');
-
-			$('.subNavigationTabs__tab-link').removeClass('active');
-			$('.subNavigationTabs__tabContent').removeClass('active');
-
-			$(this).addClass('active');
-			$("#"+tab_id).addClass('active');
-		})
-
-		$('#subTab-1').removeClass('active');
-		$('#subTab-2').addClass('active');
-	})
-</script>

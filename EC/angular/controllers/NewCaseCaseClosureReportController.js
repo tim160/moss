@@ -14,12 +14,12 @@
         $scope.refresh = function (data) {
             data.report_cc_crime.cc_is_clear_act_crime = '' + data.report_cc_crime.cc_is_clear_act_crime;
 
-            data.report_case_closure_outcome1 = $filter('filter')(data.report_case_closure_outcome, function (value, index, array) {
+            data.report_case_closure_outcome1 = $filter('filter')(data.report_case_closure_outcome, function (value) {
                 if (value.mediator.role_in_report_id === 3) {
                     return true;
                 }
             });
-            data.report_case_closure_outcome2 = $filter('filter')(data.report_case_closure_outcome, function (value, index, array) {
+            data.report_case_closure_outcome2 = $filter('filter')(data.report_case_closure_outcome, function (value) {
                 if (value.mediator.role_in_report_id === 1) {
                     return true;
                 }

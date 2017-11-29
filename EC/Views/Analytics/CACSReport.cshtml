@@ -1,0 +1,95 @@
+﻿@using EC.Models;
+@using EC.Models.ECModel;
+@using EC.Models.Database;
+@using System.Data;
+@using EC.App_LocalResources;
+
+@{
+    ViewBag.Title = "Clery Act Crime Statistics Report";
+    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+
+    int user_id = (Int32)ViewBag.user_id;
+    int companyId = ViewBag.um._user.company_id;
+}
+
+<link rel="stylesheet" href="~/Content/styleAnalitics.css" />
+
+<script src="~/Scripts/moment.min.js"></script>
+<script src="~/Scripts/jquery.daterangepicker.min.js"></script>
+<link rel="stylesheet" href="~/Libs/nvd3/build/nv.d3.min.css">
+
+<link href="~/Content/daterangepickerAnalit.css" rel="stylesheet" />
+
+<input type="hidden" id="companyId" value="@companyId" />
+<input type="hidden" id="user_id" value="@user_id" />
+<input type="hidden" id="dateStart" value="" />
+<input type="hidden" id="dateEnd" value="" />
+
+<input type="hidden" id="step1_delay" value="@ViewBag.step1_delay" />
+<input type="hidden" id="step2_delay" value="@ViewBag.step2_delay" />
+<input type="hidden" id="step3_delay" value="@ViewBag.step3_delay" />
+<input type="hidden" id="step4_delay" value="@ViewBag.step4_delay" />
+
+<style>
+    #menu a {
+        max-width: 500px;
+    }
+    .menuItem {
+        width: 350px;
+    }
+    .menuUl {
+        width: 350px;
+    }
+    .dropMenuText {
+        width: 300px;
+    }
+</style>
+
+<div class="blockSettings blockAnalitics" ng-controller="AnalyticsCACSController">
+    <div id="casesHeared">
+        <div id="menu">
+            <h2 class="mainTitle">@GlobalRes.Menu:</h2>
+            <div>
+                <a href="@Url.Action("Index")" class="caseesTab">@GlobalRes.Cases</a>
+                <a href="@Url.Action("CACSReport")" class="caseesTab active">Clery Act Crime Statistics Report</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="dropDownMenuPadding">
+        <table class="dropDownMenu">
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="parentClass">
+                            <div class="menuItem">
+                                <div class="positionText">
+                                    <span class="dropMenuText">{{cc_crime_statistics_category.crime_statistics_category_en}}</span>
+                                    <img src="~/Content/img/arrowSelect.png" />
+                                </div>
+                                <ul class="menuUl" ng-show="cc_crime_statistics_categories.length > 0">
+                                    <li ng-repeat="item in cc_crime_statistics_categories">
+                                        <div class="liItem" value="{{item.id}}" nameDropdown="ReportsDepartmentIDStringss">
+                                            <span class="positionText liText" ng-click="selectCategory(item)">
+                                                <div class="checked">
+                                                    <img class="" src="~/Content/img/check.png" />
+                                                </div>
+                                                {{item.crime_statistics_category_en}}
+                                            </span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="borderAnalit">
+
+        <nvd3 options="cacsChart" data="cacsChartData" api="api"></nvd3>
+        
+    </div>
+</div>

@@ -6,6 +6,7 @@
     angular.module('EC', [
         'ngResource',
         'ngAnimate',
+        'nvd3',
 
         'EC',
     ]);

@@ -223,6 +223,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="angular\app.js" />
+    <Content Include="angular\controllers\AnalyticsCACSController.js" />
     <Content Include="angular\controllers\NewCaseCaseClosureReportController.js" />
     <Content Include="angular\controllers\NewCaseInvestigationNotesController.js" />
     <Content Include="angular\controllers\NewCaseReportController.js" />
@@ -233,6 +234,7 @@
     <Content Include="angular\controllers\SettingsUserEditController.js" />
     <Content Include="angular\controllers\EmployeeAwarenessPosterController.js" />
     <Content Include="angular\controllers\EmployeeAwarenessController.js" />
+    <Content Include="angular\services\AnalyticsCASService.js" />
     <Content Include="angular\services\NewCaseCaseClosureReportService.js" />
     <Content Include="angular\services\NewCaseInvestigationNotesService.js" />
     <Content Include="angular\services\NewCaseReportService.js" />
@@ -661,13 +663,15 @@
     <Content Include="Views\Settings\User - Copy.cshtml" />
     <Content Include="Views\Case\Attachments.cshtml" />
     <Content Include="Views\ReporterDashboard\Attachments.cshtml" />
-    <Content Include="Views\NewCase\Report.cshtml" />
+    <Content Include="Views\NewCase\Index.cshtml" />
     <Content Include="Views\NewCase\Partial\headerPos.cshtml" />
     <Content Include="Views\NewCase\InvestigationNotes.cshtml" />
     <Content Include="Views\NewCase\CaseClosureReport.cshtml" />
     <Content Include="Views\Shared\Partial\ReporterDashboardPartial.cshtml" />
     <Content Include="Views\Shared\Partial\_NewCasesTopMenu.cshtml" />
     <Content Include="Views\Shared\IndexPages\LayoutNewCases.cshtml" />
+    <Content Include="Views\Analytics\CACSReport.cshtml" />
+    <Content Include="Views\NewCase\Activity.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -695,6 +699,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AnalyticsController.cs" />
     <Compile Include="Controllers\API\BaseApiController.cs" />
+    <Compile Include="Controllers\API\AnalyticsCACSController.cs" />
     <Compile Include="Controllers\API\NewCaseCaseClosureReportController.cs" />
     <Compile Include="Controllers\API\NewCaseInvestigationNotesController.cs" />
     <Compile Include="Controllers\API\NewCaseReportController.cs" />

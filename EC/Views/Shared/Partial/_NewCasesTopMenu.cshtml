@@ -50,13 +50,13 @@
 <div class="container mainNavigationTabs_color">
     <div class="mainNavigationTabs clearfix">
         <ul class="mainNavigationTabs__tabs-ul clearfix">
-            <li class="mainNavigationTabs__tab-link @(action == "report" ? "active" : "")" data-tab="mainTab-1">
-                <a href="@Url.Action("Report", new { report_id = ViewBag.report_id })">
+            <li class="mainNavigationTabs__tab-link @(action == "index" ? "active" : "")" data-tab="mainTab-1">
+                <a href="@Url.Action("Index", new { report_id = ViewBag.report_id })">
                     <div class="mainNavigationTabs__tab-name">Report</div>
                 </a>
                 <div class="mainNavigationTabs__badgeCount"></div>
             </li>
-            <li class="mainNavigationTabs__tab-link @(action == "investigationnotes" ? "active" : "")" data-tab="mainTab-2">
+            <li class="mainNavigationTabs__tab-link @(action == "investigationnotes" || action == "caseclosurereport" ? "active" : "")" data-tab="mainTab-2">
                 <a href="@Url.Action("InvestigationNotes", new { report_id = ViewBag.report_id })">
                     <div class="mainNavigationTabs__tab-name">Investigation Notes</div>
                 </a>
@@ -86,17 +86,17 @@
                 </a>
                 <div class="mainNavigationTabs__badgeCount"></div>
             </li>
-            <li class="mainNavigationTabs__tab-link @(action == "log" ? "active" : "")" data-tab="mainTab-5">
-                <a href="@Url.Action("Log", new { report_id = ViewBag.report_id })">
-                    <div class="mainNavigationTabs__tab-name">Log</div>
-                </a>
-                <div class="mainNavigationTabs__badgeCount"></div>
-            </li>
         </ul>
 
         <ul class="mainNavigationTabs__rightLinks-ul clearfix">
             <li class="mainNavigationTabs__rightLinks-li">
                 <a href="@Url.Action("Attachments", new { report_id = ViewBag.report_id })" class="mainNavigationTabs__rightLinks-a">Attachments</a>
+            </li>
+            <li class="mainNavigationTabs__rightLinks-li mainNavigationTabs__changeTab @(action == "activity" ? "active" : "")" data-tab="mainTab-activity">
+                <a href="@Url.Action("Activity", new { report_id = ViewBag.report_id })" class="mainNavigationTabs__rightLinks-a">
+                    <img src="Icons/activityIcon.png" alt="Activity" />
+                    <span>Activity</span>
+                </a>
             </li>
         </ul>
     </div>
