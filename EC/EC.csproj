@@ -675,6 +675,7 @@
     <Content Include="Views\Shared\Partial\_NewCasesTopMenu.cshtml" />
     <Content Include="Views\Shared\IndexPages\LayoutNewCases.cshtml" />
     <Content Include="Views\Analytics\CACSReport.cshtml" />
+    <Content Include="Views\NewCase\Activity.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,81 @@
+﻿@using EC.Core.Common;
+@using EC.Models.Database;
+@using EC.Models;
+@using EC.App_LocalResources;
+@using EC.Common.Interfaces;
+
+@{
+    Layout = "~/Views/Shared/IndexPages/LayoutNewCases.cshtml";
+
+    var report_id = (Int32)ViewBag.report_id;
+    var user_id = (Int32)ViewBag.user_id;
+    UserModel um = new UserModel(user_id);
+    ReportModel rm = new ReportModel(report_id);
+    List<report_log> actions_log = rm.ReportActions(user_id, rm._report.id);
+    action _action;
+    user _user;
+    string _sender_name = "";
+    string _sender_title = "";
+    string _month_name = "";
+    GlobalFunctions glb = new GlobalFunctions();
+    IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
+}
+
+@Html.Partial("~/Views/Shared/Partial/_NewCasesTopMenu.cshtml")
+
+<div class="container subNavigationTabs__tabContent-container">
+    <div id="mainTab-activity" class="mainNavigationTabs__tabContent active">
+        <div class="content-container__inner">
+            <div class="divider p-tb-20"></div>
+            @foreach (report_log _log in actions_log)
+            {
+                _action = glb.GetActionById(_log.action_id.Value);
+                _user = um.GetById(_log.user_id);
+                _sender_name = "";
+                _sender_title = "";
+                _month_name = m_DateTimeHelper.GetShortMonth(_log.created_dt.Month);
+
+                if (_log.user_id == user_id)
+                {
+                    _sender_name = "You,";
+                }
+                else
+                {
+                    _sender_name = (_user.first_nm + " " + _user.last_nm).Trim() + ",";
+                }
+                if (_user.role_id == 8)
+                {
+                    _sender_title = " (" + GlobalRes.Reporter + ")";
+                    _sender_name = "";
+                }
+                else
+                {
+                    _sender_title = _user.title_ds.Trim();
+                }
+
+                <div class="activityBlock clearfix">
+                    <div class="activityBlock-leftSide clearfix">
+                        <div class="activityBlock-leftSide__icon pull-left">
+                            <img src="@Url.Content(_action.icon_path)" alt="icon" class="activityBlock-leftSide__iconImg" />
+                        </div><!-- /.activityBlock-leftSide__icon -->
+                        <div class="activityBlock-leftSide__text pull-left">
+                            <div class="activityBlock-leftSide__header">
+                                <strong>@_action.description_en</strong>
+                            </div><!-- /.activityBlock-leftSide__header -->
+                            <div class="activityBlock-leftSide__description">
+                                @_sender_name, @_sender_title
+                            </div><!-- /.activityBlock-leftSide__description -->
+                        </div><!-- /.activityBlock-leftSide__text -->
+                    </div><!-- /.activityBlock-leftSide -->
+                    <div class="activityBlock-rightSide ">
+                        <div class="activityBlock-rightSide__date">
+                            <span>@_month_name @_log.created_dt.Day.ToString(), @_log.created_dt.Year, @_log.created_dt.Hour.ToString():@_log.created_dt.Minute</span>
+                        </div><!-- /.activityBlock-rightSide__date -->
+                    </div><!-- /.activityBlock-rightSide -->
+                </div><!-- /.activityBlock -->
+            }
+
+            <div class="divider p-tb-30"></div>
+        </div><!-- /.content-container__inner -->
+    </div><!-- mainNavigationTabs__tabContent -->
+</div>
