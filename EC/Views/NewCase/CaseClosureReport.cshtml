@@ -1,151 +1,160 @@
-﻿@using EC.Models.Database;
+﻿@using EC.App_LocalResources
+@using EC.Models.Database;
+
 @{
     var report_id = (Int32)ViewBag.report_id;
     var user_id = (Int32)ViewBag.user_id;
     List<attachment> attachmentFiles = (List<attachment>)ViewBag.attachmentFiles;
-    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
-    string popup = null;
-    bool? is_cc = ViewBag.is_cc;
-    is_cc = true;
-}
-<link type="text/css" href="~/Content/caseTasks.css" rel="stylesheet">
+    Layout = "~/Views/Shared/IndexPages/LayoutNewCases.cshtml";
 
-<style>
-#investigationNotes {
-    width: 100%;
-    background-color: #f2f7f7;
-    height: 100%;
+    var is_cc = (bool)ViewBag.is_cc;
 }
-#bigPadding {
-    padding: 0 48px;
-}
-#investigationNotes #firstBlock select{
-    outline: none;
-    border: none;
-    padding-left: 17px;
-    width: 220px;
-    height: 40px;
-    margin-left: 12px;
-}
-#investigationNotes #firstBlock {
-    border-bottom: 1px solid #bfc3c2;
-}
-#investigationNotes #firstBlock table {
-            width: 100%;
-    padding-left: 64px;
-    padding-bottom: 28px;
-}
-#secondBlock .positionArea {
-        padding-left: 64px;
-    padding-bottom: 85px;
-}
-#investigationNotes .button {
-        border: 1px solid #6ccec3;
-    color: #05b5a2;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-left: 15px;
-    font-size: 10pt;
-    padding: 5px 13px 5px 13px;
-    width: 65px;
-}
-#secondBlock {
-    border-bottom: 1px solid #bfc3c2;
-}
-</style>
-<div id="investigationNotes" ng-controller="NewCaseCaseClosureReportController">
-    <div id="bigPadding">
-        <div id="firstBlock">
-            @if (is_cc == true)
-            {
-                <p>Is this a Clery Act Crime?</p>
-                <table>
-                    <tr>
-                        <td width="100px">
-                            <label class="inputBlock" for="No">
-                                <input id="No" type="radio" name="radioName" value="false" ng-model="model.report_cc_crime.cc_is_clear_act_crime" ng-change="saveCrime()">
-                                <span class="radioButton"></span>
-                                <span class="radioTitle">No</span>
-                            </label>
-                        </td>
-                        <td width="100px">
-                            <label class="inputBlock" for="Yes">
-                                <input id="Yes" type="radio" name="radioName" value="true" ng-model="model.report_cc_crime.cc_is_clear_act_crime" ng-change="saveCrime()">
-                                <span class="radioButton"></span>
-                                <span class="radioTitle">Yes</span>
-                            </label>
-                        </td>
-                        <td>
-                            <select 
-                                    ng-change="saveCrime()"
-                                    ng-show="model.report_cc_crime.cc_is_clear_act_crime == 'true'"
-                                    ng-model="model.report_cc_crime.cc_crime_statistics_category_id"
-                                    ng-options="item.id as item.crime_statistics_category_en for item in model.cc_crime_statistics_categories"></select>
-                        </td>
-                        <td>
-                            <select                        
-                                    ng-change="saveCrime()"
-                                    ng-show="model.report_cc_crime.cc_is_clear_act_crime == 'true'"
-                                    ng-model="model.report_cc_crime.cc_crime_statistics_location_id" 
-                                    ng-options="item.id as item.crime_statistics_location_en for item in model.cc_crime_statistics_locations"></select>
-                        </td>
-                    </tr>
-                </table>
-            }
+
+<link rel="stylesheet" href="~/Content/assets/template/css/style.css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+@Html.Partial("~/Views/Shared/Partial/_NewCasesTopMenu.cshtml")
+
+@Html.Hidden("is_cc", is_cc)
+
+<div class="container mainNavigationTabs__tabContent-container">
+    <div id="mainTab-1" class="mainNavigationTabs__tabContent ">
+    </div>
+    <div id="mainTab-2" class="mainNavigationTabs__tabContent active">
+
+        <div class="subNavigationTabs clearfix">
+            <ul class="subNavigationTabs__tabs-ul clearfix">
+                <li class="subNavigationTabs__tab-link" data-tab="subTab-1">
+                    <a href="@Url.Action("InvestigationNotes", new { report_id = report_id})">
+                        <div class="subNavigationTabs__tab-name">General information</div>
+                    </a>
+                </li>
+                <li class="subNavigationTabs__tab-link active" data-tab="subTab-2">
+                    <a href="@Url.Action("CaseClosureReport", new { report_id = report_id})">
+                        <div class="subNavigationTabs__tab-name">Case Closure Report</div>
+                    </a>
+                </li>
+            </ul>
         </div>
-        <div id="secondBlock">
-            <p>
-                Executive Summary
-            </p>
-            <textarea class="positionArea" ng-model="model.report_cc_crime.executive_summary">
+    </div>
+    <div id="mainTab-3" class="mainNavigationTabs__tabContent">
+    </div>
+    <div id="mainTab-4" class="mainNavigationTabs__tabContent">
+    </div>
+    <div id="mainTab-5" class="mainNavigationTabs__tabContent">
+    </div>
+</div>
 
-            </textarea>
-            <div class="button" ng-click="saveCrime()">
-                Add
+<div class="container subNavigationTabs__tabContent-container">
+    <div id="subTab-2" class="subNavigationTabs__tabContent active" ng-controller="NewCaseCaseClosureReportController">
+        <section class="content-container">
+            <div class="content-container__inner">
+                @if (is_cc)
+                {
+                    <p class="sectionHeader">Is this a Clery Act Crime?</p>
+                    <div class="content-container__inner-additional clearfix">
+                        <div class="col-3 CaseClosureReport__radioBlock clearfix">
+                            <label for="Yes" class="inputRadio">
+                                <input type="radio" id="Yes" class="inputRadio__input" value="true" ng-model="model.report_cc_crime.cc_is_clear_act_crime" ng-change="saveCrime()" />
+                                <span class="inputRadio__customnBtn"></span>
+                                <span class="inputRadio__inputTitle">No</span>
+                            </label>
+                            <label for="No" class="inputRadio">
+                                <input type="radio" id="No" class="inputRadio__input" value="false" ng-model="model.report_cc_crime.cc_is_clear_act_crime" ng-change="saveCrime()" />
+                                <span class="inputRadio__customnBtn"></span>
+                                <span class="inputRadio__inputTitle">Yes</span>
+                            </label>
+                        </div>
+                        <div class="col-3">
+                            <dropbox ng-dropbox-textExpr="getCrimeCategory(model.report_cc_crime.cc_crime_statistics_category_id)"
+                                     itemText="{{item.crime_statistics_category_en}}"
+                                     ng-dropbox-list="model.cc_crime_statistics_categories"
+                                     ng-dropbox-rootItem="item"
+                                     ng-dropbox-on-select="saveCrimeCategory">
+                            </dropbox>
+                        </div>
+                        <div class="col-3">
+                            <dropbox ng-dropbox-textExpr="getCrimeLocation(model.report_cc_crime.cc_crime_statistics_location_id)"
+                                     itemText="{{item.crime_statistics_location_en}}"
+                                     ng-dropbox-list="model.cc_crime_statistics_locations"
+                                     ng-dropbox-rootItem="item"
+                                     ng-dropbox-on-select="saveCrimeLocation">
+                            </dropbox>
+                        </div>
+                    </div>
+                }
             </div>
-        </div>
-        <div id="thirdBlock" ng-show="model.report_case_closure_outcomes.length > 0">
-            <p>
-                Recommended Outcomes for Subject(s)
-            </p>
-            <table>
-                <tr ng-repeat="user in model.report_case_closure_outcomes">
-                    <td>{{user.user.Name}} {{user.user.Title}}</td>
-                    <td>
-                        <select ng-change="saveItem(user)"
-                                ng-model="user.outcome_id"
-                                ng-options="item.id as item.outcome_en for item in model.outcomes"></select>
-                    </td>
-                    <td>
-                        <div ng-show="user.isEditNote">
-                            <textarea class="positionArea" ng-model="user.note"></textarea>
-                            <div class="button" ng-click="saveItem(user)">
-                                Save
-                            </div>
-                        </div>
-                        <div class="button" ng-click="user.isEditNote = !user.isEditNote" ng-show="!user.isEditNote">
-                            Add note
-                        </div>
-                    </td>
-                </tr>                
-            </table>
-        </div>
-        <div id="fourthBlock">
-            <p>
-                Recommended Recommended Actions for Witnesses and Reporter
-            </p>
-            <select ng-change="saveItem(model.reporter)"
-                    ng-model="model.reporter.outcome_id"
-                    ng-options="item.id as item.outcome_en for item in model.outcomes"></select>
-            <div ng-show="model.reporter.isEditNote">
-                <textarea class="positionArea" ng-model="model.reporter.note"></textarea>
-                <div class="button" ng-click="saveItem(model.reporter)">
-                    Save
+        </section>
+
+        <section class="content-container">
+            <div class="content-container__inner">
+                <p class="sectionHeader">Executive Summary</p>
+                <div class="content-container__inner-additional">
+                    <div class="row">
+                        <textarea class="textareaBlock" ng-model="model.report_cc_crime.executive_summary"></textarea>
+                    </div><!-- /.row -->
+                    <div class="row clearfix">
+                        <a href="#" class="btn-link pull-right" ng-click="saveCrime()">Save</a>
+                    </div><!-- /.row -->
                 </div>
             </div>
-            <div class="button" ng-click="model.reporter.isEditNote = !model.reporter.isEditNote" ng-show="!model.reporter.isEditNote">
-                Add note
+        </section>
+
+        <section class="content-container" ng-show="model.report_case_closure_outcome1.length > 0">
+            <div class="content-container__inner">
+                <p class="sectionHeader">Recommended Recommended Actions for Witnesses and Reporter</p>
+                <div class="content-container__inner-additional clearfix">
+                    <div class="row" ng-repeat="item in model.report_case_closure_outcome1">
+                        <div class="col-3">
+                            <p class="content-container__p">{{item.mediator.Name}}</p>
+                        </div><!-- /.col-3 -->
+                        <div class="col-3">
+                            <dropbox ng-dropbox-textExpr="item.outcome_c.outcome_en || 'Please select'"
+                                     itemText="{{item.outcome_en}}"
+                                     ng-dropbox-list="model.outcomes"
+                                     ng-dropbox-rootItem="item"
+                                     ng-dropbox-on-select="saveOutcome">
+                            </dropbox>
+                        </div><!-- /.col-6 -->
+                        <div class="col-3">
+                            <textarea ng-model="item.outcome.note" ng-show="item.editNote"></textarea>
+                            <p ng-show="!item.editNote">{{item.outcome.note}}</p>
+                        </div><!-- /.col-3 -->
+                        <div class="col-3">
+                            <a href="#" class="btn-link " ng-show="item.editNote" ng-click="saveOutcome(item)">Save Note</a>
+                            <a href="#" class="btn-link " ng-show="!item.editNote" ng-click="item.editNote = true">{{item.outcome.note || '' !== '' ? 'Edit Note' : 'Add Note'}}</a>
+                        </div><!-- /.col-3 -->
+                    </div><!-- /.row -->
+                </div>
             </div>
-        </div>
+        </section>
+        <section class="content-container" ng-show="model.report_case_closure_outcome2.length > 0">
+            <div class="content-container__inner">
+                <p class="sectionHeader">Recommended Outcomes for subjects</p>
+                <div class="content-container__inner-additional clearfix">
+                    <div class="row" ng-repeat="item in model.report_case_closure_outcome2">
+                        <div class="col-3">
+                            <p class="content-container__p">{{item.mediator.Name}}</p>
+                        </div><!-- /.col-3 -->
+                        <div class="col-3">
+                            <dropbox ng-dropbox-textExpr="item.outcome_c.outcome_en || 'Please select'"
+                                     itemText="{{item.outcome_en}}"
+                                     ng-dropbox-list="model.outcomes"
+                                     ng-dropbox-rootItem="item"
+                                     ng-dropbox-on-select="saveOutcome">
+                            </dropbox>
+                        </div><!-- /.col-6 -->
+                        <div class="col-3">
+                            <textarea ng-model="item.outcome.note" ng-show="item.editNote"></textarea>
+                            <p ng-show="!item.editNote">{{item.outcome.note}}</p>
+                        </div><!-- /.col-3 -->
+                        <div class="col-3">
+                            <a href="#" class="btn-link " ng-show="item.editNote" ng-click="saveOutcome(item)">Save Note</a>
+                            <a href="#" class="btn-link " ng-show="!item.editNote" ng-click="item.editNote = true">{{item.outcome.note || '' !== '' ? 'Edit Note' : 'Add Note'}}</a>
+                        </div><!-- /.col-3 -->
+                    </div><!-- /.row -->
+                </div>
+            </div>
+        </section>
     </div>
 </div>

@@ -389,7 +389,7 @@ namespace EC
                 }
             );*/
 
-            routes.MapRoute(
+            /*routes.MapRoute(
                 name: "NewCaseCaseClosureReport",
                 url: "NewCase/CaseClosureReport/{report_id}",
                 defaults: new
@@ -398,7 +398,7 @@ namespace EC
                     action = "CaseClosureReport",
                     report_id = UrlParameter.Optional
                 }
-            );
+            );*/
 
             routes.MapRoute(
                 name: "lang",
