@@ -56,7 +56,7 @@
                 </a>
                 <div class="mainNavigationTabs__badgeCount"></div>
             </li>
-            <li class="mainNavigationTabs__tab-link @(action == "investigationnotes" ? "active" : "")" data-tab="mainTab-2">
+            <li class="mainNavigationTabs__tab-link @(action == "investigationnotes" || action == "caseclosurereport" ? "active" : "")" data-tab="mainTab-2">
                 <a href="@Url.Action("InvestigationNotes", new { report_id = ViewBag.report_id })">
                     <div class="mainNavigationTabs__tab-name">Investigation Notes</div>
                 </a>

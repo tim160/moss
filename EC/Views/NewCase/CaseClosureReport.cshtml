@@ -49,7 +49,7 @@
     <div id="subTab-2" class="subNavigationTabs__tabContent active" ng-controller="NewCaseCaseClosureReportController">
         <section class="content-container">
             <div class="content-container__inner">
-                @if (is_cc)
+                @if (!is_cc)
                 {
                     <p class="sectionHeader">Is this a Clery Act Crime?</p>
                     <div class="content-container__inner-additional clearfix">
@@ -57,15 +57,15 @@
                             <label for="Yes" class="inputRadio">
                                 <input type="radio" id="Yes" class="inputRadio__input" value="true" ng-model="model.report_cc_crime.cc_is_clear_act_crime" ng-change="saveCrime()" />
                                 <span class="inputRadio__customnBtn"></span>
-                                <span class="inputRadio__inputTitle">No</span>
+                                <span class="inputRadio__inputTitle">Yes</span>
                             </label>
                             <label for="No" class="inputRadio">
                                 <input type="radio" id="No" class="inputRadio__input" value="false" ng-model="model.report_cc_crime.cc_is_clear_act_crime" ng-change="saveCrime()" />
                                 <span class="inputRadio__customnBtn"></span>
-                                <span class="inputRadio__inputTitle">Yes</span>
+                                <span class="inputRadio__inputTitle">No</span>
                             </label>
                         </div>
-                        <div class="col-3">
+                        <div class="col-3" ng-show="model.report_cc_crime.cc_is_clear_act_crime == 'true'">
                             <dropbox ng-dropbox-textExpr="getCrimeCategory(model.report_cc_crime.cc_crime_statistics_category_id)"
                                      itemText="{{item.crime_statistics_category_en}}"
                                      ng-dropbox-list="model.cc_crime_statistics_categories"
@@ -73,7 +73,7 @@
                                      ng-dropbox-on-select="saveCrimeCategory">
                             </dropbox>
                         </div>
-                        <div class="col-3">
+                        <div class="col-3" ng-show="model.report_cc_crime.cc_is_clear_act_crime == 'true'">
                             <dropbox ng-dropbox-textExpr="getCrimeLocation(model.report_cc_crime.cc_crime_statistics_location_id)"
                                      itemText="{{item.crime_statistics_location_en}}"
                                      ng-dropbox-list="model.cc_crime_statistics_locations"
