@@ -37,19 +37,19 @@
 
 <div class="container-fluid">
     <ol class="progress-steps progress-steps_5-steps clearfix">
-        <li class="progress-steps__li @(investigationstatus > 0 ? "done": "")">
+        <li class="progress-steps__li @(investigationstatus > 0 ? "done": "") @(investigationstatus == 1 ? "current": "")">
             <div class="progress-steps__text">New report</div>
         </li>
-        <li class="progress-steps__li @(investigationstatus > 1 ? "done": "")">
+        <li class="progress-steps__li @(investigationstatus > 1 ? "done": "") @(investigationstatus == 2 ? "current": "")">
             <div class="progress-steps__text">New case</div>
         </li>
-        <li class="progress-steps__li @(investigationstatus > 2 ? "done": "")">
+        <li class="progress-steps__li @(investigationstatus > 2 ? "done": "") @(investigationstatus == 3 ? "current": "")">
             <div class="progress-steps__text">Under Investigation</div>
         </li>
-        <li class="progress-steps__li @(investigationstatus > 3 ? "done": "")">
+        <li class="progress-steps__li @(investigationstatus > 3 ? "done": "") @(investigationstatus == 4 ? "current": "")">
             <div class="progress-steps__text">Awaiting Sign-Off</div>
         </li>
-        <li class="progress-steps__li @(investigationstatus > 4 ? "done": "")">
+        <li class="progress-steps__li @(investigationstatus > 4 ? "done": "") @(investigationstatus == 5 ? "current": "")">
             <div class="progress-steps__text">Closed</div>
         </li>
     </ol>

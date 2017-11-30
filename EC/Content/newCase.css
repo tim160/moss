@@ -598,6 +598,9 @@ strong{
 					margin-bottom: 8px;
 				}
 				.progress-steps__li.done .progress-steps__text{
+					color: rgba(56, 73, 77, 0.5);
+				}
+				.progress-steps__li.current .progress-steps__text{
 					color: rgba(56, 73, 77, 1);
 				}
 				.progress-steps__text:after{
