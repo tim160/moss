@@ -4,7 +4,6 @@
 
     var unread_report_number = um.UnreadReport(0, 0).Count;
     var unread_report_number_string = "";
-    string page_subtitle = "";
     if (unread_report_number > 0)
     {
         unread_report_number_string = unread_report_number.ToString();
@@ -23,23 +22,34 @@
     {
         unread_task_number_string = unread_task_number.ToString();
     }
+
+    EC.Models.ReportModel rm = new EC.Models.ReportModel();
+    int _report_id = 0;
+    int investigationstatus = 1;
+    if ((ViewBag.report_id != null) && ((int)ViewBag.report_id != 0))
+    {
+        _report_id = (int)ViewBag.report_id;
+        rm = new EC.Models.ReportModel(_report_id);
+
+        investigationstatus = rm._investigation_status;
+    }
 }
 
 <div class="container-fluid">
     <ol class="progress-steps progress-steps_5-steps clearfix">
-        <li class="progress-steps__li done">
+        <li class="progress-steps__li @(investigationstatus > 0 ? "done": "")">
             <div class="progress-steps__text">New report</div>
         </li>
-        <li class="progress-steps__li done">
+        <li class="progress-steps__li @(investigationstatus > 1 ? "done": "")">
             <div class="progress-steps__text">New case</div>
         </li>
-        <li class="progress-steps__li ">
+        <li class="progress-steps__li @(investigationstatus > 2 ? "done": "")">
             <div class="progress-steps__text">Under Investigation</div>
         </li>
-        <li class="progress-steps__li ">
+        <li class="progress-steps__li @(investigationstatus > 3 ? "done": "")">
             <div class="progress-steps__text">Awaiting Sign-Off</div>
         </li>
-        <li class="progress-steps__li">
+        <li class="progress-steps__li @(investigationstatus > 4 ? "done": "")">
             <div class="progress-steps__text">Closed</div>
         </li>
     </ol>
