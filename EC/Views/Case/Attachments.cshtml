@@ -88,8 +88,8 @@
                                     <ul>
                                         @foreach (var route in listR.Where(x => x.company_secondary_type_id == type.id))
                                         {
-                                        foreach (var file in listA.Where(x => x.company_case_routing_id == route.id))
-                                        {
+                                            foreach (var file in listA.Where(x => x.company_case_routing_id == route.id))
+                                            {
                                                 <li>
                                                     <a href="@Url.Content(file.path_nm)" download>@file.file_nm</a>
                                                 </li>
@@ -133,7 +133,7 @@
                                     <td class="image">
                                         <img src="~/Content/Icons/viewDoc2.png" />
                                     </td>
-                                    <td class="customWidth">
+                                    <td class="customWidth" style="width: 50%">
                                         <p class="secondRow">
                                             <div class="secondRowReporter">@(user == null ? "Anonymous reporter" : (user.first_nm + " " + user.last_nm).Trim())</div>
                                             @attachment.file_nm
@@ -144,8 +144,8 @@
                                             @if (attachment.user_id != rm._report.reporter_user_id)
                                             {
                                                 <select class="attachmentFile case_select" data-id="@attachment.id">
-                                                    <option @(attachment.visible_mediators_only == true ? "selected" : "") value="1">visible by mediators</option>
-                                                    <option @(attachment.visible_reporter == true ? "selected" : "") value="2">visible by reporter</option>
+                                                    <option @(attachment.visible_mediators_only == true ? "selected" : "") value="1">Visible to Case Administrators</option>
+                                                    <option @(attachment.visible_reporter == true ? "selected" : "") value="2">Visible to Reporter & Case Administrators</option>
                                                 </select>
                                             }
                                             else
