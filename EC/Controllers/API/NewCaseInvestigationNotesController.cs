@@ -114,7 +114,7 @@ namespace EC.Controllers.API
                     .ToList(),
 
                 report_secondary_type_selected_avilable = company_secondary_types
-                    .Where(x => !report_secondary_type_selected.Select(z => z.secondary_type_id).Contains(x.id))
+                    .Where(x => !report_secondary_type_selected.Select(z => z.secondary_type_id).Contains(x.id) && x.status_id == 2)
                     .ToList(),
 
                 mediator_involved = all_mediators
