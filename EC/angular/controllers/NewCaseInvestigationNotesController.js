@@ -144,9 +144,9 @@
             }
 
             if ($('#is_cc').val() === 'True') {
-                return 'Select Campus Influences';
+                return 'Select Campus Influences (CC) ';
             } else {
-                return 'Select Organizational Influences';
+                return 'Select Organizational Influences (EC)';
             }
         };
 
