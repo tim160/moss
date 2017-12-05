@@ -106,7 +106,7 @@
                 <div class="content-container__inner-additional clearfix">
                     <div class="row" ng-repeat="item in model.report_case_closure_outcome1">
                         <div class="col-3">
-                            <p class="content-container__p">{{item.mediator.Name}}</p>
+                            <p class="content-container__p">{{item.mediator.Name}} {{item.mediator.last_name}}</p>
                         </div><!-- /.col-3 -->
                         <div class="col-3">
                             <dropbox ng-dropbox-textExpr="item.outcome_c.outcome_en || 'Please select'"
@@ -117,7 +117,7 @@
                             </dropbox>
                         </div><!-- /.col-6 -->
                         <div class="col-3">
-                            <textarea ng-model="item.outcome.note" ng-show="item.editNote"></textarea>
+                            <textarea ng-model="item.outcome.note" ng-show="item.editNote" style="font-size: 18px;"></textarea>
                             <p ng-show="!item.editNote">{{item.outcome.note}}</p>
                         </div><!-- /.col-3 -->
                         <div class="col-3">
@@ -134,7 +134,7 @@
                 <div class="content-container__inner-additional clearfix">
                     <div class="row" ng-repeat="item in model.report_case_closure_outcome2">
                         <div class="col-3">
-                            <p class="content-container__p">{{item.mediator.Name}}</p>
+                            <p class="content-container__p">{{item.mediator.Name}} {{item.mediator.last_name}}</p>
                         </div><!-- /.col-3 -->
                         <div class="col-3">
                             <dropbox ng-dropbox-textExpr="item.outcome_c.outcome_en || 'Please select'"
@@ -145,7 +145,7 @@
                             </dropbox>
                         </div><!-- /.col-6 -->
                         <div class="col-3">
-                            <textarea ng-model="item.outcome.note" ng-show="item.editNote"></textarea>
+                            <textarea ng-model="item.outcome.note" ng-show="item.editNote" style="font-size: 18px;"></textarea>
                             <p ng-show="!item.editNote">{{item.outcome.note}}</p>
                         </div><!-- /.col-3 -->
                         <div class="col-3">

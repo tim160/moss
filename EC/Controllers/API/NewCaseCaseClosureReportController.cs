@@ -93,7 +93,7 @@ namespace EC.Controllers.API
 
                 reporter = reporter,
 
-                outcomes = DB.company_outcome.Where(x => x.company_id == report.company_id).OrderBy(x => x.outcome_en).ToList(),
+                outcomes = DB.company_outcome.Where(x => x.company_id == report.company_id & x.status_id == 2).OrderBy(x => x.outcome_en).ToList(),
             };
 
 
