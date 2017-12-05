@@ -58,6 +58,10 @@
 
     angular.module('EC').filter('parseUrl', function () {
         return function (url, param) {
+            if (url.indexOf('?') === -1) {
+                var s = url.split('/');
+                return s[s.length - 1];
+            }
             var params = url.split(/(\?|\&)([^=]+)\=([^&]+)/);
             return params[params.findIndex(function (x) {
                 if (x === param) {
@@ -291,7 +295,7 @@
         $scope.refresh($scope.mode);
 
         $scope.openCase = function (id) {
-            window.location ='/Case/Index/' + id;
+            window.location ='/newCase/Index/' + id;
         };
 
         $scope.sort = function (column) {
@@ -737,7 +741,9 @@
             ['$scope', '$filter', 'orderByFilter', '$location', 'NewCaseReportService', NewCaseReportController]);
 
     function NewCaseReportController($scope, $filter, orderByFilter, $location, NewCaseReportService) {
-        $scope.report_id = parseInt(parseInt($location.absUrl().substring($location.absUrl().indexOf('report_id=') + 'report_id='.length)));
+        //$scope.report_id = parseInt(parseInt($location.absUrl().substring($location.absUrl().indexOf('report_id=') + 'report_id='.length)));
+        $scope.report_id = $filter('parseUrl')($location.$$absUrl, 'report_id');
+
         $scope.model = {
             reportingFrom: 'Canada',
             reporterWouldLike: 'Contact Info Shared',

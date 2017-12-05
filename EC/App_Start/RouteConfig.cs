@@ -378,7 +378,40 @@ namespace EC
                 }
             );
 
-            /*routes.MapRoute(
+            routes.MapRoute(
+                name: "NewCaseIndex",
+                url: "NewCase/Index/{report_id}",
+                defaults: new
+                {
+                    controller = "NewCase",
+                    action = "Index",
+                    report_id = UrlParameter.Optional
+                }
+            );
+
+            routes.MapRoute(
+                name: "NewCaseActivity",
+                url: "NewCase/Activity/{report_id}",
+                defaults: new
+                {
+                    controller = "NewCase",
+                    action = "Activity",
+                    report_id = UrlParameter.Optional
+                }
+            );
+
+            routes.MapRoute(
+                name: "NewCaseTasks",
+                url: "NewCase/Tasks/{report_id}",
+                defaults: new
+                {
+                    controller = "NewCase",
+                    action = "Tasks",
+                    report_id = UrlParameter.Optional
+                }
+            );
+
+            routes.MapRoute(
                 name: "NewCaseInvestigationNotes",
                 url: "NewCase/InvestigationNotes/{report_id}",
                 defaults: new
@@ -387,9 +420,9 @@ namespace EC
                     action = "InvestigationNotes",
                     report_id = UrlParameter.Optional
                 }
-            );*/
+            );
 
-            /*routes.MapRoute(
+            routes.MapRoute(
                 name: "NewCaseCaseClosureReport",
                 url: "NewCase/CaseClosureReport/{report_id}",
                 defaults: new
@@ -398,7 +431,7 @@ namespace EC
                     action = "CaseClosureReport",
                     report_id = UrlParameter.Optional
                 }
-            );*/
+            );
 
             routes.MapRoute(
                 name: "lang",

@@ -8,7 +8,9 @@
             ['$scope', '$filter', 'orderByFilter', '$location', 'NewCaseReportService', NewCaseReportController]);
 
     function NewCaseReportController($scope, $filter, orderByFilter, $location, NewCaseReportService) {
-        $scope.report_id = parseInt(parseInt($location.absUrl().substring($location.absUrl().indexOf('report_id=') + 'report_id='.length)));
+        //$scope.report_id = parseInt(parseInt($location.absUrl().substring($location.absUrl().indexOf('report_id=') + 'report_id='.length)));
+        $scope.report_id = $filter('parseUrl')($location.$$absUrl, 'report_id');
+
         $scope.model = {
             reportingFrom: 'Canada',
             reporterWouldLike: 'Contact Info Shared',

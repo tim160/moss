@@ -68,7 +68,7 @@
         $scope.refresh($scope.mode);
 
         $scope.openCase = function (id) {
-            window.location ='/Case/Index/' + id;
+            window.location ='/newCase/Index/' + id;
         };
 
         $scope.sort = function (column) {
