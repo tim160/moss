@@ -72,7 +72,7 @@
                 </a>
                 <div class="mainNavigationTabs__badgeCount"></div>
             </li>
-            <li class="mainNavigationTabs__tab-link @(action == "tasks" ? "active" : "")mainNavigationTabs__badgeCount_enable" data-tab="mainTab-3">
+            <li class="mainNavigationTabs__tab-link @(action == "tasks" ? "active" : "") mainNavigationTabs__badgeCount_enable" data-tab="mainTab-3">
                 <a href="@Url.Action("Tasks", new { report_id = ViewBag.report_id })">
                     <div class="mainNavigationTabs__tab-name">Tasks</div>
                 </a>
@@ -81,7 +81,7 @@
                     <div class="mainNavigationTabs__badgeCount">@unread_task_number_string</div>
                 }
             </li>
-            <li class="mainNavigationTabs__tab-link @(action == "messages" ? "active" : "")mainNavigationTabs__badgeCount_enable" data-tab="mainTab-4">
+            <li class="mainNavigationTabs__tab-link @(action == "messages" ? "active" : "") mainNavigationTabs__badgeCount_enable" data-tab="mainTab-4">
                 <a href="@Url.Action("Messages", new { report_id = ViewBag.report_id })">
                     <div class="mainNavigationTabs__tab-name">Messages</div>
                 </a>
