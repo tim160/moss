@@ -173,6 +173,7 @@ textarea{
 	max-width: 100%;
 	position: relative;
 	min-height: 1px;
+/*	overflow: hidden;*/
 }
 
 .col-1{
@@ -241,6 +242,11 @@ textarea{
 .m-r-15{
 	margin-right: 15px;
 }
+.m-lr--30{
+	margin-left: -30px;
+	margin-right: -30px;
+}
+
 .divider{
 	min-height: 1px;
 }
@@ -318,6 +324,36 @@ textarea{
 	margin: 0 auto;
 	text-align: center;
 }
+
+.profileImage{
+	display: inline-block;
+	vertical-align: middle;
+	position: relative;
+	border-radius: 50%;
+}
+	.profileImage__img{
+		width: 30px;
+		height: 30px;
+		display: inline-block;
+		vertical-align: middle;
+		border-radius: 50%;
+	}
+
+.badgeCount{
+	color: rgb(215, 219, 219);
+	vertical-align: middle;
+	line-height: initial;
+	width: 16px;
+	height: 16px;
+	border: 1px solid rgb(215, 219, 219);
+	border-radius: 50%;
+	text-align: center;
+	line-height: 16px;
+	font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+	font-size: 8px;
+}
+
+
 /*======================================================
 =========================header=========================
 =======================================================*/
@@ -885,7 +921,10 @@ textarea{
 		.subNavigationTabs__tab-link.active{
 			color: #38494d;
 		}
-
+			.subNavigationTabs__tab-name{
+				text-decoration: none;
+    		color: inherit;
+			}
 
 
 
@@ -1507,6 +1546,242 @@ textarea{
 		color: #aeb5b7;
 	}
 
+
+/*==================================================
+====================Messages======================
+====================================================*/
+
+.subNavTabLinks{}
+	.subNavTabLinks__ul{}
+		.subNavTabLinks__li{
+			display: inline-block;
+			float: left;
+			vertical-align: middle;
+			cursor: pointer;
+			font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+			font-size: 20px;
+			color: #909495;
+			padding: 27px 30px;
+		}
+		.subNavTabLinks__li.active{
+			color: #38494d;
+		}
+			.subNavTabLinks__a{
+				text-decoration: none;
+				color: inherit;
+			}
+				.subNavTabLinks__a-Text{
+					float: left;
+				}
+				.subNavTabLinks__a-badgeCount{
+					color: #909495;
+					float: left;
+					vertical-align: middle;
+					line-height: initial;
+					width: 22px;
+					height: 22px;
+					border: 1px solid #909495;
+					border-radius: 50%;
+					text-align: center;
+					line-height: 22px;
+					font-size: 12px;
+					display: inline-block;
+					margin-left: 10px;
+				}
+				.subNavTabLinks__li.active .subNavTabLinks__a-badgeCount{
+					color: #fff;
+					border: 1px solid #05b5a2;
+					background-color: #05b5a2;
+				}
+		
+
+
+/*------------v1-------------------*/
+.navMessages{
+	/*------------v2-------------------*/
+/*		background-color: #f2f7f7;
+		border: 1px solid #e0e5e6;
+		padding: 30px 0;
+		width: 100%;*/
+	/*------------v2-------------------*/
+}
+	.navMessages__ul{
+		position: relative;
+		background-color: #f2f7f7;
+		border: 1px solid #e0e5e6;
+		vertical-align: middle;
+		box-sizing: border-box;
+		display: block;
+	}
+		.navMessages__li{
+			display: inline-block;
+			vertical-align: middle;
+			float: left;
+		}
+			.navMessages__a{
+				display: block;
+				font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
+				font-size: 12px;
+				text-decoration: none;
+				padding: 25px 40px;
+				overflow: hidden;
+				color: #aeb5b7;
+			}	
+				.navMessages__a-text,
+				.navMessages__badgeCount,
+				.navMessages__a-logo{
+					float: left;
+					display: inline-block;
+					vertical-align: middle;
+					line-height: 16px;
+				}
+				.navMessages__a-text{
+					color: #aeb5b7;
+					text-transform: uppercase;
+				}
+				.navMessages__li.active .navMessages__a-text{
+					color: #05b5a2;
+				}
+				.navMessages__badgeCount{
+					margin-left: 10px;
+				}
+				.navMessages__li.active .navMessages__badgeCount{
+					color: #fff;
+					background-color: #05b5a2;
+					border: 1px solid #05b5a2;
+				}
+
+				.navMessages__a-logo{
+					-ms-transform: rotate(45deg);
+					-webkit-transform: rotate(45deg);
+					-moz-transform: rotate(45deg);
+					transform: rotate(45deg);
+					background-color: transparent;
+					color: transparent;
+					width: 6px;
+					height: 6px;
+					border-top: 2px solid #aeb3b4;
+					border-right: 2px solid #aeb3b4;
+					margin-left: 8px;
+					margin-top: 6px;
+				}
+				.navMessages__li.active .navMessages__a-logo{
+					-ms-transform: rotate(135deg);
+					-webkit-transform: rotate(135deg);
+					-moz-transform: rotate(135deg);
+					transform: rotate(135deg);
+					border-top: 2px solid #05b5a2;
+					border-right: 2px solid #05b5a2;
+					margin-left: 8px;
+					margin-top: 4px;
+				}
+/*---------------/v1-------------------*/
+.navContentMessages{
+	border: 1px solid #e0e5e6;
+}
+	.navContentMessages-tabContent{
+		display: none;
+	}
+	.navContentMessages-tabContent.active{
+		display: block;
+	}
+		.navContentMessages-tabContent__ul{
+			background-color: #fff;
+		}
+			.navContentMessages-tabContent__li{
+				position: relative;
+			}
+			.navContentMessages-tabContent__li.currentMessage:before{
+				content: '';
+				position: absolute;
+				width: 10px;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				background-color: #b2bfc3;
+			}
+				.navContentMessages-tabContent__a{
+					font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+					color: #3c3e3f;
+					padding-top: 20px;
+					padding-bottom: 20px;
+					display: block;
+					border-bottom: 1px solid #e0e5e6;
+				}
+					.navContentMessages-tabContent__profileImg{
+						float: right;
+						margin-top: 2px;
+					}
+
+					.navContentMessages-tabContent__messageName{
+						font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+						font-size: 14px;
+						color: #aeb5b7;
+						display: block;
+						line-height: normal;
+					}
+					.navContentMessages-tabContent__messageText{
+						font-size: 18px;
+						display: block;
+					}
+					.navContentMessages-tabContent__li.currentMessage .navContentMessages-tabContent__messageText{
+						font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+						font-size: 18px;
+					}
+
+					.navContentMessages-tabContent__messageDate{
+						font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+						font-size: 14px;
+						color: #aeb5b7;
+					}
+
+		.navContentMessages-tabContent__newMessageBlock{
+			background-color: #f2f7f7;
+			padding-top: 30px;
+		}
+			.navContentMessages-tabContent__newMessageBox{
+				cursor: default;
+				position: relative;
+				padding-bottom: 10px;
+				display: block;
+			}
+			.navContentMessages-tabContent__newMessageBox:focus{
+				background-color: #ccc;
+			}
+				.navContentMessages-tabContent__newMessageBox-textarea{
+					resize: none;
+					overflow: auto;
+					width: 100%;
+					height: 100px;
+					text-align: start;
+					padding: 10px 20px;
+					font-size: 14px;
+					border: 2px solid #b2bfc3;
+					display: block;
+					position: relative;
+					font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+				}
+				.navContentMessages-tabContent__newMessageBox:before{
+					content: '';
+					position: absolute;
+					top: 10px;
+					left: -14px;
+					border: 7px solid transparent;
+					border-right: 7px solid #b2bfc3;
+				}
+				.navContentMessages-tabContent__newMessageBox:focus{
+					border-right: 7px solid rgb(5, 181, 162);
+				}
+				.navContentMessages-tabContent__newMessageBox-textarea:hover,
+				.navContentMessages-tabContent__newMessageBox-textarea:focus,
+				.navContentMessages-tabContent__newMessageBox-textarea:active{
+					outline: none;
+				}
+/*				.navContentMessages-tabContent__newMessageBox-textarea:focus{
+					border: 2px solid rgb(5, 181, 162);
+				}
+*/
+			.navContentMessages-tabContent__newMessageBox-sendRow{}
 
 /*==================================================
 ======================Activity======================

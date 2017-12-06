@@ -11,6 +11,7 @@ namespace EC.Models.ViewModel
 {
     public class CaseMessagesViewModel
     {
+        public int Id { get; set; }
         public string body_tx { get; set; }
         public int report_id { get; set; }
         public int sender_id { get; set; }
@@ -88,6 +89,7 @@ namespace EC.Models.ViewModel
             }
             #endregion
 
+            vm_message.Id = _message.id;
             vm_message.body_tx = _message.body_tx;
             vm_message.reporter_access = _message.reporter_access;
             vm_message.report_id = report_id;

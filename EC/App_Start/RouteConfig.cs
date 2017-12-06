@@ -412,6 +412,17 @@ namespace EC
             );
 
             routes.MapRoute(
+                name: "NewCaseMessages",
+                url: "NewCase/Messages/{report_id}",
+                defaults: new
+                {
+                    controller = "NewCase",
+                    action = "Messages",
+                    report_id = UrlParameter.Optional
+                }
+            );
+
+            routes.MapRoute(
                 name: "NewCaseInvestigationNotes",
                 url: "NewCase/InvestigationNotes/{report_id}",
                 defaults: new

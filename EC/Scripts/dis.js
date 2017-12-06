@@ -737,6 +737,46 @@
 
     angular
         .module('EC')
+        .controller('NewCaseMessagesController',
+            ['$scope', '$filter', 'orderByFilter', '$location', 'NewCaseMessagesService', NewCaseMessagesController]);
+
+    function NewCaseMessagesController($scope, $filter, orderByFilter, $location, NewCaseMessagesService) {
+        $scope.report_id = $filter('parseUrl')($location.$$absUrl, 'report_id');
+
+        $scope.activeTab = 1;
+        $scope.activeMessage = {};
+
+        $scope.mediators = [];
+        $scope.reporters = [];
+        $scope.currentUser = {};
+
+        $scope.newMessage = '';
+
+        $scope.refresh = function () {
+            NewCaseMessagesService.get({ id: $scope.report_id }, function (data) {
+                $scope.mediators = data.mediators;
+                $scope.reporters = data.reporters;
+                $scope.currentUser = data.currentUser;
+            });
+        };
+
+        $scope.refresh();
+
+        $scope.sendMessage = function () {
+            NewCaseMessagesService.post({ report_id: $scope.report_id, newMessage: $scope.newMessage }, function () {
+                $scope.newMessage = '';
+                $scope.refresh();
+            });
+        };
+    }
+}());
+
+(function () {
+
+    'use strict';
+
+    angular
+        .module('EC')
         .controller('NewCaseReportController',
             ['$scope', '$filter', 'orderByFilter', '$location', 'NewCaseReportService', NewCaseReportController]);
 
@@ -1125,6 +1165,21 @@
 
     function NewCaseInvestigationNotesService($resource) {
         return $resource('/api/NewCaseInvestigationNotes', {}, {
+            get: { method: 'GET', params: {}, isArray: false },
+            post: { method: 'POST', params: {}, isArray: false },
+        });
+    };
+})();
+
+(function () {
+
+    'use strict';
+
+    angular.module('EC')
+        .service('NewCaseMessagesService', ['$resource', NewCaseMessagesService]);
+
+    function NewCaseMessagesService($resource) {
+        return $resource('/api/NewCaseMessages', {}, {
             get: { method: 'GET', params: {}, isArray: false },
             post: { method: 'POST', params: {}, isArray: false },
         });
