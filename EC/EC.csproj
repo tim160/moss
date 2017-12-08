@@ -226,6 +226,7 @@
     <Content Include="angular\controllers\AnalyticsCACSController.js" />
     <Content Include="angular\controllers\NewCaseCaseClosureReportController.js" />
     <Content Include="angular\controllers\NewCaseInvestigationNotesController.js" />
+    <Content Include="angular\controllers\NewCaseTeamController.js" />
     <Content Include="angular\controllers\NewCaseMessagesController.js" />
     <Content Include="angular\controllers\NewCaseReportController.js" />
     <Content Include="angular\controllers\SettingsCompanyRoutingController.js" />
@@ -238,6 +239,7 @@
     <Content Include="angular\services\AnalyticsCASService.js" />
     <Content Include="angular\services\NewCaseCaseClosureReportService.js" />
     <Content Include="angular\services\NewCaseInvestigationNotesService.js" />
+    <Content Include="angular\services\NewCaseTeamService.js" />
     <Content Include="angular\services\NewCaseMessagesService.js" />
     <Content Include="angular\services\NewCaseReportService.js" />
     <Content Include="angular\services\SettingsCompanyRoutingService.js" />
@@ -677,6 +679,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\NewCase\Tasks.cshtml" />
     <Content Include="Views\NewCase\Messages.cshtml" />
+    <Content Include="Views\NewCase\Team.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -707,6 +710,7 @@
     <Compile Include="Controllers\API\AnalyticsCACSController.cs" />
     <Compile Include="Controllers\API\NewCaseCaseClosureReportController.cs" />
     <Compile Include="Controllers\API\NewCaseInvestigationNotesController.cs" />
+    <Compile Include="Controllers\API\NewCaseTeamController.cs" />
     <Compile Include="Controllers\API\NewCaseMessagesController.cs" />
     <Compile Include="Controllers\API\NewCaseReportController.cs" />
     <Compile Include="Controllers\API\SettingsCompanyRoutingController.cs" />

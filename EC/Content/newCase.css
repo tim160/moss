@@ -353,6 +353,29 @@ textarea{
 	font-size: 8px;
 }
 
+.hr{
+	min-height: 1px;
+	border-bottom: 1px solid #e0e5e6;
+}
+
+.tooltip{
+	display: none;
+	background-color: rgba(0,0,0,0.75);
+	font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+	font-size: 14px;
+	color: #fff;
+	padding: 10px 15px;
+	border-radius: 2px;
+	position: relative;
+}
+.tooltip:after{
+	content: '';
+	position: absolute;
+	top: -14px;
+	left: calc( 50% - 7px );
+	border: 7px solid transparent;
+	border-bottom: 7px solid rgba(0,0,0,0.75);
+}
 
 /*======================================================
 =========================header=========================
@@ -1782,6 +1805,213 @@ textarea{
 				}
 */
 			.navContentMessages-tabContent__newMessageBox-sendRow{}
+
+
+/*==================================================
+=========================Team========================
+====================================================*/
+
+.team-row{
+	margin-bottom: 60px;
+}
+
+.teamBlock{
+	background-color: #fff;
+	font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+}
+	.teamBlock-header{
+		padding: 15px;
+	}
+/*	.teamBlock:hover>.teamBlock-header{
+		background-color: #05b5a2;
+	}
+	.teamBlock:hover .teamBlock-header__name-text{
+		color: #fff;
+	}
+	.teamBlock:hover .teamBlock-header__profilePost{
+		color: #fff;
+	}*/
+		.teamBlock-header__logo{
+			float: left;
+			display: block;
+			margin-right: 15px;
+		}
+			.teamBlock-header__logoImg{
+				width: 42px;
+				height: 42px;
+				display: block;
+				vertical-align: middle;
+				border-radius: 50%;
+				border: 2px solid #fff;
+			}
+		.teamBlock-header__title{
+			float: left;
+			display: block;
+		}
+			.teamBlock-header__name{
+				display: inline-block;
+			}
+				.teamBlock-header__name-text{
+					display: inline-block;
+					font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+					font-size: 18px;
+					line-height: normal;
+					vertical-align: middle;
+					color: #3c3e3f;
+					margin-right: 5px;
+				}
+				.teamBlock-header__name-ownerBadge{
+					position: relative;
+					display: inline-block;
+					line-height: 18px;
+					vertical-align: middle;
+					width: 13px;
+					height: 12px;
+					background: url(Icons/star_transparent.png) no-repeat;
+				}
+				.teamBlock-header__name-ownerBadge.active{
+					background: url(Icons/star_active.png) no-repeat;
+				}
+				.teamBlock-header__name-ownerBadge:hover{
+					background: url(Icons/star_hover.png) no-repeat;
+				}
+				.teamBlock-header__name-ownerBadge.active:hover{
+					background: url(Icons/star_active.png) no-repeat;
+				}
+				.teamBlock-header__name-ownerBadge:hover>.tooltip{
+					display: block;
+				}
+				.teamBlock-header__name-ownerBadge.active:hover>.tooltip{
+					display: none;
+				}
+
+				.teamBlock-header__name-ownerBadgeTooltip{
+					position: absolute;
+					width: 150px;
+					top: 24px;
+					right: -68.5px;
+					cursor: default;
+				}
+
+
+		.teamBlock-header__profilePost{
+			display: block;
+			font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+			font-size: 14px;
+			color: #aeb5b7;
+			line-height: normal;
+		}
+	.teamBlock-body{
+		padding: 15px;
+	}
+		.teamBlock-body__profileSpec{
+			text-transform: uppercase;
+			color: #fff;
+			background-color: #aeb5b7;
+			display: inline-block;
+			padding: 4px 10px 4px 25px;
+			font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+			font-size: 11px;
+			margin-left: -15px;
+		}
+		.teamBlock-body__profileSpec.teamBlock-body__profileSpec_owner{
+			background-color: #05b5a2;
+		}
+		.teamBlock-body__profileSpec.teamBlock-body__profileSpec_reviewer{
+			background-color: #ee613f;
+		}
+		.teamBlock-body__chartTitle{
+			font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+			font-size: 16px;
+			color: #848a8b;
+			padding: 25px 10px;
+		}
+		.teamBlock-body__charts{
+			text-align: center;
+		}
+			.chartCircle{
+				display: inline-block;
+				position: relative;
+				vertical-align: middle;
+				height: 60px;
+				width: 60px;
+				margin: 0 15px;
+			}
+				.canvasCircle{}
+				.chartCircle__content{
+					display: block;
+					position: absolute;
+					top: 0;
+					left: 0;
+					right: 0;
+					bottom: 0;
+					text-align: center;
+				}
+					.chartCircle__content-number{
+						font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+						font-size: 20px;
+						color: #848a8b;
+						display: block;
+						margin-top: 14px;
+					}
+					.chartCircle__content-text{
+						font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+						font-size: 10px;
+						color: #848a8b;
+						display: block;
+					}
+
+
+	.teamBlock-hr{
+		width: calc( 100% - 15px*2 );
+		margin: 0 auto;
+	}
+
+	.teamBlock-footer{
+		padding: 15px;
+	}
+		.teamBlock-footer__location{
+			display: block;
+			margin-bottom: 10px;
+		}
+			.teamBlock-footer__location-logo{
+				display: inline-block;
+				width: 14px;
+				height: 14px;
+				background: url(Icons/blockInfo_img1.png) no-repeat;
+				margin-left: 10px;
+				margin-right: 5px;
+			}
+			.teamBlock-footer__location-text{
+				display: inline-block;
+				color: #848a8b;
+				font-size: 14px;
+			}
+		.teamBlock-footer__mail{
+			display: block;
+			text-decoration: none;
+		}
+			.teamBlock-footer__mail-logo{
+				display: inline-block;
+				width: 14px;
+				height: 14px;
+				background: url(Icons/blockInfo_img2.png) no-repeat;
+				margin-left: 10px;
+				margin-right: 5px;
+			}
+			.teamBlock-footer__mail-content{
+				display: inline-block;
+				color: #848a8b;
+				font-size: 14px;
+			}
+
+
+/*==================================================
+====================Attachments=====================
+====================================================*/
+
+
+
 
 /*==================================================
 ======================Activity======================

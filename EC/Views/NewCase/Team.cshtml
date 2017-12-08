@@ -1,0 +1,343 @@
+﻿@using EC.Models;
+@using EC.Models.ECModel;
+@using EC.Models.Database;
+@using EC.App_LocalResources;
+
+@{
+    ViewBag.Title = "Tasks";
+    Layout = "~/Views/Shared/IndexPages/LayoutNewCases.cshtml";
+    List<TaskExtended> tasks = (List<TaskExtended>)ViewBag.tasks;
+
+    var report_id = (Int32)ViewBag.report_id;
+    var user_id = (Int32)ViewBag.user_id;
+    ReportModel rm = new ReportModel(report_id);
+    UserModel um = new UserModel(user_id);
+}
+
+@Html.Partial("~/Views/Shared/Partial/_NewCasesTopMenu.cshtml")
+
+<div class="container mainNavigationTabs__tabContent-container" ng-controller="NewCaseTeamController">
+    <div id="mainTab-Team" class="mainNavigationTabs__tabContent active">
+        <div class="divider p-tb-20"></div>
+
+        <div class="content-container__inner clearfix">
+            <div class="row clearfix team-row">
+                <div class="col-4" ng-repeat="item in mediators_whoHasAccess_toReport">
+                    <div class="teamBlock shadowLight">
+                        <div class="teamBlock-header clearfix">
+                            <div class="teamBlock-header__logo">
+                                <img src="{{item.photo_path ==  '' ? '/Content/Icons/noPhoto.png' : item.photo_path}}" alt="" class="teamBlock-header__logoImg" />
+                            </div>
+                            <div class="teamBlock-header__title">
+                                <div class="teamBlock-header__name clearfix">
+                                    <div class="teamBlock-header__name-text">{{item.first_nm}} {{item.last_nm}}</div>
+                                    <a href="#!" class="teamBlock-header__name-ownerBadge ">
+                                        <div class="tooltip teamBlock-header__name-ownerBadgeTooltip">Make Case Owner</div><!-- /.tooltip -->
+                                    </a>
+                                </div>
+                                <div class="teamBlock-header__profilePost">
+                                    {{item.title_ds}}
+                                </div><!-- /.teamBlock-header__profilePost -->
+                            </div><!-- /.teamBlock-header__title -->
+                        </div><!-- /.teamBlock-header -->
+                        <div class="teamBlock-body clearfix">
+                            <div class="teamBlock-body__profileSpec {{roleClasses[item.role_id]}}">
+                                {{roleNames[item.role_id]}}
+                            </div><!-- /.teamBlock-body__profileSpec -->
+                            <div class="teamBlock-body__chartTitle">
+                                Human Resources
+                            </div><!-- /.teamBlock-body__chartTitle -->
+                            <div class="teamBlock-body__charts">
+
+                                <div class="chartCircle">
+                                    <canvas class="canvasCircle" height="60px" width="60px"></canvas>
+                                    <div class="chartCircle__content">
+                                        <div class="chartCircle__content-number">
+                                            12
+                                        </div><!-- /.chartCircle__content-number -->
+                                        <div class="chartCircle__content-text">
+                                            tasks
+                                        </div><!-- /.chartCircle__content-text -->
+                                    </div><!-- /.chartCircle__content -->
+                                </div><!-- /.chartCircle -->
+                                <div class="chartCircle">
+                                    <canvas class="canvasCircle" height="60px" width="60px"></canvas>
+                                    <div class="chartCircle__content">
+                                        <div class="chartCircle__content-number">
+                                            4
+                                        </div><!-- /.chartCircle__content-number -->
+                                        <div class="chartCircle__content-text">
+                                            messages
+                                        </div><!-- /.chartCircle__content-text -->
+                                    </div><!-- /.chartCircle__content -->
+                                </div><!-- /.chartCircle -->
+                                <div class="chartCircle">
+                                    <canvas class="canvasCircle" height="60px" width="60px"></canvas>
+                                    <div class="chartCircle__content">
+                                        <div class="chartCircle__content-number">
+                                            14
+                                        </div><!-- /.chartCircle__content-number -->
+                                        <div class="chartCircle__content-text">
+                                            actions
+                                        </div><!-- /.chartCircle__content-text -->
+                                    </div><!-- /.chartCircle__content -->
+                                </div><!-- /.chartCircle -->
+
+                            </div><!-- /.teamBlock-body__charts -->
+                        </div><!-- /.teamBlock-body -->
+                        <div class="hr teamBlock-hr"></div><!-- /.hr teamBlock-hr -->
+                        <div class="teamBlock-footer clearfix">
+                            <div class="teamBlock-footer__location clearfix">
+                                <div class="teamBlock-footer__location-logo"></div><!-- /.teamBlock-footer__location-logo -->
+                                <div class="teamBlock-footer__location-text">
+                                    Stark Tower, NY
+                                </div><!-- /.teamBlock-footer__location-text -->
+                            </div><!-- /.teamBlock-footer__location -->
+                            <a href="mailTo:timur160@hotmail.com" class="teamBlock-footer__mail clearfix">
+                                <span class="teamBlock-footer__mail-logo"></span>
+                                <span class="teamBlock-footer__mail-content">timur160@hotmail.com</span>
+                            </a>
+                        </div><!-- /.teamBlock-footer -->
+                    </div><!-- /.teamBlock -->
+                </div><!-- /.col-4 -->
+            </div>
+        </div><!-- /.content-container__inner -->
+
+        <div class="content-container__inner clearfix">
+            <div class="row clearfix team-row">
+                <div class="col-4">
+                    <div class="teamBlock shadowLight">
+                        <div class="teamBlock-header clearfix">
+                            <div class="teamBlock-header__logo">
+                                <img src="http://report.employeeconfidential.com//Upload//UserLogo/2_636338753935849609.jpg" alt="" class="teamBlock-header__logoImg" />
+                            </div>
+                            <div class="teamBlock-header__title">
+                                <div class="teamBlock-header__name clearfix">
+                                    <div class="teamBlock-header__name-text">Kate Milton</div>
+                                    <a href="#!" class="teamBlock-header__name-ownerBadge ">
+                                        <div class="tooltip teamBlock-header__name-ownerBadgeTooltip">Make Case Owner</div><!-- /.tooltip -->
+                                    </a>
+                                </div>
+                                <div class="teamBlock-header__profilePost">
+                                    Chief Human Resources Officer
+                                </div><!-- /.teamBlock-header__profilePost -->
+                            </div><!-- /.teamBlock-header__title -->
+                        </div><!-- /.teamBlock-header -->
+                        <div class="teamBlock-body clearfix">
+                            <div class="teamBlock-body__profileSpec ">
+                                PLATFORM MANAGER
+                            </div><!-- /.teamBlock-body__profileSpec -->
+                            <div class="teamBlock-body__chartTitle">
+                                Human Resources
+                            </div><!-- /.teamBlock-body__chartTitle -->
+                            <div class="teamBlock-body__charts">
+
+                                <div class="chartCircle">
+                                    <canvas class="canvasCircle" height="60px" width="60px"></canvas>
+                                    <div class="chartCircle__content">
+                                        <div class="chartCircle__content-number">
+                                            12
+                                        </div><!-- /.chartCircle__content-number -->
+                                        <div class="chartCircle__content-text">
+                                            tasks
+                                        </div><!-- /.chartCircle__content-text -->
+                                    </div><!-- /.chartCircle__content -->
+                                </div><!-- /.chartCircle -->
+                                <div class="chartCircle">
+                                    <canvas class="canvasCircle" height="60px" width="60px"></canvas>
+                                    <div class="chartCircle__content">
+                                        <div class="chartCircle__content-number">
+                                            4
+                                        </div><!-- /.chartCircle__content-number -->
+                                        <div class="chartCircle__content-text">
+                                            messages
+                                        </div><!-- /.chartCircle__content-text -->
+                                    </div><!-- /.chartCircle__content -->
+                                </div><!-- /.chartCircle -->
+                                <div class="chartCircle">
+                                    <canvas class="canvasCircle" height="60px" width="60px"></canvas>
+                                    <div class="chartCircle__content">
+                                        <div class="chartCircle__content-number">
+                                            14
+                                        </div><!-- /.chartCircle__content-number -->
+                                        <div class="chartCircle__content-text">
+                                            actions
+                                        </div><!-- /.chartCircle__content-text -->
+                                    </div><!-- /.chartCircle__content -->
+                                </div><!-- /.chartCircle -->
+
+                            </div><!-- /.teamBlock-body__charts -->
+                        </div><!-- /.teamBlock-body -->
+                        <div class="hr teamBlock-hr"></div><!-- /.hr teamBlock-hr -->
+                        <div class="teamBlock-footer clearfix">
+                            <div class="teamBlock-footer__location clearfix">
+                                <div class="teamBlock-footer__location-logo"></div><!-- /.teamBlock-footer__location-logo -->
+                                <div class="teamBlock-footer__location-text">
+                                    Stark Tower, NY
+                                </div><!-- /.teamBlock-footer__location-text -->
+                            </div><!-- /.teamBlock-footer__location -->
+                            <a href="mailTo:timur160@hotmail.com" class="teamBlock-footer__mail clearfix">
+                                <span class="teamBlock-footer__mail-logo"></span>
+                                <span class="teamBlock-footer__mail-content">timur160@hotmail.com</span>
+                            </a>
+                        </div><!-- /.teamBlock-footer -->
+                    </div><!-- /.teamBlock -->
+                </div><!-- /.col-4 -->
+                <div class="col-4">
+                    <div class="teamBlock shadowLight">
+                        <div class="teamBlock-header clearfix">
+                            <div class="teamBlock-header__logo">
+                                <img src="http://report.employeeconfidential.com//Upload//UserLogo/2_636338753935849609.jpg" alt="" class="teamBlock-header__logoImg" />
+                            </div>
+                            <div class="teamBlock-header__title">
+                                <div class="teamBlock-header__name clearfix">
+                                    <div class="teamBlock-header__name-text">Kate Milton</div>
+                                    <a href="#!" class="teamBlock-header__name-ownerBadge active">
+                                        <div class="tooltip teamBlock-header__name-ownerBadgeTooltip">Make Case Owner</div><!-- /.tooltip -->
+                                    </a>
+                                </div>
+                                <div class="teamBlock-header__profilePost">
+                                    Chief Human Resources Officer
+                                </div><!-- /.teamBlock-header__profilePost -->
+                            </div><!-- /.teamBlock-header__title -->
+                        </div><!-- /.teamBlock-header -->
+                        <div class="teamBlock-body clearfix">
+                            <div class="teamBlock-body__profileSpec teamBlock-body__profileSpec_owner">
+                                PLATFORM MANAGER
+                            </div><!-- /.teamBlock-body__profileSpec -->
+                            <div class="teamBlock-body__chartTitle">
+                                Human Resources
+                            </div><!-- /.teamBlock-body__chartTitle -->
+                            <div class="teamBlock-body__charts">
+                                <div class="chartCircle">
+                                    <canvas class="canvasCircle" height="60px" width="60px"></canvas>
+                                    <div class="chartCircle__content">
+                                        <div class="chartCircle__content-number">
+                                            12
+                                        </div><!-- /.chartCircle__content-number -->
+                                        <div class="chartCircle__content-text">
+                                            tasks
+                                        </div><!-- /.chartCircle__content-text -->
+                                    </div><!-- /.chartCircle__content -->
+                                </div><!-- /.chartCircle -->
+                                <div class="chartCircle">
+                                    <canvas class="canvasCircle" height="60px" width="60px"></canvas>
+                                    <div class="chartCircle__content">
+                                        <div class="chartCircle__content-number">
+                                            4
+                                        </div><!-- /.chartCircle__content-number -->
+                                        <div class="chartCircle__content-text">
+                                            messages
+                                        </div><!-- /.chartCircle__content-text -->
+                                    </div><!-- /.chartCircle__content -->
+                                </div><!-- /.chartCircle -->
+                                <div class="chartCircle">
+                                    <canvas class="canvasCircle" height="60px" width="60px"></canvas>
+                                    <div class="chartCircle__content">
+                                        <div class="chartCircle__content-number">
+                                            14
+                                        </div><!-- /.chartCircle__content-number -->
+                                        <div class="chartCircle__content-text">
+                                            actions
+                                        </div><!-- /.chartCircle__content-text -->
+                                    </div><!-- /.chartCircle__content -->
+                                </div><!-- /.chartCircle -->
+                            </div><!-- /.teamBlock-body__charts -->
+                        </div><!-- /.teamBlock-body -->
+                        <div class="hr teamBlock-hr"></div><!-- /.hr teamBlock-hr -->
+                        <div class="teamBlock-footer clearfix">
+                            <div class="teamBlock-footer__location clearfix">
+                                <div class="teamBlock-footer__location-logo"></div><!-- /.teamBlock-footer__location-logo -->
+                                <div class="teamBlock-footer__location-text">
+                                    Stark Tower, NY
+                                </div><!-- /.teamBlock-footer__location-text -->
+                            </div><!-- /.teamBlock-footer__location -->
+                            <a href="mailTo:timur160@hotmail.com" class="teamBlock-footer__mail clearfix">
+                                <span class="teamBlock-footer__mail-logo"></span>
+                                <span class="teamBlock-footer__mail-content">timur160@hotmail.com</span>
+                            </a>
+                        </div><!-- /.teamBlock-footer -->
+                    </div><!-- /.teamBlock -->
+                </div><!-- /.col-4 -->
+                <div class="col-4">
+                    <div class="teamBlock shadowLight">
+                        <div class="teamBlock-header clearfix">
+                            <div class="teamBlock-header__logo">
+                                <img src="http://report.employeeconfidential.com//Upload//UserLogo/2_636338753935849609.jpg" alt="" class="teamBlock-header__logoImg" />
+                            </div>
+                            <div class="teamBlock-header__title">
+                                <div class="teamBlock-header__name clearfix">
+                                    <div class="teamBlock-header__name-text">Kate Milton</div>
+                                    <a href="#!" class="teamBlock-header__name-ownerBadge ">
+                                        <div class="tooltip teamBlock-header__name-ownerBadgeTooltip">Make Case Owner</div><!-- /.tooltip -->
+                                    </a>
+                                </div>
+                                <div class="teamBlock-header__profilePost">
+                                    Chief Human Resources Officer
+                                </div><!-- /.teamBlock-header__profilePost -->
+                            </div><!-- /.teamBlock-header__title -->
+                        </div><!-- /.teamBlock-header -->
+                        <div class="teamBlock-body clearfix">
+                            <div class="teamBlock-body__profileSpec teamBlock-body__profileSpec_reviewer">
+                                PLATFORM MANAGER
+                            </div><!-- /.teamBlock-body__profileSpec -->
+                            <div class="teamBlock-body__chartTitle">
+                                Human Resources
+                            </div><!-- /.teamBlock-body__chartTitle -->
+                            <div class="teamBlock-body__charts">
+                                <div class="chartCircle">
+                                    <canvas class="canvasCircle" height="60px" width="60px"></canvas>
+                                    <div class="chartCircle__content">
+                                        <div class="chartCircle__content-number">
+                                            12
+                                        </div><!-- /.chartCircle__content-number -->
+                                        <div class="chartCircle__content-text">
+                                            tasks
+                                        </div><!-- /.chartCircle__content-text -->
+                                    </div><!-- /.chartCircle__content -->
+                                </div><!-- /.chartCircle -->
+                                <div class="chartCircle">
+                                    <canvas class="canvasCircle" height="60px" width="60px"></canvas>
+                                    <div class="chartCircle__content">
+                                        <div class="chartCircle__content-number">
+                                            4
+                                        </div><!-- /.chartCircle__content-number -->
+                                        <div class="chartCircle__content-text">
+                                            messages
+                                        </div><!-- /.chartCircle__content-text -->
+                                    </div><!-- /.chartCircle__content -->
+                                </div><!-- /.chartCircle -->
+                                <div class="chartCircle">
+                                    <canvas class="canvasCircle" height="60px" width="60px"></canvas>
+                                    <div class="chartCircle__content">
+                                        <div class="chartCircle__content-number">
+                                            14
+                                        </div><!-- /.chartCircle__content-number -->
+                                        <div class="chartCircle__content-text">
+                                            actions
+                                        </div><!-- /.chartCircle__content-text -->
+                                    </div><!-- /.chartCircle__content -->
+                                </div><!-- /.chartCircle -->
+                            </div><!-- /.teamBlock-body__charts -->
+                        </div><!-- /.teamBlock-body -->
+                        <div class="hr teamBlock-hr"></div><!-- /.hr teamBlock-hr -->
+                        <div class="teamBlock-footer clearfix">
+                            <div class="teamBlock-footer__location clearfix">
+                                <div class="teamBlock-footer__location-logo"></div><!-- /.teamBlock-footer__location-logo -->
+                                <div class="teamBlock-footer__location-text">
+                                    Stark Tower, NY
+                                </div><!-- /.teamBlock-footer__location-text -->
+                            </div><!-- /.teamBlock-footer__location -->
+                            <a href="mailTo:timur160@hotmail.com" class="teamBlock-footer__mail clearfix">
+                                <span class="teamBlock-footer__mail-logo"></span>
+                                <span class="teamBlock-footer__mail-content">timur160@hotmail.com</span>
+                            </a>
+                        </div><!-- /.teamBlock-footer -->
+                    </div><!-- /.teamBlock -->
+                </div><!-- /.col-4 -->
+            </div>
+        </div><!-- /.content-container__inner -->
+
+        <div class="divider "></div>
+    </div>
+</div>

@@ -443,6 +443,16 @@ namespace EC
                     report_id = UrlParameter.Optional
                 }
             );
+            routes.MapRoute(
+                name: "NewCaseTeam",
+                url: "NewCase/Team/{report_id}",
+                defaults: new
+                {
+                    controller = "NewCase",
+                    action = "Team",
+                    report_id = UrlParameter.Optional
+                }
+            );
 
             routes.MapRoute(
                 name: "lang",

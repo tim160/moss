@@ -161,5 +161,19 @@ namespace EC.Controllers
 
             return View();
         }
+
+        public ActionResult Team(int report_id)
+        {
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            if (user == null || user.id == 0)
+                return RedirectToAction("Index", "Account");
+
+            int user_id = user.id;
+            ViewBag.user_id = user_id;
+            ViewBag.report_id = report_id;
+
+            return View();
+
+        }
     }
 }
