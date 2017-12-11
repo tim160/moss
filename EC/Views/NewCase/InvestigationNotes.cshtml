@@ -79,7 +79,7 @@
                                 </p>
                                 <p class="content-container__p" ng-repeat="item in model.mediator_not_involved">
                                     <a href="#" ng-click="mediatorDelete(item.id, 2)" ng-show="!item.added_by_reporter">X</a>
-                                    {{item.Name}} {{item.last_name}} {{item.Title}}
+                                    {{item.Name}} {{item.last_name}} {{item.Title}} {{getRoleTitle(item.role_in_report_id)}}
                                 </p>
                             </div>
                             <a href="#" class="btn-link" ng-show="!mediatorAddMode" ng-click="mediatorAddMode = !mediatorAddMode">Add person</a>

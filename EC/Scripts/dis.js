@@ -446,12 +446,12 @@
             data.report_cc_crime.cc_is_clear_act_crime = '' + data.report_cc_crime.cc_is_clear_act_crime;
 
             data.report_case_closure_outcome1 = $filter('filter')(data.report_case_closure_outcome, function (value) {
-                if (value.mediator.role_in_report_id === 3) {
+                if (value.mediator.role_in_report_id === 1) {
                     return true;
                 }
             });
             data.report_case_closure_outcome2 = $filter('filter')(data.report_case_closure_outcome, function (value) {
-                if (value.mediator.role_in_report_id === 1) {
+                if (value.mediator.role_in_report_id === 2) {
                     return true;
                 }
             });
@@ -711,6 +711,7 @@
         $scope.addPerson = {
             Role: { id: 0, role_en: 'Select one' },
         };
+
         $scope.addNewPerson = function () {
             if ((!$scope.addPerson.FirstName) | (!$scope.addPerson.LastName) | (!$scope.addPerson.Title) | ($scope.addPerson.Role.id === 0)) {
                 return;
@@ -727,6 +728,13 @@
                 $scope.addPerson.Role = { id: 0, role_en: 'Select one' };
                 $scope.refresh(data);
             });
+        };
+
+        $scope.getRoleTitle = function (id) {
+            var result = $.grep($scope.model.addNewPersonRoles, function (e) {
+                return e.id === id;
+            });
+            return result.length === 0 ? '' : ' (' + result[0].role_en + ')';
         };
     }
 }());

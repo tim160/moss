@@ -198,6 +198,7 @@
         $scope.addPerson = {
             Role: { id: 0, role_en: 'Select one' },
         };
+
         $scope.addNewPerson = function () {
             if ((!$scope.addPerson.FirstName) | (!$scope.addPerson.LastName) | (!$scope.addPerson.Title) | ($scope.addPerson.Role.id === 0)) {
                 return;
@@ -214,6 +215,13 @@
                 $scope.addPerson.Role = { id: 0, role_en: 'Select one' };
                 $scope.refresh(data);
             });
+        };
+
+        $scope.getRoleTitle = function (id) {
+            var result = $.grep($scope.model.addNewPersonRoles, function (e) {
+                return e.id === id;
+            });
+            return result.length === 0 ? '' : ' (' + result[0].role_en + ')';
         };
     }
 }());
