@@ -2,6 +2,17 @@
     var user_id = ViewBag.user_id;
     EC.Models.UserModel um = new EC.Models.UserModel(user_id);
 
+    EC.Models.ReportModel rm = new EC.Models.ReportModel();
+    int _report_id = 0;
+    int investigationstatus = 1;
+    if ((ViewBag.report_id != null) && ((int)ViewBag.report_id != 0))
+    {
+        _report_id = (int)ViewBag.report_id;
+        rm = new EC.Models.ReportModel(_report_id);
+
+        investigationstatus = rm._investigation_status;
+    }
+
     var unread_report_number = um.UnreadReport(0, 0).Count;
     var unread_report_number_string = "";
     if (unread_report_number > 0)
@@ -9,7 +20,7 @@
         unread_report_number_string = unread_report_number.ToString();
     }
 
-    int unread_message_number = um.Unread_Messages_Quantity(0, 1) + um.Unread_Messages_Quantity(0, 2) + um.Unread_Messages_Quantity(0, 3);
+    int unread_message_number = um.Unread_Messages_Quantity(_report_id, 1) + um.Unread_Messages_Quantity(_report_id, 2) + um.Unread_Messages_Quantity(_report_id, 3);
     var unread_message_number_string = "";
     if (unread_message_number > 0)
     {
@@ -23,16 +34,6 @@
         unread_task_number_string = unread_task_number.ToString();
     }
 
-    EC.Models.ReportModel rm = new EC.Models.ReportModel();
-    int _report_id = 0;
-    int investigationstatus = 1;
-    if ((ViewBag.report_id != null) && ((int)ViewBag.report_id != 0))
-    {
-        _report_id = (int)ViewBag.report_id;
-        rm = new EC.Models.ReportModel(_report_id);
-
-        investigationstatus = rm._investigation_status;
-    }
 }
 
 <div class="container-fluid">

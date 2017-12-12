@@ -6,6 +6,7 @@ using EC.Models.Database;
 using EC.App_LocalResources;
 using EC.Common.Interfaces;
 using EC.Core.Common;
+using EC.Models.ECModel;
 
 namespace EC.Models.ViewModel
 {
@@ -19,7 +20,7 @@ namespace EC.Models.ViewModel
         public string created_dt { get; set; }
         public string sender_name { get; set; }
         public string sender_photo { get; set; }
-
+        public bool isReaded { get; set; }
 
         public CaseMessagesViewModel BindMessageToViewMessage(message _message, int caller_id)
         {
@@ -93,6 +94,9 @@ namespace EC.Models.ViewModel
             vm_message.body_tx = _message.body_tx;
             vm_message.reporter_access = _message.reporter_access;
             vm_message.report_id = report_id;
+
+            var _extended = new MessageExtended(vm_message.Id, caller_id);
+            vm_message.isReaded = _extended.IsRead();
 
             return vm_message;
         }

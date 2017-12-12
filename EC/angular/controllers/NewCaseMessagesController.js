@@ -14,7 +14,9 @@
         $scope.activeMessage = {};
 
         $scope.mediators = [];
+        $scope.mediatorsUnreaded = 0;
         $scope.reporters = [];
+        $scope.reportersUnreaded = 0;
         $scope.currentUser = {};
 
         $scope.newMessage = '';
@@ -24,10 +26,10 @@
                 $scope.mediators = data.mediators;
                 $scope.reporters = data.reporters;
                 $scope.currentUser = data.currentUser;
+                $scope.mediatorsUnreaded = $scope.unreaded(data.mediators);
+                $scope.reportersUnreaded = $scope.unreaded(data.reporters);
             });
         };
-
-        $scope.refresh();
 
         $scope.sendMessage = function () {
             NewCaseMessagesService.post({ report_id: $scope.report_id, newMessage: $scope.newMessage }, function () {
@@ -35,5 +37,15 @@
                 $scope.refresh();
             });
         };
+
+        $scope.unreaded = function (list) {
+            var count = 0;
+            for (var i = 0; i < list.length; i++) {
+                count += list[i].isReaded ? 0 : 1;
+            }
+            return count;
+        };
+
+        $scope.refresh();
     }
 }());
