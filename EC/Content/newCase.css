@@ -1021,6 +1021,9 @@ textarea{
 		.inputRadio__input:checked ~ span{
 			color: #727c7e;
 		}
+		.inputRadio_turquoise>.inputRadio__input:checked ~ span{
+			color: #05b5a2;
+		}
 	.inputRadio__customnBtn{
 		background: url('http://stark.employeeconfidential.com/Content/img/radio.png') no-repeat;
 		background-position: top left;
@@ -1035,6 +1038,10 @@ textarea{
 		font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 		color: rgb(174, 181, 183);
 		display: inline-block;
+	}
+	.inputRadio_turquoise>.inputRadio__inputTitle{
+		font-size: 12px;
+		text-transform: uppercase;
 	}
 
 .CaseClosureReport__radioBlock .inputRadio:first-child{}
@@ -1812,17 +1819,20 @@ textarea{
 ====================================================*/
 
 .team-row{
-	margin-bottom: 60px;
+	margin-bottom: 0;
 }
 
 .teamBlock{
 	background-color: #fff;
 	font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+	margin-bottom: 60px;
+	cursor: pointer;
 }
 	.teamBlock-header{
-		padding: 15px;
+		padding: 15px 15px 5px 15px;
+		position: relative;
 	}
-/*	.teamBlock:hover>.teamBlock-header{
+	.teamBlock:hover>.teamBlock-header{
 		background-color: #05b5a2;
 	}
 	.teamBlock:hover .teamBlock-header__name-text{
@@ -1830,7 +1840,7 @@ textarea{
 	}
 	.teamBlock:hover .teamBlock-header__profilePost{
 		color: #fff;
-	}*/
+	}
 		.teamBlock-header__logo{
 			float: left;
 			display: block;
@@ -1893,16 +1903,59 @@ textarea{
 					cursor: default;
 				}
 
+			.teamBlock-header__profilePost{
+				display: block;
+				font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+				font-size: 14px;
+				color: #aeb5b7;
+				line-height: normal;
+			}
+			.teamBlock-header__ownerBadge{
+				display: inline-block;
+				vertical-align: middle;
+				position: relative;
+				font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+				font-size: 11px;
+				line-height: 20px;
+				color: #aeb5b7;
+				text-decoration: none;
+				text-transform: uppercase;
+				padding-left: 20px;
+				background: url('Icons/star_transparent.png') left 30% no-repeat;
+			}
+			.teamBlock:hover .teamBlock-header__ownerBadge{
+				color: #fff;
+				background: url('Icons/star_white.png') left 30% no-repeat;
+			}
+			.teamBlock-header__ownerBadge.active{
+				color: #05b5a2;
+				background: url('Icons/star_active.png') left 30% no-repeat;
+			}
 
-		.teamBlock-header__profilePost{
-			display: block;
-			font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
-			font-size: 14px;
+		.close.teamBlock__close{
+			top: 10px;
+			right: 10px;
 			color: #aeb5b7;
-			line-height: normal;
+			font-size: 32px;
+			line-height: 18px;
 		}
+		.teamBlock:hover .close.teamBlock__close{
+			color: #fff;
+		}
+
+.close{
+	position: absolute;
+	display: inline-block;
+	vertical-align: middle;
+	font-family: LH Line 1 Sans, arial, verdana, sans-serif;
+	font-size: 28px;
+	line-height: 16px;
+	cursor: pointer;
+	overflow: hidden;
+}
+
 	.teamBlock-body{
-		padding: 15px;
+		padding: 5px 15px 15px 15px;
 	}
 		.teamBlock-body__profileSpec{
 			text-transform: uppercase;
@@ -1913,6 +1966,7 @@ textarea{
 			font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 			font-size: 11px;
 			margin-left: -15px;
+			margin-bottom: 10px;
 		}
 		.teamBlock-body__profileSpec.teamBlock-body__profileSpec_owner{
 			background-color: #05b5a2;
@@ -1924,7 +1978,7 @@ textarea{
 			font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 			font-size: 16px;
 			color: #848a8b;
-			padding: 25px 10px;
+			padding: 15px 10px 25px 10px;
 		}
 		.teamBlock-body__charts{
 			text-align: center;
@@ -2005,12 +2059,129 @@ textarea{
 				font-size: 14px;
 			}
 
-
+	.teamBlock__addNew{
+		text-align: center;
+		margin-bottom: 60px;
+	}
+	.teamBlock__addNewText{
+		text-align: center;
+		margin-bottom: 60px;
+	}
+		.teamBlock__addNewText-title{
+			text-transform: uppercase;
+			font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+			font-size: 14px;
+			color: #05b5a2;
+		}
+.btn__team{
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
 /*==================================================
 ====================Attachments=====================
 ====================================================*/
 
+.dragDrop-blockContainer{
+	background-color: #f2f7f7;
+	padding: 30px;
+}
+	.dragDrop-block{
+		padding: 30px;
+		border: dotted 2px #afbdbf;
+	}
+		.dragDrop-block__text{}
+			.dragDrop-block__text-bold{
+				color: #3c3e3f;
+				font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+				font-size: 18px;
+				line-height: normal;
+			}
+			.dragDrop-block__text-gray{
+				color: #aeb5b7;
+				font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+				font-size: 16px;
+				line-height: normal;
+			}
+		.dragDrop-block__link{
+			margin-top: 10px;
+		}
+	.dragDrop-switchers{}
+		.dragDrop-switchers>label{
+			margin-left: 30px;
+		}
+		.dragDrop-switchers>label:first-child{
+			margin-left: 0;
+		}
 
+.dragDrop-contentList{
+	margin-top: 30px;
+}
+.contentList{}
+	.contentListItem{
+		display: block;
+		border-bottom: 1px solid #ccc;
+		padding: 20px 0;
+		margin-bottom: 20px;
+	}
+	.contentList>.contentListItem:last-child{
+		border-bottom: none;
+	}
+		.contentListItem__mainInfo{}
+			.contentListItem__fileLogo{
+				vertical-align: middle;
+				position: relative;
+				display: inline-block;
+				height: 50px;
+				float: left;
+			}
+				.contentListItem__fileLogo>img{
+					max-width: 40px;
+				}
+			.contentListItem__namesBlock{
+				display: block;
+				float: left;
+				margin-left: 20px;
+			}
+				.contentListItem__ownerName{
+					font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+					font-size: 12px;
+					color: #aeb5b7;
+					line-height: normal;
+				}
+				.contentListItem__attechFileName{
+					font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+					font-size: 16px;
+					color: #3c3e3f;
+					line-height: normal;
+				}
+		.contentListItem__additionalInfo{}
+			.contentListItem__forWhom{
+				display: block;
+				float: left;
+				font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+				font-size: 12px;
+				color: #aeb5b7;
+				line-height: 50px;
+				text-transform: uppercase;
+				margin: 0 40px 0 80px;
+			}
+			.contentListItem__infoBlock{
+				display: block;
+				float: right;
+				text-align: right;
+			}
+				.contentListItem__date{
+					font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+					font-size: 12px;
+					color: #aeb5b7;
+					line-height: normal;
+				}
+				.contentListItem__link{}
+.attachLink{
+	margin-top: 5px;
+	display: inline-block;
+	color: #6ccec3;
+}
 
 
 /*==================================================
@@ -2043,7 +2214,9 @@ textarea{
 				margin-top: 5px;
 			}
 			
-	.activityBlock-rightSide{}
+	.activityBlock-rightSide{
+		font-size: 12px;
+	}
 		.activityBlock-rightSide__date{
 			font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 			font-size: 14px;

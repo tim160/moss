@@ -43,23 +43,34 @@ namespace EC.Controllers.API
                     .OrderBy(x => x.crime_statistics_category_en)
                     .ToList());
 
-            var data = (from r in DB.report.Where(x => x.company_id == user.company_id)
-                     join sjcc in DB.report_cc_crime.Where(x => x.cc_crime_statistics_location_id == model.Category || model.Category == 0) on r.id equals sjcc.report_id into jcc
-                     from cc in jcc.DefaultIfEmpty()
-                     join sjccl in DB.cc_crime_statistics_location on cc.cc_crime_statistics_location_id equals sjccl.id into jccl
-                     from ccl in jccl.DefaultIfEmpty()
-                     group r by new { ccl } into g
-                     select new {
-                         key = g.Key.ccl.crime_statistics_location_en,
-                         values = g.GroupBy(x => SqlFunctions.DatePart("YEAR", x.reported_dt)).Select(z => new { x = z.Key, y = z.Count() })
-                     })
+            var data = (from year in new[] { DateTime.Now.Year - 2, DateTime.Now.Year - 1, DateTime.Now.Year }
+                        from crime_location in DB.cc_crime_statistics_location
+                        group year by new { crime_location } into g
+
+                        select new
+                        {
+                            key = g.Key.crime_location.crime_statistics_location_en,
+                            values = g.GroupBy(x => x).Select(x => new
+                            {
+                                x = x.Key,
+                                y = DB.report.Join(DB.report_cc_crime, r => r.id, c => c.report_id, (r, c) => new { report = r, crime = c })
+                               .Count(z => 
+                                    z.report.reported_dt.Year == x.Key 
+                                    & z.crime.cc_crime_statistics_location_id == g.Key.crime_location.id
+                                    & z.report.company_id == user.company_id
+                                    )
+                            })
+                        })
                      .Where(x => x.key != null)
                      .ToList();
+
 
             return new {
                 cc_crime_statistics_categories = categories,
 
-                report_cc_crime = data
+                report_cc_crime = data,
+
+                totals = data.SelectMany(x => x.values).GroupBy(x => x.x).Select(z => new { year = z.Key, count = z.Sum(x => x.y) }).OrderBy(x => x.year)
             };
        }
     }

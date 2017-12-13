@@ -152,6 +152,7 @@
 
         $scope.cc_crime_statistics_categories = [];
         $scope.cc_crime_statistics_category = { id: 0 };
+        $scope.totals = [];
 
         $scope.refresh = function () {
             AnalyticsCACSService.get({ category: $scope.cc_crime_statistics_category.id }, function (data) {
@@ -161,6 +162,8 @@
                 }
                 $scope.cacsChartData = data.report_cc_crime;
                 $scope.api.refresh();
+
+                $scope.totals = data.totals;
             });
         };
 
@@ -220,6 +223,12 @@
                     'text-align': 'justify',
                     'margin': '10px 13px 0px 7px'
                 }
+            }
+        };
+
+        $scope.Total = function (type, id) {
+            if (type === 1) {
+                return $scope.totals.length <= id ? 0 : $scope.totals[id].count;
             }
         };
     }
