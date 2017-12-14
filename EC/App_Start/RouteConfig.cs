@@ -453,6 +453,16 @@ namespace EC
                     report_id = UrlParameter.Optional
                 }
             );
+            routes.MapRoute(
+                name: "NewCaseAttachments",
+                url: "NewCase/Attachments/{report_id}",
+                defaults: new
+                {
+                    controller = "NewCase",
+                    action = "Attachments",
+                    report_id = UrlParameter.Optional
+                }
+            );
 
             routes.MapRoute(
                 name: "lang",

@@ -680,6 +680,7 @@
     <Content Include="Views\NewCase\Tasks.cshtml" />
     <Content Include="Views\NewCase\Messages.cshtml" />
     <Content Include="Views\NewCase\Team.cshtml" />
+    <Content Include="Views\NewCase\Attachments.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

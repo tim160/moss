@@ -173,7 +173,121 @@ namespace EC.Controllers
             ViewBag.report_id = report_id;
 
             return View();
-
         }
+
+        public ActionResult Attachments(int report_id)
+        {
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            // DEBUG
+            //user = user ?? db.user.FirstOrDefault(x => x.id == 2);
+            //
+            if (user == null || user.id == 0)
+                return RedirectToAction("Index", "Account");
+
+            var rm = new ReportModel(report_id);
+            ViewBag.rm = rm;
+            ViewBag.report_id = report_id;
+            ViewBag.user_id = user.id;
+            ViewBag.attachmentFiles = getAttachmentFiles(report_id);
+            var files = db.attachment
+                .Where(item => item.report_id == report_id && item.status_id == 2 && (item.visible_mediators_only.HasValue || item.visible_reporter.HasValue || item.user_id == rm._report.reporter_user_id))
+                .ToList(); ;
+            var users = files.Select(x => x.user_id).ToList();
+            ViewBag.attachmentAdvFiles = files;
+            ViewBag.attachmentAdvUsers = db.user.Where(x => users.Contains(x.id)).ToList();
+            ViewBag.popup = null;
+
+            var report_secondary_type = db.report_secondary_type.Where(x => x.report_id == report_id);
+            ViewBag.report_secondary_type = db.company_secondary_type
+                    .Where(x => x.company_id == rm._report.company_id)
+                    .Where(x => report_secondary_type.Select(z => z.secondary_type_id).Contains(x.id))
+                    .OrderBy(x => x.secondary_type_en)
+                    .ToList();
+
+            var company_case_routing = db.company_case_routing.Where(x => x.company_id == rm._report.company_id).ToList();
+            var ids = company_case_routing.Select(x => x.id).ToList();
+            ViewBag.company_case_routing = company_case_routing;
+            ViewBag.company_case_routing_attachments = db.company_case_routing_attachments
+                .Where(x => ids.Contains(x.company_case_routing_id) & x.status_id == 2)
+                .OrderBy(x => x.company_case_routing_id)
+                .ThenBy(x => x.file_nm)
+                .ToList();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Attachments(int report_id, string mode, string type)
+        {
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            // DEBUG
+            //user = user ?? db.user.FirstOrDefault(x => x.id == 2);
+            //user = user ?? db.user.FirstOrDefault(x => x.id == 167);
+            //
+            if (user == null || user.id == 0)
+                return RedirectToAction("Index", "Account");
+
+            if ((mode == "upload") || (mode == "upload_rd"))
+            {
+                for (int i = 0; i < Request.Files.Count; i++)
+                {
+                    var file = Request.Files[i];
+                    var report = db.report.FirstOrDefault(x => x.id == report_id);
+
+                    var a = new attachment();
+                    a.file_nm = file.FileName;
+                    a.extension_nm = System.IO.Path.GetExtension(file.FileName);
+                    a.path_nm = "";
+                    a.report_id = report_id;
+                    a.status_id = 2;
+                    a.effective_dt = DateTime.Now;
+                    a.expiry_dt = DateTime.Now;
+                    a.last_update_dt = DateTime.Now;
+                    a.user_id = user.id;
+
+                    type = mode == "upload_rd" ? "reporter" : "staff";
+                    a.visible_reporter = type == "reporter" ? true : false;
+                    a.visible_mediators_only = type == "staff" ? true : false;
+
+                    db.attachment.Add(a);
+                    db.SaveChanges();
+
+                    var dir = Server.MapPath(String.Format("~/upload/reports/{0}", report.guid));
+                    var filename = String.Format("{0}_{1}{2}", user.id, DateTime.Now.Ticks, System.IO.Path.GetExtension(file.FileName));
+                    a.path_nm = String.Format("\\upload\\reports\\{0}\\{1}", report.guid, filename);
+                    db.SaveChanges();
+
+                    if (!System.IO.Directory.Exists(dir))
+                    {
+                        System.IO.Directory.CreateDirectory(dir);
+                    }
+                    file.SaveAs(string.Format("{0}\\{1}", dir, filename));
+                }
+            }
+            if (mode == "upload_rd")
+            {
+                return RedirectToAction("Attachments", "ReporterDashboard", new { id = user.id });
+            }
+            return RedirectToAction("Attachments", new { report_id = report_id });
+        }
+
+        [HttpPost]
+        public ActionResult AttachmentType(int id, int file_id, int type)
+        {
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            // DEBUG
+            //user = user ?? db.user.FirstOrDefault(x => x.id == 2);
+            //user = user ?? db.user.FirstOrDefault(x => x.id == 167);
+            //
+            if (user == null || user.id == 0)
+                return RedirectToAction("Index", "Account");
+
+            var file = db.attachment.FirstOrDefault(x => x.report_id == id & x.id == file_id);
+            file.visible_mediators_only = type == 1;
+            file.visible_reporter = type == 2;
+            db.SaveChanges();
+
+            return RedirectToAction("Attachments", new { report_id = id });
+        }
+
     }
 }

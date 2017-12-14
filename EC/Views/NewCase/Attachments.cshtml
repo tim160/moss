@@ -1,0 +1,170 @@
+﻿@using EC.Models;
+@using EC.Models.ECModel;
+@using EC.Models.Database;
+@using EC.Core.Common;
+@using EC.App_LocalResources;
+
+@{
+    ViewBag.Title = "Tasks";
+    Layout = "~/Views/Shared/IndexPages/LayoutNewCases.cshtml";
+    List<TaskExtended> tasks = (List<TaskExtended>)ViewBag.tasks;
+
+    var report_id = (Int32)ViewBag.report_id;
+    var user_id = (Int32)ViewBag.user_id;
+    ReportModel rm = new ReportModel(report_id);
+    UserModel um = new UserModel(user_id);
+    var users = (List<user>)ViewBag.attachmentAdvUsers;
+    var dth = new DateTimeHelper();
+}
+
+@Html.Partial("~/Views/Shared/Partial/_NewCasesTopMenu.cshtml")
+
+<div class="container mainNavigationTabs__tabContent-container">
+    <div id="mainTab-attachment" class="mainNavigationTabs__tabContent active">
+        <div class="content-container__inner">
+            <div class="divider p-tb-20"></div><!-- /.divider p-tb-20 -->
+            <div class="dragDrop-blockContainer">
+                @using (Html.BeginForm("Attachments", "NewCase", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.Hidden("report_id", report_id)
+                    @Html.Hidden("mode", "upload")
+                    <div class="dragDrop-block center">
+                        <div class="dragDrop-block__text">
+                            <div class="dragDrop-block__text-bold">
+                                Drag and drop files here
+                            </div><!-- /.dragDrop-block__text-bold -->
+                            <div class="dragDrop-block__text-gray">
+                                or
+                            </div><!-- /.dragDrop-block__text-gray -->
+                        </div><!-- /.dragDrop-block__text -->
+                        <div class="dragDrop-block__link">
+                            <a href="#!" class="btn-linkReverse selectFiles">SELECT FILES TO UPLOAD</a>
+                            <input type="file" name="files" multiple="" style="display: none;" onchange="this.form.submit();" />
+                        </div><!-- /.dragDrop-block__link -->
+                    </div><!-- /.dragDrop-block -->
+                    <div class="divider p-tb-20"></div>
+                }
+            </div><!-- /.dragDrop-container -->
+
+            <div class="dragDrop-contentList contentList">
+                @{
+                    var listR = (List<company_case_routing>)ViewBag.company_case_routing;
+                    var listA = (List<company_case_routing_attachments>)ViewBag.company_case_routing_attachments;
+                }
+                @if (listR.Any() && listA.Any())
+                {
+                    foreach (var type in (List<company_secondary_type>)ViewBag.report_secondary_type)
+                    {
+                        var exists = listR.Where(x => x.company_secondary_type_id == type.id).ToList();
+                        if ((exists.Any()) && (listA.Where(x => exists.Select(z => z.id).Contains(x.company_case_routing_id)).Any()))
+                        {
+                            foreach (var route in listR.Where(x => x.company_secondary_type_id == type.id))
+                            {
+                                foreach (var file in listA.Where(x => x.company_case_routing_id == route.id))
+                                {
+                                    <div class="contentListItem clearfix">
+                                        <div class="contentListItem__mainInfo col-8 clearfix">
+                                            <div class="contentListItem__fileLogo">
+                                                <img src="/Content/Icons/attachment-icon_preview.png" alt="" />
+                                            </div><!-- /.contentListItem__fileLogo -->
+                                            <div class="contentListItem__namesBlock">
+                                                <div class="contentListItem__ownerName">
+                                                </div><!-- /.contentListItem__ownerName -->
+                                                <div class="contentListItem__attechFileName">
+                                                    @file.file_nm
+                                                </div><!-- /.contentListItem__attechFileName -->
+                                            </div><!-- /.contentListItem__namesBlock -->
+                                        </div><!-- /.pull-left -->
+                                        <div class="contentListItem__additionalInfo col-4 clearfix">
+                                            <div class="contentListItem__forWhom">
+                                                <span>Policy - @type.secondary_type_en</span>
+                                            </div><!-- /.contentListItem__forWhom -->
+                                            <div class="contentListItem__infoBlock">
+                                                <div class="contentListItem__date">@dth.ConvertDateToShortString(file.upload_dt)</div><!-- /.contentListItem__date -->
+                                                <div class="contentListItem__link">
+                                                    <a href="@Url.Content(file.path_nm)" class="attachLink">download</a>
+                                                </div><!-- /.contentListItem__link -->
+                                            </div><!-- /.contentListItem__infoBlock -->
+                                        </div><!-- /.pull-right -->
+                                    </div><!-- /.dragDrop-contentListItem -->                
+                                }
+                            }
+                        }
+                    }
+                }
+
+                @foreach (var attachment in (List<attachment>)ViewBag.attachmentAdvFiles)
+                {
+                    var user = users.FirstOrDefault(x => x.id == attachment.user_id);
+
+                    <div class="contentListItem clearfix">
+                        <div class="contentListItem__mainInfo col-8 clearfix">
+                            <div class="contentListItem__fileLogo">
+                                <img src="/Content/Icons/attachment-icon_preview.png" alt="" />
+                            </div><!-- /.contentListItem__fileLogo -->
+                            <div class="contentListItem__namesBlock">
+                                <div class="contentListItem__ownerName">
+                                    @(user == null ? "Anonymous reporter" : (user.first_nm + " " + user.last_nm).Trim())
+                                </div><!-- /.contentListItem__ownerName -->
+                                <div class="contentListItem__attechFileName">
+                                    @attachment.file_nm
+                                </div><!-- /.contentListItem__attechFileName -->
+                            </div><!-- /.contentListItem__namesBlock -->
+                        </div><!-- /.pull-left -->
+                        <div class="contentListItem__additionalInfo col-4 clearfix">
+                            <div class="contentListItem__forWhom">
+                                @if (attachment.user_id != rm._report.reporter_user_id)
+                                {
+                                    <select class="attachmentFile case_select" data-id="@attachment.id">
+                                        <option @(attachment.visible_mediators_only == true ? "selected" : "") value="1">Visible to Case Administrators</option>
+                                        <option @(attachment.visible_reporter == true ? "selected" : "") value="2">Visible to Reporter & Case Administrators</option>
+                                    </select>
+                                }
+                                else
+                                {
+                                    <span>For reporter</span>
+                                }                                
+                            </div><!-- /.contentListItem__forWhom -->
+                            <div class="contentListItem__infoBlock">
+                                <div class="contentListItem__date">@dth.ConvertDateToShortString(attachment.effective_dt)</div><!-- /.contentListItem__date -->
+                                <div class="contentListItem__link">
+                                    <a href="@attachment.path_nm" class="attachLink">download</a>
+                                </div><!-- /.contentListItem__link -->
+                            </div><!-- /.contentListItem__infoBlock -->
+                        </div><!-- /.pull-right -->
+                    </div><!-- /.dragDrop-contentListItem -->
+                }
+            </div><!-- /.dragDrop-content -->
+            <div class="divider p-tb-20"></div>
+        </div><!-- /.content-container__inner -->
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.selectFiles').on('click', function () {
+            $(this).parent().find('input').click();
+        });
+
+        $('.attachmentFile').on('change', function (e) {
+            if (confirm('You are about to change visibility for the file. Are you sure?')) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("AttachmentType", "NewCase", new { id = report_id })',
+                    data: {
+                        file_id: $(this).data('id'),
+                        type: $(this).val()
+                    },
+                    success: function (result) {
+                        window.location = window.location;
+                    },
+                    error: function (xhr, status, p3, p4) {
+                    }
+                });
+            } else {
+                $(this).val($(this).val() == 1 ? 2 : 1);
+                return false;
+            }
+        });
+    });
+</script>

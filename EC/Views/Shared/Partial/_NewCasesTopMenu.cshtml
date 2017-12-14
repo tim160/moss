@@ -100,8 +100,10 @@
         </ul>
 
         <ul class="mainNavigationTabs__rightLinks-ul clearfix">
-            <li class="mainNavigationTabs__rightLinks-li">
-                <a href="@Url.Action("Attachments", new { report_id = ViewBag.report_id })" class="mainNavigationTabs__rightLinks-a">Attachments</a>
+            <li class="mainNavigationTabs__rightLinks-li @(action == "attachments" ? "active" : "")">
+                <a href="@Url.Action("Attachments", new { report_id = ViewBag.report_id })" class="mainNavigationTabs__rightLinks-a">
+                    <div class="mainNavigationTabs__tab-name">Attachments</div>                    
+                </a>
             </li>
             <li class="mainNavigationTabs__rightLinks-li mainNavigationTabs__changeTab @(action == "activity" ? "active" : "")" data-tab="mainTab-activity">
                 <a href="@Url.Action("Activity", new { report_id = ViewBag.report_id })" class="mainNavigationTabs__rightLinks-a">

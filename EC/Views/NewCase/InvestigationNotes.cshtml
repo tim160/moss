@@ -111,38 +111,38 @@
                                 </p>
                             </div>
                             <a href="#" class="btn-link" ng-show="!mediatorAddMode" ng-click="mediatorAddMode = !mediatorAddMode">Add person</a>
-                            <div ng-show="mediatorAddMode">
+                            <form ng-show="mediatorAddMode" name="form" ng-submit="addNewPerson(form.$valid)" novalidate>
                                 <div class="addPerson">
                                     <div class="addPersonName sampleContainer">
                                         <div class="personTitle title">@GlobalRes.FirstNameUp</div>
                                         <div class="personData">
-                                            <input name="personName" class="personDataTextBox fName" ng-class="{error : !addPerson.FirstName}" ng-model="addPerson.FirstName" />
+                                            <input name="personName" class="personDataTextBox fName" required ng-class="{ error : form.personName.$invalid && (form.personName.$dirty || form.$submitted)}" ng-model="addPerson.FirstName" />
                                         </div>
                                     </div>
 
                                     <div class="addPersonName sampleContainer">
                                         <div class="personTitle title">@GlobalRes.LastNameUp</div>
                                         <div class="personData">
-                                            <input name="personLastName" class="personDataTextBox lName" ng-class="{error : !addPerson.LastName}" ng-model="addPerson.LastName" />
+                                            <input name="personLastName" class="personDataTextBox lName" required ng-class="{error : form.personLastName.$invalid && (form.personLastName.$dirty || form.$submitted)}" ng-model="addPerson.LastName" />
                                         </div>
                                     </div>
 
                                     <div class="addPersonInfo sampleContainer">
                                         <div class="personTitle title">@GlobalRes.Title</div>
                                         <div class="personData">
-                                            <input type="text" name="personTitle" class="personDataTextBox witnessTitle" ng-class="{error : !addPerson.Title}" ng-model="addPerson.Title" />
+                                            <input type="text" name="personTitle" class="personDataTextBox witnessTitle" required ng-class="{error : form.personTitle.$invalid && (form.personTitle.$dirty || form.$submitted)}" ng-model="addPerson.Title" />
                                         </div>
                                     </div>
-                                    <dropbox ng-class="{errorDropbox : addPerson.Role.id == 0}"
+                                    <dropbox ng-class="{errorDropbox : addPerson.Role.id == 0 && form.$submitted}"
                                              ng-dropbox-textexpr="addPerson.Role.role_en"
                                              itemText="{{item.role_en}}"
                                              ng-dropbox-list="model.addNewPersonRoles"
                                              ng-dropbox-rootItem=""
                                              ng-dropbox-on-select="addPerson.Role">
                                     </dropbox>
-                                    <a href="#" class="btn-link" ng-click="addNewPerson()">@GlobalRes.AddPerson</a>
+                                    <button type="submit" class="btn-link">@GlobalRes.AddPerson</button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
 
 

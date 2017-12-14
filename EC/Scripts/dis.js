@@ -97,15 +97,13 @@
         };
 
         directive.link = function (scope, element) {
-            $(document).on('click', function () {
-                var isChild = $(element).has(event.target).length > 0;
-                var isSelf = element[0] === event.target;
-                var isInside = isChild || isSelf;
-                if (!isInside) {
+            $(element).hover(
+                function () {
+                },
+                function () {
                     scope.$apply(function () {
                         scope.expanded = false;
                     });
-                }
             });
             scope.onSelectFunction = function (item) {
                 scope.expanded = false;
@@ -722,6 +720,9 @@
         };
 
         $scope.addNewPerson = function () {
+            $scope.form.$setDirty(true);
+            console.log($scope.form);
+            console.log($scope.form.personName);
             if ((!$scope.addPerson.FirstName) | (!$scope.addPerson.LastName) | (!$scope.addPerson.Title) | ($scope.addPerson.Role.id === 0)) {
                 return;
             }
