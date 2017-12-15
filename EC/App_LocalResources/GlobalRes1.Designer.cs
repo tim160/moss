@@ -4219,6 +4219,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Other Incident.
+        /// </summary>
+        public static string OtherIncident {
+            get {
+                return ResourceManager.GetString("OtherIncident", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Outcome.
         /// </summary>
         public static string Outcome {
