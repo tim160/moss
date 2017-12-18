@@ -22,36 +22,37 @@
 
         <div class="content-container__inner clearfix">
             <div class="row clearfix team-row">
-                <div class="col-4" ng-repeat="item in mediators_whoHasAccess_toReport">
+                <div class="col-4" ng-repeat="item in mediators_whoHasAccess_toReport" repeat-done="makeCircles()">
                     <div class="teamBlock shadowLight">
                         <div class="teamBlock-header clearfix">
                             <div class="teamBlock-header__logo">
-                                <img src="{{item.photo_path ==  '' ? '/Content/Icons/noPhoto.png' : item.photo_path}}" alt="" class="teamBlock-header__logoImg" />
+                                <img ng-src="{{item.user.photo_path ==  '' ? '/Content/Icons/noPhoto.png' : item.user.photo_path}}" alt="" class="teamBlock-header__logoImg" />
                             </div>
                             <div class="teamBlock-header__title">
                                 <div class="teamBlock-header__name clearfix">
-                                    <div class="teamBlock-header__name-text">{{item.first_nm}} {{item.last_nm}}</div>
+                                    <div class="teamBlock-header__name-text">{{item.user.first_nm}} {{item.user.last_nm}}</div>
                                 </div>
                                 <div class="teamBlock-header__profilePost">
-                                    {{item.title_ds}}
+                                    {{item.user.title_ds}}
                                 </div><!-- /.teamBlock-header__profilePost -->
-                                <a href="#!" class="teamBlock-header__ownerBadge ">Make case owner</a>
+                                <a href="#!" ng-show="!item.owner" class="teamBlock-header__ownerBadge" ng-click="makeCaseOwner(item)">Make case owner</a>
+                                <a href="#!" ng-show="item.owner" class="teamBlock-header__ownerBadge active">Case owner</a>
+                                <div class="close teamBlock__close" ng-show="!item.owner" ng-click="closeBtn(item)">&#215;</div>
                             </div><!-- /.teamBlock-header__title -->
                         </div><!-- /.teamBlock-header -->
                         <div class="teamBlock-body clearfix">
-                            <div class="teamBlock-body__profileSpec {{roleClasses[item.role_id]}}">
-                                {{roleNames[item.role_id]}}
+                            <div class="teamBlock-body__profileSpec {{roleClasses[item.user.role_id]}}">
+                                {{roleNames[item.user.role_id]}}
                             </div><!-- /.teamBlock-body__profileSpec -->
                             <div class="teamBlock-body__chartTitle">
-                                Human Resources
+                                {{item.user.notepad_tx}}
                             </div><!-- /.teamBlock-body__chartTitle -->
                             <div class="teamBlock-body__charts">
-
                                 <div class="chartCircle">
                                     <canvas class="canvasCircle" height="60px" width="60px"></canvas>
                                     <div class="chartCircle__content">
                                         <div class="chartCircle__content-number">
-                                            12
+                                            {{item.task_quantity}}
                                         </div><!-- /.chartCircle__content-number -->
                                         <div class="chartCircle__content-text">
                                             tasks
@@ -62,7 +63,7 @@
                                     <canvas class="canvasCircle" height="60px" width="60px"></canvas>
                                     <div class="chartCircle__content">
                                         <div class="chartCircle__content-number">
-                                            4
+                                            {{item.message_quantity}}
                                         </div><!-- /.chartCircle__content-number -->
                                         <div class="chartCircle__content-text">
                                             messages
@@ -73,7 +74,7 @@
                                     <canvas class="canvasCircle" height="60px" width="60px"></canvas>
                                     <div class="chartCircle__content">
                                         <div class="chartCircle__content-number">
-                                            14
+                                            {{item.action_quantity}}
                                         </div><!-- /.chartCircle__content-number -->
                                         <div class="chartCircle__content-text">
                                             actions
@@ -88,12 +89,12 @@
                             <div class="teamBlock-footer__location clearfix">
                                 <div class="teamBlock-footer__location-logo"></div><!-- /.teamBlock-footer__location-logo -->
                                 <div class="teamBlock-footer__location-text">
-                                    Stark Tower, NY
+                                    {{item.location_string}}
                                 </div><!-- /.teamBlock-footer__location-text -->
                             </div><!-- /.teamBlock-footer__location -->
                             <a href="mailTo:timur160@hotmail.com" class="teamBlock-footer__mail clearfix">
                                 <span class="teamBlock-footer__mail-logo"></span>
-                                <span class="teamBlock-footer__mail-content">timur160@hotmail.com</span>
+                                <span class="teamBlock-footer__mail-content">{{item.email}}</span>
                             </a>
                         </div><!-- /.teamBlock-footer -->
                     </div><!-- /.teamBlock -->
@@ -101,117 +102,51 @@
             </div>
         </div><!-- /.content-container__inner -->
 
-        <div class="content-container__inner clearfix">
+        <div class="content-container__inner">
+            <div class="teamBlock__addNew">
+                <a href="#!" class="btn-linkReverse">Add more mediators</a>
+            </div>
+        </div>
+
+        <div class="content-container__inner">
+            <div class="teamBlock__addNewText">
+                <div class="teamBlock__addNewText-title">
+                    Select mediators to add to this team
+                </div><!-- /.teamBlock__addNewText-title -->
+            </div><!-- /.teamBlock__addNew -->
             <div class="row clearfix team-row">
-                <div class="col-4">
-                    <div class="teamBlock shadowLight">
-                        <div class="teamBlock-header clearfix">
-                            <div class="teamBlock-header__logo">
-                                <img src="http://report.employeeconfidential.com//Upload//UserLogo/2_636338753935849609.jpg" alt="" class="teamBlock-header__logoImg" />
-                            </div>
-                            <div class="teamBlock-header__title">
-                                <div class="teamBlock-header__name clearfix">
-                                    <div class="teamBlock-header__name-text">Kate Milton</div>
-                                    <a href="#!" class="teamBlock-header__name-ownerBadge ">
-                                        <div class="tooltip teamBlock-header__name-ownerBadgeTooltip">Make Case Owner</div><!-- /.tooltip -->
-                                    </a>
-                                </div>
-                                <div class="teamBlock-header__profilePost">
-                                    Chief Human Resources Officer
-                                </div><!-- /.teamBlock-header__profilePost -->
-                            </div><!-- /.teamBlock-header__title -->
-                        </div><!-- /.teamBlock-header -->
-                        <div class="teamBlock-body clearfix">
-                            <div class="teamBlock-body__profileSpec ">
-                                PLATFORM MANAGER
-                            </div><!-- /.teamBlock-body__profileSpec -->
-                            <div class="teamBlock-body__chartTitle">
-                                Human Resources
-                            </div><!-- /.teamBlock-body__chartTitle -->
-                            <div class="teamBlock-body__charts">
 
-                                <div class="chartCircle">
-                                    <canvas class="canvasCircle" height="60px" width="60px"></canvas>
-                                    <div class="chartCircle__content">
-                                        <div class="chartCircle__content-number">
-                                            12
-                                        </div><!-- /.chartCircle__content-number -->
-                                        <div class="chartCircle__content-text">
-                                            tasks
-                                        </div><!-- /.chartCircle__content-text -->
-                                    </div><!-- /.chartCircle__content -->
-                                </div><!-- /.chartCircle -->
-                                <div class="chartCircle">
-                                    <canvas class="canvasCircle" height="60px" width="60px"></canvas>
-                                    <div class="chartCircle__content">
-                                        <div class="chartCircle__content-number">
-                                            4
-                                        </div><!-- /.chartCircle__content-number -->
-                                        <div class="chartCircle__content-text">
-                                            messages
-                                        </div><!-- /.chartCircle__content-text -->
-                                    </div><!-- /.chartCircle__content -->
-                                </div><!-- /.chartCircle -->
-                                <div class="chartCircle">
-                                    <canvas class="canvasCircle" height="60px" width="60px"></canvas>
-                                    <div class="chartCircle__content">
-                                        <div class="chartCircle__content-number">
-                                            14
-                                        </div><!-- /.chartCircle__content-number -->
-                                        <div class="chartCircle__content-text">
-                                            actions
-                                        </div><!-- /.chartCircle__content-text -->
-                                    </div><!-- /.chartCircle__content -->
-                                </div><!-- /.chartCircle -->
+                <div class="col-4" ng-repeat="item in available_toAssign_mediators" repeat-done="makeCircles()">
+                    <div class="teamBlock shadowLight">
 
-                            </div><!-- /.teamBlock-body__charts -->
-                        </div><!-- /.teamBlock-body -->
-                        <div class="hr teamBlock-hr"></div><!-- /.hr teamBlock-hr -->
-                        <div class="teamBlock-footer clearfix">
-                            <div class="teamBlock-footer__location clearfix">
-                                <div class="teamBlock-footer__location-logo"></div><!-- /.teamBlock-footer__location-logo -->
-                                <div class="teamBlock-footer__location-text">
-                                    Stark Tower, NY
-                                </div><!-- /.teamBlock-footer__location-text -->
-                            </div><!-- /.teamBlock-footer__location -->
-                            <a href="mailTo:timur160@hotmail.com" class="teamBlock-footer__mail clearfix">
-                                <span class="teamBlock-footer__mail-logo"></span>
-                                <span class="teamBlock-footer__mail-content">timur160@hotmail.com</span>
-                            </a>
-                        </div><!-- /.teamBlock-footer -->
-                    </div><!-- /.teamBlock -->
-                </div><!-- /.col-4 -->
-                <div class="col-4">
-                    <div class="teamBlock shadowLight">
                         <div class="teamBlock-header clearfix">
+
                             <div class="teamBlock-header__logo">
-                                <img src="http://report.employeeconfidential.com//Upload//UserLogo/2_636338753935849609.jpg" alt="" class="teamBlock-header__logoImg" />
+                                <img ng-src="{{item.user.photo_path ==  '' ? '/Content/Icons/noPhoto.png' : item.user.photo_path}}" alt="" class="teamBlock-header__logoImg" />
                             </div>
                             <div class="teamBlock-header__title">
                                 <div class="teamBlock-header__name clearfix">
-                                    <div class="teamBlock-header__name-text">Kate Milton</div>
-                                    <a href="#!" class="teamBlock-header__name-ownerBadge active">
-                                        <div class="tooltip teamBlock-header__name-ownerBadgeTooltip">Make Case Owner</div><!-- /.tooltip -->
-                                    </a>
+                                    <div class="teamBlock-header__name-text">{{item.user.first_nm}} {{item.user.last_nm}}</div>
                                 </div>
                                 <div class="teamBlock-header__profilePost">
-                                    Chief Human Resources Officer
+                                    {{item.user.title_ds}}
                                 </div><!-- /.teamBlock-header__profilePost -->
+
                             </div><!-- /.teamBlock-header__title -->
+
                         </div><!-- /.teamBlock-header -->
+
                         <div class="teamBlock-body clearfix">
-                            <div class="teamBlock-body__profileSpec teamBlock-body__profileSpec_owner">
-                                PLATFORM MANAGER
-                            </div><!-- /.teamBlock-body__profileSpec -->
+                            <a href="#!" class="btn btn__team" ng-click="addToTeam(item)">Add to team</a>
                             <div class="teamBlock-body__chartTitle">
-                                Human Resources
+                                {{item.user.notepad_tx}}
                             </div><!-- /.teamBlock-body__chartTitle -->
                             <div class="teamBlock-body__charts">
                                 <div class="chartCircle">
                                     <canvas class="canvasCircle" height="60px" width="60px"></canvas>
                                     <div class="chartCircle__content">
                                         <div class="chartCircle__content-number">
-                                            12
+                                            {{item.task_quantity}}
                                         </div><!-- /.chartCircle__content-number -->
                                         <div class="chartCircle__content-text">
                                             tasks
@@ -222,7 +157,7 @@
                                     <canvas class="canvasCircle" height="60px" width="60px"></canvas>
                                     <div class="chartCircle__content">
                                         <div class="chartCircle__content-number">
-                                            4
+                                            {{item.message_quantity}}
                                         </div><!-- /.chartCircle__content-number -->
                                         <div class="chartCircle__content-text">
                                             messages
@@ -233,7 +168,7 @@
                                     <canvas class="canvasCircle" height="60px" width="60px"></canvas>
                                     <div class="chartCircle__content">
                                         <div class="chartCircle__content-number">
-                                            14
+                                            {{item.action_quantity}}
                                         </div><!-- /.chartCircle__content-number -->
                                         <div class="chartCircle__content-text">
                                             actions
@@ -247,95 +182,49 @@
                             <div class="teamBlock-footer__location clearfix">
                                 <div class="teamBlock-footer__location-logo"></div><!-- /.teamBlock-footer__location-logo -->
                                 <div class="teamBlock-footer__location-text">
-                                    Stark Tower, NY
+                                    {{item.location_string}}
                                 </div><!-- /.teamBlock-footer__location-text -->
                             </div><!-- /.teamBlock-footer__location -->
                             <a href="mailTo:timur160@hotmail.com" class="teamBlock-footer__mail clearfix">
                                 <span class="teamBlock-footer__mail-logo"></span>
-                                <span class="teamBlock-footer__mail-content">timur160@hotmail.com</span>
+                                <span class="teamBlock-footer__mail-content">{{item.email}}</span>
                             </a>
                         </div><!-- /.teamBlock-footer -->
                     </div><!-- /.teamBlock -->
                 </div><!-- /.col-4 -->
-                <div class="col-4">
-                    <div class="teamBlock shadowLight">
-                        <div class="teamBlock-header clearfix">
-                            <div class="teamBlock-header__logo">
-                                <img src="http://report.employeeconfidential.com//Upload//UserLogo/2_636338753935849609.jpg" alt="" class="teamBlock-header__logoImg" />
-                            </div>
-                            <div class="teamBlock-header__title">
-                                <div class="teamBlock-header__name clearfix">
-                                    <div class="teamBlock-header__name-text">Kate Milton</div>
-                                    <a href="#!" class="teamBlock-header__name-ownerBadge ">
-                                        <div class="tooltip teamBlock-header__name-ownerBadgeTooltip">Make Case Owner</div><!-- /.tooltip -->
-                                    </a>
-                                </div>
-                                <div class="teamBlock-header__profilePost">
-                                    Chief Human Resources Officer
-                                </div><!-- /.teamBlock-header__profilePost -->
-                            </div><!-- /.teamBlock-header__title -->
-                        </div><!-- /.teamBlock-header -->
-                        <div class="teamBlock-body clearfix">
-                            <div class="teamBlock-body__profileSpec teamBlock-body__profileSpec_reviewer">
-                                PLATFORM MANAGER
-                            </div><!-- /.teamBlock-body__profileSpec -->
-                            <div class="teamBlock-body__chartTitle">
-                                Human Resources
-                            </div><!-- /.teamBlock-body__chartTitle -->
-                            <div class="teamBlock-body__charts">
-                                <div class="chartCircle">
-                                    <canvas class="canvasCircle" height="60px" width="60px"></canvas>
-                                    <div class="chartCircle__content">
-                                        <div class="chartCircle__content-number">
-                                            12
-                                        </div><!-- /.chartCircle__content-number -->
-                                        <div class="chartCircle__content-text">
-                                            tasks
-                                        </div><!-- /.chartCircle__content-text -->
-                                    </div><!-- /.chartCircle__content -->
-                                </div><!-- /.chartCircle -->
-                                <div class="chartCircle">
-                                    <canvas class="canvasCircle" height="60px" width="60px"></canvas>
-                                    <div class="chartCircle__content">
-                                        <div class="chartCircle__content-number">
-                                            4
-                                        </div><!-- /.chartCircle__content-number -->
-                                        <div class="chartCircle__content-text">
-                                            messages
-                                        </div><!-- /.chartCircle__content-text -->
-                                    </div><!-- /.chartCircle__content -->
-                                </div><!-- /.chartCircle -->
-                                <div class="chartCircle">
-                                    <canvas class="canvasCircle" height="60px" width="60px"></canvas>
-                                    <div class="chartCircle__content">
-                                        <div class="chartCircle__content-number">
-                                            14
-                                        </div><!-- /.chartCircle__content-number -->
-                                        <div class="chartCircle__content-text">
-                                            actions
-                                        </div><!-- /.chartCircle__content-text -->
-                                    </div><!-- /.chartCircle__content -->
-                                </div><!-- /.chartCircle -->
-                            </div><!-- /.teamBlock-body__charts -->
-                        </div><!-- /.teamBlock-body -->
-                        <div class="hr teamBlock-hr"></div><!-- /.hr teamBlock-hr -->
-                        <div class="teamBlock-footer clearfix">
-                            <div class="teamBlock-footer__location clearfix">
-                                <div class="teamBlock-footer__location-logo"></div><!-- /.teamBlock-footer__location-logo -->
-                                <div class="teamBlock-footer__location-text">
-                                    Stark Tower, NY
-                                </div><!-- /.teamBlock-footer__location-text -->
-                            </div><!-- /.teamBlock-footer__location -->
-                            <a href="mailTo:timur160@hotmail.com" class="teamBlock-footer__mail clearfix">
-                                <span class="teamBlock-footer__mail-logo"></span>
-                                <span class="teamBlock-footer__mail-content">timur160@hotmail.com</span>
-                            </a>
-                        </div><!-- /.teamBlock-footer -->
-                    </div><!-- /.teamBlock -->
-                </div><!-- /.col-4 -->
-            </div>
+
+            </div><!-- /.row clearfix team-row -->
         </div><!-- /.content-container__inner -->
-
         <div class="divider "></div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+
+        function blockTeamCircle(block, color1, color2) {
+            console.log(1);
+            //var canvas = document.getElementById("canvas");
+            var canvasTeam = block.find('.canvasCircle');
+            for (i = 0; i < canvasTeam.length; i++) {
+                var x = 1.25;
+                if (x > 0.5) {
+                    x = x - 0.5;
+                }
+                var context = canvasTeam[i].getContext("2d");
+
+                context.beginPath();
+                context.lineWidth = 1;
+                context.strokeStyle = color1;
+                context.arc(30, 30, 29, 1.5 * Math.PI, x * Math.PI);
+                context.stroke();
+
+                context.beginPath();
+                context.lineWidth = 1;
+                context.strokeStyle = color2;
+                context.arc(30, 30, 29, (x + 0.03) * Math.PI, 1.47 * Math.PI);
+                context.stroke();
+            }
+        }        
+    });
+</script>

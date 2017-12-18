@@ -24,6 +24,7 @@ namespace EC.Controllers.API
         {
             public int? ReportFlag { get; set; }
             public int? Report_id { get; set; }
+            public int? Mode { get; set; }
             public string NewMessage { get; set; }
         }
 
@@ -71,7 +72,7 @@ namespace EC.Controllers.API
             message.created_dt = DateTime.Now;
             message.ip_ds = "";
             message.subject_ds = "";
-            message.reporter_access = 2;
+            message.reporter_access = filter.Mode == 1 ? 2 : 1;
             message.body_tx = filter.NewMessage;
             message.report_id = filter.Report_id.Value;
             DB.message.Add(message);

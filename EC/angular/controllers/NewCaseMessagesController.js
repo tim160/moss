@@ -20,6 +20,7 @@
         $scope.currentUser = {};
 
         $scope.newMessage = '';
+        $scope.newMessageReporter = '';
 
         $scope.refresh = function () {
             NewCaseMessagesService.get({ id: $scope.report_id }, function (data) {
@@ -32,8 +33,15 @@
         };
 
         $scope.sendMessage = function () {
-            NewCaseMessagesService.post({ report_id: $scope.report_id, newMessage: $scope.newMessage }, function () {
+            NewCaseMessagesService.post({ mode: 1, report_id: $scope.report_id, newMessage: $scope.newMessage }, function () {
                 $scope.newMessage = '';
+                $scope.refresh();
+            });
+        };
+
+        $scope.sendMessageReporter = function () {
+            NewCaseMessagesService.post({ mode: 2, report_id: $scope.report_id, newMessage: $scope.newMessageReporter }, function () {
+                $scope.newMessageReporter = '';
                 $scope.refresh();
             });
         };

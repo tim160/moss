@@ -997,8 +997,31 @@ textarea{
 			padding: 0 30px;
 		}
 
+.row__inner-additional{}
+.row__inner-additional>.col-4{
+	padding: 0 30px;
+}
+.row__inner-additional>.col-4:first-child{
+	padding-left: 0;
+}
+.row__inner-additional>.col-4:last-child{
+	padding-right: 0;
+}
 
-
+.addPerson>.sampleContainer{
+	margin-bottom: 20px;
+}
+.sampleContainer>.title{
+	margin-bottom: 5px;
+}
+input,
+input.personDataTextBox{
+	border-radius: 4px;
+	border: 1px solid #ccc;
+}
+.addPerson .select{
+	margin-bottom: 20px;
+}
 /*-----------------------inputRadio---------------------*/
 
 
@@ -2077,6 +2100,7 @@ textarea{
 	margin-top: 5px;
 	margin-bottom: 5px;
 }
+
 /*==================================================
 ====================Attachments=====================
 ====================================================*/
@@ -2222,3 +2246,353 @@ textarea{
 			font-size: 14px;
 			color: #aeb5b7;
 		}
+
+
+/*==================================================
+==============      Dashboard Page   =================
+====================================================*/
+
+/*==================================================
+======================hotNews======================
+====================================================*/
+
+.hotNews{
+	background-color: #c18fbf;
+	line-height: 40px;
+	display: block;
+	overflow: hidden;
+}
+.hotNews .col-2,
+.hotNews .col-10{
+	padding-left: 0;
+}
+	.hotNews-id{
+		font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+		font-size: 16px;
+		color: #fff;
+	}
+	.hotNews-shortInfo{}
+		.hotNews-shortInfo__text{
+			font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+			font-size: 14px;
+			color: #fff;
+			display: inline-block;
+			vertical-align: middle;
+			float: left;
+		}
+		.hotNews-shortInfo__arrow{
+			display: inline-block;
+			vertical-align: middle;
+			float: left;
+			color: #fff;
+			margin-left: 10px;
+			font-size: 24px;
+			margin-top: -3px;
+		}
+
+/*==================================================
+======================Dashboard=====================
+====================================================*/
+
+.dashboard{
+	display: block;
+	width: 100%;
+}
+	.dashboard-rowHeader{
+		background-color: #f2f7f7;
+		border: 1px solid #e0e5e6;
+	}
+		.dashboard-colHeader{
+			font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+			font-size: 12px;
+			color: #727c7e;
+			float: left;
+			box-sizing: border-box;
+			padding: 10px 0;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			cursor: pointer;
+			height: 32px;
+			/*border-right: 1px solid #000;*/
+		}
+		.dashboard-colHeader:hover{
+			background-color: #d6dcdc;
+		}
+		.dashboard-colHeader.active{
+			background-color: #d6dcdc;
+		}
+			.dashboard-colHeader__text{
+				display: inline-block;
+				margin-left: 5px;
+				/*float: left;*/
+			}
+			.dashboard-colHeader__sortArrow{
+				display: none;
+				margin-top: 2px;
+				margin-right: 5px;
+				float: right;
+			}
+
+.sortArrow{
+	width: 9px;
+	height: 5px;
+	background: url('Icons/arrowSelect2.png')  no-repeat;
+	vertical-align: middle;
+}
+.sortArrow_up{}
+.sortArrow_down{
+	-ms-transform: rotate(180deg);
+	-webkit-transform: rotate(180deg);
+	transform: rotate(180deg);
+}
+.sortArrow.sortArrow_up,
+.sortArrow.sortArrow_down{
+	display: inline-block;
+}
+
+		.dashboard-col__case{
+			width: 12%;
+		}
+		.dashboard-col__case.dashboard-colHeader{
+			padding-left: 15px;
+		}
+
+		.dashboard-col__stage{
+			width: 14%;
+		}
+		.dashboard-col__stage.dashboard-colHeader{}
+
+		.dashboard-col__age{
+			width: 6%;
+		}
+		.dashboard-col__age.dashboard-colHeader{}
+
+		.dashboard-col__incidentType{
+			width: 23%;
+		}
+		.dashboard-col__incidentType.dashboard-colHeader{}
+
+		.dashboard-col__location{
+			width: 10%;
+		}
+		.dashboard-col__location.dashboard-colHeader{}
+
+		.dashboard-col__reportDate{
+			width: 10%;
+		}
+		.dashboard-col__reportDate.dashboard-colHeader{}
+
+		.dashboard-col__messages{
+			width: 8%;
+		}
+		.dashboard-col__messages.dashboard-colHeader{
+			text-align: center;
+		}
+		
+		.dashboard-col__tasks{
+			width: 7%;
+		}
+		.dashboard-col__tasks.dashboard-colHeader{
+			text-align: center;
+		}
+
+		.dashboard-col__team{
+			width: 10%;
+		}
+		.dashboard-col__team.dashboard-colHeader{}
+
+	.dashboard-rowbody{
+		background-color: #fff;
+		overflow: hidden;
+		border-left: 1px solid #e0e5e6;
+		border-right: 1px solid #e0e5e6;
+		position: relative;
+		padding: 10px 0;
+		cursor: pointer;
+		display: block;
+		/*height: 80px;*/
+	}
+	.dashboard-rowbody:after{
+		content: '';
+		display: block;
+		position: absolute;
+		bottom: 0;
+		left: 20px;
+		right: 20px;
+		height: 1px;
+		background-color: #e0e5e6;
+	}
+	.dashboard .dashboard-rowbody:last-child:after{
+		display: none;
+	}
+		.rowbody__colorLine{
+			position: absolute;
+			width: 5px;
+			top: 10px;
+			bottom: 10px;
+			left: 0;
+		}
+.colorLine{
+	background-color: #ccc;
+}
+.colorLine.colorLine_orange{
+	background-color: #ff9b42 ;
+}
+.colorLine.colorLine_darkBlue{
+	background-color: #3099be ;
+}
+.colorLine.colorLine_lightBlue{
+	background-color: #73cbcc ;
+}
+.colorLine.colorLine_dark{
+	background-color: #868fb8 ;
+}
+.colorLine.colorLine_red{
+	background-color: #d47472 ;
+}
+.colorLine.colorLine_limon{
+	background-color: #c6c967 ;
+}
+		.dashboard-colbody{
+			font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+			font-size: 12px;
+			color: #3c3e3f;
+			float: left;
+			box-sizing: border-box;
+			padding: 10px 5px;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			cursor: pointer;
+			/*border-right: 1px solid #000;*/
+			height: 60px;
+			vertical-align: middle;
+			display: block;
+		}
+
+		.dashboard-col__case.dashboard-colbody{}
+			.dashboard-col__case-text{
+				font-size: 16px;
+				line-height: 40px;
+				display: inline-block;
+				vertical-align: middle;
+				padding-left: 15px;
+			}
+
+		.dashboard-col__stage.dashboard-colbody{}
+			.dashboard-col__stage-type{
+				font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+				font-size: 12px;
+				color: #aeb5b7;
+				text-transform: uppercase;
+				display: inline-block;
+				float: left;
+				line-height: 20px;
+				width: 100%;
+			}
+			.dashboard-col__stage-date{
+				font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+				font-size: 12px;
+				display: inline-block;
+				float: left;
+				width: 100%;
+				line-height: 20px;
+			}
+				.dashboard-col__stage-date_green{
+					color: #05b5a2;
+				}
+				.dashboard-col__stage-date_red{
+					color: #ee5a36;
+				}
+
+		.dashboard-col__age.dashboard-colbody{}
+			.dashboard-col__age-text{
+				line-height: 40px;
+				font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+			}
+
+		.dashboard-col__incidentType.dashboard-colbody{}
+			.dashboard-col__incidentType-text{
+				font-size: 16px;
+				white-space: normal;
+			}
+		
+		.dashboard-col__location.dashboard-colbody{}
+			.dashboard-col__location-text{
+				font-size: 14px;
+				white-space: normal;
+			}
+
+		.dashboard-col__reportDate.dashboard-colbody{}
+			.dashboard-col__reportDate-text{
+				line-height: 40px;
+				font-size: 14px;
+			}
+
+		.dashboard-col__messages.dashboard-colbody{}
+			.dashboard-col__messages-text{
+				line-height: 40px;
+				font-size: 16px;
+				text-align: center;
+			}
+
+		.dashboard-col__tasks.dashboard-colbody{}
+			.dashboard-col__tasks-text{
+				line-height: 40px;
+				font-size: 16px;
+				text-align: center;
+			}
+
+		.dashboard-col__team.dashboard-colbody{}
+.team-list{
+	display: block;
+}
+	.team-list__li{
+		display: inline-block;
+		float: left;
+		vertical-align: middle;
+	}
+	.team-list__li:nth-child(1){
+		z-index: 299;
+	}
+	.team-list__li:nth-child(2){
+		z-index: 288;
+		margin-left: -10px;
+	}
+	.team-list__li:nth-child(3){
+		z-index: 277;
+		margin-left: -10px;
+	}
+		.team-list__a{
+			display: inline-block;
+			vertical-align: middle;
+			position: relative;
+			border-radius: 50%;
+			text-decoration: none;
+			line-height: 40px;
+			font-size: 16px;
+			font-weight: bold;
+			color: #3c3e3f;
+		}
+		.team-list__li:nth-child(1) .team-list__a{
+			z-index: 297;
+		}
+		.team-list__li:nth-child(2) .team-list__a{
+			z-index: 287;
+		}
+		.team-list__li:nth-child(3) .team-list__a{
+			z-index: 277;
+		}
+			.team-list__logo{
+				width: 34px;
+				height: 34px;
+				display: inline-block;
+				vertical-align: inherit;
+				border-radius: 50%;
+				border: 2px solid #fff;
+			}
+			.team-list__a>.profile-status{
+				top: 5px;
+				right: 0;
+			}
