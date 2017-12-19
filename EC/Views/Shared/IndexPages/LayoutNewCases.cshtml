@@ -329,7 +329,7 @@
                     <li class="breadcrumbs-mediators__li">
                         <a href="#" class="breadcrumbs-mediators__a">
                             <img src="@(user.photo_path.Trim() != "" ? Url.Content(user.photo_path.Trim()) : Url.Content("~/Content/Icons/noPhoto.png"))" alt="" class="breadcrumbs-mediators__img" />
-                            <span class="profile-status @(rm._report_owners.FirstOrDefault(x => x.user_id == user.id) == null ? "" : "online")"></span>
+                            <span class="profile-status @(rm._report_owners.FirstOrDefault(x => x.report_id == _report_id && x.user_id == user.id && x.status_id == 2) == null ? "" : "online")"></span>
                         </a>
                     </li>
                 }
