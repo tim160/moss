@@ -37,7 +37,7 @@
                                 </div><!-- /.teamBlock-header__profilePost -->
                                 <a href="#!" ng-show="!item.owner" class="teamBlock-header__ownerBadge" ng-click="makeCaseOwner(item)">Make case owner</a>
                                 <a href="#!" ng-show="item.owner" class="teamBlock-header__ownerBadge active">Case owner</a>
-                                <div class="close teamBlock__close" ng-show="!item.owner" ng-click="closeBtn(item)">&#215;</div>
+                                <div class="close teamBlock__close" ng-show="!item.owner && item.user.role_id != 4 && item.user.role_id != 5" ng-click="closeBtn(item)">&#215;</div>
                             </div><!-- /.teamBlock-header__title -->
                         </div><!-- /.teamBlock-header -->
                         <div class="teamBlock-body clearfix">
@@ -104,11 +104,11 @@
 
         <div class="content-container__inner">
             <div class="teamBlock__addNew">
-                <a href="#!" class="btn-linkReverse">Add more mediators</a>
+                <a href="#!" class="btn-linkReverse" ng-click="addMoreMediators = !addMoreMediators">Add more mediators</a>
             </div>
         </div>
 
-        <div class="content-container__inner">
+        <div class="content-container__inner" ng-show="addMoreMediators == true">
             <div class="teamBlock__addNewText">
                 <div class="teamBlock__addNewText-title">
                     Select mediators to add to this team

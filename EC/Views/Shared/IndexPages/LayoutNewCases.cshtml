@@ -81,6 +81,27 @@
         same_mediator_warning = GlobalRes.RecommendSecond1 + " " + GlobalRes.RecommendSecond2;
     }
 
+    string normal_button_promotion = GlobalRes.RequestCloseCase; //ResolveCaseUp
+    string Res_or_comp = GlobalRes.CloseCaseUp.ToUpper();
+    string overlay_title = GlobalRes.RequestCloseCase;
+    string textbox_title = GlobalRes.Caseresolution;
+    string left_button_promotion = "";
+    string normal_button_value = ECGlobalConstants.investigation_status_resolution.ToString();
+    string left_button_value = "";// Constant.investigation_status_completed.ToString();
+    List<company_outcome> company_outcomes = cm.Outcomes(_user.company_id, 2);
+
+    if ((investigationstatus > 2 && investigationstatus < 7) || (investigationstatus == 9))
+    {
+        Res_or_comp = GlobalRes.CloseCaseUp.ToUpper();
+        if ((investigationstatus == 4) || (investigationstatus == 6))
+        {
+            Res_or_comp = "";
+        }
+        if ((investigationstatus == 9) && (_user.role_id == 4 || _user.role_id == 5))
+        {
+            Res_or_comp = GlobalRes.Reopen.ToUpper();
+        }
+    }
 }
 
 <!DOCTYPE html>
@@ -119,6 +140,21 @@
     <!-- End Inspectlet Embed Code -->
     <input type="hidden" id="_report_id" value="@Html.Raw(_report_id)" />
     <input type="hidden" id="user_id" value="@Html.Raw(user_id)" />
+
+    @*Html.Partial("~/Views/Shared/EditorTemplates/CreateTaskModal.cshtml", new ViewDataDictionary {
+                           { "normal_button_promotion", normal_button_promotion },
+                           { "Res_or_comp", Res_or_comp },
+                           { "overlay_title", overlay_title },
+                           { "textbox_title", textbox_title },
+                           {"investigationstatus", investigationstatus },
+                           {"left_button_promotion", left_button_promotion },
+                           {"normal_button_value", normal_button_value },
+                           {"left_button_value", left_button_value },
+                           {"company_outcomes", company_outcomes },
+                           { "report_id", ViewBag.report_id },
+                           { "is_cc", is_cc }
+                    })*@
+
 
     <header class="header">
         @{
@@ -274,19 +310,6 @@
         {
             hrefURL = "/Payment/History";
             page_subtitle = GlobalRes.Payments;
-        }
-        string Res_or_comp = "";
-        if ((investigationstatus > 2 && investigationstatus < 7) || (investigationstatus == 9))
-        {
-            Res_or_comp = GlobalRes.CloseCaseUp.ToUpper();
-            if ((investigationstatus == 4) || (investigationstatus == 6))
-            {
-                Res_or_comp = "";
-            }
-            if ((investigationstatus == 9) && (_user.role_id == 4 || _user.role_id == 5))
-            {
-                Res_or_comp = GlobalRes.Reopen.ToUpper();
-            }
         }
     }
     <div class="container clearfix">

@@ -37,6 +37,7 @@
         };
 
         $scope.refresh = function (data) {
+            $scope.addMoreMediators = false;
             $scope.involved_mediators_user_list = data.involved_mediators_user_list;
             $scope.mediators_whoHasAccess_toReport = data.mediators_whoHasAccess_toReport;
             $scope.available_toAssign_mediators = data.available_toAssign_mediators;
