@@ -1,0 +1,283 @@
+﻿#anotherDialog, #approveDialog {
+    display: none;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}
+
+#anotherDialog, #approveDialog {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 2; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    /*overflow: auto;*/ /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+#anotherDialog2, #approveDialog2 {
+    position: relative;
+    width: 740px;
+    height: 340px;
+    margin: 30px auto;
+    /* background-color: #fff; */
+}
+
+    #anotherDialog2, #approveDialog2 .close {
+        padding-right: 30px;
+    }
+
+#dialog-form {
+    width: 740px;
+    max-width: 740px;
+    background-color: #05b5a2;
+    display: table;
+    padding: 17px 20px 20px 20px;
+}
+
+    #dialog-form .resolve {
+        color: #fff;
+        font-size: 24px;
+    }
+
+    #dialog-form .forButtons {
+        width: 100%;
+        padding-bottom: 15px;
+        margin-top: 25px;
+        display: table;
+    }
+
+    #dialog-form span.logButtonModal a,
+    #dialog-form span.repButtonModal a {
+        text-decoration: none;
+        font-size: 14px;
+        color: #fff;
+    }
+
+    #dialog-form span.logButtonModal,
+    #dialog-form span.repButtonModal {
+        text-transform: uppercase;
+        cursor: pointer;
+        border-radius: 2px;
+        font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+        border: 1px solid #fff;
+        color: #fff;
+        background-color: #05b5a2;
+        width: 235px;
+        display: table;
+        float: left;
+        text-align: center;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    #dialog-form span.logButtonModal {
+        margin-left: 32px;
+    }
+
+        #dialog-form span.logButtonModal:hover {
+            background-color: #fff;
+            color: #05b5a2;
+        }
+
+            #dialog-form span.logButtonModal:hover a {
+                color: #05b5a2;
+            }
+
+    #dialog-form span.repButtonModal {
+        margin-left: 60px;
+    }
+
+        #dialog-form span.repButtonModal:hover {
+            background-color: #fff;
+            color: #05b5a2;
+        }
+
+            #dialog-form span.repButtonModal:hover a {
+                color: #05b5a2;
+            }
+
+#anotherDialog, #approveDialog .createNewTaskBtn.createTask {
+    font-size: 14px;
+    padding: 5px 13px 4px 13px;
+}
+
+/*input*/
+#dialog-form .caseResolution {
+    /* width: 90%; */
+    margin: 0 auto;
+    width: 700px;
+    position: relative;
+}
+/*modal window*/
+.dropdown2 {
+    /*margin-left: 110px;
+    position: relative;
+    width: calc(100% - 40px);
+    max-width: 589px;*/
+    margin-left: 304px;
+    position: relative;
+    width: 396px;
+}
+
+    .dropdown2 label {
+        display: block;
+        padding: 21px 23px;
+        background: #f2f7f7;
+        color: #aeb3b4;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .dropdown2 ul {
+        display: none;
+        list-style: none;
+        position: absolute;
+        width: 100%;
+        z-index: 10000;
+    }
+
+        .dropdown2 ul li {
+            padding: 8px 16px;
+            background: #fff;
+            color: #727c7e;
+            height: 50px;
+            overflow: hidden;
+            cursor: pointer;
+            font-size: 18px;
+            transition: height 0.1s linear 0s;
+        }
+
+            .dropdown2 ul li:hover,
+            .dropdown2 ul li.selected {
+                background: #e5ebeb;
+                color: #3c3e3f;
+            }
+
+.dropdown3 {
+    /*margin-left: 110px;
+    position: relative;
+    width: calc(100% - 40px);
+    max-width: 589px;*/
+    margin-left: 304px;
+    position: relative;
+    width: 396px;
+}
+
+    .dropdown3 label {
+        display: block;
+        padding: 21px 23px;
+        background: #f2f7f7;
+        color: #aeb3b4;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .dropdown3 ul {
+        display: none;
+        list-style: none;
+        position: absolute;
+        width: 100%;
+        z-index: 10000;
+    }
+
+        .dropdown3 ul li {
+            padding: 8px 16px;
+            background: #fff;
+            color: #727c7e;
+            height: 50px;
+            overflow: hidden;
+            cursor: pointer;
+            font-size: 18px;
+            transition: height 0.1s linear 0s;
+        }
+
+            .dropdown3 ul li:hover,
+            .dropdown3 ul li.selected {
+                background: #e5ebeb;
+                color: #3c3e3f;
+            }
+
+/*end modal window*/
+#dialog-form .caseResolution input {
+    box-shadow: 0 0 2px #dfe4e5;
+    width: 675px;
+    height: 126px;
+    margin-left: 0;
+    text-indent: 2px;
+    outline: none;
+    line-height: 3em;
+    border: none;
+    border: 1px solid #dfe4e5;
+    font-size: 22px;
+    color: #305458;
+    margin-top: -30px;
+    padding: 1px 10px 1px 15px;
+}
+
+#dialog-form .attachFiles {
+    width: 702px;
+    height: 58px;
+    background-color: #f2f7f7;
+    border-top: 1px solid #e0e5e6;
+    margin-left: 17px;
+}
+
+#dialog-form .footerCreateTask2 {
+    width: 697px;
+    height: 50px;
+    background: #f2f7f7;
+    display: table;
+    padding-top: 8px;
+    border-top: 1px solid #e0e5e6;
+    margin: -5px 0px 0px 19px;
+}
+
+#dialog-form .hideCompletedBlock {
+    margin-left: 0px;
+}
+
+.close, .close1 {
+    float: right;
+    padding-right: 1px;
+}
+
+    .close:after,
+    .close1:after {
+        content: "\00d7";
+        position: absolute;
+        float: right;
+        margin-left: -13px;
+        margin-top: -33px;
+        color: #ffffff;
+        font-size: 28px;
+        cursor: pointer;
+        font-weight: 200;
+    }
+
+#dialog-form .attachFiles:hover {
+    background-color: #d6dcdc;
+    border: 1px solid #c7cdcd;
+    color: #848a8b;
+}
+
+.caseResolution textarea {
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+    font-size: 16px;
+    color: #305458;
+    padding: 10px 10px 10px 23px;
+    outline: none;
+    border: none;
+    width: 100%;
+    height: 101px;
+    border-radius: 0px;
+}

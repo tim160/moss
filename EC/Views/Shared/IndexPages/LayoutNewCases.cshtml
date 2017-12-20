@@ -111,6 +111,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <link rel="stylesheet" href="~/Content/newCase.css" />
+    <link rel="stylesheet" href="~/Content/anotherDialog.css" />
     <link rel="stylesheet" href="~/Content/jquery-ui.css" />
 
     <title>@ViewBag.Title</title>
@@ -141,7 +142,7 @@
     <input type="hidden" id="_report_id" value="@Html.Raw(_report_id)" />
     <input type="hidden" id="user_id" value="@Html.Raw(user_id)" />
 
-    @*Html.Partial("~/Views/Shared/EditorTemplates/CreateTaskModal.cshtml", new ViewDataDictionary {
+    @Html.Partial("~/Views/Shared/EditorTemplates/CreateTaskModal.cshtml", new ViewDataDictionary {
                            { "normal_button_promotion", normal_button_promotion },
                            { "Res_or_comp", Res_or_comp },
                            { "overlay_title", overlay_title },
@@ -153,7 +154,7 @@
                            {"company_outcomes", company_outcomes },
                            { "report_id", ViewBag.report_id },
                            { "is_cc", is_cc }
-                    })*@
+                    })
 
 
     <header class="header">
@@ -321,7 +322,7 @@
                     <span class="breadcrumbs-info__current-page-status"></span>
                     <div class="breadcrumbs-info__current-page-text">@(Request.Url.AbsoluteUri.ToLower().Contains("newreport") ? report_name_code : report_name)</div>
                 </div>
-                <a href="#" class="btn-link">@Res_or_comp</a>
+                <a href="#" class="btn-link acceptCaseBtn">@Res_or_comp</a>
             </div>
             <ul class="breadcrumbs-mediators">
                 @foreach (var user in rm._mediators_whoHasAccess_toReport)
@@ -401,6 +402,10 @@
             $("#escalate_btn").val(9);
             $("#_overlay_title").text("@Html.Raw(GlobalRes.CloseCaseUp)");
             $("#textbox_title").text("@Html.Raw(same_mediator_warning)");
+        });
+
+        $('.acceptCaseBtn').on('click', function () {
+            $('#anotherDialog').show();
         });
     </script>
 </body>
