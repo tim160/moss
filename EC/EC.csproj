@@ -272,6 +272,7 @@
     <Content Include="App\services\onLeaveService.js" />
     <Content Include="App\util\fireEventsController.js" />
     <Content Include="App\util\parentController.js" />
+    <Content Include="Content\anotherDialog.css" />
     <Content Include="Content\assets\template\css\reset.css" />
     <Content Include="Content\assets\template\css\style.css" />
     <Content Include="Content\assets\template\img\close.png" />
