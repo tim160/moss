@@ -79,7 +79,14 @@
                         </td>
                         <td>
                             <p class="recipient">
-                                @((attachment.visible_reporter == null || attachment.visible_reporter == true) ? "Visible to Reporter & Case Administrators" : "Visible to Case Administrators")
+                                @if (attachment.user_id != rm._report.reporter_user_id)
+                                {
+                                    @((attachment.visible_reporter == null || attachment.visible_reporter == true) ? "Visible to Reporter & Case Administrators" : "Visible to Case Administrators")
+                                }
+                                else
+                                {
+                                    <span>Uploaded by reporter</span>
+                                }
                             </p>
                         </td>
                         <td>
