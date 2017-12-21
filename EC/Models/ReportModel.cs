@@ -424,6 +424,17 @@ namespace EC.Models
                                 else
                                     secondary_type = _report_secondary_type.secondary_type_nm.Trim();
                             }
+                            else if (_report_secondary_type.secondary_type_id == 0)
+                            {
+                                if (secondary_type.Length > 0)
+                                {
+                                    secondary_type = secondary_type + ", " + GlobalRes.Other;
+                                }
+                                else
+                                {
+                                    secondary_type = GlobalRes.Other;
+                                }
+                            }
                         }
 
                     }
