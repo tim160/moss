@@ -53,7 +53,7 @@ namespace EC.Controllers.API
                             values = g.GroupBy(x => x).Select(x => new
                             {
                                 x = x.Key,
-                                y = DB.report.Join(DB.report_cc_crime, r => r.id, c => c.report_id, (r, c) => new { report = r, crime = c })
+                                y = DB.report.Join(DB.report_cc_crime.Where(rcc => rcc.cc_crime_statistics_category_id == model.Category || model.Category == 0), r => r.id, c => c.report_id, (r, c) => new { report = r, crime = c })
                                .Count(z => 
                                     z.report.reported_dt.Year == x.Key 
                                     & z.crime.cc_crime_statistics_location_id == g.Key.crime_location.id
