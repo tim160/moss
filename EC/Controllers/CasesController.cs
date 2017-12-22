@@ -28,7 +28,7 @@ namespace EC.Controllers
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Index", "Account", new { returnUrl = Request.Url.LocalPath });
 
             ViewBag.pending_report_ids = PendingReports();
 
@@ -69,6 +69,7 @@ namespace EC.Controllers
             ViewBag.completed_report_counters = UnreadReportsInProgressNumber(completed_report_ids, user.id);
             ViewBag.spam_report_counters = UnreadReportsInProgressNumber(spam_report_ids, user.id);
             ViewBag.closed_report_counters = UnreadReportsInProgressNumber(closed_report_ids, user.id);
+            ViewBag.newCase = Request.Params.AllKeys.FirstOrDefault(x => x == "stylenewcase");
 
             #region EC-CC Viewbag
             ViewBag.is_cc = is_cc;

@@ -7,7 +7,7 @@
         
     }
 <link rel="stylesheet" href="/Content/login.css" />
-<form action="/Account/Login" method="post">
+<form action="@Url.Action("Login", "Account", new { returnUrl = Request.Params["returnUrl"] })" method="post">
     <div class="loginFormHeader">
         <p class="loginTitle">@GlobalRes.CheckYourCase.ToUpper()</p>
     </div>

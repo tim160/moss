@@ -23,7 +23,7 @@ namespace EC.Controllers
         private readonly UserModel userModel = UserModel.inst;
         //
         // GET: /Account/
-        public ActionResult Index()
+        public ActionResult Index(string returnUrl)
         {
          /*   ReportModel rm = new ReportModel(208);
             DateTime dt = rm.promotion_toactive_status_date();
@@ -56,7 +56,7 @@ namespace EC.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(LoginViewModel model)
+        public ActionResult Login(LoginViewModel model, string returnUrl)
         {
             var user = userModel.Login(model.login, model.password);
             if (user != null)
@@ -65,6 +65,10 @@ namespace EC.Controllers
                 if (user.role_id == 8)
                 {
                     return Redirect("~/ReporterDashboard");
+                }
+                if (returnUrl != null)
+                {
+                    return Redirect(returnUrl);
                 }
                 return Redirect("~/Cases");
                 //Session["userName"] = "";

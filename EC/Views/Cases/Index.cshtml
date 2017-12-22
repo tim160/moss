@@ -35,6 +35,10 @@
             @Html.Partial("~/Views/PartialViews/_ReportPendingNotification.cshtml", new ViewDataDictionary { { "report_id", _report_id }, { "user_id", user_id } })
         }
     }
+    if (ViewBag.newCase != null)
+    {
+        <link rel="stylesheet" href="~/Content/newCase.css" />
+    }
 
     <style>
         td.case {
@@ -111,6 +115,7 @@
             </div>
         </div>
     </div>
+   
     <div id="casesIndex" ng-show="showAsGrid">
         <div class="positionTableCases">
             <table class="tableCasesIndex">
