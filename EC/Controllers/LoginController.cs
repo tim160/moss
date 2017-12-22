@@ -167,6 +167,10 @@ namespace EC.Controllers
                 if (login != null && login.Length > 0)
                 {
                     var user = userModel.Login(login, password);
+                    if (user == null)
+                    {
+                        return "";
+                    }
                     SignIn(user);
                     Session["userName"] = "";
                     Session["userId"] = user.id;

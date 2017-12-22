@@ -190,6 +190,7 @@
                 window.location.href = data;
             } else {
                 $(".text.red").show();
+                $('input[name=password]').val('');
                 return false;
             }
         }).fail(function (error) {
