@@ -171,42 +171,30 @@
         }
 
         function contentCompanyProfileShow() {
-            $('.menuItem:nth-child(9)').click(function () {
+            $('.menuItem:nth-child(8)').click(function () {
                 hideBlock();
                 $('.blockRootCauses').show();
             });
-            $('.menuItem:nth-child(10)').click(function () {
-                hideBlock();
-                $('.blockSecondaryType').show();
-            });
-            $('.menuItem:nth-child(11)').click(function () {
-                hideBlock();
-                $('.blockCaseAdminDepartment').show();
-            });
-            $('.menuItem:nth-child(8)').click(function () {
+            $('.menuItem:nth-child(7)').click(function () {
                 hideBlock();
                 $('.blockOutcomes').show();
             });
-            $('.menuItem:nth-child(7)').click(function () {
+            $('.menuItem:nth-child(6)').click(function () {
                 hideBlock();
                 $('.blockAnonymity').show();
             });
-            $('.menuItem:nth-child(6)').click(function () {
+            $('.menuItem:nth-child(5)').click(function () {
                 hideBlock();
                 $('.blockReporterTypes').show();
             });
-            $('.menuItem:nth-child(5)').click(function () {
+            $('.menuItem:nth-child(4)').click(function () {
                 hideBlock();
                 angular.element($('.blockCaseRouting').children().eq(0)).scope().onShow();
                 $(".blockCaseRouting").show();
             });
-            $('.menuItem:nth-child(4)').click(function () {
-                hideBlock();
-                $('.blockIncidentTypes').show();
-            });
             $('.menuItem:nth-child(3)').click(function () {
                 hideBlock();
-                $('.blockLanguages').show();
+                $('.blockIncidentTypes').show();
             });
             $('.menuItem:nth-child(2)').click(function () {
                 hideBlock();
