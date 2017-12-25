@@ -25,6 +25,7 @@
     bool is_cc = ViewBag.is_cc;
 
 }
+
 <div id="openModal" class="modal case-modal">
     <a href="#" class="closeLink modal-close" rel="modal:close"></a>
     <div class="case-modal__title">Request to close case</div><!-- /.modal-title -->
@@ -58,7 +59,7 @@
             Reason for Case Closure:
         </div><!-- /.case-modal__selectRow-title -->
         <div class="case-modal__selectRow-selectric">
-            <div class="select-container case-modal__selectContainer">
+            <div class="select-container case-modal__selectContainer ddlReasonClosure">
                 <select id="ddlReasonClosure" class="case-modal__selectOption">
                     <option value="0" disabled selected>Select an option...</option>
                     @foreach (case_closure_reason _reason in glb.GetCaseClosureReasonsWithStatus())
@@ -90,6 +91,7 @@
             var promotion_value = @normal_button_value;
 
             if (reason_id == null) {
+                $('.ddlReasonClosure').addClass('has-error');
                 return;
             }
 
