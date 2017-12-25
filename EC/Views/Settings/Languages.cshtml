@@ -1,0 +1,28 @@
+﻿@using EC.App_LocalResources;
+
+@{
+    ViewBag.Title = "Languages";
+    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+}
+
+<div class="blockSettings">
+    @{
+        int active = 6;
+    }
+    @Html.Partial("~/Views/Settings/partial/casesHeared.cshtml", active)
+
+
+    <div class="contentCompanyProfile contentCompanyProfile">
+        <div class="contentSettings">
+            <div class="blockLanguages">
+                <p>This version is only available in English</p>
+                <div class="tableLanguage">
+                    <div style="display: flex;">
+                        <p>@GlobalRes.English</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

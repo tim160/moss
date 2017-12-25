@@ -682,6 +682,8 @@
     <Content Include="Views\NewCase\Messages.cshtml" />
     <Content Include="Views\NewCase\Team.cshtml" />
     <Content Include="Views\NewCase\Attachments.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\CreateTaskModalNew.cshtml" />
+    <Content Include="Views\Settings\Languages.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

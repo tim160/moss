@@ -668,9 +668,24 @@ namespace EC.Controllers
 
             return View("Password", um._user);
         }
+
         public ActionResult casesHeared()
         {
             return PartialView("~/Views/Settings/partial/casesHeared.cshtml");
         }
+
+        public ActionResult Languages()
+        {
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            if (user == null || user.id == 0)
+                return RedirectToAction("Index", "Account", new { returnUrl = Url.Action("Languages", "Settings") });
+
+            UserModel um = new UserModel(user.id);
+            ViewBag.um = um;
+            ViewBag.user_id = user.id;
+
+            return View();
+        }
+        
     }
 }
