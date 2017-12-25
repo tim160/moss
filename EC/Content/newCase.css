@@ -39,38 +39,34 @@
 }
 
 /*--------------------ResetCSS-------------------*/
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html, body,
+.container-fluid ol, 
+.container ol, 
+.container ul{
 	margin: 0;
 	padding: 0;
 	border: 0;
 	font-size: 100%;
 	font: inherit;
-	vertical-align: baseline;
+	vertical-align: middle;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
+.container article, .container aside,
+.container details,.container figcaption,
+.container figure, 
+.container footer, .container header,
+.container hgroup, .container menu,
+.container nav, .container section {
 	display: block;
 }
 body {
 	line-height: 1;
 }
-ol, ul {
+.container ol,
+.container ul{
 	list-style: none;
 }
-table {
+.container table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
@@ -80,13 +76,12 @@ table {
 ========================GENERAL=========================
 =======================================================*/
 
-*{
+.container *{
 	box-sizing: border-box;
-}
-body{
 	font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
 }
-p{
+
+.container p{
 	margin: 0 0 10px 0;
 }
 
@@ -101,38 +96,40 @@ p{
 * html .clearfix             { zoom: 1; } /* IE6 */
 *:first-child+html .clearfix { zoom: 1; } /* IE7 */
 
-strong{
+.container strong{
 	font-weight: bold;
 }
 
-input{
+.container input{
 	padding: 10px 20px;
 	width: 100%;
 	font-size: 14px;
 	font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
 }
-::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
-  color: #848a8b;
-}
-::-moz-placeholder { /* Firefox 19+ */
-  font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
-  color: #848a8b;
-}
-:-ms-input-placeholder { /* IE 10+ */
-  font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
-  color: #848a8b;
-}
-:-moz-placeholder { /* Firefox 18- */
-  font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
-  color: #848a8b;
-}
-textarea{
+.container textarea{
 	padding: 10px 20px;
 	width: 100%;
 	font-size: 14px;
 	font-family: 'OpenSans-Regular', arial, verdana, sans-serif;;
 }
+
+.container ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+  color: #848a8b;
+}
+.container ::-moz-placeholder { /* Firefox 19+ */
+  font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+  color: #848a8b;
+}
+.container :-ms-input-placeholder { /* IE 10+ */
+  font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+  color: #848a8b;
+}
+.container :-moz-placeholder { /* Firefox 18- */
+  font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+  color: #848a8b;
+}
+
 
 .container{
 	margin: 0 auto;
@@ -662,7 +659,156 @@ textarea{
 	.breadcrumbs-info .btn-link{
 		float: left;
 	}
+	.breadcrumbs-info__badge{
+		font-size: 12px;
+		vertical-align: middle;
+		background-color: #CC141A;
+		border-radius: 50%;
+		color: #fff;
+		text-align: center;
+		width: 30px;
+		height: 30px;
+		line-height: 30px;
+		float: left;
+		margin-left: 10px;
+		display: block;
+		text-decoration: none;
+	}
+/*-------------------------Modal dialogue------------------------*/
+.modal a.close-modal{
+	display: none !important;
+}
+.modal.case-modal{
+	background-color: #05b5a2;
+	border-radius: 0;
+	padding: 20px;
+	color: #fff;
+	max-width: 750px;
+}
+.closeLink{
+	display: inline-block;
+	vertical-align: middle;
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	height: 20px;
+	width: 20px;
+	text-decoration: none;
+}
+.closeLink:after{
+	content: "\00D7";
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-size: 30px;
+	line-height: 20px;
+	color: #fff;
+}
+.closeLink.modal-close{
+	top: 24px;
+}
 
+.case-modal__title{
+	color: #fff;
+	font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+	font-size: 24px;
+	margin-bottom: 30px;
+}
+
+
+.case-modal__selectRow{
+	display: block;
+	margin-bottom: 20px;
+}
+	.case-modal__selectRow-title{
+		display: inline-block;
+		width: calc(40% - 20px);
+		float: left;
+		font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+		font-size: 16px;
+		color: #aeb3b4;
+		background-color: #fff;
+		vertical-align: middle;
+		padding: 0 10px;
+		line-height: 64px;
+	}
+	.case-modal__selectRow-selectric{
+		display: inline-block;
+		vertical-align: middle;
+		width: 60%;
+		float: left;
+	}
+
+.select-container{
+	font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+}
+.case-modal__selectContainer .selectric{
+	border: none;
+	background-color: #f2f7f7;
+}
+.case-modal__selectContainer .selectric .label{
+	height: 64px;
+	line-height: 64px;
+}
+.case-modal__selectContainer .selectric .button{
+	height: 64px;
+	line-height: 64px;
+}
+.case-modal__selectContainer .selectric-items li,
+.case-modal__selectContainer .selectric .label{
+	font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+	font-size: 18px;
+	color: #727c7e;
+}
+.case-modal__selectContainer .selectric .label{
+	margin-left: 20px;
+}
+.case-modal__selectContainer .selectric-items li{
+	padding: 20px 20px;
+}
+.case-modal__selectContainer .selectric-items li.highlighted{
+	background-color: #e5ebeb;
+}
+.case-modal__selectContainer .selectric-items li:hover{
+	background-color: #e5ebeb;
+}
+
+.case-modal__selectContainer .selectric .button:after{
+	top: 8px;
+	border: 8px solid transparent;
+	border-top-color: #848A8B;
+}
+.case-modal__selectContainer li[data-index="0"]{
+	color: #ccc;
+	cursor: default;
+}
+
+.case-modal__linkBlockBottom{
+	display: block;
+	width: 100%;
+	margin-top: 50px;
+	margin-bottom: 10px;
+}
+	.case-modal__linkBtn{
+		float: right;
+	}
+.whiteBtn{
+	display: block;
+	text-decoration: none;
+	color: #fff;
+	font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
+	font-size: 14px;
+	text-transform: uppercase;
+	border-radius: 2px;
+	padding: 6px 12px;
+	background-color: transparent;
+	border: 1px solid transparent;
+}
+.whiteBtn:hover{
+	background-color: #fff;
+	color: #05b5a2;
+	border: 1px solid #fff;
+}
 /*---------------------------------btn-link-------------------------------*/
 .btn-link{
 	display: inline-block;

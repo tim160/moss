@@ -127,6 +127,14 @@
     <script src="~/Libs/angular-animate/angular-animate.min.js"></script>
     <script src="~/Libs/angular-nvd3/dist/angular-nvd3.min.js"></script>
     <script src="~/Scripts/dis.js"></script>
+
+    <!-- Modal popUp http://jquerymodal.com/ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
+    <!-- Custom dropDown selicts http://selectric.js.org/ -->
+    <script src="~/libs/Selectric/jquery.selectric.min.js"></script>
+    <link rel="stylesheet" href="~/libs/Selectric/selectric.css">
 </head>
 <body ng-app="EC">
     <!-- Begin Inspectlet Embed Code -->
@@ -142,16 +150,16 @@
     <input type="hidden" id="_report_id" value="@Html.Raw(_report_id)" />
     <input type="hidden" id="user_id" value="@Html.Raw(user_id)" />
 
-    @Html.Partial("~/Views/Shared/EditorTemplates/CreateTaskModal.cshtml", new ViewDataDictionary {
+    @Html.Partial("~/Views/Shared/EditorTemplates/CreateTaskModalNew.cshtml", new ViewDataDictionary {
                            { "normal_button_promotion", normal_button_promotion },
                            { "Res_or_comp", Res_or_comp },
                            { "overlay_title", overlay_title },
                            { "textbox_title", textbox_title },
-                           {"investigationstatus", investigationstatus },
-                           {"left_button_promotion", left_button_promotion },
-                           {"normal_button_value", normal_button_value },
-                           {"left_button_value", left_button_value },
-                           {"company_outcomes", company_outcomes },
+                           { "investigationstatus", investigationstatus },
+                           { "left_button_promotion", left_button_promotion },
+                           { "normal_button_value", normal_button_value },
+                           { "left_button_value", left_button_value },
+                           { "company_outcomes", company_outcomes },
                            { "report_id", ViewBag.report_id },
                            { "is_cc", is_cc }
                     })
@@ -322,7 +330,10 @@
                     <span class="breadcrumbs-info__current-page-status"></span>
                     <div class="breadcrumbs-info__current-page-text">@(Request.Url.AbsoluteUri.ToLower().Contains("newreport") ? report_name_code : report_name)</div>
                 </div>
+                @*
                 <a href="#" class="btn-link acceptCaseBtn">@Res_or_comp</a>
+                *@
+                <a href="#openModal" class="btn-link" rel="modal:open">@Res_or_comp</a>
             </div>
             <ul class="breadcrumbs-mediators">
                 @foreach (var user in rm._mediators_whoHasAccess_toReport)
