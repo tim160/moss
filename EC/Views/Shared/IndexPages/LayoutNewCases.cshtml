@@ -336,10 +336,14 @@
             <ul class="breadcrumbs-mediators">
                 @foreach (var user in rm._mediators_whoHasAccess_toReport)
                 {
+                    var owner = rm._report_owners.FirstOrDefault(x => x.report_id == _report_id && x.user_id == user.id && x.status_id == 2) == null;
                     <li class="breadcrumbs-mediators__li">
                         <a href="#" class="breadcrumbs-mediators__a">
                             <img src="@(user.photo_path.Trim() != "" ? Url.Content(user.photo_path.Trim()) : Url.Content("~/Content/Icons/noPhoto.png"))" alt="" class="breadcrumbs-mediators__img" />
-                            <span class="profile-status @(rm._report_owners.FirstOrDefault(x => x.report_id == _report_id && x.user_id == user.id && x.status_id == 2) == null ? "" : "online")"></span>
+                            @if ((user.role_id == 4) || (user.role_id == 5))
+                            {
+                                <span class="profile-status @(owner ? "" : "online")"></span>
+                            }
                         </a>
                     </li>
                 }
