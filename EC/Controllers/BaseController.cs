@@ -85,5 +85,14 @@ namespace EC.Controllers
             httpContext.Response.Cookies.Remove(ECGlobalConstants.AuthUserCookies);
             return RedirectToAction("Start", "Index");
         }
+
+        new public RedirectToRouteResult RedirectToAction(string actionName, string controllerName)
+        {
+            if ((actionName == "Index") && (controllerName == "Account"))
+            {
+                return base.RedirectToAction(actionName, controllerName, new { returnUrl = Request.Url.LocalPath });
+            }
+            return base.RedirectToAction(actionName, controllerName, null);
+        }
     }
 }
