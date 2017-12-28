@@ -5,14 +5,19 @@
     angular
         .module('EC')
         .controller('CasesController',
-            ['$scope', '$filter', 'orderByFilter', 'CasesService', CasesController]);
+            ['$scope', '$filter', '$location', 'orderByFilter', 'CasesService', CasesController]);
 
-    function CasesController($scope, $filter, orderByFilter, CasesService) {
+    function CasesController($scope, $filter, $location, orderByFilter, CasesService) {
         $scope.showAsGrid = true;
         $scope.mode = 1;
         $scope.reports = [];
         $scope.sortColumn = 'case_number';
         $scope.sortColumnDesc = true;
+        var tab = $filter('parseUrl')($location.$$absUrl, 'mode').toLowerCase();
+        $scope.mode = tab === 'active' ? 1 : $scope.mode;
+        $scope.mode = tab === 'completed' ? 2 : $scope.mode;
+        $scope.mode = tab === 'closed' ? 5 : $scope.mode;
+        $scope.mode = tab === 'spam' ? 3 : $scope.mode;
 
         $scope.counts = {
             Active: 0,

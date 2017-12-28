@@ -36,7 +36,7 @@
             Select Case Reviewer to Sign-Off
         </div><!-- /.case-modal__selectRow-title -->
         <div class="case-modal__selectRow-selectric">
-            <div class="select-container case-modal__selectContainer">
+            <div class="select-container case-modal__selectContainer ddlSignOffMediator">
                 <select id="ddlSignOffMediator" class="case-modal__selectOption" op>
                     <option value="0" disabled selected>Select an option...</option>
                     @foreach (user _user in rm._mediators_whoHasAccess_toReport)
@@ -94,6 +94,10 @@
                 $('.ddlReasonClosure').addClass('has-error');
                 return;
             }
+            if (sign_off_mediator_id == null) {
+                $('.ddlSignOffMediator').addClass('has-error');
+                return;
+            }
 
             if (_report_id > 0 && user_id > 0) {
                 $.ajax({
@@ -118,9 +122,9 @@
                         if (promotion_value == 3)
                             str = '/cases/index';
                         if (promotion_value == 4)
-                            str = '/cases/completed';
+                            str = '/cases/index/completed';
                         if (promotion_value == 9)
-                            str = '/cases/closed';
+                            str = '/cases/index/closed';
 
                         window.location.href = str;
                     }
