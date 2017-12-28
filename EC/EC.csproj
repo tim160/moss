@@ -1111,6 +1111,7 @@
     <Compile Include="Utils\Auth\Repo.cs" />
     <Compile Include="Utils\Auth\User.cs" />
     <Compile Include="Utils\Auth\UserIndentity .cs" />
+    <Compile Include="Utils\CustomContractResolver .cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="angular\factories\" />

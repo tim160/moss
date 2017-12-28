@@ -35,10 +35,6 @@
             @Html.Partial("~/Views/PartialViews/_ReportPendingNotification.cshtml", new ViewDataDictionary { { "report_id", _report_id }, { "user_id", user_id } })
         }
     }
-    if (ViewBag.newCase != null)
-    {
-        <link rel="stylesheet" href="~/Content/newCase.css" />
-    }
 
     <style>
         td.case {
@@ -117,96 +113,134 @@
     </div>
    
     <div id="casesIndex" ng-show="showAsGrid">
-        <div class="positionTableCases">
-            <table class="tableCasesIndex">
-                <thead>
-                    <tr>
-                        <td class="case" ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('case_number')">
-                            <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'case_number'" />
-                            case
-                        </td>
-                        <td class="stage" ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('current_status')">
-                            <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'current_status'" />
-                            stage
-                        </td>
-                        <td class="reportDate" ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('case_dt_s')">
-                            <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'case_dt_s'" />
-                            Report date
-                        </td>
-                        <td class="severity" ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('severity')">
-                            <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'severity'" />
-                            Severity
-                        </td>
-                        <td class="age" ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('total_days')">
-                            <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'total_days'" />
-                            age
-                        </td>
-                        <td class="incidentType" ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('case_secondary_types')">
-                            <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'case_secondary_types'" />
-                            Incident Type
-                        </td>
-                        <td class="location" ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('location')">
-                            <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'location'" />
-                            Location
-                        </td>
-                        <td class="messages" ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('new_messages')">
-                            <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'new_messages'" />
-                            messages
-                        </td>
-                        <td class="task" ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('new_tasks')">
-                            <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'new_tasks'" />
-                            task
-                        </td>
-                        <td class="team" ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('team_number')">
-                            <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'team_number'" />
-                            team
-                        </td>
-                        @if (is_cc == true)
-                        {
-                            <td class="campusAlert" ng-class="{'revertIcon' : sortColumnDesc}" ng-click="sort('cc_is_life_threating')">
-                                <img src="~/Content/Icons/bfa_sort-desc_simple-black_512x512.png" ng-show="sortColumn == 'cc_is_life_threating'" />
-                                Campus Alert
-                            </td>
-                        }
+        <div class="container mainNavigationTabs__tabContent-container ">
+            <div id="mainTab-ActiveCases" class="mainNavigationTabs__tabContent active">
+                <div class="dashboard-container">
+                    <div class="divider p-tb-20"></div><!-- /.divider p-tb-20 -->
+                    <div class="dashboard">
+                        <div class="dashboard-rowHeader clearfix">
+                            <div class="dashboard-col__case dashboard-colHeader clearfix" ng-click="sort('case_number')">
+                                <div class="dashboard-colHeader__text">
+                                    Case
+                                </div>
+                                <div class="dashboard-colHeader__sortArrow sortArrow" ng-class="sortClass('case_number')"></div>
+                            </div><!-- /.dashboard-col__Case dashboard-colHeader -->
+                            <div class="dashboard-col__stage dashboard-colHeader clearfix" ng-click="sort('current_status')">
+                                <div class="dashboard-colHeader__text">
+                                    Stage
+                                </div>
+                                <div class="dashboard-colHeader__sortArrow sortArrow" ng-class="sortClass('current_status')"></div>
+                            </div><!-- /.dashboard-col__Stage dashboard-colHeader -->
+                            <div class="dashboard-col__age dashboard-colHeader clearfix" ng-click="sort('total_days')">
+                                <div class="dashboard-colHeader__text">
+                                    Age
+                                </div>
+                                <div class="dashboard-colHeader__sortArrow sortArrow" ng-class="sortClass('total_days')"></div>
+                            </div><!-- /.dashboard-col__Age dashboard-colHeader -->
+                            <div class="dashboard-col__incidentType dashboard-colHeader clearfix" ng-click="sort('case_secondary_types')">
+                                <div class="dashboard-colHeader__text">
+                                    Incident Type
+                                </div>
+                                <div class="dashboard-colHeader__sortArrow sortArrow" ng-class="sortClass('case_secondary_types')"></div>
+                            </div><!-- /.dashboard-col__incidentType dashboard-colHeader -->
+                            <div class="dashboard-col__location dashboard-colHeader clearfix" ng-click="sort('location')">
+                                <div class="dashboard-colHeader__text">
+                                    Location
+                                </div>
+                                <div class="dashboard-colHeader__sortArrow sortArrow" ng-class="sortClass('location')"></div>
+                            </div><!-- /.dashboard-col__location dashboard-colHeader -->
+                            <div class="dashboard-col__reportDate dashboard-colHeader clearfix" ng-click="sort('case_dt_s')">
+                                <div class="dashboard-colHeader__text">
+                                    Report date
+                                </div>
+                                <div class="dashboard-colHeader__sortArrow sortArrow" ng-class="sortClass('case_dt_s')"></div>
+                            </div><!-- /.dashboard-col__reportDate dashboard-colHeader -->
+                            <div class="dashboard-col__messages dashboard-colHeader clearfix" ng-click="sort('new_messages')">
+                                <div class="dashboard-colHeader__text">
+                                    Messages
+                                </div>
+                                <div class="dashboard-colHeader__sortArrow sortArrow" ng-class="sortClass('new_messages')"></div>
+                            </div><!-- /.dashboard-col__messages dashboard-colHeader -->
+                            <div class="dashboard-col__tasks dashboard-colHeader clearfix" ng-click="sort('new_tasks')">
+                                <div class="dashboard-colHeader__text">
+                                    Tasks
+                                </div>
+                                <div class="dashboard-colHeader__sortArrow sortArrow" ng-class="sortClass('new_tasks')"></div>
+                            </div><!-- /.dashboard-col__tasks dashboard-colHeader -->
+                            <div class="dashboard-col__team dashboard-colHeader clearfix" ng-click="sort('team_number')">
+                                <div class="dashboard-colHeader__text">
+                                    Team
+                                </div>
+                                <div class="dashboard-colHeader__sortArrow sortArrow" ng-class="sortClass('team_number')"></div>
+                            </div><!-- /.dashboard-col__team dashboard-colHeader -->
+                        </div><!-- /.dashboard-rowHeader -->
 
-                        <td></td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="report in reports" ng-click="openCase(report.report_id)">
-                        <td class="firstColumn"><div class="rectangle" style="background-color:#{{report.case_color_code}}"></div>{{report.case_number}}</td>
-                        <td><span class="OpenSansBold upperCase grey">{{report.current_status}}</span><br /><span class="timeStatus OpenSansSemibold red"> {{report.days_left}} days left</span></td>
-                        <td>{{report.case_dt}}</td>
-                        <td>{{report.severity_s}}</td>
-                        <td>{{report.total_days}} {{report.total_days == 1 ? ' day' : ' days'}}</td>
-                        <td>{{report.case_secondary_types}}</td>
-                        <td>{{report.location}}</td>
-                        <td>{{report.messages_number}}</td>
-                        <td>{{report.tasks_number}}</td>
-                        <td>
-                            <div>
-                                <div ng-repeat="mediator in report.mediators|limitTo:2">
-                                    <div class="blockPhoto">
-                                        <div class="photoPersonal">
-                                            <a href="/settings/user/{{mediator.id}}">
-                                                <img ng-src="{{mediator.photo_path}}" title="{{mediator.first_nm}}_{{mediator.last_nm}}" ng-show="mediator.id != 0" />
-                                            </a>
-                                            <img src="@Url.Content("~/Content/Icons/noPhoto.png")" ng-show="mediator.id == 0" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div ng-show="report.mediators.length > 2">
-                                    <span>and {{report.mediators.length - 2}} more</span>
-                                </div>
-                            </div>
-                        </td>
-                        @if (is_cc == true)
-                        {
-                            <td class="alarm" ng-class="{'alarm-active' : report.cc_is_life_threating == true, 'alarm-default': report.cc_is_life_threating != true}"></td>
-                        }
-                    </tr>
-                </tbody>
-            </table>
+                        <div class="dashboard-rowbody" ng-repeat="report in reports" ng-click="openCase(report.report_id)">
+                            <div class="rowbody__colorLine colorLine" style="background-color:#{{report.case_color_code}}"></div><!-- /.rowbody__colorLine yellow -->
+                            <div class="dashboard-col__case dashboard-colbody clearfix">
+                                <div class="dashboard-col__case-text">
+                                    {{report.case_number}}
+                                </div><!-- /.dashboard-col__case-text -->
+                            </div><!-- /.dashboard-col__case dashboard-colbody clearfix -->
+                            <div class="dashboard-col__stage dashboard-colbody clearfix">
+                                <div class="dashboard-col__stage-type">
+                                    {{report.current_status}}
+                                </div><!-- /.dashboard-col__stage-type -->
+                                <div class="dashboard-col__stage-date dashboard-col__stage-date_red">
+                                    {{report.days_left}} days left
+                                </div><!-- /.dashboard-col__stage-date -->
+                            </div><!-- /.dashboard-col__stage dashboard-colbody clearfix -->
+                            <div class="dashboard-col__age dashboard-colbody clearfix">
+                                <div class="dashboard-col__age-text">
+                                    {{report.total_days}} {{report.total_days == 1 ? ' day' : ' days'}}
+                                </div><!-- /.dashboard-col__age-text -->
+                            </div><!-- /.dashboard-col__age dashboard-colbody clearfix -->
+                            <div class="dashboard-col__incidentType dashboard-colbody clearfix">
+                                <div class="dashboard-col__incidentType-text">
+                                    {{report.case_secondary_types}}
+                                </div><!-- /.dashboard-col__incidentType-text -->
+                            </div><!-- /.dashboard-col__incidentType dashboard-colbody clearfix -->
+                            <div class="dashboard-col__location dashboard-colbody clearfix">
+                                <div class="dashboard-col__location-text">
+                                    {{report.location}}
+                                </div><!-- /.dashboard-col__location-text -->
+                            </div><!-- /.dashboard-col__location dashboard-colbody clearfix -->
+                            <div class="dashboard-col__reportDate dashboard-colbody clearfix">
+                                <div class="dashboard-col__reportDate-text">
+                                    {{report.case_dt}}
+                                </div><!-- /.dashboard-col__reportDate-text -->
+                            </div><!-- /.dashboard-col__reportDate dashboard-colbody clearfix -->
+                            <div class="dashboard-col__messages dashboard-colbody clearfix">
+                                <div class="dashboard-col__messages-text">
+                                    {{report.messages_number}}
+                                </div><!-- /.dashboard-col__messages-text -->
+                            </div><!-- /.dashboard-col__messages dashboard-colbody clearfix -->
+                            <div class="dashboard-col__tasks dashboard-colbody clearfix">
+                                <div class="dashboard-col__tasks-text">
+                                    {{report.tasks_number}}
+                                </div><!-- /.dashboard-col__tasks-text -->
+                            </div><!-- /.dashboard-col__tasks dashboard-colbody clearfix -->
+                            <div class="dashboard-col__team dashboard-colbody clearfix">
+                                <ul class="team-list clearfix">
+                                    <li class="team-list__li" ng-repeat="mediator in report.mediators|limitTo:3">
+                                        <a href="/settings/user/{{mediator.id}}" class=" team-list__a">
+                                            <img ng-src="{{mediator.photo_path == '' ? '/Content/Icons/noPhoto.png' : mediator.photo_path}}" alt="" class="team-list__logo" />
+                                            <span class="profile-status" ng-class="{'online' : isOwner(report, mediator) }" ng-show="mediator.role_id == 4 || mediator.role_id == 5"></span>
+                                        </a>
+                                    </li><!-- /.team-list__li -->
+                                    <li class="team-list__li" ng-show="report.mediators.length > 3">
+                                        <a href="#!" class="team-list__a">
+                                            +
+                                        </a>
+                                    </li><!-- /.team-list__li -->
+                                </ul><!-- /.team-list -->
+                            </div><!-- /.dashboard-col__team dashboard-colbody clearfix -->
+                        </div><!-- /.dashboard-rowbody -->
+
+                    </div><!-- /.dashboard -->
+                    <div class="divider p-tb-20"></div><!-- /.divider p-tb-20 -->
+                </div><!-- /.container -->
+            </div>
         </div>
     </div>
 

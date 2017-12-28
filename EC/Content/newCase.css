@@ -39,7 +39,10 @@
 }
 
 /*--------------------ResetCSS-------------------*/
-html, body,
+html, body{
+	margin: 0;
+	padding: 0;
+}
 .container-fluid ol, 
 .container ol, 
 .container ul{
@@ -47,7 +50,7 @@ html, body,
 	padding: 0;
 	border: 0;
 	font-size: 100%;
-	font: inherit;
+	/*font: inherit;*/
 	vertical-align: middle;
 }
 /* HTML5 display-role reset for older browsers */
@@ -58,9 +61,6 @@ html, body,
 .container hgroup, .container menu,
 .container nav, .container section {
 	display: block;
-}
-body {
-	line-height: 1;
 }
 .container ol,
 .container ul{
@@ -134,6 +134,7 @@ body {
 .container{
 	margin: 0 auto;
 	padding: 0 30px;
+	line-height: 1;
 }
 .row{
 	margin-bottom: 20px;
@@ -377,7 +378,9 @@ body {
 /*======================================================
 =========================header=========================
 =======================================================*/
-
+header.header{
+	line-height: 1;
+}
 .header{
 	background-color: #e9f2f2;
 	border-bottom: 1px solid #c8c7c7;
@@ -527,6 +530,7 @@ body {
 				height: 32px;
 				min-width: 1px;
 				color: #7e9297;
+				line-height: 1;
 			}
 				.userNavigation__a:active .userNavigation__info{
 					color: rgb(56, 73, 77);
@@ -719,6 +723,10 @@ body {
 .case-modal__selectRow{
 	display: block;
 	margin-bottom: 20px;
+	border: 1px solid transparent;
+}
+.has-error{
+	border: 1px solid red !important;
 }
 	.case-modal__selectRow-title{
 		display: inline-block;
@@ -2411,6 +2419,7 @@ input.personDataTextBox{
 .hotNews .col-2,
 .hotNews .col-10{
 	padding-left: 0;
+	line-height: 40px;
 }
 	.hotNews-id{
 		font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
@@ -2475,7 +2484,7 @@ input.personDataTextBox{
 			}
 			.dashboard-colHeader__sortArrow{
 				display: none;
-				margin-top: 2px;
+				margin-top: 4px;
 				margin-right: 5px;
 				float: right;
 			}
@@ -2505,7 +2514,7 @@ input.personDataTextBox{
 		}
 
 		.dashboard-col__stage{
-			width: 14%;
+			width: 9%;
 		}
 		.dashboard-col__stage.dashboard-colHeader{}
 
@@ -2515,7 +2524,7 @@ input.personDataTextBox{
 		.dashboard-col__age.dashboard-colHeader{}
 
 		.dashboard-col__incidentType{
-			width: 23%;
+			width: 22%;
 		}
 		.dashboard-col__incidentType.dashboard-colHeader{}
 

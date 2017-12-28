@@ -8,6 +8,8 @@ using System.Web.Routing;
 using System.Web.Security;
 using System.Web.SessionState;
 using System.Web.Http;
+using EC.Utils;
+using Newtonsoft.Json;
 
 namespace EC
 {
@@ -24,6 +26,12 @@ namespace EC
             ViewEngines.Engines.Clear();
             ViewEngines.Engines.Add(new RazorViewEngine());
             log4net.Config.XmlConfigurator.Configure();
+
+            var settings = new JsonSerializerSettings();
+            JsonConvert.DefaultSettings = () => new JsonSerializerSettings
+            {
+                ContractResolver = new CustomContractResolver(),
+            };
         }
 
         void Application_BeginRequest(object sender, EventArgs e)

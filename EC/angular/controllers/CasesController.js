@@ -21,6 +21,22 @@
             Closed: 0,
         };
 
+        $scope.sortClass = function (column) {
+            if (column === $scope.sortColumn) {
+                return !$scope.sortColumnDesc ? 'sortArrow_down' : 'sortArrow_up';
+            }
+            return '';
+        };
+
+        $scope.isOwner = function (report, mediator) {
+            for (var i = 0; i < report.AdvInfo.owners.length; i++) {
+                if (report.AdvInfo.owners[i].user_id === mediator.id) {
+                    return true;
+                }
+            }
+            return false;
+        };
+
         $scope.refresh = function (mode, preload) {
             CasesService.get({ ReportFlag: mode, Preload: preload }, function (data) {
                 $('.headerBlockTextRight > span').text(data.Title);
