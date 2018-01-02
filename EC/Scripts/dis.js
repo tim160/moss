@@ -338,16 +338,20 @@
         $scope.refresh($scope.mode);
 
         $scope.openCase = function (id) {
-            window.location ='/newCase/Index/' + id;
+            if ($scope.mode === 3) {
+                window.location = '/NewReport/' +id;
+            } else {
+                window.location = '/newCase/Index/' + id;
+            }
         };
 
         $scope.sort = function (column) {
             if (column === $scope.sortColumn) {
                 $scope.sortColumnDesc = !$scope.sortColumnDesc;
-            } else {
+        } else {
                 $scope.sortColumn = column;
                 $scope.sortColumnDesc = false;
-            }
+        }
 
             $scope.reports = orderByFilter($scope.reports, $scope.sortColumn, $scope.sortColumnDesc);
         };
