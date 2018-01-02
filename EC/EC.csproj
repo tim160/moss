@@ -684,6 +684,9 @@
     <Content Include="Views\NewCase\Attachments.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\CreateTaskModalNew.cshtml" />
     <Content Include="Views\Settings\Languages.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ReOpenModalNew.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\AwaitingApprovalModalNew.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ApproveDialogModalNew.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
