@@ -1,0 +1,76 @@
+﻿@using EC.App_LocalResources;
+@using EC.Models;
+@using EC.Models.Database;
+@using EC.Constants;
+
+@{
+    string Res_or_comp = ViewBag.Res_or_comp;
+    string overlay_title = ViewBag.overlay_title;
+    string textbox_title = ViewBag.textbox_title;
+    string normal_button_promotion = ViewBag.normal_button_promotion;
+    string normal_button_value = ViewBag.normal_button_value;
+    int investigationstatus = (int)ViewBag.investigationstatus;
+
+    string left_button_promotion = ViewBag.left_button_promotion; // @GlobalRes.Returnnvestigation.ToUpper()
+    string left_button_value = ViewBag.left_button_value;
+
+    GlobalFunctions glb = new GlobalFunctions();
+    List<company_outcome> _all_outcomes = ViewBag.company_outcomes;
+    int report_id = ViewBag.report_id;
+    if (ViewBag.report_id == null)
+    {
+        report_id = 0;
+    }
+    ReportModel rm = new ReportModel(report_id);
+    bool is_cc = ViewBag.is_cc;
+
+    string same_mediator_warning = GlobalRes.AddFurtherNotes;
+    var user_id = ViewBag.user_id;
+    if (rm != null && user_id == rm._last_investigation_status_user_id)
+    {
+        same_mediator_warning = GlobalRes.RecommendSecond1 + " " + GlobalRes.RecommendSecond2;
+    }
+}
+
+<div id="openModal" class="modal case-modal">
+    <a href="#" class="closeLink modal-close" rel="modal:close"></a>
+    <div class="case-modal__title">Case Closure Report</div><!-- /.modal-title -->
+
+    <p>Case Closure Request was sent for approval.</p>
+    <div class="case-modal__selectRow clearfix">
+        <div class="case-modal__selectRow-title">
+        </div><!-- /.case-modal__selectRow-title -->
+        <div class="case-modal__selectRow-selectric">
+            <div class="select-container case-modal__selectContainer ddlSignOffMediator">
+            </div>
+        </div><!-- /.case-modal__selectRow-selectric -->
+    </div><!-- /.case-modal__selectRow -->
+    <div class="case-modal__linkBlockBottom clearfix">
+        <a href="#approveDialog" rel="modal:open" id="approve_close" class="case-modal__linkBtn whiteBtn" value="@normal_button_value">APPROVE</a>
+        <a href="#approveDialog" rel="modal:open" id="return_investigation" class="case-modal__linkBtn whiteBtn" value="@normal_button_value">RETURN FOR INVESTIGATION</a>
+    </div><!-- /.case-modal__linkBlockBottom -->
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#return_investigation").on('click', function (el) {
+
+            $("#approveDialog").toggle();
+            $("#txtEscalate").attr('placeholder', "@Html.Raw(GlobalRes.AddReasonWhy)");
+
+            $("#escalate_btn").text("@Html.Raw(GlobalRes.Returnnvestigation)");
+            $("#escalate_btn").val(3);
+            $("#_overlay_title").text("@Html.Raw(GlobalRes.Returnnvestigation)");
+            $("#textbox_title").text("@Html.Raw(GlobalRes.AddReasonWhy)");
+        });
+        $("#approve_close").on('click', function (el) {
+
+            $("#approveDialog").toggle();
+            $("#txtEscalate").attr('placeholder', "@Html.Raw(same_mediator_warning)");
+            $("#escalate_btn").text("@Html.Raw(GlobalRes.CloseCaseUp)");
+            $("#escalate_btn").val(9);
+            $("#_overlay_title").text("@Html.Raw(GlobalRes.CloseCaseUp)");
+            $("#textbox_title").text("@Html.Raw(same_mediator_warning)");
+        });
+    });
+</script>

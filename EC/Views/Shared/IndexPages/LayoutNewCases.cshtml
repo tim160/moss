@@ -100,6 +100,11 @@
         if ((investigationstatus == 9) && (_user.role_id == 4 || _user.role_id == 5))
         {
             Res_or_comp = GlobalRes.Reopen.ToUpper();
+            normal_button_value = ECGlobalConstants.investigation_status_investigation.ToString();
+        }
+        if (((rm._investigation_status == ECGlobalConstants.investigation_status_completed || rm._investigation_status == ECGlobalConstants.investigation_status_resolution)))
+        {
+            Res_or_comp = GlobalRes.Awaitingapproval;
         }
     }
 }
@@ -148,20 +153,58 @@
     <input type="hidden" id="_report_id" value="@Html.Raw(_report_id)" />
     <input type="hidden" id="user_id" value="@Html.Raw(user_id)" />
 
-    @Html.Partial("~/Views/Shared/EditorTemplates/CreateTaskModalNew.cshtml", new ViewDataDictionary {
-                           { "normal_button_promotion", normal_button_promotion },
-                           { "Res_or_comp", Res_or_comp },
-                           { "overlay_title", overlay_title },
-                           { "textbox_title", textbox_title },
-                           { "investigationstatus", investigationstatus },
-                           { "left_button_promotion", left_button_promotion },
-                           { "normal_button_value", normal_button_value },
-                           { "left_button_value", left_button_value },
-                           { "company_outcomes", company_outcomes },
-                           { "report_id", ViewBag.report_id },
-                           { "is_cc", is_cc }
-                    })
+    @if (investigationstatus == 9)
+    {
+        @Html.Partial("~/Views/Shared/EditorTemplates/ReOpenModalNew.cshtml", new ViewDataDictionary {
+                               { "normal_button_promotion", normal_button_promotion },
+                               { "Res_or_comp", Res_or_comp },
+                               { "overlay_title", overlay_title },
+                               { "textbox_title", textbox_title },
+                               { "investigationstatus", investigationstatus },
+                               { "left_button_promotion", left_button_promotion },
+                               { "normal_button_value", normal_button_value },
+                               { "left_button_value", left_button_value },
+                               { "company_outcomes", company_outcomes },
+                               { "report_id", ViewBag.report_id },
+                               { "is_cc", is_cc }
+                        })
+    }
+    else if (((rm._investigation_status == ECGlobalConstants.investigation_status_completed || rm._investigation_status == ECGlobalConstants.investigation_status_resolution)))
+    {
+        @Html.Partial("~/Views/Shared/EditorTemplates/AwaitingApprovalModalNew.cshtml", new ViewDataDictionary {
+                               { "normal_button_promotion", normal_button_promotion },
+                               { "Res_or_comp", Res_or_comp },
+                               { "overlay_title", overlay_title },
+                               { "textbox_title", textbox_title },
+                               { "investigationstatus", investigationstatus },
+                               { "left_button_promotion", left_button_promotion },
+                               { "normal_button_value", normal_button_value },
+                               { "left_button_value", left_button_value },
+                               { "company_outcomes", company_outcomes },
+                               { "report_id", ViewBag.report_id },
+                               { "is_cc", is_cc }
+                        })
+        @Html.Partial("~/Views/Shared/EditorTemplates/ApproveDialogModalNew.cshtml", new ViewDataDictionary
+        {
 
+        })
+    }
+    else
+    {
+        @Html.Partial("~/Views/Shared/EditorTemplates/CreateTaskModalNew.cshtml", new ViewDataDictionary {
+                               { "normal_button_promotion", normal_button_promotion },
+                               { "Res_or_comp", Res_or_comp },
+                               { "overlay_title", overlay_title },
+                               { "textbox_title", textbox_title },
+                               { "investigationstatus", investigationstatus },
+                               { "left_button_promotion", left_button_promotion },
+                               { "normal_button_value", normal_button_value },
+                               { "left_button_value", left_button_value },
+                               { "company_outcomes", company_outcomes },
+                               { "report_id", ViewBag.report_id },
+                               { "is_cc", is_cc }
+                        })
+    }    
 
     <header class="header">
         @{

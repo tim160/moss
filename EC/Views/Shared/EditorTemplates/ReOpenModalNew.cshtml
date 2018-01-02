@@ -1,0 +1,110 @@
+﻿@using EC.App_LocalResources;
+@using EC.Models;
+@using EC.Models.Database;
+@using EC.Constants;
+
+@{
+    string Res_or_comp = ViewBag.Res_or_comp;
+    string overlay_title = ViewBag.overlay_title;
+    string textbox_title = ViewBag.textbox_title;
+    string normal_button_promotion = ViewBag.normal_button_promotion;
+    string normal_button_value = ViewBag.normal_button_value;
+    int investigationstatus = (int)ViewBag.investigationstatus;
+
+    string left_button_promotion = ViewBag.left_button_promotion; // @GlobalRes.Returnnvestigation.ToUpper()
+    string left_button_value = ViewBag.left_button_value;
+
+    GlobalFunctions glb = new GlobalFunctions();
+    List<company_outcome> _all_outcomes = ViewBag.company_outcomes;
+    int report_id = ViewBag.report_id;
+    if (ViewBag.report_id == null)
+    {
+        report_id = 0;
+    }
+    ReportModel rm = new ReportModel(report_id);
+    bool is_cc = ViewBag.is_cc;
+
+}
+
+<div id="openModal" class="modal case-modal">
+    <a href="#" class="closeLink modal-close" rel="modal:close"></a>
+    <div class="case-modal__title">Re-open case</div><!-- /.modal-title -->
+
+    <p>Add reason why the case requires further investigation.</p>
+    <textarea id="reOpenTextarea" style="width: 100%; height: 100px; overflow: hidden;"></textarea>
+    <div class="case-modal__selectRow clearfix">
+        <div class="case-modal__selectRow-title">
+        </div><!-- /.case-modal__selectRow-title -->
+        <div class="case-modal__selectRow-selectric">
+            <div class="select-container case-modal__selectContainer ddlSignOffMediator">
+            </div>
+        </div><!-- /.case-modal__selectRow-selectric -->
+    </div><!-- /.case-modal__selectRow -->
+    <div class="case-modal__linkBlockBottom clearfix">
+        <a href="#" id="requestToclose" class="case-modal__linkBtn whiteBtn" value="@normal_button_value">RE-OPEN CASE</a>
+    </div><!-- /.case-modal__linkBlockBottom -->
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.case-modal__selectOption').selectric({
+            maxHeight: 240
+        });
+
+        $('#requestToclose').on('click', function () {
+            var description = "";
+            var _report_id = $("#_report_id").val();
+            var user_id = $("#user_id").val();
+            var outcome_id = $("#ddlOutcome").val();
+            var sign_off_mediator_id = $("#ddlSignOffMediator").val();
+            var reason_id = $("#ddlReasonClosure").val();
+            var promotion_value = @normal_button_value;
+
+            if ((promotion_value === 4) && (reason_id == null)) {
+                $('.ddlReasonClosure').addClass('has-error');
+                return;
+            }
+            if ((promotion_value === 4) && (sign_off_mediator_id == null)) {
+                $('.ddlSignOffMediator').addClass('has-error');
+                return;
+            }
+
+            if (_report_id > 0 && user_id > 0) {
+                $.ajax({
+                    method: "POST",
+                    url: "/Case/CloseCase",
+                    data: {
+                        user_id: user_id, 
+                        report_id: _report_id, 
+                        description: description, 
+                        promotion_value: promotion_value,
+                        case_closure_reason_id: reason_id, 
+                        sign_off_mediator_id: sign_off_mediator_id
+                    }
+                }).done(function (data) {
+
+                    if (data == -1) {
+                    }
+
+                    if (data == 1) {
+                        var str = window.location.href;
+
+                        if (promotion_value == 3)
+                            str = '/cases/index';
+                        if (promotion_value == 4)
+                            str = '/cases/index/completed';
+                        if (promotion_value == 9)
+                            str = '/cases/index/closed';
+
+                        window.location.href = str;
+                    }
+                    if (data == 0) {
+                    }
+                }).fail(function (error) {
+                    console.log(error);
+                    return -1;
+                });
+            }
+        });
+    });
+</script>

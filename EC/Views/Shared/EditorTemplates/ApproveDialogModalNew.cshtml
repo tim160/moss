@@ -1,0 +1,94 @@
+﻿@using EC.App_LocalResources;
+@using EC.App_LocalResources;
+@{
+    string overlay_title = GlobalRes.CloseCaseUp;
+    string textbox_title = GlobalRes.Description;
+    string normal_button_promotion = GlobalRes.CloseCaseUp;
+    int normal_button_value = 9;
+}
+
+<div id="approveDialog" class="modal case-modal">
+    <a href="#" class="closeLink modal-close" rel="modal:close"></a>
+    <div class="case-modal__title">@overlay_title</div><!-- /.modal-title -->
+    
+    <div class="case-modal__selectRow clearfix">
+        <textarea class="form-control" type="text" name="txtEscalate" id="txtEscalate" style="width: 100%; height: 100px; overflow: hidden;"></textarea>
+    </div>
+
+    <div class="case-modal__linkBlockBottom clearfix">
+        <a href="#approveDialog" rel="modal:open" id="escalate_btn" class="case-modal__linkBtn whiteBtn" value=""></a>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        var selectedItem = "";
+
+        $("#approveDialog .close1").on('click', function () {
+            $("#approveDialog").toggle();
+        });
+
+        var button = "";
+        $("#escalate_btn").on('click', function (event) {
+            button = $(event.currentTarget).val();
+            sendAjax(button);
+        });
+
+        function sendAjax(promotion_value) {
+            var description = $("#txtEscalate").val();
+            var _report_id = $("#_report_id").val();
+            var user_id = $("#user_id").val();
+
+            if (description != "") {
+
+                if (_report_id > 0 && user_id > 0 && promotion_value != "") {
+                    $.ajax({
+                        method: "POST",
+                        url: "/Case/CloseCase",
+                        data: {
+                        user_id: user_id, report_id: _report_id, description: description, promotion_value: promotion_value, outcome_id: 0, outcome: '',
+                        case_closure_reason_id: 0, executive_summary: '', facts_established: '', investigation_methodology: '', description_outcome: '', recommended_actions: ''
+                    }
+
+                    }).done(function (data) {//data from server
+
+                        if (data == -1) {
+                            // need to re-login
+                        }
+
+                        if (data == 1) {
+                                var str = window.location.href;
+                                if (promotion_value == 3)
+                                    str = '/cases/index';
+                                if (promotion_value == 4)
+                                    str = '/cases/completed';
+                                if (promotion_value == 9)
+                                    str = '/cases/closed';
+
+                                window.location.href = str;
+                        }
+                        if (data == 0) {
+                        }
+                        //  console.log(data.login_nm);
+                        // alert(data);
+                    }).fail(function (error) {
+                        console.log(error);
+                    });
+
+                }
+            } else {
+                $("#txtEscalate").css({ "border": "2px solid red", "border-bottom": "none" });
+                //$(".footerCreateTask2").css("border-top", "1px solid red");
+                $("#txtEscalate").on('focusin', function () {
+                    $("#txtEscalate").css({ "border": "2px solid #05b5a2", "border-bottom": "none" });
+                    //$(".footerCreateTask2").css("border-top", "1px solid #e0e5e6");
+                });
+            }
+        }
+
+
+        function SetValues(promotion_value)
+        {
+        }
+    });
+</script>
