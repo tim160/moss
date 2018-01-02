@@ -71,7 +71,7 @@ namespace EC.Controllers.API
                             cc_is_life_threating = rm._report.cc_is_life_threating,
                             last_investigation_status_date = m_DateTimeHelper.ConvertDateToLongMonthString(rm._last_investigation_status_date),
                             mediators = rm._mediators_whoHasAccess_toReport,
-                            owners = rm._report_owners,
+                            owners = rm._report_owners.Where(z => z.status_id == 2),
                             severity_id = rm._report.severity_id,
                             severity_s = !rm._report.severity_id.HasValue ? "" : severities.FirstOrDefault(z => z.id == rm._report.severity_id).severity_en,
                         };

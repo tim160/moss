@@ -2379,8 +2379,8 @@ namespace EC.Models
                         {
                             Detail = x.MA.by_location_id != null ? "Assigned by Location: " + x.CL.location_en : x.MA.by_secondary_type_id != null ? "Assigned by Incident Type: " + x.ST.secondary_type_en : ""
                         }
-                    );
-                res.AddRange(list.OrderBy(x => x.FullName).ToList());
+                    ).OrderBy(x => x.FullName).ToList();
+                res.AddRange(list);
 
                 //Other
                 res.AddRange(list2
