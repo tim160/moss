@@ -58,6 +58,10 @@
 
     angular.module('EC').filter('parseUrl', function () {
         return function (url, param) {
+            var p = url.indexOf('#');
+            if (p !== -1) {
+                url = url.substring(0, p);
+            }
             if (url.indexOf('?') === -1) {
                 var s = url.split('/');
                 return s[s.length - 1];
