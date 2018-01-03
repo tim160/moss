@@ -389,10 +389,7 @@
                     <li class="breadcrumbs-mediators__li">
                         <a href="#" class="breadcrumbs-mediators__a">
                             <img src="@(user.photo_path.Trim() != "" ? Url.Content(user.photo_path.Trim()) : Url.Content("~/Content/Icons/noPhoto.png"))" alt="" class="breadcrumbs-mediators__img" />
-                            @if ((user.role_id == 4) || (user.role_id == 5))
-                            {
-                                <span class="profile-status @(owner ? "" : "online")"></span>
-                            }
+                            <span class="profile-status @(owner ? "" : "online")"></span>
                         </a>
                     </li>
                 }

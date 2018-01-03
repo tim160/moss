@@ -616,7 +616,7 @@
                             var description = $('.acceptCaseNote textarea').val();
 
                             if ($('#OwnerId').find(":selected").hasClass('needquestion')) {
-                                if (confirm('Add mediator to Case')) {
+                                if (confirm('Add mediator to Case?')) {
                                     reopenOrAcceptCase(@Html.Raw(report_id), @Html.Raw(user_id), description);
                                 }
                                 return;
