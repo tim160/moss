@@ -2345,6 +2345,7 @@ namespace EC.Models
 
                 var list1 = _mediators_whoHasAccess_toReport;
                 var list2 = _involved_mediators_user_list;
+                var list3 = _available_toAssign_mediators;
 
                 //By level
                 res.AddRange(list1
@@ -2384,6 +2385,12 @@ namespace EC.Models
 
                 //Other
                 res.AddRange(list2
+                    .Select(x => new UserViewModel(x) { Detail = "" })
+                    .OrderBy(x => x.FullName)
+                    .ToList()
+                    );
+
+                res.AddRange(list3
                     .Select(x => new UserViewModel(x) { Detail = "" })
                     .OrderBy(x => x.FullName)
                     .ToList()

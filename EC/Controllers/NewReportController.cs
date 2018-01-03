@@ -57,7 +57,7 @@ namespace EC.Controllers.ViewModel
             if ((rm._investigation_status != 1) && (rm._investigation_status != 2) && (rm._investigation_status != 7))
             {
                 // case is not approved to work on it yet, need to approve first. if == 7 - its spam, so they will share the view.
-                return RedirectToAction("Index", "Case", new { id = id });
+                return RedirectToAction("Index", "NewCase", new { report_id = id });
             }
 
             #region EC-CC Viewbag
@@ -278,7 +278,7 @@ namespace EC.Controllers.ViewModel
                     {
                         report_id = report_id,
                         status_id = 2,
-                        user_id = user_id,
+                        user_id = ownerId,
                         created_on = DateTime.Now,
                     };
                     db.report_owner.Add(owner);
