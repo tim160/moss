@@ -75,6 +75,12 @@ namespace EC.Controllers.API
                 };
             }
 
+            var outcomes = DB.company_outcome
+                .AsNoTracking()
+                .Where(x => x.company_id == report.company_id & x.status_id == 2)
+                .OrderBy(x => x.outcome_en)
+                .ToList();
+
             var m = new
             {
                 cc_crime_statistics_categories = DB.cc_crime_statistics_category
@@ -93,9 +99,15 @@ namespace EC.Controllers.API
 
                 reporter = reporter,
 
-                outcomes = DB.company_outcome.Where(x => x.company_id == report.company_id & x.status_id == 2).OrderBy(x => x.outcome_en).ToList(),
-            };
+                outcomes = outcomes,
 
+                rep_outcome = DB.report_case_closure_outcome
+                    .Where(x => x.report_id == filter.Report_id & x.non_mediator_involved_id == null)
+                    .Select(x => new {
+                        outcome = x,
+                        outcome_c = DB.company_outcome.FirstOrDefault(z => z.id == x.outcome_id),
+                    }).FirstOrDefault(),
+            };
 
             return ResponseObject2Json(m);
         }

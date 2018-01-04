@@ -69,6 +69,7 @@
         };
 
         $scope.saveOutcome = function (item, outcome) {
+            console.log(item, outcome);
             if (outcome !== undefined) {
                 item.outcome.outcome_id = outcome.id;
             }
