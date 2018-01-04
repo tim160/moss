@@ -225,7 +225,7 @@
                                     <li class="team-list__li" ng-repeat="mediator in report.mediators|limitTo:3">
                                         <a href="/settings/user/{{mediator.id}}" class=" team-list__a">
                                             <img ng-src="{{mediator.photo_path == '' ? '/Content/Icons/noPhoto.png' : mediator.photo_path}}" alt="" class="team-list__logo" />
-                                            <span class="profile-status" ng-class="{'online' : isOwner(report, mediator) }" ng-show="mediator.role_id == 4 || mediator.role_id == 5"></span>
+                                            <span class="profile-status" ng-class="{'online' : isOwner(report, mediator) }" ng-show="isOwner(report, mediator)"></span>
                                         </a>
                                     </li><!-- /.team-list__li -->
                                     <li class="team-list__li" ng-show="report.mediators.length > 3">
