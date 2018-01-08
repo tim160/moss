@@ -1494,7 +1494,7 @@ namespace EC.Models
                 List<user> all_top_mediators = db.user.Where(item => (item.company_id == _report.company_id) && (item.role_id == 4 || item.role_id == 5)).ToList();
                 List<user> involved_mediators = _involved_mediators_user_list;
                 List<user> assigned_mediators = _assigned_mediators_user_list;
-                var owner = db.report_owner.FirstOrDefault(x => x.report_id == _report.id);
+                var owner = db.report_owner.FirstOrDefault(x => x.report_id == _report.id & x.status_id == 2);
 
                 for (int i = 0; i < all_top_mediators.Count; i++)
                 {
