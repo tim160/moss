@@ -270,11 +270,13 @@
                 $scope.chartData1 = data.Behavioral;
                 $scope.chartData2 = data.External;
                 $scope.chartData3 = data.Organizational;
-                //$scope.api1.refresh();
-                //$scope.api2.refresh();
-                //$scope.api3.refresh();
+                $scope.chart1.chart.title = data.BehavioralTotal;
+                $scope.chart2.chart.title = data.ExternalTotal;
+                $scope.chart3.chart.title = data.OrganizationalTotal;
             });
         };
+
+        $scope.chartColors = d3.scale.category20().range();
 
         $scope.refresh();
 
@@ -300,6 +302,11 @@
                 duration: 500,
                 labelThreshold: 0.01,
                 labelSunbeamLayout: true,
+                legendPosition: 'bottom',
+                title: {
+                    enable: true,
+                    text: '',
+                },
                 legend: {
                     margin: {
                         top: 5,

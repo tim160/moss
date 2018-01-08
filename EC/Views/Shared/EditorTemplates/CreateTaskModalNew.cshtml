@@ -43,7 +43,14 @@
                     {
                         <option value=@_user.id>@_user.first_nm @_user.last_nm</option>
                     }
-                    @foreach (user _user in rm.MediatorsApproveCaseClosure)
+                    @*foreach (user _user in rm.MediatorsApproveCaseClosure)
+                    {
+                        if (rm._mediators_whoHasAccess_toReport.FirstOrDefault(x => x.id == _user.id && x.user_permissions_approve_case_closure == 1) == null)
+                        {
+                            <option value=@_user.id>@_user.first_nm @_user.last_nm</option>
+                        }
+                    }*@
+                    @foreach (user _user in rm._available_toAssign_mediators)
                     {
                         if (rm._mediators_whoHasAccess_toReport.FirstOrDefault(x => x.id == _user.id && x.user_permissions_approve_case_closure == 1) == null)
                         {

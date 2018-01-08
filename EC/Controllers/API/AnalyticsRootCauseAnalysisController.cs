@@ -104,8 +104,11 @@ namespace EC.Controllers.API
             return new {
                 SecondaryTypes = secondaryTypes,
                 Behavioral = behavioral,
+                BehavioralTotal = behavioral.Sum(x => x.count),
                 External = external,
+                ExternalTotal = external.Sum(x => x.count),
                 Organizational = organizational,
+                OrganizationalTotal = organizational.Sum(x => x.count),
             };
        }
     }

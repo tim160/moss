@@ -20,6 +20,12 @@
 
 <link href="~/Content/daterangepickerAnalit.css" rel="stylesheet" />
 
+<style>
+    h2, h3 {
+        color: black;
+    }
+</style>
+
 <div class="blockSettings blockAnalitics" ng-controller="AnalyticsRootCauseAnalysisController">
     @Html.Partial("~/Views/Analytics/AnalyticsMenu.cshtml")
 
@@ -58,17 +64,35 @@
         <table>
             <tr>
                 <td>
-                    <nvd3 options="chart1" data="chartData1" api="api1"></nvd3>
+                    <nvd3 id="chart1" options="chart1" data="chartData1" api="api1"></nvd3>
                 </td>
                 <td>
-                    <nvd3 options="chart2" data="chartData2" api="api2"></nvd3>
+                    <nvd3 options="chart2" data="chartData2" api="api2"></nvd3>                    
                 </td>
                 <td>
-                    <nvd3 options="chart3" data="chartData3" api="api3"></nvd3>
+                    <nvd3 options="chart3" data="chartData3" api="api3"></nvd3>                    
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h2>Behavioral Factors</h2>
+                    <div ng-repeat="item in chartData1">
+                        <h3 style="padding-left: 10px; border-left: solid 5px {{chartColors[$index]}} ">{{item.name}} {{item.count}}</h3>
+                    </div>
+                </td>
+                <td>
+                    <h2>External Influences</h2>
+                    <div ng-repeat="item in chartData2">
+                        <h3 style="padding-left: 10px; border-left: solid 5px {{chartColors[$index]}} ">{{item.name}} {{item.count}}</h3>
+                    </div>
+                </td>
+                <td>
+                    <h2>Organizational Influences</h2>
+                    <div ng-repeat="item in chartData3">
+                        <h3 style="padding-left: 10px; border-left: solid 5px {{chartColors[$index]}} ">{{item.name}} {{item.count}}</h3>
+                    </div>
                 </td>
             </tr>
         </table>
-
     </div>
-
 </div>
