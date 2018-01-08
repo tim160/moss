@@ -686,3 +686,13 @@ font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 .errorDropbox > div {
     border: solid 1px red;
 }
+
+.item.list>a{
+ display: block;
+ padding: 8px 15px;
+}
+.drop li.item.list{
+ height: initial;
+ line-height: normal;
+ text-indent: 0;
+}
