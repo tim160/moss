@@ -1,0 +1,16 @@
+﻿@using EC.App_LocalResources;
+
+@{ 
+    string action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+}
+
+<div id="casesHeared">
+    <div id="menu">
+        <h2 class="mainTitle">@GlobalRes.Menu:</h2>
+        <div>
+            <a href="@Url.Action("Index")" class="caseesTab @(action == "index" ? "active" : "")">@GlobalRes.Cases</a>
+            <a href="@Url.Action("CACSReport")" class="caseesTab @(action == "cacsreport" ? "active" : "")">Clery Act Crime Statistics Report</a>
+            <a href="@Url.Action("RootCauseAnalysis")" class="caseesTab @(action == "rootcauseanalysis" ? "active" : "")">Root Cause Analysis</a>
+        </div>
+    </div>
+</div>

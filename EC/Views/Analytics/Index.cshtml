@@ -59,18 +59,8 @@
 </style>
 
 <div class="blockSettings blockAnalitics">
-    <div id="casesHeared">
-        <div id="menu">
-            <h2 class="mainTitle">@GlobalRes.Menu:</h2>
-            <div>
-                <a href="@Url.Action("Index")" class="caseesTab active">@GlobalRes.Cases</a>
-                <a href="@Url.Action("CACSReport")" class="caseesTab">Clery Act Crime Statistics Report</a>
-            </div>
-        </div>
-        @* <div class="positionActivityIcon">
-                <div id="activityIcon"></div>
-            </div>*@
-    </div><!--casesHeared-->
+    @Html.Partial("~/Views/Analytics/AnalyticsMenu.cshtml")
+
     <!--work-->
     <div class="dropDownMenuPadding">
         <table class="dropDownMenu">

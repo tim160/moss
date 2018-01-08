@@ -223,6 +223,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="angular\app.js" />
+    <Content Include="angular\controllers\AnalyticsRootCauseAnalysisController.js" />
     <Content Include="angular\controllers\AnalyticsCACSController.js" />
     <Content Include="angular\controllers\NewCaseCaseClosureReportController.js" />
     <Content Include="angular\controllers\NewCaseInvestigationNotesController.js" />
@@ -236,6 +237,7 @@
     <Content Include="angular\controllers\SettingsUserEditController.js" />
     <Content Include="angular\controllers\EmployeeAwarenessPosterController.js" />
     <Content Include="angular\controllers\EmployeeAwarenessController.js" />
+    <Content Include="angular\services\AnalyticsRootCauseAnalysisService.js" />
     <Content Include="angular\services\AnalyticsCASService.js" />
     <Content Include="angular\services\NewCaseCaseClosureReportService.js" />
     <Content Include="angular\services\NewCaseInvestigationNotesService.js" />
@@ -687,6 +689,8 @@
     <Content Include="Views\Shared\EditorTemplates\ReOpenModalNew.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\AwaitingApprovalModalNew.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ApproveDialogModalNew.cshtml" />
+    <Content Include="Views\Analytics\RootCauseAnalysis.cshtml" />
+    <Content Include="Views\Analytics\AnalyticsMenu.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -713,6 +717,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AnalyticsController.cs" />
+    <Compile Include="Controllers\API\AnalyticsRootCauseAnalysisController.cs" />
     <Compile Include="Controllers\API\BaseApiController.cs" />
     <Compile Include="Controllers\API\AnalyticsCACSController.cs" />
     <Compile Include="Controllers\API\NewCaseCaseClosureReportController.cs" />
