@@ -1494,13 +1494,21 @@ namespace EC.Models
                 List<user> all_top_mediators = db.user.Where(item => (item.company_id == _report.company_id) && (item.role_id == 4 || item.role_id == 5)).ToList();
                 List<user> involved_mediators = _involved_mediators_user_list;
                 List<user> assigned_mediators = _assigned_mediators_user_list;
+                var owner = db.report_owner.FirstOrDefault(x => x.report_id == _report.id);
 
                 for (int i = 0; i < all_top_mediators.Count; i++)
                 {
                     _user = all_top_mediators[i];
                     if ((!involved_mediators.Any(item => (item.id == _user.id))) && (!result.Contains(_user)))
                     {
-                        result.Add(_user);
+                        if ((owner != null) && (owner.user_id == _user.id))
+                        {
+                            result.Insert(0, _user);
+                        }
+                        else
+                        {
+                            result.Add(_user);
+                        }
                     }
                 }
                 for (int i = 0; i < assigned_mediators.Count; i++)
@@ -1508,7 +1516,14 @@ namespace EC.Models
                     _user = assigned_mediators[i];
                     if ((!involved_mediators.Any(item => (item.id == _user.id))) && (!result.Contains(_user)))
                     {
-                        result.Add(_user);
+                        if ((owner != null) && (owner.user_id == _user.id))
+                        {
+                            result.Insert(0, _user);
+                        }
+                        else
+                        {
+                            result.Add(_user);
+                        }
                     }
                 }
 
