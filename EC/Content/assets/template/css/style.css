@@ -687,11 +687,11 @@ font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
     border: solid 1px red;
 }
 
-.item.list>a{
+.drop>li>a{
  display: block;
  padding: 8px 15px;
 }
-.drop li.item.list{
+.drop>li{
  height: initial;
  line-height: normal;
  text-indent: 0;
