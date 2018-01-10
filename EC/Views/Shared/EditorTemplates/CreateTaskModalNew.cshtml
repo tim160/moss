@@ -54,7 +54,7 @@
                     {
                         if (rm._mediators_whoHasAccess_toReport.FirstOrDefault(x => x.id == _user.id && x.user_permissions_approve_case_closure == 1) == null)
                         {
-                            <option value=@_user.id>@_user.first_nm @_user.last_nm</option>
+                            <option data-massign="true" value=@_user.id>@_user.first_nm @_user.last_nm</option>
                         }
                     }
                 </select>

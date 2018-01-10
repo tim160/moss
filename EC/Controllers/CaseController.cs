@@ -1067,6 +1067,20 @@ namespace EC.Controllers
             */
             bool _new = userModel.ResolveCase(report_id, mediator_id, description, promotion_value, reason_id,sign_off_mediator_id);
 
+            if (!db.report_mediator_assigned.Any(x => x.report_id == report_id && x.mediator_id == sign_off_mediator_id))
+            {
+                db.report_mediator_assigned.Add(new report_mediator_assigned
+                {
+                    report_id = report_id,
+                    mediator_id = sign_off_mediator_id,
+                    assigned_dt = DateTime.Now,
+                    status_id = 2,
+                    last_update_dt = DateTime.Now,
+                    user_id = user.id,
+                });
+                db.SaveChanges();
+            }
+
             if (_new)
             {
                 #region Email Ready

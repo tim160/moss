@@ -380,7 +380,22 @@
                 @*
                 <a href="#" class="btn-link acceptCaseBtn">@Res_or_comp</a>
                 *@
-                <a href="#openModal" class="btn-link" rel="modal:open">@Res_or_comp</a>
+                @if (_user.user_permissions_approve_case_closure == 1)
+                {
+                    if (Res_or_comp == GlobalRes.Awaitingapproval)
+                    {
+                        <a href="#approveDialog" rel="modal:open" id="return_investigation" style="margin-right: 30px;" class="btn-link" value="@normal_button_value">RETURN FOR INVESTIGATION</a>
+                        <a href="#approveDialog" rel="modal:open" id="approve_close" class="btn-link" value="@normal_button_value">APPROVE</a>
+                    }
+                    else
+                    {
+                        <a href="#openModal" class="btn-link" rel="modal:open" disabled>@Res_or_comp</a>
+                    }
+                }
+                else
+                {
+                    <a href="" class="btn-link" style="pointer-events: none; cursor: default; color: grey; border-color: gray;">@Res_or_comp</a>
+                }
             </div>
             <ul class="breadcrumbs-mediators">
                 @foreach (var user in rm._mediators_whoHasAccess_toReport)
