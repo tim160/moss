@@ -686,6 +686,7 @@
                 }
             },
             legend: {
+                columnCount: 1,
                 horizontalAlignment: "left",
                 verticalAlignment: "top",
                 margin: 0
@@ -699,7 +700,10 @@
                         visible: true
                     }
                 }
-            }]
+            }],
+            size: {
+                width: 600,
+            },
         });
     }
 
@@ -748,6 +752,7 @@
                 }
             },
             legend: {
+                columnCount: 1,
                 horizontalAlignment: "left",
                 verticalAlignment: "top",
                 margin: 0
@@ -761,7 +766,10 @@
                         visible: true
                     }
                 }
-            }]
+            }],
+            size: {
+                width: 600,
+            },
         });
     }
     //------------------------ END Locations ------------------------------------------
