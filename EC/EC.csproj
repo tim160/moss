@@ -691,6 +691,7 @@
     <Content Include="Views\Shared\EditorTemplates\ApproveDialogModalNew.cshtml" />
     <Content Include="Views\Analytics\RootCauseAnalysis.cshtml" />
     <Content Include="Views\Analytics\AnalyticsMenu.cshtml" />
+    <Content Include="Views\Settings\partial\blockRootCauses.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1120,6 +1121,7 @@
     <Compile Include="Utils\Auth\User.cs" />
     <Compile Include="Utils\Auth\UserIndentity .cs" />
     <Compile Include="Utils\CustomContractResolver .cs" />
+    <Compile Include="Utils\MVCExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="angular\factories\" />

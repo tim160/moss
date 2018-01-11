@@ -354,120 +354,13 @@
                 </div>
             </div>
 
-            <div class="blockRootCauses" style="display: none;">
-                <table style="width: 100%;">
-                    <tr>
-                        <td width="33%">Behavioral Factors:</td>
-                        <td width="33%">External Influences:</td>
-                        <td width="33%">Organizational Influences:</td>
-                    </tr>
-                </table>
-
-                <div class="tableLocation" style="">
-                    <table style="width: 100%;" id="tblRootCauses" data-delete="@(is_valid_mediator ? 1 : 0)">
-                        @{
-                            List<company_root_cases_behavioral> list1 = (List<company_root_cases_behavioral>)ViewBag.Company_root_cases_behavioral;
-                            List<company_root_cases_external> list2 = (List<company_root_cases_external>)ViewBag.Company_root_cases_external;
-                            List<company_root_cases_organizational> list3 = (List<company_root_cases_organizational>)ViewBag.Company_root_cases_organizational;
-                            var max = Math.Max(list1.Count, Math.Max(list2.Count, list3.Count));
-                        }
-                        @for (var i = 0; i < max; i++)
-                        {
-                            var item1 = list1.Count > i ? list1[i] : null;
-                            var item2 = list2.Count > i ? list2[i] : null;
-                            var item3 = list3.Count > i ? list3[i] : null;
-                            <tr>
-                                <td width="33%" data-id="@(item1 != null ? item1.id.ToString() : "")">
-                                    @if (item1 != null)
-                                    {
-                                        <p>@item1.name_en</p>
-                                        if (is_valid_mediator)
-                                        {
-                                            <div class="deleteRootCauses"></div>
-                                        }
-                                    }
-                                </td>
-                                <td width="33%" data-id="@(item2 != null ? item2.id.ToString() : "")">
-                                    @if (item2 != null)
-                                    {
-                                        <p>@item2.name_en</p>
-                                        if (is_valid_mediator)
-                                        {
-                                            <div class="deleteRootCauses"></div>
-                                        }
-                                    }
-                                </td>
-                                <td width="33%" data-id="@(item3 != null ? item3.id.ToString() : "")">
-                                    @if (item3 != null)
-                                    {
-                                        <p>@item3.name_en</p>
-                                        if (is_valid_mediator)
-                                        {
-                                            <div class="deleteRootCauses"></div>
-                                        }
-                                    }
-                                </td>
-                            </tr>
-                        }
-                        </table>
-                    <table style="width: 100%;">
-                        <tr>
-                            <td width="33%">
-                                <div class="newRootCauses" id="newRootCauses1" style="display: none; border-style: solid; border-width: 0px;">
-                                    <input type="text" required="" value="" placeholder="Enter name" style="border: 2px solid #05b5a2; padding: 25px;">
-                                    <div class="addLocationBtn" id="addLocBtn1" style="width: auto;">
-                                        <p style="min-width: 50px;" class="btnAdd">@GlobalRes.Add</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td width="33%">
-                                <div class="newRootCauses" id="newRootCauses2" style="display: none; border-style: solid; border-width: 0px;">
-                                    <input type="text" required="" value="" placeholder="Enter name" style="border: 2px solid #05b5a2; padding: 25px;">
-                                    <div class="addLocationBtn" id="addLocBtn1" style="width: auto;">
-                                        <p style="min-width: 50px;" class="btnAdd">@GlobalRes.Add</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td width="33%">
-                                <div class="newRootCauses" id="newRootCauses3" style="display: none; border-style: solid; border-width: 0px;">
-                                    <input type="text" required="" value="" placeholder="Enter name" style="border: 2px solid #05b5a2; padding: 25px;">
-                                    <div class="addLocationBtn" id="addLocBtn1" style="width: auto;">
-                                        <p style="min-width: 50px;" class="btnAdd">@GlobalRes.Add</p>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            
-                <table style="width: 100%;">
-                    <tr>
-                        <td width="33%">
-                            @if (is_valid_mediator)
-                            {
-                                <div class="addLocationBtn" id="addNewRootCauses1">
-                                    <p>@GlobalRes.AddNewBehavioralFactors</p>
-                                </div>
-                            }
-                        </td>
-                        <td width="33%">
-                            @if (is_valid_mediator)
-                            {
-                                <div class="addLocationBtn" id="addNewRootCauses2">
-                                    <p>@GlobalRes.AddNewExternalInfluences</p>
-                                </div>
-                            }
-                        </td>
-                        <td width="33%">
-                            @if (is_valid_mediator)
-                            {
-                                <div class="addLocationBtn" id="addNewRootCauses3">
-                                    <p>@GlobalRes.AddNewOrganizationalInfluences</p>
-                                </div>
-                            }
-                        </td>
-                    </tr>
-                </table>
+            <div class="blockRootCauses" style="display: none;" id="tblRootCauses">
+                @Html.Partial("~/Views/Settings/partial/blockRootCauses.cshtml", new ViewDataDictionary {
+                    { "Company_root_cases_behavioral", ViewBag.Company_root_cases_behavioral},
+                    { "Company_root_cases_external", ViewBag.Company_root_cases_external},
+                    { "Company_root_cases_organizational", ViewBag.Company_root_cases_organizational},
+                    { "is_valid_mediator", is_valid_mediator },
+                })
             </div>
         
             <div class="blockSecondaryType" style="display: none;" ng-controller="SettingsCompanySecondaryTypeController">

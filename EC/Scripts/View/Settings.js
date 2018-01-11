@@ -230,21 +230,70 @@
             contentCompanyProfile.find("#add" + nameObject.charAt(0) + nameObject.charAt(1) + nameObject.charAt(2) + "Btn").hide();
         }
 
-        $('#addNewRootCauses1 p').click(function () {
-            $('.newRootCauses').css('display', 'none');
-            $('#newRootCauses1').css('display', '');
-        });
-        $('#addNewRootCauses2 p').click(function () {
-            $('.newRootCauses').css('display', 'none');
-            $('#newRootCauses2').css('display', '');
-        });
-        $('#addNewRootCauses3 p').click(function () {
-            $('.newRootCauses').css('display', 'none');
-            $('#newRootCauses3').css('display', '');
-        });
+        function initRootCauses() {
+            $('#addNewRootCauses1 p').off().on("click", function () {
+                $('.newRootCauses').css('display', 'none');
+                $('#newRootCauses1').css('display', '');
+            });
+            $('#addNewRootCauses2 p').off().on("click", function () {
+                $('.newRootCauses').css('display', 'none');
+                $('#newRootCauses2').css('display', '');
+            });
+            $('#addNewRootCauses3 p').off().on("click", function () {
+                $('.newRootCauses').css('display', 'none');
+                $('#newRootCauses3').css('display', '');
+            });
+            $('#newRootCauses1 .btnAdd').off().on("click", function () {
+                var data = $('#newRootCauses1 input').val();
+                if (data.length > 0) {
+                    sendAjax("RootCauses1", data, function (json) {
+                        renderRootCauses(json);
+                        $('.newRootCauses').css('display', 'none');
+                        $('#newRootCauses1 input').val('');
+                    }, 'BlockRootCauses');
+                } else {
+                    $('#newRootCauses1').css('border-color', 'red');
+                    $('#newRootCauses1').css('border-width', '2px');
+                }
+            });
+            $('#newRootCauses2 .btnAdd').off().on("click", function () {
+                var data = $('#newRootCauses2 input').val();
+                if (data.length > 0) {
+                    sendAjax("RootCauses2", data, function (json) {
+                        renderRootCauses(json);
+                        $('.newRootCauses').css('display', 'none');
+                        $('#newRootCauses2 input').val('');
+                    }, 'BlockRootCauses');
+                } else {
+                    $('#newRootCauses2').css('border-color', 'red');
+                    $('#newRootCauses2').css('border-width', '2px');
+                }
+            });
+            $('#newRootCauses3 .btnAdd').off().on("click", function () {
+                var data = $('#newRootCauses3 input').val();
+                if (data.length > 0) {
+                    sendAjax("RootCauses3", data, function (json) {
+                        renderRootCauses(json);
+                        $('.newRootCauses').css('display', 'none');
+                        $('#newRootCauses3 input').val('');
+                    }, 'BlockRootCauses');
+                } else {
+                    $('#newRootCauses3').css('border-color', 'red');
+                    $('#newRootCauses3').css('border-width', '2px');
+                }
+            });
+            $('.deleteRootCauses').off().on('click', function () {
+                data = $(this).closest('td').data('id').toString();
+                sendAjax('deleteRootCauses' + $(this).closest('td').data('type'), data, function (json) {
+                    renderRootCauses(json);
+                    $('.newRootCauses').css('display', 'none');
+                }, 'BlockRootCauses');
+            });
+        }
+        initRootCauses();
 
         function renderRootCauses(data) {
-            data = JSON.parse(data);
+            /*data = JSON.parse(data);
             var html = '';
             for (var i = 0; i < Math.max(data.arr1.length, data.arr2.length, data.arr3.length) ; i++) {
                 var item1 = data.arr1.length > i ? data.arr1[i] : null;
@@ -269,59 +318,10 @@
                 html += '</tr>';
             }
             $('#tblRootCauses').html(html);
-            deleteRootCauses();
+            deleteRootCauses();*/
+            $('#tblRootCauses').html(data);
+            initRootCauses();
         }
-
-        function deleteRootCauses() {
-            $('.deleteRootCauses').off().on('click', function () {
-                data = $(this).closest('td').data('id').toString();
-                sendAjax('deleteRootCauses' + ($(this).closest('td').index() + 1), data, function (json) {
-                    renderRootCauses(json);
-                    $('.newRootCauses').css('display', 'none');
-                });
-            });
-        }
-        deleteRootCauses();
-
-        $('#newRootCauses1 .btnAdd').click(function () {
-            var data = $('#newRootCauses1 input').val();
-            if (data.length > 0) {
-                sendAjax("RootCauses1", data, function (json) {
-                    renderRootCauses(json);
-                    $('.newRootCauses').css('display', 'none');
-                    $('#newRootCauses1 input').val('');
-                });
-            } else {
-                $('#newRootCauses1').css('border-color', 'red');
-                $('#newRootCauses1').css('border-width', '2px');
-            }
-        });
-        $('#newRootCauses2 .btnAdd').click(function () {
-            var data = $('#newRootCauses2 input').val();
-            if (data.length > 0) {
-                sendAjax("RootCauses2", data, function (json) {
-                    renderRootCauses(json);
-                    $('.newRootCauses').css('display', 'none');
-                    $('#newRootCauses2 input').val('');
-                });
-            } else {
-                $('#newRootCauses2').css('border-color', 'red');
-                $('#newRootCauses2').css('border-width', '2px');
-            }
-        });
-        $('#newRootCauses3 .btnAdd').click(function () {
-            var data = $('#newRootCauses3 input').val();
-            if (data.length > 0) {
-                sendAjax("RootCauses3", data, function (json) {
-                    renderRootCauses(json);
-                    $('.newRootCauses').css('display', 'none');
-                    $('#newRootCauses3 input').val('');
-                });
-            } else {
-                $('#newRootCauses3').css('border-color', 'red');
-                $('#newRootCauses3').css('border-width', '2px');
-            }
-        });
 
         $('.addLanguageBtn p').click(function () {
             $(this).parent().addClass("inactive");
@@ -448,7 +448,7 @@
                 $('.addNewReporterType').css('border-color', 'red');
             }
         });
-        function sendAjax(newSetting, data, action) {
+        function sendAjax(newSetting, data, action, partial) {
             if (newSetting && data.toLowerCase() != "other") {
                 var companyId = $("#companyId").data('value');
                 var userId = $("#userId").data('value');
@@ -457,7 +457,7 @@
                 var sendAjax = $("#sendAjax").val();
                 if (data.length > 0) {
                     $.ajax({
-                        data: { companyId: companyId, userId: userId, data: data, newSetting: newSetting },
+                        data: { companyId: companyId, userId: userId, data: data, newSetting: newSetting, partial: partial },
                         url: sendAjax,
                         success: function (result) {
                             if (result !== "false") {

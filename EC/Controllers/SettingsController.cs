@@ -15,6 +15,7 @@ using System.Data.Entity.Migrations;
 using EC.App_LocalResources;
 using EC.Constants;
 using EC.Common.Util;
+using EC.Utils;
 
 namespace EC.Controllers
 {
@@ -288,6 +289,10 @@ namespace EC.Controllers
                 settings.newSetting = Request.QueryString["newSetting"];
                 settings.data = Request.QueryString["data"];
                 flag = SettingsModel.setNewItem(settings);
+            }
+            if (Request.QueryString["partial"] == "BlockRootCauses")
+            {
+                return BlockRootCauses();
             }
             return flag;
         }
@@ -686,6 +691,31 @@ namespace EC.Controllers
 
             return View();
         }
-        
+
+        public string BlockRootCauses()
+        {
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            if (user == null || user.id == 0)
+                return "";
+
+            UserModel um = new UserModel(user.id);
+            bool is_valid_mediator = false;
+            var role_id = um._user.role_id;
+            if (role_id == ECLevelConstants.level_supervising_mediator)
+            {
+                is_valid_mediator = true;
+            }
+            if (um._user.user_permissions_change_settings == 1)
+            {
+                is_valid_mediator = true;
+            }
+
+            ViewBag.Company_root_cases_behavioral = db.company_root_cases_behavioral.Where(x => x.status_id == 2 & x.company_id == um._user.company_id).OrderBy(x => x.name_en).ToList();
+            ViewBag.Company_root_cases_external = db.company_root_cases_external.Where(x => x.status_id == 2 & x.company_id == um._user.company_id).OrderBy(x => x.name_en).ToList();
+            ViewBag.Company_root_cases_organizational = db.company_root_cases_organizational.Where(x => x.status_id == 2 & x.company_id == um._user.company_id).OrderBy(x => x.name_en).ToList();
+            ViewBag.is_valid_mediator = is_valid_mediator;
+
+            return this.RenderPartialView("~/Views/Settings/partial/blockRootCauses.cshtml", null, ViewData);
+        }
     }
 }
