@@ -9,7 +9,7 @@
 
 <div id="approveDialog" class="modal case-modal">
     <a href="#" class="closeLink modal-close" rel="modal:close"></a>
-    <div class="case-modal__title">@overlay_title</div><!-- /.modal-title -->
+    <div class="case-modal__title"></div><!-- /.modal-title -->
     
     <div class="case-modal__selectRow clearfix">
         <textarea class="form-control" type="text" name="txtEscalate" id="txtEscalate" style="width: 100%; height: 100px; overflow: hidden;"></textarea>
@@ -61,9 +61,9 @@
                                 if (promotion_value == 3)
                                     str = '/cases/index';
                                 if (promotion_value == 4)
-                                    str = '/cases/completed';
+                                    str = '/cases/index/completed';
                                 if (promotion_value == 9)
-                                    str = '/cases/closed';
+                                    str = '/cases/index/closed';
 
                                 window.location.href = str;
                         }
