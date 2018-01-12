@@ -6,118 +6,106 @@
 
 @{
     Layout = null;
+    List<company_root_cases_behavioral> list1 = (List<company_root_cases_behavioral>)ViewBag.Company_root_cases_behavioral;
+    List<company_root_cases_external> list2 = (List<company_root_cases_external>)ViewBag.Company_root_cases_external;
+    List<company_root_cases_organizational> list3 = (List<company_root_cases_organizational>)ViewBag.Company_root_cases_organizational;
 }
 
-<table style="width: 100%;">
-    <tr>
-        <td width="33%">Behavioral Factors:</td>
-        <td width="33%">External Influences:</td>
-        <td width="33%">Organizational Influences:</td>
-    </tr>
-</table>
+<style>
+    .deleteRootCauses {
+	    cursor: pointer;
+	    text-decoration: none;
+	    color: inherit;
+    }
+    .btn-link {
+        cursor: pointer;
+    }
+</style>
 
-<div class="tableLocation" style="">
-    <table style="width: 100%;" id="tblRootCauses" data-delete="@(ViewBag.is_valid_mediator ? 1 : 0)">
-        @{
-            List<company_root_cases_behavioral> list1 = (List<company_root_cases_behavioral>)ViewBag.Company_root_cases_behavioral;
-            List<company_root_cases_external> list2 = (List<company_root_cases_external>)ViewBag.Company_root_cases_external;
-            List<company_root_cases_organizational> list3 = (List<company_root_cases_organizational>)ViewBag.Company_root_cases_organizational;
-            var max = Math.Max(list1.Count, Math.Max(list2.Count, list3.Count));
-        }
-        @for (var i = 0; i < max; i++)
-        {
-            var item1 = list1.Count > i ? list1[i] : null;
-            var item2 = list2.Count > i ? list2[i] : null;
-            var item3 = list3.Count > i ? list3[i] : null;
-            <tr>
-                <td width="33%" data-id="@(item1 != null ? item1.id.ToString() : "")" data-type="1">
-                    @if (item1 != null)
-                    {
-                        <p>@item1.name_en</p>
-                        if (ViewBag.is_valid_mediator)
-                        {
-                            <div class="deleteRootCauses"></div>
-                        }
-                    }
-                </td>
-                <td width="33%" data-id="@(item2 != null ? item2.id.ToString() : "")" data-type="2">
-                    @if (item2 != null)
-                    {
-                        <p>@item2.name_en</p>
-                        if (ViewBag.is_valid_mediator)
-                        {
-                            <div class="deleteRootCauses"></div>
-                        }
-                    }
-                </td>
-                <td width="33%" data-id="@(item3 != null ? item3.id.ToString() : "")" data-type="3">
-                    @if (item3 != null)
-                    {
-                        <p>@item3.name_en</p>
-                        if (ViewBag.is_valid_mediator)
-                        {
-                            <div class="deleteRootCauses"></div>
-                        }
-                    }
-                </td>
-            </tr>
-        }
-    </table>
-    <table style="width: 100%;">
-        <tr>
-            <td width="33%">
-                <div class="newRootCauses" id="newRootCauses1" style="display: none; border-style: solid; border-width: 0px;">
-                    <input type="text" required="" value="" placeholder="Enter name" style="border: 2px solid #05b5a2; padding: 25px;">
-                    <div class="addLocationBtn" id="addLocBtn1" style="width: auto;">
-                        <p style="min-width: 50px;" class="btnAdd">@GlobalRes.Add</p>
+<div class="container subNavigationTabs__tabContent-container">
+    <div id="subTab-1" class="subNavigationTabs__tabContent active">
+        <section class="content-container">
+            <div class="content-container__inner">
+                <div class="content-container__inner-additional clearfix">
+                    <div class="row">
+                        <div class="col-4">
+                            <p class="sectionHeader-col">Behavioral Factors</p>
+                            @foreach (var item in list1)
+                            {
+                                <p class="content-container__p">
+                                    @if (ViewBag.is_valid_mediator)
+                                    {
+                                        <span class="deleteRootCauses" data-id="@item.id" data-type="1">X</span>
+                                    }
+                                    @item.name_en
+                                </p>
+                            }
+                            @if (ViewBag.is_valid_mediator)
+                            {
+                                <div class="btn-link" id="addNewRootCauses1a">
+                                    @GlobalRes.AddNewBehavioralFactors
+                                </div>
+                            }
+                            <div class="newRootCauses" id="newRootCauses1" style="display: none; border-style: solid; border-width: 0px;">
+                                <input type="text" required="" value="" placeholder="Enter name" class="personDataTextBox">
+                                <div class="addLocationBtn" id="addLocBtn1" style="width: auto;">
+                                    <p style="min-width: 50px;" class="btnAdd">@GlobalRes.Add</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <p class="sectionHeader-col">External Influences</p>
+                            @foreach (var item in list2)
+                            {
+                                <p class="content-container__p">
+                                    @if (ViewBag.is_valid_mediator)
+                                    {
+                                        <span class="deleteRootCauses" data-id="@item.id" data-type="2">X</span>
+                                    }
+                                    @item.name_en
+                                </p>
+                            }
+                            @if (ViewBag.is_valid_mediator)
+                            {
+                                <div class="btn-link" id="addNewRootCauses2a">
+                                    @GlobalRes.AddNewExternalInfluences
+                                </div>
+                            }
+                            <div class="newRootCauses" id="newRootCauses2" style="display: none; border-style: solid; border-width: 0px;">
+                                <input type="text" required="" value="" placeholder="Enter name" class="personDataTextBox">
+                                <div class="addLocationBtn" id="addLocBtn1" style="width: auto;">
+                                    <p style="min-width: 50px;" class="btnAdd">@GlobalRes.Add</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <p class="sectionHeader-col">Organizational Influences</p>
+                            @foreach (var item in list3)
+                            {
+                                <p class="content-container__p">
+                                    @if (ViewBag.is_valid_mediator)
+                                    {
+                                        <span class="deleteRootCauses" data-id="@item.id" data-type="3">X</span>
+                                    }
+                                    @item.name_en
+                                </p>
+                            }
+                            @if (ViewBag.is_valid_mediator)
+                            {
+                                <div class="btn-link" id="addNewRootCauses3a">
+                                    @GlobalRes.AddNewOrganizationalInfluences
+                                </div>
+                            }
+                            <div class="newRootCauses" id="newRootCauses3" style="display: none; border-style: solid; border-width: 0px;">
+                                <input type="text" required="" value="" placeholder="Enter name" class="personDataTextBox">
+                                <div class="addLocationBtn" id="addLocBtn1" style="width: auto;">
+                                    <p style="min-width: 50px;" class="btnAdd">@GlobalRes.Add</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </td>
-            <td width="33%">
-                <div class="newRootCauses" id="newRootCauses2" style="display: none; border-style: solid; border-width: 0px;">
-                    <input type="text" required="" value="" placeholder="Enter name" style="border: 2px solid #05b5a2; padding: 25px;">
-                    <div class="addLocationBtn" id="addLocBtn1" style="width: auto;">
-                        <p style="min-width: 50px;" class="btnAdd">@GlobalRes.Add</p>
-                    </div>
-                </div>
-            </td>
-            <td width="33%">
-                <div class="newRootCauses" id="newRootCauses3" style="display: none; border-style: solid; border-width: 0px;">
-                    <input type="text" required="" value="" placeholder="Enter name" style="border: 2px solid #05b5a2; padding: 25px;">
-                    <div class="addLocationBtn" id="addLocBtn1" style="width: auto;">
-                        <p style="min-width: 50px;" class="btnAdd">@GlobalRes.Add</p>
-                    </div>
-                </div>
-            </td>
-        </tr>
-    </table>
+            </div>
+        </section>
+    </div>
 </div>
-
-<table style="width: 100%;">
-    <tr>
-        <td width="33%">
-            @if (ViewBag.is_valid_mediator)
-            {
-                <div class="addLocationBtn" id="addNewRootCauses1">
-                    <p>@GlobalRes.AddNewBehavioralFactors</p>
-                </div>
-            }
-        </td>
-        <td width="33%">
-            @if (ViewBag.is_valid_mediator)
-            {
-                <div class="addLocationBtn" id="addNewRootCauses2">
-                    <p>@GlobalRes.AddNewExternalInfluences</p>
-                </div>
-            }
-        </td>
-        <td width="33%">
-            @if (ViewBag.is_valid_mediator)
-            {
-                <div class="addLocationBtn" id="addNewRootCauses3">
-                    <p>@GlobalRes.AddNewOrganizationalInfluences</p>
-                </div>
-            }
-        </td>
-    </tr>
-</table>

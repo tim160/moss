@@ -231,16 +231,16 @@
         }
 
         function initRootCauses() {
-            $('#addNewRootCauses1 p').off().on("click", function () {
-                $('.newRootCauses').css('display', 'none');
+            $('#addNewRootCauses1a').off().on("click", function () {
+                $('#addNewRootCauses1a').css('display', 'none');
                 $('#newRootCauses1').css('display', '');
             });
-            $('#addNewRootCauses2 p').off().on("click", function () {
-                $('.newRootCauses').css('display', 'none');
+            $('#addNewRootCauses2a').off().on("click", function () {
+                $('#addNewRootCauses2a').css('display', 'none');
                 $('#newRootCauses2').css('display', '');
             });
-            $('#addNewRootCauses3 p').off().on("click", function () {
-                $('.newRootCauses').css('display', 'none');
+            $('#addNewRootCauses3a').off().on("click", function () {
+                $('#addNewRootCauses3a').css('display', 'none');
                 $('#newRootCauses3').css('display', '');
             });
             $('#newRootCauses1 .btnAdd').off().on("click", function () {
@@ -283,8 +283,8 @@
                 }
             });
             $('.deleteRootCauses').off().on('click', function () {
-                data = $(this).closest('td').data('id').toString();
-                sendAjax('deleteRootCauses' + $(this).closest('td').data('type'), data, function (json) {
+                data = $(this).data('id').toString();
+                sendAjax('deleteRootCauses' + $(this).data('type'), data, function (json) {
                     renderRootCauses(json);
                     $('.newRootCauses').css('display', 'none');
                 }, 'BlockRootCauses');
