@@ -703,6 +703,7 @@
             }],
             size: {
                 width: 600,
+                height: 400,
             },
         });
     }
@@ -712,28 +713,6 @@
     //depens on one line
     //-------------------------- START Locations ----------------------------------------
     function _dtCompanyLocationReport(data) {
-        //example data
-        //var dataLocation = [{
-        //    name: "Sales",
-        //    val: 10
-        //}, {
-        //    name: "Accounting",
-        //    val: 18
-        //}, {
-        //    name: "Marketing1",
-        //    val: 13
-        //}, {
-        //    name: "Marketing2",
-        //    val: 13
-        //}, {
-        //    name: "Marketing3",
-        //    val: 13
-        //}, {
-        //    name: "R&D",
-        //    val: 3
-        //}];
-
-
         var pieChart = $("#containerLocation");
         if (pieChart.length > 1) {
             pieChart = $("#containerLocation").dxPieChart('instance');
@@ -769,6 +748,7 @@
             }],
             size: {
                 width: 600,
+                height: 400,
             },
         });
     }

@@ -222,6 +222,10 @@ html, body{
 	margin-bottom: 15px;
 }
 
+.p-tb-5{
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
 .p-tb-10{
 	padding-bottom: 10px;
 	padding-top: 10px;
@@ -373,6 +377,10 @@ html, body{
 	left: calc( 50% - 7px );
 	border: 7px solid transparent;
 	border-bottom: 7px solid rgba(0,0,0,0.75);
+}
+
+.white{
+	background-color: #fff;
 }
 
 /*======================================================
@@ -2524,7 +2532,7 @@ input.personDataTextBox{
 		.dashboard-col__age.dashboard-colHeader{}
 
 		.dashboard-col__incidentType{
-			width: 28%;
+			width: 22%;
 		}
 		.dashboard-col__incidentType.dashboard-colHeader{}
 
@@ -2751,3 +2759,254 @@ input.personDataTextBox{
 				top: 5px;
 				right: 0;
 			}
+/*==================================================
+==============      Other Page   =================
+====================================================*/
+
+/*----------------- companyProfileMenu  ----------------*/
+
+.companyProfileMenu{
+	display: block;
+	width: 100%;
+}
+
+/*------------------------list Update------------------------*/
+.drop>li>a{
+ display: block;
+ padding: 8px 15px;
+}
+.drop>li{
+ height: initial;
+ line-height: normal;
+ text-indent: 0;
+}
+/*----------------- Statistics Reports -------------------*/
+.borderAnalit{
+	padding: 0!important;
+}
+.plugSchedule{
+	width: 100%;
+	height: 450px;
+	background-color: #ccc;
+}
+
+.statistics-container{
+	background-color: #fff;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.dropMenuText{
+	font-weight: bold;
+}
+.item .liItem:hover{
+	background-color: #05b5a2;
+}
+
+.statistics-totalTable{}
+.statistics-totalCrimes{
+	margin-bottom: 60px;
+}
+.row-1>.statistics-totalTable__cols{
+	width: calc( 100% / 1);
+}
+.row-2>.statistics-totalTable__cols{
+	width: calc( 100% / 2);
+}
+.row-3>.statistics-totalTable__cols{
+	width: calc( 100% / 3);
+}
+.row-4>.statistics-totalTable__cols{
+	width: calc( 100% / 4);
+}
+.row-5>.statistics-totalTable__cols{
+	width: calc( 100% / 5);
+}
+	.statistics-totalTable__title{
+		font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+		font-size: 12px;
+		color: #3c3e3f;
+		margin-bottom: 10px;
+	}
+	.statistics-totalReports>.statistics-totalTable__title{
+		font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+		font-size: 18px;
+		color: #3c3e3f;
+		margin-bottom: 40px;
+	}
+	.statistics-totalTable__cols{
+		display: inline-block;
+		box-sizing: border-box;
+		float: left;
+		font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+		font-size: 14px;
+		color: #3c3e3f;
+		text-align: center;
+	}
+
+	.statistics-totalTable__cols>.ng-binding{
+		font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+		font-size: 14px;
+		color: #3c3e3f;
+	}
+	.statistics-totalReports>.statistics-totalTable__cols,
+	.statistics-totalReports>.statistics-totalTable__cols>.ng-binding{
+		font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+		font-size: 18px;
+		color: #3c3e3f;
+	}
+	.ng-bindingYear{
+		font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+		font-size: 12px;
+		color: #aeb5b7;
+		margin-top: 10px;
+	}
+
+/*----------------- Analytics - Cases ---------------------*/
+
+body .filter{
+	margin: 10px 0;
+}
+.dropDownMenuRow{
+	background-color: #ebf1f1;
+	border-bottom: 1px solid #dce2e3;
+}
+.menuCasesBlock{
+	display: block;
+	padding: 0;
+}
+.parentClass{
+	display: inline-block;
+}
+body .menuItem{
+	display: inline-block;
+	width: initial;
+	height: initial;
+	vertical-align: middle;
+	margin: 0;
+	padding: 0 40px;
+}
+body .menuItem:hover .dropMenuText{
+	font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+}
+body .liItem.selected:hover .positionText{
+	color: #727c7e;
+}
+.menuUl .liItem:active .positionText,
+.liItem.selected .positionText{
+	color: #ffffff ;
+}
+body .dropMenuText{
+	display: inline-block;
+	padding: 17px 0;
+	font-family: 'OpenSans-Light', arial, verdana, sans-serif;
+	font-size: 16px;
+	color: #3c3e3f;
+}
+
+.menuUl .positionText{
+	font-family: 'OpenSans-Light', arial, verdana, sans-serif;
+	font-size: 14px;
+	color: #727c7e;
+}
+body .blockSettings .contentSettings{
+	display: inline-block;
+}
+body .liItem{
+	display: block;
+	text-align: initial;
+	height: initial;
+	overflow: hidden;
+}
+body .menuUl .checked{
+	padding: 0;
+	line-height: normal;
+	height: initial;
+	overflow: hidden;
+	float: left;
+	width: 12px;
+	min-height: 1px;
+	margin-left: 10px;
+	margin-right: 10px;
+	line-height: 46px;
+}
+/*body .menuUl .checked>img{
+	width: 12px;
+}*/
+body .liItem.selected .logo{
+	vertical-align: middle;
+}
+body .menuUl .positionText{
+	display: inline-block;
+	line-height: normal;
+	vertical-align: middle;
+	padding: 15px 0;
+	width: calc( 100% - 37px );
+	float: left;
+}
+.menuCasesBlock{
+	overflow: hidden;
+}
+/*-----------------blockAllCases----------------*/
+body .blockAllCases .itemLegend span{
+	font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+	font-size: 12px;
+	color: #3c3e3f;
+	line-height: 16px;
+}
+body .blockAllCases{
+	display: block;
+}
+body .blockSettings .contentSettings{
+	margin: 0;
+}
+	.blockSettings .headerBlockActivity{
+		display: block;
+	}
+	body .blockAllCases .itemLegend{
+		width: initial;
+	}
+	body #chartContainer{
+		text-align: center;
+	}
+
+body .blockTodayContant .miniSquare{
+	margin-left: 15px;
+}
+body .blockToday{
+	display: block;
+	padding: 0 40px;
+}
+	.blockToday .blockTodayContant{
+		display: block;
+	}
+	body .titleBlock{
+		font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+		font-size: 16px;
+		color: #3c3e3f;
+	}
+	body .blockTodayContant .headerLegend span{
+		font-family: 'OpenSans-Light', arial, verdana, sans-serif;
+	}
+	body .blockTodayContant .itemLegend{
+		display: inline-block;
+	}	
+	.itemLegend .headerLegend{
+		display: inline-block;
+		width: 100%;
+	}
+		.itemLegend .blockTodayContant .miniSquare{
+			display: block;
+			width: 9px;
+		}
+		body .blockTodayContant .itemLegend .headerLegend span{
+			float: left;
+			width: calc( 100% - 44px);
+		}
+body .blockLinesItem p{
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+body .itemLegend .headerLegend{
+	margin-bottom: 10px;
+}

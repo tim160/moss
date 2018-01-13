@@ -62,594 +62,535 @@
     @Html.Partial("~/Views/Analytics/AnalyticsMenu.cshtml")
 
     <!--work-->
-    <div class="dropDownMenuPadding">
-        <table class="dropDownMenu">
-            <tbody>
-                <tr>
-                    <td>
-                        <div class="parentClass">
-                            <div class="menuItem">
-                                <div class="positionText">
-                                    <span class="dropMenuText">@GlobalRes.Department</span>
-                                    <img src="~/Content/img/arrowSelect.png" />
-                                </div>
-                                <ul class="menuUl">
-                                    @if (ViewBag.dropDownFirst != null && ViewBag.dropDownFirst.Count > 0)
-                                    {
-                                        foreach (Tuple<string, string> tuple in ViewBag.dropDownFirst)
-                                        {
-                                            <li>
-                                                <div class="liItem" value="@tuple.Item2" nameDropdown="ReportsDepartmentIDStringss">
-                                                    <span class="positionText liText">
-                                                        <div class="checked">
-                                                            <img class="logo" src="~/Content/img/check.png" />
-                                                        </div>
-                                                        @tuple.Item1
-                                                    </span>
-                                                </div>
-                                            </li>
-                                        }
-                                    }
-                                </ul>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="parentClass">
-                            <div class="menuItem">
-                                <div class="positionText">
-                                    <span class="dropMenuText">@GlobalRes.Location</span>
-                                    <img src="~/Content/img/arrowSelect.png" />
-                                </div>
-                                <ul class="menuUl">
-                                    @if (ViewBag.dropDownSecond != null && ViewBag.dropDownSecond.Count > 0)
-                                    {
-                                        foreach (Tuple<string, string> tuple in ViewBag.dropDownSecond)
-                                        {
-                                            <li>
-                                                <div class="liItem" value="@tuple.Item2" nameDropdown="ReportsLocationIDStrings">
-                                                    <span class="positionText liText">
-                                                        <div class="checked">
-                                                            <img class="logo" src="~/Content/img/check.png" />
-                                                        </div>
-                                                        @tuple.Item1
-                                                    </span>
-                                                </div>
-                                            </li>
-                                        }
-                                    }
-                                </ul>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="parentClass">
-                            <div class="menuItem">
-                                <div class="positionText">
-                                    <span class="dropMenuText">@GlobalRes.IncidentType</span>
-                                    <img src="~/Content/img/arrowSelect.png" />
-                                </div>
-                                <ul class="menuUl">
-                                    @if (ViewBag.dropDownThird != null && ViewBag.dropDownThird.Count > 0)
-                                    {
-                                        foreach (Tuple<string, string> tuple in ViewBag.dropDownThird)
-                                        {
-                                            <li>
-                                                <div class="liItem" value="@tuple.Item2" nameDropdown="ReportsSecondaryTypesIDStrings">
-                                                    <span class="positionText liText">
-                                                        <div class="checked">
-                                                            <img class="logo" src="~/Content/img/check.png" />
-                                                        </div>
-                                                        @tuple.Item1
-                                                    </span>
-                                                </div>
-                                            </li>
-                                        }
-                                    }
-                                </ul>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="parentClass">
-                            <div class="menuItem">
-                                <div class="positionText">
-                                    <span class="dropMenuText">Reporter Type</span>
-                                    <img src="~/Content/img/arrowSelect.png" />
-                                </div>
-                                <ul class="menuUl">
-                                    @if (ViewBag.dropDownFourth != null && ViewBag.dropDownFourth.Count > 0)
-                                    {
-                                        foreach (Tuple<string, string> tuple in ViewBag.dropDownFourth)
-                                        {
-                                            <li>
-                                                <div class="liItem" value="@tuple.Item2" nameDropdown="ReportsRelationTypesIDStrings">
-                                                    <span class="positionText liText">
-                                                        <div class="checked">
-                                                            <img class="logo" src="~/Content/img/check.png" />
-                                                        </div>
-                                                        @tuple.Item1
-                                                    </span>
-                                                </div>
-                                            </li>
-                                        }
-                                    }
-                                </ul>
-                            </div>
-
-                        </div>
-                    </td>
-                    <td>
-                        <div class="daterange menuItem">
-                            <div class="positionText">
-                                <span class="dropMenuText">Date range</span>
-                                <img src="~/Content/img/arrowSelect.png" />
-                            </div>
-                        </div>
-                        <input id="daterange" type="text" style="display: none" name="daterange" value="01/01/2015 - 01/31/2015" />
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="dropDownMenuRow">
+        <div class="container">
+            <div class="parentClass">
+                <div class="menuItem">
+                    <div class="positionText">
+                        <span class="dropMenuText">@GlobalRes.Department</span>
+                        <img src="~/Content/img/arrowSelect.png" />
+                    </div>
+                    <ul class="menuUl">
+                        @if (ViewBag.dropDownFirst != null && ViewBag.dropDownFirst.Count > 0)
+                        {
+                            foreach (Tuple<string, string> tuple in ViewBag.dropDownFirst)
+                            {
+                                <li>
+                                    <div class="liItem" value="@tuple.Item2" nameDropdown="ReportsDepartmentIDStringss">
+                                        <div class="checked">
+                                            <img class="logo" src="~/Content/img/check.png" />
+                                        </div>
+                                        <span class="positionText liText">
+                                            @tuple.Item1
+                                        </span>
+                                    </div>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="parentClass">
+                <div class="menuItem">
+                    <div class="positionText">
+                        <span class="dropMenuText">@GlobalRes.Location</span>
+                        <img src="~/Content/img/arrowSelect.png" />
+                    </div>
+                    <ul class="menuUl">
+                        @if (ViewBag.dropDownSecond != null && ViewBag.dropDownSecond.Count > 0)
+                        {
+                            foreach (Tuple<string, string> tuple in ViewBag.dropDownSecond)
+                            {
+                                <li>
+                                    <div class="liItem" value="@tuple.Item2" nameDropdown="ReportsLocationIDStrings">
+                                        <span class="positionText liText">
+                                            <div class="checked">
+                                                <img class="logo" src="~/Content/img/check.png" />
+                                            </div>
+                                            @tuple.Item1
+                                        </span>
+                                    </div>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="parentClass">
+                <div class="menuItem">
+                    <div class="positionText">
+                        <span class="dropMenuText">@GlobalRes.IncidentType</span>
+                        <img src="~/Content/img/arrowSelect.png" />
+                    </div>
+                    <ul class="menuUl">
+                        @if (ViewBag.dropDownThird != null && ViewBag.dropDownThird.Count > 0)
+                        {
+                            foreach (Tuple<string, string> tuple in ViewBag.dropDownThird)
+                            {
+                                <li>
+                                    <div class="liItem" value="@tuple.Item2" nameDropdown="ReportsSecondaryTypesIDStrings">
+                                        <span class="positionText liText">
+                                            <div class="checked">
+                                                <img class="logo" src="~/Content/img/check.png" />
+                                            </div>
+                                            @tuple.Item1
+                                        </span>
+                                    </div>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="parentClass">
+                <div class="menuItem">
+                    <div class="positionText">
+                        <span class="dropMenuText">Reporter Type</span>
+                        <img src="~/Content/img/arrowSelect.png" />
+                    </div>
+                    <ul class="menuUl">
+                        @if (ViewBag.dropDownFourth != null && ViewBag.dropDownFourth.Count > 0)
+                        {
+                            foreach (Tuple<string, string> tuple in ViewBag.dropDownFourth)
+                            {
+                                <li>
+                                    <div class="liItem" value="@tuple.Item2" nameDropdown="ReportsRelationTypesIDStrings">
+                                        <span class="positionText liText">
+                                            <div class="checked">
+                                                <img class="logo" src="~/Content/img/check.png" />
+                                            </div>
+                                            @tuple.Item1
+                                        </span>
+                                    </div>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="daterange menuItem">
+                <div class="positionText">
+                    <span class="dropMenuText">Date range</span>
+                    <img src="~/Content/img/arrowSelect.png" />
+                </div>
+            </div>
+            <input id="daterange" type="text" style="display: none" name="daterange" value="01/01/2015 - 01/31/2015" />
+        </div>
     </div>
 
 
     <!--end work-->
     <div class="borderAnalit">
-        <div class="filter">
-            <table>
-                <tr>
-                    <td class="filterUp">Search:</td>
-                    <td>
-                        <table id="filterTable">
-                            @*<tr>
-                                    <td>Deaprtments</td>
-                                    <td><div class="sales">Toronto, ON, Canada<img src="/Content/Icons/Xanal.gif"></div></td>
-                                    <td class="clearAll">Clear<img src="~/Content/Icons/Xanal.gif" /></td>
-                                </tr>
-                                <tr>
-                                    <td>Deaprtments</td>
-                                    <td><div class="sales inTheBall">Toronto, ON, Canada<img src="/Content/Icons/Xanal.gif"></div></td>
-                                    <td class="clearAll">Clear<img src="~/Content/Icons/Xanal.gif" /></td>
-                                </tr>
-                                <tr>
-                                    <td>Deaprtments</td>
-                                    <td><div class="sales">Toronto, ON, Canada<img src="/Content/Icons/Xanal.gif"></div></td>
-                                    <td class="clearAll">Clear<img src="~/Content/Icons/Xanal.gif" /></td>
-                                </tr>*@
-                            @*<tr>
-                                    <td>
-                                        <div id="clearAll" class="clearAll">Clear all<img src="~/Content/Icons/Xanal.gif" /></div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>*@
-                        </table>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        @*
 
-            <td>
-                        <p>Departments:</p>
-                        <p>Locations:</p>
-                        <div class="clearAll">Clear all<img src="~/Content/Icons/Xanal.gif" /></div>
-                    </td>
-                    <td>
-                        <div class="sales">Toronto, ON, Canada<img src="/Content/Icons/Xanal.gif"></div>
-                        <div class="sales">Toronto, ON, Canada<img src="/Content/Icons/Xanal.gif"></div>
-                    </td>
-                    <td class="clearAll" type="ReportsLocationIDStrings">Clear<img src="~/Content/Icons/Xanal.gif" /></td>
-
-        *@
-
-        @*<div class="filter">
+        <div class="container">
+            <div class="filter">
                 <table>
-                    <tr id="tableFilter">
-                        <th class="filterUp">Filter:</th>
-                        <th class="clearAll">Clear all<img src="~/Content/Icons/Xanal.gif" /></th>
-                        <th class="clearAll" type="ReportsLocationIDStrings">Clear locations<img src="~/Content/Icons/Xanal.gif" /></th>
-                        <th class="clearAll" type="ReportsDepartmentIDStringss">Clear departmetns<img src="~/Content/Icons/Xanal.gif" /></th>
-                        <th class="clearAll" type="ReportsSecondaryTypesIDStrings">Clear Incident Type<img src="~/Content/Icons/Xanal.gif" /></th>
-                        <th class="clearAll" type="ReportsRelationTypesIDStrings">Clear Reporter Type<img src="~/Content/Icons/Xanal.gif" /></th>
-                        <th class="clearAll" type="dateRange">Clear Date range<img src="~/Content/Icons/Xanal.gif" /></th>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <td class="filterUp">Search:</td>
+                            <td>
+                                <table id="filterTable"></table>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
-            </div>*@
-        <div class="contentSettings contentActivity">
-            <!-- 1 All cases -->
-            <div class="blockAllCases">
-                <div class="headerBlockActivity">
-                    <div class="titleBlock">@GlobalRes.Allcases</div>
-                    @for (var i = 0; i < 6; i++)
-                    {
-                        <div class="itemLegend">
-                            <div class="miniSquare" style="background-color: @_miniSquareColor[i];"></div>
-                            <span>@_titleHeaderLegend[i]</span>
-                        </div>
-                    }
-                </div>
-
-                <div id="chartContainer"></div>
             </div>
-            <!-- 2 Today -->
-            <div class="blockToday">
-                <div class="headerBlockActivity">
-                    <div class="titleBlock">@GlobalRes.Number_cases_stage: @_today</div>
-                    <div class="blockTodayContant">
-                        <div class="itemLegend">
-                            <div class="headerLegend">
-                                <div class="miniSquare" style="background-color: #abb9bb;"></div>
-                                <span>@GlobalRes.Spam</span>
-                            </div>
-                            <div class="contentLegend">
-                                <label>@_today_spanshot[5]</label>
-                            </div>
-                        </div>
+        </div><!-- /.container -->
+
+        <div class="container">
+            <div class="contentSettings contentActivity">
+                <!-- 1 All cases -->
+                <div class="blockAllCases">
+                    <div class="headerBlockActivity">
+                        <div class="titleBlock">@GlobalRes.Allcases</div>
                         @for (var i = 0; i < 6; i++)
+                    {
+                    <div class="itemLegend">
+                        <div class="miniSquare" style="background-color: @_miniSquareColor[i];"></div>
+                        <span>@_titleHeaderLegend[i]</span>
+                    </div>
+                    }
+                    </div>
+
+                    <div id="chartContainer"></div>
+                </div>
+                <!-- 2 Today -->
+                <div class="blockToday">
+                    <div class="headerBlockActivity">
+                        <div class="titleBlock">@GlobalRes.Number_cases_stage: @_today</div>
+                        <div class="blockTodayContant">
+                            <div class="itemLegend">
+                                <div class="headerLegend">
+                                    <div class="miniSquare" style="background-color: #abb9bb;"></div>
+                                    <span>@GlobalRes.Spam</span>
+                                </div>
+                                <div class="contentLegend">
+                                    <label>@_today_spanshot[5]</label>
+                                </div>
+                            </div>
+                            @for (var i = 0; i < 6; i++)
                         {
                             //      if (i != 4)
                             {
-                                <div class="itemLegend">
-                                    <div class="headerLegend">
-                                        <div class="miniSquare" style="background-color: @_miniSquareColor[i];"></div>
-                                        <span>@_titleHeaderLegend[i]</span>
-                                    </div>
-                                    <div class="contentLegend">
-                                        <label>@_today_spanshot[i]</label>
+                        <div class="itemLegend">
+                            <div class="headerLegend">
+                                <div class="miniSquare" style="background-color: @_miniSquareColor[i];"></div>
+                                <span>@_titleHeaderLegend[i]</span>
+                            </div>
+                            <div class="contentLegend">
+                                <label>@_today_spanshot[i]</label>
 
 
-                                    </div>
-                                </div>
+                            </div>
+                        </div>
                             }
                         }
 
+                        </div>
                     </div>
+
                 </div>
+                <!-- 3 Average -->
 
-            </div>
-            <!-- 3 Average -->
-
-            <div class="blockAverage">
-                <!--work begin-->
-                <div class="titleBlock">@GlobalRes.AverageNumberDaysPerStage</div>
-                <div class="wrapper wrapperSpec">
-                    <table class="table">
-                        <tr>
-                            <td colspan="4" class="headerBorder"></td>
-                            <td></td>
-                            <td>
-                                @*<div class="parentDivHeader"><div class="headerBrown">2<span class="specialBorder">&nbsp;</span></div></div>*@
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-
-                            <td>
-                                <!--<div class="base"><div class="letters">21</div></div>-->
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                @*<div class="parentDivHeader"><div class="headerBrown" style="right:-10px">21<span class="specialBorder" style="left: 8px;">&nbsp;</span></div></div>*@
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                @*<div class="base greyBase"><div class="letters">28</div></div>*@
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="4">@GlobalRes.PreReviewUp</td>
-                            <td>
-                                @*<div class="parentDiv">
-                                        <div class="brownDiv"></div>
-                                    </div>*@
-                            </td>
-                            <td>
-                                @*<div class="parentDiv">
-                                        <div class="brownDiv"></div>
-                                    </div>*@
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td colspan="4">@GlobalRes.Review</td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                @*<div class="parentDiv">
-                                        <div class="brownDiv"></div>
-                                    </div>*@
-                            </td>
-                            <td>
-                                @*<div class="parentDiv">
-                                        <div class="brownDiv"></div>
-                                    </div>*@
-                            </td>
-                            <td>
-                                @*<div class="parentDiv">
-                                        <div class="brownDiv"></div>
-                                    </div>*@
-                            </td>
-                            <td>
-                                @*<div class="parentDiv">
-                                        <div class="brownDiv"></div>
-                                    </div>*@
-                            </td>
-                            <!--6-->
-                            <td>
-                                @*<div class="parentDiv">
-                                        <div class="brownDiv"></div>
-                                    </div>*@
-                            </td>
-                            <td>
-                                @*<div class="parentDiv">
-                                        <div class="brownDiv"></div>
-                                    </div>*@
-                            </td>
-                            <td>
-                                @*<div class="parentDiv">
-                                        <div class="brownDiv"></div>
-                                    </div>*@
-                            </td>
-                            <td>
-                                @*<div class="parentDiv">
-                                        <div class="brownDiv"></div>
-                                    </div>*@
-                            </td>
-                            <td>
-                                @*<div class="parentDiv">
-                                        <div class="brownDiv"></div>
-                                    </div>*@
-                            </td>
-                            <td>
-                                @*<div class="parentDiv">
-                                        <div class="brownDiv"></div>
-                                    </div>*@
-                            </td>
-                            <td>
-                                @*<div class="parentDiv">
-                                        <div class="brownDiv"></div>
-                                    </div>*@
-                            </td>
-                            <td>
-                                @*<div class="parentDiv">
-                                        <div class="brownDiv"></div>
-                                    </div>*@
-                            </td>
-                            <td>
-                                @*<div class="parentDiv">
-                                        <div class="brownDiv"></div>
-                                    </div>*@
-                            </td>
-                            <td>
-                                @*<div class="parentDiv">
-                                        <div class="brownDiv"></div>
-                                    </div>*@
-                            </td>
-                            <!--16-->
-                            <td>
-                                @*<div class="parentDiv">
-                                        <div class="brownDiv"></div>
-                                    </div>*@
-                            </td>
-                            <td>
-                                @*<div class="parentDiv">
-                                        <div class="brownDiv"></div>
-                                    </div>*@
-                            </td>
-                            <td>
-                                @*<div class="parentDiv">
-                                        <div class="brownDiv"></div>
-                                    </div>*@
-                            </td>
-                            <td>
-                                @*<div class="parentDiv">
-                                        <div class="brownDiv"></div>
-                                    </div>*@
-                            </td>
-                            <td>
-                                @*<div class="parentDiv">
-                                        <div class="brownDiv"></div>
-                                    </div>*@
-                            </td>
-                            <td>
-                                @*<div class="parentDiv">
-                                        <div class="brownDiv"></div>
-                                    </div>*@
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td colspan="4">@GlobalRes.Investigation</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                @*<div class="parentDiv">
-                                        <div class="brownDiv"></div>
-                                    </div>*@
-                            </td>
-                            <td>
-                                @*<div class="parentDiv">
-                                        <div class="brownDiv"></div>
-                                    </div>*@
-                            </td>
-                            <td>
-                                @*<div class="parentDiv">
-                                        <div class="brownDiv"></div>
-                                    </div>*@
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td colspan="4">@GlobalRes.Resolution</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                @*<div class="parentDiv">
-                                        <div class="brownDiv"></div>
-                                    </div>*@
-                            </td>
-                            <td>
-                                @*<div class="parentDiv">
-                                        <div class="brownDiv"></div>
-                                    </div>*@
-                            </td>
-                            <td>
-                                @*<div class="parentDiv">
-                                        <div class="brownDiv"></div>
-                                    </div>*@
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="addTheLegend">
-                    <div class="containerCenter">
-                        <table>
+                <div class="blockAverage">
+                    <!--work begin-->
+                    <div class="titleBlock">@GlobalRes.AverageNumberDaysPerStage</div>
+                    <div class="wrapper wrapperSpec">
+                        <table class="table">
                             <tr>
-                                <td><img src="~/Content/img/cutImage.jpg" /></td>
-                                <td class="text">Stage overdue / Stage within Deadline</td>
-                                <td><span class="square"></span></td>
-                                <td class="text">Alloted Days per Stage</td>
+                                <td colspan="4" class="headerBorder"></td>
+                                <td></td>
+                                <td>
+                                    @*<div class="parentDivHeader"><div class="headerBrown">2<span class="specialBorder">&nbsp;</span></div></div>*@
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+
+                                <td>
+                                    <!--<div class="base"><div class="letters">21</div></div>-->
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    @*<div class="parentDivHeader"><div class="headerBrown" style="right:-10px">21<span class="specialBorder" style="left: 8px;">&nbsp;</span></div></div>*@
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    @*<div class="base greyBase"><div class="letters">28</div></div>*@
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">@GlobalRes.PreReviewUp</td>
+                                <td>
+                                    @*<div class="parentDiv">
+                                        <div class="brownDiv"></div>
+                                    </div>*@
+                                </td>
+                                <td>
+                                    @*<div class="parentDiv">
+                                        <div class="brownDiv"></div>
+                                    </div>*@
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">@GlobalRes.Review</td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    @*<div class="parentDiv">
+                                        <div class="brownDiv"></div>
+                                    </div>*@
+                                </td>
+                                <td>
+                                    @*<div class="parentDiv">
+                                        <div class="brownDiv"></div>
+                                    </div>*@
+                                </td>
+                                <td>
+                                    @*<div class="parentDiv">
+                                        <div class="brownDiv"></div>
+                                    </div>*@
+                                </td>
+                                <td>
+                                    @*<div class="parentDiv">
+                                        <div class="brownDiv"></div>
+                                    </div>*@
+                                </td>
+                                <!--6-->
+                                <td>
+                                    @*<div class="parentDiv">
+                                        <div class="brownDiv"></div>
+                                    </div>*@
+                                </td>
+                                <td>
+                                    @*<div class="parentDiv">
+                                        <div class="brownDiv"></div>
+                                    </div>*@
+                                </td>
+                                <td>
+                                    @*<div class="parentDiv">
+                                        <div class="brownDiv"></div>
+                                    </div>*@
+                                </td>
+                                <td>
+                                    @*<div class="parentDiv">
+                                        <div class="brownDiv"></div>
+                                    </div>*@
+                                </td>
+                                <td>
+                                    @*<div class="parentDiv">
+                                        <div class="brownDiv"></div>
+                                    </div>*@
+                                </td>
+                                <td>
+                                    @*<div class="parentDiv">
+                                        <div class="brownDiv"></div>
+                                    </div>*@
+                                </td>
+                                <td>
+                                    @*<div class="parentDiv">
+                                        <div class="brownDiv"></div>
+                                    </div>*@
+                                </td>
+                                <td>
+                                    @*<div class="parentDiv">
+                                        <div class="brownDiv"></div>
+                                    </div>*@
+                                </td>
+                                <td>
+                                    @*<div class="parentDiv">
+                                        <div class="brownDiv"></div>
+                                    </div>*@
+                                </td>
+                                <td>
+                                    @*<div class="parentDiv">
+                                        <div class="brownDiv"></div>
+                                    </div>*@
+                                </td>
+                                <!--16-->
+                                <td>
+                                    @*<div class="parentDiv">
+                                        <div class="brownDiv"></div>
+                                    </div>*@
+                                </td>
+                                <td>
+                                    @*<div class="parentDiv">
+                                        <div class="brownDiv"></div>
+                                    </div>*@
+                                </td>
+                                <td>
+                                    @*<div class="parentDiv">
+                                        <div class="brownDiv"></div>
+                                    </div>*@
+                                </td>
+                                <td>
+                                    @*<div class="parentDiv">
+                                        <div class="brownDiv"></div>
+                                    </div>*@
+                                </td>
+                                <td>
+                                    @*<div class="parentDiv">
+                                        <div class="brownDiv"></div>
+                                    </div>*@
+                                </td>
+                                <td>
+                                    @*<div class="parentDiv">
+                                        <div class="brownDiv"></div>
+                                    </div>*@
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">@GlobalRes.Investigation</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    @*<div class="parentDiv">
+                                        <div class="brownDiv"></div>
+                                    </div>*@
+                                </td>
+                                <td>
+                                    @*<div class="parentDiv">
+                                        <div class="brownDiv"></div>
+                                    </div>*@
+                                </td>
+                                <td>
+                                    @*<div class="parentDiv">
+                                        <div class="brownDiv"></div>
+                                    </div>*@
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">@GlobalRes.Resolution</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    @*<div class="parentDiv">
+                                        <div class="brownDiv"></div>
+                                    </div>*@
+                                </td>
+                                <td>
+                                    @*<div class="parentDiv">
+                                        <div class="brownDiv"></div>
+                                    </div>*@
+                                </td>
+                                <td>
+                                    @*<div class="parentDiv">
+                                        <div class="brownDiv"></div>
+                                    </div>*@
+                                </td>
                             </tr>
                         </table>
                     </div>
-                </div>
-                <div id="base">
+                    <div class="addTheLegend">
+                        <div class="containerCenter">
+                            <table>
+                                <tr>
+                                    <td><img src="~/Content/img/cutImage.jpg" /></td>
+                                    <td class="text">Stage overdue / Stage within Deadline</td>
+                                    <td><span class="square"></span></td>
+                                    <td class="text">Alloted Days per Stage</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="base">
 
-                </div>
-            </div>
-            <!-- 4 Departments & Locations -->
-            <div class="bigBlock">
-                <!-- 4_1 Departments -->
-                <div class="blockDepartments">
-                    <div class="headerBlockActivity">
-                        <div class="titleBlock">@GlobalRes.Departments</div>
-                    </div>
-                    <div style="width: 100%; display: table;">
-                        <div id="containerDepartments" class="containers" style="height: 250px; width: 95%; margin-left: 5%;"></div>
                     </div>
                 </div>
-                <!-- 4_2 Locations -->
-                <div class="blockLocations">
-                    <div class="headerBlockActivity">
-                        <div class="titleBlock">@GlobalRes.Locations</div>
+                <!-- 4 Departments & Locations -->
+                <div class="bigBlock">
+                    <!-- 4_1 Departments -->
+                    <div class="blockDepartments">
+                        <div class="headerBlockActivity">
+                            <div class="titleBlock">@GlobalRes.Departments</div>
+                        </div>
+                        <div style="width: 100%; display: table;">
+                            <div id="containerDepartments" class="containers" style="height: 250px; width: 95%; margin-left: 5%;"></div>
+                        </div>
                     </div>
-                    <div style="width: 100%; display: table;">
-                        <div id="containerLocation" class="containers" style="height: 250px; width: 95%; margin-left: 5%;"></div>
-                    </div>
+                    <!-- 4_2 Locations -->
+                    <div class="blockLocations">
+                        <div class="headerBlockActivity">
+                            <div class="titleBlock">@GlobalRes.Locations</div>
+                        </div>
+                        <div style="width: 100%; display: table;">
+                            <div id="containerLocation" class="containers" style="height: 250px; width: 95%; margin-left: 5%;"></div>
+                        </div>
 
-                </div>
-            </div>
-
-            <!-- 5 Type of incident & Reporter -->
-            <div class="bigBlock">
-                <!-- 5_1 Type of incident -->
-                <div class="blockTypeOfIncident">
-                    <div class="headerBlockActivity">
-                        <div class="titleBlock">@GlobalRes.Typeofincident</div>
                     </div>
-                    <div class="allBlockLines">
-                        @*@foreach (DataRow dr in _dtSecondaryTypes.Rows)
+                </div>
+
+                <!-- 5 Type of incident & Reporter -->
+                <div class="bigBlock">
+                    <!-- 5_1 Type of incident -->
+                    <div class="blockTypeOfIncident">
+                        <div class="headerBlockActivity">
+                            <div class="titleBlock">@GlobalRes.Typeofincident</div>
+                        </div>
+                        <div class="allBlockLines">
+                            @*@foreach (DataRow dr in _dtSecondaryTypes.Rows)
                             {
                                 <div class="blockLinesItem">
                                     <p>@dr["name"]</p>
@@ -660,18 +601,18 @@
                                     </div>
                                 </div>
                             }*@
+                        </div>
+                        <!--allBlockLines-->
                     </div>
-                    <!--allBlockLines-->
-                </div>
-                <!-- 5_2 Reporter -->
-                <div class="blockReporter">
-                    <div class="headerBlockActivity">
-                        <div class="titleBlock">@GlobalRes.TypeOfReporter</div>
-                    </div>
+                    <!-- 5_2 Reporter -->
+                    <div class="blockReporter">
+                        <div class="headerBlockActivity">
+                            <div class="titleBlock">@GlobalRes.TypeOfReporter</div>
+                        </div>
 
-                    <div class="allBlockLines">
+                        <div class="allBlockLines">
 
-                        @*@foreach (DataRow dr in _dtCompanyRelationships.Rows)
+                            @*@foreach (DataRow dr in _dtCompanyRelationships.Rows)
                             {
                                 <div class="blockLinesItem">
                                     <p>@dr["name"]</p>
@@ -683,13 +624,15 @@
                                 </div>
                             }*@
 
+                        </div>
+                        <!--allBlockLines-->
                     </div>
-                    <!--allBlockLines-->
+
+
                 </div>
-
-
-            </div>
-        </div><!--contentSettings-->
+            </div><!--contentSettings-->
+        </div>
+    
     </div>
 </div><!--end blockSettings blockAnalitics-->
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
