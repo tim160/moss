@@ -32,6 +32,19 @@
     String class_ext = ViewBag.cc_extension;
 }
 
+<style>
+    .oldstyle {
+        display: table !important; 
+        margin-left: auto !important;
+        margin-right: auto !important;
+        
+    }
+    .moldstyle {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+</style>
+
 <div id="companyId" data-value="@company_id"></div>
 <div id="userId" data-value="@user_id"></div>
 <div class="blockSettings">
@@ -42,7 +55,7 @@
     @Html.Partial("~/Views/Settings/partial/casesHeared.cshtml", active)
     <!--casesHeared-->
 
-    <div class="contentSettings secondHeader">
+    <div class="contentSettings secondHeader oldstyle">
         <div class="headerCompanyProfile">
             <div class="headerBlock">
                 <div class="blockImg">
@@ -68,15 +81,15 @@
             </div>
             <div class="menuCompanyProfile">
                 <div class="settingMenuItems">
-                    <h2 class="menuItem active">@GlobalRes.Departments</h2>
-                    <h2 class="menuItem">@GlobalRes.Locations</h2>
+                    <h2 class="menuItem moldstyle active">@GlobalRes.Departments</h2>
+                    <h2 class="menuItem moldstyle">@GlobalRes.Locations</h2>
                     @*<h2 class="menuItem">@GlobalRes.Languages</h2>*@
-                    <h2 class="menuItem">@GlobalRes.IncidentTypes</h2>
-                    <h2 class="menuItem">@GlobalRes.CaseRouting</h2>
-                    <h2 class="menuItem">@GlobalRes.ReporterTypes</h2>
-                    <h2 class="menuItem">@GlobalRes.Anonymity</h2>
-                    <h2 class="menuItem">@GlobalRes.Outcomes</h2>
-                    <h2 class="menuItem">@GlobalRes.RootCauses</h2>
+                    <h2 class="menuItem moldstyle">@GlobalRes.IncidentTypes</h2>
+                    <h2 class="menuItem moldstyle">@GlobalRes.CaseRouting</h2>
+                    <h2 class="menuItem moldstyle">@GlobalRes.ReporterTypes</h2>
+                    <h2 class="menuItem moldstyle">@GlobalRes.Anonymity</h2>
+                    <h2 class="menuItem moldstyle">@GlobalRes.Outcomes</h2>
+                    <h2 class="menuItem moldstyle">@GlobalRes.RootCauses</h2>
                     @*
                     <h2 class="menuItem">@GlobalRes.SecondaryType</h2>
                     <h2 class="menuItem">@GlobalRes.CaseAdminDepartment</h2>
@@ -86,7 +99,7 @@
         </div>
     </div><!--contentSettings.secondHeader-->
     <div class="contentCompanyProfile contentCompanyProfile@{@class_ext}">
-        <div class="contentSettings">
+        <div class="contentSettings oldstyle">
             <!--blockDepartments-->
             <div class="blockDepartments">
                 @if (is_valid_mediator)
