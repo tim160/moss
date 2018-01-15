@@ -42,11 +42,11 @@
                                 </div>
                                 <ul class="menuUl" ng-show="secondaryTypes.length > 0">
                                     <li ng-repeat="item in secondaryTypes">
-                                        <div class="liItem" value="{{item.id}}" nameDropdown="ReportsDepartmentIDStringss">
+                                        <div class="liItem" ng-class="{'selected': item._selected}" value="{{item.id}}" nameDropdown="ReportsDepartmentIDStringss">
+                                            <div class="checked">
+                                                <img class="" src="~/Content/img/check.png" />
+                                            </div>
                                             <span class="positionText liText" ng-click="selectSecondaryTypes(item)">
-                                                <div class="checked">
-                                                    <img class="" src="~/Content/img/check.png" />
-                                                </div>
                                                 {{item.secondary_type_en}}
                                             </span>
                                         </div>

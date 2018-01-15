@@ -13,6 +13,9 @@
         $scope.secondaryTypes = [];
 
         $scope.refresh = function () {
+            /*var types = $scope.secondaryTypes.map(function (v) {
+                return v._selected;
+            });*/
             AnalyticsRootCauseAnalysisService.get({ secondaryType: $scope.secondaryType.id }, function (data) {
                 if ($scope.secondaryTypes.length === 0) {
                     $scope.secondaryTypes = data.SecondaryTypes;
@@ -32,6 +35,7 @@
         $scope.refresh();
 
         $scope.selectSecondaryTypes = function (item) {
+            //item._selected = !item._selected;
             $scope.secondaryType = item;
             $scope.refresh();
         };
