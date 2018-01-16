@@ -263,7 +263,8 @@
 
         </div><!--end LeftLogo-->
     </div><!-- end header -->
-    <div class="menuCasesBlock">
+
+    <div class="menuCasesBlock" style="margin-top: 35px;">
         <div class="headerBlockTextLeft">
             @{
                 string hrefURL = Request.Url.AbsoluteUri.ToLower();
@@ -581,87 +582,73 @@
                 </div><!--headerPos-->
     }
         </div>
+    </div>
+
+    @RenderBody()
+
+    <script src="~/Scripts/View/Settings.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //var button = $(".acceptCaseBtn.resolveCase");
+            var textareaPopup = $('textarea#txtResolve');
+
+            function overlay() {
+                el = document.getElementById("anotherDialog");
+                el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+            }
 
 
-        @RenderBody()
-        <script src="~/Scripts/View/Settings.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                //var button = $(".acceptCaseBtn.resolveCase");
-                var textareaPopup = $('textarea#txtResolve');
+            var textareaNewPopup = $('textarea#txtEscalate');
 
-                function overlay() {
-                    el = document.getElementById("anotherDialog");
-                    el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
-                }
+            function overlay_approve() {
+                el = document.getElementById("approveDialog");
+                el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+            }
 
-
-                var textareaNewPopup = $('textarea#txtEscalate');
-
-                function overlay_approve() {
-                    el = document.getElementById("approveDialog");
-                    el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
-                }
-
-                function startClick(){
-                    $('.logButtonModal').click(
-                        function(){
-                            if(textareaPopup[0].value==""){
-                                textareaPopup.css({'border-color':'red', 'box-shadow':'red'});
-                            }
-                            else{
-                              //  console.log('logButtonModal click - _report_id = ' + @_report_id);
-                            }
+            function startClick(){
+                $('.logButtonModal').click(
+                    function(){
+                        if(textareaPopup[0].value==""){
+                            textareaPopup.css({'border-color':'red', 'box-shadow':'red'});
                         }
-                    );
-                    $('.repButtonModal').click(
-                        function(){
-                            if(textareaPopup[0].value==""){
-                                textarea.css({'border-color':'red', 'box-shadow':'red'});
-                            }
-                            else{
-                            //    console.log('repButtonModal click - _report_id = ' + @_report_id);
-                            }
+                        else{
+                            //  console.log('logButtonModal click - _report_id = ' + @_report_id);
                         }
-                    );
-                }
-                startClick();
-            });
+                    }
+                );
+                $('.repButtonModal').click(
+                    function(){
+                        if(textareaPopup[0].value==""){
+                            textarea.css({'border-color':'red', 'box-shadow':'red'});
+                        }
+                        else{
+                        //    console.log('repButtonModal click - _report_id = ' + @_report_id);
+                        }
+                    }
+                );
+            }
+            startClick();
+        });
 
-            $("#return_investigation").on('click', function(el){
+        $("#return_investigation").on('click', function(el){
 
-                $("#approveDialog").toggle();
-                $("#txtEscalate").attr('placeholder', "@Html.Raw(GlobalRes.AddReasonWhy)");
+            $("#approveDialog").toggle();
+            $("#txtEscalate").attr('placeholder', "@Html.Raw(GlobalRes.AddReasonWhy)");
 
-                $("#escalate_btn").text("@Html.Raw(GlobalRes.Returnnvestigation)");
-                $("#escalate_btn").val(3);
-                $("#_overlay_title").text("@Html.Raw(GlobalRes.Returnnvestigation)");
-                $("#textbox_title").text("@Html.Raw(GlobalRes.AddReasonWhy)");
-            });
-            $("#approve_close").on('click', function(el){
+            $("#escalate_btn").text("@Html.Raw(GlobalRes.Returnnvestigation)");
+            $("#escalate_btn").val(3);
+            $("#_overlay_title").text("@Html.Raw(GlobalRes.Returnnvestigation)");
+            $("#textbox_title").text("@Html.Raw(GlobalRes.AddReasonWhy)");
+        });
+        $("#approve_close").on('click', function(el){
 
-                $("#approveDialog").toggle();
-                $("#txtEscalate").attr('placeholder', "@Html.Raw(same_mediator_warning)");
-                $("#escalate_btn").text("@Html.Raw(GlobalRes.CloseCaseUp)");
-                $("#escalate_btn").val(9);
-                $("#_overlay_title").text("@Html.Raw(GlobalRes.CloseCaseUp)");
-                $("#textbox_title").text("@Html.Raw(same_mediator_warning)");
-            });
-        </script>
+            $("#approveDialog").toggle();
+            $("#txtEscalate").attr('placeholder', "@Html.Raw(same_mediator_warning)");
+            $("#escalate_btn").text("@Html.Raw(GlobalRes.CloseCaseUp)");
+            $("#escalate_btn").val(9);
+            $("#_overlay_title").text("@Html.Raw(GlobalRes.CloseCaseUp)");
+            $("#textbox_title").text("@Html.Raw(same_mediator_warning)");
+        });
+    </script>
 </body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </html>

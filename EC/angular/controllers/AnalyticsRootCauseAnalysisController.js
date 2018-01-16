@@ -57,7 +57,7 @@
                 duration: 500,
                 labelThreshold: 0.01,
                 labelSunbeamLayout: true,
-                legendPosition: 'bottom',
+                //legendPosition: 'bottom',
                 title: {
                     enable: true,
                     text: '',

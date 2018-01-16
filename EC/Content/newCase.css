@@ -3010,3 +3010,26 @@ body .blockLinesItem p{
 body .itemLegend .headerLegend{
 	margin-bottom: 10px;
 }
+
+body .onclick-menu-content li a{
+	text-align: left;
+}
+.centerBlock .onclick-menu-content button{
+	text-align: left;
+	margin: 0;
+	border: none;
+	padding: 0;
+}
+
+/*----------------- RootCauseAnalysis ---------------------*/
+
+.graphTitle{
+	font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+	font-size: 16px;
+	color: #3c3e3f;
+	padding-bottom: 20px;
+	padding-left: 30px;
+}
+.circleGraphInfoRow .ng-scope{
+	padding: 5px 15px;
+}
