@@ -64,7 +64,7 @@
                                 <span class="inputRadio__inputTitle">No</span>
                             </label>
                         </div>
-                        <div class="col-3" ng-show="model.report_cc_crime.cc_is_clear_act_crime == 'true'">
+                        <div class="col-4" ng-show="model.report_cc_crime.cc_is_clear_act_crime == 'true'">
                             <dropbox ng-dropbox-textExpr="getCrimeCategory(model.report_cc_crime.cc_crime_statistics_category_id)"
                                      itemText="{{item.crime_statistics_category_en}}"
                                      ng-dropbox-list="model.cc_crime_statistics_categories"
@@ -72,7 +72,7 @@
                                      ng-dropbox-on-select="saveCrimeCategory">
                             </dropbox>
                         </div>
-                        <div class="col-3" ng-show="model.report_cc_crime.cc_is_clear_act_crime == 'true'">
+                        <div class="col-4" ng-show="model.report_cc_crime.cc_is_clear_act_crime == 'true'">
                             <dropbox ng-dropbox-textExpr="getCrimeLocation(model.report_cc_crime.cc_crime_statistics_location_id)"
                                      itemText="{{item.crime_statistics_location_en}}"
                                      ng-dropbox-list="model.cc_crime_statistics_locations"

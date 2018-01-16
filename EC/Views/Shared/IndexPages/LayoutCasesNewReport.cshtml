@@ -264,7 +264,7 @@
         </div><!--end LeftLogo-->
     </div><!-- end header -->
 
-    <div class="menuCasesBlock" style="margin-top: 35px;">
+    <div class="menuCasesBlock" style="margin-top: 35px; margin-bottom: 35px;">
         <div class="headerBlockTextLeft">
             @{
                 string hrefURL = Request.Url.AbsoluteUri.ToLower();
@@ -505,7 +505,7 @@
                                 flag = true;
 
                             }
-                            if (CurrentURL.Contains("analytics/index"))
+                            if (CurrentURL.Contains("analytics/index") || CurrentURL.Contains("/analytics"))
                             {
                                 _temp = GlobalRes.Cases;
                                 flag = true;
@@ -513,6 +513,16 @@
                             if (CurrentURL.Contains("analytics/tasks"))
                             {
                                 _temp = GlobalRes.Tasks;
+                                flag = true;
+                            }
+                            if (CurrentURL.Contains("analytics/rootcauseanalysis"))
+                            {
+                                _temp = "Root cause analysis";
+                                flag = true;
+                            }
+                            if (CurrentURL.Contains("analytics/cacsreport"))
+                            {
+                                _temp = "Clery Act Crime Statistics Report";
                                 flag = true;
                             }
                             if (CurrentURL.Contains("analytics/mediators"))
