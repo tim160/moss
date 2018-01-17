@@ -81,6 +81,19 @@ namespace EC.Controllers.API
                 .OrderBy(x => x.outcome_en)
                 .ToList();
 
+            var rep_outcome = DB.report_case_closure_outcome.FirstOrDefault(x => x.report_id == filter.Report_id & x.non_mediator_involved_id == null);
+
+            if (rep_outcome == null)
+            {
+                rep_outcome = new report_case_closure_outcome
+                {
+                    non_mediator_involved_id = null,
+                    report_id = filter.Report_id                    
+                };
+                DB.report_case_closure_outcome.Add(rep_outcome);
+                DB.SaveChanges();
+            }
+
             var m = new
             {
                 cc_crime_statistics_categories = DB.cc_crime_statistics_category

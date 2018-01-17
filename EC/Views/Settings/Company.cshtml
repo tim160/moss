@@ -290,7 +290,7 @@
                 </div>
             </div><!--blockOutcome-->
 
-            <div id="caseRouting" class="blockCaseRouting" style="display: none;" ng-controller="SettingsCompanyRoutingController">
+            <div id="caseRouting" class="blockCaseRouting" style="display: none;" ng-controller="SettingsCompanyRoutingController" ng-cloak>
                 <div class="positionTableCases">
                     <p>Routing by Location</p>
                     <table class="tableCasesIndex">
@@ -368,7 +368,7 @@
                 })
             </div>
         
-            <div class="blockSecondaryType" style="display: none;" ng-controller="SettingsCompanySecondaryTypeController">
+            <div class="blockSecondaryType" style="display: none;" ng-controller="SettingsCompanySecondaryTypeController" ng-cloak>
                 @if (is_valid_mediator)
                 {
                     <div class="addIncidentTypeBtn" ng-show="!addMode">
@@ -402,7 +402,7 @@
                 </div>
             </div>
 
-            <div class="blockCaseAdminDepartment" style="display: none;" ng-controller="SettingsCompanyCaseAdminDepartmentController">
+            <div class="blockCaseAdminDepartment" style="display: none;" ng-controller="SettingsCompanyCaseAdminDepartmentController" ng-cloak>
                 @if (is_valid_mediator)
                 {
                     <div class="addIncidentTypeBtn" ng-show="!addMode">
