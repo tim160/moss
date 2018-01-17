@@ -79,6 +79,12 @@ namespace EC.Controllers
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
+            #region EC-CC Viewbag
+            ViewBag.is_cc = is_cc;
+            string cc_ext = "";
+            if (is_cc) cc_ext = "_cc";
+            #endregion
+
             int user_id = user.id;
             ViewBag.user_id = user_id;
             ViewBag.report_id = report_id;
