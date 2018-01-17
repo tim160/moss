@@ -276,10 +276,11 @@
                 $scope.chart1.chart.title = data.BehavioralTotal;
                 $scope.chart2.chart.title = data.ExternalTotal;
                 $scope.chart3.chart.title = data.OrganizationalTotal;
+                $scope.chartColors = data.Colors;
             });
         };
 
-        $scope.chartColors = d3.scale.category20().range();
+        $scope.chartColors = ['#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472'];
 
         $scope.refresh();
 
@@ -303,10 +304,12 @@
                 },
                 height: 500,
                 showLabels: false,
+                color: $scope.chartColors,
                 duration: 500,
                 labelThreshold: 0.01,
                 labelSunbeamLayout: true,
                 //legendPosition: 'bottom',
+                showLegend: false,
                 title: {
                     enable: true,
                     text: '',
@@ -334,9 +337,11 @@
                 },
                 height: 500,
                 showLabels: false,
+                color: $scope.chartColors,
                 duration: 500,
                 labelThreshold: 0.01,
                 labelSunbeamLayout: true,
+                showLegend: false,
                 legend: {
                     margin: {
                         top: 5,
@@ -360,9 +365,11 @@
                 },
                 height: 500,
                 showLabels: false,
+                color: $scope.chartColors,
                 duration: 500,
                 labelThreshold: 0.01,
                 labelSunbeamLayout: true,
+                showLegend: false,
                 legend: {
                     margin: {
                         top: 5,

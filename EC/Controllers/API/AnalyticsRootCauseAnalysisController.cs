@@ -109,6 +109,7 @@ namespace EC.Controllers.API
                 ExternalTotal = external.Sum(x => x.count),
                 Organizational = organizational,
                 OrganizationalTotal = organizational.Sum(x => x.count),
+                Colors = DB.color.OrderBy(x => x.id).Select(x => "#" + x.color_code),
             };
        }
     }
