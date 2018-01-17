@@ -63,7 +63,9 @@ namespace EC.Controllers.API
             }*/
 
             //var reportInfo = DB.report_investigation_methodology.Where(x => ids.Contains(x.report_id)).ToList();
-            var reportInfo = DB.report_investigation_methodology.Where(x => x.report_secondary_type_id == model.SecondaryType || model.SecondaryType == 0).ToList();
+            var reportInfo = DB.report_investigation_methodology
+                .Where(x => x.report_secondary_type_id == model.SecondaryType || model.SecondaryType == 0)
+                .ToList();
 
             var company_behavioral = DB.company_root_cases_behavioral.Where(x => x.company_id == user.company_id).ToList();
             var behavioral = reportInfo
@@ -71,7 +73,7 @@ namespace EC.Controllers.API
                 .GroupBy(x => x.company_root_cases_behavioral_id)
                 .Select(x => new {
                     id = x.Key,
-                    name = company_behavioral.FirstOrDefault(z => z.id == x.Key).name_en,
+                    name = company_behavioral.FirstOrDefault(z => z.id == x.Key)?.name_en,
                     count = x.Count()
                 })
                 .ToList();
@@ -82,7 +84,7 @@ namespace EC.Controllers.API
                 .GroupBy(x => x.company_root_cases_external_id)
                 .Select(x => new {
                     id = x.Key,
-                    name = company_external.FirstOrDefault(z => z.id == x.Key).name_en,
+                    name = company_external.FirstOrDefault(z => z.id == x.Key)?.name_en,
                     count = x.Count()
                 })
                 .ToList();
@@ -93,7 +95,7 @@ namespace EC.Controllers.API
                 .GroupBy(x => x.company_root_cases_organizational_id)
                 .Select(x => new {
                     id = x.Key,
-                    name = company_organizational.FirstOrDefault(z => z.id == x.Key).name_en,
+                    name = company_organizational.FirstOrDefault(z => z.id == x.Key)?.name_en,
                     count = x.Count()
                 })
                 .ToList();
