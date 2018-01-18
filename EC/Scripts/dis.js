@@ -634,7 +634,7 @@
                 }
             });
             data.report_case_closure_outcome2 = $filter('filter')(data.report_case_closure_outcome, function (value) {
-                if (value.mediator.role_in_report_id === 2) {
+                if ((value.mediator.role_in_report_id === 2) || (value.mediator.role_in_report_id === 3)) {
                     return true;
                 }
             });
