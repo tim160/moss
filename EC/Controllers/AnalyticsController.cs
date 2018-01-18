@@ -244,6 +244,9 @@ namespace EC.Controllers
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
+            if (!is_cc)
+                return RedirectToAction("Index", "Analytics");
+
             int user_id = user.id;
             ViewBag.user_id = user_id;
 
