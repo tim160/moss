@@ -92,7 +92,7 @@
                                     {{item.location_string}}
                                 </div><!-- /.teamBlock-footer__location-text -->
                             </div><!-- /.teamBlock-footer__location -->
-                            <a href="mailTo:timur160@hotmail.com" class="teamBlock-footer__mail clearfix">
+                            <a href={{item.email}} class="teamBlock-footer__mail clearfix">
                                 <span class="teamBlock-footer__mail-logo"></span>
                                 <span class="teamBlock-footer__mail-content">{{item.email}}</span>
                             </a>
@@ -104,14 +104,14 @@
 
         <div class="content-container__inner">
             <div class="teamBlock__addNew">
-                <a href="#!" class="btn-linkReverse" ng-click="addMoreMediators = !addMoreMediators">Add more mediators</a>
+                <a href="#!" class="btn-linkReverse" ng-click="addMoreMediators = !addMoreMediators">Add more case administrators</a>
             </div>
         </div>
 
         <div class="content-container__inner" ng-show="addMoreMediators == true">
             <div class="teamBlock__addNewText">
                 <div class="teamBlock__addNewText-title">
-                    Select mediators to add to this team
+                    Select case administrators to add to this team
                 </div><!-- /.teamBlock__addNewText-title -->
             </div><!-- /.teamBlock__addNew -->
             <div class="row clearfix team-row">
@@ -185,7 +185,7 @@
                                     {{item.location_string}}
                                 </div><!-- /.teamBlock-footer__location-text -->
                             </div><!-- /.teamBlock-footer__location -->
-                            <a href="mailTo:timur160@hotmail.com" class="teamBlock-footer__mail clearfix">
+                            <a href={{item.email}} class="teamBlock-footer__mail clearfix">
                                 <span class="teamBlock-footer__mail-logo"></span>
                                 <span class="teamBlock-footer__mail-content">{{item.email}}</span>
                             </a>
