@@ -65,6 +65,11 @@
                     enable: true,
                     text: '',
                 },
+                labels: {
+                    mainLabel: {
+                        fontSize: 20,
+                    },
+                },
                 legend: {
                     margin: {
                         top: 5,

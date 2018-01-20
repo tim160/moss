@@ -155,17 +155,17 @@ namespace EC.Controllers.API
                 note2 = DB.report_inv_notes.FirstOrDefault(x => x.report_id == filter.Report_id & x.type == 2)?.note,
 
                 company_root_cases_behavioral = DB.company_root_cases_behavioral
-                    .Where(x => x.company_id == user.company_id)
+                    .Where(x => x.company_id == user.company_id & x.status_id == 2)
                     .OrderBy(x => x.name_en)
                     .ToList(),
 
                 company_root_cases_external = DB.company_root_cases_external
-                    .Where(x => x.company_id == user.company_id)
+                    .Where(x => x.company_id == user.company_id & x.status_id == 2)
                     .OrderBy(x => x.name_en)
                     .ToList(),
 
                 company_root_cases_organizational = DB.company_root_cases_organizational
-                    .Where(x => x.company_id == user.company_id)
+                    .Where(x => x.company_id == user.company_id & x.status_id == 2)
                     .OrderBy(x => x.name_en)
                     .ToList(),
 

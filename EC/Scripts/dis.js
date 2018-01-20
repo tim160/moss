@@ -313,6 +313,12 @@
                 title: {
                     enable: true,
                     text: '',
+                    fontSize: 20,
+                },
+                labels: {
+                    mainLabel: {
+                        fontSize: 20,
+                    },
                 },
                 legend: {
                     margin: {
