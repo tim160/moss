@@ -39,9 +39,16 @@
         $scope.refresh = function (data) {
             $scope.addMoreMediators = false;
             $scope.involved_mediators_user_list = data.involved_mediators_user_list;
-            $scope.mediators_whoHasAccess_toReport = data.mediators_whoHasAccess_toReport;
+            //$scope.mediators_whoHasAccess_toReport = data.mediators_whoHasAccess_toReport;
             $scope.available_toAssign_mediators = data.available_toAssign_mediators;
             $scope.currentInfo = data.currentInfo;
+            $scope.mediators_whoHasAccess_toReportG = [];
+            for (var i = 0; i < data.mediators_whoHasAccess_toReport.length; i++) {
+                if (i % 3 === 0) {
+                    $scope.mediators_whoHasAccess_toReportG.push([]);
+                }
+                $scope.mediators_whoHasAccess_toReportG[$scope.mediators_whoHasAccess_toReportG.length - 1].push(data.mediators_whoHasAccess_toReport[i]);
+            }
         };
 
         NewCaseTeamService.get({ id: $scope.report_id }, function (data) {

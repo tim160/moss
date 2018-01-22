@@ -21,8 +21,8 @@
         <div class="divider p-tb-20"></div>
 
         <div class="content-container__inner clearfix">
-            <div class="row clearfix team-row">
-                <div class="col-4" ng-repeat="item in mediators_whoHasAccess_toReport" repeat-done="makeCircles()">
+            <div class="row clearfix team-row" ng-repeat="grp in mediators_whoHasAccess_toReportG">
+                <div class="col-4" ng-repeat="item in grp" repeat-done="makeCircles()">
                     <div class="teamBlock shadowLight">
                         <div class="teamBlock-header clearfix">
                             <div class="teamBlock-header__logo">
