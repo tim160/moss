@@ -755,6 +755,8 @@
     //------------------------ END Locations ------------------------------------------
 
     var configObject = {
+        parentEl: '.daterange.menuItem',
+        container: '.daterange.menuItem',
         autoClose: false,
         format: 'YYYY-MM-DD',
         separator: ' to ',
@@ -788,7 +790,6 @@
         },
         customShortcuts : [],
         inline:false,
-        container:'body',
         alwaysOpen:false,
         singleDate:false,
         lookBehind: false,
