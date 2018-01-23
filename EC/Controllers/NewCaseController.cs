@@ -24,6 +24,9 @@ namespace EC.Controllers
                 return RedirectToAction("Index", "Account", new { returnUrl = Request.Url.LocalPath });
 
             ReportModel rm = new ReportModel(report_id);
+            if (!rm.HasAccessToReport(user.id))
+                return RedirectToAction("Index", "Account");
+
             int user_id = user.id;
             ViewBag.user_id = user_id;
             ViewBag.report_id = report_id;
@@ -55,6 +58,9 @@ namespace EC.Controllers
                 return RedirectToAction("Index", "Account");
 
             ReportModel rm = new ReportModel(report_id);
+            if (!rm.HasAccessToReport(user.id))
+                return RedirectToAction("Index", "Account");
+
             int user_id = user.id;
             ViewBag.user_id = user_id;
             ViewBag.report_id = report_id;
@@ -77,6 +83,10 @@ namespace EC.Controllers
             //user = user != null ? user : db.user.FirstOrDefault(x => x.id == 2);
             //DEBUG
             if (user == null || user.id == 0)
+                return RedirectToAction("Index", "Account");
+
+            ReportModel rm = new ReportModel(report_id);
+            if (!rm.HasAccessToReport(user.id))
                 return RedirectToAction("Index", "Account");
 
             #region EC-CC Viewbag
@@ -102,6 +112,10 @@ namespace EC.Controllers
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
+            ReportModel rm = new ReportModel(report_id);
+            if (!rm.HasAccessToReport(user.id))
+                return RedirectToAction("Index", "Account");
+
             int user_id = user.id;
             ViewBag.user_id = user_id;
             ViewBag.report_id = report_id;
@@ -119,6 +133,9 @@ namespace EC.Controllers
                 return RedirectToAction("Index", "Account");
 
             ReportModel rm = new ReportModel(report_id);
+            if (!rm.HasAccessToReport(user.id))
+                return RedirectToAction("Index", "Account");
+
             int user_id = user.id;
             UserModel um = new UserModel(user_id);
             List<task> tasks = rm.ReportTasks(0);
@@ -158,6 +175,9 @@ namespace EC.Controllers
                 return RedirectToAction("Index", "Account");
 
             ReportModel rm = new ReportModel(report_id);
+            if (!rm.HasAccessToReport(user.id))
+                return RedirectToAction("Index", "Account");
+
             int user_id = user.id;
             UserModel um = new UserModel(user_id);
 
@@ -172,6 +192,10 @@ namespace EC.Controllers
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
+                return RedirectToAction("Index", "Account");
+
+            ReportModel rm = new ReportModel(report_id);
+            if (!rm.HasAccessToReport(user.id))
                 return RedirectToAction("Index", "Account");
 
             int user_id = user.id;
@@ -190,7 +214,10 @@ namespace EC.Controllers
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
-            var rm = new ReportModel(report_id);
+            ReportModel rm = new ReportModel(report_id);
+            if (!rm.HasAccessToReport(user.id))
+                return RedirectToAction("Index", "Account");
+
             ViewBag.rm = rm;
             ViewBag.report_id = report_id;
             ViewBag.user_id = user.id;
