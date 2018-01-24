@@ -148,7 +148,7 @@
                     <input type="text" name="newLocationName" required="" value="">
                     @if (is_cc)
                     {
-                        @Html.DropDownList("location_cc_extended", (SelectList) ViewBag.LocationExtendeds, "Not selected", new { @class = "select-def" })
+                        @Html.DropDownList("location_cc_extended", (SelectList) ViewBag.LocationExtendeds, "Select Location Category", new { @class = "select-def" })
                     }
                     <div class="closeIcon"></div>
                 </div>
@@ -157,16 +157,20 @@
                     {
                         <div style="display: flex;">
                             <p>
-                                <span class="location_name">@_location.location_en</span>
-                                @if (is_cc)
-                                {
-                                    var list = (SelectList)ViewBag.LocationExtendeds;
-                                    if (_location.location_cc_extended_id.HasValue)
+                                <span class="col-6">
+                                    <span class="location_name">@_location.location_en</span>
+                                </span>
+                                <span class="col-6">
+                                    @if (is_cc)
                                     {
-                                        list = new SelectList(list, "Value", "Text", _location.location_cc_extended_id.Value.ToString());
+                                        var list = (SelectList)ViewBag.LocationExtendeds;
+                                        if (_location.location_cc_extended_id.HasValue)
+                                        {
+                                            list = new SelectList(list, "Value", "Text", _location.location_cc_extended_id.Value.ToString());
+                                        }
+                                        @Html.DropDownList("location_cc_extended_" + _location.id, list, "Select Location Category", new { @class = "location_cc_extended_items select-def" })
                                     }
-                                    @Html.DropDownList("location_cc_extended_" + _location.id, list, "Not selected", new { @class = "location_cc_extended_items select-def" })
-                                }
+                                </span>
                             </p>
                             @if (is_valid_mediator)
                             {

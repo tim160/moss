@@ -2563,9 +2563,6 @@ input.personDataTextBox{
 		.dashboard-col__team{
 			width: 10%;
 		}
-		.dashboard-col__alert{
-			width: 3%;
-		}
 		.dashboard-col__team.dashboard-colHeader{}
 
 	.dashboard-rowbody{
@@ -2950,6 +2947,16 @@ body .menuUl .positionText{
 .menuCasesBlock{
 	overflow: hidden;
 }
+
+.daterange.menuItem .date-picker-wrapper{
+	top: 45px !important;
+	left: -160px !important;
+}
+
+
+
+
+
 /*-----------------blockAllCases----------------*/
 body .blockAllCases .itemLegend span{
 	font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
@@ -3035,4 +3042,13 @@ body .onclick-menu-content li a{
 }
 .circleGraphInfoRow .ng-scope{
 	padding: 5px 15px;
+}
+
+
+/*===================================================
+==============    Company Profile   =================
+====================================================*/
+
+.tableLocation .col-6{
+	width: calc( 80% / 2);
 }
