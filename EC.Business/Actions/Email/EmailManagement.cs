@@ -15,6 +15,7 @@ using System.IO;
 using System.Xml;
 using System.Configuration;
 using EC.Business.Abstract;
+using System.Threading.Tasks;
 
 namespace EC.Business.Actions.Email
 {
@@ -156,6 +157,9 @@ namespace EC.Business.Actions.Email
             m_Username = "employeeconfidential@employeeconfidential.com";
             m_Password = "confidentialConfidential1$3";
             m_Port = 25;
+
+            //m_Server = "smtp.gmail.com";
+            //m_Port = 587;
             /*
             if (m_Username != null)
             {
@@ -629,7 +633,6 @@ namespace EC.Business.Actions.Email
             //}
 
             MailMessage msg = new MailMessage();
-
             try
             {
                 if (string.IsNullOrEmpty(m_Server))
@@ -683,8 +686,57 @@ namespace EC.Business.Actions.Email
                     msg.CC.Add(new MailAddress(ccAddress));
                 }
 
-                SmtpClient smtpClient = new SmtpClient(m_Server);
+                using (SmtpClient smtpClient = new SmtpClient(m_Server))
+                {
+                    //Seems to resolve the problem of some mail servers not relaying emails. D.
+                    smtpClient.DeliveryMethod = m_DeliveryMethod;
 
+                    smtpClient.Host = m_Server;
+                    smtpClient.Port = m_Port;
+                    if (m_Username.Length > 0)
+                    {
+                        try
+                        {
+                            NetworkCredential cred = new NetworkCredential(m_Username, m_Password);
+                            smtpClient.Credentials = cred;
+                        }
+                        catch (Exception e1)
+                        {
+                            ///        m_Log.Error("Send() - Error setting mail server credentials.", e1);
+                        }
+
+                    }
+
+                    //smtpClient.Send(msg);
+                    //smtpClient.SendAsync(msg, null);
+                    SendEmailAsync(msg);
+
+                    ///           m_Log.Info(
+                    // //              string.Format("Send() - Email sent: recipient [{0}], subject line [{1}]", String.Join(";", to), messageSubject));
+
+                    msg.Attachments.Dispose();
+                }
+
+                return new ActionResultExtended(ReturnCode.Success, string.Empty);
+            }
+            catch (Exception e)
+            {
+                ////           m_Log.Error(
+                // ///             string.Format("Send() - Error sending email: server [{0}], recipient [{1}], message subject line [{2}]",
+                ///                       m_Server, String.Join(";", to), messageSubject),
+                //                     e);
+
+                msg.Attachments.Dispose();
+
+                return new ActionResultExtended(ReturnCode.Fail,
+                                        string.Format("Error sending email: {0}", e.Message));
+            }
+        }
+
+        private async Task<int> SendEmailAsync(MailMessage msg)
+        {
+            using (SmtpClient smtpClient = new SmtpClient(m_Server))
+            {
                 //Seems to resolve the problem of some mail servers not relaying emails. D.
                 smtpClient.DeliveryMethod = m_DeliveryMethod;
 
@@ -697,33 +749,14 @@ namespace EC.Business.Actions.Email
                         NetworkCredential cred = new NetworkCredential(m_Username, m_Password);
                         smtpClient.Credentials = cred;
                     }
-                    catch (Exception e1)
+                    catch
                     {
-                ///        m_Log.Error("Send() - Error setting mail server credentials.", e1);
                     }
 
                 }
-                //smtpClient.Send(msg);
-                smtpClient.SendAsync(msg, null);
-
-     ///           m_Log.Info(
-                // //              string.Format("Send() - Email sent: recipient [{0}], subject line [{1}]", String.Join(";", to), messageSubject));
-
-                msg.Attachments.Dispose();
-
-                return new ActionResultExtended(ReturnCode.Success, string.Empty);
-            }
-            catch (Exception e)
-            {
-     ////           m_Log.Error(
-      // ///             string.Format("Send() - Error sending email: server [{0}], recipient [{1}], message subject line [{2}]",
-           ///                       m_Server, String.Join(";", to), messageSubject),
-       //                     e);
-
-                msg.Attachments.Dispose();
-
-                return new ActionResultExtended(ReturnCode.Fail,
-                                        string.Format("Error sending email: {0}", e.Message));
+                smtpClient.Send(msg);
+                await Task.Yield();
+                return 0;
             }
         }
 
