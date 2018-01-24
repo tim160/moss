@@ -23,17 +23,20 @@
     // ViewBag.cssStyle = "/Content/MainStyle.css";
     // ViewBag.cssStyle = "/Content/cai.css";
 }
-<div id="headerCai">
-    <a href="/" class="blueLogo"></a>
-    <a href="/Login/Company" class="linkLogin">Client login</a>
-    <div class="info">Ethics Reporting & Case Management Cloudware</div>
-</div>
+@if (is_cc == false)
+{
+    <div id="headerCai">
+        <a href="/" class="blueLogo"></a>
+        <a href="/Login/Company" class="linkLogin">Client login</a>
+        <div class="info">Ethics Reporting & Case Management Cloudware</div>
+    </div>
+}
 
 <div class="mainBlock">
 
     <div id="bodyInc">
         @*<img class="logoShow" src='@Url.Content("~/Content/img/secondLogo.jpg")' />*@
-        @if (logo_path.Trim().Length > 0)
+        @if ((logo_path.Trim().Length > 0) && (is_cc == false))
         {
             <img class="logoShow" src='@Url.Content(logo_path)' />
         }

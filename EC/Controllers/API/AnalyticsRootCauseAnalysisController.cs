@@ -37,32 +37,6 @@ namespace EC.Controllers.API
             {
                 return null;
             }
-
-            /*var glb = new GlobalFunctions();
-            var secondaryTypes = glb.SecondaryTypesListDistinct(user.company_id, user.id);
-            secondaryTypes.Insert(0, new Tuple<string, string>("All Incindent Types", "0"));
-
-            string allIds = model.SecondaryType;
-            if (model.SecondaryType == "0")
-            {
-                model.SecondaryType = string.Join(",", secondaryTypes.Select(x => x.Item2).ToList());
-            }
-
-            List<int> ids = new List<int>();
-            var secondaryTypesIds = model.SecondaryType.Split(',');
-            foreach(var item in secondaryTypesIds)
-            {
-                int p;
-                if (int.TryParse(item, out p))
-                {
-                    if (ids.IndexOf(p) == -1)
-                    {
-                        ids.Add(p);
-                    }
-                }
-            }*/
-
-            //var reportInfo = DB.report_investigation_methodology.Where(x => ids.Contains(x.report_id)).ToList();
             var reportInfo = DB.report_investigation_methodology
                 .Where(x => x.report_secondary_type_id == model.SecondaryType || model.SecondaryType == 0)
                 .ToList();
