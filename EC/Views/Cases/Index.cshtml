@@ -173,6 +173,15 @@
                                 </div>
                                 <div class="dashboard-colHeader__sortArrow sortArrow" ng-class="sortClass('team_number')"></div>
                             </div><!-- /.dashboard-col__team dashboard-colHeader -->
+                            @if (is_cc == true)
+                            {
+                                <div class="dashboard-col__alert dashboard-colHeader clearfix" ng-click="sort('team_number')">
+                                    <div class="dashboard-colHeader__text">
+                                        is life threat
+                                    </div>
+                                    <div class="dashboard-colHeader__sortArrow sortArrow" ng-class="sortClass('team_number')"></div>
+                                </div><!-- /.dashboard-col__team dashboard-colHeader -->
+                            }
                         </div><!-- /.dashboard-rowHeader -->
 
                         <div class="dashboard-rowbody" ng-repeat="report in reports" ng-click="openCase(report.report_id)">
@@ -235,6 +244,15 @@
                                     </li><!-- /.team-list__li -->
                                 </ul><!-- /.team-list -->
                             </div><!-- /.dashboard-col__team dashboard-colbody clearfix -->
+                            @if (is_cc == true)
+                            {
+                                <div class="dashboard-col__alert dashboard-colbody clearfix">
+                                    <div class="dashboard-col__tasks-text">
+                                        <img src="@Url.Content("~/Content/img/alarm-active.png")" ng-show="report.cc_is_life_threating == true" />
+                                        <img src="@Url.Content("~/Content/img/alarm-default.png")" ng-show="report.cc_is_life_threating != true" />
+                                    </div><!-- /.dashboard-col__tasks-text -->
+                                </div><!-- /.dashboard-col__tasks dashboard-colbody clearfix -->
+                            }
                         </div><!-- /.dashboard-rowbody -->
 
                     </div><!-- /.dashboard -->

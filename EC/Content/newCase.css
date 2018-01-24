@@ -2563,6 +2563,9 @@ input.personDataTextBox{
 		.dashboard-col__team{
 			width: 10%;
 		}
+		.dashboard-col__alert{
+			width: 3%;
+		}
 		.dashboard-col__team.dashboard-colHeader{}
 
 	.dashboard-rowbody{
