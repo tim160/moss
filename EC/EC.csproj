@@ -225,6 +225,7 @@
     <Content Include="angular\app.js" />
     <Content Include="angular\controllers\AnalyticsRootCauseAnalysisController.js" />
     <Content Include="angular\controllers\AnalyticsCACSController.js" />
+    <Content Include="angular\controllers\NewCaseTopMenuController.js" />
     <Content Include="angular\controllers\NewCaseCaseClosureReportController.js" />
     <Content Include="angular\controllers\NewCaseInvestigationNotesController.js" />
     <Content Include="angular\controllers\NewCaseTeamController.js" />
@@ -239,6 +240,7 @@
     <Content Include="angular\controllers\EmployeeAwarenessController.js" />
     <Content Include="angular\services\AnalyticsRootCauseAnalysisService.js" />
     <Content Include="angular\services\AnalyticsCASService.js" />
+    <Content Include="angular\services\NewCaseTopMenuService.js" />
     <Content Include="angular\services\NewCaseCaseClosureReportService.js" />
     <Content Include="angular\services\NewCaseInvestigationNotesService.js" />
     <Content Include="angular\services\NewCaseTeamService.js" />
@@ -718,6 +720,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AnalyticsController.cs" />
+    <Compile Include="Controllers\API\NewCaseTopMenuController.cs" />
     <Compile Include="Controllers\API\AnalyticsRootCauseAnalysisController.cs" />
     <Compile Include="Controllers\API\BaseApiController.cs" />
     <Compile Include="Controllers\API\AnalyticsCACSController.cs" />

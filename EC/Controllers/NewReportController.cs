@@ -320,6 +320,13 @@ namespace EC.Controllers.ViewModel
             glb.UpdateReportLog(user_id, 17, report_id, description, null, "");
             glb.UpdateReportLog(user_id, 20, report_id, App_LocalResources.GlobalRes._Completed, null, "");
             glb.UpdateReportLog(user_id, 21, report_id, App_LocalResources.GlobalRes._Started, null, "");
+            if (EC.Common.Util.DomainUtil.IsCC(Request))
+            {
+                if (lifeThreat)
+                {
+                    glb.UpdateReportLog(user_id, 16, report_id, "", null, "");
+                }
+            }
 
             report_log _log = new report_log();
 

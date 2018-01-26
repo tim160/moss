@@ -63,7 +63,7 @@
 @{ 
     string action = ViewContext.RouteData.Values["action"].ToString().ToLower();
 }
-<div class="container mainNavigationTabs_color">
+<div class="container mainNavigationTabs_color" ng-controller="NewCaseTopMenuController">
     <div class="mainNavigationTabs clearfix">
         <ul class="mainNavigationTabs__tabs-ul clearfix">
             <li class="mainNavigationTabs__tab-link @(action == "index" ? "active" : "")" data-tab="mainTab-1">
@@ -105,19 +105,20 @@
         </ul>
 
         <ul class="mainNavigationTabs__rightLinks-ul clearfix">
+            @if (is_cc == true)
+            {
+                <li class="mainNavigationTabs__rightLinks-li mainNavigationTabs__changeTab @(action == "activity" ? "active" : "")" data-tab="mainTab-activity">
+                    <a href="" class="mainNavigationTabs__rightLinks-a">
+                        <img src="@Url.Content("~/Content/img/alarm-active.png")" ng-show="state.LifeThreating == true" ng-click="setIsLifeThreating(false)" title="{{state.LifeThreatingInfo}}" />
+                        <img src="@Url.Content("~/Content/img/alarm-default.png")" ng-show="state.LifeThreating != true" ng-click="setIsLifeThreating(true)" title="{{state.LifeThreatingInfo}}" />
+                    </a>
+                </li>
+            }
             <li class="mainNavigationTabs__rightLinks-li @(action == "attachments" ? "active" : "")">
                 <a href="@Url.Action("Attachments", new { report_id = ViewBag.report_id })" class="mainNavigationTabs__rightLinks-a">
                     <div class="mainNavigationTabs__tab-name">Attachments</div>                    
                 </a>
             </li>
-            @if ((is_cc == true) && (rm._report.cc_is_life_threating == true))
-            {
-                <li class="mainNavigationTabs__rightLinks-li mainNavigationTabs__changeTab @(action == "activity" ? "active" : "")" data-tab="mainTab-activity">
-                    <a href="" class="mainNavigationTabs__rightLinks-a">
-                        <img src="@Url.Content("~/Content/img/alarm-active.png")" />
-                    </a>
-                </li>
-            }
             <li class="mainNavigationTabs__rightLinks-li mainNavigationTabs__changeTab @(action == "activity" ? "active" : "")" data-tab="mainTab-activity">
                 <a href="@Url.Action("Activity", new { report_id = ViewBag.report_id })" class="mainNavigationTabs__rightLinks-a">
                     <img src="/Content/Icons/activityIcon.png" alt="Activity" />
