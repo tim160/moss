@@ -19,8 +19,20 @@ namespace EC.Common.Util
             return false;
         }
 
+        public static bool IsStark(string url)
+        {
+            url = url.ToLower();
+            if ((url.ToLower().Contains("stark.")) || (url.ToLower().Contains("cc.employeeconfidential")))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public static bool IsCC(string url)
         {
+            //return true;
             // uncomment for campus-confidential testing
             //      return true;
             if ((url.ToLower().Contains("campus")) || (url.ToLower().Contains("cc.employeeconfidential")))
@@ -30,7 +42,6 @@ namespace EC.Common.Util
 
             return false;
         }
-
 
         public static string LogoBaseUrl(string url)
         {
