@@ -21,8 +21,9 @@ namespace EC.Common.Util
 
         public static bool IsStark(string url)
         {
+            
             url = url.ToLower();
-            if ((url.ToLower().Contains("stark.")) || (url.ToLower().Contains("cc.employeeconfidential")))
+            if ((url.ToLower().Contains("stark.")) )
             {
                 return true;
             }

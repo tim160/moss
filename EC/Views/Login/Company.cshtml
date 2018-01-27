@@ -1,6 +1,7 @@
 ﻿@using EC.App_LocalResources
 @using EC.Controllers.Utils
 @using EC.Models
+@using EC.Common.Util
 
 @{
     bool? is_cc = ViewBag.is_cc;
@@ -37,7 +38,7 @@
 <div id="bodyInc" class="loginCompany">
 
     <div class="secondMenu">
-        @if (EC.Common.Util.DomainUtil.IsStark(Request.Url.AbsoluteUri))
+        @if ((DomainUtil.IsStark(Request.Url.AbsoluteUri)) || (DomainUtil.IsCC(Request.Url.AbsoluteUri)))
         {
             <img class="secLogo" src='@Url.Content(logo_path)' />
         }
