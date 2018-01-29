@@ -20,17 +20,12 @@
 
         $scope.setIsLifeThreating = function (isLifeThreating) {
             if (isLifeThreating) {
-                if (!confirm('Mark case as a threat to the health or safety of students or employees on the campus?')) {
-                    return;
-                }
-            } else {
-                if (!confirm('Mark case as a non-threat to the health or safety of students or employees on the campus?')) {
-                    return;
+                if (confirm('Mark case as a threat to the health or safety of students or employees on the campus?')) {
+                    NewCaseTopMenuService.setLifeThreating({ reportId: $scope.report_id, isLifeThreating: isLifeThreating }, function (data) {
+                        $scope.refresh();
+                    });
                 }
             }
-            NewCaseTopMenuService.setLifeThreating({ reportId: $scope.report_id, isLifeThreating: isLifeThreating }, function (data) {
-                $scope.refresh();
-            });
         };
     }
 }());

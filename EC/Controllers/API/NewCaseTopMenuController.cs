@@ -64,11 +64,14 @@ namespace EC.Controllers.API
             }
 
             var report = DB.report.FirstOrDefault(x => x.id == model.ReportId);
-            report.cc_is_life_threating = model.IsLifeThreating;
-            DB.SaveChanges();
+            if (report.cc_is_life_threating != true)
+            {
+                report.cc_is_life_threating = model.IsLifeThreating;
+                DB.SaveChanges();
 
-            GlobalFunctions glb = new GlobalFunctions();
-            glb.UpdateReportLog(user.id, model.IsLifeThreating ? 16 : 24, report.id, "", null, "");
+                GlobalFunctions glb = new GlobalFunctions();
+                glb.UpdateReportLog(user.id, model.IsLifeThreating ? 16 : 24, report.id, "", null, "");
+            }
 
             return new
             {
