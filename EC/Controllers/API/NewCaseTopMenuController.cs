@@ -63,14 +63,19 @@ namespace EC.Controllers.API
                 return null;
             }
 
+            GlobalFunctions glb = new GlobalFunctions();
+
             var report = DB.report.FirstOrDefault(x => x.id == model.ReportId);
             if (report.cc_is_life_threating != true)
             {
                 report.cc_is_life_threating = model.IsLifeThreating;
                 DB.SaveChanges();
 
-                GlobalFunctions glb = new GlobalFunctions();
                 glb.UpdateReportLog(user.id, model.IsLifeThreating ? 16 : 24, report.id, "", null, "");
+
+                CompanyModel cm = new CompanyModel(report.company_id);
+                glb.CampusSecurityAlertEmail(report, Request.RequestUri, DB, cm._company.cc_campus_alert_manager_email);
+                glb.CampusSecurityAlertEmail(report, Request.RequestUri, DB, cm._company.cc_daily_crime_log_manager_email);
             }
 
             return new

@@ -2560,4 +2560,35 @@ public class GlobalFunctions
         }
         return String.Format("The password should be at least {0} characters long", PasswordLength.ToString());
     }
+
+    public void CampusSecurityAlertEmail(report report, Uri uri, ECEntities db, string email)
+    {
+        IEmailAddressHelper m_EmailHelper = new EmailAddressHelper();
+        EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
+        EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, uri.AbsoluteUri.ToLower());
+        string body = "";
+        List<string> to = new List<string>();
+        List<string> cc = new List<string>();
+        List<string> bcc = new List<string>();
+
+        var pm = db.user.FirstOrDefault(x => x.role_id == 5 && x.company_id == report.company_id);
+        if ((pm != null) && (email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(email.Trim()))
+        {
+            to = new List<string>();
+            cc = new List<string>();
+            bcc = new List<string>();
+
+            to.Add(email);
+
+            eb.CampusSecurityAlert(
+                report.id.ToString(),
+                report.display_name,
+                $"{pm.first_nm} {pm.last_nm}",
+                $"{pm.phone}"
+                );
+            body = eb.Body;
+
+            em.Send(to, cc, EC.App_LocalResources.GlobalRes.CampusSecurityAlert, body, true);
+        }
+    }
 }

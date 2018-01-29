@@ -199,6 +199,11 @@ namespace EC.Business.Actions.Email
                     // message to mediator with the link to update password 
                     m_filename = "ForgetPassword";
                     break;
+
+                case 51:
+                    // message to mediator with the link to update password 
+                    m_filename = "CampusSecurityAlert";
+                    break;
             }
 
             string appPath = Path.GetFullPath("~/EmailText/" + m_filename + ".html");
@@ -449,6 +454,17 @@ namespace EC.Business.Actions.Email
             m_body = m_body.Replace("[RestorePass]", (DomainUtil.GetSubdomainLink(url) + "/login/restore" + "?email=" + email + "&token=" + code).Trim());
 
         }
+
+        public void CampusSecurityAlert(string caseUrl, string caseId, string platformManagerName, string platformManagerCell)
+        {
+            GetBody(51);
+
+            m_body = m_body.Replace("[CaseUrl]", (DomainUtil.GetSubdomainLink(caseUrl) + "/newCase/Index/" + caseUrl).Trim());
+            m_body = m_body.Replace("[CaseId]", caseId);
+            m_body = m_body.Replace("[PlatformManagerName]", platformManagerName);
+            m_body = m_body.Replace("[PlatformManagerCell]", platformManagerCell);
+        }
+
         #endregion
     }
 

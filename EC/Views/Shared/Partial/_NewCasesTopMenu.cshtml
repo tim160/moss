@@ -109,8 +109,8 @@
             {
                 <li class="mainNavigationTabs__rightLinks-li mainNavigationTabs__changeTab @(action == "activity" ? "active" : "")" data-tab="mainTab-activity">
                     <a href="" class="mainNavigationTabs__rightLinks-a">
-                        <img src="@Url.Content("~/Content/img/alarm-active.png")" ng-show="state.LifeThreating == true" ng-click="setIsLifeThreating(false)" title="{{state.LifeThreatingInfo}}" />
-                        <img src="@Url.Content("~/Content/img/alarm-default.png")" ng-show="state.LifeThreating != true" ng-click="setIsLifeThreating(true)" title="{{state.LifeThreatingInfo}}" />
+                        <img src="@Url.Content("~/Content/Icons/alarm-active.png")" ng-show="state.LifeThreating == true" ng-click="setIsLifeThreating(false)" title="{{state.LifeThreatingInfo}}" />
+                        <img src="@Url.Content("~/Content/Icons/alarm-default.png")" ng-show="state.LifeThreating != true" ng-click="setIsLifeThreating(true)" title="{{state.LifeThreatingInfo}}" />
                     </a>
                 </li>
             }

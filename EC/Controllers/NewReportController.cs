@@ -320,13 +320,6 @@ namespace EC.Controllers.ViewModel
             glb.UpdateReportLog(user_id, 17, report_id, description, null, "");
             glb.UpdateReportLog(user_id, 20, report_id, App_LocalResources.GlobalRes._Completed, null, "");
             glb.UpdateReportLog(user_id, 21, report_id, App_LocalResources.GlobalRes._Started, null, "");
-            if (EC.Common.Util.DomainUtil.IsCC(Request))
-            {
-                if (lifeThreat)
-                {
-                    glb.UpdateReportLog(user_id, 16, report_id, "", null, "");
-                }
-            }
 
             report_log _log = new report_log();
 
@@ -342,6 +335,16 @@ namespace EC.Controllers.ViewModel
             EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
             string body = "";
             #endregion
+
+            if (EC.Common.Util.DomainUtil.IsCC(Request))
+            {
+                if (lifeThreat)
+                {
+                    glb.UpdateReportLog(user_id, 16, report_id, "", null, "");
+                    glb.CampusSecurityAlertEmail(rm._report, Request.Url, db, cm._company.cc_campus_alert_manager_email);
+                    glb.CampusSecurityAlertEmail(rm._report, Request.Url, db, cm._company.cc_daily_crime_log_manager_email);
+                }
+            }
 
             if (!db.report_log.Any(item => ((item.action_id == 19) && (item.report_id == report_id))))
             {

@@ -26,6 +26,19 @@
     List<user> AllUsers = ViewBag.AllUser;
 }
 
+<style>
+    .oldstyle {
+        display: table !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .moldstyle {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+</style>
+
 
 <div class="blockSettings">
 
@@ -37,100 +50,99 @@
     <p class="textMediators">
         @GlobalRes.SetupMediatorProfiles
     </p>
-    <div class="contentCompanyProfiel">
-        <div class="contentSettings">
-            <div class="blockWithTeam">
-                <div class="contentMediators blockTeam">
-                    <!--empty block-->
-                    <div class="blockIteamTeam footerInputStyle">
+    <div class="contentSettings secondHeader oldstyle">
+        <div class="blockWithTeam">
+            <div class="contentMediators blockTeam">
+                <!--empty block-->
+                <div class="blockIteamTeam footerInputStyle">
 
-                        @Html.ActionLink("setup case administrator", "User", new { id = 0 }, new { @class = "positionLinkIviteMediator greenButton greenButtonCustom disableUnderline" })
-                    </div>
-                    <!--end empty block-->
-                    @foreach (user _user in AllUsers)
+                    @Html.ActionLink("setup case administrator", "User", new { id = 0 }, new { @class = "positionLinkIviteMediator greenButton greenButtonCustom disableUnderline" })
+                </div>
+                <!--end empty block-->
+                @foreach (user _user in AllUsers)
+                {
+                    string link = "/settings/user/" + _user.id;
+                    if (_user.role_id == 0) { link = ""; }
+
+                    if ((_user.role_id == 4) || (_user.role_id == 5) || (_user.role_id == 6) || (_user.role_id == 7) || (_user.role_id == 0))
                     {
-                        string link = "/settings/user/" + _user.id;
-                        if (_user.role_id == 0) { link = ""; }
+                        _temp_um = new UserModel(_user.id);
 
-                        if ((_user.role_id == 4) || (_user.role_id == 5) || (_user.role_id == 6) || (_user.role_id == 7) || (_user.role_id == 0))
-                        {
-                            _temp_um = new UserModel(_user.id);
-
-                            <div class="blockIteamTeam blockIteamTeam@{@class_ext}">
-                                <div class="blockHeaderTeam">
-                                    <a class="contanatTable" href="@link">
-                                        <div class="blockPhoto">
-                                            <div class="photoPersonal">
-                                                @if (_user.photo_path.Trim().Length == 0)
-                                                {
-                                                    <img src='@Url.Content("~/Content/Icons/anonimousReporterIcon.png")' />
-                                                }
-                                                else
-                                                {
-                                                    <img src='@Url.Content(_user.photo_path.Trim())' />
-                                                }
-                                            </div><!--blockPhoto-->
-                                        </div>
-                                        <div class="blockHeaderText">
-                                            <p>@_user.first_nm @_user.last_nm</p>
-                                            <p>@_user.title_ds</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                @if (_user.role_id == 4)
-                                {
-                                    <p class="blockMediator escalation">
-                                        <span>@GlobalRes.EscalationMediator.ToLower()</span>
-                                    </p>
-                                }
-                                @if (_user.role_id == 5)
-                                {
-                                    <p class="blockMediator admin admin@{@class_ext}">
-                                        <span>@GlobalRes.AdminMediator.ToLower()</span>
-                                    </p>
+                        <div class="blockIteamTeam blockIteamTeam@{@class_ext}">
+                            <div class="blockHeaderTeam">
+                                <a class="contanatTable" href="@link">
+                                    <div class="blockPhoto">
+                                        <div class="photoPersonal">
+                                            @if (_user.photo_path.Trim().Length == 0)
+                                            {
+                                                <img src='@Url.Content("~/Content/Icons/anonimousReporterIcon.png")' />
+                                            }
+                                            else
+                                            {
+                                                <img src='@Url.Content(_user.photo_path.Trim())' />
+                                            }
+                                        </div><!--blockPhoto-->
+                                    </div>
+                                    <div class="blockHeaderText">
+                                        <p>@_user.first_nm @_user.last_nm</p>
+                                        <p>@_user.title_ds</p>
+                                    </div>
+                                </a>
+                            </div>
+                            @if (_user.role_id == 4)
+                            {
+                                <p class="blockMediator escalation">
+                                    <span>@GlobalRes.EscalationMediator.ToLower()</span>
+                                </p>
+                            }
+                            @if (_user.role_id == 5)
+                            {
+                                <p class="blockMediator admin admin@{@class_ext}">
+                                    <span>@GlobalRes.AdminMediator.ToLower()</span>
+                                </p>
     }
-                                @if (_user.role_id == 6)
-                                {
-                                    <p class="blockMediator">
-                                        <span>@GlobalRes.Mediator.ToLower()</span>
-                                    </p>
-                                }
-                                @if (_user.role_id == 7)
-                                {
-                                    <p class="blockMediator">
-                                        <span>@GlobalRes.Legalcounsel.ToLower()</span>
-                                    </p>
-                                }
-                                @if ((_user.notepad_tx != null) && (_user.notepad_tx.Trim().Length > 0))
-                                {
-                                    <p class="blockTextMediator">@_user.notepad_tx</p>
-                                }
-                                else
-                                {
-                                    <p class="blockTextMediator">&nbsp;</p>
-                                }
+                            @if (_user.role_id == 6)
+                            {
+                                <p class="blockMediator">
+                                    <span>@GlobalRes.Mediator.ToLower()</span>
+                                </p>
+                            }
+                            @if (_user.role_id == 7)
+                            {
+                                <p class="blockMediator">
+                                    <span>@GlobalRes.Legalcounsel.ToLower()</span>
+                                </p>
+                            }
+                            @if ((_user.notepad_tx != null) && (_user.notepad_tx.Trim().Length > 0))
+                            {
+                                <p class="blockTextMediator">@_user.notepad_tx</p>
+                            }
+                            else
+                            {
+                                <p class="blockTextMediator">&nbsp;</p>
+                            }
 
-                                <div class="blocksInfo">
-                                    <div class="blockInfo">
-                                        @if (_user.role_id != 0)
-                                        {
-                                            <img src='@Url.Content("/Content/Icons/blockInfo_img1" + @class_ext + ".png")'>
-                                            <label>@_temp_um._location_string</label>
-                                        }
-                                    </div>
-                                    <div class="blockInfo">
-                                        <img src='@Url.Content("/Content/Icons/blockInfo_img2"+@class_ext+".png")'>
-                                        <label>@_user.email</label>
-                                    </div>
-
+                            <div class="blocksInfo">
+                                <div class="blockInfo">
+                                    @if (_user.role_id != 0)
+                                    {
+                                        <img src='@Url.Content("/Content/Icons/blockInfo_img1" + @class_ext + ".png")'>
+                                        <label>@_temp_um._location_string</label>
+                                    }
                                 </div>
-                            </div><!--blockIteamTeam-->
+                                <div class="blockInfo">
+                                    <img src='@Url.Content("/Content/Icons/blockInfo_img2"+@class_ext+".png")'>
+                                    <label>@_user.email</label>
+                                </div>
+
+                            </div>
+                        </div><!--blockIteamTeam-->
 
         }
     }
-                </div>
             </div>
-        </div><!--contentSettings-->
+        </div>
+    </div><!--contentSettings-->
             @if (is_cc)
             {
                 using (Html.BeginForm(null, null, FormMethod.Post, new { id = "AlertDailyCrimeLogManagers" }))
@@ -138,7 +150,7 @@
 
                     @Html.HiddenFor(x => company.id)
                     <div class="footerInputPosition footerInputStyle">
-                        <div class="contentSettings secondHeader">
+                        <div class="contentSettings secondHeader oldstyle">
                             <div class="headerCompanyProfile">
                                 <div class="headerBlock">
                                     <div class="blockText">
@@ -199,7 +211,7 @@
                     }
                 }
         <div class="footerInputPosition footerInputStyle">
-            <div class="contentSettings secondHeader">
+            <div class="contentSettings secondHeader oldstyle">
                 <div class="headerCompanyProfile">
                     @if (is_cc && is_valid_mediator)
             {
@@ -239,7 +251,6 @@
         </div>
 
     </div><!--contentCompanyProfile-->
-</div>
 <input type="hidden" id="InvitationSuccessfull" value="@GlobalRes.InvitationSuccessfull" />
 
 <script>

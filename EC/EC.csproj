@@ -284,6 +284,7 @@
     <Content Include="Content\assets\template\js\select.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\caiNew.css" />
+    <Content Include="Content\emails\CampusSecurityAlert.html" />
     <Content Include="Content\emails\CaseCloseApprove.html" />
     <Content Include="Content\emails\SeniorMediatorCaseConfirm.html" />
     <Content Include="Content\fonts\bootstrap.min.css" />

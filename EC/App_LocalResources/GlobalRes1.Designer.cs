@@ -799,6 +799,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Campus Security Alert.
+        /// </summary>
+        public static string CampusSecurityAlert {
+            get {
+                return ResourceManager.GetString("CampusSecurityAlert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please take note of your login information NOW. Write it down somewhere safe (or enter it into your password protected smartphone) so that you can access it later to check the status of your report..
         /// </summary>
         public static string canAccess {
