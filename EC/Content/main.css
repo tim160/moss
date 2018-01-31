@@ -4029,7 +4029,8 @@ textarea {
         }
 
         #caseRouting .tableCasesIndex tbody td:first-child {
-            text-align: center;
+            text-align: left;
+            padding-left: 30px;
             width: 145px;
         }
 

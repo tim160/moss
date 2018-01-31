@@ -318,6 +318,7 @@
     <Content Include="Content\Icons\activityIcon.png" />
     <Content Include="Content\Icons\alarm-active.png" />
     <Content Include="Content\Icons\alarm-default.png" />
+    <Content Include="Content\Icons\alarm-whitepng.png" />
     <Content Include="Content\Icons\anonimousReporterIcon.png" />
     <Content Include="Content\Icons\arrowMessage.png" />
     <Content Include="Content\Icons\arrowSelect.png" />
