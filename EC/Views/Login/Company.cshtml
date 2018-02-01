@@ -38,9 +38,13 @@
 <div id="bodyInc" class="loginCompany">
 
     <div class="secondMenu">
-        @if ((DomainUtil.IsStark(Request.Url.AbsoluteUri)) || (DomainUtil.IsCC(Request.Url.AbsoluteUri)))
+        @if ((DomainUtil.IsStark(Request.Url.AbsoluteUri)))
         {
             <img class="secLogo" src='@Url.Content(logo_path)' />
+        }
+        @if ((DomainUtil.IsCC(Request.Url.AbsoluteUri)))
+        {
+            <img class="secLogo" src='@Url.Content("~/Content/img/logo2.png")' />
         }
         <div class="statusTitle">
             <div class="titleInc titleIncPosition">@GlobalRes.increportingandcasemanag</div>

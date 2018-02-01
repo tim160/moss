@@ -322,6 +322,9 @@
     <Content Include="Content\Icons\anonimousReporterIcon.png" />
     <Content Include="Content\Icons\arrowMessage.png" />
     <Content Include="Content\Icons\arrowSelect.png" />
+    <Content Include="Content\Icons\arrowSelect2.png" />
+    <Content Include="Content\Icons\attachment-icon.png" />
+    <Content Include="Content\Icons\attachment-icon_preview.png" />
     <Content Include="Content\Icons\bfa_sort-desc_simple-black_512x512.png" />
     <Content Include="Content\Icons\blockInfo_img1.png" />
     <Content Include="Content\Icons\blockInfo_img1_cc.png" />
@@ -375,6 +378,10 @@
     <Content Include="Content\Icons\reviewStage.png" />
     <Content Include="Content\Icons\second.png" />
     <Content Include="Content\Icons\settingsPersonalNOPhoto.png" />
+    <Content Include="Content\Icons\star_active.png" />
+    <Content Include="Content\Icons\star_hover.png" />
+    <Content Include="Content\Icons\star_transparent.png" />
+    <Content Include="Content\Icons\star_white.png" />
     <Content Include="Content\Icons\statistic.png" />
     <Content Include="Content\Icons\statisticActive.png" />
     <Content Include="Content\Icons\statisticHover.png" />
@@ -388,9 +395,12 @@
     <Content Include="Content\Icons\X.png" />
     <Content Include="Content\Icons\Xanal.gif" />
     <Content Include="Content\Icons\yes.png" />
+    <Content Include="Content\img\alarm-active.png" />
+    <Content Include="Content\img\alarm-default.png" />
     <Content Include="Content\img\arrowSelect.png" />
     <Content Include="Content\img\back.jpg" />
     <Content Include="Content\img\cai_logo.png" />
+    <Content Include="Content\img\cc_is_life_threating.png" />
     <Content Include="Content\img\check.png" />
     <Content Include="Content\img\checkbox.png" />
     <Content Include="Content\img\checkbox_checked.png" />
