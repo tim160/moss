@@ -301,9 +301,9 @@
                     @if (is_cc.HasValue && is_cc.Value)
                     {
                         <p class="someAlert">
-                            Does this incident represent a threat to the health or safety of students or employees on the campus?
+                            Does this Case or Subject pose an ongoing threat to the safety or health of the students and employees on campus?
                          </p>
-                        <div style="padding: 20px;">
+                        <div style="padding: 20px;" id="AnonymousDiv">
                             <label class="inputBlock" for="Anonymous">
                                 <input id="Anonymous" type="radio" name="isLifeThreat" value="true">
                                 <span class="radioButton"></span>
@@ -314,7 +314,7 @@
                                 <span class="radioButton"></span>
                                 <span class="radioTitle">No</span>
                             </label>
-                            <p class="someAlert">
+                            <p class="someAlert" id="PAnonymous">
                                 A campus alert will be sent to the designated Campus Security Authority for Purposes of the Clery Act.
                             </p>
                         </div>
@@ -583,6 +583,14 @@
 <script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
 <script>
     $(document).ready(function () {
+        $('#PAnonymous').hide();
+        $('#AnonymousDiv').click(function(){
+            $('#PAnonymous').hide();
+            if ($('#Anonymous:checked').length == 1) {
+                $('#PAnonymous').show();
+            }
+        });
+
         //$        //name="spamMessage
         function showBlockDocs(){
             if($('.contentDownloadDoc').html().trim()=="")
