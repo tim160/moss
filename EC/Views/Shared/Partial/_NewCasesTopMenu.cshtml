@@ -107,7 +107,7 @@
         <ul class="mainNavigationTabs__rightLinks-ul clearfix">
             @if (is_cc == true)
             {
-                <li class="mainNavigationTabs__rightLinks-li mainNavigationTabs__changeTab @(action == "activity" ? "active" : "")" data-tab="mainTab-activity">
+                <li class="mainNavigationTabs__rightLinks-li mainNavigationTabs__changeTab" data-tab="mainTab-activity">
                     <a href="" class="mainNavigationTabs__rightLinks-a">
                         <img src="@Url.Content("~/Content/Icons/alarm-active.png")" ng-show="state.LifeThreating == true" ng-click="setIsLifeThreating(false)" title="{{state.LifeThreatingInfo}}" />
                         <img src="@Url.Content("~/Content/Icons/alarm-whitepng.png")" ng-show="state.LifeThreating != true" ng-click="setIsLifeThreating(true)" title="{{state.LifeThreatingInfo}}" />

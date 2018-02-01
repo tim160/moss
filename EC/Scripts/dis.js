@@ -1123,7 +1123,7 @@
 
         $scope.setIsLifeThreating = function (isLifeThreating) {
             if (isLifeThreating) {
-                if (confirm('Mark case as a threat to the health or safety of students or employees on the campus?')) {
+                if (confirm('Does this Case or Subject pose an ongoing threat to the safety or health of the students and employees on campus? A Campus Alert will be requested if you select "OK"')) {
                     NewCaseTopMenuService.setLifeThreating({ reportId: $scope.report_id, isLifeThreating: isLifeThreating }, function (data) {
                         $scope.refresh();
                     });
