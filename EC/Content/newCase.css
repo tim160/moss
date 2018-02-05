@@ -2853,12 +2853,13 @@ input.personDataTextBox{
 		color: #3c3e3f;
 	}
 	.statistics-totalReports>.statistics-totalTable__cols,
-	.statistics-totalReports>.statistics-totalTable__cols>.ng-binding{
+	.statistics-totalReports>.statistics-totalTable__cols>.binding{
 		font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 		font-size: 18px;
 		color: #3c3e3f;
 	}
-	.ng-bindingYear{
+	.statistics-totalReports>.statistics-totalTable__cols,
+	.statistics-totalReports>.statistics-totalTable__cols>.bindingYear{
 		font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 		font-size: 12px;
 		color: #aeb5b7;

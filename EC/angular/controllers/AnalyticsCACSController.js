@@ -87,10 +87,10 @@
 
         $scope.Total = function (type, id) {
             if (type === 1) {
-                return $scope.totals.length <= id ? 0 : $scope.totals[id].count;
+                return $scope.totals.length <= id ? 0 : $scope.totals[id];
             }
             if (type === 2) {
-                return $scope.totals.length <= id ? 0 : $scope.totals[id].count;
+                return $scope.totals.length <= id ? 0 : $scope.totals[id];
             }
         };
     }

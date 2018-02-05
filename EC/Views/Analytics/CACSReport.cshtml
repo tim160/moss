@@ -48,59 +48,68 @@
 <div class="blockSettings blockAnalitics" ng-controller="AnalyticsCACSController" ng-cloak>
     @Html.Partial("~/Views/Analytics/AnalyticsMenu.cshtml")
 
-    <div class="dropDownMenuPadding">
-        <table class="dropDownMenu">
-            <tbody>
-                <tr>
-                    <td>
-                        <div class="parentClass">
-                            <div class="menuItem">
-                                <div class="positionText">
-                                    <span class="dropMenuText">{{cc_crime_statistics_category.crime_statistics_category_en}}</span>
-                                    <img src="~/Content/img/arrowSelect.png" />
+    <div class="container ">
+        <div class="divider p-tb-20"></div><!-- /.divider p-tb-10 -->
+        <div class="content-container__inner statistics-container">
+            <div class="menuItem">
+                <div class="positionText">
+                    <span class="dropMenuText">{{cc_crime_statistics_category.crime_statistics_category_en}}</span>
+                    <img src="~/Content/img/arrowSelect.png" />
+                </div>
+                <ul class="menuUl" ng-show="cc_crime_statistics_categories.length > 0">
+                    <li ng-repeat="item in cc_crime_statistics_categories">
+                        <div class="liItem" value="{{item.id}}" nameDropdown="ReportsDepartmentIDStringss">
+                            <span class="positionText liText" ng-click="selectCategory(item)">
+                                <div class="checked">
+                                    <img class="" src="~/Content/img/check.png" />
                                 </div>
-                                <ul class="menuUl" ng-show="cc_crime_statistics_categories.length > 0">
-                                    <li ng-repeat="item in cc_crime_statistics_categories">
-                                        <div class="liItem" value="{{item.id}}" nameDropdown="ReportsDepartmentIDStringss">
-                                            <span class="positionText liText" ng-click="selectCategory(item)">
-                                                <div class="checked">
-                                                    <img class="" src="~/Content/img/check.png" />
-                                                </div>
-                                                {{item.crime_statistics_category_en}}
-                                            </span>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
+                                {{item.crime_statistics_category_en}}
+                            </span>
                         </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="divider p-tb-5"></div><!-- /.divider p-tb-10 -->
+
+            <div class="borderAnalit">
+
+                <nvd3 options="cacsChart" data="cacsChartData" api="api"></nvd3>
+
+            </div>
+
+            <div class="divider p-tb-20"></div>
+            <div class="row row-3 statistics-totalTable statistics-totalCrimes clearfix">
+                <div class="statistics-totalTable__title">
+                    Total Clery act crimes:
+                </div><!-- /.statistics-totalTable__title -->
+                <div class="statistics-totalTable__cols">
+                    <div class="binding">{{Total(1, 0).count}}</div>
+                </div><!-- /.statistics-totalTable__cols -->
+                <div class="statistics-totalTable__cols">
+                    <div class="binding">{{Total(1, 1).count}}</div>
+                </div><!-- /.statistics-totalTable__cols -->
+                <div class="statistics-totalTable__cols">
+                    <div class="binding">{{Total(1, 2).count}}</div>
+                </div><!-- /.statistics-totalTable__cols -->
+            </div><!-- /.statistics-totalCrimes -->
+            <div class="row row-3 statistics-totalTable statistics-totalReports clearfix">
+                <div class="statistics-totalTable__title">
+                    Total Unfounded Reports:
+                </div><!-- /.statistics-totalTable__title -->
+                <div class="statistics-totalTable__cols">
+                    <div class="binding">{{Total(2, 0).count}}</div>
+                    <div class="bindingYear">{{Total(2, 0).year}}</div><!-- /.ng-bindingYear -->
+                </div><!-- /.statistics-totalTable__cols -->
+                <div class="statistics-totalTable__cols">
+                    <div class="binding">{{Total(2, 1).count}}</div>
+                    <div class="bindingYear">{{Total(2, 1).year}}</div><!-- /.ng-bindingYear -->
+                </div><!-- /.statistics-totalTable__cols -->
+                <div class="statistics-totalTable__cols">
+                    <div class="binding">{{Total(2, 2).count}}</div>
+                    <div class="bindingYear">{{Total(2, 2).year}}</div><!-- /.ng-bindingYear -->
+                </div><!-- /.statistics-totalTable__cols -->
+            </div><!-- /.row -->
+        </div>
     </div>
-
-    <div class="borderAnalit">
-
-        <nvd3 options="cacsChart" data="cacsChartData" api="api"></nvd3>
-        
-    </div>
-
-    <table>
-        <tr>
-            <th colspan="3">Total Clery act crimes:</th>
-        </tr>
-        <tr>
-            <td>{{Total(1, 0)}}</td>
-            <td>{{Total(1, 1)}}</td>
-            <td>{{Total(1, 2)}}</td>
-        </tr>
-        <tr>
-            <th colspan="3">Total Unfounded Reports:</th>
-        </tr>
-        <tr>
-            <td>{{Total(2, 0)}}</td>
-            <td>{{Total(2, 1)}}</td>
-            <td>{{Total(2, 2)}}</td>
-        </tr>
-    </table>
 </div>
