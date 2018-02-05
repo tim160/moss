@@ -171,6 +171,7 @@ html, body{
 	max-width: 100%;
 	position: relative;
 	min-height: 1px;
+	box-sizing: border-box;
 /*	overflow: hidden;*/
 }
 
@@ -939,7 +940,9 @@ header.header{
 ==================mainNavigationTabs====================
 =======================================================*/
 
-
+.mainNavigationTabs{
+	max-height: 60px;
+}
 .mainNavigationTabs_color{
 	background-color: #ABB9BB;
 	padding-right: 0;
@@ -2970,6 +2973,9 @@ body .blockAllCases{
 body .blockSettings .contentSettings{
 	margin: 0;
 }
+body .blockSettings .contentSettings.contentActivity{
+	overflow: hidden;
+}
 	.blockSettings .headerBlockActivity{
 		display: block;
 	}
@@ -3052,3 +3058,41 @@ body .onclick-menu-content li a{
 .tableLocation .col-6{
 	width: calc( 80% / 2);
 }
+
+/*===================================================
+=  Case Admins - Setup Case Administrator Profiles: =
+====================================================*/
+
+.footerInputPosition{
+	height: initial;
+}
+.headerCompanyProfile .blockSendEmail{
+	height: initial;
+}
+.footerInputPosition{
+	margin-bottom: 0;
+}
+
+
+.p-h5{
+	font-size: 20px;
+}
+.lableText{
+	display: block;
+	width: 100%;
+	font-size: 16px;
+}
+	.lableText__input{
+		display: block;
+		width: 100%;
+		box-sizing: border-box;
+		border-radius: 4px;
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    width: 100%;
+    font-size: 14px;
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;padding: 10px 20px;
+    width: 100%;
+    font-size: 14px;
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+	}

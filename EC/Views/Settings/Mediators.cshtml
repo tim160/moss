@@ -147,74 +147,91 @@
             {
                 using (Html.BeginForm(null, null, FormMethod.Post, new { id = "AlertDailyCrimeLogManagers" }))
                 {
-
                     @Html.HiddenFor(x => company.id)
-                    <div class="footerInputPosition footerInputStyle">
-                        <div class="contentSettings secondHeader oldstyle">
-                            <div class="headerCompanyProfile">
-                                <div class="headerBlock">
-                                    <div class="blockText">
-                                        <p class="title">Campus Alert and Daily Crime Log managers info</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <table>
-                                <tr>
-                                    <td>
-                                        <table>
-                                            <tr>
-                                                <td>Campus Alert Manager </td>
-                                                <td>Name</td>
-                                                <td>
-                                                    @Html.TextBoxFor(x => company.cc_campus_alert_manager_first_name, new { placeholder = "" })
-                                                </td>
-                                                <td>Last Name</td>
-                                                <td>
-                                                    @Html.TextBoxFor(x => company.cc_campus_alert_manager_last_name, new { placeholder = "Last Name" })
-                                                </td>
-                                                <td>Email</td>
-                                                <td>
-                                                    @Html.TextBoxFor(x => company.cc_campus_alert_manager_email, new { placeholder = "Email" })
-                                                </td>
-                                                <td>Phone</td>
-                                                <td>
-                                                    @Html.TextBoxFor(x => company.cc_campus_alert_manager_phone, new { placeholder = "Phone" })
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Daily Crime Log Manager </td>
-                                                <td>Name</td>
-                                                <td>
-                                                    @Html.TextBoxFor(x => company.cc_daily_crime_log_manager_first_name, new { placeholder = "" })
-                                                </td>
-                                                <td>Last Name</td>
-                                                <td>
-                                                    @Html.TextBoxFor(x => company.cc_daily_crime_log_manager_last_name, new { placeholder = "Last Name" })
-                                                </td>
-                                                <td>Email</td>
-                                                <td>
-                                                    @Html.TextBoxFor(x => company.cc_daily_crime_log_manager_email, new { placeholder = "Email" })
-                                                </td>
-                                                <td>Phone</td>
-                                                <td>
-                                                    @Html.TextBoxFor(x => company.cc_daily_crime_log_manager_phone, new { placeholder = "Phone" })
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                    <td></td>
-                                </tr>
-                            </table>
-                            <button type="submit" style="margin-right: 41px;" class="greenButton makeButtonTextCenter">@GlobalRes.Update</button>                
-                        </div>
-                    </div>
-                    }
+
+                    <div class="contentSettings secondHeader oldstyle">
+                        <div class="row">
+                            <p class="title">Campus Alert and Daily Crime Log managers info</p>
+                        </div><!-- /.row -->
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="p-h5">Campus Alert Manager</div><!-- /.p-h5 -->
+                            </div><!-- /.col-4 -->
+                            <div class="col-4">
+                                <div class="row">
+                                    <label for="CampusAlertManager_Name" class="lableText">
+                                        Name
+                                        @Html.TextBoxFor(x => company.cc_campus_alert_manager_first_name, new { placeholder = "", @class = "lableText__input", type = "text" })
+                                    </label>
+                                </div><!-- /.row -->
+                                <div class="row">
+                                    <label class="lableText">
+                                        Email
+                                        @Html.TextBoxFor(x => company.cc_campus_alert_manager_email, new { placeholder = "", @class = "lableText__input", type = "email" })
+                                    </label>
+                                </div><!-- /.row -->
+                            </div><!-- /.col-4 -->
+                            <div class="col-4">
+                                <div class="row">
+                                    <label class="lableText">
+                                        Last Name
+                                        @Html.TextBoxFor(x => company.cc_campus_alert_manager_last_name, new { placeholder = "", @class = "lableText__input", type = "text" })
+                                    </label>
+                                </div><!-- /.row -->
+                                <div class="row">
+                                    <label class="lableText">
+                                        Phone
+                                        @Html.TextBoxFor(x => company.cc_campus_alert_manager_phone, new { placeholder = "", @class = "lableText__input", type = "tel" })
+                                    </label>
+                                </div><!-- /.row -->
+                            </div><!-- /.col-4 -->
+                        </div><!-- /.row -->
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="p-h5">Daily Crime Log Manager</div><!-- /.p-h5 -->
+                            </div><!-- /.col-4 -->
+                            <div class="col-4">
+                                <div class="row">
+                                    <label for="CampusAlertManager_Name" class="lableText">
+                                        Name
+                                        @Html.TextBoxFor(x => company.cc_daily_crime_log_manager_first_name, new { placeholder = "", @class = "lableText__input", type = "text" })
+                                    </label>
+                                </div><!-- /.row -->
+                                <div class="row">
+                                    <label class="lableText">
+                                        Email
+                                        @Html.TextBoxFor(x => company.cc_daily_crime_log_manager_email, new { placeholder = "", @class = "lableText__input", type = "email" })
+                                    </label>
+                                </div><!-- /.row -->
+                            </div><!-- /.col-4 -->
+                            <div class="col-4">
+                                <div class="row">
+                                    <label class="lableText">
+                                        Last Name
+                                        @Html.TextBoxFor(x => company.cc_daily_crime_log_manager_last_name, new { placeholder = "", @class = "lableText__input", type = "text" })
+                                    </label>
+                                </div><!-- /.row -->
+                                <div class="row">
+                                    <label class="lableText">
+                                        Phone
+                                        @Html.TextBoxFor(x => company.cc_daily_crime_log_manager_phone, new { placeholder = "", @class = "lableText__input", type = "tel" })
+                                    </label>
+                                </div><!-- /.row -->
+                            </div><!-- /.col-4 -->
+                        </div><!-- /.row -->
+                        <div class="row">
+                            <div class="pull-right">
+                                <button type="submit" style="margin-right: 41px;" class="greenButton makeButtonTextCenter">Update</button>
+                            </div><!-- /.pull-right -->
+                        </div><!-- /.row -->
+                    </div><!-- /.contentSettings secondHeader oldstyle -->
                 }
+            }
         <div class="footerInputPosition footerInputStyle">
             <div class="contentSettings secondHeader oldstyle">
                 <div class="headerCompanyProfile">
                     @if (is_cc && is_valid_mediator)
-            {
+                    {
                         <div class="headerBlock">
                             <div class="blockText">
                                 <p class="title">Invite new college mediator by email</p>
