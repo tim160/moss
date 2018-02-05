@@ -383,7 +383,7 @@
 
         function init_location_cc_extended() {
             $('.location_cc_extended_items').off().on('change', function () {
-                var name = $(this).parent().find('.location_name').text();
+                var name = $(this).parent().parent().find('.location_name').text();
                 var cc = $(this).val();
                 cc = cc === undefined ? 'none' : cc;
                 var data = '' + name + '\n' + cc;
