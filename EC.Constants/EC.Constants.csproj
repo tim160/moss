@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="CaseStatusConstants.cs" />
     <Compile Include="CookieConstants.cs" />
+    <Compile Include="EAPostersSizesEnum.cs" />
     <Compile Include="ECActionConstants.cs" />
     <Compile Include="ECGlobalConstants.cs" />
     <Compile Include="ECLanguageConstants.cs" />

@@ -583,6 +583,7 @@
     <Content Include="Global.asax" />
     <Content Include="StarkLogo.jpg" />
     <Content Include="TermsOfService.html" />
+    <Content Include="Upload\EAPdf\1\1.png" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -706,6 +707,12 @@
     <Content Include="Views\Analytics\RootCauseAnalysis.cshtml" />
     <Content Include="Views\Analytics\AnalyticsMenu.cshtml" />
     <Content Include="Views\Settings\partial\blockRootCauses.cshtml" />
+    <Content Include="Upload\EAPdf\1\1.pdf" />
+    <Content Include="Upload\EAPdf\1\10.pdf" />
+    <Content Include="Upload\EAPdf\1\2.pdf" />
+    <Content Include="Upload\EAPdf\1\3.pdf" />
+    <Content Include="Upload\EAPdf\1\4.pdf" />
+    <Content Include="Upload\EAPdf\1\5.pdf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1144,6 +1151,10 @@
     <Folder Include="Content\assets\content\" />
     <Folder Include="Content\assets\template\php\" />
     <Folder Include="Upload\CompanyLogo\" />
+    <Folder Include="Upload\EAPdf\2\" />
+    <Folder Include="Upload\EAPdf\3\" />
+    <Folder Include="Upload\EAPdf\4\" />
+    <Folder Include="Upload\EAPdf\5\" />
     <Folder Include="Views\ActiveCasesModel\" />
     <Folder Include="Views\App_LocalResources\" />
   </ItemGroup>
