@@ -5,16 +5,13 @@ using System.Text;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using EC.Framework.Logger;
-using EC.Business.Entities;
 using EC.Framework;
-using EC.Framework.Email;
 using EC.Common.Util;
 using System.Net;
 using System.Net.Mail;
 using System.IO;
 using System.Xml;
 using System.Configuration;
-using EC.Business.Abstract;
 using System.Threading.Tasks;
 
 namespace EC.Business.Actions.Email
@@ -100,45 +97,21 @@ namespace EC.Business.Actions.Email
             return m_EmailTemplates;
         }
 
-        EC.Business.Abstract.IConfig configuration = null;
-        public IConfig Config
-        {
-            get
-            {
-                if (configuration == null)
-                {
-                    configuration = new Configuration();
-                }
-                return configuration;
-            }
-            set
-            {
-                if (value != null)
-                    configuration = value;
-            }
-        }
-
         #endregion
 
         #region Constructor(s)
         public EmailManagement()
-            : this(new CultureInfo("en-US"), null)
+            : this(new CultureInfo("en-US"))
         {
             Initialize();
 
         }
+
+
 
         public EmailManagement(CultureInfo cultureInfo)
-            : this(cultureInfo, null)
-        {
-            Initialize();
-
-        }
-
-        public EmailManagement(CultureInfo cultureInfo, IConfig config)
         {
             m_CultureInfo = cultureInfo;
-            configuration = config;
             Initialize();
         }
         private void Initialize()

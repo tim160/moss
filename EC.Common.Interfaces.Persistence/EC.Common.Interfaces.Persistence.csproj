@@ -61,22 +61,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ICascadeDelete.cs" />
-    <Compile Include="ICommitFailureHandler.cs" />
-    <Compile Include="ICommitHandler.cs" />
-    <Compile Include="IContextReady.cs" />
     <Compile Include="IDatabaseValidator.cs" />
     <Compile Include="IDataMotionMigration.cs" />
     <Compile Include="IHasGuidId.cs" />
     <Compile Include="IInjectKernel.cs" />
     <Compile Include="IInjectRepositoryFinder.cs" />
     <Compile Include="IMarkDatesTimesAsUtc.cs" />
-    <Compile Include="IMLSDbContext.cs" />
-    <Compile Include="IMLSTransactionScope.cs" />
     <Compile Include="IModifiableDateTimeItem.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="ISchemaConfigurator.cs" />
-    <Compile Include="IUnitofWork.cs" />
-    <Compile Include="IUOW.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

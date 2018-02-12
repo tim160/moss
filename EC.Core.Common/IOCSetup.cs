@@ -58,7 +58,6 @@ namespace EC.Core.Common
             var newContainer = new WindsorContainer();
             newContainer.Kernel.ComponentCreated += Kernel_ComponentCreated;
             RegisterCommonFacilities(newContainer, suppressStartable);
-            ConfigureLog4Net(newContainer);
             DBC.Assert(MainContainer == null, String.Format("IoCSetup::Run[{0}] - Duplicate main container", containerName));
             MainContainer = newContainer;
             Logger = newContainer.Resolve<ILogger>();
@@ -401,76 +400,6 @@ namespace EC.Core.Common
         /// Configure the log4net logging infrastructure at runtime from app settings
         /// </summary>
 
-        private static void ConfigureLog4Net(WindsorContainer container)
-        {
-            IAppSettings settings = null;
-            log4net.Repository.Hierarchy.Hierarchy hierarchy = null;
-            Dictionary<string, AppenderSkeleton> appenderMap = null;
-            var logger = container.Resolve<ILogger>();
-
-            // create a temporary container to gain early access to the app settings
-            using (var tempContainer = new WindsorContainer())
-            {
-                try
-                {
-                    // add our temp container as a child to the main container so we get access
-                    // to its registrations
-                    container.AddChildContainer(tempContainer);
-
-                    // Register file access, which is required by AppSettings
-                    tempContainer.Register(Component.For<IFileAccess>().ImplementedBy<FileAccess>());
-
-                    // Register app settings early so we can access configuration before IoC registrations
-                    tempContainer.Register(Component.For<IAppSettings>().ImplementedBy<AppSettings>());
-
-                    settings = tempContainer.Resolve<IAppSettings>();
-                }
-                catch (Exception ex)
-                {
-                    logger.Warn("Unable to Resolve App Settings", ex);
-                }
-            }
-
-            try
-            {
-                hierarchy = LogManager
-                    .GetRepository() as log4net.Repository.Hierarchy.Hierarchy;
-
-                appenderMap = hierarchy
-                    .GetAppenders()
-                    .OfType<AppenderSkeleton>()
-                    .ToDictionary(x => x.Name, x => x);
-            }
-            catch (Exception ex)
-            {
-                logger.Warn("Unable to build Log4Net Appender Map", ex);
-            }
-
-            if (settings != null && hierarchy != null && appenderMap != null)
-            {
-                var rootLevel = settings.RootLogLevel;
-
-                if (string.IsNullOrWhiteSpace(rootLevel) == false)
-                {
-                    try
-                    {
-                        hierarchy.Root.Level = hierarchy.LevelMap[settings.RootLogLevel];
-                    }
-                    catch (Exception ex)
-                    {
-                        logger.ErrorFormat("IoCSetup::ConfigureLog4Net[{0}] - Unable to Set Root Level: {1} - {2}", ContainerName, settings.RootLogLevel, ex.Message);
-                    }
-                }
-
-                ConfigureLog4NetAppender(settings, hierarchy, appenderMap, Log4NetTraceLogAppenderName, settings.TraceLogLevel, logger);
-                ConfigureLog4NetAppender(settings, hierarchy, appenderMap, Log4NetEventLogAppenderName, settings.EventLogLevel, logger);
-                ConfigureLog4NetAppender(settings, hierarchy, appenderMap, Log4NetEmailLogAppenderName, settings.EmailLogLevel, logger);
-                ConfigureLog4NetAppender(settings, hierarchy, appenderMap, Log4NetDebuggerLogAppenderName, settings.DebuggerLogLevel, logger);
-                ConfigureLog4NetAppender(settings, hierarchy, appenderMap, Log4NetStatsLogAppenderName, settings.StatsLogLevel, logger);
-            }
-
-            SetupStatsLogging(container);
-        }
 
         /// <summary>
         /// Configure a specific appender to use the specified logging level as the threshold

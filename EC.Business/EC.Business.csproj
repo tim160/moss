@@ -40,40 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstract\CSVEntity.cs" />
-    <Compile Include="Abstract\IConfig.cs" />
-    <Compile Include="Abstract\IConfigRepository.cs" />
     <Compile Include="Abstract\IEmailer.cs" />
     <Compile Include="Abstract\IEmailManager.cs" />
-    <Compile Include="Abstract\ILoginLogs.cs" />
-    <Compile Include="Abstract\IRepository.cs" />
-    <Compile Include="Actions\Config.cs" />
     <Compile Include="Actions\Email\EmailBody.cs" />
     <Compile Include="Actions\Email\EmailManagement.cs" />
-    <Compile Include="Actions\WorkOrderManagement.cs" />
-    <Compile Include="AdvancedQuery.cs" />
-    <Compile Include="AdvancedQueryCriteria.cs" />
     <Compile Include="Culture.cs" />
-    <Compile Include="DiagnosticDisplayValue.cs" />
-    <Compile Include="Entities\Attachment.cs" />
-    <Compile Include="Entities\BaseEntity.cs" />
-    <Compile Include="Entities\ConfigSetting.cs" />
-    <Compile Include="Entities\DatabaseConstraintException.cs" />
-    <Compile Include="Entities\GlobalSetting.cs" />
-    <Compile Include="Entities\IBaseEntity.cs" />
-    <Compile Include="Entities\IEntity.cs" />
-    <Compile Include="Entities\LoginLog.cs" />
-    <Compile Include="Entities\LoginResult.cs" />
-    <Compile Include="Entities\ObjectKeyUpdatedArgs.cs" />
-    <Compile Include="Entities\Setting.cs" />
-    <Compile Include="Entities\SortQueryCriteria.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SortCriteria.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="IconResources.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EC.Common.Base\EC.Common.Base.csproj">
@@ -84,18 +56,6 @@
       <Project>{60f0f82e-fa76-4279-b980-21614256dafb}</Project>
       <Name>EC.Common.Util</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EC.Framework.Data.Util\EC.Framework.Data.Util.csproj">
-      <Project>{c7573cb1-0e71-48db-9238-52c1807f7825}</Project>
-      <Name>EC.Framework.Data.Util</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EC.Framework.Data\EC.Framework.Data.csproj">
-      <Project>{3f2ccc07-70bd-4dc9-89fa-daccb1c73a86}</Project>
-      <Name>EC.Framework.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EC.Framework.Email\EC.Framework.Email.csproj">
-      <Project>{f17c0764-8c0b-4290-b7c3-e647ce65e96f}</Project>
-      <Name>EC.Framework.Email</Name>
-    </ProjectReference>
     <ProjectReference Include="..\EC.Framework.Logger\EC.Framework.Logger.csproj">
       <Project>{2303f1f0-96a9-4958-ac53-9822adfb0467}</Project>
       <Name>EC.Framework.Logger</Name>
@@ -104,18 +64,12 @@
       <Project>{0f6191b7-e3e1-44c9-b5b0-1149eb69459a}</Project>
       <Name>EC.Framework.Timezone</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EC.Library\EC.Library.csproj">
-      <Project>{16b0566b-3f43-442d-a864-9c8d4034a75b}</Project>
-      <Name>EC.Library</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Localization\EC.Localization.csproj">
       <Project>{2403521e-4e55-43c3-a91c-2d4454488003}</Project>
       <Name>EC.Localization</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Repositories\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

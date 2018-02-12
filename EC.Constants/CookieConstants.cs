@@ -21,42 +21,6 @@ namespace EC.Constants
         public const string COOKIE_NAME = "EC";
 
         /// <summary>
-        /// 'userName'. User name key value.
-        /// </summary>
-
-        public const string USER_NAME = "userName";
-
-        /// <summary>
-        /// 'userId'. User Id key value.
-        /// </summary>
-
-        public const string USER_ID = "userId";
-
-        /// <summary>
-        /// 'seriesId'. Series Id key value.
-        /// </summary>
-
-        public const string SERIES_ID = "seriesId";
-
-        /// <summary>
-        /// 'tokenId'. Token Id key value.
-        /// </summary>
-
-        public const string TOKEN_ID = "tokenId";
-
-        /// <summary>
-        /// Unique page list ID, to identify the pager this cookie belongs to
-        /// </summary>
-
-        public const string PAGE_LIST_ID = "pageListID";
-
-        /// <summary>
-        /// page size for the given pager
-        /// </summary>
-
-        public const string PAGE_SIZE = "pageSize";
-
-        /// <summary>
         /// Cookie lifetime in days.
         /// </summary>
 

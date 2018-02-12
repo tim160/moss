@@ -12,7 +12,7 @@ namespace EC.Constants
 
     public static class WCFHeaderConstants
     {
-        public const string MLSNamespace = "EC";
+        public const string ECNamespace = "EC";
         public const string UserId = "UserId";
         public const string UserName = "UserName";
         public const string URLHost = "URLHost";

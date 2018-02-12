@@ -13,21 +13,6 @@ namespace EC.Common.Base
     public static class UrlPathHelper
     {
         /// <summary>
-        /// Create content URL for a specific path.
-        /// </summary>
-        /// <param name="dnsName">DNS name for the URL</param>
-        /// <param name="isSSL">Flag whether to use HTTPS or HTTP</param>
-        /// <param name="path">content path</param>
-        /// <returns>Return full URL (http(s)://.....) for the content <paramref name="path"/>.</returns>
-
-        public static string CreateContentUrl(string dnsName, bool isSSL, string path) 
-        {
-            path = PathHelper.FixPath(path, true);
-            string url = string.Format("http{0}://{1}/Cnt{2}", (isSSL) ? "s" : string.Empty, dnsName, path);
-            return url;
-        }
-
-        /// <summary>
         /// Get domain name from a url.
         /// </summary>
         /// <param name="url"></param>
@@ -46,10 +31,39 @@ namespace EC.Common.Base
                 url = url.Substring("https://".Count());
             }
 
-            var splitUrl = url.SplitStringBy(new char[] { '/' }, true);
+            var splitUrl = SplitStringBy(url, new char[] { '/' }, true);
 
             return splitUrl.First();
         }
+
+        /// <summary>
+        /// Split string by <paramref name="splityBy"/> and trim each element.
+        /// </summary>
+        /// <param name="valueToSplit">string value to be split</param>
+        /// <param name="splitBy">Characters to split the string by.</param>
+        /// <param name="removeEmptyEntries">Flag whether to remove empty entries after the split.</param>
+        /// <returns>
+        /// Return list with split values.
+        /// Return empty list if <paramref name="valueToSplit"/> is <c>null</c> or empty. 
+        /// Return list with <paramref name="valueToSplit"/> as entry if <paramref name="splitBy"/> is <c>null</c> or empty.
+        /// </returns>
+
+        private static IList<string> SplitStringBy(string valueToSplit, char[] splitBy, bool removeEmptyEntries = true)
+        {
+            if (string.IsNullOrEmpty(valueToSplit)) { return new List<string>(); }
+            if ((splitBy == null) || (splitBy.Length == 0)) { return new List<string>() { valueToSplit }; }
+
+            if (removeEmptyEntries)
+            {
+                return valueToSplit.Split(splitBy, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim()).ToList<string>();
+            }
+            else
+            {
+                return valueToSplit.Split(splitBy).Select(s => s.Trim()).ToList<string>();
+            }
+        }
+
+
 
         /// <summary>
         /// Check whether the URL is secure (https) or not (http).

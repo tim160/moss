@@ -62,14 +62,12 @@
     <Compile Include="IDateTimeHelper.cs" />
     <Compile Include="IEmailAddressHelper.cs" />
     <Compile Include="IEmailSender.cs" />
-    <Compile Include="IFileAccess.cs" />
     <Compile Include="IFileItem.cs" />
     <Compile Include="IGenericTypeFactory.cs" />
     <Compile Include="IHtmlUtility.cs" />
     <Compile Include="ILock.cs" />
     <Compile Include="IManageRequestContexts.cs" />
     <Compile Include="IMarineLMSClient.cs" />
-    <Compile Include="IMLSTask.cs" />
     <Compile Include="IPageInfo.cs" />
     <Compile Include="IPdfHelper.cs" />
     <Compile Include="IRequestContext.cs" />

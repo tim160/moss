@@ -56,14 +56,6 @@
     <Compile Include="SqlOrderByCriteria.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EC.Framework.Data.Util\EC.Framework.Data.Util.csproj">
-      <Project>{c7573cb1-0e71-48db-9238-52c1807f7825}</Project>
-      <Name>EC.Framework.Data.Util</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EC.Framework.Dynamic\EC.Framework.Dynamic.csproj">
-      <Project>{1e745894-357b-4c25-a4d4-e5ee1589eb1a}</Project>
-      <Name>EC.Framework.Dynamic</Name>
-    </ProjectReference>
     <ProjectReference Include="..\EC.Framework.Logger\EC.Framework.Logger.csproj">
       <Project>{2303f1f0-96a9-4958-ac53-9822adfb0467}</Project>
       <Name>EC.Framework.Logger</Name>

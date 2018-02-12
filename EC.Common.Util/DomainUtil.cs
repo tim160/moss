@@ -33,7 +33,7 @@ namespace EC.Common.Util
 
         public static bool IsCC(string url)
         {
-            return true;
+            //return true;
             // uncomment for campus-confidential testing
             //      return true;
             if ((url.ToLower().Contains("campus")) || (url.ToLower().Contains("cc.employeeconfidential")))

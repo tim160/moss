@@ -1187,14 +1187,6 @@
       <Project>{a6dc770d-89c5-483b-b73c-077df5c7fefe}</Project>
       <Name>EC.Core.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EC.Framework.Data.Util\EC.Framework.Data.Util.csproj">
-      <Project>{c7573cb1-0e71-48db-9238-52c1807f7825}</Project>
-      <Name>EC.Framework.Data.Util</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EC.Framework.Email\EC.Framework.Email.csproj">
-      <Project>{f17c0764-8c0b-4290-b7c3-e647ce65e96f}</Project>
-      <Name>EC.Framework.Email</Name>
-    </ProjectReference>
     <ProjectReference Include="..\EC.Model.Impl\EC.Model.Impl.csproj">
       <Project>{ff040d47-bd8a-4c3c-a285-0d6f2f11754c}</Project>
       <Name>EC.Model.Impl</Name>
