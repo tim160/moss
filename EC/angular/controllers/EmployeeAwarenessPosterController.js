@@ -8,7 +8,7 @@
             ['$scope', '$filter', '$location', 'EmployeeAwarenessPosterService', EmployeeAwarenessPosterController]);
 
     function EmployeeAwarenessPosterController($scope, $filter, $location, EmployeeAwarenessPosterService) {
-        $scope.SelectedSize = 1;
+        $scope.SelectedSize = 1117;
         $scope.SelectedLogo = 1;
         $scope.mainImage = '';
         $scope.id = parseInt($location.absUrl().substring($location.absUrl().indexOf('poster/') + 'poster/'.length));
@@ -18,9 +18,11 @@
         });
 
         $scope.Process = function () {
-            console.log($scope.id, $scope.SelectedSize, $scope.SelectedLogo);
-            EmployeeAwarenessPosterService.post({ type: $scope.id, size: $scope.SelectedSize, logo: $scope.SelectedLogo }, function (data) {
-                window.location = data.file;
+            EmployeeAwarenessPosterService.post({ posterId: $scope.id, type: 1, size: $scope.SelectedSize, logo1: $scope.SelectedLogo }, function (data) {
+                //window.location = data.file;
+                $scope.downloadLink = data.file;
+                document.getElementById('downloadA').setAttribute('href', data.file);
+                document.getElementById('downloadA').click();
             });
 
             return true;

@@ -62,7 +62,7 @@
 
                 <div ng-repeat="poster in posters" class="blockInformation" ng-style="poster.IsVisible == true ? {'display': 'block' } : {'display' : 'none' }">
                     <a ng-href="/employeeawareness/poster/{{poster.poster.id}}" style="text-decoration: none">
-                        <div class="filtersBlock {{poster.poster.imageName}}" style="background-image: url({{poster.poster.image_path}}{{poster.poster.image_name}})">
+                        <div class="filtersBlock {{poster.poster.imageName}}" style="background-image: url('/Upload/EAPdf/{{poster.poster.id}}/1.png')">
                             <div ng-repeat="category in poster.posterCategoryNames" class="filter" ng-class="{{'c' + category.id}}" value="{{category.id}}">{{categoryName(category.id)}}</div>
                         </div>
                         <div class="greenBlock {{poster.poster.message.id}}">{{messageName(poster.message)}}</div>

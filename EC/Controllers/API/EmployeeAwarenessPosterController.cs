@@ -20,9 +20,10 @@ namespace EC.Controllers.API
     {
         public class Filter
         {
+            public int posterId { get; set; }            
             public int type { get; set; }
             public int size { get; set; }
-            public int logo { get; set; }
+            public int logo1 { get; set; }
         }
 
         [HttpGet]
@@ -39,7 +40,8 @@ namespace EC.Controllers.API
 
             return new {
                 //mainImage = Url.Content("~/Content/img/employeeAwarenessPoster.jpg")
-                mainImage = $"{poster.image_path}{poster.image_name}"
+                //mainImage = $"{poster.image_path}{poster.image_name}"
+                mainImage = ($"/Upload/EAPdf/{poster.id}/1.png"),
             };
         }
 
@@ -49,9 +51,8 @@ namespace EC.Controllers.API
             var poster = DB.poster.FirstOrDefault(x => x.id == filter.type);
 
             return new {
-                //file = $"{poster.image_path}{poster.image_name}",
-                file = ("/Content/img/TestPdf.pdf"),
-                name = $"type:{filter.type} size:{filter.size} logo:{filter.logo}"
+                file = ($"/Upload/EAPdf/{poster.id}/{filter.type}_{filter.size}_{filter.logo1}.pdf"),
+                name = $"type:{filter.type} size:{filter.size} logo1:{filter.logo1}"
             };
 
         }

@@ -18,9 +18,10 @@
 <div id="EmployeeAwarenessBlock" class="blockSettings" ng-controller="EmployeeAwarenessPosterController" ng-cloak>
     <div class="topHeader">@GlobalRes.AwarenessMaterials</div>
     <div class="mainContent">
+        <a id="downloadA" href="" download></a>
         <div class="rightContent">
             <div class="topBlockFilters">
-                <a href="#" class="toBack">
+                <a href="@Url.Action("Index", "employeeawareness")" class="toBack">
                     @GlobalRes.BackToResults
                 </a>
                 <span class="textShot">@GlobalRes.EmployeeAwarenessMaterials</span>
@@ -38,19 +39,19 @@
                         <div class="blockFormat">
                             <div class="titleBlockFormat active">@GlobalRes.Poster</div>
                             <div class="itemsFormat">
-                                <div class="itemFormat active" ng-click="SelectedSize = 1">
+                                <div class="itemFormat active" ng-click="SelectedSize = 1117">
                                     <div class="format format1"></div>
                                     <div class="size">@GlobalRes.format_1</div>
                                 </div>
-                                <div class="itemFormat" ng-click="SelectedSize = 2">
+                                <div class="itemFormat" ng-click="SelectedSize = 1620">
                                     <div class="format format2"></div>
                                     <div class="size">@GlobalRes.format_2</div>
                                 </div>
-                                <div class="itemFormat" ng-click="SelectedSize = 3">
+                                <div class="itemFormat" ng-click="SelectedSize = 1824">
                                     <div class="format format3"></div>
                                     <div class="size">@GlobalRes.format_3</div>
                                 </div>
-                                <div class="itemFormat" ng-click="SelectedSize = 4">
+                                <div class="itemFormat" ng-click="SelectedSize = 2228">
                                     <div class="format format4"></div>
                                     <div class="size">@GlobalRes.format_4</div>
                                 </div>
@@ -65,10 +66,12 @@
                             <div class="format noLogo"></div>
                             <div class="size">@GlobalRes.Nologo</div>
                         </div>
+                        @*
                         <div class="itemFormat" ng-click="SelectedLogo = 2">
                             <div class="format useCurrentLogo"></div>
                             <div class="size">@GlobalRes.Usecurrentlogo</div>
                         </div>
+                        *@
                     </div>
 
                 </div>
