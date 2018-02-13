@@ -595,6 +595,11 @@ table.table:first-child tr:first-child td {
     font-family: OpenSans-Light;
     color: #727c7e;
 }
+.addTheLegend {
+    font-size: 12px;
+    font-family: OpenSans-Light;
+    color: #3c3e3f;
+}
 .dropDownMenuPadding {
     padding-left: 40px;
     background-color: #ebf1f1;
