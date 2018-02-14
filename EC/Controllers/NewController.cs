@@ -821,7 +821,6 @@ namespace EC.Controllers
                 _user.title_ds = title.Trim();
                 _user.employee_no = "";
                 _user.company_department_id = currentDepartmens;
-                _user.company_location_id = currentLocations;
                 _user.question_ds = "";
                 _user.answer_ds = "";
                 _user.previous_login_dt = DateTime.Now;
@@ -833,7 +832,7 @@ namespace EC.Controllers
                 _user.notification_new_reports_flag = 1;
                 _user.notification_marketing_flag = 1;
                 _user.notification_summary_period = 1;
-                _user.company_location_id = location_id;
+                _user.company_location_id = currentLocations;
                 _user.location_nm = "";
                 _user.sign_in_code = null;
                 _user.guid = Guid.NewGuid();
