@@ -205,6 +205,8 @@ namespace EC.Controllers
             if ((loginModel.restorePass(token, email).ToLower().Trim() == App_LocalResources.GlobalRes.Success.ToLower().Trim()))
             {
                 Session.Clear();
+                ViewBag.email = email;
+                ViewBag.token = token;
                 return View();
             }
             else

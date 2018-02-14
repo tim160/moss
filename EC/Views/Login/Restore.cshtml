@@ -15,12 +15,12 @@
     <div class="loginForm">
         <div class="loginInput">
             <label class="label">@GlobalRes.Email</label>
-            <input type="text" class="loginText" name="email" />
+            <input type="text" class="loginText" name="email" value="@ViewBag.email" />
 
         </div>
         <div class="passwordInput">
             <label class="label">@GlobalRes.Yourpasswordtoken</label>
-            <input type="text" class="loginText" name="token" />
+            <input type="text" class="loginText" name="token" value="@ViewBag.token" />
         </div>
         <input type="submit" id="submit" value="Submit">
     </div>
