@@ -1339,8 +1339,10 @@
         $scope.title_ds = '';
         $scope.email = '';
         $scope.departments = [];
+        $scope.locations = [];
         $scope.role = 5;
         $scope.departmentId = 0;
+        $scope.locationId = 0;
         $scope.user_permissions_approve_case_closure = 0;
         $scope.user_permissions_change_settings = 0;
 
@@ -1349,6 +1351,7 @@
         $scope.val_title_ds = false;
         $scope.val_email = false;
         $scope.val_departmentId = false;
+        $scope.val_locationId = false;
 
         $scope.id = parseInt($location.absUrl().substring($location.absUrl().indexOf('user/') + 'user/'.length));
         $scope.id = isNaN($scope.id) ? 0 : $scope.id;
@@ -1359,8 +1362,10 @@
             $scope.title_ds = data.model.title_ds;
             $scope.email = data.model.email;
             $scope.departments = data.departments;
+            $scope.locations = data.locations;
             $scope.role = data.model.role;
             $scope.departmentId = data.model.departmentId;
+            $scope.locationId = data.model.locationId;
             $scope.user_permissions_approve_case_closure = data.model.user_permissions_approve_case_closure.toString();
             $scope.user_permissions_change_settings = data.model.user_permissions_change_settings.toString();
         });
@@ -1384,12 +1389,14 @@
             $scope.val_title_ds = !$scope.validate($scope.title_ds);
             $scope.val_email = !$scope.validate($scope.email, /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/);
             $scope.val_departmentId = $scope.departmentId == null || !$scope.validate($scope.departmentId.toString());
+            $scope.val_locationId = $scope.locationId == null || !$scope.validate($scope.locationId.toString());
 
             if (!$scope.val_first_nm
                 && !$scope.val_last_nm
                 && !$scope.val_title_ds
                 && !$scope.val_email
                 && !$scope.val_departmentId
+                && !$scope.val_locationId
                 ) {
 
                 var model = {
@@ -1400,6 +1407,7 @@
                     email: $scope.email,
                     role_id: $scope.role,
                     company_department_id: $scope.departmentId,
+                    company_location_id: $scope.locationId,
                     user_permissions_approve_case_closure: $scope.user_permissions_approve_case_closure,
                     user_permissions_change_settings: $scope.user_permissions_change_settings,
                 };
