@@ -299,7 +299,7 @@ namespace EC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UpdateUser([Bind(Include = "id,first_nm,last_nm,title_ds,email,company_department_id,user_permissions_approve_case_closure,user_permissions_change_settings")] user _user)
+        public ActionResult UpdateUser([Bind(Include = "id,first_nm,last_nm,title_ds,email,company_department_id,user_permissions_approve_case_closure,user_permissions_change_settings,company_location_id")] user _user)
         {
             if (ModelState.IsValid)
             {
@@ -310,6 +310,7 @@ namespace EC.Controllers
                     _updateuser.first_nm = _user.first_nm;
                     _updateuser.last_nm = _user.last_nm;
                     _updateuser.title_ds = _user.title_ds;
+                    _updateuser.company_location_id = _user.company_location_id;
                     //_updateuser.notepad_tx = _user.notepad_tx;
                     _updateuser.email = _user.email;
                     //_updateuser.notification_messages_actions_flag = _user.notification_messages_actions_flag;

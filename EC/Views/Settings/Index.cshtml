@@ -7,14 +7,15 @@
 
 
     UserModel um = (UserModel)ViewBag.um;
+    CompanyModel cm = new CompanyModel(um._user.company_id);
     var user_id = um.ID;
     int checkBoxActiveCases = um._user.notification_messages_actions_flag;
     int checkBoxNewReports = um._user.notification_new_reports_flag;
     string mediator_active = string.Empty;
     string adminMediator_active = string.Empty;
     string escalationMediator_active = string.Empty;
-    var a=10;
-    if(um._user.role_id != null ) {
+    var a = 10;
+    if(um._user.role_id != 0) {
 
         switch(um._user.role_id) {
             case(6):
@@ -77,6 +78,10 @@
                 <div class="blockPersonalSettings greyBorder">
                     <p class="title">@GlobalRes.Department</p>
                     @Html.DropDownListFor(model => Model.company_department_id, new SelectList(um.listDepartments, "id", "department_nm"))
+                </div>
+                <div class="blockPersonalSettings greyBorder">
+                    <p class="title">@GlobalRes.Location</p>
+                    @Html.DropDownListFor(model => Model.company_location_id, new SelectList(cm.Locations(um._user.company_id), "id", "location_en"))
                 </div>
 
                 <div class="blockPersonalSettings greyBorder">

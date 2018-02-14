@@ -62,7 +62,8 @@
                 last: $("#last").val().trim(),
                 email: $("#email").val().trim(),
                 title: $("#title").val().trim(),
-                currentDepartmens: $("#currentDepartmens").val().trim()
+                currentDepartmens: $("#currentDepartmens").val().trim(),
+                currentLocations: $("#currentLocations").val().trim(),
             }
         }).done(function (data) {//data from server
             if (data != 'completed') {

@@ -4,11 +4,12 @@
 
 @{
     <link rel="stylesheet" type="text/css" href="/Content/styleReportDashboard.css">
-  //  @Styles.Render("~/Content/Styles");
+    //  @Styles.Render("~/Content/Styles");
     ViewBag.Title = GlobalRes.NewUserRegistration;
     var _code = ViewBag.code;
     var _email = ViewBag.email;
     UserModel um = new UserModel();
+    var cm = new CompanyModel((int)ViewBag.company_id);
     string mediator_active = string.Empty;
     string adminMediator_active = string.Empty;
     string escalationMediator_active = string.Empty;
@@ -59,7 +60,10 @@
             <div class="blockPersonalSettings">
                 <p class="title">@GlobalRes.Department</p>
                 @Html.DropDownList("currentDepartmens", ViewBag.currentDepartmens as SelectList)
-                @*<input type="text" id="description" />*@
+            </div>
+            <div class="blockPersonalSettings">
+                <p class="title">@GlobalRes.Department</p>
+                @Html.DropDownList("currentLocations", new SelectList(cm.Locations(cm._company.id), "id", "location_en"))
             </div>
 
             <div class="blockPersonalSettings">

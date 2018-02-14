@@ -58,6 +58,7 @@ namespace EC.Controllers
                     SelectListItem temp = new SelectListItem { Text = App_LocalResources.GlobalRes.Other, Value = "0" };
                     items.Add(temp);
                     ViewBag.currentDepartmens = items;
+                    ViewBag.company_id = selectedCompany.id;
                 }
             }
 
@@ -735,7 +736,7 @@ namespace EC.Controllers
 
         }
 
-        public string CreateUser(string code, string first, string last, string email, string title, int currentDepartmens)
+        public string CreateUser(string code, string first, string last, string email, string title, int currentDepartmens, int currentLocations)
         {
             int company_id = 0;
             int user_id = 0;
@@ -820,6 +821,7 @@ namespace EC.Controllers
                 _user.title_ds = title.Trim();
                 _user.employee_no = "";
                 _user.company_department_id = currentDepartmens;
+                _user.company_location_id = currentLocations;
                 _user.question_ds = "";
                 _user.answer_ds = "";
                 _user.previous_login_dt = DateTime.Now;
