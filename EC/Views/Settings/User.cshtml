@@ -50,6 +50,13 @@
                     <option value="0">@GlobalRes.Other</option>
                 </select>
             </div>
+            <div class="blockPersonalSettings greyBorder" ng-class="{error: val_locationId }">
+                <p class="title">@GlobalRes.Location</p>
+                <select ng-model="locationId">
+                    <option ng-repeat="item in locations" ng-value="{{item.id}}" ng-selected="locationId == item.id">{{item.location_en}}</option>
+                    <option value="0">@GlobalRes.Other</option>
+                </select>
+            </div>
             <div class="blockPersonalSettings greyBorder" ng-class="{error: val_email }">
                 <p class="title">@GlobalRes.Email</p>
                 <input email="email" id="email" name="email" type="text" ng-model="email">

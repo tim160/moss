@@ -26,7 +26,8 @@ namespace EC.Controllers.API
 
             return new
             {
-                departments = DB.company_department.Where(x => x.company_id == user.company_id).OrderBy(x => x.department_en).ToList(),
+                departments = DB.company_department.Where(x => x.company_id == user.company_id && x.status_id == 2).OrderBy(x => x.department_en).ToList(),
+                locations = DB.company_location.Where(x => x.company_id == user.company_id && x.status_id == 2).OrderBy(x => x.location_en).ToList(),
                 model = new
                 {
                     first_nm = model == null ? "" : model.first_nm,
@@ -35,6 +36,7 @@ namespace EC.Controllers.API
                     email = model == null ? "" : model.email,
                     role = model == null ? 5 : model.role_id,
                     departmentId = model == null ? 0 : model.company_department_id,
+                    locationId = model == null ? 0 : model.company_location_id,
                     user_permissions_approve_case_closure = model == null ? 0 : model.user_permissions_approve_case_closure,
                     user_permissions_change_settings = model == null ? 0 : model.user_permissions_change_settings,
                 }
@@ -55,6 +57,7 @@ namespace EC.Controllers.API
                 user.email = model.email;
                 user.role_id = model.role_id;
                 user.company_department_id = model.company_department_id;
+                user.company_location_id = model.company_location_id;
                 user.user_permissions_approve_case_closure = model.user_permissions_approve_case_closure;
                 user.user_permissions_change_settings = model.user_permissions_change_settings;
             }
