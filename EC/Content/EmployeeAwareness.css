@@ -1,10 +1,4 @@
-﻿.menuCasesBlock {
-    display: none;
-}
-.menuCasesBlock{
-    padding: 0px;
-}
-#EmployeeAwarenessBlock{
+﻿#EmployeeAwarenessBlock{
     background-color: #e5ebeb;
 }
 #EmployeeAwarenessBlock .topHeader {
