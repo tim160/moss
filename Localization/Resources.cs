@@ -61,13 +61,21 @@ namespace EC.Localization
         {
             try
             {
+                string temp_key = key;
                 if (is_cc) { key = key + "_CC"; }
                 string value = App_GlobalResources.Resources.ResourceManager.GetString(key);
 
                 if (value != null)
                     return value;
                 else
-                    return key;
+                {
+                    if (is_cc)
+                        value = App_GlobalResources.Resources.ResourceManager.GetString(temp_key);
+                    if(value != null)
+                        return value;
+                    else
+                        return key;
+                }
 
 
                 /*
