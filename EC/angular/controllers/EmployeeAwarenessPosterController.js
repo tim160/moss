@@ -8,7 +8,7 @@
             ['$scope', '$filter', '$location', 'EmployeeAwarenessPosterService', EmployeeAwarenessPosterController]);
 
     function EmployeeAwarenessPosterController($scope, $filter, $location, EmployeeAwarenessPosterService) {
-        $scope.SelectedSize = 1117;
+        $scope.SelectedSize = 1620;
         $scope.SelectedLogo = 1;
         $scope.mainImage = '';
         $scope.id = parseInt($location.absUrl().substring($location.absUrl().indexOf('poster/') + 'poster/'.length));
