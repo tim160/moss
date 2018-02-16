@@ -2698,6 +2698,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Forgot Old Password.
+        /// </summary>
+        public static string ForgotOldPassword {
+            get {
+                return ResourceManager.GetString("ForgotOldPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Forgot Password.
         /// </summary>
         public static string ForgotPassword {
