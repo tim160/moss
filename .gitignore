@@ -1,7 +1,6 @@
 ###################
 # compiled source #
 ###################
-*.com
 *.class
 *.dll
 *.exe
@@ -80,3 +79,5 @@ EC/Content/img/TestPdf.pdf
 EC/Upload/
 EC/Models/Database/
 EC/Web.config
+EC.COM/Web.config
+EC.COM/Areas/

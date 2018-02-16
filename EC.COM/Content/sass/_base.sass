@@ -1,0 +1,58 @@
+@import "vars"
+/*=======================================================*/
+/*===================  Basic style  =====================*/
+/*=======================================================*/
+*
+	box-sizing: border-box
+	&:before, &:after
+		box-sizing: border-box
+
+html, body
+	height: 100%
+
+body
+	font-size: 16px
+	min-width: 320px
+	position: relative
+	opacity: 1
+p
+	margin: 0 0 10px 0
+.img-responsive
+	display: block
+	max-width: 100%
+	height: auto
+
+.center
+	text-align: center
+
+.general-container
+	font-family: $regular-font
+	display: grid
+	grid-template-columns: 1fr
+	grid-template-areas: "header" "main" "footer"
+	grid-template-rows: [header-row-start] minmax(50px, max-content) [header-row-end mainContent-row-start] minmax( calc( 100vh - 394px ), max-content ) [mainContent-row-end footer-row-start] minmax(30px, max-content) [footer-row-end]
+
+.container
+	max-width: 1200px
+	padding: 0 20px
+	margin: auto
+	position: relative
+
+.btn
+	display: block
+	outline: none
+	border: 1px solid $orangeDarken-color
+	border-radius: 3px
+	background-color: $orange-color
+	color: $lightfont-color
+	text-transform: uppercase
+	text-decoration: none
+	font-family: Open Sans
+	font-weight: bold
+	padding: 12px 20px
+	transition: background-color 0.25s ease
+	&:hover,
+	&:active,
+	&:focus
+		background-color: darken($orange-color, 10%)
+		border: 1px solid darken($orangeDarken-color, 10%) 
