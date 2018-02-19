@@ -42,6 +42,27 @@
         types['dateEnd'] = $("#dateEnd").attr("value");
         
         sendAjax(userId.val(), companyId.val(), types);
+
+        if (($("#dateStart").val() !== '') && ($("#dateEnd").val() !== '')) {
+            var html = '<tr name="Date">';
+            html += '<td>Date</td><td>';
+            html += "" + moment(parseInt($("#dateEnd").val())).format('DD/MM/YYYY');
+            html += " - ";
+            html += "" + moment(parseInt($("#dateStart").val())).format('DD/MM/YYYY');
+            html += '</td><td class="clearAll clearDate">Clear<img src="/Content/Icons/Xanal.gif" /></td> </tr>';
+
+            if ($('#filterTable > tbody > tr:first').length == 0) {
+                $("#filterTable").append(html);
+            } else {
+                $(html).insertBefore('#filterTable > tbody > tr:last');
+            }
+            $('.clearDate').off().on('click', function () {
+                $("tr [name='Date']").remove();
+                $("#dateStart").val('');
+                $("#dateEnd").val('');
+                updateGraphics();
+            })
+        }
     }
     function upadteFilterAgain(textDropDown, elementSelected) {
         var table = $("#filterTable");
@@ -73,6 +94,9 @@
         });
         $("#clearAll").on('click', function () {
             clearAll();
+            $("#dateStart").val('');
+            $("#dateEnd").val('');
+            updateGraphics();
         });
     }
     function clearItemOne(item) {
