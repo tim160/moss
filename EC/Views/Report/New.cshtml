@@ -319,7 +319,7 @@
                             <p>@GlobalRes.Hascasereportedoutside<br /></p>
                             <div class="rowBlock whoKnow">
                                 <input type="hidden" value="false" name="reported_outside_id" class="validate" data-vltarget=".reported_outside_id" data-validate="notEmpty" />
-                                @foreach (EC.Models.Database.reported_outside item in ViewBag.reportedOutsides)
+                                @foreach (reported_outside item in ViewBag.reportedOutsides)
                                 {
                                     <div class="freeBlock inputRadio option" data-val="@item.id">
                                         <label class="inputBlock" for="@item.description_en">

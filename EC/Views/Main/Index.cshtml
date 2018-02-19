@@ -1,20 +1,21 @@
 ﻿@using EC.App_LocalResources
 @using EC.Controllers.Utils
 @using EC.Models
-@using EC.App_LocalResources;
+@using EC.Localization;
 @{
     ViewBag.Title = GlobalRes.increportingandcasemanag;
     Layout = "~/Views/Shared/_MainHTML.cshtml";
+    bool is_cc = ViewBag.is_cc;
 }
 <div id="topBody">
     <div class="firstTitle">
-        @GlobalRes.FileReport
+        @Resources.GetString("FileReport")
     </div>
     <div class="secondTitle">
-        @GlobalRes.FindOrganization
+        @Resources.GetString("FindOrganization", is_cc)
     </div>
     <div class="thirdTitle">
         <input id="specialInput" placeholder="Company name or code">
-        <div id="buttonStart"><span class="buttonStartText">@GlobalRes.Start.ToUpper()</span></div>
+        <div id="buttonStart"><span class="buttonStartText">@Resources.GetString("Start").ToUpper()</span></div>
     </div>
 </div><!--end topBody-->

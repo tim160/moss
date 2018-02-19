@@ -1,17 +1,18 @@
 ﻿@using System.Collections;
 @using EC.Models;
 @using EC.Models.Database;
-@using EC.App_LocalResources;
+@using EC.Localization;
 @{
     <link rel="stylesheet" type="text/css" href="/Content/styleReportDashboard.css">
-  //  @Styles.Render("~/Content/Styles");
-    ViewBag.Title = GlobalRes.NewCompanyRegistration;
+    //  @Styles.Render("~/Content/Styles");
+    bool is_cc = ViewBag.is_cc;
     var _code = ViewBag.code;
 
 
     UserModel um = new UserModel();
     CompanyModel cm = new CompanyModel();
     int company_id = 0;
+    ViewBag.Title = Resources.GetString("NewCompanyRegistration", is_cc);
     <style>
         .fullContainer {
             max-width: none;
@@ -21,10 +22,10 @@
 
 <div class="blockSettings contentCompanyProfile">
     <div class="titleNewUser">
-        <h1 class="helloUser">@GlobalRes.NewCompanyRegistration:</h1>
-    </div>
+        <h1 class="helloUser">@Resources.GetString("NewCompanyRegistration", is_cc):</h1>
+    </div >
     <div class="contentSettings">
-        <p class="helloUser" id="hello">@GlobalRes.FillTheFollowingFields.</p>
+        <p class="helloUser" id="hello">@Resources.GetString("FillTheFollowingFields").</p>
 
         <div class="blockPersonalPhotoSetting">
             <div class="blockPhotoSetting">
@@ -34,101 +35,101 @@
         <div>
             <div class="personalBlock" id="registration">
                 <div class="blockPersonalSettings">
-                    <p class="title">@GlobalRes.InvitationCode</p>
+                    <p class="title">@Resources.GetString("InvitationCode")</p>
                     @Html.TextBox("code")
 
                 </div>
                 <div class="blockPersonalSettings">
-                    <p class="title">@GlobalRes.CompanyNameUp</p>
+                    <p class="title">@Resources.GetString("CompanyNameUp", is_cc)</p>
                     @Html.TextBox("company_name")
                 </div>
                 <div class="blockPersonalSettings">
-                    <p class="title">@GlobalRes.PrimaryLocationUp</p>
-                    <input type="text" id="location" />
-                </div>
+                    <p class="title">@Resources.GetString("PrimaryLocationUp", is_cc)</p>
+                    <input type = "text" id = "location" />
+                </div >
                 <div class="blockPersonalSettings">
-                    <p class="title">@GlobalRes.NumberEmployees</p>
-                    <input type="number" id="number" min="0" />
-                </div>
+                    <p class="title">@Resources.GetString("NumberEmployees", is_cc)</p>
+                    <input type = "number" id = "number" min = "0" />
+                </div >
                 <div class="blockPersonalSettings">
-                    <p class="title">@GlobalRes.PrimaryLanguageUp</p>
+                    <p class="title">@Resources.GetString("PrimaryLanguageUp", is_cc)</p>
 
                     <div class="rowBlock inputMediator">
                         <div class="freeBlock inputRadio mediator active">
                             <label class="inputBlock" for="freeIncident">
-                                <input id="oneIncident" type="radio" name="language_id" value="1">
-                                <span class="radioTitle">@GlobalRes.English</span>
-                            </label>
-                        </div>
-                    </div><!--rowBlock-->
-                </div>
+                                <input id = "oneIncident" type="radio" name="language_id" value="1">
+                                <span class="radioTitle">@Resources.GetString("English")</span>
+                            </label >
+                        </div >
+                    </div >< !--rowBlock-- >
+                </div >
 
                 <div class="blockPersonalSettings">
-                    <p class="title">@GlobalRes.YourRoleUp</p>
+                    <p class="title">@Resources.GetString("YourRoleUp", is_cc)</p>
 
                     <div class="rowBlock inputMediator">
                         <div class="freeBlock inputRadio adminMediator active">
                             <label class="inputBlock" for="freeIncident">
-                                <input id="oneIncident" type="radio" name="role_id" value="5">
-                                <span class="radioTitle">@GlobalRes.AdminMediator</span>
-                            </label>
-                        </div>
-                    </div><!--rowBlock-->
-                </div>
+                                <input id = "oneIncident" type="radio" name="role_id" value="5">
+                                <span class="radioTitle">@Resources.GetString("AdminMediator", is_cc)</span>
+                            </label >
+                        </div >
+                    </div >< !--rowBlock-- >
+                </div >
 
                 <div class="blockPersonalSettings">
-                    <p class="title">@GlobalRes.FirstNameUp</p>
-                    <input type="text" id="first" />
-                </div>
+                    <p class="title">@Resources.GetString("FirstNameUp")</p>
+                    <input type = "text" id = "first" />
+                </div >
                 <div class="blockPersonalSettings">
-                    <p class="title">@GlobalRes.LastNameUp</p>
-                    <input type="text" id="last" />
-                </div>
+                    <p class="title">@Resources.GetString("LastNameUp")</p>
+                    <input type = "text" id = "last" />
+                </div >
                 <div class="blockPersonalSettings">
-                    <p class="title">@GlobalRes.Email</p>
-                    <input type="text" id="email" />
-                </div>
+                    <p class="title">@Resources.GetString("Email")</p>
+                    <input type = "text" id = "email" />
+                </div >
                 <div class="blockPersonalSettings">
-                    <p class="title">@GlobalRes.Title</p>
-                    <input type="text" id="title" />
-                </div>
+                    <p class="title">@Resources.GetString("Title")</p>
+                    <input type = "text" id = "title" />
+                </div >
                 <div class="blockPersonalSettings">
-                    <p class="title">@GlobalRes.Department</p>
-                    <input type="text" id="departments" />
+                    <p class="title">@Resources.GetString("Department")</p>
+                    <input type = "text" id = "departments" />
                 </div>
 
-                <div id="PayByCard" type="hidden">
+                <div id = "PayByCard" type = "hidden" >
                     <div class="blockPersonalSettings">
-                        <p class="title">@GlobalRes.Amount</p>
-                        <input type="text" id="amount" value="0" />
+                        <p class="title">@Resources.GetString("Amount")</p>
+                        <input type = "text" id = "amount" value = "0" />
+                    </div >
+
+                    <div class="blockPersonalSettings">
+                        <p class="title">@Resources.GetString("CreditCardNumber")</p>
+                        <input type = "text" id="cardnumber" />
                     </div>
-
                     <div class="blockPersonalSettings">
-                        <p class="title">@GlobalRes.CreditCardNumber</p>
-                        <input type="text" id="cardnumber" />
-                    </div>
-                    <div class="blockPersonalSettings">
-                        <p class="title">@GlobalRes.NameonCard</p>
-                        <input type="text" id="cardname" />
-                    </div>
+                        <p class="title">@Resources.GetString("NameonCard")</p>
+                        <input type = "text" id = "cardname" />
+                    </div >
 
 
                     <div class="blockPersonalSettings">
-                        <p class="title">@GlobalRes.ExpiryDate</p>
+                        <p class="title">@Resources.GetString("ExpiryDate")</p>
                         <div class="positioncreditCardSelect">
                             <select class="creditCardSelect" id="selectedMonth">
-                                <option selected="selected" disabled>mm</option>
-                                <option value="01">01</option>
+                                <option selected = "selected" disabled>mm</option>
+                                <option value = "01" > 01 </ option >
                                 <option value="02">02</option>
-                                <option value="03">03</option>
+                                <option value = "03" > 03 </ option >
                                 <option value="04">04</option>
-                                <option value="05">05</option>
+                                <option value = "05" > 05 </ option >
                                 <option value="06">06</option>
-                                <option value="07">07</option>
+                                <option value = "07" > 07 </ option >
                                 <option value="08">08</option>
-                                <option value="09">09</option>
+                                <option value = "09" > 09 </ option >
                                 <option value="10">10</option>
-                                <option value="11">11</option>
+                                <option value = "11" > 11 </ option >
                                 <option value="12">12</option>
                             </select>
                             @*<input type="number" placeholder="mm" id="mm" min="1" pattern="\d*" max="2" maxlength="2"  numbers_only-01-12 mask="__" style="width:45%; float:left" />*@
@@ -146,7 +147,7 @@
                         </div>
                     </div>
                     <div class="blockPersonalSettings">
-                        <p class="title">@GlobalRes.CSVCode</p>
+                        <p class="title">@Resources.GetString("CSVCode")</p>
                         <input type="number" id="csv" />
                     </div>
                 </div>
@@ -154,7 +155,7 @@
                 <div class="blockUpdateProfile">
                     <div class="updateProfileBtn">
                         <input type="submit" value="create" />
-                        <span style="display: none;">@GlobalRes.CreateProfileUp.ToLower()</span>
+                        <span style="display: none;">@Resources.GetString("CreateProfileUp").ToLower()</span>
                     </div>
                 </div>
                 @Html.Hidden("company_exist")

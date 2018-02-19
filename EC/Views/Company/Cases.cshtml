@@ -1,22 +1,23 @@
 ﻿@using EC.Models;
 @using EC.Models.Database;
-@using EC.App_LocalResources;
+@using EC.Localization;
 @{
-    ViewBag.Title = GlobalRes.CaseFlowSettings;
+    ViewBag.Title = @Resources.GetString("CaseFlowSettings");
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
 
     var um = (UserModel)ViewBag.um;
     var user_id = um.ID;
+    bool is_cc = ViewBag.is_cc;
 }
 
 
 <div class="blockSettings">
     <div id="casesHeared">
         <div id="menu">
-            <a href="/Settings/Index" class="caseesTab">@GlobalRes.MyProfile</a>
-            <a href="/Settings/Company" class="caseesTab">@GlobalRes.CompanyProfile</a>
-            <a href="/Settings/Mediators" class="caseesTab">@GlobalRes.CompanyMediators</a>
-            <a class="caseesTab active">@GlobalRes.CaseSettings</a>
+            <a href="/Settings/Index" class="caseesTab">@Resources.GetString("MyProfile", is_cc)</a>
+            <a href="/Settings/Company" class="caseesTab">@Resources.GetString("CompanyProfile", is_cc)</a>
+            <a href="/Settings/Mediators" class="caseesTab">@Resources.GetString("CompanyMediators", is_cc)</a>
+            <a class="caseesTab active">@Resources.GetString("CaseSettings", is_cc)</a>
         </div>
     @*    <div class="positionActivityIcon">
                 <div id="activityIcon"></div>
