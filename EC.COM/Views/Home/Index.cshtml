@@ -11,12 +11,17 @@
                     <nav class="top-header__loginBar-nav">
                         <li class="top-header__loginBar-li">
                             <a href="#!" class="top-header__loginBar-a">
-                                Log In
+                                Client Login
                             </a>
                         </li><!-- /.top-header__loginBar-li -->
                         <li class="top-header__loginBar-li">
                             <a href="#!" class="top-header__loginBar-a">
-                                Check or File a Report
+                                File a Report
+                            </a>
+                        </li><!-- /.top-header__loginBar-li -->
+                        <li class="top-header__loginBar-li">
+                            <a href="#!" class="top-header__loginBar-a">
+                                Check Report Status
                             </a>
                         </li><!-- /.top-header__loginBar-li -->
                     </nav><!-- /.top-header__loginBar-nav -->
@@ -29,7 +34,7 @@
             <div class="main-header">
                 <a href="#" class="main-headerLogo">
                     <div class="main-headerLogo__img">
-                        <img src="images/0-main-logo.png" alt="" />
+                        <img src="~/Content/images/0-main-logo.png" alt="" />
                     </div><!-- /.main-headerLogo__img -->
                     <div class="main-headerLogo__text">
                         Reduce risk. Create trust.
@@ -38,27 +43,27 @@
                 <div class="main-headerMenu">
                     <nav class="main-headerMenu__nav">
                         <li class="main-headerMenu__li">
-                            <a href="#!" class="main-headerMenu__a">
+                            <a href="#!" data-scroll-to=".benefitsSection" class="main-headerMenu__a">
                                 Benefits
                             </a>
                         </li><!-- /.main-headerMenu__li -->
                         <li class="main-headerMenu__li">
-                            <a href="#!" class="main-headerMenu__a">
+                            <a href="#!" data-scroll-to=".gridSection" class="main-headerMenu__a">
                                 Incident Reporting
                             </a>
                         </li><!-- /.main-headerMenu__li -->
                         <li class="main-headerMenu__li">
-                            <a href="#!" class="main-headerMenu__a">
+                            <a href="#!" data-scroll-to=".menegementSection" class="main-headerMenu__a">
                                 Case Management
                             </a>
                         </li><!-- /.main-headerMenu__li -->
                         <li class="main-headerMenu__li">
-                            <a href="#!" class="main-headerMenu__a">
+                            <a href="#!" data-scroll-to="" class="main-headerMenu__a">
                                 About
                             </a>
                         </li><!-- /.main-headerMenu__li -->
                         <li class="main-headerMenu__li">
-                            <a href="#!" class="main-headerMenu__a">
+                            <a href="#!" data-scroll-to=".contactSection" class="main-headerMenu__a">
                                 Contact
                             </a>
                         </li><!-- /.main-headerMenu__li -->
@@ -84,7 +89,7 @@
                     It includes a Case Management solution to quickly and
                     effectively investigate and resolve cases.
                 </p><!-- /.firstSection__text -->
-                <a href="#" class="firstSection__btn btn">
+                <a href="#" data-scroll-to=".contactSection" class="firstSection__btn btn">
                     Learn more
                 </a>
             </div><!-- /.firstSection__contentBox -->
@@ -101,7 +106,7 @@
             <div class="benefitsSection-content">
                 <div class="benefitsSection-contentBox">
                     <div class="benefitsSection-contentBox__img">
-                        <img src="images/warning-img.png" alt="" />
+                        <img src="~/Content/images/warning-img.png" alt="" />
                     </div><!-- /.benefitsSection-contentBox__img -->
                     <div class="benefitsSection-contentBox__title">
                         Early Warning
@@ -113,7 +118,7 @@
 
                 <div class="benefitsSection-contentBox">
                     <div class="benefitsSection-contentBox__img">
-                        <img src="images/trust-img.png" alt="" />
+                        <img src="~/Content/images/trust-img.png" alt="" />
                     </div><!-- /.benefitsSection-contentBox__img -->
                     <div class="benefitsSection-contentBox__title">
                         Increase Trust
@@ -125,7 +130,7 @@
 
                 <div class="benefitsSection-contentBox">
                     <div class="benefitsSection-contentBox__img">
-                        <img src="images/standarts-img.png" alt="" />
+                        <img src="~/Content/images/standarts-img.png" alt="" />
                     </div><!-- /.benefitsSection-contentBox__img -->
                     <div class="benefitsSection-contentBox__title">
                         Meet Standards
@@ -137,7 +142,7 @@
 
                 <div class="benefitsSection-contentBox">
                     <div class="benefitsSection-contentBox__img">
-                        <img src="images/risk-img.png" alt="" />
+                        <img src="~/Content/images/risk-img.png" alt="" />
                     </div><!-- /.benefitsSection-contentBox__img -->
                     <div class="benefitsSection-contentBox__title">
                         Minimize Risk
@@ -149,7 +154,7 @@
 
                 <div class="benefitsSection-contentBox">
                     <div class="benefitsSection-contentBox__img">
-                        <img src="images/lawsuits-img.png" alt="" />
+                        <img src="~/Content/images/lawsuits-img.png" alt="" />
                     </div><!-- /.benefitsSection-contentBox__img -->
                     <div class="benefitsSection-contentBox__title">
                         Prevent Lawsuits
@@ -379,7 +384,7 @@
             </div><!-- /.blockIcons__header -->
             <div class="blockIcons__content">
                 <div class="blockIcons__contentIcon">
-                    <img src="images/cal.png" alt="" />
+                    <img src="~/Content/images/cal.png" alt="" />
                 </div><!-- /.blockIcons__contentIcon -->
                 <div class="blockIcons__contentInfo">
                     <div class="blockIcons__contentInfo-title">
@@ -400,7 +405,7 @@
             </div><!-- /.blockIcons__header -->
             <div class="blockIcons__content">
                 <div class="blockIcons__contentIcon">
-                    <img src="images/people-icon.png" alt="" />
+                    <img src="~/Content/images/people-icon.png" alt="" />
                 </div><!-- /.blockIcons__contentIcon -->
                 <div class="blockIcons__contentInfo">
                     <div class="blockIcons__contentInfo-title">
@@ -430,7 +435,7 @@
                         First name:
                         <input type="text" />
                     </label>
-                    <label class="learnMore-form__content-input active">
+                    <label class="learnMore-form__content-input ">
                         Last name:
                         <input type="text" />
                     </label>
@@ -458,7 +463,7 @@
     <div class="container">
         <div class="footer">
             <a href="#" class="footer__logo">
-                <img src="images/0-main-logo.png" alt="" />
+                <img src="~/Content/images/0-main-logo.png" alt="" />
             </a><!-- /.footer__logo -->
             <div class="footer__copyright">
                 Copyright © 2018 Employee Confidential LLC. All Rights Reserved

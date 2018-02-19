@@ -49,10 +49,10 @@
 	&__loginBar-nav
 		list-style: none
 		display: grid
-		grid-template-columns: repeat( 2, max-content )
+		grid-template-columns: repeat( 3, max-content )
 	&__loginBar-li
 		position: relative
-		&:first-child:after
+		&:after
 			content: ''
 			display: block
 			width: 1px
@@ -62,6 +62,8 @@
 			right: 0
 			position: absolute
 			opacity: 0.4
+		&:last-child:after
+			display: none
 		&:last-child .top-header__loginBar-a
 				padding-right: 0
 	&__loginBar-a
@@ -453,10 +455,12 @@
 .learnMore-form__content-input
 	display: block
 	padding: 10px 10px 0 10px
-	border-bottom: 1px solid #ced7d8
 	font-size: 14px
 	font-family: $lato-Semibold-font
 	color: #afbbbc
+	border: 2px solid transparent
+	border-bottom: 2px solid #ced7d8
+
 .learnMore-form__content-input input
 	font-family: $lato-Semibold-font
 	color: $accent-color
