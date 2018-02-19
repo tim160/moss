@@ -1,12 +1,13 @@
 ﻿@using EC.Models;
 @using EC.Models.Database;
-@using EC.App_LocalResources;
+@using EC.Localization;
 @{
-    ViewBag.Title = GlobalRes.CaseFlowSettings;
+    ViewBag.Title = Resources.GetString("CaseFlowSettings");
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
 
     int _total = 0, step1Delay = 0, step2Delay = 0, step3Delay = 0, step4Delay = 0, step5Delay = 0;
     bool is_cc = ViewBag.is_cc;
+
     String class_ext = ViewBag.cc_extension;
 }
 @model  company
@@ -24,13 +25,13 @@
     @Html.HiddenFor(model => model.id, new { @class = "companyIdHidden" })
     <div id="casesHeared">
         <div id="menu">
-            <h2 class="mainTitle">@GlobalRes.Menu:</h2>
+            <h2 class="mainTitle">@Resources.GetString("Menu"):</h2>
             <div>
-                <a class="caseesTab active">@GlobalRes.MyProfile</a>
-                <a href="/Settings/Password" class="caseesTab">@GlobalRes.Password</a>
-                <a href="/Settings/Company" class="caseesTab">@GlobalRes.CompanyProfile</a>
-                <a href="/Settings/Mediators" class="caseesTab">@GlobalRes.CompanyMediators</a>
-                <a href="/Settings/Cases" class="caseesTab">@GlobalRes.CaseManagementDeadlines</a>
+                <a class="caseesTab active">@Resources.GetString("MyProfile")</a>
+                <a href="/Settings/Password" class="caseesTab">@Resources.GetString("Password")</a>
+                <a href="/Settings/Company" class="caseesTab">@Resources.GetString("CompanyProfile", is_cc)</a>
+                <a href="/Settings/Mediators" class="caseesTab">@Resources.GetString("CompanyMediators", is_cc)</a>
+                <a href="/Settings/Cases" class="caseesTab">@Resources.GetString("CaseManagementDeadlines")</a>
                 <a href="/Settings/workFlow" class="caseesTab">workFlow</a>
             </div>
         </div>
@@ -51,7 +52,7 @@
                     </p>
                     <p class="second fontSize14">
                         <span class="right upperCase">
-                            <span class="lightgreyText">@GlobalRes.Recommended:</span>
+                            <span class="lightgreyText">@Resources.GetString("Recommended"):</span>
                             <span class="darkText">23 days</span>
                         </span>
                     </p>
@@ -60,7 +61,7 @@
             <div class="caseFlowBottom">
                 <div class="special" href="#">
                     <div class="greenBlock"></div>
-                    <span class="text">@GlobalRes.PreReview</span>
+                    <span class="text">@Resources.GetString("PreReview")</span>
                     <div class="someDropdowns">
                         <div class="show">
                             @Html.DisplayFor(model => model.step1_delay) <img src="/Content/img/arrowSelect.png">    
@@ -70,11 +71,11 @@
                             <div class="hide">@i</div>
                         }
                     </div>
-                    <span class="bottomText">@GlobalRes.Recommended: <span class="moreBlack">2 days</span></span>
+                    <span class="bottomText">@Resources.GetString("Recommended"): <span class="moreBlack">2 days</span></span>
                 </div>
                 <div class="special borderLeft borderRight" >
                     <div class="greenBlock"></div>
-                    <span class="text">@GlobalRes.Review</span>
+                    <span class="text">@Resources.GetString("Review")</span>
                     <div class="someDropdowns">
                         <div class="show">
                             @Html.DisplayFor(model => model.step2_delay) <img src="/Content/img/arrowSelect.png">
@@ -84,11 +85,11 @@
                             <div class="hide">@i</div>
                         }
                     </div>
-                    <span class="bottomText">@GlobalRes.Recommended: <span class="moreBlack">2 days</span></span>
+                    <span class="bottomText">@Resources.GetString("Recommended"): <span class="moreBlack">2 days</span></span>
                 </div>
                 <div class="special borderRight">
                     <div class="greenBlock"></div>
-                    <span class="text">@GlobalRes.Investigation</span>
+                    <span class="text">@Resources.GetString("Investigation")</span>
                     <div class="someDropdowns">
                         <div class="show">
                             @Html.DisplayFor(model => model.step3_delay) <img src="/Content/img/arrowSelect.png"> 
@@ -100,11 +101,11 @@
 
 
                     </div>
-                    <span class="bottomText">@GlobalRes.Recommended: <span class="moreBlack">14 days</span></span>
+                    <span class="bottomText">@Resources.GetString("Recommended"): <span class="moreBlack">14 days</span></span>
                 </div>
                 <div class="special">
                     <div class="greenBlock"></div>
-                    <span class="text">@GlobalRes.Resolution</span>
+                    <span class="text">@Resources.GetString("Resolution")</span>
                     <div class="someDropdowns">
                         <div class="show">
                             @Html.DisplayFor(model => model.step4_delay) <img src="/Content/img/arrowSelect.png">
@@ -114,7 +115,7 @@
                             <div class="hide">@i</div>
                         }
                     </div>
-                    <span class="bottomText">@GlobalRes.Recommended: <span class="moreBlack">5 days</span></span>
+                    <span class="bottomText">@Resources.GetString("Recommended"): <span class="moreBlack">5 days</span></span>
                 </div>
             </div>
         </div>

@@ -12,6 +12,7 @@ using EC.Constants;
 using log4net;
 using LavaBlast.Util.CreditCards;
 using EC.Common.Util;
+using EC.Localization;
 
 namespace EC.Controllers
 {
@@ -156,7 +157,7 @@ namespace EC.Controllers
             }
             if (glb.isCompanyInUse(company_name))
             {
-                return App_LocalResources.GlobalRes.CompanyInUse;
+                return Resources.GetString("CompanyInUse", is_cc);
             }
             if (!m_EmailHelper.IsValidEmail(email))
             {
@@ -315,7 +316,7 @@ namespace EC.Controllers
             catch (Exception ex)
             {
                 logger.Error(ex.ToString());
-                return App_LocalResources.GlobalRes.CompanySavingFailed;
+                return Resources.GetString("CompanySavingFailed", is_cc);
             }
             #endregion
 
@@ -348,7 +349,7 @@ namespace EC.Controllers
             }
             else
             {
-                return App_LocalResources.GlobalRes.CompanySavingFailed;
+                return Resources.GetString("CompanySavingFailed", is_cc);
             }
 
             #endregion
@@ -655,7 +656,7 @@ namespace EC.Controllers
             }
             else
             {
-                return App_LocalResources.GlobalRes.CompanySavingFailed;
+                return Resources.GetString("CompanySavingFailed", is_cc);
             }
 
             if (login != null && login.Length > 0)
@@ -790,7 +791,7 @@ namespace EC.Controllers
 
             if (invitation_id == 0)
             {
-                return App_LocalResources.GlobalRes.InvitationCompanyMismatch;
+                return Resources.GetString("InvitationCompanyMismatch", is_cc);
             }
             string login = glb.GenerateLoginName(first, last);
             string pass = glb.GeneretedPassword();
@@ -854,7 +855,7 @@ namespace EC.Controllers
             }
             else
             {
-                return App_LocalResources.GlobalRes.InvitationCompanyMismatch;
+                return Resources.GetString("InvitationCompanyMismatch", is_cc);
             }
 
             if (login != null && login.Length > 0)

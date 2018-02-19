@@ -2107,4 +2107,22 @@
   <data name="OtherIncident" xml:space="preserve">
     <value>Other Incident</value>
   </data>
+  <data name="CompanyMediatorsSettings_cc" xml:space="preserve">
+    <value>Educational Institute Case Administrator Settings</value>
+  </data>
+  <data name="forEmployeeConfidentialOnly_cc" xml:space="preserve">
+    <value>FOR CAMPUS CONFIDENTIAL ONLY</value>
+  </data>
+  <data name="InvitationCompanyMismatch_cc" xml:space="preserve">
+    <value>Code doesn't match educational institute</value>
+  </data>
+  <data name="invite_new_mediator_cc" xml:space="preserve">
+    <value>Invite new case administrator</value>
+  </data>
+  <data name="NewCompanyRegistration_cc" xml:space="preserve">
+    <value>New Edicational Institute Registration</value>
+  </data>
+  <data name="SelectYourCompany_cc" xml:space="preserve">
+    <value>Select Your New Educational Institute</value>
+  </data>
 </root>

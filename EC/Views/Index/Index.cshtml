@@ -1,5 +1,4 @@
 ﻿@using EC.Models.Database
-@using EC.App_LocalResources;
 @using Resources = EC.Localization.Resources
 @{
 
@@ -16,22 +15,22 @@
     //    class_ext = "_cc";
     //}
 
-    ViewBag.Title = GlobalRes.SelectYourCompany;
+    ViewBag.Title = Resources.GetString("SelectYourCompany", is_cc);
     Layout = "~/Views/Shared/HeaderFooterFrontPages.cshtml";
     //ViewBag.background = "background-image: url(/Content/img/website-report" + class_ext + ".jpg);";
 }
 
 <div id="topBody">
     <div class="firstTitle">
-        @GlobalRes.FileReport
+        @Resources.GetString("FileReport")
     </div>
     <div class="secondTitle">
-        @GlobalRes.FindOrganization
+        @Resources.GetString("FindOrganization", is_cc)
     </div>
     <div class="thirdTitle">
         <div class="widthThirdTitle">
             <input id="specialInput" placeholder="Company name or code" type="text">
-            <div id="buttonStart"><span class="buttonStartText">@GlobalRes.Start.ToUpper()</span></div>
+            <div id="buttonStart"><span class="buttonStartText">@Resources.GetString("Start", is_cc).ToUpper()</span></div>
             <ul id="dropDownList" style="display: none">
             </ul>
         </div>
@@ -40,7 +39,7 @@
 <div id="bottomBody@{@class_ext}">
 
     <div class="fourthTitle">
-        @GlobalRes.DontSilentBystander
+        @Resources.GetString("DontSilentBystander")
     </div>
     <div class="icons">
         <div class="centerBlock">
@@ -49,9 +48,9 @@
                 <div class="positionIcons">
                     <div id="firstIcon"></div>
                 </div>
-                <span class="title">@GlobalRes.ActEarly,<br />@GlobalRes.ActEthically</span><br />
+                <span class="title">@Resources.GetString("ActEarly"),<br />@Resources.GetString("ActEthically")</span><br />
                 <span class="textBlock">
-                    @GlobalRes.Ifyouwitness
+                    @Resources.GetString("Ifyouwitness")
                 </span>
             </div>
 
@@ -60,9 +59,9 @@
                 <div class="positionIcons">
                     <div id="secondIcon"></div>
                 </div>
-                <span class="title">@GlobalRes.ReportWeb, <br />@GlobalRes.TabletMobile</span><br />
+                <span class="title">@Resources.GetString("ReportWeb"), <br />@Resources.GetString("TabletMobile")</span><br />
                 <span class="textBlock">
-                    @GlobalRes.Useonline
+                    @Resources.GetString("Useonline")
                 </span>
             </div>
 
@@ -71,9 +70,9 @@
                 <div class="positionIcons">
                     <div id="thirdIcon"></div>
                 </div>
-                <span class="title">@GlobalRes.Chooseyour  <br />@GlobalRes.ConfidentialityLevel</span><br />
+                <span class="title">@Resources.GetString("Chooseyour")  <br />@Resources.GetString("ConfidentialityLevel")</span><br />
                 <span class="textBlock">
-                    @GlobalRes.ReportAnon
+                    @Resources.GetString("ReportAnon")
                 </span>
             </div>
 
@@ -82,9 +81,9 @@
                 <div class="positionIcons">
                     <div id="fourthIcon"></div>
                 </div>
-                <span class="title">@GlobalRes.Expecta <br />@GlobalRes.Response</span><br />
+                <span class="title">@Resources.GetString("Expecta") <br />@Resources.GetString("Response")</span><br />
                 <span class="textBlock">
-                    @GlobalRes.Mediatorswillgetback
+                    @Resources.GetString("Mediatorswillgetback")
                 </span>
             </div>
         </div><!-- end centerBlock-->
