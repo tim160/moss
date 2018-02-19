@@ -3,7 +3,7 @@
 @using EC.App_LocalResources;
 
 @{
-    ViewBag.Title = GlobalRes.NewUserRegistration;
+    ViewBag.Title = GlobalRes.Profile;
     bool is_cc = ViewBag.is_cc;
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
     UserModel um = new UserModel(ViewBag.user_id);
@@ -100,7 +100,32 @@
                     </div>
                 </div><!--rowBlock-->
             </div>
+            <div class="blockPersonalSettings greyBorder">
+                <div id="personeAgain">
+                    <div class="title">Status {{status_id}} {{role}}</div>
+                </div>
 
+                <div class="rowBlock inputMediator">
+                    <div class="freeBlock inputRadio mediator" ng-class="{active: status_id == 2 }" ng-click="status_id = 2">
+                        <label class="inputBlock" for="freeIncident">
+                            <input id="oneIncident" type="radio" name="role_id" value="6">
+                            <span class="radioTitle">Active</span>
+                        </label>
+                    </div>
+                    <div class="freeBlock inputRadio adminMediator adminMediator" ng-class="{active: status_id == 1 }" ng-click="status_id = 1">
+                        <label class="inputBlock" for="freeIncident">
+                            <input id="twoIncident" type="radio" name="role_id" value="5">
+                            <span class="radioTitle">Inactive</span>
+                        </label>
+                    </div>
+                    <div class="freeBlock inputRadio escalationMediator" ng-class="{active: status_id == 3 }" ng-click="status_id = 3">
+                        <label class="inputBlock" for="freeIncident">
+                            <input id="threeIncident" type="radio" name="role_id" value="4">
+                            <span class="radioTitle">Pending</span>
+                        </label>
+                    </div>
+                </div><!--rowBlock-->
+            </div>
 
             @if (um._user.role_id == 5)
             {

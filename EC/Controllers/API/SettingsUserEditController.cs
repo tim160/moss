@@ -39,6 +39,7 @@ namespace EC.Controllers.API
                     locationId = model == null ? 0 : model.company_location_id,
                     user_permissions_approve_case_closure = model == null ? 0 : model.user_permissions_approve_case_closure,
                     user_permissions_change_settings = model == null ? 0 : model.user_permissions_change_settings,
+                    status_id = model.status_id,
                 }
             };
         }
@@ -60,6 +61,7 @@ namespace EC.Controllers.API
                 user.company_location_id = model.company_location_id;
                 user.user_permissions_approve_case_closure = model.user_permissions_approve_case_closure;
                 user.user_permissions_change_settings = model.user_permissions_change_settings;
+                user.status_id = model.status_id;
             }
             else
             {
@@ -76,7 +78,8 @@ namespace EC.Controllers.API
                 user.last_nm = model.last_nm.Trim();
                 user.company_id = curUser.company_id;
                 user.role_id = model.role_id;
-                user.status_id = 2;
+                //user.status_id = 2;
+                user.status_id = model.status_id;
                 user.login_nm = glb.GenerateLoginName(user.first_nm, user.last_nm);
                 user.password = glb.GeneretedPassword().Trim();
                 user.photo_path = "";

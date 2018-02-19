@@ -1345,6 +1345,7 @@
         $scope.locationId = 0;
         $scope.user_permissions_approve_case_closure = 0;
         $scope.user_permissions_change_settings = 0;
+        $scope.status_id = 2;
 
         $scope.val_first_nm = false;
         $scope.val_last_nm = false;
@@ -1365,6 +1366,7 @@
             $scope.locations = data.locations;
             $scope.role = data.model.role;
             $scope.departmentId = data.model.departmentId;
+            $scope.status_id = data.model.status_id;
             $scope.locationId = data.model.locationId;
             $scope.user_permissions_approve_case_closure = data.model.user_permissions_approve_case_closure.toString();
             $scope.user_permissions_change_settings = data.model.user_permissions_change_settings.toString();
@@ -1410,6 +1412,7 @@
                     company_location_id: $scope.locationId,
                     user_permissions_approve_case_closure: $scope.user_permissions_approve_case_closure,
                     user_permissions_change_settings: $scope.user_permissions_change_settings,
+                    status_id: $scope.status_id,
                 };
                 SettingsUserEditService.post(model, function () {
                     if ($scope.id !== 0) {
