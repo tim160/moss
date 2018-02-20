@@ -32,12 +32,25 @@ namespace EC.Localization
         /// </summary>
         /// <param name="key">The key.</param>
         /// <returns></returns>
+        public static string GetString(string key, bool? is_cc)
+        {
+            if (!is_cc.HasValue)
+            {
+                is_cc = false;
+            }
+            Assembly ca = Assembly.GetCallingAssembly();
+            return GetString(key, m_Culture, ca, is_cc.Value);
+        }
+        /// <summary>
+        /// Gets the string.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <returns></returns>
         public static string GetString(string key, bool is_cc = false)
         {
             Assembly ca = Assembly.GetCallingAssembly();
             return GetString(key, m_Culture, ca, is_cc);
         }
-
         /// <summary>
         /// Gets the string.
         /// </summary>
@@ -64,7 +77,7 @@ namespace EC.Localization
                 string temp_key = key;
                 if (is_cc) { key = key + "_CC"; }
                 string value = App_GlobalResources.Resources.ResourceManager.GetString(key);
-
+                
                 if (value != null)
                     return value;
                 else
