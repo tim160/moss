@@ -7,7 +7,11 @@
     List<attachment> attachmentFiles = (List<attachment>)ViewBag.attachmentFiles;
     Layout = "~/Views/Shared/IndexPages/LayoutNewCases.cshtml";
 
-    var is_cc = (bool) ViewBag.is_cc;
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
 }
 
 <link rel="stylesheet" href="~/Content/assets/template/css/style.css" />

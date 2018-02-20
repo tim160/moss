@@ -13,7 +13,11 @@
     int user_id = um.ID;
     UserModel _temp_um = new UserModel();
 
-    bool is_cc = ViewBag.is_cc;
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
     //is_cc = true;
     String class_ext = ViewBag.cc_extension;
 
@@ -144,7 +148,7 @@
             </div>
         </div>
     </div><!--contentSettings-->
-            @if (is_cc)
+            @if (is_cc.Value)
             {
                 using (Html.BeginForm(null, null, FormMethod.Post, new { id = "AlertDailyCrimeLogManagers" }))
                 {
@@ -231,7 +235,7 @@
         <div class="footerInputPosition footerInputStyle">
             <div class="contentSettings secondHeader oldstyle">
                 <div class="headerCompanyProfile">
-                    @if (is_cc && is_valid_mediator)
+                    @if (is_cc.Value && is_valid_mediator)
                     {
                         <div class="headerBlock">
                             <div class="blockText">

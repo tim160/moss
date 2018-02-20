@@ -5,7 +5,11 @@
 @{
     ViewBag.Title = GlobalRes.increportingandcasemanag;
     Layout = "~/Views/Shared/_MainHTML.cshtml";
-    bool is_cc = ViewBag.is_cc;
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
 }
 <div id="topBody">
     <div class="firstTitle">
@@ -15,7 +19,7 @@
         @Resources.GetString("FindOrganization", is_cc)
     </div>
     <div class="thirdTitle">
-        <input id="specialInput" placeholder="Company name or code">
+        <input id="specialInput" placeholder="@Resources.GetString("CompanyNameOrCode", is_cc)">
         <div id="buttonStart"><span class="buttonStartText">@Resources.GetString("Start").ToUpper()</span></div>
     </div>
 </div><!--end topBody-->

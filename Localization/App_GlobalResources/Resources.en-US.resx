@@ -2086,4 +2086,19 @@
   <data name="_Started" xml:space="preserve">
     <value>Started</value>
   </data>
+  <data name="CompanyMediatorsSettings_cc" xml:space="preserve">
+    <value>Educational Institute Case Administrator Settings</value>
+  </data>
+  <data name="CompanyNameOrCode" xml:space="preserve">
+    <value>Company name or code</value>
+  </data>
+  <data name="CompanyNameOrCode_cc" xml:space="preserve">
+    <value>Educational Institute name or code</value>
+  </data>
+  <data name="forEmployeeConfidentialOnly_cc" xml:space="preserve">
+    <value>FOR CAMPUS CONFIDENTIAL ONLY</value>
+  </data>
+  <data name="Ifyouwitness_CC1" xml:space="preserve">
+    <value>If you witness (or know of) an incident that compromises your educational institution, contribute to the solution. Report it.</value>
+  </data>
 </root>

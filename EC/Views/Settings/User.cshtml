@@ -4,7 +4,11 @@
 
 @{
     ViewBag.Title = GlobalRes.Profile;
-    bool is_cc = ViewBag.is_cc;
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
     UserModel um = new UserModel(ViewBag.user_id);
 }

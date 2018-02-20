@@ -1294,6 +1294,15 @@ namespace EC.Localization.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Educational Institute Case Administrator Settings.
+        /// </summary>
+        internal static string CompanyMediatorsSettings_cc {
+            get {
+                return ResourceManager.GetString("CompanyMediatorsSettings_cc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Company name.
         /// </summary>
         internal static string Companyname {
@@ -1308,6 +1317,24 @@ namespace EC.Localization.App_GlobalResources {
         internal static string Companyname_CC {
             get {
                 return ResourceManager.GetString("Companyname_CC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company name or code.
+        /// </summary>
+        internal static string CompanyNameOrCode {
+            get {
+                return ResourceManager.GetString("CompanyNameOrCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Educational Institute name or code.
+        /// </summary>
+        internal static string CompanyNameOrCode_cc {
+            get {
+                return ResourceManager.GetString("CompanyNameOrCode_cc", resourceCulture);
             }
         }
         
@@ -2617,6 +2644,15 @@ namespace EC.Localization.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to FOR CAMPUS CONFIDENTIAL ONLY.
+        /// </summary>
+        internal static string forEmployeeConfidentialOnly_cc {
+            get {
+                return ResourceManager.GetString("forEmployeeConfidentialOnly_cc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Forgot Password.
         /// </summary>
         internal static string ForgotPassword {
@@ -2856,6 +2892,15 @@ namespace EC.Localization.App_GlobalResources {
         internal static string Ifyouwitness_CC {
             get {
                 return ResourceManager.GetString("Ifyouwitness_CC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you witness (or know of) an incident that compromises your educational institution, contribute to the solution. Report it..
+        /// </summary>
+        internal static string Ifyouwitness_CC1 {
+            get {
+                return ResourceManager.GetString("Ifyouwitness_CC1", resourceCulture);
             }
         }
         

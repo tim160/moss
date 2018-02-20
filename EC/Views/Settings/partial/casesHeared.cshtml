@@ -2,7 +2,11 @@
 @*active*@
 @{ 
     int temp = Model;
-    bool is_cc = ViewBag.is_cc;
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
     String class_ext = ViewBag.cc_extension;
 }
 <div class="dispFlex">

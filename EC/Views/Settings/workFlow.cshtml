@@ -6,7 +6,11 @@
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
 
     int _total = 0, step1Delay = 0, step2Delay = 0, step3Delay = 0, step4Delay = 0, step5Delay = 0;
-    bool is_cc = ViewBag.is_cc;
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
 
     String class_ext = ViewBag.cc_extension;
 }

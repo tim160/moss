@@ -29,7 +29,7 @@
     </div>
     <div class="thirdTitle">
         <div class="widthThirdTitle">
-            <input id="specialInput" placeholder="Company name or code" type="text">
+            <input id="specialInput" placeholder="@Resources.GetString("CompanyNameOrCode", is_cc)" type="text">
             <div id="buttonStart"><span class="buttonStartText">@Resources.GetString("Start", is_cc).ToUpper()</span></div>
             <ul id="dropDownList" style="display: none">
             </ul>
@@ -50,7 +50,7 @@
                 </div>
                 <span class="title">@Resources.GetString("ActEarly"),<br />@Resources.GetString("ActEthically")</span><br />
                 <span class="textBlock">
-                    @Resources.GetString("Ifyouwitness")
+                    @Resources.GetString("Ifyouwitness", is_cc)
                 </span>
             </div>
 
@@ -83,7 +83,7 @@
                 </div>
                 <span class="title">@Resources.GetString("Expecta") <br />@Resources.GetString("Response")</span><br />
                 <span class="textBlock">
-                    @Resources.GetString("Mediatorswillgetback")
+                    @Resources.GetString("Mediatorswillgetback", is_cc)
                 </span>
             </div>
         </div><!-- end centerBlock-->

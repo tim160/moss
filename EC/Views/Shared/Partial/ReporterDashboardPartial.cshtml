@@ -7,7 +7,11 @@
 @model ReportModel
 
 @{
-    bool is_cc = ViewBag.is_cc;
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
     ReportModel rm = Model;
     List<report_non_mediator_involved> _involved = rm._witnesses;
     IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();

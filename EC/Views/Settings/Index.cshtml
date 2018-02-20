@@ -32,7 +32,11 @@
     if (um._user.photo_path == null || um._user.photo_path == String.Empty) {
         um._user.photo_path = "/Content/Icons/settingsPersonalNOPhoto.png";
     }
-    bool is_cc = ViewBag.is_cc;
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
     String class_ext = ViewBag.cc_extension;
 }
 

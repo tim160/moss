@@ -2,6 +2,11 @@
 
 @{ 
     string action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
 }
 
 <style>
@@ -16,7 +21,7 @@
         <div>
             <a href="@Url.Action("Index")" class="caseesTab @(action == "index" ? "active" : "")">@GlobalRes.Cases</a>
             <a href="@Url.Action("RootCauseAnalysis")" class="caseesTab @(action == "rootcauseanalysis" ? "active" : "")">Root Cause Analysis</a>
-            @if (ViewBag.is_cc)
+            @if (is_cc.Value)
             {
                 <a href="@Url.Action("CACSReport")" class="caseesTab @(action == "cacsreport" ? "active" : "")">Clery Act Crime Statistics Report</a>
             }

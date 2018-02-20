@@ -7,7 +7,11 @@
     List<attachment> attachmentFiles = (List<attachment>)ViewBag.attachmentFiles;
     Layout = "~/Views/Shared/IndexPages/LayoutNewCases.cshtml";
 
-    var is_cc = (bool)ViewBag.is_cc;
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
 }
 
 <link rel="stylesheet" href="~/Content/assets/template/css/style.css" />
@@ -48,7 +52,7 @@
     <div id="subTab-2" class="subNavigationTabs__tabContent active" ng-controller="NewCaseCaseClosureReportController" ng-cloak>
         <section class="content-container">
             <div class="content-container__inner">
-                @if (is_cc)
+                @if (is_cc.Value)
                 {
                     <p class="sectionHeader">Is this a Clery Act Crime?</p>
                     <div class="content-container__inner-additional clearfix">

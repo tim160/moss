@@ -2122,4 +2122,10 @@
   <data name="SelectYourCompany_cc" xml:space="preserve">
     <value>Select Your New Educational Institute</value>
   </data>
+  <data name="CompanyNameOrCode" xml:space="preserve">
+    <value>Company name or code</value>
+  </data>
+  <data name="CompanyNameOrCode_cc" xml:space="preserve">
+    <value>Educational Institute name or code</value>
+  </data>
 </root>

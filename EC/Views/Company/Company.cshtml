@@ -3,7 +3,11 @@
 @using EC.Localization;
 
 @{
-    bool is_cc = ViewBag.is_cc;
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
     ViewBag.Title = Resources.GetString("CompanySettings", is_cc);
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
 

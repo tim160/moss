@@ -7,7 +7,11 @@
 
     var um = (UserModel)ViewBag.um;
     var user_id = um.ID;
-    bool is_cc = ViewBag.is_cc;
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+}
 }
 
 

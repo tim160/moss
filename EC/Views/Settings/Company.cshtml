@@ -27,7 +27,11 @@
     {
         cm._company.path_en = "~/Content/img/logoDefaultCompany.png";
     }
-    bool is_cc = ViewBag.is_cc;
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
     //is_cc = true;
     String class_ext = ViewBag.cc_extension;
     ViewBag.Title = Resources.GetString("CompanySettings", is_cc);
@@ -147,7 +151,7 @@
                 </div>
                 <div class="addNewLocation">
                     <input type="text" name="newLocationName" required="" value="">
-                    @if (is_cc)
+                    @if (is_cc.Value)
                     {
                         @Html.DropDownList("location_cc_extended", (SelectList) ViewBag.LocationExtendeds, "Select Location Category", new { @class = "select-def" })
                     }
@@ -162,7 +166,7 @@
                                     <span class="location_name">@_location.location_en</span>
                                 </span>
                                 <span class="col-6">
-                                    @if (is_cc)
+                                    @if (is_cc.Value)
                                     {
                                         var list = (SelectList)ViewBag.LocationExtendeds;
                                         if (_location.location_cc_extended_id.HasValue)
