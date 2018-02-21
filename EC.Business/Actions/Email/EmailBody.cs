@@ -452,6 +452,7 @@ namespace EC.Business.Actions.Email
             GetBody(50);
 
             m_body = m_body.Replace("[RestorePass]", (DomainUtil.GetSubdomainLink(url) + "/login/restore" + "?email=" + email + "&token=" + code).Trim());
+            m_body = m_body.Replace("[RestorePass2]", (DomainUtil.GetSubdomainLink(url).Replace(".", "<span>.</span>") + "/<span>login</span>/restore" + "?email=" + email.Replace("@", "<span>@</span>").Replace(".", "<span>.</span>") + "&token=" + code).Trim());
 
         }
 
