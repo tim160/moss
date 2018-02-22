@@ -53,7 +53,7 @@
     @Html.Partial("~/Views/Settings/partial/casesHeared.cshtml", active)
 
     <p class="textMediators">
-        Resources.GetString("SetupMediatorProfiles
+        @Resources.GetString("SetupMediatorProfiles", is_cc)
     </p>
     <div class="contentSettings secondHeader oldstyle">
         <div class="blockWithTeam">
@@ -97,25 +97,25 @@
                             @if (_user.role_id == 4)
                             {
                                 <p class="blockMediator escalation">
-                                    <span>Resources.GetString("EscalationMediator", is_cc).ToLower()</span>
+                                    <span>@Resources.GetString("EscalationMediator", is_cc).ToLower()</span>
                                 </p>
                             }
                             @if (_user.role_id == 5)
                             {
                                 <p class="blockMediator admin admin@{@class_ext}">
-                                    <span>Resources.GetString("AdminMediator", is_cc).ToLower()</span>
+                                    <span>@Resources.GetString("AdminMediator", is_cc).ToLower()</span>
                                 </p>
     }
                             @if (_user.role_id == 6)
                             {
                                 <p class="blockMediator">
-                                    <span>Resources.GetString("Mediator", is_cc).ToLower()</span>
+                                    <span>@Resources.GetString("Mediator", is_cc).ToLower()</span>
                                 </p>
                             }
                             @if (_user.role_id == 7)
                             {
                                 <p class="blockMediator">
-                                    <span>Resources.GetString("Legalcounsel", is_cc).ToLower()</span>
+                                    <span>@Resources.GetString("Legalcounsel", is_cc).ToLower()</span>
                                 </p>
                             }
                             @if ((_user.notepad_tx != null) && (_user.notepad_tx.Trim().Length > 0))
@@ -247,7 +247,7 @@
                             <div class="closeIcon"></div>
                             <textarea placeholder="Enter message to colleague about joining the case administration team"></textarea>
                             <input id="sendMessage" type="submit" />
-                            <span class="sendBtn">Resources.GetString("Send", is_cc).ToLower()</span>
+                            <span class="sendBtn">@Resources.GetString("Send", is_cc).ToLower()</span>
                         </div>
                     }
                     else
@@ -256,14 +256,14 @@
                         {
                             <div class="headerBlock">
                                 <div class="blockText">
-                                    <p class="title">Resources.GetString("invite_new_mediator", is_cc)</p>
+                                    <p class="title">@Resources.GetString("invite_new_mediator", is_cc)</p>
                                 </div>
                             </div>
                             <div class="blockSendEmail greyBorder">
                                 <input type="text" id="sendEmail" name="newLocationName" placeholder="email@yourcompany.com" required="" value="">
                                 <div class="closeIcon"></div>
                                 <input id="sendMessage" type="submit" />
-                                <span class="sendBtn">Resources.GetString("Send", is_cc).ToLower()</span>
+                                <span class="sendBtn">@Resources.GetString("Send", is_cc).ToLower()</span>
                             </div>
                         }
                     }
