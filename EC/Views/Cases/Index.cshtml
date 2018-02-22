@@ -92,7 +92,7 @@
                     <span ng-show="counts.Closed > 0">{{counts.Closed}}</span>
                 </a>
                 <a href="#" class="caseesTab" ng-class="{'active': mode == 3}" ng-click="refresh(3)">
-                    @GlobalRes.Spam
+                    @GlobalRes.Spam @System.Configuration.ConfigurationManager.AppSettings["TestSetting"]
                     <span ng-show="counts.Spam > 0">{{counts.Spam}}</span>
                 </a>
             </div>
