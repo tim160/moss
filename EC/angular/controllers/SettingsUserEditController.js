@@ -20,6 +20,7 @@
         $scope.user_permissions_approve_case_closure = 0;
         $scope.user_permissions_change_settings = 0;
         $scope.status_id = 2;
+        $scope.user_role = 0;
 
         $scope.val_first_nm = false;
         $scope.val_last_nm = false;
@@ -44,6 +45,7 @@
             $scope.locationId = data.model.locationId;
             $scope.user_permissions_approve_case_closure = data.model.user_permissions_approve_case_closure.toString();
             $scope.user_permissions_change_settings = data.model.user_permissions_change_settings.toString();
+            $scope.user_role = data.user.role;
         });
 
         $scope.validate = function (value, rv) {
