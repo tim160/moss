@@ -46,9 +46,9 @@
         if (($("#dateStart").val() !== '') && ($("#dateEnd").val() !== '')) {
             var html = '<tr name="Date">';
             html += '<td>Date</td><td>';
-            html += "" + moment(parseInt($("#dateEnd").val())).format('DD/MM/YYYY');
-            html += " - ";
             html += "" + moment(parseInt($("#dateStart").val())).format('DD/MM/YYYY');
+            html += " - ";
+            html += "" + moment(parseInt($("#dateEnd").val())).format('DD/MM/YYYY');
             html += '</td><td class="clearAll clearDate">Clear<img src="/Content/Icons/Xanal.gif" /></td> </tr>';
 
             if ($('#filterTable > tbody > tr:first').length == 0) {
@@ -846,10 +846,17 @@
         $("#daterange").hide();
         $(".prev").html("");
         $(".next").html("");
-        var dateStart = "";
+        $("#daterange").bind('datepicker-change', function (event, obj) {
+            $("#dateStart").attr("value", obj.date1.getTime());
+            $("#dateEnd").attr("value", obj.date2.getTime());
+            $("#daterange").data('dateRangePicker').close();
+            updateGraphics();
+        });
+        /*var dateStart = "";
         var dateEnd = "";
         $(".month1 div").on('click', function (event) {
             var temp = $(event.currentTarget).attr('time');
+            console.log(temp);
             if (dateStart == "" ) {
                 dateStart = temp;
             } else if(dateStart != "" && dateStart < temp) {
@@ -864,8 +871,7 @@
                 $("#dateEnd").attr("value", dateEnd);
                 updateGraphics();
             }
-        });
-        
+        });*/
     });
     $(".clearAll").on('click', function (event) {
         $(event.currentTarget).hide();
