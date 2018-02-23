@@ -111,7 +111,7 @@
                         <div class="col-3">
                             <p class="content-container__p">Reporter</p>
                         </div><!-- /.col-3 -->
-                        <div class="col-3">
+                        <div class="col-6">
                             <dropbox ng-dropbox-textExpr="model.rep_outcome.outcome_c.outcome_en || 'Please select'"
                                      itemText="{{item.outcome_en}}"
                                      ng-dropbox-list="model.outcomes"
@@ -120,19 +120,17 @@
                             </dropbox>
                         </div><!-- /.col-6 -->
                         <div class="col-3">
-                            <textarea ng-model="item.outcome.note" ng-show="item.editNote" style="font-size: 18px;"></textarea>
-                            <p ng-show="!item.editNote">{{item.outcome.note}}</p>
-                        </div><!-- /.col-3 -->
-                        <div class="col-3">
-                            <a href="#" class="btn-link " ng-show="item.editNote" ng-click="saveOutcome(item)">Save Note</a>
-                            <a href="#" class="btn-link " ng-show="!item.editNote" ng-click="item.editNote = true">{{item.outcome.note || '' !== '' ? 'Edit Note' : 'Add Note'}}</a>
+                            <textarea ng-model="model.rep_outcome.outcome.note" ng-show="model.rep_outcome.editNote" style="font-size: 18px;"></textarea>
+                            <p ng-show="!model.rep_outcome.editNote">{{model.rep_outcome.outcome.note}}</p>
+                            <a href="#" class="btn-link " ng-show="model.rep_outcome.editNote" ng-click="saveOutcome(model.rep_outcome)">Save Note</a>
+                            <a href="#" class="btn-link " ng-show="!model.rep_outcome.editNote" ng-click="model.rep_outcome.editNote = true">{{model.rep_outcome.outcome.note || '' !== '' ? 'Edit Note' : 'Add Note'}}</a>
                         </div><!-- /.col-3 -->
                     </div><!-- /.row -->
                     <div class="row" ng-repeat="item in model.report_case_closure_outcome1">
                         <div class="col-3">
                             <p class="content-container__p">{{item.mediator.Name}} {{item.mediator.last_name}}</p>
                         </div><!-- /.col-3 -->
-                        <div class="col-3">
+                        <div class="col-6">
                             <dropbox ng-dropbox-textExpr="item.outcome_c.outcome_en || 'Please select'"
                                      itemText="{{item.outcome_en}}"
                                      ng-dropbox-list="model.outcomes"
@@ -143,8 +141,6 @@
                         <div class="col-3">
                             <textarea ng-model="item.outcome.note" ng-show="item.editNote" style="font-size: 18px;"></textarea>
                             <p ng-show="!item.editNote">{{item.outcome.note}}</p>
-                        </div><!-- /.col-3 -->
-                        <div class="col-3">
                             <a href="#" class="btn-link " ng-show="item.editNote" ng-click="saveOutcome(item)">Save Note</a>
                             <a href="#" class="btn-link " ng-show="!item.editNote" ng-click="item.editNote = true">{{item.outcome.note || '' !== '' ? 'Edit Note' : 'Add Note'}}</a>
                         </div><!-- /.col-3 -->
@@ -160,7 +156,7 @@
                         <div class="col-3">
                             <p class="content-container__p">{{item.mediator.Name}} {{item.mediator.last_name}}</p>
                         </div><!-- /.col-3 -->
-                        <div class="col-3">
+                        <div class="col-6">
                             <dropbox ng-dropbox-textExpr="item.outcome_c.outcome_en || 'Please select'"
                                      itemText="{{item.outcome_en}}"
                                      ng-dropbox-list="model.outcomes"
@@ -171,8 +167,6 @@
                         <div class="col-3">
                             <textarea ng-model="item.outcome.note" ng-show="item.editNote" style="font-size: 18px;"></textarea>
                             <p ng-show="!item.editNote">{{item.outcome.note}}</p>
-                        </div><!-- /.col-3 -->
-                        <div class="col-3">
                             <a href="#" class="btn-link " ng-show="item.editNote" ng-click="saveOutcome(item)">Save Note</a>
                             <a href="#" class="btn-link " ng-show="!item.editNote" ng-click="item.editNote = true">{{item.outcome.note || '' !== '' ? 'Edit Note' : 'Add Note'}}</a>
                         </div><!-- /.col-3 -->
