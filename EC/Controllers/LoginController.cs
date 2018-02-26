@@ -236,7 +236,7 @@ namespace EC.Controllers
         {
             ViewBag.error = loginModel.setNewPass(email, token, password, confirmPassword);
             ViewBag.redirect = "true";
-            return View("Restore");
+            return RedirectToAction("Index");
         }
     }
 }
