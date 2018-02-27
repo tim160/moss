@@ -94,31 +94,43 @@
                                     </div>
                                 </a>
                             </div>
-                            @if (_user.role_id == 4)
+                            @if (_user.status_id == 1)
+                            {
+                                <p class="blockMediator">
+                                    <span>Inactive</span>
+                                </p>
+                            }
+                            else if (_user.status_id == 3)
+                            {
+                                <p class="blockMediator">
+                                    <span>Pending</span>
+                                </p>
+                            }
+                            else if (_user.role_id == 4)
                             {
                                 <p class="blockMediator escalation">
                                     <span>@Resources.GetString("EscalationMediator", is_cc).ToLower()</span>
                                 </p>
                             }
-                            @if (_user.role_id == 5)
+                            else if (_user.role_id == 5)
                             {
                                 <p class="blockMediator admin admin@{@class_ext}">
                                     <span>@Resources.GetString("AdminMediator", is_cc).ToLower()</span>
                                 </p>
-    }
-                            @if (_user.role_id == 6)
+                            }
+                            else if (_user.role_id == 6)
                             {
                                 <p class="blockMediator">
                                     <span>@Resources.GetString("Mediator", is_cc).ToLower()</span>
                                 </p>
                             }
-                            @if (_user.role_id == 7)
+                            else if (_user.role_id == 7)
                             {
                                 <p class="blockMediator">
                                     <span>@Resources.GetString("Legalcounsel", is_cc).ToLower()</span>
                                 </p>
                             }
-                            @if ((_user.notepad_tx != null) && (_user.notepad_tx.Trim().Length > 0))
+                            else if ((_user.notepad_tx != null) && (_user.notepad_tx.Trim().Length > 0))
                             {
                                 <p class="blockTextMediator">@_user.notepad_tx</p>
                             }
