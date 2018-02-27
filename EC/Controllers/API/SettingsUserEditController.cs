@@ -39,7 +39,7 @@ namespace EC.Controllers.API
                     locationId = model == null ? 0 : model.company_location_id,
                     user_permissions_approve_case_closure = model == null ? 0 : model.user_permissions_approve_case_closure,
                     user_permissions_change_settings = model == null ? 0 : model.user_permissions_change_settings,
-                    status_id = model.status_id,
+                    status_id = model == null ? 3 : model.status_id,
                 },
                 user = new {
                     role = user.role_id,
@@ -72,6 +72,14 @@ namespace EC.Controllers.API
             else
             {
                 var glb = new GlobalFunctions();
+
+                if (DB.user.Any(x => x.email.ToLower() == model.email.ToLower() && x.company_id == curUser.company_id))
+                {
+                    return new {
+                        ok = false,
+                        message = $"User with email '{model.email}' already exists!",
+                    };
+                }
 
                 int language_id = 1;
                 int location_id = 0;
@@ -116,12 +124,26 @@ namespace EC.Controllers.API
                 user.user_permissions_approve_case_closure = model.user_permissions_approve_case_closure;
                 user.user_permissions_change_settings = model.user_permissions_change_settings;
                 DB.user.Add(user);
+
+                var company = DB.company.FirstOrDefault(x => x.id == curUser.company_id);
+                EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
+                EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, HttpContext.Current.Request.Url.AbsoluteUri.ToLower());
+                eb.NewMediator(
+                    $"{curUser.first_nm} {curUser.last_nm}", 
+                    $"{company.company_nm}", 
+                    HttpContext.Current.Request.Url.AbsoluteUri.ToLower(),
+                    HttpContext.Current.Request.Url.AbsoluteUri.ToLower(),
+                    $"{user.login_nm}",
+                    $"{user.password}");
+                string body = eb.Body;
+                em.Send(model.email.ToLower(), "You have been registered at", body, true);
             }
             DB.SaveChanges();
 
             return new
             {
-                result = 0
+                result = 0,
+                ok = true,
             };
         }
     }

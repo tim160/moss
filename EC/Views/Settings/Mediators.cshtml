@@ -59,10 +59,12 @@
         <div class="blockWithTeam">
             <div class="contentMediators blockTeam">
                 <!--empty block-->
-                <div class="blockIteamTeam footerInputStyle">
-
-                    @Html.ActionLink("setup case administrator", "User", new { id = 0 }, new { @class = "positionLinkIviteMediator greenButton greenButtonCustom disableUnderline" })
-                </div>
+                @if (um._user.role_id == 5)
+                {
+                    <div class="blockIteamTeam footerInputStyle">
+                        @Html.ActionLink("setup case administrator", "User", new { id = 0 }, new { @class = "positionLinkIviteMediator greenButton greenButtonCustom disableUnderline" })
+                    </div>
+                }
                 <!--end empty block-->
                 @foreach (user _user in AllUsers)
                 {

@@ -286,6 +286,7 @@
     <Content Include="Content\caiNew.css" />
     <Content Include="Content\emails\CampusSecurityAlert.html" />
     <Content Include="Content\emails\CaseCloseApprove.html" />
+    <Content Include="Content\emails\MediatorInvitedUserCreated.html" />
     <Content Include="Content\emails\SeniorMediatorCaseConfirm.html" />
     <Content Include="Content\fonts\bootstrap.min.css" />
     <Content Include="Content\caiOLD.css" />

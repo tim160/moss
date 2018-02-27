@@ -134,6 +134,12 @@ namespace EC.Models
                     if (_user.last_login_dt.HasValue)
                         _user.previous_login_dt = _user.last_login_dt;
                     _user.last_login_dt = DateTime.Now;
+
+                    if ((new int[] { 4, 5, 6 }.Contains(_user.role_id)) && (_user.status_id == 3)) //Pending
+                    {
+                        _user.status_id = 2;
+                    }
+                    db.SaveChanges();
                     return _user;
 
                     //  _user.save();

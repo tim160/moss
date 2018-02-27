@@ -199,10 +199,13 @@ namespace EC.Business.Actions.Email
                     // message to mediator with the link to update password 
                     m_filename = "ForgetPassword";
                     break;
-
                 case 51:
                     // message to mediator with the link to update password 
                     m_filename = "CampusSecurityAlert";
+                    break;
+                case 52:
+                    // message to mediator with the link to update password 
+                    m_filename = "MediatorInvitedUserCreated";
                     break;
             }
 
@@ -465,6 +468,19 @@ namespace EC.Business.Actions.Email
             m_body = m_body.Replace("[CaseId]", caseId);
             m_body = m_body.Replace("[PlatformManagerName]", platformManagerName);
             m_body = m_body.Replace("[PlatformManagerCell]", platformManagerCell);
+        }
+
+        public void NewMediator(string adminName, string companyName, string baseUrl, string link, string username, string password)
+        {
+            GetBody(52);
+
+            m_body = m_body.Replace("[AdminName]", adminName);
+            m_body = m_body.Replace("[CompanyName]", companyName);
+            m_body = m_body.Replace("[BaseUrl]", baseUrl);
+            m_body = m_body.Replace("[Link]", link);
+            m_body = m_body.Replace("[Username]", username);
+            m_body = m_body.Replace("[Password]", password);
+            m_body = m_body.Replace("[Username]", username);
         }
 
         #endregion

@@ -1345,7 +1345,7 @@
         $scope.locationId = 0;
         $scope.user_permissions_approve_case_closure = 0;
         $scope.user_permissions_change_settings = 0;
-        $scope.status_id = 2;
+        $scope.status_id = 3;
         $scope.user_role = 0;
 
         $scope.val_first_nm = false;
@@ -1416,11 +1416,15 @@
                     user_permissions_change_settings: $scope.user_permissions_change_settings,
                     status_id: $scope.status_id,
                 };
-                SettingsUserEditService.post(model, function () {
-                    if ($scope.id !== 0) {
-                        window.location = window.location;
+                SettingsUserEditService.post(model, function (data) {
+                    if (data.ok) {
+                        if ($scope.id !== 0) {
+                            window.location = window.location;
+                        } else {
+                            window.location = '/Settings/Mediators';
+                        }
                     } else {
-                        window.location = '/Settings/Mediators';
+                        alert(data.message);
                     }
                 });
             }
