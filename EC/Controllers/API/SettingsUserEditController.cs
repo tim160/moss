@@ -37,8 +37,8 @@ namespace EC.Controllers.API
                     role = model == null ? 5 : model.role_id,
                     departmentId = model == null ? 0 : model.company_department_id,
                     locationId = model == null ? 0 : model.company_location_id,
-                    user_permissions_approve_case_closure = model == null ? 0 : model.user_permissions_approve_case_closure,
-                    user_permissions_change_settings = model == null ? 0 : model.user_permissions_change_settings,
+                    user_permissions_approve_case_closure = model == null || model.user_permissions_approve_case_closure == null ? 0 : model.user_permissions_approve_case_closure,
+                    user_permissions_change_settings = model == null || model.user_permissions_change_settings == null ? 0 : model.user_permissions_change_settings,
                     status_id = model == null ? 3 : model.status_id,
                 },
                 user = new {
@@ -82,10 +82,13 @@ namespace EC.Controllers.API
                 }
 
                 int language_id = 1;
-                int location_id = 0;
-                List<company_location> company_locations = DB.company_location.Where(t => ((t.status_id == 2))).OrderBy(t => t.id).ToList();
-                if (company_locations.Count > 0)
-                    location_id = company_locations[0].id;
+                int location_id = model.company_location_id ?? 0;
+                if (model.company_location_id == 0)
+                {
+                    List<company_location> company_locations = DB.company_location.Where(t => t.company_id == curUser.company_id && t.status_id == 2).OrderBy(t => t.id).ToList();
+                    if (company_locations.Count > 0)
+                        location_id = company_locations[0].id;
+                }
 
                 user = new user();
                 user.first_nm = model.first_nm.Trim();

@@ -75,7 +75,7 @@ namespace EC.Models
                     {
                         if (_user.company_location_id.HasValue)
                         {
-                            _loc = db.company_location.FirstOrDefault(item => item.id == _user.company_location_id.Value);
+                            _loc = db.company_location.FirstOrDefault(item => item.id == _user.company_location_id.Value && item.company_id == _user.company_id);
                             if (_loc != null)
                                 location_nm = _loc.location_en;
                         }
@@ -88,7 +88,7 @@ namespace EC.Models
                     }
                 }
 
-                return location_nm.Trim();
+                return location_nm.Trim() != "" ? location_nm.Trim() : "Not Specified";
             }
         }
         #endregion
