@@ -476,8 +476,8 @@ namespace EC.Business.Actions.Email
 
             m_body = m_body.Replace("[AdminName]", adminName);
             m_body = m_body.Replace("[CompanyName]", companyName);
-            m_body = m_body.Replace("[BaseUrl]", baseUrl);
-            m_body = m_body.Replace("[Link]", link);
+            m_body = m_body.Replace("[BaseUrl]", DomainUtil.GetSubdomainLink(link) + "/login/index?loginField=" + username);
+            m_body = m_body.Replace("[Link]", DomainUtil.GetSubdomainLink(link) + "/settings/index");
             m_body = m_body.Replace("[Username]", username);
             m_body = m_body.Replace("[Password]", password);
             m_body = m_body.Replace("[Username]", username);
