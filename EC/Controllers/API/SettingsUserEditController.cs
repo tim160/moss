@@ -139,7 +139,7 @@ namespace EC.Controllers.API
                     $"{user.login_nm}",
                     $"{user.password}");
                 string body = eb.Body;
-                em.Send(model.email.ToLower(), "You have been registered at", body, true);
+                em.Send(model.email.ToLower(), "You have been added as a Case Administrator", body, true);
             }
             DB.SaveChanges();
 
