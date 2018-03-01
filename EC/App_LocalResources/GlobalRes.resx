@@ -2149,4 +2149,7 @@
   <data name="ForgotYourPassword" xml:space="preserve">
     <value>Forgot your password?</value>
   </data>
+  <data name="ChangePasswordRequest" xml:space="preserve">
+    <value>Change Password Request</value>
+  </data>
 </root>

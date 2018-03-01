@@ -127,7 +127,7 @@ namespace EC.Controllers
                                 EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
                                 eb.ForgetPassword(Request.Url.AbsoluteUri.ToLower(), email, password_token);
                                 string body = eb.Body;
-                                em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_ForgetPassword, body, true);
+                                em.Send(to, cc, App_LocalResources.GlobalRes.ChangePasswordRequest, body, true);
 
                                 #endregion
                             }

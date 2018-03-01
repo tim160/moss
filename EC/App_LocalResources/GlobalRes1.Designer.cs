@@ -1195,6 +1195,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change Password Request.
+        /// </summary>
+        public static string ChangePasswordRequest {
+            get {
+                return ResourceManager.GetString("ChangePasswordRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change Settings.
         /// </summary>
         public static string ChangeSettings {
