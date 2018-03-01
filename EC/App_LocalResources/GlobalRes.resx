@@ -2152,4 +2152,7 @@
   <data name="ChangePasswordRequest" xml:space="preserve">
     <value>Change Password Request</value>
   </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>Confirm new password</value>
+  </data>
 </root>
