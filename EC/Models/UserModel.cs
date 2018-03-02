@@ -97,8 +97,12 @@ namespace EC.Models
         {
             get
             {
-                var d = db.company_department.FirstOrDefault(x => x.id == _user.company_department_id && x.company_id == _user.company_id);
-                return d == null ? "" : d.department_en;
+                if ((_user != null) && (_user.id != 0))
+                {
+                    var d = db.company_department.FirstOrDefault(x => x.id == _user.company_department_id && x.company_id == _user.company_id);
+                    return d == null ? "" : d.department_en;
+                }
+                return "";
             }
         }
 
