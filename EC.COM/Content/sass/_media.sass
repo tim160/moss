@@ -38,27 +38,1241 @@
 
 /* Custom, iPhone Retina */
 @media only screen and (min-width : 320px)
-	/**/
+
+	.container
+		max-width: 100%
+		padding: 0 15px
+		overflow: hidden
+	// top-header
+
+	.login .main
+		background-color: $grey-footerColor
+		min-height: calc( 100vh - 36px - 105px ) // 36px - very top header and 280px footer
+
+	.top-header
+		height: 36px
+		overflow: hidden
+
+		&__campusLink
+			display: none
+
+		&__loginBar
+			justify-self: center
+		&__loginBar-nav
+			list-style: none
+			display: grid
+			grid-template-columns: repeat( 3, max-content )
+		&__loginBar-li
+			position: relative
+			&:last-child:after
+				display: none
+			&:first-child .top-header__loginBar-a
+					padding-left: 0
+			&:last-child .top-header__loginBar-a
+					padding-right: 0
+		&__loginBar-a
+			font-size: 12px
+			padding: 12px 10px
+			position: relative
+			display: block
+			height: 36px
+
+	.top-header__loginBar
+		display: grid
+	.login .top-header__loginBar-nav
+		display: grid
+		grid-template-columns: 1fr 1fr
+	.top-header__loginBar-li
+		display: grid
+		justify-self: end
+	.top-header__loginBar-li:last-child
+		justify-self: start
+
+	//    main-header
+
+	
+	.main-header
+		display: grid
+
+	.main-headerLogo
+		display: none
+
+	.main-headerMenu-mobile
+		display: grid
+		grid-template-columns: max-content 1fr
+
+	.main-headerLogo-mobile
+		justify-self: start
+		text-decoration: none
+	.main-headerLogo-mobile-burgerBtn
+		justify-self: end
+		text-decoration: none
+
+	.main-headerLogo__img-mobile
+		position: relative
+		padding-top: 10px
+		& img
+			display: block
+			width: 100%
+			height: auto
+	.main-headerLogo__text-mobile
+		text-decoration: none
+		color: $mainAccentLighter-color
+		text-transform: uppercase
+		font-size: 8px
+		font-family: $bold-font
+		text-decoration: none
+		padding-bottom: 8px
+		padding-top: 4px
+		height: 18px
+		margin-left: 45px
+
+	.main-headerLogo-mobile-burgerBtn
+		position: relative
+		display: grid
+		padding:  0 10px
+		margin-right: -15px
+		& img
+			align-self: center
+			display: block
+			width: 20px
+			height: auto
+
+
+	.main-headerMenu.on
+		display: grid
+	.main-headerMenu
+		margin: 0 -15px
+		display: none
+		overflow: hidden
+		transition: all .65s ease;
+		&__nav
+			list-style: none
+			display: grid
+
+		&__li
+			text-transform: none
+			display: grid
+			border-bottom: 1px solid #ccc
+			&:first-child
+				border-top: 1px solid #ccc
+		&__a
+			text-transform: uppercase
+			text-decoration: none
+			font-family: $heavy-font
+			font-size: 14px
+			color: $mainAccent-color
+			padding:  15px 15px
+		&__a:hover,
+		&__a:focus,
+		&__a:active
+			background-color: darken($lightBg-color, 10%)
+
+	// -------------- Main ---------------
+	.home .main.fixed-header,
+	.about .main.fixed-header
+		margin-top: 64px
+	// firstSection
+
+	.firstSection__headText
+		font-size: 26px
+	.firstSection__text
+		justify-self: start
+		line-height: 1.6
+	.firstSection__btn
+		margin-bottom: 30px
+		justify-self: start
+
+	// Benefits
+
+	.benefitsSection-head
+		&__title
+			font-size: 30px
+			margin: 30px 0 20px
+		&__text
+			font-size: 20px
+			margin-bottom: 30px
+
+	.benefitsSection-content
+		grid-row-gap: 30px;
+
+
+	.benefitsSection-contentBox
+		grid-template-rows: 100px minmax( 35px, max-content) auto
+		&__title
+			font-size: 18px
+		&__text
+			font-size: 16px
+
+	// TextImageSection
+	.textImageSection
+		margin-top: 30px
+	.textImageSection img
+		display: block
+		margin: auto
+		margin-left: -40px
+
+	//slider-section
+
+	.owl-carousel__slide
+		grid-template-rows: 280px
+	.slider-content
+		width: 80%
+		&__title
+			font-size: 26px
+			margin-bottom: 20px
+		&__text
+			font-size: 16px
+		&__text-signature
+			margin-top: 5%
+			font-size: 12px
+
+	.owl-prev,
+	.owl-next
+		top: calc( 50% - 30px/2 )
+
+	.owl-prev
+		left: 2%
+	.owl-next
+		right: 2%
+
+	// gridSection
+
+	.gridSection
+		grid-template-columns: 1fr
+		grid-template-rows: repeat(4, minmax(280px, max-content))
+		
+	.gridSection__mobileText,
+	.gridSection__reportText
+		padding: 0 15px
+
+	.grid-title
+		font-size: 24px
+		margin-top: 20px
+		margin-bottom: 20px
+	.grid-text
+		font-size: 16px
+		padding-left: 5%
+		& p
+			margin-bottom: 10px
+
+	.gridSection__reportImage
+		grid-row: third-line / 4
+
+	// menegementSection
+
+	.menegementSection
+		grid-template-columns: 1fr
+		grid-template-rows: repeat(2, minmax(280px, max-content))
+	.menegementSection__textBlock
+		padding: 0 15px
+
+	.menegementSection__imageBlock
+		background-position: center
+		background-size: contain
+
+	// routingSection
+
+	.routingSection
+		grid-template-columns: 1fr
+		grid-template-rows: repeat(2, minmax(280px, max-content))
+		&__imageBlock
+			background-position: center
+			background-size: contain
+			grid-row: 2 / 3
+		&__textBlock
+			padding: 0 15px
+
+	// analyticsSection
+
+	.analyticsSection
+		grid-template-columns: 1fr
+		grid-template-rows: repeat(2, minmax(280px, max-content))
+		&__textBlock
+			padding: 0 15px
+		&__imageBlock
+			background-position: center
+			background-size: contain
+
+	.grid-text__list
+		padding-left: 5%
+		margin-top: 10px
+
+	// employeeSection
+
+	.employeeSection
+		grid-template-columns: 1fr
+		grid-template-rows: repeat(2, minmax(280px, max-content))
+		
+	.employeeSection__imageBlock
+		background-position: center
+		background-size: contain
+		grid-row: 2 / 3
+
+	.employeeSection__textBlock
+		padding: 0 15px
+
+	// wideSection
+
+	.wideSection
+		grid-template-rows: 280px
+
+	.wideSection__mainText
+		font-size: 20px
+		margin-bottom: 20px
+
+	.wideSection__signatureText
+		margin-bottom: 20px
+		font-size: 14px
+
+	// greySection
+
+	.greySection
+		padding: 0 0 20px 0
+		grid-template-columns: 1fr
+		grid-template-rows: repeat(2, minmax(200px, max-content))
+
+	.blockIcons
+		padding: 0 15px
+
+	.blockIcons__header
+		margin-bottom: 20px
+		font-size: 22px
+
+	.blockIcons__content
+		grid-template-columns: 40% 60%
+
+	.blockIcons__contentIcon
+		position: relative
+
+	.blockIcons__contentIcon img
+		padding: 0	10px
+
+	.blockIcons__contentInfo
+		&-title
+			font-size: 20px
+			margin-bottom: 5px
+		&-text
+			font-size: 14px
+			margin-bottom: 10px
+		&-signature
+			font-size: 12px
+
+	// contactSection
+
+	.contactSection
+		&__title
+			font-size: 24px
+			margin-bottom: 20px
+			margin-top: 30px
+			text-align: center
+
+	.learnMore-form
+		margin-bottom: 30px
+		&__title
+			font-size: 20px
+			padding-top: 20px
+			padding-bottom: 24px
+		&__content
+			margin: 20px 
+
+	.learnMore-form__content-input
+		padding: 10px 10px 0 10px
+		font-size: 12px
+		border: 1px solid transparent
+		border-bottom: 1px solid #ced7d8
+		box-sizing: border-box
+
+	.learnMore-form__content-input input
+		font-size: 18px
+		padding: 0
+		margin-top: 5px
+
+
+	.learnMore-form__content-input.active
+		border: 1px solid $mainAccentLighter-color
+
+	.learnMore-form__btn
+		margin-bottom: 20px
+
+
+
+	// -------------- Footer ---------------
+
+	.footer
+		margin-top: 20px
+		&__logo
+		&__copyright
+			font-size: 10px
+
+		&__navLinks
+			&-nav
+				grid-auto-flow: column
+			&-li
+			&-a
+				font-size: 12px
+				padding: 10px 24px
+				display: flex
+				justify-content: center
+	.footer__navLinks-li:last-child .footer__navLinks-a
+		padding-right: 0
+
+	.footer__logo
+		margin: 20px 0
+		display: grid
+		justify-content: center
+	.footer__copyright
+		grid-row: 3 / 4
+		margin: 20px 0
+
+	// -----------------------------------------------------------------------
+
+	// -----------------------------------
+	// ------------ ABOUT ----------------
+	// -----------------------------------
+
+	.leaderShipSection
+		margin-bottom: 30px
+	.leaderShipSection__title
+		font-size: 30px
+
+	.leaderShipSection__container
+		grid-gap: 30px 0
+
+	.leaderShipBlock
+		text-decoration: none
+		width: 220px
+	.leaderShipBlock__link
+		text-decoration: none
+
+	.leaderShip__img
+	.leaderShip__name
+		font-size: 16px
+	.leaderShip__position
+		font-size: 16px
+
+	//-----------
+	.leaderShipBlock-infoContainer
+		padding-top: 50px
+		padding-bottom: 30px
+
+	.leaderShipBlock.active
+		//margin-bottom: 400px // leaderShipBlock-infoContainer - height
+
+
+	.leaderShipBlock-infoContainer__foto
+		display: none
+	.leaderShipBlock-infoContainer__content
+
+
+	.leaderShipBlock-infoContainer__contentName
+		font-size: 18px
+		display: none
+		margin-bottom: 10px
+	.leaderShipBlock-infoContainer__contentPosition
+		font-size: 16px
+		margin-bottom: 15px
+		display: none
+	.leaderShipBlock-infoContainer__contentText
+		font-size: 14px
+		& p
+	.leaderShipBlock-infoContainer__close
+		top: -40px
+		right: 0
+
+
+
+
+
+
+	// -----------------------------------
+	// ------------ Log In ---------------
+	// -----------------------------------
+
+	.top-header__backLink
+		font-size: 14px
+		padding: 10px 0
+		display: none
+	.top-header__backLink-text
+		padding-left: 20px
+
+
+	.loginSection
+	.loginSection__titleBg
+	.loginSection__contentBg
+
+	.loginSection__title
+		font-size: 20px
+		margin: 50px auto 20px auto
+		padding-left: 40px
+		padding-top: 3px
+		&:before
+			top: -4.5px
+			left: 0
+
+	.loginForm
+		margin-top: 30px
+		margin-bottom: 20px
+	.loginForm__input		
+		font-size: 12px
+		padding: 6px 5px 2px 5px
+		border: 1px solid transparent
+		border-bottom: 1px solid #ced7d8
+	.loginForm__input.active
+		background-color: #fff
+		border: 1px solid $mainAccentLighter-color
+	.loginForm__input:last-child
+		border-bottom: 1px solid transparent
+	.loginForm__input.active:last-child
+		border: 1px solid $mainAccentLighter-color
+	.loginForm__input	input
+		font-size: 24px
+		padding: 4px 0 2px 0
+		font-size: 18px
+		padding: 2px 0
+	.loginForm__input.active input 
+		background-color: #fff
+
+	.loginFormLinks
+		margin-bottom: 30px
+	.loginFormLinks__restoreLink
+		color: #a0a3a3
+		font-size: 12px
+	.loginFormLinks__loginBtn
+		padding: 6px 30px
+		font-size: 14px
+
+
+	// -----------------------------------
+	// ----- Check report status ---------
+	// -----------------------------------
+
+	.loginContentBlock
+		margin-top: 30px
+	.loginContentBlock__textP
+		font-size: 14px
+	.loginContentBlock__link
+		font-size: 12px
+		margin-top: 20px
+
+	// -----------------------------------
+	// ------------- Report --------------
+	// -----------------------------------
+
+	.loginTextForm
+		margin-top: 30px
+		margin-bottom: 30px
+	.loginTextForm__textarea
+		height: 60px
+		padding: 6px
+		margin-bottom: 20px
+	textarea::-webkit-input-placeholder
+		font-size: 12px
+
+	.loginTextFormLinks__startBtn
+		font-size: 14px
+		padding: 6px 30px
+
+
+
+
 
 
 /* Extra Small Devices, Phones */
 @media only screen and (min-width : 480px)
 	/**/
+	.benefitsSection-contentBox *
+		max-width: 350px
+		margin: auto
+
+	.employeeSection__imageBlock
+		background-size: cover
+
+	.greySection
+		padding: 0
+
+	.blockIcons
+		padding: 30px 15px
+	.blockIcons:first-child
+		padding-bottom: 0
+	.blockIcons__content
+		grid-template-columns: 35% 60%
+		overflow: hidden
+		grid-gap: 20px
+	.blockIcons__header
+		font-size: 26px
+	.blockIcons__contentInfo-title
+		font-size: 24px
+	.blockIcons__contentInfo-text
+		font-size: 16px
+	.blockIcons__contentInfo-signature
+		font-size: 14px
+	.blockIcons__contentIcon img
+		max-width: 150px
+
+	// -----------------------------------
+	// ------------ ABOUT ----------------
+	// -----------------------------------
+
+	.leaderShipSection__title
+		margin: 60px 0
+
+	.leaderShipSection__container
+		grid-template-columns: repeat(2, 1fr)
+		grid-gap: 50px 0
+
+	// -----------------------------------
+	// ------------ Log In ---------------
+	// -----------------------------------
+
+	.loginSection__container.container,
+	.loginTopSection__container.container
+		max-width: 420px
+	.loginTopSection__container
+		overflow: visible
+
+	.loginSection__title
+		margin-left: -40px
+
+
+	.loginForm__input		
+		font-size: 14px
+		padding: 6px 10px 2px 10px
+	.loginForm__input input
+		font-size: 24px
+
+	.loginFormLinks__restoreLink
+		font-size: 14px
+
+	.loginFormLinks__loginBtn
+		font-size: 16px
+		padding: 15px 60px
+
+	// -----------------------------------
+	// ------------- Report --------------
+	// -----------------------------------
+
+	.loginTextForm__textarea
+		padding: 10px
+	textarea::-webkit-input-placeholder
+		font-size: 14px
+
+	.loginTextFormLinks__startBtn
+		font-size: 16px
+		padding: 15px 60px
+
+
+
 
 
 /* Small Devices, Tablets */
 @media only screen and (min-width : 768px)
-	/**/
+	// top-header
+	.login .main
+		min-height: calc( 100vh - 36px - 125px )
 
+	.top-header
+		grid-template-columns: repeat( 2, 1fr )
+		height: 36px
+		overflow: hidden
+		&__campusLink
+			display: block
+			justify-self: start
+			font-size: 14px
+			padding: 10px 0
+			&-text
+				padding-right: 20px
+
+		&__loginBar
+			justify-self: end
+		&__loginBar-nav
+			grid-template-columns: repeat( 3, max-content )
+		&__loginBar-li
+			&:last-child:after
+				display: none
+			&:last-child .top-header__loginBar-a
+					padding-right: 0
+		&__loginBar-a
+			font-size: 12px
+			padding: 12px 20px
+			position: relative
+			display: block
+			height: 36px
+
+	.top-header__campusLink img
+		display: block
+		position: absolute
+		width: 11px
+		right: 0
+		top: 12px
+	
+	
+	// firstSection
+
+	.firstSection__headText
+		font-size: 30px
+		margin-top: 50px
+	.firstSection__text
+		font-size: 18px
+		width: 80%
+	.firstSection__text
+		margin-bottom: 20px
+
+	// slider-section
+
+	.slider-content__title
+		font-size: 30px
+	.slider-content__text
+		font-size: 20px
+	.slider-content__text-signature
+		font-size: 15px
+
+	// gridSection
+
+	.grid-title
+		font-size: 30px
+	.grid-text p
+		font-size: 18px
+
+  // wideSection
+
+  .wideSection__mainText
+  	font-size: 22px
+	.wideSection__signatureText
+		font-size: 15px
+
+
+	// benefitsSection
+	.benefitsSection-content
+		grid-template-columns: 1fr 1fr
+	.benefitsSection-contentBox *
+		margin: 0 auto
+
+	// footer
+	
+	.footer__logo
+		margin: 30px 0
+	.footer__copyright
+		margin: 30px 0
+
+	// -----------------------------------
+	// ------------ ABOUT ----------------
+	// -----------------------------------
+
+	.leaderShipSection__container
+		grid-template-columns: repeat(3, 1fr)
+
+
+	// -----------------------------------
+	// ------------ Log In ---------------
+	// -----------------------------------
+	
+	.top-header__backLink
+		display: block
 
 /* Medium Devices, Desktops */
 @media only screen and (min-width : 992px)
 	/**/
+	.container
+		max-width: 1200px
+		padding: 0 20px
+		margin: auto
+		position: relative
+
+	.general-container
+		font-family: $regular-font
+		display: grid
+		grid-template-columns: 1fr
+		grid-template-areas: "header" "main" "footer"
+		//grid-template-rows: [header-row-start] minmax(50px, max-content) [header-row-end mainContent-row-start] minmax( calc( 100vh - 394px ), max-content ) [mainContent-row-end footer-row-start] minmax(30px, max-content) [footer-row-end]
+
+	.login .main
+		min-height: calc( 100vh - 36px - 280px ) // 36px - very top header and 280px footer
+	
+
+	//    main-header
+	.main-headerMenu-mobile
+		display: none
+
+	.main-header
+		display: grid
+		grid-template-columns: minmax(max-content, 300px) 1fr
+
+	.main-headerLogo
+		display: block
+		justify-self: start
+		&__img
+			position: relative
+			padding-top: 20px
+			height: 58px
+		&__text
+			font-size: 10px
+			padding-bottom: 5px
+			padding-top: 2px
+			height: 18px
+			margin-left: 44px
+
+	.main-headerMenu
+		justify-self: end
+		display: grid
+		overflow: hidden
+		&__nav
+			list-style: none
+			display: grid
+			grid-auto-flow: column
+			align-content: center
+
+		&__li
+			text-transform: none
+			border: none
+			&:first-child
+				border: none
+			
+		&__a
+			font-size: 14px
+			padding: 30px 15px
+			border-bottom: 2px solid transparent
+			transition: all 0.5s ease
+		&__a:hover,
+		&__a:focus,
+		&__a:active
+			color: $mainAccentLighter-color
+			border-bottom: 2px solid $mainAccentLighter-color
+			background-color: #fff
+
+	// -------------- Main ---------------
+	.home .main.fixed-header,
+	.about .main.fixed-header
+		margin-top: 77px
+	// firstSection
+
+	.firstSection__headText
+		font-size: 40px
+		margin: 160px 0 30px 0
+		justify-self: start
+	.firstSection__text
+		font-size: 20px
+		margin-bottom: 50px
+		justify-self: start
+		width: 540px
+		line-height: 1.6
+	.firstSection__btn
+		margin-bottom: 100px
+		justify-self: start
+
+	// Benefits
+
+	.benefitsSection-head
+		&__title
+			font-size: 36px
+			margin: 50px 0 20px
+		&__text
+			font-size: 20px
+			margin-bottom: 60px
+
+	.benefitsSection-content
+		grid-template-columns: repeat(5, 1fr)
+		margin-bottom: 60px
+		grid-row-gap: 0
+	.benefitsSection-contentBox
+		grid-template-rows: 100px minmax( 35px, max-content) auto
+		padding: 0px 24px
+		&__title
+			font-size: 18px
+		&__text
+			font-size: 16px
+
+
+	// TextImageSection
+	.textImageSection 
+		height: 220px
+		width: 100%
+		margin: 0
+	.textImageSection img
+		display: block
+		margin: auto
+		width: initial
+
+
+	//slider-section
+
+	.owl-carousel__slide
+		grid-template-rows: 380px
+	.slider-content
+		width: 80%
+		&__title
+			font-size: 36px
+			margin-bottom: 40px
+		&__text
+			font-size: 24px
+		&__text-signature
+			margin-top: 5%
+			font-size: 16px
+
+	.owl-prev,
+	.owl-next
+		top: calc( 50% - 30px/2 )
+
+	.owl-prev
+		left: 5%
+	.owl-next
+		right: 5%
+
+	// gridSection
+
+	.gridSection
+		grid-template-columns: 1fr 1fr
+		grid-template-rows: repeat(2, minmax(570px, max-content))
+		
+	.gridSection__mobileText
+		padding-left: 10%
+		padding-right: 3%
+	.gridSection__reportText
+		padding: 15% 5% 10% 15%
+
+	.grid-title
+		font-size: 36px
+		margin-bottom: 30px
+	.grid-text
+		font-size: 20px
+		padding-left: 5%
+		& p
+			margin-bottom: 20px
+
+	.gridSection__reportImage
+		grid-row: auto
+
+	// menegementSection
+
+	.menegementSection
+		grid-template-columns: 45% 55%
+		grid-template-rows:  minmax(570px, max-content)
+	.menegementSection__textBlock
+		padding-left: 15%
+		padding-right: 3%
+
+	.menegementSection__imageBlock
+		background-position: 0 40px
+		background-size: contain
+
+	// routingSection
+
+	.routingSection
+		grid-template-rows:  minmax(570px, max-content)
+		grid-template-columns: 55% 45%
+		&__imageBlock
+			background-position: 0 40px
+		&__textBlock
+			padding-right: 3%
+			padding-left: 10%
+	.routingSection__imageBlock
+		grid-row: auto
+
+	// analyticsSection
+
+	.analyticsSection
+		grid-template-columns: 45% 55%
+		grid-template-rows:  minmax(570px, max-content)
+		&__textBlock
+			padding-left: 15%
+			padding-right: 3%
+		&__imageBlock
+			background-position: 0 40px
+
+	.grid-text__list
+		padding-left: 5%
+		margin-top: 30px
+
+	// employeeSection
+
+	.employeeSection
+		grid-template-columns: 1fr 1fr
+		grid-template-rows: minmax(570px, max-content)
+		
+	.employeeSection__imageBlock
+		background-position: 100% 0
+		grid-row: auto
+		background-size: cover;
+
+	.employeeSection__textBlock
+		padding-left: 15%
+		padding-right: 3%
+
+	// wideSection
+
+	.wideSection
+		grid-template-rows: 470px
+
+
+	.wideSection__mainText
+		font-size: 24px
+		margin-bottom: 40px
+
+	.wideSection__signatureText
+		margin-bottom: 40px
+		font-size: 16px
+
+	// greySection
+
+	.greySection
+		padding: 0
+		grid-template-columns: 1fr 1fr
+		grid-template-rows: 310px
+
+	.blockIcons
+		padding: 0 20px
+
+	.greySection__keyBlock
+		justify-self: end
+
+	.blockIcons__header
+		margin-bottom: 30px
+		font-size: 24px
+
+	.blockIcons__content
+		grid-template-columns: 110px 285px
+
+	.blockIcons__contentIcon
+		position: relative
+
+	.blockIcons__contentIcon img
+		padding: 0	10px
+
+	.blockIcons__contentInfo
+		&-title
+			font-size: 30px
+			margin-bottom: 5px
+		&-text
+			font-size: 18px
+			margin-bottom: 20px
+		&-signature
+			font-size: 14px
+			margin-bottom: 0
+
+	.greySection__sexualBlock
+		justify-self: start
+
+	// contactSection
+
+	.contactSection
+		height: 730px
+		&__title
+			font-size: 30px
+			margin-bottom: 50px
+
+	.learnMore-form
+		width: 420px
+		&__title
+			font-size: 24px
+			padding-top: 24px
+			padding-bottom: 38px
+		&__content
+			margin: 20px 
+
+	.learnMore-form__content-input
+		padding: 10px 10px 0 10px
+		font-size: 14px
+		border: 2px solid transparent
+		border-bottom: 2px solid #ced7d8
+
+	.learnMore-form__content-input input
+		font-size: 24px
+		padding: 2px 0
+		margin-top: 5px
+
+
+	.learnMore-form__content-input.active
+		border: 2px solid $mainAccentLighter-color
+
+	.learnMore-form__btn
+		margin-bottom: 20px
+
+
+
+	// -------------- Footer ---------------
+
+	.footer
+		height: 280px
+		margin-top: 0
+		grid-template-columns: 30% auto 30%
+		&__logo
+		&__copyright
+			font-size: 12px
+
+		&__navLinks
+			&-nav
+				grid-auto-flow: column
+			&-li
+			&-a
+				font-size: 14px
+				padding: 10px 25px
+				display: flex
+				justify-content: center
+	.footer__navLinks-li:last-child .footer__navLinks-a
+		padding-right: 0
+
+	.footer__navLinks-nav
+		justify-content: end
+
+	.footer__logo
+		justify-content: start
+	.footer__copyright
+		grid-row: auto
+		margin: auto
+
+
+	// -----------------------------------
+	// ------------ ABOUT ----------------
+	// -----------------------------------
+	
+	.leaderShipSection>.container
+		position: initial
+	
+	.leaderShipSection
+	.leaderShipSection__title
+		font-size: 36px
+		margin: 80px 0 100px 0
+
+	.leaderShipSection__container
+		grid-template-columns: repeat(4, 1fr)
+
+	.leaderShip__img
+		margin-bottom: 10px
+	.leaderShip__name
+		font-size: 16px
+		margin-bottom: 5px
+	.leaderShip__position
+		font-size: 16px
+
+	//------------------------------
+
+
+
+	.leaderShipBlock-infoContainer
+		max-width: 1050px
+		display: grid
+		grid-template-columns: 200px auto
+		padding: 60px
+
+	.leaderShipBlock-infoContainer__foto
+		display: block
+	.leaderShipBlock-infoContainer__foto.container,
+	.leaderShipBlock-infoContainer__content.container
+		padding-left: 10%
+		padding-right: 10%
+
+
+	.leaderShipBlock-infoContainer__contentName
+		font-size: 18px
+		display: block
+		margin-bottom: 5px
+	.leaderShipBlock-infoContainer__contentPosition
+		font-size: 16px
+		margin-bottom: 15px
+		display: block
+	.leaderShipBlock-infoContainer__contentText
+		font-size: 18px
+		& p
+			margin-bottom: 20px
+	.leaderShipBlock-infoContainer__close
+		top: 10px
+		right: -40px
+
+	// -----------------------------------
+	// ------------ Log In ---------------
+	// -----------------------------------
+
+	.loginSection__title
+		margin-left: -50px
+		padding-left: 50px
+		font-size: 24px
+
+	.loginSection__title
+		margin-top: 150px
+
+	.loginForm
+		margin-top: 50px
+
+	.loginForm__input
+		padding: 10px 10px 2px 10px
+		border: 2px solid transparent
+		border-bottom: 2px solid #ced7d8
+	.loginForm__input.active
+		border: 2px solid $mainAccentLighter-color
+	.loginForm__input:last-child
+		border-bottom: 2px solid transparent
+	.loginForm__input.active:last-child
+		border: 2px solid $mainAccentLighter-color
+	.loginForm__input input
+		margin-top: 5px
+		padding: 0
+
+	// -----------------------------------
+	// ----- Check report status ---------
+	// -----------------------------------
+
+	.loginContentBlock
+		margin-top: 30px
+	.loginContentBlock+.loginForm
+		margin-top: 30px
+
+	.loginContentBlock__link
+		font-size: 14px
+	.loginContentBlock__textP
+		padding-bottom: 10px
+		font-size: 16px
+
+	// -----------------------------------
+	// ------------- Report --------------
+	// -----------------------------------
+	
+	.loginTextForm__textarea
+		height: 80px
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* Large Devices, Wide Screens */
 @media only screen and (min-width : 1280px)
-	/**/
+
+	.container
+		max-width: 1230px
+	.container-wide
+		max-width: 100%
+		padding: 0 2%
+		margin: auto
+
+	.main-headerBg>.container
+		overflow: initial
+	.main-headerLogo__img
+		margin-left: -46px
+	.main-headerLogo__text
+		margin-left: 0
+
+	.footerBg>.container
+		overflow: initial
+	.footer__logo
+		margin-left: -46px
+		margin-right: 46px
+
+	.gridSection__mobileText,
+	.menegementSection__textBlock,
+	.analyticsSection__textBlock
+		padding-left: 18%
+	.routingSection__textBlock
+		padding-right: 18%
+		padding-left: 0
+	.employeeSection__textBlock
+		padding-right: 18%
 
 @media only screen and (min-width : 1690px)
 	/**/

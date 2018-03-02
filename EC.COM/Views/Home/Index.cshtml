@@ -1,487 +1,507 @@
-﻿<header class="header">
-    <div class="top-headerBg">
-        <div class="container">
-            <div class="top-header">
-                <a href="#" class="top-header__campusLink">
-                    <span class="top-header__campusLink-text">
-                        Campus Confidential<i class="demo-icon icon-up"></i>
-                    </span>
-                </a>
-                <div class="top-header__loginBar">
-                    <nav class="top-header__loginBar-nav">
-                        <li class="top-header__loginBar-li">
-                            <a href="#!" class="top-header__loginBar-a">
-                                Client Login
-                            </a>
-                        </li><!-- /.top-header__loginBar-li -->
-                        <li class="top-header__loginBar-li">
-                            <a href="#!" class="top-header__loginBar-a">
-                                File a Report
-                            </a>
-                        </li><!-- /.top-header__loginBar-li -->
-                        <li class="top-header__loginBar-li">
-                            <a href="#!" class="top-header__loginBar-a">
-                                Check Report Status
-                            </a>
-                        </li><!-- /.top-header__loginBar-li -->
-                    </nav><!-- /.top-header__loginBar-nav -->
-                </div><!-- /.top-header__loginBar -->
-            </div><!-- /.top-header -->
+﻿<div class="general-container home">
+
+    <header class="header">
+        <div class="top-headerBg">
+            <div class="container">
+                <div class="top-header">
+                    <a href="#" class="top-header__campusLink">
+                        <span class="top-header__campusLink-text">
+                            Campus Confidential
+                        </span>
+                        <img src="~/Content/images/svg-icons/upper-right.svg" alt="" />
+                    </a>
+                    <div class="top-header__loginBar">
+                        <nav class="top-header__loginBar-nav">
+                            <li class="top-header__loginBar-li">
+                                <a href="@Url.Action("Login", "Home")" class="top-header__loginBar-a">
+                                    Client Login
+                                </a>
+                            </li><!-- /.top-header__loginBar-li -->
+                            <li class="top-header__loginBar-li">
+                                <a href="@Url.Action("Report", "Home")" class="top-header__loginBar-a">
+                                    File a Report
+                                </a>
+                            </li><!-- /.top-header__loginBar-li -->
+                            <li class="top-header__loginBar-li">
+                                <a href="@Url.Action("CheckStatus", "Home")" class="top-header__loginBar-a">
+                                    Check Report Status
+                                </a>
+                            </li><!-- /.top-header__loginBar-li -->
+                        </nav><!-- /.top-header__loginBar-nav -->
+                    </div><!-- /.top-header__loginBar -->
+                </div><!-- /.top-header -->
+            </div>
         </div>
-    </div>
-    <div class="main-headerBg">
-        <div class="container">
-            <div class="main-header">
-                <a href="#" class="main-headerLogo">
-                    <div class="main-headerLogo__img">
-                        <img src="~/Content/images/0-main-logo.png" alt="" />
-                    </div><!-- /.main-headerLogo__img -->
-                    <div class="main-headerLogo__text">
-                        Reduce risk. Create trust.
-                    </div><!-- /.main-headerLogo__text -->
-                </a><!-- /.main-headerLogo -->
-                <div class="main-headerMenu">
-                    <nav class="main-headerMenu__nav">
-                        <li class="main-headerMenu__li">
-                            <a href="#!" data-scroll-to=".benefitsSection" class="main-headerMenu__a">
-                                Benefits
-                            </a>
-                        </li><!-- /.main-headerMenu__li -->
-                        <li class="main-headerMenu__li">
-                            <a href="#!" data-scroll-to=".gridSection" class="main-headerMenu__a">
-                                Incident Reporting
-                            </a>
-                        </li><!-- /.main-headerMenu__li -->
-                        <li class="main-headerMenu__li">
-                            <a href="#!" data-scroll-to=".menegementSection" class="main-headerMenu__a">
-                                Case Management
-                            </a>
-                        </li><!-- /.main-headerMenu__li -->
-                        <li class="main-headerMenu__li">
-                            <a href="#!" data-scroll-to="" class="main-headerMenu__a">
-                                About
-                            </a>
-                        </li><!-- /.main-headerMenu__li -->
-                        <li class="main-headerMenu__li">
-                            <a href="#!" data-scroll-to=".contactSection" class="main-headerMenu__a">
-                                Contact
-                            </a>
-                        </li><!-- /.main-headerMenu__li -->
-                    </nav><!-- /.main-headerMenu__nav -->
-                </div><!-- /.main-headerMenu -->
-            </div><!-- /.main-header -->
-        </div><!-- /.container -->
-    </div><!-- /.main-headerBg -->
-</header><!-- /.header -->
-<main class="main">
-    <section class="firstSection">
-        <div class="container">
-            <div class="firstSection__contentBox">
-                <h3 class="firstSection__headText">
-                    Build a Safe, Compliant and Ethical Workplace
-                </h3><!-- /.firstSection__headText -->
-                <p class="firstSection__text">
-                    Employee Confidential is an online and mobile platform
-                    to provide employees, customers, suppliers, and contractors
-                    a Confidential and Anonymous system to report incidents.
-                </p><!-- /.firstSection__text -->
-                <p class="firstSection__text">
-                    It includes a Case Management solution to quickly and
-                    effectively investigate and resolve cases.
-                </p><!-- /.firstSection__text -->
-                <a href="#" data-scroll-to=".contactSection" class="firstSection__btn btn">
-                    Learn more
-                </a>
-            </div><!-- /.firstSection__contentBox -->
-        </div><!-- /.container -->
-    </section><!-- /.firstSection -->
-    <section class="benefitsSection">
-        <div class="container benefitsSection-grid">
-            <div class="benefitsSection-head">
-                <h3 class="benefitsSection-head__title">Benefits</h3><!-- /.benefitsSection-head__title -->
-                <p class="benefitsSection-head__text">
-                    of an Incident Reporting and Case Management System
-                </p><!-- /.benefitsSection-head__text -->
-            </div><!-- /.benefitsSection-head -->
-            <div class="benefitsSection-content">
-                <div class="benefitsSection-contentBox">
-                    <div class="benefitsSection-contentBox__img">
-                        <img src="~/Content/images/warning-img.png" alt="" />
-                    </div><!-- /.benefitsSection-contentBox__img -->
-                    <div class="benefitsSection-contentBox__title">
-                        Early Warning
-                    </div><!-- /.benefitsSection-contentBox__title -->
-                    <div class="benefitsSection-contentBox__text">
-                        The best time to deal with a problem is now. Help your organization address problems before they get worse.
-                    </div><!-- /.benefitsSection-contentBox__text -->
-                </div><!-- /.benefitsSection-contentBox -->
-
-                <div class="benefitsSection-contentBox">
-                    <div class="benefitsSection-contentBox__img">
-                        <img src="~/Content/images/trust-img.png" alt="" />
-                    </div><!-- /.benefitsSection-contentBox__img -->
-                    <div class="benefitsSection-contentBox__title">
-                        Increase Trust
-                    </div><!-- /.benefitsSection-contentBox__title -->
-                    <div class="benefitsSection-contentBox__text">
-                        Increase trust in the entire process. Reduce the fear of retaliation through prompt handling of allegations, keeping the reporter informed and always being transparent.
-                    </div><!-- /.benefitsSection-contentBox__text -->
-                </div><!-- /.benefitsSection-contentBox -->
-
-                <div class="benefitsSection-contentBox">
-                    <div class="benefitsSection-contentBox__img">
-                        <img src="~/Content/images/standarts-img.png" alt="" />
-                    </div><!-- /.benefitsSection-contentBox__img -->
-                    <div class="benefitsSection-contentBox__title">
-                        Meet Standards
-                    </div><!-- /.benefitsSection-contentBox__title -->
-                    <div class="benefitsSection-contentBox__text">
-                        Enable an effective compliance program to meet regulatory standards set forth by the EEOC, OSHA, USFSG, OECD and FCPA.
-                    </div><!-- /.benefitsSection-contentBox__text -->
-                </div><!-- /.benefitsSection-contentBox -->
-
-                <div class="benefitsSection-contentBox">
-                    <div class="benefitsSection-contentBox__img">
-                        <img src="~/Content/images/risk-img.png" alt="" />
-                    </div><!-- /.benefitsSection-contentBox__img -->
-                    <div class="benefitsSection-contentBox__title">
-                        Minimize Risk
-                    </div><!-- /.benefitsSection-contentBox__title -->
-                    <div class="benefitsSection-contentBox__text">
-                        Reduce financial and reputational losses. Identify potential risk areas for your business via standard reporting and robust analytics.
-                    </div><!-- /.benefitsSection-contentBox__text -->
-                </div><!-- /.benefitsSection-contentBox -->
-
-                <div class="benefitsSection-contentBox">
-                    <div class="benefitsSection-contentBox__img">
-                        <img src="~/Content/images/lawsuits-img.png" alt="" />
-                    </div><!-- /.benefitsSection-contentBox__img -->
-                    <div class="benefitsSection-contentBox__title">
-                        Prevent Lawsuits
-                    </div><!-- /.benefitsSection-contentBox__title -->
-                    <div class="benefitsSection-contentBox__text">
-                        Help prevent legal action against your company to a wide range of exposures, including EEO, financial and safety.
-                    </div><!-- /.benefitsSection-contentBox__text -->
-                </div><!-- /.benefitsSection-contentBox -->
-
-            </div><!-- /.benefitsSection-content -->
-        </div><!-- /.container -->
-    </section><!-- /.benefitsSection -->
-    <section class="textImageSection"></section><!-- /.textImageSection -->
-    <section class="slider-section">
-        <div class="owl-carousel ">
-            <div class="owl-carousel__slide owl-carousel__slide1">
-                <div class="slider-content ">
-                    <div class="slider-content__title">
-                        What you don’t know <b>CAN</b> hurt you
-                    </div><!-- /.slider-content__title -->
-                    <div class="slider-content__text">
-                        <p>
-                            “Brookdale Senior Living sued over alleged negligence and sexual assault.”
-                        </p>
-                        <p>
-                            <i>Cook Country Record.</i> September 24, 2015
-                        </p>
-                    </div><!-- /.slider-content__text -->
-                </div><!-- /.slider-content -->
-            </div><!-- /.container -->
-            <div class="owl-carousel__slide owl-carousel__slide1">
-                <div class="slider-content container">
-                    <div class="slider-content__title">
-                        What you don’t know <b>CAN</b> hurt you
-                    </div><!-- /.slider-content__title -->
-                    <div class="slider-content__text">
-                        <p>
-                            “US Department of Labor sues Jasper Roofing Contractors, CEO for retaliation after employee cooperates with OSHA investigation.”
-                        </p>
-                    </div><!-- /.slider-content__text -->
-                </div><!-- /.slider-content -->
-            </div><!-- /.container -->
-            <div class="owl-carousel__slide owl-carousel__slide1">
-                <div class="slider-content container">
-                    <div class="slider-content__title">
-                        What you don’t know <b>CAN</b> hurt you
-                    </div><!-- /.slider-content__title -->
-                    <div class="slider-content__text">
-                        <p>
-                            “Employee theft is a crime that is costing U.S. small businesses $50 billion annually.”
-                        </p>
-                        <p>
-                            Statistic Brain
-                        </p>
-                    </div><!-- /.slider-content__text -->
-                </div><!-- /.slider-content -->
-            </div><!-- /.container -->
-            <div class="owl-carousel__slide owl-carousel__slide1">
-                <div class="slider-content container">
-                    <div class="slider-content__title">
-                        What you don’t know <b>CAN</b> hurt you
-                    </div><!-- /.slider-content__title -->
-                    <div class="slider-content__text">
-                        <p>
-                            “KASCO, a butcher supplies and meat processing equipment company, to pay $110,000 to settle an employment discrimination lawsuit.”
-                        </p>
-                        <p>
-                            U.S. Equal Employment Opportunity Commission (EEOC), March 22, 2017
-                        </p>
-                    </div><!-- /.slider-content__text -->
-                </div><!-- /.slider-content -->
-            </div><!-- /.container -->
-            <div class="owl-carousel__slide owl-carousel__slide1">
-                <div class="slider-content container">
-                    <div class="slider-content__title">
-                        What you don’t know <b>CAN</b> hurt you
-                    </div><!-- /.slider-content__title -->
-                    <div class="slider-content__text">
-                        <p>
-                            “Avon settles Justice Department charges of China bribery for $135 million.”
-                        </p>
-                        <p>
-                            Fortune, December 17, 2014
-                        </p>
-                    </div><!-- /.slider-content__text -->
-                </div><!-- /.slider-content -->
-            </div><!-- /.container -->
-
-        </div>
-    </section><!-- /.slider-section -->
-    <section class="gridSection">
-        <div class="gridSection__mobileText">
-            <div class="grid-title">
-                Online & mobile reporting hotline
-            </div><!-- /.grid-title -->
-            <div class="grid-text">
-                <p>
-                    A platform to submit confidential or anonymous reports via web, tablet or mobile.
-                </p>
-                <p>
-                    An option to report in one of 11 different languages.
-                </p>
-                <p>
-                    Intuitive reporting interface that takes as little as 10 minutes to complete.
-                </p>
-                <p>
-                    Supporting documents can be attached (e.g. videos, photos, screenshots & documents)
-                </p>
-                <p>
-                    Reporters can print and save a copy of the report.
-                </p>
-            </div><!-- /.grid-text -->
-        </div><!-- /.gridSection__mobileText -->
-        <div class="gridSection__mobileImage"></div><!-- /.gridSection__mobileImage -->
-        <div class="gridSection__reportImage"></div><!-- /.gridSection__reportImage -->
-        <div class="gridSection__reportText">
-            <div class="grid-title">
-                Reporter dashboard
-            </div><!-- /.grid-title -->
-            <div class="grid-text">
-                <p>Check case status.</p>
-                <p>Correspond confidentially or anonymously with case officers.</p>
-                <p>Add additional evidence and information.</p>
-            </div><!-- /.grid-text -->
-        </div><!-- /.gridSection__reportText -->
-    </section><!-- /.mobileReportingSection -->
-    <section class="menegementSection">
-        <div class="menegementSection__textBlock">
-            <div class="grid-title">
-                Case management
-            </div><!-- /.grid-title -->
-            <div class="grid-text">
-                <p>
-                    Reviewing Case Status in Dashboard
-                </p>
-                <p>
-                    Messaging (to Reporters & Case Officers)
-                </p>
-                <p>
-                    Tracking Tasks
-                </p>
-                <p>
-                    Attaching Evidence
-                </p>
-                <p>
-                    Recording Investigation Notes
-                </p>
-                <p>Analyzing Route Causes of the incident and subject.</p>
-                <p>Logging date & time stamps and timeline of investigation activity. </p>
-            </div><!-- /.grid-text -->
-        </div><!-- /.menegementSection__textBlock -->
-        <div class="menegementSection__imageBlock"></div><!-- /.menegementSection__imageBlock -->
-    </section><!-- /.menegementSection -->
-    <section class="routingSection">
-        <div class="routingSection__imageBlock"></div><!-- /.routingSection__imageBlock -->
-        <div class="routingSection__textBlock">
-            <div class="grid-title">
-                Case management
-            </div><!-- /.grid-title -->
-            <div class="grid-text">
-                <p>
-                    Assign Case Administrators according to the type of incident and location.
-                </p>
-                <p>
-                    Assign Case Owners.
-                </p>
-                <p>
-                    Flag whether an incident is a regulatory infringement.
-                </p>
-                <p>Link compliance and HR procedural policies to incident types for easy access during the investigation and resolution process. </p>
-            </div><!-- /.routingSection__textBlock -->
-    </section><!-- /.routingSection -->
-    <section class="analyticsSection">
-        <div class="analyticsSection__textBlock">
-            <div class="grid-title">
-                Analytics
-            </div><!-- /.grid-title -->
-            <div class="grid-text">
-                <p>A data-analytics section helps management get a snapshot of:</p>
-                <div class="grid-text__list">
-                    <p>Stages of all cases</p>
-                    <p>Case activity by date</p>
-                    <p>Case activity by location</p>
-                    <p>Case activity by department</p>
-                    <p>Number of cases by reporter type</p>
-                    <p>Number of cases by incident type</p>
-                    <p>Root Cause Analysis</p>
-                </div><!-- /.grid-text__list -->
-            </div><!-- /.grid-text -->
-        </div><!-- /.analyticsSection__textBlock -->
-        <div class="analyticsSection__imageBlock"></div><!-- /.analyticsSection__imageBlock -->
-    </section><!-- /.analyticsSection -->
-    <section class="employeeSection">
-        <div class="employeeSection__imageBlock"></div><!-- /.employeeSection__imageBlock -->
-        <div class="employeeSection__textBlock">
-            <div class="grid-title">
-                Employee Awareness
-            </div><!-- /.grid-title -->
-            <div class="grid-text">
-                <p>
-                    Every client receives awareness materials tailored for their industry and target market.
-                </p>
-                <div class="grid-text__list">
-                    <p>Downloadable posters for placement in common areas</p>
-                    <p>Downloadable wallet-size cards.</p>
-                    <p>Website & email buttons.</p>
-                </div><!-- /.grid-text__list -->
-            </div><!-- /.grid-text -->
-        </div><!-- /.employeeSection__textBlock -->
-    </section><!-- /.employeeSection -->
-    <section class="wideSection">
-        <div class="wideSection__conteiner container">
-            <div class="wideSection__mainText">
-                “Having litigated and investigated whistleblower, EEO and fraud claims,<br>
-                I can tell you the best time to deal with a problem<br>
-                is as soon as it is reported!”<br>
-            </div><!-- /.wideSection__mainText -->
-            <div class="wideSection__signatureText">
-                <b>Don Phin</b>, JD. Board of Advisor
-            </div><!-- /.wideSection__signatureText -->
-        </div><!-- /.wideSection__conteiner -->
-    </section><!-- /.wideSection -->
-    <section class="greySection">
-        <div class="greySection__keyBlock blockIcons">
-            <div class="blockIcons__header">
-                Early Detection is Key
-            </div><!-- /.blockIcons__header -->
-            <div class="blockIcons__content">
-                <div class="blockIcons__contentIcon">
-                    <img src="~/Content/images/cal.png" alt="" />
-                </div><!-- /.blockIcons__contentIcon -->
-                <div class="blockIcons__contentInfo">
-                    <div class="blockIcons__contentInfo-title">
-                        18 months
-                    </div><!-- /.blockIcons__contentInfo-title -->
-                    <div class="blockIcons__contentInfo-text">
-                        is the time that the typical workplace fraud lasted before being detected.
-                    </div><!-- /.blockIcons__contentInfo-text -->
-                    <div class="blockIcons__contentInfo-signature">
-                        Chubb 2016
-                    </div><!-- /.blockIcons__contentInfo-signature -->
-                </div><!-- /.blockIcons__contentInfo -->
-            </div><!-- /.blockIcons__content -->
-        </div><!-- /.greySection__keyBlock -->
-        <div class="greySection__sexualBlock blockIcons">
-            <div class="blockIcons__header">
-                Sexual Harassment in the Workplace
-            </div><!-- /.blockIcons__header -->
-            <div class="blockIcons__content">
-                <div class="blockIcons__contentIcon">
-                    <img src="~/Content/images/people-icon.png" alt="" />
-                </div><!-- /.blockIcons__contentIcon -->
-                <div class="blockIcons__contentInfo">
-                    <div class="blockIcons__contentInfo-title">
-                        1 in 3
-                    </div><!-- /.blockIcons__contentInfo-title -->
-                    <div class="blockIcons__contentInfo-text">
-                        women in the US between the ages or 18-34, have been sexually harassed at work.
-                    </div><!-- /.blockIcons__contentInfo-text -->
-                    <div class="blockIcons__contentInfo-signature">
-                        Hearst Communications Survey, Feb 16, 2015
-                    </div><!-- /.blockIcons__contentInfo-signature -->
-                </div><!-- /.blockIcons__contentInfo -->
-            </div><!-- /.blockIcons__content -->
-        </div><!-- /.greySection__sexualBlock -->
-    </section><!-- /.greySection -->
-    <section class="contactSection">
-        <div class="container contactSection__container">
-            <div class="contactSection__title">
-                Start building an ethical workplace today
-            </div><!-- /.contactSection__title -->
-            <div class="contactSection__form learnMore-form">
-                <div class="learnMore-form__title">
-                    Learn more
-                </div><!-- /.learnMore-form__title -->
-                <div class="learnMore-form__content">
-                    <label class="learnMore-form__content-input">
-                        First name:
-                        <input type="text" />
-                    </label>
-                    <label class="learnMore-form__content-input ">
-                        Last name:
-                        <input type="text" />
-                    </label>
-                    <label class="learnMore-form__content-input">
-                        Company name:
-                        <input type="text" />
-                    </label>
-                    <label class="learnMore-form__content-input">
-                        Phone:
-                        <input type="text" />
-                    </label>
-                    <label class="learnMore-form__content-input">
-                        E-mail:
-                        <input type="email" />
-                    </label>
-                </div><!-- /.learnMore-form__content -->
-                <a href="#" class="learnMore-form__btn btn">Request demo</a>
-            </div><!-- /.contactSection__form -->
-        </div><!-- /.container -->
-    </section><!-- /.contactSection -->
-
-</main><!-- /.main -->
-<!-- ------------------  Footer ---------------- -->
-<footer class="footerBg">
-    <div class="container">
-        <div class="footer">
-            <a href="#" class="footer__logo">
-                <img src="~/Content/images/0-main-logo.png" alt="" />
-            </a><!-- /.footer__logo -->
-            <div class="footer__copyright">
-                Copyright © 2018 Employee Confidential LLC. All Rights Reserved
-            </div><!-- /.footer__copyright -->
-            <div class="footer__navLinks">
-                <nav class="footer__navLinks-nav">
-                    <li class="footer__navLinks-li">
-                        <a href="#" class="footer__navLinks-a">
-                            Privacy Policy
+        <div class="main-headerBg">
+            <div class="container">
+                <div class="main-header">
+                    <a href="/" class="main-headerLogo">
+                        <div class="main-headerLogo__img">
+                            <img src="~/Content/images/0-main-logo.png" alt="" />
+                        </div><!-- /.main-headerLogo__img -->
+                        <div class="main-headerLogo__text">
+                            Reduce risk. Create trust.
+                        </div><!-- /.main-headerLogo__text -->
+                    </a><!-- /.main-headerLogo -->
+                    <div class="main-headerMenu-mobile">
+                        <a href="/" class="main-headerLogo-mobile">
+                            <div class="main-headerLogo__img-mobile">
+                                <img src="~/Content/images/0-main-logo.png" alt="" />
+                            </div><!-- /.main-headerLogo__img -->
+                            <div class="main-headerLogo__text-mobile">
+                                Reduce risk. Create trust.
+                            </div><!-- /.main-headerLogo__text -->
+                        </a><!-- /.main-headerLogo -->
+                        <a href="#" class="main-headerLogo-mobile-burgerBtn">
+                            <img src="~/Content/images/svg-icons/burger.svg" alt="" />
                         </a>
-                    </li><!-- /.footer__navLinks-li -->
-                    <li class="footer__navLinks-li">
-                        <a href="#" class="footer__navLinks-a">
-                            Terms of Use
-                        </a>
-                    </li><!-- /.footer__navLinks-li -->
-                </nav><!-- /.footer__navLinks-nav -->
-            </div><!-- /.footer__navLinks -->
-        </div><!-- /.footer -->
-    </div><!-- /.container -->
-</footer><!-- /.footer -->
+                    </div><!-- /.main-headerMenu-mobile -->
+                    <div class="main-headerMenu">
+                        <nav class="main-headerMenu__nav">
+                            <li class="main-headerMenu__li">
+                                <a href="/#benefitsSection" class="main-headerMenu__a">
+                                    Benefits
+                                </a>
+                            </li><!-- /.main-headerMenu__li -->
+                            <li class="main-headerMenu__li">
+                                <a href="/#gridSection" class="main-headerMenu__a">
+                                    Incident Reporting
+                                </a>
+                            </li><!-- /.main-headerMenu__li -->
+                            <li class="main-headerMenu__li">
+                                <a href="/#menegementSection" class="main-headerMenu__a">
+                                    Case Management
+                                </a>
+                            </li><!-- /.main-headerMenu__li -->
+                            <li class="main-headerMenu__li">
+                                <a href="@Url.Action("About", "Home")" data-scroll-to="" class="main-headerMenu__a">
+                                    About
+                                </a>
+                            </li><!-- /.main-headerMenu__li -->
+                            <li class="main-headerMenu__li">
+                                <a href="/#contactSection" class="main-headerMenu__a">
+                                    Contact
+                                </a>
+                            </li><!-- /.main-headerMenu__li -->
+                        </nav><!-- /.main-headerMenu__nav -->
+                    </div><!-- /.main-headerMenu -->
+                </div><!-- /.main-header -->
+            </div><!-- /.container -->
+        </div><!-- /.main-headerBg -->
+    </header><!-- /.header -->
+    <main class="main">
+        <section class="firstSection">
+            <div class="container">
+                <div class="firstSection__contentBox">
+                    <h3 class="firstSection__headText">
+                        Build a Safe, Compliant and Ethical Workplace
+                    </h3><!-- /.firstSection__headText -->
+                    <p class="firstSection__text">
+                        Employee Confidential is an online and mobile platform
+                        to provide employees, customers, suppliers, and contractors
+                        a Confidential and Anonymous system to report incidents.
+                    </p><!-- /.firstSection__text -->
+                    <p class="firstSection__text">
+                        It includes a Case Management solution to quickly and
+                        effectively investigate and resolve cases.
+                    </p><!-- /.firstSection__text -->
+                    <a href="#contactSection" class="firstSection__btn btn">
+                        Learn more
+                    </a>
+                </div><!-- /.firstSection__contentBox -->
+            </div><!-- /.container -->
+        </section><!-- /.firstSection -->
+        <section class="benefitsSection" id="benefitsSection">
+            <div class="container container-wide benefitsSection-grid">
+                <div class="benefitsSection-head">
+                    <h3 class="benefitsSection-head__title">Benefits</h3><!-- /.benefitsSection-head__title -->
+                    <p class="benefitsSection-head__text">
+                        of an Incident Reporting and Case Management System
+                    </p><!-- /.benefitsSection-head__text -->
+                </div><!-- /.benefitsSection-head -->
+                <div class="benefitsSection-content">
+                    <div class="benefitsSection-contentBox">
+                        <div class="benefitsSection-contentBox__img">
+                            <img src="~/Content/images/svg-icons/alarm.svg" alt="" />
+                        </div><!-- /.benefitsSection-contentBox__img -->
+                        <div class="benefitsSection-contentBox__title">
+                            Early Warning
+                        </div><!-- /.benefitsSection-contentBox__title -->
+                        <div class="benefitsSection-contentBox__text">
+                            The best time to deal with a problem is now. Help your organization address problems before they get worse.
+                        </div><!-- /.benefitsSection-contentBox__text -->
+                    </div><!-- /.benefitsSection-contentBox -->
+
+                    <div class="benefitsSection-contentBox">
+                        <div class="benefitsSection-contentBox__img">
+                            <img src="~/Content/images/svg-icons/trust.svg" alt="" />
+                        </div><!-- /.benefitsSection-contentBox__img -->
+                        <div class="benefitsSection-contentBox__title">
+                            Increase Trust
+                        </div><!-- /.benefitsSection-contentBox__title -->
+                        <div class="benefitsSection-contentBox__text">
+                            Increase trust in the entire process. Reduce the fear of retaliation through prompt handling of allegations, keeping the reporter informed and always being transparent.
+                        </div><!-- /.benefitsSection-contentBox__text -->
+                    </div><!-- /.benefitsSection-contentBox -->
+
+                    <div class="benefitsSection-contentBox">
+                        <div class="benefitsSection-contentBox__img">
+                            <img src="~/Content/images/svg-icons/standarts.svg" alt="" />
+                        </div><!-- /.benefitsSection-contentBox__img -->
+                        <div class="benefitsSection-contentBox__title">
+                            Meet Standards
+                        </div><!-- /.benefitsSection-contentBox__title -->
+                        <div class="benefitsSection-contentBox__text">
+                            Enable an effective compliance program to meet regulatory standards set forth by the EEOC, OSHA, USFSG, OECD and FCPA.
+                        </div><!-- /.benefitsSection-contentBox__text -->
+                    </div><!-- /.benefitsSection-contentBox -->
+
+                    <div class="benefitsSection-contentBox">
+                        <div class="benefitsSection-contentBox__img">
+                            <img src="~/Content/images/svg-icons/risk.svg" alt="" />
+                        </div><!-- /.benefitsSection-contentBox__img -->
+                        <div class="benefitsSection-contentBox__title">
+                            Minimize Risk
+                        </div><!-- /.benefitsSection-contentBox__title -->
+                        <div class="benefitsSection-contentBox__text">
+                            Reduce financial and reputational losses. Identify potential risk areas for your business via standard reporting and robust analytics.
+                        </div><!-- /.benefitsSection-contentBox__text -->
+                    </div><!-- /.benefitsSection-contentBox -->
+
+                    <div class="benefitsSection-contentBox">
+                        <div class="benefitsSection-contentBox__img">
+                            <img src="~/Content/images/svg-icons/lawsuite.svg" alt="" />
+                        </div><!-- /.benefitsSection-contentBox__img -->
+                        <div class="benefitsSection-contentBox__title">
+                            Prevent Lawsuits
+                        </div><!-- /.benefitsSection-contentBox__title -->
+                        <div class="benefitsSection-contentBox__text">
+                            Help prevent legal action against your company to a wide range of exposures, including EEO, financial and safety.
+                        </div><!-- /.benefitsSection-contentBox__text -->
+                    </div><!-- /.benefitsSection-contentBox -->
+
+                </div><!-- /.benefitsSection-content -->
+            </div><!-- /.container -->
+        </section><!-- /.benefitsSection -->
+        <section class="textImageSection">
+            <img src="~/Content/images/word-cloud-text.png" alt="" />
+        </section><!-- /.textImageSection -->
+        <section class="slider-section">
+            <div class="owl-carousel ">
+                <div class="owl-carousel__slide owl-carousel__slide1">
+                    <div class="slider-content ">
+                        <div class="slider-content__title">
+                            What you don’t know <b>CAN</b> hurt you
+                        </div><!-- /.slider-content__title -->
+                        <div class="slider-content__text">
+                            <p class="slider-content__text-main">
+                                “Brookdale Senior Living sued over alleged negligence and sexual assault.”
+                            </p>
+                            <p class="slider-content__text-signature">
+                                <b>Cook Country Record.</b> September 24, 2015
+                            </p>
+                        </div><!-- /.slider-content__text -->
+                    </div><!-- /.slider-content -->
+                </div><!-- /.container -->
+                <div class="owl-carousel__slide owl-carousel__slide1">
+                    <div class="slider-content container">
+                        <div class="slider-content__title">
+                            What you don’t know <b>CAN</b> hurt you
+                        </div><!-- /.slider-content__title -->
+                        <div class="slider-content__text">
+                            <p class="slider-content__text-main">
+                                “US Department of Labor sues Jasper Roofing Contractors, CEO for<br> retaliation after employee cooperates with OSHA investigation.”
+                            </p>
+                        </div><!-- /.slider-content__text -->
+                    </div><!-- /.slider-content -->
+                </div><!-- /.container -->
+                <div class="owl-carousel__slide owl-carousel__slide1">
+                    <div class="slider-content container">
+                        <div class="slider-content__title">
+                            What you don’t know <b>CAN</b> hurt you
+                        </div><!-- /.slider-content__title -->
+                        <div class="slider-content__text">
+                            <p class="slider-content__text-main">
+                                “Employee theft is a crime that is costing U.S. small businesses $50 billion annually.”
+                            </p>
+                            <p class="slider-content__text-signature">
+                                <b>Statistic Brain</b>
+                            </p>
+                        </div><!-- /.slider-content__text -->
+                    </div><!-- /.slider-content -->
+                </div><!-- /.container -->
+                <div class="owl-carousel__slide owl-carousel__slide1">
+                    <div class="slider-content container">
+                        <div class="slider-content__title">
+                            What you don’t know <b>CAN</b> hurt you
+                        </div><!-- /.slider-content__title -->
+                        <div class="slider-content__text">
+                            <p class="slider-content__text-main">
+                                “KASCO, a butcher supplies and meat processing equipment company,<br> to pay $110,000 to settle an employment discrimination lawsuit.”
+                            </p>
+                            <p class="slider-content__text-signature">
+                                <b>U.S. Equal Employment Opportunity Commission (EEOC)</b>, March 22, 2017
+                            </p>
+                        </div><!-- /.slider-content__text -->
+                    </div><!-- /.slider-content -->
+                </div><!-- /.container -->
+                <div class="owl-carousel__slide owl-carousel__slide1">
+                    <div class="slider-content container">
+                        <div class="slider-content__title">
+                            What you don’t know <b>CAN</b> hurt you
+                        </div><!-- /.slider-content__title -->
+                        <div class="slider-content__text">
+                            <p class="slider-content__text-main">
+                                “Avon settles Justice Department charges of China bribery for $135 million.”
+                            </p><!-- /.slider-content__text-main -->
+                            <p class="slider-content__text-signature">
+                                <b>Fortune</b>, December 17, 2014
+                            </p><!-- /.slider-content__text-signature -->
+                        </div><!-- /.slider-content__text -->
+                    </div><!-- /.slider-content -->
+                </div><!-- /.container -->
+
+            </div>
+        </section><!-- /.slider-section -->
+        <section class="gridSection" id="gridSection">
+            <div class="gridSection__mobileText">
+                <div class="grid-title">
+                    Online & mobile reporting hotline
+                </div><!-- /.grid-title -->
+                <div class="grid-text">
+                    <p class="slider-content__text-main">
+                        A platform to submit confidential or anonymous reports via web, tablet or mobile.
+                    </p>
+                    <p class="slider-content__text-main">
+                        An option to report in one of 11 different languages.
+                    </p>
+                    <p class="slider-content__text-main">
+                        Intuitive reporting interface that takes as little as 10 minutes to complete.
+                    </p>
+                    <p class="slider-content__text-main">
+                        Supporting documents can be attached (e.g. videos, photos, screenshots & documents)
+                    </p>
+                    <p class="slider-content__text-main">
+                        Reporters can print and save a copy of the report.
+                    </p>
+                </div><!-- /.grid-text -->
+            </div><!-- /.gridSection__mobileText -->
+            <div class="gridSection__mobileImage"></div><!-- /.gridSection__mobileImage -->
+            <div class="gridSection__reportImage"></div><!-- /.gridSection__reportImage -->
+            <div class="gridSection__reportText">
+                <div class="grid-title">
+                    Reporter dashboard
+                </div><!-- /.grid-title -->
+                <div class="grid-text">
+                    <p>Check case status.</p>
+                    <p>Correspond confidentially or anonymously with case officers.</p>
+                    <p>Add additional evidence and information.</p>
+                </div><!-- /.grid-text -->
+            </div><!-- /.gridSection__reportText -->
+        </section><!-- /.mobileReportingSection -->
+        <section class="menegementSection" id="menegementSection">
+            <div class="menegementSection__textBlock">
+                <div class="grid-title">
+                    Case management
+                </div><!-- /.grid-title -->
+                <div class="grid-text">
+                    <p>
+                        Reviewing Case Status in Dashboard
+                    </p>
+                    <p>
+                        Messaging (to Reporters & Case Officers)
+                    </p>
+                    <p>
+                        Tracking Tasks
+                    </p>
+                    <p>
+                        Attaching Evidence
+                    </p>
+                    <p>
+                        Recording Investigation Notes
+                    </p>
+                    <p>Analyzing Route Causes of the incident and subject.</p>
+                    <p>Logging date & time stamps and timeline of investigation activity. </p>
+                </div><!-- /.grid-text -->
+            </div><!-- /.menegementSection__textBlock -->
+            <div class="menegementSection__imageBlock"></div><!-- /.menegementSection__imageBlock -->
+        </section><!-- /.menegementSection -->
+        <section class="routingSection">
+            <div class="routingSection__imageBlock"></div><!-- /.routingSection__imageBlock -->
+            <div class="routingSection__textBlock">
+                <div class="grid-title">
+                    Case management
+                </div><!-- /.grid-title -->
+                <div class="grid-text">
+                    <p>
+                        Assign Case Administrators according to the type of incident and location.
+                    </p>
+                    <p>
+                        Assign Case Owners.
+                    </p>
+                    <p>
+                        Flag whether an incident is a regulatory infringement.
+                    </p>
+                    <p>Link compliance and HR procedural policies to incident types for easy access during the investigation and resolution process. </p>
+                </div><!-- /.routingSection__textBlock -->
+        </section><!-- /.routingSection -->
+        <section class="analyticsSection">
+            <div class="analyticsSection__textBlock">
+                <div class="grid-title">
+                    Analytics
+                </div><!-- /.grid-title -->
+                <div class="grid-text">
+                    <p>A data-analytics section helps management get a snapshot of:</p>
+                    <div class="grid-text__list">
+                        <p>Stages of all cases</p>
+                        <p>Case activity by date</p>
+                        <p>Case activity by location</p>
+                        <p>Case activity by department</p>
+                        <p>Number of cases by reporter type</p>
+                        <p>Number of cases by incident type</p>
+                        <p>Root Cause Analysis</p>
+                    </div><!-- /.grid-text__list -->
+                </div><!-- /.grid-text -->
+            </div><!-- /.analyticsSection__textBlock -->
+            <div class="analyticsSection__imageBlock"></div><!-- /.analyticsSection__imageBlock -->
+        </section><!-- /.analyticsSection -->
+        <section class="employeeSection">
+            <div class="employeeSection__imageBlock"></div><!-- /.employeeSection__imageBlock -->
+            <div class="employeeSection__textBlock">
+                <div class="grid-title">
+                    Employee Awareness
+                </div><!-- /.grid-title -->
+                <div class="grid-text">
+                    <p>
+                        Every client receives awareness materials tailored for their industry and target market.
+                    </p>
+                    <div class="grid-text__list">
+                        <p>Downloadable posters for placement in common areas</p>
+                        <p>Downloadable wallet-size cards.</p>
+                        <p>Website & email buttons.</p>
+                    </div><!-- /.grid-text__list -->
+                </div><!-- /.grid-text -->
+            </div><!-- /.employeeSection__textBlock -->
+        </section><!-- /.employeeSection -->
+        <section class="wideSection">
+            <div class="wideSection__conteiner container">
+                <div class="wideSection__mainText">
+                    “Having litigated and investigated whistleblower, EEO and fraud claims,<br>
+                    I can tell you the best time to deal with a problem<br>
+                    is as soon as it is reported!”<br>
+                </div><!-- /.wideSection__mainText -->
+                <div class="wideSection__signatureText">
+                    <b>Don Phin</b>, JD. Board of Advisor
+                </div><!-- /.wideSection__signatureText -->
+            </div><!-- /.wideSection__conteiner -->
+        </section><!-- /.wideSection -->
+        <section class="greySection">
+            <div class="greySection__keyBlock blockIcons">
+                <div class="blockIcons__header">
+                    Early Detection is Key
+                </div><!-- /.blockIcons__header -->
+                <div class="blockIcons__content">
+                    <div class="blockIcons__contentIcon">
+                        <img src="~/Content/images/svg-icons/calendar.svg" alt="" />
+                    </div><!-- /.blockIcons__contentIcon -->
+                    <div class="blockIcons__contentInfo">
+                        <div class="blockIcons__contentInfo-title">
+                            18 months
+                        </div><!-- /.blockIcons__contentInfo-title -->
+                        <div class="blockIcons__contentInfo-text">
+                            is the time that the typical workplace fraud lasted before being detected.
+                        </div><!-- /.blockIcons__contentInfo-text -->
+                        <div class="blockIcons__contentInfo-signature">
+                            Chubb 2016
+                        </div><!-- /.blockIcons__contentInfo-signature -->
+                    </div><!-- /.blockIcons__contentInfo -->
+                </div><!-- /.blockIcons__content -->
+            </div><!-- /.greySection__keyBlock -->
+            <div class="greySection__sexualBlock blockIcons">
+                <div class="blockIcons__header">
+                    Sexual Harassment in the Workplace
+                </div><!-- /.blockIcons__header -->
+                <div class="blockIcons__content">
+                    <div class="blockIcons__contentIcon">
+                        <img src="~/Content/images/svg-icons/people.svg" alt="" />
+                    </div><!-- /.blockIcons__contentIcon -->
+                    <div class="blockIcons__contentInfo">
+                        <div class="blockIcons__contentInfo-title">
+                            1 in 3
+                        </div><!-- /.blockIcons__contentInfo-title -->
+                        <div class="blockIcons__contentInfo-text">
+                            women in the US between the ages of 18-34, have been sexually harassed at work.
+                        </div><!-- /.blockIcons__contentInfo-text -->
+                        <div class="blockIcons__contentInfo-signature">
+                            Hearst Communications Survey, Feb 16, 2015
+                        </div><!-- /.blockIcons__contentInfo-signature -->
+                    </div><!-- /.blockIcons__contentInfo -->
+                </div><!-- /.blockIcons__content -->
+            </div><!-- /.greySection__sexualBlock -->
+        </section><!-- /.greySection -->
+        <section class="contactSection" id="contactSection">
+            <div class="container contactSection__container">
+                <div class="contactSection__title">
+                    Start building an ethical workplace today
+                </div><!-- /.contactSection__title -->
+                <div class="contactSection__form learnMore-form">
+                    <div class="learnMore-form__title">
+                        Learn more
+                    </div><!-- /.learnMore-form__title -->
+                    <div class="learnMore-form__content">
+                        <label class="learnMore-form__content-input">
+                            First name:
+                            <input type="text" />
+                        </label>
+                        <label class="learnMore-form__content-input ">
+                            Last name:
+                            <input type="text" />
+                        </label>
+                        <label class="learnMore-form__content-input">
+                            Company name:
+                            <input type="text" />
+                        </label>
+                        <label class="learnMore-form__content-input">
+                            Phone:
+                            <input type="text" />
+                        </label>
+                        <label class="learnMore-form__content-input">
+                            E-mail:
+                            <input type="email" />
+                        </label>
+                    </div><!-- /.learnMore-form__content -->
+                    <a href="#" class="learnMore-form__btn btn">Request demo</a>
+                </div><!-- /.contactSection__form -->
+            </div><!-- /.container -->
+        </section><!-- /.contactSection -->
+
+    </main><!-- /.main -->
+    <!-- ------------------  Footer ---------------- -->
+    <footer class="footerBg">
+        <div class="container">
+            <div class="footer">
+                <a href="#" class="footer__logo">
+                    <img src="~/Content/images/0-main-logo.png" alt="" />
+                </a><!-- /.footer__logo -->
+                <div class="footer__copyright">
+                    Copyright © 2018 Employee Confidential LLC. All Rights Reserved
+                </div><!-- /.footer__copyright -->
+                <div class="footer__navLinks">
+                    <nav class="footer__navLinks-nav">
+                        <li class="footer__navLinks-li">
+                            <a href="#" class="footer__navLinks-a">
+                                Privacy Policy
+                            </a>
+                        </li><!-- /.footer__navLinks-li -->
+                        <li class="footer__navLinks-li">
+                            <a href="#" class="footer__navLinks-a">
+                                Terms of Use
+                            </a>
+                        </li><!-- /.footer__navLinks-li -->
+                    </nav><!-- /.footer__navLinks-nav -->
+                </div><!-- /.footer__navLinks -->
+            </div><!-- /.footer -->
+        </div><!-- /.container -->
+    </footer><!-- /.footer -->
+
+</div><!-- /.general-container -->

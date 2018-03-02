@@ -3,6 +3,7 @@
 /*=====================================================*/
 
 
+
 .header,
 .main,
 .footer
@@ -13,43 +14,36 @@
 .main
 	grid-area: main
 	overflow: hidden
-	//min-height: calc( 100vh - 150px )
 .footer
 	grid-area: footer
 
-// top-header
+.login .main
+	background-color: $grey-footerColor
+	//min-height: calc( 100vh - 36px - 280px ) // 36px - very top header and 280px footer
+
+.general-container
+	font-family: $regular-font
+	display: grid
+	grid-template-columns: 1fr
+	grid-template-areas: "header" "main" "footer"
+
 .top-headerBg
 	background-color: $mainAccent-color
+
 .top-header
 	display: grid
-	grid-template-columns: repeat( 2, 1fr )
-	height: 36px
-	overflow: hidden
 	&__campusLink
-		justify-self: start
 		color: $lightfont-color
 		text-decoration: none
 		font-family: $regular-font
-		font-size: 14px
-		padding: 10px 0
 		position: relative
 		&-text
 			position: relative
-			padding-right: 22px
-		&-text i
-			font-size: 14px
-			transform: rotate(45deg)
-			display: block
-			position: absolute
-			right: 0
-			top: 1px
 
 	&__loginBar
-		justify-self: end
 	&__loginBar-nav
 		list-style: none
 		display: grid
-		grid-template-columns: repeat( 3, max-content )
 	&__loginBar-li
 		position: relative
 		&:after
@@ -70,68 +64,56 @@
 		color: $lightfont-color
 		text-decoration: none
 		font-family: $regular-font
-		font-size: 12px
-		padding: 12px 20px
 		position: relative
 		display: block
-		height: 36px
 
+.main-headerBg
+	border-bottom: 1px solid #ccc
+.main-headerBg.fixed-header
+	position: fixed
+	top: 0
+	left: 0
+	right: 0
+	z-index: 999
+	background-color: #fff
 //    main-header
 .main-headerBg
 	background-color: $lightBg-color
 .main-header
 	display: grid
-	grid-template-columns: minmax(max-content, 300px) 1fr
+
 
 .main-headerLogo
 	text-decoration: none
-	justify-self: start
+
 	&__img
 		position: relative
-		padding-top: 20px
-		height: 58px
-		& img
 	&__text
 		color: $mainAccentLighter-color
 		text-transform: uppercase
-		font-size: 10px
 		font-family: $bold-font
 		text-decoration: none
-		padding-bottom: 5px
-		padding-top: 2px
-		height: 18px
-		margin-left: 44px
 
 .main-headerMenu
-	justify-self: end
 	display: grid
-	overflow: hidden
 	&__nav
 		list-style: none
 		display: grid
-		grid-auto-flow: column
-		align-content: center
 
 	&__li
 		text-transform: none
-		//margin: 0 -1px
-	&__li:last-child .main-headerMenu__a
-		padding-right: 0
+
 	&__a
 		text-transform: uppercase
 		text-decoration: none
 		font-family: $heavy-font
-		font-size: 14px
 		color: $mainAccent-color
-		padding: 30px 15px
 	&__a:hover,
 	&__a:focus,
 	&__a:active
-		background-color: darken($lightBg-color, 10%)
+		
 
-// -------------- Main ---------------
 
-// firstSection
 .firstSection
 	background-image: url('../images/first-section-BG.jpg')
 	background-repeat: no-repeat
@@ -142,21 +124,10 @@
 	display: grid
 .firstSection__headText
 	font-family: $heavy-font
-	font-size: 40px
 	color: $mainAccent-color
-	margin: 160px 0 30px 0
-	justify-self: start
 .firstSection__text
 	font-family: $regular-font
-	font-size: 20px
 	color: $grey-color
-	margin-bottom: 50px
-	justify-self: start
-	width: 540px
-	line-height: 1.6
-.firstSection__btn
-	margin-bottom: 100px
-	justify-self: start
 
 // Benefits
 .benefitsSection
@@ -167,48 +138,44 @@
 	text-align: center
 	&__title
 		font-family: $light-font
-		font-size: 36px
 		color: $grey-color
 		text-transform: uppercase
 		font-weight: normal
-		margin: 50px 0 20px
 	&__text
 		font-family: $light-font
-		font-size: 20px
 		color: $grey-color
 		font-weight: normal
-		margin-bottom: 60px
 
 .benefitsSection-content
 	display: grid
-	grid-template-columns: repeat(5, 1fr)
-	margin-bottom: 60px
 .benefitsSection-contentBox
 	text-align: center
 	display: grid
-	grid-template-rows: 100px minmax( 35px, max-content) auto
-	padding: 0px 10px
 	&__img
 		align-self: center
+		text-align: center
+		margin: auto
+		& img
+			display: block
+			height: 80px
+			width: 120px
 	&__title
 		color: $mainAccentLighter-color
 		font-family: $bold-font
-		font-size: 18px
 		align-self: center
 	&__text
 		font-family: $regular-font
-		font-size: 16px
 		color: $accent-color
-
 
 // TextImageSection
 .textImageSection
 	height: 220px
-	width: 100%
-	background-image: url('../images/word-cloud.jpg')
+	background-image: url('../images/word-cloud-no-text.jpg')
 	background-repeat: no-repeat
 	background-position: center
 	background-size: cover
+	position: relative
+
 
 //slider-section
 .slider-section
@@ -218,64 +185,51 @@
 
 .owl-carousel__slide
 	display: grid
-	grid-template-rows: 380px
 	position: relative
 	z-index: 1
 .slider-content
 	align-self: center
 	text-align: center
-	width: 50%
 	margin: 0 auto
 	z-index: 1
 	&__title
 		font-family: $light-font
-		font-size: 36px
 		color: $grey-color
-		margin-bottom: 40px
 	&__text
-		font-family: $light-font
-		font-size: 24px
+		font-family: $lightItalic-font
 		color: $grey-color
+	&__text-signature
+		& b
+			font-family: $semiboldItalic-font
 
-// .owl-nav
-// 	position: absolute
-// 	top: 0
-// 	bottom: 0
-// 	left: 0
-// 	right: 0
-// 	z-index: -1
 .owl-prev,
 .owl-next
 	position: absolute
 	width: 30px
 	height: 30px
-	top: calc( 50% - 30px/2 )
 	overflow: hidden
 	text-indent: -999px
-	background-image: url('../images/sliderNav-next.png')
+	background-color: #fff
+	background-image: url('../images/svg-icons/slider-arrow.svg')
+	background-size: 8px
+	background-position: center
 	background-repeat: no-repeat
 	border-radius: 50%
 	z-index: 2
+	
 .owl-prev
-	left: 5%
-	transform: rotate(180deg);
 .owl-next
-	right: 5%
+	transform: rotate( 180deg )
 
 // gridSection
 
 .gridSection
 	display: grid
-	grid-template-columns: 1fr 1fr
-	grid-template-rows: repeat(2, minmax(570px, max-content))
 	
 .gridSection__mobileText
 	align-self: center
-	padding-left: 10%
-	padding-right: 3%
 .gridSection__reportText
 	background-color: $mainBg-color
-	padding: 15% 5% 10% 15%
 
 .gridSection__mobileImage
 	background-image: url('../images/mobile-img.jpg')
@@ -290,80 +244,67 @@
 
 .grid-title
 	font-family: $light-font
-	font-size: 36px
 	color: $grey-color
-	margin-bottom: 30px
 .grid-text
-	font-size: 20px
 	color: $accent-color
-	padding-left: 5%
-	& p
-		margin-bottom: 20px
 
 // menegementSection
 
 .menegementSection
 	overflow: hidden
 	display: grid
-	grid-template-columns: 45% 55%
-	grid-template-rows:  minmax(570px, max-content)
 .menegementSection__textBlock
 	align-self: center
-	padding-left: 15%
-	padding-right: 3%
 
 .menegementSection__imageBlock
 	background-image: url('../images/dashboard-img.png')
 	background-repeat: no-repeat
-	background-position: 0 40px
-	background-size: contain
+
 
 // routingSection
 
 .routingSection
-	@extend .menegementSection
+	overflow: hidden
+	display: grid
 	background-color: $mainBg-color
-	grid-template-columns: 55% 45%
 	&__imageBlock
-		@extend .menegementSection__imageBlock
+		background-repeat: no-repeat
+		background-size: contain
 		background-image: url('../images/settings-img.png')
 	&__textBlock
-		@extend .menegementSection__textBlock
-		padding-left: 10%
+		align-self: center
 
 // analyticsSection
 
 .analyticsSection
-	@extend .menegementSection
+	overflow: hidden
+	display: grid
 	&__textBlock
-		@extend .menegementSection__textBlock
-	&__imageBlock
-		@extend .menegementSection__imageBlock
-		background-image: url('../images/charts-img.jpg')
+		align-self: center
 
-.grid-text__list
-	padding-left: 5%
-	margin-top: 30px
+	&__imageBlock
+		background-repeat: no-repeat
+		background-size: contain
+		background-image: url('../images/charts-img.jpg')
 
 // employeeSection
 
 .employeeSection
-	@extend .gridSection
-	grid-template-rows: minmax(570px, max-content)
+	display: grid
 	background-color: $mainBg-color
 	
 .employeeSection__imageBlock
-	@extend .gridSection__reportImage
+	background-repeat: no-repeat
+	background-size: cover
 	background-image: url('../images/wall-siteview-img.jpg')
 
 .employeeSection__textBlock
-	@extend .menegementSection__textBlock
+	align-self: center
 
 // wideSection
 
 .wideSection
 	display: grid
-	grid-template-rows: 470px
 	position: relative
 
 .wideSection__conteiner
@@ -372,102 +313,77 @@
 
 .wideSection__mainText
 	font-family: $lightItalic-font
-	font-size: 24px
 	color: $grey-color
-	margin-bottom: 40px
 
 .wideSection__signatureText
-	@extend .wideSection__mainText
-	font-size: 16px
+	font-family: $lightItalic-font
+	color: $grey-color
 
 // greySection
 
 .greySection
 	display: grid
-	grid-template-columns: 1fr 1fr
-	grid-template-rows: 310px
 	background-color: $mainBgLighter-color
 
 .blockIcons
 	align-self: center
-	padding: 0 20px
-
-.greySection__keyBlock
-	justify-self: end
 
 .blockIcons__header
 	text-align: center
-	margin-bottom: 30px
-	font-size: 24px
 	color: $accent-color
 
 .blockIcons__content
 	display: grid
-	grid-template-columns: 110px 285px
+
+.blockIcons__contentIcon img
+	display: block
+	margin: auto
+	width: 100%
+	height: auto
 
 .blockIcons__contentInfo
 	&-title
 		color: $orange-color
-		font-size: 30px
-		margin-bottom: 5px
 	&-text
-		font-size: 18px
 		color: $accent-color
-		margin-bottom: 20px
 	&-signature
-		font-size: 14px
 		color: #969898
 
-.greySection__sexualBlock
-	justify-self: start
 
 // contactSection
 
 .contactSection
 	background-color: $mainBgDark-color
 	display: grid
-	height: 730px
 	&__title
 		font-family: $light-font
-		font-size: 30px
 		color: $lightfont-color
-		margin-bottom: 50px
 
 .learnMore-form
 	display: grid
 	background-color: $accentLighter-color
-	width: 420px
 	margin: 0 auto
 	&__title
 		background-color: $accent-color
 		color: $lightfont-color
 		text-align: center
 		font-family: $bold-font
-		font-size: 24px
 		text-transform: uppercase
-		padding-top: 10px
-		padding-bottom: 15px
 	&__content
 		display: grid
 		background-color: $mainBg-color
-		margin: 20px 
 
 .learnMore-form__content-input
 	display: block
-	padding: 10px 10px 0 10px
-	font-size: 14px
 	font-family: $lato-Semibold-font
 	color: #afbbbc
-	border: 2px solid transparent
-	border-bottom: 2px solid #ced7d8
+	background-color: #eff2f2
+
 
 .learnMore-form__content-input input
 	font-family: $lato-Semibold-font
 	color: $accent-color
-	font-size: 24px
-	padding: 2px 0
-	margin-top: 5px
-	background-color: $mainBg-color
+	background-color: #eff2f2
 
 input
 	border: none
@@ -479,51 +395,212 @@ input
 		outline: none
 
 .learnMore-form__content-input.active
-	border: 2px solid $mainAccentLighter-color
 	background-color: $lightBg-color
 .learnMore-form__content-input.active input
 	background-color: $lightBg-color
 
-
 .learnMore-form__btn
 	justify-self: center
-	margin-bottom: 20px
-
-
-
-
-
-
-
-
 
 
 
 // -------------- Footer ---------------
 
 .footerBg
-	background-color: $lightBg-color
+	background-color: $grey-footerColor
 .footer
-	height: 280px
 	display: grid
-	grid-template-columns: max-content auto max-content
 	align-items: center
+	text-align: center
 	&__logo
 	&__copyright
-		justify-self: center
-		color: $accent-color
-		font-family: $regular-font
 		font-size: 12px
 
 	&__navLinks
 		&-nav
 			list-style: none
 			display: grid
-			grid-auto-flow: column
 		&-li
 		&-a
 			text-decoration: none
 			font-family: $regular-font
-			font-size: 12px
 			color: $accent-color
-			padding: 10px 2px
+
+.footer__copyright
+	color: $grey-footerTextColor
+
+// -----------------------------------
+// ------------ ABOUT ----------------
+// -----------------------------------
+
+.leaderShipSection
+.leaderShipSection__title
+	font-family: $light-font
+	color: $grey-color
+	font-weight: normal
+	text-transform: uppercase
+	text-align: center
+
+.leaderShipSection__container
+	display: grid
+
+.leaderShipBlock
+	text-align: center
+	justify-self: center
+
+.leaderShip__name
+	font-family: $bold-font
+	color: $mainAccentLighter-color
+.leaderShip__position
+	font-family: $light-font
+	color: $grey-color
+
+
+
+// -------------------
+.leaderShipSection.active .leaderShipSection__title,
+.leaderShipSection.active .leaderShipBlock
+	opacity: 0.5
+.leaderShipSection.active .leaderShipBlock.active 
+	opacity: initial
+
+.leaderShipBlock-infoContainerBg
+	display: none
+	margin-top: 30px
+	z-index: 1
+.leaderShipBlock-infoContainerBg
+	background-color: $mainBgLighter-color
+	position: absolute
+	left: 0
+	right: 0
+	//height: 400px
+	text-align: left
+.leaderShipBlock-infoContainerBg *
+	//transition: all .5s ease
+
+.leaderShipBlock-infoContainer
+	padding: 0 15px
+	margin: auto
+
+.leaderShipBlock-infoContainer__content
+	position: relative
+
+.leaderShipBlock-infoContainer__contentName
+	font-family: $bold-font
+	color: $mainAccentLighter-color
+.leaderShipBlock-infoContainer__contentPosition
+	font-family: $regular-font
+	color: $grey-color
+.leaderShipBlock-infoContainer__contentText
+	font-family: $light-font
+	color: $grey-color
+	& p
+.leaderShipBlock-infoContainer__close
+	position: absolute
+	width: 30px
+	height: 30px
+	display: block
+	& img
+		width: 100%
+		height: auto
+		opacity: 0.5
+
+
+
+
+
+// -----------------------------------
+// ------------ Log In ---------------
+// -----------------------------------
+
+.top-header__backLink
+	font-family: $regular-font
+	color: $lightfont-color
+	position: relative
+	display: block
+	justify-self: start
+	text-decoration: none
+.top-header__backLink-text
+.top-header__backLink img
+	display: block
+	position: absolute
+	width: 11px
+	height: 11px
+	left: 0
+	top: 12px
+
+.loginSection
+.loginSection__titleBg
+.loginSection__contentBg
+	background-color: $grey-bgColor
+
+.loginSection__title
+	font-family: $light-font
+	color: $grey-color
+	text-transform: uppercase
+	position: relative
+	&:before
+		content: ''
+		position: absolute
+		width: 36px
+		height: 36px
+		background-image: url('../images/logo-mini.png')
+		background-repeat: no-repeat
+
+.loginForm
+.loginForm__input		
+	color: #afbbbc
+	font-family: $lato-Semibold-font
+	display: block
+	background-color: #eff2f2
+.loginForm__input	input
+	display: block
+	background-color: #eff2f2
+
+.loginFormLinks
+	display: grid
+	grid-template-columns: repeat(2, 1fr)
+.loginFormLinks__restoreLink
+	font-family: $regular-font
+	align-self: center
+.loginFormLinks__loginBtn
+	justify-self: end
+
+
+// -----------------------------------
+// ----- Check report status ---------
+// -----------------------------------
+
+.loginContentBlock
+.loginContentBlock__textP
+	color: $grey-color
+	font-family: $light-font
+.loginContentBlock__link
+	font-family: $lato-Semibold-font
+	color: $mainAccentLighter-color
+	display: block
+
+// -----------------------------------
+// ------------- Report --------------
+// -----------------------------------
+
+.loginTextForm
+.loginTextForm__textarea
+	width: 100%
+	overflow: auto
+	text-align: start
+	resize: none
+	outline: none
+	border: none
+	display: grid
+textarea::-webkit-input-placeholder
+	color: #afbbbc
+	font-family: $lato-Semibold-font
+
+.loginTextFormLinks
+	display: grid
+.loginTextFormLinks__startBtn
+	justify-self: end
+
+
+

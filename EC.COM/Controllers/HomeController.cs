@@ -14,5 +14,25 @@ namespace EC.COM.Controllers
 
             return View();
         }
+
+        public ActionResult About()
+        {
+            return View();
+        }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        public ActionResult Report()
+        {
+            return View();
+        }
+
+        public ActionResult CheckStatus()
+        {
+            return View();
+        }
     }
 }

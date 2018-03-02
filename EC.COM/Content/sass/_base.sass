@@ -15,6 +15,13 @@ body
 	min-width: 320px
 	position: relative
 	opacity: 1
+
+.container
+	max-width: 100%
+	padding: 0 20px
+	margin: auto
+	position: relative
+
 p
 	margin: 0 0 10px 0
 .img-responsive
@@ -25,19 +32,6 @@ p
 .center
 	text-align: center
 
-.general-container
-	font-family: $regular-font
-	display: grid
-	grid-template-columns: 1fr
-	grid-template-areas: "header" "main" "footer"
-	grid-template-rows: [header-row-start] minmax(50px, max-content) [header-row-end mainContent-row-start] minmax( calc( 100vh - 394px ), max-content ) [mainContent-row-end footer-row-start] minmax(30px, max-content) [footer-row-end]
-
-.container
-	max-width: 1200px
-	padding: 0 20px
-	margin: auto
-	position: relative
-
 .btn
 	display: block
 	outline: none
@@ -47,7 +41,7 @@ p
 	color: $lightfont-color
 	text-transform: uppercase
 	text-decoration: none
-	font-family: Open Sans
+	font-family: $heavy-font
 	font-weight: bold
 	padding: 12px 20px
 	transition: background-color 0.25s ease
