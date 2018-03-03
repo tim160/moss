@@ -4,7 +4,7 @@
         <div class="top-headerBg">
             <div class="container">
                 <div class="top-header">
-                    <a href="#" class="top-header__campusLink">
+                    <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]" class="top-header__campusLink">
                         <span class="top-header__campusLink-text">
                             Campus Confidential
                         </span>
@@ -13,17 +13,17 @@
                     <div class="top-header__loginBar">
                         <nav class="top-header__loginBar-nav">
                             <li class="top-header__loginBar-li">
-                                <a href="@Url.Action("Login", "Home")" class="top-header__loginBar-a">
+                                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Login" class="top-header__loginBar-a">
                                     Client Login
                                 </a>
                             </li><!-- /.top-header__loginBar-li -->
                             <li class="top-header__loginBar-li">
-                                <a href="@Url.Action("Report", "Home")" class="top-header__loginBar-a">
+                                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Report" class="top-header__loginBar-a">
                                     File a Report
                                 </a>
                             </li><!-- /.top-header__loginBar-li -->
                             <li class="top-header__loginBar-li">
-                                <a href="@Url.Action("CheckStatus", "Home")" class="top-header__loginBar-a">
+                                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/CheckStatus" class="top-header__loginBar-a">
                                     Check Report Status
                                 </a>
                             </li><!-- /.top-header__loginBar-li -->
@@ -451,26 +451,26 @@
                     <div class="learnMore-form__content">
                         <label class="learnMore-form__content-input">
                             First name:
-                            <input type="text" />
+                            <input type="text" name="fname" required />
                         </label>
                         <label class="learnMore-form__content-input ">
                             Last name:
-                            <input type="text" />
+                            <input type="text" name="lname" required />
                         </label>
                         <label class="learnMore-form__content-input">
                             Company name:
-                            <input type="text" />
+                            <input type="text" name="cname" required />
                         </label>
                         <label class="learnMore-form__content-input">
                             Phone:
-                            <input type="text" />
+                            <input type="text" name="phone" required />
                         </label>
                         <label class="learnMore-form__content-input">
                             E-mail:
-                            <input type="email" />
+                            <input type="email" name="email" required />
                         </label>
                     </div><!-- /.learnMore-form__content -->
-                    <a href="#" class="learnMore-form__btn btn">Request demo</a>
+                    <a href="#" id="submit" class="learnMore-form__btn btn">Request demo</a>
                 </div><!-- /.contactSection__form -->
             </div><!-- /.container -->
         </section><!-- /.contactSection -->
@@ -489,12 +489,12 @@
                 <div class="footer__navLinks">
                     <nav class="footer__navLinks-nav">
                         <li class="footer__navLinks-li">
-                            <a href="#" class="footer__navLinks-a">
+                            <a href="http://employeeconfidential.com/PrivacyStatement.html" class="footer__navLinks-a">
                                 Privacy Policy
                             </a>
                         </li><!-- /.footer__navLinks-li -->
                         <li class="footer__navLinks-li">
-                            <a href="#" class="footer__navLinks-a">
+                            <a href="http://employeeconfidential.com/TermsOfService.html" class="footer__navLinks-a">
                                 Terms of Use
                             </a>
                         </li><!-- /.footer__navLinks-li -->
@@ -505,3 +505,35 @@
     </footer><!-- /.footer -->
 
 </div><!-- /.general-container -->
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(function () {
+        $('#submit').on('click', function () {
+            var fname = $("input[name=fname]").val();
+            var lname = $("input[name=lname]").val();
+            var cname = $("input[name=cname]").val();
+            var phone = $("input[name=phone]").val();
+            var email = $("input[name=email]").val();
+                
+            $.ajax({
+                type: "GET",
+                url: "@Url.Action("GetRequest", "Home")",
+                data: {
+                fname: fname,
+                lname: lname,
+                cname: cname,
+                phone: phone,
+                email: email,
+                },
+                success: function (data) {
+                    alert(data);
+                    console.log(data);
+                },
+                error: function (error) {
+                    alert(error.responseText);
+                }
+            });
+        });
+    });
+</script>

@@ -7,7 +7,7 @@
         <div class="top-headerBg">
             <div class="container">
                 <div class="top-header">
-                    <a href="#" class="top-header__campusLink">
+                    <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]" class="top-header__campusLink">
                         <span class="top-header__campusLink-text">
                             Campus Confidential
                         </span>
@@ -16,17 +16,17 @@
                     <div class="top-header__loginBar">
                         <nav class="top-header__loginBar-nav">
                             <li class="top-header__loginBar-li">
-                                <a href="@Url.Action("Login", "Home")" class="top-header__loginBar-a">
+                                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Login" class="top-header__loginBar-a">
                                     Client Login
                                 </a>
                             </li><!-- /.top-header__loginBar-li -->
                             <li class="top-header__loginBar-li">
-                                <a href="@Url.Action("Report", "Home")" class="top-header__loginBar-a">
+                                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Report" class="top-header__loginBar-a">
                                     File a Report
                                 </a>
                             </li><!-- /.top-header__loginBar-li -->
                             <li class="top-header__loginBar-li">
-                                <a href="@Url.Action("CheckStatus", "Home")" class="top-header__loginBar-a">
+                                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/CheckStatus" class="top-header__loginBar-a">
                                     Check Report Status
                                 </a>
                             </li><!-- /.top-header__loginBar-li -->
@@ -107,7 +107,7 @@
                                 <img src="~/Content/images/about-Margo.jpg" alt="" />
                             </div><!-- /.leaderShip__img -->
                             <div class="leaderShip__name">
-                                Margot Sandenbergh-Bozmarov
+                                Margot Sandenbergh
                             </div><!-- /.leaderShip__name -->
                             <div class="leaderShip__position">
                                 CEO & Cofounder
@@ -313,7 +313,7 @@
                                     </div><!-- /.leaderShipBlock-infoContainer__contentPosition -->
                                     <div class="leaderShipBlock-infoContainer__contentText">
                                         <p>
-                                            Carol A. Moody is Entergy Nuclear’ Operations s vice president-Human Resources. She has more than 25 years of experience in all aspects of Human Resources across a variety of industries, including manufacturing, metals processing, utilities and nuclear power.
+                                            Carol A. Moody is Entergy Nuclear’ Operations Vice President-Human Resources. She has more than 25 years of experience in all aspects of Human Resources across a variety of industries, including manufacturing, metals processing, utilities and nuclear power.
                                         </p>
                                         <p>
                                             Carol has a Masters degree in Labor and Industrial Relations and a Bachelor's Degree in Economics from Michigan State University.
@@ -338,7 +338,7 @@
                             <div class="leaderShip__position">
                                 Advisory Board Member,<br>
                                 Product Development.<br>
-                                Human Resources<br>
+                                Workplace Investigation<br>
                             </div><!-- /.leaderShip__position -->
                         </a>
                         <div class="leaderShipBlock-infoContainerBg">
@@ -353,7 +353,7 @@
                                     <div class="leaderShipBlock-infoContainer__contentPosition">
                                         Advisory Board Member,<br>
                                         Biz Development.<br>
-                                        Specialty: Employment Practice Liability<br>
+                                        Specialty: Workplace Investigation<br>
                                     </div><!-- /.leaderShipBlock-infoContainer__contentPosition -->
                                     <div class="leaderShipBlock-infoContainer__contentText">
                                         <p>
@@ -651,12 +651,12 @@
                 <div class="footer__navLinks">
                     <nav class="footer__navLinks-nav">
                         <li class="footer__navLinks-li">
-                            <a href="#" class="footer__navLinks-a">
+                            <a href="http://employeeconfidential.com/PrivacyStatement.html" class="footer__navLinks-a">
                                 Privacy Policy
                             </a>
                         </li><!-- /.footer__navLinks-li -->
                         <li class="footer__navLinks-li">
-                            <a href="#" class="footer__navLinks-a">
+                            <a href="http://employeeconfidential.com/TermsOfService.html" class="footer__navLinks-a">
                                 Terms of Use
                             </a>
                         </li><!-- /.footer__navLinks-li -->

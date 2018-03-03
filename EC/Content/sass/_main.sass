@@ -1,0 +1,606 @@
+/*=====================================================*/
+/*==================  User style  =====================*/
+/*=====================================================*/
+
+
+
+.header,
+.main,
+.footer
+	position: relative
+
+.header
+	grid-area: header
+.main
+	grid-area: main
+	overflow: hidden
+.footer
+	grid-area: footer
+
+.login .main
+	background-color: $grey-footerColor
+	//min-height: calc( 100vh - 36px - 280px ) // 36px - very top header and 280px footer
+
+.general-container
+	font-family: $regular-font
+	display: grid
+	grid-template-columns: 1fr
+	grid-template-areas: "header" "main" "footer"
+
+.top-headerBg
+	background-color: $mainAccent-color
+
+.top-header
+	display: grid
+	&__campusLink
+		color: $lightfont-color
+		text-decoration: none
+		font-family: $regular-font
+		position: relative
+		&-text
+			position: relative
+
+	&__loginBar
+	&__loginBar-nav
+		list-style: none
+		display: grid
+	&__loginBar-li
+		position: relative
+		&:after
+			content: ''
+			display: block
+			width: 1px
+			background-color: #8cc9c3
+			top: 5px
+			bottom: 5px
+			right: 0
+			position: absolute
+			opacity: 0.4
+		&:last-child:after
+			display: none
+		&:last-child .top-header__loginBar-a
+				padding-right: 0
+	&__loginBar-a
+		color: $lightfont-color
+		text-decoration: none
+		font-family: $regular-font
+		position: relative
+		display: block
+
+.main-headerBg
+	border-bottom: 1px solid #ccc
+.main-headerBg.fixed-header
+	position: fixed
+	top: 0
+	left: 0
+	right: 0
+	z-index: 999
+	background-color: #fff
+//    main-header
+.main-headerBg
+	background-color: $lightBg-color
+.main-header
+	display: grid
+
+
+.main-headerLogo
+	text-decoration: none
+
+	&__img
+		position: relative
+	&__text
+		color: $mainAccentLighter-color
+		text-transform: uppercase
+		font-family: $bold-font
+		text-decoration: none
+
+.main-headerMenu
+	display: grid
+	&__nav
+		list-style: none
+		display: grid
+
+	&__li
+		text-transform: none
+
+	&__a
+		text-transform: uppercase
+		text-decoration: none
+		font-family: $heavy-font
+		color: $mainAccent-color
+	&__a:hover,
+	&__a:focus,
+	&__a:active
+		
+
+
+.firstSection
+	background-image: url('../images/first-section-BG.jpg')
+	background-repeat: no-repeat
+	background-position: center
+	background-size: cover
+
+.firstSection__contentBox
+	display: grid
+.firstSection__headText
+	font-family: $heavy-font
+	color: $mainAccent-color
+.firstSection__text
+	font-family: $regular-font
+	color: $grey-color
+
+// Benefits
+.benefitsSection
+	&-grid
+		display: grid
+.benefitsSection-head
+	justify-self: center
+	text-align: center
+	&__title
+		font-family: $light-font
+		color: $grey-color
+		text-transform: uppercase
+		font-weight: normal
+	&__text
+		font-family: $light-font
+		color: $grey-color
+		font-weight: normal
+
+.benefitsSection-content
+	display: grid
+.benefitsSection-contentBox
+	text-align: center
+	display: grid
+	&__img
+		align-self: center
+		text-align: center
+		margin: auto
+		& img
+			display: block
+			height: 80px
+			width: 120px
+	&__title
+		color: $mainAccentLighter-color
+		font-family: $bold-font
+		align-self: center
+	&__text
+		font-family: $regular-font
+		color: $accent-color
+
+// TextImageSection
+.textImageSection
+	height: 220px
+	background-image: url('../images/word-cloud-no-text.jpg')
+	background-repeat: no-repeat
+	background-position: center
+	background-size: cover
+	position: relative
+
+
+//slider-section
+.slider-section
+	position: relative
+.owl-carousel__slide
+	background-color: $mainBgLighter-color
+
+.owl-carousel__slide
+	display: grid
+	position: relative
+	z-index: 1
+.slider-content
+	align-self: center
+	text-align: center
+	margin: 0 auto
+	z-index: 1
+	&__title
+		font-family: $light-font
+		color: $grey-color
+	&__text
+		font-family: $lightItalic-font
+		color: $grey-color
+	&__text-signature
+		& b
+			font-family: $semiboldItalic-font
+
+.owl-prev,
+.owl-next
+	position: absolute
+	width: 30px
+	height: 30px
+	overflow: hidden
+	text-indent: -999px
+	background-color: #fff
+	background-image: url('../images/svg-icons/slider-arrow.svg')
+	background-size: 8px
+	background-position: center
+	background-repeat: no-repeat
+	border-radius: 50%
+	z-index: 2
+	
+.owl-prev
+.owl-next
+	transform: rotate( 180deg )
+
+// gridSection
+
+.gridSection
+	display: grid
+	
+.gridSection__mobileText
+	align-self: center
+.gridSection__reportText
+	background-color: $mainBg-color
+
+.gridSection__mobileImage
+	background-image: url('../images/mobile-img.jpg')
+	background-repeat: no-repeat
+	background-position: 0 0
+	background-size: cover
+.gridSection__reportImage
+	background-image: url('../images/pcView.jpg')
+	background-repeat: no-repeat
+	background-position: 100% 0
+	background-size: cover
+
+.grid-title
+	font-family: $light-font
+	color: $grey-color
+.grid-text
+	color: $accent-color
+
+// menegementSection
+
+.menegementSection
+	overflow: hidden
+	display: grid
+.menegementSection__textBlock
+	align-self: center
+
+.menegementSection__imageBlock
+	background-image: url('../images/dashboard-img.png')
+	background-repeat: no-repeat
+
+
+// routingSection
+
+.routingSection
+	overflow: hidden
+	display: grid
+	background-color: $mainBg-color
+	&__imageBlock
+		background-repeat: no-repeat
+		background-size: contain
+		background-image: url('../images/settings-img.png')
+	&__textBlock
+		align-self: center
+
+// analyticsSection
+
+.analyticsSection
+	overflow: hidden
+	display: grid
+	&__textBlock
+		align-self: center
+
+	&__imageBlock
+		background-repeat: no-repeat
+		background-size: contain
+		background-image: url('../images/charts-img.jpg')
+
+// employeeSection
+
+.employeeSection
+	display: grid
+	background-color: $mainBg-color
+	
+.employeeSection__imageBlock
+	background-repeat: no-repeat
+	background-size: cover
+	background-image: url('../images/wall-siteview-img.jpg')
+
+.employeeSection__textBlock
+	align-self: center
+
+// wideSection
+
+.wideSection
+	display: grid
+	position: relative
+
+.wideSection__conteiner
+	align-self: center
+	text-align: center
+
+.wideSection__mainText
+	font-family: $lightItalic-font
+	color: $grey-color
+
+.wideSection__signatureText
+	font-family: $lightItalic-font
+	color: $grey-color
+
+// greySection
+
+.greySection
+	display: grid
+	background-color: $mainBgLighter-color
+
+.blockIcons
+	align-self: center
+
+.blockIcons__header
+	text-align: center
+	color: $accent-color
+
+.blockIcons__content
+	display: grid
+
+.blockIcons__contentIcon img
+	display: block
+	margin: auto
+	width: 100%
+	height: auto
+
+.blockIcons__contentInfo
+	&-title
+		color: $orange-color
+	&-text
+		color: $accent-color
+	&-signature
+		color: #969898
+
+
+// contactSection
+
+.contactSection
+	background-color: $mainBgDark-color
+	display: grid
+	&__title
+		font-family: $light-font
+		color: $lightfont-color
+
+.learnMore-form
+	display: grid
+	background-color: $accentLighter-color
+	margin: 0 auto
+	&__title
+		background-color: $accent-color
+		color: $lightfont-color
+		text-align: center
+		font-family: $bold-font
+		text-transform: uppercase
+	&__content
+		display: grid
+		background-color: $mainBg-color
+
+.learnMore-form__content-input
+	display: block
+	font-family: $lato-Semibold-font
+	color: #afbbbc
+	background-color: #eff2f2
+
+
+.learnMore-form__content-input input
+	font-family: $lato-Semibold-font
+	color: $accent-color
+	background-color: #eff2f2
+
+input
+	border: none
+	display: block
+	width: 100%
+	&:active,
+	&:focus,
+	&:hover
+		outline: none
+
+.learnMore-form__content-input.active
+	background-color: $lightBg-color
+.learnMore-form__content-input.active input
+	background-color: $lightBg-color
+
+.learnMore-form__btn
+	justify-self: center
+
+
+
+// -------------- Footer ---------------
+
+.footerBg
+	background-color: $grey-footerColor
+.footer
+	display: grid
+	align-items: center
+	text-align: center
+	&__logo
+	&__copyright
+		font-size: 12px
+
+	&__navLinks
+		&-nav
+			list-style: none
+			display: grid
+		&-li
+		&-a
+			text-decoration: none
+			font-family: $regular-font
+			color: $accent-color
+
+.footer__copyright
+	color: $grey-footerTextColor
+
+// -----------------------------------
+// ------------ ABOUT ----------------
+// -----------------------------------
+
+.leaderShipSection
+.leaderShipSection__title
+	font-family: $light-font
+	color: $grey-color
+	font-weight: normal
+	text-transform: uppercase
+	text-align: center
+
+.leaderShipSection__container
+	display: grid
+
+.leaderShipBlock
+	text-align: center
+	justify-self: center
+
+.leaderShip__name
+	font-family: $bold-font
+	color: $mainAccentLighter-color
+.leaderShip__position
+	font-family: $light-font
+	color: $grey-color
+
+
+
+// -------------------
+.leaderShipSection.active .leaderShipSection__title,
+.leaderShipSection.active .leaderShipBlock
+	opacity: 0.5
+.leaderShipSection.active .leaderShipBlock.active 
+	opacity: initial
+
+.leaderShipBlock-infoContainerBg
+	display: none
+	margin-top: 30px
+	z-index: 1
+.leaderShipBlock-infoContainerBg
+	background-color: $mainBgLighter-color
+	position: absolute
+	left: 0
+	right: 0
+	//height: 400px
+	text-align: left
+.leaderShipBlock-infoContainerBg *
+	//transition: all .5s ease
+
+.leaderShipBlock-infoContainer
+	padding: 0 15px
+	margin: auto
+
+.leaderShipBlock-infoContainer__content
+	position: relative
+
+.leaderShipBlock-infoContainer__contentName
+	font-family: $bold-font
+	color: $mainAccentLighter-color
+.leaderShipBlock-infoContainer__contentPosition
+	font-family: $regular-font
+	color: $grey-color
+.leaderShipBlock-infoContainer__contentText
+	font-family: $light-font
+	color: $grey-color
+	& p
+.leaderShipBlock-infoContainer__close
+	position: absolute
+	width: 30px
+	height: 30px
+	display: block
+	& img
+		width: 100%
+		height: auto
+		opacity: 0.5
+
+
+
+
+
+// -----------------------------------
+// ------------ Log In ---------------
+// -----------------------------------
+
+.top-header__backLink
+	font-family: $regular-font
+	color: $lightfont-color
+	position: relative
+	display: block
+	justify-self: start
+	text-decoration: none
+.top-header__backLink-text
+.top-header__backLink img
+	display: block
+	position: absolute
+	width: 11px
+	height: 11px
+	left: 0
+	top: 12px
+
+.loginSection
+.loginSection__titleBg
+.loginSection__contentBg
+	background-color: $grey-bgColor
+
+.loginSection__title
+	font-family: $light-font
+	color: $grey-color
+	text-transform: uppercase
+	position: relative
+	&:before
+		content: ''
+		position: absolute
+		width: 36px
+		height: 36px
+		background-image: url('../images/logo-mini.png')
+		background-repeat: no-repeat
+
+.loginForm
+.loginForm__input		
+	color: #afbbbc
+	font-family: $lato-Semibold-font
+	display: block
+	background-color: #eff2f2
+.loginForm__input	input
+	display: block
+	background-color: #eff2f2
+
+.loginFormLinks
+	display: grid
+	grid-template-columns: repeat(2, 1fr)
+.loginFormLinks__restoreLink
+	font-family: $regular-font
+	align-self: center
+.loginFormLinks__loginBtn
+	justify-self: end
+
+
+// -----------------------------------
+// ----- Check report status ---------
+// -----------------------------------
+
+.loginContentBlock
+.loginContentBlock__textP
+	color: $grey-color
+	font-family: $light-font
+.loginContentBlock__link
+	font-family: $lato-Semibold-font
+	color: $mainAccentLighter-color
+	display: block
+
+// -----------------------------------
+// ------------- Report --------------
+// -----------------------------------
+
+.loginTextForm
+.loginTextForm__textarea
+	width: 100%
+	overflow: auto
+	text-align: start
+	resize: none
+	outline: none
+	border: none
+	display: grid
+textarea::-webkit-input-placeholder
+	color: #afbbbc
+	font-family: $lato-Semibold-font
+
+.loginTextFormLinks
+	display: grid
+.loginTextFormLinks__startBtn
+	justify-self: end
+
+
+

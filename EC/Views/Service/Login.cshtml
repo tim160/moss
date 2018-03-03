@@ -1,0 +1,105 @@
+﻿@model EC.Controllers.ServiceController.LoginViewModel
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
+}
+
+<div class="general-container login">
+
+    <header class="header">
+        <div class="top-headerBg">
+            <div class="container">
+                <div class="top-header">
+
+                    <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]" class="top-header__backLink">
+                        <img src="~/Content/images/svg-icons/left.svg" alt="" />
+                        <span class="top-header__backLink-text">
+                            EmployeeConfidential.com
+                        </span>
+                    </a>
+                    <div class="top-header__loginBar">
+                        <nav class="top-header__loginBar-nav">
+                            <li class="top-header__loginBar-li">
+                                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Report" class="top-header__loginBar-a">
+                                    File a Report
+                                </a>
+                            </li>
+                            <li class="top-header__loginBar-li">
+                                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/CheckStatus" class="top-header__loginBar-a">
+                                    Check Report Status
+                                </a>
+                            </li>
+                        </nav><!-- /.top-header__loginBar-nav -->
+                    </div><!-- /.top-header__loginBar -->
+                </div><!-- /.top-header -->
+            </div>
+        </div>
+
+    </header><!-- /.header -->
+
+    <main class="main">
+        <section class="loginSection">
+            <div class="loginSection__titleBg">
+                <div class="container loginTopSection__container">
+                    <div class="loginSection__title">
+                        Client Login
+                    </div><!-- /.loginSection__title -->
+                </div><!-- /.container -->
+            </div><!-- /.loginSection__titleBg -->
+            <div class="loginSection__contentBg">
+                @using (Html.BeginForm("Login", "Service", FormMethod.Post, new { }))
+                {
+                    <div class="container loginSection__container">
+                        <div class="loginForm">
+                            <label class="loginForm__input">
+                                Login
+                                @Html.TextBoxFor(x => x.Login)
+                            </label>
+                            <label class="loginForm__input">
+                                Password
+                                @Html.PasswordFor(x => x.Password)
+                            </label>
+                        </div><!-- /.loginForm -->
+                        <div class="loginFormLinks">
+                            <a href="@Url.Action("ForgetPassword", "Login")" class="loginFormLinks__restoreLink">
+                                Forgot your password?
+                            </a>
+                            <button type="submit" class="loginFormLinks__loginBtn btn" style="cursor: pointer;">
+                                Login
+                            </button>
+                        </div><!-- /.loginFormLinks -->
+                    </div><!-- /.container -->
+                }
+            </div><!-- /.loginSection__contentBg -->
+        </section><!-- /.loginSection -->
+    </main><!-- /.main -->
+    <!-- ------------------  Footer ---------------- -->
+    <footer class="footerBg">
+        <div class="container">
+            <div class="footer">
+                <div></div>
+                <div class="footer__copyright">
+                    Copyright © 2018 Employee Confidential LLC. All Rights Reserved
+                </div><!-- /.footer__copyright -->
+                <div class="footer__navLinks">
+                    <nav class="footer__navLinks-nav">
+                        <li class="footer__navLinks-li">
+                            <a href="http://employeeconfidential.com/PrivacyStatement.html" class="footer__navLinks-a">
+                                Privacy Policy
+                            </a>
+                        </li><!-- /.footer__navLinks-li -->
+                        <li class="footer__navLinks-li">
+                            <a href="http://employeeconfidential.com/TermsOfService.html" class="footer__navLinks-a">
+                                Terms of Use
+                            </a>
+                        </li><!-- /.footer__navLinks-li -->
+                    </nav><!-- /.footer__navLinks-nav -->
+                </div><!-- /.footer__navLinks -->
+            </div><!-- /.footer -->
+        </div><!-- /.container -->
+    </footer><!-- /.footer -->
+
+</div><!-- /.general-container -->
+
+

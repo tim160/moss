@@ -12,7 +12,7 @@ namespace EC.Common.Util
         // Content/img/cai_logo.png
         public static bool IsSubdomain(string url)
         {
-            if (url.ToLower().Contains("localhost") || url.ToLower().Contains("local2host") || url.ToLower().Contains("stark.") || url.ToLower().Contains("democompany.") || url.ToLower().Contains("report.") || url.ToLower().Contains("cai."))
+            if (url.ToLower().Contains("localhost") || url.ToLower().Contains("local2host") || url.ToLower().Contains("stark.") || url.ToLower().Contains("democompany.") || url.ToLower().Contains("report.") || url.ToLower().Contains("cai.") || url.ToLower().Contains("ase.com.ua"))
             {
                 return true;
             }
