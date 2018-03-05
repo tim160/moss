@@ -207,6 +207,10 @@ namespace EC.Business.Actions.Email
                     // message to mediator with the link to update password 
                     m_filename = "MediatorInvitedUserCreated";
                     break;
+                case 53:
+                    // message to mediator with the link to update password 
+                    m_filename = "ForgetPasswordNew";
+                    break;
             }
 
             string appPath = Path.GetFullPath("~/EmailText/" + m_filename + ".html");
@@ -481,6 +485,16 @@ namespace EC.Business.Actions.Email
             m_body = m_body.Replace("[Username]", username);
             m_body = m_body.Replace("[Password]", password);
             m_body = m_body.Replace("[Username]", username);
+        }
+
+        public void ForgetPasswordNew(string url, string email, string code)
+        {
+            GetBody(53);
+
+            m_body = m_body.Replace("[RestorePass]", (DomainUtil.GetSubdomainLink(url) + "/service/restore" + "?email=" + email + "&token=" + code).Trim());
+            m_body = m_body.Replace("[RestorePass2]", (DomainUtil.GetSubdomainLink(url).Replace(".", "<span>.</span>") + "/<span>service</span>/restore" + "?email=" + email.Replace("@", "<span>@</span>").Replace(".", "<span>.</span>") + "&token=" + code).Trim());
+            m_body = m_body.Replace("[RestoreCode]", code);
+
         }
 
         #endregion

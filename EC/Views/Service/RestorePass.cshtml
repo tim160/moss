@@ -1,7 +1,7 @@
-﻿@model EC.Controllers.ServiceController.LoginViewModel
+﻿@using EC.App_LocalResources;
 
 @{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "RestorePass";
     Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
 }
 
@@ -43,30 +43,30 @@
             <div class="loginSection__titleBg">
                 <div class="container loginTopSection__container">
                     <div class="loginSection__title">
-                        Client Login
+                        @GlobalRes.EnterNewPassword.ToUpper()
                     </div><!-- /.loginSection__title -->
                 </div><!-- /.container -->
             </div><!-- /.loginSection__titleBg -->
             <div class="loginSection__contentBg">
-                @using (Html.BeginForm("Login", "Service", FormMethod.Post, new { }))
+                @using (Html.BeginForm("setNewPass", "Service", FormMethod.Post, new { }))
                 {
+                    <input type="hidden" id="email" name="email" value="@ViewBag.email" />
+                    <input type="hidden" id="token" name="token" value="@ViewBag.token" />
+
                     <div class="container loginSection__container">
                         <div class="loginForm">
                             <label class="loginForm__input">
-                                Login
-                                @Html.TextBoxFor(x => x.Login)
+                                @GlobalRes.EnterNewPassword
+                                <input type="password" class="loginText" name="password" />
                             </label>
                             <label class="loginForm__input">
-                                Password
-                                @Html.PasswordFor(x => x.Password)
+                                @GlobalRes.ConfirmNewPassword
+                                <input type="password" class="loginText" name="confirmPassword" />
                             </label>
                         </div><!-- /.loginForm -->
                         <div class="loginFormLinks">
-                            <a href="@Url.Action("ForgetPassword", "Service")" class="loginFormLinks__restoreLink">
-                                Forgot your password?
-                            </a>
-                            <button type="submit" class="loginFormLinks__loginBtn btn" style="cursor: pointer;">
-                                Login
+                            <button type="submit" id="submit" class="loginFormLinks__loginBtn btn" style="cursor: pointer;">
+                                Submit
                             </button>
                         </div><!-- /.loginFormLinks -->
                     </div><!-- /.container -->
@@ -102,4 +102,35 @@
 
 </div><!-- /.general-container -->
 
+<script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#submit').on('click', function (event) {
+            var password = $('input[name=password]');
+            var confirmPassword = $('input[name=confirmPassword]');
+            if (password.val() == "") {
+                event.preventDefault();
+                alert('@GlobalRes.requiredFileds');
+            } else {
+                if (confirmPassword.val() == "") {
+                    event.preventDefault();
+                    alert('@GlobalRes.requiredFileds');
+                } else {
+                    if (password.val() != confirmPassword.val()) {
+                        event.preventDefault();
+                        alert('@GlobalRes.notMatchConfPassandPass');
+                    }
+                    var email = $("#email");
+                    var token = $("#token");
+                    if (email.val() == "" && token.val() == "") {
+                        event.preventDefault();
+                        alert('@GlobalRes.reEnterEmailToken');
+                        window.location.replace("Login/Restore");
+                    }
+                }
+            }
+        });
+    });
+</script>
 

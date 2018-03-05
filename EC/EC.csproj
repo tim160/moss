@@ -286,6 +286,7 @@
     <Content Include="Content\caiNew.css" />
     <Content Include="Content\emails\CampusSecurityAlert.html" />
     <Content Include="Content\emails\CaseCloseApprove.html" />
+    <Content Include="Content\emails\ForgetPasswordNew.html" />
     <Content Include="Content\emails\MediatorInvitedUserCreated.html" />
     <Content Include="Content\emails\SeniorMediatorCaseConfirm.html" />
     <Content Include="Content\fonts\bootstrap.min.css" />
@@ -718,6 +719,9 @@
     <Content Include="Views\Shared\_LayoutECCOM.cshtml" />
     <Content Include="Views\Service\Report.cshtml" />
     <Content Include="Views\Service\CheckStatus.cshtml" />
+    <Content Include="Views\Service\ForgetPassword.cshtml" />
+    <Content Include="Views\Service\Restore.cshtml" />
+    <Content Include="Views\Service\RestorePass.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
