@@ -23,7 +23,7 @@
 <div class="blockSettings contentCompanyProfile">
     <div class="titleNewUser">
         <h1 class="helloUser">@Resources.GetString("NewCompanyRegistration", is_cc):</h1>
-    </div >
+    </div>
     <div class="contentSettings">
         <p class="helloUser" id="hello">@Resources.GetString("FillTheFollowingFields").</p>
 
@@ -46,11 +46,11 @@
                 <div class="blockPersonalSettings">
                     <p class="title">@Resources.GetString("PrimaryLocationUp", is_cc)</p>
                     <input type = "text" id = "location" />
-                </div >
+                </div>
                 <div class="blockPersonalSettings">
                     <p class="title">@Resources.GetString("NumberEmployees", is_cc)</p>
                     <input type = "number" id = "number" min = "0" />
-                </div >
+                </div>
                 <div class="blockPersonalSettings">
                     <p class="title">@Resources.GetString("PrimaryLanguageUp", is_cc)</p>
 
@@ -59,10 +59,10 @@
                             <label class="inputBlock" for="freeIncident">
                                 <input id = "oneIncident" type="radio" name="language_id" value="1">
                                 <span class="radioTitle">@Resources.GetString("English")</span>
-                            </label >
-                        </div >
-                    </div >< !--rowBlock-- >
-                </div >
+                            </label>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="blockPersonalSettings">
                     <p class="title">@Resources.GetString("YourRoleUp", is_cc)</p>
@@ -72,37 +72,37 @@
                             <label class="inputBlock" for="freeIncident">
                                 <input id = "oneIncident" type="radio" name="role_id" value="5">
                                 <span class="radioTitle">@Resources.GetString("AdminMediator", is_cc)</span>
-                            </label >
-                        </div >
-                    </div >< !--rowBlock-- >
-                </div >
+                            </label>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="blockPersonalSettings">
                     <p class="title">@Resources.GetString("FirstNameUp")</p>
                     <input type = "text" id = "first" />
-                </div >
+                </div>
                 <div class="blockPersonalSettings">
                     <p class="title">@Resources.GetString("LastNameUp")</p>
                     <input type = "text" id = "last" />
-                </div >
+                </div>
                 <div class="blockPersonalSettings">
                     <p class="title">@Resources.GetString("Email")</p>
                     <input type = "text" id = "email" />
-                </div >
+                </div>
                 <div class="blockPersonalSettings">
                     <p class="title">@Resources.GetString("Title")</p>
                     <input type = "text" id = "title" />
-                </div >
+                </div>
                 <div class="blockPersonalSettings">
                     <p class="title">@Resources.GetString("Department")</p>
                     <input type = "text" id = "departments" />
                 </div>
 
-                <div id = "PayByCard" type = "hidden" >
+                <div id = "PayByCard" type = "hidden">
                     <div class="blockPersonalSettings">
                         <p class="title">@Resources.GetString("Amount")</p>
                         <input type = "text" id = "amount" value = "0" />
-                    </div >
+                    </div>
 
                     <div class="blockPersonalSettings">
                         <p class="title">@Resources.GetString("CreditCardNumber")</p>
@@ -111,7 +111,7 @@
                     <div class="blockPersonalSettings">
                         <p class="title">@Resources.GetString("NameonCard")</p>
                         <input type = "text" id = "cardname" />
-                    </div >
+                    </div>
 
 
                     <div class="blockPersonalSettings">
@@ -119,17 +119,17 @@
                         <div class="positioncreditCardSelect">
                             <select class="creditCardSelect" id="selectedMonth">
                                 <option selected = "selected" disabled>mm</option>
-                                <option value = "01" > 01 </ option >
+                                <option value = "01"> 01 </option>
                                 <option value="02">02</option>
-                                <option value = "03" > 03 </ option >
+                                <option value = "03"> 03 </option>
                                 <option value="04">04</option>
-                                <option value = "05" > 05 </ option >
+                                <option value = "05"> 05 </option>
                                 <option value="06">06</option>
-                                <option value = "07" > 07 </ option >
+                                <option value = "07"> 07 </option>
                                 <option value="08">08</option>
-                                <option value = "09" > 09 </ option >
+                                <option value = "09"> 09 </option>
                                 <option value="10">10</option>
-                                <option value = "11" > 11 </ option >
+                                <option value = "11"> 11 </option>
                                 <option value="12">12</option>
                             </select>
                             @*<input type="number" placeholder="mm" id="mm" min="1" pattern="\d*" max="2" maxlength="2"  numbers_only-01-12 mask="__" style="width:45%; float:left" />*@
@@ -154,7 +154,7 @@
 
                 <div class="blockUpdateProfile">
                     <div class="updateProfileBtn">
-                        <input type="submit" value="create" />
+                        <input class="greenButton" type="submit" value="create" />
                         <span style="display: none;">@Resources.GetString("CreateProfileUp").ToLower()</span>
                     </div>
                 </div>
