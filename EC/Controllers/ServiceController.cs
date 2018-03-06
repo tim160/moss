@@ -63,18 +63,18 @@ namespace EC.Controllers
 
         public ActionResult Report()
         {
-            return View();
+            return View($"Report{(is_cc ? "-CC" : "")}");
         }
 
         public ActionResult CheckStatus()
         {
-            return View();
+            return View($"CheckStatus{(is_cc ? "-CC" : "")}", new LoginViewModel());
         }
 
         public ActionResult ForgetPassword()
         {
             Session.Clear();
-            return View();
+            return View($"ForgetPassword{(is_cc ? "-CC" : "")}");
         }
 
         public string Email(string email)
@@ -145,7 +145,7 @@ namespace EC.Controllers
                 Session.Clear();
                 ViewBag.email = email;
                 ViewBag.token = token;
-                return View();
+                return View($"Restore{(is_cc ? "-CC" : "")}");
             }
             else
             {
@@ -169,7 +169,7 @@ namespace EC.Controllers
                 ViewBag.email = email;
                 ViewBag.token = token;
             }
-            return View();
+            return View($"RestorePass{(is_cc ? "-CC" : "")}");
         }
 
         [HttpPost]

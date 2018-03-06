@@ -1,7 +1,7 @@
 ﻿@model EC.Controllers.ServiceController.LoginViewModel
 
 @{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "CheckStatus";
     Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
 }
 
@@ -21,15 +21,16 @@
                     <div class="top-header__loginBar">
                         <nav class="top-header__loginBar-nav">
                             <li class="top-header__loginBar-li">
+                                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Login" class="top-header__loginBar-a">
+                                    Client Login
+                                </a>
+                            </li><!-- /.top-header__loginBar-li -->
+                            <li class="top-header__loginBar-li">
                                 <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Report" class="top-header__loginBar-a">
                                     File a Report
                                 </a>
-                            </li>
-                            <li class="top-header__loginBar-li">
-                                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/CheckStatus" class="top-header__loginBar-a">
-                                    Check Report Status
-                                </a>
-                            </li>
+                            </li><!-- /.top-header__loginBar-li -->
+
                         </nav><!-- /.top-header__loginBar-nav -->
                     </div><!-- /.top-header__loginBar -->
                 </div><!-- /.top-header -->
@@ -43,12 +44,27 @@
             <div class="loginSection__titleBg">
                 <div class="container loginTopSection__container">
                     <div class="loginSection__title">
-                        Client Login
+                        Check report status
                     </div><!-- /.loginSection__title -->
                 </div><!-- /.container -->
             </div><!-- /.loginSection__titleBg -->
             <div class="loginSection__contentBg">
                 <div class="container loginSection__container">
+                    <div class="loginContentBlock">
+                        <p class="loginContentBlock__textP">
+                            You can check the status of your report using the login
+                            provided and password created when you submitted your
+                            report.
+                        </p><!-- /.loginContentBlock__textP -->
+                        <p class="loginContentBlock__textP">
+                            We suggest that you check on status of your report on a
+                            regular basis. You can keep messaging with the Company
+                            Case Administrators in a safe and confidential manner.
+                        </p><!-- /.loginContentBlock__textP -->
+                        <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Report" class="loginContentBlock__link">
+                            Want to file a new report?
+                        </a>
+                    </div><!-- /.loginContentBlock -->
                     @using (Html.BeginForm("Login", "Service", FormMethod.Post, new { }))
                     {
                         <div class="loginForm">
@@ -62,7 +78,7 @@
                             </label>
                         </div><!-- /.loginForm -->
                         <div class="loginFormLinks">
-                            <a href="#" class="loginFormLinks__restoreLink">
+                            <a href="@Url.Action("ForgetPassword", "Service")" class="loginFormLinks__restoreLink">
                                 Forgot your password?
                             </a>
                             <button type="submit" class="loginFormLinks__loginBtn btn btn-cc" style="cursor: pointer;">
@@ -99,4 +115,5 @@
             </div><!-- /.footer -->
         </div><!-- /.container -->
     </footer><!-- /.footer -->
+
 </div><!-- /.general-container -->

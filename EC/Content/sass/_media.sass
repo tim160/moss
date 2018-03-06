@@ -127,6 +127,9 @@
 		height: 18px
 		margin-left: 45px
 
+	.header-cc .main-headerLogo__text-mobile
+		color: $mainAccentLighter-color-cc
+
 	.main-headerLogo-mobile-burgerBtn
 		position: relative
 		display: grid
@@ -156,6 +159,8 @@
 			border-bottom: 1px solid #ccc
 			&:first-child
 				border-top: 1px solid #ccc
+			&:last-child
+				border-bottom: none
 		&__a
 			text-transform: uppercase
 			text-decoration: none
@@ -235,6 +240,10 @@
 		left: 2%
 	.owl-next
 		right: 2%
+	
+	.slider-content__text span
+		font-size: 14px
+
 
 	// gridSection
 
@@ -283,6 +292,18 @@
 		&__textBlock
 			padding: 0 15px
 
+	// tailoredSection
+
+	.tailoredSection
+		grid-template-columns: 1fr
+		grid-template-rows: repeat(2, minmax(280px, max-content))
+	.tailoredSection__textBlock
+		padding: 0 15px
+	.tailoredSection__imageBlock
+		background-position: center
+		background-size: contain
+
+
 	// analyticsSection
 
 	.analyticsSection
@@ -298,6 +319,9 @@
 		padding-left: 5%
 		margin-top: 10px
 
+	.analyticsSection-cc .analyticsSection__imageBlock
+		grid-row: 2/3
+
 	// employeeSection
 
 	.employeeSection
@@ -312,6 +336,37 @@
 	.employeeSection__textBlock
 		padding: 0 15px
 
+	// gridNumbers
+
+
+	.gridNumbers__title
+		font-size: 24px
+		margin-top: 30px
+		margin-bottom: 40px
+
+	.gridNumbers__infoText
+		font-size: 11px
+		margin-bottom: 10px
+		margin-top: 20px
+
+	.gridNumbers-content
+		grid-template-columns: 1fr
+		grid-gap: 10px
+
+	.gridNumbers-contentBox
+		grid-template-rows: 100px minmax(35px,max-content)
+		padding: 0 24px
+		
+	.gridNumbers-contentBox__head	
+		font-size: 26px
+
+	.gridNumbers-contentBox__head	span
+		font-size: 20px
+
+	.gridNumbers-contentBox__text
+		font-size: 16px
+		padding: 15px 0
+
 	// wideSection
 
 	.wideSection
@@ -320,6 +375,8 @@
 	.wideSection__mainText
 		font-size: 20px
 		margin-bottom: 20px
+	.wideSection-cc .wideSection__mainText
+		font-size: 16px
 
 	.wideSection__signatureText
 		margin-bottom: 20px
@@ -382,6 +439,7 @@
 		border: 1px solid transparent
 		border-bottom: 1px solid #ced7d8
 		box-sizing: border-box
+	
 
 	.learnMore-form__content-input input
 		font-size: 18px
@@ -395,7 +453,8 @@
 	.learnMore-form__btn
 		margin-bottom: 20px
 
-
+	.contactSection-cc .learnMore-form__content-input.active
+		border: 1px solid #4da456
 
 	// -------------- Footer ---------------
 
@@ -533,6 +592,11 @@
 	.loginForm__input.active input 
 		background-color: #fff
 
+	.loginSection-cc .loginForm__input.active,
+	.loginSection-cc .loginForm__input.active:last-child
+		border: 1px solid #4da456
+
+
 	.loginFormLinks
 		margin-bottom: 30px
 	.loginFormLinks__restoreLink
@@ -573,7 +637,12 @@
 		font-size: 14px
 		padding: 6px 30px
 
-
+	.loginTextForm__textarea
+		border: 1px solid transparent
+	.loginTextForm__textarea:focus
+		border: 1px solid #05b5a2
+	.loginSection-cc .loginTextForm__textarea:focus
+		border: 1px solid #4da456
 
 
 
@@ -748,6 +817,37 @@
 	.benefitsSection-contentBox *
 		margin: 0 auto
 
+	// gridNumbers
+
+
+	.gridNumbers__title
+		font-size: 32px
+		margin-top: 30px
+		margin-bottom: 40px
+
+	.gridNumbers__infoText
+		font-size: 14px
+		margin-bottom: 10px
+		margin-top: 20px
+
+	.gridNumbers-content
+		grid-template-columns: repeat(2,1fr)
+		grid-gap: 10px
+
+	.gridNumbers-contentBox
+		grid-template-rows: 100px minmax(35px,max-content)
+		padding: 0 24px
+		
+	.gridNumbers-contentBox__head	
+		font-size: 40px
+
+	.gridNumbers-contentBox__head	span
+		font-size: 30px
+
+	.gridNumbers-contentBox__text
+		font-size: 16px
+		padding: 15px 0
+
 	// footer
 	
 	.footer__logo
@@ -839,7 +939,11 @@
 			color: $mainAccentLighter-color
 			border-bottom: 2px solid $mainAccentLighter-color
 			background-color: #fff
-
+	.header-cc .main-headerMenu__a:hover,
+	.header-cc .main-headerMenu__a:focus,
+	.header-cc .main-headerMenu__a:active
+		color: $mainAccentLighter-color-cc
+		border-bottom: 2px solid $mainAccentLighter-color-cc
 	// -------------- Main ---------------
 	.home .main.fixed-header,
 	.about .main.fixed-header
@@ -874,6 +978,9 @@
 		grid-template-columns: repeat(5, 1fr)
 		margin-bottom: 60px
 		grid-row-gap: 0
+	.benefitsSection-cc .benefitsSection-content
+		grid-template-columns: repeat(4, 1fr)
+
 	.benefitsSection-contentBox
 		grid-template-rows: 100px minmax( 35px, max-content) auto
 		padding: 0px 24px
@@ -917,6 +1024,8 @@
 		left: 5%
 	.owl-next
 		right: 5%
+	.slider-content__text span
+		font-size: 18px
 
 	// gridSection
 
@@ -968,6 +1077,18 @@
 	.routingSection__imageBlock
 		grid-row: auto
 
+	// tailoredSection
+
+	.tailoredSection
+		grid-template-columns: 45% 55%
+		grid-template-rows:  minmax(570px, max-content)
+	.tailoredSection__textBlock
+		padding-left: 15%
+		padding-right: 3%
+	.tailoredSection__imageBlock
+		background-position: 0 50%
+		background-size: contain
+
 	// analyticsSection
 
 	.analyticsSection
@@ -983,6 +1104,8 @@
 		padding-left: 5%
 		margin-top: 30px
 
+	.analyticsSection-cc .analyticsSection__imageBlock
+		grid-row: auto
 	// employeeSection
 
 	.employeeSection
@@ -998,6 +1121,39 @@
 		padding-left: 15%
 		padding-right: 3%
 
+
+	// gridNumbers
+
+
+	.gridNumbers__title
+		font-size: 36px
+		margin-top: 50px
+		margin-bottom: 60px
+
+	.gridNumbers__infoText
+		font-size: 14px
+		margin-bottom: 10px
+		margin-top: 20px
+
+	.gridNumbers-content
+		grid-template-columns: repeat(4,1fr)
+		grid-gap: 0
+
+	.gridNumbers-contentBox
+		grid-template-rows: 100px minmax(35px,max-content)
+		padding: 0 24px
+		
+	.gridNumbers-contentBox__head	
+		font-size: 48px
+
+	.gridNumbers-contentBox__head	span
+		font-size: 30px
+
+	.gridNumbers-contentBox__text
+		font-size: 16px
+		padding: 15px 0
+
+
 	// wideSection
 
 	.wideSection
@@ -1007,6 +1163,8 @@
 	.wideSection__mainText
 		font-size: 24px
 		margin-bottom: 40px
+	.wideSection-cc .wideSection__mainText
+		font-size: 23px
 
 	.wideSection__signatureText
 		margin-bottom: 40px
@@ -1083,6 +1241,9 @@
 
 	.learnMore-form__content-input.active
 		border: 2px solid $mainAccentLighter-color
+
+	.contactSection-cc .learnMore-form__content-input.active
+		border: 2px solid #4da456
 
 	.learnMore-form__btn
 		margin-bottom: 20px
@@ -1186,6 +1347,8 @@
 		margin-left: -50px
 		padding-left: 50px
 		font-size: 24px
+	.loginSection-cc .loginSection__title
+		padding-top: 0
 
 	.loginSection__title
 		margin-top: 150px
@@ -1207,6 +1370,9 @@
 		margin-top: 5px
 		padding: 0
 
+	.loginSection-cc .loginForm__input.active,
+	.loginSection-cc .loginForm__input.active:last-child
+		border: 2px solid #4da456
 	// -----------------------------------
 	// ----- Check report status ---------
 	// -----------------------------------
@@ -1229,7 +1395,12 @@
 	.loginTextForm__textarea
 		height: 80px
 
-
+	.loginTextForm__textarea
+		border: 2px solid transparent
+	.loginTextForm__textarea:focus
+		border: 2px solid #05b5a2
+	.loginSection-cc .loginTextForm__textarea:focus
+		border: 2px solid #4da456
 
 
 

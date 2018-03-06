@@ -1,7 +1,5 @@
-﻿@model EC.Controllers.ServiceController.LoginViewModel
-
-@{
-    ViewBag.Title = "Login";
+﻿@{
+    ViewBag.Title = "Report";
     Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
 }
 
@@ -21,15 +19,16 @@
                     <div class="top-header__loginBar">
                         <nav class="top-header__loginBar-nav">
                             <li class="top-header__loginBar-li">
-                                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Report" class="top-header__loginBar-a">
-                                    File a Report
+                                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Login" class="top-header__loginBar-a">
+                                    Client Login
                                 </a>
-                            </li>
+                            </li><!-- /.top-header__loginBar-li -->
+
                             <li class="top-header__loginBar-li">
                                 <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/CheckStatus" class="top-header__loginBar-a">
                                     Check Report Status
                                 </a>
-                            </li>
+                            </li><!-- /.top-header__loginBar-li -->
                         </nav><!-- /.top-header__loginBar-nav -->
                     </div><!-- /.top-header__loginBar -->
                 </div><!-- /.top-header -->
@@ -43,35 +42,37 @@
             <div class="loginSection__titleBg">
                 <div class="container loginTopSection__container">
                     <div class="loginSection__title">
-                        Client Login
+                        File a report
                     </div><!-- /.loginSection__title -->
                 </div><!-- /.container -->
             </div><!-- /.loginSection__titleBg -->
             <div class="loginSection__contentBg">
                 <div class="container loginSection__container">
-                    @using (Html.BeginForm("Login", "Service", FormMethod.Post, new { }))
-                    {
-                        <div class="loginForm">
-                            <label class="loginForm__input">
-                                Login
-                                @Html.TextBoxFor(x => x.Login)
-                            </label>
-                            <label class="loginForm__input">
-                                Password
-                                @Html.PasswordFor(x => x.Password)
-                            </label>
-                        </div><!-- /.loginForm -->
-                        <div class="loginFormLinks">
-                            <a href="#" class="loginFormLinks__restoreLink">
-                                Forgot your password?
+                    <div class="loginContentBlock">
+                        <p class="loginContentBlock__textP">
+                            This platform makes it easy to report an incident about
+                            campus issues like sexual harassment, bullying, hazing,
+                            suicide ideation, substance abuse etc.
+                        </p><!-- /.loginContentBlock__textP -->
+                        <p class="loginContentBlock__textP">
+                            Find your high school, college or university below to get
+                            started with your report and we’ll ask you a few questions
+                            about the incident.
+                        </p><!-- /.loginContentBlock__textP -->
+                        <a href="#" class="loginContentBlock__link">
+                            Already filed a report?
+                        </a>
+                    </div><!-- /.loginContentBlock -->
+                    <div class="loginTextForm">
+                        <textarea placeholder="School, college or university name" class="loginTextForm__textarea"></textarea>
+                        <div class="loginTextFormLinks">
+                            <a href="#" class="btn loginTextFormLinks__startBtn btn-cc">
+                                Start
                             </a>
-                            <button type="submit" class="loginFormLinks__loginBtn btn btn-cc" style="cursor: pointer;">
-                                Login
-                            </button>
-                        </div><!-- /.loginFormLinks -->
-                    }
-                </div><!-- /.container -->
-            </div><!-- /.loginSection__contentBg -->
+                        </div><!-- /.loginTextFormLinks -->
+                    </div><!-- /.loginTextForm -->
+
+                </div><!-- /.loginSection__contentBg -->
         </section><!-- /.loginSection -->
     </main><!-- /.main -->
     <!-- ------------------  Footer ---------------- -->
@@ -99,4 +100,7 @@
             </div><!-- /.footer -->
         </div><!-- /.container -->
     </footer><!-- /.footer -->
+
 </div><!-- /.general-container -->
+
+

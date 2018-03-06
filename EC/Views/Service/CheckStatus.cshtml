@@ -1,4 +1,6 @@
-﻿@{
+﻿@model EC.Controllers.ServiceController.LoginViewModel
+
+@{
     ViewBag.Title = "CheckStatus";
     Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
 }
@@ -68,11 +70,11 @@
                         <div class="loginForm">
                             <label class="loginForm__input">
                                 Login
-                                <input type="text" />
+                                @Html.TextBoxFor(x => x.Login)
                             </label>
                             <label class="loginForm__input">
                                 Password
-                                <input type="password" />
+                                @Html.PasswordFor(x => x.Password)
                             </label>
                         </div><!-- /.loginForm -->
                         <div class="loginFormLinks">

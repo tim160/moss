@@ -35,9 +35,9 @@ namespace EC.Controllers
         protected user _user = null;
         internal bool is_cc
         {
-           // get { return true; }
+            get { return true; }
 
-            get { return DomainUtil.IsCC(Request.Url.AbsoluteUri.ToLower()); }
+            //get { return DomainUtil.IsCC(Request.Url.AbsoluteUri.ToLower()); }
         }
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)

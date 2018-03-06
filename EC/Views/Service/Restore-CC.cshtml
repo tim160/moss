@@ -1,7 +1,7 @@
-﻿@model EC.Controllers.ServiceController.LoginViewModel
+﻿@using EC.App_LocalResources;
 
 @{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "Restore";
     Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
 }
 
@@ -43,39 +43,36 @@
             <div class="loginSection__titleBg">
                 <div class="container loginTopSection__container">
                     <div class="loginSection__title">
-                        Client Login
+                        @GlobalRes.RestoreYourPassword.ToUpper()
                     </div><!-- /.loginSection__title -->
                 </div><!-- /.container -->
             </div><!-- /.loginSection__titleBg -->
             <div class="loginSection__contentBg">
-                <div class="container loginSection__container">
-                    @using (Html.BeginForm("Login", "Service", FormMethod.Post, new { }))
-                    {
+                @using (Html.BeginForm("RestorePass", "Service", FormMethod.Post, new { }))
+                {
+                    <div class="container loginSection__container">
                         <div class="loginForm">
                             <label class="loginForm__input">
-                                Login
-                                @Html.TextBoxFor(x => x.Login)
+                                @GlobalRes.Email
+                                <input type="text" class="loginText" name="email" value="@ViewBag.email" />
                             </label>
                             <label class="loginForm__input">
-                                Password
-                                @Html.PasswordFor(x => x.Password)
+                                @GlobalRes.Yourpasswordtoken
+                                <input type="text" class="loginText" name="token" value="@ViewBag.token" />
                             </label>
                         </div><!-- /.loginForm -->
                         <div class="loginFormLinks">
-                            <a href="#" class="loginFormLinks__restoreLink">
-                                Forgot your password?
-                            </a>
-                            <button type="submit" class="loginFormLinks__loginBtn btn btn-cc" style="cursor: pointer;">
-                                Login
+                            <button type="submit" id="submit" class="loginFormLinks__loginBtn btn btn-cc" style="cursor: pointer;">
+                                Submit
                             </button>
                         </div><!-- /.loginFormLinks -->
-                    }
-                </div><!-- /.container -->
+                    </div><!-- /.container -->
+                }
             </div><!-- /.loginSection__contentBg -->
         </section><!-- /.loginSection -->
     </main><!-- /.main -->
     <!-- ------------------  Footer ---------------- -->
-    <footer class="footerBg footerBg-cc">
+    <footer class="footerBg">
         <div class="container">
             <div class="footer">
                 <div></div>
@@ -85,12 +82,12 @@
                 <div class="footer__navLinks">
                     <nav class="footer__navLinks-nav">
                         <li class="footer__navLinks-li">
-                            <a href="#" class="footer__navLinks-a">
+                            <a href="http://employeeconfidential.com/PrivacyStatement.html" class="footer__navLinks-a">
                                 Privacy Policy
                             </a>
                         </li><!-- /.footer__navLinks-li -->
                         <li class="footer__navLinks-li">
-                            <a href="#" class="footer__navLinks-a">
+                            <a href="http://employeeconfidential.com/TermsOfService.html" class="footer__navLinks-a">
                                 Terms of Use
                             </a>
                         </li><!-- /.footer__navLinks-li -->
@@ -99,4 +96,48 @@
             </div><!-- /.footer -->
         </div><!-- /.container -->
     </footer><!-- /.footer -->
+
 </div><!-- /.general-container -->
+
+<script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#submit').on('click', function (event) {
+            var email = $('input[name=email]');
+            var token = $('input[name=token]');
+            if (email.val() == "") {
+                event.preventDefault();
+                alert('@GlobalRes.EnterYourEmail');
+            } else {
+                if (token.val() == "") {
+                    event.preventDefault();
+                    alert('@GlobalRes.EnterYourToken');
+                }
+            }
+        });
+    });
+
+</script>
+@if (ViewBag.error != null)
+{
+    <text>
+        <script>
+            $(document).ready(function () {
+                alert('@ViewBag.error');
+            });
+        </script>
+    </text>
+}
+@if (ViewBag.redirect != null)
+{
+    <text>
+        <script>
+        $(document).ready(function () {
+            //
+            var url = '@Url.Action("Company", "Login")';
+            window.location.href = url;
+            });
+        </script>
+    </text>
+}

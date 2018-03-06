@@ -723,6 +723,11 @@
     <Content Include="Views\Service\Restore.cshtml" />
     <Content Include="Views\Service\RestorePass.cshtml" />
     <Content Include="Views\Service\Login-CC.cshtml" />
+    <Content Include="Views\Service\Report-CC.cshtml" />
+    <Content Include="Views\Service\CheckStatus-CC.cshtml" />
+    <Content Include="Views\Service\ForgetPassword-CC.cshtml" />
+    <Content Include="Views\Service\Restore-CC.cshtml" />
+    <Content Include="Views\Service\RestorePass-CC.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
