@@ -25,7 +25,7 @@ namespace EC.Controllers
         // GET: Service
         public ActionResult Login()
         {
-            return View(new LoginViewModel());
+            return View($"Login{(is_cc ? "-CC" : "")}", new LoginViewModel());
         }
 
         [HttpPost]

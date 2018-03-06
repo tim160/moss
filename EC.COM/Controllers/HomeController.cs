@@ -10,31 +10,18 @@ namespace EC.COM.Controllers
 {
     public class HomeController : Controller
     {
+        readonly bool isCC = bool.Parse(System.Configuration.ConfigurationManager.AppSettings["isCC"]);
+
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
 
-            return View();
+            return View($"Index{(isCC ? "-CC" : "")}");
         }
 
         public ActionResult About()
         {
-            return View();
-        }
-
-        public ActionResult Login()
-        {
-            return View();
-        }
-
-        public ActionResult Report()
-        {
-            return View();
-        }
-
-        public ActionResult CheckStatus()
-        {
-            return View();
+            return View($"About{(isCC ? "-CC" : "")}");
         }
 
         [HttpGet]

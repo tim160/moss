@@ -29,6 +29,8 @@
 
 .top-headerBg
 	background-color: $mainAccent-color
+.header-cc .top-headerBg
+	background-color: $mainAccent-color-cc
 
 .top-header
 	display: grid
@@ -93,6 +95,9 @@
 		text-transform: uppercase
 		font-family: $bold-font
 		text-decoration: none
+.header-cc .main-headerLogo__text
+	color: $mainAccentLighter-color-cc
+
 
 .main-headerMenu
 	display: grid
@@ -111,7 +116,9 @@
 	&__a:hover,
 	&__a:focus,
 	&__a:active
-		
+.header-cc .main-headerMenu__a
+	color: $mainAccent-color-cc
+
 
 
 .firstSection
@@ -119,15 +126,23 @@
 	background-repeat: no-repeat
 	background-position: center
 	background-size: cover
+.firstSection.firstSection-cc
+	background-image: url('../images/first-section-СС-BG.jpg')
 
 .firstSection__contentBox
 	display: grid
 .firstSection__headText
 	font-family: $heavy-font
 	color: $mainAccent-color
+.firstSection-cc .firstSection__headText
+	color: $lightfont-color
+
 .firstSection__text
 	font-family: $regular-font
 	color: $grey-color
+.firstSection-cc .firstSection__text
+	color: $lightfont-color
+
 
 // Benefits
 .benefitsSection
@@ -167,6 +182,12 @@
 		font-family: $regular-font
 		color: $accent-color
 
+.benefitsSection-cc .benefitsSection-contentBox__title
+	color: $mainAccentLighter-color-cc
+.benefitsSection-cc .benefitsSection-contentBox__text
+	color: $mainAccent-color-cc
+
+
 // TextImageSection
 .textImageSection
 	height: 220px
@@ -182,6 +203,8 @@
 	position: relative
 .owl-carousel__slide
 	background-color: $mainBgLighter-color
+.slider-section-cc .owl-carousel__slide
+	background-color: #e9eeea
 
 .owl-carousel__slide
 	display: grid
@@ -230,6 +253,9 @@
 	align-self: center
 .gridSection__reportText
 	background-color: $mainBg-color
+.gridSection-cc .gridSection__reportText
+	background-color: $mainBg-color-cc
+
 
 .gridSection__mobileImage
 	background-image: url('../images/mobile-img.jpg')
@@ -242,11 +268,21 @@
 	background-position: 100% 0
 	background-size: cover
 
+.gridSection-cc .gridSection__mobileImage
+	background-image: url('../images/mobile-img-CC.jpg')
+.gridSection-cc .gridSection__reportImage
+	background-image: url('../images/pcView-CC.jpg')
+
 .grid-title
 	font-family: $light-font
 	color: $grey-color
 .grid-text
 	color: $accent-color
+
+.gridSection-cc .grid-title
+	color: $grey-color
+.gridSection-cc .grid-text
+	color: $mainAccent-color-cc
 
 // menegementSection
 
@@ -258,6 +294,10 @@
 
 .menegementSection__imageBlock
 	background-image: url('../images/dashboard-img.png')
+	background-repeat: no-repeat
+
+.menegementSection-cc .menegementSection__imageBlock
+	background-image: url('../images/dashboard-img-CC.png')
 	background-repeat: no-repeat
 
 
@@ -274,6 +314,23 @@
 	&__textBlock
 		align-self: center
 
+.routingSection-cc.routingSection
+	background-color: $mainBg-color-cc
+.routingSection-cc .routingSection__imageBlock
+	background-image: url('../images/settings-img-CC.png')
+
+
+// tailoredSection
+
+.tailoredSection
+	overflow: hidden
+	display: grid
+.tailoredSection__textBlock
+	align-self: center
+.tailoredSection__imageBlock
+	background-image: url('../images/tailoredBg.jpg')
+	background-repeat: no-repeat
+
 // analyticsSection
 
 .analyticsSection
@@ -287,19 +344,78 @@
 		background-size: contain
 		background-image: url('../images/charts-img.jpg')
 
+.analyticsSection.analyticsSection-cc
+	background-color: $mainBg-color-cc
 // employeeSection
 
 .employeeSection
 	display: grid
 	background-color: $mainBg-color
-	
+.employeeSection.employeeSection-cc
+	background-color: #fff
+
 .employeeSection__imageBlock
 	background-repeat: no-repeat
 	background-size: cover
 	background-image: url('../images/wall-siteview-img.jpg')
+.employeeSection-cc .employeeSection__imageBlock
+	background-image: url('../images/wall-siteview-img-CC.jpg')
 
 .employeeSection__textBlock
 	align-self: center
+
+
+// gridNumbers
+
+.gridNumbers
+	background-color: #e9eeea
+
+.gridNumbers-container
+	display: grid
+	text-align: center
+
+.gridNumbers__title
+	font-family: $light-font
+	text-transform: uppercase
+	color: $grey-color
+
+.gridNumbers__infoText
+	font-family: $regular-font
+	color: #939694
+
+.gridNumbers-content
+	display: grid
+
+.gridNumbers-contentBox
+	display: grid
+	position: relative
+	
+.gridNumbers-contentBox__head	
+	font-family: $lato-medium-font
+	color: #fb892d
+	align-self: center
+	z-index: 1
+	&:before
+		content: ''
+		width: 100px
+		height: 100px
+		border-radius: 50%
+		background-color: #dae2db
+		position: absolute
+		top: 0
+		z-index: -1
+		left: calc( 50% - 50px )
+.gridNumbers-contentBox__head	span
+.gridNumbers-contentBox__head	span.up
+	display: inline-block
+	vertical-align: top
+
+.gridNumbers-contentBox__text
+	font-family: $regular-font
+	color: #4b5a4d
+	z-index: 1
+
+
 
 // wideSection
 
@@ -358,6 +474,13 @@
 	&__title
 		font-family: $light-font
 		color: $lightfont-color
+
+.contactSection.contactSection-cc
+	background-color: $mainBgDark-color-cc
+.contactSection-cc .learnMore-form__title
+	background-color: $mainAccentLighter-color-cc
+.contactSection-cc .learnMore-form
+	background-color: #719276
 
 .learnMore-form
 	display: grid
@@ -428,7 +551,10 @@ input
 
 .footer__copyright
 	color: $grey-footerTextColor
-
+.footerBg-cc .footer__copyright
+	color: #a8b4b5
+.footerBg-cc .footer__navLinks-a
+	color: $mainAccent-color-cc
 // -----------------------------------
 // ------------ ABOUT ----------------
 // -----------------------------------
@@ -455,7 +581,11 @@ input
 	font-family: $light-font
 	color: $grey-color
 
+.leaderShipSection-cc .leaderShip__name
+	color: $mainAccentLighter-color-cc
 
+.leaderShipSection-cc .leaderShip__name
+	color: $mainAccentLighter-color-cc
 
 // -------------------
 .leaderShipSection.active .leaderShipSection__title,
@@ -488,6 +618,8 @@ input
 .leaderShipBlock-infoContainer__contentName
 	font-family: $bold-font
 	color: $mainAccentLighter-color
+.leaderShipSection-cc .leaderShipBlock-infoContainer__contentName
+	color: $mainAccentLighter-color-cc
 .leaderShipBlock-infoContainer__contentPosition
 	font-family: $regular-font
 	color: $grey-color
@@ -546,6 +678,8 @@ input
 		height: 36px
 		background-image: url('../images/logo-mini.png')
 		background-repeat: no-repeat
+.loginSection-cc .loginSection__title:before
+	background-image: url('../images/logo-mini-CC.png')
 
 .loginForm
 .loginForm__input		
@@ -580,6 +714,8 @@ input
 	color: $mainAccentLighter-color
 	display: block
 
+.loginSection-cc .loginContentBlock__link
+	color: $AccentLighterFont-color-cc
 // -----------------------------------
 // ------------- Report --------------
 // -----------------------------------

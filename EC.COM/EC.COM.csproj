@@ -200,9 +200,8 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\Home\Report.cshtml" />
-    <Content Include="Views\Home\CheckStatus.cshtml" />
+    <Content Include="Views\Home\Index-CC.cshtml" />
+    <Content Include="Views\Home\About-CC.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -1,6 +1,8 @@
-﻿
+﻿@model EC.Controllers.ServiceController.LoginViewModel
+
 @{
-    ViewBag.Title = "Report";
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
 }
 
 <div class="general-container login">
@@ -10,7 +12,7 @@
             <div class="container">
                 <div class="top-header">
 
-                    <a href="#" class="top-header__backLink">
+                    <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]" class="top-header__backLink">
                         <img src="~/Content/images/svg-icons/left.svg" alt="" />
                         <span class="top-header__backLink-text">
                             EmployeeConfidential.com
@@ -19,16 +21,15 @@
                     <div class="top-header__loginBar">
                         <nav class="top-header__loginBar-nav">
                             <li class="top-header__loginBar-li">
-                                <a href="@Url.Action("Login", "Home")" class="top-header__loginBar-a">
-                                    Client Login
+                                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Report" class="top-header__loginBar-a">
+                                    File a Report
                                 </a>
-                            </li><!-- /.top-header__loginBar-li -->
-
+                            </li>
                             <li class="top-header__loginBar-li">
-                                <a href="@Url.Action("CheckStatus", "Home")" class="top-header__loginBar-a">
+                                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/CheckStatus" class="top-header__loginBar-a">
                                     Check Report Status
                                 </a>
-                            </li><!-- /.top-header__loginBar-li -->
+                            </li>
                         </nav><!-- /.top-header__loginBar-nav -->
                     </div><!-- /.top-header__loginBar -->
                 </div><!-- /.top-header -->
@@ -42,37 +43,35 @@
             <div class="loginSection__titleBg">
                 <div class="container loginTopSection__container">
                     <div class="loginSection__title">
-                        File a report
+                        Client Login
                     </div><!-- /.loginSection__title -->
                 </div><!-- /.container -->
             </div><!-- /.loginSection__titleBg -->
             <div class="loginSection__contentBg">
-                <div class="container loginSection__container">
-                    <div class="loginContentBlock">
-                        <p class="loginContentBlock__textP">
-                            This platform makes it easy to report an incident about
-                            workplace issues like sexual harassment, unsafe conditions,
-                            financial and auditing concerns, theft, bribery, substance
-                            abuse etc.
-                        </p><!-- /.loginContentBlock__textP -->
-                        <p class="loginContentBlock__textP">
-                            Find your company below to get started with your report
-                            and we’ll ask you a few questions about the incident.
-                        </p><!-- /.loginContentBlock__textP -->
-                        <a href="#" class="loginContentBlock__link">
-                            Already filed a report?
-                        </a>
-                    </div><!-- /.loginContentBlock -->
-                    <div class="loginTextForm">
-                        <textarea placeholder="Company name" class="loginTextForm__textarea"></textarea>
-                        <div class="loginTextFormLinks">
-                            <a href="#" class="btn loginTextFormLinks__startBtn">
-                                Start
+                @using (Html.BeginForm("Login", "Service", FormMethod.Post, new { }))
+                {
+                    <div class="container loginSection__container">
+                        <div class="loginForm">
+                            <label class="loginForm__input">
+                                Login
+                                @Html.TextBoxFor(x => x.Login)
+                            </label>
+                            <label class="loginForm__input">
+                                Password
+                                @Html.PasswordFor(x => x.Password)
+                            </label>
+                        </div><!-- /.loginForm -->
+                        <div class="loginFormLinks">
+                            <a href="@Url.Action("ForgetPassword", "Service")" class="loginFormLinks__restoreLink">
+                                Forgot your password?
                             </a>
-                        </div><!-- /.loginTextFormLinks -->
-                    </div><!-- /.loginTextForm -->
-
-                </div><!-- /.loginSection__contentBg -->
+                            <button type="submit" class="loginFormLinks__loginBtn btn" style="cursor: pointer;">
+                                Login
+                            </button>
+                        </div><!-- /.loginFormLinks -->
+                    </div><!-- /.container -->
+                }
+            </div><!-- /.loginSection__contentBg -->
         </section><!-- /.loginSection -->
     </main><!-- /.main -->
     <!-- ------------------  Footer ---------------- -->
@@ -86,12 +85,12 @@
                 <div class="footer__navLinks">
                     <nav class="footer__navLinks-nav">
                         <li class="footer__navLinks-li">
-                            <a href="#" class="footer__navLinks-a">
+                            <a href="http://employeeconfidential.com/PrivacyStatement.html" class="footer__navLinks-a">
                                 Privacy Policy
                             </a>
                         </li><!-- /.footer__navLinks-li -->
                         <li class="footer__navLinks-li">
-                            <a href="#" class="footer__navLinks-a">
+                            <a href="http://employeeconfidential.com/TermsOfService.html" class="footer__navLinks-a">
                                 Terms of Use
                             </a>
                         </li><!-- /.footer__navLinks-li -->
