@@ -2101,4 +2101,7 @@
   <data name="Ifyouwitness_CC1" xml:space="preserve">
     <value>If you witness (or know of) an incident that compromises your educational institution, contribute to the solution. Report it.</value>
   </data>
+  <data name="FillTheFollowingFieldsRegister" xml:space="preserve">
+    <value>Fill in the following fields and click "Register" to create an account</value>
+  </data>
 </root>

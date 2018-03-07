@@ -2155,4 +2155,7 @@
   <data name="ConfirmNewPassword" xml:space="preserve">
     <value>Confirm new password</value>
   </data>
+  <data name="YourLoginDetails" xml:space="preserve">
+    <value>Your Login Details</value>
+  </data>
 </root>

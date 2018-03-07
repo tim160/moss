@@ -6118,6 +6118,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your Login Details.
+        /// </summary>
+        public static string YourLoginDetails {
+            get {
+                return ResourceManager.GetString("YourLoginDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to First Name.
         /// </summary>
         public static string YourName {

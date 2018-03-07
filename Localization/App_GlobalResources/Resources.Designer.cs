@@ -2590,6 +2590,15 @@ namespace EC.Localization.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fill in the following fields and click &quot;Register&quot; to create an account.
+        /// </summary>
+        internal static string FillTheFollowingFieldsRegister {
+            get {
+                return ResourceManager.GetString("FillTheFollowingFieldsRegister", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Financial reporting /Accounting irregularity.
         /// </summary>
         internal static string FinancialReportingAccountingIrregularity {
