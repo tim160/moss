@@ -90,7 +90,8 @@ namespace EC.Controllers
         {
             if ((actionName == "Index") && (controllerName == "Account"))
             {
-                return base.RedirectToAction(actionName, controllerName, new { returnUrl = Request.Url.LocalPath });
+                //return base.RedirectToAction(actionName, controllerName, new { returnUrl = Request.Url.LocalPath });
+                return base.RedirectToAction("Login", "Service", new { returnUrl = Request.Url.LocalPath });
             }
             return base.RedirectToAction(actionName, controllerName, null);
         }

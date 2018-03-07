@@ -28,7 +28,7 @@ namespace EC.Controllers
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Account", new { returnUrl = Request.Url.LocalPath });
+                return RedirectToAction("Index", "Account");
 
             ViewBag.pending_report_ids = PendingReports();
 
