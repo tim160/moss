@@ -17,7 +17,7 @@
     <AssemblyName>EC.COM</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -634,6 +634,7 @@
     <Content Include="Content\sass\_main.sass" />
     <Content Include="Content\sass\_media.sass" />
     <Content Include="Content\sass\_vars.sass" />
+    <None Include="Properties\PublishProfiles\EC.COM.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
