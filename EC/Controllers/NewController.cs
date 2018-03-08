@@ -47,7 +47,7 @@ namespace EC.Controllers
                 company selectedCompany = db.company.Where(m => m.id == um._user.company_id).FirstOrDefault();
                 if (selectedCompany != null)
                 {
-                    List<company_department> currentDepartmens = db.company_department.Where(m => m.company_id == selectedCompany.id).ToList();
+                    List<company_department> currentDepartmens = db.company_department.Where(m => m.company_id == selectedCompany.id && m.status_id == 2).ToList();
                     /*put drop daun*/
                     List<SelectListItem> items = new List<SelectListItem>();
                     foreach (var item in currentDepartmens)

@@ -2790,3 +2790,11 @@ p.helloUser {
     color: #fff;
     border-color: #049787;
 }
+
+html body .selectStyled{
+    max-width: 400px;
+    border: 1px solid #ccc;
+    padding: 0;
+    margin: 25px 28px;
+    padding-left: 10px;
+}

@@ -4156,3 +4156,11 @@ textarea {
 	font: 600 16px/18px 'Open Sans', sans-serif;
 	color: #727c7e;
 }
+
+html body .selectStyled{
+    max-width: 400px;
+    border: 1px solid #ccc;
+    padding: 0;
+    margin: 25px 28px;
+    padding-left: 10px;
+}

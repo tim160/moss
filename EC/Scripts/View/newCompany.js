@@ -147,6 +147,7 @@
     }
 
     function createCompany() {
+        validationForm();
         $.ajax({
             method: "POST",
             url: "/New/CreateCompany",
@@ -171,7 +172,7 @@
             }
         }).done(function (data) {//data from server
             if (data != 'completed') {
-                alert(data);
+                //alert(data);
             }
             else {
                 //    location.reload();

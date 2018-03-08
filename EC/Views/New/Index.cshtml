@@ -59,11 +59,11 @@
             </div>
             <div class="blockPersonalSettings">
                 <p class="title">@GlobalRes.Department</p>
-                @Html.DropDownList("currentDepartmens", ViewBag.currentDepartmens as SelectList)
+                @Html.DropDownList("currentDepartmens", ViewBag.currentDepartmens as SelectList, new { @class = "selectStyled" })
             </div>
             <div class="blockPersonalSettings">
                 <p class="title">@GlobalRes.Location</p>
-                @Html.DropDownList("currentLocations", new SelectList(cm.Locations(cm._company.id), "id", "location_en"))
+                @Html.DropDownList("currentLocations", new SelectList(cm.Locations(cm._company.id), "id", "location_en"), new { @class = "selectStyled" })
             </div>
 
             <div class="blockPersonalSettings">

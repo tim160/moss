@@ -81,11 +81,11 @@
                 </div>
                 <div class="blockPersonalSettings greyBorder">
                     <p class="title">@GlobalRes.Department</p>
-                    @Html.DropDownListFor(model => Model.company_department_id, new SelectList(um.listDepartments, "id", "department_nm"))
+                    @Html.DropDownListFor(model => Model.company_department_id, new SelectList(um.listDepartments, "id", "department_nm"), new { @class = "selectStyled" })
                 </div>
                 <div class="blockPersonalSettings greyBorder">
                     <p class="title">@GlobalRes.Location</p>
-                    @Html.DropDownListFor(model => Model.company_location_id, new SelectList(cm.Locations(um._user.company_id), "id", "location_en"))
+                    @Html.DropDownListFor(model => Model.company_location_id, new SelectList(cm.Locations(um._user.company_id), "id", "location_en"), new { @class = "selectStyled" })
                 </div>
 
                 <div class="blockPersonalSettings greyBorder">
