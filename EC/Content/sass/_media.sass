@@ -1092,13 +1092,18 @@
 	// analyticsSection
 
 	.analyticsSection
-		grid-template-columns: 45% 55%
+		grid-template-columns: 60% 40%
 		grid-template-rows:  minmax(570px, max-content)
 		&__textBlock
 			padding-left: 15%
 			padding-right: 3%
 		&__imageBlock
 			background-position: 0 40px
+	
+	.analyticsSection.analyticsSection-cc .analyticsSection__imageBlock
+		background-position: right bottom;
+		background-size: auto
+
 
 	.grid-text__list
 		padding-left: 5%
@@ -1445,6 +1450,8 @@
 	.employeeSection__textBlock
 		padding-right: 18%
 
+	.analyticsSection-cc .analyticsSection__textBlock
+		padding-left: 10%
 @media only screen and (min-width : 1690px)
 	/**/
 
