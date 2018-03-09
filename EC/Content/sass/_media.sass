@@ -1092,14 +1092,17 @@
 	// analyticsSection
 
 	.analyticsSection
-		grid-template-columns: 60% 40%
+		grid-template-columns: 40% 60%
 		grid-template-rows:  minmax(570px, max-content)
 		&__textBlock
 			padding-left: 15%
 			padding-right: 3%
 		&__imageBlock
-			background-position: 0 40px
+			background-size: auto
+			background-position: left bottom;
 	
+	.analyticsSection.analyticsSection-cc
+		grid-template-columns: 60% 40%
 	.analyticsSection.analyticsSection-cc .analyticsSection__imageBlock
 		background-position: right bottom;
 		background-size: auto

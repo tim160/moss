@@ -106,20 +106,24 @@ $(document).ready(function(){
       event.preventDefault();
     });
     $( leadeShipInfo_linkSelector ).focus(function(){
-      $( this ).parent().addClass("active");
-      $( this ).next().fadeIn();
+      var $this = $( this );
 
-      var dropBlock_height = $( this ).next().height();
-      console.log(dropBlock_height);
-      $( this ).parent().css( "marginBottom", dropBlock_height+"px" );
+      $this.parent().addClass("active");
+      $this.next().fadeIn();
+
+      var dropBlock_height = $this.next().height();
+      // console.log(dropBlock_height);
+      $this.parent().css( "marginBottom", dropBlock_height+"px" );
 
       $(".leaderShipSection").addClass("active");
-      $( this ).focusout(function(){
-          $( this ).parent().removeClass("active");
-          $( this ).next().fadeOut();
-          $( this ).parent().css( "marginBottom", "0px" );
+
+      $this.focusout(function(){
+          $this.parent().removeClass("active");
+          $this.next().fadeOut();
+          $this.parent().css( "marginBottom", "0px" );
           $(".leaderShipSection").removeClass("active");
       });
+
     });
   }
   function leadeShipInfo_Close ( leadeShipInfo_closeLinkSelector ){
@@ -127,10 +131,12 @@ $(document).ready(function(){
       event.preventDefault();
     });
     $( leadeShipInfo_closeLinkSelector ).click(function(){
-      $( this ).closest(".leaderShipBlock-infoContainerBg").fadeOut();
-      $( this ).closest(".leaderShipBlock").css( "marginBottom", "0px" );
+      var $this = $( this );
+
+      $this.closest(".leaderShipBlock-infoContainerBg").fadeOut();
+      $this.closest(".leaderShipBlock").css( "marginBottom", "0px" );
       $(".leaderShipSection").removeClass("active");
-      $( this ).closest(".leaderShipBlock").removeClass("active");
+      $this.closest(".leaderShipBlock").removeClass("active");
     });
   }
 
