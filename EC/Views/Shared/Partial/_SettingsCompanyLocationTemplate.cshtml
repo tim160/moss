@@ -1,0 +1,31 @@
+﻿@using EC.Models.Database
+
+@model company_location
+
+@{
+    var is_cc = (bool?)ViewBag.is_cc;
+    var is_valid_mediator = (bool)ViewBag.is_valid_mediator;
+}
+
+<div style="display: flex;">
+    <p>
+        <span class="col-6">
+            <span class="location_name">@Model.location_en</span>
+        </span>
+        <span class="col-6">
+            @if (is_cc.Value)
+            {
+                var list = (SelectList)ViewBag.LocationExtendeds;
+                if (Model.location_cc_extended_id.HasValue)
+                {
+                    list = new SelectList(list, "Value", "Text", Model.location_cc_extended_id.Value.ToString());
+                }
+                @Html.DropDownList("location_cc_extended_" + Model.id, list, "Select Location Category", new { @class = "location_cc_extended_items select-def" })
+            }
+        </span>
+    </p>
+    @if (is_valid_mediator)
+    {
+        <div data-value="@Model.id" class="deleteLocation"></div>
+    }
+</div>

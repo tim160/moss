@@ -49,7 +49,7 @@
             </div><!-- /.loginSection__titleBg -->
             <div class="loginSection__contentBg">
                 <div class="container loginSection__container">
-                    @using (Html.BeginForm("Login", "Service", FormMethod.Post, new { }))
+                    @using (Html.BeginForm("Login", "Service", new { returnUrl = Request.Params["returnUrl"] }, FormMethod.Post))
                     {
                         <div class="loginForm">
                             <label class="loginForm__input">

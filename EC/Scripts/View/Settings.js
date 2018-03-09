@@ -359,8 +359,8 @@
             var data = '' + name + '\n' + cc;
 
             if ($('.addNewLocation input[name="newLocationName"]').val().length > 0) {
-                sendAjax('Location', data, function (id) {
-                    var s = '<div style="display:flex"><p>';
+                sendAjax('Location', data, function (html) {
+                    /*var s = '<div style="display:flex"><p>';
                     s += '<span class="location_name">' + name + '</span>';
                     if ($('#location_cc_extended').length != 0) {
                         s += '<select class="location_cc_extended_items" id="location_cc_extended_' + id + '" name="location_cc_extended_' + id + '"><option value="">Not selected</option>';
@@ -373,9 +373,10 @@
                     if (cc != 'none') {
                         $('#location_cc_extended_' + id).val(cc);
                     }
-                    init_location_cc_extended();
+                    init_location_cc_extended();*/
+                    $('#tableLocation').append(html);
                     closeIcon('Location');
-                });
+                }, 'Location');
             } else {
                 $('.addNewLocation').css('border-color', 'red');
             }

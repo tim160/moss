@@ -157,31 +157,13 @@
                     }
                     <div class="closeIcon"></div>
                 </div>
-                <div class="tableLocation">
+                <div class="tableLocation" id="tableLocation">
                     @foreach (company_location _location in cm.Locations(company_id, 2))
                     {
-                        <div style="display: flex;">
-                            <p>
-                                <span class="col-6">
-                                    <span class="location_name">@_location.location_en</span>
-                                </span>
-                                <span class="col-6">
-                                    @if (is_cc.Value)
-                                    {
-                                        var list = (SelectList)ViewBag.LocationExtendeds;
-                                        if (_location.location_cc_extended_id.HasValue)
-                                        {
-                                            list = new SelectList(list, "Value", "Text", _location.location_cc_extended_id.Value.ToString());
-                                        }
-                                        @Html.DropDownList("location_cc_extended_" + _location.id, list, "Select Location Category", new { @class = "location_cc_extended_items select-def" })
-                                    }
-                                </span>
-                            </p>
-                            @if (is_valid_mediator)
-                            {
-                                <div data-value="@_location.id" class="deleteLocation"></div>
-                            }
-                        </div>
+                        @Html.Partial("~/Views/Shared/Partial/_SettingsCompanyLocationTemplate.cshtml", _location, new ViewDataDictionary {
+                            { "is_cc", is_cc },
+                            { "is_valid_mediator", is_valid_mediator },
+                        })
                     }
                 </div>
 

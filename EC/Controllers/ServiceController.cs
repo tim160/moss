@@ -29,7 +29,7 @@ namespace EC.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(LoginViewModel model)
+        public ActionResult Login(LoginViewModel model, string returnUrl)
         {
             Session.Clear();
             GlobalFunctions glb = new GlobalFunctions();
@@ -49,6 +49,11 @@ namespace EC.Controllers
 
                     Session["userName"] = "";
                     Session["userId"] = user.id;
+
+                    if (returnUrl != null)
+                    {
+                        return Redirect(returnUrl);
+                    }
 
                     if (user.role_id == 8)
                     {

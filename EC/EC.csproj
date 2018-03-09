@@ -1183,6 +1183,7 @@
     <Content Include="Views\Service\ForgetPassword-CC.cshtml" />
     <Content Include="Views\Service\Restore-CC.cshtml" />
     <Content Include="Views\Service\RestorePass-CC.cshtml" />
+    <Content Include="Views\Shared\Partial\_SettingsCompanyLocationTemplate.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

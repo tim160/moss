@@ -48,7 +48,7 @@
                 </div><!-- /.container -->
             </div><!-- /.loginSection__titleBg -->
             <div class="loginSection__contentBg">
-                @using (Html.BeginForm("Login", "Service", FormMethod.Post, new { }))
+                @using (Html.BeginForm("Login", "Service", new { returnUrl = Request.Params["returnUrl"] }, FormMethod.Post))
                 {
                     <div class="container loginSection__container">
                         <div class="loginForm">

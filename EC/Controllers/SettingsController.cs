@@ -299,6 +299,10 @@ namespace EC.Controllers
             {
                 return BlockRootCauses();
             }
+            if (Request.QueryString["partial"] == "Location")
+            {
+                return LocationPartial(flag);
+            }
             return flag;
         }
 
@@ -722,6 +726,37 @@ namespace EC.Controllers
             ViewBag.is_valid_mediator = is_valid_mediator;
 
             return this.RenderPartialView("~/Views/Settings/partial/blockRootCauses.cshtml", null, ViewData);
+        }
+
+        public string LocationPartial(string locationId)
+        {
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            if (user == null || user.id == 0)
+                return "";
+
+            UserModel um = new UserModel(user.id);
+            bool is_valid_mediator = false;
+            var role_id = um._user.role_id;
+            if (role_id == ECLevelConstants.level_supervising_mediator)
+            {
+                is_valid_mediator = true;
+            }
+            if (um._user.user_permissions_change_settings == 1)
+            {
+                is_valid_mediator = true;
+            }
+
+            ViewBag.is_valid_mediator = is_valid_mediator;
+            ViewBag.is_cc = is_cc;
+
+            int id;
+            if (int.TryParse(locationId, out id))
+            {
+                var location = db.company_location.FirstOrDefault(x => x.id == id);
+                return this.RenderPartialView("~/Views/Shared/Partial/_SettingsCompanyLocationTemplate.cshtml", location, ViewData);
+            }
+
+            return "";
         }
     }
 }
