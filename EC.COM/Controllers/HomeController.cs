@@ -10,7 +10,7 @@ namespace EC.COM.Controllers
 {
     public class HomeController : Controller
     {
-        readonly bool isCC = bool.Parse(System.Configuration.ConfigurationManager.AppSettings["isCC"]);
+        readonly bool isCC = bool.Parse(ConfigurationManager.AppSettings["isCC"]);
 
         public ActionResult Index()
         {
@@ -34,13 +34,15 @@ namespace EC.COM.Controllers
                 try
                 {
                     string[] emails = ConfigurationManager.AppSettings["email"].Split(';');
-
+                    string domain_name = "http://employeeconfidential.com/";
+                    if(isCC)
+                        domain_name = "http://campusconfidential.com/";
                     for (int i = 0; i < emails.Count(); i++)
                     {
                         MailMessage mailMessage = new MailMessage();
                         mailMessage.To.Add(emails[i]);
-                        mailMessage.Subject = "New user in http://employeeconfidential.com/";
-                        mailMessage.Body = "Hello,\n\n new request in http://employeeconfidential.com/ \n\n First name is " + fname +
+                        mailMessage.Subject = "New user in " + domain_name;
+                        mailMessage.Body = "Hello,\n\n new request in " + domain_name + " \n\n First name is " + fname +
                             "\n\n Last Name is " + lname + "\n\n Company name is " + cname + "\n\n Phone is " + phone + "\n\n email is " + email;
 
                         SmtpClient smtpClient = new SmtpClient();
