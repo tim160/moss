@@ -296,15 +296,15 @@
                                 @GlobalRes.Password
                             </a>
                         </li>
-                        <li class="dropDown-navigation__li">
+                        @*<li class="dropDown-navigation__li">
                             <a href="/Payment/History" class="dropDown-navigation__a">
                                 @GlobalRes.Subscription
                             </a>
-                        </li>
+                        </li>*@
                         <li class="dropDown-navigation__li">
                             <form id="logout_form" action="@Url.Action("Logout", "Base")">
                                 <a href="javascript:{}" onclick="document.getElementById('logout_form').submit();" class="dropDown-navigation__a">
-                                    @GlobalRes.Logout
+                                    @Resources.GetString("Logout2")
                                 </a>
                             </form>
                         </li>

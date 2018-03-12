@@ -248,12 +248,12 @@
                             <a href="/settings/password/">@GlobalRes.Password</a>
                             <!--<button>Settings</button>-->
                         </li>
-                        <li>
+                        @*<li>
                         <a href="/Payment/History">@GlobalRes.Subscription</a>
-                        </li>
+                        </li>*@
                         <li>
                             <form action="@Url.Action("Logout", "Base")">
-                                <button>@GlobalRes.Logout</button>
+                                <button>@Resources.GetString("Logout2")</button>
                             </form>
                         </li>
                     </ul>

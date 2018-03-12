@@ -2104,4 +2104,7 @@
   <data name="FillTheFollowingFieldsRegister" xml:space="preserve">
     <value>Fill in the following fields and click "Register" to create an account</value>
   </data>
+  <data name="Logout2" xml:space="preserve">
+    <value>Log Out</value>
+  </data>
 </root>
