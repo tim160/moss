@@ -1,6 +1,7 @@
 $(document).ready(function(){
 
 	// OWL Carousel options
+  var active_class = "active";
 
   $(".owl-carousel").owlCarousel({
   	"items": 							1,
@@ -20,9 +21,9 @@ $(document).ready(function(){
 
   function fieldActiveOnFocus ( inputSelector ){
     $( inputSelector ).focus(function(){
-      $( this ).parent().addClass("active");
+      $( this ).parent().addClass(active_class);
       $( this ).focusout(function(){
-        $( this ).parent().removeClass("active");
+        $( this ).parent().removeClass(active_class);
       });
     });
   }
@@ -98,45 +99,56 @@ $(document).ready(function(){
   }
 
   // About page drop info
+
+  var leaderShipSection         = ".leaderShipSection",
+      leaderShipBlock           = ".leaderShipBlock",
+      leaderShipBlock_Active    = ".leaderShipBlock.active",
+      leaderShipBlock_FullInfo  = ".leaderShipBlock-infoContainerBg";
+
+
   leadeShipInfo_Open( ".leaderShipBlock__link" );
   leadeShipInfo_Close(".leaderShipBlock-infoContainer__close");
+
+  $('html').click(function(e) {
+    //if clicked element is not your element and parents aren't your div
+    if (e.target.id != leaderShipBlock && $(e.target).parents('.leaderShipSection__container').length == 0) {
+      //do stuff
+      $(leaderShipSection).removeClass(active_class);
+      $(leaderShipBlock).css( "marginBottom", "0" ).removeClass(active_class);
+      $(leaderShipBlock_FullInfo).fadeOut();
+    }
+  });
 
   function leadeShipInfo_Open ( leadeShipInfo_linkSelector ){
     $ ( leadeShipInfo_linkSelector ).click(function( event ){
       event.preventDefault();
-    });
-    $( leadeShipInfo_linkSelector ).focus(function(){
+
       var $this = $( this );
-
-      $this.parent().addClass("active");
-      $this.next().fadeIn();
-
       var dropBlock_height = $this.next().height();
-      // console.log(dropBlock_height);
-      $this.parent().css( "marginBottom", dropBlock_height+"px" );
 
-      $(".leaderShipSection").addClass("active");
+      if (!( $this.parent(leaderShipBlock).hasClass(active_class) )){
+        $(leaderShipSection).addClass(active_class);
 
-      $this.focusout(function(){
-          $this.parent().removeClass("active");
-          $this.next().fadeOut();
-          $this.parent().css( "marginBottom", "0px" );
-          $(".leaderShipSection").removeClass("active");
-      });
-
+        $(leaderShipBlock_Active).toggleClass(active_class)
+          .css( "marginBottom", "0" )
+          .children(leaderShipBlock_FullInfo).fadeOut();
+        $this.parents(leaderShipBlock).toggleClass(active_class)
+          .css( "marginBottom", dropBlock_height+"px" )
+          .children(leaderShipBlock_FullInfo).fadeIn();
+      }
     });
   }
+
   function leadeShipInfo_Close ( leadeShipInfo_closeLinkSelector ){
     $ ( leadeShipInfo_closeLinkSelector ).click(function( event ){
       event.preventDefault();
-    });
-    $( leadeShipInfo_closeLinkSelector ).click(function(){
+
       var $this = $( this );
 
-      $this.closest(".leaderShipBlock-infoContainerBg").fadeOut();
-      $this.closest(".leaderShipBlock").css( "marginBottom", "0px" );
-      $(".leaderShipSection").removeClass("active");
-      $this.closest(".leaderShipBlock").removeClass("active");
+      $this.closest(leaderShipBlock_FullInfo).fadeOut();
+      $this.closest(leaderShipBlock).css( "marginBottom", "0" );
+      $(leaderShipSection).removeClass(active_class);
+      $this.closest(leaderShipBlock).removeClass(active_class);
     });
   }
 
