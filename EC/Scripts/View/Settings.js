@@ -104,7 +104,6 @@
             for (var i = 0; i < file.files.length; i++) {
                 fd.append('_file', file.files[i]);
             }
-
             $.ajax({
                 type: "POST",
                 url: urlAjaxUploadFiles,

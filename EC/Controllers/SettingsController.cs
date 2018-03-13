@@ -255,6 +255,48 @@ namespace EC.Controllers
 
             return View(viewd_user._user);
         }
+
+        [HttpPost]
+        public object User(int id, HttpPostedFileWrapper _file)
+        {
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            if (user == null || user.id == 0)
+            {
+                return new
+                {
+                    ok = false,
+                    message = "Authorization needed",
+                };
+            }
+
+            var fi = new System.IO.FileInfo(_file.FileName);
+            if (".png,.jpg,.jpeg,*.gif,*.bmp,".IndexOf(fi.Extension.ToLower()) == -1)
+            {
+                return new
+                {
+                    ok = false,
+                    message = "Not valid extension",
+                };
+            }
+
+            UserModel um = new UserModel(user.id);
+            CompanyModel cm = new CompanyModel(um._user.company_id);
+
+            var folder = Server.MapPath(String.Format("~/Upload/Company/{0}/users", cm._company.guid));
+            if (!System.IO.Directory.Exists(folder))
+            {
+                System.IO.Directory.CreateDirectory(folder);
+            }
+            var file = String.Format("{0}\\{1}{2}", folder, user.guid, fi.Extension);
+            _file.SaveAs(file);
+
+            var dbUser = db.user.FirstOrDefault(x => x.id == user.id);
+            var url = String.Format("~/Upload/Company/{0}/users/{1}{2}", cm._company.guid, user.guid, fi.Extension);
+            dbUser.photo_path = url;
+            db.SaveChanges();
+
+            return url.Substring(1);
+        }
         // GET: Settings
         public ActionResult Cases()
         {
