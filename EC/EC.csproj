@@ -484,6 +484,10 @@
     <Content Include="Content\img\checkbox_checked.png" />
     <Content Include="Content\img\cutImage.jpg" />
     <Content Include="Content\img\down_arrow_select.png" />
+    <Content Include="Content\img\EC-line-2x-cc.png" />
+    <Content Include="Content\img\EC-line-2x.png" />
+    <Content Include="Content\img\EC-logo-2x-cc.png" />
+    <Content Include="Content\img\EC-logo-2x.png" />
     <Content Include="Content\img\employeeAwarenessPoster.jpg" />
     <Content Include="Content\img\EmployeeAwareness\img1.png" />
     <Content Include="Content\img\EmployeeAwareness\img10.png" />
