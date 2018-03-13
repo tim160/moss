@@ -25,7 +25,7 @@ namespace EC.Controllers
         //   ReportModel reportModel = new ReportModel();
 
         private readonly UserModel userModel = UserModel.inst;
-        private readonly CompanyModel companyModel = CompanyModel.inst;
+        private readonly CompanyModel companyModel = new CompanyModel();
         private readonly ReportModel reportModel = new ReportModel();
 
         //
@@ -39,6 +39,7 @@ namespace EC.Controllers
             ///    reportModel = new ReportModel();
             ///     userModel = new UserModel();
             ////   companyModel = new CompanyModel();
+            ModelState.Clear();
 
             int id = 0;
             if (companyCode != null)
@@ -74,7 +75,6 @@ namespace EC.Controllers
                 //         reporter - file report no company
                 ////screen - http://invis.io/QK2VGQNAW
                 ////PSD - http://invis.io/a/G91HFKB8NJ4ZV
-
 
 
                 CompanyModel model = new CompanyModel(id);
@@ -232,7 +232,7 @@ namespace EC.Controllers
 
 
             int id = 1;
-            var currentCompany = CompanyModel.inst.GetById(id);
+            var currentCompany = new CompanyModel().GetById(id);
             ViewBag.currentCompany = currentCompany.company_nm;
             ViewBag.currentCompanyId = currentCompany.id;
             ViewBag.currentCompanySubmitted = currentCompany.company_nm;
@@ -270,7 +270,7 @@ namespace EC.Controllers
 
 
             int id = 1;
-            var currentCompany = CompanyModel.inst.GetById(id);
+            var currentCompany = new CompanyModel().GetById(id);
             ViewBag.currentCompany = currentCompany.company_nm;
             ViewBag.currentCompanyId = currentCompany.id;
             ViewBag.currentCompanySubmitted = currentCompany.company_nm;
@@ -307,7 +307,7 @@ namespace EC.Controllers
 
 
             int id = 1;
-            var currentCompany = CompanyModel.inst.GetById(id);
+            var currentCompany = new CompanyModel().GetById(id);
             ViewBag.currentCompany = currentCompany.company_nm;
             ViewBag.currentCompanyId = currentCompany.id;
             ViewBag.currentCompanySubmitted = currentCompany.company_nm;
@@ -344,7 +344,7 @@ namespace EC.Controllers
 
 
             int id = 1;
-            var currentCompany = CompanyModel.inst.GetById(id);
+            var currentCompany = new CompanyModel().GetById(id);
             ViewBag.currentCompany = currentCompany.company_nm;
             ViewBag.currentCompanyId = currentCompany.id;
             ViewBag.currentCompanySubmitted = currentCompany.company_nm;
@@ -390,7 +390,7 @@ namespace EC.Controllers
             List<anonymity> list_anon = null;
             if (company_id != null && country_id != null)
             {
-                var currentCompany = CompanyModel.inst.GetById(company_id);
+                var currentCompany = new CompanyModel().GetById(company_id);
                 list_anon = companyModel.GetAnonymities(company_id, country_id);
                 foreach (anonymity _anon in list_anon)
                 {

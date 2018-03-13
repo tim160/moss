@@ -16,7 +16,7 @@ namespace EC.Models
 {
     public class CompanyModel : BaseModel
     {
-        public static CompanyModel inst = new CompanyModel();
+        //public static CompanyModel inst = new CompanyModel();
 
         #region Properties
         public int ID
@@ -385,7 +385,10 @@ namespace EC.Models
                 var companyAnonymitiesId = (from ca in db.company_anonymity
                                             where (ca.company_id == companyId)
                                             select ca.anonymity_id).ToList();
-                anonymities = db.anonymity.Where(s => companyAnonymitiesId.Contains(s.id)).ToList();
+                anonymities = db.anonymity
+                    //.AsNoTracking()
+                    .Where(s => companyAnonymitiesId.Contains(s.id))
+                    .ToList();
             }
             else
             {

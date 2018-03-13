@@ -23,7 +23,7 @@ namespace EC.Controllers
     public class SettingsController : BaseController
     {
 
-        private readonly CompanyModel companyModel = CompanyModel.inst;
+        private readonly CompanyModel companyModel = new CompanyModel();
         private SettingsModel SettingsModel = new SettingsModel();
         // GET: Settings
         public ActionResult Index()

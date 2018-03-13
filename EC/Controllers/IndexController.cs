@@ -22,7 +22,7 @@ namespace EC.Controllers
 {
     public class IndexController : BaseController
     {
-        private readonly CompanyModel companyModel = CompanyModel.inst;
+        private readonly CompanyModel companyModel = new CompanyModel();
         //
         // GET: /Index/
         //[EcAuthorized("admin, moderator, mediator")] //раскоментировать когда будет использоваться авторизация! и в BaseController
