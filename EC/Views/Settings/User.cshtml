@@ -35,10 +35,13 @@
                 <input type="hidden" id="urlAjaxUploadFiles" from="User" value="@Url.Action("User", "Settings")"/>
                 <input type="file" accept="image/*" id="_file" name="_file" multiple="multiple" style="width: 1px;height: 1px;opacity: 0;">
             </div>
-            <div class="blockHoverPhoto">
-                <label class="close"></label>
-                <label class="newImageBtn">@GlobalRes.Newimage</label>
-            </div>
+            @if (um._user.role_id == 5)
+            {
+                <div class="blockHoverPhoto">
+                    <label class="close"></label>
+                    <label class="newImageBtn">@GlobalRes.Newimage</label>
+                </div>
+            }
         </div>
 
 
