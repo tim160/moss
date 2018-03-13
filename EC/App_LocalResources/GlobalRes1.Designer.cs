@@ -5371,7 +5371,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Setup Case Administrator Profiles:.
+        ///   Looks up a localized string similar to Set up Case Administrator Profiles:.
         /// </summary>
         public static string SetupMediatorProfiles {
             get {

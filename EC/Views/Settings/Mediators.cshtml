@@ -62,7 +62,7 @@
                 @if (um._user.role_id == 5)
                 {
                     <div class="blockIteamTeam footerInputStyle">
-                        @Html.ActionLink("setup case administrator", "User", new { id = 0 }, new { @class = "positionLinkIviteMediator greenButton greenButtonCustom disableUnderline" })
+                        @Html.ActionLink("Add a Case Administrator", "User", new { id = 0 }, new { @class = "positionLinkIviteMediator greenButton greenButtonCustom disableUnderline" })
                     </div>
                 }
                 <!--end empty block-->
@@ -270,7 +270,7 @@
                     {
                         if (is_valid_mediator)
                         {
-                            <div class="headerBlock">
+                            @*@<div class="headerBlock">
                                 <div class="blockText">
                                     <p class="title">@Resources.GetString("invite_new_mediator", is_cc)</p>
                                 </div>
@@ -280,7 +280,7 @@
                                 <div class="closeIcon"></div>
                                 <input id="sendMessage" type="submit" />
                                 <span class="sendBtn">@Resources.GetString("Send", is_cc).ToLower()</span>
-                            </div>
+                            </div>*@
                         }
                     }
 

@@ -1,6 +1,9 @@
 ﻿@using EC.Models;
 @using EC.Models.Database;
 @using EC.App_LocalResources;
+@using System.Collections;
+@using EC.Localization;
+
 
 @{
     <link rel="stylesheet" type="text/css" href="/Content/styleReportDashboard.css">
@@ -27,7 +30,7 @@
         <h1 class="helloUser">@GlobalRes.Hellouser!</h1>
     </div>
     <div class="contentSettings">
-        <p class="helloUser">@GlobalRes.FillTheFollowingFields.</p>
+        <p class="helloUser">@Resources.GetString("FillTheFollowingFieldsRegister").</p>
 
         <div class="blockPersonalPhotoSetting">
             <div class="blockPhotoSetting">
@@ -94,7 +97,7 @@
 
             <div class="blockUpdateProfile">
                 <div class="updateProfileBtn">
-                    <input class="greenButton" type="submit" value="create" />
+                    <input class="greenButton" type="submit" value="@Resources.GetString("Register")" />
                     <span style="display: none;">@GlobalRes.CreateProfileUp.ToLower()</span>
                 </div>
             </div>

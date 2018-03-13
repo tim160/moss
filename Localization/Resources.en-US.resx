@@ -1823,7 +1823,7 @@
     <value>Settings</value>
   </data>
   <data name="SetupMediatorProfiles" xml:space="preserve">
-    <value>Setup Case Administrator Profiles:</value>
+    <value>Set up Case Administrator Profiles:</value>
   </data>
   <data name="Severity" xml:space="preserve">
     <value>Severity</value>
