@@ -10,7 +10,7 @@ $(document).ready(function(){
   	"dots": 							false,
   	"navContainerClass": "owl-nav",
   	 "autoplay": 					true,
-  	 "autoplayTimeout": 		4500
+  	 "autoplayTimeout": 		7500
   });
 
   // Active input in contact form
