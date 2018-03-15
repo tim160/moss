@@ -162,7 +162,7 @@
                         <textarea class="facts-established--text" ng-model="model.note1" ng-show="editNote1"> </textarea>
                     </div>
                     <div class="row clearfix">
-                        <p ng-show="!editNote1">{{model.note1}}</p>
+                        <p ng-show="!editNote1" style="line-height: 18px;">{{model.note1}}</p>
                         <a href="#" class="green--button facts--submit" ng-show="editNote1" ng-click="saveNote(1)">Save</a>
                         <a href="#" class="green--button facts--submit" ng-show="!editNote1" ng-click="editNote1 = true">
                             {{model.note1 || '' !== '' ? 'Edit' : 'Add'}}
