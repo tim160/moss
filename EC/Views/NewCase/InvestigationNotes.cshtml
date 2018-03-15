@@ -199,7 +199,7 @@
                         <div class="col-3">
                             <p class="content-container__p">{{item.secondary_type_en}}</p>
                         </div>
-                        <div class="col-6">
+                        <div class="col-4">
                             <div class="investigation__inner">
                                 <dropbox ng-dropbox-textExpr="getBehavioralFactors(item)"
                                          itemText="{{item.name_en}}"
@@ -208,12 +208,14 @@
                                          ng-dropbox-on-select="changeBehavioralFactors">
                                 </dropbox>
                             </div>
+                        </div>
+                        <div class="col-4">
                             <div class="">
                                 <textarea class="facts-established--text" cols="20" rows="5" ng-model="item.inv_meth_bf_note" ng-show="item.behavioralEditMode"></textarea>
                                 <p ng-show="!item.behavioralEditMode">{{item.inv_meth_bf_note}}</p>
                             </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-1">
                             <a href="#" class="green--button facts--submit" ng-click="item.behavioralEditMode = !item.behavioralEditMode" ng-show="!item.behavioralEditMode">
                                 {{item.inv_meth_bf_note != '' ? 'Edit note' : 'Add note'}}
                             </a>
@@ -223,8 +225,9 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-3"></div>
-                        <div class="col-6">
+                        <div class="col-3">
+                        </div>
+                        <div class="col-4">
                             <div class="investigation__inner">
                                 <dropbox ng-dropbox-textExpr="getExternalInfluences(item)"
                                          itemText="{{item.name_en}}"
@@ -233,12 +236,14 @@
                                          ng-dropbox-on-select="changeExternalInfluences">
                                 </dropbox>
                             </div>
+                        </div>
+                        <div class="col-4">
                             <div class="">
                                 <textarea class="facts-established--text" ng-model="item.inv_meth_ei_note" ng-show="item.externalInfluencesEditMode"></textarea>
                                 <p ng-show="!item.externalInfluencesEditMode">{{item.inv_meth_ei_note}}</p>
                             </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-1">
                             <span class="green--button facts--submit" ng-click="item.externalInfluencesEditMode = !item.externalInfluencesEditMode" ng-show="!item.externalInfluencesEditMode">
                                 {{item.inv_meth_ei_note != '' ? 'Edit note' : 'Add note'}}
                             </span>
@@ -248,8 +253,9 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-3"></div>
-                        <div class="col-6">
+                        <div class="col-3">
+                        </div>
+                        <div class="col-4">
                             <div class="investigation__inner">
                                 <dropbox ng-dropbox-textExpr="getCampusInfluences(item)"
                                          itemText="{{item.name_en}}"
@@ -258,12 +264,14 @@
                                          ng-dropbox-on-select="changeCampusInfluences">
                                 </dropbox>
                             </div>
+                        </div>
+                        <div class="col-4">
                             <div class="">
                                 <textarea class="facts-established--text" ng-model="item.inv_meth_ci_note" ng-show="item.campusInfluencesEditMode"></textarea>
                                 <p ng-show="!item.campusInfluencesEditMode">{{item.inv_meth_ci_note}}</p>
                             </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-1">
                             <span class="green--button facts--submit" ng-click="item.campusInfluencesEditMode = !item.campusInfluencesEditMode" ng-show="!item.campusInfluencesEditMode">
                                 {{item.inv_meth_ci_note != '' ? 'Edit note' : 'Add note'}}
                             </span>
