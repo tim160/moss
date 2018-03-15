@@ -264,6 +264,10 @@ namespace EC.Controllers
                 for (int i = 0; i < Request.Files.Count; i++)
                 {
                     var file = Request.Files[i];
+                    if (file.ContentLength == 0)
+                    {
+                        continue;
+                    }
                     var report = db.report.FirstOrDefault(x => x.id == report_id);
 
                     var a = new attachment();
