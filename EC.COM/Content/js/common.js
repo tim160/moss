@@ -9,8 +9,8 @@ $(document).ready(function(){
   	"loop": 							true,
   	"dots": 							false,
   	"navContainerClass": "owl-nav",
-  	 "autoplay": 					true,
-  	 "autoplayTimeout": 		7500
+  	"autoplay": 					true,
+  	"autoplayTimeout": 		7500
   });
 
   // Active input in contact form

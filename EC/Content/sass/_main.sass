@@ -223,7 +223,9 @@
 	&__text
 		font-family: $lightItalic-font
 		color: $grey-color
+		font-style: italic
 	&__text-signature
+		font-style: italic
 		& b
 			font-family: $semiboldItalic-font
 
@@ -436,10 +438,12 @@
 .wideSection__mainText
 	font-family: $lightItalic-font
 	color: $grey-color
+	font-style: italic
 
 .wideSection__signatureText
 	font-family: $lightItalic-font
 	color: $grey-color
+	font-style: italic
 
 // greySection
 
@@ -514,6 +518,7 @@
 	color: $accent-color
 	background-color: #eff2f2
 
+
 input
 	border: none
 	display: block
@@ -522,6 +527,14 @@ input
 	&:focus,
 	&:hover
 		outline: none
+
+input::-webkit-contacts-auto-fill-button
+	visibility: hidden
+	display: none !important
+	pointer-events: none
+	position: absolute
+	right: 0
+
 
 .learnMore-form__content-input.active
 	background-color: $lightBg-color
