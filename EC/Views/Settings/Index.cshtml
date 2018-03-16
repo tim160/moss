@@ -83,9 +83,9 @@
                     <p class="title">@GlobalRes.Department</p>
                     @Html.DropDownListFor(model => Model.company_department_id, new SelectList(um.listDepartments, "id", "department_nm"), new { @class = "selectStyled" })
                 </div>
-                <div class="blockPersonalSettings greyBorder">
+                <div class="blockPersonalSettings greyBorder @(ViewContext.ViewData.ModelState["company_location_id"] == null ? "" : "has-error")">
                     <p class="title">@GlobalRes.Location</p>
-                    @Html.DropDownListFor(model => Model.company_location_id, new SelectList(cm.Locations(um._user.company_id), "id", "location_en"), new { @class = "selectStyled" })
+                    @Html.DropDownListFor(model => Model.company_location_id, new SelectList(cm.Locations(um._user.company_id, 2), "id", "location_en"), "", new { @class = "selectStyled" })
                 </div>
 
                 <div class="blockPersonalSettings greyBorder">

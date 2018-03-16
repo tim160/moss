@@ -352,6 +352,10 @@ namespace EC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult UpdateUser([Bind(Include = "id,first_nm,last_nm,title_ds,email,company_department_id,user_permissions_approve_case_closure,user_permissions_change_settings,company_location_id")] user _user)
         {
+            if (!(_user.company_location_id.HasValue) || (_user.company_location_id == 0))
+            {
+                ModelState.AddModelError("company_location_id", @GlobalRes.Location);
+            }
             if (ModelState.IsValid)
             {
                 using (var db1 = new ECEntities())
@@ -378,7 +382,22 @@ namespace EC.Controllers
 
                 //     return RedirectToAction("Index");
             }
-            return View(_user);
+
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            if (user == null || user.id == 0)
+                return RedirectToAction("Index", "Account");
+
+            int user_id = user.id;
+
+            UserModel um = new UserModel(user_id);
+            Company ecModelCompany = new Company();
+            um.listDepartments = ecModelCompany.CompanyDepartments(user.company_id, 1, true);
+            ViewBag.um = um;
+            ViewBag.page_subtitle = GlobalRes.Settings;
+            ViewBag.user_id = user_id;
+            um._user.user_permissions_approve_case_closure = um._user.user_permissions_approve_case_closure == null ? 2 : um._user.user_permissions_approve_case_closure;
+            um._user.user_permissions_change_settings = um._user.user_permissions_change_settings == null ? 2 : um._user.user_permissions_change_settings;
+            return View("Index", _user);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]

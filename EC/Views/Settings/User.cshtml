@@ -60,14 +60,14 @@
             </div>
             <div class="blockPersonalSettings greyBorder"  ng-class="{error: val_departmentId }">
                 <p class="title">@GlobalRes.Department</p>
-                <select ng-model="departmentId">
+                <select ng-model="departmentId" class="selectStyled">
                     <option ng-repeat="item in departments" ng-value="{{item.id}}" ng-selected="departmentId == item.id" >{{item.department_en}}</option>                    
                     <option value="0">@GlobalRes.Other</option>
                 </select>
             </div>
             <div class="blockPersonalSettings greyBorder" ng-class="{error: val_locationId }">
                 <p class="title">@GlobalRes.Location</p>
-                <select ng-model="locationId">
+                <select ng-model="locationId" class="selectStyled">
                     <option ng-repeat="item in locations" ng-value="{{item.id}}" ng-selected="locationId == item.id">{{item.location_en}}</option>
                     <option value="0">@GlobalRes.Other</option>
                 </select>
@@ -78,17 +78,47 @@
             </div>
             <div class="blockPersonalSettings greyBorder">
                 <div id="personeAgain">
-                    <div class="title">@GlobalRes.Role</div>
+                    <div class="title">@GlobalRes.UserPermissions</div>
                     <div class="help" title="">
                         ?
                         <div class="hoverElement">
                             <div class="triangleHover position"></div>
                             <div class="spec position">
-                                <ul>
+                                <table>
+                                    <tr>
+                                        <td>User Permissions:</td>
+                                        <td>Change Settings</td>
+                                        <td>Sign-Off Case</td>
+                                        <td>All Cases Access</td>
+                                        <td>Case Specific Access</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Platform Manager</td>
+                                        <td><div class="radio"></div></td>
+                                        <td><div class="radio"></div></td>
+                                        <td><div class="radio"></div></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Case Investigator</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><div class="radio"></div> </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Case Reviewer</td>
+                                        <td></td>
+                                        <td><div class="radio"></div></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                                @*<ul>
                                     <li>A <strong>Case Investigator</strong> is assigned to a specific case.</li>
                                     <li>A <strong>Platform Manager</strong> is responsible for and manages the Employee Confidential system and assigns all the cases (typically an HR manager).</li>
                                     <li>A <strong>Case Reviewer</strong> handles only escalation issues and signs off on case resolutions and closure applications.</li>
-                                </ul>
+                                </ul>*@
                             </div>
                         </div>
                     </div>
