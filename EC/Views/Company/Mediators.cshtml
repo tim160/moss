@@ -1,7 +1,6 @@
 ﻿@using EC.Models;
 @using EC.Models.Database;
 @using EC.Localization;
-
 @{
     bool? is_cc = ViewBag.is_cc;
     if (!is_cc.HasValue)
@@ -12,36 +11,30 @@
 
     var um = (UserModel)ViewBag.um;
     var user_id = um.ID;
-    ViewBag.Title = Resources.GetString("CompanyMediatorsSettings", is_cc);
+    ViewBag.Title = LocalizationGetter.GetString("CompanyMediatorsSettings", is_cc);
 }
-
 
 <div class="blockSettings">
     <div id="casesHeared">
         <div id="menu">
-            <a href="/Settings/Index" class="caseesTab">@Resources.GetString("MyProfile", is_cc)</a>
-            <a href="/Settings/Company" class="caseesTab">@Resources.GetString("CompanyProfile", is_cc)</a>
-            <a class="caseesTab active">@Resources.GetString("CompanyMediators", is_cc)</a>
-            <a href="/Settings/Cases" class="caseesTab">@Resources.GetString("CaseSettings", is_cc)</a>
+            <a href="/Settings/Index" class="caseesTab">@LocalizationGetter.GetString("MyProfile", is_cc)</a>
+            <a href="/Settings/Company" class="caseesTab">@LocalizationGetter.GetString("CompanyProfile", is_cc)</a>
+            <a class="caseesTab active">@LocalizationGetter.GetString("CompanyMediators", is_cc)</a>
+            <a href="/Settings/Cases" class="caseesTab">@LocalizationGetter.GetString("CaseSettings", is_cc)</a>
         </div>
-    @*    <div class="positionActivityIcon">
+        @*    <div class="positionActivityIcon">
                 <div id="activityIcon"></div>
             </div>*@
-        </div>
-
-        <div class="contentSettings">
-            <div class="PersonalPhotoBlock">
-
-            </div>
-            <div class="personalBlock">
-
-            </div>
-        </div>
-
     </div>
-
-    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script>
+    <div class="contentSettings">
+        <div class="PersonalPhotoBlock">
+        </div>
+        <div class="personalBlock">
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script>
             $(document).ready(function () {
             //    $('.activeCases').css('display', 'none');
             //    $('.completedCases').css('display', 'none');
@@ -68,4 +61,4 @@
             //    });
             });
 
-    </script>
+</script>

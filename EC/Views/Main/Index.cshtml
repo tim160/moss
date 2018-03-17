@@ -3,7 +3,7 @@
 @using EC.Models
 @using EC.Localization;
 @{
-    ViewBag.Title = GlobalRes.increportingandcasemanag;
+    ViewBag.Title = LocalizationGetter.GetString("increportingandcasemanag");
     Layout = "~/Views/Shared/_MainHTML.cshtml";
     bool? is_cc = ViewBag.is_cc;
     if (!is_cc.HasValue)
@@ -13,13 +13,13 @@
 }
 <div id="topBody">
     <div class="firstTitle">
-        @Resources.GetString("FileReport")
+        @LocalizationGetter.GetString("FileReport")
     </div>
     <div class="secondTitle">
-        @Resources.GetString("FindOrganization", is_cc)
+        @LocalizationGetter.GetString("FindOrganization", is_cc)
     </div>
     <div class="thirdTitle">
-        <input id="specialInput" placeholder="@Resources.GetString("CompanyNameOrCode", is_cc)">
-        <div id="buttonStart"><span class="buttonStartText">@Resources.GetString("Start").ToUpper()</span></div>
+        <input id="specialInput" placeholder="@LocalizationGetter.GetString("CompanyNameOrCode", is_cc)">
+        <div id="buttonStart"><span class="buttonStartText">@LocalizationGetter.GetString("Start").ToUpper()</span></div>
     </div>
 </div><!--end topBody-->

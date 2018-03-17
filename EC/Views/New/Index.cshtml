@@ -4,11 +4,10 @@
 @using System.Collections;
 @using EC.Localization;
 
-
 @{
     <link rel="stylesheet" type="text/css" href="/Content/styleReportDashboard.css">
     //  @Styles.Render("~/Content/Styles");
-    ViewBag.Title = GlobalRes.NewUserRegistration;
+    ViewBag.Title = LocalizationGetter.GetString("NewUserRegistration");
     var _code = ViewBag.code;
     var _email = ViewBag.email;
     UserModel um = new UserModel();
@@ -24,89 +23,77 @@
     </style>
 }
 
-
 <div class="blockSettings">
     <div class="titleNewUser">
-        <h1 class="helloUser">@GlobalRes.Hellouser!</h1>
+        <h1 class="helloUser">@LocalizationGetter.GetString("Hellouser")!</h1>
     </div>
     <div class="contentSettings">
-        <p class="helloUser">@Resources.GetString("FillTheFollowingFieldsRegister").</p>
-
+        <p class="helloUser">@LocalizationGetter.GetString("FillTheFollowingFieldsRegister").</p>
         <div class="blockPersonalPhotoSetting">
             <div class="blockPhotoSetting">
                 <img class="PersonalPhotoBlock" src='@Url.Content("~/Content/Icons/settingsPersonalNOPhoto.png")' />
             </div>
         </div>
-
         <div class="personalBlock">
             <div class="blockPersonalSettings">
-                <p class="title">@GlobalRes.InvitationCodefromEmail</p>
+                <p class="title">@LocalizationGetter.GetString("InvitationCodefromEmail")</p>
                 @Html.TextBox("code")
             </div>
             <div class="blockPersonalSettings">
-                <p class="title">@GlobalRes.Email</p>
+                <p class="title">@LocalizationGetter.GetString("Email")</p>
                 @Html.TextBox("email")
             </div>
             <div class="blockPersonalSettings">
-                <p class="title">@GlobalRes.FirstNameUp</p>
+                <p class="title">@LocalizationGetter.GetString("FirstNameUp")</p>
                 <input type="text" id="first" />
             </div>
             <div class="blockPersonalSettings">
-                <p class="title">@GlobalRes.LastNameUp</p>
+                <p class="title">@LocalizationGetter.GetString("LastNameUp")</p>
                 <input type="text" id="last" />
             </div>
-
             <div class="blockPersonalSettings">
-                <p class="title">@GlobalRes.Title</p>
+                <p class="title">@LocalizationGetter.GetString("Title")</p>
                 <input type="text" id="title" />
             </div>
             <div class="blockPersonalSettings">
-                <p class="title">@GlobalRes.Department</p>
+                <p class="title">@LocalizationGetter.GetString("Department")</p>
                 @Html.DropDownList("currentDepartmens", ViewBag.currentDepartmens as SelectList, new { @class = "selectStyled" })
             </div>
             <div class="blockPersonalSettings">
-                <p class="title">@GlobalRes.Location</p>
+                <p class="title">@LocalizationGetter.GetString("Location")</p>
                 @Html.DropDownList("currentLocations", new SelectList(cm.Locations(cm._company.id), "id", "location_en"), new { @class = "selectStyled" })
             </div>
-
             <div class="blockPersonalSettings">
-                <p class="title">@GlobalRes.Role</p>
-
+                <p class="title">@LocalizationGetter.GetString("UserPermissions")</p>
                 <div class="rowBlock inputMediator">
                     <div class="freeBlock inputRadio mediator @mediator_active">
                         <label class="inputBlock" for="freeIncident">
                             <input id="oneIncident" type="radio" name="role_id" value="6">
-                            <span class="radioTitle">@GlobalRes.Mediator</span>
+                            <span class="radioTitle">@LocalizationGetter.GetString("Mediator")</span>
                         </label>
                     </div>
                 </div><!--rowBlock-->
             </div>
-
             <div class="blockPersonalSettings">
-                <p class="title">@GlobalRes.PrimaryLanguageUp</p>
-
+                <p class="title">@LocalizationGetter.GetString("PrimaryLanguageUp")</p>
                 <div class="rowBlock inputMediator">
                     <div class="freeBlock inputRadio mediator active">
                         <label class="inputBlock" for="freeIncident">
                             <input id="oneIncident" type="radio" name="language_id" value="1">
-                            <span class="radioTitle">@GlobalRes.English</span>
+                            <span class="radioTitle">@LocalizationGetter.GetString("English")</span>
                         </label>
                     </div>
                 </div><!--rowBlock-->
             </div>
-
             <div class="blockUpdateProfile">
                 <div class="updateProfileBtn">
-                    <input class="greenButton" type="submit" value="@Resources.GetString("Register")" />
-                    <span style="display: none;">@GlobalRes.CreateProfileUp.ToLower()</span>
+                    <input class="greenButton" type="submit" value="@LocalizationGetter.GetString("Register")" />
+                    <span style="display: none;">@LocalizationGetter.GetString("CreateProfileUp").ToLower()</span>
                 </div>
             </div>
-
         </div>
     </div>
-
 </div>
-
 
 <script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/View/newIndex.js"></script>

@@ -3,7 +3,7 @@
 @using EC.App_LocalResources;
 @using EC.Localization;
 @{
-    ViewBag.Title = GlobalRes.Profile;
+    ViewBag.Title = LocalizationGetter.GetString("Profile");
     bool? is_cc = ViewBag.is_cc;
     if (!is_cc.HasValue)
     {
@@ -12,15 +12,12 @@
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
     UserModel um = new UserModel(ViewBag.user_id);
 }
-
 <style>
     .error {
         border: 2px solid red !important;
     }
 </style>
-
 <div class="blockSettings" ng-controller="SettingsUserEditController" ng-cloak>
-
     <div class="contentSettings">
         <div class="blockPersonalPhotoSetting">
             <div class="blockPhotoSetting">
@@ -32,53 +29,52 @@
                 {
                     <img id="logoUser" class="PersonalPhotoBlock" src="@Url.Content(um._user.photo_path)">
                 }
-                <input type="hidden" id="urlAjaxUploadFiles" from="User" value="@Url.Action("User", "Settings")"/>
+                <input type="hidden" id="urlAjaxUploadFiles" from="User" value="@Url.Action("User", "Settings")" />
                 <input type="file" accept="image/*" id="_file" name="_file" multiple="multiple" style="width: 1px;height: 1px;opacity: 0;">
             </div>
             @if (um._user.role_id == 5)
             {
                 <div class="blockHoverPhoto">
                     <label class="close"></label>
-                    <label class="newImageBtn">@GlobalRes.Newimage</label>
+                    <label class="newImageBtn">@LocalizationGetter.GetString("Newimage")</label>
                 </div>
             }
         </div>
 
-
         <div class="personalBlock">
             <div class="blockPersonalSettings greyBorder" ng-class="{error: val_first_nm }">
-                <p class="title">@GlobalRes.Firstname</p>
+                <p class="title">@LocalizationGetter.GetString("Firstname")</p>
                 <input class="text-box single-line" id="first_nm" name="first_nm" type="text" ng-model="first_nm">
             </div>
             <div class="blockPersonalSettings greyBorder" ng-class="{error: val_last_nm }">
-                <p class="title">@GlobalRes.Lastname</p>
+                <p class="title">@LocalizationGetter.GetString("Lastname")</p>
                 <input class="text-box single-line" id="last_nm" name="last_nm" type="text" ng-model="last_nm">
             </div>
             <div class="blockPersonalSettings greyBorder" ng-class="{error: val_title_ds }">
-                <p class="title">@GlobalRes.Title</p>
+                <p class="title">@LocalizationGetter.GetString("Title")</p>
                 <input class="text-box single-line" id="title_ds" name="title_ds" type="text" ng-model="title_ds">
             </div>
-            <div class="blockPersonalSettings greyBorder"  ng-class="{error: val_departmentId }">
-                <p class="title">@GlobalRes.Department</p>
+            <div class="blockPersonalSettings greyBorder" ng-class="{error: val_departmentId }">
+                <p class="title">@LocalizationGetter.GetString("Department")</p>
                 <select ng-model="departmentId" class="selectStyled">
-                    <option ng-repeat="item in departments" ng-value="{{item.id}}" ng-selected="departmentId == item.id" >{{item.department_en}}</option>                    
-                    <option value="0">@GlobalRes.Other</option>
+                    <option ng-repeat="item in departments" ng-value="{{item.id}}" ng-selected="departmentId == item.id">{{item.department_en}}</option>
+                    <option value="0">@LocalizationGetter.GetString("Other")</option>
                 </select>
             </div>
             <div class="blockPersonalSettings greyBorder" ng-class="{error: val_locationId }">
-                <p class="title">@GlobalRes.Location</p>
+                <p class="title">@LocalizationGetter.GetString("Location")</p>
                 <select ng-model="locationId" class="selectStyled">
                     <option ng-repeat="item in locations" ng-value="{{item.id}}" ng-selected="locationId == item.id">{{item.location_en}}</option>
-                    <option value="0">@GlobalRes.Other</option>
+                    <option value="0">@LocalizationGetter.GetString("Other")</option>
                 </select>
             </div>
             <div class="blockPersonalSettings greyBorder" ng-class="{error: val_email }">
-                <p class="title">@GlobalRes.Email</p>
+                <p class="title">@LocalizationGetter.GetString("Email")</p>
                 <input email="email" id="email" name="email" type="text" ng-model="email">
             </div>
             <div class="blockPersonalSettings greyBorder">
                 <div id="personeAgain">
-                    <div class="title">@GlobalRes.UserPermissions</div>
+                    <div class="title">@LocalizationGetter.GetString("UserPermissions")</div>
                     <div class="help" title="">
                         ?
                         <div class="hoverElement">
@@ -115,32 +111,31 @@
                                     </tr>
                                 </table>
                                 @*<ul>
-                                    <li>A <strong>Case Investigator</strong> is assigned to a specific case.</li>
-                                    <li>A <strong>Platform Manager</strong> is responsible for and manages the Employee Confidential system and assigns all the cases (typically an HR manager).</li>
-                                    <li>A <strong>Case Reviewer</strong> handles only escalation issues and signs off on case resolutions and closure applications.</li>
-                                </ul>*@
+                                        <li>A <strong>Case Investigator</strong> is assigned to a specific case.</li>
+                                        <li>A <strong>Platform Manager</strong> is responsible for and manages the Employee Confidential system and assigns all the cases (typically an HR manager).</li>
+                                        <li>A <strong>Case Reviewer</strong> handles only escalation issues and signs off on case resolutions and closure applications.</li>
+                                    </ul>*@
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="rowBlock inputMediator">
                     <div class="freeBlock inputRadio mediator" ng-class="{active: role == 6 }" ng-click="role = 6">
                         <label class="inputBlock" for="freeIncident">
                             <input id="oneIncident" type="radio" name="role_id" value="6">
-                            <span class="radioTitle">@GlobalRes.Mediator</span>
+                            <span class="radioTitle">@LocalizationGetter.GetString("Mediator")</span>
                         </label>
                     </div>
                     <div class="freeBlock inputRadio adminMediator adminMediator" ng-class="{active: role == 5 }" ng-click="role = 5">
                         <label class="inputBlock" for="freeIncident">
                             <input id="twoIncident" type="radio" name="role_id" value="5">
-                            <span class="radioTitle">@GlobalRes.AdminMediator</span>
+                            <span class="radioTitle">@LocalizationGetter.GetString("AdminMediator")</span>
                         </label>
                     </div>
                     <div class="freeBlock inputRadio escalationMediator" ng-class="{active: role == 4 }" ng-click="role = 4">
                         <label class="inputBlock" for="freeIncident">
                             <input id="threeIncident" type="radio" name="role_id" value="4">
-                            <span class="radioTitle">@GlobalRes.EscalationMediator</span>
+                            <span class="radioTitle">@LocalizationGetter.GetString("EscalationMediator")</span>
                         </label>
                     </div>
                 </div><!--rowBlock-->
@@ -149,7 +144,6 @@
                 <div id="personeAgain">
                     <div class="title">Status</div>
                 </div>
-
                 <div class="rowBlock inputMediator">
                     <div class="freeBlock inputRadio mediator" ng-class="{active: status_id == 2 }" ng-click="status_id = user_role == 5 ? 2 : status_id">
                         <label class="inputBlock" for="freeIncident">
@@ -171,54 +165,52 @@
                     </div>
                 </div><!--rowBlock-->
             </div>
-
             @if (um._user.role_id == 5)
             {
                 <div class="blockPersonalSettings greyBorder">
-                    <p class="title">@Resources.GetString("ApproveCaseClosure", is_cc)</p>
+                    <p class="title">@LocalizationGetter.GetString("ApproveCaseClosure", is_cc)</p>
                     <div class="rowBlock" id="checkBoxApproveCaseClosure">
                         <div class="freeBlock inputRadio" data-valueFlag="0" ng-click="user_permissions_approve_case_closure = '1'">
                             <label class="inputBlock" for="thirdIncident">
                                 <input data-val="true" type="radio" value="1" ng-model="user_permissions_approve_case_closure">
                                 <span class="radioButton"></span>
-                                <span class="radioTitle">@Resources.GetString("Yes", is_cc)</span>
+                                <span class="radioTitle">@LocalizationGetter.GetString("Yes", is_cc)</span>
                             </label>
                         </div>
                         <div class="freeBlock inputRadio" data-valueFlag="1" ng-click="user_permissions_approve_case_closure = '2'">
                             <label class="inputBlock" for="fourIncident">
                                 <input data-val="true" type="radio" value="2" ng-model="user_permissions_approve_case_closure">
                                 <span class="radioButton"></span>
-                                <span class="radioTitle">@Resources.GetString("No", is_cc)</span>
+                                <span class="radioTitle">@LocalizationGetter.GetString("No", is_cc)</span>
                             </label>
                         </div>
                     </div><!--rowBlock-->
                 </div>
 
                 <div class="blockPersonalSettings greyBorder">
-                    <p class="title">@GlobalRes.ChangeSettings</p>
+                    <p class="title">@LocalizationGetter.GetString("ChangeSettings")</p>
                     <div class="rowBlock" id="checkBoxChangeSettings">
                         <div class="freeBlock inputRadio" data-valueFlag="0">
                             <label class="inputBlock" for="thirdIncident" ng-click="user_permissions_change_settings = '1'">
                                 <input data-val="true" type="radio" value="1" ng-model="user_permissions_change_settings">
                                 <span class="radioButton"></span>
-                                <span class="radioTitle">@Resources.GetString("Yes", is_cc)</span>
+                                <span class="radioTitle">@LocalizationGetter.GetString("Yes", is_cc)</span>
                             </label>
                         </div>
                         <div class="freeBlock inputRadio" data-valueFlag="1">
                             <label class="inputBlock" for="fourIncident" ng-click="user_permissions_change_settings = '2'">
                                 <input data-val="true" type="radio" value="2" ng-model="user_permissions_change_settings">
                                 <span class="radioButton"></span>
-                                <span class="radioTitle">@Resources.GetString("No", is_cc)</span>
+                                <span class="radioTitle">@LocalizationGetter.GetString("No", is_cc)</span>
                             </label>
                         </div>
                     </div><!--rowBlock-->
                 </div>
             }
-
             <div class="blockUpdateProfile">
                 <div class="updateProfileBtn">
                     <input class="greenButton" type="submit" value="update" ng-click="post()">
-                    <span style="display: none;">@GlobalRes.Save</span>
+                    <span style="display: none;">@LocalizationGetter.GetString("Save")</span>
                 </div>
             </div>
         </div>

@@ -96,7 +96,7 @@
                         window.location.href = str;
                     }
                     if (data == 0) {
-                //        alert('Error: Please add a Case Executive to your team. Your case cannot be approved for resolution or closure unless a member of your executive leadership is brought on board as a Case Executive. If one of your existing Case Officers is an executive leader (i.e. CEO, CHRO, COO, CFO, CRO, CSO or CLO), then please change their role in their profile to Case Executive.');
+                //        alert('Error: Please add a Case Reviewer to your team. Your case cannot be approved for resolution or closure unless a member of your executive leadership is brought on board as a Case Executive. If one of your existing Case Officers is an executive leader (i.e. CEO, CHRO, COO, CFO, CRO, CSO or CLO), then please change their role in their profile to Case Executive.');
                     }
                 }).fail(function (error) {
                     console.log(error);

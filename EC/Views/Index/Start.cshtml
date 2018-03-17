@@ -7,7 +7,7 @@
     {
         is_cc = false;
     }
-    ViewBag.Title = Resources.GetString("SelectYourCompany", is_cc);
+    ViewBag.Title = LocalizationGetter.GetString("SelectYourCompany", is_cc);
     String class_ext = ViewBag.cc_extension;
     Layout = "~/Views/Shared/HeaderFooterFrontPages.cshtml";
     ViewBag.background = "background-image: url(/Content/img/website-report" + class_ext + ".jpg);";
@@ -30,9 +30,7 @@
         <div class="info">Ethics Reporting & Case Management Cloudware</div>
     </div>
 }
-
 <div class="mainBlock">
-
     <div id="bodyInc">
         @*<img class="logoShow" src='@Url.Content("~/Content/img/secondLogo.jpg")' />*@
         @if ((logo_path.Trim().Length > 0) && (is_cc == false))
@@ -69,7 +67,7 @@
                         <label>Password</label>
                         <input type="password" name="password" autocomplete="off">
                     </div>
-                    <div class="" style="height: 20px;"><a style="font-size: 14px; color: gray; float: right;" href="~/Login/ForgetPassword">@Resources.GetString("ForgotPassword")?</a></div>
+                    <div class="" style="height: 20px;"><a style="font-size: 14px; color: gray; float: right;" href="~/Login/ForgetPassword">@LocalizationGetter.GetString("ForgotPassword")?</a></div>
                     <div class="button">
                         <input id="submit" type="button" value="LOGIN" />
                     </div>
@@ -80,63 +78,56 @@
             </div>
         </div>
         <div class="fourthTitle">
-            @Resources.GetString("DontSilentBystander")
+            @LocalizationGetter.GetString("DontSilentBystander")
         </div>
     </div>
-
     <div id="bottomBody@{@class_ext}">
         <div class="itemBlock">
             <div class="empty"></div>
             <div class="positionIcons">
                 <div id="firstIcon"></div>
             </div>
-            <span class="title">@Resources.GetString("ActEarly"),<br />@Resources.GetString("ActEthically")</span><br />
+            <span class="title">@LocalizationGetter.GetString("ActEarly"),<br />@LocalizationGetter.GetString("ActEthically")</span><br />
             <span class="textBlock">
-                @Resources.GetString("Ifyouwitness", is_cc)
+                @LocalizationGetter.GetString("Ifyouwitness", is_cc)
             </span>
         </div>
-
         <div class="itemBlock">
             <div class="empty"></div>
             <div class="positionIcons">
                 <div id="secondIcon"></div>
             </div>
-            <span class="title">@Resources.GetString("ReportWeb"), <br />@Resources.GetString("TabletMobile")</span><br />
+            <span class="title">@LocalizationGetter.GetString("ReportWeb"), <br />@LocalizationGetter.GetString("TabletMobile")</span><br />
             <span class="textBlock">
-                @Resources.GetString("Useonline")
+                @LocalizationGetter.GetString("Useonline")
             </span>
         </div>
-
         <div class="itemBlock">
             <div class="empty"></div>
             <div class="positionIcons">
                 <div id="thirdIcon"></div>
             </div>
-            <span class="title">@Resources.GetString("Chooseyour")  <br />@Resources.GetString("ConfidentialityLevel")</span><br />
+            <span class="title">@LocalizationGetter.GetString("Chooseyour")  <br />@LocalizationGetter.GetString("ConfidentialityLevel")</span><br />
             <span class="textBlock">
-                @Resources.GetString("ReportAnon")
+                @LocalizationGetter.GetString("ReportAnon")
             </span>
         </div>
-
         <div class="itemBlock">
             <div class="empty"></div>
             <div class="positionIcons">
                 <div id="fourthIcon"></div>
             </div>
-            <span class="title">@Resources.GetString("Expecta") <br />@Resources.GetString("Response")</span><br />
+            <span class="title">@LocalizationGetter.GetString("Expecta") <br />@LocalizationGetter.GetString("Response")</span><br />
             <span class="textBlock">
-                @Resources.GetString("Mediatorswillgetback", is_cc)
+                @LocalizationGetter.GetString("Mediatorswillgetback", is_cc)
             </span>
         </div>
     </div><!--end bottomBody-->
 </div>
-
 <input id="companyCode" type="hidden" value="false" />
-
 <script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.min.css">
-
 <script>
     $(document).ready(function() {
         $('.div input')

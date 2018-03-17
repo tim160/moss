@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
 using System.Resources;
-using System.Text;
+
+//Resx.Areas.Assessments.Views.Exam.ExamDetailsRx;
 
 namespace EC.Localization
 {
     public class LocalizationGetter
     {
+
         private static Dictionary<Assembly, ResourceManager> resourceManagers = new Dictionary<Assembly, ResourceManager>();
 
         #region PROPERTIES
@@ -63,7 +65,11 @@ namespace EC.Localization
         {
             try
             {
-                ResourceManager rm = GetResourceManager(callingAssembly);
+                ResourceManager rm = EC.Localization.Resources.ResourceManager;
+
+                /////      ResourceManager rm = GetResourceManager(callingAssembly);
+
+                culture = System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("es-MX");
                 if (rm == null) return key;
                 if (is_cc) { key = key + "_CC"; }
 

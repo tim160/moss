@@ -1,8 +1,8 @@
 ﻿@using EC.Models;
 @using EC.Models.Database;
-@using EC.App_LocalResources;
+@using EC.Localization;
 @{
-    ViewBag.Title = GlobalRes.MySettings;
+    ViewBag.Title = LocalizationGetter.GetString("MySettings");
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
 
 
@@ -15,21 +15,24 @@
     string adminMediator_active = string.Empty;
     string escalationMediator_active = string.Empty;
     var a = 10;
-    if(um._user.role_id != 0) {
+    if (um._user.role_id != 0)
+    {
 
-        switch(um._user.role_id) {
-            case(6):
+        switch (um._user.role_id)
+        {
+            case (6):
                 mediator_active = "active";
                 break;
-            case(5):
+            case (5):
                 adminMediator_active = "active";
                 break;
-            case(4):
+            case (4):
                 escalationMediator_active = "active";
                 break;
         }
     }
-    if (um._user.photo_path == null || um._user.photo_path == String.Empty) {
+    if (um._user.photo_path == null || um._user.photo_path == String.Empty)
+    {
         um._user.photo_path = "/Content/Icons/settingsPersonalNOPhoto.png";
     }
     bool? is_cc = ViewBag.is_cc;
@@ -39,17 +42,16 @@
     }
     String class_ext = ViewBag.cc_extension;
 }
-
 <div class="blockSettings">
     <!--casesHeared-->
-    @{ 
+    @{
         int active = 1;
     }
     @Html.Partial("~/Views/Settings/partial/casesHeared.cshtml", active)
     <!--casesHeared-->
 
-    
-@using (Html.BeginForm("UpdateUser", "Settings", FormMethod.Post, new { })) {
+    @using (Html.BeginForm("UpdateUser", "Settings", FormMethod.Post, new { }))
+    {
         @Html.AntiForgeryToken()
         @model user
         @Html.HiddenFor(model => Model.id)
@@ -57,45 +59,42 @@
             <div class="blockPersonalPhotoSetting">
                 <div class="blockPhotoSetting">
                     <img id="logoUser" class="PersonalPhotoBlock" src="@um._user.photo_path" />
-                    <input type="file" accept="image/*" id="_file" name="_file" multiple="multiple" style="width: 1px;height: 1px;opacity: 0;" />                    
+                    <input type="file" accept="image/*" id="_file" name="_file" multiple="multiple" style="width: 1px;height: 1px;opacity: 0;" />
                 </div>
                 <div class="blockHoverPhoto">
                     <label class="close"></label>
-                    <label class="newImageBtn">@GlobalRes.Newimage</label>
+                    <label class="newImageBtn">@LocalizationGetter.GetString("Newimage")</label>
                 </div>
             </div>
 
-
             <div class="personalBlock">
                 <div class="blockPersonalSettings greyBorder">
-                    <p class="title">@GlobalRes.Firstname</p>
+                    <p class="title">@LocalizationGetter.GetString("Firstname")</p>
                     @Html.EditorFor(model => model.first_nm, new { first_nm = "first_nm" })
                 </div>
                 <div class="blockPersonalSettings greyBorder">
-                    <p class="title">@GlobalRes.Lastname</p>
+                    <p class="title">@LocalizationGetter.GetString("Lastname")</p>
                     @Html.EditorFor(model => model.last_nm, new { last_nm = "last_nm" })
                 </div>
                 <div class="blockPersonalSettings greyBorder">
-                    <p class="title">@GlobalRes.Title</p>
+                    <p class="title">@LocalizationGetter.GetString("Title")</p>
                     @Html.EditorFor(model => model.title_ds, new { title_ds = "title_ds" })
                 </div>
                 <div class="blockPersonalSettings greyBorder">
-                    <p class="title">@GlobalRes.Department</p>
+                    <p class="title">@LocalizationGetter.GetString("Department")</p>
                     @Html.DropDownListFor(model => Model.company_department_id, new SelectList(um.listDepartments, "id", "department_nm"), new { @class = "selectStyled" })
                 </div>
                 <div class="blockPersonalSettings greyBorder @(ViewContext.ViewData.ModelState["company_location_id"] == null ? "" : "has-error")">
-                    <p class="title">@GlobalRes.Location</p>
+                    <p class="title">@LocalizationGetter.GetString("Location")</p>
                     @Html.DropDownListFor(model => Model.company_location_id, new SelectList(cm.Locations(um._user.company_id, 2), "id", "location_en"), "", new { @class = "selectStyled" })
                 </div>
-
                 <div class="blockPersonalSettings greyBorder">
-                    <p class="title">@GlobalRes.Email</p>
+                    <p class="title">@LocalizationGetter.GetString("Email")</p>
                     @Html.TextBoxFor(model => model.email, new { email = "email" })
                 </div>
-
                 <div class="blockPersonalSettings greyBorder">
                     <div id="personeAgain">
-                        <div class="title">@GlobalRes.UserPermissions</div>
+                        <div class="title">@LocalizationGetter.GetString("UserPermissions")</div>
                         <div class="help" title="">
                             ?
                             <div class="hoverElement">
@@ -132,75 +131,74 @@
                                         </tr>
                                     </table>
                                     @*<ul>
-                                        <li>A <strong>Case Investigator</strong> is assigned to a specific case.</li>
-                                        <li>A <strong>Platform Manager</strong> is responsible for and manages the Employee Confidential system and assigns all the cases (typically an HR manager).</li>
-                                        <li>A <strong>Case Reviewer</strong> handles only escalation issues and signs off on case resolutions and closure applications.</li>
-                                    </ul>*@
+                                            <li>A <strong>Case Investigator</strong> is assigned to a specific case.</li>
+                                            <li>A <strong>Platform Manager</strong> is responsible for and manages the Employee Confidential system and assigns all the cases (typically an HR manager).</li>
+                                            <li>A <strong>Case Reviewer</strong> handles only escalation issues and signs off on case resolutions and closure applications.</li>
+                                        </ul>*@
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="rowBlock inputMediator">
                         <div class="freeBlock inputRadio mediator @mediator_active">
                             <label class="inputBlock" for="freeIncident">
                                 <input id="oneIncident" type="radio" name="role_id" value="6">
-                                <span class="radioTitle">@GlobalRes.Mediator</span>
+                                <span class="radioTitle">@LocalizationGetter.GetString("Mediator")</span>
                             </label>
                         </div>
                         <div class="freeBlock inputRadio adminMediator adminMediator@{@class_ext} @adminMediator_active">
                             <label class="inputBlock" for="freeIncident">
                                 <input id="twoIncident" type="radio" name="role_id" value="5">
-                                <span class="radioTitle">@GlobalRes.AdminMediator</span>
+                                <span class="radioTitle">@LocalizationGetter.GetString("AdminMediator")</span>
                             </label>
                         </div>
                         <div class="freeBlock inputRadio escalationMediator @escalationMediator_active">
                             @*<label class="inputBlock" for="fourIncident">*@
                             <label class="inputBlock" for="freeIncident">
-                                <input id="threeIncident" type="radio" name="role_id" value="4" >
-                                <span class="radioTitle">@GlobalRes.EscalationMediator</span>
+                                <input id="threeIncident" type="radio" name="role_id" value="4">
+                                <span class="radioTitle">@LocalizationGetter.GetString("EscalationMediator")</span>
                             </label>
                         </div>
                     </div><!--rowBlock-->
                 </div>
-
                 @if (um._user.role_id == 5)
                 {
                     <div class="blockPersonalSettings greyBorder">
-                        <p class="title">@EC.Localization.Resources.GetString("ApproveCaseClosure", is_cc)</p>
+                        <p class="title">@LocalizationGetter.GetString("ApproveCaseClosure", is_cc)</p>
                         <div class="rowBlock" id="checkBoxApproveCaseClosure">
                             <div class="freeBlock inputRadio" data-valueFlag="0">
                                 <label class="inputBlock" for="thirdIncident">
                                     @Html.RadioButtonFor(model => model.user_permissions_approve_case_closure, "1", new { @readonly = "" })
                                     <span class="radioButton"></span>
-                                    <span class="radioTitle">@EC.Localization.Resources.GetString("Yes", is_cc)</span>
+                                    <span class="radioTitle">@LocalizationGetter.GetString("Yes", is_cc)</span>
                                 </label>
                             </div>
                             <div class="freeBlock inputRadio" data-valueFlag="1">
                                 <label class="inputBlock" for="fourIncident">
                                     @Html.RadioButtonFor(m => m.user_permissions_approve_case_closure, "2", new { @readonly = "" })
                                     <span class="radioButton"></span>
-                                    <span class="radioTitle">@EC.Localization.Resources.GetString("No", is_cc)</span>
+                                    <span class="radioTitle">@LocalizationGetter.GetString("No", is_cc)</span>
                                 </label>
                             </div>
                         </div><!--rowBlock-->
                     </div>
 
                     <div class="blockPersonalSettings greyBorder">
-                        <p class="title">@GlobalRes.ChangeSettings</p>
+                        <p class="title">@LocalizationGetter.GetString("ChangeSettings")</p>
                         <div class="rowBlock" id="checkBoxChangeSettings">
                             <div class="freeBlock inputRadio" data-valueFlag="0">
                                 <label class="inputBlock" for="thirdIncident">
                                     @Html.RadioButtonFor(model => model.user_permissions_change_settings, "1", new { @readonly = "", disable = "" })
                                     <span class="radioButton"></span>
-                                    <span class="radioTitle">@EC.Localization.Resources.GetString("Yes", is_cc)</span>
+                                    <span class="radioTitle">@LocalizationGetter.GetString("Yes", is_cc)</span>
                                 </label>
                             </div>
                             <div class="freeBlock inputRadio" data-valueFlag="1">
                                 <label class="inputBlock" for="fourIncident">
                                     @Html.RadioButtonFor(m => m.user_permissions_change_settings, "2", new { @readonly = "", disable = "" })
                                     <span class="radioButton"></span>
-                                    <span class="radioTitle">@EC.Localization.Resources.GetString("No", is_cc)</span>
+                                    <span class="radioTitle">@LocalizationGetter.GetString("No", is_cc)</span>
                                 </label>
                             </div>
                         </div><!--rowBlock-->
@@ -208,16 +206,14 @@
                 }
                 <div class="blockUpdateProfile">
                     <div class="updateProfileBtn">
-                        <input class="greenButton" type="submit" value="update"  />
-                        <span style="display: none;">@GlobalRes.UpdateProfile.ToLower()</span>
+                        <input class="greenButton" type="submit" value="update" />
+                        <span style="display: none;">@LocalizationGetter.GetString("UpdateProfile").ToLower()</span>
                     </div>
                 </div>
-
             </div>
         </div>
-        }
+    }
     <!--</form>-->
 </div>
-
 <input type="hidden" id="urlAjaxUploadFiles" from="User" value="@Url.Action("AddLogoCompany", "Settings")" />
 <input type="hidden" id="levelId" value="@Html.Raw(um._user.role_id)" />

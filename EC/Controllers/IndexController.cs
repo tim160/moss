@@ -30,46 +30,46 @@ namespace EC.Controllers
         {
 
             ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-     /////        logger.Info("info message to logger");
-       ///      logger.Error("error message to logger");
-            
-   
-            Session.Clear();
-         //   System.Configuration.Configuration rootWebConfig1 =
-          //      System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration(null);
-         //   System.Configuration.KeyValueConfigurationElement customSetting =
-          //          rootWebConfig1.AppSettings.Settings["DisableWebMessage"];
+            /////        logger.Info("info message to logger");
+            ///      logger.Error("error message to logger");
 
-        //    UserModel um = new UserModel(977);
-           // int t = um.Unread_Messages_Quantity(0, 1) + um.Unread_Messages_Quantity(0, 2) + um.Unread_Messages_Quantity(0, 3);
-          //  for (int i = 0; i < db.company.Count(); i++)
+
+            Session.Clear();
+            //   System.Configuration.Configuration rootWebConfig1 =
+            //      System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration(null);
+            //   System.Configuration.KeyValueConfigurationElement customSetting =
+            //          rootWebConfig1.AppSettings.Settings["DisableWebMessage"];
+
+            //    UserModel um = new UserModel(977);
+            // int t = um.Unread_Messages_Quantity(0, 1) + um.Unread_Messages_Quantity(0, 2) + um.Unread_Messages_Quantity(0, 3);
+            //  for (int i = 0; i < db.company.Count(); i++)
             //{
-        ///    foreach (var item in db.user)
-          //  {
+            ///    foreach (var item in db.user)
+            //  {
             ////    item.guid = Guid.NewGuid();
 
-               
-         //   }
-         ////   db.SaveChanges();
- /*
-    //       how to send email ( from newrequest@ec.com)
-            List<string> to = new List<string>();
-            List<string> cc = new List<string>();
-            to.Add("timur160@gmail.com");
-            cc.Add("timur160@hotmail.com");
 
-            EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
-            EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1,1);
-            eb.CaseReopened("Alex", "Stone", "case_1111", "Kate", "Milton");
-            string body = eb.Body;
-            em.Send(to, cc, "Case Reopened", body, true);
-          //  em.Send(to, cc, "Case Reopened", body, true, 'email_from_if_needed');
-            
-          */
+            //   }
+            ////   db.SaveChanges();
+            /*
+               //       how to send email ( from newrequest@ec.com)
+                       List<string> to = new List<string>();
+                       List<string> cc = new List<string>();
+                       to.Add("timur160@gmail.com");
+                       cc.Add("timur160@hotmail.com");
+
+                       EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
+                       EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1,1);
+                       eb.CaseReopened("Alex", "Stone", "case_1111", "Kate", "Milton");
+                       string body = eb.Body;
+                       em.Send(to, cc, "Case Reopened", body, true);
+                     //  em.Send(to, cc, "Case Reopened", body, true, 'email_from_if_needed');
+
+                     */
 
 
-     //       string temp = Resources.GetString(m_CultureInfo, "_Completed", Resources.GetString(m_CultureInfo, "_Completed"));
-       //     temp = Resources.GetString(m_CultureInfo, "_Completed");
+            //       string temp = LocalizationGetter.GetString(m_CultureInfo, "_Completed", LocalizationGetter.GetString(m_CultureInfo, "_Completed"));
+            //     temp = LocalizationGetter.GetString(m_CultureInfo, "_Completed");
 
             string CurrentURL = Request.Url.AbsoluteUri.ToLower();
             if (CurrentURL.Contains("stark."))
@@ -89,7 +89,7 @@ namespace EC.Controllers
                 ViewBag.cc_extension = cc_ext;
                 #endregion
 
-          
+
                 /*List<company> list = companyModel.GeCompaniesWithStatus();
                 List<SearchCompanyDto> searchCompanyDto = new List<SearchCompanyDto>();
                 if (!CurrentURL.Contains("registration"))
@@ -157,7 +157,7 @@ namespace EC.Controllers
                 ViewBag.LogoPath = "";
             }
             string CurrentURL = Request.Url.AbsoluteUri.ToLower();
-    //        if (!CurrentURL.Contains("report"))
+            //        if (!CurrentURL.Contains("report"))
             {
                 foreach (var item in list)
                 {
@@ -177,7 +177,7 @@ namespace EC.Controllers
             ViewBag.CurrentURL = CurrentURL;
             return View();
         }
-       // [EcAuthorized("admin, moderator")]
+        // [EcAuthorized("admin, moderator")]
         public ActionResult Test()
         {
             #region EC-CC Viewbag
@@ -187,7 +187,7 @@ namespace EC.Controllers
             ViewBag.cc_extension = cc_ext;
             #endregion
 
-          
+
             //var user = SessionManager.inst.User.email;
             return View("Index");
         }

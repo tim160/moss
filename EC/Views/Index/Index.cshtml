@@ -1,5 +1,6 @@
-﻿@using EC.Models.Database
-@using Resources = EC.Localization.Resources
+﻿@using EC.Models.Database;
+@using LocalizationGetter = EC.Localization.LocalizationGetter;
+
 @{
 
     bool? is_cc = ViewBag.is_cc;
@@ -15,31 +16,28 @@
     //    class_ext = "_cc";
     //}
 
-    ViewBag.Title = Resources.GetString("SelectYourCompany", is_cc);
+    ViewBag.Title = LocalizationGetter.GetString("SelectYourCompany", is_cc);
     Layout = "~/Views/Shared/HeaderFooterFrontPages.cshtml";
     //ViewBag.background = "background-image: url(/Content/img/website-report" + class_ext + ".jpg);";
 }
-
 <div id="topBody">
     <div class="firstTitle">
-        @Resources.GetString("FileReport")
+        @LocalizationGetter.GetString("FileReport")
     </div>
     <div class="secondTitle">
-        @Resources.GetString("FindOrganization", is_cc)
+        @LocalizationGetter.GetString("FindOrganization", is_cc)
     </div>
     <div class="thirdTitle">
         <div class="widthThirdTitle">
-            <input id="specialInput" placeholder="@Resources.GetString("CompanyNameOrCode", is_cc)" type="text">
-            <div id="buttonStart"><span class="buttonStartText">@Resources.GetString("Start", is_cc).ToUpper()</span></div>
-            <ul id="dropDownList" style="display: none">
-            </ul>
+            <input id="specialInput" placeholder="@LocalizationGetter.GetString("CompanyNameOrCode", is_cc)" type="text">
+            <div id="buttonStart"><span class="buttonStartText">@LocalizationGetter.GetString("Start", is_cc).ToUpper()</span></div>
+            <ul id="dropDownList" style="display: none"></ul>
         </div>
     </div>
 </div><!--end topBody-->
 <div id="bottomBody@{@class_ext}">
-
     <div class="fourthTitle">
-        @Resources.GetString("DontSilentBystander")
+        @LocalizationGetter.GetString("DontSilentBystander")
     </div>
     <div class="icons">
         <div class="centerBlock">
@@ -48,42 +46,39 @@
                 <div class="positionIcons">
                     <div id="firstIcon"></div>
                 </div>
-                <span class="title">@Resources.GetString("ActEarly"),<br />@Resources.GetString("ActEthically")</span><br />
+                <span class="title">@LocalizationGetter.GetString("ActEarly"),<br />@LocalizationGetter.GetString("ActEthically")</span><br />
                 <span class="textBlock">
-                    @Resources.GetString("Ifyouwitness", is_cc)
+                    @LocalizationGetter.GetString("Ifyouwitness", is_cc)
                 </span>
             </div>
-
             <div class="itemBlock">
                 <div class="empty"></div>
                 <div class="positionIcons">
                     <div id="secondIcon"></div>
                 </div>
-                <span class="title">@Resources.GetString("ReportWeb"), <br />@Resources.GetString("TabletMobile")</span><br />
+                <span class="title">@LocalizationGetter.GetString("ReportWeb"), <br />@LocalizationGetter.GetString("TabletMobile")</span><br />
                 <span class="textBlock">
-                    @Resources.GetString("Useonline")
+                    @LocalizationGetter.GetString("Useonline")
                 </span>
             </div>
-
             <div class="itemBlock">
                 <div class="empty"></div>
                 <div class="positionIcons">
                     <div id="thirdIcon"></div>
                 </div>
-                <span class="title">@Resources.GetString("Chooseyour")  <br />@Resources.GetString("ConfidentialityLevel")</span><br />
+                <span class="title">@LocalizationGetter.GetString("Chooseyour")  <br />@LocalizationGetter.GetString("ConfidentialityLevel")</span><br />
                 <span class="textBlock">
-                    @Resources.GetString("ReportAnon")
+                    @LocalizationGetter.GetString("ReportAnon")
                 </span>
             </div>
-
             <div class="itemBlock">
                 <div class="empty"></div>
                 <div class="positionIcons">
                     <div id="fourthIcon"></div>
                 </div>
-                <span class="title">@Resources.GetString("Expecta") <br />@Resources.GetString("Response")</span><br />
+                <span class="title">@LocalizationGetter.GetString("Expecta") <br />@LocalizationGetter.GetString("Response")</span><br />
                 <span class="textBlock">
-                    @Resources.GetString("Mediatorswillgetback", is_cc)
+                    @LocalizationGetter.GetString("Mediatorswillgetback", is_cc)
                 </span>
             </div>
         </div><!-- end centerBlock-->
@@ -92,41 +87,37 @@
 <input id="companyCode" type="hidden" value="false" />
 @section pageScripts{
     <script>
-        var input = document.getElementById("specialInput");
-        input.oninput = function (event) {
-            let lookup = {'event':event.currentTarget.value } ;
-            let len = lookup.event.length;
-            if (len >= 3) {
-                //go ajax call
-                let temp = loadDoc(lookup);
-            }
-            //document.getElementById('result').innerHTML = input.value;
+    var input = document.getElementById("specialInput");
+    input.oninput = function (event) {
+      let lookup = { 'event': event.currentTarget.value };
+      let len = lookup.event.length;
+      if (len >= 3) {
+        //go ajax call
+        let temp = loadDoc(lookup);
+      }
+      //document.getElementById('result').innerHTML = input.value;
+    };
+
+    function loadDoc(lookup) {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function () {
+        xmlhttp.onreadystatechange = function (event) {
+
         };
-        
-        function loadDoc(lookup) {
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function () {
-                xmlhttp.onreadystatechange = function (event) {
+      };
+      let link = window.location.href + "Index/CompanyLookup?lookup=" + lookup.event;
+      xmlhttp.open("POST", link, true);
+      xmlhttp.send();
+    }
+    function SetInputStart(textContent) {
+      if (textContent.length > 1) {
+        document.getElementById("specialInput").value = textContent;
 
-                };
-            };
-            let link = window.location.href + "Index/CompanyLookup?lookup=" + lookup.event;
-            xmlhttp.open("POST", link, true);
-            xmlhttp.send();
-        }
-        function SetInputStart(textContent) {
-            if (textContent.length > 1) {
-                document.getElementById("specialInput").value = textContent;
+      }
 
-            }
-            
-            
-        }
+
+    }
     </script>
-
 }
-
-
-
 
 

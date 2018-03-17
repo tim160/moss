@@ -3,7 +3,6 @@
 @using EC.Models
 @using EC.App_LocalResources;
 @using EC.Localization;
-
 @{
     bool? is_cc = ViewBag.is_cc;
     if (!is_cc.HasValue)
@@ -18,56 +17,52 @@
     //    class_ext = "_cc";
     //}
     //19
-    ViewBag.Title = GlobalRes.increportingandcasemanag;
+    ViewBag.Title = LocalizationGetter.GetString("increportingandcasemanag");
     //Layout = "~/Views/Shared/_MainHTML.cshtml";
     Layout = "~/Views/Shared/HeaderFooterFrontPages.cshtml";
     ViewBag.background = "background-image: url(/Content/img/website-report" + class_ext + ".jpg);";
     //  ViewBag.cssStyle = "/Content/MainStyle.css";
-  ///  @Styles.Render("~/Content/bStart")
+    ///  @Styles.Render("~/Content/bStart")
     ViewBag.cssStyle = "/Content/aStart";
- //  @Styles.Render("~/bundles/Styles")
- ///   @Styles.Render("~/bundles/Fonts")
+    //  @Styles.Render("~/bundles/Styles")
+    ///   @Styles.Render("~/bundles/Fonts")
     string logo_path = "~/Content/img/secondLogo.jpg";
     if (ViewBag.LogoPath != "")
-    { 
+    {
         logo_path = ViewBag.LogoPath;
     }
 }
-
 <div id="bodyInc" class="indexPage">
     <div class="secondMenu">
         <img class="secLogo" src='@Url.Content(logo_path)' />
         <div class="statusTitle">
-            <div class="titleInc">@GlobalRes.increportingandcasemanag</div>
+            <div class="titleInc">@LocalizationGetter.GetString("increportingandcasemanag")</div>
         </div>
     </div>
-
     <div class="repLoginBlock@{@class_ext}">
         <div class="repBlock">
             <img src='@Url.Content("~/Content/img/subd-index1" + @class_ext + ".png")' />
             <div class="btn">
-                <span class="btnsRepLog repButton"><a href="/Report/new?companyCode=STA2015">@GlobalRes.FileNewReport.ToUpper()</a></span>
+                <span class="btnsRepLog repButton"><a href="/Report/new?companyCode=STA2015">@LocalizationGetter.GetString("FileNewReport").ToUpper()</a></span>
             </div>
             <div class="accept">
                 <img class="check">
                 <img class="checked">
                 <input hidden value="false" id="checkBox" />
-                <a href="#">@GlobalRes.Accepttermsconditions</a>
+                <a href="#">@LocalizationGetter.GetString("Accepttermsconditions")</a>
             </div>
         </div>
         <div class="logBlock">
             <img src='@Url.Content("~/Content/img/subd-index2"+@class_ext+".png")' />
             <div class="btn">
-                <span class="btnsRepLog logButton"><a href="/Login">@GlobalRes.Login.ToUpper()</a></span>
+                <span class="btnsRepLog logButton"><a href="/Login">@LocalizationGetter.GetString("Login").ToUpper()</a></span>
             </div>
         </div>
     </div>
 </div>
-
 <div id="bottomBody@{@class_ext}">
-
     <div class="fourthTitle">
-        @GlobalRes.DontSilentBystander
+        @LocalizationGetter.GetString("DontSilentBystander")
     </div>
     <div class="icons">
         <div class="centerBlock">
@@ -76,42 +71,39 @@
                 <div class="positionIcons">
                     <div id="firstIcon"></div>
                 </div>
-                <span class="title">@GlobalRes.ActEarly,<br />@GlobalRes.ActEthically</span><br />
+                <span class="title">@LocalizationGetter.GetString("ActEarly"),<br />@LocalizationGetter.GetString("ActEthically")</span><br />
                 <span class="textBlock">
-                    @Resources.GetString("Ifyouwitness", is_cc)
+                    @LocalizationGetter.GetString("Ifyouwitness", is_cc)
                 </span>
             </div>
-
             <div class="itemBlock">
                 <div class="empty"></div>
                 <div class="positionIcons">
                     <div id="secondIcon"></div>
                 </div>
-                <span class="title">@GlobalRes.ReportWeb, <br />@GlobalRes.TabletMobile</span><br />
+                <span class="title">@LocalizationGetter.GetString("ReportWeb"), <br />@LocalizationGetter.GetString("TabletMobile")</span><br />
                 <span class="textBlock">
-                    @GlobalRes.Useonline
+                    @LocalizationGetter.GetString("Useonline")
                 </span>
             </div>
-
             <div class="itemBlock">
                 <div class="empty"></div>
                 <div class="positionIcons">
                     <div id="thirdIcon"></div>
                 </div>
-                <span class="title">@GlobalRes.Chooseyour  <br />@GlobalRes.ConfidentialityLevel</span><br />
+                <span class="title">@LocalizationGetter.GetString("Chooseyour")  <br />@LocalizationGetter.GetString("ConfidentialityLevel")</span><br />
                 <span class="textBlock">
-                    @GlobalRes.ReportAnon
+                    @LocalizationGetter.GetString("ReportAnon")
                 </span>
             </div>
-
             <div class="itemBlock">
                 <div class="empty"></div>
                 <div class="positionIcons">
                     <div id="fourthIcon"></div>
                 </div>
-                <span class="title">@GlobalRes.Expecta <br />@GlobalRes.Response</span><br />
+                <span class="title">@LocalizationGetter.GetString("Expecta") <br />@LocalizationGetter.GetString("Response")</span><br />
                 <span class="textBlock">
-                    @GlobalRes.Mediatorswillgetback
+                    @LocalizationGetter.GetString("Mediatorswillgetback")
                 </span>
             </div>
         </div><!-- end centerBlock-->

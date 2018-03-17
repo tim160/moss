@@ -58,7 +58,7 @@
         rm = new EC.Models.ReportModel(_report_id);
 
         report_name = rm._secondary_type_string + " - " + rm._location_string + " - #" + rm._report.display_name;
-        report_name_code = GlobalRes.Newreport + ": #" + rm._report.display_name;
+        report_name_code = LocalizationGetter.GetString("Newreport") + ": #" + rm._report.display_name;
         report_color = rm._color_descr;
         report_color_code = rm._color_code;
         investigationstatus = rm._investigation_status;
@@ -66,16 +66,16 @@
 
     string[] _statuses = ECGlobalConstants.ReportFlowStatusesList;
 
-    string same_mediator_warning = GlobalRes.AddFurtherNotes;
+    string same_mediator_warning = LocalizationGetter.GetString("AddFurtherNotes");
     if (rm != null && user_id == rm._last_investigation_status_user_id)
     {
-        same_mediator_warning = GlobalRes.RecommendSecond1 + " " + GlobalRes.RecommendSecond2;
+        same_mediator_warning = LocalizationGetter.GetString("RecommendSecond1") + " " + LocalizationGetter.GetString("RecommendSecond2");
     }
 
-    string normal_button_promotion = GlobalRes.RequestCloseCase; //ResolveCaseUp
-    string Res_or_comp = GlobalRes.CloseCaseUp.ToUpper();
-    string overlay_title = GlobalRes.RequestCloseCase;
-    string textbox_title = GlobalRes.Caseresolution;
+    string normal_button_promotion = LocalizationGetter.GetString("RequestCloseCase"); //ResolveCaseUp
+    string Res_or_comp = LocalizationGetter.GetString("CloseCaseUp");
+    string overlay_title = LocalizationGetter.GetString("RequestCloseCase");
+    string textbox_title = LocalizationGetter.GetString("Caseresolution");
     string left_button_promotion = "";
     string normal_button_value = ECGlobalConstants.investigation_status_resolution.ToString();
     string left_button_value = "";// Constant.investigation_status_completed.ToString();
@@ -83,49 +83,41 @@
 
     if ((investigationstatus > 2 && investigationstatus < 7) || (investigationstatus == 9))
     {
-        Res_or_comp = GlobalRes.CloseCaseUp.ToUpper();
+        Res_or_comp = LocalizationGetter.GetString("CloseCaseUp");
         if ((investigationstatus == 4) || (investigationstatus == 6))
         {
             Res_or_comp = "";
         }
         if ((investigationstatus == 9) && (_user.role_id == 4 || _user.role_id == 5))
         {
-            Res_or_comp = GlobalRes.Reopen.ToUpper();
+            Res_or_comp = LocalizationGetter.GetString("Reopen");
             normal_button_value = ECGlobalConstants.investigation_status_investigation.ToString();
         }
         if (((rm._investigation_status == ECGlobalConstants.investigation_status_completed || rm._investigation_status == ECGlobalConstants.investigation_status_resolution)))
         {
-            Res_or_comp = GlobalRes.Awaitingapproval;
+            Res_or_comp = LocalizationGetter.GetString("Awaitingapproval");
         }
     }
 }
-
 <!DOCTYPE html>
 <html>
 <head lang="en">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
     <link rel="stylesheet" href="~/Content/newCase.css" />
-
     <title>@ViewBag.Title</title>
-
     <script type="text/javascript" src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="~/Scripts/lib/jquery-ui.min.js"></script>
-
     <script src="~/Scripts/View/reportSummary.js"></script>
-
     <script src="~/Libs/angular/angular.min.js"></script>
     <script src="~/Libs/angular-http/angular-http.js"></script>
     <script src="~/Libs/angular-resource/angular-resource.min.js"></script>
     <script src="~/Libs/angular-animate/angular-animate.min.js"></script>
     <script src="~/Libs/angular-nvd3/dist/angular-nvd3.min.js"></script>
     <script src="~/Scripts/dis.js"></script>
-
     <!-- Modal popUp http://jquerymodal.com/ -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-
     <!-- Custom dropDown selicts http://selectric.js.org/ -->
     <script src="~/libs/Selectric/jquery.selectric.min.js"></script>
     <link rel="stylesheet" href="~/libs/Selectric/selectric.css">
@@ -143,7 +135,6 @@
     <!-- End Inspectlet Embed Code -->
     <input type="hidden" id="_report_id" value="@Html.Raw(_report_id)" />
     <input type="hidden" id="user_id" value="@Html.Raw(user_id)" />
-
     @if (investigationstatus == 9)
     {
         @Html.Partial("~/Views/Shared/EditorTemplates/ReOpenModalNew.cshtml", new ViewDataDictionary {
@@ -176,9 +167,9 @@
                                { "is_cc", is_cc }
                         })
         @Html.Partial("~/Views/Shared/EditorTemplates/ApproveDialogModalNew.cshtml", new ViewDataDictionary
-        {
+   {
 
-        })
+   })
     }
     else
     {
@@ -195,8 +186,7 @@
                                { "report_id", ViewBag.report_id },
                                { "is_cc", is_cc }
                         })
-    }    
-
+    }
     <header class="header">
         @{
             string mainURL = Request.Url.AbsoluteUri.ToLower();
@@ -235,7 +225,7 @@
                         <a href="/analytics/Index" class="navConteiner__a ">
                             <span class="navConteiner__icon navConteiner__icon_analytics"></span>
                             <span class="navConteiner__name">Analytics</span>
-                            
+
                         </a>
                     </li><!-- /.navConteiner -->
                     <li class="navConteiner @_menuTasks">
@@ -269,8 +259,8 @@
                     <a href="#" class="userNavigation__a">
                         <div class="userNavigation__info">
                             @*
-                            <div class="userNavigation__name">@(um._user != null ? um._user.first_nm : "")</div>
-                            <div class="userNavigation__surname">@(um._user != null ? um._user.last_nm : "")</div>
+                                <div class="userNavigation__name">@(um._user != null ? um._user.first_nm : "")</div>
+                                <div class="userNavigation__surname">@(um._user != null ? um._user.last_nm : "")</div>
                             *@
                             @if (cm.getLogoCompany() != null)
                             {
@@ -290,21 +280,21 @@
                         <div class="userNavigation__triangle"></div>
                     </a>
                     <ul class="dropDown-navigation">
-                        <li class="dropDown-navigation__li"><a href="/settings/index/" class="dropDown-navigation__a">@GlobalRes.Settings</a></li>
+                        <li class="dropDown-navigation__li"><a href="/settings/index/" class="dropDown-navigation__a">@LocalizationGetter.GetString("Settings")</a></li>
                         <li class="dropDown-navigation__li active">
                             <a href="/settings/password/" class="dropDown-navigation__a">
-                                @GlobalRes.Password
+                                @LocalizationGetter.GetString("Password")
                             </a>
                         </li>
                         @*<li class="dropDown-navigation__li">
-                            <a href="/Payment/History" class="dropDown-navigation__a">
-                                @GlobalRes.Subscription
-                            </a>
-                        </li>*@
+                                <a href="/Payment/History" class="dropDown-navigation__a">
+                                    @LocalizationGetter.GetString("Subscription")
+                                </a>
+                            </li>*@
                         <li class="dropDown-navigation__li">
                             <form id="logout_form" action="@Url.Action("Logout", "Base")">
                                 <a href="javascript:{}" onclick="document.getElementById('logout_form').submit();" class="dropDown-navigation__a">
-                                    @Resources.GetString("Logout2")
+                                    @LocalizationGetter.GetString("Logout2")
                                 </a>
                             </form>
                         </li>
@@ -313,50 +303,49 @@
             </div>
         </div>
     </header>
-
     @{
         string hrefURL = Request.Url.AbsoluteUri.ToLower();
         if (hrefURL.Contains("/settings"))
         {
             hrefURL = "/settings/index";
-            page_subtitle = GlobalRes.Settings;
+            page_subtitle = LocalizationGetter.GetString("Settings");
         }
         if ((hrefURL.Contains("/tasks")))
         {
             if (!mainURL.Contains("analytics"))
             {
                 hrefURL = "/tasks/index";
-                page_subtitle = GlobalRes.Tasks;
+                page_subtitle = LocalizationGetter.GetString("Tasks");
             }
         }
         if ((hrefURL.Contains("case/")) || (hrefURL.Contains("/cases")) || (hrefURL.Contains("/newreport") || (hrefURL.Contains("case/task/"))))
         {
             hrefURL = "/cases/index";
-            page_subtitle = GlobalRes.Cases;
+            page_subtitle = LocalizationGetter.GetString("Cases");
         }
 
         if (hrefURL.Contains("/cases"))
         {
             hrefURL = "/cases/index";
-            page_subtitle = GlobalRes.Dashboard;
+            page_subtitle = LocalizationGetter.GetString("Dashboard");
         }
 
         if (hrefURL.Contains("/analytics"))
         {
             hrefURL = "/analytics/index";
-            page_subtitle = GlobalRes.Analytics;
+            page_subtitle = LocalizationGetter.GetString("Analytics");
         }
 
         if (hrefURL.Contains("/messages"))
         {
             hrefURL = "/messages/index";
-            page_subtitle = GlobalRes.Messages;
+            page_subtitle = LocalizationGetter.GetString("Messages");
         }
 
         if (hrefURL.Contains("/payment"))
         {
             hrefURL = "/Payment/History";
-            page_subtitle = GlobalRes.Payments;
+            page_subtitle = LocalizationGetter.GetString("Payments");
         }
     }
     <div class="container clearfix">
@@ -369,11 +358,11 @@
                     <div class="breadcrumbs-info__current-page-text">@(Request.Url.AbsoluteUri.ToLower().Contains("newreport") ? report_name_code : report_name)</div>
                 </div>
                 @*
-                <a href="#" class="btn-link acceptCaseBtn">@Res_or_comp</a>
+                    <a href="#" class="btn-link acceptCaseBtn">@Res_or_comp</a>
                 *@
                 @if (_user.user_permissions_approve_case_closure == 1)
                 {
-                    if (Res_or_comp == GlobalRes.Awaitingapproval)
+                    if (Res_or_comp == LocalizationGetter.GetString("Awaitingapproval"))
                     {
                         <a href="#approveDialog" rel="modal:open" id="return_investigation" style="margin-right: 30px;" class="btn-link" value="@normal_button_value">RETURN FOR INVESTIGATION</a>
                         <a href="#approveDialog" rel="modal:open" id="approve_close" class="btn-link" value="@normal_button_value">APPROVE</a>
@@ -412,9 +401,7 @@
             </ul>
         </div>
     </div>
-
     @RenderBody()
-
     <script src="~/Scripts/View/Settings.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {

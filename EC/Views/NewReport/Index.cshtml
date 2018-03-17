@@ -5,6 +5,8 @@
 @using EC.Localization;
 @using EC.Core.Common;
 @using EC.Model.Impl;
+@using System.Linq;
+
 @{
     bool? is_cc = ViewBag.is_cc;
     if (!is_cc.HasValue)
@@ -41,9 +43,8 @@
 
 
     string report_name = " - #" + rm._report.display_name + " - " + rm._secondary_type_string + " - " + rm._location_string;
-    ViewBag.Title = GlobalRes.NewReportUp + report_name;
+    ViewBag.Title = LocalizationGetter.GetString("NewReportUp") + report_name;
 }
-
 <body>
     <div class="headerPos">
         @if (report_id != 0)
@@ -62,16 +63,15 @@
         <div class="positionN">
             <span>@_statuses[i]</span>
         </div>
-                    <div class="polos"></div>
+        <div class="polos"></div>
             }
         }
     }
     else
     {
         <div style="color: #38494d;">@GlobalRes.no_permission</div>
-            <div style="color: #38494d;">@GlobalRes.use_top_panel</div>
+        <div style="color: #38494d;">@GlobalRes.use_top_panel</div>
     }
-
     </div><!--headerPos-->
     @if (rm._report != null)
     {
@@ -104,7 +104,6 @@
                                     @GlobalRes.report_review.
                                 </div>
                             }
-
                         </div>
                         <table id="timeReport">
                             <tr>
@@ -113,7 +112,7 @@
                             </tr>
                             <tr>
                                 @if (!is_spam)
-                                {
+                {
                                     <td class="openSans">@GlobalRes.Timeelapsed:</td>
                                 }
                                 else
@@ -121,7 +120,7 @@
                                     <td class="openSans">@GlobalRes.Totaltime:</td>
                                 }
                                 @if (rm._total_days == 1)
-                                {
+                {
                                     <td class="openSansSemibold">1 @GlobalRes.day</td>
                                 }
                                 else
@@ -130,7 +129,6 @@
                                 }
                             </tr>
                         </table>
-
                     </div>
                 </div><!--firstPosition-->
                 @if ((is_spam) && (rm._last_promotion != null))
@@ -153,13 +151,11 @@
                             <p class="textSpamDate">@_last_user_promotion_model._user.first_nm @_last_user_promotion_model._user.last_nm,@m_DateTimeHelper.ConvertDateToShortString(@rm._last_promoted_date):</p>
                             <p class="textSpam">@rm._last_promotion.description</p>
                         </div>
-
                     </div>
                 }
-
                 @if (!is_spam)
                 {
-                    <!-- accept_case button -->
+          <!-- accept_case button -->
                     if (is_cc.Value)
                     {
                         <label class="acceptCaseBtn acceptCaseBtn_cc">@GlobalRes.Acceptcase.ToLower()</label>
@@ -169,7 +165,7 @@
                         <label class="acceptCaseBtn">@GlobalRes.Acceptcase.ToLower()</label>
                     }
                     <input id="accept_case" type="submit" name="accept_case" />
-                    <!-- mark_spam button -->
+          <!-- mark_spam button -->
                     <label class="markSpamBtn">@GlobalRes.Markspam.ToLower()</label>
                     <input id="mark_spam" type="submit" name="mark_spam" />
                 }
@@ -178,9 +174,7 @@
                     <div class="buttonBlock">
                         @*    <label class="spamBtn">@GlobalRes.Spam.ToUpper()</label>
                             <input id="spam_case" type="submit" name="spam_case" />*@
-
                         <!-- mark_spam button -->
-
                         @if (is_cc.Value)
                         {
                             <label class="acceptCaseBtn acceptCaseBtn_cc">@GlobalRes.Reopen.ToUpper()</label>
@@ -189,12 +183,10 @@
                         {
                             <label class="acceptCaseBtn">@GlobalRes.Reopen.ToUpper()</label>
                         }
-
                         <input id="reopen_case" type="submit" name="reopen_case" />
                     </div>
                 }
             </div>
-
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
@@ -214,22 +206,20 @@
                 var allReportMediatorAssigned = (List<report_mediator_assigned>)ViewBag.report_mediator_assigned;
                 var allReportMediatorInvolved = (List<report_mediator_involved>)ViewBag.report_mediator_involved;
 
-            <!-- ============================== START Accept case ==================================== -->
+        <!-- ============================== START Accept case ==================================== -->
 
-        <style>
+                <style>
+                    .blockAcceptCase table {
+                        width: 100%;
+                    }
 
-            .blockAcceptCase table {
-                    width: 100%;
-                }
-
-                .blockAcceptCase select {
-                    width: 220px;
-                    height: 40px;
-                    margin-left: 12px;
-                }
-            </style>
+                    .blockAcceptCase select {
+                        width: 220px;
+                        height: 40px;
+                        margin-left: 12px;
+                    }
+                </style>
                 <div id="blockAcceptCase" class="contentViewReport blockAcceptCase" style="display: none;">
-
                     <table>
                         <tbody>
                             <tr>
@@ -259,13 +249,12 @@
                                     @Html.DropDownList("SeverityId", new SelectList(allSeverities, "id", "severity_en"), new { @class = "" })
                                 </td>
                             </tr>
-
                             <tr>
                                 <td class="aroundSelect">Case Owner:</td>
                                 <td class="inSelect" colspan="3">
                                     <select class="" id="OwnerId" name="OwnerId" style="width: 100%">
                                         @foreach (var item in rm.MediatorsAcceptCase)
-                                        {
+                    {
                                             <option class="@(String.IsNullOrEmpty(item.Detail) ? "needquestion" : "")" value="@item.User.id">@item.FullNameWithDetail</option>
                                         }
                                     </select>
@@ -283,9 +272,9 @@
                                         {
                                             foreach (var item in allPolicies)
                                             {
-                                            <div>
-                                                <a href="@Url.Content(item.path_nm)" download>@item.file_nm</a>
-                                            </div>
+                                                <div>
+                                                    <a href="@Url.Content(item.path_nm)" download>@item.file_nm</a>
+                                                </div>
                                             }
                                         }
                                     </td>
@@ -297,12 +286,12 @@
                                 }
                             </tr>
                     </table>
-                               
+
                     @if (is_cc.HasValue && is_cc.Value)
                     {
                         <p class="someAlert">
                             Does this Case or Subject pose an ongoing threat to the safety or health of the students and employees on campus?
-                         </p>
+                        </p>
                         <div style="padding: 20px;" id="AnonymousDiv">
                             <label class="inputBlock" for="Anonymous">
                                 <input id="Anonymous" type="radio" name="isLifeThreat" value="true">
@@ -319,7 +308,7 @@
                             </p>
                         </div>
                     }
-                    
+
                     <div class="newMessageBtn">
                         @if (is_cc.Value)
                         {
@@ -334,48 +323,42 @@
                     <div class="contentBlockCase">
                         <p class="titleCase"></p>
                     </div>
-
                     <form action="" method="post"></form>
-
                 </div>
 
 
-            <!-- ============================== END Accept case ==================================== -->
-            <!-- ============================== START Mark case as spam ==================================== -->
+        <!-- ============================== END Accept case ==================================== -->
+        <!-- ============================== START Mark case as spam ==================================== -->
 
-                <div class="contentViewReport blockSpamCase" style="display: none;">
-                    <div class="headerblockButtons">
+                                        <div class="contentViewReport blockSpamCase" style="display: none;">
+                                            <div class="headerblockButtons">
+                                                <div class="closeIcon"></div>
+                                            </div>
+                                            <div class="contentBlockCase">
+                                                <p class="titleCase">@GlobalRes.Mark_case_spam</p>
+                                                <p class="textCace">@GlobalRes.Notification_will_sent_reporter</p>
+                                            </div>
+                                            <form action="" method="post">
+                                                <div class="addComment addComment2@{@class_ext}">
+                                                    <div class="blockPersonal">
+                                                        <div class="blockPhoto">
+                                                            @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", user_id }, { "is_owner", true } })
 
-                        <div class="closeIcon"></div>
-                    </div>
-                    <div class="contentBlockCase">
-                        <p class="titleCase">@GlobalRes.Mark_case_spam</p>
-                        <p class="textCace">@GlobalRes.Notification_will_sent_reporter</p>
-                    </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="arrow green"></div>
+                                                    <div class="messageText spamMessage">
+                                                        <textarea cols="20" id="body_text" class="green" name="body_tx" rows="2" autofocus></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="newMessageBtn">
+                                                    <span class="markAsSpam">@GlobalRes.Mark_case_spam</span>
+                                                    <input type="submit" value="new message" style="display: none;">
+                                                </div>
+                                            </form>
+                                        </div>
 
-                    <form action="" method="post">
-                        <div class="addComment addComment2@{@class_ext}">
-                            <div class="blockPersonal">
-                                <div class="blockPhoto">
-                                    @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", user_id }, { "is_owner", true } })
-
-
-                                </div>
-                            </div>
-                                <div class="arrow green"></div>
-                            <div class="messageText spamMessage">
-                                <textarea cols="20" id="body_text" class="green" name="body_tx" rows="2" autofocus></textarea>
-                            </div>
-                        </div>
-                        <div class="newMessageBtn">
-                            <span class="markAsSpam">@GlobalRes.Mark_case_spam</span>
-                            <input type="submit" value="new message" style="display: none;">
-                        </div>
-                    </form>
-
-                </div>
-
-    <!-- ============================== END Mark case as spam ==================================== -->
+        <!-- ============================== END Mark case as spam ==================================== -->
     }
         </div><!-- end viewReport-->
 
@@ -410,7 +393,6 @@
                                 <td>@rm._report.not_current_employee</td>
                             </tr>
                         }
-
                         <tr>
                             <td>@GlobalRes.TheIncidentHappenedIn:</td>
                             <td>@rm._location_string</td>
@@ -421,10 +403,9 @@
                         </tr>
                     </table>
                 </div>
-
                 <div class="blockPartiesInformation">
                     <span class="title">@GlobalRes.PartiesInvolved</span>
-                     <table class="generalInformation">
+                    <table class="generalInformation">
                         <tr>
                             <td>
                                 @GlobalRes.report_by_myself
@@ -437,7 +418,6 @@
                     @if (_involved.Count > 0)
                     {
                         @*<div class="incidentDescription">*@<div class="incidentDescription">
-
                             <table class="partiesInformation">
                                 @foreach (var item in _involved)
                                 {
@@ -450,12 +430,11 @@
                             @*</div>*@
                         </div>
                     }
-
                     @if (rm._involved_mediators_user_list.Count > 0)
                     {
                         <table class="generalInformation">
                             <tr>
-                                <td>@Resources.GetString("Mediatorsinvolved", is_cc)</td>
+                                <td>@LocalizationGetter.GetString("Mediatorsinvolved", is_cc)</td>
                                 <td>&nbsp;</td>
                             </tr>
                             @foreach (user mediators_involved in rm._involved_mediators_user_list)
@@ -480,7 +459,6 @@
                             </tr>
                         }
                     </table>
-
                     <table class="generalInformation">
                         <tr>
                             <td>@GlobalRes.Incidentreportedoutside_q</td>
@@ -499,7 +477,6 @@
                         </tr>
                     </table>
                 </div>
-
                 <div class="blockCaseInformation">
                     <span class="title">@GlobalRes.CaseInformation</span>
                     <table class="caseInformation">
@@ -522,7 +499,6 @@
                                 <td>@rm._report.report_frequency_text</td>
                             </tr>
                         }
-
                         <tr>
                             <td>@GlobalRes.incidentResult:</td>
                             <td>@rm._has_injury_damage</td>
@@ -536,7 +512,6 @@
                         }
                     </table>
                 </div>
-
                 <div class="incidentDescription">
                     <p class="titleIncidentDescription">@GlobalRes.IncidentDescription:</p>
                     <div class="text">
@@ -544,9 +519,7 @@
                     </div>
                 </div>
             </div>
-
             <div class="contentDownloadDoc">
-
                 @foreach (EC.Models.Database.attachment file in ViewBag.attachmentFiles)
                 {
                     <div class="blockDownloadDoc">
@@ -573,12 +546,9 @@
 <div>
     <p>@ViewBag.companyName</p>
 </div>
-
 <div>
     <p>@ViewBag.generatedName</p>
 </div>
-
-
 
 <script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
 <script>

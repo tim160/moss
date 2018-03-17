@@ -31,7 +31,7 @@ namespace EC.Controllers
             #endregion
 
             List<SelectListItem> temp_items = new List<SelectListItem>();
-            SelectListItem _temp_department = new SelectListItem { Text = App_LocalResources.GlobalRes.Other, Value = "0" };
+            SelectListItem _temp_department = new SelectListItem { Text = LocalizationGetter.GetString("Other"), Value = "0" };
             temp_items.Add(_temp_department);
             ViewBag.currentDepartmens = temp_items;
 
@@ -56,7 +56,7 @@ namespace EC.Controllers
                         items.Add(dep);
                     }
                     /*put other*/
-                    SelectListItem temp = new SelectListItem { Text = App_LocalResources.GlobalRes.Other, Value = "0" };
+                    SelectListItem temp = new SelectListItem { Text = LocalizationGetter.GetString("Other"), Value = "0" };
                     items.Add(temp);
                     ViewBag.currentDepartmens = items;
                     ViewBag.company_id = selectedCompany.id;
@@ -153,19 +153,19 @@ namespace EC.Controllers
 
             if ((string.IsNullOrEmpty(code)) || (string.IsNullOrEmpty(location)) || (string.IsNullOrEmpty(company_name)) || (string.IsNullOrEmpty(number)) || (string.IsNullOrEmpty(first)) || (string.IsNullOrEmpty(last)) || (string.IsNullOrEmpty(email)) || (string.IsNullOrEmpty(title)))
             {
-                return App_LocalResources.GlobalRes.EmptyData;
+                return LocalizationGetter.GetString("EmptyData");
             }
             if (glb.isCompanyInUse(company_name))
             {
-                return Resources.GetString("CompanyInUse", is_cc);
+                return LocalizationGetter.GetString("CompanyInUse", is_cc);
             }
             if (!m_EmailHelper.IsValidEmail(email))
             {
-                return App_LocalResources.GlobalRes.EmailInvalid;
+                return LocalizationGetter.GetString("EmailInvalid");
             }
 
             if (!db.company_invitation.Any(t => ((t.is_active == 1) && (t.invitation_code.Trim().ToLower() == code.Trim().ToLower()))))
-                return App_LocalResources.GlobalRes.InvalidCode;
+                return LocalizationGetter.GetString("InvalidCode");
 
             decimal _amount = 0;
             if (!string.IsNullOrEmpty(amount) && amount != "0")
@@ -178,7 +178,7 @@ namespace EC.Controllers
             {
                 if ((string.IsNullOrEmpty(cardnumber)) || (string.IsNullOrEmpty(cardname)) || (string.IsNullOrEmpty(csv)) || (string.IsNullOrEmpty(selectedMonth)) || (string.IsNullOrEmpty(selectedYear)))
                 {
-                    return App_LocalResources.GlobalRes.EmptyData;
+                    return LocalizationGetter.GetString("EmptyData");
                 }
             }
             #region Credit Card
@@ -203,7 +203,7 @@ namespace EC.Controllers
                 int.TryParse(selectedYear, out _year);
 
                 if (_month == 0 || _year == 0)
-                    return App_LocalResources.GlobalRes.EmptyData;
+                    return LocalizationGetter.GetString("EmptyData");
 
                 var random = new Random();
                 payment_auth_code = glb.GenerateInvoiceNumber(); // "INV_" + random.Next(10001, 99999).ToString(); 
@@ -316,7 +316,7 @@ namespace EC.Controllers
             catch (Exception ex)
             {
                 logger.Error(ex.ToString());
-                return Resources.GetString("CompanySavingFailed", is_cc);
+                return LocalizationGetter.GetString("CompanySavingFailed", is_cc);
             }
             #endregion
 
@@ -344,12 +344,12 @@ namespace EC.Controllers
                 catch (Exception ex)
                 {
                     logger.Error(ex.ToString());
-                    return App_LocalResources.GlobalRes.LocationSavingFailed;
+                    return LocalizationGetter.GetString("LocationSavingFailed");
                 }
             }
             else
             {
-                return Resources.GetString("CompanySavingFailed", is_cc);
+                return LocalizationGetter.GetString("CompanySavingFailed", is_cc);
             }
 
             #endregion
@@ -359,11 +359,11 @@ namespace EC.Controllers
             /// 
             company_department selectedDepartment = null;
             List<string> list_departments = new List<string>();
-            list_departments.Add(App_LocalResources.GlobalRes.Administrative);
-            list_departments.Add(App_LocalResources.GlobalRes.Accounting);
-            list_departments.Add(App_LocalResources.GlobalRes.Management);
-            list_departments.Add(App_LocalResources.GlobalRes.Sales);
-            list_departments.Add(App_LocalResources.GlobalRes.Support);
+            list_departments.Add(LocalizationGetter.GetString("Administrative"));
+            list_departments.Add(LocalizationGetter.GetString("Accounting"));
+            list_departments.Add(LocalizationGetter.GetString("Management"));
+            list_departments.Add(LocalizationGetter.GetString("Sales"));
+            list_departments.Add(LocalizationGetter.GetString("Support"));
 
             if (company_id != 0)
             {
@@ -395,7 +395,7 @@ namespace EC.Controllers
                 catch (Exception ex)
                 {
                     logger.Error(ex.ToString());
-                    return App_LocalResources.GlobalRes.DepartmentSavingFailed;
+                    return LocalizationGetter.GetString("DepartmentSavingFailed");
                 }
 
                 /*check other deparment*/
@@ -434,7 +434,7 @@ namespace EC.Controllers
                         catch (Exception ex)
                         {
                             logger.Error(ex.ToString());
-                            return App_LocalResources.GlobalRes.OtherDepartmentSavingFailed;
+                            return LocalizationGetter.GetString("OtherDepartmentSavingFailed");
                         }
                     }
                 }
@@ -452,7 +452,7 @@ namespace EC.Controllers
             if (company_id != 0)
             {
                 List<string> list_types = db.secondary_type_mandatory.Where(t => t.type_id == 1 && t.status_id == 2).Select(item => item.secondary_type_en).ToList();
-                // list_types.Add(App_LocalResources.GlobalRes.Administrative);
+                // LocalizationGetter.GetString("Administrative") 
 
                 foreach (string _types in list_types)
                 {
@@ -482,7 +482,7 @@ namespace EC.Controllers
                         {
                             ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
                             logger.Error(ex.ToString());
-                            return App_LocalResources.GlobalRes.IncidentTypeSavingFailed;
+                            return LocalizationGetter.GetString("IncidentTypeSavingFailed");
                         }
                     }
                 }
@@ -493,7 +493,7 @@ namespace EC.Controllers
             if (company_id != 0)
             {
                 List<string> list_relationship = db.relationship.Select(item => item.relationship_en).ToList();
-                // list_types.Add(App_LocalResources.GlobalRes.Administrative);
+                //   LocalizationGetter.GetString("Administrative")
 
 
                 foreach (string _relationships in list_relationship)
@@ -520,7 +520,7 @@ namespace EC.Controllers
                         catch (Exception ex)
                         {
                             logger.Error(ex.ToString());
-                            return App_LocalResources.GlobalRes.RelationshipsSavingFailed;
+                            return LocalizationGetter.GetString("RelationshipsSavingFailed");
                         }
                     }
                 }
@@ -554,7 +554,7 @@ namespace EC.Controllers
                         catch (Exception ex)
                         {
                             logger.Error(ex.ToString());
-                            return App_LocalResources.GlobalRes.AnonymitySavingFailed;
+                            return LocalizationGetter.GetString("AnonymitySavingFailed");
                         }
                     }
                 }
@@ -565,13 +565,13 @@ namespace EC.Controllers
             if (company_id != 0)
             {
                 List<string> list_outcomes = new List<string>();
-                list_outcomes.Add(App_LocalResources.GlobalRes.OutcomeCompany1);
-                list_outcomes.Add(App_LocalResources.GlobalRes.OutcomeCompany2);
-                list_outcomes.Add(App_LocalResources.GlobalRes.OutcomeCompany3);
-                list_outcomes.Add(App_LocalResources.GlobalRes.OutcomeCompany4);
-                list_outcomes.Add(App_LocalResources.GlobalRes.OutcomeCompany5);
-                list_outcomes.Add(App_LocalResources.GlobalRes.OutcomeCompany6);
-                list_outcomes.Add(App_LocalResources.GlobalRes.OutcomeCompany7);
+                list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany1"));
+                list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany2"));
+                list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany3"));
+                list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany4"));
+                list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany5"));
+                list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany6"));
+                list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany7"));
 
 
 
@@ -598,7 +598,7 @@ namespace EC.Controllers
                         catch (Exception ex)
                         {
                             logger.Error(ex.ToString());
-                            return App_LocalResources.GlobalRes.RelationshipsSavingFailed;
+                            return LocalizationGetter.GetString("RelationshipsSavingFailed");
                         }
                     }
                 }
@@ -651,12 +651,12 @@ namespace EC.Controllers
                 catch (Exception ex)
                 {
                     logger.Error(ex.ToString());
-                    return App_LocalResources.GlobalRes.UserSavingFailed;
+                    return LocalizationGetter.GetString("UserSavingFailed");
                 }
             }
             else
             {
-                return Resources.GetString("CompanySavingFailed", is_cc);
+                return LocalizationGetter.GetString("CompanySavingFailed", is_cc);
             }
 
             if (login != null && login.Length > 0)
@@ -684,7 +684,7 @@ namespace EC.Controllers
                     EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
                     eb.NewCompany(user.first_nm, user.last_nm, login.Trim(), pass.Trim(), company_name.Trim(), company_code.Trim());
                     string body = eb.Body;
-                    em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_NewCompany, body, true);
+                    em.Send(to, cc, LocalizationGetter.GetString("Email_Title_NewCompany"), body, true);
                 }
 
 
@@ -693,7 +693,7 @@ namespace EC.Controllers
 
             }
             else
-                return App_LocalResources.GlobalRes.UserSavingFailed;
+                return LocalizationGetter.GetString("UserSavingFailed");
             #endregion
 
 
@@ -731,7 +731,7 @@ namespace EC.Controllers
             #endregion
             Session["Auth"] = auth_code;
             Session["Amount"] = _amount;
-            return App_LocalResources.GlobalRes._Completed.ToLower();
+            return LocalizationGetter.GetString("_Completed").ToLower();
 
             //  return user_id.ToString();
 
@@ -746,21 +746,21 @@ namespace EC.Controllers
 
             if ((string.IsNullOrEmpty(code)) || (string.IsNullOrEmpty(first)) || (string.IsNullOrEmpty(last)) || (string.IsNullOrEmpty(email)) || (string.IsNullOrEmpty(title)))
             {
-                return App_LocalResources.GlobalRes.EmptyData;
+                return LocalizationGetter.GetString("EmptyData");
             }
 
             if (!m_EmailHelper.IsValidEmail(email))
             {
-                return App_LocalResources.GlobalRes.EmailInvalid;
+                return LocalizationGetter.GetString("EmailInvalid");
             }
 
             if (db.invitation.Any(t => ((t.email.ToLower().Trim() == email.ToLower().Trim()) && (t.used_flag == 1) && (t.code.Trim().ToLower() == code.Trim().ToLower()))))
-                return App_LocalResources.GlobalRes.AlreadyRegistered;
+                return LocalizationGetter.GetString("AlreadyRegistered");
 
             int invitation_id = 0;
 
             if (!db.invitation.Any(t => ((t.email.ToLower().Trim() == email.ToLower().Trim()) && (t.used_flag == 0) && (t.code.Trim().ToLower() == code.Trim().ToLower()))))
-                return App_LocalResources.GlobalRes.InvitationCodeMismatch;
+                return LocalizationGetter.GetString("InvitationCodeMismatch");
             else
             {
                 List<invitation> invitations = db.invitation.Where(t => ((t.email.ToLower().Trim() == email.ToLower().Trim()) && (t.used_flag == 0) && (t.code.Trim().ToLower() == code.Trim().ToLower()))).ToList();
@@ -779,7 +779,7 @@ namespace EC.Controllers
                     _company_user_ids = (db.user.Where(t => ((t.company_id == company_id) && (t.role_id != ECLevelConstants.level_informant))).Select(t => t.id)).ToList();
 
                     if (db.user.Any(u => ((u.email.ToLower().Trim() == email.ToLower().Trim() && u.role_id != ECLevelConstants.level_informant && _company_user_ids.Contains(u.id)))))
-                        return App_LocalResources.GlobalRes.AlreadyRegistered;
+                        return LocalizationGetter.GetString("AlreadyRegistered");
                 }
                 catch
                 {
@@ -791,7 +791,7 @@ namespace EC.Controllers
 
             if (invitation_id == 0)
             {
-                return Resources.GetString("InvitationCompanyMismatch", is_cc);
+                return LocalizationGetter.GetString("InvitationCompanyMismatch", is_cc);
             }
             string login = glb.GenerateLoginName(first, last);
             string pass = glb.GeneretedPassword();
@@ -847,7 +847,7 @@ namespace EC.Controllers
                 catch (Exception ex)
                 {
                     logger.Error(ex.ToString());
-                    return App_LocalResources.GlobalRes.UserSavingFailed;
+                    return LocalizationGetter.GetString("UserSavingFailed");
                 }
 
                 #region Create Folder for User
@@ -855,7 +855,7 @@ namespace EC.Controllers
             }
             else
             {
-                return Resources.GetString("InvitationCompanyMismatch", is_cc);
+                return LocalizationGetter.GetString("InvitationCompanyMismatch", is_cc);
             }
 
             if (login != null && login.Length > 0)
@@ -885,7 +885,7 @@ namespace EC.Controllers
                     eb.NewUser(user.first_nm, user.last_nm, login.Trim(), pass.Trim());
                     string body = eb.Body;
 
-                    string email_title = App_LocalResources.GlobalRes.Email_Title_NewUser;
+                    string email_title = LocalizationGetter.GetString("Email_Title_NewUser");
                     email_title = email_title.Replace("[CompanyName]", cm._company.company_nm);
                     em.Send(to, cc, email_title, body, true);
 
@@ -910,10 +910,10 @@ namespace EC.Controllers
                 }
                 #endregion
 
-                return App_LocalResources.GlobalRes._Completed.ToLower();
+                return LocalizationGetter.GetString("_Completed").ToLower();
             }
             else
-                return App_LocalResources.GlobalRes.UserSavingFailed;
+                return LocalizationGetter.GetString("UserSavingFailed");
             #endregion
         }
 

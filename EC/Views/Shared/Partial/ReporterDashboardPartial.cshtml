@@ -3,9 +3,7 @@
 @using EC.Localization;
 @using EC.Common.Interfaces;
 @using EC.Core.Common;
-
 @model ReportModel
-
 @{
     bool? is_cc = ViewBag.is_cc;
     if (!is_cc.HasValue)
@@ -20,38 +18,34 @@
         ViewBag.attachmentAdvFiles = new List<attachment>();
     }
 }
-
 <div class="content">
     <div class="post">
         <div class="dataPosts">
             <div class="leftBlock">
-                <div class="listHead">@Resources.GetString("GeneralInformation"):</div>
-                < div class="reportBlock">
+                <div class="listHead">@LocalizationGetter.GetString("GeneralInformation"):</div>
+                <div class="reportBlock">
                     <div class="report">
-                        <div class="titleReport">@Resources.GetString("ReportingFrom"):</div>
-                        < div class="reportText">@rm._country_string</div>
+                        <div class="titleReport">@LocalizationGetter.GetString("ReportingFrom"):</div>
+                        <div class="reportText">@rm._country_string</div>
                     </div>
 
-
                     <div class="report">
-                        <div class="titleReport">@Resources.GetString("ConfidentialityLevel"):</div>
-                        < div class="reportText">@rm._anonymousLevel_reporterVersion</div>
+                        <div class="titleReport">@LocalizationGetter.GetString("ConfidentialityLevel"):</div>
+                        <div class="reportText">@rm._anonymousLevel_reporterVersion</div>
                     </div>
 
-
-                    @if((rm._report.incident_anonymity_id == 2 || rm._report.incident_anonymity_id == 3))
+                    @if ((rm._report.incident_anonymity_id == 2 || rm._report.incident_anonymity_id == 3))
                     {
                         <div class="report">
                             <div class="titleReport">
-                                @Resources.GetString("Name", is_cc)
-                                @if(rm._report.incident_anonymity_id != 2)
+                                @LocalizationGetter.GetString("Name", is_cc)
+                                @if (rm._report.incident_anonymity_id != 2)
                                 {
                                     < text >:</ text >
                                 }
-
-                                @if(rm._report.incident_anonymity_id == 2)
+                                @if (rm._report.incident_anonymity_id == 2)
                                 {
-                                    @Resources.GetString("forEmployeeConfidentialOnly", is_cc)
+                                    @LocalizationGetter.GetString("forEmployeeConfidentialOnly", is_cc)
                                     < text >:</ text >
                                 }
                             </div>
@@ -61,14 +55,11 @@
                         </div>
                     }
 
-
-
                     <div class="report">
-                        <div class="titleReport">@Resources.GetString("Reportedas"):</div>
+                        <div class="titleReport">@LocalizationGetter.GetString("Reportedas"):</div>
                         <div class="reportText">@rm._reporter_company_relation_short</div>
-
                     </div>
-                    @if(!String.IsNullOrEmpty(rm._report.not_current_employee))
+                    @if (!String.IsNullOrEmpty(rm._report.not_current_employee))
                     {
                         <div class="report">
                             <div class="titleReport">&nbsp;</div>
@@ -78,11 +69,11 @@
                         </div>
                     }
                     <div class="report">
-                        <div class="titleReport">@Resources.GetString("Incidentlocation"):</div>
+                        <div class="titleReport">@LocalizationGetter.GetString("Incidentlocation"):</div>
                         <div class="reportText">@rm._location_string</div>
                     </div>
                     <div class="report">
-                        <div class="titleReport">@Resources.GetString("AffectedDepartment"):</div>
+                        <div class="titleReport">@LocalizationGetter.GetString("AffectedDepartment"):</div>
                         <div class="reportText">@rm._departments_string</div>
                     </div>
                 </div><!--reportBlock-->
@@ -90,26 +81,23 @@
         </div><!--dataPosts-->
     </div><!--post-->
 </div>
-
 <div class="content">
     <div class="post">
         <div class="dataPosts">
             <div class="leftBlock">
-
-                <div class="listHead">@Resources.GetString("PartiesInvolved")</div>
+                <div class="listHead">@LocalizationGetter.GetString("PartiesInvolved")</div>
                 <div class="reportBlock">
                     <div class="report">
-                        <div class="titleReport">@Resources.GetString("report_by_myself")</div>
+                        <div class="titleReport">@LocalizationGetter.GetString("report_by_myself")</div>
                         <div class="reportText">
-                            @(rm._report.report_by_myself? @Resources.GetString("Myself") : @Resources.GetString("SomeoneElse"))
+                            @(rm._report.report_by_myself ? @LocalizationGetter.GetString("Myself") : @LocalizationGetter.GetString("SomeoneElse"))
                         </div>
                     </div>
-
-                    @if(_involved != null && _involved.Count > 0)
-                        {
+                    @if (_involved != null && _involved.Count > 0)
+                    {
                         <table>
                             <tbody>
-                                @foreach(var witness in _involved)
+                                @foreach (var witness in _involved)
                                 {
                                     <tr>
                                         <td class="positionTitleReport">@Html.Raw(@witness.Name + " " + @witness.last_name)</td>
@@ -119,27 +107,25 @@
                             </tbody>
                         </table>
                     }
-
-                    @if(rm._involved_mediators_user_list.Count > 0)
-                        {
+                    @if (rm._involved_mediators_user_list.Count > 0)
+                    {
                         <div class="report">
-                            <div class="titleReport">@Resources.GetString("Mediatorsinvolved")</div>
+                            <div class="titleReport">@LocalizationGetter.GetString("Mediatorsinvolved")</div>
                             <div class="reportText">&nbsp;</div>
-
-                            @foreach(user witness in rm._involved_mediators_user_list)
-                                    {
+                            @foreach (user witness in rm._involved_mediators_user_list)
+                            {
                                 <div class="titleReport">@witness.first_nm @witness.last_nm</div>
-                                         <div class="reportText"> @witness.title_ds @witness.notepad_tx</div>
+                                <div class="reportText"> @witness.title_ds @witness.notepad_tx</div>
                             }
                         </div>
                     }
                     <div class="report">
-                        <div class="titleReport">@Resources.GetString("ManagementKnow")?</div>
+                        <div class="titleReport">@LocalizationGetter.GetString("ManagementKnow")?</div>
                         <div class="reportText">
                             @rm._management_know_string
                         </div>
                     </div>
-                    @if(!String.IsNullOrEmpty(rm._report.management_know_text))
+                    @if (!String.IsNullOrEmpty(rm._report.management_know_text))
                     {
                         <div class="report">
                             <div class="titleReport">&nbsp;</div>
@@ -149,53 +135,49 @@
                         </div>
                     }
 
-
                     <div class="report">
-                        <div class="titleReport">@Resources.GetString("Hascasereportedoutside")</div>
-                        < div class="reportText" style="height: 55px; ">@rm._is_reported_outside</div>
-                         @if(!String.IsNullOrEmpty(rm._report.reported_outside_text))
+                        <div class="titleReport">@LocalizationGetter.GetString("Hascasereportedoutside")</div>
+                        <div class="reportText" style="height: 55px; ">@rm._is_reported_outside</div>
+                        @if (!String.IsNullOrEmpty(rm._report.reported_outside_text))
                         {
                             <div class="titleReport">&nbsp;</div>
-                                    <div class="reportText">
-                                        @rm._report.reported_outside_text
-                                    </div>
-                            }
+                            <div class="reportText">
+                                @rm._report.reported_outside_text
+                            </div>
+                        }
                     </div>
                     <div class="report">
-                        <div class="titleReport">@Resources.GetString("IsCaseUrgent_q")</div>
-                        < div class="reportText">@rm._is_reported_urgent</div>
+                        <div class="titleReport">@LocalizationGetter.GetString("IsCaseUrgent_q")</div>
+                        <div class="reportText">@rm._is_reported_urgent</div>
                     </div>
 
-
                 </div><!--reportBlock-->
-
             </div><!--leftBlock-->
         </div><!--dataPosts-->
     </div><!--post-->
 </div><!--content-->
-
 <div class="content">
     <div class="post">
         <div class="dataPosts">
             <div class="leftBlock">
-                <div class="listHead">@Resources.GetString("CaseInformation")</div>
-                < div class="reportBlock">
+                <div class="listHead">@LocalizationGetter.GetString("CaseInformation")</div>
+                <div class="reportBlock">
                     <div class="report">
                         <table>
                             <tbody>
                                 <tr>
-                                    <td class="positionTitleReport">@Resources.GetString("IncidentType"):</td>
+                                    <td class="positionTitleReport">@LocalizationGetter.GetString("IncidentType"):</td>
                                     <td class="positionReportText reportTextBlack">@rm._secondary_type_string</td>
                                 </tr>
                                 <tr>
-                                    <td class="positionTitleReport">@Resources.GetString("IncidentDateUp"):</td>
+                                    <td class="positionTitleReport">@LocalizationGetter.GetString("IncidentDateUp"):</td>
                                     <td class="positionReportText reportTextBlack">@m_DateTimeHelper.ConvertDateToLongMonthString(rm._report.incident_dt)</td>
                                 </tr>
                                 <tr>
-                                    <td class="positionTitleReport">@Resources.GetString("isOngoing"):</td>
+                                    <td class="positionTitleReport">@LocalizationGetter.GetString("isOngoing"):</td>
                                     <td class="positionReportText reportTextBlack">@rm._is_ongoing</td>
                                 </tr>
-                                @if(!String.IsNullOrEmpty(rm._report.report_frequency_text))
+                                @if (!String.IsNullOrEmpty(rm._report.report_frequency_text))
                                 {
                                     <tr>
                                         <td class="positionTitleReport">&nbsp;</td>
@@ -205,11 +187,10 @@
                                     </tr>
                                 }
                                 <tr>
-                                    <td class="positionTitleReport">@Resources.GetString("incidentResult"):</td>
+                                    <td class="positionTitleReport">@LocalizationGetter.GetString("incidentResult"):</td>
                                     <td class="positionReportText reportTextBlack">@rm._has_injury_damage</td>
                                 </tr>
-
-                                @if(!String.IsNullOrEmpty(rm._report.injury_damage))
+                                @if (!String.IsNullOrEmpty(rm._report.injury_damage))
                                 {
                                     <tr>
                                         <td class="positionReportText reportTextBlack">
@@ -219,35 +200,9 @@
                                 }
                             </tbody>
                         </table>
-
-                        @*<div class="titleReport">@GlobalRes.IncidentType:</div>
-                            <div class="reportText"> @rm._secondary_type_string</div>
-
-                            <div class="titleReport">@GlobalRes.IncidentDateUp:</div>
-                            <div class="reportText">@m_DateTimeHelper.ConvertDateToLongMonthString(rm._report.incident_dt)</div>
-
-                            <div class="titleReport">@GlobalRes.isOngoing:</div>
-                            <div class="reportText">@rm._is_ongoing</div>
-                            @if (!String.IsNullOrEmpty(rm._report.report_frequency_text))
-                            {
-                                <div class="titleReport">&nbsp;</div>
-                                <div class="reportText">
-                                    @rm._report.report_frequency_text
-                                </div>
-                            }
-
-                            <div class="titleReport">@GlobalRes.incidentResult:</div>
-                            <div class="reportText">@rm._has_injury_damage</div>
-
-                            @if (!String.IsNullOrEmpty(rm._report.injury_damage))
-                            {
-                                <div class="reportText">
-                                    @rm._report.injury_damage
-                                </div>
-                            }*@
                         <div class="titleReportAll">
                             <div class="incidentDescription">
-                                <p class="titleIncidentDescription">@Resources.GetString("IncidentDescription"):</p>
+                                <p class="titleIncidentDescription">@LocalizationGetter.GetString("IncidentDescription"):</p>
                                 <div class="text" style="float: left;padding-top:10px">
                                     @rm._report.description
                                 </div>
@@ -265,13 +220,12 @@
                                     <div class="description">
                                         @file.file_nm
                                         <div class="download">
-                                            <a href="@file.path_nm">@Resources.GetString("Download").ToLower()</a>
+                                            <a href="@file.path_nm">@LocalizationGetter.GetString("Download").ToLower()</a>
                                         </div>
                                     </div>
                                 </div>
                             }
                         </div>
-
                     </div>
                 </div>
             </div>

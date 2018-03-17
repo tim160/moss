@@ -14,6 +14,7 @@ using EC.Core.Common;
 using EC.App_LocalResources;
 using EC.Models.ViewModel;
 using EC.Common.Interfaces;
+using EC.Localization;
 
 namespace EC.Controllers.API
 {
@@ -29,7 +30,7 @@ namespace EC.Controllers.API
             public int? Mediator_add { get; set; }
             public int? Mediator_delete { get; set; }
             public int? Mode { get; set; }
-            
+
 
             public int? Department_add { get; set; }
             public int? Department_delete { get; set; }
@@ -52,7 +53,7 @@ namespace EC.Controllers.API
             public string addPersonLastName { get; set; }
             public string addPersonTitle { get; set; }
             public int? addPersonRole { get; set; }
-            
+
         }
 
         [HttpGet]
@@ -88,7 +89,7 @@ namespace EC.Controllers.API
 
             var mediator_not_involved = DB.report_non_mediator_involved
                 .Where(x => x.report_id == filter.Report_id)
-                .ToList();            
+                .ToList();
 
             var mediator_assigned = DB.report_mediator_assigned
                 .Where(x => x.report_id == filter.Report_id & x.status_id == 2)
@@ -178,7 +179,7 @@ namespace EC.Controllers.API
                 addNewPersonRoles = DB.role_in_report.OrderBy(x => x.role_en).ToList()
             };
 
-            m.addNewPersonRoles.Insert(0, new role_in_report { id = 0, role_en = App_LocalResources.GlobalRes.Other });
+            m.addNewPersonRoles.Insert(0, new role_in_report { id = 0, role_en = LocalizationGetter.GetString("Other") });
 
 
             return ResponseObject2Json(m);
@@ -299,8 +300,8 @@ namespace EC.Controllers.API
                         user_id = user.id,
                         report_id = filter.Report_id,
                         note = filter.Note1 != null ? filter.Note1 : filter.Note2,
-                        type = type,                        
-                });
+                        type = type,
+                    });
                 }
                 else
                 {

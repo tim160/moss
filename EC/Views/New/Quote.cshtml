@@ -5,28 +5,26 @@
 @{
     <link rel="stylesheet" type="text/css" href="/Content/styleReportDashboard.css">
     //  @Styles.Render("~/Content/Styles");
-    ViewBag.Title = GlobalRes.NewQuoteUp;
+
     var _code = ViewBag.code;
     bool? is_cc = ViewBag.is_cc;
     if (!is_cc.HasValue)
     {
         is_cc = false;
     }
-
+    ViewBag.Title = LocalizationGetter.GetString("NewQuoteUp", is_cc);
     <style>
         .fullContainer {
             max-width: none;
         }
     </style>
 }
-
 <div class="blockSettings contentCompanyProfile">
     <div class="titleNewUser">
-        <h1 class="helloUser">@Resources.GetString("NewQuoteUp"):</h1>
+        <h1 class="helloUser">@LocalizationGetter.GetString("NewQuoteUp"):</h1>
     </div>
     <div class="contentSettings">
-        <p class="helloUser" id="hello">@Resources.GetString("GetQuoteMessage")</p>
-
+        <p class="helloUser" id="hello">@LocalizationGetter.GetString("GetQuoteMessage")</p>
         <div class="blockPersonalPhotoSetting">
             <div class="blockPhotoSetting">
                 <img class="PersonalPhotoBlock" src='@Url.Content("~/Content/img/logo.png")' />
@@ -35,51 +33,46 @@
         <div>
             <div class="personalBlock" id="registration">
                 <div class="blockPersonalSettings">
-                    <p class="title">@Resources.GetString("InvitationCode")</p>
+                    <p class="title">@LocalizationGetter.GetString("InvitationCode")</p>
                     @Html.TextBox("code")
-
                 </div>
                 <div class="blockPersonalSettings">
-                    <p class="title">@Resources.GetString("CompanyNameUp", is_cc)</p>
+                    <p class="title">@LocalizationGetter.GetString("CompanyNameUp", is_cc)</p>
                     @Html.TextBox("company_name")
                 </div>
                 <div class="blockPersonalSettings">
-                    <p class="title">@Resources.GetString("PrimaryLocationUp")</p>
+                    <p class="title">@LocalizationGetter.GetString("PrimaryLocationUp")</p>
                     <input type="text" id="location" />
                 </div>
                 <div class="blockPersonalSettings">
-                    <p class="title">@Resources.GetString("NumberEmployees")</p>
+                    <p class="title">@LocalizationGetter.GetString("NumberEmployees")</p>
                     <input type="number" id="number" />
                 </div>
 
-
                 <div class="blockPersonalSettings">
-                    <p class="title">@Resources.GetString("Name")</p>
+                    <p class="title">@LocalizationGetter.GetString("Name")</p>
                     <input type="text" id="first" />
                 </div>
                 <div class="blockPersonalSettings">
-                    <p class="title">@Resources.GetString("Email")</p>
+                    <p class="title">@LocalizationGetter.GetString("Email")</p>
                     <input type="text" id="email" />
                 </div>
                 <div class="blockPersonalSettings">
-                    <p class="title">@Resources.GetString("Title")</p>
-                    <input type="text" id="title"  />
+                    <p class="title">@LocalizationGetter.GetString("Title")</p>
+                    <input type="text" id="title" />
                 </div>
                 <input type="text" id="amount" hidden="hidden" />
                 <div class="blockUpdateProfile">
                     <div class="updateProfileBtn">
-                        <input type="submit" value=@Resources.GetString("RequestQuoteUp") />
-                        <span style="display: none;">@Resources.GetString("RequestQuoteUp").ToLower()</span>
+                        <input type="submit" value=@LocalizationGetter.GetString("RequestQuoteUp") />
+                        <span style="display: none;">@LocalizationGetter.GetString("RequestQuoteUp").ToLower()</span>
                     </div>
                 </div>
                 @Html.Hidden("company_exist")
             </div>
-
         </div>
-
     </div>
     <!--</form>-->
 </div>
-
 <script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/View/newQuote.js"></script>

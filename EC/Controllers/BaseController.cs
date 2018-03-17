@@ -15,6 +15,7 @@ using EC.Core.Common;
 using log4net;
 using EC.Constants;
 using EC.Common.Util;
+using EC.Localization;
 
 namespace EC.Controllers
 {

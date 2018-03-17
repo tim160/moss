@@ -1,6 +1,6 @@
 ﻿@using EC.Localization;
 @*active*@
-@{ 
+@{
     int temp = Model;
     bool? is_cc = ViewBag.is_cc;
     if (!is_cc.HasValue)
@@ -13,34 +13,31 @@
     <table>
         <tr>
             <td>
-                <a href="/Settings/Index" class="caseesTab1">@Resources.GetString("MyProfile")</a>
+                <a href="/Settings/Index" class="caseesTab1">@LocalizationGetter.GetString("MyProfile")</a>
                 <div class="divCasesTabActive @(temp == 1 ? "active":"")">
                 </div>
             </td>
             <td>
-                <a href="/Settings/Mediators" class="caseesTab1">@Resources.GetString("CompanyMediators", is_cc)</a>
+                <a href="/Settings/Mediators" class="caseesTab1">@LocalizationGetter.GetString("CompanyMediators", is_cc)</a>
                 <div class="divCasesTabActive @(temp == 4 ? "active":"")">
                 </div>
             </td>
             <td>
-                <a href="/Settings/Company" class="caseesTab1">@Resources.GetString("CompanyProfile", is_cc)</a>
+                <a href="/Settings/Company" class="caseesTab1">@LocalizationGetter.GetString("CompanyProfile", is_cc)</a>
                 <div class="divCasesTabActive @(temp == 3 ? "active":"")">
                 </div>
             </td>
             <td>
-                <a href="/Settings/Cases" class="caseesTab1">@Resources.GetString("CaseManagementDeadlines")</a>
+                <a href="/Settings/Cases" class="caseesTab1">@LocalizationGetter.GetString("CaseManagementDeadlines")</a>
                 <div class="divCasesTabActive @(temp == 5 ? "active":"")">
                 </div>
             </td>
             <td>
-                <a href="/Settings/Languages" class="caseesTab1">@Resources.GetString("Languages")</a>
+                <a href="/Settings/Languages" class="caseesTab1">@LocalizationGetter.GetString("Languages")</a>
                 <div class="divCasesTabActive @(temp == 6 ? "active":"")">
                 </div>
             </td>
         </tr>
     </table>
 </div>
-
-    <!--casesHeared-->
-
-
+<!--casesHeared-->

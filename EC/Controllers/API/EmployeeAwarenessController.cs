@@ -11,7 +11,7 @@ using EC.Models;
 using EC.Models.Database;
 using EC.Constants;
 using EC.Core.Common;
-using EC.App_LocalResources;
+using EC.Localization;
 
 namespace EC.Controllers.API
 {
@@ -49,20 +49,20 @@ namespace EC.Controllers.API
 
                     messages = messages.Where(x => x.status == 2).ToList(),
 
-                    languages = new [] {
-                        new { Id = 1, Name = GlobalRes.English },                        
+                    languages = new[] {
+                        new { Id = 1, Name = LocalizationGetter.GetString("English") },
                     },
 
                     avaibleFormats = new[] {
-                        new { Id = 1, Name = GlobalRes.AvailableFormat_1 },
-                        new { Id = 2, Name = GlobalRes.AvailableFormat_2 },
-                        new { Id = 3, Name = GlobalRes.AvailableFormat_3 },
+                        new { Id = 1, Name = LocalizationGetter.GetString("AvailableFormat_1")},
+                        new { Id = 2, Name = LocalizationGetter.GetString("AvailableFormat_2")},
+                        new { Id = 3, Name = LocalizationGetter.GetString("AvailableFormat_3")},
                     },
                 };
 
                 return ResponseObject2Json(m);
             }
-            catch(Exception exc)
+            catch (Exception exc)
             {
                 return "EXC! " + exc.Message;
             }

@@ -15,6 +15,7 @@ using EC.App_LocalResources;
 using EC.Models.ViewModel;
 using EC.Common.Interfaces;
 using EC.Models.App.Case;
+using EC.Localization;
 
 namespace EC.Controllers.API
 {
@@ -142,7 +143,7 @@ namespace EC.Controllers.API
                     EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, HttpContext.Current.Request.Url.AbsoluteUri.ToLower());
                     eb.MediatorAssigned(_um._user.first_nm, _um._user.last_nm, user.first_nm, user.last_nm, _rm._report.display_name);
                     string body = eb.Body;
-                    em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_MediatorAssigned, body, true);
+                    em.Send(to, cc, LocalizationGetter.GetString("Email_Title_MediatorAssigned", false), body, true);
                 }
             }
 
@@ -163,7 +164,7 @@ namespace EC.Controllers.API
             if (filter.MakeCaseOwner.HasValue)
             {
                 var list = DB.report_owner.Where(x => x.report_id == filter.Report_id).ToList();
-                foreach(var item in list)
+                foreach (var item in list)
                 {
                     item.status_id = item.user_id == filter.MakeCaseOwner.Value ? 2 : 1;
                 }

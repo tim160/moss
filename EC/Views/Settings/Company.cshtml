@@ -3,7 +3,6 @@
 @using EC.Models.Database;
 @using EC.Localization;
 @using EC.Constants;
-
 @{
 
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
@@ -23,7 +22,7 @@
     var is_invalid_mediator = (!is_valid_mediator).ToString().ToLower();
     var cm = (CompanyModel)ViewBag.cm;
     int company_id = cm._company.id;
-    if(string.IsNullOrEmpty(cm._company.path_en))
+    if (string.IsNullOrEmpty(cm._company.path_en))
     {
         cm._company.path_en = "~/Content/img/logoDefaultCompany.png";
     }
@@ -34,22 +33,20 @@
     }
     //is_cc = true;
     String class_ext = ViewBag.cc_extension;
-    ViewBag.Title = Resources.GetString("CompanySettings", is_cc);
+    ViewBag.Title = LocalizationGetter.GetString("CompanySettings", is_cc);
 }
-
 <style>
     .oldstyle {
-        display: table !important; 
+        display: table !important;
         margin-left: auto !important;
         margin-right: auto !important;
-        
     }
+
     .moldstyle {
         padding-left: 10px !important;
         padding-right: 10px !important;
     }
 </style>
-
 <div id="companyId" data-value="@company_id"></div>
 <div id="userId" data-value="@user_id"></div>
 <div class="blockSettings">
@@ -59,7 +56,6 @@
     }
     @Html.Partial("~/Views/Settings/partial/casesHeared.cshtml", active)
     <!--casesHeared-->
-
     <div class="contentSettings secondHeader oldstyle">
         <div class="headerCompanyProfile">
             <div class="headerBlock">
@@ -72,34 +68,33 @@
                         }
                     </form>
                     @if (is_valid_mediator)
-                    { 
-                    <div id="hoverCompanyPhoto">
-                        <label class="newImageBtn">@Resources.GetString("Newimage")</label>
-                    </div >
+                    {
+                        <div id="hoverCompanyPhoto">
+                            <label class="newImageBtn">@LocalizationGetter.GetString("Newimage")</label>
+                        </div>
                     }
-                </div >
-
+                </div>
                 <div class="blockText">
                     <p class="title">@cm._company.company_nm</p>
                     @*
-                    <a href="@cm._company_subdomain"> @cm._company_subdomain </a>
+                        <a href="@cm._company_subdomain"> @cm._company_subdomain </a>
                     *@
-                </div >
-            </div >
+                </div>
+            </div>
             <div class="menuCompanyProfile">
                 <div class="settingMenuItems">
-                    <h2 class="menuItem moldstyle active">@Resources.GetString("Departments")</h2>
-                    <h2 class="menuItem moldstyle">@Resources.GetString("Locations")</h2>
-                    @*<h2 class="menuItem">@GlobalRes.Languages</h2>*@
-                    <h2 class="menuItem moldstyle">@Resources.GetString("IncidentTypes")</h2>
-                    <h2 class="menuItem moldstyle">@Resources.GetString("CaseRouting")</h2>
-                    <h2 class="menuItem moldstyle">@Resources.GetString("ReporterTypes")</h2>
-                    <h2 class="menuItem moldstyle">@Resources.GetString("Anonymity")</h2>
-                    <h2 class="menuItem moldstyle">@Resources.GetString("Outcomes")</h2>
-                    <h2 class="menuItem moldstyle">@Resources.GetString("RootCauses")</h2>
+                    <h2 class="menuItem moldstyle active">@LocalizationGetter.GetString("Departments")</h2>
+                    <h2 class="menuItem moldstyle">@LocalizationGetter.GetString("Locations")</h2>
+                    @*<h2 class="menuItem">@LocalizationGetter.GetString("Languages")</h2>*@
+                    <h2 class="menuItem moldstyle">@LocalizationGetter.GetString("IncidentTypes")</h2>
+                    <h2 class="menuItem moldstyle">@LocalizationGetter.GetString("CaseRouting")</h2>
+                    <h2 class="menuItem moldstyle">@LocalizationGetter.GetString("ReporterTypes")</h2>
+                    <h2 class="menuItem moldstyle">@LocalizationGetter.GetString("Anonymity")</h2>
+                    <h2 class="menuItem moldstyle">@LocalizationGetter.GetString("Outcomes")</h2>
+                    <h2 class="menuItem moldstyle">@LocalizationGetter.GetString("RootCauses")</h2>
                     @*
-                    <h2 class="menuItem">@GlobalRes.SecondaryType</h2>
-                    <h2 class="menuItem">@GlobalRes.CaseAdminDepartment</h2>
+                        <h2 class="menuItem">@GlobalRes.SecondaryType</h2>
+                        <h2 class="menuItem">@GlobalRes.CaseAdminDepartment</h2>
                     *@
                 </div>
             </div><!--menuCompanyProfile-->
@@ -113,12 +108,12 @@
                 {
                     <div class="addDepartmentBtn" id="addInputDep">
                         <!--After click Btn - add class inactive-->
-                        <p>@Resources.GetString("addnewDepartment")</p>
+                        <p>@LocalizationGetter.GetString("addnewDepartment")</p>
                     </div>
                 }
                 <div class="addDepartmentBtn" id="addDepBtn" style="width: auto;">
                     <!--After click Btn - add class inactive-->
-                    <p style="min-width: 50px;">@Resources.GetString("Add")</p>
+                    <p style="min-width: 50px;">@LocalizationGetter.GetString("Add")</p>
                 </div>
                 <div class="addNewDepartment">
                     <input type="text" name="newDepartmenName" required="" value="">
@@ -137,25 +132,24 @@
                     }
                 </div>
             </div><!--blockDepartments-->
-
             <!--blockLocations-->
             <div class="blockLocations" style="display: none;">
                 @if (is_valid_mediator)
                 {
                     <div class="addLocationBtn" id="addInputLoc">
                         <!--After click Btn - add class inactive-->
-                        <p>@Resources.GetString("addnewLocation")</p>
+                        <p>@LocalizationGetter.GetString("addnewLocation")</p>
                     </div>
                 }
                 <div class="addLocationBtn" id="addLocBtn" style="width: auto;">
                     <!--After click Btn - add class inactive-->
-                    <p style=" min-width: 50px;">@Resources.GetString("Add")</p>
+                    <p style=" min-width 50px;">@LocalizationGetter.GetString("Add")</p>
                 </div>
                 <div class="addNewLocation">
                     <input type="text" name="newLocationName" required="" value="">
                     @if (is_cc.Value)
                     {
-                        @Html.DropDownList("location_cc_extended", (SelectList) ViewBag.LocationExtendeds, "Select Location Category", new { @class = "select-def" })
+                        @Html.DropDownList("location_cc_extended", (SelectList)ViewBag.LocationExtendeds, "Select Location Category", new { @class = "select-def" })
                     }
                     <div class="closeIcon"></div>
                 </div>
@@ -168,20 +162,18 @@
                         })
                     }
                 </div>
-
             </div><!--blockLocations-->
-
             <div class="blockIncidentTypes" style="display: none;">
-                 @if (is_valid_mediator)
-                    {
-                <div class="addIncidentTypeBtn" id="addInputIncType">
-                    <!--After click Btn - add class inactive-->
-                    <p>@Resources.GetString("addnewIncidentType")</p>
-                </div>
+                @if (is_valid_mediator)
+                {
+                    <div class="addIncidentTypeBtn" id="addInputIncType">
+                        <!--After click Btn - add class inactive-->
+                        <p>@LocalizationGetter.GetString("addnewIncidentType")</p>
+                    </div>
                 }
                 <div class="addIncidentTypeBtn" id="addIncBtn" style="width: auto;">
                     <!--After click Btn - add class inactive-->
-                    <p style=" min-width: 50px;">@Resources.GetString("Add")</p>
+                    <p style=" min-width 50px;">@LocalizationGetter.GetString("Add")</p>
                 </div>
                 <div class="addNewIncidentType">
                     <input type="text" name="newIncidentTypeName" required="" value="">
@@ -198,21 +190,19 @@
                             }
                         </div>
                     }
-
                 </div>
             </div><!--blockIncidentTypes-->
-
             <div class="blockReporterTypes" style="display: none;">
-                    @if (is_valid_mediator)
-                    {
+                @if (is_valid_mediator)
+                {
                     <div class="addReporterTypeBtn" id="addInputRepType">
                         <!--After click Btn - add class inactive-->
-                        <p>@Resources.GetString("addnewReporterType")</p>
+                        <p>@LocalizationGetter.GetString("addnewReporterType")</p>
                     </div>
-                    }
+                }
                 <div class="addReporterTypeBtn" id="addRepBtn" style="width: auto;">
                     <!--After click Btn - add class inactive-->
-                    <p style=" min-width: 50px;">@Resources.GetString("Add")</p>
+                    <p style=" min-width 50px;">@LocalizationGetter.GetString("Add")</p>
                 </div>
                 <div class="addNewReporterType">
                     <input type="text" name="newReporterTypeName" required="" value="">
@@ -229,12 +219,9 @@
                             }
                         </div>
                     }
-
                 </div>
             </div><!--blockReporterType-->
-
             <div class="blockAnonymity" style="display: none;">
-
                 <div class="tableAnonymity">
                     @if (ViewBag.CA != null)
                     {
@@ -251,18 +238,17 @@
                     }
                 </div>
             </div><!--blockReporterType-->
-
             <div class="blockOutcomes" style="display: none;">
                 @if (is_valid_mediator)
                 {
                     <div class="addOutcomeBtn" id="addInputOutcome">
                         <!--After click Btn - add class inactive-->
-                        <p>@Resources.GetString("addnewOutcome")</p>
+                        <p>@LocalizationGetter.GetString("addnewOutcome")</p>
                     </div>
                 }
                 <div class="addOutcomeBtn" id="addOutBtn" style="width: auto;">
                     <!--After click Btn - add class inactive-->
-                    <p style=" min-width: 50px;">@Resources.GetString("Add")</p>
+                    <p style=" min-width 50px;">@LocalizationGetter.GetString("Add")</p>
                 </div>
                 <div class="addNewOutcome">
                     <input type="text" name="newOutcomeName" required="" value="">
@@ -279,10 +265,8 @@
                             }
                         </div>
                     }
-
                 </div>
             </div><!--blockOutcome-->
-
             <div id="caseRouting" class="blockCaseRouting" style="display: none;" ng-controller="SettingsCompanyRoutingController" ng-cloak>
                 <div class="positionTableCases">
                     <p>Routing by Location</p>
@@ -297,13 +281,12 @@
                             <tr ng-repeat="line in locationItems">
                                 <td class="ng-binding">{{locationName(line.company_location_id).location_en}}</td>
                                 <td class="inSelect">
-                                    <select ng-change="changeLineLocation(line)" ng-model="line.user_id" ng-options="item.id as userName(item) for item in usersLocation" ng-disabled="@is_invalid_mediator">
-                                    </select>
+                                    <select ng-change="changeLineLocation(line)" ng-model="line.user_id" ng-options="item.id as userName(item) for item in usersLocation" ng-disabled="@is_invalid_mediator"></select>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                    
+
                     <p style="margin-top: 40px;">Routing by Incident Type</p>
                     <table class="tableCasesIndex">
                         <thead>
@@ -319,16 +302,13 @@
                             <tr ng-repeat="line in items">
                                 <td class="ng-binding">{{typeName(line.company_secondary_type_id).secondary_type_en}}</td>
                                 <td class="inSelect">
-                                    <select ng-change="changeLine(line)" ng-model="line.company_case_admin_department_id" ng-options="item.id as item.department_en for item in departments" ng-disabled="@is_invalid_mediator">
-                                    </select>
+                                    <select ng-change="changeLine(line)" ng-model="line.company_case_admin_department_id" ng-options="item.id as item.department_en for item in departments" ng-disabled="@is_invalid_mediator"></select>
                                 </td>
                                 <td class="inSelect">
-                                    <select ng-change="changeLine(line)" ng-model="line.user_id" ng-options="item.id as userName(item) for item in users" ng-disabled="@is_invalid_mediator">
-                                    </select>
+                                    <select ng-change="changeLine(line)" ng-model="line.user_id" ng-options="item.id as userName(item) for item in users" ng-disabled="@is_invalid_mediator"></select>
                                 </td>
                                 <td class="inSelect">
-                                    <select ng-change="changeLine(line)" ng-model="line.scope_id" ng-options="item.id as item.scope_en for item in scopes" ng-disabled="@is_invalid_mediator">
-                                    </select>
+                                    <select ng-change="changeLine(line)" ng-model="line.scope_id" ng-options="item.id as item.scope_en for item in scopes" ng-disabled="@is_invalid_mediator"></select>
                                 </td>
                                 <td class="ng-binding">
                                     <div class="button" ng-click="fileSelect(line)" onclick="$(this).parent().find('input').click()" ng-hide="@is_invalid_mediator">
@@ -351,7 +331,6 @@
                     </table>
                 </div>
             </div>
-
             <div class="blockRootCauses" style="display: none;" id="tblRootCauses">
                 @Html.Partial("~/Views/Settings/partial/blockRootCauses.cshtml", new ViewDataDictionary {
                     { "Company_root_cases_behavioral", ViewBag.Company_root_cases_behavioral},
@@ -360,7 +339,7 @@
                     { "is_valid_mediator", is_valid_mediator },
                 })
             </div>
-        
+
             <div class="blockSecondaryType" style="display: none;" ng-controller="SettingsCompanySecondaryTypeController" ng-cloak>
                 @if (is_valid_mediator)
                 {
@@ -368,7 +347,7 @@
                         <p ng-click="addMode = !addMode">Add New Secondary Type</p>
                     </div>
                     <div class="addIncidentTypeBtn" ng-show="addMode">
-                        <p style="min-width: 50px;" ng-click="add()">@Resources.GetString("Add")</p>
+                        <p style="min-width: 50px;" ng-click="add()">@LocalizationGetter.GetString("Add")</p>
                     </div>
                 }
                 <div ng-show="addMode">
@@ -394,7 +373,6 @@
                     </table>
                 </div>
             </div>
-
             <div class="blockCaseAdminDepartment" style="display: none;" ng-controller="SettingsCompanyCaseAdminDepartmentController" ng-cloak>
                 @if (is_valid_mediator)
                 {
@@ -402,7 +380,7 @@
                         <p ng-click="addMode = !addMode">Add New Case Admin Department</p>
                     </div>
                     <div class="addIncidentTypeBtn" ng-show="addMode">
-                        <p style="min-width: 50px;" ng-click="add()">@Resources.GetString("Add")</p>
+                        <p style="min-width: 50px;" ng-click="add()">@LocalizationGetter.GetString("Add")</p>
                     </div>
                 }
                 <div class="addNewIncidentType" ng-show="addMode" style="display: block;">
@@ -422,12 +400,9 @@
                         </tr>
                     </table>
                 </div>
-
             </div><!--blockIncidentTypes-->
-
         </div><!--blockIncidentTypes-->
     </div><!--contentSettings-->
 </div><!--contentCompanyProfile-->
-
 <input type="hidden" id="urlAjaxUploadFiles" from="Company" value="@Url.Action("AddLogoCompany", "Settings")" />
-<input type="hidden" id="sendAjax" value="@Url.Action("addNewfunction", "Settings")"/>
+<input type="hidden" id="sendAjax" value="@Url.Action("addNewfunction", "Settings")" />

@@ -2,7 +2,7 @@
 @using EC.Models.Database;
 @using EC.Localization;
 @{
-    ViewBag.Title = Resources.GetString("CaseFlowSettings");
+    ViewBag.Title = LocalizationGetter.GetString("CaseFlowSettings");
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
 
     int _total = 0, step1Delay = 0, step2Delay = 0, step3Delay = 0, step4Delay = 0, step5Delay = 0;
@@ -15,118 +15,114 @@
     String class_ext = ViewBag.cc_extension;
 }
 @model  company
-
 <input type="hidden" value="@ViewBag.companyId" id="companyId" />
 <div class="blockSettings">
-@using (Html.BeginForm("UpdateCompany", "SettingsController", Model, FormMethod.Post))
-{
-    _total = Model.step1_delay + Model.step2_delay + Model.step3_delay + Model.step4_delay + Model.step5_delay;
-    step1Delay = Model.step1_delay;
-    step2Delay = Model.step2_delay;
-    step3Delay = Model.step3_delay;
-    step4Delay = Model.step4_delay;
-    step5Delay = Model.step5_delay;
-    @Html.HiddenFor(model => model.id, new { @class = "companyIdHidden" })
-    <div id="casesHeared">
-        <div id="menu">
-            <h2 class="mainTitle">@Resources.GetString("Menu"):</h2>
-            <div>
-                <a class="caseesTab active">@Resources.GetString("MyProfile")</a>
-                <a href="/Settings/Password" class="caseesTab">@Resources.GetString("Password")</a>
-                <a href="/Settings/Company" class="caseesTab">@Resources.GetString("CompanyProfile", is_cc)</a>
-                <a href="/Settings/Mediators" class="caseesTab">@Resources.GetString("CompanyMediators", is_cc)</a>
-                <a href="/Settings/Cases" class="caseesTab">@Resources.GetString("CaseManagementDeadlines")</a>
-                <a href="/Settings/workFlow" class="caseesTab">workFlow</a>
+    @using (Html.BeginForm("UpdateCompany", "SettingsController", Model, FormMethod.Post))
+    {
+        _total = Model.step1_delay + Model.step2_delay + Model.step3_delay + Model.step4_delay + Model.step5_delay;
+        step1Delay = Model.step1_delay;
+        step2Delay = Model.step2_delay;
+        step3Delay = Model.step3_delay;
+        step4Delay = Model.step4_delay;
+        step5Delay = Model.step5_delay;
+        @Html.HiddenFor(model => model.id, new { @class = "companyIdHidden" })
+        <div id="casesHeared">
+            <div id="menu">
+                <h2 class="mainTitle">@LocalizationGetter.GetString("Menu"):</h2>
+                <div>
+                    <a class="caseesTab active">@LocalizationGetter.GetString("MyProfile")</a>
+                    <a href="/Settings/Password" class="caseesTab">@LocalizationGetter.GetString("Password")</a>
+                    <a href="/Settings/Company" class="caseesTab">@LocalizationGetter.GetString("CompanyProfile", is_cc)</a>
+                    <a href="/Settings/Mediators" class="caseesTab">@LocalizationGetter.GetString("CompanyMediators", is_cc)</a>
+                    <a href="/Settings/Cases" class="caseesTab">@LocalizationGetter.GetString("CaseManagementDeadlines")</a>
+                    <a href="/Settings/workFlow" class="caseesTab">workFlow</a>
+                </div>
             </div>
-        </div>
-    </div><!--casesHeared-->
-    <div class="caseWorkflowPosition">
-
-        <div class="caseFlow">
-            <div class="caseFlowTop">
-                <div class="caseFlowTopContent">
-                    <p class="first">
-                        <span class="left OpenSansSemibold fontSize20 darkText">Case workflow</span>
-                        <span class="right fontSize16">
-                            <span class="OpenSansRegular greyText upperCase">Case Management Turnaraound Time:</span>
-                            <span class="OpenSansBold">
-                                <span class="redText upperCase" id="totalTime">@_total days</span> 
+        </div><!--casesHeared-->
+        <div class="caseWorkflowPosition">
+            <div class="caseFlow">
+                <div class="caseFlowTop">
+                    <div class="caseFlowTopContent">
+                        <p class="first">
+                            <span class="left OpenSansSemibold fontSize20 darkText">Case workflow</span>
+                            <span class="right fontSize16">
+                                <span class="OpenSansRegular greyText upperCase">Case Management Turnaraound Time:</span>
+                                <span class="OpenSansBold">
+                                    <span class="redText upperCase" id="totalTime">@_total days</span>
+                                </span>
                             </span>
-                        </span>
-                    </p>
-                    <p class="second fontSize14">
-                        <span class="right upperCase">
-                            <span class="lightgreyText">@Resources.GetString("Recommended"):</span>
-                            <span class="darkText">23 days</span>
-                        </span>
-                    </p>
-                </div>
-            </div>
-            <div class="caseFlowBottom">
-                <div class="special" href="#">
-                    <div class="greenBlock"></div>
-                    <span class="text">@Resources.GetString("PreReview")</span>
-                    <div class="someDropdowns">
-                        <div class="show">
-                            @Html.DisplayFor(model => model.step1_delay) <img src="/Content/img/arrowSelect.png">    
-                        </div>
-                        @for (int i = 1; i <= 3; i++)
-                        {
-                            <div class="hide">@i</div>
-                        }
+                        </p>
+                        <p class="second fontSize14">
+                            <span class="right upperCase">
+                                <span class="lightgreyText">@LocalizationGetter.GetString("Recommended"):</span>
+                                <span class="darkText">23 days</span>
+                            </span>
+                        </p>
                     </div>
-                    <span class="bottomText">@Resources.GetString("Recommended"): <span class="moreBlack">2 days</span></span>
                 </div>
-                <div class="special borderLeft borderRight" >
-                    <div class="greenBlock"></div>
-                    <span class="text">@Resources.GetString("Review")</span>
-                    <div class="someDropdowns">
-                        <div class="show">
-                            @Html.DisplayFor(model => model.step2_delay) <img src="/Content/img/arrowSelect.png">
+                <div class="caseFlowBottom">
+                    <div class="special" href="#">
+                        <div class="greenBlock"></div>
+                        <span class="text">@LocalizationGetter.GetString("PreReview")</span>
+                        <div class="someDropdowns">
+                            <div class="show">
+                                @Html.DisplayFor(model => model.step1_delay) <img src="/Content/img/arrowSelect.png">
+                            </div>
+                            @for (int i = 1; i <= 3; i++)
+                            {
+                                <div class="hide">@i</div>
+                            }
                         </div>
-                        @for (int i = 1; i <= 5; i++)
-                        {
-                            <div class="hide">@i</div>
-                        }
+                        <span class="bottomText">@LocalizationGetter.GetString("Recommended"): <span class="moreBlack">2 days</span></span>
                     </div>
-                    <span class="bottomText">@Resources.GetString("Recommended"): <span class="moreBlack">2 days</span></span>
-                </div>
-                <div class="special borderRight">
-                    <div class="greenBlock"></div>
-                    <span class="text">@Resources.GetString("Investigation")</span>
-                    <div class="someDropdowns">
-                        <div class="show">
-                            @Html.DisplayFor(model => model.step3_delay) <img src="/Content/img/arrowSelect.png"> 
+                    <div class="special borderLeft borderRight">
+                        <div class="greenBlock"></div>
+                        <span class="text">@LocalizationGetter.GetString("Review")</span>
+                        <div class="someDropdowns">
+                            <div class="show">
+                                @Html.DisplayFor(model => model.step2_delay) <img src="/Content/img/arrowSelect.png">
+                            </div>
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                <div class="hide">@i</div>
+                            }
                         </div>
-                        @for (int i = 1; i <= 60; i++)
-                        {
-                            <div class="hide">@i</div>
-                        }
+                        <span class="bottomText">@LocalizationGetter.GetString("Recommended"): <span class="moreBlack">2 days</span></span>
+                    </div>
+                    <div class="special borderRight">
+                        <div class="greenBlock"></div>
+                        <span class="text">@LocalizationGetter.GetString("Investigation")</span>
+                        <div class="someDropdowns">
+                            <div class="show">
+                                @Html.DisplayFor(model => model.step3_delay) <img src="/Content/img/arrowSelect.png">
+                            </div>
+                            @for (int i = 1; i <= 60; i++)
+                            {
+                                <div class="hide">@i</div>
+                            }
 
-
-                    </div>
-                    <span class="bottomText">@Resources.GetString("Recommended"): <span class="moreBlack">14 days</span></span>
-                </div>
-                <div class="special">
-                    <div class="greenBlock"></div>
-                    <span class="text">@Resources.GetString("Resolution")</span>
-                    <div class="someDropdowns">
-                        <div class="show">
-                            @Html.DisplayFor(model => model.step4_delay) <img src="/Content/img/arrowSelect.png">
                         </div>
-                        @for (int i = 1; i <= 21; i++)
-                        {
-                            <div class="hide">@i</div>
-                        }
+                        <span class="bottomText">@LocalizationGetter.GetString("Recommended"): <span class="moreBlack">14 days</span></span>
                     </div>
-                    <span class="bottomText">@Resources.GetString("Recommended"): <span class="moreBlack">5 days</span></span>
+                    <div class="special">
+                        <div class="greenBlock"></div>
+                        <span class="text">@LocalizationGetter.GetString("Resolution")</span>
+                        <div class="someDropdowns">
+                            <div class="show">
+                                @Html.DisplayFor(model => model.step4_delay) <img src="/Content/img/arrowSelect.png">
+                            </div>
+                            @for (int i = 1; i <= 21; i++)
+                            {
+                                <div class="hide">@i</div>
+                            }
+                        </div>
+                        <span class="bottomText">@LocalizationGetter.GetString("Recommended"): <span class="moreBlack">5 days</span></span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-}
+    }
 </div>
-
 <script>
     $(document).ready(function () {
         $(".show").on('click', function (event) {

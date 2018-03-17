@@ -33,7 +33,7 @@ namespace EC.Localization
         {
             if (is_cc) { key = key + "_CC"; }
 
-            string value = LocalizationResource.ResourceManager.GetString(key, culture);
+            string value = "LocalizationResource?";// LocalizationResource.ResourceManager.GetString(key, culture);
             if (value != null)
                 return value;
             else
