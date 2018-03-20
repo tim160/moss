@@ -2134,4 +2134,13 @@
   <data name="RootCauses" xml:space="preserve">
     <value>Root Causes</value>
   </data>
+  <data name="ReportReviewUp" xml:space="preserve">
+    <value>Report Review</value>
+  </data>
+  <data name="SignOffPendingUp" xml:space="preserve">
+    <value>Sign-Off Pending</value>
+  </data>
+  <data name="UnderInvestigationUp" xml:space="preserve">
+    <value>Under Investigation</value>
+  </data>
 </root>

@@ -4876,6 +4876,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Report Review.
+        /// </summary>
+        public static string ReportReviewUp {
+            get {
+                return ResourceManager.GetString("ReportReviewUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to reports about.
         /// </summary>
         public static string reportsabout {
@@ -5326,6 +5335,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sign-Off Pending.
+        /// </summary>
+        public static string SignOffPendingUp {
+            get {
+                return ResourceManager.GetString("SignOffPendingUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sort by case admins.
         /// </summary>
         public static string SortByMediator {
@@ -5700,6 +5718,15 @@ namespace EC.Localization {
         public static string UnderInvestigation {
             get {
                 return ResourceManager.GetString("UnderInvestigation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Under Investigation.
+        /// </summary>
+        public static string UnderInvestigationUp {
+            get {
+                return ResourceManager.GetString("UnderInvestigationUp", resourceCulture);
             }
         }
         
