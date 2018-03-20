@@ -41,10 +41,10 @@
                     <a href="#!" class="btn btn-dropDownList__btnLink ">
                         <span class="btn-dropDownList__btnLink-logoIcon"></span>
                         <span class="btn-dropDownList__btnLink-beforeText">:</span>
-                        <span class="btn-dropDownList__btnLink-text">assign case investigator</span>
+                        <span class="btn-dropDownList__btnLink-text">Assign Case Admin</span>
                         <span class="btn-dropDownList__btnLink-arrowImg"></span>
                     </a>
-                    <ul class="dropDownListInBtn">
+                    <ul class="dropDownListInBtn" style="margin-top: 0px;">
                         <li class="dropDownListInBtn__li" data-id="0">
                             <a href="#!" class="dropDownListInBtn__a clearfix">
                                 <span class="dropDownListInBtn__logoImg pull-left">
@@ -259,7 +259,7 @@
         });
 
         $('.btnAssign').on('click', function () {
-            $('.btnAssign').addClass('active');
+            $('.btnAssign').toggleClass('active');
         });
 
         $('.btnAssign').hover(function () {
