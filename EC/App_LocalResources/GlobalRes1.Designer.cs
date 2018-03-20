@@ -5110,6 +5110,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Review Report.
+        /// </summary>
+        public static string ReviewReportUp {
+            get {
+                return ResourceManager.GetString("ReviewReportUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Review stage.
         /// </summary>
         public static string Reviewstage {

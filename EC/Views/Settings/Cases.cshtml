@@ -50,7 +50,7 @@
                 <div class="caseFlowTop">
                     <div class="caseFlowTopContent">
                         <p class="first">
-                            <span class="left OpenSansSemibold fontSize20 darkText">Case workflow</span>
+                            <span class="left OpenSansSemibold fontSize20 darkText">Case Management Deadlines</span>
                             <span class="right fontSize16">
                                 <span class="OpenSansRegular greyText upperCase">Case Management Turnaraound Time:</span>
                                 <span class="OpenSansBold">
@@ -61,7 +61,7 @@
                         <p class="second fontSize14">
                             <span class="right upperCase">
                                 <span class="lightgreyText">@GlobalRes.Recommended:</span>
-                                <span class="darkText">23 days</span>
+                                <span class="darkText">22 days</span>
                             </span>
                         </p>
                     </div>
@@ -69,7 +69,7 @@
                 <div class="caseFlowBottom">
                     <div class="special" href="#">
                         <div class="greenBlock"></div>
-                        <span class="text">@GlobalRes.PreReview</span>
+                        <span class="text">@GlobalRes.ReviewReportUp</span>
                         <div class="someDropdowns">
                             <div class="show">
                                 @Html.DisplayFor(model => model.step1_delay) <img src="/Content/img/arrowSelect.png">
@@ -79,11 +79,11 @@
                                 <div class="hide">@i</div>
                             }
                         </div>
-                        <span class="bottomText">@GlobalRes.Recommended: <span class="moreBlack">2 days</span></span>
+                        <span class="bottomText">@GlobalRes.Recommended: <span class="moreBlack">1 day</span></span>
                     </div>
                     <div class="special borderLeft borderRight">
                         <div class="greenBlock"></div>
-                        <span class="text">@GlobalRes.Review</span>
+                        <span class="text">@GlobalRes.AcceptCaseUp</span>
                         <div class="someDropdowns">
                             <div class="show">
                                 @Html.DisplayFor(model => model.step2_delay) <img src="/Content/img/arrowSelect.png">
@@ -113,7 +113,7 @@
                     </div>
                     <div class="special">
                         <div class="greenBlock"></div>
-                        <span class="text">@GlobalRes.Resolution</span>
+                        <span class="text">@GlobalRes.AwaitingSignOff</span>
                         <div class="someDropdowns">
                             <div class="show">
                                 @Html.DisplayFor(model => model.step4_delay) <img src="/Content/img/arrowSelect.png">

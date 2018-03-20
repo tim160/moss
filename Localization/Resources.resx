@@ -2131,8 +2131,17 @@
   <data name="RootCauses" xml:space="preserve">
     <value>Root Causes</value>
   </data>
+  <data name="AcceptCaseUp" xml:space="preserve">
+    <value>Accept Case</value>
+  </data>
+  <data name="CaseManagementDeadlinesUp" xml:space="preserve">
+    <value>Case Management Deadlines</value>
+  </data>
   <data name="ReportReviewUp" xml:space="preserve">
     <value>Report Review</value>
+  </data>
+  <data name="ReviewReportUp" xml:space="preserve">
+    <value>Review Report</value>
   </data>
   <data name="SignOffPendingUp" xml:space="preserve">
     <value>Sign-Off Pending</value>

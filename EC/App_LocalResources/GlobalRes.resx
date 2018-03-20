@@ -2158,4 +2158,10 @@
   <data name="YourLoginDetails" xml:space="preserve">
     <value>Your Login Details</value>
   </data>
+  <data name="AcceptCaseUp" xml:space="preserve">
+    <value>Accept Case</value>
+  </data>
+  <data name="ReviewReportUp" xml:space="preserve">
+    <value>Review Report</value>
+  </data>
 </root>

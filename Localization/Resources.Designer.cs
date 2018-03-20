@@ -97,6 +97,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accept Case.
+        /// </summary>
+        public static string AcceptCaseUp {
+            get {
+                return ResourceManager.GetString("AcceptCaseUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Accept terms and conditions.
         /// </summary>
         public static string Accepttermsconditions {
@@ -876,6 +885,15 @@ namespace EC.Localization {
         public static string CaseManagementDeadlines {
             get {
                 return ResourceManager.GetString("CaseManagementDeadlines", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Case Management Deadlines.
+        /// </summary>
+        public static string CaseManagementDeadlinesUp {
+            get {
+                return ResourceManager.GetString("CaseManagementDeadlinesUp", resourceCulture);
             }
         }
         
@@ -5061,6 +5079,15 @@ namespace EC.Localization {
         public static string Review {
             get {
                 return ResourceManager.GetString("Review", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Review Report.
+        /// </summary>
+        public static string ReviewReportUp {
+            get {
+                return ResourceManager.GetString("ReviewReportUp", resourceCulture);
             }
         }
         

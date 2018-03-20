@@ -44,7 +44,7 @@
                 <div class="caseFlowTop">
                     <div class="caseFlowTopContent">
                         <p class="first">
-                            <span class="left OpenSansSemibold fontSize20 darkText">Case workflow</span>
+                            <span class="left OpenSansSemibold fontSize20 darkText">Case Management Deadlines</span>
                             <span class="right fontSize16">
                                 <span class="OpenSansRegular greyText upperCase">Case Management Turnaraound Time:</span>
                                 <span class="OpenSansBold">
@@ -63,7 +63,7 @@
                 <div class="caseFlowBottom">
                     <div class="special" href="#">
                         <div class="greenBlock"></div>
-                        <span class="text">@LocalizationGetter.GetString("PreReview")</span>
+                        <span class="text">@LocalizationGetter.GetString("ReviewReportUp")</span>
                         <div class="someDropdowns">
                             <div class="show">
                                 @Html.DisplayFor(model => model.step1_delay) <img src="/Content/img/arrowSelect.png">
@@ -77,7 +77,7 @@
                     </div>
                     <div class="special borderLeft borderRight">
                         <div class="greenBlock"></div>
-                        <span class="text">@LocalizationGetter.GetString("Review")</span>
+                        <span class="text">@LocalizationGetter.GetString("AcceptCaseUp")</span>
                         <div class="someDropdowns">
                             <div class="show">
                                 @Html.DisplayFor(model => model.step2_delay) <img src="/Content/img/arrowSelect.png">
@@ -106,7 +106,7 @@
                     </div>
                     <div class="special">
                         <div class="greenBlock"></div>
-                        <span class="text">@LocalizationGetter.GetString("Resolution")</span>
+                        <span class="text">@LocalizationGetter.GetString("AwaitingSignOff")</span>
                         <div class="someDropdowns">
                             <div class="show">
                                 @Html.DisplayFor(model => model.step4_delay) <img src="/Content/img/arrowSelect.png">
