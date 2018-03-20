@@ -14,6 +14,8 @@
     UserModel um = new UserModel(user_id);
 }
 
+<link href="~/Content/jquery-ui.css" rel="stylesheet">
+
 @Html.Partial("~/Views/Shared/Partial/_NewCasesTopMenu.cshtml")
 
 <div class="content-container__inner">
@@ -112,7 +114,7 @@
                     <span class="btn-dropDownList__btnLink-text">Sort by case Admin</span>
                     <span class="btn-dropDownList__btnLink-arrowImg"></span>
                 </a>
-                <ul class="dropDownListInBtn">
+                <ul class="dropDownListInBtn" style="margin-top: 0px;">
                     <li class="dropDownListInBtn__li" data-id="0">
                         <a href="#!" class="dropDownListInBtn__a clearfix">
                             <span class="dropDownListInBtn__logoImg pull-left">
@@ -181,7 +183,7 @@
                 circle = (task.IsRead() && (!task.HasNewActivity())) ? "blueBorder" : circle;                
 
                 <li class="taskList__li" data-userid="@_assignee.id" data-state="@circle">
-                    <a href="@Url.Action("Task", "newCase", new { id = task.TaskID })" class="taskList__a taskNameCol__taskProgress-on">
+                    <a href="@Url.Action("Task", "Case", new { id = task.TaskID })" class="taskList__a taskNameCol__taskProgress-on">
                         <span class="col-7">
                             <span class="taskNameCol">
                                 <span class="taskNameCol__taskStatus @circle"></span>
@@ -221,9 +223,18 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#datepicker").datepicker({
-            minDate: "D"
+
+        $('.btn-attach__text').on('click', function(){
+            $('.btn-attach__input').click();
         });
+
+        $("#datepicker").datepicker({
+            minDate: "D",
+            onSelect: function(dateText) {
+                $('.btn-dateCalendar__text').html(this.value);
+            }
+        });
+
         $('.btn-dateCalendar').on('click', function(){
             $("#datepicker").datepicker('show');
         });
@@ -302,12 +313,10 @@
         }
 
         $('.btnCreateTaskStart').on('click', function () {
-            console.log(1);
             var taskName = $('.createTaskBlock-content__input-taskName').val();
             var taskDescription = $('.createTaskBlock-content__input-taskDescription').val();
             var taskAssignTo = $('.btnAssign').data('id');
             var dueDate = $("#datepicker").val();
-            console.log(1, taskName, taskDescription, taskAssignTo, dueDate);
 
             if (taskName.length > 0 && taskName.length < 30) {
                 $('.createTaskBlock-content__input-taskName').css('border', '');
