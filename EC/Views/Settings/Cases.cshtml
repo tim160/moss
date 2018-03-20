@@ -1,10 +1,10 @@
 ﻿@using EC.Models;
 @using EC.Models.Database;
-@using EC.App_LocalResources;
+@using EC.Localization;
 @using EC.Constants;
 
 @{
-    ViewBag.Title = GlobalRes.CaseFlowSettings;
+    ViewBag.Title = LocalizationGetter.GetString("CaseFlowSettings");
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
 
     int _total = 0, step1Delay = 0, step2Delay = 0, step3Delay = 0, step4Delay = 0, step5Delay = 0;
@@ -60,7 +60,7 @@
                         </p>
                         <p class="second fontSize14">
                             <span class="right upperCase">
-                                <span class="lightgreyText">@GlobalRes.Recommended:</span>
+                                <span class="lightgreyText">@LocalizationGetter.GetString("Recommended"):</span>
                                 <span class="darkText">22 days</span>
                             </span>
                         </p>
@@ -69,7 +69,7 @@
                 <div class="caseFlowBottom">
                     <div class="special" href="#">
                         <div class="greenBlock"></div>
-                        <span class="text">@GlobalRes.ReviewReportUp</span>
+                        <span class="text">@LocalizationGetter.GetString("ReviewReportUp")</span>
                         <div class="someDropdowns">
                             <div class="show">
                                 @Html.DisplayFor(model => model.step1_delay) <img src="/Content/img/arrowSelect.png">
@@ -79,11 +79,11 @@
                                 <div class="hide">@i</div>
                             }
                         </div>
-                        <span class="bottomText">@GlobalRes.Recommended: <span class="moreBlack">1 day</span></span>
+                        <span class="bottomText">@LocalizationGetter.GetString("Recommended"): <span class="moreBlack">1 day</span></span>
                     </div>
                     <div class="special borderLeft borderRight">
                         <div class="greenBlock"></div>
-                        <span class="text">@GlobalRes.AcceptCaseUp</span>
+                        <span class="text">@LocalizationGetter.GetString("AcceptCaseUp")</span>
                         <div class="someDropdowns">
                             <div class="show">
                                 @Html.DisplayFor(model => model.step2_delay) <img src="/Content/img/arrowSelect.png">
@@ -93,11 +93,11 @@
                                 <div class="hide">@i</div>
                             }
                         </div>
-                        <span class="bottomText">@GlobalRes.Recommended: <span class="moreBlack">2 days</span></span>
+                        <span class="bottomText">@LocalizationGetter.GetString("Recommended"): <span class="moreBlack">2 days</span></span>
                     </div>
                     <div class="special borderRight">
                         <div class="greenBlock"></div>
-                        <span class="text">@GlobalRes.Investigation</span>
+                        <span class="text">@LocalizationGetter.GetString("Investigation")</span>
                         <div class="someDropdowns">
                             <div class="show">
                                 @Html.DisplayFor(model => model.step3_delay) <img src="/Content/img/arrowSelect.png">
@@ -109,11 +109,11 @@
 
 
                         </div>
-                        <span class="bottomText">@GlobalRes.Recommended: <span class="moreBlack">14 days</span></span>
+                        <span class="bottomText">@LocalizationGetter.GetString("Recommended"): <span class="moreBlack">14 days</span></span>
                     </div>
                     <div class="special">
                         <div class="greenBlock"></div>
-                        <span class="text">@GlobalRes.AwaitingSignOff</span>
+                        <span class="text">@LocalizationGetter.GetString("AwaitingSignOff")</span>
                         <div class="someDropdowns">
                             <div class="show">
                                 @Html.DisplayFor(model => model.step4_delay) <img src="/Content/img/arrowSelect.png">
@@ -123,7 +123,7 @@
                                 <div class="hide">@i</div>
                             }
                         </div>
-                        <span class="bottomText">@GlobalRes.Recommended: <span class="moreBlack">5 days</span></span>
+                        <span class="bottomText">@LocalizationGetter.GetString("Recommended"): <span class="moreBlack">5 days</span></span>
                     </div>
                 </div>
             </div>

@@ -1,9 +1,8 @@
 ﻿@using System.Collections;
 @using EC.Models;
 @using EC.Models.Database;
-@using EC.App_LocalResources;
 @using EC.Constants;
-
+@using EC.Localization;
 @{
     Layout = null;
     List<company_root_cases_behavioral> list1 = (List<company_root_cases_behavioral>)ViewBag.Company_root_cases_behavioral;
@@ -43,13 +42,13 @@
                             @if (ViewBag.is_valid_mediator)
                             {
                                 <div class="btn-link" id="addNewRootCauses1a">
-                                    @GlobalRes.AddNewBehavioralFactors
+                                    @LocalizationGetter.GetString("AddNewBehavioralFactors")
                                 </div>
                             }
                             <div class="newRootCauses" id="newRootCauses1" style="display: none; border-style: solid; border-width: 0px;">
                                 <input type="text" required="" value="" placeholder="Enter name" class="personDataTextBox">
                                 <div class="addLocationBtn" id="addLocBtn1" style="width: auto;">
-                                    <p style="min-width: 50px;" class="btnAdd">@GlobalRes.Add</p>
+                                    <p style="min-width: 50px;" class="btnAdd">@LocalizationGetter.GetString("Add")</p>
                                 </div>
                             </div>
                         </div>
@@ -68,13 +67,13 @@
                             @if (ViewBag.is_valid_mediator)
                             {
                                 <div class="btn-link" id="addNewRootCauses2a">
-                                    @GlobalRes.AddNewExternalInfluences
+                                    @LocalizationGetter.GetString("AddNewExternalInfluences")
                                 </div>
                             }
                             <div class="newRootCauses" id="newRootCauses2" style="display: none; border-style: solid; border-width: 0px;">
                                 <input type="text" required="" value="" placeholder="Enter name" class="personDataTextBox">
                                 <div class="addLocationBtn" id="addLocBtn1" style="width: auto;">
-                                    <p style="min-width: 50px;" class="btnAdd">@GlobalRes.Add</p>
+                                    <p style="min-width: 50px;" class="btnAdd">@LocalizationGetter.GetString("Add")</p>
                                 </div>
                             </div>
                         </div>
@@ -93,13 +92,13 @@
                             @if (ViewBag.is_valid_mediator)
                             {
                                 <div class="btn-link" id="addNewRootCauses3a">
-                                    @GlobalRes.AddNewOrganizationalInfluences
+                                    @LocalizationGetter.GetString("AddNewOrganizationalInfluences")
                                 </div>
                             }
                             <div class="newRootCauses" id="newRootCauses3" style="display: none; border-style: solid; border-width: 0px;">
                                 <input type="text" required="" value="" placeholder="Enter name" class="personDataTextBox">
                                 <div class="addLocationBtn" id="addLocBtn1" style="width: auto;">
-                                    <p style="min-width: 50px;" class="btnAdd">@GlobalRes.Add</p>
+                                    <p style="min-width: 50px;" class="btnAdd">@LocalizationGetter.GetString("Add")</p>
                                 </div>
                             </div>
                         </div>
