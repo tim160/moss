@@ -2455,7 +2455,7 @@ namespace EC.Localization.App_GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Case Executive.
+        ///   Looks up a localized string similar to Case Reviewer.
         /// </summary>
         internal static string EscalationMediator {
             get {

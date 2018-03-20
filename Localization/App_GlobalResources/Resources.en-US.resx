@@ -902,7 +902,7 @@
     <value>Escalation</value>
   </data>
   <data name="EscalationMediator" xml:space="preserve">
-    <value>Case Executive</value>
+    <value>Case Reviewer</value>
   </data>
   <data name="Escalationstage" xml:space="preserve">
     <value>Escalation stage</value>

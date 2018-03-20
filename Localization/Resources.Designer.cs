@@ -2473,7 +2473,7 @@ namespace EC.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Case Executive.
+        ///   Looks up a localized string similar to Case Reviewer.
         /// </summary>
         public static string EscalationMediator {
             get {
