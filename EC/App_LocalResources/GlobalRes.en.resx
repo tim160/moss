@@ -2113,4 +2113,7 @@
   <data name="ForgotYourPassword" xml:space="preserve">
     <value>Forgot your password?</value>
   </data>
+  <data name="RootCauses" xml:space="preserve">
+    <value>Root Causes</value>
+  </data>
 </root>

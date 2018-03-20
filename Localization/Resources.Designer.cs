@@ -5092,6 +5092,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Root Causes.
+        /// </summary>
+        public static string RootCauses {
+            get {
+                return ResourceManager.GetString("RootCauses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sales.
         /// </summary>
         public static string Sales {
