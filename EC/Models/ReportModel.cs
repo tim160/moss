@@ -1296,6 +1296,7 @@ namespace EC.Models
 
                         temp.last_update_dt = DateTime.Now;
                         temp.user_id = 1;
+                        temp.added_by_reporter = true;
 
                         AddSecondaryType(temp);
                     }
