@@ -1265,6 +1265,7 @@ namespace EC.Models
                     List<report_department> departments = model.GetReportDepartment(currentReport.id);
                     foreach (report_department department in departments)
                     {
+                        department.added_by_reporter = true;
                         AddReportDepartment(department);
                         t = adv.SaveChanges();
                     }
