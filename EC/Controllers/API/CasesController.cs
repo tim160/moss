@@ -67,7 +67,9 @@ namespace EC.Controllers.API
                         return new
                         {
                             id = x.report_id,
-                            total_days = rm._total_days,
+                            //total_days = rm._total_days,
+                            //total_days = Math.Floor((DateTime.Now - rm._report.incident_dt).TotalDays),
+                            total_days = Math.Floor((DateTime.Now - rm._report.reported_dt).TotalDays),
                             case_dt_s = rm._report.incident_dt.Ticks,
                             cc_is_life_threating = rm._report.cc_is_life_threating,
                             last_investigation_status_date = m_DateTimeHelper.ConvertDateToLongMonthString(rm._last_investigation_status_date),
