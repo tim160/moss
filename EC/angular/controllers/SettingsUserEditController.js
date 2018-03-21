@@ -21,6 +21,7 @@
         $scope.user_permissions_change_settings = 0;
         $scope.status_id = 3;
         $scope.user_role = 0;
+        $scope.photo_path = '';
 
         $scope.val_first_nm = false;
         $scope.val_last_nm = false;
@@ -46,6 +47,7 @@
             $scope.user_permissions_approve_case_closure = data.model.user_permissions_approve_case_closure.toString();
             $scope.user_permissions_change_settings = data.model.user_permissions_change_settings.toString();
             $scope.user_role = data.user.role;
+            $scope.photo_path = data.model.photo_path;
         });
 
         $scope.validate = function (value, rv) {

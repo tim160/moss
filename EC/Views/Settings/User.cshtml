@@ -21,14 +21,9 @@
     <div class="contentSettings">
         <div class="blockPersonalPhotoSetting">
             <div class="blockPhotoSetting">
-                @if (String.IsNullOrEmpty(um._user.photo_path))
-                {
-                    <img id="logoUser" class="PersonalPhotoBlock" src="~/Content/Icons/settingsPersonalNOPhoto.png">
-                }
-                else
-                {
-                    <img id="logoUser" class="PersonalPhotoBlock" src="@Url.Content(um._user.photo_path)">
-                }
+                <img id="logoUser" class="PersonalPhotoBlock" ng-show="!photo_path" src="~/Content/Icons/settingsPersonalNOPhoto.png">
+                <img id="logoUser" class="PersonalPhotoBlock" ng-show="photo_path" src="{{photo_path}}">
+
                 <input type="hidden" id="urlAjaxUploadFiles" from="User" value="@Url.Action("User", "Settings")" />
                 <input type="file" accept="image/*" id="_file" name="_file" multiple="multiple" style="width: 1px;height: 1px;opacity: 0;">
             </div>

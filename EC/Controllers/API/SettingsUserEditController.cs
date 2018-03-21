@@ -40,6 +40,7 @@ namespace EC.Controllers.API
                     user_permissions_approve_case_closure = model == null || model.user_permissions_approve_case_closure == null ? 2 : model.user_permissions_approve_case_closure,
                     user_permissions_change_settings = model == null || model.user_permissions_change_settings == null ? 2 : model.user_permissions_change_settings,
                     status_id = model == null ? 3 : model.status_id,
+                    photo_path = model.photo_path,
                 },
                 user = new {
                     role = user.role_id,
