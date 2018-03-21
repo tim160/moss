@@ -19,5 +19,12 @@ namespace EC.COM
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
+        protected void Application_BeginRequest(object sender, EventArgs e)
+        {
+            if (!Context.Request.IsSecureConnection && !Context.Request.IsLocal)
+                Response.Redirect(Context.Request.Url.ToString().Replace("http:", "https:"));
+        }
+
     }
 }
