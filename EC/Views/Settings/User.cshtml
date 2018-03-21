@@ -17,6 +17,14 @@
         border: 2px solid red !important;
     }
 </style>
+
+<!--casesHeared-->
+@{
+    int active = 1;
+}
+@Html.Partial("~/Views/Settings/partial/casesHeared.cshtml", active)
+<!--casesHeared-->
+
 <div class="blockSettings" ng-controller="SettingsUserEditController" ng-cloak>
     <div class="contentSettings">
         <div class="blockPersonalPhotoSetting">
