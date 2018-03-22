@@ -1280,7 +1280,7 @@
     <value>Case Administrators</value>
   </data>
   <data name="MediatorsAssignedSecondOption" xml:space="preserve">
-    <value>The following case administrator(s) will be assigned to your case. Mark off any case administrators who you think may be involved in the incident.</value>
+    <value>The following case administrator(s) will be assigned to your case. If you feel that a Case Administrator may have a conflict of interest or would be obstructive to investigating the case, please check ‘Exclude’ below.</value>
   </data>
   <data name="Mediatorsinvolved" xml:space="preserve">
     <value>Case Administrators excluded</value>
@@ -2148,5 +2148,71 @@
   </data>
   <data name="UnderInvestigationUp" xml:space="preserve">
     <value>Under Investigation</value>
+  </data>
+  <data name="AddBehavioralFactors" xml:space="preserve">
+    <value>Add Behavioral Factors</value>
+  </data>
+  <data name="AddExternalInfluences" xml:space="preserve">
+    <value>Add External Influences</value>
+  </data>
+  <data name="AdditionalPermissionsExplanations" xml:space="preserve">
+    <value>Platform Managers can add additional permissions to Case Administrators’ profiles below</value>
+  </data>
+  <data name="AddOrganizationalInfluences" xml:space="preserve">
+    <value>Add Organizational Influences</value>
+  </data>
+  <data name="AddOutcomesExplanation" xml:space="preserve">
+    <value>Add disciplinary outcomes for Subjects as well as outcome options for Witnesses and Reporters</value>
+  </data>
+  <data name="AnonymousToCompany" xml:space="preserve">
+    <value>Anonymous to {0}</value>
+  </data>
+  <data name="CaseAdministratorsUp" xml:space="preserve">
+    <value>Case Administrators</value>
+  </data>
+  <data name="CaseManagerUp" xml:space="preserve">
+    <value>Case Manager</value>
+  </data>
+  <data name="ChangePasswordUp" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="CheckSummarySubmit" xml:space="preserve">
+    <value>Please check your report summary and submit when ready:</value>
+  </data>
+  <data name="CompletelyAnonymousUp" xml:space="preserve">
+    <value>Completely Anonymous</value>
+  </data>
+  <data name="Deadlines" xml:space="preserve">
+    <value>Deadlines</value>
+  </data>
+  <data name="IncidentReportedOutside" xml:space="preserve">
+    <value>Has the incident been reported to anyone outside the organization?</value>
+  </data>
+  <data name="IsSituationEmergency" xml:space="preserve">
+    <value>Is the situation an emergency?</value>
+  </data>
+  <data name="ReportingFollowingTypes" xml:space="preserve">
+    <value>You are reporting the following Incident Type(s):</value>
+  </data>
+  <data name="SaveNewPasswordUp" xml:space="preserve">
+    <value>Save New Password</value>
+  </data>
+  <data name="ShareNameContact" xml:space="preserve">
+    <value>Share Name &amp; Contact Info</value>
+  </data>
+  <data name="Incidentreportedexternally" xml:space="preserve">
+    <value>Incident reported externally?</value>
+  </data>
+  <data name="IsreporturgentLow" xml:space="preserve">
+    <value>Is report urgent?</value>
+  </data>
+  <data name="NARootCauseExplanation" xml:space="preserve">
+    <value>If a Root Cause that is applicable this incident is not available in the dropdown, please add in Settings.</value>
+  </data>
+  <data name="Reopened" xml:space="preserve">
+    <value>Reopened</value>
+  </data>
+  <data name="ReportingfromLow" xml:space="preserve">
+    <value>Reporting from</value>
   </data>
 </root>

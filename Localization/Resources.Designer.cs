@@ -214,11 +214,38 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Behavioral Factors.
+        /// </summary>
+        public static string AddBehavioralFactors {
+            get {
+                return ResourceManager.GetString("AddBehavioralFactors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add External Influences.
+        /// </summary>
+        public static string AddExternalInfluences {
+            get {
+                return ResourceManager.GetString("AddExternalInfluences", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add any further notes regarding approval of case closure..
         /// </summary>
         public static string AddFurtherNotes {
             get {
                 return ResourceManager.GetString("AddFurtherNotes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Platform Managers can add additional permissions to Case Administrators’ profiles below.
+        /// </summary>
+        public static string AdditionalPermissionsExplanations {
+            get {
+                return ResourceManager.GetString("AdditionalPermissionsExplanations", resourceCulture);
             }
         }
         
@@ -291,6 +318,24 @@ namespace EC.Localization {
         public static string Addnote {
             get {
                 return ResourceManager.GetString("Addnote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Organizational Influences.
+        /// </summary>
+        public static string AddOrganizationalInfluences {
+            get {
+                return ResourceManager.GetString("AddOrganizationalInfluences", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add disciplinary outcomes for Subjects as well as outcome options for Witnesses and Reporters.
+        /// </summary>
+        public static string AddOutcomesExplanation {
+            get {
+                return ResourceManager.GetString("AddOutcomesExplanation", resourceCulture);
             }
         }
         
@@ -516,6 +561,15 @@ namespace EC.Localization {
         public static string AnonymousToAcme {
             get {
                 return ResourceManager.GetString("AnonymousToAcme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anonymous to {0}.
+        /// </summary>
+        public static string AnonymousToCompany {
+            get {
+                return ResourceManager.GetString("AnonymousToCompany", resourceCulture);
             }
         }
         
@@ -799,6 +853,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Case Administrators.
+        /// </summary>
+        public static string CaseAdministratorsUp {
+            get {
+                return ResourceManager.GetString("CaseAdministratorsUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Case Can&apos;t Be Resolved.
         /// </summary>
         public static string CaseCantBeResolved {
@@ -894,6 +957,15 @@ namespace EC.Localization {
         public static string CaseManagementDeadlinesUp {
             get {
                 return ResourceManager.GetString("CaseManagementDeadlinesUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Case Manager.
+        /// </summary>
+        public static string CaseManagerUp {
+            get {
+                return ResourceManager.GetString("CaseManagerUp", resourceCulture);
             }
         }
         
@@ -1150,6 +1222,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change Password.
+        /// </summary>
+        public static string ChangePasswordUp {
+            get {
+                return ResourceManager.GetString("ChangePasswordUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change Settings.
         /// </summary>
         public static string ChangeSettings {
@@ -1173,6 +1254,15 @@ namespace EC.Localization {
         public static string CheckCaseSummary {
             get {
                 return ResourceManager.GetString("CheckCaseSummary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please check your report summary and submit when ready:.
+        /// </summary>
+        public static string CheckSummarySubmit {
+            get {
+                return ResourceManager.GetString("CheckSummarySubmit", resourceCulture);
             }
         }
         
@@ -1479,6 +1569,15 @@ namespace EC.Localization {
         public static string Completedon {
             get {
                 return ResourceManager.GetString("Completedon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Completely Anonymous.
+        /// </summary>
+        public static string CompletelyAnonymousUp {
+            get {
+                return ResourceManager.GetString("CompletelyAnonymousUp", resourceCulture);
             }
         }
         
@@ -1857,6 +1956,15 @@ namespace EC.Localization {
         public static string DeadlineNotification {
             get {
                 return ResourceManager.GetString("DeadlineNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deadlines.
+        /// </summary>
+        public static string Deadlines {
+            get {
+                return ResourceManager.GetString("Deadlines", resourceCulture);
             }
         }
         
@@ -2995,6 +3103,24 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Incident reported externally?.
+        /// </summary>
+        public static string Incidentreportedexternally {
+            get {
+                return ResourceManager.GetString("Incidentreportedexternally", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Has the incident been reported to anyone outside the organization?.
+        /// </summary>
+        public static string IncidentReportedOutside {
+            get {
+                return ResourceManager.GetString("IncidentReportedOutside", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Incident reported outside?.
         /// </summary>
         public static string Incidentreportedoutside_q {
@@ -3355,6 +3481,24 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Is report urgent?.
+        /// </summary>
+        public static string IsreporturgentLow {
+            get {
+                return ResourceManager.GetString("IsreporturgentLow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is the situation an emergency?.
+        /// </summary>
+        public static string IsSituationEmergency {
+            get {
+                return ResourceManager.GetString("IsSituationEmergency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} Item(s).
         /// </summary>
         public static string Itemss {
@@ -3652,7 +3796,7 @@ namespace EC.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The following case administrator(s) will be assigned to your case. Mark off any case administrators who you think may be involved in the incident..
+        ///   Looks up a localized string similar to The following case administrator(s) will be assigned to your case. If you feel that a Case Administrator may have a conflict of interest or would be obstructive to investigating the case, please check ‘Exclude’ below..
         /// </summary>
         public static string MediatorsAssignedSecondOption {
             get {
@@ -3882,6 +4026,15 @@ namespace EC.Localization {
         public static string NamesOfWitnesses {
             get {
                 return ResourceManager.GetString("NamesOfWitnesses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If a Root Cause that is applicable this incident is not available in the dropdown, please add in Settings..
+        /// </summary>
+        public static string NARootCauseExplanation {
+            get {
+                return ResourceManager.GetString("NARootCauseExplanation", resourceCulture);
             }
         }
         
@@ -4678,6 +4831,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reopened.
+        /// </summary>
+        public static string Reopened {
+            get {
+                return ResourceManager.GetString("Reopened", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Replace.
         /// </summary>
         public static string Replace {
@@ -4849,11 +5011,29 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You are reporting the following Incident Type(s):.
+        /// </summary>
+        public static string ReportingFollowingTypes {
+            get {
+                return ResourceManager.GetString("ReportingFollowingTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reporting From.
         /// </summary>
         public static string ReportingFrom {
             get {
                 return ResourceManager.GetString("ReportingFrom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reporting from.
+        /// </summary>
+        public static string ReportingfromLow {
+            get {
+                return ResourceManager.GetString("ReportingfromLow", resourceCulture);
             }
         }
         
@@ -5155,6 +5335,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save New Password.
+        /// </summary>
+        public static string SaveNewPasswordUp {
+            get {
+                return ResourceManager.GetString("SaveNewPasswordUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save Password Change.
         /// </summary>
         public static string SavePasswordChangeUp {
@@ -5358,6 +5547,15 @@ namespace EC.Localization {
         public static string Severity {
             get {
                 return ResourceManager.GetString("Severity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Share Name &amp; Contact Info.
+        /// </summary>
+        public static string ShareNameContact {
+            get {
+                return ResourceManager.GetString("ShareNameContact", resourceCulture);
             }
         }
         

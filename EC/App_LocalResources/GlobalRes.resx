@@ -2105,13 +2105,13 @@
     <value>Root Causes</value>
   </data>
   <data name="AddNewBehavioralFactors" xml:space="preserve">
-    <value>Add new behavioral factors</value>
+    <value>Add behavioral factors</value>
   </data>
   <data name="AddNewExternalInfluences" xml:space="preserve">
-    <value>Add new external influences</value>
+    <value>Add external influences</value>
   </data>
   <data name="AddNewOrganizationalInfluences" xml:space="preserve">
-    <value>Add new organizational influences</value>
+    <value>Add organizational influences</value>
   </data>
   <data name="SecondaryType" xml:space="preserve">
     <value>Secondary Type</value>
