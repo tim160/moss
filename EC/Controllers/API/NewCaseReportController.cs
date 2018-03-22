@@ -56,9 +56,9 @@ namespace EC.Controllers.API
                     .OrderBy(x => x.Title)
                     .ToList()
                     .Select(x => new {
-                        Name = x.Name,
+                        Name = $"{x.Name} {x.last_name}",
                         Title = x.Title,
-                        Role = "",
+                        Role = x.Role,
                     }),
                 management_know_string = rm._management_know_string,
                 is_reported_outside = rm._is_reported_outside,

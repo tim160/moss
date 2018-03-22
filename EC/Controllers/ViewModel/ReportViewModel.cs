@@ -221,12 +221,13 @@ namespace EC.Controllers.ViewModel
 
             if (personRole != null)
             {
-
+                var roles = db.role_in_report.ToList();
                 for (int i = 0; i < personRole.Count; i++)
                 {
+                    var role = roles.FirstOrDefault(x => x.id == personRole.ToList()[i]);
                     result.Add(new report_non_mediator_involved()
                     {
-                        Role = personRole.ToList()[i].ToString(),
+                        Role = role == null ? "" : role.role_en,
                         Name = personName.ToList()[i],
                         last_name = personLastName.ToList()[i],
                         Title = personTitle.ToList()[i],
