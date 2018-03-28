@@ -183,7 +183,7 @@
                 circle = (task.IsRead() && (!task.HasNewActivity())) ? "blueBorder" : circle;                
 
                 <li class="taskList__li" data-userid="@_assignee.id" data-state="@circle">
-                    <a href="@Url.Action("Task", "Case", new { id = task.TaskID })" class="taskList__a taskNameCol__taskProgress-on">
+                    <a href="@Url.Action("Task", "NewCase", new { id = task.TaskID })" class="taskList__a taskNameCol__taskProgress-on">
                         <span class="col-7">
                             <span class="taskNameCol">
                                 <span class="taskNameCol__taskStatus @circle"></span>

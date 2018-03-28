@@ -326,5 +326,98 @@ namespace EC.Controllers
             return RedirectToAction("Attachments", new { report_id = id });
         }
 
+        public List<attachment> getAttachmentFilesTask(int task_id)
+        {
+            List<attachment> attachmentFiles = db.attachment.Where(item => (item.report_task_id == task_id)).ToList();
+            return attachmentFiles;
+        }
+
+        public ActionResult Task(int? id)
+        {
+            if (!id.HasValue)
+                return RedirectToAction("Index", "Cases");
+
+            //int user_id = 2;
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            if (user == null || user.id == 0)
+                return RedirectToAction("Index", "Account");
+
+            int user_id = user.id;
+
+            TaskExtended tsk = new TaskExtended(id.Value, user_id);
+
+            ReportModel rm = new ReportModel(tsk.TaskReportID);
+            if (!rm.HasAccessToReport(user_id))
+                return RedirectToAction("Index", "Account");
+
+            UserModel um = new UserModel(user_id);
+            glb.UpdateReportRead(user_id, tsk.TaskReportID);
+
+            if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
+            {
+                // case is not approved to work on it yet, need to approve first. if == 7 - its spam, so they will share the view.
+                return RedirectToAction("Index", "NewReport", new { id = tsk.TaskReportID });
+            }
+            #region EC-CC Viewbag
+            ViewBag.is_cc = is_cc;
+            string cc_ext = "";
+            if (is_cc) cc_ext = "_cc";
+            ViewBag.cc_extension = cc_ext;
+            #endregion
+
+
+            // user
+            //  UserModel um = new UserModel(user_id);
+            ViewBag.report_id = tsk.TaskReportID; // 167-171
+            ViewBag.user_id = user_id;
+            ViewBag.task_id = id;
+            ViewBag.taskStatus = tsk.TaskStatus;
+            ViewBag.um = um;
+            ViewBag.attachmentFiles = getAttachmentFiles(tsk.TaskReportID);
+            ViewBag.AttachmentFilesTask = getAttachmentFilesTask(id.Value);
+
+            glb.UpdateTaskRead(user_id, id.Value);
+
+            List<Int32> _task_comments_ids = new List<Int32>();
+
+            _task_comments_ids = db.task_comment.Where(a => a.id == id.Value).Select(t => t.id).ToList();
+            foreach (int _id in _task_comments_ids)
+            {
+                /////           glb.UpdateTaskCommentRead(user_id, _id);
+            }
+            // if (!db.task_comment_user_read.Any(item => ((item.user_id == user_id) && (item.task_comment_id == task_comment_id))))
+            // get all tasks comments 
+            // glb.UpdateTaskRead(user_id, id.Value);
+
+
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Task([Bind(Include = "body,task_id,user_id")] task_comment newTask)
+        {
+            newTask.created_date = DateTime.Now;
+            newTask.title = "";
+
+            if (ModelState.IsValid)
+            {
+                db.task_comment.Add(newTask);
+                try
+                {
+                    db.SaveChanges();
+                    ///     glb.UpdateReportLog(newMessage.sender_id, 7, newMessage.report_id, "", null, "");
+                }
+                catch (Exception ex)
+                {
+                    logger.Error(ex.ToString());
+                    return View();
+                }
+                return RedirectToAction("Task/" + newTask.task_id.ToString());
+            }
+
+            return View();
+        }
     }
 }
