@@ -1189,6 +1189,7 @@
     <Content Include="Views\Service\RestorePass-CC.cshtml" />
     <Content Include="Views\Shared\Partial\_SettingsCompanyLocationTemplate.cshtml" />
     <Content Include="Views\NewCase\Task.cshtml" />
+    <Content Include="Views\Settings\CaseRouting.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

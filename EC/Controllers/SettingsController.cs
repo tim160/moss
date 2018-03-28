@@ -819,5 +819,18 @@ namespace EC.Controllers
 
             return "";
         }
+
+        public ActionResult CaseRouting()
+        {
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            if (user == null || user.id == 0)
+                return RedirectToAction("Index", "Account", new { returnUrl = Url.Action("Languages", "Settings") });
+
+            UserModel um = new UserModel(user.id);
+            ViewBag.um = um;
+            ViewBag.user_id = user.id;
+
+            return View();
+        }
     }
 }
