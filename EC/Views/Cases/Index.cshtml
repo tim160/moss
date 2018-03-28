@@ -95,6 +95,12 @@
                     @GlobalRes.Spam
                     <span ng-show="counts.Spam > 0">{{counts.Spam}}</span>
                 </a>
+                <a href="#" class="caseesTab" ng-class="{'active': mode == 4}" ng-click="refresh(4)">
+                    New Reports
+                    <span ng-show="counts.Pending > 0">{{counts.Pending}}</span>
+                </a>
+                <a href="#" class="caseesTab">
+                </a>
             </div>
         </div>
         <div id="positionIconCases">

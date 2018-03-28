@@ -41,6 +41,7 @@ namespace EC.Controllers.API
             List<int> completed_report_ids = um.ReportsSearchIds(um._user.company_id, 2);
             List<int> spam_report_ids = um.ReportsSearchIds(um._user.company_id, 3);
             List<int> closed_report_ids = um.ReportsSearchIds(um._user.company_id, 5);
+            List<int> all_pending_reports_ids = um.ReportsSearchIds(um._user.company_id, 4);
 
             var reports = report_ids.Select(x => new CasePreviewViewModel(x, user.id)).ToList();
 
@@ -89,6 +90,7 @@ namespace EC.Controllers.API
                     Completed = UnreadReportsInProgressNumber(completed_report_ids, user.id),
                     Spam = UnreadReportsInProgressNumber(spam_report_ids, user.id),
                     Closed = UnreadReportsInProgressNumber(closed_report_ids, user.id),
+                    Pending = UnreadReportsInProgressNumber(all_pending_reports_ids, user.id),
                 },
 
                 Title = title,
