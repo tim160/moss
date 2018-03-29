@@ -27,7 +27,11 @@ namespace EC.Controllers
             if (!rm.HasAccessToReport(user.id))
                 return RedirectToAction("Index", "Account");
 
+
             int user_id = user.id;
+
+            glb.UpdateReportRead(user_id, report_id);
+
             ViewBag.user_id = user_id;
             ViewBag.report_id = report_id;
             ViewBag.attachmentFiles = getAttachmentFiles(report_id);
@@ -66,6 +70,8 @@ namespace EC.Controllers
             ViewBag.report_id = report_id;
             ViewBag.attachmentFiles = getAttachmentFiles(report_id);
 
+            glb.UpdateReportRead(user_id, report_id);
+
             #region EC-CC Viewbag
             ViewBag.is_cc = is_cc;
             string cc_ext = "";
@@ -95,7 +101,12 @@ namespace EC.Controllers
             if (is_cc) cc_ext = "_cc";
             #endregion
 
+            
+
             int user_id = user.id;
+
+            glb.UpdateReportRead(user_id, report_id);
+
             ViewBag.user_id = user_id;
             ViewBag.report_id = report_id;
             ViewBag.attachmentFiles = getAttachmentFiles(report_id);
@@ -117,6 +128,8 @@ namespace EC.Controllers
                 return RedirectToAction("Index", "Account");
 
             int user_id = user.id;
+
+            glb.UpdateReportRead(user_id, report_id);
             ViewBag.user_id = user_id;
             ViewBag.report_id = report_id;
 
@@ -139,6 +152,8 @@ namespace EC.Controllers
             int user_id = user.id;
             UserModel um = new UserModel(user_id);
             List<task> tasks = rm.ReportTasks(0);
+
+            glb.UpdateReportRead(user_id, report_id);
 
             List<TaskExtended> list_tsk = new List<TaskExtended>();
             int task_id = 0;
@@ -181,6 +196,9 @@ namespace EC.Controllers
             int user_id = user.id;
             UserModel um = new UserModel(user_id);
 
+            glb.UpdateReportRead(user_id, report_id);
+            glb.UpdateReadMessages(report_id, user_id, 2);
+
             ViewBag.um = um;
             ViewBag.report_id = report_id; // 167-171
             ViewBag.user_id = user_id;
@@ -202,6 +220,8 @@ namespace EC.Controllers
             ViewBag.user_id = user_id;
             ViewBag.report_id = report_id;
 
+            glb.UpdateReportRead(user_id, report_id);
+
             return View();
         }
 
@@ -217,6 +237,8 @@ namespace EC.Controllers
             ReportModel rm = new ReportModel(report_id);
             if (!rm.HasAccessToReport(user.id))
                 return RedirectToAction("Index", "Account");
+
+            glb.UpdateReportRead(user.id, report_id);
 
             ViewBag.rm = rm;
             ViewBag.report_id = report_id;

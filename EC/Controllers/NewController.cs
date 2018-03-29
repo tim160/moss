@@ -641,6 +641,9 @@ namespace EC.Controllers
                 _user.sign_in_code = null;
                 _user.guid = Guid.NewGuid();
                 _user.company_department_id = selectedDepartment.id;
+                _user.user_permissions_approve_case_closure = 1;
+                _user.user_permissions_change_settings = 1;
+
 
                 try
                 {
