@@ -48,13 +48,13 @@
     }
     @Html.Partial("~/Views/Settings/partial/casesHeared.cshtml", active)
     <p class="textMediators">
-        @LocalizationGetter.GetString("SetupMediatorProfiles", is_cc)
+        @LocalizationGetter.GetString(um._user.user_permissions_change_settings == 1 ? "SetupMediatorProfiles" : "CaseAdministratorsUp", is_cc)
     </p>
     <div class="contentSettings secondHeader oldstyle">
         <div class="blockWithTeam">
             <div class="contentMediators blockTeam">
                 <!--empty block-->
-                @if (um._user.role_id == 5)
+                @if ((um._user.role_id == 5) && (um._user.user_permissions_change_settings == 1))
                 {
                     <div class="blockIteamTeam footerInputStyle">
                         @Html.ActionLink("Add a Case Administrator", "User", new { id = 0 }, new { @class = "positionLinkIviteMediator greenButton greenButtonCustom disableUnderline" })

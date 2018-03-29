@@ -23,6 +23,7 @@ namespace EC.Controllers.API
         {
             user user = (user)HttpContext.Current.Session[ECGlobalConstants.CurrentUserMarcker];
             var model = DB.user.FirstOrDefault(x => x.id == id);
+            model = model ?? new user();
 
             return new
             {
