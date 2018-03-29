@@ -290,7 +290,7 @@ namespace EC.Controllers
             var file = String.Format("{0}\\{1}{2}", folder, user.guid, fi.Extension);
             _file.SaveAs(file);
 
-            var dbUser = db.user.FirstOrDefault(x => x.id == user.id);
+            var dbUser = db.user.FirstOrDefault(x => x.id == id);
             var url = String.Format("~/Upload/Company/{0}/users/{1}{2}", cm._company.guid, user.guid, fi.Extension);
             dbUser.photo_path = url;
             db.SaveChanges();
