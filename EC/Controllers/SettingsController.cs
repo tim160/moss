@@ -177,10 +177,10 @@ namespace EC.Controllers
             //ViewBag.um = um;
             ViewBag.user_id = _user.id;
 
-            if (_user.role_id != 5)
+            /*if (_user.role_id != 5)
             {
                 return RedirectToAction("Index", "Settings");
-            }
+            }*/
 
             return View();
 

@@ -122,19 +122,19 @@
                     </div>
                 </div>
                 <div class="rowBlock inputMediator">
-                    <div class="freeBlock inputRadio mediator" ng-class="{active: role == 6 }" ng-click="role = 6">
+                    <div class="freeBlock inputRadio mediator" ng-class="{active: role == 6 }" ng-click="role = user_role == 5 ? 6 : role">
                         <label class="inputBlock" for="freeIncident">
                             <input id="oneIncident" type="radio" name="role_id" value="6">
                             <span class="radioTitle">@LocalizationGetter.GetString("Mediator")</span>
                         </label>
                     </div>
-                    <div class="freeBlock inputRadio adminMediator adminMediator" ng-class="{active: role == 5 }" ng-click="role = 5">
+                    <div class="freeBlock inputRadio adminMediator adminMediator" ng-class="{active: role == 5 }" ng-click="role = role = user_role == 5 ? 5 : role">
                         <label class="inputBlock" for="freeIncident">
                             <input id="twoIncident" type="radio" name="role_id" value="5">
                             <span class="radioTitle">@LocalizationGetter.GetString("AdminMediator")</span>
                         </label>
                     </div>
-                    <div class="freeBlock inputRadio escalationMediator" ng-class="{active: role == 4 }" ng-click="role = 4">
+                    <div class="freeBlock inputRadio escalationMediator" ng-class="{active: role == 4 }" ng-click="role = role = user_role == 5 ? 4 : role">
                         <label class="inputBlock" for="freeIncident">
                             <input id="threeIncident" type="radio" name="role_id" value="4">
                             <span class="radioTitle">@LocalizationGetter.GetString("EscalationMediator")</span>
@@ -211,7 +211,7 @@
             }
             <div class="blockUpdateProfile">
                 <div class="updateProfileBtn">
-                    <input class="greenButton" type="submit" value="update" ng-click="post()">
+                    <input class="greenButton" type="submit" value="update" ng-show="user_role == 5" ng-click="post()">
                     <span style="display: none;">@LocalizationGetter.GetString("Save")</span>
                 </div>
             </div>

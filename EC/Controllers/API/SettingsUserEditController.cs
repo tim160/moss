@@ -58,8 +58,19 @@ namespace EC.Controllers.API
         public object Post(user model)
         {
             user curUser = (user)HttpContext.Current.Session[ECGlobalConstants.CurrentUserMarcker];
-
             var user = DB.user.FirstOrDefault(x => x.id == model.id);
+
+            //Change only own settings
+            //Can not add
+            if ((curUser.role_id != 5) & (user == null || curUser.id != user.id))
+            {
+                return new
+                {
+                    result = 0,
+                    ok = true,
+                };
+            }
+
             if (user != null)
             {
                 user.first_nm = model.first_nm;
@@ -71,10 +82,7 @@ namespace EC.Controllers.API
                 user.company_location_id = model.company_location_id;
                 user.user_permissions_approve_case_closure = model.user_permissions_approve_case_closure;
                 user.user_permissions_change_settings = model.user_permissions_change_settings;
-                if (curUser.role_id == 5)
-                {
-                    user.status_id = model.status_id;
-                }
+                user.status_id = model.status_id;
             }
             else
             {
@@ -101,11 +109,17 @@ namespace EC.Controllers.API
                 user.first_nm = model.first_nm.Trim();
                 user.last_nm = model.last_nm.Trim();
                 user.company_id = curUser.company_id;
-                user.role_id = model.role_id;
-                user.status_id = 2;
                 if (curUser.role_id == 5)
                 {
+                    user.role_id = model.role_id;
                     user.status_id = model.status_id;
+                    user.user_permissions_approve_case_closure = model.user_permissions_approve_case_closure;
+                    user.user_permissions_change_settings = model.user_permissions_change_settings;
+                }
+                else
+                {
+                    //Activate if pendind
+                    user.status_id = user.status_id == 3 ? 2 : user.status_id;
                 }
                 user.login_nm = glb.GenerateLoginName(user.first_nm, user.last_nm);
                 user.password = glb.GeneretedPassword().Trim();
@@ -131,8 +145,6 @@ namespace EC.Controllers.API
                 user.location_nm = "";
                 user.sign_in_code = null;
                 user.guid = Guid.NewGuid();
-                user.user_permissions_approve_case_closure = model.user_permissions_approve_case_closure;
-                user.user_permissions_change_settings = model.user_permissions_change_settings;
                 DB.user.Add(user);
 
                 var company = DB.company.FirstOrDefault(x => x.id == curUser.company_id);
