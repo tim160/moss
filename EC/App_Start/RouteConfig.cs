@@ -421,6 +421,16 @@ namespace EC
                     report_id = UrlParameter.Optional
                 }
             );
+            routes.MapRoute(
+                name: "NewCaseReporter",
+                url: "NewCase/Reporter/{report_id}",
+                defaults: new
+                {
+                    controller = "NewCase",
+                    action = "Reporter",
+                    report_id = UrlParameter.Optional
+                }
+            );
 
             routes.MapRoute(
                 name: "NewCaseInvestigationNotes",

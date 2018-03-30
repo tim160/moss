@@ -183,9 +183,6 @@ namespace EC.Controllers
         public ActionResult Messages(int report_id)
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
-            //DEBUG
-            //user = user != null ? user : db.user.FirstOrDefault(x => x.id == 2);
-            //DEBUG
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
@@ -204,6 +201,29 @@ namespace EC.Controllers
             ViewBag.user_id = user_id;
 
             return View();
+        }
+
+        public ActionResult Reporter(int report_id)
+        {
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            if (user == null || user.id == 0)
+                return RedirectToAction("Index", "Account");
+
+            ReportModel rm = new ReportModel(report_id);
+            if (!rm.HasAccessToReport(user.id))
+                return RedirectToAction("Index", "Account");
+
+            int user_id = user.id;
+            UserModel um = new UserModel(user_id);
+
+            glb.UpdateReportRead(user_id, report_id);
+            glb.UpdateReadMessages(report_id, user_id, 2);
+
+            ViewBag.um = um;
+            ViewBag.report_id = report_id; // 167-171
+            ViewBag.user_id = user_id;
+
+            return View("Messages");
         }
 
         public ActionResult Team(int report_id)

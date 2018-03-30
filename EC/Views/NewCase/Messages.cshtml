@@ -23,13 +23,13 @@
         <div class="subNavTabLinks clearfix">
             <ul class="subNavTabLinks__ul clearfix">
                 <li class="subNavTabLinks__li subNavTabLinks__messagesSwitch" data-tab="sub-CaseMediators" ng-class="{ 'active': activeTab == 1}">
-                    <a href="#" class="subNavTabLinks__a clearfix" ng-click="activeTab = 1">
+                    <a href="@Url.Action("Messages", new { report_id = report_id })" class="subNavTabLinks__a clearfix">
                         <span class="subNavTabLinks__a-Text">Case Administrators</span>
                         <span class="subNavTabLinks__a-badgeCount" ng-show="mediatorsUnreaded > 0">{{mediatorsUnreaded}}</span>
                     </a>
                 </li><!-- /.subNavTabLinks__li -->
                 <li class="subNavTabLinks__li subNavTabLinks__messagesSwitch" data-tab="sub-Reporter" ng-class="{ 'active': activeTab == 2}">
-                    <a href="#" class="subNavTabLinks__a clearfix" ng-click="activeTab = 2">
+                    <a href="@Url.Action("Reporter", new { report_id = report_id })" class="subNavTabLinks__a clearfix">
                         <span class="subNavTabLinks__a-Text">Reporter</span>
                         <span class="subNavTabLinks__a-badgeCount" ng-show="reportersUnreaded > 0">{{reportersUnreaded}}</span>
                     </a>
