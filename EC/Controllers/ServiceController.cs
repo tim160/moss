@@ -2,6 +2,7 @@
 using EC.Common.Util;
 using EC.Constants;
 using EC.Controllers.utils;
+using EC.Localization;
 using EC.Models;
 using EC.Models.Database;
 using System;
@@ -41,7 +42,8 @@ namespace EC.Controllers
                     var user = userModel.Login(model.Login, model.Password);
                     if (user == null)
                     {
-                        return View(model);
+                        ModelState.AddModelError("PasswordError", "Password");
+                        return View(is_cc ? "Login" : "Login-CC", model);
                     }
 
                     AuthHelper.SetCookies(user, HttpContext);
@@ -74,7 +76,10 @@ namespace EC.Controllers
                 }
             }
 
-            return View(model);
+            ModelState.AddModelError("PasswordError", "Password");
+            model.Password = "";
+
+            return View(is_cc ? "Login" : "Login-CC", model);
         }
 
         public ActionResult Report()
