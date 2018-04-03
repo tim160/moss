@@ -446,6 +446,72 @@ namespace EC.Models
             }
         }
 
+        public string _secondary_type_string_all
+        {
+            get
+            {
+                string secondary_type = "";
+
+                if (_report != null)
+                {
+                    if (db.report_secondary_type.Any(t => t.report_id == _report.id))
+                    {
+                        List<report_secondary_type> _report_secondary_type_list = db.report_secondary_type.Where(t => t.report_id == _report.id).ToList();
+                        foreach (report_secondary_type _report_secondary_type in _report_secondary_type_list)
+                        {
+                            if (_report_secondary_type.mandatory_secondary_type_id != null)
+                            {
+                                secondary_type_mandatory temp_sec_type = db.secondary_type_mandatory.Where(item => item.id == _report_secondary_type.mandatory_secondary_type_id).FirstOrDefault();
+                                if (temp_sec_type != null)
+                                {
+                                    if ((secondary_type.Length > 0) && (!secondary_type.Contains(temp_sec_type.secondary_type_en.Trim())))
+                                        secondary_type = secondary_type + ", " + temp_sec_type.secondary_type_en.Trim();
+                                    else if (secondary_type.Length == 0)
+                                        secondary_type = temp_sec_type.secondary_type_en.Trim();
+                                }
+                            }
+
+                            if ((_report_secondary_type.secondary_type_id != 0) && (_report_secondary_type.secondary_type_id != -1))
+                            {
+                                company_secondary_type temp_comp_sec_type = db.company_secondary_type.Where(item => item.id == _report_secondary_type.secondary_type_id).FirstOrDefault();
+                                if (temp_comp_sec_type != null)
+                                {
+                                    if ((secondary_type.Length > 0) && (!secondary_type.Contains(temp_comp_sec_type.secondary_type_en.Trim())))
+                                        secondary_type = secondary_type + ", " + temp_comp_sec_type.secondary_type_en.Trim();
+                                    else if (secondary_type.Length == 0)
+                                        secondary_type = temp_comp_sec_type.secondary_type_en.Trim();
+                                }
+                            }
+
+                            if (_report_secondary_type.secondary_type_nm.Trim() != "")
+                            {
+                                if ((secondary_type.Length > 0) && (!secondary_type.Contains(_report_secondary_type.secondary_type_nm.Trim())))
+                                    secondary_type = secondary_type + ", " + _report_secondary_type.secondary_type_nm.Trim();
+                                else if (secondary_type.Length == 0)
+                                    secondary_type = _report_secondary_type.secondary_type_nm.Trim();
+                            }
+                            else if (_report_secondary_type.secondary_type_id == 0)
+                            {
+                                if (secondary_type.Length > 0)
+                                {
+                                    secondary_type = secondary_type + ", " + GlobalRes.Other;
+                                }
+                                else
+                                {
+                                    secondary_type = GlobalRes.Other;
+                                }
+                            }
+                        }
+
+                    }
+                }
+                if (secondary_type.Length == 0)
+                    secondary_type = App_LocalResources.GlobalRes.unknown_secondary_type;
+
+                return secondary_type.Trim();
+            }
+        }
+
         /// <summary>
         /// Returns "Jan 31, 2015"
         /// </summary>

@@ -18,6 +18,7 @@ namespace EC.Models.ViewModel
 
         public int report_id { get; set; }
         public string case_secondary_types { get; set; }
+        public string case_secondary_types_all { get; set; }
         public string current_status { get; set; }
         public int investigation_status_number { get; set; }
         public int previous_investigation_status_number { get; set; }
@@ -101,6 +102,7 @@ namespace EC.Models.ViewModel
             this.departments = rm._departments_string;
             this.current_status = rm._investigation_status_string;
             this.case_secondary_types = rm._secondary_type_string;
+            this.case_secondary_types_all = rm._secondary_type_string_all;            
             this.case_color_code = rm._color_code;
 
 
