@@ -636,12 +636,12 @@
             data.report_cc_crime.cc_is_clear_act_crime = '' + data.report_cc_crime.cc_is_clear_act_crime;
 
             data.report_case_closure_outcome1 = $filter('filter')(data.report_case_closure_outcome, function (value) {
-                if (value.mediator.role_in_report_id === 1) {
+                if ((value.mediator.role_in_report_id === 1) || (value.mediator.role_in_report_id === 2)) {
                     return true;
                 }
             });
             data.report_case_closure_outcome2 = $filter('filter')(data.report_case_closure_outcome, function (value) {
-                if ((value.mediator.role_in_report_id === 2) || (value.mediator.role_in_report_id === 3)) {
+                if ((value.mediator.role_in_report_id === 3)) {
                     return true;
                 }
             });
