@@ -122,19 +122,19 @@
                     </div>
                 </div>
                 <div class="rowBlock inputMediator">
-                    <div class="freeBlock inputRadio mediator" ng-class="{active: role == 6 }" ng-click="role = user_role == 5 ? 6 : role">
+                    <div class="freeBlock inputRadio mediator" ng-class="{active: role == 6 }" ng-click="role = canEditUserProfiles ? 6 : role">
                         <label class="inputBlock" for="freeIncident">
                             <input id="oneIncident" type="radio" name="role_id" value="6">
                             <span class="radioTitle">@LocalizationGetter.GetString("Mediator")</span>
                         </label>
                     </div>
-                    <div class="freeBlock inputRadio adminMediator adminMediator" ng-class="{active: role == 5 }" ng-click="role = role = user_role == 5 ? 5 : role">
+                    <div class="freeBlock inputRadio adminMediator adminMediator" ng-class="{active: role == 5 }" ng-click="role = role = canEditUserProfiles ? 5 : role">
                         <label class="inputBlock" for="freeIncident">
                             <input id="twoIncident" type="radio" name="role_id" value="5">
                             <span class="radioTitle">@LocalizationGetter.GetString("AdminMediator")</span>
                         </label>
                     </div>
-                    <div class="freeBlock inputRadio escalationMediator" ng-class="{active: role == 4 }" ng-click="role = role = user_role == 5 ? 4 : role">
+                    <div class="freeBlock inputRadio escalationMediator" ng-class="{active: role == 4 }" ng-click="role = role = canEditUserProfiles ? 4 : role">
                         <label class="inputBlock" for="freeIncident">
                             <input id="threeIncident" type="radio" name="role_id" value="4">
                             <span class="radioTitle">@LocalizationGetter.GetString("EscalationMediator")</span>
@@ -147,19 +147,19 @@
                     <div class="title">Status</div>
                 </div>
                 <div class="rowBlock inputMediator">
-                    <div class="freeBlock inputRadio mediator" ng-class="{active: status_id == 2 }" ng-click="status_id = user_role == 5 ? 2 : status_id">
+                    <div class="freeBlock inputRadio mediator" ng-class="{active: status_id == 2 }" ng-click="status_id = canEditUserProfiles ? 2 : status_id">
                         <label class="inputBlock" for="freeIncident">
                             <input id="oneIncident" type="radio" name="role_id" value="6">
                             <span class="radioTitle">Active</span>
                         </label>
                     </div>
-                    <div class="freeBlock inputRadio adminMediator adminMediator" ng-class="{active: status_id == 1 }" ng-click="status_id = user_role == 5 ? 1 : status_id">
+                    <div class="freeBlock inputRadio adminMediator adminMediator" ng-class="{active: status_id == 1 }" ng-click="status_id = canEditUserProfiles ? 1 : status_id">
                         <label class="inputBlock" for="freeIncident">
                             <input id="twoIncident" type="radio" name="role_id" value="5">
                             <span class="radioTitle">Inactive</span>
                         </label>
                     </div>
-                    <div class="freeBlock inputRadio escalationMediator" ng-class="{active: status_id == 3 }" ng-click="status_id = user_role == 5 ? 3 : status_id">
+                    <div class="freeBlock inputRadio escalationMediator" ng-class="{active: status_id == 3 }" ng-click="status_id = canEditUserProfiles ? 3 : status_id">
                         <label class="inputBlock" for="freeIncident">
                             <input id="threeIncident" type="radio" name="role_id" value="4">
                             <span class="radioTitle">Pending</span>
@@ -167,7 +167,7 @@
                     </div>
                 </div><!--rowBlock-->
             </div>
-            @if (um._user.role_id == 5)
+            @if (um.CanEditUserProfiles)
             {
                 <div class="blockPersonalSettings greyBorder">
                     <p class="title">@LocalizationGetter.GetString("ApproveCaseClosure", is_cc)</p>
@@ -211,7 +211,7 @@
             }
             <div class="blockUpdateProfile">
                 <div class="updateProfileBtn">
-                    <input class="greenButton" type="submit" value="update" ng-show="user_role == 5" ng-click="post()">
+                    <input class="greenButton" type="submit" value="update" ng-show="canEditUserProfiles" ng-click="post()">
                     <span style="display: none;">@LocalizationGetter.GetString("Save")</span>
                 </div>
             </div>

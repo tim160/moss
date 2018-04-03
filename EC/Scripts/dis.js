@@ -1374,6 +1374,7 @@
             $scope.user_permissions_change_settings = data.model.user_permissions_change_settings.toString();
             $scope.user_role = data.user.role;
             $scope.photo_path = data.model.photo_path;
+            $scope.canEditUserProfiles = data.user.CanEditUserProfiles;
         });
 
         $scope.validate = function (value, rv) {

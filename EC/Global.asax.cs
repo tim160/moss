@@ -36,7 +36,7 @@ namespace EC
 
         void Application_BeginRequest(object sender, EventArgs e)
         {
-            if (!Context.Request.IsSecureConnection && !Context.Request.IsLocal)
+            if (!Context.Request.IsSecureConnection && !Context.Request.IsLocal && !Context.Request.Url.AbsoluteUri.ToLower().Contains("ase.com.ua"))
                 Response.Redirect(Context.Request.Url.ToString().Replace("http:", "https:"));
         }
 

@@ -137,7 +137,10 @@ namespace EC.Models
         {
             user _user = db.user.FirstOrDefault(item => item.login_nm.Trim() == login && item.password.Trim() == password);
             //user _user = db.user.FirstOrDefault(item => item.login_nm.Trim() == login && item.password.Trim() == password && item.status_id == 2);
-
+            if (_user == null)
+            {
+                return null;
+            }
             if ((_user.status_id != 2) & (_user.last_login_dt != null))
             {
                 return null;
@@ -1273,6 +1276,18 @@ namespace EC.Models
                 result = true;
             }
             return result;
+        }
+
+        public bool CanEditUserProfiles
+        {
+            get
+            {
+                if (_user == null) 
+                {
+                    return false;
+                }
+                return _user.role_id == 5 || _user.user_permissions_change_settings == 1;
+            }
         }
     }
 }
