@@ -50,15 +50,26 @@ namespace EC.Controllers
                     Session["userName"] = "";
                     Session["userId"] = user.id;
 
-                    if (returnUrl != null)
-                    {
-                        return Redirect(returnUrl);
-                    }
-
                     if (user.role_id == 8)
                     {
                         return RedirectToAction("Index", "ReporterDashboard");
                     }
+
+                    if (user.last_login_dt == null && user.role_id != 8)
+                    {
+                        return RedirectToAction("Index", "Settings");
+                    }
+
+                    if (user.last_login_dt == null && user.role_id != 8)
+                    {
+                        return RedirectToAction("Completed", "Cases");
+                    }
+
+                    if (returnUrl != null)
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    
                     return RedirectToAction("Index", "Cases");
                 }
             }
