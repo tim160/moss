@@ -1274,5 +1274,17 @@ namespace EC.Models
             }
             return result;
         }
+
+        public bool CanEditUserProfiles
+        {
+            get
+            {
+                if (_user == null) 
+                {
+                    return false;
+                }
+                return _user.role_id == 5 || _user.user_permissions_change_settings == 1;
+            }
+        }
     }
 }
