@@ -377,6 +377,7 @@ namespace EC.Controllers.API
                         report_id = filter.Report_id,
                         Title = filter.addPersonTitle,
                         role_in_report_id = filter.addPersonRole,
+                        added_by_reporter = false,
                     });
                     DB.SaveChanges();
                 }

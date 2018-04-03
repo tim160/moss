@@ -1456,6 +1456,7 @@ namespace EC.Models
                 List<report_non_mediator_involved> mediators = model.GetModeMediatorInvolveds();
                 foreach (var item in mediators)
                 {
+                    item.added_by_reporter = true;
                     AddReportNonMediatorInvolved(item, currentReport);
                 }
 

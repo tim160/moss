@@ -105,11 +105,11 @@
                             <div class="row">
                                 <p class="sectionHeader-col">Involved Parties</p>
                                 <p class="content-container__p" ng-repeat="item in model.mediator_involved">
-                                    <a href="#" ng-click="mediatorDelete(item.id)" ng-show="!item.added_by_reporter">X</a>
+                                    <a href="#" ng-click="mediatorDelete(item.id)" ng-show="item.added_by_reporter == false">X</a>
                                     {{item.first_nm}} {{item.last_nm}}
                                 </p>
                                 <p class="content-container__p" ng-repeat="item in model.mediator_not_involved">
-                                    <a href="#" ng-click="mediatorDelete(item.id, 2)" ng-show="!item.added_by_reporter">X</a>
+                                    <a href="#" ng-click="mediatorDelete(item.id, 2)" ng-show="item.added_by_reporter == false">X</a>
                                     {{item.Name}} {{item.last_name}} {{item.Title}} {{getRoleTitle(item.role_in_report_id)}}
                                 </p>
                             </div>
