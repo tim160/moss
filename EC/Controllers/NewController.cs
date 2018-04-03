@@ -359,11 +359,36 @@ namespace EC.Controllers
             /// 
             company_department selectedDepartment = null;
             List<string> list_departments = new List<string>();
-            list_departments.Add(LocalizationGetter.GetString("Administrative"));
-            list_departments.Add(LocalizationGetter.GetString("Accounting"));
-            list_departments.Add(LocalizationGetter.GetString("Management"));
-            list_departments.Add(LocalizationGetter.GetString("Sales"));
-            list_departments.Add(LocalizationGetter.GetString("Support"));
+            if (!is_cc)
+            {
+                list_departments.Add(LocalizationGetter.GetString("Administration"));
+                list_departments.Add(LocalizationGetter.GetString("AccountingFinance"));
+                list_departments.Add(LocalizationGetter.GetString("CustomerService"));
+                list_departments.Add(LocalizationGetter.GetString("HumanResources"));
+                list_departments.Add(LocalizationGetter.GetString("IT"));
+                list_departments.Add(LocalizationGetter.GetString("Legal"));
+                list_departments.Add(LocalizationGetter.GetString("Marketing"));
+                list_departments.Add(LocalizationGetter.GetString("Production"));
+                list_departments.Add(LocalizationGetter.GetString("Purchasing"));
+                list_departments.Add(LocalizationGetter.GetString("RD"));
+                list_departments.Add(LocalizationGetter.GetString("Sales"));
+            }
+
+            if (is_cc)
+            {
+                list_departments.Add(LocalizationGetter.GetString("AcademicAffairs"));
+                list_departments.Add(LocalizationGetter.GetString("AccountingFinance"));
+                list_departments.Add(LocalizationGetter.GetString("Athletics"));
+                list_departments.Add(LocalizationGetter.GetString("HumanResources"));
+                list_departments.Add(LocalizationGetter.GetString("IT"));
+                list_departments.Add(LocalizationGetter.GetString("Medical"));
+                list_departments.Add(LocalizationGetter.GetString("Research"));
+                list_departments.Add(LocalizationGetter.GetString("RiskSafetyMatters"));
+                list_departments.Add(LocalizationGetter.GetString("StudentsAffairs"));
+            }
+
+
+
 
             if (company_id != 0)
             {

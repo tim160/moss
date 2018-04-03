@@ -88,6 +88,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Academic Affairs.
+        /// </summary>
+        public static string AcademicAffairs {
+            get {
+                return ResourceManager.GetString("AcademicAffairs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Accept case.
         /// </summary>
         public static string Acceptcase {
@@ -120,6 +129,15 @@ namespace EC.Localization {
         public static string Accounting {
             get {
                 return ResourceManager.GetString("Accounting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accounting &amp; Finance.
+        /// </summary>
+        public static string AccountingFinance {
+            get {
+                return ResourceManager.GetString("AccountingFinance", resourceCulture);
             }
         }
         
@@ -372,6 +390,15 @@ namespace EC.Localization {
         public static string admin_escalation_warning {
             get {
                 return ResourceManager.GetString("admin_escalation_warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Administration.
+        /// </summary>
+        public static string Administration {
+            get {
+                return ResourceManager.GetString("Administration", resourceCulture);
             }
         }
         
@@ -669,6 +696,15 @@ namespace EC.Localization {
         public static string Assigntaskto {
             get {
                 return ResourceManager.GetString("Assigntaskto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Athletics.
+        /// </summary>
+        public static string Athletics {
+            get {
+                return ResourceManager.GetString("Athletics", resourceCulture);
             }
         }
         
@@ -1776,6 +1812,15 @@ namespace EC.Localization {
         public static string CurrentStatus {
             get {
                 return ResourceManager.GetString("CurrentStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Customer Service.
+        /// </summary>
+        public static string CustomerService {
+            get {
+                return ResourceManager.GetString("CustomerService", resourceCulture);
             }
         }
         
@@ -3004,6 +3049,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Human Resources.
+        /// </summary>
+        public static string HumanResources {
+            get {
+                return ResourceManager.GetString("HumanResources", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to If not reported via Employee Confidential please provide case description.
         /// </summary>
         public static string IfNotReportedViaEmployeeConfidentialPleaseProvideCaseDescription {
@@ -3499,6 +3553,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Information Technology (IT).
+        /// </summary>
+        public static string IT {
+            get {
+                return ResourceManager.GetString("IT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} Item(s).
         /// </summary>
         public static string Itemss {
@@ -3558,6 +3621,15 @@ namespace EC.Localization {
         public static string lastOpportunity {
             get {
                 return ResourceManager.GetString("lastOpportunity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Legal.
+        /// </summary>
+        public static string Legal {
+            get {
+                return ResourceManager.GetString("Legal", resourceCulture);
             }
         }
         
@@ -3742,6 +3814,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Marketing.
+        /// </summary>
+        public static string Marketing {
+            get {
+                return ResourceManager.GetString("Marketing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mark spam.
         /// </summary>
         public static string Markspam {
@@ -3846,6 +3927,15 @@ namespace EC.Localization {
         public static string Mediatorswillgetback_CC {
             get {
                 return ResourceManager.GetString("Mediatorswillgetback_CC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Medical.
+        /// </summary>
+        public static string Medical {
+            get {
+                return ResourceManager.GetString("Medical", resourceCulture);
             }
         }
         
@@ -4705,11 +4795,38 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Production.
+        /// </summary>
+        public static string Production {
+            get {
+                return ResourceManager.GetString("Production", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Profile.
         /// </summary>
         public static string Profile {
             get {
                 return ResourceManager.GetString("Profile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Purchasing.
+        /// </summary>
+        public static string Purchasing {
+            get {
+                return ResourceManager.GetString("Purchasing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Research &amp; Development (R&amp;D).
+        /// </summary>
+        public static string RD {
+            get {
+                return ResourceManager.GetString("RD", resourceCulture);
             }
         }
         
@@ -5164,6 +5281,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Research.
+        /// </summary>
+        public static string Research {
+            get {
+                return ResourceManager.GetString("Research", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Resolution.
         /// </summary>
         public static string Resolution {
@@ -5286,6 +5412,15 @@ namespace EC.Localization {
         public static string Reviewstagemilestones {
             get {
                 return ResourceManager.GetString("Reviewstagemilestones", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Risk &amp; Safety Matters.
+        /// </summary>
+        public static string RiskSafetyMatters {
+            get {
+                return ResourceManager.GetString("RiskSafetyMatters", resourceCulture);
             }
         }
         
@@ -5637,6 +5772,15 @@ namespace EC.Localization {
         public static string Status {
             get {
                 return ResourceManager.GetString("Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Students Affairs.
+        /// </summary>
+        public static string StudentsAffairs {
+            get {
+                return ResourceManager.GetString("StudentsAffairs", resourceCulture);
             }
         }
         

@@ -2215,4 +2215,52 @@
   <data name="ReportingfromLow" xml:space="preserve">
     <value>Reporting from</value>
   </data>
+  <data name="AcademicAffairs" xml:space="preserve">
+    <value>Academic Affairs</value>
+  </data>
+  <data name="AccountingFinance" xml:space="preserve">
+    <value>Accounting &amp; Finance</value>
+  </data>
+  <data name="Administration" xml:space="preserve">
+    <value>Administration</value>
+  </data>
+  <data name="Athletics" xml:space="preserve">
+    <value>Athletics</value>
+  </data>
+  <data name="CustomerService" xml:space="preserve">
+    <value>Customer Service</value>
+  </data>
+  <data name="HumanResources" xml:space="preserve">
+    <value>Human Resources</value>
+  </data>
+  <data name="IT" xml:space="preserve">
+    <value>Information Technology (IT)</value>
+  </data>
+  <data name="Legal" xml:space="preserve">
+    <value>Legal</value>
+  </data>
+  <data name="Marketing" xml:space="preserve">
+    <value>Marketing</value>
+  </data>
+  <data name="Medical" xml:space="preserve">
+    <value>Medical</value>
+  </data>
+  <data name="Production" xml:space="preserve">
+    <value>Production</value>
+  </data>
+  <data name="Purchasing" xml:space="preserve">
+    <value>Purchasing</value>
+  </data>
+  <data name="RD" xml:space="preserve">
+    <value>Research &amp; Development (R&amp;D)</value>
+  </data>
+  <data name="Research" xml:space="preserve">
+    <value>Research</value>
+  </data>
+  <data name="RiskSafetyMatters" xml:space="preserve">
+    <value>Risk &amp; Safety Matters</value>
+  </data>
+  <data name="StudentsAffairs" xml:space="preserve">
+    <value>Students Affairs</value>
+  </data>
 </root>
