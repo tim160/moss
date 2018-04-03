@@ -476,8 +476,137 @@ namespace EC.Controllers
             #region Incident types
             if (company_id != 0)
             {
-                List<string> list_types = db.secondary_type_mandatory.Where(t => t.type_id == 1 && t.status_id == 2).Select(item => item.secondary_type_en).ToList();
+                ///List<string> list_types = db.secondary_type_mandatory.Where(t => t.type_id == 1 && t.status_id == 2).Select(item => item.secondary_type_en).ToList();
                 // LocalizationGetter.GetString("Administrative") 
+                List<string> list_types = new List<string>();
+                if (!is_cc)
+                {
+                    list_departments.Add(LocalizationGetter.GetString("AccountingAuditRelated"));
+                    list_departments.Add(LocalizationGetter.GetString("AccountingError"));
+                    list_departments.Add(LocalizationGetter.GetString("AccountingMisrepresentation"));
+                    list_departments.Add(LocalizationGetter.GetString("AuditingMatters"));
+                    list_departments.Add(LocalizationGetter.GetString("BriberyKickbacks"));
+                    list_departments.Add(LocalizationGetter.GetString("Embezzlement"));
+                    list_departments.Add(LocalizationGetter.GetString("FinancialConcerns"));
+                    list_departments.Add(LocalizationGetter.GetString("Falsification"));
+                    list_departments.Add(LocalizationGetter.GetString("MisappropriationFunds"));
+                    list_departments.Add(LocalizationGetter.GetString("HumanResourcesIssues"));
+                    list_departments.Add(LocalizationGetter.GetString("Discrimination"));
+                    list_departments.Add(LocalizationGetter.GetString("DomesticViolence"));
+                    list_departments.Add(LocalizationGetter.GetString("SubstanceAbuse"));
+                    list_departments.Add(LocalizationGetter.GetString("CommunicateNonManagement"));
+                    list_departments.Add(LocalizationGetter.GetString("ComplianceRegulationViolations"));
+                    list_departments.Add(LocalizationGetter.GetString("CorporateScandal"));
+                    list_departments.Add(LocalizationGetter.GetString("Harassment"));
+                    list_departments.Add(LocalizationGetter.GetString("Mistreatment"));
+                    list_departments.Add(LocalizationGetter.GetString("Retaliation"));
+
+                    list_departments.Add(LocalizationGetter.GetString("SexualHarassment"));
+                    list_departments.Add(LocalizationGetter.GetString("ThreatViolence"));
+                    list_departments.Add(LocalizationGetter.GetString("WorkplaceViolence"));
+                    list_departments.Add(LocalizationGetter.GetString("PrivacyIssues"));
+                    list_departments.Add(LocalizationGetter.GetString("AcceptableUseViolations"));
+                    list_departments.Add(LocalizationGetter.GetString("HIPAACompliance"));
+                    list_departments.Add(LocalizationGetter.GetString("IdentityTheft"));
+                    list_departments.Add(LocalizationGetter.GetString("InformationSecurity"));
+                    list_departments.Add(LocalizationGetter.GetString("EthicsViolations"));
+                    list_departments.Add(LocalizationGetter.GetString("CodeEthicsViolation"));
+                    list_departments.Add(LocalizationGetter.GetString("EthicalViolations"));
+                    list_departments.Add(LocalizationGetter.GetString("Misconduct"));
+                    list_departments.Add(LocalizationGetter.GetString("TheftEquipment"));
+
+                    list_departments.Add(LocalizationGetter.GetString("Theft"));
+                    list_departments.Add(LocalizationGetter.GetString("UnfairLaborPractices"));
+                    list_departments.Add(LocalizationGetter.GetString("VendorConcerns"));
+                    list_departments.Add(LocalizationGetter.GetString("WorkplaceSafety"));
+                    list_departments.Add(LocalizationGetter.GetString("EnvironmentalDamage"));
+                    list_departments.Add(LocalizationGetter.GetString("EnvironmentalIssue"));
+                    list_departments.Add(LocalizationGetter.GetString("IndustrialAccidents"));
+
+                    list_departments.Add(LocalizationGetter.GetString("Sabotage"));
+                    list_departments.Add(LocalizationGetter.GetString("SafeDrivingConcerns"));
+                    list_departments.Add(LocalizationGetter.GetString("UnsafeWorkConditions"));
+                    list_departments.Add(LocalizationGetter.GetString("UnusualSuspiciousActivities"));
+                    list_departments.Add(LocalizationGetter.GetString("Vandalism"));
+                    list_departments.Add(LocalizationGetter.GetString("PoorCustomerService"));
+                    list_departments.Add(LocalizationGetter.GetString("CustomerMistreatment"));
+                    list_departments.Add(LocalizationGetter.GetString("EmployeeRelations"));
+                    list_departments.Add(LocalizationGetter.GetString("SecuritiesViolation"));
+                    list_departments.Add(LocalizationGetter.GetString("ShareholderConcerns"));
+
+                }
+                if (is_cc)
+                {
+                    list_departments.Add(LocalizationGetter.GetString("AcademicMisconduct"));
+                    list_departments.Add(LocalizationGetter.GetString("AlcoholDrugAbuse"));
+                    list_departments.Add(LocalizationGetter.GetString("CheatingPlagiarism"));
+                    list_departments.Add(LocalizationGetter.GetString("CredentialMisrepresentation"));
+                    list_departments.Add(LocalizationGetter.GetString("Hazing"));
+                    list_departments.Add(LocalizationGetter.GetString("SexualHarassment"));
+
+                    list_departments.Add(LocalizationGetter.GetString("SpikingDrinks"));
+                    list_departments.Add(LocalizationGetter.GetString("StudentSafety"));
+                    list_departments.Add(LocalizationGetter.GetString("StudentTravel"));
+                    list_departments.Add(LocalizationGetter.GetString("Terrorism"));
+                    list_departments.Add(LocalizationGetter.GetString("AccountingAuditingMatters"));
+                    list_departments.Add(LocalizationGetter.GetString("DonorStewardship"));
+                    list_departments.Add(LocalizationGetter.GetString("FalsificationContracts"));
+                    list_departments.Add(LocalizationGetter.GetString("Records"));
+                    list_departments.Add(LocalizationGetter.GetString("Fraud"));
+
+
+                    list_departments.Add(LocalizationGetter.GetString("ImproperDisclosure"));
+                    list_departments.Add(LocalizationGetter.GetString("ImproperGiving"));
+                    list_departments.Add(LocalizationGetter.GetString("ImproperSupplier"));
+                    list_departments.Add(LocalizationGetter.GetString("TheftEmbezzlement"));
+                    list_departments.Add(LocalizationGetter.GetString("WasteAbuse"));
+                    list_departments.Add(LocalizationGetter.GetString("OtherFinancialMatters"));
+                    list_departments.Add(LocalizationGetter.GetString("FraudulentActivities"));
+                    list_departments.Add(LocalizationGetter.GetString("ImproperGivingGifts"));
+                    list_departments.Add(LocalizationGetter.GetString("InappropriateActivities"));
+
+                    list_departments.Add(LocalizationGetter.GetString("MisuseAssets"));
+                    list_departments.Add(LocalizationGetter.GetString("RecruitingMisconduct"));
+                    list_departments.Add(LocalizationGetter.GetString("ScholarshipFinancial"));
+                    list_departments.Add(LocalizationGetter.GetString("SubstanceAbuse"));
+                    list_departments.Add(LocalizationGetter.GetString("BiasIncidents"));
+                    list_departments.Add(LocalizationGetter.GetString("ConflictInterest"));
+                    list_departments.Add(LocalizationGetter.GetString("DiscriminationHarassment"));
+                    list_departments.Add(LocalizationGetter.GetString("EEOCADA"));
+
+                    list_departments.Add(LocalizationGetter.GetString("EmployeeBenefitsAbuse"));
+                    list_departments.Add(LocalizationGetter.GetString("EmployeeMisconduct"));
+                    list_departments.Add(LocalizationGetter.GetString("Nepotism"));
+                    list_departments.Add(LocalizationGetter.GetString("OffensiveInappropriateCommunication"));
+                    list_departments.Add(LocalizationGetter.GetString("ThreatInappropriate"));
+                    list_departments.Add(LocalizationGetter.GetString("TimeAbuse"));
+                    list_departments.Add(LocalizationGetter.GetString("UnsafeWorkingConditions"));
+                    list_departments.Add(LocalizationGetter.GetString("ViolenceThreat"));
+                    list_departments.Add(LocalizationGetter.GetString("WorkersCompensationDisability"));
+                    list_departments.Add(LocalizationGetter.GetString("BenefitsAbuses"));
+                    list_departments.Add(LocalizationGetter.GetString("DataprivacyIntegrity"));
+                    list_departments.Add(LocalizationGetter.GetString("MaliciousUseTechnology"));
+
+                    list_departments.Add(LocalizationGetter.GetString("SoftwarePiracy"));
+                    list_departments.Add(LocalizationGetter.GetString("Infringement"));
+                    list_departments.Add(LocalizationGetter.GetString("MisuseResources"));
+                    list_departments.Add(LocalizationGetter.GetString("HealthcareFraud"));
+                    list_departments.Add(LocalizationGetter.GetString("HIPAA"));
+                    list_departments.Add(LocalizationGetter.GetString("InsuranceIssues"));
+                    list_departments.Add(LocalizationGetter.GetString("PatientCare"));
+                    list_departments.Add(LocalizationGetter.GetString("PatientAbuse"));
+                    list_departments.Add(LocalizationGetter.GetString("PatientRights"));
+                    list_departments.Add(LocalizationGetter.GetString("ResearchMisconduct"));
+
+                    list_departments.Add(LocalizationGetter.GetString("SponsoredProjects"));
+                    list_departments.Add(LocalizationGetter.GetString("OtherMedicalResearch"));
+                    list_departments.Add(LocalizationGetter.GetString("ConflictInterest"));
+                    list_departments.Add(LocalizationGetter.GetString("DataPrivacy"));
+                    list_departments.Add(LocalizationGetter.GetString("DisclosureConfidential"));
+                    list_departments.Add(LocalizationGetter.GetString("EnvironmentalSafetyMatters"));
+                    list_departments.Add(LocalizationGetter.GetString("HumanAnimalResearch"));
+                    list_departments.Add(LocalizationGetter.GetString("ResearchGrantMisconduct"));
+                }
 
                 foreach (string _types in list_types)
                 {

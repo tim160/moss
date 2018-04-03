@@ -97,6 +97,24 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Academic Misconduct.
+        /// </summary>
+        public static string AcademicMisconduct {
+            get {
+                return ResourceManager.GetString("AcademicMisconduct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Acceptable Use Violations.
+        /// </summary>
+        public static string AcceptableUseViolations {
+            get {
+                return ResourceManager.GetString("AcceptableUseViolations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Accept case.
         /// </summary>
         public static string Acceptcase {
@@ -133,11 +151,47 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accounting and Auditing Matters.
+        /// </summary>
+        public static string AccountingAuditingMatters {
+            get {
+                return ResourceManager.GetString("AccountingAuditingMatters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accounting / Audit Related Concerns.
+        /// </summary>
+        public static string AccountingAuditRelated {
+            get {
+                return ResourceManager.GetString("AccountingAuditRelated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accounting Error.
+        /// </summary>
+        public static string AccountingError {
+            get {
+                return ResourceManager.GetString("AccountingError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Accounting &amp; Finance.
         /// </summary>
         public static string AccountingFinance {
             get {
                 return ResourceManager.GetString("AccountingFinance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accounting Misrepresentation.
+        /// </summary>
+        public static string AccountingMisrepresentation {
+            get {
+                return ResourceManager.GetString("AccountingMisrepresentation", resourceCulture);
             }
         }
         
@@ -448,6 +502,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Alcohol/Drug Abuse.
+        /// </summary>
+        public static string AlcoholDrugAbuse {
+            get {
+                return ResourceManager.GetString("AlcoholDrugAbuse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to All cases.
         /// </summary>
         public static string Allcases {
@@ -727,6 +790,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Auditing Matters.
+        /// </summary>
+        public static string AuditingMatters {
+            get {
+                return ResourceManager.GetString("AuditingMatters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Authorization Code.
         /// </summary>
         public static string AuthCode {
@@ -826,6 +898,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Benefits Abuses.
+        /// </summary>
+        public static string BenefitsAbuses {
+            get {
+                return ResourceManager.GetString("BenefitsAbuses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Be as specific as possible..
         /// </summary>
         public static string Bespecific {
@@ -835,11 +916,29 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bias Incidents.
+        /// </summary>
+        public static string BiasIncidents {
+            get {
+                return ResourceManager.GetString("BiasIncidents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Breach of legal obligation.
         /// </summary>
         public static string BreachofLegalObligations {
             get {
                 return ResourceManager.GetString("BreachofLegalObligations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bribery/Kickbacks.
+        /// </summary>
+        public static string BriberyKickbacks {
+            get {
+                return ResourceManager.GetString("BriberyKickbacks", resourceCulture);
             }
         }
         
@@ -1276,6 +1375,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cheating/Plagiarism.
+        /// </summary>
+        public static string CheatingPlagiarism {
+            get {
+                return ResourceManager.GetString("CheatingPlagiarism", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You can always check this case progress using the following details:.
         /// </summary>
         public static string CheckCaseNumber {
@@ -1389,6 +1497,24 @@ namespace EC.Localization {
         public static string Closedtasks {
             get {
                 return ResourceManager.GetString("Closedtasks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Code of Ethics Violation.
+        /// </summary>
+        public static string CodeEthicsViolation {
+            get {
+                return ResourceManager.GetString("CodeEthicsViolation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Communicate with Non-Management Directors.
+        /// </summary>
+        public static string CommunicateNonManagement {
+            get {
+                return ResourceManager.GetString("CommunicateNonManagement", resourceCulture);
             }
         }
         
@@ -1645,6 +1771,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Compliance and Regulation Violations.
+        /// </summary>
+        public static string ComplianceRegulationViolations {
+            get {
+                return ResourceManager.GetString("ComplianceRegulationViolations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confidential.
         /// </summary>
         public static string Confidential {
@@ -1686,6 +1821,15 @@ namespace EC.Localization {
         public static string ConfirmPassword {
             get {
                 return ResourceManager.GetString("ConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Conflict of Interest.
+        /// </summary>
+        public static string ConflictInterest {
+            get {
+                return ResourceManager.GetString("ConflictInterest", resourceCulture);
             }
         }
         
@@ -1744,6 +1888,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Corporate Scandal.
+        /// </summary>
+        public static string CorporateScandal {
+            get {
+                return ResourceManager.GetString("CorporateScandal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Legal counsel will be invited to this case.
         /// </summary>
         public static string counsel_invited {
@@ -1780,6 +1933,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Credential Misrepresentation.
+        /// </summary>
+        public static string CredentialMisrepresentation {
+            get {
+                return ResourceManager.GetString("CredentialMisrepresentation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Credit Card Number.
         /// </summary>
         public static string CreditCardNumber {
@@ -1812,6 +1974,15 @@ namespace EC.Localization {
         public static string CurrentStatus {
             get {
                 return ResourceManager.GetString("CurrentStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Customer Mistreatment.
+        /// </summary>
+        public static string CustomerMistreatment {
+            get {
+                return ResourceManager.GetString("CustomerMistreatment", resourceCulture);
             }
         }
         
@@ -1857,6 +2028,24 @@ namespace EC.Localization {
         public static string Dashboard {
             get {
                 return ResourceManager.GetString("Dashboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data Privacy.
+        /// </summary>
+        public static string DataPrivacy {
+            get {
+                return ResourceManager.GetString("DataPrivacy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data privacy/Integrity.
+        /// </summary>
+        public static string DataprivacyIntegrity {
+            get {
+                return ResourceManager.GetString("DataprivacyIntegrity", resourceCulture);
             }
         }
         
@@ -2095,11 +2284,56 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disclosure of Confidential Information.
+        /// </summary>
+        public static string DisclosureConfidential {
+            get {
+                return ResourceManager.GetString("DisclosureConfidential", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Discrimination.
+        /// </summary>
+        public static string Discrimination {
+            get {
+                return ResourceManager.GetString("Discrimination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Discrimination or Harassment.
+        /// </summary>
+        public static string DiscriminationHarassment {
+            get {
+                return ResourceManager.GetString("DiscriminationHarassment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Does management know about this incident?.
         /// </summary>
         public static string Doesmanagementknowaboutthisincident {
             get {
                 return ResourceManager.GetString("Doesmanagementknowaboutthisincident", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Domestic Violence.
+        /// </summary>
+        public static string DomesticViolence {
+            get {
+                return ResourceManager.GetString("DomesticViolence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Donor Stewardship.
+        /// </summary>
+        public static string DonorStewardship {
+            get {
+                return ResourceManager.GetString("DonorStewardship", resourceCulture);
             }
         }
         
@@ -2199,6 +2433,15 @@ namespace EC.Localization {
         public static string Edit {
             get {
                 return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EEOC or ADA Matters.
+        /// </summary>
+        public static string EEOCADA {
+            get {
+                return ResourceManager.GetString("EEOCADA", resourceCulture);
             }
         }
         
@@ -2473,6 +2716,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Embezzlement.
+        /// </summary>
+        public static string Embezzlement {
+            get {
+                return ResourceManager.GetString("Embezzlement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Employee.
         /// </summary>
         public static string Employee {
@@ -2536,6 +2788,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Employee Benefits Abuse.
+        /// </summary>
+        public static string EmployeeBenefitsAbuse {
+            get {
+                return ResourceManager.GetString("EmployeeBenefitsAbuse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Employee Confidential.
         /// </summary>
         public static string EmployeeConfidential {
@@ -2559,6 +2820,24 @@ namespace EC.Localization {
         public static string EmployeeConfidentialCaseNumber_CC {
             get {
                 return ResourceManager.GetString("EmployeeConfidentialCaseNumber_CC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Employee Misconduct.
+        /// </summary>
+        public static string EmployeeMisconduct {
+            get {
+                return ResourceManager.GetString("EmployeeMisconduct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Employee Relations.
+        /// </summary>
+        public static string EmployeeRelations {
+            get {
+                return ResourceManager.GetString("EmployeeRelations", resourceCulture);
             }
         }
         
@@ -2617,6 +2896,33 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Environmental Damage.
+        /// </summary>
+        public static string EnvironmentalDamage {
+            get {
+                return ResourceManager.GetString("EnvironmentalDamage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Environmental Issue.
+        /// </summary>
+        public static string EnvironmentalIssue {
+            get {
+                return ResourceManager.GetString("EnvironmentalIssue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Environmental and Safety Matters.
+        /// </summary>
+        public static string EnvironmentalSafetyMatters {
+            get {
+                return ResourceManager.GetString("EnvironmentalSafetyMatters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login / Pass wasn&apos;t saved..
         /// </summary>
         public static string ErrorSavingLoginPass {
@@ -2667,6 +2973,24 @@ namespace EC.Localization {
         public static string Escalationstagemilestones {
             get {
                 return ResourceManager.GetString("Escalationstagemilestones", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ethical Violations.
+        /// </summary>
+        public static string EthicalViolations {
+            get {
+                return ResourceManager.GetString("EthicalViolations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ethics Violations.
+        /// </summary>
+        public static string EthicsViolations {
+            get {
+                return ResourceManager.GetString("EthicsViolations", resourceCulture);
             }
         }
         
@@ -2743,6 +3067,24 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Falsification of Records and Official Documents.
+        /// </summary>
+        public static string Falsification {
+            get {
+                return ResourceManager.GetString("Falsification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Falsification of Contracts, Reports or Records.
+        /// </summary>
+        public static string FalsificationContracts {
+            get {
+                return ResourceManager.GetString("FalsificationContracts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to FAQ.
         /// </summary>
         public static string Faq {
@@ -2775,6 +3117,15 @@ namespace EC.Localization {
         public static string FillTheFollowingFields {
             get {
                 return ResourceManager.GetString("FillTheFollowingFields", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Financial Concerns.
+        /// </summary>
+        public static string FinancialConcerns {
+            get {
+                return ResourceManager.GetString("FinancialConcerns", resourceCulture);
             }
         }
         
@@ -2905,11 +3256,29 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fraud.
+        /// </summary>
+        public static string Fraud {
+            get {
+                return ResourceManager.GetString("Fraud", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fraud, Embezzlement or Theft .
         /// </summary>
         public static string FraudEmbezzlement {
             get {
                 return ResourceManager.GetString("FraudEmbezzlement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fraudulent Activities.
+        /// </summary>
+        public static string FraudulentActivities {
+            get {
+                return ResourceManager.GetString("FraudulentActivities", resourceCulture);
             }
         }
         
@@ -2977,6 +3346,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Harassment.
+        /// </summary>
+        public static string Harassment {
+            get {
+                return ResourceManager.GetString("Harassment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Harassment/ Discrimination.
         /// </summary>
         public static string HarassmentDiscrimination {
@@ -3013,6 +3391,24 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hazing.
+        /// </summary>
+        public static string Hazing {
+            get {
+                return ResourceManager.GetString("Hazing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Healthcare Fraud.
+        /// </summary>
+        public static string HealthcareFraud {
+            get {
+                return ResourceManager.GetString("HealthcareFraud", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hello, user.
         /// </summary>
         public static string Hellouser {
@@ -3040,6 +3436,24 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to HIPAA.
+        /// </summary>
+        public static string HIPAA {
+            get {
+                return ResourceManager.GetString("HIPAA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HIPAA Compliance.
+        /// </summary>
+        public static string HIPAACompliance {
+            get {
+                return ResourceManager.GetString("HIPAACompliance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to History.
         /// </summary>
         public static string History {
@@ -3049,11 +3463,38 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Human or Animal Research.
+        /// </summary>
+        public static string HumanAnimalResearch {
+            get {
+                return ResourceManager.GetString("HumanAnimalResearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Human Resources.
         /// </summary>
         public static string HumanResources {
             get {
                 return ResourceManager.GetString("HumanResources", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Human Resources Issues.
+        /// </summary>
+        public static string HumanResourcesIssues {
+            get {
+                return ResourceManager.GetString("HumanResourcesIssues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Identity Theft.
+        /// </summary>
+        public static string IdentityTheft {
+            get {
+                return ResourceManager.GetString("IdentityTheft", resourceCulture);
             }
         }
         
@@ -3094,6 +3535,42 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Improper Disclosure of Financial Records.
+        /// </summary>
+        public static string ImproperDisclosure {
+            get {
+                return ResourceManager.GetString("ImproperDisclosure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Improper Giving or Receiving of Gifts.
+        /// </summary>
+        public static string ImproperGiving {
+            get {
+                return ResourceManager.GetString("ImproperGiving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Improper Giving or Gifts.
+        /// </summary>
+        public static string ImproperGivingGifts {
+            get {
+                return ResourceManager.GetString("ImproperGivingGifts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Improper Supplier or Contractor Activity.
+        /// </summary>
+        public static string ImproperSupplier {
+            get {
+                return ResourceManager.GetString("ImproperSupplier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to in.
         /// </summary>
         public static string in_ {
@@ -3108,6 +3585,15 @@ namespace EC.Localization {
         public static string Inactive {
             get {
                 return ResourceManager.GetString("Inactive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inappropriate Activities.
+        /// </summary>
+        public static string InappropriateActivities {
+            get {
+                return ResourceManager.GetString("InappropriateActivities", resourceCulture);
             }
         }
         
@@ -3238,6 +3724,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Industrial Accidents.
+        /// </summary>
+        public static string IndustrialAccidents {
+            get {
+                return ResourceManager.GetString("IndustrialAccidents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Industry.
         /// </summary>
         public static string Industry {
@@ -3301,11 +3796,29 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Information Security.
+        /// </summary>
+        public static string InformationSecurity {
+            get {
+                return ResourceManager.GetString("InformationSecurity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Breach of information security.
         /// </summary>
         public static string InformationSecurityBreach {
             get {
                 return ResourceManager.GetString("InformationSecurityBreach", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Infringement.
+        /// </summary>
+        public static string Infringement {
+            get {
+                return ResourceManager.GetString("Infringement", resourceCulture);
             }
         }
         
@@ -3333,6 +3846,15 @@ namespace EC.Localization {
         public static string Instantly {
             get {
                 return ResourceManager.GetString("Instantly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Insurance Issues.
+        /// </summary>
+        public static string InsuranceIssues {
+            get {
+                return ResourceManager.GetString("InsuranceIssues", resourceCulture);
             }
         }
         
@@ -3751,6 +4273,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Malicious/Inappropriate Use of Technology.
+        /// </summary>
+        public static string MaliciousUseTechnology {
+            get {
+                return ResourceManager.GetString("MaliciousUseTechnology", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The management does not know about the incident.
         /// </summary>
         public static string ManagamentIncidentParties {
@@ -4039,6 +4570,51 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Misappropriation of Funds.
+        /// </summary>
+        public static string MisappropriationFunds {
+            get {
+                return ResourceManager.GetString("MisappropriationFunds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Misconduct.
+        /// </summary>
+        public static string Misconduct {
+            get {
+                return ResourceManager.GetString("Misconduct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mistreatment.
+        /// </summary>
+        public static string Mistreatment {
+            get {
+                return ResourceManager.GetString("Mistreatment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Misuse of Assets, Players or Endorsements.
+        /// </summary>
+        public static string MisuseAssets {
+            get {
+                return ResourceManager.GetString("MisuseAssets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Misuse of Resources.
+        /// </summary>
+        public static string MisuseResources {
+            get {
+                return ResourceManager.GetString("MisuseResources", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to MM.
         /// </summary>
         public static string MM {
@@ -4125,6 +4701,15 @@ namespace EC.Localization {
         public static string NARootCauseExplanation {
             get {
                 return ResourceManager.GetString("NARootCauseExplanation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nepotism.
+        /// </summary>
+        public static string Nepotism {
+            get {
+                return ResourceManager.GetString("Nepotism", resourceCulture);
             }
         }
         
@@ -4399,6 +4984,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Offensive or Inappropriate Communication.
+        /// </summary>
+        public static string OffensiveInappropriateCommunication {
+            get {
+                return ResourceManager.GetString("OffensiveInappropriateCommunication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Case administrator excluded at request of reporter.
         /// </summary>
         public static string OfficersExcludedByReporter {
@@ -4480,11 +5074,29 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Other Financial Matters.
+        /// </summary>
+        public static string OtherFinancialMatters {
+            get {
+                return ResourceManager.GetString("OtherFinancialMatters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Other Incident.
         /// </summary>
         public static string OtherIncident {
             get {
                 return ResourceManager.GetString("OtherIncident", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Other Medical Research or Patient Matters.
+        /// </summary>
+        public static string OtherMedicalResearch {
+            get {
+                return ResourceManager.GetString("OtherMedicalResearch", resourceCulture);
             }
         }
         
@@ -4615,6 +5227,33 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Patient Abuse/Physical or Verbal.
+        /// </summary>
+        public static string PatientAbuse {
+            get {
+                return ResourceManager.GetString("PatientAbuse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Patient Care.
+        /// </summary>
+        public static string PatientCare {
+            get {
+                return ResourceManager.GetString("PatientCare", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Patient Rights.
+        /// </summary>
+        public static string PatientRights {
+            get {
+                return ResourceManager.GetString("PatientRights", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Payment.
         /// </summary>
         public static string Payment {
@@ -4732,6 +5371,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Poor Customer Service.
+        /// </summary>
+        public static string PoorCustomerService {
+            get {
+                return ResourceManager.GetString("PoorCustomerService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Poster.
         /// </summary>
         public static string Poster {
@@ -4791,6 +5439,15 @@ namespace EC.Localization {
         public static string PrintReport {
             get {
                 return ResourceManager.GetString("PrintReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Privacy Issues.
+        /// </summary>
+        public static string PrivacyIssues {
+            get {
+                return ResourceManager.GetString("PrivacyIssues", resourceCulture);
             }
         }
         
@@ -4899,6 +5556,24 @@ namespace EC.Localization {
         public static string RecommendSecond2 {
             get {
                 return ResourceManager.GetString("RecommendSecond2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Records.
+        /// </summary>
+        public static string Records {
+            get {
+                return ResourceManager.GetString("Records", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recruiting Misconduct.
+        /// </summary>
+        public static string RecruitingMisconduct {
+            get {
+                return ResourceManager.GetString("RecruitingMisconduct", resourceCulture);
             }
         }
         
@@ -5290,6 +5965,24 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Research Grant Misconduct.
+        /// </summary>
+        public static string ResearchGrantMisconduct {
+            get {
+                return ResourceManager.GetString("ResearchGrantMisconduct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Research Misconduct.
+        /// </summary>
+        public static string ResearchMisconduct {
+            get {
+                return ResourceManager.GetString("ResearchMisconduct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Resolution.
         /// </summary>
         public static string Resolution {
@@ -5367,6 +6060,15 @@ namespace EC.Localization {
         public static string Result {
             get {
                 return ResourceManager.GetString("Result", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retaliation.
+        /// </summary>
+        public static string Retaliation {
+            get {
+                return ResourceManager.GetString("Retaliation", resourceCulture);
             }
         }
         
@@ -5452,6 +6154,24 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sabotage.
+        /// </summary>
+        public static string Sabotage {
+            get {
+                return ResourceManager.GetString("Sabotage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Safe Driving Concerns.
+        /// </summary>
+        public static string SafeDrivingConcerns {
+            get {
+                return ResourceManager.GetString("SafeDrivingConcerns", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sales.
         /// </summary>
         public static string Sales {
@@ -5488,11 +6208,29 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Scholarship/Financial Aid Misconduct.
+        /// </summary>
+        public static string ScholarshipFinancial {
+            get {
+                return ResourceManager.GetString("ScholarshipFinancial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Scope.
         /// </summary>
         public static string Scope {
             get {
                 return ResourceManager.GetString("Scope", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Securities Violation.
+        /// </summary>
+        public static string SecuritiesViolation {
+            get {
+                return ResourceManager.GetString("SecuritiesViolation", resourceCulture);
             }
         }
         
@@ -5686,6 +6424,24 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sexual Harassment.
+        /// </summary>
+        public static string SexualHarassment {
+            get {
+                return ResourceManager.GetString("SexualHarassment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shareholder Concerns.
+        /// </summary>
+        public static string ShareholderConcerns {
+            get {
+                return ResourceManager.GetString("ShareholderConcerns", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Share Name &amp; Contact Info.
         /// </summary>
         public static string ShareNameContact {
@@ -5700,6 +6456,15 @@ namespace EC.Localization {
         public static string SignOffPendingUp {
             get {
                 return ResourceManager.GetString("SignOffPendingUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Software Piracy/Intellectual Property.
+        /// </summary>
+        public static string SoftwarePiracy {
+            get {
+                return ResourceManager.GetString("SoftwarePiracy", resourceCulture);
             }
         }
         
@@ -5740,6 +6505,24 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Spiking Drinks/Rape Drug Abuse.
+        /// </summary>
+        public static string SpikingDrinks {
+            get {
+                return ResourceManager.GetString("SpikingDrinks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sponsored Projects Non-Compliance.
+        /// </summary>
+        public static string SponsoredProjects {
+            get {
+                return ResourceManager.GetString("SponsoredProjects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start.
         /// </summary>
         public static string Start {
@@ -5776,11 +6559,29 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Student Safety.
+        /// </summary>
+        public static string StudentSafety {
+            get {
+                return ResourceManager.GetString("StudentSafety", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Students Affairs.
         /// </summary>
         public static string StudentsAffairs {
             get {
                 return ResourceManager.GetString("StudentsAffairs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Student Travel.
+        /// </summary>
+        public static string StudentTravel {
+            get {
+                return ResourceManager.GetString("StudentTravel", resourceCulture);
             }
         }
         
@@ -5799,6 +6600,15 @@ namespace EC.Localization {
         public static string Subscription {
             get {
                 return ResourceManager.GetString("Subscription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Substance Abuse.
+        /// </summary>
+        public static string SubstanceAbuse {
+            get {
+                return ResourceManager.GetString("SubstanceAbuse", resourceCulture);
             }
         }
         
@@ -5938,6 +6748,42 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Terrorism.
+        /// </summary>
+        public static string Terrorism {
+            get {
+                return ResourceManager.GetString("Terrorism", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Theft.
+        /// </summary>
+        public static string Theft {
+            get {
+                return ResourceManager.GetString("Theft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Theft/Embezzlement.
+        /// </summary>
+        public static string TheftEmbezzlement {
+            get {
+                return ResourceManager.GetString("TheftEmbezzlement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Theft of Equipment and Supplies.
+        /// </summary>
+        public static string TheftEquipment {
+            get {
+                return ResourceManager.GetString("TheftEquipment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The incident happened.
         /// </summary>
         public static string TheIncidentHappened {
@@ -5961,6 +6807,33 @@ namespace EC.Localization {
         public static string ThismediatorsCould {
             get {
                 return ResourceManager.GetString("ThismediatorsCould", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Threat or Inappropriate Supervisor Directive.
+        /// </summary>
+        public static string ThreatInappropriate {
+            get {
+                return ResourceManager.GetString("ThreatInappropriate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Threat of Violence.
+        /// </summary>
+        public static string ThreatViolence {
+            get {
+                return ResourceManager.GetString("ThreatViolence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time Abuse.
+        /// </summary>
+        public static string TimeAbuse {
+            get {
+                return ResourceManager.GetString("TimeAbuse", resourceCulture);
             }
         }
         
@@ -6100,6 +6973,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unfair Labor Practices.
+        /// </summary>
+        public static string UnfairLaborPractices {
+            get {
+                return ResourceManager.GetString("UnfairLaborPractices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unknown.
         /// </summary>
         public static string unknown {
@@ -6141,6 +7023,33 @@ namespace EC.Localization {
         public static string unknown_secondary_type {
             get {
                 return ResourceManager.GetString("unknown_secondary_type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unsafe Work Conditions.
+        /// </summary>
+        public static string UnsafeWorkConditions {
+            get {
+                return ResourceManager.GetString("UnsafeWorkConditions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unsafe Working Conditions.
+        /// </summary>
+        public static string UnsafeWorkingConditions {
+            get {
+                return ResourceManager.GetString("UnsafeWorkingConditions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unusual or Suspicious Activities.
+        /// </summary>
+        public static string UnusualSuspiciousActivities {
+            get {
+                return ResourceManager.GetString("UnusualSuspiciousActivities", resourceCulture);
             }
         }
         
@@ -6226,6 +7135,33 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Vandalism.
+        /// </summary>
+        public static string Vandalism {
+            get {
+                return ResourceManager.GetString("Vandalism", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vendor Concerns.
+        /// </summary>
+        public static string VendorConcerns {
+            get {
+                return ResourceManager.GetString("VendorConcerns", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Violence or Threat.
+        /// </summary>
+        public static string ViolenceThreat {
+            get {
+                return ResourceManager.GetString("ViolenceThreat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Visible to Reporter.
         /// </summary>
         public static string VisibletoReporter {
@@ -6276,6 +7212,15 @@ namespace EC.Localization {
         public static string wasSubmittedSucessfully {
             get {
                 return ResourceManager.GetString("wasSubmittedSucessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waste, Abuse or Misuse of Institution Resources.
+        /// </summary>
+        public static string WasteAbuse {
+            get {
+                return ResourceManager.GetString("WasteAbuse", resourceCulture);
             }
         }
         
@@ -6339,6 +7284,33 @@ namespace EC.Localization {
         public static string WitnessNames {
             get {
                 return ResourceManager.GetString("WitnessNames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Workers Compensation or Disability.
+        /// </summary>
+        public static string WorkersCompensationDisability {
+            get {
+                return ResourceManager.GetString("WorkersCompensationDisability", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Workplace Safety.
+        /// </summary>
+        public static string WorkplaceSafety {
+            get {
+                return ResourceManager.GetString("WorkplaceSafety", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Workplace Violence.
+        /// </summary>
+        public static string WorkplaceViolence {
+            get {
+                return ResourceManager.GetString("WorkplaceViolence", resourceCulture);
             }
         }
         
