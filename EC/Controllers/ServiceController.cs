@@ -50,17 +50,17 @@ namespace EC.Controllers
                     Session["userName"] = "";
                     Session["userId"] = user.id;
 
-                    if (user.role_id == 8)
+                    if (user.role_id == ECLevelConstants.level_informant)
                     {
                         return RedirectToAction("Index", "ReporterDashboard");
                     }
 
-                    if (user.last_login_dt == null && user.role_id != 8)
+                    if (user.last_login_dt == null && user.role_id != ECLevelConstants.level_informant)
                     {
                         return RedirectToAction("Index", "Settings");
                     }
 
-                    if (user.last_login_dt == null && user.role_id != 8)
+                    if (user.role_id == ECLevelConstants.level_supervising_mediator)
                     {
                         return RedirectToAction("Completed", "Cases");
                     }
