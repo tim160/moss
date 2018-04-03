@@ -1985,7 +1985,7 @@ namespace EC.Models
             {
                 // reporter can see only messages with reporter_visible == 1 
                 List<int> reporter_actions_list = db.action.Where(item => (item.reporter_visible == true)).Select(item => item.id).ToList();
-                report_actions = (db.report_log.Where(item => ((item.report_id == report_id) && (item.action_id.HasValue) && (reporter_actions_list.Contains(item.action_id.Value))))).ToList();
+                report_actions = (db.report_log.Where(item => ((item.report_id == report_id) && (item.action_id.HasValue) && (reporter_actions_list.Contains(item.action_id.Value)))).OrderByDescending(dt => dt.created_dt)).ToList();
             }
             else
                 report_actions = (db.report_log.Where(item => (item.report_id == report_id))).ToList();
