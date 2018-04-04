@@ -3,6 +3,8 @@
 @using EC.Models
 @using EC.Models.Database
 @using EC.Models.ECModel
+@using EC.Localization
+
 @model EC.Controllers.ViewModel.ReportSubmit
 @{
     ViewBag.Title = "Report";
@@ -63,11 +65,15 @@
                 dataType: 'json',
                 data: { pass: pass, userId: userId }
             }).done(function(data) {//data from server
-                 alert(data);
+                alert(data);
+                $('.saveChanges').hide();
             }).fail(function (error) {
                 // alert(data);
             });
         };
+        $('.pass').on('change', function () {
+            $('.saveChanges').show();
+        });
     });
 
 </script>
@@ -144,7 +150,7 @@
                 </div>
 
                 <div class="buttonBlock">
-                    <input type="button" class="button saveChanges" value="@GlobalRes.SavePasswordChangeUp ">
+                    <input type="button" class="button saveChanges" style="display: none;" value="@LocalizationGetter.GetString("SaveNewPasswordUp")">
                 </div>
             </div>
 
