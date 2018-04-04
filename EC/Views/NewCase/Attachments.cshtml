@@ -82,7 +82,7 @@
                                             <div class="contentListItem__infoBlock">
                                                 <div class="contentListItem__date">@dth.ConvertDateToShortString(file.upload_dt)</div><!-- /.contentListItem__date -->
                                                 <div class="contentListItem__link">
-                                                    <a href="@Url.Content(file.path_nm)" class="attachLink">download</a>
+                                                    <a href="@Url.Content(file.path_nm)" class="attachLink" download="@file.file_nm">download</a>
                                                 </div><!-- /.contentListItem__link -->
                                             </div><!-- /.contentListItem__infoBlock -->
                                         </div><!-- /.pull-right -->
