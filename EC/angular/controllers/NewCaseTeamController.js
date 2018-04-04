@@ -58,6 +58,13 @@
         $scope.closeBtn = function (item) {
             NewCaseTeamService.post({ removeFromTeam: item.user.id, report_id: $scope.report_id }, function (data) {
                 $scope.refresh(data);
+                if (!data.success) {
+                    $scope.messageModal = {
+                        title: 'Error',
+                        text: data.message,
+                    };
+                    $('#messageModal').modal();
+                }
             });
         };
 

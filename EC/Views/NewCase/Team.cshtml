@@ -17,6 +17,17 @@
 @Html.Partial("~/Views/Shared/Partial/_NewCasesTopMenu.cshtml")
 
 <div class="container mainNavigationTabs__tabContent-container" ng-controller="NewCaseTeamController" ng-cloak>
+    
+    <div id="messageModal" class="modal case-modal">
+        <a href="#" class="closeLink modal-close" rel="modal:close"></a>
+        <div class="case-modal__title">{{messageModal.title}}</div><!-- /.modal-title -->
+
+        <p>{{messageModal.text}}</p>
+        <div class="case-modal__linkBlockBottom clearfix">
+            <a href="#" rel="modal:close" class="case-modal__linkBtn whiteBtn">Close</a>
+        </div><!-- /.case-modal__linkBlockBottom -->
+    </div>
+
     <div id="mainTab-Team" class="mainNavigationTabs__tabContent active">
         <div class="divider p-tb-20"></div>
 

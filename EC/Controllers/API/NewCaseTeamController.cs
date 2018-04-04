@@ -43,7 +43,7 @@ namespace EC.Controllers.API
         }
 
         [HttpGet]
-        public object Get(int id)
+        public object Get(int id, bool success = true, string message = "")
         {
             user user = (user)HttpContext.Current.Session[ECGlobalConstants.CurrentUserMarcker];
 
@@ -61,6 +61,8 @@ namespace EC.Controllers.API
                 mediators_whoHasAccess_toReport = new List<UserAdv>(),
                 available_toAssign_mediators = new List<UserAdv>(),
                 currentInfo = um._user,
+                message = message,
+                success = success
             };
 
             foreach (var item in rm._involved_mediators_user_list.ToList())
@@ -159,6 +161,10 @@ namespace EC.Controllers.API
 
                     userModel.RemoveMediator(filter.RemoveFromTeam.Value, filter.Report_id.Value);
                     glb.UpdateReportLog(user.id, 6, filter.Report_id.Value, _um._user.first_nm + " " + _um._user.last_nm, null, "");
+                }
+                else
+                {
+                    return Get(filter.Report_id.Value, false, "User have a tasks");
                 }
             }
             if (filter.MakeCaseOwner.HasValue)
