@@ -159,7 +159,8 @@ namespace EC.Models
                     {
                         item = new company_root_cases_behavioral
                         {
-                            name_en = newSetting.data.Trim().ToLower(),
+                            //name_en = newSetting.data.Trim().ToLower(),
+                            name_en = newSetting.data.Trim(),
                             name_es = "",
                             name_fr = "",
                             company_id = newSetting.companyId,
