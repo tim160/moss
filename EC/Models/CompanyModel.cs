@@ -565,9 +565,13 @@ namespace EC.Models
             }
             return other;
         }
-        public string getLogoCompany()
+        public string getLogoCompany(int id = 0)
         {
-            return db.company.Where(m => m.id == 2).Select(m => m.path_en).FirstOrDefault();
+            if (id == 0)
+            {
+                return null;
+            }
+            return db.company.Where(m => m.id == id).Select(m => m.path_en).FirstOrDefault();
         }
 
         public List<PosterItem> GetAllPosters()
