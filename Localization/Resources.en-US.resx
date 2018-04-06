@@ -2590,4 +2590,7 @@
   <data name="WorkplaceViolence" xml:space="preserve">
     <value>Workplace Violence</value>
   </data>
+  <data name="Logout2" xml:space="preserve">
+    <value>Log Out</value>
+  </data>
 </root>

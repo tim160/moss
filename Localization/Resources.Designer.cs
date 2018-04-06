@@ -4255,6 +4255,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Log Out.
+        /// </summary>
+        public static string Logout2 {
+            get {
+                return ResourceManager.GetString("Logout2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fill in the following fields and click &quot;Submit&quot; to renew subscription..
         /// </summary>
         public static string MakePamentNotice {
