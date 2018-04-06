@@ -202,7 +202,7 @@
                                     {{report.current_status}}
                                 </div><!-- /.dashboard-col__stage-type -->
                                 <div class="dashboard-col__stage-date dashboard-col__stage-date_red">
-                                    {{report.days_left}} days left
+                                    {{report.days_left}} {{report.days_left == 1 ? ' day left' : ' days left'}}
                                 </div><!-- /.dashboard-col__stage-date -->
                             </div><!-- /.dashboard-col__stage dashboard-colbody clearfix -->
                             <div class="dashboard-col__age dashboard-colbody clearfix">
