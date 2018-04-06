@@ -62,7 +62,7 @@ namespace EC.Controllers
                         return RedirectToAction("Index", "Settings");
                     }
 
-                    if (user.role_id == ECLevelConstants.level_supervising_mediator)
+                    if (user.role_id == ECLevelConstants.level_escalation_mediator)
                     {
                         return RedirectToAction("Completed", "Cases");
                     }
@@ -198,7 +198,7 @@ namespace EC.Controllers
         {
             ViewBag.error = loginModel.setNewPass(email, token, password, confirmPassword);
             ViewBag.redirect = "true";
-            return RedirectToAction("Company", "Login");
+            return RedirectToAction("Login", "Service");// RedirectToAction("Company", "Login");
         }
     }
 }

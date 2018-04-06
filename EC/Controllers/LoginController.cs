@@ -63,6 +63,9 @@ namespace EC.Controllers
         }
         public ActionResult Company()
         {
+
+            return RedirectToAction("Login", "Service");
+            /*
             #region EC-CC Viewbag
             ViewBag.is_cc = is_cc;
             string cc_ext = "";
@@ -73,7 +76,7 @@ namespace EC.Controllers
             ViewBag.LogoPath = DomainUtil.LogoBaseUrl(Request.Url.AbsoluteUri.ToLower());
 
             Session.Clear();
-            return View();
+            return View();*/
         }
 
         public ActionResult ForgetPassword()

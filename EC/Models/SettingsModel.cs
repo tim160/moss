@@ -200,7 +200,7 @@ namespace EC.Models
                     {
                         item = new company_root_cases_external
                         {
-                            name_en = newSetting.data.Trim().ToLower(),
+                            name_en = newSetting.data.Trim(),
                             name_es = "",
                             name_fr = "",
                             company_id = newSetting.companyId,
@@ -240,7 +240,7 @@ namespace EC.Models
                     {
                         item = new company_root_cases_organizational
                         {
-                            name_en = newSetting.data.Trim().ToLower(),
+                            name_en = newSetting.data.Trim(),
                             name_es = "",
                             name_fr = "",
                             company_id = newSetting.companyId,
@@ -279,12 +279,12 @@ namespace EC.Models
                     }
                     oldOutcome.status_id = 2;
                     oldOutcome.company_id = newSetting.companyId;
-                    oldOutcome.outcome_en = newSetting.data.Trim().ToLower();
-                    oldOutcome.outcome_fr = newSetting.data.Trim().ToLower();
-                    oldOutcome.outcome_es = newSetting.data.Trim().ToLower();
-                    oldOutcome.outcome_ru = newSetting.data.Trim().ToLower();
-                    oldOutcome.outcome_ar = newSetting.data.Trim().ToLower();
-                    oldOutcome.outcome_jp = newSetting.data.Trim().ToLower();
+                    oldOutcome.outcome_en = newSetting.data.Trim();
+                    oldOutcome.outcome_fr = newSetting.data.Trim();
+                    oldOutcome.outcome_es = newSetting.data.Trim();
+                    oldOutcome.outcome_ru = newSetting.data.Trim();
+                    oldOutcome.outcome_ar = newSetting.data.Trim();
+                    oldOutcome.outcome_jp = newSetting.data.Trim();
                     oldOutcome.last_update_dt = DateTime.Now;
                     db.company_outcome.Add(oldOutcome);
                     db.SaveChanges();

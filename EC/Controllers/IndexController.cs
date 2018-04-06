@@ -109,7 +109,9 @@ namespace EC.Controllers
                 EcAuthorizedAttribute attr = new EcAuthorizedAttribute();
 
                 ViewBag.newListComp = serializer.Serialize(searchCompanyDto.ToArray());*/
-                return View();
+
+                RedirectToAction("Login", "Service");
+                //return View();
             }
         }
 
@@ -133,15 +135,19 @@ namespace EC.Controllers
             if (is_cc) cc_ext = "_cc";
             ViewBag.cc_extension = cc_ext;
             #endregion
+            return RedirectToAction("Login", "Service");
+           /// ViewBag.LogoPath = DomainUtil.LogoBaseUrl(Request.Url.AbsoluteUri.ToLower());
 
-            ViewBag.LogoPath = DomainUtil.LogoBaseUrl(Request.Url.AbsoluteUri.ToLower());
-
-            return View();
+            ///return View();
         }
 
         public ActionResult Start()
         {
             Session.Clear();
+
+        
+            
+
             #region EC-CC Viewbag
             ViewBag.is_cc = is_cc;
             string cc_ext = "";
