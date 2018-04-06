@@ -19,7 +19,7 @@ namespace EC.Controllers
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Start");
+                return RedirectToAction("Login", "Service");
 
             UserModel um = new UserModel(user.id);
             CompanyModel cm = new CompanyModel(um._user.company_id);
@@ -40,7 +40,7 @@ namespace EC.Controllers
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Start");
+                return RedirectToAction("Login", "Service");
 
             UserModel um = new UserModel(user.id);
             ViewBag.user_id = user.id;
@@ -75,7 +75,7 @@ namespace EC.Controllers
             // to make payment
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Start");
+                return RedirectToAction("Login", "Service");
 
             UserModel um = new UserModel(user.id);
             CompanyModel cm = new CompanyModel(um._user.company_id);

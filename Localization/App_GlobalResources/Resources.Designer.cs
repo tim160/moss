@@ -3265,7 +3265,7 @@ namespace EC.Localization.App_GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Is Case Urgent?.
+        ///   Looks up a localized string similar to Is the situation an emergency?.
         /// </summary>
         internal static string IsCaseUrgent_q {
             get {

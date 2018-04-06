@@ -1163,7 +1163,7 @@
     <value>in</value>
   </data>
   <data name="IsCaseUrgent_q" xml:space="preserve">
-    <value>Is Case Urgent?</value>
+    <value>Is the situation an emergency?</value>
   </data>
   <data name="IsCleryActCrime" xml:space="preserve">
     <value>Is this a Clery Act Crime?</value>

@@ -4003,7 +4003,7 @@ namespace EC.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Is Case Urgent?.
+        ///   Looks up a localized string similar to Is the situation an emergency?.
         /// </summary>
         public static string IsCaseUrgent_q {
             get {
