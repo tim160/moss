@@ -267,7 +267,7 @@ namespace EC.Models
 
                 if (_report != null)
                 {
-                    List<report_department> _c_departments = db.report_department.Where(item => item.report_id == _report.id).ToList();
+                    List<report_department> _c_departments = db.report_department.Where(item => item.report_id == _report.id && item.added_by_reporter != false).ToList();
                     company_department temp_c_dep;
                     foreach (report_department _temp_dep in _c_departments)
                     {
@@ -388,9 +388,9 @@ namespace EC.Models
 
                 if (_report != null)
                 {
-                    if (db.report_secondary_type.Any(t => t.report_id == _report.id))
+                    if (db.report_secondary_type.Any(t => t.report_id == _report.id && t.added_by_reporter != false))
                     {
-                        List<report_secondary_type> _report_secondary_type_list = db.report_secondary_type.Where(t => t.report_id == _report.id).ToList();
+                        List<report_secondary_type> _report_secondary_type_list = db.report_secondary_type.Where(t => t.report_id == _report.id && t.added_by_reporter != false).ToList();
                         foreach (report_secondary_type _report_secondary_type in _report_secondary_type_list)
                         {
                             if (_report_secondary_type.mandatory_secondary_type_id != null)
@@ -1605,7 +1605,7 @@ namespace EC.Models
         {
             get
             {
-                return (db.report_mediator_involved.Where(item => (item.report_id == ID))).ToList();
+                return (db.report_mediator_involved.Where(item => (item.report_id == ID) && item.added_by_reporter != false)).ToList();
             }
         }
         public List<user> _involved_mediators_user_list
@@ -1653,7 +1653,7 @@ namespace EC.Models
         {
             get
             {
-                List<report_non_mediator_involved> result = (db.report_non_mediator_involved.Where(item => (item.report_id == ID))).ToList();
+                List<report_non_mediator_involved> result = (db.report_non_mediator_involved.Where(item => (item.report_id == ID && item.added_by_reporter != false))).ToList();
                 foreach (var item in result)
                 {
                     int temp;

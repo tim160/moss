@@ -52,7 +52,7 @@ namespace EC.Controllers.API
                 incidentDate= rm._incident_date_string,
                 report_by_myself = rm._report.report_by_myself,
                 non_mediator_involved = DB.report_non_mediator_involved
-                    .Where(x => x.report_id == id)
+                    .Where(x => x.report_id == id && x.added_by_reporter != false)
                     .OrderBy(x => x.Title)
                     .ToList()
                     .Select(x => new {
