@@ -568,40 +568,43 @@
         }
 
         function sendMessageSpam(){
-                        $('.markAsSpam').click(function(){
-                            var self = $(this);
-                            var spamMessage = $('.spamMessage textarea').val();
-                            markAsSpam(@Html.Raw(report_id), @Html.Raw(user_id), spamMessage);
+            $('.markAsSpam').click(function(){
+                var self = $(this);
+                var spamMessage = $('.spamMessage textarea').val();
+                markAsSpam(@Html.Raw(report_id), @Html.Raw(user_id), spamMessage);
 
-                                            var str = '@Url.Content("~/Cases/Spam")';
-                                            window.location.href = str;
-                                        });
-                        }
-
-                        function markAsSpam(report_id, user_id, message) {
-                            $.ajax({
-                                method: "POST",
-                                url: "/NewReport/SendSpamMessage",
-                                data: { report_id : report_id, user_id: user_id, spamMessage: message }
-                            }).done(function(data) {//data from server
-                            }).fail(function(error){
-                                console.log(error);
+                                var str = '@Url.Content("~/Cases/Spam")';
+                                window.location.href = str;
                             });
-                        }
+        }
 
-                        $('.acceptNewCase').click(function(){
-                            var self = $(this);
-                            var description = $('.acceptCaseNote textarea').val();
+        function markAsSpam(report_id, user_id, message) {
+            $.ajax({
+                method: "POST",
+                url: "/NewReport/SendSpamMessage",
+                data: { report_id : report_id, user_id: user_id, spamMessage: message }
+            }).done(function(data) {//data from server
+            }).fail(function(error){
+                console.log(error);
+            });
+        }
 
-                            if ($('#OwnerId').find(":selected").hasClass('needquestion')) {
-                                if (confirm('Add mediator to Case?')) {
-                                    reopenOrAcceptCase(@Html.Raw(report_id), @Html.Raw(user_id), description);
-                                }
-                                return;
-                            }
-                            reopenOrAcceptCase(@Html.Raw(report_id), @Html.Raw(user_id), description);
-                        });
+        $('.acceptNewCase').click(function(){
+            var self = $(this);
+            var description = $('.acceptCaseNote textarea').val();
+            if ($('#SeverityId').val() === '1') {
+                $('#SeverityId').addClass('has-error');
+                return;
+            }
 
+            if ($('#OwnerId').find(":selected").hasClass('needquestion')) {
+                if (confirm('Add mediator to Case?')) {
+                    reopenOrAcceptCase(@Html.Raw(report_id), @Html.Raw(user_id), description);
+                }
+                return;
+            }
+            reopenOrAcceptCase(@Html.Raw(report_id), @Html.Raw(user_id), description);
+        });
 
         function reopenOrAcceptCase(report_id, user_id, description) {
             $.ajax({
