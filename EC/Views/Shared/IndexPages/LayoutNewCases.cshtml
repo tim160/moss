@@ -17,9 +17,9 @@
 
     string hrefURL_1 = Request.Url.AbsoluteUri.ToLower();
 
-    EC.Models.UserModel um = new EC.Models.UserModel(user_id);
-    EC.Models.CompanyModel cm = new EC.Models.CompanyModel(um._user.company_id);
-    EC.Models.ReportModel rm = new EC.Models.ReportModel();
+    UserModel um = new UserModel(user_id);
+    CompanyModel cm = new CompanyModel(um._user.company_id);
+    ReportModel rm = new ReportModel();
 
 
     var unread_report_number = um.UnreadReport(0, 0).Count;
@@ -262,7 +262,7 @@
                                 <div class="userNavigation__name">@(um._user != null ? um._user.first_nm : "")</div>
                                 <div class="userNavigation__surname">@(um._user != null ? um._user.last_nm : "")</div>
                             *@
-                            @if (cm.getLogoCompany(_user.company_id) != null)
+                            @if (_user!= null && cm.getLogoCompany(_user.company_id) != null)
                             {
                                 <img src="@Url.Content(cm.getLogoCompany(_user.company_id))" style="max-height: 44px;" alt="CompanyLogo" />
                             }

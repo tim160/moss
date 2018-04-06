@@ -3364,7 +3364,7 @@ namespace EC.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Has case been reported to anyone outside the organization?.
+        ///   Looks up a localized string similar to Has the incident been reported to anyone outside the organization?.
         /// </summary>
         public static string Hascasereportedoutside {
             get {
@@ -4039,7 +4039,7 @@ namespace EC.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Is Report Urgent?.
+        ///   Looks up a localized string similar to Is the situation an emergency?.
         /// </summary>
         public static string IsReportUrgent {
             get {
@@ -4048,7 +4048,7 @@ namespace EC.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Is Report Urgent?.
+        ///   Looks up a localized string similar to Is the situation an emergency?.
         /// </summary>
         public static string IsReportUrgent_q {
             get {
@@ -4057,7 +4057,7 @@ namespace EC.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Is report urgent?.
+        ///   Looks up a localized string similar to Is the situation an emergency?.
         /// </summary>
         public static string IsreporturgentLow {
             get {
@@ -7414,7 +7414,7 @@ namespace EC.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are reporting:.
+        ///   Looks up a localized string similar to You are reporting the following Incident Type(s):.
         /// </summary>
         public static string YouReport {
             get {

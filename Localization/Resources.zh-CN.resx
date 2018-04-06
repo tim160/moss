@@ -280,7 +280,7 @@
     <value>Is the incident ongoing?</value>
   </data>
   <data name="IsReportUrgent" xml:space="preserve">
-    <value>Is Report Urgent?</value>
+    <value>Is the situation an emergency?</value>
   </data>
   <data name="Languge" xml:space="preserve">
     <value>Language</value>
@@ -430,7 +430,7 @@
     <value>Email address</value>
   </data>
   <data name="YouReport" xml:space="preserve">
-    <value>You are reporting:</value>
+    <value>You are reporting the following Incident Type(s):</value>
   </data>
   <data name="YourName" xml:space="preserve">
     <value>First Name</value>

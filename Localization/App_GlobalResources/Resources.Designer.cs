@@ -2806,7 +2806,7 @@ namespace EC.Localization.App_GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Has case been reported to anyone outside the organization?.
+        ///   Looks up a localized string similar to Has the incident been reported to anyone outside the organization?.
         /// </summary>
         internal static string Hascasereportedoutside {
             get {
@@ -3301,7 +3301,7 @@ namespace EC.Localization.App_GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Is Report Urgent?.
+        ///   Looks up a localized string similar to Is the situation an emergency?.
         /// </summary>
         internal static string IsReportUrgent {
             get {
@@ -3310,7 +3310,7 @@ namespace EC.Localization.App_GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Is Report Urgent?.
+        ///   Looks up a localized string similar to Is the situation an emergency?.
         /// </summary>
         internal static string IsReportUrgent_q {
             get {
@@ -5965,7 +5965,7 @@ namespace EC.Localization.App_GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are reporting:.
+        ///   Looks up a localized string similar to You are reporting the following Incident Type(s):.
         /// </summary>
         internal static string YouReport {
             get {

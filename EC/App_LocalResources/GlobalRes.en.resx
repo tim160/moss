@@ -1013,7 +1013,7 @@
     <value>Harassment/ Discrimination</value>
   </data>
   <data name="Hascasereportedoutside" xml:space="preserve">
-    <value>Has case been reported to anyone outside the organization?</value>
+    <value>Has the incident been reported to anyone outside the organization?</value>
   </data>
   <data name="Hascasereportedoutside_CC" xml:space="preserve">
     <value>Has case been reported to anyone outside the educational institution?</value>
@@ -1175,10 +1175,10 @@
     <value>Is the incident ongoing</value>
   </data>
   <data name="IsReportUrgent" xml:space="preserve">
-    <value>Is Report Urgent?</value>
+    <value>Is the situation an emergency?</value>
   </data>
   <data name="IsReportUrgent_q" xml:space="preserve">
-    <value>Is Report Urgent?</value>
+    <value>Is the situation an emergency?</value>
   </data>
   <data name="Itemss" xml:space="preserve">
     <value>{0} Item(s)</value>
@@ -2057,7 +2057,7 @@
     <value>Email address</value>
   </data>
   <data name="YouReport" xml:space="preserve">
-    <value>You are reporting:</value>
+    <value>You are reporting the following Incident Type(s):</value>
   </data>
   <data name="YourName" xml:space="preserve">
     <value>First Name</value>
