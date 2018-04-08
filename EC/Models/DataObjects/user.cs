@@ -43,8 +43,8 @@ namespace EC.Models.Database
         return department_nm.Trim();
       }
     }
-
-    public int _reporter_report_id
+        
+ /*   public int _reporter_report_id
     {
       get
       {
@@ -61,7 +61,7 @@ namespace EC.Models.Database
 
         return report_id;
       }
-    }
+    }*/
 
     public string _photo_path_string(int param)
     {
