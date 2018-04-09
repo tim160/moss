@@ -94,7 +94,7 @@ namespace EC.Models.ViewModel
             this.previous_investigation_status_number = 0;
 
             this.report_id = rm._report.id;
-            this.case_dt = rm._incident_date_string_month_long;
+            this.case_dt = rm._incident_date_string;
             this.reported_dt = rm._reported_date_string;
             this.case_number = rm._report.display_name;
             this.investigation_status_number = rm._investigation_status;

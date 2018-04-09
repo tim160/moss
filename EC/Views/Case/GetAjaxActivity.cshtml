@@ -44,7 +44,7 @@
         @foreach (report_log _log in actions_log)
         {
             _user = um.GetById(_log.user_id);
-            _month_name = m_DateTimeHelper.GetShortMonth(_log.created_dt.Month);
+            _month_name = m_DateTimeHelper.GetFullMonth(_log.created_dt.Month);
             _action = glb.GetActionById(_log.action_id.Value);
             _second_name = "";
             _string_to_add = "";

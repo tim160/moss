@@ -124,7 +124,7 @@
                                 <div class="date">
                                     @if (_task._task.completed_on.HasValue)
                                     {
-                                        @m_DateTimeHelper.ConvertDateToShortString(_task._task.completed_on.Value)
+                                        @m_DateTimeHelper.ConvertDateToLongMonthString(_task._task.completed_on.Value)
                                     }
                                 </div>
                                 <div class="info @_nameBlockShow">
@@ -215,7 +215,7 @@
                                             <div class="date">
                                                 @if (tsk._task.completed_on.HasValue)
                                                 {
-                                                    @m_DateTimeHelper.ConvertDateToShortString(tsk._task.completed_on.Value)
+                                                    @m_DateTimeHelper.ConvertDateToLongMonthString(tsk._task.completed_on.Value)
                                                 }
                                             </div>
                                             <div class="info @_nameBlockShow">

@@ -287,7 +287,7 @@
                                         {
                                             @last_message.MessagePoster
                                         }
-                                        <div class="right textRight">@m_DateTimeHelper.ConvertDateToShortString(last_message._message.created_dt.Value)</div>
+                                        <div class="right textRight">@m_DateTimeHelper.ConvertDateToLongMonthString(last_message._message.created_dt.Value)</div>
                                     </div>
                                     <div class="beginMessage"> @last_message.MessageBody</div>
                                 </div>
@@ -454,7 +454,7 @@
                                     <div class="textRight">
                                         <div class="title">@GlobalRes.Spam</div>
                                         <div class="textInfo">
-                                            <p class="headerTitle">@temp_um._user.first_nm @temp_um._user.last_nm, @m_DateTimeHelper.ConvertDateToShortString(ris.created_date):</p>
+                                            <p class="headerTitle">@temp_um._user.first_nm @temp_um._user.last_nm, @m_DateTimeHelper.ConvertDateToLongMonthString(ris.created_date):</p>
                                             <p class="textAll">
                                                 @ris.description
                                             </p>

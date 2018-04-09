@@ -41,7 +41,7 @@ namespace EC.Models.ECModel
             {
                 if (TaskDueDate.HasValue)
                 {
-                    return m_DateTimeHelper.ConvertDateToShortString(TaskDueDate.Value);
+                    return m_DateTimeHelper.ConvertDateToLongMonthString(TaskDueDate.Value);
                 }
                 else
                     return "";

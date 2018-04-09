@@ -85,8 +85,8 @@ namespace EC.Models.ViewModel
             vm_message.created_dt = "";
             if (_message.created_dt.HasValue)
             {
-                _month_name = m_DateTimeHelper.GetShortMonth(_message.created_dt.Value.Month);
-                vm_message.created_dt = _message.created_dt.Value.Day.ToString() + " " + _month_name;
+                _month_name = m_DateTimeHelper.GetFullMonth(_message.created_dt.Value.Month);
+                vm_message.created_dt = _month_name + " " + _message.created_dt.Value.Day.ToString();
             }
             #endregion
 

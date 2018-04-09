@@ -57,6 +57,11 @@ namespace EC.Controllers
                         return RedirectToAction("Index", "ReporterDashboard");
                     }
 
+                    if (returnUrl != null)
+                    {
+                        return Redirect(returnUrl);
+                    }
+
                     if (user.last_login_dt == null && user.role_id != ECLevelConstants.level_informant)
                     {
                         return RedirectToAction("Index", "Settings");
@@ -65,11 +70,6 @@ namespace EC.Controllers
                     if (user.role_id == ECLevelConstants.level_escalation_mediator)
                     {
                         return RedirectToAction("Completed", "Cases");
-                    }
-
-                    if (returnUrl != null)
-                    {
-                        return Redirect(returnUrl);
                     }
                     
                     return RedirectToAction("Index", "Cases");

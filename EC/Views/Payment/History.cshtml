@@ -72,7 +72,7 @@
                                 <p class="text"><a href="/Payment/Receipt/@_payment.id">@StringUtil.ConvertDecimalToStringAmount(_payment.amount)</a></p>
                             </div>
                             <div class="blockDate">
-                                <p>@m_DateTimeHelper.GetShortMonth(_payment.payment_date.Month) @_payment.payment_date.Day, @_payment.payment_date.Year</p>
+                                <p>@m_DateTimeHelper.GetFullMonth(_payment.payment_date.Month) @_payment.payment_date.Day, @_payment.payment_date.Year</p>
                             </div>
                         </div>
                     </div>
@@ -107,7 +107,7 @@
                             @*<p class="text"><a href="/Payment/Receipt/@_payment.id">@StringUtil.ConvertDecimalToStringAmount(_payment.amount)</a></p>*@
                         </div>
                         <div class="blockDate">
-                            <p>@m_DateTimeHelper.GetShortMonth(dt_next_payment.Month) @dt_next_payment.Day, @dt_next_payment.Year</p>
+                            <p>@m_DateTimeHelper.GetFullMonth(dt_next_payment.Month) @dt_next_payment.Day, @dt_next_payment.Year</p>
                         </div>
                     </div>
 

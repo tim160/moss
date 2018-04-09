@@ -33,7 +33,7 @@
                 _user = um.GetById(_log.user_id);
                 _sender_name = "";
                 _sender_title = "";
-                _month_name = m_DateTimeHelper.GetShortMonth(_log.created_dt.Month);
+                _month_name = m_DateTimeHelper.GetFullMonth(_log.created_dt.Month);
 
                 if (_log.user_id == user_id)
                 {
