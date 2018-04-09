@@ -2590,4 +2590,8 @@
   <data name="Logout2" xml:space="preserve">
     <value>Log Out</value>
   </data>
+  <data name="WillSendLogin" xml:space="preserve">
+    <value>We will send your login name and password by email. You can change your password in the dashboard but, for security reasons, we do not allow users to change their assigned login name.
+                            We suggest recording your login name and password now as an extra precaution.</value>
+  </data>
 </root>

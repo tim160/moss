@@ -7261,6 +7261,16 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to We will send your login name and password by email. You can change your password in the dashboard but, for security reasons, we do not allow users to change their assigned login name.
+        ///                            We suggest recording your login name and password now as an extra precaution..
+        /// </summary>
+        public static string WillSendLogin {
+            get {
+                return ResourceManager.GetString("WillSendLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Witness.
         /// </summary>
         public static string Witness {

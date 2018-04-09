@@ -99,44 +99,49 @@
                             ?
                             <div class="hoverElement">
                                 <div class="triangleHover position"></div>
-                                <div class="spec position">
-                                    <table>
-                                        <tr>
-                                            <td>User Permissions:</td>
-                                            <td>Change Settings</td>
-                                            <td>Sign-Off Case</td>
-                                            <td>All Cases Access</td>
-                                            <td>Case Specific Access</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Platform Manager</td>
-                                            <td><div class="radio"></div></td>
-                                            <td><div class="radio"></div></td>
-                                            <td><div class="radio"></div></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Case Investigator</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td><div class="radio"></div> </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Case Reviewer</td>
-                                            <td></td>
-                                            <td><div class="radio"></div></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    </table>
-                                    @*<ul>
-                                            <li>A <strong>Case Investigator</strong> is assigned to a specific case.</li>
-                                            <li>A <strong>Platform Manager</strong> is responsible for and manages the Employee Confidential system and assigns all the cases (typically an HR manager).</li>
-                                            <li>A <strong>Case Reviewer</strong> handles only escalation issues and signs off on case resolutions and closure applications.</li>
-                                        </ul>*@
-                                </div>
+                                
+
+                            <div class="spec position">
+                                <br />
+                                <strong>PERMISSIONS</strong><br /><br />
+                                @LocalizationGetter.GetString("AdditionalPermissionsExplanations")<br /><br /><br />
+                                <table>
+                                    <tr>
+                                        <td>User Permissions:</td>
+                                        <td>Change Settings</td>
+                                        <td>Sign-Off Case</td>
+                                        <td>All Cases Access</td>
+                                        <td>Case Specific Access</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Platform Manager</td>
+                                        <td><div class="radio"></div></td>
+                                        <td><div class="radio"></div></td>
+                                        <td><div class="radio"></div></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Case Investigator</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><div class="radio"></div> </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Case Reviewer</td>
+                                        <td></td>
+                                        <td><div class="radio"></div></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                                @*<ul>
+                                        <li>A <strong>Case Investigator</strong> is assigned to a specific case.</li>
+                                        <li>A <strong>Platform Manager</strong> is responsible for and manages the Employee Confidential system and assigns all the cases (typically an HR manager).</li>
+                                        <li>A <strong>Case Reviewer</strong> handles only escalation issues and signs off on case resolutions and closure applications.</li>
+                                    </ul>*@
                             </div>
+                        </div>
                         </div>
                     </div>
 

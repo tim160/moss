@@ -3,6 +3,7 @@
 @using EC.Models.Database;
 @using EC.App_LocalResources;
 @using EC.Common.Util;
+@using EC.Localization;
 @{
     // @Styles.Render("~/Content/Styles");
     <link rel="stylesheet" type="text/css" href="/Content/styleReportDashboard.css">
@@ -86,18 +87,20 @@
                     </div>
                 }
                 <div class="blockPersonalSettings">
-                    <p>
-                        We will send your login name and password by email. You can change your password in the dashboard but, for security reasons, we do not allow users to change their assigned login name.
-                        We suggest recording your login name and password now as an extra precaution.
-                    </p>
-                </div>
-                <div class="blockUpdateProfile">
-                    <div class="updateProfileBtn">
-                        <input type="submit" class="greenButton" value="@redirect_string" />
-                        <span style="display: none;">@redirect_string</span>
+                    <div class="title">
+                        <p style="padding-left: 38px">
+                            @LocalizationGetter.GetString("WillSendLogin")
+                            
+                        </p>
+                    </div>
+               </div>
+                    <div class="blockUpdateProfile">
+                        <div class="updateProfileBtn">
+                            <input type="submit" class="greenButton" value="@redirect_string" />
+                            <span style="display: none;">@redirect_string</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
         </div>
 
