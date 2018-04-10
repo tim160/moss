@@ -86,7 +86,11 @@ namespace EC.Controllers.API
                         };
                     }).ToList(),
 
-                Users = DB.user.Where(x => userIds.Contains(x.id)).ToList(),
+                Users = DB.user
+                    .AsNoTracking()
+                    .Where(x => userIds.Contains(x.id))
+                    .ToList(),
+
                 UserIds = userIds,
 
                 Counts = new

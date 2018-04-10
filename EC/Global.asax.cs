@@ -31,6 +31,7 @@ namespace EC
             JsonConvert.DefaultSettings = () => new JsonSerializerSettings
             {
                 ContractResolver = new CustomContractResolver(),
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
             };
         }
 
