@@ -279,7 +279,9 @@ namespace EC.Controllers
                 };
             }
 
-            UserModel um = new UserModel(user.id);
+            //UserModel um = new UserModel(user.id);
+            UserModel um = new UserModel(id); //Selected user
+
             CompanyModel cm = new CompanyModel(um._user.company_id);
 
             var folder = Server.MapPath(String.Format("~/Upload/Company/{0}/users", cm._company.guid));
@@ -287,11 +289,11 @@ namespace EC.Controllers
             {
                 System.IO.Directory.CreateDirectory(folder);
             }
-            var file = String.Format("{0}\\{1}{2}", folder, user.guid, fi.Extension);
+            var file = String.Format("{0}\\{1}{2}", folder, um._user.guid, fi.Extension);
             _file.SaveAs(file);
 
             var dbUser = db.user.FirstOrDefault(x => x.id == id);
-            var url = String.Format("~/Upload/Company/{0}/users/{1}{2}", cm._company.guid, user.guid, fi.Extension);
+            var url = String.Format("~/Upload/Company/{0}/users/{1}{2}", cm._company.guid, um._user.guid, fi.Extension);
             dbUser.photo_path = url;
             db.SaveChanges();
 
