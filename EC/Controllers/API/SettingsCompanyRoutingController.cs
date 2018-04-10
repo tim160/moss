@@ -134,13 +134,17 @@ namespace EC.Controllers.API
             {
                 types = types,
                 departments = departments,
-                users = cm.AllMediators(user.company_id, true, null),
+                users = cm.AllMediators(user.company_id, true, null).Select(x => new {
+                    id = x.id,
+                    first_nm = x.first_nm,
+                    last_nm = x.last_nm,
+                }),
                 scopes = scopes,
                 items = items,
                 files = files,
                 locations = locations,
                 locationItems = locationItems,
-        };
+            };
             return ResponseObject2Json(m);
         }
 
