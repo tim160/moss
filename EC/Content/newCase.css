@@ -3037,7 +3037,6 @@ input.personDataTextBox{
 
 		.dashboard-col__stage.dashboard-colbody{
 			display: flex;
-			text-align: center;
 			flex-wrap: wrap;
 		}
 			.dashboard-col__stage-type{
@@ -3046,6 +3045,7 @@ input.personDataTextBox{
 				color: #aeb5b7;
 				text-transform: uppercase;
 				align-self: center;
+				width: 100%;
 			}
 			.dashboard-col__stage-date{
 				font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
@@ -3054,9 +3054,11 @@ input.personDataTextBox{
 			}
 				.dashboard-col__stage-date_green{
 					color: #05b5a2;
+					width: 100%;
 				}
 				.dashboard-col__stage-date_red{
 					color: #ee5a36;
+					width: 100%;
 				}
 
 		.dashboard-col__age.dashboard-colbody{}
@@ -3067,7 +3069,7 @@ input.personDataTextBox{
 
 		.dashboard-col__incidentType.dashboard-colbody{
 			display: flex;
-    	align-items: center;
+			align-items: center;
 		}
 			.dashboard-col__incidentType-text{
 				font-size: 16px;
@@ -3075,8 +3077,8 @@ input.personDataTextBox{
 			}
 		
 		.dashboard-col__location.dashboard-colbody{
-			display: flex;
-    	align-items: center;
+				display: flex;
+				align-items: center;
 		}
 			.dashboard-col__location-text{
 				font-size: 14px;
@@ -3106,8 +3108,8 @@ input.personDataTextBox{
 		.dashboard-col__team.dashboard-colbody{}
 		.dashboard-col__alert.dashboard-colbody{
 			display: flex;
-    	align-items: center;
-    	justify-content: center;
+			align-items: center;
+			justify-content: center;
 		}
 .team-list{
 	display: block;
