@@ -21,30 +21,26 @@
 @Html.Hidden("is_cc", is_cc)
 
 <div class="container mainNavigationTabs__tabContent-container">
-    <div id="mainTab-1" class="mainNavigationTabs__tabContent ">
-    </div>
-    <div id="mainTab-2" class="mainNavigationTabs__tabContent active">
-
-        <div class="subNavigationTabs clearfix">
-            <ul class="subNavigationTabs__tabs-ul clearfix">
-                <li class="subNavigationTabs__tab-link" data-tab="subTab-1">
-                    <a href="@Url.Action("InvestigationNotes", new { report_id = report_id})">
-                        <div class="subNavigationTabs__tab-name">General information</div>
-                    </a>
-                </li>
-                <li class="subNavigationTabs__tab-link active" data-tab="subTab-2">
-                    <a href="@Url.Action("CaseClosureReport", new { report_id = report_id})">
-                        <div class="subNavigationTabs__tab-name">Case Closure Report</div>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div id="mainTab-3" class="mainNavigationTabs__tabContent">
-    </div>
-    <div id="mainTab-4" class="mainNavigationTabs__tabContent">
-    </div>
-    <div id="mainTab-5" class="mainNavigationTabs__tabContent">
+    <div class="subNavigationTabs clearfix">
+        <ul class="subNavigationTabs__tabs-ul clearfix">
+            <li class="subNavigationTabs__tab-link" data-tab="subTab-1">
+                <a href="@Url.Action("InvestigationNotes", new { report_id = report_id})">
+                    <div class="subNavigationTabs__tab-name">General information</div>
+                </a>
+            </li>
+            <li class="subNavigationTabs__tab-link active" data-tab="subTab-2">
+                <a href="@Url.Action("CaseClosureReport", new { report_id = report_id})">
+                    <div class="subNavigationTabs__tab-name">Case Closure Report</div>
+                </a>
+            </li>
+        </ul>
+        <ul class="mainNavigationTabs__rightLinks-ul clearfix">
+            <li class="subNavigationTabs__tab-link">
+                <a href="#">
+                    <img style="height: 74px;" src="~/Content/img/pdf.png" />
+                </a>
+            </li>
+        </ul>
     </div>
 </div>
 
