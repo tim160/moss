@@ -69,9 +69,9 @@ namespace EC.Controllers
 
                     if (user.role_id == ECLevelConstants.level_escalation_mediator)
                     {
-                        return RedirectToAction("Completed", "Cases");
+                        return RedirectToAction("Index", "Cases", new { mode = "completed" });
                     }
-                    
+
                     return RedirectToAction("Index", "Cases");
                 }
             }
