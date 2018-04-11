@@ -290,6 +290,25 @@ namespace EC.Controllers
             return View();
         }
 
+        public ActionResult AttachmentDelete(int id, int report_id)
+        {
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            if (user == null || user.id == 0)
+                return RedirectToAction("Index", "Account");
+
+            var att = db.attachment.FirstOrDefault(x => x.id == id && x.report_id == report_id);
+            if (att != null)
+            {
+                if (att.user_id == user.id)
+                {
+                    db.attachment.Remove(att);
+                    db.SaveChanges();
+                }
+            }
+
+            return RedirectToAction("Attachments", new { report_id  = report_id });
+        }
+
         [HttpPost]
         public ActionResult Attachments(int report_id, string mode, string type)
         {

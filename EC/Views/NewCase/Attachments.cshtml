@@ -130,6 +130,15 @@
                                 <div class="contentListItem__link">
                                     <a href="@attachment.path_nm" class="attachLink" download="@attachment.file_nm">download</a>
                                 </div><!-- /.contentListItem__link -->
+                                <div>
+                                @if (attachment.user_id == user_id)
+                                {
+                                    using (Html.BeginForm("AttachmentDelete", null, new { id = attachment.id, report_id }, FormMethod.Post, null))
+                                    {
+                                        <button type="submit">X</button>
+                                    }
+                                }
+                                </div>
                             </div><!-- /.contentListItem__infoBlock -->
                         </div><!-- /.pull-right -->
                     </div><!-- /.dragDrop-contentListItem -->
