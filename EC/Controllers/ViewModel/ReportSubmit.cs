@@ -239,7 +239,10 @@ namespace EC.Controllers.ViewModel
             for(int i=0; i< personRoles.Count; i++)
             {
                 role_in_report nameRole = roleInReport.Where(m => m.id == personRoles[i]).FirstOrDefault();
-                personRole.Add(nameRole.role_en);
+                if (nameRole != null)
+                {
+                    personRole.Add(nameRole.role_en);
+                }
             }
         }
     }

@@ -1,4 +1,6 @@
 ﻿@using EC.App_LocalResources;
+@using EC.Models;
+
 @{
 
     bool? is_cc = ViewBag.is_cc;
@@ -62,7 +64,7 @@
 
             EC.Models.Database.attachment _attachment;
 
-            string _logo = _company.path_en;
+            string _logo = cm.getLogoCompany(company_id);
             if (_logo.Trim().Length == 0)
             {
                 _logo = "http://report.employeeconfidential.com/Content/img/secondLogo.jpg";

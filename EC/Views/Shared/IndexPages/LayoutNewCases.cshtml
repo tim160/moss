@@ -262,9 +262,13 @@
                                 <div class="userNavigation__name">@(um._user != null ? um._user.first_nm : "")</div>
                                 <div class="userNavigation__surname">@(um._user != null ? um._user.last_nm : "")</div>
                             *@
-                            @if (_user!= null && cm.getLogoCompany(_user.company_id) != null)
+                            @if (_user!= null)
                             {
-                                <img src="@Url.Content(cm.getLogoCompany(_user.company_id))" style="max-height: 44px;" alt="CompanyLogo" />
+                                var logo = cm.getLogoCompany(_user.company_id);
+                                if (!String.IsNullOrEmpty(logo))
+                                {
+                                    <img src="@Url.Content(cm.getLogoCompany(_user.company_id))" style="max-height: 44px;" alt="CompanyLogo" />
+                                }
                             }
                         </div>
                         <div class="userNavigation__logo">
