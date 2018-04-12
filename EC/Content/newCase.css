@@ -1076,6 +1076,9 @@ header.header{
 
 /*----------------mainNavigationTabs__tabContent-------------------*/
 
+.mainNavigationTabs__tabContent *{
+	box-sizing: border-box;
+}
 .mainNavigationTabs__tabContent-container{
 	background-color: #e5ebeb;
 	display: block;
@@ -1826,6 +1829,7 @@ input.personDataTextBox{
 						font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 						font-size: 18px;
 						line-height: 30px;
+						min-width: 140px;
 					}
 					.breadcrumbs-fullInfo__currentPegeContent-timeText{
 						position: absolute;
@@ -2089,6 +2093,9 @@ input.personDataTextBox{
 		display: block;
 		background-color: #ccc;
 	}*/
+	.profileImg__status{
+		box-sizing: border-box;
+	}
 	.profileImg__status.online{
 		background-color: #05b5a2;
 		position: absolute;
@@ -2906,8 +2913,13 @@ input.personDataTextBox{
 			padding-left: 15px;
 		}
 
+		.dashboard-col__severity{
+			width: 7%;
+		}
+		.dashboard-col__severity.dashboard-colHeader{}
+
 		.dashboard-col__stage{
-			width: 9%;
+			width: 10%;
 		}
 		.dashboard-col__stage.dashboard-colHeader{}
 
@@ -2917,12 +2929,12 @@ input.personDataTextBox{
 		.dashboard-col__age.dashboard-colHeader{}
 
 		.dashboard-col__incidentType{
-			width: 22%;
+			width: 18%;
 		}
 		.dashboard-col__incidentType.dashboard-colHeader{}
 
 		.dashboard-col__location{
-			width: 10%;
+			width: 9%;
 		}
 		.dashboard-col__location.dashboard-colHeader{}
 
@@ -2932,14 +2944,14 @@ input.personDataTextBox{
 		.dashboard-col__reportDate.dashboard-colHeader{}
 
 		.dashboard-col__messages{
-			width: 7%;
+			width: 6%;
 		}
 		.dashboard-col__messages.dashboard-colHeader{
 			text-align: center;
 		}
 		
 		.dashboard-col__tasks{
-			width: 7%;
+			width: 5%;
 		}
 		.dashboard-col__tasks.dashboard-colHeader{
 			text-align: center;
@@ -2965,7 +2977,6 @@ input.personDataTextBox{
 		padding: 10px 0;
 		cursor: pointer;
 		display: block;
-		/*height: 80px;*/
 	}
 	.dashboard-rowbody:after{
 		content: '';
@@ -3009,7 +3020,7 @@ input.personDataTextBox{
 	background-color: #c6c967 ;
 }
 		.dashboard-colbody{
-			font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+			font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 			font-size: 12px;
 			color: #3c3e3f;
 			float: left;
@@ -3019,8 +3030,7 @@ input.personDataTextBox{
 			white-space: nowrap;
 			text-overflow: ellipsis;
 			cursor: pointer;
-			/*border-right: 1px solid #000;*/
-			height: 60px;
+			min-height: 60px;
 			vertical-align: middle;
 			display: block;
 		}
@@ -3033,13 +3043,39 @@ input.personDataTextBox{
 				vertical-align: middle;
 				padding-left: 15px;
 			}
+		
+		.dashboard-col__severity.dashboard-colbody{
+			display: -webkit-flex;
+			display: -moz-flex;
+			display: -ms-flex;
+			display: -o-flex;
+			display: flex;
+			align-items: center;
+		}
+			.dashboard-col__severity-text{
+				font-family: 'OpenSans-Bold', arial, verdana, sans-serif;;
+				font-size: 10px;
+				color: #aeb5b7;
+			}
+			.dashboard-col__severity-textLow{
+				color: #1ebcab !important;
+			}
+			.dashboard-col__severity-textMedium{
+				color: #049787 !important;
+			}
+			.dashboard-col__severity-textHigh{
+				color: #f7941d !important;
+			}
+			.dashboard-col__severity-textCritical{
+				color: #ee5a36 !important;
+			}
 
 		.dashboard-col__stage.dashboard-colbody{
 			display: flex;
 			flex-wrap: wrap;
 		}
 			.dashboard-col__stage-type{
-				font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+				font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
 				font-size: 12px;
 				color: #aeb5b7;
 				text-transform: uppercase;
@@ -3073,6 +3109,7 @@ input.personDataTextBox{
 			.dashboard-col__incidentType-text{
 				font-size: 16px;
 				white-space: normal;
+				line-height: 1.2em;
 			}
 		
 		.dashboard-col__location.dashboard-colbody{
@@ -3082,6 +3119,7 @@ input.personDataTextBox{
 			.dashboard-col__location-text{
 				font-size: 14px;
 				white-space: normal;
+				line-height: 1.2em;
 			}
 
 		.dashboard-col__reportDate.dashboard-colbody{}
