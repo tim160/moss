@@ -510,6 +510,7 @@
     <Content Include="Content\img\logos\demo_logo.jpg" />
     <Content Include="Content\img\logos\stark.jpg" />
     <Content Include="Content\img\nextStep.png" />
+    <Content Include="Content\img\pdf.png" />
     <Content Include="Content\img\print.png" />
     <Content Include="Content\img\printSelected.png" />
     <Content Include="Content\img\radio.png" />
