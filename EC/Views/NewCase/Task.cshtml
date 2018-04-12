@@ -16,7 +16,8 @@
     IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
 
 
-    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+    //Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+    Layout = "~/Views/Shared/IndexPages/LayoutNewCases.cshtml";
 
     ReportModel rm = new ReportModel(report_id);
     UserModel um = new UserModel(user_id);
@@ -50,202 +51,181 @@
 
 }
 
-<body>
-    @*<link type="text/css" href="~/Content/caseTasks.min.css" rel="stylesheet">*@
-    <link type="text/css" href="~/Content/caseTasks.css" rel="stylesheet">
-    <div class="blockContent">
-        <!--leftBlockContent-->
-        @Html.Partial("~/Views/PartialViews/_ReportDetailsLeft.cshtml",
-                        new ViewDataDictionary { { "report_id", report_id },
-                                                { "user_id", user_id },
-                                                { "attachmentFiles", attachmentFiles } })
-        <!--boroda-->
-        <div class="rightBlockContent">
-            <div id="slider"><div class="reportIconWhite"></div></div>
-            <div id="casesHeared">
-                <div id="menu">
-                    @Html.Partial("~/Views/PartialViews/_ReportTopMenu.cshtml",
-                        new ViewDataDictionary { { "report_id", report_id },
-                                                { "user_id", user_id },
-                                                { "selected_item", 1 } })
-                </div>
-                <div class="positionActivityIcon">
-                    <div id="activityIcon"></div>
-                    <span>@GlobalRes.Activity</span>
-                </div>
-            </div>
+@Html.Partial("~/Views/Shared/Partial/_NewCasesTopMenu.cshtml")
 
-            <div style="display: table; width: 100%;">
-                <div class="blockTasks">
-
-                    <div class="headTask pageTask">
-                        <div class="menuCasesBlock">
-                            <div class="headerBlockTextLeft">
-                                <a href="/Case/Index/@report_id" class="labelCases">@GlobalRes.Tasks</a>
-                                <span class="labelArrow">></span>
-                                <span class="casesDot">
-                                    <span style="background: #@_tsk.TaskColorCode"></span>
-                                </span>
-                            </div>
-                            <!--headerBlockTextLeft-->
-                            <div class="headerBlockTextRight">
-                                <span class="text">@_tsk._task.title</span>
-                                <br />
-                                @if (_tsk.TaskDueDate.HasValue)
-                                {
-                                    <span class="textDate">@GlobalRes.Due: @_tsk.TaskDueDateString</span>
-                                }
-                                else
-                                {
-                                    <span class="textDate">@GlobalRes.Willneverexpire</span>
-                                }
-
-                            </div>
-                            <!--headerBlockTextRight-->
+<div class="container mainNavigationTabs__tabContent-container ">
+    <div id="mainTab-Tasks" class="mainNavigationTabs__tabContent active">
+	    <div class="content-container__inner">
+		    <div class="divider p-tb-10"></div><!-- /.divider -->
+			    <div class="fullTaskBlock shadowLight clearfix">
+				    <div class="fullTaskBlock-head clearfix">
+					    <div class="breadcrumbs-fullInfo clearfix">
+						    <a href="@Url.Action("Tasks", new { retport_id = report_id})" class="breadcrumbs-fullInfo__tree-links">
+							    Tasks
+						    </a><!-- /.breadcrumbs-fullInfo__tree-links -->
+						    <div class="breadcrumbs-fullInfo__links-arrow">
+							    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+									    viewBox="0 0 407.436 407.436" style="enable-background:new 0 0 407.436 407.436;opacity:0.3;" xml:space="preserve">
+							    <polygon points="112.814,0 91.566,21.178 273.512,203.718 91.566,386.258 112.814,407.436 315.869,203.718 "/>
+							    </svg>
+						    </div><!-- /.breadcrumbs-fullInfo__links-arrow -->
+						    <div class="breadcrumbs-fullInfo__currentPege">
+							    <div class="breadcrumbs-fullInfo__currentPegeStatus"></div><!-- /.breadcrumbs-fullInfo__currentPegeStatus -->
+							    <div class="breadcrumbs-fullInfo__currentPegeContent">
+								    <div class="breadcrumbs-fullInfo__currentPegeContent-MeinText" style="min-width: 140px;">
+									    @_tsk._task.title
+								    </div><!-- /.breadcrumbs-fullInfo__currentPegeContent-MeinText -->
+								    <div class="breadcrumbs-fullInfo__currentPegeContent-timeText">
+                                        @if (_tsk.TaskDueDate.HasValue)
+                                        {
+                                            <span class="textDate">@GlobalRes.Due: @_tsk.TaskDueDateString</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="textDate">@GlobalRes.Willneverexpire</span>
+                                        }
+								    </div><!-- /.breadcrumbs-fullInfo__currentPegeContent-timeText -->
+							    </div><!-- /.breadcrumbs-fullInfo__currentPegeContent -->
+						    </div><!-- /.breadcrumbs-fullInfo__currentPege -->
                             @if (task_status != 2)
                             {
-                                <div class="completeTaskBtn">
-                                    <input type="submit" value="complete_task" style="display: none;">
-                                    <span class="contactReportBtn completeTask">@GlobalRes.TaskCompleted.ToLower()</span>
-                                </div>
+                                <a href="#" class="btn-link">Complete task</a>
                             }
-                            <!--completeTaskBtn-->
+					    </div><!-- /.breadcrumbs-fullInfo clearfix -->
+					    <div class="taskUserMenu ">
+						    <a href="#" class="taskUserMenu-topBlock ">
+							    <div class="taskUserMenu-topBlock__title">@GlobalRes.AssignedToUpper:</div><!-- /.taskUserMenu-topBlock__title -->
+							    <div class="taskUserMenu-topBlock__userBlock clearfix">
+								    <div class="taskUserMenu-topBlock__userBlock-logo col-3">
+									    <img src="@Url.Content(_tsk.TaskAssigneePhoto)" alt="" />
+								    </div><!-- /.taskUserMenu-topBlock__userBlock-logo -->
+								    <div class="taskUserMenu-topBlock__userBlock-name col-7">
+									    @_tsk.TaskAssignee
+								    </div><!-- /.taskUserMenu-topBlock__userBlock-name -->
+								    <div class="taskUserMenu-topBlock__userBlock-arrow col-2">
+									    <svg version="1.1" class="arrowDown" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+											    viewBox="0 0 30.727 30.727" style="enable-background:new 0 0 30.727 30.727;"
+											    xml:space="preserve">
+									    <g>
+										    <path d="M29.994,10.183L15.363,24.812L0.733,10.184c-0.977-0.978-0.977-2.561,0-3.536c0.977-0.977,2.559-0.976,3.536,0
+											    l11.095,11.093L26.461,6.647c0.977-0.976,2.559-0.976,3.535,0C30.971,7.624,30.971,9.206,29.994,10.183z"/>
+									    </g>
+									    </svg>
 
-                        </div>
-                        <!--START form-->
-                        <form action="#" method="post" class="selectBlock assignedToSelect">
-                            <p class="labelAssignedTo">@GlobalRes.AssignedToUpper</p>
-                            <div class="dropdown subject">
-                                <span class="selected">
-                                    <img src='@Url.Content(_tsk.TaskAssigneePhoto)' />
-                                    <span></span>
-                                    <span class="textSpan">@_tsk.TaskAssignee</span>
-                                    <img src='@Url.Content("~/Content/Icons/arrowSelect.png")' />
-                                </span>
-                                <input type="hidden" name="subject" value="general">
-                                <ul style="display: none;">
-                                    <li id="textAssigntaskTo">@GlobalRes.Assigntaskto.ToLower():</li>
-                                    <li id="general" class="selected">
-                                        <div class="blockItem">
-                                            <div class="blockPhoto">
-                                                <div class="photoPersonal">
-                                                    @*<img src='@Url.Content("~/Content/Icons/peopleBlockSelect.png")' />*@
-                                                    <img src='@Url.Content(_tsk.TaskAssigneePhoto)' />
-                                                </div>
-                                            </div><!--blockPhoto-->
-                                            <div class="aboutMediator">
-                                                <label>@_tsk.TaskAssignee</label>
-                                                <label></label>
-                                            </div>
-                                        </div>
-                                    </li>
+									    <svg version="1.1" class="arrowUp" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+											    viewBox="0 0 30.728 30.729" style="enable-background:new 0 0 30.728 30.729;"
+											    xml:space="preserve">
+									    <g>
+										    <path d="M29.996,24.08c-0.977,0.978-2.561,0.978-3.535,0L15.365,12.985L4.268,24.081C3.78,24.568,3.14,24.812,2.5,24.812
+											    s-1.28-0.244-1.768-0.731c-0.977-0.978-0.977-2.56,0-3.535L15.364,5.915l14.63,14.629C30.972,21.521,30.972,23.104,29.996,24.08z"
+											    />
+									    </g>
+									    </svg>
 
-                                    @foreach (user _user in _mediators_whoHasAccess_toReport)
-                                    {
-                                        if (_user.id != _tsk.TaskAssigneeID)
+								    </div><!-- /.taskUserMenu-topBlock__userBlock-arrow -->
+							    </div><!-- /.taskUserMenu-topBlock__userBlock -->
+						    </a><!-- /.taskUserMenu-topBlock -->
+						    <div class="taskUserMenu-listBlock">
+							    <div class="taskUserMenu-listBlock__title">
+								    Assign task to:
+							    </div><!-- /.taskUserMenu-listBlock__title -->
+							    <div class="taskListUsers clearfix">
+								    <ul class="taskListUsers__ul clearfix">
+                                        @foreach (user _user in _mediators_whoHasAccess_toReport)
                                         {
-                                            <li id=@_user.id>
-                                                <div class="blockItem">
-                                                    <div class="blockPhoto">
-                                                        <div class="photoPersonal">
+                                            <li class="taskListUsers__li @(_user.id != _tsk.TaskAssigneeID ? "" : "active")">
+                                                <a href="@Url.Action("ReassignTask", new { id = _tsk.TaskID, mediator_id = _user.id })" class="taskListUsers__a">
+                                                    <span class="col-3 center">
+                                                        <div class="profileImg">
                                                             @if (_user.photo_path.Trim() != "")
                                                             {
-                                                                <img src='@Url.Content(_user.photo_path.Trim())' />
+                                                                <img src="@Url.Content(_user.photo_path.Trim())" alt="" class="profileImg__img" />
                                                             }
                                                             else
                                                             {
-                                                                <img src='@Url.Content("~/Content/Icons/noPhoto.png")' />
+                                                                <img src="@Url.Content("~/Content/Icons/noPhoto.png")" alt="" class="profileImg__img" />
                                                             }
-                                                        </div>
-                                                    </div><!--blockPhoto-->
-                                                    <div class="aboutMediator">
-                                                        <label>@_user.first_nm @_user.last_nm</label>
-                                                        <label>@_user.title_ds</label>
-                                                    </div>
-                                                </div>
-                                            </li>
+                                                            <div class="profileImg__status "></div><!-- /.profileImg__status -->
+                                                        </div><!-- /.profileImg -->
+                                                    </span>
+                                                    <span class="col-9">
+                                                        <span class="taskListUsers__name">
+                                                            @_user.first_nm @_user.last_nm
+                                                        </span>
+                                                        <span class="taskListUsers__post">
+                                                            @_user.title_ds
+                                                        </span>
+                                                    </span>
+                                                </a>
+                                            </li><!-- /.taskListUsers__li -->
                                         }
-                                    }
-                                </ul>
-
-                            </div>
-                        </form>
-
-
-
-                    </div><!--headTask-->
-
-                    <div class="blockComents">
-                        <div class="blockComment" style="border-left: 10px solid #ffffff">
-                            <div class="blockPhoto">
-                                <div class="photoPersonal">
-                                    <img src=@_tsk.TaskAssignerPhoto alt="" stone="">
-                                </div>
-                            </div><!--blockPhoto-->
-                            <div class="contentComment">
-                                <p class="headerComment">
-                                    <span class="namePersone">@_tsk.TaskAssigner</span>
-                                    @*<span class="dateComment">23/12/2015</span>*@
-                                </p>
-                                <p class="assignedTo">
-                                    <span class="labelArrow"></span>
-                                    <span class="labelArrow"></span>
-                                    <span class="assignedToText">@_tsk._task.description</span>
-
-                                    @{
-                                        if ((ViewBag.AttachmentFilesTask != null) && ((List<attachment>)ViewBag.AttachmentFilesTask).Count() > 0)
-                                        {
-                                            <text>
-                                                <span style="cursor: pointer;">
-                                                    <a href="@ViewBag.AttachmentFilesTask[0].path_nm">
-                                                        <img src="/Content/Icons/fileCases.png">
-                                                    </a>
-                                                </span>
-                                            </text>
-                                        }
-                                    }
-
-                                    <span class="assignedToName" style="float:right; color:#aeb5b7;">@m_DateTimeHelper.ConvertDateToLongMonthString(_tsk._task.created_on)</span>
-                                </p>
-                            </div>
-                        </div>
+								    </ul><!-- /.taskListUsers__ul -->
+							    </div><!-- /.taskListUsers -->
+							    <div class="taskUserMenu-listBlock__footer clearfix">
+								    <a href="#" class="btn-link">
+									    Manage team
+								    </a>
+							    </div><!-- /.taskUserMenu-listBlock__footer -->
+						    </div><!-- /.taskUserMenu-listBlock -->
+								
+					    </div><!-- /.taskUserMenu -->
+				    </div><!-- /.fullTaskBlock-head -->
+				    <div class="fullTaskBlock-content clearfix">
 
                         @foreach (task_comment _comment in _tsk.Comments().OrderBy(x => x.created_date).ToList())
                         {
-
-                            string task_comment_color = "#ffffff";
                             TaskCommentExtended _tce = new TaskCommentExtended(_comment.id, user_id);
                             temp_user = new UserModel(_comment.user_id);
-                            if (_tce.IsRead())
-                            {
 
-                            }
-                            else
-                            {
-                                glb.UpdateTaskCommentRead(user_id, _comment.id);
-                                task_comment_color = "#b2bfc3";
-                            }
+                            <div class="row fullTaskBlock-contentRow">
+                                <div class="col-1 fullTaskBlock-contentColIcon">
+                                    <div class="profileImg">
+                                        <img src="@Url.Content(_tce.PosterPath)" alt="" class="profileImg__img" />
+                                        <div class="profileImg__status online"></div><!-- /.profileImg__status -->
+                                    </div><!-- /.profileImg -->
+                                </div><!-- /.col-1 -->
+                                <div class="col-10 fullTaskBlock-contentColMain">
+                                    <div class="messageDialogue">
+                                        <div class="messageDialogue__title">
+                                            @temp_user._user.first_nm @temp_user._user.last_nm
+                                        </div><!-- /.messageDialogue__title -->
+                                        <div class="messageDialogue__mainText">
+                                            <p>
+                                                @_comment.body
+                                            </p>
+                                        </div><!-- /.messageDialogue__mainText -->
+                                        <div class="messageDialogue__additionalInfo">
+                                            <div class="messageDialogue__additionalInfo-title">
+                                                <div class="messageDialogue__additionalInfo-titleDArrow">
+                                                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                         viewBox="0 0 220.682 220.682" style="enable-background:new 0 0 220.682 220.682;fill:#ffac28;"
+                                                         xml:space="preserve">
+                                                    <g>
+                                                    <polygon points="92.695,38.924 164.113,110.341 92.695,181.758 120.979,210.043 220.682,110.341 120.979,10.639 	" />
+                                                    <polygon points="28.284,210.043 127.986,110.341 28.284,10.639 0,38.924 71.417,110.341 0,181.758 	" />
+											    </g>
+											    </svg>
 
-                            <div class="blockComment" style="border-left: 10px solid @task_comment_color">
-                                <div class="blockPhoto">
-                                    <div class="photoPersonal">
-                                        <img src='@Url.Content(_tce.PosterPath)' alt=@temp_user._user.last_nm stone="">
-                                    </div><!--blockPhoto-->
-                                </div>
-                                <div class="contentComment">
-                                    <p class="headerComment">
-                                        <span class="namePersone">@temp_user._user.first_nm @temp_user._user.last_nm</span>
-                                        <span class="dateComment">@m_DateTimeHelper.ConvertDateToLongMonthString(_comment.created_date)</span>
-                                    </p>
-                                    <div class="textComment">
-                                        <p>@_comment.body</p>
-                                    </div>
-                                </div>
-                            </div>
+                                                </div><!-- /.messageDialogue__additionalInfo-titleArrow -->
+                                                <div class="messageDialogue__additionalInfo-titleText">
+                                                    Assigned to:
+                                                </div><!-- /.messageDialogue__additionalInfo-titleText -->
+                                                <a href="#" class="messageDialogue__additionalInfo-titleNames">
+                                                    @_tsk.TaskAssignee
+                                                </a>
+                                            </div><!-- /.messageDialogue__additionalInfo-title -->
+                                        </div><!-- /.messageDialogue__additionalInfo -->
+                                    </div><!-- /.messageDialogue -->
+                                </div><!-- /.col-10 -->
+                                <div class="col-1 fullTaskBlock-contentColDate">
+                                    <div class="messageDate">
+                                        @m_DateTimeHelper.ConvertDateToLongMonthString(_comment.created_date)
+                                    </div><!-- /.messageDate -->
+                                </div><!-- /.col-1 -->
+                            </div><!-- /.row -->
                         }
-
-                    </div>
-                    <!-- ================================================================================================================== -->
+							
+				    </div><!-- /.fullTaskBlock-content -->
                     @if (rm._investigation_status != ECGlobalConstants.investigation_status_closed)
                     {
                         using (Html.BeginForm())
@@ -255,341 +235,55 @@
                                 @Html.AntiForgeryToken()
 
                                 @model task_comment
-                                <div class="addComment">
-                                    <div class="content">
-                                        <div class="blockPhoto1">
-                                            <div class="photoPersonal">
-                                                @{temp_user = new UserModel(user_id);
 
-                                                    _temp = "";
-                                                    if (temp_user._user.photo_path.Trim().Length > 0)
-                                                    {
-                                                        _temp = temp_user._user.photo_path.Trim();
-                                                    }
-                                                }
-                                                @*<img src="~/Content/Icons/people.png" />*@
-                                                @if (_temp != "")
-                                                {
-                                                    <img src='@Url.Content(_temp)'>
-                                                }
-                                                else
-                                                {
-                                                    <img src='@Url.Content("~/Content/Icons/noPhoto.png")' />
-                                                }
-                                            </div>
-                                            <div class="arrow"></div>
-                                        </div>
-                                        <div class="messageText">
-                                            @Html.TextAreaFor(model => model.body, new { body_tx = "body_tx" })
+				                <div class="fullTaskBlock-footer clearfix">
+					                <div class="col-1">
+						                <div class="profileImg">
+							                <img src="Icons/pepperPhoto.png" alt="" class="profileImg__img" />
+							                <div class="profileImg__status online"></div><!-- /.profileImg__status -->
+						                </div><!-- /.profileImg -->
+					                </div><!-- /.col-1 -->
+					                <div class="col-11">
+						                <div class="messageBlock">
+                                            <textarea class="messageBlock__textArea" name="body"></textarea>
 
                                             @Html.Hidden("task_id", task_id)
                                             @Html.Hidden("user_id", user_id)
-                                        </div>
-                                    </div>
-                                    @*@Html.Hidden("report_id", report_id)
-                                        @Html.Hidden("sender_id", user_id)
-                                        @Html.Hidden("reporter_access", 0)*@
-                                    <div class="newCommentBtn">
-                                        <input type="submit" value="comment" style="display: none;" />
-                                        <span>comment</span>
-                                    </div>
-                                </div><!--addComment-->
-                        <!-- ================================================================================================================== -->
-                                                            }
-                                                        }
-                                                    }
-                </div><!--blockTasks-->
-
-                <div>
-
-                    @*<!--ADD ACTIVITY BLOCK -->
-                        @if ((rm._report != null) && (rm._report.id != 0))
-                        {
-                            List<user> mediators = rm._mediators_whoHasAccess_toReport;
-                            <div class="blockActivity" style="width: 260px; background-color: rgb(171, 185, 187); display: none;">
-                                <div class="headerActivity">
-                                    <div class="blockCaseMediators">
-                                        @if (mediators.Count > 0)
-                                        {
-                                            <p class="titleCaseMediators">@GlobalRes.Casemediators:</p>
-
-                                            <div class="displayMediators">
-                                                @foreach (user _mediator in mediators)
-                                                {
-                                                    <div class="blockMediator">
-                                                        <div class="blockPhoto">
-                                                            <div class="photoPersonal">
-                                                                @if (_mediator.photo_path.Trim() != "")
-                                                                {
-                                                                    <img src='@Url.Content(_mediator.photo_path.Trim())' />
-                                                                }
-                                                                else
-                                                                {
-                                                                    <img src='@Url.Content("~/Content/Icons/noPhoto.png")' />
-                                                                }
-                                                            </div>
-                                                        </div>
-                                                        <div class="personalText">
-                                                            <p class="title">@_mediator.first_nm @_mediator.last_nm</p>
-                                                            @if (_mediator.title_ds.Trim().Length > 0)
-                                                            {
-                                                                <p class="text"> @_mediator.title_ds</p>
-                                                            }
-                                                        </div>
-                                                    </div><!--blockMediator-->
-                                                }
-                                            </div><!--displayMediators-->
-                                        }
-                                    </div><!--blockCaseMediators-->
-                                </div><!--headerActivity-->
-                                @foreach (report_log _log in actions_log)
-                                {
-                                    _userActivity = um.GetById(_log.user_id);
-                                    _month_name = glb.GetShortMonth(_log.created_dt.Month);
-                                    _action = glb.GetActionById(_log.action_id.Value);
-                                    _second_name = "";
-                                    _string_to_add = "";
-
-                                    if (_log.second_user_id.HasValue)
-                                    {
-                                        _second_user = um.GetById(_log.second_user_id.Value);
-                                        _second_name = (_second_user.first_nm + " " + _second_user.last_nm).Trim();
-                                    }
-
-                                    _sender_name = "";
-                                    _sender_title = "";
-
-                                    if (_log.user_id == user_id)
-                                    {
-                                        _sender_name = GlobalRes.You + ",";
-                                    }
-                                    else
-                                    {
-                                        _sender_name = (_userActivity.first_nm + " " + _userActivity.last_nm).Trim() + ",";
-                                    }
-
-                                    if (_userActivity.role_id == 8)
-                                    {
-                                        {
-                                            _sender_title = " (" + GlobalRes.Reporter + ")";
-                                            _sender_name = "";
-                                        }
-                                    }
-                                    else
-                                    {
-                                        _sender_title = _userActivity.title_ds.Trim();
-                                    }
-
-                                    <div class="contentActivity">
-                                        <div class="contentBlockActivity">
-                                            <div class="blockImg">
-                                                <img src='@Url.Content(_action.icon_path)'>
-                                            </div>
-                                            <div class="blockInfo">
-                                                <span class="date">@_log.created_dt.Day.ToString() @_month_name</span>
-                                                <div class="topText">
-                                                    <span class="title">
-                                                        <span class="reviewStage">@_action.description_en</span>
-                                                        @if (_second_name.Length > 0) { _second_name = ": " + _second_name; }    @_second_name
-                                                        @if ((_log.string_to_add != null) && (_log.string_to_add.Trim().Length > 0))
-                                                        {
-                                                            _string_to_add = ": " + _log.string_to_add;
-                                                        }
-                                                        @_string_to_add
-                                                    </span>
-                                                </div>
-                                                <p class="text">
-                                                    @if (_sender_name != "")
-                                                    {
-                                                        <span class="personalName">@_sender_name</span>
-                                                        <br>
-                                                    }
-                                                    <span class="personalSenderTitle">@_sender_title</span>
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                        <hr class="HrBorder">
-
-                                    </div>
-                                }
-
-                            </div><!--blockActivity-->
-                        }*@
-
-                    <!--END ADD A BLOCK-->
-                    @*@Html.Partial("~/Views/PartialViews/_ReportDetailsLeft.cshtml",
-                        new ViewDataDictionary { { "report_id", report_id },
-                                                { "user_id", user_id },
-                                                { "attachmentFiles", attachmentFiles } })*@
-                </div>
-                <div id="rightRight"></div>
-            </div><!--rightBlockContent-->
-
-        </div>
-
-        @*<script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
-            <script src="~/Scripts/jquery.the-modal.js"></script>*@
-
-        <script type="text/javascript">
-            $(document).ready(function () {
-
-                var activityIconOpen = false;
-                var assignedToMediator = $('.assignedToSelect .dropdown input[name=subject]').val();
-                var assignedToMediatorName = $('.assignedToSelect .dropdown .textSpan').text();
-
-
-
-                $('#activityIcon').on('click', function(){
-                    if (activityIconOpen){
-                        $(this).parent().css('width', '81px');
-                        $('.blockActivity').css('display', 'none');
-                        $('.activitySection').text('');
-                        activityIconOpen = false;
-                    }
-                    else{
-                        $(this).parent().css('width', '260px');
-                        $('.blockActivity').css('display', 'table-cell');
-                        $('.activitySection').text('Activity');
-                        activityIconOpen = true;
-                    }
-                });
-
-                //START stile for textarea
-                $('textarea')
-                    .focus(function () {
-                        $(this).css('border', '2px solid #05b5a2');
-                        $(this).attr("placeholder", "");
-                        $(this).parent().parent().find('.blockPhoto').find('.arrow').css('border-right', '5px solid #05b5a2');
-                    })
-                    .focusout(function () {
-                        $(this).css('border', '2px solid #b2bfc3');
-                        $(this).attr("placeholder", "");
-                        $(this).parent().parent().find('.blockPhoto').find('.arrow').css('border-right', '5px solid #b2bfc3');
-                    });
-                //END stile for textarea
-                var textAreaMessage = $('.messageText textarea');
-                $('.newCommentBtn span').click(function () {
-                    if (textAreaMessage.val().trim().length > 0) {
-                        $('.newCommentBtn input').click();
-                    }
-                });
-
-                $('.newCommentBtn span').on('click', function () {
-                    if (textAreaMessage.val().trim() == "")
-                        textAreaMessage.css('border', '2px solid red');
-                });
-
-                $('.completeTask').on('click', function ()
-                {
-                    $.ajax({
-                        method: "POST",
-                        url: "/Case/CloseTask",
-                        data: { task_id: @task_id, user_id: @user_id }
-                    }).done(function (data) {//data from server
-                        location.reload();
-                    }).fail(function (error) {
-                        console.log(error);
-                    });
-                })
-
-                $('.dropdown')
-                       .click(
-                       function () {
-                           $(this).children('ul').slideToggle(150);
-
-                           if ($(this).hasClass('open')) {
-                               $(this).removeClass('open');
-                               return false;
-                           } else {
-                               $(this).addClass('open');
-                               return false;
-                           }
-
-                           return false;
-                       })
-
-                       .hover(
-                       function () {
-                           //$(this).find('span.selected img:first-child').attr('src', '/Content/Icons/peopleBlockSelectBlack.png');
-                       },
-                       function () {
-                           $(this).children('ul').slideUp(150);
-                           $(this).removeClass('open');
-
-                           if ($(this).parent().find('input[name=subject]').val() != assignedToMediator){
-
-                               $('.reassignMediators').text('Do you want to reassign task from ' +
-                                                             assignedToMediatorName + ' to ' +
-                                                             $('.assignedToSelect .dropdown .textSpan').text() + ' ?');
-
-                               assignedToMediatorName = $('.assignedToSelect .dropdown .textSpan').text();
-                               assignedToMediator = $('.assignedToSelect .dropdown input[name=subject]').val();
-                               reassignBtnYes();
-                               //$("#terms-of-service").dialog();
-                               //overlay();//.modal().open();
-                           }
-                           // $(this).find('span.selected img:first-child').attr('src', '/Content/Icons/peopleBlockSelect.png');
-                       });
-                function reassignBtnYes(){
-                    $.ajax({
-                        method: "POST",
-                        url: "/Case/ReassignTask",
-                        data: { task_id: @task_id, user_id: assignedToMediator }
-                    }).done(function(data) {//data from server
-                        // alert(data);
-                    }).fail(function(error){
-                        console.log(error);
-                    });
-                };
-
-                $('.dropdown ul li')
-                        .click(
-                        function () {
-                            var sitem = $(this).find('.aboutMediator').find('label:first-child').text();
-                            var sid = $(this).attr('id');
-                            var photo = $(this).find('.photoPersonal img').attr('src');
-
-                            $(this).siblings('li').removeClass('selected');
-                            $(this).addClass('selected');
-                            $(this).parent('ul').siblings('span.selected').find('span.textSpan').text(sitem);
-                            $(this).parent('ul').siblings('input').val(sid);
-
-                            $(this).parents('.dropdown.subject').find('.selected img:first-child').attr('src', photo);
-                        });
-
-                $('.modalWindowButton').on('click', function(){})
-                function rightActivityShow() {
-                    var rightBlock = $("#rightRight");
-                    $(".positionActivityIcon").on('click', function () {
-                        if (!rightBlock.is(':empty')) {
-                            rightBlock.hide(500);
-                            rightBlock.empty();
-                            $('.positionActivityIcon').removeClass('active');
+						                </div>
+						                <div class="row clearfix">
+							                <button type="submit" class="btn-linkReverse pull-right">Comment</button>
+						                </div><!-- /.row -->
+					                </div><!-- /.col-11 -->
+				                </div><!-- /.fullTaskBlock-footer -->
+                            }
                         }
-                        else {
-                            $.ajax(
-                                {
-                                    method: "GET",
-                                    contentType: false,
-                                    processData: false,
-                                    cache: false,
-                                    url: "/Case/GetAjaxActivity/@Html.Raw(report_id)",
-                                }
-                               ).done(function (data) {//data from server
-                                   rightBlock.empty();
-                                   rightBlock.append(data);
-                                   rightBlock.show(500);
-                                   $('.positionActivityIcon').addClass('active');
-                               }).fail(function (error) {
-                                   console.log(error);
-                               });
-                        }
-                    });
-                }
+                    }
+			    </div><!-- /.fullTaskBlock clearfix -->
+		    <div class="divider p-tb-30"></div><!-- /.divider p-tb-30 -->
+	    </div><!-- /.content-container__inner -->
+    </div>
+</div>
 
-
-                rightActivityShow();
+<script>
+    $(function () {
+        listBlock('.taskUserMenu-topBlock');
+        function listBlock ( listBlockSelector ){
+            $ ( listBlockSelector ).click(function( event ){
+                event.preventDefault();
+                var $this = $( this );
+                $this.addClass('active');
+                $this.next('.taskUserMenu-listBlock').fadeIn();
             });
-        </script>
-</body>
+        };
+        $(document).mouseup(function(e) 
+        {
+            var container = $(".taskUserMenu-listBlock");
+            // if the target of the click isn't the container nor a descendant of the container
+            if (!container.is(e.target) && container.has(e.target).length === 0) 
+            {
+                container.fadeOut();
+                container.prev('.taskUserMenu-topBlock').removeClass('active');
+            }
+        });
+    });
+</script>

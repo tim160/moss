@@ -322,16 +322,16 @@
                 page_subtitle = LocalizationGetter.GetString("Tasks");
             }
         }
-        if ((hrefURL.Contains("case/")) || (hrefURL.Contains("/cases")) || (hrefURL.Contains("/newreport") || (hrefURL.Contains("case/task/"))))
-        {
-            hrefURL = "/cases/index";
-            page_subtitle = LocalizationGetter.GetString("Cases");
-        }
-
         if (hrefURL.Contains("/cases"))
         {
             hrefURL = "/cases/index";
             page_subtitle = LocalizationGetter.GetString("Dashboard");
+        }
+
+        if ((hrefURL.Contains("case/")) || (hrefURL.Contains("/cases")) || (hrefURL.Contains("/newreport") || (hrefURL.Contains("case/task/"))))
+        {
+            hrefURL = "/cases/index";
+            page_subtitle = LocalizationGetter.GetString("Cases");
         }
 
         if (hrefURL.Contains("/analytics"))
@@ -405,7 +405,9 @@
             </ul>
         </div>
     </div>
+    
     @RenderBody()
+
     <script src="~/Scripts/View/Settings.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {

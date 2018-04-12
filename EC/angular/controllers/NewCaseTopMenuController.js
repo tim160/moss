@@ -16,7 +16,10 @@
             });
         };
 
-        $scope.refresh();
+        $scope.init = function (id) {
+            $scope.report_id = id || $scope.report_id;
+            $scope.refresh();
+        };
 
         $scope.setIsLifeThreating = function (isLifeThreating) {
             if (isLifeThreating) {

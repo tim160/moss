@@ -480,5 +480,13 @@ namespace EC.Controllers
 
             return View();
         }
+
+        public ActionResult ReassignTask(int id, int mediator_id)
+        {
+            var userModel = new UserModel();
+            userModel.ReassignTask(id, mediator_id);
+
+            return RedirectToAction("Task", new {id = id });
+        }
     }
 }
