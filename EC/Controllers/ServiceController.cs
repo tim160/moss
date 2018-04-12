@@ -200,5 +200,34 @@ namespace EC.Controllers
             ViewBag.redirect = "true";
             return RedirectToAction("Login", "Service");// RedirectToAction("Company", "Login");
         }
+
+        public ActionResult Scheduler1()
+        {
+            //Allow sec
+            if (this.Request.UserHostAddress != "")
+            {
+                return new JsonResult
+                {
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                    Data = new
+                    {
+                        ok = false,
+                    }
+                };
+            }
+
+            using(var db = new ECEntities)
+            {
+                //db.report
+            }
+
+            return new JsonResult
+            {
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                Data = new {
+                    ok = true,
+                }
+            };
+        }
     }
 }
