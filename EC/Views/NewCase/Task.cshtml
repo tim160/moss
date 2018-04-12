@@ -275,6 +275,7 @@
                 $this.next('.taskUserMenu-listBlock').fadeIn();
             });
         };
+
         $(document).mouseup(function(e) 
         {
             var container = $(".taskUserMenu-listBlock");
@@ -285,5 +286,14 @@
                 container.prev('.taskUserMenu-topBlock').removeClass('active');
             }
         });
+
+        $('.messageBlock__textArea').focus(function () {
+            var $this = $(this);
+            $this.parent('.messageBlock').addClass('onFocus');
+            $this.focusout(function () {
+                $this.parent().removeClass("onFocus");
+            });
+        });
+
     });
 </script>
