@@ -423,6 +423,23 @@
             return '';
         };
 
+        $scope.severityClass = function (report) {
+            console.log(report.severity_id);
+            if (report.severity_id === 2) {
+                return 'dashboard-col__severity-textLow';
+            }
+            if (report.severity_id === 5) {
+                return 'dashboard-col__severity-textCritical';
+            }
+            if (report.severity_id === 3) {
+                return 'dashboard-col__severity-textMedium';
+            }
+            if (report.severity_id === 4) {
+                return 'dashboard-col__severity-textHigh';
+            }
+            return '';
+        };
+
         $scope.isOwner = function (report, mediator) {
             for (var i = 0; i < report.AdvInfo.owners.length; i++) {
                 if (report.AdvInfo.owners[i].user_id === mediator.id) {
@@ -444,6 +461,7 @@
                         data.Reports[i].cc_is_life_threating = r[0].cc_is_life_threating;
                         data.Reports[i].mediators = r[0].mediators;
                         data.Reports[i].severity_s = r[0].severity_s;
+                        data.Reports[i].severity_id = r[0].severity_id;
                     }
 
                     var r = $filter('filter')(data.Users, { 'id': data.Reports[i].last_sender_id }, true);

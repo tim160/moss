@@ -216,7 +216,7 @@ namespace EC.Controllers
                 };
             }
 
-            using(var db = new ECEntities)
+            using(var db = new ECEntities())
             {
                 //db.report
             }

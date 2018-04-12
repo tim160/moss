@@ -131,6 +131,12 @@
                                 </div>
                                 <div class="dashboard-colHeader__sortArrow sortArrow" ng-class="sortClass('case_number')"></div>
                             </div><!-- /.dashboard-col__Case dashboard-colHeader -->
+						    <div class="dashboard-col__severity dashboard-colHeader clearfix">
+							    <div class="dashboard-colHeader__text">
+								    Severity
+							    </div>
+							    <div class="dashboard-colHeader__sortArrow sortArrow" ng-class="sortClass('severity')"></div>
+						    </div><!-- /.dashboard-col__severity dashboard-colHeader -->
                             <div class="dashboard-col__stage dashboard-colHeader clearfix" ng-click="sort('current_status')">
                                 <div class="dashboard-colHeader__text">
                                     Stage
@@ -197,6 +203,11 @@
                                     {{report.case_number}}
                                 </div><!-- /.dashboard-col__case-text -->
                             </div><!-- /.dashboard-col__case dashboard-colbody clearfix -->
+						    <div class="dashboard-col__severity dashboard-colbody clearfix">
+							    <div class="dashboard-col__severity-text" ng-class="severityClass(report)">
+								    {{report.severity_s}}
+							    </div><!-- /.dashboard-col__case-text -->
+						    </div><!-- /.dashboard-col__severity dashboard-colbody clearfix -->
                             <div class="dashboard-col__stage dashboard-colbody clearfix">
                                 <div class="dashboard-col__stage-type">
                                     {{report.current_status}}
