@@ -2244,7 +2244,6 @@ input.personDataTextBox{
 					color: #fff;
 					background-color: #05b5a2;
 					border: 1px solid #05b5a2;
-					t
 				}
 
 				.navMessages__a-logo{
@@ -3490,9 +3489,6 @@ body .onclick-menu-content li a{
 		border-radius: 4px;
     border: 1px solid #ccc;
     padding: 10px 20px;
-    width: 100%;
-    font-size: 14px;
-    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;padding: 10px 20px;
     width: 100%;
     font-size: 14px;
     font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
