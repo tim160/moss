@@ -34,7 +34,6 @@
         };
 
         $scope.severityClass = function (report) {
-            console.log(report.severity_id);
             if (report.severity_id === 2) {
                 return 'dashboard-col__severity-textLow';
             }

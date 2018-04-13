@@ -201,10 +201,12 @@ namespace EC.Controllers
             return RedirectToAction("Login", "Service");// RedirectToAction("Company", "Login");
         }
 
-        public ActionResult Scheduler1()
+        //[HttpPost]
+        //EC.Windows.Task.Scheduler.exe http://localhost:8093/Service/Scheduler1?param1=197
+        public ActionResult Scheduler1(int param1)
         {
             //Allow sec
-            if (this.Request.UserHostAddress != "")
+            /*if (this.Request.UserHostAddress != "")
             {
                 return new JsonResult
                 {
@@ -214,11 +216,17 @@ namespace EC.Controllers
                         ok = false,
                     }
                 };
-            }
+            }*/
 
             using(var db = new ECEntities())
             {
-                //db.report
+                var report = db.report.FirstOrDefault(x => x.id == param1);
+
+                EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
+                EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+                eb.Scheduler1(report.display_name);
+                string body = eb.Body;
+                em.Send("alexandr@ase.com.ua", "Scheduler1", body, true);
             }
 
             return new JsonResult

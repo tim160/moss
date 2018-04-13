@@ -1175,7 +1175,8 @@ h2.mainTitle {
 .contentCompanyProfile .tableLocation,
 .contentCompanyProfile .tableIncidentType,
 .contentCompanyProfile .tableReporterType,
-.contentCompanyProfile .tableDepartment {
+.contentCompanyProfile .tableDepartment,
+.contentCompanyProfile .tableOutcome {
     background: #ffffff;
     border: 1px solid #e0e5e6;
     width: 930px;
@@ -1185,7 +1186,8 @@ h2.mainTitle {
 .contentCompanyProfile .tableLocation p ,
 .contentCompanyProfile .tableIncidentType p ,
 .contentCompanyProfile .tableReporterType p ,
-.contentCompanyProfile .tableDepartment p {
+.contentCompanyProfile .tableDepartment p,
+.contentCompanyProfile .tableOutcome p {
     margin-left: 19px;
     margin-right: 10px;
     border-bottom: 1px solid #e0e5e6;
@@ -1205,6 +1207,7 @@ h2.mainTitle {
 .contentCompanyProfile .tableLocation div:last-child p,
 .contentCompanyProfile .tableIncidentType div:last-child p,
 .contentCompanyProfile .tableReporterType div:last-child p,
+.contentCompanyProfile .tableOutcome div:last-child p,
 .contentCompanyProfile .tableDepartment div:last-child p{
     border-bottom: none;
 }
