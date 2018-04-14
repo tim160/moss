@@ -11,6 +11,7 @@ using EC.Controllers.ViewModel;
 using EC.Models.ViewModel;
 using EC.Constants;
 using log4net;
+using EC.Models.ViewModels;
 
 namespace EC.Controllers
 {
@@ -33,10 +34,20 @@ namespace EC.Controllers
             ViewBag.pending_report_ids = PendingReports();
 
             UserModel um = new UserModel(user.id);
+            UsersReportIDsViewModel vmAllIDs = um.GetAllUserReportIdsLists();
+            UsersUnreadReportsNumberViewModel vmUnreadReports = um.GetUserUnreadCasesNumbers(vmAllIDs);
+
+
+
+            //to delete - replace with vmAllIDs
             List<int> all_active_report_ids = um.ReportsSearchIds(um._user.company_id, 1);
             List<int> completed_report_ids = um.ReportsSearchIds(um._user.company_id, 2);
             List<int> spam_report_ids = um.ReportsSearchIds(um._user.company_id, 3);
             List<int> closed_report_ids = um.ReportsSearchIds(um._user.company_id, 5);
+
+
+
+
 
             #region Active Reports
             List<int> temp_all_active_report_ids = all_active_report_ids.OrderBy(t => t).ToList();
