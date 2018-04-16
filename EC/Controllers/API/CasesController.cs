@@ -99,11 +99,6 @@ namespace EC.Controllers.API
 
                 Counts = new
                 {
-                    /*Active = UnreadReportsInProgressNumber(all_active_report_ids, user.id),
-                    Completed = UnreadReportsInProgressNumber(completed_report_ids, user.id),
-                    Spam = UnreadReportsInProgressNumber(spam_report_ids, user.id),
-                    Closed = UnreadReportsInProgressNumber(closed_report_ids, user.id),
-                    Pending = UnreadReportsInProgressNumber(all_pending_reports_ids, user.id),*/
                     Active = vmUnreadReports.unread_active_reports,
                     Completed = vmUnreadReports.unread_completed_reports,
                     Spam = vmUnreadReports.unread_spam_reports,
