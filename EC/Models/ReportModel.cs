@@ -1656,16 +1656,8 @@ namespace EC.Models
                 List<report_non_mediator_involved> result = (db.report_non_mediator_involved.Where(item => (item.report_id == ID && item.added_by_reporter != false))).ToList();
                 foreach (var item in result)
                 {
-                    int temp;
-                    Int32.TryParse(item.Role, out temp);
-                    if (temp == 0)
-                    {
-                        item.Role = App_LocalResources.GlobalRes.Other;
-                    }
-                    else
-                    {
-                        item.Role = db.role_in_report.First(m => m.id == temp).role_en;
-                    }
+                    var role = db.role_in_report.First(m => m.id == item.role_in_report_id);
+                    item.Role = role != null ? role.role_en : App_LocalResources.GlobalRes.Other;
                 }
                 return result;
             }
