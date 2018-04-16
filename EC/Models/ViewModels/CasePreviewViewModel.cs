@@ -74,22 +74,17 @@ namespace EC.Models.ViewModel
         public CasePreviewViewModel(int report_id, int caller_id)
         {
             ReportModel rm = new ReportModel(report_id);
-            UserModel um = new UserModel(caller_id);
-
-            BindCaseModelToCasePreviewViewModel(rm, um);
+            BindCaseModelToCasePreviewViewModel(rm, caller_id);
         }
 
-        public CasePreviewViewModel(ReportModel rm, UserModel um)
+        public CasePreviewViewModel(ReportModel rm, int caller_id)
         {
-            BindCaseModelToCasePreviewViewModel(rm, um);
+            BindCaseModelToCasePreviewViewModel(rm, caller_id);
         }
 
-        public CasePreviewViewModel BindCaseModelToCasePreviewViewModel(ReportModel rm, UserModel um)
+        public CasePreviewViewModel BindCaseModelToCasePreviewViewModel(ReportModel rm, int caller_id)
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();
-
-
-            GlobalFunctions glb = new GlobalFunctions();
             CasePreviewViewModel vm_case = new CasePreviewViewModel();
 
             this.report_id = rm._report.id;
@@ -103,7 +98,7 @@ namespace EC.Models.ViewModel
             this.days_left = rm._step_days_left;
 
             this.tasks_number = rm.ReportTasks(0).Count().ToString();
-            this.messages_number = um.UserMessages(rm._report.id, 0).Count().ToString();
+            this.messages_number = rm.UserMessagesCountNotSecure(caller_id, 0).ToString();
 
             //?
             return vm_case;

@@ -1933,6 +1933,39 @@ namespace EC.Models
             return all_tasks;
         }
 
+
+        /// <summary>
+        /// NO CHECK - just when you know user belongs to report
+        /// </summary>
+        /// <param name="report_id">if report_id = null or 0, its total messages for this user</param>
+        /// <param name="thread_id">0 - all messages, 1 - reporter thread, 2 - mediators thread, 3 - privilege thread</param>
+        /// <returns></returns>
+        public int UserMessagesCountNotSecure(int user_id, int thread_id)
+        {
+            List<message> all_messages = new List<message>();
+
+
+            #region Got All messages for current user
+                if (thread_id == 1)
+                {
+                    // reporter can see only messages with reporter_access == 1 
+                    all_messages = (db.message.Where(item => (item.report_id == ID && (item.reporter_access == 1)))).ToList();
+                }
+                else if (thread_id == 0)
+                {
+                    // all messages
+                    all_messages = (db.message.Where(item => (item.report_id == ID))).ToList();
+                }
+                else
+                {
+                    all_messages = (db.message.Where(item => (item.report_id == ID && (item.reporter_access == 2)))).ToList();
+                }
+                #endregion
+
+            return all_messages.Count();
+        }
+
+
         #endregion
 
 

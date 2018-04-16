@@ -293,8 +293,7 @@ namespace EC.Controllers
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             ReportModel rm = new ReportModel(case_id);
-            UserModel um = new UserModel(user.id);
-            CasePreviewViewModel cpvm = new CasePreviewViewModel(rm, um);
+            CasePreviewViewModel cpvm = new CasePreviewViewModel(rm, user.id);
             return PartialView("~/Views/Shared/Helpers/_CasePreview.cshtml", cpvm);
         }
     }
