@@ -15,6 +15,7 @@ using EC.App_LocalResources;
 using EC.Models.ViewModel;
 using EC.Common.Interfaces;
 using EC.Localization;
+using EC.Models.ViewModels;
 
 namespace EC.Controllers.API
 {
@@ -36,12 +37,15 @@ namespace EC.Controllers.API
             }
 
             UserModel um = new UserModel(user.id);
+            UsersReportIDsViewModel vmAllIDs = um.GetAllUserReportIdsLists();
+            UsersUnreadReportsNumberViewModel vmUnreadReports = um.GetUserUnreadCasesNumbers(vmAllIDs);
+
             var report_ids = um.ReportsSearchIds(um._user.company_id, filter.ReportFlag);
-            List<int> all_active_report_ids = um.ReportsSearchIds(um._user.company_id, 1);
+            /*List<int> all_active_report_ids = um.ReportsSearchIds(um._user.company_id, 1);
             List<int> completed_report_ids = um.ReportsSearchIds(um._user.company_id, 2);
             List<int> spam_report_ids = um.ReportsSearchIds(um._user.company_id, 3);
             List<int> closed_report_ids = um.ReportsSearchIds(um._user.company_id, 5);
-            List<int> all_pending_reports_ids = um.ReportsSearchIds(um._user.company_id, 4);
+            List<int> all_pending_reports_ids = um.ReportsSearchIds(um._user.company_id, 4);*/
 
             var reports = report_ids.Select(x => new CasePreviewViewModel(x, user.id)).ToList();
 
@@ -95,11 +99,16 @@ namespace EC.Controllers.API
 
                 Counts = new
                 {
-                    Active = UnreadReportsInProgressNumber(all_active_report_ids, user.id),
+                    /*Active = UnreadReportsInProgressNumber(all_active_report_ids, user.id),
                     Completed = UnreadReportsInProgressNumber(completed_report_ids, user.id),
                     Spam = UnreadReportsInProgressNumber(spam_report_ids, user.id),
                     Closed = UnreadReportsInProgressNumber(closed_report_ids, user.id),
-                    Pending = UnreadReportsInProgressNumber(all_pending_reports_ids, user.id),
+                    Pending = UnreadReportsInProgressNumber(all_pending_reports_ids, user.id),*/
+                    Active = vmUnreadReports.unread_active_reports,
+                    Completed = vmUnreadReports.unread_completed_reports,
+                    Spam = vmUnreadReports.unread_spam_reports,
+                    Closed = vmUnreadReports.unread_closed_reports,
+                    Pending = vmUnreadReports.unread_pending_reports,
                 },
 
                 Title = title,
