@@ -47,17 +47,6 @@
                         <span class="btn-dropDownList__btnLink-arrowImg"></span>
                     </a>
                     <ul class="dropDownListInBtn" style="margin-top: 0px;">
-                        <li class="dropDownListInBtn__li" data-id="0">
-                            <a href="#!" class="dropDownListInBtn__a clearfix">
-                                <span class="dropDownListInBtn__logoImg pull-left">
-                                    <img src="http://stark.employeeconfidential.com/Content/Icons/peopleBlockSelect.png" alt="" />
-                                </span>
-                                <span class="dropDownListInBtn__content pull-left">
-                                    <span class="dropDownListInBtn__contentName dropDownListInBtn__contentNameAll">All case administrators</span>
-                                    <span class="dropDownListInBtn__contentPost"></span>
-                                </span>
-                            </a>
-                        </li><!-- /.dropDownListInBtn__li -->
                         @foreach (user _user in rm._mediators_whoHasAccess_toReport)
                         {
                             <li class="dropDownListInBtn__li" data-id="@_user.id">
