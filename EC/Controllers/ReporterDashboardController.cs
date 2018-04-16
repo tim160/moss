@@ -27,14 +27,14 @@ namespace EC.Controllers
             //user = db.user.FirstOrDefault(x => x.id == 167);
             // DEBUG
             if (user == null || user.id == 0 || user.role_id == 4 || user.role_id == 5 || user.role_id ==6  || user.role_id == 7)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("CheckStatus", "Service");
 
 
         //    ViewBag.user_id = id.Value; // 167-171
             id = user.id;
 
             if ((!id.HasValue) || (id.Value == 0))
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("CheckStatus", "Service");
 
             #region EC-CC Viewbag
             ViewBag.is_cc = is_cc;
@@ -52,7 +52,7 @@ namespace EC.Controllers
             var reporter = new ReportModel(report_id);
 
             if(report_id == 0)
-                 return RedirectToAction("Index", "Account");
+                 return RedirectToAction("CheckStatus", "Service");
 
             ViewBag.attachmentFiles = getAttachmentFiles(report_id);
             ViewBag.attachmentAdvFiles = db.attachment
