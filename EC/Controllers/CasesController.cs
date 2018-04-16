@@ -33,7 +33,7 @@ namespace EC.Controllers
 
 
 
-            UserModel um = new UserModel(user.id);
+            /*UserModel um = new UserModel(user.id);
             UsersReportIDsViewModel vmAllIDs = um.GetAllUserReportIdsLists();
             UsersUnreadReportsNumberViewModel vmUnreadReports = um.GetUserUnreadCasesNumbers(vmAllIDs);
 
@@ -42,9 +42,9 @@ namespace EC.Controllers
             List<int> spam_report_ids = vmAllIDs.all_spam_report_ids;
             List<int> closed_report_ids = vmAllIDs.all_closed_report_ids;
             var pending_report_ids = vmAllIDs.all_pending_report_ids;
-            ViewBag.pending_report_ids = PendingReports(pending_report_ids);
+            ViewBag.pending_report_ids = PendingReports(pending_report_ids);*/
             #region Active Reports
-            List <int> temp_all_active_report_ids = all_active_report_ids.OrderBy(t => t).ToList();
+            /*List <int> temp_all_active_report_ids = all_active_report_ids.OrderBy(t => t).ToList();
             int temp_report_count = total_report_count;
             if (all_active_report_ids.Count() < temp_report_count)
                 temp_report_count = all_active_report_ids.Count();
@@ -65,17 +65,17 @@ namespace EC.Controllers
 
             ViewBag.ReportPreviewStart = preview_list;
             ViewBag.ReportPreviewVM = temp_all_active_report_ids;
-
+            */
             #endregion
 
-            ViewBag.um = um;
+            //ViewBag.um = um;
             ViewBag.user_id = user.id;
-            ViewBag.active_report_counters = vmUnreadReports.unread_active_reports;
-            ViewBag.completed_report_counters = vmUnreadReports.unread_completed_reports;
-            ViewBag.spam_report_counters = vmUnreadReports.unread_spam_reports;
-            ViewBag.closed_report_counters = vmUnreadReports.unread_closed_reports;
+            //ViewBag.active_report_counters = vmUnreadReports.unread_active_reports;
+            //ViewBag.completed_report_counters = vmUnreadReports.unread_completed_reports;
+            //ViewBag.spam_report_counters = vmUnreadReports.unread_spam_reports;
+            //ViewBag.closed_report_counters = vmUnreadReports.unread_closed_reports;
 
-            ViewBag.newCase = Request.Params.AllKeys.FirstOrDefault(x => x == "stylenewcase");
+            //ViewBag.newCase = Request.Params.AllKeys.FirstOrDefault(x => x == "stylenewcase");
 
             #region EC-CC Viewbag
             ViewBag.is_cc = is_cc;
