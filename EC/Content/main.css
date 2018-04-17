@@ -4028,6 +4028,10 @@ textarea {
             color: #aeb5b7;
         }
 
+        #caseRouting .tableCasesIndex thead td:first-child {
+            padding-left: 30px;
+        }
+
         #caseRouting .tableCasesIndex tbody td:first-child {
             text-align: left;
             padding-left: 30px;
@@ -4048,7 +4052,7 @@ textarea {
     #caseRouting select, #caseRouting input {
         width: 220px;
         height: 40px;
-        margin-left: 12px;
+        /*margin-left: 12px;*/
         background-color: #f2f7f7;
         outline: none;
         border: none;

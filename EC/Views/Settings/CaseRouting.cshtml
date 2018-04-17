@@ -80,7 +80,7 @@
                                     <input type="file" style="display: none;" onchange="angular.element(this).scope().upload(this); return false;">
                                     <div ng-repeat="file in files | filter: { company_case_routing_id: line.id }:true">
                                         <div>
-                                            <span>
+                                            <span style="font-size: 14px;">
                                                 <a href="{{file.path_nm}}">{{file.file_nm}}</a>
                                             </span>
                                             <span>
