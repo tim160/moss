@@ -759,7 +759,7 @@
                                         <div class="contentBlockChild">
                                             @if (myItem.photo_path != String.Empty)
                                             {
-                                                <img src="@myItem.photo_path" />
+                                                <img src="@Url.Content(myItem.photo_path)" />
                                             }
                                             else
                                             {
@@ -812,7 +812,7 @@
                                     <div class="contentBlockChild">
                                         @if (myItem.photo_path != String.Empty)
                                         {
-                                            <img src="@myItem.photo_path" />
+                                            <img src="@Url.Content(myItem.photo_path)" />
                                         }
                                         else
                                         {
