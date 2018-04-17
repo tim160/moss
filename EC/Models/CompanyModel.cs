@@ -249,7 +249,7 @@ namespace EC.Models
 
             if (db.company_secondary_type.Any(o => o.company_id == companyId))
             {
-                List<company_secondary_type> _list = db.company_secondary_type.Where(s => s.company_id == companyId && s.status_id == 2).ToList();
+                List<company_secondary_type> _list = db.company_secondary_type.Where(s => s.company_id == companyId && s.status_id == 2).OrderBy(t => t.secondary_type_en).ToList();
                 foreach (company_secondary_type cst in _list)
                 {
                     if (statusId.HasValue)
@@ -295,7 +295,7 @@ namespace EC.Models
 
             if (db.company_relationship.Any(o => o.company_id == companyId))
             {
-                List<company_relationship> _list = db.company_relationship.Where(s => s.company_id == companyId && s.status_id == 2).ToList();
+                List<company_relationship> _list = db.company_relationship.Where(s => s.company_id == companyId && s.status_id == 2).OrderBy(t => t.relationship_en).ToList();
                 foreach (company_relationship cst in _list)
                 {
                     if (statusId.HasValue)

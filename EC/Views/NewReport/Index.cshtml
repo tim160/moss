@@ -610,7 +610,7 @@
             }
 
             if ($('#OwnerId').find(":selected").hasClass('needquestion')) {
-                if (confirm('Add mediator to Case?')) {
+                if (confirm('Alert: you have chosen a Case Owner that has not been routed to this type of case, either by location, incident type or level. Do you want to proceed?')) {
                     reopenOrAcceptCase(@Html.Raw(report_id), @Html.Raw(user_id), description);
                 }
                 return;
