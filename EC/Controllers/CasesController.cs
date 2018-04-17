@@ -33,16 +33,16 @@ namespace EC.Controllers
 
 
 
-            /*UserModel um = new UserModel(user.id);
+            UserModel um = new UserModel(user.id);
             UsersReportIDsViewModel vmAllIDs = um.GetAllUserReportIdsLists();
             UsersUnreadReportsNumberViewModel vmUnreadReports = um.GetUserUnreadCasesNumbers(vmAllIDs);
-
+            /*
             List<int> all_active_report_ids = vmAllIDs.all_active_report_ids;
             List<int> completed_report_ids = vmAllIDs.all_completed_report_ids;
             List<int> spam_report_ids = vmAllIDs.all_spam_report_ids;
-            List<int> closed_report_ids = vmAllIDs.all_closed_report_ids;
+            List<int> closed_report_ids = vmAllIDs.all_closed_report_ids;*/
             var pending_report_ids = vmAllIDs.all_pending_report_ids;
-            ViewBag.pending_report_ids = PendingReports(pending_report_ids);*/
+            ViewBag.pending_report_ids = PendingReports(pending_report_ids);
             #region Active Reports
             /*List <int> temp_all_active_report_ids = all_active_report_ids.OrderBy(t => t).ToList();
             int temp_report_count = total_report_count;

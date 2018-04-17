@@ -265,7 +265,7 @@ namespace EC.Models
             }
             else
             {
-                List<secondary_type_mandatory> _list = db.secondary_type_mandatory.Where(s => s.type_id == 1).OrderBy(s => s.weight) .ToList();
+                List<secondary_type_mandatory> _list = db.secondary_type_mandatory.Where(s => s.type_id == 1).OrderBy(s => s.weight).ToList();
                 foreach (secondary_type_mandatory stm in _list)
                 {
                     if (statusId.HasValue)
@@ -277,6 +277,7 @@ namespace EC.Models
                         _location.Add(stm.id, stm.secondary_type_en);
                 }
             }
+            SortedDictionary<string, Int16> AuthorList = new SortedDictionary<string, Int16>();
             return _location;
 
 
