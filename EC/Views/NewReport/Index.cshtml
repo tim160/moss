@@ -112,7 +112,7 @@
                             </tr>
                             <tr>
                                 @if (!is_spam)
-                {
+                                {
                                     <td class="openSans">@GlobalRes.Timeelapsed:</td>
                                 }
                                 else
@@ -120,7 +120,7 @@
                                     <td class="openSans">@GlobalRes.Totaltime:</td>
                                 }
                                 @if (rm._total_days == 1)
-                {
+                                {
                                     <td class="openSansSemibold">1 @GlobalRes.day</td>
                                 }
                                 else
@@ -374,7 +374,7 @@
                     <span class="title">@GlobalRes.GeneralInformation</span>
                     <table class="generalInformation">
                         <tr>
-                            <td>@GlobalRes.ReportingFrom:</td>
+                            <td>Reporting from:</td>
                             <td>@rm._country_string</td>
                         </tr>
                         <tr>
@@ -467,7 +467,7 @@
                     </table>
                     <table class="generalInformation">
                         <tr>
-                            <td>@GlobalRes.Incidentreportedoutside_q</td>
+                            <td>Incident reported externally?</td>
                             <td>@rm._is_reported_outside</td>
                         </tr>
                         @if (!String.IsNullOrEmpty(rm._report.reported_outside_text))
@@ -478,7 +478,7 @@
                             </tr>
                         }
                         <tr>
-                            <td>@GlobalRes.IsReportUrgent</td>
+                            <td>Is report urgent?</td>
                             <td>@rm._is_reported_urgent</td>
                         </tr>
                     </table>
@@ -487,7 +487,7 @@
                     <span class="title">@GlobalRes.CaseInformation</span>
                     <table class="caseInformation">
                         <tr>
-                            <td>@GlobalRes.ReportingAbout:</td>
+                            <td>Incident Type:</td>
                             <td>@rm._secondary_type_string</td>
                         </tr>
                         <tr>
@@ -495,7 +495,7 @@
                             <td>@rm._incident_date_string</td>
                         </tr>
                         <tr>
-                            <td>@GlobalRes.isOngoing:</td>
+                            <td>@GlobalRes.isOngoing?</td>
                             <td>@rm._is_ongoing</td>
                         </tr>
                         @if (!String.IsNullOrEmpty(rm._report.report_frequency_text))
@@ -506,7 +506,7 @@
                             </tr>
                         }
                         <tr>
-                            <td>@GlobalRes.incidentResult:</td>
+                            <td>@GlobalRes.incidentResult?</td>
                             <td>@rm._has_injury_damage</td>
                         </tr>
                         @if (!String.IsNullOrEmpty(rm._report.injury_damage))
