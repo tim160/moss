@@ -123,129 +123,128 @@
     <input type="hidden" id="_report_id" value="@Html.Raw(_report_id)" />
     <input type="hidden" id="user_id" value="@Html.Raw(user_id)" />
     <input type="hidden" id="" value="" />
-    <div id="header" class="header@{@class_ext}">
-        <div class="positionLogo">
-            <a href="/cases">
-                <div class="blueLogo"></div>
-            </a>
-        </div>
-        <div class="headerPadding">
-            @{
-                string mainURL = Request.Url.AbsoluteUri.ToLower();
-                string _menuAnalytics = "", _menuTasks = "", _menuMessages = "", _menuCases = "";
-                // Case/Task      - cases and tasks
-                if ((mainURL.Contains("tasks")) || (mainURL.Contains("task/")))
-                {
-                    if ((!mainURL.Contains("analytics")) && (!mainURL.Contains("/case/")))
-                    {
-                        _menuTasks = "active";
-                    }
-                }
 
-                if ((mainURL.Contains("cases")) || (mainURL.Contains("newreport/")) || (mainURL.Contains("case/")))
+    <header class="header">
+        @{
+            string mainURL = Request.Url.AbsoluteUri.ToLower();
+            string _menuAnalytics = "", _menuTasks = "", _menuMessages = "", _menuCases = "";
+            if ((mainURL.Contains("tasks")) || (mainURL.Contains("task/")))
+            {
+                if ((!mainURL.Contains("analytics")) && (!mainURL.Contains("/case/")))
                 {
-                    _menuCases = "active";
-                }
-
-                if (mainURL.Contains("analytics"))
-                {
-                    _menuAnalytics = "active";
-                }
-                if (mainURL.Contains("messages") && !mainURL.Contains("case/messages/"))
-                {
-                    _menuMessages = "active";
+                    _menuTasks = "active";
                 }
             }
-            <div class="position @_menuAnalytics">
-                <a href="/analytics/Index">
-                    <div class="centerPostition">
-                        <div class="positionIconStatistic">
-                            <div id="iconStatistic"></div>
-                        </div>
-                        <span class="textHeader">@GlobalRes.Analytics</span>
-                    </div>
-                </a>
-            </div><!-- end positionStatistic -->
-            <div class="position @_menuTasks">
-                <a href="/tasks/Index">
-                    <div class="centerPostition">
-                        <div class="positionIconTasks">
-                            <div id="iconTasks"></div>
-                        </div>
-                        <span class="textHeader">@GlobalRes.Tasks</span>
-                        @if (unread_task_number_string.Length > 0)
-                        {
-                            <span class="badge">@unread_task_number_string</span>
-                        }
-                    </div>
-                </a>
-            </div><!-- end positionStatistic -->
-            <div class="positionSpecial @_menuMessages">
-                <a href="/messages/Index">
-                    <div class="centerPostition">
-                        <div class="positionIconMessages">
-                            <div id="iconMessages"></div>
-                        </div>
-                        <div class="floatLeft">
-                            <span class="textHeader">@GlobalRes.Messages</span>
+
+            if ((mainURL.Contains("cases")) || (mainURL.Contains("newreport/")) || (mainURL.Contains("case/")))
+            {
+                _menuCases = "active";
+            }
+
+            if (mainURL.Contains("analytics"))
+            {
+                _menuAnalytics = "active";
+            }
+            if (mainURL.Contains("messages") && !mainURL.Contains("case/messages/"))
+            {
+                _menuMessages = "active";
+            }
+        }
+        <div class="container clearfix">
+            <div class="header__leftBlock">
+                <div class="headerTop-logo">
+                    <a href="#" class="headerTop-logo__link">
+                        <div class="headerTop-logo__img"></div>
+                    </a>
+                </div>
+                <ul class="mainNavigation">
+                    <li class="navConteiner @_menuAnalytics">
+                        <a href="/analytics/Index" class="navConteiner__a ">
+                            <span class="navConteiner__icon navConteiner__icon_analytics"></span>
+                            <span class="navConteiner__name">Analytics</span>
+
+                        </a>
+                    </li><!-- /.navConteiner -->
+                    <li class="navConteiner @_menuTasks">
+                        <a href="/tasks/Index" class="navConteiner__a">
+                            <span class="navConteiner__icon navConteiner__icon_tasks"></span>
+                            <span class="navConteiner__name">Tasks</span>
                             @if (unread_message_number_string.Length > 0)
+                            {<span class="navConteiner__badgeCount ">@unread_task_number_string</span>}
+                        </a>
+                    </li><!-- /.navConteiner -->
+                    <li class="navConteiner @_menuMessages">
+                        <a href="/messages/Index" class="navConteiner__a navConteiner__badgeCount_enable">
+                            <span class="navConteiner__icon navConteiner__icon_messages"></span>
+                            <span class="navConteiner__name">Messages</span>
+                            @if (unread_message_number_string.Length > 0)
+                            { <span class="navConteiner__badgeCount ">@unread_message_number_string</span> }
+                        </a>
+                    </li><!-- /.navConteiner -->
+                    <li class="navConteiner @_menuCases">
+                        <a href="/cases/Index" class="navConteiner__a navConteiner__badgeCount_enable">
+                            <span class="navConteiner__icon navConteiner__icon_dashboard"></span>
+                            <span class="navConteiner__name">Dashboard</span>
+                            @if (unread_report_number_string.Length > 0)
+                            {<span class="navConteiner__badgeCount ">@unread_report_number_string</span>}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="header__rightBlock">
+                <div class="userNavigation">
+                    <a href="#" class="userNavigation__a">
+                        <div class="userNavigation__info">
+                            @*
+                                <div class="userNavigation__name">@(um._user != null ? um._user.first_nm : "")</div>
+                                <div class="userNavigation__surname">@(um._user != null ? um._user.last_nm : "")</div>
+                            *@
+                            @if (_user!= null)
                             {
-                                <span class="badge">@unread_message_number_string</span>
+                                var logo = cm.getLogoCompany(_user.company_id);
+                                if (!String.IsNullOrEmpty(logo))
+                                {
+                                    <img src="@Url.Content(cm.getLogoCompany(_user.company_id))" style="max-height: 44px;" alt="CompanyLogo" />
+                                }
                             }
                         </div>
-                    </div>
-                </a>
-            </div><!-- end positionStatistic -->
-            <div class="position @_menuCases">
-                <a href="/cases/Index">
-                    <div class="centerPostition">
-                        <div class="positionIconCases">
-                            <div id="iconCases"></div>
+                        <div class="userNavigation__logo">
+                            @if ((um._user != null) && (um._user.photo_path.Trim() != ""))
+                            {
+                                <img src="@Url.Content(um._user.photo_path.Trim())" alt="UserLogo" />
+                            }
+                            else
+                            {
+                                <img src="@Url.Content("/Content/Icons/anonimousReporterIcon.png")" alt="UserLogo" />
+                            }
                         </div>
-                        <span class="textHeader">@GlobalRes.Dashboard</span>
-                        @if (unread_report_number_string.Length > 0)
-                        {
-                            <span class="badge">@unread_report_number_string</span>
-                        }
-                    </div><!-- end centerPostition -->
-                </a>
-            </div><!-- end positionStatistic -->
-        </div><!-- end headerPadding -->
-        <div class="leftLogo">
-            <div class="leftLogoBorder" style=""></div>
-            <div class="aui-header onclick-menu" tabindex="0">
-                <div class="centerBlock">
-                    @if ((um._user != null) && (um._user.photo_path.Trim() != ""))
-                    {
-                        <img class="secondLogo" src='@Url.Content(um._user.photo_path.Trim())' />
-                    }
-                    else
-                    {
-                        <img src='@Url.Content("/Content/Icons/anonimousReporterIcon.png")' />
-                    }
-                    <ul class="onclick-menu-content">
-                        <li>
-                            <a href="/settings/index/">@GlobalRes.Settings</a>
-                            <!--<button>Settings</button>-->
+                        <div class="userNavigation__triangle"></div>
+                    </a>
+                    <ul class="dropDown-navigation">
+                        <li class="dropDown-navigation__li"><a href="/settings/index/" class="dropDown-navigation__a">@LocalizationGetter.GetString("Settings")</a></li>
+                        <li class="dropDown-navigation__li active">
+                            <a href="/settings/password/" class="dropDown-navigation__a">
+                                @LocalizationGetter.GetString("Password")
+                            </a>
                         </li>
-                        <li>
-                            <a href="/settings/password/">@GlobalRes.Password</a>
-                            <!--<button>Settings</button>-->
-                        </li>
-                        @*<li>
-                            <a href="/Payment/History">@GlobalRes.Subscription</a>
+                        @*<li class="dropDown-navigation__li">
+                                <a href="/Payment/History" class="dropDown-navigation__a">
+                                    @LocalizationGetter.GetString("Subscription")
+                                </a>
                             </li>*@
-                        <li>
-                            <form action="@Url.Action("Logout", "Base")">
-                                <button>@LocalizationGetter.GetString("Logout2")</button>
+                        <li class="dropDown-navigation__li">
+                            <form id="logout_form" action="@Url.Action("Logout", "Base")">
+                                <a href="javascript:{}" onclick="document.getElementById('logout_form').submit();" class="dropDown-navigation__a">
+                                    @LocalizationGetter.GetString("Logout2")
+                                </a>
                             </form>
                         </li>
                     </ul>
                 </div>
-                <div class="triangles"></div>
             </div>
-        </div><!--end LeftLogo-->
-    </div><!-- end header -->
+        </div>
+    </header>
+   
     <div class="menuCasesBlock" style="margin-top: 35px; margin-bottom: 35px;">
         <div class="headerBlockTextLeft">
             @{
