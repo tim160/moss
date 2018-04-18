@@ -37,7 +37,7 @@
                     <div class="teamBlock shadowLight">
                         <div class="teamBlock-header clearfix">
                             <div class="teamBlock-header__logo">
-                                <img ng-src="{{item.user.photo_path ==  '' ? '/Content/Icons/noPhoto.png' : item.user.photo_path}}" alt="" class="teamBlock-header__logoImg" />
+                                <img ng-src="{{item.user.photo_path ==  '' ? '/Content/Icons/noPhoto.png' : item.user.photo_path.substring(1)}}" alt="" class="teamBlock-header__logoImg" />
                             </div>
                             <div class="teamBlock-header__title">
                                 <div class="teamBlock-header__name clearfix">
