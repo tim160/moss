@@ -155,12 +155,12 @@ namespace EC.Controllers
                 ViewBag.departments = HtmlDataHelper.MakeSelect(departmentsActive, item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("department")));
 
 
-                ViewBag.locationsOfIncident = HtmlDataHelper.MakeSelect(companyModel.LocationsOfIncident(id).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
+                ViewBag.locationsOfIncident = HtmlDataHelper.MakeSelect(companyModel.Locations(id).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
 
                 // ViewBag.departments2 = currentCompany.company_department.ToList();
                 ViewBag.departments2 = companyModel.CompanyDepartmentsActive(id).ToList();
 
-                ViewBag.locationsOfIncident2 = companyModel.LocationsOfIncident(id).ToList();
+                ViewBag.locationsOfIncident2 = companyModel.Locations(id).ToList();
 
                 ViewBag.injury_damage = companyModel.GetInjuryDamages().ToList();
 
@@ -247,7 +247,7 @@ namespace EC.Controllers
             ViewBag.anonimity = companyModel.GetAnonymities(id, 0);
             ViewBag.relationship = companyModel.getRelationships();
             ViewBag.departments = HtmlDataHelper.MakeSelect(currentCompany.company_department.ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("department")));
-            ViewBag.locationsOfIncident = HtmlDataHelper.MakeSelect(companyModel.LocationsOfIncident(id).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
+            ViewBag.locationsOfIncident = HtmlDataHelper.MakeSelect(companyModel.Locations(id).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
 
             ViewBag.injury_damage = companyModel.GetInjuryDamages().ToList();
 
@@ -285,7 +285,7 @@ namespace EC.Controllers
             ViewBag.anonimity = companyModel.GetAnonymities(id, 0);
             ViewBag.relationship = companyModel.getRelationships();
             ViewBag.departments = HtmlDataHelper.MakeSelect(currentCompany.company_department.ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("department")));
-            ViewBag.locationsOfIncident = HtmlDataHelper.MakeSelect(companyModel.LocationsOfIncident(id).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
+            ViewBag.locationsOfIncident = HtmlDataHelper.MakeSelect(companyModel.Locations(id).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
 
             ViewBag.injury_damage = companyModel.GetInjuryDamages().ToList();
 
@@ -322,7 +322,7 @@ namespace EC.Controllers
             ViewBag.anonimity = companyModel.GetAnonymities(id, 0);
             ViewBag.relationship = companyModel.getRelationships();
             ViewBag.departments = HtmlDataHelper.MakeSelect(currentCompany.company_department.ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("department")));
-            ViewBag.locationsOfIncident = HtmlDataHelper.MakeSelect(companyModel.LocationsOfIncident(id).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
+            ViewBag.locationsOfIncident = HtmlDataHelper.MakeSelect(companyModel.Locations(id).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
 
             ViewBag.injury_damage = companyModel.GetInjuryDamages().ToList();
 
@@ -359,7 +359,7 @@ namespace EC.Controllers
             ViewBag.anonimity = companyModel.GetAnonymities(id, 0);
             ViewBag.relationship = companyModel.getRelationships();
             ViewBag.departments = HtmlDataHelper.MakeSelect(currentCompany.company_department.ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("department")));
-            ViewBag.locationsOfIncident = HtmlDataHelper.MakeSelect(companyModel.LocationsOfIncident(id).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
+            ViewBag.locationsOfIncident = HtmlDataHelper.MakeSelect(companyModel.Locations(id).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
 
             ViewBag.injury_damage = companyModel.GetInjuryDamages().ToList();
 

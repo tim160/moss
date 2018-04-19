@@ -179,7 +179,7 @@
                     <div class="closeIcon"></div>
                 </div>
                 <div class="tableIncidentType">
-                    @foreach (DictionaryEntry _entry in cm.CompanyIncidentTypes(company_id))
+                    @foreach (var _entry in cm.CompanyIncidentTypes(company_id))
                     {
                         <div style="display: flex;">
                             <p>@_entry.Value</p>
@@ -208,7 +208,7 @@
                     <div class="closeIcon"></div>
                 </div>
                 <div class="tableReporterType">
-                    @foreach (DictionaryEntry _entry in cm.CompanyReporterTypes(company_id))
+                    @foreach (var _entry in cm.CompanyReporterTypes(company_id))
                     {
                         <div style="display: flex;">
                             <p>@_entry.Value</p>
