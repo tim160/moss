@@ -75,9 +75,9 @@ namespace EC.Controllers.API
                             //total_days = rm._total_days,
                             //total_days = Math.Floor((DateTime.Now - rm._report.incident_dt).TotalDays),
                             total_days = Math.Floor((DateTime.Now.Date - rm._report.reported_dt.Date).TotalDays),
-                            case_dt_s = rm._report.incident_dt.Ticks,
+                            case_dt_s = rm._report.reported_dt.Ticks,
                             cc_is_life_threating = rm._report.cc_is_life_threating,
-                            last_investigation_status_date = m_DateTimeHelper.ConvertDateToLongMonthString(rm._last_investigation_status_date),
+                            last_investigation_status_date = m_DateTimeHelper.ConvertDateToLongMonthString(rm.Last_investigation_status_date()),
                             mediators = rm._mediators_whoHasAccess_toReport.Select(z => new {
                                 id = z.id,
                                 first_nm = z.first_nm,

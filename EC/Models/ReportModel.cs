@@ -874,75 +874,67 @@ namespace EC.Models
                 return ECGlobalConstants._default_date;
         }
 
-        public bool IsSpamScreen
+        public bool IsSpamScreen()
         {
-            get
-            {
-                bool is_spam = false;
-                if ((_investigation_status == ECGlobalConstants.investigation_status_spam) || (_previous_investigation_status_id == ECGlobalConstants.investigation_status_spam && _investigation_status == ECGlobalConstants.investigation_status_closed))
-                {
-                    is_spam = true;
-                    // at least its spam
 
-                    /*         if (promotion_status_date(Constant.investigation_status_spam) > _last_read_date(user_id))
-                             {
-                                 is_spam = true;
-                             }*/
+            int _prev_inv_status_id = _previous_investigation_status_id();
+            bool is_spam = false;
+            if ((_investigation_status == ECGlobalConstants.investigation_status_spam) || (_prev_inv_status_id == ECGlobalConstants.investigation_status_spam && _investigation_status == ECGlobalConstants.investigation_status_closed))
+            {
+                is_spam = true;
+                // at least its spam
 
-                }
-                return is_spam;
+                /*         if (promotion_status_date(Constant.investigation_status_spam) > _last_read_date(user_id))
+                         {
+                             is_spam = true;
+                         }*/
+
             }
+            return is_spam;
         }
-        public bool IsCompletedScreen
+        public bool IsCompletedScreen()
         {
-            get
+            bool is_completed = false;
+            if ((_investigation_status == ECGlobalConstants.investigation_status_completed) || (_investigation_status == ECGlobalConstants.investigation_status_resolution))
             {
-                bool is_completed = false;
-                if ((_investigation_status == ECGlobalConstants.investigation_status_completed) || (_investigation_status == ECGlobalConstants.investigation_status_resolution))
-                {
-                    is_completed = true;
-                    /*    // at least its spam
-                        if (promotion_status_date(Constant.investigation_status_closed) > _last_read_date(user_id))
-                        {
-                            is_closed = true;
-                        }*/
-                }
-                return is_completed;
+                is_completed = true;
+                /*    // at least its spam
+                    if (promotion_status_date(Constant.investigation_status_closed) > _last_read_date(user_id))
+                    {
+                        is_closed = true;
+                    }*/
             }
+            return is_completed;
         }
-        public bool IsClosedScreen
+        public bool IsClosedScreen()
         {
-            get
+            int _prev_inv_status_id = _previous_investigation_status_id();
+            bool is_closed = false;
+            if (((_investigation_status == ECGlobalConstants.investigation_status_closed) && (_prev_inv_status_id != ECGlobalConstants.investigation_status_spam)))
             {
-                bool is_closed = false;
-                if (((_investigation_status == ECGlobalConstants.investigation_status_closed) && (_previous_investigation_status_id != ECGlobalConstants.investigation_status_spam)))
-                {
-                    is_closed = true;
-                    /*    // at least its spam
-                        if (promotion_status_date(Constant.investigation_status_closed) > _last_read_date(user_id))
-                        {
-                            is_closed = true;
-                        }*/
-                }
-                return is_closed;
+                is_closed = true;
+                /*    // at least its spam
+                    if (promotion_status_date(Constant.investigation_status_closed) > _last_read_date(user_id))
+                    {
+                        is_closed = true;
+                    }*/
             }
+            return is_closed;
+
         }
-        public bool IsPendingScreen
+        public bool IsPendingScreen()
         {
-            get
+            bool is_closed = false;
+            if ((_investigation_status == ECGlobalConstants.investigation_status_pending) || (_investigation_status == ECGlobalConstants.investigation_status_review))
             {
-                bool is_closed = false;
-                if ((_investigation_status == ECGlobalConstants.investigation_status_pending) || (_investigation_status == ECGlobalConstants.investigation_status_review))
-                {
-                    is_closed = true;
-                    /*    // at least its spam
-                        if (promotion_status_date(Constant.investigation_status_closed) > _last_read_date(user_id))
-                        {
-                            is_closed = true;
-                        }*/
-                }
-                return is_closed;
+                is_closed = true;
+                /*    // at least its spam
+                    if (promotion_status_date(Constant.investigation_status_closed) > _last_read_date(user_id))
+                    {
+                        is_closed = true;
+                    }*/
             }
+            return is_closed;
         }
 
         public DateTime promotion_toactive_status_date()
@@ -1013,20 +1005,17 @@ namespace EC.Models
         }
 
 
-        public report_investigation_status _last_promotion
+        public report_investigation_status _last_promotion()
         {
-            get
+            int status_id = _investigation_status;
+            if (db.report_investigation_status.Any(item => ((item.report_id == ID) && (item.investigation_status_id == status_id))))
             {
-                int status_id = _investigation_status;
-                if (db.report_investigation_status.Any(item => ((item.report_id == ID) && (item.investigation_status_id == status_id))))
-                {
-                    report_investigation_status _current_report_status = db.report_investigation_status.Where(item => ((item.report_id == ID) && (item.investigation_status_id == status_id))).OrderByDescending(a => a.created_date).FirstOrDefault();
-                    return _current_report_status;
-                }
-                else
-                {
-                    return null;
-                }
+                report_investigation_status _current_report_status = db.report_investigation_status.Where(item => ((item.report_id == ID) && (item.investigation_status_id == status_id))).OrderByDescending(a => a.created_date).FirstOrDefault();
+                return _current_report_status;
+            }
+            else
+            {
+                return null;
             }
         }
 
@@ -1098,10 +1087,9 @@ namespace EC.Models
         /// </summary>
         /// <param name="report_id"></param>
         /// <returns></returns>
-        public string _anonymousLevel_reporterVersion
+        public string _anonymousLevel_reporterVersion()
         {
-            get
-            {
+
                 string anon_level = "";
                 int anon_level_id = 0;
 
@@ -1120,13 +1108,10 @@ namespace EC.Models
                 }
 
                 return anon_level;
-            }
         }
 
-        public string _anonymousLevel_mediatorVersion
+        public string _anonymousLevel_mediatorVersion()
         {
-            get
-            {
                 string anon_level = "";
                 int anon_level_id = 0;
 
@@ -1145,7 +1130,6 @@ namespace EC.Models
                 }
 
                 return anon_level;
-            }
         }
 
         public string _anonymousLevel_mediatorVersionByCaller(int caller_id)
@@ -1185,18 +1169,13 @@ namespace EC.Models
             return anon_level;
 
         }
-        public bool _has_attachments
+        public bool _has_attachments()
         {
-            get
-            {
-                return (_attachments.Count > 0);
-            }
+            return (_attachments().Count > 0);
         }
 
-        public List<string> _attachments
+        public List<string> _attachments()
         {
-            get
-            {
                 List<string> _list = new List<string>();
 
                 if (db.attachment.Any(item => (item.report_id == ID) && (item.status_id == 2) && !item.visible_mediators_only.HasValue && !item.visible_reporter.HasValue))
@@ -1205,7 +1184,6 @@ namespace EC.Models
                 }
 
                 return _list;
-            }
         }
         #endregion
 
@@ -2039,10 +2017,8 @@ namespace EC.Models
         /// </summary>
         /// <param name="report_id"></param>
         /// <returns></returns>
-        public string _investigation_status_string
+        public string _investigation_status_string()
         {
-            get
-            {
                 string status = "";
 
                 investigation_status _status = db.investigation_status.Where(item => item.id == _investigation_status).FirstOrDefault();
@@ -2052,7 +2028,6 @@ namespace EC.Models
                 }
 
                 return status.Trim();
-            }
         }
 
 
@@ -2076,10 +2051,8 @@ namespace EC.Models
         /// User of last investigation status
         /// </summary>
         /// <returns></returns>
-        public int _last_investigation_status_user_id
+        public int Last_investigation_status_user_id()
         {
-            get
-            {
                 report_investigation_status last_status = _last_investigation_status();
 
                 if (last_status != null)
@@ -2088,26 +2061,22 @@ namespace EC.Models
                 }
 
                 return 0;
-            }
         }
 
         /// <summary>
         /// User of last investigation status
         /// </summary>
         /// <returns></returns>
-        public DateTime? _last_investigation_status_date
+        public DateTime? Last_investigation_status_date()
         {
-            get
+            report_investigation_status last_status = _last_investigation_status();
+
+            if (last_status != null)
             {
-                report_investigation_status last_status = _last_investigation_status();
-
-                if (last_status != null)
-                {
-                    return last_status.created_date;
-                }
-
-                return null;
+                return last_status.created_date;
             }
+
+            return null;
         }
         #endregion
 
@@ -2117,11 +2086,8 @@ namespace EC.Models
         /// <summary>
         /// return last, but 1 status. need it to check where case came from
         /// </summary>
-        public int _previous_investigation_status_id
+        public int _previous_investigation_status_id()
         {
-            get
-            {
-
                 report_investigation_status last_status = new report_investigation_status();
                 report_investigation_status previous_last_status = new report_investigation_status();
 
@@ -2138,7 +2104,6 @@ namespace EC.Models
                 }
                 else
                     return 0;
-            }
         }
 
         public report_investigation_status _previous_investigation_status()
@@ -2154,19 +2119,16 @@ namespace EC.Models
 
             return null;
         }
-        public int _previous_investigation_status_user_id
+        public int _previous_investigation_status_user_id()
         {
-            get
+            report_investigation_status _status = _previous_investigation_status();
+
+            if (_status != null)
             {
-                report_investigation_status _status = _previous_investigation_status();
-
-                if (_status != null)
-                {
-                    return _status.user_id;
-                }
-
-                return 0;
+                return _status.user_id;
             }
+
+            return 0;
         }
         #endregion
 
@@ -2331,19 +2293,20 @@ namespace EC.Models
         public string CaseStatusGreenBarTitle()
         {
             string _green_bar_status = "";
+            int _prev_inv_status_id = _previous_investigation_status_id();
 
             //case just closed
             if (_investigation_status == (Int32)CaseStatusConstants.CaseStatusValues.Closed)
                 _green_bar_status = GlobalRes.CaseClosed;
 
             //current - investigation, previous - closed => Re-opened
-            if (_investigation_status == (Int32)CaseStatusConstants.CaseStatusValues.Investigation && _previous_investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Closed)
+            if (_investigation_status == (Int32)CaseStatusConstants.CaseStatusValues.Investigation && _prev_inv_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Closed)
             {
                 _green_bar_status = GlobalRes.CaseReOpened;
             }
 
             //current - investigation, previous - Resolution => Returned for futher investigation
-            if (_investigation_status == (Int32)CaseStatusConstants.CaseStatusValues.Investigation && _previous_investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Resolution)
+            if (_investigation_status == (Int32)CaseStatusConstants.CaseStatusValues.Investigation && _prev_inv_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Resolution)
             {
                 _green_bar_status = GlobalRes.CaseReturnedFutherInvestigation;
             }
@@ -2435,21 +2398,17 @@ namespace EC.Models
             }
         }
 
-        public List<user> MediatorsApproveCaseClosure
+        public List<user> MediatorsApproveCaseClosure()
         {
-            get
-            {
-                return (
-                    from m in db.report_mediator_assigned.Where(x => x.report_id == ID).Select(x => x.mediator_id).Distinct().ToList()
-                    join u in db.user.Where(x => x.user_permissions_approve_case_closure != 1) on m equals u.id
-                    select u).ToList();
-            }
+            return (
+                from m in db.report_mediator_assigned.Where(x => x.report_id == ID).Select(x => x.mediator_id).Distinct().ToList()
+                join u in db.user.Where(x => x.user_permissions_approve_case_closure != 1) on m equals u.id
+                select u).ToList();
         }
 
-        public List<UserViewModel> MediatorsAcceptCase
+        public List<UserViewModel> MediatorsAcceptCase()
         {
-            get
-            {
+
                 var res = new List<UserViewModel>();
 
                 var list1 = _mediators_whoHasAccess_toReport;
@@ -2508,5 +2467,4 @@ namespace EC.Models
                 return res.GroupBy(x => x.User.id).Select(x => x.First()).ToList();
             }
         }
-    }
 }

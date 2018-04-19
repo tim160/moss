@@ -67,7 +67,7 @@
     string[] _statuses = ECGlobalConstants.ReportFlowStatusesList;
 
     string same_mediator_warning = LocalizationGetter.GetString("AddFurtherNotes");
-    if (rm != null && user_id == rm._last_investigation_status_user_id)
+    if (rm != null && user_id == rm.Last_investigation_status_user_id())
     {
         same_mediator_warning = LocalizationGetter.GetString("RecommendSecond1") + " " + LocalizationGetter.GetString("RecommendSecond2");
     }

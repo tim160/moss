@@ -15,6 +15,7 @@
 
 
     ReportModel rm = new ReportModel(report_id);
+    int _previous_investigation_status_id = rm._previous_investigation_status_id();
 
     string _color_descr = rm._color_descr;
     var company_name = rm._company_name;
@@ -46,7 +47,7 @@
     if (flag == 2)
     {
         statusclass = "completedCases";
-        if ((rm._investigation_status == ECGlobalConstants.investigation_status_closed) || (rm._previous_investigation_status_id == ECGlobalConstants.investigation_status_completed))
+        if ((rm._investigation_status == ECGlobalConstants.investigation_status_closed) || (_previous_investigation_status_id == ECGlobalConstants.investigation_status_completed))
         {
             typeCases = "caseClosed";
         }
@@ -115,14 +116,14 @@
                         }
                         <div class="blockButtonAndDate">
                             <p class="caseBtn @caseStatusBtn"></p><!-- and class = caseResolvedBtn -->
-                            <p class="data">@m_DateTimeHelper.ConvertDateToLongMonthString(rm._last_investigation_status_date)</p>
+                            <p class="data">@m_DateTimeHelper.ConvertDateToLongMonthString(rm.Last_investigation_status_date())</p>
                         </div>
                     }
                     @if (flag == 3)
                     {
                         <div class="blockButtonAndDate">
                             <p class="caseBtn caseSpamBtn"></p>
-                            <p class="data">@m_DateTimeHelper.ConvertDateToLongMonthString(rm._last_investigation_status_date)</p>
+                            <p class="data">@m_DateTimeHelper.ConvertDateToLongMonthString(rm.Last_investigation_status_date())</p>
                         </div>
                     }
                 </div>
@@ -145,7 +146,7 @@
                     <br />
                     @GlobalRes.IncidentDate: <span> @rm._incident_date_string_month_long </span>
                     <br />
-                    @GlobalRes.CaseStatusUp: <span> @rm._investigation_status_string </span>
+                    @GlobalRes.CaseStatusUp: <span> @rm._investigation_status_string() </span>
                     <br />
                     @GlobalRes.DepartmentsInvolved: <span> @rm._departments_string </span>
                 </div>
@@ -303,7 +304,7 @@
                 <li class="infoCasesBlock">
                     <div class="contanatTable">
                         <div class="infoIcon">
-                            @if ((rm._investigation_status == ECGlobalConstants.investigation_status_completed) || ((rm._investigation_status == ECGlobalConstants.investigation_status_closed) && (rm._previous_investigation_status_id == ECGlobalConstants.investigation_status_completed)))
+                            @if ((rm._investigation_status == ECGlobalConstants.investigation_status_completed) || ((rm._investigation_status == ECGlobalConstants.investigation_status_closed) && (_previous_investigation_status_id == ECGlobalConstants.investigation_status_completed)))
                             {
                                 <img src='@Url.Content("/Content/Icons/caseNotResolvedIcons.png")' />
                             }
@@ -354,7 +355,7 @@
                             }
                             else
                             {
-                                if (((rm._investigation_status == ECGlobalConstants.investigation_status_closed) && (rm._previous_investigation_status_id == ECGlobalConstants.investigation_status_resolution)) || ((rm._investigation_status == ECGlobalConstants.investigation_status_closed) && (rm._previous_investigation_status_id == ECGlobalConstants.investigation_status_completed)))
+                                if (((rm._investigation_status == ECGlobalConstants.investigation_status_closed) && (_previous_investigation_status_id == ECGlobalConstants.investigation_status_resolution)) || ((rm._investigation_status == ECGlobalConstants.investigation_status_closed) && (_previous_investigation_status_id == ECGlobalConstants.investigation_status_completed)))
                                 {
                                     {
                                         // confirmed resolved/completed
@@ -390,7 +391,7 @@
                                                 <div class="textRight">
                                                     @if (j == 0)
                                                     {
-                                                        if ((rm._investigation_status == ECGlobalConstants.investigation_status_closed) && (rm._previous_investigation_status_id == ECGlobalConstants.investigation_status_completed))
+                                                        if ((rm._investigation_status == ECGlobalConstants.investigation_status_closed) && (_previous_investigation_status_id == ECGlobalConstants.investigation_status_completed))
                                                         {
                                                             <div class="CaseCantBeResolved title">@GlobalRes.CaseCantBeResolved.</div>
                                                         }
@@ -464,7 +465,7 @@
                             }
                             else
                             {
-                                if ((rm._investigation_status == ECGlobalConstants.investigation_status_closed) && (rm._previous_investigation_status_id == ECGlobalConstants.investigation_status_spam))
+                                if ((rm._investigation_status == ECGlobalConstants.investigation_status_closed) && (_previous_investigation_status_id == ECGlobalConstants.investigation_status_spam))
                                 {
                                     for (int j = 0; j < 2; j++)
                                     {

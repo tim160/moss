@@ -264,7 +264,7 @@ namespace EC.Models
                         //   temp_status = new ReportModel(_temp.id)._investigation_status;
 
                         temp_rm = new ReportModel(_temp.id);
-                        if ((!temp_rm.IsSpamScreen) && (!temp_rm.IsPendingScreen) && (!temp_rm.IsClosedScreen) && (!temp_rm.IsCompletedScreen))
+                        if ((!temp_rm.IsSpamScreen()) && (!temp_rm.IsPendingScreen()) && (!temp_rm.IsClosedScreen()) && (!temp_rm.IsCompletedScreen()))
                             //  if ((temp_status == 3) || (temp_status == 4) || (temp_status == 5))
                             reports.Add(_temp);
                     }
@@ -274,7 +274,7 @@ namespace EC.Models
                     // closed
                     foreach (report _temp in all_reports)
                     {
-                        if (new ReportModel(_temp.id).IsCompletedScreen)
+                        if (new ReportModel(_temp.id).IsCompletedScreen())
                             reports.Add(_temp);
 
                         //  if (new ReportModel(_temp.id)._investigation_status == 6)
@@ -286,7 +286,7 @@ namespace EC.Models
                     // spam
                     foreach (report _temp in all_reports)
                     {
-                        if (new ReportModel(_temp.id).IsSpamScreen)
+                        if (new ReportModel(_temp.id).IsSpamScreen())
                             reports.Add(_temp);
                         //  if (new ReportModel(_temp.id)._investigation_status == 7)
                         ///     reports.Add(_temp);
@@ -297,7 +297,7 @@ namespace EC.Models
                     // pending
                     foreach (report _temp in all_reports)
                     {
-                        if (new ReportModel(_temp.id).IsPendingScreen)
+                        if (new ReportModel(_temp.id).IsPendingScreen())
                             reports.Add(_temp);
                         //   if ((new ReportModel(_temp.id)._investigation_status == 1) || (new ReportModel(_temp.id)._investigation_status == 2))
                         //       reports.Add(_temp);
@@ -308,7 +308,7 @@ namespace EC.Models
                     // pending
                     foreach (report _temp in all_reports)
                     {
-                        if (new ReportModel(_temp.id).IsClosedScreen)
+                        if (new ReportModel(_temp.id).IsClosedScreen())
                             reports.Add(_temp);
                         //   if ((new ReportModel(_temp.id)._investigation_status == 1) || (new ReportModel(_temp.id)._investigation_status == 2))
                         //       reports.Add(_temp);

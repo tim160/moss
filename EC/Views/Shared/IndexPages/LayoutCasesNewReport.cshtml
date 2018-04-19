@@ -75,7 +75,7 @@
     string[] _statuses = ECGlobalConstants.ReportFlowStatusesList;
 
     string same_mediator_warning = GlobalRes.AddFurtherNotes;
-    if (rm != null && user_id == rm._last_investigation_status_user_id)
+    if (rm != null && user_id == rm.Last_investigation_status_user_id())
     {
         same_mediator_warning = GlobalRes.RecommendSecond1 + " " + GlobalRes.RecommendSecond2;
     }

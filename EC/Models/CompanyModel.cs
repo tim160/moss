@@ -95,17 +95,17 @@ namespace EC.Models
         public List<company_location> Locations(int companyId, int? statusId = null)
         {
             if(statusId.HasValue)
-                return db.company_location.Where(s => (s.company_id == companyId && s.status_id == statusId)).ToList();
+                return db.company_location.Where(s => (s.company_id == companyId && s.status_id == statusId)).OrderBy(t => t.location_en).ToList();
             else
-                return db.company_location.Where(s => s.company_id == companyId).ToList();
+                return db.company_location.Where(s => s.company_id == companyId).OrderBy(t => t.location_en).ToList();
         }
 
         public List<company_outcome> Outcomes(int companyId, int? statusId = null)
         {
             if (statusId.HasValue)
-                return db.company_outcome.Where(s => (s.company_id == companyId && s.status_id == statusId)).ToList();
+                return db.company_outcome.Where(s => (s.company_id == companyId && s.status_id == statusId)).OrderBy(t => t.outcome_en).ToList();
             else
-                return db.company_outcome.Where(s => s.company_id == companyId).ToList();
+                return db.company_outcome.Where(s => s.company_id == companyId).OrderBy(t => t.outcome_en).ToList();
 
         }
 
@@ -230,11 +230,11 @@ namespace EC.Models
          */
         public List<company_department> CompanyDepartments(int companyId)
         {
-            return db.company_department.Where(s => s.company_id == companyId).ToList();
+            return db.company_department.Where(s => s.company_id == companyId).OrderBy(t => t.department_en).ToList();
         }
         public List<company_department> CompanyDepartmentsActive(int companyId)
         {
-            return db.company_department.Where(s => s.company_id == companyId && s.status_id == 2).ToList();
+            return db.company_department.Where(s => s.company_id == companyId && s.status_id == 2).OrderBy(t => t.department_en).ToList();
         }
 
         /// <summary>
