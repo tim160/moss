@@ -18,35 +18,104 @@
 
 @Html.Partial("~/Views/Shared/Partial/_NewCasesTopMenu.cshtml")
 
-<div class="content-container__inner">
-    <div class="divider p-tb-10"></div><!-- /.divider -->
+<div class="container mainNavigationTabs__tabContent-container">
+    <div class="content-container__inner">
+        <div class="divider p-tb-10"></div><!-- /.divider -->
 
-    <div class="createTaskBlock">
-        <div class="createTaskBlock-header clearfix">
-            <div class="createTaskBlock-header__title">
-                <strong>Create new task.</strong> Don’t forget to assign it!
-            </div><!-- /.createTaskBlock-header__title -->
-            <div class="createTaskBlock-header__close">&#215;</div><!-- /.createTaskBlock-header__close btn-close -->
-        </div><!-- /.createTaskBlock-header -->
-        <div class="createTaskBlock-content">
-            <div class="createTaskBlock-content__input-taskNameContainer">
-                <input type="text" placeholder="Task title" class="createTaskBlock-content__input-taskName" />
-            </div><!-- /.createTaskBlock-content__input-taskNameContainer -->
-            <div class="createTaskBlock-content__input-taskDescriptionContainer">
-                <textarea name="" id="" placeholder="Task description" class="createTaskBlock-content__input-taskDescription textareaBlock"></textarea>
-            </div><!-- /.createTaskBlock-content__input-taskDescriptionContainer -->
-        </div><!-- /.createTaskBlock-content -->
-        <div class="createTaskBlock-footer clearfix">
-            <div class="createTaskBlock-footer__leftSide clearfix">
+        <div class="createTaskBlock">
+            <div class="createTaskBlock-header clearfix">
+                <div class="createTaskBlock-header__title">
+                    <strong>Create new task.</strong> Don’t forget to assign it!
+                </div><!-- /.createTaskBlock-header__title -->
+                <div class="createTaskBlock-header__close">&#215;</div><!-- /.createTaskBlock-header__close btn-close -->
+            </div><!-- /.createTaskBlock-header -->
+            <div class="createTaskBlock-content">
+                <div class="createTaskBlock-content__input-taskNameContainer">
+                    <input type="text" placeholder="Task title" class="createTaskBlock-content__input-taskName" />
+                </div><!-- /.createTaskBlock-content__input-taskNameContainer -->
+                <div class="createTaskBlock-content__input-taskDescriptionContainer">
+                    <textarea name="" id="" placeholder="Task description" class="createTaskBlock-content__input-taskDescription textareaBlock"></textarea>
+                </div><!-- /.createTaskBlock-content__input-taskDescriptionContainer -->
+            </div><!-- /.createTaskBlock-content -->
+            <div class="createTaskBlock-footer clearfix">
+                <div class="createTaskBlock-footer__leftSide clearfix">
 
-                <div class="btn-dropDownList pull-left m-r-15 btnAssign" data-id="0">
+                    <div class="btn-dropDownList pull-left m-r-15 btnAssign" data-id="0">
+                        <a href="#!" class="btn btn-dropDownList__btnLink ">
+                            <span class="btn-dropDownList__btnLink-logoIcon"></span>
+                            <span class="btn-dropDownList__btnLink-beforeText">:</span>
+                            <span class="btn-dropDownList__btnLink-text">Assign Case Admin</span>
+                            <span class="btn-dropDownList__btnLink-arrowImg"></span>
+                        </a>
+                        <ul class="dropDownListInBtn" style="margin-top: 0px;">
+                            @foreach (user _user in rm._mediators_whoHasAccess_toReport)
+                            {
+                                <li class="dropDownListInBtn__li" data-id="@_user.id">
+                                    <a href="#!" class="dropDownListInBtn__a clearfix">
+                                        <span class="dropDownListInBtn__logoImg pull-left">
+                                            @if (_user.photo_path.Trim() != "")
+                                            {
+                                                <img src='@Url.Content(_user.photo_path.Trim())' alt="" />
+                                            }
+                                            else
+                                            {
+                                                <img src='@Url.Content("~/Content/Icons/noPhoto.png")' alt="" />
+                                            }
+                                        </span>
+                                        <span class="dropDownListInBtn__content pull-left">
+                                            <span class="dropDownListInBtn__contentName">@_user.first_nm @_user.last_nm</span>
+                                            <span class="dropDownListInBtn__contentPost">@_user.title_ds</span>
+                                        </span>
+                                    </a>
+                                </li><!-- /.dropDownListInBtn__li -->
+                            }
+                        </ul><!-- /.btn-dropDownList__ul -->
+                    </div><!-- /.btn-dropDownList -->
+
+                    <div class="btn btn-attach pull-left m-r-15">
+                        <div class="btn-attach__img"></div><!-- /.btn-attach__img -->
+                        <div class="btn-attach__text">
+                            Attach files
+                        </div><!-- /.btn-attach__text -->
+                        <input type="file" multiple="multiple" class="btn-attach__input" />
+                    </div><!-- /.btn -->
+
+                    <div class="btn btn-dateCalendar">
+                        <div class="btn-dateCalendar__img"></div><!-- /.btn-dateCalendar__img -->
+                        <div class="btn-dateCalendar__text">
+                            Due date
+                        </div><!-- /.btn-dateCalendar__text -->
+                        <input type="text" id="datepicker" value="" style="width: 1px; height: 1px; max-width: 1px; max-height: 1px; padding: 0px;">
+                    </div><!-- /.btn btn-dateCalendar -->
+
+                </div><!-- /.createTaskBlock-footer__leftSide -->
+                <div class="createTaskBlock-footer__rightSide uppercase btnCreateTaskStart">
+                    <a href="#!" class="btn-linkReverse">Create task</a>
+                </div><!-- /.createTaskBlock-footer__rightSide -->
+            </div><!-- /.createTaskBlock-footer -->
+        </div><!-- /.createTaskBlock -->
+
+        <div class="task-headerRow shadowLight clearfix">
+            <div class="task-headerRow__leftBlock clearfix">
+                <div class="btn-dropDownList pull-left m-r-30 btnSort" data-id="0">
                     <a href="#!" class="btn btn-dropDownList__btnLink ">
                         <span class="btn-dropDownList__btnLink-logoIcon"></span>
                         <span class="btn-dropDownList__btnLink-beforeText">:</span>
-                        <span class="btn-dropDownList__btnLink-text">Assign Case Admin</span>
+                        <span class="btn-dropDownList__btnLink-text">Sort by case Admin</span>
                         <span class="btn-dropDownList__btnLink-arrowImg"></span>
                     </a>
                     <ul class="dropDownListInBtn" style="margin-top: 0px;">
+                        <li class="dropDownListInBtn__li" data-id="0">
+                            <a href="#!" class="dropDownListInBtn__a clearfix">
+                                <span class="dropDownListInBtn__logoImg pull-left">
+                                    <img src="http://stark.employeeconfidential.com/Content/Icons/peopleBlockSelect.png" alt="" />
+                                </span>
+                                <span class="dropDownListInBtn__content pull-left">
+                                    <span class="dropDownListInBtn__contentName dropDownListInBtn__contentNameAll">All case administrators</span>
+                                    <span class="dropDownListInBtn__contentPost"></span>
+                                </span>
+                            </a>
+                        </li><!-- /.dropDownListInBtn__li -->
                         @foreach (user _user in rm._mediators_whoHasAccess_toReport)
                         {
                             <li class="dropDownListInBtn__li" data-id="@_user.id">
@@ -70,155 +139,88 @@
                         }
                     </ul><!-- /.btn-dropDownList__ul -->
                 </div><!-- /.btn-dropDownList -->
+                <a href="#!" class="btn btn_bold pull-left btnHide">Hide completed</a>
+            </div><!-- /.task-headerRow__leftBlock -->
+            <div class="task-headerRow__rightBlock clearfix">
+                <a href="#!" class="btn-linkReverse btnCreateTask">Create New Task</a>
+            </div><!-- /.task-headerRow__rightBlock -->
+        </div><!-- /.headerRow -->
+        <div class="task-titleRow shadowLight">
+            <div class="col-1">
+                <div class="task-titleRow__text task-titleRow__textName">
+                </div><!-- /.task-titleRow__text -->
+            </div><!-- /.col-6 -->
+            <div class="col-6">
+                <div class="task-titleRow__text task-titleRow__textName">
+                    Task name
+                </div><!-- /.task-titleRow__text -->
+            </div><!-- /.col-6 -->
+            <div class="col-2">
+                <div class="task-titleRow__text task-titleRow__textMediator  pull-left">
+                    Assigned mediator
+                </div><!-- /.task-titleRow__text -->
+            </div><!-- /.col-3 -->
+            <div class="col-3">
+                <div class="task-titleRow__text task-titleRow__textActivity pull-right">
+                    Last activity
+                </div><!-- /.task-titleRow__text -->
+            </div><!-- /.col-3 -->
+        </div><!-- /.titleRow -->
+        <div class="task-contentRow shadowLight">
+            <ul class="taskList">
+                @foreach (var task in tasks)
+                {
+                    var _assignee = um.GetById(task.TaskAssigneeID);
+                    //"blueCircle" "blueBorder" "greyCircle" "greyBorder"
+                    string circle = "blueCircle";
+                    circle = task.IsCompleted() ? "greyBorder" : circle;
+                    circle = (task.IsRead() && (!task.HasNewActivity())) ? "blueBorder" : circle;                
 
-                <div class="btn btn-attach pull-left m-r-15">
-                    <div class="btn-attach__img"></div><!-- /.btn-attach__img -->
-                    <div class="btn-attach__text">
-                        Attach files
-                    </div><!-- /.btn-attach__text -->
-                    <input type="file" multiple="multiple" class="btn-attach__input" />
-                </div><!-- /.btn -->
-
-                <div class="btn btn-dateCalendar">
-                    <div class="btn-dateCalendar__img"></div><!-- /.btn-dateCalendar__img -->
-                    <div class="btn-dateCalendar__text">
-                        Due date
-                    </div><!-- /.btn-dateCalendar__text -->
-                    <input type="text" id="datepicker" value="" style="width: 1px; height: 1px; max-width: 1px; max-height: 1px; padding: 0px;">
-                </div><!-- /.btn btn-dateCalendar -->
-
-            </div><!-- /.createTaskBlock-footer__leftSide -->
-            <div class="createTaskBlock-footer__rightSide uppercase btnCreateTaskStart">
-                <a href="#!" class="btn-linkReverse">Create task</a>
-            </div><!-- /.createTaskBlock-footer__rightSide -->
-        </div><!-- /.createTaskBlock-footer -->
-    </div><!-- /.createTaskBlock -->
-
-    <div class="task-headerRow shadowLight clearfix">
-        <div class="task-headerRow__leftBlock clearfix">
-            <div class="btn-dropDownList pull-left m-r-30 btnSort" data-id="0">
-                <a href="#!" class="btn btn-dropDownList__btnLink ">
-                    <span class="btn-dropDownList__btnLink-logoIcon"></span>
-                    <span class="btn-dropDownList__btnLink-beforeText">:</span>
-                    <span class="btn-dropDownList__btnLink-text">Sort by case Admin</span>
-                    <span class="btn-dropDownList__btnLink-arrowImg"></span>
-                </a>
-                <ul class="dropDownListInBtn" style="margin-top: 0px;">
-                    <li class="dropDownListInBtn__li" data-id="0">
-                        <a href="#!" class="dropDownListInBtn__a clearfix">
-                            <span class="dropDownListInBtn__logoImg pull-left">
-                                <img src="http://stark.employeeconfidential.com/Content/Icons/peopleBlockSelect.png" alt="" />
+                    <li class="taskList__li" data-userid="@_assignee.id" data-state="@circle">
+                        <a href="@Url.Action("Task", "NewCase", new { id = task.TaskID })" class="taskList__a taskNameCol__taskProgress-on">
+                            <span class="col-1">
+                                @if (task.file)
+                                {
+                                    <img src="~/Content/Icons/fileCases.png" />
+                                }
                             </span>
-                            <span class="dropDownListInBtn__content pull-left">
-                                <span class="dropDownListInBtn__contentName dropDownListInBtn__contentNameAll">All case administrators</span>
-                                <span class="dropDownListInBtn__contentPost"></span>
+                            <span class="col-6">
+                                <span class="taskNameCol">
+                                    <span class="taskNameCol__taskStatus @circle"></span>
+                                    <span class="taskNameCol__Title">@task._task.title</span>
+                                    <span class="taskNameCol__taskProgress"></span>
+                                </span>
                             </span>
-                        </a>
-                    </li><!-- /.dropDownListInBtn__li -->
-                    @foreach (user _user in rm._mediators_whoHasAccess_toReport)
-                    {
-                        <li class="dropDownListInBtn__li" data-id="@_user.id">
-                            <a href="#!" class="dropDownListInBtn__a clearfix">
-                                <span class="dropDownListInBtn__logoImg pull-left">
-                                    @if (_user.photo_path.Trim() != "")
+                            <span class="col-2">
+                                <span class="taskMediatorCol pull-left">
+                                    @if (_assignee.photo_path.Trim() != "")
                                     {
-                                        <img src='@Url.Content(_user.photo_path.Trim())' alt="" />
+                                        <img src='@Url.Content(_assignee.photo_path.Trim())' alt="" class="taskMediatorCol__logoImg" />
                                     }
                                     else
                                     {
-                                        <img src='@Url.Content("~/Content/Icons/noPhoto.png")' alt="" />
+                                        <img src='@Url.Content("~/Content/Icons/noPhoto.png")' alt="" class="taskMediatorCol__logoImg" />
                                     }
+                                    <span class="taskMediatorCol__Name">@_assignee.first_nm @_assignee.last_nm</span>
                                 </span>
-                                <span class="dropDownListInBtn__content pull-left">
-                                    <span class="dropDownListInBtn__contentName">@_user.first_nm @_user.last_nm</span>
-                                    <span class="dropDownListInBtn__contentPost">@_user.title_ds</span>
+                            </span>
+                            <span class="col-3">
+                                <span class="taskActivityCol pull-right">
+                                    <!-- <span class="taskActivityCol__attached">
+                                        <img src="Icons/fileCases.png" alt="" />
+                                    </span> -->
+                                    <span class="taskActivityCol__date">@(task.TaskDueDate.HasValue ? task.TaskDueDateString : @GlobalRes.Willneverexpire)</span>
                                 </span>
-                            </a>
-                        </li><!-- /.dropDownListInBtn__li -->
-                    }
-                </ul><!-- /.btn-dropDownList__ul -->
-            </div><!-- /.btn-dropDownList -->
-            <a href="#!" class="btn btn_bold pull-left btnHide">Hide completed</a>
-        </div><!-- /.task-headerRow__leftBlock -->
-        <div class="task-headerRow__rightBlock clearfix">
-            <a href="#!" class="btn-linkReverse btnCreateTask">Create New Task</a>
-        </div><!-- /.task-headerRow__rightBlock -->
-    </div><!-- /.headerRow -->
-    <div class="task-titleRow shadowLight">
-        <div class="col-1">
-            <div class="task-titleRow__text task-titleRow__textName">
-            </div><!-- /.task-titleRow__text -->
-        </div><!-- /.col-6 -->
-        <div class="col-6">
-            <div class="task-titleRow__text task-titleRow__textName">
-                Task name
-            </div><!-- /.task-titleRow__text -->
-        </div><!-- /.col-6 -->
-        <div class="col-2">
-            <div class="task-titleRow__text task-titleRow__textMediator  pull-left">
-                Assigned mediator
-            </div><!-- /.task-titleRow__text -->
-        </div><!-- /.col-3 -->
-        <div class="col-3">
-            <div class="task-titleRow__text task-titleRow__textActivity pull-right">
-                Last activity
-            </div><!-- /.task-titleRow__text -->
-        </div><!-- /.col-3 -->
-    </div><!-- /.titleRow -->
-    <div class="task-contentRow shadowLight">
-        <ul class="taskList">
-            @foreach (var task in tasks)
-            {
-                var _assignee = um.GetById(task.TaskAssigneeID);
-                //"blueCircle" "blueBorder" "greyCircle" "greyBorder"
-                string circle = "blueCircle";
-                circle = task.IsCompleted() ? "greyBorder" : circle;
-                circle = (task.IsRead() && (!task.HasNewActivity())) ? "blueBorder" : circle;                
+                            </span>
+                        </a>
+                    </li><!-- /.taskList__li -->
+                }
+            </ul><!-- /.taskList -->
 
-                <li class="taskList__li" data-userid="@_assignee.id" data-state="@circle">
-                    <a href="@Url.Action("Task", "NewCase", new { id = task.TaskID })" class="taskList__a taskNameCol__taskProgress-on">
-                        <span class="col-1">
-                            @if (task.file)
-                            {
-                                <img src="~/Content/Icons/fileCases.png" />
-                            }
-                        </span>
-                        <span class="col-6">
-                            <span class="taskNameCol">
-                                <span class="taskNameCol__taskStatus @circle"></span>
-                                <span class="taskNameCol__Title">@task._task.title</span>
-                                <span class="taskNameCol__taskProgress"></span>
-                            </span>
-                        </span>
-                        <span class="col-2">
-                            <span class="taskMediatorCol pull-left">
-                                @if (_assignee.photo_path.Trim() != "")
-                                {
-                                    <img src='@Url.Content(_assignee.photo_path.Trim())' alt="" class="taskMediatorCol__logoImg" />
-                                }
-                                else
-                                {
-                                    <img src='@Url.Content("~/Content/Icons/noPhoto.png")' alt="" class="taskMediatorCol__logoImg" />
-                                }
-                                <span class="taskMediatorCol__Name">@_assignee.first_nm @_assignee.last_nm</span>
-                            </span>
-                        </span>
-                        <span class="col-3">
-                            <span class="taskActivityCol pull-right">
-                                <!-- <span class="taskActivityCol__attached">
-                                    <img src="Icons/fileCases.png" alt="" />
-                                </span> -->
-                                <span class="taskActivityCol__date">@(task.TaskDueDate.HasValue ? task.TaskDueDateString : @GlobalRes.Willneverexpire)</span>
-                            </span>
-                        </span>
-                    </a>
-                </li><!-- /.taskList__li -->
-            }
-        </ul><!-- /.taskList -->
-
-    </div><!-- /.task-contentRow -->
-    <div class="divider p-tb-30"></div><!-- /.divider p-tb-30 -->
-</div><!-- /.content-container__inner -->
+        </div><!-- /.task-contentRow -->
+        <div class="divider p-tb-30"></div><!-- /.divider p-tb-30 -->
+    </div><!-- /.content-container__inner -->
+</div>
 
 <script type="text/javascript">
     $(document).ready(function () {
