@@ -2867,7 +2867,7 @@ input.personDataTextBox{
 			white-space: nowrap;
 			text-overflow: ellipsis;
 			cursor: pointer;
-			height: 32px;
+			/*height: 32px;*/
 			/*border-right: 1px solid #000;*/
 		}
 		.dashboard-colHeader:hover{
@@ -2974,7 +2974,7 @@ input.personDataTextBox{
 		border-left: 1px solid #e0e5e6;
 		border-right: 1px solid #e0e5e6;
 		position: relative;
-		padding: 10px 0;
+		padding: 10px 0 5px 0;
 		cursor: pointer;
 		display: block;
 	}
@@ -3025,7 +3025,7 @@ input.personDataTextBox{
 			color: #3c3e3f;
 			float: left;
 			box-sizing: border-box;
-			padding: 10px 5px;
+			padding: 30px 5px 5px 5px;
 			overflow: hidden;
 			white-space: nowrap;
 			text-overflow: ellipsis;
@@ -3038,24 +3038,16 @@ input.personDataTextBox{
 		.dashboard-col__case.dashboard-colbody{}
 			.dashboard-col__case-text{
 				font-size: 16px;
-				line-height: 40px;
-				display: inline-block;
-				vertical-align: middle;
-				padding-left: 15px;
+
+				padding-left: 15%;
 			}
 		
-		.dashboard-col__severity.dashboard-colbody{
-			display: -webkit-flex;
-			display: -moz-flex;
-			display: -ms-flex;
-			display: -o-flex;
-			display: flex;
-			align-items: center;
-		}
+		.dashboard-col__severity.dashboard-colbody{}
 			.dashboard-col__severity-text{
 				font-family: 'OpenSans-Bold', arial, verdana, sans-serif;;
 				font-size: 10px;
 				color: #aeb5b7;
+				text-transform: uppercase;
 			}
 			.dashboard-col__severity-textLow{
 				color: #1ebcab !important;
@@ -3070,22 +3062,22 @@ input.personDataTextBox{
 				color: #ee5a36 !important;
 			}
 
-		.dashboard-col__stage.dashboard-colbody{
-			display: flex;
-			flex-wrap: wrap;
-		}
+		.dashboard-col__stage.dashboard-colbody{}
 			.dashboard-col__stage-type{
 				font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
 				font-size: 12px;
 				color: #aeb5b7;
 				text-transform: uppercase;
-				align-self: center;
 				width: 100%;
+				display: block;
+				margin-bottom: 5%;
 			}
 			.dashboard-col__stage-date{
 				font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 				font-size: 12px;
 				align-self: center;
+				width: 100%;
+				display: block;
 			}
 				.dashboard-col__stage-date_green{
 					color: #05b5a2;
@@ -3098,24 +3090,17 @@ input.personDataTextBox{
 
 		.dashboard-col__age.dashboard-colbody{}
 			.dashboard-col__age-text{
-				line-height: 40px;
 				font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 			}
 
-		.dashboard-col__incidentType.dashboard-colbody{
-			display: flex;
-			align-items: center;
-		}
+		.dashboard-col__incidentType.dashboard-colbody{}
 			.dashboard-col__incidentType-text{
 				font-size: 16px;
 				white-space: normal;
 				line-height: 1.2em;
 			}
 		
-		.dashboard-col__location.dashboard-colbody{
-				display: flex;
-				align-items: center;
-		}
+		.dashboard-col__location.dashboard-colbody{}
 			.dashboard-col__location-text{
 				font-size: 14px;
 				white-space: normal;
@@ -3124,30 +3109,25 @@ input.personDataTextBox{
 
 		.dashboard-col__reportDate.dashboard-colbody{}
 			.dashboard-col__reportDate-text{
-				line-height: 40px;
 				font-size: 14px;
 			}
 
 		.dashboard-col__messages.dashboard-colbody{}
 			.dashboard-col__messages-text{
-				line-height: 40px;
 				font-size: 16px;
 				text-align: center;
 			}
 
 		.dashboard-col__tasks.dashboard-colbody{}
 			.dashboard-col__tasks-text{
-				line-height: 40px;
 				font-size: 16px;
 				text-align: center;
 			}
 
-		.dashboard-col__team.dashboard-colbody{}
-		.dashboard-col__alert.dashboard-colbody{
-			display: flex;
-			align-items: center;
-			justify-content: center;
+		.dashboard-col__team.dashboard-colbody{
+			padding-top: 15px;
 		}
+		.dashboard-col__alert.dashboard-colbody{}
 .team-list{
 	display: block;
 }
@@ -3531,3 +3511,11 @@ body .onclick-menu-content li a{
     font-size: 14px;
     font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
 	}
+
+/*===================================================
+==============    Settings / cases   =================
+====================================================*/
+body .someDropdowns{
+	max-height: 236px;
+	overflow-y: auto;
+}
