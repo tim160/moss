@@ -90,10 +90,14 @@
                 <p class="sectionHeader">Executive Summary</p>
                 <div class="content-container__inner-additional">
                     <div class="row">
-                        <textarea class="textareaBlock" ng-model="model.report_cc_crime.executive_summary"></textarea>
+                        <textarea class="textareaBlock" ng-model="model.report_cc_crime.executive_summary" ng-show="editExecutiveSummary"></textarea>
+                        <p ng-show="!editExecutiveSummary" style="font-size: 18px; font-family: 'OpenSans-Regular', arial, verdana, sans-serif;" ng-bind-html="executiveSummaryP(model.report_cc_crime.executive_summary)"></p>
                     </div><!-- /.row -->
                     <div class="row clearfix">
-                        <a href="#" class="btn-link pull-right" ng-click="saveCrime()">Save</a>
+                        <a ng-show="editExecutiveSummary" href="#" class="btn-link pull-right" ng-click="saveCrime()">Save</a>
+                        <a href="#" class="green--button facts--submit" ng-show="!editExecutiveSummary" ng-click="editExecutiveSummary = true">
+                            {{model.report_cc_crime.executive_summary || '' !== '' ? 'Edit' : 'Add'}}
+                        </a>
                     </div><!-- /.row -->
                 </div>
             </div>
