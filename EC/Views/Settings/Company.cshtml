@@ -91,6 +91,7 @@
                     <h2 class="menuItem moldstyle">@LocalizationGetter.GetString("Anonymity")</h2>
                     <h2 class="menuItem moldstyle">@LocalizationGetter.GetString("Outcomes")</h2>
                     <h2 class="menuItem moldstyle">@LocalizationGetter.GetString("RootCauses")</h2>
+                    <h2 class="menuItem moldstyle">@LocalizationGetter.GetString("Disclaimers")</h2>                    
                     @*
                         <h2 class="menuItem">@GlobalRes.SecondaryType</h2>
                         <h2 class="menuItem">@GlobalRes.CaseAdminDepartment</h2>
@@ -308,6 +309,7 @@
                     </table>
                 </div>
             </div>
+           
             <div class="blockCaseAdminDepartment" style="display: none;" ng-controller="SettingsCompanyCaseAdminDepartmentController" ng-cloak>
                 @if (is_valid_mediator)
                 {
@@ -336,6 +338,10 @@
                     </table>
                 </div>
             </div><!--blockIncidentTypes-->
+
+            <div class="blockDisclaimers">
+                blockDisclaimers
+            </div>
         </div><!--blockIncidentTypes-->
     </div><!--contentSettings-->
 </div><!--contentCompanyProfile-->
