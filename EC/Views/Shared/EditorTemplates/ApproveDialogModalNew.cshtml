@@ -12,7 +12,7 @@
     <div class="case-modal__title"></div><!-- /.modal-title -->
     
     <div class="case-modal__selectRow clearfix">
-        <textarea class="form-control" type="text" name="txtEscalate" id="txtEscalate" style="width: 100%; height: 100px; overflow: hidden;"></textarea>
+        <textarea class="form-control" type="text" name="txtEscalate" id="txtEscalate" style="width: 100%; height: 100px; overflow: hidden; font-size: 16px;"></textarea>
     </div>
 
     <div class="case-modal__linkBlockBottom clearfix">
@@ -40,6 +40,9 @@
             var user_id = $("#user_id").val();
 
             if (description != "") {
+                setTimeout(function () {
+                    $.modal.close();
+                }, 300);
 
                 if (_report_id > 0 && user_id > 0 && promotion_value != "") {
                     $.ajax({
