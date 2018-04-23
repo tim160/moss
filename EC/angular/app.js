@@ -6,6 +6,7 @@
     angular.module('EC', [
         'ngResource',
         'ngAnimate',
+        'ngSanitize',
         'nvd3',
 
         'EC',
