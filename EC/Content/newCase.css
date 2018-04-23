@@ -113,6 +113,11 @@ html, body{
 	font-family: 'OpenSans-Regular', arial, verdana, sans-serif;;
 }
 
+.factsEstablished__box{
+	width: calc( 100% - 200px );
+}
+.container .factsEstablished__box textarea{
+}
 .container ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
   color: #848a8b;

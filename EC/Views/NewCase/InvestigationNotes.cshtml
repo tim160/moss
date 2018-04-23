@@ -209,16 +209,16 @@
                                 </dropbox>
                             </div>
                         </div>
-                        <div class="col-4">
-                            <div class="">
+                        <div class="col-5">
+                            <div class="factsEstablished__box pull-left ">
                                 <textarea class="facts-established--text" cols="20" rows="5" ng-model="item.inv_meth_bf_note" ng-show="item.behavioralEditMode"></textarea>
                                 <p ng-show="!item.behavioralEditMode">{{item.inv_meth_bf_note}}</p>
                             </div>
-                        </div>
-                        <div class="col-1">
-                            <a href="#" class="green--button facts--submit" ng-click="item.behavioralEditMode = !item.behavioralEditMode" ng-show="!item.behavioralEditMode">
-                                {{item.inv_meth_bf_note != '' ? 'Edit note' : 'Add note'}}
-                            </a>
+                            <div class="pull-right">
+                                <a href="#" class="green--button facts--submit" ng-click="item.behavioralEditMode = !item.behavioralEditMode" ng-show="!item.behavioralEditMode">
+                                    {{item.inv_meth_bf_note != '' ? 'Edit note' : 'Add note'}}
+                                </a>
+                            </div>
                             <a href="#" class="green--button facts--submit" ng-show="item.behavioralEditMode" ng-click="saveNoteBehavioralFactors(item)">
                                 Save
                             </a>
@@ -237,16 +237,16 @@
                                 </dropbox>
                             </div>
                         </div>
-                        <div class="col-4">
-                            <div class="">
+                        <div class="col-5">
+                            <div class="factsEstablished__box pull-left ">
                                 <textarea class="facts-established--text" ng-model="item.inv_meth_ei_note" ng-show="item.externalInfluencesEditMode"></textarea>
                                 <p ng-show="!item.externalInfluencesEditMode">{{item.inv_meth_ei_note}}</p>
                             </div>
-                        </div>
-                        <div class="col-1">
-                            <span class="green--button facts--submit" ng-click="item.externalInfluencesEditMode = !item.externalInfluencesEditMode" ng-show="!item.externalInfluencesEditMode">
-                                {{item.inv_meth_ei_note != '' ? 'Edit note' : 'Add note'}}
-                            </span>
+                            <div class="pull-right">
+                                <span class="green--button facts--submit" ng-click="item.externalInfluencesEditMode = !item.externalInfluencesEditMode" ng-show="!item.externalInfluencesEditMode">
+                                    {{item.inv_meth_ei_note != '' ? 'Edit note' : 'Add note'}}
+                                </span>
+                            </div>
                             <a href="#" class="green--button facts--submit" ng-show="item.externalInfluencesEditMode" ng-click="saveNoteExternalInfluences(item)">
                                 Save
                             </a>
@@ -265,16 +265,16 @@
                                 </dropbox>
                             </div>
                         </div>
-                        <div class="col-4">
-                            <div class="">
+                        <div class="col-5">
+                            <div class="factsEstablished__box pull-left ">
                                 <textarea class="facts-established--text" ng-model="item.inv_meth_ci_note" ng-show="item.campusInfluencesEditMode"></textarea>
                                 <p ng-show="!item.campusInfluencesEditMode">{{item.inv_meth_ci_note}}</p>
                             </div>
-                        </div>
-                        <div class="col-1">
-                            <span class="green--button facts--submit" ng-click="item.campusInfluencesEditMode = !item.campusInfluencesEditMode" ng-show="!item.campusInfluencesEditMode">
-                                {{item.inv_meth_ci_note != '' ? 'Edit note' : 'Add note'}}
-                            </span>
+                            <div class="pull-right">
+                                <span class="green--button facts--submit" ng-click="item.campusInfluencesEditMode = !item.campusInfluencesEditMode" ng-show="!item.campusInfluencesEditMode">
+                                    {{item.inv_meth_ci_note != '' ? 'Edit note' : 'Add note'}}
+                                </span>
+                            </div>
                             <a href="#" class="green--button facts--submit" ng-show="item.campusInfluencesEditMode" ng-click="saveNoteCampusInfluences(item)">
                                 Save
                             </a>
