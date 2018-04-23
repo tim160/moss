@@ -2250,13 +2250,19 @@ namespace EC.Models
 
                 //By level
                 res.AddRange(list1
-                    .Where(x => x.role_id == 4 || x.role_id == 5)
-                    .Select(x => new UserViewModel(x) { Detail = "Assigned by Level" })
+                    .Where(x => x.role_id == 4)
+                    .Select(x => new UserViewModel(x) { Detail = "Case Reviewer" })
                     .OrderBy(x => x.FullName)
                     .ToList());
 
-                //ids not top level
-                var ids = list1.Where(x => x.role_id != 4 && x.role_id != 5).Select(x => x.id).ToList();
+                res.AddRange(list1
+                    .Where(x => x.role_id == 5)
+                    .Select(x => new UserViewModel(x) { Detail = "Platform Manager" })
+                    .OrderBy(x => x.FullName)
+                    .ToList());
+
+            //ids not top level
+            var ids = list1.Where(x => x.role_id != 4 && x.role_id != 5).Select(x => x.id).ToList();
 
                 var list = (
                     from ma in db.report_mediator_assigned.Where(x => ids.Contains(x.mediator_id) & x.report_id == ID)
@@ -2279,7 +2285,7 @@ namespace EC.Models
                     .Select(x =>
                         new UserViewModel(x.User)
                         {
-                            Detail = x.MA.by_location_id != null ? "Assigned by Location: " + x.CL.location_en : x.MA.by_secondary_type_id != null ? "Assigned by Incident Type: " + x.ST.secondary_type_en : ""
+                            Detail = x.MA.by_location_id != null ? "On case team due to location: " + x.CL.location_en : x.MA.by_secondary_type_id != null ? "On case team due to incident type: " + x.ST.secondary_type_en : ""
                         }
                     ).OrderBy(x => x.FullName).ToList();
                 res.AddRange(list);

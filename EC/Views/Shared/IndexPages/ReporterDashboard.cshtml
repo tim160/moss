@@ -22,8 +22,8 @@
     EC.Models.UserModel um = new EC.Models.UserModel(user_id);
 
     int report_id = um._reporter_report_id;
-    EC.Models.ReportModel rm = new EC.Models.ReportModel(report_id);
-    EC.Models.CompanyModel cm = new EC.Models.CompanyModel();
+    ReportModel rm = new ReportModel(report_id);
+    CompanyModel cm = new CompanyModel();
     string[] _statuses = EC.Constants.ECGlobalConstants.ReportFlowStatusesList;
     int _investigation_status = rm._investigation_status;
     if (_investigation_status == 6)
@@ -72,15 +72,7 @@
             <div class="main">
                 <div class="header">
                     <img class="logo" src='@Url.Content("~/Content/img/ReportDashboardLogo.png")' />
-                    @*<div class="headerMenuAbout">
-                            <ul>
-                                <li style="padding-right: 32px;">
-                                    <a href="http://employeeconfidential.com/#footer">@GlobalRes.About</a>
-                                </li>
-                                <li style="padding-right: 26px;"><a href="http://employeeconfidential.com/PrivacyStatement.html">@GlobalRes.Faq</a></li>
-                                <li><a href="http://employeeconfidential.com/TermsOfService.html">@GlobalRes.TermsAndConditions</a></li>
-                            </ul>
-                        </div>*@
+ 
                     <div class="headerMenu">
                         <ul>
                             <li class="logIn">@GlobalRes.Logout</li>
