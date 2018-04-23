@@ -1,5 +1,6 @@
 ﻿@using EC.App_LocalResources
 @using EC.Models.Database;
+@using EC.Localization;
 
 @{
     var report_id = (Int32)ViewBag.report_id;
@@ -281,8 +282,11 @@
                         </div>
                     </div>
                 </div>
+                <p>@LocalizationGetter.GetString("NARootCauseExplanation")</p>
             </div>
-            <div class="panel-overlay"></div>
+            <div class="panel-overlay">
+                
+            </div>
         </section>
         <section style="height: 300px;">
 
