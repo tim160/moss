@@ -116,8 +116,6 @@ html, body{
 .factsEstablished__box{
 	width: calc( 100% - 200px );
 }
-.container .factsEstablished__box textarea{
-}
 .container ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
   color: #848a8b;
@@ -3523,4 +3521,131 @@ body .onclick-menu-content li a{
 body .someDropdowns{
 	max-height: 236px;
 	overflow-y: auto;
+}
+/*--------------- Settings/Company Profile -----------------*/
+.menuCompanyProfile div.settingMenuItems{
+	padding-left: 0;
+	padding-right: 0;
+}
+.settingMenuItems .menuItem:first-child{
+	padding-left: 0 !important;
+}
+.settingMenuItems .menuItem:last-child{
+	padding-right: 0 !important;
+}
+/*------------------  blockDisclaimer   ----------*/
+.blockDisclaimer-container{
+	padding: 0 20px;
+}
+.blockDisclaimer__textBlock{
+	color: #3c3e3f;
+	font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+	font-size: 16px;
+	line-height: initial;
+}
+.blockDisclaimer__textBlock p{
+	margin: 0;
+	padding: 0;
+}
+.blockDisclaimer__upLinkBlock{
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+
+.settingsProf-contentBlock{
+	margin-bottom: 80px;
+	cursor: pointer;
+}
+	.settingsProf-contentBlock__head{}
+		.settingsProf-contentBlock__headTop{
+			color: #aeb5b7;
+			font-size: 12px;
+			font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+			margin-bottom: 10px;
+		}
+			.settingsProf-contentBlock__headTopName{}
+			.settingsProf-contentBlock__headTopDate{}
+
+		.settingsProf-contentBlock__headMain{}
+			.settingsProf-contentBlock__headMain-cols{
+				padding: 0;
+			}
+				.settingsProf-contentBlock__headMainTitle{
+					font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+					font-size: 16px;
+					color: #3c3e3f;
+					position: relative;
+				}
+				.settingsProf-contentBlock__headMainTitle::before{
+					content: '';
+					width: 21px;
+					height: 14px;
+					position: absolute;
+					left: -31px;
+					top: 2px;
+					background-repeat: no-repeat;
+				}
+				.settingsProf-contentBlock__headMainTitle.resolved::before{
+					background-image: url(Icons/caseResolvedIcon.png);
+				}
+				.settingsProf-contentBlock__headMainTitle.error::before{
+					width: 12px;
+					height: 12px;
+					left: -22px;
+					background-image: url(Icons/exclamationmark.png);
+				}
+			.settingsProf-contentBlock__headMain-cols a{
+				margin-right: 30px;
+			}
+			.settingsProf-contentBlock__headMain-colLinks{
+				display: none;
+				transition: all 0.5s ease;
+			}
+.settingsProf-contentBlock:hover .settingsProf-contentBlock__headMain-colLinks{
+	display: block;
+}
+.link{
+	display: inline-block;
+	font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+	font-size: 12px;
+	color: #3c3e3f;
+}
+.link-delete{
+	display: inline-block;
+	font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+	color: #ee5a36;
+	font-size: 12px;
+	margin-left: 20px;
+	position: relative;
+}
+.link-delete::before{
+	content: '';
+	width: 10px;
+	height: 10px;
+	position: absolute;
+	left: -15px;
+	background-image: url(Icons/caseNotResolvedIcons.png);
+	-webkit-background-size: cover;
+	background-size: cover;
+}
+	.settingsProf-contentBlock__main{
+	}
+		textarea.textareaBlockSettings{
+			border: 2px solid #b2bfc3;
+			font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+			font-size: 16px;
+			color: #3c3e3f;
+		}
+	.settingsProf-contentBlock__bottom{
+		margin-top: 20px;
+	}
+
+.btn-link.btn-link__disabled{
+	color: #aeb5b7;
+	border: none;
+	cursor: not-allowed;
+}
+.btn-link.btn-link__disabled:hover{
+	background-color: transparent;
+	color: #aeb5b7;
 }
