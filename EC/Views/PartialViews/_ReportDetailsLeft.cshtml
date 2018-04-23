@@ -56,7 +56,7 @@
 
         </table>
         <div class="blockInfoDays">
-            <span class="title">@rm._investigation_status_string:  </span>
+            <span class="title">@rm.InvestigationStatusString():  </span>
             @if (Convert.ToInt32((DateTime.Today - rm._last_promoted_date).TotalDays + 1) == 1)
             {
                 <span class="days">@Convert.ToInt32((DateTime.Today - rm._last_promoted_date).TotalDays + 1) @GlobalRes.day</span>

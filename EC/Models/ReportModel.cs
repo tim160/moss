@@ -1005,7 +1005,7 @@ namespace EC.Models
         }
 
 
-        public report_investigation_status _last_promotion()
+        public report_investigation_status LastPromotion()
         {
             int status_id = _investigation_status;
             if (db.report_investigation_status.Any(item => ((item.report_id == ID) && (item.investigation_status_id == status_id))))
@@ -2017,7 +2017,7 @@ namespace EC.Models
         /// </summary>
         /// <param name="report_id"></param>
         /// <returns></returns>
-        public string _investigation_status_string()
+        public string InvestigationStatusString()
         {
                 string status = "";
 

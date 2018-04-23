@@ -34,9 +34,9 @@
     GlobalFunctions glb = new GlobalFunctions();
 
     UserModel _last_user_promotion_model = new UserModel();
-    if ((is_spam) && (rm._last_promotion != null))
+    if ((is_spam) && (rm.LastPromotion() != null))
     {
-        _last_user_promotion_model = new UserModel(rm._last_promotion.user_id);
+        _last_user_promotion_model = new UserModel(rm.LastPromotion().user_id);
     }
 
     string[] _statuses = EC.Constants.ECGlobalConstants.ReportFlowStatusesList;
@@ -131,7 +131,7 @@
                         </table>
                     </div>
                 </div><!--firstPosition-->
-                @if ((is_spam) && (rm._last_promotion != null))
+                @if ((is_spam) && (rm.LastPromotion() != null))
                 {
                     <div class="blockInfoSpam">
                         <div class="blockPhoto">
@@ -149,7 +149,7 @@
                         <div class="blockInfoTextSpam">
                             <p class="textSpamTitle">@GlobalRes.Casemarkedasspam.</p>
                             <p class="textSpamDate">@_last_user_promotion_model._user.first_nm @_last_user_promotion_model._user.last_nm,@m_DateTimeHelper.ConvertDateToLongMonthString(@rm._last_promoted_date):</p>
-                            <p class="textSpam">@rm._last_promotion.description</p>
+                            <p class="textSpam">@rm.LastPromotion().description</p>
                         </div>
                     </div>
                 }
@@ -254,12 +254,12 @@
                                 <td class="inSelect" colspan="3">
                                     <select class="" id="OwnerId" name="OwnerId" style="width: 100%">
                                         <option value="0">-------Currently has access-------</option>
-                                        @foreach (var item in rm.MediatorsAcceptCase.Where(x => !String.IsNullOrEmpty(x.Detail)))
+                                        @foreach (var item in rm.MediatorsAcceptCase().Where(x => !String.IsNullOrEmpty(x.Detail)))
                                         {
                                             <option class="" value="@item.User.id">@item.FullNameWithDetail</option>
                                         }
                                         <option value="0">-------Currently does not have access------ </option>
-                                        @foreach (var item in rm.MediatorsAcceptCase.Where(x => String.IsNullOrEmpty(x.Detail)))
+                                        @foreach (var item in rm.MediatorsAcceptCase().Where(x => String.IsNullOrEmpty(x.Detail)))
                                         {
                                             <option class="needquestion" value="@item.User.id">@item.FullNameWithDetail</option>
                                         }

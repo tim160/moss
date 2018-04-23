@@ -96,7 +96,7 @@ namespace EC.Models.ViewModel
             this.case_secondary_types_all = rm._secondary_type_string_all;            
             this.case_color_code = rm._color_code;
             this.days_left = rm._step_days_left;
-            this.current_status = rm._investigation_status_string();
+            this.current_status = rm.InvestigationStatusString();
 
 
             this.tasks_number = rm.ReportTasks(0).Count().ToString();

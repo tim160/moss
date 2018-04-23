@@ -31,7 +31,7 @@
 
                     <div class="report">
                         <div class="titleReport">@LocalizationGetter.GetString("ConfidentialityLevel"):</div>
-                        <div class="reportText">@rm._anonymousLevel_reporterVersion</div>
+                        <div class="reportText">@rm._anonymousLevel_reporterVersion()</div>
                     </div>
 
                     @if ((rm._report.incident_anonymity_id == 2 || rm._report.incident_anonymity_id == 3))
