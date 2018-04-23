@@ -46,33 +46,7 @@ namespace EC.Models
                 return null;
             }
         }
-
-        /// <summary>
-        /// returns the name of reporter or "Anonymous Reporter".
-        /// </summary>
-        /// <param name="report_id"></param>
-        /// <returns></returns>
-        public string _reporter_name
-        {
-            get
-            {
-                string name = "";
-                if (_reporter_user != null)
-                {
-                    name = _reporter_user.first_nm + " " + _reporter_user.last_nm;
-                    if ((_reporter_user.first_nm + " " + _reporter_user.last_nm).Trim().Length > 0)
-                        return name;
-                    user _user = db.user.Where(item => item.id == _report.reporter_user_id).FirstOrDefault();
-                    if (_user != null)
-                        name = _user.first_nm + " " + _user.last_nm;
-                }
-                if (name.Trim().Length == 0)
-                    name = App_LocalResources.GlobalRes.anonymous_reporter;
-
-                return name.Trim();
-            }
-        }
-
+       
         public string Get_reporter_name(int caller_id)
         {
             string name = "";
@@ -81,10 +55,9 @@ namespace EC.Models
                 if (caller_id == _reporter_user.id)
                     return App_LocalResources.GlobalRes.You;
 
-                user _user = db.user.Where(item => item.id == _report.reporter_user_id).FirstOrDefault();
-                user _caller = db.user.Where(item => item.id == caller_id).FirstOrDefault();
+               user _caller = db.user.Where(item => item.id == caller_id).FirstOrDefault();
 
-                if ((_user != null) && (_caller != null))
+                if (_caller != null)
                 {
                     if ((_caller.role_id < 8) && (_caller.role_id > 3))
                     {
@@ -101,6 +74,14 @@ namespace EC.Models
                             if ((_reporter_user.first_nm + " " + _reporter_user.last_nm).Trim().Length > 0)
                                 return _reporter_user.first_nm + " " + _reporter_user.last_nm;
                         }
+                    }
+                    if (_caller.role_id == 8)
+                    {
+                        name = _reporter_user.first_nm + " " + _reporter_user.last_nm;
+                        if ((_reporter_user.first_nm + " " + _reporter_user.last_nm).Trim().Length > 0)
+                            return name;
+                        if (name.Trim().Length == 0)
+                            name = App_LocalResources.GlobalRes.anonymous_reporter;
                     }
                 }
 
@@ -122,25 +103,22 @@ namespace EC.Models
         /// </summary>
         /// <param name="report_id"></param>
         /// <returns></returns>
-        public string _location_string
+        public string LocationString()
         {
-            get
+            string location = App_LocalResources.GlobalRes.unknown_location;
+            if ((_report != null) && (ID != 0))
             {
-                string location = App_LocalResources.GlobalRes.unknown_location;
-                if ((_report != null) && (ID != 0))
+                if (_report.location_id.HasValue)
                 {
-                    if (_report.location_id.HasValue)
-                    {
-                        company_location _c_location = db.company_location.Where(item => item.id == _report.location_id.Value).FirstOrDefault();
-                        if (_c_location != null)
-                            location = _c_location.location_en;
-                    }
-                    else if ((_report != null) && (_report.other_location_name != null) && (_report.other_location_name.Trim().Length > 0))
-                        location = _report.other_location_name.Trim();
+                    company_location _c_location = db.company_location.Where(item => item.id == _report.location_id.Value).FirstOrDefault();
+                    if (_c_location != null)
+                        location = _c_location.location_en;
                 }
-
-                return location;
+                else if ((_report != null) && (_report.other_location_name != null) && (_report.other_location_name.Trim().Length > 0))
+                    location = _report.other_location_name.Trim();
             }
+
+            return location;
         }
 
         /// <summary>
@@ -148,368 +126,292 @@ namespace EC.Models
         /// </summary>
         /// <param name="report_id"></param>
         /// <returns></returns>
-        public string _country_string
+        public string CountryString()
         {
-            get
-            {
-                string country_nm = App_LocalResources.GlobalRes.unknown;
+            string country_nm = App_LocalResources.GlobalRes.unknown;
 
-                if (_report != null)
+            if (_report != null)
+            {
+                if (_report.reporter_country_id.HasValue)
                 {
-                    if (_report.reporter_country_id.HasValue)
-                    {
-                        country _country = db.country.Where(item => item.id == _report.reporter_country_id.Value).FirstOrDefault();
-                        if (_country != null)
-                            country_nm = _country.country_nm;
-                    }
+                    country _country = db.country.Where(item => item.id == _report.reporter_country_id.Value).FirstOrDefault();
+                    if (_country != null)
+                        country_nm = _country.country_nm;
                 }
-                return country_nm;
             }
+            return country_nm;
         }
 
-        public string _is_reported_outside
+        public string IsReportedOutside()
         {
-            get
-            {
-                string report_outside = App_LocalResources.GlobalRes.unknown;
 
-                if (_report != null)
+            string report_outside = App_LocalResources.GlobalRes.unknown;
+
+            if (_report != null)
+            {
+                if (_report.reported_outside_id.HasValue)
                 {
-                    if (_report.reported_outside_id.HasValue)
+                    reported_outside reported_outside =
+                        db.reported_outside.Where(item => item.id == _report.reported_outside_id.Value).FirstOrDefault();
+                    if (reported_outside != null)
                     {
-                        reported_outside reported_outside =
-                            db.reported_outside.Where(item => item.id == _report.reported_outside_id.Value).FirstOrDefault();
-                        if (reported_outside != null)
+                        report_outside = reported_outside.description_en;
+                        if (_report.reported_outside_id.Value != 1)
                         {
-                            report_outside = reported_outside.description_en;
-                            if (_report.reported_outside_id.Value != 1)
-                            {
-                                report_outside = report_outside;// +". Description : " + _report.reported_outside_text;
-                            }
+                            report_outside = report_outside;// +". Description : " + _report.reported_outside_text;
                         }
                     }
                 }
-                return report_outside;
             }
+            return report_outside;
         }
-        public string _is_reported_urgent
+        public string IsReportedUrgent()
         {
-            get
-            {
-                string report_urgent = App_LocalResources.GlobalRes.unknown;
+            string report_urgent = App_LocalResources.GlobalRes.unknown;
 
-                if (_report.priority_id == 0)
-                    report_urgent = App_LocalResources.GlobalRes.No;
-                else if (_report.priority_id == 1)
-                    report_urgent = App_LocalResources.GlobalRes.Yes;
+            if (_report.priority_id == 0)
+                report_urgent = App_LocalResources.GlobalRes.No;
+            else if (_report.priority_id == 1)
+                report_urgent = App_LocalResources.GlobalRes.Yes;
 
-                return report_urgent;
-            }
+            return report_urgent;
         }
 
-        public string _is_ongoing
+        public string IsOngoing()
         {
-            get
-            {
-                string is_ongoing = App_LocalResources.GlobalRes.unknown;
+            string is_ongoing = App_LocalResources.GlobalRes.unknown;
 
-                if (_report != null)
+            if (_report != null)
+            {
+                if (_report.is_ongoing == 1)
                 {
-                    if (_report.is_ongoing == 1)
+                    is_ongoing = GlobalRes.No;
+                }
+                else if (_report.is_ongoing == 2)
+                {
+                    is_ongoing = GlobalRes.Yes;// +" Description : " + _report.report_frequency_text;
+                }
+                else if (_report.is_ongoing == 3)
+                {
+                    is_ongoing = GlobalRes.NotSureUp;
+                }
+            }
+            return is_ongoing;
+        }
+
+        public string HasInjuryDamage()
+        {
+            string injury_damage = App_LocalResources.GlobalRes.unknown;
+
+            if (_report != null)
+            {
+                injury_damage injuryOrDamage =
+                    db.injury_damage.Where(item => item.id == _report.injury_damage_id).FirstOrDefault();
+                if (injuryOrDamage != null)
+                {
+                    injury_damage = injuryOrDamage.text_en;
+                    if (_report.reported_outside_id.Value == 2)
                     {
-                        is_ongoing = GlobalRes.No;
-                    }
-                    else if (_report.is_ongoing == 2)
-                    {
-                        is_ongoing = GlobalRes.Yes;// +" Description : " + _report.report_frequency_text;
-                    }
-                    else if (_report.is_ongoing == 3)
-                    {
-                        is_ongoing = GlobalRes.NotSureUp;
+                        injury_damage = injury_damage;// +". Description : " + _report.injury_damage;
                     }
                 }
-                return is_ongoing;
             }
-        }
-
-        public string _has_injury_damage
-        {
-            get
-            {
-                string injury_damage = App_LocalResources.GlobalRes.unknown;
-
-                if (_report != null)
-                {
-                    injury_damage injuryOrDamage =
-                        db.injury_damage.Where(item => item.id == _report.injury_damage_id).FirstOrDefault();
-                    if (injuryOrDamage != null)
-                    {
-                        injury_damage = injuryOrDamage.text_en;
-                        if (_report.reported_outside_id.Value == 2)
-                        {
-                            injury_damage = injury_damage;// +". Description : " + _report.injury_damage;
-                        }
-                    }
-                }
-                return injury_damage;
-            }
+            return injury_damage;
         }
         /// <summary>
         /// Returns the departments involved in reported
         /// </summary>
         /// <param name="report_id"></param>
         /// <returns></returns>
-        public string _departments_string
+        public string DepartmentsString()
         {
-            get
+            string departments = "";
+
+            if (_report != null)
             {
-                string departments = "";
-
-                if (_report != null)
+                List<report_department> _c_departments = db.report_department.Where(item => item.report_id == _report.id && item.added_by_reporter != false).ToList();
+                company_department temp_c_dep;
+                foreach (report_department _temp_dep in _c_departments)
                 {
-                    List<report_department> _c_departments = db.report_department.Where(item => item.report_id == _report.id && item.added_by_reporter != false).ToList();
-                    company_department temp_c_dep;
-                    foreach (report_department _temp_dep in _c_departments)
+                    temp_c_dep = db.company_department.Where(item => item.id == _temp_dep.department_id).FirstOrDefault();
+                    if (temp_c_dep != null)
                     {
-                        temp_c_dep = db.company_department.Where(item => item.id == _temp_dep.department_id).FirstOrDefault();
-                        if (temp_c_dep != null)
-                        {
-                            if (departments.Length > 0)
-                                departments = departments + ", " + temp_c_dep.department_en.Trim();
-                            else
-                                departments = temp_c_dep.department_en.Trim();
-                        }
-                    }
-
-                    if (_report.other_department_name.Trim().Length > 0)
                         if (departments.Length > 0)
-                            departments = departments + ", " + _report.other_department_name.Trim();
+                            departments = departments + ", " + temp_c_dep.department_en.Trim();
                         else
-                            departments = _report.other_department_name.Trim();
-                }
-                if (departments.Length == 0)
-                    departments = App_LocalResources.GlobalRes.unknown_departments;
-
-                return departments;
-            }
-        }
-
-        /// <summary>
-        /// do we need it?
-        /// </summary>
-        public string _reporter_company_relation
-        {
-            get
-            {
-                string relationship_text = App_LocalResources.GlobalRes.unknown;
-
-                if (_report != null)
-                {
-                    if (db.report_relationship.Any(t => t.report_id == _report.id))
-                    {
-                        report_relationship _report_relationship = db.report_relationship.Where(t => t.report_id == _report.id).First();
-                        if ((_report_relationship.relationship_id.HasValue) && (_report_relationship.relationship_id.Value != 0) && (_report_relationship.relationship_id.Value != -1))
-                        {
-                            relationship temp_relationship = db.relationship.Where(item => item.id == _report_relationship.relationship_id.Value).FirstOrDefault();
-                            relationship_text = temp_relationship.relationship_en;
-                        }
-                        // 
-                        if ((_report_relationship.company_relationship_id.HasValue) && (_report_relationship.company_relationship_id.Value != 0) && (_report_relationship.company_relationship_id.Value != -1))
-                        {
-                            company_relationship temp_comp_relationship = db.company_relationship.Where(item => item.id == _report_relationship.company_relationship_id.Value).FirstOrDefault();
-                            if (temp_comp_relationship != null)
-                            {
-                                relationship_text = temp_comp_relationship.relationship_en.Trim();
-                            }
-                        }
-
-                        if (_report_relationship.relationship_nm != null && _report_relationship.relationship_nm.Trim().Length > 0)
-                        {
-                            relationship_text = _report_relationship.relationship_nm.Trim();
-                            /*   if ((relationship_text.Trim().ToLower() == App_LocalResources.GlobalRes.FormerEmployee.Trim().ToLower()) || (relationship_text.Trim().ToLower() == App_LocalResources.GlobalRes.Other.Trim().ToLower()))
-                               {
-                                   relationship_text = relationship_text + " " + _report_relationship.relationship_nm.Trim();
-                               }
-                               else
-                               {
-                                   relationship_text = _report_relationship.relationship_nm.Trim();
-                               }*/
-                        }
-
-                    }
-
-                }
-
-                return relationship_text;
-            }
-        }
-
-        public string _reporter_company_relation_short
-        {
-            get
-            {
-                string relationship_text = App_LocalResources.GlobalRes.Other;
-
-                if (_report != null)
-                {
-                    if (db.report_relationship.Any(t => t.report_id == _report.id))
-                    {
-                        report_relationship _report_relationship = db.report_relationship.Where(t => t.report_id == _report.id).First();
-                        if ((_report_relationship.relationship_id.HasValue) && (_report_relationship.relationship_id.Value != 0) && (_report_relationship.relationship_id.Value != -1))
-                        {
-                            relationship temp_relationship = db.relationship.Where(item => item.id == _report_relationship.relationship_id.Value).FirstOrDefault();
-                            relationship_text = temp_relationship.relationship_en;
-                        }
-                        // 
-                        if ((_report_relationship.company_relationship_id.HasValue) && (_report_relationship.company_relationship_id.Value != 0) && (_report_relationship.company_relationship_id.Value != -1))
-                        {
-                            company_relationship temp_comp_relationship = db.company_relationship.Where(item => item.id == _report_relationship.company_relationship_id.Value).FirstOrDefault();
-                            if (temp_comp_relationship != null)
-                            {
-                                relationship_text = temp_comp_relationship.relationship_en.Trim();
-                            }
-                        }
+                            departments = temp_c_dep.department_en.Trim();
                     }
                 }
 
-                return relationship_text;
+                if (_report.other_department_name.Trim().Length > 0)
+                    if (departments.Length > 0)
+                        departments = departments + ", " + _report.other_department_name.Trim();
+                    else
+                        departments = _report.other_department_name.Trim();
             }
+            if (departments.Length == 0)
+                departments = App_LocalResources.GlobalRes.unknown_departments;
+
+            return departments;
+        }
+
+        public string ReporterCompanyRelationShort()
+        {
+            string relationship_text = App_LocalResources.GlobalRes.Other;
+
+            if (_report != null)
+            {
+                if (db.report_relationship.Any(t => t.report_id == _report.id))
+                {
+                    report_relationship _report_relationship = db.report_relationship.Where(t => t.report_id == _report.id).First();
+                    if ((_report_relationship.relationship_id.HasValue) && (_report_relationship.relationship_id.Value != 0) && (_report_relationship.relationship_id.Value != -1))
+                    {
+                        relationship temp_relationship = db.relationship.Where(item => item.id == _report_relationship.relationship_id.Value).FirstOrDefault();
+                        relationship_text = temp_relationship.relationship_en;
+                    }
+                    // 
+                    if ((_report_relationship.company_relationship_id.HasValue) && (_report_relationship.company_relationship_id.Value != 0) && (_report_relationship.company_relationship_id.Value != -1))
+                    {
+                        company_relationship temp_comp_relationship = db.company_relationship.Where(item => item.id == _report_relationship.company_relationship_id.Value).FirstOrDefault();
+                        if (temp_comp_relationship != null)
+                        {
+                            relationship_text = temp_comp_relationship.relationship_en.Trim();
+                        }
+                    }
+                }
+            }
+
+            return relationship_text;
         }
         /// <summary>
         /// gets the secondary type of report
         /// </summary>
         /// <param name="report_id"></param>
         /// <returns></returns>
-        public string _secondary_type_string
+        public string SecondaryTypeString()
         {
-            get
+            string secondary_type = "";
+
+            if (_report != null)
             {
-                string secondary_type = "";
-
-                if (_report != null)
+                if (db.report_secondary_type.Any(t => t.report_id == _report.id && t.added_by_reporter != false))
                 {
-                    if (db.report_secondary_type.Any(t => t.report_id == _report.id && t.added_by_reporter != false))
+                    List<report_secondary_type> _report_secondary_type_list = db.report_secondary_type.Where(t => t.report_id == _report.id && t.added_by_reporter != false).ToList();
+                    foreach (report_secondary_type _report_secondary_type in _report_secondary_type_list)
                     {
-                        List<report_secondary_type> _report_secondary_type_list = db.report_secondary_type.Where(t => t.report_id == _report.id && t.added_by_reporter != false).ToList();
-                        foreach (report_secondary_type _report_secondary_type in _report_secondary_type_list)
+                        if (_report_secondary_type.mandatory_secondary_type_id != null)
                         {
-                            if (_report_secondary_type.mandatory_secondary_type_id != null)
+                            secondary_type_mandatory temp_sec_type = db.secondary_type_mandatory.Where(item => item.id == _report_secondary_type.mandatory_secondary_type_id).FirstOrDefault();
+                            if (temp_sec_type != null)
                             {
-                                secondary_type_mandatory temp_sec_type = db.secondary_type_mandatory.Where(item => item.id == _report_secondary_type.mandatory_secondary_type_id).FirstOrDefault();
-                                if (temp_sec_type != null)
-                                {
-                                    if ((secondary_type.Length > 0) && (!secondary_type.Contains(temp_sec_type.secondary_type_en.Trim())))
-                                        secondary_type = secondary_type + ", " + temp_sec_type.secondary_type_en.Trim();
-                                    else
-                                        secondary_type = temp_sec_type.secondary_type_en.Trim();
-                                }
-                            }
-
-                            if ((_report_secondary_type.secondary_type_id != 0) && (_report_secondary_type.secondary_type_id != -1))
-                            {
-                                company_secondary_type temp_comp_sec_type = db.company_secondary_type.Where(item => item.id == _report_secondary_type.secondary_type_id).FirstOrDefault();
-                                if (temp_comp_sec_type != null)
-                                {
-                                    if ((secondary_type.Length > 0) && (!secondary_type.Contains(temp_comp_sec_type.secondary_type_en.Trim())))
-                                        secondary_type = secondary_type + ", " + temp_comp_sec_type.secondary_type_en.Trim();
-                                    else
-                                        secondary_type = temp_comp_sec_type.secondary_type_en.Trim();
-                                }
-                            }
-
-                            if (_report_secondary_type.secondary_type_nm.Trim() != "")
-                            {
-                                if ((secondary_type.Length > 0) && (!secondary_type.Contains(_report_secondary_type.secondary_type_nm.Trim())))
-                                    secondary_type = secondary_type + ", " + _report_secondary_type.secondary_type_nm.Trim();
+                                if ((secondary_type.Length > 0) && (!secondary_type.Contains(temp_sec_type.secondary_type_en.Trim())))
+                                    secondary_type = secondary_type + ", " + temp_sec_type.secondary_type_en.Trim();
                                 else
-                                    secondary_type = _report_secondary_type.secondary_type_nm.Trim();
-                            }
-                            else if (_report_secondary_type.secondary_type_id == 0)
-                            {
-                                if (secondary_type.Length > 0)
-                                {
-                                    secondary_type = secondary_type + ", " + GlobalRes.Other;
-                                }
-                                else
-                                {
-                                    secondary_type = GlobalRes.Other;
-                                }
+                                    secondary_type = temp_sec_type.secondary_type_en.Trim();
                             }
                         }
 
-                    }
-                }
-                if (secondary_type.Length == 0)
-                    secondary_type = App_LocalResources.GlobalRes.unknown_secondary_type;
+                        if ((_report_secondary_type.secondary_type_id != 0) && (_report_secondary_type.secondary_type_id != -1))
+                        {
+                            company_secondary_type temp_comp_sec_type = db.company_secondary_type.Where(item => item.id == _report_secondary_type.secondary_type_id).FirstOrDefault();
+                            if (temp_comp_sec_type != null)
+                            {
+                                if ((secondary_type.Length > 0) && (!secondary_type.Contains(temp_comp_sec_type.secondary_type_en.Trim())))
+                                    secondary_type = secondary_type + ", " + temp_comp_sec_type.secondary_type_en.Trim();
+                                else
+                                    secondary_type = temp_comp_sec_type.secondary_type_en.Trim();
+                            }
+                        }
 
-                return secondary_type.Trim();
+                        if (_report_secondary_type.secondary_type_nm.Trim() != "")
+                        {
+                            if ((secondary_type.Length > 0) && (!secondary_type.Contains(_report_secondary_type.secondary_type_nm.Trim())))
+                                secondary_type = secondary_type + ", " + _report_secondary_type.secondary_type_nm.Trim();
+                            else
+                                secondary_type = _report_secondary_type.secondary_type_nm.Trim();
+                        }
+                        else if (_report_secondary_type.secondary_type_id == 0)
+                        {
+                            if (secondary_type.Length > 0)
+                            {
+                                secondary_type = secondary_type + ", " + GlobalRes.Other;
+                            }
+                            else
+                            {
+                                secondary_type = GlobalRes.Other;
+                            }
+                        }
+                    }
+
+                }
             }
+            if (secondary_type.Length == 0)
+                secondary_type = App_LocalResources.GlobalRes.unknown_secondary_type;
+
+            return secondary_type.Trim();
         }
 
-        public string _secondary_type_string_all
+        public string SecondaryTypeStringAll()
         {
-            get
+            string secondary_type = "";
+
+            if (_report != null)
             {
-                string secondary_type = "";
-
-                if (_report != null)
+                if (db.report_secondary_type.Any(t => t.report_id == _report.id))
                 {
-                    if (db.report_secondary_type.Any(t => t.report_id == _report.id))
+                    List<report_secondary_type> _report_secondary_type_list = db.report_secondary_type.Where(t => t.report_id == _report.id).ToList();
+                    foreach (report_secondary_type _report_secondary_type in _report_secondary_type_list)
                     {
-                        List<report_secondary_type> _report_secondary_type_list = db.report_secondary_type.Where(t => t.report_id == _report.id).ToList();
-                        foreach (report_secondary_type _report_secondary_type in _report_secondary_type_list)
+                        if (_report_secondary_type.mandatory_secondary_type_id != null)
                         {
-                            if (_report_secondary_type.mandatory_secondary_type_id != null)
+                            secondary_type_mandatory temp_sec_type = db.secondary_type_mandatory.Where(item => item.id == _report_secondary_type.mandatory_secondary_type_id).FirstOrDefault();
+                            if (temp_sec_type != null)
                             {
-                                secondary_type_mandatory temp_sec_type = db.secondary_type_mandatory.Where(item => item.id == _report_secondary_type.mandatory_secondary_type_id).FirstOrDefault();
-                                if (temp_sec_type != null)
-                                {
-                                    if ((secondary_type.Length > 0) && (!secondary_type.Contains(temp_sec_type.secondary_type_en.Trim())))
-                                        secondary_type = secondary_type + ", " + temp_sec_type.secondary_type_en.Trim();
-                                    else if (secondary_type.Length == 0)
-                                        secondary_type = temp_sec_type.secondary_type_en.Trim();
-                                }
-                            }
-
-                            if ((_report_secondary_type.secondary_type_id != 0) && (_report_secondary_type.secondary_type_id != -1))
-                            {
-                                company_secondary_type temp_comp_sec_type = db.company_secondary_type.Where(item => item.id == _report_secondary_type.secondary_type_id).FirstOrDefault();
-                                if (temp_comp_sec_type != null)
-                                {
-                                    if ((secondary_type.Length > 0) && (!secondary_type.Contains(temp_comp_sec_type.secondary_type_en.Trim())))
-                                        secondary_type = secondary_type + ", " + temp_comp_sec_type.secondary_type_en.Trim();
-                                    else if (secondary_type.Length == 0)
-                                        secondary_type = temp_comp_sec_type.secondary_type_en.Trim();
-                                }
-                            }
-
-                            if (_report_secondary_type.secondary_type_nm.Trim() != "")
-                            {
-                                if ((secondary_type.Length > 0) && (!secondary_type.Contains(_report_secondary_type.secondary_type_nm.Trim())))
-                                    secondary_type = secondary_type + ", " + _report_secondary_type.secondary_type_nm.Trim();
+                                if ((secondary_type.Length > 0) && (!secondary_type.Contains(temp_sec_type.secondary_type_en.Trim())))
+                                    secondary_type = secondary_type + ", " + temp_sec_type.secondary_type_en.Trim();
                                 else if (secondary_type.Length == 0)
-                                    secondary_type = _report_secondary_type.secondary_type_nm.Trim();
-                            }
-                            else if (_report_secondary_type.secondary_type_id == 0)
-                            {
-                                if (secondary_type.Length > 0)
-                                {
-                                    secondary_type = secondary_type + ", " + GlobalRes.Other;
-                                }
-                                else
-                                {
-                                    secondary_type = GlobalRes.Other;
-                                }
+                                    secondary_type = temp_sec_type.secondary_type_en.Trim();
                             }
                         }
 
-                    }
-                }
-                if (secondary_type.Length == 0)
-                    secondary_type = App_LocalResources.GlobalRes.unknown_secondary_type;
+                        if ((_report_secondary_type.secondary_type_id != 0) && (_report_secondary_type.secondary_type_id != -1))
+                        {
+                            company_secondary_type temp_comp_sec_type = db.company_secondary_type.Where(item => item.id == _report_secondary_type.secondary_type_id).FirstOrDefault();
+                            if (temp_comp_sec_type != null)
+                            {
+                                if ((secondary_type.Length > 0) && (!secondary_type.Contains(temp_comp_sec_type.secondary_type_en.Trim())))
+                                    secondary_type = secondary_type + ", " + temp_comp_sec_type.secondary_type_en.Trim();
+                                else if (secondary_type.Length == 0)
+                                    secondary_type = temp_comp_sec_type.secondary_type_en.Trim();
+                            }
+                        }
 
-                return secondary_type.Trim();
+                        if (_report_secondary_type.secondary_type_nm.Trim() != "")
+                        {
+                            if ((secondary_type.Length > 0) && (!secondary_type.Contains(_report_secondary_type.secondary_type_nm.Trim())))
+                                secondary_type = secondary_type + ", " + _report_secondary_type.secondary_type_nm.Trim();
+                            else if (secondary_type.Length == 0)
+                                secondary_type = _report_secondary_type.secondary_type_nm.Trim();
+                        }
+                        else if (_report_secondary_type.secondary_type_id == 0)
+                        {
+                            if (secondary_type.Length > 0)
+                            {
+                                secondary_type = secondary_type + ", " + GlobalRes.Other;
+                            }
+                            else
+                            {
+                                secondary_type = GlobalRes.Other;
+                            }
+                        }
+                    }
+
+                }
             }
+            if (secondary_type.Length == 0)
+                secondary_type = App_LocalResources.GlobalRes.unknown_secondary_type;
+
+            return secondary_type.Trim();
         }
 
         /// <summary>
@@ -517,23 +419,20 @@ namespace EC.Models
         /// </summary>
         /// <param name="report_id"></param>
         /// <returns></returns>
-        public string _incident_date_string
+        public string IncidentDateString()
         {
-            get
+            string date_string = "";
+            DateTime dt;
+            if (_report != null)
             {
-                string date_string = "";
-                DateTime dt;
-                if (_report != null)
-                {
-                    dt = _report.incident_dt;
-                    date_string = m_DateTimeHelper.GetShortMonth(dt.Month) + " " + dt.Day.ToString() + ", " + dt.Year.ToString();
-                }
-
-                if (date_string.Trim().Length == 0)
-                    date_string = App_LocalResources.GlobalRes.unknown_date;
-
-                return date_string.Trim();
+                dt = _report.incident_dt;
+                date_string = m_DateTimeHelper.GetShortMonth(dt.Month) + " " + dt.Day.ToString() + ", " + dt.Year.ToString();
             }
+
+            if (date_string.Trim().Length == 0)
+                date_string = App_LocalResources.GlobalRes.unknown_date;
+
+            return date_string.Trim();
         }
 
         /// <summary>
@@ -541,201 +440,177 @@ namespace EC.Models
         /// </summary>
         /// <param name="report_id"></param>
         /// <returns></returns>
-        public string _incident_date_string_month_long
+        public string IncidentDateStringMonthLong()
         {
-            get
+            string date_string = "";
+            DateTime dt;
+            if (_report != null)
             {
-                string date_string = "";
-                DateTime dt;
-                if (_report != null)
-                {
-                    dt = _report.incident_dt;
-                    date_string = m_DateTimeHelper.GetFullMonth(dt.Month) + " " + dt.Day.ToString() + ", " + dt.Year.ToString();
-                }
-
-                if (date_string.Trim().Length == 0)
-                    date_string = App_LocalResources.GlobalRes.unknown_date;
-
-                return date_string.Trim();
+                dt = _report.incident_dt;
+                date_string = m_DateTimeHelper.GetFullMonth(dt.Month) + " " + dt.Day.ToString() + ", " + dt.Year.ToString();
             }
+
+            if (date_string.Trim().Length == 0)
+                date_string = App_LocalResources.GlobalRes.unknown_date;
+
+            return date_string.Trim();
         }
         /// <summary>
         /// Returns "Jan 31, 2015"
         /// </summary>
         /// <param name="report_id"></param>
         /// <returns></returns>
-        public string _reported_date_string
+        public string ReportedDateString()
         {
-            get
+            string date_string = "";
+            DateTime dt;
+            if (_report != null)
             {
-                string date_string = "";
-                DateTime dt;
-                if (_report != null)
-                {
-                    dt = _report.reported_dt;
-                    date_string = m_DateTimeHelper.GetShortMonth(dt.Month) + " " + dt.Day.ToString() + ", " + dt.Year.ToString();
-                }
-
-                if (date_string.Trim().Length == 0)
-                    date_string = App_LocalResources.GlobalRes.unknown_date;
-
-                return date_string.Trim();
+                dt = _report.reported_dt;
+                date_string = m_DateTimeHelper.GetShortMonth(dt.Month) + " " + dt.Day.ToString() + ", " + dt.Year.ToString();
             }
+
+            if (date_string.Trim().Length == 0)
+                date_string = App_LocalResources.GlobalRes.unknown_date;
+
+            return date_string.Trim();
         }
         /// <summary>
         /// Returns "January 31, 2015"
         /// </summary>
         /// <param name="report_id"></param>
         /// <returns></returns>
-        public string _reported_date_string_month_long
+        public string ReportedDateStringMonthLong()
         {
-            get
+            string date_string = "";
+            DateTime dt;
+            if (_report != null)
             {
-                string date_string = "";
-                DateTime dt;
-                if (_report != null)
-                {
-                    dt = _report.reported_dt;
-                    date_string = m_DateTimeHelper.GetFullMonth(dt.Month) + " " + dt.Day.ToString() + ", " + dt.Year.ToString();
-                }
-
-                if (date_string.Trim().Length == 0)
-                    date_string = App_LocalResources.GlobalRes.unknown_date;
-
-                return date_string.Trim();
+                dt = _report.reported_dt;
+                date_string = m_DateTimeHelper.GetFullMonth(dt.Month) + " " + dt.Day.ToString() + ", " + dt.Year.ToString();
             }
+
+            if (date_string.Trim().Length == 0)
+                date_string = App_LocalResources.GlobalRes.unknown_date;
+
+            return date_string.Trim();
         }
-        public string _color_code
+        public string ColorCode()
         {
-            get
+            string color_code = "";
+            color _color;
+
+            if (_report != null)
             {
-                string color_code = "";
-                color _color;
+                int color_id = _report.report_color_id;
 
-                if (_report != null)
-                {
-                    int color_id = _report.report_color_id;
-
-                    _color = db.color.Where(item => item.id == _report.report_color_id).FirstOrDefault();
-                    if (_color != null)
-                        color_code = _color.color_code;
-                    else
-                    {
-                        _color = db.color.Where(item => item.id == 1).FirstOrDefault();
-                        color_code = _color.color_code;
-                    }
-                }
+                _color = db.color.Where(item => item.id == _report.report_color_id).FirstOrDefault();
+                if (_color != null)
+                    color_code = _color.color_code;
                 else
                 {
                     _color = db.color.Where(item => item.id == 1).FirstOrDefault();
                     color_code = _color.color_code;
                 }
-
-                return color_code.Trim();
             }
-        }
-        public string _color_descr
-        {
-            get
+            else
             {
-                string color_descr = "";
-                color _color;
+                _color = db.color.Where(item => item.id == 1).FirstOrDefault();
+                color_code = _color.color_code;
+            }
 
-                if (_report != null)
-                {
-                    int color_id = _report.report_color_id;
+            return color_code.Trim();
+        }
+        public string ColorDescr()
+        {
+            string color_descr = "";
+            color _color;
 
-                    _color = db.color.Where(item => item.id == _report.report_color_id).FirstOrDefault();
-                    if (_color != null)
-                        color_descr = _color.color_description;
-                    else
-                    {
-                        _color = db.color.Where(item => item.id == 1).FirstOrDefault();
-                        color_descr = _color.color_description;
-                    }
-                }
+            if (_report != null)
+            {
+                int color_id = _report.report_color_id;
+
+                _color = db.color.Where(item => item.id == _report.report_color_id).FirstOrDefault();
+                if (_color != null)
+                    color_descr = _color.color_description;
                 else
                 {
                     _color = db.color.Where(item => item.id == 1).FirstOrDefault();
                     color_descr = _color.color_description;
                 }
-
-                return color_descr.Trim();
             }
+            else
+            {
+                _color = db.color.Where(item => item.id == 1).FirstOrDefault();
+                color_descr = _color.color_description;
+            }
+
+            return color_descr.Trim();
         }
 
-        public string _color_secondary_code
+        public string ColorSecondaryCode()
         {
-            get
+            string color_code = "";
+            color _color;
+
+            if (_report != null)
             {
-                string color_code = "";
-                color _color;
+                int color_id = _report.report_color_id;
 
-                if (_report != null)
-                {
-                    int color_id = _report.report_color_id;
-
-                    _color = db.color.Where(item => item.id == _report.report_color_id).FirstOrDefault();
-                    if (_color != null)
-                        color_code = _color.secondary_color_code;
-                    else
-                    {
-
-                        _color = db.color.Where(item => item.id == 1).FirstOrDefault();
-                        color_code = _color.secondary_color_code;
-                    }
-                }
+                _color = db.color.Where(item => item.id == _report.report_color_id).FirstOrDefault();
+                if (_color != null)
+                    color_code = _color.secondary_color_code;
                 else
                 {
+
                     _color = db.color.Where(item => item.id == 1).FirstOrDefault();
                     color_code = _color.secondary_color_code;
                 }
-
-                return color_code.Trim();
             }
+            else
+            {
+                _color = db.color.Where(item => item.id == 1).FirstOrDefault();
+                color_code = _color.secondary_color_code;
+            }
+
+            return color_code.Trim();
         }
 
-        public string _management_know_string
+        public string ManagementKnowString()
         {
-            get
-            {
-                string management_know = App_LocalResources.GlobalRes.unknown;
+            string management_know = App_LocalResources.GlobalRes.unknown;
 
-                if (_report != null)
+            if (_report != null)
+            {
+                if (_report.management_know_id.HasValue)
                 {
-                    if (_report.management_know_id.HasValue)
+                    management_know _management_know = db.management_know.Where(item => item.id == _report.management_know_id.Value).FirstOrDefault();
+                    if (_management_know != null)
                     {
-                        management_know _management_know = db.management_know.Where(item => item.id == _report.management_know_id.Value).FirstOrDefault();
-                        if (_management_know != null)
-                        {
-                            management_know = _management_know.text_en;
-                        }
+                        management_know = _management_know.text_en;
                     }
                 }
-                return management_know;
             }
+            return management_know;
         }
 
 
-        public string _company_name
+        public string CompanyName()
         {
-            get
+            string company_name = "";
+
+            if (_report != null)
             {
-                string company_name = "";
-
-                if (_report != null)
+                if (_report.company_id != 1)
                 {
-                    if (_report.company_id != 1)
-                    {
-                        company _company = db.company.Where(item => item.id == _report.company_id).FirstOrDefault();
-                        company_name = _company.company_nm.Trim();
-                    }
-                    else
-                        company_name = _report.submitted_company_nm.Trim();
+                    company _company = db.company.Where(item => item.id == _report.company_id).FirstOrDefault();
+                    company_name = _company.company_nm.Trim();
                 }
-
-                return company_name;
+                else
+                    company_name = _report.submitted_company_nm.Trim();
             }
+
+            return company_name;
         }
 
 
@@ -744,40 +619,37 @@ namespace EC.Models
         /// </summary>
         /// <param name="report_id"></param>
         /// <returns></returns>
-        public int _delay_allowed
+        public int GetDelayAllowed()
         {
-            get
+            int delay_allowed = 5;
+
+            int company_id = _report.company_id;
+            company _company = db.company.Where(item => item.id == company_id).FirstOrDefault();
+
+            int status_id = _investigation_status;
+
+            switch (status_id)
             {
-                int delay_allowed = 5;
-
-                int company_id = _report.company_id;
-                company _company = db.company.Where(item => item.id == company_id).FirstOrDefault();
-
-                int status_id = _investigation_status;
-
-                switch (status_id)
-                {
-                    case 1:
-                        delay_allowed = _company.step1_delay;
-                        break;
-                    case 2:
-                        delay_allowed = _company.step2_delay;
-                        break;
-                    case 3:
-                        delay_allowed = _company.step3_delay;
-                        break;
-                    case 4:
-                        delay_allowed = _company.step4_delay;
-                        break;
-                    case 5:
-                        delay_allowed = _company.step5_delay;
-                        break;
-                    default:
-                        delay_allowed = 5;
-                        break;
-                }
-                return delay_allowed;
+                case 1:
+                    delay_allowed = _company.step1_delay;
+                    break;
+                case 2:
+                    delay_allowed = _company.step2_delay;
+                    break;
+                case 3:
+                    delay_allowed = _company.step3_delay;
+                    break;
+                case 4:
+                    delay_allowed = _company.step4_delay;
+                    break;
+                case 5:
+                    delay_allowed = _company.step5_delay;
+                    break;
+                default:
+                    delay_allowed = 5;
+                    break;
             }
+            return delay_allowed;
         }
 
         /// <summary>
@@ -785,18 +657,16 @@ namespace EC.Models
         /// </summary>
         /// <param name="report_id"></param>
         /// <returns></returns>
-        public int _total_days
+        public int GetTotalDays()
         {
-            get
-            {
                 int total_days = 0;
                 if (_report != null)
                 {
 
                     if ((_investigation_status == 6) || (_investigation_status == 7))
                     {
-                        //report is closed or marked as spam on _last_promoted_date
-                        total_days = (_last_promoted_date - _report.reported_dt).Days;
+                    //report is closed or marked as spam on LastPromotedDate()
+                    total_days = (LastPromotedDate() - _report.reported_dt).Days;
                     }
                     else
                     {
@@ -805,7 +675,6 @@ namespace EC.Models
                 }
 
                 return total_days;
-            }
         }
 
 
@@ -814,51 +683,45 @@ namespace EC.Models
         /// </summary>
         /// <param name="report_id"></param>
         /// <returns></returns>
-        public int _step_days_left
+        public int GetThisStepDaysLeft()
         {
-            get
+            double days_left = 2;
+            int delay_allowed = GetDelayAllowed();
+            int status_id = _investigation_status;
+
+
+            DateTime promoted_date = LastPromotedDate();
+
+            double days_ongoing = 0;
+            days_ongoing = (DateTime.Today - promoted_date).TotalDays;
+            days_left = delay_allowed - days_ongoing;
+            int days = (int)days_left;
+
+            if (days >= 0)
+                return days;
+            else if (days < -1)
             {
-                double days_left = 2;
-                int delay_allowed = _delay_allowed;
-                int status_id = _investigation_status;
-
-
-                DateTime promoted_date = _last_promoted_date;
-
-                double days_ongoing = 0;
-                days_ongoing = (DateTime.Today - promoted_date).TotalDays;
-                days_left = delay_allowed - days_ongoing;
-                int days = (int)days_left;
-
-                if (days >= 0)
-                    return days;
-                else if (days < -1)
-                {
-                    //expired I guess
-                    return 0;
-                    //     return days;
-                }
-                else
-                    return 0;
+                //expired I guess
+                return 0;
+                //     return days;
             }
+            else
+                return 0;
         }
 
-        public DateTime _last_promoted_date
+        public DateTime LastPromotedDate()
         {
-            get
+            int status_id = _investigation_status;
+            DateTime promoted_date = _report.reported_dt;
+            if (db.report_investigation_status.Any(item => ((item.report_id == ID) && (item.investigation_status_id == status_id))))
             {
-                int status_id = _investigation_status;
-                DateTime promoted_date = _report.reported_dt;
-                if (db.report_investigation_status.Any(item => ((item.report_id == ID) && (item.investigation_status_id == status_id))))
-                {
-                    report_investigation_status _current_report_status = db.report_investigation_status.Where(item => ((item.report_id == ID) && (item.investigation_status_id == status_id))).OrderByDescending(a => a.created_date).FirstOrDefault();
-                    promoted_date = _current_report_status.created_date;
-                }
-                return promoted_date;
+                report_investigation_status _current_report_status = db.report_investigation_status.Where(item => ((item.report_id == ID) && (item.investigation_status_id == status_id))).OrderByDescending(a => a.created_date).FirstOrDefault();
+                promoted_date = _current_report_status.created_date;
             }
+            return promoted_date;
         }
 
-        public DateTime _last_read_date(int user_id)
+        public DateTime LastReadDate(int user_id)
         {
 
             if (db.report_user_read.Where(item => ((item.user_id == user_id) && (item.report_id == ID))).Count() == 0)
@@ -884,7 +747,7 @@ namespace EC.Models
                 is_spam = true;
                 // at least its spam
 
-                /*         if (promotion_status_date(Constant.investigation_status_spam) > _last_read_date(user_id))
+                /*         if (promotion_status_date(Constant.investigation_status_spam) > LastReadDate(user_id))
                          {
                              is_spam = true;
                          }*/
@@ -899,7 +762,7 @@ namespace EC.Models
             {
                 is_completed = true;
                 /*    // at least its spam
-                    if (promotion_status_date(Constant.investigation_status_closed) > _last_read_date(user_id))
+                    if (promotion_status_date(Constant.investigation_status_closed) > LastReadDate(user_id))
                     {
                         is_closed = true;
                     }*/
@@ -914,7 +777,7 @@ namespace EC.Models
             {
                 is_closed = true;
                 /*    // at least its spam
-                    if (promotion_status_date(Constant.investigation_status_closed) > _last_read_date(user_id))
+                    if (promotion_status_date(Constant.investigation_status_closed) > LastReadDate(user_id))
                     {
                         is_closed = true;
                     }*/
@@ -929,7 +792,7 @@ namespace EC.Models
             {
                 is_closed = true;
                 /*    // at least its spam
-                    if (promotion_status_date(Constant.investigation_status_closed) > _last_read_date(user_id))
+                    if (promotion_status_date(Constant.investigation_status_closed) > LastReadDate(user_id))
                     {
                         is_closed = true;
                     }*/
@@ -1046,7 +909,7 @@ namespace EC.Models
             //          return 0;
         }
 
-        public DateTime last_event_date()
+        public DateTime LastEventDate()
         {
             if ((_report == null) || (ID == 0))
             {
@@ -1075,7 +938,7 @@ namespace EC.Models
         {
             bool _new_activity = false;
 
-            if (last_event_date() > _last_read_date(user_id))
+            if (LastEventDate() > LastReadDate(user_id))
             {
                 _new_activity = true;
             }
@@ -1103,7 +966,7 @@ namespace EC.Models
                         if ((anon_level_id == 1) || (anon_level_id == 3))
                             anon_level = _anonymity.anonymity_en;
                         if (anon_level_id == 2)
-                            anon_level = String.Format(_anonymity.anonymity_en_company, _company_name);
+                            anon_level = String.Format(_anonymity.anonymity_en_company, CompanyName());
                     }
                 }
 
@@ -1125,7 +988,7 @@ namespace EC.Models
                         if ((anon_level_id == 1) || (anon_level_id == 3))
                             anon_level = _anonymity.anonymity_en;
                         if (anon_level_id == 2)
-                            anon_level = String.Format(_anonymity.anonymity_en, _company_name);
+                            anon_level = String.Format(_anonymity.anonymity_en, CompanyName());
                     }
                 }
 
@@ -1157,7 +1020,7 @@ namespace EC.Models
                         }
                         if ((role_id > 0) && (role_id < 4))
                         {
-                            return String.Format(_anonymity.anonymity_en, _company_name);
+                            return String.Format(_anonymity.anonymity_en, CompanyName());
                         }
                         return EC.App_LocalResources.GlobalRes.anonymous_reporter;
 
@@ -1531,16 +1394,14 @@ namespace EC.Models
         /// </summary>
         /// <param name="reportId"></param>
         /// <returns></returns>
-        public List<user> _mediators_whoHasAccess_toReport
+        public List<user> MediatorsWhoHasAccessToReport()
         {
-            get
-            {
                 List<user> result = new List<user>();
                 user _user;
 
                 List<user> all_top_mediators = db.user.Where(item => (item.company_id == _report.company_id) && (item.role_id == 4 || item.role_id == 5)).ToList();
-                List<user> involved_mediators = _involved_mediators_user_list;
-                List<user> assigned_mediators = _assigned_mediators_user_list;
+                List<user> involved_mediators = InvolvedMediatorsUserList();
+                List<user> assigned_mediators = AssignedMediatorsUserList();
                 var owner = db.report_owner.FirstOrDefault(x => x.report_id == _report.id & x.status_id == 2);
 
                 for (int i = 0; i < all_top_mediators.Count; i++)
@@ -1576,76 +1437,61 @@ namespace EC.Models
 
 
                 return result;
-            }
         }
 
-        public List<report_mediator_involved> _involved_mediators
+        public List<report_mediator_involved> InvolvedMediators()
         {
-            get
-            {
-                return (db.report_mediator_involved.Where(item => (item.report_id == ID) && item.added_by_reporter != false)).ToList();
-            }
+            return (db.report_mediator_involved.Where(item => (item.report_id == ID) && item.added_by_reporter != false)).ToList();
         }
-        public List<user> _involved_mediators_user_list
+        public List<user> InvolvedMediatorsUserList()
         {
-            get
+            List<user> result = new List<user>();
+            List<report_mediator_involved> mediators = InvolvedMediators();
+            user _user;
+            int mediator_id = 0;
+            for (int i = 0; i < mediators.Count; i++)
             {
+                mediator_id = mediators[i].mediator_id;
+                _user = db.user.FirstOrDefault(item => item.id == mediator_id);
+                result.Add(_user);
+            }
+
+            return result;
+        }
+
+        public List<report_mediator_assigned> AssignedMediators()
+        {
+            List<report_mediator_assigned> result = new List<report_mediator_assigned>();
+            List<report_mediator_assigned> assigned_list = (db.report_mediator_assigned.Where(item => ((item.report_id == ID) && (item.status_id == 2)))).ToList();
+            report_mediator_assigned _assigned;
+
+            // just in case to check mediator is not involved
+            List<report_mediator_involved> involved_list = (db.report_mediator_involved.Where(item => (item.report_id == ID))).ToList();
+
+            for (int i = 0; i < assigned_list.Count; i++)
+            {
+                _assigned = assigned_list[i];
+                if ((!involved_list.Any(item => (item.user_id == _assigned.mediator_id))) && (!result.Contains(_assigned)))
+                    result.Add(_assigned);
+            }
+
+            return result;
+        }
+
+        public List<report_non_mediator_involved> GetWitnesses()
+        {
+            List<report_non_mediator_involved> result = (db.report_non_mediator_involved.Where(item => (item.report_id == ID && item.added_by_reporter != false))).ToList();
+            foreach (var item in result)
+            {
+                var role = db.role_in_report.First(m => m.id == item.role_in_report_id);
+                item.Role = role != null ? role.role_en : App_LocalResources.GlobalRes.Other;
+            }
+            return result;
+        }
+        public List<user> AssignedMediatorsUserList()
+        {
                 List<user> result = new List<user>();
-                List<report_mediator_involved> mediators = _involved_mediators;
-                user _user;
-                int mediator_id = 0;
-                for (int i = 0; i < mediators.Count; i++)
-                {
-                    mediator_id = mediators[i].mediator_id;
-                    _user = db.user.FirstOrDefault(item => item.id == mediator_id);
-                    result.Add(_user);
-                }
-
-                return result;
-            }
-        }
-
-        public List<report_mediator_assigned> _assigned_mediators
-        {
-            get
-            {
-                List<report_mediator_assigned> result = new List<report_mediator_assigned>();
-                List<report_mediator_assigned> assigned_list = (db.report_mediator_assigned.Where(item => ((item.report_id == ID) && (item.status_id == 2)))).ToList();
-                report_mediator_assigned _assigned;
-
-                // just in case to check mediator is not involved
-                List<report_mediator_involved> involved_list = (db.report_mediator_involved.Where(item => (item.report_id == ID))).ToList();
-
-                for (int i = 0; i < assigned_list.Count; i++)
-                {
-                    _assigned = assigned_list[i];
-                    if ((!involved_list.Any(item => (item.user_id == _assigned.mediator_id))) && (!result.Contains(_assigned)))
-                        result.Add(_assigned);
-                }
-
-                return result;
-            }
-        }
-
-        public List<report_non_mediator_involved> _witnesses
-        {
-            get
-            {
-                List<report_non_mediator_involved> result = (db.report_non_mediator_involved.Where(item => (item.report_id == ID && item.added_by_reporter != false))).ToList();
-                foreach (var item in result)
-                {
-                    var role = db.role_in_report.First(m => m.id == item.role_in_report_id);
-                    item.Role = role != null ? role.role_en : App_LocalResources.GlobalRes.Other;
-                }
-                return result;
-            }
-        }
-        public List<user> _assigned_mediators_user_list
-        {
-            get
-            {
-                List<user> result = new List<user>();
-                List<report_mediator_assigned> mediators = _assigned_mediators;
+                List<report_mediator_assigned> mediators = AssignedMediators();
                 List<user> _users;
                 int mediator_id = 0;
                 for (int i = 0; i < mediators.Count; i++)
@@ -1657,32 +1503,25 @@ namespace EC.Models
                 }
 
                 return result;
-            }
         }
 
-        public List<report_owner> _report_owners
+        public List<report_owner> ReportOwners()
         {
-            get
-            {
-                return (db.report_owner.Where(item => (item.report_id == ID))).ToList();
-            }
+            return (db.report_owner.Where(item => (item.report_id == ID))).ToList();
         }
-        public List<user> _report_owners_user_list
+        public List<user> ReportOwnersUserList()
         {
-            get
+            List<user> result = new List<user>();
+            List<report_owner> mediators = ReportOwners();
+            user _user;
+
+            for (int i = 0; i < mediators.Count; i++)
             {
-                List<user> result = new List<user>();
-                List<report_owner> mediators = _report_owners;
-                user _user;
-
-                for (int i = 0; i < mediators.Count; i++)
-                {
-                    _user = db.user.FirstOrDefault(item => item.id == mediators[i].user_id);
-                    result.Add(_user);
-                }
-
-                return result;
+                _user = db.user.FirstOrDefault(item => item.id == mediators[i].user_id);
+                result.Add(_user);
             }
+
+            return result;
         }
 
         /// <summary>
@@ -1690,10 +1529,8 @@ namespace EC.Models
         /// </summary>
         /// <param name="reportId"></param>
         /// <returns></returns>
-        public List<user> _available_toAssign_mediators
+        public List<user> AvailableToAssignMediators()
         {
-            get
-            {
                 report _report = db.report.FirstOrDefault(item => item.id == ID);
                 List<user> result = new List<user>();
                 List<user> users = db.user.Where(item => (item.company_id == _report.company_id) && (item.role_id == 6) && (item.status_id == 2)).ToList();
@@ -1713,7 +1550,6 @@ namespace EC.Models
                 }
 
                 return result;
-            }
         }
         #endregion
 
@@ -1966,7 +1802,7 @@ namespace EC.Models
                 // if user is mediator from a company
                 if ((_user.role_id == 4) || (_user.role_id == 5) || (_user.role_id == 6) || (_user.role_id == 7))
                 {
-                    List<user> mediators = _mediators_whoHasAccess_toReport;
+                    List<user> mediators = MediatorsWhoHasAccessToReport();
                     if (mediators.Any(item => (item.id == user_id)))
                         return true;
                 }
@@ -2029,9 +1865,6 @@ namespace EC.Models
 
                 return status.Trim();
         }
-
-
-
 
         public report_investigation_status _last_investigation_status()
         {
@@ -2411,9 +2244,9 @@ namespace EC.Models
 
                 var res = new List<UserViewModel>();
 
-                var list1 = _mediators_whoHasAccess_toReport;
-                var list2 = _involved_mediators_user_list;
-                var list3 = _available_toAssign_mediators;
+                var list1 = MediatorsWhoHasAccessToReport();
+                var list2 = InvolvedMediatorsUserList();
+                var list3 = AvailableToAssignMediators();
 
                 //By level
                 res.AddRange(list1

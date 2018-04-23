@@ -65,10 +65,10 @@
         _report_id = (int)ViewBag.report_id;
         rm = new EC.Models.ReportModel(_report_id);
 
-        report_name = rm._secondary_type_string + " - " + rm._location_string + " - #" + rm._report.display_name;
+        report_name = rm.SecondaryTypeString() + " - " + rm.LocationString() + " - #" + rm._report.display_name;
         report_name_code = GlobalRes.Newreport + ": #" + rm._report.display_name;
-        report_color = rm._color_descr;
-        report_color_code = rm._color_code;
+        report_color = rm.ColorDescr();
+        report_color_code = rm.ColorCode();
         investigationstatus = rm._investigation_status;
     }
 
@@ -316,7 +316,7 @@
                 rm = new ReportModel(_report_id);
                 List<company_outcome> company_outcomes = cm.Outcomes(_user.company_id, 2);
 
-                List<user> mediators = rm._mediators_whoHasAccess_toReport;
+                List<user> mediators = rm.MediatorsWhoHasAccessToReport();
 
                 //<span class="casesDot @report_color"> <span></span></span>
                 <span class="casesDot"> <span style="background: #@report_color_code"></span></span>

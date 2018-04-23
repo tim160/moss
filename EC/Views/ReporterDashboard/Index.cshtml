@@ -12,7 +12,7 @@
     int user_id = (Int32)ViewBag.user_id;
     int report_id = (Int32)ViewBag.report_id;
     ReportModel rm = new ReportModel(report_id);
-    List<report_non_mediator_involved> _involved = rm._witnesses;
+    List<report_non_mediator_involved> _involved = rm.GetWitnesses();
     UserModel um = new UserModel(user_id);
     List<attachment> attachments = (List<attachment>)ViewBag.attachmentFiles;
 
@@ -61,14 +61,14 @@
                     </div>
                     <div class="listRight">
                         <p> @m_DateTimeHelper.ConvertDateToLongMonthString(rm._report.reported_dt)</p>
-                        @if (rm._total_days == 1)
+                        @if (rm.GetTotalDays() == 1)
                         {
-                            <p> @rm._total_days.ToString() @GlobalRes.day</p>
+                            <p> @rm.GetTotalDays().ToString() @GlobalRes.day</p>
 
                         }
                         else
                         {
-                            <p> @rm._total_days.ToString() @GlobalRes.days1</p>
+                            <p> @rm.GetTotalDays().ToString() @GlobalRes.days1</p>
                         }
                     </div>
 

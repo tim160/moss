@@ -8,7 +8,7 @@
     var user_id = (Int32)ViewBag.user_id;
 
     EC.Models.ReportModel rm = new ReportModel(report_id);
-    List<report_non_mediator_involved> _involved = rm._witnesses;
+    List<report_non_mediator_involved> _involved = rm.GetWitnesses();
     bool? is_cc = ViewBag.is_cc;
     if (!is_cc.HasValue)
     {
@@ -39,17 +39,17 @@
             <tbody>
                 <tr>
                     <td class="openSans">@GlobalRes.Reported:</td>
-                    <td class="openSansSemibold">@rm._reported_date_string</td>
+                    <td class="openSansSemibold">@rm.ReportedDateString()</td>
                 </tr>
                 <tr>
                     <td class="openSans">@GlobalRes.Timeelapsed:</td>
-                    @if (rm._total_days == 1)
+                    @if (rm.GetTotalDays() == 1)
                     {
-                        <td class="openSansSemibold">@rm._total_days.ToString() @GlobalRes.day</td>
+                        <td class="openSansSemibold">@rm.GetTotalDays().ToString() @GlobalRes.day</td>
                     }
                     else
                     {
-                        <td class="openSansSemibold">@rm._total_days.ToString() @GlobalRes.days1</td>
+                        <td class="openSansSemibold">@rm.GetTotalDays().ToString() @GlobalRes.days1</td>
                     }
                 </tr>
             </tbody>
@@ -57,22 +57,22 @@
         </table>
         <div class="blockInfoDays">
             <span class="title">@rm.InvestigationStatusString():  </span>
-            @if (Convert.ToInt32((DateTime.Today - rm._last_promoted_date).TotalDays + 1) == 1)
+            @if (Convert.ToInt32((DateTime.Today - rm.LastPromotedDate()).TotalDays + 1) == 1)
             {
-                <span class="days">@Convert.ToInt32((DateTime.Today - rm._last_promoted_date).TotalDays + 1) @GlobalRes.day</span>
+                <span class="days">@Convert.ToInt32((DateTime.Today - rm.LastPromotedDate()).TotalDays + 1) @GlobalRes.day</span>
             }
             else
             {
-                <span class="days">@Convert.ToInt32((DateTime.Today - rm._last_promoted_date).TotalDays + 1) @GlobalRes.days1</span>
+                <span class="days">@Convert.ToInt32((DateTime.Today - rm.LastPromotedDate()).TotalDays + 1) @GlobalRes.days1</span>
             }
 
-            @if (rm._step_days_left == 1)
+            @if (rm.GetThisStepDaysLeft() == 1)
             {
-                <span class="daysRight">@rm._step_days_left.ToString() @GlobalRes.day_left </span>
+                <span class="daysRight">@rm.GetThisStepDaysLeft().ToString() @GlobalRes.day_left </span>
             }
             else
             {
-                <span class="daysRight">@rm._step_days_left.ToString() @GlobalRes.days_left</span>
+                <span class="daysRight">@rm.GetThisStepDaysLeft().ToString() @GlobalRes.days_left</span>
             }
         </div>
         @if (rm._investigation_status != ECGlobalConstants.investigation_status_closed)
@@ -92,7 +92,7 @@
                     <span class="title">@GlobalRes.GeneralInformation</span>
                     <div class="generalInformation">
                         <p class="title">@GlobalRes.ReportingFrom:</p>
-                        <p class="text">@rm._country_string</p>
+                        <p class="text">@rm.CountryString()</p>
                         <p class="title">@GlobalRes.Reporterwouldliketostay:</p>
                         <p class="text">@rm._anonymousLevel_mediatorVersionByCaller(user_id)</p>
                         @if ((rm.Get_reporter_name(user_id).ToLower().Trim() != GlobalRes.anonymous_reporter.ToLower().Trim()) && (rm._report.incident_anonymity_id != 1))
@@ -101,7 +101,7 @@
                         <p class="text">@rm.Get_reporter_name(user_id)</p>
                         }
                         <p class="title">@GlobalRes.Reporteris:</p>
-                        <p class="text">@rm._reporter_company_relation_short</p>
+                        <p class="text">@rm.ReporterCompanyRelationShort()</p>
                         @if (!String.IsNullOrEmpty(rm._report.not_current_employee))
                         {
                         <p class="title">&nbsp;</p>
@@ -111,9 +111,9 @@
                         }
 
                         <p class="title">@GlobalRes.TheIncidentHappened @GlobalRes.in_:</p>
-                        <p class="text">@rm._location_string</p>
+                        <p class="text">@rm.LocationString()</p>
                         <p class="title">@GlobalRes.AffectedDepartment:</p>
-                        <p class="text">@rm._departments_string</p>
+                        <p class="text">@rm.DepartmentsString()</p>
                     </div>
                 </div>
 
@@ -131,17 +131,17 @@
 
 
 
-                        @if (rm._involved_mediators_user_list.Count > 0)
+                        @if (rm.InvolvedMediatorsUserList().Count > 0)
                         {
                             <p class="title">@GlobalRes.Mediatorsinvolved</p>
-                            foreach (user witness in rm._involved_mediators_user_list)
+                            foreach (user witness in rm.InvolvedMediatorsUserList())
                             {
                                 <p class="text">@witness.first_nm @witness.last_nm, @witness.title_ds  @witness.notepad_tx</p>
                             }
                         }
 
                         <p class="title">@GlobalRes.Doesmanagementknowaboutthisincident </p>
-                        <p class="text"> @rm._management_know_string</p>
+                        <p class="text"> @rm.ManagementKnowString()</p>
 
                         @if (!String.IsNullOrEmpty(rm._report.management_know_text))
                         { <p class="title">&nbsp; </p>
@@ -151,7 +151,7 @@
                         }
 
                         <p class="title">@GlobalRes.Incidentreportedoutside_q</p>
-                        <p class="text">@rm._is_reported_outside</p>
+                        <p class="text">@rm.IsReportedOutside()</p>
                         @if (!String.IsNullOrEmpty(rm._report.reported_outside_text))
                         {   <p class="title">&nbsp;</p>
                             <p class="text">
@@ -160,7 +160,7 @@
                         }
 
                         <p class="title">@GlobalRes.IsReportUrgent_q</p>
-                        <p class="text">@rm._is_reported_urgent</p>
+                        <p class="text">@rm.IsReportedUrgent()</p>
                     </div>
                 </div>
 
@@ -168,13 +168,13 @@
                     <span class="title">@GlobalRes.CaseInformation</span>
                     <div class="caseInformation">
                         <p class="title">@GlobalRes.ReportingAbout:</p>
-                        <p class="text">@rm._secondary_type_string</p>
+                        <p class="text">@rm.SecondaryTypeString()</p>
 
                         <p class="title">@GlobalRes.IncidentDate:</p>
-                        <p class="text">@rm._incident_date_string</p>
+                        <p class="text">@rm.IncidentDateString()</p>
 
                         <p class="title">@GlobalRes.isOngoing?</p>
-                        <p class="text">@rm._is_ongoing</p>
+                        <p class="text">@rm.IsOngoing()</p>
                         @if (!String.IsNullOrEmpty(rm._report.report_frequency_text))
                         {
                             <p class="title">&nbsp;</p>
@@ -184,7 +184,7 @@
                         }
 
                         <p class="title">@GlobalRes.IncidentResultInjury</p>
-                        <p class="text">@rm._has_injury_damage</p>
+                        <p class="text">@rm.HasInjuryDamage()</p>
                         @if (!String.IsNullOrEmpty(rm._report.injury_damage))
                         {
                             <p class="title">&nbsp;</p>

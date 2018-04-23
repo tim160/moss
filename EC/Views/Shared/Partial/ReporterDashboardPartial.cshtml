@@ -11,7 +11,7 @@
         is_cc = false;
     }
     ReportModel rm = Model;
-    List<report_non_mediator_involved> _involved = rm._witnesses;
+    List<report_non_mediator_involved> _involved = rm.GetWitnesses();
     IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
     if (ViewBag.attachmentAdvFiles == null)
     {
@@ -26,7 +26,7 @@
                 <div class="reportBlock">
                     <div class="report">
                         <div class="titleReport">@LocalizationGetter.GetString("ReportingFrom"):</div>
-                        <div class="reportText">@rm._country_string</div>
+                        <div class="reportText">@rm.CountryString()</div>
                     </div>
 
                     <div class="report">
@@ -50,14 +50,14 @@
                                 }
                             </div>
                             <div class="reportText">
-                                @rm._reporter_name
+                                @rm.Get_reporter_name(rm._report.reporter_user_id)
                             </div>
                         </div>
                     }
 
                     <div class="report">
                         <div class="titleReport">@LocalizationGetter.GetString("Reportedas"):</div>
-                        <div class="reportText">@rm._reporter_company_relation_short</div>
+                        <div class="reportText">@rm.ReporterCompanyRelationShort()</div>
                     </div>
                     @if (!String.IsNullOrEmpty(rm._report.not_current_employee))
                     {
@@ -70,11 +70,11 @@
                     }
                     <div class="report">
                         <div class="titleReport">@LocalizationGetter.GetString("Incidentlocation"):</div>
-                        <div class="reportText">@rm._location_string</div>
+                        <div class="reportText">@rm.LocationString()</div>
                     </div>
                     <div class="report">
                         <div class="titleReport">@LocalizationGetter.GetString("AffectedDepartment"):</div>
-                        <div class="reportText">@rm._departments_string</div>
+                        <div class="reportText">@rm.DepartmentsString()</div>
                     </div>
                 </div><!--reportBlock-->
             </div><!--leftBlock-->
@@ -107,12 +107,12 @@
                             </tbody>
                         </table>
                     }
-                    @if (rm._involved_mediators_user_list.Count > 0)
+                    @if (rm.InvolvedMediatorsUserList().Count > 0)
                     {
                         <div class="report">
                             <div class="titleReport">@LocalizationGetter.GetString("Mediatorsinvolved")</div>
                             <div class="reportText">&nbsp;</div>
-                            @foreach (user witness in rm._involved_mediators_user_list)
+                            @foreach (user witness in rm.InvolvedMediatorsUserList())
                             {
                                 <div class="titleReport">@witness.first_nm @witness.last_nm</div>
                                 <div class="reportText"> @witness.title_ds @witness.notepad_tx</div>
@@ -122,7 +122,7 @@
                     <div class="report">
                         <div class="titleReport">@LocalizationGetter.GetString("ManagementKnow")?</div>
                         <div class="reportText">
-                            @rm._management_know_string
+                            @rm.ManagementKnowString()
                         </div>
                     </div>
                     @if (!String.IsNullOrEmpty(rm._report.management_know_text))
@@ -137,7 +137,7 @@
 
                     <div class="report">
                         <div class="titleReport">@LocalizationGetter.GetString("Hascasereportedoutside")</div>
-                        <div class="reportText" style="height: 55px; ">@rm._is_reported_outside</div>
+                        <div class="reportText" style="height: 55px; ">@rm.IsReportedOutside()</div>
                         @if (!String.IsNullOrEmpty(rm._report.reported_outside_text))
                         {
                             <div class="titleReport">&nbsp;</div>
@@ -148,7 +148,7 @@
                     </div>
                     <div class="report">
                         <div class="titleReport">@LocalizationGetter.GetString("IsCaseUrgent_q")</div>
-                        <div class="reportText">@rm._is_reported_urgent</div>
+                        <div class="reportText">@rm.IsReportedUrgent()</div>
                     </div>
 
                 </div><!--reportBlock-->
@@ -167,7 +167,7 @@
                             <tbody>
                                 <tr>
                                     <td class="positionTitleReport">@LocalizationGetter.GetString("IncidentType"):</td>
-                                    <td class="positionReportText reportTextBlack">@rm._secondary_type_string</td>
+                                    <td class="positionReportText reportTextBlack">@rm.SecondaryTypeString()</td>
                                 </tr>
                                 <tr>
                                     <td class="positionTitleReport">@LocalizationGetter.GetString("IncidentDateUp"):</td>
@@ -175,7 +175,7 @@
                                 </tr>
                                 <tr>
                                     <td class="positionTitleReport">@LocalizationGetter.GetString("isOngoing"):</td>
-                                    <td class="positionReportText reportTextBlack">@rm._is_ongoing</td>
+                                    <td class="positionReportText reportTextBlack">@rm.IsOngoing()</td>
                                 </tr>
                                 @if (!String.IsNullOrEmpty(rm._report.report_frequency_text))
                                 {
@@ -188,7 +188,7 @@
                                 }
                                 <tr>
                                     <td class="positionTitleReport">@LocalizationGetter.GetString("incidentResult"):</td>
-                                    <td class="positionReportText reportTextBlack">@rm._has_injury_damage</td>
+                                    <td class="positionReportText reportTextBlack">@rm.HasInjuryDamage()</td>
                                 </tr>
                                 @if (!String.IsNullOrEmpty(rm._report.injury_damage))
                                 {

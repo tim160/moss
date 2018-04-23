@@ -72,19 +72,19 @@ namespace EC.Controllers.API
                         return new
                         {
                             id = x.report_id,
-                            //total_days = rm._total_days,
+                            //total_days = rm.GetTotalDays(),
                             //total_days = Math.Floor((DateTime.Now - rm._report.incident_dt).TotalDays),
                             total_days = Math.Floor((DateTime.Now.Date - rm._report.reported_dt.Date).TotalDays),
                             case_dt_s = rm._report.reported_dt.Ticks,
                             cc_is_life_threating = rm._report.cc_is_life_threating,
                             last_investigation_status_date = m_DateTimeHelper.ConvertDateToLongMonthString(rm.Last_investigation_status_date()),
-                            mediators = rm._mediators_whoHasAccess_toReport.Select(z => new {
+                            mediators = rm.MediatorsWhoHasAccessToReport().Select(z => new {
                                 id = z.id,
                                 first_nm = z.first_nm,
                                 last_nm = z.last_nm,
                                 photo_path = z.photo_path,
                             }),
-                            owners = rm._report_owners.Where(z => z.status_id == 2),
+                            owners = rm.ReportOwners().Where(z => z.status_id == 2),
                             severity_id = rm._report.severity_id,
                             severity_s = !rm._report.severity_id.HasValue ? "" : severities.FirstOrDefault(z => z.id == rm._report.severity_id).severity_en,
                         };

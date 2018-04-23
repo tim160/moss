@@ -88,14 +88,14 @@ namespace EC.Models.ViewModel
             CasePreviewViewModel vm_case = new CasePreviewViewModel();
 
             this.report_id = rm._report.id;
-            this.case_dt = rm._incident_date_string;
-            this.reported_dt = rm._reported_date_string;
+            this.case_dt = rm.IncidentDateString();
+            this.reported_dt = rm.ReportedDateString();
             this.case_number = rm._report.display_name;
-            this.location = rm._location_string;
-            this.case_secondary_types = rm._secondary_type_string;
-            this.case_secondary_types_all = rm._secondary_type_string_all;            
-            this.case_color_code = rm._color_code;
-            this.days_left = rm._step_days_left;
+            this.location = rm.LocationString();
+            this.case_secondary_types = rm.SecondaryTypeString();
+            this.case_secondary_types_all = rm.SecondaryTypeStringAll();            
+            this.case_color_code = rm.ColorCode();
+            this.days_left = rm.GetThisStepDaysLeft();
             this.current_status = rm.InvestigationStatusString();
 
 

@@ -48,7 +48,7 @@
                             <span class="btn-dropDownList__btnLink-arrowImg"></span>
                         </a>
                         <ul class="dropDownListInBtn" style="margin-top: 0px;">
-                            @foreach (user _user in rm._mediators_whoHasAccess_toReport)
+                            @foreach (user _user in rm.MediatorsWhoHasAccessToReport())
                             {
                                 <li class="dropDownListInBtn__li" data-id="@_user.id">
                                     <a href="#!" class="dropDownListInBtn__a clearfix">
@@ -116,7 +116,7 @@
                                 </span>
                             </a>
                         </li><!-- /.dropDownListInBtn__li -->
-                        @foreach (user _user in rm._mediators_whoHasAccess_toReport)
+                        @foreach (user _user in rm.MediatorsWhoHasAccessToReport())
                         {
                             <li class="dropDownListInBtn__li" data-id="@_user.id">
                                 <a href="#!" class="dropDownListInBtn__a clearfix">

@@ -27,7 +27,7 @@
     user _assignee = new user();
     UserModel temp_user = new UserModel();
     string _temp = "";
-    List<user> _mediators_whoHasAccess_toReport = rm._mediators_whoHasAccess_toReport;
+    List<user> _mediators_whoHasAccess_toReport = rm.MediatorsWhoHasAccessToReport();
 
     TaskExtended _tsk = new TaskExtended(task_id, user_id);
 

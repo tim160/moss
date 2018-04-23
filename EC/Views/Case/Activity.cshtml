@@ -28,7 +28,7 @@
     action _action;
     Dictionary<int, string> month = m_DateTimeHelper.ShortMonth();
 
-    string report_name = " - #" + rm._report.display_name + " - " + rm._secondary_type_string + " - " + rm._location_string;
+    string report_name = " - #" + rm._report.display_name + " - " + rm.SecondaryTypeString() + " - " + rm.LocationString();
     ViewBag.Title = GlobalRes.CaseActivityUp + report_name;
 
 
@@ -59,7 +59,7 @@
             </div><!--rightBlockContent-->
             @if ((rm._report != null) && (rm._report.id != 0))
             {
-                List<user> mediators = rm._mediators_whoHasAccess_toReport;
+                List<user> mediators = rm.MediatorsWhoHasAccessToReport();
                 <div class="blockActivity">
                     <div class="headerActivity">
                         <div class="blockCaseMediators">

@@ -25,10 +25,10 @@ namespace EC.Controllers
         // GET: /Account/
         public ActionResult Index(string returnUrl)
         {
-         /*   ReportModel rm = new ReportModel(208);
-            DateTime dt = rm.promotion_toactive_status_date();
-            DateTime dt1 = rm.last_event_date();
-            */
+            /*   ReportModel rm = new ReportModel(208);
+               DateTime dt = rm.promotion_toactive_status_date();
+               DateTime dt1 = rm.LastEventDate();
+               */
             #region EC-CC Viewbag
             ViewBag.is_cc = is_cc;
             string cc_ext = "";

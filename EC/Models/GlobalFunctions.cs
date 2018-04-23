@@ -293,7 +293,7 @@ public class GlobalFunctions
             rm = new ReportModel(_report.id);
             _status = 0;
 
-            if ((rm._last_promoted_date >= _real_start) && (rm._last_promoted_date <= _real_end))
+            if ((rm.LastPromotedDate() >= _real_start) && (rm.LastPromotedDate() <= _real_end))
             {
                 _selected_reports.Add(_report);
                 _status = rm._investigation_status;
@@ -796,7 +796,7 @@ public class GlobalFunctions
 
             foreach (DataRow _dr in dt.Rows)
             {
-                if (_dr["name"].ToString().ToLower().Trim() == rm._location_string.ToLower().Trim())
+                if (_dr["name"].ToString().ToLower().Trim() == rm.LocationString().ToLower().Trim())
                 {
                     _dr["val"] = Convert.ToInt32(_dr["val"]) + 1;
                     is_in_table = true;
@@ -805,7 +805,7 @@ public class GlobalFunctions
             if (!is_in_table)
             {
                 dr = dt.NewRow();
-                dr["name"] = rm._location_string.Trim();
+                dr["name"] = rm.LocationString().Trim();
                 dr["val"] = 1;
                 dt.Rows.Add(dr);
             }
@@ -1075,7 +1075,7 @@ public class GlobalFunctions
 
             foreach (DataRow _dr in dt.Rows)
             {
-                if (_dr["name"].ToString().ToLower().Trim() == rm._location_string.ToLower().Trim())
+                if (_dr["name"].ToString().ToLower().Trim() == rm.LocationString().ToLower().Trim())
                 {
                     _dr["val"] = Convert.ToInt32(_dr["val"]) + 1;
                     is_in_table = true;
@@ -1084,7 +1084,7 @@ public class GlobalFunctions
             if (!is_in_table)
             {
                 dr = dt.NewRow();
-                dr["name"] = rm._location_string.Trim();
+                dr["name"] = rm.LocationString().Trim();
                 dr["val"] = 1;
                 dt.Rows.Add(dr);
             }
@@ -1736,7 +1736,7 @@ public class GlobalFunctions
             rm = new ReportModel(_report.id);
             _status = 0;
 
-            if ((rm._last_promoted_date >= _real_start) && (rm._last_promoted_date <= _real_end))
+            if ((rm.LastPromotedDate() >= _real_start) && (rm.LastPromotedDate() <= _real_end))
             {
                 _selected_reports.Add(_report);
                 _status = rm._investigation_status;

@@ -150,7 +150,7 @@
                                     <span class="@_classCircle" style="@_styleCircle"></span>
                                     <span class="taskName @_fontName">
                                         <span class="titleTask @_colorTextBefore">
-                                            @rm._report.display_name - @rm._location_string
+                                            @rm._report.display_name - @rm.LocationString()
                                         </span>
                                         <span class="labelArrow">></span>
                                         <a href="/newCase/Task/@_task.TaskID">
@@ -235,10 +235,10 @@
                             {
                                 <div class="contentBlockTasks">
                                     <div class="contentBlockTask contentMainTask">
-                                        <div class="headerContentTask" style="border-left: 10px solid #@rm._color_code; ">
+                                        <div class="headerContentTask" style="border-left: 10px solid #@rm.ColorCode(); ">
                                             <div class="blockTitle">
                                                 <span class="taskName">
-                                                    <span class="titleTask">@rm._report.display_name - @rm._location_string</span>
+                                                    <span class="titleTask">@rm._report.display_name - @rm.LocationString()</span>
                                                     <span class="labelArrow">></span>
                                                 </span>
                                             </div>
@@ -251,7 +251,7 @@
                                         _colorTextAfter = "";
                                         _colorTextBefore = "";
                                         _classCircle = "bigDot";
-                                        _styleCircle = "background: #";// + @rm._color_code + ";";
+                                        _styleCircle = "background: #";// + @rm.ColorCode() + ";";
 
 
                                         if (tsk.IsCompleted())
@@ -259,7 +259,7 @@
                                             _colorTextAfter = "colorTextGrey";
                                             _colorTextBefore = "colorTextGrey";
                                             _classCircle = "notShadedCircle";
-                                            _styleCircle = "border: 2px solid #";// + @rm._color_code + ";";
+                                            _styleCircle = "border: 2px solid #";// + @rm.ColorCode() + ";";
                                         }
                                         if (tsk.HasNewActivity())
                                         {
@@ -292,7 +292,7 @@
                                         <div class="trololo">
                                             <div class="contentBlockTask tasksForMain">
                                                 <div class="blockTitle">
-                                                    <span class="@_classCircle" style="@_styleCircle@rm._color_code;"></span>
+                                                    <span class="@_classCircle" style="@_styleCircle@rm.ColorCode();"></span>
                                                     <span class="taskName @_fontName">
                                                         <a href="/newCase/Task/@tsk.TaskID">
                                                             <span class="text @_colorTextAfter">@_tasks.title</span>
