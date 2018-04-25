@@ -1,5 +1,7 @@
 ﻿@using EC.App_LocalResources
-@using EC.Models.Database;
+@using EC.Models.Database
+@using EC.Constants
+@using EC.Models
 
 @{
     var report_id = (Int32)ViewBag.report_id;
@@ -12,6 +14,7 @@
     {
         is_cc = false;
     }
+    var report = new ReportModel(report_id);
 }
 
 <link rel="stylesheet" href="~/Content/assets/template/css/style.css" />
@@ -33,13 +36,14 @@
                     <div class="subNavigationTabs__tab-name">Case Closure Report</div>
                 </a>
             </li>
-        </ul>
-        <ul class="mainNavigationTabs__rightLinks-ul clearfix">
-            <li class="subNavigationTabs__tab-link">
-                <a href="#">
-                    <img style="height: 74px;" src="~/Content/img/pdf.png" />
-                </a>
-            </li>
+            @if (report._investigation_status == ECGlobalConstants.investigation_status_closed)
+            {
+                <li class="subNavigationTabs__tab-link" style="float: right;">
+                    <a href="#">
+                        <img style="height: 74px;" src="~/Content/img/pdf.png" />
+                    </a>
+                </li>
+            }
         </ul>
     </div>
 </div>
@@ -105,6 +109,33 @@
 
         <section class="content-container">
             <div class="content-container__inner">
+                <p class="sectionHeader">Recommended Outcomes for subjects</p>
+                <div class="content-container__inner-additional clearfix">
+                    <div class="row" ng-repeat="item in model.report_case_closure_outcome2">
+                        <div class="col-3">
+                            <p class="content-container__p">{{item.mediator.Name}} {{item.mediator.last_name}}</p>
+                        </div><!-- /.col-3 -->
+                        <div class="col-6">
+                            <dropbox ng-dropbox-textExpr="item.outcome_c.outcome_en || 'Please select'"
+                                     itemText="{{item.outcome_en}}"
+                                     ng-dropbox-list="model.outcomes"
+                                     ng-dropbox-rootItem="item"
+                                     ng-dropbox-on-select="saveOutcome">
+                            </dropbox>
+                        </div><!-- /.col-6 -->
+                        <div class="col-3">
+                            <textarea ng-model="item.outcome.note" ng-show="item.editNote" style="font-size: 18px;"></textarea>
+                            <p ng-show="!item.editNote">{{item.outcome.note}}</p>
+                            <a href="#" class="btn-link " ng-show="item.editNote" ng-click="saveOutcome(item)">Save Note</a>
+                            <a href="#" class="btn-link " ng-show="!item.editNote" ng-click="item.editNote = true">{{item.outcome.note || '' !== '' ? 'Edit Note' : 'Add Note'}}</a>
+                        </div><!-- /.col-3 -->
+                    </div><!-- /.row -->
+                </div>
+            </div>
+        </section>
+
+        <section class="content-container">
+            <div class="content-container__inner">
                 <p class="sectionHeader">Recommended Actions for Witnesses and Reporter</p>
                 <div class="content-container__inner-additional clearfix">
                     <div class="row">
@@ -127,32 +158,6 @@
                         </div><!-- /.col-3 -->
                     </div><!-- /.row -->
                     <div class="row" ng-repeat="item in model.report_case_closure_outcome1">
-                        <div class="col-3">
-                            <p class="content-container__p">{{item.mediator.Name}} {{item.mediator.last_name}}</p>
-                        </div><!-- /.col-3 -->
-                        <div class="col-6">
-                            <dropbox ng-dropbox-textExpr="item.outcome_c.outcome_en || 'Please select'"
-                                     itemText="{{item.outcome_en}}"
-                                     ng-dropbox-list="model.outcomes"
-                                     ng-dropbox-rootItem="item"
-                                     ng-dropbox-on-select="saveOutcome">
-                            </dropbox>
-                        </div><!-- /.col-6 -->
-                        <div class="col-3">
-                            <textarea ng-model="item.outcome.note" ng-show="item.editNote" style="font-size: 18px;"></textarea>
-                            <p ng-show="!item.editNote">{{item.outcome.note}}</p>
-                            <a href="#" class="btn-link " ng-show="item.editNote" ng-click="saveOutcome(item)">Save Note</a>
-                            <a href="#" class="btn-link " ng-show="!item.editNote" ng-click="item.editNote = true">{{item.outcome.note || '' !== '' ? 'Edit Note' : 'Add Note'}}</a>
-                        </div><!-- /.col-3 -->
-                    </div><!-- /.row -->
-                </div>
-            </div>
-        </section>
-        <section class="content-container">
-            <div class="content-container__inner">
-                <p class="sectionHeader">Recommended Outcomes for subjects</p>
-                <div class="content-container__inner-additional clearfix">
-                    <div class="row" ng-repeat="item in model.report_case_closure_outcome2">
                         <div class="col-3">
                             <p class="content-container__p">{{item.mediator.Name}} {{item.mediator.last_name}}</p>
                         </div><!-- /.col-3 -->

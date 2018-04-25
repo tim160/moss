@@ -1328,6 +1328,12 @@
     <Compile Include="Models\Database\company_department.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Database\company_disclamer_page.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\company_disclamer_uploads.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Database\company_invitation.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
