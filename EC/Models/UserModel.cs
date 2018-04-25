@@ -1480,12 +1480,11 @@ namespace EC.Models
 
         }
 
-        public List<CasePreviewViewModel> ReportPreviews(List<int> report_ids, int investigation_status, int delay_allowed)
+        public List<CasePreviewViewModel> ReportPreviews(List<int> report_ids, string investigation_status, int delay_allowed)
         {
             var severities = db.severity.ToList();
             var colors = db.color.ToList();
-            string inv_status = db.investigation_status.Where(item => item.id == investigation_status).FirstOrDefault().investigation_status_en;
-
+      
             //var reports = report_ids.Select(x => new CasePreviewViewModel(x, user.id)).ToList();
             var reports = report_ids
               .Select(x =>
@@ -1493,7 +1492,7 @@ namespace EC.Models
                   var rm = new ReportModel(x);
                   return new CasePreviewViewModel
                   {
-                      current_status = inv_status,
+                      current_status = investigation_status,
 
                       report_id = rm._report.id,
                       case_number = rm._report.display_name,

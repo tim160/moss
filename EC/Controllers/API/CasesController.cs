@@ -41,14 +41,18 @@ namespace EC.Controllers.API
             UsersUnreadReportsNumberViewModel vmUnreadReports = um.GetUserUnreadCasesNumbers(vmAllIDs);
 
             var report_ids = um.ReportsSearchIds(um._user.company_id, filter.ReportFlag);
-            /*List<int> all_active_report_ids = um.ReportsSearchIds(um._user.company_id, 1);
-            List<int> completed_report_ids = um.ReportsSearchIds(um._user.company_id, 2);
-            List<int> spam_report_ids = um.ReportsSearchIds(um._user.company_id, 3);
-            List<int> closed_report_ids = um.ReportsSearchIds(um._user.company_id, 5);
-            List<int> all_pending_reports_ids = um.ReportsSearchIds(um._user.company_id, 4);*/
 
-            var reports = report_ids.Select(x => new CasePreviewViewModel(x, user.id)).ToList();
+            string investigation_status = LocalizationGetter.GetString("Investigation");
+            int delay_allowed = 2;
+            if (report_ids.Count > 0)
+            {
+                ReportModel tempRm = new ReportModel(report_ids[0]);
+                investigation_status = tempRm.InvestigationStatusString();
+                delay_allowed = tempRm.GetDelayAllowed();
+            }
 
+           //////  var reports = report_ids.Select(x => new CasePreviewViewModel(x, user.id)).ToList();
+            var  reports = um.ReportPreviews(report_ids, investigation_status, delay_allowed).ToList();
             IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
             var userIds = reports.Select(x => x.last_sender_id).ToList();
 
