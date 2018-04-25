@@ -86,7 +86,7 @@ namespace EC.Controllers.API
                             }),
                             owners = rm.ReportOwners().Where(z => z.status_id == 2),
                             severity_id = rm._report.severity_id,
-                            severity_s = !rm._report.severity_id.HasValue ? "" : severities.FirstOrDefault(z => z.id == rm._report.severity_id).severity_en,
+                            severity_s = !rm._report.severity_id.HasValue ? "UNSPECIFIED" : severities.FirstOrDefault(z => z.id == rm._report.severity_id).severity_en,
                         };
                     }).ToList(),
 

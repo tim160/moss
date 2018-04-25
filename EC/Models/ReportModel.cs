@@ -685,16 +685,19 @@ namespace EC.Models
         /// <returns></returns>
         public int GetThisStepDaysLeft()
         {
-            double days_left = 2;
             int delay_allowed = GetDelayAllowed();
-            int status_id = _investigation_status;
+            return GetThisStepDaysLeft(delay_allowed);
+           
+        }
 
-
+        // Overloaded method when we know the delay
+        public int GetThisStepDaysLeft(int step_delay_allowed)
+        {
             DateTime promoted_date = LastPromotedDate();
 
             double days_ongoing = 0;
             days_ongoing = (DateTime.Today - promoted_date).TotalDays;
-            days_left = delay_allowed - days_ongoing;
+            double days_left = step_delay_allowed - days_ongoing;
             int days = (int)days_left;
 
             if (days >= 0)
@@ -708,15 +711,13 @@ namespace EC.Models
             else
                 return 0;
         }
-
         public DateTime LastPromotedDate()
         {
             int status_id = _investigation_status;
             DateTime promoted_date = _report.reported_dt;
             if (db.report_investigation_status.Any(item => ((item.report_id == ID) && (item.investigation_status_id == status_id))))
             {
-                report_investigation_status _current_report_status = db.report_investigation_status.Where(item => ((item.report_id == ID) && (item.investigation_status_id == status_id))).OrderByDescending(a => a.created_date).FirstOrDefault();
-                promoted_date = _current_report_status.created_date;
+                promoted_date = db.report_investigation_status.Where(item => ((item.report_id == ID) && (item.investigation_status_id == status_id))).OrderByDescending(a => a.created_date).Select(t => t.created_date).FirstOrDefault();
             }
             return promoted_date;
         }

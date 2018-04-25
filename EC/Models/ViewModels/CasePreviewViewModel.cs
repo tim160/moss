@@ -65,8 +65,14 @@ namespace EC.Models.ViewModel
         public string last_status_message { get; set; }
         #endregion
 
-        private report_investigation_status ris;
-        private UserModel temp_um = new UserModel();
+        public double total_days { get; set; }
+        public double case_dt_s { get; set; }
+        public bool? cc_is_life_threating { get; set; }
+        public string severity_s { get; set; }
+        public int? severity_id { get; set; }
+
+        public IEnumerable<dynamic> mediators { get; set; }
+        public IEnumerable<report_owner> owners { get; set; }
 
         public CasePreviewViewModel()
         {

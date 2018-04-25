@@ -15,6 +15,7 @@ using EC.Model.Impl;
 using EC.Model.Interfaces;
 using EC.Constants;
 using EC.Models.ViewModels;
+using EC.Models.ViewModel;
 
 namespace EC.Models
 {
@@ -1479,6 +1480,55 @@ namespace EC.Models
 
         }
 
+        public List<CasePreviewViewModel> ReportPreviews(List<int> report_ids, int investigation_status, int delay_allowed)
+        {
+            var severities = db.severity.ToList();
+            var colors = db.color.ToList();
+            string inv_status = db.investigation_status.Where(item => item.id == investigation_status).FirstOrDefault().investigation_status_en;
+
+            //var reports = report_ids.Select(x => new CasePreviewViewModel(x, user.id)).ToList();
+            var reports = report_ids
+              .Select(x =>
+              {
+                  var rm = new ReportModel(x);
+                  return new CasePreviewViewModel
+                  {
+                      current_status = inv_status,
+
+                      report_id = rm._report.id,
+                      case_number = rm._report.display_name,
+                      case_color_code = (rm._report.report_color_id == 0) ? colors.Where(item => item.id == 1).FirstOrDefault().color_code : colors.Where(item => item.id == rm._report.report_color_id).FirstOrDefault().color_code,
+
+                      location = rm.LocationString(),
+                      case_secondary_types = rm.SecondaryTypeString(),
+
+                      days_left = rm.GetThisStepDaysLeft(delay_allowed),
+
+                      reported_dt = rm.ReportedDateString(),
+                      case_dt = rm.IncidentDateString(),
+
+                      tasks_number = rm.ReportTasks(0).Count().ToString(),
+                      messages_number = rm.UserMessagesCountNotSecure(ID, 0).ToString(),
+
+
+                      total_days = Math.Floor((DateTime.Now.Date - rm._report.reported_dt.Date).TotalDays),
+                      case_dt_s = rm._report.reported_dt.Ticks,
+                      cc_is_life_threating = rm._report.cc_is_life_threating,
+                      mediators = rm.MediatorsWhoHasAccessToReport().Select(z => new {
+                          id = z.id,
+                          first_nm = z.first_nm,
+                          last_nm = z.last_nm,
+                          photo_path = z.photo_path,
+                      }),
+                      owners = rm.ReportOwners().Where(z => z.status_id == 2),
+                      severity_id = rm._report.severity_id,
+                      severity_s = !rm._report.severity_id.HasValue ? "UNSPECIFIED" : severities.FirstOrDefault(z => z.id == rm._report.severity_id).severity_en
+
+                  };
+
+              }).ToList();
+            return reports;
+        }
 
 
     }
