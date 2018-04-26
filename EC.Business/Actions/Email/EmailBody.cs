@@ -126,6 +126,10 @@ namespace EC.Business.Actions.Email
                     // case needs to be signed-off ( by 2 top mediator levels only)
                     m_filename = "CaseCloseApprove";
                     break;
+                case 10:
+                    // case needs to be signed-off ( by 2 top mediator levels only)
+                    m_filename = "CaseCloseApprovePlatformManager";
+                    break;
                 case 11:
                     // case escalated - don't have red button to escalate yet
                     m_filename = "EscalatedCase";
@@ -211,9 +215,9 @@ namespace EC.Business.Actions.Email
                     // message to mediator with the link to update password 
                     m_filename = "ForgetPasswordNew";
                     break;
-                case 54:
-                    // message to mediator with the link to update password 
-                    m_filename = "ForgetPasswordNew";
+                case 60:
+                    // message about case deadline past due
+                    m_filename = "CaseDeadlinePastDue";
                     break;
             }
 
@@ -331,6 +335,13 @@ namespace EC.Business.Actions.Email
         public void CaseCloseApprove(string case_number)
         {
             GetBody(9);
+
+            m_body = m_body.Replace("[CaseNumber]", case_number.Trim());
+        }
+
+        public void CaseCloseApprovePlatformManager(string case_number)
+        {
+            GetBody(10);
 
             m_body = m_body.Replace("[CaseNumber]", case_number.Trim());
         }

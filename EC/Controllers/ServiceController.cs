@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using EC.Business.Actions;
 
 namespace EC.Controllers
 {
@@ -218,15 +219,52 @@ namespace EC.Controllers
                 };
             }*/
 
-            using(var db = new ECEntities())
+            using (var db = new ECEntities())
             {
-                var report = db.report.FirstOrDefault(x => x.id == param1);
+                var reports = db.report.ToList();
+                ReportModel rm = new ReportModel();
+                string email = "";
+                Business.Actions.Email.EmailManagement em = new Business.Actions.Email.EmailManagement();
+                Business.Actions.Email.EmailBody eb = new Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
 
-                EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
-                EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
-                eb.Scheduler1(report.display_name);
-                string body = eb.Body;
-                em.Send("alexandr@ase.com.ua", "Scheduler1", body, true);
+
+                foreach (var _report in reports)
+                {
+                    rm = new ReportModel(_report.id);
+                    if ((rm.GetThisStepDaysLeft() <= 0) && (!db.unread_report_reminder_sent.Any(t => t.report_id == _report.id && t.user_id == rm._investigation_status)))
+                    {
+                        eb.Scheduler1(rm._report.display_name);
+                        // days are exceeded - reminder never sent - need to send reminder
+                        foreach (var user in rm.MediatorsWhoHasAccessToReport())
+                        {
+                            email = user.email;
+                            if ((email != null) && (email.Length > 0))
+                            {
+                                try
+                                {
+                                    // em.Send(email, "Case Management Deadline is past due", eb.Body, true);
+                                }
+                                catch
+                                {
+
+                                }
+                            }
+                        }
+                        try
+                        {
+                            unread_report_reminder_sent _reminder = new unread_report_reminder_sent();
+                            _reminder.last_update_dt = DateTime.Now;
+                            _reminder.report_id = _report.id;
+                            _reminder.sent_dt = DateTime.Now;
+                            _reminder.user_id = rm._investigation_status;
+                            db.unread_report_reminder_sent.Add(_reminder);
+                        }
+                        catch
+                        {
+
+                        }
+                    }
+                }
             }
 
             return new JsonResult
