@@ -231,7 +231,7 @@ namespace EC.Controllers
                 foreach (var _report in reports)
                 {
                     rm = new ReportModel(_report.id);
-                    if ((rm.GetThisStepDaysLeft() <= 0) && (!db.unread_report_reminder_sent.Any(t => t.report_id == _report.id && t.user_id == rm._investigation_status)))
+                    if ((rm.GetThisStepDaysLeft() <= 0) && (!db.unread_report_reminder_sent.Any(t => t.report_id == _report.id && t.investigation_status_id == rm._investigation_status)))
                     {
                         eb.Scheduler1(rm._report.display_name);
                         // days are exceeded - reminder never sent - need to send reminder
@@ -256,7 +256,7 @@ namespace EC.Controllers
                             _reminder.last_update_dt = DateTime.Now;
                             _reminder.report_id = _report.id;
                             _reminder.sent_dt = DateTime.Now;
-                            _reminder.user_id = rm._investigation_status;
+                            _reminder.investigation_status_id = rm._investigation_status;
                             db.unread_report_reminder_sent.Add(_reminder);
                         }
                         catch
