@@ -441,8 +441,8 @@
         };
 
         $scope.isOwner = function (report, mediator) {
-            for (var i = 0; i < report.AdvInfo.owners.length; i++) {
-                if (report.AdvInfo.owners[i].user_id === mediator.id) {
+            for (var i = 0; i < report.owners.length; i++) {
+                if (report.owners[i].user_id === mediator.id) {
                     return true;
                 }
             }
@@ -454,7 +454,7 @@
                 $('.headerBlockTextRight > span').text(data.Title);
                 for (var i = 0; i < data.Reports.length; i++) {
                     var r = $filter('filter')(data.ReportsAdv, { 'id': data.Reports[i].report_id }, true);
-                    if ((r != null) && (r.length > 0)) {
+                    /*if ((r != null) && (r.length > 0)) {
                         data.Reports[i].AdvInfo = r[0];
                         data.Reports[i].total_days = r[0].total_days;
                         data.Reports[i].case_dt_s = r[0].case_dt_s;
@@ -462,7 +462,7 @@
                         data.Reports[i].mediators = r[0].mediators;
                         data.Reports[i].severity_s = r[0].severity_s;
                         data.Reports[i].severity_id = r[0].severity_id;
-                    }
+                    }*/
 
                     var r = $filter('filter')(data.Users, { 'id': data.Reports[i].last_sender_id }, true);
                     r = r.length === 0 ? null : r[0];
