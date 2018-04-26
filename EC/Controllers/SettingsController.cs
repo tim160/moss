@@ -86,8 +86,6 @@ namespace EC.Controllers
             ViewBag.Company_root_cases_behavioral = db.company_root_cases_behavioral.Where(x => x.status_id == 2 & x.company_id == company_id).OrderBy(x => x.name_en).ToList();
             ViewBag.Company_root_cases_external = db.company_root_cases_external.Where(x => x.status_id == 2 & x.company_id == company_id).OrderBy(x => x.name_en).ToList();
             ViewBag.Company_root_cases_organizational = db.company_root_cases_organizational.Where(x => x.status_id == 2 & x.company_id == company_id).OrderBy(x => x.name_en).ToList();
-            ViewBag.company_disclamer_page = db.company_disclamer_page.FirstOrDefault(x => x.company_id == company_id);
-            ViewBag.company_disclamer_uploads = db.company_disclamer_uploads.Where(x => x.company_id == company_id).ToList();
 
             // company profile
             return View(cm._company);

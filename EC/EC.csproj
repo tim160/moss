@@ -235,6 +235,7 @@
     <Content Include="angular\controllers\SettingsCompanySecondaryTypeController.js" />
     <Content Include="angular\controllers\SettingsCompanyCaseAdminDepartmentController.js" />
     <Content Include="angular\controllers\CasesController.js" />
+    <Content Include="angular\controllers\SettingsDisclaimerController.js" />
     <Content Include="angular\controllers\SettingsUserEditController.js" />
     <Content Include="angular\controllers\EmployeeAwarenessPosterController.js" />
     <Content Include="angular\controllers\EmployeeAwarenessController.js" />
@@ -251,6 +252,7 @@
     <Content Include="angular\services\SettingsCompanySecondaryTypeService.js" />
     <Content Include="angular\services\EmployeeAwarenessPosterService.js" />
     <Content Include="angular\services\CasesService.js" />
+    <Content Include="angular\services\SettingsDisclaimerService.js" />
     <Content Include="angular\services\SettingsUserEditService.js" />
     <Content Include="angular\services\EmployeeAwarenessService.js" />
     <Content Include="App\components\activeHover\activeHover.js" />
@@ -1230,6 +1232,7 @@
     <Compile Include="Controllers\API\SettingsCompanyCaseAdminDepartmentController.cs" />
     <Compile Include="Controllers\API\SettingsCompanySecondaryTypeController.cs" />
     <Compile Include="Controllers\API\CasesController.cs" />
+    <Compile Include="Controllers\API\SettingsDisclaimerController.cs" />
     <Compile Include="Controllers\API\SettingsUserEditController.cs" />
     <Compile Include="Controllers\API\EmployeeAwarenessPosterController.cs" />
     <Compile Include="Controllers\API\EmployeeAwarenessController.cs" />

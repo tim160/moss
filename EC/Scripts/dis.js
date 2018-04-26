@@ -1370,6 +1370,40 @@
 
     angular
         .module('EC')
+        .controller('SettingsDisclaimerController',
+            ['$scope', '$filter', '$location', 'SettingsDisclaimerService', SettingsDisclaimerController]);
+
+    function SettingsDisclaimerController($scope, $filter, $location, SettingsDisclaimerService) {
+
+        $scope.refresh = function () {
+            SettingsDisclaimerService.get({}, function (data) {
+                data.message_to_employeesChanged = false;
+                data.message_about_guidelinesChanged = false;
+                $scope.model = data;
+            });
+        };
+
+        $scope.save = function (mode) {
+            if (mode === 1) {
+                SettingsDisclaimerService.save1({ message: $scope.model.company_disclamer_page.message_to_employees }, function () {
+                    $scope.refresh();
+                });
+            }
+            if (mode === 2) {
+                SettingsDisclaimerService.save2({ message: $scope.model.company_disclamer_page.message_about_guidelines }, function () {
+                    $scope.refresh();
+                });
+            }
+        };
+    }
+}());
+
+(function () {
+
+    'use strict';
+
+    angular
+        .module('EC')
         .controller('SettingsUserEditController',
             ['$scope', '$filter', '$location', 'SettingsUserEditService', SettingsUserEditController]);
 
@@ -1679,6 +1713,22 @@
             get: { method: 'GET', params: {}, isArray: false },
             post: { method: 'POST', params: {}, isArray: false },
             delete: { method: 'POST', params: {}, isArray: false },
+        });
+    };
+})();
+
+(function () {
+
+    'use strict';
+
+    angular.module('EC')
+        .service('SettingsDisclaimerService', ['$resource', SettingsDisclaimerService]);
+
+    function SettingsDisclaimerService($resource) {
+        return $resource('/api/SettingsDisclaimer', {}, {
+            get: { url: '/api/SettingsDisclaimer/Get', method: 'GET', params: {}, isArray: false },
+            save1: { url: '/api/SettingsDisclaimer/Save1', method: 'POST', params: {}, isArray: false },
+            save2: { url: '/api/SettingsDisclaimer/Save2', method: 'POST', params: {}, isArray: false },
         });
     };
 })();

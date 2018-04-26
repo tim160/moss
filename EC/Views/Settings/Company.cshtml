@@ -339,109 +339,99 @@
                 </div>
             </div><!--blockIncidentTypes-->
 
-            @using (@Html.BeginForm("Disclaimer", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
-            {
-                <div class="blockDisclaimers blockDisclaimer">
-                    @{ 
-                        var company_disclamer_page = (company_disclamer_page)ViewBag.company_disclamer_page;
-                        var company_disclamer_uploads = (List<company_disclamer_uploads>)ViewBag.company_disclamer_uploads;
-                    }
-                    <div class="container blockDisclaimer-container">
-                        <div class="blockDisclaimer__textBlock">
-                            <p>
-                                This page contains the information that will be seen by all reporters, including your employees. 
-                            </p>
-                            <p>
-                                Upload all conduct guidelines, policy documents, legal warnings and disclaimers.
-                            </p>
-                        </div><!-- /.blockDisclaimer-textBlock -->
-                        <div class="blockDisclaimer__upLinkBlock">
-                            <a href="#" class="btn-link ">Upload new document</a>
-                        </div><!-- /.blockDisclaimer__upLinkBlock -->
-                        <div class="settingsProf-contentBlock">
-                            <div class="settingsProf-contentBlock__head">
-                                <div class="settingsProf-contentBlock__headTop">
-                                    <span class="settingsProf-contentBlock__headTopName">
-                                        Kate Milton,
-                                    </span><span class="settingsProf-contentBlock__headTopDate">
-                                        12 Jan 2017
-                                    </span>
-                                </div><!-- /.settingsProf-contentBlock__headTop -->
-                                <div class="settingsProf-contentBlock__headMain row">
-                                    <div class="settingsProf-contentBlock__headMain-cols col-6">
-                                        <div class="settingsProf-contentBlock__headMainTitle resolved">
-                                            ConductGuidelines.pdf
-                                        </div><!-- /.settingsProf-contentBlock__headMainTitle -->
-                                    </div><!-- /.col-6 -->
-                                    <div class="settingsProf-contentBlock__headMain-cols settingsProf-contentBlock__headMain-colLinks col-6">
-                                        <a href="#" class="link">Download</a>
-                                        <a href="#" class="link-delete">Delete</a>
-                                    </div><!-- /.col-6 -->
-                                </div><!-- /.settingsProf-contentBlock__headMain -->
-                            </div>
-                            <div class="settingsProf-contentBlock__main">
-                                <textarea  class="textareaBlock textareaBlockSettings">Download Conduct Guidelines
-                                </textarea>
-                            </div>
-                            <div class="settingsProf-contentBlock__bottom clearfix"></div>
-                        </div><!-- /.blockDisclaimer-contentBlock -->
-                        <div class="settingsProf-contentBlock">
-                            <div class="settingsProf-contentBlock__head">
-                                <div class="settingsProf-contentBlock__headTop">
-                                    <span class="settingsProf-contentBlock__headTopName">
-                                        Kate Milton,
-                                    </span><span class="settingsProf-contentBlock__headTopDate">
-                                        12 Jan 2017
-                                    </span>
-                                </div><!-- /.settingsProf-contentBlock__headTop -->
-                                <div class="settingsProf-contentBlock__headMain row">
-                                    <div class="settingsProf-contentBlock__headMain-cols col-6">
-                                        <div class="settingsProf-contentBlock__headMainTitle resolved">
-                                            Message to Employees
-                                        </div><!-- /.settingsProf-contentBlock__headMainTitle -->
-                                    </div><!-- /.col-6 -->
-                                    <div class="settingsProf-contentBlock__headMain-cols settingsProf-contentBlock__headMain-colLinks col-6">
-                                        <a href="#" class="link">Download</a>
-                                        <a href="#" class="link-delete">Delete</a>
-                                    </div><!-- /.col-6 -->
-                                </div><!-- /.settingsProf-contentBlock__headMain -->
-                            </div>
-                            <div class="settingsProf-contentBlock__main">
-                                <textarea  class="textareaBlock textareaBlockSettings">
-                                    company_disclamer_page.message_to_employees
-                                </textarea>
-                            </div>
-                            <div class="settingsProf-contentBlock__bottom clearfix">
-                                <a href="#" class="btn-link pull-right btn-link__disabled">Saved</a>
-                            </div>
-                        </div><!-- /.blockDisclaimer-contentBlock -->
-                        <div class="settingsProf-contentBlock">
-                            <div class="settingsProf-contentBlock__head">
-                                <div class="settingsProf-contentBlock__headTop"></div><!-- /.settingsProf-contentBlock__headTop -->
-                                <div class="settingsProf-contentBlock__headMain row">
-                                    <div class="settingsProf-contentBlock__headMain-cols col-6">
-                                        <div class="settingsProf-contentBlock__headMainTitle error">
-                                            Message about Company Conduct Guidelines, Policies and Legal Disclaimers
-                                        </div><!-- /.settingsProf-contentBlock__headMainTitle -->
-                                    </div><!-- /.col-6 -->
-                                    <div class="settingsProf-contentBlock__headMain-cols settingsProf-contentBlock__headMain-colLinks col-6">
-                                        <a href="#" class="link">Download</a>
-                                        <a href="#" class="link-delete">Delete</a>
-                                    </div><!-- /.col-6 -->
-                                </div><!-- /.settingsProf-contentBlock__headMain -->
-                            </div>
-                            <div class="settingsProf-contentBlock__main">
-                                <textarea  class="textareaBlock textareaBlockSettings">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora sequi eligendi sed sit, consectetur, possimus quibusdam hic nihil error corporis culpa quae animi soluta, impedit harum aspernatur laborum alias fuga. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur ipsam cum, odit, deserunt laborum accusamus molestiae consequatur at dolorem a, enim facilis saepe harum molestias? Repellendus, illum? Iure, distinctio!
-                                </textarea>
-                            </div>
-                            <div class="settingsProf-contentBlock__bottom clearfix">
-                                <a href="#" class="btn-link pull-right">Save</a>
-                            </div>
-                        </div><!-- /.blockDisclaimer-contentBlock -->
-                    </div><!-- /.container -->
-                </div>
-            }
-        </div><!--blockIncidentTypes-->
+            <div class="blockDisclaimers blockDisclaimer" style="display: none;" ng-controller="SettingsDisclaimerController" ng-init="refresh()">
+                <div class="container blockDisclaimer-container">
+                    <div class="blockDisclaimer__textBlock">
+                        <p>
+                            This page contains the information that will be seen by all reporters, including your employees. 
+                        </p>
+                        <p>
+                            Upload all conduct guidelines, policy documents, legal warnings and disclaimers.
+                        </p>
+                    </div><!-- /.blockDisclaimer-textBlock -->
+                    <div class="blockDisclaimer__upLinkBlock">
+                        <a href="#" class="btn-link ">Upload new document</a>
+                    </div><!-- /.blockDisclaimer__upLinkBlock -->
+                    <div class="settingsProf-contentBlock">
+                        <div class="settingsProf-contentBlock__head">
+                            <div class="settingsProf-contentBlock__headTop">
+                                <span class="settingsProf-contentBlock__headTopName">
+                                    Kate Milton,
+                                </span><span class="settingsProf-contentBlock__headTopDate">
+                                    12 Jan 2017
+                                </span>
+                            </div><!-- /.settingsProf-contentBlock__headTop -->
+                            <div class="settingsProf-contentBlock__headMain row">
+                                <div class="settingsProf-contentBlock__headMain-cols col-6">
+                                    <div class="settingsProf-contentBlock__headMainTitle resolved">
+                                        ConductGuidelines.pdf
+                                    </div><!-- /.settingsProf-contentBlock__headMainTitle -->
+                                </div><!-- /.col-6 -->
+                                <div class="settingsProf-contentBlock__headMain-cols settingsProf-contentBlock__headMain-colLinks col-6">
+                                    <a href="#" class="link">Download</a>
+                                    <a href="#" class="link-delete">Delete</a>
+                                </div><!-- /.col-6 -->
+                            </div><!-- /.settingsProf-contentBlock__headMain -->
+                        </div>
+                        <div class="settingsProf-contentBlock__main">
+                            <textarea  class="textareaBlock textareaBlockSettings">Download Conduct Guidelines
+                            </textarea>
+                        </div>
+                        <div class="settingsProf-contentBlock__bottom clearfix"></div>
+                    </div><!-- /.blockDisclaimer-contentBlock -->
+                    
+                    <div class="settingsProf-contentBlock">
+                        <div class="settingsProf-contentBlock__head">
+                            <div class="settingsProf-contentBlock__headTop">
+                                <span class="settingsProf-contentBlock__headTopName">
+                                    {{model.company_disclamer_page.user.first_nm}} {{model.company_disclamer_page.user.last_nm}},
+                                </span><span class="settingsProf-contentBlock__headTopDate">
+                                    {{model.company_disclamer_page_date}}
+                                </span>
+                            </div><!-- /.settingsProf-contentBlock__headTop -->
+                            <div class="settingsProf-contentBlock__headMain row">
+                                <div class="settingsProf-contentBlock__headMain-cols col-6">
+                                    <div class="settingsProf-contentBlock__headMainTitle" ng-class="model.message_to_employeesChanged ? 'error' : 'resolved'">
+                                        Message to Employees
+                                    </div><!-- /.settingsProf-contentBlock__headMainTitle -->
+                                </div><!-- /.col-6 -->
+                            </div><!-- /.settingsProf-contentBlock__headMain -->
+                        </div>
+                        <div class="settingsProf-contentBlock__main">
+                            <textarea  class="textareaBlock textareaBlockSettings" ng-model="model.company_disclamer_page.message_to_employees" ng-change="model.message_to_employeesChanged = true"></textarea>
+                        </div>
+                        <div class="settingsProf-contentBlock__bottom clearfix">
+                            <a href="#" class="btn-link pull-right" ng-class="model.message_to_employeesChanged ? '' : 'btn-link__disabled'" ng-click="save(1)">{{model.message_to_employeesChanged ? 'Save' : 'Saved'}}</a>
+                        </div>
+                    </div><!-- /.blockDisclaimer-contentBlock -->
+
+                    <div class="settingsProf-contentBlock">
+                        <div class="settingsProf-contentBlock__head">
+                            <div class="settingsProf-contentBlock__headTop">
+                                <span class="settingsProf-contentBlock__headTopName">
+                                    {{model.company_disclamer_page.user1.first_nm}} {{model.company_disclamer_page.user1.last_nm}},
+                                </span><span class="settingsProf-contentBlock__headTopDate">
+                                    {{model.company_disclamer_page_date1}}
+                                </span>
+                            </div><!-- /.settingsProf-contentBlock__headTop -->
+                            <div class="settingsProf-contentBlock__headMain row">
+                                <div class="settingsProf-contentBlock__headMain-cols col-6">
+                                    <div class="settingsProf-contentBlock__headMainTitle" ng-class="model.message_about_guidelinesChanged ? 'error' : 'resolved'">
+                                        Message about Company Conduct Guidelines, Policies and Legal Disclaimers
+                                    </div><!-- /.settingsProf-contentBlock__headMainTitle -->
+                                </div><!-- /.col-6 -->
+                            </div><!-- /.settingsProf-contentBlock__headMain -->
+                        </div>
+                        <div class="settingsProf-contentBlock__main">
+                            <textarea  class="textareaBlock textareaBlockSettings" ng-model="model.company_disclamer_page.message_about_guidelines" ng-change="model.message_about_guidelinesChanged = true"></textarea>
+                        </div>
+                        <div class="settingsProf-contentBlock__bottom clearfix">
+                            <a href="#" class="btn-link pull-right" ng-class="model.message_about_guidelinesChanged ? '' : 'btn-link__disabled'" ng-click="save(2)">{{model.message_about_guidelinesChanged ? 'Save' : 'Saved'}}</a>
+                        </div>
+                    </div><!-- /.blockDisclaimer-contentBlock -->
+                </div><!-- /.container -->
+            </div>        
+        </div>
     </div><!--contentSettings-->
 </div><!--contentCompanyProfile-->
 <input type="hidden" id="urlAjaxUploadFiles" from="Company" value="@Url.Action("AddLogoCompany", "Settings")" />
