@@ -15,6 +15,7 @@ using EC.Controllers.ViewModel;
 using EC.Controllers.utils;
 using EC.Constants;
 using EC.Common.Base;
+using EC.Localization;
 
 namespace EC.Controllers
 {
@@ -216,6 +217,39 @@ namespace EC.Controllers
             ReportSubmit submit = new ReportSubmit();
             submit.merge(rvm, companyModel, reportModel, model);
             ViewBag.ReportModel = new ReportModel(currentReport.id);
+
+
+            #region SendEmail To Admins
+            ReportModel rm = new ReportModel(currentReport.id);
+
+            Business.Actions.Email.EmailManagement em = new Business.Actions.Email.EmailManagement();
+            Business.Actions.Email.EmailBody eb = new Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+            bool has_involved = false;
+            List<string> to = new List<string>();
+            List<string> cc = new List<string>();
+            if (rm.InvolvedMediatorsUserList().Count > 0)
+                has_involved = true;
+
+            string body = "";
+            string title = LocalizationGetter.GetString("Email_Title_NewCase");
+            if (has_involved)
+                title = LocalizationGetter.GetString("Email_Title_NewCaseInvolved");
+            foreach (var _user in rm.MediatorsWhoHasAccessToReport())
+            {
+                eb = new Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+                to = new List<string>();
+                to.Add(_user.email.Trim());
+                if (has_involved)
+                    eb.NewCaseInvolved(_user.first_nm, _user.last_nm, rm._report.display_name);
+                else
+                    eb.NewCase(_user.first_nm, _user.last_nm, rm._report.display_name);
+
+                body = eb.Body;
+                em.Send(to, cc, title, body, true);
+            }
+
+            #endregion
+
             return View("CaseSubmitted", submit);
         }
 

@@ -55,15 +55,13 @@ namespace EC.Controllers.API
 
            //////  var reports = report_ids.Select(x => new CasePreviewViewModel(x, user.id)).ToList();
             var  reports = um.ReportPreviews(report_ids, investigation_status, delay_allowed).ToList();
-            IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
-            var userIds = reports.Select(x => x.last_sender_id).ToList();
 
             string title = LocalizationGetter.GetString("ActiveCasesUp");
             title = filter.ReportFlag == 2 ? LocalizationGetter.GetString("CompletedcasesUp") : title;
             title = filter.ReportFlag == 5 ? LocalizationGetter.GetString("ClosedCasesUp") : title;
             title = filter.ReportFlag == 3 ? LocalizationGetter.GetString("SpamcasesUp") : title;
 
-            var severities = DB.severity.ToList();
+         /*   var severities = DB.severity.ToList();
 
             Func<int, object> cerateReportAdv = (report_id) =>
             {
@@ -90,7 +88,7 @@ namespace EC.Controllers.API
                     severity_s = !rm._report.severity_id.HasValue ? "UNSPECIFIED" : severities.FirstOrDefault(z => z.id == rm._report.severity_id).severity_en,
                 };
             };
-
+            */
             var m = new
             {
                 Mode = filter.ReportFlag,
@@ -102,13 +100,6 @@ namespace EC.Controllers.API
                     {
                         return cerateReportAdv(x.report_id);
                     }).ToList(),*/
-
-                Users = DB.user
-                    .AsNoTracking()
-                    .Where(x => userIds.Contains(x.id))
-                    .ToList(),
-
-                UserIds = userIds,
 
                 Counts = new
                 {

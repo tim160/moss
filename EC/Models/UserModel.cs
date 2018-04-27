@@ -1504,9 +1504,9 @@ namespace EC.Models
                       days_left = rm.GetThisStepDaysLeft(delay_allowed),
 
                       reported_dt = rm.ReportedDateString(),
-                      case_dt = rm.IncidentDateString(),
+                    //  case_dt = rm.IncidentDateString(),
 
-                      tasks_number = rm.ReportTasks(0).Count().ToString(),
+                      tasks_number = rm.ReportTasksCount(0).ToString(),
                       messages_number = rm.UserMessagesCountNotSecure(ID, 0).ToString(),
 
 
@@ -1520,7 +1520,6 @@ namespace EC.Models
                           photo_path = z.photo_path,
                       }),
                       owners = rm.ReportOwners().Where(z => z.status_id == 2),
-                      severity_id = rm._report.severity_id,
                       severity_s = !rm._report.severity_id.HasValue ? "UNSPECIFIED" : severities.FirstOrDefault(z => z.id == rm._report.severity_id).severity_en
 
                   };

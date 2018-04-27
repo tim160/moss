@@ -694,10 +694,10 @@ namespace EC.Models
         public int GetThisStepDaysLeft(int step_delay_allowed)
         {
             DateTime promoted_date = LastPromotedDate();
-
+            double days_left = 2;
             double days_ongoing = 0;
             days_ongoing = (DateTime.Today - promoted_date).TotalDays;
-            double days_left = step_delay_allowed - days_ongoing;
+            days_left = step_delay_allowed - days_ongoing;
             int days = (int)days_left;
 
             if (days >= 0)
@@ -1255,7 +1255,7 @@ namespace EC.Models
                     }*/
                     //foreach(var person in model.pe)
 
-                    foreach(var item in db.company_case_routing_location.Where(x => x.company_id == currentReport.company_id & x.company_location_id == currentReport.location_id).ToList())
+                    foreach (var item in db.company_case_routing_location.Where(x => x.company_id == currentReport.company_id & x.company_location_id == currentReport.location_id && !model.mediatorsInvolved.Contains(x.user_id.ToString())).ToList())
                     {
                         var cl = db.company_location.FirstOrDefault(x => x.id == item.company_location_id);
                         if ((cl != null) && (cl.status_id == 2))
@@ -1273,7 +1273,7 @@ namespace EC.Models
                         }
                     }
 
-                    foreach(var item in db.company_case_routing.Where(x => x.company_id == currentReport.company_id).ToList())
+                    foreach (var item in db.company_case_routing.Where(x => x.company_id == currentReport.company_id && !model.mediatorsInvolved.Contains(x.user_id.ToString())).ToList())
                     {
                         var inc = db.company_secondary_type.FirstOrDefault(x => x.id == item.company_secondary_type_id);
                         if ((model.whatHappened.Contains(item.company_secondary_type_id)) & (inc != null) && (inc.status_id == 2))
@@ -1715,7 +1715,26 @@ namespace EC.Models
             return all_tasks;
 
         }
-
+        /// <summary>
+        /// just a number of tasks in case
+        /// </summary>
+        /// <param name="user_id">user_id</param>
+        /// <param name="task_status">0 - all tasks, 1 - active, 2 - competed</param>
+        /// <returns></returns>
+        public int ReportTasksCount(int task_status)
+        {
+            int tasks_count = 0;
+            if (ID != 0)
+            {
+                if (task_status == 0)
+                    tasks_count = db.task.Where(item => item.report_id == ID).Count();
+                if (task_status == 1)
+                    tasks_count = db.task.Where(item => item.report_id == ID && item.is_completed == false).Count();
+                if (task_status == 2)
+                    tasks_count = db.task.Where(item => item.report_id == ID && item.is_completed == true).Count();
+            }
+            return tasks_count;
+        }
 
         /// <summary>
         /// number of tasks by previous month
@@ -1749,27 +1768,26 @@ namespace EC.Models
         /// <returns></returns>
         public int UserMessagesCountNotSecure(int user_id, int thread_id)
         {
-            List<message> all_messages = new List<message>();
-
+            int messages_count = 0;
 
             #region Got All messages for current user
-                if (thread_id == 1)
-                {
-                    // reporter can see only messages with reporter_access == 1 
-                    all_messages = (db.message.Where(item => (item.report_id == ID && (item.reporter_access == 1)))).ToList();
-                }
-                else if (thread_id == 0)
-                {
-                    // all messages
-                    all_messages = (db.message.Where(item => (item.report_id == ID))).ToList();
-                }
-                else
-                {
-                    all_messages = (db.message.Where(item => (item.report_id == ID && (item.reporter_access == 2)))).ToList();
-                }
-                #endregion
+            if (thread_id == 1)
+            {
+                // reporter can see only messages with reporter_access == 1 
+                messages_count = (db.message.Where(item => (item.report_id == ID && (item.reporter_access == 1)))).Count();
+            }
+            else if (thread_id == 0)
+            {
+                // all messages
+                messages_count = (db.message.Where(item => (item.report_id == ID))).Count();
+            }
+            else
+            {
+                messages_count = (db.message.Where(item => (item.report_id == ID && (item.reporter_access == 2)))).Count();
+            }
+            #endregion
 
-            return all_messages.Count();
+            return messages_count;
         }
 
 
