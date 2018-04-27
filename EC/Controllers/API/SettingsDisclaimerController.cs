@@ -227,7 +227,7 @@ namespace EC.Controllers.API
             }
 
             var fileDB = DB.company_disclamer_uploads.FirstOrDefault(x => x.company_id == user.company_id && x.Id == file.Id);
-            //fileDB
+            fileDB.Description = file.Description;
             DB.SaveChanges();
 
             return new

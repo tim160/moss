@@ -364,22 +364,22 @@
                             </div><!-- /.settingsProf-contentBlock__headTop -->
                             <div class="settingsProf-contentBlock__headMain row">
                                 <div class="settingsProf-contentBlock__headMain-cols col-6">
-                                    <div class="settingsProf-contentBlock__headMainTitle" ng-class="file.messageChanged ? 'error' : 'resolved'">
+                                    <div class="settingsProf-contentBlock__headMainTitle" ng-class="file.DescriptionChanged ? 'error' : 'resolved'">
                                         {{file.display_name}}
                                     </div><!-- /.settingsProf-contentBlock__headMainTitle -->
                                 </div><!-- /.col-6 -->
                                 <div class="settingsProf-contentBlock__headMain-cols settingsProf-contentBlock__headMain-colLinks col-6">
-                                    <a ng-href="{{file.file_path}}" class="link">Download</a>
+                                    <a ng-href="{{file.file_path}}" class="link" download="{{file.display_name}}">Download</a>
                                     <a href="#" ng-click="deleteFile(file)" class="link-delete">Delete</a>
                                 </div><!-- /.col-6 -->
                             </div><!-- /.settingsProf-contentBlock__headMain -->
                         </div>
                         <div class="settingsProf-contentBlock__main">
-                            <textarea  class="textareaBlock textareaBlockSettings" ng-model="file.message" ng-change="file.messageChanged = true">
+                            <textarea  class="textareaBlock textareaBlockSettings" ng-model="file.Description" ng-change="file.DescriptionChanged = true">
                             </textarea>
                         </div>
                         <div class="settingsProf-contentBlock__bottom clearfix">
-                            <a href="#" class="btn-link pull-right" ng-class="file.messageChanged ? '' : 'btn-link__disabled'" ng-click="saveFile()">{{file.messageChanged ? 'Save' : 'Saved'}}</a>
+                            <a href="#" class="btn-link pull-right" ng-class="file.DescriptionChanged ? '' : 'btn-link__disabled'" ng-click="saveFile(file)">{{file.DescriptionChanged ? 'Save' : 'Saved'}}</a>
                         </div>
                     </div><!-- /.blockDisclaimer-contentBlock -->
                     
