@@ -1373,14 +1373,29 @@
             }
         };
 
-        $scope.upload = function (file) {
+        $scope.upload = function (files) {
             Upload.upload({
                 url: '/api/SettingsDisclaimer/Upload',
-                data: { file: file }
+                data: {
+                    File: files,
+                    Description: ''
+                }
             }).then(function () {
                 $scope.refresh();
             }, function () {
             }, function () {
+            });
+        };
+
+        $scope.deleteFile = function (file) {
+            SettingsDisclaimerService.deleteFile(file, function () {
+                $scope.refresh();
+            });
+        };
+
+        $scope.saveFile = function (file) {
+            SettingsDisclaimerService.saveFile(file, function () {
+                $scope.refresh();
             });
         };
     }
@@ -1717,6 +1732,8 @@
             get: { url: '/api/SettingsDisclaimer/Get', method: 'GET', params: {}, isArray: false },
             save1: { url: '/api/SettingsDisclaimer/Save1', method: 'POST', params: {}, isArray: false },
             save2: { url: '/api/SettingsDisclaimer/Save2', method: 'POST', params: {}, isArray: false },
+            deleteFile: { url: '/api/SettingsDisclaimer/DeleteFile', method: 'POST', params: {}, isArray: false },
+            saveFile: { url: '/api/SettingsDisclaimer/SaveFile', method: 'POST', params: {}, isArray: false },
         });
     };
 })();

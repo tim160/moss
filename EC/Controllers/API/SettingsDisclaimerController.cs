@@ -13,6 +13,7 @@ using EC.Constants;
 using EC.Core.Common;
 using EC.App_LocalResources;
 using EC.Common.Interfaces;
+using System.Threading.Tasks;
 
 namespace EC.Controllers.API
 {
@@ -55,6 +56,26 @@ namespace EC.Controllers.API
             IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
             var dt = model.company_disclamer_page.message_to_employees_created_dt.Value;
             var dt1 = model.company_disclamer_page.message_about_guidelines_created_dt.Value;
+
+            model.company_disclamer_uploads.ForEach(x =>
+            {
+                if (x.user != null)
+                {
+                    x.user = new user
+                    {
+                        first_nm = x.user.first_nm,
+                        last_nm = x.user.last_nm,
+                    };
+                }
+                if (x.user1 != null)
+                {
+                    x.user1 = new user
+                    {
+                        first_nm = x.user1.first_nm,
+                        last_nm = x.user1.last_nm,
+                    };
+                }
+            });
 
             return new
             {
@@ -131,8 +152,84 @@ namespace EC.Controllers.API
 
         [HttpPost]
         [Route("api/SettingsDisclaimer/Upload")]
-        public object Upload(HttpPostedFileBase file)
+        public object Upload()
         {
+            user user = (user)HttpContext.Current.Session[ECGlobalConstants.CurrentUserMarcker];
+            if (user == null || user.id == 0)
+            {
+                return null;
+            }
+            var company = DB.company.FirstOrDefault(x => x.id == user.company_id);
+
+            string root = HttpContext.Current.Server.MapPath($"~/Upload/Company/{company.guid}/Disclaimers/");
+            if (!System.IO.Directory.Exists(root))
+            {
+                System.IO.Directory.CreateDirectory(root);
+            }
+
+            foreach (var fileId in HttpContext.Current.Request.Files.AllKeys)
+            {
+                var file = HttpContext.Current.Request.Files[fileId];
+                var fi = new System.IO.FileInfo(file.FileName);
+
+                var id = Guid.NewGuid();
+                file.SaveAs($"{root}{id}{fi.Extension}");
+
+                var fileDB = new company_disclamer_uploads
+                {
+                    company_id = user.company_id,
+                    created_by_user_id = user.id,
+                    created_dt = DateTime.Now,
+                    display_ext = fi.Extension,
+                    display_name = fi.Name,
+                    file_path = $"/Upload/Company/{company.guid}/Disclaimers/{id}{fi.Extension}",
+                    last_update_dt = DateTime.Now,
+                    last_update_user_id = user.id,
+                    status_id = 2,
+                };
+
+                DB.company_disclamer_uploads.Add(fileDB);
+                DB.SaveChanges();
+            }
+
+            return new
+            {
+            };
+        }
+
+        [HttpPost]
+        [Route("api/SettingsDisclaimer/DeleteFile")]
+        public object DeleteFile(company_disclamer_uploads file)
+        {
+            user user = (user)HttpContext.Current.Session[ECGlobalConstants.CurrentUserMarcker];
+            if (user == null || user.id == 0)
+            {
+                return null;
+            }
+
+            var fileDB = DB.company_disclamer_uploads.FirstOrDefault(x => x.company_id == user.company_id && x.Id == file.Id);
+            DB.company_disclamer_uploads.Remove(fileDB);
+            DB.SaveChanges();
+
+            return new
+            {
+            };
+        }
+
+        [HttpPost]
+        [Route("api/SettingsDisclaimer/SaveFile")]
+        public object SaveFile(company_disclamer_uploads file)
+        {
+            user user = (user)HttpContext.Current.Session[ECGlobalConstants.CurrentUserMarcker];
+            if (user == null || user.id == 0)
+            {
+                return null;
+            }
+
+            var fileDB = DB.company_disclamer_uploads.FirstOrDefault(x => x.company_id == user.company_id && x.Id == file.Id);
+            //fileDB
+            DB.SaveChanges();
+
             return new
             {
             };

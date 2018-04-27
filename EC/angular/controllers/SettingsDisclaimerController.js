@@ -30,14 +30,29 @@
             }
         };
 
-        $scope.upload = function (file) {
+        $scope.upload = function (files) {
             Upload.upload({
                 url: '/api/SettingsDisclaimer/Upload',
-                data: { file: file }
+                data: {
+                    File: files,
+                    Description: ''
+                }
             }).then(function () {
                 $scope.refresh();
             }, function () {
             }, function () {
+            });
+        };
+
+        $scope.deleteFile = function (file) {
+            SettingsDisclaimerService.deleteFile(file, function () {
+                $scope.refresh();
+            });
+        };
+
+        $scope.saveFile = function (file) {
+            SettingsDisclaimerService.saveFile(file, function () {
+                $scope.refresh();
             });
         };
     }
