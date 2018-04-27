@@ -803,10 +803,10 @@
     <value>New report has been filed with Employee Confidential</value>
   </data>
   <data name="Email_Title_NewCaseInvolved" xml:space="preserve">
-    <value>New report has been filed with Employee Confidential</value>
+    <value>New report has been filed with Employee Confidential - Case admins might be involved</value>
   </data>
   <data name="Email_Title_NewCaseInvolved_CC" xml:space="preserve">
-    <value>New report has been filed with Campus Confidential</value>
+    <value>New report has been filed with Campus Confidential - Case admins might be involved</value>
   </data>
   <data name="Email_Title_NewCase_CC" xml:space="preserve">
     <value>New report has been filed with Campus Confidential</value>

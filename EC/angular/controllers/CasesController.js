@@ -72,30 +72,6 @@
                         data.Reports[i].severity_s = r[0].severity_s;
                         data.Reports[i].severity_id = r[0].severity_id;
                     }*/
-
-                    var r = $filter('filter')(data.Users, { 'id': data.Reports[i].last_sender_id }, true);
-                    r = r.length === 0 ? null : r[0];
-                    if (r === null) {
-                        r = {
-                            photo_path: '/Content/Icons/noPhoto.png',
-                            first_nm: '',
-                            last_nm: '',
-                        };
-                    }
-                    r.sb_full_name = (r.first_nm + ' ' + r.last_nm).replace(' ', '_');
-                    data.Reports[i].Last_sender = r;
-
-                    var r = $filter('filter')(data.Users, { 'id': data.Reports[i].previous_sender_id }, true);
-                    r = r.length === 0 ? null : r[0];
-                    if (r === null) {
-                        r = {
-                            photo_path: '/Content/Icons/noPhoto.png',
-                            first_nm: '',
-                            last_nm: '',
-                        };
-                    }
-                    r.sb_full_name = (r.first_nm + ' ' + r.last_nm).replace(' ', '_');
-                    data.Reports[i].Previous_sender = r;
                 }
 
                 $scope.reports = data.Reports;

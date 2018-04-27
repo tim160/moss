@@ -291,6 +291,8 @@
     <Content Include="Content\css\fontello.css" />
     <Content Include="Content\emails\CampusSecurityAlert.html" />
     <Content Include="Content\emails\CaseCloseApprove.html" />
+    <Content Include="Content\emails\CaseCloseApprovePlatformManager.html" />
+    <Content Include="Content\emails\CaseDeadlinePastDue.html" />
     <Content Include="Content\emails\ForgetPasswordNew.html" />
     <Content Include="Content\emails\MediatorInvitedUserCreated.html" />
     <Content Include="Content\emails\SeniorMediatorCaseConfirm.html" />
