@@ -8,6 +8,7 @@
         'ngAnimate',
         'ngSanitize',
         'nvd3',
+        'ngFileUpload',
 
         'EC',
     ]);
@@ -1371,9 +1372,9 @@
     angular
         .module('EC')
         .controller('SettingsDisclaimerController',
-            ['$scope', '$filter', '$location', 'SettingsDisclaimerService', SettingsDisclaimerController]);
+            ['$scope', '$filter', '$location', 'Upload', 'SettingsDisclaimerService', SettingsDisclaimerController]);
 
-    function SettingsDisclaimerController($scope, $filter, $location, SettingsDisclaimerService) {
+    function SettingsDisclaimerController($scope, $filter, $location, Upload, SettingsDisclaimerService) {
 
         $scope.refresh = function () {
             SettingsDisclaimerService.get({}, function (data) {
@@ -1394,6 +1395,17 @@
                     $scope.refresh();
                 });
             }
+        };
+
+        $scope.upload = function (file) {
+            Upload.upload({
+                url: '/api/SettingsDisclaimer/Upload',
+                data: { file: file }
+            }).then(function () {
+                $scope.refresh();
+            }, function () {
+            }, function () {
+            });
         };
     }
 }());

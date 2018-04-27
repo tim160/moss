@@ -8,6 +8,7 @@
         'ngAnimate',
         'ngSanitize',
         'nvd3',
+        'ngFileUpload',
 
         'EC',
     ]);

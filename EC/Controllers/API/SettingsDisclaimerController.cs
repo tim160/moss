@@ -128,5 +128,14 @@ namespace EC.Controllers.API
             {
             };
         }
+
+        [HttpPost]
+        [Route("api/SettingsDisclaimer/Upload")]
+        public object Upload(HttpPostedFileBase file)
+        {
+            return new
+            {
+            };
+        }
     }
 }
