@@ -1484,7 +1484,8 @@ namespace EC.Models
         {
             var severities = db.severity.ToList();
             var colors = db.color.ToList();
-      
+            IEnumerable<int> top_mediator_ids = db.user.Where(item => (item.company_id == _user.company_id) && (item.role_id == 4 || item.role_id == 5)).Select(t => t.id);
+
             //var reports = report_ids.Select(x => new CasePreviewViewModel(x, user.id)).ToList();
             var reports = report_ids
               .Select(x =>
@@ -1513,13 +1514,13 @@ namespace EC.Models
                       total_days = Math.Floor((DateTime.Now.Date - rm._report.reported_dt.Date).TotalDays),
                       case_dt_s = rm._report.reported_dt.Ticks,
                       cc_is_life_threating = rm._report.cc_is_life_threating,
-                      mediators = rm.MediatorsWhoHasAccessToReport().Select(z => new {
+                      mediators = rm.MediatorsWhoHasAccessToReportQuick(top_mediator_ids).Select(z => new {
                           id = z.id,
                           first_nm = z.first_nm,
                           last_nm = z.last_nm,
                           photo_path = z.photo_path,
+                          is_owner = z.is_owner
                       }),
-                      owners = rm.ReportOwners().Where(z => z.status_id == 2),
                       severity_s = !rm._report.severity_id.HasValue ? "UNSPECIFIED" : severities.FirstOrDefault(z => z.id == rm._report.severity_id).severity_en
 
                   };

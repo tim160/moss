@@ -43,7 +43,7 @@ namespace EC.Controllers.API
             UsersUnreadReportsNumberViewModel vmUnreadReports = um.GetUserUnreadCasesNumbers(vmAllIDs);
 
             var report_ids = um.ReportsSearchIds(um._user.company_id, filter.ReportFlag);
-
+          
             string investigation_status = LocalizationGetter.GetString("Investigation");
             int delay_allowed = 2;
             if (report_ids.Count > 0)
@@ -61,45 +61,11 @@ namespace EC.Controllers.API
             title = filter.ReportFlag == 5 ? LocalizationGetter.GetString("ClosedCasesUp") : title;
             title = filter.ReportFlag == 3 ? LocalizationGetter.GetString("SpamcasesUp") : title;
 
-         /*   var severities = DB.severity.ToList();
-
-            Func<int, object> cerateReportAdv = (report_id) =>
-            {
-                var rm = new ReportModel(report_id);
-                var mediators = rm.MediatorsWhoHasAccessToReport().Select(z => new
-                {
-                    id = z.id,
-                    first_nm = z.first_nm,
-                    last_nm = z.last_nm,
-                    photo_path = z.photo_path,
-                });
-                var owners = rm.ReportOwners().Where(z => z.status_id == 2);
-
-                return new
-                {
-                    id = report_id,
-                    total_days = Math.Floor((DateTime.Now.Date - rm._report.reported_dt.Date).TotalDays),
-                    case_dt_s = rm._report.reported_dt.Ticks,
-                    cc_is_life_threating = rm._report.cc_is_life_threating,
-                    last_investigation_status_date = m_DateTimeHelper.ConvertDateToLongMonthString(rm.Last_investigation_status_date()),
-                    mediators = mediators,
-                    owners = owners,
-                    severity_id = rm._report.severity_id,
-                    severity_s = !rm._report.severity_id.HasValue ? "UNSPECIFIED" : severities.FirstOrDefault(z => z.id == rm._report.severity_id).severity_en,
-                };
-            };
-            */
             var m = new
             {
                 Mode = filter.ReportFlag,
 
                 Reports = reports,
-
-                /*ReportsAdv = reports
-                    .Select(x =>
-                    {
-                        return cerateReportAdv(x.report_id);
-                    }).ToList(),*/
 
                 Counts = new
                 {
