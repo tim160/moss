@@ -26,7 +26,11 @@ namespace EC.Controllers
             ReportModel rm = new ReportModel(report_id);
             if (!rm.HasAccessToReport(user.id))
                 return RedirectToAction("Index", "Account");
-
+            if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
+            {
+                // case is not approved to work on it yet, need to approve first. if == 7 - its spam, so they will share the view.
+                return RedirectToAction("Index", "NewReport", new { id = report_id });
+            }
 
             int user_id = user.id;
 
@@ -65,6 +69,12 @@ namespace EC.Controllers
             if (!rm.HasAccessToReport(user.id))
                 return RedirectToAction("Index", "Account");
 
+            if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
+            {
+                // case is not approved to work on it yet, need to approve first. if == 7 - its spam, so they will share the view.
+                return RedirectToAction("Index", "NewReport", new { id = report_id });
+            }
+
             int user_id = user.id;
             ViewBag.user_id = user_id;
             ViewBag.report_id = report_id;
@@ -94,6 +104,12 @@ namespace EC.Controllers
             ReportModel rm = new ReportModel(report_id);
             if (!rm.HasAccessToReport(user.id))
                 return RedirectToAction("Index", "Account");
+
+            if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
+            {
+                // case is not approved to work on it yet, need to approve first. if == 7 - its spam, so they will share the view.
+                return RedirectToAction("Index", "NewReport", new { id = report_id });
+            }
 
             #region EC-CC Viewbag
             ViewBag.is_cc = is_cc;
@@ -127,6 +143,12 @@ namespace EC.Controllers
             if (!rm.HasAccessToReport(user.id))
                 return RedirectToAction("Index", "Account");
 
+            if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
+            {
+                // case is not approved to work on it yet, need to approve first. if == 7 - its spam, so they will share the view.
+                return RedirectToAction("Index", "NewReport", new { id = report_id });
+            }
+
             int user_id = user.id;
 
             glb.UpdateReportRead(user_id, report_id);
@@ -148,6 +170,12 @@ namespace EC.Controllers
             ReportModel rm = new ReportModel(report_id);
             if (!rm.HasAccessToReport(user.id))
                 return RedirectToAction("Index", "Account");
+
+            if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
+            {
+                // case is not approved to work on it yet, need to approve first. if == 7 - its spam, so they will share the view.
+                return RedirectToAction("Index", "NewReport", new { id = report_id });
+            }
 
             int user_id = user.id;
             UserModel um = new UserModel(user_id);
@@ -190,6 +218,12 @@ namespace EC.Controllers
             if (!rm.HasAccessToReport(user.id))
                 return RedirectToAction("Index", "Account");
 
+            if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
+            {
+                // case is not approved to work on it yet, need to approve first. if == 7 - its spam, so they will share the view.
+                return RedirectToAction("Index", "NewReport", new { id = report_id });
+            }
+
             int user_id = user.id;
             UserModel um = new UserModel(user_id);
 
@@ -212,6 +246,12 @@ namespace EC.Controllers
             ReportModel rm = new ReportModel(report_id);
             if (!rm.HasAccessToReport(user.id))
                 return RedirectToAction("Index", "Account");
+
+            if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
+            {
+                // case is not approved to work on it yet, need to approve first. if == 7 - its spam, so they will share the view.
+                return RedirectToAction("Index", "NewReport", new { id = report_id });
+            }
 
             int user_id = user.id;
             UserModel um = new UserModel(user_id);
@@ -236,6 +276,12 @@ namespace EC.Controllers
             if (!rm.HasAccessToReport(user.id))
                 return RedirectToAction("Index", "Account");
 
+            if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
+            {
+                // case is not approved to work on it yet, need to approve first. if == 7 - its spam, so they will share the view.
+                return RedirectToAction("Index", "NewReport", new { id = report_id });
+            }
+
             int user_id = user.id;
             ViewBag.user_id = user_id;
             ViewBag.report_id = report_id;
@@ -258,7 +304,14 @@ namespace EC.Controllers
             if (!rm.HasAccessToReport(user.id))
                 return RedirectToAction("Index", "Account");
 
+
             glb.UpdateReportRead(user.id, report_id);
+
+            if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
+            {
+                // case is not approved to work on it yet, need to approve first. if == 7 - its spam, so they will share the view.
+                return RedirectToAction("Index", "NewReport", new { id = report_id });
+            }
 
             ViewBag.rm = rm;
             ViewBag.report_id = report_id;
@@ -402,6 +455,7 @@ namespace EC.Controllers
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
+
 
             int user_id = user.id;
 
