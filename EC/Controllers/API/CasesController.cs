@@ -42,8 +42,38 @@ namespace EC.Controllers.API
             UsersReportIDsViewModel vmAllIDs = um.GetAllUserReportIdsLists();
             UsersUnreadReportsNumberViewModel vmUnreadReports = um.GetUserUnreadCasesNumbers(vmAllIDs);
 
-            var report_ids = um.ReportsSearchIds(um._user.company_id, filter.ReportFlag);
-          
+            ///old var report_ids = um.ReportsSearchIds(um._user.company_id, filter.ReportFlag);
+
+            List<int> report_ids = new List<int>();
+            switch (filter.ReportFlag)
+            {
+                case 1:
+                    //active
+                    report_ids = vmAllIDs.all_active_report_ids;
+                    break;
+                case 2:
+                    //completed
+                    report_ids = vmAllIDs.all_completed_report_ids;
+                    break;
+                case 5:
+                    //closed
+                    report_ids = vmAllIDs.all_closed_report_ids;
+                    break;
+                case 3:
+                    //spam
+                    report_ids = vmAllIDs.all_spam_report_ids;
+
+                    break;
+                case 4:
+                    //pending
+                    report_ids = vmAllIDs.all_pending_report_ids;
+
+                    break;
+                default:
+                    report_ids = vmAllIDs.all_report_ids;
+                    break;
+            }
+
             string investigation_status = LocalizationGetter.GetString("Investigation");
             int delay_allowed = 2;
             if (report_ids.Count > 0)
@@ -60,7 +90,7 @@ namespace EC.Controllers.API
             title = filter.ReportFlag == 2 ? LocalizationGetter.GetString("CompletedcasesUp") : title;
             title = filter.ReportFlag == 5 ? LocalizationGetter.GetString("ClosedCasesUp") : title;
             title = filter.ReportFlag == 3 ? LocalizationGetter.GetString("SpamcasesUp") : title;
-
+            title = filter.ReportFlag == 4 ? LocalizationGetter.GetString("NewReportsUp") : title;
             var m = new
             {
                 Mode = filter.ReportFlag,

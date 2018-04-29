@@ -2581,7 +2581,7 @@ namespace EC.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New report has been filed with Employee Confidential.
+        ///   Looks up a localized string similar to New report has been filed with Employee Confidential - Case admins might be involved.
         /// </summary>
         public static string Email_Title_NewCaseInvolved {
             get {
@@ -2590,7 +2590,7 @@ namespace EC.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New report has been filed with Campus Confidential.
+        ///   Looks up a localized string similar to New report has been filed with Campus Confidential - Case admins might be involved.
         /// </summary>
         public static string Email_Title_NewCaseInvolved_CC {
             get {
@@ -4809,6 +4809,15 @@ namespace EC.Localization {
         public static string Newreport {
             get {
                 return ResourceManager.GetString("Newreport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Reports.
+        /// </summary>
+        public static string NewReportsUp {
+            get {
+                return ResourceManager.GetString("NewReportsUp", resourceCulture);
             }
         }
         
