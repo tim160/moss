@@ -43,19 +43,31 @@ namespace EC.Controllers.API
                     .ToList(),
             };
 
-            model.company_disclamer_page.user = new user
+            var dt = DateTime.Now;
+            var dt1 = DateTime.Now;
+            if (model.company_disclamer_page != null)
             {
-                first_nm = model.company_disclamer_page.user1.first_nm,
-                last_nm = model.company_disclamer_page.user1.last_nm,
-            };
-            model.company_disclamer_page.user1 = new user
-            {
-                first_nm = model.company_disclamer_page.user.first_nm,
-                last_nm = model.company_disclamer_page.user.last_nm,
-            };
+                model.company_disclamer_page.user = new user
+                {
+                    first_nm = model.company_disclamer_page.user1.first_nm,
+                    last_nm = model.company_disclamer_page.user1.last_nm,
+                };
+                model.company_disclamer_page.user1 = new user
+                {
+                    first_nm = model.company_disclamer_page.user.first_nm,
+                    last_nm = model.company_disclamer_page.user.last_nm,
+                };
+                if (model.company_disclamer_page.message_to_employees_created_dt.HasValue)
+                {
+                    dt = model.company_disclamer_page.message_to_employees_created_dt.Value;
+                }
+                if (model.company_disclamer_page.message_about_guidelines_created_dt.HasValue)
+                {
+                    dt1 = model.company_disclamer_page.message_about_guidelines_created_dt.Value;
+                }
+            }
+
             IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
-            var dt = model.company_disclamer_page.message_to_employees_created_dt.Value;
-            var dt1 = model.company_disclamer_page.message_about_guidelines_created_dt.Value;
 
             model.company_disclamer_uploads.ForEach(x =>
             {
