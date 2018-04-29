@@ -1449,7 +1449,7 @@ namespace EC.Models
         {
             List<int> result_ids = new List<int>();
             int owner_id = 0;
-            var owner = db.report_owner.FirstOrDefault(x => x.report_id == _report.id & x.status_id == 2);
+            var owner = db.report_owner.FirstOrDefault(x => x.report_id == ID & x.status_id == 2);
             if (owner != null)
             {
                 owner_id = owner.user_id;

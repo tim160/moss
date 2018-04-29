@@ -82,7 +82,7 @@
         $scope.refresh($scope.mode);
 
         $scope.openCase = function (id) {
-            if ($scope.mode === 3) {
+            if ($scope.mode === 3 || $scope.mode === 4) {
                 window.location = '/NewReport/' +id;
             } else {
                 window.location = '/newCase/Index/' + id;
