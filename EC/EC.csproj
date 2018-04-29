@@ -676,6 +676,18 @@
     <Content Include="html\500.html" />
     <Content Include="html\503.html" />
     <Content Include="html\reset.css" />
+    <Content Include="Libs\angular-animate\angular-animate.js" />
+    <Content Include="Libs\angular-animate\angular-animate.min.js" />
+    <Content Include="Libs\angular-http\angular-http.js" />
+    <Content Include="Libs\angular-nvd3\dist\angular-nvd3.js" />
+    <Content Include="Libs\angular-nvd3\dist\angular-nvd3.min.js" />
+    <Content Include="Libs\angular-resource\angular-resource.js" />
+    <Content Include="Libs\angular-resource\angular-resource.min.js" />
+    <Content Include="Libs\angular-sanitize\angular-sanitize.js" />
+    <Content Include="Libs\angular-sanitize\angular-sanitize.min.js" />
+    <Content Include="Libs\angular\angular.js" />
+    <Content Include="Libs\angular\angular.min.js" />
+    <Content Include="Libs\ng-file-upload\ng-file-upload.js" />
     <Content Include="Libs\ng-file-upload\ng-file-upload.min.js" />
     <Content Include="Models\Database\ECEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
