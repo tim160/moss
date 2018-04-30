@@ -238,9 +238,11 @@
                     }
                 </div>
             </div><!--blockReporterType-->
+            
             <div class="blockOutcomes" style="display: none;">
                 @if (is_valid_mediator)
                 {
+                    <p style="margin-left: 30px;">Add disciplinary outcomes for Subjects as well as outcome options for Witnesses and Reporters</p>
                     <div class="addOutcomeBtn" id="addInputOutcome">
                         <!--After click Btn - add class inactive-->
                         <p>@LocalizationGetter.GetString("addnewOutcome")</p>
@@ -267,7 +269,8 @@
                     }
                 </div>
             </div><!--blockOutcome-->
-            <div class="blockRootCauses" style="display: none;" id="tblRootCauses">
+           
+             <div class="blockRootCauses" style="display: none;" id="tblRootCauses">
                 @Html.Partial("~/Views/Settings/partial/blockRootCauses.cshtml", new ViewDataDictionary {
                     { "Company_root_cases_behavioral", ViewBag.Company_root_cases_behavioral},
                     { "Company_root_cases_external", ViewBag.Company_root_cases_external},
