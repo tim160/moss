@@ -89,7 +89,7 @@
 						    </div><!-- /.breadcrumbs-fullInfo__currentPege -->
                             @if (task_status != 2)
                             {
-                                <a href="#" class="btn-link">Complete task</a>
+                                <a href="#" class="btn-link completeTask">Complete task</a>
                             }
 					    </div><!-- /.breadcrumbs-fullInfo clearfix -->
 					    <div class="taskUserMenu ">
@@ -278,5 +278,17 @@
             });
         });
 
+        $('.completeTask').on('click', function ()
+        {
+            $.ajax({
+                method: "POST",
+                url: "/Case/CloseTask",
+                data: { task_id: @task_id, user_id: @user_id }
+            }).done(function (data) {//data from server
+                location.reload();
+            }).fail(function (error) {
+                console.log(error);
+            });
+        })
     });
 </script>

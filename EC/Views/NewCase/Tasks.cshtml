@@ -327,8 +327,10 @@
                     if (taskAssignTo != 0) {
                         var $input = $(".btn-attach__input");
                         var fd = new FormData;
-                        for (var i = 0; i < $input.prop('files').length; i++)
-                            fd.append('files', $input.prop('files')[i]);
+                        if ($input.prop('files') !== undefined) {
+                            for (var i = 0; i < $input.prop('files').length; i++)
+                                fd.append('files', $input.prop('files')[i]);
+                        }
 
                         fd.append('report_id', @report_id);
                         fd.append('user_id', @user_id);
