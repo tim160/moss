@@ -1482,8 +1482,8 @@ namespace EC.Models
 
         public List<CasePreviewViewModel> ReportPreviews(List<int> report_ids, string investigation_status, int delay_allowed)
         {
-            var severities = db.severity.ToList();
-            var colors = db.color.ToList();
+            var severities = db.severity.Select( z => new { id =z.id, severity_en = z.severity_en});
+            var colors = db.color.Select(z => new { id = z.id, color_code = z.color_code });
             IEnumerable<int> top_mediator_ids = db.user.Where(item => (item.company_id == _user.company_id) && (item.role_id == 4 || item.role_id == 5)).Select(t => t.id);
 
             //var reports = report_ids.Select(x => new CasePreviewViewModel(x, user.id)).ToList();
@@ -1497,11 +1497,12 @@ namespace EC.Models
 
                       report_id = rm._report.id,
                       case_number = rm._report.display_name,
-                      case_color_code = (rm._report.report_color_id == 0) ? colors.Where(item => item.id == 1).FirstOrDefault().color_code : colors.Where(item => item.id == rm._report.report_color_id).FirstOrDefault().color_code,
+                      case_dt_s = rm._report.reported_dt.Ticks,
+                      cc_is_life_threating = rm._report.cc_is_life_threating,
+                      total_days = Math.Floor((DateTime.Now.Date - rm._report.reported_dt.Date).TotalDays),
 
                       location = rm.LocationString(),
                       case_secondary_types = rm.SecondaryTypeString(),
-
                       days_left = rm.GetThisStepDaysLeft(delay_allowed),
 
                       reported_dt = rm.ReportedDateString(),
@@ -1510,10 +1511,7 @@ namespace EC.Models
                       tasks_number = rm.ReportTasksCount(0).ToString(),
                       messages_number = rm.UserMessagesCountNotSecure(ID, 0).ToString(),
 
-
-                      total_days = Math.Floor((DateTime.Now.Date - rm._report.reported_dt.Date).TotalDays),
-                      case_dt_s = rm._report.reported_dt.Ticks,
-                      cc_is_life_threating = rm._report.cc_is_life_threating,
+                   
                       mediators = rm.MediatorsWhoHasAccessToReportQuick(top_mediator_ids).Select(z => new {
                           id = z.id,
                           first_nm = z.first_nm,
@@ -1521,6 +1519,7 @@ namespace EC.Models
                           photo_path = z.photo_path,
                           is_owner = z.is_owner
                       }),
+                      case_color_code = (rm._report.report_color_id == 0) ? colors.Where(item => item.id == 1).FirstOrDefault().color_code : colors.Where(item => item.id == rm._report.report_color_id).FirstOrDefault().color_code,
                       severity_s = !rm._report.severity_id.HasValue ? "UNSPECIFIED" : severities.FirstOrDefault(z => z.id == rm._report.severity_id).severity_en
 
                   };
