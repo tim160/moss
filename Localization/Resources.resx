@@ -2207,7 +2207,7 @@
     <value>Is the situation an emergency?</value>
   </data>
   <data name="NARootCauseExplanation" xml:space="preserve">
-    <value>If a Root Cause that is applicable this incident is not available in the dropdown, please add in Settings.</value>
+    <value>If a Root Cause is not available in the dropdown, please add in Settings.</value>
   </data>
   <data name="Reopened" xml:space="preserve">
     <value>Reopened</value>

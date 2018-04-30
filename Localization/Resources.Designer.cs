@@ -4705,7 +4705,7 @@ namespace EC.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If a Root Cause that is applicable this incident is not available in the dropdown, please add in Settings..
+        ///   Looks up a localized string similar to If a Root Cause is not available in the dropdown, please add in Settings..
         /// </summary>
         public static string NARootCauseExplanation {
             get {
