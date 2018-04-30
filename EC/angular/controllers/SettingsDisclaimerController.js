@@ -13,6 +13,9 @@
             SettingsDisclaimerService.get({}, function (data) {
                 data.message_to_employeesChanged = false;
                 data.message_about_guidelinesChanged = false;
+                for (var i = 0; i < data.company_disclamer_uploads_dt.length; i++) {
+                    data.company_disclamer_uploads[i].create_dt_s = data.company_disclamer_uploads_dt[i];
+                }
                 $scope.model = data;
             });
         };

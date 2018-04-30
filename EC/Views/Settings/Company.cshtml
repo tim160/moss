@@ -270,7 +270,7 @@
                 </div>
             </div><!--blockOutcome-->
            
-             <div class="blockRootCauses" style="display: none;" id="tblRootCauses">
+            <div class="blockRootCauses" style="display: none;" id="tblRootCauses">
                 @Html.Partial("~/Views/Settings/partial/blockRootCauses.cshtml", new ViewDataDictionary {
                     { "Company_root_cases_behavioral", ViewBag.Company_root_cases_behavioral},
                     { "Company_root_cases_external", ViewBag.Company_root_cases_external},
@@ -362,7 +362,7 @@
                                 <span class="settingsProf-contentBlock__headTopName">
                                     {{file.user.first_nm}} {{file.user.last_nm}},
                                 </span><span class="settingsProf-contentBlock__headTopDate">
-                                    12 Jan 2017
+                                    {{file.create_dt_s}}
                                 </span>
                             </div><!-- /.settingsProf-contentBlock__headTop -->
                             <div class="settingsProf-contentBlock__headMain row">
@@ -378,7 +378,7 @@
                             </div><!-- /.settingsProf-contentBlock__headMain -->
                         </div>
                         <div class="settingsProf-contentBlock__main">
-                            <textarea  class="textareaBlock textareaBlockSettings" ng-model="file.Description" ng-change="file.DescriptionChanged = true">
+                            <textarea  class="textareaBlock textareaBlockSettings" style="font-size: 14px;" ng-model="file.Description" ng-change="file.DescriptionChanged = true">
                             </textarea>
                         </div>
                         <div class="settingsProf-contentBlock__bottom clearfix">

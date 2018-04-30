@@ -96,6 +96,7 @@ namespace EC.Controllers.API
                 company_disclamer_page_date1 = dt1.Day.ToString() + " " + m_DateTimeHelper.GetShortMonth(dt1.Month) + " " + dt1.Year.ToString(),
 
                 company_disclamer_uploads = model.company_disclamer_uploads,
+                company_disclamer_uploads_dt = model.company_disclamer_uploads.Select(x => x.created_dt.Value.Day.ToString() + " " + m_DateTimeHelper.GetShortMonth(x.created_dt.Value.Month) + " " + x.created_dt.Value.Year.ToString())
             };
         }
 
