@@ -1255,39 +1255,45 @@ namespace EC.Models
                     }*/
                     //foreach(var person in model.pe)
 
-                    foreach (var item in db.company_case_routing_location.Where(x => x.company_id == currentReport.company_id & x.company_location_id == currentReport.location_id && !model.mediatorsInvolved.Contains(x.user_id.ToString())).ToList())
+                    if (model.mediatorsInvolved != null)
                     {
-                        var cl = db.company_location.FirstOrDefault(x => x.id == item.company_location_id);
-                        if ((cl != null) && (cl.status_id == 2))
+                        foreach (var item in db.company_case_routing_location.Where(x => x.company_id == currentReport.company_id & x.company_location_id == currentReport.location_id && !model.mediatorsInvolved.Contains(x.user_id.ToString())).ToList())
                         {
-                            db.report_mediator_assigned.Add(new report_mediator_assigned
+                            var cl = db.company_location.FirstOrDefault(x => x.id == item.company_location_id);
+                            if ((cl != null) && (cl.status_id == 2))
                             {
-                                report_id = currentReport.id,
-                                by_location_id = item.company_location_id,
-                                mediator_id = item.user_id,
-                                last_update_dt = DateTime.Now,
-                                assigned_dt = DateTime.Now,
-                                status_id = 2,
-                                user_id = currentReport.user_id,
-                            });
+                                db.report_mediator_assigned.Add(new report_mediator_assigned
+                                {
+                                    report_id = currentReport.id,
+                                    by_location_id = item.company_location_id,
+                                    mediator_id = item.user_id,
+                                    last_update_dt = DateTime.Now,
+                                    assigned_dt = DateTime.Now,
+                                    status_id = 2,
+                                    user_id = currentReport.user_id,
+                                });
+                            }
                         }
                     }
 
-                    foreach (var item in db.company_case_routing.Where(x => x.company_id == currentReport.company_id && !model.mediatorsInvolved.Contains(x.user_id.ToString())).ToList())
+                    if (model.mediatorsInvolved != null)
                     {
-                        var inc = db.company_secondary_type.FirstOrDefault(x => x.id == item.company_secondary_type_id);
-                        if ((model.whatHappened.Contains(item.company_secondary_type_id)) & (inc != null) && (inc.status_id == 2))
+                        foreach (var item in db.company_case_routing.Where(x => x.company_id == currentReport.company_id && !model.mediatorsInvolved.Contains(x.user_id.ToString())).ToList())
                         {
-                            db.report_mediator_assigned.Add(new report_mediator_assigned
+                            var inc = db.company_secondary_type.FirstOrDefault(x => x.id == item.company_secondary_type_id);
+                            if ((model.whatHappened.Contains(item.company_secondary_type_id)) & (inc != null) && (inc.status_id == 2))
                             {
-                                report_id = currentReport.id,
-                                mediator_id = item.user_id,
-                                by_secondary_type_id = item.company_secondary_type_id,
-                                last_update_dt = DateTime.Now,
-                                assigned_dt = DateTime.Now,
-                                status_id = 2,
-                                user_id = currentReport.user_id,
-                            });
+                                db.report_mediator_assigned.Add(new report_mediator_assigned
+                                {
+                                    report_id = currentReport.id,
+                                    mediator_id = item.user_id,
+                                    by_secondary_type_id = item.company_secondary_type_id,
+                                    last_update_dt = DateTime.Now,
+                                    assigned_dt = DateTime.Now,
+                                    status_id = 2,
+                                    user_id = currentReport.user_id,
+                                });
+                            }
                         }
                     }
 
