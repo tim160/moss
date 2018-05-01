@@ -378,8 +378,7 @@
                             </div><!-- /.settingsProf-contentBlock__headMain -->
                         </div>
                         <div class="settingsProf-contentBlock__main">
-                            <textarea  class="textareaBlock textareaBlockSettings" style="font-size: 14px;" ng-model="file.Description" ng-change="file.DescriptionChanged = true">
-                            </textarea>
+                            <input  class="textareaBlock textareaBlockSettings" style="font-size: 14px; height: auto;" ng-model="file.Description" ng-change="file.DescriptionChanged = true" />
                         </div>
                         <div class="settingsProf-contentBlock__bottom clearfix">
                             <a href="#" class="btn-link pull-right" ng-class="file.DescriptionChanged ? '' : 'btn-link__disabled'" ng-click="saveFile(file)">{{file.DescriptionChanged ? 'Save' : 'Saved'}}</a>
