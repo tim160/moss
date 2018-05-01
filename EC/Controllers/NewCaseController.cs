@@ -8,6 +8,7 @@ using EC.Models.Database;
 using EC.Models.ViewModels;
 using EC.Models;
 using EC.Models.ECModel;
+using Rotativa.MVC;
 
 namespace EC.Controllers
 {
@@ -541,6 +542,29 @@ namespace EC.Controllers
             userModel.ReassignTask(id, mediator_id);
 
             return RedirectToAction("Task", new {id = id });
+        }
+
+        public ActionResult PrintToPdf(int id, Guid? rg, Guid? ug, bool pdf = false)
+        {
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            if ((user == null) && (rg.HasValue) && (ug.HasValue))
+            {
+                user = db.user.FirstOrDefault(x => x.guid == ug);
+            }
+            if (user == null || user.id == 0)
+            {
+                return RedirectToAction("Index", "Account");
+            }
+
+            if (pdf)
+            {
+                var report = db.report.FirstOrDefault(x => x.id == id);
+                return new ActionAsPdf("PrintToPdf", new { id = id, rg = report.guid, ug = user.guid });
+            }
+
+            var rm = new ReportModel(id);
+            ViewBag.user_id = user.id;
+            return View(rm);
         }
     }
 }

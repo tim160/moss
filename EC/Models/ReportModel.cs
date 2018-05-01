@@ -218,6 +218,44 @@ namespace EC.Models
             }
             return injury_damage;
         }
+
+        public List<string> Departments()
+        {
+            var list = new List<string>();
+
+            if (_report != null)
+            {
+                List<report_department> _c_departments = db.report_department.Where(item => item.report_id == _report.id && item.added_by_reporter != false).ToList();
+                company_department temp_c_dep;
+                foreach (report_department _temp_dep in _c_departments)
+                {
+                    temp_c_dep = db.company_department.Where(item => item.id == _temp_dep.department_id).FirstOrDefault();
+                    if (temp_c_dep != null)
+                    {
+                        if (list.IndexOf(temp_c_dep.department_en.Trim()) == -1)
+                        {
+                            list.Add(temp_c_dep.department_en.Trim());
+                        }
+                    }
+                }
+
+                if (_report.other_department_name.Trim().Length > 0)
+                {
+                    if (list.IndexOf(_report.other_department_name.Trim()) == -1)
+                    {
+                        list.Add(_report.other_department_name.Trim());
+                    }
+
+                }
+            }
+            if (list.Count == 0)
+            {
+                list.Add(App_LocalResources.GlobalRes.unknown_departments);
+            }
+
+            return list;
+        }
+
         /// <summary>
         /// Returns the departments involved in reported
         /// </summary>
@@ -349,6 +387,59 @@ namespace EC.Models
                 secondary_type = App_LocalResources.GlobalRes.unknown_secondary_type;
 
             return secondary_type.Trim();
+        }
+
+        public List<string> SecondaryTypeAll()
+        {
+            var list = new List<string>();
+
+            if (_report != null)
+            {
+                if (db.report_secondary_type.Any(t => t.report_id == _report.id))
+                {
+                    List<report_secondary_type> _report_secondary_type_list = db.report_secondary_type.Where(t => t.report_id == _report.id).ToList();
+                    foreach (report_secondary_type _report_secondary_type in _report_secondary_type_list)
+                    {
+                        if (_report_secondary_type.mandatory_secondary_type_id != null)
+                        {
+                            secondary_type_mandatory temp_sec_type = db.secondary_type_mandatory.Where(item => item.id == _report_secondary_type.mandatory_secondary_type_id).FirstOrDefault();
+                            if (temp_sec_type != null)
+                            {
+                                if (list.IndexOf(temp_sec_type.secondary_type_en.Trim()) != -1)
+                                {
+                                    list.Add(temp_sec_type.secondary_type_en.Trim());
+                                }
+                            }
+                        }
+
+                        if ((_report_secondary_type.secondary_type_id != 0) && (_report_secondary_type.secondary_type_id != -1))
+                        {
+                            company_secondary_type temp_comp_sec_type = db.company_secondary_type.Where(item => item.id == _report_secondary_type.secondary_type_id).FirstOrDefault();
+                            if (temp_comp_sec_type != null)
+                            {
+                                if (list.IndexOf(temp_comp_sec_type.secondary_type_en.Trim()) == -1)
+                                {
+                                    list.Add(temp_comp_sec_type.secondary_type_en.Trim());
+                                }
+                            }
+                        }
+
+                        if (_report_secondary_type.secondary_type_nm.Trim() != "")
+                        {
+                            if (list.IndexOf(_report_secondary_type.secondary_type_nm.Trim()) == 0)
+                            {
+                                list.Add(_report_secondary_type.secondary_type_nm.Trim());
+                            }
+                        }
+                        else if (_report_secondary_type.secondary_type_id == 0)
+                        {
+                            list.Add(GlobalRes.Other);
+                        }
+                    }
+                }
+            }
+
+            return list;
         }
 
         public string SecondaryTypeStringAll()
@@ -1488,6 +1579,10 @@ namespace EC.Models
             return users;
         }
 
+        public List<report_non_mediator_involved> NonInvolvedMediators()
+        {
+            return (db.report_non_mediator_involved.Where(item => (item.report_id == ID) && item.added_by_reporter != false)).ToList();
+        }
 
         public List<report_mediator_involved> InvolvedMediators()
         {
@@ -1557,7 +1652,7 @@ namespace EC.Models
 
         public List<report_owner> ReportOwners()
         {
-            return (db.report_owner.Where(item => (item.report_id == ID))).ToList();
+            return (db.report_owner.Where(item => item.report_id == ID && item.status_id == 2)).ToList();
         }
         public List<user> ReportOwnersUserList()
         {
@@ -1565,9 +1660,9 @@ namespace EC.Models
             List<report_owner> mediators = ReportOwners();
             user _user;
 
-            for (int i = 0; i < mediators.Count; i++)
+            foreach(var mediator in mediators)
             {
-                _user = db.user.FirstOrDefault(item => item.id == mediators[i].user_id);
+                _user = db.user.FirstOrDefault(item => item.id == mediator.user_id);
                 result.Add(_user);
             }
 

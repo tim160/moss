@@ -16,6 +16,7 @@ using EC.Controllers.utils;
 using EC.Constants;
 using EC.Common.Base;
 using EC.Localization;
+using Rotativa.MVC;
 
 namespace EC.Controllers
 {
@@ -442,6 +443,15 @@ namespace EC.Controllers
             //bool result = glb.isCompanyInUse(IdCountry);
             return result_company;
         }
-    }
 
+        public ActionResult PrintToPdf(int id, bool pdf = false)
+        {
+            if (pdf)
+            {
+                return new ActionAsPdf("PrintToPdf", new { id = id });
+            }
+            var rm = new ReportModel(id);
+            return View(rm);
+        }
+    }
 }
