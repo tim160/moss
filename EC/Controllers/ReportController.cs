@@ -444,13 +444,16 @@ namespace EC.Controllers
             return result_company;
         }
 
-        public ActionResult PrintToPdf(int id, bool pdf = false)
+        public ActionResult PrintToPdf(Guid id, bool pdf = true)
         {
             if (pdf)
             {
-                return new ActionAsPdf("PrintToPdf", new { id = id });
+                return new ActionAsPdf("PrintToPdf", new { id = id, pdf = false });
             }
-            var rm = new ReportModel(id);
+
+            var report = db.report.FirstOrDefault(x => x.guid == id);
+            var rm = new ReportModel(report.id);
+            ViewBag.Roles = db.role_in_report.ToList();
             return View(rm);
         }
     }
