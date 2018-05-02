@@ -423,18 +423,15 @@
                     </table>
                     @if (_involved.Count > 0)
                     {
-                        @*<div class="incidentDescription">*@<div class="incidentDescription">
-                            <table class="partiesInformation">
-                                @foreach (var item in _involved)
-                                {
-                                    <tr>
-                                        <td>@item.Role</td>
-                                        <td>@item.Name @item.last_name, @item.Title</td>
-                                    </tr>
-                                }
-                            </table>
-                            @*</div>*@
-                        </div>
+                        <table class="generalInformation">
+                            @foreach (var item in _involved)
+                            {
+                                <tr>
+                                    <td>@item.Role</td>
+                                    <td>@item.Name @item.last_name, @item.Title</td>
+                                </tr>
+                            }
+                        </table>
                     }
                     @if (rm.InvolvedMediatorsUserList().Count > 0)
                     {

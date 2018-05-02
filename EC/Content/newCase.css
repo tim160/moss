@@ -1586,7 +1586,6 @@ input.personDataTextBox{
 			border: 1px solid #e8eaeb;
 			border-top: none;
 			padding: 10px 0;
-			height: 62px;
 			overflow: hidden;
 		}
 			.dropDownListInBtn__logoImg{
@@ -1609,7 +1608,6 @@ input.personDataTextBox{
 				display: block;
 				width: calc( 100% - 56px );
 				padding-right: 10px;
-				height: 42px;
 				vertical-align: middle;
 			}
 				.dropDownListInBtn__contentName{
@@ -1635,7 +1633,7 @@ input.personDataTextBox{
 					color: #aeb5b7;
 					font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
 					font-size: 12px;
-					display: inline-block;
+					display: block;
 				}
 /*				.dropDownListInBtn__li:hover .dropDownListInBtn__contentPost{
 					display: inline-block;
