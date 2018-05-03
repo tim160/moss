@@ -293,6 +293,8 @@ namespace EC.Controllers
             var file = String.Format("{0}\\{1}{2}", folder, um._user.guid, fi.Extension);
             _file.SaveAs(file);
 
+            ImageUtils.MakeSquarePhoto(file);
+
             var dbUser = db.user.FirstOrDefault(x => x.id == id);
             //var url = String.Format("~/Upload/Company/{0}/users/{1}{2}", cm._company.guid, um._user.guid, fi.Extension);
             var url = System.Configuration.ConfigurationManager.AppSettings["SiteRoot"];
@@ -616,6 +618,8 @@ namespace EC.Controllers
                             }
                             var file = String.Format("{0}\\{1}{2}", folder, um._user.guid, fi.Extension);
                             photo.SaveAs(file);
+
+                            ImageUtils.MakeSquarePhoto(file);
 
                             var url = System.Configuration.ConfigurationManager.AppSettings["SiteRoot"];
                             url = url ?? Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port);
