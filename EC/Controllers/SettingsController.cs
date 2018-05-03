@@ -295,7 +295,8 @@ namespace EC.Controllers
 
             var dbUser = db.user.FirstOrDefault(x => x.id == id);
             //var url = String.Format("~/Upload/Company/{0}/users/{1}{2}", cm._company.guid, um._user.guid, fi.Extension);
-            var url = Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port);
+            var url = System.Configuration.ConfigurationManager.AppSettings["SiteRoot"];
+            url = url ?? Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port);
             url += String.Format("/Upload/Company/{0}/users/{1}{2}", cm._company.guid, um._user.guid, fi.Extension);
 
             dbUser.photo_path = url;
@@ -575,6 +576,7 @@ namespace EC.Controllers
             int user_id = user.id;
             UserModel um = new UserModel(user_id);
             int company_id = um._user.company_id;
+            var cm = new CompanyModel(company_id);
             /**/
 
             try
@@ -606,16 +608,22 @@ namespace EC.Controllers
                         }
                         if (Request.Form["from"] == "User")
                         {
-                            var fileName = user_id + "_" + DateTime.Now.Ticks + System.IO.Path.GetExtension(photo.FileName);
-                            //result = "/Upload/" + Request.Form["from"] + "Logo/" + fileName;
-                            pathLogo += "/" + fileName;
-                            UserModel model = new UserModel();
-                            tempResult = model.updateLogoUser(user_id, pathLogo);
-                            if (tempResult)
+                            var fi = new System.IO.FileInfo(photo.FileName);
+                            var folder = Server.MapPath(String.Format("~/Upload/Company/{0}/users", cm._company.guid));
+                            if (!System.IO.Directory.Exists(folder))
                             {
-                                photo.SaveAs(UploadTarget + fileName);
+                                System.IO.Directory.CreateDirectory(folder);
                             }
-                            result = pathLogo;
+                            var file = String.Format("{0}\\{1}{2}", folder, um._user.guid, fi.Extension);
+                            photo.SaveAs(file);
+
+                            var url = System.Configuration.ConfigurationManager.AppSettings["SiteRoot"];
+                            url = url ?? Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port);
+                            url += String.Format("/Upload/Company/{0}/users/{1}{2}", cm._company.guid, um._user.guid, fi.Extension);
+
+                            UserModel model = new UserModel();
+                            tempResult = model.updateLogoUser(user_id, url);
+                            result = url;
                         }
                     }
                 }
