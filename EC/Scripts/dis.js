@@ -1427,7 +1427,7 @@
         $scope.user_permissions_change_settings = 0;
         $scope.status_id = 3;
         $scope.user_role = 0;
-        $scope.photo_path = '~/Content/Icons/settingsPersonalNOPhoto.png';
+        $scope.photo_path = '/Content/Icons/settingsPersonalNOPhoto.png';
 
         $scope.val_first_nm = false;
         $scope.val_last_nm = false;

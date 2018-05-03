@@ -113,7 +113,7 @@
                 success: function (result) {
                     var from = $("#urlAjaxUploadFiles").attr("from");
                     if (from == "User") {
-                        $("#logoUser").attr("src", result);
+                        $("#logoUser").attr("src", result + '?' + new Date().getTime());
                     } else {
                         $("#logoCompany").attr("src", result);
                     }

@@ -294,11 +294,14 @@ namespace EC.Controllers
             _file.SaveAs(file);
 
             var dbUser = db.user.FirstOrDefault(x => x.id == id);
-            var url = String.Format("~/Upload/Company/{0}/users/{1}{2}", cm._company.guid, um._user.guid, fi.Extension);
+            //var url = String.Format("~/Upload/Company/{0}/users/{1}{2}", cm._company.guid, um._user.guid, fi.Extension);
+            var url = Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port);
+            url += String.Format("/Upload/Company/{0}/users/{1}{2}", cm._company.guid, um._user.guid, fi.Extension);
+
             dbUser.photo_path = url;
             db.SaveChanges();
 
-            return url.Substring(1);
+            return url;
         }
         // GET: Settings
         public ActionResult Cases()
