@@ -2591,4 +2591,34 @@ public class GlobalFunctions
             em.Send(to, cc, EC.App_LocalResources.GlobalRes.CampusSecurityAlert, body, true);
         }
     }
+
+    public string Photo_Path_String(string photo_path, int param, int photo_user_role)
+    {
+        string base_url = ConfigurationManager.AppSettings["base_url"];
+        string _photo_path = "";
+        if (photo_path != "" &&  File.Exists(photo_path))
+        {
+            _photo_path = photo_path;
+        }
+        else
+        {
+            if (param == 1)
+            {
+                _photo_path = base_url + "/Content/Icons/noPhoto.png";
+            }
+            else if (param == 2)
+            {
+                _photo_path = base_url +"/Content/Icons/settingsPersonalNOPhoto.png";
+            }
+            else if (param == 3)
+            {
+                _photo_path = base_url + "/Content/Icons/settingsPersonalNOPhoto.png";
+            }
+            if (photo_user_role == EC.Constants.ECLevelConstants.level_informant)
+            {
+                _photo_path = base_url + "/Content/Icons/anonimousReporterIcon.png";
+            }
+        }
+        return _photo_path;
+    }
 }
