@@ -95,7 +95,7 @@ namespace EC.Controllers
                 else
                 {
                     /*default*/
-                    ViewBag.secondary_type_mandatory = reportModel.getSecondaryTypeMandatory();
+                    ViewBag.secondary_type_mandatory = reportModel.getSecondaryTypeMandatory().Where(t => t.status_id == 2).ToList();
                     ViewBag.CustomSecondaryType = false;
                 }
 
@@ -103,7 +103,7 @@ namespace EC.Controllers
                 ViewBag.currentCompanySubmitted = currentCompany.company_nm;
                 ViewBag.currentCompany = currentCompany.company_nm;
                 //ViewBag.country = currentCompany.address.country.country_nm;
-                ViewBag.locations = HtmlDataHelper.MakeSelect(companyModel.Locations(id), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
+                ViewBag.locations = HtmlDataHelper.MakeSelect(companyModel.Locations(id).Where(t => t.status_id == 2).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
                 ViewBag.managament = companyModel.getManagamentKnow();
                 ViewBag.frequencies = HtmlDataHelper.MakeSelect(companyModel.getFrequencies(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("description")));
                 List<country> arr = companyModel.getCountries();
