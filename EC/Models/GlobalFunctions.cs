@@ -2594,7 +2594,7 @@ public class GlobalFunctions
 
     public string Photo_Path_String(string photo_path, int param, int photo_user_role)
     {
-        string base_url = ConfigurationManager.AppSettings["base_url"];
+        string base_url = ConfigurationManager.AppSettings["SiteRoot"];
         string _photo_path = "";
         if (photo_path != "" &&  File.Exists(photo_path))
         {
