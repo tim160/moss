@@ -82,7 +82,8 @@ namespace EC.Controllers.API
                 investigation_status = tempRm.InvestigationStatusString();
                 delay_allowed = tempRm.GetDelayAllowed();
             }
-
+            if (investigation_status.ToLower().Contains(LocalizationGetter.GetString("Investigation").ToLower()))
+                investigation_status = LocalizationGetter.GetString("Investigation");
            //////  var reports = report_ids.Select(x => new CasePreviewViewModel(x, user.id)).ToList();
             var  reports = um.ReportPreviews(report_ids, investigation_status, delay_allowed).ToList();
 

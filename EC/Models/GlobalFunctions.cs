@@ -19,6 +19,7 @@ using System.Web.Script.Serialization;
 using log4net;
 using EC.Common.Util;
 using EC.Common.Base;
+using System.Net;
 
 /// <summary>
 /// Global Functions for EC Project
@@ -2596,7 +2597,25 @@ public class GlobalFunctions
     {
         string base_url = ConfigurationManager.AppSettings["SiteRoot"];
         string _photo_path = "";
-        if (photo_path != "" &&  File.Exists(photo_path))
+        bool file_exist = false;
+
+        if (photo_path != "")
+        {
+            WebRequest request = WebRequest.Create(photo_path);
+
+            try
+            {
+                WebResponse response = request.GetResponse();
+                file_exist = true;
+            }
+            catch (Exception ex)
+            {
+                file_exist = false;
+            }
+        }
+
+
+        if (photo_path != "" && file_exist)
         {
             _photo_path = photo_path;
         }
