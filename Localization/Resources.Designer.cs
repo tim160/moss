@@ -4417,7 +4417,7 @@ namespace EC.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The following case administrator(s) will be assigned to your case. If you feel that a Case Administrator may have a conflict of interest or would be obstructive to investigating the case, please check ‘Exclude’ below..
+        ///   Looks up a localized string similar to The following case administrator(s) may be assigned to your case. If you feel that a Case Administrator may have a conflict of interest or would be obstructive to investigating the case, please check ‘Exclude’ below..
         /// </summary>
         public static string MediatorsAssignedSecondOption {
             get {
