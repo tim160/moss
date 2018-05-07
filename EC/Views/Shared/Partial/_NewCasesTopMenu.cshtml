@@ -41,6 +41,12 @@
     }
 }
 
+<style>
+    .mainNavigationTabs__rightLinks-li.active .mainNavigationTabs__tab-name {
+        color: #fff !important;
+    }
+</style>
+
 <div class="container-fluid">
     <ol class="progress-steps progress-steps_5-steps clearfix">
         <li class="progress-steps__li @(investigationstatus > 0 ? "done": "") @(investigationstatus == 1 ? "current": "")">
@@ -87,7 +93,7 @@
                     <div class="mainNavigationTabs__badgeCount">@unread_task_number_string</div>
                 }
             </li>
-            <li class="mainNavigationTabs__tab-link @(action == "messages" ? "active" : "") mainNavigationTabs__badgeCount_enable" data-tab="mainTab-4">
+            <li class="mainNavigationTabs__tab-link @(action == "messages" || action == "reporter" ? "active" : "") mainNavigationTabs__badgeCount_enable" data-tab="mainTab-4">
                 <a href="@Url.Action("Messages", new { report_id = ViewBag.report_id })">
                     <div class="mainNavigationTabs__tab-name">Messages</div>
                 </a>
