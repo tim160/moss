@@ -157,12 +157,12 @@ namespace EC.Controllers
                 ViewBag.departments = HtmlDataHelper.MakeSelect(departmentsActive, item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("department")));
 
 
-                ViewBag.locationsOfIncident = HtmlDataHelper.MakeSelect(companyModel.Locations(id).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
+                ViewBag.locationsOfIncident = HtmlDataHelper.MakeSelect(companyModel.Locations(id).Where(t => t.status_id == 2).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
 
                 // ViewBag.departments2 = currentCompany.company_department.ToList();
                 ViewBag.departments2 = companyModel.CompanyDepartmentsActive(id).ToList();
 
-                ViewBag.locationsOfIncident2 = companyModel.Locations(id).ToList();
+                ViewBag.locationsOfIncident2 = companyModel.Locations(id).Where(t => t.status_id == 2).ToList();
 
                 ViewBag.injury_damage = companyModel.GetInjuryDamages().ToList();
 
@@ -235,7 +235,7 @@ namespace EC.Controllers
             string title = LocalizationGetter.GetString("Email_Title_NewCase");
             if (has_involved)
                 title = LocalizationGetter.GetString("Email_Title_NewCaseInvolved");
-            foreach (var _user in rm.MediatorsWhoHasAccessToReport())
+            foreach (var _user in rm.MediatorsWhoHasAccessToReport().Where(t => t.role_id != 4).ToList())
             {
                 eb = new Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
                 to = new List<string>();

@@ -1558,12 +1558,12 @@ namespace EC.Models
                 owner_id = owner.user_id;
             }
             //IEnumerable<int> top_mediator_ids = db.user.Where(item => (item.company_id == _report.company_id) && (item.role_id == 4 || item.role_id == 5)).Select(t => t.id);
-            IEnumerable<int> assigned_mediator_ids = (db.report_mediator_assigned.Where(item => ((item.report_id == ID) && (item.status_id == 2)))).Select(t => t.id);
-            IEnumerable<int> involved_mediator_ids = (db.report_mediator_involved.Where(item => (item.report_id == ID) && item.added_by_reporter != false)).Select(t => t.id);
+            IEnumerable<int> assigned_mediator_ids = (db.report_mediator_assigned.Where(item => ((item.report_id == ID) && (item.status_id == 2)))).Select(t => t.mediator_id);
+            IEnumerable<int> involved_mediator_ids = (db.report_mediator_involved.Where(item => (item.report_id == ID) && item.added_by_reporter != false)).Select(t => t.mediator_id);
 
             IEnumerable<int> mediator_ids = top_mediator_ids.Concat(assigned_mediator_ids).Distinct();
             mediator_ids = mediator_ids.Except(involved_mediator_ids);
-            List<QuickUserViewModel> users = db.user.Where(item => (mediator_ids.Contains(item.id))).Select(z => new QuickUserViewModel
+            List<QuickUserViewModel> users = db.user.Where(item => (item.status_id == 2 && mediator_ids.Contains(item.id))).Select(z => new QuickUserViewModel
             {
                 id = z.id,
                 first_nm = z.first_nm,

@@ -397,6 +397,7 @@
     <Content Include="Content\Icons\pepper-sm-faded-red.png" />
     <Content Include="Content\Icons\pepper-sm-faded.png" />
     <Content Include="Content\Icons\pepperPhoto.png" />
+    <Content Include="Content\Icons\print-icon.png" />
     <Content Include="Content\Icons\report-icon-white.png" />
     <Content Include="Content\Icons\report-icon.png" />
     <Content Include="Content\Icons\reviewStage.png" />
@@ -477,6 +478,9 @@
     <Content Include="Content\images\svg-icons\upper-right.svg" />
     <Content Include="Content\images\tailoredBg.jpg" />
     <Content Include="Content\images\trust-img.png" />
+    <Content Include="Content\images\ui-bg_glass_75_ffffff_1x400.png" />
+    <Content Include="Content\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\images\ui-icons_454545_256x240.png" />
     <Content Include="Content\images\wall-siteview-img-CC.jpg" />
     <Content Include="Content\images\wall-siteview-img.jpg" />
     <Content Include="Content\images\warning-img.png" />
@@ -666,6 +670,7 @@
     <Content Include="Content\main.css" />
     <Content Include="Content\MainStyle.css" />
     <Content Include="Content\newCase.css" />
+    <Content Include="Content\print-reports.css" />
     <Content Include="Content\reportCss.css" />
     <Content Include="Content\reportDashboard.css" />
     <Content Include="Content\Site.css" />

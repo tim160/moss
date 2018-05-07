@@ -237,7 +237,7 @@
                                 <ul class="team-list clearfix">
                                     <li class="team-list__li" ng-repeat="mediator in report.mediators|limitTo:3">
                                         <a href="/settings/user/{{mediator.id}}" class=" team-list__a" title="{{mediator.first_nm}} {{mediator.last_nm}}">
-                                            <img ng-src="{{mediator.photo_path == '' ? '/Content/Icons/noPhoto.png' : mediator.photo_path.substring(1)}}" alt="" class="team-list__logo" />
+                                            <img ng-src="{{mediator.photo_path == '' ? '/Content/Icons/noPhoto.png' : mediator.photo_path}}" alt="" class="team-list__logo" />
                                             <span class="profile-status" ng-class="{'online' :mediator.is_owner}" ng-show="mediator.is_owner == true"></span>
                                         </a>
                                     </li><!-- /.team-list__li -->
