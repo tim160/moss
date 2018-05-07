@@ -1358,6 +1358,7 @@
                 data.message_about_guidelinesChanged = false;
                 for (var i = 0; i < data.company_disclamer_uploads_dt.length; i++) {
                     data.company_disclamer_uploads[i].create_dt_s = data.company_disclamer_uploads_dt[i];
+                    data.company_disclamer_uploads[i].display_name2 = data.company_disclamer_uploads[i].display_name;
                 }
                 $scope.model = data;
             });
