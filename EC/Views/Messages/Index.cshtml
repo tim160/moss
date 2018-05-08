@@ -52,7 +52,7 @@
                     <div class="myMessages @_old">
                         <div class="headerMessages" style="border-left: 10px solid #@rm.ColorCode();">
                             <div class="topBlock">
-                                <p class="titleMessages">@rm.SecondaryTypeString() - @rm.LocationString() - #@rm._report.display_name</p>
+                                <p class="titleMessages">@rm.SecondaryTypeString() &mdash; @rm.LocationString() &mdash; #@rm._report.display_name</p>
                             </div>
                         </div>
                         <div class="blockMessage withStaticBorder">
@@ -62,7 +62,7 @@
                             </div>
                             <div class="textMessage">
                                 <p class="personalName">@_message.MessagePoster</p>
-                                <p class="text"><a href="/newCase/@message_type/@_message.MessageCaseID">@_message._message.body_tx</a></p>
+                                <p class="text"><a href="/newCase/@message_type/@_message.MessageCaseID" style="text-decoration: none;">@_message._message.body_tx</a></p>
                             </div>
                             <div class="blockDate">
                                 <p>@m_DateTimeHelper.GetFullMonth(_message._message.created_dt.Value.Month) @_message._message.created_dt.Value.Day</p>
