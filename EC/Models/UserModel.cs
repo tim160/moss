@@ -1491,6 +1491,7 @@ namespace EC.Models
               .Select(x =>
               {
                   var rm = new ReportModel(x);
+                  var access_mediators = rm.MediatorsWhoHasAccessToReportQuick(top_mediator_ids);
                   return new CasePreviewViewModel
                   {
                       current_status = investigation_status,
@@ -1512,7 +1513,7 @@ namespace EC.Models
                       messages_number = rm.UserMessagesCountNotSecure(ID, 0).ToString(),
 
                    
-                      mediators = rm.MediatorsWhoHasAccessToReportQuick(top_mediator_ids).Select(z => new {
+                      mediators = (access_mediators == null || access_mediators.Count == 0)? null: access_mediators.Select(z => new {
                           id = z.id,
                           first_nm = z.first_nm,
                           last_nm = z.last_nm,

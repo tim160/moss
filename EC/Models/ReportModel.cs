@@ -1563,7 +1563,7 @@ namespace EC.Models
 
             IEnumerable<int> mediator_ids = top_mediator_ids.Concat(assigned_mediator_ids).Distinct();
             mediator_ids = mediator_ids.Except(involved_mediator_ids);
-            List<QuickUserViewModel> users = db.user.Where(item => (item.status_id == 2 && mediator_ids.Contains(item.id))).Select(z => new QuickUserViewModel
+            List<QuickUserViewModel> users = (mediator_ids ==null || mediator_ids.Count() == 0) ? new List<QuickUserViewModel>() : db.user.Where(item => (item.status_id == 2 && mediator_ids.Contains(item.id))).Select(z => new QuickUserViewModel
             {
                 id = z.id,
                 first_nm = z.first_nm,
@@ -1573,7 +1573,7 @@ namespace EC.Models
             }).ToList();
             // List<user> users = db.user.Where(item => (mediator_ids.Contains(item.id))).ToList();
 
-            if (owner_id != 0 && users.Count > 0  && mediator_ids.Contains(owner_id))
+            if (owner_id != 0 && users.Count > 0 && mediator_ids.Count() > 0 && mediator_ids.Contains(owner_id))
             {
                 int tempIndex = users.FindIndex(a => a.id == owner_id);
                 QuickUserViewModel tmp = users[tempIndex];
