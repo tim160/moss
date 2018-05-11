@@ -1576,10 +1576,13 @@ namespace EC.Models
             if (owner_id != 0 && users.Count > 0 && mediator_ids.Count() > 0 && mediator_ids.Contains(owner_id))
             {
                 int tempIndex = users.FindIndex(a => a.id == owner_id);
-                QuickUserViewModel tmp = users[tempIndex];
-                users[tempIndex] = users[0];
-                tmp.is_owner = true;
-                users[0] = tmp;
+                if (tempIndex > 0)
+                {
+                    QuickUserViewModel tmp = users[tempIndex];
+                    users[tempIndex] = users[0];
+                    tmp.is_owner = true;
+                    users[0] = tmp;
+                }
             }
 
             return users;

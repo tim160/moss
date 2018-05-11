@@ -2601,10 +2601,10 @@ public class GlobalFunctions
 
         if (photo_path != "")
         {
-            WebRequest request = WebRequest.Create(photo_path);
-
             try
             {
+                WebRequest request = WebRequest.Create(photo_path);
+                request.Timeout = 2;
                 WebResponse response = request.GetResponse();
                 file_exist = true;
             }

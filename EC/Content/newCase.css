@@ -3058,7 +3058,7 @@ input.personDataTextBox{
 			box-sizing: border-box;
 			padding: 30px 5px 5px 5px;
 			overflow: hidden;
-			white-space: nowrap;
+/*			white-space: nowrap;*/
 			text-overflow: ellipsis;
 			cursor: pointer;
 			min-height: 60px;
@@ -3066,19 +3066,26 @@ input.personDataTextBox{
 			display: block;
 		}
 
-		.dashboard-col__case.dashboard-colbody{}
+		.dashboard-col__case.dashboard-colbody{
+			white-space: initial;
+		}
 			.dashboard-col__case-text{
 				font-size: 16px;
-
+				display: inline-block;
+				vertical-align: -webkit-baseline-middle;
 				padding-left: 15%;
 			}
 		
-		.dashboard-col__severity.dashboard-colbody{}
+		.dashboard-col__severity.dashboard-colbody{
+			white-space: initial;
+		}
 			.dashboard-col__severity-text{
 				font-family: 'OpenSans-Bold', arial, verdana, sans-serif;;
 				font-size: 10px;
 				color: #aeb5b7;
 				text-transform: uppercase;
+				display: inline-block;
+				vertical-align: -webkit-baseline-middle;
 			}
 			.dashboard-col__severity-textLow{
 				color: #1ebcab !important;
@@ -3122,6 +3129,8 @@ input.personDataTextBox{
 		.dashboard-col__age.dashboard-colbody{}
 			.dashboard-col__age-text{
 				font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+				display: inline-block;
+				vertical-align: -webkit-baseline-middle;
 			}
 
 		.dashboard-col__incidentType.dashboard-colbody{}
@@ -3129,6 +3138,8 @@ input.personDataTextBox{
 				font-size: 16px;
 				white-space: normal;
 				line-height: 1.2em;
+				display: inline-block;
+				vertical-align: -webkit-baseline-middle;
 			}
 		
 		.dashboard-col__location.dashboard-colbody{}
@@ -3136,31 +3147,42 @@ input.personDataTextBox{
 				font-size: 14px;
 				white-space: normal;
 				line-height: 1.2em;
+				display: inline-block;
+				vertical-align: -webkit-baseline-middle;
 			}
 
 		.dashboard-col__reportDate.dashboard-colbody{}
 			.dashboard-col__reportDate-text{
 				font-size: 14px;
+				display: inline-block;
+				vertical-align: -webkit-baseline-middle;
 			}
 
 		.dashboard-col__messages.dashboard-colbody{}
 			.dashboard-col__messages-text{
 				font-size: 16px;
 				text-align: center;
+				display: inline-block;
+				width: 100%;
+				vertical-align: -webkit-baseline-middle;
 			}
 
 		.dashboard-col__tasks.dashboard-colbody{}
 			.dashboard-col__tasks-text{
 				font-size: 16px;
 				text-align: center;
+				display: inline-block;
+				width: 100%;
+				vertical-align: -webkit-baseline-middle;
 			}
 
 		.dashboard-col__team.dashboard-colbody{
 			padding-top: 15px;
 		}
 		.dashboard-col__alert.dashboard-colbody{}
-.team-list{
+.container ul.team-list{
 	display: block;
+	margin-top: 4px;
 }
 	.team-list__li{
 		display: inline-block;
