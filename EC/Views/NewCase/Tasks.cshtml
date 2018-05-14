@@ -12,6 +12,7 @@
     var user_id = (Int32)ViewBag.user_id;
     ReportModel rm = new ReportModel(report_id);
     UserModel um = new UserModel(user_id);
+    GlobalFunctions glb = new GlobalFunctions();
 }
 
 <link href="~/Content/jquery-ui.css" rel="stylesheet">
@@ -150,17 +151,22 @@
                 <div class="task-titleRow__text task-titleRow__textName">
                 </div><!-- /.task-titleRow__text -->
             </div><!-- /.col-6 -->
-            <div class="col-6">
+            <div class="col-5">
                 <div class="task-titleRow__text task-titleRow__textName">
                     Task name
                 </div><!-- /.task-titleRow__text -->
             </div><!-- /.col-6 -->
             <div class="col-2">
                 <div class="task-titleRow__text task-titleRow__textMediator  pull-left">
+                    Status
+                </div><!-- /.task-titleRow__text -->
+            </div><!-- /.col-3 -->
+            <div class="col-2">
+                <div class="task-titleRow__text task-titleRow__textMediator  pull-left">
                     Assigned mediator
                 </div><!-- /.task-titleRow__text -->
             </div><!-- /.col-3 -->
-            <div class="col-3">
+            <div class="col-2">
                 <div class="task-titleRow__text task-titleRow__textActivity pull-right">
                     Last activity
                 </div><!-- /.task-titleRow__text -->
@@ -174,8 +180,8 @@
                     //"blueCircle" "blueBorder" "greyCircle" "greyBorder"
                     string circle = "blueCircle";
                     circle = task.IsCompleted() ? "greyBorder" : circle;
-                    circle = (task.IsRead() && (!task.HasNewActivity())) ? "blueBorder" : circle;                
-
+                    circle = (task.IsRead() && (!task.HasNewActivity())) ? "blueBorder" : circle;
+                    var _assignee_photo = glb.Photo_Path_String(_assignee.photo_path, 1, 5);
                     <li class="taskList__li" data-userid="@_assignee.id" data-state="@circle">
                         <a href="@Url.Action("Task", "NewCase", new { id = task.TaskID })" class="taskList__a taskNameCol__taskProgress-on">
                             <span class="col-1">
@@ -184,27 +190,24 @@
                                     <img src="~/Content/Icons/fileCases.png" />
                                 }
                             </span>
-                            <span class="col-6">
+                            <span class="col-5">
                                 <span class="taskNameCol">
-                                    <span class="taskNameCol__taskStatus @circle"></span>
                                     <span class="taskNameCol__Title">@task._task.title</span>
                                     <span class="taskNameCol__taskProgress"></span>
                                 </span>
                             </span>
                             <span class="col-2">
+                                <span class="taskActivityCol pull-left">
+                                    <span class="taskActivityCol__date">@(task.TaskStatusString.Length > 0 ? task.TaskStatusString : @GlobalRes.Active)</span>
+                                </span>
+                            </span>
+                            <span class="col-2">
                                 <span class="taskMediatorCol pull-left">
-                                    @if (_assignee.photo_path.Trim() != "")
-                                    {
-                                        <img src='@Url.Content(_assignee.photo_path.Trim())' alt="" class="taskMediatorCol__logoImg" />
-                                    }
-                                    else
-                                    {
-                                        <img src='@Url.Content("~/Content/Icons/noPhoto.png")' alt="" class="taskMediatorCol__logoImg" />
-                                    }
+                                   <img src='@_assignee_photo' alt="" class="taskMediatorCol__logoImg" />
                                     <span class="taskMediatorCol__Name">@_assignee.first_nm @_assignee.last_nm</span>
                                 </span>
                             </span>
-                            <span class="col-3">
+                            <span class="col-2">
                                 <span class="taskActivityCol pull-right">
                                     <!-- <span class="taskActivityCol__attached">
                                         <img src="Icons/fileCases.png" alt="" />
