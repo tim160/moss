@@ -21,6 +21,7 @@ namespace EC.Controllers.API
 {
     public class NewCaseTeamController : BaseApiController
     {
+        GlobalFunctions glb = new GlobalFunctions();
         public class Filter
         {
             public int? ReportFlag { get; set; }
@@ -40,6 +41,7 @@ namespace EC.Controllers.API
             public string location_string { get; set; }
             public string email { get; set; }
             public bool owner { get; set; }
+            public string user_photo { get; set; }
         }
 
         [HttpGet]
@@ -76,6 +78,7 @@ namespace EC.Controllers.API
                     action_quantity = um.CaseActionsQuantity(id),
                     location_string = um._location_string,
                     email = um._user.email,
+                    user_photo = glb.Photo_Path_String(item.photo_path, 1, 5),
                     owner = rm.ReportOwners().FirstOrDefault(x => x.user_id == item.id & x.status_id == 2) != null,
                 });
             }
@@ -90,6 +93,7 @@ namespace EC.Controllers.API
                     action_quantity = um.CaseActionsQuantity(id),
                     location_string = um._location_string,
                     email = um._user.email,
+                    user_photo = glb.Photo_Path_String(item.photo_path, 1, 5),
                     owner = rm.ReportOwners().FirstOrDefault(x => x.user_id == item.id & x.status_id == 2) != null,
                 });
             }
@@ -104,6 +108,7 @@ namespace EC.Controllers.API
                     action_quantity = um.CaseActionsQuantity(id),
                     location_string = um._location_string,
                     email = um._user.email,
+                    user_photo = glb.Photo_Path_String(item.photo_path, 1, 5),
                     owner = rm.ReportOwners().FirstOrDefault(x => x.user_id == item.id & x.status_id == 2) != null,
                 });
             }

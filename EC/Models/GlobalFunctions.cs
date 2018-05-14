@@ -2256,13 +2256,13 @@ public class GlobalFunctions
         company_relation_ids = company_relation_ids.Distinct().ToList();
 
         /////mandatory
-        List<relationship> _all_mandatory_relationships = db.relationship.Where(item => (mandatory_relation_ids.Contains(item.id))).ToList();
+    /*    List<relationship> _all_mandatory_relationships = db.relationship.Where(item => (mandatory_relation_ids.Contains(item.id))).ToList();
         foreach (relationship _temp_relationship_mandatory in _all_mandatory_relationships)
         {
             ///     _list_types.Add(new Tuple<string, int, int, bool>(_temp_secondary_type_mandatory.secondary_type_en, _temp_secondary_type_mandatory.id, 1, true));
             _list_types.Add(new Tuple<string, int, int, bool>(_temp_relationship_mandatory.relationship_en, _temp_relationship_mandatory.id, 1, true));
 
-        }
+        }*/
         /////company_secondary_type
         List<company_relationship> _all_secondary_relationships = db.company_relationship.Where(item => (company_relation_ids.Contains(item.id))).ToList();
         foreach (company_relationship _temp_company_relationship in _all_secondary_relationships)
