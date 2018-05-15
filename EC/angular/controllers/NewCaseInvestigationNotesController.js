@@ -47,6 +47,7 @@
         };
 
         $scope.noteP = function (note) {
+            note = note || '';
             return note.split('\n').join('<br/>');
         };
 

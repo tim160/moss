@@ -1030,7 +1030,6 @@ namespace EC.Controllers
             if (user == null || user.id == 0)
                 return -1;
 
-
             int mediator_id = Convert.ToInt16(Request["user_id"]);
             int report_id = Convert.ToInt16(Request["report_id"]);
             int promotion_value = Convert.ToInt16(Request["promotion_value"]);
@@ -1057,14 +1056,46 @@ namespace EC.Controllers
             {
                 return -1;
             }
-            // we don't need this error anymore
-       /*     if (promotion_value == ECGlobalConstants.investigation_status_resolution)
+            //validate
+            if (!rm.getSecondaryTypeMandatory().Any())
             {
-                CompanyModel cm = new CompanyModel(um._user.company_id);
-                if (cm.AllMediators(cm._company.id, true, ECLevelConstants.level_escalation_mediator).Count == 0)
-                    return 0;
+                return -2;
             }
-            */
+            if ((!db.report_mediator_involved.Any(x => x.report_id == report_id)) && (!db.report_non_mediator_involved.Any(x => x.report_id == report_id)))
+            {
+                return -2;
+            }
+            var note1 = db.report_inv_notes.FirstOrDefault(x => x.report_id == report_id & x.type == 1)?.note;
+            var note2 = db.report_inv_notes.FirstOrDefault(x => x.report_id == report_id & x.type == 2)?.note;
+
+            if ((String.IsNullOrEmpty(note1)) || (String.IsNullOrEmpty(note2)))
+            {
+                return -2;
+            }
+
+            /*var report_cc_crime = db.report_cc_crime
+                .Where(x => x.report_id == report_id)
+                .FirstOrDefault();
+            if ((report_cc_crime == null) || (String.IsNullOrEmpty(report_cc_crime.executive_summary)))
+            {
+                return -2;
+            }*/
+
+            var list = db.report_non_mediator_involved.Where(x => x.report_id == report_id && x.role_in_report_id == 3).Select(x => x.id).ToList();
+            var list_cco = db.report_case_closure_outcome.Where(x => x.report_id == report_id).ToList();
+            if ((list.Any()) && (!list_cco.Any(x => x.non_mediator_involved_id.HasValue && list.Contains(x.non_mediator_involved_id.Value))))
+            {
+                return -2;
+            }
+
+            // we don't need this error anymore
+            /*     if (promotion_value == ECGlobalConstants.investigation_status_resolution)
+                 {
+                     CompanyModel cm = new CompanyModel(um._user.company_id);
+                     if (cm.AllMediators(cm._company.id, true, ECLevelConstants.level_escalation_mediator).Count == 0)
+                         return 0;
+                 }
+                 */
             bool _new = userModel.ResolveCase(report_id, mediator_id, description, promotion_value, reason_id,sign_off_mediator_id);
 
             if (!db.report_mediator_assigned.Any(x => x.report_id == report_id && x.mediator_id == sign_off_mediator_id))

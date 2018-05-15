@@ -86,6 +86,22 @@
     </div><!-- /.case-modal__linkBlockBottom -->
 </div>
 
+<div id="alertModal" class="modal case-modal">
+    <a href="#" class="closeLink modal-close" rel="modal:close"></a>
+    <div class="case-modal__title"><p>The following fields are required to be completed before the case can be closed.</p></div>
+    <ul>
+        <li>Incident Type(s)</li>
+        <li>Involved Parties</li>
+        <li>Facts Established</li>
+        <li>Investigation Methodology</li>
+        <li>Executive Summary</li>
+        <li>Recommended Outcomes for Subject(s)</li>
+    </ul>
+    <div class="case-modal__linkBlockBottom clearfix">
+        <a href="#" id="requestToclose" rel="modal:close" class="case-modal__linkBtn whiteBtn">Close</a>
+    </div><!-- /.case-modal__linkBlockBottom -->
+</div>
+
 <script>
     $(document).ready(function () {
         $('.case-modal__selectOption').selectric({
@@ -125,6 +141,10 @@
                 }).done(function (data) {
 
                     if (data == -1) {
+                    }
+
+                    if (data == -2) {
+                        $('#alertModal').modal();
                     }
 
                     if (data == 1) {
