@@ -52,10 +52,10 @@
 
 <div class="container subNavigationTabs__tabContent-container">
     <div id="subTab-2" class="subNavigationTabs__tabContent active" ng-controller="NewCaseCaseClosureReportController" ng-cloak>
+        @if (is_cc.Value)
+        {
         <section class="content-container">
             <div class="content-container__inner">
-                @if (is_cc.Value)
-                {
                     <p class="sectionHeader">Is this a Clery Act Crime?</p>
                     <div class="content-container__inner-additional clearfix">
                         <div class="col-3 CaseClosureReport__radioBlock clearfix">
@@ -87,10 +87,10 @@
                             </dropbox>
                         </div>
                     </div>
-                }
+                
             </div>
         </section>
-
+        }
         <section class="content-container">
             <div class="content-container__inner">
                 <p class="sectionHeader">Executive Summary</p>
@@ -109,7 +109,7 @@
             </div>
         </section>
 
-        <section class="content-container">
+        <section class="content-container" ng-show="model.report_case_closure_outcome2.length > 0">
             <div class="content-container__inner">
                 <p class="sectionHeader">Recommended Outcomes for subjects</p>
                 <div class="content-container__inner-additional clearfix">
@@ -181,5 +181,8 @@
                 </div>
             </div>
         </section>
+
+        <section style="height: 300px;"></section>
+
     </div>
 </div>
