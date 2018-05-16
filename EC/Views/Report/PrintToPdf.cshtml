@@ -7,6 +7,7 @@
 @{
     Layout = null;
     var role_in_report = (List<role_in_report>)ViewBag.Roles;
+    var cm = new CompanyModel();
 }
 
 <!DOCTYPE html>
@@ -24,7 +25,7 @@
     <div class="reportTemplate container clearfix">
         <div class="reportTemplateHeader clearfix">
             <div class="reportTemplateHeader-logo pull-left">
-                <img src="~/Content/Icons/logo.png" alt="" />
+                <img src="@cm.getLogoCompany(Model._report.company_id)" alt="" />
             </div><!-- /.reportTemplateHeader-logo pull-left -->
             <div class="reportTemplateHeader-info pull-right">
                 <div class="reportTemplateHeader-info__title">

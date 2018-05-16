@@ -2476,6 +2476,25 @@ namespace EC.Models
                     );
 
                 return res.GroupBy(x => x.User.id).Select(x => x.First()).ToList();
-            }
         }
+
+        public string InvestigationMethodology()
+        {
+            return $"{db.report_inv_notes.FirstOrDefault(x => x.report_id == ID & x.type == 2)?.note}";
+        }
+
+        public string FactsEstablished()
+        {
+            return $"{db.report_inv_notes.FirstOrDefault(x => x.report_id == ID & x.type == 1)?.note}";
+        }
+
+        public string ExecutiveSummary()
+        {
+            var report_cc_crime = db.report_cc_crime
+                .Where(x => x.report_id == ID)
+                .FirstOrDefault();
+
+            return $"{report_cc_crime?.executive_summary}";
+        }
+    }
 }
