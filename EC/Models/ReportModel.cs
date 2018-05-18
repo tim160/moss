@@ -1569,7 +1569,8 @@ namespace EC.Models
                 first_nm = z.first_nm,
                 last_nm = z.last_nm,
                 photo_path = z.photo_path,
-                is_owner = false
+                is_owner = false,
+                is_signoff = false
             }).ToList();
             // List<user> users = db.user.Where(item => (mediator_ids.Contains(item.id))).ToList();
 
@@ -2496,5 +2497,17 @@ namespace EC.Models
 
             return $"{report_cc_crime?.executive_summary}";
         }
+
+        /// <summary>
+        /// Returns mediator, who is having sign-off priviligies.
+        /// </summary>
+        /// <returns></returns>
+        public user GetSignOffMeditoar()
+        {
+            var user = db.user.Where(item => (item.id == 2)).FirstOrDefault();
+            return user;
+
+        }
     }
+
 }
