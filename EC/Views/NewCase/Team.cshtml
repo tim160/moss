@@ -114,25 +114,18 @@
             </div>
         </div><!-- /.content-container__inner -->
 
-        <div class="content-container__inner">
-            <div class="teamBlock__addNew">
-                <a href="#!" class="btn-linkReverse" ng-show="available_toAssign_mediators.length > 0" ng-click="addMoreMediators = !addMoreMediators">Add more case administrators</a>
-            </div>
-        </div>
-
-        <div class="content-container__inner" ng-show="addMoreMediators == true">
+        <div class="content-container__inner" ng-show="involved_mediators_user_list.length > 0">
             <div class="teamBlock__addNewText">
-                <div class="teamBlock__addNewText-title">
-                    Select case administrators to add to this team
+                <div class="teamBlock__addNewText-title_involved">
+                    Case administrator excluded at request of reporter
                 </div><!-- /.teamBlock__addNewText-title -->
             </div><!-- /.teamBlock__addNew -->
+
             <div class="row clearfix team-row">
 
-                <div class="col-4" ng-repeat="item in available_toAssign_mediators" repeat-done="makeCircles()">
+                <div class="col-4" ng-repeat="item in involved_mediators_user_list" repeat-done="makeCircles()">
                     <div class="teamBlock shadowLight">
-
                         <div class="teamBlock-header clearfix">
-
                             <div class="teamBlock-header__logo">
                                 <img ng-src="{{item.user_photo}}" alt="" class="teamBlock-header__logoImg" />
                             </div>
@@ -149,44 +142,11 @@
                         </div><!-- /.teamBlock-header -->
 
                         <div class="teamBlock-body clearfix">
-                            <a href="#!" class="btn btn__team" ng-click="addToTeam(item)">Add to team</a>
                             <div class="teamBlock-body__chartTitle">
                                 {{item.user.notepad_tx}}
                             </div><!-- /.teamBlock-body__chartTitle -->
                             <div class="teamBlock-body__charts">
-                                <div class="chartCircle">
-                                    <canvas class="canvasCircle" height="60px" width="60px"></canvas>
-                                    <div class="chartCircle__content">
-                                        <div class="chartCircle__content-number">
-                                            {{item.task_quantity}}
-                                        </div><!-- /.chartCircle__content-number -->
-                                        <div class="chartCircle__content-text">
-                                            tasks
-                                        </div><!-- /.chartCircle__content-text -->
-                                    </div><!-- /.chartCircle__content -->
-                                </div><!-- /.chartCircle -->
-                                <div class="chartCircle">
-                                    <canvas class="canvasCircle" height="60px" width="60px"></canvas>
-                                    <div class="chartCircle__content">
-                                        <div class="chartCircle__content-number">
-                                            {{item.message_quantity}}
-                                        </div><!-- /.chartCircle__content-number -->
-                                        <div class="chartCircle__content-text">
-                                            messages
-                                        </div><!-- /.chartCircle__content-text -->
-                                    </div><!-- /.chartCircle__content -->
-                                </div><!-- /.chartCircle -->
-                                <div class="chartCircle">
-                                    <canvas class="canvasCircle" height="60px" width="60px"></canvas>
-                                    <div class="chartCircle__content">
-                                        <div class="chartCircle__content-number">
-                                            {{item.action_quantity}}
-                                        </div><!-- /.chartCircle__content-number -->
-                                        <div class="chartCircle__content-text">
-                                            actions
-                                        </div><!-- /.chartCircle__content-text -->
-                                    </div><!-- /.chartCircle__content -->
-                                </div><!-- /.chartCircle -->
+
                             </div><!-- /.teamBlock-body__charts -->
                         </div><!-- /.teamBlock-body -->
                         <div class="hr teamBlock-hr"></div><!-- /.hr teamBlock-hr -->
@@ -206,9 +166,106 @@
                 </div><!-- /.col-4 -->
 
             </div><!-- /.row clearfix team-row -->
-        </div><!-- /.content-container__inner -->
-        <div class="divider "></div>
-    </div>
+
+
+     </div>
+
+
+            <div class="content-container__inner">
+                <div class="teamBlock__addNew">
+                    <a href="#!" class="btn-linkReverse" ng-show="available_toAssign_mediators.length > 0" ng-click="addMoreMediators = !addMoreMediators">Add more case administrators</a>
+                </div>
+            </div>
+
+            <div class="content-container__inner" ng-show="addMoreMediators == true">
+                <div class="teamBlock__addNewText">
+                    <div class="teamBlock__addNewText-title">
+                        Select case administrators to add to this team
+                    </div><!-- /.teamBlock__addNewText-title -->
+                </div><!-- /.teamBlock__addNew -->
+                <div class="row clearfix team-row">
+
+                    <div class="col-4" ng-repeat="item in available_toAssign_mediators" repeat-done="makeCircles()">
+                        <div class="teamBlock shadowLight">
+
+                            <div class="teamBlock-header clearfix">
+
+                                <div class="teamBlock-header__logo">
+                                    <img ng-src="{{item.user_photo}}" alt="" class="teamBlock-header__logoImg" />
+                                </div>
+                                <div class="teamBlock-header__title">
+                                    <div class="teamBlock-header__name clearfix">
+                                        <div class="teamBlock-header__name-text">{{item.user.first_nm}} {{item.user.last_nm}}</div>
+                                    </div>
+                                    <div class="teamBlock-header__profilePost">
+                                        {{item.user.title_ds}}
+                                    </div><!-- /.teamBlock-header__profilePost -->
+
+                                </div><!-- /.teamBlock-header__title -->
+
+                            </div><!-- /.teamBlock-header -->
+
+                            <div class="teamBlock-body clearfix">
+                                <a href="#!" class="btn btn__team" ng-click="addToTeam(item)">Add to team</a>
+                                <div class="teamBlock-body__chartTitle">
+                                    {{item.user.notepad_tx}}
+                                </div><!-- /.teamBlock-body__chartTitle -->
+                                <div class="teamBlock-body__charts">
+                                    <div class="chartCircle">
+                                        <canvas class="canvasCircle" height="60px" width="60px"></canvas>
+                                        <div class="chartCircle__content">
+                                            <div class="chartCircle__content-number">
+                                                {{item.task_quantity}}
+                                            </div><!-- /.chartCircle__content-number -->
+                                            <div class="chartCircle__content-text">
+                                                tasks
+                                            </div><!-- /.chartCircle__content-text -->
+                                        </div><!-- /.chartCircle__content -->
+                                    </div><!-- /.chartCircle -->
+                                    <div class="chartCircle">
+                                        <canvas class="canvasCircle" height="60px" width="60px"></canvas>
+                                        <div class="chartCircle__content">
+                                            <div class="chartCircle__content-number">
+                                                {{item.message_quantity}}
+                                            </div><!-- /.chartCircle__content-number -->
+                                            <div class="chartCircle__content-text">
+                                                messages
+                                            </div><!-- /.chartCircle__content-text -->
+                                        </div><!-- /.chartCircle__content -->
+                                    </div><!-- /.chartCircle -->
+                                    <div class="chartCircle">
+                                        <canvas class="canvasCircle" height="60px" width="60px"></canvas>
+                                        <div class="chartCircle__content">
+                                            <div class="chartCircle__content-number">
+                                                {{item.action_quantity}}
+                                            </div><!-- /.chartCircle__content-number -->
+                                            <div class="chartCircle__content-text">
+                                                actions
+                                            </div><!-- /.chartCircle__content-text -->
+                                        </div><!-- /.chartCircle__content -->
+                                    </div><!-- /.chartCircle -->
+                                </div><!-- /.teamBlock-body__charts -->
+                            </div><!-- /.teamBlock-body -->
+                            <div class="hr teamBlock-hr"></div><!-- /.hr teamBlock-hr -->
+                            <div class="teamBlock-footer clearfix">
+                                <div class="teamBlock-footer__location clearfix">
+                                    <div class="teamBlock-footer__location-logo"></div><!-- /.teamBlock-footer__location-logo -->
+                                    <div class="teamBlock-footer__location-text">
+                                        {{item.location_string}}
+                                    </div><!-- /.teamBlock-footer__location-text -->
+                                </div><!-- /.teamBlock-footer__location -->
+                                <a href={{item.email}} class="teamBlock-footer__mail clearfix">
+                                    <span class="teamBlock-footer__mail-logo"></span>
+                                    <span class="teamBlock-footer__mail-content">{{item.email}}</span>
+                                </a>
+                            </div><!-- /.teamBlock-footer -->
+                        </div><!-- /.teamBlock -->
+                    </div><!-- /.col-4 -->
+
+                </div><!-- /.row clearfix team-row -->
+            </div><!-- /.content-container__inner -->
+            <div class="divider "></div>
+        </div>
 </div>
 
 <script>
