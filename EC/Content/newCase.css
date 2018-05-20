@@ -1097,7 +1097,7 @@ header.header{
 /*----------------subNavigationTabs-----------------*/
 
 .subNavigationTabs{}
-	.ubNavigationTabs__tabs-ul{
+	.subNavigationTabs__tabs-ul{
 		display: inline-block;
 		float: left;
 		vertical-align: middle;
@@ -1120,7 +1120,37 @@ header.header{
     		color: inherit;
 			}
 
+.subNavigationIcons{
+	float: right;
+}
+	.subNavigationIcons__li{
+		float: left;
+		padding: 21px 0;
+	}
+		.subNavigationIcons__a{
+			display: block;
+		}
+			.subNavigationIcons__imgPrint{
+				display: block;
+				height: 32px;
+				width: 32px;
+			}
 
+.subNavigation-Badge{
+	font-size: 12px;
+	vertical-align: middle;
+	background-color: #CC141A;
+	border-radius: 50%;
+	color: #fff;
+	text-align: center;
+	width: 32px;
+	height: 32px;
+	line-height: 32px;
+	float: left;
+	margin-left: 30px;
+	display: block;
+	text-decoration: none;
+}
 
 /*----------------subNavigationTabs__tabContent-----------------*/
 
@@ -1556,7 +1586,6 @@ input.personDataTextBox{
 			border: 1px solid #e8eaeb;
 			border-top: none;
 			padding: 10px 0;
-			height: 62px;
 			overflow: hidden;
 		}
 			.dropDownListInBtn__logoImg{
@@ -1579,7 +1608,6 @@ input.personDataTextBox{
 				display: block;
 				width: calc( 100% - 56px );
 				padding-right: 10px;
-				height: 42px;
 				vertical-align: middle;
 			}
 				.dropDownListInBtn__contentName{
@@ -1605,7 +1633,7 @@ input.personDataTextBox{
 					color: #aeb5b7;
 					font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
 					font-size: 12px;
-					display: inline-block;
+					display: block;
 				}
 /*				.dropDownListInBtn__li:hover .dropDownListInBtn__contentPost{
 					display: inline-block;
@@ -3030,7 +3058,7 @@ input.personDataTextBox{
 			box-sizing: border-box;
 			padding: 30px 5px 5px 5px;
 			overflow: hidden;
-			white-space: nowrap;
+/*			white-space: nowrap;*/
 			text-overflow: ellipsis;
 			cursor: pointer;
 			min-height: 60px;
@@ -3038,19 +3066,26 @@ input.personDataTextBox{
 			display: block;
 		}
 
-		.dashboard-col__case.dashboard-colbody{}
+		.dashboard-col__case.dashboard-colbody{
+			white-space: initial;
+		}
 			.dashboard-col__case-text{
 				font-size: 16px;
-
+				display: inline-block;
+				vertical-align: -webkit-baseline-middle;
 				padding-left: 15%;
 			}
 		
-		.dashboard-col__severity.dashboard-colbody{}
+		.dashboard-col__severity.dashboard-colbody{
+			white-space: initial;
+		}
 			.dashboard-col__severity-text{
 				font-family: 'OpenSans-Bold', arial, verdana, sans-serif;;
 				font-size: 10px;
 				color: #aeb5b7;
 				text-transform: uppercase;
+				display: inline-block;
+				vertical-align: -webkit-baseline-middle;
 			}
 			.dashboard-col__severity-textLow{
 				color: #1ebcab !important;
@@ -3094,6 +3129,8 @@ input.personDataTextBox{
 		.dashboard-col__age.dashboard-colbody{}
 			.dashboard-col__age-text{
 				font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+				display: inline-block;
+				vertical-align: -webkit-baseline-middle;
 			}
 
 		.dashboard-col__incidentType.dashboard-colbody{}
@@ -3101,6 +3138,8 @@ input.personDataTextBox{
 				font-size: 16px;
 				white-space: normal;
 				line-height: 1.2em;
+				display: inline-block;
+				vertical-align: -webkit-baseline-middle;
 			}
 		
 		.dashboard-col__location.dashboard-colbody{}
@@ -3108,31 +3147,42 @@ input.personDataTextBox{
 				font-size: 14px;
 				white-space: normal;
 				line-height: 1.2em;
+				display: inline-block;
+				vertical-align: -webkit-baseline-middle;
 			}
 
 		.dashboard-col__reportDate.dashboard-colbody{}
 			.dashboard-col__reportDate-text{
 				font-size: 14px;
+				display: inline-block;
+				vertical-align: -webkit-baseline-middle;
 			}
 
 		.dashboard-col__messages.dashboard-colbody{}
 			.dashboard-col__messages-text{
 				font-size: 16px;
 				text-align: center;
+				display: inline-block;
+				width: 100%;
+				vertical-align: -webkit-baseline-middle;
 			}
 
 		.dashboard-col__tasks.dashboard-colbody{}
 			.dashboard-col__tasks-text{
 				font-size: 16px;
 				text-align: center;
+				display: inline-block;
+				width: 100%;
+				vertical-align: -webkit-baseline-middle;
 			}
 
 		.dashboard-col__team.dashboard-colbody{
 			padding-top: 15px;
 		}
 		.dashboard-col__alert.dashboard-colbody{}
-.team-list{
+.container ul.team-list{
 	display: block;
+	margin-top: 4px;
 }
 	.team-list__li{
 		display: inline-block;
@@ -3649,3 +3699,197 @@ body .someDropdowns{
 	background-color: transparent;
 	color: #aeb5b7;
 }
+
+/*==================================================
+================== Report Template =================
+====================================================*/
+
+.reportTemplate{
+	margin-top: 40px;
+	max-width: 880px;
+}
+.reportTemplateHeader{}
+	.reportTemplateHeader-logo{}
+
+	.reportTemplateHeader-info{}
+		.reportTemplateHeader-info__title{
+			font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
+			font-size: 12pt;
+			color: #444845;
+			text-transform: uppercase;
+		}
+		.reportTemplateHeader-info__id,
+		.reportTemplateHeader-info__date{
+			font-family: 'OpenSans-semibold', arial, verdana, sans-serif;
+			font-size: 8pt;
+			color: #444845;
+			text-align: right;
+		}
+		.reportTemplateHeader-Case{
+			font-family: 'OpenSans-semibold', arial, verdana, sans-serif;
+			font-size: 10pt;
+			color: #444845;
+			text-align: right;
+			text-transform: uppercase;
+			margin-top: 1mm;
+		}
+		.reportTemplateHeader-info__id b,
+		.reportTemplateHeader-info__date b,
+		.reportTemplateHeader-info__id strong,
+		.reportTemplateHeader-info__date strong,
+		.reportTemplateHeader-Case b,
+		.reportTemplateHeader-Case strong{
+			font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
+		}
+		.reportTemplateHeader-info__id{
+			text-transform: uppercase;
+		}
+
+.reportTemplateContent{}
+	.reportContentBlock{
+		margin-left: 11mm;
+	}
+		.reportContentBlock__title{
+			text-transform: uppercase;
+			font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
+			font-size: 9pt;
+			color: #444845;
+			margin-top: 6mm;
+			margin-bottom: 6mm;
+		}
+		.reportContentBlock__textCols{
+			margin-left: 4mm;
+			margin-bottom: 4mm;
+		}
+		.reportContentBlock__textCols p{
+			margin: 0;
+		}
+		.reportContentBlock__textCols i{
+			font-family: 'OpenSans-Light', arial, verdana, sans-serif;
+		}
+			.reportContentBlock__textColFirst{
+				width: 40mm;
+				float: left;
+				font-family: 'OpenSans-Light', arial, verdana, sans-serif;
+				font-size: 8pt;
+				color: #444845;
+			}
+			.reportContentBlock__textColRight{
+				font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+				font-size: 9pt;
+				color: #444845;
+				width: calc(100% - 43mm);
+				margin-left: 3mm;
+			}
+			.reportContentBlock__textColFirst,
+			.reportContentBlock__textColRight,
+			.reportContentBlock__textColSecond,
+			.reportContentBlock__textColThird,
+			.reportContentBlock__textColFourth{
+				display: inline-block;
+				max-width: 100%;
+				position: relative;
+				min-height: 1px;
+				box-sizing: border-box;
+				vertical-align: super;
+			}
+			.reportContentBlock__textColSecond{
+				font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+				font-size: 9pt;
+				float: left;
+				color: #444845;
+				width: 80mm;
+				margin-left: 3mm;
+			}
+			.reportContentBlock__textColThird{
+				width: 40mm;
+				float: left;
+				font-family: 'OpenSans-Light', arial, verdana, sans-serif;
+				font-size: 8pt;
+				color: #444845;
+			}
+			.reportContentBlock__textColFourth{
+				font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+				font-size: 9pt;
+				color: #444845;
+				float: left;
+				width: 40mm;
+				margin-left: 3mm;
+			}
+			.reportContentBlock__firstColTitle{
+				font-family: 'OpenSans-Light', arial, verdana, sans-serif;
+				font-size: 8pt;
+				color: #444845;
+				margin-bottom: 2mm;
+			}
+
+.reportPagesCount{
+	font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+	font-size: 12pt;
+	margin-left: 11mm;
+	margin-top: 5mm;
+	border-bottom: 1px solid #ccc;
+	display: inline-block !important;
+	padding-bottom: 1mm;
+}
+.reportRow{
+	padding-left: 3mm;
+}
+	.reportRow>div{
+		display: inline-block;
+    max-width: 100%;
+    position: relative;
+    min-height: 1px;
+    box-sizing: border-box;
+    vertical-align: super;
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+    font-size: 9pt;
+    color: #444845;
+	}
+	.reportRow_mt{
+		margin-top: 2mm;
+	}
+	.reportTitle_mt{
+		margin-top: 6mm;
+	}
+.reportContentBlock__wideText{
+	margin-left: 4mm;
+	display: inline-block;
+	max-width: 100%;
+	position: relative;
+	min-height: 1px;
+	box-sizing: border-box;
+	vertical-align: super;
+	font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+	font-size: 9pt;
+	color: #444845;
+}
+.onlyPrint{
+	display: none;
+}
+.report_m-l{
+	margin-left: 4mm;
+}
+.reportRow__twoCols{
+	margin-left: 8mm;
+}
+	.reportRow__twoCols-title,
+	.reportRow__twoCols-text{
+		display: inline-block;
+		max-width: 100%;
+		position: relative;
+		min-height: 1px;
+		box-sizing: border-box;
+		vertical-align: super;
+		font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+		font-size: 9pt;
+		color: #444845;
+		float: left;
+	}
+	.reportRow__twoCols-title{
+		width: 60mm;
+		margin-right: 3mm;
+	}
+	.reportRow__twoCols-text{
+		width: calc(100% - 63mm);
+	}
