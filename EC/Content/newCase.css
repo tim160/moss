@@ -2677,6 +2677,12 @@ input.personDataTextBox{
 			font-size: 14px;
 			color: #05b5a2;
 		}
+       .teamBlock__addNewText-title_involved{
+			text-transform: uppercase;
+			font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+			font-size: 14px;
+			color: darkslategray;
+		}
 .btn__team{
 	margin-top: 5px;
 	margin-bottom: 5px;

@@ -182,7 +182,7 @@
                     circle = task.IsCompleted() ? "greyBorder" : circle;
                     circle = (task.IsRead() && (!task.HasNewActivity())) ? "blueBorder" : circle;
                     var _assignee_photo = glb.Photo_Path_String(_assignee.photo_path, 1, 5);
-                    <li class="taskList__li" data-userid="@_assignee.id" data-state="@circle">
+                    <li class="taskList__li" data-userid="@_assignee.id" data-status="@task.TaskStatus" data-state="@circle">
                         <a href="@Url.Action("Task", "NewCase", new { id = task.TaskID })" class="taskList__a taskNameCol__taskProgress-on">
                             <span class="col-1">
                                 @if (task.file)
@@ -299,7 +299,8 @@
             else if ($(this).text() == "Show All") {
                 $(this).text("Hide completed");
             }
-            selectForName();
+            alert 
+            hideCompleted();
         });
 
         function selectForName() {
@@ -311,6 +312,19 @@
                     $(value).hide();
                 }
                 if ((filterType == 'Show All') && ($(value).data('state') == 'blueBorder')) {
+                    $(value).hide();
+                }
+            });
+        }
+
+        function hideCompleted() {
+            var filterType = $('.btnHide').text();
+            console.log(filterType);
+            $('.taskList .taskList__li').each(function (index, value) {
+                $(value).show();
+                console.log($(value).data('status'));
+
+                if ((filterType == 'Show All') && ($(value).data('status') == '2')) {
                     $(value).hide();
                 }
             });
