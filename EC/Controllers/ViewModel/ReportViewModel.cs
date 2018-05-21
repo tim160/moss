@@ -227,7 +227,8 @@ namespace EC.Controllers.ViewModel
                     var role = roles.FirstOrDefault(x => x.id == personRole.ToList()[i]);
                     result.Add(new report_non_mediator_involved()
                     {
-                        Role = role == null ? "" : role.role_en,
+                        //Role = role == null ? "" : role.role_en,
+                        role_in_report_id = role == null ? null : (int?)role.id,
                         Name = personName.ToList()[i],
                         last_name = personLastName.ToList()[i],
                         Title = personTitle.ToList()[i],

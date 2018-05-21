@@ -29,7 +29,7 @@
     <div class="contentSettings">
         <div class="blockPersonalPhotoSetting">
             <div class="blockPhotoSetting">
-                <img id="logoUser" class="PersonalPhotoBlock" ng-src="{{photo_path.replace('~', '')}}">
+                <img id="logoUser" class="PersonalPhotoBlock" ng-src="{{photo_path}}">
 
                 <input type="hidden" id="urlAjaxUploadFiles" from="User" value="@Url.Action("User", "Settings")" />
                 <input type="file" accept="image/*" id="_file" name="_file" multiple="multiple" style="width: 1px;height: 1px;opacity: 0;">

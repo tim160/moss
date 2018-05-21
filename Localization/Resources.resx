@@ -803,10 +803,10 @@
     <value>New report has been filed with Employee Confidential</value>
   </data>
   <data name="Email_Title_NewCaseInvolved" xml:space="preserve">
-    <value>New report has been filed with Employee Confidential</value>
+    <value>New report has been filed with Employee Confidential - Case admins might be involved</value>
   </data>
   <data name="Email_Title_NewCaseInvolved_CC" xml:space="preserve">
-    <value>New report has been filed with Campus Confidential</value>
+    <value>New report has been filed with Campus Confidential - Case admins might be involved</value>
   </data>
   <data name="Email_Title_NewCase_CC" xml:space="preserve">
     <value>New report has been filed with Campus Confidential</value>
@@ -1280,7 +1280,7 @@
     <value>Case Administrators</value>
   </data>
   <data name="MediatorsAssignedSecondOption" xml:space="preserve">
-    <value>The following case administrator(s) will be assigned to your case. If you feel that a Case Administrator may have a conflict of interest or would be obstructive to investigating the case, please check ‘Exclude’ below.</value>
+    <value>The following case administrator(s) may be assigned to your case. If you feel that a Case Administrator may have a conflict of interest or would be obstructive to investigating the case, please check ‘Exclude’ below.</value>
   </data>
   <data name="Mediatorsinvolved" xml:space="preserve">
     <value>Case Administrators excluded</value>
@@ -2207,7 +2207,7 @@
     <value>Is the situation an emergency?</value>
   </data>
   <data name="NARootCauseExplanation" xml:space="preserve">
-    <value>If a Root Cause that is applicable this incident is not available in the dropdown, please add in Settings.</value>
+    <value>If a Root Cause is not available in the dropdown, please add in Settings.</value>
   </data>
   <data name="Reopened" xml:space="preserve">
     <value>Reopened</value>
@@ -2593,5 +2593,8 @@
   <data name="WillSendLogin" xml:space="preserve">
     <value>We will send your login name and password by email. You can change your password in the dashboard but, for security reasons, we do not allow users to change their assigned login name.
                             We suggest recording your login name and password now as an extra precaution.</value>
+  </data>
+  <data name="NewReportsUp" xml:space="preserve">
+    <value>New Reports</value>
   </data>
 </root>

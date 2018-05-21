@@ -27,22 +27,22 @@
     int report_id = (Int32)ViewBag.report_id;
 
     ReportModel rm = new ReportModel(report_id);
-    List<report_non_mediator_involved> _involved = rm._witnesses;
+    List<report_non_mediator_involved> _involved = rm.GetWitnesses();
     UserModel um = new UserModel(user_id);
 
     bool is_spam = ((rm._investigation_status != 1) && (rm._investigation_status != 2));
     GlobalFunctions glb = new GlobalFunctions();
 
     UserModel _last_user_promotion_model = new UserModel();
-    if ((is_spam) && (rm._last_promotion != null))
+    if ((is_spam) && (rm.LastPromotion() != null))
     {
-        _last_user_promotion_model = new UserModel(rm._last_promotion.user_id);
+        _last_user_promotion_model = new UserModel(rm.LastPromotion().user_id);
     }
 
     string[] _statuses = EC.Constants.ECGlobalConstants.ReportFlowStatusesList;
 
 
-    string report_name = " - #" + rm._report.display_name + " - " + rm._secondary_type_string + " - " + rm._location_string;
+    string report_name = " - #" + rm._report.display_name + " - " + rm.SecondaryTypeString() + " - " + rm.LocationString();
     ViewBag.Title = LocalizationGetter.GetString("NewReportUp") + report_name;
 }
 <body>
@@ -85,7 +85,7 @@
                         <div class="positionTitle">
                             @if (!is_spam)
                             {
-                                if (rm._step_days_left == 1)
+                                if (rm.GetThisStepDaysLeft() == 1)
                                 {
                                     <div class="title">
                                         @GlobalRes.report_review_1day
@@ -94,7 +94,7 @@
                                 else
                                 {
                                     <div class="title">
-                                        @GlobalRes.report_review @rm._step_days_left.ToString() @GlobalRes.daysleft
+                                        @GlobalRes.report_review @rm.GetThisStepDaysLeft().ToString() @GlobalRes.daysleft
                                     </div>
                                 }
                             }
@@ -112,26 +112,26 @@
                             </tr>
                             <tr>
                                 @if (!is_spam)
-                {
+                                {
                                     <td class="openSans">@GlobalRes.Timeelapsed:</td>
                                 }
                                 else
                                 {
                                     <td class="openSans">@GlobalRes.Totaltime:</td>
                                 }
-                                @if (rm._total_days == 1)
-                {
+                                @if (rm.GetTotalDays() == 1)
+                                {
                                     <td class="openSansSemibold">1 @GlobalRes.day</td>
                                 }
                                 else
                                 {
-                                    <td class="openSansSemibold">@rm._total_days.ToString() @GlobalRes.days1</td>
+                                    <td class="openSansSemibold">@rm.GetTotalDays().ToString() @GlobalRes.days1</td>
                                 }
                             </tr>
                         </table>
                     </div>
                 </div><!--firstPosition-->
-                @if ((is_spam) && (rm._last_promotion != null))
+                @if ((is_spam) && (rm.LastPromotion() != null))
                 {
                     <div class="blockInfoSpam">
                         <div class="blockPhoto">
@@ -148,8 +148,8 @@
                         </div>
                         <div class="blockInfoTextSpam">
                             <p class="textSpamTitle">@GlobalRes.Casemarkedasspam.</p>
-                            <p class="textSpamDate">@_last_user_promotion_model._user.first_nm @_last_user_promotion_model._user.last_nm,@m_DateTimeHelper.ConvertDateToLongMonthString(@rm._last_promoted_date):</p>
-                            <p class="textSpam">@rm._last_promotion.description</p>
+                            <p class="textSpamDate">@_last_user_promotion_model._user.first_nm @_last_user_promotion_model._user.last_nm,@m_DateTimeHelper.ConvertDateToLongMonthString(@rm.LastPromotedDate()):</p>
+                            <p class="textSpam">@rm.LastPromotion().description</p>
                         </div>
                     </div>
                 }
@@ -253,9 +253,15 @@
                                 <td class="aroundSelect">Case Owner:</td>
                                 <td class="inSelect" colspan="3">
                                     <select class="" id="OwnerId" name="OwnerId" style="width: 100%">
-                                        @foreach (var item in rm.MediatorsAcceptCase)
-                    {
-                                            <option class="@(String.IsNullOrEmpty(item.Detail) ? "needquestion" : "")" value="@item.User.id">@item.FullNameWithDetail</option>
+                                        <option value="0">-------Currently has access-------</option>
+                                        @foreach (var item in rm.MediatorsAcceptCase().Where(x => !String.IsNullOrEmpty(x.Detail)))
+                                        {
+                                            <option class="" value="@item.User.id">@item.FullNameWithDetail</option>
+                                        }
+                                        <option value="0">-------Currently does not have access------ </option>
+                                        @foreach (var item in rm.MediatorsAcceptCase().Where(x => String.IsNullOrEmpty(x.Detail)))
+                                        {
+                                            <option class="needquestion" value="@item.User.id">@item.FullNameWithDetail</option>
                                         }
                                     </select>
                             </tr>
@@ -368,8 +374,8 @@
                     <span class="title">@GlobalRes.GeneralInformation</span>
                     <table class="generalInformation">
                         <tr>
-                            <td>@GlobalRes.ReportingFrom:</td>
-                            <td>@rm._country_string</td>
+                            <td>Reporting from:</td>
+                            <td>@rm.CountryString()</td>
                         </tr>
                         <tr>
                             <td>@GlobalRes.Reporterwouldliketostay:</td>
@@ -384,7 +390,7 @@
                         }
                         <tr>
                             <td>@GlobalRes.Reporteris:</td>
-                            <td>@rm._reporter_company_relation_short</td>
+                            <td>@rm.ReporterCompanyRelationShort()</td>
                         </tr>
                         @if (!String.IsNullOrEmpty(rm._report.not_current_employee))
                         {
@@ -395,11 +401,11 @@
                         }
                         <tr>
                             <td>@GlobalRes.TheIncidentHappenedIn:</td>
-                            <td>@rm._location_string</td>
+                            <td>@rm.LocationString()</td>
                         </tr>
                         <tr>
                             <td>@GlobalRes.AffectedDepartment:</td>
-                            <td>@rm._departments_string</td>
+                            <td>@rm.DepartmentsString()</td>
                         </tr>
                     </table>
                 </div>
@@ -417,27 +423,24 @@
                     </table>
                     @if (_involved.Count > 0)
                     {
-                        @*<div class="incidentDescription">*@<div class="incidentDescription">
-                            <table class="partiesInformation">
-                                @foreach (var item in _involved)
-                                {
-                                    <tr>
-                                        <td>@item.Role</td>
-                                        <td>@item.Name @item.last_name, @item.Title</td>
-                                    </tr>
-                                }
-                            </table>
-                            @*</div>*@
-                        </div>
+                        <table class="generalInformation">
+                            @foreach (var item in _involved)
+                            {
+                                <tr>
+                                    <td>@item.Role</td>
+                                    <td>@item.Name @item.last_name, @item.Title</td>
+                                </tr>
+                            }
+                        </table>
                     }
-                    @if (rm._involved_mediators_user_list.Count > 0)
+                    @if (rm.InvolvedMediatorsUserList().Count > 0)
                     {
                         <table class="generalInformation">
                             <tr>
                                 <td>@LocalizationGetter.GetString("Mediatorsinvolved", is_cc)</td>
                                 <td>&nbsp;</td>
                             </tr>
-                            @foreach (user mediators_involved in rm._involved_mediators_user_list)
+                            @foreach (user mediators_involved in rm.InvolvedMediatorsUserList())
                             {
                                 <tr>
                                     <td>@mediators_involved.first_nm @mediators_involved.last_nm</td>
@@ -449,7 +452,7 @@
                     <table class="generalInformation">
                         <tr>
                             <td>@GlobalRes.Doesmanagementknowaboutthisincident</td>
-                            <td>@rm._management_know_string</td>
+                            <td>@rm.ManagementKnowString()</td>
                         </tr>
                         @if (!String.IsNullOrEmpty(rm._report.management_know_text))
                         {
@@ -461,8 +464,8 @@
                     </table>
                     <table class="generalInformation">
                         <tr>
-                            <td>@GlobalRes.Incidentreportedoutside_q</td>
-                            <td>@rm._is_reported_outside</td>
+                            <td>Incident reported externally?</td>
+                            <td>@rm.IsReportedOutside()</td>
                         </tr>
                         @if (!String.IsNullOrEmpty(rm._report.reported_outside_text))
                         {
@@ -472,8 +475,8 @@
                             </tr>
                         }
                         <tr>
-                            <td>@GlobalRes.IsReportUrgent</td>
-                            <td>@rm._is_reported_urgent</td>
+                            <td>Is report urgent?</td>
+                            <td>@rm.IsReportedUrgent()</td>
                         </tr>
                     </table>
                 </div>
@@ -481,16 +484,16 @@
                     <span class="title">@GlobalRes.CaseInformation</span>
                     <table class="caseInformation">
                         <tr>
-                            <td>@GlobalRes.ReportingAbout:</td>
-                            <td>@rm._secondary_type_string</td>
+                            <td>Incident Type:</td>
+                            <td>@rm.SecondaryTypeString()</td>
                         </tr>
                         <tr>
                             <td>@GlobalRes.IncidentDate:</td>
-                            <td>@rm._incident_date_string</td>
+                            <td>@rm.IncidentDateStringMonthLong()</td>
                         </tr>
                         <tr>
-                            <td>@GlobalRes.isOngoing:</td>
-                            <td>@rm._is_ongoing</td>
+                            <td>@GlobalRes.isOngoing?</td>
+                            <td>@rm.IsOngoing()</td>
                         </tr>
                         @if (!String.IsNullOrEmpty(rm._report.report_frequency_text))
                         {
@@ -500,8 +503,8 @@
                             </tr>
                         }
                         <tr>
-                            <td>@GlobalRes.incidentResult:</td>
-                            <td>@rm._has_injury_damage</td>
+                            <td>@GlobalRes.incidentResult?</td>
+                            <td>@rm.HasInjuryDamage()</td>
                         </tr>
                         @if (!String.IsNullOrEmpty(rm._report.injury_damage))
                         {
@@ -592,13 +595,19 @@
         $('.acceptNewCase').click(function(){
             var self = $(this);
             var description = $('.acceptCaseNote textarea').val();
+            $('#SeverityId').removeClass('has-error');
             if ($('#SeverityId').val() === '1') {
                 $('#SeverityId').addClass('has-error');
                 return;
             }
+            $('#OwnerId').removeClass('has-error');
+            if ($('#OwnerId').val() === "0") {
+                $('#OwnerId').addClass('has-error');
+                return;
+            }
 
             if ($('#OwnerId').find(":selected").hasClass('needquestion')) {
-                if (confirm('Add mediator to Case?')) {
+                if (confirm('Alert: you have chosen a Case Owner that has not been routed to this type of case, either by location, incident type or level. Do you want to proceed?')) {
                     reopenOrAcceptCase(@Html.Raw(report_id), @Html.Raw(user_id), description);
                 }
                 return;

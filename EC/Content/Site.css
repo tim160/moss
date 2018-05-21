@@ -252,6 +252,7 @@ body{
 .contentBlock select.selectedRoleInReport {
     padding: 0;
     font-size: 14px;
+    color: #727c7e;
 }
 .dropDownList {
     background-color: white;

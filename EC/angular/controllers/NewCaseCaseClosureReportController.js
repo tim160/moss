@@ -34,6 +34,7 @@
 
         $scope.saveCrime = function () {
             NewCaseCaseClosureReportService.post({ report_id: $scope.report_id, report_cc_crime: $scope.model.report_cc_crime }, function (data) {
+                $scope.editExecutiveSummary = false;
                 $scope.refresh(data);
             });
         };
@@ -77,6 +78,11 @@
             NewCaseCaseClosureReportService.post({ report_id: $scope.report_id, report_case_closure_outcome: item.outcome }, function (data) {
                 $scope.refresh(data);
             });
+        };
+
+        $scope.executiveSummaryP = function (str) {
+            str = str || '';
+            return str.split('\n').join('<br/>');
         };
     }
 }());

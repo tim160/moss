@@ -41,7 +41,14 @@
                         r[0].company_root_cases_organizational_note === null ? '' : r[0].company_root_cases_organizational_note;
                 }
             }
+            data.note1 = data.note1 || '';
+            data.note2 = data.note2 || '';
             $scope.model = data;
+        };
+
+        $scope.noteP = function (note) {
+            note = note || '';
+            return note.split('\n').join('<br/>');
         };
 
         NewCaseInvestigationNotesService.get({ report_id: $scope.report_id }, function (data) {

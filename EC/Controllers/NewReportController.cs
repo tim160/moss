@@ -352,7 +352,7 @@ namespace EC.Controllers.ViewModel
                 glb.UpdateReportLog(user_id, 19, report_id, description, null, "");
 
                 #region Email To Mediators About Case Approved
-                foreach (user _user in rm._mediators_whoHasAccess_toReport)
+                foreach (user _user in rm.MediatorsWhoHasAccessToReport())
                 {
                     if ((_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_user.email.Trim()))
                     {
@@ -365,7 +365,7 @@ namespace EC.Controllers.ViewModel
                         eb.NextStep(_user.first_nm, _user.last_nm, rm._report.display_name);
                         body = eb.Body;
 
-                        em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_NextStep, body, true);
+                     ///   em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_NextStep, body, true);
                     }
                 }
                 #endregion
@@ -395,7 +395,7 @@ namespace EC.Controllers.ViewModel
 
 
                 #region Email To Mediators About Case re-opening
-                foreach (user _user in rm._mediators_whoHasAccess_toReport)
+                foreach (user _user in rm.MediatorsWhoHasAccessToReport())
                 {
                     if ((_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_user.email.Trim()))
                     {

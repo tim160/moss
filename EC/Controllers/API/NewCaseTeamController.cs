@@ -21,6 +21,7 @@ namespace EC.Controllers.API
 {
     public class NewCaseTeamController : BaseApiController
     {
+        GlobalFunctions glb = new GlobalFunctions();
         public class Filter
         {
             public int? ReportFlag { get; set; }
@@ -40,6 +41,7 @@ namespace EC.Controllers.API
             public string location_string { get; set; }
             public string email { get; set; }
             public bool owner { get; set; }
+            public string user_photo { get; set; }
         }
 
         [HttpGet]
@@ -65,7 +67,7 @@ namespace EC.Controllers.API
                 success = success
             };
 
-            foreach (var item in rm._involved_mediators_user_list.ToList())
+            foreach (var item in rm.InvolvedMediatorsUserList().ToList())
             {
                 um = new UserModel(item.id);
                 m.involved_mediators_user_list.Add(new UserAdv
@@ -76,10 +78,11 @@ namespace EC.Controllers.API
                     action_quantity = um.CaseActionsQuantity(id),
                     location_string = um._location_string,
                     email = um._user.email,
-                    owner = rm._report_owners.FirstOrDefault(x => x.user_id == item.id & x.status_id == 2) != null,
+                    user_photo = glb.Photo_Path_String(item.photo_path, 1, 5),
+                    owner = rm.ReportOwners().FirstOrDefault(x => x.user_id == item.id & x.status_id == 2) != null,
                 });
             }
-            foreach (var item in rm._mediators_whoHasAccess_toReport.ToList())
+            foreach (var item in rm.MediatorsWhoHasAccessToReport().ToList())
             {
                 um = new UserModel(item.id);
                 m.mediators_whoHasAccess_toReport.Add(new UserAdv
@@ -90,10 +93,11 @@ namespace EC.Controllers.API
                     action_quantity = um.CaseActionsQuantity(id),
                     location_string = um._location_string,
                     email = um._user.email,
-                    owner = rm._report_owners.FirstOrDefault(x => x.user_id == item.id & x.status_id == 2) != null,
+                    user_photo = glb.Photo_Path_String(item.photo_path, 1, 5),
+                    owner = rm.ReportOwners().FirstOrDefault(x => x.user_id == item.id & x.status_id == 2) != null,
                 });
             }
-            foreach (var item in rm._available_toAssign_mediators.ToList())
+            foreach (var item in rm.AvailableToAssignMediators().ToList())
             {
                 um = new UserModel(item.id);
                 m.available_toAssign_mediators.Add(new UserAdv
@@ -104,7 +108,8 @@ namespace EC.Controllers.API
                     action_quantity = um.CaseActionsQuantity(id),
                     location_string = um._location_string,
                     email = um._user.email,
-                    owner = rm._report_owners.FirstOrDefault(x => x.user_id == item.id & x.status_id == 2) != null,
+                    user_photo = glb.Photo_Path_String(item.photo_path, 1, 5),
+                    owner = rm.ReportOwners().FirstOrDefault(x => x.user_id == item.id & x.status_id == 2) != null,
                 });
             }
 

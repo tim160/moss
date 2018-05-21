@@ -1280,7 +1280,7 @@
     <value>Case Administrators</value>
   </data>
   <data name="MediatorsAssignedSecondOption" xml:space="preserve">
-    <value>The following case administrator(s) will be assigned to your case. Mark off any case administrators who you think may be involved in the incident.</value>
+    <value>The following case administrator(s) may be assigned to your case. Mark off any case administrators who you think may be involved in the incident.</value>
   </data>
   <data name="Mediatorsinvolved" xml:space="preserve">
     <value>Case Administrators excluded</value>

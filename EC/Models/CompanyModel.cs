@@ -95,21 +95,17 @@ namespace EC.Models
         public List<company_location> Locations(int companyId, int? statusId = null)
         {
             if(statusId.HasValue)
-                return db.company_location.Where(s => (s.company_id == companyId && s.status_id == statusId)).ToList();
+                return db.company_location.Where(s => (s.company_id == companyId && s.status_id == statusId)).OrderBy(t => t.location_en).ToList();
             else
-                return db.company_location.Where(s => s.company_id == companyId).ToList();
-
-        }
-        public List<company_location> LocationsOfIncident(int companyId) {
-            return db.company_location.Where(s => (s.company_id == companyId)).ToList();
+                return db.company_location.Where(s => s.company_id == companyId).OrderBy(t => t.location_en).ToList();
         }
 
         public List<company_outcome> Outcomes(int companyId, int? statusId = null)
         {
             if (statusId.HasValue)
-                return db.company_outcome.Where(s => (s.company_id == companyId && s.status_id == statusId)).ToList();
+                return db.company_outcome.Where(s => (s.company_id == companyId && s.status_id == statusId)).OrderBy(t => t.outcome_en).ToList();
             else
-                return db.company_outcome.Where(s => s.company_id == companyId).ToList();
+                return db.company_outcome.Where(s => s.company_id == companyId).OrderBy(t => t.outcome_en).ToList();
 
         }
 
@@ -234,52 +230,11 @@ namespace EC.Models
          */
         public List<company_department> CompanyDepartments(int companyId)
         {
-            return db.company_department.Where(s => s.company_id == companyId).ToList();
+            return db.company_department.Where(s => s.company_id == companyId).OrderBy(t => t.department_en).ToList();
         }
         public List<company_department> CompanyDepartmentsActive(int companyId)
         {
-            return db.company_department.Where(s => s.company_id == companyId && s.status_id == 2).ToList();
-        }
-
-
-        public Hashtable CompanyIncidentTypes(int companyId, int? statusId = null)
-        {
-            Hashtable _location = new Hashtable();
-
-
-            if (db.company_secondary_type.Any(o => o.company_id == companyId))
-            {
-                List<company_secondary_type> _list = db.company_secondary_type.Where(s => s.company_id == companyId && s.status_id == 2).ToList();
-                foreach (company_secondary_type cst in _list)
-                {
-                    if (statusId.HasValue)
-                    {
-                        if (cst.status_id == statusId)
-                            //_location.Add(cst.type_id, cst.secondary_type_en); I change it for id - need to delete item
-                            _location.Add(cst.id, cst.secondary_type_en);
-                    }
-                    else
-                        //_location.Add(cst.type_id, cst.secondary_type_en);I change it for id - need to delete item
-                        _location.Add(cst.id, cst.secondary_type_en);
-                }
-            }
-            else
-            {
-                List<secondary_type_mandatory> _list = db.secondary_type_mandatory.Where(s => s.type_id == 1).OrderBy(s => s.weight) .ToList();
-                foreach (secondary_type_mandatory stm in _list)
-                {
-                    if (statusId.HasValue)
-                    {
-                        if (stm.status_id == statusId)
-                            _location.Add(stm.id, stm.secondary_type_en);
-                    }
-                    else
-                        _location.Add(stm.id, stm.secondary_type_en);
-                }
-            }
-            return _location;
-
-
+            return db.company_department.Where(s => s.company_id == companyId && s.status_id == 2).OrderBy(t => t.department_en).ToList();
         }
 
         /// <summary>
@@ -288,14 +243,14 @@ namespace EC.Models
         /// <param name="companyId"></param>
         /// <param name="statusId"></param>
         /// <returns></returns>
-        public Hashtable CompanyReporterTypes(int companyId, int? statusId = null)
+        public List<DictionaryEntry> CompanyReporterTypes(int companyId, int? statusId = null)
         {
             Hashtable _reporter_type = new Hashtable();
 
 
             if (db.company_relationship.Any(o => o.company_id == companyId))
             {
-                List<company_relationship> _list = db.company_relationship.Where(s => s.company_id == companyId && s.status_id == 2).ToList();
+                List<company_relationship> _list = db.company_relationship.Where(s => s.company_id == companyId && s.status_id == 2).OrderBy(t => t.relationship_en).ToList();
                 foreach (company_relationship cst in _list)
                 {
                     if (statusId.HasValue)
@@ -315,10 +270,48 @@ namespace EC.Models
                     _reporter_type.Add(stm.id, stm.relationship_en);
                 }
             }
-            return _reporter_type;
+            return _reporter_type.Cast<DictionaryEntry>().OrderBy(entry => entry.Value).ToList();
+        }
 
+        public List<DictionaryEntry> CompanyIncidentTypes(int companyId, int? statusId = null)
+        {
+            Hashtable _incident_types = new Hashtable();
+
+            if (db.company_secondary_type.Any(o => o.company_id == companyId))
+            {
+                List<company_secondary_type> _list = db.company_secondary_type.Where(s => s.company_id == companyId && s.status_id == 2).OrderBy(t => t.secondary_type_en).ToList();
+                foreach (company_secondary_type cst in _list)
+                {
+                    if (statusId.HasValue)
+                    {
+                        if (cst.status_id == statusId)
+                            //_location.Add(cst.type_id, cst.secondary_type_en); I change it for id - need to delete item
+                            _incident_types.Add(cst.id, cst.secondary_type_en);
+                    }
+                    else
+                        //_location.Add(cst.type_id, cst.secondary_type_en);I change it for id - need to delete item
+                        _incident_types.Add(cst.id, cst.secondary_type_en);
+                }
+            }
+            else
+            {
+                List<secondary_type_mandatory> _list = db.secondary_type_mandatory.Where(s => s.type_id == 1).OrderBy(s => s.weight).ToList();
+                foreach (secondary_type_mandatory stm in _list)
+                {
+                    if (statusId.HasValue)
+                    {
+                        if (stm.status_id == statusId)
+                            _incident_types.Add(stm.id, stm.secondary_type_en);
+                    }
+                    else
+                        _incident_types.Add(stm.id, stm.secondary_type_en);
+                }
+            }
+            return _incident_types.Cast<DictionaryEntry>().OrderBy(entry => entry.Value).ToList();
 
         }
+
+
         public company GetById(int id)
         {
             ID = id;

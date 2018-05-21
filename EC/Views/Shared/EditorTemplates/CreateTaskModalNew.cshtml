@@ -43,20 +43,20 @@
             <div class="select-container case-modal__selectContainer ddlSignOffMediator">
                 <select id="ddlSignOffMediator" class="case-modal__selectOption" op>
                     <option value="0" disabled selected>Select an option...</option>
-                    @foreach (user _user in rm._mediators_whoHasAccess_toReport.Where(x => x.user_permissions_approve_case_closure == 1))
+                    @foreach (user _user in rm.MediatorsWhoHasAccessToReport().Where(x => x.user_permissions_approve_case_closure == 1))
                     {
                         <option value=@_user.id>@_user.first_nm @_user.last_nm</option>
                     }
                     @*foreach (user _user in rm.MediatorsApproveCaseClosure)
                     {
-                        if (rm._mediators_whoHasAccess_toReport.FirstOrDefault(x => x.id == _user.id && x.user_permissions_approve_case_closure == 1) == null)
+                        if (rm.MediatorsWhoHasAccessToReport().FirstOrDefault(x => x.id == _user.id && x.user_permissions_approve_case_closure == 1) == null)
                         {
                             <option value=@_user.id>@_user.first_nm @_user.last_nm</option>
                         }
                     }*@
-                    @foreach (user _user in rm._available_toAssign_mediators)
+                    @foreach (user _user in rm.AvailableToAssignMediators())
                     {
-                        if (rm._mediators_whoHasAccess_toReport.FirstOrDefault(x => x.id == _user.id && x.user_permissions_approve_case_closure == 1) == null)
+                        if (rm.MediatorsWhoHasAccessToReport().FirstOrDefault(x => x.id == _user.id && x.user_permissions_approve_case_closure == 1) == null)
                         {
                             <option data-massign="true" value=@_user.id>@_user.first_nm @_user.last_nm</option>
                         }
@@ -83,6 +83,22 @@
     </div><!-- /.case-modal__selectRow -->
     <div class="case-modal__linkBlockBottom clearfix">
         <a href="#" id="requestToclose" class="case-modal__linkBtn whiteBtn" value="@normal_button_value">Request to close case</a>
+    </div><!-- /.case-modal__linkBlockBottom -->
+</div>
+
+<div id="alertModal" class="modal case-modal">
+    <a href="#" class="closeLink modal-close" rel="modal:close"></a>
+    <div class="case-modal__title"><p>The following fields are required to be completed before the case can be closed.</p></div>
+    <ul>
+        <li>Incident Type(s)</li>
+        <li>Involved Parties</li>
+        <li>Facts Established</li>
+        <li>Investigation Methodology</li>
+        <li>Executive Summary</li>
+        <li>Recommended Outcomes for Subject(s)</li>
+    </ul>
+    <div class="case-modal__linkBlockBottom clearfix">
+        <a href="#" id="requestToclose" rel="modal:close" class="case-modal__linkBtn whiteBtn">Close</a>
     </div><!-- /.case-modal__linkBlockBottom -->
 </div>
 
@@ -125,6 +141,10 @@
                 }).done(function (data) {
 
                     if (data == -1) {
+                    }
+
+                    if (data == -2) {
+                        $('#alertModal').modal();
                     }
 
                     if (data == 1) {

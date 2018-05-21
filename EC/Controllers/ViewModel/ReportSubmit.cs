@@ -80,7 +80,7 @@ namespace EC.Controllers.ViewModel
                 }
             }
 
-            var locations = companyModel.LocationsOfIncident(companyModel._company.id).ToList();
+            var locations = companyModel.Locations(companyModel._company.id).ToList();
             if(locations != null)
             {
                 var temp = from n in locations where n.id == model.locationsOfIncident select n.location_en;
@@ -239,7 +239,10 @@ namespace EC.Controllers.ViewModel
             for(int i=0; i< personRoles.Count; i++)
             {
                 role_in_report nameRole = roleInReport.Where(m => m.id == personRoles[i]).FirstOrDefault();
-                personRole.Add(nameRole.role_en);
+                if (nameRole != null)
+                {
+                    personRole.Add(nameRole.role_en);
+                }
             }
         }
     }

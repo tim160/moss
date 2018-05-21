@@ -8,6 +8,7 @@ using EC.Models.Database;
 using EC.Models.ViewModels;
 using EC.Models;
 using EC.Models.ECModel;
+using Rotativa.MVC;
 
 namespace EC.Controllers
 {
@@ -26,7 +27,11 @@ namespace EC.Controllers
             ReportModel rm = new ReportModel(report_id);
             if (!rm.HasAccessToReport(user.id))
                 return RedirectToAction("Index", "Account");
-
+            if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
+            {
+                // case is not approved to work on it yet, need to approve first. if == 7 - its spam, so they will share the view.
+                return RedirectToAction("Index", "NewReport", new { id = report_id });
+            }
 
             int user_id = user.id;
 
@@ -65,6 +70,12 @@ namespace EC.Controllers
             if (!rm.HasAccessToReport(user.id))
                 return RedirectToAction("Index", "Account");
 
+            if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
+            {
+                // case is not approved to work on it yet, need to approve first. if == 7 - its spam, so they will share the view.
+                return RedirectToAction("Index", "NewReport", new { id = report_id });
+            }
+
             int user_id = user.id;
             ViewBag.user_id = user_id;
             ViewBag.report_id = report_id;
@@ -94,6 +105,12 @@ namespace EC.Controllers
             ReportModel rm = new ReportModel(report_id);
             if (!rm.HasAccessToReport(user.id))
                 return RedirectToAction("Index", "Account");
+
+            if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
+            {
+                // case is not approved to work on it yet, need to approve first. if == 7 - its spam, so they will share the view.
+                return RedirectToAction("Index", "NewReport", new { id = report_id });
+            }
 
             #region EC-CC Viewbag
             ViewBag.is_cc = is_cc;
@@ -127,6 +144,12 @@ namespace EC.Controllers
             if (!rm.HasAccessToReport(user.id))
                 return RedirectToAction("Index", "Account");
 
+            if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
+            {
+                // case is not approved to work on it yet, need to approve first. if == 7 - its spam, so they will share the view.
+                return RedirectToAction("Index", "NewReport", new { id = report_id });
+            }
+
             int user_id = user.id;
 
             glb.UpdateReportRead(user_id, report_id);
@@ -148,6 +171,12 @@ namespace EC.Controllers
             ReportModel rm = new ReportModel(report_id);
             if (!rm.HasAccessToReport(user.id))
                 return RedirectToAction("Index", "Account");
+
+            if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
+            {
+                // case is not approved to work on it yet, need to approve first. if == 7 - its spam, so they will share the view.
+                return RedirectToAction("Index", "NewReport", new { id = report_id });
+            }
 
             int user_id = user.id;
             UserModel um = new UserModel(user_id);
@@ -190,6 +219,12 @@ namespace EC.Controllers
             if (!rm.HasAccessToReport(user.id))
                 return RedirectToAction("Index", "Account");
 
+            if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
+            {
+                // case is not approved to work on it yet, need to approve first. if == 7 - its spam, so they will share the view.
+                return RedirectToAction("Index", "NewReport", new { id = report_id });
+            }
+
             int user_id = user.id;
             UserModel um = new UserModel(user_id);
 
@@ -212,6 +247,12 @@ namespace EC.Controllers
             ReportModel rm = new ReportModel(report_id);
             if (!rm.HasAccessToReport(user.id))
                 return RedirectToAction("Index", "Account");
+
+            if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
+            {
+                // case is not approved to work on it yet, need to approve first. if == 7 - its spam, so they will share the view.
+                return RedirectToAction("Index", "NewReport", new { id = report_id });
+            }
 
             int user_id = user.id;
             UserModel um = new UserModel(user_id);
@@ -236,6 +277,12 @@ namespace EC.Controllers
             if (!rm.HasAccessToReport(user.id))
                 return RedirectToAction("Index", "Account");
 
+            if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
+            {
+                // case is not approved to work on it yet, need to approve first. if == 7 - its spam, so they will share the view.
+                return RedirectToAction("Index", "NewReport", new { id = report_id });
+            }
+
             int user_id = user.id;
             ViewBag.user_id = user_id;
             ViewBag.report_id = report_id;
@@ -258,7 +305,14 @@ namespace EC.Controllers
             if (!rm.HasAccessToReport(user.id))
                 return RedirectToAction("Index", "Account");
 
+
             glb.UpdateReportRead(user.id, report_id);
+
+            if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
+            {
+                // case is not approved to work on it yet, need to approve first. if == 7 - its spam, so they will share the view.
+                return RedirectToAction("Index", "NewReport", new { id = report_id });
+            }
 
             ViewBag.rm = rm;
             ViewBag.report_id = report_id;
@@ -288,6 +342,25 @@ namespace EC.Controllers
                 .ThenBy(x => x.file_nm)
                 .ToList();
             return View();
+        }
+
+        public ActionResult AttachmentDelete(int id, int report_id)
+        {
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            if (user == null || user.id == 0)
+                return RedirectToAction("Index", "Account");
+
+            var att = db.attachment.FirstOrDefault(x => x.id == id && x.report_id == report_id);
+            if (att != null)
+            {
+                if (att.user_id == user.id)
+                {
+                    db.attachment.Remove(att);
+                    db.SaveChanges();
+                }
+            }
+
+            return RedirectToAction("Attachments", new { report_id  = report_id });
         }
 
         [HttpPost]
@@ -384,6 +457,7 @@ namespace EC.Controllers
             if (user == null || user.id == 0)
                 return RedirectToAction("Index", "Account");
 
+
             int user_id = user.id;
 
             TaskExtended tsk = new TaskExtended(id.Value, user_id);
@@ -460,6 +534,37 @@ namespace EC.Controllers
             }
 
             return View();
+        }
+
+        public ActionResult ReassignTask(int id, int mediator_id)
+        {
+            var userModel = new UserModel();
+            userModel.ReassignTask(id, mediator_id);
+
+            return RedirectToAction("Task", new {id = id });
+        }
+
+        public ActionResult PrintToPdf(int id, Guid? rg, Guid? ug, bool pdf = false)
+        {
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            if ((user == null) && (rg.HasValue) && (ug.HasValue))
+            {
+                user = db.user.FirstOrDefault(x => x.guid == ug);
+            }
+            if (user == null || user.id == 0)
+            {
+                return RedirectToAction("Index", "Account");
+            }
+
+            if (pdf)
+            {
+                var report = db.report.FirstOrDefault(x => x.id == id);
+                return new ActionAsPdf("PrintToPdf", new { id = id, rg = report.guid, ug = user.guid });
+            }
+
+            var rm = new ReportModel(id);
+            ViewBag.user_id = user.id;
+            return View(rm);
         }
     }
 }

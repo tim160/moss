@@ -5,6 +5,19 @@
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
 }
 
+<style>
+    .oldstyle {
+        display: table !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .moldstyle {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+</style>
+
 <div class="blockSettings">
     @{
         int active = 6;
@@ -13,7 +26,7 @@
 
 
     <div class="contentCompanyProfile contentCompanyProfile">
-        <div class="contentSettings">
+        <div class="contentSettings oldstyle">
             <div class="blockLanguages">
                 <p>This version is only available in English</p>
                 <div class="tableLanguage">

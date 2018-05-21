@@ -33,9 +33,25 @@
             return '';
         };
 
+        $scope.severityClass = function (report) {
+            if (report.severity_id === 2) {
+                return 'dashboard-col__severity-textLow';
+            }
+            if (report.severity_id === 5) {
+                return 'dashboard-col__severity-textCritical';
+            }
+            if (report.severity_id === 3) {
+                return 'dashboard-col__severity-textMedium';
+            }
+            if (report.severity_id === 4) {
+                return 'dashboard-col__severity-textHigh';
+            }
+            return '';
+        };
+
         $scope.isOwner = function (report, mediator) {
-            for (var i = 0; i < report.AdvInfo.owners.length; i++) {
-                if (report.AdvInfo.owners[i].user_id === mediator.id) {
+            for (var i = 0; i < report.owners.length; i++) {
+                if (report.owners[i].user_id === mediator.id) {
                     return true;
                 }
             }
@@ -47,38 +63,15 @@
                 $('.headerBlockTextRight > span').text(data.Title);
                 for (var i = 0; i < data.Reports.length; i++) {
                     var r = $filter('filter')(data.ReportsAdv, { 'id': data.Reports[i].report_id }, true);
-                    if ((r != null) && (r.length > 0)) {
+                    /*if ((r != null) && (r.length > 0)) {
                         data.Reports[i].AdvInfo = r[0];
                         data.Reports[i].total_days = r[0].total_days;
                         data.Reports[i].case_dt_s = r[0].case_dt_s;
                         data.Reports[i].cc_is_life_threating = r[0].cc_is_life_threating;
                         data.Reports[i].mediators = r[0].mediators;
                         data.Reports[i].severity_s = r[0].severity_s;
-                    }
-
-                    var r = $filter('filter')(data.Users, { 'id': data.Reports[i].last_sender_id }, true);
-                    r = r.length === 0 ? null : r[0];
-                    if (r === null) {
-                        r = {
-                            photo_path: '/Content/Icons/noPhoto.png',
-                            first_nm: '',
-                            last_nm: '',
-                        };
-                    }
-                    r.sb_full_name = (r.first_nm + ' ' + r.last_nm).replace(' ', '_');
-                    data.Reports[i].Last_sender = r;
-
-                    var r = $filter('filter')(data.Users, { 'id': data.Reports[i].previous_sender_id }, true);
-                    r = r.length === 0 ? null : r[0];
-                    if (r === null) {
-                        r = {
-                            photo_path: '/Content/Icons/noPhoto.png',
-                            first_nm: '',
-                            last_nm: '',
-                        };
-                    }
-                    r.sb_full_name = (r.first_nm + ' ' + r.last_nm).replace(' ', '_');
-                    data.Reports[i].Previous_sender = r;
+                        data.Reports[i].severity_id = r[0].severity_id;
+                    }*/
                 }
 
                 $scope.reports = data.Reports;
@@ -89,7 +82,7 @@
         $scope.refresh($scope.mode);
 
         $scope.openCase = function (id) {
-            if ($scope.mode === 3) {
+            if ($scope.mode === 3 || $scope.mode === 4) {
                 window.location = '/NewReport/' +id;
             } else {
                 window.location = '/newCase/Index/' + id;

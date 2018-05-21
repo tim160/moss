@@ -3625,7 +3625,7 @@ namespace EC.Localization.App_GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The following case administrator(s) will be assigned to your case. Mark off any case administrators who you think may be involved in the incident..
+        ///   Looks up a localized string similar to The following case administrator(s) may be assigned to your case. Mark off any case administrators who you think may be involved in the incident..
         /// </summary>
         internal static string MediatorsAssignedSecondOption {
             get {

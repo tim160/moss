@@ -26,7 +26,7 @@
     user _assignee = new user();
     UserModel temp_user = new UserModel();
     string _temp = "";
-    List<user> _mediators_whoHasAccess_toReport = rm._mediators_whoHasAccess_toReport;
+    List<user> _mediators_whoHasAccess_toReport = rm.MediatorsWhoHasAccessToReport();
 
     TaskExtended _tsk = new TaskExtended(task_id, user_id);
 
@@ -303,119 +303,119 @@
                 <div>
 
                     @*<!--ADD ACTIVITY BLOCK -->
-                        @if ((rm._report != null) && (rm._report.id != 0))
-                        {
-                            List<user> mediators = rm._mediators_whoHasAccess_toReport;
-                            <div class="blockActivity" style="width: 260px; background-color: rgb(171, 185, 187); display: none;">
-                                <div class="headerActivity">
-                                    <div class="blockCaseMediators">
-                                        @if (mediators.Count > 0)
-                                        {
-                                            <p class="titleCaseMediators">@GlobalRes.Casemediators:</p>
+    @if ((rm._report != null) && (rm._report.id != 0))
+    {
+        List<user> mediators = rm.MediatorsWhoHasAccessToReport();
+        <div class="blockActivity" style="width: 260px; background-color: rgb(171, 185, 187); display: none;">
+            <div class="headerActivity">
+                <div class="blockCaseMediators">
+                    @if (mediators.Count > 0)
+                    {
+                        <p class="titleCaseMediators">@GlobalRes.Casemediators:</p>
 
-                                            <div class="displayMediators">
-                                                @foreach (user _mediator in mediators)
-                                                {
-                                                    <div class="blockMediator">
-                                                        <div class="blockPhoto">
-                                                            <div class="photoPersonal">
-                                                                @if (_mediator.photo_path.Trim() != "")
-                                                                {
-                                                                    <img src='@Url.Content(_mediator.photo_path.Trim())' />
-                                                                }
-                                                                else
-                                                                {
-                                                                    <img src='@Url.Content("~/Content/Icons/noPhoto.png")' />
-                                                                }
-                                                            </div>
-                                                        </div>
-                                                        <div class="personalText">
-                                                            <p class="title">@_mediator.first_nm @_mediator.last_nm</p>
-                                                            @if (_mediator.title_ds.Trim().Length > 0)
-                                                            {
-                                                                <p class="text"> @_mediator.title_ds</p>
-                                                            }
-                                                        </div>
-                                                    </div><!--blockMediator-->
-                                                }
-                                            </div><!--displayMediators-->
-                                        }
-                                    </div><!--blockCaseMediators-->
-                                </div><!--headerActivity-->
-                                @foreach (report_log _log in actions_log)
-                                {
-                                    _userActivity = um.GetById(_log.user_id);
-                                    _month_name = glb.GetShortMonth(_log.created_dt.Month);
-                                    _action = glb.GetActionById(_log.action_id.Value);
-                                    _second_name = "";
-                                    _string_to_add = "";
-
-                                    if (_log.second_user_id.HasValue)
-                                    {
-                                        _second_user = um.GetById(_log.second_user_id.Value);
-                                        _second_name = (_second_user.first_nm + " " + _second_user.last_nm).Trim();
-                                    }
-
-                                    _sender_name = "";
-                                    _sender_title = "";
-
-                                    if (_log.user_id == user_id)
-                                    {
-                                        _sender_name = GlobalRes.You + ",";
-                                    }
-                                    else
-                                    {
-                                        _sender_name = (_userActivity.first_nm + " " + _userActivity.last_nm).Trim() + ",";
-                                    }
-
-                                    if (_userActivity.role_id == 8)
-                                    {
-                                        {
-                                            _sender_title = " (" + GlobalRes.Reporter + ")";
-                                            _sender_name = "";
-                                        }
-                                    }
-                                    else
-                                    {
-                                        _sender_title = _userActivity.title_ds.Trim();
-                                    }
-
-                                    <div class="contentActivity">
-                                        <div class="contentBlockActivity">
-                                            <div class="blockImg">
-                                                <img src='@Url.Content(_action.icon_path)'>
-                                            </div>
-                                            <div class="blockInfo">
-                                                <span class="date">@_log.created_dt.Day.ToString() @_month_name</span>
-                                                <div class="topText">
-                                                    <span class="title">
-                                                        <span class="reviewStage">@_action.description_en</span>
-                                                        @if (_second_name.Length > 0) { _second_name = ": " + _second_name; }    @_second_name
-                                                        @if ((_log.string_to_add != null) && (_log.string_to_add.Trim().Length > 0))
-                                                        {
-                                                            _string_to_add = ": " + _log.string_to_add;
-                                                        }
-                                                        @_string_to_add
-                                                    </span>
-                                                </div>
-                                                <p class="text">
-                                                    @if (_sender_name != "")
-                                                    {
-                                                        <span class="personalName">@_sender_name</span>
-                                                        <br>
-                                                    }
-                                                    <span class="personalSenderTitle">@_sender_title</span>
-                                                </p>
-                                            </div>
+                        <div class="displayMediators">
+                            @foreach (user _mediator in mediators)
+                            {
+                                <div class="blockMediator">
+                                    <div class="blockPhoto">
+                                        <div class="photoPersonal">
+                                            @if (_mediator.photo_path.Trim() != "")
+                                            {
+                                                <img src='@Url.Content(_mediator.photo_path.Trim())' />
+                                            }
+                                            else
+                                            {
+                                                <img src='@Url.Content("~/Content/Icons/noPhoto.png")' />
+                                            }
                                         </div>
-
-                                        <hr class="HrBorder">
-
                                     </div>
-                                }
+                                    <div class="personalText">
+                                        <p class="title">@_mediator.first_nm @_mediator.last_nm</p>
+                                        @if (_mediator.title_ds.Trim().Length > 0)
+                                        {
+                                            <p class="text"> @_mediator.title_ds</p>
+                                        }
+                                    </div>
+                                </div><!--blockMediator-->
+                            }
+                        </div><!--displayMediators-->
+                    }
+                </div><!--blockCaseMediators-->
+            </div><!--headerActivity-->
+            @foreach (report_log _log in actions_log)
+            {
+                _userActivity = um.GetById(_log.user_id);
+                _month_name = glb.GetShortMonth(_log.created_dt.Month);
+                _action = glb.GetActionById(_log.action_id.Value);
+                _second_name = "";
+                _string_to_add = "";
 
-                            </div><!--blockActivity-->
-                        }*@
+                if (_log.second_user_id.HasValue)
+                {
+                    _second_user = um.GetById(_log.second_user_id.Value);
+                    _second_name = (_second_user.first_nm + " " + _second_user.last_nm).Trim();
+                }
+
+                _sender_name = "";
+                _sender_title = "";
+
+                if (_log.user_id == user_id)
+                {
+                    _sender_name = GlobalRes.You + ",";
+                }
+                else
+                {
+                    _sender_name = (_userActivity.first_nm + " " + _userActivity.last_nm).Trim() + ",";
+                }
+
+                if (_userActivity.role_id == 8)
+                {
+                    {
+                        _sender_title = " (" + GlobalRes.Reporter + ")";
+                        _sender_name = "";
+                    }
+                }
+                else
+                {
+                    _sender_title = _userActivity.title_ds.Trim();
+                }
+
+                <div class="contentActivity">
+                    <div class="contentBlockActivity">
+                        <div class="blockImg">
+                            <img src='@Url.Content(_action.icon_path)'>
+                        </div>
+                        <div class="blockInfo">
+                            <span class="date">@_log.created_dt.Day.ToString() @_month_name</span>
+                            <div class="topText">
+                                <span class="title">
+                                    <span class="reviewStage">@_action.description_en</span>
+                                    @if (_second_name.Length > 0) { _second_name = ": " + _second_name; }    @_second_name
+                                    @if ((_log.string_to_add != null) && (_log.string_to_add.Trim().Length > 0))
+                                    {
+                                        _string_to_add = ": " + _log.string_to_add;
+                                    }
+                                    @_string_to_add
+                                </span>
+                            </div>
+                            <p class="text">
+                                @if (_sender_name != "")
+                                {
+                                    <span class="personalName">@_sender_name</span>
+                                    <br>
+                                }
+                                <span class="personalSenderTitle">@_sender_title</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <hr class="HrBorder">
+
+                </div>
+            }
+
+        </div><!--blockActivity-->
+    }*@
 
                     <!--END ADD A BLOCK-->
                     @*@Html.Partial("~/Views/PartialViews/_ReportDetailsLeft.cshtml",

@@ -4,7 +4,7 @@
 @using EC.App_LocalResources;
 
 @{
-    ViewBag.Title = "Tasks";
+    ViewBag.Title = "Messages";
     Layout = "~/Views/Shared/IndexPages/LayoutNewCases.cshtml";
     List<TaskExtended> tasks = (List<TaskExtended>)ViewBag.tasks;
 
@@ -52,7 +52,7 @@
                                 <a href="#!" class="navContentMessages-tabContent__a clearfix" ng-click="$parent.activeMessage = message">
                                     <span class="col-1">
                                         <span class="profileImage navContentMessages-tabContent__profileImg">
-                                            <img src="sender_photo" alt="" class="profileImage__img" />
+                                            <img ng-src="{{message.sender_photo}}" alt="" class="profileImage__img" />
                                             <span class="profile-status online"></span>
                                         </span>
                                     </span>
@@ -100,7 +100,7 @@
                                 <a href="#!" class="navContentMessages-tabContent__a clearfix" ng-click="$parent.activeMessage = message">
                                     <span class="col-1">
                                         <span class="profileImage navContentMessages-tabContent__profileImg">
-                                            <img src="sender_photo" alt="" class="profileImage__img" />
+                                            <img ng-src="{{message.sender_photo}}" alt="" class="profileImage__img" />
                                             <span class="profile-status online"></span>
                                         </span>
                                     </span>

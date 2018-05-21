@@ -2,9 +2,9 @@
 @{
     var report_id = (Int32)ViewBag.report_id;
     EC.Models.ReportModel rm = new EC.Models.ReportModel(report_id);
-    string style = "background-color: #" + rm._color_code;
+    string style = "background-color: #" + rm.ColorCode();
     var user_id = (Int32)ViewBag.user_id;
-    string report_string = string.Format(GlobalRes.ReportPreviewNotification_noDate, rm.Get_reporter_name(user_id), rm._secondary_type_string, rm._location_string);
+    string report_string = string.Format(GlobalRes.ReportPreviewNotification_noDate, rm.Get_reporter_name(user_id), rm.SecondaryTypeString(), rm.LocationString());
 }
 <a href="/newReport/@report_id">
     <div class="newReport" style="@style">

@@ -73,6 +73,14 @@
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.3.2.0.0\lib\net45\NLog.dll</HintPath>
     </Reference>
+    <Reference Include="Rotativa.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.Core.2.0.0\lib\net45\Rotativa.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Rotativa.MVC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.MVC.2.0.3\lib\net45\Rotativa.MVC.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Activities" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
@@ -235,6 +243,7 @@
     <Content Include="angular\controllers\SettingsCompanySecondaryTypeController.js" />
     <Content Include="angular\controllers\SettingsCompanyCaseAdminDepartmentController.js" />
     <Content Include="angular\controllers\CasesController.js" />
+    <Content Include="angular\controllers\SettingsDisclaimerController.js" />
     <Content Include="angular\controllers\SettingsUserEditController.js" />
     <Content Include="angular\controllers\EmployeeAwarenessPosterController.js" />
     <Content Include="angular\controllers\EmployeeAwarenessController.js" />
@@ -251,6 +260,7 @@
     <Content Include="angular\services\SettingsCompanySecondaryTypeService.js" />
     <Content Include="angular\services\EmployeeAwarenessPosterService.js" />
     <Content Include="angular\services\CasesService.js" />
+    <Content Include="angular\services\SettingsDisclaimerService.js" />
     <Content Include="angular\services\SettingsUserEditService.js" />
     <Content Include="angular\services\EmployeeAwarenessService.js" />
     <Content Include="App\components\activeHover\activeHover.js" />
@@ -289,6 +299,8 @@
     <Content Include="Content\css\fontello.css" />
     <Content Include="Content\emails\CampusSecurityAlert.html" />
     <Content Include="Content\emails\CaseCloseApprove.html" />
+    <Content Include="Content\emails\CaseCloseApprovePlatformManager.html" />
+    <Content Include="Content\emails\CaseDeadlinePastDue.html" />
     <Content Include="Content\emails\ForgetPasswordNew.html" />
     <Content Include="Content\emails\MediatorInvitedUserCreated.html" />
     <Content Include="Content\emails\SeniorMediatorCaseConfirm.html" />
@@ -385,6 +397,7 @@
     <Content Include="Content\Icons\pepper-sm-faded-red.png" />
     <Content Include="Content\Icons\pepper-sm-faded.png" />
     <Content Include="Content\Icons\pepperPhoto.png" />
+    <Content Include="Content\Icons\print-icon.png" />
     <Content Include="Content\Icons\report-icon-white.png" />
     <Content Include="Content\Icons\report-icon.png" />
     <Content Include="Content\Icons\reviewStage.png" />
@@ -465,6 +478,9 @@
     <Content Include="Content\images\svg-icons\upper-right.svg" />
     <Content Include="Content\images\tailoredBg.jpg" />
     <Content Include="Content\images\trust-img.png" />
+    <Content Include="Content\images\ui-bg_glass_75_ffffff_1x400.png" />
+    <Content Include="Content\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\images\ui-icons_454545_256x240.png" />
     <Content Include="Content\images\wall-siteview-img-CC.jpg" />
     <Content Include="Content\images\wall-siteview-img.jpg" />
     <Content Include="Content\images\warning-img.png" />
@@ -510,6 +526,7 @@
     <Content Include="Content\img\logos\demo_logo.jpg" />
     <Content Include="Content\img\logos\stark.jpg" />
     <Content Include="Content\img\nextStep.png" />
+    <Content Include="Content\img\pdf.png" />
     <Content Include="Content\img\print.png" />
     <Content Include="Content\img\printSelected.png" />
     <Content Include="Content\img\radio.png" />
@@ -653,6 +670,7 @@
     <Content Include="Content\main.css" />
     <Content Include="Content\MainStyle.css" />
     <Content Include="Content\newCase.css" />
+    <Content Include="Content\print-reports.css" />
     <Content Include="Content\reportCss.css" />
     <Content Include="Content\reportDashboard.css" />
     <Content Include="Content\Site.css" />
@@ -671,6 +689,19 @@
     <Content Include="html\500.html" />
     <Content Include="html\503.html" />
     <Content Include="html\reset.css" />
+    <Content Include="Libs\angular-animate\angular-animate.js" />
+    <Content Include="Libs\angular-animate\angular-animate.min.js" />
+    <Content Include="Libs\angular-http\angular-http.js" />
+    <Content Include="Libs\angular-nvd3\dist\angular-nvd3.js" />
+    <Content Include="Libs\angular-nvd3\dist\angular-nvd3.min.js" />
+    <Content Include="Libs\angular-resource\angular-resource.js" />
+    <Content Include="Libs\angular-resource\angular-resource.min.js" />
+    <Content Include="Libs\angular-sanitize\angular-sanitize.js" />
+    <Content Include="Libs\angular-sanitize\angular-sanitize.min.js" />
+    <Content Include="Libs\angular\angular.js" />
+    <Content Include="Libs\angular\angular.min.js" />
+    <Content Include="Libs\ng-file-upload\ng-file-upload.js" />
+    <Content Include="Libs\ng-file-upload\ng-file-upload.min.js" />
     <Content Include="Models\Database\ECEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ECEntities.edmx</DependentUpon>
@@ -974,6 +1005,7 @@
     <Content Include="Content\fonts\Lato2OFL\Lato-SemiboldItalic.ttf" />
     <Content Include="Content\fonts\Lato2OFL\Lato-Thin.ttf" />
     <Content Include="Content\fonts\Lato2OFL\Lato-ThinItalic.ttf" />
+    <Content Include="App_Browsers\qt.browser" />
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <None Include="Properties\PublishProfiles\ec-code.pubxml" />
     <None Include="Properties\PublishProfiles\ec-dev.pubxml" />
@@ -982,6 +1014,7 @@
     <Content Include="patches\1_5.sql" />
     <Content Include="patches\1_7.sql" />
     <Content Include="PrivacyStatement.html" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\daterangepicker.js" />
     <None Include="Properties\PublishProfiles\test.pubxml" />
     <None Include="Scripts\lib\jquery-1.10.2.intellisense.js" />
@@ -1190,6 +1223,8 @@
     <Content Include="Views\Shared\Partial\_SettingsCompanyLocationTemplate.cshtml" />
     <Content Include="Views\NewCase\Task.cshtml" />
     <Content Include="Views\Settings\CaseRouting.cshtml" />
+    <Content Include="Views\Report\PrintToPdf.cshtml" />
+    <Content Include="Views\NewCase\PrintToPdf.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1229,6 +1264,7 @@
     <Compile Include="Controllers\API\SettingsCompanyCaseAdminDepartmentController.cs" />
     <Compile Include="Controllers\API\SettingsCompanySecondaryTypeController.cs" />
     <Compile Include="Controllers\API\CasesController.cs" />
+    <Compile Include="Controllers\API\SettingsDisclaimerController.cs" />
     <Compile Include="Controllers\API\SettingsUserEditController.cs" />
     <Compile Include="Controllers\API\EmployeeAwarenessPosterController.cs" />
     <Compile Include="Controllers\API\EmployeeAwarenessController.cs" />
@@ -1325,6 +1361,12 @@
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\company_department.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\company_disclamer_page.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\company_disclamer_uploads.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\company_invitation.cs">
@@ -1606,6 +1648,9 @@
     <Compile Include="Models\ViewModels\CaseMessagesViewModel.cs" />
     <Compile Include="Models\ViewModels\CasePreviewViewModel.cs" />
     <Compile Include="Models\ViewModels\HeaderPos.cs" />
+    <Compile Include="Models\ViewModels\QuickUserViewModel.cs" />
+    <Compile Include="Models\ViewModels\UsersReportIDsViewModel.cs" />
+    <Compile Include="Models\ViewModels\UsersUnreadReportsNumberViewModel.cs" />
     <Compile Include="Models\ViewModels\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -1621,6 +1666,7 @@
     <Compile Include="Utils\Auth\User.cs" />
     <Compile Include="Utils\Auth\UserIndentity .cs" />
     <Compile Include="Utils\CustomContractResolver .cs" />
+    <Compile Include="Utils\ImageUtils.cs" />
     <Compile Include="Utils\MVCExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

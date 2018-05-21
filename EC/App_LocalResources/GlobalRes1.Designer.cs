@@ -97,6 +97,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accept Case.
+        /// </summary>
+        public static string AcceptCaseUp {
+            get {
+                return ResourceManager.GetString("AcceptCaseUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Accept terms and conditions.
         /// </summary>
         public static string Accepttermsconditions {
@@ -223,7 +232,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add new behavioral factors.
+        ///   Looks up a localized string similar to Add behavioral factors.
         /// </summary>
         public static string AddNewBehavioralFactors {
             get {
@@ -241,7 +250,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add new external influences.
+        ///   Looks up a localized string similar to Add external influences.
         /// </summary>
         public static string AddNewExternalInfluences {
             get {
@@ -277,7 +286,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add new organizational influences.
+        ///   Looks up a localized string similar to Add organizational influences.
         /// </summary>
         public static string AddNewOrganizationalInfluences {
             get {
@@ -2878,7 +2887,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Has case been reported to anyone outside the organization?.
+        ///   Looks up a localized string similar to Has the incident been reported to anyone outside the organization?.
         /// </summary>
         public static string Hascasereportedoutside {
             get {
@@ -3364,7 +3373,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Is Report Urgent?.
+        ///   Looks up a localized string similar to Is the situation an emergency?.
         /// </summary>
         public static string IsReportUrgent {
             get {
@@ -3373,7 +3382,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Is Report Urgent?.
+        ///   Looks up a localized string similar to Is the situation an emergency?.
         /// </summary>
         public static string IsReportUrgent_q {
             get {
@@ -3679,7 +3688,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The following case administrator(s) will be assigned to your case. Mark off any case administrators who you think may be involved in the incident..
+        ///   Looks up a localized string similar to The following case administrator(s) may be assigned to your case. Mark off any case administrators who you think may be involved in the incident..
         /// </summary>
         public static string MediatorsAssignedSecondOption {
             get {
@@ -6118,7 +6127,7 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are reporting:.
+        ///   Looks up a localized string similar to You are reporting the following Incident Type(s):.
         /// </summary>
         public static string YouReport {
             get {

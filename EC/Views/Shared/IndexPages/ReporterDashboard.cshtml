@@ -1,4 +1,6 @@
 ﻿@using EC.App_LocalResources;
+@using EC.Models;
+
 @{
 
     bool? is_cc = ViewBag.is_cc;
@@ -20,8 +22,8 @@
     EC.Models.UserModel um = new EC.Models.UserModel(user_id);
 
     int report_id = um._reporter_report_id;
-    EC.Models.ReportModel rm = new EC.Models.ReportModel(report_id);
-    EC.Models.CompanyModel cm = new EC.Models.CompanyModel();
+    ReportModel rm = new ReportModel(report_id);
+    CompanyModel cm = new CompanyModel();
     string[] _statuses = EC.Constants.ECGlobalConstants.ReportFlowStatusesList;
     int _investigation_status = rm._investigation_status;
     if (_investigation_status == 6)
@@ -62,23 +64,15 @@
 
             EC.Models.Database.attachment _attachment;
 
-            string _logo = _company.path_en;
+            string _logo = cm.getLogoCompany(company_id);
             if (_logo.Trim().Length == 0)
             {
-                _logo = "http://report.employeeconfidential.com/Content/img/secondLogo.jpg";
+                _logo = "http://report.employeeconfidential.com/Content/img/logo.png";
             }
             <div class="main">
                 <div class="header">
                     <img class="logo" src='@Url.Content("~/Content/img/ReportDashboardLogo.png")' />
-                    @*<div class="headerMenuAbout">
-                            <ul>
-                                <li style="padding-right: 32px;">
-                                    <a href="http://employeeconfidential.com/#footer">@GlobalRes.About</a>
-                                </li>
-                                <li style="padding-right: 26px;"><a href="http://employeeconfidential.com/PrivacyStatement.html">@GlobalRes.Faq</a></li>
-                                <li><a href="http://employeeconfidential.com/TermsOfService.html">@GlobalRes.TermsAndConditions</a></li>
-                            </ul>
-                        </div>*@
+ 
                     <div class="headerMenu">
                         <ul>
                             <li class="logIn">@GlobalRes.Logout</li>
@@ -93,7 +87,7 @@
                         <div class="title">@GlobalRes.Case @rm._report.display_name</div>
                         <div class="status">
                             @GlobalRes.Casestatus<br />
-                            <span class="review">@rm._investigation_status_string</span>
+                            <span class="review">@rm.InvestigationStatusString()</span>
                         </div>
                     </div>
                     <div class="headerPos">
@@ -133,7 +127,7 @@
 <script>
     $(document).ready(function () {
         $(".logIn").click(function () {
-            location.href = '@Url.Action("Logout", "Base")';
+            location.href = '@Url.Action("CheckStatus", "Service")';
         });
     });
 </script>

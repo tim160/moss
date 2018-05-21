@@ -130,7 +130,7 @@ namespace EC.Controllers
             ViewBag.user_id = user_id;
             ViewBag.rm = rm;
             ViewBag.um = um;
-            ViewBag.report_name = " - #" + rm._report.display_name + " - " + rm._secondary_type_string + " - " + rm._location_string;
+            ViewBag.report_name = " - #" + rm._report.display_name + " - " + rm.SecondaryTypeString() + " - " + rm.LocationString();
 
             ViewBag.attachmentFiles = getAttachmentFiles(id.Value);
             if (popup != null)
@@ -162,7 +162,7 @@ namespace EC.Controllers
 
                     #region Email to Case Admin
 
-                    foreach (user _user in rm._mediators_whoHasAccess_toReport)
+                    foreach (user _user in rm.MediatorsWhoHasAccessToReport())
                     {
                         if ((_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_user.email.Trim()) && (_user.id != newMessage.sender_id))
                         {
@@ -250,7 +250,7 @@ namespace EC.Controllers
             UserModel um = new UserModel(user_id);
             ViewBag.rm = rm;
             ViewBag.um = um;
-            ViewBag.report_name = " - #" + rm._report.display_name + " - " + rm._secondary_type_string + " - " + rm._location_string;
+            ViewBag.report_name = " - #" + rm._report.display_name + " - " + rm.SecondaryTypeString() + " - " + rm.LocationString();
             CaseMessagesModel cm = new CaseMessagesModel(id.Value, 1, user_id);
 
             glb.UpdateReadMessages(id.Value, user_id, 1);
@@ -279,7 +279,7 @@ namespace EC.Controllers
 
                     #region Email to Case Admin
 
-                    foreach (user _user in rm._mediators_whoHasAccess_toReport)
+                    foreach (user _user in rm.MediatorsWhoHasAccessToReport())
                     {
                         if ((_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_user.email.Trim()) && (_user.id != newMessage.sender_id))
                         {
@@ -368,7 +368,7 @@ namespace EC.Controllers
           
             CaseMessagesModel cm = new CaseMessagesModel(id.Value, 3, user_id);
             ViewBag.rm = rm;
-            ViewBag.report_name = " - #" + rm._report.display_name + " - " + rm._secondary_type_string + " - " + rm._location_string;
+            ViewBag.report_name = " - #" + rm._report.display_name + " - " + rm.SecondaryTypeString() + " - " + rm.LocationString();
             // user
             ViewBag.report_id = id; // 167-171
             ViewBag.user_id = user_id;
@@ -553,7 +553,7 @@ namespace EC.Controllers
             {
                 ViewBag.popup = popup;
             }
-            ViewMediatorsClass _mediators = new ViewMediatorsClass { _involved_mediators_user_list = rm._involved_mediators_user_list, _mediators_whoHasAccess_toReport = rm._mediators_whoHasAccess_toReport, _available_toAssign_mediators = rm._available_toAssign_mediators };
+            ViewMediatorsClass _mediators = new ViewMediatorsClass { _involved_mediators_user_list = rm.InvolvedMediatorsUserList(), _mediators_whoHasAccess_toReport = rm.MediatorsWhoHasAccessToReport(), _available_toAssign_mediators = rm.AvailableToAssignMediators() };
             return View(_mediators);
         }
 
@@ -569,16 +569,16 @@ namespace EC.Controllers
         {
             ReportModel rm = new ReportModel(id);
 
-            ViewBag._involved_mediators_user_list = rm._involved_mediators_user_list;
-            ViewBag._mediators_whoHasAccess_toReport = rm._mediators_whoHasAccess_toReport;
-            ViewBag._available_toAssign_mediators = rm._available_toAssign_mediators;
+            ViewBag._involved_mediators_user_list = rm.InvolvedMediatorsUserList();
+            ViewBag._mediators_whoHasAccess_toReport = rm.MediatorsWhoHasAccessToReport();
+            ViewBag._available_toAssign_mediators = rm.AvailableToAssignMediators();
         }
 
         [HttpPost]
         public JsonResult GetCMsList(int id)
         {
             ReportModel rm = new ReportModel(id);
-            List<int> _list = rm._mediators_whoHasAccess_toReport.OrderBy(item=>item.role_id).Select(item =>item.id).ToList();
+            List<int> _list = rm.MediatorsWhoHasAccessToReport().OrderBy(item=>item.role_id).Select(item =>item.id).ToList();
             return Json(_list, JsonRequestBehavior.AllowGet);
         }
 
@@ -832,7 +832,7 @@ namespace EC.Controllers
 
                 #region Email To Mediators About Case Update
                 rm = new ReportModel(report_id);
-                foreach (user _user in rm._mediators_whoHasAccess_toReport)
+                foreach (user _user in rm.MediatorsWhoHasAccessToReport())
                 {
                     if ((_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_user.email.Trim()))
                     {
@@ -845,7 +845,7 @@ namespace EC.Controllers
                         eb.NextStep(_user.first_nm, _user.last_nm, rm._report.display_name);
                         body = eb.Body;
 
-                        em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_NextStep, body, true);
+       ////////                 em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_NextStep, body, true);
                     }
                 }
                 #endregion
@@ -997,7 +997,7 @@ namespace EC.Controllers
 
                 #region Email To Mediators About Case Update
                 rm = new ReportModel(report_id);
-                foreach (user _user in rm._mediators_whoHasAccess_toReport)
+                foreach (user _user in rm.MediatorsWhoHasAccessToReport())
                 {
                     if ((_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_user.email.Trim()))
                     {
@@ -1007,10 +1007,10 @@ namespace EC.Controllers
 
                         to.Add(_user.email.Trim());
 
-                        eb.NextStep(_user.first_nm, _user.last_nm, rm._report.display_name);
+         //////               eb.NextStep(_user.first_nm, _user.last_nm, rm._report.display_name);
                         body = eb.Body;
 
-                        em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_NextStep, body, true);
+         ///////               em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_NextStep, body, true);
                     }
                 }
                 #endregion
@@ -1029,7 +1029,6 @@ namespace EC.Controllers
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return -1;
-
 
             int mediator_id = Convert.ToInt16(Request["user_id"]);
             int report_id = Convert.ToInt16(Request["report_id"]);
@@ -1057,14 +1056,46 @@ namespace EC.Controllers
             {
                 return -1;
             }
-            // we don't need this error anymore
-       /*     if (promotion_value == ECGlobalConstants.investigation_status_resolution)
+            //validate
+            if (!rm.getSecondaryTypeMandatory().Any())
             {
-                CompanyModel cm = new CompanyModel(um._user.company_id);
-                if (cm.AllMediators(cm._company.id, true, ECLevelConstants.level_escalation_mediator).Count == 0)
-                    return 0;
+                return -2;
             }
-            */
+            if ((!db.report_mediator_involved.Any(x => x.report_id == report_id)) && (!db.report_non_mediator_involved.Any(x => x.report_id == report_id)))
+            {
+                return -2;
+            }
+            var note1 = db.report_inv_notes.FirstOrDefault(x => x.report_id == report_id & x.type == 1)?.note;
+            var note2 = db.report_inv_notes.FirstOrDefault(x => x.report_id == report_id & x.type == 2)?.note;
+
+            if ((String.IsNullOrEmpty(note1)) || (String.IsNullOrEmpty(note2)))
+            {
+                return -2;
+            }
+
+            /*var report_cc_crime = db.report_cc_crime
+                .Where(x => x.report_id == report_id)
+                .FirstOrDefault();
+            if ((report_cc_crime == null) || (String.IsNullOrEmpty(report_cc_crime.executive_summary)))
+            {
+                return -2;
+            }*/
+
+            var list = db.report_non_mediator_involved.Where(x => x.report_id == report_id && x.role_in_report_id == 3).Select(x => x.id).ToList();
+            var list_cco = db.report_case_closure_outcome.Where(x => x.report_id == report_id).ToList();
+            if ((list.Any()) && (!list_cco.Any(x => x.non_mediator_involved_id.HasValue && list.Contains(x.non_mediator_involved_id.Value))))
+            {
+                return -2;
+            }
+
+            // we don't need this error anymore
+            /*     if (promotion_value == ECGlobalConstants.investigation_status_resolution)
+                 {
+                     CompanyModel cm = new CompanyModel(um._user.company_id);
+                     if (cm.AllMediators(cm._company.id, true, ECLevelConstants.level_escalation_mediator).Count == 0)
+                         return 0;
+                 }
+                 */
             bool _new = userModel.ResolveCase(report_id, mediator_id, description, promotion_value, reason_id,sign_off_mediator_id);
 
             if (!db.report_mediator_assigned.Any(x => x.report_id == report_id && x.mediator_id == sign_off_mediator_id))
@@ -1094,7 +1125,7 @@ namespace EC.Controllers
                 #endregion
 
                 #region Email To Mediators About Case Update
-                foreach (user _user in rm._mediators_whoHasAccess_toReport)
+                foreach (user _user in rm.MediatorsWhoHasAccessToReport())
                 {
                     if ((_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_user.email.Trim()))
                     {
@@ -1104,18 +1135,18 @@ namespace EC.Controllers
 
                         to.Add(_user.email.Trim());
                         UserModel um_temp = new UserModel(_user.id);
-                        if ((promotion_value == ECGlobalConstants.investigation_status_resolution) && ((um_temp._user.role_id == 4) || (um_temp._user.role_id == 5)))
+                        if ((promotion_value == ECGlobalConstants.investigation_status_resolution || promotion_value == ECGlobalConstants.investigation_status_completed) && um_temp._user.id == sign_off_mediator_id)
                         {
                             eb.CaseCloseApprove( rm._report.display_name);
+                            body = eb.Body;
+                            em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_NextStep, body, true);
                         }
-                        else
+                        else if((promotion_value == ECGlobalConstants.investigation_status_resolution || promotion_value == ECGlobalConstants.investigation_status_completed) && um_temp._user.role_id == 4)
                         {
-                            eb.NextStep(_user.first_nm, _user.last_nm, rm._report.display_name);
-                        
+                            eb.CaseCloseApprovePlatformManager(rm._report.display_name);
+                            body = eb.Body;
+                            em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_NextStep, body, true);
                         }
-                        body = eb.Body;
-
-                        em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_NextStep, body, true);
                     }
                 }
                 #endregion

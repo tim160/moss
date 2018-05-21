@@ -37,7 +37,7 @@
 
 @if ((rm._report != null) && (rm._report.id != 0))
 {
-    List<user> mediators = rm._mediators_whoHasAccess_toReport;
+    List<user> mediators = rm.MediatorsWhoHasAccessToReport();
 
 <p class="upperCaseTimeline">@GlobalRes.Timeline</p>
     <div class="blockActivity">

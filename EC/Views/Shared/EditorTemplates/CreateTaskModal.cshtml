@@ -52,13 +52,13 @@
                     <div class="dropdown3">
                         <label id="ddlSignOffMediator" data-value="">@GlobalRes.Selectanoption</label><span class="arrow-down"></span>
                         <ul>
-                            @foreach (user _user in rm._mediators_whoHasAccess_toReport)
+                            @foreach (user _user in rm.MediatorsWhoHasAccessToReport())
                             {
                                 <li data-value=@_user.id>@_user.first_nm @_user.last_nm</li>
                             }
-                            @foreach (user _user in rm.MediatorsApproveCaseClosure)
+                            @foreach (user _user in rm.MediatorsApproveCaseClosure())
                             {
-                                if (rm._mediators_whoHasAccess_toReport.FirstOrDefault(x => x.id == _user.id) == null)
+                                if (rm.MediatorsWhoHasAccessToReport().FirstOrDefault(x => x.id == _user.id) == null)
                                 {
                                     <li data-value=@_user.id>@_user.first_nm @_user.last_nm</li>
                                 }

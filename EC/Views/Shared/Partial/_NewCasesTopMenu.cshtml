@@ -41,6 +41,12 @@
     }
 }
 
+<style>
+    .mainNavigationTabs__rightLinks-li.active .mainNavigationTabs__tab-name {
+        color: #fff !important;
+    }
+</style>
+
 <div class="container-fluid">
     <ol class="progress-steps progress-steps_5-steps clearfix">
         <li class="progress-steps__li @(investigationstatus > 0 ? "done": "") @(investigationstatus == 1 ? "current": "")">
@@ -63,7 +69,7 @@
 @{ 
     string action = ViewContext.RouteData.Values["action"].ToString().ToLower();
 }
-<div class="container mainNavigationTabs_color" ng-controller="NewCaseTopMenuController">
+<div class="container mainNavigationTabs_color" ng-controller="NewCaseTopMenuController" ng-init="init(@_report_id)">
     <div class="mainNavigationTabs clearfix">
         <ul class="mainNavigationTabs__tabs-ul clearfix">
             <li class="mainNavigationTabs__tab-link @(action == "index" ? "active" : "")" data-tab="mainTab-1">
@@ -78,7 +84,7 @@
                 </a>
                 <div class="mainNavigationTabs__badgeCount"></div>
             </li>
-            <li class="mainNavigationTabs__tab-link @(action == "tasks" ? "active" : "") mainNavigationTabs__badgeCount_enable" data-tab="mainTab-3">
+            <li class="mainNavigationTabs__tab-link @((action == "tasks" || action == "task") ? "active" : "") mainNavigationTabs__badgeCount_enable" data-tab="mainTab-3">
                 <a href="@Url.Action("Tasks", new { report_id = ViewBag.report_id })">
                     <div class="mainNavigationTabs__tab-name">Tasks</div>
                 </a>
@@ -87,7 +93,7 @@
                     <div class="mainNavigationTabs__badgeCount">@unread_task_number_string</div>
                 }
             </li>
-            <li class="mainNavigationTabs__tab-link @(action == "messages" ? "active" : "") mainNavigationTabs__badgeCount_enable" data-tab="mainTab-4">
+            <li class="mainNavigationTabs__tab-link @(action == "messages" || action == "reporter" ? "active" : "") mainNavigationTabs__badgeCount_enable" data-tab="mainTab-4">
                 <a href="@Url.Action("Messages", new { report_id = ViewBag.report_id })">
                     <div class="mainNavigationTabs__tab-name">Messages</div>
                 </a>

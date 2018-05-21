@@ -29,7 +29,7 @@
     List<user> _mediators_whoHasAccess_toReport = ViewBag._mediators_whoHasAccess_toReport;
     List<user> _available_toAssign_mediators = ViewBag._available_toAssign_mediators;
 
-    string report_name = " - #" + rm._report.display_name + " - " + rm._secondary_type_string + " - " + rm._location_string;
+    string report_name = " - #" + rm._report.display_name + " - " + rm.SecondaryTypeString() + " - " + rm.LocationString();
     ViewBag.Title = GlobalRes.CaseTeamUp + report_name;
 
     <link type="text/css" href="~/Content/caseTasks.css" rel="stylesheet">
@@ -71,7 +71,7 @@
                     </div>
                 </div>
 
-                if (((rm._investigation_status == ECGlobalConstants.investigation_status_closed) && (rm._previous_investigation_status_id == ECGlobalConstants.investigation_status_resolution)) || ((rm._investigation_status == ECGlobalConstants.investigation_status_closed) && (rm._previous_investigation_status_id == ECGlobalConstants.investigation_status_completed)))
+                if (((rm._investigation_status == ECGlobalConstants.investigation_status_closed) && (rm._previous_investigation_status_id() == ECGlobalConstants.investigation_status_resolution)) || ((rm._investigation_status == ECGlobalConstants.investigation_status_closed) && (rm._previous_investigation_status_id() == ECGlobalConstants.investigation_status_completed)))
                 {
                     ris = rm._previous_investigation_status();
                     UserModel temp_um = new UserModel(ris.user_id);
@@ -279,7 +279,7 @@
                                     ((_user.role_id == 6) || (_user.role_id == 7)) 
                                     && (rm._investigation_status != ECGlobalConstants.investigation_status_closed) 
                                     && (um._user.role_id != ECLevelConstants.level_mediator)
-                                    && (rm._report_owners.FirstOrDefault(x => x.user_id == _user.user_id & x.status_id == 2) == null)
+                                    && (rm.ReportOwners().FirstOrDefault(x => x.user_id == _user.user_id & x.status_id == 2) == null)
                                     )
                                 {
                                     <label class="close" data-userid="@_user.id"></label>
@@ -309,7 +309,7 @@
                                     <span>@GlobalRes.Legalcounsel.ToLower()</span>
                                 </p>
                             }
-                            @if (rm._report_owners.FirstOrDefault(x => x.user_id == _user.id & x.status_id == 2) != null)
+                            @if (rm.ReportOwners().FirstOrDefault(x => x.user_id == _user.id & x.status_id == 2) != null)
                             {
                                 <p class="blockMediator">
                                     <span>Case owner</span>
@@ -325,7 +325,7 @@
                             }
                             @if (
                                 ((_user.role_id == 4) || (_user.role_id == 5)) 
-                                && (rm._report_owners.FirstOrDefault(x => x.user_id == _user.id & x.status_id == 2) == null)
+                                && (rm.ReportOwners().FirstOrDefault(x => x.user_id == _user.id & x.status_id == 2) == null)
                             )
                             {
                                 <p class="addCaseOwner">

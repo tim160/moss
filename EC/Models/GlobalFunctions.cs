@@ -19,6 +19,7 @@ using System.Web.Script.Serialization;
 using log4net;
 using EC.Common.Util;
 using EC.Common.Base;
+using System.Net;
 
 /// <summary>
 /// Global Functions for EC Project
@@ -293,7 +294,7 @@ public class GlobalFunctions
             rm = new ReportModel(_report.id);
             _status = 0;
 
-            if ((rm._last_promoted_date >= _real_start) && (rm._last_promoted_date <= _real_end))
+            if ((rm.LastPromotedDate() >= _real_start) && (rm.LastPromotedDate() <= _real_end))
             {
                 _selected_reports.Add(_report);
                 _status = rm._investigation_status;
@@ -796,7 +797,7 @@ public class GlobalFunctions
 
             foreach (DataRow _dr in dt.Rows)
             {
-                if (_dr["name"].ToString().ToLower().Trim() == rm._location_string.ToLower().Trim())
+                if (_dr["name"].ToString().ToLower().Trim() == rm.LocationString().ToLower().Trim())
                 {
                     _dr["val"] = Convert.ToInt32(_dr["val"]) + 1;
                     is_in_table = true;
@@ -805,7 +806,7 @@ public class GlobalFunctions
             if (!is_in_table)
             {
                 dr = dt.NewRow();
-                dr["name"] = rm._location_string.Trim();
+                dr["name"] = rm.LocationString().Trim();
                 dr["val"] = 1;
                 dt.Rows.Add(dr);
             }
@@ -1075,7 +1076,7 @@ public class GlobalFunctions
 
             foreach (DataRow _dr in dt.Rows)
             {
-                if (_dr["name"].ToString().ToLower().Trim() == rm._location_string.ToLower().Trim())
+                if (_dr["name"].ToString().ToLower().Trim() == rm.LocationString().ToLower().Trim())
                 {
                     _dr["val"] = Convert.ToInt32(_dr["val"]) + 1;
                     is_in_table = true;
@@ -1084,7 +1085,7 @@ public class GlobalFunctions
             if (!is_in_table)
             {
                 dr = dt.NewRow();
-                dr["name"] = rm._location_string.Trim();
+                dr["name"] = rm.LocationString().Trim();
                 dr["val"] = 1;
                 dt.Rows.Add(dr);
             }
@@ -1736,7 +1737,7 @@ public class GlobalFunctions
             rm = new ReportModel(_report.id);
             _status = 0;
 
-            if ((rm._last_promoted_date >= _real_start) && (rm._last_promoted_date <= _real_end))
+            if ((rm.LastPromotedDate() >= _real_start) && (rm.LastPromotedDate() <= _real_end))
             {
                 _selected_reports.Add(_report);
                 _status = rm._investigation_status;
@@ -2255,13 +2256,13 @@ public class GlobalFunctions
         company_relation_ids = company_relation_ids.Distinct().ToList();
 
         /////mandatory
-        List<relationship> _all_mandatory_relationships = db.relationship.Where(item => (mandatory_relation_ids.Contains(item.id))).ToList();
+    /*    List<relationship> _all_mandatory_relationships = db.relationship.Where(item => (mandatory_relation_ids.Contains(item.id))).ToList();
         foreach (relationship _temp_relationship_mandatory in _all_mandatory_relationships)
         {
             ///     _list_types.Add(new Tuple<string, int, int, bool>(_temp_secondary_type_mandatory.secondary_type_en, _temp_secondary_type_mandatory.id, 1, true));
             _list_types.Add(new Tuple<string, int, int, bool>(_temp_relationship_mandatory.relationship_en, _temp_relationship_mandatory.id, 1, true));
 
-        }
+        }*/
         /////company_secondary_type
         List<company_relationship> _all_secondary_relationships = db.company_relationship.Where(item => (company_relation_ids.Contains(item.id))).ToList();
         foreach (company_relationship _temp_company_relationship in _all_secondary_relationships)
@@ -2590,5 +2591,53 @@ public class GlobalFunctions
 
             em.Send(to, cc, EC.App_LocalResources.GlobalRes.CampusSecurityAlert, body, true);
         }
+    }
+
+    public string Photo_Path_String(string photo_path, int param, int photo_user_role)
+    {
+        string base_url = ConfigurationManager.AppSettings["SiteRoot"];
+        string _photo_path = "";
+        bool file_exist = false;
+
+        if (photo_path != "")
+        {
+            try
+            {
+                WebRequest request = WebRequest.Create(photo_path);
+                request.Timeout = 2;
+                WebResponse response = request.GetResponse();
+                file_exist = true;
+            }
+            catch (Exception ex)
+            {
+                file_exist = false;
+            }
+        }
+
+
+        if (photo_path != "" && file_exist)
+        {
+            _photo_path = photo_path;
+        }
+        else
+        {
+            if (param == 1)
+            {
+                _photo_path = base_url + "/Content/Icons/noPhoto.png";
+            }
+            else if (param == 2)
+            {
+                _photo_path = base_url +"/Content/Icons/settingsPersonalNOPhoto.png";
+            }
+            else if (param == 3)
+            {
+                _photo_path = base_url + "/Content/Icons/settingsPersonalNOPhoto.png";
+            }
+            if (photo_user_role == EC.Constants.ECLevelConstants.level_informant)
+            {
+                _photo_path = base_url + "/Content/Icons/anonimousReporterIcon.png";
+            }
+        }
+        return _photo_path;
     }
 }

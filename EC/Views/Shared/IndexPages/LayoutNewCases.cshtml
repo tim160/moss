@@ -57,17 +57,17 @@
         _report_id = (int)ViewBag.report_id;
         rm = new EC.Models.ReportModel(_report_id);
 
-        report_name = rm._secondary_type_string + " - " + rm._location_string + " - #" + rm._report.display_name;
+        report_name = rm.SecondaryTypeString() + " - " + rm.LocationString() + " - #" + rm._report.display_name;
         report_name_code = LocalizationGetter.GetString("Newreport") + ": #" + rm._report.display_name;
-        report_color = rm._color_descr;
-        report_color_code = rm._color_code;
+        report_color = rm.ColorDescr();
+        report_color_code = rm.ColorCode();
         investigationstatus = rm._investigation_status;
     }
 
     string[] _statuses = ECGlobalConstants.ReportFlowStatusesList;
 
     string same_mediator_warning = LocalizationGetter.GetString("AddFurtherNotes");
-    if (rm != null && user_id == rm._last_investigation_status_user_id)
+    if (rm != null && user_id == rm.Last_investigation_status_user_id())
     {
         same_mediator_warning = LocalizationGetter.GetString("RecommendSecond1") + " " + LocalizationGetter.GetString("RecommendSecond2");
     }
@@ -109,12 +109,17 @@
     <script type="text/javascript" src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="~/Scripts/lib/jquery-ui.min.js"></script>
     <script src="~/Scripts/View/reportSummary.js"></script>
+
     <script src="~/Libs/angular/angular.min.js"></script>
     <script src="~/Libs/angular-http/angular-http.js"></script>
     <script src="~/Libs/angular-resource/angular-resource.min.js"></script>
     <script src="~/Libs/angular-animate/angular-animate.min.js"></script>
+    <script src="~/Libs/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="~/Libs/angular-nvd3/dist/angular-nvd3.min.js"></script>
+    <script src="~/Libs/ng-file-upload/ng-file-upload.min.js"></script>
+
     <script src="~/Scripts/dis.js"></script>
+
     <!-- Modal popUp http://jquerymodal.com/ -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
@@ -164,7 +169,8 @@
                                { "left_button_value", left_button_value },
                                { "company_outcomes", company_outcomes },
                                { "report_id", ViewBag.report_id },
-                               { "is_cc", is_cc }
+                               { "is_cc", is_cc },
+                               { "user_id", user_id}
                         })
         @Html.Partial("~/Views/Shared/EditorTemplates/ApproveDialogModalNew.cshtml", new ViewDataDictionary
    {
@@ -262,9 +268,13 @@
                                 <div class="userNavigation__name">@(um._user != null ? um._user.first_nm : "")</div>
                                 <div class="userNavigation__surname">@(um._user != null ? um._user.last_nm : "")</div>
                             *@
-                            @if (_user!= null && cm.getLogoCompany(_user.company_id) != null)
+                            @if (_user!= null)
                             {
-                                <img src="@Url.Content(cm.getLogoCompany(_user.company_id))" style="max-height: 44px;" alt="CompanyLogo" />
+                                var logo = cm.getLogoCompany(_user.company_id);
+                                if (!String.IsNullOrEmpty(logo))
+                                {
+                                    <img src="@Url.Content(cm.getLogoCompany(_user.company_id))" style="max-height: 44px;" alt="CompanyLogo" />
+                                }
                             }
                         </div>
                         <div class="userNavigation__logo">
@@ -318,16 +328,16 @@
                 page_subtitle = LocalizationGetter.GetString("Tasks");
             }
         }
-        if ((hrefURL.Contains("case/")) || (hrefURL.Contains("/cases")) || (hrefURL.Contains("/newreport") || (hrefURL.Contains("case/task/"))))
-        {
-            hrefURL = "/cases/index";
-            page_subtitle = LocalizationGetter.GetString("Cases");
-        }
-
         if (hrefURL.Contains("/cases"))
         {
             hrefURL = "/cases/index";
             page_subtitle = LocalizationGetter.GetString("Dashboard");
+        }
+
+        if ((hrefURL.Contains("case/")) || (hrefURL.Contains("/cases")) || (hrefURL.Contains("/newreport") || (hrefURL.Contains("case/task/"))))
+        {
+            hrefURL = "/cases/index";
+            page_subtitle = LocalizationGetter.GetString("Cases");
         }
 
         if (hrefURL.Contains("/analytics"))
@@ -360,9 +370,9 @@
                 @*
                     <a href="#" class="btn-link acceptCaseBtn">@Res_or_comp</a>
                 *@
-                @if (_user.user_permissions_approve_case_closure == 1)
+                @if ((_user.user_permissions_approve_case_closure == 1) || (rm.MediatorsWhoHasAccessToReport().Select(t => t.id).ToList().Contains(_user.id)))
                 {
-                    if (Res_or_comp == LocalizationGetter.GetString("Awaitingapproval"))
+                    if (Res_or_comp == LocalizationGetter.GetString("Awaitingapproval") && _user.user_permissions_approve_case_closure == 1)
                     {
                         <a href="#approveDialog" rel="modal:open" id="return_investigation" style="margin-right: 30px;" class="btn-link" value="@normal_button_value">RETURN FOR INVESTIGATION</a>
                         <a href="#approveDialog" rel="modal:open" id="approve_close" class="btn-link" value="@normal_button_value">APPROVE</a>
@@ -385,9 +395,9 @@
                 }
             </div>
             <ul class="breadcrumbs-mediators">
-                @foreach (var user in rm._mediators_whoHasAccess_toReport)
+                @foreach (var user in rm.MediatorsWhoHasAccessToReport())
                 {
-                    var owner = rm._report_owners.FirstOrDefault(x => x.report_id == _report_id && x.user_id == user.id && x.status_id == 2) != null;
+                    var owner = rm.ReportOwners().FirstOrDefault(x => x.report_id == _report_id && x.user_id == user.id && x.status_id == 2) != null;
                     <li class="breadcrumbs-mediators__li">
                         <a href="#" class="breadcrumbs-mediators__a">
                             <img src="@(user.photo_path.Trim() != "" ? Url.Content(user.photo_path.Trim()) : Url.Content("~/Content/Icons/noPhoto.png"))" alt="" class="breadcrumbs-mediators__img" />
@@ -401,7 +411,9 @@
             </ul>
         </div>
     </div>
+    
     @RenderBody()
+
     <script src="~/Scripts/View/Settings.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {

@@ -15,6 +15,8 @@ using EC.Controllers.ViewModel;
 using EC.Controllers.utils;
 using EC.Constants;
 using EC.Common.Base;
+using EC.Localization;
+using Rotativa.MVC;
 
 namespace EC.Controllers
 {
@@ -93,7 +95,7 @@ namespace EC.Controllers
                 else
                 {
                     /*default*/
-                    ViewBag.secondary_type_mandatory = reportModel.getSecondaryTypeMandatory();
+                    ViewBag.secondary_type_mandatory = reportModel.getSecondaryTypeMandatory().Where(t => t.status_id == 2).ToList();
                     ViewBag.CustomSecondaryType = false;
                 }
 
@@ -101,7 +103,7 @@ namespace EC.Controllers
                 ViewBag.currentCompanySubmitted = currentCompany.company_nm;
                 ViewBag.currentCompany = currentCompany.company_nm;
                 //ViewBag.country = currentCompany.address.country.country_nm;
-                ViewBag.locations = HtmlDataHelper.MakeSelect(companyModel.Locations(id), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
+                ViewBag.locations = HtmlDataHelper.MakeSelect(companyModel.Locations(id).Where(t => t.status_id == 2).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
                 ViewBag.managament = companyModel.getManagamentKnow();
                 ViewBag.frequencies = HtmlDataHelper.MakeSelect(companyModel.getFrequencies(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("description")));
                 List<country> arr = companyModel.getCountries();
@@ -155,12 +157,12 @@ namespace EC.Controllers
                 ViewBag.departments = HtmlDataHelper.MakeSelect(departmentsActive, item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("department")));
 
 
-                ViewBag.locationsOfIncident = HtmlDataHelper.MakeSelect(companyModel.LocationsOfIncident(id).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
+                ViewBag.locationsOfIncident = HtmlDataHelper.MakeSelect(companyModel.Locations(id).Where(t => t.status_id == 2).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
 
                 // ViewBag.departments2 = currentCompany.company_department.ToList();
                 ViewBag.departments2 = companyModel.CompanyDepartmentsActive(id).ToList();
 
-                ViewBag.locationsOfIncident2 = companyModel.LocationsOfIncident(id).ToList();
+                ViewBag.locationsOfIncident2 = companyModel.Locations(id).Where(t => t.status_id == 2).ToList();
 
                 ViewBag.injury_damage = companyModel.GetInjuryDamages().ToList();
 
@@ -216,6 +218,39 @@ namespace EC.Controllers
             ReportSubmit submit = new ReportSubmit();
             submit.merge(rvm, companyModel, reportModel, model);
             ViewBag.ReportModel = new ReportModel(currentReport.id);
+
+
+            #region SendEmail To Admins
+            ReportModel rm = new ReportModel(currentReport.id);
+
+            Business.Actions.Email.EmailManagement em = new Business.Actions.Email.EmailManagement();
+            Business.Actions.Email.EmailBody eb = new Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+            bool has_involved = false;
+            List<string> to = new List<string>();
+            List<string> cc = new List<string>();
+            if (rm.InvolvedMediatorsUserList().Count > 0)
+                has_involved = true;
+
+            string body = "";
+            string title = LocalizationGetter.GetString("Email_Title_NewCase");
+            if (has_involved)
+                title = LocalizationGetter.GetString("Email_Title_NewCaseInvolved");
+            foreach (var _user in rm.MediatorsWhoHasAccessToReport().Where(t => t.role_id != 4).ToList())
+            {
+                eb = new Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+                to = new List<string>();
+                to.Add(_user.email.Trim());
+                if (has_involved)
+                    eb.NewCaseInvolved(_user.first_nm, _user.last_nm, rm._report.display_name);
+                else
+                    eb.NewCase(_user.first_nm, _user.last_nm, rm._report.display_name);
+
+                body = eb.Body;
+                em.Send(to, cc, title, body, true);
+            }
+
+            #endregion
+
             return View("CaseSubmitted", submit);
         }
 
@@ -247,7 +282,7 @@ namespace EC.Controllers
             ViewBag.anonimity = companyModel.GetAnonymities(id, 0);
             ViewBag.relationship = companyModel.getRelationships();
             ViewBag.departments = HtmlDataHelper.MakeSelect(currentCompany.company_department.ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("department")));
-            ViewBag.locationsOfIncident = HtmlDataHelper.MakeSelect(companyModel.LocationsOfIncident(id).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
+            ViewBag.locationsOfIncident = HtmlDataHelper.MakeSelect(companyModel.Locations(id).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
 
             ViewBag.injury_damage = companyModel.GetInjuryDamages().ToList();
 
@@ -285,7 +320,7 @@ namespace EC.Controllers
             ViewBag.anonimity = companyModel.GetAnonymities(id, 0);
             ViewBag.relationship = companyModel.getRelationships();
             ViewBag.departments = HtmlDataHelper.MakeSelect(currentCompany.company_department.ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("department")));
-            ViewBag.locationsOfIncident = HtmlDataHelper.MakeSelect(companyModel.LocationsOfIncident(id).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
+            ViewBag.locationsOfIncident = HtmlDataHelper.MakeSelect(companyModel.Locations(id).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
 
             ViewBag.injury_damage = companyModel.GetInjuryDamages().ToList();
 
@@ -322,7 +357,7 @@ namespace EC.Controllers
             ViewBag.anonimity = companyModel.GetAnonymities(id, 0);
             ViewBag.relationship = companyModel.getRelationships();
             ViewBag.departments = HtmlDataHelper.MakeSelect(currentCompany.company_department.ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("department")));
-            ViewBag.locationsOfIncident = HtmlDataHelper.MakeSelect(companyModel.LocationsOfIncident(id).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
+            ViewBag.locationsOfIncident = HtmlDataHelper.MakeSelect(companyModel.Locations(id).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
 
             ViewBag.injury_damage = companyModel.GetInjuryDamages().ToList();
 
@@ -359,7 +394,7 @@ namespace EC.Controllers
             ViewBag.anonimity = companyModel.GetAnonymities(id, 0);
             ViewBag.relationship = companyModel.getRelationships();
             ViewBag.departments = HtmlDataHelper.MakeSelect(currentCompany.company_department.ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("department")));
-            ViewBag.locationsOfIncident = HtmlDataHelper.MakeSelect(companyModel.LocationsOfIncident(id).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
+            ViewBag.locationsOfIncident = HtmlDataHelper.MakeSelect(companyModel.Locations(id).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
 
             ViewBag.injury_damage = companyModel.GetInjuryDamages().ToList();
 
@@ -408,6 +443,18 @@ namespace EC.Controllers
             //bool result = glb.isCompanyInUse(IdCountry);
             return result_company;
         }
-    }
 
+        public ActionResult PrintToPdf(Guid id, bool pdf = true)
+        {
+            if (pdf)
+            {
+                return new ActionAsPdf("PrintToPdf", new { id = id, pdf = false });
+            }
+
+            var report = db.report.FirstOrDefault(x => x.guid == id);
+            var rm = new ReportModel(report.id);
+            ViewBag.Roles = db.role_in_report.ToList();
+            return View(rm);
+        }
+    }
 }

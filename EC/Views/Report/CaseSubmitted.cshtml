@@ -11,6 +11,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     List<EC.Models.Database.relationship> relationship = ViewBag.relationship;
     List<EC.Models.Database.anonymity> anonimity = ViewBag.anonimity;
+
+    var rm = (ReportModel)ViewBag.ReportModel;
 }
 
 
@@ -144,7 +146,7 @@
                     </div>
 
                     <div class="contentBlock contentBorder">
-                        <p class="title">@GlobalRes.Password</p>
+                        <p class="title">@GlobalRes.Password (Type in field to update)</p>
                         <textarea class="accessInfo pass">@ViewBag.Password</textarea>
                     </div>
                 </div>
@@ -159,7 +161,7 @@
                 <div class="printPanel">
                     <div class="reportAction">
                         <img class="summaryImages" id="printImage" src="~/Content/img/print.png">
-                        <input type="button" id="printReport" class="button summaryButtons" value="@GlobalRes.PrintReport">
+                        <a href="@Url.Action("PrintToPdf", "Report", new { id = rm._report.guid })" target="_blank" class="button summaryButtons" style="width: 226px;align-items: flex-start;text-align: center;">@GlobalRes.PrintReport</a>
                     </div>
 
                     <div class="reportAction">

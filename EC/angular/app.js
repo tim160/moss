@@ -6,7 +6,9 @@
     angular.module('EC', [
         'ngResource',
         'ngAnimate',
+        'ngSanitize',
         'nvd3',
+        'ngFileUpload',
 
         'EC',
     ]);

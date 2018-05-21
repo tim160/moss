@@ -6,7 +6,9 @@
     angular.module('EC', [
         'ngResource',
         'ngAnimate',
+        'ngSanitize',
         'nvd3',
+        'ngFileUpload',
 
         'EC',
     ]);
@@ -423,9 +425,25 @@
             return '';
         };
 
+        $scope.severityClass = function (report) {
+            if (report.severity_id === 2) {
+                return 'dashboard-col__severity-textLow';
+            }
+            if (report.severity_id === 5) {
+                return 'dashboard-col__severity-textCritical';
+            }
+            if (report.severity_id === 3) {
+                return 'dashboard-col__severity-textMedium';
+            }
+            if (report.severity_id === 4) {
+                return 'dashboard-col__severity-textHigh';
+            }
+            return '';
+        };
+
         $scope.isOwner = function (report, mediator) {
-            for (var i = 0; i < report.AdvInfo.owners.length; i++) {
-                if (report.AdvInfo.owners[i].user_id === mediator.id) {
+            for (var i = 0; i < report.owners.length; i++) {
+                if (report.owners[i].user_id === mediator.id) {
                     return true;
                 }
             }
@@ -437,38 +455,15 @@
                 $('.headerBlockTextRight > span').text(data.Title);
                 for (var i = 0; i < data.Reports.length; i++) {
                     var r = $filter('filter')(data.ReportsAdv, { 'id': data.Reports[i].report_id }, true);
-                    if ((r != null) && (r.length > 0)) {
+                    /*if ((r != null) && (r.length > 0)) {
                         data.Reports[i].AdvInfo = r[0];
                         data.Reports[i].total_days = r[0].total_days;
                         data.Reports[i].case_dt_s = r[0].case_dt_s;
                         data.Reports[i].cc_is_life_threating = r[0].cc_is_life_threating;
                         data.Reports[i].mediators = r[0].mediators;
                         data.Reports[i].severity_s = r[0].severity_s;
-                    }
-
-                    var r = $filter('filter')(data.Users, { 'id': data.Reports[i].last_sender_id }, true);
-                    r = r.length === 0 ? null : r[0];
-                    if (r === null) {
-                        r = {
-                            photo_path: '/Content/Icons/noPhoto.png',
-                            first_nm: '',
-                            last_nm: '',
-                        };
-                    }
-                    r.sb_full_name = (r.first_nm + ' ' + r.last_nm).replace(' ', '_');
-                    data.Reports[i].Last_sender = r;
-
-                    var r = $filter('filter')(data.Users, { 'id': data.Reports[i].previous_sender_id }, true);
-                    r = r.length === 0 ? null : r[0];
-                    if (r === null) {
-                        r = {
-                            photo_path: '/Content/Icons/noPhoto.png',
-                            first_nm: '',
-                            last_nm: '',
-                        };
-                    }
-                    r.sb_full_name = (r.first_nm + ' ' + r.last_nm).replace(' ', '_');
-                    data.Reports[i].Previous_sender = r;
+                        data.Reports[i].severity_id = r[0].severity_id;
+                    }*/
                 }
 
                 $scope.reports = data.Reports;
@@ -479,7 +474,7 @@
         $scope.refresh($scope.mode);
 
         $scope.openCase = function (id) {
-            if ($scope.mode === 3) {
+            if ($scope.mode === 3 || $scope.mode === 4) {
                 window.location = '/NewReport/' +id;
             } else {
                 window.location = '/newCase/Index/' + id;
@@ -655,6 +650,7 @@
 
         $scope.saveCrime = function () {
             NewCaseCaseClosureReportService.post({ report_id: $scope.report_id, report_cc_crime: $scope.model.report_cc_crime }, function (data) {
+                $scope.editExecutiveSummary = false;
                 $scope.refresh(data);
             });
         };
@@ -698,6 +694,11 @@
             NewCaseCaseClosureReportService.post({ report_id: $scope.report_id, report_case_closure_outcome: item.outcome }, function (data) {
                 $scope.refresh(data);
             });
+        };
+
+        $scope.executiveSummaryP = function (str) {
+            str = str || '';
+            return str.split('\n').join('<br/>');
         };
     }
 }());
@@ -745,7 +746,14 @@
                         r[0].company_root_cases_organizational_note === null ? '' : r[0].company_root_cases_organizational_note;
                 }
             }
+            data.note1 = data.note1 || '';
+            data.note2 = data.note2 || '';
             $scope.model = data;
+        };
+
+        $scope.noteP = function (note) {
+            note = note || '';
+            return note.split('\n').join('<br/>');
         };
 
         NewCaseInvestigationNotesService.get({ report_id: $scope.report_id }, function (data) {
@@ -1128,7 +1136,10 @@
             });
         };
 
-        $scope.refresh();
+        $scope.init = function (id) {
+            $scope.report_id = id || $scope.report_id;
+            $scope.refresh();
+        };
 
         $scope.setIsLifeThreating = function (isLifeThreating) {
             if (isLifeThreating) {
@@ -1337,6 +1348,70 @@
 
     angular
         .module('EC')
+        .controller('SettingsDisclaimerController',
+            ['$scope', '$filter', '$location', 'Upload', 'SettingsDisclaimerService', SettingsDisclaimerController]);
+
+    function SettingsDisclaimerController($scope, $filter, $location, Upload, SettingsDisclaimerService) {
+
+        $scope.refresh = function () {
+            SettingsDisclaimerService.get({}, function (data) {
+                data.message_to_employeesChanged = false;
+                data.message_about_guidelinesChanged = false;
+                for (var i = 0; i < data.company_disclamer_uploads_dt.length; i++) {
+                    data.company_disclamer_uploads[i].create_dt_s = data.company_disclamer_uploads_dt[i];
+                    data.company_disclamer_uploads[i].display_name2 = data.company_disclamer_uploads[i].display_name;
+                }
+                $scope.model = data;
+            });
+        };
+
+        $scope.save = function (mode) {
+            if (mode === 1) {
+                SettingsDisclaimerService.save1({ message: $scope.model.company_disclamer_page.message_to_employees }, function () {
+                    $scope.refresh();
+                });
+            }
+            if (mode === 2) {
+                SettingsDisclaimerService.save2({ message: $scope.model.company_disclamer_page.message_about_guidelines }, function () {
+                    $scope.refresh();
+                });
+            }
+        };
+
+        $scope.upload = function (files) {
+            Upload.upload({
+                url: '/api/SettingsDisclaimer/Upload',
+                data: {
+                    File: files,
+                    Description: ''
+                }
+            }).then(function () {
+                $scope.refresh();
+            }, function () {
+            }, function () {
+            });
+        };
+
+        $scope.deleteFile = function (file) {
+            SettingsDisclaimerService.deleteFile(file, function () {
+                $scope.refresh();
+            });
+        };
+
+        $scope.saveFile = function (file) {
+            SettingsDisclaimerService.saveFile(file, function () {
+                $scope.refresh();
+            });
+        };
+    }
+}());
+
+(function () {
+
+    'use strict';
+
+    angular
+        .module('EC')
         .controller('SettingsUserEditController',
             ['$scope', '$filter', '$location', 'SettingsUserEditService', SettingsUserEditController]);
 
@@ -1354,7 +1429,7 @@
         $scope.user_permissions_change_settings = 0;
         $scope.status_id = 3;
         $scope.user_role = 0;
-        $scope.photo_path = '~/Content/Icons/settingsPersonalNOPhoto.png';
+        $scope.photo_path = '/Content/Icons/settingsPersonalNOPhoto.png';
 
         $scope.val_first_nm = false;
         $scope.val_last_nm = false;
@@ -1646,6 +1721,24 @@
             get: { method: 'GET', params: {}, isArray: false },
             post: { method: 'POST', params: {}, isArray: false },
             delete: { method: 'POST', params: {}, isArray: false },
+        });
+    };
+})();
+
+(function () {
+
+    'use strict';
+
+    angular.module('EC')
+        .service('SettingsDisclaimerService', ['$resource', SettingsDisclaimerService]);
+
+    function SettingsDisclaimerService($resource) {
+        return $resource('/api/SettingsDisclaimer', {}, {
+            get: { url: '/api/SettingsDisclaimer/Get', method: 'GET', params: {}, isArray: false },
+            save1: { url: '/api/SettingsDisclaimer/Save1', method: 'POST', params: {}, isArray: false },
+            save2: { url: '/api/SettingsDisclaimer/Save2', method: 'POST', params: {}, isArray: false },
+            deleteFile: { url: '/api/SettingsDisclaimer/DeleteFile', method: 'POST', params: {}, isArray: false },
+            saveFile: { url: '/api/SettingsDisclaimer/SaveFile', method: 'POST', params: {}, isArray: false },
         });
     };
 })();

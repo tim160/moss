@@ -6,7 +6,7 @@
 @using EC.Constants;
 
 @{
-    ViewBag.Title = "Languages";
+    ViewBag.Title = "Case Routing";
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
 
     var um = (UserModel)ViewBag.um;
@@ -80,11 +80,11 @@
                                     <input type="file" style="display: none;" onchange="angular.element(this).scope().upload(this); return false;">
                                     <div ng-repeat="file in files | filter: { company_case_routing_id: line.id }:true">
                                         <div>
-                                            <span>
+                                            <span style="font-size: 14px;">
                                                 <a href="{{file.path_nm}}">{{file.file_nm}}</a>
                                             </span>
                                             <span>
-                                                <a href="#" ng-click="delete(file.id)" ng-hide="@is_invalid_mediator">X</a>
+                                                <a href="" ng-click="delete(file.id)" ng-hide="@is_invalid_mediator">X</a>
                                             </span>
                                         </div>
                                     </div>

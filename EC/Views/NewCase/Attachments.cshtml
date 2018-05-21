@@ -5,7 +5,7 @@
 @using EC.App_LocalResources;
 
 @{
-    ViewBag.Title = "Tasks";
+    ViewBag.Title = "Attachments";
     Layout = "~/Views/Shared/IndexPages/LayoutNewCases.cshtml";
     List<TaskExtended> tasks = (List<TaskExtended>)ViewBag.tasks;
 
@@ -128,8 +128,17 @@
                             <div class="contentListItem__infoBlock">
                                 <div class="contentListItem__date">@dth.ConvertDateToLongMonthString(attachment.effective_dt)</div><!-- /.contentListItem__date -->
                                 <div class="contentListItem__link">
-                                    <a href="@attachment.path_nm" class="attachLink">download</a>
+                                    <a href="@attachment.path_nm" class="attachLink" download="@attachment.file_nm">download</a>
                                 </div><!-- /.contentListItem__link -->
+                                <div>
+                                @if (attachment.user_id == user_id)
+                                {
+                                    using (Html.BeginForm("AttachmentDelete", null, new { id = attachment.id, report_id }, FormMethod.Post, null))
+                                    {
+                                        <button type="submit">X</button>
+                                    }
+                                }
+                                </div>
                             </div><!-- /.contentListItem__infoBlock -->
                         </div><!-- /.pull-right -->
                     </div><!-- /.dragDrop-contentListItem -->

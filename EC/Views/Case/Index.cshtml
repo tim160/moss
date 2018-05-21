@@ -29,15 +29,15 @@
     UserModel um = new UserModel(user_id);
 
     user _assignee = new user();
-    List<user> _mediators_whoHasAccess_toReport = rm._mediators_whoHasAccess_toReport;
+    List<user> _mediators_whoHasAccess_toReport = rm.MediatorsWhoHasAccessToReport();
 
     string _task_grey = "red";
     string littleDot_red = "";
     string read_task = "text";
     string _classCircle = "bigDot";
-    string _styleCircle = "#" + rm._color_code + ";";
+    string _styleCircle = "#" + rm.ColorCode() + ";";
 
-    string report_name = " - #" + rm._report.display_name + " - " + rm._secondary_type_string + " - " + rm._location_string;
+    string report_name = " - #" + rm._report.display_name + " - " + rm.SecondaryTypeString() + " - " + rm.LocationString();
     ViewBag.Title = GlobalRes.CaseTasksUp + report_name;
     string popup = null;
     if (ViewBag.popup != null)

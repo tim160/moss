@@ -14,7 +14,8 @@ using EC.Models.ECModel;
 using EC.Model.Impl;
 using EC.Model.Interfaces;
 using EC.Constants;
-
+using EC.Models.ViewModels;
+using EC.Models.ViewModel;
 
 namespace EC.Models
 {
@@ -264,7 +265,7 @@ namespace EC.Models
                         //   temp_status = new ReportModel(_temp.id)._investigation_status;
 
                         temp_rm = new ReportModel(_temp.id);
-                        if ((!temp_rm.IsSpamScreen) && (!temp_rm.IsPendingScreen) && (!temp_rm.IsClosedScreen) && (!temp_rm.IsCompletedScreen))
+                        if ((!temp_rm.IsSpamScreen()) && (!temp_rm.IsPendingScreen()) && (!temp_rm.IsClosedScreen()) && (!temp_rm.IsCompletedScreen()))
                             //  if ((temp_status == 3) || (temp_status == 4) || (temp_status == 5))
                             reports.Add(_temp);
                     }
@@ -274,7 +275,7 @@ namespace EC.Models
                     // closed
                     foreach (report _temp in all_reports)
                     {
-                        if (new ReportModel(_temp.id).IsCompletedScreen)
+                        if (new ReportModel(_temp.id).IsCompletedScreen())
                             reports.Add(_temp);
 
                         //  if (new ReportModel(_temp.id)._investigation_status == 6)
@@ -286,7 +287,7 @@ namespace EC.Models
                     // spam
                     foreach (report _temp in all_reports)
                     {
-                        if (new ReportModel(_temp.id).IsSpamScreen)
+                        if (new ReportModel(_temp.id).IsSpamScreen())
                             reports.Add(_temp);
                         //  if (new ReportModel(_temp.id)._investigation_status == 7)
                         ///     reports.Add(_temp);
@@ -297,7 +298,7 @@ namespace EC.Models
                     // pending
                     foreach (report _temp in all_reports)
                     {
-                        if (new ReportModel(_temp.id).IsPendingScreen)
+                        if (new ReportModel(_temp.id).IsPendingScreen())
                             reports.Add(_temp);
                         //   if ((new ReportModel(_temp.id)._investigation_status == 1) || (new ReportModel(_temp.id)._investigation_status == 2))
                         //       reports.Add(_temp);
@@ -308,7 +309,7 @@ namespace EC.Models
                     // pending
                     foreach (report _temp in all_reports)
                     {
-                        if (new ReportModel(_temp.id).IsClosedScreen)
+                        if (new ReportModel(_temp.id).IsClosedScreen())
                             reports.Add(_temp);
                         //   if ((new ReportModel(_temp.id)._investigation_status == 1) || (new ReportModel(_temp.id)._investigation_status == 2))
                         //       reports.Add(_temp);
@@ -1289,5 +1290,245 @@ namespace EC.Models
                 return _user.role_id == 5 || _user.user_permissions_change_settings == 1;
             }
         }
+
+        public UsersReportIDsViewModel GetAllUserReportIdsLists()
+
+        {
+
+            UsersReportIDsViewModel vm = new UsersReportIDsViewModel();
+
+
+
+            List<int> all_reports_id = GetReportIds(null);
+
+            vm.all_report_ids = all_reports_id;
+
+            //    select rep_id from[Marine].[dbo].[testt]  z
+
+            //where id in (select max(id) from[Marine].[dbo].[testt] z2 group by z2.rep_id) and z.status_id = 4
+
+            var refGroupInvestigationStatuses = (from m in db.report_investigation_status
+
+                                                 group m by m.report_id into refGroup
+
+                                                 select refGroup.OrderByDescending(x => x.id).FirstOrDefault());
+
+            List<int> statuses_match_all_report_id = new List<int>();
+
+
+
+            vm.all_report_ids = all_reports_id.Intersect(from m in refGroupInvestigationStatuses
+
+                                                         select m.report_id).OrderByDescending(t => t).ToList();
+
+            //????vm.all_report_ids = statuses_match_all_report_id;
+
+
+
+
+
+            //active
+
+            statuses_match_all_report_id = (from m in refGroupInvestigationStatuses
+
+                                            where m.investigation_status_id == ECGlobalConstants.investigation_status_investigation
+
+                                            select m.report_id).ToList();
+
+            vm.all_active_report_ids = all_reports_id.Intersect(statuses_match_all_report_id).OrderByDescending(t => t).ToList();
+
+
+
+            //completed
+
+            statuses_match_all_report_id = (from m in refGroupInvestigationStatuses
+
+                                            where m.investigation_status_id == ECGlobalConstants.investigation_status_resolution || m.investigation_status_id == ECGlobalConstants.investigation_status_completed
+
+                                            select m.report_id).ToList();
+
+            vm.all_completed_report_ids = all_reports_id.Intersect(statuses_match_all_report_id).OrderByDescending(t => t).ToList();
+
+
+
+            //spam
+
+            statuses_match_all_report_id = (from m in refGroupInvestigationStatuses
+
+                                            where m.investigation_status_id == ECGlobalConstants.investigation_status_spam
+
+                                            select m.report_id).ToList();
+
+            vm.all_spam_report_ids = all_reports_id.Intersect(statuses_match_all_report_id).OrderByDescending(t => t).ToList();
+
+
+
+            //closed
+
+            statuses_match_all_report_id = (from m in refGroupInvestigationStatuses
+
+                                            where m.investigation_status_id == ECGlobalConstants.investigation_status_closed
+
+                                            select m.report_id).ToList();
+
+            vm.all_closed_report_ids = all_reports_id.Intersect(statuses_match_all_report_id).OrderByDescending(t => t).ToList();
+
+
+
+
+
+            //pending
+
+            statuses_match_all_report_id = (from m in refGroupInvestigationStatuses
+
+                                            where m.investigation_status_id == ECGlobalConstants.investigation_status_pending || m.investigation_status_id == ECGlobalConstants.investigation_status_review
+
+                                            select m.report_id).ToList();
+
+
+
+            List<int> reports_with_history = (from m in refGroupInvestigationStatuses
+
+                                              where m.investigation_status_id > 0
+
+                                              select m.report_id).ToList();
+
+            IEnumerable<int> excluded = all_reports_id.Except(reports_with_history);
+
+
+
+            statuses_match_all_report_id.AddRange(excluded);
+
+            vm.all_pending_report_ids = all_reports_id.Intersect(statuses_match_all_report_id).OrderByDescending(t => t).ToList();
+
+
+
+            return vm;
+
+        }
+        public UsersUnreadReportsNumberViewModel GetUserUnreadCasesNumbers(UsersReportIDsViewModel vmReportIds)
+        {
+
+            int _count = 0;
+
+            UsersUnreadReportsNumberViewModel vm = new UsersUnreadReportsNumberViewModel();
+
+            //    select rep_id from[Marine].[dbo].[testt]  z
+
+            //where id in (select max(id) from[Marine].[dbo].[testt] z2 group by z2.rep_id) and z.status_id = 4
+
+            var refGroupReportLogs = (from m in db.report_log
+
+                                      group m by m.report_id into refGroup
+
+                                      //   orderby refGroup.Id descending
+
+                                      //select refGroup.Where(x => vmReportIds.all_report_ids.Contains(x.id)).OrderByDescending(x => x.created_dt).FirstOrDefault());
+                                       select refGroup.OrderByDescending(x => x.created_dt).FirstOrDefault());
+
+
+
+            /*
+            var refGroupInvestigationStatuses = (from m in db.report_investigation_status
+
+                                                 group m by m.report_id into refGroup
+
+                                                 select refGroup.OrderByDescending(x => x.id).FirstOrDefault());
+                                               
+            statuses_match_all_report_id = (from m in refGroupInvestigationStatuses
+
+                                            where m.investigation_status_id == ECGlobalConstants.investigation_status_investigation
+
+                                            select m.report_id).ToList();
+                                              */
+
+            var refGroupReportReadDate = db.report_user_read.Where(item => (item.user_id == ID));
+
+
+            var active = vmReportIds.all_active_report_ids.Where(item => (refGroupReportLogs.Where(t => t.report_id == item).Any() && refGroupReportReadDate.Where(t => t.report_id == item).Any() &&
+           (refGroupReportLogs.Where(t => t.report_id == item)).FirstOrDefault().created_dt > (refGroupReportReadDate.Where(t => t.report_id == item)).FirstOrDefault().read_date)  ||
+           (!refGroupReportReadDate.Where(t => t.report_id == item).Any())
+           ).Count();
+            vm.unread_active_reports = active;
+
+            var spam = vmReportIds.all_spam_report_ids.Where(item => (refGroupReportLogs.Where(t => t.report_id == item).Any() && refGroupReportReadDate.Where(t => t.report_id == item).Any() &&
+            (refGroupReportLogs.Where(t => t.report_id == item)).FirstOrDefault().created_dt > (refGroupReportReadDate.Where(t => t.report_id == item)).FirstOrDefault().read_date) ||
+            (!refGroupReportReadDate.Where(t => t.report_id == item).Any())
+            ).Count();
+            vm.unread_spam_reports = spam;
+
+            var newreport = vmReportIds.all_pending_report_ids.Where(item => (refGroupReportLogs.Where(t => t.report_id == item).Any() && refGroupReportReadDate.Where(t => t.report_id == item).Any() &&
+            (refGroupReportLogs.Where(t => t.report_id == item)).FirstOrDefault().created_dt > (refGroupReportReadDate.Where(t => t.report_id == item)).FirstOrDefault().read_date) ||
+            (!refGroupReportReadDate.Where(t => t.report_id == item).Any())
+            ).Count();
+            vm.unread_pending_reports = newreport;
+
+            var closed = vmReportIds.all_closed_report_ids.Where(item => (refGroupReportLogs.Where(t => t.report_id == item).Any() && refGroupReportReadDate.Where(t => t.report_id == item).Any() &&
+                (refGroupReportLogs.Where(t => t.report_id == item)).FirstOrDefault().created_dt > (refGroupReportReadDate.Where(t => t.report_id == item)).FirstOrDefault().read_date) ||
+                (!refGroupReportReadDate.Where(t => t.report_id == item).Any())
+                ).Count();
+            vm.unread_closed_reports = closed;
+
+            var completed = vmReportIds.all_completed_report_ids.Where(item => (refGroupReportLogs.Where(t => t.report_id == item).Any() && refGroupReportReadDate.Where(t => t.report_id == item).Any() &&
+                (refGroupReportLogs.Where(t => t.report_id == item)).FirstOrDefault().created_dt > (refGroupReportReadDate.Where(t => t.report_id == item)).FirstOrDefault().read_date) ||
+                (!refGroupReportReadDate.Where(t => t.report_id == item).Any())
+                ).Count();
+            vm.unread_completed_reports = completed;
+
+
+            return vm;
+
+        }
+
+        public List<CasePreviewViewModel> ReportPreviews(List<int> report_ids, string investigation_status, int delay_allowed)
+        {
+            var severities = db.severity.Select( z => new { id =z.id, severity_en = z.severity_en});
+            var colors = db.color.Select(z => new { id = z.id, color_code = z.color_code });
+            IEnumerable<int> top_mediator_ids = db.user.Where(item => (item.company_id == _user.company_id) && (item.role_id == 4 || item.role_id == 5)).Select(t => t.id);
+            
+            //var reports = report_ids.Select(x => new CasePreviewViewModel(x, user.id)).ToList();
+            var reports = report_ids
+              .Select(x =>
+              {
+                  var rm = new ReportModel(x);
+                  var access_mediators = rm.MediatorsWhoHasAccessToReportQuick(top_mediator_ids);
+                  return new CasePreviewViewModel
+                  {
+                      current_status = investigation_status,
+
+                      report_id = rm._report.id,
+                      case_number = rm._report.display_name,
+                      case_dt_s = rm._report.reported_dt.Ticks,
+                      cc_is_life_threating = rm._report.cc_is_life_threating,
+                      total_days = Math.Floor((DateTime.Now.Date - rm._report.reported_dt.Date).TotalDays),
+
+                      location = rm.LocationString(),
+                      case_secondary_types = rm.SecondaryTypeString(),
+                      days_left = rm.GetThisStepDaysLeft(delay_allowed),
+
+                      reported_dt = rm.ReportedDateString(),
+                    //  case_dt = rm.IncidentDateString(),
+
+                      tasks_number = rm.ReportTasksCount(0).ToString(),
+                      messages_number = rm.UserMessagesCountNotSecure(ID, 0).ToString(),
+
+                   
+                      mediators = (access_mediators == null || access_mediators.Count == 0)? null: access_mediators.Select(z => new {
+                          id = z.id,
+                          first_nm = z.first_nm,
+                          last_nm = z.last_nm,
+                          photo_path = glb.Photo_Path_String(z.photo_path, 1, 5),
+                          is_owner = z.is_owner
+                      }),
+                      case_color_code = (rm._report.report_color_id == 0) ? colors.Where(item => item.id == 1).FirstOrDefault().color_code : colors.Where(item => item.id == rm._report.report_color_id).FirstOrDefault().color_code,
+                      severity_s = !rm._report.severity_id.HasValue ? "UNSPECIFIED" : severities.FirstOrDefault(z => z.id == rm._report.severity_id).severity_en
+
+                  };
+
+              }).ToList();
+            return reports;
+        }
+
+
     }
 }

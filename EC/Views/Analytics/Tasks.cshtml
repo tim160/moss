@@ -120,28 +120,28 @@
                     @foreach (report _report in _reports)
                     {
                         rm = new ReportModel(_report.id);
-                        if (rm.ReportTasks(0).Count() > 0)
+                        if (rm.ReportTasks(0).Count > 0)
                         {
                             <div class="blockLinesItem">
-                                <p>@rm._secondary_type_string - @rm._location_string - @GlobalRes.Report # @rm._report.display_name</p>
+                                <p>@rm.SecondaryTypeString() - @rm._location_string - @GlobalRes.Report # @rm._report.display_name</p>
                                 <div class="linesShow">
-                                    <div class="blockLineFirst" style="border-bottom-color: #@rm._color_code;"></div>
-                                    <label>@rm.ReportTasks(0).Count()</label>
+                                    <div class="blockLineFirst" style="border-bottom-color: #@rm.ColorCode();"></div>
+                                    <label>@rm.ReportTasks(0).Count</label>
                                     <span>
                                         (
-                                        @if (rm.ReportTaskByMonthEnd(0).Count() == 0)
+                                        @if (rm.ReportTaskByMonthEnd(0).Count == 0)
                                         {
                                             @Html.Raw("-");
                                         }
                                         else
                                         {
                                             @Html.Raw("+");
-                                            @rm.ReportTaskByMonthEnd(0).Count()
+                                            @rm.ReportTaskByMonthEnd(0).Count
                                         }
 
                                         )
                                     </span>
-                                    <div class="blockLineSecond" style="border-bottom-color: #@rm._color_secondary_code;"></div>
+                                    <div class="blockLineSecond" style="border-bottom-color: #@rm.ColorSecondaryCode();"></div>
                                 </div>
                             </div>
                         }
@@ -160,16 +160,16 @@
                     @foreach (report _report in _reports)
                     {
                         rm = new ReportModel(_report.id);
-                        if (rm.ReportTasks(0).Count() > 0)
+                        if (rm.ReportTasks(0).Count > 0)
                         {
                             foreach (task _task in rm.ReportTasks(0))
                             {
                                 TaskExtended _extended_task = new TaskExtended(_task.id, user_id);
 
                                 <div class="blockLinesItem">
-                                    <p><label>@rm._secondary_type_string - @rm._location_string - @GlobalRes.Report # @rm._report.display_name</label><label>></label>@_extended_task.TaskTitle</p>
+                                    <p><label>@rm.SecondaryTypeString() - @rm.LocationString() - @GlobalRes.Report # @rm._report.display_name</label><label>></label>@_extended_task.TaskTitle</p>
                                     <div class="linesShow">
-                                        <div class="blockLineFirst" style="border-bottom-color: #@rm._color_code;"></div>
+                                        <div class="blockLineFirst" style="border-bottom-color: #@rm.ColorCode();"></div>
 
                                         <label>@_extended_task.TaskLength</label>
                                         <span>
@@ -189,7 +189,7 @@
                                             )
                                         </span>
 
-                                        <div class="blockLineSecond" style="border-bottom-color: #@rm._color_secondary_code;"></div>
+                                        <div class="blockLineSecond" style="border-bottom-color: #@rm.ColorSecondaryCode();"></div>
                                     </div>
                                 </div>
                             }

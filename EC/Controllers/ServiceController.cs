@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using EC.Business.Actions;
 
 namespace EC.Controllers
 {
@@ -69,9 +70,9 @@ namespace EC.Controllers
 
                     if (user.role_id == ECLevelConstants.level_escalation_mediator)
                     {
-                        return RedirectToAction("Completed", "Cases");
+                        return RedirectToAction("Index", "Cases", new { mode = "completed" });
                     }
-                    
+
                     return RedirectToAction("Index", "Cases");
                 }
             }
@@ -199,6 +200,80 @@ namespace EC.Controllers
             ViewBag.error = loginModel.setNewPass(email, token, password, confirmPassword);
             ViewBag.redirect = "true";
             return RedirectToAction("Login", "Service");// RedirectToAction("Company", "Login");
+        }
+
+        //[HttpPost]
+        //EC.Windows.Task.Scheduler.exe http://localhost:8093/Service/Scheduler1?param1=197
+        public ActionResult Scheduler1(int param1)
+        {
+            //Allow sec
+            /*if (this.Request.UserHostAddress != "")
+            {
+                return new JsonResult
+                {
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                    Data = new
+                    {
+                        ok = false,
+                    }
+                };
+            }*/
+
+            using (var db = new ECEntities())
+            {
+                var reports = db.report.ToList();
+                ReportModel rm = new ReportModel();
+                string email = "";
+                Business.Actions.Email.EmailManagement em = new Business.Actions.Email.EmailManagement();
+                Business.Actions.Email.EmailBody eb = new Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+
+
+                foreach (var _report in reports)
+                {
+                    rm = new ReportModel(_report.id);
+                    if ((rm.GetThisStepDaysLeft() <= 0) && (!db.unread_report_reminder_sent.Any(t => t.report_id == _report.id && t.investigation_status_id == rm._investigation_status)))
+                    {
+                        eb.Scheduler1(rm._report.display_name);
+                        // days are exceeded - reminder never sent - need to send reminder
+                        foreach (var user in rm.MediatorsWhoHasAccessToReport())
+                        {
+                            email = user.email;
+                            if ((email != null) && (email.Length > 0))
+                            {
+                                try
+                                {
+                                    // em.Send(email, "Case Management Deadline is past due", eb.Body, true);
+                                }
+                                catch
+                                {
+
+                                }
+                            }
+                        }
+                        try
+                        {
+                            unread_report_reminder_sent _reminder = new unread_report_reminder_sent();
+                            _reminder.last_update_dt = DateTime.Now;
+                            _reminder.report_id = _report.id;
+                            _reminder.sent_dt = DateTime.Now;
+                            _reminder.investigation_status_id = rm._investigation_status;
+                            db.unread_report_reminder_sent.Add(_reminder);
+                        }
+                        catch
+                        {
+
+                        }
+                    }
+                }
+            }
+
+            return new JsonResult
+            {
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                Data = new {
+                    ok = true,
+                }
+            };
         }
     }
 }

@@ -47,13 +47,39 @@ namespace EC.Controllers.API
             UserModel um = new UserModel(user.id);
 
             //var departments = DB.company_case_admin_department.Where(x => x.company_id == user.company_id && x.status_id == 2).ToList();
-            var departments = DB.company_department.Where(x => x.company_id == user.company_id && x.status_id == 2).ToList();
-            var users = DB.user.Where(x => x.company_id == user.company_id && x.status_id == 2 && x.role_id == 6).ToList();
-            var scopes = DB.scope.ToList();
-            var items = DB.company_case_routing.Where(x => x.company_id == user.company_id).ToList();
-            var types = DB.company_secondary_type.Where(x => x.company_id == user.company_id && x.status_id == 2).ToList();
-            var ids = items.Select(x => x.id).ToList();
-            var files = DB.company_case_routing_attachments.Where(x => ids.Contains(x.company_case_routing_id) & x.status_id == 2).ToList();
+            var departments = DB.company_department
+                .AsNoTracking()
+                .Where(x => x.company_id == user.company_id && x.status_id == 2)
+                .ToList();
+
+            var users = DB.user
+                .AsNoTracking()
+                .Where(x => x.company_id == user.company_id && x.status_id == 2 && x.role_id == 6)
+                .ToList();
+
+            var scopes = DB.scope
+                .AsNoTracking()
+                .ToList();
+
+            var items = DB.company_case_routing
+                .AsNoTracking()
+                .Where(x => x.company_id == user.company_id)
+                .ToList();
+
+            var types = DB.company_secondary_type
+                .AsNoTracking()
+                .Where(x => x.company_id == user.company_id && x.status_id == 2)
+                .ToList();
+
+            var ids = items
+                .Select(x => x.id)
+                .ToList();
+
+            var files = DB.company_case_routing_attachments
+                .AsNoTracking()
+                .Where(x => ids.Contains(x.company_case_routing_id) & x.status_id == 2)
+                .ToList();
+
             types.ForEach(x =>
             {
                 var item = items.FirstOrDefault(z => z.company_secondary_type_id == x.id);
@@ -72,9 +98,18 @@ namespace EC.Controllers.API
                 }
             });
 
-            var locations = DB.company_location.Where(x => x.company_id == user.company_id && x.status_id == 2).OrderBy(x => x.location_en).ToList();
+            var locations = DB.company_location
+                .AsNoTracking()
+                .Where(x => x.company_id == user.company_id && x.status_id == 2)
+                .OrderBy(x => x.location_en)
+                .ToList();
+
             ids = locations.Select(x => x.id).ToList();
-            var locationItems = DB.company_case_routing_location.Where(x => ids.Contains(x.company_location_id) & x.company_id == user.company_id).ToList();
+            var locationItems = DB.company_case_routing_location
+                .AsNoTracking()
+                .Where(x => ids.Contains(x.company_location_id) & x.company_id == user.company_id)
+                .ToList();
+
             locations.ForEach(x =>
             {
                 var item = locationItems.FirstOrDefault(z => z.company_location_id == x.id);
@@ -99,13 +134,17 @@ namespace EC.Controllers.API
             {
                 types = types,
                 departments = departments,
-                users = cm.AllMediators(user.company_id, true, null),
+                users = cm.AllMediators(user.company_id, true, null).Select(x => new {
+                    id = x.id,
+                    first_nm = x.first_nm,
+                    last_nm = x.last_nm,
+                }),
                 scopes = scopes,
                 items = items,
                 files = files,
                 locations = locations,
                 locationItems = locationItems,
-        };
+            };
             return ResponseObject2Json(m);
         }
 

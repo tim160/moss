@@ -2581,7 +2581,7 @@ namespace EC.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New report has been filed with Employee Confidential.
+        ///   Looks up a localized string similar to New report has been filed with Employee Confidential - Case admins might be involved.
         /// </summary>
         public static string Email_Title_NewCaseInvolved {
             get {
@@ -2590,7 +2590,7 @@ namespace EC.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New report has been filed with Campus Confidential.
+        ///   Looks up a localized string similar to New report has been filed with Campus Confidential - Case admins might be involved.
         /// </summary>
         public static string Email_Title_NewCaseInvolved_CC {
             get {
@@ -4417,7 +4417,7 @@ namespace EC.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The following case administrator(s) will be assigned to your case. If you feel that a Case Administrator may have a conflict of interest or would be obstructive to investigating the case, please check ‘Exclude’ below..
+        ///   Looks up a localized string similar to The following case administrator(s) may be assigned to your case. If you feel that a Case Administrator may have a conflict of interest or would be obstructive to investigating the case, please check ‘Exclude’ below..
         /// </summary>
         public static string MediatorsAssignedSecondOption {
             get {
@@ -4705,7 +4705,7 @@ namespace EC.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If a Root Cause that is applicable this incident is not available in the dropdown, please add in Settings..
+        ///   Looks up a localized string similar to If a Root Cause is not available in the dropdown, please add in Settings..
         /// </summary>
         public static string NARootCauseExplanation {
             get {
@@ -4809,6 +4809,15 @@ namespace EC.Localization {
         public static string Newreport {
             get {
                 return ResourceManager.GetString("Newreport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Reports.
+        /// </summary>
+        public static string NewReportsUp {
+            get {
+                return ResourceManager.GetString("NewReportsUp", resourceCulture);
             }
         }
         
