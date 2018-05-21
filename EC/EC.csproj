@@ -1552,6 +1552,9 @@
     <Compile Include="Models\Database\report_secondary_type.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Database\report_signoff_mediator.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Database\report_third_level_type.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>

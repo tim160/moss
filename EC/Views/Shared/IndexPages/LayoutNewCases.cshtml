@@ -190,7 +190,8 @@
                                { "left_button_value", left_button_value },
                                { "company_outcomes", company_outcomes },
                                { "report_id", ViewBag.report_id },
-                               { "is_cc", is_cc }
+                               { "is_cc", is_cc },
+                               { "user_id", user_id}
                         })
     }
     <header class="header">
@@ -398,12 +399,17 @@
                 @foreach (var user in rm.MediatorsWhoHasAccessToReport())
                 {
                     var owner = rm.ReportOwners().FirstOrDefault(x => x.report_id == _report_id && x.user_id == user.id && x.status_id == 2) != null;
+                    var soff = rm.GetSignOffMeditoar();
                     <li class="breadcrumbs-mediators__li">
                         <a href="#" class="breadcrumbs-mediators__a">
                             <img src="@(user.photo_path.Trim() != "" ? Url.Content(user.photo_path.Trim()) : Url.Content("~/Content/Icons/noPhoto.png"))" alt="" class="breadcrumbs-mediators__img" />
                             @if (owner)
                             {
                                 <span class="profile-status online"></span>
+                            }
+                            else if ((soff != null) && (soff.id == user.id))
+                            {
+                                <span class="profile-status offline"></span>
                             }
                         </a>
                     </li>

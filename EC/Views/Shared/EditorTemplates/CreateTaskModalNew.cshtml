@@ -27,7 +27,7 @@
     {
         is_cc = false;
     }
-
+    int user_id = ViewBag.user_id;
 }
 
 <div id="openModal" class="modal case-modal">
@@ -65,6 +65,9 @@
             </div>
         </div><!-- /.case-modal__selectRow-selectric -->
     </div><!-- /.case-modal__selectRow -->
+    <div id="infomsg1" style="display: none;">
+        @GlobalRes.RecommendSecond1 @GlobalRes.RecommendSecond2
+    </div>
     <div class="case-modal__selectRow clearfix">
         <div class="case-modal__selectRow-title">
             Reason for Case Closure:
@@ -107,6 +110,13 @@
         $('.case-modal__selectOption').selectric({
             maxHeight: 240
         });
+
+        $('#ddlSignOffMediator').on('change', function(){
+            $('#infomsg1').hide();
+            if ($("#ddlSignOffMediator").val() == @user_id) {
+                $('#infomsg1').show();
+            }
+        });        
 
         $('#requestToclose').on('click', function () {
             var description = "";

@@ -1112,6 +1112,32 @@ namespace EC.Controllers
                 db.SaveChanges();
             }
 
+            if (sign_off_mediator_id != 0)
+            {
+                report_signoff_mediator report_signoff_mediator = null;
+                foreach (var item in db.report_signoff_mediator.Where(x => x.report_id == report_id))
+                {
+                    item.status_id = 1;
+                    if (item.user_id == sign_off_mediator_id)
+                    {
+                        report_signoff_mediator = item;
+                    }
+                }
+                if (report_signoff_mediator == null)
+                {
+                    report_signoff_mediator = new report_signoff_mediator
+                    {
+                        createdby_user_id = user.id,
+                        created_on = DateTime.Now,
+                        report_id = report_id,
+                        user_id = sign_off_mediator_id,
+                    };
+                    db.report_signoff_mediator.Add(report_signoff_mediator);
+                }
+                report_signoff_mediator.status_id = 2;
+                db.SaveChanges();
+            }
+
             if (_new)
             {
                 #region Email Ready

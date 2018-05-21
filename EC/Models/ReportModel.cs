@@ -2504,9 +2504,7 @@ namespace EC.Models
         /// <returns></returns>
         public user GetSignOffMeditoar()
         {
-            var user = db.user.Where(item => (item.id == 2)).FirstOrDefault();
-            return user;
-
+            return db.report_signoff_mediator.FirstOrDefault(x => x.report_id == ID && x.status_id == 2)?.user1;
         }
     }
 

@@ -33,7 +33,7 @@ ALTER TABLE [dbo].[report_signoff_mediator]  WITH CHECK ADD  CONSTRAINT [FK_repo
 REFERENCES [dbo].[user] ([id])
 GO
 
-ALTER TABLE [dbo].[report_signoff_mediator]  WITH CHECK ADD  CONSTRAINT [FK_report_signoff_mediator_createdby_user_id] FOREIGN KEY([user_id])
+ALTER TABLE [dbo].[report_signoff_mediator]  WITH CHECK ADD  CONSTRAINT [FK_report_signoff_mediator_createdby_user_id] FOREIGN KEY([createdby_user_id])
 REFERENCES [dbo].[user] ([id])
 GO
 
