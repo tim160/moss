@@ -1022,41 +1022,11 @@ namespace EC.Controllers
 
         }
 
-
-        public int CloseCase()
+        public int CloseCaseValidate()
         {
-         //   return 2;
-            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
-            if (user == null || user.id == 0)
-                return -1;
-
-            int mediator_id = Convert.ToInt16(Request["user_id"]);
             int report_id = Convert.ToInt16(Request["report_id"]);
-            int promotion_value = Convert.ToInt16(Request["promotion_value"]);
-            string description = Request["description"].ToString().Trim();
-
-
-            int reason_id = 0;
-            if (Request["case_closure_reason_id"] != "")
-            {
-                reason_id = Convert.ToInt16(Request["case_closure_reason_id"]);
-            }
-
-            int sign_off_mediator_id = 0;
-            if (Request["sign_off_mediator_id"] != null)
-                sign_off_mediator_id = Convert.ToInt32(Request["sign_off_mediator_id"]);
-            
-            if (mediator_id != user.id)
-                return -1;
             ReportModel rm = new ReportModel(report_id);
-            UserModel um = new UserModel(user.id);
-            bool has_access = rm.HasAccessToReport(user.id);
 
-            if ((!has_access) || (user.role_id == 8))
-            {
-                return -1;
-            }
-            //validate
             if (!rm.getSecondaryTypeMandatory().Any())
             {
                 return -2;
@@ -1073,14 +1043,6 @@ namespace EC.Controllers
                 return -2;
             }
 
-            /*var report_cc_crime = db.report_cc_crime
-                .Where(x => x.report_id == report_id)
-                .FirstOrDefault();
-            if ((report_cc_crime == null) || (String.IsNullOrEmpty(report_cc_crime.executive_summary)))
-            {
-                return -2;
-            }*/
-
             var list = db.report_non_mediator_involved.Where(x => x.report_id == report_id && x.role_in_report_id == 3).Select(x => x.id).ToList();
             var list_cco = db.report_case_closure_outcome.Where(x => x.report_id == report_id).ToList();
             if ((list.Any()) && (!list_cco.Any(x => x.non_mediator_involved_id.HasValue && list.Contains(x.non_mediator_involved_id.Value))))
@@ -1088,14 +1050,44 @@ namespace EC.Controllers
                 return -2;
             }
 
-            // we don't need this error anymore
-            /*     if (promotion_value == ECGlobalConstants.investigation_status_resolution)
-                 {
-                     CompanyModel cm = new CompanyModel(um._user.company_id);
-                     if (cm.AllMediators(cm._company.id, true, ECLevelConstants.level_escalation_mediator).Count == 0)
-                         return 0;
-                 }
-                 */
+            return 0;
+        }
+
+        public int CloseCase()
+        {
+         //   return 2;
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            if (user == null || user.id == 0)
+                return -1;
+
+            int mediator_id = Convert.ToInt16(Request["user_id"]);
+            int report_id = Convert.ToInt16(Request["report_id"]);
+            int promotion_value = Convert.ToInt16(Request["promotion_value"]);
+            string description = Request["description"].ToString().Trim();
+
+            int reason_id = 0;
+            if (Request["case_closure_reason_id"] != "")
+            {
+                reason_id = Convert.ToInt16(Request["case_closure_reason_id"]);
+            }
+
+            int sign_off_mediator_id = 0;
+            if (Request["sign_off_mediator_id"] != null)
+                sign_off_mediator_id = Convert.ToInt32(Request["sign_off_mediator_id"]);
+            
+            if (mediator_id != user.id)
+                return -1;
+
+            UserModel um = new UserModel(user.id);
+            ReportModel rm = new ReportModel(report_id);
+            bool has_access = rm.HasAccessToReport(user.id);
+
+            if ((!has_access) || (user.role_id == 8))
+            {
+                return -1;
+            }
+
+
             bool _new = userModel.ResolveCase(report_id, mediator_id, description, promotion_value, reason_id,sign_off_mediator_id);
 
             if (!db.report_mediator_assigned.Any(x => x.report_id == report_id && x.mediator_id == sign_off_mediator_id))

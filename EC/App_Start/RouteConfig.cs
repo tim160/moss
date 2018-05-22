@@ -178,6 +178,16 @@ namespace EC
                  });
 
             routes.MapRoute(
+                name: "CloseCaseValidate",
+                url: "Case/CloseCaseValidate",
+                 defaults: new
+                 {
+                     controller = "Case",
+                     action = "CloseCaseValidate",
+                     id = UrlParameter.Optional
+                 });
+
+            routes.MapRoute(
                 name: "RemoveMediator",
                 url: "Case/RemoveMediator",
                  defaults: new

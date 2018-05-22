@@ -37,6 +37,22 @@
 
     <div class="case-modal__selectRow clearfix">
         <div class="case-modal__selectRow-title">
+            Reason for Case Closure:
+        </div><!-- /.case-modal__selectRow-title -->
+        <div class="case-modal__selectRow-selectric">
+            <div class="select-container case-modal__selectContainer ddlReasonClosure">
+                <select id="ddlReasonClosure" class="case-modal__selectOption">
+                    <option value="0" disabled selected>Select an option...</option>
+                    @foreach (case_closure_reason _reason in glb.GetCaseClosureReasonsWithStatus())
+                    {
+                        <option value=@_reason.id>@_reason.case_closure_reason_en</option>
+                    }
+                </select>
+            </div>
+        </div><!-- /.case-modal__selectRow-selectric -->
+    </div><!-- /.case-modal__selectRow -->
+    <div class="case-modal__selectRow clearfix">
+        <div class="case-modal__selectRow-title">
             Select Case Reviewer to Sign-Off
         </div><!-- /.case-modal__selectRow-title -->
         <div class="case-modal__selectRow-selectric">
@@ -68,22 +84,6 @@
     <div id="infomsg1" style="display: none;">
         @GlobalRes.RecommendSecond1 @GlobalRes.RecommendSecond2
     </div>
-    <div class="case-modal__selectRow clearfix">
-        <div class="case-modal__selectRow-title">
-            Reason for Case Closure:
-        </div><!-- /.case-modal__selectRow-title -->
-        <div class="case-modal__selectRow-selectric">
-            <div class="select-container case-modal__selectContainer ddlReasonClosure">
-                <select id="ddlReasonClosure" class="case-modal__selectOption">
-                    <option value="0" disabled selected>Select an option...</option>
-                    @foreach (case_closure_reason _reason in glb.GetCaseClosureReasonsWithStatus())
-                    {
-                        <option value=@_reason.id>@_reason.case_closure_reason_en</option>
-                    }
-                </select>
-            </div>
-        </div><!-- /.case-modal__selectRow-selectric -->
-    </div><!-- /.case-modal__selectRow -->
     <div class="case-modal__linkBlockBottom clearfix">
         <a href="#" id="requestToclose" class="case-modal__linkBtn whiteBtn" value="@normal_button_value">Request to close case</a>
     </div><!-- /.case-modal__linkBlockBottom -->
@@ -106,6 +106,22 @@
 </div>
 
 <script>
+    function closeCaseModal() {
+        $.ajax({
+            method: "POST",
+            url: "/Case/CloseCaseValidate",
+            data: {
+                report_id: $("#_report_id").val(), 
+            }
+        }).done(function (data) {
+            if (data == -2) {
+                $('#alertModal').modal();
+            } else {
+                $('#openModal').modal();
+            }
+        });
+    }
+
     $(document).ready(function () {
         $('.case-modal__selectOption').selectric({
             maxHeight: 240
@@ -151,10 +167,6 @@
                 }).done(function (data) {
 
                     if (data == -1) {
-                    }
-
-                    if (data == -2) {
-                        $('#alertModal').modal();
                     }
 
                     if (data == 1) {
