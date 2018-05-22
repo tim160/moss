@@ -442,6 +442,52 @@ namespace EC.Models
             return list;
         }
 
+        public List<report_secondary_type> SecondaryTypeModelAll()
+        {
+            var list = db.report_secondary_type
+                .Where(x => x.report_id == ID)
+                .ToList();
+
+            var company_secondary_types = db.company_secondary_type
+                .Where(x => x.company_id == _report.company_id)
+                .OrderBy(x => x.secondary_type_en)
+                .ToList();
+
+            list.ForEach(x =>
+            {
+                x.secondary_type_nm = company_secondary_types.FirstOrDefault(z => z.id == x.secondary_type_id)?.secondary_type_en;
+            });
+
+            return list;
+        }
+
+        public report_investigation_methodology InvestigationMethodologies(int secondary_type_id)
+        {
+            return db.report_investigation_methodology
+                .FirstOrDefault(x => x.report_id == ID && x.report_secondary_type_id == secondary_type_id);
+        }
+
+        public List<company_root_cases_behavioral> RootCasesBehavioral()
+        {
+            return db.company_root_cases_behavioral
+                .Where(x => x.company_id == _report.company_id)
+                .ToList();
+        }
+
+        public List<company_root_cases_external> RootCasesExternal()
+        {
+            return db.company_root_cases_external
+                .Where(x => x.company_id == _report.company_id)
+                .ToList();
+        }
+
+        public List<company_root_cases_organizational> RootCasesOrganizational()
+        {
+            return db.company_root_cases_organizational
+                .Where(x => x.company_id == _report.company_id)
+                .ToList();
+        }
+
         public string SecondaryTypeStringAll()
         {
             string secondary_type = "";

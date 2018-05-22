@@ -1,6 +1,7 @@
 ﻿@using EC.Models
 @using EC.Common.Interfaces
 @using EC.Core.Common
+@using EC.Models.Database
 
 @model ReportModel
 
@@ -258,68 +259,68 @@
             <div class="reportContentBlock__title">
                 ROOT CAUSES
             </div><!-- /.reportContentBlock__title -->
+            @foreach (var incident in Model.SecondaryTypeModelAll())
+            {
+                var im = Model.InvestigationMethodologies(incident.secondary_type_id);
+                company_root_cases_behavioral b = null;
+                company_root_cases_external e = null;
+                company_root_cases_organizational o = null;
 
-            <div class="reportContentBlock__firstColTitle report_m-l">
-                Behavioral factors
-            </div><!-- /.reportContentBlock__firstColTitle -->
-            <div class="reportRow__twoCols clearfix">
-                <div class="reportRow__twoCols-title">
-                    Alcohol consumption
-                </div><!-- /.reportRow__twoCols-title -->
-                <div class="reportRow__twoCols-text">
-                    Ut enim ad minima veniam, quis nostrum exercitationem ullam
-                    corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
-                    consequatur? Quis autem vel eum iure reprehenderit qui in ea
-                    voluptate velit esse quam nihil molestiae consequatur, vel illum
-                    qui dolorem eum fugiat quo voluptas nulla pariatur?
-                </div><!-- /.reportRow__twoCols-text -->
-            </div><!-- /.reportRow clearfix -->
-            <div class="reportRow__twoCols reportRow_mt clearfix">
-                <div class="reportRow__twoCols-title">
-                    Physical activity
-                </div><!-- /.reportRow__twoCols-title -->
-                <div class="reportRow__twoCols-text">
-                    Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
-                    consectetur, adipisci velit
-                </div><!-- /.reportRow__twoCols-text -->
-            </div><!-- /.reportRow clearfix -->
+                if (im != null)
+                {
+                    b = Model.RootCasesBehavioral().FirstOrDefault(x => x.id == im.company_root_cases_behavioral_id);
+                    e = Model.RootCasesExternal().FirstOrDefault(x => x.id == im.company_root_cases_external_id);
+                    o = Model.RootCasesOrganizational().FirstOrDefault(x => x.id == im.company_root_cases_organizational_id);
+                }
 
-            <div class="reportContentBlock__firstColTitle report_m-l reportTitle_mt">
-                External influences
-            </div><!-- /.reportContentBlock__firstColTitle -->
-            <div class="reportRow__twoCols clearfix">
-                <div class="reportRow__twoCols-title">
-                    Social status
-                </div><!-- /.reportRow__twoCols-title -->
-                <div class="reportRow__twoCols-text">
-                    Ut enim ad minima veniam, quis nostrum exercitationem ullam
-                    corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
-                    consequatur.
-                </div><!-- /.reportRow__twoCols-text -->
-            </div><!-- /.reportRow clearfix -->
+                <div class="reportContentBlock__title">
+                    @incident.secondary_type_nm
+                </div>
+                <div class="reportContentBlock__firstColTitle report_m-l">
+                    Behavioral factors
+                </div><!-- /.reportContentBlock__firstColTitle -->
+                <div class="reportRow__twoCols clearfix">
+                    @if (b != null)
+                    {
+                        <div class="reportRow__twoCols-title">
+                            @b.name_en
+                        </div><!-- /.reportRow__twoCols-title -->
+                        <div class="reportRow__twoCols-text">
+                            @im.company_root_cases_behavioral_note
+                        </div><!-- /.reportRow__twoCols-text -->
+                    }
+                </div><!-- /.reportRow clearfix -->
 
-            <div class="reportContentBlock__firstColTitle report_m-l">
-                Internal influences:
-            </div><!-- /.reportContentBlock__firstColTitle -->
-            <div class="reportRow__twoCols clearfix">
-                <div class="reportRow__twoCols-title">
-                    Expectations
-                </div><!-- /.reportRow__twoCols-title -->
-                <div class="reportRow__twoCols-text">
-                    Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse
-                    quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat
-                    quo voluptas nulla pariatur?
-                </div><!-- /.reportRow__twoCols-text -->
-            </div><!-- /.reportRow clearfix -->
-            <div class="reportRow__twoCols reportRow_mt clearfix">
-                <div class="reportRow__twoCols-title">
-                    Traditions
-                </div><!-- /.reportRow__twoCols-title -->
-                <div class="reportRow__twoCols-text">
-                    Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
-                    consectetur, adipisci velit
-                </div><!-- /.reportRow__twoCols-text -->
-            </div><!-- /.reportRow clearfix -->
+                <div class="reportContentBlock__firstColTitle report_m-l">
+                    External influences
+                </div><!-- /.reportContentBlock__firstColTitle -->
+                <div class="reportRow__twoCols clearfix">
+                    @if (e != null)
+                    {
+                        <div class="reportRow__twoCols-title">
+                            @e.name_en
+                        </div><!-- /.reportRow__twoCols-title -->
+                        <div class="reportRow__twoCols-text">
+                            @im.company_root_cases_external_note
+                        </div><!-- /.reportRow__twoCols-text -->
+                    }
+                </div><!-- /.reportRow clearfix -->
+
+                <div class="reportContentBlock__firstColTitle report_m-l">
+                    Internal influences:
+                </div><!-- /.reportContentBlock__firstColTitle -->
+                <div class="reportRow__twoCols clearfix">
+                    @if (o != null)
+                    {
+                        <div class="reportRow__twoCols-title">
+                            @o.name_en
+                        </div><!-- /.reportRow__twoCols-title -->
+                        <div class="reportRow__twoCols-text">
+                            @im.company_root_cases_organizational_note
+                        </div><!-- /.reportRow__twoCols-text -->
+                    }
+                </div><!-- /.reportRow clearfix -->
+            }
         </div><!-- /.reportContentBlock clearfix -->
 
         <div class="reportContentBlock clearfix">
