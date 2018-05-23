@@ -1225,6 +1225,7 @@
     <Content Include="Views\Settings\CaseRouting.cshtml" />
     <Content Include="Views\Report\PrintToPdf.cshtml" />
     <Content Include="Views\NewCase\PrintToPdf.cshtml" />
+    <Content Include="Views\Service\Disclaimer.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

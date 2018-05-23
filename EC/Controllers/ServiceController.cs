@@ -88,6 +88,11 @@ namespace EC.Controllers
             return View($"Report{(is_cc ? "-CC" : "")}");
         }
 
+        public ActionResult Disclaimer(string companyCode)
+        {
+            return View($"Disclaimer{(is_cc ? "-CC" : "")}");
+        }
+
         public ActionResult CheckStatus()
         {
             return View($"CheckStatus{(is_cc ? "-CC" : "")}", new LoginViewModel());
