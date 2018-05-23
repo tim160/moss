@@ -337,66 +337,7 @@
 				        </div>
 			        </div>
                 </div>
-
             </div>
-                @*
-
-                <div class="row">
-                    <div class="col-3">
-                    </div>
-                    <div class="col-4">
-                        <div class="investigation__inner">
-                            <dropbox ng-dropbox-textExpr="getExternalInfluences(item)"
-                                        itemText="{{item.name_en}}"
-                                        ng-dropbox-list="model.company_root_cases_external"
-                                        ng-dropbox-rootItem="item"
-                                        ng-dropbox-on-select="changeExternalInfluences">
-                            </dropbox>
-                        </div>
-                    </div>
-                    <div class="col-5">
-                        <div class="factsEstablished__box pull-left ">
-                            <textarea class="facts-established--text" ng-model="item.inv_meth_ei_note" ng-show="item.externalInfluencesEditMode"></textarea>
-                            <p ng-show="!item.externalInfluencesEditMode">{{item.inv_meth_ei_note}}</p>
-                        </div>
-                        <div class="pull-right">
-                            <span class="btn-link facts--submit" ng-click="item.externalInfluencesEditMode = !item.externalInfluencesEditMode" ng-show="!item.externalInfluencesEditMode">
-                                {{item.inv_meth_ei_note != '' ? 'Edit note' : 'Add note'}}
-                            </span>
-                        </div>
-                        <a href="#" class="btn-link facts--submit" ng-show="item.externalInfluencesEditMode" ng-click="saveNoteExternalInfluences(item)">
-                            Save
-                        </a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-3">
-                    </div>
-                    <div class="col-4">
-                        <div class="investigation__inner">
-                            <dropbox ng-dropbox-textExpr="getCampusInfluences(item)"
-                                        itemText="{{item.name_en}}"
-                                        ng-dropbox-list="model.company_root_cases_organizational"
-                                        ng-dropbox-rootItem="item"
-                                        ng-dropbox-on-select="changeCampusInfluences">
-                            </dropbox>
-                        </div>
-                    </div>
-                    <div class="col-5">
-                        <div class="factsEstablished__box pull-left ">
-                            <textarea class="facts-established--text" ng-model="item.inv_meth_ci_note" ng-show="item.campusInfluencesEditMode"></textarea>
-                            <p ng-show="!item.campusInfluencesEditMode">{{item.inv_meth_ci_note}}</p>
-                        </div>
-                        <div class="pull-right">
-                            <span class="btn-link facts--submit" ng-click="item.campusInfluencesEditMode = !item.campusInfluencesEditMode" ng-show="!item.campusInfluencesEditMode">
-                                {{item.inv_meth_ci_note != '' ? 'Edit note' : 'Add note'}}
-                            </span>
-                        </div>
-                        <a href="#" class="btn-link facts--submit" ng-show="item.campusInfluencesEditMode" ng-click="saveNoteCampusInfluences(item)">
-                            Save
-                        </a>
-                    </div>
-                </div>*@
         </section>
         <section style="height: 300px;">
             <p>@LocalizationGetter.GetString("NARootCauseExplanation")</p>

@@ -285,7 +285,8 @@
                 url: "/Case/CloseTask",
                 data: { task_id: @task_id, user_id: @user_id }
             }).done(function (data) {//data from server
-                location.reload();
+                console.log('/newCase/Tasks/' + @report_id);
+                window.location.href = '/newCase/Tasks/' + @report_id;
             }).fail(function (error) {
                 console.log(error);
             });
