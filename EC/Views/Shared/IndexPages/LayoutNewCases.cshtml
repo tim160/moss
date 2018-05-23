@@ -52,16 +52,22 @@
     int _report_id = 0;
     int investigationstatus = 1;
     string report_color = "", report_color_code = "", report_name_code = "";
+    bool is_owner = false;
+    user soff = null;
+
     if ((ViewBag.report_id != null) && ((int)ViewBag.report_id != 0))
     {
         _report_id = (int)ViewBag.report_id;
-        rm = new EC.Models.ReportModel(_report_id);
+        rm = new ReportModel(_report_id);
 
         report_name = rm.SecondaryTypeString() + " - " + rm.LocationString() + " - #" + rm._report.display_name;
         report_name_code = LocalizationGetter.GetString("Newreport") + ": #" + rm._report.display_name;
         report_color = rm.ColorDescr();
         report_color_code = rm.ColorCode();
         investigationstatus = rm._investigation_status;
+
+        is_owner = rm.ReportOwners().FirstOrDefault(x => x.report_id == _report_id && x.user_id == user_id && x.status_id == 2) != null;
+        soff = rm.GetSignOffMeditoar();
     }
 
     string[] _statuses = ECGlobalConstants.ReportFlowStatusesList;
@@ -69,7 +75,7 @@
     string same_mediator_warning = LocalizationGetter.GetString("AddFurtherNotes");
     if (rm != null && user_id == rm.Last_investigation_status_user_id())
     {
-        same_mediator_warning = LocalizationGetter.GetString("RecommendSecond1") + " " + LocalizationGetter.GetString("RecommendSecond2");
+   ///     same_mediator_warning = LocalizationGetter.GetString("RecommendSecond1") + " " + LocalizationGetter.GetString("RecommendSecond2");
     }
 
     string normal_button_promotion = LocalizationGetter.GetString("RequestCloseCase"); //ResolveCaseUp
@@ -371,14 +377,17 @@
                 @*
                     <a href="#" class="btn-link acceptCaseBtn">@Res_or_comp</a>
                 *@
-                @if ((_user.user_permissions_approve_case_closure == 1) || (rm.MediatorsWhoHasAccessToReport().Select(t => t.id).ToList().Contains(_user.id)))
+
+                @if ((rm.MediatorsWhoHasAccessToReport().Select(t => t.id).ToList().Contains(_user.id)))
                 {
-                    if (Res_or_comp == LocalizationGetter.GetString("Awaitingapproval") && _user.user_permissions_approve_case_closure == 1)
+
+
+                    if (Res_or_comp == LocalizationGetter.GetString("Awaitingapproval") && (_user.role_id == ECLevelConstants.level_supervising_mediator || ((soff != null) && (soff.id == _user.id))))
                     {
                         <a href="#approveDialog" rel="modal:open" id="return_investigation" style="margin-right: 30px;" class="btn-link" value="@normal_button_value">RETURN FOR INVESTIGATION</a>
                         <a href="#approveDialog" rel="modal:open" id="approve_close" class="btn-link" value="@normal_button_value">APPROVE</a>
                     }
-                    else
+                    else if(_user.role_id == ECLevelConstants.level_supervising_mediator || is_owner)
                     {
                         @*@<a href="#openModal" class="btn-link" rel="modal:open" disabled>@Res_or_comp</a>*@
                         <a href="#" class="btn-link" onclick="closeCaseModal()" disabled>@Res_or_comp</a>
@@ -400,7 +409,6 @@
                 @foreach (var user in rm.MediatorsWhoHasAccessToReport())
                 {
                     var owner = rm.ReportOwners().FirstOrDefault(x => x.report_id == _report_id && x.user_id == user.id && x.status_id == 2) != null;
-                    var soff = rm.GetSignOffMeditoar();
                     <li class="breadcrumbs-mediators__li">
                         <a href="#" class="breadcrumbs-mediators__a">
                             <img src="@(user.photo_path.Trim() != "" ? Url.Content(user.photo_path.Trim()) : Url.Content("~/Content/Icons/noPhoto.png"))" alt="" class="breadcrumbs-mediators__img" />

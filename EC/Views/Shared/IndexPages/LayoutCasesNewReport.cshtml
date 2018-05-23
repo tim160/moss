@@ -103,8 +103,8 @@
     <script src="~/Libs/angular-http/angular-http.js"></script>
     <script src="~/Libs/angular-resource/angular-resource.min.js"></script>
     <script src="~/Libs/angular-animate/angular-animate.min.js"></script>
-    <script src="~/Libs/angular-sanitize/angular-sanitize.min.js"></script>    
-    <script src="~/Libs/ng-file-upload/ng-file-upload.min.js"></script>    
+    <script src="~/Libs/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="~/Libs/ng-file-upload/ng-file-upload.min.js"></script>
 
     <script src="~/Libs/d3/d3.min.js"></script>
     <script src="~/Libs/nvd3/build/nv.d3.min.js"></script>
@@ -116,8 +116,8 @@
     <script type="text/javascript" id="inspectletjs">
         window.__insp = window.__insp || [];
         __insp.push(['wid', 467767562]);
-        (function() {
-            function ldinsp(){if(typeof window.__inspld != "undefined") return; window.__inspld = 1; var insp = document.createElement('script'); insp.type = 'text/javascript'; insp.async = true; insp.id = "inspsync"; insp.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cdn.inspectlet.com/inspectlet.js'; var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(insp, x); };
+        (function () {
+            function ldinsp() { if (typeof window.__inspld != "undefined") return; window.__inspld = 1; var insp = document.createElement('script'); insp.type = 'text/javascript'; insp.async = true; insp.id = "inspsync"; insp.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cdn.inspectlet.com/inspectlet.js'; var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(insp, x); };
             setTimeout(ldinsp, 500); document.readyState != "complete" ? (window.attachEvent ? window.attachEvent('onload', ldinsp) : window.addEventListener('load', ldinsp, false)) : ldinsp();
         })();
     </script>
@@ -201,7 +201,7 @@
                                 <div class="userNavigation__name">@(um._user != null ? um._user.first_nm : "")</div>
                                 <div class="userNavigation__surname">@(um._user != null ? um._user.last_nm : "")</div>
                             *@
-                            @if (_user!= null)
+                            @if (_user != null)
                             {
                                 var logo = cm.getLogoCompany(_user.company_id);
                                 if (!String.IsNullOrEmpty(logo))
@@ -246,7 +246,7 @@
             </div>
         </div>
     </header>
-   
+
     <div class="menuCasesBlock" style="margin-top: 35px; margin-bottom: 35px;">
         <div class="headerBlockTextLeft">
             @{
@@ -372,8 +372,8 @@
                     })
 
                             @Html.Partial("~/Views/Shared/EditorTemplates/ApproveDialogModal.cshtml", new ViewDataDictionary
-               {
-               })
+                       {
+                       })
 
                             if (((rm._investigation_status == ECGlobalConstants.investigation_status_completed || rm._investigation_status == ECGlobalConstants.investigation_status_resolution)))
                             {
@@ -604,24 +604,24 @@
                 el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
             }
 
-            function startClick(){
+            function startClick() {
                 $('.logButtonModal').click(
-                    function(){
-                        if(textareaPopup[0].value==""){
-                            textareaPopup.css({'border-color':'red', 'box-shadow':'red'});
+                    function () {
+                        if (textareaPopup[0].value == "") {
+                            textareaPopup.css({ 'border-color': 'red', 'box-shadow': 'red' });
                         }
-                        else{
+                        else {
                             //  console.log('logButtonModal click - _report_id = ' + @_report_id);
                         }
                     }
                 );
                 $('.repButtonModal').click(
-                    function(){
-                        if(textareaPopup[0].value==""){
-                            textarea.css({'border-color':'red', 'box-shadow':'red'});
+                    function () {
+                        if (textareaPopup[0].value == "") {
+                            textarea.css({ 'border-color': 'red', 'box-shadow': 'red' });
                         }
-                        else{
-                        //    console.log('repButtonModal click - _report_id = ' + @_report_id);
+                        else {
+                            //    console.log('repButtonModal click - _report_id = ' + @_report_id);
                         }
                     }
                 );
@@ -629,7 +629,7 @@
             startClick();
         });
 
-        $("#return_investigation").on('click', function(el){
+        $("#return_investigation").on('click', function (el) {
 
             $("#approveDialog").toggle();
             $("#txtEscalate").attr('placeholder', "@Html.Raw(GlobalRes.AddReasonWhy)");
@@ -639,7 +639,7 @@
             $("#_overlay_title").text("@Html.Raw(GlobalRes.Returnnvestigation)");
             $("#textbox_title").text("@Html.Raw(GlobalRes.AddReasonWhy)");
         });
-        $("#approve_close").on('click', function(el){
+        $("#approve_close").on('click', function (el) {
 
             $("#approveDialog").toggle();
             $("#txtEscalate").attr('placeholder', "@Html.Raw(same_mediator_warning)");

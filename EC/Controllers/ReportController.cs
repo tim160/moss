@@ -235,7 +235,7 @@ namespace EC.Controllers
             string title = LocalizationGetter.GetString("Email_Title_NewCase");
             if (has_involved)
                 title = LocalizationGetter.GetString("Email_Title_NewCaseInvolved");
-            foreach (var _user in rm.MediatorsWhoHasAccessToReport().Where(t => t.role_id != 4).ToList())
+            foreach (var _user in rm.MediatorsWhoHasAccessToReport().Where(t => t.role_id != ECLevelConstants.level_escalation_mediator).ToList())
             {
                 eb = new Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
                 to = new List<string>();
