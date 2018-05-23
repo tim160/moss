@@ -216,14 +216,23 @@ html, body{
 }
 
 .m-0{
-	margin: 0;
+	margin: 0 !important;
 }
 .p-lr-50{
 	padding-left: 50px;
 	padding-right: 50px;
 }
+.m-b-10{
+	margin-bottom: 10px !important;
+}
 .m-b-15{
-	margin-bottom: 15px;
+	margin-bottom: 15px !important;
+}
+.m-b-20{
+	margin-bottom: 20px !important;
+}
+.m-b-30{
+	margin-bottom: 30px !important;
 }
 
 .p-tb-5{
@@ -271,10 +280,10 @@ html, body{
 }
 
 .pull-left{
-	float: left !im;
+	float: left !important;
 }
 .pull-right{
-	float: right;
+	float: right !important;
 }
 
 .btn{
@@ -849,6 +858,9 @@ header.header{
 	color: #fff;
 	border: 1px solid #049787;
 }
+.btn-link.btn-link_small{
+	font-size: 14px;
+}
 
 /*---------------------------------/btn-link-------------------------------*/
 	
@@ -1168,7 +1180,20 @@ header.header{
 /*======================================================
 ===================content-container====================
 =======================================================*/
+.align-items-center{
+	display: flex;
+	align-items: center;
+}
 
+.container__inner{
+	margin: 0 auto;
+	padding: 0 30px;
+	line-height: 1;
+}
+.container__innerContent{
+	padding-left: 20px;
+	line-height: 1;
+}
 .content-container{
 	padding: 40px 0;
 	border-bottom: 1px solid #ccc;
@@ -1180,10 +1205,11 @@ header.header{
 		padding: 0 60px;
 	}
 
-		.sectionHeader{
-			margin: 0 0 30px 0;
+		.sectionHeader,
+		.container .sectionHeader{
+			margin: 0 0 20px 0;
 			font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
-			font-size: 18px;
+			font-size: 20px;
 			color: #727c7e;
 			min-height: 1px;
 		}
@@ -1273,10 +1299,11 @@ input.personDataTextBox{
 	margin-left: 40px;
 }
 
-		.content-container__p{
+		.content-container__p,
+		.container .content-container__p{
 			font-size: inherit;
 			line-height: 30px;
-			margin: 0;
+			margin: 0 0 15px 0;
 		}
 		.content-container__p>strong{
 			font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
@@ -2676,12 +2703,6 @@ input.personDataTextBox{
 			font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
 			font-size: 14px;
 			color: #05b5a2;
-		}
-       .teamBlock__addNewText-title_involved{
-			text-transform: uppercase;
-			font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
-			font-size: 14px;
-			color: darkslategray;
 		}
 .btn__team{
 	margin-top: 5px;

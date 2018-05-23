@@ -59,244 +59,347 @@
 <div class="container subNavigationTabs__tabContent-container">
     <div id="subTab-1" class="subNavigationTabs__tabContent active" ng-controller="NewCaseInvestigationNotesController" ng-cloak>
         <section class="content-container">
-            <div class="content-container__inner">
-                <div class="content-container__inner-additional clearfix">
-                    <div class="row">
+            <div class="row container__inner">
+                <div class="col-6">
+					<p class="sectionHeader">
+						Incident types
+					</p>
+                    <div class="container__innerContent">
+                        <p class="content-container__p" ng-repeat="item in model.report_secondary_type_selected">
+                            <a href="#" ng-click="incidentTypeDelete(item.id)" ng-show="!item.added_by_reporter">X</a>
+                            {{item.secondary_type_en}}
+                        </p>
+                        <a href="#" class="btn-link" ng-show="!incidentTypeAddMode && model.report_secondary_type_selected_avilable.length > 0" ng-click="incidentTypeAddMode = !incidentTypeAddMode">
+                            Add incident type
+                        </a>
+                        <dropbox ng-show="incidentTypeAddMode"
+                                    text="Select one"
+                                    itemText="{{item.secondary_type_en}}"
+                                    ng-dropbox-list="model.report_secondary_type_selected_avilable"
+                                    ng-dropbox-rootItem=""
+                                    ng-dropbox-on-select="incidentTypeAdd">
+                        </dropbox>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <p class="sectionHeader">
+                        Involved Departments
+                    </p>
+                    <div class="container__innerContent">
+                        <p class="content-container__p" ng-repeat="item in model.departments_report">
+                            <a href="#" ng-click="departmentDelete(item.id)" ng-show="!item.added_by_reporter">X</a>
+                            {{item.name}}
+                        </p>
+                        <a href="#" class="btn-link" ng-show="!departmentAddMode && model.departments_all.length > 0" ng-click="departmentAddMode = !departmentAddMode">
+                            Add department
+                        </a>
+                        <dropbox ng-show="departmentAddMode"
+                                    text="Select one"
+                                    itemText="{{item.department_en}}"
+                                    ng-dropbox-list="model.departments_all"
+                                    ng-dropbox-rootItem=""
+                                    ng-dropbox-on-select="departmentAdd">
+                        </dropbox>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-container">
+            <div class="row container__inner">
+                <div class="col-6">
+                    <p class="sectionHeader">
+                        Involved Parties
+                    </p>
+                    <div class="container__innerContent">
+                        <p class="content-container__p" ng-repeat="item in model.mediator_involved">
+                            <a href="#" ng-click="mediatorDelete(item.id)" ng-show="item.added_by_reporter == false">X</a>
+                            {{item.first_nm}} {{item.last_nm}}
+                        </p>
+                        <p class="content-container__p" ng-repeat="item in model.mediator_not_involved">
+                            <a href="#" ng-click="mediatorDelete(item.id, 2)" ng-show="item.added_by_reporter == false">X</a>
+                            {{item.Name}} {{item.last_name}} {{item.Title}} {{getRoleTitle(item.role_in_report_id)}}
+                        </p>
+                        <a href="#" class="btn-link" ng-show="!mediatorAddMode" ng-click="mediatorAddMode = !mediatorAddMode">Add person</a>
+                        <form ng-show="mediatorAddMode" name="form" ng-submit="addNewPerson(form.$valid)" novalidate>
+                            <div class="addPerson">
+                                <div class="addPersonName sampleContainer">
+                                    <div class="personTitle title">@GlobalRes.FirstNameUp</div>
+                                    <div class="personData">
+                                        <input name="personName" class="personDataTextBox fName" required ng-class="{ error : form.personName.$invalid && (form.personName.$dirty || form.$submitted)}" ng-model="addPerson.FirstName" />
+                                    </div>
+                                </div>
+
+                                <div class="addPersonName sampleContainer">
+                                    <div class="personTitle title">@GlobalRes.LastNameUp</div>
+                                    <div class="personData">
+                                        <input name="personLastName" class="personDataTextBox lName" required ng-class="{error : form.personLastName.$invalid && (form.personLastName.$dirty || form.$submitted)}" ng-model="addPerson.LastName" />
+                                    </div>
+                                </div>
+
+                                <div class="addPersonInfo sampleContainer">
+                                    <div class="personTitle title">@GlobalRes.Title</div>
+                                    <div class="personData">
+                                        <input type="text" name="personTitle" class="personDataTextBox witnessTitle" required ng-class="{error : form.personTitle.$invalid && (form.personTitle.$dirty || form.$submitted)}" ng-model="addPerson.Title" />
+                                    </div>
+                                </div>
+                                <dropbox ng-class="{errorDropbox : addPerson.Role.id == 0 && form.$submitted}"
+                                            ng-dropbox-textexpr="addPerson.Role.role_en"
+                                            itemText="{{item.role_en}}"
+                                            ng-dropbox-list="model.addNewPersonRoles"
+                                            ng-dropbox-rootItem=""
+                                            ng-dropbox-on-select="addPerson.Role">
+                                </dropbox>
+                                <button type="submit" class="btn-link">@GlobalRes.AddPerson</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-6"></div>
+            </div>
+        </section>
+
+        <section class="content-container">
+            <div class="row container__inner">
+                <div class="col-12">
+                    <p class="sectionHeader" >Facts Established</p>
+                    <div class="row container__innerContent">
+                        <div class="row m-0">
+                            <textarea class="facts-established--text" ng-model="model.note1" ng-show="editNote1"> </textarea>
+                        </div>
+                        <div class="row m-0 clearfix">
+                            <p ng-show="!editNote1" class="content-container__p m-b-20" ng-bind-html="noteP(model.note1)"></p>
+                            <a href="#" class="btn-link btn-link_small pull-right" ng-show="editNote1" ng-click="saveNote(1)">Save</a>
+                            <a href="#" class="btn-link btn-link_small pull-right" ng-show="!editNote1" ng-click="editNote1 = true">
+                                {{model.note1 || '' !== '' ? 'Edit' : 'Add'}}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-container">
+            <div class="row container__inner">
+                <div class="col-12">
+                    <p class="sectionHeader">Investigation Methodology</p>
+                    <div class="row container__innerContent">
+                        <div class="row m-0">
+                            <textarea class="facts-established--text m-b-20" ng-model="model.note2" ng-show="editNote2"> </textarea>
+                        </div><!-- /.row -->
+                        <div class="row m-0 clearfix">
+                            <p ng-show="!editNote2" class="content-container__p m-b-20" ng-bind-html="noteP(model.note2)"></p>
+							<div class="row m-0 clearfix">
+                                <a href="#" class="btn-link btn-link_small pull-right" ng-show="editNote2" ng-click="saveNote(2)">Save</a>
+                                <a href="#" class="btn-link btn-link_small pull-right" ng-show="!editNote2" ng-click="editNote2 = true">
+                                    {{model.note2 || '' !== '' ? 'Edit' : 'Add'}}
+                                </a>
+							</div>
+
+                        </div><!-- /.row -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-container">
+            <div class="row container__inner">
+				<div class="col-12">
+					<p class="sectionHeader" >Root Cause Investigation</p>
+				</div>
+            </div>
+
+            <div ng-repeat="item in model.report_secondary_type_selected">
+
+                <div> <!-- Behavioral -->
+                    <div class="row container__inner align-items-center m-b-20">
                         <div class="col-4">
-                            <div class="row">
-                                <p class="sectionHeader-col" style="font-size: 20px;">Incident types</p>
-                                <p class="content-container__p" ng-repeat="item in model.report_secondary_type_selected">
-                                    <a href="#" ng-click="incidentTypeDelete(item.id)" ng-show="!item.added_by_reporter">X</a>
+                            <div class="container__innerContent">
+                                <p class="content-container__p m-0">
                                     {{item.secondary_type_en}}
                                 </p>
                             </div>
-                            <a href="#" class="btn-link" ng-show="!incidentTypeAddMode && model.report_secondary_type_selected_avilable.length > 0" ng-click="incidentTypeAddMode = !incidentTypeAddMode">
-                                Add incident type
-                            </a>
-                            <dropbox ng-show="incidentTypeAddMode"
-                                     text="Select one"
-                                     itemText="{{item.secondary_type_en}}"
-                                     ng-dropbox-list="model.report_secondary_type_selected_avilable"
-                                     ng-dropbox-rootItem=""
-                                     ng-dropbox-on-select="incidentTypeAdd">
-                            </dropbox>
                         </div>
-
-                        <div class="col-4">
-                            <div class="row">
-                                <p class="sectionHeader-col" style="font-size: 20px;">Involved Departments</p>
-                                <p class="content-container__p" ng-repeat="item in model.departments_report">
-                                    <a href="#" ng-click="departmentDelete(item.id)" ng-show="!item.added_by_reporter">X</a>
-                                    {{item.name}}
-                                </p>
-                            </div>
-                            <a href="#" class="btn-link" ng-show="!departmentAddMode && model.departments_all.length > 0" ng-click="departmentAddMode = !departmentAddMode">
-                                Add department
-                            </a>
-                            <dropbox ng-show="departmentAddMode"
-                                     text="Select one"
-                                     itemText="{{item.department_en}}"
-                                     ng-dropbox-list="model.departments_all"
-                                     ng-dropbox-rootItem=""
-                                     ng-dropbox-on-select="departmentAdd">
-                            </dropbox>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="content-container">
-            <div class="content-container__inner">
-                <div class="content-container__inner-additional clearfix">
-                    <div class="row">
-                        <div class="col-4">
-                            <div class="row">
-                                <p class="sectionHeader-col" style="font-size: 20px;">Involved Parties</p>
-                                <p class="content-container__p" ng-repeat="item in model.mediator_involved">
-                                    <a href="#" ng-click="mediatorDelete(item.id)" ng-show="item.added_by_reporter == false">X</a>
-                                    {{item.first_nm}} {{item.last_nm}}
-                                </p>
-                                <p class="content-container__p" ng-repeat="item in model.mediator_not_involved">
-                                    <a href="#" ng-click="mediatorDelete(item.id, 2)" ng-show="item.added_by_reporter == false">X</a>
-                                    {{item.Name}} {{item.last_name}} {{item.Title}} {{getRoleTitle(item.role_in_report_id)}}
-                                </p>
-                            </div>
-                            <a href="#" class="btn-link" ng-show="!mediatorAddMode" ng-click="mediatorAddMode = !mediatorAddMode">Add person</a>
-                            <form ng-show="mediatorAddMode" name="form" ng-submit="addNewPerson(form.$valid)" novalidate>
-                                <div class="addPerson">
-                                    <div class="addPersonName sampleContainer">
-                                        <div class="personTitle title">@GlobalRes.FirstNameUp</div>
-                                        <div class="personData">
-                                            <input name="personName" class="personDataTextBox fName" required ng-class="{ error : form.personName.$invalid && (form.personName.$dirty || form.$submitted)}" ng-model="addPerson.FirstName" />
-                                        </div>
-                                    </div>
-
-                                    <div class="addPersonName sampleContainer">
-                                        <div class="personTitle title">@GlobalRes.LastNameUp</div>
-                                        <div class="personData">
-                                            <input name="personLastName" class="personDataTextBox lName" required ng-class="{error : form.personLastName.$invalid && (form.personLastName.$dirty || form.$submitted)}" ng-model="addPerson.LastName" />
-                                        </div>
-                                    </div>
-
-                                    <div class="addPersonInfo sampleContainer">
-                                        <div class="personTitle title">@GlobalRes.Title</div>
-                                        <div class="personData">
-                                            <input type="text" name="personTitle" class="personDataTextBox witnessTitle" required ng-class="{error : form.personTitle.$invalid && (form.personTitle.$dirty || form.$submitted)}" ng-model="addPerson.Title" />
-                                        </div>
-                                    </div>
-                                    <dropbox ng-class="{errorDropbox : addPerson.Role.id == 0 && form.$submitted}"
-                                             ng-dropbox-textexpr="addPerson.Role.role_en"
-                                             itemText="{{item.role_en}}"
-                                             ng-dropbox-list="model.addNewPersonRoles"
-                                             ng-dropbox-rootItem=""
-                                             ng-dropbox-on-select="addPerson.Role">
-                                    </dropbox>
-                                    <button type="submit" class="btn-link">@GlobalRes.AddPerson</button>
-                                </div>
-                            </form>
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="content-container">
-            <div class="content-container__inner">
-                <p class="sectionHeader" style="font-size: 20px">Facts Established</p>
-                <div class="content-container__inner-additional">
-                    <div class="row">
-                        <textarea class="facts-established--text" ng-model="model.note1" ng-show="editNote1"> </textarea>
-                    </div>
-                    <div class="row clearfix">
-                        <p ng-show="!editNote1" style="font-size: 18px; font-family: 'OpenSans-Regular', arial, verdana, sans-serif;" ng-bind-html="noteP(model.note1)"></p>
-                        <a href="#" class="btn-link facts--submit" ng-show="editNote1" ng-click="saveNote(1)">Save</a>
-                        <a href="#" class="btn-link facts--submit" ng-show="!editNote1" ng-click="editNote1 = true">
-                            {{model.note1 || '' !== '' ? 'Edit' : 'Add'}}
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="content-container">
-            <div class="content-container__inner">
-                <p class="sectionHeader" style="font-size: 20px">Investigation Methodology</p>
-                <div class="content-container__inner-additional">
-                    <div class="row">
-                        <textarea class="facts-established--text" ng-model="model.note2" ng-show="editNote2"> </textarea>
-                    </div><!-- /.row -->
-                    <div class="row clearfix">
-                        <p ng-show="!editNote2" style="font-size: 18px; font-family: 'OpenSans-Regular', arial, verdana, sans-serif;" ng-bind-html="noteP(model.note2)"></p>
-                        <a href="#" class="btn-link facts--submit" ng-show="editNote2" ng-click="saveNote(2)">Save</a>
-                        <a href="#" class="btn-link facts--submit" ng-show="!editNote2" ng-click="editNote2 = true">
-                            {{model.note2 || '' !== '' ? 'Edit' : 'Add'}}
-                        </a>
-                    </div><!-- /.row -->
-                </div>
-            </div>
-        </section>
-
-        <section class="content-container">
-            <div class="content-container__inner">
-                <p class="sectionHeader">Root Cause Investigation</p>
-                <br />
-                <div class="content-container__inner-additional clearfix" ng-repeat="item in model.report_secondary_type_selected" style="padding-left: 0px;">
-                    <div class="row">
-                        <div class="col-3"  style="padding-left: 0px;">
-                            <p class="content-container__p">{{item.secondary_type_en}}</p>
-                        </div>
-                        <div class="col-4">
+                        <div class="col-5">
                             <div class="investigation__inner">
                                 <dropbox ng-dropbox-textExpr="getBehavioralFactors(item)"
-                                         itemText="{{item.name_en}}"
-                                         ng-dropbox-list="model.company_root_cases_behavioral"
-                                         ng-dropbox-rootItem="item"
-                                         ng-dropbox-on-select="changeBehavioralFactors">
+                                            itemText="{{item.name_en}}"
+                                            ng-dropbox-list="model.company_root_cases_behavioral"
+                                            ng-dropbox-rootItem="item"
+                                            ng-dropbox-on-select="changeBehavioralFactors">
                                 </dropbox>
                             </div>
                         </div>
-                        <div class="col-5">
-                            <div class="factsEstablished__box pull-left ">
-                                <textarea class="facts-established--text" cols="20" rows="5" ng-model="item.inv_meth_bf_note" ng-show="item.behavioralEditMode"></textarea>
-                                <p ng-show="!item.behavioralEditMode">{{item.inv_meth_bf_note}}</p>
-                            </div>
-                            <div class="pull-right">
-                                <a href="#" class="btn-link facts--submit" ng-click="item.behavioralEditMode = !item.behavioralEditMode" ng-show="!item.behavioralEditMode">
-                                    {{item.inv_meth_bf_note != '' ? 'Edit note' : 'Add note'}}
-                                </a>
-                            </div>
-                            <a href="#" class="btn-link facts--submit" ng-show="item.behavioralEditMode" ng-click="saveNoteBehavioralFactors(item)">
-                                Save
+                        <div class="col-3">
+                            <a href="#" class="btn-link btn-link_small pull-right" ng-click="item.behavioralEditMode = !item.behavioralEditMode" ng-show="!item.behavioralEditMode">
+                                {{item.inv_meth_bf_note != '' ? 'Edit note' : 'Add note'}}
                             </a>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-3">
-                        </div>
+
+			        <div class="row container__inner">
+				        <div class="col-4"></div>
+				        <div class="col-8 clearfix">
+					        <div class="row m-0">
+                                <textarea class="facts-established--text m-b-20" cols="20" rows="5" ng-model="item.inv_meth_bf_note" ng-show="item.behavioralEditMode"></textarea>
+                                <p class="content-container__p m-b-20" ng-show="!item.behavioralEditMode && item.inv_meth_bf_note != ''">{{item.inv_meth_bf_note}}</p>
+					        </div>
+					        <div class="row m-0">
+                                <a href="#" class="btn-link btn-link_small pull-right m-b-20" ng-show="item.behavioralEditMode" ng-click="saveNoteBehavioralFactors(item)">
+                                    Save
+                                </a>
+					        </div>
+				        </div>
+			        </div>
+                </div>
+
+                <div> <!-- External -->
+                    <div class="row container__inner align-items-center m-b-20">
                         <div class="col-4">
+                            <div class="container__innerContent">
+                                <p class="content-container__p m-0">
+                                    
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-5">
                             <div class="investigation__inner">
                                 <dropbox ng-dropbox-textExpr="getExternalInfluences(item)"
-                                         itemText="{{item.name_en}}"
-                                         ng-dropbox-list="model.company_root_cases_external"
-                                         ng-dropbox-rootItem="item"
-                                         ng-dropbox-on-select="changeExternalInfluences">
+                                            itemText="{{item.name_en}}"
+                                            ng-dropbox-list="model.company_root_cases_external"
+                                            ng-dropbox-rootItem="item"
+                                            ng-dropbox-on-select="changeExternalInfluences">
                                 </dropbox>
                             </div>
                         </div>
-                        <div class="col-5">
-                            <div class="factsEstablished__box pull-left ">
-                                <textarea class="facts-established--text" ng-model="item.inv_meth_ei_note" ng-show="item.externalInfluencesEditMode"></textarea>
-                                <p ng-show="!item.externalInfluencesEditMode">{{item.inv_meth_ei_note}}</p>
-                            </div>
-                            <div class="pull-right">
-                                <span class="btn-link facts--submit" ng-click="item.externalInfluencesEditMode = !item.externalInfluencesEditMode" ng-show="!item.externalInfluencesEditMode">
-                                    {{item.inv_meth_ei_note != '' ? 'Edit note' : 'Add note'}}
-                                </span>
-                            </div>
-                            <a href="#" class="btn-link facts--submit" ng-show="item.externalInfluencesEditMode" ng-click="saveNoteExternalInfluences(item)">
-                                Save
+                        <div class="col-3">
+                            <a href="#" class="btn-link btn-link_small pull-right" ng-click="item.externalInfluencesEditMode = !item.externalInfluencesEditMode" ng-show="!item.externalInfluencesEditMode">
+                                {{item.inv_meth_ei_note != '' ? 'Edit note' : 'Add note'}}
                             </a>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-3">
-                        </div>
+
+			        <div class="row container__inner">
+				        <div class="col-4"></div>
+				        <div class="col-8 clearfix">
+					        <div class="row m-0">
+                                <textarea class="facts-established--text m-b-20" cols="20" rows="5" ng-model="item.inv_meth_ei_note" ng-show="item.externalInfluencesEditMode"></textarea>
+                                <p class="content-container__p m-b-20" ng-show="!item.externalInfluencesEditMode && item.inv_meth_ei_note != ''">{{item.inv_meth_ei_note}}</p>
+					        </div>
+					        <div class="row m-0">
+                                <a href="#" class="btn-link btn-link_small pull-right m-b-20" ng-show="item.externalInfluencesEditMode" ng-click="saveNoteExternalInfluences(item)">
+                                    Save
+                                </a>
+					        </div>
+				        </div>
+			        </div>
+                </div>
+            
+                <div> <!-- External -->
+                    <div class="row container__inner align-items-center m-b-20">
                         <div class="col-4">
+                            <div class="container__innerContent">
+                                <p class="content-container__p m-0">
+                                    
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-5">
                             <div class="investigation__inner">
                                 <dropbox ng-dropbox-textExpr="getCampusInfluences(item)"
-                                         itemText="{{item.name_en}}"
-                                         ng-dropbox-list="model.company_root_cases_organizational"
-                                         ng-dropbox-rootItem="item"
-                                         ng-dropbox-on-select="changeCampusInfluences">
+                                            itemText="{{item.name_en}}"
+                                            ng-dropbox-list="model.company_root_cases_organizational"
+                                            ng-dropbox-rootItem="item"
+                                            ng-dropbox-on-select="changeCampusInfluences">
                                 </dropbox>
                             </div>
                         </div>
-                        <div class="col-5">
-                            <div class="factsEstablished__box pull-left ">
-                                <textarea class="facts-established--text" ng-model="item.inv_meth_ci_note" ng-show="item.campusInfluencesEditMode"></textarea>
-                                <p ng-show="!item.campusInfluencesEditMode">{{item.inv_meth_ci_note}}</p>
-                            </div>
-                            <div class="pull-right">
-                                <span class="btn-link facts--submit" ng-click="item.campusInfluencesEditMode = !item.campusInfluencesEditMode" ng-show="!item.campusInfluencesEditMode">
-                                    {{item.inv_meth_ci_note != '' ? 'Edit note' : 'Add note'}}
-                                </span>
-                            </div>
-                            <a href="#" class="btn-link facts--submit" ng-show="item.campusInfluencesEditMode" ng-click="saveNoteCampusInfluences(item)">
-                                Save
+                        <div class="col-3">
+                            <a href="#" class="btn-link btn-link_small pull-right" ng-click="item.campusInfluencesEditMode = !item.campusInfluencesEditMode" ng-show="!item.campusInfluencesEditMode">
+                                {{item.inv_meth_ci_note != '' ? 'Edit note' : 'Add note'}}
                             </a>
                         </div>
                     </div>
+
+			        <div class="row container__inner">
+				        <div class="col-4"></div>
+				        <div class="col-8 clearfix">
+					        <div class="row m-0">
+                                <textarea class="facts-established--text m-b-20" cols="20" rows="5" ng-model="item.inv_meth_ci_note" ng-show="item.campusInfluencesEditMode"></textarea>
+                                <p class="content-container__p m-b-20" ng-show="!item.campusInfluencesEditMode && item.inv_meth_ci_note != ''">{{item.inv_meth_ci_note}}</p>
+					        </div>
+					        <div class="row m-0">
+                                <a href="#" class="btn-link btn-link_small pull-right m-b-20" ng-show="item.campusInfluencesEditMode" ng-click="saveNoteCampusInfluences(item)">
+                                    Save
+                                </a>
+					        </div>
+				        </div>
+			        </div>
                 </div>
-                <p>@LocalizationGetter.GetString("NARootCauseExplanation")</p>
+
             </div>
-            <div class="panel-overlay">
-                
-            </div>
+                @*
+
+                <div class="row">
+                    <div class="col-3">
+                    </div>
+                    <div class="col-4">
+                        <div class="investigation__inner">
+                            <dropbox ng-dropbox-textExpr="getExternalInfluences(item)"
+                                        itemText="{{item.name_en}}"
+                                        ng-dropbox-list="model.company_root_cases_external"
+                                        ng-dropbox-rootItem="item"
+                                        ng-dropbox-on-select="changeExternalInfluences">
+                            </dropbox>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="factsEstablished__box pull-left ">
+                            <textarea class="facts-established--text" ng-model="item.inv_meth_ei_note" ng-show="item.externalInfluencesEditMode"></textarea>
+                            <p ng-show="!item.externalInfluencesEditMode">{{item.inv_meth_ei_note}}</p>
+                        </div>
+                        <div class="pull-right">
+                            <span class="btn-link facts--submit" ng-click="item.externalInfluencesEditMode = !item.externalInfluencesEditMode" ng-show="!item.externalInfluencesEditMode">
+                                {{item.inv_meth_ei_note != '' ? 'Edit note' : 'Add note'}}
+                            </span>
+                        </div>
+                        <a href="#" class="btn-link facts--submit" ng-show="item.externalInfluencesEditMode" ng-click="saveNoteExternalInfluences(item)">
+                            Save
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3">
+                    </div>
+                    <div class="col-4">
+                        <div class="investigation__inner">
+                            <dropbox ng-dropbox-textExpr="getCampusInfluences(item)"
+                                        itemText="{{item.name_en}}"
+                                        ng-dropbox-list="model.company_root_cases_organizational"
+                                        ng-dropbox-rootItem="item"
+                                        ng-dropbox-on-select="changeCampusInfluences">
+                            </dropbox>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="factsEstablished__box pull-left ">
+                            <textarea class="facts-established--text" ng-model="item.inv_meth_ci_note" ng-show="item.campusInfluencesEditMode"></textarea>
+                            <p ng-show="!item.campusInfluencesEditMode">{{item.inv_meth_ci_note}}</p>
+                        </div>
+                        <div class="pull-right">
+                            <span class="btn-link facts--submit" ng-click="item.campusInfluencesEditMode = !item.campusInfluencesEditMode" ng-show="!item.campusInfluencesEditMode">
+                                {{item.inv_meth_ci_note != '' ? 'Edit note' : 'Add note'}}
+                            </span>
+                        </div>
+                        <a href="#" class="btn-link facts--submit" ng-show="item.campusInfluencesEditMode" ng-click="saveNoteCampusInfluences(item)">
+                            Save
+                        </a>
+                    </div>
+                </div>*@
         </section>
         <section style="height: 300px;">
-
+            <p>@LocalizationGetter.GetString("NARootCauseExplanation")</p>
         </section>
     </div>
 </div>
