@@ -90,7 +90,8 @@ namespace EC.Controllers
 
         public ActionResult Disclaimer(string companyCode)
         {
-            return View($"Disclaimer{(is_cc ? "-CC" : "")}");
+            var c = db.company.FirstOrDefault(x => x.company_code == companyCode);
+            return View($"Disclaimer{(is_cc ? "-CC" : "")}", new CompanyModel(c.id));
         }
 
         public ActionResult CheckStatus()

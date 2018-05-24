@@ -444,6 +444,7 @@
     <Content Include="Content\images\first-section-BG.jpg" />
     <Content Include="Content\images\first-section-СС-BG.jpg" />
     <Content Include="Content\images\lawsuits-img.png" />
+    <Content Include="Content\images\loginSection-logoImg__Dutchess.jpg" />
     <Content Include="Content\images\logo-mini-CC.png" />
     <Content Include="Content\images\logo-mini.png" />
     <Content Include="Content\images\mobile-img-CC.jpg" />
@@ -1226,6 +1227,7 @@
     <Content Include="Views\Report\PrintToPdf.cshtml" />
     <Content Include="Views\NewCase\PrintToPdf.cshtml" />
     <Content Include="Views\Service\Disclaimer.cshtml" />
+    <Content Include="Views\Service\Disclaimer-CC.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
