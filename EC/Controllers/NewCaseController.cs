@@ -556,13 +556,15 @@ namespace EC.Controllers
                 return RedirectToAction("Index", "Account");
             }
 
+            var rm = new ReportModel(id);
+
             if (pdf)
             {
                 var report = db.report.FirstOrDefault(x => x.id == id);
-                return new ActionAsPdf("PrintToPdf", new { id = id, rg = report.guid, ug = user.guid });
+                var fn = $"{rm.CompanyName()} Case Closure Report {rm._report.display_name}";
+                return new ActionAsPdf("PrintToPdf", new { id = id, rg = report.guid, ug = user.guid }) { FileName = fn };
             }
 
-            var rm = new ReportModel(id);
             ViewBag.user_id = user.id;
             return View(rm);
         }

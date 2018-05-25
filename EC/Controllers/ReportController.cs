@@ -446,13 +446,14 @@ namespace EC.Controllers
 
         public ActionResult PrintToPdf(Guid id, bool pdf = true)
         {
-            if (pdf)
-            {
-                return new ActionAsPdf("PrintToPdf", new { id = id, pdf = false });
-            }
-
             var report = db.report.FirstOrDefault(x => x.guid == id);
             var rm = new ReportModel(report.id);
+            if (pdf)
+            {
+                var fn = $"Report to {rm.CompanyName()}";
+                return new ActionAsPdf("PrintToPdf", new { id = id, pdf = false }) { FileName = fn };
+            }
+
             ViewBag.Roles = db.role_in_report.ToList();
             return View(rm);
         }
