@@ -224,6 +224,9 @@
                         </div>
                         <div class="col-5">
                             <div class="investigation__inner">
+                                <p class="content-container__p m-0">
+                                    <b>Select Behavioral Factors</b>
+                                </p>
                                 <dropbox ng-dropbox-textExpr="getBehavioralFactors(item)"
                                             itemText="{{item.name_en}}"
                                             ng-dropbox-list="model.company_root_cases_behavioral"
@@ -233,6 +236,9 @@
                             </div>
                         </div>
                         <div class="col-3">
+                            <p class="content-container__p m-0">
+                                &nbsp;
+                            </p>
                             <a href="#" class="btn-link btn-link_small pull-right" ng-click="item.behavioralEditMode = !item.behavioralEditMode" ng-show="!item.behavioralEditMode">
                                 {{item.inv_meth_bf_note != '' ? 'Edit note' : 'Add note'}}
                             </a>
@@ -265,6 +271,9 @@
                             </div>
                         </div>
                         <div class="col-5">
+                            <p class="content-container__p m-0">
+                                <b>Select External Influences</b>
+                            </p>
                             <div class="investigation__inner">
                                 <dropbox ng-dropbox-textExpr="getExternalInfluences(item)"
                                             itemText="{{item.name_en}}"
@@ -275,6 +284,9 @@
                             </div>
                         </div>
                         <div class="col-3">
+                            <p class="content-container__p m-0">
+                                &nbsp;
+                            </p>
                             <a href="#" class="btn-link btn-link_small pull-right" ng-click="item.externalInfluencesEditMode = !item.externalInfluencesEditMode" ng-show="!item.externalInfluencesEditMode">
                                 {{item.inv_meth_ei_note != '' ? 'Edit note' : 'Add note'}}
                             </a>
@@ -307,6 +319,9 @@
                             </div>
                         </div>
                         <div class="col-5">
+                            <p class="content-container__p m-0">
+                                <b>Select Organizational Influences (EC)</b>
+                            </p>
                             <div class="investigation__inner">
                                 <dropbox ng-dropbox-textExpr="getCampusInfluences(item)"
                                             itemText="{{item.name_en}}"
@@ -317,6 +332,9 @@
                             </div>
                         </div>
                         <div class="col-3">
+                            <p class="content-container__p m-0">
+                               &nbsp;
+                            </p>
                             <a href="#" class="btn-link btn-link_small pull-right" ng-click="item.campusInfluencesEditMode = !item.campusInfluencesEditMode" ng-show="!item.campusInfluencesEditMode">
                                 {{item.inv_meth_ci_note != '' ? 'Edit note' : 'Add note'}}
                             </a>
