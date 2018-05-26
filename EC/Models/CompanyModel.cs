@@ -144,20 +144,20 @@ namespace EC.Models
 
         public List<user> AllMediators(int companyId, bool isActiveOnly, int? roleId)
         {
-            List<int> mediator_ids = new List<int>();
-            mediator_ids.Add(4);
-            mediator_ids.Add(5);
-            mediator_ids.Add(6);
-            mediator_ids.Add(7);
+            List<int> role_ids = new List<int>();
+            role_ids.Add(4);
+            role_ids.Add(5);
+            role_ids.Add(6);
+            role_ids.Add(7);
 
          return  roleId == null 
            ? isActiveOnly
-                    ? db.user.Where(s => s.company_id == companyId && s.status_id == ECGlobalConstants.status_active && mediator_ids.Contains(s.role_id)).ToList()
-                    : db.user.Where(s => s.company_id == companyId && mediator_ids.Contains(s.role_id)).ToList()
+                    ? db.user.Where(s => s.company_id == companyId && s.status_id == ECGlobalConstants.status_active && role_ids.Contains(s.role_id)).ToList()
+                    : db.user.Where(s => s.company_id == companyId && role_ids.Contains(s.role_id)).ToList()
             
             : isActiveOnly
-                    ? db.user.Where(s => s.company_id == companyId && s.role_id == roleId.Value && s.status_id == ECGlobalConstants.status_active && mediator_ids.Contains(s.role_id)).ToList()
-                    : db.user.Where(s => s.company_id == companyId && s.role_id == roleId.Value && mediator_ids.Contains(s.role_id)).ToList();
+                    ? db.user.Where(s => s.company_id == companyId && s.role_id == roleId.Value && s.status_id == ECGlobalConstants.status_active && role_ids.Contains(s.role_id)).ToList()
+                    : db.user.Where(s => s.company_id == companyId && s.role_id == roleId.Value && role_ids.Contains(s.role_id)).ToList();
 
         }
 

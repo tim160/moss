@@ -28,6 +28,9 @@
         is_cc = false;
     }
 
+    int company_id = rm._report.company_id;
+    CompanyModel cm = new CompanyModel(company_id);
+
 }
 <div id="anotherDialog">
     <div id="anotherDialog2">
@@ -52,16 +55,9 @@
                     <div class="dropdown3">
                         <label id="ddlSignOffMediator" data-value="">@GlobalRes.Selectanoption</label><span class="arrow-down"></span>
                         <ul>
-                            @foreach (user _user in rm.MediatorsWhoHasAccessToReport())
+                            @foreach (user _user in cm.AllMediators(company_id, true, null).Where(t => (t.user_permissions_approve_case_closure.HasValue && t.user_permissions_approve_case_closure.Value == 1) || t.role_id == 5).ToList())
                             {
                                 <li data-value=@_user.id>@_user.first_nm @_user.last_nm</li>
-                            }
-                            @foreach (user _user in rm.MediatorsApproveCaseClosure())
-                            {
-                                if (rm.MediatorsWhoHasAccessToReport().FirstOrDefault(x => x.id == _user.id) == null)
-                                {
-                                    <li data-value=@_user.id>@_user.first_nm @_user.last_nm</li>
-                                }
                             }
                         </ul>
                     </div>

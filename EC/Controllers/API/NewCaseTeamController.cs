@@ -48,7 +48,7 @@ namespace EC.Controllers.API
         public object Get(int id, bool success = true, string message = "")
         {
             user user = (user)HttpContext.Current.Session[ECGlobalConstants.CurrentUserMarcker];
-
+            var _started = DateTime.Now;
             if (user == null || user.id == 0)
             {
                 return null;
@@ -73,9 +73,9 @@ namespace EC.Controllers.API
                 m.involved_mediators_user_list.Add(new UserAdv
                 {
                     user = item,
-                    task_quantity = um.CaseTasksQuantity(id),
-                    message_quantity = um.CaseMessagesQuantity(id),
-                    action_quantity = um.CaseActionsQuantity(id),
+                    task_quantity = 0,
+                    message_quantity = 0,
+                    action_quantity = 0,
                     location_string = um._location_string,
                     email = um._user.email,
                     user_photo = glb.Photo_Path_String(item.photo_path, 1, 5),
@@ -112,7 +112,7 @@ namespace EC.Controllers.API
                     owner = rm.ReportOwners().FirstOrDefault(x => x.user_id == item.id & x.status_id == 2) != null,
                 });
             }
-
+            var counter = (DateTime.Now - _started).TotalMilliseconds;
             return ResponseObject2Json(m);
         }
 
