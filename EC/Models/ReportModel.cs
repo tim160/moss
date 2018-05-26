@@ -2047,7 +2047,7 @@ namespace EC.Models
                 report_actions = (db.report_log.Where(item => ((item.report_id == report_id) && (item.action_id.HasValue) && (reporter_actions_list.Contains(item.action_id.Value)))).OrderByDescending(dt => dt.created_dt)).ToList();
             }
             else
-                report_actions = (db.report_log.Where(item => (item.report_id == report_id))).ToList();
+                report_actions = (db.report_log.Where(item => (item.report_id == report_id)).OrderByDescending(dt => dt.created_dt)).ToList();
 
             return report_actions;
         }

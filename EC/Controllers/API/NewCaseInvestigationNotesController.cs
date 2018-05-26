@@ -196,6 +196,7 @@ namespace EC.Controllers.API
             {
                 return null;
             }
+            GlobalFunctions glb = new GlobalFunctions();
 
             UserModel um = new UserModel(user.id);
 
@@ -217,6 +218,8 @@ namespace EC.Controllers.API
                             added_by_reporter = false,
                         });
                         DB.SaveChanges();
+
+                        glb.UpdateReportLog(user.id, 30, filter.Report_id, company_secondary_type.secondary_type_en, null, "");
                     }
                 }
             }
@@ -226,6 +229,7 @@ namespace EC.Controllers.API
                 var report_secondary_type = DB.report_secondary_type.FirstOrDefault(x => x.report_id == filter.Report_id & x.secondary_type_id == filter.Company_secondary_type_delete.Value & x.added_by_reporter != true);
                 DB.report_secondary_type.Remove(report_secondary_type);
                 DB.SaveChanges();
+                glb.UpdateReportLog(user.id, 31, filter.Report_id, report_secondary_type.secondary_type_nm, null, "");
             }
 
             if (filter.Mediator_add.HasValue)
@@ -246,6 +250,8 @@ namespace EC.Controllers.API
                         user_id = user.id,
                         added_by_reporter = false,
                     });
+                    glb.UpdateReportLog(user.id, 31, filter.Report_id, model.mediator_id.ToString(), null, "");
+
                 }
                 DB.SaveChanges();
             }
@@ -256,13 +262,17 @@ namespace EC.Controllers.API
                 {
                     var model = DB.report_non_mediator_involved.FirstOrDefault(x => x.report_id == filter.Report_id & x.id == filter.Mediator_delete.Value);
                     DB.report_non_mediator_involved.Remove(model);
+                    glb.UpdateReportLog(user.id, 32, filter.Report_id, model.Role.ToString(), null, "");
                 }
                 else
                 {
                     var model = DB.report_mediator_involved.FirstOrDefault(x => x.report_id == filter.Report_id & x.mediator_id == filter.Mediator_delete.Value & x.added_by_reporter == false);
                     model.status_id = 1;
+                    glb.UpdateReportLog(user.id, 32, filter.Report_id, model.mediator_id.ToString(), null, "");
                 }
                 DB.SaveChanges();
+                
+
             }
 
             if (filter.Department_add.HasValue)
@@ -276,6 +286,8 @@ namespace EC.Controllers.API
                         report_id = filter.Report_id,
                         added_by_reporter = false,
                     });
+                    glb.UpdateReportLog(user.id, 35, filter.Report_id, model.department_id.ToString(), null, "");
+
                 }
                 DB.SaveChanges();
             }
@@ -285,6 +297,9 @@ namespace EC.Controllers.API
                 var model = DB.report_department.FirstOrDefault(x => x.report_id == filter.Report_id & x.department_id == filter.Department_delete.Value & x.added_by_reporter == false);
                 DB.report_department.Remove(model);
                 DB.SaveChanges();
+
+                glb.UpdateReportLog(user.id, 37, filter.Report_id, model.department_id.ToString(), null, "");
+
             }
 
             if ((filter.Note1 != null) || (filter.Note2 != null))
@@ -310,6 +325,8 @@ namespace EC.Controllers.API
                     model.note = filter.Note1 != null ? filter.Note1 : filter.Note2;
                 }
                 DB.SaveChanges();
+
+                glb.UpdateReportLog(user.id, 38, filter.Report_id, filter.Note1 != null ? filter.Note1 : filter.Note2, null, "");
             }
 
             if (filter.inv_meth_st_id.HasValue)
