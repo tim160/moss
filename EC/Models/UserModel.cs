@@ -824,7 +824,7 @@ namespace EC.Models
             return all_messages_reporter.Count + all_messages_mediator.Count;
         }
 
-        public int CaseActionsQuantity(int? report_id)
+        public int CaseActionsQuantityNoCheck(int? report_id)
         {
             int actions_quantity = 0;
 
@@ -832,7 +832,10 @@ namespace EC.Models
 
             if ((_user != null) && (_user.id != 0))
             {
-                all_report_ids = GetReportIds(report_id);
+                if (report_id.HasValue)
+                    all_report_ids.Add(report_id.Value);
+                else
+                    all_report_ids = GetReportIds(report_id);
 
                 #region Got All action's for current user
                 actions_quantity = (db.report_log.Where(item => (all_report_ids.Contains(item.report_id) && (item.user_id == _user.id)))).ToList().Count;

@@ -66,8 +66,9 @@ namespace EC.Controllers.API
                 message = message,
                 success = success
             };
+            var _started1 = DateTime.Now;
 
-            foreach (var item in rm.InvolvedMediatorsUserList().ToList())
+            foreach (var item in rm.InvolvedMediatorsUserList())
             {
                 um = new UserModel(item.id);
                 m.involved_mediators_user_list.Add(new UserAdv
@@ -77,12 +78,16 @@ namespace EC.Controllers.API
                     message_quantity = 0,
                     action_quantity = 0,
                     location_string = um._location_string,
-                    email = um._user.email,
+                    email = item.email,
                     user_photo = glb.Photo_Path_String(item.photo_path, 1, 5),
-                    owner = rm.ReportOwners().FirstOrDefault(x => x.user_id == item.id & x.status_id == 2) != null,
+                    owner = false,
                 });
             }
-            foreach (var item in rm.MediatorsWhoHasAccessToReport().ToList())
+            var counter1 = (DateTime.Now - _started1).TotalMilliseconds;
+
+            var _started2 = DateTime.Now;
+
+            foreach (var item in rm.MediatorsWhoHasAccessToReport())
             {
                 um = new UserModel(item.id);
                 m.mediators_whoHasAccess_toReport.Add(new UserAdv
@@ -90,29 +95,34 @@ namespace EC.Controllers.API
                     user = item,
                     task_quantity = um.CaseTasksQuantity(id),
                     message_quantity = um.CaseMessagesQuantity(id),
-                    action_quantity = um.CaseActionsQuantity(id),
+                    action_quantity = um.CaseActionsQuantityNoCheck(id),
                     location_string = um._location_string,
-                    email = um._user.email,
+                    email = item.email,
                     user_photo = glb.Photo_Path_String(item.photo_path, 1, 5),
                     owner = rm.ReportOwners().FirstOrDefault(x => x.user_id == item.id & x.status_id == 2) != null,
                 });
             }
-            foreach (var item in rm.AvailableToAssignMediators().ToList())
+            var counter2 = (DateTime.Now - _started2).TotalMilliseconds;
+            var _started3 = DateTime.Now;
+
+            foreach (var item in rm.AvailableToAssignMediators())
             {
                 um = new UserModel(item.id);
                 m.available_toAssign_mediators.Add(new UserAdv
                 {
                     user = item,
                     task_quantity = um.CaseTasksQuantity(id),
-                    message_quantity = um.CaseMessagesQuantity(id),
-                    action_quantity = um.CaseActionsQuantity(id),
+                    message_quantity =  um.CaseMessagesQuantity(id),
+                    action_quantity = um.CaseActionsQuantityNoCheck(id),
                     location_string = um._location_string,
-                    email = um._user.email,
+                    email = item.email,
                     user_photo = glb.Photo_Path_String(item.photo_path, 1, 5),
-                    owner = rm.ReportOwners().FirstOrDefault(x => x.user_id == item.id & x.status_id == 2) != null,
+                    owner = false,
                 });
             }
+            var counter3 = (DateTime.Now - _started3).TotalMilliseconds;
             var counter = (DateTime.Now - _started).TotalMilliseconds;
+            var cc = counter1 + counter2 + counter3;
             return ResponseObject2Json(m);
         }
 

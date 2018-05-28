@@ -225,7 +225,7 @@
                         <div class="col-5">
                             <div class="investigation__inner">
                                 <p class="content-container__p m-0">
-                                    <b>Select Behavioral Factors</b>
+                                    <b>Behavioral Factors</b>
                                 </p>
                                 <dropbox ng-dropbox-textExpr="getBehavioralFactors(item)"
                                             itemText="{{item.name_en}}"
@@ -272,7 +272,7 @@
                         </div>
                         <div class="col-5">
                             <p class="content-container__p m-0">
-                                <b>Select External Influences</b>
+                                <b>External Influences</b>
                             </p>
                             <div class="investigation__inner">
                                 <dropbox ng-dropbox-textExpr="getExternalInfluences(item)"
@@ -320,7 +320,7 @@
                         </div>
                         <div class="col-5">
                             <p class="content-container__p m-0">
-                                <b>Select Organizational Influences (EC)</b>
+                                @if (is_cc.HasValue && is_cc.Value) { <b>Campus Influences(CC) </b> } else { <b>Organizational Influences (EC)</b> }
                             </p>
                             <div class="investigation__inner">
                                 <dropbox ng-dropbox-textExpr="getCampusInfluences(item)"

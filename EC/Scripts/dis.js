@@ -831,7 +831,7 @@
                     return r[0].name_en;
                 }
             }
-            return 'Select Behavioral Factors';
+            return 'Select';
         };
 
         $scope.getExternalInfluences = function (item) {
@@ -843,7 +843,7 @@
                 }
             }
 
-            return 'Select External Influences';
+            return 'Select';
         };
 
         $scope.getCampusInfluences = function (item) {
@@ -856,9 +856,9 @@
             }
 
             if ($('#is_cc').val() === 'True') {
-                return 'Select Campus Influences (CC) ';
+                return 'Select ';
             } else {
-                return 'Select Organizational Influences (EC)';
+                return 'Select ';
             }
         };
 
