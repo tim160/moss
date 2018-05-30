@@ -670,5 +670,15 @@ namespace EC.Models
 
             return list;
         }
+
+        public company_disclamer_page DisclamerPage()
+        {
+            return db.company_disclamer_page.FirstOrDefault(x => x.company_id == ID) ?? new company_disclamer_page { };
+        }
+
+        public List<company_disclamer_uploads> DisclamerUploads()
+        {
+            return db.company_disclamer_uploads.Where(x => x.company_id == ID).ToList();
+        }
     }
 }
