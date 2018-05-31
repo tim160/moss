@@ -19,6 +19,8 @@
         $scope.mode = tab === 'closed' ? 5 : $scope.mode;
         $scope.mode = tab === 'spam' ? 3 : $scope.mode;
 
+        var titles = ['', 'Active Cases', 'Cases Awaiting Sign-off', 'Closed Cases', 'Spam Cases', 'New Reports'];
+
         $scope.counts = {
             Active: 0,
             Completed: 0,
@@ -63,20 +65,12 @@
                 $('.headerBlockTextRight > span').text(data.Title);
                 for (var i = 0; i < data.Reports.length; i++) {
                     var r = $filter('filter')(data.ReportsAdv, { 'id': data.Reports[i].report_id }, true);
-                    /*if ((r != null) && (r.length > 0)) {
-                        data.Reports[i].AdvInfo = r[0];
-                        data.Reports[i].total_days = r[0].total_days;
-                        data.Reports[i].case_dt_s = r[0].case_dt_s;
-                        data.Reports[i].cc_is_life_threating = r[0].cc_is_life_threating;
-                        data.Reports[i].mediators = r[0].mediators;
-                        data.Reports[i].severity_s = r[0].severity_s;
-                        data.Reports[i].severity_id = r[0].severity_id;
-                    }*/
                 }
 
                 $scope.reports = data.Reports;
                 $scope.mode = data.Mode;
                 $scope.counts = data.Counts;
+                $('title').html(titles[$scope.mode]);
             });
         };
         $scope.refresh($scope.mode);
