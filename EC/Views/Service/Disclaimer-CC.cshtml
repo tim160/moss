@@ -22,7 +22,7 @@
 				<div class="top-header">
 
 					<a href="http://campusconfidential.com" class="top-header__backLink">
-						<img src="images/svg-icons/left.svg" alt="" />
+						<img src="~/Content/images/svg-icons/left.svg" alt="" />
 						<span class="top-header__backLink-text">
 							CampusConfidential.com
 						</span>
@@ -95,31 +95,35 @@
 		<div class="container">
 			<div class="footerInfo">
 				<div class="footerInfo__col">
-					<div class="footerInfo__title">
-						Message to out employees
-					</div>
-					<div class="footerInfo__textContent">
-                        1
-					</div>
+                    @if (!String.IsNullOrEmpty(Model.DisclamerPage().message_to_employees))
+                    {
+					    <div class="footerInfo__title">
+						    Message to our employees
+					    </div>
+					    <div class="footerInfo__textContent">
+						    @Model.DisclamerPage().message_to_employees
+					    </div>
+                    }
 				</div>
 				<div class="footerInfo__col">
-					<div class="footerInfo__title">
-						Company conduct guidelines, policies and legal disclaimers
-					</div>
-					<div class="footerInfo__textContent">
-                        2
-					</div>
+                    @if (!String.IsNullOrEmpty(Model.DisclamerPage().message_about_guidelines))
+                    {
+					    <div class="footerInfo__title">
+						    Company conduct guidelines, policies and legal disclaimers
+					    </div>
+					    <div class="footerInfo__textContent">
+                            @Model.DisclamerPage().message_about_guidelines
+					    </div>
+                    }
 					<ul class="footerInfo__textList">
-						<li class="footerInfo__textList-li">
-							<a href="#" class="footerInfo__textList-a">
-								Conduct guidelines
-							</a>
-						</li>
-						<li class="footerInfo__textList-li">
-							<a href="#" class="footerInfo__textList-a">
-								Incident reporting policiy
-							</a>
-						</li>
+                        @foreach (var item in Model.DisclamerUploads())
+                        {
+						    <li class="footerInfo__textList-li">
+							    <a href="@item.file_path" class="footerInfo__textList-a" download="@item.display_name">
+								    @item.display_name
+							    </a>
+						    </li>
+                        }
 					</ul>
 				</div>
 			</div>

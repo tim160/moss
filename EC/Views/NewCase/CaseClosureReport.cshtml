@@ -111,75 +111,146 @@
         </section>
 
         <section class="content-container" ng-show="model.report_case_closure_outcome2.length > 0">
-            <div class="content-container__inner">
-                <p class="sectionHeader">Recommended Outcomes for subjects</p>
-                <div class="content-container__inner-additional clearfix">
-                    <div class="row" ng-repeat="item in model.report_case_closure_outcome2">
-                        <div class="col-3">
-                            <p class="content-container__p">{{item.mediator.Name}} {{item.mediator.last_name}}</p>
-                        </div><!-- /.col-3 -->
-                        <div class="col-6">
+            <div class="row container__inner">
+				<div class="col-12">
+					<p class="sectionHeader">Recommended Outcomes for subjects</p>
+				</div>
+            </div>
+
+            <div ng-repeat="item in model.report_case_closure_outcome2">
+                <div class="row container__inner align-items-center m-b-20">
+                    <div class="col-4">
+                        <div class="container__innerContent">
+                            <p class="content-container__p m-0">
+                                {{item.mediator.Name}} {{item.mediator.last_name}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="investigation__inner">
+                                <p class="content-container__p m-0">
+                                    <b></b>
+                                </p>
                             <dropbox ng-dropbox-textExpr="item.outcome_c.outcome_en || 'Please select'"
-                                     itemText="{{item.outcome_en}}"
-                                     ng-dropbox-list="model.outcomes"
-                                     ng-dropbox-rootItem="item"
-                                     ng-dropbox-on-select="saveOutcome">
+                                        itemText="{{item.outcome_en}}"
+                                        ng-dropbox-list="model.outcomes"
+                                        ng-dropbox-rootItem="item"
+                                        ng-dropbox-on-select="saveOutcome">
                             </dropbox>
-                        </div><!-- /.col-6 -->
-                        <div class="col-3">
-                            <textarea ng-model="item.outcome.note" ng-show="item.editNote" style="font-size: 18px;"></textarea>
-                            <p ng-show="!item.editNote">{{item.outcome.note}}</p>
-                            <a href="#" class="btn-link " ng-show="item.editNote" ng-click="saveOutcome(item)">Save Note</a>
-                            <a href="#" class="btn-link " ng-show="!item.editNote" ng-click="item.editNote = true">{{item.outcome.note || '' !== '' ? 'Edit Note' : 'Add Note'}}</a>
-                        </div><!-- /.col-3 -->
-                    </div><!-- /.row -->
-                </div>
+                        </div>
+                    </div><!-- /.col-6 -->
+                    <div class="col-3">
+                        <p class="content-container__p m-0">
+                            &nbsp;
+                        </p>
+                        <a href="#" class="btn-link btn-link_small pull-right" ng-show="!item.editNote" ng-click="item.editNote = true">{{item.outcome.note || '' !== '' ? 'Edit Note' : 'Add Note'}}</a>
+                    </div>
+                </div><!-- /.row -->
+			    <div class="row container__inner">
+				    <div class="col-4"></div>
+				    <div class="col-8 clearfix">
+					    <div class="row m-0">
+                            <textarea class="facts-established--text m-b-20" cols="20" rows="5" ng-model="item.outcome.note" ng-show="item.editNote"></textarea>
+                            <p class="content-container__p m-b-20" ng-show="!item.editNote">{{item.outcome.note}}</p>
+					    </div>
+					    <div class="row m-0">
+                            <a href="#" class="btn-link btn-link_small pull-right" ng-show="item.editNote" ng-click="saveOutcome(item)">Save Note</a>
+					    </div>
+				    </div>
+			    </div>
             </div>
         </section>
 
         <section class="content-container">
-            <div class="content-container__inner">
-                <p class="sectionHeader">Recommended Actions for Witnesses and Reporter</p>
-                <div class="content-container__inner-additional clearfix">
-                    <div class="row">
-                        <div class="col-3">
-                            <p class="content-container__p">Reporter</p>
-                        </div><!-- /.col-3 -->
-                        <div class="col-6">
-                            <dropbox ng-dropbox-textExpr="model.rep_outcome.outcome_c.outcome_en || 'Please select'"
-                                     itemText="{{item.outcome_en}}"
-                                     ng-dropbox-list="model.outcomes"
-                                     ng-dropbox-rootItem="model.rep_outcome"
-                                     ng-dropbox-on-select="saveOutcome">
-                            </dropbox>
-                        </div><!-- /.col-6 -->
-                        <div class="col-3">
-                            <textarea ng-model="model.rep_outcome.outcome.note" ng-show="model.rep_outcome.editNote" style="font-size: 18px;"></textarea>
-                            <p ng-show="!model.rep_outcome.editNote">{{model.rep_outcome.outcome.note}}</p>
-                            <a href="#" class="btn-link " ng-show="model.rep_outcome.editNote" ng-click="saveOutcome(model.rep_outcome)">Save Note</a>
-                            <a href="#" class="btn-link " ng-show="!model.rep_outcome.editNote" ng-click="model.rep_outcome.editNote = true">{{model.rep_outcome.outcome.note || '' !== '' ? 'Edit Note' : 'Add Note'}}</a>
-                        </div><!-- /.col-3 -->
-                    </div><!-- /.row -->
-                    <div class="row" ng-repeat="item in model.report_case_closure_outcome1">
-                        <div class="col-3">
-                            <p class="content-container__p">{{item.mediator.Name}} {{item.mediator.last_name}}</p>
-                        </div><!-- /.col-3 -->
-                        <div class="col-6">
-                            <dropbox ng-dropbox-textExpr="item.outcome_c.outcome_en || 'Please select'"
-                                     itemText="{{item.outcome_en}}"
-                                     ng-dropbox-list="model.outcomes"
-                                     ng-dropbox-rootItem="item"
-                                     ng-dropbox-on-select="saveOutcome">
-                            </dropbox>
-                        </div><!-- /.col-6 -->
-                        <div class="col-3">
-                            <textarea ng-model="item.outcome.note" ng-show="item.editNote" style="font-size: 18px;"></textarea>
-                            <p ng-show="!item.editNote">{{item.outcome.note}}</p>
-                            <a href="#" class="btn-link " ng-show="item.editNote" ng-click="saveOutcome(item)">Save Note</a>
-                            <a href="#" class="btn-link " ng-show="!item.editNote" ng-click="item.editNote = true">{{item.outcome.note || '' !== '' ? 'Edit Note' : 'Add Note'}}</a>
-                        </div><!-- /.col-3 -->
-                    </div><!-- /.row -->
+            <div class="row container__inner">
+				<div class="col-12">
+					<p class="sectionHeader">Recommended Actions for Witnesses and Reporter</p>
+				</div>
+            </div>
+
+            <div class="row container__inner align-items-center m-b-20">
+                <div class="col-4">
+                    <div class="container__innerContent">
+                        <p class="content-container__p m-0">
+                            Reporter
+                        </p>
+                    </div>
                 </div>
+                <div class="col-5">
+                    <div class="investigation__inner">
+                        <p class="content-container__p m-0">
+                            <b></b>
+                        </p>
+                        <dropbox ng-dropbox-textExpr="model.rep_outcome.outcome_c.outcome_en || 'Please select'"
+                                    itemText="{{item.outcome_en}}"
+                                    ng-dropbox-list="model.outcomes"
+                                    ng-dropbox-rootItem="model.rep_outcome"
+                                    ng-dropbox-on-select="saveOutcome">
+                        </dropbox>
+                    </div>
+                </div><!-- /.col-6 -->
+                <div class="col-3">
+                    <p class="content-container__p m-0">
+                        &nbsp;
+                    </p>
+                    <a href="#" class="btn-link btn-link_small pull-right " ng-show="!model.rep_outcome.editNote" ng-click="model.rep_outcome.editNote = true">{{model.rep_outcome.outcome.note || '' !== '' ? 'Edit Note' : 'Add Note'}}</a>
+                </div><!-- /.col-3 -->
+            </div>
+			<div class="row container__inner">
+				<div class="col-4"></div>
+				<div class="col-8 clearfix">
+					<div class="row m-0">
+                        <textarea ng-model="model.rep_outcome.outcome.note" ng-show="model.rep_outcome.editNote" class="facts-established--text m-b-20" cols="20" rows="5" ></textarea>
+                        <p class="content-container__p m-b-20" ng-show="!model.rep_outcome.editNote">{{model.rep_outcome.outcome.note}}</p>
+					</div>
+					<div class="row m-0">
+                        <a href="#" class="btn-link btn-link_small pull-right" ng-show="model.rep_outcome.editNote" ng-click="saveOutcome(model.rep_outcome)">Save Note</a>
+					</div>
+				</div>
+			</div>
+            
+            <div ng-repeat="item in model.report_case_closure_outcome1">
+                <div class="row container__inner align-items-center m-b-20">
+                    <div class="col-4">
+                        <div class="container__innerContent">
+                            <p class="content-container__p m-0">
+                                {{item.mediator.Name}} {{item.mediator.last_name}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="investigation__inner">
+                            <p class="content-container__p m-0">
+                                <b></b>
+                            </p>
+                            <dropbox ng-dropbox-textExpr="item.outcome_c.outcome_en || 'Please select'"
+                                        itemText="{{item.outcome_en}}"
+                                        ng-dropbox-list="model.outcomes"
+                                        ng-dropbox-rootItem="item"
+                                        ng-dropbox-on-select="saveOutcome">
+                            </dropbox>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <p class="content-container__p m-0">
+                            &nbsp;
+                        </p>
+                        <a href="#" class="btn-link btn-link_small pull-right " ng-show="!item.editNote" ng-click="item.editNote = true">{{item.outcome.note || '' !== '' ? 'Edit Note' : 'Add Note'}}</a>
+                    </div><!-- /.col-3 -->
+                </div>
+
+			    <div class="row container__inner">
+				    <div class="col-4"></div>
+				    <div class="col-8 clearfix">
+					    <div class="row m-0">
+                            <textarea ng-model="item.outcome.note" ng-show="item.editNote" class="facts-established--text m-b-20" cols="20" rows="5"></textarea>
+                            <p class="content-container__p m-b-20" ng-show="!item.editNote">{{item.outcome.note}}</p>
+					    </div>
+					    <div class="row m-0">
+                            <a href="#" class="btn-link btn-link_small pull-right" ng-show="item.editNote" ng-click="saveOutcome(item)">Save Note</a>
+					    </div>
+				    </div>
+			    </div>
             </div>
         </section>
 
