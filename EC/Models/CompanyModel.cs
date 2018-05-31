@@ -175,6 +175,22 @@ namespace EC.Models
             return NonSupervisingMediators;
         }
 
+        public List<user> MediatorsAvailableForSignOff(int companyId)
+        {
+            List<user> mediatorsList = new List<user>();
+
+            List<int> role_ids = new List<int>();
+            role_ids.Add(4);
+            role_ids.Add(6);
+
+            mediatorsList = db.user.Where(s => s.company_id == companyId && ((role_ids.Contains(s.role_id) && s.status_id == 2 && s.user_permissions_approve_case_closure.HasValue && s.user_permissions_approve_case_closure.Value == 1) || s.role_id == ECLevelConstants.level_supervising_mediator)).ToList();
+
+            return mediatorsList;
+
+
+
+
+        }
         /*
           public List<ECModel.Anonymity> CompanyAnonimities(int company_id, int? language_id)
           {

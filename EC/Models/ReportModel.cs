@@ -2452,10 +2452,13 @@ namespace EC.Models
 
         public List<user> MediatorsApproveCaseClosure()
         {
-            return (
+            List<user> access_mediators = MediatorsWhoHasAccessToReport().Where(t => t.role_id == 5 || (t.user_permissions_approve_case_closure.HasValue && t.user_permissions_approve_case_closure.Value == 1)).ToList();
+            return access_mediators;
+
+        /*    return (
                 from m in db.report_mediator_assigned.Where(x => x.report_id == ID).Select(x => x.mediator_id).Distinct().ToList()
                 join u in db.user.Where(x => x.user_permissions_approve_case_closure != 1) on m equals u.id
-                select u).ToList();
+                select u).ToList();*/
         }
 
         public List<UserViewModel> MediatorsAcceptCase()
