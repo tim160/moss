@@ -6,6 +6,7 @@
     var user_id = (Int32)ViewBag.user_id;
     List<attachment> attachmentFiles = (List<attachment>)ViewBag.attachmentFiles;
     Layout = "~/Views/Shared/IndexPages/LayoutNewCases.cshtml";
+    ViewBag.Title = "Case Details";
 }
 
 @Html.Partial("~/Views/Shared/Partial/_NewCasesTopMenu.cshtml")
