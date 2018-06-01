@@ -25,7 +25,7 @@
     <div class="reportTemplate container clearfix">
         <div class="reportTemplateHeader clearfix">
             <div class="reportTemplateHeader-logo pull-left">
-                <img src="@cm.getLogoCompany(Model._report.company_id)" alt="" />
+                <img src="@cm.getLogoCompany(Model._report.company_id)" style="max-width: 100px;" alt="" />
             </div><!-- /.reportTemplateHeader-logo pull-left -->
             <div class="reportTemplateHeader-info pull-right">
                 <div class="reportTemplateHeader-info__title">
@@ -50,7 +50,7 @@
                         Reporting From
                     </div><!-- /.reportContentBlock__textColFirst -->
                     <div class="reportContentBlock__textColRight">
-                        <p>@Model.LocationString()</p>
+                        <p>@Model.CountryString()</p>
                     </div><!-- /.reportContentBlock__textColRight -->
                 </div><!-- /.reportContentBlock__textCols -->
                 <div class="reportContentBlock__textCols clearfix">

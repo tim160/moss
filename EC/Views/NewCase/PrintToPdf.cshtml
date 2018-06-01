@@ -27,7 +27,7 @@
     <div class="reportTemplate container clearfix">
         <div class="reportTemplateHeader clearfix">
             <div class="reportTemplateHeader-logo pull-left">
-                <img src="@cm.getLogoCompany(Model._report.company_id)" alt="" />
+                <img src="@cm.getLogoCompany(Model._report.company_id)" style="max-width: 100px;" alt="" />
             </div><!-- /.reportTemplateHeader-logo pull-left -->
             <div class="reportTemplateHeader-info pull-right">
                 <div class="reportTemplateHeader-info__title">
@@ -239,7 +239,7 @@
         <div class="onlyPrint">
             <div class="reportTemplateHeader onlyPrint clearfix">
                 <div class="reportTemplateHeader-logo pull-left">
-                    <img src="@cm.getLogoCompany(Model._report.company_id)" alt="" />
+                    <img src="@cm.getLogoCompany(Model._report.company_id)" style="max-width: 100px;" alt="" />
                 </div><!-- /.reportTemplateHeader-logo pull-left -->
                 <div class="reportTemplateHeader-info pull-right">
                     <div class="reportTemplateHeader-info__title">
@@ -363,7 +363,7 @@
         <div class="onlyPrint">
             <div class="reportTemplateHeader onlyPrint clearfix">
                 <div class="reportTemplateHeader-logo pull-left">
-                    <img src="@cm.getLogoCompany(Model._report.company_id)" alt="" />
+                    <img src="@cm.getLogoCompany(Model._report.company_id)" style="max-width: 100px;" alt="" />
                 </div><!-- /.reportTemplateHeader-logo pull-left -->
                 <div class="reportTemplateHeader-info pull-right">
                     <div class="reportTemplateHeader-info__title">
@@ -405,7 +405,11 @@
                     Approval notes
                 </div><!-- /.reportContentBlock__firstColTitle -->
                 <div class="reportContentBlock__wideText">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum autem adipisci non molestias explicabo, facilis illo, ducimus, nostrum similique accusamus voluptatibus. Voluptatum, facere consequatur reiciendis obcaecati atque voluptas et nihil! Nihil dolorum minus enim repudiandae ut nesciunt similique! Eum nemo rem facilis doloremque illum hic distinctio quaerat, quam numquam quasi voluptate. Numquam excepturi, culpa vitae illum quas ab repellendus, optio magni, perspiciatis nulla ut. Neque, eveniet magnam error modi adipisci fugit quasi itaque reprehenderit quas dignissimos voluptatum commodi optio distinctio ea ad libero eos sequi, alias nobis unde iusto quidem voluptas, debitis repellendus. Dignissimos commodi repudiandae, distinctio, eius expedita tempora.
+                    @{
+                        var status = Model._last_investigation_status();
+                        var description = status != null ? status.description : "";
+                    }
+                    @description
                 </div><!-- /.reportContentBlock__wideText -->
             </div><!-- /.reportContentBlock__textCols clearfix -->
 

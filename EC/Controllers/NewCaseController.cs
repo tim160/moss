@@ -544,7 +544,7 @@ namespace EC.Controllers
             return RedirectToAction("Task", new {id = id });
         }
 
-        public ActionResult PrintToPdf(int id, Guid? rg, Guid? ug, bool pdf = false)
+        public ActionResult PrintToPdf(int id, Guid? rg, Guid? ug, bool pdf = true)
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if ((user == null) && (rg.HasValue) && (ug.HasValue))
@@ -562,7 +562,8 @@ namespace EC.Controllers
             {
                 var report = db.report.FirstOrDefault(x => x.id == id);
                 var fn = $"{rm.CompanyName()} Case Closure Report {rm._report.display_name}";
-                return new ActionAsPdf("PrintToPdf", new { id = id, rg = report.guid, ug = user.guid }) { FileName = fn };
+                return new ActionAsPdf("PrintToPdf", new { id = id, rg = report.guid, ug = user.guid, pdf = false })
+                { FileName = fn, RotativaOptions = new Rotativa.Core.DriverOptions { CustomSwitches = "--quiet" } };
             }
 
             ViewBag.user_id = user.id;
