@@ -280,16 +280,16 @@ namespace EC.Controllers.API
                 var model = DB.report_department.FirstOrDefault(x => x.report_id == filter.Report_id & x.department_id == filter.Department_add.Value & x.added_by_reporter == false);
                 if (model == null)
                 {
-                    DB.report_department.Add(new report_department
+                    model = new report_department
                     {
                         department_id = filter.Department_add.Value,
                         report_id = filter.Report_id,
                         added_by_reporter = false,
-                    });
+                    };
+                    DB.report_department.Add(model);
+                    DB.SaveChanges();
                     glb.UpdateReportLog(user.id, 35, filter.Report_id, model.department_id.ToString(), null, "");
-
                 }
-                DB.SaveChanges();
             }
 
             if (filter.Department_delete.HasValue)
