@@ -135,6 +135,9 @@
                         <p>
                             @Model.ManagementKnowString()
                         </p>
+                        <p>
+                            @Model._report.management_know_text
+                        </p>
                     </div><!-- /.reportContentBlock__textColRight -->
                 </div><!-- /.reportContentBlock__textCols -->
                 <div class="reportContentBlock__textCols clearfix">
@@ -144,6 +147,9 @@
                     <div class="reportContentBlock__textColRight">
                         <p>
                             @Model.IsReportedOutside()
+                        </p>
+                        <p>
+                            @Model._report.reported_outside_text
                         </p>
                     </div><!-- /.reportContentBlock__textColRight -->
                 </div><!-- /.reportContentBlock__textCols -->
@@ -194,6 +200,7 @@
                         <p>
                             @Model.IsOngoing()
                         </p>
+                        <p>@Model._report.report_frequency_text</p>
                     </div><!-- /.reportContentBlock__textColRight -->
                 </div><!-- /.reportContentBlock__textCols -->
                 <div class="reportContentBlock__textCols clearfix">
