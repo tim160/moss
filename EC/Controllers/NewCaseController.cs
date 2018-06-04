@@ -562,8 +562,8 @@ namespace EC.Controllers
             {
                 var report = db.report.FirstOrDefault(x => x.id == id);
                 var fn = $"{rm.CompanyName()} Case Closure Report {rm._report.display_name}";
-                return new ActionAsPdf("PrintToPdf", new { id = id, rg = report.guid, ug = user.guid, pdf = false })
-                { FileName = fn, RotativaOptions = new Rotativa.Core.DriverOptions { CustomSwitches = "--quiet" } };
+                //return new ActionAsPdf("PrintToPdf", new { id = id, rg = report.guid, ug = user.guid, pdf = false }) { FileName = fn };
+                return new ActionAsPdf("PrintToPdf", new { id = id, rg = report.guid, ug = user.guid, pdf = false }) { };
             }
 
             ViewBag.user_id = user.id;
