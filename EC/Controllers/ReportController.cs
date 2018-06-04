@@ -451,7 +451,8 @@ namespace EC.Controllers
             if (pdf)
             {
                 var fn = $"Report to {rm.CompanyName()}";
-                return new ActionAsPdf("PrintToPdf", new { id = id, pdf = false }) { FileName = fn };
+                //return new ActionAsPdf("PrintToPdf", new { id = id, pdf = false }) { FileName = fn };
+                return new ActionAsPdf("PrintToPdf", new { id = id, pdf = false }) {  };
             }
 
             ViewBag.Roles = db.role_in_report.ToList();

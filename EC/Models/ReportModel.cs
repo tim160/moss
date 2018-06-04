@@ -1640,6 +1640,11 @@ namespace EC.Models
             return (db.report_non_mediator_involved.Where(item => (item.report_id == ID) && item.added_by_reporter != false)).ToList();
         }
 
+        public List<role_in_report> RoleInReport()
+        {
+            return db.role_in_report.ToList();
+        }
+
         public List<report_mediator_involved> InvolvedMediators()
         {
             return (db.report_mediator_involved.Where(item => (item.report_id == ID) && item.added_by_reporter != false)).ToList();

@@ -171,8 +171,10 @@
                     </div><!-- /.reportContentBlock__firstColTitle -->
                     @{
                         rClass = "";
+                        var roles = Model.RoleInReport();
                         foreach (var item in Model.NonInvolvedMediators())
                         {
+                            var role = roles.FirstOrDefault(x => x.id == item.role_in_report_id);
                             <div class="reportRow @rClass clearfix">
                                 <div class="col-4">
                                     <p>@item.Name @item.last_name</p>
@@ -181,7 +183,9 @@
                                     <p>@item.Title</p>
                                 </div><!-- /.col-4 -->
                                 <div class="col-4">
-                                    <p></p>
+                                    <p>
+                                        @(role == null ? "" : role.role_en)
+                                    </p>
                                 </div><!-- /.col-4 -->
                             </div><!-- /.reportRow -->
                             rClass = "reportRow_mt";

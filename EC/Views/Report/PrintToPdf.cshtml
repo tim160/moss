@@ -17,7 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>[@Model.CompanyName()] Case Closure Report [@Model._report.display_name]</title>
+    <title>@("Report to " + Model.CompanyName())</title>
     <link rel="stylesheet" href="~/Content/newCase.css" />
     <link rel="stylesheet" href="~/Content/print-reports.css" />
 </head>
@@ -66,7 +66,12 @@
                         Name
                     </div><!-- /.reportContentBlock__textColFirst -->
                     <div class="reportContentBlock__textColRight">
-                        <p>@Model._reporter_user.first_nm @Model._reporter_user.last_nm, @Model._reporter_user.email</p>
+                        <p>
+                            @Model._reporter_user.first_nm 
+                            @Model._reporter_user.last_nm
+                            @(String.IsNullOrEmpty(Model._reporter_user.first_nm) && String.IsNullOrEmpty(Model._reporter_user.last_nm) ? "" : ", "),
+                            @Model._reporter_user.email
+                        </p>
                     </div><!-- /.reportContentBlock__textColRight -->
                 </div><!-- /.reportContentBlock__textCols -->
                 <div class="reportContentBlock__textCols clearfix">
@@ -75,6 +80,7 @@
                     </div><!-- /.reportContentBlock__textColFirst -->
                     <div class="reportContentBlock__textColRight">
                         <p>@Model.ReporterCompanyRelationShort()</p>
+                        <p>@Model._report.not_current_employee</p>
                     </div><!-- /.reportContentBlock__textColRight -->
                 </div><!-- /.reportContentBlock__textCols -->
                 <div class="reportContentBlock__textCols clearfix">
@@ -211,6 +217,7 @@
                         <p>
                             @Model.HasInjuryDamage()
                         </p>
+                        <p>@Model._report.injury_damage</p>
                     </div><!-- /.reportContentBlock__textColRight -->
                 </div><!-- /.reportContentBlock__textCols -->
                 <div class="reportContentBlock__textCols clearfix">
