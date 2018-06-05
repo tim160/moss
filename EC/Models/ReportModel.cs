@@ -1664,6 +1664,13 @@ namespace EC.Models
         {
             return (db.report_mediator_involved.Where(item => (item.report_id == ID) && item.added_by_reporter != false)).ToList();
         }
+
+        public user SignoffMediator()
+        {
+            var som = db.report_signoff_mediator.OrderByDescending(x => x.created_on).FirstOrDefault(item => item.report_id == ID);
+            return som == null ? null : db.user.FirstOrDefault(x => x.id == som.user_id);
+        }        
+
         public List<user> InvolvedMediatorsUserList()
         {
             List<user> result = new List<user>();

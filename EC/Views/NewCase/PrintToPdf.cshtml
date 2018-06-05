@@ -420,7 +420,13 @@
                     Case closure approved by
                 </div><!-- /.reportContentBlock__textColFirst -->
                 <div class="reportContentBlock__textColRight">
-                    <p>Kate Milton, CEO</p>
+                    @{ 
+                        var som = Model.SignoffMediator();
+                    }
+                    @if (som != null)
+                    {
+                        <p>@som.first_nm @som.last_nm, @som.title_ds</p>
+                    }
                 </div><!-- /.reportContentBlock__textColRight -->
             </div><!-- /.reportContentBlock__textCols -->
             <div class="reportContentBlock__textCols clearfix">
