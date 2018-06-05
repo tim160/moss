@@ -1640,6 +1640,21 @@ namespace EC.Models
             return (db.report_non_mediator_involved.Where(item => (item.report_id == ID) && item.added_by_reporter != false)).ToList();
         }
 
+        public List<report_non_mediator_involved> NonInvolvedMediatorsAll()
+        {
+            return db.report_non_mediator_involved.Where(item => item.report_id == ID).ToList();
+        }
+
+        public List<report_case_closure_outcome> CaseClosureOutcome()
+        {
+            return db.report_case_closure_outcome.Where(item => item.report_id == ID).ToList();
+        }
+
+        public List<company_outcome> CompanyOutcomes()
+        {
+            return db.company_outcome.Where(item => item.company_id == _report.company_id).ToList();
+        }        
+
         public List<role_in_report> RoleInReport()
         {
             return db.role_in_report.ToList();

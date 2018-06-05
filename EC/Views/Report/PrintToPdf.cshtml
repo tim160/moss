@@ -69,7 +69,7 @@
                         <p>
                             @Model._reporter_user.first_nm 
                             @Model._reporter_user.last_nm
-                            @(String.IsNullOrEmpty(Model._reporter_user.first_nm) && String.IsNullOrEmpty(Model._reporter_user.last_nm) ? "" : ", "),
+                            @(String.IsNullOrEmpty(Model._reporter_user.first_nm) && String.IsNullOrEmpty(Model._reporter_user.last_nm) && String.IsNullOrEmpty(Model._reporter_user.email) ? "" : ", ")
                             @Model._reporter_user.email
                         </p>
                     </div><!-- /.reportContentBlock__textColRight -->

@@ -85,7 +85,10 @@
                     </div><!-- /.reportContentBlock__textColFirst -->
                     <div class="reportContentBlock__textColRight">
                         <p>
-                            @Model._reporter_user.first_nm @Model._reporter_user.last_nm, @Model._reporter_user.email
+                            @Model._reporter_user.first_nm 
+                            @Model._reporter_user.last_nm
+                            @(String.IsNullOrEmpty(Model._reporter_user.first_nm) && String.IsNullOrEmpty(Model._reporter_user.last_nm) && String.IsNullOrEmpty(Model._reporter_user.email) ? "" : ", ")
+                            @Model._reporter_user.email
                         </p>
                     </div><!-- /.reportContentBlock__textColRight -->
                 </div><!-- /.reportContentBlock__textCols -->
@@ -327,41 +330,57 @@
             }
         </div><!-- /.reportContentBlock clearfix -->
 
-        <div class="reportContentBlock clearfix">
-            <div class="reportContentBlock__title">
-                SUGGESTED OUTCOME FOR SUBJECT — LEGAL
-            </div><!-- /.reportContentBlock__title -->
-            <div class="reportContentBlock__wideText">
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam
-                rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-                Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni
-                dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor
-                sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore
-                magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam
-                corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur.
-            </div><!-- /.reportContentBlock__wideText -->
-        </div><!-- /.reportContentBlock clearfix -->
+        @{ 
+            var mediators = Model.NonInvolvedMediatorsAll();
+            var caseClosureOutcome = Model.CaseClosureOutcome();
+            var companyOutcomes = Model.CompanyOutcomes();
+        }
+        @foreach (var item in mediators.Where(x => x.role_in_report_id == 3).ToList())
+        {
+            var detail = caseClosureOutcome.FirstOrDefault(x => x.non_mediator_involved_id == item.id);
+            var outcome = companyOutcomes.FirstOrDefault(x => x.id == (detail == null ? 0 : detail.outcome_id));
 
-        <div class="reportContentBlock clearfix">
-            <div class="reportContentBlock__title">
-                SUGGESTED ACTIONS FOR REPORTER — DISCIPLINE STEP 1: VERBAL COUNSELING
-            </div><!-- /.reportContentBlock__title -->
-            <div class="reportContentBlock__wideText">
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </div><!-- /.reportContentBlock__wideText -->
-        </div><!-- /.reportContentBlock clearfix -->
+            <div class="reportContentBlock clearfix">
+                <div class="reportContentBlock__title">
+                    SUGGESTED OUTCOME FOR SUBJECT — @item.Name @item.last_name — @(outcome == null ? "n/a" : outcome.outcome_en)
+                </div><!-- /.reportContentBlock__title -->
+                <div class="reportContentBlock__wideText">
+                    @(detail == null ? "" : detail.note)
+                </div><!-- /.reportContentBlock__wideText -->
+            </div><!-- /.reportContentBlock clearfix -->
+        }
+        
+        @{ 
+            var reporter = caseClosureOutcome.FirstOrDefault(x => !x.non_mediator_involved_id.HasValue);
+        }
+        @if (reporter != null)
+        {
+            var outcome = companyOutcomes.FirstOrDefault(x => x.id == reporter.outcome_id);
 
-        <div class="reportContentBlock clearfix">
-            <div class="reportContentBlock__title">
-                SUGGESTED ACTIONS FOR WITNESSES — DISCIPLINE STEP 1: VERBAL COUNSELING
-            </div><!-- /.reportContentBlock__title -->
-            <div class="reportContentBlock__wideText">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                commodo consequat.
-            </div><!-- /.reportContentBlock__wideText -->
-        </div><!-- /.reportContentBlock clearfix -->
+            <div class="reportContentBlock clearfix">
+                <div class="reportContentBlock__title">
+                    SUGGESTED ACTIONS FOR REPORTER — @(outcome == null ? "n/a" : outcome.outcome_en)
+                </div><!-- /.reportContentBlock__title -->
+                <div class="reportContentBlock__wideText">
+                    @reporter.note
+                </div><!-- /.reportContentBlock__wideText -->
+            </div><!-- /.reportContentBlock clearfix -->
+        }
+
+        @foreach (var item in mediators.Where(x => x.role_in_report_id == 1 || x.role_in_report_id == 2).ToList())
+        {
+            var detail = caseClosureOutcome.FirstOrDefault(x => x.non_mediator_involved_id == item.id);
+            var outcome = companyOutcomes.FirstOrDefault(x => x.id == (detail == null ? 0 : detail.outcome_id));
+
+            <div class="reportContentBlock clearfix">
+                <div class="reportContentBlock__title">
+                    SUGGESTED OUTCOME FOR SUBJECT — @item.Name @item.last_name — @(outcome == null ? "n/a" : outcome.outcome_en)
+                </div><!-- /.reportContentBlock__title -->
+                <div class="reportContentBlock__wideText">
+                    @(detail == null ? "" : detail.note)
+                </div><!-- /.reportContentBlock__wideText -->
+            </div><!-- /.reportContentBlock clearfix -->
+        }
 
         <div class="page-break"></div><!-- /.page-break -->
         <div class="onlyPrint">
