@@ -3742,20 +3742,20 @@ body .someDropdowns{
 		.reportTemplateHeader-info__title{
 			font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
 			font-size: 12pt;
-			color: #444845;
+			color: #444845 !important;
 			text-transform: uppercase;
 		}
 		.reportTemplateHeader-info__id,
 		.reportTemplateHeader-info__date{
 			font-family: 'OpenSans-semibold', arial, verdana, sans-serif;
 			font-size: 8pt;
-			color: #444845;
+			color: #444845  !important;
 			text-align: right;
 		}
 		.reportTemplateHeader-Case{
 			font-family: 'OpenSans-semibold', arial, verdana, sans-serif;
 			font-size: 10pt;
-			color: #444845;
+			color: #444845 !important;
 			text-align: right;
 			text-transform: uppercase;
 			margin-top: 1mm;
@@ -3770,6 +3770,8 @@ body .someDropdowns{
 		}
 		.reportTemplateHeader-info__id{
 			text-transform: uppercase;
+			font-family: OpenSans-Light;
+			font-weight: bold;
 		}
 
 .reportTemplateContent{}
@@ -3780,9 +3782,9 @@ body .someDropdowns{
 			text-transform: uppercase;
 			font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
 			font-size: 9pt;
-			color: #444845;
+			color: #444845 !important;
 			margin-top: 6mm;
-			margin-bottom: 6mm;
+			margin-bottom: 5mm;
 		}
 		.reportContentBlock__textCols{
 			margin-left: 4mm;
@@ -3799,12 +3801,12 @@ body .someDropdowns{
 				float: left;
 				font-family: 'OpenSans-Light', arial, verdana, sans-serif;
 				font-size: 8pt;
-				color: #444845;
+				color: #444845 !important;
 			}
 			.reportContentBlock__textColRight{
 				font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
 				font-size: 9pt;
-				color: #444845;
+				color: #444845 !important;
 				width: calc(100% - 43mm);
 				margin-left: 3mm;
 			}
@@ -3824,7 +3826,7 @@ body .someDropdowns{
 				font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
 				font-size: 9pt;
 				float: left;
-				color: #444845;
+				color: #444845 !important;
 				width: 80mm;
 				margin-left: 3mm;
 			}
@@ -3833,12 +3835,12 @@ body .someDropdowns{
 				float: left;
 				font-family: 'OpenSans-Light', arial, verdana, sans-serif;
 				font-size: 8pt;
-				color: #444845;
+				color: #444845 !important;
 			}
 			.reportContentBlock__textColFourth{
 				font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
 				font-size: 9pt;
-				color: #444845;
+				color: #444845 !important;
 				float: left;
 				width: 40mm;
 				margin-left: 3mm;
@@ -3846,7 +3848,7 @@ body .someDropdowns{
 			.reportContentBlock__firstColTitle{
 				font-family: 'OpenSans-Light', arial, verdana, sans-serif;
 				font-size: 8pt;
-				color: #444845;
+				color: #444845 !important;
 				margin-bottom: 2mm;
 			}
 
@@ -3855,7 +3857,7 @@ body .someDropdowns{
 	font-size: 12pt;
 	margin-left: 11mm;
 	margin-top: 5mm;
-	border-bottom: 1px solid #ccc;
+	border-bottom: 1px solid #ccc  !important;
 	display: inline-block !important;
 	padding-bottom: 1mm;
 }
@@ -3871,7 +3873,7 @@ body .someDropdowns{
     vertical-align: super;
     font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     font-size: 9pt;
-    color: #444845;
+    color: #444845 !important;
 	}
 	.reportRow_mt{
 		margin-top: 2mm;
@@ -3889,7 +3891,7 @@ body .someDropdowns{
 	vertical-align: super;
 	font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
 	font-size: 9pt;
-	color: #444845;
+	color: #444845 !important;
 }
 .onlyPrint{
 	display: none;
@@ -3910,7 +3912,7 @@ body .someDropdowns{
 		vertical-align: super;
 		font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
 		font-size: 9pt;
-		color: #444845;
+		color: #444845 !important;
 		float: left;
 	}
 	.reportRow__twoCols-title{
