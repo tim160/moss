@@ -411,7 +411,7 @@
         $scope.mode = tab === 'closed' ? 5 : $scope.mode;
         $scope.mode = tab === 'spam' ? 3 : $scope.mode;
 
-        var titles = ['', 'Active Cases', 'Cases Awaiting Sign-off', 'Closed Cases', 'Spam Cases', 'New Reports'];
+        var titles = ['', 'Active Cases', 'Cases Awaiting Sign-off', 'Spam Cases', 'New Reports', 'Closed Cases'];
 
         $scope.counts = {
             Active: 0,

@@ -105,7 +105,7 @@
                         Case owner
                     </div><!-- /.reportContentBlock__firstColTitle -->
                     <div class="reportRow clearfix">
-                        @foreach (var item in Model.ReportOwnersUserList())
+                        @foreach (var item in Model.MediatorsWhoHasAccessToReport())
                         {
                             var um = new UserModel(item.id);
                             <div class="reportRow clearfix">
