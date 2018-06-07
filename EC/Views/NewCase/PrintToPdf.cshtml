@@ -105,22 +105,20 @@
                         Case owner
                     </div><!-- /.reportContentBlock__firstColTitle -->
                     <div class="reportRow clearfix">
-                        @foreach (var item in Model.MediatorsWhoHasAccessToReport())
+                        @foreach (var item in Model.ReportOwnersUserList())
                         {
                             var um = new UserModel(item.id);
-                            <div class="reportRow clearfix">
-                                <div class="col-4">
-                                    <p>
-                                        @item.first_nm @item.last_nm
-                                    </p>
-                                </div><!-- /.col-4 -->
-                                <div class="col-4">
-                                    <p>@um._department_string</p>
-                                </div><!-- /.col-4 -->
-                                <div class="col-4">
-                                    <p>@item.email</p>
-                                </div><!-- /.col-4 -->
-                            </div><!-- /.reportRow -->
+                            <div class="col-4">
+                                <p>
+                                    @item.first_nm @item.last_nm
+                                </p>
+                            </div><!-- /.col-4 -->
+                            <div class="col-4">
+                                <p>@um._department_string</p>
+                            </div><!-- /.col-4 -->
+                            <div class="col-4">
+                                <p>@item.email</p>
+                            </div><!-- /.col-4 -->
                         }
                     </div><!-- /.reportRow -->
                 </div><!-- /.reportContentBlock__textCols clearfix -->
@@ -130,7 +128,7 @@
                     </div><!-- /.reportContentBlock__firstColTitle -->
                     @{
                         var rClass = "";
-                        foreach (var item in Model.InvolvedMediatorsUserList())
+                        foreach (var item in Model.MediatorsWhoHasAccessToReport())
                         {
                             var um = new UserModel(item.id);
                             <div class="reportRow @rClass clearfix">
@@ -199,11 +197,11 @@
                     <div class="reportContentBlock__firstColTitle">
                         Involved departments
                     </div><!-- /.reportContentBlock__firstColTitle -->
-                    @foreach (var item in Model.Departments())
+                    @foreach (var item in Model.Departments(null))
                     {
                         <div class="reportRow clearfix">
                             <div class="col-4">
-                                <p>@item</p>
+                                <p>@item.department_en</p>
                             </div><!-- /.col-4 -->
                             <div class="col-4">
                                 <p></p>
@@ -292,7 +290,7 @@
                         <div class="reportRow__twoCols-title">
                             @b.name_en
                         </div><!-- /.reportRow__twoCols-title -->
-                        <div class="reportRow__twoCols-text">
+                        <div class="reportRow__twoCols-text" style="margin-bottom: 20px;">
                             @im.company_root_cases_behavioral_note
                         </div><!-- /.reportRow__twoCols-text -->
                     }
@@ -307,7 +305,7 @@
                         <div class="reportRow__twoCols-title">
                             @e.name_en
                         </div><!-- /.reportRow__twoCols-title -->
-                        <div class="reportRow__twoCols-text">
+                        <div class="reportRow__twoCols-text" style="margin-bottom: 20px;">
                             @im.company_root_cases_external_note
                         </div><!-- /.reportRow__twoCols-text -->
                     }
@@ -322,7 +320,7 @@
                         <div class="reportRow__twoCols-title">
                             @o.name_en
                         </div><!-- /.reportRow__twoCols-title -->
-                        <div class="reportRow__twoCols-text">
+                        <div class="reportRow__twoCols-text" style="margin-bottom: 20px;">
                             @im.company_root_cases_organizational_note
                         </div><!-- /.reportRow__twoCols-text -->
                     }

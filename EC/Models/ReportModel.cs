@@ -219,6 +219,23 @@ namespace EC.Models
             return injury_damage;
         }
 
+        public List<company_department> Departments(bool? added_by_reporter)
+        {
+            List<int> list;
+            if (added_by_reporter.HasValue)
+                list = db.report_department
+                    .Where(item => item.report_id == _report.id && item.added_by_reporter == added_by_reporter)
+                    .Select(x => x.department_id)
+                    .ToList();
+            else
+                list = db.report_department
+                    .Where(item => item.report_id == _report.id)
+                    .Select(x => x.department_id)
+                    .ToList();
+
+            return db.company_department.Where(x => list.Contains(x.id)).ToList();
+        }
+
         public List<string> Departments()
         {
             var list = new List<string>();
