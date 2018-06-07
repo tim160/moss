@@ -2052,7 +2052,7 @@ public class GlobalFunctions
     /// <param name="company_id"></param>
     /// <param name="user_id"></param>
     /// <returns></returns>
-    public List<Tuple<string, string>> SecondaryTypesListDistinct(int company_id, int user_id)
+    public List<Tuple<string, string>> SecondaryTypesListDistinctOld(int company_id, int user_id)
     {
         /// string - name, int - id, int -1 - primary, 2- secondary, 3 - 'Other', bool - to merge
         List<Tuple<string, int, int, bool>> _list_types = new List<Tuple<string, int, int, bool>>();
@@ -2209,13 +2209,39 @@ public class GlobalFunctions
         return return_array;
     }
 
+    public List<Tuple<string, string>> SecondaryTypesListDistinct(int company_id, int user_id)
+    {
+        List<Tuple<string, string>> return_array = new List<Tuple<string, string>>();
+        UserModel um = new UserModel(user_id);
+        ReportModel rm = new ReportModel();
+        List<Int32> _report_ids = um.ReportsSearchIds(company_id, 0);
+
+        List<int> sec_type_ids = db.report_secondary_type.Where(item => (_report_ids.Contains(item.id))).Select(item => item.secondary_type_id).Distinct().ToList();
+
+        /////company_relation
+
+        List<company_secondary_type> _all_sec_types = db.company_secondary_type.Where(item => (sec_type_ids.Contains(item.id))).ToList();
+        foreach (company_secondary_type _temp_company_sec_type in _all_sec_types)
+        {
+            List<int> report_ids_by_sec_type_id = db.report_secondary_type.Where(item => (_report_ids.Contains(item.report_id) && item.secondary_type_id == _temp_company_sec_type.id)).Select(item => item.report_id).ToList();
+            return_array.Add(new Tuple<string, string>(_temp_company_sec_type.secondary_type_en, string.Join(",", report_ids_by_sec_type_id.ToArray())));
+        }
+
+        if (sec_type_ids.Contains(0))
+        {
+            List<int> report_ids_by_rel_id = db.report_secondary_type.Where(item => (_report_ids.Contains(item.id) && item.secondary_type_id == 0)).Select(item => item.report_id).ToList();
+            return_array.Add(new Tuple<string, string>(GlobalRes.Other, string.Join(",", report_ids_by_rel_id.ToArray())));
+        }
+        return return_array;
+    }
+
     /// <summary>
     /// 
     /// </summary>
     /// <param name="company_id"></param>
     /// <param name="user_id"></param>
     /// <returns></returns>
-    public List<Tuple<string, string>> RelationTypesListDistinct(int company_id, int user_id)
+    public List<Tuple<string, string>> RelationTypesListDistinctOld(int company_id, int user_id)
     {
         /// string - name, int - id, int -1 - primary, 2- secondary, 3 - 'Other', bool - to merge
         List<Tuple<string, int, int, bool>> _list_types = new List<Tuple<string, int, int, bool>>();
@@ -2235,7 +2261,7 @@ public class GlobalFunctions
             ////   _list_types.Add(new Tuple<string, int, int, bool>(_secondary_type.secondary_type_nm, _secondary_type.secondary_type_id, 1, true));
             if ((_relationship.relationship_nm != null) && (_relationship.relationship_nm.Trim() != "") && ((_relationship.relationship_id == null) || (_relationship.relationship_id == -1) || (_relationship.relationship_id == 0)) && ((_relationship.company_relationship_id == null) || (_relationship.company_relationship_id == -1) || (_relationship.company_relationship_id == 0)))
             {
-                other_relation_names.Add(_relationship.relationship_nm.Trim());
+                ///other_relation_names.Add(_relationship.relationship_nm.Trim());
                 _list_types.Add(new Tuple<string, int, int, bool>(_relationship.relationship_nm, _relationship.report_id, 3, true));
             }
             else
@@ -2369,6 +2395,35 @@ public class GlobalFunctions
         return return_array;
     }
 
+    public List<Tuple<string, string>> RelationTypesListDistinct(int company_id, int user_id)
+    {
+        //check if null???
+        List<Tuple<string, string>> return_array = new List<Tuple<string, string>>();
+
+        UserModel um = new UserModel(user_id);
+        ReportModel rm = new ReportModel();
+        List<Int32> _report_ids = um.ReportsSearchIds(company_id, 0);
+
+        List<int?> relation_ids = db.report_relationship.Where(item => (_report_ids.Contains(item.report_id))).Select(item => item.company_relationship_id).Distinct().ToList();
+
+        /////company_relation
+        List<company_relationship> _all_relations = db.company_relationship.Where(item => (relation_ids.Contains(item.id))).ToList();
+        foreach (company_relationship _temp_company_rel in _all_relations)
+        {
+            List<int> report_ids_by_rel_id = db.report_relationship.Where(item => (_report_ids.Contains(item.report_id) && item.relationship_id == _temp_company_rel.id)).Select(item => item.report_id).ToList();
+            return_array.Add(new Tuple<string, string>(_temp_company_rel.relationship_en, string.Join(",", report_ids_by_rel_id.ToArray())));
+        }
+
+       // if (relation_ids.Contains(0) )
+        {
+            List<int> report_ids_by_rel_id = db.report_relationship.Where(item => (_report_ids.Contains(item.report_id) && (item.relationship_id == 0 || !item.relationship_id.HasValue))).Select(item => item.report_id).ToList();
+            if(report_ids_by_rel_id.Count > 0)
+                return_array.Add(new Tuple<string, string>(GlobalRes.Other, string.Join(",", report_ids_by_rel_id.ToArray())));
+        }
+
+        return return_array;
+    }
+
     public List<Tuple<string, string>> DepartmentsListDistinct(int company_id, int user_id)
     {
         List<Tuple<string, string>> return_array = new List<Tuple<string, string>>();
@@ -2391,7 +2446,7 @@ public class GlobalFunctions
         if (departments_ids.Contains(0))
         {
             List<int> report_ids_by_dept_id = db.report_department.Where(item => (_report_ids.Contains(item.report_id) && item.department_id == 0)).Select(item => item.report_id).ToList();
-            return_array.Add(new Tuple<string, string>(GlobalRes.notListed, string.Join(",", report_ids_by_dept_id.ToArray())));
+            return_array.Add(new Tuple<string, string>(GlobalRes.Other, string.Join(",", report_ids_by_dept_id.ToArray())));
         }
         return return_array;
     }
@@ -2418,8 +2473,12 @@ public class GlobalFunctions
             return_array.Add(new Tuple<string, string>(_temp_loc, string.Join(",", _location_report_ids.ToArray())));
 
         }
-        /////company_departments
-
+        /////other location
+        if (db.report.Any(item => (_user_report_ids.Contains(item.id) && (item.location_id.Value == 0 || !item.location_id.HasValue))))
+        {
+            List<int> temp_location_ids = db.report.Where(item => (_user_report_ids.Contains(item.id) && (item.location_id.Value == 0 || !item.location_id.HasValue))).Select(item => item.id).ToList();
+            return_array.Add(new Tuple<string, string>(GlobalRes.Other, string.Join(",", temp_location_ids.ToArray())));
+        }
 
         return return_array;
     }
