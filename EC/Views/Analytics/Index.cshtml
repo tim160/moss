@@ -27,8 +27,8 @@
     //int[] _company_average_days = ViewBag._company_average_days;
     //int[] _average_stage_days = ViewBag._average_stage_days;
 
-    string[] _titleHeaderLegend = { "New Report", "New Case", "Under Investigation", "Resolution", "Awaiting Sign-Off", "Closed" };
-    string[] _miniSquareColor = { "#D6F9F6", "#c0ece8", "#82dad0", "#44c8b9", "#44c8b9", "#e5eeee" };
+    string[] _titleHeaderLegend = { "New Report", "New Case", "Under Investigation", "Awaiting Sign-Off", "Closed" };
+    string[] _miniSquareColor = {"#c0ece8", "#82dad0", "#44c8b9", "#44c8b9", "#e5eeee" };
 
     //var _dtAnalyticsTimeline = ViewBag._dtAnalyticsTimeline;
 }
@@ -203,7 +203,7 @@
                 <div class="blockAllCases">
                     <div class="headerBlockActivity">
                         <div class="titleBlock">@GlobalRes.Allcases</div>
-                        @for (var i = 0; i < 6; i++)
+                        @for (var i = 0; i < 5; i++)
                     {
                     <div class="itemLegend">
                         <div class="miniSquare" style="background-color: @_miniSquareColor[i];"></div>
@@ -228,7 +228,7 @@
                                     <label>@_today_spanshot[5]</label>
                                 </div>
                             </div>
-                            @for (var i = 0; i < 6; i++)
+                            @for (var i = 0; i < 5; i++)
                         {
                             //      if (i != 4)
                             {
@@ -497,50 +497,7 @@
                                 <td></td>
                                 <td></td>
                             </tr>
-                            <tr>
-                                <td colspan="4">@GlobalRes.Resolution</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
 
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    @*<div class="parentDiv">
-                                        <div class="brownDiv"></div>
-                                    </div>*@
-                                </td>
-                                <td>
-                                    @*<div class="parentDiv">
-                                        <div class="brownDiv"></div>
-                                    </div>*@
-                                </td>
-                                <td>
-                                    @*<div class="parentDiv">
-                                        <div class="brownDiv"></div>
-                                    </div>*@
-                                </td>
-                            </tr>
                         </table>
                     </div>
                     <div class="addTheLegend">
@@ -636,8 +593,8 @@
     </div>
 </div><!--end blockSettings blockAnalitics-->
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<script type='text/javascript' src="http://ajax.aspnetcdn.com/ajax/globalize/0.1.1/globalize.min.js"></script>
-<script type='text/javascript' src="http://cdn3.devexpress.com/jslib/13.1.5/js/dx.chartjs.js"></script>
+<script type='text/javascript' src="https://ajax.aspnetcdn.com/ajax/globalize/0.1.1/globalize.min.js"></script>
+<script type='text/javascript' src="https://cdn3.devexpress.com/jslib/13.1.5/js/dx.chartjs.js"></script>
 
 @*<script src="~/Scripts/Chart.min.js"></script>*@
 <script>
