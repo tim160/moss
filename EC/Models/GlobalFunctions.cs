@@ -1069,27 +1069,42 @@ public class GlobalFunctions
 
         DataRow dr;
         bool is_in_table = false;
-        foreach (report _report in _all_reports)
-        {
-            rm = new ReportModel(_report.id);
-            is_in_table = false;
 
-            foreach (DataRow _dr in dt.Rows)
+
+        _all_reports.Where(c => c.location_id == null || !c.location_id.HasValue).ToList().ForEach(c => c.location_id = 0);
+
+
+
+        var groups = _all_reports.GroupBy(s => s.location_id).Select(
+
+              s => new { key = s.Key.Value, val = s.Count() });
+
+        company_location temp_cm;
+        string temp_loc = "";
+
+        foreach (var item in groups)
+        {
+            if (item.key != 0)
             {
-                if (_dr["name"].ToString().ToLower().Trim() == rm.LocationString().ToLower().Trim())
+                temp_loc = "";
+                temp_cm = db.company_location.Where(t => t.id == item.key).FirstOrDefault();
+                if (temp_cm != null)
                 {
-                    _dr["val"] = Convert.ToInt32(_dr["val"]) + 1;
-                    is_in_table = true;
+                    temp_loc = temp_cm.location_en;
                 }
             }
-            if (!is_in_table)
+            else
+                temp_loc = GlobalRes.Other;
+
+            if (temp_loc.Length > 0)
             {
                 dr = dt.NewRow();
-                dr["name"] = rm.LocationString().Trim();
-                dr["val"] = 1;
+                dr["name"] = temp_loc;
+                dr["val"] = item.val;
                 dt.Rows.Add(dr);
             }
         }
+       
         return dt;
     }
 
@@ -2046,169 +2061,7 @@ public class GlobalFunctions
 
     #region Analytics Helpers List
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="company_id"></param>
-    /// <param name="user_id"></param>
-    /// <returns></returns>
-    public List<Tuple<string, string>> SecondaryTypesListDistinctOld(int company_id, int user_id)
-    {
-        /// string - name, int - id, int -1 - primary, 2- secondary, 3 - 'Other', bool - to merge
-        List<Tuple<string, int, int, bool>> _list_types = new List<Tuple<string, int, int, bool>>();
-
-        UserModel um = new UserModel(user_id);
-        ReportModel rm = new ReportModel();
-
-        List<Int32> _report_ids = um.ReportsSearchIds(company_id, 0);
-
-        List<int> mandatory_types_ids = new List<int>();
-        List<int> secondary_types_ids = new List<int>();
-        List<string> other_types_names = new List<string>();
-
-        List<report_secondary_type> _all_secondary_types_for_company = db.report_secondary_type.Where(item => (_report_ids.Contains(item.report_id))).ToList();
-        foreach (report_secondary_type _secondary_type in _all_secondary_types_for_company)
-        {
-            ////   _list_types.Add(new Tuple<string, int, int, bool>(_secondary_type.secondary_type_nm, _secondary_type.secondary_type_id, 1, true));
-            if ((_secondary_type.secondary_type_nm != null) && (_secondary_type.secondary_type_nm.Trim() != ""))
-            {
-                other_types_names.Add(_secondary_type.secondary_type_nm.Trim());
-                _list_types.Add(new Tuple<string, int, int, bool>(_secondary_type.secondary_type_nm, _secondary_type.report_id, 3, true));
-            }
-            else
-            {
-                if ((_secondary_type.mandatory_secondary_type_id != null) && (_secondary_type.mandatory_secondary_type_id != 0))
-                {
-                    mandatory_types_ids.Add(_secondary_type.mandatory_secondary_type_id.Value);
-                }
-                else if ((_secondary_type.secondary_type_id != -1) && (_secondary_type.secondary_type_id != 0))
-                {
-                    secondary_types_ids.Add(_secondary_type.secondary_type_id);
-                }
-            }
-        }
-
-        other_types_names = other_types_names.Distinct().ToList();
-        mandatory_types_ids = mandatory_types_ids.Distinct().ToList();
-        secondary_types_ids = secondary_types_ids.Distinct().ToList();
-
-
-        /////mandatory
-        List<secondary_type_mandatory> _all_mandatory_types = db.secondary_type_mandatory.Where(item => (mandatory_types_ids.Contains(item.id))).ToList();
-        foreach (secondary_type_mandatory _temp_secondary_type_mandatory in _all_mandatory_types)
-        {
-            ///     _list_types.Add(new Tuple<string, int, int, bool>(_temp_secondary_type_mandatory.secondary_type_en, _temp_secondary_type_mandatory.id, 1, true));
-            _list_types.Add(new Tuple<string, int, int, bool>(_temp_secondary_type_mandatory.secondary_type_en, _temp_secondary_type_mandatory.id, 1, true));
-
-        }
-        /////company_secondary_type
-        List<company_secondary_type> _all_secondary_types = db.company_secondary_type.Where(item => (secondary_types_ids.Contains(item.id))).ToList();
-        foreach (company_secondary_type _temp_company_secondary_type in _all_secondary_types)
-        {
-            ///    _list_types.Add(new Tuple<string, int, int, bool>(_temp_company_secondary_type.secondary_type_en, _temp_company_secondary_type.id, 2, true));
-            _list_types.Add(new Tuple<string, int, int, bool>(_temp_company_secondary_type.secondary_type_en, _temp_company_secondary_type.id, 2, true));
-
-        }
-
-
-        List<Tuple<string, List<int>>> _secondary_types = new List<Tuple<string, List<int>>>();
-
-        for (int i = 0; i < _list_types.Count; i++)
-        {
-            Tuple<string, int, int, bool> _current_item = _list_types[i];
-            bool is_in_list = false;
-
-            List<int> temp_list = new List<int>();
-            int temp_index = -1;
-            for (int j = 0; j < _secondary_types.Count; j++)
-            {
-                Tuple<string, List<int>> _temp_item = _secondary_types[j];
-                if (_temp_item.Item1.Trim().ToLower() == _current_item.Item1.Trim().ToLower())
-                {
-                    temp_index = j;
-                    temp_list = _temp_item.Item2;
-                    is_in_list = true;
-                }
-            }
-            if (!is_in_list)
-            {
-                if (_current_item.Item3 == 3)
-                {
-                    //other
-                    if (!temp_list.Contains(_current_item.Item2))
-                        temp_list.Add(_current_item.Item2);
-                    _secondary_types.Add(new Tuple<string, List<int>>(_current_item.Item1, temp_list));
-                }
-
-
-            }
-            else
-            {
-                Tuple<string, List<int>> _temp_item = _secondary_types[temp_index];
-                if (_current_item.Item3 == 3)
-                {
-                    temp_list.Add(_current_item.Item2);
-                }
-                _temp_item = new Tuple<string, List<int>>(_temp_item.Item1, temp_list);
-                _secondary_types[temp_index] = _temp_item;
-            }
-
-
-
-
-            if (_current_item.Item3 == 2)
-            {
-                //secondary
-                List<report_secondary_type> secondary_types_in_reports = db.report_secondary_type.Where(item => (_report_ids.Contains(item.report_id) && item.secondary_type_id == _current_item.Item2 && item.secondary_type_nm.Trim() == "")).ToList();
-                for (int k = 0; k < secondary_types_in_reports.Count; k++)
-                {
-                    report_secondary_type _temp_secondary_types_in_reports = secondary_types_in_reports[k];
-                    if (!temp_list.Contains(_temp_secondary_types_in_reports.report_id))
-                        temp_list.Add(_temp_secondary_types_in_reports.report_id);
-                }
-                if (is_in_list)
-                {
-                    _secondary_types[temp_index] = new Tuple<string, List<int>>(_secondary_types[temp_index].Item1, temp_list);
-                }
-                else
-                {
-                    _secondary_types.Add(new Tuple<string, List<int>>(_current_item.Item1, temp_list));
-                }
-            }
-            else if (_current_item.Item3 == 1)
-            {
-                //primary
-                List<report_secondary_type> mandatory_types_in_reports = db.report_secondary_type.Where(item => (_report_ids.Contains(item.report_id) && item.mandatory_secondary_type_id == _current_item.Item2 && item.secondary_type_nm.Trim() == "" && item.secondary_type_id == -1 && item.secondary_type_id == 0)).ToList();
-                for (int k = 0; k < mandatory_types_in_reports.Count; k++)
-                {
-                    report_secondary_type _temp_secondary_types_in_reports = mandatory_types_in_reports[k];
-                    if (!temp_list.Contains(_temp_secondary_types_in_reports.report_id))
-                        temp_list.Add(_temp_secondary_types_in_reports.report_id);
-                }
-
-                if (is_in_list)
-                {
-                    _secondary_types[temp_index] = new Tuple<string, List<int>>(_secondary_types[temp_index].Item1, temp_list);
-                }
-                else
-                {
-                    _secondary_types.Add(new Tuple<string, List<int>>(_current_item.Item1, temp_list));
-                }
-
-            }
-
-        }
-
-
-        List<Tuple<string, string>> return_array = new List<Tuple<string, string>>();
-        for (int i = 0; i < _secondary_types.Count; i++)
-        {
-            Tuple<string, List<int>> _current_item = _secondary_types[i];
-            return_array.Add(new Tuple<string, string>(_current_item.Item1, string.Join(",", _current_item.Item2.ToArray())));
-        }
-        return return_array;
-    }
-
+   
     public List<Tuple<string, string>> SecondaryTypesListDistinct(int company_id, int user_id)
     {
         List<Tuple<string, string>> return_array = new List<Tuple<string, string>>();
@@ -2410,13 +2263,13 @@ public class GlobalFunctions
         List<company_relationship> _all_relations = db.company_relationship.Where(item => (relation_ids.Contains(item.id))).ToList();
         foreach (company_relationship _temp_company_rel in _all_relations)
         {
-            List<int> report_ids_by_rel_id = db.report_relationship.Where(item => (_report_ids.Contains(item.report_id) && item.relationship_id == _temp_company_rel.id)).Select(item => item.report_id).ToList();
+            List<int> report_ids_by_rel_id = db.report_relationship.Where(item => (_report_ids.Contains(item.report_id) && item.company_relationship_id == _temp_company_rel.id)).Select(item => item.report_id).ToList();
             return_array.Add(new Tuple<string, string>(_temp_company_rel.relationship_en, string.Join(",", report_ids_by_rel_id.ToArray())));
         }
 
        // if (relation_ids.Contains(0) )
         {
-            List<int> report_ids_by_rel_id = db.report_relationship.Where(item => (_report_ids.Contains(item.report_id) && (item.relationship_id == 0 || !item.relationship_id.HasValue))).Select(item => item.report_id).ToList();
+            List<int> report_ids_by_rel_id = db.report_relationship.Where(item => (_report_ids.Contains(item.report_id) && (item.company_relationship_id == 0 || !item.company_relationship_id.HasValue))).Select(item => item.report_id).ToList();
             if(report_ids_by_rel_id.Count > 0)
                 return_array.Add(new Tuple<string, string>(GlobalRes.Other, string.Join(",", report_ids_by_rel_id.ToArray())));
         }

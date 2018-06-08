@@ -1375,10 +1375,10 @@ namespace EC.Models
                         //other
                         rep.relationship_nm = currentReport.not_current_employee.Trim();
                         rep.relationship_id = null;
-                        if (currentReport.company_relationship_id == 2)
+                        if (currentReport.company_relationship_id != 0)
                         {
                             //'Former Employee'
-                            rep.company_relationship_id = 2;
+                            rep.company_relationship_id = currentReport.company_relationship_id;
                         }
                     }
                     else
