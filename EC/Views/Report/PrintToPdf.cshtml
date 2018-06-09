@@ -121,14 +121,14 @@
                 </div><!-- /.reportContentBlock__textCols -->
                 <div class="reportContentBlock__textCols clearfix">
                     <div class="reportContentBlock__textColFirst">
-                        Paries involved
+                        Parties involved
                     </div><!-- /.reportContentBlock__textColFirst -->
                     <div class="reportContentBlock__textColRight">
                         @foreach (var item in Model.NonInvolvedMediators())
                         {
                             var r = role_in_report.FirstOrDefault(x => x.id == item.role_in_report_id);
                             <p>
-                                <b>@item.Name @item.last_name,</b> <i>@item.Title</i>, @(r == null ? "" : r.role_en)
+                                <b>@item.Name @item.last_name,</b> @item.Title, <b>@(r == null ? "" : r.role_en)</b>
                             </p>
                         }
                     </div><!-- /.reportContentBlock__textColRight -->
