@@ -2069,7 +2069,7 @@ public class GlobalFunctions
         ReportModel rm = new ReportModel();
         List<Int32> _report_ids = um.ReportsSearchIds(company_id, 0);
 
-        List<int> sec_type_ids = db.report_secondary_type.Where(item => (_report_ids.Contains(item.id))).Select(item => item.secondary_type_id).Distinct().ToList();
+        List<int> sec_type_ids = db.report_secondary_type.Where(item => (_report_ids.Contains(item.report_id))).Select(item => item.secondary_type_id).Distinct().ToList();
 
         /////company_relation
 

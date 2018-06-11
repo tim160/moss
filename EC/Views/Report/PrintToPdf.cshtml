@@ -128,7 +128,7 @@
                         {
                             var r = role_in_report.FirstOrDefault(x => x.id == item.role_in_report_id);
                             <p>
-                                <b>@item.Name @item.last_name,</b> @item.Title, <b>@(r == null ? "" : r.role_en)</b>
+                                <b>@item.Name @item.last_name,</b> @item.Title, @(r == null ? "" : r.role_en)
                             </p>
                         }
                     </div><!-- /.reportContentBlock__textColRight -->

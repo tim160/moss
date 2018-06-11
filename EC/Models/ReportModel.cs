@@ -1332,6 +1332,19 @@ namespace EC.Models
                         t = adv.SaveChanges();
                     }
 
+
+                    #region Status Saving = pending
+                    report_investigation_status _review_status = new report_investigation_status();
+                    _review_status.created_date = DateTime.Now;
+                    _review_status.investigation_status_id = 1;
+                    _review_status.report_id = currentReport.id;
+                    _review_status.user_id = newUser.id;
+                    _review_status.description = "";
+                    ///adv.report_investigation_status.Add(_review_status);
+                    ////   t = adv.SaveChanges();
+                    AddPendingStatus(_review_status);
+                    #endregion
+
                     //savind secondary type 
 
                     /*CustomSecondaryType == false*/
@@ -1493,6 +1506,19 @@ namespace EC.Models
             }
             return null;
         }
+
+
+        public report_investigation_status AddPendingStatus(report_investigation_status item)
+        {
+            using (ECEntities adv = new ECEntities())
+            {
+                adv.report_investigation_status.Add(item);
+                adv.SaveChanges();
+            }
+            return item;
+        }
+
+
         public report_non_mediator_involved AddReportNonMediatorInvolved(report_non_mediator_involved item, report currentReport)
         {
             item.report_id = currentReport.id;
