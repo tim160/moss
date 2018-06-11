@@ -44,7 +44,7 @@ namespace EC.Controllers
                     if (user == null)
                     {
                         ModelState.AddModelError("PasswordError", "Password");
-                        return View(is_cc ? "Login" : "Login-CC", model);
+                        return View($"Login{(is_cc ? "-CC" : "")}", model);
                     }
 
                     AuthHelper.SetCookies(user, HttpContext);
@@ -80,7 +80,7 @@ namespace EC.Controllers
             ModelState.AddModelError("PasswordError", "Password");
             model.Password = "";
 
-            return View(is_cc ? "Login" : "Login-CC", model);
+            return View($"Login{(is_cc ? "-CC" : "")}", model);
         }
 
         public ActionResult Report()

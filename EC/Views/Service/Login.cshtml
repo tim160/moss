@@ -6,7 +6,8 @@
 }
 
 <style>
-    .error {
+    .errorLogin {
+        border: 2px solid red;
     }
 </style>
 
@@ -67,7 +68,7 @@
                                 Login
                                 @Html.TextBoxFor(x => x.Login)
                             </label>
-                            <label class="loginForm__input">
+                            <label class="loginForm__input @(ViewData.ModelState.ContainsKey("PasswordError") ? "errorLogin" : "")">
                                 Password
                                 @Html.PasswordFor(x => x.Password, new { @class = ViewContext.ViewData.ModelState.ContainsKey("PasswordError") ? "error" : "" })
                             </label>
