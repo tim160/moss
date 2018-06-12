@@ -308,226 +308,6 @@ public class GlobalFunctions
         return _array;
     }
 
-    //done
-    public DataTable SecondaryTypesByDate(int company_id, int user_id)
-    {
-        DateTime _real_start, _real_end;
-
-        _real_start = new DateTime(2015, 1, 1);
-        _real_end = DateTime.Today.AddDays(1);
-        DateTime _month_end_date = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1).AddDays(-1);
-
-        UserModel um = new UserModel(user_id);
-        ReportModel rm = new ReportModel();
-
-        List<report> _all_reports = um.ReportsSearch(company_id, 0);
-
-        List<secondary_type_mandatory> all_types = new List<secondary_type_mandatory>();
-        all_types = (db.secondary_type_mandatory).ToList();
-
-        List<report> _selected_reports = new List<report>();
-        List<report> _previous_reports = new List<report>();
-
-        foreach (report _report in _all_reports)
-        {
-            if ((_report.reported_dt >= _real_start) && (_report.reported_dt <= _real_end))
-            {
-                _selected_reports.Add(_report);
-            }
-        }
-
-        // getting the data for previous month
-        _real_end = _month_end_date;
-        foreach (report _report in _all_reports)
-        {
-            if ((_report.reported_dt >= _real_start) && (_report.reported_dt <= _real_end))
-            {
-                _previous_reports.Add(_report);
-            }
-        }
-        // merge with previous
-        List<Int32> _report_ids = _all_reports.Select(t => t.id).ToList();
-        List<Int32> _previous_report_ids = _previous_reports.Select(t => t.id).ToList();
-
-        DataTable dt = dtAnalyticsTable();
-
-        List<company_secondary_type> _c_secondary_types = db.company_secondary_type.Where(item => item.company_id == company_id).ToList();
-
-        foreach (company_secondary_type _temp_secondary_types in _c_secondary_types)
-        {
-            //int prev_count = 0;
-            int count = db.report_secondary_type.Where(item => ((item.secondary_type_id == _temp_secondary_types.id) && (_report_ids.Contains(item.report_id)))).Count();
-            int prev_count = db.report_secondary_type.Where(item => ((item.secondary_type_id == _temp_secondary_types.id) && (_previous_report_ids.Contains(item.report_id)))).Count();
-
-            if (count > 0)
-            {
-                DataRow dr;
-                //  prev_count = _previous_reports.Where(item => (item.type_id == _type.id)).Count();
-                dr = dt.NewRow();
-                dr["name"] = _temp_secondary_types.secondary_type_en;
-                dr["value"] = count;
-                dr["prev"] = prev_count;
-                dt.Rows.Add(dr);
-            }
-        }
-
-
-
-        List<report_secondary_type> _all_types = db.report_secondary_type.Where(item => (_report_ids.Contains(item.report_id)) && ((item.secondary_type_id == 0 || item.secondary_type_id == -1))).ToList();
-
-        foreach (report_secondary_type _type in _all_types)
-        {
-            string _temp_secondary_type_nm = _type.secondary_type_nm;
-            bool is_in_dt = false;
-            int row_num = 0;
-            int i = 0;
-
-            int _previous = 0;
-            if (_previous_report_ids.Contains(_type.report_id))
-                _previous = 1;
-
-            foreach (DataRow dr in dt.Rows)
-            {
-                if (dr["name"].ToString().ToLower().Trim() == _temp_secondary_type_nm.ToLower().Trim())
-                {
-                    is_in_dt = true;
-                    row_num = i;
-                }
-                i++;
-            }
-
-            if (!is_in_dt)
-            {
-                //  prev_count = _previous_reports.Where(item => (item.type_id == _type.id)).Count();
-                DataRow dr = dt.NewRow();
-                dr["name"] = _temp_secondary_type_nm;
-                dr["value"] = 1;
-                dr["prev"] = _previous;
-                dt.Rows.Add(dr);
-
-            }
-            else
-            {
-                DataRow dr = dt.Rows[row_num];
-                dr["value"] = Convert.ToInt32(dr["value"]) + 1;
-                dr["prev"] = Convert.ToInt32(dr["prev"]) + _previous;
-            }
-        }
-
-        return dt;
-    }
-
-    //done
-    public DataTable RelationshipToCompanyByDate(int company_id, int user_id)
-    {
-        DateTime _real_start, _real_end;
-
-        _real_start = new DateTime(2015, 1, 1);
-        _real_end = DateTime.Today.AddDays(1);
-        DateTime _month_end_date = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1).AddDays(-1);
-
-        UserModel um = new UserModel(user_id);
-        ReportModel rm = new ReportModel();
-
-        List<report> _all_reports = um.ReportsSearch(company_id, 0);
-
-        List<relationship> all_relationships = new List<relationship>();
-        all_relationships = (db.relationship).ToList();
-
-        List<report> _selected_reports = new List<report>();
-        List<report> _previous_reports = new List<report>();
-
-        foreach (report _report in _all_reports)
-        {
-            if ((_report.reported_dt >= _real_start) && (_report.reported_dt <= _real_end))
-            {
-                _selected_reports.Add(_report);
-            }
-        }
-
-        // getting the data for previous month
-        _real_end = _month_end_date;
-        foreach (report _report in _all_reports)
-        {
-            if ((_report.reported_dt >= _real_start) && (_report.reported_dt <= _real_end))
-            {
-                _previous_reports.Add(_report);
-            }
-        }
-
-        // merge with previous
-        List<Int32> _report_ids = _all_reports.Select(t => t.id).ToList();
-        List<Int32> _previous_report_ids = _previous_reports.Select(t => t.id).ToList();
-
-        DataTable dt = dtAnalyticsTable();
-
-
-        List<company_relationship> _c_relationships = db.company_relationship.Where(item => item.company_id == company_id).ToList();
-
-        foreach (company_relationship _temp_relationships in _c_relationships)
-        {
-            //int prev_count = 0;
-            int count = db.report_relationship.Where(item => ((item.company_relationship_id == _temp_relationships.id) && (_report_ids.Contains(item.report_id)))).Count();
-            int prev_count = db.report_relationship.Where(item => ((item.company_relationship_id == _temp_relationships.id) && (_previous_report_ids.Contains(item.report_id)))).Count();
-
-            if (count > 0)
-            {
-                DataRow dr;
-                //  prev_count = _previous_reports.Where(item => (item.type_id == _type.id)).Count();
-                dr = dt.NewRow();
-                dr["name"] = _temp_relationships.relationship_en;
-                dr["value"] = count;
-                dr["prev"] = prev_count;
-                dt.Rows.Add(dr);
-            }
-        }
-
-
-        List<report_relationship> _all_types = db.report_relationship.Where(item => (_report_ids.Contains(item.report_id)) && ((item.company_relationship_id == null || item.company_relationship_id.Value == 0 || item.company_relationship_id.Value == -1))).ToList();
-
-        foreach (report_relationship _type in _all_types)
-        {
-            string _temp_relationship_nm = _type.relationship_nm;
-            bool is_in_dt = false;
-            int row_num = 0;
-            int i = 0;
-
-            int _previous = 0;
-            if (_previous_report_ids.Contains(_type.report_id))
-                _previous = 1;
-
-            foreach (DataRow dr in dt.Rows)
-            {
-                if (dr["name"].ToString().ToLower().Trim() == _temp_relationship_nm.ToLower().Trim())
-                {
-                    is_in_dt = true;
-                    row_num = i;
-                }
-                i++;
-            }
-
-            if (!is_in_dt)
-            {
-                //  prev_count = _previous_reports.Where(item => (item.type_id == _type.id)).Count();
-                DataRow dr = dt.NewRow();
-                dr["name"] = _temp_relationship_nm;
-                dr["value"] = 1;
-                dr["prev"] = _previous;
-                dt.Rows.Add(dr);
-
-            }
-            else
-            {
-                DataRow dr = dt.Rows[row_num];
-                dr["value"] = Convert.ToInt32(dr["value"]) + 1;
-                dr["prev"] = Convert.ToInt32(dr["prev"]) + _previous;
-            }
-        }
-
-
-        return dt;
-    }
-
     public DataTable AnalyticsTimeline(int company_id, int user_id)
     {
         DataTable dt = dtAnalyticsTimeLineTable();
@@ -704,8 +484,6 @@ public class GlobalFunctions
         return dt_length;
     }
 
-
-
     //done
     /// <summary>
     /// generates average number days per stage.
@@ -780,103 +558,6 @@ public class GlobalFunctions
         return _array_ratio;
     }
 
-    //done
-    public DataTable CompanyLocationReport(int company_id, int user_id)
-    {
-        UserModel um = new UserModel(user_id);
-        ReportModel rm = new ReportModel();
-        List<report> _all_reports = um.ReportsSearch(company_id, 0);
-        DataTable dt = dtDoughnutTable();
-
-        DataRow dr;
-        bool is_in_table = false;
-        foreach (report _report in _all_reports)
-        {
-            rm = new ReportModel(_report.id);
-            is_in_table = false;
-
-            foreach (DataRow _dr in dt.Rows)
-            {
-                if (_dr["name"].ToString().ToLower().Trim() == rm.LocationString().ToLower().Trim())
-                {
-                    _dr["val"] = Convert.ToInt32(_dr["val"]) + 1;
-                    is_in_table = true;
-                }
-            }
-            if (!is_in_table)
-            {
-                dr = dt.NewRow();
-                dr["name"] = rm.LocationString().Trim();
-                dr["val"] = 1;
-                dt.Rows.Add(dr);
-            }
-        }
-        return dt;
-    }
-
-    //done
-    public DataTable CompanyDepartmentReport(int company_id, int user_id)
-    {
-        UserModel um = new UserModel(user_id);
-        List<report> _all_reports = um.ReportsSearch(company_id, 0);
-        DataTable dt = dtDoughnutTable();
-        List<string> _dep_names = new List<string>();
-
-        DataRow dr;
-        bool is_in_table = false;
-        company_department temp_c_dep;
-        bool one_department_added = false;
-
-
-        foreach (report _report in _all_reports)
-        {
-            one_department_added = false;
-            List<report_department> _c_departments = db.report_department.Where(item => item.report_id == _report.id).ToList();
-
-            foreach (report_department _temp_dep in _c_departments)
-            {
-                temp_c_dep = db.company_department.Where(item => item.id == _temp_dep.department_id).FirstOrDefault();
-                if (temp_c_dep != null)
-                {
-                    one_department_added = true;
-                    _dep_names.Add(temp_c_dep.department_en.Trim());
-                }
-            }
-
-            if (_report.other_department_name.Trim().Length > 0)
-            {
-                _dep_names.Add(_report.other_department_name.Trim());
-                one_department_added = true;
-            }
-
-            if (!one_department_added)
-            {
-                _dep_names.Add(GlobalRes.unknown_departments);
-            }
-        }
-        foreach (string _department in _dep_names)
-        {
-            is_in_table = false;
-            foreach (DataRow _dr in dt.Rows)
-            {
-                if (_dr["name"].ToString().ToLower().Trim() == _department.ToLower().Trim())
-                {
-                    _dr["val"] = Convert.ToInt32(_dr["val"]) + 1;
-                    is_in_table = true;
-                }
-            }
-            if (!is_in_table)
-            {
-                dr = dt.NewRow();
-                dr["name"] = _department.Trim();
-                dr["val"] = 1;
-                dt.Rows.Add(dr);
-            }
-        }
-        return dt;
-    }
-
-
     #endregion
 
 
@@ -945,64 +626,36 @@ public class GlobalFunctions
         #endregion
 
         DataTable dt = dtDoughnutTable();
-        List<string> _dep_names = new List<string>();
 
         DataRow dr;
-        bool is_in_table = false;
         company_department temp_c_dep;
-        bool one_department_added = false;
 
+        List<int> report_ids_list = _all_reports.Select(t => t.id).ToList();
+        List<report_department> departmentsList = db.report_department.Where(t => report_ids_list.Contains(t.report_id)).ToList();
 
-        foreach (report _report in _all_reports)
+        var groups = departmentsList.GroupBy(s => s.department_id).Select(s => new { key = s.Key, val = s.Count() });
+
+        string temp_dep = "";
+
+        foreach (var item in groups)
         {
-            one_department_added = false;
-            List<report_department> _c_departments = db.report_department.Where(item => item.report_id == _report.id).ToList();
-
-            foreach (report_department _temp_dep in _c_departments)
+            if (item.key != 0)
             {
-                if (_temp_dep.department_id != 0)
+                temp_dep = "";
+                temp_c_dep = db.company_department.Where(t => t.id == item.key).FirstOrDefault();
+                if (temp_c_dep != null)
                 {
-                    temp_c_dep = db.company_department.Where(item => item.id == _temp_dep.department_id).FirstOrDefault();
-                    if (temp_c_dep != null)
-                    {
-                        one_department_added = true;
-                        _dep_names.Add(temp_c_dep.department_en.Trim());
-                    }
-                }
-                else
-                {
-                    one_department_added = true;
-                    _dep_names.Add(GlobalRes.notListed.Trim());
+                    temp_dep = temp_c_dep.department_en;
                 }
             }
+            else
+                temp_dep = GlobalRes.Other;
 
-            if (_report.other_department_name.Trim().Length > 0)
-            {
-                _dep_names.Add(_report.other_department_name.Trim());
-                one_department_added = true;
-            }
-
-            if (!one_department_added)
-            {
-                _dep_names.Add(GlobalRes.unknown_departments);
-            }
-        }
-        foreach (string _department in _dep_names)
-        {
-            is_in_table = false;
-            foreach (DataRow _dr in dt.Rows)
-            {
-                if (_dr["name"].ToString().ToLower().Trim() == _department.ToLower().Trim())
-                {
-                    _dr["val"] = Convert.ToInt32(_dr["val"]) + 1;
-                    is_in_table = true;
-                }
-            }
-            if (!is_in_table)
+            if (temp_dep.Length > 0)
             {
                 dr = dt.NewRow();
-                dr["name"] = _department.Trim();
-                dr["val"] = 1;
+                dr["name"] = temp_dep;
+                dr["val"] = item.val;
                 dt.Rows.Add(dr);
             }
         }
@@ -1015,6 +668,15 @@ public class GlobalFunctions
         //List<string> result = names.Split(',').ToList();
         UserModel um = new UserModel(user_id);
         List<report> _all_reports_old = um.ReportsSearch(company_id, 0);
+        if (dtReportCreationStartDate.HasValue)
+        {
+            _all_reports_old = _all_reports_old.Where(t => t.reported_dt.Date >= dtReportCreationStartDate.Value.Date).ToList();
+        }
+        if (dtReportCreationEndDate.HasValue)
+        {
+            _all_reports_old = _all_reports_old.Where(t => t.reported_dt.Date <= dtReportCreationEndDate.Value.Date).ToList();
+        }
+
         List<report> _all_reports = new List<report>();
         #region Get the list of ReportIDs allowed
         List<int> ReportsSecondaryTypesIDs = new List<int>();
@@ -1064,20 +726,13 @@ public class GlobalFunctions
         #endregion
 
         ReportModel rm = new ReportModel();
-
         DataTable dt = dtDoughnutTable();
 
         DataRow dr;
-        bool is_in_table = false;
-
 
         _all_reports.Where(c => c.location_id == null || !c.location_id.HasValue).ToList().ForEach(c => c.location_id = 0);
 
-
-
-        var groups = _all_reports.GroupBy(s => s.location_id).Select(
-
-              s => new { key = s.Key.Value, val = s.Count() });
+        var groups = _all_reports.GroupBy(s => s.location_id).Select(s => new { key = s.Key.Value, val = s.Count() });
 
         company_location temp_cm;
         string temp_loc = "";
@@ -2061,7 +1716,7 @@ public class GlobalFunctions
 
     #region Analytics Helpers List
 
-   
+   /// Secondary Types - Menu
     public List<Tuple<string, string>> SecondaryTypesListDistinct(int company_id, int user_id)
     {
         List<Tuple<string, string>> return_array = new List<Tuple<string, string>>();
@@ -2088,166 +1743,7 @@ public class GlobalFunctions
         return return_array;
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="company_id"></param>
-    /// <param name="user_id"></param>
-    /// <returns></returns>
-    public List<Tuple<string, string>> RelationTypesListDistinctOld(int company_id, int user_id)
-    {
-        /// string - name, int - id, int -1 - primary, 2- secondary, 3 - 'Other', bool - to merge
-        List<Tuple<string, int, int, bool>> _list_types = new List<Tuple<string, int, int, bool>>();
-
-        UserModel um = new UserModel(user_id);
-        ReportModel rm = new ReportModel();
-
-        List<Int32> _report_ids = um.ReportsSearchIds(company_id, 0);
-
-        List<int> mandatory_relation_ids = new List<int>();
-        List<int> company_relation_ids = new List<int>();
-        List<string> other_relation_names = new List<string>();
-
-        List<report_relationship> _all_relationships_for_company = db.report_relationship.Where(item => (_report_ids.Contains(item.report_id))).ToList();
-        foreach (report_relationship _relationship in _all_relationships_for_company)
-        {
-            ////   _list_types.Add(new Tuple<string, int, int, bool>(_secondary_type.secondary_type_nm, _secondary_type.secondary_type_id, 1, true));
-            if ((_relationship.relationship_nm != null) && (_relationship.relationship_nm.Trim() != "") && ((_relationship.relationship_id == null) || (_relationship.relationship_id == -1) || (_relationship.relationship_id == 0)) && ((_relationship.company_relationship_id == null) || (_relationship.company_relationship_id == -1) || (_relationship.company_relationship_id == 0)))
-            {
-                ///other_relation_names.Add(_relationship.relationship_nm.Trim());
-                _list_types.Add(new Tuple<string, int, int, bool>(_relationship.relationship_nm, _relationship.report_id, 3, true));
-            }
-            else
-            {
-                if ((_relationship.relationship_id != null) && (_relationship.relationship_id != 0))
-                {
-                    mandatory_relation_ids.Add(_relationship.relationship_id.Value);
-                }
-                else if ((_relationship.company_relationship_id.HasValue) && (_relationship.company_relationship_id != -1) && (_relationship.company_relationship_id != 0))
-                {
-                    company_relation_ids.Add(_relationship.company_relationship_id.Value);
-                }
-            }
-        }
-
-        other_relation_names = other_relation_names.Distinct().ToList();
-        mandatory_relation_ids = mandatory_relation_ids.Distinct().ToList();
-        company_relation_ids = company_relation_ids.Distinct().ToList();
-
-        /////mandatory
-    /*    List<relationship> _all_mandatory_relationships = db.relationship.Where(item => (mandatory_relation_ids.Contains(item.id))).ToList();
-        foreach (relationship _temp_relationship_mandatory in _all_mandatory_relationships)
-        {
-            ///     _list_types.Add(new Tuple<string, int, int, bool>(_temp_secondary_type_mandatory.secondary_type_en, _temp_secondary_type_mandatory.id, 1, true));
-            _list_types.Add(new Tuple<string, int, int, bool>(_temp_relationship_mandatory.relationship_en, _temp_relationship_mandatory.id, 1, true));
-
-        }*/
-        /////company_secondary_type
-        List<company_relationship> _all_secondary_relationships = db.company_relationship.Where(item => (company_relation_ids.Contains(item.id))).ToList();
-        foreach (company_relationship _temp_company_relationship in _all_secondary_relationships)
-        {
-            ///    _list_types.Add(new Tuple<string, int, int, bool>(_temp_company_secondary_type.secondary_type_en, _temp_company_secondary_type.id, 2, true));
-            _list_types.Add(new Tuple<string, int, int, bool>(_temp_company_relationship.relationship_en, _temp_company_relationship.id, 2, true));
-
-        }
-
-
-        List<Tuple<string, List<int>>> _relationships = new List<Tuple<string, List<int>>>();
-
-        for (int i = 0; i < _list_types.Count; i++)
-        {
-            Tuple<string, int, int, bool> _current_item = _list_types[i];
-            bool is_in_list = false;
-
-            List<int> temp_list = new List<int>();
-            int temp_index = -1;
-            for (int j = 0; j < _relationships.Count; j++)
-            {
-                Tuple<string, List<int>> _temp_item = _relationships[j];
-                if (_temp_item.Item1.Trim().ToLower() == _current_item.Item1.Trim().ToLower())
-                {
-                    temp_index = j;
-                    temp_list = _temp_item.Item2;
-                    is_in_list = true;
-                }
-            }
-            if (!is_in_list)
-            {
-                if (_current_item.Item3 == 3)
-                {
-                    //other
-                    if (!temp_list.Contains(_current_item.Item2))
-                        temp_list.Add(_current_item.Item2);
-                    _relationships.Add(new Tuple<string, List<int>>(_current_item.Item1, temp_list));
-                }
-
-
-            }
-            else
-            {
-                Tuple<string, List<int>> _temp_item = _relationships[temp_index];
-                if (_current_item.Item3 == 3)
-                {
-                    temp_list.Add(_current_item.Item2);
-                }
-                _temp_item = new Tuple<string, List<int>>(_temp_item.Item1, temp_list);
-                _relationships[temp_index] = _temp_item;
-            }
-
-
-
-
-            if (_current_item.Item3 == 2)
-            {
-                //secondary
-                List<report_relationship> secondary_relationships_in_reports = db.report_relationship.Where(item => (_report_ids.Contains(item.report_id) && item.company_relationship_id == _current_item.Item2)).ToList();
-                for (int k = 0; k < secondary_relationships_in_reports.Count; k++)
-                {
-                    report_relationship _temp_secondary_types_in_reports = secondary_relationships_in_reports[k];
-                    if (!temp_list.Contains(_temp_secondary_types_in_reports.report_id))
-                        temp_list.Add(_temp_secondary_types_in_reports.report_id);
-                }
-                if (is_in_list)
-                {
-                    _relationships[temp_index] = new Tuple<string, List<int>>(_relationships[temp_index].Item1, temp_list);
-                }
-                else
-                {
-                    _relationships.Add(new Tuple<string, List<int>>(_current_item.Item1, temp_list));
-                }
-            }
-            else if (_current_item.Item3 == 1)
-            {
-                //primary
-                List<report_relationship> mandatory_relationships_in_reports = db.report_relationship.Where(item => (_report_ids.Contains(item.report_id) && item.relationship_id == _current_item.Item2 && item.company_relationship_id == -1 && item.company_relationship_id == 0)).ToList();
-                for (int k = 0; k < mandatory_relationships_in_reports.Count; k++)
-                {
-                    report_relationship _temp_secondary_types_in_reports = mandatory_relationships_in_reports[k];
-                    if (!temp_list.Contains(_temp_secondary_types_in_reports.report_id))
-                        temp_list.Add(_temp_secondary_types_in_reports.report_id);
-                }
-
-                if (is_in_list)
-                {
-                    _relationships[temp_index] = new Tuple<string, List<int>>(_relationships[temp_index].Item1, temp_list);
-                }
-                else
-                {
-                    _relationships.Add(new Tuple<string, List<int>>(_current_item.Item1, temp_list));
-                }
-            }
-        }
-
-
-        List<Tuple<string, string>> return_array = new List<Tuple<string, string>>();
-        for (int i = 0; i < _relationships.Count; i++)
-        {
-            Tuple<string, List<int>> _current_item = _relationships[i];
-            return_array.Add(new Tuple<string, string>(_current_item.Item1, string.Join(",", _current_item.Item2.ToArray())));
-        }
-        return return_array;
-    }
-
+    /// Relation Types - Menu
     public List<Tuple<string, string>> RelationTypesListDistinct(int company_id, int user_id)
     {
         //check if null???
@@ -2277,6 +1773,7 @@ public class GlobalFunctions
         return return_array;
     }
 
+    /// Departments - Menu
     public List<Tuple<string, string>> DepartmentsListDistinct(int company_id, int user_id)
     {
         List<Tuple<string, string>> return_array = new List<Tuple<string, string>>();
@@ -2304,6 +1801,7 @@ public class GlobalFunctions
         return return_array;
     }
 
+    /// Locations - Menu
     public List<Tuple<string, string>> LocationsListDistinct(int company_id, int user_id)
     {
         List<Tuple<string, string>> return_array = new List<Tuple<string, string>>();
