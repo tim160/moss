@@ -395,6 +395,11 @@ namespace EC.Models
             var refGroupInvestigationStatuses = (from m in db.report_investigation_status
                                                  group m by m.report_id into refGroup
                                                  select refGroup.OrderByDescending(x => x.id).FirstOrDefault());
+
+            var refGroupInvestigationStatuses1 = (from m in db.report_investigation_status
+                                                 group m by m.report_id into refGroup
+                                                 select refGroup.OrderByDescending(x => x.id).FirstOrDefault()).ToList();
+
             List<int> statuses_match_all_report_id = new List<int>();
             if (flag == 0)
             {

@@ -121,6 +121,8 @@ namespace EC.Controllers.ViewModel
                     _review_status.description = "";
 
                     db.report_investigation_status.Add(_review_status);
+                    db.SaveChanges();
+
                     glb.UpdateReportLog(user_id, 28, report_id, App_LocalResources.GlobalRes._Completed, null, "");
                     glb.UpdateReportLog(user_id, 20, report_id, App_LocalResources.GlobalRes._Started, null, "");
                 }
