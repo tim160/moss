@@ -3121,6 +3121,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fill in the following fields and click &quot;Register&quot; to create an account.
+        /// </summary>
+        public static string FillTheFollowingFieldsRegister {
+            get {
+                return ResourceManager.GetString("FillTheFollowingFieldsRegister", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Financial Concerns.
         /// </summary>
         public static string FinancialConcerns {

@@ -2597,4 +2597,7 @@
   <data name="NewReportsUp" xml:space="preserve">
     <value>New Reports</value>
   </data>
+  <data name="FillTheFollowingFieldsRegister" xml:space="preserve">
+    <value>Fill in the following fields and click "Register" to create an account</value>
+  </data>
 </root>
