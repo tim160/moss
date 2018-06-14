@@ -1714,7 +1714,7 @@ public class GlobalFunctions
 
     #endregion
 
-    #region Analytics Helpers List
+    #region Analytics Helpers List = Menu items
 
    /// Secondary Types - Menu
     public List<Tuple<string, string>> SecondaryTypesListDistinct(int company_id, int user_id)
