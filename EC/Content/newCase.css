@@ -3922,3 +3922,18 @@ body .someDropdowns{
 	.reportRow__twoCols-text{
 		width: calc(100% - 63mm);
 	}
+
+	/* -------------- list upd (Analytics>Cases)  --------------- */
+
+.blockAnalitics .menuItem:hover .menuUl {
+  width: 100%;
+}
+
+/* ------------- bigBlock ------------ */
+body .bigBlock  .blockLinesItem p{
+	white-space: nowrap;
+}
+/* ------ error login ------- */
+.errorLogin.loginForm__input:last-child{
+	border: 2px solid red;
+}
