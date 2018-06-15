@@ -241,19 +241,28 @@ namespace EC.Controllers
                     {
                         eb.Scheduler1(rm._report.display_name);
                         // days are exceeded - reminder never sent - need to send reminder
-                        foreach (var user in rm.MediatorsWhoHasAccessToReport())
-                        {
-                            email = user.email;
-                            email = "alexandr@ase.com.ua";
-                            if ((email != null) && (email.Length > 0))
-                            {
-                                try
-                                {
-                                    em.Send(email, "Case Management Deadline is past due", eb.Body, true);
-                                }
-                                catch
-                                {
+                        List<user> listOwners = rm.ReportOwnersUserList();
+                        CompanyModel cm = new CompanyModel(rm._report.company_id);
+                        List<user> listPlatformManagers = cm.AllMediators(rm._report.company_id, true, ECLevelConstants.level_supervising_mediator);
+                        listOwners.AddRange(listPlatformManagers);
+                        listOwners = listOwners.Distinct().ToList();
 
+                        foreach (var user in listOwners )
+                        {
+                            if (rm.MediatorsWhoHasAccessToReport().Contains(user))
+                            {
+                                email = user.email;
+                               // email = "timur160@hotmail.com";
+                                if ((email != null) && (email.Length > 0))
+                                {
+                                    try
+                                    {
+                                        em.Send(email, "Case Management Deadline is past due", eb.Body, true);
+                                    }
+                                    catch
+                                    {
+
+                                    }
                                 }
                             }
                         }
