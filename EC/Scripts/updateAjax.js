@@ -700,6 +700,9 @@
         }
         $("#containerDepartments").dxPieChart({
             dataSource: data,
+            export: {
+                enabled: true,
+            },
             tooltip: {
                 enabled: true,
                 percentPrecision: 2,
@@ -745,6 +748,9 @@
         
         $("#containerLocation").dxPieChart({
             dataSource: data,
+            export: {
+                enabled: true,
+            },
             tooltip: {
                 enabled: true,
                 percentPrecision: 2,
