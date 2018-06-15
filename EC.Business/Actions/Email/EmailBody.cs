@@ -512,11 +512,11 @@ namespace EC.Business.Actions.Email
 
         }
 
-        public void Scheduler1(string code)
+        public void Scheduler1(string caseNumber)
         {
-            GetBody(54);
+            GetBody(60);
 
-            m_body = m_body.Replace("[RestoreCode]", code);
+            m_body = m_body.Replace("[CaseNumber]", caseNumber); 
         }
 
         #endregion

@@ -166,7 +166,7 @@
                     </div>
                 </div>
                 <div class="text3">
-                    Reported by @Model.reported_by_whom.ToLower() on @Model.reported_dt
+                    Reported by @Model.reported_by_whom?.ToLower() on @Model.reported_dt
                 </div>
                 @if (Model.investigation_status_number == ECGlobalConstants.investigation_status_completed)
                 {

@@ -544,7 +544,10 @@
                     <!-- 5_1 Type of incident -->
                     <div class="blockTypeOfIncident">
                         <div class="headerBlockActivity">
-                            <div class="titleBlock">@GlobalRes.Typeofincident</div>
+                            <div class="titleBlock">
+                                @GlobalRes.Typeofincident
+                                <button type="button" id="blockTypeOfIncidentPrint" class="btn-linkReverse">Print</button>
+                            </div>
                         </div>
                         <div class="allBlockLines">
                             @*@foreach (DataRow dr in _dtSecondaryTypes.Rows)

@@ -921,6 +921,9 @@
                 addPersonRole: $scope.addPerson.Role.id,
             };
             NewCaseInvestigationNotesService.post(param, function (data) {
+                $scope.addPerson.FirstName = '';
+                $scope.addPerson.LastName = '';
+                $scope.addPerson.Title = '';
                 $scope.addPerson.Role = { id: 0, role_en: 'Select one' };
                 $scope.refresh(data);
             });

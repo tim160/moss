@@ -244,6 +244,7 @@ namespace EC.Controllers
                         foreach (var user in rm.MediatorsWhoHasAccessToReport())
                         {
                             email = user.email;
+                            email = "alexandr@ase.com.ua";
                             if ((email != null) && (email.Length > 0))
                             {
                                 try

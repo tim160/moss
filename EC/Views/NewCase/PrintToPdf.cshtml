@@ -173,7 +173,7 @@
                     @{
                         rClass = "";
                         var roles = Model.RoleInReport();
-                        foreach (var item in Model.NonInvolvedMediators())
+                        foreach (var item in Model.NonInvolvedMediatorsAll())
                         {
                             var role = roles.FirstOrDefault(x => x.id == item.role_in_report_id);
                             <div class="reportRow @rClass clearfix">
