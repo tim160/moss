@@ -242,14 +242,10 @@ namespace EC.Controllers
                         eb.Scheduler1(rm._report.display_name);
                         // days are exceeded - reminder never sent - need to send reminder
                         List<user> listOwners = rm.ReportOwnersUserList();
-                        CompanyModel cm = new CompanyModel(rm._report.company_id);
-                        List<user> listPlatformManagers = cm.AllMediators(rm._report.company_id, true, ECLevelConstants.level_supervising_mediator);
-                        listOwners.AddRange(listPlatformManagers);
-                        listOwners = listOwners.Distinct().ToList();
-
-                        foreach (var user in listOwners )
+                      
+                        foreach (var user in rm.MediatorsWhoHasAccessToReport())
                         {
-                            if (rm.MediatorsWhoHasAccessToReport().Contains(user))
+                            if (listOwners.Contains(user) || user.role_id == ECLevelConstants.level_supervising_mediator)
                             {
                                 email = user.email;
                                // email = "timur160@hotmail.com";
