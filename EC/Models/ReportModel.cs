@@ -2185,6 +2185,18 @@ namespace EC.Models
                 return 0;
         }
 
+        public user Last_investigation_status_user()
+        {
+            report_investigation_status last_status = _last_investigation_status();
+
+            if (last_status == null)
+            {
+                return null;
+            }
+
+            return db.user.FirstOrDefault(x => x.id == last_status.user_id);
+        }
+
         /// <summary>
         /// User of last investigation status
         /// </summary>
