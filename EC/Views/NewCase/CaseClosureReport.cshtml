@@ -98,7 +98,7 @@
                 <div class="content-container__inner-additional">
                     <div class="row">
                         <textarea class="textareaBlock" ng-model="model.report_cc_crime.executive_summary" ng-show="editExecutiveSummary"></textarea>
-                        <p ng-show="!editExecutiveSummary" style="font-size: 18px; font-family: 'OpenSans-Regular', arial, verdana, sans-serif;" ng-bind-html="executiveSummaryP(model.report_cc_crime.executive_summary)"></p>
+                        <p ng-show="!editExecutiveSummary" style="font-size: 18px; font-family: 'OpenSans-Regular', arial, verdana, sans-serif;" ng-bind-html="strBR(model.report_cc_crime.executive_summary)"></p>
                     </div><!-- /.row -->
                     <div class="row clearfix">
                         <a ng-show="editExecutiveSummary" href="#" class="btn-link pull-right" ng-click="saveCrime()">Save</a>
@@ -151,7 +151,7 @@
 				    <div class="col-8 clearfix">
 					    <div class="row m-0">
                             <textarea class="facts-established--text m-b-20" cols="20" rows="5" ng-model="item.outcome.note" ng-show="item.editNote"></textarea>
-                            <p class="content-container__p m-b-20" ng-show="!item.editNote">{{item.outcome.note}}</p>
+                            <p class="content-container__p m-b-20" ng-show="!item.editNote" ng-bind-html="strBR(item.outcome.note)"></p>
 					    </div>
 					    <div class="row m-0">
                             <a href="#" class="btn-link btn-link_small pull-right" ng-show="item.editNote" ng-click="saveOutcome(item)">Save Note</a>
@@ -201,7 +201,7 @@
 				<div class="col-8 clearfix">
 					<div class="row m-0">
                         <textarea ng-model="model.rep_outcome.outcome.note" ng-show="model.rep_outcome.editNote" class="facts-established--text m-b-20" cols="20" rows="5" ></textarea>
-                        <p class="content-container__p m-b-20" ng-show="!model.rep_outcome.editNote">{{model.rep_outcome.outcome.note}}</p>
+                        <p class="content-container__p m-b-20" ng-show="!model.rep_outcome.editNote" ng-bind-html="strBR(model.rep_outcome.outcome.note)"></p>
 					</div>
 					<div class="row m-0">
                         <a href="#" class="btn-link btn-link_small pull-right" ng-show="model.rep_outcome.editNote" ng-click="saveOutcome(model.rep_outcome)">Save Note</a>
@@ -244,7 +244,7 @@
 				    <div class="col-8 clearfix">
 					    <div class="row m-0">
                             <textarea ng-model="item.outcome.note" ng-show="item.editNote" class="facts-established--text m-b-20" cols="20" rows="5"></textarea>
-                            <p class="content-container__p m-b-20" ng-show="!item.editNote">{{item.outcome.note}}</p>
+                            <p class="content-container__p m-b-20" ng-show="!item.editNote" ng-bind-html="strBR(item.outcome.note)"></p>
 					    </div>
 					    <div class="row m-0">
                             <a href="#" class="btn-link btn-link_small pull-right" ng-show="item.editNote" ng-click="saveOutcome(item)">Save Note</a>

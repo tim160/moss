@@ -291,7 +291,7 @@
                             @b.name_en
                         </div><!-- /.reportRow__twoCols-title -->
                         <div class="reportRow__twoCols-text" style="margin-bottom: 20px;">
-                            @im.company_root_cases_behavioral_note
+                            @Html.Raw((im.company_root_cases_behavioral_note ?? "").Replace("\n", "<br/>"))
                         </div><!-- /.reportRow__twoCols-text -->
                     }
                 </div><!-- /.reportRow clearfix -->
@@ -306,7 +306,7 @@
                             @e.name_en
                         </div><!-- /.reportRow__twoCols-title -->
                         <div class="reportRow__twoCols-text" style="margin-bottom: 20px;">
-                            @im.company_root_cases_external_note
+                            @Html.Raw((im.company_root_cases_external_note ?? "").Replace("\n", "<br/>"))
                         </div><!-- /.reportRow__twoCols-text -->
                     }
                 </div><!-- /.reportRow clearfix -->
@@ -321,7 +321,7 @@
                             @o.name_en
                         </div><!-- /.reportRow__twoCols-title -->
                         <div class="reportRow__twoCols-text" style="margin-bottom: 20px;">
-                            @im.company_root_cases_organizational_note
+                            @Html.Raw((im.company_root_cases_organizational_note ?? "").Replace("\n", "<br/>"))
                         </div><!-- /.reportRow__twoCols-text -->
                     }
                 </div><!-- /.reportRow clearfix -->
@@ -343,7 +343,10 @@
                     SUGGESTED OUTCOME FOR SUBJECT — @item.Name @item.last_name — @(outcome == null ? "n/a" : outcome.outcome_en)
                 </div><!-- /.reportContentBlock__title -->
                 <div class="reportContentBlock__wideText">
-                    @(detail == null ? "" : detail.note)
+                    @if (detail != null)
+                    {
+                        @Html.Raw((detail.note ?? "").Replace("\n", "<br/>"))
+                    }
                 </div><!-- /.reportContentBlock__wideText -->
             </div><!-- /.reportContentBlock clearfix -->
         }
@@ -360,7 +363,7 @@
                     SUGGESTED ACTIONS FOR REPORTER — @(outcome == null ? "n/a" : outcome.outcome_en)
                 </div><!-- /.reportContentBlock__title -->
                 <div class="reportContentBlock__wideText">
-                    @reporter.note
+                    @Html.Raw((reporter.note ?? "").Replace("\n", "<br/>"))
                 </div><!-- /.reportContentBlock__wideText -->
             </div><!-- /.reportContentBlock clearfix -->
         }

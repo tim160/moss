@@ -690,7 +690,7 @@
             });
         };
 
-        $scope.executiveSummaryP = function (str) {
+        $scope.strBR = function (str) {
             str = str || '';
             return str.split('\n').join('<br/>');
         };

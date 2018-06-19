@@ -251,7 +251,7 @@
 				        <div class="col-8 clearfix">
 					        <div class="row m-0">
                                 <textarea class="facts-established--text m-b-20" cols="20" rows="5" ng-model="item.inv_meth_bf_note" ng-show="item.behavioralEditMode"></textarea>
-                                <p class="content-container__p m-b-20" ng-show="!item.behavioralEditMode && item.inv_meth_bf_note != ''">{{item.inv_meth_bf_note}}</p>
+                                <p class="content-container__p m-b-20" ng-show="!item.behavioralEditMode && item.inv_meth_bf_note != ''" ng-bind-html="noteP(item.inv_meth_bf_note)"></p>
 					        </div>
 					        <div class="row m-0">
                                 <a href="#" class="btn-link btn-link_small pull-right m-b-20" ng-show="item.behavioralEditMode" ng-click="saveNoteBehavioralFactors(item)">
@@ -299,7 +299,7 @@
 				        <div class="col-8 clearfix">
 					        <div class="row m-0">
                                 <textarea class="facts-established--text m-b-20" cols="20" rows="5" ng-model="item.inv_meth_ei_note" ng-show="item.externalInfluencesEditMode"></textarea>
-                                <p class="content-container__p m-b-20" ng-show="!item.externalInfluencesEditMode && item.inv_meth_ei_note != ''">{{item.inv_meth_ei_note}}</p>
+                                <p class="content-container__p m-b-20" ng-show="!item.externalInfluencesEditMode && item.inv_meth_ei_note != ''" ng-bind-html="noteP(item.inv_meth_ei_note)"></p>
 					        </div>
 					        <div class="row m-0">
                                 <a href="#" class="btn-link btn-link_small pull-right m-b-20" ng-show="item.externalInfluencesEditMode" ng-click="saveNoteExternalInfluences(item)">
@@ -347,7 +347,7 @@
 				        <div class="col-8 clearfix">
 					        <div class="row m-0">
                                 <textarea class="facts-established--text m-b-20" cols="20" rows="5" ng-model="item.inv_meth_ci_note" ng-show="item.campusInfluencesEditMode"></textarea>
-                                <p class="content-container__p m-b-20" ng-show="!item.campusInfluencesEditMode && item.inv_meth_ci_note != ''">{{item.inv_meth_ci_note}}</p>
+                                <p class="content-container__p m-b-20" ng-show="!item.campusInfluencesEditMode && item.inv_meth_ci_note != ''" ng-bind-html="noteP(item.inv_meth_ci_note)"></p>
 					        </div>
 					        <div class="row m-0">
                                 <a href="#" class="btn-link btn-link_small pull-right m-b-20" ng-show="item.campusInfluencesEditMode" ng-click="saveNoteCampusInfluences(item)">
