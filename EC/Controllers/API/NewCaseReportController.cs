@@ -37,6 +37,8 @@ namespace EC.Controllers.API
             UserModel um = new UserModel(user.id);
             var rm = new ReportModel(id);
 
+            var roles = DB.role_in_report.ToList();
+
             var m = new
             {
                 reportingFrom = rm.CountryString(),
@@ -58,7 +60,7 @@ namespace EC.Controllers.API
                     .Select(x => new {
                         Name = $"{x.Name} {x.last_name}",
                         Title = x.Title,
-                        Role = x.Role,
+                        Role = !String.IsNullOrEmpty(x.Role) ? x.Role : roles.FirstOrDefault(z => z.id == x.role_in_report_id)?.role_en,
                     }),
                 management_know_string = rm.ManagementKnowString(),
                 is_reported_outside = rm.IsReportedOutside(),
