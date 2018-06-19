@@ -618,25 +618,25 @@
                     argumentField: 'month',
                     valueField: 'pending',
                     type: 'area',
-                    color: '#D6F9F6'
+                    color: '#d47472'
                 },
                 {
                     argumentField: 'month',
                     valueField: 'review',
                     type: 'area',
-                    color: '#c0ece8'
+                    color: '#ff9b42'
                 },
                 {
                     argumentField: 'month',
                     valueField: 'investigation',
                     type: 'area',
-                    color: '#82dad0'
+                    color: '#3099be'
                 },
                 {
                     argumentField: 'month',
                     valueField: 'resolution',
                     type: 'area',
-                    color: '#44c8b9'
+                    color: '#64cd9b'
                 },
                 {
                     argumentField: 'month',

@@ -241,19 +241,24 @@ namespace EC.Controllers
                     {
                         eb.Scheduler1(rm._report.display_name);
                         // days are exceeded - reminder never sent - need to send reminder
+                        List<user> listOwners = rm.ReportOwnersUserList();
+                      
                         foreach (var user in rm.MediatorsWhoHasAccessToReport())
                         {
-                            email = user.email;
-                            email = "alexandr@ase.com.ua";
-                            if ((email != null) && (email.Length > 0))
+                            if (listOwners.Contains(user) || user.role_id == ECLevelConstants.level_supervising_mediator)
                             {
-                                try
+                                email = user.email;
+                               // email = "timur160@hotmail.com";
+                                if ((email != null) && (email.Length > 0))
                                 {
-                                    em.Send(email, "Case Management Deadline is past due", eb.Body, true);
-                                }
-                                catch
-                                {
+                                    try
+                                    {
+                                        em.Send(email, "Case Management Deadline is past due", eb.Body, true);
+                                    }
+                                    catch
+                                    {
 
+                                    }
                                 }
                             }
                         }
