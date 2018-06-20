@@ -37,11 +37,20 @@ namespace EC.Controllers.API
             {
                 return null;
             }
-            var reportInfo = DB.report_investigation_methodology
-                .Where(x => x.report_secondary_type_id == model.SecondaryType || model.SecondaryType == 0)
-                .ToList();
 
             var company_behavioral = DB.company_root_cases_behavioral.Where(x => x.company_id == user.company_id).ToList();
+            var company_external = DB.company_root_cases_external.Where(x => x.company_id == user.company_id).ToList();
+            var company_organizational = DB.company_root_cases_organizational.Where(x => x.company_id == user.company_id).ToList();
+            var idsB = company_behavioral.Select(x => x.id).ToList();
+            var idsE = company_external.Select(x => x.id).ToList();
+            var idsO = company_organizational.Select(x => x.id).ToList();
+
+            var reportInfo = DB.report_investigation_methodology
+                .Where(x => 
+                    (x.report_secondary_type_id == model.SecondaryType || model.SecondaryType == 0) 
+                    && (idsB.Contains(x.company_root_cases_behavioral_id.Value) || idsE.Contains(x.company_root_cases_external_id.Value) || idsO.Contains(x.company_root_cases_organizational_id.Value)) )
+                .ToList();
+
             var behavioral = reportInfo
                 .Where(x => x.company_root_cases_behavioral_id.HasValue)
                 .GroupBy(x => x.company_root_cases_behavioral_id)
@@ -52,7 +61,7 @@ namespace EC.Controllers.API
                 })
                 .ToList();
 
-            var company_external = DB.company_root_cases_external.Where(x => x.company_id == user.company_id).ToList();
+
             var external = reportInfo
                 .Where(x => x.company_root_cases_external_id.HasValue)
                 .GroupBy(x => x.company_root_cases_external_id)
@@ -63,7 +72,6 @@ namespace EC.Controllers.API
                 })
                 .ToList();
 
-            var company_organizational = DB.company_root_cases_organizational.Where(x => x.company_id == user.company_id).ToList();
             var organizational = reportInfo
                 .Where(x => x.company_root_cases_organizational_id.HasValue)
                 .GroupBy(x => x.company_root_cases_organizational_id)
