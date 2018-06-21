@@ -136,6 +136,7 @@
         if ($('.sales').length == 0) {
             $("#filterTable").html('');
         }
+        updateGraphics();
     }
     function clearAll() {
         var allSelected = $(".selected");
