@@ -141,14 +141,14 @@
 
 .blockTypeOfIncident,
 .blockReporter,
-.blockLocations,
+.blockLocationsAN,
 .blockDepartments {
   width: 50%;
   float: left;
 }
 .blockTypeOfIncident .titleBlock,
 .blockReporter .titleBlock,
-.blockLocations .titleBlock,
+.blockLocationsAN .titleBlock,
 .blockDepartments .titleBlock{
   padding-left: 4%;
 }
