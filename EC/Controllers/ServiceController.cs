@@ -33,6 +33,17 @@ namespace EC.Controllers
         [HttpPost]
         public ActionResult Login(LoginViewModel model, string returnUrl)
         {
+            return DoLogin(model, returnUrl, "Login");
+        }
+
+        [HttpPost]
+        public ActionResult CheckStatus(LoginViewModel model, string returnUrl)
+        {
+            return DoLogin(model, returnUrl, "CheckStatus");
+        }
+
+        private ActionResult DoLogin(LoginViewModel model, string returnUrl, string view)
+        {
             Session.Clear();
             GlobalFunctions glb = new GlobalFunctions();
 
@@ -44,7 +55,7 @@ namespace EC.Controllers
                     if (user == null)
                     {
                         ModelState.AddModelError("PasswordError", "Password");
-                        return View($"Login{(is_cc ? "-CC" : "")}", model);
+                        return View($"{view}{(is_cc ? "-CC" : "")}", model);
                     }
 
                     AuthHelper.SetCookies(user, HttpContext);
@@ -80,7 +91,7 @@ namespace EC.Controllers
             ModelState.AddModelError("PasswordError", "Password");
             model.Password = "";
 
-            return View($"Login{(is_cc ? "-CC" : "")}", model);
+            return View($"{view}{(is_cc ? "-CC" : "")}", model);
         }
 
         public ActionResult Report()

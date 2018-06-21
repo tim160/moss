@@ -5,6 +5,12 @@
     Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
 }
 
+<style>
+    .errorLogin.loginForm__input:last-child{
+        border: 2px solid red;
+    }
+</style>
+
 <div class="general-container login">
 
     <header class="header">
@@ -65,7 +71,7 @@
                             Want to file a new report?
                         </a>
                     </div><!-- /.loginContentBlock -->
-                    @using (Html.BeginForm("Login", "Service", FormMethod.Post, new { }))
+                    @using (Html.BeginForm("CheckStatus", "Service", FormMethod.Post, new { }))
                     {
                         if (this.Request.HttpMethod == "POST")
                         {
@@ -78,7 +84,7 @@
                                 Login
                                 @Html.TextBoxFor(x => x.Login)
                             </label>
-                            <label class="loginForm__input">
+                            <label class="loginForm__input @(ViewData.ModelState.ContainsKey("PasswordError") ? "errorLogin" : "")">
                                 Password
                                 @Html.PasswordFor(x => x.Password, new { @class = ViewContext.ViewData.ModelState.ContainsKey("PasswordError") ? "error" : "" })
                             </label>
