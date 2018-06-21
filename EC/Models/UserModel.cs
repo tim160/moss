@@ -1095,6 +1095,14 @@ namespace EC.Models
                 if (reason_id.HasValue)
                     case_closure_reason_id = reason_id.Value;
 
+                if ((case_closure_reason_id == 0) && (new_status == 9))
+                {
+                    var ps = db.report_investigation_status.OrderByDescending(x => x.id).FirstOrDefault(x => x.report_id == report_id);
+                    if ((ps != null) && (ps.case_closure_reason_id.HasValue))
+                    {
+                        case_closure_reason_id = ps.case_closure_reason_id.Value;
+                    }
+                }
 
                 //  outcome_message = outcome,   outcome acts like a case_closure_report. We would need to change this in future
 
