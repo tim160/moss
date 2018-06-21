@@ -269,26 +269,26 @@ namespace EC.Controllers.ViewModel
 
                 adv.report_investigation_status.Add(addStatus);
 
+                //Remove owner
+                foreach (var rem_owner in db.report_owner.Where(x => x.report_id == report_id).ToList())
+                {
+                    rem_owner.status_id = 1;
+                }
+
+                //New owner
+                var owner = new report_owner
+                {
+                    report_id = report_id,
+                    status_id = 2,
+                    user_id = ownerId,
+                    created_on = DateTime.Now,
+                };
+                db.report_owner.Add(owner);
+                db.SaveChanges();
+
                 var item = db.report_mediator_assigned.FirstOrDefault(x => x.report_id == report_id & x.mediator_id == ownerId);
                 if (item == null)
                 {
-                    //Remove owner
-                    foreach(var rem_owner in db.report_owner.Where(x => x.report_id == report_id).ToList())
-                    {
-                        rem_owner.status_id = 1;
-                    }
-
-                    //New owner
-                    var owner = new report_owner
-                    {
-                        report_id = report_id,
-                        status_id = 2,
-                        user_id = ownerId,
-                        created_on = DateTime.Now,
-                    };
-                    db.report_owner.Add(owner);
-                    db.SaveChanges();
-
                     //Add to mediators
                     var report_mediator_assigned = new report_mediator_assigned
                     {
