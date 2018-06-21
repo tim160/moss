@@ -82,9 +82,9 @@ namespace EC.Controllers.API
                 })
                 .ToList();
 
-            var secondaryTypes = DB.company_secondary_type.Where(x => x.company_id == user.id).ToList();
-            secondaryTypes.Insert(0, new company_secondary_type { id = 0, secondary_type_en = "All Incindent Types" });
-
+            var secondaryTypes = DB.company_secondary_type.Where(x => x.company_id == user.company_id).ToList();
+            secondaryTypes.Insert(0, new company_secondary_type { id = 0, secondary_type_en = "All Incident Types" });
+                                                                                               
             return new {
                 SecondaryTypes = secondaryTypes,
                 Behavioral = behavioral,
