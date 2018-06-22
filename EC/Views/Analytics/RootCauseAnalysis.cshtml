@@ -83,24 +83,45 @@
                 <div class="graphTitle">
                     Behavioral Factors
                 </div><!-- /.graphTitle -->
-                <div ng-repeat="item in chartData1" class="ng-scope">
-                    <h3 style="padding-left: 10px; border-left: solid 5px {{chartColors[$index]}} ">{{item.name}} {{item.count}}</h3>
+                <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in chartData1">
+	                <div class="col-10 p-0">
+		                <div class="ng-binding RootCauseAnalysis-roudChart__title" style="padding-left: 10px; border-left: solid 5px {{chartColors[$index]}}">
+			                {{item.name}}
+		                </div>
+	                </div>
+	                <div class="col-2 RootCauseAnalysis-roudChart__count">
+		                {{item.count}}
+	                </div>
                 </div>
             </div><!-- /.col-4 -->
             <div class="col-4">
                 <div class="graphTitle">
                     External Influences
                 </div><!-- /.graphTitle -->
-                <div ng-repeat="item in chartData2" class="ng-scope">
-                    <h3 style="padding-left: 10px; border-left: solid 5px {{chartColors[$index]}} ">{{item.name}} {{item.count}}</h3>
+                <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in chartData2">
+	                <div class="col-10 p-0">
+		                <div class="ng-binding RootCauseAnalysis-roudChart__title" style="padding-left: 10px; border-left: solid 5px {{chartColors[$index]}}">
+			                {{item.name}}
+		                </div>
+	                </div>
+	                <div class="col-2 RootCauseAnalysis-roudChart__count">
+		                {{item.count}}
+	                </div>
                 </div>
             </div><!-- /.col-4 -->
             <div class="col-4">
                 <div class="graphTitle">
                     Organizational Influences
                 </div><!-- /.graphTitle -->
-                <div ng-repeat="item in chartData3" class="ng-scope">
-                    <h3 style="padding-left: 10px; border-left: solid 5px {{chartColors[$index]}} ">{{item.name}} {{item.count}}</h3>
+                <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in chartData3">
+	                <div class="col-10 p-0">
+		                <div class="ng-binding RootCauseAnalysis-roudChart__title" style="padding-left: 10px; border-left: solid 5px {{chartColors[$index]}}">
+			                {{item.name}}
+		                </div>
+	                </div>
+	                <div class="col-2 RootCauseAnalysis-roudChart__count">
+		                {{item.count}}
+	                </div>
                 </div>
             </div><!-- /.col-4 -->
         </div><!-- /.row -->
