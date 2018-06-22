@@ -17,8 +17,8 @@
 
     /*page cases begin*/
     updateTOTALTIMEONCASE();
-    var isValidMed = "@is_valid_mediator";
-    if (isValidMed != "False") {
+    var isValidMed = !!$('#is_valid_mediator').val();
+    if (isValidMed) {
         $(".show").on('click', function (event) {
             var clickedDrop = $(event.currentTarget);
             var dropDownList = clickedDrop.siblings('.hide');

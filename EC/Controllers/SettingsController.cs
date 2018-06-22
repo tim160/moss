@@ -513,6 +513,17 @@ namespace EC.Controllers
         {
             try
             {
+                user session_user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+                if (session_user == null || session_user.id == 0)
+                {
+                    return false;
+                }
+
+                if (session_user.role_id != ECLevelConstants.level_supervising_mediator)
+                {
+                    return false;
+                }
+
                 int company_id = Convert.ToInt16(Request["company_id"]);
 
                 int step1_delayMin = Convert.ToInt16(Request["step1_delayMin"]);

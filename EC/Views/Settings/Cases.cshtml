@@ -28,6 +28,8 @@
 @model  company
 
 <input type="hidden" value="@ViewBag.companyId" id="companyId" />
+<input type="hidden" value="@is_valid_mediator" id="is_valid_mediator" />
+
 <div class="blockSettings">
     @using (Html.BeginForm("UpdateCompany", "SettingsController", Model, FormMethod.Post))
     {
