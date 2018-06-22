@@ -384,10 +384,16 @@
                         <a href="#approveDialog" rel="modal:open" id="return_investigation" style="margin-right: 30px;" class="btn-link" value="@normal_button_value">RETURN FOR INVESTIGATION</a>
                         <a href="#approveDialog" rel="modal:open" id="approve_close" class="btn-link" value="@normal_button_value">APPROVE</a>
                     }
-                    else if(_user.role_id == ECLevelConstants.level_supervising_mediator || is_owner)
+                    else if (_user.role_id == ECLevelConstants.level_supervising_mediator || is_owner)
                     {
-                        <a href="#openModal" class="btn-link" rel="modal:open" disabled>@Res_or_comp</a>
-                        @*@<a href="#" class="btn-link" onclick="closeCaseModal()" disabled>@Res_or_comp</a>*@
+                        if ((investigationstatus == 9) && (_user.role_id == 4 || _user.role_id == 5))
+                        {
+                            <a href="#openModal" class="btn-link" rel="modal:open" disabled>@Res_or_comp</a>
+                        }
+                        else
+                        {
+                            <a href="#" class="btn-link" onclick="closeCaseModal()" disabled>@Res_or_comp</a>
+                        }
                     }
                 }
                 else
