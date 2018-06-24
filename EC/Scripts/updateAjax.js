@@ -862,7 +862,7 @@
             pieChart = $("#containerTypeOfReporter").dxPieChart('instance');
             pieChart.clearSelection();
         }
-        $("#containerTypeOfReporters").dxPieChart({
+        $("#containerTypeOfReporter").dxPieChart({
             dataSource: data,
             export: {
                 enabled: true,
