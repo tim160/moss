@@ -560,12 +560,8 @@ public class GlobalFunctions
 
     #endregion
 
-
-    #region Analytics Helpers - new version
-
-    public DataTable CompanyDepartmentReportAdvanced(int company_id, int user_id, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
+    public List<report> ReportsListForCompany(int company_id, int user_id, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
     {
-        //List<string> result = names.Split(',').ToList();
         UserModel um = new UserModel(user_id);
         List<report> _all_reports_old = um.ReportsSearch(company_id, 0);
         if (dtReportCreationStartDate.HasValue)
@@ -625,14 +621,22 @@ public class GlobalFunctions
         }
         #endregion
 
-        DataTable dt = dtDoughnutTable();
+        return _all_reports;
+    }
 
+    #region Analytics Helpers - new version
+
+    public DataTable CompanyDepartmentReportAdvanced(int company_id, int user_id, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
+    {
+        List<report> _all_reports = ReportsListForCompany(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
+
+        DataTable dt = dtDoughnutTable();
         DataRow dr;
         company_department temp_c_dep;
 
         List<int> report_ids_list = _all_reports.Select(t => t.id).ToList();
         List<report_department> departmentsList = db.report_department.Where(t => report_ids_list.Contains(t.report_id)).ToList();
-
+    
         var groups = departmentsList.GroupBy(s => s.department_id).Select(s => new { key = s.Key, val = s.Count() });
 
         string temp_dep = "";
@@ -665,66 +669,7 @@ public class GlobalFunctions
 
     public DataTable CompanyLocationReportAdvanced(int company_id, int user_id, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
     {
-        //List<string> result = names.Split(',').ToList();
-        UserModel um = new UserModel(user_id);
-        List<report> _all_reports_old = um.ReportsSearch(company_id, 0);
-        if (dtReportCreationStartDate.HasValue)
-        {
-            _all_reports_old = _all_reports_old.Where(t => t.reported_dt.Date >= dtReportCreationStartDate.Value.Date).ToList();
-        }
-        if (dtReportCreationEndDate.HasValue)
-        {
-            _all_reports_old = _all_reports_old.Where(t => t.reported_dt.Date <= dtReportCreationEndDate.Value.Date).ToList();
-        }
-
-        List<report> _all_reports = new List<report>();
-        #region Get the list of ReportIDs allowed
-        List<int> ReportsSecondaryTypesIDs = new List<int>();
-        List<int> ReportsRelationTypesIDs = new List<int>();
-        List<int> ReportsDepartmentIDs = new List<int>();
-        List<int> ReportsLocationIDs = new List<int>();
-
-        if (ReportsSecondaryTypesIDStrings.Trim().Length > 0)
-            ReportsSecondaryTypesIDs = ReportsSecondaryTypesIDStrings.Split(',').Select(Int32.Parse).ToList();
-        if (ReportsRelationTypesIDStrings.Trim().Length > 0)
-            ReportsRelationTypesIDs = ReportsRelationTypesIDStrings.Split(',').Select(Int32.Parse).ToList();
-        if (ReportsDepartmentIDStringss.Trim().Length > 0)
-            ReportsDepartmentIDs = ReportsDepartmentIDStringss.Split(',').Select(Int32.Parse).ToList();
-        if (ReportsLocationIDStrings.Trim().Length > 0)
-            ReportsLocationIDs = ReportsLocationIDStrings.Split(',').Select(Int32.Parse).ToList();
-
-        bool _flag1 = true;
-        bool _flag2 = true;
-        bool _flag3 = true;
-        bool _flag4 = true;
-        bool _flag5 = true;
-        bool _flag6 = true;
-
-        foreach (report _report in _all_reports_old)
-        {
-            _flag1 = true;
-            _flag2 = true;
-            _flag3 = true;
-            _flag4 = true;
-            _flag5 = true;
-            _flag6 = true;
-            if ((ReportsSecondaryTypesIDs.Count > 0) && (!ReportsSecondaryTypesIDs.Contains(_report.id)))
-                _flag1 = false;
-            if ((ReportsRelationTypesIDs.Count > 0) && (!ReportsRelationTypesIDs.Contains(_report.id)))
-                _flag2 = false;
-            if ((ReportsDepartmentIDs.Count > 0) && (!ReportsDepartmentIDs.Contains(_report.id)))
-                _flag3 = false;
-            if ((ReportsLocationIDs.Count > 0) && (!ReportsLocationIDs.Contains(_report.id)))
-                _flag4 = false;
-            if ((dtReportCreationStartDate.HasValue) && (dtReportCreationStartDate.Value.Date >= _report.reported_dt.Date))
-                _flag5 = false;
-            if ((dtReportCreationEndDate.HasValue) && (dtReportCreationEndDate.Value.Date <= _report.reported_dt.Date))
-                _flag6 = false;
-            if (_flag1 & _flag2 && _flag3 & _flag4 && _flag5 & _flag6)
-                _all_reports.Add(_report);
-        }
-        #endregion
-
+        List<report> _all_reports = ReportsListForCompany(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
         ReportModel rm = new ReportModel();
         DataTable dt = dtDoughnutTable();
 
@@ -773,54 +718,8 @@ public class GlobalFunctions
     {
         //List<string> result = names.Split(',').ToList();
         UserModel um = new UserModel(user_id);
-        List<report> _all_reports_old = um.ReportsSearch(company_id, 0);
-        List<report> _all_reports = new List<report>();
-        #region Get the list of ReportIDs allowed
-        List<int> ReportsSecondaryTypesIDs = new List<int>();
-        List<int> ReportsRelationTypesIDs = new List<int>();
-        List<int> ReportsDepartmentIDs = new List<int>();
-        List<int> ReportsLocationIDs = new List<int>();
+        List<report> _all_reports = ReportsListForCompany(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
 
-        if (ReportsSecondaryTypesIDStrings.Trim().Length > 0)
-            ReportsSecondaryTypesIDs = ReportsSecondaryTypesIDStrings.Split(',').Select(Int32.Parse).ToList();
-        if (ReportsRelationTypesIDStrings.Trim().Length > 0)
-            ReportsRelationTypesIDs = ReportsRelationTypesIDStrings.Split(',').Select(Int32.Parse).ToList();
-        if (ReportsDepartmentIDStringss.Trim().Length > 0)
-            ReportsDepartmentIDs = ReportsDepartmentIDStringss.Split(',').Select(Int32.Parse).ToList();
-        if (ReportsLocationIDStrings.Trim().Length > 0)
-            ReportsLocationIDs = ReportsLocationIDStrings.Split(',').Select(Int32.Parse).ToList();
-
-        bool _flag1 = true;
-        bool _flag2 = true;
-        bool _flag3 = true;
-        bool _flag4 = true;
-        bool _flag5 = true;
-        bool _flag6 = true;
-
-        foreach (report _report in _all_reports_old)
-        {
-            _flag1 = true;
-            _flag2 = true;
-            _flag3 = true;
-            _flag4 = true;
-            _flag5 = true;
-            _flag6 = true;
-            if ((ReportsSecondaryTypesIDs.Count > 0) && (!ReportsSecondaryTypesIDs.Contains(_report.id)))
-                _flag1 = false;
-            if ((ReportsRelationTypesIDs.Count > 0) && (!ReportsRelationTypesIDs.Contains(_report.id)))
-                _flag2 = false;
-            if ((ReportsDepartmentIDs.Count > 0) && (!ReportsDepartmentIDs.Contains(_report.id)))
-                _flag3 = false;
-            if ((ReportsLocationIDs.Count > 0) && (!ReportsLocationIDs.Contains(_report.id)))
-                _flag4 = false;
-            if ((dtReportCreationStartDate.HasValue) && (dtReportCreationStartDate >= _report.reported_dt))
-                _flag5 = false;
-            if ((dtReportCreationEndDate.HasValue) && (dtReportCreationEndDate <= _report.reported_dt))
-                _flag6 = false;
-            if (_flag1 & _flag2 && _flag3 & _flag4 && _flag5 & _flag6)
-                _all_reports.Add(_report);
-        }
-        #endregion
         //  public List<report> ReportsSearch(int? company_id, int flag)
         ReportModel rm = new ReportModel();
 
@@ -886,54 +785,8 @@ public class GlobalFunctions
     {
         //List<string> result = names.Split(',').ToList();
         UserModel um = new UserModel(user_id);
-        List<report> _all_reports_old = um.ReportsSearch(company_id, 0);
-        List<report> _all_reports = new List<report>();
-        #region Get the list of ReportIDs allowed
-        List<int> ReportsSecondaryTypesIDs = new List<int>();
-        List<int> ReportsRelationTypesIDs = new List<int>();
-        List<int> ReportsDepartmentIDs = new List<int>();
-        List<int> ReportsLocationIDs = new List<int>();
+        List<report> _all_reports = ReportsListForCompany(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
 
-        if (ReportsSecondaryTypesIDStrings.Trim().Length > 0)
-            ReportsSecondaryTypesIDs = ReportsSecondaryTypesIDStrings.Split(',').Select(Int32.Parse).ToList();
-        if (ReportsRelationTypesIDStrings.Trim().Length > 0)
-            ReportsRelationTypesIDs = ReportsRelationTypesIDStrings.Split(',').Select(Int32.Parse).ToList();
-        if (ReportsDepartmentIDStringss.Trim().Length > 0)
-            ReportsDepartmentIDs = ReportsDepartmentIDStringss.Split(',').Select(Int32.Parse).ToList();
-        if (ReportsLocationIDStrings.Trim().Length > 0)
-            ReportsLocationIDs = ReportsLocationIDStrings.Split(',').Select(Int32.Parse).ToList();
-
-        bool _flag1 = true;
-        bool _flag2 = true;
-        bool _flag3 = true;
-        bool _flag4 = true;
-        bool _flag5 = true;
-        bool _flag6 = true;
-
-        foreach (report _report in _all_reports_old)
-        {
-            _flag1 = true;
-            _flag2 = true;
-            _flag3 = true;
-            _flag4 = true;
-            _flag5 = true;
-            _flag6 = true;
-            if ((ReportsSecondaryTypesIDs.Count > 0) && (!ReportsSecondaryTypesIDs.Contains(_report.id)))
-                _flag1 = false;
-            if ((ReportsRelationTypesIDs.Count > 0) && (!ReportsRelationTypesIDs.Contains(_report.id)))
-                _flag2 = false;
-            if ((ReportsDepartmentIDs.Count > 0) && (!ReportsDepartmentIDs.Contains(_report.id)))
-                _flag3 = false;
-            if ((ReportsLocationIDs.Count > 0) && (!ReportsLocationIDs.Contains(_report.id)))
-                _flag4 = false;
-            if ((dtReportCreationStartDate.HasValue) && (dtReportCreationStartDate >= _report.reported_dt))
-                _flag5 = false;
-            if ((dtReportCreationEndDate.HasValue) && (dtReportCreationEndDate <= _report.reported_dt))
-                _flag6 = false;
-            if (_flag1 & _flag2 && _flag3 & _flag4 && _flag5 & _flag6)
-                _all_reports.Add(_report);
-        }
-        #endregion
         DataTable dt = dtTaskLengthTable();
 
         ReportModel rm = new ReportModel();
@@ -1019,369 +872,101 @@ public class GlobalFunctions
         return dt_length;
     }
 
+
     public DataTable RelationshipToCompanyByDateAdvanced(int company_id, int user_id, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
     {
-        //List<string> result = names.Split(',').ToList();
-        UserModel um = new UserModel(user_id);
-        List<report> _all_reports_old = um.ReportsSearch(company_id, 0);
-        List<report> _all_reports = new List<report>();
-        #region Get the list of ReportIDs allowed
-        List<int> ReportsSecondaryTypesIDs = new List<int>();
-        List<int> ReportsRelationTypesIDs = new List<int>();
-        List<int> ReportsDepartmentIDs = new List<int>();
-        List<int> ReportsLocationIDs = new List<int>();
-
-        if (ReportsSecondaryTypesIDStrings.Trim().Length > 0)
-            ReportsSecondaryTypesIDs = ReportsSecondaryTypesIDStrings.Split(',').Select(Int32.Parse).ToList();
-        if (ReportsRelationTypesIDStrings.Trim().Length > 0)
-            ReportsRelationTypesIDs = ReportsRelationTypesIDStrings.Split(',').Select(Int32.Parse).ToList();
-        if (ReportsDepartmentIDStringss.Trim().Length > 0)
-            ReportsDepartmentIDs = ReportsDepartmentIDStringss.Split(',').Select(Int32.Parse).ToList();
-        if (ReportsLocationIDStrings.Trim().Length > 0)
-            ReportsLocationIDs = ReportsLocationIDStrings.Split(',').Select(Int32.Parse).ToList();
-
-        bool _flag1 = true;
-        bool _flag2 = true;
-        bool _flag3 = true;
-        bool _flag4 = true;
-        bool _flag5 = true;
-        bool _flag6 = true;
-
-        foreach (report _report in _all_reports_old)
-        {
-            _flag1 = true;
-            _flag2 = true;
-            _flag3 = true;
-            _flag4 = true;
-            _flag5 = true;
-            _flag6 = true;
-            if ((ReportsSecondaryTypesIDs.Count > 0) && (!ReportsSecondaryTypesIDs.Contains(_report.id)))
-                _flag1 = false;
-            if ((ReportsRelationTypesIDs.Count > 0) && (!ReportsRelationTypesIDs.Contains(_report.id)))
-                _flag2 = false;
-            if ((ReportsDepartmentIDs.Count > 0) && (!ReportsDepartmentIDs.Contains(_report.id)))
-                _flag3 = false;
-            if ((ReportsLocationIDs.Count > 0) && (!ReportsLocationIDs.Contains(_report.id)))
-                _flag4 = false;
-            if ((dtReportCreationStartDate.HasValue) && (dtReportCreationStartDate.Value.Date >= _report.reported_dt.Date))
-                _flag5 = false;
-            if ((dtReportCreationEndDate.HasValue) && (dtReportCreationEndDate.Value.Date <= _report.reported_dt.Date))
-                _flag6 = false;
-            if (_flag1 & _flag2 && _flag3 & _flag4 && _flag5 & _flag6)
-                _all_reports.Add(_report);
-        }
-        #endregion
-
-
-        DateTime _real_start, _real_end;
-
-        _real_start = new DateTime(2015, 1, 1);
-        _real_end = DateTime.Today.AddDays(1);
-        DateTime _month_end_date = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1).AddDays(-1);
+        List<report> _all_reports = ReportsListForCompany(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
 
         ReportModel rm = new ReportModel();
 
-        List<relationship> all_relationships = new List<relationship>();
-        all_relationships = (db.relationship).ToList();
-
-        List<report> _selected_reports = new List<report>();
-        List<report> _previous_reports = new List<report>();
-
-        foreach (report _report in _all_reports)
-        {
-            if ((_report.reported_dt >= _real_start) && (_report.reported_dt <= _real_end))
-            {
-                _selected_reports.Add(_report);
-            }
-        }
-
-        // getting the data for previous month
-        _real_end = _month_end_date;
-        foreach (report _report in _all_reports)
-        {
-            if ((_report.reported_dt >= _real_start) && (_report.reported_dt <= _real_end))
-            {
-                _previous_reports.Add(_report);
-            }
-        }
-
         // merge with previous
         List<Int32> _report_ids = _all_reports.Select(t => t.id).ToList();
-        List<Int32> _previous_report_ids = _previous_reports.Select(t => t.id).ToList();
 
-        DataTable dt = dtAnalyticsTable();
+        DataTable dt = dtDoughnutTable();
 
+        List<report_relationship> _all_relations = db.report_relationship.Where(item => (_report_ids.Contains(item.report_id))).ToList();
+        _all_relations.Where(c => c.company_relationship_id == null || !c.company_relationship_id.HasValue).ToList().ForEach(c => c.company_relationship_id = 0);
 
-        List<company_relationship> _c_relationships = db.company_relationship.Where(item => item.company_id == company_id).ToList();
+        var groups = _all_relations.GroupBy(s => s.company_relationship_id).Select(s => new { key = s.Key, val = s.Count() });
+     
+        string temp_rel = "";
+        company_relationship temp_c_rel;
+        DataRow dr;
 
-        foreach (company_relationship _temp_relationships in _c_relationships)
+        foreach (var item in groups)
         {
-            //int prev_count = 0;
-            int count = db.report_relationship.Where(item => ((item.company_relationship_id == _temp_relationships.id) && (_report_ids.Contains(item.report_id)))).Count();
-            int prev_count = db.report_relationship.Where(item => ((item.company_relationship_id == _temp_relationships.id) && (_previous_report_ids.Contains(item.report_id)))).Count();
-
-            if (count > 0)
+            if (item.key != 0)
             {
-                DataRow dr;
-                //  prev_count = _previous_reports.Where(item => (item.type_id == _type.id)).Count();
-                dr = dt.NewRow();
-                dr["name"] = _temp_relationships.relationship_en;
-                dr["value"] = count;
-                dr["prev"] = prev_count;
-                dt.Rows.Add(dr);
-            }
-        }
-
-
-        List<report_relationship> _all_types = db.report_relationship.Where(item => (_report_ids.Contains(item.report_id)) && ((item.company_relationship_id == null || item.company_relationship_id.Value == 0 || item.company_relationship_id.Value == -1))).ToList();
-
-        foreach (report_relationship _type in _all_types)
-        {
-            string _temp_relationship_nm = _type.relationship_nm;
-            bool is_in_dt = false;
-            int row_num = 0;
-            int i = 0;
-
-            int _previous = 0;
-            if (_previous_report_ids.Contains(_type.report_id))
-                _previous = 1;
-
-            foreach (DataRow dr in dt.Rows)
-            {
-                if (dr["name"].ToString().ToLower().Trim() == _temp_relationship_nm.ToLower().Trim())
+                temp_rel = "";
+                temp_c_rel = db.company_relationship.Where(t => t.id == item.key).FirstOrDefault();
+                if (temp_c_rel != null)
                 {
-                    is_in_dt = true;
-                    row_num = i;
+                    temp_rel = temp_c_rel.relationship_en;
                 }
-                i++;
-            }
-
-            if (!is_in_dt)
-            {
-                //  prev_count = _previous_reports.Where(item => (item.type_id == _type.id)).Count();
-                DataRow dr = dt.NewRow();
-                dr["name"] = _temp_relationship_nm;
-                dr["value"] = 1;
-                dr["prev"] = _previous;
-                dt.Rows.Add(dr);
-
             }
             else
+                temp_rel = GlobalRes.Other;
+
+            if (temp_rel.Length > 0)
             {
-                DataRow dr = dt.Rows[row_num];
-                dr["value"] = Convert.ToInt32(dr["value"]) + 1;
-                dr["prev"] = Convert.ToInt32(dr["prev"]) + _previous;
+                dr = dt.NewRow();
+                dr["name"] = temp_rel;
+                dr["val"] = item.val;
+                dt.Rows.Add(dr);
             }
         }
-
 
         return dt;
     }
 
     public DataTable SecondaryTypesByDateAdvanced(int company_id, int user_id, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
     {
-        //List<string> result = names.Split(',').ToList();
-        UserModel um = new UserModel(user_id);
-        List<report> _all_reports_old = um.ReportsSearch(company_id, 0);
-        List<report> _all_reports = new List<report>();
-        #region Get the list of ReportIDs allowed
-        List<int> ReportsSecondaryTypesIDs = new List<int>();
-        List<int> ReportsRelationTypesIDs = new List<int>();
-        List<int> ReportsDepartmentIDs = new List<int>();
-        List<int> ReportsLocationIDs = new List<int>();
-
-        if (ReportsSecondaryTypesIDStrings.Trim().Length > 0)
-            ReportsSecondaryTypesIDs = ReportsSecondaryTypesIDStrings.Split(',').Select(Int32.Parse).ToList();
-        if (ReportsRelationTypesIDStrings.Trim().Length > 0)
-            ReportsRelationTypesIDs = ReportsRelationTypesIDStrings.Split(',').Select(Int32.Parse).ToList();
-        if (ReportsDepartmentIDStringss.Trim().Length > 0)
-            ReportsDepartmentIDs = ReportsDepartmentIDStringss.Split(',').Select(Int32.Parse).ToList();
-        if (ReportsLocationIDStrings.Trim().Length > 0)
-            ReportsLocationIDs = ReportsLocationIDStrings.Split(',').Select(Int32.Parse).ToList();
-
-        bool _flag1 = true;
-        bool _flag2 = true;
-        bool _flag3 = true;
-        bool _flag4 = true;
-        bool _flag5 = true;
-        bool _flag6 = true;
-
-        foreach (report _report in _all_reports_old)
-        {
-            _flag1 = true;
-            _flag2 = true;
-            _flag3 = true;
-            _flag4 = true;
-            _flag5 = true;
-            _flag6 = true;
-            if ((ReportsSecondaryTypesIDs.Count > 0) && (!ReportsSecondaryTypesIDs.Contains(_report.id)))
-                _flag1 = false;
-            if ((ReportsRelationTypesIDs.Count > 0) && (!ReportsRelationTypesIDs.Contains(_report.id)))
-                _flag2 = false;
-            if ((ReportsDepartmentIDs.Count > 0) && (!ReportsDepartmentIDs.Contains(_report.id)))
-                _flag3 = false;
-            if ((ReportsLocationIDs.Count > 0) && (!ReportsLocationIDs.Contains(_report.id)))
-                _flag4 = false;
-            if ((dtReportCreationStartDate.HasValue) && (dtReportCreationStartDate.Value.Date >= _report.reported_dt.Date))
-                _flag5 = false;
-            if ((dtReportCreationEndDate.HasValue) && (dtReportCreationEndDate.Value.Date <= _report.reported_dt.Date))
-                _flag6 = false;
-            if (_flag1 & _flag2 && _flag3 & _flag4 && _flag5 & _flag6)
-                _all_reports.Add(_report);
-        }
-        #endregion
-        DateTime _real_start, _real_end;
-
-        _real_start = new DateTime(2015, 1, 1);
-        _real_end = DateTime.Today.AddDays(1);
-        DateTime _month_end_date = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1).AddDays(-1);
+        List<report> _all_reports = ReportsListForCompany(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
 
         ReportModel rm = new ReportModel();
-        List<secondary_type_mandatory> all_types = new List<secondary_type_mandatory>();
-        all_types = (db.secondary_type_mandatory).ToList();
-
-        List<report> _selected_reports = new List<report>();
-        List<report> _previous_reports = new List<report>();
-
-        foreach (report _report in _all_reports)
-        {
-            if ((_report.reported_dt >= _real_start) && (_report.reported_dt <= _real_end))
-            {
-                _selected_reports.Add(_report);
-            }
-        }
-
-        // getting the data for previous month
-        _real_end = _month_end_date;
-        foreach (report _report in _all_reports)
-        {
-            if ((_report.reported_dt >= _real_start) && (_report.reported_dt <= _real_end))
-            {
-                _previous_reports.Add(_report);
-            }
-        }
         // merge with previous
         List<Int32> _report_ids = _all_reports.Select(t => t.id).ToList();
-        List<Int32> _previous_report_ids = _previous_reports.Select(t => t.id).ToList();
 
-        DataTable dt = dtAnalyticsTable();
+        DataTable dt = dtDoughnutTable();
 
-        List<company_secondary_type> _c_secondary_types = db.company_secondary_type.Where(item => item.company_id == company_id).ToList();
+        List<report_secondary_type> _all_types = db.report_secondary_type.Where(item => (_report_ids.Contains(item.report_id))).ToList();
+     
+        var groups = _all_types.GroupBy(s => s.secondary_type_id).Select(s => new { key = s.Key, val = s.Count() });
 
-        foreach (company_secondary_type _temp_secondary_types in _c_secondary_types)
+        string temp_sec_type = "";
+        company_secondary_type temp_c_sec_type;
+        DataRow dr;
+        foreach (var item in groups)
         {
-            //int prev_count = 0;
-            int count = db.report_secondary_type.Where(item => ((item.secondary_type_id == _temp_secondary_types.id) && (_report_ids.Contains(item.report_id)))).Count();
-            int prev_count = db.report_secondary_type.Where(item => ((item.secondary_type_id == _temp_secondary_types.id) && (_previous_report_ids.Contains(item.report_id)))).Count();
-
-            if (count > 0)
+            if (item.key != 0)
             {
-                DataRow dr;
-                //  prev_count = _previous_reports.Where(item => (item.type_id == _type.id)).Count();
-                dr = dt.NewRow();
-                dr["name"] = _temp_secondary_types.secondary_type_en;
-                dr["value"] = count;
-                dr["prev"] = prev_count;
-                dt.Rows.Add(dr);
-            }
-        }
-
-        List<report_secondary_type> _all_types = db.report_secondary_type.Where(item => (_report_ids.Contains(item.report_id)) && ((item.secondary_type_id == 0 || item.secondary_type_id == -1))).ToList();
-
-        foreach (report_secondary_type _type in _all_types)
-        {
-            string _temp_secondary_type_nm = _type.secondary_type_nm;
-            bool is_in_dt = false;
-            int row_num = 0;
-            int i = 0;
-
-            int _previous = 0;
-            if (_previous_report_ids.Contains(_type.report_id))
-                _previous = 1;
-
-            foreach (DataRow dr in dt.Rows)
-            {
-                if (dr["name"].ToString().ToLower().Trim() == _temp_secondary_type_nm.ToLower().Trim())
+                temp_sec_type = "";
+                temp_c_sec_type = db.company_secondary_type.Where(t => t.id == item.key).FirstOrDefault();
+                if (temp_c_sec_type != null)
                 {
-                    is_in_dt = true;
-                    row_num = i;
+                    temp_sec_type = temp_c_sec_type.secondary_type_en;
                 }
-                i++;
-            }
-
-            if (!is_in_dt)
-            {
-                //  prev_count = _previous_reports.Where(item => (item.type_id == _type.id)).Count();
-                DataRow dr = dt.NewRow();
-                dr["name"] = _temp_secondary_type_nm;
-                dr["value"] = 1;
-                dr["prev"] = _previous;
-                dt.Rows.Add(dr);
-
             }
             else
+                temp_sec_type = GlobalRes.Other;
+
+            if (temp_sec_type.Length > 0)
             {
-                DataRow dr = dt.Rows[row_num];
-                dr["value"] = Convert.ToInt32(dr["value"]) + 1;
-                dr["prev"] = Convert.ToInt32(dr["prev"]) + _previous;
+                dr = dt.NewRow();
+                dr["name"] = temp_sec_type;
+                dr["val"] = item.val;
+                dt.Rows.Add(dr);
             }
         }
 
         return dt;
     }
-
+   
     public int[] AnalyticsByDateAdvanced(DateTime? _start, DateTime? _end, int company_id, int user_id, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
     {
         //List<string> result = names.Split(',').ToList();
         UserModel um = new UserModel(user_id);
-        List<report> _all_reports_old = um.ReportsSearch(company_id, 0);
-        List<report> _all_reports = new List<report>();
-        #region Get the list of ReportIDs allowed
-        List<int> ReportsSecondaryTypesIDs = new List<int>();
-        List<int> ReportsRelationTypesIDs = new List<int>();
-        List<int> ReportsDepartmentIDs = new List<int>();
-        List<int> ReportsLocationIDs = new List<int>();
-
-        if (ReportsSecondaryTypesIDStrings.Trim().Length > 0)
-            ReportsSecondaryTypesIDs = ReportsSecondaryTypesIDStrings.Split(',').Select(Int32.Parse).ToList();
-        if (ReportsRelationTypesIDStrings.Trim().Length > 0)
-            ReportsRelationTypesIDs = ReportsRelationTypesIDStrings.Split(',').Select(Int32.Parse).ToList();
-        if (ReportsDepartmentIDStringss.Trim().Length > 0)
-            ReportsDepartmentIDs = ReportsDepartmentIDStringss.Split(',').Select(Int32.Parse).ToList();
-        if (ReportsLocationIDStrings.Trim().Length > 0)
-            ReportsLocationIDs = ReportsLocationIDStrings.Split(',').Select(Int32.Parse).ToList();
-
-        bool _flag1 = true;
-        bool _flag2 = true;
-        bool _flag3 = true;
-        bool _flag4 = true;
-        bool _flag5 = true;
-        bool _flag6 = true;
-
-        foreach (report _report in _all_reports_old)
-        {
-            _flag1 = true;
-            _flag2 = true;
-            _flag3 = true;
-            _flag4 = true;
-            _flag5 = true;
-            _flag6 = true;
-            if ((ReportsSecondaryTypesIDs.Count > 0) && (!ReportsSecondaryTypesIDs.Contains(_report.id)))
-                _flag1 = false;
-            if ((ReportsRelationTypesIDs.Count > 0) && (!ReportsRelationTypesIDs.Contains(_report.id)))
-                _flag2 = false;
-            if ((ReportsDepartmentIDs.Count > 0) && (!ReportsDepartmentIDs.Contains(_report.id)))
-                _flag3 = false;
-            if ((ReportsLocationIDs.Count > 0) && (!ReportsLocationIDs.Contains(_report.id)))
-                _flag4 = false;
-            if ((dtReportCreationStartDate.HasValue) && (dtReportCreationStartDate >= _report.reported_dt))
-                _flag5 = false;
-            if ((dtReportCreationEndDate.HasValue) && (dtReportCreationEndDate <= _report.reported_dt))
-                _flag6 = false;
-            if (_flag1 & _flag2 && _flag3 & _flag4 && _flag5 & _flag6)
-                _all_reports.Add(_report);
-        }
-        #endregion
+        List<report> _all_reports = ReportsListForCompany(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
 
         DateTime _real_start, _real_end;
 
