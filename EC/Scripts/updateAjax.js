@@ -249,6 +249,13 @@
                 totalDaysAll.totalDaysSettings = totalDaysSettings;
                 totalDaysAll.totalDays = totalDays;
 
+                //Clear
+                $(".wrapper table td").each(function (idx, val) {
+                    if (!$(val).hasClass('notClear')) {
+                        $(val).html('');
+                    }
+                });
+
                 AverageOfDaysPerStageBackUp();
                 //var init = {
                 //    "review": review,
@@ -372,6 +379,7 @@
         //var escalation = 3;
 
         var table = $(".wrapper table");
+
         var backup = $("#base");
         backup.html("");
         backup.html(table.html());
