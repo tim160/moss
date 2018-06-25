@@ -702,6 +702,7 @@
             export: {
                 enabled: true,
                 formats: ['PDF', 'JPEG'],
+                fileName: 'Departments',
             },
             tooltip: {
                 enabled: true,
@@ -716,7 +717,10 @@
                 columnCount: 1,
                 horizontalAlignment: "left",
                 verticalAlignment: "top",
-                margin: 0
+                margin: 0,
+                customizeHint: function () {
+                    return this.pointName + ' - ' + data[this.pointIndex].val;
+                },
             },
             series: [{
                 type: "doughnut",
@@ -751,6 +755,7 @@
             export: {
                 enabled: true,
                 formats: ['PDF', 'JPEG'],
+                fileName: 'Locations',
             },
             tooltip: {
                 enabled: true,
@@ -765,7 +770,10 @@
                 columnCount: 1,
                 horizontalAlignment: "left",
                 verticalAlignment: "top",
-                margin: 0
+                margin: 0,
+                customizeHint: function () {
+                    return this.pointName + ' - ' + data[this.pointIndex].val;
+                },
             },
             series: [{
                 type: "doughnut",
@@ -785,7 +793,7 @@
     }
     //------------------------ END Locations ------------------------------------------
     function _dtCompanySecondaryTypeReport(data) {
-        console.log('sec', data);
+        //console.log('sec', data);
 
         //example data
         //var dataSource = [{
@@ -810,6 +818,8 @@
             dataSource: data,
             export: {
                 enabled: true,
+                formats: ['PDF', 'JPEG'],
+                fileName: 'Type of incident',
             },
             tooltip: {
                 enabled: true,
@@ -824,7 +834,10 @@
                 columnCount: 1,
                 horizontalAlignment: "left",
                 verticalAlignment: "top",
-                margin: 0
+                margin: 0,
+                customizeHint: function () {
+                    return this.pointName + ' - ' + data[this.pointIndex].val;
+                },
             },
             series: [{
                 type: "doughnut",
@@ -844,7 +857,7 @@
     }
 
     function _dtCompanyRelationTypeReport(data) {
-        console.log('rel', data);
+        //console.log('rel', data);
         //example data
         //var dataSource = [{
         //    name: "Sales",
@@ -868,6 +881,8 @@
             dataSource: data,
             export: {
                 enabled: true,
+                formats: ['PDF', 'JPEG'],
+                fileName: 'Type of Reporter',
             },
             tooltip: {
                 enabled: true,
@@ -882,7 +897,10 @@
                 columnCount: 1,
                 horizontalAlignment: "left",
                 verticalAlignment: "top",
-                margin: 0
+                margin: 0,
+                customizeHint: function () {
+                    return this.pointName + ' - ' + data[this.pointIndex].val;
+                },
             },
             series: [{
                 type: "doughnut",
