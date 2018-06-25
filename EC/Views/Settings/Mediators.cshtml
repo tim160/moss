@@ -114,27 +114,27 @@
                                 <p class="blockMediator admin admin@{@class_ext}">
                                     <span>@LocalizationGetter.GetString("AdminMediator", is_cc).ToLower()</span>
                                 </p>
-    }
-    else if (_user.role_id == 6)
-    {
-        <p class="blockMediator">
-            <span>@LocalizationGetter.GetString("Mediator", is_cc).ToLower()</span>
-        </p>
-    }
-    else if (_user.role_id == 7)
-    {
-        <p class="blockMediator">
-            <span>@LocalizationGetter.GetString("Legalcounsel", is_cc).ToLower()</span>
-        </p>
-    }
-    else if ((_user.notepad_tx != null) && (_user.notepad_tx.Trim().Length > 0))
-    {
-        <p class="blockTextMediator">@_user.notepad_tx</p>
-    }
-    else
-    {
-        <p class="blockTextMediator">&nbsp;</p>
-    }
+                            }
+                            else if (_user.role_id == 6)
+                            {
+                                <p class="blockMediator">
+                                    <span>@LocalizationGetter.GetString("Mediator", is_cc).ToLower()</span>
+                                </p>
+                            }
+                            else if (_user.role_id == 7)
+                            {
+                                <p class="blockMediator">
+                                    <span>@LocalizationGetter.GetString("Legalcounsel", is_cc).ToLower()</span>
+                                </p>
+                            }
+                            else if ((_user.notepad_tx != null) && (_user.notepad_tx.Trim().Length > 0))
+                            {
+                                <p class="blockTextMediator">@_user.notepad_tx</p>
+                            }
+                            else
+                            {
+                                <p class="blockTextMediator">&nbsp;</p>
+                            }
                             <p class="blockTextMediator">@_temp_um._department_string&nbsp;</p>
                             <div class="blocksInfo">
                                 <div class="blockInfo">
@@ -150,16 +150,15 @@
                                 </div>
                             </div>
                         </div><!--blockIteamTeam-->
-
-        }
-    }
+                    }
+                }
             </div>
         </div>
     </div><!--contentSettings-->
-    @if (is_cc.Value && false)
-            {
-                using (Html.BeginForm(null, null, FormMethod.Post, new { id = "AlertDailyCrimeLogManagers" }))
-                {
+    @if (is_cc.Value == false && false)
+    {
+        using (Html.BeginForm(null, null, FormMethod.Post, new { id = "AlertDailyCrimeLogManagers" }))
+        {
             @Html.HiddenFor(x => company.id)
 
             <div class="contentSettings secondHeader oldstyle">
