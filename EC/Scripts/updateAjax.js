@@ -703,6 +703,7 @@
             dataSource: data,
             export: {
                 enabled: true,
+                formats: ['PDF', 'JPEG'],
             },
             tooltip: {
                 enabled: true,
@@ -751,6 +752,7 @@
             dataSource: data,
             export: {
                 enabled: true,
+                formats: ['PDF', 'JPEG'],
             },
             tooltip: {
                 enabled: true,
