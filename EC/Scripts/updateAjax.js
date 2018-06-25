@@ -195,14 +195,12 @@
                     addValDep($("#containerDepartments tspan"), temp['DepartmentTable']);
                 }
                 if (temp["SecondaryTypeTable"] != null && temp["SecondaryTypeTable"].length > 1) {
-                    var parentBlock = $(".blockTypeOfIncident");
-                    blockTypeOfIncident(parentBlock, temp["SecondaryTypeTable"]);
-                    TypeOfIncident_Reporter('.blockTypeOfIncident');
+                    _dtCompanySecondaryTypeReport(temp['SecondaryTypeTable']);
+                    addValDep($("#containerTypesOfIncident tspan"), temp['SecondaryTypeTable']);
                 }
                 if (temp["RelationTable"] != null && temp["RelationTable"].length > 1) {
-                    var parentBlock = $(".blockReporter");
-                    blockTypeOfIncident(parentBlock, temp["RelationTable"]);
-                    TypeOfIncident_Reporter('.blockReporter');
+                    _dtCompanyRelationTypeReport(temp['RelationTable']);
+                    addValDep($("#containerTypeOfReporter tspan"), temp['RelationTable']);
                 }
                 if (temp["AnalyticsTimeline"] != null && temp["AnalyticsTimeline"].length > 1) {
                     _dtAnalyticsTimeline(temp["AnalyticsTimeline"]);
@@ -786,6 +784,122 @@
         });
     }
     //------------------------ END Locations ------------------------------------------
+    function _dtCompanySecondaryTypeReport(data) {
+        console.log('sec', data);
+
+        //example data
+        //var dataSource = [{
+        //    name: "Sales",
+        //    val: 10
+        //}, {
+        //    name: "Accounting",
+        //    val: 18
+        //}, {
+        //    name: "Marketing",
+        //    val: 13
+        //}, {
+        //    name: "R&D",
+        //    val: 3
+        //}];
+        var pieChart = $("#containerTypesOfIncident");
+        if (pieChart.length > 1) {
+            pieChart = $("#containerTypesOfIncident").dxPieChart('instance');
+            pieChart.clearSelection();
+        }
+        $("#containerTypesOfIncident").dxPieChart({
+            dataSource: data,
+            export: {
+                enabled: true,
+            },
+            tooltip: {
+                enabled: true,
+                percentPrecision: 2,
+                customizeTooltip: function (arg) {
+                    return {
+                        text: arg.valueText + " - " + arg.percentText
+                    };
+                }
+            },
+            legend: {
+                columnCount: 1,
+                horizontalAlignment: "left",
+                verticalAlignment: "top",
+                margin: 0
+            },
+            series: [{
+                type: "doughnut",
+                argumentField: "name",
+                label: {
+                    visible: false,
+                    connector: {
+                        visible: true
+                    }
+                }
+            }],
+            size: {
+                width: 600,
+                height: 400,
+            },
+        });
+    }
+
+    function _dtCompanyRelationTypeReport(data) {
+        console.log('rel', data);
+        //example data
+        //var dataSource = [{
+        //    name: "Sales",
+        //    val: 10
+        //}, {
+        //    name: "Accounting",
+        //    val: 18
+        //}, {
+        //    name: "Marketing",
+        //    val: 13
+        //}, {
+        //    name: "R&D",
+        //    val: 3
+        //}];
+        var pieChart = $("#containerTypeOfReporter");
+        if (pieChart.length > 1) {
+            pieChart = $("#containerTypeOfReporter").dxPieChart('instance');
+            pieChart.clearSelection();
+        }
+        $("#containerTypeOfReporter").dxPieChart({
+            dataSource: data,
+            export: {
+                enabled: true,
+            },
+            tooltip: {
+                enabled: true,
+                percentPrecision: 2,
+                customizeTooltip: function (arg) {
+                    return {
+                        text: arg.valueText + " - " + arg.percentText
+                    };
+                }
+            },
+            legend: {
+                columnCount: 1,
+                horizontalAlignment: "left",
+                verticalAlignment: "top",
+                margin: 0
+            },
+            series: [{
+                type: "doughnut",
+                argumentField: "name",
+                label: {
+                    visible: false,
+                    connector: {
+                        visible: true
+                    }
+                }
+            }],
+            size: {
+                width: 600,
+                height: 400,
+            },
+        });
+    }
 
     var configObject = {
         parentEl: '.daterange.menuItem',

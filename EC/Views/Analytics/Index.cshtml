@@ -547,21 +547,10 @@
                         <div class="headerBlockActivity">
                             <div class="titleBlock">
                                 @GlobalRes.Typeofincident
-                                <button type="button" id="blockTypeOfIncidentPrint" class="btn-linkReverse">Print</button>
                             </div>
                         </div>
-                        <div class="allBlockLines">
-                            @*@foreach (DataRow dr in _dtSecondaryTypes.Rows)
-                            {
-                                <div class="blockLinesItem">
-                                    <p>@dr["name"]</p>
-                                    <div class="linesShow">
-                                        <div class="blockLineFirst"></div>
-                                        <label>@dr["value"]</label>
-                                        <div class="blockLineSecond"></div>
-                                    </div>
-                                </div>
-                            }*@
+                        <div style="width: 100%; display: table;">
+                            <div id="containerTypesOfIncident" class="containers" style="height: 250px; width: 95%; margin-left: 5%;"></div>
                         </div>
                         <!--allBlockLines-->
                     </div>
@@ -571,22 +560,9 @@
                             <div class="titleBlock">@GlobalRes.TypeOfReporter</div>
                         </div>
 
-                        <div class="allBlockLines">
-
-                            @*@foreach (DataRow dr in _dtCompanyRelationships.Rows)
-                            {
-                                <div class="blockLinesItem">
-                                    <p>@dr["name"]</p>
-                                    <div class="linesShow">
-                                        <div class="blockLineFirst"></div>
-                                        <label>@dr["value"]</label>
-                                        <div class="blockLineSecond"></div>
-                                    </div>
-                                </div>
-                            }*@
-
+                        <div style="width: 100%; display: table;">
+                            <div id="containerTypeOfReporter" class="containers" style="height: 250px; width: 95%; margin-left: 5%;"></div>
                         </div>
-                        <!--allBlockLines-->
                     </div>
 
 
