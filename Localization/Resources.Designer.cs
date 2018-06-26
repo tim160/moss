@@ -2581,7 +2581,7 @@ namespace EC.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New report has been filed with Employee Confidential - Case admins might be involved.
+        ///   Looks up a localized string similar to New report has been filed with Employee Confidential.
         /// </summary>
         public static string Email_Title_NewCaseInvolved {
             get {
@@ -2590,7 +2590,7 @@ namespace EC.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New report has been filed with Campus Confidential - Case admins might be involved.
+        ///   Looks up a localized string similar to New report has been filed with Campus Confidential.
         /// </summary>
         public static string Email_Title_NewCaseInvolved_CC {
             get {
