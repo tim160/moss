@@ -3437,9 +3437,7 @@ body .menuUl .checked{
 	margin-right: 10px;
 	line-height: 46px;
 }
-/*body .menuUl .checked>img{
-	width: 12px;
-}*/
+
 body .liItem.selected .logo{
 	vertical-align: middle;
 }
@@ -3483,6 +3481,11 @@ body .menuUl .positionText{
 body .blockTodayContant .itemLegend .headerLegend span{
 	line-height: normal;
 }
+
+
+.dropDownMenuRow .menuItem:hover{
+	font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+}
 /*-----------------RootCauseAnalysis----------------*/
 
 .RootCauseAnalysis-roudChart{}
@@ -3492,10 +3495,23 @@ body .blockTodayContant .itemLegend .headerLegend span{
 .RootCauseAnalysis-roudChart__count{
 	font-size: 14pt;
 	font-weight: bold;
+	text-align: right;
+}
+body .positionText .dropMenuText,
+.dropDownMenuRow .menuItem:hover .dropMenuText{
+	font-weight: normal;
+	font-size: 16px;
+	font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+}
+.filterUp{
+	font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+}
+.blockToday .blockTodayContant .itemLegend{
+	width: 16.6%;
 }
 /*-----------------blockAllCases----------------*/
 body .blockAllCases .itemLegend span{
-	font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+	font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
 	font-size: 12px;
 	color: #3c3e3f;
 	line-height: 16px;

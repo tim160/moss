@@ -1,6 +1,7 @@
 ﻿@using EC.Models
 @using EC.App_LocalResources
 @using EC.Models.Database
+@using EC.Localization
 
 @model ReportModel
 
@@ -8,6 +9,11 @@
     Layout = null;
     var role_in_report = (List<role_in_report>)ViewBag.Roles;
     var cm = new CompanyModel();
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
 }
 
 <!DOCTYPE html>
@@ -58,7 +64,7 @@
                         Confidentiality Level
                     </div><!-- /.reportContentBlock__textColFirst -->
                     <div class="reportContentBlock__textColRight">
-                        <p>@Model._anonymousLevel_mediatorVersionByCaller(0)</p>
+                        <p>@Model._anonymousLevel_reporterVersion()</p>
                     </div><!-- /.reportContentBlock__textColRight -->
                 </div><!-- /.reportContentBlock__textCols -->
                 <div class="reportContentBlock__textCols clearfix">
