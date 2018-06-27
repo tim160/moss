@@ -691,6 +691,10 @@
     }
 
     function _dtCompanyDepartmentReport(data) {
+        var total = 0;
+        for (var i = 0; i < data.length; i++) {
+            total += data[i].val;
+        }
         //example data
         //var dataSource = [{
         //    name: "Sales",
@@ -733,7 +737,7 @@
                 percentPrecision: 2,
                 customizeTooltip: function (arg) {
                     return {
-                        text: arg.valueText + " - " + arg.percentText
+                        text: arg.argumentText + " - " + arg.value + ' (' + arg.percentText + ')'
                     };
                 }
             },
@@ -744,6 +748,13 @@
                 margin: 0,
                 customizeHint: function () {
                     return this.pointName + ' - ' + data[this.pointIndex].val;
+                },
+                customizeText: function () {
+                    var s = this.pointName + ' - ' + data[this.pointIndex].val;
+                    if (total != 0) {
+                        s += ' (' + Math.round(data[this.pointIndex].val * 100 / total) + '%)';
+                    }
+                    return s;
                 },
             },
             series: [{
@@ -768,6 +779,10 @@
     //depens on one line
     //-------------------------- START Locations ----------------------------------------
     function _dtCompanyLocationReport(data) {
+        var total = 0;
+        for (var i = 0; i < data.length; i++) {
+            total += data[i].val;
+        }
         var pieChart = $("#containerLocation");
         if (pieChart.length > 1) {
             pieChart = $("#containerLocation").dxPieChart('instance');
@@ -795,7 +810,7 @@
                 percentPrecision: 2,
                 customizeTooltip: function (arg) {
                     return {
-                        text: arg.valueText + " - " + arg.percentText
+                        text: arg.argumentText + " - " + arg.value + ' (' + arg.percentText + ')'
                     };
                 }
             },
@@ -806,6 +821,13 @@
                 margin: 0,
                 customizeHint: function () {
                     return this.pointName + ' - ' + data[this.pointIndex].val;
+                },
+                customizeText: function () {
+                    var s = this.pointName + ' - ' + data[this.pointIndex].val;
+                    if (total != 0) {
+                        s += ' (' + Math.round(data[this.pointIndex].val * 100 / total) + '%)';
+                    }
+                    return s;
                 },
             },
             series: [{
@@ -826,7 +848,10 @@
     }
     //------------------------ END Locations ------------------------------------------
     function _dtCompanySecondaryTypeReport(data) {
-        //console.log('sec', data);
+        var total = 0;
+        for (var i = 0; i < data.length; i++) {
+            total += data[i].val;
+        }
 
         //example data
         //var dataSource = [{
@@ -867,8 +892,9 @@
                 enabled: true,
                 percentPrecision: 2,
                 customizeTooltip: function (arg) {
+                    console.log(arg);
                     return {
-                        text: arg.valueText + " - " + arg.percentText
+                        text: arg.argumentText + " - " + arg.value + ' (' + arg.percentText + ')'
                     };
                 }
             },
@@ -879,6 +905,13 @@
                 margin: 0,
                 customizeHint: function () {
                     return this.pointName + ' - ' + data[this.pointIndex].val;
+                },
+                customizeText: function () {
+                    var s = this.pointName + ' - ' + data[this.pointIndex].val;
+                    if (total != 0) {
+                        s += ' (' + Math.round(data[this.pointIndex].val * 100 / total) + '%)';
+                    }
+                    return s;
                 },
             },
             series: [{
@@ -893,12 +926,16 @@
             }],
             size: {
                 width: 600,
-                height: 400,
+                height: 500,
             },
         });
     }
 
     function _dtCompanyRelationTypeReport(data) {
+        var total = 0;
+        for (var i = 0; i < data.length; i++) {
+            total += data[i].val;
+        }
         //console.log('rel', data);
         //example data
         //var dataSource = [{
@@ -940,7 +977,7 @@
                 percentPrecision: 2,
                 customizeTooltip: function (arg) {
                     return {
-                        text: arg.valueText + " - " + arg.percentText
+                        text: arg.argumentText + " - " + arg.value + ' (' + arg.percentText + ')'
                     };
                 }
             },
@@ -951,6 +988,13 @@
                 margin: 0,
                 customizeHint: function () {
                     return this.pointName + ' - ' + data[this.pointIndex].val;
+                },
+                customizeText: function () {
+                    var s = this.pointName + ' - ' + data[this.pointIndex].val;
+                    if (total != 0) {
+                        s += ' (' + Math.round(data[this.pointIndex].val * 100 / total) + '%)';
+                    }
+                    return s;
                 },
             },
             series: [{
