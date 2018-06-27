@@ -207,13 +207,20 @@
                 }
                 if (temp["MonthEndSnapshotTable"] != null && temp["MonthEndSnapshotTable"].length > 1 && temp["TodaySnapshotTable"] != null && temp["TodaySnapshotTable"].length > 1 && temp["MonthEndSnapshotTable"].length == temp["TodaySnapshotTable"].length) {
                     var items = $(".blockTodayContant .itemLegend");
-                    for (var i = 0; i < temp["MonthEndSnapshotTable"].length; i++) {
+                    var col = $(items[0]).find('label'); col.text(temp["TodaySnapshotTable"][6]);
+                    col = $(items[1]).find('label'); col.text(temp["TodaySnapshotTable"][0]);
+                    col = $(items[2]).find('label'); col.text(temp["TodaySnapshotTable"][1]);
+                    col = $(items[3]).find('label'); col.text(temp["TodaySnapshotTable"][2]);
+                    col = $(items[4]).find('label'); col.text(temp["TodaySnapshotTable"][3]);
+                    col = $(items[5]).find('label'); col.text(temp["TodaySnapshotTable"][8]);
+
+                    /*for (var i = 0; i < temp["MonthEndSnapshotTable"].length; i++) {
                         var currentItem = $(items[i]);
                         var today = currentItem.find('label');
                         var currentMonthEnd = currentItem.find('.closed');
                         today.text(temp["TodaySnapshotTable"][i]);
                         currentMonthEnd.text(temp["MonthEndSnapshotTable"][i]);
-                    }
+                    }*/
                 }
                 var averOfDays = temp['AverageStageDaysTable'];
 

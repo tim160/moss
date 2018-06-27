@@ -27,9 +27,11 @@
     //int[] _company_average_days = ViewBag._company_average_days;
     //int[] _average_stage_days = ViewBag._average_stage_days;
 
-    string[] _titleHeaderLegend = { "New Report", "Report Review", "Under Investigation", "Awaiting Sign-Off", "Closed" };
- ///   string[] _miniSquareColor = {"#c0ece8", "#82dad0", "#44c8b9", "#44c8b9", "#e5eeee" };
-    string[] _miniSquareColor = { "#d47472", "#ff9b42", "#3099be", "#64cd9b", "#e5eeee" };
+    string[] _titleHeaderLegend = { "Spam", "New Report", "Report Review", "Under Investigation", "Awaiting Sign-Off", "Closed" };
+    int[] _titleHeaderLegendIdx = { 6, 0, 1, 2, 3, 8 };
+
+    ///   string[] _miniSquareColor = {"#c0ece8", "#82dad0", "#44c8b9", "#44c8b9", "#e5eeee" };
+    string[] _miniSquareColor = { "#abb9bb", "#d47472", "#ff9b42", "#3099be", "#64cd9b", "#e5eeee" };
 
     //var _dtAnalyticsTimeline = ViewBag._dtAnalyticsTimeline;
 }
@@ -220,33 +222,18 @@
                     <div class="headerBlockActivity">
                         <div class="titleBlock">@GlobalRes.Number_cases_stage: @_today</div>
                         <div class="blockTodayContant">
-                            <div class="itemLegend">
-                                <div class="headerLegend">
-                                    <div class="miniSquare" style="background-color: #abb9bb;"></div>
-                                    <span>@GlobalRes.Spam</span>
-                                </div>
-                                <div class="contentLegend">
-                                    <label>@_today_spanshot[5]</label>
-                                </div>
-                            </div>
-                            @for (var i = 0; i < 5; i++)
-                        {
-                            //      if (i != 4)
+                            @for (var i = 0; i < _titleHeaderLegend.Length; i++)
                             {
-                        <div class="itemLegend">
-                            <div class="headerLegend">
-                                <div class="miniSquare" style="background-color: @_miniSquareColor[i];"></div>
-                                <span>@_titleHeaderLegend[i]</span>
-                            </div>
-                            <div class="contentLegend">
-                                <label>@_today_spanshot[i]</label>
-
-
-                            </div>
-                        </div>
+                                <div class="itemLegend">
+                                    <div class="headerLegend">
+                                        <div class="miniSquare" style="background-color: @_miniSquareColor[i];"></div>
+                                        <span>@_titleHeaderLegend[i]</span>
+                                    </div>
+                                    <div class="contentLegend">
+                                        <label>@_today_spanshot[_titleHeaderLegendIdx[i]]</label>
+                                    </div>
+                                </div>
                             }
-                        }
-
                         </div>
                     </div>
 
