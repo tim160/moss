@@ -719,6 +719,15 @@
                 formats: ['PDF', 'JPEG'],
                 fileName: 'Departments',
             },
+            title: {
+                font: {
+                    family: "'OpenSans-Semibold', arial, verdana, sans-serif;",
+                    size: 16,
+                    color: '#3c3e3f',
+                },
+                horizontalAlignment: 'left',
+                text: 'Departments',
+            },
             tooltip: {
                 enabled: true,
                 percentPrecision: 2,
@@ -771,6 +780,15 @@
                 enabled: true,
                 formats: ['PDF', 'JPEG'],
                 fileName: 'Locations',
+            },
+            title: {
+                font: {
+                    family: "'OpenSans-Semibold', arial, verdana, sans-serif;",
+                    size: 16,
+                    color: '#3c3e3f',
+                },
+                horizontalAlignment: 'left',
+                text: 'Locations',
             },
             tooltip: {
                 enabled: true,
@@ -836,6 +854,15 @@
                 formats: ['PDF', 'JPEG'],
                 fileName: 'Type of incident',
             },
+            title: {
+                font: {
+                    family: "'OpenSans-Semibold', arial, verdana, sans-serif;",
+                    size: 16,
+                    color: '#3c3e3f',
+                },
+                horizontalAlignment: 'left',
+                text: 'Type of incident',
+            },
             tooltip: {
                 enabled: true,
                 percentPrecision: 2,
@@ -898,6 +925,15 @@
                 enabled: true,
                 formats: ['PDF', 'JPEG'],
                 fileName: 'Type of Reporter',
+            },
+            title: {
+                font: {
+                    family: "'OpenSans-Semibold', arial, verdana, sans-serif;",
+                    size: 16,
+                    color: '#3c3e3f',
+                },
+                horizontalAlignment: 'left',
+                text: 'Type of Reporter',
             },
             tooltip: {
                 enabled: true,
