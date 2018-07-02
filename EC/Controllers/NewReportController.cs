@@ -323,7 +323,7 @@ namespace EC.Controllers.ViewModel
             }
             // Case accepted
             glb.UpdateReportLog(user_id, 17, report_id, description, null, "");
-            glb.UpdateReportLog(user_id, 20, report_id, App_LocalResources.GlobalRes._Completed, null, "");
+    ///// to return        glb.UpdateReportLog(user_id, 20, report_id, App_LocalResources.GlobalRes._Completed, null, "");
             glb.UpdateReportLog(user_id, 21, report_id, App_LocalResources.GlobalRes._Started, null, "");
 
             report_log _log = new report_log();

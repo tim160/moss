@@ -680,7 +680,6 @@
         };
 
         $scope.saveOutcome = function (item, outcome) {
-            console.log(item, outcome);
             if (outcome !== undefined) {
                 item.outcome.outcome_id = outcome.id;
             }
@@ -907,8 +906,6 @@
 
         $scope.addNewPerson = function () {
             $scope.form.$setDirty(true);
-            console.log($scope.form);
-            console.log($scope.form.personName);
             if ((!$scope.addPerson.FirstName) | (!$scope.addPerson.LastName) | (!$scope.addPerson.Title) | ($scope.addPerson.Role.id === 0)) {
                 return;
             }
