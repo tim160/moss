@@ -317,16 +317,22 @@ namespace EC.Controllers.API
                         note = filter.Note1 != null ? filter.Note1 : filter.Note2,
                         type = type,
                     });
+                    if (type == 1)
+                        glb.UpdateReportLog(user.id, 38, filter.Report_id, filter.Note1, null, "");
+                    else
+                        glb.UpdateReportLog(user.id, 47, filter.Report_id, filter.Note2, null, "");
                 }
                 else
                 {
                     model.last_update_dt = DateTime.Now;
                     model.user_id = user.id;
                     model.note = filter.Note1 != null ? filter.Note1 : filter.Note2;
+                    if (type == 1)
+                        glb.UpdateReportLog(user.id, 38, filter.Report_id, filter.Note1, null, "");
+                    else
+                        glb.UpdateReportLog(user.id, 48, filter.Report_id, filter.Note2, null, "");
                 }
                 DB.SaveChanges();
-
-                glb.UpdateReportLog(user.id, 38, filter.Report_id, filter.Note1 != null ? filter.Note1 : filter.Note2, null, "");
             }
 
             if (filter.inv_meth_st_id.HasValue)
@@ -397,6 +403,7 @@ namespace EC.Controllers.API
                         added_by_reporter = false,
                     });
                     DB.SaveChanges();
+                    glb.UpdateReportLog(user.id, 51, filter.Report_id, $"{filter.addPersonLastName} {filter.addPersonFirstName}", null, "");
                 }
             }
 

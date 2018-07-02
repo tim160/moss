@@ -995,6 +995,7 @@ namespace EC.Models
                 }
 
                 glb.UpdateReportLog(mediator_id, 10, report_id, taskName, null, "");
+                glb.UpdateReportLog(mediator_id, 12, report_id, taskName, null, "");
 
                 #region New Task - Email to Asignee
                 UserModel um = new UserModel(assignTo);

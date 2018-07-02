@@ -38,16 +38,6 @@
                 </a>
             </li>
         </ul>
-        @if (report._investigation_status == ECGlobalConstants.investigation_status_closed)
-        {
-            <ul class="subNavigationIcons clearfix">
-                <li class="subNavigationIcons__li">
-                    <a href="@Url.Action("PrintToPdf", new { id = report_id })" class="subNavigationIcons__a" target="_blank">
-                        <img class="subNavigationIcons__imgPrint" src="~/Content/Icons/print-icon.png" alt="" />
-                    </a>
-                </li><!-- /.subNavigationIcons__li -->
-            </ul><!-- /.subNavigationIcons -->
-        }
     </div>
 </div>
 

@@ -31,6 +31,7 @@
             @foreach (report_log _log in actions_log)
             {
                 _action = glb.GetActionById(_log.action_id.Value);
+                _action = _action == null ? glb.GetActionById(1) : _action;
                 _user = um.GetById(_log.user_id);
                 _sender_name = "";
                 _sender_title = "";

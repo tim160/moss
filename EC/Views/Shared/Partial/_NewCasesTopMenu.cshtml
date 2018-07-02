@@ -1,4 +1,9 @@
-﻿@{
+﻿@using EC.App_LocalResources
+@using EC.Models.Database
+@using EC.Constants
+@using EC.Models
+
+@{
     bool? is_cc = ViewBag.is_cc;
     if (!is_cc.HasValue)
     {
@@ -104,10 +109,18 @@
             </li>
             <li class="mainNavigationTabs__tab-link @(action == "investigationnotes" || action == "caseclosurereport" ? "active" : "")" data-tab="mainTab-2">
                 <a href="@Url.Action("InvestigationNotes", new { report_id = ViewBag.report_id })">
-                    <div class="mainNavigationTabs__tab-name">nvestigation Notes & Case Closure Report</div>
+                    <div class="mainNavigationTabs__tab-name">Investigation Notes & Case Closure Report</div>
                 </a>
                 <div class="mainNavigationTabs__badgeCount"></div>
             </li>
+            @if (rm._investigation_status == ECGlobalConstants.investigation_status_closed)
+            {
+                <li class="mainNavigationTabs__tab-link" data-tab="mainTab-2" style="padding: 14px 25px;">
+                    <a href="@Url.Action("PrintToPdf", new { id = rm.ID })" class="subNavigationIcons__a" target="_blank">
+                        <img class="subNavigationIcons__imgPrint" src="~/Content/Icons/print-icon.png" alt="" />
+                    </a>
+                </li>
+            }
         </ul>
 
         <ul class="mainNavigationTabs__rightLinks-ul clearfix">

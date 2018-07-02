@@ -1672,6 +1672,7 @@
     <Compile Include="Utils\Auth\User.cs" />
     <Compile Include="Utils\Auth\UserIndentity .cs" />
     <Compile Include="Utils\CustomContractResolver .cs" />
+    <Compile Include="Utils\DateTimeKindAttribute.cs" />
     <Compile Include="Utils\ImageUtils.cs" />
     <Compile Include="Utils\MVCExtensions.cs" />
   </ItemGroup>
