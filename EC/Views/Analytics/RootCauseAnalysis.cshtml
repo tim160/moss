@@ -20,18 +20,6 @@
 
 <link href="~/Content/daterangepickerAnalit.css" rel="stylesheet" />
 
-<style>
-    h2, h3 {
-        color: black;
-    }
-
-    .nvd3.nv-pie .nv-pie-title {
-        font-size: 80px;
-        color: black;
-        fill: black;
-    }
-</style>
-
 <div class="blockSettings blockAnalitics" ng-controller="AnalyticsRootCauseAnalysisController" ng-cloak>
     @Html.Partial("~/Views/Analytics/AnalyticsMenu.cshtml")
 
@@ -67,19 +55,10 @@
     </div>
 
     <div class="container">
-        <div class="row circleGraphRow">
-            <div class="col-4">
+        <div class="row circleGraphRow circleGraphInfoRow">
+            <div class="col-4" id="chart1">
+                <button type="button" class="noPrint" ng-click="print('chart1', 'Behavioral Factors')">Print</button>
                 <nvd3 id="chart1" options="chart1" data="chartData1" api="api1"></nvd3>
-            </div><!-- /.col-4 -->
-            <div class="col-4">
-                <nvd3 id="chart2" options="chart2" data="chartData2" api="api2"></nvd3>
-            </div><!-- /.col-4 -->
-            <div class="col-4">
-                <nvd3 id="chart3" options="chart3" data="chartData3" api="api3"></nvd3>
-            </div><!-- /.col-4 -->
-        </div><!-- /.row -->
-        <div class="row circleGraphInfoRow">
-            <div class="col-4">
                 <div class="graphTitle">
                     Behavioral Factors
                 </div><!-- /.graphTitle -->
@@ -94,7 +73,9 @@
 	                </div>
                 </div>
             </div><!-- /.col-4 -->
-            <div class="col-4">
+            <div class="col-4" id="chart2">
+                <button type="button" ng-click="print('chart2', 'External Influences')">Print</button>
+                <nvd3 id="chart2" options="chart2" data="chartData2" api="api2"></nvd3>
                 <div class="graphTitle">
                     External Influences
                 </div><!-- /.graphTitle -->
@@ -109,7 +90,9 @@
 	                </div>
                 </div>
             </div><!-- /.col-4 -->
-            <div class="col-4">
+            <div class="col-4" id="chart3">
+                <button type="button" ng-click="print('chart3', 'Organizational Influences')">Print</button>
+                <nvd3 id="chart3" options="chart3" data="chartData3" api="api3"></nvd3>
                 <div class="graphTitle">
                     Organizational Influences
                 </div><!-- /.graphTitle -->
