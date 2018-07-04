@@ -321,6 +321,31 @@ namespace EC.Controllers.ViewModel
                 adv.SaveChanges();
 
             }
+            if (scopeId == 2)
+            {
+                glb.UpdateReportLog(user_id, 41, report_id, "Case Scope: Internal", null, "");
+            }
+            if (scopeId == 1)
+            {
+                glb.UpdateReportLog(user_id, 42, report_id, "Case Scope: Regulatory", null, "");
+            }
+            if (severityId == 2)
+            {
+                glb.UpdateReportLog(user_id, 43, report_id, "Case Severity: Low", null, "");
+            }
+            if (severityId == 3)
+            {
+                glb.UpdateReportLog(user_id, 44, report_id, "Case Severity: Medium", null, "");
+            }
+            if (severityId == 4)
+            {
+                glb.UpdateReportLog(user_id, 45, report_id, "Case Severity: High", null, "");
+            }
+            if (severityId == 5)
+            {
+                glb.UpdateReportLog(user_id, 46, report_id, "Case Severity: Critical", null, "");
+            }
+
             // Case accepted
             glb.UpdateReportLog(user_id, 17, report_id, description, null, "");
     ///// to return        glb.UpdateReportLog(user_id, 20, report_id, App_LocalResources.GlobalRes._Completed, null, "");
