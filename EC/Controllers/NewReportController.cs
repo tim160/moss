@@ -465,8 +465,31 @@ namespace EC.Controllers.ViewModel
 
             /////     glb.UpdateReportLog(user_id, 20, report_id, App_LocalResources.GlobalRes._Completed, null, description);
             //////    glb.UpdateReportLog(user_id, 21, report_id, App_LocalResources.GlobalRes._Started, null, "");
-
-            return true;
+            switch (severityId)
+            {
+                case 2:
+                    glb.UpdateReportLog(user_id, 43, report_id, "", null, "");
+                    break;
+                case 3:
+                    glb.UpdateReportLog(user_id, 44, report_id, "", null, "");
+                    break;
+                case 4:
+                    glb.UpdateReportLog(user_id, 45, report_id, "", null, "");
+                    break;
+                case 5:
+                    glb.UpdateReportLog(user_id, 46, report_id, "", null, "");
+                    break;
+            }
+            switch (scopeId)
+            {
+                case 1:
+                    glb.UpdateReportLog(user_id, 41, report_id, "", null, "");
+                    break;
+                case 2:
+                    glb.UpdateReportLog(user_id, 42, report_id, "", null, "");
+                    break;
+            }
+                    return true;
         }
 
         public List<attachment> getAttachmentFiles(int report_id)
