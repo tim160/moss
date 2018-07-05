@@ -1441,7 +1441,7 @@ namespace EC.Models
                                       //   orderby refGroup.Id descending
 
                                       //select refGroup.Where(x => vmReportIds.all_report_ids.Contains(x.id)).OrderByDescending(x => x.created_dt).FirstOrDefault());
-                                       select refGroup.OrderByDescending(x => x.created_dt).FirstOrDefault());
+                                       select refGroup.OrderByDescending(x => x.id).FirstOrDefault());
 
 
 
