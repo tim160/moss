@@ -408,6 +408,7 @@
     <Content Include="Content\Icons\pepper-sm-faded.png" />
     <Content Include="Content\Icons\pepperPhoto.png" />
     <Content Include="Content\Icons\print-icon.png" />
+    <Content Include="Content\Icons\print_icon_white.png" />
     <Content Include="Content\Icons\report-icon-white.png" />
     <Content Include="Content\Icons\report-icon.png" />
     <Content Include="Content\Icons\reviewStage.png" />
