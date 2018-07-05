@@ -690,6 +690,23 @@
         }
     }
 
+
+    function legentText(name, cnt, total) {
+        var max = 50;
+        var c = ' - ' + cnt;
+        var p = '';
+        if (total != 0) {
+            p = ' (' + Math.round(cnt * 100 / total) + '%)';
+        }
+
+        var lc = (c + p).length;
+        if (name.length + lc > max) {
+            name = name.substring(0, max - lc - 3) + '...';
+        }
+
+        return (name + c + p).padEnd(max);
+    }
+
     function _dtCompanyDepartmentReport(data) {
         var total = 0;
         for (var i = 0; i < data.length; i++) {
@@ -750,11 +767,7 @@
                     return this.pointName + ' - ' + data[this.pointIndex].val;
                 },
                 customizeText: function () {
-                    var s = this.pointName + ' - ' + data[this.pointIndex].val;
-                    if (total != 0) {
-                        s += ' (' + Math.round(data[this.pointIndex].val * 100 / total) + '%)';
-                    }
-                    return s;
+                    return legentText(this.pointName, data[this.pointIndex].val, total);
                 },
             },
             series: [{
@@ -769,7 +782,7 @@
             }],
             size: {
                 width: 600,
-                height: 400,
+                height: 600,
             },
         });
     }
@@ -823,11 +836,7 @@
                     return this.pointName + ' - ' + data[this.pointIndex].val;
                 },
                 customizeText: function () {
-                    var s = this.pointName + ' - ' + data[this.pointIndex].val;
-                    if (total != 0) {
-                        s += ' (' + Math.round(data[this.pointIndex].val * 100 / total) + '%)';
-                    }
-                    return s;
+                    return legentText(this.pointName, data[this.pointIndex].val, total);
                 },
             },
             series: [{
@@ -842,10 +851,11 @@
             }],
             size: {
                 width: 600,
-                height: 400,
+                height: 600,
             },
         });
     }
+
     //------------------------ END Locations ------------------------------------------
     function _dtCompanySecondaryTypeReport(data) {
         var total = 0;
@@ -892,7 +902,6 @@
                 enabled: true,
                 percentPrecision: 2,
                 customizeTooltip: function (arg) {
-                    console.log(arg);
                     return {
                         text: arg.argumentText + " - " + arg.value + ' (' + arg.percentText + ')'
                     };
@@ -907,11 +916,7 @@
                     return this.pointName + ' - ' + data[this.pointIndex].val;
                 },
                 customizeText: function () {
-                    var s = this.pointName + ' - ' + data[this.pointIndex].val;
-                    if (total != 0) {
-                        s += ' (' + Math.round(data[this.pointIndex].val * 100 / total) + '%)';
-                    }
-                    return s;
+                    return legentText(this.pointName, data[this.pointIndex].val, total);
                 },
             },
             series: [{
@@ -926,7 +931,7 @@
             }],
             size: {
                 width: 600,
-                height: 500,
+                height: 600,
             },
         });
     }
@@ -990,11 +995,7 @@
                     return this.pointName + ' - ' + data[this.pointIndex].val;
                 },
                 customizeText: function () {
-                    var s = this.pointName + ' - ' + data[this.pointIndex].val;
-                    if (total != 0) {
-                        s += ' (' + Math.round(data[this.pointIndex].val * 100 / total) + '%)';
-                    }
-                    return s;
+                    return legentText(this.pointName, data[this.pointIndex].val, total);
                 },
             },
             series: [{
@@ -1009,7 +1010,7 @@
             }],
             size: {
                 width: 600,
-                height: 400,
+                height: 600,
             },
         });
     }
