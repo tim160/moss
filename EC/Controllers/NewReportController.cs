@@ -123,7 +123,7 @@ namespace EC.Controllers.ViewModel
                     db.report_investigation_status.Add(_review_status);
                     db.SaveChanges();
 
-                    glb.UpdateReportLog(user_id, 28, report_id, App_LocalResources.GlobalRes._Completed, null, "");
+ ///////                   glb.UpdateReportLog(user_id, 28, report_id, App_LocalResources.GlobalRes._Completed, null, "");
                     glb.UpdateReportLog(user_id, 20, report_id, App_LocalResources.GlobalRes._Started, null, "");
                 }
             }
@@ -321,36 +321,36 @@ namespace EC.Controllers.ViewModel
                 adv.SaveChanges();
 
             }
-         /*   if (scopeId == 2)
-            {
-                glb.UpdateReportLog(user_id, 41, report_id, "Case Scope: Internal", null, "");
-            }
-            if (scopeId == 1)
-            {
-                glb.UpdateReportLog(user_id, 42, report_id, "Case Scope: Regulatory", null, "");
-            }
-            if (severityId == 2)
-            {
-                glb.UpdateReportLog(user_id, 43, report_id, "Case Severity: Low", null, "");
-            }
-            if (severityId == 3)
-            {
-                glb.UpdateReportLog(user_id, 44, report_id, "Case Severity: Medium", null, "");
-            }
-            if (severityId == 4)
-            {
-                glb.UpdateReportLog(user_id, 45, report_id, "Case Severity: High", null, "");
-            }
-            if (severityId == 5)
-            {
-                glb.UpdateReportLog(user_id, 46, report_id, "Case Severity: Critical", null, "");
-            }*/
+            /*   if (scopeId == 2)
+               {
+                   glb.UpdateReportLog(user_id, 41, report_id, "Case Scope: Internal", null, "");
+               }
+               if (scopeId == 1)
+               {
+                   glb.UpdateReportLog(user_id, 42, report_id, "Case Scope: Regulatory", null, "");
+               }
+               if (severityId == 2)
+               {
+                   glb.UpdateReportLog(user_id, 43, report_id, "Case Severity: Low", null, "");
+               }
+               if (severityId == 3)
+               {
+                   glb.UpdateReportLog(user_id, 44, report_id, "Case Severity: Medium", null, "");
+               }
+               if (severityId == 4)
+               {
+                   glb.UpdateReportLog(user_id, 45, report_id, "Case Severity: High", null, "");
+               }
+               if (severityId == 5)
+               {
+                   glb.UpdateReportLog(user_id, 46, report_id, "Case Severity: Critical", null, "");
+               }*/
 
             // Case accepted
             glb.UpdateReportLog(user_id, 17, report_id, description, null, "");
-    ///// to return        glb.UpdateReportLog(user_id, 20, report_id, App_LocalResources.GlobalRes._Completed, null, "");
-            glb.UpdateReportLog(user_id, 21, report_id, App_LocalResources.GlobalRes._Started, null, "");
+            ///// to return        glb.UpdateReportLog(user_id, 20, report_id, App_LocalResources.GlobalRes._Completed, null, "");
 
+            
             report_log _log = new report_log();
 
             ReportModel rm = new ReportModel(report_id);
@@ -375,7 +375,7 @@ namespace EC.Controllers.ViewModel
                     glb.CampusSecurityAlertEmail(rm._report, Request.Url, db, cm._company.cc_daily_crime_log_manager_email);
                 }
             }
-
+            glb.UpdateReportLog(user_id, 21, report_id, App_LocalResources.GlobalRes._Started, null, "");
             if (!db.report_log.Any(item => ((item.action_id == 19) && (item.report_id == report_id))))
             {
                 //case opened

@@ -1074,7 +1074,7 @@ namespace EC.Models
             report_log last_status_log = new report_log();
             if (db.report_log.Any(item => (item.report_id == ID)))
             {
-                List<report_log> _statuses = db.report_log.Where(item => (item.report_id == ID)).OrderByDescending(x => x.created_dt).ToList();
+                List<report_log> _statuses = db.report_log.Where(item => (item.report_id == ID)).OrderByDescending(x => x.id).ToList();
 
                 if (_statuses.Count > 0)
                 {
@@ -2114,10 +2114,10 @@ namespace EC.Models
             {
                 // reporter can see only messages with reporter_visible == 1 
                 List<int> reporter_actions_list = db.action.Where(item => (item.reporter_visible == true)).Select(item => item.id).ToList();
-                report_actions = (db.report_log.Where(item => ((item.report_id == report_id) && (item.action_id.HasValue) && (reporter_actions_list.Contains(item.action_id.Value)))).OrderByDescending(dt => dt.created_dt)).ToList();
+                report_actions = (db.report_log.Where(item => ((item.report_id == report_id) && (item.action_id.HasValue) && (reporter_actions_list.Contains(item.action_id.Value)))).OrderByDescending(dt => dt.id)).ToList();
             }
             else
-                report_actions = (db.report_log.Where(item => (item.report_id == report_id)).OrderByDescending(dt => dt.created_dt)).ToList();
+                report_actions = (db.report_log.Where(item => (item.report_id == report_id)).OrderByDescending(dt => dt.id)).ToList();
 
             return report_actions;
         }

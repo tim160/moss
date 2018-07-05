@@ -937,7 +937,7 @@ namespace EC.Controllers
             if ((promotion_id == 1) && (rm._investigation_status == ECGlobalConstants.investigation_status_investigation))
             {
                 new_status_id = ECGlobalConstants.investigation_status_completed;
-                glb.UpdateReportLog(user.id, 21, report_id, App_LocalResources.GlobalRes._Completed, null, description);
+  ///////              glb.UpdateReportLog(user.id, 21, report_id, App_LocalResources.GlobalRes._Completed, null, description);
                 glb.UpdateReportLog(user.id, 27, report_id, App_LocalResources.GlobalRes._Started, null, "");
             }
 
@@ -954,17 +954,17 @@ namespace EC.Controllers
                         break;
                     case 3:
                         new_status_id = ECGlobalConstants.investigation_status_resolution;
-                        glb.UpdateReportLog(user.id, 21, report_id, App_LocalResources.GlobalRes._Completed, null, description);
+        ////                glb.UpdateReportLog(user.id, 21, report_id, App_LocalResources.GlobalRes._Completed, null, description);
                         glb.UpdateReportLog(user.id, 22, report_id, App_LocalResources.GlobalRes._Started, null, "");
                         break;
                     case 4:
-                        glb.UpdateReportLog(user.id, 22, report_id, App_LocalResources.GlobalRes._Completed, null, description);
+              /////          glb.UpdateReportLog(user.id, 22, report_id, App_LocalResources.GlobalRes._Completed, null, description);
                         glb.UpdateReportLog(user.id, 25, report_id,"", null, "");
                         new_status_id = ECGlobalConstants.investigation_status_closed;
                         break;
                     case 6:
                         new_status_id = ECGlobalConstants.investigation_status_closed;
-                        glb.UpdateReportLog(user.id, 27, report_id, App_LocalResources.GlobalRes._Completed, null, description);
+         ////               glb.UpdateReportLog(user.id, 27, report_id, App_LocalResources.GlobalRes._Completed, null, description);
                         glb.UpdateReportLog(user.id, 25, report_id,"", null, "");
                         break;
                     case 9:
@@ -1179,9 +1179,13 @@ namespace EC.Controllers
                         glb.UpdateReportLog(user.id, 29, report_id, "", null, description);
 
                     if (old_status == 6)
-                        glb.UpdateReportLog(user.id, 27, report_id, App_LocalResources.GlobalRes._Completed, null, description);
+                    {
+                     //////   glb.UpdateReportLog(user.id, 27, report_id, App_LocalResources.GlobalRes._Completed, null, description);
+                    }
                     else if (old_status == 3)
-                        glb.UpdateReportLog(user.id, 22, report_id, App_LocalResources.GlobalRes._Completed, null, description);
+                    {
+                     /////   glb.UpdateReportLog(user.id, 22, report_id, App_LocalResources.GlobalRes._Completed, null, description);
+                    }
                     else
                         glb.UpdateReportLog(user.id, 21, report_id, App_LocalResources.GlobalRes._Started, null, description);
                     /* if (rm._investigation_status == 9)
@@ -1197,11 +1201,11 @@ namespace EC.Controllers
                     break;
                 case 4:
                    
-                    glb.UpdateReportLog(user.id, 21, report_id, App_LocalResources.GlobalRes._Completed, null, description);
+         //////           glb.UpdateReportLog(user.id, 21, report_id, App_LocalResources.GlobalRes._Completed, null, description);
                     glb.UpdateReportLog(user.id, 22, report_id, App_LocalResources.GlobalRes._Started, null, "");
                     break;
                 case 6:
-                    glb.UpdateReportLog(user.id, 21, report_id, App_LocalResources.GlobalRes._Completed, null, description);
+       ///////             glb.UpdateReportLog(user.id, 21, report_id, App_LocalResources.GlobalRes._Completed, null, description);
                     glb.UpdateReportLog(user.id, 27, report_id, App_LocalResources.GlobalRes._Started, null, "");
                     break;
 
