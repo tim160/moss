@@ -321,7 +321,7 @@ namespace EC.Controllers.ViewModel
                 adv.SaveChanges();
 
             }
-            if (scopeId == 2)
+         /*   if (scopeId == 2)
             {
                 glb.UpdateReportLog(user_id, 41, report_id, "Case Scope: Internal", null, "");
             }
@@ -344,7 +344,7 @@ namespace EC.Controllers.ViewModel
             if (severityId == 5)
             {
                 glb.UpdateReportLog(user_id, 46, report_id, "Case Severity: Critical", null, "");
-            }
+            }*/
 
             // Case accepted
             glb.UpdateReportLog(user_id, 17, report_id, description, null, "");

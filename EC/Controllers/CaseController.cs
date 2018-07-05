@@ -1082,6 +1082,8 @@ namespace EC.Controllers
             ReportModel rm = new ReportModel(report_id);
             bool has_access = rm.HasAccessToReport(user.id);
 
+            int old_status = rm._investigation_status;
+
             if ((!has_access) || (user.role_id == 8))
             {
                 return -1;
@@ -1173,18 +1175,28 @@ namespace EC.Controllers
             {
 
                 case 3:
-                    if (rm._investigation_status == 9)
+                    if (old_status == 9)
                         glb.UpdateReportLog(user.id, 29, report_id, "", null, description);
 
-                    if (rm._investigation_status == 6)
+                    if (old_status == 6)
                         glb.UpdateReportLog(user.id, 27, report_id, App_LocalResources.GlobalRes._Completed, null, description);
-                    else if (rm._investigation_status == 3)
+                    else if (old_status == 3)
                         glb.UpdateReportLog(user.id, 22, report_id, App_LocalResources.GlobalRes._Completed, null, description);
                     else
                         glb.UpdateReportLog(user.id, 21, report_id, App_LocalResources.GlobalRes._Started, null, description);
+                    /* if (rm._investigation_status == 9)
+                         glb.UpdateReportLog(user.id, 29, report_id, "", null, description);
 
+                     if (rm._investigation_status == 6)
+                         glb.UpdateReportLog(user.id, 27, report_id, App_LocalResources.GlobalRes._Completed, null, description);
+                     else if (rm._investigation_status == 3)
+                         glb.UpdateReportLog(user.id, 22, report_id, App_LocalResources.GlobalRes._Completed, null, description);
+                     else
+                         glb.UpdateReportLog(user.id, 21, report_id, App_LocalResources.GlobalRes._Started, null, description);
+                         */
                     break;
                 case 4:
+                   
                     glb.UpdateReportLog(user.id, 21, report_id, App_LocalResources.GlobalRes._Completed, null, description);
                     glb.UpdateReportLog(user.id, 22, report_id, App_LocalResources.GlobalRes._Started, null, "");
                     break;
@@ -1194,10 +1206,15 @@ namespace EC.Controllers
                     break;
 
                 case 9:
-                    if(rm._investigation_status == 6)
+
+                    if (old_status == 6)
                         glb.UpdateReportLog(user.id, 27, report_id, App_LocalResources.GlobalRes._Completed, null, description);
-                    else if (rm._investigation_status == 4)
-                        glb.UpdateReportLog(user.id, 22, report_id, App_LocalResources.GlobalRes._Completed, null, description);
+
+
+     ////               if (rm._investigation_status == 6)
+    ////                    glb.UpdateReportLog(user.id, 27, report_id, App_LocalResources.GlobalRes._Completed, null, description);
+   /////                 else if (rm._investigation_status == 4)
+ /////                       glb.UpdateReportLog(user.id, 22, report_id, App_LocalResources.GlobalRes._Completed, null, description);
                     
                         glb.UpdateReportLog(user.id, 25, report_id, "", null, description);
                     break;
