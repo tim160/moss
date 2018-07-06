@@ -182,12 +182,14 @@ namespace EC.Controllers.API
                 var item = DB.report_case_closure_outcome.FirstOrDefault(x => x.id == filter.Report_case_closure_outcome.id);
                 if (item == null)
                 {
-                    DB.report_case_closure_outcome.Add(new report_case_closure_outcome {
+                    item = new report_case_closure_outcome
+                    {
                         report_id = filter.Report_id,
                         outcome_id = filter.Report_case_closure_outcome.outcome_id,
                         note = filter.Report_case_closure_outcome.note,
-                        non_mediator_involved_id = filter.Report_case_closure_outcome.non_mediator_involved_id                       
-                    });
+                        non_mediator_involved_id = filter.Report_case_closure_outcome.non_mediator_involved_id
+                    };
+                    DB.report_case_closure_outcome.Add(item);
                 }
                 else
                 {
@@ -195,6 +197,19 @@ namespace EC.Controllers.API
                     item.note = filter.Report_case_closure_outcome.note;
                 }
                 DB.SaveChanges();
+
+                var mediator = DB.report_non_mediator_involved.FirstOrDefault(x => x.id == item.non_mediator_involved_id);
+                var outcome = DB.outcome.FirstOrDefault(x => x.id == item.outcome_id);
+
+                GlobalFunctions gf = new GlobalFunctions();
+                if ((mediator != null) && (mediator.role_in_report_id == 3)) //49	Recommended Outcome for Subject Added
+                {
+                    gf.UpdateReportLog(user.id, 49, filter.Report_id, outcome.outcome_en, null, "");
+                }
+                else //50	Recommended Action for Witness or Reporter Added
+                {
+                    gf.UpdateReportLog(user.id, 50, filter.Report_id, outcome.outcome_en, null, "");
+                }
             }
 
             return Get(filter);
