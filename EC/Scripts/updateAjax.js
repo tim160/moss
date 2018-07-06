@@ -760,7 +760,7 @@
             },
             legend: {
                 columnCount: 1,
-                horizontalAlignment: "left",
+                horizontalAlignment: "right",
                 verticalAlignment: "top",
                 margin: 0,
                 customizeHint: function () {
@@ -781,7 +781,7 @@
                 }
             }],
             size: {
-                width: 600,
+                width: undefined,
                 height: 600,
             },
         });
@@ -829,7 +829,7 @@
             },
             legend: {
                 columnCount: 1,
-                horizontalAlignment: "left",
+                horizontalAlignment: "right",
                 verticalAlignment: "top",
                 margin: 0,
                 customizeHint: function () {
@@ -850,7 +850,7 @@
                 }
             }],
             size: {
-                width: 600,
+                width: undefined,
                 height: 600,
             },
         });
@@ -909,7 +909,7 @@
             },
             legend: {
                 columnCount: 1,
-                horizontalAlignment: "left",
+                horizontalAlignment: "right",
                 verticalAlignment: "top",
                 margin: 0,
                 customizeHint: function () {
@@ -930,7 +930,7 @@
                 }
             }],
             size: {
-                width: 600,
+                width: undefined,
                 height: 600,
             },
         });
@@ -988,7 +988,7 @@
             },
             legend: {
                 columnCount: 1,
-                horizontalAlignment: "left",
+                horizontalAlignment: "right",
                 verticalAlignment: "top",
                 margin: 0,
                 customizeHint: function () {
@@ -1009,7 +1009,7 @@
                 }
             }],
             size: {
-                width: 600,
+                width: undefined,
                 height: 600,
             },
         });
