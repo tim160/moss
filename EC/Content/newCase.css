@@ -3504,10 +3504,25 @@ body .positionText .dropMenuText,
 	font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
 }
 .filterUp{
-	font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+	font-family: 'OpenSans-Regular', arial, verdana, sans-serif !important;
 }
 .blockToday .blockTodayContant .itemLegend{
 	width: 16.6%;
+}
+g.dxc-arg-elements text{
+	color: #aeb5b7 !important;
+	font-family: 'OpenSans-Semibold', arial, verdana, sans-serif !important;
+}
+.specialBorder{
+	display: none;
+}
+td.notClear{
+	padding-right: 20px !important;
+	text-align: right !important;
+}
+g.dxc-legend text{
+	font-family: 'OpenSans-Regular', arial, verdana, sans-serif !important;
+	color: #3c3e3f !important;
 }
 /*-----------------blockAllCases----------------*/
 body .blockAllCases .itemLegend span{
@@ -3983,4 +3998,28 @@ body .bigBlock  .blockLinesItem p{
 /* ------ error login ------- */
 .errorLogin.loginForm__input:last-child{
 	border: 2px solid red;
+}
+/* ------------- Open Sans fonts ------------
+'OpenSans-Regular', arial, verdana, sans-serif
+'OpenSans-semibold', arial, verdana, sans-serif
+'OpenSans-Light'
+'OpenSans-Bold'
+*/
+#EmployeeAwarenessBlock .topBlockFilters .toBack,
+#EmployeeAwarenessBlock .topBlockFilters .textShot,
+#EmployeeAwarenessBlock .titleFormat,
+#EmployeeAwarenessBlock .titleBlockFormat.active,
+#EmployeeAwarenessBlock .titleBlockFormat,
+#EmployeeAwarenessBlock .itemFormat.active .size,
+#EmployeeAwarenessBlock .itemSelect,
+#EmployeeAwarenessBlock .info,
+#EmployeeAwarenessBlock .calcItems,
+#EmployeeAwarenessBlock .blockInformation .filter,
+#EmployeeAwarenessBlock .greenBlock,
+#EmployeeAwarenessBlock .infoItem{
+	font-family: 'OpenSans-Regular', arial, verdana, sans-serif !important;
+}
+
+#EmployeeAwarenessBlock .title{
+	font-family: 'OpenSans-semibold', arial, verdana, sans-serif !important;
 }
