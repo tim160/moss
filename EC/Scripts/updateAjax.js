@@ -733,7 +733,7 @@
 
 
         }
-        $("#containerDepartments").dxPieChart({
+        var chart = $("#containerDepartments").dxPieChart({
             dataSource: data,
             export: {
                 enabled: true,
@@ -773,6 +773,7 @@
             series: [{
                 type: "doughnut",
                 argumentField: "name",
+                innerRadius: '0.6',
                 label: {
                     visible: false,
                     connector: {
@@ -785,6 +786,9 @@
                 height: 600,
             },
         });
+
+        console.log(chart);
+        chart.arcsRadius({ "inner": 0.6, "outer": 0.8 });
     }
 
 
@@ -842,6 +846,7 @@
             series: [{
                 type: "doughnut",
                 argumentField: "name",
+                innerRadius: '0.6',
                 label: {
                     visible: false,
                     connector: {
@@ -922,6 +927,7 @@
             series: [{
                 type: "doughnut",
                 argumentField: "name",
+                innerRadius: '0.6',
                 label: {
                     visible: false,
                     connector: {
@@ -1001,6 +1007,7 @@
             series: [{
                 type: "doughnut",
                 argumentField: "name",
+                innerRadius: '0.6',
                 label: {
                     visible: false,
                     connector: {
