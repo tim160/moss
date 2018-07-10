@@ -64,7 +64,7 @@
 
                     angular.forEach($scope.categories, function (category) {
                         if (category.Selected) {
-                            if ($filter('getBy')(poster.posterCategoryNames, 'id', category.id) != null) {
+                            if ($filter('getBy')(poster.posterCategoryNames, 'industry_posters_id', category.id) != null) {
                                 poster.IsVisible = true;
                             }
                         }
