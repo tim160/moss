@@ -786,9 +786,6 @@
                 height: 600,
             },
         });
-
-        console.log(chart);
-        chart.arcsRadius({ "inner": 0.6, "outer": 0.8 });
     }
 
 

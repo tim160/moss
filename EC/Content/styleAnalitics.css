@@ -684,3 +684,9 @@ h2, h3 {
         display: none;
     }
 }
+
+.printButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+}

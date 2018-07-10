@@ -57,7 +57,7 @@
     <div class="container">
         <div class="row circleGraphRow circleGraphInfoRow">
             <div class="col-4" id="chart1">
-                <button type="button" class="noPrint" ng-click="print('chart1', 'Behavioral Factors')" ng-show="chartData1.length > 0"><img src="~/Content/Icons/print_icon_white.png" /></button>
+                <button type="button" class="noPrint printButton" ng-click="print('chart1', 'Behavioral Factors')" ng-show="chartData1.length > 0"><img src="~/Content/Icons/print_icon_white.png" /></button>
                 <nvd3 id="chart1" options="chart1" data="chartData1" api="api1"></nvd3>
                 <div class="graphTitle">
                     Behavioral Factors
@@ -74,7 +74,7 @@
                 </div>
             </div><!-- /.col-4 -->
             <div class="col-4" id="chart2">
-                <button type="button" ng-click="print('chart2', 'External Influences')"  ng-show="chartData2.length > 0"><img src="~/Content/Icons/print_icon_white.png"  /></button>
+                <button type="button" class="noPrint printButton" ng-click="print('chart2', 'External Influences')"  ng-show="chartData2.length > 0"><img src="~/Content/Icons/print_icon_white.png"  /></button>
                 <nvd3 id="chart2" options="chart2" data="chartData2" api="api2"></nvd3>
                 <div class="graphTitle">
                     External Influences
@@ -91,7 +91,7 @@
                 </div>
             </div><!-- /.col-4 -->
             <div class="col-4" id="chart3">
-                <button type="button" ng-click="print('chart3', 'Organizational Influences')"  ng-show="chartData3.length > 0"><img src="~/Content/Icons/print_icon_white.png" /></button>
+                <button type="button" class="noPrint printButton" ng-click="print('chart3', 'Organizational Influences')"  ng-show="chartData3.length > 0"><img src="~/Content/Icons/print_icon_white.png" /></button>
                 <nvd3 id="chart3" options="chart3" data="chartData3" api="api3"></nvd3>
                 <div class="graphTitle">
                     Organizational Influences
