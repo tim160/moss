@@ -55,7 +55,7 @@ namespace EC.Controllers.API
 
                     avaibleFormats = new[] {
                         new { Id = 1, Name = LocalizationGetter.GetString("AvailableFormat_1")},
-                        new { Id = 2, Name = LocalizationGetter.GetString("AvailableFormat_2")},
+                      ///  new { Id = 2, Name = LocalizationGetter.GetString("AvailableFormat_2")},
                      ///   new { Id = 3, Name = LocalizationGetter.GetString("AvailableFormat_3")},
                     },
                 };
