@@ -379,6 +379,7 @@
     <Content Include="Content\Icons\fourth.png" />
     <Content Include="Content\Icons\generic-file.png" />
     <Content Include="Content\Icons\HappyHogan.png" />
+    <Content Include="Content\Icons\help_icon.png" />
     <Content Include="Content\Icons\IconsCasesNewReport\arrow.png" />
     <Content Include="Content\Icons\IconsCasesNewReport\cases-icon-active.png" />
     <Content Include="Content\Icons\IconsCasesNewReport\cases-icon.png" />
