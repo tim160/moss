@@ -762,7 +762,7 @@
                 columnCount: 1,
                 horizontalAlignment: "right",
                 verticalAlignment: "top",
-                margin: 20,
+                margin: { left: 40, top: 20 },
                 customizeHint: function () {
                     return this.pointName + ' - ' + data[this.pointIndex].val;
                 },
@@ -832,7 +832,7 @@
                 columnCount: 1,
                 horizontalAlignment: "right",
                 verticalAlignment: "top",
-                margin: 20,
+                margin: { left: 40, top: 20 },
                 customizeHint: function () {
                     return this.pointName + ' - ' + data[this.pointIndex].val;
                 },
@@ -913,7 +913,7 @@
                 columnCount: 1,
                 horizontalAlignment: "right",
                 verticalAlignment: "top",
-                margin: 20,
+                margin: { left: 40, top: 20 },
                 customizeHint: function () {
                     return this.pointName + ' - ' + data[this.pointIndex].val;
                 },
@@ -993,7 +993,7 @@
                 columnCount: 1,
                 horizontalAlignment: "right",
                 verticalAlignment: "top",
-                margin: 20,
+                margin: { left: 40, top: 20 },
                 customizeHint: function () {
                     return this.pointName + ' - ' + data[this.pointIndex].val;
                 },
