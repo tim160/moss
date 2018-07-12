@@ -120,6 +120,7 @@
             </div>
         }
     }
+    @Html.Partial("~/Views/Shared/HelpPartial.cshtml", new ViewDataDictionary { { "is_reporter", true } })
     <div id="userId" data-value="@user_id"></div>
 </body>
 
