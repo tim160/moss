@@ -1247,6 +1247,7 @@
     <Content Include="Views\NewCase\PrintToPdf.cshtml" />
     <Content Include="Views\Service\Disclaimer.cshtml" />
     <Content Include="Views\Service\Disclaimer-CC.cshtml" />
+    <Content Include="Views\Shared\HelpPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
