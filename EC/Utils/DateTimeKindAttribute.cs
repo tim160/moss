@@ -14,7 +14,7 @@ namespace EC.Utils
             ((IObjectContextAdapter)this).ObjectContext.ObjectMaterialized +=
                   (sender, e) => 
                   {
-                      DateTimeKindAttribute.Apply(e.Entity, DateTimeKind.Utc);
+                      EC.Utils.DateTimeKindAttribute.Apply(e.Entity, DateTimeKind.Utc);
                   };
             */
 
