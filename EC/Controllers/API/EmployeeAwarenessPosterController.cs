@@ -41,7 +41,7 @@ namespace EC.Controllers.API
             return new {
                 //mainImage = Url.Content("~/Content/img/employeeAwarenessPoster.jpg")
                 //mainImage = $"{poster.image_path}{poster.image_name}"
-                mainImage = ($"/Upload/EAPdf/{poster.id}/1_short.jpg"),
+                mainImage = ($"/Upload/EAPdf/{poster.id}/1.jpg"),
             };
         }
 
