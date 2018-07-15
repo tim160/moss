@@ -42,14 +42,14 @@ namespace EC.Controllers
 
         public ActionResult Poster(int? id)
         {
-            try
+      ///      try
             {
-                if (!id.HasValue || id > 10)
-                    return RedirectToAction("Index", "EmployeeAwareness");
+           ///     if (!id.HasValue || id > 10)
+           ////         return RedirectToAction("Index", "EmployeeAwareness");
             }
-            catch (Exception ex)
+         ////   catch (Exception ex)
             {
-                return RedirectToAction("Index", "EmployeeAwareness");
+         ////       return RedirectToAction("Index", "EmployeeAwareness");
             }
 
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
