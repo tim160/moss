@@ -11,6 +11,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using EC.Business.Actions;
+using EC.Utils;
 
 namespace EC.Controllers
 {
@@ -20,14 +21,15 @@ namespace EC.Controllers
         {
             public string Login { get; set; }
             public string Password { get; set; }
+            public string HostUrl { get; set; }
         }
 
         private readonly UserModel userModel = UserModel.inst;
 
         // GET: Service
-        public ActionResult Login()
+        public ActionResult Login(string host_url)
         {
-            return View($"Login{(is_cc ? "-CC" : "")}", new LoginViewModel());
+            return View($"Login{(is_cc ? "-CC" : "")}", new LoginViewModel { HostUrl = host_url });
         }
 
         [HttpPost]
@@ -63,6 +65,14 @@ namespace EC.Controllers
 
                     Session["userName"] = "";
                     Session["userId"] = user.id;
+
+                    if (!String.IsNullOrEmpty(model.HostUrl))
+                    {
+                        return Redirect(FreshDesk.GetSsoUrl(Server, 
+                            System.Configuration.ConfigurationManager.AppSettings["FreshDeskSite"],
+                            System.Configuration.ConfigurationManager.AppSettings["FreshDeskSecret"], 
+                            user.login_nm, user.email));
+                    }
 
                     if (user.role_id == ECLevelConstants.level_informant)
                     {

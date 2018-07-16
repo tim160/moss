@@ -54,7 +54,6 @@ namespace EC.Controllers.API
                 file = ($"/Upload/EAPdf/{poster.id}/{filter.type}_{filter.size}_{filter.logo1}.pdf"),
                 name = $"type:{filter.type} size:{filter.size} logo1:{filter.logo1}"
             };
-
         }
    }
 }
