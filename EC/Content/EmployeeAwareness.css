@@ -100,21 +100,22 @@
 }
 #EmployeeAwarenessBlock .blockInformation {
     border: 1px solid #e0e5e6;
-    width: calc( 25% - 60px );
+    width: calc( 33% - 62px );
     vertical-align: top;
     position: relative;
     background-color: #fff;
     margin: 20px 30px;
     cursor: pointer;
+    max-width: 304px;
 }
 #EmployeeAwarenessBlock .blockInformation .filtersBlock {
-    min-height: 200px;
+    min-height: 400px;
     width: 100%;
     position: relative;
-    background-position: top;
+    background-position: center top;
     background-size: cover;
     background-repeat: no-repeat;
-    padding: 9px 0;
+    padding: 8px;
 }
 #EmployeeAwarenessBlock .blockInformation .filter {
     background: rgba(0,0,0,0.6);
@@ -463,4 +464,29 @@
     font-size: 14px;
     font-family: 'Open sans';
     font-weight: 300;
+}
+@media only screen and (min-width : 992px){
+#EmployeeAwarenessBlock .blockInformation {
+    width: calc( 33% - 32px );
+    margin: 15px;
+}
+
+#EmployeeAwarenessBlock .blockInformation .filtersBlock{
+    min-height: 200px;
+}
+
+}
+
+
+@media only screen and (min-width : 1200px){
+#EmployeeAwarenessBlock .blockInformation{
+width: calc( 33% - 42px );
+margin: 20px 20px;
+max-width: 300px;
+}
+
+#EmployeeAwarenessBlock .blockInformation .filtersBlock{
+    min-height: 300px;
+}
+
 }

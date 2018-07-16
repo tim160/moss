@@ -590,6 +590,7 @@
         </div>
     </div>
     @RenderBody()
+    @Html.Partial("~/Views/Shared/HelpPartial.cshtml", new ViewDataDictionary { { "is_reporter", false } })
     <script src="~/Scripts/View/Settings.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
