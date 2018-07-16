@@ -295,5 +295,17 @@ namespace EC.Controllers
                 }
             };
         }
+
+        public ActionResult FreshDeskSSO()
+        {
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            if (user == null || user.id == 0)
+                return RedirectToAction("Login");
+
+            return Redirect(FreshDesk.GetSsoUrl(Server,
+               System.Configuration.ConfigurationManager.AppSettings["FreshDeskSite"],
+               System.Configuration.ConfigurationManager.AppSettings["FreshDeskSecret"],
+               user.login_nm, user.email));
+        }
     }
 }
