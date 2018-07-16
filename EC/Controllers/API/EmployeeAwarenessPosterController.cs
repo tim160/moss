@@ -48,7 +48,7 @@ namespace EC.Controllers.API
         [HttpPost]
         public object Post([FromBody]Filter filter)
         {
-            var poster = DB.poster.FirstOrDefault(x => x.id == filter.type);
+            var poster = DB.poster.FirstOrDefault(x => x.id == filter.posterId);
 
             return new {
                 file = ($"/Upload/EAPdf/{poster.id}/{filter.type}_{filter.size}_{filter.logo1}.pdf"),
