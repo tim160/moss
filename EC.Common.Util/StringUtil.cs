@@ -197,5 +197,20 @@ namespace EC.Common.Util
 
             return better_text;
         }
+
+        public static string ShortString(string str)
+        {
+            var r = "";
+
+            for(var i = 0; i < str.Length; i++)
+            {
+                if (char.IsLetterOrDigit(str[i]))
+                {
+                    r += str[i];
+                }
+            }
+
+            return r.ToLower().Trim();
+        }
     }
 }

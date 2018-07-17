@@ -1435,6 +1435,15 @@ public class GlobalFunctions
         else
             return false;
     }
+
+    public bool isCompanyShortInUse(string company_nm)
+    {
+        if (db.company.Any(t => t.company_short_name != null && t.company_short_name.Trim().ToLower() == company_nm.Trim().ToLower()))
+            return true;
+        else
+            return false;
+    }
+
     public string GenerateLoginName(string first, string last)
     {
         Regex rgx = new Regex("[^a-zA-Z]");

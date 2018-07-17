@@ -159,6 +159,22 @@ namespace EC.Controllers
             {
                 return LocalizationGetter.GetString("CompanyInUse", is_cc);
             }
+            var company_short_name = StringUtil.ShortString(company_name.Trim());
+            if (glb.isCompanyShortInUse(company_short_name))
+            {
+                for (var i = 1; i < 1000; i++)
+                {
+                    if (!glb.isCompanyShortInUse(company_short_name + i))
+                    {
+                        company_short_name = company_short_name + i;
+                        break;
+                    }
+                    if (i == 999)
+                    {
+                        return LocalizationGetter.GetString("CompanyInUse", is_cc);
+                    }
+                }
+            }
             if (!m_EmailHelper.IsValidEmail(email))
             {
                 return LocalizationGetter.GetString("EmailInvalid");
@@ -245,6 +261,7 @@ namespace EC.Controllers
             _company.company_code = company_code.Trim();
             _company.employee_quantity = number;
             _company.language_id = language_id;
+            _company.company_short_name = company_short_name;
 
             _company.address_id = 1;
             _company.billing_info_id = 0;

@@ -88,8 +88,8 @@
 
     function clickCreate() {
         $('.updateProfileBtn input').click(function () {
-            createCompany();
-            //validationForm();
+            //createCompany();
+            validationForm();
             $('html, body').animate({ scrollTop: 0 }, 500);
         });
     }
@@ -147,7 +147,7 @@
     }
 
     function createCompany() {
-        validationForm();
+        //validationForm();
         $.ajax({
             method: "POST",
             url: "/New/CreateCompany",
