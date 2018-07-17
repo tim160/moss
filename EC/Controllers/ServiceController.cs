@@ -109,9 +109,13 @@ namespace EC.Controllers
             return View($"Report{(is_cc ? "-CC" : "")}");
         }
 
-        public ActionResult Disclaimer(string companyCode)
+        public ActionResult Disclaimer(string id, string companyCode)
         {
-            var c = db.company.FirstOrDefault(x => x.company_code == companyCode);
+            if (String.IsNullOrEmpty(id))
+            {
+                return RedirectToAction("Disclaimer", new { id = companyCode });
+            }
+            var c = db.company.FirstOrDefault(x => x.company_code == id);
             return View($"Disclaimer{(is_cc ? "-CC" : "")}", new CompanyModel(c.id));
         }
 
