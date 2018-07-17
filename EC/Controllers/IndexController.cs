@@ -26,8 +26,16 @@ namespace EC.Controllers
         //
         // GET: /Index/
         //[EcAuthorized("admin, moderator, mediator")] //раскоментировать когда будет использоваться авторизация! и в BaseController
-        public ActionResult Index()
+        public ActionResult Index(string submit)
         {
+            if (!String.IsNullOrEmpty(submit))
+            {
+                var cmp = db.company.FirstOrDefault(x => x.company_short_name != null && x.company_short_name.ToLower() == submit.ToLower());
+                if (cmp != null)
+                {
+                    return RedirectToAction("Disclaimer", "Service", new { id = cmp.company_code });
+                }
+            }
             RedirectToAction("Login", "Service");
 
             //////////ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
