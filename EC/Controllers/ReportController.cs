@@ -458,5 +458,19 @@ namespace EC.Controllers
             ViewBag.Roles = db.role_in_report.ToList();
             return View(rm);
         }
+
+        public ActionResult Company(string id)
+        {
+            if (String.IsNullOrEmpty(id))
+            {
+                return RedirectToAction("Index", "Index");
+            }
+            var c = db.company.FirstOrDefault(x => x.company_short_name != null && x.company_short_name.ToLower() == id.ToLower());
+            if (c == null)
+            {
+                return RedirectToAction("Index", "Index");
+            }
+            return RedirectToAction("Disclaimer", "Service", new { id = c.company_code });
+        }
     }
 }

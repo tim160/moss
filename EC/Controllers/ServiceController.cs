@@ -116,6 +116,10 @@ namespace EC.Controllers
                 return RedirectToAction("Disclaimer", new { id = companyCode });
             }
             var c = db.company.FirstOrDefault(x => x.company_code == id);
+            if (c == null)
+            {
+                return RedirectToAction("Index", "Index");
+            }
             return View($"Disclaimer{(is_cc ? "-CC" : "")}", new CompanyModel(c.id));
         }
 
