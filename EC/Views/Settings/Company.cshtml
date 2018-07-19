@@ -162,6 +162,7 @@
                         @Html.Partial("~/Views/Shared/Partial/_SettingsCompanyLocationTemplate.cshtml", _location, new ViewDataDictionary {
                             { "is_cc", is_cc },
                             { "is_valid_mediator", is_valid_mediator },
+                            { "LocationExtendeds", ViewBag.LocationExtendeds },                            
                         })
                     }
                 </div>
