@@ -75,11 +75,14 @@
             !valLast.hasClass('error') &&
             !valEmail.hasClass('error') &&
 
-            !csv.hasClass('error') &&
-            !cardname.hasClass('error') &&
-            !cardnumber.hasClass('error') &&
-            !selectedMonth.hasClass('error') &&
-            !selectedYear.hasClass('error') &&
+            (
+                !$("#PayByCard").is(':visible') ||
+                (!csv.hasClass('error') &&
+                !cardname.hasClass('error') &&
+                !cardnumber.hasClass('error') &&
+                !selectedMonth.hasClass('error') &&
+                !selectedYear.hasClass('error'))
+            ) &&
 
             !valTitle.hasClass('error') && ($("#company_exist").val().length > 0)) {
             createCompany();
