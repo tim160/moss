@@ -120,6 +120,7 @@ namespace EC.Controllers
             {
                 return RedirectToAction("Index", "Index");
             }
+            ViewBag.CID = id;
             return View($"Disclaimer{(is_cc ? "-CC" : "")}", new CompanyModel(c.id));
         }
 
