@@ -39,7 +39,7 @@
     {
         report_domain = "https://CampusConfidential.com/Report/";
     }
-    if (cm._company.company_short_name.Trim().Length > 0)
+    if (cm._company!= null && cm._company.company_short_name!= null && cm._company.company_short_name.Trim().Length > 0)
     {
         report_domain = report_domain + cm._company.company_short_name.Trim();
     }
