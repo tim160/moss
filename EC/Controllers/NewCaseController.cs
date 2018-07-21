@@ -258,7 +258,7 @@ namespace EC.Controllers
             UserModel um = new UserModel(user_id);
 
             glb.UpdateReportRead(user_id, report_id);
-            glb.UpdateReadMessages(report_id, user_id, 2);
+            glb.UpdateReadMessages(report_id, user_id, 1);
 
             ViewBag.um = um;
             ViewBag.report_id = report_id; // 167-171
