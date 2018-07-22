@@ -32,7 +32,7 @@
             </div><!-- /.createTaskBlock-header -->
             <div class="createTaskBlock-content">
                 <div class="createTaskBlock-content__input-taskNameContainer">
-                    <input type="text" placeholder="Task title" class="createTaskBlock-content__input-taskName" />
+                    <input type="text" placeholder="Task title, max length - 50 characters" class="createTaskBlock-content__input-taskName" />
                 </div><!-- /.createTaskBlock-content__input-taskNameContainer -->
                 <div class="createTaskBlock-content__input-taskDescriptionContainer">
                     <textarea name="" id="" placeholder="Task description" class="createTaskBlock-content__input-taskDescription textareaBlock"></textarea>
@@ -109,7 +109,7 @@
                         <li class="dropDownListInBtn__li" data-id="0">
                             <a href="#!" class="dropDownListInBtn__a clearfix">
                                 <span class="dropDownListInBtn__logoImg pull-left">
-                                    <img src="http://stark.employeeconfidential.com/Content/Icons/peopleBlockSelect.png" alt="" />
+                                    <img src="https://report.employeeconfidential.com/Content/Icons/peopleBlockSelect.png" alt="" />
                                 </span>
                                 <span class="dropDownListInBtn__content pull-left">
                                     <span class="dropDownListInBtn__contentName dropDownListInBtn__contentNameAll">All case administrators</span>
@@ -163,7 +163,7 @@
             </div><!-- /.col-3 -->
             <div class="col-2">
                 <div class="task-titleRow__text task-titleRow__textMediator  pull-left">
-                    Assigned mediator
+                    Assigned case admin
                 </div><!-- /.task-titleRow__text -->
             </div><!-- /.col-3 -->
             <div class="col-2">
@@ -336,7 +336,7 @@
             var taskAssignTo = $('.btnAssign').data('id');
             var dueDate = $("#datepicker").val();
 
-            if (taskName.length > 0 && taskName.length < 30) {
+            if (taskName.length > 0 && taskName.length < 50) {
                 $('.createTaskBlock-content__input-taskName').css('border', '');
 
                 if (taskDescription.length > 0) {
