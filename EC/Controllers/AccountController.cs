@@ -37,7 +37,9 @@ namespace EC.Controllers
             #endregion
 
             SingOut();
-            return View("~/Views/Login/Index.cshtml");
+
+            return RedirectToAction("Login", "Service", new { returnUrl = Request.Url.LocalPath });
+            //return View("~/Views/Login/Index.cshtml");
         }
 
 
@@ -50,8 +52,8 @@ namespace EC.Controllers
             if (is_cc) cc_ext = "_cc";
             ViewBag.cc_extension = cc_ext;
             #endregion
-
-            return View("~/Views/Login/Index.cshtml");
+            return RedirectToAction("Login", "Service", new { returnUrl = Request.Url.LocalPath });
+          //  return View("~/Views/Login/Index.cshtml");
             //return Redirect("/");
         }
 

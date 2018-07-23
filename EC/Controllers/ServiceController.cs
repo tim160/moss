@@ -29,6 +29,7 @@ namespace EC.Controllers
         // GET: Service
         public ActionResult Login(string host_url)
         {
+            Session.Clear();
             return View($"Login{(is_cc ? "-CC" : "")}", new LoginViewModel { HostUrl = host_url });
         }
 
@@ -41,6 +42,7 @@ namespace EC.Controllers
         [HttpPost]
         public ActionResult CheckStatus(LoginViewModel model, string returnUrl)
         {
+            Session.Clear();
             return DoLogin(model, returnUrl, "CheckStatus");
         }
 
