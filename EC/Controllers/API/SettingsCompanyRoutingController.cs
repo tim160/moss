@@ -71,6 +71,8 @@ namespace EC.Controllers.API
                 .Where(x => x.company_id == user.company_id && x.status_id == 2)
                 .ToList();
 
+            items.RemoveAll(x => !types.Any(z => z.id == x.company_secondary_type_id));
+
             var ids = items
                 .Select(x => x.id)
                 .ToList();

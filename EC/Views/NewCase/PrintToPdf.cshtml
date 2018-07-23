@@ -281,7 +281,7 @@
                 <div class="reportContentBlock__title">
                     @incident.secondary_type_nm
                 </div>
-                if (b != null && (im.company_root_cases_behavioral_note.Length > 0 || b.name_en.Length > 0))
+                if ((b != null) && (im != null) && (im.company_root_cases_behavioral_note != null) && (im.company_root_cases_behavioral_note.Length > 0 || b.name_en.Length > 0))
                 {
                     <div class="reportContentBlock__firstColTitle report_m-l">
                         Behavioral factors
@@ -296,7 +296,7 @@
                     
                     </div><!-- /.reportRow clearfix -->
                 }
-                if (e != null && (im.company_root_cases_external_note.Length > 0 || e.name_en.Length > 0))
+                if ((e != null) && (im != null) && (im.company_root_cases_behavioral_note != null) && (im.company_root_cases_external_note.Length > 0 || e.name_en.Length > 0))
                 {
                 <div class="reportContentBlock__firstColTitle report_m-l">
                     External influences
@@ -312,7 +312,7 @@
                     
                 </div><!-- /.reportRow clearfix -->
                 }
-                if (o != null && (im.company_root_cases_organizational_note.Length > 0 || o.name_en.Length > 0))
+                if ((o != null) && (im != null) && (im.company_root_cases_behavioral_note != null) && (im.company_root_cases_organizational_note.Length > 0 || o.name_en.Length > 0))
                 {
                 <div class="reportContentBlock__firstColTitle report_m-l">
                     Internal influences:
