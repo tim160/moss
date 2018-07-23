@@ -36,6 +36,12 @@ namespace EC.Controllers
                 if (loginField != null && loginField.Length > 0)
                 {
                     var user = userModel.Login(loginField, loginPass);
+                    if (user == null)
+                    {
+                        ViewBag.login = loginField;
+                        ViewBag.pass = loginPass;
+                        return View();
+                    }
                     SignIn(user);
                     Session["userName"] = "";
                     Session["userId"] = user.id;
