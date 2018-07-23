@@ -39,7 +39,7 @@ namespace EC.Controllers.API
                 company_disclamer_page_date1 = "",
 
                 company_disclamer_uploads = DB.company_disclamer_uploads
-                    .Where(x => x.company_id == user.company_id)
+                    .Where(x => x.company_id == user.company_id).OrderByDescending(t => t.created_dt)
                     .ToList(),
             };
 
