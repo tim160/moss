@@ -18,7 +18,7 @@
     var um = (UserModel)ViewBag.um;
     var user_id = um.ID;
     var role_id = um._user.role_id;
-    bool is_valid_mediator = um._user.user_permissions_change_settings == 1;
+    bool is_valid_mediator = (um._user.user_permissions_change_settings == 1 || um._user.role_id == ECLevelConstants.level_supervising_mediator);
 
 }
 @model  company

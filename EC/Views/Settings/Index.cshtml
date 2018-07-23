@@ -167,7 +167,7 @@
                         </div>
                     </div><!--rowBlock-->
                 </div>
-                @if (um._user.role_id == 5)
+                @if (um._user.role_id == 5 || (um._user.user_permissions_change_settings.HasValue && um._user.user_permissions_change_settings.Value == 1))
                 {
                     <div class="blockPersonalSettings greyBorder">
                         <p class="title">@LocalizationGetter.GetString("ApproveCaseClosure", is_cc)</p>

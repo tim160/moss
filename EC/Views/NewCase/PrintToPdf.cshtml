@@ -248,7 +248,7 @@
                 </div><!-- /.reportTemplateHeader-logo pull-left -->
                 <div class="reportTemplateHeader-info pull-right">
                     <div class="reportTemplateHeader-info__title">
-                        Stark industries
+                        @Model.CompanyName()
                     </div><!-- /.reportTemplateHeader-info__title -->
                     <div class="reportTemplateHeader-Case">
                         Case <strong>#22000-d-3</strong>
@@ -281,51 +281,54 @@
                 <div class="reportContentBlock__title">
                     @incident.secondary_type_nm
                 </div>
-                <div class="reportContentBlock__firstColTitle report_m-l">
-                    Behavioral factors
-                </div><!-- /.reportContentBlock__firstColTitle -->
-                <div class="reportRow__twoCols clearfix">
-                    @if (b != null)
-                    {
-                        <div class="reportRow__twoCols-title">
-                            @b.name_en
-                        </div><!-- /.reportRow__twoCols-title -->
-                        <div class="reportRow__twoCols-text" style="margin-bottom: 20px;">
-                            @Html.Raw((im.company_root_cases_behavioral_note ?? "").Replace("\n", "<br/>"))
-                        </div><!-- /.reportRow__twoCols-text -->
-                    }
-                </div><!-- /.reportRow clearfix -->
-
+                if (b != null && (im.company_root_cases_behavioral_note.Length > 0 || b.name_en.Length > 0))
+                {
+                    <div class="reportContentBlock__firstColTitle report_m-l">
+                        Behavioral factors
+                    </div><!-- /.reportContentBlock__firstColTitle -->
+                    <div class="reportRow__twoCols clearfix">
+                            <div class="reportRow__twoCols-title">
+                                @b.name_en
+                            </div><!-- /.reportRow__twoCols-title -->
+                            <div class="reportRow__twoCols-text" style="margin-bottom: 20px;">
+                                @Html.Raw((im.company_root_cases_behavioral_note ?? "").Replace("\n", "<br/>"))
+                            </div><!-- /.reportRow__twoCols-text -->
+                    
+                    </div><!-- /.reportRow clearfix -->
+                }
+                if (e != null && (im.company_root_cases_external_note.Length > 0 || e.name_en.Length > 0))
+                {
                 <div class="reportContentBlock__firstColTitle report_m-l">
                     External influences
                 </div><!-- /.reportContentBlock__firstColTitle -->
                 <div class="reportRow__twoCols clearfix">
-                    @if (e != null)
-                    {
+ 
                         <div class="reportRow__twoCols-title">
                             @e.name_en
                         </div><!-- /.reportRow__twoCols-title -->
                         <div class="reportRow__twoCols-text" style="margin-bottom: 20px;">
                             @Html.Raw((im.company_root_cases_external_note ?? "").Replace("\n", "<br/>"))
                         </div><!-- /.reportRow__twoCols-text -->
-                    }
+                    
                 </div><!-- /.reportRow clearfix -->
-
+                }
+                if (o != null && (im.company_root_cases_organizational_note.Length > 0 || o.name_en.Length > 0))
+                {
                 <div class="reportContentBlock__firstColTitle report_m-l">
                     Internal influences:
                 </div><!-- /.reportContentBlock__firstColTitle -->
                 <div class="reportRow__twoCols clearfix">
-                    @if (o != null)
-                    {
+
                         <div class="reportRow__twoCols-title">
                             @o.name_en
                         </div><!-- /.reportRow__twoCols-title -->
                         <div class="reportRow__twoCols-text" style="margin-bottom: 20px;">
                             @Html.Raw((im.company_root_cases_organizational_note ?? "").Replace("\n", "<br/>"))
                         </div><!-- /.reportRow__twoCols-text -->
-                    }
+                    
                 </div><!-- /.reportRow clearfix -->
-            }
+                    }
+                }
         </div><!-- /.reportContentBlock clearfix -->
 
         @{ 
@@ -391,7 +394,7 @@
                 </div><!-- /.reportTemplateHeader-logo pull-left -->
                 <div class="reportTemplateHeader-info pull-right">
                     <div class="reportTemplateHeader-info__title">
-                        Stark industries
+                        @Model.CompanyName()
                     </div><!-- /.reportTemplateHeader-info__title -->
                     <div class="reportTemplateHeader-Case">
                         Case <strong>#22000-d-3</strong>
