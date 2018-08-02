@@ -1795,7 +1795,7 @@
   <data name="SelectYourCompany" xml:space="preserve">
     <value>Select Your Company</value>
   </data>
-  <data name="Send" xml:space="preserve">
+  <data name="S" xml:space="preserve">
     <value>Send</value>
   </data>
   <data name="SendCaseClosureApproval" xml:space="preserve">
@@ -2107,28 +2107,28 @@
   <data name="OtherIncident" xml:space="preserve">
     <value>Other Incident</value>
   </data>
-  <data name="CompanyMediatorsSettings_cc" xml:space="preserve">
+  <data name="CompanyMediatorsSettings_CC" xml:space="preserve">
     <value>Educational Institute Case Administrator Settings</value>
   </data>
-  <data name="forEmployeeConfidentialOnly_cc" xml:space="preserve">
+  <data name="forEmployeeConfidentialOnly_CC" xml:space="preserve">
     <value>FOR CAMPUS CONFIDENTIAL ONLY</value>
   </data>
-  <data name="InvitationCompanyMismatch_cc" xml:space="preserve">
+  <data name="InvitationCompanyMismatch_CC" xml:space="preserve">
     <value>Code doesn't match educational institute</value>
   </data>
-  <data name="invite_new_mediator_cc" xml:space="preserve">
+  <data name="invite_new_mediator_CC" xml:space="preserve">
     <value>Invite new case administrator</value>
   </data>
-  <data name="NewCompanyRegistration_cc" xml:space="preserve">
+  <data name="NewCompanyRegistration_CC" xml:space="preserve">
     <value>New Edicational Institute Registration</value>
   </data>
-  <data name="SelectYourCompany_cc" xml:space="preserve">
+  <data name="SelectYourCompany_CC" xml:space="preserve">
     <value>Select Your New Educational Institute</value>
   </data>
   <data name="CompanyNameOrCode" xml:space="preserve">
     <value>Company name or code</value>
   </data>
-  <data name="CompanyNameOrCode_cc" xml:space="preserve">
+  <data name="CompanyNameOrCode_CC" xml:space="preserve">
     <value>Educational Institute name or code</value>
   </data>
   <data name="RootCauses" xml:space="preserve">
@@ -2605,5 +2605,17 @@
   </data>
   <data name="FillTheFollowingFieldsRegister" xml:space="preserve">
     <value>Fill in the following fields and click "Register" to create an account</value>
+  </data>
+  <data name="MessageAboutGuidlines" xml:space="preserve">
+    <value>Message about Company Conduct Guidelines, Policies and Legal Disclaimers</value>
+  </data>
+  <data name="MessageAboutGuidlines_CC" xml:space="preserve">
+    <value>Message about Conduct Guidelines, Policies and Legal Disclaimers</value>
+  </data>
+  <data name="MessageToStaff" xml:space="preserve">
+    <value>Message to Employees</value>
+  </data>
+  <data name="MessageToStaff_CC" xml:space="preserve">
+    <value>Message to Students and Employees</value>
   </data>
 </root>

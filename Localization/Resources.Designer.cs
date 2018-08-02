@@ -1575,9 +1575,9 @@ namespace EC.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Educational Institute Case Administrator Settings.
         /// </summary>
-        public static string CompanyMediatorsSettings_cc {
+        public static string CompanyMediatorsSettings_CC {
             get {
-                return ResourceManager.GetString("CompanyMediatorsSettings_cc", resourceCulture);
+                return ResourceManager.GetString("CompanyMediatorsSettings_CC", resourceCulture);
             }
         }
         
@@ -1611,9 +1611,9 @@ namespace EC.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Educational Institute name or code.
         /// </summary>
-        public static string CompanyNameOrCode_cc {
+        public static string CompanyNameOrCode_CC {
             get {
-                return ResourceManager.GetString("CompanyNameOrCode_cc", resourceCulture);
+                return ResourceManager.GetString("CompanyNameOrCode_CC", resourceCulture);
             }
         }
         
@@ -3195,9 +3195,9 @@ namespace EC.Localization {
         /// <summary>
         ///   Looks up a localized string similar to FOR CAMPUS CONFIDENTIAL ONLY.
         /// </summary>
-        public static string forEmployeeConfidentialOnly_cc {
+        public static string forEmployeeConfidentialOnly_CC {
             get {
-                return ResourceManager.GetString("forEmployeeConfidentialOnly_cc", resourceCulture);
+                return ResourceManager.GetString("forEmployeeConfidentialOnly_CC", resourceCulture);
             }
         }
         
@@ -3987,9 +3987,9 @@ namespace EC.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Invite new case administrator.
         /// </summary>
-        public static string invite_new_mediator_cc {
+        public static string invite_new_mediator_CC {
             get {
-                return ResourceManager.GetString("invite_new_mediator_cc", resourceCulture);
+                return ResourceManager.GetString("invite_new_mediator_CC", resourceCulture);
             }
         }
         

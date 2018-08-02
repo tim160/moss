@@ -40,17 +40,13 @@ namespace EC.Localization
             return GetString(key, m_Culture, ca, is_cc);
         }
 
-        /// <summary>
-        /// Gets the string.
-        /// </summary>
-        /// <param name="culture">The culture info.</param>
-        /// <param name="key">The key.</param>
-        /// <param name="is_cc">Boolean is Campus Confidential or Employee Confidential; false by default</param>
-        /// <returns></returns>
-        public static string GetString(CultureInfo culture, string key, bool is_cc = false)
+        public static string GetString(string key, bool? is_cc)
         {
+            bool is_cc_value = false;
+            if (is_cc.HasValue)
+                is_cc_value = is_cc.Value;
             Assembly ca = Assembly.GetCallingAssembly();
-            return GetString(key, culture, ca, is_cc);
+            return GetString(key, m_Culture, ca, is_cc_value);
         }
 
         /// <summary>
@@ -65,19 +61,29 @@ namespace EC.Localization
         {
             try
             {
-                ResourceManager rm = EC.Localization.Resources.ResourceManager;
-
+                ResourceManager rm = Resources.ResourceManager;
                 /////      ResourceManager rm = GetResourceManager(callingAssembly);
-
-                culture = System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("es-MX");
+                culture = System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("en-Us");
                 if (rm == null) return key;
-                if (is_cc) { key = key + "_CC"; }
 
-                string value = rm.GetString(key, culture);
+                string temp_key = key;
+                if (is_cc) { temp_key = temp_key + "_CC"; }
+                string value = rm.GetString(temp_key, culture);
                 if (value != null)
                     return value;
                 else
-                    return key;
+                {
+                    if (is_cc)
+                    {
+                        value = rm.GetString(key, culture);
+                        if (value != null)
+                            return value;
+                        else
+                            return key;
+                    }
+                    else
+                        return key;
+                }
             }
             catch (Exception)
             {
@@ -88,11 +94,26 @@ namespace EC.Localization
         /// <summary>
         /// Gets the string.
         /// </summary>
+        /// <param name="culture">The culture info.</param>
+        /// <param name="key">The key.</param>
+        /// <param name="is_cc">Boolean is Campus Confidential or Employee Confidential; false by default</param>
+        /// <returns></returns>
+        public static string GetString_bkp(CultureInfo culture, string key, bool is_cc = false)
+        {
+            Assembly ca = Assembly.GetCallingAssembly();
+            return GetString(key, culture, ca, is_cc);
+        }
+
+     
+
+        /// <summary>
+        /// Gets the string.
+        /// </summary>
         /// <param name="key">The key.</param>
         /// <param name="value">The value.</param>
         /// <param name="is_cc">Boolean is Campus Confidential or Employee Confidential; false by default</param>
         /// <returns></returns>
-        public static string GetString(string key, object value, bool is_cc = false)
+        public static string GetString_bkp(string key, object value, bool is_cc = false)
         {
             Assembly ca = Assembly.GetCallingAssembly();
             string valuestring = GetString(key, m_Culture, ca, is_cc);
@@ -109,7 +130,7 @@ namespace EC.Localization
         /// <param name="value">The assembly to reference.</param>
         /// <param name="is_cc">Boolean is Campus Confidential or Employee Confidential; false by default</param>
         /// <returns></returns>
-        public static string GetString(string key, object value, Assembly referenceAssembly, bool is_cc = false)
+        public static string GetString_bkp(string key, object value, Assembly referenceAssembly, bool is_cc = false)
         {
             Assembly ca = referenceAssembly;
             string valuestring = GetString(key, m_Culture, ca, is_cc);
@@ -126,7 +147,7 @@ namespace EC.Localization
         /// <param name="value">The value.</param>
         /// <param name="is_cc">Boolean is Campus Confidential or Employee Confidential; false by default</param>
         /// <returns></returns>
-        public static string GetString(CultureInfo culture, string key, object value, bool is_cc = false)
+        public static string GetString_bkp(CultureInfo culture, string key, object value, bool is_cc = false)
         {
             Assembly ca = Assembly.GetCallingAssembly();
             string valuestring = GetString(key, culture, ca, is_cc);
@@ -142,7 +163,7 @@ namespace EC.Localization
         /// <param name="is_cc">Boolean is Campus Confidential or Employee Confidential; false by default</param>
         /// <param name="values">The values.</param>
         /// <returns></returns>
-        public static string GetString(string key, bool is_cc = false, params string[] values)
+        public static string GetString_bkp(string key, bool is_cc = false, params string[] values)
         {
             Assembly ca = Assembly.GetCallingAssembly();
             string valuestring = GetString(key, m_Culture, ca, is_cc);
@@ -159,7 +180,7 @@ namespace EC.Localization
         /// <param name="is_cc">Boolean is Campus Confidential or Employee Confidential; false by default</param>
         /// <param name="value">The values.</param>
         /// <returns></returns>
-        public static string GetString(CultureInfo culture, string key, bool is_cc = false, params string[] values)
+        public static string GetString_bkp(CultureInfo culture, string key, bool is_cc = false, params string[] values)
         {
             try
             {
@@ -182,7 +203,7 @@ namespace EC.Localization
         /// <param name="is_cc">Boolean is Campus Confidential or Employee Confidential; false by default</param>
         /// <param name="paramList">The param list.</param>
         /// <returns></returns>
-        public static string GetString(string key, object[] paramList, bool is_cc = false)
+        public static string GetString_bkp(string key, object[] paramList, bool is_cc = false)
         {
             Assembly ca = Assembly.GetCallingAssembly();
             string valuestring = GetString(key, m_Culture, ca, is_cc);
@@ -199,7 +220,7 @@ namespace EC.Localization
         /// <param name="paramList">The param list.</param>
         /// <param name="is_cc">Boolean is Campus Confidential or Employee Confidential; false by default</param>
         /// <returns></returns>
-        public static string GetString(CultureInfo culture, string key, object[] paramList, bool is_cc = false)
+        public static string GetString_bkp(CultureInfo culture, string key, object[] paramList, bool is_cc = false)
         {
             Assembly ca = Assembly.GetCallingAssembly();
             string valuestring = GetString(key, culture, ca, is_cc);

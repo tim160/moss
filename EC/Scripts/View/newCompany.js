@@ -105,7 +105,7 @@
             data: { company_nm: company_nm }
         }).done(function (data) {//data from server
             if ((company_nm.length > 0) && (data == 1)) {
-                alert('Company name is already in use.');
+                alert('Organization name is already in use.');
                 $("#company_name").parent().css('border', '2px solid red');
                 $("#company_exist").val('');
             }

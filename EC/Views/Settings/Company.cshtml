@@ -168,10 +168,6 @@
                 </div>
                 <div class="addNewLocation">
                     <input type="text" name="newLocationName" required="" value="">
-                    @if (is_cc.Value)
-                    {
-                        @Html.DropDownList("location_cc_extended", (SelectList)ViewBag.LocationExtendeds, "Select Location Category", new { @class = "select-def" })
-                    }
                     <div class="closeIcon"></div>
                 </div>
                 <div class="tableLocation" id="tableLocation">
@@ -431,7 +427,7 @@
                             <div class="settingsProf-contentBlock__headMain row">
                                 <div class="settingsProf-contentBlock__headMain-cols col-6">
                                     <div class="settingsProf-contentBlock__headMainTitle" ng-class="model.message_to_employeesChanged ? 'error' : 'resolved'">
-                                        Message to Employees
+                                        @LocalizationGetter.GetString("MessageToStaff", is_cc)
                                     </div><!-- /.settingsProf-contentBlock__headMainTitle -->
                                 </div><!-- /.col-6 -->
                             </div><!-- /.settingsProf-contentBlock__headMain -->
@@ -459,7 +455,7 @@
                             <div class="settingsProf-contentBlock__headMain row">
                                 <div class="settingsProf-contentBlock__headMain-cols col-6">
                                     <div class="settingsProf-contentBlock__headMainTitle" ng-class="model.message_about_guidelinesChanged ? 'error' : 'resolved'">
-                                        Message about Company Conduct Guidelines, Policies and Legal Disclaimers
+                                        @LocalizationGetter.GetString("MessageAboutGuidlines", is_cc)
                                     </div><!-- /.settingsProf-contentBlock__headMainTitle -->
                                 </div><!-- /.col-6 -->
                             </div><!-- /.settingsProf-contentBlock__headMain -->
