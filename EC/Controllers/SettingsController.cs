@@ -443,7 +443,7 @@ namespace EC.Controllers
 
                     CompanyModel cm = new CompanyModel(_user.company_id);
 
-                    EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
+                    EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
                     EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
                     string body = "";
 
@@ -718,11 +718,11 @@ namespace EC.Controllers
                 to.Add(email.Trim());
                 ///     bcc.Add("timur160@hotmail.com");
 
-                EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
+                EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
                 EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
 
                 CompanyModel cm = new CompanyModel(_user.company_id);
-                eb.MediatorInvited(_user.first_nm, _user.last_nm, _user.first_nm, _user.last_nm, cm._company.company_nm, generated_code, DomainUtil.GetSubdomainLink(Request.Url.AbsoluteUri.ToLower()) + "/new/?code=" + generated_code + "&email=" + email);
+                eb.MediatorInvited(_user.first_nm, _user.last_nm, _user.first_nm, _user.last_nm, cm._company.company_nm, generated_code, DomainUtil.GetSubdomainLink(Request.Url.AbsoluteUri.ToLower(), Request.Url.AbsoluteUri.ToLower()) + "/new/?code=" + generated_code + "&email=" + email);
                 string body = eb.Body;
                 em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_MediatorInvited, body, true);
             }

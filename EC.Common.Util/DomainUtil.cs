@@ -74,13 +74,13 @@ namespace EC.Common.Util
 
         }
 
-        public static string GetSubdomainLink(string url)
+        public static string GetSubdomainLink(string url, string site_url)
         {
             string entrance_link = "report.employeeconfidential.com";
 
-            if (url.ToLower().Contains("campus"))
+            if (url.ToLower().Contains("campus") || site_url.ToLower().Contains("campus"))
             {
-                entrance_link = "campus-confidential.com";
+                entrance_link = "campusconfidential.com";
             }
             else if (url.ToLower().Contains("stark."))
             {
@@ -94,9 +94,9 @@ namespace EC.Common.Util
             {
                 entrance_link = "cai.employeeconfidential.com";
             }
-            if (url.ToLower().Contains("report.campus"))
+            if (url.ToLower().Contains("report.campus") || site_url.ToLower().Contains("report.campus"))
             {
-                entrance_link = "report.campus-confidential.com";
+                entrance_link = "report.campusconfidential.com";
             }
             return entrance_link;
         }

@@ -223,7 +223,7 @@ namespace EC.Controllers
             #region SendEmail To Admins
             ReportModel rm = new ReportModel(currentReport.id);
 
-            Business.Actions.Email.EmailManagement em = new Business.Actions.Email.EmailManagement();
+            Business.Actions.Email.EmailManagement em = new Business.Actions.Email.EmailManagement(is_cc);
             Business.Actions.Email.EmailBody eb = new Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
             bool has_involved = false;
             List<string> to = new List<string>();
@@ -232,9 +232,9 @@ namespace EC.Controllers
                 has_involved = true;
 
             string body = "";
-            string title = LocalizationGetter.GetString("Email_Title_NewCase");
+            string title = LocalizationGetter.GetString("Email_Title_NewCase", is_cc);
             if (has_involved)
-                title = LocalizationGetter.GetString("Email_Title_NewCaseInvolved");
+                title = LocalizationGetter.GetString("Email_Title_NewCaseInvolved", is_cc);
             foreach (var _user in rm.MediatorsWhoHasAccessToReport().Where(t => t.role_id != ECLevelConstants.level_escalation_mediator).ToList())
             {
                 eb = new Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());

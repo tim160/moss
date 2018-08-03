@@ -7,7 +7,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Web;
 using System.Web.Http;
+using EC.Common.Util;
 
 namespace EC.Controllers.API
 {
@@ -40,6 +42,16 @@ namespace EC.Controllers.API
                 });
 
             return new HttpResponseMessage() { Content = new StringContent(json, Encoding.UTF8, "application/json") };
+        }
+
+        internal bool is_cc
+        {
+            
+
+                   get
+            {
+                return DomainUtil.IsCC(HttpContext.Current.Request.Url.AbsoluteUri.ToLower());
+            }
         }
     }
 }

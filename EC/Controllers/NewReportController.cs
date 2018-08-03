@@ -360,7 +360,7 @@ namespace EC.Controllers.ViewModel
             List<string> cc = new List<string>();
             List<string> bcc = new List<string>();
 
-            EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
+            EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
             EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
             string body = "";
             #endregion

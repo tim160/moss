@@ -854,11 +854,11 @@ namespace EC.Controllers
                     to.Add(user.email.Trim());
                     ///     bcc.Add("timur160@hotmail.com");
 
-                    EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
+                    EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
                     EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
                     eb.NewCompany(user.first_nm, user.last_nm, login.Trim(), pass.Trim(), company_name.Trim(), company_code.Trim());
                     string body = eb.Body;
-                    em.Send(to, cc, LocalizationGetter.GetString("Email_Title_NewCompany"), body, true);
+                    em.Send(to, cc, LocalizationGetter.GetString("Email_Title_NewCompany", is_cc), body, true);
                 }
 
 
@@ -1054,12 +1054,12 @@ namespace EC.Controllers
 
                     CompanyModel cm = new CompanyModel(user.company_id);
 
-                    EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
+                    EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
                     EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
                     eb.NewUser(user.first_nm, user.last_nm, login.Trim(), pass.Trim());
                     string body = eb.Body;
 
-                    string email_title = LocalizationGetter.GetString("Email_Title_NewUser");
+                    string email_title = LocalizationGetter.GetString("Email_Title_NewUser", is_cc);
                     email_title = email_title.Replace("[CompanyName]", cm._company.company_nm);
                     em.Send(to, cc, email_title, body, true);
 

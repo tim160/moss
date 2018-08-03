@@ -156,11 +156,11 @@ namespace EC.Controllers.API
                     to.Add(_um._user.email.Trim());
                     ReportModel _rm = new ReportModel(filter.Report_id.Value);
 
-                    EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
+                    EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
                     EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, HttpContext.Current.Request.Url.AbsoluteUri.ToLower());
                     eb.MediatorAssigned(_um._user.first_nm, _um._user.last_nm, user.first_nm, user.last_nm, _rm._report.display_name);
                     string body = eb.Body;
-                    em.Send(to, cc, LocalizationGetter.GetString("Email_Title_MediatorAssigned", false), body, true);
+                    em.Send(to, cc, LocalizationGetter.GetString("Email_Title_MediatorAssigned", is_cc), body, true);
                 }
             }
 

@@ -100,21 +100,21 @@ namespace EC.Business.Actions.Email
         #endregion
 
         #region Constructor(s)
-        public EmailManagement()
+        public EmailManagement(bool is_cc = false)
             : this(new CultureInfo("en-US"))
         {
-            Initialize();
+            Initialize(is_cc);
 
         }
 
 
 
-        public EmailManagement(CultureInfo cultureInfo)
+        public EmailManagement(CultureInfo cultureInfo, bool is_cc = false)
         {
             m_CultureInfo = cultureInfo;
-            Initialize();
+            Initialize(is_cc);
         }
-        private void Initialize()
+        private void Initialize(bool is_cc = false)
         {
        //     m_Server = Config.GetConfig("Server");
        //     m_Username = Config.GetConfig("Username");
@@ -131,6 +131,11 @@ namespace EC.Business.Actions.Email
             m_Password = "confidentialConfidential1$3";
             m_Port = 25;
 
+            if (is_cc)
+            {
+                m_FromAddress = "campusconfidential@employeeconfidential.com";
+                m_Username = "campusconfidential@employeeconfidential.com";
+            }
             //m_Server = "smtp.gmail.com";
             //m_Port = 587;
             /*

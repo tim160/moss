@@ -132,7 +132,7 @@ namespace EC.Controllers
                                 to.Add(email.Trim());
                                 ///     bcc.Add("timur160@hotmail.com");
 
-                                EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
+                                EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
                                 EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
                                 eb.ForgetPassword(Request.Url.AbsoluteUri.ToLower(), email, password_token);
                                 string body = eb.Body;

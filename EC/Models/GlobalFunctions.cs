@@ -1579,7 +1579,7 @@ public class GlobalFunctions
     public void CampusSecurityAlertEmail(report report, Uri uri, ECEntities db, string email)
     {
         IEmailAddressHelper m_EmailHelper = new EmailAddressHelper();
-        EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
+        EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(true);
         EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, uri.AbsoluteUri.ToLower());
         string body = "";
         List<string> to = new List<string>();

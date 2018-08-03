@@ -151,7 +151,7 @@ namespace EC.Controllers.API
                 DB.user.Add(user);
 
                 var company = DB.company.FirstOrDefault(x => x.id == curUser.company_id);
-                EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
+                EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
                 EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, HttpContext.Current.Request.Url.AbsoluteUri.ToLower());
                 eb.NewMediator(
                     $"{curUser.first_nm} {curUser.last_nm}", 

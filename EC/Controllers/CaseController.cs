@@ -173,7 +173,7 @@ namespace EC.Controllers
                             to.Add(_user.email.Trim());
                             ///     bcc.Add("timur160@hotmail.com");
 
-                            EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
+                            EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
                             EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
                             eb.NewMessage(_user.first_nm, _user.last_nm, rm._report.display_name);
                             string body = eb.Body;
@@ -290,7 +290,7 @@ namespace EC.Controllers
                             to.Add(_user.email.Trim());
                             ///     bcc.Add("timur160@hotmail.com");
 
-                            EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
+                            EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
                             EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
                             eb.NewMessage(_user.first_nm, _user.last_nm, rm._report.display_name);
                             string body = eb.Body;
@@ -311,7 +311,7 @@ namespace EC.Controllers
                         to.Add(_reporter.email.Trim());
                         ///     bcc.Add("timur160@hotmail.com");
 
-                        EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
+                        EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
                         EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
                         eb.NewMessage(_reporter.first_nm, _reporter.last_nm, rm._report.display_name);
                         string body = eb.Body;
@@ -694,7 +694,7 @@ namespace EC.Controllers
                 ///     bcc.Add("timur160@hotmail.com");
                 ReportModel _rm = new ReportModel(report_id);
 
-                EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
+                EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
                 EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
                 eb.MediatorAssigned(_um._user.first_nm, _um._user.last_nm, user.first_nm, user.last_nm, _rm._report.display_name);
                 string body = eb.Body;
@@ -825,7 +825,7 @@ namespace EC.Controllers
                 List<string> cc = new List<string>();
                 List<string> bcc = new List<string>();
 
-                EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
+                EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
                 EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
                 string body = "";
                 #endregion
@@ -990,7 +990,7 @@ namespace EC.Controllers
                 List<string> cc = new List<string>();
                 List<string> bcc = new List<string>();
 
-                EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
+                EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
                 EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
                 string body = "";
                 #endregion
@@ -1139,7 +1139,7 @@ namespace EC.Controllers
                 List<string> cc = new List<string>();
                 List<string> bcc = new List<string>();
 
-                EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
+                EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
                 EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
                 string body = "";
                 #endregion

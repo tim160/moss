@@ -172,7 +172,7 @@ namespace EC.Controllers
                                 to.Add(email.Trim());
                                 ///     bcc.Add("timur160@hotmail.com");
 
-                                EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
+                                EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
                                 EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
                                 eb.ForgetPasswordNew(Request.Url.AbsoluteUri.ToLower(), email, password_token);
                                 string body = eb.Body;
@@ -263,7 +263,7 @@ namespace EC.Controllers
                 var reports = db.report.Where(x => x.reported_dt >= dt.Date).ToList();
                 ReportModel rm = new ReportModel();
                 string email = "";
-                Business.Actions.Email.EmailManagement em = new Business.Actions.Email.EmailManagement();
+                Business.Actions.Email.EmailManagement em = new Business.Actions.Email.EmailManagement(is_cc);
                 Business.Actions.Email.EmailBody eb = new Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
 
                 foreach (var _report in reports)

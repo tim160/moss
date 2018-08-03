@@ -246,7 +246,7 @@ namespace EC.Controllers
                         to.Add(_user.email.Trim());
                         ///     bcc.Add("timur160@hotmail.com");
 
-                        EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
+                        EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
                         EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
                         eb.NewMessage(_user.first_nm, _user.last_nm, rm._report.display_name);
                         string body = eb.Body;
