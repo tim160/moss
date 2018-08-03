@@ -147,6 +147,14 @@ namespace EC.Models
                 return null;
             }
 
+            company _company = db.company.FirstOrDefault(item => item.id == _user.company_id);
+
+            if (_company == null || (_company.status_id != 2 && _company.status_id != 3 && _user.role_id != 8))
+            {
+                //  company is not active or pending, means = inactive
+                return null;
+            }
+
             if (_user != null)
             {
                 ui.SetUserDetails(_user.id, _user.password, _user.login_nm);

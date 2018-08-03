@@ -12,7 +12,6 @@ using EC.Utils.Auth;
 using EC.Models;
 using EC.Controllers.Utils;
 using EC.Controllers.utils;
-using Resources = EC.Localization.Resources;
 using log4net;
 using EC.Constants;
 using EC.Common.Util;

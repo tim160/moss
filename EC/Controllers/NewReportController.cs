@@ -9,7 +9,6 @@ using EC.Models.Database;
 using EC.Models.ECModel;
 using EC.Controllers.ViewModel;
 using EC.Localization;
-using Resources = EC.Localization.Resources;
 using EC.Constants;
 using EC.Model.Impl;
 using EC.Core.Common;

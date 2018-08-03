@@ -1204,11 +1204,11 @@ namespace EC.Controllers
             else
                 amount = 1000;
 
-            if (code.Trim().ToLower() == "ec")
+            if ((code.Length == 5) && (code.Trim().ToLower().Contains("ec43") || code.Trim().ToLower().Contains("cc29")))
             {
                 amount = 0;
             }
-            if (code.Trim().ToLower() == "ec1")
+            if (code.Trim().ToLower() == "flat")
             {
                 amount = 1300;
             }

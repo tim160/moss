@@ -1277,11 +1277,11 @@ namespace EC.Models
                     newUser = adv.user.Add(newUser);
                     int t = 0;
                     t = adv.SaveChanges();
-                    string reporter_login = GenerateReporterLogin(newUser.id);
+                    string reporter_login = GenerateReporterLogin();
 
                     while (glb.isLoginInUse(reporter_login))
                     {
-                        reporter_login = GenerateReporterLogin(newUser.id);
+                        reporter_login = GenerateReporterLogin();
                     }
 
                     newUser.login_nm = reporter_login;
@@ -2490,13 +2490,13 @@ namespace EC.Models
                 letter = "UNK";
             if (company_id == 2)
                 letter = "STA";
-            int number = 22000 + report_id;
+            int number = 2000 + report_id;
             string case_number = number.ToString() + "-" + letter + "-" + company_id.ToString();
 
             return case_number;
         }
 
-        private string GenerateReporterLogin(int report_id)
+        private string GenerateReporterLogin()
         {
             Random rd = new Random();
             string reporter_login = "";
@@ -2509,7 +2509,7 @@ namespace EC.Models
 
             //     ?while ((reporter_login.Length + report_id.ToString().Length) < 6);
 
-            return "EC" + reporter_login;
+            return "RE" + reporter_login;
         }
 
         private int GetNextColor(int company_id, int report_id)

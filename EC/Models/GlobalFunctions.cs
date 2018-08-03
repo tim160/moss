@@ -42,9 +42,19 @@ public class GlobalFunctions
 
     public string GeneretedPassword()
     {
-        string password = System.Web.Security.Membership.GeneratePassword(PasswordLength, PasswordExtraSubmolsCount);
-        password = StringUtil.ReplaceForUI(password);
-        return password;
+
+        string newPassword = System.Web.Security.Membership.GeneratePassword(PasswordLength, PasswordExtraSubmolsCount);
+
+        Random rnd = new Random();
+
+        newPassword = Regex.Replace(newPassword, @"[^a-zA-Z0-9]", m => rnd.Next(0, 10).ToString());
+        newPassword = StringUtil.ReplaceForUI(newPassword);
+
+
+
+        ///string password = System.Web.Security.Membership.GeneratePassword(PasswordLength, PasswordExtraSubmolsCount);
+       //// password = StringUtil.ReplaceForUI(password);
+        return newPassword;
     }
 
     #endregion
