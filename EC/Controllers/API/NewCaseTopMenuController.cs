@@ -42,7 +42,7 @@ namespace EC.Controllers.API
             var log = DB.report_log.OrderByDescending(x => x.id).FirstOrDefault(x => x.report_id == reportId && (x.action_id == 16 || (x.action_id == 24)));
             var action = log == null ? null : DB.action.FirstOrDefault(x => x.id == log.action_id);
             var loguser = log == null ? null : DB.user.FirstOrDefault(x => x.id == log.user_id);
-            var lifeThreatingInfo = log == null ? "" : $"{action.description_en} at {log.created_dt.ToString()} by {loguser.first_nm} {loguser.last_nm}";
+            var lifeThreatingInfo = (log == null || action == null || loguser == null) ? "" : $"{action.description_en} at {log.created_dt.ToString()} by {loguser.first_nm} {loguser.last_nm}";
 
             return new {
                 LifeThreating = DB.report.FirstOrDefault(x => x.id == reportId).cc_is_life_threating,
@@ -74,8 +74,8 @@ namespace EC.Controllers.API
                 glb.UpdateReportLog(user.id, model.IsLifeThreating ? 16 : 24, report.id, "", null, "");
 
                 CompanyModel cm = new CompanyModel(report.company_id);
-                glb.CampusSecurityAlertEmail(report, Request.RequestUri, DB, cm._company.cc_campus_alert_manager_email);
-                glb.CampusSecurityAlertEmail(report, Request.RequestUri, DB, cm._company.cc_daily_crime_log_manager_email);
+ ////////               glb.CampusSecurityAlertEmail(report, Request.RequestUri, DB, cm._company.cc_campus_alert_manager_email);
+ ////////               glb.CampusSecurityAlertEmail(report, Request.RequestUri, DB, cm._company.cc_daily_crime_log_manager_email);
             }
 
             return new
