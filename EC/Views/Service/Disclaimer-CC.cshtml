@@ -80,7 +80,7 @@
 							<div class="inputCheckbox__indicator"></div>
 						</label>
 						<div class="loginTextFormLinks">
-							<a href="@Url.Action("New", "Report", new { companyCode = this.Request.Params["companyCode"] })" id="btnStart" class="btn loginTextFormLinks__startBtn btn-cc m_t_20 not-active">
+							<a href="@Url.Action("New", "Report", new { companyCode = ViewBag.CID })" id="btnStart" class="btn loginTextFormLinks__startBtn btn-cc m_t_20 not-active">
 								Start
 							</a>
 						</div><!-- /.loginTextFormLinks -->
@@ -136,16 +136,16 @@
 				</div><!-- /.footer__copyright -->
 				<div class="footer__navLinks">
 					<nav class="footer__navLinks-nav">
-						<li class="footer__navLinks-li">
-							<a href="#" class="footer__navLinks-a">
-								Privacy Policy
-							</a>
-						</li><!-- /.footer__navLinks-li -->
-						<li class="footer__navLinks-li">
-							<a href="#" class="footer__navLinks-a">
-								Terms of Use
-							</a>
-						</li><!-- /.footer__navLinks-li -->
+                        <li class="footer__navLinks-li">
+                            <a href="http://campusconfidential.com/PrivacyStatement.html" class="footer__navLinks-a">
+                                Privacy Policy
+                            </a>
+                        </li><!-- /.footer__navLinks-li -->
+                        <li class="footer__navLinks-li">
+                            <a href="http://campusconfidential.com/TermsOfService.html" class="footer__navLinks-a">
+                                Terms of Use
+                            </a>
+                        </li><!-- /.footer__navLinks-li -->
 					</nav><!-- /.footer__navLinks-nav -->
 				</div><!-- /.footer__navLinks -->
 			</div><!-- /.footer -->
@@ -153,7 +153,7 @@
 	</footer><!-- /.footer -->
 
 </div><!-- /.general-container -->
-
+@Html.Partial("~/Views/Shared/HelpPartial.cshtml", new ViewDataDictionary { { "is_reporter", true } })
 <script>
     $(function () {
         $('#chkStart').on('change', function () {

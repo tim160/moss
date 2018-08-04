@@ -14,18 +14,28 @@
     int company_id = um._user.company_id;
 
     List<PosterItem> allPosters = ViewBag.all_posters;
+
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
+
 }
 
 
 <div id="EmployeeAwarenessBlock" class="blockSettings" ng-controller="EmployeeAwarenessController" ng-cloak>
     <div class="mainContent">
         <div class="leftContent">
-            <div class="blockMenu posterCategoryNames">
-                <div class="title">@GlobalRes.Industry</div>
-                <div ng-repeat="category in categories">
-                    <div class="itemSelect" ng-class="{'active' : category.Selected}" ng-click="category.Selected = !category.Selected" value="{{category.Id}}">{{categoryName(category)}}</div>
+            @if (!is_cc.Value)
+            {
+                <div class="blockMenu posterCategoryNames">
+                    <div class="title">@GlobalRes.Industry</div>
+                    <div ng-repeat="category in categories">
+                        <div class="itemSelect" ng-class="{'active' : category.Selected}" ng-click="category.Selected = !category.Selected" value="{{category.Id}}">{{categoryName(category)}}</div>
+                    </div>
                 </div>
-            </div>
+            }
             <div class="blockMenu posterMessage" ng-show="false">
                 <div class="title">@GlobalRes.Message</div>
                 <div ng-repeat="message in messages">

@@ -66,10 +66,11 @@
                     <div class="loginTextForm">
                         <label class="loginForm__input">
                             School, college or university name
-                            <input type="text" />
+                            <input id="specialInput" type="text" name="text" required="" autocomplete="off">
+                            <input id="companyCode" type="hidden" value="false" />
                         </label>
                         <div class="loginTextFormLinks">
-                            <a href="#" class="btn loginTextFormLinks__startBtn btn-cc m_t_20">
+                            <a href="#" id="startBtn"  class="btn loginTextFormLinks__startBtn btn-cc m_t_20">
                                 Start
                             </a>
                         </div><!-- /.loginTextFormLinks -->
@@ -89,12 +90,12 @@
                 <div class="footer__navLinks">
                     <nav class="footer__navLinks-nav">
                         <li class="footer__navLinks-li">
-                            <a href="#" class="footer__navLinks-a">
+                            <a href="http://campusconfidential.com/PrivacyStatement.html" class="footer__navLinks-a">
                                 Privacy Policy
                             </a>
                         </li><!-- /.footer__navLinks-li -->
                         <li class="footer__navLinks-li">
-                            <a href="#" class="footer__navLinks-a">
+                            <a href="http://campusconfidential.com/TermsOfService.html" class="footer__navLinks-a">
                                 Terms of Use
                             </a>
                         </li><!-- /.footer__navLinks-li -->
@@ -105,5 +106,38 @@
     </footer><!-- /.footer -->
 
 </div><!-- /.general-container -->
+@Html.Partial("~/Views/Shared/HelpPartial.cshtml", new ViewDataDictionary { { "is_reporter", true } })
+<script>
+    $(function () {
+        $("#specialInput").autocomplete({
+            minLength: 3,
+            source: '@Url.Action("SeekCompany", "Index")',
+            select: function (event, ui) {
+                $('#specialInput').val(ui.item.label);
+                $('#companyCode').val(ui.item.value);
+                return false;
+            }
+        });
 
+        $("#startBtn").on('click', function () {
+            var companyCode = $('#companyCode').val();
+            if (companyCode != 'false') {
+                window.location.href = "/Service/Disclaimer?companyCode=" + companyCode;
+            } else {
+                TakeCompany();
+            }
+        });
+    });
 
+    function TakeCompany(selname) {
+        $.ajax({
+            method: 'POST',
+            url: '@Url.Action("SeekCompany", "Index")',
+            data: { term: $('#specialInput').val() }
+        }).done(function (data) {
+            if (data.length > 0) {
+                window.location.href = "/Service/Disclaimer?companyCode=" + data[0].value;
+            }
+        });
+    }
+</script>

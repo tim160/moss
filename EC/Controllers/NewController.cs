@@ -660,7 +660,7 @@ namespace EC.Controllers
             }
             #endregion
 
-            #region Relationship
+            #region Relationship // Reporter Types
             if (company_id != 0)
             {
                 List<string> list_relationship = db.relationship.Select(item => item.relationship_en).ToList();

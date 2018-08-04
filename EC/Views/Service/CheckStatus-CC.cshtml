@@ -5,6 +5,11 @@
     Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
 }
 
+<style>
+    .errorLogin.loginForm__input:last-child {
+        border: 2px solid red;
+    }
+</style>
 <div class="general-container login">
 
     <header class="header header-cc">
@@ -65,7 +70,7 @@
                             Want to file a new report?
                         </a>
                     </div><!-- /.loginContentBlock -->
-                    @using (Html.BeginForm("Login", "Service", FormMethod.Post, new { }))
+                    @using (Html.BeginForm("CheckStatus", "Service", FormMethod.Post, new { }))
                     {
                         if (this.Request.HttpMethod == "POST")
                         {
@@ -78,7 +83,7 @@
                                 Login
                                 @Html.TextBoxFor(x => x.Login)
                             </label>
-                            <label class="loginForm__input">
+                            <label class="loginForm__input @(ViewData.ModelState.ContainsKey("PasswordError") ? "errorLogin" : "")">
                                 Password
                                 @Html.PasswordFor(x => x.Password, new { @class = ViewContext.ViewData.ModelState.ContainsKey("PasswordError") ? "error" : "" })
                             </label>
@@ -107,12 +112,12 @@
                 <div class="footer__navLinks">
                     <nav class="footer__navLinks-nav">
                         <li class="footer__navLinks-li">
-                            <a href="#" class="footer__navLinks-a">
+                            <a href="http://campusconfidential.com/PrivacyStatement.html" class="footer__navLinks-a">
                                 Privacy Policy
                             </a>
                         </li><!-- /.footer__navLinks-li -->
                         <li class="footer__navLinks-li">
-                            <a href="#" class="footer__navLinks-a">
+                            <a href="http://campusconfidential.com/TermsOfService.html" class="footer__navLinks-a">
                                 Terms of Use
                             </a>
                         </li><!-- /.footer__navLinks-li -->
@@ -123,3 +128,4 @@
     </footer><!-- /.footer -->
 
 </div><!-- /.general-container -->
+@Html.Partial("~/Views/Shared/HelpPartial.cshtml", new ViewDataDictionary { { "is_reporter", true } })
