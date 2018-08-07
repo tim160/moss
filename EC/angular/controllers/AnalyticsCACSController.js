@@ -50,6 +50,14 @@
                     return d.y;
                 },
                 useInteractiveGuideline: true,
+                dispatch: {
+                    renderEnd: function(){
+                        var wa = d3.select('.nv-legendWrap')[0][0].parentNode.getBBox().width;
+                        var wl = d3.select('.nv-legendWrap')[0][0].getBBox().width;
+                        var x = (wa - wl) / 2;
+                        d3.select('.nv-legendWrap').attr('transform', 'translate(-' + x + ',-30)');
+                    },
+                },
                 xAxis: {
                     axisLabel: 'Years'
                 },
