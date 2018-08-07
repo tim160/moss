@@ -838,6 +838,7 @@ namespace EC.Controllers
 
             ViewBag.is_valid_mediator = is_valid_mediator;
             ViewBag.is_cc = is_cc;
+            ViewBag.LocationExtendeds = new SelectList(db.location_cc_extended.OrderBy(x => x.description_en).ToList(), "id", "description_en");
 
             int id;
             if (int.TryParse(locationId, out id))

@@ -374,6 +374,7 @@
                     init_location_cc_extended();*/
                     $('#tableLocation').append(html);
                     closeIcon('Location');
+                    init_location_cc_extended();
                 }, 'Location');
             } else {
                 $('.addNewLocation').css('border-color', 'red');
