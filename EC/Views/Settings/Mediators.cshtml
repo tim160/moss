@@ -155,7 +155,7 @@
             </div>
         </div>
     </div><!--contentSettings-->
-    @if (is_cc.Value == false && false)
+    @if (is_cc.HasValue && is_cc.Value)
     {
         using (Html.BeginForm(null, null, FormMethod.Post, new { id = "AlertDailyCrimeLogManagers" }))
         {

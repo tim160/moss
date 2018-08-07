@@ -71,16 +71,36 @@ namespace EC.Controllers.API
                 report.cc_is_life_threating = model.IsLifeThreating;
                 DB.SaveChanges();
 
-                glb.UpdateReportLog(user.id, model.IsLifeThreating ? 16 : 24, report.id, "", null, "");
+                glb.UpdateReportLog(user.id, model.IsLifeThreating ? 16 : 26, report.id, "", null, "");
 
                 CompanyModel cm = new CompanyModel(report.company_id);
+
+                string platform_manager_email = "";
+                var platformManager = cm.AllMediators(cm.ID, true, null).FirstOrDefault(x => x.role_id == 5);
+                if ((platformManager != null) && (!String.IsNullOrEmpty(platformManager.email)))
+                    platform_manager_email = platformManager.email;
+                bool sent_email = false;
+
                 if (!String.IsNullOrEmpty(cm._company.cc_campus_alert_manager_email))
                 {
                     glb.CampusSecurityAlertEmail(report, Request.RequestUri, DB, cm._company.cc_campus_alert_manager_email);
+                    glb.UpdateReportLog(user.id, 24, report.id, "", null, "");
                 }
+                else if (platform_manager_email.Length > 0)
+                {
+                    glb.CampusSecurityAlertEmail(report, Request.RequestUri, DB, platform_manager_email);
+                    sent_email = true;
+                    glb.UpdateReportLog(user.id, 24, report.id, "", null, "");
+                }
+
                 if (!String.IsNullOrEmpty(cm._company.cc_daily_crime_log_manager_email))
                 {
                     glb.CampusSecurityAlertEmail(report, Request.RequestUri, DB, cm._company.cc_daily_crime_log_manager_email);
+                }
+                else if (platform_manager_email.Length > 0 && !sent_email)
+                {
+                    glb.CampusSecurityAlertEmail(report, Request.RequestUri, DB, platform_manager_email);
+                    glb.UpdateReportLog(user.id, 24, report.id, "", null, "");
                 }
             }
 

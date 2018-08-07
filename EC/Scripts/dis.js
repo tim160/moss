@@ -221,6 +221,9 @@
                     },
                     axisLabelDistance: -10
                 },
+                legend: {
+                    align: false
+                },
                 callback: function (chart) {
                 }
             },

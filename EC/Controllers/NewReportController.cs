@@ -370,25 +370,38 @@ namespace EC.Controllers.ViewModel
                 if (lifeThreat)
                 {
                     glb.UpdateReportLog(user_id, 16, report_id, "", null, "");
-                    if ((String.IsNullOrEmpty(cm._company.cc_campus_alert_manager_email)) && (String.IsNullOrEmpty(cm._company.cc_daily_crime_log_manager_email)))
-                    {
-                        var platformManager = cm.AllMediators(cm.ID, true, null).FirstOrDefault(x => x.role_id == 5);
-                        if ((platformManager != null) && (!String.IsNullOrEmpty(platformManager.email)))
-                        {
-                            glb.CampusSecurityAlertEmail(rm._report, Request.Url, db, platformManager.email);
-                        }
-                    }
-                    else
-                    { 
+
+
+                    string platform_manager_email = "";
+                    var platformManager = cm.AllMediators(cm.ID, true, null).FirstOrDefault(x => x.role_id == 5);
+                    if ((platformManager != null) && (!String.IsNullOrEmpty(platformManager.email)))
+                        platform_manager_email = platformManager.email;
+                    bool sent_email = false;
+
+
+                   
                         if (!String.IsNullOrEmpty(cm._company.cc_campus_alert_manager_email))
                         {
                             glb.CampusSecurityAlertEmail(rm._report, Request.Url, db, cm._company.cc_campus_alert_manager_email);
+                            glb.UpdateReportLog(user_id, 24, report_id, "", null, "");
                         }
-                        if (!String.IsNullOrEmpty(cm._company.cc_daily_crime_log_manager_email))
+                        else if(platform_manager_email.Length > 0)
                         {
-                            glb.CampusSecurityAlertEmail(rm._report, Request.Url, db, cm._company.cc_daily_crime_log_manager_email);
+                            glb.CampusSecurityAlertEmail(rm._report, Request.Url, db, platformManager.email);
+                            sent_email = true;
+                            glb.UpdateReportLog(user_id, 24, report_id, "", null, "");
                         }
+
+                    if (!String.IsNullOrEmpty(cm._company.cc_daily_crime_log_manager_email))
+                    {
+                        glb.CampusSecurityAlertEmail(rm._report, Request.Url, db, cm._company.cc_daily_crime_log_manager_email);
                     }
+                    else if (platform_manager_email.Length > 0 && !sent_email)
+                    {
+                        glb.CampusSecurityAlertEmail(rm._report, Request.Url, db, platform_manager_email);
+                        glb.UpdateReportLog(user_id, 24, report_id, "", null, "");
+                    }
+
                 }
             }
             glb.UpdateReportLog(user_id, 21, report_id, App_LocalResources.GlobalRes._Started, null, "");
