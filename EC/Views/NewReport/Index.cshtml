@@ -29,6 +29,7 @@
     ReportModel rm = new ReportModel(report_id);
     List<report_non_mediator_involved> _involved = rm.GetWitnesses();
     UserModel um = new UserModel(user_id);
+    var cm = new CompanyModel(rm._report.company_id);
 
     bool is_spam = ((rm._investigation_status != 1) && (rm._investigation_status != 2));
     GlobalFunctions glb = new GlobalFunctions();
@@ -310,7 +311,14 @@
                                 <span class="radioTitle">No</span>
                             </label>
                             <p class="someAlert" id="PAnonymous">
-                                A campus alert will be sent to the designated Campus Security Authority for Purposes of the Clery Act.
+                                @if ((String.IsNullOrEmpty(cm._company.cc_campus_alert_manager_email)) && (String.IsNullOrEmpty(cm._company.cc_daily_crime_log_manager_email)))
+                                {
+                                    <span>Warning. A contact has not been entered to receive Campus Alerts. Please add the contact details before accepting the case and adding the Campus Alert.</span>
+                                }
+                                else
+                                {
+                                    <span>A campus alert will be sent to the designated Campus Security Authority for Purposes of the Clery Act.</span>
+                                }                                
                             </p>
                         </div>
                     }

@@ -74,8 +74,14 @@ namespace EC.Controllers.API
                 glb.UpdateReportLog(user.id, model.IsLifeThreating ? 16 : 24, report.id, "", null, "");
 
                 CompanyModel cm = new CompanyModel(report.company_id);
- ////////               glb.CampusSecurityAlertEmail(report, Request.RequestUri, DB, cm._company.cc_campus_alert_manager_email);
- ////////               glb.CampusSecurityAlertEmail(report, Request.RequestUri, DB, cm._company.cc_daily_crime_log_manager_email);
+                if (!String.IsNullOrEmpty(cm._company.cc_campus_alert_manager_email))
+                {
+                    glb.CampusSecurityAlertEmail(report, Request.RequestUri, DB, cm._company.cc_campus_alert_manager_email);
+                }
+                if (!String.IsNullOrEmpty(cm._company.cc_daily_crime_log_manager_email))
+                {
+                    glb.CampusSecurityAlertEmail(report, Request.RequestUri, DB, cm._company.cc_daily_crime_log_manager_email);
+                }
             }
 
             return new
