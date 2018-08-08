@@ -217,7 +217,7 @@
                 yAxis: {
                     axisLabel: '',
                     tickFormat: function (d) {
-                        return d3.format('.02f')(d);
+                        return d3.format('d')(d);
                     },
                     axisLabelDistance: -10
                 },
