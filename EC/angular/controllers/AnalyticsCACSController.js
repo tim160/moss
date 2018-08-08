@@ -66,13 +66,15 @@
                     tickFormat: function (d) {
                         return d3.format('d')(d);
                     },
-                    axisLabelDistance: -10
+                    axisLabelDistance: -10,
+                    domain: [0, 1000],
                 },
                 legend: {
                     align: false
                 },
                 callback: function (chart) {
-                }
+                },
+                forceY: [0, 1],
             },
             title: {
                 enable: false,
