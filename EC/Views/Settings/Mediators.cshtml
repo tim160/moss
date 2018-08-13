@@ -155,23 +155,23 @@
             </div>
         </div>
     </div><!--contentSettings-->
-    @if (is_cc.HasValue && is_cc.Value && false)
+    @if (is_cc.HasValue && is_cc.Value)
     {
         using (Html.BeginForm(null, null, FormMethod.Post, new { id = "AlertDailyCrimeLogManagers" }))
         {
             @Html.HiddenFor(x => company.id)
 
             <div class="contentSettings secondHeader oldstyle">
-                <div class="row">
+                @*<div class="row">
                     <p class="title">Campus Alert and Daily Crime Log managers info</p>
-                </div><!-- /.row -->
+                </div><!-- /.row -->*@
                 <div class="row">
                     <div class="col-4">
                         <div class="p-h5">Campus Alert Manager</div><!-- /.p-h5 -->
                     </div><!-- /.col-4 -->
                     <div class="col-4">
                         <div class="row">
-                            <label for="CampusAlertManager_Name" class="lableText">
+                            <label for="CampusAlertManager_Name" class="lableText ">
                                 Name
                                 @Html.TextBoxFor(x => company.cc_campus_alert_manager_first_name, new { placeholder = "", @class = "lableText__input", type = "text" })
                             </label>
@@ -198,7 +198,7 @@
                         </div><!-- /.row -->
                     </div><!-- /.col-4 -->
                 </div><!-- /.row -->
-                <div class="row">
+                <div class="row" style="display: none;">
                     <div class="col-4">
                         <div class="p-h5">Daily Crime Log Manager</div><!-- /.p-h5 -->
                     </div><!-- /.col-4 -->
@@ -296,10 +296,10 @@
     $(function () {
 
         $('#AlertDailyCrimeLogManagers').submit(function () {
-            $(this).find('input').removeClass('err');
+            $(this).find('input').removeClass('errorInput');
             var empty = $(this).find('input').filter(function () {
                 if (this.value === "") {
-                    $(this).addClass('err');
+                    $(this).addClass('errorInput');
                     return true;
                 }
                 return false;

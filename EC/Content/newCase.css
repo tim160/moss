@@ -4026,3 +4026,7 @@ body .bigBlock  .blockLinesItem p{
 #EmployeeAwarenessBlock .title{
 	font-family: 'OpenSans-semibold', arial, verdana, sans-serif !important;
 }
+
+.errorInput:last-child{
+	border: 2px solid red;
+}
