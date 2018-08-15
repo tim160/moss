@@ -44,9 +44,16 @@
             <div class="select-container case-modal__selectContainer ddlReasonClosure">
                 <select id="ddlReasonClosure" class="case-modal__selectOption">
                     <option value="0" disabled selected>Select an option...</option>
-                    @foreach (case_closure_reason _reason in glb.GetCaseClosureReasonsWithStatus())
+                    @foreach (case_closure_reason _reason in glb.GetCaseClosureReasonsWithStatus(is_cc ?? false))
                     {
-                        <option value=@_reason.id>@_reason.case_closure_reason_en</option>
+                        if (_reason.id == 6)
+                        {
+                            <option class="UnfoundedReport" value=@_reason.id>@_reason.case_closure_reason_en</option>
+                        }
+                        else
+                        {
+                            <option value=@_reason.id>@_reason.case_closure_reason_en</option>
+                        }
                     }
                 </select>
             </div>

@@ -667,6 +667,10 @@
                 }
             });
 
+            $('li.UnfoundedReport').hide();
+            if (data.report_cc_crime.cc_is_clear_act_crime === 'true') {
+                $('li.UnfoundedReport').show();
+            }
             $scope.model = data;
         };
 

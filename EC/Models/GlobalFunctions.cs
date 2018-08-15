@@ -60,11 +60,21 @@ public class GlobalFunctions
     #endregion
 
     //Used in EC\Views\Shared\EditorTemplates\CreateTaskModal.cshtml 
-    public List<case_closure_reason> GetCaseClosureReasonsWithStatus()
+    public List<case_closure_reason> GetCaseClosureReasonsWithStatus(bool isCC)
     {
         //[company_nm]
         //return (from comp in db.company where comp.status_id == 2 select comp.company_nm, comp.id).ToList();
-        return db.case_closure_reason.Where(item => item.status_id == 2).ToList();
+        var r = db.case_closure_reason.Where(item => item.status_id == 2).ToList();
+        var other = r.FirstOrDefault(x => x.id == 5);
+        r.Remove(other);
+        r.Add(other);
+        var unfounded = r.FirstOrDefault(x => x.id == 6);
+        if (!isCC)
+        {
+            r.Remove(unfounded);
+        }
+
+        return r;
     }
 
     //Used in 
