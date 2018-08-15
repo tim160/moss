@@ -53,24 +53,44 @@ namespace EC.Controllers.API
                             values = g.GroupBy(x => x).Select(x => new
                             {
                                 x = x.Key,
-                                y = DB.report.Join(DB.report_cc_crime.Where(rcc => rcc.cc_crime_statistics_category_id == model.Category || model.Category == 0), r => r.id, c => c.report_id, (r, c) => new { report = r, crime = c })
+                                y = DB.report.Where(r => r.company_id == user.company_id).Join(DB.report_cc_crime.Where(rcc => rcc.cc_crime_statistics_category_id == model.Category || model.Category == 0), r => r.id, c => c.report_id, (r, c) => new { report = r, crime = c })
                                .Count(z => 
                                     z.report.reported_dt.Year == x.Key 
                                     & z.crime.cc_crime_statistics_location_id == g.Key.crime_location.id
                                     & z.report.company_id == user.company_id
-                                    )
+                                    ),
                             })
                         })
                      .Where(x => x.key != null)
                      .ToList();
 
+            var y = DateTime.Now.AddYears(-2).Date;
+            var totals = (from r in DB.report.Where(x => x.company_id == user.company_id && x.reported_dt >= y)
+                         let s = DB.report_investigation_status.OrderByDescending(x => x.created_date).Where(x => r.id == x.report_id).FirstOrDefault()
+                         let c = DB.report_cc_crime.FirstOrDefault(x => r.id == x.report_id)
+                         select new
+                         {
+                             r = r,
+                             s = s,
+                             c = c,
+                         })
+                         .Where(x => x.s != null && x.s.investigation_status_id == 9 && x.c != null & x.c.cc_is_clear_act_crime == true)
+                         .ToList();
 
             return new {
                 cc_crime_statistics_categories = categories,
 
                 report_cc_crime = data,
 
-                totals = data.SelectMany(x => x.values).GroupBy(x => x.x).Select(z => new { year = z.Key, count = z.Sum(x => x.y) }).OrderBy(x => x.year)
+                //totals = data.SelectMany(x => x.values).GroupBy(x => x.x).Select(z => new { year = z.Key, count = z.Sum(x => x.y) }).OrderBy(x => x.year),
+
+                totals = (from year in new[] { DateTime.Now.Year - 2, DateTime.Now.Year - 1, DateTime.Now.Year }
+                        //from t in totals
+                      select new {
+                          year = year,
+                          total1 = totals.Count(x => x.r.reported_dt.Year == year),
+                          total2 = totals.Count(x => x.r.reported_dt.Year == year & x.s.case_closure_reason_id == 6)
+                      }),
             };
        }
     }

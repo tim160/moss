@@ -98,12 +98,12 @@
             }
         };
 
-        $scope.Total = function (type, id) {
+        $scope.Total = function (type, year) {
             if (type === 1) {
-                return $scope.totals.length <= id ? 0 : $scope.totals[id];
+                return $scope.totals.length <= year ? 0 : $scope.totals[year];
             }
             if (type === 2) {
-                return $scope.totals.length <= id ? 0 : $scope.totals[id];
+                return $scope.totals.length <= year ? 0 : $scope.totals[year];
             }
         };
     }
