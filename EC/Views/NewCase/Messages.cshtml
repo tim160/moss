@@ -100,7 +100,8 @@
                                 <a href="#!" class="navContentMessages-tabContent__a clearfix" ng-click="$parent.activeMessage = message">
                                     <span class="col-1">
                                         <span class="profileImage navContentMessages-tabContent__profileImg">
-                                            <img ng-src="{{message.sender_photo}}" alt="" class="profileImage__img" />
+                                            <img ng-if="message.sender_photo.indexOf('~') == -1" ng-src="{{message.sender_photo}}" alt="" class="profileImage__img" />
+                                            <img ng-if="message.sender_photo.indexOf('~') != -1" ng-src="{{message.sender_photo.substring(1)}}" alt="" class="profileImage__img" />
                                             <span class="profile-status online"></span>
                                         </span>
                                     </span>
