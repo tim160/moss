@@ -93,7 +93,7 @@ namespace EC.Controllers.API
                     glb.UpdateReportLog(user.id, 24, report.id, "", null, "");
                 }
 
-                if (!String.IsNullOrEmpty(cm._company.cc_daily_crime_log_manager_email))
+       /*         if (!String.IsNullOrEmpty(cm._company.cc_daily_crime_log_manager_email))
                 {
                     glb.CampusSecurityAlertEmail(report, Request.RequestUri, DB, cm._company.cc_daily_crime_log_manager_email);
                 }
@@ -101,7 +101,7 @@ namespace EC.Controllers.API
                 {
                     glb.CampusSecurityAlertEmail(report, Request.RequestUri, DB, platform_manager_email);
                     glb.UpdateReportLog(user.id, 24, report.id, "", null, "");
-                }
+                }*/
             }
 
             return new

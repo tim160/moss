@@ -1603,14 +1603,16 @@ public class GlobalFunctions
             to = new List<string>();
             cc = new List<string>();
             bcc = new List<string>();
-
+            string phone = $"{pm.phone}";
+            if(string.IsNullOrEmpty(phone))
+                phone = $"{pm.email}";
             to.Add(email);
 
             eb.CampusSecurityAlert(
                 report.id.ToString(),
                 report.display_name,
                 $"{pm.first_nm} {pm.last_nm}",
-                $"{pm.phone}"
+                phone
                 );
             body = eb.Body;
 

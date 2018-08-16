@@ -392,7 +392,7 @@ namespace EC.Controllers.ViewModel
                             glb.UpdateReportLog(user_id, 24, report_id, "", null, "");
                         }
 
-                    if (!String.IsNullOrEmpty(cm._company.cc_daily_crime_log_manager_email))
+         /*         if (!String.IsNullOrEmpty(cm._company.cc_daily_crime_log_manager_email))
                     {
                         glb.CampusSecurityAlertEmail(rm._report, Request.Url, db, cm._company.cc_daily_crime_log_manager_email);
                     }
@@ -401,7 +401,7 @@ namespace EC.Controllers.ViewModel
                         glb.CampusSecurityAlertEmail(rm._report, Request.Url, db, platform_manager_email);
                         glb.UpdateReportLog(user_id, 24, report_id, "", null, "");
                     }
-
+                    */
                 }
             }
             glb.UpdateReportLog(user_id, 21, report_id, App_LocalResources.GlobalRes._Started, null, "");
