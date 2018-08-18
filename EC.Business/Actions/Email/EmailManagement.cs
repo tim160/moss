@@ -133,7 +133,7 @@ namespace EC.Business.Actions.Email
 
             if (is_cc)
             {
-                m_FromAddress = "campusconfidential@employeeconfidential.com";
+             m_FromAddress = "campusconfidential@employeeconfidential.com";
                 m_Username = "campusconfidential@employeeconfidential.com";
             }
             //m_Server = "smtp.gmail.com";

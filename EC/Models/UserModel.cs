@@ -701,16 +701,28 @@ namespace EC.Models
                 // old function - replaced with the new call below. check if correct
 
                 #endregion
+                /*
+                                if ((_user.role_id == 4) || (_user.role_id == 5) || (_user.role_id == 6) || (_user.role_id == 7))
+                                    all_task_ids = UserTasks(status_id, null, is_user_only).Select(t => t.id).ToList();
 
-                if ((_user.role_id == 4) || (_user.role_id == 5) || (_user.role_id == 6) || (_user.role_id == 7))
-                    all_task_ids = UserTasks(status_id, null, is_user_only).Where(x => x.created_by != _user.id).Select(t => t.id).ToList();
+                                read_task_ids = (db.task_user_read.Where(item => (all_task_ids.Contains(item.task_id) && (item.user_id == ID))).Select(item => item.task_id)).ToList();
 
-                read_task_ids = (db.task_user_read.Where(item => (all_task_ids.Contains(item.task_id) && (item.user_id == ID))).Select(item => item.task_id)).ToList();
+                                //all_message_ids
+                                //   unread_message_ids = all_message_ids.Except(read_message_ids);
+                                unread_task_ids = all_task_ids.Where(id => !read_task_ids.Contains(id)).ToList();
+                                tasks_quantity = unread_task_ids.Count;
+                                */
 
-                //all_message_ids
-                //   unread_message_ids = all_message_ids.Except(read_message_ids);
-                unread_task_ids = all_task_ids.Where(id => !read_task_ids.Contains(id)).ToList();
-                tasks_quantity = unread_task_ids.Count;
+                List<task> tasks = UserTasks(status_id, report_id, is_user_only);
+                List<TaskExtended> list_tsk = new List<TaskExtended>();
+                foreach (task _task in tasks)
+                {
+                    TaskExtended tsk = new TaskExtended(_task.id, this.ID);
+
+                    if (!tsk.IsRead())
+                        tasks_quantity++;
+
+                }
             }
 
             return tasks_quantity;
