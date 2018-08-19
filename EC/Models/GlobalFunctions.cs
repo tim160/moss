@@ -1614,12 +1614,57 @@ public class GlobalFunctions
                 $"{pm.first_nm} {pm.last_nm}",
                 phone
                 );
+
             body = eb.Body;
 
             em.Send(to, cc, EC.App_LocalResources.GlobalRes.CampusSecurityAlert, body, true);
         }
     }
 
+
+    public void CampusSecurityAlertEmail_bkp(report report, Uri uri, ECEntities db, string email, string first_nm, string last_nm)
+    {
+        ////   return;
+        IEmailAddressHelper m_EmailHelper = new EmailAddressHelper();
+        EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(true);
+        EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, uri.AbsoluteUri.ToLower());
+        string body = "";
+        List<string> to = new List<string>();
+        List<string> cc = new List<string>();
+        List<string> bcc = new List<string>();
+
+        var pm = db.user.FirstOrDefault(x => x.role_id == 5 && x.company_id == report.company_id);
+        if ((pm != null) && (email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(email.Trim()))
+        {
+            to = new List<string>();
+            cc = new List<string>();
+            bcc = new List<string>();
+            string phone = $"{pm.phone}";
+            if (string.IsNullOrEmpty(phone))
+                phone = $"{pm.email}";
+            to.Add(email);
+
+            string first_nm_temp = first_nm;
+            string last_nm_temp = last_nm;
+            if (string.IsNullOrEmpty(first_nm_temp) && string.IsNullOrEmpty(last_nm_temp))
+            {
+                first_nm_temp = pm.first_nm;
+                last_nm_temp = pm.last_nm;
+            }
+            eb.CampusSecurityAlert(
+                report.id.ToString(),
+                report.display_name,
+                $"{first_nm_temp} {last_nm_temp}",
+                phone
+                );
+
+
+
+            body = eb.Body;
+
+            em.Send(to, cc, EC.App_LocalResources.GlobalRes.CampusSecurityAlert, body, true);
+        }
+    }
     public string Photo_Path_String(string photo_path, int param, int photo_user_role)
     {
         string base_url = ConfigurationManager.AppSettings["SiteRoot"];
