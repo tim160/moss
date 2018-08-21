@@ -108,15 +108,15 @@
                         @foreach (var item in Model.ReportOwnersUserList())
                         {
                             var um = new UserModel(item.id);
-                            <div class="col-4">
+                            <div class="col-4" style="width: 33.33% !important">
                                 <p>
                                     @item.first_nm @item.last_nm
                                 </p>
                             </div><!-- /.col-4 -->
-                            <div class="col-4">
+                            <div class="col-4" style="width: 33.33% !important">
                                 <p>@um._department_string</p>
                             </div><!-- /.col-4 -->
-                            <div class="col-4">
+                            <div class="col-4" style="width: 33.33% !important">
                                 <p>@item.email</p>
                             </div><!-- /.col-4 -->
                         }
