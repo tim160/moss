@@ -1511,7 +1511,7 @@
             $scope.val_first_nm = !$scope.validate($scope.first_nm);
             $scope.val_last_nm = !$scope.validate($scope.last_nm);
             $scope.val_title_ds = !$scope.validate($scope.title_ds);
-            $scope.val_email = !$scope.validate($scope.email, /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/);
+            $scope.val_email = !$scope.validate($scope.email, /^([a-zA-Z0-9_-]+\.)*[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*\.[a-zA-Z]{2,6}$/);
             $scope.val_departmentId = $scope.departmentId == null || !$scope.validate($scope.departmentId.toString());
             $scope.val_locationId = $scope.locationId == null || !$scope.validate($scope.locationId.toString());
 

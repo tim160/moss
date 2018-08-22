@@ -27,7 +27,7 @@
         var valTitle = $('#title');
 
         var rv_onlyText = /^[a-zA-Zа-яА-Я\. ]+$/;
-        var rv_email = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/;
+        var rv_email = /^([a-zA-Z0-9_-]+\.)*[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*\.[a-zA-Z]{2,6}$/;
         //var rv_tel = /[0-9]{5,20}$/;
 
         valTB_rv(valEmail, rv_email);
