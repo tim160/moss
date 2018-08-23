@@ -51,7 +51,7 @@
                     <div class="secondSemiboldText">or</div>
                         <div class="selectFiles">
                             select files to upload
-                            <input type="file" class="hiddenElement" name="files" multiple="" onchange="this.form.submit();">
+                            <input type="file" class="hiddenElement btn-upload-attach" name="files" multiple="">
                         </div>
                         
                 </div>
@@ -154,6 +154,12 @@
                 error: function (xhr, status, p3, p4) {
                 }
             });
+        });
+
+        $('.btn-upload-attach').on('change', function () {
+            setTimeout(function () {
+                $('#attachmentPage form').submit();
+            }, 500)
         });
     });
 </script>
