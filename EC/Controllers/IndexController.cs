@@ -152,6 +152,7 @@ namespace EC.Controllers
 
         public ActionResult Start()
         {
+            return RedirectToAction("Login", "Service");
             Session.Clear();
 
         
