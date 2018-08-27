@@ -134,7 +134,8 @@ body{
     text-decoration: none;
     color: #92a0a3;
 }
-.headerPos .positionN.active {
+.headerPos .positionN.active,
+.headerPos .positionN.active_сс {
     border-bottom: 4px solid #05B5A2;
 }
 .headerPos .positionN + .polos {
@@ -191,7 +192,7 @@ body{
 }
 .secondaryMenu .status{
     text-align: right;
-    width: 150px;
+    width: initial;
     margin: 30px 20px 0px 0px;
     margin-bottom: 0;
     color: rgb(56,73,77);
