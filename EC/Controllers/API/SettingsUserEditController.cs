@@ -12,6 +12,7 @@ using EC.Models.Database;
 using EC.Constants;
 using EC.Core.Common;
 using EC.App_LocalResources;
+using EC.Utils;
 
 namespace EC.Controllers.API
 {
@@ -125,7 +126,8 @@ namespace EC.Controllers.API
                     user.status_id = user.status_id == 3 ? 2 : user.status_id;
                 }
                 user.login_nm = glb.GenerateLoginName(user.first_nm, user.last_nm);
-                user.password = glb.GeneretedPassword().Trim();
+                var password = glb.GeneretedPassword().Trim();
+                user.password = PasswordUtils.GetHash(password);
                 user.photo_path = "";
                 user.email = model.email.Trim();
                 user.phone = "";
@@ -159,7 +161,7 @@ namespace EC.Controllers.API
                     HttpContext.Current.Request.Url.AbsoluteUri.ToLower(),
                     HttpContext.Current.Request.Url.AbsoluteUri.ToLower(),
                     $"{user.login_nm}",
-                    $"{user.password}");
+                    $"{password}");
                 string body = eb.Body;
                 em.Send(model.email.ToLower(), "You have been added as a Case Administrator", body, true);
             }

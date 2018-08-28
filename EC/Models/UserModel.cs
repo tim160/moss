@@ -141,7 +141,7 @@ namespace EC.Models
             var validate = PasswordUtils.Validate(password, hash);
 
             user _user = db.user.FirstOrDefault(item => item.login_nm.Trim() == login && item.password == hash); //By hash
-            _user = _user ?? db.user.FirstOrDefault(item => item.login_nm.Trim() == login && item.password.Trim() == password); //By password
+            //_user = _user ?? db.user.FirstOrDefault(item => item.login_nm.Trim() == login && item.password.Trim() == password); //By password
 
             //user _user = db.user.FirstOrDefault(item => item.login_nm.Trim() == login && item.password.Trim() == password && item.status_id == 2);
             if (_user == null)

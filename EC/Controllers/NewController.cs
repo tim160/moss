@@ -13,6 +13,7 @@ using log4net;
 using LavaBlast.Util.CreditCards;
 using EC.Common.Util;
 using EC.Localization;
+using EC.Utils;
 
 namespace EC.Controllers
 {
@@ -790,6 +791,7 @@ namespace EC.Controllers
                 _user.status_id = 2;
                 _user.login_nm = login.Trim();
                 _user.password = pass.Trim();
+                _user.password = PasswordUtils.GetHash(_user.password);
                 _user.photo_path = "";
                 _user.email = email.Trim();
                 _user.phone = "";
@@ -989,6 +991,7 @@ namespace EC.Controllers
                 _user.status_id = 2;
                 _user.login_nm = login.Trim();
                 _user.password = pass.Trim();
+                _user.password = PasswordUtils.GetHash(_user.password);
                 _user.photo_path = "";
                 _user.email = email.Trim();
                 _user.phone = "";

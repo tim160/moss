@@ -16,6 +16,7 @@ using Newtonsoft.Json;
 using EC.Common.Interfaces;
 using EC.Core.Common;
 using System.IO;
+using EC.Utils;
 
 namespace EC.Models
 {
@@ -1217,7 +1218,7 @@ namespace EC.Models
             ID = report_id;
         }
 
-        public report AddReport(ReportViewModel model)
+        public report AddReport(ReportViewModel model, out string password)
         {
             try
             {
@@ -1249,6 +1250,7 @@ namespace EC.Models
                     {
                         notification = 3;
                     }
+                    password = glb.GeneretedPassword();
                     user newUser = new user()
                     {
                         company_id = model.currentCompanyId,
@@ -1258,7 +1260,7 @@ namespace EC.Models
                         first_nm = model.userName == null ? "" : model.userName,
                         last_nm = model.userLastName == null ? "" : model.userLastName,
                         login_nm = "",
-                        password = glb.GeneretedPassword(),
+                        password = PasswordUtils.GetHash(password),
                         email = model.userEmail == null ? "" : model.userEmail,
                         preferred_contact_method_id = 2,
                         question_ds = "",
@@ -2352,7 +2354,7 @@ namespace EC.Models
                         {
                             using (ECEntities adv = new ECEntities())
                             {
-                                user.password = password;
+                                user.password = PasswordUtils.GetHash(password);
                                 user.last_update_dt = DateTime.Now;
                                 adv.user.AddOrUpdate(user);
                                 adv.SaveChanges();

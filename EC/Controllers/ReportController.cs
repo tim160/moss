@@ -195,7 +195,8 @@ namespace EC.Controllers
         {
             companyModel.ID = model.currentCompanyId;
             model.Process(Request.Form, Request.Files);
-            var currentReport = reportModel.AddReport(model);
+            string password;
+            var currentReport = reportModel.AddReport(model, out password);
             ViewBag.CaseNumber = currentReport.display_name;//Request.Form["caseNumber"];model.caseNumber
             if (currentReport.user_id > 0)
             {
@@ -204,7 +205,7 @@ namespace EC.Controllers
                 /*model.userName = */
                 ViewBag.Login = user.login_nm;
                 /*model.password = */
-                ViewBag.Password = user.password;
+                ViewBag.Password = password;
                 /*model.userEmail = */
                 ViewBag.Email = user.email;
                 SignIn(user);

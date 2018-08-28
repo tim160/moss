@@ -1,5 +1,6 @@
 ﻿using EC.Controllers.ViewModel;
 using EC.Models.Database;
+using EC.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -626,10 +627,10 @@ namespace EC.Models
                     return "Password and Confirm Password do not match";
                 }
                 user user = db.user.Where(item => item.id == user_id).FirstOrDefault();
-                if (user.password == oldPass)
+                if (user.password == PasswordUtils.GetHash(oldPass))
                 {
                     //try save
-                    user.password = newPass;
+                    user.password = PasswordUtils.GetHash(newPass);
                     db.SaveChanges();
                 }
                 else
