@@ -9,6 +9,7 @@
         'ngSanitize',
         'nvd3',
         'ngFileUpload',
+        'ui.calendar',
 
         'EC',
     ]);

@@ -244,6 +244,8 @@
     <Content Include="angular\controllers\SettingsUserEditController.js" />
     <Content Include="angular\controllers\EmployeeAwarenessPosterController.js" />
     <Content Include="angular\controllers\EmployeeAwarenessController.js" />
+    <Content Include="angular\controllers\TrainerCompanyController.js" />
+    <Content Include="angular\controllers\TrainerController.js" />
     <Content Include="angular\services\AnalyticsRootCauseAnalysisService.js" />
     <Content Include="angular\services\AnalyticsCASService.js" />
     <Content Include="angular\services\NewCaseTopMenuService.js" />
@@ -260,6 +262,7 @@
     <Content Include="angular\services\SettingsDisclaimerService.js" />
     <Content Include="angular\services\SettingsUserEditService.js" />
     <Content Include="angular\services\EmployeeAwarenessService.js" />
+    <Content Include="angular\services\TrainerService.js" />
     <Content Include="App\components\activeHover\activeHover.js" />
     <Content Include="App\components\affix\affix.js" />
     <Content Include="App\components\confirm\confirm.js" />
@@ -1245,6 +1248,8 @@
     <Content Include="Views\Service\Disclaimer.cshtml" />
     <Content Include="Views\Service\Disclaimer-CC.cshtml" />
     <Content Include="Views\Shared\HelpPartial.cshtml" />
+    <Content Include="Views\Trainer\Index.cshtml" />
+    <Content Include="Views\Trainer\Company.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1288,6 +1293,7 @@
     <Compile Include="Controllers\API\SettingsUserEditController.cs" />
     <Compile Include="Controllers\API\EmployeeAwarenessPosterController.cs" />
     <Compile Include="Controllers\API\EmployeeAwarenessController.cs" />
+    <Compile Include="Controllers\API\TrainerController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CaseController.cs" />
@@ -1305,6 +1311,7 @@
     <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\TasksController.cs" />
+    <Compile Include="Controllers\TrainerController.cs" />
     <Compile Include="Controllers\Utils\AuthHelper.cs" />
     <Compile Include="Controllers\Utils\Constatns.cs" />
     <Compile Include="Controllers\IndexController.cs" />
@@ -1618,6 +1625,9 @@
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\time_zone.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\TrainerEvents.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\type.cs">

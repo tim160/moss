@@ -87,6 +87,11 @@ namespace EC.Controllers
                         return RedirectToAction("Index", "ReporterDashboard");
                     }
 
+                    if (user.role_id == ECLevelConstants.level_trainer)
+                    {
+                        return RedirectToAction("Index", "Trainer");
+                    }
+
                     if (returnUrl != null)
                     {
                         return Redirect(returnUrl);

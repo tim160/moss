@@ -1,0 +1,24 @@
+﻿
+@{
+    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+    ViewBag.Title = "Trainer Company";
+}
+
+<link rel="stylesheet" href="~/Libs/fullcalendar/dist/fullcalendar.css" />
+<script type="text/javascript" src="~/Libs/moment/min/moment.min.js"></script>
+<script type="text/javascript" src="~/Libs/fullcalendar/dist/fullcalendar.min.js"></script>
+<script type="text/javascript" src="~/Libs/fullcalendar/dist/gcal.js"></script>
+
+<style>
+    .fc-center h2 {
+        color: black;
+    }
+</style>
+
+<div class="container">
+    <div ng-controller="TrainerCompanyController" ng-cloak>
+        <div id="qqqq" ui-calendar="uiConfig.calendar" ng-model="eventSources" calendar="calendarOne">
+
+        </div>
+    </div>
+</div>
