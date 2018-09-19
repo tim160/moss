@@ -17,23 +17,13 @@
                 }
 
                 $scope.eventSources.splice(0, $scope.eventSources.length);
-                $scope.eventSources.push({
-                    events: data.Events,
-                });
-
-                //$('#fullCalendar').fullCalendar('gotoDate', $scope.period.start);
-                //uiCalendarConfig.calendars.calendarOne.fullCalendar('removeEvents');
-                //uiCalendarConfig.calendars.calendarOne.fullCalendar('refetchEvents');
-                //uiCalendarConfig.calendars.calendarOne.fullCalendar('render');
-                //uiCalendarConfig.calendars.calendarOne.fullCalendar('updateEvents', $scope.eventSources);
-                //uiCalendarConfig.calendars['calendarOne'].fullCalendar('rerenderEvents');
-                //uiCalendarConfig.calendars['calendarOne'].fullCalendar('removeEventSource', $scope.eventSources);
-                //uiCalendarConfig.calendars['calendarOne'].fullCalendar('addEventSource', $scope.eventSources.events);
+                for (var t = 0; t < data.Times.length; t++) {
+                    $scope.eventSources.push(data.Times[t]);
+                };
             });
         };
 
-        $scope.eventSources = [{
-        }];
+        $scope.eventSources = [];
 
         $scope.uiConfig = {
             calendar: {
@@ -51,8 +41,10 @@
                         timeFormat: 'H:mm' //this will return 23:00 time format
                     }
                 },
+                minTime: '00:00:00',
+                maxTime: '24:00:00',
+                slotDuration: '01:00:00',
                 axisFormat: 'HH:mm',
-                //timeFormat: 'HH:mm{ - HH:mm}',
                 selectable: true,
                 select: function (start, end, allDay) {
                     TrainerService.addEvent({ DateFrom: start, DateTo: end }, function (data) {

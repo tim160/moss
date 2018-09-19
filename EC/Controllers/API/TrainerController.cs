@@ -25,6 +25,37 @@ namespace EC.Controllers.API
 
             dateFrom = dateFrom.Date;
             dateTo = dateTo.Date.AddDays(1);
+            var trainers = DB.TrainerTimes
+                .Select(x => x.CreatedByUserId)
+                .Distinct()
+                .ToList();
+
+            var colors = DB.color.OrderBy(x => x.id).Select(x => x.color_code).ToList();
+            while(colors.Count < trainers.Count)
+            {
+                colors.AddRange(colors);
+            }
+
+            var times = DB.user
+                .Where(x => trainers.Contains(x.id))
+                .ToList()
+                .Select((x, idx) => new {
+                    x.id,
+                    x.first_nm,
+                    x.last_nm,
+                    color = $"#{colors[idx]}",
+                    events = DB.TrainerTimes
+                        .Where(z => z.CreatedByUserId == x.id && z.DateFrom >= dateFrom && z.DateTo <= dateTo)
+                        .ToList()
+                        .Select(z => new {
+                            title = $"{x.first_nm} {x.last_nm}",
+                            start = z.DateFrom,
+                            end = z.DateTo,
+                        })
+                    .ToList(),
+                })
+                .ToList();
+            //.ToDictionary(x => x.id);
 
             return new
             {
@@ -36,6 +67,7 @@ namespace EC.Controllers.API
                         end = x.DateTo,
                     })
                     .ToList(),
+                Times = times,
             };
         }
 
@@ -94,25 +126,21 @@ namespace EC.Controllers.API
                 return null;
             }
 
-            var exists = DB.TrainerTimes.Where(x => x.DateFrom < model.DateTo && model.DateFrom < x.DateTo && x.CreatedByUserId == user.id).ToList();
-            //if (exists.Count > DB.user.Count(x => x.role_id == ECLevelConstants.level_trainer))
-            if (exists.Count > 0)
+            for(var i = 0; i < (int)(model.DateTo - model.DateFrom).TotalHours; i++)
             {
-                return new
+                var h = model.DateFrom.AddHours(i);
+                var item = DB.TrainerTimes.FirstOrDefault(x => x.DateFrom == h && x.CreatedByUserId == user.id);
+                if (item == null)
                 {
-                    Result = false,
-                    Code = 1,
-                    Message = $"Already there are event from {exists[0].DateFrom.ToString("yyyy/MM/dd hh:mm:ss")} to {exists[0].DateTo.ToString("yyyy/MM/dd hh:mm:ss")}",
-                };
+                    DB.TrainerTimes.Add(new Models.Database.TrainerTimes
+                    {
+                        CreatedByUserId = user.id,
+                        DateFrom = h,
+                        DateTo = h.AddHours(1),
+                        Description = "",
+                    });
+                }
             }
-
-            DB.TrainerTimes.Add(new Models.Database.TrainerTimes
-            {
-                CreatedByUserId = user.id,
-                DateFrom = model.DateFrom,
-                DateTo = model.DateTo,
-                Description = "",
-            });
             DB.SaveChanges();
 
             return new
@@ -138,8 +166,9 @@ namespace EC.Controllers.API
             {
                 Events = DB.TrainerTimes
                     .Where(x => x.DateFrom >= dateFrom && x.DateTo < dateTo && x.CreatedByUserId == user.id)
+                    .ToList()
                     .Select(x => new {
-                        title = "",
+                        title = $"",
                         start = x.DateFrom,
                         end = x.DateTo,
                         id = x.Id,

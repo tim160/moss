@@ -25,7 +25,7 @@ namespace EC.Controllers
             return View();
         }
 
-        public ActionResult Company()
+        public ActionResult Calendar()
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)

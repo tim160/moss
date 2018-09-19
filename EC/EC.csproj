@@ -1249,7 +1249,7 @@
     <Content Include="Views\Service\Disclaimer-CC.cshtml" />
     <Content Include="Views\Shared\HelpPartial.cshtml" />
     <Content Include="Views\Trainer\Index.cshtml" />
-    <Content Include="Views\Trainer\Company.cshtml" />
+    <Content Include="Views\Trainer\Calendar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

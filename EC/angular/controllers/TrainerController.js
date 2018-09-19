@@ -16,6 +16,7 @@
                     data.Events[i].end = moment(data.Events[i].end).toDate();
                 }
 
+                uiCalendarConfig.calendars.calendarOne.fullCalendar('unselect');
                 $scope.eventSources.splice(0, $scope.eventSources.length);
                 $scope.eventSources.push({
                     events: data.Events,
