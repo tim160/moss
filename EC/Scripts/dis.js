@@ -1564,20 +1564,6 @@
 
     function TrainerCompanyController($scope, $filter, $location, $timeout, TrainerService, uiCalendarConfig) {
 
-        $scope.refresh = function () {
-            TrainerService.get({ DateFrom: $scope.period.start, DateTo: $scope.period.end }, function (data) {
-                for (var i = 0; i < data.Events.length; i++) {
-                    data.Events[i].start = moment(data.Events[i].start).toDate();
-                    data.Events[i].end = moment(data.Events[i].end).toDate();
-                }
-
-                $scope.eventSources.splice(0, $scope.eventSources.length);
-                for (var t = 0; t < data.Times.length; t++) {
-                    $scope.eventSources.push(data.Times[t]);
-                };
-            });
-        };
-
         $scope.eventSources = [];
 
         $scope.uiConfig = {
@@ -1588,7 +1574,6 @@
                 },
                 defaultView: 'agendaWeek',
                 eventClick: function(date, jsEvent, view) {
-                    console.log(date, jsEvent, view);
                 },
                 agenda: 'H:mm',
                 views: {
@@ -1602,12 +1587,16 @@
                 axisFormat: 'HH:mm',
                 selectable: true,
                 select: function (start, end, allDay) {
-                    TrainerService.addEvent({ DateFrom: start, DateTo: end }, function (data) {
-                        $scope.refresh();
-                        if (!data.Result) {
-                            alert(data.Message);
-                        }
-                    });
+                    if (!confirm(' Do you want to book this time for training?')) {
+                        uiCalendarConfig.calendars.calendarOne.fullCalendar('unselect');
+                    } else {
+                        TrainerService.addEvent({ DateFrom: start, DateTo: end }, function (data) {
+                            $scope.refresh();
+                            if (!data.Result) {
+                                alert(data.Message);
+                            }
+                        });
+                    }
                 },
                 viewRender: function(view, element) {
                     $scope.period = {
@@ -1617,7 +1606,41 @@
                     $scope.refresh();
                 },
                 selectHelper: true,
+                eventRender: function (event, element, view) {
+                    if (view.name === 'agendaWeek') {
+                        element.find('.fc-content').prepend('<a href=\"#\" style=\"float: right\" class=\"closeon\">X</span>');
+                        element.find('.closeon').off('click').on('click', function () {
+                            if (confirm('Do you want to cancel this training?')) {
+                                TrainerService.deleteCompanyTime({ Hour: event.start.format('YYYY/MM/DD HH:00:00') }, function (data) {
+                                    if (data.Result) {
+                                        //uiCalendarConfig.calendars.calendarOne.fullCalendar('removeEvents', event._id);
+                                        $scope.refresh();
+                                    } else {
+                                        alert(data.Message);
+                                    }
+                                });
+                            }
+                        });
+                    }
+                },
             },
+        };
+
+        $scope.refresh = function () {
+            TrainerService.get({ DateFrom: $scope.period.start, DateTo: $scope.period.end }, function (data) {
+                uiCalendarConfig.calendars.calendarOne.fullCalendar('unselect');
+
+                $scope.eventSources.splice(0, $scope.eventSources.length);
+                for (var t = 0; t < data.AvailableTimes.length; t++) {
+                    $scope.eventSources.push(data.AvailableTimes[t]);
+                };
+
+                for (var i = 0; i < data.Events.events.length; i++) {
+                    data.Events.events[i].start = moment(data.Events.events[i].start).toDate();
+                    data.Events.events[i].end = moment(data.Events.events[i].end).toDate();
+                }
+                $scope.eventSources.push(data.Events);
+            });
         };
     }
 }());
@@ -1635,21 +1658,22 @@
 
         $scope.refresh = function () {
             TrainerService.getTrainer({ DateFrom: $scope.period.start, DateTo: $scope.period.end }, function (data) {
-                for (var i = 0; i < data.Events.length; i++) {
-                    data.Events[i].start = moment(data.Events[i].start).toDate();
-                    data.Events[i].end = moment(data.Events[i].end).toDate();
-                }
-
                 uiCalendarConfig.calendars.calendarOne.fullCalendar('unselect');
+
+                for (var e = 0; e < 2; e++) {
+                    for (var i = 0; i < data.Events[e].events.length; i++) {
+                        console.log(moment(data.Events[e].events[i].start).hasTime());
+                        data.Events[e].events[i].start = moment(data.Events[e].events[i].start).toDate();
+                        data.Events[e].events[i].end = moment(data.Events[e].events[i].end).toDate();
+                    }
+                }
                 $scope.eventSources.splice(0, $scope.eventSources.length);
-                $scope.eventSources.push({
-                    events: data.Events,
-                });
+                $scope.eventSources.push(data.Events[0]);
+                $scope.eventSources.push(data.Events[1]);
             });
         };
 
-        $scope.eventSources = [{
-        }];
+        $scope.eventSources = [];
 
         $scope.uiConfig = {
             calendar: {
@@ -1670,7 +1694,6 @@
                 axisFormat: 'HH:mm',
                 selectable: true,
                 eventClick: function (date, jsEvent, view) {
-                    console.log(date, jsEvent, view);
                 },
                 select: function (start, end, allDay) {
                     TrainerService.addTime({ DateFrom: start, DateTo: end }, function (data) {
@@ -1692,10 +1715,10 @@
                 },
                 selectHelper: true,
                 eventRender: function (event, element, view) {
-                    if (view.name === 'agendaWeek') {
+                    if ((view.name === 'agendaWeek') && (!event.companyId)) {
                         element.find('.fc-content').prepend('<a href=\"#\" style=\"float: right\" class=\"closeon\">X</span>');
                         element.find('.closeon').off('click').on('click', function () {
-                            TrainerService.deleteTime({ id: event.id }, function (data) {
+                            TrainerService.deleteTime({ Hour: event.start.format('YYYY/MM/DD HH:00:00') }, function (data) {
                                 uiCalendarConfig.calendars.calendarOne.fullCalendar('removeEvents', event._id);
                             });
                         });
@@ -1961,6 +1984,7 @@
             getTrainer: { url: '/api/Trainer/GetTrainer', method: 'GET', params: {}, isArray: false },
             addTime: { url: '/api/Trainer/AddTime', method: 'POST', params: {}, isArray: false },
             deleteTime: { url: '/api/Trainer/DeleteTime', method: 'POST', params: {}, isArray: false },
+            deleteCompanyTime: { url: '/api/Trainer/DeleteCompanyTime', method: 'POST', params: {}, isArray: false },
         });
     };
 })();

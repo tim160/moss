@@ -12,6 +12,7 @@
             getTrainer: { url: '/api/Trainer/GetTrainer', method: 'GET', params: {}, isArray: false },
             addTime: { url: '/api/Trainer/AddTime', method: 'POST', params: {}, isArray: false },
             deleteTime: { url: '/api/Trainer/DeleteTime', method: 'POST', params: {}, isArray: false },
+            deleteCompanyTime: { url: '/api/Trainer/DeleteCompanyTime', method: 'POST', params: {}, isArray: false },
         });
     };
 })();

@@ -161,38 +161,40 @@
                     </a>
                 </div>
                 <ul class="mainNavigation">
-                    @*
-                    <li class="navConteiner @_menuAnalytics">
-                        <a href="/analytics/Index" class="navConteiner__a ">
-                            <span class="navConteiner__icon navConteiner__icon_analytics"></span>
-                            <span class="navConteiner__name">Analytics</span>
+                    @if (_user.role_id != ECLevelConstants.level_trainer)
+                    {
+                        <li class="navConteiner @_menuAnalytics">
+                            <a href="/analytics/Index" class="navConteiner__a ">
+                                <span class="navConteiner__icon navConteiner__icon_analytics"></span>
+                                <span class="navConteiner__name">Analytics</span>
 
-                        </a>
-                    </li><!-- /.navConteiner -->
-                    <li class="navConteiner @_menuTasks">
-                        <a href="/tasks/Index" class="navConteiner__a navConteiner__badgeCount_enable">
-                            <span class="navConteiner__icon navConteiner__icon_tasks"></span>
-                            <span class="navConteiner__name">Tasks</span>
-                            @if (unread_task_number_string.Length > 0)
-                            {<span class="navConteiner__badgeCount ">@unread_task_number_string</span>}
-                        </a>
-                    </li><!-- /.navConteiner -->
-                    <li class="navConteiner @_menuMessages">
-                        <a href="/messages/Index" class="navConteiner__a navConteiner__badgeCount_enable">
-                            <span class="navConteiner__icon navConteiner__icon_messages"></span>
-                            <span class="navConteiner__name">Messages</span>
-                            @if (unread_message_number_string.Length > 0)
-                            { <span class="navConteiner__badgeCount ">@unread_message_number_string</span> }
-                        </a>
-                    </li><!-- /.navConteiner -->
-                    <li class="navConteiner @_menuCases">
-                        <a href="/cases/Index" class="navConteiner__a navConteiner__badgeCount_enable">
-                            <span class="navConteiner__icon navConteiner__icon_dashboard"></span>
-                            <span class="navConteiner__name">Dashboard</span>
-                            @if (unread_report_number_string.Length > 0)
-                            {<span class="navConteiner__badgeCount ">@unread_report_number_string</span>}
-                        </a>
-                    </li>*@
+                            </a>
+                        </li><!-- /.navConteiner -->
+                        <li class="navConteiner @_menuTasks">
+                            <a href="/tasks/Index" class="navConteiner__a navConteiner__badgeCount_enable">
+                                <span class="navConteiner__icon navConteiner__icon_tasks"></span>
+                                <span class="navConteiner__name">Tasks</span>
+                                @if (unread_task_number_string.Length > 0)
+                                {<span class="navConteiner__badgeCount ">@unread_task_number_string</span>}
+                            </a>
+                        </li><!-- /.navConteiner -->
+                        <li class="navConteiner @_menuMessages">
+                            <a href="/messages/Index" class="navConteiner__a navConteiner__badgeCount_enable">
+                                <span class="navConteiner__icon navConteiner__icon_messages"></span>
+                                <span class="navConteiner__name">Messages</span>
+                                @if (unread_message_number_string.Length > 0)
+                                { <span class="navConteiner__badgeCount ">@unread_message_number_string</span> }
+                            </a>
+                        </li><!-- /.navConteiner -->
+                        <li class="navConteiner @_menuCases">
+                            <a href="/cases/Index" class="navConteiner__a navConteiner__badgeCount_enable">
+                                <span class="navConteiner__icon navConteiner__icon_dashboard"></span>
+                                <span class="navConteiner__name">Dashboard</span>
+                                @if (unread_report_number_string.Length > 0)
+                                {<span class="navConteiner__badgeCount ">@unread_report_number_string</span>}
+                            </a>
+                        </li>
+                    }
                 </ul>
             </div>
             <div class="header__rightBlock">
@@ -225,22 +227,20 @@
                         <div class="userNavigation__triangle"></div>
                     </a>
                     <ul class="dropDown-navigation">
-                        <li class="dropDown-navigation__li"><a href="/settings/index/" class="dropDown-navigation__a">@LocalizationGetter.GetString("Settings")</a></li>
-                        <li class="dropDown-navigation__li active">
-                            <a href="/EmployeeAwareness/" class="dropDown-navigation__a">
-                                Posters
-                            </a>
-                        </li>
+                        @if (_user.role_id != ECLevelConstants.level_trainer)
+                        {
+                            <li class="dropDown-navigation__li"><a href="/settings/index/" class="dropDown-navigation__a">@LocalizationGetter.GetString("Settings")</a></li>
+                            <li class="dropDown-navigation__li active">
+                                <a href="/EmployeeAwareness/" class="dropDown-navigation__a">
+                                    Posters
+                                </a>
+                            </li>
+                        }
                         <li class="dropDown-navigation__li active">
                             <a href="/settings/password/" class="dropDown-navigation__a">
                                 @LocalizationGetter.GetString("Password")
                             </a>
                         </li>
-                        @*<li class="dropDown-navigation__li">
-                                <a href="/Payment/History" class="dropDown-navigation__a">
-                                    @LocalizationGetter.GetString("Subscription")
-                                </a>
-                            </li>*@
                         <li class="dropDown-navigation__li">
                             <form id="logout_form" action="@Url.Action("Logout", "Base")">
                                 <a href="javascript:{}" onclick="document.getElementById('logout_form').submit();" class="dropDown-navigation__a">

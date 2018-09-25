@@ -11,21 +11,22 @@
 
         $scope.refresh = function () {
             TrainerService.getTrainer({ DateFrom: $scope.period.start, DateTo: $scope.period.end }, function (data) {
-                for (var i = 0; i < data.Events.length; i++) {
-                    data.Events[i].start = moment(data.Events[i].start).toDate();
-                    data.Events[i].end = moment(data.Events[i].end).toDate();
-                }
-
                 uiCalendarConfig.calendars.calendarOne.fullCalendar('unselect');
+
+                for (var e = 0; e < 2; e++) {
+                    for (var i = 0; i < data.Events[e].events.length; i++) {
+                        console.log(moment(data.Events[e].events[i].start).hasTime());
+                        data.Events[e].events[i].start = moment(data.Events[e].events[i].start).toDate();
+                        data.Events[e].events[i].end = moment(data.Events[e].events[i].end).toDate();
+                    }
+                }
                 $scope.eventSources.splice(0, $scope.eventSources.length);
-                $scope.eventSources.push({
-                    events: data.Events,
-                });
+                $scope.eventSources.push(data.Events[0]);
+                $scope.eventSources.push(data.Events[1]);
             });
         };
 
-        $scope.eventSources = [{
-        }];
+        $scope.eventSources = [];
 
         $scope.uiConfig = {
             calendar: {
@@ -46,7 +47,6 @@
                 axisFormat: 'HH:mm',
                 selectable: true,
                 eventClick: function (date, jsEvent, view) {
-                    console.log(date, jsEvent, view);
                 },
                 select: function (start, end, allDay) {
                     TrainerService.addTime({ DateFrom: start, DateTo: end }, function (data) {
@@ -68,10 +68,10 @@
                 },
                 selectHelper: true,
                 eventRender: function (event, element, view) {
-                    if (view.name === 'agendaWeek') {
+                    if ((view.name === 'agendaWeek') && (!event.companyId)) {
                         element.find('.fc-content').prepend('<a href=\"#\" style=\"float: right\" class=\"closeon\">X</span>');
                         element.find('.closeon').off('click').on('click', function () {
-                            TrainerService.deleteTime({ id: event.id }, function (data) {
+                            TrainerService.deleteTime({ Hour: event.start.format('YYYY/MM/DD HH:00:00') }, function (data) {
                                 uiCalendarConfig.calendars.calendarOne.fullCalendar('removeEvents', event._id);
                             });
                         });

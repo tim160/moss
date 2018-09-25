@@ -1627,9 +1627,6 @@
     <Compile Include="Models\Database\time_zone.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Database\TrainerEvents.cs">
-      <DependentUpon>ECEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Database\TrainerTimes.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
