@@ -114,6 +114,15 @@ namespace EC.Controllers.API
             }
 
             var now = DateTime.Now.Date;
+            if (model.DateFrom < now.AddDays(1))
+            {
+                return new
+                {
+                    Result = false,
+                    Code = 2,
+                    Message = $"You can book training from tomorrow only",
+                };
+            }
             if (DB.TrainerTimes.Count(x => x.CompanyId == user.company_id && x.Hour >= DateTime.Now) > 0)
             {
                 return new
@@ -139,6 +148,26 @@ namespace EC.Controllers.API
             var item = exists.FirstOrDefault(x => x.CompanyId == null);
             item.CompanyId = user.company_id;
             DB.SaveChanges();
+
+            EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
+            EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.RequestUri.AbsoluteUri.ToLower());
+            eb.CalendarEvent(true, true, Request.RequestUri.AbsoluteUri.ToLower(), item.Hour.ToString("yyyy-MM-dd HH:mm:ss"));
+            string body = eb.Body;
+            var mediator = DB.user.FirstOrDefault(x => x.company_id == item.CompanyId && x.role_id == ECLevelConstants.level_administrator);
+            if (mediator != null)
+            {
+                //em.Send("alexandr@ase.com.ua", "New book training added", body, "", true);
+                em.Send(mediator.email, "New book training added", body, "", true);
+            }
+
+            eb.CalendarEvent(false, true, Request.RequestUri.AbsoluteUri.ToLower(), item.Hour.ToString("yyyy-MM-dd HH:mm:ss"));
+            body = eb.Body;
+            var trainer = DB.user.FirstOrDefault(x => x.id == item.CreatedByUserId);
+            if (trainer != null)
+            {
+                //em.Send("alexandr@ase.com.ua", "New book training added", body, "", true);
+                em.Send(trainer.email, "New book training added", body, "", true);
+            }
 
             return new
             {
@@ -279,8 +308,29 @@ namespace EC.Controllers.API
                     Message = $"You cannot cancel this training as it is less than 3 days",
                 };
             }
+            var companyId = item.CompanyId;
             item.CompanyId = null;
             DB.SaveChanges();
+
+            EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
+            EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.RequestUri.AbsoluteUri.ToLower());
+            eb.CalendarEvent(true, true, Request.RequestUri.AbsoluteUri.ToLower(), item.Hour.ToString("yyyy-MM-dd HH:mm:ss"));
+            string body = eb.Body;
+            var mediator = DB.user.FirstOrDefault(x => x.company_id == companyId && x.role_id == ECLevelConstants.level_administrator);
+            if (mediator != null)
+            {
+                //em.Send("alexandr@ase.com.ua", "The book training have removed", body, "", true);
+                em.Send(mediator.email, "The book training have removed", body, "", true);
+            }
+
+            eb.CalendarEvent(false, true, Request.RequestUri.AbsoluteUri.ToLower(), item.Hour.ToString("yyyy-MM-dd HH:mm:ss"));
+            body = eb.Body;
+            var trainer = DB.user.FirstOrDefault(x => x.id == item.CreatedByUserId);
+            if (trainer != null)
+            {
+                //em.Send("alexandr@ase.com.ua", "The book training have removed", body, "", true);
+                em.Send(trainer.email, "The book training have removed", body, "", true);
+            }
 
             return new
             {

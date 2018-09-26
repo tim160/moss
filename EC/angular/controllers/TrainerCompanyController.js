@@ -32,7 +32,17 @@
                 axisFormat: 'HH:mm',
                 selectable: true,
                 select: function (start, end, allDay) {
-                    if (!confirm(' Do you want to book this time for training?')) {
+                    var dt = new Date();
+                    var d3 = moment(dt).add(3, 'days').utc().startOf('day');
+
+                    var ds = moment(start);
+                    var msg = 'Do you want to book training on ' + ds.format('MMM DD HH:00') + '?';
+
+                    ds = ds.startOf('day');
+                    if (d3.diff(ds, 'days') > 0) {
+                        msg += ' WARNING. You cannot cancel training withing 3 days before start date.';
+                    }
+                    if (!confirm(msg)) {
                         uiCalendarConfig.calendars.calendarOne.fullCalendar('unselect');
                     } else {
                         TrainerService.addEvent({ DateFrom: start, DateTo: end }, function (data) {
@@ -58,7 +68,6 @@
                             if (confirm('Do you want to cancel this training?')) {
                                 TrainerService.deleteCompanyTime({ Hour: event.start.format('YYYY/MM/DD HH:00:00') }, function (data) {
                                     if (data.Result) {
-                                        //uiCalendarConfig.calendars.calendarOne.fullCalendar('removeEvents', event._id);
                                         $scope.refresh();
                                     } else {
                                         alert(data.Message);

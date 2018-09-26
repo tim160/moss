@@ -301,6 +301,10 @@
     <Content Include="Content\emails\CaseCloseApprove.html" />
     <Content Include="Content\emails\CaseCloseApprovePlatformManager.html" />
     <Content Include="Content\emails\CaseDeadlinePastDue.html" />
+    <Content Include="Content\emails\TrainerCalendarEventRemoved.html" />
+    <Content Include="Content\emails\TrainerCalendarEventAdded.html" />
+    <Content Include="Content\emails\CompanyCalendarEventRemoved.html" />
+    <Content Include="Content\emails\CompanyCalendarEventAdded.html" />
     <Content Include="Content\emails\ForgetPasswordNew.html" />
     <Content Include="Content\emails\MediatorInvitedUserCreated.html" />
     <Content Include="Content\emails\SeniorMediatorCaseConfirm.html" />

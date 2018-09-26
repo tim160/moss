@@ -219,6 +219,22 @@ namespace EC.Business.Actions.Email
                     // message about case deadline past due
                     m_filename = "CaseDeadlinePastDue";
                     break;
+                case 61:
+                    // message about case deadline past due
+                    m_filename = "CompanyCalendarEventAdded";
+                    break;
+                case 62:
+                    // message about case deadline past due
+                    m_filename = "CompanyCalendarEventRemoved";
+                    break;
+                case 63:
+                    // message about case deadline past due
+                    m_filename = "TrainerCalendarEventAdded";
+                    break;
+                case 64:
+                    // message about case deadline past due
+                    m_filename = "TrainerCalendarEventRemoved";
+                    break;
             }
 
             string appPath = Path.GetFullPath("~/EmailText/" + m_filename + ".html");
@@ -509,7 +525,6 @@ namespace EC.Business.Actions.Email
             m_body = m_body.Replace("[RestorePass]", (DomainUtil.GetSubdomainLink(url, m_url) + "/service/restore" + "?email=" + email + "&token=" + code).Trim());
             m_body = m_body.Replace("[RestorePass2]", (DomainUtil.GetSubdomainLink(url, m_url).Replace(".", "<span>.</span>") + "/<span>service</span>/restore" + "?email=" + email.Replace("@", "<span>@</span>").Replace(".", "<span>.</span>") + "&token=" + code).Trim());
             m_body = m_body.Replace("[RestoreCode]", code);
-
         }
 
         public void Scheduler1(string caseNumber)
@@ -517,6 +532,16 @@ namespace EC.Business.Actions.Email
             GetBody(60);
 
             m_body = m_body.Replace("[CaseNumber]", caseNumber); 
+        }
+
+        public void CalendarEvent(bool company, bool added,string url, string date)
+        {
+            if ((company) && (added)) GetBody(61);
+            if ((company) && (!added)) GetBody(62);
+            if ((!company) && (added)) GetBody(63);
+            if ((!company) && (!added)) GetBody(64);
+
+            m_body = m_body.Replace("[Date]", date);
         }
 
         #endregion
