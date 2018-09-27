@@ -26,10 +26,10 @@
                         timeFormat: 'H:mm' //this will return 23:00 time format
                     }
                 },
-                minTime: '00:00:00',
-                maxTime: '24:00:00',
+                minTime: '06:00:00',
+                maxTime: '18:00:00',
                 slotDuration: '01:00:00',
-                axisFormat: 'HH:mm',
+                axisFormat: 'hh:mm a',
                 selectable: true,
                 select: function (start, end, allDay) {
                     var dt = new Date();

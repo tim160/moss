@@ -60,13 +60,14 @@ namespace EC.Controllers.API
                 })
                 .ToList();
 
+            var now = DateTime.Now.AddDays(1).Date;
             var availableTimes = new[]
             {
                 new {
                     color = "green",
                     rendering = "background",
                     events = DB.TrainerTimes
-                        .Where(z => z.Hour >= dateFrom && z.Hour <= dateTo && z.CompanyId == null)
+                        .Where(z => z.Hour >= dateFrom && z.Hour > now && z.Hour <= dateTo && z.CompanyId == null)
                         .Select(z => z.Hour)
                         .Distinct()
                         .ToList()
