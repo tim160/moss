@@ -20,6 +20,18 @@ namespace EC.COM
                 );
 
             routes.MapRoute(
+                name: "Video",
+                url: "Video/{id}",
+                defaults: new { controller = "Video", action = "Index", id = UrlParameter.Optional }
+                );
+
+            routes.MapRoute(
+                name: "Book",
+                url: "Book/{id}",
+                defaults: new { controller = "Book", action = "Index", id = UrlParameter.Optional }
+                );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

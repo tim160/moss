@@ -1,0 +1,254 @@
+﻿
+@{
+    ViewBag.Title = "Video";
+}
+
+<div class="general-container videoPage">
+	
+	<header class="header">
+		<div class="top-headerBg">
+            <div class="container">
+                <div class="top-header">
+                    <a href="http://campusconfidential.com" class="top-header__campusLink">
+                        <span class="top-header__campusLink-text">
+                            Campus Confidential
+                        </span>
+                        <img src="~/Content/images/svg-icons/upper-right.svg" alt="" />
+                    </a>
+                    <div class="top-header__loginBar">
+                        <nav class="top-header__loginBar-nav">
+                            <li class="top-header__loginBar-li">
+                                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Login" class="top-header__loginBar-a">
+                                    Client Login
+                                </a>
+                            </li><!-- /.top-header__loginBar-li -->
+                            <li class="top-header__loginBar-li">
+                                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Report" class="top-header__loginBar-a">
+                                    File a Report
+                                </a>
+                            </li><!-- /.top-header__loginBar-li -->
+                            <li class="top-header__loginBar-li">
+                                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/CheckStatus" class="top-header__loginBar-a">
+                                    Check Report Status
+                                </a>
+                            </li><!-- /.top-header__loginBar-li -->
+                        </nav><!-- /.top-header__loginBar-nav -->
+                    </div><!-- /.top-header__loginBar -->
+                </div><!-- /.top-header -->
+            </div>
+		</div>
+		<div class="main-headerBg ">
+			<div class="container">
+				<div class="main-header">
+					<a href="/" class="main-headerLogo">
+						<div class="main-headerLogo__img">
+							<img src="~/Content/images/0-main-logo.png" alt="" />
+						</div><!-- /.main-headerLogo__img -->
+						<div class="main-headerLogo__text">
+							Reduce risk. Create trust.
+						</div><!-- /.main-headerLogo__text -->
+					</a><!-- /.main-headerLogo -->
+					<div class="main-headerMenu-mobile">
+						<a href="/" class="main-headerLogo-mobile">
+							<div class="main-headerLogo__img-mobile">
+								<img src="~/Content/images/0-main-logo.png" alt="" />
+							</div><!-- /.main-headerLogo__img -->
+							<div class="main-headerLogo__text-mobile">
+								Reduce risk. Create trust.
+							</div><!-- /.main-headerLogo__text -->
+						</a><!-- /.main-headerLogo -->
+						<a href="#" class="main-headerLogo-mobile-burgerBtn">
+							<img src="~/Content/images/svg-icons/burger.svg" alt="" />
+						</a>
+					</div><!-- /.main-headerMenu-mobile -->
+					<div class="main-headerMenu">
+						<nav class="main-headerMenu__nav">
+							<li class="main-headerMenu__li">
+								<a href="/#benefitsSection" class="main-headerMenu__a">
+									Benefits
+								</a>
+							</li><!-- /.main-headerMenu__li -->
+							<li class="main-headerMenu__li">
+								<a href="/#gridSection" class="main-headerMenu__a">
+									Incident Reporting
+								</a>
+							</li><!-- /.main-headerMenu__li -->
+							<li class="main-headerMenu__li">
+								<a href="/#menegementSection" class="main-headerMenu__a">
+									Case Management
+								</a>
+							</li><!-- /.main-headerMenu__li -->
+							<li class="main-headerMenu__li">
+								<a href="about.html" data-scroll-to="" class="main-headerMenu__a">
+									About
+								</a>
+							</li><!-- /.main-headerMenu__li -->
+							<li class="main-headerMenu__li">
+								<a href="/#contactSection" class="main-headerMenu__a">
+									Contact
+								</a>
+							</li><!-- /.main-headerMenu__li -->
+						</nav><!-- /.main-headerMenu__nav -->
+					</div><!-- /.main-headerMenu -->
+				</div><!-- /.main-header -->
+			</div><!-- /.container -->
+		</div><!-- /.main-headerBg -->
+	</header><!-- /.header -->
+	<main class="main">
+        <section class="videoHeroImageSection">
+			<div class="container">
+				<div class="videoHeroImage-contentBlock">
+					<div class="videoHeroImage-contentBlock__title">
+						See for yourself	
+					</div>
+					<div class="videoHeroImage-contentBlock__subTitle">
+						Employee Confidential can help you reduce the hidden
+						risks and costs of unethical behavior and protect your
+						company and its employees.
+					</div>
+					<div class="videoHeroImage-contentBlock__textInfo">
+						Watch the demos and see how it’s done.
+					</div>
+					<a href="#" class="videoHeroImage-contentBlock__playBlock clearfix">
+						<div class="videoHeroImage-contentBlock__playBlock-icon"></div>
+						<div class="videoHeroImage-contentBlock__playBlock-text">
+							Start watching
+						</div>
+					</a>
+				</div>
+			</div>
+		</section>
+		<section class="videoMeinContentSection">
+			<div class="container clearfix">
+				<div class="videoMeinContent-block">
+					<div class="videoBlock-container">
+						<a href="#" class="videoBlock-playBg">
+							<img src="~/Content/images/playVideoWhite-icon.png" alt="play">
+						</a>
+						<div class="videoBlock-content">
+							<div class="videoBlock-content__info">
+								1. What is Employee Confidential 
+								& its Benefits
+							</div>
+						</div>
+					</div>
+						
+					<div class="videoBlock-container">
+						<a href="#" class="videoBlock-playBg">
+							<img src="~/Content/images/playVideoWhite-icon.png" alt="play">
+						</a>
+						<div class="videoBlock-content">
+							<div class="videoBlock-content__info">
+								2. Filing an Incident Report
+							</div>
+						</div>
+					</div>
+						
+					<div class="videoBlock-container">
+						<a href="#" class="videoBlock-playBg">
+							<img src="~/Content/images/playVideoWhite-icon.png" alt="play">
+						</a>
+						<div class="videoBlock-content">
+							<div class="videoBlock-content__info">
+								3. Reporters’ Dashboard
+							</div>
+						</div>
+					</div>
+						
+					<div class="videoBlock-container">
+						<a href="#" class="videoBlock-playBg">
+							<img src="~/Content/images/playVideoWhite-icon.png" alt="play">
+						</a>
+						<div class="videoBlock-content">
+							<div class="videoBlock-content__info">
+								4. Case Management
+							</div>
+						</div>
+					</div>
+						
+					<div class="videoBlock-container">
+						<a href="#" class="videoBlock-playBg">
+							<img src="~/Content/images/playVideoWhite-icon.png" alt="play">
+						</a>
+						<div class="videoBlock-content">
+							<div class="videoBlock-content__info">
+								5. Onboarding and 
+								Implementation
+							</div>
+						</div>
+					</div>
+
+					<a href="#" class="videoBlockDownload-container">
+						<div class="videoBlockDownload-title">
+							Download </br> brochures
+						</div>
+						<div class="videoBlockDownload-icon"></div>
+					</a>
+						
+				</div>
+				<div class="videoMeinContent-sideBar">
+
+					<div class="sidebarActionblock">
+						<div class="sidebarActionblock__title">
+							<div class="sidebarActionblock__title-text">
+									I’m ready, let’s
+									start
+							</div>	
+						</div>
+						<div class="sidebarActionblock__btn">
+							<a href="@Url.Action("Index", "Book", new { id = ViewContext.RouteData.Values["id"] })" class="btn btnGreen">
+								Get Pricing
+							</a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</section>
+		<section class="videoActionSection">
+			<div class="container">
+				<div class="videoAction-title">
+					Ready to do this?
+				</div>
+				<div class="videoAction-button">
+					<a href="@Url.Action("Index", "Book", new { id = ViewContext.RouteData.Values["id"] })" class="btn actionBtn">Get Pricing</a>
+				</div>
+			</div>
+		</section>
+			
+
+	</main><!-- /.main -->
+
+	<!-- ------------------  Footer ---------------- -->
+	<footer class="footerBg">
+		<div class="container">
+			<div class="footer">
+				<a href="#" class="footer__logo">
+					<img src="~/Content/images/0-main-logo.png" alt="" />
+				</a><!-- /.footer__logo -->
+				<div class="footer__copyright">
+					Copyright В© 2018 Employee Confidential LLC. All Rights Reserved
+				</div><!-- /.footer__copyright -->
+				<div class="footer__navLinks">
+					<nav class="footer__navLinks-nav">
+						<li class="footer__navLinks-li">
+							<a href="#" class="footer__navLinks-a">
+								Privacy Policy
+							</a>
+						</li><!-- /.footer__navLinks-li -->
+						<li class="footer__navLinks-li">
+							<a href="#" class="footer__navLinks-a">
+								Terms of Use
+							</a>
+						</li><!-- /.footer__navLinks-li -->
+					</nav><!-- /.footer__navLinks-nav -->
+				</div><!-- /.footer__navLinks -->
+			</div><!-- /.footer -->
+		</div><!-- /.container -->
+	</footer><!-- /.footer -->
+
+</div><!-- /.general-container -->
+	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="~/Content/libs/OwlCarousel2-2.2.1/dist/owl.carousel.min.js"></script>
+<script src="~/Content/js/common.js"></script>

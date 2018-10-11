@@ -54,7 +54,7 @@ namespace EC.Controllers.API
                         .Select(z => new {
                             title = $"{x.first_nm} {x.last_nm}",
                             start = new DateTime(z.Year, z.Month, z.Day, z.Hour, 0, 0),
-                            end = new DateTime(z.Year, z.Month, z.Day, z.Hour + 1, 0, 0),
+                            end = new DateTime(z.Year, z.Month, z.Day, z.Hour + 1,  0, 0),
                         })
                     .ToList(),
                 })

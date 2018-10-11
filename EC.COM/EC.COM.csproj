@@ -160,9 +160,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\VARController.cs" />
+    <Compile Include="Controllers\VideoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -199,10 +202,13 @@
     <Content Include="Content\images\about-Steve.jpg" />
     <Content Include="Content\images\about-Tim.jpg" />
     <Content Include="Content\images\cal.png" />
+    <Content Include="Content\images\CC\favicon.ico" />
     <Content Include="Content\images\charts-img-сс.jpg" />
     <Content Include="Content\images\charts-img.jpg" />
     <Content Include="Content\images\dashboard-img-CC.png" />
     <Content Include="Content\images\dashboard-img.png" />
+    <Content Include="Content\images\download-icon.png" />
+    <Content Include="Content\images\download-iconComp.png" />
     <Content Include="Content\images\favicon.ico" />
     <Content Include="Content\images\first-section-BG.jpg" />
     <Content Include="Content\images\first-section-СС-BG.jpg" />
@@ -214,6 +220,10 @@
     <Content Include="Content\images\pcView-CC.jpg" />
     <Content Include="Content\images\pcView.jpg" />
     <Content Include="Content\images\people-icon.png" />
+    <Content Include="Content\images\playVideo-icon.png" />
+    <Content Include="Content\images\playVideo-iconComp.png" />
+    <Content Include="Content\images\playVideoWhite-icon.png" />
+    <Content Include="Content\images\playVideoWhite-iconComp.png" />
     <Content Include="Content\images\risk-img.png" />
     <Content Include="Content\images\settings-img-CC.png" />
     <Content Include="Content\images\settings-img.png" />
@@ -241,9 +251,13 @@
     <Content Include="Content\images\svg-icons\upper-right.svg" />
     <Content Include="Content\images\tailoredBg.jpg" />
     <Content Include="Content\images\trust-img.png" />
+    <Content Include="Content\images\videoPage_mainBg.jpg" />
+    <Content Include="Content\images\videoPage_mainBgComp.jpg" />
     <Content Include="Content\images\wall-siteview-img-CC.jpg" />
     <Content Include="Content\images\wall-siteview-img.jpg" />
     <Content Include="Content\images\warning-img.png" />
+    <Content Include="Content\images\welcomeBg Compress.jpg" />
+    <Content Include="Content\images\welcomeBg.jpg" />
     <Content Include="Content\images\word-cloud-no-text-CC.jpg" />
     <Content Include="Content\images\word-cloud-no-text.jpg" />
     <Content Include="Content\images\word-cloud-text-CC.png" />
@@ -667,6 +681,9 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Index-CC.cshtml" />
     <Content Include="Views\Home\About-CC.cshtml" />
+    <Content Include="Views\VAR\Index.cshtml" />
+    <Content Include="Views\Video\Index.cshtml" />
+    <Content Include="Views\Book\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

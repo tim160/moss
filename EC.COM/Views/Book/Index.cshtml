@@ -1,0 +1,317 @@
+﻿
+@{
+    ViewBag.Title = "Book";
+}
+
+<div class="general-container pricingPage">
+	
+	<header class="header">
+		<div class="top-headerBg">
+            <div class="container">
+                <div class="top-header">
+                    <a href="http://campusconfidential.com" class="top-header__campusLink">
+                        <span class="top-header__campusLink-text">
+                            Campus Confidential
+                        </span>
+                        <img src="~/Content/images/svg-icons/upper-right.svg" alt="" />
+                    </a>
+                    <div class="top-header__loginBar">
+                        <nav class="top-header__loginBar-nav">
+                            <li class="top-header__loginBar-li">
+                                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Login" class="top-header__loginBar-a">
+                                    Client Login
+                                </a>
+                            </li><!-- /.top-header__loginBar-li -->
+                            <li class="top-header__loginBar-li">
+                                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Report" class="top-header__loginBar-a">
+                                    File a Report
+                                </a>
+                            </li><!-- /.top-header__loginBar-li -->
+                            <li class="top-header__loginBar-li">
+                                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/CheckStatus" class="top-header__loginBar-a">
+                                    Check Report Status
+                                </a>
+                            </li><!-- /.top-header__loginBar-li -->
+                        </nav><!-- /.top-header__loginBar-nav -->
+                    </div><!-- /.top-header__loginBar -->
+                </div><!-- /.top-header -->
+            </div>
+		</div>
+		<div class="main-headerBg ">
+			<div class="container">
+				<div class="main-header">
+					<a href="/" class="main-headerLogo">
+						<div class="main-headerLogo__img">
+							<img src="~/Content/images/0-main-logo.png" alt="" />
+						</div><!-- /.main-headerLogo__img -->
+						<div class="main-headerLogo__text">
+							Reduce risk. Create trust.
+						</div><!-- /.main-headerLogo__text -->
+					</a><!-- /.main-headerLogo -->
+					<div class="main-headerMenu-mobile">
+						<a href="/" class="main-headerLogo-mobile">
+							<div class="main-headerLogo__img-mobile">
+								<img src="~/Content/images/0-main-logo.png" alt="" />
+							</div><!-- /.main-headerLogo__img -->
+							<div class="main-headerLogo__text-mobile">
+								Reduce risk. Create trust.
+							</div><!-- /.main-headerLogo__text -->
+						</a><!-- /.main-headerLogo -->
+						<a href="#" class="main-headerLogo-mobile-burgerBtn">
+							<img src="~/Content/images/svg-icons/burger.svg" alt="" />
+						</a>
+					</div><!-- /.main-headerMenu-mobile -->
+					<div class="main-headerMenu">
+						<nav class="main-headerMenu__nav">
+							<li class="main-headerMenu__li">
+								<a href="/#benefitsSection" class="main-headerMenu__a">
+									Benefits
+								</a>
+							</li><!-- /.main-headerMenu__li -->
+							<li class="main-headerMenu__li">
+								<a href="/#gridSection" class="main-headerMenu__a">
+									Incident Reporting
+								</a>
+							</li><!-- /.main-headerMenu__li -->
+							<li class="main-headerMenu__li">
+								<a href="/#menegementSection" class="main-headerMenu__a">
+									Case Management
+								</a>
+							</li><!-- /.main-headerMenu__li -->
+							<li class="main-headerMenu__li">
+								<a href="about.html" data-scroll-to="" class="main-headerMenu__a">
+									About
+								</a>
+							</li><!-- /.main-headerMenu__li -->
+							<li class="main-headerMenu__li">
+								<a href="/#contactSection" class="main-headerMenu__a">
+									Contact
+								</a>
+							</li><!-- /.main-headerMenu__li -->
+						</nav><!-- /.main-headerMenu__nav -->
+					</div><!-- /.main-headerMenu -->
+				</div><!-- /.main-header -->
+			</div><!-- /.container -->
+		</div><!-- /.main-headerBg -->
+	</header><!-- /.header -->
+	<main class="main">
+        <section class="pricingTitleSection">
+            <div class="pricingTitleSection__title">
+                Product Pricing
+            </div>
+            <div class="pricingTitleSection__subTitle">
+                The Best Value in Ethics Reporting and Case Management
+            </div>
+        </section>
+        <section class="pricingMainSection">
+            <div class="container">
+                <div class="pricingMainContainer">
+                    <div class="pricingFormContainer">
+                        <div class="pricingForm-block">
+                            <div class="pricingForm-block__title">
+                                Referral Partner Invitation Code
+                            </div>
+                            <div class="pricingForm-block__input">
+                                <label class="form-mainContent__label">
+                                    Invitation Code
+                                    <input type="text" class="form-mainContent__labelInput" name="InvitationCode" value="@ViewBag.InvitationCode">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="pricingForm-block">
+                            <div class="pricingForm-block__title">
+                                Company size: Number of Employees
+                            </div>
+                            <div class="pricingForm-block__input">
+                                <div class="form-mainContent__dropDownList dropDownList ">
+                                    <div class="form-mainContent__dropDownList-topText">
+                                        Number of employees
+                                    </div>
+                                    <div class="selectContainer">
+                                        @Html.Hidden("NumberOfEmployees", $"{ViewBag.NumberOfEmployees}")
+                                        <div class="selectList-value initValue"></div>
+                                        <ul class="ulSelectList" >
+                                            <li class="init">Please select</li>
+                                            <li data-id="1" data-value="Less than 10">Less than 10</li>
+                                            <li data-id="2" data-value="10 to 100 employees">10 to 100 employees</li>
+                                            <li data-id="3" data-value="100 to 500 employees">100 to 500 employees</li>
+                                            <li data-id="4" data-value="500 to 1000 employees">500 to 1000 employees</li>
+                                            <li data-id="5" data-value="More than 1000 employees">More than 1000 employees</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pricingForm-block">
+                            <div class="pricingForm-block__title">
+                                Estimated number of non-employees 
+                                (i.e. contractors, suppliers, vendors, 
+                                consultants, volunteers) who will have 
+                                access to the service*
+                            </div>
+                            <div class="pricingForm-block__input">
+                                <div class="form-mainContent__dropDownList dropDownList ">
+                                    <div class="form-mainContent__dropDownList-topText">
+                                        Number of non-employees
+                                    </div>
+                                    <div class="selectContainer">
+                                        @Html.Hidden("NumberOfNonEmployees", "")
+                                        <div class="selectList-value initValue"></div>
+                                        <ul class="ulSelectList " >
+                                            <li class="init">Please select</li>
+                                            <li data-id="1" data-value="Less than 10">Less than 10</li>
+                                            <li data-id="2" data-value="10 to 100 employees">10 to 100 employees</li>
+                                            <li data-id="3" data-value="100 to 500 employees">100 to 500 employees</li>
+                                            <li data-id="4" data-value="500 to 1000 employees">500 to 1000 employees</li>
+                                            <li data-id="5" data-value="More than 1000 employees">More than 1000 employees</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pricingForm-block">
+                            <div class="pricingForm-block__title">
+                                Estimated number of clients or customers 
+                                who will have access to the service
+                            </div>
+                            <div class="pricingForm-block__input">
+                                <div class="form-mainContent__dropDownList dropDownList ">
+                                    <div class="form-mainContent__dropDownList-topText">
+                                        Number of clients/customers
+                                    </div>
+                                    <div class="selectContainer">
+                                        @Html.Hidden("NumberOfClients", "")
+                                        <div class="selectList-value initValue"></div>
+                                        <ul class="ulSelectList" >
+                                            <li class="init">Please select</li>
+                                            <li data-id="1" data-value="none">none</li>
+                                            <li data-id="2" data-value="10 to 100 employees">10 to 100 employees</li>
+                                            <li data-id="3" data-value="100 to 500 employees">100 to 500 employees</li>
+                                            <li data-id="4" data-value="500 to 1000 employees">500 to 1000 employees</li>
+                                            <li data-id="5" data-value="More than 1000 employees">More than 1000 employees</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pricingInfoBlock">
+                            <div class="pricingInfoBlock__textInfo">
+                                * New York Law prohibits sexual harassment of non-employees in the workplace. The term “non-employee” includes 
+                                contractors, subcontractors, vendors, consultants. An employer will be liable when the employer (including its agents and 
+                                supervisors) knew or should have known that the non-employee was subjected to sexual harassment in the employer’s 
+                                workplace, and the employer failed to take immediate and appropriate corrective action. This took effect in April of 2018.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pricingBillContainer">
+                        <div class="pricingBill-head">
+                            <div class="pricingBill-line clearfix">
+                                <div class="pricingBill-line__text">
+                                    Annual Plan Price
+                                </div>
+                                <div class="pricingBill-line__tax">
+                                    $1,234
+                                </div>
+                            </div>
+                            <div class="pricingBill-line clearfix">
+                                <div class="pricingBill-line__text">
+                                    Non-Employees Access
+                                </div>
+                                <div class="pricingBill-line__tax">
+                                    $1,234
+                                </div>
+                            </div>
+                            <div class="pricingBill-line clearfix">
+                                <div class="pricingBill-line__text">
+                                    Client and Customer Access
+                                </div>
+                                <div class="pricingBill-line__tax">
+                                    $1,234
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pricingBill-main">
+                            <div class="pricingBill-line pricingBill-lineTotal clearfix">
+                                <div class="pricingBill-line__text">
+                                    Total Annual Plan Price
+                                </div>
+                                <div class="pricingBill-line__tax">
+                                    $4,702
+                                </div>
+                            </div>
+                            <div class="pricingBill-line pricingBill-lineSmall clearfix">
+                                <div class="pricingBill-line__text">
+                                    Required once-off 
+                                    onboarding & training.
+                                </div>
+                                <div class="pricingBill-line__tax">
+                                    $1,234
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pricingBill-footer">
+                            <a href="#" class="submitBigBtn btn">Buy now</a>
+                        </div>
+                    </div>
+                </div>
+                    
+            </div>
+        </section>
+			
+
+	</main><!-- /.main -->
+
+	<!-- ------------------  Footer ---------------- -->
+	<footer class="footerBg">
+		<div class="container">
+			<div class="footer">
+				<a href="#" class="footer__logo">
+					<img src="~/Content/images/0-main-logo.png" alt="" />
+				</a><!-- /.footer__logo -->
+				<div class="footer__copyright">
+					Copyright © 2018 Employee Confidential LLC. All Rights Reserved
+				</div><!-- /.footer__copyright -->
+				<div class="footer__navLinks">
+					<nav class="footer__navLinks-nav">
+						<li class="footer__navLinks-li">
+							<a href="#" class="footer__navLinks-a">
+								Privacy Policy
+							</a>
+						</li><!-- /.footer__navLinks-li -->
+						<li class="footer__navLinks-li">
+							<a href="#" class="footer__navLinks-a">
+								Terms of Use
+							</a>
+						</li><!-- /.footer__navLinks-li -->
+					</nav><!-- /.footer__navLinks-nav -->
+				</div><!-- /.footer__navLinks -->
+			</div><!-- /.footer -->
+		</div><!-- /.container -->
+	</footer><!-- /.footer -->
+
+</div><!-- /.general-container -->
+	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="~/Content/libs/OwlCarousel2-2.2.1/dist/owl.carousel.min.js"></script>
+<script src="~/Content/js/common.js"></script>
+
+<script>
+    $(function () {
+        $(".ulSelectList").children("li:not(.init)").click(function () {
+            $(this).closest('.selectContainer').find('input').val($(this).data('id'));
+        });
+
+        var p = $('#NumberOfEmployees').parent();
+        p.find('.initValue').html(p.find('.ulSelectList [data-id="' + $('#NumberOfEmployees').val() + '"]').html());
+
+        function Calculate() {
+            var nE = $('#NumberOfEmployees').val();
+            var nNE = $('#NumberOfNonEmployees').val();
+            var nC = $('#NumberOfClients').val();
+
+            console.log(nE, nNE, nC);
+        };
+
+        Calculate();
+    });
+</script>

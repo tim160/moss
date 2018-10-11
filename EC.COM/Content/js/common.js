@@ -18,6 +18,8 @@ $(document).ready(function(){
 
   fieldActiveOnFocus( ".learnMore-form__content-input input" );
   fieldActiveOnFocus( ".loginForm__input input" );
+  fieldActiveOnFocus( ".form-mainContent__label input" );
+  
 
   function fieldActiveOnFocus ( inputSelector ){
     $( inputSelector ).focus(function(){
@@ -151,5 +153,52 @@ $(document).ready(function(){
       $this.closest(leaderShipBlock).removeClass(active_class);
     });
   }
+
+  // Customn select list in form
+
+  customSelectListOpen(".selectContainer");
+
+  function customSelectListOpen ( customSelectList_selector ){
+    $( customSelectList_selector ).children(".selectList-value").click(function (){
+      $(this).closest(customSelectList_selector).children(".ulSelectList").toggle();
+      $(this).closest(customSelectList_selector).toggleClass("open");
+      $(this).closest(".dropDownList").toggleClass("active");
+    });
+
+    $(document).mouseup(function (e){
+      var container = $(".selectContainer");
+      if (!container.is(e.target) && container.has(e.target).length === 0){
+        $(container).children(".ulSelectList").hide();
+        $(container).closest(".dropDownList").removeClass("active");
+        $(container).removeClass("open");
+      }
+    });
+
+    $( ".ulSelectList").children("li:not(.init)").click(function (){
+      $(this).closest(customSelectList_selector).children(".selectList-value").html($(this).html());
+      $(this).closest(customSelectList_selector).children(".ulSelectList").toggle();
+      $(this).closest(customSelectList_selector).toggleClass("open");
+      $(this).closest(".dropDownList").toggleClass("active").addClass("filled");
+    });
+
+  }
+
+  // Check if not empty inputs
+
+  checkFormImput(".form-mainContent__label");
+
+  function checkFormImput( imputContainer ){
+    $(imputContainer).children("input").focusout(function(){
+      if( $(this).val().trim() ) {
+        $(this).closest(".form-mainContent__label").addClass("filled");
+      }else{
+        $(this).closest(".form-mainContent__label").removeClass("filled");
+      }
+    });
+  }
+
+  
+
+
 
 });
