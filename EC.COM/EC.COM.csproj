@@ -45,6 +45,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -166,6 +174,8 @@
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\VARController.cs" />
     <Compile Include="Controllers\VideoController.cs" />
+    <Compile Include="Data\CompanyInvitationModel.cs" />
+    <Compile Include="Data\DBContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -656,6 +666,7 @@
     <Content Include="Content\sass\_main.sass" />
     <Content Include="Content\sass\_media.sass" />
     <Content Include="Content\sass\_vars.sass" />
+    <None Include="ConnectionStrings.config.default" />
     <None Include="Properties\PublishProfiles\EC.COM.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -684,6 +695,9 @@
     <Content Include="Views\VAR\Index.cshtml" />
     <Content Include="Views\Video\Index.cshtml" />
     <Content Include="Views\Book\Index.cshtml" />
+    <Content Include="ConnectionStrings.config" />
+    <Content Include="Smtp.config" />
+    <None Include="Smtp.config.default" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

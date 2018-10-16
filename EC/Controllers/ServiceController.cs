@@ -220,7 +220,11 @@ namespace EC.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Account");
+                ViewBag.email = email;
+                ViewBag.token = token;
+                ViewBag.Error = "Error: token mismatch. Please contact our customer support";
+                return View($"Restore{(is_cc ? "-CC" : "")}");
+                //return RedirectToAction("Index", "Account");
             }
         }
 

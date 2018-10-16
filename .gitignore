@@ -79,5 +79,6 @@ EC/Content/img/TestPdf.pdf
 EC/Upload/
 EC/Models/Database/
 EC/Web.config
-EC.COM/Web.config
 EC.COM/Areas/
+EC.COM/ConnectionStrings.config
+EC.COM/Smtp.config

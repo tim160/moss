@@ -26,10 +26,22 @@ namespace EC.COM
                 );
 
             routes.MapRoute(
+                name: "BookCalculate",
+                url: "Book/Calculate",
+                defaults: new { controller = "Book", action = "Calculate" }
+                );
+
+            routes.MapRoute(
+                name: "BookBuy",
+                url: "Book/Buy",
+                defaults: new { controller = "Book", action = "Buy" }
+                );
+
+            routes.MapRoute(
                 name: "Book",
                 url: "Book/{id}",
                 defaults: new { controller = "Book", action = "Index", id = UrlParameter.Optional }
-                );
+                );            
 
             routes.MapRoute(
                 name: "Default",

@@ -50,6 +50,9 @@
             <div class="loginSection__contentBg">
                 @using (Html.BeginForm("RestorePass", "Service", FormMethod.Post, new { }))
                 {
+                    if (ViewBag.Error != null)
+                    {
+                    }
                     <div class="container loginSection__container">
                         <div class="loginForm">
                             <label class="loginForm__input">
