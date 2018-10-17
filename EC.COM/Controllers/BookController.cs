@@ -14,29 +14,44 @@ namespace EC.COM.Controllers
         public ActionResult Index(string id = "")
         {
             var data = System.Text.Encoding.Default.GetString(System.Convert.FromBase64String(id)).Split('|');
-            ViewBag.FirstName = data[0];
-            ViewBag.LastName = data[1];
-            ViewBag.CompanyName = data[2];
-            ViewBag.Phone = data[3];
-            ViewBag.Email = data[4];
-            ViewBag.NumberOfEmployees = data[5];
-            ViewBag.InvitationCode = data[6];
+            int count;
+            if (!int.TryParse(data[5], out count))
+            {
+                count = 1;
+            }
+            var model = new CalculateModel
+            {
+                FirstName = data[0],
+                LastName = data[1],
+                CompanyName = data[2],
+                Phone = data[3],
+                Email = data[4],
+                NumberOfEmployees = count,
+                InvitationCode = data[6],
+            };
 
-            return View();
+            return View(model);
         }
 
         public ActionResult Buy(CalculateModel model)
         {
-            return View();
+            var data = $"{model.InvitationCode}|{model.FirstName}|{model.LastName}|{model.CompanyName}|{model.Phone}|{model.Email}|{model.NumberOfEmployees}|{model.NumberOfNonEmployees}|{model.NumberOfClients}";
+            data = System.Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(data));
+            return Redirect($"{System.Configuration.ConfigurationManager.AppSettings["MainSite"]}new/company?data={data}");
+            //return View();
         }
 
         public class CalculateModel
         {
-            public string Id { get; set; }
             public string InvitationCode { get; set; }
             public int NumberOfEmployees { get; set; }
             public int NumberOfNonEmployees { get; set; }
             public int NumberOfClients { get; set; }
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public string CompanyName { get; set; }
+            public string Phone { get; set; }
+            public string Email { get; set; }
         }
 
         [HttpPost]
@@ -59,7 +74,7 @@ namespace EC.COM.Controllers
                     priceR = ne.Onboarding_fee.Value;
                 }
                 var nne = items.FirstOrDefault(x => model.NumberOfNonEmployees >= x.From_quantity && model.NumberOfNonEmployees <= x.To_quantity);
-                if ((nne != null) && (nne.Employee_price.HasValue) && (nne.Employee_price_type.HasValue))
+                if ((nne != null) && (nne.Contractor_price.HasValue) && (nne.Contractor_price_type.HasValue))
                 {
                     priceNNE = nne.Contractor_price_type.Value == 1 ? nne.Contractor_price.Value : nne.Contractor_price.Value * model.NumberOfNonEmployees;
                 }

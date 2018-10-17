@@ -72,7 +72,7 @@
                 legend: {
                     align: false
                 },
-                callback: function (chart) {
+                callback: function () {
                 },
                 forceY: [0, 1],
             },

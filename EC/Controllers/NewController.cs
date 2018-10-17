@@ -72,7 +72,7 @@ namespace EC.Controllers
             ViewBag.email = _email;
             return View();
         }
-        public ActionResult Company(string code)
+        public ActionResult Company(string code, string data)
         {
             string _code = "";
             if (!string.IsNullOrEmpty(code))
@@ -86,6 +86,12 @@ namespace EC.Controllers
             if (is_cc) cc_ext = "_cc";
             ViewBag.cc_extension = cc_ext;
             #endregion
+
+            if (!String.IsNullOrEmpty(data))
+            {
+                return View("CompanyA");
+            }
+
             return View();
         }
 

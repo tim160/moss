@@ -1,4 +1,5 @@
-﻿
+﻿@model EC.COM.Controllers.BookController.CalculateModel
+
 @{
     ViewBag.Title = "Book";
 }
@@ -108,6 +109,12 @@
                 @using (Html.BeginForm("Buy", null, FormMethod.Post))
                 {
                     @Html.Hidden("Id", ViewContext.RouteData.Values["id"])
+                    @Html.HiddenFor(x => x.FirstName)
+                    @Html.HiddenFor(x => x.LastName)
+                    @Html.HiddenFor(x => x.CompanyName)
+                    @Html.HiddenFor(x => x.Phone)
+                    @Html.HiddenFor(x => x.Email)
+
                     <div class="pricingMainContainer">
                         <div class="pricingFormContainer">
                             <div class="pricingForm-block">
@@ -117,7 +124,7 @@
                                 <div class="pricingForm-block__input">
                                     <label class="form-mainContent__label">
                                         Invitation Code
-                                        <input type="text" class="form-mainContent__labelInput" id="InvitationCode" name="InvitationCode" value="@ViewBag.InvitationCode">
+                                        <input type="text" class="form-mainContent__labelInput calc" id="InvitationCode" name="InvitationCode" value="@Model.InvitationCode">
                                     </label>
                                 </div>
                             </div>
@@ -129,7 +136,7 @@
                                     <div class="form-mainContent__dropDownList dropDownList ">
                                         <label class="form-mainContent__label">
                                             Number of employees
-                                            <input class="form-mainContent__labelInput calc" id="NumberOfEmployees" type="number" name="NumberOfEmployees" value="@ViewBag.NumberOfEmployees">
+                                            <input class="form-mainContent__labelInput calc" id="NumberOfEmployees" type="number" name="NumberOfEmployees" value="@Model.NumberOfEmployees">
                                         </label>
                                         @*<div class="form-mainContent__dropDownList-topText">
                                             Number of employees
@@ -160,7 +167,7 @@
                                     <div class="form-mainContent__dropDownList dropDownList ">
                                         <label class="form-mainContent__label">
                                             Number of non-employees
-                                            <input class="form-mainContent__labelInput calc" id="NumberOfNonEmployees" type="number" name="NumberOfNonEmployees" value="@ViewBag.NumberOfNonEmployees">
+                                            <input class="form-mainContent__labelInput calc" id="NumberOfNonEmployees" type="number" name="NumberOfNonEmployees" value="@Model.NumberOfNonEmployees">
                                         </label>
                                         @*<div class="form-mainContent__dropDownList-topText">
                                             Number of non-employees
@@ -189,7 +196,7 @@
                                     <div class="form-mainContent__dropDownList dropDownList ">
                                         <label class="form-mainContent__label">
                                             Number of clients/customers
-                                            <input class="form-mainContent__labelInput calc" id="NumberOfClients" type="number" name="NumberOfClients" value="@ViewBag.NumberOfClients">
+                                            <input class="form-mainContent__labelInput calc" id="NumberOfClients" type="number" name="NumberOfClients" value="@Model.NumberOfClients">
                                         </label>
                                         @*<div class="form-mainContent__dropDownList-topText">
                                             Number of clients/customers

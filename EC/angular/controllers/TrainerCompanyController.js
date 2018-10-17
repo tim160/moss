@@ -18,8 +18,8 @@
                     center: 'title',
                 },
                 defaultView: 'agendaWeek',
-                eventClick: function(date, jsEvent, view) {
-                },
+                //eventClick: function(date, jsEvent, view) {
+                //},
                 agenda: 'H:mm',
                 views: {
                     week: {
@@ -31,7 +31,7 @@
                 slotDuration: '01:00:00',
                 axisFormat: 'hh:mm a',
                 selectable: true,
-                select: function (start, end, allDay) {
+                select: function (start, end) {
                     var dt = new Date();
                     var d3 = moment(dt).add(3, 'days').utc().startOf('day');
 
@@ -53,7 +53,7 @@
                         });
                     }
                 },
-                viewRender: function(view, element) {
+                viewRender: function(view) {
                     $scope.period = {
                         start: view.start.toDate(),
                         end: view.end.toDate(),

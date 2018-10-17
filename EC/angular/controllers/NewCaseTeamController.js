@@ -47,7 +47,9 @@
                 if (i % 3 === 0) {
                     $scope.mediators_whoHasAccess_toReportG.push([]);
                 }
-                $scope.mediators_whoHasAccess_toReportG[$scope.mediators_whoHasAccess_toReportG.length - 1].push(data.mediators_whoHasAccess_toReport[i]);
+                $scope
+                    .mediators_whoHasAccess_toReportG[$scope.mediators_whoHasAccess_toReportG.length - 1]
+                    .push(data.mediators_whoHasAccess_toReport[i]);
             }
         };
 

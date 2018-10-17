@@ -46,9 +46,9 @@
                 slotDuration: '01:00:00',
                 axisFormat: 'hh:mm a',
                 selectable: true,
-                eventClick: function (date, jsEvent, view) {
-                },
-                select: function (start, end, allDay) {
+                //eventClick: function (date, jsEvent, view) {
+                //},
+                select: function (start, end) {
                     TrainerService.addTime({ DateFrom: start, DateTo: end }, function (data) {
                         if (!data.Result) {
                             uiCalendarConfig.calendars.calendarOne.fullCalendar('unselect');
@@ -59,7 +59,7 @@
                     });
                     return false;
                 },
-                viewRender: function (view, element) {
+                viewRender: function (view) {
                     $scope.period = {
                         start: view.start.toDate(),
                         end: view.end.toDate(),
@@ -71,7 +71,7 @@
                     if ((view.name === 'agendaWeek') && (!event.companyId)) {
                         element.find('.fc-content').prepend('<a href=\"#\" style=\"float: right\" class=\"closeon\">X</span>');
                         element.find('.closeon').off('click').on('click', function () {
-                            TrainerService.deleteTime({ Hour: event.start.format('YYYY/MM/DD HH:00:00') }, function (data) {
+                            TrainerService.deleteTime({ Hour: event.start.format('YYYY/MM/DD HH:00:00') }, function () {
                                 uiCalendarConfig.calendars.calendarOne.fullCalendar('removeEvents', event._id);
                             });
                         });

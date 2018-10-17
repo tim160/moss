@@ -17,7 +17,10 @@
                     data.company_disclamer_uploads[i].create_dt_s = data.company_disclamer_uploads_dt[i];
                     data.company_disclamer_uploads[i].display_name2 = data.company_disclamer_uploads[i].display_name;
                 }
-                if ((!data.company_disclamer_page) || (!data.company_disclamer_page.message_to_employees) || (!data.company_disclamer_page.message_about_guidelines)) {
+                if (
+                    (!data.company_disclamer_page)
+                    || (!data.company_disclamer_page.message_to_employees)
+                    || (!data.company_disclamer_page.message_about_guidelines)) {
                     $('#DisclaimersExclamationmarkImg').show();
                 } else {
                     $('#DisclaimersExclamationmarkImg').hide();

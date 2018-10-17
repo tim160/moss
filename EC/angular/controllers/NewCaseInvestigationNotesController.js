@@ -7,6 +7,7 @@
         .controller('NewCaseInvestigationNotesController',
             ['$scope', '$filter', '$location', 'orderByFilter', 'NewCaseInvestigationNotesService', NewCaseInvestigationNotesController]);
 
+    /*eslint max-statements: ["error", 40]*/
     function NewCaseInvestigationNotesController($scope, $filter, $location, orderByFilter, NewCaseInvestigationNotesService) {
         $scope.model = {};
 

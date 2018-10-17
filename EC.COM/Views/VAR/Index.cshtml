@@ -139,23 +139,10 @@
                                 Email
                                 <input type="email" class="form-mainContent__labelInput" name="Email">
                             </label>
-						    <div class="form-mainContent__dropDownList dropDownList ">
-							    <div class="form-mainContent__dropDownList-topText">
-								    Number of employees
-							    </div>
-							    <div class="selectContainer">
-                                    @Html.Hidden("NumberOfEmployees", "")
-								    <div class="selectList-value initValue"></div>
-								    <ul class="ulSelectList " >
-									    <li class="init">Please select</li>
-									    <li data-id="1" data-value="Less than 10">Less than 10</li>
-									    <li data-id="2" data-value="10 to 100 employees">10 to 100 employees</li>
-									    <li data-id="3" data-value="100 to 500 employees">100 to 500 employees</li>
-									    <li data-id="4" data-value="500 to 1000 employees">500 to 1000 employees</li>
-									    <li data-id="5" data-value="More than 1000 employees">More than 1000 employees</li>
-								    </ul>
-							    </div>
-						    </div>
+                            <label class="form-mainContent__label">
+                                Number of employees
+                                <input type="number" class="form-mainContent__labelInput" name="NumberOfEmployees">
+                            </label>
                             <label class="form-mainContent__label">
                                 Referral Partner Invitation Code
                                 <input type="text" class="form-mainContent__labelInput" name="InvitationCode">
@@ -211,8 +198,5 @@
 
 <script>
     $(function () {
-        $(".ulSelectList").children("li:not(.init)").click(function () {
-            $('#NumberOfEmployees').val($(this).data('id'));
-        });
     });
 </script>

@@ -1,0 +1,172 @@
+﻿@using System.Collections;
+@using EC.Models;
+@using EC.Models.Database;
+@using EC.Localization;
+@{
+    <link rel="stylesheet" type="text/css" href="/Content/styleReportDashboard.css">
+    //  @Styles.Render("~/Content/Styles");
+    bool is_cc = ViewBag.is_cc;
+    var _code = ViewBag.code;
+
+
+    UserModel um = new UserModel();
+    CompanyModel cm = new CompanyModel();
+    int company_id = 0;
+    ViewBag.Title = LocalizationGetter.GetString("NewCompanyRegistration", is_cc);
+    <style>
+        .fullContainer {
+            max-width: none;
+        }
+        .error {
+            border: 2px solid red !important;
+        }
+        select {
+            padding: 0px !important;
+        }
+    </style>
+}
+<div class="blockSettings contentCompanyProfile" ng-controller="NewCompany" ng-init="refresh()">
+    <div class="titleNewUser">
+        <h1 class="helloUser">@LocalizationGetter.GetString("NewCompanyRegistration", is_cc):</h1>
+    </div>
+    <div class="contentSettings">
+        <p class="helloUser" id="hello">@LocalizationGetter.GetString("FillTheFollowingFieldsRegister").</p>
+        <div class="blockPersonalPhotoSetting">
+            <div class="blockPhotoSetting">
+                <img class="PersonalPhotoBlock" src='@Url.Content("~/Content/img/logo.png")' />
+            </div>
+        </div>
+        <div>
+            <form novalidate name="form">
+                <div class="personalBlock" id="registration">
+                    <div class="blockPersonalSettings" ng-class="{ 'error': form.$submitted && form.code.$invalid }">
+                        <p class="title">@LocalizationGetter.GetString("InvitationCode")</p>
+                        @Html.TextBox("code", null, new { ng_model = "model.InvitationCode", required = "" })
+                    </div>
+                    <div class="blockPersonalSettings" ng-class="{ 'error': form.$submitted && form.company_name.$invalid }">
+                        <p class="title">@LocalizationGetter.GetString("CompanyNameUp", is_cc)</p>
+                        @Html.TextBox("company_name", null, new { ng_model = "model.CompanyName", required = "" })
+                    </div>
+                    <div class="blockPersonalSettings" ng-class="{ 'error': form.$submitted && form.PrimaryLocationUp.$invalid }">
+                        <p class="title">@LocalizationGetter.GetString("PrimaryLocationUp", is_cc)</p>
+                        <input type="text" id="location" ng-model = "model.PrimaryLocationUp" name="PrimaryLocationUp" required />
+                    </div>
+                    <div class="blockPersonalSettings" ng-class="{ 'error': form.$submitted && form.number.$invalid }">
+                        <p class="title">@LocalizationGetter.GetString("NumberEmployees", is_cc)</p>
+                        <input type="number" name="number" required min="0" ng-model="model.NumberEmployees" />
+                    </div>
+                    <div class="blockPersonalSettings">
+                        <p class="title">Number of non-employees</p>
+                        <input type="number" id="number" min="0" ng-model="model.NumberOfNonEmployees" />
+                    </div>
+                    <div class="blockPersonalSettings">
+                        <p class="title">Number of clients/customers</p>
+                        <input type="number" id="number" min="0" ng-model="model.NumberOfClients" />
+                    </div>
+                    <div class="blockPersonalSettings">
+                        <p class="title">@LocalizationGetter.GetString("PrimaryLanguageUp", is_cc)</p>
+                        <div class="rowBlock inputMediator">
+                            <div class="freeBlock inputRadio mediator active">
+                                <label class="inputBlock" for="freeIncident">
+                                    <input id="oneIncident" type="radio" name="language_id" ng-model="model.Language">
+                                    <span class="radioTitle">@LocalizationGetter.GetString("English")</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blockPersonalSettings">
+                        <p class="title">@LocalizationGetter.GetString("YourRoleUp", is_cc)</p>
+                        <div class="rowBlock inputMediator">
+                            <div class="freeBlock inputRadio adminMediator active">
+                                <label class="inputBlock" for="freeIncident">
+                                    <input id="oneIncident" type="radio" name="role_id" ng-model="model.Role">
+                                    <span class="radioTitle">@LocalizationGetter.GetString("AdminMediator", is_cc)</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blockPersonalSettings" ng-class="{ 'error': form.$submitted && form.first.$invalid }">
+                        <p class="title">@LocalizationGetter.GetString("FirstNameUp")</p>
+                        <input type="text" name="first" ng-model="model.FirstName" required />
+                    </div>
+                    <div class="blockPersonalSettings" ng-class="{ 'error': form.$submitted && form.last.$invalid }">
+                        <p class="title">@LocalizationGetter.GetString("LastNameUp")</p>
+                        <input type="text" name="last" ng-model="model.LastName" required />
+                    </div>
+                    <div class="blockPersonalSettings" ng-class="{ 'error': form.$submitted && form.email.$invalid }">
+                        <p class="title">@LocalizationGetter.GetString("Email")</p>
+                        <input type="text" name="email" ng-model="model.Email" required />
+                    </div>
+                    <div class="blockPersonalSettings" ng-class="{ 'error': form.$submitted && form.title.$invalid }">
+                        <p class="title">@LocalizationGetter.GetString("Title")</p>
+                        <input type="text" name="title" ng-model="model.Title" required />
+                    </div>
+                    <div class="blockPersonalSettings">
+                        <p class="title">@LocalizationGetter.GetString("Department")</p>
+                        <input type="text" id="departments" ng-model="model.Department" />
+                    </div>
+                    <div id="PayByCard" type="hidden">
+                        <div class="blockPersonalSettings">
+                            <p class="title">@LocalizationGetter.GetString("Amount")</p>
+                            <input type="text" id="amount" ng-model="model.Amount" />
+                        </div>
+                        <div class="blockPersonalSettings" ng-class="{ 'error': form.$submitted && form.cardnumber.$invalid }">
+                            <p class="title">@LocalizationGetter.GetString("CreditCardNumber")</p>
+                            <input type="text" name="cardnumber" required ng-model="model.CreditCardNumber" />
+                        </div>
+                        <div class="blockPersonalSettings" ng-class="{ 'error': form.$submitted && form.cardname.$invalid }">
+                            <p class="title">@LocalizationGetter.GetString("NameonCard")</p>
+                            <input type="text" name="cardname" required ng-model="model.NameonCard" />
+                        </div>
+
+                        <div class="blockPersonalSettings" ng-class="{ 'error': form.$submitted && (form.selectedMonth.$invalid || form.selectedYear.$invalid || model.ExpiryDate == 'mm' || model.SelectedYear == 'yyyy') }">
+                            <p class="title">@LocalizationGetter.GetString("ExpiryDate")</p>
+                            <div class="positioncreditCardSelect">
+                                <select class="creditCardSelect" name="selectedMonth" required ng-model="model.ExpiryDate">
+                                    <option selected="selected" disabled>mm</option>
+                                    <option value="01"> 01 </option>
+                                    <option value="02">02</option>
+                                    <option value="03"> 03 </option>
+                                    <option value="04">04</option>
+                                    <option value="05"> 05 </option>
+                                    <option value="06">06</option>
+                                    <option value="07"> 07 </option>
+                                    <option value="08">08</option>
+                                    <option value="09"> 09 </option>
+                                    <option value="10">10</option>
+                                    <option value="11"> 11 </option>
+                                    <option value="12">12</option>
+                                </select>
+                                @*<input type="number" placeholder="mm" id="mm" min="1" pattern="\d*" max="2" maxlength="2"  numbers_only-01-12 mask="__" style="width:45%; float:left" />*@
+                                /
+                                @*<input type="number" placeholder="yy" id="yy" max="2" maxlength="2" style="width:50%;" mask="__" numbers_only17andmore />*@
+                                <select class="creditCardSelect" required name="selectedYear" ng-model="model.SelectedYear">
+                                    <option selected="selected" disabled>yyyy</option>
+                                    @{
+                                        for (int i = DateTime.Today.Year; i <= 2030; i++)
+                                        {
+                                            <option value="@i">@i</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="blockPersonalSettings" ng-class="{ 'error': form.$submitted && form.csv.$invalid }">
+                            <p class="title">@LocalizationGetter.GetString("CSVCode")</p>
+                            <input type="number" name="csv" ng-model="model.CSV" required string-to-number />
+                        </div>
+                    </div>
+                    <div class="blockUpdateProfile">
+                        <div class="updateProfileBtn">
+                            <input class="greenButton" type="button" value="@LocalizationGetter.GetString("Register")" ng-click="register(form)" />
+                            <span style="display: none;">@LocalizationGetter.GetString("CreateProfileUp").ToLower()</span>
+                        </div>
+                    </div>
+                    @Html.Hidden("company_exist")
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--</form>-->
+</div>
+<script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>

@@ -149,6 +149,21 @@
             }
         };
     });
+
+    angular.module('EC').directive('stringToNumber', function() {
+        return {
+            require: 'ngModel',
+            link: function(scope, element, attrs, ngModel) {
+                ngModel.$parsers.push(function(value) {
+                    return '' + value;
+                });
+                ngModel.$formatters.push(function(value) {
+                    return parseFloat(value);
+                });
+            }
+        };
+    });
+
 })();
 
 
@@ -226,7 +241,7 @@
                 legend: {
                     align: false
                 },
-                callback: function (chart) {
+                callback: function () {
                 },
                 forceY: [0, 1],
             },
@@ -489,7 +504,7 @@
             CasesService.get({ ReportFlag: mode, Preload: preload }, function (data) {
                 $('.headerBlockTextRight > span').text(data.Title);
                 for (var i = 0; i < data.Reports.length; i++) {
-                    var r = $filter('filter')(data.ReportsAdv, { 'id': data.Reports[i].report_id }, true);
+                    //var r = $filter('filter')(data.ReportsAdv, { 'id': data.Reports[i].report_id }, true);
                 }
 
                 $scope.reports = data.Reports;
@@ -629,7 +644,8 @@
         });
 
         $scope.Process = function () {
-            EmployeeAwarenessPosterService.post({ posterId: $scope.id, type: 1, size: $scope.SelectedSize, logo1: $scope.SelectedLogo }, function (data) {
+            var p = { posterId: $scope.id, type: 1, size: $scope.SelectedSize, logo1: $scope.SelectedLogo };
+            EmployeeAwarenessPosterService.post(p, function (data) {
                 //window.location = data.file;
                 $scope.downloadLink = data.file;
                 document.getElementById('downloadA').setAttribute('href', data.file);
@@ -742,6 +758,7 @@
         .controller('NewCaseInvestigationNotesController',
             ['$scope', '$filter', '$location', 'orderByFilter', 'NewCaseInvestigationNotesService', NewCaseInvestigationNotesController]);
 
+    /*eslint max-statements: ["error", 40]*/
     function NewCaseInvestigationNotesController($scope, $filter, $location, orderByFilter, NewCaseInvestigationNotesService) {
         $scope.model = {};
 
@@ -1114,7 +1131,9 @@
                 if (i % 3 === 0) {
                     $scope.mediators_whoHasAccess_toReportG.push([]);
                 }
-                $scope.mediators_whoHasAccess_toReportG[$scope.mediators_whoHasAccess_toReportG.length - 1].push(data.mediators_whoHasAccess_toReport[i]);
+                $scope
+                    .mediators_whoHasAccess_toReportG[$scope.mediators_whoHasAccess_toReportG.length - 1]
+                    .push(data.mediators_whoHasAccess_toReport[i]);
             }
         };
 
@@ -1174,11 +1193,113 @@
 
         $scope.setIsLifeThreating = function (isLifeThreating) {
             if (isLifeThreating) {
+                /*eslint max-len: [2, 200, 4]*/
                 if (confirm('Does this Case or Subject pose an ongoing threat to the safety or health of the students and employees on campus? A Campus Alert will be requested if you select "OK"')) {
-                    NewCaseTopMenuService.setLifeThreating({ reportId: $scope.report_id, isLifeThreating: isLifeThreating }, function (data) {
+                    NewCaseTopMenuService.setLifeThreating({ reportId: $scope.report_id, isLifeThreating: isLifeThreating }, function () {
                         $scope.refresh();
                     });
                 }
+            }
+        };
+    }
+}());
+
+(function () {
+
+    'use strict';
+
+    angular
+        .module('EC')
+        .controller('NewCompany',
+            ['$scope', '$filter', '$location', 'NewCompanyService', NewCompany]);
+
+    function NewCompany($scope, $filter, $location, NewCompanyService) {
+
+        $scope.model = {
+            Data: $filter('parseUrl')($location.$$absUrl, 'data'),
+            InvitationCode: '',
+            CompanyName: '',
+            PrimaryLocationUp: '',
+            NumberEmployees: 0,
+            NumberOfNonEmployees: 0,
+            NumberOfClients: 0,
+            Language: 1,
+            Role: 5,
+            FirstName: '',
+            LastName: '',
+            Email: '',
+            Title: '',
+            Department: '',
+            Amount: 0,
+            CreditCardNumber: '',
+            NameonCard: '',
+            ExpiryDate: 'mm',
+            SelectedYear: 'yyyy',
+            CSV: 0,
+        };
+        /*$scope.model.PrimaryLocationUp = 'q';
+        $scope.model.CreditCardNumber = 'q';
+        $scope.model.NameonCard = 'q';
+        $scope.model.ExpiryDate = '01';
+        $scope.model.SelectedYear = '2018';
+        $scope.model.Title = '2018';
+        $scope.model.CompanyName = 'MailTest11';
+        $scope.model.CSV = 123;*/
+
+        $scope.years = [];
+        for (var i = new Date().getFullYear() ; i <= 2030; i++) {
+            $scope.years.push(i);
+        }
+
+        $scope.refresh = function () {
+            NewCompanyService.calc($scope.model, function (data) {
+                $scope.model = data.Model;
+            });
+        };
+
+        $scope.register = function (form) {
+            form.$submitted = true;
+            if (form.$valid) {
+                NewCompanyService.create($scope.model, function (data) {
+                    if (!data.Result) {
+                        alert(data.Message);
+                    } else {
+                        $.ajax({
+                            method: 'POST',
+                            url: '/New/CreateCompany',
+                            data: {
+                                code: $scope.model.InvitationCode.trim(),
+                                location: $scope.model.PrimaryLocationUp.trim(),
+                                departments: $scope.model.Department.trim(),
+                                company_name: $scope.model.CompanyName.trim(),
+                                number: $scope.model.NumberEmployees,
+                                numberN: $scope.model.NumberOfNonEmployees,
+                                numberC: $scope.model.NumberOfClients,
+                                first: $scope.model.FirstName.trim(),
+                                last: $scope.model.LastName.trim(),
+                                email: $scope.model.Email.trim(),
+                                title: $scope.model.Title.trim(),
+                                csv: $scope.model.CSV.trim(),
+                                cardname: $scope.model.NameonCard.trim(),
+                                cardnumber: $scope.model.CreditCardNumber.trim(),
+                                selectedMonth: $scope.model.ExpiryDate,
+                                selectedYear: $scope.model.SelectedYear,
+                                amount: $scope.model.Amount,
+                                description: '',
+                            }
+                        }).done(function (data) {//data from server
+                            if (data !== 'completed') {
+                            } else {
+                                window.location.href = '/new/success?show=1';
+                            }
+                        }).fail(function (error) {
+                            console.log(error);
+                        });
+                    }
+                });
+
+            } else {
+                console.log(form);
             }
         };
     }
@@ -1392,7 +1513,10 @@
                     data.company_disclamer_uploads[i].create_dt_s = data.company_disclamer_uploads_dt[i];
                     data.company_disclamer_uploads[i].display_name2 = data.company_disclamer_uploads[i].display_name;
                 }
-                if ((!data.company_disclamer_page) || (!data.company_disclamer_page.message_to_employees) || (!data.company_disclamer_page.message_about_guidelines)) {
+                if (
+                    (!data.company_disclamer_page)
+                    || (!data.company_disclamer_page.message_to_employees)
+                    || (!data.company_disclamer_page.message_about_guidelines)) {
                     $('#DisclaimersExclamationmarkImg').show();
                 } else {
                     $('#DisclaimersExclamationmarkImg').hide();
@@ -1573,8 +1697,8 @@
                     center: 'title',
                 },
                 defaultView: 'agendaWeek',
-                eventClick: function(date, jsEvent, view) {
-                },
+                //eventClick: function(date, jsEvent, view) {
+                //},
                 agenda: 'H:mm',
                 views: {
                     week: {
@@ -1586,7 +1710,7 @@
                 slotDuration: '01:00:00',
                 axisFormat: 'hh:mm a',
                 selectable: true,
-                select: function (start, end, allDay) {
+                select: function (start, end) {
                     var dt = new Date();
                     var d3 = moment(dt).add(3, 'days').utc().startOf('day');
 
@@ -1608,7 +1732,7 @@
                         });
                     }
                 },
-                viewRender: function(view, element) {
+                viewRender: function(view) {
                     $scope.period = {
                         start: view.start.toDate(),
                         end: view.end.toDate(),
@@ -1702,9 +1826,9 @@
                 slotDuration: '01:00:00',
                 axisFormat: 'hh:mm a',
                 selectable: true,
-                eventClick: function (date, jsEvent, view) {
-                },
-                select: function (start, end, allDay) {
+                //eventClick: function (date, jsEvent, view) {
+                //},
+                select: function (start, end) {
                     TrainerService.addTime({ DateFrom: start, DateTo: end }, function (data) {
                         if (!data.Result) {
                             uiCalendarConfig.calendars.calendarOne.fullCalendar('unselect');
@@ -1715,7 +1839,7 @@
                     });
                     return false;
                 },
-                viewRender: function (view, element) {
+                viewRender: function (view) {
                     $scope.period = {
                         start: view.start.toDate(),
                         end: view.end.toDate(),
@@ -1727,7 +1851,7 @@
                     if ((view.name === 'agendaWeek') && (!event.companyId)) {
                         element.find('.fc-content').prepend('<a href=\"#\" style=\"float: right\" class=\"closeon\">X</span>');
                         element.find('.closeon').off('click').on('click', function () {
-                            TrainerService.deleteTime({ Hour: event.start.format('YYYY/MM/DD HH:00:00') }, function (data) {
+                            TrainerService.deleteTime({ Hour: event.start.format('YYYY/MM/DD HH:00:00') }, function () {
                                 uiCalendarConfig.calendars.calendarOne.fullCalendar('removeEvents', event._id);
                             });
                         });
@@ -1894,6 +2018,21 @@
         return $resource('/api/NewCaseTopMenu', {}, {
             get: { url: '/api/NewCaseTopMenu/get', method: 'GET', params: {}, isArray: false },
             setLifeThreating: { url: '/api/NewCaseTopMenu/setLifeThreating', method: 'POST', params: {}, isArray: false },
+        });
+    };
+})();
+
+(function () {
+
+    'use strict';
+
+    angular.module('EC')
+        .service('NewCompanyService', ['$resource', NewCompanyService]);
+
+    function NewCompanyService($resource) {
+        return $resource('/api/Trainer', {}, {
+            calc: { url: '/api/NewCompany/Calc', method: 'POST', params: {}, isArray: false },
+            create: { url: '/api/NewCompany/Create', method: 'POST', params: {}, isArray: false },
         });
     };
 })();

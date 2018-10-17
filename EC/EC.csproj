@@ -245,6 +245,7 @@
     <Content Include="angular\controllers\EmployeeAwarenessPosterController.js" />
     <Content Include="angular\controllers\EmployeeAwarenessController.js" />
     <Content Include="angular\controllers\TrainerCompanyController.js" />
+    <Content Include="angular\controllers\NewCompany.js" />
     <Content Include="angular\controllers\TrainerController.js" />
     <Content Include="angular\services\AnalyticsRootCauseAnalysisService.js" />
     <Content Include="angular\services\AnalyticsCASService.js" />
@@ -262,6 +263,7 @@
     <Content Include="angular\services\SettingsDisclaimerService.js" />
     <Content Include="angular\services\SettingsUserEditService.js" />
     <Content Include="angular\services\EmployeeAwarenessService.js" />
+    <Content Include="angular\services\NewCompanyService.js" />
     <Content Include="angular\services\TrainerService.js" />
     <Content Include="App\components\activeHover\activeHover.js" />
     <Content Include="App\components\affix\affix.js" />
@@ -1254,6 +1256,7 @@
     <Content Include="Views\Shared\HelpPartial.cshtml" />
     <Content Include="Views\Trainer\Index.cshtml" />
     <Content Include="Views\Trainer\Calendar.cshtml" />
+    <Content Include="Views\New\CompanyA.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1289,6 +1292,7 @@
     <Compile Include="Controllers\API\NewCaseTeamController.cs" />
     <Compile Include="Controllers\API\NewCaseMessagesController.cs" />
     <Compile Include="Controllers\API\NewCaseReportController.cs" />
+    <Compile Include="Controllers\API\NewCompanyController.cs" />
     <Compile Include="Controllers\API\SettingsCompanyRoutingController.cs" />
     <Compile Include="Controllers\API\SettingsCompanyCaseAdminDepartmentController.cs" />
     <Compile Include="Controllers\API\SettingsCompanySecondaryTypeController.cs" />
