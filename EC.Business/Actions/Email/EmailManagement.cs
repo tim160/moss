@@ -624,6 +624,11 @@ namespace EC.Business.Actions.Email
                 {
                     msg.To.Add(new MailAddress(toAddress));
                 }
+                if (ConfigurationManager.AppSettings["TestEmail"] != null)
+                {
+                    msg.To.Clear();
+                    msg.To.Add(new MailAddress(ConfigurationManager.AppSettings["TestEmail"]));
+                }
 
                 msg.Subject = messageSubject;
                 msg.Body = messageBody;

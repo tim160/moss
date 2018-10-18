@@ -150,7 +150,24 @@ namespace EC.Controllers
 
             return View();
         }
-        public string CreateCompany(string code, string location, string company_name, string number, string first, string last, string email, string title, string departments, string amount, string cardnumber, string cardname, string csv, string selectedMonth, string selectedYear)
+        public string CreateCompany(
+            string code, 
+            string location, 
+            string company_name, 
+            string number, 
+            string first, 
+            string last, 
+            string email, 
+            string title, 
+            string departments, 
+            string amount, 
+            string cardnumber, 
+            string cardname, 
+            string csv, 
+            string selectedMonth, 
+            string selectedYear,
+            int contractors_number = 0,
+            int customers_number = 0)
         {
             int company_id = 0;
             int user_id = 0;
@@ -267,6 +284,8 @@ namespace EC.Controllers
             _company.registration_dt = DateTime.Now;
             _company.company_code = company_code.Trim();
             _company.employee_quantity = number;
+            _company.contractors_number = contractors_number;
+            _company.customers_number = customers_number;
             _company.language_id = language_id;
             _company.company_short_name = company_short_name;
 
@@ -784,7 +803,7 @@ namespace EC.Controllers
             #endregion
 
             string login = glb.GenerateLoginName(first, last);
-            string pass = glb.GeneretedPassword();
+            string pass = glb.GeneretedPassword().Trim();
 
             #region User Saving
             if (company_id != 0)
@@ -796,8 +815,7 @@ namespace EC.Controllers
                 _user.role_id = 5;
                 _user.status_id = 2;
                 _user.login_nm = login.Trim();
-                _user.password = pass.Trim();
-                _user.password = PasswordUtils.GetHash(_user.password);
+                _user.password = PasswordUtils.GetHash(pass);
                 _user.photo_path = "";
                 _user.email = email.Trim();
                 _user.phone = "";
@@ -829,6 +847,7 @@ namespace EC.Controllers
                     db.user.Add(_user);
                     db.SaveChanges();
                     user_id = _user.id;
+                    _user.password = pass;
                 }
                 catch (Exception ex)
                 {

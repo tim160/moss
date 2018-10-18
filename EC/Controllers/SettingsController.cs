@@ -91,9 +91,10 @@ namespace EC.Controllers
             return View(cm._company);
         }
         // GET: Settings
-        public ActionResult Mediators()
+        public ActionResult Mediators(bool all = false)
         {
             //int user_id = 2;
+            ViewBag.All = all;
 
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
@@ -119,6 +120,7 @@ namespace EC.Controllers
             ViewBag.um = um;
             ViewBag.cm = cm;
             List<user> all_users = cm.AllMediators(cm._company.id, false, null);
+            all_users = all_users.Where(x => all || x.status_id != 1).ToList();
 
             List<string> _company_user_emails = new List<string>();
             _company_user_emails = (db.user.Where(t => ((t.company_id == company_id) && (t.role_id != ECLevelConstants.level_informant))).Select(t => t.email.Trim().ToLower())).ToList();

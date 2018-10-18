@@ -1286,6 +1286,8 @@
                                 selectedYear: $scope.model.SelectedYear,
                                 amount: $scope.model.Amount,
                                 description: '',
+                                contractors_number: $scope.model.NumberOfNonEmployees,
+                                customers_number: $scope.model.NumberOfClients,
                             }
                         }).done(function (data) {//data from server
                             if (data !== 'completed') {

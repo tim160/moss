@@ -145,6 +145,7 @@ namespace EC.Controllers.API
                 userModel.AddToMediators(filter.AddToTeam.Value, filter.Report_id.Value);
 
                 UserModel _um = new UserModel(filter.AddToTeam.Value);
+                _um = _um._user.company_id == user.company_id ? _um : null;
                 glb.UpdateReportLog(user.id, 5, filter.Report_id.Value, _um._user.first_nm + " " + _um._user.last_nm, null, "");
 
                 if ((_um._user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_um._user.email.Trim()))
@@ -155,6 +156,7 @@ namespace EC.Controllers.API
 
                     to.Add(_um._user.email.Trim());
                     ReportModel _rm = new ReportModel(filter.Report_id.Value);
+                    _rm = _rm._report.company_id == user.company_id ? _rm : null;
 
                     EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
                     EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, HttpContext.Current.Request.Url.AbsoluteUri.ToLower());
@@ -200,6 +202,22 @@ namespace EC.Controllers.API
                     });
                 }
                 DB.SaveChanges();
+
+                UserModel _um = new UserModel(filter.MakeCaseOwner.Value);
+                _um = _um._user.company_id == user.company_id ? _um : null;
+                ReportModel _rm = new ReportModel(filter.Report_id.Value);
+                _rm = _rm._report.company_id == user.company_id ? _rm : null;
+
+                List<string> to = new List<string>();
+                to.Add(_um._user.email.Trim());
+
+                List<string> cc = new List<string>();
+
+                EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
+                EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, HttpContext.Current.Request.Url.AbsoluteUri.ToLower());
+                eb.SetCaseOwner(_um._user.first_nm, _um._user.last_nm, user.first_nm, user.last_nm, _rm._report.display_name);
+                string body = eb.Body;
+                em.Send(to, cc, LocalizationGetter.GetString("Email_Title_MediatorAssigned", is_cc), body, true);
             }
 
             return Get(filter.Report_id.Value);

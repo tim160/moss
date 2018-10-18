@@ -181,7 +181,6 @@ namespace EC.Business.Actions.Email
                     // // case re-opened - message for reporter
                     m_filename = "ReporterCaseReopened";
                     break;
-
                 case 40:
                     //mediator assigned to case   (?? cc for the one who assigned?)
                     m_filename = "MediatorAssigned";
@@ -234,6 +233,10 @@ namespace EC.Business.Actions.Email
                 case 64:
                     // message about case deadline past due
                     m_filename = "TrainerCalendarEventRemoved";
+                    break;
+                case 65:
+                    //mediator assigned to case   (?? cc for the one who assigned?)
+                    m_filename = "SetCaseOwner";
                     break;
             }
 
@@ -451,6 +454,14 @@ namespace EC.Business.Actions.Email
         public void MediatorAssigned(string first, string last, string admin_first, string admin_last, string case_number)
         {
             GetBody(40);
+
+            m_body = m_body.Replace("[MediatorName]", (first + " " + last).Trim());
+            m_body = m_body.Replace("[AdminName]", (admin_first + " " + admin_last).Trim());
+            m_body = m_body.Replace("[CaseNumber]", case_number.Trim());
+        }
+        public void SetCaseOwner(string first, string last, string admin_first, string admin_last, string case_number)
+        {
+            GetBody(65);
 
             m_body = m_body.Replace("[MediatorName]", (first + " " + last).Trim());
             m_body = m_body.Replace("[AdminName]", (admin_first + " " + admin_last).Trim());
