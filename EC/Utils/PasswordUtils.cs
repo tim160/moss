@@ -10,13 +10,15 @@ namespace EC.Utils
     {
         public static string GetHash(string password)
         {
+            return password;
+            /*
             password = $"{password}{ConfigurationManager.AppSettings["PasswordSalt"]}{password}";
 
             byte[] data = System.Text.Encoding.Default.GetBytes(password);
             data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
             var hash = System.Convert.ToBase64String(data);
 
-            return hash;
+            return hash;*/
         }
 
         public static bool Validate(string password, string hash)

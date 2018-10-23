@@ -137,13 +137,15 @@ namespace EC.Models
 
         public user Login(string login, string password)
         {
-            var hash = PasswordUtils.GetHash(password);
+         /*   var hash = PasswordUtils.GetHash(password);
             var validate = PasswordUtils.Validate(password, hash);
 
             user _user = db.user.FirstOrDefault(item => item.login_nm.Trim() == login && item.password == hash); //By hash
             //_user = _user ?? db.user.FirstOrDefault(item => item.login_nm.Trim() == login && item.password.Trim() == password); //By password
 
             //user _user = db.user.FirstOrDefault(item => item.login_nm.Trim() == login && item.password.Trim() == password && item.status_id == 2);
+            */
+            user _user = db.user.FirstOrDefault(item => item.login_nm.Trim() == login && item.password.Trim() == password);
             if (_user == null)
             {
                 return null;
