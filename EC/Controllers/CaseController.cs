@@ -19,6 +19,7 @@ using EC.Models.App.Case;
 using EC.Common.Interfaces;
 using EC.Core.Common;
 using EC.Constants;
+using EC.Localization;
 
 namespace EC.Controllers
 {
@@ -698,16 +699,18 @@ namespace EC.Controllers
                 EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
                 eb.MediatorAssigned(_um._user.first_nm, _um._user.last_nm, user.first_nm, user.last_nm, _rm._report.display_name);
                 string body = eb.Body;
-                em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_MediatorAssigned, body, true);
+              ///  em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_MediatorAssigned, body, true);
+                em.Send(to, cc, LocalizationGetter.GetString("Email_Title_MediatorAssigned", is_cc), body, true);
+
             }
-            
+
 
             #endregion
 
 
 
-         //   ShowMediators(209);
-         //   return RedirectToAction("Team/" + report_id.ToString());
+            //   ShowMediators(209);
+            //   return RedirectToAction("Team/" + report_id.ToString());
             return true;
         }
 
@@ -1159,13 +1162,13 @@ namespace EC.Controllers
                         {
                             eb.CaseCloseApprove( rm._report.display_name);
                             body = eb.Body;
-                            em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_NextStep, body, true);
+                            em.Send(to, cc, LocalizationGetter.GetString("Email_Title_NextStep", is_cc), body, true);
                         }
                         else if((promotion_value == ECGlobalConstants.investigation_status_resolution || promotion_value == ECGlobalConstants.investigation_status_completed) && um_temp._user.role_id == 4)
                         {
                             eb.CaseCloseApprovePlatformManager(rm._report.display_name);
                             body = eb.Body;
-                            em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_NextStep, body, true);
+                            em.Send(to, cc, LocalizationGetter.GetString("Email_Title_NextStep", is_cc), body, true);
                         }
                     }
                 }

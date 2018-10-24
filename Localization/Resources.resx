@@ -2618,4 +2618,10 @@
   <data name="_Started" xml:space="preserve">
     <value>Started</value>
   </data>
+  <data name="Email_Title_SetCaseOwner" xml:space="preserve">
+    <value>Employee Confidential assignment as Case Owner</value>
+  </data>
+  <data name="Email_Title_SetCaseOwner_CC" xml:space="preserve">
+    <value>Campus Confidential assignment as Case Owner</value>
+  </data>
 </root>

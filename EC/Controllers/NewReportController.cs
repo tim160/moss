@@ -446,7 +446,7 @@ namespace EC.Controllers.ViewModel
                     eb.NextStep(um._user.first_nm, um._user.last_nm, rm._report.display_name);
                     body = eb.Body;
 
-                    em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_NextStep, body, true);
+                    em.Send(to, cc, LocalizationGetter.GetString("Email_Title_NextStep", is_cc), body, true);
                 }
 
                 #endregion

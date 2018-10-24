@@ -2707,6 +2707,24 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Employee Confidential assignment as Case Owner.
+        /// </summary>
+        internal static string Email_Title_SetCaseOwner {
+            get {
+                return ResourceManager.GetString("Email_Title_SetCaseOwner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Campus Confidential assignment as Case Owner.
+        /// </summary>
+        internal static string Email_Title_SetCaseOwner_CC {
+            get {
+                return ResourceManager.GetString("Email_Title_SetCaseOwner_CC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Membership status.
         /// </summary>
         internal static string Email_TitlePartnerNewCompanyStatusChange {
