@@ -17,7 +17,7 @@ namespace EC.COM.Controllers
             int count;
             if (!int.TryParse(data[5], out count))
             {
-                count = 1;
+                count = 0;
             }
             var model = new CalculateModel
             {
@@ -63,6 +63,7 @@ namespace EC.COM.Controllers
             var priceR = 0m;
             using (var db = new DBContext())
             {
+                model.InvitationCode = String.IsNullOrEmpty(model.InvitationCode) ? "EC" : model.InvitationCode;
                 var items = db.CompanyInvitations
                     .Where(x => x.Invitation_code == model.InvitationCode)
                     .ToList();
