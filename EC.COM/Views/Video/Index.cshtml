@@ -115,7 +115,7 @@
 					<div class="videoHeroImage-contentBlock__textInfo">
 						Watch the demos and see how it’s done.
 					</div>
-					<a href="#" class="videoHeroImage-contentBlock__playBlock clearfix">
+					<a href="#" class="videoHeroImage-contentBlock__playBlock clearfix" id="play-video">
 						<div class="videoHeroImage-contentBlock__playBlock-icon"></div>
 						<div class="videoHeroImage-contentBlock__playBlock-text">
 							Start watching
@@ -129,7 +129,7 @@
 				<div class="videoMeinContent-block">
 					<div class="videoBlock-container">
 						<div class="videoBlock-playBg">
-                            <iframe width="283" height="170" src="https://www.youtube.com/embed/QsVTBL7GtLI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            <iframe id="video" width="283" height="170" src="https://www.youtube.com/embed/QsVTBL7GtLI?rel=0" frameborder="0" allow="autoplay" allowfullscreen></iframe>
 						</div>
 						<div class="videoBlock-content">
 							<div class="videoBlock-content__info">
@@ -184,7 +184,7 @@
 						</div>
 					</div>
 
-					<a href="#" class="videoBlockDownload-container">
+					<a href="@Url.Content("~/Content/Employee Confidential Overview.zip")" class="videoBlockDownload-container">
 						<div class="videoBlockDownload-title">
 							Download </br> brochures
 						</div>
@@ -258,3 +258,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="~/Content/libs/OwlCarousel2-2.2.1/dist/owl.carousel.min.js"></script>
 <script src="~/Content/js/common.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#play-video').on('click', function (ev) {
+
+            $("#video")[0].src += "&autoplay=1";
+            ev.preventDefault();
+
+        });
+    });
+</script>

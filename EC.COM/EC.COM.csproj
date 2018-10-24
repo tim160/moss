@@ -667,6 +667,7 @@
     <Content Include="Content\sass\_media.sass" />
     <Content Include="Content\sass\_vars.sass" />
     <None Include="ConnectionStrings.config.default" />
+    <Content Include="Content\Employee Confidential Overview.zip" />
     <None Include="Properties\PublishProfiles\EC.COM.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

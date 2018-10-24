@@ -82,3 +82,4 @@ EC/Web.config
 EC.COM/Areas/
 EC.COM/ConnectionStrings.config
 EC.COM/Smtp.config
+EC/Properties/PublishProfiles/File.pubxml

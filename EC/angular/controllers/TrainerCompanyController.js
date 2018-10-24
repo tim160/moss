@@ -81,7 +81,7 @@
         };
 
         $scope.refresh = function () {
-            TrainerService.get({ DateFrom: $scope.period.start, DateTo: $scope.period.end }, function (data) {
+            TrainerService.get({ DateFrom: moment($scope.period.start).format('YYYY/MM/DD'), DateTo: moment($scope.period.end).format('YYYY/MM/DD') }, function (data) {
                 uiCalendarConfig.calendars.calendarOne.fullCalendar('unselect');
 
                 $scope.eventSources.splice(0, $scope.eventSources.length);
