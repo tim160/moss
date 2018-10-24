@@ -51,11 +51,11 @@
         @LocalizationGetter.GetString(um.CanEditUserProfiles ? "SetupMediatorProfiles" : "CaseAdministratorsUp", is_cc)
         @if (ViewBag.All == false)
         {
-            @Html.ActionLink("Show Inactive case admins", "Mediators", new { all = true }, new { @class = "greenButton greenButtonCustom disableUnderline", style = "float: none;" })
+            @Html.ActionLink("Show Inactive case admins", "Mediators", new { all = true }, new { @class = "greenButton greenButtonCustom disableUnderline", style = "float: none; display: inline-block;" })
         }
         else
         {
-            @Html.ActionLink("Hide inactive case admins", "Mediators", new { all = false }, new { @class = "greenButton greenButtonCustom disableUnderline", style = "float: none;" })
+            @Html.ActionLink("Hide inactive case admins", "Mediators", new { all = false }, new { @class = "greenButton greenButtonCustom disableUnderline", style = "float: none; display: inline-block;" })
         }
     </p>
     <div class="contentSettings secondHeader oldstyle">
