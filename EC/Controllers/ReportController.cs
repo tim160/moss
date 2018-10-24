@@ -89,13 +89,14 @@ namespace EC.Controllers
                 if (reportModel.isCustomIncidentTypes(ViewBag.currentCompanyId))
                 {
                     /*custom types*/
-                    ViewBag.secondary_type_mandatory = reportModel.getCompanySecondaryType(ViewBag.currentCompanyId);
+                    List<company_secondary_type> list = reportModel.getCompanySecondaryType(ViewBag.currentCompanyId);
+                    ViewBag.secondary_type_mandatory = list.Where(t => t.status_id == 2).OrderBy(x => x.secondary_type_en).ToList();
                     ViewBag.CustomSecondaryType = true;
                 }
                 else
                 {
                     /*default*/
-                    ViewBag.secondary_type_mandatory = reportModel.getSecondaryTypeMandatory().Where(t => t.status_id == 2).ToList();
+                    ViewBag.secondary_type_mandatory = reportModel.getSecondaryTypeMandatory().Where(t => t.status_id == 2).OrderBy(x => x.secondary_type_en).ToList();
                     ViewBag.CustomSecondaryType = false;
                 }
 
