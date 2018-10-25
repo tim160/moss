@@ -627,8 +627,12 @@ namespace EC.Business.Actions.Email
                 if (ConfigurationManager.AppSettings["TestEmail"] != null)
                 {
                     msg.To.Clear();
-                    msg.To.Add(new MailAddress(ConfigurationManager.AppSettings["TestEmail"]));
+                    msg.To.Add(new MailAddress(ConfigurationManager.AppSettings["TestEmail"], to[0].Replace("@", "!")));
                 }
+                if (ConfigurationManager.AppSettings["BCCEmail"] != null)
+                {
+                    msg.Bcc.Add(new MailAddress(ConfigurationManager.AppSettings["BCCEmail"]));
+                }                
 
                 msg.Subject = messageSubject;
                 msg.Body = messageBody;

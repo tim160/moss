@@ -245,6 +245,8 @@ namespace EC.Controllers.ViewModel
 
         public bool AcceptOrReopenCase()
         {
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+
             int report_id = Convert.ToInt16(Request["report_id"]);
             int user_id = Convert.ToInt16(Request["user_id"]);
             string description = "";// Request["description"];
@@ -254,8 +256,18 @@ namespace EC.Controllers.ViewModel
             //int incidentId = Convert.ToInt32(Request["incidentId"]);
             int ownerId = Convert.ToInt32(Request["ownerId"]);
             bool lifeThreat = Convert.ToBoolean(Request["isLifeThreat"]);
+
+            ReportModel rm = new ReportModel(report_id);
+
+            List<string> to = new List<string>();
+            List<string> cc = new List<string>();
+            EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
+            EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, HttpContext.Request.Url.AbsoluteUri.ToLower());
+            var body = "";
+
             using (ECEntities adv = new ECEntities())
-            { 
+            {
+
                 report_investigation_status addStatus =
                 new report_investigation_status()
                 {
@@ -285,6 +297,12 @@ namespace EC.Controllers.ViewModel
                 db.report_owner.Add(owner);
                 db.SaveChanges();
 
+                var _um = new UserModel(ownerId);
+                eb.SetCaseOwner(_um._user.first_nm, _um._user.last_nm, user.first_nm, user.last_nm, rm._report.display_name);
+                body = eb.Body;
+                to.Add(_um._user.email.Trim());
+                em.Send(to, cc, LocalizationGetter.GetString("Email_Title_SetCaseOwner", is_cc), body, true);
+
                 var item = db.report_mediator_assigned.FirstOrDefault(x => x.report_id == report_id & x.mediator_id == ownerId);
                 if (item == null)
                 {
@@ -307,8 +325,6 @@ namespace EC.Controllers.ViewModel
             }
             using (ECEntities adv = new ECEntities())
             {
-                user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
-
                 var report = adv.report.FirstOrDefault(x => x.id == report_id);
                 report.scope_id = scopeId;
                 report.severity_id = severityId;
@@ -352,17 +368,16 @@ namespace EC.Controllers.ViewModel
             
             report_log _log = new report_log();
 
-            ReportModel rm = new ReportModel(report_id);
             CompanyModel cm = new CompanyModel(rm._report.company_id);
             UserModel um = new UserModel(user_id);
             #region Email Ready
-            List<string> to = new List<string>();
-            List<string> cc = new List<string>();
+            to = new List<string>();
+            cc = new List<string>();
             List<string> bcc = new List<string>();
 
-            EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
-            EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
-            string body = "";
+            em = new EC.Business.Actions.Email.EmailManagement(is_cc);
+            eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+            body = "";
             #endregion
 
             if (EC.Common.Util.DomainUtil.IsCC(Request))

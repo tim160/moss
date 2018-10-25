@@ -284,7 +284,11 @@ namespace EC.Controllers
                 foreach (var _report in reports)
                 {
                     rm = new ReportModel(_report.id);
-                    if (rm.GetThisStepDaysLeft() <= 0)
+                    if (
+                        (rm.GetThisStepDaysLeft() <= 0) 
+                        && (rm._last_investigation_status().investigation_status_id != 7) 
+                        && (rm._last_investigation_status().investigation_status_id != 9)
+                        )
                     {
                         eb.Scheduler1(rm._report.display_name);
                         // days are exceeded - reminder never sent - need to send reminder
