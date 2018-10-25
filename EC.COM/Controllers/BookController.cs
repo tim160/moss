@@ -77,12 +77,12 @@ namespace EC.COM.Controllers
                 var nne = items.FirstOrDefault(x => model.NumberOfNonEmployees >= x.From_quantity && model.NumberOfNonEmployees <= x.To_quantity);
                 if ((nne != null) && (nne.Contractor_price.HasValue) && (nne.Contractor_price_type.HasValue))
                 {
-                    priceNNE = nne.Contractor_price_type.Value == 1 ? nne.Contractor_price.Value : nne.Contractor_price.Value * model.NumberOfNonEmployees;
+                    //priceNNE = nne.Contractor_price_type.Value == 1 ? nne.Contractor_price.Value : nne.Contractor_price.Value * model.NumberOfNonEmployees;
                 }
                 var c = items.FirstOrDefault(x => model.NumberOfClients >= x.From_quantity && model.NumberOfClients <= x.To_quantity);
                 if ((c != null) && (c.Employee_price.HasValue) && (c.Employee_price_type.HasValue))
                 {
-                    priceC = c.Customer_price_type.Value == 1 ? c.Customer_price.Value : c.Customer_price.Value * model.NumberOfClients;
+                    //priceC = c.Customer_price_type.Value == 1 ? c.Customer_price.Value : c.Customer_price.Value * model.NumberOfClients;
                 }
             }
 
