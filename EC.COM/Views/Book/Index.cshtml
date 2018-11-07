@@ -138,21 +138,6 @@
                                             Number of employees
                                             <input class="form-mainContent__labelInput calc" id="NumberOfEmployees" type="number" name="NumberOfEmployees" value="@Model.NumberOfEmployees">
                                         </label>
-                                        @*<div class="form-mainContent__dropDownList-topText">
-                                            Number of employees
-                                        </div>
-                                        <div class="selectContainer">
-                                            @Html.Hidden("NumberOfEmployees", $"{ViewBag.NumberOfEmployees}")
-                                            <div class="selectList-value initValue"></div>
-                                            <ul class="ulSelectList" >
-                                                <li class="init">Please select</li>
-                                                <li data-id="1" data-value="Less than 10">Less than 10</li>
-                                                <li data-id="2" data-value="10 to 100 employees">10 to 100 employees</li>
-                                                <li data-id="3" data-value="100 to 500 employees">100 to 500 employees</li>
-                                                <li data-id="4" data-value="500 to 1000 employees">500 to 1000 employees</li>
-                                                <li data-id="5" data-value="More than 1000 employees">More than 1000 employees</li>
-                                            </ul>
-                                        </div>*@
                                     </div>
                                 </div>
                             </div>
@@ -166,21 +151,6 @@
                                             Number of non-employees
                                             <input class="form-mainContent__labelInput calc" id="NumberOfNonEmployees" type="number" name="NumberOfNonEmployees" value="@Model.NumberOfNonEmployees">
                                         </label>
-                                        @*<div class="form-mainContent__dropDownList-topText">
-                                            Number of non-employees
-                                        </div>
-                                        <div class="selectContainer">
-                                            @Html.Hidden("NumberOfNonEmployees", "")
-                                            <div class="selectList-value initValue"></div>
-                                            <ul class="ulSelectList " >
-                                                <li class="init">Please select</li>
-                                                <li data-id="1" data-value="Less than 10">Less than 10</li>
-                                                <li data-id="2" data-value="10 to 100 employees">10 to 100 employees</li>
-                                                <li data-id="3" data-value="100 to 500 employees">100 to 500 employees</li>
-                                                <li data-id="4" data-value="500 to 1000 employees">500 to 1000 employees</li>
-                                                <li data-id="5" data-value="More than 1000 employees">More than 1000 employees</li>
-                                            </ul>
-                                        </div>*@
                                     </div>
                                 </div>
                             </div>
@@ -194,21 +164,6 @@
                                             Number of clients/customers
                                             <input class="form-mainContent__labelInput calc" id="NumberOfClients" type="number" name="NumberOfClients" value="@Model.NumberOfClients">
                                         </label>
-                                        @*<div class="form-mainContent__dropDownList-topText">
-                                            Number of clients/customers
-                                        </div>
-                                        <div class="selectContainer">
-                                            @Html.Hidden("NumberOfClients", "")
-                                            <div class="selectList-value initValue"></div>
-                                            <ul class="ulSelectList" >
-                                                <li class="init">Please select</li>
-                                                <li data-id="1" data-value="none">none</li>
-                                                <li data-id="2" data-value="10 to 100 employees">10 to 100 employees</li>
-                                                <li data-id="3" data-value="100 to 500 employees">100 to 500 employees</li>
-                                                <li data-id="4" data-value="500 to 1000 employees">500 to 1000 employees</li>
-                                                <li data-id="5" data-value="More than 1000 employees">More than 1000 employees</li>
-                                            </ul>
-                                        </div>*@
                                     </div>
                                 </div>
                             </div>
@@ -223,6 +178,16 @@
                         </div>
                         <div class="pricingBillContainer">
                             <div class="pricingBill-head">
+                                <div class="pricingBill-line clearfix" style="display: flex;">
+                                    <label style="display: flex; width: 50%; flex-wrap: nowrap;">
+                                        <input type="radio" name="year" value="1" style="width: 20px" checked class="calc" />
+                                        1-Year License
+                                    </label>
+                                    <label style="display: flex; width: 50%; flex-wrap: wrap;">
+                                        <input type="radio" name="year" value="2" style="width: 20px" class="calc" />
+                                        2-Year License <br> <i>20% saving.</i>
+                                    </label>
+                                </div>
                                 <div class="pricingBill-line clearfix">
                                     <div class="pricingBill-line__text">
                                         Annual Plan Price
@@ -268,7 +233,8 @@
                                 </div>
                             </div>
                             <div class="pricingBill-footer">
-                                <button class="submitBigBtn btn" type="button">Buy now</button>
+                                <h3 id="more10k">Pricing available upon request. Contact <a href="mailto:sales@employeeconfidential.com">sales@employeeconfidential.com</a></h3>
+                                <button id="more10kb" class="submitBigBtn btn" type="button">Buy now</button>
                             </div>
                         </div>
                     </div>
@@ -320,6 +286,14 @@
             var numberOfNonEmployees = $('#NumberOfNonEmployees').val();
             var numberOfClients = $('#NumberOfClients').val();
             var invitationCode = $('#InvitationCode').val();
+            var year = $('[name="year"]:checked').val();
+
+            $('#more10k').hide();
+            $('#more10kb').show();
+            if (numberOfEmployees > 10000) {
+                $('#more10k').show();
+                $('#more10kb').hide();
+            }
 
             $.ajax({
                 cache: false,
@@ -330,6 +304,7 @@
                     numberOfEmployees: numberOfEmployees,
                     numberOfNonEmployees: numberOfNonEmployees,
                     numberOfClients: numberOfClients,
+                    year: year,
                 }
             }).done(function (data) {
                 $('#priceNE').html('$' + data.priceNE);
