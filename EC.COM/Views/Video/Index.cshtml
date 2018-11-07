@@ -7,6 +7,19 @@
     .main {
         overflow: visible !important;
     }
+    .videoBlockDownload-title2 {
+        display: flex;
+        text-decoration: none;
+        color: #434343;
+        font-family: Lato-Regular-LatinWeb;
+        font-size: 24px;
+        background-color: #edf0f0;
+        justify-content: center;
+        flex-flow: column;
+    }
+    .videoBlockDownload-icon {
+        margin-top: 10px !important;
+    }
 </style>
 
 <div class="general-container videoPage">
@@ -184,12 +197,21 @@
 						</div>
 					</div>
 
-					<a href="@Url.Content("~/Content/Employee Confidential Overview.zip")" class="videoBlockDownload-container">
-						<div class="videoBlockDownload-title">
-							Download </br> brochures
-						</div>
-						<div class="videoBlockDownload-icon"></div>
-					</a>
+					<div class="videoBlockDownload-container">
+						<a href="@Url.Content("~/Content/Employee Confidential-Overview_Two-Pager_(c)_2018.zip")" class="videoBlockDownload-title videoBlockDownload-title2">
+                            <div class="videoBlockDownload-title videoBlockDownload-title2">
+							    Download 2-page</br> overview
+                            </div>
+						    <div class="videoBlockDownload-icon videoBlockDownload-icon2"></div>
+						</a>
+
+						<a href="@Url.Content("~/Content/Employee Confidential-Overview_(c)_2018.zip")" class="videoBlockDownload-title2" style="margin-top: 20px;">
+                            <div class="videoBlockDownload-title">
+							    Download brochures
+                            </div>
+						    <div class="videoBlockDownload-icon videoBlockDownload-icon2"></div>
+						</a>
+					</div>
 						
 				</div>
 				<div class="videoMeinContent-sideBar">
