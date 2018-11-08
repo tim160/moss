@@ -9,6 +9,7 @@ namespace EC.COM.Data
     public class DBContext: DbContext
     {
         public DbSet<CompanyInvitationModel> CompanyInvitations { get; set; }
+        public DbSet<VarInfoModel> VarInfoes { get; set; }        
 
         public DBContext(): base("ECEntities")
         {
@@ -20,6 +21,10 @@ namespace EC.COM.Data
             modelBuilder
                 .Entity<CompanyInvitationModel>()
                 .ToTable("company_invitation");
+
+            modelBuilder
+                .Entity<VarInfoModel>()
+                .ToTable("var_info");
 
             base.OnModelCreating(modelBuilder);
         }

@@ -35,6 +35,28 @@ namespace EC.COM.Controllers
 
         public ActionResult Buy(CalculateModel model)
         {
+            model = DoCalculate(model);
+
+            var db = new DBContext();
+            db.VarInfoes.Add(new Data.VarInfoModel
+            {
+                First_nm = model.FirstName,
+                Last_nm = model.LastName,
+                Company_nm = model.CompanyName,
+                Phone = model.Phone,
+                Email = model.Email,
+                Invitation_code = model.InvitationCode,
+                Employee_no = model.NumberOfEmployees,
+                Non_employee_no = model.NumberOfNonEmployees,
+                Customers_no = model.NumberOfClients,
+                Annual_plan_price = model.PriceNE,
+                Non_employee_price = model.PriceNNE,
+                Customers_price = model.PriceC,
+                Onboarding_price = model.PriceR,
+                Total_price = model.PriceNE + model.PriceNNE + model.PriceC,
+            });
+            db.SaveChanges();
+
             var data = $"{model.InvitationCode}|{model.FirstName}|{model.LastName}|{model.CompanyName}|{model.Phone}|{model.Email}|{model.NumberOfEmployees}|{model.NumberOfNonEmployees}|{model.NumberOfClients}";
             data = System.Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(data));
             return Redirect($"{System.Configuration.ConfigurationManager.AppSettings["MainSite"]}new/company?data={data}");
@@ -52,15 +74,18 @@ namespace EC.COM.Controllers
             public string CompanyName { get; set; }
             public string Phone { get; set; }
             public string Email { get; set; }
+            public decimal PriceNE { get; set; }
+            public decimal PriceNNE { get; set; }
+            public decimal PriceC { get; set; }
+            public decimal PriceR { get; set; }
         }
 
-        [HttpPost]
-        public JsonResult Calculate(CalculateModel model)
+        public CalculateModel DoCalculate(CalculateModel model)
         {
-            var priceNE = 0m;
-            var priceNNE = 0m;
-            var priceC = 0m;
-            var priceR = 0m;
+            model.PriceNE = 0m;
+            model.PriceNNE = 0m;
+            model.PriceC = 0m;
+            model.PriceR = 0m;
             using (var db = new DBContext())
             {
                 model.InvitationCode = String.IsNullOrEmpty(model.InvitationCode) ? "EC" : model.InvitationCode;
@@ -71,31 +96,39 @@ namespace EC.COM.Controllers
                 var ne = items.FirstOrDefault(x => model.NumberOfEmployees >= x.From_quantity && model.NumberOfEmployees <= x.To_quantity);
                 if ((ne != null) && (ne.Employee_price.HasValue) && (ne.Employee_price_type.HasValue))
                 {
-                    priceNE = ne.Employee_price_type.Value == 1 ? ne.Employee_price.Value : ne.Employee_price.Value * model.NumberOfEmployees;
-                    priceR = ne.Onboarding_fee.Value;
+                    model.PriceNE = ne.Employee_price_type.Value == 1 ? ne.Employee_price.Value : ne.Employee_price.Value * model.NumberOfEmployees;
+                    model.PriceR = ne.Onboarding_fee.Value;
                 }
                 var nne = items.FirstOrDefault(x => model.NumberOfEmployees >= x.From_quantity && model.NumberOfEmployees <= x.To_quantity);
                 if ((nne != null) && (nne.Contractor_price.HasValue) && (nne.Contractor_price_type.HasValue))
                 {
-                     priceNNE = nne.Contractor_price_type.Value == 1 ? nne.Contractor_price.Value : nne.Contractor_price.Value * model.NumberOfNonEmployees;
+                    model.PriceNNE = nne.Contractor_price_type.Value == 1 ? nne.Contractor_price.Value : nne.Contractor_price.Value * model.NumberOfNonEmployees;
                 }
                 var c = items.FirstOrDefault(x => model.NumberOfEmployees >= x.From_quantity && model.NumberOfEmployees <= x.To_quantity);
                 if ((c != null) && (c.Employee_price.HasValue) && (c.Employee_price_type.HasValue))
                 {
-                     priceC = c.Customer_price_type.Value == 1 ? c.Customer_price.Value : c.Customer_price.Value * model.NumberOfClients;
+                    model.PriceC = c.Customer_price_type.Value == 1 ? c.Customer_price.Value : c.Customer_price.Value * model.NumberOfClients;
                 }
             }
+
+            return model;
+        }
+
+        [HttpPost]
+        public JsonResult Calculate(CalculateModel model)
+        {
+            model = DoCalculate(model);
 
             NumberFormatInfo nfi = (NumberFormatInfo) CultureInfo.InvariantCulture.NumberFormat.Clone();
             nfi.NumberGroupSeparator = ",";
 
             var data = new
             {
-                priceNE = priceNE.ToString("N0", nfi),
-                priceNNE = priceNNE.ToString("N0", nfi),
-                priceC = priceC.ToString("N0", nfi),
-                priceT = (priceNE + priceNNE + priceC).ToString("N0", nfi),
-                priceR = priceR.ToString("N0", nfi),
+                priceNE = model.PriceNE.ToString("N0", nfi),
+                priceNNE = model.PriceNNE.ToString("N0", nfi),
+                priceC = model.PriceC.ToString("N0", nfi),
+                priceT = (model.PriceNE + model.PriceNNE + model.PriceC).ToString("N0", nfi),
+                priceR = model.PriceR.ToString("N0", nfi),
             };
 
             return new JsonResult

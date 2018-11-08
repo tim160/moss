@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EC.COM.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,7 +16,7 @@ namespace EC.COM.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(string firstName, string lastName, string companyName, string phone, string email, string numberOfEmployees, string invitationCode)
+        public ActionResult Index(string firstName, string lastName, string companyName, string phone, string email, int numberOfEmployees, string invitationCode)
         {
             var data = $"{firstName}|{lastName}|{companyName}|{phone}|{email}|{numberOfEmployees}|{invitationCode}";
 
