@@ -78,6 +78,7 @@ namespace EC.COM.Controllers
             public decimal PriceNNE { get; set; }
             public decimal PriceC { get; set; }
             public decimal PriceR { get; set; }
+            public int Year { get; set; }
         }
 
         public CalculateModel DoCalculate(CalculateModel model)
@@ -110,6 +111,10 @@ namespace EC.COM.Controllers
                     model.PriceC = c.Customer_price_type.Value == 1 ? c.Customer_price.Value : c.Customer_price.Value * model.NumberOfClients;
                 }
             }
+
+            model.PriceNE = model.PriceNE * (model.Year == 1 ? 1.2m : 2m);
+            model.PriceNNE = model.PriceNNE * (model.Year == 1 ? 1.2m : 2m);
+            model.PriceC = model.PriceC * (model.Year == 1 ? 1.2m : 2m);
 
             return model;
         }
