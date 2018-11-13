@@ -1,0 +1,226 @@
+﻿@model EC.COM.Controllers.BookController.OrderViewModel
+
+@{
+    ViewBag.Title = "Order";
+    var monthes = new List<int>();
+    var years = new List<int>();
+    for(var i = 1; i < 13; i++)
+    {
+        monthes.Add(i);
+    }
+    for (var i = 0; i < 30; i++)
+    {
+        years.Add(DateTime.Now.Year + i);
+    }
+}
+
+<div class="general-container pricingPage">
+	<header class="header">
+		<div class="top-headerBg">
+            <div class="container">
+                <div class="top-header">
+                    <a href="http://campusconfidential.com" class="top-header__campusLink">
+                        <span class="top-header__campusLink-text">
+                            Campus Confidential
+                        </span>
+                        <img src="~/Content/images/svg-icons/upper-right.svg" alt="" />
+                    </a>
+                    <div class="top-header__loginBar">
+                        <nav class="top-header__loginBar-nav">
+                            <li class="top-header__loginBar-li">
+                                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Login" class="top-header__loginBar-a">
+                                    Client Login
+                                </a>
+                            </li><!-- /.top-header__loginBar-li -->
+                            <li class="top-header__loginBar-li">
+                                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Report" class="top-header__loginBar-a">
+                                    File a Report
+                                </a>
+                            </li><!-- /.top-header__loginBar-li -->
+                            <li class="top-header__loginBar-li">
+                                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/CheckStatus" class="top-header__loginBar-a">
+                                    Check Report Status
+                                </a>
+                            </li><!-- /.top-header__loginBar-li -->
+                        </nav><!-- /.top-header__loginBar-nav -->
+                    </div><!-- /.top-header__loginBar -->
+                </div><!-- /.top-header -->
+            </div>
+		</div>
+		<div class="main-headerBg ">
+			<div class="container">
+				<div class="main-header">
+					<a href="/" class="main-headerLogo">
+						<div class="main-headerLogo__img">
+							<img src="~/Content/images/0-main-logo.png" alt="" />
+						</div><!-- /.main-headerLogo__img -->
+						<div class="main-headerLogo__text">
+							Reduce risk. Create trust.
+						</div><!-- /.main-headerLogo__text -->
+					</a><!-- /.main-headerLogo -->
+					<div class="main-headerMenu-mobile">
+						<a href="/" class="main-headerLogo-mobile">
+							<div class="main-headerLogo__img-mobile">
+								<img src="~/Content/images/0-main-logo.png" alt="" />
+							</div><!-- /.main-headerLogo__img -->
+							<div class="main-headerLogo__text-mobile">
+								Reduce risk. Create trust.
+							</div><!-- /.main-headerLogo__text -->
+						</a><!-- /.main-headerLogo -->
+						<a href="#" class="main-headerLogo-mobile-burgerBtn">
+							<img src="~/Content/images/svg-icons/burger.svg" alt="" />
+						</a>
+					</div><!-- /.main-headerMenu-mobile -->
+					<div class="main-headerMenu">
+						<nav class="main-headerMenu__nav">
+							<li class="main-headerMenu__li">
+								<a href="/#benefitsSection" class="main-headerMenu__a">
+									Benefits
+								</a>
+							</li><!-- /.main-headerMenu__li -->
+							<li class="main-headerMenu__li">
+								<a href="/#gridSection" class="main-headerMenu__a">
+									Incident Reporting
+								</a>
+							</li><!-- /.main-headerMenu__li -->
+							<li class="main-headerMenu__li">
+								<a href="/#menegementSection" class="main-headerMenu__a">
+									Case Management
+								</a>
+							</li><!-- /.main-headerMenu__li -->
+							<li class="main-headerMenu__li">
+								<a href="about.html" data-scroll-to="" class="main-headerMenu__a">
+									About
+								</a>
+							</li><!-- /.main-headerMenu__li -->
+							<li class="main-headerMenu__li">
+								<a href="/#contactSection" class="main-headerMenu__a">
+									Contact
+								</a>
+							</li><!-- /.main-headerMenu__li -->
+						</nav><!-- /.main-headerMenu__nav -->
+					</div><!-- /.main-headerMenu -->
+				</div><!-- /.main-header -->
+			</div><!-- /.container -->
+		</div><!-- /.main-headerBg -->
+	</header><!-- /.header -->
+	
+    <main class="main">
+        <section class="pricingTitleSection">
+        <div class="pricingTitleSection__title">
+            Order
+        </div>
+        <div class="pricingTitleSection__subTitle">
+            Order
+        </div>
+        </section>
+        <section class="pricingMainSection">
+            <div class="container">
+                @using (Html.BeginForm("Order", null, FormMethod.Post))
+                {
+                    @Html.HiddenFor(x => x.VarInfo.Id)
+                    @Html.HiddenFor(x => x.VarInfo.First_nm)
+                    @Html.HiddenFor(x => x.VarInfo.Last_nm)
+                    @Html.HiddenFor(x => x.VarInfo.Company_nm)
+                    @Html.HiddenFor(x => x.VarInfo.Phone)
+                    @Html.HiddenFor(x => x.VarInfo.Email)
+
+                    <div class="pricingMainContainer">
+                        <div class="pricingFormContainer">
+                            <div class="pricingForm-block">
+                                <div class="pricingForm-block__title">
+                                    Amount
+                                </div>
+                                <div class="pricingForm-block__input">
+                                    <label class="form-mainContent__label">
+                                        Amount
+                                        <input type="text" class="form-mainContent__labelInput calc" id="Total_price" name="Total_price" value="@(Model.VarInfo.Total_price + Model.VarInfo.Annual_plan_price)" readonly>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="pricingForm-block">
+                                <div class="pricingForm-block__title">
+                                    Credit Card Number
+                                </div>
+                                <div class="pricingForm-block__input">
+                                    <div class="form-mainContent__dropDownList dropDownList ">
+                                        <label class="form-mainContent__label">
+                                            Credit Card Number
+                                            <input class="form-mainContent__labelInput calc" id="CardNo" type="text" name="CardNo" value="@Model.CardNo">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pricingForm-block">
+                                <div class="pricingForm-block__title">
+                                    Name on Card
+                                </div>
+                                <div class="pricingForm-block__input">
+                                    <div class="form-mainContent__dropDownList dropDownList ">
+                                        <label class="form-mainContent__label">
+                                            Name on Card
+                                            <input class="form-mainContent__labelInput calc" id="NameOnCard" type="text" name="NameOnCard" value="@Model.NameOnCard">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pricingForm-block">
+                                <div class="pricingForm-block__title">
+                                    Expiration date
+                                </div>
+                                <div class="pricingForm-block__input">
+                                    <div class="form-mainContent__dropDownList dropDownList ">
+                                        <label class="form-mainContent__label">
+                                            @Html.DropDownListFor(x => x.ExpirationMonth, new SelectList(monthes), new { @class = "form-mainContent__labelInput" })
+                                            /
+                                            @Html.DropDownListFor(x => x.ExpirationMonth, new SelectList(years), new { @class = "form-mainContent__labelInput" })
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pricingForm-block">
+                                <div class="pricingForm-block__title">
+                                    CSV Code
+                                </div>
+                                <div class="pricingForm-block__input">
+                                    <div class="form-mainContent__dropDownList dropDownList ">
+                                        <label class="form-mainContent__label">
+                                            CSV Code
+                                            <input class="form-mainContent__labelInput calc" id="CSVCode" type="number" name="CSVCode" value="@Model.CSVCode">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pricingBill-footer">
+                                <button id="submitBigBtn" class="submitBigBtn btn" type="submit" style="display: none;">Order</button>
+                            </div>
+                            <div class="pricingInfoBlock">
+                                <div class="pricingInfoBlock__textInfo">
+                                    *Many US states prohibit sexual harassment of non-employees in the workplace. The term “non-employee” includes 
+                                    contractors, subcontractors, vendors, consultants. An employer will be liable when the employer (including its agents and 
+                                    supervisors) knew or should have known that the non-employee was subjected to sexual harassment in the employer’s 
+                                    workplace, and the employer failed to take immediate and appropriate corrective action.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </section>
+    </main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+    $(function () {
+        $('.calc').on('change', function () {
+            $('#submitBigBtn').hide();
+            console.log(1);
+            if ($('#CardNo').val() && $('#NameOnCard').val() && $('#CSVCode').val()) {
+                $('#submitBigBtn').show();
+            }
+        });
+    });
+</script>
+

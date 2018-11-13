@@ -702,6 +702,7 @@
     <Content Include="ConnectionStrings.config" />
     <Content Include="Smtp.config" />
     <None Include="Smtp.config.default" />
+    <Content Include="Views\Book\Order.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EC.Business\EC.Business.csproj">

@@ -42,7 +42,7 @@ namespace EC.COM.Controllers
             model = DoCalculate(model);
 
             var db = new DBContext();
-            db.VarInfoes.Add(new Data.VarInfoModel
+            var varinfo = new Data.VarInfoModel
             {
                 First_nm = model.FirstName,
                 Last_nm = model.LastName,
@@ -58,13 +58,15 @@ namespace EC.COM.Controllers
                 Customers_price = model.PriceC,
                 Onboarding_price = model.PriceR,
                 Total_price = model.PriceNE + model.PriceNNE + model.PriceC,
-            });
+            };
+            db.VarInfoes.Add(varinfo);
             db.SaveChanges();
 
-            var data = $"{model.InvitationCode}|{model.FirstName}|{model.LastName}|{model.CompanyName}|{model.Phone}|{model.Email}|{model.NumberOfEmployees}|{model.NumberOfNonEmployees}|{model.NumberOfClients}";
-            data = System.Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(data));
-            return Redirect($"{System.Configuration.ConfigurationManager.AppSettings["MainSite"]}new/company?data={data}");
+            //var data = $"{model.InvitationCode}|{model.FirstName}|{model.LastName}|{model.CompanyName}|{model.Phone}|{model.Email}|{model.NumberOfEmployees}|{model.NumberOfNonEmployees}|{model.NumberOfClients}|{(model.PriceNE + model.PriceNNE + model.PriceC)}";
+            //data = System.Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(data));
+            //return Redirect($"{System.Configuration.ConfigurationManager.AppSettings["MainSite"]}new/company?data={data}");
             //return View();
+            return RedirectToAction("Order", new { id = varinfo.Id, email = model.Email, company = model.CompanyName });
         }
 
         public class CalculateModel
@@ -83,6 +85,7 @@ namespace EC.COM.Controllers
             public decimal PriceC { get; set; }
             public decimal PriceR { get; set; }
             public int Year { get; set; }
+            public decimal PriceTotal { get; set; }
         }
 
         public CalculateModel DoCalculate(CalculateModel model)
@@ -119,6 +122,7 @@ namespace EC.COM.Controllers
             model.PriceNE = model.PriceNE * (model.Year == 1 ? 1.2m : 2m);
             model.PriceNNE = model.PriceNNE * (model.Year == 1 ? 1.2m : 2m);
             model.PriceC = model.PriceC * (model.Year == 1 ? 1.2m : 2m);
+            model.PriceTotal = model.PriceNE + model.PriceNNE + model.PriceC;
 
             return model;
         }
@@ -144,6 +148,29 @@ namespace EC.COM.Controllers
             {
                 Data = data,
             };
+        }
+
+        public class OrderViewModel
+        {
+            public VarInfoModel VarInfo { get; set; }
+            public string CardNo { get; set; }
+            public string NameOnCard { get; set; }
+            public int ExpirationMonth { get; set; }
+            public int ExpirationYear { get; set; }
+            public string CSVCode { get; set; }            
+        }
+
+        public ActionResult Order(int id, string email, string company)
+        {
+            var db = new DBContext();
+            var model = db.VarInfoes.FirstOrDefault(x => x.Id == id && x.Email == email && x.Company_nm == company);
+
+            return View(new OrderViewModel
+            {
+                VarInfo = model,
+                ExpirationYear = DateTime.Now.Year,
+                ExpirationMonth = DateTime.Now.Month,
+            });
         }
     }
 }
