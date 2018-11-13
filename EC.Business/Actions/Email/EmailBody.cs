@@ -238,6 +238,10 @@ namespace EC.Business.Actions.Email
                     //mediator assigned to case   (?? cc for the one who assigned?)
                     m_filename = "SetCaseOwner";
                     break;
+                case 66:
+                    //mediator assigned to case   (?? cc for the one who assigned?)
+                    m_filename = "EC.COM.VAR";
+                    break;
             }
 
             string appPath = Path.GetFullPath("~/EmailText/" + m_filename + ".html");
@@ -553,6 +557,16 @@ namespace EC.Business.Actions.Email
             if ((!company) && (!added)) GetBody(64);
 
             m_body = m_body.Replace("[Date]", date);
+        }
+
+        public void ECCOMVAR(string firstName, string lastName, string companyName, string url)
+        {
+            GetBody(66);
+
+            m_body = m_body.Replace("[FirstName]", firstName);
+            m_body = m_body.Replace("[LastName]", lastName);
+            m_body = m_body.Replace("[CompanyName]", companyName);
+            m_body = m_body.Replace("[Url]", url);
         }
 
         #endregion

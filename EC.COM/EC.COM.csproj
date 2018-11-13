@@ -190,6 +190,7 @@
     <Content Include="Content\css\all.css" />
     <Content Include="Content\css\all.min.css" />
     <Content Include="Content\css\fontello.css" />
+    <Content Include="Content\emails\EC.COM.VAR.html" />
     <Content Include="Content\fonts\fontello\fontello.svg" />
     <Content Include="Content\fonts\Lato2OFLWeb\LatoLatin\latolatin.html" />
     <Content Include="Content\fonts\Lato2OFLWeb\LatoLatin\latolatinfonts.css" />
@@ -671,6 +672,7 @@
     <Content Include="Content\Employee Confidential Overview.zip" />
     <None Include="Properties\PublishProfiles\EC.COM.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\emailvalidation.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
@@ -701,7 +703,16 @@
     <Content Include="Smtp.config" />
     <None Include="Smtp.config.default" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\EC.Business\EC.Business.csproj">
+      <Project>{41f69955-26be-4a77-832e-109f2d88654e}</Project>
+      <Name>EC.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EC.Common.Util\EC.Common.Util.csproj">
+      <Project>{60f0f82e-fa76-4279-b980-21614256dafb}</Project>
+      <Name>EC.Common.Util</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />

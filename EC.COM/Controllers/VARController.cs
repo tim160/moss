@@ -20,6 +20,18 @@ namespace EC.COM.Controllers
         {
             var data = $"{firstName}|{lastName}|{companyName}|{phone}|{email}|{numberOfEmployees}|{invitationCode}";
 
+            EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(false);
+            EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+            eb.ECCOMVAR(firstName, lastName, companyName, Request.Url.AbsoluteUri.ToLower());
+            string body = eb.Body;
+
+            List<string> to = new List<string>();
+            List<string> cc = new List<string>();
+            List<string> bcc = new List<string>();
+
+            to.Add(email.Trim());
+            em.Send(to, cc, "New View Demo", body, true);
+
             return RedirectToAction("Index", "Video", new { id = System.Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(data)) });
         }
     }

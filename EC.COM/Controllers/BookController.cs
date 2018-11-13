@@ -14,6 +14,10 @@ namespace EC.COM.Controllers
         public ActionResult Index(string id = "")
         {
             var data = System.Text.Encoding.Default.GetString(System.Convert.FromBase64String(id)).Split('|');
+            if (data.Length < 6)
+            {
+                return RedirectToAction("Index", "Var");
+            }
             int count;
             if (!int.TryParse(data[5], out count))
             {
