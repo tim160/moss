@@ -191,6 +191,7 @@
     <Content Include="Content\css\all.min.css" />
     <Content Include="Content\css\fontello.css" />
     <Content Include="Content\emails\EC.COM.VAR.html" />
+    <Content Include="Content\emails\OrderConfirmation_Email.html" />
     <Content Include="Content\fonts\fontello\fontello.svg" />
     <Content Include="Content\fonts\Lato2OFLWeb\LatoLatin\latolatin.html" />
     <Content Include="Content\fonts\Lato2OFLWeb\LatoLatin\latolatinfonts.css" />

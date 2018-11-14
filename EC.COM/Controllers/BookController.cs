@@ -172,5 +172,41 @@ namespace EC.COM.Controllers
                 ExpirationMonth = DateTime.Now.Month,
             });
         }
+
+        [HttpPost]
+        public ActionResult Order(OrderViewModel model)
+        {
+            var db = new DBContext();
+            var varinfo = db.VarInfoes.FirstOrDefault(x => x.Id == model.VarInfo.Id && x.Email == model.VarInfo.Email);
+            //varinfo.Emailed_code_to_customer = System.Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(Guid.NewGuid().ToString()));
+            //varinfo.Emailed_code_to_customer =
+            db.SaveChanges();
+
+            EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(false);
+            EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+            eb.OrderConfirmation_Email(
+                varinfo.Emailed_code_to_customer,
+                varinfo.First_nm,
+                varinfo.Last_nm,
+                varinfo.Annual_plan_price.ToString(),
+                varinfo.Onboarding_price.ToString(),
+                (varinfo.Registered_dt.Value.AddYears(1)).ToString(""),
+                varinfo.Last_nm,
+                varinfo.Company_nm,
+                model.NameOnCard,
+                "",
+                Url.Action("Index", "Video"),
+                Url.Action("Index", "Video"));
+            string body = eb.Body;
+
+            List<string> to = new List<string>();
+            List<string> cc = new List<string>();
+            List<string> bcc = new List<string>();
+
+            to.Add(varinfo.Email.Trim());
+            em.Send(to, cc, "New View Demo", body, true);
+
+            return View(model);
+        }
     }
 }
