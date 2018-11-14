@@ -456,10 +456,12 @@
         var tab = $filter('parseUrl')($location.$$absUrl, 'mode').toLowerCase();
         $scope.mode = tab === 'active' ? 1 : $scope.mode;
         $scope.mode = tab === 'completed' ? 2 : $scope.mode;
-        $scope.mode = tab === 'closed' ? 5 : $scope.mode;
         $scope.mode = tab === 'spam' ? 3 : $scope.mode;
+        $scope.mode = tab === 'new' ? 4 : $scope.mode;
+        $scope.mode = tab === 'closed' ? 5 : $scope.mode;
 
         var titles = ['', 'Active Cases', 'Cases Awaiting Sign-off', 'Spam Cases', 'New Reports', 'Closed Cases'];
+        $('title').html(titles[$scope.mode]);
 
         $scope.counts = {
             Active: 0,
@@ -510,7 +512,6 @@
                 $scope.reports = data.Reports;
                 $scope.mode = data.Mode;
                 $scope.counts = data.Counts;
-                $('title').html(titles[$scope.mode]);
             });
         };
         $scope.refresh($scope.mode);

@@ -583,10 +583,9 @@
                 var self = $(this);
                 var spamMessage = $('.spamMessage textarea').val();
                 markAsSpam(@Html.Raw(report_id), @Html.Raw(user_id), spamMessage);
-
-                                var str = '@Url.Content("~/Cases/Spam")';
-                                window.location.href = str;
-                            });
+                var str = '@Url.Content("~/Cases/Index?mode=spam")';
+                window.location.href = str;
+            });
         }
 
         function markAsSpam(report_id, user_id, message) {
