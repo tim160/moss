@@ -27,5 +27,6 @@ namespace EC.COM.Data
         public decimal? Customer_price { get; set; }
         public int? Customer_price_type { get; set; }
         public decimal? Onboarding_fee { get; set; }
+        public int? Onboarding_session_numbers { get; set; }
     }
 }
