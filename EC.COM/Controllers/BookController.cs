@@ -134,7 +134,7 @@ namespace EC.COM.Controllers
         {
             model = DoCalculate(model);
 
-            NumberFormatInfo nfi = (NumberFormatInfo) CultureInfo.InvariantCulture.NumberFormat.Clone();
+            NumberFormatInfo nfi = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
             nfi.NumberGroupSeparator = ",";
 
             var data = new
@@ -159,7 +159,7 @@ namespace EC.COM.Controllers
             public string NameOnCard { get; set; }
             public int ExpirationMonth { get; set; }
             public int ExpirationYear { get; set; }
-            public string CSVCode { get; set; }            
+            public string CSVCode { get; set; }
         }
 
         public ActionResult Order(int id, string email, string company)
@@ -208,7 +208,12 @@ namespace EC.COM.Controllers
             to.Add(varinfo.Email.Trim());
             em.Send(to, cc, "New View Demo", body, true);
 
-            return View(model);
+            return RedirectToAction("CompanyRegistrationVideo", "Book", new { emailedcode = varinfo.Emailed_code_to_customer, invitationcode = "VAR" });
+        }
+
+        public ActionResult CompanyRegistrationVideo(string emailedcode, string invitationcode)
+        {
+            return View();
         }
     }
 }
