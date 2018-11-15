@@ -173,7 +173,7 @@
                                         <label class="form-mainContent__label">
                                             @Html.DropDownListFor(x => x.ExpirationMonth, new SelectList(monthes), new { @class = "form-mainContent__labelInput" })
                                             /
-                                            @Html.DropDownListFor(x => x.ExpirationMonth, new SelectList(years), new { @class = "form-mainContent__labelInput" })
+                                            @Html.DropDownListFor(x => x.ExpirationYear, new SelectList(years), new { @class = "form-mainContent__labelInput" })
                                         </label>
                                     </div>
                                 </div>
@@ -214,13 +214,18 @@
 
 <script>
     $(function () {
-        $('.calc').on('change', function () {
+        function refresh() {
             $('#submitBigBtn').hide();
-            console.log(1);
             if ($('#CardNo').val() && $('#NameOnCard').val() && $('#CSVCode').val()) {
                 $('#submitBigBtn').show();
             }
+        }
+
+        $('.calc').on('change', function () {
+            refresh();
         });
+
+        refresh();
     });
 </script>
 

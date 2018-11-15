@@ -242,6 +242,11 @@ namespace EC.Business.Actions.Email
                     //mediator assigned to case   (?? cc for the one who assigned?)
                     m_filename = "EC.COM.VAR";
                     break;
+                case 67:
+                    //mediator assigned to case   (?? cc for the one who assigned?)
+                    m_filename = "OrderConfirmation_Email";
+                    break;
+                    
             }
 
             string appPath = Path.GetFullPath("~/EmailText/" + m_filename + ".html");
@@ -567,6 +572,36 @@ namespace EC.Business.Actions.Email
             m_body = m_body.Replace("[LastName]", lastName);
             m_body = m_body.Replace("[CompanyName]", companyName);
             m_body = m_body.Replace("[Url]", url);
+        }
+        
+        public void OrderConfirmation_Email(
+            string orderNumber, 
+            string name, 
+            string surname, 
+            string annualFee, 
+            string onboardingFee, 
+            string registrationDate, 
+            string last, 
+            string companyName,
+            string CCName,
+            string CCSurname,
+            string link,
+            string linkReg)
+        {
+            GetBody(67);
+
+            m_body = m_body.Replace("@@OrderNumber", orderNumber);
+            m_body = m_body.Replace("@@Name", name);
+            m_body = m_body.Replace("@@Surname", surname);
+            m_body = m_body.Replace("@@AnnualFee", annualFee);
+            m_body = m_body.Replace("@@OnboardingFee", onboardingFee);
+            m_body = m_body.Replace("@@RegistrationDate", registrationDate); //October 31st, 2019
+            m_body = m_body.Replace("@@LAST", last);
+            m_body = m_body.Replace("@@CompanyName", companyName);
+            m_body = m_body.Replace("@@CCName", CCName);
+            m_body = m_body.Replace("@@CCSurname", CCSurname);
+            m_body = m_body.Replace("@@Link", link); //Video
+            m_body = m_body.Replace("@@Link2", linkReg); //Registration complete
         }
 
         #endregion
