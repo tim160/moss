@@ -58,6 +58,8 @@ namespace EC.COM.Controllers
                 Customers_price = model.PriceC,
                 Onboarding_price = model.PriceR,
                 Total_price = model.PriceNE + model.PriceNNE + model.PriceC,
+                Year = model.Year,
+                Registered_dt = DateTime.Now,
             };
             db.VarInfoes.Add(varinfo);
             db.SaveChanges();
@@ -178,8 +180,8 @@ namespace EC.COM.Controllers
         {
             var db = new DBContext();
             var varinfo = db.VarInfoes.FirstOrDefault(x => x.Id == model.VarInfo.Id && x.Email == model.VarInfo.Email);
-            //varinfo.Emailed_code_to_customer = System.Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(Guid.NewGuid().ToString()));
-            //varinfo.Emailed_code_to_customer =
+            varinfo.Emailed_code_to_customer = varinfo.Emailed_code_to_customer ?? Guid.NewGuid().ToString();
+            varinfo.Registered_dt = varinfo.Registered_dt ?? DateTime.Now;
             db.SaveChanges();
 
             EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(false);
@@ -190,11 +192,11 @@ namespace EC.COM.Controllers
                 varinfo.Last_nm,
                 varinfo.Annual_plan_price.ToString(),
                 varinfo.Onboarding_price.ToString(),
-                (varinfo.Registered_dt.Value.AddYears(1)).ToString(""),
+                (varinfo.Registered_dt.Value.AddYears(varinfo.Year)).ToString("MMMM dd'st', yyyy"),
                 varinfo.Last_nm,
                 varinfo.Company_nm,
                 model.NameOnCard,
-                "",
+                varinfo.Last_nm,
                 Url.Action("Index", "Video"),
                 Url.Action("Index", "Video"));
             string body = eb.Body;

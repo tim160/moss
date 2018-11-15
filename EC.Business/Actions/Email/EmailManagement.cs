@@ -729,6 +729,7 @@ namespace EC.Business.Actions.Email
 
                 smtpClient.Host = m_Server;
                 smtpClient.Port = m_Port;
+                smtpClient.EnableSsl = false;
                 if (m_Username.Length > 0)
                 {
                     try

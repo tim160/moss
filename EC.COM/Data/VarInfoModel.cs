@@ -41,5 +41,6 @@ namespace EC.COM.Data
         public string Registered_company_nm { get; set; }
         public string Registered_first_nm { get; set; }
         public string Registered_last_nm { get; set; }
+        public int Year { get; set; }
     }
 }
