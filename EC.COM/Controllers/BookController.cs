@@ -86,6 +86,8 @@ namespace EC.COM.Controllers
             public decimal PriceR { get; set; }
             public int Year { get; set; }
             public decimal PriceTotal { get; set; }
+            public int sessionNumber { get; set; }
+            public string sessionN { get; set; }
         }
 
         public CalculateModel DoCalculate(CalculateModel model)
@@ -94,6 +96,8 @@ namespace EC.COM.Controllers
             model.PriceNNE = 0m;
             model.PriceC = 0m;
             model.PriceR = 0m;
+            model.sessionNumber = 0;
+
             using (var db = new DBContext())
             {
                 model.InvitationCode = String.IsNullOrEmpty(model.InvitationCode) ? "EC" : model.InvitationCode;
@@ -106,6 +110,8 @@ namespace EC.COM.Controllers
                 {
                     model.PriceNE = ne.Employee_price_type.Value == 1 ? ne.Employee_price.Value : ne.Employee_price.Value * model.NumberOfEmployees;
                     model.PriceR = ne.Onboarding_fee.Value;
+                    if(ne.Onboarding_session_numbers.HasValue)
+                        model.sessionNumber = ne.Onboarding_session_numbers.Value;
                 }
                 var nne = items.FirstOrDefault(x => model.NumberOfEmployees >= x.From_quantity && model.NumberOfEmployees <= x.To_quantity);
                 if ((nne != null) && (nne.Contractor_price.HasValue) && (nne.Contractor_price_type.HasValue))
@@ -123,6 +129,26 @@ namespace EC.COM.Controllers
             model.PriceNNE = model.PriceNNE * (model.Year == 1 ? 1.2m : 2m);
             model.PriceC = model.PriceC * (model.Year == 1 ? 1.2m : 2m);
             model.PriceTotal = model.PriceNE + model.PriceNNE + model.PriceC;
+
+            model.sessionN = "";
+            switch (model.sessionNumber)
+            {
+
+                case 1:
+                    model.sessionN = "Up to one session";
+                    break;
+                case 2:
+                    model.sessionN = "Up to two sessions";
+                    break;
+                case 3:
+                    model.sessionN = "Up to three sessions";
+                    break;
+                default:
+                    {
+                        model.sessionN = "";
+                        break;
+                    }
+            }
 
             return model;
         }
