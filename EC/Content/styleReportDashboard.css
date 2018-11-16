@@ -1908,8 +1908,8 @@ p.addMoreMediatorsBtn {
     opacity: 0;
 }
 #logoCompany {
-    width: 240px;
-    height: 110px;
+    max-width: 240px;
+    max-height: 110px;
 }
 
 .headerCompanyProfile .blockSendEmail {
