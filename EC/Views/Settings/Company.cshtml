@@ -74,7 +74,9 @@
             <div class="headerBlock">
                 <div class="blockImg">
                     <form action="@Url.Action("AddLogoCompany")" method="post" enctype="multipart/form-data" onsubmit="return handleSubmit(this);">
-                        <img id="logoCompany" src='@Url.Content(cm._company.path_en)' />
+                        <div style="width: 240px; height: 110px;">
+                            <img id="logoCompany" src='@Url.Content(cm._company.path_en)' />
+                        </div>
                         @if (is_valid_mediator)
                         {
                             <input type="file" accept="image/*" id="_file" name="_file" multiple="multiple" style="width: 1px;height: 1px;opacity: 0;" />

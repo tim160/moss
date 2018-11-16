@@ -1910,6 +1910,8 @@ p.addMoreMediatorsBtn {
 #logoCompany {
     max-width: 240px;
     max-height: 110px;
+    display: block;
+    margin: 0 auto;
 }
 
 .headerCompanyProfile .blockSendEmail {
