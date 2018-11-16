@@ -170,6 +170,7 @@ namespace EC.COM.Controllers
                 priceC = model.PriceC.ToString("N0", nfi),
                 priceT = (model.PriceNE + model.PriceNNE + model.PriceC).ToString("N0", nfi),
                 priceR = model.PriceR.ToString("N0", nfi),
+                sessionN = model.sessionN,
             };
 
             return new JsonResult
