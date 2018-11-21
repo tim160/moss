@@ -111,6 +111,10 @@ namespace EC.COM.Controllers
                 if ((ne != null) && (ne.Employee_price.HasValue) && (ne.Employee_price_type.HasValue))
                 {
                     model.PriceNE = ne.Employee_price_type.Value == 1 ? ne.Employee_price.Value : ne.Employee_price.Value * model.NumberOfEmployees;
+                    if (model.Year == 2)
+                    {
+                        model.PriceNE = ne.Employee_price_type.Value == 1 ? ne.TwoYearPerYear_employee_price.Value : ne.TwoYearPerYear_employee_price.Value * model.NumberOfEmployees;
+                    }
                     model.PriceR = ne.Onboarding_fee.Value;
                     if(ne.Onboarding_session_numbers.HasValue)
                         model.sessionNumber = ne.Onboarding_session_numbers.Value;
@@ -127,7 +131,7 @@ namespace EC.COM.Controllers
                 }
             }
 
-            model.PriceNE = model.PriceNE * (model.Year == 1 ? 1.2m : 2m);
+            //model.PriceNE = model.PriceNE * (model.Year == 1 ? 1.2m : 2m);
             model.PriceNNE = model.PriceNNE * (model.Year == 1 ? 1.2m : 2m);
             model.PriceC = model.PriceC * (model.Year == 1 ? 1.2m : 2m);
             model.PriceTotal = model.PriceNE + model.PriceNNE + model.PriceC;

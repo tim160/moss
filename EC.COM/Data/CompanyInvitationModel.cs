@@ -21,6 +21,7 @@ namespace EC.COM.Data
         public int? From_quantity { get; set; }
         public int? To_quantity { get; set; }
         public decimal? Employee_price { get; set; }
+        public decimal? TwoYearPerYear_employee_price { get; set; }
         public int? Employee_price_type { get; set; }
         public decimal? Contractor_price { get; set; }
         public int? Contractor_price_type { get; set; }
