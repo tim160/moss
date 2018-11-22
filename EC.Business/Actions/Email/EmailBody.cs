@@ -391,7 +391,7 @@ namespace EC.Business.Actions.Email
         }
         public void NewUser(string first, string last, string login, string pass)
         {
-            GetBody(13);
+                GetBody(13);
 
             m_body = m_body.Replace("[MediatorName]", (first + " " + last).Trim());
             m_body = m_body.Replace("[LoginName]", login.Trim());
@@ -585,6 +585,7 @@ namespace EC.Business.Actions.Email
             string companyName,
             string CCName,
             string CCSurname,
+            string url,
             string link,
             string linkReg)
         {
@@ -601,7 +602,7 @@ namespace EC.Business.Actions.Email
             m_body = m_body.Replace("@@CCName", CCName);
             m_body = m_body.Replace("@@CCSurname", CCSurname);
             m_body = m_body.Replace("@@Link", link); //Video
-            m_body = m_body.Replace("@@Link2", linkReg); //Registration complete
+            m_body = m_body.Replace("@@2Link", linkReg); //Registration complete
         }
 
         #endregion

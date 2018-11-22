@@ -223,13 +223,14 @@ namespace EC.COM.Controllers
                 varinfo.Last_nm,
                 varinfo.Annual_plan_price.ToString(),
                 varinfo.Onboarding_price.ToString(),
-                (varinfo.Registered_dt.Value.AddYears(varinfo.Year)).ToString("MMMM dd'st', yyyy"),
+                (varinfo.Registered_dt.Value.AddYears(varinfo.Year)).ToString("MMMM dd'st', yyyy", new CultureInfo("en-US")),
                 varinfo.Last_nm,
                 varinfo.Company_nm,
                 model.NameOnCard,
                 varinfo.Last_nm,
-                Url.Action("Index", "Video"),
-                Url.Action("Index", "Video"));
+                Request.Url.AbsoluteUri.ToLower(),
+                $"{Request.Url.Scheme}://{Request.Url.Host}{(Request.Url.Port == 80 ? "" : ":" + Request.Url.Port.ToString())}/Video/Index",
+                $"{Request.Url.Scheme}://{Request.Url.Host}{(Request.Url.Port == 80 ? "" : ":" + Request.Url.Port.ToString())}/Book/CompanyRegistrationVideo?emailedcode{varinfo.Emailed_code_to_customer}&invitationcode=VAR");
             string body = eb.Body;
 
             List<string> to = new List<string>();
