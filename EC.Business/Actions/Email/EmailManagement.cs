@@ -742,7 +742,14 @@ namespace EC.Business.Actions.Email
                     }
 
                 }
-                smtpClient.Send(msg);
+                try
+                {
+                    smtpClient.Send(msg);
+                }
+                catch(Exception exc)
+                {
+                    throw exc;
+                }
                 await Task.Yield();
                 return 0;
             }
