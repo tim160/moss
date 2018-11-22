@@ -1036,7 +1036,7 @@ namespace EC.Controllers
             }
             if ((!db.report_mediator_involved.Any(x => x.report_id == report_id)) && (!db.report_non_mediator_involved.Any(x => x.report_id == report_id)))
             {
-                return -2;
+                //return -2;
             }
             var note1 = db.report_inv_notes.FirstOrDefault(x => x.report_id == report_id & x.type == 1)?.note;
             var note2 = db.report_inv_notes.FirstOrDefault(x => x.report_id == report_id & x.type == 2)?.note;

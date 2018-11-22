@@ -262,7 +262,7 @@ namespace EC.Controllers.API
                 {
                     var model = DB.report_non_mediator_involved.FirstOrDefault(x => x.report_id == filter.Report_id & x.id == filter.Mediator_delete.Value);
                     DB.report_non_mediator_involved.Remove(model);
-                    glb.UpdateReportLog(user.id, 32, filter.Report_id, model.Role.ToString(), null, "");
+                    glb.UpdateReportLog(user.id, 32, filter.Report_id, model.Role, null, "");
                 }
                 else
                 {
