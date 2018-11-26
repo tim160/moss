@@ -30,7 +30,7 @@ namespace EC.COM.Controllers
             List<string> bcc = new List<string>();
 
             to.Add(email.Trim());
-            em.Send(to, cc, "New View Demo", body, true);
+            // em.Send(to, cc, "Employee Confidential Registration", body, true);
 
             return RedirectToAction("Index", "Video", new { id = System.Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(data)) });
         }

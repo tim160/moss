@@ -238,7 +238,7 @@ namespace EC.COM.Controllers
             List<string> bcc = new List<string>();
 
             to.Add(varinfo.Email.Trim());
-            em.Send(to, cc, "New View Demo", body, true);
+            em.Send(to, cc, "Employee Confidential Registration", body, true);
 
             return RedirectToAction("CompanyRegistrationVideo", "Book", new { emailedcode = varinfo.Emailed_code_to_customer, invitationcode = "VAR" });
         }

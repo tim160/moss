@@ -180,11 +180,11 @@
                             <div class="pricingBill-head">
                                 <div class="pricingBill-line clearfix" style="display: flex;">
                                     <label style="display: flex; width: 50%; flex-wrap: nowrap;">
-                                        <input type="radio" name="year" value="1" style="width: 20px" checked class="calc" />
+                                        <input type="radio" name="year" value="1" style="width: 20px" class="calc" />
                                         1-Year License
                                     </label>
                                     <label style="display: flex; width: 50%; flex-wrap: wrap;">
-                                        <input type="radio" name="year" value="2" style="width: 20px" class="calc" />
+                                        <input type="radio" name="year" value="2" style="width: 20px" checked class="calc" />
                                         2-Year License <br> <i>&nbsp;&nbsp;&nbsp;&nbsp;20% saving.</i>
                                     </label>
                                 </div>
@@ -241,8 +241,8 @@
                                 </div>
                             </div>
                             <div class="pricingBill-footer">
-                                <h3 id="more10k">Pricing available upon request. Contact <a href="mailto:sales@employeeconfidential.com">sales@employeeconfidential.com</a></h3>
-                                <button id="more10kb" class="submitBigBtn btn" type="submit">Buy now</button>
+                                <h3 id="more25k">Pricing available upon request. Contact <a href="mailto:sales@employeeconfidential.com">sales@employeeconfidential.com</a></h3>
+                                <button id="more25kb" class="submitBigBtn btn" type="submit">Buy now</button>
                             </div>
                         </div>
                     </div>
@@ -296,11 +296,11 @@
             var invitationCode = $('#InvitationCode').val();
             var year = $('[name="year"]:checked').val();
 
-            $('#more10k').hide();
-            $('#more10kb').show();
-            if (numberOfEmployees > 10000) {
-                $('#more10k').show();
-                $('#more10kb').hide();
+            $('#more25k').hide();
+            $('#more25kb').show();
+            if (numberOfEmployees > 24999) {
+                $('#more25k').show();
+                $('#more25kb').hide();
             }
 
             $.ajax({
