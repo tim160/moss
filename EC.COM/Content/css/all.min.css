@@ -513,6 +513,65 @@ body,.general-container.welcomePage,.welcomePage .main,
         border: 1px solid #073e50;
     }
 
+/*                      Purchase Page                    */
+.thankRow{
+    background-color: #31859C;
+    padding: 30px 0;
+}
+    .thankRow__title,
+    .thankRow__subText{
+        color: #fff;
+        font-family: Lato-Regular-LatinWeb;
+        text-align: center;
+    }
+    .thankRow__title{
+        font-family: Lato-Heavy-LatinWeb;
+        font-size: 1.4em;
+        margin-bottom: 10px;
+    }
+    .thankRow__subText{
+        font-size: 1.2em;
+    }
+
+.purchasePage-content{
+    background-color: #fff;
+}
+    .purchasePage-content__title{
+        font-family: Lato-Heavy-LatinWeb;
+        font-size: 1.4em;
+        text-align: center;
+        margin: 30px 0;
+    }
+
+.purchasePage-contentRow{
+    font-family: Lato-Regular-LatinWeb;
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+.purchasePage-contentRow a{
+    color: #000;
+}
+
+.col100{
+    padding: 0 15px;
+}
+.col60{
+    display: inline-block;
+    width: 100%;
+    padding: 0 15px;
+    float: left;
+}
+.col20{
+    display: inline-block;
+    width: 50%;
+    padding: 0 15px; 
+    float: left;
+}
+
+
+
+
+
 
 /*                      MEDIA                    */
 
@@ -580,6 +639,8 @@ body,.general-container.welcomePage,.welcomePage .main,
         margin: 0;
     }
 
+    
+
 
 }
 
@@ -603,6 +664,18 @@ body,.general-container.welcomePage,.welcomePage .main,
 @media only screen and (min-width : 768px){
     .videoMeinContent-block{
         grid-template-columns: repeat(2,1fr);
+    }
+    .col60{
+        width: 60%;
+        padding: 0 15px;
+    }
+    .col20{
+        width: 20%;
+        padding: 0 0 0 15px; 
+    }
+    .purchasePage-contentRow{
+        display: flex;
+        align-items: center;
     }
 }
 
