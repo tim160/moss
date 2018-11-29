@@ -1,4 +1,5 @@
 ﻿using EC.COM.Data;
+using Stripe;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -248,6 +249,62 @@ namespace EC.COM.Controllers
         public ActionResult CompanyRegistrationVideo(string emailedcode, string invitationcode)
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Payment(VarInfoModel varInfo, string stripeToken)
+        {
+            StripeConfiguration.SetApiKey("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
+
+            // Token is created using Checkout or Elements!
+            // Get the payment token submitted by the form:
+            var token = stripeToken; // Using ASP.NET MVC
+
+            var db = new DBContext();
+            var varinfo = db.VarInfoes.FirstOrDefault(x => x.Id == varInfo.Id && x.Email == varInfo.Email);
+
+            var options = new ChargeCreateOptions
+            {
+                Amount = System.Convert.ToInt64(varinfo.Annual_plan_price + varinfo.Total_price),
+                Currency = "usd",
+                Description = "Example charge",
+                SourceId = token,
+            };
+
+            var service = new ChargeService();
+            Charge charge = service.Create(options);
+
+            varinfo.Emailed_code_to_customer = charge.Id;
+            varinfo.Registered_dt = varinfo.Registered_dt ?? DateTime.Now;
+            db.SaveChanges();
+
+            EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(false);
+            EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+            eb.OrderConfirmation_Email(
+                varinfo.Emailed_code_to_customer,
+                varinfo.First_nm,
+                varinfo.Last_nm,
+                varinfo.Annual_plan_price.ToString(),
+                varinfo.Onboarding_price.ToString(),
+                (varinfo.Registered_dt.Value.AddYears(varinfo.Year)).ToString("MMMM dd'st', yyyy", new CultureInfo("en-US")),
+                varinfo.Last_nm,
+                varinfo.Company_nm,
+                //model.NameOnCard,
+                "",
+                varinfo.Last_nm,
+                Request.Url.AbsoluteUri.ToLower(),
+                $"{Request.Url.Scheme}://{Request.Url.Host}{(Request.Url.Port == 80 ? "" : ":" + Request.Url.Port.ToString())}/Video/Index",
+                $"{Request.Url.Scheme}://{Request.Url.Host}{(Request.Url.Port == 80 ? "" : ":" + Request.Url.Port.ToString())}/Book/CompanyRegistrationVideo?emailedcode{varinfo.Emailed_code_to_customer}&invitationcode=VAR");
+            string body = eb.Body;
+
+            List<string> to = new List<string>();
+            List<string> cc = new List<string>();
+            List<string> bcc = new List<string>();
+
+            to.Add(varinfo.Email.Trim());
+            em.Send(to, cc, "Employee Confidential Registration", body, true);
+
+            return RedirectToAction("CompanyRegistrationVideo", "Book", new { emailedcode = varinfo.Emailed_code_to_customer, invitationcode = "VAR" });
         }
     }
 }
