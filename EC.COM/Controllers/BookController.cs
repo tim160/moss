@@ -87,9 +87,11 @@ namespace EC.COM.Controllers
             public decimal PriceC { get; set; }
             public decimal PriceR { get; set; }
             public int Year { get; set; }
-            public decimal PriceTotal { get; set; }
+            public decimal AnnualyTotal { get; set; }
             public int sessionNumber { get; set; }
             public string sessionN { get; set; }
+
+            public decimal GrandTotal { get; set; }
         }
 
         public CalculateModel DoCalculate(CalculateModel model)
@@ -132,10 +134,10 @@ namespace EC.COM.Controllers
             }
 
             //model.PriceNE = model.PriceNE * (model.Year == 1 ? 1.2m : 2m);
-            model.PriceNNE = model.PriceNNE * (model.Year == 1 ? 1.2m : 2m);
-            model.PriceC = model.PriceC * (model.Year == 1 ? 1.2m : 2m);
-            model.PriceTotal = model.PriceNE + model.PriceNNE + model.PriceC;
-
+            model.PriceNNE = model.PriceNNE * (model.Year == 1 ? 1.2m : 1m);
+            model.PriceC = model.PriceC * (model.Year == 1 ? 1.2m : 1m);
+            model.AnnualyTotal = model.PriceNE + model.PriceNNE + model.PriceC;
+            model.GrandTotal = model.AnnualyTotal * model.Year + model.PriceR;
             model.sessionN = "";
             switch (model.sessionNumber)
             {
