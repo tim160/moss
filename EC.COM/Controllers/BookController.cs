@@ -58,7 +58,7 @@ namespace EC.COM.Controllers
                 Non_employee_price = model.PriceNNE,
                 Customers_price = model.PriceC,
                 Onboarding_price = model.PriceR,
-                Total_price = model.PriceNE + model.PriceNNE + model.PriceC,
+                Total_price = model.Year * (model.PriceNE + model.PriceNNE + model.PriceC) + model.PriceR,
                 Year = model.Year,
                 Registered_dt = DateTime.Now,
             };
@@ -265,7 +265,7 @@ namespace EC.COM.Controllers
 
             var options = new ChargeCreateOptions
             {
-                Amount = System.Convert.ToInt64(varinfo.Annual_plan_price + varinfo.Total_price),
+                Amount = System.Convert.ToInt64(varinfo.Total_price),
                 Currency = "usd",
                 Description = "Example charge",
                 SourceId = token,
