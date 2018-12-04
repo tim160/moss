@@ -5263,6 +5263,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        internal static string OutcomeCompany8 {
+            get {
+                return ResourceManager.GetString("OutcomeCompany8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Outcomes.
         /// </summary>
         internal static string Outcomes {

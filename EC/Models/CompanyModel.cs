@@ -102,10 +102,20 @@ namespace EC.Models
 
         public List<company_outcome> Outcomes(int companyId, int? statusId = null)
         {
+            List<company_outcome> list = new List<company_outcome>(); 
             if (statusId.HasValue)
-                return db.company_outcome.Where(s => (s.company_id == companyId && s.status_id == statusId)).OrderBy(t => t.outcome_en).ToList();
+                list = db.company_outcome.Where(s => (s.company_id == companyId && s.status_id == statusId && s.outcome_en.ToLower() != "none")).OrderBy(t => t.outcome_en).ToList();
             else
-                return db.company_outcome.Where(s => s.company_id == companyId).OrderBy(t => t.outcome_en).ToList();
+                list = db.company_outcome.Where(s => s.company_id == companyId && s.outcome_en.ToLower() != "none").OrderBy(t => t.outcome_en).ToList();
+
+            var none_outcome = db.company_outcome.Where(s => s.company_id == companyId && s.status_id == 2 && s.outcome_en.ToLower() == "none").SingleOrDefault();
+            if (none_outcome != null)
+            {
+                list.Insert(0, none_outcome);
+            }
+
+
+            return list;
 
         }
 

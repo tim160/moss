@@ -769,6 +769,7 @@ namespace EC.Controllers
                 list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany5"));
                 list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany6"));
                 list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany7"));
+                list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany8"));
 
 
 

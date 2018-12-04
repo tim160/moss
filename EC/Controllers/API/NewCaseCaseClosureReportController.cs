@@ -77,9 +77,15 @@ namespace EC.Controllers.API
 
             var outcomes = DB.company_outcome
                 .AsNoTracking()
-                .Where(x => x.company_id == report.company_id & x.status_id == 2)
+                .Where(x => x.company_id == report.company_id & x.status_id == 2 && x.outcome_en.ToLower() != "none")
                 .OrderBy(x => x.outcome_en)
                 .ToList();
+
+            var none_outcome = DB.company_outcome.Where(s => s.company_id == report.company_id && s.status_id == 2 && s.outcome_en.ToLower() == "none").SingleOrDefault();
+            if (none_outcome != null)
+            {
+                outcomes.Insert(0, none_outcome);
+            }
 
             var rep_outcome = DB.report_case_closure_outcome.FirstOrDefault(x => x.report_id == filter.Report_id & x.non_mediator_involved_id == null);
 

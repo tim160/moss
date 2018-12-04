@@ -281,7 +281,7 @@
                     {
                         <div style="display: flex;">
                             <p>@_outcome.outcome_en</p>
-                            @if (is_valid_mediator)
+                            @if (is_valid_mediator && _outcome.outcome_en.ToLower() != "none")
                             {
                                 <div data-value="@_outcome.id" class="deleteOutcome"></div>
                             }
