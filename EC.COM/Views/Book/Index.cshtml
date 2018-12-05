@@ -177,7 +177,7 @@
                             </div>
                         </div>
                         <div class="pricingBillContainer">
-                            <div class="pricingBill-head">
+                            <div class="pricingBill-head price-section">
                                 <div class="pricingBill-line clearfix" style="display: flex;">
                                     <label style="display: flex; width: 50%; flex-wrap: nowrap;">
                                         <input type="radio" name="year" value="1" style="width: 20px" class="calc" />
@@ -213,7 +213,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="pricingBill-main">
+                            <div class="pricingBill-main price-section">
                                 <div class="pricingBill-line pricingBill-lineTotal clearfix">
                                     <div class="pricingBill-line__text">
                                         Total Annual Plan Price
@@ -289,6 +289,13 @@
 
 <script>
     $(function () {
+        $(window).keydown(function (event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                return false;
+            }
+        });
+
         function Calculate() {
             var numberOfEmployees = $('#NumberOfEmployees').val();
             var numberOfNonEmployees = $('#NumberOfNonEmployees').val();
@@ -298,9 +305,11 @@
 
             $('#more25k').hide();
             $('#more25kb').show();
+            $('.price-section').show();
             if (numberOfEmployees > 25000) {
                 $('#more25k').show();
                 $('#more25kb').hide();
+                $('.price-section').hide();
             }
 
             $.ajax({
