@@ -34,6 +34,7 @@ namespace EC.Controllers.API
             public string ExpiryDate { get; set; }
             public string SelectedYear { get; set; }
             public string CSV { get; set; }
+            public string OnboardingSessionsNumber { get; set; }
         }
 
         [HttpPost]
