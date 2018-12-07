@@ -167,7 +167,8 @@ namespace EC.Controllers
             string selectedMonth, 
             string selectedYear,
             int contractors_number = 0,
-            int customers_number = 0)
+            int customers_number = 0,
+            int oboarding_sessions_number = 0)
         {
             int company_id = 0;
             int user_id = 0;
@@ -286,6 +287,9 @@ namespace EC.Controllers
             _company.employee_quantity = number;
             _company.contractors_number = contractors_number;
             _company.customers_number = customers_number;
+            _company.onboard_sessions_paid = oboarding_sessions_number;
+            if (oboarding_sessions_number > 0)
+                _company.onboard_sessions_expiry_dt = DateTime.Today.AddYears(1);
             _company.language_id = language_id;
             _company.company_short_name = company_short_name;
 
