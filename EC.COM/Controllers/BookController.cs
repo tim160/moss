@@ -54,13 +54,16 @@ namespace EC.COM.Controllers
                 Employee_no = model.NumberOfEmployees,
                 Non_employee_no = model.NumberOfNonEmployees,
                 Customers_no = model.NumberOfClients,
+
                 Annual_plan_price = model.PriceNE,
                 Non_employee_price = model.PriceNNE,
                 Customers_price = model.PriceC,
                 Onboarding_price = model.PriceR,
                 Total_price = model.Year * (model.PriceNE + model.PriceNNE + model.PriceC) + model.PriceR,
+
                 Year = model.Year,
                 Registered_dt = DateTime.Now,
+                Onboarding_session_numbers = model.sessionNumber,
             };
             db.VarInfoes.Add(varinfo);
             db.SaveChanges();
@@ -119,8 +122,10 @@ namespace EC.COM.Controllers
                         model.PriceNE = ne.Employee_price_type.Value == 1 ? ne.TwoYearPerYear_employee_price.Value : ne.TwoYearPerYear_employee_price.Value * model.NumberOfEmployees;
                     }
                     model.PriceR = ne.Onboarding_fee.Value;
-                    if(ne.Onboarding_session_numbers.HasValue)
+                    if (ne.Onboarding_session_numbers.HasValue)
+                    {
                         model.sessionNumber = ne.Onboarding_session_numbers.Value;
+                    }
                 }
                 var nne = items.FirstOrDefault(x => model.NumberOfEmployees >= x.From_quantity && model.NumberOfEmployees <= x.To_quantity);
                 if ((nne != null) && (nne.Contractor_price.HasValue) && (nne.Contractor_price_type.HasValue))
@@ -232,8 +237,9 @@ namespace EC.COM.Controllers
                 model.NameOnCard,
                 varinfo.Last_nm,
                 Request.Url.AbsoluteUri.ToLower(),
-                $"{Request.Url.Scheme}://{Request.Url.Host}{(Request.Url.Port == 80 ? "" : ":" + Request.Url.Port.ToString())}/Video/Index",
-                $"{Request.Url.Scheme}://{Request.Url.Host}{(Request.Url.Port == 80 ? "" : ":" + Request.Url.Port.ToString())}/Book/CompanyRegistrationVideo?emailedcode{varinfo.Emailed_code_to_customer}&invitationcode=VAR");
+                $"{Request.Url.Scheme}://{Request.Url.Host}{(Request.Url.Port == 80 ? "" : ":" + Request.Url.Port.ToString())}/Book/CompanyRegistrationVideo?emailedcode{varinfo.Emailed_code_to_customer}&invitationcode=VAR",
+                $"{System.Configuration.ConfigurationManager.AppSettings["MainSite"]}new/company/{varinfo.Emailed_code_to_customer}"
+                );
             string body = eb.Body;
 
             List<string> to = new List<string>();
@@ -248,6 +254,7 @@ namespace EC.COM.Controllers
 
         public ActionResult CompanyRegistrationVideo(string emailedcode, string invitationcode)
         {
+            ViewBag.EmailedCode = emailedcode;
             return View();
         }
 

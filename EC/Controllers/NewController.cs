@@ -72,13 +72,14 @@ namespace EC.Controllers
             ViewBag.email = _email;
             return View();
         }
-        public ActionResult Company(string code, string data)
+        public ActionResult Company(string id, string code, string data)
         {
             string _code = "";
             if (!string.IsNullOrEmpty(code))
                 _code = code;
 
             ViewBag.code = _code;
+            ViewBag.id = id;
             #region EC-CC Viewbag
             bool is_cc = DomainUtil.IsCC(Request.Url.AbsoluteUri.ToLower());
             ViewBag.is_cc = is_cc;
@@ -92,7 +93,9 @@ namespace EC.Controllers
                 return View("CompanyA");
             }
 
-            return View();
+            var model = db.var_info.FirstOrDefault(x => x.emailed_code_to_customer == id) ?? new var_info();
+
+            return View(model);
         }
 
         public ActionResult Success(string show)
@@ -151,6 +154,7 @@ namespace EC.Controllers
             return View();
         }
         public string CreateCompany(
+            string emailed_code_to_customer,
             string code, 
             string location, 
             string company_name, 
@@ -165,10 +169,10 @@ namespace EC.Controllers
             string cardname, 
             string csv, 
             string selectedMonth, 
-            string selectedYear,
+            string selectedYear/*,
             int contractors_number = 0,
             int customers_number = 0,
-            int oboarding_sessions_number = 0)
+            int oboarding_sessions_number = 0*/)
         {
             int company_id = 0;
             int user_id = 0;
@@ -176,7 +180,15 @@ namespace EC.Controllers
             int language_id = 1;
 
 
-            if ((string.IsNullOrEmpty(code)) || (string.IsNullOrEmpty(location)) || (string.IsNullOrEmpty(company_name)) || (string.IsNullOrEmpty(number)) || (string.IsNullOrEmpty(first)) || (string.IsNullOrEmpty(last)) || (string.IsNullOrEmpty(email)) || (string.IsNullOrEmpty(title)))
+            if (
+                (string.IsNullOrEmpty(code)) || 
+                (string.IsNullOrEmpty(location)) || 
+                (string.IsNullOrEmpty(company_name)) || 
+                (string.IsNullOrEmpty(number)) || 
+                (string.IsNullOrEmpty(first)) || 
+                (string.IsNullOrEmpty(last)) || 
+                (string.IsNullOrEmpty(email)) || 
+                (string.IsNullOrEmpty(title)))
             {
                 return LocalizationGetter.GetString("EmptyData");
             }
@@ -217,15 +229,15 @@ namespace EC.Controllers
 
             if (_amount > 0)
             {
-                if ((string.IsNullOrEmpty(cardnumber)) || (string.IsNullOrEmpty(cardname)) || (string.IsNullOrEmpty(csv)) || (string.IsNullOrEmpty(selectedMonth)) || (string.IsNullOrEmpty(selectedYear)))
+                /*if ((string.IsNullOrEmpty(cardnumber)) || (string.IsNullOrEmpty(cardname)) || (string.IsNullOrEmpty(csv)) || (string.IsNullOrEmpty(selectedMonth)) || (string.IsNullOrEmpty(selectedYear)))
                 {
                     return LocalizationGetter.GetString("EmptyData");
-                }
+                }*/
             }
             #region Credit Card
             string auth_code = "";
             string payment_auth_code = "";
-            if (_amount > 0)
+            /*if (_amount > 0)
             {
                 /// amount, string cardnumber, string cardname, string csv
                 BeanStream.beanstream.TransactionProcessRequest tpr = new BeanStream.beanstream.TransactionProcessRequest();
@@ -252,13 +264,7 @@ namespace EC.Controllers
 
 
                 auth_code = payment_auth_code;
-                /*    Dictionary<BeanStreamProcessing.RequestFieldNames, string> _dictionary = new Dictionary<BeanStreamProcessing.RequestFieldNames, string>();
-                    bsp.ProcessRequest(_dictionary, out cc_error_message, out auth_code);
-                    if (cc_error_message.Trim().Length > 0)
-                    {
-                        return cc_error_message;
-                    }*/
-            }
+            }*/
 
             #endregion
 
@@ -275,7 +281,7 @@ namespace EC.Controllers
 
             string company_code = glb.GenerateCompanyCode(company_name);
 
-
+            var varinfo = db.var_info.FirstOrDefault(x => x.emailed_code_to_customer == emailed_code_to_customer);
 
             company _company = new company();
             _company.company_nm = company_name.Trim();
@@ -285,11 +291,17 @@ namespace EC.Controllers
             _company.registration_dt = DateTime.Now;
             _company.company_code = company_code.Trim();
             _company.employee_quantity = number;
-            _company.contractors_number = contractors_number;
-            _company.customers_number = customers_number;
-            _company.onboard_sessions_paid = oboarding_sessions_number;
-            if (oboarding_sessions_number > 0)
-                _company.onboard_sessions_expiry_dt = DateTime.Today.AddYears(1);
+
+            if (varinfo != null)
+            {
+                _company.contractors_number = varinfo.employee_no;
+                _company.customers_number = varinfo.customers_no;
+                _company.onboard_sessions_paid = varinfo.onboarding_session_numbers;
+                if (varinfo.onboarding_session_numbers > 0)
+                {
+                    _company.onboard_sessions_expiry_dt = DateTime.Today.AddYears(1);
+                }
+            }
             _company.language_id = language_id;
             _company.company_short_name = company_short_name;
 
@@ -905,7 +917,7 @@ namespace EC.Controllers
 
 
             #region Saving CC_Payment
-            if (_amount > 0)
+            /*if (_amount > 0)
             {
                 company_payments _cp = new company_payments();
                 _cp.amount = _amount;
@@ -933,7 +945,7 @@ namespace EC.Controllers
                 {
                     logger.Error(ex.ToString());
                 }
-            }
+            }*/
             #endregion
             Session["Auth"] = auth_code;
             Session["Amount"] = _amount;

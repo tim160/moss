@@ -172,6 +172,7 @@
                 selectedYear: $("#selectedYear").val(),
                 amount: $("#amount").val().trim(),
                 description: $("#description").text().trim(),
+                emailed_code_to_customer: $('#emailed_code_to_customer').val(),
 
             }
         }).done(function (data) {//data from server
