@@ -2,6 +2,9 @@
 @using EC.Models;
 @using EC.Models.Database;
 @using EC.Localization;
+
+@model var_info
+
 @{
     <link rel="stylesheet" type="text/css" href="/Content/styleReportDashboard.css">
     //  @Styles.Render("~/Content/Styles");
@@ -34,19 +37,19 @@
             <div class="personalBlock" id="registration">
                 <div class="blockPersonalSettings">
                     <p class="title">@LocalizationGetter.GetString("InvitationCode")</p>
-                    @Html.TextBox("code")
+                    @Html.TextBox("code", Model.invitation_code)
                 </div>
                 <div class="blockPersonalSettings">
                     <p class="title">@LocalizationGetter.GetString("CompanyNameUp", is_cc)</p>
-                    @Html.TextBox("company_name")
+                    @Html.TextBox("company_name", Model.company_nm)
                 </div>
                 <div class="blockPersonalSettings">
                     <p class="title">@LocalizationGetter.GetString("PrimaryLocationUp", is_cc)</p>
-                    <input type="text" id="location" />
+                    <input type="text" id="location" value="" />
                 </div>
                 <div class="blockPersonalSettings">
                     <p class="title">@LocalizationGetter.GetString("NumberEmployees", is_cc)</p>
-                    <input type="number" id="number" min="0" />
+                    <input type="number" id="number" min="0" value="@Model.employee_no" />
                 </div>
                 <div class="blockPersonalSettings">
                     <p class="title">@LocalizationGetter.GetString("PrimaryLanguageUp", is_cc)</p>
@@ -72,15 +75,15 @@
                 </div>
                 <div class="blockPersonalSettings">
                     <p class="title">@LocalizationGetter.GetString("FirstNameUp")</p>
-                    <input type="text" id="first" />
+                    <input type="text" id="first" value="@Model.first_nm" />
                 </div>
                 <div class="blockPersonalSettings">
                     <p class="title">@LocalizationGetter.GetString("LastNameUp")</p>
-                    <input type="text" id="last" />
+                    <input type="text" id="last" value="@Model.last_nm" />
                 </div>
                 <div class="blockPersonalSettings">
                     <p class="title">@LocalizationGetter.GetString("Email")</p>
-                    <input type="text" id="email" />
+                    <input type="text" id="email" value="@Model.email" />
                 </div>
                 <div class="blockPersonalSettings">
                     <p class="title">@LocalizationGetter.GetString("Title")</p>
@@ -93,7 +96,7 @@
                 <div id="PayByCard" type="hidden">
                     <div class="blockPersonalSettings">
                         <p class="title">@LocalizationGetter.GetString("Amount")</p>
-                        <input type="text" id="amount" value="0" />
+                        <input type="text" id="amount" value="@Model.total_price" />
                     </div>
                     <div class="blockPersonalSettings">
                         <p class="title">@LocalizationGetter.GetString("CreditCardNumber")</p>
@@ -148,6 +151,7 @@
                     </div>
                 </div>
                 @Html.Hidden("company_exist")
+                @Html.Hidden("emailed_code_to_customer", Model.emailed_code_to_customer)
             </div>
         </div>
     </div>

@@ -253,6 +253,7 @@ namespace EC.COM.Controllers
 
         public ActionResult CompanyRegistrationVideo(string emailedcode, string invitationcode)
         {
+            ViewBag.EmailedCode = emailedcode;
             return View();
         }
 

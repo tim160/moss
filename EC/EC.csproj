@@ -1659,6 +1659,9 @@
     <Compile Include="Models\Database\validation_type.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Database\var_info.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DataObjects\SearchCompanyDto.cs" />
     <Compile Include="Models\ECModel\MessageExtended.cs" />
     <Compile Include="Models\ECModel\ReportTypes.cs" />
