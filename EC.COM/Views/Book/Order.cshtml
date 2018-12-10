@@ -219,9 +219,11 @@
                                 </div>
                             </div>*@
                             <div class="pricingBill-footer">
-                                <p>by clicking buy now you are confirming you read and accepted 
-                                <a href="~/PrivacyStatement.html" target="_blank">agreement</a>
-                                i ssilku s agreement na html file privacy policy</p>
+                                <p>By clicking on Buy Now, you agree to our 
+                                    <a href="~/TermsOfService.html" target="_blank">Terms</a>,
+                                    <a href="~/LicenseAgreement.html" target="_blank">Employee Confidential License Agreement</a> and
+                                    <a href="~/PrivacyStatement.html" target="_blank">Privacy Policy</a>
+                                </p>
                                 @*
                                 <button id="submitBigBtn" class="submitBigBtn btn" type="submit" style="">BUY NOW</button>
                                 *@
@@ -249,31 +251,33 @@
                         </div>
                     </div>
                 }
-                @*<div class="pricingInfoBlock">
-                    <form action="@Url.Action("Payment")" method="post" id="payment-form">
-                        @Html.HiddenFor(x => x.VarInfo.Id)
-                        @Html.HiddenFor(x => x.VarInfo.First_nm)
-                        @Html.HiddenFor(x => x.VarInfo.Last_nm)
-                        @Html.HiddenFor(x => x.VarInfo.Company_nm)
-                        @Html.HiddenFor(x => x.VarInfo.Phone)
-                        @Html.HiddenFor(x => x.VarInfo.Email)
-                        <div class="form-row">
-                            <label for="card-element">
-                                Credit or debit card
-                            </label>
-                            <p>by clicking buy now you are confirming you read and accepted 
-                            <a href="~/PrivacyStatement.html" target="_blank">agreement</a>
-                            i ssilku s agreement na html file privacy policy</p>
-                            <div id="card-element">
-                                <!-- A Stripe Element will be inserted here. -->
-                            </div>
+                                                @*<div class="pricingInfoBlock">
+            <form action="@Url.Action("Payment")" method="post" id="payment-form">
+                @Html.HiddenFor(x => x.VarInfo.Id)
+                @Html.HiddenFor(x => x.VarInfo.First_nm)
+                @Html.HiddenFor(x => x.VarInfo.Last_nm)
+                @Html.HiddenFor(x => x.VarInfo.Company_nm)
+                @Html.HiddenFor(x => x.VarInfo.Phone)
+                @Html.HiddenFor(x => x.VarInfo.Email)
+                <div class="form-row">
+                    <label for="card-element">
+                        Credit or debit card
+                    </label>
+                                <p>By clicking on Buy Now, you agree to our
+                                    <a href="~/TermsOfService.html" target="_blank">Terms</a>,
+                                    <a href="~/LicenseAgreement.html" target="_blank">Employee Confidential License Agreement</a> and
+                                    <a href="~/PrivacyStatement.html" target="_blank">Privacy Policy</a>
+                                </p>
+                    <div id="card-element">
+                        <!-- A Stripe Element will be inserted here. -->
+                    </div>
 
-                            <!-- Used to display form errors. -->
-                            <div id="card-errors" role="alert"></div>
-                        </div>
-                        <button>Submit Payment</button>
-                    </form>
-                </div>*@
+                    <!-- Used to display form errors. -->
+                    <div id="card-errors" role="alert"></div>
+                </div>
+                <button>Submit Payment</button>
+            </form>
+        </div>*@
             </div>
         </section>
     </main>
