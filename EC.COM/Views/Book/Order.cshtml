@@ -1,4 +1,6 @@
-﻿@model EC.COM.Controllers.BookController.OrderViewModel
+﻿@using System.Globalization
+
+@model EC.COM.Controllers.BookController.OrderViewModel
 
 @{
     ViewBag.Title = "Order";
@@ -12,6 +14,9 @@
     {
         years.Add(DateTime.Now.Year + i);
     }
+
+    NumberFormatInfo nfi = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
+    nfi.NumberGroupSeparator = ",";
 }
 
 <script src="https://js.stripe.com/v3/"></script>
@@ -143,90 +148,74 @@
         </section>
         <section class="pricingMainSection">
             <div class="container">
-                @using (Html.BeginForm("Order", null, FormMethod.Post))
+                @using (Html.BeginForm("Payment", null, FormMethod.Post, new { id = "main-form" }))
                 {
                     @Html.HiddenFor(x => x.VarInfo.Id)
-                    @Html.HiddenFor(x => x.VarInfo.First_nm)
-                    @Html.HiddenFor(x => x.VarInfo.Last_nm)
-                    @Html.HiddenFor(x => x.VarInfo.Company_nm)
-                    @Html.HiddenFor(x => x.VarInfo.Phone)
+                    @Html.HiddenFor(x => x.VarInfo.Email)
+                    @Html.Hidden("stripeToken")
+                }
+
+                @using (Html.BeginForm("Order", null, FormMethod.Post, new { id = "payment-form" }))
+                {
+                    @Html.HiddenFor(x => x.VarInfo.Id)
                     @Html.HiddenFor(x => x.VarInfo.Email)
 
                     <div class="pricingMainContainer">
                         <div class="pricingFormContainer">
-                            @*<div class="pricingForm-block">
+                            <div class="pricingForm-block">
                                 <div class="pricingForm-block__title">
-                                    Amount
+                                    Name on Card
                                 </div>
-                                <div class="pricingForm-block__input">
+                                <div class="pricingForm-block__input" id="NameOnCardDiv">
                                     <label class="form-mainContent__label">
-                                        Amount
-                                        <input type="text" class="form-mainContent__labelInput calc" id="Total_price" name="Total_price" value="@(Model.VarInfo.Total_price)" readonly>
+                                        Name on Card
+                                        <input type="text" class="form-mainContent__labelInput calc" id="NameOnCard">
                                     </label>
                                 </div>
                             </div>
                             <div class="pricingForm-block">
                                 <div class="pricingForm-block__title">
-                                    Credit Card Number
+                                    Card Number
                                 </div>
-                                <div class="pricingForm-block__input">
-                                    <div class="form-mainContent__dropDownList dropDownList ">
-                                        <label class="form-mainContent__label">
-                                            Credit Card Number
-                                            <input class="form-mainContent__labelInput calc" id="CardNo" type="text" name="CardNo" value="@Model.CardNo">
-                                        </label>
-                                    </div>
+                                <div class="pricingForm-block__input" id="CardNumberDiv">
+                                    <label class="form-mainContent__label">
+                                        Card Number
+                                        <input type="text" class="form-mainContent__labelInput calc" id="CardNumber">
+                                    </label>
                                 </div>
                             </div>
                             <div class="pricingForm-block">
                                 <div class="pricingForm-block__title">
-                                    Name on Card
+                                    Card Expire
                                 </div>
-                                <div class="pricingForm-block__input">
-                                    <div class="form-mainContent__dropDownList dropDownList ">
-                                        <label class="form-mainContent__label">
-                                            Name on Card
-                                            <input class="form-mainContent__labelInput calc" id="NameOnCard" type="text" name="NameOnCard" value="@Model.NameOnCard">
-                                        </label>
-                                    </div>
+                                <div class="pricingForm-block__input" id="CardExpireDiv">
+                                    <label class="form-mainContent__label">
+                                        Card Expire
+                                        <input type="text" class="form-mainContent__labelInput calc" id="CardExpire">
+                                    </label>
                                 </div>
                             </div>
                             <div class="pricingForm-block">
                                 <div class="pricingForm-block__title">
-                                    Expiration date
+                                    CVC
                                 </div>
-                                <div class="pricingForm-block__input">
-                                    <div class="form-mainContent__dropDownList dropDownList ">
-                                        <label class="form-mainContent__label">
-                                            @Html.DropDownListFor(x => x.ExpirationMonth, new SelectList(monthes), new { @class = "form-mainContent__labelInput" })
-                                            /
-                                            @Html.DropDownListFor(x => x.ExpirationYear, new SelectList(years), new { @class = "form-mainContent__labelInput" })
-                                        </label>
-                                    </div>
+                                <div class="pricingForm-block__input" id="CVCDiv">
+                                    <label class="form-mainContent__label">
+                                        CVC
+                                        <input type="text" class="form-mainContent__labelInput calc" id="CVC">
+                                    </label>
                                 </div>
                             </div>
+                            <div class="pricingForm-block" style="height: 150px;">
+                            </div>
+
                             <div class="pricingForm-block">
-                                <div class="pricingForm-block__title">
-                                    CSV Code
-                                </div>
-                                <div class="pricingForm-block__input">
-                                    <div class="form-mainContent__dropDownList dropDownList ">
-                                        <label class="form-mainContent__label">
-                                            CSV Code
-                                            <input class="form-mainContent__labelInput calc" id="CSVCode" type="number" name="CSVCode" value="@Model.CSVCode">
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>*@
+                                <div id="card-element"></div>
+                                <div id="card-errors" role="alert"></div>
+                            </div>
                             <div class="pricingBill-footer">
-                                <p>By clicking on Buy Now, you agree to our 
-                                    <a href="~/TermsOfService.html" target="_blank">Terms</a>,
-                                    <a href="~/LicenseAgreement.html" target="_blank">Employee Confidential License Agreement</a> and
-                                    <a href="~/PrivacyStatement.html" target="_blank">Privacy Policy</a>
-                                </p>
                                 @*
                                 <button id="submitBigBtn" class="submitBigBtn btn" type="submit" style="">BUY NOW</button>
-                                *@
                                 <form action="@Url.Action("Payment")" method="POST" id="stripeForm" style="display: none;">
                                     <script
                                             src="https://checkout.stripe.com/checkout.js" class="stripe-button"
@@ -239,6 +228,7 @@
                                             data-currency="usd">
                                     </script>
                                 </form>
+                                *@
                             </div>
                             <div class="pricingInfoBlock">
                                 <div class="pricingInfoBlock__textInfo">
@@ -247,6 +237,80 @@
                                     supervisors) knew or should have known that the non-employee was subjected to sexual harassment in the employer’s 
                                     workplace, and the employer failed to take immediate and appropriate corrective action.
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="pricingBillContainer">
+                            <div class="pricingBill-head price-section">
+                                <div class="pricingBill-line clearfix" style="display: flex;">
+                                    <label style="display: flex; width: 50%; flex-wrap: nowrap;">
+                                        <input type="radio" name="year" value="1" style="width: 20px" @(Model.VarInfo.Year == 1 ? "checked" : "") class="calc" disabled />
+                                        1-Year License
+                                    </label>
+                                    <label style="display: flex; width: 50%; flex-wrap: wrap;">
+                                        <input type="radio" name="year" value="2" style="width: 20px" @(Model.VarInfo.Year == 2 ? "checked" : "") class="calc" disabled />
+                                        2-Year License <br> <i>&nbsp;&nbsp;&nbsp;&nbsp;20% saving.</i>
+                                    </label>
+                                </div>
+                                <div class="pricingBill-line clearfix" style="margin-top: 20px;">
+                                    <div class="pricingBill-line__text">
+                                        Annual Plan Price
+                                    </div>
+                                    <div class="pricingBill-line__tax" id="priceNE">
+                                        $@Model.VarInfo.Annual_plan_price.ToString("N0", nfi)
+                                    </div>
+                                </div>
+                                <div class="pricingBill-line clearfix">
+                                    <div class="pricingBill-line__text">
+                                        Non-Employees Access
+                                    </div>
+                                    <div class="pricingBill-line__tax" id="priceNNE">
+                                        $@Model.VarInfo.Non_employee_price.ToString("N0", nfi)
+                                    </div>
+                                </div>
+                                <div class="pricingBill-line clearfix">
+                                    <div class="pricingBill-line__text">
+                                        Client and Customer Access
+                                    </div>
+                                    <div class="pricingBill-line__tax" id="priceC">
+                                        $@Model.VarInfo.Customers_price.ToString("N0", nfi)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pricingBill-main price-section">
+                                <div class="pricingBill-line pricingBill-lineTotal clearfix">
+                                    <div class="pricingBill-line__text">
+                                        Total Annual Plan Price
+                                    </div>
+                                    <div class="pricingBill-line__tax" id="priceT">
+                                        $@Model.VarInfo.Total_price.ToString("N0", nfi)
+                                    </div>
+                                </div>
+                                <div class="pricingBill-line pricingBill-lineSmall clearfix">
+                                    <div class="pricingBill-line__text">
+                                        Required 
+                                        onboarding & training.
+                                    </div>
+                                    <div class="pricingBill-line__tax" id="priceR">
+                                        $@Model.VarInfo.Onboarding_price.ToString("N0", nfi)
+                                    </div>
+                                </div>
+                                <div class="pricingBill-line pricingBill-lineSmall clearfix">
+                                    <div class="pricingBill-line__text">
+                                        &nbsp;
+                                    </div>
+                                    <div class="pricingBill-line__tax" style="font-size:16px;" id="sessionN">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pricingBill-footer">
+                                <p>By clicking on Buy Now, you agree to our 
+                                    <a href="~/TermsOfService.html" target="_blank">Terms</a>,
+                                    <a href="~/LicenseAgreement.html" target="_blank">Employee Confidential License Agreement</a> and
+                                    <a href="~/PrivacyStatement.html" target="_blank">Privacy Policy</a>
+                                </p>
+                                <button class="submitBigBtn btn" type="submit">Pay $@((Model.VarInfo.Total_price + Model.VarInfo.Onboarding_price).ToString("N0", nfi))</button>
                             </div>
                         </div>
                     </div>
@@ -284,27 +348,111 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://js.stripe.com/v3/"></script>
 
 <script>
     $(function () {
-        function refresh() {
-            $('#submitBigBtn').hide();
-            if ($('#CardNo').val() && $('#NameOnCard').val() && $('#CSVCode').val()) {
-                $('#submitBigBtn').show();
+        var style = {
+            base: {
+                // Add your base input styles here. For example:
+                fontSize: '16px',
+                color: "#32325d",
             }
-        }
+        };
 
-        $('.calc').on('change', function () {
-            //refresh();
+        var stripe = Stripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+        var elements = stripe.elements();
+        /*var card = elements.create('card', { style: style });
+        card.mount('#card-element');
+
+        card.addEventListener('change', function (event) {
+            var displayError = document.getElementById('card-errors');
+            if (event.error) {
+                displayError.textContent = event.error.message;
+            } else {
+                displayError.textContent = '';
+            }
         });
+        */
 
-        $('[type="email"]').val('@Model.VarInfo.Email');
-        $('.stripe-button-el').html('BUY NOW');
-        $('.stripe-button-el').addClass('submitBigBtn btn');
-        $('.stripe-button-el').removeClass('stripe-button-el');
-        $('#stripeForm').show();
+        var elements = stripe.elements({
+            fonts: [
+              {
+                  cssSrc: 'https://fonts.googleapis.com/css?family=Source+Code+Pro',
+              },
+            ],
+            // Stripe's examples are localized to specific languages, but if
+            // you wish to have Elements automatically detect your user's locale,
+            // use `locale: 'auto'` instead.
+            locale: window.__exampleLocale
+        });
+        var elementStyles = {
+            base: {
+                color: '#32325D',
+                fontWeight: 500,
+                fontFamily: 'Source Code Pro, Consolas, Menlo, monospace',
+                fontSize: '16px',
+                fontSmoothing: 'antialiased',
 
-        //refresh();
+                '::placeholder': {
+                    color: '#CFD7DF',
+                },
+                ':-webkit-autofill': {
+                    color: '#e39f48',
+                },
+            },
+            invalid: {
+                color: '#E25950',
+
+                '::placeholder': {
+                    color: '#FFCCA5',
+                },
+            },
+        };
+
+        var elementClasses = {
+            focus: 'focused',
+            empty: 'empty',
+            invalid: 'invalid',
+        };
+
+        var cardNumber = elements.create('cardNumber', {
+            style: elementStyles,
+            classes: elementClasses,
+        });
+        cardNumber.mount('#CardNumberDiv');
+
+        var cardExpiry = elements.create('cardExpiry', {
+            style: elementStyles,
+            classes: elementClasses,
+        });
+        cardExpiry.mount('#CardExpireDiv');
+
+        var cardCvc = elements.create('cardCvc', {
+            style: elementStyles,
+            classes: elementClasses,
+        });
+        cardCvc.mount('#CVCDiv');
+
+        //registerElements([cardNumber, cardExpiry, cardCvc], 'example2');
+        var form = document.getElementById('payment-form');
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            stripe.createToken(cardNumber).then(function (result) {
+                if (result.error) {
+                    // Inform the customer that there was an error.
+                    var errorElement = document.getElementById('card-errors');
+                    errorElement.textContent = result.error.message;
+                } else {
+                    // Send the token to your server.
+                    //stripeTokenHandler(result.token);
+                    console.log(result);
+                    $('#stripeToken').val(result.token.id);
+                    $('#main-form').submit();
+                }
+            });
+        });
     });
 </script>
 
