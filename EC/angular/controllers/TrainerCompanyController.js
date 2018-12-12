@@ -94,6 +94,7 @@
                     data.Events.events[i].end = moment(data.Events.events[i].end).toDate();
                 }
                 $scope.eventSources.push(data.Events);
+                $scope.onboardingsRemaining = data.OnboardingsRemaining;
             });
         };
     }
