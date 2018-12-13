@@ -59,7 +59,7 @@ namespace EC.COM.Controllers
                 Non_employee_price = model.PriceNNE,
                 Customers_price = model.PriceC,
                 Onboarding_price = model.PriceR,
-                Total_price = model.Year * (model.PriceNE + model.PriceNNE + model.PriceC) + model.PriceR,
+                Total_price = model.PriceNE + model.PriceNNE + model.PriceC,
 
                 Year = model.Year,
                 Registered_dt = DateTime.Now,
