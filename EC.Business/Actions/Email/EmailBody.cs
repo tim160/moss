@@ -592,17 +592,38 @@ namespace EC.Business.Actions.Email
             GetBody(67);
 
             m_body = m_body.Replace("@@OrderNumber", orderNumber);
-            m_body = m_body.Replace("@@Name", name);
             m_body = m_body.Replace("@@Surname", surname);
             m_body = m_body.Replace("@@AnnualFee", annualFee);
             m_body = m_body.Replace("@@OnboardingFee", onboardingFee);
             m_body = m_body.Replace("@@RegistrationDate", registrationDate); //October 31st, 2019
-            m_body = m_body.Replace("@@LAST", last);
             m_body = m_body.Replace("@@CompanyName", companyName);
             m_body = m_body.Replace("@@CCName", CCName);
             m_body = m_body.Replace("@@CCSurname", CCSurname);
             m_body = m_body.Replace("@@Link", link); //Video
             m_body = m_body.Replace("@@2Link", linkReg); //Registration complete
+
+            m_body = m_body.Replace("@@Name", name);
+            m_body = m_body.Replace("@@LAST", last);
+            m_body = m_body.Replace("@@sName", "block");
+            if (String.IsNullOrEmpty(name) && String.IsNullOrEmpty(last))
+            {
+                m_body = m_body.Replace("@@sName", "none");
+            }
+
+            m_body = m_body.Replace("@@CompanyName", companyName);
+            m_body = m_body.Replace("@@sCompanyName", "block");
+            if (String.IsNullOrEmpty(companyName))
+            {
+                m_body = m_body.Replace("@@sCompanyName", "none");
+            }
+
+            m_body = m_body.Replace("@@CCName", CCName);
+            m_body = m_body.Replace("@@CCSurname", CCSurname);
+            m_body = m_body.Replace("@@sCCName", "block");
+            if (String.IsNullOrEmpty(CCName) && String.IsNullOrEmpty(CCSurname))
+            {
+                m_body = m_body.Replace("@@sCCName", "none");
+            }
         }
 
         #endregion
