@@ -283,12 +283,12 @@
                                         Total Annual Plan Price
                                     </div>
                                     <div class="pricingBill-line__tax" id="priceT">
-                                        $@Model.VarInfo.Total_price.ToString("N0", nfi)
+                                        $@((Model.VarInfo.Annual_plan_price + Model.VarInfo.Customers_price + Model.VarInfo.Non_employee_price).ToString("N0", nfi))
                                     </div>
                                 </div>
                                 <div class="pricingBill-line pricingBill-lineSmall clearfix">
                                     <div class="pricingBill-line__text">
-                                        Required 
+                                        Required
                                         onboarding & training.
                                     </div>
                                     <div class="pricingBill-line__tax" id="priceR">
@@ -305,12 +305,12 @@
                                 </div>
                             </div>
                             <div class="pricingBill-footer">
-                                <p>By clicking on Buy Now, you agree to our 
+                                <p>By clicking on Buy Now, you agree to our
                                     <a href="~/TermsOfService.html" target="_blank">Terms</a>,
                                     <a href="~/LicenseAgreement.html" target="_blank">Employee Confidential License Agreement</a> and
                                     <a href="~/PrivacyStatement.html" target="_blank">Privacy Policy</a>
                                 </p>
-                                <button class="submitBigBtn btn" type="submit">Pay $@((Model.VarInfo.Total_price + Model.VarInfo.Onboarding_price).ToString("N0", nfi))</button>
+                                <button class="submitBigBtn btn" type="submit">Pay $@((Model.VarInfo.Total_price).ToString("N0", nfi))</button>
                             </div>
                         </div>
                     </div>
