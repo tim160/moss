@@ -83,6 +83,7 @@ namespace EC.Controllers.API
             };
 
             int booked_sessions;
+            int booked_sessions_f;
             return new
             {
                 Events = new {
@@ -98,7 +99,7 @@ namespace EC.Controllers.API
                 },
                 AvailableTimes = availableTimes,
 
-                OnboardingsRemaining = GetOnboardingsRemaining(user.company_id, out booked_sessions),
+                OnboardingsRemaining = GetOnboardingsRemaining(user.company_id, out booked_sessions, out booked_sessions_f),
             };
         }
 
@@ -129,8 +130,19 @@ namespace EC.Controllers.API
                 };
             }
             int booked_sessions;
-            var onboardingsRemaining = GetOnboardingsRemaining(user.company_id, out booked_sessions);
+            int booked_sessions_f;
+            var onboardingsRemaining = GetOnboardingsRemaining(user.company_id, out booked_sessions, out booked_sessions_f);
             var company = new CompanyModel(user.company_id);
+
+            if (booked_sessions_f > 0)
+            {
+                return new
+                {
+                    Result = false,
+                    Code = 3,
+                    Message = $"You've booked session already",
+                };                
+            }
 
             //if (DB.TrainerTimes.Count(x => x.CompanyId == user.company_id && x.Hour >= DateTime.Now) > 0)
             if (company._company.onboard_sessions_paid - booked_sessions < 1)
@@ -348,10 +360,11 @@ namespace EC.Controllers.API
             };
         }
 
-        public string GetOnboardingsRemaining(int company_id, out int booked_sessions)
+        public string GetOnboardingsRemaining(int company_id, out int booked_sessions, out int booked_sessions_f)
         {
             string remaining_onboardings = "";
             booked_sessions = 0;
+            booked_sessions_f = 0;
             CompanyModel cm = new CompanyModel(company_id);
 
             int paid_oboarding = cm._company.onboard_sessions_paid;
@@ -366,8 +379,10 @@ namespace EC.Controllers.API
                 }
                 else
                 {
-                    var dt = cm._company.onboard_sessions_expiry_dt.Value.AddYears(-1);
-                    booked_sessions = DB.TrainerTimes.Where(t => t.CompanyId == company_id && t.Hour >= dt).Count();
+                    //var dt = cm._company.onboard_sessions_expiry_dt.Value.AddYears(-1);
+                    //booked_sessions = DB.TrainerTimes.Where(t => t.CompanyId == company_id && t.Hour >= dt).Count();
+                    booked_sessions = DB.TrainerTimes.Where(t => t.CompanyId == company_id).Count();
+                    booked_sessions_f = DB.TrainerTimes.Where(t => t.CompanyId == company_id & t.Hour > DateTime.Now).Count();
                     switch (booked_sessions)
                     {
                         case 0:
