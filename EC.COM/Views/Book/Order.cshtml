@@ -230,14 +230,6 @@
                                 </form>
                                 *@
                             </div>
-                            <div class="pricingInfoBlock">
-                                <div class="pricingInfoBlock__textInfo">
-                                    *Many US states prohibit sexual harassment of non-employees in the workplace. The term “non-employee” includes 
-                                    contractors, subcontractors, vendors, consultants. An employer will be liable when the employer (including its agents and 
-                                    supervisors) knew or should have known that the non-employee was subjected to sexual harassment in the employer’s 
-                                    workplace, and the employer failed to take immediate and appropriate corrective action.
-                                </div>
-                            </div>
                         </div>
 
                         <div class="pricingBillContainer">
@@ -286,6 +278,19 @@
                                         $@((Model.VarInfo.Annual_plan_price + Model.VarInfo.Customers_price + Model.VarInfo.Non_employee_price).ToString("N0", nfi))
                                     </div>
                                 </div>
+                                @if (Model.VarInfo.Year > 1)
+                               {
+                                <div class="pricingBill-line pricingBill-lineTotal clearfix">
+                                    <div class="pricingBill-line__text">
+                                        <b>@Model.VarInfo.Year.ToString()-Year License</b>
+                                    </div>
+                                    <div class="pricingBill-line__tax" id="priceT">
+                                        $@(((Model.VarInfo.Annual_plan_price + Model.VarInfo.Customers_price + Model.VarInfo.Non_employee_price) * Model.VarInfo.Year).ToString("N0", nfi))
+                                    </div>
+                                </div>
+                                }
+
+
                                 <div class="pricingBill-line pricingBill-lineSmall clearfix">
                                     <div class="pricingBill-line__text">
                                         Required
@@ -299,20 +304,33 @@
                                     <div class="pricingBill-line__text">
                                         &nbsp;
                                     </div>
-                                    <div class="pricingBill-line__tax" style="font-size:16px;" id="sessionN">
-                                        
+                                    <div class="pricingBill-line__tax" style="font-size:14px;" id="sessionN">
+                                        @Model.VarInfo.Onboarding_session_explained
                                     </div>
                                 </div>
                             </div>
+                            <div class="pricingBill-main price-section">
+                                <div class="pricingBill-line pricingBill-lineTotal clearfix">
+                                    <div class="pricingBill-line__text">
+                                        <b>Total</b>
+                                    </div>
+                                    <div class="pricingBill-line__tax" id="priceT">
+                                        $@((Model.VarInfo.Total_price).ToString("N0", nfi))
+                                    </div>
+                                </div>
+                                </div>
                             <div class="pricingBill-footer">
-                                <p>By clicking on Buy Now, you agree to our
-                                    <a href="~/TermsOfService.html" target="_blank">Terms</a>,
-                                    <a href="~/LicenseAgreement.html" target="_blank">Employee Confidential License Agreement</a> and
-                                    <a href="~/PrivacyStatement.html" target="_blank">Privacy Policy</a>
-                                </p>
-                                <button class="submitBigBtn btn" type="submit">Pay $@((Model.VarInfo.Total_price).ToString("N0", nfi))</button>
+                                    <div class="pricingBill-line">
+                                        <p>
+                                            By clicking on Buy Now, you agree to our
+                                            <a href="~/TermsOfService.html" target="_blank">Terms</a>,
+                                            <a href="~/LicenseAgreement.html" target="_blank">Employee Confidential License Agreement</a> and
+                                            <a href="~/PrivacyStatement.html" target="_blank">Privacy Policy</a>
+                                        </p>
+                                    </div>
+                                    <button class="submitBigBtn btn" type="submit">Pay $@((Model.VarInfo.Total_price).ToString("N0", nfi))</button>
+                                </div>
                             </div>
-                        </div>
                     </div>
                 }
                                                 @*<div class="pricingInfoBlock">

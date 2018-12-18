@@ -20,6 +20,9 @@ namespace EC.COM.Data
         public int? Non_employee_no { get; set; }
         public int? Customers_no { get; set; }
 
+        /// <summary>
+        /// same as year?
+        /// </summary>
         public int Contract_length { get; set; }
         /* 3rd page generated price*/
         public decimal Annual_plan_price { get; set; }
@@ -42,6 +45,30 @@ namespace EC.COM.Data
         public string Registered_first_nm { get; set; }
         public string Registered_last_nm { get; set; }
         public int Year { get; set; }
-        public int Onboarding_session_numbers { get; set; }        
+        public int Onboarding_session_numbers { get; set; }  
+        
+        public string Onboarding_session_explained
+        {
+            get {
+                string return_string = "";
+                switch (Onboarding_session_numbers)
+                {
+
+                    case 1:
+                        return_string = "Up to one session";
+                        break;
+                    case 2:
+                        return_string = "Up to two sessions";
+                        break;
+                    case 3:
+                        return_string = "Up to three sessions";
+                        break;
+                }
+                return return_string;
+            }
+
+
+
+        }      
     }
 }
