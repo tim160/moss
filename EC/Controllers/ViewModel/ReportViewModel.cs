@@ -53,6 +53,7 @@ namespace EC.Controllers.ViewModel
         public string userName { get; set; }
         public string userLastName { get; set; }
         public string userEmail { get; set; }
+        public string userTelephone { get; set; }
         public bool sendUpdates { get; set; }
         public string witnessNames { get; set; }
         public string witnessWillCooperate { get; set; }
@@ -232,7 +233,7 @@ namespace EC.Controllers.ViewModel
                         Name = personName.ToList()[i],
                         last_name = personLastName.ToList()[i],
                         Title = personTitle.ToList()[i],
-                        
+
                     });
                 }
             }

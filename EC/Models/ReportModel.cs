@@ -47,7 +47,7 @@ namespace EC.Models
                 return null;
             }
         }
-       
+
         public string Get_reporter_name(int caller_id)
         {
             string name = "";
@@ -56,7 +56,7 @@ namespace EC.Models
                 if (caller_id == _reporter_user.id)
                     return App_LocalResources.GlobalRes.You;
 
-               user _caller = db.user.Where(item => item.id == caller_id).FirstOrDefault();
+                user _caller = db.user.Where(item => item.id == caller_id).FirstOrDefault();
 
                 if (_caller != null)
                 {
@@ -814,22 +814,22 @@ namespace EC.Models
         /// <returns></returns>
         public int GetTotalDays()
         {
-                int total_days = 0;
-                if (_report != null)
-                {
+            int total_days = 0;
+            if (_report != null)
+            {
 
-                    if ((_investigation_status == 6) || (_investigation_status == 7))
-                    {
+                if ((_investigation_status == 6) || (_investigation_status == 7))
+                {
                     //report is closed or marked as spam on LastPromotedDate()
                     total_days = (LastPromotedDate() - _report.reported_dt).Days;
-                    }
-                    else
-                    {
-                        total_days = (System.DateTime.Now - _report.reported_dt).Days;
-                    }
                 }
+                else
+                {
+                    total_days = (System.DateTime.Now - _report.reported_dt).Days;
+                }
+            }
 
-                return total_days;
+            return total_days;
         }
 
 
@@ -842,7 +842,7 @@ namespace EC.Models
         {
             int delay_allowed = GetDelayAllowed();
             return GetThisStepDaysLeft(delay_allowed);
-           
+
         }
 
         // Overloaded method when we know the delay
@@ -1109,46 +1109,46 @@ namespace EC.Models
         public string _anonymousLevel_reporterVersion()
         {
 
-                string anon_level = "";
-                int anon_level_id = 0;
+            string anon_level = "";
+            int anon_level_id = 0;
 
-                if (_report != null)
+            if (_report != null)
+            {
+                anon_level_id = _report.incident_anonymity_id;
+                anonymity _anonymity = db.anonymity.Where(item => (item.id == anon_level_id)).FirstOrDefault();
+
+                if (_anonymity != null)
                 {
-                    anon_level_id = _report.incident_anonymity_id;
-                    anonymity _anonymity = db.anonymity.Where(item => (item.id == anon_level_id)).FirstOrDefault();
-
-                    if (_anonymity != null)
-                    {
-                        if ((anon_level_id == 1) || (anon_level_id == 3))
-                            anon_level = _anonymity.anonymity_en;
-                        if (anon_level_id == 2)
-                            anon_level = String.Format(_anonymity.anonymity_en_company, CompanyName());
-                    }
+                    if ((anon_level_id == 1) || (anon_level_id == 3))
+                        anon_level = _anonymity.anonymity_en;
+                    if (anon_level_id == 2)
+                        anon_level = String.Format(_anonymity.anonymity_en_company, CompanyName());
                 }
+            }
 
-                return anon_level;
+            return anon_level;
         }
 
         public string _anonymousLevel_mediatorVersion()
         {
-                string anon_level = "";
-                int anon_level_id = 0;
+            string anon_level = "";
+            int anon_level_id = 0;
 
-                if (_report != null)
+            if (_report != null)
+            {
+                anon_level_id = _report.incident_anonymity_id;
+                anonymity _anonymity = db.anonymity.Where(item => (item.id == anon_level_id)).FirstOrDefault();
+
+                if (_anonymity != null)
                 {
-                    anon_level_id = _report.incident_anonymity_id;
-                    anonymity _anonymity = db.anonymity.Where(item => (item.id == anon_level_id)).FirstOrDefault();
-
-                    if (_anonymity != null)
-                    {
-                        if ((anon_level_id == 1) || (anon_level_id == 3))
-                            anon_level = _anonymity.anonymity_en;
-                        if (anon_level_id == 2)
-                            anon_level = String.Format(_anonymity.anonymity_en, CompanyName());
-                    }
+                    if ((anon_level_id == 1) || (anon_level_id == 3))
+                        anon_level = _anonymity.anonymity_en;
+                    if (anon_level_id == 2)
+                        anon_level = String.Format(_anonymity.anonymity_en, CompanyName());
                 }
+            }
 
-                return anon_level;
+            return anon_level;
         }
 
         public string _anonymousLevel_mediatorVersionByCaller(int caller_id)
@@ -1195,14 +1195,14 @@ namespace EC.Models
 
         public List<string> _attachments()
         {
-                List<string> _list = new List<string>();
+            List<string> _list = new List<string>();
 
-                if (db.attachment.Any(item => (item.report_id == ID) && (item.status_id == 2) && !item.visible_mediators_only.HasValue && !item.visible_reporter.HasValue))
-                {
-                    _list = db.attachment.Where(item1 => (item1.report_id == ID) && (item1.status_id == 2) && !item1.visible_mediators_only.HasValue && !item1.visible_reporter.HasValue).Select(item => item.path_nm).ToList();
-                }
+            if (db.attachment.Any(item => (item.report_id == ID) && (item.status_id == 2) && !item.visible_mediators_only.HasValue && !item.visible_reporter.HasValue))
+            {
+                _list = db.attachment.Where(item1 => (item1.report_id == ID) && (item1.status_id == 2) && !item1.visible_mediators_only.HasValue && !item1.visible_reporter.HasValue).Select(item => item.path_nm).ToList();
+            }
 
-                return _list;
+            return _list;
         }
         #endregion
 
@@ -1273,7 +1273,8 @@ namespace EC.Models
                         notification_new_reports_flag = 1,
                         notification_marketing_flag = 1,
                         guid = _guid,
-                        notification_summary_period = 1
+                        notification_summary_period = 1,
+                        phone = model.userTelephone
                     };
 
                     newUser = adv.user.Add(newUser);
@@ -1424,7 +1425,7 @@ namespace EC.Models
                     }*/
                     //foreach(var person in model.pe)
 
-                 ////   if (model.mediatorsInvolved != null)
+                    ////   if (model.mediatorsInvolved != null)
                     {
                         foreach (var item in db.company_case_routing_location.Where(x => x.company_id == currentReport.company_id & x.company_location_id == currentReport.location_id).ToList())
                         {
@@ -1448,7 +1449,7 @@ namespace EC.Models
                         }
                     }
 
-                ////////    if (model.mediatorsInvolved != null)
+                    ////////    if (model.mediatorsInvolved != null)
                     {
                         foreach (var item in db.company_case_routing.Where(x => x.company_id == currentReport.company_id && model.whatHappened.Contains(x.company_secondary_type_id)).ToList())
                         {
@@ -1591,47 +1592,47 @@ namespace EC.Models
         /// <returns></returns>
         public List<user> MediatorsWhoHasAccessToReport()
         {
-                List<user> result = new List<user>();
-                user _user;
+            List<user> result = new List<user>();
+            user _user;
 
-                List<user> all_top_mediators = db.user.Where(item => (item.company_id == _report.company_id) && (item.role_id == 4 || item.role_id == 5) && item.status_id == 2).ToList();
-                List<user> involved_mediators = InvolvedMediatorsUserList();
-                List<user> assigned_mediators = AssignedMediatorsUserList();
-                var owner = db.report_owner.FirstOrDefault(x => x.report_id == _report.id & x.status_id == 2);
+            List<user> all_top_mediators = db.user.Where(item => (item.company_id == _report.company_id) && (item.role_id == 4 || item.role_id == 5) && item.status_id == 2).ToList();
+            List<user> involved_mediators = InvolvedMediatorsUserList();
+            List<user> assigned_mediators = AssignedMediatorsUserList();
+            var owner = db.report_owner.FirstOrDefault(x => x.report_id == _report.id & x.status_id == 2);
 
-                for (int i = 0; i < all_top_mediators.Count; i++)
+            for (int i = 0; i < all_top_mediators.Count; i++)
+            {
+                _user = all_top_mediators[i];
+                if ((!involved_mediators.Any(item => (item.id == _user.id))) && (!result.Contains(_user)))
                 {
-                    _user = all_top_mediators[i];
-                    if ((!involved_mediators.Any(item => (item.id == _user.id))) && (!result.Contains(_user)))
+                    if ((owner != null) && (owner.user_id == _user.id))
                     {
-                        if ((owner != null) && (owner.user_id == _user.id))
-                        {
-                            result.Insert(0, _user);
-                        }
-                        else
-                        {
-                            result.Add(_user);
-                        }
+                        result.Insert(0, _user);
+                    }
+                    else
+                    {
+                        result.Add(_user);
                     }
                 }
-                for (int i = 0; i < assigned_mediators.Count; i++)
+            }
+            for (int i = 0; i < assigned_mediators.Count; i++)
+            {
+                _user = assigned_mediators[i];
+                if ((!involved_mediators.Any(item => (item.id == _user.id))) && (!result.Contains(_user)))
                 {
-                    _user = assigned_mediators[i];
-                    if ((!involved_mediators.Any(item => (item.id == _user.id))) && (!result.Contains(_user)))
+                    if ((owner != null) && (owner.user_id == _user.id))
                     {
-                        if ((owner != null) && (owner.user_id == _user.id))
-                        {
-                            result.Insert(0, _user);
-                        }
-                        else
-                        {
-                            result.Add(_user);
-                        }
+                        result.Insert(0, _user);
+                    }
+                    else
+                    {
+                        result.Add(_user);
                     }
                 }
+            }
 
 
-                return result;
+            return result;
         }
 
         /// <summary>
@@ -1654,7 +1655,7 @@ namespace EC.Models
 
             IEnumerable<int> mediator_ids = top_mediator_ids.Concat(assigned_mediator_ids).Distinct();
             mediator_ids = mediator_ids.Except(involved_mediator_ids);
-            List<QuickUserViewModel> users = (mediator_ids ==null || mediator_ids.Count() == 0) ? new List<QuickUserViewModel>() : db.user.Where(item => (item.status_id == 2 && mediator_ids.Contains(item.id))).Select(z => new QuickUserViewModel
+            List<QuickUserViewModel> users = (mediator_ids == null || mediator_ids.Count() == 0) ? new List<QuickUserViewModel>() : db.user.Where(item => (item.status_id == 2 && mediator_ids.Contains(item.id))).Select(z => new QuickUserViewModel
             {
                 id = z.id,
                 first_nm = z.first_nm,
@@ -1698,7 +1699,7 @@ namespace EC.Models
         public List<company_outcome> CompanyOutcomes()
         {
             return db.company_outcome.Where(item => item.company_id == _report.company_id).ToList();
-        }        
+        }
 
         public List<role_in_report> RoleInReport()
         {
@@ -1714,7 +1715,7 @@ namespace EC.Models
         {
             var som = db.report_signoff_mediator.OrderByDescending(x => x.created_on).FirstOrDefault(item => item.report_id == ID);
             return som == null ? null : db.user.FirstOrDefault(x => x.id == som.user_id);
-        }        
+        }
 
         public List<user> InvolvedMediatorsUserList()
         {
@@ -1763,19 +1764,19 @@ namespace EC.Models
         }
         public List<user> AssignedMediatorsUserList()
         {
-                List<user> result = new List<user>();
-                List<report_mediator_assigned> mediators = AssignedMediators();
-                List<user> _users;
-                int mediator_id = 0;
-                for (int i = 0; i < mediators.Count; i++)
-                {
-                    mediator_id = mediators[i].mediator_id;
-                    _users = db.user.Where(item => item.id == mediator_id && item.status_id == 2).ToList();
-                    if (_users.Count > 0)
-                        result.Add(_users[0]);
-                }
+            List<user> result = new List<user>();
+            List<report_mediator_assigned> mediators = AssignedMediators();
+            List<user> _users;
+            int mediator_id = 0;
+            for (int i = 0; i < mediators.Count; i++)
+            {
+                mediator_id = mediators[i].mediator_id;
+                _users = db.user.Where(item => item.id == mediator_id && item.status_id == 2).ToList();
+                if (_users.Count > 0)
+                    result.Add(_users[0]);
+            }
 
-                return result;
+            return result;
         }
 
         public List<report_owner> ReportOwners()
@@ -1788,7 +1789,7 @@ namespace EC.Models
             List<report_owner> mediators = ReportOwners();
             user _user;
 
-            foreach(var mediator in mediators)
+            foreach (var mediator in mediators)
             {
                 _user = db.user.FirstOrDefault(item => item.id == mediator.user_id);
                 result.Add(_user);
@@ -1804,25 +1805,25 @@ namespace EC.Models
         /// <returns></returns>
         public List<user> AvailableToAssignMediators()
         {
-                report _report = db.report.FirstOrDefault(item => item.id == ID);
-                List<user> result = new List<user>();
-                List<user> users = db.user.Where(item => (item.company_id == _report.company_id) && (item.role_id == 6) && (item.status_id == 2)).ToList();
+            report _report = db.report.FirstOrDefault(item => item.id == ID);
+            List<user> result = new List<user>();
+            List<user> users = db.user.Where(item => (item.company_id == _report.company_id) && (item.role_id == 6) && (item.status_id == 2)).ToList();
 
-                user _user;
+            user _user;
 
-                for (int i = 0; i < users.Count; i++)
+            for (int i = 0; i < users.Count; i++)
+            {
+                _user = users[i];
+                // if regular mediator is not involved
+                if (!db.report_mediator_involved.Any(item => (item.mediator_id == _user.id) && (item.report_id == ID)))
                 {
-                    _user = users[i];
-                    // if regular mediator is not involved
-                    if (!db.report_mediator_involved.Any(item => (item.mediator_id == _user.id) && (item.report_id == ID)))
-                    {
-                        // if regular mediator is not assigned already
-                        if (!db.report_mediator_assigned.Any(item => (item.mediator_id == _user.id) && (item.report_id == ID) && (item.status_id == 2)))
-                            result.Add(_user);
-                    }
+                    // if regular mediator is not assigned already
+                    if (!db.report_mediator_assigned.Any(item => (item.mediator_id == _user.id) && (item.report_id == ID) && (item.status_id == 2)))
+                        result.Add(_user);
                 }
+            }
 
-                return result;
+            return result;
         }
         #endregion
 
@@ -2146,15 +2147,15 @@ namespace EC.Models
         /// <returns></returns>
         public string InvestigationStatusString()
         {
-                string status = "";
+            string status = "";
 
-                investigation_status _status = db.investigation_status.Where(item => item.id == _investigation_status).FirstOrDefault();
-                if (_status != null)
-                {
-                    status = _status.investigation_status_en;
-                }
+            investigation_status _status = db.investigation_status.Where(item => item.id == _investigation_status).FirstOrDefault();
+            if (_status != null)
+            {
+                status = _status.investigation_status_en;
+            }
 
-                return status.Trim();
+            return status.Trim();
         }
 
         public report_investigation_status _last_investigation_status()
@@ -2177,14 +2178,14 @@ namespace EC.Models
         /// <returns></returns>
         public int Last_investigation_status_user_id()
         {
-                report_investigation_status last_status = _last_investigation_status();
+            report_investigation_status last_status = _last_investigation_status();
 
-                if (last_status != null)
-                {
-                    return last_status.user_id;
-                }
+            if (last_status != null)
+            {
+                return last_status.user_id;
+            }
 
-                return 0;
+            return 0;
         }
 
         public user Last_investigation_status_user()
@@ -2238,22 +2239,22 @@ namespace EC.Models
         /// </summary>
         public int _previous_investigation_status_id()
         {
-                report_investigation_status last_status = new report_investigation_status();
-                report_investigation_status previous_last_status = new report_investigation_status();
+            report_investigation_status last_status = new report_investigation_status();
+            report_investigation_status previous_last_status = new report_investigation_status();
 
-                if (db.report_investigation_status.Any(item => item.report_id == ID))
+            if (db.report_investigation_status.Any(item => item.report_id == ID))
+            {
+                List<report_investigation_status> statuses = db.report_investigation_status.Where(item => item.report_id == ID).OrderByDescending(x => x.id).ToList();
+                if (statuses.Count > 1)
                 {
-                    List<report_investigation_status> statuses = db.report_investigation_status.Where(item => item.report_id == ID).OrderByDescending(x => x.id).ToList();
-                    if (statuses.Count > 1)
-                    {
-                        previous_last_status = statuses[1];
-                        return previous_last_status.investigation_status_id;
-                    }
-                    else
-                        return 0;
+                    previous_last_status = statuses[1];
+                    return previous_last_status.investigation_status_id;
                 }
                 else
                     return 0;
+            }
+            else
+                return 0;
         }
 
         public report_investigation_status _previous_investigation_status()
@@ -2553,77 +2554,77 @@ namespace EC.Models
             List<user> access_mediators = MediatorsWhoHasAccessToReport().Where(t => t.role_id == 5 || (t.user_permissions_approve_case_closure.HasValue && t.user_permissions_approve_case_closure.Value == 1)).ToList();
             return access_mediators;
 
-        /*    return (
-                from m in db.report_mediator_assigned.Where(x => x.report_id == ID).Select(x => x.mediator_id).Distinct().ToList()
-                join u in db.user.Where(x => x.user_permissions_approve_case_closure != 1) on m equals u.id
-                select u).ToList();*/
+            /*    return (
+                    from m in db.report_mediator_assigned.Where(x => x.report_id == ID).Select(x => x.mediator_id).Distinct().ToList()
+                    join u in db.user.Where(x => x.user_permissions_approve_case_closure != 1) on m equals u.id
+                    select u).ToList();*/
         }
 
         public List<UserViewModel> MediatorsAcceptCase()
         {
 
-                var res = new List<UserViewModel>();
+            var res = new List<UserViewModel>();
 
-                var list1 = MediatorsWhoHasAccessToReport();
-                var list2 = InvolvedMediatorsUserList();
-                var list3 = AvailableToAssignMediators();
+            var list1 = MediatorsWhoHasAccessToReport();
+            var list2 = InvolvedMediatorsUserList();
+            var list3 = AvailableToAssignMediators();
 
-                //By level
-                res.AddRange(list1
-                    .Where(x => x.role_id == 4)
-                    .Select(x => new UserViewModel(x) { Detail = "Case Reviewer" })
-                    .OrderBy(x => x.FullName)
-                    .ToList());
+            //By level
+            res.AddRange(list1
+                .Where(x => x.role_id == 4)
+                .Select(x => new UserViewModel(x) { Detail = "Case Reviewer" })
+                .OrderBy(x => x.FullName)
+                .ToList());
 
-                res.AddRange(list1
-                    .Where(x => x.role_id == 5)
-                    .Select(x => new UserViewModel(x) { Detail = "Platform Manager" })
-                    .OrderBy(x => x.FullName)
-                    .ToList());
+            res.AddRange(list1
+                .Where(x => x.role_id == 5)
+                .Select(x => new UserViewModel(x) { Detail = "Platform Manager" })
+                .OrderBy(x => x.FullName)
+                .ToList());
 
             //ids not top level
             var ids = list1.Where(x => x.role_id != 4 && x.role_id != 5).Select(x => x.id).ToList();
 
-                var list = (
-                    from ma in db.report_mediator_assigned.Where(x => ids.Contains(x.mediator_id) & x.report_id == ID)
-                    join ju in db.user on ma.mediator_id equals ju.id into j1
-                    join jcl in db.company_location on ma.by_location_id equals jcl.id into j2
-                    join jst in db.company_secondary_type on ma.by_secondary_type_id equals jst.id into j3
-                    from u in j1.DefaultIfEmpty()
-                    from cl in j2.DefaultIfEmpty()
-                    from st in j3.DefaultIfEmpty()
-                    select new
+            var list = (
+                from ma in db.report_mediator_assigned.Where(x => ids.Contains(x.mediator_id) & x.report_id == ID)
+                join ju in db.user on ma.mediator_id equals ju.id into j1
+                join jcl in db.company_location on ma.by_location_id equals jcl.id into j2
+                join jst in db.company_secondary_type on ma.by_secondary_type_id equals jst.id into j3
+                from u in j1.DefaultIfEmpty()
+                from cl in j2.DefaultIfEmpty()
+                from st in j3.DefaultIfEmpty()
+                select new
+                {
+                    User = u,
+                    MA = ma,
+                    CL = cl,
+                    ST = st
+                }
+                )
+                .Where(x => x.User != null)
+                .ToList()
+                .Select(x =>
+                    new UserViewModel(x.User)
                     {
-                        User = u,
-                        MA = ma,
-                        CL = cl,
-                        ST = st
+                        Detail = x.MA.by_location_id != null ? "On case team due to location: " + x.CL.location_en : x.MA.by_secondary_type_id != null ? "On case team due to incident type: " + x.ST.secondary_type_en : ""
                     }
-                    )
-                    .Where(x => x.User != null)
-                    .ToList()
-                    .Select(x =>
-                        new UserViewModel(x.User)
-                        {
-                            Detail = x.MA.by_location_id != null ? "On case team due to location: " + x.CL.location_en : x.MA.by_secondary_type_id != null ? "On case team due to incident type: " + x.ST.secondary_type_en : ""
-                        }
-                    ).OrderBy(x => x.FullName).ToList();
-                res.AddRange(list);
+                ).OrderBy(x => x.FullName).ToList();
+            res.AddRange(list);
 
-                //Other
-                res.AddRange(list2
-                    .Select(x => new UserViewModel(x) { Detail = "" })
-                    .OrderBy(x => x.FullName)
-                    .ToList()
-                    );
+            //Other
+            res.AddRange(list2
+                .Select(x => new UserViewModel(x) { Detail = "" })
+                .OrderBy(x => x.FullName)
+                .ToList()
+                );
 
-                res.AddRange(list3
-                    .Select(x => new UserViewModel(x) { Detail = "" })
-                    .OrderBy(x => x.FullName)
-                    .ToList()
-                    );
+            res.AddRange(list3
+                .Select(x => new UserViewModel(x) { Detail = "" })
+                .OrderBy(x => x.FullName)
+                .ToList()
+                );
 
-                return res.GroupBy(x => x.User.id).Select(x => x.First()).ToList();
+            return res.GroupBy(x => x.User.id).Select(x => x.First()).ToList();
         }
 
         public string InvestigationMethodology()

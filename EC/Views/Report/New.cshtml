@@ -25,7 +25,7 @@
     {
         class_ext = "_cc";
     }
-        //19
+    //19
 }
 
 
@@ -69,7 +69,8 @@
                 @if (@ViewBag.companylogo != null)
                 {
                     <img class="logo" src=@ViewBag.companylogo />
-                } else
+                }
+                else
                 {
                     <div style="width: 240px;float: left;height: 110px;"></div>
                 }
@@ -79,7 +80,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="rowContent">
         <div class="leftBlock leftBlock@{@class_ext}">
             <p class="titleMenu">@GlobalRes.NewIncidentReport</p>
@@ -149,30 +150,30 @@
                         <div class="rowBlock reporterType vlCorrect">
                             <input type="hidden" class="validate vlCorrect reporterTypeInput" value="1" name="reporterTypeDetail" data-vltarget=".reporterTypeDetail" data-validate="notEmpty">
                             @*@if (ViewBag.relationship != null)
-                            {
-                                int count = 0;
-                                foreach (var item in ViewBag.relationship)
                                 {
-                                    if (count == 0)
+                                    int count = 0;
+                                    foreach (var item in ViewBag.relationship)
                                     {
-                                        <div class="fourBlock inputRadio option active" data-val="@item.id">
-                                            <label class="inputBlock" for="@String.Concat(@item.relationship_en)">
-                                                <input id="@String.Concat(@item.relationship_en)" type="radio" name="radioName" value="@item.id" /><span class="radioButton"></span><span class="radioTitle">@item.relationship_en</span>
-                                            </label>
-                                        </div>
-                                        count++;
+                                        if (count == 0)
+                                        {
+                                            <div class="fourBlock inputRadio option active" data-val="@item.id">
+                                                <label class="inputBlock" for="@String.Concat(@item.relationship_en)">
+                                                    <input id="@String.Concat(@item.relationship_en)" type="radio" name="radioName" value="@item.id" /><span class="radioButton"></span><span class="radioTitle">@item.relationship_en</span>
+                                                </label>
+                                            </div>
+                                            count++;
+                                        }
+                                        else
+                                        {
+                                            <div class="fourBlock inputRadio option" data-val="@item.id">
+                                                <label class="inputBlock" for="@String.Concat(@item.relationship_en)">
+                                                    <input id="@String.Concat(@item.relationship_en)" type="radio" name="radioName" value="@String.Concat(@item.relationship_en)" /><span class="radioButton"></span><span class="radioTitle">@String.Concat(@item.relationship_en)</span>
+                                                </label>
+                                            </div>
+                                        }
+                                    ///b Employee” came through as “9” in “Reported as:”
                                     }
-                                    else
-                                    {
-                                        <div class="fourBlock inputRadio option" data-val="@item.id">
-                                            <label class="inputBlock" for="@String.Concat(@item.relationship_en)">
-                                                <input id="@String.Concat(@item.relationship_en)" type="radio" name="radioName" value="@String.Concat(@item.relationship_en)" /><span class="radioButton"></span><span class="radioTitle">@String.Concat(@item.relationship_en)</span>
-                                            </label>
-                                        </div>
-                                    }
-                                ///b Employee” came through as “9” in “Reported as:”
-                                }
-                            }*@
+                                }*@
                             @if (ViewBag.relationship != null)
                             {
                                 foreach (var item in ViewBag.relationship)
@@ -263,7 +264,7 @@
                             <p class="title">@GlobalRes.report_by_myself</p>
                             <div class="rowBlock report_by_myself">
                                 <input type="hidden" class="report_by_myself validate" name="report_by_myself" value="1" data-validate="notEmpty" data-vltarget=".report_by_myself">
-                                <div class="freeBlock inputRadio option"  data-val="true">
+                                <div class="freeBlock inputRadio option" data-val="true">
                                     <label class="inputBlock" for="Myself">
                                         <input id="Myself" type="radio" name="report_by_myself" value="true" data-val="1">
                                         <span class="radioButton"></span>
@@ -340,7 +341,7 @@
                                     $('.whoKnow .freeBlock ').on('click', function (event) {
                                         $('.whoKnow input').each(function (indx, element) {
                                             $(element).prop('checked', false);
-                                            $(element).next().css({ "background-position": "0px 0px"});
+                                            $(element).next().css({ "background-position": "0px 0px" });
                                             $(element).parent().find('.radioTitle').css("color", "#AEB5B7");
                                         });
                                         $(event.currentTarget).find('.radioButton').css({ "background-position": "0px 100%" });
@@ -410,7 +411,7 @@
                 </div>
 
             </div>
-            
+
             <!--caseInformation-->
             <div class="caseInformation tab" data-id="3">
                 <div class="content">
@@ -422,23 +423,23 @@
 
                             </div>
                             @*<div class="help" title="" onclick="">
-                                ?
-                                <div class="hoverElement">
-                                    <div class="triangleHover position"></div>
-                                    <div class="spec position">
-                                        •	Accounting, Auditing and Financial Reporting (i.e. financial misconduct, internal controls, expense reporting)<br /><br />
-                                        •	Business Integrity (i.e. bribery, falsification of documents, fraud, COI, vendor/customer issues, HIPAA)<br /><br />
-                                        •	HR, Diversity and Workplace Respect (i.e. discrimination, harassment, compensation, general HR and cases marked as “other”)<br /><br />
-                                        •	Environment, Health and Safety (i.e. EPA compliance, assault, safety, OSHA, substance abuse)<br /><br />
-                                        •	Misuse, Misappropriation of Corporate Assets (i.e. employee theft, time clock abuse)<br /><br />
+                                    ?
+                                    <div class="hoverElement">
+                                        <div class="triangleHover position"></div>
+                                        <div class="spec position">
+                                            •	Accounting, Auditing and Financial Reporting (i.e. financial misconduct, internal controls, expense reporting)<br /><br />
+                                            •	Business Integrity (i.e. bribery, falsification of documents, fraud, COI, vendor/customer issues, HIPAA)<br /><br />
+                                            •	HR, Diversity and Workplace Respect (i.e. discrimination, harassment, compensation, general HR and cases marked as “other”)<br /><br />
+                                            •	Environment, Health and Safety (i.e. EPA compliance, assault, safety, OSHA, substance abuse)<br /><br />
+                                            •	Misuse, Misappropriation of Corporate Assets (i.e. employee theft, time clock abuse)<br /><br />
+                                        </div>
                                     </div>
-                                </div>
-                            </div>*@
+                                </div>*@
 
                         </div>
                         <input type="hidden" value="@ViewBag.CustomSecondaryType" name="CustomSecondaryType" />
 
-                        
+
                         <div class="rowBlock caseInformationReport">
                             <input type="hidden" class="validate" value="false" name="caseInformationReport" data-vltarget=".caseInformationReport" data-validate="notEmpty" />
                             @if (ViewBag.secondary_type_mandatory != null)
@@ -563,9 +564,8 @@
                 </div>
 
             </div>
-            
+
             <!--caseInformation END-->
-            
             <!--Previwe Summaru. Page 4 -->
             <div class="mAssigned tab" data-id="4">
                 <div class="content">
@@ -589,6 +589,10 @@
                                 <input type="checkbox" name="sendUpdates" id="checkBox" value="false" class="checkBoxStyle floatLeftClass" />
                                 <span class="radioTitle sendUpdates" style="height:30px;">@GlobalRes.Sendreportupdates</span>
                             </div>
+                        </div>
+                        <div class="contentBlock" tabindex="1">
+                            <p class="title">@GlobalRes.telephone</p>
+                            <textarea id="userTelephone" name="userTelephone" class="validate lessHeight" data-validate="phone"></textarea>
                         </div>
                     </div>
                 </div>
@@ -651,14 +655,14 @@
                             <div class="report">
                                 <div class="partiesInvolvedBlock">
                                     @*<div class="reportText" style="float: left; padding-left: 0px;" id="FirstLastName">Stan Lee,</div>
-                                    <div class="titleReport">Title unknown</div>+
-                                    <div class="reportText" id="witnessRole">Witness</div>
-                                    <div id="addedPepsones"></div>*@
+                                        <div class="titleReport">Title unknown</div>+
+                                        <div class="reportText" id="witnessRole">Witness</div>
+                                        <div id="addedPepsones"></div>*@
                                 </div>
 
                                 <!--<span id="managementTrue">The management knows about the incident</span>
-                            <span id="managementFalse">The management doesn't know about the incident</span>
-                            <div class="titleReportAll" id="isManagementKnow"></div>-->
+                                <span id="managementFalse">The management doesn't know about the incident</span>
+                                <div class="titleReportAll" id="isManagementKnow"></div>-->
                             </div>
                         </div>
 
@@ -740,7 +744,8 @@
                 </div>
 
                 <div class="titleMediators">@GlobalRes.MediatorsAssigned</div>
-                <div class="titleMediatorsDescrition">The following case administrator(s) may be assigned to your case. If you feel that a Case Administrator may have a conflict of interest or would be obstructive to investigating the case, please check ‘Exclude’ below.
+                <div class="titleMediatorsDescrition">
+                    The following case administrator(s) may be assigned to your case. If you feel that a Case Administrator may have a conflict of interest or would be obstructive to investigating the case, please check ‘Exclude’ below.
                 </div>
 
 
@@ -792,7 +797,7 @@
                 @if (ViewBag.nonSupervisingMediators.Count > 0)
                 {
                     @*<div class="titleMediators">@GlobalRes.Mediationteam</div>
-                    <div class="titleMediatorsDescrition">@GlobalRes.ThismediatorsCould</div>*@
+                        <div class="titleMediatorsDescrition">@GlobalRes.ThismediatorsCould</div>*@
                     <div class="titleMediators">@GlobalRes.Mediationteam</div>
                 }
 
@@ -884,7 +889,7 @@
                 </div>
                 <div class="addPersonInfo sampleContainer">
                     <div class="personTitle title">
-                        @GlobalRes.Role 
+                        @GlobalRes.Role
                         <div class="help" title="" onclick="">
                             ?
                             <div class="hoverElement">
@@ -893,14 +898,14 @@
                             </div>
                         </div>
                     </div>
-                                        @*
-                            <select class="selectedRoleInReport" id="selectedRoleInReport" name="selectedRoleInReport"><option selected="selected" value="0">Other</option>
-        <option value="1">Witness</option>
-        <option value="2">Involved</option>
-        <option value="3">Other</option>
-        </select>
+                    @*
+                                            <select class="selectedRoleInReport" id="selectedRoleInReport" name="selectedRoleInReport"><option selected="selected" value="0">Other</option>
+                        <option value="1">Witness</option>
+                        <option value="2">Involved</option>
+                        <option value="3">Other</option>
+                        </select>
 
-                                        *@
+                    *@
 
                     <div class="personData">
                         <select name="personRole[NUM]" class="selectedRoleInReport">
@@ -911,7 +916,7 @@
                         </select>
 
                         @*@Html.DropDownList("selectedRoleInReport", ViewBag.selectedRoleInReport as SelectList, new { @class = "selectedRoleInReport" })*@
-                        
+
                         @*<input type="text" name="personRole[NUM]"   class="personDataTextBox witnessRole" />*@
                     </div>
                 </div>

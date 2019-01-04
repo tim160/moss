@@ -2164,4 +2164,7 @@
   <data name="ReviewReportUp" xml:space="preserve">
     <value>Review Report</value>
   </data>
+  <data name="telephone" xml:space="preserve">
+    <value>Telephone</value>
+  </data>
 </root>
