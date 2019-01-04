@@ -120,19 +120,19 @@
                         </div>
                         <div class="form-mainContent">
                             <label class="form-mainContent__label">
-                                First name
+                                First name*
                                 <input type="text" class="form-mainContent__labelInput" name="FirstName">
                             </label>
                             <label class="form-mainContent__label">
-                                Last name
+                                Last name*
                                 <input type="text" class="form-mainContent__labelInput" name="LastName">
                             </label>
                             <label class="form-mainContent__label">
-                                Company name
+                                Company name*
                                 <input type="text" class="form-mainContent__labelInput" name="CompanyName">
                             </label>
                             <label class="form-mainContent__label">
-                                Phone
+                                Phone*
                                 <input type="text" class="form-mainContent__labelInput" name="Phone">
                             </label>
                             <label class="form-mainContent__label">
@@ -140,7 +140,7 @@
                                 <input type="email" class="form-mainContent__labelInput" name="Email" required>
                             </label>
                             <label class="form-mainContent__label">
-                                Number of employees
+                                Number of employees*
                                 <input type="number" class="form-mainContent__labelInput" name="NumberOfEmployees" value="1">
                             </label>
                             <label class="form-mainContent__label">
@@ -200,7 +200,7 @@
     $(function () {
         $('form').on('submit', function (event) {
             event.preventDefault();
-            var array = ['FirstName', 'LastName', 'CompanyName', 'Phone', 'Email', 'NumberOfEmployees', 'InvitationCode'];
+            var array = ['FirstName', 'LastName', 'CompanyName', 'Phone', 'Email', 'NumberOfEmployees'];
             var flag = 0;
             array.forEach(function (item, i, arr) {
                 var temp = $('[name="' + item + '"]');
@@ -222,15 +222,5 @@
                 event.target.submit();
             }
         });
-        //arr.forEach(function (item, i, arr) {
-        //    alert(i + ": " + item + " (массив:" + arr + ")");
-        //});
-        //var name = $('[name="FirstName"]');
-        //if (name.val() == "") {
-        //    name.parent().css('border', '2px solid red');
-        //}
-        //if (!validateEmail($('[name="Email"]').val())) {
-        //    $('[name="Email"]').parent().css('border', '2px solid red');
-        //    return false;
     });
 </script>
