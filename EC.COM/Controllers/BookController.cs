@@ -289,14 +289,13 @@ namespace EC.COM.Controllers
             EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
             eb.OrderConfirmation_Email(
                 varinfo.Emailed_code_to_customer,
-                varinfo.First_nm,
+                String.IsNullOrEmpty(varinfo.First_nm) && String.IsNullOrEmpty(varinfo.Last_nm) ? "Customer" : varinfo.First_nm,
                 varinfo.Last_nm,
                 varinfo.Annual_plan_price.ToString(),
                 varinfo.Onboarding_price.ToString(),
                 (varinfo.Registered_dt.Value.AddYears(varinfo.Year)).ToString("MMMM dd'st', yyyy", new CultureInfo("en-US")),
                 varinfo.Last_nm,
                 varinfo.Company_nm,
-                //model.NameOnCard,
                 "",
                 varinfo.Last_nm,
                 Request.Url.AbsoluteUri.ToLower(),
