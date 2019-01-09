@@ -17,7 +17,7 @@
     <AssemblyName>EC.COM</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -26,6 +26,7 @@
     <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -711,6 +712,7 @@
     <None Include="Smtp.config.default" />
     <Content Include="Views\Book\Order.cshtml" />
     <Content Include="Views\Book\CompanyRegistrationVideo.cshtml" />
+    <Content Include="Views\Video\test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EC.Business\EC.Business.csproj">

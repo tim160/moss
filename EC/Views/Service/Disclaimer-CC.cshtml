@@ -7,135 +7,134 @@
 
 <style>
     .not-active {
-      pointer-events: none;
-      cursor: default;
-      text-decoration: none;
-      color: black;
+        pointer-events: none;
+        cursor: default;
+        text-decoration: none;
+        color: black;
     }
 </style>
 
 <div class="general-container login">
-	
-	<header class="header header-cc">
-		<div class="top-headerBg">
-			<div class="container">
-				<div class="top-header">
 
-					<a href="http://campusconfidential.com" class="top-header__backLink">
-						<img src="~/Content/images/svg-icons/left.svg" alt="" />
-						<span class="top-header__backLink-text">
-							CampusConfidential.com
-						</span>
-					</a>
-					<div class="top-header__loginBar">
-						<nav class="top-header__loginBar-nav">
-							<li class="top-header__loginBar-li">
-								<a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Login" class="top-header__loginBar-a">
-									Client Login
-								</a>
-							</li><!-- /.top-header__loginBar-li -->
+    <header class="header header-cc">
+        <div class="top-headerBg">
+            <div class="container">
+                <div class="top-header">
 
-							<li class="top-header__loginBar-li">
-								<a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/CheckStatus" class="top-header__loginBar-a">
-									Check Report Status
-								</a>
-							</li><!-- /.top-header__loginBar-li -->
-						</nav><!-- /.top-header__loginBar-nav -->
-					</div><!-- /.top-header__loginBar -->
-				</div><!-- /.top-header -->
-			</div>	
-		</div>
-			
-	</header><!-- /.header -->
+                    <a href="http://campusconfidential.com" class="top-header__backLink">
+                        <img src="~/Content/images/svg-icons/left.svg" alt="" />
+                        <span class="top-header__backLink-text">
+                            CampusConfidential.com
+                        </span>
+                    </a>
+                    <div class="top-header__loginBar">
+                        <nav class="top-header__loginBar-nav">
+                            <li class="top-header__loginBar-li">
+                                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Login" class="top-header__loginBar-a">
+                                    Client Login
+                                </a>
+                            </li><!-- /.top-header__loginBar-li -->
 
-	<main class="main main_white">
-		<section class="loginSection loginSection-cc">
-			<div class="loginSection__titleBg">
-				<div class="container loginTopSection__container">
-					<a href="#" class="loginSection__logo">
-						<img class="loginSection__logoImg" src="@Model.getLogoCompany(Model.ID)" alt="">
-					</a>
-					<div class="loginSection__title loginSection__titleWithLlogo">
-						File a report
-					</div><!-- /.loginSection__title -->
-				</div><!-- /.container -->
-			</div><!-- /.loginSection__titleBg -->
-			<div class="loginSection__contentBg">
-				<div class="container loginSection__container">
-					<div class="loginContentBlock">
-						<p class="loginContentBlock__textP">
-							This platform makes it easy to report an incident about 
-							campus issues like sexual harassment, bullying, hazing, 
-							suicide ideation, substance abuse etc. 
-						</p><!-- /.loginContentBlock__textP -->
-						<p class="loginContentBlock__textP">
+                            <li class="top-header__loginBar-li">
+                                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/CheckStatus" class="top-header__loginBar-a">
+                                    Check Report Status
+                                </a>
+                            </li><!-- /.top-header__loginBar-li -->
+                        </nav><!-- /.top-header__loginBar-nav -->
+                    </div><!-- /.top-header__loginBar -->
+                </div><!-- /.top-header -->
+            </div>
+        </div>
+
+    </header><!-- /.header -->
+
+    <main class="main main_white">
+        <section class="loginSection loginSection-cc">
+            <div class="loginSection__titleBg">
+                <div class="container loginTopSection__container">
+                    <a href="#" class="loginSection__logo">
+                        <img class="loginSection__logoImg" src="@Model.getLogoCompany(Model.ID)" alt="">
+                    </a>
+                    <div class="loginSection__title loginSection__titleWithLlogo">
+                        File a report
+                    </div><!-- /.loginSection__title -->
+                </div><!-- /.container -->
+            </div><!-- /.loginSection__titleBg -->
+            <div class="loginSection__contentBg">
+                <div class="container loginSection__container">
+                    <div class="loginContentBlock">
+                        <p class="loginContentBlock__textP">
+                            This platform makes it easy to report an incident about
+                            campus issues like sexual harassment, bullying, hazing,
+                            suicide ideation, substance abuse etc.
+                        </p><!-- /.loginContentBlock__textP -->
+                        <p class="loginContentBlock__textP">
 
 
-						</p><!-- /.loginContentBlock__textP -->
-					</div><!-- /.loginContentBlock -->
-					<div class="loginTextForm">
-						<label class="loginForm__inputCheckBox inputCheckbox">
-							I have read and agree with policies
-							<input class="inputCheckbox__input" type="checkbox" id="chkStart" />
-							<div class="inputCheckbox__indicator"></div>
-						</label>
-						<div class="loginTextFormLinks">
-							<a href="@Url.Action("New", "Report", new { companyCode = ViewBag.CID })" id="btnStart" class="btn loginTextFormLinks__startBtn btn-cc m_t_20 not-active">
-								Start
-							</a>
-						</div><!-- /.loginTextFormLinks -->
-					</div><!-- /.loginTextForm -->
-						
-			</div><!-- /.loginSection__contentBg -->
-		</section><!-- /.loginSection -->
-	</main><!-- /.main -->
+                        </p><!-- /.loginContentBlock__textP -->
+                    </div><!-- /.loginContentBlock -->
+                    <div class="loginTextForm">
+                        <label class="loginForm__inputCheckBox inputCheckbox">
+                            I have read and agree with policies
+                            <input class="inputCheckbox__input" type="checkbox" id="chkStart" />
+                            <div class="inputCheckbox__indicator"></div>
+                        </label>
+                        <div class="loginTextFormLinks">
+                            <a href="@Url.Action("New", "Report", new { companyCode = ViewBag.CID })" id="btnStart" class="btn loginTextFormLinks__startBtn btn-cc m_t_20 not-active">
+                                Start
+                            </a>
+                        </div><!-- /.loginTextFormLinks -->
+                    </div><!-- /.loginTextForm -->
 
-	<!-- ------------------  Footer ---------------- -->
-	<footer class="footerBg footerBg-cc">
-		<div class="container">
-			<div class="footerInfo">
-				<div class="footerInfo__col">
+                </div><!-- /.loginSection__contentBg -->
+        </section><!-- /.loginSection -->
+    </main><!-- /.main -->
+    <!-- ------------------  Footer ---------------- -->
+    <footer class="footerBg footerBg-cc">
+        <div class="container">
+            <div class="footerInfo">
+                <div class="footerInfo__col">
                     @if (!String.IsNullOrEmpty(Model.DisclamerPage().message_to_employees))
                     {
-					    <div class="footerInfo__title">
-						    Message to our employees
-					    </div>
-					    <div class="footerInfo__textContent">
-						    @Model.DisclamerPage().message_to_employees
-					    </div>
+                        <div class="footerInfo__title">
+                            Message to our employees
+                        </div>
+                        <div class="footerInfo__textContent">
+                            @Model.DisclamerPage().message_to_employees
+                        </div>
                     }
-				</div>
-				<div class="footerInfo__col">
+                </div>
+                <div class="footerInfo__col">
                     @if (!String.IsNullOrEmpty(Model.DisclamerPage().message_about_guidelines))
                     {
-					    <div class="footerInfo__title">
-						    Company conduct guidelines, policies and legal disclaimers
-					    </div>
-					    <div class="footerInfo__textContent">
+                        <div class="footerInfo__title">
+                            Company conduct guidelines, policies and legal disclaimers
+                        </div>
+                        <div class="footerInfo__textContent">
                             @Model.DisclamerPage().message_about_guidelines
-					    </div>
+                        </div>
                     }
-					<ul class="footerInfo__textList">
+                    <ul class="footerInfo__textList">
                         @foreach (var item in Model.DisclamerUploads())
                         {
-						    <li class="footerInfo__textList-li">
-							    <a href="@item.file_path" class="footerInfo__textList-a" download="@item.display_name">
-								    @item.display_name
-							    </a>
-						    </li>
+                            <li class="footerInfo__textList-li">
+                                <a href="@item.file_path" class="footerInfo__textList-a" download="@item.display_name">
+                                    @item.display_name
+                                </a>
+                            </li>
                         }
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="container">
-			<div class="footer">
-				<div></div>
-				<div class="footer__copyright">
-					Copyright © 2018 Employee Confidential LLC. All Rights Reserved
-				</div><!-- /.footer__copyright -->
-				<div class="footer__navLinks">
-					<nav class="footer__navLinks-nav">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="footer">
+                <div></div>
+                <div class="footer__copyright">
+                    Copyright © 2019 Employee Confidential LLC. All Rights Reserved
+                </div><!-- /.footer__copyright -->
+                <div class="footer__navLinks">
+                    <nav class="footer__navLinks-nav">
                         <li class="footer__navLinks-li">
                             <a href="http://campusconfidential.com/PrivacyStatement.html" class="footer__navLinks-a">
                                 Privacy Policy
@@ -146,11 +145,11 @@
                                 Terms of Use
                             </a>
                         </li><!-- /.footer__navLinks-li -->
-					</nav><!-- /.footer__navLinks-nav -->
-				</div><!-- /.footer__navLinks -->
-			</div><!-- /.footer -->
-		</div><!-- /.container -->
-	</footer><!-- /.footer -->
+                    </nav><!-- /.footer__navLinks-nav -->
+                </div><!-- /.footer__navLinks -->
+            </div><!-- /.footer -->
+        </div><!-- /.container -->
+    </footer><!-- /.footer -->
 
 </div><!-- /.general-container -->
 @Html.Partial("~/Views/Shared/HelpPartial.cshtml", new ViewDataDictionary { { "is_reporter", true } })
