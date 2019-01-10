@@ -8,10 +8,10 @@
             temp.css("border-color", "rgb(5, 181, 162)");
         }
     })
-    .on('focusout', function (event) {
-        var temp = $(event.currentTarget);
-        temp.css("border-color", "transparent transparent #E5EBEB transparent");
-    });
+        .on('focusout', function (event) {
+            var temp = $(event.currentTarget);
+            temp.css("border-color", "transparent transparent #E5EBEB transparent");
+        });
     $(".contentBlock textarea").focus(function (event) {
         var temp = $(event.currentTarget);
 
@@ -22,12 +22,12 @@
             temp.parents('.contentBlock').css("border", "3px solid rgb(5, 181, 162)");
         }
     })
-    .on('focusout', function (event) {
-        var temp = $(event.currentTarget);
-        temp.css("border", "3px solid transparent transparent #E5EBEB transparent");
-    });
+        .on('focusout', function (event) {
+            var temp = $(event.currentTarget);
+            temp.css("border", "3px solid transparent transparent #E5EBEB transparent");
+        });
 
-    
+
     var generalInfo = $('.tab.generalInfo');
     var passiveCircle = $('.tab.partiesInvolved');
     var caseInformation = $('.tab.caseInformation');
@@ -180,10 +180,10 @@
                     data: { countryId: countryId },
                     url: "/Report/getAjaxCountry",
                 }
-                ).done(function (data) {//data from server
-                }).fail(function (error) {
-                    console.log(error);
-                });
+            ).done(function (data) {//data from server
+            }).fail(function (error) {
+                console.log(error);
+            });
             /**/
 
         });
@@ -369,16 +369,16 @@
                                         && fname != "" && lName != "" && witnessRole != "" && witnessTitle != "") {
                                         $('.partiesInvolvedBlock')
                                             .append("<div class='FirstLastNames'>" +
-                                            fname + '&nbsp;' +
-                                            lName + "</div>");
+                                                fname + '&nbsp;' +
+                                                lName + "</div>");
 
                                         $('.partiesInvolvedBlock')
                                             .append("<div class='titleReport'>" +
-                                            witnessTitle + "</div>");
+                                                witnessTitle + "</div>");
 
                                         $('.partiesInvolvedBlock')
                                             .append("<div class='reportText'>" +
-                                            witnessRole + "</div>");
+                                                witnessRole + "</div>");
                                     }
                                 });
 
@@ -546,7 +546,7 @@
         function validateTab(tab) {
             var containerWithness = $(".addPersonContainer");
             if (containerWithness.find('.witnessPersone').length != 0) {
-                containerWithness.find('.sampleContainer').each(function(indx, element){
+                containerWithness.find('.sampleContainer').each(function (indx, element) {
                     element = $(element);
                     if (element.find('input').val() == "") {
                         element.addClass('vlError');
@@ -642,7 +642,7 @@
         var managementKnow = passiveCircle.find('input:radio[name="managementKnow"]');
         var isReportRefered = passiveCircle.find('input:radio[name="isReportRefered"]');
 
-        
+
 
         managementKnow.on('change', function () {
             if ($("input:radio[name=managementKnow]:checked").val() == 'Yes' || $("input:radio[name=managementKnow]:checked").val() == 'Do not want to involve') {
@@ -784,10 +784,10 @@
             var temp = $(event.currentTarget).parents('.contentBlock');
             temp.css("border-color", "rgb(5, 181, 162)");
         })
-        .on('focusout', function () {
-            var temp = $(event.currentTarget).parents('.contentBlock');
-            temp.css("border-color", "transparent transparent #E5EBEB transparent");
-        });
+            .on('focusout', function () {
+                var temp = $(event.currentTarget).parents('.contentBlock');
+                temp.css("border-color", "transparent transparent #E5EBEB transparent");
+            });
         adviceManagement.on('click', function (events) {
             adviceManagement.css({ "width": "750px", "height": "155px" });
             adviceManagement.find('textarea').show();
@@ -896,7 +896,7 @@
                         $(".selectBlock.location").addClass('vlCorrect');
                     }
                 });
-                
+
             }
             else {
                 $('.otherLocation').hide();
@@ -933,7 +933,8 @@
         });
 
         $(".buttonSubmit").on('click', function () {
-            if ($('.incidentAnonymityId').val() != 1) {
+            var incidentAnonymityIdVal = $('.incidentAnonymityId').val();
+            if (incidentAnonymityIdVal != 1) {
                 if ($("#userName").hasClass("vlCorrect") &&
                     $("#userLastName").hasClass("vlCorrect") &&
                     $("#reporterFirstName").hasClass("vlCorrect")) {
@@ -947,7 +948,8 @@
 
                     if (!$("#reporterFirstName").hasClass("vlCorrect"))
                         $("#reporterFirstName").addClass('vlError');
-
+                    if (!$("#userTelephone").hasClass("vlCorrect"))
+                        $("#userTelephone").addClass('vlError');
                     return false;
                 }
             }
@@ -964,31 +966,31 @@
         $('.dropdown ul li').unbind('click');
 
         $('.dropdown')
-        .on('click',
-        function () {
-            $(this).children('ul').slideToggle(150);
-            if ($(this).hasClass('open')) {
-                $(this).removeClass('open');
-                return false;
-            } else {
-                $(this).addClass('open');
-                return false;
-            }
+            .on('click',
+                function () {
+                    $(this).children('ul').slideToggle(150);
+                    if ($(this).hasClass('open')) {
+                        $(this).removeClass('open');
+                        return false;
+                    } else {
+                        $(this).addClass('open');
+                        return false;
+                    }
 
-            return false;
-        })
+                    return false;
+                })
 
-        .hover(
-        function () {
+            .hover(
+                function () {
 
-        },
-        function () {
-            $(this).children('ul').slideUp(150);
-            $(this).removeClass('open');
-        });
+                },
+                function () {
+                    $(this).children('ul').slideUp(150);
+                    $(this).removeClass('open');
+                });
 
         $('.dropdown ul li')
-                .click(
+            .click(
                 function () {
                     var sitem = $(this).html();
                     var sid = $(this).attr('value');
