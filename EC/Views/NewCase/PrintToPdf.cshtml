@@ -87,8 +87,22 @@
                         <p>
                             @Model._reporter_user.first_nm 
                             @Model._reporter_user.last_nm
-                            @(String.IsNullOrEmpty(Model._reporter_user.first_nm) && String.IsNullOrEmpty(Model._reporter_user.last_nm) && String.IsNullOrEmpty(Model._reporter_user.email) ? "" : ", ")
-                            @Model._reporter_user.email
+                            @{ 
+                                var l = new List<string>();
+                                if (!String.IsNullOrEmpty(Model._reporter_user.first_nm) || String.IsNullOrEmpty(Model._reporter_user.last_nm))
+                                {
+                                    l.Add(String.Format("{0} {1}", Model._reporter_user.first_nm, Model._reporter_user.last_nm));
+                                }
+                                if (!String.IsNullOrEmpty(Model._reporter_user.email))
+                                {
+                                    l.Add(Model._reporter_user.email);
+                                }
+                                if (!String.IsNullOrEmpty(Model._reporter_user.phone))
+                                {
+                                    l.Add(Model._reporter_user.phone);
+                                }
+                            }
+                            @String.Join(", ", l);
                         </p>
                     </div><!-- /.reportContentBlock__textColRight -->
                 </div><!-- /.reportContentBlock__textCols -->
