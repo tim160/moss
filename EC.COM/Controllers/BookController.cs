@@ -42,37 +42,55 @@ namespace EC.COM.Controllers
         {
             model = DoCalculate(model);
 
-            var db = new DBContext();
-            var varinfo = new Data.VarInfoModel
+            using (var db = new DBContext())
             {
-                First_nm = model.FirstName,
-                Last_nm = model.LastName,
-                Company_nm = model.CompanyName,
-                Phone = model.Phone,
-                Email = model.Email,
-                Invitation_code = model.InvitationCode,
-                Employee_no = model.NumberOfEmployees,
-                Non_employee_no = model.NumberOfNonEmployees,
-                Customers_no = model.NumberOfClients,
+                var varinfo = db.VarInfoes.FirstOrDefault(x => x.Email == model.Email);
+                /*var varinfo = new Data.VarInfoModel
+                {
+                    First_nm = model.FirstName,
+                    Last_nm = model.LastName,
+                    Company_nm = model.CompanyName,
+                    Phone = model.Phone,
+                    Email = model.Email,
+                    Invitation_code = model.InvitationCode,
+                    Employee_no = model.NumberOfEmployees,
+                    Non_employee_no = model.NumberOfNonEmployees,
+                    Customers_no = model.NumberOfClients,
 
-                Annual_plan_price = model.PriceNE,
-                Non_employee_price = model.PriceNNE,
-                Customers_price = model.PriceC,
-                Onboarding_price = model.PriceR,
-                Total_price = model.Year * (model.PriceNE + model.PriceNNE + model.PriceC) + model.PriceR,
+                    Annual_plan_price = model.PriceNE,
+                    Non_employee_price = model.PriceNNE,
+                    Customers_price = model.PriceC,
+                    Onboarding_price = model.PriceR,
+                    Total_price = model.Year * (model.PriceNE + model.PriceNNE + model.PriceC) + model.PriceR,
 
-                Year = model.Year,
-                Registered_dt = DateTime.Now,
-                Onboarding_session_numbers = model.sessionNumber,
-            };
-            db.VarInfoes.Add(varinfo);
-            db.SaveChanges();
+                    Year = model.Year,
+                    Registered_dt = DateTime.Now,
+                    Onboarding_session_numbers = model.sessionNumber,
+                };
+                db.VarInfoes.Add(varinfo);*/
 
-            //var data = $"{model.InvitationCode}|{model.FirstName}|{model.LastName}|{model.CompanyName}|{model.Phone}|{model.Email}|{model.NumberOfEmployees}|{model.NumberOfNonEmployees}|{model.NumberOfClients}|{(model.PriceNE + model.PriceNNE + model.PriceC)}";
-            //data = System.Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(data));
-            //return Redirect($"{System.Configuration.ConfigurationManager.AppSettings["MainSite"]}new/company?data={data}");
-            //return View();
-            return RedirectToAction("Order", new { id = varinfo.Id, email = model.Email, company = model.CompanyName });
+                varinfo.Invitation_code = model.InvitationCode;
+                varinfo.Employee_no = model.NumberOfEmployees;
+                varinfo.Non_employee_no = model.NumberOfNonEmployees;
+                varinfo.Customers_no = model.NumberOfClients;
+
+                varinfo.Annual_plan_price = model.PriceNE;
+                varinfo.Non_employee_price = model.PriceNNE;
+                varinfo.Customers_price = model.PriceC;
+                varinfo.Onboarding_price = model.PriceR;
+                varinfo.Total_price = model.Year * (model.PriceNE + model.PriceNNE + model.PriceC) + model.PriceR;
+
+                varinfo.Year = model.Year;
+                varinfo.Registered_dt = DateTime.Now;
+                varinfo.Onboarding_session_numbers = model.sessionNumber;
+                db.SaveChanges();
+
+                //var data = $"{model.InvitationCode}|{model.FirstName}|{model.LastName}|{model.CompanyName}|{model.Phone}|{model.Email}|{model.NumberOfEmployees}|{model.NumberOfNonEmployees}|{model.NumberOfClients}|{(model.PriceNE + model.PriceNNE + model.PriceC)}";
+                //data = System.Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(data));
+                //return Redirect($"{System.Configuration.ConfigurationManager.AppSettings["MainSite"]}new/company?data={data}");
+                //return View();
+                return RedirectToAction("Order", new { id = varinfo.Id, email = model.Email, company = model.CompanyName });
+            }
         }
 
         public class CalculateModel
@@ -220,7 +238,7 @@ namespace EC.COM.Controllers
             var db = new DBContext();
             var varinfo = db.VarInfoes.FirstOrDefault(x => x.Id == model.VarInfo.Id && x.Email == model.VarInfo.Email);
             varinfo.Emailed_code_to_customer = varinfo.Emailed_code_to_customer ?? Guid.NewGuid().ToString();
-            varinfo.Registered_dt = varinfo.Registered_dt ?? DateTime.Now;
+            varinfo.Registered_dt = DateTime.Now;
             db.SaveChanges();
 
             EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(false);

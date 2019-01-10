@@ -32,6 +32,48 @@ namespace EC.COM.Controllers
             to.Add(email.Trim());
             // em.Send(to, cc, "Employee Confidential Registration", body, true);
 
+            using (var db = new DBContext())
+            {
+                var model = db.VarInfoes.FirstOrDefault(x => x.Email == email);
+                if (model == null)
+                {
+                    var varinfo = new Data.VarInfoModel
+                    {
+                        First_nm = firstName,
+                        Last_nm = lastName,
+                        Company_nm = companyName,
+                        Phone = phone,
+                        Email = email,
+                        Invitation_code = invitationCode,
+                        Employee_no = numberOfEmployees,
+                        /*Non_employee_no = model.NumberOfNonEmployees,
+                        Customers_no = model.NumberOfClients,
+
+                        Annual_plan_price = model.PriceNE,
+                        Non_employee_price = model.PriceNNE,
+                        Customers_price = model.PriceC,
+                        Onboarding_price = model.PriceR,
+                        Total_price = model.Year * (model.PriceNE + model.PriceNNE + model.PriceC) + model.PriceR,
+
+                        Year = model.Year,
+                        Registered_dt = DateTime.Now,
+                        Onboarding_session_numbers = model.sessionNumber,*/
+                    };
+                    db.VarInfoes.Add(varinfo);
+                }
+                else
+                {
+                    model.First_nm = firstName ?? model.First_nm;
+                    model.Last_nm = lastName ?? model.Last_nm;
+                    model.Company_nm = companyName ?? model.Company_nm;
+                    model.Phone = phone ?? model.Phone;
+                    model.Email = email ?? model.Email;
+                    model.Invitation_code = invitationCode ?? model.Invitation_code;
+                    model.Employee_no = numberOfEmployees > 0 ? numberOfEmployees : model.Employee_no;
+                }
+                db.SaveChanges();
+            }
+
             return RedirectToAction("Index", "Video", new { id = System.Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(data)) });
         }
     }
