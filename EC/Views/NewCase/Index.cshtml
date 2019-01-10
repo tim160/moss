@@ -15,7 +15,7 @@
     <div id="mainTab-1" class="mainNavigationTabs__tabContent active">
         <section class="content-container content-container_pbn">
             <div class="content-container__inner">
-                <p class="sectionHeader">General information</p><!-- /.sectionHeader -->
+                <p class="sectionHeader">@GlobalRes.GeneralInformation</p><!-- /.sectionHeader -->
                 <div class="content-container__inner-additional clearfix">
                     <div class="col-6">
                         <div class="row row-noP-fl">
@@ -34,7 +34,7 @@
                         <div class="row row-noP-fl">
                             <div class="col-6">
                                 <p class="content-container__p">
-                                    Reporter would like to stay:
+                                    @GlobalRes.Reporterwouldliketostay:
                                 </p><!-- /.content-container__p -->
                             </div><!-- /.col-4 -->
                             <div class="col-6">
@@ -56,7 +56,35 @@
                                 </p><!-- /.content-container__pBold -->
                             </div><!-- /.col-4 -->
                         </div><!-- /.row -->
+                        @* here my code *@
 
+                        <div class="row row-noP-fl" ng-if="model.reporterEmail">
+                            <div class="col-6">
+                                <p class="content-container__p">
+                                    @GlobalRes.Email:
+                                </p><!-- /.content-container__p -->
+                            </div><!-- /.col-4 -->
+                            <div class="col-6">
+                                <p class="content-container__pBold">
+                                    {{model.reporterEmail}}
+                                </p><!-- /.content-container__pBold -->
+                            </div><!-- /.col-4 -->
+                        </div><!-- /.row -->
+
+
+                        <div class="row row-noP-fl" ng-if="model.reporterPhone">
+                            <div class="col-6">
+                                <p class="content-container__p">
+                                    Telephone:
+                                </p><!-- /.content-container__p -->
+                            </div><!-- /.col-4 -->
+                            <div class="col-6">
+                                <p class="content-container__pBold">
+                                    {{model.reporterPhone}}
+                                </p><!-- /.content-container__pBold -->
+                            </div><!-- /.col-4 -->
+                        </div><!-- /.row -->
+                        @* here my code *@
                         <div class="row row-noP-fl">
                             <div class="col-6">
                                 <p class="content-container__p">

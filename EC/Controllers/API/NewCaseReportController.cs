@@ -43,21 +43,22 @@ namespace EC.Controllers.API
             {
                 reportingFrom = rm.CountryString(),
                 reporterWouldLike = rm._anonymousLevel_mediatorVersionByCaller(user.id),
-                reporterName= rm.Get_reporter_name(user.id),
-                reporterIs= rm.ReporterCompanyRelationShort(),
-                incidentHappenedIn= rm.LocationString(),
-                affectedDepartment= rm.DepartmentsString(),
-                partiesInvolvedName= "(Margot) Cooper1",
-                partiesInvolvedTitle= "CFO1",
-                partiesInvolvedType= "Case Administrators excluded1",
-                reportingAbout= rm.SecondaryTypeString(),
-                incidentDate= rm.IncidentDateStringMonthLong(),
+                reporterName = rm.Get_reporter_name(user.id),
+                reporterIs = rm.ReporterCompanyRelationShort(),
+                incidentHappenedIn = rm.LocationString(),
+                affectedDepartment = rm.DepartmentsString(),
+                partiesInvolvedName = "(Margot) Cooper1",
+                partiesInvolvedTitle = "CFO1",
+                partiesInvolvedType = "Case Administrators excluded1",
+                reportingAbout = rm.SecondaryTypeString(),
+                incidentDate = rm.IncidentDateStringMonthLong(),
                 report_by_myself = rm._report.report_by_myself,
                 non_mediator_involved = DB.report_non_mediator_involved
                     .Where(x => x.report_id == id && x.added_by_reporter != false)
                     .OrderBy(x => x.Title)
                     .ToList()
-                    .Select(x => new {
+                    .Select(x => new
+                    {
                         Name = $"{x.Name} {x.last_name}",
                         Title = x.Title,
                         Role = !String.IsNullOrEmpty(x.Role) ? x.Role : roles.FirstOrDefault(z => z.id == x.role_in_report_id)?.role_en,
@@ -73,6 +74,8 @@ namespace EC.Controllers.API
                 injury_damage = rm._report.injury_damage,
                 description = rm._report.description,
                 attachments = DB.attachment.Where(x => x.report_id == id && !x.visible_reporter.HasValue && !x.visible_mediators_only.HasValue).OrderBy(x => x.file_nm),
+                reporterPhone = rm._reporter_user.phone != string.Empty && rm._report.incident_anonymity_id == 3 ? rm._reporter_user.phone : null,
+                reporterEmail = rm._reporter_user.email != string.Empty && rm._report.incident_anonymity_id == 3 ? rm._reporter_user.email : null
             };
 
 

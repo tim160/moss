@@ -58,21 +58,21 @@
                         <span>@_statuses[i]</span>
                     </div>
                     <div class="polos"></div>
-    }
-    else
-    {
-        <div class="positionN">
-            <span>@_statuses[i]</span>
-        </div>
-        <div class="polos"></div>
+                }
+                else
+                {
+                    <div class="positionN">
+                        <span>@_statuses[i]</span>
+                    </div>
+                    <div class="polos"></div>
+                }
             }
         }
-    }
-    else
-    {
-        <div style="color: #38494d;">@GlobalRes.no_permission</div>
-        <div style="color: #38494d;">@GlobalRes.use_top_panel</div>
-    }
+        else
+        {
+            <div style="color: #38494d;">@GlobalRes.no_permission</div>
+            <div style="color: #38494d;">@GlobalRes.use_top_panel</div>
+        }
     </div><!--headerPos-->
     @if (rm._report != null)
     {
@@ -156,7 +156,7 @@
                 }
                 @if (!is_spam)
                 {
-          <!-- accept_case button -->
+                    <!-- accept_case button -->
                     if (is_cc.Value)
                     {
                         <label class="acceptCaseBtn acceptCaseBtn_cc">@GlobalRes.Acceptcase.ToLower()</label>
@@ -166,7 +166,7 @@
                         <label class="acceptCaseBtn">@GlobalRes.Acceptcase.ToLower()</label>
                     }
                     <input id="accept_case" type="submit" name="accept_case" />
-          <!-- mark_spam button -->
+                    <!-- mark_spam button -->
                     <label class="markSpamBtn">@GlobalRes.Markspam.ToLower()</label>
                     <input id="mark_spam" type="submit" name="mark_spam" />
                 }
@@ -207,7 +207,7 @@
                 var allReportMediatorAssigned = (List<report_mediator_assigned>)ViewBag.report_mediator_assigned;
                 var allReportMediatorInvolved = (List<report_mediator_involved>)ViewBag.report_mediator_involved;
 
-        <!-- ============================== START Accept case ==================================== -->
+                <!-- ============================== START Accept case ==================================== -->
 
                 <style>
                     .blockAcceptCase table {
@@ -318,7 +318,7 @@
                                 else
                                 {
                                     <span>A campus alert will be sent to the designated Campus Security Authority for Purposes of the Clery Act.</span>
-                                }                                
+                                }
                             </p>
                         </div>
                     }
@@ -341,39 +341,39 @@
                 </div>
 
 
-        <!-- ============================== END Accept case ==================================== -->
-        <!-- ============================== START Mark case as spam ==================================== -->
+                <!-- ============================== END Accept case ==================================== -->
+                <!-- ============================== START Mark case as spam ==================================== -->
 
-                                        <div class="contentViewReport blockSpamCase" style="display: none;">
-                                            <div class="headerblockButtons">
-                                                <div class="closeIcon"></div>
-                                            </div>
-                                            <div class="contentBlockCase">
-                                                <p class="titleCase">@GlobalRes.Mark_case_spam</p>
-                                                <p class="textCace">@GlobalRes.Notification_will_sent_reporter</p>
-                                            </div>
-                                            <form action="" method="post">
-                                                <div class="addComment addComment2@{@class_ext}">
-                                                    <div class="blockPersonal">
-                                                        <div class="blockPhoto">
-                                                            @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", user_id }, { "is_owner", true } })
+                <div class="contentViewReport blockSpamCase" style="display: none;">
+                    <div class="headerblockButtons">
+                        <div class="closeIcon"></div>
+                    </div>
+                    <div class="contentBlockCase">
+                        <p class="titleCase">@GlobalRes.Mark_case_spam</p>
+                        <p class="textCace">@GlobalRes.Notification_will_sent_reporter</p>
+                    </div>
+                    <form action="" method="post">
+                        <div class="addComment addComment2@{@class_ext}">
+                            <div class="blockPersonal">
+                                <div class="blockPhoto">
+                                    @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", user_id }, { "is_owner", true } })
 
-                                                        </div>
-                                                    </div>
-                                                    <div class="arrow green"></div>
-                                                    <div class="messageText spamMessage">
-                                                        <textarea cols="20" id="body_text" class="green" name="body_tx" rows="2" autofocus></textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="newMessageBtn">
-                                                    <span class="markAsSpam">@GlobalRes.Mark_case_spam</span>
-                                                    <input type="submit" value="new message" style="display: none;">
-                                                </div>
-                                            </form>
-                                        </div>
+                                </div>
+                            </div>
+                            <div class="arrow green"></div>
+                            <div class="messageText spamMessage">
+                                <textarea cols="20" id="body_text" class="green" name="body_tx" rows="2" autofocus></textarea>
+                            </div>
+                        </div>
+                        <div class="newMessageBtn">
+                            <span class="markAsSpam">@GlobalRes.Mark_case_spam</span>
+                            <input type="submit" value="new message" style="display: none;">
+                        </div>
+                    </form>
+                </div>
 
-        <!-- ============================== END Mark case as spam ==================================== -->
-    }
+                <!-- ============================== END Mark case as spam ==================================== -->
+            }
         </div><!-- end viewReport-->
 
         <div id="generalInfo">
@@ -394,6 +394,20 @@
                             <tr>
                                 <td>@GlobalRes.Reportername</td>
                                 <td>@rm.Get_reporter_name(user_id)</td>
+                            </tr>
+                        }
+                        @if (rm._report.incident_anonymity_id == 3)
+                        {
+                            <tr>
+                                <td>@GlobalRes.Email</td>
+                                <td>@rm._reporter_user.email</td>
+                            </tr>
+                        }
+                        @if (rm._report.incident_anonymity_id == 3 && rm._reporter_user.phone != String.Empty)
+                        {
+                            <tr>
+                                <td>Telephone</td>
+                                <td>@rm._reporter_user.phone</td>
                             </tr>
                         }
                         <tr>
