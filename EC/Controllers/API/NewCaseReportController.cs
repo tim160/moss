@@ -75,7 +75,8 @@ namespace EC.Controllers.API
                 description = rm._report.description,
                 attachments = DB.attachment.Where(x => x.report_id == id && !x.visible_reporter.HasValue && !x.visible_mediators_only.HasValue).OrderBy(x => x.file_nm),
                 reporterPhone = rm._reporter_user.phone != string.Empty && rm._report.incident_anonymity_id == 3 ? rm._reporter_user.phone : null,
-                reporterEmail = rm._reporter_user.email != string.Empty && rm._report.incident_anonymity_id == 3 ? rm._reporter_user.email : null
+                reporterEmail = rm._reporter_user.email != string.Empty && rm._report.incident_anonymity_id == 3 ? rm._reporter_user.email : null,
+                incident_anonymity_id = rm._report.incident_anonymity_id
             };
 
 

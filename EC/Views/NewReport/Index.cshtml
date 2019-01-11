@@ -403,7 +403,7 @@
                                 <td>@rm._reporter_user.email</td>
                             </tr>
                         }
-                        @if (rm._report.incident_anonymity_id == 3 && rm._reporter_user.phone != String.Empty)
+                        @if (rm._report.incident_anonymity_id == 3 && rm._reporter_user.phone != null && rm._reporter_user.phone != String.Empty)
                         {
                             <tr>
                                 <td>Telephone</td>

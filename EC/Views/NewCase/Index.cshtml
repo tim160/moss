@@ -57,6 +57,18 @@
                             </div><!-- /.col-4 -->
                         </div><!-- /.row -->
                         @* here my code *@
+                        <div class="row row-noP-fl" ng-if="model.incident_anonymity_id === 3">
+                            <div class="col-6">
+                                <p class="content-container__p">
+                                    @GlobalRes.Reportername:
+                                </p><!-- /.content-container__p -->
+                            </div><!-- /.col-4 -->
+                            <div class="col-6">
+                                <p class="content-container__pBold">
+                                    {{model.reporterName}}
+                                </p><!-- /.content-container__pBold -->
+                            </div><!-- /.col-4 -->
+                        </div><!-- /.row -->
 
                         <div class="row row-noP-fl" ng-if="model.reporterEmail">
                             <div class="col-6">
