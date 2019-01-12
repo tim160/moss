@@ -246,7 +246,10 @@ namespace EC.Business.Actions.Email
                     //mediator assigned to case   (?? cc for the one who assigned?)
                     m_filename = "OrderConfirmation_Email";
                     break;
-                    
+                case 68:
+                    //user not complete registration
+                    m_filename = "UserNotCompleteRegistration_Email";
+                    break;
             }
 
             string appPath = Path.GetFullPath("~/EmailText/" + m_filename + ".html");
@@ -318,6 +321,12 @@ namespace EC.Business.Actions.Email
             m_body = m_body.Replace("[CompanyCode]", company_code.Trim());
 
         }
+
+        public void OrderConfirmation_Email(object emailed_code_to_customer, object p1, object last_nm1, object p2, object p3, object p4, object last_nm2, object company_nm, object nameOnCard, object last_nm3, string v1, string v2, string v3)
+        {
+            throw new NotImplementedException();
+        }
+
         public void NewCase(string first, string last, string case_number)
         {
             GetBody(3);
@@ -626,6 +635,57 @@ namespace EC.Business.Actions.Email
             }
         }
 
+        public void UserNotCompleteRegistration_Email(
+            string orderNumber,
+            string name,
+            string surname,
+            string annualFee,
+            string onboardingFee,
+            string registrationDate,
+            string last,
+            string companyName,
+            string CCName,
+            string CCSurname,
+            string url,
+            string link,
+            string linkReg)
+        {
+            GetBody(68);
+
+            m_body = m_body.Replace("@@OrderNumber", orderNumber);
+            m_body = m_body.Replace("@@Surname", surname);
+            m_body = m_body.Replace("@@AnnualFee", annualFee);
+            m_body = m_body.Replace("@@OnboardingFee", onboardingFee);
+            m_body = m_body.Replace("@@RegistrationDate", registrationDate); //October 31st, 2019
+            m_body = m_body.Replace("@@CompanyName", companyName);
+            m_body = m_body.Replace("@@CCName", CCName);
+            m_body = m_body.Replace("@@CCSurname", CCSurname);
+            m_body = m_body.Replace("@@Link", link); //Video
+            m_body = m_body.Replace("@@2Link", linkReg); //Registration complete
+
+            m_body = m_body.Replace("@@Name", name);
+            m_body = m_body.Replace("@@LAST", last);
+            m_body = m_body.Replace("@@sName", "block");
+            if (String.IsNullOrEmpty(name) && String.IsNullOrEmpty(last))
+            {
+                m_body = m_body.Replace("@@sName", "none");
+            }
+
+            m_body = m_body.Replace("@@CompanyName", companyName);
+            m_body = m_body.Replace("@@sCompanyName", "block");
+            if (String.IsNullOrEmpty(companyName))
+            {
+                m_body = m_body.Replace("@@sCompanyName", "none");
+            }
+
+            m_body = m_body.Replace("@@CCName", CCName);
+            m_body = m_body.Replace("@@CCSurname", CCSurname);
+            m_body = m_body.Replace("@@sCCName", "block");
+            if (String.IsNullOrEmpty(CCName) && String.IsNullOrEmpty(CCSurname))
+            {
+                m_body = m_body.Replace("@@sCCName", "none");
+            }
+        }
         #endregion
     }
 

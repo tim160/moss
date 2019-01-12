@@ -303,6 +303,7 @@
     <Content Include="Content\emails\CaseCloseApprove.html" />
     <Content Include="Content\emails\CaseCloseApprovePlatformManager.html" />
     <Content Include="Content\emails\CaseDeadlinePastDue.html" />
+    <Content Include="Content\emails\UserNotCompleteRegistration_Email.html" />
     <Content Include="Content\emails\SetCaseOwner.html" />
     <Content Include="Content\emails\TrainerCalendarEventRemoved.html" />
     <Content Include="Content\emails\TrainerCalendarEventAdded.html" />

@@ -12,6 +12,7 @@ using System.Web;
 using System.Web.Mvc;
 using EC.Business.Actions;
 using EC.Utils;
+using System.Globalization;
 
 namespace EC.Controllers
 {
@@ -304,7 +305,7 @@ namespace EC.Controllers
                                 {
                                     try
                                     {
-                                        em.Send(email, "Case Management Deadline is past due", eb.Body, true);
+                                        //em.Send(email, "Case Management Deadline is past due", eb.Body, true);
                                     }
                                     catch
                                     {
@@ -313,6 +314,35 @@ namespace EC.Controllers
                                 }
                             }
                         }
+                    }
+                }
+
+                var var_email = "timur160@gmail.com ";
+                foreach (var varinfo in db.var_info.Where(x => !x.registered_dt.HasValue).ToList())
+                {
+                    try
+                    {
+                        eb.UserNotCompleteRegistration_Email(
+                            varinfo.emailed_code_to_customer,
+                            String.IsNullOrEmpty(varinfo.first_nm) && String.IsNullOrEmpty(varinfo.last_nm) ? "Customer" : varinfo.first_nm,
+                            varinfo.last_nm,
+                            varinfo.annual_plan_price.ToString(),
+                            varinfo.onboarding_price.ToString(),
+                            "",
+                            varinfo.last_nm,
+                            varinfo.company_nm,
+                            "",
+                            varinfo.last_nm,
+                            Request.Url.AbsoluteUri.ToLower(),
+                            $"{Request.Url.Scheme}://{Request.Url.Host}{(Request.Url.Port == 80 ? "" : ":" + Request.Url.Port.ToString())}/Book/CompanyRegistrationVideo?emailedcode{varinfo.emailed_code_to_customer}&invitationcode=VAR",
+                            $"{System.Configuration.ConfigurationManager.AppSettings["MainSite"]}new/company/{varinfo.emailed_code_to_customer}"
+                            );
+
+                        em.Send(var_email, "User not complete registration", eb.Body, true);
+                    }
+                    catch(Exception exc)
+                    {
+
                     }
                 }
             }
