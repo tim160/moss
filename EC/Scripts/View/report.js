@@ -948,8 +948,8 @@
 
                     if (!$("#reporterFirstName").hasClass("vlCorrect"))
                         $("#reporterFirstName").addClass('vlError');
-                    if (!$("#userTelephone").hasClass("vlCorrect"))
-                        $("#userTelephone").addClass('vlError');
+                    //if (!$("#userTelephone").hasClass("vlCorrect"))
+                    //    $("#userTelephone").addClass('vlError');
                     return false;
                 }
             }
