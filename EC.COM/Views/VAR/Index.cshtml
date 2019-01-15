@@ -207,16 +207,26 @@
                 if (temp.val() == "") {
                     temp.parent().css('border', '2px solid red');
                     flag--;
+
                 } else {
-                    flag++;
+                    if (item == 'Email') {
+                        if (validateEmail(temp.val())) {
+                            flag++;
+                        } else {
+                            temp.parent().css('border', '2px solid red');
+                        }
+                    } else {
+                        flag++;
+                    }
+
                 }
+
                 temp.on('change', function () {
                     temp.parent().css('border', '2px solid transparent');
                     temp.parent().css('border', '2px solid  #ced7d8');
                     temp.unbind();
                     flag++;
                 });
-
             });
             if (flag == array.length) {
                 event.target.submit();
