@@ -34,25 +34,39 @@
                         <div class="reportText">@rm._anonymousLevel_reporterVersion()</div>
                     </div>
 
-                    @if ((rm._report.incident_anonymity_id == 2 || rm._report.incident_anonymity_id == 3))
+                    @if (rm._report.incident_anonymity_id == 3)
                     {
                         <div class="report">
                             <div class="titleReport">
-                                @LocalizationGetter.GetString("Name", is_cc)
-                                @if (rm._report.incident_anonymity_id != 2)
-                                {
-                                    < text >:</ text >
-                                }
-                                @if (rm._report.incident_anonymity_id == 2)
-                                {
-                                    @LocalizationGetter.GetString("forEmployeeConfidentialOnly", is_cc)
-                                    < text >:</ text >
-                                }
+                                Reporter name
                             </div>
                             <div class="reportText">
-                                @rm.Get_reporter_name(rm._report.reporter_user_id)
+                                <text>
+                                    @rm._reporter_user.first_nm
+                                    @rm._reporter_user.last_nm
+                                </text>
+
                             </div>
                         </div>
+                        <div class="report">
+                            <div class="titleReport">
+                                Email
+                            </div>
+                            <div class="reportText">
+                                @rm._reporter_user.email
+                            </div>
+                        </div>
+                        if (rm._reporter_user.phone != null && rm._reporter_user.phone != "")
+                        {
+                            <div class="report">
+                                <div class="titleReport">
+                                    Phone
+                                </div>
+                                <div class="reportText">
+                                    @rm._reporter_user.phone
+                                </div>
+                            </div>
+                        }
                     }
 
                     <div class="report">
