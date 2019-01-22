@@ -30,7 +30,7 @@ namespace EC.Models
             }
         }
 
-        public string _company_subdomain
+     /*   public string _company_subdomain
         {
             get
             {
@@ -47,7 +47,7 @@ namespace EC.Models
 
                 return name;
             }
-        }
+        }*/
 
         #endregion
 
