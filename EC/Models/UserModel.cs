@@ -39,27 +39,25 @@ namespace EC.Models
             }
         }
 
-        public int _reporter_report_id
+        public int GetReportIDForReporter()
         {
-            get
+            int report_id = 0;
+            try
             {
-                int report_id = 0;
-                try
+                user _user = db.user.FirstOrDefault(item => item.id == ID);
+                if (_user.role_id == 8)
                 {
-                    user _user = db.user.FirstOrDefault(item => item.id == ID);
-                    if (_user.role_id == 8)
-                    {
-                        report _report = db.report.FirstOrDefault(item => item.reporter_user_id == ID);
-                        report_id = _report.id;
-                    }
+                    report _report = db.report.FirstOrDefault(item => item.reporter_user_id == ID);
+                    report_id = _report.id;
                 }
-                catch (Exception ex)
-                {
-                    logger.Error(ex.ToString());
-                }
-
-                return report_id;
             }
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+            }
+
+            return report_id;
+
         }
 
 
@@ -95,17 +93,16 @@ namespace EC.Models
         }
         #endregion
 
-        public string _department_string
+        public string GetDepartmentString()
         {
-            get
+
+            if ((_user != null) && (_user.id != 0))
             {
-                if ((_user != null) && (_user.id != 0))
-                {
-                    var d = db.company_department.FirstOrDefault(x => x.id == _user.company_department_id && x.company_id == _user.company_id);
-                    return d == null ? "" : d.department_en;
-                }
-                return "";
+                var d = db.company_department.FirstOrDefault(x => x.id == _user.company_department_id && x.company_id == _user.company_id);
+                return d == null ? "" : d.department_en;
             }
+            return "";
+
         }
 
         public UserModel()

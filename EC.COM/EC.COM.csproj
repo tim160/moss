@@ -712,7 +712,6 @@
     <None Include="Smtp.config.default" />
     <Content Include="Views\Book\Order.cshtml" />
     <Content Include="Views\Book\CompanyRegistrationVideo.cshtml" />
-    <Content Include="Views\Video\test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EC.Business\EC.Business.csproj">

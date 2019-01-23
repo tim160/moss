@@ -46,7 +46,7 @@ namespace EC.Controllers
           
 
             UserModel um = new UserModel(id.Value);
-            int report_id = um._reporter_report_id;
+            int report_id = um.GetReportIDForReporter();
             ViewBag.report_id = report_id;
             ViewBag.user_id = id.Value;
             var reporter = new ReportModel(report_id);
@@ -87,7 +87,7 @@ namespace EC.Controllers
             ViewBag.user_id = id.Value; // 167-171
 
             UserModel um = new UserModel(id.Value);
-            int report_id = um._reporter_report_id;
+            int report_id = um.GetReportIDForReporter();
             ViewBag.report_id = report_id;
             ViewBag.user_id = id.Value;
 
@@ -165,31 +165,31 @@ namespace EC.Controllers
             if (user == null || user.id == 0 || user.role_id == 4 || user.role_id == 5 || user.role_id == 6 || user.role_id == 7)
                 return RedirectToAction("Index", "Account");
 
-          //  return RedirectToAction("Messages/" + user.id.ToString());
+            //  return RedirectToAction("Messages/" + user.id.ToString());
             #region Commented --- Values in Session
-      /*      EC.Models.App.Case.CaseMessagesModel cm1 = new Models.App.Case.CaseMessagesModel(newMessage.report_id, 1, newMessage.sender_id);
-
-           
-            user temp_user = (user)Session[Constants.CurrentUserMarcker];
-            if (temp_user == null || temp_user.id == 0 || temp_user.role_id == 4 || temp_user.role_id == 5 || temp_user.role_id == 6 || temp_user.role_id == 7)
-                return RedirectToAction("Index", "Account");
+            /*      EC.Models.App.Case.CaseMessagesModel cm1 = new Models.App.Case.CaseMessagesModel(newMessage.report_id, 1, newMessage.sender_id);
 
 
-            //    ViewBag.user_id = id.Value; // 167-171
-            int? id = user.id;
+                  user temp_user = (user)Session[Constants.CurrentUserMarcker];
+                  if (temp_user == null || temp_user.id == 0 || temp_user.role_id == 4 || temp_user.role_id == 5 || temp_user.role_id == 6 || temp_user.role_id == 7)
+                      return RedirectToAction("Index", "Account");
 
-            if ((!id.HasValue) || (id.Value == 0))
-                return RedirectToAction("Index", "Account");
 
-            ViewBag.user_id = id.Value; // 167-171
+                  //    ViewBag.user_id = id.Value; // 167-171
+                  int? id = user.id;
 
-            UserModel um = new UserModel(id.Value);
-            int report_id = um._reporter_report_id;
-            ViewBag.report_id = report_id;
-            ViewBag.user_id = id.Value; 
+                  if ((!id.HasValue) || (id.Value == 0))
+                      return RedirectToAction("Index", "Account");
 
-            return View(cm);
-         //   return Json(new { someValue = someValue });*/
+                  ViewBag.user_id = id.Value; // 167-171
+
+                  UserModel um = new UserModel(id.Value);
+                  int report_id = um.GetReportIDForReporter();
+                  ViewBag.report_id = report_id;
+                  ViewBag.user_id = id.Value; 
+
+                  return View(cm);
+               //   return Json(new { someValue = someValue });*/
             #endregion
         }
 
@@ -295,7 +295,7 @@ namespace EC.Controllers
             ViewBag.user_id = id.Value; // 167-171
 
             UserModel um = new UserModel(id.Value);
-            int report_id = um._reporter_report_id;
+            int report_id = um.GetReportIDForReporter();
             ViewBag.report_id = report_id;
             ReportModel rm = new ReportModel(report_id);//same as activity on bottom.
             CompanyModel cm = new CompanyModel(rm._report.company_id);  
@@ -336,7 +336,7 @@ namespace EC.Controllers
 
             ViewBag.user_id = id.Value; // 167-171
             UserModel um = new UserModel(id.Value);
-            int report_id = um._reporter_report_id;
+            int report_id = um.GetReportIDForReporter();
             ViewBag.report_id = report_id;
 
             return View();
@@ -383,13 +383,11 @@ namespace EC.Controllers
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             // DEBUG
-            //user = db.user.FirstOrDefault(x => x.id == 167);
-            // DEBUG
             if (user == null || user.id == 0 || user.role_id == 4 || user.role_id == 5 || user.role_id == 6 || user.role_id == 7)
                 return RedirectToAction("Index", "Account");
 
             UserModel um = new UserModel(user.id);
-            int report_id = um._reporter_report_id;
+            int report_id = um.GetReportIDForReporter();
             ViewBag.report_id = report_id;
             ViewBag.user_id = id;
             var reporter = new ReportModel(report_id);

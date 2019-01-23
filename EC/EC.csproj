@@ -1683,14 +1683,12 @@
     <Compile Include="Models\GlobalFunctions.cs" />
     <Compile Include="Models\JsonPResult.cs" />
     <Compile Include="Models\LoginModel.cs" />
-    <Compile Include="Models\NewReportModel.cs" />
     <Compile Include="Models\ReporterDashboardModel.cs" />
     <Compile Include="Models\ReportModel.cs" />
     <Compile Include="Models\SettingsModel.cs" />
     <Compile Include="Models\UserIdentifyModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\ECModel\BaseEntity.cs" />
-    <Compile Include="Models\Constant.cs" />
     <Compile Include="Models\ECModel\Company.cs" />
     <Compile Include="Models\ECModel\User.cs" />
     <Compile Include="Models\IdentityModels.cs" />
