@@ -19,9 +19,9 @@
 
     ViewBag.Title = GlobalRes.ReporterDashboard;
     var user_id = (Int32)ViewBag.user_id;
-    EC.Models.UserModel um = new EC.Models.UserModel(user_id);
+    UserModel um = new UserModel(user_id);
 
-    int report_id = um._reporter_report_id;
+    int report_id = um.GetReportIDForReporter();
     ReportModel rm = new ReportModel(report_id);
     CompanyModel cm = new CompanyModel();
     string[] _statuses = EC.Constants.ECGlobalConstants.ReportFlowStatusesList;

@@ -39,27 +39,25 @@ namespace EC.Models
             }
         }
 
-        public int _reporter_report_id
+        public int GetReportIDForReporter()
         {
-            get
+            int report_id = 0;
+            try
             {
-                int report_id = 0;
-                try
+                user _user = db.user.FirstOrDefault(item => item.id == ID);
+                if (_user.role_id == 8)
                 {
-                    user _user = db.user.FirstOrDefault(item => item.id == ID);
-                    if (_user.role_id == 8)
-                    {
-                        report _report = db.report.FirstOrDefault(item => item.reporter_user_id == ID);
-                        report_id = _report.id;
-                    }
+                    report _report = db.report.FirstOrDefault(item => item.reporter_user_id == ID);
+                    report_id = _report.id;
                 }
-                catch (Exception ex)
-                {
-                    logger.Error(ex.ToString());
-                }
-
-                return report_id;
             }
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+            }
+
+            return report_id;
+
         }
 
 
@@ -95,17 +93,16 @@ namespace EC.Models
         }
         #endregion
 
-        public string _department_string
+        public string GetDepartmentString()
         {
-            get
+
+            if ((_user != null) && (_user.id != 0))
             {
-                if ((_user != null) && (_user.id != 0))
-                {
-                    var d = db.company_department.FirstOrDefault(x => x.id == _user.company_department_id && x.company_id == _user.company_id);
-                    return d == null ? "" : d.department_en;
-                }
-                return "";
+                var d = db.company_department.FirstOrDefault(x => x.id == _user.company_department_id && x.company_id == _user.company_id);
+                return d == null ? "" : d.department_en;
             }
+            return "";
+
         }
 
         public UserModel()
@@ -1173,100 +1170,7 @@ namespace EC.Models
             }
         }
 
-        private bool ResolveCase_bkp(int report_id, int mediator_id, string description, int new_status, int? outcome_id, string outcome, int? reason_id, string executive_summary, string facts_established, string investigation_methodology, string description_outcome, string recommended_actions, int sign_off_mediator_id, bool? is_clery_act_crime, int crime_statistics_category_id, int crime_statistics_location_id)
-        {
-            try
-            {
-                int case_closure_reason_id = 0;
-                if (reason_id.HasValue)
-                    case_closure_reason_id = reason_id.Value;
-
-                string executive_summary_str = "";
-                executive_summary_str = (executive_summary == null) ? "" : executive_summary;
-                string facts_established_str = "";
-                facts_established_str = (facts_established == null) ? "" : facts_established;
-                string investigation_methodology_str = "";
-                investigation_methodology_str = (investigation_methodology == null) ? "" : investigation_methodology;
-                string description_outcome_str = "";
-                description_outcome_str = (description_outcome == null) ? "" : description_outcome;
-                string recommended_actions_str = "";
-                recommended_actions_str = (recommended_actions == null) ? "" : recommended_actions;
-                string outcome_message_str = "";
-                //  outcome_message = outcome,   outcome acts like a case_closure_report. We would need to change this in future
-
-                report_investigation_status report_investigation_status;
-                if (outcome_id.HasValue)
-                {
-                    report_investigation_status = new report_investigation_status()
-                    {
-                        report_id = report_id,
-                        investigation_status_id = new_status,
-                        created_date = DateTime.Now,
-                        user_id = mediator_id,
-                        description = description,
-                        outcome_id = outcome_id,
-                        outcome_message = outcome,
-                        case_closure_reason_id = case_closure_reason_id,
-                        executive_summary = executive_summary_str,
-                        facts_established = facts_established_str,
-                        investigation_methodology = investigation_methodology_str,
-                        description_outcome = description_outcome_str,
-                        recommended_actions = recommended_actions_str
-                    };
-                }
-                else
-                {
-                    report_investigation_status = new report_investigation_status()
-                    {
-                        report_id = report_id,
-                        investigation_status_id = new_status,
-                        created_date = DateTime.Now,
-                        user_id = mediator_id,
-                        description = description,
-                        outcome_message = "",
-                        case_closure_reason_id = case_closure_reason_id,
-                        executive_summary = executive_summary_str,
-                        facts_established = facts_established_str,
-                        investigation_methodology = investigation_methodology_str,
-                        description_outcome = description_outcome_str,
-                        recommended_actions = recommended_actions_str
-                    };
-                }
-
-                db.report_investigation_status.Add(report_investigation_status);
-
-                report _report = db.report.Where(item => (item.id == report_id)).FirstOrDefault();
-                _report.status_id = 1;
-                _report.last_update_dt = DateTime.Now;
-
-                _report.cc_crime_statistics_category_id = null;
-                if (crime_statistics_category_id == 0)
-                    _report.cc_crime_statistics_category_id = crime_statistics_category_id;
-
-                _report.cc_crime_statistics_location_id = null;
-                if (crime_statistics_location_id == 0)
-                    _report.cc_crime_statistics_category_id = crime_statistics_location_id;
-
-                _report.cc_is_clear_act_crime = null;
-                if (is_clery_act_crime != null)
-                {
-                    _report.cc_is_clear_act_crime = is_clery_act_crime;
-                }
-
-                db.SaveChanges();
-
-
-                return true;
-            }
-            catch (System.Data.DataException ex)
-            {
-                logger.Error(ex.ToString());
-                Console.WriteLine("Case wasn't resolved. Ex:" + ex.Data);
-                return false;
-            }
-        }
-
-
+    
         public bool ReassignTask(int task_id, int mediator_id)
         {
             try

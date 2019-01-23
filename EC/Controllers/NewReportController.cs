@@ -22,13 +22,6 @@ namespace EC.Controllers.ViewModel
 
         // GET: ReporterDashboard
 
-        /* public ActionResultExtended Index(int? id)
-         {
-             if (!id.HasValue)
-                 id = 166;
-             NewReportModel reporterDashboard = new NewReportModel();
-             ViewBag.user_id = id.Value; // 167-171
-         }*/
         public ActionResult Index(int? id)
         {
 
@@ -50,8 +43,6 @@ namespace EC.Controllers.ViewModel
                 return RedirectToAction("Index", "Account");
 
             glb.UpdateReportRead(user_id, report_id);
-            NewReportModel reporterDashboard = new NewReportModel();
-
 
             if ((rm._investigation_status != 1) && (rm._investigation_status != 2) && (rm._investigation_status != 7))
             {
@@ -127,45 +118,6 @@ namespace EC.Controllers.ViewModel
                 }
             }
 
-
-            /*
-            report report = new report();
-            report = reporterDashboard.getReport(175);
-
-
-            ViewBag.id = report.id;
-
-            ViewBag.generatedName = report.report_name_generic;
-            ViewBag.companyName = report.submitted_company_nm;
-
-            ViewBag.reported = report.reported_dt.Day + " " + month[report.reported_dt.Month] + " " + report.reported_dt.Year;
-            ViewBag.totalTime = (System.DateTime.Now - report.reported_dt).Days + " days";
-
-            ViewBag.happenedIn = report.other_location_name;
-
-
-            //Parties involved
-            if (report.management_know_id == null)
-            {
-                ViewBag.managmentKnow = "NULL";
-            }
-            else
-            {
-                ViewBag.managmentKnow = reporterDashboard.getManagmentKnowInfo((Int16)report.management_know_id);
-            }
-
-
-            report_secondary_type reportSecondaryType = new report_secondary_type();
-            reportSecondaryType = reporterDashboard.getReportSecondaryType(report.id);
-
-            //Case nformation
-            ViewBag.reportingAbout = reportSecondaryType.secondary_type_nm;
-            ViewBag.incidentHappend = report.incident_dt.Day + " " + month[report.incident_dt.Month] + " " + report.incident_dt.Year;
-            ViewBag.incidentDescription = report.description;
-
-            //Messages
-            ViewBag.messages = reporterDashboard.getMessagesList(report.id);
-             */
 
             ViewBag.company_location = db.company_location.Where(x => x.company_id == rm._report.company_id).ToList();
             ViewBag.report_mediator_assigned = db.report_mediator_assigned.Where(x => x.report_id == report_id).ToList();
