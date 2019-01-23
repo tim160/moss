@@ -322,6 +322,7 @@ namespace EC.Controllers
                 {
                     try
                     {
+                        //Every hours
                         eb.UserNotCompleteRegistration_Email(
                             varinfo.emailed_code_to_customer,
                             String.IsNullOrEmpty(varinfo.first_nm) && String.IsNullOrEmpty(varinfo.last_nm) ? "Customer" : varinfo.first_nm,
@@ -339,8 +340,59 @@ namespace EC.Controllers
                             );
 
                         em.Send(var_email, "User not complete registration", eb.Body, true);
+
+                        if ((DateTime.Now - varinfo.created_dt).Hours == 4)
+                        {
+                            //017-2
+                            //trigger the email 4 hours after signup 
+                            var invitation = db.company_invitation.FirstOrDefault(x => x.invitation_code == varinfo.invitation_code);
+                            if (invitation != null)
+                            {
+                                var company = db.company.FirstOrDefault(x => x.id == invitation.created_by_company_id);
+                                if (company != null)
+                                {
+                                    eb.UserNotCompleteRegistration_Email(
+                                        varinfo.emailed_code_to_customer,
+                                        String.IsNullOrEmpty(varinfo.first_nm) && String.IsNullOrEmpty(varinfo.last_nm) ? "Customer" : varinfo.first_nm,
+                                        varinfo.last_nm,
+                                        varinfo.annual_plan_price.ToString(),
+                                        varinfo.onboarding_price.ToString(),
+                                        "",
+                                        varinfo.last_nm,
+                                        varinfo.company_nm,
+                                        "",
+                                        varinfo.last_nm,
+                                        Request.Url.AbsoluteUri.ToLower(),
+                                        $"{Request.Url.Scheme}://{Request.Url.Host}{(Request.Url.Port == 80 ? "" : ":" + Request.Url.Port.ToString())}/Book/CompanyRegistrationVideo?emailedcode{varinfo.emailed_code_to_customer}&invitationcode=VAR",
+                                        $"{System.Configuration.ConfigurationManager.AppSettings["MainSite"]}new/company/{varinfo.emailed_code_to_customer}"
+                                        );
+
+                                    em.Send(var_email, "Employee Confidential prospect follow-up needed", eb.Body, true);
+                                }
+                            }
+
+                            //017-3
+                            //trigger the email 4 hours after signup 
+                            eb.VarAfter4HoursAfterSignUp(
+                                varinfo.emailed_code_to_customer,
+                                String.IsNullOrEmpty(varinfo.first_nm) && String.IsNullOrEmpty(varinfo.last_nm) ? "Customer" : varinfo.first_nm,
+                                varinfo.last_nm,
+                                varinfo.annual_plan_price.ToString(),
+                                varinfo.onboarding_price.ToString(),
+                                "",
+                                varinfo.last_nm,
+                                varinfo.company_nm,
+                                "",
+                                varinfo.last_nm,
+                                Request.Url.AbsoluteUri.ToLower(),
+                                $"{Request.Url.Scheme}://{Request.Url.Host}{(Request.Url.Port == 80 ? "" : ":" + Request.Url.Port.ToString())}/Book/CompanyRegistrationVideo?emailedcode{varinfo.emailed_code_to_customer}&invitationcode=VAR",
+                                $"{System.Configuration.ConfigurationManager.AppSettings["MainSite"]}new/company/{varinfo.emailed_code_to_customer}"
+                                );
+
+                            em.Send("sales@employeeconfidential.com", "Employee Confidential prospect follow-up", eb.Body, true);
+                        }
                     }
-                    catch(Exception exc)
+                    catch (Exception exc)
                     {
 
                     }

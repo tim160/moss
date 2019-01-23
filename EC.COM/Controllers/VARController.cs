@@ -46,6 +46,8 @@ namespace EC.COM.Controllers
                         Email = email,
                         Invitation_code = invitationCode,
                         Employee_no = numberOfEmployees,
+                        Created_dt = DateTime.Now,
+
                         /*Non_employee_no = model.NumberOfNonEmployees,
                         Customers_no = model.NumberOfClients,
 
