@@ -303,7 +303,8 @@
     <Content Include="Content\emails\CaseCloseApprove.html" />
     <Content Include="Content\emails\CaseCloseApprovePlatformManager.html" />
     <Content Include="Content\emails\CaseDeadlinePastDue.html" />
-    <Content Include="Content\emails\EmployeeConfidentialProspectFollowUp.html" />
+    <Content Include="Content\emails\VarAfter3WeekAfterSignUpToUser.html" />
+    <Content Include="Content\emails\VarAfter24HoursAfterSignUpToUser.html" />
     <Content Include="Content\emails\VarAfter4HoursAfterSignUp.html" />
     <Content Include="Content\emails\UserNotCompleteRegistration_Email.html" />
     <Content Include="Content\emails\SetCaseOwner.html" />
