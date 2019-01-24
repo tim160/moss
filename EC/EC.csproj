@@ -303,6 +303,9 @@
     <Content Include="Content\emails\CaseCloseApprove.html" />
     <Content Include="Content\emails\CaseCloseApprovePlatformManager.html" />
     <Content Include="Content\emails\CaseDeadlinePastDue.html" />
+    <Content Include="Content\emails\VarAfter3WeekAfterSignUpToUser.html" />
+    <Content Include="Content\emails\VarAfter24HoursAfterSignUpToUser.html" />
+    <Content Include="Content\emails\VarAfter4HoursAfterSignUp.html" />
     <Content Include="Content\emails\UserNotCompleteRegistration_Email.html" />
     <Content Include="Content\emails\SetCaseOwner.html" />
     <Content Include="Content\emails\TrainerCalendarEventRemoved.html" />
@@ -1044,18 +1047,11 @@
     <None Include="Properties\PublishProfiles\ec-dev.pubxml" />
     <None Include="Properties\PublishProfiles\File.pubxml" />
     <None Include="Properties\PublishProfiles\FTP.pubxml" />
-    <Content Include="patches\1_6.sql" />
-    <Content Include="patches\1_5.sql" />
-    <Content Include="patches\1_7.sql" />
     <Content Include="PrivacyStatement.html" />
     <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\daterangepicker.js" />
     <None Include="Properties\PublishProfiles\test.pubxml" />
     <None Include="Scripts\lib\jquery-1.10.2.intellisense.js" />
-    <Content Include="patches\1_4.sql" />
-    <Content Include="patches\1_3.sql" />
-    <Content Include="patches\1_2.sql" />
-    <Content Include="patches\1_1.sql" />
     <Content Include="Scripts\Common\helper.js" />
     <Content Include="Scripts\dis.js" />
     <Content Include="Scripts\jquery.daterangepicker.min.js" />
@@ -1109,7 +1105,6 @@
     <Content Include="Scripts\_references.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="StarkLogo.jpg" />
     <Content Include="TermsOfService.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -1209,7 +1204,6 @@
     <Content Include="Views\Payment\NewPayment.cshtml" />
     <Content Include="Views\New\Quote.cshtml" />
     <Content Include="Views\New\QuoteSuccess.cshtml" />
-    <Content Include="Views\Settings\User - Copy.cshtml" />
     <Content Include="Views\Case\Attachments.cshtml" />
     <Content Include="Views\ReporterDashboard\Attachments.cshtml" />
     <Content Include="Views\NewCase\Index.cshtml" />
@@ -1221,7 +1215,6 @@
     <Content Include="Views\Shared\IndexPages\LayoutNewCases.cshtml" />
     <Content Include="Views\Analytics\CACSReport.cshtml" />
     <Content Include="Views\NewCase\Activity.cshtml" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\NewCase\Tasks.cshtml" />
     <Content Include="Views\NewCase\Messages.cshtml" />
     <Content Include="Views\NewCase\Team.cshtml" />
@@ -1730,7 +1723,6 @@
     <Folder Include="Content\assets\content\" />
     <Folder Include="Content\assets\template\php\" />
     <Folder Include="Upload\CompanyLogo\" />
-    <Folder Include="Views\ActiveCasesModel\" />
     <Folder Include="Views\App_LocalResources\" />
   </ItemGroup>
   <ItemGroup>

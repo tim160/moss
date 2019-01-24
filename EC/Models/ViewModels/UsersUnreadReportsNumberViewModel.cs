@@ -17,4 +17,14 @@ namespace EC.Models.ViewModels
 
         public int unread_closed_reports { get; set; }
     }
+
+    public class UsersUnreadEntitiesNumberViewModel
+    {
+        public int unread_reports { get; set; }
+
+        public int unread_messages { get; set; }
+
+        public int unread_tasks { get; set; }
+    }
+
 }

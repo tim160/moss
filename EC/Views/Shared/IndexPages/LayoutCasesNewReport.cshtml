@@ -4,6 +4,9 @@
 @using EC.Constants;
 @using EC.Localization;
 @using EC.Constants;
+@using EC.Models;
+@using EC.Models.ViewModels;
+
 @{
     bool? is_cc = ViewBag.is_cc;
     if (!is_cc.HasValue)
@@ -25,12 +28,14 @@
 
     string hrefURL_1 = Request.Url.AbsoluteUri.ToLower();
 
-    EC.Models.UserModel um = new EC.Models.UserModel(user_id);
-    EC.Models.CompanyModel cm = new EC.Models.CompanyModel(um._user.company_id);
-    EC.Models.ReportModel rm = new EC.Models.ReportModel();
+    UserModel um = new UserModel(user_id);
+    CompanyModel cm = new CompanyModel(um._user.company_id);
+    ReportModel rm = new ReportModel();
+    UsersUnreadEntitiesNumberViewModel userUnreadEntities = um.GetUserUnreadEntitiesNumbers();
 
+    var unread_report_number = userUnreadEntities.unread_reports;
 
-    var unread_report_number = um.UnreadReport(0, 0).Count;
+    // var unread_report_number = um.UnreadReport(0, 0).Count;
     var unread_report_number_string = "";
     string page_subtitle = "";
     if (unread_report_number > 0)
@@ -38,14 +43,16 @@
         unread_report_number_string = unread_report_number.ToString();
     }
 
-    int unread_message_number = um.Unread_Messages_Quantity(0, 1) + um.Unread_Messages_Quantity(0, 2) + um.Unread_Messages_Quantity(0, 3);
+    int unread_message_number = userUnreadEntities.unread_messages;
+    // int unread_message_number = um.Unread_Messages_Quantity(0, 1) + um.Unread_Messages_Quantity(0, 2) + um.Unread_Messages_Quantity(0, 3);
     var unread_message_number_string = "";
     if (unread_message_number > 0)
     {
         unread_message_number_string = unread_message_number.ToString();
     }
 
-    int unread_task_number = um.UnreadTasksQuantity(0, true, 1);
+    int unread_task_number = userUnreadEntities.unread_tasks;
+    //int unread_task_number = um.UnreadTasksQuantity(0, true, 1);
     var unread_task_number_string = "";
     if (unread_task_number > 0)
     {
@@ -54,7 +61,6 @@
 
     user _user = um.GetById(user_id);
     company _company = cm.GetById(_user.company_id);
-
     string report_name = "Case";
 
     int _report_id = 0;

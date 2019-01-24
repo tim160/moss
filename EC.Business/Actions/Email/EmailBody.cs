@@ -250,6 +250,19 @@ namespace EC.Business.Actions.Email
                     //user not complete registration
                     m_filename = "UserNotCompleteRegistration_Email";
                     break;
+                case 69:
+                    //After 4 hours of signup in VAR
+                    m_filename = "VarAfter4HoursAfterSignUp";
+                    break;
+                case 70:
+                    //After 4 hours of signup in VAR
+                    m_filename = "VarAfter24HoursAfterSignUpToUser";
+                    break;
+                case 71:
+                    //After 3 weeks to user
+                    m_filename = "VarAfter3WeekAfterSignUpToUser";
+                    break;
+                    
             }
 
             string appPath = Path.GetFullPath("~/EmailText/" + m_filename + ".html");
@@ -635,56 +648,32 @@ namespace EC.Business.Actions.Email
             }
         }
 
-        public void UserNotCompleteRegistration_Email(
-            string orderNumber,
-            string name,
-            string surname,
-            string annualFee,
-            string onboardingFee,
-            string registrationDate,
-            string last,
-            string companyName,
-            string CCName,
-            string CCSurname,
-            string url,
-            string link,
-            string linkReg)
+        public void UserNotCompleteRegistration_Email(Func<string, string> prepareBody)
         {
             GetBody(68);
 
-            m_body = m_body.Replace("@@OrderNumber", orderNumber);
-            m_body = m_body.Replace("@@Surname", surname);
-            m_body = m_body.Replace("@@AnnualFee", annualFee);
-            m_body = m_body.Replace("@@OnboardingFee", onboardingFee);
-            m_body = m_body.Replace("@@RegistrationDate", registrationDate); //October 31st, 2019
-            m_body = m_body.Replace("@@CompanyName", companyName);
-            m_body = m_body.Replace("@@CCName", CCName);
-            m_body = m_body.Replace("@@CCSurname", CCSurname);
-            m_body = m_body.Replace("@@Link", link); //Video
-            m_body = m_body.Replace("@@2Link", linkReg); //Registration complete
+            m_body = prepareBody(m_body);
+        }
 
-            m_body = m_body.Replace("@@Name", name);
-            m_body = m_body.Replace("@@LAST", last);
-            m_body = m_body.Replace("@@sName", "block");
-            if (String.IsNullOrEmpty(name) && String.IsNullOrEmpty(last))
-            {
-                m_body = m_body.Replace("@@sName", "none");
-            }
+        public void VarAfter4HoursAfterSignUp(Func<string, string> prepareBody)
+        {
+            GetBody(69);
 
-            m_body = m_body.Replace("@@CompanyName", companyName);
-            m_body = m_body.Replace("@@sCompanyName", "block");
-            if (String.IsNullOrEmpty(companyName))
-            {
-                m_body = m_body.Replace("@@sCompanyName", "none");
-            }
+            m_body = prepareBody(m_body);
+        }
+        
+        public void VarAfter24HoursAfterSignUpToUser(Func<string, string> prepareBody)
+        {
+            GetBody(70);
 
-            m_body = m_body.Replace("@@CCName", CCName);
-            m_body = m_body.Replace("@@CCSurname", CCSurname);
-            m_body = m_body.Replace("@@sCCName", "block");
-            if (String.IsNullOrEmpty(CCName) && String.IsNullOrEmpty(CCSurname))
-            {
-                m_body = m_body.Replace("@@sCCName", "none");
-            }
+            m_body = prepareBody(m_body);
+        }
+
+        public void VarAfter3WeekAfterSignUpToUser(Func<string, string> prepareBody)
+        {
+            GetBody(71);
+
+            m_body = prepareBody(m_body);
         }
         #endregion
     }
