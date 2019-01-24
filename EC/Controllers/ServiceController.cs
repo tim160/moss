@@ -317,30 +317,96 @@ namespace EC.Controllers
                     }
                 }
 
-                var var_email = "timur160@gmail.com ";
+                var everyHourEmail = "timur160@gmail.com ";
+                ActionResultExtended emailResult = null;
                 foreach (var varinfo in db.var_info.Where(x => !x.registered_dt.HasValue).ToList())
                 {
                     try
                     {
-                        eb.UserNotCompleteRegistration_Email(
-                            varinfo.emailed_code_to_customer,
-                            String.IsNullOrEmpty(varinfo.first_nm) && String.IsNullOrEmpty(varinfo.last_nm) ? "Customer" : varinfo.first_nm,
-                            varinfo.last_nm,
-                            varinfo.annual_plan_price.ToString(),
-                            varinfo.onboarding_price.ToString(),
-                            "",
-                            varinfo.last_nm,
-                            varinfo.company_nm,
-                            "",
-                            varinfo.last_nm,
-                            Request.Url.AbsoluteUri.ToLower(),
-                            $"{Request.Url.Scheme}://{Request.Url.Host}{(Request.Url.Port == 80 ? "" : ":" + Request.Url.Port.ToString())}/Book/CompanyRegistrationVideo?emailedcode{varinfo.emailed_code_to_customer}&invitationcode=VAR",
-                            $"{System.Configuration.ConfigurationManager.AppSettings["MainSite"]}new/company/{varinfo.emailed_code_to_customer}"
-                            );
+                        //Every hours
+                        eb.UserNotCompleteRegistration_Email((body) =>
+                        {
+                            return body;
+                        });
+                        em.Send(everyHourEmail, "User not complete registration", eb.Body, true);
 
-                        em.Send(var_email, "User not complete registration", eb.Body, true);
+                        //017-2
+                        //trigger the email 4 hours after signup to company
+                        if (varinfo.CompanyNotified != true && (DateTime.Now - varinfo.created_dt).TotalHours >= 4)
+                        {
+                            var invitation = db.company_invitation.FirstOrDefault(x => x.invitation_code == varinfo.invitation_code);
+                            if (invitation != null)
+                            {
+                                var company = db.company.FirstOrDefault(x => x.id == invitation.created_by_company_id);
+                                if (company != null)
+                                {
+                                    eb.UserNotCompleteRegistration_Email((body) =>
+                                    {
+                                        return body;
+                                    });
+
+                                    emailResult = em.Send(everyHourEmail, "Employee Confidential prospect follow-up needed", eb.Body, true);
+                                    if (emailResult.ReturnCode == ReturnCode.Success)
+                                    {
+                                        varinfo.CompanyNotified = true;
+                                        db.SaveChanges();
+                                    }
+                                }
+                            }
+                        }
+
+                        //017-3
+                        //trigger the email 4 hours after signup to sales
+                        if (varinfo.SalesNotified != true && (DateTime.Now - varinfo.created_dt).TotalHours >= 4)
+                        {
+                            eb.VarAfter4HoursAfterSignUp((body) =>
+                            {
+                                return body;
+                            });
+
+                            emailResult = em.Send("sales@employeeconfidential.com", "Employee Confidential prospect follow-up", eb.Body, true);
+                            if (emailResult.ReturnCode == ReturnCode.Success)
+                            {
+                                varinfo.SalesNotified = true;
+                                db.SaveChanges();
+                            }
+                        }
+
+                        //017-4
+                        //trigger the email 24 hours after signup to User
+                        if (varinfo.User24HNotified != true && (DateTime.Now - varinfo.created_dt).TotalHours >= 24)
+                        {
+                            eb.VarAfter24HoursAfterSignUpToUser((body) =>
+                            {
+                                return body;
+                            });
+
+                            emailResult = em.Send(varinfo.email, "Employee Confidential prospect follow-up", eb.Body, true);
+                            if (emailResult.ReturnCode == ReturnCode.Success)
+                            {
+                                varinfo.SalesNotified = true;
+                                db.SaveChanges();
+                            }
+                        }
+
+                        //017-5
+                        //trigger the email 3 weeks after signup to User
+                        if (varinfo.User24HNotified != true && (DateTime.Now - varinfo.created_dt).TotalHours >= 24)
+                        {
+                            eb.VarAfter3WeekAfterSignUpToUser((body) =>
+                            {
+                                return body;
+                            });
+
+                            emailResult = em.Send(varinfo.email, "Employee Confidential prospect follow-up", eb.Body, true);
+                            if (emailResult.ReturnCode == ReturnCode.Success)
+                            {
+                                varinfo.SalesNotified = true;
+                                db.SaveChanges();
+                            }
+                        }
                     }
-                    catch(Exception exc)
+                    catch (Exception exc)
                     {
 
                     }

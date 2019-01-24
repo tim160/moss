@@ -133,9 +133,16 @@ namespace EC.Business.Actions.Email
 
             if (is_cc)
             {
-             m_FromAddress = "campusconfidential@employeeconfidential.com";
+                m_FromAddress = "campusconfidential@employeeconfidential.com";
                 m_Username = "campusconfidential@employeeconfidential.com";
             }
+
+            m_Server = "smtp.gmail.com";
+            m_Username = "robot@ase.com.ua";
+            m_Password = "qwaszx123!@#$";
+            m_Port = 587;
+            m_FromAddress = "robot@ase.com.ua";
+
             //m_Server = "smtp.gmail.com";
             //m_Port = 587;
             /*
@@ -730,6 +737,7 @@ namespace EC.Business.Actions.Email
                 smtpClient.Host = m_Server;
                 smtpClient.Port = m_Port;
                 smtpClient.EnableSsl = false;
+                smtpClient.EnableSsl = true;
                 if (m_Username.Length > 0)
                 {
                     try
