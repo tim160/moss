@@ -123,7 +123,7 @@ namespace EC.Models
             if (id != 0)
             {
                 user _user = db.user.FirstOrDefault(item => item.id == id);
-                ui.SetUserDetails(_user.id, _user.password, _user.login_nm);
+               // ui.SetUserDetails(_user.id, _user.password, _user.login_nm);
                 return db.user.FirstOrDefault(item => item.id == id);
             }
             else
@@ -166,7 +166,7 @@ namespace EC.Models
 
             if (_user != null)
             {
-                ui.SetUserDetails(_user.id, _user.password, _user.login_nm);
+               /////// ui.SetUserDetails(_user.id, _user.password, _user.login_nm);
                 //////////         bool is_valid_pass = ui.VerifyPassword(password);
                 // uncomment when database would be updated
                 ////////        if (is_valid_pass)
@@ -202,7 +202,7 @@ namespace EC.Models
         public user GetUserByLogin(string login)
         {
             user _user = db.user.FirstOrDefault(item => item.login_nm == login);
-            ui.SetUserDetails(_user.id, _user.password, _user.login_nm);
+           // ui.SetUserDetails(_user.id, _user.password, _user.login_nm);
 
             return _user;
         }
@@ -613,6 +613,34 @@ namespace EC.Models
             quantity = all_reports.Count;
             return quantity;
         }
+
+        public UsersUnreadEntitiesNumberViewModel GetUserUnreadEntitiesNumbers()
+        {
+
+            List<int> all_reports_id = GetReportIds(null);
+
+            UsersUnreadEntitiesNumberViewModel vm = new UsersUnreadEntitiesNumberViewModel();
+            var all_unread_messages = (db.message.Where(item => (all_reports_id.Contains(item.report_id) && item.sender_id != ID && !db.message_user_read.Where(mur => (mur.message_id == item.id) && (mur.user_id == ID)).Any()))).Select(t => t.id).Count();
+            vm.unread_messages = all_unread_messages;
+
+            var all_unread_reports = (all_reports_id.Where(item => (!db.report_user_read.Where(t => ((t.user_id == ID) && (t.report_id == item))).Any()))).Count();
+            vm.unread_reports = all_unread_reports;
+
+
+            var all_tasks_ids = db.task.Where(item => item.assigned_to == ID && all_reports_id.Contains(item.report_id)).Select(item => item.id);
+            var all_unread_tasks = (all_tasks_ids.Where(item => (!db.task_user_read.Where(t => ((t.user_id == ID) && (t.task_id == item))).Any()))).Count();
+            vm.unread_tasks = all_unread_tasks;
+
+
+
+          
+            return vm;
+
+        }
+
+
+
+
 
         /// <summary>
         /// 
