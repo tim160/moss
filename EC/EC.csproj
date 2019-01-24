@@ -768,13 +768,6 @@
     <Content Include="App\ec\components\EAList\EAList.cshtml" />
     <Content Include="bower.json" />
     <Content Include="package.json" />
-    <EntityDeploy Include="Models\Database\ECEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ECEntities.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Database\ECEntities.edmx.diagram">
-      <DependentUpon>ECEntities.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\libs\fontello-a8edc99e\config.json" />
     <Content Include="Content\libs\fontello-a8edc99e\font\e800.eot" />
     <Content Include="Content\libs\fontello-a8edc99e\font\e800.ttf" />
@@ -1039,6 +1032,13 @@
     <Content Include="Content\fonts\Lato2OFL\Lato-Thin.ttf" />
     <Content Include="Content\fonts\Lato2OFL\Lato-ThinItalic.ttf" />
     <Content Include="App_Browsers\qt.browser" />
+    <EntityDeploy Include="Models\Database\ECEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ECEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Database\ECEntities.edmx.diagram">
+      <DependentUpon>ECEntities.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <None Include="Properties\PublishProfiles\ec-code.pubxml" />
     <None Include="Properties\PublishProfiles\ec-dev.pubxml" />
@@ -1625,6 +1625,9 @@
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\status.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\sysdiagrams.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\task.cs">
