@@ -1134,7 +1134,6 @@
     <Content Include="Views\Shared\IndexPages\LayoutCasesNewReport.cshtml" />
     <Content Include="Views\ReporterDashboard\Index.cshtml" />
     <Content Include="Views\Shared\IndexPages\ReporterDashboard.cshtml" />
-    <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\PartialViews\_ReportPreview.cshtml" />
     <Content Include="Views\PartialViews\_ReportPendingNotification.cshtml" />
     <Content Include="Views\Cases\Completed.cshtml" />
@@ -1149,7 +1148,6 @@
     <Content Include="Views\Settings\Cases.cshtml" />
     <Content Include="Views\Settings\Company.cshtml" />
     <Content Include="Views\Settings\Mediators.cshtml" />
-    <Content Include="Views\Login\Company.cshtml" />
     <Content Include="Views\Tasks\Index.cshtml" />
     <Content Include="Views\Tasks\Completed.cshtml" />
     <Content Include="Views\PartialViews\_ReportTopMenu.cshtml" />
@@ -1159,13 +1157,10 @@
     <Content Include="Views\New\Company.cshtml" />
     <Content Include="Views\New\Index.cshtml" />
     <Content Include="Views\PartialViews\_ReportTopMessagesMenu.cshtml" />
-    <Content Include="Views\Login\ForgetPassword.cshtml" />
-    <Content Include="Views\Login\Restore.cshtml" />
     <Content Include="Views\New\Success.cshtml" />
     <Content Include="Views\Settings\User.cshtml" />
     <Content Include="Views\Shared\Helpers\_UserPreviewFace.cshtml" />
     <Content Include="Views\Settings\Password.cshtml" />
-    <Content Include="Views\Login\RestorePass.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\CreateTaskModal.cshtml" />
     <Content Include="Views\Analytics\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ApproveDialogModal.cshtml" />
@@ -1702,7 +1697,6 @@
     <Folder Include="Content\assets\content\" />
     <Folder Include="Content\assets\template\php\" />
     <Folder Include="Upload\CompanyLogo\" />
-    <Folder Include="Views\App_LocalResources\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
