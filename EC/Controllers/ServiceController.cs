@@ -258,7 +258,7 @@ namespace EC.Controllers
 
         //[HttpPost]
         //EC.Windows.Task.Scheduler.exe http://localhost:8093/Service/Scheduler1?param1=197
-        public ActionResult Scheduler1(int param1)
+        public ActionResult Scheduler1(int? param1, int? varInfoId)
         {
             //Allow sec
             /*if (this.Request.UserHostAddress != "")
@@ -319,7 +319,7 @@ namespace EC.Controllers
 
                 var everyHourEmail = "timur160@gmail.com ";
                 ActionResultExtended emailResult = null;
-                foreach (var varinfo in db.var_info.Where(x => !x.registered_dt.HasValue).ToList())
+                foreach (var varinfo in db.var_info.Where(x => !x.registered_dt.HasValue || (varInfoId.HasValue && x.id == varInfoId)).ToList())
                 {
                     try
                     {
@@ -328,56 +328,83 @@ namespace EC.Controllers
                         {
                             return body;
                         });
-                        em.Send(everyHourEmail, "User not complete registration", eb.Body, true);
+                        //em.Send(everyHourEmail, "User not complete registration", eb.Body, true);
+
+                        var invitation = db.company_invitation.FirstOrDefault(x => x.invitation_code == varinfo.invitation_code);
+                        company company = null;
+                        if (invitation != null)
+                        {
+                            company = db.company.FirstOrDefault(x => x.id == invitation.created_by_company_id);
+                        }
 
                         //017-2
                         //trigger the email 4 hours after signup to company
-                        if (varinfo.CompanyNotified != true && (DateTime.Now - varinfo.created_dt).TotalHours >= 4)
+                        if ((varinfo.CompanyNotified != true && (DateTime.Now - varinfo.created_dt).TotalHours >= 4) || (varinfo.id == varInfoId))
                         {
-                            var invitation = db.company_invitation.FirstOrDefault(x => x.invitation_code == varinfo.invitation_code);
-                            if (invitation != null)
+                            if (company != null)
                             {
-                                var company = db.company.FirstOrDefault(x => x.id == invitation.created_by_company_id);
-                                if (company != null)
+                                eb.VarAfter4HoursAfterSignUp((body) =>
                                 {
-                                    eb.UserNotCompleteRegistration_Email((body) =>
-                                    {
-                                        return body;
-                                    });
+                                    body = body.Replace("[Referral Partner Name]", company.contact_nm);
+                                    body = body.Replace("[Referenced Code]", varinfo.invitation_code);
+                                    body = body.Replace("[First Name]", varinfo.first_nm);
+                                    body = body.Replace("[Last Name]", varinfo.last_nm);
+                                    body = body.Replace("[Company Name]", varinfo.company_nm);
+                                    body = body.Replace("[Phone]", varinfo.phone);
+                                    body = body.Replace("[Email]", varinfo.email);
+                                    body = body.Replace("[Number of Employees]", $"{varinfo.employee_no}");
 
-                                    emailResult = em.Send(everyHourEmail, "Employee Confidential prospect follow-up needed", eb.Body, true);
-                                    if (emailResult.ReturnCode == ReturnCode.Success)
-                                    {
-                                        varinfo.CompanyNotified = true;
-                                        db.SaveChanges();
-                                    }
+                                    return body;
+                                });
+
+                                emailResult = em.Send(everyHourEmail, "Employee Confidential prospect follow-up needed", eb.Body, true);
+                                if (emailResult.ReturnCode == ReturnCode.Success)
+                                {
+                                    varinfo.CompanyNotified = true;
+                                    db.SaveChanges();
                                 }
                             }
                         }
 
                         //017-3
                         //trigger the email 4 hours after signup to sales
-                        if (varinfo.SalesNotified != true && (DateTime.Now - varinfo.created_dt).TotalHours >= 4)
+                        if ((varinfo.SalesNotified != true && (DateTime.Now - varinfo.created_dt).TotalHours >= 4) || (varinfo.id == varInfoId))
                         {
-                            eb.VarAfter4HoursAfterSignUp((body) =>
+                            if (company != null)
                             {
-                                return body;
-                            });
+                                eb.VarAfter4HoursAfterSignUpToSales((body) =>
+                                {
+                                    body = body.Replace("[First Name]", varinfo.first_nm);
+                                    body = body.Replace("[Last Name]", varinfo.last_nm);
+                                    body = body.Replace("[Company Name]", varinfo.company_nm);
+                                    body = body.Replace("[Phone]", varinfo.phone);
+                                    body = body.Replace("[Email]", varinfo.email);
+                                    body = body.Replace("[Number of Employees]", $"{varinfo.employee_no}");
+                                    body = body.Replace("[Referral Partner Code]", varinfo.invitation_code);
+                                    body = body.Replace("[Referral Partner Names]", company.contact_nm);
+                                    return body;
+                                });
 
-                            emailResult = em.Send("sales@employeeconfidential.com", "Employee Confidential prospect follow-up", eb.Body, true);
-                            if (emailResult.ReturnCode == ReturnCode.Success)
-                            {
-                                varinfo.SalesNotified = true;
-                                db.SaveChanges();
+                                emailResult = em.Send("sales@employeeconfidential.com", "Employee Confidential prospect follow-up", eb.Body, true);
+                                if (emailResult.ReturnCode == ReturnCode.Success)
+                                {
+                                    varinfo.SalesNotified = true;
+                                    db.SaveChanges();
+                                }
                             }
                         }
 
                         //017-4
                         //trigger the email 24 hours after signup to User
-                        if (varinfo.User24HNotified != true && (DateTime.Now - varinfo.created_dt).TotalHours >= 24)
+                        if ((varinfo.User24HNotified != true && (DateTime.Now - varinfo.created_dt).TotalHours >= 24) || (varinfo.id == varInfoId))
                         {
                             eb.VarAfter24HoursAfterSignUpToUser((body) =>
                             {
+                                body = body.Replace("[Prospect First Name]", varinfo.first_nm);
+                                body = body.Replace("[Phone]", varinfo.phone);
+                                body = body.Replace("[Email]", varinfo.email);
+                                body = body.Replace("[Referral Partner Company Name]", company.company_nm);
+                                body = body.Replace("[Referral Partner contact name]", company.contact_nm);
                                 return body;
                             });
 
@@ -391,10 +418,15 @@ namespace EC.Controllers
 
                         //017-5
                         //trigger the email 3 weeks after signup to User
-                        if (varinfo.User24HNotified != true && (DateTime.Now - varinfo.created_dt).TotalHours >= 24)
+                        if ((varinfo.User24HNotified != true && (DateTime.Now - varinfo.created_dt).TotalHours >= 24) || (varinfo.id == varInfoId))
                         {
                             eb.VarAfter3WeekAfterSignUpToUser((body) =>
                             {
+                                body = body.Replace("[Prospect First Name]", varinfo.first_nm);
+                                body = body.Replace("[Phone]", varinfo.phone);
+                                body = body.Replace("[Email]", varinfo.email);
+                                body = body.Replace("[Referral Partner Company Name]", company.company_nm);
+                                body = body.Replace("[Referral Partner contact name]", company.contact_nm);
                                 return body;
                             });
 

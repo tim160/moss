@@ -299,6 +299,10 @@
     <Content Include="Content\css\all.css" />
     <Content Include="Content\css\all.min.css" />
     <Content Include="Content\css\fontello.css" />
+    <Content Include="Content\emails\1,2NotificationProspectEntersInfoSales.html" />
+    <Content Include="Content\emails\1NotificationProspectEntersInfoECReferralPartner.html" />
+    <Content Include="Content\emails\2ProspectNotPurchase.html" />
+    <Content Include="Content\emails\3ProspectAfter3weeks.html" />
     <Content Include="Content\emails\CampusSecurityAlert.html" />
     <Content Include="Content\emails\CaseCloseApprove.html" />
     <Content Include="Content\emails\CaseCloseApprovePlatformManager.html" />
@@ -1591,9 +1595,6 @@
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\status.cs">
-      <DependentUpon>ECEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Database\sysdiagrams.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\task.cs">
