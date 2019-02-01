@@ -137,12 +137,6 @@ namespace EC.Business.Actions.Email
                 m_Username = "campusconfidential@employeeconfidential.com";
             }
 
-            m_Server = "smtp.gmail.com";
-            m_Username = "robot@ase.com.ua";
-            m_Password = "qwaszx123!@#$";
-            m_Port = 587;
-            m_FromAddress = "robot@ase.com.ua";
-
             //m_Server = "smtp.gmail.com";
             //m_Port = 587;
             /*

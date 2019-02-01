@@ -143,7 +143,7 @@ namespace EC.Models
             //user _user = db.user.FirstOrDefault(item => item.login_nm.Trim() == login && item.password.Trim() == password && item.status_id == 2);
             */
             user _user = db.user.FirstOrDefault(item => item.login_nm.Trim() == login && item.password.Trim() == password);
-            _user = db.user.FirstOrDefault(item => item.login_nm.Trim() == login);
+            //_user = db.user.FirstOrDefault(item => item.login_nm.Trim() == login);
             if (_user == null)
             {
                 return null;

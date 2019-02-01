@@ -252,17 +252,23 @@ namespace EC.Business.Actions.Email
                     break;
                 case 69:
                     //After 4 hours of signup in VAR
-                    m_filename = "VarAfter4HoursAfterSignUp";
+                    m_filename = "1NotificationProspectEntersInfoECReferralPartner";
                     break;
                 case 70:
                     //After 4 hours of signup in VAR
-                    m_filename = "VarAfter24HoursAfterSignUpToUser";
+                    m_filename = "2ProspectNotPurchase";
                     break;
                 case 71:
                     //After 3 weeks to user
-                    m_filename = "VarAfter3WeekAfterSignUpToUser";
+                    m_filename = "3ProspectAfter3weeks";
+                    break;
+                case 72:
+                    //After 3 weeks to user
+                    m_filename = "1,2NotificationProspectEntersInfoSales";
                     break;
                     
+
+
             }
 
             string appPath = Path.GetFullPath("~/EmailText/" + m_filename + ".html");
@@ -661,7 +667,14 @@ namespace EC.Business.Actions.Email
 
             m_body = prepareBody(m_body);
         }
-        
+
+        public void VarAfter4HoursAfterSignUpToSales(Func<string, string> prepareBody)
+        {
+            GetBody(72);
+
+            m_body = prepareBody(m_body);
+        }        
+
         public void VarAfter24HoursAfterSignUpToUser(Func<string, string> prepareBody)
         {
             GetBody(70);
