@@ -1046,6 +1046,7 @@
     <None Include="Properties\PublishProfiles\ec-code.pubxml" />
     <None Include="Properties\PublishProfiles\ec-dev.pubxml" />
     <None Include="Properties\PublishProfiles\File.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FTP.pubxml" />
     <Content Include="PrivacyStatement.html" />
     <Content Include="Rotativa\wkhtmltopdf.exe" />
