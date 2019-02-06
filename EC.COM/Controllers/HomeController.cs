@@ -28,7 +28,7 @@ namespace EC.COM.Controllers
         public string GetRequest(string fname, string lname, string cname, string phone, string email)
         {
             string result = "Thank you for your request, you’ll be contacted shortly.";
-            if (fname != "" && lname != "" && cname != "" && phone != "" && email != "")
+            if (!string.IsNullOrWhiteSpace(fname) && !string.IsNullOrWhiteSpace(lname) && !string.IsNullOrWhiteSpace(cname) && !string.IsNullOrWhiteSpace(phone) && !string.IsNullOrWhiteSpace(email))
             {
 
                 try
