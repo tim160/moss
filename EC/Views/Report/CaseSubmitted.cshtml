@@ -29,7 +29,7 @@
     $(document).ready(function () {
         summaryPage();
         $("#reportDashboard").on("click", function () {
-            var r = confirm("Did you put a note about your login and pass?");
+            var r = confirm("WARNING.You are about to leave the reporting page. If you have not saved your Login and Password information, then please select Cancel so you record them. If you have saved your Login and Password, you can leave the reporting page."); 
             if (r == true) {
                 window.location.href = "/ReporterDashboard";
             } else {
