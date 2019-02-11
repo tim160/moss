@@ -41,7 +41,7 @@
     </div><!--settingMenu-->
 
     <div id="attachmentPage">
-        @using (Html.BeginForm("Attachments", "Case", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("Attachments", "NewCase", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.Hidden("report_id", report_id)
             @Html.Hidden("mode", "upload_rd")
@@ -51,7 +51,7 @@
                     <div class="secondSemiboldText">or</div>
                         <div class="selectFiles">
                             select files to upload
-                            <input type="file" class="hiddenElement btn-upload-attach" name="files" multiple="">
+                            <input type="file" id="attachments" class="hiddenElement btn-upload-attach" name="files" multiple="">
                         </div>
                         
                 </div>
@@ -133,8 +133,14 @@
         $('.dottedContainer').on('drop', function () {
             event.preventDefault();
             event.stopPropagation();
+            makeAjaxcall();
+        });
+        $("#attachments").click(function () {
+            makeAjaxcall();
+        });
 
-            var data = new FormData();
+        function makeAjaxcall() {
+             var data = new FormData();
             data.append('report_id', '@report_id');
             data.append('mode', 'upload_rd');
             data.append('type', $('.inputBlock > input:checked').val());
@@ -144,7 +150,7 @@
 
             $.ajax({
                 type: "POST",
-                url: '@Url.Action("Attachments", "Case")',
+                url: '@Url.Action("Attachments", "NewCase")',
                 contentType: false,
                 processData: false,
                 data: data,
@@ -154,7 +160,7 @@
                 error: function (xhr, status, p3, p4) {
                 }
             });
-        });
+        }
 
         $('.btn-upload-attach').on('change', function () {
             setTimeout(function () {
