@@ -19,7 +19,7 @@ namespace EC.App_LocalResources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class GlobalRes {
@@ -1330,6 +1330,24 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Communication Barriers.
+        /// </summary>
+        public static string CommunicationBarriers {
+            get {
+                return ResourceManager.GetString("CommunicationBarriers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Communication Barriers.
+        /// </summary>
+        public static string CommunicationBarriers1 {
+            get {
+                return ResourceManager.GetString("CommunicationBarriers1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Company.
         /// </summary>
         public static string Company {
@@ -1362,6 +1380,24 @@ namespace EC.App_LocalResources {
         public static string CompanyInUse_CC {
             get {
                 return ResourceManager.GetString("CompanyInUse_CC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company Loyalty Realization.
+        /// </summary>
+        public static string CompanyLoyaltyRealization {
+            get {
+                return ResourceManager.GetString("CompanyLoyaltyRealization", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company Loyalty Realization.
+        /// </summary>
+        public static string CompanyLoyaltyRealization1 {
+            get {
+                return ResourceManager.GetString("CompanyLoyaltyRealization1", resourceCulture);
             }
         }
         
@@ -1654,6 +1690,24 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cost Control Goals.
+        /// </summary>
+        public static string CostControlGoals {
+            get {
+                return ResourceManager.GetString("CostControlGoals", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cost Control Goals.
+        /// </summary>
+        public static string CostControlGoals1 {
+            get {
+                return ResourceManager.GetString("CostControlGoals1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Legal counsel will be invited to this case.
         /// </summary>
         public static string counsel_invited {
@@ -1717,11 +1771,65 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cultural Differences/Personal Values.
+        /// </summary>
+        public static string CulturalDifferencesPersonalValues {
+            get {
+                return ResourceManager.GetString("CulturalDifferencesPersonalValues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cultural Differences/Personal Values.
+        /// </summary>
+        public static string CulturalDifferencesPersonalValues1 {
+            get {
+                return ResourceManager.GetString("CulturalDifferencesPersonalValues1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cultural Influences.
+        /// </summary>
+        public static string CulturalInfluences {
+            get {
+                return ResourceManager.GetString("CulturalInfluences", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cultural Influences.
+        /// </summary>
+        public static string CulturalInfluences1 {
+            get {
+                return ResourceManager.GetString("CulturalInfluences1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Current Status.
         /// </summary>
         public static string CurrentStatus {
             get {
                 return ResourceManager.GetString("CurrentStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Customer Demands.
+        /// </summary>
+        public static string CustomerDemands {
+            get {
+                return ResourceManager.GetString("CustomerDemands", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Customer Demands.
+        /// </summary>
+        public static string CustomerDemands1 {
+            get {
+                return ResourceManager.GetString("CustomerDemands1", resourceCulture);
             }
         }
         
@@ -2626,6 +2734,24 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Extrenal Locus of Control.
+        /// </summary>
+        public static string ExtrenalLocusofControl {
+            get {
+                return ResourceManager.GetString("ExtrenalLocusofControl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Extrenal Locus of Control.
+        /// </summary>
+        public static string ExtrenalLocusofControl1 {
+            get {
+                return ResourceManager.GetString("ExtrenalLocusofControl1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Facts Established.
         /// </summary>
         public static string FactsEstablished {
@@ -2667,6 +2793,24 @@ namespace EC.App_LocalResources {
         public static string FillTheFollowingFields {
             get {
                 return ResourceManager.GetString("FillTheFollowingFields", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Financial or Performance Incentives.
+        /// </summary>
+        public static string FinancialorPerformanceIncentives {
+            get {
+                return ResourceManager.GetString("FinancialorPerformanceIncentives", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Financial or Performance Incentives.
+        /// </summary>
+        public static string FinancialorPerformanceIncentives1 {
+            get {
+                return ResourceManager.GetString("FinancialorPerformanceIncentives1", resourceCulture);
             }
         }
         
@@ -3211,6 +3355,24 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Insubordination.
+        /// </summary>
+        public static string Insubordination {
+            get {
+                return ResourceManager.GetString("Insubordination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Insubordination.
+        /// </summary>
+        public static string Insubordination1 {
+            get {
+                return ResourceManager.GetString("Insubordination1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid Invitation Code.
         /// </summary>
         public static string InvalidCode {
@@ -3400,6 +3562,96 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Lack of Awareness.
+        /// </summary>
+        public static string LackofAwareness {
+            get {
+                return ResourceManager.GetString("LackofAwareness", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lack of Awareness.
+        /// </summary>
+        public static string LackofAwareness1 {
+            get {
+                return ResourceManager.GetString("LackofAwareness1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lack of Sensitivity.
+        /// </summary>
+        public static string LackofSensitivity {
+            get {
+                return ResourceManager.GetString("LackofSensitivity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lack of Sensitivity.
+        /// </summary>
+        public static string LackofSensitivity1 {
+            get {
+                return ResourceManager.GetString("LackofSensitivity1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lack of Skills.
+        /// </summary>
+        public static string LackofSkills {
+            get {
+                return ResourceManager.GetString("LackofSkills", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lack of Skills.
+        /// </summary>
+        public static string LackofSkills1 {
+            get {
+                return ResourceManager.GetString("LackofSkills1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lack of Teamwork.
+        /// </summary>
+        public static string LackofTeamwork {
+            get {
+                return ResourceManager.GetString("LackofTeamwork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lack of Teamwork.
+        /// </summary>
+        public static string LackofTeamwork1 {
+            get {
+                return ResourceManager.GetString("LackofTeamwork1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lack of Training.
+        /// </summary>
+        public static string LackofTraining {
+            get {
+                return ResourceManager.GetString("LackofTraining", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lack of Training.
+        /// </summary>
+        public static string LackofTraining1 {
+            get {
+                return ResourceManager.GetString("LackofTraining1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Language.
         /// </summary>
         public static string Language {
@@ -3472,11 +3724,47 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Legitimate Action Rationalization.
+        /// </summary>
+        public static string LegitimateActionRationalization {
+            get {
+                return ResourceManager.GetString("LegitimateActionRationalization", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Legitimate Action Rationalization.
+        /// </summary>
+        public static string LegitimateActionRationalization1 {
+            get {
+                return ResourceManager.GetString("LegitimateActionRationalization1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to IF THIS INCIDENT IS LIFE THREATENING, CONTACT YOUR LOCAL POLICE..
         /// </summary>
         public static string LifeThreatening {
             get {
                 return ResourceManager.GetString("LifeThreatening", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Limited Resources.
+        /// </summary>
+        public static string LimitedResources {
+            get {
+                return ResourceManager.GetString("LimitedResources", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Limited Resources.
+        /// </summary>
+        public static string LimitedResources1 {
+            get {
+                return ResourceManager.GetString("LimitedResources1", resourceCulture);
             }
         }
         
@@ -4084,6 +4372,24 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No Harm Rationalization.
+        /// </summary>
+        public static string NoHarmRationalization {
+            get {
+                return ResourceManager.GetString("NoHarmRationalization", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Harm Rationalization.
+        /// </summary>
+        public static string NoHarmRationalization1 {
+            get {
+                return ResourceManager.GetString("NoHarmRationalization1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No information about you is shared with {0}, but we store your name and e-mail address to strengthen your case..
         /// </summary>
         public static string Noinformationissharedwith0 {
@@ -4525,6 +4831,24 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Poor Process Design.
+        /// </summary>
+        public static string PoorProcessDesign {
+            get {
+                return ResourceManager.GetString("PoorProcessDesign", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Poor Process Design.
+        /// </summary>
+        public static string PoorProcessDesign1 {
+            get {
+                return ResourceManager.GetString("PoorProcessDesign1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Poster.
         /// </summary>
         public static string Poster {
@@ -4557,6 +4881,24 @@ namespace EC.App_LocalResources {
         public static string PreReviewUp {
             get {
                 return ResourceManager.GetString("PreReviewUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pressure of Meeting Sales Quotas.
+        /// </summary>
+        public static string PressureofMeetingSalesQuotas {
+            get {
+                return ResourceManager.GetString("PressureofMeetingSalesQuotas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pressure of Meeting Sales Quotas.
+        /// </summary>
+        public static string PressureofMeetingSalesQuotas1 {
+            get {
+                return ResourceManager.GetString("PressureofMeetingSalesQuotas1", resourceCulture);
             }
         }
         
@@ -4683,6 +5025,24 @@ namespace EC.App_LocalResources {
         public static string RelationshipsSavingFailed {
             get {
                 return ResourceManager.GetString("RelationshipsSavingFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remote or Inadequate Supervision.
+        /// </summary>
+        public static string RemoteorInadequateSupervision {
+            get {
+                return ResourceManager.GetString("RemoteorInadequateSupervision", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remote or Inadequate Supervision.
+        /// </summary>
+        public static string RemoteorInadequateSupervision1 {
+            get {
+                return ResourceManager.GetString("RemoteorInadequateSupervision1", resourceCulture);
             }
         }
         
@@ -5308,6 +5668,24 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Self-Interest.
+        /// </summary>
+        public static string SelfInterest {
+            get {
+                return ResourceManager.GetString("SelfInterest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Self-Interest.
+        /// </summary>
+        public static string SelfInterest1 {
+            get {
+                return ResourceManager.GetString("SelfInterest1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Send.
         /// </summary>
         public static string Send {
@@ -5488,6 +5866,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string String1 {
+            get {
+                return ResourceManager.GetString("String1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Submit.
         /// </summary>
         public static string Submit {
@@ -5628,6 +6015,15 @@ namespace EC.App_LocalResources {
         public static string Team {
             get {
                 return ResourceManager.GetString("Team", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Telephone.
+        /// </summary>
+        public static string telephone {
+            get {
+                return ResourceManager.GetString("telephone", resourceCulture);
             }
         }
         
@@ -5839,6 +6235,24 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unsupportive Environment or Department.
+        /// </summary>
+        public static string UnsupportiveEnvironmentorDepartment {
+            get {
+                return ResourceManager.GetString("UnsupportiveEnvironmentorDepartment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unsupportive Environment or Department.
+        /// </summary>
+        public static string UnsupportiveEnvironmentorDepartment1 {
+            get {
+                return ResourceManager.GetString("UnsupportiveEnvironmentorDepartment1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Upcoming Payment Notice.
         /// </summary>
         public static string UpcomingPaymentNotice {
@@ -5970,6 +6384,24 @@ namespace EC.App_LocalResources {
         public static string wasSubmittedSucessfully {
             get {
                 return ResourceManager.GetString("wasSubmittedSucessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weak Controls.
+        /// </summary>
+        public static string WeakControls {
+            get {
+                return ResourceManager.GetString("WeakControls", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weak Controls.
+        /// </summary>
+        public static string WeakControls1 {
+            get {
+                return ResourceManager.GetString("WeakControls1", resourceCulture);
             }
         }
         

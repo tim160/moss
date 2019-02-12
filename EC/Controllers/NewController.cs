@@ -819,6 +819,57 @@ namespace EC.Controllers
             }
             #endregion
 
+            #region Root Causes
+            var list_root_cases = new List<string>();
+            if (company_id != 0)
+            {
+                list_root_cases.Add(LocalizationGetter.GetString("CulturalInfluences"));
+                list_root_cases.Add(LocalizationGetter.GetString("CustomerDemands"));
+                list_root_cases.Add(LocalizationGetter.GetString("CommunicationBarriers"));
+            }
+            foreach(var itemString in list_root_cases)
+            {
+                var temp_cases_external = new company_root_cases_external { company_id = company_id, name_en = itemString, name_es = itemString, name_fr = itemString, status_id = 2 };
+                db.company_root_cases_external.Add(temp_cases_external);
+                db.SaveChanges();
+            }
+            list_root_cases = new List<string>();
+            list_root_cases.Add(LocalizationGetter.GetString("CostControlGoals"));
+            list_root_cases.Add(LocalizationGetter.GetString("FinancialorPerformanceIncentives"));
+            list_root_cases.Add(LocalizationGetter.GetString("LackofTeamwork"));
+            list_root_cases.Add(LocalizationGetter.GetString("PoorProcessDesign"));
+            list_root_cases.Add(LocalizationGetter.GetString("PressureofMeetingSalesQuotas"));
+            list_root_cases.Add(LocalizationGetter.GetString("RemoteorInadequateSupervision"));
+            list_root_cases.Add(LocalizationGetter.GetString("UnsupportiveEnvironmentorDepartment"));
+            list_root_cases.Add(LocalizationGetter.GetString("WeakControls"));
+            list_root_cases.Add(LocalizationGetter.GetString("LackofTraining"));
+            list_root_cases.Add(LocalizationGetter.GetString("LimitedResources"));
+            foreach (var itemString in list_root_cases)
+            {
+                var temp_cases_organizational = new company_root_cases_organizational { company_id = company_id, name_en = itemString, name_es = itemString, name_fr = itemString, status_id = 2 };
+                db.company_root_cases_organizational.Add(temp_cases_organizational);
+                db.SaveChanges();
+            }
+            list_root_cases = new List<string>();
+            list_root_cases.Add(LocalizationGetter.GetString("CompanyLoyaltyRealization"));
+            list_root_cases.Add(LocalizationGetter.GetString("ExtrenalLocusofControl"));
+            list_root_cases.Add(LocalizationGetter.GetString("Insubordination"));
+            list_root_cases.Add(LocalizationGetter.GetString("LackofAwareness"));
+            list_root_cases.Add(LocalizationGetter.GetString("LackofSensitivity"));
+            list_root_cases.Add(LocalizationGetter.GetString("LegitimateActionRationalization"));
+            list_root_cases.Add(LocalizationGetter.GetString("NoHarmRationalization"));
+            list_root_cases.Add(LocalizationGetter.GetString("SelfInterest"));
+            list_root_cases.Add(LocalizationGetter.GetString("CulturalDifferencesPersonalValues"));
+            list_root_cases.Add(LocalizationGetter.GetString("LackofSkills"));
+
+            foreach (var itemString in list_root_cases)
+            {
+                var temp_cases_behavioral = new company_root_cases_behavioral { company_id = company_id, name_en = itemString, name_es = itemString, name_fr = itemString, status_id = 2 };
+                db.company_root_cases_behavioral.Add(temp_cases_behavioral);
+                db.SaveChanges();
+            }
+            #endregion
+
             string login = glb.GenerateLoginName(first, last);
             string pass = glb.GeneretedPassword().Trim();
 
