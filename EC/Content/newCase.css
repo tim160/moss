@@ -4030,3 +4030,7 @@ body .bigBlock  .blockLinesItem p{
 .errorInput:last-child{
 	border: 2px solid red;
 }
+
+#alertModal {
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+}

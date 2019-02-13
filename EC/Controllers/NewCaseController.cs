@@ -569,5 +569,35 @@ namespace EC.Controllers
             ViewBag.user_id = user.id;
             return View(rm);
         }
+        public int CloseCaseValidate()
+        {
+            int report_id = Convert.ToInt16(Request["report_id"]);
+            ReportModel rm = new ReportModel(report_id);
+
+            if (!rm.getSecondaryTypeMandatory().Any())
+            {
+                return -2;
+            }
+            if ((!db.report_mediator_involved.Any(x => x.report_id == report_id)) && (!db.report_non_mediator_involved.Any(x => x.report_id == report_id)))
+            {
+                //return -2;
+            }
+            var note1 = db.report_inv_notes.FirstOrDefault(x => x.report_id == report_id & x.type == 1)?.note;
+            var note2 = db.report_inv_notes.FirstOrDefault(x => x.report_id == report_id & x.type == 2)?.note;
+
+            if ((String.IsNullOrEmpty(note1)) || (String.IsNullOrEmpty(note2)))
+            {
+                return -2;
+            }
+
+            var list = db.report_non_mediator_involved.Where(x => x.report_id == report_id && x.role_in_report_id == 3).Select(x => x.id).ToList();
+            var list_cco = db.report_case_closure_outcome.Where(x => x.report_id == report_id).ToList();
+            if ((list.Any()) && (!list_cco.Any(x => x.non_mediator_involved_id.HasValue && list.Contains(x.non_mediator_involved_id.Value))))
+            {
+                return -2;
+            }
+
+            return 0;
+        }
     }
 }
