@@ -68,7 +68,7 @@ namespace EC.Controllers
                     logger.Info("Login-NotNull");
 
                     var user = userModel.Login(model.Login, model.Password);
-                    logger.Info("Login-id " + user.id.ToString());
+                    logger.Info("Login-id " + user?.id.ToString());
 
                     if (user == null)
                     {
