@@ -41,39 +41,6 @@ namespace EC
                 }
             );
 
-            routes.MapRoute(
-                name: "NewCaseAttachments",
-                url: "NewCase/Attachments/{id}",
-                defaults: new
-                {
-                    controller = "NewCase",
-                    action = "Attachments",
-                    id = UrlParameter.Optional
-                }
-            );
-
-            routes.MapRoute(
-            name: "NewCaseReporter",
-            url: "NewCase/Reporter/{id}",
-            defaults: new
-            {
-                controller = "NewCase",
-                action = "Reporter",
-                id = UrlParameter.Optional
-            }
-        );
-
-            routes.MapRoute(
-    name: "NewCaseActivity",
-    url: "NewCase/Activity/{id}",
-    defaults: new
-    {
-        controller = "NewCase",
-        action = "Activity",
-        id = UrlParameter.Optional
-    }
-);
-
 
             routes.MapRoute(
     name: "SaveLoginChanges",
@@ -84,17 +51,6 @@ namespace EC
          action = "SaveLoginChanges",
          id = UrlParameter.Optional
      });
-
-            routes.MapRoute(
-            name: "NewCaseTeam",
-            url: "NewCase/Team/{id}",
-            defaults: new
-            {
-                controller = "NewCase",
-                action = "Team",
-                id = UrlParameter.Optional
-            }
-        );
             routes.MapRoute(
                 name: "AddToMediators",
                 url: "NewCase/AddToMediators",
