@@ -12,8 +12,6 @@ namespace EC.Constants
     {
 
         public const string CurrentUserMarcker = "CurentUser";
-        public const string AuthUserCookies = "temp_templ_store";
-
 
         public static DateTime _default_date = new DateTime(1900, 1, 1);
 
