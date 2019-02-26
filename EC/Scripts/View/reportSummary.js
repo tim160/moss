@@ -71,7 +71,7 @@
              if (_report_id > 0 && user_id > 0 && promotion_value != "") {
                 $.ajax({
                     method: "POST",
-                    url: "/Case/CloseCase",
+                    url: "/NewCase/CloseCase",
                     data: {
                         user_id: user_id, report_id: _report_id, description: description, promotion_value: promotion_value,
                         case_closure_reason_id: reason_id, sign_off_mediator_id: sign_off_mediator_id

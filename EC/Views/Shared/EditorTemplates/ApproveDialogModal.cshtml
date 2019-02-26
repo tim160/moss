@@ -185,7 +185,7 @@
                 if (_report_id > 0 && user_id > 0 && promotion_value != "") {
                     $.ajax({
                         method: "POST",
-                        url: "/Case/CloseCase",
+                        url: "/NewCase/CloseCase",
                         data: {
                         user_id: user_id, report_id: _report_id, description: description, promotion_value: promotion_value, outcome_id: 0, outcome: '',
                         case_closure_reason_id: 0, executive_summary: '', facts_established: '', investigation_methodology: '', description_outcome: '', recommended_actions: ''

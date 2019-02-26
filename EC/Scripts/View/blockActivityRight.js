@@ -14,7 +14,7 @@
                         contentType: false,
                         processData: false,
                         cache: false,
-                        url: "/Case/GetAjaxActivity/@Html.Raw(report_id)",
+                        url: "/NewCase/GetAjaxActivity/@Html.Raw(report_id)",
                     }
                    ).done(function (data) {//data from server
                        rightBlock.empty();

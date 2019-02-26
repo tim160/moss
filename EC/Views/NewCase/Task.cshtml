@@ -282,11 +282,11 @@
         {
             $.ajax({
                 method: "POST",
-                url: "/Case/CloseTask",
+                url: "/NewCase/CloseTask",
                 data: { task_id: @task_id, user_id: @user_id }
             }).done(function (data) {//data from server
-                console.log('/newCase/Tasks/' + @report_id);
-                window.location.href = '/newCase/Tasks/' + @report_id;
+                console.log('/NewCase/Tasks/' + @report_id);
+                window.location.href = '/NewCase/Tasks/' + @report_id;
             }).fail(function (error) {
                 console.log(error);
             });
