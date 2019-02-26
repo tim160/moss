@@ -46,14 +46,14 @@
 
 }
 
-<a href="/Case/Index/@popup" class="@(selected_item == 1 ? "caseesTab active" : "caseesTab")">
+<a href="/NewCase/Index/@popup" class="@(selected_item == 1 ? "caseesTab active" : "caseesTab")">
     @GlobalRes.Tasks
     @if (unread_tasks_s.Length > 0)
     {
         <span>@unread_tasks_s</span>
     }
 </a>
-<a href="/Case/Messages/@popup" class="@(selected_item == 2 ? "caseesTab active" : "caseesTab")">
+<a href="/NewCase/Messages/@popup" class="@(selected_item == 2 ? "caseesTab active" : "caseesTab")">
     @GlobalRes.Messages
     @if (unread_messages_s.Length > 0)
     {
@@ -61,6 +61,6 @@
     }
 </a>
 
-<a href="/Case/Team/@popup" class="@(selected_item == 3 ? "caseesTab active" : "caseesTab")">@GlobalRes.Team</a>
+<a href="/NewCase/Team/@popup" class="@(selected_item == 3 ? "caseesTab active" : "caseesTab")">@GlobalRes.Team</a>
 
-<a href="/Case/Attachments/@popup" class="@(selected_item == 4 ? "caseesTab active" : "caseesTab")">Attachments</a>
+<a href="/NewCase/Attachments/@popup" class="@(selected_item == 4 ? "caseesTab active" : "caseesTab")">Attachments</a>

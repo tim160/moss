@@ -212,13 +212,13 @@
             string _menuAnalytics = "", _menuTasks = "", _menuMessages = "", _menuCases = "";
             if ((mainURL.Contains("tasks")) || (mainURL.Contains("task/")))
             {
-                if ((!mainURL.Contains("analytics")) && (!mainURL.Contains("/case/")))
+                if ((!mainURL.Contains("analytics")) && (!mainURL.Contains("/NewCase/")))
                 {
                     _menuTasks = "active";
                 }
             }
 
-            if ((mainURL.Contains("cases")) || (mainURL.Contains("newreport/")) || (mainURL.Contains("case/")))
+            if ((mainURL.Contains("cases")) || (mainURL.Contains("newreport/")) || (mainURL.Contains("NewCase/")))
             {
                 _menuCases = "active";
             }
@@ -227,7 +227,7 @@
             {
                 _menuAnalytics = "active";
             }
-            if (mainURL.Contains("messages") && !mainURL.Contains("case/messages/"))
+            if (mainURL.Contains("messages") && !mainURL.Contains("NewCase/messages/"))
             {
                 _menuMessages = "active";
             }
@@ -352,7 +352,7 @@
             page_subtitle = LocalizationGetter.GetString("Dashboard");
         }
 
-        if ((hrefURL.Contains("case/")) || (hrefURL.Contains("/cases")) || (hrefURL.Contains("/newreport") || (hrefURL.Contains("case/task/"))))
+        if ((hrefURL.Contains("Newcase/")) || (hrefURL.Contains("/cases")) || (hrefURL.Contains("/newreport") || (hrefURL.Contains("Newcase/task/"))))
         {
             hrefURL = "/cases/index";
             page_subtitle = LocalizationGetter.GetString("Cases");

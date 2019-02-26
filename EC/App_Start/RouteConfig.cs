@@ -21,10 +21,10 @@ namespace EC
             #region /Case
             routes.MapRoute(
         name: "CaseMessages",
-        url: "Case/Messages/{id}",
+        url: "NewCase/Messages/{id}",
         defaults: new
         {
-            controller = "Case",
+            controller = "NewCase",
             action = "Messages",
             id = UrlParameter.Optional
         }
