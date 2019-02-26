@@ -28,19 +28,19 @@ namespace EC.Controllers.ViewModel
             int report_id = 0;
 
             if (!id.HasValue)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
             else
                 report_id = id.Value;// 167-171??
 
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             int user_id = user.id;
             ReportModel rm = new ReportModel(report_id);
 
             if (!rm.HasAccessToReport(user_id))
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             glb.UpdateReportRead(user_id, report_id);
 
@@ -90,7 +90,7 @@ namespace EC.Controllers.ViewModel
 
             if ((!has_access) || (user.role_id == 8))
             {
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
             }
             else
                 ViewBag.report_id = report_id;

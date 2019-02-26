@@ -29,7 +29,7 @@ namespace EC.Controllers
 
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             #region EC-CC Viewbag
             ViewBag.is_cc = is_cc;
@@ -73,7 +73,7 @@ namespace EC.Controllers
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             int user_id = user.id;
             // user

@@ -638,7 +638,29 @@ namespace EC.Models
 
         }
 
+        public UsersUnreadEntitiesNumberViewModel1 GetUserUnreadEntitiesNumbers1()
+        {
 
+            List<int> all_reports_id = GetReportIds(null);
+
+            UsersUnreadEntitiesNumberViewModel1 vm = new UsersUnreadEntitiesNumberViewModel1();
+            var all_unread_messages = (db.message.Where(item => (all_reports_id.Contains(item.report_id) && item.sender_id != ID && !db.message_user_read.Where(mur => (mur.message_id == item.id) && (mur.user_id == ID)).Any()))).Select(t => t.id).ToList();
+            vm.unread_messages = all_unread_messages;
+
+            var all_unread_reports = (all_reports_id.Where(item => (!db.report_user_read.Where(t => ((t.user_id == ID) && (t.report_id == item))).Any()))).ToList();
+            vm.unread_reports = all_unread_reports;
+
+
+            var all_tasks_ids = db.task.Where(item => item.assigned_to == ID && all_reports_id.Contains(item.report_id)).Select(item => item.id);
+            var all_unread_tasks = (all_tasks_ids.Where(item => (!db.task_user_read.Where(t => ((t.user_id == ID) && (t.task_id == item))).Any()))).ToList();
+            vm.unread_tasks = all_unread_tasks;
+
+
+
+
+            return vm;
+
+        }
 
 
 
@@ -1273,115 +1295,54 @@ namespace EC.Models
         }
 
         public UsersReportIDsViewModel GetAllUserReportIdsLists()
-
         {
-
             UsersReportIDsViewModel vm = new UsersReportIDsViewModel();
-
-
-
-            List<int> all_reports_id = GetReportIds(null);
-
-            vm.all_report_ids = all_reports_id;
-
-            //    select rep_id from[Marine].[dbo].[testt]  z
-
-            //where id in (select max(id) from[Marine].[dbo].[testt] z2 group by z2.rep_id) and z.status_id = 4
-
-            var refGroupInvestigationStatuses = (from m in db.report_investigation_status
-
-                                                 group m by m.report_id into refGroup
-
-                                                 select refGroup.OrderByDescending(x => x.id).FirstOrDefault());
-
+            List<int> all_reports_id = new List<int>();
             List<int> statuses_match_all_report_id = new List<int>();
 
+            if ((_user.role_id == 4) || (_user.role_id == 5))
+            {
+                var involved_report_ids = (db.report_mediator_involved.Where(item => (item.mediator_id == _user.id)).Select(item => item.report_id));
 
+                vm.all_report_ids = (db.report.Where(item => ((item.company_id == _user.company_id) && (!involved_report_ids.Contains(item.id)))).Select(item => item.id)).ToList();
+                vm.all_active_report_ids = (db.report.Where(item => ((item.company_id == _user.company_id) && (!involved_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_investigation))).Select(item => item.id)).ToList();
+                vm.all_completed_report_ids = (db.report.Where(item => ((item.company_id == _user.company_id) && (!involved_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_completed))).Select(item => item.id)).ToList();
+                vm.all_spam_report_ids = (db.report.Where(item => ((item.company_id == _user.company_id) && (!involved_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_spam))).Select(item => item.id)).ToList();
+                vm.all_closed_report_ids = (db.report.Where(item => ((item.company_id == _user.company_id) && (!involved_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_closed))).Select(item => item.id)).ToList();
+                vm.all_pending_report_ids = (db.report.Where(item => ((item.company_id == _user.company_id) && (!involved_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_pending || item.status_id == ECGlobalConstants.investigation_status_review))).Select(item => item.id)).ToList();
+            }
 
-            vm.all_report_ids = all_reports_id.Intersect(from m in refGroupInvestigationStatuses
+            // if user is regular mediator/ legal counsil - we show only reports where he is assigned and hide all others
 
-                                                         select m.report_id).OrderByDescending(t => t).ToList();
+            if ((_user.role_id == 6) || (_user.role_id == 7))
+            {
+                var assigned_report_ids = (db.report_mediator_assigned.Where(item => ((item.mediator_id == _user.id) && (item.status_id == 2))).Select(item => item.report_id));
 
-            //????vm.all_report_ids = statuses_match_all_report_id;
-
-
-
-
-
-            //active
-
-            statuses_match_all_report_id = (from m in refGroupInvestigationStatuses
-
-                                            where m.investigation_status_id == ECGlobalConstants.investigation_status_investigation
-
-                                            select m.report_id).ToList();
-
-            vm.all_active_report_ids = all_reports_id.Intersect(statuses_match_all_report_id).OrderByDescending(t => t).ToList();
-
-
-
-            //completed
-
-            statuses_match_all_report_id = (from m in refGroupInvestigationStatuses
-
-                                            where m.investigation_status_id == ECGlobalConstants.investigation_status_resolution || m.investigation_status_id == ECGlobalConstants.investigation_status_completed
-
-                                            select m.report_id).ToList();
-
-            vm.all_completed_report_ids = all_reports_id.Intersect(statuses_match_all_report_id).OrderByDescending(t => t).ToList();
-
-
-
-            //spam
-
-            statuses_match_all_report_id = (from m in refGroupInvestigationStatuses
-
-                                            where m.investigation_status_id == ECGlobalConstants.investigation_status_spam
-
-                                            select m.report_id).ToList();
-
-            vm.all_spam_report_ids = all_reports_id.Intersect(statuses_match_all_report_id).OrderByDescending(t => t).ToList();
-
-
-
-            //closed
-
-            statuses_match_all_report_id = (from m in refGroupInvestigationStatuses
-
-                                            where m.investigation_status_id == ECGlobalConstants.investigation_status_closed
-
-                                            select m.report_id).ToList();
-
-            vm.all_closed_report_ids = all_reports_id.Intersect(statuses_match_all_report_id).OrderByDescending(t => t).ToList();
+                vm.all_report_ids = (db.report.Where(item => ((assigned_report_ids.Contains(item.id)))).Select(item => item.id)).ToList();
+                vm.all_active_report_ids = (db.report.Where(item => ((assigned_report_ids.Contains(item.id) && (item.status_id == ECGlobalConstants.investigation_status_investigation)  ))).Select(item => item.id)).ToList();
+                vm.all_completed_report_ids = (db.report.Where(item => ((assigned_report_ids.Contains(item.id) && (item.status_id == ECGlobalConstants.investigation_status_completed)))).Select(item => item.id)).ToList();
+                vm.all_spam_report_ids = (db.report.Where(item => ((assigned_report_ids.Contains(item.id) && (item.status_id == ECGlobalConstants.investigation_status_spam)))).Select(item => item.id)).ToList();
+                vm.all_closed_report_ids = (db.report.Where(item => ((assigned_report_ids.Contains(item.id) && (item.status_id == ECGlobalConstants.investigation_status_closed)))).Select(item => item.id)).ToList();
+                vm.all_pending_report_ids = (db.report.Where(item => ((assigned_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_pending || item.status_id == ECGlobalConstants.investigation_status_review))).Select(item => item.id)).ToList();
+            }
 
 
 
 
+            /*   List<int> reports_with_history = (from m in refGroupInvestigationStatuses
 
-            //pending
+                                                 where m.investigation_status_id > 0
 
-            statuses_match_all_report_id = (from m in refGroupInvestigationStatuses
+                                                 select m.report_id).ToList();
 
-                                            where m.investigation_status_id == ECGlobalConstants.investigation_status_pending || m.investigation_status_id == ECGlobalConstants.investigation_status_review
-
-                                            select m.report_id).ToList();
-
-
-
-            List<int> reports_with_history = (from m in refGroupInvestigationStatuses
-
-                                              where m.investigation_status_id > 0
-
-                                              select m.report_id).ToList();
-
-            IEnumerable<int> excluded = all_reports_id.Except(reports_with_history);
+               IEnumerable<int> excluded = all_reports_id.Except(reports_with_history);
 
 
 
-            statuses_match_all_report_id.AddRange(excluded);
+               statuses_match_all_report_id.AddRange(excluded);
 
-            vm.all_pending_report_ids = all_reports_id.Intersect(statuses_match_all_report_id).OrderByDescending(t => t).ToList();
-
+               vm.all_pending_report_ids = all_reports_id.Intersect(statuses_match_all_report_id).OrderByDescending(t => t).ToList();
+               */
 
 
             return vm;
@@ -1389,77 +1350,83 @@ namespace EC.Models
         }
         public UsersUnreadReportsNumberViewModel GetUserUnreadCasesNumbers(UsersReportIDsViewModel vmReportIds)
         {
-
-            int _count = 0;
-
-            UsersUnreadReportsNumberViewModel vm = new UsersUnreadReportsNumberViewModel();
-
-            //    select rep_id from[Marine].[dbo].[testt]  z
-
-            //where id in (select max(id) from[Marine].[dbo].[testt] z2 group by z2.rep_id) and z.status_id = 4
-
-            var refGroupReportLogs = (from m in db.report_log
-
-                                      group m by m.report_id into refGroup
-
-                                      //   orderby refGroup.Id descending
-
-                                      //select refGroup.Where(x => vmReportIds.all_report_ids.Contains(x.id)).OrderByDescending(x => x.created_dt).FirstOrDefault());
-                                       select refGroup.OrderByDescending(x => x.id).FirstOrDefault());
-
-
-
-            /*
-            var refGroupInvestigationStatuses = (from m in db.report_investigation_status
-
-                                                 group m by m.report_id into refGroup
-
-                                                 select refGroup.OrderByDescending(x => x.id).FirstOrDefault());
-                                               
-            statuses_match_all_report_id = (from m in refGroupInvestigationStatuses
-
-                                            where m.investigation_status_id == ECGlobalConstants.investigation_status_investigation
-
-                                            select m.report_id).ToList();
-                                              */
-
-            var refGroupReportReadDate = db.report_user_read.Where(item => (item.user_id == ID));
-
-
-            var active = vmReportIds.all_active_report_ids.Where(item => (refGroupReportLogs.Where(t => t.report_id == item).Any() && refGroupReportReadDate.Where(t => t.report_id == item).Any() &&
-           (refGroupReportLogs.Where(t => t.report_id == item)).FirstOrDefault().created_dt > (refGroupReportReadDate.Where(t => t.report_id == item)).FirstOrDefault().read_date)  ||
-           (!refGroupReportReadDate.Where(t => t.report_id == item).Any())
-           ).Count();
+             UsersUnreadReportsNumberViewModel vm = new UsersUnreadReportsNumberViewModel();
+ 
+            var active = vmReportIds.all_active_report_ids.Where(item => (
+            db.report.Where(t => (t.id == item && 
+            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date < t.last_update_dt).Any()
+            )).Any())).Count();
             vm.unread_active_reports = active;
 
-            var spam = vmReportIds.all_spam_report_ids.Where(item => (refGroupReportLogs.Where(t => t.report_id == item).Any() && refGroupReportReadDate.Where(t => t.report_id == item).Any() &&
-            (refGroupReportLogs.Where(t => t.report_id == item)).FirstOrDefault().created_dt > (refGroupReportReadDate.Where(t => t.report_id == item)).FirstOrDefault().read_date) ||
-            (!refGroupReportReadDate.Where(t => t.report_id == item).Any())
-            ).Count();
+            var spam = vmReportIds.all_spam_report_ids.Where(item => (
+            db.report.Where(t => (t.id == item &&
+            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date < t.last_update_dt).Any()
+            )).Any())).Count();
             vm.unread_spam_reports = spam;
 
-            var newreport = vmReportIds.all_pending_report_ids.Where(item => (refGroupReportLogs.Where(t => t.report_id == item).Any() && refGroupReportReadDate.Where(t => t.report_id == item).Any() &&
-            (refGroupReportLogs.Where(t => t.report_id == item)).FirstOrDefault().created_dt > (refGroupReportReadDate.Where(t => t.report_id == item)).FirstOrDefault().read_date) ||
-            (!refGroupReportReadDate.Where(t => t.report_id == item).Any())
-            ).Count();
+            var newreport = vmReportIds.all_pending_report_ids.Where(item => (
+            db.report.Where(t => (t.id == item &&
+            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date < t.last_update_dt).Any()
+            )).Any())).Count();
             vm.unread_pending_reports = newreport;
 
-            var closed = vmReportIds.all_closed_report_ids.Where(item => (refGroupReportLogs.Where(t => t.report_id == item).Any() && refGroupReportReadDate.Where(t => t.report_id == item).Any() &&
-                (refGroupReportLogs.Where(t => t.report_id == item)).FirstOrDefault().created_dt > (refGroupReportReadDate.Where(t => t.report_id == item)).FirstOrDefault().read_date) ||
-                (!refGroupReportReadDate.Where(t => t.report_id == item).Any())
-                ).Count();
-            vm.unread_closed_reports = closed;
-
-            var completed = vmReportIds.all_completed_report_ids.Where(item => (refGroupReportLogs.Where(t => t.report_id == item).Any() && refGroupReportReadDate.Where(t => t.report_id == item).Any() &&
-                (refGroupReportLogs.Where(t => t.report_id == item)).FirstOrDefault().created_dt > (refGroupReportReadDate.Where(t => t.report_id == item)).FirstOrDefault().read_date) ||
-                (!refGroupReportReadDate.Where(t => t.report_id == item).Any())
-                ).Count();
+            var completed = vmReportIds.all_completed_report_ids.Where(item => (
+            db.report.Where(t => (t.id == item &&
+            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date < t.last_update_dt).Any()
+            )).Any())).Count();
             vm.unread_completed_reports = completed;
 
+            var closed = vmReportIds.all_closed_report_ids.Where(item => (
+            db.report.Where(t => (t.id == item &&
+            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date < t.last_update_dt).Any()
+            )).Any()
+            )).Count();
+            vm.unread_closed_reports = closed;
+ 
+            return vm;
+
+        }
+
+
+        public UsersUnreadReportsNumberViewModel1 GetUserUnreadCasesNumbers1(UsersReportIDsViewModel vmReportIds)
+        {
+            UsersUnreadReportsNumberViewModel1 vm = new UsersUnreadReportsNumberViewModel1();
+
+            var active = vmReportIds.all_active_report_ids.Where(item => (
+            db.report.Where(t => (t.id == item &&
+            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date < t.last_update_dt).Any()
+            )).Any())).ToList();
+            vm.unread_active_reports = active;
+
+            var spam = vmReportIds.all_spam_report_ids.Where(item => (
+            db.report.Where(t => (t.id == item &&
+            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date < t.last_update_dt).Any()
+            )).Any())).ToList();
+            vm.unread_spam_reports = spam;
+
+            var newreport = vmReportIds.all_pending_report_ids.Where(item => (
+            db.report.Where(t => (t.id == item &&
+            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date < t.last_update_dt).Any()
+            )).Any())).ToList();
+            vm.unread_pending_reports = newreport;
+
+            var completed = vmReportIds.all_completed_report_ids.Where(item => (
+            db.report.Where(t => (t.id == item &&
+            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date < t.last_update_dt).Any()
+            )).Any())).ToList();
+            vm.unread_completed_reports = completed;
+
+            var closed = vmReportIds.all_closed_report_ids.Where(item => (
+            db.report.Where(t => (t.id == item &&
+            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date < t.last_update_dt).Any()
+            )).Any()
+            )).ToList();
+            vm.unread_closed_reports = closed;
 
             return vm;
 
         }
+
 
         public List<CasePreviewViewModel> ReportPreviews(List<int> report_ids, string investigation_status, int delay_allowed)
         {
@@ -1502,7 +1469,8 @@ namespace EC.Models
                           is_owner = z.is_owner
                       }),
                       case_color_code = (rm._report.report_color_id == 0) ? colors.Where(item => item.id == 1).FirstOrDefault().color_code : colors.Where(item => item.id == rm._report.report_color_id).FirstOrDefault().color_code,
-                      severity_s = !rm._report.severity_id.HasValue ? "UNSPECIFIED" : severities.FirstOrDefault(z => z.id == rm._report.severity_id).severity_en
+                      severity_s = !rm._report.severity_id.HasValue ? "UNSPECIFIED" : severities.FirstOrDefault(z => z.id == rm._report.severity_id).severity_en,
+                      severity_id = !rm._report.severity_id.HasValue ? 0 : rm._report.severity_id.Value
 
                   };
 

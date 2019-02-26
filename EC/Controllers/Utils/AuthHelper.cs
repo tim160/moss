@@ -32,14 +32,6 @@ namespace EC.Controllers.utils
             */
         }
 
-        public static user GetCookies(HttpContextBase httpContext)
-        {
-            HttpCookie authCookie = httpContext.Request.Cookies.Get(ECGlobalConstants.AuthUserCookies);
-           if (authCookie == null || string.IsNullOrEmpty(authCookie.Value)) return null;
-           var ticket = FormsAuthentication.Decrypt(authCookie.Value);
-           return UserModel.inst.GetUserByLogin(ticket.Name);
-           // return UserModel.inst.GetUserByLogin("kmilton");
-
-        }
+ 
     }
 }

@@ -57,23 +57,30 @@ namespace EC.Controllers
         {
             Session.Clear();
             GlobalFunctions glb = new GlobalFunctions();
+            logger.Info("Login-SessionClear");
 
             if (DomainUtil.IsSubdomain(Request.Url.AbsoluteUri.ToLower()))
             {
+                logger.Info("Login-Subd");
+
                 if (!String.IsNullOrEmpty(model.Login))
                 {
+                    logger.Info("Login-NotNull");
+
                     var user = userModel.Login(model.Login, model.Password);
+                    logger.Info("Login-id " + user.id.ToString());
+
                     if (user == null)
                     {
                         ModelState.AddModelError("PasswordError", "Password");
                         return View($"{view}{(is_cc ? "-CC" : "")}", model);
                     }
 
-                    AuthHelper.SetCookies(user, HttpContext);
                     Session[ECGlobalConstants.CurrentUserMarcker] = user;
-
-                    Session["userName"] = "";
+                    Session["userName"] = user.login_nm;
                     Session["userId"] = user.id;
+                    logger.Info("Login-id " + user.login_nm);
+
 
                     if (!String.IsNullOrEmpty(model.HostUrl))
                     {
@@ -105,8 +112,13 @@ namespace EC.Controllers
 
                     if (user.role_id == ECLevelConstants.level_escalation_mediator)
                     {
+                        logger.Info("Login-id level_escalation_mediator");
+
                         return RedirectToAction("Index", "Cases", new { mode = "completed" });
                     }
+                    logger.Info("Login- " + user.login_nm);
+
+                    logger.Info("Login- Cases");
 
                     return RedirectToAction("Index", "Cases");
                 }
@@ -225,7 +237,7 @@ namespace EC.Controllers
                 ViewBag.token = token;
                 ViewBag.Error = "Error: token mismatch. Please contact our customer support";
                 return View($"Restore{(is_cc ? "-CC" : "")}");
-                //return RedirectToAction("Index", "Account");
+                //return RedirectToAction("Login", "Service");
             }
         }
 

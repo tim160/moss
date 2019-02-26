@@ -16,10 +16,10 @@ namespace EC.Controllers
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             if (user.role_id != ECLevelConstants.level_trainer)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             ViewBag.user_id = user.id;
 
@@ -30,10 +30,10 @@ namespace EC.Controllers
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             if (user.role_id == ECLevelConstants.level_trainer)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             ViewBag.user_id = user.id;
 

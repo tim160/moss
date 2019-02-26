@@ -92,10 +92,13 @@ namespace EC.Controllers
             {
                 return View("CompanyA");
             }
+            if (id != null && id != "0")
+            {
+                var model = db.var_info.FirstOrDefault(x => x.emailed_code_to_customer == id) ?? new var_info();
 
-            var model = db.var_info.FirstOrDefault(x => x.emailed_code_to_customer == id) ?? new var_info();
-
-            return View(model);
+                return View(model);
+            }
+            return View(new var_info());
         }
 
         public ActionResult Success(string show)
@@ -117,7 +120,7 @@ namespace EC.Controllers
             //int user_id = 2;
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
 
             int user_id = user.id;
@@ -216,7 +219,7 @@ namespace EC.Controllers
             {
                 return LocalizationGetter.GetString("EmailInvalid");
             }
-
+            logger.Info("EmailPassed");
             if (!db.company_invitation.Any(t => ((t.is_active == 1) && (t.invitation_code.Trim().ToLower() == code.Trim().ToLower()))))
                 return LocalizationGetter.GetString("InvalidCode");
 
@@ -226,6 +229,7 @@ namespace EC.Controllers
                 // amount more than 0 -> we have a registration with money involved
                 decimal.TryParse(amount, out _amount);
             }
+            logger.Info("amount " + _amount.ToString());
 
             if (_amount > 0)
             {
@@ -378,6 +382,7 @@ namespace EC.Controllers
                 return LocalizationGetter.GetString("CompanySavingFailed", is_cc);
             }
             #endregion
+            logger.Info("companySaving");
 
             #region Location Saving
             if (company_id != 0)
@@ -531,6 +536,7 @@ namespace EC.Controllers
                 }
             }
             #endregion
+            logger.Info("DepartmentSaving");
 
             #region Incident types
             if (company_id != 0)
@@ -739,9 +745,11 @@ namespace EC.Controllers
                 }
             }
             #endregion
+            logger.Info("RelationshipSaving");
 
             #region Create Folder for Company
             #endregion
+            logger.Info("CreateFolder");
 
             #region Anonymity
             if (company_id != 0)
@@ -773,6 +781,7 @@ namespace EC.Controllers
                 }
             }
             #endregion
+            logger.Info("Anon");
 
             #region Relationship
             if (company_id != 0)
@@ -818,6 +827,7 @@ namespace EC.Controllers
                 }
             }
             #endregion
+            logger.Info("Relation");
 
             #region Root Causes
             var list_root_cases = new List<string>();
@@ -869,6 +879,7 @@ namespace EC.Controllers
                 db.SaveChanges();
             }
             #endregion
+            logger.Info("RootCause");
 
             string login = glb.GenerateLoginName(first, last);
             string pass = glb.GeneretedPassword().Trim();
@@ -916,6 +927,8 @@ namespace EC.Controllers
                     db.SaveChanges();
                     user_id = _user.id;
                     _user.password = pass;
+                    logger.Info("AddedUser");
+
                 }
                 catch (Exception ex)
                 {
@@ -932,7 +945,6 @@ namespace EC.Controllers
             {
                 UserModel userModel = new UserModel();
                 var user = userModel.Login(login, pass);
-                EC.Controllers.utils.AuthHelper.SetCookies(user, HttpContext);
                 Session[ECGlobalConstants.CurrentUserMarcker] = user;
                 Session["userName"] = "";
                 Session["userId"] = user.id;
@@ -1132,7 +1144,6 @@ namespace EC.Controllers
             {
                 UserModel userModel = new UserModel();
                 var user = userModel.Login(login, pass);
-                EC.Controllers.utils.AuthHelper.SetCookies(user, HttpContext);
                 Session[ECGlobalConstants.CurrentUserMarcker] = user;
                 Session["userName"] = "";
                 Session["userId"] = user.id;
@@ -1297,8 +1308,8 @@ namespace EC.Controllers
                 if (reseller_level == 8)
                     amount = 15;
             }
-            else
-                amount = 1000;
+       //     else
+        //        amount = 1000;
 
             if ((code.Length == 5) && (code.Trim().ToLower().Contains("ec43") || code.Trim().ToLower().Contains("cc29")))
             {

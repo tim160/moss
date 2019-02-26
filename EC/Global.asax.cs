@@ -37,8 +37,8 @@ namespace EC
 
         void Application_BeginRequest(object sender, EventArgs e)
         {
-            if (!Context.Request.IsSecureConnection && !Context.Request.IsLocal && !Context.Request.Url.AbsoluteUri.ToLower().Contains("ase.com.ua") && !Context.Request.Url.AbsoluteUri.Contains("192.168."))
-                Response.Redirect(Context.Request.Url.ToString().Replace("http:", "https:"));
+ ///           if (!Context.Request.IsSecureConnection && !Context.Request.IsLocal && !Context.Request.Url.AbsoluteUri.ToLower().Contains("ase.com.ua") && !Context.Request.Url.AbsoluteUri.Contains("192.168."))
+ ///               Response.Redirect(Context.Request.Url.ToString().Replace("http:", "https:"));
         }
 
         protected void Application_PostAuthorizeRequest()
@@ -55,6 +55,11 @@ namespace EC
         protected void Application_Error(object sender, EventArgs e)
         {
             //Server.GetLastError().Message
+        }
+
+        public void Application_PreSendRequestHeaders(Object sender, EventArgs e)
+        {
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
         }
     }
 }

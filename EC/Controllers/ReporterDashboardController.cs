@@ -67,13 +67,13 @@ namespace EC.Controllers
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0 || user.role_id == 4 || user.role_id == 5 || user.role_id == 6 || user.role_id == 7)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             //    ViewBag.user_id = id.Value; // 167-171
             id = user.id;
 
             if ((!id.HasValue) || (id.Value == 0))
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             #region EC-CC Viewbag
             ViewBag.is_cc = is_cc;
@@ -163,7 +163,7 @@ namespace EC.Controllers
 
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0 || user.role_id == 4 || user.role_id == 5 || user.role_id == 6 || user.role_id == 7)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             //  return RedirectToAction("Messages/" + user.id.ToString());
             #region Commented --- Values in Session
@@ -172,14 +172,14 @@ namespace EC.Controllers
 
                   user temp_user = (user)Session[Constants.CurrentUserMarcker];
                   if (temp_user == null || temp_user.id == 0 || temp_user.role_id == 4 || temp_user.role_id == 5 || temp_user.role_id == 6 || temp_user.role_id == 7)
-                      return RedirectToAction("Index", "Account");
+                      return RedirectToAction("Login", "Service");
 
 
                   //    ViewBag.user_id = id.Value; // 167-171
                   int? id = user.id;
 
                   if ((!id.HasValue) || (id.Value == 0))
-                      return RedirectToAction("Index", "Account");
+                      return RedirectToAction("Login", "Service");
 
                   ViewBag.user_id = id.Value; // 167-171
 
@@ -198,8 +198,8 @@ namespace EC.Controllers
         public PartialViewResult AddedMessages()
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
-      //      if (user == null || user.id == 0 || user.role_id == 4 || user.role_id == 5 || user.role_id == 6 || user.role_id == 7)
-     //           return RedirectToAction("Index", "Account");
+            //      if (user == null || user.id == 0 || user.role_id == 4 || user.role_id == 5 || user.role_id == 6 || user.role_id == 7)
+            //           return RedirectToAction("Login", "Service");
             int sender_id = Convert.ToInt16(Request["sender_id"]);
             if (user.id != sender_id)
             {
@@ -275,13 +275,13 @@ namespace EC.Controllers
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0 || user.role_id == 4 || user.role_id == 5 || user.role_id == 6 || user.role_id == 7)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             //    ViewBag.user_id = id.Value; // 167-171
             id = user.id;
 
             if ((!id.HasValue) || (id.Value == 0))
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             #region EC-CC Viewbag
             ViewBag.is_cc = is_cc;
@@ -316,14 +316,14 @@ namespace EC.Controllers
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0 || user.role_id == 4 || user.role_id == 5 || user.role_id == 6 || user.role_id == 7)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
 
             //    ViewBag.user_id = id.Value; // 167-171
             id = user.id;
 
             if ((!id.HasValue) || (id.Value == 0))
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             #region EC-CC Viewbag
             ViewBag.is_cc = is_cc;
@@ -384,7 +384,7 @@ namespace EC.Controllers
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             // DEBUG
             if (user == null || user.id == 0 || user.role_id == 4 || user.role_id == 5 || user.role_id == 6 || user.role_id == 7)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             UserModel um = new UserModel(user.id);
             int report_id = um.GetReportIDForReporter();
@@ -410,7 +410,7 @@ namespace EC.Controllers
             //user = db.user.FirstOrDefault(x => x.id == 167);
             // DEBUG
             if (user == null || user.id == 0 || user.role_id == 4 || user.role_id == 5 || user.role_id == 6 || user.role_id == 7)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             var file = db.attachment.FirstOrDefault(x => x.report_id == report_id & x.id == id & x.user_id == user.id);
             file.status_id = 1;

@@ -22,11 +22,11 @@ namespace EC.Controllers
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Account", new { returnUrl = Request.Url.LocalPath });
+                return RedirectToAction("Login", "Service", new { returnUrl = Request.Url.LocalPath });
 
             ReportModel rm = new ReportModel(report_id);
             if (!rm.HasAccessToReport(user.id))
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
             if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
             {
                 // case is not approved to work on it yet, need to approve first. if == 7 - its spam, so they will share the view.
@@ -64,11 +64,11 @@ namespace EC.Controllers
             //user = user != null ? user : db.user.FirstOrDefault(x => x.id == 2);
             //DEBUG
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             ReportModel rm = new ReportModel(report_id);
             if (!rm.HasAccessToReport(user.id))
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
             {
@@ -100,11 +100,11 @@ namespace EC.Controllers
             //user = user != null ? user : db.user.FirstOrDefault(x => x.id == 2);
             //DEBUG
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             ReportModel rm = new ReportModel(report_id);
             if (!rm.HasAccessToReport(user.id))
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
             {
@@ -138,11 +138,11 @@ namespace EC.Controllers
             //user = user != null ? user : db.user.FirstOrDefault(x => x.id == 2);
             //DEBUG
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             ReportModel rm = new ReportModel(report_id);
             if (!rm.HasAccessToReport(user.id))
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
             {
@@ -166,11 +166,11 @@ namespace EC.Controllers
             //user = user != null ? user : db.user.FirstOrDefault(x => x.id == 2);
             //DEBUG
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             ReportModel rm = new ReportModel(report_id);
             if (!rm.HasAccessToReport(user.id))
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
             {
@@ -213,11 +213,11 @@ namespace EC.Controllers
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             ReportModel rm = new ReportModel(report_id);
             if (!rm.HasAccessToReport(user.id))
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
             {
@@ -242,11 +242,11 @@ namespace EC.Controllers
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             ReportModel rm = new ReportModel(report_id);
             if (!rm.HasAccessToReport(user.id))
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
             {
@@ -271,11 +271,11 @@ namespace EC.Controllers
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             ReportModel rm = new ReportModel(report_id);
             if (!rm.HasAccessToReport(user.id))
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
             {
@@ -299,11 +299,11 @@ namespace EC.Controllers
             //user = user ?? db.user.FirstOrDefault(x => x.id == 2);
             //
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             ReportModel rm = new ReportModel(report_id);
             if (!rm.HasAccessToReport(user.id))
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
 
             glb.UpdateReportRead(user.id, report_id);
@@ -348,7 +348,7 @@ namespace EC.Controllers
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             var att = db.attachment.FirstOrDefault(x => x.id == id && x.report_id == report_id);
             if (att != null)
@@ -372,7 +372,7 @@ namespace EC.Controllers
             //user = user ?? db.user.FirstOrDefault(x => x.id == 167);
             //
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             if ((mode == "upload") || (mode == "upload_rd"))
             {
@@ -431,7 +431,7 @@ namespace EC.Controllers
             //user = user ?? db.user.FirstOrDefault(x => x.id == 167);
             //
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             var file = db.attachment.FirstOrDefault(x => x.report_id == id & x.id == file_id);
             file.visible_mediators_only = type == 1;
@@ -455,7 +455,7 @@ namespace EC.Controllers
             //int user_id = 2;
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
 
             int user_id = user.id;
@@ -464,7 +464,7 @@ namespace EC.Controllers
 
             ReportModel rm = new ReportModel(tsk.TaskReportID);
             if (!rm.HasAccessToReport(user_id))
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             UserModel um = new UserModel(user_id);
             glb.UpdateReportRead(user_id, tsk.TaskReportID);
@@ -553,7 +553,7 @@ namespace EC.Controllers
             }
             if (user == null || user.id == 0)
             {
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
             }
 
             var rm = new ReportModel(id);

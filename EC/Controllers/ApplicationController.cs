@@ -19,10 +19,6 @@ namespace EC.Controllers
             base.OnActionExecuted(filterContext);
             HttpContextBase httpContext = new HttpContextWrapper(HttpContext.ApplicationInstance.Context);
             user user = (user)httpContext.Session[ECGlobalConstants.CurrentUserMarcker];
-            if (user == null)
-            {
-                user = AuthHelper.GetCookies(httpContext);
-            }
         }
     }
 }

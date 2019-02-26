@@ -29,13 +29,13 @@ namespace EC.Controllers
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
 
 
             UserModel um = new UserModel(user.id);
             UsersReportIDsViewModel vmAllIDs = um.GetAllUserReportIdsLists();
-            UsersUnreadReportsNumberViewModel vmUnreadReports = um.GetUserUnreadCasesNumbers(vmAllIDs);
+       /////     UsersUnreadReportsNumberViewModel vmUnreadReports = um.GetUserUnreadCasesNumbers(vmAllIDs);
             /*
             List<int> all_active_report_ids = vmAllIDs.all_active_report_ids;
             List<int> completed_report_ids = vmAllIDs.all_completed_report_ids;
@@ -91,7 +91,7 @@ namespace EC.Controllers
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             #region EC-CC Viewbag
             ViewBag.is_cc = is_cc;
@@ -154,7 +154,7 @@ namespace EC.Controllers
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             #region EC-CC Viewbag
             ViewBag.is_cc = is_cc;
@@ -214,7 +214,7 @@ namespace EC.Controllers
 
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             #region EC-CC Viewbag
             ViewBag.is_cc = is_cc;

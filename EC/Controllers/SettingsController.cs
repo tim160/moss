@@ -30,7 +30,7 @@ namespace EC.Controllers
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             int user_id = user.id;
 
@@ -60,7 +60,7 @@ namespace EC.Controllers
 
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             int user_id = user.id;
 
@@ -98,7 +98,7 @@ namespace EC.Controllers
 
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             int user_id = user.id;
 
@@ -174,7 +174,7 @@ namespace EC.Controllers
         {
             user _user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (_user == null || _user.id == 0)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             //UserModel um = new UserModel(_user.id);
             //ViewBag.um = um;
@@ -193,11 +193,11 @@ namespace EC.Controllers
                 return RedirectToAction("Index", "Settings");
             }
             if (_user == null || _user.id == 0)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             if (_user.role_id == 8)
             {
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
             }
 
             #region EC-CC Viewbag
@@ -220,7 +220,7 @@ namespace EC.Controllers
             ViewBag.page_subtitle = GlobalRes.Settings;
 
             if ((viewd_user._user.role_id < 4) || (viewd_user._user.role_id > 7))
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
 
             ViewBag.um = um;
@@ -232,7 +232,7 @@ namespace EC.Controllers
             if ((_user.role_id > 3) && (_user.role_id < 8))
             {
                 if (viewd_user._user.company_id != _user.company_id)
-                    return RedirectToAction("Index", "Account");
+                    return RedirectToAction("Login", "Service");
             }
 
             if (_user.role_id == 7 || _user.role_id == 6)
@@ -313,7 +313,7 @@ namespace EC.Controllers
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             int user_id = user.id;
 
@@ -396,7 +396,7 @@ namespace EC.Controllers
 
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             int user_id = user.id;
 
@@ -416,7 +416,7 @@ namespace EC.Controllers
         {
             user session_user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (session_user == null || session_user.id == 0)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             if (ModelState.IsValid)
             {
@@ -735,7 +735,7 @@ namespace EC.Controllers
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
 
             int user_id = user.id;
 
@@ -758,7 +758,7 @@ namespace EC.Controllers
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Service");
             int user_id = user.id;
             ViewBag.status = SettingsModel.IsValidPass(oldPass, newPass, confPass, user_id);
             UserModel um = new UserModel(user_id);
@@ -785,7 +785,7 @@ namespace EC.Controllers
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Account", new { returnUrl = Url.Action("Languages", "Settings") });
+                return RedirectToAction("Login", "Service", new { returnUrl = Url.Action("Languages", "Settings") });
 
             UserModel um = new UserModel(user.id);
             ViewBag.um = um;
@@ -856,7 +856,7 @@ namespace EC.Controllers
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
-                return RedirectToAction("Index", "Account", new { returnUrl = Url.Action("Languages", "Settings") });
+                return RedirectToAction("Login", "Service", new { returnUrl = Url.Action("Languages", "Settings") });
 
             UserModel um = new UserModel(user.id);
             ViewBag.um = um;

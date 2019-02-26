@@ -210,7 +210,6 @@ namespace EC.Controllers
 
         private void SignIn(user user)
         {
-            AuthHelper.SetCookies(user, HttpContext);
             Session[ECGlobalConstants.CurrentUserMarcker] = user;
         }
 
