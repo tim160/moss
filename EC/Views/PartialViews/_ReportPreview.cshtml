@@ -73,7 +73,7 @@
             <div class="headerContent">
                 <div class="topContent @_color_descr">
                     <div class="text">
-                        <a href="/Case/Index/@report_id">
+                        <a href="/NewCase/Index/@report_id">
                             @rm.SecondaryTypeString() - @GlobalRes.Report # @rm._report.display_name
                         </a><br />
                         <span>@GlobalRes.Reportedon @rm.ReportedDateStringMonthLong()</span>
@@ -160,7 +160,7 @@
                     <li>
                         @if (_tasks.Count > 0)
                         {
-                            <a class="contanatTable" href="~/Case/Index/@report_id">
+                            <a class="contanatTable" href="~/NewCase/Index/@report_id">
                                 <div class="taskIcon">
                                     <img src='@Url.Content("/Content/Icons/tasks.png")'>
                                 </div>
@@ -256,7 +256,7 @@
                         _message_target = "Legal";
                     }
                     <li>
-                        <a class="contanatTable" href=@Url.Content("~/Case/" + _message_target+ "/" +report_id)>
+                        <a class="contanatTable" href=@Url.Content("~/NewCase/" + _message_target+ "/" +report_id)>
                             <div class="positionSecondBlock">
                                 <div class="taskIcon">
                                     <div id="iconMessages"></div>

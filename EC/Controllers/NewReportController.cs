@@ -163,7 +163,7 @@ namespace EC.Controllers.ViewModel
                     logger.Error(ex.ToString());
                     return View(newStatus);
                 }
-                return RedirectToAction("Case/Index/" + newStatus.report_id.ToString());
+                return RedirectToAction("NewCase/Index/" + newStatus.report_id.ToString());
                 //  return RedirectToAction("Messages/208");
             }
 
