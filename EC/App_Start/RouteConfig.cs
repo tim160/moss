@@ -53,11 +53,11 @@ namespace EC
             );
 
             routes.MapRoute(
-            name: "CaseReporter",
-            url: "Case/Reporter/{id}",
+            name: "NewCaseReporter",
+            url: "NewCase/Reporter/{id}",
             defaults: new
             {
-                controller = "Case",
+                controller = "NewCase",
                 action = "Reporter",
                 id = UrlParameter.Optional
             }
