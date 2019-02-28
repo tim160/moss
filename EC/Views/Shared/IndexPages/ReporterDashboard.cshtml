@@ -81,7 +81,9 @@
                 </div>
 
                 <div class="secondaryMenu">
-                    <img class="secondLogo" style="width: auto; height: 110px;" src='@Url.Content(_logo)' />
+                    <div class="positionImageLogo">
+                        <img class="makeImgCenter" src='@Url.Content(_logo)' />
+                    </div>
                     <div class="statusTitle">
 
                         <div class="title">@GlobalRes.Case @rm._report.display_name</div>
@@ -91,7 +93,6 @@
                         </div>
                     </div>
                     <div class="headerPos">
-
                         @for (int i = 0; i < 5; i++)
                         {
                             if (i < _investigation_status)

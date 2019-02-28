@@ -75,10 +75,19 @@ body{
     font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
     width: 100%;
 }
-.secondLogo{
+.makeImgCenter {
+    max-width: 220px;
+    max-height: 110px;
+}
+
+.positionImageLogo {
+    width: 220px;
+    height: 110px;
     float: left;
-    width: 25%;
-    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 .secondaryMenu ul{
     margin-bottom: 0;
@@ -1191,7 +1200,7 @@ h2.menuItem:nth-child(4).active::after {
     .headerMenu ul li {
         padding: 35px 10px 30px 10px;
     }
-    .secondLogo {
+    .positionImageLogo {
         display: none;
     }
     .secondaryMenu ul {
