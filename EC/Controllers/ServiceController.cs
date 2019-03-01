@@ -92,6 +92,8 @@ namespace EC.Controllers
 
                     if (user.role_id == ECLevelConstants.level_informant)
                     {
+                        logger.Info("login - ReporterDashboard");
+
                         return RedirectToAction("Index", "ReporterDashboard");
                     }
 

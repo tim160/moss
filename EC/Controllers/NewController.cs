@@ -883,6 +883,7 @@ namespace EC.Controllers
 
             string login = glb.GenerateLoginName(first, last);
             string pass = glb.GeneretedPassword().Trim();
+            logger.Info("RootCause1");
 
             #region User Saving
             if (company_id != 0)
@@ -927,7 +928,7 @@ namespace EC.Controllers
                     db.SaveChanges();
                     user_id = _user.id;
                     _user.password = pass;
-                    logger.Info("AddedUser");
+                    logger.Info("AddedUser" + _user?.login_nm);
 
                 }
                 catch (Exception ex)
@@ -976,6 +977,7 @@ namespace EC.Controllers
             else
                 return LocalizationGetter.GetString("UserSavingFailed");
             #endregion
+            logger.Info("RootCause2");
 
 
 
@@ -1010,6 +1012,10 @@ namespace EC.Controllers
                 }
             }*/
             #endregion
+
+            logger.Info("Auth" + auth_code);
+            logger.Info("Amount" + _amount);
+
             Session["Auth"] = auth_code;
             Session["Amount"] = _amount;
             return LocalizationGetter.GetString("_Completed").ToLower();
