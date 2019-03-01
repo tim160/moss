@@ -39,17 +39,17 @@
         <div class="settingMenuItems">
             <h2 class="mainTitle">@GlobalRes.Menu:</h2>
             <div>
-                <a href="/ReporterDashboard/Index/@user_id" class="menuItem" style="padding-right:14px;">@GlobalRes.ReportSummaryUp</a>
+                <a href="/ReporterDashboard/Index/@user_id" class="menuItem" style="margin-right:44px;">@GlobalRes.ReportSummaryUp</a>
                 @if (unread_message_number > 0)
                 {
-                    <a href="/ReporterDashboard/Messages/@user_id" class="menuItem" style="padding-right:15px;">
+                    <a href="/ReporterDashboard/Messages/@user_id" class="menuItem" style="margin-right:45px;">
                         @GlobalRes.Messages
                         <span>@unread_message_number</span>
                     </a>
                 }
                 else
                 {
-                    <a href="/ReporterDashboard/Messages/@user_id" class="menuItem" style="padding-right:50px;">
+                    <a href="/ReporterDashboard/Messages/@user_id" class="menuItem" style="margin-right:80px;">
                         @GlobalRes.Messages
                     </a>
                 }

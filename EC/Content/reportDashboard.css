@@ -881,13 +881,13 @@ body{
     outline: none;
     margin-top: 10px;
 }
-.menuItem{
+/*.menuItem{
     margin-right: 30px;
-}
+}*/
 .menuItem:hover,
 .mainTitle:hover {
     color: #fff;
-    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+    /*font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;*/
 }
 
 .menuItem:hover span{
@@ -918,12 +918,11 @@ body{
 .menuItem.active::after {
     content: '';
     position: absolute;
-    /*left: 0px;*/
     bottom: -13.1px;
     border: 10px solid transparent;
     border-bottom: 10px solid rgb(229, 235, 235);
-    /*margin-left: 40%;*/
-    right: 23px;
+    /*right: 23px;*/
+    left: 50%;
 }
 h2.menuItem:nth-child(4).active::after {
     margin-left: 70%;
@@ -1643,7 +1642,7 @@ h2.menuItem:nth-child(4).active::after {
     }
 
     #attachmentPage .dragAndDropContainer {
-        background-color: #f2f7f7;
+        background-color: #e5ebeb;
         width: 100%;
         height: 250px;
         overflow: auto;
