@@ -28,14 +28,18 @@ namespace EC.Controllers
         public ActionResult Index()
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            logger.Info("Cases - Cases1");
             if (user == null || user.id == 0)
                 return RedirectToAction("Login", "Service");
 
 
+            logger.Info("Cases - Cases2");
 
             UserModel um = new UserModel(user.id);
             UsersReportIDsViewModel vmAllIDs = um.GetAllUserReportIdsLists();
-       /////     UsersUnreadReportsNumberViewModel vmUnreadReports = um.GetUserUnreadCasesNumbers(vmAllIDs);
+            logger.Info("Cases - Cases3");
+
+            /////     UsersUnreadReportsNumberViewModel vmUnreadReports = um.GetUserUnreadCasesNumbers(vmAllIDs);
             /*
             List<int> all_active_report_ids = vmAllIDs.all_active_report_ids;
             List<int> completed_report_ids = vmAllIDs.all_completed_report_ids;
@@ -67,6 +71,7 @@ namespace EC.Controllers
             ViewBag.ReportPreviewVM = temp_all_active_report_ids;
             */
             #endregion
+            logger.Info("Cases - Cases4");
 
             //ViewBag.um = um;
             ViewBag.user_id = user.id;
@@ -76,6 +81,7 @@ namespace EC.Controllers
             //ViewBag.closed_report_counters = vmUnreadReports.unread_closed_reports;
 
             //ViewBag.newCase = Request.Params.AllKeys.FirstOrDefault(x => x == "stylenewcase");
+            logger.Info("Cases - Cases5");
 
             #region EC-CC Viewbag
             ViewBag.is_cc = is_cc;
@@ -83,6 +89,7 @@ namespace EC.Controllers
             if (is_cc) cc_ext = "_cc";
             ViewBag.cc_extension = cc_ext;
             #endregion
+            logger.Info("Cases - Cases6");
 
             return View();
         }
