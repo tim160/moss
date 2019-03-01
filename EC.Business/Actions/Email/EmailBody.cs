@@ -537,7 +537,7 @@ namespace EC.Business.Actions.Email
         {
             GetBody(50);
 
-            m_body = m_body.Replace("[RestorePass]", (DomainUtil.GetSubdomainLink(url, m_url) + "/login/restore" + "?email=" + email + "&token=" + code).Trim());
+            m_body = m_body.Replace("[RestorePass]", (DomainUtil.GetSubdomainLink(url, m_url) + "/Service/restore" + "?email=" + email + "&token=" + code).Trim());
             m_body = m_body.Replace("[RestorePass2]", (DomainUtil.GetSubdomainLink(url, m_url).Replace(".", "<span>.</span>") + "/<span>login</span>/restore" + "?email=" + email.Replace("@", "<span>@</span>").Replace(".", "<span>.</span>") + "&token=" + code).Trim());
             m_body = m_body.Replace("[RestoreCode]", code);
 
@@ -559,7 +559,7 @@ namespace EC.Business.Actions.Email
 
             m_body = m_body.Replace("[AdminName]", adminName);
             m_body = m_body.Replace("[CompanyName]", companyName);
-            m_body = m_body.Replace("[BaseUrl]", DomainUtil.GetSubdomainLink(link, m_url) + "/login/index?loginField=" + username);
+            m_body = m_body.Replace("[BaseUrl]", DomainUtil.GetSubdomainLink(link, m_url) + "/service/index?loginField=" + username);
             m_body = m_body.Replace("[Link]", DomainUtil.GetSubdomainLink(link, m_url) + "/settings/index");
             m_body = m_body.Replace("[Username]", username);
             m_body = m_body.Replace("[Password]", password);

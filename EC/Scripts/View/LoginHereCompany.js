@@ -9,7 +9,7 @@
     function LoginHere(login, password) {
         $.ajax({
             method: "POST",
-            url: "/Login/Login",
+            url: "/Service/Login",
             data: { login: login, password: password }
         }).done(function (data) {//data from server
 
