@@ -182,7 +182,20 @@ body{
     width: 100%;
     /*overflow:hidden;*/
 }
+.positionImageLogo {
+    width: 220px;
+    height: 110px;
+    float: left;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
 
+.makeImgCenter {
+    max-width: 220px;
+    max-height: 110px;
+}
 /*******************************************************************/
 .content .contentBlock{
     padding-top: 25px;
