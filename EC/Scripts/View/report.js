@@ -212,7 +212,12 @@
         partiesInvolvedBtn.hide();
         cmp.OptionSelect(anType);
         var lastDepartmentNum = 1;
-        var departmenBuff = tmplStoredge.find('#departmentInvolvedTmpl').html().trim();
+        var departmenBuff = tmplStoredge.find('#departmentInvolvedTmpl');
+        if (departmenBuff.length > 0) {
+            departmenBuff = departmenBuff.html().trim();
+        }
+
+            
         var departmentInvolvedNum = generalInfo.find('.departmentInvolvedNum');
         function delecteDeertmentSelect(self) {
             if (departmentInvolvedContainer.find('select').length == 1) return;
@@ -628,7 +633,10 @@
         cmp.OptionSelect(isReportUrgent);
         var addPersonContainer = passiveCircle.find('.addPersonContainer');
         var personNum = passiveCircle.find('input.personNum');
-        var addPersonTempl = tmplStoredge.find('#addPersonTmpl').html().trim();
+        var addPersonTempl = tmplStoredge.find('#addPersonTmpl');
+        if (addPersonTempl.length > 0) {
+            addPersonTempl = addPersonTempl.html().trim();
+        }
         var num = 0;
         var personCount = 0;
         var urgentCheckBox = passiveCircle.find('#isUrgent');
@@ -907,12 +915,22 @@
 
         managmantKnown.click();
         toStay.click();
-        staff.click();
+        if (staff != undefined) {
+            staff.click();
+        }
         reportAbout.click();
-        isUrgent.click();
-        isreferredOutside.click();
-        isOngoing.click();
-        isInjury.click();
+        if (isUrgent != undefined) {
+            isUrgent.click();
+        }
+        if (isreferredOutside != undefined) {
+            isreferredOutside.click();
+        }
+        if (isOngoing != undefined) {
+            isOngoing.click();
+        }
+        if (isInjury != undefined) {
+            isInjury.click();
+        }
 
         setDropdown();
         $(".check").add(".sendUpdates").add('.checked').on('click', function () {
@@ -955,10 +973,11 @@
             }
         });
     };
-
-    document.querySelector('#attachments').onchange = function (event) {
-        attachmentsFiles = this.files;
-        $('.attach').append("<table class='attachedFilesTitle' style='color: #3c3e3f;font-size: 14px;'><tr><th><img src=/Content/Icons/generic-file.png></th> <th>" + this.files[0].name + "</th></tr></table>");
+    if (document.querySelector('#attachments') != null) {
+        document.querySelector('#attachments').onchange = function (event) {
+            attachmentsFiles = this.files;
+            $('.attach').append("<table class='attachedFilesTitle' style='color: #3c3e3f;font-size: 14px;'><tr><th><img src=/Content/Icons/generic-file.png></th> <th>" + this.files[0].name + "</th></tr></table>");
+        }
     }
 
     function setDropdown() {
