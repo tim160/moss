@@ -152,6 +152,7 @@
 
     function createCompany() {
         //validationForm();
+        startLoader();
         $.ajax({
             method: "POST",
             url: "/New/CreateCompany",
@@ -192,7 +193,9 @@
     companyNameChange();
     editStyleInput();
     clickCreate();
-
+    function startLoader() {
+        $('#loading').show();
+    }
     
 
     var changeTimer = false;
