@@ -393,6 +393,7 @@
     <Content Include="Content\Icons\first.png" />
     <Content Include="Content\Icons\fourth.png" />
     <Content Include="Content\Icons\generic-file.png" />
+    <Content Include="Content\Icons\giphy.gif" />
     <Content Include="Content\Icons\HappyHogan.png" />
     <Content Include="Content\Icons\help_icon.png" />
     <Content Include="Content\Icons\IconsCasesNewReport\arrow.png" />

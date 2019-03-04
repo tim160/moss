@@ -26,6 +26,10 @@
         class_ext = "_cc";
     }
     //19
+    if (ViewBag.companylogo.Trim().Length == 0)
+    {
+        ViewBag.companylogo = "http://report.employeeconfidential.com/Content/img/logo.png";
+    }
 }
 
 
@@ -65,17 +69,8 @@
         </div>
 
         <div class="secondBlock">
-            <div>
-                @if (@ViewBag.companylogo != null)
-                {
-                    <img class="logo" src=@ViewBag.companylogo />
-                }
-                else
-                {
-                    <div class="positionImageLogo">
-                        <img class="makeImgCenter" src="http://report.employeeconfidential.com/Content/img/logo.png" />
-                    </div>
-                }
+            <div class="positionImageLogo">
+                <img class="makeImgCenter" src='@Url.Content(ViewBag.companylogo)' />
             </div>
             <div class="titlePage">
                 <p>@GlobalRes.GeneralInformation</p>

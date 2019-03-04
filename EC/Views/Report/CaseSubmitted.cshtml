@@ -13,6 +13,11 @@
     List<EC.Models.Database.anonymity> anonimity = ViewBag.anonimity;
 
     var rm = (ReportModel)ViewBag.ReportModel;
+
+    if (ViewBag.companylogo.Trim().Length == 0)
+    {
+        ViewBag.companylogo = "http://report.employeeconfidential.com/Content/img/logo.png";
+    }
 }
 
 
@@ -107,9 +112,11 @@
         </div>
 
         <div class="secondBlock">
-            <div>
-                <img class="logo" src=@ViewBag.companylogo />
+
+            <div class="positionImageLogo">
+                <img class="makeImgCenter" src='@Url.Content(ViewBag.companylogo)' />
             </div>
+
             <div class="titlePage">
                 <p class="newReportCaseNumber">@GlobalRes.Report #@ViewBag.CaseNumber @GlobalRes.wasSubmittedSucessfully</p>
             </div>
