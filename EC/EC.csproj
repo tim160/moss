@@ -393,6 +393,7 @@
     <Content Include="Content\Icons\first.png" />
     <Content Include="Content\Icons\fourth.png" />
     <Content Include="Content\Icons\generic-file.png" />
+    <Content Include="Content\Icons\giphy.gif" />
     <Content Include="Content\Icons\HappyHogan.png" />
     <Content Include="Content\Icons\help_icon.png" />
     <Content Include="Content\Icons\IconsCasesNewReport\arrow.png" />
@@ -1598,9 +1599,6 @@
     <Compile Include="Models\Database\status.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Database\sysdiagrams.cs">
-      <DependentUpon>ECEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Database\task.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
@@ -1660,7 +1658,6 @@
     <Compile Include="Models\ReporterDashboardModel.cs" />
     <Compile Include="Models\ReportModel.cs" />
     <Compile Include="Models\SettingsModel.cs" />
-    <Compile Include="Models\UserIdentifyModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\ECModel\BaseEntity.cs" />
     <Compile Include="Models\ECModel\Company.cs" />
