@@ -16,29 +16,6 @@ namespace EC.Models.ECModel
         
         ActiveCasesViewModel activeCase = new ActiveCasesViewModel();
 
-        public report getReport(string reportName)
-        {
-            /*  SELECT * FROM [EC].[dbo].[report] WHERE id=xxxx*/
-            return (report)(from ca in db.report
-                            where (ca.display_name == reportName)
-                            select ca);
-        }
-
-        public report getReport(int reportId)
-        {
-            /*  SELECT * FROM [EC].[dbo].[report] WHERE id=xxxx*/
-
-            var r = db.report.Where(s => (s.id == reportId));
-
-            if (r.First() == null)
-            {
-                return new report();
-            }
-            else
-            {
-                return r.First();
-            }
-        }
         public void HasTaskFile(TaskExtended task)
         {
             List<attachment> list = new List<attachment>();

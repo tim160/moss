@@ -1599,9 +1599,6 @@
     <Compile Include="Models\Database\status.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Database\sysdiagrams.cs">
-      <DependentUpon>ECEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Database\task.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
@@ -1661,7 +1658,6 @@
     <Compile Include="Models\ReporterDashboardModel.cs" />
     <Compile Include="Models\ReportModel.cs" />
     <Compile Include="Models\SettingsModel.cs" />
-    <Compile Include="Models\UserIdentifyModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\ECModel\BaseEntity.cs" />
     <Compile Include="Models\ECModel\Company.cs" />
