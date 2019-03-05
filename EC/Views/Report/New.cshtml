@@ -31,11 +31,11 @@
     {
         if(is_cc.Value)
         {
-            logo = Url.Content("~/Content/img/logo2.png");
+            logo = "https://report.campusconfidential.com/Content/img/logo2.png";
         }
         else
         {
-            logo = Url.Content("~/Content/img/logo.png");
+            logo = "https://report.employeeconfidential.com/Content/img/logo.png";
         }
     } else
     {
@@ -62,11 +62,11 @@
             <div class="logo">
                 @if (is_cc.Value)
                 {
-                    <img src='@Url.Content("~/Content/img/logo2.png")' />
+                    <img src='https://report.campusconfidential.com/Content/img/logo2.png' />
                 }
                 else
                 {
-                    <img src='@Url.Content("~/Content/img/logo.png")' />
+                    <img src='https://report.employeeconfidential.com/Content/img/logo.png' />
                 }
             </div>
         </div>

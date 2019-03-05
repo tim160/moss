@@ -15,16 +15,16 @@
     var rm = (ReportModel)ViewBag.ReportModel;
     string logo = (string)ViewBag.companylogo;
     bool is_cc = EC.Common.Util.DomainUtil.IsCC(this.Request.Url.AbsoluteUri.ToLower());
-    string mainLogo = Url.Content("~/Content/img/logo.png");
+    string mainLogo = "https://report.employeeconfidential.com/Content/img/logo.png";
     if (is_cc)
     {
-        mainLogo = Url.Content("~/Content/img/logo2.png");
+        mainLogo = "https://report.campusconfidential.com/Content/img/logo2.png";
     }
     if (logo == null || logo.Trim().Length == 0)
     {
         if (is_cc)
         {
-            logo = Url.Content("~/Content/img/logo2.png");
+            logo = "https://report.employeeconfidential.com/Content/img/logo.png";
         }
         else
         {
