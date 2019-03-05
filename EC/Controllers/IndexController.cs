@@ -10,8 +10,6 @@ using EC.Models.Database;
 using EC.Models.ECModel;
 using EC.Utils.Auth;
 using EC.Models;
-using EC.Controllers.Utils;
-using EC.Controllers.utils;
 using log4net;
 using EC.Constants;
 using EC.Common.Util;
@@ -187,7 +185,6 @@ namespace EC.Controllers
             ViewBag.listCompanies = list;
             //JSON goes v View
             var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
-            EcAuthorizedAttribute attr = new EcAuthorizedAttribute();
 
             ViewBag.newListComp = serializer.Serialize(searchCompanyDto.ToArray());
             ViewBag.CurrentURL = CurrentURL;

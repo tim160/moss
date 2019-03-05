@@ -8,7 +8,6 @@ using System.Web.Mvc;
 using EC.Controllers.Utils;
 using EC.Utils.Auth;
 using EC.Models.Database;
-using EC.Controllers.utils;
 using EC.Models;
 using EC.Common.Interfaces;
 using EC.Core.Common;

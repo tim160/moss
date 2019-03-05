@@ -403,6 +403,7 @@
     <Content Include="html\500.html" />
     <Content Include="html\503.html" />
     <Content Include="html\reset.css" />
+    <Content Include="LicenseAgreement.html" />
     <Content Include="PrivacyStatement.html" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -740,7 +741,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>55847</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

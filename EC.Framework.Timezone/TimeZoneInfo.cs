@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Xml;
 using Microsoft.Win32;
-using EC.Framework.Logger;
+
 
 namespace EC.Framework.TimeZone
 {
@@ -15,7 +15,6 @@ namespace EC.Framework.TimeZone
     public class TimeZoneInfo : IComparer
     {
         #region Member(s) and Property(s)
-        private static readonly ICustomLog Log = CustomLogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private static TimeZoneInfo[] m_TimeZoneInfosAll = null;
         private static TimeZoneInfo[] m_TimeZoneInfosActive = null;
         private static Dictionary<int, TimeZoneInfo> m_IndexDictionary = new Dictionary<int, TimeZoneInfo>();
