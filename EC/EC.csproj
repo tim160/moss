@@ -1574,9 +1574,6 @@
     <Compile Include="Models\Database\status.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Database\sysdiagrams.cs">
-      <DependentUpon>ECEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Database\task.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
