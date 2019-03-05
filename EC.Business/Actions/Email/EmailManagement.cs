@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Globalization;
 using System.Text.RegularExpressions;
-using EC.Framework.Logger;
-using EC.Framework;
 using EC.Common.Util;
 using System.Net;
 using System.Net.Mail;
