@@ -294,7 +294,6 @@
     <Content Include="Content\assets\template\img\close.png" />
     <Content Include="Content\assets\template\img\report.png" />
     <Content Include="Content\assets\template\js\select.js" />
-    <Content Include="Content\bootstrap.css" />
     <Content Include="Content\caiNew.css" />
     <Content Include="Content\css\all.css" />
     <Content Include="Content\css\all.min.css" />
@@ -319,7 +318,6 @@
     <Content Include="Content\emails\ForgetPasswordNew.html" />
     <Content Include="Content\emails\MediatorInvitedUserCreated.html" />
     <Content Include="Content\emails\SeniorMediatorCaseConfirm.html" />
-    <Content Include="Content\fonts\bootstrap.min.css" />
     <Content Include="Content\caiOLD.css" />
     <Content Include="Content\caseTasks.css" />
     <Content Include="Content\daterangepicker.css" />
@@ -718,7 +716,6 @@
     <Content Include="Content\styleReportDashboard.css" />
     <Content Include="Content\styleTasks.css" />
     <Content Include="Content\the-modal.css" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="gulpfile.js" />
     <Content Include="html\404.css" />
     <Content Include="html\404.html" />
@@ -754,11 +751,7 @@
       <LastGenOutput>ECEntities.cs</LastGenOutput>
     </Content>
     <Content Include="packages.config" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="App_Code\Helpers.cshtml" />
-    <Content Include="fonts\OpenSansSemibold.ttf" />
     <Content Include="Content\fonts\lato-heavy.ttf" />
     <Content Include="Content\fonts\Lato-Regular.ttf" />
     <Content Include="Content\fonts\Lato-Bold.ttf" />
@@ -1062,8 +1055,6 @@
     <Content Include="Scripts\dis.js" />
     <Content Include="Scripts\jquery.daterangepicker.min.js" />
     <Content Include="Scripts\jquery.the-modal.js" />
-    <Content Include="Scripts\lib\bootstrap.js" />
-    <Content Include="Scripts\lib\bootstrap.min.js" />
     <Content Include="Scripts\lib\Chart.min.js" />
     <Content Include="Scripts\lib\jquery-1.10.2.js" />
     <Content Include="Scripts\lib\jquery-1.10.2.min.js" />
@@ -1581,6 +1572,9 @@
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\status.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\sysdiagrams.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\task.cs">
