@@ -29,7 +29,14 @@
     string logo = (string)ViewBag.companylogo;
     if (logo == null  || logo.Trim().Length == 0)
     {
-        logo = "http://report.employeeconfidential.com/Content/img/logo.png";
+        if(is_cc.Value)
+        {
+            logo = Url.Content("~/Content/img/logo2.png");
+        }
+        else
+        {
+            logo = "http://report.employeeconfidential.com/Content/img/logo.png";
+        }
     } else
     {
         logo = logo.Trim();

@@ -14,10 +14,22 @@
 
     var rm = (ReportModel)ViewBag.ReportModel;
     string logo = (string)ViewBag.companylogo;
-
+    bool is_cc = EC.Common.Util.DomainUtil.IsCC(this.Request.Url.AbsoluteUri.ToLower());
+    string mainLogo = Url.Content("~/Content/img/logo.png");
+    if(is_cc)
+    {
+        mainLogo = Url.Content("~/Content/img/logo2.png");
+    }
     if (logo == null || logo.Trim().Length == 0)
     {
-        logo = "http://report.employeeconfidential.com/Content/img/logo.png";
+        if (is_cc)
+        {
+            logo = Url.Content("~/Content/img/logo2.png");
+        }
+        else
+        {
+            logo = "http://report.employeeconfidential.com/Content/img/logo.png";
+        }
     }
     else
     {
@@ -99,7 +111,7 @@
     <div class="headerBlock">
         <div class="firstBlock">
             <div class="logo">
-                <img src='@Url.Content("~/Content/img/logo.png")' />
+                <img src='@mainLogo' />
                 <div class="newReportNumber">@GlobalRes.Newreport: #@ViewBag.CaseNumber</div>
             </div>
         </div>
