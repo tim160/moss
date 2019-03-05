@@ -16,7 +16,7 @@
     string logo = (string)ViewBag.companylogo;
     bool is_cc = EC.Common.Util.DomainUtil.IsCC(this.Request.Url.AbsoluteUri.ToLower());
     string mainLogo = Url.Content("~/Content/img/logo.png");
-    if(is_cc)
+    if (is_cc)
     {
         mainLogo = Url.Content("~/Content/img/logo2.png");
     }
@@ -28,7 +28,7 @@
         }
         else
         {
-            logo = "http://report.employeeconfidential.com/Content/img/logo.png";
+            logo = mainLogo;
         }
     }
     else
