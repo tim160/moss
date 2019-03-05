@@ -1130,13 +1130,7 @@
     <Content Include="Views\Report\Details.cshtml" />
     <Content Include="Views\Report\Tasks.cshtml" />
     <Content Include="Views\Cases\Index.cshtml" />
-    <Content Include="Views\Shared\_MainHTML.cshtml" />
     <Content Include="Views\NewReport\Index.cshtml" />
-    <Content Include="Views\Shared\IndexPages\CompanyFinder.cshtml" />
-    <Content Include="Views\Shared\IndexPages\Error.cshtml" />
-    <Content Include="Views\Shared\IndexPages\FrontShared.cshtml" />
-    <Content Include="Views\Shared\IndexPages\_Layout.cshtml" />
-    <Content Include="Views\Shared\IndexPages\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\IndexPages\LayoutCasesNewReport.cshtml" />
     <Content Include="Views\ReporterDashboard\Index.cshtml" />
     <Content Include="Views\Shared\IndexPages\ReporterDashboard.cshtml" />
@@ -1144,25 +1138,20 @@
     <Content Include="Views\PartialViews\_ReportPendingNotification.cshtml" />
     <Content Include="Views\Cases\Completed.cshtml" />
     <Content Include="Views\Cases\Spam.cshtml" />
-    <Content Include="Views\Shared\HeaderFooterFrontPages.cshtml" />
-    <Content Include="Views\Shared\IndexPages\NoAccess.cshtml" />
     <Content Include="Views\ReporterDashboard\Messages.cshtml" />
     <Content Include="Views\ReporterDashboard\Activity.cshtml" />
     <Content Include="Views\ReporterDashboard\Settings.cshtml" />
-    <Content Include="Views\PartialViews\_ReportDetailsLeft.cshtml" />
     <Content Include="Views\Settings\Index.cshtml" />
     <Content Include="Views\Settings\Cases.cshtml" />
     <Content Include="Views\Settings\Company.cshtml" />
     <Content Include="Views\Settings\Mediators.cshtml" />
     <Content Include="Views\Tasks\Index.cshtml" />
     <Content Include="Views\Tasks\Completed.cshtml" />
-    <Content Include="Views\PartialViews\_ReportTopMenu.cshtml" />
     <Content Include="Views\Messages\Index.cshtml" />
     <Content Include="Views\Analytics\Tasks.cshtml" />
     <Content Include="Views\Analytics\Mediators.cshtml" />
     <Content Include="Views\New\Company.cshtml" />
     <Content Include="Views\New\Index.cshtml" />
-    <Content Include="Views\PartialViews\_ReportTopMessagesMenu.cshtml" />
     <Content Include="Views\New\Success.cshtml" />
     <Content Include="Views\Settings\User.cshtml" />
     <Content Include="Views\Shared\Helpers\_UserPreviewFace.cshtml" />
@@ -1173,7 +1162,6 @@
     <Content Include="Views\EmployeeAwareness\Index.cshtml" />
     <Content Include="Views\EmployeeAwareness\Poster.cshtml" />
     <Content Include="Views\Shared\Helpers\_CasePreview.cshtml" />
-    <Content Include="Views\Shared\Helpers\_CaseStatus.cshtml" />
     <Content Include="Views\Shared\Helpers\_SingleMessage.cshtml" />
     <Content Include="Views\Cases\Closed.cshtml" />
     <Content Include="Views\Settings\WorkFlow.cshtml" />
@@ -1181,7 +1169,6 @@
     <Content Include="Views\Errors\Index.cshtml" />
     <Content Include="Views\Errors\NotFound.cshtml" />
     <Content Include="Views\Errors\Unavailable.cshtml" />
-    <Content Include="Views\Shared\HeaderFooterFrontPagesBgColor.cshtml" />
     <Content Include="Views\Payment\History.cshtml" />
     <Content Include="Views\Payment\PrintReceipt.cshtml" />
     <Content Include="Views\Payment\Receipt.cshtml" />
@@ -1315,7 +1302,6 @@
     </Compile>
     <Compile Include="Models\App\Case\CaseMessagesModel.cs" />
     <Compile Include="Models\BaseModel.cs" />
-    <Compile Include="Models\ActiveCasesModel.cs" />
     <Compile Include="Models\CountryModel.cs" />
     <Compile Include="Models\Database\action.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>

@@ -186,12 +186,11 @@ namespace EC.Controllers
 
             List<TaskExtended> list_tsk = new List<TaskExtended>();
             int task_id = 0;
-            ActiveCasesModel temp = new ActiveCasesModel();
             foreach (task _task in tasks)
             {
                 task_id = _task.id;
                 TaskExtended tsk = new TaskExtended(_task.id, user_id);
-                temp.HasTaskFile(tsk);
+                tsk.HasTaskFile();
                 list_tsk.Add(tsk);
             }
             ViewBag.tasks = list_tsk;

@@ -323,5 +323,20 @@ namespace EC.Models.ECModel
             return task_comments;
         }
 
+
+        public void HasTaskFile()
+        {
+            List<attachment> list = new List<attachment>();
+            if (TaskID > 0)
+            {
+                list = db.attachment.Where(item => (item.report_task_id == TaskID)).ToList();
+            }
+            if (list.Count > 0)
+            {
+                file = true;
+            }
+            fileAttach = list;
+        }
+
     }
 }
