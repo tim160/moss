@@ -37,24 +37,34 @@
     }
 
 }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
 
 @section pageScripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <script type="text/javascript" src="~/Scripts/Common/helper.js"></script>
     <script type="text/javascript">
 
 
     $(document).ready(function () {
         summaryPage();
-        $("#reportDashboard").on("click", function () {
-            var r = confirm("WARNING.You are about to leave the reporting page. If you have not saved your Login and Password information, then please select Cancel so you record them. If you have saved your Login and Password, you can leave the reporting page."); 
-            if (r == true) {
-                window.location.href = "/ReporterDashboard";
-            } else {
-                txt = "You pressed Cancel!";
-            }
-
+        $("#ok").on('click', function () {
+            window.location.href = "/ReporterDashboard";
         });
+        //$("#reportDashboard").on("click", function () {
+        //    document.getElementById('linkModal').click();
+        //    $("#ok").on('click', function () {
+        //        window.location.href = "/ReporterDashboard";
+        //    });
+
+        //    //var r = confirm("WARNING.You are about to leave the reporting page. If you have not saved your Login and Password information, then please select Cancel so you record them. If you have saved your Login and Password, you can leave the reporting page.");
+        //    //if (r == true) {
+        //    //    window.location.href = "/ReporterDashboard";
+        //    //} else {
+        //    //    txt = "You pressed Cancel!";
+        //    //}
+
+        //});
         function summaryPage() {
             function setHoverBlock(item) {
                 $(this).parent().find('img, input').addClass('hover');
@@ -108,6 +118,20 @@
 }
 
 <body>
+    <div id="alertModal" class="modal case-modal">
+        <a href="#" class="closeLink modal-close" rel="modal:close"></a>
+        @*<div class="case-modal__title"><p style="text-align: center">Your Company Registration failed.</p></div>*@
+        <p style="text-align: center">
+            WARNING.You are about to leave the reporting page. If you have not saved your Login and Password information, then please select Cancel so you record them. If you have saved your Login and Password, you can leave the reporting page
+        </p>
+
+        <div class="case-modal__linkBlockBottom clearfix">
+            <a style="float: left" href="#" id="Cancel" rel="modal:close" class="case-modal__linkBtn whiteBtn">Cancel</a>
+        </div><!-- /.case-modal__linkBlockBottom -->
+        <div class="case-modal__linkBlockBottom clearfix">
+            <a href="#" id="ok" rel="modal:close" class="case-modal__linkBtn whiteBtn">Ok</a>
+        </div><!-- /.case-modal__linkBlockBottom -->
+    </div>
     <div class="headerBlock">
         <div class="firstBlock">
             <div class="logo">
@@ -192,7 +216,8 @@
 
                     <div class="reportAction">
                         <img class="summaryImages" id="dashboardImage" src="~/Content/img/printSelected.png">
-                        <input type="button" id="reportDashboard" class="button summaryButtons" value="@GlobalRes.GoToReportDashboard">
+                        @*<input type="button" id="reportDashboard" class="button summaryButtons" value="@GlobalRes.GoToReportDashboard">*@
+                        <a id="linkModal" href="#alertModal" rel="modal:open" class="button summaryButtons" style="width: 226px;align-items: flex-start;text-align: center;">@GlobalRes.GoToReportDashboard</a>
                     </div>
                 </div>
             </div>
