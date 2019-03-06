@@ -9,6 +9,7 @@ using EC.Models.ViewModels;
 using EC.Models;
 using EC.Models.ECModel;
 using Rotativa.MVC;
+using EC.Localization;
 
 namespace EC.Controllers
 {
@@ -597,6 +598,186 @@ namespace EC.Controllers
             }
 
             return 0;
+        }
+ 
+        public int CloseCase()
+        {
+            //   return 2;
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            if (user == null || user.id == 0)
+                return -1;
+
+            int mediator_id = Convert.ToInt16(Request["user_id"]);
+            int report_id = Convert.ToInt16(Request["report_id"]);
+            int promotion_value = Convert.ToInt16(Request["promotion_value"]);
+            string description = Request["description"].ToString().Trim();
+
+            int reason_id = 0;
+            if (Request["case_closure_reason_id"] != "")
+            {
+                reason_id = Convert.ToInt16(Request["case_closure_reason_id"]);
+            }
+
+            int sign_off_mediator_id = 0;
+            if (Request["sign_off_mediator_id"] != null)
+                sign_off_mediator_id = Convert.ToInt32(Request["sign_off_mediator_id"]);
+
+            if (mediator_id != user.id)
+                return -1;
+
+            UserModel um = new UserModel(user.id);
+            ReportModel rm = new ReportModel(report_id);
+            bool has_access = rm.HasAccessToReport(user.id);
+
+            int old_status = rm._investigation_status;
+
+            if ((!has_access) || (user.role_id == 8))
+            {
+                return -1;
+            }
+
+
+            bool _new = um.ResolveCase(report_id, mediator_id, description, promotion_value, reason_id, sign_off_mediator_id);
+
+            if (!db.report_mediator_assigned.Any(x => x.report_id == report_id && x.mediator_id == sign_off_mediator_id))
+            {
+                db.report_mediator_assigned.Add(new report_mediator_assigned
+                {
+                    report_id = report_id,
+                    mediator_id = sign_off_mediator_id,
+                    assigned_dt = DateTime.Now,
+                    status_id = 2,
+                    last_update_dt = DateTime.Now,
+                    user_id = user.id,
+                });
+                db.SaveChanges();
+            }
+
+            if (sign_off_mediator_id != 0)
+            {
+                report_signoff_mediator report_signoff_mediator = null;
+                foreach (var item in db.report_signoff_mediator.Where(x => x.report_id == report_id))
+                {
+                    item.status_id = 1;
+                    if (item.user_id == sign_off_mediator_id)
+                    {
+                        report_signoff_mediator = item;
+                    }
+                }
+                if (report_signoff_mediator == null)
+                {
+                    report_signoff_mediator = new report_signoff_mediator
+                    {
+                        createdby_user_id = user.id,
+                        created_on = DateTime.Now,
+                        report_id = report_id,
+                        user_id = sign_off_mediator_id,
+                    };
+                    db.report_signoff_mediator.Add(report_signoff_mediator);
+                }
+                report_signoff_mediator.status_id = 2;
+                db.SaveChanges();
+            }
+
+            if (_new)
+            {
+                #region Email Ready
+                List<string> to = new List<string>();
+                List<string> cc = new List<string>();
+                List<string> bcc = new List<string>();
+
+                EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
+                EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+                string body = "";
+                #endregion
+
+                #region Email To Mediators About Case Update
+                foreach (user _user in rm.MediatorsWhoHasAccessToReport())
+                {
+                    if ((_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_user.email.Trim()))
+                    {
+                        to = new List<string>();
+                        cc = new List<string>();
+                        bcc = new List<string>();
+
+                        to.Add(_user.email.Trim());
+                        UserModel um_temp = new UserModel(_user.id);
+                        if ((promotion_value == ECGlobalConstants.investigation_status_resolution || promotion_value == ECGlobalConstants.investigation_status_completed) && um_temp._user.id == sign_off_mediator_id)
+                        {
+                            eb.CaseCloseApprove(rm._report.display_name);
+                            body = eb.Body;
+                            em.Send(to, cc, LocalizationGetter.GetString("Email_Title_NextStep", is_cc), body, true);
+                        }
+                        else if ((promotion_value == ECGlobalConstants.investigation_status_resolution || promotion_value == ECGlobalConstants.investigation_status_completed) && um_temp._user.role_id == 4)
+                        {
+                            eb.CaseCloseApprovePlatformManager(rm._report.display_name);
+                            body = eb.Body;
+                            em.Send(to, cc, LocalizationGetter.GetString("Email_Title_NextStep", is_cc), body, true);
+                        }
+                    }
+                }
+                #endregion
+            }
+            switch (promotion_value)
+            {
+
+                case 3:
+                    if (old_status == 9)
+                        glb.UpdateReportLog(user.id, 29, report_id, "", null, description);
+
+                    if (old_status == 6)
+                    {
+                        //////   glb.UpdateReportLog(user.id, 27, report_id, App_LocalResources.GlobalRes._Completed, null, description);
+                    }
+                    else if (old_status == 3)
+                    {
+                        /////   glb.UpdateReportLog(user.id, 22, report_id, App_LocalResources.GlobalRes._Completed, null, description);
+                    }
+                    else
+                        glb.UpdateReportLog(user.id, 21, report_id, App_LocalResources.GlobalRes._Started, null, description);
+                    /* if (rm._investigation_status == 9)
+                         glb.UpdateReportLog(user.id, 29, report_id, "", null, description);
+
+                     if (rm._investigation_status == 6)
+                         glb.UpdateReportLog(user.id, 27, report_id, App_LocalResources.GlobalRes._Completed, null, description);
+                     else if (rm._investigation_status == 3)
+                         glb.UpdateReportLog(user.id, 22, report_id, App_LocalResources.GlobalRes._Completed, null, description);
+                     else
+                         glb.UpdateReportLog(user.id, 21, report_id, App_LocalResources.GlobalRes._Started, null, description);
+                         */
+                    break;
+                case 4:
+
+                    //////           glb.UpdateReportLog(user.id, 21, report_id, App_LocalResources.GlobalRes._Completed, null, description);
+                    glb.UpdateReportLog(user.id, 22, report_id, App_LocalResources.GlobalRes._Started, null, "");
+                    break;
+                case 6:
+                    ///////             glb.UpdateReportLog(user.id, 21, report_id, App_LocalResources.GlobalRes._Completed, null, description);
+                    glb.UpdateReportLog(user.id, 27, report_id, App_LocalResources.GlobalRes._Started, null, "");
+                    break;
+
+                case 9:
+
+                    if (old_status == 6)
+                        glb.UpdateReportLog(user.id, 27, report_id, App_LocalResources.GlobalRes._Completed, null, description);
+
+
+                    ////               if (rm._investigation_status == 6)
+                    ////                    glb.UpdateReportLog(user.id, 27, report_id, App_LocalResources.GlobalRes._Completed, null, description);
+                    /////                 else if (rm._investigation_status == 4)
+                    /////                       glb.UpdateReportLog(user.id, 22, report_id, App_LocalResources.GlobalRes._Completed, null, description);
+
+                    glb.UpdateReportLog(user.id, 25, report_id, "", null, description);
+                    break;
+
+
+            }
+
+
+
+
+
+            return 1;
         }
     }
 }

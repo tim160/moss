@@ -1136,36 +1136,7 @@ namespace EC.Models
                 return false;
             }
         }
-
-        public bool ResolveCase(int report_id, int mediator_id)
-        {
-            try
-            {
-                report_investigation_status report_investigation_status = new report_investigation_status()
-                {
-                    report_id = report_id,
-                    investigation_status_id = 6,
-                    created_date = DateTime.Now,
-                    user_id = mediator_id,
-                    description = ""
-                };
-
-                db.report_investigation_status.Add(report_investigation_status);
-
-                report report = db.report.Where(item => (item.id == report_id)).FirstOrDefault();
-                report.status_id = 1;
-                report.last_update_dt = DateTime.Now;
-
-                db.SaveChanges();
-                return true;
-            }
-            catch (System.Data.DataException ex)
-            {
-                logger.Error(ex.ToString());
-                Console.WriteLine("Case wasn't resolved. Ex:" + ex.Data);
-                return false;
-            }
-        }
+ 
 
         public bool ResolveCase(int report_id, int mediator_id, string description, int new_status, int? reason_id,int sign_off_mediator_id)
         {
@@ -1202,9 +1173,9 @@ namespace EC.Models
                 db.report_investigation_status.Add(report_investigation_status);
 
                 report _report = db.report.Where(item => (item.id == report_id)).FirstOrDefault();
-                _report.status_id = 1;
+                _report.status_id = new_status;
                 _report.last_update_dt = DateTime.Now;
-
+                _report.user_id = mediator_id;
                 _report.cc_crime_statistics_category_id = null;
 
                 db.SaveChanges();
