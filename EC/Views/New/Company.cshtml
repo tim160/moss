@@ -23,6 +23,10 @@
         }
     </style>
 }
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
+<a id="linkModal" href="#alertModal" rel="modal:open" style="display:none">modal</a>
 <div class="blockSettings contentCompanyProfile">
     <div class="titleNewUser">
         <h1 class="helloUser">@LocalizationGetter.GetString("NewCompanyRegistration", is_cc):</h1>
@@ -162,4 +166,19 @@
 <script src="~/Scripts/View/newCompany.js"></script>
 <div id="loading" style="display: none">
     <img id="loading-image" src='@Url.Content("~/Content/Icons/giphy.gif")' alt="Loading..." />
+</div>
+
+<div id="alertModal" class="modal case-modal">
+    <a href="#" class="closeLink modal-close" rel="modal:close"></a>
+    <div class="case-modal__title"><p style="text-align: center">Your Company Registration failed.</p></div>
+    <p style="text-align: center">
+        This is due to a connection error or session expiration.
+    </p>
+    
+    <div class="case-modal__linkBlockBottom clearfix">
+        <a style="float: left" href="#" id="Retry" rel="modal:close" class="case-modal__linkBtn whiteBtn">Retry</a>
+    </div><!-- /.case-modal__linkBlockBottom -->
+    <div class="case-modal__linkBlockBottom clearfix">
+        <a href="#" id="Re-submit" rel="modal:close" class="case-modal__linkBtn whiteBtn">Re-submit your Company Registration</a>
+    </div><!-- /.case-modal__linkBlockBottom -->
 </div>

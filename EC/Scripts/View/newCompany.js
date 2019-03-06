@@ -178,13 +178,16 @@
             }
         }).done(function (data) {//data from server
             if (data != 'completed') {
-                //alert(data);
+                $('#loading').hide();
+                document.getElementById('linkModal').click();
+                console.log(data);
             }
             else {
                 //    location.reload();
                 window.location.href = "/new/success?show=1";
             }
-        }).fail(function (error) {
+            }).fail(function (error) {
+                $('#loading').hide();
             console.log(error);
         });
     }
@@ -196,8 +199,14 @@
     function startLoader() {
         $('#loading').show();
     }
+    //modal function
+    $("#Retry").click(function () {
+        location.reload();
+    });
+    $("#Re-submit").click(function () {
+        $('.updateProfileBtn input').click();
+    });
     
-
     var changeTimer = false;
 
     $("#amount").on('change', function (event) {

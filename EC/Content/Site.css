@@ -1617,6 +1617,80 @@ table {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+/*modal window*/
+
+#alertModal {
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+}
+
+.modal.case-modal {
+    background-color: #05b5a2;
+    border-radius: 0;
+    padding: 20px;
+    color: #fff;
+    max-width: 750px;
+}
+
+.closeLink:after {
+    content: "\00D7";
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 30px;
+    line-height: 20px;
+    color: #fff;
+}
+
+.closeLink.modal-close {
+    top: 24px;
+}
+
+.closeLink {
+    display: inline-block;
+    vertical-align: middle;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    height: 20px;
+    width: 20px;
+    text-decoration: none;
+}
+
+.modal a.close-modal {
+    display: none !important;
+}
+
+.whiteBtn {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
+    font-size: 14px;
+    text-transform: uppercase;
+    border-radius: 2px;
+    padding: 6px 12px;
+    background-color: transparent;
+    border: 1px solid transparent;
+}
+
+.case-modal__linkBlockBottom {
+    display: block;
+    width: 100%;
+    margin-top: 50px;
+    margin-bottom: 10px;
+}
+
+.case-modal__linkBtn {
+    float: right;
+}
+
+.case-modal__title {
+    color: #fff;
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+
 /*table*/
 .modal {
     position: fixed;

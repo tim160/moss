@@ -231,13 +231,13 @@ namespace EC.Controllers
             }
             logger.Info("amount " + _amount.ToString());
 
-            if (_amount > 0)
-            {
+            //if (_amount > 0)
+            //{
                 /*if ((string.IsNullOrEmpty(cardnumber)) || (string.IsNullOrEmpty(cardname)) || (string.IsNullOrEmpty(csv)) || (string.IsNullOrEmpty(selectedMonth)) || (string.IsNullOrEmpty(selectedYear)))
                 {
                     return LocalizationGetter.GetString("EmptyData");
                 }*/
-            }
+            //}
             #region Credit Card
             string auth_code = "";
             string payment_auth_code = "";
@@ -376,7 +376,7 @@ namespace EC.Controllers
                     try
                     {
                         db.company.Add(_company);
-                        //db.SaveChanges();
+                        db.SaveChanges();
                         company_id = _company.id;
                     }
                     catch (Exception ex)
@@ -405,7 +405,7 @@ namespace EC.Controllers
                         try
                         {
                             db.company_location.Add(_location);
-                            //db.SaveChanges();
+                            db.SaveChanges();
                             location_id = _location.id;
                         }
                         catch (Exception ex)
@@ -479,16 +479,17 @@ namespace EC.Controllers
                             }
                         }
                         /*saving List Departments*/
-                        try
-                        {
-                            db.company_department.AddRange(departmentsNewCompany);
-                            //db.SaveChanges();
-                        }
-                        catch (Exception ex)
-                        {
-                            logger.Error(ex.ToString());
-                            return LocalizationGetter.GetString("DepartmentSavingFailed");
-                        }
+                        db.company_department.AddRange(departmentsNewCompany);
+                        //try
+                        //{
+                            
+                        //    //db.SaveChanges();
+                        //}
+                        //catch (Exception ex)
+                        //{
+                        //    logger.Error(ex.ToString());
+                        //    return LocalizationGetter.GetString("DepartmentSavingFailed");
+                        //}
 
                         /*check other deparment*/
                         if (departments != null && departments != "")
@@ -517,17 +518,17 @@ namespace EC.Controllers
                                 other_department.last_update_dt = DateTime.Now;
                                 other_department.status_id = 2;
 
-                                try
-                                {
-                                    db.company_department.Add(other_department);
-                                    //db.SaveChanges();
-                                    selectedDepartment = other_department;
-                                }
-                                catch (Exception ex)
-                                {
-                                    logger.Error(ex.ToString());
-                                    return LocalizationGetter.GetString("OtherDepartmentSavingFailed");
-                                }
+                                //try
+                                //{
+                                db.company_department.Add(other_department);
+                                //db.SaveChanges();
+                                selectedDepartment = other_department;
+                                //    }
+                                //    catch (Exception ex)
+                                //    {
+                                //        logger.Error(ex.ToString());
+                                //        return LocalizationGetter.GetString("OtherDepartmentSavingFailed");
+                                //    }
                             }
                         }
                         else
@@ -695,17 +696,17 @@ namespace EC.Controllers
                                 _incident_type.weight = 200;
                                 _incident_type.parent_secondary_type = 0;
 
-                                try
-                                {
+                                //try
+                                //{
                                     db.company_secondary_type.Add(_incident_type);
                                     //db.SaveChanges();
-                                }
-                                catch (Exception ex)
-                                {
-                                    ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-                                    logger.Error(ex.ToString());
-                                    return LocalizationGetter.GetString("IncidentTypeSavingFailed");
-                                }
+                                //}
+                                //catch (Exception ex)
+                                //{
+                                //    ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+                                //    logger.Error(ex.ToString());
+                                //    return LocalizationGetter.GetString("IncidentTypeSavingFailed");
+                                //}
                             }
                         }
                     }
@@ -734,25 +735,21 @@ namespace EC.Controllers
                                 ///??     _company_relationship.last_update_dt = DateTime.Now;
                                 _company_relationship.status_id = 2;
 
-                                try
-                                {
-                                    db.company_relationship.Add(_company_relationship);
+                                //try
+                                //{
+                                db.company_relationship.Add(_company_relationship);
                                     //db.SaveChanges();
-                                }
-                                catch (Exception ex)
-                                {
-                                    logger.Error(ex.ToString());
-                                    return LocalizationGetter.GetString("RelationshipsSavingFailed");
-                                }
+                                //}
+                                //catch (Exception ex)
+                                //{
+                                //    logger.Error(ex.ToString());
+                                //    return LocalizationGetter.GetString("RelationshipsSavingFailed");
+                                //}
                             }
                         }
                     }
                     #endregion
                     logger.Info("RelationshipSaving");
-
-                    #region Create Folder for Company
-                    #endregion
-                    logger.Info("CreateFolder");
 
                     #region Anonymity
                     if (company_id != 0)
@@ -770,16 +767,16 @@ namespace EC.Controllers
                                 _anonymity.anonymity_id = _anon;
                                 _anonymity.user_id = 1;
 
-                                try
-                                {
-                                    db.company_anonymity.Add(_anonymity);
-                                    //db.SaveChanges();
-                                }
-                                catch (Exception ex)
-                                {
-                                    logger.Error(ex.ToString());
-                                    return LocalizationGetter.GetString("AnonymitySavingFailed");
-                                }
+                                //try
+                                //{
+                                db.company_anonymity.Add(_anonymity);
+                                //    //db.SaveChanges();
+                                //}
+                                //catch (Exception ex)
+                                //{
+                                //    logger.Error(ex.ToString());
+                                //    return LocalizationGetter.GetString("AnonymitySavingFailed");
+                                //}
                             }
                         }
                     }
@@ -816,16 +813,16 @@ namespace EC.Controllers
                                 _company_outcome.last_update_dt = DateTime.Now;
                                 _company_outcome.status_id = 2;
                                 _company_outcome.user_id = 1;
-                                try
-                                {
-                                    db.company_outcome.Add(_company_outcome);
-                                    //db.SaveChanges();
-                                }
-                                catch (Exception ex)
-                                {
-                                    logger.Error(ex.ToString());
-                                    return LocalizationGetter.GetString("RelationshipsSavingFailed");
-                                }
+                                //try
+                                //{
+                                db.company_outcome.Add(_company_outcome);
+                                //    //db.SaveChanges();
+                                //}
+                                //catch (Exception ex)
+                                //{
+                                //    logger.Error(ex.ToString());
+                                //    return LocalizationGetter.GetString("RelationshipsSavingFailed");
+                                //}
                             }
                         }
                     }
@@ -928,15 +925,16 @@ namespace EC.Controllers
                         try
                         {
                             db.user.Add(_user);
-                            //db.SaveChanges();
+                            db.SaveChanges();
                             user_id = _user.id;
                             _user.password = pass;
                             logger.Info("AddedUser" + _user?.login_nm);
-
+                            transaction.Commit();
                         }
                         catch (Exception ex)
                         {
                             logger.Error(ex.ToString());
+                            transaction.Rollback();
                             return LocalizationGetter.GetString("UserSavingFailed");
                         }
                     }
@@ -1021,21 +1019,16 @@ namespace EC.Controllers
 
                     Session["Auth"] = auth_code;
                     Session["Amount"] = _amount;
-                    db.SaveChanges();
-                    transaction.Commit();
+                    //db.SaveChanges();
                     return LocalizationGetter.GetString("_Completed").ToLower();
 
                 }
                 catch (Exception ex)
                 {
                     transaction.Rollback();
+                    return LocalizationGetter.GetString("UserSavingFailed");
                 }
             }
-
-
-            return null;
-            //  return user_id.ToString();
-
         }
 
         public string CreateUser(string code, string first, string last, string email, string title, int currentDepartmens, int currentLocations)
