@@ -965,7 +965,6 @@ namespace EC.Models
             }
             List<int> _active_classes = new List<int>();
             _active_classes.Add(ECGlobalConstants.investigation_status_investigation);
-            _active_classes.Add(ECGlobalConstants.investigation_status_resolution);
             _active_classes.Add(ECGlobalConstants.investigation_status_completed);
             _active_classes.Add(ECGlobalConstants.investigation_status_closed);
 
