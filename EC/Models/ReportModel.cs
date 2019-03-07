@@ -971,7 +971,6 @@ namespace EC.Models
             }
             List<int> _active_classes = new List<int>();
             _active_classes.Add(ECGlobalConstants.investigation_status_investigation);
-            _active_classes.Add(ECGlobalConstants.investigation_status_resolution);
             _active_classes.Add(ECGlobalConstants.investigation_status_completed);
             _active_classes.Add(ECGlobalConstants.investigation_status_closed);
 
@@ -1543,6 +1542,12 @@ namespace EC.Models
             using (ECEntities adv = new ECEntities())
             {
                 adv.report_investigation_status.Add(item);
+
+                var report = adv.report.FirstOrDefault(x => x.id == item.report_id);
+                report.status_id = item.investigation_status_id;
+                report.last_update_dt = DateTime.Now;
+                report.user_id = item.user_id;
+
                 adv.SaveChanges();
             }
             return item;

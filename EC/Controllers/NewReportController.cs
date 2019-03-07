@@ -105,12 +105,18 @@ namespace EC.Controllers.ViewModel
                         // need to update investigation status from pending to review after first mediator accessed the report
                         report_investigation_status _review_status = new report_investigation_status();
                     _review_status.created_date = DateTime.Now;
-                    _review_status.investigation_status_id = 2;
+                    _review_status.investigation_status_id = ECGlobalConstants.investigation_status_review;
                     _review_status.report_id = report_id;
                     _review_status.user_id = user_id;
                     _review_status.description = "";
 
                     db.report_investigation_status.Add(_review_status);
+
+                    var report = db.report.FirstOrDefault(x => x.id == report_id);
+                    report.status_id = ECGlobalConstants.investigation_status_review;
+                    report.last_update_dt = DateTime.Now;
+                    report.user_id = user_id;
+
                     db.SaveChanges();
 
  ///////                   glb.UpdateReportLog(user_id, 28, report_id, App_LocalResources.GlobalRes._Completed, null, "");
@@ -152,6 +158,12 @@ namespace EC.Controllers.ViewModel
             if (ModelState.IsValid)
             {
                 db.report_investigation_status.Add(newStatus);
+
+                var report = db.report.FirstOrDefault(x => x.id == newStatus.report_id);
+                report.status_id = newStatus.investigation_status_id;
+                report.last_update_dt = DateTime.Now;
+                report.user_id = newStatus.user_id;
+
                 try
                 {
                     //     db.SaveChanges();
@@ -181,13 +193,20 @@ namespace EC.Controllers.ViewModel
                 new report_investigation_status()
                 {
                     report_id = report_id,
-                    investigation_status_id = 7,
+                    investigation_status_id = ECGlobalConstants.investigation_status_spam,
                     created_date = DateTime.Now,
                     user_id = user_id,
                     description = spam_Message
                 };
 
             db.report_investigation_status.Add(addStatus);
+
+            var report = db.report.FirstOrDefault(x => x.id == report_id);
+            report.status_id = ECGlobalConstants.investigation_status_spam;
+            report.last_update_dt = DateTime.Now;
+            report.user_id = user_id;
+
+
             db.SaveChanges();
 
             glb.UpdateReportLog(user_id, 18, report_id, spam_Message, null, "");
@@ -224,13 +243,18 @@ namespace EC.Controllers.ViewModel
                 new report_investigation_status()
                 {
                     report_id = report_id,
-                    investigation_status_id = 3,
+                    investigation_status_id = ECGlobalConstants.investigation_status_investigation,
                     created_date = DateTime.Now,
                     user_id = user_id,
                     description = description
                 };
 
                 adv.report_investigation_status.Add(addStatus);
+
+                var report = adv.report.FirstOrDefault(x => x.id == report_id);
+                report.status_id = ECGlobalConstants.investigation_status_investigation;
+                report.last_update_dt = DateTime.Now;
+                report.user_id = user_id;
 
                 //Remove owner
                 foreach (var rem_owner in db.report_owner.Where(x => x.report_id == report_id).ToList())

@@ -54,13 +54,15 @@ namespace EC.Controllers
 
         private ActionResult DoLogin(LoginViewModel model, string returnUrl, string view)
         {
+            logger.Info("DoLogin");
             Session.Clear();
+            logger.Info("Clear");
             GlobalFunctions glb = new GlobalFunctions();
-            logger.Info("Login-SessionClear");
+
 
             if (DomainUtil.IsSubdomain(Request.Url.AbsoluteUri.ToLower()))
             {
-                logger.Info("Login-Subd");
+                
 
                 if (!String.IsNullOrEmpty(model.Login))
                 {
@@ -78,7 +80,9 @@ namespace EC.Controllers
                     Session[ECGlobalConstants.CurrentUserMarcker] = user;
                     Session["userName"] = user.login_nm;
                     Session["userId"] = user.id;
-                    logger.Info("Login-id " + user.login_nm);
+
+                    logger.Info("sessid " + HttpContext.Session.SessionID);
+                    logger.Info("Session[userName] " + Session["userName"]);
 
 
                     if (!String.IsNullOrEmpty(model.HostUrl))
