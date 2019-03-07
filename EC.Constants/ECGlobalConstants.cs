@@ -46,7 +46,6 @@ namespace EC.Constants
         public const int investigation_status_review = 2;
         public const int investigation_status_investigation = 3;
         public const int investigation_status_resolution = 4;
-        public const int investigation_status_escalation = 5;
         public const int investigation_status_completed = 6;
         public const int investigation_status_spam = 7;
         public const int investigation_status_completed_not_resolved_to_remove = 8;
