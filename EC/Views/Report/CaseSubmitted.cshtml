@@ -5,7 +5,6 @@
 @using EC.Models.ECModel
 @using EC.Localization
 
-@model EC.Controllers.ViewModel.ReportSubmit
 @{
     ViewBag.Title = "Report";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -51,20 +50,7 @@
         $("#ok").on('click', function () {
             window.location.href = "/ReporterDashboard";
         });
-        //$("#reportDashboard").on("click", function () {
-        //    document.getElementById('linkModal').click();
-        //    $("#ok").on('click', function () {
-        //        window.location.href = "/ReporterDashboard";
-        //    });
 
-        //    //var r = confirm("WARNING.You are about to leave the reporting page. If you have not saved your Login and Password information, then please select Cancel so you record them. If you have saved your Login and Password, you can leave the reporting page.");
-        //    //if (r == true) {
-        //    //    window.location.href = "/ReporterDashboard";
-        //    //} else {
-        //    //    txt = "You pressed Cancel!";
-        //    //}
-
-        //});
         function summaryPage() {
             function setHoverBlock(item) {
                 $(this).parent().find('img, input').addClass('hover');
@@ -117,166 +103,206 @@
     <script type="text/javascript" src="~/Scripts/lib/jquery-ui.min.js"></script>
 }
 
-<body>
-    <div id="alertModal" class="modal case-modal">
-        <a href="#" class="closeLink modal-close" rel="modal:close"></a>
-        @*<div class="case-modal__title"><p style="text-align: center">Your Company Registration failed.</p></div>*@
-        <p style="text-align: center">
-            WARNING.You are about to leave the reporting page. If you have not saved your Login and Password information, then please select Cancel so you record them. If you have saved your Login and Password, you can leave the reporting page
-        </p>
+    <body>
 
-        <div class="case-modal__linkBlockBottom clearfix">
-            <a style="float: left" href="#" id="Cancel" rel="modal:close" class="case-modal__linkBtn whiteBtn">Cancel</a>
-        </div><!-- /.case-modal__linkBlockBottom -->
-        <div class="case-modal__linkBlockBottom clearfix">
-            <a href="#" id="ok" rel="modal:close" class="case-modal__linkBtn whiteBtn">Ok</a>
-        </div><!-- /.case-modal__linkBlockBottom -->
-    </div>
-    <div class="headerBlock">
-        <div class="firstBlock">
-            <div class="logo">
-                <img src='@mainLogo' />
-                <div class="newReportNumber">@GlobalRes.Newreport: #@ViewBag.CaseNumber</div>
+
+
+
+        <div id="alertModal" class="modal case-modal">
+            <a href="#" class="closeLink modal-close" rel="modal:close"></a>
+            @*<div class="case-modal__title"><p style="text-align: center">Your Company Registration failed.</p></div>*@
+            <p style="text-align: center">
+                WARNING.You are about to leave the reporting page. If you have not saved your Login and Password information, then please select Cancel so you record them. If you have saved your Login and Password, you can leave the reporting page
+            </p>
+
+            <div class="case-modal__linkBlockBottom clearfix">
+                <a style="float: left" href="#" id="Cancel" rel="modal:close" class="case-modal__linkBtn whiteBtn">Cancel</a>
+            </div><!-- /.case-modal__linkBlockBottom -->
+            <div class="case-modal__linkBlockBottom clearfix">
+                <a href="#" id="ok" rel="modal:close" class="case-modal__linkBtn whiteBtn">Ok</a>
+            </div><!-- /.case-modal__linkBlockBottom -->
+        </div>
+        <div class="headerBlock">
+            <div class="firstBlock">
+                <div class="logo">
+                    <img src='@mainLogo' />
+                    <div class="newReportNumber">@GlobalRes.Newreport: #@ViewBag.CaseNumber</div>
+                </div>
+            </div>
+
+            <div class="steps" style="height: 65px; background-color: rgb(51,59,64); border-bottom: 5px solid rgb(5, 181, 162);">
+                <div class="selectedStep" data-val="1">1</div>
+                <div class="selectedStep" data-val="2">2</div>
+                <div class="selectedStep" data-val="3">3</div>
+                <div class="selectedStep" data-val="4">4</div>
+                <div class="selectedStep clicked" data-val="5" style="border-color: rgb(5, 181, 162); color: rgb(5, 181, 162);">5</div>
+            </div>
+
+            <div class="secondBlock">
+
+                <div class="positionImageLogo">
+                    <img class="makeImgCenter" src='@logo' />
+                </div>
+
+                <div class="titlePage">
+                    <p class="newReportCaseNumber">@GlobalRes.Report #@ViewBag.CaseNumber @GlobalRes.wasSubmittedSucessfully</p>
+                </div>
             </div>
         </div>
 
-        <div class="steps" style="height: 65px; background-color: rgb(51,59,64); border-bottom: 5px solid rgb(5, 181, 162);">
-            <div class="selectedStep" data-val="1">1</div>
-            <div class="selectedStep" data-val="2">2</div>
-            <div class="selectedStep" data-val="3">3</div>
-            <div class="selectedStep" data-val="4">4</div>
-            <div class="selectedStep clicked" data-val="5" style="border-color: rgb(5, 181, 162); color: rgb(5, 181, 162);">5</div>
-        </div>
-
-        <div class="secondBlock">
-
-            <div class="positionImageLogo">
-                <img class="makeImgCenter" src='@logo' />
+        <div class="rowContent">
+            <div class="leftBlock">
+                <p class="titleMenu">@GlobalRes.NewIncidentReport</p>
+                <ul class="verticalMenu">
+                    <li data-id="1" class="stepDone"><span>@GlobalRes.GeneralInformation</span></li>
+                    <li data-id="2" class="stepDone"><span>@GlobalRes.PartiesInvolved</span></li>
+                    <li data-id="3" class="stepDone"><span>@GlobalRes.CaseInformation</span></li>
+                    <li data-id="4" class="stepDone"><span>@GlobalRes.CaseSummary</span></li>
+                </ul>
             </div>
 
-            <div class="titlePage">
-                <p class="newReportCaseNumber">@GlobalRes.Report #@ViewBag.CaseNumber @GlobalRes.wasSubmittedSucessfully</p>
+            <div class="rightBlock sumResp" id="summareResponce">
+
+                <div class="sumResp">
+                    <div class="summaryReportInfo">@GlobalRes.canAccess</div>
+                    <div class="summaryReportInfo"><span style="font-weight: bold;"> @GlobalRes.lastOpportunity.</span></div>
+                    <div class="summaryReportInfo">@GlobalRes.detailsCase</div>
+                    <p></p>
+                    @if (ViewBag.Email != null && ViewBag.Email.Length != 0)
+                    {
+                        <div class="summaryReportInfo" style="margin-bottom:40px;">@GlobalRes.CaseUpdates: <u class="reporterEmail">@ViewBag.Email</u></div>
+                    }
+                    <p></p>
+
+                    <div class="content">
+                        <div class="contentBlock reportNumberBlock contentBorder">
+                            <p class="title">@GlobalRes.Reportnumber</p>
+                            <div class="reportNumber">@ViewBag.CaseNumber</div>
+                        </div>
+
+                        <div class="contentBlock contentBorder">
+                            <p class="title">@GlobalRes.Login</p>
+                            <div class="reportNumber">@ViewBag.Login</div>
+                        </div>
+
+                        <div class="contentBlock contentBorder">
+                            <p class="title">@GlobalRes.Password (Type in field to update)</p>
+                            <textarea class="accessInfo pass">@ViewBag.Password</textarea>
+                        </div>
+                    </div>
+
+                    <div class="buttonBlock">
+                        <input type="button" class="button saveChanges" style="display: none;" value="@LocalizationGetter.GetString("SaveNewPasswordUp")">
+                    </div>
+                </div>
+
+
+                <div style="clear: both; margin-top: 150px;">
+                    <div class="printPanel">
+                        <div class="reportAction">
+                            <img class="summaryImages" id="printImage" src="~/Content/img/print.png">
+                            @if (rm.ID != 0)
+                            {
+                                <a href="@Url.Action("PrintToPdf", "Report", new { id = rm._report.guid })" target="_blank" class="button summaryButtons" style="width: 226px;align-items: flex-start;text-align: center;">@GlobalRes.PrintReport</a>
+                            }
+                        </div>
+                        <div class="reportAction">
+                            <img class="summaryImages" id="dashboardImage" src="~/Content/img/printSelected.png">
+                            @*<input type="button" id="reportDashboard" class="button summaryButtons" value="@GlobalRes.GoToReportDashboard">*@
+                            <a id="linkModal" href="#alertModal" rel="modal:open" class="button summaryButtons" style="width: 226px;align-items: flex-start;text-align: center;">@GlobalRes.GoToReportDashboard</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="rowContent">
-        <div class="leftBlock">
-            <p class="titleMenu">@GlobalRes.NewIncidentReport</p>
-            <ul class="verticalMenu">
-                <li data-id="1" class="stepDone"><span>@GlobalRes.GeneralInformation</span></li>
-                <li data-id="2" class="stepDone"><span>@GlobalRes.PartiesInvolved</span></li>
-                <li data-id="3" class="stepDone"><span>@GlobalRes.CaseInformation</span></li>
-                <li data-id="4" class="stepDone"><span>@GlobalRes.CaseSummary</span></li>
-            </ul>
+
+        <div id="caseSubmitted">
+            <!--5 window ends-->
         </div>
 
-        <div class="rightBlock sumResp" id="summareResponce">
+        <div class="modal fade in">
+            <div class="modal-dialog">
+                <div class="modal-content ">
 
-            <div class="sumResp">
-                <div class="summaryReportInfo">@GlobalRes.canAccess</div>
-                <div class="summaryReportInfo"><span style="font-weight: bold;"> @GlobalRes.lastOpportunity.</span></div>
-                <div class="summaryReportInfo">@GlobalRes.detailsCase</div>
-                <p></p>
-                @if (ViewBag.Email != null && ViewBag.Email.Length != 0)
-                {
-                    <div class="summaryReportInfo" style="margin-bottom:40px;">@GlobalRes.CaseUpdates: <u class="reporterEmail">@ViewBag.Email</u></div>
+                    <div class="modal-body">
+                        <div class="content printable" id="modal-dialog">
+                            @if (rm.ID != 0)
+                            {
+                                <a href="@Url.Action("PrintToPdf", "Report", new { id = rm._report.guid })" target="_blank" class="button summaryButtons" style="width: 226px;align-items: flex-start;text-align: center;">@GlobalRes.PrintReport</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $("#printReport").on('click', function () {
+                //$("#modal-dialog").toggle();
+                printElement(document.getElementById("modal-dialog"));
+                $(".fullContainer").hide();
+                $(".footer").hide();
+                window.print();
+                $(".fullContainer").show();
+                $(".footer").show();
+            });
+            $(".close").on('click', function () {
+                $("#modal-dialog").toggle();
+            });
+            function printElement(elem, append, delimiter) {
+                var domClone = elem.cloneNode(true);
+
+                var $printSection = document.getElementById("printSection");
+
+                if (!$printSection) {
+                    $printSection = document.createElement("div");
+                    $printSection.id = "printSection";
+                    document.body.appendChild($printSection);
                 }
-                <p></p>
-
-                <div class="content">
-                    <div class="contentBlock reportNumberBlock contentBorder">
-                        <p class="title">@GlobalRes.Reportnumber</p>
-                        <div class="reportNumber">@ViewBag.CaseNumber</div>
-                    </div>
-
-                    <div class="contentBlock contentBorder">
-                        <p class="title">@GlobalRes.Login</p>
-                        <div class="reportNumber">@ViewBag.Login</div>
-                    </div>
-
-                    <div class="contentBlock contentBorder">
-                        <p class="title">@GlobalRes.Password (Type in field to update)</p>
-                        <textarea class="accessInfo pass">@ViewBag.Password</textarea>
-                    </div>
-                </div>
-
-                <div class="buttonBlock">
-                    <input type="button" class="button saveChanges" style="display: none;" value="@LocalizationGetter.GetString("SaveNewPasswordUp")">
-                </div>
-            </div>
-
-
-            <div style="clear: both; margin-top: 150px;">
-                <div class="printPanel">
-                    <div class="reportAction">
-                        <img class="summaryImages" id="printImage" src="~/Content/img/print.png">
-                        <a href="@Url.Action("PrintToPdf", "Report", new { id = rm._report.guid })" target="_blank" class="button summaryButtons" style="width: 226px;align-items: flex-start;text-align: center;">@GlobalRes.PrintReport</a>
-                    </div>
-
-                    <div class="reportAction">
-                        <img class="summaryImages" id="dashboardImage" src="~/Content/img/printSelected.png">
-                        @*<input type="button" id="reportDashboard" class="button summaryButtons" value="@GlobalRes.GoToReportDashboard">*@
-                        <a id="linkModal" href="#alertModal" rel="modal:open" class="button summaryButtons" style="width: 226px;align-items: flex-start;text-align: center;">@GlobalRes.GoToReportDashboard</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div id="caseSubmitted">
-        <!--5 window ends-->
-    </div>
-
-    <div class="modal fade in">
-        <div class="modal-dialog">
-            <div class="modal-content ">
-
-                <div class="modal-body">
-                    <div class="content printable" id="modal-dialog">
-                        @Html.Partial("~/Views/Shared/Partial/ReporterDashboardPartial.cshtml", (ViewBag.ReportModel as ReportModel))
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script>
-        $("#printReport").on('click', function () {
-            //$("#modal-dialog").toggle();
-            printElement(document.getElementById("modal-dialog"));
-            $(".fullContainer").hide();
-            $(".footer").hide();
-            window.print();
-            $(".fullContainer").show();
-            $(".footer").show();
-        });
-        $(".close").on('click', function () {
-            $("#modal-dialog").toggle();
-        });
-        function printElement(elem, append, delimiter) {
-            var domClone = elem.cloneNode(true);
-
-            var $printSection = document.getElementById("printSection");
-
-            if (!$printSection) {
-                $printSection = document.createElement("div");
-                $printSection.id = "printSection";
-                document.body.appendChild($printSection);
-            }
-            if (append !== true) {
-                $printSection.innerHTML = "";
-            }
-            else if (append === true) {
-                if (typeof (delimiter) === "string") {
-                    $printSection.innerHTML += delimiter;
+                if (append !== true) {
+                    $printSection.innerHTML = "";
                 }
-                else if (typeof (delimiter) === "object") {
-                    $printSection.appendChlid(delimiter);
+                else if (append === true) {
+                    if (typeof (delimiter) === "string") {
+                        $printSection.innerHTML += delimiter;
+                    }
+                    else if (typeof (delimiter) === "object") {
+                        $printSection.appendChlid(delimiter);
+                    }
                 }
+                $printSection.appendChild(domClone);
             }
-            $printSection.appendChild(domClone);
+        </script>
+
+        @if (rm.ID == 0)
+        {
+            <a id="linkRegistrationReport" href="#registrationReport" rel="modal:open" class="button summaryButtons" style="display: none">@GlobalRes.GoToReportDashboard</a>
+
+            <div id="registrationReport" class="modal case-modal">
+                <a href="#" class="closeLink modal-close" rel="modal:close"></a>
+                <div class="case-modal__title"><p style="text-align: center">The Report Submission failed.</p></div>
+                <p style="text-align: center">
+                    This is due to a connection error or session expiration.
+                </p>
+
+                <div class="case-modal__linkBlockBottom clearfix">
+                    <a style="float: left" href="#" id="retry" rel="modal:close" class="case-modal__linkBtn whiteBtn">Retry</a>
+                </div><!-- /.case-modal__linkBlockBottom -->
+                <div class="case-modal__linkBlockBottom clearfix">
+                    <a href="#" id="newReport" rel="modal:close" class="case-modal__linkBtn whiteBtn">File a New Report</a>
+                </div><!-- /.case-modal__linkBlockBottom -->
+            </div>
+            <script>
+                $("#retry").on('click', function () {
+                    location.reload();
+                });
+                $("#newReport").on('click', function () {
+                    window.location.href = "/Service/Disclaimer?companyCode=" + "@ViewBag.company_code";
+                });
+                $(document).ready(function () {
+                    window.onload = document.getElementById('linkRegistrationReport').click();
+                });
+            </script>
         }
-    </script>
-</body>
+    </body>
 

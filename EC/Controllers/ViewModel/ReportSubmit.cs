@@ -43,7 +43,7 @@ namespace EC.Controllers.ViewModel
 
         public List<string> namesFile { get; set; }
         public string attachFiles { get; set; }
-
+        public ReportModelResult result { get; set; }
         public void merge(ReportViewModel rvm, CompanyModel companyModel, ReportModel reportModel, ReportViewModel model)
         {
             this.confidentialLevelInt = model.incident_anonymity_id;

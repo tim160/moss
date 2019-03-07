@@ -197,62 +197,76 @@ namespace EC.Controllers
             model.Process(Request.Form, Request.Files);
             string password;
             var currentReport = reportModel.AddReport(model, out password);
-            ViewBag.CaseNumber = currentReport.display_name;//Request.Form["caseNumber"];model.caseNumber
-            if (currentReport.user_id > 0)
-            {
-                var user = companyModel.GetUser(currentReport.user_id);
-                ViewBag.UserId = user.id;
-                /*model.userName = */
-                ViewBag.Login = user.login_nm;
-                /*model.password = */
-                ViewBag.Password = password;
-                /*model.userEmail = */
-                ViewBag.Email = user.email;
-                SignIn(user);
-                GlobalFunctions glb = new GlobalFunctions();
-                glb.UpdateReportLog(user.id, 2, currentReport.id, "", null, "");
-                glb.UpdateReportLog(user.id, 28, currentReport.id, App_LocalResources.GlobalRes._Started, null, "");
-            }
-            ReportViewModel rvm = new ReportViewModel();
-            rvm.Merge(currentReport);
-            ViewBag.companylogo = companyModel._company.path_en;
             ReportSubmit submit = new ReportSubmit();
-            submit.merge(rvm, companyModel, reportModel, model);
-            ViewBag.ReportModel = new ReportModel(currentReport.id);
-
-
-            #region SendEmail To Admins
-            ReportModel rm = new ReportModel(currentReport.id);
-
-            Business.Actions.Email.EmailManagement em = new Business.Actions.Email.EmailManagement(is_cc);
-            Business.Actions.Email.EmailBody eb = new Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
-            bool has_involved = false;
-            List<string> to = new List<string>();
-            List<string> cc = new List<string>();
-            if (rm.InvolvedMediatorsUserList().Count > 0)
-                has_involved = true;
-
-            string body = "";
-            string title = LocalizationGetter.GetString("Email_Title_NewCase", is_cc);
-            if (has_involved)
-                title = LocalizationGetter.GetString("Email_Title_NewCaseInvolved", is_cc);
-            foreach (var _user in rm.MediatorsWhoHasAccessToReport().Where(t => t.role_id != ECLevelConstants.level_escalation_mediator).ToList())
+            submit.result = new ReportModelResult();
+            submit.result.StatusCode = currentReport.StatusCode;
+            submit.result.ErrorMessage = currentReport.ErrorMessage;
+            ViewBag.companylogo = companyModel._company.path_en;
+            if (currentReport.StatusCode == 200)
             {
-                eb = new Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
-                to = new List<string>();
-                to.Add(_user.email.Trim());
-                if (has_involved)
-                    eb.NewCaseInvolved(_user.first_nm, _user.last_nm, rm._report.display_name);
-                else
-                    eb.NewCase(_user.first_nm, _user.last_nm, rm._report.display_name);
+                ViewBag.CaseNumber = currentReport.report.display_name;//Request.Form["caseNumber"];model.caseNumber
+                if (currentReport.report.user_id > 0)
+                {
+                    var user = companyModel.GetUser(currentReport.report.user_id);
+                    ViewBag.UserId = user.id;
+                    /*model.userName = */
+                    ViewBag.Login = user.login_nm;
+                    /*model.password = */
+                    ViewBag.Password = password;
+                    /*model.userEmail = */
+                    ViewBag.Email = user.email;
+                    SignIn(user);
+                    GlobalFunctions glb = new GlobalFunctions();
+                    glb.UpdateReportLog(user.id, 2, currentReport.report.id, "", null, "");
+                    glb.UpdateReportLog(user.id, 28, currentReport.report.id, App_LocalResources.GlobalRes._Started, null, "");
+                }
+                //ReportViewModel rvm = new ReportViewModel();
+                //rvm.Merge(currentReport.report);
+                //submit.merge(rvm, companyModel, reportModel, model);
+                ViewBag.ReportModel = new ReportModel(currentReport.report.id);
 
-                body = eb.Body;
-                em.Send(to, cc, title, body, true);
+
+                #region SendEmail To Admins
+                ReportModel rm = new ReportModel(currentReport.report.id);
+
+                Business.Actions.Email.EmailManagement em = new Business.Actions.Email.EmailManagement(is_cc);
+                Business.Actions.Email.EmailBody eb = new Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+                bool has_involved = false;
+                List<string> to = new List<string>();
+                List<string> cc = new List<string>();
+                if (rm.InvolvedMediatorsUserList().Count > 0)
+                    has_involved = true;
+
+                string body = "";
+                string title = LocalizationGetter.GetString("Email_Title_NewCase", is_cc);
+                if (has_involved)
+                    title = LocalizationGetter.GetString("Email_Title_NewCaseInvolved", is_cc);
+                foreach (var _user in rm.MediatorsWhoHasAccessToReport().Where(t => t.role_id != ECLevelConstants.level_escalation_mediator).ToList())
+                {
+                    eb = new Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+                    to = new List<string>();
+                    to.Add(_user.email.Trim());
+                    if (has_involved)
+                        eb.NewCaseInvolved(_user.first_nm, _user.last_nm, rm._report.display_name);
+                    else
+                        eb.NewCase(_user.first_nm, _user.last_nm, rm._report.display_name);
+
+                    body = eb.Body;
+                    em.Send(to, cc, title, body, true);
+                }
+                #endregion
+            } else
+            {
+                ViewBag.UserId = 0;
+                ViewBag.Login = "";
+                ViewBag.Password = "";
+                ViewBag.Email = "";
+                ViewBag.ReportModel = new ReportModel();
+                ViewBag.CaseNumber = 0;
+                ViewBag.company_code = companyModel._company.company_code;
             }
 
-            #endregion
-
-            return View("CaseSubmitted", submit);
+            return View("CaseSubmitted");
         }
 
         // case details
