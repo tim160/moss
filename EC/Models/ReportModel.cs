@@ -1304,7 +1304,7 @@ namespace EC.Models
                         currentReport.guid = Guid.NewGuid();
                         //db.user.AddOrUpdate(newUser);
                         currentReport = adv.report.Add(currentReport);
-                        //t = adv.SaveChanges();
+                        adv.SaveChanges();
                         //  t = db.SaveChanges();
                         currentReport.display_name = GenerateCaseNumber(currentReport.id, currentReport.company_id, currentReport.company_nm);
                         currentReport.report_color_id = GetNextColor(currentReport.company_id, currentReport.id);
@@ -1490,7 +1490,7 @@ namespace EC.Models
                             AddReportNonMediatorInvolved(item, currentReport);
                         }
 
-                        int t2 = db.SaveChanges();
+                        db.SaveChanges();
                         #region Create Folder for Report
 
                         Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/Upload/reports/" + _guid));
