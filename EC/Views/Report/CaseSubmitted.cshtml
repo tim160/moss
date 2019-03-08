@@ -49,6 +49,7 @@
         summaryPage();
         $("#ok").on('click', function () {
             window.location.href = "/ReporterDashboard";
+            $('#loading').show();
         });
 
         function summaryPage() {
@@ -106,7 +107,9 @@
     <body>
 
 
-
+        <div id="loading" style="display: none">
+            <img id="loading-image" src='@Url.Content("~/Content/Icons/giphy.gif")' alt="Loading..." />
+        </div>
 
         <div id="alertModal" class="modal case-modal">
             <a href="#" class="closeLink modal-close" rel="modal:close"></a>
