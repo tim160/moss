@@ -779,5 +779,12 @@ namespace EC.Controllers
 
             return 1;
         }
+        public bool CloseTask()
+        {
+            int mediator_id = Convert.ToInt16(Request["user_id"]);
+            int task_id = Convert.ToInt16(Request["task_id"]);
+            UserModel um = new UserModel(mediator_id);
+            return um.CloseTask(task_id, mediator_id);
+        }
     }
 }
