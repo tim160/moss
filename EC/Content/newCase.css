@@ -752,8 +752,11 @@ header.header{
 	margin-bottom: 20px;
 	border: 1px solid transparent;
 }
-.has-error{
-	border: 1px solid red !important;
+#infomsg1 {
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+}
+.has-error {
+    border: 1px solid red !important;
 }
 	.case-modal__selectRow-title{
 		display: inline-block;
