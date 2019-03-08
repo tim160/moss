@@ -951,6 +951,7 @@
         });
 
         $(".buttonSubmit").on('click', function () {
+            $('#loading').show();
             var incidentAnonymityIdVal = $('.incidentAnonymityId').val();
             if (incidentAnonymityIdVal != 1) {
                 if ($("#userName").hasClass("vlCorrect") &&

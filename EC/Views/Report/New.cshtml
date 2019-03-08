@@ -27,9 +27,9 @@
     }
     //19
     string logo = (string)ViewBag.companylogo;
-    if (logo == null  || logo.Trim().Length == 0)
+    if (logo == null || logo.Trim().Length == 0)
     {
-        if(is_cc.Value)
+        if (is_cc.Value)
         {
             logo = "https://report.campusconfidential.com/Content/img/logo2.png";
         }
@@ -37,7 +37,8 @@
         {
             logo = "https://report.employeeconfidential.com/Content/img/logo.png";
         }
-    } else
+    }
+    else
     {
         logo = logo.Trim();
     }
@@ -81,7 +82,7 @@
 
         <div class="secondBlock">
             <div class="positionImageLogo">
-               <img class="makeImgCenter" src="@logo" />
+                <img class="makeImgCenter" src="@logo" />
             </div>
             <div class="titlePage">
                 <p>@GlobalRes.GeneralInformation</p>
@@ -944,5 +945,7 @@
 
     </div>
 </form>
-
+<div id="loading" style="display: none">
+    <img id="loading-image" src='@Url.Content("~/Content/Icons/giphy.gif")' alt="Loading..." />
+</div>
 @Html.Partial("~/Views/Shared/HelpPartial.cshtml", new ViewDataDictionary { { "is_reporter", true } })
