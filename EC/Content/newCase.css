@@ -1905,12 +1905,15 @@ ul.drop.slide{
 						font-size: 12px;
 					}
 
-.taskUserMenu{
-	float: right;
-	width: 250px;
-	position: relative;
-	z-index: 4;
-	border-left: 1px solid #e0e5e6;
+.blocker {
+    z-index: 5!important;
+}
+.taskUserMenu {
+    float: right;
+    width: 250px;
+    position: relative;
+    z-index: 4;
+    border-left: 1px solid #e0e5e6;
 }
 .taskUserMenu .col-3{
 	padding-left: 25px;
