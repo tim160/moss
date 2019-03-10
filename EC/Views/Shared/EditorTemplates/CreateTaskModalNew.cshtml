@@ -186,24 +186,21 @@
                         sign_off_mediator_id: sign_off_mediator_id
                     }
                 }).done(function (data) {
-
-                    if (data == -1) {
-                    }
-
-                    if (data == 1) {
-                        var str = window.location.href;
-
-                        if (promotion_value == 3)
-                            str = '/cases/index';
-                        if (promotion_value == 4)
-                            str = '/cases/index/completed';
-                        if (promotion_value == 9)
-                            str = '/cases/index/closed';
-
-                        window.location.href = str;
-                    }
-                    if (data == 0) {
-                    }
+                    window.location.href = '/cases/index/closed';
+                    //if (data == -1) {
+                    //}
+                    //if (data == 1) {
+                    //    var str = window.location.href;
+                    //    if (promotion_value == 3)
+                    //        str = '/cases/index';
+                    //    if (promotion_value == 4)
+                    //        str = '/cases/index/completed';
+                    //    if (promotion_value == 9)
+                    //        str = '/cases/index/closed';
+                    //    window.location.href = str;
+                    //}
+                    //if (data == 0) {
+                    //}
                 }).fail(function (error) {
                     console.log(error);
                     return -1;
