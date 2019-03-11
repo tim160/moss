@@ -60,15 +60,22 @@
                         }
 
                         if (data == 1) {
-                                var str = window.location.href;
-                                if (promotion_value == 3)
-                                    str = '/cases/index';
-                                if (promotion_value == 4)
-                                    str = '/cases/index/completed';
-                                if (promotion_value == 9)
-                                    str = '/cases/index/closed';
+                            var escalate_btn_id = $("#escalate_btn").val();
+                            if (escalate_btn_id == 9) {
+                                window.location.href = '/cases/index?mode=closed';
+                            } else {
+                                window.location.href = '/cases/index';
+                            }
+                            
+                                //var str = window.location.href;
+                                //if (promotion_value == 3)
+                                //    str = '/cases/index';
+                                //if (promotion_value == 4)
+                                //    str = '/cases/index/completed';
+                                //if (promotion_value == 9)
+                                //    str = '/cases/index/closed';
 
-                                window.location.href = str;
+                                //window.location.href = str;
                         }
                         if (data == 0) {
                         }
