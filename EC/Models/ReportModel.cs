@@ -1287,8 +1287,7 @@ namespace EC.Models
                         };
 
                         newUser = adv.user.Add(newUser);
-                        int t = 0;
-                        t = adv.SaveChanges();
+                        adv.SaveChanges();
                         string reporter_login = GenerateReporterLogin();
 
                         while (glb.isLoginInUse(reporter_login))
@@ -1303,6 +1302,10 @@ namespace EC.Models
                         currentReport.report_by_myself = model.report_by_myself;
                         currentReport.guid = Guid.NewGuid();
                         //db.user.AddOrUpdate(newUser);
+                        currentReport.status_id = 1;
+                        currentReport.last_update_dt = DateTime.Now;
+                        currentReport.user_id = newUser.id;
+
                         currentReport = adv.report.Add(currentReport);
                         adv.SaveChanges();
                         //  t = db.SaveChanges();
@@ -1332,7 +1335,7 @@ namespace EC.Models
                                 };
 
                                 adv.report_mediator_involved.Add(result);
-                                t = adv.SaveChanges();
+                                //adv.SaveChanges();
                             }
                         }
 
@@ -1354,7 +1357,13 @@ namespace EC.Models
                         _review_status.description = "";
                         ///adv.report_investigation_status.Add(_review_status);
                         ////   t = adv.SaveChanges();
-                        AddPendingStatus(_review_status);
+                        //AddPendingStatus(_review_status);
+                        adv.report_investigation_status.Add(_review_status);
+
+                        //var report = adv.report.FirstOrDefault(x => x.id == _review_status.report_id);
+
+
+                        //adv.SaveChanges();
                         #endregion
 
                         //savind secondary type 
@@ -1385,8 +1394,9 @@ namespace EC.Models
                             temp.last_update_dt = DateTime.Now;
                             temp.user_id = 1;
                             temp.added_by_reporter = true;
-
-                            AddSecondaryType(temp);
+                            //adv.
+                            //AddSecondaryType(temp);
+                            adv.report_secondary_type.Add(temp);
                         }
 
                         /*report_relationship*/
@@ -1487,7 +1497,8 @@ namespace EC.Models
                         foreach (var item in mediators)
                         {
                             item.added_by_reporter = true;
-                            AddReportNonMediatorInvolved(item, currentReport);
+                            adv.report_non_mediator_involved.Add(item);
+                            //AddReportNonMediatorInvolved(item, currentReport);
                         }
 
                         db.SaveChanges();
