@@ -27,6 +27,8 @@ namespace EC.Controllers
         public ActionResult Index()
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            if (HttpContext.Session != null)
+                logger.Info("cases session " +HttpContext.Session.SessionID);
             logger.Info("Cases - Cases1");
             if (user == null || user.id == 0)
                 return RedirectToAction("Login", "Service");

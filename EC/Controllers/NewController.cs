@@ -219,7 +219,7 @@ namespace EC.Controllers
             {
                 return LocalizationGetter.GetString("EmailInvalid");
             }
-            logger.Info("EmailPassed");
+ 
             if (!db.company_invitation.Any(t => ((t.is_active == 1) && (t.invitation_code.Trim().ToLower() == code.Trim().ToLower()))))
                 return LocalizationGetter.GetString("InvalidCode");
 
@@ -229,7 +229,6 @@ namespace EC.Controllers
                 // amount more than 0 -> we have a registration with money involved
                 decimal.TryParse(amount, out _amount);
             }
-            logger.Info("amount " + _amount.ToString());
 
             //if (_amount > 0)
             //{
@@ -385,7 +384,6 @@ namespace EC.Controllers
                         return LocalizationGetter.GetString("CompanySavingFailed", is_cc);
                     }
                     #endregion
-                    logger.Info("companySaving");
 
                     #region Location Saving
                     if (company_id != 0)
@@ -540,7 +538,6 @@ namespace EC.Controllers
                         }
                     }
                     #endregion
-                    logger.Info("DepartmentSaving");
 
                     #region Incident types
                     if (company_id != 0)
@@ -749,7 +746,6 @@ namespace EC.Controllers
                         }
                     }
                     #endregion
-                    logger.Info("RelationshipSaving");
 
                     #region Anonymity
                     if (company_id != 0)
@@ -781,7 +777,6 @@ namespace EC.Controllers
                         }
                     }
                     #endregion
-                    logger.Info("Anon");
 
                     #region Relationship
                     if (company_id != 0)
@@ -827,7 +822,6 @@ namespace EC.Controllers
                         }
                     }
                     #endregion
-                    logger.Info("Relation");
 
                     #region Root Causes
                     var list_root_cases = new List<string>();
@@ -879,11 +873,10 @@ namespace EC.Controllers
                         //db.SaveChanges();
                     }
                     #endregion
-                    logger.Info("RootCause");
+
 
                     string login = glb.GenerateLoginName(first, last);
                     string pass = glb.GeneretedPassword().Trim();
-                    logger.Info("RootCause1");
 
                     #region User Saving
                     if (company_id != 0)
@@ -978,9 +971,6 @@ namespace EC.Controllers
                     else
                         return LocalizationGetter.GetString("UserSavingFailed");
                     #endregion
-                    logger.Info("RootCause2");
-
-
 
                     #region Saving CC_Payment
                     /*if (_amount > 0)
@@ -1014,12 +1004,8 @@ namespace EC.Controllers
                     }*/
                     #endregion
 
-                    logger.Info("Auth" + auth_code);
-                    logger.Info("Amount" + _amount);
-
                     Session["Auth"] = auth_code;
                     Session["Amount"] = _amount;
-                    //db.SaveChanges();
                     return LocalizationGetter.GetString("_Completed").ToLower();
 
                 }
