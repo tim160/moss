@@ -637,33 +637,7 @@ namespace EC.Models
             return vm;
 
         }
-
-        public UsersUnreadEntitiesNumberViewModel1 GetUserUnreadEntitiesNumbers1()
-        {
-
-            List<int> all_reports_id = GetReportIds(null);
-
-            UsersUnreadEntitiesNumberViewModel1 vm = new UsersUnreadEntitiesNumberViewModel1();
-            var all_unread_messages = (db.message.Where(item => (all_reports_id.Contains(item.report_id) && item.sender_id != ID && !db.message_user_read.Where(mur => (mur.message_id == item.id) && (mur.user_id == ID)).Any()))).Select(t => t.id).ToList();
-            vm.unread_messages = all_unread_messages;
-
-            var all_unread_reports = (all_reports_id.Where(item => (!db.report_user_read.Where(t => ((t.user_id == ID) && (t.report_id == item))).Any()))).ToList();
-            vm.unread_reports = all_unread_reports;
-
-
-            var all_tasks_ids = db.task.Where(item => item.assigned_to == ID && all_reports_id.Contains(item.report_id)).Select(item => item.id);
-            var all_unread_tasks = (all_tasks_ids.Where(item => (!db.task_user_read.Where(t => ((t.user_id == ID) && (t.task_id == item))).Any()))).ToList();
-            vm.unread_tasks = all_unread_tasks;
-
-
-
-
-            return vm;
-
-        }
-
-
-
+    
         /// <summary>
         /// 
         /// </summary>
@@ -1323,33 +1297,33 @@ namespace EC.Models
         {
              UsersUnreadReportsNumberViewModel vm = new UsersUnreadReportsNumberViewModel();
  
-            var active = vmReportIds.all_active_report_ids.Where(item => (
+            var active = vmReportIds.all_active_report_ids.Where(item => !(
             db.report.Where(t => (t.id == item && 
-            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date < t.last_update_dt).Any()
+            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date > t.last_update_dt).Any()
             )).Any())).Count();
             vm.unread_active_reports = active;
 
-            var spam = vmReportIds.all_spam_report_ids.Where(item => (
+            var spam = vmReportIds.all_spam_report_ids.Where(item => !(
             db.report.Where(t => (t.id == item &&
-            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date < t.last_update_dt).Any()
+            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date > t.last_update_dt).Any()
             )).Any())).Count();
             vm.unread_spam_reports = spam;
 
-            var newreport = vmReportIds.all_pending_report_ids.Where(item => (
+            var newreport = vmReportIds.all_pending_report_ids.Where(item => !(
             db.report.Where(t => (t.id == item &&
-            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date < t.last_update_dt).Any()
+            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date > t.last_update_dt).Any()
             )).Any())).Count();
             vm.unread_pending_reports = newreport;
 
-            var completed = vmReportIds.all_completed_report_ids.Where(item => (
+            var completed = vmReportIds.all_completed_report_ids.Where(item => !(
             db.report.Where(t => (t.id == item &&
-            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date < t.last_update_dt).Any()
+            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date > t.last_update_dt).Any()
             )).Any())).Count();
             vm.unread_completed_reports = completed;
 
-            var closed = vmReportIds.all_closed_report_ids.Where(item => (
+            var closed = vmReportIds.all_closed_report_ids.Where(item => !(
             db.report.Where(t => (t.id == item &&
-            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date < t.last_update_dt).Any()
+            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date > t.last_update_dt).Any()
             )).Any()
             )).Count();
             vm.unread_closed_reports = closed;
@@ -1358,45 +1332,7 @@ namespace EC.Models
 
         }
 
-
-        public UsersUnreadReportsNumberViewModel1 GetUserUnreadCasesNumbers1(UsersReportIDsViewModel vmReportIds)
-        {
-            UsersUnreadReportsNumberViewModel1 vm = new UsersUnreadReportsNumberViewModel1();
-
-            var active = vmReportIds.all_active_report_ids.Where(item => (
-            db.report.Where(t => (t.id == item &&
-            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date < t.last_update_dt).Any()
-            )).Any())).ToList();
-            vm.unread_active_reports = active;
-
-            var spam = vmReportIds.all_spam_report_ids.Where(item => (
-            db.report.Where(t => (t.id == item &&
-            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date < t.last_update_dt).Any()
-            )).Any())).ToList();
-            vm.unread_spam_reports = spam;
-
-            var newreport = vmReportIds.all_pending_report_ids.Where(item => (
-            db.report.Where(t => (t.id == item &&
-            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date < t.last_update_dt).Any()
-            )).Any())).ToList();
-            vm.unread_pending_reports = newreport;
-
-            var completed = vmReportIds.all_completed_report_ids.Where(item => (
-            db.report.Where(t => (t.id == item &&
-            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date < t.last_update_dt).Any()
-            )).Any())).ToList();
-            vm.unread_completed_reports = completed;
-
-            var closed = vmReportIds.all_closed_report_ids.Where(item => (
-            db.report.Where(t => (t.id == item &&
-            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date < t.last_update_dt).Any()
-            )).Any()
-            )).ToList();
-            vm.unread_closed_reports = closed;
-
-            return vm;
-
-        }
+ 
 
 
         public List<CasePreviewViewModel> ReportPreviews(List<int> report_ids, string investigation_status, int delay_allowed)

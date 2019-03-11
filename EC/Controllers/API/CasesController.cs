@@ -39,16 +39,16 @@ namespace EC.Controllers.API
             }
 
             UserModel um = new UserModel(user.id);
-            var counter1 = (DateTime.Now - _started).TotalMilliseconds;
+      //      var counter1 = (DateTime.Now - _started).TotalMilliseconds;
             UsersReportIDsViewModel vmAllIDs = um.GetAllUserReportIdsLists();
-            var counter2 = (DateTime.Now - _started).TotalMilliseconds;
+     //       var counter2 = (DateTime.Now - _started).TotalMilliseconds;
 
             UsersUnreadReportsNumberViewModel vmUnreadReports = um.GetUserUnreadCasesNumbers(vmAllIDs);
-            var counter3 = (DateTime.Now - _started).TotalMilliseconds;
+       //     var counter3 = (DateTime.Now - _started).TotalMilliseconds;
 
             ///old var report_ids = um.ReportsSearchIds(um._user.company_id, filter.ReportFlag);
 
-            var temp1 = um.GetUserUnreadEntitiesNumbers1();
+     //       var temp1 = um.GetUserUnreadEntitiesNumbers1();
 
             List<int> report_ids = new List<int>();
             switch (filter.ReportFlag)
@@ -92,10 +92,10 @@ namespace EC.Controllers.API
             if (investigation_status.ToLower().Contains(LocalizationGetter.GetString("Investigation").ToLower()))
                 investigation_status = LocalizationGetter.GetString("Investigation");
             //////  var reports = report_ids.Select(x => new CasePreviewViewModel(x, user.id)).ToList();
-            var counter4 = (DateTime.Now - _started).TotalMilliseconds;
+     //       var counter4 = (DateTime.Now - _started).TotalMilliseconds;
 
             var reports = um.ReportPreviews(report_ids, investigation_status, delay_allowed).ToList();
-            var counter5 = (DateTime.Now - _started).TotalMilliseconds;
+  //          var counter5 = (DateTime.Now - _started).TotalMilliseconds;
 
             string title = LocalizationGetter.GetString("ActiveCasesUp");
             title = filter.ReportFlag == 2 ? LocalizationGetter.GetString("CompletedcasesUp") : title;
@@ -103,8 +103,8 @@ namespace EC.Controllers.API
             title = filter.ReportFlag == 3 ? LocalizationGetter.GetString("SpamcasesUp") : title;
             title = filter.ReportFlag == 4 ? LocalizationGetter.GetString("NewReportsUp") : title;
 
-            var temp2 = um.GetUserUnreadCasesNumbers1(vmAllIDs);
-            var temp3 = vmAllIDs;
+    ///        var temp2 = um.GetUserUnreadCasesNumbers1(vmAllIDs);
+      //      var temp3 = vmAllIDs;
 
             var m = new
             {
@@ -123,7 +123,7 @@ namespace EC.Controllers.API
 
                 Title = title,
 
-                counter = (DateTime.Now - _started).TotalMilliseconds,
+/*                counter = (DateTime.Now - _started).TotalMilliseconds,
                 counter1 = counter1,
                 counter2 = counter2,
                 counter3 = counter3,
@@ -131,7 +131,7 @@ namespace EC.Controllers.API
                 counter5 = counter5,
                 temp1 = temp1,
                 temp2 = temp2,
-                temp3 = temp3,
+                temp3 = temp3,*/
 
             };
 
