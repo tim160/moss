@@ -41,7 +41,7 @@
     </div><!--settingMenu-->
 
     <div id="attachmentPage">
-        @using (Html.BeginForm("Attachments", "NewCase", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("SaveAttachments", "ReporterDashboard", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.Hidden("report_id", report_id)
             @Html.Hidden("mode", "upload_rd")
@@ -114,7 +114,7 @@
 
 }
 
-<script>
+    <script>
     $(function () {
         if (typeof (window.FileReader) === 'undefined') {
             $('.dottedContainer .semiboldText').text('');
@@ -136,7 +136,7 @@
             makeAjaxcall();
         });
         $("#attachments").click(function () {
-            makeAjaxcall();
+            //makeAjaxcall();
         });
 
         function makeAjaxcall() {
@@ -150,7 +150,7 @@
 
             $.ajax({
                 type: "POST",
-                url: '@Url.Action("Attachments", "NewCase")',
+                url: '@Url.Action("SaveAttachments", "ReporterDashboard")',
                 contentType: false,
                 processData: false,
                 data: data,
@@ -168,4 +168,4 @@
             }, 500)
         });
     });
-</script>
+    </script>

@@ -424,5 +424,59 @@ namespace EC.Controllers
 
             return RedirectToAction("Attachments", new { id = user.id });
         }
+        [HttpPost]
+        public ActionResult SaveAttachments(int report_id, string mode, string type)
+        {
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            // DEBUG
+            //user = user ?? db.user.FirstOrDefault(x => x.id == 2);
+            //user = user ?? db.user.FirstOrDefault(x => x.id == 167);
+            //
+            if (user == null || user.id == 0)
+                return RedirectToAction("Index", "Account");
+
+            if ((mode == "upload") || (mode == "upload_rd"))
+            {
+                for (int i = 0; i < Request.Files.Count; i++)
+                {
+                    var file = Request.Files[i];
+                    var report = db.report.FirstOrDefault(x => x.id == report_id);
+
+                    var a = new attachment();
+                    a.file_nm = file.FileName;
+                    a.extension_nm = System.IO.Path.GetExtension(file.FileName);
+                    a.path_nm = "";
+                    a.report_id = report_id;
+                    a.status_id = 2;
+                    a.effective_dt = DateTime.Now;
+                    a.expiry_dt = DateTime.Now;
+                    a.last_update_dt = DateTime.Now;
+                    a.user_id = user.id;
+
+                    type = mode == "upload_rd" ? "reporter" : "staff";
+                    a.visible_reporter = type == "reporter" ? true : false;
+                    a.visible_mediators_only = type == "staff" ? true : false;
+
+                    db.attachment.Add(a);
+                    db.SaveChanges();
+
+                    var dir = Server.MapPath(String.Format("~/upload/reports/{0}", report.guid));
+                    var filename = String.Format("{0}_{1}{2}", user.id, DateTime.Now.Ticks, System.IO.Path.GetExtension(file.FileName));
+                    a.path_nm = String.Format("\\upload\\reports\\{0}\\{1}", report.guid, filename);
+                    db.SaveChanges();
+
+                    if (!System.IO.Directory.Exists(dir))
+                    {
+                        System.IO.Directory.CreateDirectory(dir);
+                    }
+                    file.SaveAs(string.Format("{0}\\{1}", dir, filename));
+                }
+            }
+            if (mode == "upload_rd")
+            {
+                return RedirectToAction("Attachments", "ReporterDashboard", new { id = user.id });
+            }
+            return RedirectToAction("Attachments", new { id = report_id });
+        }
     }
 } 

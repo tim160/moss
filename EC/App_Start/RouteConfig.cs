@@ -293,6 +293,16 @@ namespace EC
              );
 
             routes.MapRoute(
+                 name: "ReporterDashboardAttachmentSave",
+                 url: "ReporterDashboard/SaveAttachments",
+                 defaults: new
+                 {
+                     controller = "ReporterDashboard",
+                     action = "SaveAttachments"
+                 }
+             );
+
+            routes.MapRoute(
                  name: "PaymentHistory",
                  url: "Payment/History",
                  defaults: new
