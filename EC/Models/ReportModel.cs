@@ -876,10 +876,14 @@ namespace EC.Models
         {
             int status_id = _investigation_status;
             DateTime promoted_date = _report.reported_dt;
-            if (db.report_investigation_status.Any(item => ((item.report_id == ID) && (item.investigation_status_id == status_id))))
-            {
-                promoted_date = db.report_investigation_status.Where(item => ((item.report_id == ID) && (item.investigation_status_id == status_id))).OrderByDescending(a => a.created_date).Select(t => t.created_date).FirstOrDefault();
-            }
+            if (_report.last_update_dt != null)
+              promoted_date = _report.last_update_dt;
+
+
+            //if (db.report_investigation_status.Any(item => ((item.report_id == ID) && (item.investigation_status_id == status_id))))
+            //{
+            //    promoted_date = db.report_investigation_status.Where(item => ((item.report_id == ID) && (item.investigation_status_id == status_id))).OrderByDescending(a => a.created_date).Select(t => t.created_date).FirstOrDefault();
+            //}
             return promoted_date;
         }
 
