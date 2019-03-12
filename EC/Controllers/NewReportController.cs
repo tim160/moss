@@ -438,10 +438,10 @@ namespace EC.Controllers.ViewModel
                     body = eb.Body;
 
                     em.Send(to, cc, LocalizationGetter.GetString("Email_Title_NextStep", is_cc), body, true);
-                }
+        }
 
-                #endregion
-            }
+        #endregion
+      }
             else
             {
                 // case re-opened
@@ -464,8 +464,8 @@ namespace EC.Controllers.ViewModel
                         body = eb.Body;
 
                         em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_CaseReopened, body, true);
-                    }
-                }
+          }
+        }
                 #endregion
 
                 #region Email to Reporter About case been reopened
@@ -482,10 +482,10 @@ namespace EC.Controllers.ViewModel
                     body = eb.Body;
 
                     em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_CaseReopened, body, true);
-                }
+        }
 
-                #endregion
-            }
+        #endregion
+      }
 
             /////     glb.UpdateReportLog(user_id, 20, report_id, App_LocalResources.GlobalRes._Completed, null, description);
             //////    glb.UpdateReportLog(user_id, 21, report_id, App_LocalResources.GlobalRes._Started, null, "");

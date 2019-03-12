@@ -700,19 +700,19 @@ namespace EC.Controllers
 
                         to.Add(_user.email.Trim());
                         UserModel um_temp = new UserModel(_user.id);
-                        if ((promotion_value == ECGlobalConstants.investigation_status_resolution || promotion_value == ECGlobalConstants.investigation_status_completed) && um_temp._user.id == sign_off_mediator_id)
+                        if (  promotion_value == ECGlobalConstants.investigation_status_completed && um_temp._user.id == sign_off_mediator_id)
                         {
                             eb.CaseCloseApprove(rm._report.display_name);
                             body = eb.Body;
                             em.Send(to, cc, LocalizationGetter.GetString("Email_Title_NextStep", is_cc), body, true);
-                        }
-                        else if ((promotion_value == ECGlobalConstants.investigation_status_resolution || promotion_value == ECGlobalConstants.investigation_status_completed) && um_temp._user.role_id == 4)
+            }
+            else if (  promotion_value == ECGlobalConstants.investigation_status_completed && um_temp._user.role_id == 4)
                         {
                             eb.CaseCloseApprovePlatformManager(rm._report.display_name);
                             body = eb.Body;
                             em.Send(to, cc, LocalizationGetter.GetString("Email_Title_NextStep", is_cc), body, true);
-                        }
-                    }
+            }
+          }
                 }
                 #endregion
             }

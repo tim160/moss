@@ -17,10 +17,7 @@ namespace EC.Controllers
         // GET: ReporterDashboard
         public ActionResult Index(int? id)
         {
-
-            logger.Info("ReporterDashboardController - start");
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
-            logger.Info("ReporterDashboardController - user " + user?.login_nm);
 
             //////////tim          user = AuthHelper.GetCookies(HttpContext);
             // DEBUG
@@ -28,9 +25,7 @@ namespace EC.Controllers
             // DEBUG
             if (user == null || user.id == 0 || user.role_id == 4 || user.role_id == 5 || user.role_id ==6  || user.role_id == 7)
                 return RedirectToAction("CheckStatus", "Service");
-            logger.Info("ReporterDashboardController - user_id " + user?.id.ToString());
-
-
+ 
             //    ViewBag.user_id = id.Value; // 167-171
             id = user.id;
 
@@ -44,18 +39,13 @@ namespace EC.Controllers
             ViewBag.cc_extension = cc_ext;
             #endregion
 
-
-            logger.Info("ReporterDashboardController - usermodel ");
-
             UserModel um = new UserModel(id.Value);
             int report_id = um.GetReportIDForReporter();
-            logger.Info("ReporterDashboardController - report_id " + report_id.ToString());
-
+ 
             ViewBag.report_id = report_id;
             ViewBag.user_id = id.Value;
             var reporter = new ReportModel(report_id);
-            logger.Info("ReporterDashboardController - report_id " + reporter?.ToString());
-
+ 
             if (report_id == 0)
                  return RedirectToAction("CheckStatus", "Service");
 
@@ -63,7 +53,6 @@ namespace EC.Controllers
             ViewBag.attachmentAdvFiles = db.attachment
                 .Where(item => item.report_id == report_id && (item.visible_reporter == true || item.user_id == reporter._report.reporter_user_id))
                 .ToList();
-            logger.Info("ReporterDashboardController attachment - report_id ");
 
             return View();
         }

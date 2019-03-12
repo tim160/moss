@@ -248,9 +248,9 @@ namespace EC.Controllers
 
                     body = eb.Body;
                     em.Send(to, cc, title, body, true);
-                }
-                #endregion
-            } else
+        }
+        #endregion
+      } else
             {
                 ViewBag.UserId = 0;
                 ViewBag.Login = "";
