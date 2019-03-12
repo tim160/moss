@@ -204,13 +204,16 @@
                     <div class="printPanel">
                         <div class="reportAction">
                             <img class="summaryImages" id="printImage" src="~/Content/img/print.png">
+                            <img src="~/Content/img/printSelected.png" style="display: none"/>
+
                             @if (rm.ID != 0)
                             {
                                 <a href="@Url.Action("PrintToPdf", "Report", new { id = rm._report.guid })" target="_blank" class="button summaryButtons" style="width: 226px;align-items: flex-start;text-align: center;">@GlobalRes.PrintReport</a>
                             }
                         </div>
                         <div class="reportAction">
-                            <img class="summaryImages" id="dashboardImage" src="~/Content/img/printSelected.png">
+                            <img class="summaryImages" id="dashboardImage" src="~/Content/img/reportDashboard.png">
+                            <img src="~/Content/img/reportDashboardHover.png" style="display: none" />
                             @*<input type="button" id="reportDashboard" class="button summaryButtons" value="@GlobalRes.GoToReportDashboard">*@
                             <a id="linkModal" href="#alertModal" rel="modal:open" class="button summaryButtons" style="width: 226px;align-items: flex-start;text-align: center;">@GlobalRes.GoToReportDashboard</a>
                         </div>

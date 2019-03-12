@@ -1320,7 +1320,7 @@ titleReportTable {
 #printImage {
     content:url('/Content/img/print.png');
 }
-#printImage.hover {
+.reportAction:hover #printImage {
     content: url('/Content/img/printSelected.png');
 }
 
@@ -1328,7 +1328,7 @@ titleReportTable {
     content:url('/Content/img/reportDashboard.png');
 }
 
-#dashboardImage.hover{
+.reportAction:hover #dashboardImage {
     content: url('/Content/img/reportDashboardHover.png');
 }
 
