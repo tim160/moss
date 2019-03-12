@@ -857,7 +857,7 @@ namespace EC.Business.Actions.Email
                 }
                 try
                 {
-                    smtpClient.Send(msg);
+                    await smtpClient.SendMailAsync(msg);
                 }
                 catch(Exception exc)
                 {
