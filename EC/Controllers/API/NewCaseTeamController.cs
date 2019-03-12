@@ -138,13 +138,13 @@ namespace EC.Controllers.API
 
             if (filter.AddToTeam.HasValue)
             {
-                UserModel userModel = UserModel.inst;
                 GlobalFunctions glb = new GlobalFunctions();
                 IEmailAddressHelper m_EmailHelper = new EmailAddressHelper();
 
-                userModel.AddToMediators(filter.AddToTeam.Value, filter.Report_id.Value);
+                
 
                 UserModel _um = new UserModel(filter.AddToTeam.Value);
+                _um.AddToMediators(filter.AddToTeam.Value, filter.Report_id.Value);
                 _um = _um._user.company_id == user.company_id ? _um : null;
                 glb.UpdateReportLog(user.id, 5, filter.Report_id.Value, _um._user.first_nm + " " + _um._user.last_nm, null, "");
 
@@ -173,10 +173,9 @@ namespace EC.Controllers.API
                 int tasks_number = _um.UserTasks(1, filter.Report_id.Value, true).Count();
                 if (tasks_number == 0)
                 {
-                    UserModel userModel = UserModel.inst;
                     GlobalFunctions glb = new GlobalFunctions();
 
-                    userModel.RemoveMediator(filter.RemoveFromTeam.Value, filter.Report_id.Value);
+                    _um.RemoveMediator(filter.RemoveFromTeam.Value, filter.Report_id.Value);
                     glb.UpdateReportLog(user.id, 6, filter.Report_id.Value, _um._user.first_nm + " " + _um._user.last_nm, null, "");
                 }
                 else

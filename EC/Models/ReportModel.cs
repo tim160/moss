@@ -1248,17 +1248,14 @@ namespace EC.Models
                             nameOfEmail = mail.User;
                         }
 
-                        GlobalFunctions gfFunctions = new GlobalFunctions();
+                        //GlobalFunctions gfFunctions = new GlobalFunctions();
                         int notification = Convert.ToInt16(model.sendUpdates);
                         //if not checked = 3, if  check = 1
-                        if (notification == 1)
-                        {
-                            notification = 1;
-                        }
-                        else
+                        if (notification != 1)
                         {
                             notification = 3;
                         }
+                       
                         password = glb.GeneretedPassword();
                         user newUser = new user()
                         {
@@ -1301,7 +1298,7 @@ namespace EC.Models
                         currentReport.reporter_user_id = newUser.id;
                         currentReport.report_by_myself = model.report_by_myself;
                         currentReport.guid = Guid.NewGuid();
-                        //db.user.AddOrUpdate(newUser);
+                        db.user.AddOrUpdate(newUser);
                         currentReport.status_id = 1;
                         currentReport.last_update_dt = DateTime.Now;
                         currentReport.user_id = newUser.id;

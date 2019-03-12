@@ -21,11 +21,6 @@ namespace EC.Controllers
 {
     public class ReportController : BaseController
     {
-        //  UserModel userModel = new UserModel();
-        //    CompanyModel companyModel = new CompanyModel();
-        //   ReportModel reportModel = new ReportModel();
-
-        private readonly UserModel userModel = UserModel.inst;
         private readonly CompanyModel companyModel = new CompanyModel();
         private readonly ReportModel reportModel = new ReportModel();
 
@@ -216,9 +211,9 @@ namespace EC.Controllers
                     /*model.userEmail = */
                     ViewBag.Email = user.email;
                     SignIn(user);
-                    GlobalFunctions glb = new GlobalFunctions();
-                    glb.UpdateReportLog(user.id, 2, currentReport.report.id, "", null, "");
-                    glb.UpdateReportLog(user.id, 28, currentReport.report.id, App_LocalResources.GlobalRes._Started, null, "");
+
+                    base.glb.UpdateReportLog(user.id, 2, currentReport.report.id, "", null, "");
+                    base.glb.UpdateReportLog(user.id, 28, currentReport.report.id, App_LocalResources.GlobalRes._Started, null, "");
                 }
                 //ReportViewModel rvm = new ReportViewModel();
                 //rvm.Merge(currentReport.report);

@@ -22,7 +22,6 @@ namespace EC.Models
 {
     public class UserModel : BaseModel
     {
-        public static readonly UserModel inst = new UserModel();
         GlobalFunctions glb = new GlobalFunctions();
         UserItems ui = new UserItems();
 

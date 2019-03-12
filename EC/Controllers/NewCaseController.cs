@@ -16,8 +16,6 @@ namespace EC.Controllers
     
     public class NewCaseController : BaseController
     {
-        public ECEntities db = new ECEntities();
-        
         // GET: NewCase
         public ActionResult Index(int report_id)
         {
@@ -205,7 +203,7 @@ namespace EC.Controllers
 
         public bool CreateNewTask()
         {
-            UserModel userModel = UserModel.inst;
+            UserModel userModel = new UserModel();
             return userModel.CreateNewTask(Request.Form, Request.Files);
         }
 

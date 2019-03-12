@@ -24,7 +24,7 @@ namespace EC.Controllers
             public string HostUrl { get; set; }
         }
 
-        private readonly UserModel userModel = UserModel.inst;
+        private readonly UserModel userModel = new UserModel();
 
         // GET: Service
         public ActionResult Login(string host_url)
