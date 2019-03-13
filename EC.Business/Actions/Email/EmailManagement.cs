@@ -11,15 +11,17 @@ using System.IO;
 using System.Xml;
 using System.Configuration;
 using System.Threading.Tasks;
+using log4net;
 
 namespace EC.Business.Actions.Email
 {
     public delegate string HTMLEmailFormatter(Type[] typeList, object[] entities, string templateData, bool isHtml);
-
+    
     public class EmailManagement : IEmailer
     {
+        //public ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         #region Property(s)
-      //  private static readonly ICustomLog m_Log = CustomLogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+          //private static readonly ICustomLog m_Log = CustomLogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private CultureInfo m_CultureInfo = null;
         private static Dictionary<string, EmailTemplateInfo> m_EmailTemplates = new Dictionary<string, EmailTemplateInfo>();
         private static bool m_TemplatesInitialized = false;
@@ -498,9 +500,13 @@ namespace EC.Business.Actions.Email
                 ccAddressArray = ccAddress.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             else
                 ccAddressArray = new String[0];
+            System.Threading.Thread email = new System.Threading.Thread(delegate ()
+            {
+                SendAsync(fromAddress, toAddressArray, messageSubject, messageBody, ccAddressArray, attachments, isBodyHtml).
+  ContinueWith(t => Console.WriteLine(t.Exception), TaskContinuationOptions.OnlyOnFaulted);
+            });
 
-            SendAsync(fromAddress, toAddressArray, messageSubject, messageBody, ccAddressArray, attachments, isBodyHtml).
-              ContinueWith(t => Console.WriteLine(t.Exception), TaskContinuationOptions.OnlyOnFaulted); ;
+
       /// tim  ActionResultExtended result = Send(fromAddress, toAddressArray, messageSubject, messageBody, ccAddressArray, attachments, isBodyHtml);
 
 
@@ -814,10 +820,12 @@ namespace EC.Business.Actions.Email
                 catch (Exception e)
                 {
                     int a = 10;
-                    ////           m_Log.Error(
-                    // ///             string.Format("Send() - Error sending email: server [{0}], recipient [{1}], message subject line [{2}]",
-                    ///                       m_Server, String.Join(";", to), messageSubject),
-                    //                     e);
+
+                    //logger.Info(e.Message);
+                    //           m_Log.Error(
+                    //            string.Format("Send() - Error sending email: server [{0}], recipient [{1}], message subject line [{2}]",
+                    //                       m_Server, String.Join(";", to), messageSubject),
+                    //                    e);
 
                     msg.Attachments.Dispose();
 
