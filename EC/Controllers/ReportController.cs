@@ -240,15 +240,15 @@ namespace EC.Controllers
                 foreach (var _user in rm.MediatorsWhoHasAccessToReport().Where(t => t.role_id != ECLevelConstants.level_escalation_mediator).ToList())
                 {
                     eb = new Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
-                    to = new List<string>();
-                    to.Add(_user.email.Trim());
+                    //to = new List<string>();
+                    //to.Add(_user.email.Trim());
                     if (has_involved)
                         eb.NewCaseInvolved(_user.first_nm, _user.last_nm, rm._report.display_name);
                     else
                         eb.NewCase(_user.first_nm, _user.last_nm, rm._report.display_name);
 
                     body = eb.Body;
-                    em.Send(to, cc, title, body, true);
+                    await em.QuickSendEmailAsync(_user.email.Trim(), "copy", title, body, true);
         }
         #endregion
       } else

@@ -568,7 +568,55 @@ namespace EC.Business.Actions.Email
                 response.Close();
                 return body;
         }
+        public async Task<bool> QuickSendEmailAsync(string to, string cc, string subject, string msg, bool send)
+        {
+            // Initialization.  
+            bool isSend = false;
 
+            try
+            {
+                // Initialization.  
+                var body = msg;
+                var message = new MailMessage();
+
+                // Settings.  
+                message.To.Add(new MailAddress(to));
+                message.From = new MailAddress("employeeconfidential@employeeconfidential.com");
+                message.Subject = subject;
+                message.Body = body;
+                message.IsBodyHtml = true;
+
+                using (var smtp = new SmtpClient())
+                {
+                    // Settings.  
+                    var credential = new NetworkCredential
+                    {
+                        UserName = "employeeconfidential@employeeconfidential.com",
+                        Password = "confidentialConfidential1$3"
+                    };
+
+                    // Settings.  
+                    smtp.Credentials = credential;
+                    smtp.Host = "employeeconfidential.com";
+                    smtp.Port = 25;
+                    smtp.EnableSsl = false;
+
+                    // Sending  
+                    await smtp.SendMailAsync(message);
+
+                    // Settings.  
+                    isSend = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Info  
+                throw ex;
+            }
+
+            // info.  
+            return isSend;
+        }
         #endregion
         #region MailWrapper Methods
 
@@ -1046,6 +1094,8 @@ namespace EC.Business.Actions.Email
         }
 
         #endregion
+
+
     }
 
     public class EmailTemplateInfo
@@ -1070,4 +1120,5 @@ namespace EC.Business.Actions.Email
             m_Subject = subject;
         }
     }
+
 }
