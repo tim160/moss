@@ -10,6 +10,7 @@ using EC.Models;
 using EC.Models.ECModel;
 using Rotativa.MVC;
 using EC.Localization;
+using System.Threading.Tasks;
 
 namespace EC.Controllers
 {
@@ -598,7 +599,7 @@ namespace EC.Controllers
             return 0;
         }
  
-        public int CloseCase()
+        public async Task<int> CloseCase()
         {
             //   return 2;
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
@@ -704,14 +705,16 @@ namespace EC.Controllers
                         {
                             eb.CaseCloseApprove(rm._report.display_name);
                             body = eb.Body;
-                            em.Send(to, cc, LocalizationGetter.GetString("Email_Title_NextStep", is_cc), body, true);
-            }
+                            //em.Send(to, cc, LocalizationGetter.GetString("Email_Title_NextStep", is_cc), body, true);
+                            await em.QuickSendEmailAsync(_user.email.Trim(), "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), body, true);
+                        }
             else if (  promotion_value == ECGlobalConstants.investigation_status_completed && um_temp._user.role_id == 4)
                         {
                             eb.CaseCloseApprovePlatformManager(rm._report.display_name);
                             body = eb.Body;
-                            em.Send(to, cc, LocalizationGetter.GetString("Email_Title_NextStep", is_cc), body, true);
-            }
+                            //em.Send(to, cc, LocalizationGetter.GetString("Email_Title_NextStep", is_cc), body, true);
+                            await em.QuickSendEmailAsync(_user.email.Trim(), "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), body, true);
+                        }
           }
                 }
                 #endregion

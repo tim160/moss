@@ -13,7 +13,7 @@ using EC.Constants;
 using EC.Model.Impl;
 using EC.Core.Common;
 using EC.Common.Interfaces;
-
+using System.Threading.Tasks;
 
 namespace EC.Controllers.ViewModel
 {
@@ -214,7 +214,7 @@ namespace EC.Controllers.ViewModel
             return true;
         }
 
-        public bool AcceptOrReopenCase()
+        public async Task<bool> AcceptOrReopenCase()
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
 
@@ -437,12 +437,13 @@ namespace EC.Controllers.ViewModel
                     eb.NextStep(um._user.first_nm, um._user.last_nm, rm._report.display_name);
                     body = eb.Body;
 
-                    em.Send(to, cc, LocalizationGetter.GetString("Email_Title_NextStep", is_cc), body, true);
+                    //em.Send(to, cc, LocalizationGetter.GetString("Email_Title_NextStep", is_cc), body, true);
+                    await em.QuickSendEmailAsync(rm._reporter_user.email.Trim(), "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), body, true);
         }
 
         #endregion
       }
-            else
+            else                                                                                                         
             {
                 // case re-opened
                 glb.UpdateReportLog(user_id, 29, report_id, description, null, "");
