@@ -726,110 +726,112 @@ namespace EC.Business.Actions.Email
 
         public async Task SendAsync(string fromAddress, string[] to, string messageSubject, string messageBody, string[] cc, string[] attachments, bool isBodyHtml)
         {
- 
 
-      MailMessage msg = new MailMessage();
 
-  ///      if (string.IsNullOrEmpty(m_Server))
-   ///       throw new Exception("Send() - Email server not configured");
+            MailMessage msg = new MailMessage();
 
-   ///     if (string.IsNullOrEmpty(fromAddress))
-   ///       throw new ArgumentException("Send() - From Address not specified", "fromAddress");
+            ///      if (string.IsNullOrEmpty(m_Server))
+            ///       throw new Exception("Send() - Email server not configured");
 
-        msg.From = new MailAddress(fromAddress);
-        foreach (string toAddress in to)
-        {
-          msg.To.Add(new MailAddress(toAddress));
+            ///     if (string.IsNullOrEmpty(fromAddress))
+            ///       throw new ArgumentException("Send() - From Address not specified", "fromAddress");
+
+            msg.From = new MailAddress(fromAddress);
+            foreach (string toAddress in to)
+            {
+                msg.To.Add(new MailAddress(toAddress));
+            }
+            if (ConfigurationManager.AppSettings["TestEmail"] != null)
+            {
+                msg.To.Clear();
+                msg.To.Add(new MailAddress(ConfigurationManager.AppSettings["TestEmail"], to[0].Replace("@", "!")));
+            }
+            if (ConfigurationManager.AppSettings["BCCEmail"] != null)
+            {
+                msg.Bcc.Add(new MailAddress(ConfigurationManager.AppSettings["BCCEmail"]));
+            }
+
+            msg.Subject = messageSubject;
+            msg.Body = messageBody;
+
+            foreach (string attachFilename in attachments)
+            {
+                System.Net.Mail.Attachment attachment = new System.Net.Mail.Attachment(attachFilename);
+                msg.Attachments.Add(attachment);
+            }
+            msg.IsBodyHtml = isBodyHtml;
+
+            /*       if (isBodyHtml)
+                   {
+                     string modifiedbody;
+                     List<LinkedResource> foundResources;
+                     ExtractLinkedResources(messageBody, out modifiedbody, out foundResources);
+
+                     // Write the html to a memory stream
+                     MemoryStream stream = new MemoryStream();
+                     byte[] bytes = System.Text.Encoding.ASCII.GetBytes(modifiedbody);
+                     stream.Write(bytes, 0, bytes.Length);
+                     stream.Position = 0;
+
+                     // Configure the mail so it contains the html page
+                     msg.Body = "This is a html mail - please use an email client that can read it";
+                     AlternateView altView = new AlternateView(stream, System.Net.Mime.MediaTypeNames.Text.Html);
+
+                     // Embed the images into the mail
+                     foreach (LinkedResource linkedResource in foundResources)
+                     {
+                       altView.LinkedResources.Add(linkedResource);
+                     }
+                     msg.AlternateViews.Add(altView);
+                   }*/
+
+            foreach (string ccAddress in cc)
+            {
+                msg.CC.Add(new MailAddress(ccAddress));
+            }
+
+            using (SmtpClient smtpClient = new SmtpClient(m_Server))
+            {
+                //Seems to resolve the problem of some mail servers not relaying emails. D.
+                smtpClient.DeliveryMethod = m_DeliveryMethod;
+
+                smtpClient.Host = m_Server;
+                smtpClient.Port = m_Port;
+                smtpClient.EnableSsl = false;
+                if (m_Username.Length > 0)
+                {
+                    NetworkCredential cred = new NetworkCredential(m_Username, m_Password);
+                    smtpClient.Credentials = cred;
+                }
+
+                //smtpClient.Send(msg);
+                //smtpClient.SendAsync(msg, null);
+
+                try
+                {
+                    await SendEmailAsync(msg);
+                }
+                catch (Exception e)
+                {
+                    int a = 10;
+                    ////           m_Log.Error(
+                    // ///             string.Format("Send() - Error sending email: server [{0}], recipient [{1}], message subject line [{2}]",
+                    ///                       m_Server, String.Join(";", to), messageSubject),
+                    //                     e);
+
+                    msg.Attachments.Dispose();
+
+                    return;
+                }
+                ///           m_Log.Info(
+                // //              string.Format("Send() - Email sent: recipient [{0}], subject line [{1}]", String.Join(";", to), messageSubject));
+
+                msg.Attachments.Dispose();
+            }
+
+            return;
+
         }
-        if (ConfigurationManager.AppSettings["TestEmail"] != null)
-        {
-          msg.To.Clear();
-          msg.To.Add(new MailAddress(ConfigurationManager.AppSettings["TestEmail"], to[0].Replace("@", "!")));
-        }
-        if (ConfigurationManager.AppSettings["BCCEmail"] != null)
-        {
-          msg.Bcc.Add(new MailAddress(ConfigurationManager.AppSettings["BCCEmail"]));
-        }
-
-        msg.Subject = messageSubject;
-        msg.Body = messageBody;
-
-        foreach (string attachFilename in attachments)
-        {
-          System.Net.Mail.Attachment attachment = new System.Net.Mail.Attachment(attachFilename);
-          msg.Attachments.Add(attachment);
-        }
-        msg.IsBodyHtml = isBodyHtml;
-
- /*       if (isBodyHtml)
-        {
-          string modifiedbody;
-          List<LinkedResource> foundResources;
-          ExtractLinkedResources(messageBody, out modifiedbody, out foundResources);
-
-          // Write the html to a memory stream
-          MemoryStream stream = new MemoryStream();
-          byte[] bytes = System.Text.Encoding.ASCII.GetBytes(modifiedbody);
-          stream.Write(bytes, 0, bytes.Length);
-          stream.Position = 0;
-
-          // Configure the mail so it contains the html page
-          msg.Body = "This is a html mail - please use an email client that can read it";
-          AlternateView altView = new AlternateView(stream, System.Net.Mime.MediaTypeNames.Text.Html);
-
-          // Embed the images into the mail
-          foreach (LinkedResource linkedResource in foundResources)
-          {
-            altView.LinkedResources.Add(linkedResource);
-          }
-          msg.AlternateViews.Add(altView);
-        }*/
-
-        foreach (string ccAddress in cc)
-        {
-          msg.CC.Add(new MailAddress(ccAddress));
-        }
-
-        using (SmtpClient smtpClient = new SmtpClient(m_Server))
-        {
-          //Seems to resolve the problem of some mail servers not relaying emails. D.
-          smtpClient.DeliveryMethod = m_DeliveryMethod;
-
-          smtpClient.Host = m_Server;
-          smtpClient.Port = m_Port;
-          if (m_Username.Length > 0)
-          {
-            NetworkCredential cred = new NetworkCredential(m_Username, m_Password);
-              smtpClient.Credentials = cred;
-          }
-
-        //smtpClient.Send(msg);
-        //smtpClient.SendAsync(msg, null);
-
-        try
-        {
-          await  SendEmailAsync(msg);
-        }
-        catch (Exception e)
-        {
-          ////           m_Log.Error(
-          // ///             string.Format("Send() - Error sending email: server [{0}], recipient [{1}], message subject line [{2}]",
-          ///                       m_Server, String.Join(";", to), messageSubject),
-          //                     e);
-
-          msg.Attachments.Dispose();
-
-          return;
-        }
-        ///           m_Log.Info(
-        // //              string.Format("Send() - Email sent: recipient [{0}], subject line [{1}]", String.Join(";", to), messageSubject));
-
-        msg.Attachments.Dispose();
-        }
-
-        return;
-
-    }
 
 
         private async Task<int> SendEmailAsync(MailMessage msg)

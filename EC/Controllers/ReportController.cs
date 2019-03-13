@@ -16,6 +16,7 @@ using EC.Constants;
 using EC.Common.Base;
 using EC.Localization;
 using Rotativa.MVC;
+using System.Threading.Tasks;
 
 namespace EC.Controllers
 {
@@ -186,7 +187,7 @@ namespace EC.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult New(ReportViewModel model)
+        public async Task<ActionResult> New(ReportViewModel model)
         {
             companyModel.ID = model.currentCompanyId;
             model.Process(Request.Form, Request.Files);
