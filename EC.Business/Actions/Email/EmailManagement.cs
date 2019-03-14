@@ -242,7 +242,7 @@ namespace EC.Business.Actions.Email
         #endregion
 
         #region Method
-        public string ParseEmailAddress(string inputString)
+        private string ParseEmailAddress(string inputString)
         {
             string[] distLists = inputString.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             Dictionary<string, string> EmailDictionary = new Dictionary<string, string>();
@@ -310,7 +310,7 @@ namespace EC.Business.Actions.Email
              return outputStringBuffer.ToString();
         }
 
-        public static bool IsValidEmailAddress(string sEmail)
+        private static bool IsValidEmailAddress(string sEmail)
         {
             if (sEmail == null)
             {
@@ -448,7 +448,7 @@ namespace EC.Business.Actions.Email
             return Send(to, cc, messageSubject, messageBody, new byte[][] { attachmentData }, new string[] { attachmentFileName }, isBodyHtml);
         }
 
-        public ActionResultExtended Send(string to, string cc, string messageSubject, string messageBody, byte[][] attachmentDatas, String[] attachmentFileNames, bool isBodyHtml)
+        private ActionResultExtended Send(string to, string cc, string messageSubject, string messageBody, byte[][] attachmentDatas, String[] attachmentFileNames, bool isBodyHtml)
         {
             if (attachmentDatas == null || attachmentFileNames == null || attachmentDatas.Length != attachmentFileNames.Length)
                 attachmentFileNames = new String[0];
@@ -479,12 +479,12 @@ namespace EC.Business.Actions.Email
             return result;
         }
 
-        public ActionResultExtended Send(string to, string cc, string messageSubject, string messageBody, string[] attachments, bool isBodyHtml)
+        private ActionResultExtended Send(string to, string cc, string messageSubject, string messageBody, string[] attachments, bool isBodyHtml)
         {
             return Send(AddressFrom, to, cc, messageSubject, messageBody, attachments, isBodyHtml);
         }
 
-        public ActionResultExtended Send(string fromAddress, string to, string cc, string messageSubject, string messageBody, string[] attachments, bool isBodyHtml)
+        private ActionResultExtended Send(string fromAddress, string to, string cc, string messageSubject, string messageBody, string[] attachments, bool isBodyHtml)
         {
             string toAddress = ParseEmailAddress(to);
             string ccAddress = ParseEmailAddress(cc);

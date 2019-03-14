@@ -202,10 +202,10 @@ namespace EC.Controllers
             return View();
         }
 
-        public bool CreateNewTask()
+        public async Task<bool> CreateNewTask()
         {
             UserModel userModel = new UserModel();
-            return userModel.CreateNewTask(Request.Form, Request.Files);
+            return await userModel.CreateNewTask(Request.Form, Request.Files);
         }
 
         public ActionResult Messages(int report_id)
@@ -535,10 +535,10 @@ namespace EC.Controllers
             return View();
         }
 
-        public ActionResult ReassignTask(int id, int mediator_id)
+        public async Task<ActionResult> ReassignTask(int id, int mediator_id)
         {
             var userModel = new UserModel();
-            userModel.ReassignTask(id, mediator_id);
+            await userModel.ReassignTask(id, mediator_id);
 
             return RedirectToAction("Task", new {id = id });
         }

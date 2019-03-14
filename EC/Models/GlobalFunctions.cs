@@ -1586,13 +1586,13 @@ public class GlobalFunctions
         return String.Format("The password should be at least {0} characters long", PasswordLength.ToString());
     }
 
-    public void CampusSecurityAlertEmail(report report, Uri uri, ECEntities db, string email)
+    public async void CampusSecurityAlertEmail(report report, Uri uri, ECEntities db, string email)
     {
      ////   return;
         IEmailAddressHelper m_EmailHelper = new EmailAddressHelper();
         EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(true);
         EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, uri.AbsoluteUri.ToLower());
-        string body = "";
+        //string body = "";
         List<string> to = new List<string>();
         List<string> cc = new List<string>();
         List<string> bcc = new List<string>();
@@ -1600,13 +1600,13 @@ public class GlobalFunctions
         var pm = db.user.FirstOrDefault(x => x.role_id == 5 && x.company_id == report.company_id);
         if ((pm != null) && (email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(email.Trim()))
         {
-            to = new List<string>();
-            cc = new List<string>();
-            bcc = new List<string>();
+            //to = new List<string>();
+            //cc = new List<string>();
+            //bcc = new List<string>();
             string phone = $"{pm.phone}";
             if(string.IsNullOrEmpty(phone))
                 phone = $"{pm.email}";
-            to.Add(email);
+            //to.Add(email);
 
             eb.CampusSecurityAlert(
                 report.id.ToString(),
@@ -1615,14 +1615,19 @@ public class GlobalFunctions
                 phone
                 );
 
-            body = eb.Body;
+            //body = eb.Body;
 
-            em.Send(to, cc, EC.App_LocalResources.GlobalRes.CampusSecurityAlert, body, true);
+            //em.Send(to, cc, EC.App_LocalResources.GlobalRes.CampusSecurityAlert, body, true);
+            var resultErrorMessage = await em.QuickSendEmailAsync(email, "copy", GlobalRes.CampusSecurityAlert, eb.Body, true);
+            if (resultErrorMessage.exception != null)
+            {
+                logger.Info("GlobalFunctions / CampusSecurityAlertEmail" + resultErrorMessage.exception.Message);
+            }
         }
     }
 
 
-    public void CampusSecurityAlertEmail_bkp(report report, Uri uri, ECEntities db, string email, string first_nm, string last_nm)
+    public async void CampusSecurityAlertEmail_bkp(report report, Uri uri, ECEntities db, string email, string first_nm, string last_nm)
     {
         ////   return;
         IEmailAddressHelper m_EmailHelper = new EmailAddressHelper();
@@ -1660,9 +1665,15 @@ public class GlobalFunctions
 
 
 
-            body = eb.Body;
+            //body = eb.Body;
 
-            em.Send(to, cc, EC.App_LocalResources.GlobalRes.CampusSecurityAlert, body, true);
+            //em.Send(to, cc, EC.App_LocalResources.GlobalRes.CampusSecurityAlert, body, true);
+
+            var resultErrorMessage = await em.QuickSendEmailAsync(email, "copy", GlobalRes.CampusSecurityAlert, eb.Body, true);
+            if (resultErrorMessage.exception != null)
+            {
+                logger.Info("GlobalFunctions / CampusSecurityAlertEmail_bkp" + resultErrorMessage.exception.Message);
+            }
         }
     }
     public string Photo_Path_String(string photo_path, int param, int photo_user_role)

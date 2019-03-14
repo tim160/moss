@@ -17,6 +17,7 @@ using EC.Constants;
 using EC.Models.ViewModels;
 using EC.Models.ViewModel;
 using EC.Utils;
+using System.Threading.Tasks;
 
 namespace EC.Models
 {
@@ -979,7 +980,7 @@ namespace EC.Models
             }
         }
 
-        public bool CreateNewTask(NameValueCollection form, HttpFileCollectionBase files)
+        public async Task<bool> CreateNewTask(NameValueCollection form, HttpFileCollectionBase files)
         {
             int mediator_id = Convert.ToInt16(form["user_id"]);
             int report_id = Convert.ToInt16(form["report_id"]);
@@ -1055,18 +1056,23 @@ namespace EC.Models
 
                 if ((um._user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(um._user.email.Trim()))
                 {
-                    List<string> to = new List<string>();
-                    List<string> cc = new List<string>();
-                    List<string> bcc = new List<string>();
+                    //List<string> to = new List<string>();
+                    //List<string> cc = new List<string>();
+                    //List<string> bcc = new List<string>();
 
-                    to.Add(um._user.email.Trim());
+                    //to.Add(um._user.email.Trim());
                     ///     bcc.Add("timur160@hotmail.com");
 
                     EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
                     EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, HttpContext.Current.Request.Url.AbsoluteUri.ToLower());
                     eb.NewTask(um._user.first_nm, um._user.last_nm, _rm._report.display_name);
-                    string body = eb.Body;
-                    em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_NewTask, body, true);
+                    //string body = eb.Body;
+                    //em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_NewTask, body, true);
+                    var resultErrorMessage = await em.QuickSendEmailAsync(um._user.email.Trim(), "copy", App_LocalResources.GlobalRes.Email_Title_NewTask, eb.Body, true);
+                    if (resultErrorMessage.exception != null)
+                    {
+                        logger.Info("UserModel / CreateNewTask" + resultErrorMessage.exception.Message);
+                    }
                 }
 
                 #endregion
@@ -1165,7 +1171,7 @@ namespace EC.Models
         }
 
     
-        public bool ReassignTask(int task_id, int mediator_id)
+        public async Task<bool> ReassignTask(int task_id, int mediator_id)
         {
             try
             {
@@ -1186,18 +1192,23 @@ namespace EC.Models
 
                 if ((um._user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(um._user.email.Trim()))
                 {
-                    List<string> to = new List<string>();
-                    List<string> cc = new List<string>();
-                    List<string> bcc = new List<string>();
+                    //List<string> to = new List<string>();
+                    //List<string> cc = new List<string>();
+                    //List<string> bcc = new List<string>();
 
-                    to.Add(um._user.email.Trim());
+                    //to.Add(um._user.email.Trim());
                     ///     bcc.Add("timur160@hotmail.com");
 
                     EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
                     EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, HttpContext.Current.Request.Url.AbsoluteUri.ToLower());
                     eb.NewTask(um._user.first_nm, um._user.last_nm, _rm._report.display_name);
                     string body = eb.Body;
-                    em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_NewTask, body, true);
+                    //em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_NewTask, body, true);
+                    var resultErrorMessage = await em.QuickSendEmailAsync(um._user.email.Trim(), "copy", App_LocalResources.GlobalRes.Email_Title_NewTask, body, true);
+                    if (resultErrorMessage.exception != null)
+                    {
+                        logger.Info("UserModel / ReassignTask" + resultErrorMessage.exception.Message);
+                    }
                 }
 
                 #endregion

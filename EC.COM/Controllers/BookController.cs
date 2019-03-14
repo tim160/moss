@@ -266,6 +266,11 @@ namespace EC.COM.Controllers
 
             to.Add(varinfo.Email.Trim());
             em.Send(to, cc, "Employee Confidential Registration", body, true);
+            //var resultErrorMessage = await em.QuickSendEmailAsync(varinfo.Email.Trim(), "copy", "Employee Confidential Registration", body, true);
+            //if (resultErrorMessage.exception != null)
+            //{
+            //    logger.Info("ReportController / New" + resultErrorMessage.exception.Message);
+            //}
 
             return RedirectToAction("CompanyRegistrationVideo", "Book", new { emailedcode = varinfo.Emailed_code_to_customer, invitationcode = "VAR" });
         }

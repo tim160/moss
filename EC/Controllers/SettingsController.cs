@@ -473,11 +473,11 @@ namespace EC.Controllers
                     {
                         if ((_updateuser.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_updateuser.email.Trim()))
                         {
-                            to = new List<string>();
-                            cc = new List<string>();
-                            bcc = new List<string>();
+                            //to = new List<string>();
+                            //cc = new List<string>();
+                            //bcc = new List<string>();
 
-                            to.Add(_updateuser.email.Trim());
+                            //to.Add(_updateuser.email.Trim());
                             ///     bcc.Add("timur160@hotmail.com");
 
                             string new_status = "";
@@ -486,8 +486,14 @@ namespace EC.Controllers
                                 new_status = new_roledb.status_en;
 
                             eb.MediatorStatusChange(_updateuser.first_nm, _updateuser.last_nm, session_user.first_nm, session_user.last_nm, new_status);
-                            body = eb.Body;
-                            em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_MediatorStatusChanged, body, true);
+                            //body = eb.Body;
+                            //em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_MediatorStatusChanged, body, true);
+
+                            var resultErrorMessage = await em.QuickSendEmailAsync(_updateuser.email.Trim(), "copy", title, body, true);
+                            if (resultErrorMessage.exception != null)
+                            {
+                                logger.Info("ReportController / New" + resultErrorMessage.exception.Message);
+                            }
                         }
                     }
 
@@ -653,7 +659,7 @@ namespace EC.Controllers
             return result;
         }
 
-        public string InviteMediator(string email)
+        public async string InviteMediator(string email)
         {
             email = email.ToLower().Trim();
 
@@ -713,11 +719,11 @@ namespace EC.Controllers
 
             if ((email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(email.Trim()))
             {
-                List<string> to = new List<string>();
-                List<string> cc = new List<string>();
-                List<string> bcc = new List<string>();
+                //List<string> to = new List<string>();
+                //List<string> cc = new List<string>();
+                //List<string> bcc = new List<string>();
 
-                to.Add(email.Trim());
+                //to.Add(email.Trim());
                 ///     bcc.Add("timur160@hotmail.com");
 
                 EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
@@ -725,8 +731,13 @@ namespace EC.Controllers
 
                 CompanyModel cm = new CompanyModel(_user.company_id);
                 eb.MediatorInvited(_user.first_nm, _user.last_nm, _user.first_nm, _user.last_nm, cm._company.company_nm, generated_code, DomainUtil.GetSubdomainLink(Request.Url.AbsoluteUri.ToLower(), Request.Url.AbsoluteUri.ToLower()) + "/new/?code=" + generated_code + "&email=" + email);
-                string body = eb.Body;
-                em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_MediatorInvited, body, true);
+                //string body = eb.Body;
+                //em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_MediatorInvited, body, true);
+                var resultErrorMessage = await em.QuickSendEmailAsync(email.Trim(), "copy", App_LocalResources.GlobalRes.Email_Title_MediatorInvited, eb.Body, true);
+                if (resultErrorMessage.exception != null)
+                {
+                    logger.Info("SettingsController / InviteMediator" + resultErrorMessage.exception.Message);
+                }
             }
 
             return App_LocalResources.GlobalRes._Completed.ToLower();
