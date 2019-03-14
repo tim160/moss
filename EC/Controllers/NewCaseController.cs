@@ -681,13 +681,13 @@ namespace EC.Controllers
             if (_new)
             {
                 #region Email Ready
-                List<string> to = new List<string>();
-                List<string> cc = new List<string>();
-                List<string> bcc = new List<string>();
+                //List<string> to = new List<string>();
+                //List<string> cc = new List<string>();
+                //List<string> bcc = new List<string>();
 
                 EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
                 EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
-                string body = "";
+                //string body = "";
                 #endregion
 
                 #region Email To Mediators About Case Update
@@ -695,28 +695,32 @@ namespace EC.Controllers
                 {
                     if ((_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_user.email.Trim()))
                     {
-                        to = new List<string>();
-                        cc = new List<string>();
-                        bcc = new List<string>();
+                        //to = new List<string>();
+                        //cc = new List<string>();
+                        //bcc = new List<string>();
 
-                        to.Add(_user.email.Trim());
+                        //to.Add(_user.email.Trim());
                         UserModel um_temp = new UserModel(_user.id);
                         if (  promotion_value == ECGlobalConstants.investigation_status_completed && um_temp._user.id == sign_off_mediator_id)
                         {
                             eb.CaseCloseApprove(rm._report.display_name);
-                            body = eb.Body;
+                            //body = eb.Body;
                             //em.Send(to, cc, LocalizationGetter.GetString("Email_Title_NextStep", is_cc), body, true);
-                            await em.QuickSendEmailAsync(_user.email.Trim(), "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), body, true);
+                            var resultErrorMessage = await em.QuickSendEmailAsync(_user.email.Trim(), "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, true);
+                            if (resultErrorMessage.exception != null)
+                            {
+                                logger.Info("NewCase / CloseCase 712 line " + resultErrorMessage.exception.Message);
+                            }
                         }
             else if (  promotion_value == ECGlobalConstants.investigation_status_completed && um_temp._user.role_id == 4)
                         {
                             eb.CaseCloseApprovePlatformManager(rm._report.display_name);
-                            body = eb.Body;
+                            //body = eb.Body;
                             //em.Send(to, cc, LocalizationGetter.GetString("Email_Title_NextStep", is_cc), body, true);
-                            var resultErrorMessage = await em.QuickSendEmailAsync(_user.email.Trim(), "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), body, true);
+                            var resultErrorMessage = await em.QuickSendEmailAsync(_user.email.Trim(), "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, true);
                             if (resultErrorMessage.exception != null)
                             {
-                                logger.Info("NewCase / CloseCase" + resultErrorMessage.exception.Message);
+                                logger.Info("NewCase / CloseCase 723 line " + resultErrorMessage.exception.Message);
                             }
                         }
           }
