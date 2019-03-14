@@ -11,7 +11,6 @@ using System.IO;
 using System.Xml;
 using System.Configuration;
 using System.Threading.Tasks;
-using log4net;
 
 namespace EC.Business.Actions.Email
 {
