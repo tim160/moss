@@ -16,6 +16,7 @@ using EC.App_LocalResources;
 using EC.Constants;
 using EC.Common.Util;
 using EC.Utils;
+using System.Threading.Tasks;
 
 namespace EC.Controllers
 {
@@ -659,7 +660,7 @@ namespace EC.Controllers
             return result;
         }
 
-        public async string InviteMediator(string email)
+        public async Task<string> InviteMediator(string email)
         {
             email = email.ToLower().Trim();
 
