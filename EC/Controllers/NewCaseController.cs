@@ -598,7 +598,7 @@ namespace EC.Controllers
 
             return 0;
         }
- 
+
         public async Task<int> CloseCase()
         {
             //   return 2;
@@ -637,53 +637,62 @@ namespace EC.Controllers
 
 
             bool _new = um.ResolveCase(report_id, mediator_id, description, promotion_value, reason_id, sign_off_mediator_id);
-
-            if (!db.report_mediator_assigned.Any(x => x.report_id == report_id && x.mediator_id == sign_off_mediator_id))
+            using (var transaction = db.Database.BeginTransaction())
             {
-                db.report_mediator_assigned.Add(new report_mediator_assigned
+                try
                 {
-                    report_id = report_id,
-                    mediator_id = sign_off_mediator_id,
-                    assigned_dt = DateTime.Now,
-                    status_id = 2,
-                    last_update_dt = DateTime.Now,
-                    user_id = user.id,
-                });
-                db.SaveChanges();
-            }
-
-            if (sign_off_mediator_id != 0)
-            {
-                report_signoff_mediator report_signoff_mediator = null;
-                foreach (var item in db.report_signoff_mediator.Where(x => x.report_id == report_id))
-                {
-                    item.status_id = 1;
-                    if (item.user_id == sign_off_mediator_id)
+                    if (!db.report_mediator_assigned.Any(x => x.report_id == report_id && x.mediator_id == sign_off_mediator_id))
                     {
-                        report_signoff_mediator = item;
+                        db.report_mediator_assigned.Add(new report_mediator_assigned
+                        {
+                            report_id = report_id,
+                            mediator_id = sign_off_mediator_id,
+                            assigned_dt = DateTime.Now,
+                            status_id = 2,
+                            last_update_dt = DateTime.Now,
+                            user_id = user.id,
+                        });
+                        //db.SaveChanges();
                     }
-                }
-                if (report_signoff_mediator == null)
-                {
-                    report_signoff_mediator = new report_signoff_mediator
+
+                    if (sign_off_mediator_id != 0)
                     {
-                        createdby_user_id = user.id,
-                        created_on = DateTime.Now,
-                        report_id = report_id,
-                        user_id = sign_off_mediator_id,
-                    };
-                    db.report_signoff_mediator.Add(report_signoff_mediator);
+                        report_signoff_mediator report_signoff_mediator = null;
+                        foreach (var item in db.report_signoff_mediator.Where(x => x.report_id == report_id))
+                        {
+                            item.status_id = 1;
+                            if (item.user_id == sign_off_mediator_id)
+                            {
+                                report_signoff_mediator = item;
+                            }
+                        }
+                        if (report_signoff_mediator == null)
+                        {
+                            report_signoff_mediator = new report_signoff_mediator
+                            {
+                                createdby_user_id = user.id,
+                                created_on = DateTime.Now,
+                                report_id = report_id,
+                                user_id = sign_off_mediator_id,
+                            };
+                            db.report_signoff_mediator.Add(report_signoff_mediator);
+                        }
+                        report_signoff_mediator.status_id = 2;
+
+                    }
+                    db.SaveChanges();
+                    transaction.Commit();
                 }
-                report_signoff_mediator.status_id = 2;
-                db.SaveChanges();
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    logger.Info("NewCase / CloseCase saving error " + ex.Message);
+                }
             }
 
             if (_new)
             {
                 #region Email Ready
-                //List<string> to = new List<string>();
-                //List<string> cc = new List<string>();
-                //List<string> bcc = new List<string>();
 
                 EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
                 EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
@@ -695,16 +704,10 @@ namespace EC.Controllers
                 {
                     if ((_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_user.email.Trim()))
                     {
-                        //to = new List<string>();
-                        //cc = new List<string>();
-                        //bcc = new List<string>();
-
-                        //to.Add(_user.email.Trim());
                         UserModel um_temp = new UserModel(_user.id);
-                        if (  promotion_value == ECGlobalConstants.investigation_status_completed && um_temp._user.id == sign_off_mediator_id)
+                        if (promotion_value == ECGlobalConstants.investigation_status_completed && um_temp._user.id == sign_off_mediator_id)
                         {
                             eb.CaseCloseApprove(rm._report.display_name);
-                            //body = eb.Body;
                             //em.Send(to, cc, LocalizationGetter.GetString("Email_Title_NextStep", is_cc), body, true);
                             var resultErrorMessage = await em.QuickSendEmailAsync(_user.email.Trim(), "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, true);
                             if (resultErrorMessage.exception != null)
@@ -712,10 +715,9 @@ namespace EC.Controllers
                                 logger.Info("NewCase / CloseCase 712 line " + resultErrorMessage.exception.Message);
                             }
                         }
-            else if (  promotion_value == ECGlobalConstants.investigation_status_completed && um_temp._user.role_id == 4)
+                        else if (promotion_value == ECGlobalConstants.investigation_status_completed && um_temp._user.role_id == 4)
                         {
                             eb.CaseCloseApprovePlatformManager(rm._report.display_name);
-                            //body = eb.Body;
                             //em.Send(to, cc, LocalizationGetter.GetString("Email_Title_NextStep", is_cc), body, true);
                             var resultErrorMessage = await em.QuickSendEmailAsync(_user.email.Trim(), "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, true);
                             if (resultErrorMessage.exception != null)
@@ -723,7 +725,7 @@ namespace EC.Controllers
                                 logger.Info("NewCase / CloseCase 723 line " + resultErrorMessage.exception.Message);
                             }
                         }
-          }
+                    }
                 }
                 #endregion
             }
@@ -778,14 +780,7 @@ namespace EC.Controllers
 
                     glb.UpdateReportLog(user.id, 25, report_id, "", null, description);
                     break;
-
-
             }
-
-
-
-
-
             return 1;
         }
         public bool CloseTask()
