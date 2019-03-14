@@ -1723,4 +1723,25 @@ public class GlobalFunctions
         }
         return _photo_path;
     }
+
+    public bool SaveEmailBeforeSend(int user_id, int company_id, string to, string from, string cc, string subject, string msg, bool send)
+    {
+        var email = new email
+        {
+            To = to,
+            From = from,
+            cc = cc,
+            Title = subject,
+            Body = msg,
+            is_sent = false,
+            user_id = user_id,
+            company_id = company_id,
+            created_dt = DateTime.Now,
+            isSSL = false
+        };
+        db.email.Add(email);
+        db.SaveChanges();
+
+        return true;
+    }
 }

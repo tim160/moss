@@ -248,11 +248,12 @@ namespace EC.Controllers
                         eb.NewCase(_user.first_nm, _user.last_nm, rm._report.display_name);
 
                     body = eb.Body;
-                    var resultErrorMessage = await em.QuickSendEmailAsync(_user.email.Trim(), "copy", title, body, true);
-                    if (resultErrorMessage.exception != null)
-                    {
-                        logger.Info("ReportController / New" + resultErrorMessage.exception.Message);
-                    }
+                    glb.SaveEmailBeforeSend(_user.id, companyModel._company.id, _user.email.Trim(), "employeeconfidential@employeeconfidential.com", "copy", title, body, true);
+                    //var resultErrorMessage = await em.QuickSendEmailAsync(_user.email.Trim(), "copy", title, body, true);
+                    //if (resultErrorMessage.exception != null)
+                    //{
+                    //    logger.Info("ReportController / New" + resultErrorMessage.exception.Message);
+                    //}
                 }
         #endregion
       } else
