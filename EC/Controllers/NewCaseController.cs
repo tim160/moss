@@ -713,7 +713,11 @@ namespace EC.Controllers
                             eb.CaseCloseApprovePlatformManager(rm._report.display_name);
                             body = eb.Body;
                             //em.Send(to, cc, LocalizationGetter.GetString("Email_Title_NextStep", is_cc), body, true);
-                            await em.QuickSendEmailAsync(_user.email.Trim(), "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), body, true);
+                            var resultErrorMessage = await em.QuickSendEmailAsync(_user.email.Trim(), "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), body, true);
+                            if (resultErrorMessage.exception != null)
+                            {
+                                logger.Info("NewCase / CloseCase" + resultErrorMessage.exception.Message);
+                            }
                         }
           }
                 }

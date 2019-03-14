@@ -568,11 +568,13 @@ namespace EC.Business.Actions.Email
                 response.Close();
                 return body;
         }
-        public async Task<bool> QuickSendEmailAsync(string to, string cc, string subject, string msg, bool send)
+        public async Task<ResultErrorMessage> QuickSendEmailAsync(string to, string cc, string subject, string msg, bool send)
         {
+            ResultErrorMessage result = new ResultErrorMessage();
+            
             // Initialization.  
             bool isSend = false;
-
+            
             try
             {
                 // Initialization.  
@@ -611,11 +613,14 @@ namespace EC.Business.Actions.Email
             catch (Exception ex)
             {
                 // Info  
-                throw ex;
+                result.isSent = false;
+                result.exception = ex;
             }
 
             // info.  
-            return isSend;
+            //return ;
+            result.isSent = isSend;
+            return result;
         }
         #endregion
         #region MailWrapper Methods
@@ -1121,4 +1126,10 @@ namespace EC.Business.Actions.Email
         }
     }
 
+
+    public class ResultErrorMessage
+    {
+        public Exception exception { get; set; }
+        public Boolean isSent { get; set; }
+    }
 }

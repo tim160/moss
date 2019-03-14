@@ -438,8 +438,12 @@ namespace EC.Controllers.ViewModel
                     body = eb.Body;
 
                     //em.Send(to, cc, LocalizationGetter.GetString("Email_Title_NextStep", is_cc), body, true);
-                    await em.QuickSendEmailAsync(rm._reporter_user.email.Trim(), "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), body, true);
-        }
+                    var resultErrorMessage = await em.QuickSendEmailAsync(rm._reporter_user.email.Trim(), "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), body, true);
+                    if (resultErrorMessage.exception != null)
+                    {
+                        logger.Info("NewReportController  / AcceptOrReopenCase" + resultErrorMessage.exception.Message);
+                    }
+                }
 
         #endregion
       }
