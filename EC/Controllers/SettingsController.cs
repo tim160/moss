@@ -473,12 +473,12 @@ namespace EC.Controllers
                     {
                         if ((_updateuser.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_updateuser.email.Trim()))
                         {
-                            //to = new List<string>();
-                            //cc = new List<string>();
-                            //bcc = new List<string>();
+                            to = new List<string>();
+                            cc = new List<string>();
+                            bcc = new List<string>();
 
-                            //to.Add(_updateuser.email.Trim());
-                            ///     bcc.Add("timur160@hotmail.com");
+                            to.Add(_updateuser.email.Trim());
+                            // bcc.Add("timur160@hotmail.com");
 
                             string new_status = "";
                             status new_roledb = db.status.Where(t => t.id == _user.status_id).FirstOrDefault();
@@ -486,14 +486,14 @@ namespace EC.Controllers
                                 new_status = new_roledb.status_en;
 
                             eb.MediatorStatusChange(_updateuser.first_nm, _updateuser.last_nm, session_user.first_nm, session_user.last_nm, new_status);
-                            //body = eb.Body;
-                            //em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_MediatorStatusChanged, body, true);
+                            body = eb.Body;
+                            em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_MediatorStatusChanged, body, true);
 
-                            var resultErrorMessage = await em.QuickSendEmailAsync(_updateuser.email.Trim(), "copy", title, body, true);
-                            if (resultErrorMessage.exception != null)
-                            {
-                                logger.Info("ReportController / New" + resultErrorMessage.exception.Message);
-                            }
+                            //var resultErrorMessage = await em.QuickSendEmailAsync(_updateuser.email.Trim(), "copy", title, body, true);
+                            //if (resultErrorMessage.exception != null)
+                            //{
+                            //    logger.Info("ReportController / New" + resultErrorMessage.exception.Message);
+                            //}
                         }
                     }
 
