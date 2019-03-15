@@ -80,11 +80,11 @@ namespace EC.Controllers
                  string CurrentURL = Request.Url.AbsoluteUri.ToLower();
                  if (CurrentURL.Contains("stark."))
                  {
-                     return RedirectToAction("Index", "Index/Page");
+      //               return RedirectToAction("Index", "Index/Page");
                  }
                  else if (CurrentURL.Contains("cai."))
                  {
-                     return RedirectToAction("Index", "Index/Start");
+             //        return RedirectToAction("Index", "Index/Start");
                  }
                  else
                  {

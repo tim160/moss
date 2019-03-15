@@ -242,13 +242,20 @@ namespace EC.Controllers
                     eb = new Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
                     //to = new List<string>();
                     //to.Add(_user.email.Trim());
+                    int email_type = 0;
                     if (has_involved)
-                        eb.NewCaseInvolved(_user.first_nm, _user.last_nm, rm._report.display_name);
+                    {
+                      eb.NewCaseInvolved(_user.first_nm, _user.last_nm, rm._report.display_name);
+                      email_type = 4;
+                    }
                     else
-                        eb.NewCase(_user.first_nm, _user.last_nm, rm._report.display_name);
+                    {
+                      eb.NewCase(_user.first_nm, _user.last_nm, rm._report.display_name);
+                      email_type = 3;
+                    }
 
                     body = eb.Body;
-                    glb.SaveEmailBeforeSend(_user.id, companyModel._company.id, _user.email.Trim(), "employeeconfidential@employeeconfidential.com", "copy", title, body, true);
+                    glb.SaveEmailBeforeSend(_user.id, companyModel._company.id, _user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"],  "", title, body, false, email_type);
                     //var resultErrorMessage = await em.QuickSendEmailAsync(_user.email.Trim(), "copy", title, body, true);
                     //if (resultErrorMessage.exception != null)
                     //{

@@ -176,11 +176,15 @@ namespace EC.Controllers.API
             eb.CalendarEvent(true, true, Request.RequestUri.AbsoluteUri.ToLower(), item.Hour.ToString("yyyy-MM-dd HH:mm:ss"));
             string body = eb.Body;
             var mediator = DB.user.FirstOrDefault(x => x.company_id == item.CompanyId && x.role_id == ECLevelConstants.level_administrator);
+            GlobalFunctions glb = new GlobalFunctions();
+
             if (mediator != null)
             {
                 //em.Send("alexandr@ase.com.ua", "New book training added", body, "", true);
-                em.Send(mediator.email, "New book training added", body, "", true);
-            }
+                //em.Send(mediator.email, "New book training added", body, "", true);
+                glb.SaveEmailBeforeSend(mediator.id, mediator.company_id, mediator.email, System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", "New book training added", body, false, 61);
+
+          }
 
             eb.CalendarEvent(false, true, Request.RequestUri.AbsoluteUri.ToLower(), item.Hour.ToString("yyyy-MM-dd HH:mm:ss"));
             body = eb.Body;
@@ -188,10 +192,12 @@ namespace EC.Controllers.API
             if (trainer != null)
             {
                 //em.Send("alexandr@ase.com.ua", "New book training added", body, "", true);
-                em.Send(trainer.email, "New book training added", body, "", true);
-            }
+               // em.Send(trainer.email, "New book training added", body, "", true);
+                glb.SaveEmailBeforeSend(trainer.id, trainer.company_id, trainer.email, System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", "New book training added", body, false, 61);
 
-            return new
+      }
+
+      return new
             {
                 Result = true,
             };

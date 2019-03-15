@@ -1724,7 +1724,7 @@ public class GlobalFunctions
         return _photo_path;
     }
 
-    public bool SaveEmailBeforeSend(int user_id, int company_id, string to, string from, string cc, string subject, string msg, bool send)
+    public bool SaveEmailBeforeSend(int user_id, int company_id, string to, string from, string cc, string subject, string msg, bool send, int email_type)
     {
         var email = new email
         {
@@ -1733,6 +1733,7 @@ public class GlobalFunctions
             cc = cc,
             Title = subject,
             Body = msg,
+            EmailType = email_type,
             is_sent = false,
             user_id = user_id,
             company_id = company_id,

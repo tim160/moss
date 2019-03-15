@@ -708,12 +708,12 @@ namespace EC.Controllers
                         if (promotion_value == ECGlobalConstants.investigation_status_completed && um_temp._user.id == sign_off_mediator_id)
                         {
                             eb.CaseCloseApprove(rm._report.display_name);
+                            glb.SaveEmailBeforeSend(_user.id, _user.company_id, _user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc),eb.Body, false, 9);
+
+
                             //em.Send(to, cc, LocalizationGetter.GetString("Email_Title_NextStep", is_cc), body, true);
-                            var resultErrorMessage = await em.QuickSendEmailAsync(_user.email.Trim(), "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, true);
-                            if (resultErrorMessage.exception != null)
-                            {
-                                logger.Info("NewCase / CloseCase 712 line " + resultErrorMessage.exception.Message);
-                            }
+                            //var resultErrorMessage = await em.QuickSendEmailAsync(_user.email.Trim(), "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, true);
+ 
                         }
                         else if (promotion_value == ECGlobalConstants.investigation_status_completed && um_temp._user.role_id == 4)
                         {
