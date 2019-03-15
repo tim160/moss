@@ -343,13 +343,13 @@ namespace EC.Controllers.ViewModel
             CompanyModel cm = new CompanyModel(rm._report.company_id);
             UserModel um = new UserModel(user_id);
             #region Email Ready
-            to = new List<string>();
-            cc = new List<string>();
+            //to = new List<string>();
+            //cc = new List<string>();
             List<string> bcc = new List<string>();
 
             em = new EC.Business.Actions.Email.EmailManagement(is_cc);
             eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
-            body = "";
+            //body = "";
             #endregion
 
             if (EC.Common.Util.DomainUtil.IsCC(Request))

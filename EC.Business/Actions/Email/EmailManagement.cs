@@ -756,7 +756,7 @@ namespace EC.Business.Actions.Email
 
                     }
 
-                    //smtpClient.Send(msg);
+                     smtpClient.Send(msg);
                     //smtpClient.SendAsync(msg, null);
    ///tim                 SendEmailAsync(msg);
 
