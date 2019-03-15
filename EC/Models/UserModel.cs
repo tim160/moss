@@ -1056,23 +1056,11 @@ namespace EC.Models
 
                 if ((um._user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(um._user.email.Trim()))
                 {
-                    //List<string> to = new List<string>();
-                    //List<string> cc = new List<string>();
-                    //List<string> bcc = new List<string>();
-
-                    //to.Add(um._user.email.Trim());
-                    ///     bcc.Add("timur160@hotmail.com");
-
                     EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
                     EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, HttpContext.Current.Request.Url.AbsoluteUri.ToLower());
                     eb.NewTask(um._user.first_nm, um._user.last_nm, _rm._report.display_name);
-                    //string body = eb.Body;
-                    //em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_NewTask, body, true);
-                    var resultErrorMessage = await em.QuickSendEmailAsync(um._user.email.Trim(), "copy", App_LocalResources.GlobalRes.Email_Title_NewTask, eb.Body, true);
-                    if (resultErrorMessage.exception != null)
-                    {
-                        logger.Info("UserModel / CreateNewTask" + resultErrorMessage.exception.Message);
-                    }
+                    glb.SaveEmailBeforeSend(_user.id, _user.company_id, um._user.email.Trim(), ConfigurationManager.AppSettings["emailFrom"], "",
+                        App_LocalResources.GlobalRes.Email_Title_NewTask, eb.Body, false, 6);
                 }
 
                 #endregion
@@ -1171,7 +1159,7 @@ namespace EC.Models
         }
 
     
-        public async Task<bool> ReassignTask(int task_id, int mediator_id)
+        public bool ReassignTask(int task_id, int mediator_id)
         {
             try
             {
@@ -1192,23 +1180,11 @@ namespace EC.Models
 
                 if ((um._user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(um._user.email.Trim()))
                 {
-                    //List<string> to = new List<string>();
-                    //List<string> cc = new List<string>();
-                    //List<string> bcc = new List<string>();
-
-                    //to.Add(um._user.email.Trim());
-                    ///     bcc.Add("timur160@hotmail.com");
-
                     EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
                     EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, HttpContext.Current.Request.Url.AbsoluteUri.ToLower());
                     eb.NewTask(um._user.first_nm, um._user.last_nm, _rm._report.display_name);
-                    string body = eb.Body;
-                    //em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_NewTask, body, true);
-                    var resultErrorMessage = await em.QuickSendEmailAsync(um._user.email.Trim(), "copy", App_LocalResources.GlobalRes.Email_Title_NewTask, body, true);
-                    if (resultErrorMessage.exception != null)
-                    {
-                        logger.Info("UserModel / ReassignTask" + resultErrorMessage.exception.Message);
-                    }
+                    glb.SaveEmailBeforeSend(_user.id, _user.company_id, um._user.email.Trim(), ConfigurationManager.AppSettings["emailFrom"], "",
+                        App_LocalResources.GlobalRes.Email_Title_NewTask, eb.Body, false, 6);
                 }
 
                 #endregion

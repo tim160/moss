@@ -535,10 +535,10 @@ namespace EC.Controllers
             return View();
         }
 
-        public async Task<ActionResult> ReassignTask(int id, int mediator_id)
+        public ActionResult ReassignTask(int id, int mediator_id)
         {
             var userModel = new UserModel();
-            await userModel.ReassignTask(id, mediator_id);
+            userModel.ReassignTask(id, mediator_id);
 
             return RedirectToAction("Task", new {id = id });
         }
@@ -709,21 +709,11 @@ namespace EC.Controllers
                         {
                             eb.CaseCloseApprove(rm._report.display_name);
                             glb.SaveEmailBeforeSend(_user.id, _user.company_id, _user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc),eb.Body, false, 9);
-
-
-                            //em.Send(to, cc, LocalizationGetter.GetString("Email_Title_NextStep", is_cc), body, true);
-                            //var resultErrorMessage = await em.QuickSendEmailAsync(_user.email.Trim(), "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, true);
- 
                         }
                         else if (promotion_value == ECGlobalConstants.investigation_status_completed && um_temp._user.role_id == 4)
                         {
                             eb.CaseCloseApprovePlatformManager(rm._report.display_name);
-                            //em.Send(to, cc, LocalizationGetter.GetString("Email_Title_NextStep", is_cc), body, true);
-                            var resultErrorMessage = await em.QuickSendEmailAsync(_user.email.Trim(), "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, true);
-                            if (resultErrorMessage.exception != null)
-                            {
-                                logger.Info("NewCase / CloseCase 723 line " + resultErrorMessage.exception.Message);
-                            }
+                            glb.SaveEmailBeforeSend(_user.id, _user.company_id, _user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 10);
                         }
                     }
                 }

@@ -949,18 +949,11 @@ namespace EC.Controllers
 
                         if ((user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(user.email.Trim()))
                         {
-                            List<string> to = new List<string>();
-                            List<string> cc = new List<string>();
-                            List<string> bcc = new List<string>();
-
-                            to.Add(user.email.Trim());
-                            ///     bcc.Add("timur160@hotmail.com");
-
                             EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
                             EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
                             eb.NewCompany(user.first_nm, user.last_nm, login.Trim(), pass.Trim(), company_name.Trim(), company_code.Trim());
-                            string body = eb.Body;
-                            em.Send(to, cc, LocalizationGetter.GetString("Email_Title_NewCompany", is_cc), body, true);
+                            glb.SaveEmailBeforeSend(_user.id, _user.company_id, user.email.Trim(), ConfigurationManager.AppSettings["emailFrom"], "",
+                                LocalizationGetter.GetString("Email_Title_NewCompany", is_cc), eb.Body, false, 2);
                         }
 
 
@@ -1151,39 +1144,24 @@ namespace EC.Controllers
 
                 if ((user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(user.email.Trim()))
                 {
-                    List<string> to = new List<string>();
-                    List<string> cc = new List<string>();
-                    List<string> bcc = new List<string>();
-
-                    to.Add(user.email.Trim());
-                    ///     bcc.Add("timur160@hotmail.com");
-
                     CompanyModel cm = new CompanyModel(user.company_id);
 
                     EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
                     EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
                     eb.NewUser(user.first_nm, user.last_nm, login.Trim(), pass.Trim());
-                    string body = eb.Body;
 
                     string email_title = LocalizationGetter.GetString("Email_Title_NewUser", is_cc);
                     email_title = email_title.Replace("[CompanyName]", cm._company.company_nm);
-                    em.Send(to, cc, email_title, body, true);
-
+                    glb.SaveEmailBeforeSend(_user.id, _user.company_id, user.email.Trim(), ConfigurationManager.AppSettings["emailFrom"], "",
+                        email_title, eb.Body, false, 13);
                     #region New Mediator Arrived - message to all Supervising mediators
                     foreach (user _user in cm.AllSupervisingMediators(cm._company.id, true))
                     {
                         if ((_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_user.email.Trim()))
                         {
-                            to = new List<string>();
-                            cc = new List<string>();
-                            bcc = new List<string>();
-
-                            to.Add(_user.email.Trim());
-                            ///     bcc.Add("timur160@hotmail.com");
-
                             eb.NewUserArrived(_user.first_nm, _user.last_nm, user.first_nm, user.last_nm);
-                            body = eb.Body;
-                            em.Send(to, cc, email_title, body, true);
+                            glb.SaveEmailBeforeSend(_user.id, _user.company_id, _user.email.Trim(), ConfigurationManager.AppSettings["emailFrom"], "",
+                                email_title, eb.Body, false, 14);
                         }
                     }
                     #endregion

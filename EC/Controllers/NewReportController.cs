@@ -230,11 +230,8 @@ namespace EC.Controllers.ViewModel
 
             ReportModel rm = new ReportModel(report_id);
 
-            List<string> to = new List<string>();
-            List<string> cc = new List<string>();
             EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
             EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, HttpContext.Request.Url.AbsoluteUri.ToLower());
-            var body = "";
 
             using (ECEntities adv = new ECEntities())
             {
@@ -275,9 +272,8 @@ namespace EC.Controllers.ViewModel
 
                 var _um = new UserModel(ownerId);
                 eb.SetCaseOwner(_um._user.first_nm, _um._user.last_nm, user.first_nm, user.last_nm, rm._report.display_name);
-                body = eb.Body;
-                to.Add(_um._user.email.Trim());
-                em.Send(to, cc, LocalizationGetter.GetString("Email_Title_SetCaseOwner", is_cc), body, true);
+                glb.SaveEmailBeforeSend(_user.id, _user.company_id, _um._user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
+                    LocalizationGetter.GetString("Email_Title_SetCaseOwner", is_cc), eb.Body, false, 65);
 
                 var item = db.report_mediator_assigned.FirstOrDefault(x => x.report_id == report_id & x.mediator_id == ownerId);
                 if (item == null)
@@ -341,7 +337,7 @@ namespace EC.Controllers.ViewModel
             glb.UpdateReportLog(user_id, 17, report_id, description, null, "");
             ///// to return        glb.UpdateReportLog(user_id, 20, report_id, App_LocalResources.GlobalRes._Completed, null, "");
 
-            
+
             report_log _log = new report_log();
 
             CompanyModel cm = new CompanyModel(rm._report.company_id);
@@ -370,33 +366,33 @@ namespace EC.Controllers.ViewModel
                     bool sent_email = false;
 
 
-                   
-                        if (!String.IsNullOrEmpty(cm._company.cc_campus_alert_manager_email))
-                        {
-                            //glb.CampusSecurityAlertEmail(rm._report, Request.Url, db, cm._company.cc_campus_alert_manager_email, cm._company.cc_campus_alert_manager_first_name, cm._company.cc_campus_alert_manager_last_name);
 
-                            glb.CampusSecurityAlertEmail(rm._report, Request.Url, db, cm._company.cc_campus_alert_manager_email);
-                            glb.UpdateReportLog(user_id, 24, report_id, "", null, "");
-                        }
-                        else if(platform_manager_email.Length > 0)
-                        {
-                            //glb.CampusSecurityAlertEmail(rm._report, Request.Url, db, platformManager.email, platformManager.first_nm, platformManager.last_nm);
-
-                            glb.CampusSecurityAlertEmail(rm._report, Request.Url, db, platformManager.email);
-                            sent_email = true;
-                            glb.UpdateReportLog(user_id, 24, report_id, "", null, "");
-                        }
-
-         /*         if (!String.IsNullOrEmpty(cm._company.cc_daily_crime_log_manager_email))
+                    if (!String.IsNullOrEmpty(cm._company.cc_campus_alert_manager_email))
                     {
-                        glb.CampusSecurityAlertEmail(rm._report, Request.Url, db, cm._company.cc_daily_crime_log_manager_email);
-                    }
-                    else if (platform_manager_email.Length > 0 && !sent_email)
-                    {
-                        glb.CampusSecurityAlertEmail(rm._report, Request.Url, db, platform_manager_email);
+                        //glb.CampusSecurityAlertEmail(rm._report, Request.Url, db, cm._company.cc_campus_alert_manager_email, cm._company.cc_campus_alert_manager_first_name, cm._company.cc_campus_alert_manager_last_name);
+
+                        glb.CampusSecurityAlertEmail(rm._report, Request.Url, db, cm._company.cc_campus_alert_manager_email);
                         glb.UpdateReportLog(user_id, 24, report_id, "", null, "");
                     }
-                    */
+                    else if (platform_manager_email.Length > 0)
+                    {
+                        //glb.CampusSecurityAlertEmail(rm._report, Request.Url, db, platformManager.email, platformManager.first_nm, platformManager.last_nm);
+
+                        glb.CampusSecurityAlertEmail(rm._report, Request.Url, db, platformManager.email);
+                        sent_email = true;
+                        glb.UpdateReportLog(user_id, 24, report_id, "", null, "");
+                    }
+
+                    /*         if (!String.IsNullOrEmpty(cm._company.cc_daily_crime_log_manager_email))
+                               {
+                                   glb.CampusSecurityAlertEmail(rm._report, Request.Url, db, cm._company.cc_daily_crime_log_manager_email);
+                               }
+                               else if (platform_manager_email.Length > 0 && !sent_email)
+                               {
+                                   glb.CampusSecurityAlertEmail(rm._report, Request.Url, db, platform_manager_email);
+                                   glb.UpdateReportLog(user_id, 24, report_id, "", null, "");
+                               }
+                               */
                 }
             }
             glb.UpdateReportLog(user_id, 21, report_id, App_LocalResources.GlobalRes._Started, null, "");
@@ -410,16 +406,18 @@ namespace EC.Controllers.ViewModel
                 {
                     if ((_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_user.email.Trim()))
                     {
-                        to = new List<string>();
-                        cc = new List<string>();
-                        bcc = new List<string>();
+                        //to = new List<string>();
+                        //cc = new List<string>();
+                        //bcc = new List<string>();
 
-                        to.Add(_user.email.Trim());
+                        //to.Add(_user.email.Trim());
 
                         eb.NextStep(_user.first_nm, _user.last_nm, rm._report.display_name);
-                        body = eb.Body;
+                        //body = eb.Body;
 
-                     ///   em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_NextStep, body, true);
+                        ///   em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_NextStep, body, true);
+                        glb.SaveEmailBeforeSend(_user.id, _user.company_id, _user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
+                            LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 7);
                     }
                 }
                 #endregion
@@ -428,26 +426,14 @@ namespace EC.Controllers.ViewModel
 
                 if ((rm._reporter_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(rm._reporter_user.email.Trim()))
                 {
-                    to = new List<string>();
-                    cc = new List<string>();
-                    bcc = new List<string>();
-
-                    to.Add(rm._reporter_user.email.Trim());
-
                     eb.NextStep(um._user.first_nm, um._user.last_nm, rm._report.display_name);
-                    body = eb.Body;
-
-                    //em.Send(to, cc, LocalizationGetter.GetString("Email_Title_NextStep", is_cc), body, true);
-                    var resultErrorMessage = await em.QuickSendEmailAsync(rm._reporter_user.email.Trim(), "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), body, true);
-                    if (resultErrorMessage.exception != null)
-                    {
-                        logger.Info("NewReportController  / AcceptOrReopenCase" + resultErrorMessage.exception.Message);
-                    }
+                    glb.SaveEmailBeforeSend(_user.id, _user.company_id, rm._reporter_user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
+                        LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 7);
                 }
 
-        #endregion
-      }
-            else                                                                                                         
+                #endregion
+            }
+            else
             {
                 // case re-opened
                 glb.UpdateReportLog(user_id, 29, report_id, description, null, "");
@@ -458,39 +444,23 @@ namespace EC.Controllers.ViewModel
                 {
                     if ((_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_user.email.Trim()))
                     {
-                        to = new List<string>();
-                        cc = new List<string>();
-                        bcc = new List<string>();
-
-                        to.Add(_user.email.Trim());
-                        ///     bcc.Add("timur160@hotmail.com");
-
                         eb.CaseReopened(_user.first_nm, _user.last_nm, rm._report.display_name, um._user.first_nm, um._user.last_nm);
-                        body = eb.Body;
-
-                        em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_CaseReopened, body, true);
-          }
-        }
+                        glb.SaveEmailBeforeSend(_user.id, _user.company_id, _user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
+                            App_LocalResources.GlobalRes.Email_Title_CaseReopened, eb.Body, false, 8);
+                    }
+                }
                 #endregion
 
                 #region Email to Reporter About case been reopened
                 if ((rm._reporter_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(rm._reporter_user.email.Trim()))
                 {
-                    to = new List<string>();
-                    cc = new List<string>();
-                    bcc = new List<string>();
-
-                    to.Add(rm._reporter_user.email.Trim());
-                    ///     bcc.Add("timur160@hotmail.com");
-
                     eb.ReporterCaseReopened(rm._report.display_name);
-                    body = eb.Body;
+                    glb.SaveEmailBeforeSend(_user.id, _user.company_id, rm._reporter_user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
+                            App_LocalResources.GlobalRes.Email_Title_CaseReopened, eb.Body, false, 33);
+                }
 
-                    em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_CaseReopened, body, true);
-        }
-
-        #endregion
-      }
+                #endregion
+            }
 
             /////     glb.UpdateReportLog(user_id, 20, report_id, App_LocalResources.GlobalRes._Completed, null, description);
             //////    glb.UpdateReportLog(user_id, 21, report_id, App_LocalResources.GlobalRes._Started, null, "");
@@ -518,7 +488,7 @@ namespace EC.Controllers.ViewModel
                     glb.UpdateReportLog(user_id, 42, report_id, "", null, "");
                     break;
             }
-                    return true;
+            return true;
         }
 
         public List<attachment> getAttachmentFiles(int report_id)
