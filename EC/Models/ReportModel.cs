@@ -1232,6 +1232,7 @@ namespace EC.Models
             var resultModel = new ReportModelResult();
             Guid _guid = Guid.NewGuid();
             var currentReport = new report();
+            
             using (ECEntities adv = new ECEntities())
             {
                 using (var transaction = db.Database.BeginTransaction())
@@ -1498,7 +1499,8 @@ namespace EC.Models
                         foreach (var item in mediators)
                         {
                             item.added_by_reporter = true;
-                            adv.report_non_mediator_involved.Add(item);
+                            item.report_id = currentReport.id;
+                            db.report_non_mediator_involved.Add(item);
                             //AddReportNonMediatorInvolved(item, currentReport);
                         }
 
@@ -1574,7 +1576,6 @@ namespace EC.Models
                 adv.report_non_mediator_involved.Add(item);
                 adv.SaveChanges();
             }
-
             return item;
         }
 
