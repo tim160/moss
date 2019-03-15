@@ -119,8 +119,9 @@ namespace EC.Controllers
             return RedirectToAction("Login", "Service");
                 //return View();
             }
-           ///// return RedirectToAction("Login", "Service");
-        }
+      return RedirectToAction("Login", "Service");
+      ///// return RedirectToAction("Login", "Service");
+    }
 
         [AllowAnonymous]
         public JsonResult SeekCompany(string term)
