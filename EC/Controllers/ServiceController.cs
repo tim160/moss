@@ -471,6 +471,43 @@ namespace EC.Controllers
             };
         }
 
+
+    //[HttpPost]
+    //EC.Windows.Task.Scheduler.exe http://localhost:8093/Service/Scheduler2?param1=197
+    public ActionResult Scheduler2(int? param1)
+    {
+
+      using (var db = new ECEntities())
+      {
+        var unsend_emails = db.email.Where(x => x.is_sent == false).ToList();
+        Business.Actions.Email.EmailManagement em = new Business.Actions.Email.EmailManagement(is_cc);
+        Business.Actions.Email.EmailBody eb = new Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+
+
+        foreach (var _email in unsend_emails)
+        {
+          ActionResultExtended emailResult = em.Send(_email.To, _email.Title, _email.Body, true);
+          //em.Send(email, "Case Management Deadline is past due", eb.Body, true);
+          if (emailResult.ReturnCode == ReturnCode.Success)
+          {
+            _email.is_sent = true;
+            _email.sent_dt = DateTime.Now;
+            db.SaveChanges();
+          }
+        }
+      }
+
+
+      return new JsonResult
+      {
+        JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+        Data = new
+        {
+          ok = true,
+        }
+      };
+
+    }
         public ActionResult FreshDeskSSO()
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
