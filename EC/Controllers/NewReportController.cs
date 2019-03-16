@@ -272,7 +272,7 @@ namespace EC.Controllers.ViewModel
 
                 var _um = new UserModel(ownerId);
                 eb.SetCaseOwner(_um._user.first_nm, _um._user.last_nm, user.first_nm, user.last_nm, rm._report.display_name);
-                glb.SaveEmailBeforeSend(_user.id, _user.company_id, _um._user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
+                glb.SaveEmailBeforeSend(_um._user.id, _um._user.company_id, _um._user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
                     LocalizationGetter.GetString("Email_Title_SetCaseOwner", is_cc), eb.Body, false, 65);
 
                 var item = db.report_mediator_assigned.FirstOrDefault(x => x.report_id == report_id & x.mediator_id == ownerId);
@@ -452,7 +452,7 @@ namespace EC.Controllers.ViewModel
                 if ((rm._reporter_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(rm._reporter_user.email.Trim()))
                 {
                     eb.ReporterCaseReopened(rm._report.display_name);
-                    glb.SaveEmailBeforeSend(_user.id, _user.company_id, rm._reporter_user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
+                    glb.SaveEmailBeforeSend(rm._reporter_user.id, rm._reporter_user.company_id, rm._reporter_user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
                             App_LocalResources.GlobalRes.Email_Title_CaseReopened, eb.Body, false, 33);
                 }
 
