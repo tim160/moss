@@ -980,7 +980,7 @@ namespace EC.Models
             }
         }
 
-        public async Task<bool> CreateNewTask(NameValueCollection form, HttpFileCollectionBase files)
+        public bool CreateNewTask(NameValueCollection form, HttpFileCollectionBase files)
         {
             int mediator_id = Convert.ToInt16(form["user_id"]);
             int report_id = Convert.ToInt16(form["report_id"]);
@@ -1059,7 +1059,7 @@ namespace EC.Models
                     EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
                     EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, HttpContext.Current.Request.Url.AbsoluteUri.ToLower());
                     eb.NewTask(um._user.first_nm, um._user.last_nm, _rm._report.display_name);
-                    glb.SaveEmailBeforeSend(_user.id, _user.company_id, um._user.email.Trim(), ConfigurationManager.AppSettings["emailFrom"], "",
+                    glb.SaveEmailBeforeSend(mediator_id, um._user.id, um._user.company_id, um._user.email.Trim(), ConfigurationManager.AppSettings["emailFrom"], "",
                         App_LocalResources.GlobalRes.Email_Title_NewTask, eb.Body, false, 6);
                 }
 
@@ -1159,7 +1159,7 @@ namespace EC.Models
         }
 
     
-        public bool ReassignTask(int task_id, int mediator_id)
+        public bool ReassignTask(int task_id, int mediator_id, int reporter_user)
         {
             try
             {
@@ -1183,7 +1183,7 @@ namespace EC.Models
                     EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
                     EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, HttpContext.Current.Request.Url.AbsoluteUri.ToLower());
                     eb.NewTask(um._user.first_nm, um._user.last_nm, _rm._report.display_name);
-                    glb.SaveEmailBeforeSend(_user.id, _user.company_id, um._user.email.Trim(), ConfigurationManager.AppSettings["emailFrom"], "",
+                    glb.SaveEmailBeforeSend(reporter_user, um._user.id, um._user.company_id, um._user.email.Trim(), ConfigurationManager.AppSettings["emailFrom"], "",
                         App_LocalResources.GlobalRes.Email_Title_NewTask, eb.Body, false, 6);
                 }
 

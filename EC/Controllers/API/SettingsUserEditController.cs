@@ -151,7 +151,7 @@ namespace EC.Controllers.API
                 user.sign_in_code = null;
                 user.guid = Guid.NewGuid();
                 DB.user.Add(user);
-
+                DB.SaveChanges();
                 var company = DB.company.FirstOrDefault(x => x.id == curUser.company_id);
                 EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
                 EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, HttpContext.Current.Request.Url.AbsoluteUri.ToLower());
@@ -164,7 +164,8 @@ namespace EC.Controllers.API
                     $"{password}");
                 string body = eb.Body;
                 //em.Send(model.email.ToLower(), "You have been added as a Case Administrator", body, true);
-                glb.SaveEmailBeforeSend(curUser.id, curUser.company_id, model.email, System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", "You have been added as a Case Administrator", body, false, 0);
+                //need to check
+                glb.SaveEmailBeforeSend(curUser.id, user.id, curUser.company_id, model.email, System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", "You have been added as a Case Administrator", body, false, 0);
 
             }
       DB.SaveChanges();

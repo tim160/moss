@@ -182,7 +182,7 @@ namespace EC.Controllers.API
             {
                 //em.Send("alexandr@ase.com.ua", "New book training added", body, "", true);
                 //em.Send(mediator.email, "New book training added", body, "", true);
-                glb.SaveEmailBeforeSend(mediator.id, mediator.company_id, mediator.email, System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", "New book training added", body, false, 61);
+                glb.SaveEmailBeforeSend(user.id, mediator.id, mediator.company_id, mediator.email, System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", "New book training added", body, false, 61);
 
           }
 
@@ -193,7 +193,7 @@ namespace EC.Controllers.API
             {
                 //em.Send("alexandr@ase.com.ua", "New book training added", body, "", true);
                // em.Send(trainer.email, "New book training added", body, "", true);
-                glb.SaveEmailBeforeSend(trainer.id, trainer.company_id, trainer.email, System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", "New book training added", body, false, 61);
+                glb.SaveEmailBeforeSend(user.id, trainer.id, trainer.company_id, trainer.email, System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", "New book training added", body, false, 61);
 
       }
 

@@ -214,7 +214,7 @@ namespace EC.Controllers.ViewModel
             return true;
         }
 
-        public async Task<bool> AcceptOrReopenCase()
+        public bool AcceptOrReopenCase()
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
 
@@ -272,7 +272,7 @@ namespace EC.Controllers.ViewModel
 
                 var _um = new UserModel(ownerId);
                 eb.SetCaseOwner(_um._user.first_nm, _um._user.last_nm, user.first_nm, user.last_nm, rm._report.display_name);
-                glb.SaveEmailBeforeSend(_um._user.id, _um._user.company_id, _um._user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
+                glb.SaveEmailBeforeSend(user.id, _um._user.id, _um._user.company_id, _um._user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
                     LocalizationGetter.GetString("Email_Title_SetCaseOwner", is_cc), eb.Body, false, 65);
 
                 var item = db.report_mediator_assigned.FirstOrDefault(x => x.report_id == report_id & x.mediator_id == ownerId);
@@ -308,6 +308,7 @@ namespace EC.Controllers.ViewModel
                 adv.SaveChanges();
 
             }
+            #region commited code
             /*   if (scopeId == 2)
                {
                    glb.UpdateReportLog(user_id, 41, report_id, "Case Scope: Internal", null, "");
@@ -334,6 +335,7 @@ namespace EC.Controllers.ViewModel
                }*/
 
             // Case accepted
+            # endregion
             glb.UpdateReportLog(user_id, 17, report_id, description, null, "");
             ///// to return        glb.UpdateReportLog(user_id, 20, report_id, App_LocalResources.GlobalRes._Completed, null, "");
 
@@ -368,14 +370,14 @@ namespace EC.Controllers.ViewModel
                     {
                         //glb.CampusSecurityAlertEmail(rm._report, Request.Url, db, cm._company.cc_campus_alert_manager_email, cm._company.cc_campus_alert_manager_first_name, cm._company.cc_campus_alert_manager_last_name);
 
-                        glb.CampusSecurityAlertEmail(rm._report, Request.Url, db, cm._company.cc_campus_alert_manager_email);
+                        glb.CampusSecurityAlertEmail(user.id, rm._report, Request.Url, db, cm._company.cc_campus_alert_manager_email);
                         glb.UpdateReportLog(user_id, 24, report_id, "", null, "");
                     }
                     else if (platform_manager_email.Length > 0)
                     {
                         //glb.CampusSecurityAlertEmail(rm._report, Request.Url, db, platformManager.email, platformManager.first_nm, platformManager.last_nm);
 
-                        glb.CampusSecurityAlertEmail(rm._report, Request.Url, db, platformManager.email);
+                        glb.CampusSecurityAlertEmail(user.id, rm._report, Request.Url, db, platformManager.email);
                         sent_email = true;
                         glb.UpdateReportLog(user_id, 24, report_id, "", null, "");
                     }
@@ -413,7 +415,7 @@ namespace EC.Controllers.ViewModel
                         //body = eb.Body;
 
                         ///   em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_NextStep, body, true);
-                        glb.SaveEmailBeforeSend(_user.id, _user.company_id, _user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
+                        glb.SaveEmailBeforeSend(user.id, _user.id, _user.company_id, _user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
                             LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 7);
                     }
                 }
@@ -424,7 +426,7 @@ namespace EC.Controllers.ViewModel
                 if ((rm._reporter_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(rm._reporter_user.email.Trim()))
                 {
                     eb.NextStep(um._user.first_nm, um._user.last_nm, rm._report.display_name);
-                    glb.SaveEmailBeforeSend(_user.id, _user.company_id, rm._reporter_user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
+                    glb.SaveEmailBeforeSend(user.id, _user.id, _user.company_id, rm._reporter_user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
                         LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 7);
                 }
 
@@ -442,7 +444,7 @@ namespace EC.Controllers.ViewModel
                     if ((_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_user.email.Trim()))
                     {
                         eb.CaseReopened(_user.first_nm, _user.last_nm, rm._report.display_name, um._user.first_nm, um._user.last_nm);
-                        glb.SaveEmailBeforeSend(_user.id, _user.company_id, _user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
+                        glb.SaveEmailBeforeSend(user.id, _user.id, _user.company_id, _user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
                             App_LocalResources.GlobalRes.Email_Title_CaseReopened, eb.Body, false, 8);
                     }
                 }
@@ -452,7 +454,7 @@ namespace EC.Controllers.ViewModel
                 if ((rm._reporter_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(rm._reporter_user.email.Trim()))
                 {
                     eb.ReporterCaseReopened(rm._report.display_name);
-                    glb.SaveEmailBeforeSend(rm._reporter_user.id, rm._reporter_user.company_id, rm._reporter_user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
+                    glb.SaveEmailBeforeSend(user.id, rm._reporter_user.id, rm._reporter_user.company_id, rm._reporter_user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
                             App_LocalResources.GlobalRes.Email_Title_CaseReopened, eb.Body, false, 33);
                 }
 
