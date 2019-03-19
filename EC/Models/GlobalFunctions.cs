@@ -1586,27 +1586,27 @@ public class GlobalFunctions
         return String.Format("The password should be at least {0} characters long", PasswordLength.ToString());
     }
 
-    public void CampusSecurityAlertEmail(report report, Uri uri, ECEntities db, string email)
+    public void CampusSecurityAlertEmail(int user_from,report report, Uri uri, ECEntities db, string email)
     {
      ////   return;
         IEmailAddressHelper m_EmailHelper = new EmailAddressHelper();
         EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(true);
         EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, uri.AbsoluteUri.ToLower());
 
-        var user_pm = db.user.FirstOrDefault(x => x.role_id == 5 && x.company_id == report.company_id);
-        if ((user_pm != null) && (email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(email.Trim()))
+        var user_to = db.user.FirstOrDefault(x => x.role_id == 5 && x.company_id == report.company_id);
+        if ((user_to != null) && (email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(email.Trim()))
         {
-            string phone = $"{user_pm.phone}";
+            string phone = $"{user_to.phone}";
             if(string.IsNullOrEmpty(phone))
-                phone = $"{user_pm.email}";
+                phone = $"{user_to.email}";
 
             eb.CampusSecurityAlert(
                 report.id.ToString(),
                 report.display_name,
-                $"{user_pm.first_nm} {user_pm.last_nm}",
+                $"{user_to.first_nm} {user_to.last_nm}",
                 phone
                 );
-            SaveEmailBeforeSend(user_pm.id, user_pm.company_id, email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
+            SaveEmailBeforeSend(user_from, user_to.id, user_to.company_id, email.Trim(), ConfigurationManager.AppSettings["emailFrom"], "",
                 EC.App_LocalResources.GlobalRes.CampusSecurityAlert, eb.Body, false, 51);
         }
     }
@@ -1640,8 +1640,8 @@ public class GlobalFunctions
                 $"{first_nm_temp} {last_nm_temp}",
                 phone
                 );
-            this.SaveEmailBeforeSend(user_pm.id, user_pm.company_id, email, ConfigurationManager.AppSettings["emailFrom"], "",
-                EC.App_LocalResources.GlobalRes.CampusSecurityAlert, eb.Body, false, 0);
+            this.SaveEmailBeforeSend(0, user_pm.id, user_pm.company_id, email, ConfigurationManager.AppSettings["emailFrom"], "",
+               GlobalRes.CampusSecurityAlert, eb.Body, false, 0);
             
         }
     }
@@ -1693,7 +1693,7 @@ public class GlobalFunctions
         return _photo_path;
     }
 
-    public bool SaveEmailBeforeSend(int user_id, int company_id, string to, string from, string cc, string subject, string msg, bool send, int email_type)
+    public bool SaveEmailBeforeSend(int user_id_from, int user_id_to,  int company_id, string to, string from, string cc, string subject, string msg, bool send, int email_type)
     {
         var email = new email
         {
@@ -1701,10 +1701,11 @@ public class GlobalFunctions
             From = from,
             cc = cc,
             Title = subject,
-            Body = msg,
+             Body = msg,
             EmailType = email_type,
             is_sent = false,
-            user_id = user_id,
+            user_id_from = user_id_from,
+            user_id_to = user_id_to,
             company_id = company_id,
             created_dt = DateTime.Now,
             isSSL = false

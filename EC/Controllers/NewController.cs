@@ -952,7 +952,7 @@ namespace EC.Controllers
                             EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
                             EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
                             eb.NewCompany(user.first_nm, user.last_nm, login.Trim(), pass.Trim(), company_name.Trim(), company_code.Trim());
-                            glb.SaveEmailBeforeSend(_user.id, _user.company_id, user.email.Trim(), ConfigurationManager.AppSettings["emailFrom"], "",
+                            glb.SaveEmailBeforeSend(0, user.id, user.company_id, user.email.Trim(), ConfigurationManager.AppSettings["emailFrom"], "",
                                 LocalizationGetter.GetString("Email_Title_NewCompany", is_cc), eb.Body, false, 2);
                         }
 
@@ -1152,7 +1152,7 @@ namespace EC.Controllers
 
                     string email_title = LocalizationGetter.GetString("Email_Title_NewUser", is_cc);
                     email_title = email_title.Replace("[CompanyName]", cm._company.company_nm);
-                    glb.SaveEmailBeforeSend(_user.id, _user.company_id, user.email.Trim(), ConfigurationManager.AppSettings["emailFrom"], "",
+                    glb.SaveEmailBeforeSend(0, _user.id, _user.company_id, user.email.Trim(), ConfigurationManager.AppSettings["emailFrom"], "",
                         email_title, eb.Body, false, 13);
                     #region New Mediator Arrived - message to all Supervising mediators
                     foreach (user _user in cm.AllSupervisingMediators(cm._company.id, true))
@@ -1160,7 +1160,7 @@ namespace EC.Controllers
                         if ((_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_user.email.Trim()))
                         {
                             eb.NewUserArrived(_user.first_nm, _user.last_nm, user.first_nm, user.last_nm);
-                            glb.SaveEmailBeforeSend(_user.id, _user.company_id, _user.email.Trim(), ConfigurationManager.AppSettings["emailFrom"], "",
+                            glb.SaveEmailBeforeSend(0, _user.id, _user.company_id, _user.email.Trim(), ConfigurationManager.AppSettings["emailFrom"], "",
                                 email_title, eb.Body, false, 14);
                         }
                     }

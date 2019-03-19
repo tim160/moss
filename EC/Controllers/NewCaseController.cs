@@ -202,10 +202,13 @@ namespace EC.Controllers
             return View();
         }
 
-        public async Task<bool> CreateNewTask()
+        public bool CreateNewTask()
         {
             UserModel userModel = new UserModel();
-            return await userModel.CreateNewTask(Request.Form, Request.Files);
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            if (user == null || user.id == 0)
+                return false;
+            return userModel.CreateNewTask(Request.Form, Request.Files);
         }
 
         public ActionResult Messages(int report_id)
@@ -538,7 +541,9 @@ namespace EC.Controllers
         public ActionResult ReassignTask(int id, int mediator_id)
         {
             var userModel = new UserModel();
-            userModel.ReassignTask(id, mediator_id);
+            user reporter_user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+
+            userModel.ReassignTask(id, mediator_id, reporter_user.id);
 
             return RedirectToAction("Task", new {id = id });
         }
@@ -599,7 +604,7 @@ namespace EC.Controllers
             return 0;
         }
 
-        public async Task<int> CloseCase()
+        public int CloseCase()
         {
             //   return 2;
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
@@ -708,12 +713,12 @@ namespace EC.Controllers
                         if (promotion_value == ECGlobalConstants.investigation_status_completed && um_temp._user.id == sign_off_mediator_id)
                         {
                             eb.CaseCloseApprove(rm._report.display_name);
-                            glb.SaveEmailBeforeSend(_user.id, _user.company_id, _user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc),eb.Body, false, 9);
+                            glb.SaveEmailBeforeSend(user.id, _user.id, _user.company_id, _user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc),eb.Body, false, 9);
                         }
                         else if (promotion_value == ECGlobalConstants.investigation_status_completed && um_temp._user.role_id == 4)
                         {
                             eb.CaseCloseApprovePlatformManager(rm._report.display_name);
-                            glb.SaveEmailBeforeSend(_user.id, _user.company_id, _user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 10);
+                            glb.SaveEmailBeforeSend(user.id, _user.id, _user.company_id, _user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 10);
                         }
                     }
                 }

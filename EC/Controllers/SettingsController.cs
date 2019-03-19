@@ -455,7 +455,7 @@ namespace EC.Controllers
                                 new_role = new_roledb.role_en;
 
                             eb.MediatorRoleChange(_updateuser.first_nm, _updateuser.last_nm, session_user.first_nm, session_user.last_nm, new_role);
-                            glb.SaveEmailBeforeSend(_user.id, _user.company_id, _updateuser.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
+                            glb.SaveEmailBeforeSend(session_user.id, _user.id, _user.company_id, _updateuser.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
                                 GlobalRes.Email_Title_MediatorRoleChanged, eb.Body, false, 42);
                         }
                     }
@@ -469,7 +469,7 @@ namespace EC.Controllers
                                 new_status = new_roledb.status_en;
 
                             eb.MediatorStatusChange(_updateuser.first_nm, _updateuser.last_nm, session_user.first_nm, session_user.last_nm, new_status);
-                            glb.SaveEmailBeforeSend(_user.id, _user.company_id, _updateuser.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
+                            glb.SaveEmailBeforeSend(session_user.id, _user.id, _user.company_id, _updateuser.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
                                 GlobalRes.Email_Title_MediatorStatusChanged, eb.Body, false, 43);
                         }
                     }
@@ -636,7 +636,7 @@ namespace EC.Controllers
             return result;
         }
 
-        public async Task<string> InviteMediator(string email)
+        public string InviteMediator(string email)
         {
             email = email.ToLower().Trim();
 
@@ -701,7 +701,7 @@ namespace EC.Controllers
 
                 CompanyModel cm = new CompanyModel(_user.company_id);
                 eb.MediatorInvited(_user.first_nm, _user.last_nm, _user.first_nm, _user.last_nm, cm._company.company_nm, generated_code, DomainUtil.GetSubdomainLink(Request.Url.AbsoluteUri.ToLower(), Request.Url.AbsoluteUri.ToLower()) + "/new/?code=" + generated_code + "&email=" + email);
-                glb.SaveEmailBeforeSend(_user.id, _user.company_id, email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
+                glb.SaveEmailBeforeSend(_user.id, 0, 0, email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
                     GlobalRes.Email_Title_MediatorInvited, eb.Body, false, 41);
             }
 

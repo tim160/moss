@@ -187,7 +187,7 @@ namespace EC.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<ActionResult> New(ReportViewModel model)
+        public ActionResult New(ReportViewModel model)
         {
             companyModel.ID = model.currentCompanyId;
             model.Process(Request.Form, Request.Files);
@@ -255,12 +255,7 @@ namespace EC.Controllers
                     }
 
                     body = eb.Body;
-                    glb.SaveEmailBeforeSend(_user.id, companyModel._company.id, _user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"],  "", title, body, false, email_type);
-                    //var resultErrorMessage = await em.QuickSendEmailAsync(_user.email.Trim(), "copy", title, body, true);
-                    //if (resultErrorMessage.exception != null)
-                    //{
-                    //    logger.Info("ReportController / New" + resultErrorMessage.exception.Message);
-                    //}
+                    glb.SaveEmailBeforeSend(0, _user.id, companyModel._company.id, _user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"],  "", title, body, false, email_type);
                 }
         #endregion
       } else
