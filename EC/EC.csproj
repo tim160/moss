@@ -1421,6 +1421,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ECEntities.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Database\email.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Database\frequency.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
