@@ -78,6 +78,26 @@ namespace EC.Controllers.API
             DB.message.Add(message);
             DB.SaveChanges();
 
+            #region send email user
+            if (filter.Mode == 2)
+            {
+                var report = DB.report.Find(message.report_id);
+                if (report != null && (report.incident_anonymity_id == 3 || report.incident_anonymity_id == 2))
+                {
+                    Business.Actions.Email.EmailManagement em = new Business.Actions.Email.EmailManagement(is_cc);
+                    Business.Actions.Email.EmailBody eb = new Business.Actions.Email.EmailBody(1, 1, Url.ToString());
+                    eb.ReporterNewMessage(report.company_nm);
+                    var userReporter = DB.user.Find(report.reporter_user_id);
+                    if (userReporter.email.Trim() != "" && userReporter.email.Trim().Length > 0)
+                    {
+                        GlobalFunctions glb = new GlobalFunctions();
+                        glb.SaveEmailBeforeSend(user.id, userReporter.id, userReporter.company_id, userReporter.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"],
+                                "", Localization.LocalizationGetter.GetString("Email_Title_NewCase", is_cc), eb.Body, false, 31);
+                    }
+                }
+            }
+            #endregion
+
             var m = new
             {
                 retsult = true,

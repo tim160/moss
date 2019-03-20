@@ -467,10 +467,10 @@ namespace EC.Business.Actions.Email
             m_body = m_body.Replace("[CaseNumber]", case_number.Trim());
         }
         //deleted?
-        public void ReporterNewMessage(string case_number)
+        public void ReporterNewMessage(string company_name)
         {
             GetBody(31);
-            m_body = m_body.Replace("[CaseNumber]", case_number.Trim());
+            m_body = m_body.Replace("[Company Name]", company_name.Trim());
 
         }
 

@@ -260,7 +260,7 @@ namespace EC.Controllers
                 #endregion
 
                 #region send email to user
-                if (currentReport.report.incident_anonymity_id == 3 && currentReport.report.user.email.Trim() != "")
+                if ((currentReport.report.incident_anonymity_id == 2 || currentReport.report.incident_anonymity_id == 3) && currentReport.report.user.email.Trim() != "")
                 {
                     eb.ReporterNewCase(currentReport.report.user.login_nm, currentReport.report.user.password, currentReport.report.display_name);
                     glb.SaveEmailBeforeSend(0, currentReport.report.user.id, currentReport.report.user.company_id, currentReport.report.user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"],

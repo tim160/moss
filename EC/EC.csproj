@@ -304,6 +304,7 @@
     <Content Include="Content\emails\CaseCloseApprove.html" />
     <Content Include="Content\emails\CaseCloseApprovePlatformManager.html" />
     <Content Include="Content\emails\CaseDeadlinePastDue.html" />
+    <Content Include="Content\emails\ReporterNewMessage.html" />
     <Content Include="Content\emails\VarAfter3WeekAfterSignUpToUser.html" />
     <Content Include="Content\emails\VarAfter24HoursAfterSignUpToUser.html" />
     <Content Include="Content\emails\VarAfter4HoursAfterSignUp.html" />
