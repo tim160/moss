@@ -426,7 +426,7 @@ namespace EC.Controllers.ViewModel
                 if ((rm._reporter_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(rm._reporter_user.email.Trim()))
                 {
                     eb.NextStep(um._user.first_nm, um._user.last_nm, rm._report.display_name);
-                    glb.SaveEmailBeforeSend(user.id, _user.id, _user.company_id, rm._reporter_user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
+                    glb.SaveEmailBeforeSend(user.id, rm._reporter_user.id, rm._reporter_user.company_id, rm._reporter_user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
                         LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 7);
                 }
 
