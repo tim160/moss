@@ -73,8 +73,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Rotativa.MVC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Bin\Rotativa.MVC.dll</HintPath>
+      <HintPath>..\packages\Rotativa.MVC.2.0.3\lib\net45\Rotativa.MVC.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Activities" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -1572,9 +1572,6 @@
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\status.cs">
-      <DependentUpon>ECEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Database\sysdiagrams.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\task.cs">
