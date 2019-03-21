@@ -228,8 +228,8 @@ namespace EC.Controllers
                 Business.Actions.Email.EmailManagement em = new Business.Actions.Email.EmailManagement(is_cc);
                 Business.Actions.Email.EmailBody eb = new Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
                 bool has_involved = false;
-                List<string> to = new List<string>();
-                List<string> cc = new List<string>();
+                //List<string> to = new List<string>();
+                //List<string> cc = new List<string>();
                 if (rm.InvolvedMediatorsUserList().Count > 0)
                     has_involved = true;
 
@@ -245,20 +245,31 @@ namespace EC.Controllers
                     int email_type = 0;
                     if (has_involved)
                     {
-                      eb.NewCaseInvolved(_user.first_nm, _user.last_nm, rm._report.display_name);
-                      email_type = 4;
+                        eb.NewCaseInvolved(_user.first_nm, _user.last_nm, rm._report.display_name);
+                        email_type = 4;
                     }
                     else
                     {
-                      eb.NewCase(_user.first_nm, _user.last_nm, rm._report.display_name);
-                      email_type = 3;
+                        eb.NewCase(_user.first_nm, _user.last_nm, rm._report.display_name);
+                        email_type = 3;
                     }
 
                     body = eb.Body;
-                    glb.SaveEmailBeforeSend(0, _user.id, companyModel._company.id, _user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"],  "", title, body, false, email_type);
+                    glb.SaveEmailBeforeSend(0, _user.id, companyModel._company.id, _user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", title, body, false, email_type);
                 }
-        #endregion
-      } else
+                #endregion
+
+                #region send email to user
+                if ((currentReport.report.incident_anonymity_id == 2 || currentReport.report.incident_anonymity_id == 3) && currentReport.report.user.email.Trim() != "")
+                {
+                    eb.ReporterNewCase(currentReport.report.user.login_nm, currentReport.report.user.password, currentReport.report.display_name);
+                    glb.SaveEmailBeforeSend(0, currentReport.report.user.id, currentReport.report.user.company_id, currentReport.report.user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"],
+                        "", LocalizationGetter.GetString("Email_Title_NewCase", is_cc), eb.Body, false, 30);
+                }
+
+                #endregion
+            }
+            else
             {
                 ViewBag.UserId = 0;
                 ViewBag.Login = "";
