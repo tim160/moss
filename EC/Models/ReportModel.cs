@@ -854,6 +854,8 @@ namespace EC.Models
         // Overloaded method when we know the delay
         public int GetThisStepDaysLeft(int step_delay_allowed)
         {
+          if (_report.status_id == ECGlobalConstants.investigation_status_closed || _report.status_id == ECGlobalConstants.investigation_status_spam)
+            return 0;
             DateTime promoted_date = LastPromotedDate();
             double days_left = 2;
             double days_ongoing = 0;
@@ -2698,6 +2700,19 @@ namespace EC.Models
         public user GetSignOffMeditoar()
         {
             return db.report_signoff_mediator.FirstOrDefault(x => x.report_id == ID && x.status_id == 2)?.user1;
+        }
+
+        public string DaysLeftClosedSpamMessage(int delay_allowed)
+        {
+          if (_report.status_id == ECGlobalConstants.investigation_status_spam)
+            return $"Sent on {m_DateTimeHelper.ConvertDateToShortString(_report.last_update_dt) }";
+          else if (_report.status_id == ECGlobalConstants.investigation_status_closed)
+            return $"Closed on {m_DateTimeHelper.ConvertDateToShortString(_report.last_update_dt) }";
+          else
+          {
+            int days_left = GetThisStepDaysLeft(delay_allowed);
+            return $"{days_left}" + (days_left == 1 ? " day left" : " days left");
+          }
         }
     }
 

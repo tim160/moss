@@ -70,6 +70,7 @@ namespace EC.Models.ViewModel
         public bool? cc_is_life_threating { get; set; }
         public string severity_s { get; set; }
         public int? severity_id { get; set; }
+        public string under_status_message { get; set; }
 
         public IEnumerable<dynamic> mediators { get; set; }
         public IEnumerable<report_owner> owners { get; set; }
@@ -103,7 +104,7 @@ namespace EC.Models.ViewModel
             this.case_color_code = rm.ColorCode();
             this.days_left = rm.GetThisStepDaysLeft();
             this.current_status = rm.InvestigationStatusString();
-
+            this.under_status_message = "";
 
             this.tasks_number = rm.ReportTasks(0).Count().ToString();
             this.messages_number = rm.UserMessagesCountNotSecure(caller_id, 0).ToString();
