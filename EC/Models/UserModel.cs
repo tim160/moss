@@ -1335,39 +1335,39 @@ namespace EC.Models
               {
                   var rm = new ReportModel(x);
                   var access_mediators = rm.MediatorsWhoHasAccessToReportQuick(top_mediator_ids);
-                  return new CasePreviewViewModel
-                  {
-                      current_status = investigation_status,
+                return new CasePreviewViewModel
+                {
+                    current_status = investigation_status,
 
-                      report_id = rm._report.id,
-                      case_number = rm._report.display_name,
-                      case_dt_s = rm._report.reported_dt.Ticks,
-                      cc_is_life_threating = rm._report.cc_is_life_threating,
-                      total_days = Math.Floor((DateTime.Now.Date - rm._report.reported_dt.Date).TotalDays),
+                    report_id = rm._report.id,
+                    case_number = rm._report.display_name,
+                    case_dt_s = rm._report.reported_dt.Ticks,
+                    cc_is_life_threating = rm._report.cc_is_life_threating,
+                    total_days = Math.Floor((DateTime.Now.Date - rm._report.reported_dt.Date).TotalDays),
 
-                      location = rm.LocationString(),
-                      case_secondary_types = rm.SecondaryTypeString(),
-                      days_left = rm.GetThisStepDaysLeft(delay_allowed),
+                    location = rm.LocationString(),
+                    case_secondary_types = rm.SecondaryTypeString(),
+                    days_left = rm.GetThisStepDaysLeft(delay_allowed),
 
-                      reported_dt = rm.ReportedDateString(),
+                    reported_dt = rm.ReportedDateString(),
                     //  case_dt = rm.IncidentDateString(),
 
-                      tasks_number = rm.ReportTasksCount(0).ToString(),
-                      messages_number = rm.UserMessagesCountNotSecure(ID, 0).ToString(),
+                    tasks_number = rm.ReportTasksCount(0).ToString(),
+                    messages_number = rm.UserMessagesCountNotSecure(ID, 0).ToString(),
 
-                   
-                      mediators = (access_mediators == null || access_mediators.Count == 0)? null: access_mediators.Select(z => new {
-                          id = z.id,
-                          first_nm = z.first_nm,
-                          last_nm = z.last_nm,
-                          photo_path = string.IsNullOrWhiteSpace(z.photo_path) ? _no_photo_path : z.photo_path,
-                          //photo_path = glb.Photo_Path_String(z.photo_path, 1, 5),
-                          is_owner = z.is_owner
-                      }),
-                      case_color_code = (rm._report.report_color_id == 0) ? colors.Where(item => item.id == 1).FirstOrDefault().color_code : colors.Where(item => item.id == rm._report.report_color_id).FirstOrDefault().color_code,
-                      severity_s = !rm._report.severity_id.HasValue ? "UNSPECIFIED" : severities.FirstOrDefault(z => z.id == rm._report.severity_id).severity_en,
-                      severity_id = !rm._report.severity_id.HasValue ? 0 : rm._report.severity_id.Value
 
+                    mediators = (access_mediators == null || access_mediators.Count == 0) ? null : access_mediators.Select(z => new {
+                      id = z.id,
+                      first_nm = z.first_nm,
+                      last_nm = z.last_nm,
+                      photo_path = string.IsNullOrWhiteSpace(z.photo_path) ? _no_photo_path : z.photo_path,
+                      //photo_path = glb.Photo_Path_String(z.photo_path, 1, 5),
+                      is_owner = z.is_owner
+                    }),
+                    case_color_code = (rm._report.report_color_id == 0) ? colors.Where(item => item.id == 1).FirstOrDefault().color_code : colors.Where(item => item.id == rm._report.report_color_id).FirstOrDefault().color_code,
+                    severity_s = !rm._report.severity_id.HasValue ? "UNSPECIFIED" : severities.FirstOrDefault(z => z.id == rm._report.severity_id).severity_en,
+                    severity_id = !rm._report.severity_id.HasValue ? 0 : rm._report.severity_id.Value,
+                    under_status_message = rm.DaysLeftClosedSpamMessage(delay_allowed)
                   };
 
               }).ToList();

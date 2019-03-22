@@ -13,15 +13,7 @@
 
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
     ViewBag.Title = GlobalRes.ActiveCasesUp;
-    //Layout = "~/Views/Shared/LayoutMediators.cshtml";
-
-    //Int32 report_ids_Completed = ViewBag.completed_report_counters;
-    //Int32 report_ids_Spam = ViewBag.spam_report_counters;
-    //Int32 report_ids_Active = ViewBag.active_report_counters;
-    //Int32 report_ids_Closed = ViewBag.closed_report_counters;
-
-    //List<CasePreviewViewModel> preview_start_list = ViewBag.ReportPreviewStart;
-    //List<int> preview_list = ViewBag.ReportPreviewVM;
+ 
 
     <script src="~/Scripts/View/menuWork.js"></script>
     <script src="~/Scripts/View/CaseCircleDraw.js"></script>
@@ -195,14 +187,18 @@
 								    {{report.severity_s}}
 							    </div><!-- /.dashboard-col__case-text -->
 						    </div><!-- /.dashboard-col__severity dashboard-colbody clearfix -->
+
+
                             <div class="dashboard-col__stage dashboard-colbody clearfix">
                                 <div class="dashboard-col__stage-type">
                                     {{report.current_status}}
                                 </div><!-- /.dashboard-col__stage-type -->
                                 <div class="dashboard-col__stage-date {{(report.days_left > 0) ? 'dashboard-col__stage-date_green' : 'dashboard-col__stage-date_red'}}" style="font-size: 10px;">
-                                    {{report.days_left}} {{report.days_left == 1 ? ' day left' : ' days left'}}
-                                </div><!-- /.dashboard-col__stage-date -->
-                            </div><!-- /.dashboard-col__stage dashboard-colbody clearfix -->
+                                   {{report.under_status_message}} 
+                                 </div>
+                            </div>
+
+
                             <div class="dashboard-col__age dashboard-colbody clearfix">
                                 <div class="dashboard-col__age-text">
                                     {{report.total_days}} {{report.total_days == 1 ? ' day' : ' days'}}
