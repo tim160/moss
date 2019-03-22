@@ -395,11 +395,12 @@ namespace EC.Business.Actions.Email
             m_body = m_body.Replace("[CaseNumber]", case_number.Trim());
         }
 
-        public void CaseCloseApprovePlatformManager(string case_number)
+        public void CaseCloseApprovePlatformManager(string case_number, string caseReviewerName)
         {
             GetBody(10);
 
             m_body = m_body.Replace("[CaseNumber]", case_number.Trim());
+            m_body = m_body.Replace("[CaseReviewerName]", caseReviewerName.Trim());
         }
 
         public void EscalatedCase(string first, string last, string escalated_first, string escalated_last, string case_number)

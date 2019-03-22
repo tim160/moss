@@ -717,7 +717,7 @@ namespace EC.Controllers
                         }
                         else if (promotion_value == ECGlobalConstants.investigation_status_completed && um_temp._user.role_id == 4)
                         {
-                            eb.CaseCloseApprovePlatformManager(rm._report.display_name);
+                            eb.CaseCloseApprovePlatformManager(rm._report.display_name, user.first_nm + " " + user.last_nm);
                             glb.SaveEmailBeforeSend(user.id, _user.id, _user.company_id, _user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 10);
                         }
                     }
