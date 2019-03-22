@@ -45,6 +45,7 @@
     <Compile Include="Abstract\IEmailManager.cs" />
     <Compile Include="Actions\Email\EmailBody.cs" />
     <Compile Include="Actions\Email\EmailManagement.cs" />
+    <Compile Include="Actions\TextMessage.cs" />
     <Compile Include="Culture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

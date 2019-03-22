@@ -266,7 +266,11 @@ namespace EC.Business.Actions.Email
                     //After 3 weeks to user
                     m_filename = "1,2NotificationProspectEntersInfoSales";
                     break;
-                    
+                case 73:
+                    //ApproveCloseCaselast
+                    m_filename = "CaseCloseApproveClosed";
+                    break;
+
 
 
             }
@@ -401,6 +405,12 @@ namespace EC.Business.Actions.Email
 
             m_body = m_body.Replace("[CaseNumber]", case_number.Trim());
             m_body = m_body.Replace("[CaseReviewerName]", caseReviewerName.Trim());
+        }
+        public void CaseCloseApproveClosed(string case_number)
+        {
+            GetBody(73);
+
+            m_body = m_body.Replace("[CaseNumber]", case_number.Trim());
         }
 
         public void EscalatedCase(string first, string last, string escalated_first, string escalated_last, string case_number)

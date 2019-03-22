@@ -11,6 +11,7 @@ using EC.Models.ECModel;
 using Rotativa.MVC;
 using EC.Localization;
 using System.Threading.Tasks;
+using EC.Business.Actions;
 
 namespace EC.Controllers
 {
@@ -695,7 +696,7 @@ namespace EC.Controllers
                 }
             }
 
-            if (_new)
+            if (_new && description.Trim() == "")
             {
                 #region Email Ready
 
@@ -713,7 +714,7 @@ namespace EC.Controllers
                 else
                 {
                     //need to send to CaseCloseApprovePlatformManager to selected user in ddl
-                    user um_temp = db.user.Find(sign_off_mediator_id);
+                     user um_temp = db.user.Find(sign_off_mediator_id);
                     if(um_temp!=null)
                     {
                         eb.CaseCloseApprovePlatformManager(rm._report.display_name, user.first_nm + " " + user.last_nm);
@@ -741,6 +742,23 @@ namespace EC.Controllers
                 //        }
                 //    }
                 //}
+                #endregion
+            } else
+            {
+                #region sendsms
+                TextMessage text = new TextMessage();
+                text.Send();
+                #endregion
+
+                #region send email
+                EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
+                EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+                //Case Owner and Platform Manager.
+                eb.CaseCloseApproveClosed(rm._report.display_name);
+                glb.SaveEmailBeforeSend(user.id, user.id, user.company_id, user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 9);
+                //report.getCaseOwner
+                user caseOwner = db.user.Find(rm._report.current_owner_id);
+                glb.SaveEmailBeforeSend(user.id, caseOwner.id, caseOwner.company_id, caseOwner.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 73);
                 #endregion
             }
             switch (promotion_value)
