@@ -705,23 +705,42 @@ namespace EC.Controllers
                 #endregion
 
                 #region Email To Mediators About Case Update
-                foreach (user _user in rm.MediatorsWhoHasAccessToReport())
+                if(sign_off_mediator_id == mediator_id)
                 {
-                    if ((_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_user.email.Trim()))
-                    {
-                        UserModel um_temp = new UserModel(_user.id);
-                        if (promotion_value == ECGlobalConstants.investigation_status_completed && um_temp._user.id == sign_off_mediator_id)
-                        {
-                            eb.CaseCloseApprove(rm._report.display_name);
-                            glb.SaveEmailBeforeSend(user.id, _user.id, _user.company_id, _user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc),eb.Body, false, 9);
-                        }
-                        else if (promotion_value == ECGlobalConstants.investigation_status_completed && um_temp._user.role_id == 4)
-                        {
-                            eb.CaseCloseApprovePlatformManager(rm._report.display_name, user.first_nm + " " + user.last_nm);
-                            glb.SaveEmailBeforeSend(user.id, _user.id, _user.company_id, _user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 10);
-                        }
-                    }
+                    eb.CaseCloseApprove(rm._report.display_name);
+                    glb.SaveEmailBeforeSend(user.id, user.id, user.company_id, user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 9);
                 }
+                else
+                {
+                    //need to send to CaseCloseApprovePlatformManager to selected user in ddl
+                    user um_temp = db.user.Find(sign_off_mediator_id);
+                    if(um_temp!=null)
+                    {
+                        eb.CaseCloseApprovePlatformManager(rm._report.display_name, user.first_nm + " " + user.last_nm);
+                        glb.SaveEmailBeforeSend(user.id, um_temp.id, um_temp.company_id, um_temp.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 9);
+                    }
+                    //need to send to CaseCloseApprove to kate
+                    eb.CaseCloseApprove(rm._report.display_name);
+                    glb.SaveEmailBeforeSend(user.id, user.id, user.company_id, user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 9);
+                }
+
+                //foreach (user _user in rm.MediatorsWhoHasAccessToReport())
+                //{
+                //    if ((_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_user.email.Trim()))
+                //    {
+                //        UserModel um_temp = new UserModel(_user.id);
+                //        if (promotion_value == ECGlobalConstants.investigation_status_completed && um_temp._user.id == sign_off_mediator_id)
+                //        {
+                //            eb.CaseCloseApprove(rm._report.display_name);
+                //            glb.SaveEmailBeforeSend(user.id, _user.id, _user.company_id, _user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc),eb.Body, false, 9);
+                //        }
+                //        else if (promotion_value == ECGlobalConstants.investigation_status_completed && um_temp._user.role_id == 4)
+                //        {
+                //            eb.CaseCloseApprovePlatformManager(rm._report.display_name, user.first_nm + " " + user.last_nm);
+                //            glb.SaveEmailBeforeSend(user.id, _user.id, _user.company_id, _user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 10);
+                //        }
+                //    }
+                //}
                 #endregion
             }
             switch (promotion_value)
