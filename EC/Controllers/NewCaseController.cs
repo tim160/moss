@@ -757,8 +757,19 @@ namespace EC.Controllers
                 eb.CaseCloseApproveClosed(rm._report.display_name);
                 glb.SaveEmailBeforeSend(user.id, user.id, user.company_id, user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 9);
                 //report.getCaseOwner
-                user caseOwner = db.user.Find(rm._report.current_owner_id);
-                glb.SaveEmailBeforeSend(user.id, caseOwner.id, caseOwner.company_id, caseOwner.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 73);
+
+                int owner_id = 0;
+                var owner = db.report_owner.FirstOrDefault(x => x.report_id == rm._report.id & x.status_id == 2);
+                if (owner != null)
+                {
+                  owner_id = owner.user_id;
+                }
+                if (owner_id != 0)
+                {
+                  user caseOwner = db.user.Find(owner_id);
+                  if(user != null)
+                    glb.SaveEmailBeforeSend(user.id, caseOwner.id, caseOwner.company_id, caseOwner.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 73);
+                }
                 #endregion
             }
             switch (promotion_value)

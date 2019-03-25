@@ -479,14 +479,20 @@ namespace EC.Controllers
 
       using (var db = new ECEntities())
       {
+        logger.Info("Scheduler, is_cc" + is_cc.ToString());
         var unsend_emails = db.email.Where(x => x.is_sent == false).ToList();
         Business.Actions.Email.EmailManagement em = new Business.Actions.Email.EmailManagement(is_cc);
         Business.Actions.Email.EmailBody eb = new Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
 
+        logger.Info("Scheduler, unsend_emails" + unsend_emails.Count().ToString());
 
         foreach (var _email in unsend_emails)
         {
           ActionResultExtended emailResult = em.Send(_email.To, _email.Title, _email.Body, true);
+          logger.Info("Scheduler, emailResult ReturnCode" + emailResult.ReturnCode.ToString());
+          logger.Info("Scheduler, emailResult ReturnMessage" + emailResult.ReturnMessage);
+          logger.Info("Scheduler, emailResult ex" + emailResult.ExceptionMessage.ToString());
+          
           //em.Send(email, "Case Management Deadline is past due", eb.Body, true);
           if (emailResult.ReturnCode == ReturnCode.Success)
           {
