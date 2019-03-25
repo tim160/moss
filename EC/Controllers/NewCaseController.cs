@@ -718,7 +718,7 @@ namespace EC.Controllers
                     if(um_temp!=null)
                     {
                         eb.CaseCloseApprovePlatformManager(rm._report.display_name, user.first_nm + " " + user.last_nm);
-                        glb.SaveEmailBeforeSend(user.id, um_temp.id, um_temp.company_id, um_temp.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 9);
+                        glb.SaveEmailBeforeSend(user.id, um_temp.id, um_temp.company_id, um_temp.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 10);
                     }
                     //need to send to CaseCloseApprove to kate
                     eb.CaseCloseApprove(rm._report.display_name);
