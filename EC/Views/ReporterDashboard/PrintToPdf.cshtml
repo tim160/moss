@@ -1,0 +1,271 @@
+﻿@using EC.Models
+@using EC.App_LocalResources
+@using EC.Models.Database
+@using EC.Localization
+
+@model ReportModel
+
+@{
+    Layout = null;
+    var role_in_report = (List<role_in_report>)ViewBag.Roles;
+    var cm = new CompanyModel();
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>@("Report to " + Model.CompanyName())</title>
+    <link rel="stylesheet" href="~/Content/newCase.css" />
+    <link rel="stylesheet" href="~/Content/print-reports.css" />
+</head>
+<body>
+    <div class="reportTemplate container clearfix">
+        <div class="reportTemplateHeader clearfix">
+            <div class="reportTemplateHeader-logo pull-left">
+                <img src="@cm.getLogoCompany(Model._report.company_id)" style="max-width: 100px;" alt="" />
+            </div><!-- /.reportTemplateHeader-logo pull-left -->
+            <div class="reportTemplateHeader-info pull-right">
+                <div class="reportTemplateHeader-info__title">
+                    @Model.CompanyName()
+                </div><!-- /.reportTemplateHeader-info__title -->
+                <div class="reportTemplateHeader-info__id">
+                    Report <b>#@Model._report.display_name</b>
+                </div><!-- /.reportTemplateHeader-info__id -->
+                <div class="reportTemplateHeader-info__date">
+                    Reported on <b>@Model.ReportedDateString()</b>
+                </div><!-- /.reportTemplateHeader-info__date -->
+            </div><!-- /.reportTemplateHeader-info pull-right -->
+        </div><!-- /.reportTemplateHeader -->
+        <div class="reportTemplateContent">
+            <div class="reportContentBlock clearfix">
+                <div class="reportContentBlock__title">
+                    General information
+                </div><!-- /.reportContentBlock__title -->
+
+                <div class="reportContentBlock__textCols clearfix">
+                    <div class="reportContentBlock__textColFirst">
+                        Reporting From
+                    </div><!-- /.reportContentBlock__textColFirst -->
+                    <div class="reportContentBlock__textColRight">
+                        <p>@Model.CountryString()</p>
+                    </div><!-- /.reportContentBlock__textColRight -->
+                </div><!-- /.reportContentBlock__textCols -->
+                <div class="reportContentBlock__textCols clearfix">
+                    <div class="reportContentBlock__textColFirst">
+                        Confidentiality Level
+                    </div><!-- /.reportContentBlock__textColFirst -->
+                    <div class="reportContentBlock__textColRight">
+                        <p>@Model._anonymousLevel_reporterVersion()</p>
+                    </div><!-- /.reportContentBlock__textColRight -->
+                </div><!-- /.reportContentBlock__textCols -->
+                <div class="reportContentBlock__textCols clearfix">
+                    <div class="reportContentBlock__textColFirst">
+                        Name
+                    </div><!-- /.reportContentBlock__textColFirst -->
+                    <div class="reportContentBlock__textColRight">
+                        <p>
+                            @Model._reporter_user.first_nm
+                            @Model._reporter_user.last_nm
+                            @(String.IsNullOrEmpty(Model._reporter_user.first_nm) && String.IsNullOrEmpty(Model._reporter_user.last_nm) && String.IsNullOrEmpty(Model._reporter_user.email) ? "" : ", ")
+                            @Model._reporter_user.email
+                        </p>
+                    </div><!-- /.reportContentBlock__textColRight -->
+                </div><!-- /.reportContentBlock__textCols -->
+                <div style="@(String.IsNullOrEmpty(Model._reporter_user.phone) ? "display: none" : "display: block")  ">
+                    <div class="reportContentBlock__textCols clearfix">
+                        <div class="reportContentBlock__textColFirst">
+                            Telephone
+                        </div><!-- /.reportContentBlock__textColFirst -->
+                        <div class="reportContentBlock__textColRight">
+                            <p>
+                                @Model._reporter_user.phone
+                            </p>
+                        </div><!-- /.reportContentBlock__textColRight -->
+                    </div><!-- /.reportContentBlock__textCols -->
+                </div>
+
+                <div class="reportContentBlock__textCols clearfix">
+                    <div class="reportContentBlock__textColFirst">
+                        Reported as
+                    </div><!-- /.reportContentBlock__textColFirst -->
+                    <div class="reportContentBlock__textColRight">
+                        <p>@Model.ReporterCompanyRelationShort()</p>
+                        <p>@Model._report.not_current_employee</p>
+                    </div><!-- /.reportContentBlock__textColRight -->
+                </div><!-- /.reportContentBlock__textCols -->
+                <div class="reportContentBlock__textCols clearfix">
+                    <div class="reportContentBlock__textColFirst">
+                        Incident Location
+                    </div><!-- /.reportContentBlock__textColFirst -->
+                    <div class="reportContentBlock__textColRight">
+                        <p>@Model.LocationString()</p>
+                    </div><!-- /.reportContentBlock__textColRight -->
+                </div><!-- /.reportContentBlock__textCols -->
+                <div class="reportContentBlock__textCols clearfix">
+                    <div class="reportContentBlock__textColFirst">
+                        Affected department (s)
+                    </div><!-- /.reportContentBlock__textColFirst -->
+                    <div class="reportContentBlock__textColRight">
+                        @foreach (var item in Model.Departments())
+                        {
+                            <p>@item</p>
+                        }
+                    </div><!-- /.reportContentBlock__textColRight -->
+                </div><!-- /.reportContentBlock__textCols -->
+            </div><!-- /.reportContentBlock clearfix -->
+
+            <div class="reportContentBlock clearfix">
+                <div class="reportContentBlock__title">
+                    Parties involved
+                </div><!-- /.reportContentBlock__title -->
+
+                <div class="reportContentBlock__textCols clearfix">
+                    <div class="reportContentBlock__textColFirst">
+                        Reporting on behalf of yourself or someone else?
+                    </div><!-- /.reportContentBlock__textColFirst -->
+                    <div class="reportContentBlock__textColRight">
+                        <p>
+                            @(Model._report.report_by_myself ? @GlobalRes.Myself : @GlobalRes.SomeoneElse)
+                        </p>
+                    </div><!-- /.reportContentBlock__textColRight -->
+                </div><!-- /.reportContentBlock__textCols -->
+                <div class="reportContentBlock__textCols clearfix">
+                    <div class="reportContentBlock__textColFirst">
+                        Parties involved
+                    </div><!-- /.reportContentBlock__textColFirst -->
+                    <div class="reportContentBlock__textColRight">
+                        @foreach (var item in Model.NonInvolvedMediators())
+                        {
+                            var r = role_in_report.FirstOrDefault(x => x.id == item.role_in_report_id);
+                            <p>
+                                <b>@item.Name @item.last_name,</b> @item.Title, @(r == null ? "" : r.role_en)
+                            </p>
+                        }
+                    </div><!-- /.reportContentBlock__textColRight -->
+                </div><!-- /.reportContentBlock__textCols -->
+                <div class="reportContentBlock__textCols clearfix">
+                    <div class="reportContentBlock__textColFirst">
+                        Does management know about this incident?
+                    </div><!-- /.reportContentBlock__textColFirst -->
+                    <div class="reportContentBlock__textColRight">
+                        <p>
+                            @Model.ManagementKnowString()
+                        </p>
+                        <p>
+                            @Model._report.management_know_text
+                        </p>
+                    </div><!-- /.reportContentBlock__textColRight -->
+                </div><!-- /.reportContentBlock__textCols -->
+                <div class="reportContentBlock__textCols clearfix">
+                    <div class="reportContentBlock__textColFirst">
+                        Has the incident been reported to anyone outside the organization?
+                    </div><!-- /.reportContentBlock__textColFirst -->
+                    <div class="reportContentBlock__textColRight">
+                        <p>
+                            @Model.IsReportedOutside()
+                        </p>
+                        <p>
+                            @Model._report.reported_outside_text
+                        </p>
+                    </div><!-- /.reportContentBlock__textColRight -->
+                </div><!-- /.reportContentBlock__textCols -->
+                <div class="reportContentBlock__textCols clearfix">
+                    <div class="reportContentBlock__textColFirst">
+                        Is the situation an emergency?
+                    </div><!-- /.reportContentBlock__textColFirst -->
+                    <div class="reportContentBlock__textColRight">
+                        <p>
+                            @Model.IsReportedUrgent()
+                        </p>
+                    </div><!-- /.reportContentBlock__textColRight -->
+                </div><!-- /.reportContentBlock__textCols -->
+
+            </div><!-- /.reportContentBlock clearfix -->
+
+            <div class="reportContentBlock clearfix">
+                <div class="reportContentBlock__title">
+                    Case Information
+                </div><!-- /.reportContentBlock__title -->
+
+                <div class="reportContentBlock__textCols clearfix">
+                    <div class="reportContentBlock__textColFirst">
+                        Incident type
+                    </div><!-- /.reportContentBlock__textColFirst -->
+                    <div class="reportContentBlock__textColRight">
+                        @foreach (var item in Model.SecondaryTypeAll())
+                        {
+                            <p>@item,</p>
+                        }
+                    </div><!-- /.reportContentBlock__textColRight -->
+                </div><!-- /.reportContentBlock__textCols -->
+                <div class="reportContentBlock__textCols clearfix">
+                    <div class="reportContentBlock__textColFirst">
+                        Incident date
+                    </div><!-- /.reportContentBlock__textColFirst -->
+                    <div class="reportContentBlock__textColRight">
+                        <p>
+                            @Model.IncidentDateString()
+                        </p>
+                    </div><!-- /.reportContentBlock__textColRight -->
+                </div><!-- /.reportContentBlock__textCols -->
+                <div class="reportContentBlock__textCols clearfix">
+                    <div class="reportContentBlock__textColFirst">
+                        Is the incident ongoing?
+                    </div><!-- /.reportContentBlock__textColFirst -->
+                    <div class="reportContentBlock__textColRight">
+                        <p>
+                            @Model.IsOngoing()
+                        </p>
+                        <p>@Model._report.report_frequency_text</p>
+                    </div><!-- /.reportContentBlock__textColRight -->
+                </div><!-- /.reportContentBlock__textCols -->
+                <div class="reportContentBlock__textCols clearfix">
+                    <div class="reportContentBlock__textColFirst">
+                        Did this incident result in any physical injury or damage?
+                    </div><!-- /.reportContentBlock__textColFirst -->
+                    <div class="reportContentBlock__textColRight">
+                        <p>
+                            @Model.HasInjuryDamage()
+                        </p>
+                        <p>@Model._report.injury_damage</p>
+                    </div><!-- /.reportContentBlock__textColRight -->
+                </div><!-- /.reportContentBlock__textCols -->
+                <div class="reportContentBlock__textCols clearfix">
+                    <div class="reportContentBlock__textColFirst">
+                        Incident description
+                    </div><!-- /.reportContentBlock__textColFirst -->
+                    <div class="reportContentBlock__textColRight">
+                        <p>
+                            @Model._report.description                           .
+                        </p>
+                    </div><!-- /.reportContentBlock__textColRight -->
+                </div><!-- /.reportContentBlock__textCols -->
+                <div class="reportContentBlock__textCols clearfix">
+                    <div class="reportContentBlock__textColFirst">
+                        Attachments
+                    </div><!-- /.reportContentBlock__textColFirst -->
+                    <div class="reportContentBlock__textColRight">
+                        @foreach (var item in Model._attachments())
+                        {
+                            <p>
+                                @item
+                            </p>
+                        }
+                    </div><!-- /.reportContentBlock__textColRight -->
+                </div><!-- /.reportContentBlock__textCols -->
+
+            </div><!-- /.reportContentBlock clearfix -->
+
+        </div><!-- /.reportTemplateContent -->
+    </div><!-- /.reportTemplate container clearfix -->
+</body>
+</html>

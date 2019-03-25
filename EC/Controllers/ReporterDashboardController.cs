@@ -8,6 +8,7 @@ using EC.Models.Database;
 using EC.Models.ViewModel;
 using EC.Models.App.Case;
 using EC.Constants;
+using Rotativa.MVC;
 
 namespace EC.Controllers
 {
@@ -53,6 +54,7 @@ namespace EC.Controllers
             ViewBag.attachmentAdvFiles = db.attachment
                 .Where(item => item.report_id == report_id && (item.visible_reporter == true || item.user_id == reporter._report.reporter_user_id))
                 .ToList();
+            ViewBag.guid = reporter._report.guid;
 
             return View();
         }
@@ -96,6 +98,7 @@ namespace EC.Controllers
 
             GlobalFunctions glb = new GlobalFunctions();
             glb.UpdateReadMessages(report_id, id.Value, 1);
+            ViewBag.guid = rm._report.guid;
 
             return View(cm);
         }
@@ -303,6 +306,8 @@ namespace EC.Controllers
             Session["incidentAnonymity"] = list_anon[0].id;
             ViewBag.anon_level = anon_level;
             //ViewBag.notification_new_reports_flag = user.notification_new_reports_flag;
+            ViewBag.guid = rm._report.guid;
+
             return View(rm._reporter_user);
         }
 
@@ -333,6 +338,7 @@ namespace EC.Controllers
             UserModel um = new UserModel(id.Value);
             int report_id = um.GetReportIDForReporter();
             ViewBag.report_id = report_id;
+            ViewBag.guid = db.report.Find(report_id).guid;
 
             return View();
         }
@@ -393,7 +399,7 @@ namespace EC.Controllers
             var users = files.Select(x => x.user_id).ToList();
             ViewBag.attachmentAdvFiles = files;
             ViewBag.attachmentAdvUsers = db.user.Where(x => users.Contains(x.id)).ToList();
-
+            ViewBag.guid = reporter._report.guid;
             return View();
         }
 
@@ -466,6 +472,21 @@ namespace EC.Controllers
                 return RedirectToAction("Attachments", "ReporterDashboard", new { id = user.id });
             }
             return RedirectToAction("Attachments", new { id = report_id });
+        }
+        public ActionResult PrintToPdf(Guid id, bool pdf = true)
+        {
+            var report = db.report.FirstOrDefault(x => x.guid == id);
+            var rm = new ReportModel(report.id);
+            if (pdf)
+            {
+                var fn = $"Report to {rm.CompanyName()}";
+                //return new ActionAsPdf("PrintToPdf", new { id = id, pdf = false }) { FileName = fn };
+                return new ActionAsPdf("PrintToPdf", new { id = id, pdf = false }) { };
+            }
+
+            ViewBag.Roles = db.role_in_report.ToList();
+            return View(rm);
+            //return new ReportController().PrintToPdf(id);
         }
     }
 } 

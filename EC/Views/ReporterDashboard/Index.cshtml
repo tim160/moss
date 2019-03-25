@@ -18,36 +18,13 @@
 
     int unread_message_number = um.Unread_Messages_Quantity(report_id, 1);
     GlobalFunctions glb = new GlobalFunctions();
+    ViewBag.active = "Index";
 }
 
 @if ((rm._report != null) && (rm._report.id != 0))
 {
-    <div class="settingMenu">
-        <div class="settingMenuItems">
-            <h2 class="mainTitle">@GlobalRes.Menu:</h2>
-            <div>
-                <a href="/ReporterDashboard/Index/@user_id" class="menuItem active" style="margin-right:44px;">@GlobalRes.ReportSummaryUp</a>
+    { Html.RenderPartial("~/Views/ReporterDashboard/settingMenu.cshtml", new { user_id = user_id, unread_message_number = unread_message_number, active = "Index" }); }
 
-
-                @if (unread_message_number > 0)
-                {
-                    <a href="/ReporterDashboard/Messages/@user_id" class="menuItem" style="margin-right:45px;">
-                        @GlobalRes.Messages
-                        <span>@unread_message_number</span>
-                    </a>
-                }
-                else
-                {
-                    <a href="/ReporterDashboard/Messages/@user_id" class="menuItem" style="margin-right:80px;">
-                        @GlobalRes.Messages
-                    </a>
-                }
-                <a href="/ReporterDashboard/Activity/@user_id" class="menuItem">@GlobalRes.Activity</a>
-                @*<a href="/ReporterDashboard/Settings/@user_id" class="menuItem settings" style="margin-right:-2px;">@GlobalRes.Settings</a>*@
-                <a href="/ReporterDashboard/Attachments/@user_id" class="menuItem settings" style="margin-right:-2px;">@GlobalRes.Attachments</a>
-            </div>
-        </div>
-    </div><!--settingMenu-->
 
     <div class="blockReportSummary">
 

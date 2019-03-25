@@ -12,33 +12,13 @@
     UserModel um = new UserModel(user_id);
     int unread_message_number = um.Unread_Messages_Quantity(report_id, 1);
     var dth = new DateTimeHelper();
+    ViewBag.active = "Attachments";
+
 }
 
 @if ((rm._report != null) && (rm._report.id != 0))
 {
-    <div class="settingMenu">
-        <div class="settingMenuItems">
-            <h2 class="mainTitle">@GlobalRes.Menu:</h2>
-            <div>
-                <a href="/ReporterDashboard/Index/@user_id" class="menuItem" style="margin-right:44px;">@GlobalRes.ReportSummaryUp</a>
-                @if (unread_message_number > 0)
-                {
-                    <a href="/ReporterDashboard/Messages/@user_id" class="menuItem" style="margin-right:45px;">
-                        @GlobalRes.Messages
-                        <span>@unread_message_number</span>
-                    </a>
-                }
-                else
-                {
-                    <a href="/ReporterDashboard/Messages/@user_id" class="menuItem" style="margin-right:80px;">
-                        @GlobalRes.Messages
-                    </a>
-                }
-                <a href="/ReporterDashboard/Activity/@user_id" class="menuItem ">@GlobalRes.Activity</a>
-                <a href="/ReporterDashboard/Attachments/@user_id" class="menuItem settings active" style="margin-right:-2px;">@GlobalRes.Attachments</a>
-            </div>
-        </div>
-    </div><!--settingMenu-->
+    { Html.RenderPartial("~/Views/ReporterDashboard/settingMenu.cshtml", new { user_id = user_id, unread_message_number = unread_message_number, active = "Attachments" }); }
 
     <div id="attachmentPage">
         @using (Html.BeginForm("SaveAttachments", "ReporterDashboard", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -57,6 +37,11 @@
                 </div>
             </div>
         }
+        <div class="printReport">
+            <a href="/ReporterDashboard/PrintToPdf/@ViewBag.guid">
+                <img src="http://stark.employeeconfidential.com/Content/Icons/print_icon_white.png" />
+            </a>
+        </div>
 
 
         <table>

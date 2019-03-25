@@ -822,5 +822,20 @@ namespace EC.Controllers
             UserModel um = new UserModel(mediator_id);
             return um.CloseTask(task_id, mediator_id);
         }
+        public ActionResult PrintToPdfOriginal(Guid id, bool pdf = true)
+        {
+            var report = db.report.FirstOrDefault(x => x.guid == id);
+            var rm = new ReportModel(report.id);
+            if (pdf)
+            {
+                var fn = $"Report to {rm.CompanyName()}";
+                //return new ActionAsPdf("PrintToPdf", new { id = id, pdf = false }) { FileName = fn };
+                return new ActionAsPdf("PrintToPdfOriginal", new { id = id, pdf = false }) { };
+            }
+
+            ViewBag.Roles = db.role_in_report.ToList();
+            return View(rm);
+            //return new ReportController().PrintToPdf(id);
+        }
     }
 }
