@@ -753,7 +753,7 @@ namespace EC.Controllers
                 EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
                 //Case Owner and Platform Manager.
                 eb.CaseCloseApproveClosed(rm._report.display_name);
-                glb.SaveEmailBeforeSend(user.id, user.id, user.company_id, user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 9);
+                glb.SaveEmailBeforeSend(user.id, user.id, user.company_id, user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_CaseClosureReport", is_cc), eb.Body, false, 73);
                 //report.getCaseOwner
 
                 int owner_id = 0;
