@@ -715,13 +715,11 @@ namespace EC.Controllers
                 {
                     //need to send to CaseCloseApprovePlatformManager to selected user in ddl
                      user um_temp = db.user.Find(sign_off_mediator_id);
-                    if(um_temp!=null)
-                    {
-                        eb.CaseCloseApprovePlatformManager(rm._report.display_name, user.first_nm + " " + user.last_nm);
-                        glb.SaveEmailBeforeSend(user.id, um_temp.id, um_temp.company_id, um_temp.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 10);
-                    }
-                    //need to send to CaseCloseApprove to kate
+                        
                     eb.CaseCloseApprove(rm._report.display_name);
+                    glb.SaveEmailBeforeSend(user.id, um_temp.id, um_temp.company_id, um_temp.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 10);
+                    //need to send to CaseCloseApprove to kate
+                    eb.CaseCloseApprovePlatformManager(rm._report.display_name, user.first_nm);
                     glb.SaveEmailBeforeSend(user.id, user.id, user.company_id, user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 9);
                 }
 
