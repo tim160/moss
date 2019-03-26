@@ -113,11 +113,11 @@
                 </a>
                 <div class="mainNavigationTabs__badgeCount"></div>
             </li>
-            <li class="mainNavigationTabs__tab-link" data-tab="mainTab-2" style="padding: 14px 25px;">
+            @*<li class="mainNavigationTabs__tab-link" data-tab="mainTab-2" style="padding: 14px 25px;">
                 <a href="@Url.Action("PrintToPdfOriginal", new { id = rm._report.guid })" class="subNavigationIcons__a" target="_blank">
                     <img class="subNavigationIcons__imgPrint" src="~/Content/Icons/print_icon_white.png" alt="Print/Download Original Report" />
                 </a>
-            </li>
+            </li>*@
             @if (rm._investigation_status == ECGlobalConstants.investigation_status_closed)
             {
                 <li class="mainNavigationTabs__tab-link" data-tab="mainTab-2" style="padding: 14px 25px;">

@@ -98,7 +98,6 @@ namespace EC.Controllers
 
             GlobalFunctions glb = new GlobalFunctions();
             glb.UpdateReadMessages(report_id, id.Value, 1);
-            ViewBag.guid = rm._report.guid;
 
             return View(cm);
         }
@@ -306,7 +305,6 @@ namespace EC.Controllers
             Session["incidentAnonymity"] = list_anon[0].id;
             ViewBag.anon_level = anon_level;
             //ViewBag.notification_new_reports_flag = user.notification_new_reports_flag;
-            ViewBag.guid = rm._report.guid;
 
             return View(rm._reporter_user);
         }
@@ -338,7 +336,6 @@ namespace EC.Controllers
             UserModel um = new UserModel(id.Value);
             int report_id = um.GetReportIDForReporter();
             ViewBag.report_id = report_id;
-            ViewBag.guid = db.report.Find(report_id).guid;
 
             return View();
         }
@@ -399,7 +396,6 @@ namespace EC.Controllers
             var users = files.Select(x => x.user_id).ToList();
             ViewBag.attachmentAdvFiles = files;
             ViewBag.attachmentAdvUsers = db.user.Where(x => users.Contains(x.id)).ToList();
-            ViewBag.guid = reporter._report.guid;
             return View();
         }
 

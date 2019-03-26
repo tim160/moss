@@ -40,6 +40,7 @@ namespace EC.Controllers
 
             ViewBag.user_id = user_id;
             ViewBag.report_id = report_id;
+            ViewBag.guid = rm._report.guid;
             ViewBag.attachmentFiles = getAttachmentFiles(report_id);
             
             #region EC-CC Viewbag

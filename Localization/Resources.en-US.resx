@@ -2699,4 +2699,7 @@
   <data name="NewMessageFromCaseAdmin" xml:space="preserve">
     <value>You have a new message from a Case Administrator</value>
   </data>
+  <data name="Email_Title_CaseClosureReport" xml:space="preserve">
+    <value>Employee Confidential notification - Case Closure Report</value>
+  </data>
 </root>

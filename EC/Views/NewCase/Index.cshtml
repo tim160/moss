@@ -304,6 +304,19 @@
                             </div><!-- /.attachmentBlock -->
                         </div><!-- /.col-4 -->
                     </div><!-- /.content-container__attachment-row -->
+
+                    <div class="col-6">
+                        <p class="content-container__p">
+                            Is the incident ongoing?
+                        </p>
+                    </div>
+                    <div class="col-6">
+                        <p class="content-container__p">
+                            <a href="@Url.Action("PrintToPdfOriginal", new { id = ViewBag.guid })" class="menuItem" target="_blank" style="padding: 0 10px;">
+                                <img src="http://stark.employeeconfidential.com/Content/Icons/print_icon_white.png" />
+                            </a>
+                        </p>
+                    </div>
                 </div><!-- /.content-container__inner-additional clearfix -->
             </div><!-- /.content-container__inner -->
         </section><!-- /.content-container -->
