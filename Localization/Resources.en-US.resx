@@ -2696,4 +2696,7 @@
   <data name="WeakControls" xml:space="preserve">
     <value>Weak Controls</value>
   </data>
+  <data name="NewMessageFromCaseAdmin" xml:space="preserve">
+    <value>You have a new message from a Case Administrator</value>
+  </data>
 </root>

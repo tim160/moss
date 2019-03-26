@@ -92,7 +92,7 @@ namespace EC.Controllers.API
                     {
                         GlobalFunctions glb = new GlobalFunctions();
                         glb.SaveEmailBeforeSend(user.id, userReporter.id, userReporter.company_id, userReporter.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"],
-                                "", Localization.LocalizationGetter.GetString("Email_Title_NewCase", is_cc), eb.Body, false, 31);
+                                "", Localization.LocalizationGetter.GetString("NewMessageFromCaseAdmin", is_cc), eb.Body, false, 31);
                     }
                 }
             }
