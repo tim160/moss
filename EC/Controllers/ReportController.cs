@@ -258,16 +258,6 @@ namespace EC.Controllers
                     glb.SaveEmailBeforeSend(0, _user.id, companyModel._company.id, _user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", title, body, false, email_type);
                 }
                 #endregion
-
-                #region send email to user
-                if ((currentReport.report.incident_anonymity_id == 2 || currentReport.report.incident_anonymity_id == 3) && currentReport.report.user.email.Trim() != "")
-                {
-                    eb.ReporterNewCase(currentReport.report.user.login_nm, currentReport.report.user.password, currentReport.report.display_name);
-                    glb.SaveEmailBeforeSend(0, currentReport.report.user.id, currentReport.report.user.company_id, currentReport.report.user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"],
-                        "", LocalizationGetter.GetString("Email_Title_NewCase", is_cc), eb.Body, false, 30);
-                }
-
-                #endregion
             }
             else
             {
@@ -438,6 +428,10 @@ namespace EC.Controllers
             int user_Id = Convert.ToInt16(Request["userId"]);
             string pass = Request["pass"];
             string result = reportModel.SaveLoginChanges(user_Id, pass);
+            if(result.ToLower() == "success")
+            {
+                SignIn(db.user.Find(user_Id));
+            }
             JsonResult json = new JsonResult();
             json.Data = result;
             return json;
@@ -499,6 +493,29 @@ namespace EC.Controllers
                 return RedirectToAction("Report", "Service");
             }
             return RedirectToAction("Disclaimer", "Service", new { id = c.company_code });
+        }
+        public ActionResult RedirectToReporterDashboard(int reportId)
+        {
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            #region send email to user
+            reportModel.ID = reportId;
+            if (user != null)
+            {
+                if(reportModel._report != null && (reportModel._report.incident_anonymity_id == 2 || reportModel._report.incident_anonymity_id == 3))
+                {
+                    Business.Actions.Email.EmailManagement em = new Business.Actions.Email.EmailManagement(is_cc);
+                    Business.Actions.Email.EmailBody eb = new Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+
+                    eb.ReporterNewCase(user.login_nm, user.password, reportModel._report.display_name);
+                    glb.SaveEmailBeforeSend(0, user.id, user.company_id, user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"],
+                        "", LocalizationGetter.GetString("Email_Title_NewCase", is_cc), eb.Body, false, 30);
+                }
+            } else
+            {
+                return RedirectToAction("Login", "Service");
+            }
+            #endregion
+            return RedirectToAction("Index", "ReporterDashboard");
         }
     }
 }
