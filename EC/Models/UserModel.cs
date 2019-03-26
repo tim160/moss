@@ -1328,6 +1328,7 @@ namespace EC.Models
             IEnumerable<int> top_mediator_ids = db.user.Where(item => (item.company_id == _user.company_id) && (item.role_id == 4 || item.role_id == 5)).Select(t => t.id);
             string base_url = ConfigurationManager.AppSettings["SiteRoot"];
             string _no_photo_path = base_url + "/Content/Icons/noPhoto.png";
+            report_ids = report_ids.OrderByDescending(t => t).ToList();
 
               //var reports = report_ids.Select(x => new CasePreviewViewModel(x, user.id)).ToList();
               var reports = report_ids
