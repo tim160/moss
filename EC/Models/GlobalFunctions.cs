@@ -1653,16 +1653,24 @@ public class GlobalFunctions
 
         if (photo_path != "")
         {
+            HttpWebResponse response = null;
             try
             {
                 WebRequest request = WebRequest.Create(photo_path);
-                request.Timeout = 2;
-                WebResponse response = request.GetResponse();
+                request.Timeout = 1200;
+                response = (HttpWebResponse)request.GetResponse();
                 file_exist = true;
             }
             catch (Exception ex)
             {
                 file_exist = false;
+            }
+            finally
+            {
+              if (response != null)
+              {
+                response.Close();
+              }
             }
         }
 

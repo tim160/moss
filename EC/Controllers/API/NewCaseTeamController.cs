@@ -16,12 +16,15 @@ using EC.Models.ViewModel;
 using EC.Common.Interfaces;
 using EC.Models.App.Case;
 using EC.Localization;
+using System.Configuration;
 
 namespace EC.Controllers.API
 {
     public class NewCaseTeamController : BaseApiController
     {
         GlobalFunctions glb = new GlobalFunctions();
+        string base_url = ConfigurationManager.AppSettings["SiteRoot"];
+
         public class Filter
         {
             public int? ReportFlag { get; set; }
@@ -71,17 +74,17 @@ namespace EC.Controllers.API
             foreach (var item in rm.InvolvedMediatorsUserList())
             {
                 um = new UserModel(item.id);
-                m.involved_mediators_user_list.Add(new UserAdv
-                {
-                    user = item,
-                    task_quantity = 0,
-                    message_quantity = 0,
-                    action_quantity = 0,
-                    location_string = um._location_string,
-                    email = item.email,
-                    user_photo = glb.Photo_Path_String(item.photo_path, 1, 5),
-                    owner = false,
-                });
+        m.involved_mediators_user_list.Add(new UserAdv
+        {
+          user = item,
+          task_quantity = 0,
+          message_quantity = 0,
+          action_quantity = 0,
+          location_string = um._location_string,
+          email = item.email,
+          user_photo = string.IsNullOrWhiteSpace(item.photo_path) ? base_url + "/Content/Icons/noPhoto.png" : item.photo_path,
+          owner = false,
+        });
             }
             var counter1 = (DateTime.Now - _started1).TotalMilliseconds;
 
@@ -98,7 +101,7 @@ namespace EC.Controllers.API
                     action_quantity = um.CaseActionsQuantityNoCheck(id),
                     location_string = um._location_string,
                     email = item.email,
-                    user_photo = glb.Photo_Path_String(item.photo_path, 1, 5),
+                    user_photo = string.IsNullOrWhiteSpace(item.photo_path) ? base_url + "/Content/Icons/noPhoto.png" : item.photo_path,
                     owner = rm.ReportOwners().FirstOrDefault(x => x.user_id == item.id & x.status_id == 2) != null,
                 });
             }
@@ -116,7 +119,7 @@ namespace EC.Controllers.API
                     action_quantity = um.CaseActionsQuantityNoCheck(id),
                     location_string = um._location_string,
                     email = item.email,
-                    user_photo = glb.Photo_Path_String(item.photo_path, 1, 5),
+                    user_photo = string.IsNullOrWhiteSpace(item.photo_path) ? base_url + "/Content/Icons/noPhoto.png" : item.photo_path,
                     owner = false,
                 });
             }
