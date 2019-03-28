@@ -1,0 +1,112 @@
+﻿@using EC.Models;
+@using EC.Models.ECModel;
+@using EC.Models.Database;
+@using System.Data;
+@using EC.App_LocalResources;
+
+@{
+    ViewBag.Title = "Root Causes report";
+    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+
+    int user_id = (Int32)ViewBag.user_id;
+    int companyId = ViewBag.um._user.company_id;
+}
+
+<link rel="stylesheet" href="~/Content/styleAnalitics.css" />
+
+<script src="~/Scripts/moment.min.js"></script>
+<script src="~/Scripts/jquery.daterangepicker.min.js"></script>
+<link rel="stylesheet" href="~/Libs/nvd3/build/nv.d3.min.css">
+
+<link href="~/Content/daterangepickerAnalit.css" rel="stylesheet" />
+
+<div class="blockSettings blockAnalitics" ng-controller="AnalyticsRootCauseAnalysisController" ng-cloak>
+    @Html.Partial("~/Views/Analytics/AnalyticsMenu.cshtml")
+
+    <div class="dropDownMenuPadding">
+        <table class="dropDownMenu">
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="parentClass">
+                            <div class="menuItem">
+                                <div class="positionText">
+                                    <span class="dropMenuText">{{secondaryType.secondary_type_en}}</span>
+                                    <img src="~/Content/img/arrowSelect.png" />
+                                </div>
+                                <ul class="menuUl" ng-show="secondaryTypes.length > 0">
+                                    <li ng-repeat="item in secondaryTypes">
+                                        <div class="liItem" ng-class="{'selected': item._selected}" value="{{item.id}}" nameDropdown="ReportsDepartmentIDStringss">
+                                            <div class="checked">
+                                                <img class="" src="~/Content/img/check.png" />
+                                            </div>
+                                            <span class="positionText liText" ng-click="selectSecondaryTypes(item)">
+                                                {{item.secondary_type_en}}
+                                            </span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container">
+        <div class="row circleGraphRow circleGraphInfoRow">
+            <div class="col-4" id="chart1">
+                <button type="button" class="noPrint printButton" ng-click="print('chart1', 'Behavioral Factors')" ng-show="chartData1.length > 0"><img src="~/Content/Icons/print-icon.png" /></button>
+                <nvd3 id="chart1" options="chart1" data="chartData1" api="api1"></nvd3>
+                <div class="graphTitle">
+                    Behavioral Factors
+                </div><!-- /.graphTitle -->
+                <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in chartData1">
+                    <div class="col-10 p-0">
+                        <div class="ng-binding RootCauseAnalysis-roudChart__title" style="padding-left: 10px; border-left: solid 5px {{chartColors[$index]}}">
+                            {{item.name}}
+                        </div>
+                    </div>
+                    <div class="col-2 RootCauseAnalysis-roudChart__count">
+                        {{item.count}}
+                    </div>
+                </div>
+            </div><!-- /.col-4 -->
+            <div class="col-4" id="chart2">
+                <button type="button" class="noPrint printButton" ng-click="print('chart2', 'External Influences')" ng-show="chartData2.length > 0"><img src="~/Content/Icons/print-icon.png" /></button>
+                <nvd3 id="chart2" options="chart2" data="chartData2" api="api2"></nvd3>
+                <div class="graphTitle">
+                    External Influences
+                </div><!-- /.graphTitle -->
+                <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in chartData2">
+                    <div class="col-10 p-0">
+                        <div class="ng-binding RootCauseAnalysis-roudChart__title" style="padding-left: 10px; border-left: solid 5px {{chartColors[$index]}}">
+                            {{item.name}}
+                        </div>
+                    </div>
+                    <div class="col-2 RootCauseAnalysis-roudChart__count">
+                        {{item.count}}
+                    </div>
+                </div>
+            </div><!-- /.col-4 -->
+            <div class="col-4" id="chart3">
+                <button type="button" class="noPrint printButton" ng-click="print('chart3', 'Organizational Influences')" ng-show="chartData3.length > 0"><img src="~/Content/Icons/print-icon.png" /></button>
+                <nvd3 id="chart3" options="chart3" data="chartData3" api="api3"></nvd3>
+                <div class="graphTitle">
+                    Organizational Influences
+                </div><!-- /.graphTitle -->
+                <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in chartData3">
+                    <div class="col-10 p-0">
+                        <div class="ng-binding RootCauseAnalysis-roudChart__title" style="padding-left: 10px; border-left: solid 5px {{chartColors[$index]}}">
+                            {{item.name}}
+                        </div>
+                    </div>
+                    <div class="col-2 RootCauseAnalysis-roudChart__count">
+                        {{item.count}}
+                    </div>
+                </div>
+            </div><!-- /.col-4 -->
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+</div>

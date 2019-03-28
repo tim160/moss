@@ -1888,7 +1888,7 @@
         .service('AnalyticsRootCauseAnalysisService', ['$resource', AnalyticsRootCauseAnalysisService]);
 
     function AnalyticsRootCauseAnalysisService($resource) {
-        return $resource('/api/AnalyticsRootCauseAnalysis', {}, {
+        return $resource('/api/AnalyticsDashboardAPI', {}, {
             get: { method: 'GET', params: {}, isArray: false },
         });
     };
