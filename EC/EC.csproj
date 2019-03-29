@@ -302,6 +302,7 @@
     <Content Include="Content\emails\3ProspectAfter3weeks.html" />
     <Content Include="Content\emails\CampusSecurityAlert.html" />
     <Content Include="Content\emails\CaseCloseApprove.html" />
+    <Content Include="Content\emails\CaseCloseApproveClosed.html" />
     <Content Include="Content\emails\CaseCloseApprovePlatformManager.html" />
     <Content Include="Content\emails\CaseDeadlinePastDue.html" />
     <Content Include="Content\emails\ReporterNewMessage.html" />
@@ -1210,6 +1211,9 @@
     <Content Include="Views\Trainer\Index.cshtml" />
     <Content Include="Views\Trainer\Calendar.cshtml" />
     <Content Include="Views\New\CompanyA.cshtml" />
+    <Content Include="Views\NewCase\PrintToPdfOriginal.cshtml" />
+    <Content Include="Views\ReporterDashboard\PrintToPdf.cshtml" />
+    <Content Include="Views\ReporterDashboard\settingMenu.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
