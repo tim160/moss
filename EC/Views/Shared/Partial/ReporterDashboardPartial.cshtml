@@ -13,6 +13,7 @@
     ReportModel rm = Model;
     List<report_non_mediator_involved> _involved = rm.GetWitnesses();
     IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
+    List<attachment> attachments = ViewBag.attachmentAdvFiles;
     if (ViewBag.attachmentAdvFiles == null)
     {
         ViewBag.attachmentAdvFiles = new List<attachment>();
@@ -222,8 +223,16 @@
                                 </div>
                             </div>
                         </div>
+                        @if (attachments.Count > 0 )
+                        {
+                            <p>
+                                Attached evidence:
+                            </p>
+                        }
+
+
                         <div class="files">
-                            @foreach (attachment file in ViewBag.attachmentAdvFiles)
+                            @foreach (var file in attachments)
                             {
                                 <div class="item">
                                     <div class="imgCorner">

@@ -286,24 +286,32 @@
                             </div><!-- /.col-4 -->
                         </div><!-- /.row -->
                     </div><!-- /.col-6 -->
+                    <div class="col-12" ng-show="model.attachments.length > 0">
+                        <div class="row">
+                            <div class="col-3" style="padding-left: 0px;">
+                                <p class="content-container__p">
+                                    Attached evidence:
+                                </p>
+                            </div>
 
-                    <div class="row content-container__attachment-row">
-                        <div class="col-4" ng-repeat="item in model.attachments">
-                            <div class="attachmentBlock clearfix">
-                                <div class="attachmentBlock__img">
-                                    <img src="~/Content/Icons/attachment-icon_preview.png" alt="icon" />
-                                </div><!-- /.attachmentBlock__img -->
-                                <div class="attachmentBlock__info">
-                                    <div class="attachmentBlock__name">
-                                        {{item.file_nm}}
-                                    </div><!-- /.attachmentBlock__name -->
-                                    <a href="{{item.path_nm}}" class="attachmentBlock__link">
-                                        download
-                                    </a>
-                                </div><!-- /.attachmentBlock__info -->
-                            </div><!-- /.attachmentBlock -->
-                        </div><!-- /.col-4 -->
-                    </div><!-- /.content-container__attachment-row -->
+                            <div class="col-9" ng-repeat="item in model.attachments" style="padding: 0px">
+                                <div class="attachmentBlock clearfix">
+                                    <div class="attachmentBlock__img">
+                                        <img src="~/Content/Icons/attachment-icon_preview.png" alt="icon" />
+                                    </div><!-- /.attachmentBlock__img -->
+                                    <div class="attachmentBlock__info">
+                                        <div class="attachmentBlock__name">
+                                            {{item.file_nm}}
+                                        </div><!-- /.attachmentBlock__name -->
+                                        <a href="{{item.path_nm}}" class="attachmentBlock__link">
+                                            download
+                                        </a>
+                                    </div><!-- /.attachmentBlock__info -->
+                                </div><!-- /.attachmentBlock -->
+                            </div><!-- /.col-4 -->
+                        </div><!-- /.content-container__attachment-row -->
+                    </div>
+
 
                     <div class="col-3">
                         <p class="content-container__p">
