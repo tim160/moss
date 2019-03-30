@@ -677,7 +677,7 @@ namespace EC.Controllers
         {
           if (sign_off_mediator_id != 0 && promotion_value == ECGlobalConstants.investigation_status_completed)
           {
-            #region Assign Mediator from drop
+            #region Save to Assign Mediator from drop
             if (!db.report_mediator_assigned.Any(x => x.report_id == report_id && x.mediator_id == sign_off_mediator_id))
             {
               db.report_mediator_assigned.Add(new report_mediator_assigned
@@ -698,7 +698,7 @@ namespace EC.Controllers
             }
             #endregion
 
-            #region Sign-off mediator from drop
+            #region Save to Sign-off mediator from drop
             report_signoff_mediator report_signoff_mediator = null;
             foreach (var item in db.report_signoff_mediator.Where(x => x.report_id == report_id))
             {
@@ -732,65 +732,28 @@ namespace EC.Controllers
         }
       }
 
-      var platform_managers = db.user.Where(t => t.company_id == um._user.company_id && t.status_id == 2 && t.role_id == ECLevelConstants.level_escalation_mediator).ToList();
       if (was_case_promoted)
       {
         if (promotion_value == ECGlobalConstants.investigation_status_completed)
         {
-          #region Email Ready
+          Business.Actions.Email.EmailBody eb = new Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
 
-          EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
-          EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
-          //string body = "";
-          #endregion
+          //need to find selected user in ddl
+          user um_temp = db.user.Find(sign_off_mediator_id);
 
-
-          #region Email To Mediators About Case Update
-          if (sign_off_mediator_id == mediator_id)
+          // all mediators except the sign-off mediator  getting email with name
+          eb.CaseCloseApprovePlatformManager(rm._report.display_name, um_temp.first_nm + " " + um_temp.last_nm);
+          // List of all mediators except the sign-off mediator
+          List<user> mediators_to_update = rm.MediatorsWhoHasAccessToReport().Where(t => t.id != sign_off_mediator_id).ToList();
+          foreach (var mediators in mediators_to_update)
           {
-            eb.CaseCloseApprove(rm._report.display_name);
-            glb.SaveEmailBeforeSend(user.id, user.id, user.company_id, user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 9);
+            glb.SaveEmailBeforeSend(user.id, mediators.id, user.company_id, mediators.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 10);
           }
-          else
-          {
-            //need to send to  to selected user in ddl
-            user um_temp = db.user.Find(sign_off_mediator_id);
+ 
+          eb.CaseCloseApprove(rm._report.display_name);
+          // send to actual sign-off user
+          glb.SaveEmailBeforeSend(user.id, um_temp.id, user.company_id, um_temp.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 9);
 
-            var ownerReport = db.report_owner.Where(rep => rep.report_id == report_id && rep.status_id == 2).FirstOrDefault();
-            var ownerReportUser = db.user.Find(ownerReport.user_id);
-
-            eb.CaseCloseApprovePlatformManager(rm._report.display_name, um_temp.first_nm + " " + um_temp.last_nm);
-            foreach (var managers in platform_managers)
-            {
-              glb.SaveEmailBeforeSend(user.id, managers.id, user.company_id, managers.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 10);
-
-            }
-            //need to send to CaseCloseApprove to owner
-            glb.SaveEmailBeforeSend(user.id, ownerReportUser.id, ownerReportUser.company_id, ownerReportUser.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 10);
-
-            // send to actual user
-            glb.SaveEmailBeforeSend(user.id, um_temp.id, user.company_id, um_temp.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 9);
-            eb.CaseCloseApprove(rm._report.display_name);
-          }
-
-          //foreach (user _user in rm.MediatorsWhoHasAccessToReport())
-          //{
-          //    if ((_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_user.email.Trim()))
-          //    {
-          //        UserModel um_temp = new UserModel(_user.id);
-          //        if (promotion_value == ECGlobalConstants.investigation_status_completed && um_temp._user.id == sign_off_mediator_id)
-          //        {
-          //            eb.CaseCloseApprove(rm._report.display_name);
-          //            glb.SaveEmailBeforeSend(user.id, _user.id, _user.company_id, _user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc),eb.Body, false, 9);
-          //        }
-          //        else if (promotion_value == ECGlobalConstants.investigation_status_completed && um_temp._user.role_id == 4)
-          //        {
-          //            eb.CaseCloseApprovePlatformManager(rm._report.display_name, user.first_nm + " " + user.last_nm);
-          //            glb.SaveEmailBeforeSend(user.id, _user.id, _user.company_id, _user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 10);
-          //        }
-          //    }
-          //}
-          #endregion
         }
         else if (promotion_value == ECGlobalConstants.investigation_status_investigation && old_status == ECGlobalConstants.investigation_status_closed)
         {
@@ -808,29 +771,18 @@ namespace EC.Controllers
           #endregion
 
           #region send email
-          EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
-          EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+
+          Business.Actions.Email.EmailBody eb = new Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
           //Case Owner and Platform Manager.
           eb.CaseCloseApproveClosed(rm._report.display_name);
-          glb.SaveEmailBeforeSend(user.id, user.id, user.company_id, user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_CaseClosureReport", is_cc), eb.Body, false, 73);
-          //report.getCaseOwner
-          foreach (var managers in platform_managers)
+          List<user> mediators_to_update = rm.MediatorsWhoHasAccessToReport().ToList();
+
+          foreach (var mediators in mediators_to_update)
           {
-            glb.SaveEmailBeforeSend(user.id, managers.id, user.company_id, managers.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_CaseClosureReport", is_cc), eb.Body, false, 10);
+            glb.SaveEmailBeforeSend(user.id, mediators.id, user.company_id, mediators.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_CaseClosureReport", is_cc), eb.Body, false, 73);
           }
 
-          int owner_id = 0;
-          var owner = db.report_owner.FirstOrDefault(x => x.report_id == rm._report.id & x.status_id == 2);
-          if (owner != null)
-          {
-            owner_id = owner.user_id;
-          }
-          if (owner_id != 0)
-          {
-            user caseOwner = db.user.Find(owner_id);
-            if (user != null)
-              glb.SaveEmailBeforeSend(user.id, caseOwner.id, caseOwner.company_id, caseOwner.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_CaseClosureReport", is_cc), eb.Body, false, 73);
-          }
+          
           #endregion
         }
       }
@@ -852,18 +804,16 @@ namespace EC.Controllers
 
           if (old_status == 6)
             glb.UpdateReportLog(user.id, 27, report_id, App_LocalResources.GlobalRes._Completed, null, description);
-
-
           ////               if (rm._investigation_status == 6)
           ////                    glb.UpdateReportLog(user.id, 27, report_id, App_LocalResources.GlobalRes._Completed, null, description);
           /////                 else if (rm._investigation_status == 4)
           /////                       glb.UpdateReportLog(user.id, 22, report_id, App_LocalResources.GlobalRes._Completed, null, description);
-
           glb.UpdateReportLog(user.id, 25, report_id, "", null, description);
           break;
       }
       return 1;
     }
+
 
  
 
