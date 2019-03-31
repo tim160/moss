@@ -469,110 +469,7 @@ namespace EC.Models
             }
 
             IEnumerable<int> both = all_reports_id.Intersect(statuses_match_all_report_id);
-            //.Where(j => (j.investigation_status_id == 4))
-            //var refGroupInvestigationStatuses = (from m in db.report_investigation_status
-
-
-
-            /*   var query = report_investigation_status.GroupBy(p => p.report_id)
-                     .Select(g => g.OrderByDescending(p => p.id).FirstOrDefault()
-                      );
-               var query1 = query.Select(decimal ) // where status = 4.
-               */
-
-
-
-            /*      from row in Posts
-                  group row by row.type
-                  into g
-                  select new
-                  {
-                      Content = (from row2 in g orderby row2.date descending select row2.content).FirstOrDefault(),
-                      Type = g.Key
-                  }*/
-
-            //https://msdn.microsoft.com/en-us/library/bb738512(v=vs.100).aspx
-            // http://stackoverflow.com/questions/16273485/entity-framework-select-one-of-each-group-by-date
-
-            ///
-            /// IEnumerable<int> both = id1.Intersect(id2);
-
-            ///     foreach (int id in both)
-            ////         Console.WriteLine(id);
-
-            /*
-                        if (all_reports_id.Count > 0)
-                        {
-                            ReportModel temp_rm = new ReportModel();
-                            if (flag == 1)
-                            {
-                                // active only
-                                foreach (report _temp in all_reports)
-                                {
-                                    //     rm = ReportModel(_temp.id);
-                                    //   temp_status = new ReportModel(_temp.id)._investigation_status;
-
-                                    temp_rm = new ReportModel(_temp.id);
-                                    if ((!temp_rm.IsSpamScreen) && (!temp_rm.IsPendingScreen) && (!temp_rm.IsClosedScreen) && (!temp_rm.IsCompletedScreen))
-                                        //  if ((temp_status == 3) || (temp_status == 4) || (temp_status == 5))
-                                        reports.Add(_temp);
-                                }
-                            }
-                            else if (flag == 2)
-                            {
-                    
-
-                                // closed
-                                foreach (report _temp in all_reports)
-                                {
-                                    if (new ReportModel(_temp.id).IsCompletedScreen)
-                                        reports.Add(_temp);
-
-                                    //  if (new ReportModel(_temp.id)._investigation_status == 6)
-                                    //      reports.Add(_temp);
-                                }
-                            }
-                            else if (flag == 3)
-                            {
-                                // spam
-                                foreach (report _temp in all_reports)
-                                {
-                                    if (new ReportModel(_temp.id).IsSpamScreen)
-                                        reports.Add(_temp);
-                                    //  if (new ReportModel(_temp.id)._investigation_status == 7)
-                                    ///     reports.Add(_temp);
-                                }
-                            }
-                            else if (flag == 4)
-                            {
-                                // pending
-                                foreach (report _temp in all_reports)
-                                {
-                                    if (new ReportModel(_temp.id).IsPendingScreen)
-                                        reports.Add(_temp);
-                                    //   if ((new ReportModel(_temp.id)._investigation_status == 1) || (new ReportModel(_temp.id)._investigation_status == 2))
-                                    //       reports.Add(_temp);
-                                }
-                            }
-                            else if (flag == 5)
-                            {
-                                // pending
-                                foreach (report _temp in all_reports)
-                                {
-                                    if (new ReportModel(_temp.id).IsClosedScreen)
-                                        reports.Add(_temp);
-                                    //   if ((new ReportModel(_temp.id)._investigation_status == 1) || (new ReportModel(_temp.id)._investigation_status == 2))
-                                    //       reports.Add(_temp);
-                                }
-                            }
-                            else
-                            {
-                                reports = all_reports;
-                            }
-                        }
-                        else
-                            reports = all_reports;
-                        */
+           
             return both.OrderByDescending(t => t).ToList();
         }
 
@@ -1105,7 +1002,7 @@ namespace EC.Models
         }
  
 
-        public bool ResolveCase(int report_id, int mediator_id, string description, int new_status, int? reason_id,int sign_off_mediator_id)
+        public bool PromoteCase(int report_id, int mediator_id, string description, int new_status, int? reason_id,int sign_off_mediator_id)
         {
             try
             {

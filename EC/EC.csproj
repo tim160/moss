@@ -1216,8 +1216,7 @@
     <Content Include="Views\NewCase\PrintToPdfOriginal.cshtml" />
     <Content Include="Views\ReporterDashboard\PrintToPdf.cshtml" />
     <Content Include="Views\ReporterDashboard\settingMenu.cshtml" />
-    <Content Include="Views\Analytics\Dashboard.cshtml" />
-    <None Include="Web.Debug.config">
+    <Content Include="Views\Analytics\Dashboard.cshtml" />    <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
