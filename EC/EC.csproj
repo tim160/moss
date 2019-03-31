@@ -286,6 +286,7 @@
     <Content Include="App\services\onLeaveService.js" />
     <Content Include="App\util\fireEventsController.js" />
     <Content Include="App\util\parentController.js" />
+    <Content Include="Content\analiticsDashboard.css" />
     <Content Include="Content\anotherDialog.css" />
     <Content Include="Content\assets\template\css\reset.css" />
     <Content Include="Content\assets\template\css\style.css" />
@@ -302,6 +303,7 @@
     <Content Include="Content\emails\3ProspectAfter3weeks.html" />
     <Content Include="Content\emails\CampusSecurityAlert.html" />
     <Content Include="Content\emails\CaseCloseApprove.html" />
+    <Content Include="Content\emails\CaseCloseApproveClosed.html" />
     <Content Include="Content\emails\CaseCloseApprovePlatformManager.html" />
     <Content Include="Content\emails\CaseDeadlinePastDue.html" />
     <Content Include="Content\emails\ReporterNewMessage.html" />
@@ -741,8 +743,8 @@
     <Content Include="Libs\ng-file-upload\ng-file-upload.min.js" />
     <Content Include="Models\Database\ECEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ECEntities.edmx</DependentUpon>
       <LastGenOutput>ECEntities.Context.cs</LastGenOutput>
+      <DependentUpon>ECEntities.edmx</DependentUpon>
     </Content>
     <Content Include="Models\Database\ECEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1063,6 +1065,7 @@
     <Content Include="Scripts\reportDashboard\reportDashboard.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\ajaxDashobardAnalitics.js" />
     <Content Include="Scripts\updateAjax.js" />
     <Content Include="Scripts\View\blockActivityRight.js" />
     <Content Include="Scripts\View\CaseCircleDraw.js" />
@@ -1210,6 +1213,10 @@
     <Content Include="Views\Trainer\Index.cshtml" />
     <Content Include="Views\Trainer\Calendar.cshtml" />
     <Content Include="Views\New\CompanyA.cshtml" />
+    <Content Include="Views\NewCase\PrintToPdfOriginal.cshtml" />
+    <Content Include="Views\ReporterDashboard\PrintToPdf.cshtml" />
+    <Content Include="Views\ReporterDashboard\settingMenu.cshtml" />
+    <Content Include="Views\Analytics\Dashboard.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1235,6 +1242,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AnalyticsController.cs" />
+    <Compile Include="Controllers\API\AnalyticsDashboardAPIController.cs" />
     <Compile Include="Controllers\API\NewCaseTopMenuController.cs" />
     <Compile Include="Controllers\API\AnalyticsRootCauseAnalysisController.cs" />
     <Compile Include="Controllers\API\BaseApiController.cs" />
@@ -1573,6 +1581,9 @@
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\status.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database\sysdiagrams.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\task.cs">
