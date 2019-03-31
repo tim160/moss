@@ -291,9 +291,6 @@ namespace EC.Controllers
             if (user == null || user.id == 0)
                 return RedirectToAction("Login", "Service");
 
-            int user_id = user.id;
-            ViewBag.user_id = user_id;
-
             #region EC-CC Viewbag
             ViewBag.is_cc = is_cc;
             string cc_ext = "";
@@ -301,8 +298,46 @@ namespace EC.Controllers
             ViewBag.cc_extension = cc_ext;
             #endregion
 
+            int user_id = user.id;
+
+            ViewBag.user_id = user_id;
             UserModel um = new UserModel(user_id);
             ViewBag.um = um;
+
+            int[] _today_spanshot = glb.AnalyticsByDate(null, null, um._user.company_id, um._user.id);
+            ViewBag._today_spanshot = _today_spanshot;
+
+            company company_item = db.company.Where(item => (item.id == um._user.company_id)).FirstOrDefault();
+            if (company_item != null)
+            {
+
+                ViewBag.step1_delay = company_item.step1_delay;
+                ViewBag.step2_delay = company_item.step2_delay;
+                ViewBag.step3_delay = company_item.step3_delay;
+                ViewBag.step4_delay = company_item.step4_delay;
+            }
+
+            DateTime _month_end_date = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1).AddDays(-1);
+            int[] _month_end_spanshot = glb.AnalyticsByDate(null, _month_end_date, um._user.company_id, um._user.id);
+            ViewBag._month_end_spanshot = _month_end_spanshot;
+
+            string _today = DateTimeHelper.ConvertDateToLongMonthString(DateTime.Today);
+            ViewBag._today = _today;
+
+            GlobalFunctions f = new GlobalFunctions();
+            List<Tuple<string, string>> temp_tuple = f.DepartmentsListDistinct(user.company_id, user.id);
+            ViewBag.dropDownFirst = temp_tuple;
+
+            temp_tuple = f.LocationsListDistinct(user.company_id, user.id);
+            ViewBag.dropDownSecond = temp_tuple;
+
+            temp_tuple = f.SecondaryTypesListDistinct(user.company_id, user.id);
+            ViewBag.dropDownThird = temp_tuple;
+
+            temp_tuple = f.RelationTypesListDistinct(user.company_id, user.id);
+            ViewBag.dropDownFourth = temp_tuple;
+
+
 
             return View();
         }

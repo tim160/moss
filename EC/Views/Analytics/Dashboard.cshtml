@@ -1,112 +1,792 @@
-﻿@using EC.Models;
+﻿<link href="~/Content/analiticsDashboard.css" rel="stylesheet" />
+
+@using EC.Models;
 @using EC.Models.ECModel;
 @using EC.Models.Database;
 @using System.Data;
 @using EC.App_LocalResources;
-
 @{
-    ViewBag.Title = "Root Causes report";
-    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
 
+    <link rel="stylesheet" href="~/Content/styleAnalitics.css" />
+    <link rel="stylesheet" href="~/Content/styleAnalitics.css" />
+
+    ViewBag.Title = GlobalRes.Analytics;
+    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
     int user_id = (Int32)ViewBag.user_id;
+    ReportModel rm = new ReportModel();
     int companyId = ViewBag.um._user.company_id;
+    int[] _today_spanshot = ViewBag._today_spanshot;
+    int[] _month_end_spanshot = ViewBag._month_end_spanshot;
+    int difference = 0;
+
+    string _today = ViewBag._today;
+
+    string[] _titleHeaderLegend = { "Spam", "New Report", "Report Review", "Under Investigation", "Awaiting Sign-Off", "Closed" };
+    int[] _titleHeaderLegendIdx = { 6, 0, 1, 2, 3, 8 };
+
+    string[] _miniSquareColor = { "#abb9bb", "#d47472", "#ff9b42", "#3099be", "#64cd9b", "#e5eeee" };
+
 }
 
-<link rel="stylesheet" href="~/Content/styleAnalitics.css" />
-
+<!-- Include Date Range Picker -->
 <script src="~/Scripts/moment.min.js"></script>
 <script src="~/Scripts/jquery.daterangepicker.min.js"></script>
 <link rel="stylesheet" href="~/Libs/nvd3/build/nv.d3.min.css">
+<link href="~/Content/daterangepickerAnalit.css" rel="stylesheet" />
+<script type='text/javascript' src="https://ajax.aspnetcdn.com/ajax/globalize/0.1.1/globalize.min.js"></script>
+<script type='text/javascript' src="https://cdn3.devexpress.com/jslib/18.1.3/js/dx.all.js"></script>
 
 <link href="~/Content/daterangepickerAnalit.css" rel="stylesheet" />
+
+<input type="hidden" id="companyId" value="@companyId" />
+<input type="hidden" id="user_id" value="@user_id" />
+<input type="hidden" id="dateStart" value="" />
+<input type="hidden" id="dateEnd" value="" />
+
+<input type="hidden" id="step1_delay" value="@ViewBag.step1_delay" />
+<input type="hidden" id="step2_delay" value="@ViewBag.step2_delay" />
+<input type="hidden" id="step3_delay" value="@ViewBag.step3_delay" />
+<input type="hidden" id="step4_delay" value="@ViewBag.step4_delay" />
+
+<style>
+    #menu a {
+        max-width: 500px;
+    }
+</style>
 
 <div class="blockSettings blockAnalitics" ng-controller="AnalyticsRootCauseAnalysisController" ng-cloak>
     @Html.Partial("~/Views/Analytics/AnalyticsMenu.cshtml")
 
-    <div class="dropDownMenuPadding">
-        <table class="dropDownMenu">
-            <tbody>
-                <tr>
-                    <td>
-                        <div class="parentClass">
-                            <div class="menuItem">
-                                <div class="positionText">
-                                    <span class="dropMenuText">{{secondaryType.secondary_type_en}}</span>
-                                    <img src="~/Content/img/arrowSelect.png" />
-                                </div>
-                                <ul class="menuUl" ng-show="secondaryTypes.length > 0">
-                                    <li ng-repeat="item in secondaryTypes">
-                                        <div class="liItem" ng-class="{'selected': item._selected}" value="{{item.id}}" nameDropdown="ReportsDepartmentIDStringss">
-                                            <div class="checked">
-                                                <img class="" src="~/Content/img/check.png" />
-                                            </div>
-                                            <span class="positionText liText" ng-click="selectSecondaryTypes(item)">
-                                                {{item.secondary_type_en}}
-                                            </span>
-                                        </div>
-                                    </li>
-                                </ul>
+
+    <div class="container mainNavigationTabs__tabContent-container ">
+        <div id="mainTab-Cases" class="mainNavigationTabs__tabContent active">
+
+            <div class="fluidTitle">
+                <strong>@GlobalRes.Number_cases_stage:</strong> -  @_today
+            </div>
+
+            <div class="container cases-TotalStatistics">
+                <div class="row clearfix">
+
+                    @*  *@
+                    @for (var i = 0; i < _titleHeaderLegend.Length; i++)
+                    {
+                        <div class="col-2">
+                            <div class="cases-TotalStatistics__numberOfCases">
+                                <strong>@_today_spanshot[_titleHeaderLegendIdx[i]]</strong>
+                                <span class="cases-TotalStatistics__numberOfCases-changed color-CasesSpam" style="color: @_miniSquareColor[i];">(+2)</span>
+                            </div>
+                            <div class="cases-TotalStatistics__titleColored clearfix">
+                                <div class="cases-TotalStatistics__titleColored-color color-CasesSpam" style="background-color: @_miniSquareColor[i];"></div>
+                                <div class="cases-TotalStatistics__titleColored-text">@_titleHeaderLegend[i]</div>
                             </div>
                         </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                    }
+
+                    <!-- #region Test -->
+                    @*<div class="col-2">
+                            <div class="cases-TotalStatistics__numberOfCases">
+                                <strong>18</strong>
+                                <span class="cases-TotalStatistics__numberOfCases-changed color-CasesSpam">(+2)</span>
+                            </div>
+                            <div class="cases-TotalStatistics__titleColored clearfix">
+                                <div class="cases-TotalStatistics__titleColored-color color-CasesSpam"></div>
+                                <div class="cases-TotalStatistics__titleColored-text">Spam</div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="cases-TotalStatistics__numberOfCases">
+                                <strong>2</strong>
+                                <span class="cases-TotalStatistics__numberOfCases-changed color-newReport">(-3)</span>
+                            </div>
+                            <div class="cases-TotalStatistics__titleColored clearfix">
+                                <div class="cases-TotalStatistics__titleColored-color color-newReport"></div>
+                                <div class="cases-TotalStatistics__titleColored-text">New Report</div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="cases-TotalStatistics__numberOfCases">
+                                <strong>5</strong>
+                                <span class="cases-TotalStatistics__numberOfCases-changed color-reportReview">(+5)</span>
+                            </div>
+                            <div class="cases-TotalStatistics__titleColored clearfix">
+                                <div class="cases-TotalStatistics__titleColored-color color-reportReview"></div>
+                                <div class="cases-TotalStatistics__titleColored-text">Report Review</div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="cases-TotalStatistics__numberOfCases">
+                                <strong>0</strong>
+                                <span class="cases-TotalStatistics__numberOfCases-changed color-UnderInvestigation">(+2)</span>
+                            </div>
+                            <div class="cases-TotalStatistics__titleColored clearfix">
+                                <div class="cases-TotalStatistics__titleColored-color color-UnderInvestigation"></div>
+                                <div class="cases-TotalStatistics__titleColored-text">Under <br> Investigation</div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="cases-TotalStatistics__numberOfCases">
+                                <strong>1</strong>
+                                <span class="cases-TotalStatistics__numberOfCases-changed color-SignOff">(+1)</span>
+                            </div>
+                            <div class="cases-TotalStatistics__titleColored clearfix">
+                                <div class="cases-TotalStatistics__titleColored-color color-SignOff"></div>
+                                <div class="cases-TotalStatistics__titleColored-text">Awaiting Sign-Off</div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="cases-TotalStatistics__numberOfCases">
+                                <strong>49</strong>
+                                <span class="cases-TotalStatistics__numberOfCases-changed color-Closed">(-)</span>
+                            </div>
+                            <div class="cases-TotalStatistics__titleColored clearfix">
+                                <div class="cases-TotalStatistics__titleColored-color color-Closed"></div>
+                                <div class="cases-TotalStatistics__titleColored-text">Closed</div>
+                            </div>
+                        </div>*@
+                    <!-- #endregion -->
+
+                </div>
+            </div><!-- /.container cases-TotalStatistics -->
+
+            <div class="container cases-TotalHeader clearfix">
+                <div class="case-TotalHeader__items timeFilterCases clearfix">
+                    <div class="case-DropDownList-title clearfix">
+                        <div class="case-DropDownList-title__text clearfix">All Time</div>
+                        <div class="case-DropDownList-title__arrow clearfix"></div>
+                    </div>
+                    <div class="timeFilterCases-dropBlock case-DropDownList-contentBlock   clearfix">
+                        <div class="timeFilterCases-dropBlock__titleRow row clearfix">
+                            <div class="col-12">
+                                <div class="timeFilterCases-dropBlock__titleRowText">
+                                    <ul class="case-DropDownListRadio">
+                                        <li class="case-DropDownListRadio-li clearfix checked">
+                                            <div class="case-DropDownListRadio-li__icon"></div>
+                                            <div class="case-DropDownListRadio-li__text">
+                                                All Time
+                                            </div>
+                                        </li>
+                                        <li class="case-DropDownListRadio-li clearfix ">
+                                            <div class="case-DropDownListRadio-li__icon"></div>
+                                            <div class="case-DropDownListRadio-li__text">
+                                                1 Year
+                                            </div>
+                                        </li>
+                                        <li class="case-DropDownListRadio-li clearfix ">
+                                            <div class="case-DropDownListRadio-li__icon"></div>
+                                            <div class="case-DropDownListRadio-li__text">
+                                                6 Month
+                                            </div>
+                                        </li>
+                                        <li class="case-DropDownListRadio-li clearfix ">
+                                            <div class="case-DropDownListRadio-li__icon"></div>
+                                            <div class="case-DropDownListRadio-li__text">
+                                                3 Month
+                                            </div>
+                                        </li>
+                                        <li class="case-DropDownListRadio-li clearfix ">
+                                            <div class="case-DropDownListRadio-li__icon"></div>
+                                            <div class="case-DropDownListRadio-li__text">
+                                                1 Month chto u nas ne buset problem s dlinnimi nazvaniyami..
+                                            </div>
+                                        </li>
+                                        <li class="case-DropDownListRadio-li clearfix ">
+                                            <div class="case-DropDownListRadio-li__icon"></div>
+                                            <div class="case-DropDownListRadio-li__text">
+                                                1 Week
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="case-DropDownListRadio-customDate">
+                                        <div class="case-DropDownListRadio-customDate__text">
+                                            Custom dates
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="case-TotalHeader__items filterCases  clearfix">
+                    <!-- activated -->
+                    <div class="case-DropDownList-title clearfix">
+                        <div class="case-DropDownList-title__text clearfix">Filter Cases</div>
+                        <div class="case-DropDownList-title__arrow clearfix"></div>
+                    </div>
+                    <div class="filterCases-dropBlock case-DropDownList-contentBlock  clearfix">
+                        <div class="filterCases-dropBlock__titleRow row clearfix">
+                            <div class="col-3">
+                                <div class="filterCases-dropBlock__titleRowText">
+                                    Location
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="filterCases-dropBlock__titleRowText">
+                                    Department
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="filterCases-dropBlock__titleRowText">
+                                    Incedent type
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="filterCases-dropBlock__titleRowText">
+                                    Reporter type
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filterCases-dropBlock__contentRow row clearfix">
+                            <div class="col-3 filterCases-dropBlock__contentCol">
+                                <ul class="case-DropDownList black">
+                                    <!--this is location-->
+                                    @if (ViewBag.dropDownSecond != null && ViewBag.dropDownSecond.Count > 0)
+                                    {
+                                        foreach (Tuple<string, string> tuple in ViewBag.dropDownSecond)
+                                        {
+                                            <li class="case-DropDownList-li clearfix checked">
+                                                <input type="hidden" value="@tuple.Item2" />
+                                                <div class="case-DropDownList-li__icon"></div>
+                                                <div class="case-DropDownList-li__text">
+                                                    @tuple.Item1
+                                                </div>
+                                            </li>
+
+                                        }
+                                    }
+                                </ul>
+                            </div><!-- / .col-3 filterCases-dropBlock__contentCol -->
+                            <div class="col-3 filterCases-dropBlock__contentCol">
+                                <ul class="case-DropDownList black">
+
+                                    @if (ViewBag.dropDownFirst != null && ViewBag.dropDownFirst.Count > 0)
+                                    {
+                                        foreach (Tuple<string, string> tuple in ViewBag.dropDownFirst)
+                                        {
+                                            <li class="case-DropDownList-li clearfix checked">
+                                                <input type="hidden" value="@tuple.Item2" />
+                                                <div class="case-DropDownList-li__icon"></div>
+                                                <div class="case-DropDownList-li__text">
+                                                    @tuple.Item1
+                                                </div>
+                                            </li>
+                                        }
+                                    }
+                                </ul>
+                            </div><!-- / .col-3 filterCases-dropBlock__contentCol -->
+
+                            <div class="col-3 filterCases-dropBlock__contentCol">
+                                <ul class="case-DropDownList black">
+
+                                    @if (ViewBag.dropDownThird != null && ViewBag.dropDownThird.Count > 0)
+                                    {
+                                        foreach (Tuple<string, string> tuple in ViewBag.dropDownThird)
+                                        {
+                                            <li class="case-DropDownList-li clearfix checked">
+                                                <input type="hidden" value="@tuple.Item2" />
+                                                <div class="case-DropDownList-li__icon"></div>
+                                                <div class="case-DropDownList-li__text">
+                                                    @tuple.Item1
+                                                </div>
+                                            </li>
+                                        }
+                                    }
+                                </ul>
+                            </div><!-- / .col-3 filterCases-dropBlock__contentCol -->
+
+                            <div class="col-3 filterCases-dropBlock__contentCol">
+                                <ul class="case-DropDownList black">
+                                    @if (ViewBag.dropDownFourth != null && ViewBag.dropDownFourth.Count > 0)
+                                    {
+                                        foreach (Tuple<string, string> tuple in ViewBag.dropDownFourth)
+                                        {
+                                            <li class="case-DropDownList-li clearfix checked">
+                                                <input type="hidden" value="@tuple.Item2" />
+                                                <div class="case-DropDownList-li__icon"></div>
+                                                <div class="case-DropDownList-li__text">
+                                                    @tuple.Item1
+                                                </div>
+                                            </li>
+                                        }
+                                    }
+
+                                </ul>
+                            </div><!-- / .col-3 filterCases-dropBlock__contentCol -->
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div><!-- /.cases-TotalHeader -->
+
+
+        </div><!-- mainNavigationTabs__tabContent -->
+        <div class="container ">
+            <div class="case-MainContent container">
+                <div class="case-MainContent-Header clearfix">
+                    <div class="case-MainContent-Header__left clearfix">
+                        <div class="case-MainContent-Header__leftTitle">
+                            Cases
+                        </div>
+                    </div>
+                    <div class="case-MainContent-Header__right clearfix">
+                        <div class="case-MainContent-HeaderLinks clearfix">
+                            <a href="#" class="case-MainContent-HeaderLinks__item expertLink clearfix">
+                                <div class="case-MainContent-HeaderLinks__itemIcon"></div>
+                                <div class="case-MainContent-HeaderLinks__itemText">
+                                    Export PDF
+                                </div>
+                            </a>
+                            <a href="#" class="case-MainContent-HeaderLinks__item clearfix">
+                                <div class="case-MainContent-HeaderLinks__itemText">
+                                    Show Cases
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="case-MainContent-main">
+                    <div class="col-3 center">
+                        <div class="blockDepartments" style="width: 100%; margin: 0 auto; float: none;">
+                            <div style="width: 100%; display: table;">
+                                @*<div id="containerDepartments" class="containers" style="width: 95%; margin-left: 5%;"></div>*@
+                            </div>
+                        </div>
+                        <div class="caseNofound">
+                                <div class="caseNofound__title">
+                                    Departments
+                                </div>
+                                <div class="caseNofound__def">
+                                    No cases found
+                                </div>
+                            </div>
+                    </div>
+                    <div class="col-3 center" style="position: relative;">
+
+                        <div class="caseNofound" style="position: absolute;top: 27%; left: 17%">
+                            <div class="caseNofound__title">
+                                Location
+                            </div>
+                            <div class="caseNofound__def">
+                                No cases found
+                            </div>
+                        </div>
+                        @*<div id="containerLocation" class="containers" style="width: 95%; margin-left: 5%;">*@
+                        </div>
+
+                    </div>
+                    <div class="col-3 center">
+                        @*<div id="containerTypesOfIncident" class="containers" style="width: 95%; margin-left: 5%;"></div>*@
+                        <div class="caseNofound">
+                                <div class="caseNofound__title">
+                                    Type of reporter
+                                </div>
+                                <div class="caseNofound__def">
+                                    No cases found
+                                </div>
+                            </div>
+                    </div>
+                    <div class="col-3 center">
+                        @*<div id="containerTypeOfReporter" class="containers" style="width: 95%; margin-left: 5%;"></div>*@
+                        <div class="caseNofound">
+                                <div class="caseNofound__title">
+                                    Type of incident
+                                </div>
+                                <div class="caseNofound__def">
+                                    No cases found
+                                </div>
+                            </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="case-MainContent-hr"></div>
+            <div class="case-MainContent container">
+                <div class="case-MainContent-Header clearfix">
+                    <div class="case-MainContent-Header__left clearfix">
+                        <div class="case-MainContent-Header__leftTitle">
+                            Cases Management Turnaround Time
+                        </div>
+                    </div>
+                    <div class="case-MainContent-Header__right clearfix">
+                        <div class="case-MainContent-HeaderLinks clearfix">
+                            <a href="#" class="case-MainContent-HeaderLinks__item expertLink clearfix">
+                                <div class="case-MainContent-HeaderLinks__itemIcon"></div>
+                                <div class="case-MainContent-HeaderLinks__itemText">
+                                    Export PDF
+                                </div>
+                            </a>
+                            <a href="#" class="case-MainContent-HeaderLinks__item clearfix">
+                                <div class="case-MainContent-HeaderLinks__itemText">
+                                    Show Cases
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pb-60"></div>
+        <div class="container ">
+            <div class="case-MainContent container">
+                <div class="case-MainContent-Header filterInCaseContent-header clearfix">
+                    <div class="case-MainContent-Header__left clearfix">
+                        <div class="case-MainContent-Header__leftTitle">
+                            Cases Response Time
+                        </div>
+                    </div>
+                    <div class="case-MainContent-Header__right clearfix">
+                        <div class="case-MainContent-HeaderLinks clearfix">
+                            <div class="filterInCaseContent">
+                                <div class="case-TotalHeader__items timeFilterCases clearfix">
+                                    <div class="case-DropDownList-title clearfix">
+                                        <div class="case-DropDownList-title__text clearfix">All Time</div>
+                                        <div class="case-DropDownList-title__arrow clearfix"></div>
+                                    </div>
+                                    <div class="timeFilterCases-dropBlock case-DropDownList-contentBlock   clearfix">
+                                        <div class="timeFilterCases-dropBlock__titleRow row clearfix">
+                                            <div class="col-12 black">
+                                                <div class="timeFilterCases-dropBlock__titleRowText">
+                                                    <ul class="case-DropDownListRadio">
+                                                        <li class="case-DropDownListRadio-li clearfix checked">
+                                                            <div class="case-DropDownListRadio-li__icon"></div>
+                                                            <div class="case-DropDownListRadio-li__text">
+                                                                All Time
+                                                            </div>
+                                                        </li>
+                                                        <li class="case-DropDownListRadio-li clearfix ">
+                                                            <div class="case-DropDownListRadio-li__icon"></div>
+                                                            <div class="case-DropDownListRadio-li__text">
+                                                                1 Year
+                                                            </div>
+                                                        </li>
+                                                        <li class="case-DropDownListRadio-li clearfix ">
+                                                            <div class="case-DropDownListRadio-li__icon"></div>
+                                                            <div class="case-DropDownListRadio-li__text">
+                                                                6 Month
+                                                            </div>
+                                                        </li>
+                                                        <li class="case-DropDownListRadio-li clearfix ">
+                                                            <div class="case-DropDownListRadio-li__icon"></div>
+                                                            <div class="case-DropDownListRadio-li__text">
+                                                                3 Month
+                                                            </div>
+                                                        </li>
+                                                        <li class="case-DropDownListRadio-li clearfix ">
+                                                            <div class="case-DropDownListRadio-li__icon"></div>
+                                                            <div class="case-DropDownListRadio-li__text">
+                                                                1 Month
+                                                            </div>
+                                                        </li>
+                                                        <li class="case-DropDownListRadio-li clearfix ">
+                                                            <div class="case-DropDownListRadio-li__icon"></div>
+                                                            <div class="case-DropDownListRadio-li__text">
+                                                                1 Week
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="case-DropDownListRadio-customDate">
+                                                        <div class="case-DropDownListRadio-customDate__text">
+                                                            Custom dates
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="case-TotalHeader__items filterCases  clearfix">
+                                    <!-- activated -->
+                                    <div class="case-DropDownList-title clearfix">
+                                        <div class="case-DropDownList-title__text clearfix">Filter Cases</div>
+                                        <div class="case-DropDownList-title__arrow clearfix"></div>
+                                    </div>
+                                    <div class="filterCases-dropBlock case-DropDownList-contentBlock  clearfix">
+                                        <div class="filterCases-dropBlock__titleRow row clearfix">
+                                            <div class="col-3">
+                                                <div class="filterCases-dropBlock__titleRowText">
+                                                    Location
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="filterCases-dropBlock__titleRowText">
+                                                    Department
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="filterCases-dropBlock__titleRowText">
+                                                    Incedent type
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="filterCases-dropBlock__titleRowText">
+                                                    Reporter type
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="filterCases-dropBlock__contentRow row clearfix">
+                                            <div class="col-3 filterCases-dropBlock__contentCol">
+                                                <ul class="case-DropDownList">
+                                                    <li class="case-DropDownList-li clearfix checked">
+                                                        <div class="case-DropDownList-li__icon"></div>
+                                                        <div class="case-DropDownList-li__text">
+                                                            New-York
+                                                        </div>
+                                                    </li>
+                                                    <li class="case-DropDownList-li clearfix checked">
+                                                        <div class="case-DropDownList-li__icon"></div>
+                                                        <div class="case-DropDownList-li__text">
+                                                            New-York
+                                                        </div>
+                                                    </li>
+                                                    <li class="case-DropDownList-li clearfix checked">
+                                                        <div class="case-DropDownList-li__icon"></div>
+                                                        <div class="case-DropDownList-li__text">
+                                                            New-York
+                                                        </div>
+                                                    </li>
+                                                    <li class="case-DropDownList-li clearfix checked">
+                                                        <div class="case-DropDownList-li__icon"></div>
+                                                        <div class="case-DropDownList-li__text">
+                                                            New-York
+                                                        </div>
+                                                    </li>
+                                                    <li class="case-DropDownList-li clearfix checked">
+                                                        <div class="case-DropDownList-li__icon"></div>
+                                                        <div class="case-DropDownList-li__text">
+                                                            New-York
+                                                        </div>
+                                                    </li>
+                                                    <li class="case-DropDownList-li clearfix">
+                                                        <div class="case-DropDownList-li__icon"></div>
+                                                        <div class="case-DropDownList-li__text">
+                                                            Los-Angeles
+                                                        </div>
+                                                    </li>
+                                                    <li class="case-DropDownList-li clearfix">
+                                                        <div class="case-DropDownList-li__icon"></div>
+                                                        <div class="case-DropDownList-li__text">
+                                                            Los-Angeles
+                                                        </div>
+                                                    </li>
+                                                    <li class="case-DropDownList-li clearfix">
+                                                        <div class="case-DropDownList-li__icon"></div>
+                                                        <div class="case-DropDownList-li__text">
+                                                            Los-Angeles
+                                                        </div>
+                                                    </li>
+                                                    <li class="case-DropDownList-li clearfix">
+                                                        <div class="case-DropDownList-li__icon"></div>
+                                                        <div class="case-DropDownList-li__text">
+                                                            Los-Angeles
+                                                        </div>
+                                                    </li>
+                                                    <li class="case-DropDownList-li clearfix">
+                                                        <div class="case-DropDownList-li__icon"></div>
+                                                        <div class="case-DropDownList-li__text">
+                                                            Los-Angeles
+                                                        </div>
+                                                    </li>
+                                                    <li class="case-DropDownList-li clearfix">
+                                                        <div class="case-DropDownList-li__icon"></div>
+                                                        <div class="case-DropDownList-li__text">
+                                                            Los-Angeles
+                                                        </div>
+                                                    </li>
+                                                    <li class="case-DropDownList-li clearfix">
+                                                        <div class="case-DropDownList-li__icon"></div>
+                                                        <div class="case-DropDownList-li__text">
+                                                            Los-Angeles
+                                                        </div>
+                                                    </li>
+                                                    <li class="case-DropDownList-li clearfix">
+                                                        <div class="case-DropDownList-li__icon"></div>
+                                                        <div class="case-DropDownList-li__text">
+                                                            Los-Angeles
+                                                        </div>
+                                                    </li>
+                                                    <li class="case-DropDownList-li clearfix">
+                                                        <div class="case-DropDownList-li__icon"></div>
+                                                        <div class="case-DropDownList-li__text">
+                                                            Los-Angeles
+                                                        </div>
+                                                    </li>
+                                                    <li class="case-DropDownList-li clearfix">
+                                                        <div class="case-DropDownList-li__icon"></div>
+                                                        <div class="case-DropDownList-li__text">
+                                                            Los-Angeles
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div><!-- / .col-3 filterCases-dropBlock__contentCol -->
+                                            <div class="col-3 filterCases-dropBlock__contentCol">
+                                                <ul class="case-DropDownList">
+                                                    <li class="case-DropDownList-li clearfix checked">
+                                                        <div class="case-DropDownList-li__icon"></div>
+                                                        <div class="case-DropDownList-li__text">
+                                                            Sales
+                                                        </div>
+                                                    </li>
+                                                    <li class="case-DropDownList-li clearfix checked">
+                                                        <div class="case-DropDownList-li__icon"></div>
+                                                        <div class="case-DropDownList-li__text">
+                                                            Legal
+                                                        </div>
+                                                    </li>
+                                                    <li class="case-DropDownList-li clearfix checked">
+                                                        <div class="case-DropDownList-li__icon"></div>
+                                                        <div class="case-DropDownList-li__text">
+                                                            IT
+                                                        </div>
+                                                    </li>
+
+                                                </ul>
+                                            </div><!-- / .col-3 filterCases-dropBlock__contentCol -->
+
+                                            <div class="col-3 filterCases-dropBlock__contentCol">
+                                                <ul class="case-DropDownList">
+                                                    <li class="case-DropDownList-li clearfix checked">
+                                                        <div class="case-DropDownList-li__icon"></div>
+                                                        <div class="case-DropDownList-li__text">
+                                                            Threat or violence
+                                                        </div>
+                                                    </li>
+                                                    <li class="case-DropDownList-li clearfix checked">
+                                                        <div class="case-DropDownList-li__icon"></div>
+                                                        <div class="case-DropDownList-li__text">
+                                                            Falsification of Records
+                                                        </div>
+                                                    </li>
+                                                    <li class="case-DropDownList-li clearfix checked">
+                                                        <div class="case-DropDownList-li__icon"></div>
+                                                        <div class="case-DropDownList-li__text">
+                                                            Accounting Error
+                                                        </div>
+                                                    </li>
+
+                                                </ul>
+                                            </div><!-- / .col-3 filterCases-dropBlock__contentCol -->
+
+                                            <div class="col-3 filterCases-dropBlock__contentCol">
+                                                <ul class="case-DropDownList">
+                                                    <li class="case-DropDownList-li clearfix checked">
+                                                        <div class="case-DropDownList-li__icon"></div>
+                                                        <div class="case-DropDownList-li__text">
+                                                            Employee
+                                                        </div>
+                                                    </li>
+                                                    <li class="case-DropDownList-li clearfix checked">
+                                                        <div class="case-DropDownList-li__icon"></div>
+                                                        <div class="case-DropDownList-li__text">
+                                                            Former Employee
+                                                        </div>
+                                                    </li>
+                                                    <li class="case-DropDownList-li clearfix checked">
+                                                        <div class="case-DropDownList-li__icon"></div>
+                                                        <div class="case-DropDownList-li__text">
+                                                            Contractor
+                                                        </div>
+                                                    </li>
+                                                    <li class="case-DropDownList-li clearfix checked">
+                                                        <div class="case-DropDownList-li__icon"></div>
+                                                        <div class="case-DropDownList-li__text">
+                                                            Other
+                                                        </div>
+                                                    </li>
+
+                                                </ul>
+                                            </div><!-- / .col-3 filterCases-dropBlock__contentCol -->
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="case-MainContent-main">
+                    <div class="col-3">
+                        col 1
+                    </div>
+                    <div class="col-3">
+                        col 2
+                    </div>
+                    <div class="col-3">
+                        col 3
+                    </div>
+                    <div class="col-3">
+                        col 4
+                    </div>
+                </div>
+            </div>
+
+            <div class="pb-60"></div>
+        </div><!-- /.container -->
+
+
+
+
+
+
+        <footer class="cleanFooter">
+            <div class="container clearfix">
+                <ul class="footer-RightLinks">
+                    <li><a href="#">Help and support</a></li>
+                </ul>
+            </div>
+        </footer>
+        <script>
+            $(document).ready(function () {
+                //Filter case
+
+
+                // check items
+                $(".case-DropDownList>.case-DropDownList-li").click(function () {
+                    $(this).toggleClass("checked");
+                });
+
+                // Radio check
+                $(".case-DropDownListRadio>.case-DropDownListRadio-li").click(function () {
+                    $(".case-DropDownListRadio>.case-DropDownListRadio-li").removeClass("checked");
+                    $(this).addClass("checked");
+                });
+
+
+                // Toggle block
+
+                $(document).click(function (event) {
+                    $target = $(event.target);
+                    if (!$target.closest(".case-TotalHeader__items").length &&
+                        $(".case-DropDownList-contentBlock").is(":visible")) {
+                        $(".case-DropDownList-contentBlock").hide("fast");
+                        $(".case-DropDownList-contentBlock").parent(".case-TotalHeader__items").removeClass("selected");
+                    }
+                });
+                $(".case-DropDownList-title").click(function () {
+
+                    $(".case-DropDownList-title").not(this).next(".case-DropDownList-contentBlock").hide("fast");
+                    $(".case-DropDownList-title").not(this).parent(".case-TotalHeader__items").removeClass("selected");
+
+                    $(this).next(".case-DropDownList-contentBlock").toggle("fast");
+                    $(this).parent(".case-TotalHeader__items").toggleClass("selected");
+                });
+
+
+            });
+        </script>
+
+
     </div>
 
-    <div class="container">
-        <div class="row circleGraphRow circleGraphInfoRow">
-            <div class="col-4" id="chart1">
-                <button type="button" class="noPrint printButton" ng-click="print('chart1', 'Behavioral Factors')" ng-show="chartData1.length > 0"><img src="~/Content/Icons/print-icon.png" /></button>
-                <nvd3 id="chart1" options="chart1" data="chartData1" api="api1"></nvd3>
-                <div class="graphTitle">
-                    Behavioral Factors
-                </div><!-- /.graphTitle -->
-                <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in chartData1">
-                    <div class="col-10 p-0">
-                        <div class="ng-binding RootCauseAnalysis-roudChart__title" style="padding-left: 10px; border-left: solid 5px {{chartColors[$index]}}">
-                            {{item.name}}
-                        </div>
-                    </div>
-                    <div class="col-2 RootCauseAnalysis-roudChart__count">
-                        {{item.count}}
-                    </div>
-                </div>
-            </div><!-- /.col-4 -->
-            <div class="col-4" id="chart2">
-                <button type="button" class="noPrint printButton" ng-click="print('chart2', 'External Influences')" ng-show="chartData2.length > 0"><img src="~/Content/Icons/print-icon.png" /></button>
-                <nvd3 id="chart2" options="chart2" data="chartData2" api="api2"></nvd3>
-                <div class="graphTitle">
-                    External Influences
-                </div><!-- /.graphTitle -->
-                <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in chartData2">
-                    <div class="col-10 p-0">
-                        <div class="ng-binding RootCauseAnalysis-roudChart__title" style="padding-left: 10px; border-left: solid 5px {{chartColors[$index]}}">
-                            {{item.name}}
-                        </div>
-                    </div>
-                    <div class="col-2 RootCauseAnalysis-roudChart__count">
-                        {{item.count}}
-                    </div>
-                </div>
-            </div><!-- /.col-4 -->
-            <div class="col-4" id="chart3">
-                <button type="button" class="noPrint printButton" ng-click="print('chart3', 'Organizational Influences')" ng-show="chartData3.length > 0"><img src="~/Content/Icons/print-icon.png" /></button>
-                <nvd3 id="chart3" options="chart3" data="chartData3" api="api3"></nvd3>
-                <div class="graphTitle">
-                    Organizational Influences
-                </div><!-- /.graphTitle -->
-                <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in chartData3">
-                    <div class="col-10 p-0">
-                        <div class="ng-binding RootCauseAnalysis-roudChart__title" style="padding-left: 10px; border-left: solid 5px {{chartColors[$index]}}">
-                            {{item.name}}
-                        </div>
-                    </div>
-                    <div class="col-2 RootCauseAnalysis-roudChart__count">
-                        {{item.count}}
-                    </div>
-                </div>
-            </div><!-- /.col-4 -->
-        </div><!-- /.row -->
-    </div><!-- /.container -->
 </div>
+
+<script src="~/Scripts/ajaxDashobardAnalitics.js"></script>
