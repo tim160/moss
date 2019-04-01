@@ -169,9 +169,9 @@
         }
         return str;
     }
-    let totalDaysAll = {};
-    let totalDaysSettings = {};
-    let totalDays = {};
+    //let totalDaysAll = {};
+    //let totalDaysSettings = {};
+    //let totalDays = {};
 
 
 
@@ -179,100 +179,131 @@
     //drop down list
     function sendAjax(userId, companyId, types) {
         if (userId && companyId) {
-            //var temp = $.parseJSON(data);
-            //_dtCompanyDepartmentReport(temp['DepartmentTable']);
-            //addValDep($("#containerDepartments tspan"), temp['DepartmentTable']);
+            var data = "{\"LocationTable\":[{\"name\":\"Chicago\",\"val\":10},{\"name\":\"Atlanta\",\"val\":2},{\"name\":\"New York\",\"val\":7},{\"name\":\"Houston\",\"val\":15},{\"name\":\"Other\",\"val\":8}], \"DepartmentTable\":[{\"name\":\"Sales\",\"val\":3},{\"name\":\"Production\",\"val\":2},{\"name\":\"Accounting \\u0026 Finance\",\"val\":1},{\"name\":\"Compliance\",\"val\":2},{\"name\":\"Customer Service\",\"val\":8},{\"name\":\"Information Technology (IT)\",\"val\":17},{\"name\":\"Purchasing\",\"val\":6},{\"name\":\"HR\",\"val\":3}], \"RelationTable\":[{\"name\":\"Employee\",\"val\":20},{\"name\":\"Former employee\",\"val\":3},{\"name\":\"Contractor\",\"val\":1},{\"name\":\"Member of the public\",\"val\":1},{\"name\":\"Other\",\"val\":1}], \"SecondaryTypeTable\":[{\"name\":\"Sexual Harassment\",\"val\":2},{\"name\":\"Retaliation\",\"val\":1},{\"name\":\"Unsafe Work Conditions\",\"val\":1},{\"name\":\"Bribery/Kickbacks\",\"val\":7},{\"name\":\"Domestic Violence\",\"val\":3},{\"name\":\"Substance Abuse\",\"val\":2},{\"name\":\"Discrimination\",\"val\":3},{\"name\":\"Workplace Safety\",\"val\":1},{\"name\":\"Falsification of Records and Official Documents\",\"val\":1},{\"name\":\"Misappropriation of Funds\",\"val\":2},{\"name\":\"Harassment\",\"val\":2},{\"name\":\"Threat of Violence\",\"val\":1},{\"name\":\"Accounting Misrepresentation\",\"val\":3},{\"name\":\"Customer Mistreatment\",\"val\":1},{\"name\":\"Embezzlement\",\"val\":1},{\"name\":\"Identity Theft\",\"val\":2},{\"name\":\"Code of Ethics Violation\",\"val\":1},{\"name\":\"Accounting / Audit Related Concerns\",\"val\":7},{\"name\":\"Auditing Matters\",\"val\":1},{\"name\":\"Acceptable Use Violations\",\"val\":6}], \"AverageStageDaysTable\":[{ \"name\": \"New Report\",\"val\":4},{ \"name\": \"New Case\",\"val\":0},{ \"name\": \"Under Investigation\",\"val\":62},{ \"name\": \"Awaiting Sign-Off\",\"val\":58},{ \"name\": \"Closed\",\"val\":0}], \"TodaySnapshotTable\":[7,1,3,4,0,16,0,0,11,0], \"MonthEndSnapshotTable\":[7,1,3,4,0,16,0,0,11,0], \"AnalyticsTimeline\":[{\"month\":\"\",\"pending\":0,\"review\":0,\"investigation\":0,\"resolution\":0,\"escalation\":0,\"completed\":null,\"closed\":0,\"spam\":0,\"notused\":null},{\"month\":\"May\",\"pending\":0,\"review\":0,\"investigation\":0,\"resolution\":0,\"escalation\":0,\"completed\":0,\"closed\":0,\"spam\":0,\"notused\":0},{\"month\":\"June\",\"pending\":0,\"review\":0,\"investigation\":0,\"resolution\":0,\"escalation\":0,\"completed\":0,\"closed\":0,\"spam\":0,\"notused\":0},{\"month\":\"July\",\"pending\":0,\"review\":0,\"investigation\":0,\"resolution\":0,\"escalation\":0,\"completed\":0,\"closed\":0,\"spam\":0,\"notused\":0},{\"month\":\"August\",\"pending\":1,\"review\":0,\"investigation\":4,\"resolution\":0,\"escalation\":0,\"completed\":0,\"closed\":0,\"spam\":0,\"notused\":1},{\"month\":\"September\",\"pending\":1,\"review\":0,\"investigation\":5,\"resolution\":0,\"escalation\":0,\"completed\":0,\"closed\":0,\"spam\":0,\"notused\":1},{\"month\":\"October\",\"pending\":1,\"review\":0,\"investigation\":7,\"resolution\":0,\"escalation\":0,\"completed\":0,\"closed\":0,\"spam\":0,\"notused\":2},{\"month\":\"November\",\"pending\":0,\"review\":0,\"investigation\":10,\"resolution\":0,\"escalation\":0,\"completed\":0,\"closed\":0,\"spam\":0,\"notused\":2},{\"month\":\"December\",\"pending\":0,\"review\":0,\"investigation\":11,\"resolution\":0,\"escalation\":0,\"completed\":0,\"closed\":0,\"spam\":0,\"notused\":2},{\"month\":\"January\",\"pending\":0,\"review\":0,\"investigation\":11,\"resolution\":1,\"escalation\":0,\"completed\":0,\"closed\":0,\"spam\":0,\"notused\":3},{\"month\":\"February\",\"pending\":0,\"review\":0,\"investigation\":12,\"resolution\":1,\"escalation\":0,\"completed\":0,\"closed\":0,\"spam\":0,\"notused\":3},{\"month\":\"March\",\"pending\":2,\"review\":0,\"investigation\":12,\"resolution\":1,\"escalation\":0,\"completed\":0,\"closed\":0,\"spam\":0,\"notused\":3},{\"month\":\"April\",\"pending\":7,\"review\":1,\"investigation\":3,\"resolution\":4,\"escalation\":0,\"completed\":16,\"closed\":0,\"spam\":0,\"notused\":11},{\"month\":\" \",\"pending\":7,\"review\":1,\"investigation\":3,\"resolution\":4,\"escalation\":0,\"completed\":16,\"closed\":0,\"spam\":0,\"notused\":11}]}";
+            var temp = $.parseJSON(data);
+            _dtCompanyDepartmentReport(temp['DepartmentTable']);
+            addValDep($("#containerDepartments tspan"), temp['DepartmentTable']);
 
-            //_dtCompanyLocationReport(temp['LocationTable']);
-            //addValDep($("#containerLocation tspan"), temp['LocationTable']);
+            _dtCompanyLocationReport(temp['LocationTable']);
+            addValDep($("#containerLocation tspan"), temp['LocationTable']);
 
-            //_dtCompanySecondaryTypeReport(temp['SecondaryTypeTable']);
-            //addValDep($("#containerTypesOfIncident tspan"), temp['SecondaryTypeTable']);
+            _dtCompanySecondaryTypeReport(temp['SecondaryTypeTable']);
+            addValDep($("#containerTypesOfIncident tspan"), temp['SecondaryTypeTable']);
 
-            //_dtCompanyRelationTypeReport(temp['RelationTable']);
-            //addValDep($("#containerTypeOfReporter tspan"), temp['RelationTable']);
-            $.ajax({
-                method: "POST",
-                url: "/Analytics/CompanyDepartmentReportAdvanced",
-                data: { companyId: companyId, userId: userId, types: types }
-            }).done(function (data) {//data from server
-                var temp = $.parseJSON(data);
+            _dtCompanyRelationTypeReport(temp['RelationTable']);
+            addValDep($("#containerTypeOfReporter tspan"), temp['RelationTable']);
 
-                if (temp['LocationTable'] != null && temp['LocationTable'].length >= 1) {
-                    _dtCompanyLocationReport(temp['LocationTable']);
-                    addValDep($("#containerLocation tspan"), temp['LocationTable']);
-                }
-                if (temp['DepartmentTable'] != null && temp['DepartmentTable'].length > 1) {
-                    _dtCompanyDepartmentReport(temp['DepartmentTable']);
-                    addValDep($("#containerDepartments tspan"), temp['DepartmentTable']);
-                }
-                if (temp["SecondaryTypeTable"] != null && temp["SecondaryTypeTable"].length > 1) {
-                    _dtCompanySecondaryTypeReport(temp['SecondaryTypeTable']);
-                    addValDep($("#containerTypesOfIncident tspan"), temp['SecondaryTypeTable']);
-                }
-                if (temp["RelationTable"] != null && temp["RelationTable"].length > 1) {
-                    _dtCompanyRelationTypeReport(temp['RelationTable']);
-                    addValDep($("#containerTypeOfReporter tspan"), temp['RelationTable']);
-                }
-                if (temp["AnalyticsTimeline"] != null && temp["AnalyticsTimeline"].length > 1) {
-                    _dtAnalyticsTimeline(temp["AnalyticsTimeline"]);
-                }
-                if (temp["MonthEndSnapshotTable"] != null && temp["MonthEndSnapshotTable"].length > 1 && temp["TodaySnapshotTable"] != null && temp["TodaySnapshotTable"].length > 1 && temp["MonthEndSnapshotTable"].length == temp["TodaySnapshotTable"].length) {
-                    var items = $(".blockTodayContant .itemLegend");
-                    var col = $(items[0]).find('label'); col.text(temp["TodaySnapshotTable"][6]);
-                    col = $(items[1]).find('label'); col.text(temp["TodaySnapshotTable"][0]);
-                    col = $(items[2]).find('label'); col.text(temp["TodaySnapshotTable"][1]);
-                    col = $(items[3]).find('label'); col.text(temp["TodaySnapshotTable"][2]);
-                    col = $(items[4]).find('label'); col.text(temp["TodaySnapshotTable"][3]);
-                    col = $(items[5]).find('label'); col.text(temp["TodaySnapshotTable"][8]);
-                }
-                var averOfDays = temp['AverageStageDaysTable'];
+            //$.ajax({
+            //    method: "GET",
+            //    url: "/api/AnalyticsRootCauseAnalysis"
+            //}).done(function (data) {
+            //    _dtbehavioralFactors(data.Behavioral);
+            //    _dtexternalInfluences(data.External);
+            //    _dtorganizationalInfluences(data.Organizational);
+            //});
 
-                var preReview = averOfDays[0].val;
-                var review = averOfDays[1].val;
-                var investigation = averOfDays[2].val;
-                var resolution = averOfDays[3].val;
-                var escalation = averOfDays[4].val;
+
+            //_dtbehavioralFactors(tempSecond.Behavioral);
+            //_dtexternalInfluences(tempSecond.External);
+            //_dtorganizationalInfluences(tempSecond.Organizational);
+            //(function () {
+
+            //    'use strict';
+
+            //    angular.module('EC')
+            //        .service('AnalyticsRootCauseAnalysisService', ['$resource', AnalyticsRootCauseAnalysisService]);
+
+            //    function AnalyticsRootCauseAnalysisService($resource) {
+            //        return $resource('/api/AnalyticsRootCauseAnalysis', {}, {
+            //            get: { method: 'GET', params: {}, isArray: false },
+            //        });
+            //    };
+            //})();
+
+          
+
+            //$.ajax({
+            //    method: "POST",
+            //    url: "/Analytics/CompanyDepartmentReportAdvanced",
+            //    data: { companyId: companyId, userId: userId, types: types }
+            //}).done(function (data) {//data from server
+            //    var temp = $.parseJSON(data);
+
+            //    if (temp['LocationTable'] != null && temp['LocationTable'].length >= 1) {
+            //        _dtCompanyLocationReport(temp['LocationTable']);
+            //        addValDep($("#containerLocation tspan"), temp['LocationTable']);
+            //    }
+            //    if (temp['DepartmentTable'] != null && temp['DepartmentTable'].length > 1) {
+            //        _dtCompanyDepartmentReport(temp['DepartmentTable']);
+            //        addValDep($("#containerDepartments tspan"), temp['DepartmentTable']);
+            //    }
+            //    if (temp["SecondaryTypeTable"] != null && temp["SecondaryTypeTable"].length > 1) {
+            //        _dtCompanySecondaryTypeReport(temp['SecondaryTypeTable']);
+            //        addValDep($("#containerTypesOfIncident tspan"), temp['SecondaryTypeTable']);
+            //    }
+            //    if (temp["RelationTable"] != null && temp["RelationTable"].length > 1) {
+            //        _dtCompanyRelationTypeReport(temp['RelationTable']);
+            //        addValDep($("#containerTypeOfReporter tspan"), temp['RelationTable']);
+            //    }
+            //    if (temp["AnalyticsTimeline"] != null && temp["AnalyticsTimeline"].length > 1) {
+            //        _dtAnalyticsTimeline(temp["AnalyticsTimeline"]);
+            //    }
+            //    if (temp["MonthEndSnapshotTable"] != null && temp["MonthEndSnapshotTable"].length > 1 && temp["TodaySnapshotTable"] != null && temp["TodaySnapshotTable"].length > 1 && temp["MonthEndSnapshotTable"].length == temp["TodaySnapshotTable"].length) {
+            //        var items = $(".blockTodayContant .itemLegend");
+            //        var col = $(items[0]).find('label'); col.text(temp["TodaySnapshotTable"][6]);
+            //        col = $(items[1]).find('label'); col.text(temp["TodaySnapshotTable"][0]);
+            //        col = $(items[2]).find('label'); col.text(temp["TodaySnapshotTable"][1]);
+            //        col = $(items[3]).find('label'); col.text(temp["TodaySnapshotTable"][2]);
+            //        col = $(items[4]).find('label'); col.text(temp["TodaySnapshotTable"][3]);
+            //        col = $(items[5]).find('label'); col.text(temp["TodaySnapshotTable"][8]);
+            //    }
+            //    var averOfDays = temp['AverageStageDaysTable'];
+
+            //    var preReview = averOfDays[0].val;
+            //    var review = averOfDays[1].val;
+            //    var investigation = averOfDays[2].val;
+            //    var resolution = averOfDays[3].val;
+            //    var escalation = averOfDays[4].val;
 
                 
-                let totalDaysAll = {};
-                let totalDaysSettings = {};
-                let totalDays = {};
+            //    let totalDaysAll = {};
+            //    let totalDaysSettings = {};
+            //    let totalDays = {};
 
-                let reviewSettings = parseInt($("#step1_delay").attr("value"));
-                let reviewInvestigation = parseInt($("#step2_delay").attr("value"));
-                let reviewResolution = parseInt($("#step3_delay").attr("value"));
-                let reviewEscalation = parseInt($("#step4_delay").attr("value"));
+            //    let reviewSettings = parseInt($("#step1_delay").attr("value"));
+            //    let reviewInvestigation = parseInt($("#step2_delay").attr("value"));
+            //    let reviewResolution = parseInt($("#step3_delay").attr("value"));
+            //    let reviewEscalation = parseInt($("#step4_delay").attr("value"));
 
 
 
-                totalDaysSettings.reviewSettings = reviewSettings;
-                totalDaysSettings.reviewInvestigation = reviewInvestigation;
-                totalDaysSettings.reviewResolution = reviewResolution;
-                totalDaysSettings.reviewEscalation = reviewEscalation;
+            //    totalDaysSettings.reviewSettings = reviewSettings;
+            //    totalDaysSettings.reviewInvestigation = reviewInvestigation;
+            //    totalDaysSettings.reviewResolution = reviewResolution;
+            //    totalDaysSettings.reviewEscalation = reviewEscalation;
 
-                totalDays.preReview = preReview;
-                totalDays.review = review;
-                totalDays.investigation = investigation;
-                totalDays.resolution = resolution;
-                totalDays.escalation = escalation;
+            //    totalDays.preReview = preReview;
+            //    totalDays.review = review;
+            //    totalDays.investigation = investigation;
+            //    totalDays.resolution = resolution;
+            //    totalDays.escalation = escalation;
 
-                totalDaysAll.totalDaysSettings = totalDaysSettings;
-                totalDaysAll.totalDays = totalDays;
+            //    totalDaysAll.totalDaysSettings = totalDaysSettings;
+            //    totalDaysAll.totalDays = totalDays;
 
-                //Clear
-                $(".wrapper table td").each(function (idx, val) {
-                    if (!$(val).hasClass('notClear')) {
-                        $(val).html('');
-                    }
-                });
+            //    //Clear
+            //    $(".wrapper table td").each(function (idx, val) {
+            //        if (!$(val).hasClass('notClear')) {
+            //            $(val).html('');
+            //        }
+            //    });
 
-                AverageOfDaysPerStageBackUp();
-                init(totalDaysAll);
-                initGreyBlocks(totalDaysAll);
+            //    AverageOfDaysPerStageBackUp();
+            //    init(totalDaysAll);
+            //    initGreyBlocks(totalDaysAll);
 
-                addNumberCenter();
-            });
+            //    addNumberCenter();
+            //});
         }
 
     }
@@ -1131,4 +1162,424 @@
     $('#blockTypeOfIncidentPrint').on('click', function () {
         PrintElem($('.blockTypeOfIncident')[0]);
     });
+
+    //function _dtbehavioralFactors(data) {
+    //    //var total = 0;
+    //    //for (var i = 0; i < data.length; i++) {
+    //    //    total += data[i].val;
+    //    //}
+    //    //var pieChart = $("#behavioralFactors");
+    //    //if (pieChart.length > 1) {
+    //    //    pieChart = $("#behavioralFactors").dxPieChart('instance');
+    //    //    pieChart.clearSelection();
+    //    //}
+
+    //    $("#behavioralFactors").dxPieChart({
+    //        dataSource: data,
+    //        tooltip: {
+    //            enabled: true,
+    //            percentPrecision: 2,
+    //            customizeTooltip: function (arg) {
+    //                return {
+    //                    text: arg.argumentText + " - " + arg.value + ' (' + arg.percentText + ')'
+    //                };
+    //            }
+    //        },
+    //        legend: {
+    //            columnCount: 1,
+    //            horizontalAlignment: "center",
+    //            verticalAlignment: "bottom",
+    //            customizeHint: function () {
+    //                return this.pointName + ' - ' + data[this.pointIndex].val;
+    //            },
+    //            customizeText: function () {
+    //                return legentText(this.pointName, data[this.pointIndex].val, total);
+    //            },
+    //        },
+    //        series: [{
+    //            type: "doughnut",
+    //            argumentField: "name",
+    //            innerRadius: '0.6',
+    //            label: {
+    //                visible: false,
+    //                connector: {
+    //                    visible: true
+    //                }
+    //            }
+    //        }],
+    //        size: {
+    //            width: 200,
+    //            height: 200,
+    //        },
+    //    });
+    //}
+    //function _dtexternalInfluences(data) {
+    //    //var total = 0;
+    //    //for (var i = 0; i < data.length; i++) {
+    //    //    total += data[i].val;
+    //    //}
+    //    //var pieChart = $("#externalInfluences");
+    //    //if (pieChart.length > 1) {
+    //    //    pieChart = $("#externalInfluences").dxPieChart('instance');
+    //    //    pieChart.clearSelection();
+    //    //}
+
+    //    $("#externalInfluences").dxPieChart({
+    //        dataSource: data,
+    //        tooltip: {
+    //            enabled: true,
+    //            percentPrecision: 2,
+    //            customizeTooltip: function (arg) {
+    //                return {
+    //                    text: arg.argumentText + " - " + arg.value + ' (' + arg.percentText + ')'
+    //                };
+    //            }
+    //        },
+    //        legend: {
+    //            columnCount: 1,
+    //            horizontalAlignment: "center",
+    //            verticalAlignment: "bottom",
+    //            customizeHint: function () {
+    //                return this.pointName + ' - ' + data[this.pointIndex].val;
+    //            },
+    //            customizeText: function () {
+    //                return legentText(this.pointName, data[this.pointIndex].val, total);
+    //            },
+    //        },
+    //        series: [{
+    //            type: "doughnut",
+    //            argumentField: "name",
+    //            innerRadius: '0.6',
+    //            label: {
+    //                visible: false,
+    //                connector: {
+    //                    visible: true
+    //                }
+    //            }
+    //        }],
+    //        size: {
+    //            width: 200,
+    //            height: 200,
+    //        },
+    //    });
+    //}
+    //function _dtorganizationalInfluences(data) {
+    //    //var total = 0;
+    //    //for (var i = 0; i < data.length; i++) {
+    //    //    total += data[i].val;
+    //    //}
+    //    //var pieChart = $("#organizationalInfluences");
+    //    //if (pieChart.length > 1) {
+    //    //    pieChart = $("#organizationalInfluences").dxPieChart('instance');
+    //    //    pieChart.clearSelection();
+    //    //}
+
+    //    $("#organizationalInfluences").dxPieChart({
+    //        dataSource: data,
+    //        tooltip: {
+    //            enabled: true,
+    //            percentPrecision: 2,
+    //            customizeTooltip: function (arg) {
+    //                return {
+    //                    text: arg.argumentText + " - " + arg.value + ' (' + arg.percentText + ')'
+    //                };
+    //            }
+    //        },
+    //        legend: {
+    //            columnCount: 1,
+    //            horizontalAlignment: "center",
+    //            verticalAlignment: "bottom",
+    //            customizeHint: function () {
+    //                return this.pointName + ' - ' + data[this.pointIndex].val;
+    //            },
+    //            customizeText: function () {
+    //                return legentText(this.pointName, data[this.pointIndex].val, total);
+    //            },
+    //        },
+    //        series: [{
+    //            type: "doughnut",
+    //            argumentField: "name",
+    //            innerRadius: '0.6',
+    //            label: {
+    //                visible: false,
+    //                connector: {
+    //                    visible: true
+    //                }
+    //            }
+    //        }],
+    //        size: {
+    //            width: 200,
+    //            height: 200,
+    //        },
+    //    });
 });
+//(function () {
+//    ROOT = $('base').attr('href');
+
+//    'use strict';
+
+//    angular.module('EC', [
+//        'ngResource',
+//        'ngAnimate',
+//        'ngSanitize',
+//        'nvd3',
+//        'ngFileUpload',
+//        'ui.calendar',
+
+//        'EC',
+//    ]);
+
+//    angular.module('EC').config(['$locationProvider',
+//        function () {
+//        }])
+//        .run(function () {
+//        });
+//});
+
+
+//(function () {
+
+//    'use strict';
+
+//    angular.module('EC')
+//        .service('AnalyticsRootCauseAnalysisService', ['$resource', AnalyticsRootCauseAnalysisService]);
+
+//    function AnalyticsRootCauseAnalysisService($resource) {
+//        return $resource('/api/AnalyticsRootCauseAnalysis', {}, {
+//            get: { method: 'GET', params: {}, isArray: false },
+//        });
+//    };
+//})();
+//(function () {
+
+//    'use strict';
+
+//    angular
+//        .module('EC', ['dx'])
+//        .controller('AnalyticsRootCauseAnalysisController',
+//            ['$scope', 'AnalyticsRootCauseAnalysisService', AnalyticsRootCauseAnalysisController]);
+
+//    function AnalyticsRootCauseAnalysisController($scope, AnalyticsRootCauseAnalysisService) {
+
+//        $scope.secondaryType = { id: 0 };
+//        $scope.secondaryTypes = [];
+
+//        $scope.refresh = function () {
+//            /*var types = $scope.secondaryTypes.map(function (v) {
+//                return v._selected;
+//            });*/
+//            AnalyticsRootCauseAnalysisService.get({ secondaryType: $scope.secondaryType.id }, function (data) {
+//                if ($scope.secondaryTypes.length === 0) {
+//                    $scope.secondaryTypes = data.SecondaryTypes;
+//                    $scope.secondaryType = $scope.secondaryTypes[0];
+//                }
+//                $scope.chartData1 = data.Behavioral;
+//                $scope.chartData2 = data.External;
+//                $scope.chartData3 = data.Organizational;
+//                $scope.chart1.chart.title = data.BehavioralTotal;
+//                $scope.chart2.chart.title = data.ExternalTotal;
+//                $scope.chart3.chart.title = data.OrganizationalTotal;
+//                $scope.chartColors = data.Colors;
+//            });
+//        };
+
+//        $scope.chartColors = ['#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472'];
+
+//        $scope.refresh();
+
+//        $scope.selectSecondaryTypes = function (item) {
+//            //item._selected = !item._selected;
+//            $scope.secondaryType = item;
+//            $scope.refresh();
+//        };
+
+
+//        $scope.chart1 = {
+//            chart: {
+//                type: 'pieChart',
+//                donut: true,
+//                donutRatio: 1,
+//                x: function (d) {
+//                    return d.name;
+//                },
+//                y: function (d) {
+//                    return d.count;
+//                },
+//                height: 200,
+//                weight: 200,
+//                showLabels: false,
+//                color: $scope.chartColors,
+//                duration: 500,
+//                labelThreshold: 0.01,
+//                labelSunbeamLayout: true,
+//                //legendPosition: 'bottom',
+//                showLegend: false,
+//                title: {
+//                    enable: true,
+//                    text: '',
+//                },
+//                labels: {
+//                    mainLabel: {
+//                        fontSize: 20,
+//                    },
+//                },
+//                legend: {
+//                    margin: {
+//                        top: 5,
+//                        right: 35,
+//                        bottom: 5,
+//                        left: 0
+//                    }
+//                }
+//            }
+//        };
+//        $scope.chart2 = {
+//            chart: {
+//                type: 'pieChart',
+//                donut: true,
+//                donutRatio: 1,
+//                x: function (d) {
+//                    return d.name;
+//                },
+//                y: function (d) {
+//                    return d.count;
+//                },
+//                height: 500,
+//                showLabels: false,
+//                color: $scope.chartColors,
+//                duration: 500,
+//                labelThreshold: 0.01,
+//                labelSunbeamLayout: true,
+//                showLegend: false,
+//                legend: {
+//                    margin: {
+//                        top: 5,
+//                        right: 35,
+//                        bottom: 5,
+//                        left: 0
+//                    }
+//                }
+//            }
+//        };
+
+//        $scope.chart3 = {
+//            chart: {
+//                type: 'pieChart',
+//                donut: true,
+//                donutRatio: 1,
+//                x: function (d) {
+//                    return d.name;
+//                },
+//                y: function (d) {
+//                    return d.count;
+//                },
+//                height: 500,
+//                showLabels: false,
+//                color: $scope.chartColors,
+//                duration: 500,
+//                labelThreshold: 0.01,
+//                labelSunbeamLayout: true,
+//                showLegend: false,
+//                legend: {
+//                    margin: {
+//                        top: 5,
+//                        right: 35,
+//                        bottom: 5,
+//                        left: 0
+//                    }
+//                }
+//            }
+//        };
+
+//        $scope.print = function (elem, title) {
+//            var mywindow = window.open('', 'PRINT', 'width=' + screen.availWidth + ',height=' + screen.availHeight);
+
+//            mywindow.document.write('<html><head><title>' + title + '</title>');
+//            mywindow.document.write('<link rel="stylesheet" href="/Content/styleAnalitics.css" type="text/css" />');
+//            mywindow.document.write('<link rel="stylesheet" href="/Content/newCase.css" type="text/css" />');
+//            mywindow.document.write('</head><body onload="window.print(); window.close()">');
+//            mywindow.document.write('<h1>' + title + '</h1>');
+//            mywindow.document.write('<div class="container">');
+//            mywindow.document.write(document.getElementById(elem).innerHTML);
+//            mywindow.document.write('</div></body></html>');
+
+//            mywindow.document.close(); // necessary for IE >= 10
+//            mywindow.focus(); // necessary for IE >= 10*/
+
+//            return true;
+//        };
+//    }
+//}());
+
+
+
+(function () {
+
+    'use strict';
+    //var app = angular.module('EC', ['dx']); if not use dx - not drawing graph
+
+    var app = angular.module('EC'); //not drawing graph but error is epsent
+
+
+    app.service('getValues', function ($resource) {
+        var resource = $resource('/api/AnalyticsRootCauseAnalysis', {}, {
+            get: { method: 'GET', params: {}, isArray: false },
+        });
+    });
+
+
+    app.controller('BodyController', ['$scope', 'getValues', BodyController]);
+
+    function BodyController($scope, getValues) {
+        var something;
+        var temp = getValues.resource;
+        //AnalyticsRootCauseAnalysisService.get(function (data) {
+        //    if ($scope.secondaryTypes.length === 0) {
+        //        $scope.secondaryTypes = data.SecondaryTypes;
+        //        $scope.secondaryType = $scope.secondaryTypes[0];
+        //    }
+        //    $scope.chartData1 = data.Behavioral;
+        //    $scope.chartData2 = data.External;
+        //    $scope.chartData3 = data.Organizational;
+        //});
+
+        $scope.chartOptions = {
+            dataSource: $scope.chartData1,
+            tooltip: {
+                enabled: true,
+                percentPrecision: 2,
+                customizeTooltip: function (arg) {
+                    return {
+                        text: arg.argumentText + " - " + arg.value + ' (' + arg.percentText + ')'
+                    };
+                }
+            },
+            legend: {
+                columnCount: 1,
+                horizontalAlignment: "center",
+                verticalAlignment: "bottom",
+                customizeHint: function () {
+                    return this.pointName + ' - ' + data[this.pointIndex].val;
+                },
+                customizeText: function () {
+                    return legentText(this.pointName, data[this.pointIndex].val, total);
+                },
+            },
+            series: [{
+                type: "doughnut",
+                argumentField: "name",
+                innerRadius: '0.6',
+                label: {
+                    visible: false,
+                    connector: {
+                        visible: true
+                    }
+                }
+            }],
+            size: {
+                width: 200,
+                height: 200,
+            },
+        };
+    }
+}());
