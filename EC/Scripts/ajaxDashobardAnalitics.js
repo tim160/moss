@@ -179,6 +179,18 @@
     //drop down list
     function sendAjax(userId, companyId, types) {
         if (userId && companyId) {
+            //var temp = $.parseJSON(data);
+            //_dtCompanyDepartmentReport(temp['DepartmentTable']);
+            //addValDep($("#containerDepartments tspan"), temp['DepartmentTable']);
+
+            //_dtCompanyLocationReport(temp['LocationTable']);
+            //addValDep($("#containerLocation tspan"), temp['LocationTable']);
+
+            //_dtCompanySecondaryTypeReport(temp['SecondaryTypeTable']);
+            //addValDep($("#containerTypesOfIncident tspan"), temp['SecondaryTypeTable']);
+
+            //_dtCompanyRelationTypeReport(temp['RelationTable']);
+            //addValDep($("#containerTypeOfReporter tspan"), temp['RelationTable']);
             $.ajax({
                 method: "POST",
                 url: "/Analytics/CompanyDepartmentReportAdvanced",
@@ -704,20 +716,20 @@
         }
         var chart = $("#containerDepartments").dxPieChart({
             dataSource: data,
-            export: {
-                enabled: true,
-                formats: ['PDF', 'JPEG'],
-                fileName: 'Departments',
-            },
-            title: {
-                font: {
-                    family: "'OpenSans-Semibold', arial, verdana, sans-serif;",
-                    size: 16,
-                    color: '#3c3e3f',
-                },
-                horizontalAlignment: 'left',
-                text: 'Departments',
-            },
+            //export: {
+            //    enabled: true,
+            //    formats: ['PDF', 'JPEG'],
+            //    fileName: 'Departments',
+            //},
+            //title: {
+            //    font: {
+            //        family: "'OpenSans-Semibold', arial, verdana, sans-serif;",
+            //        size: 16,
+            //        color: '#3c3e3f',
+            //    },
+            //    horizontalAlignment: 'left',
+            //    text: 'Departments',
+            //},
             tooltip: {
                 enabled: true,
                 percentPrecision: 2,
@@ -729,9 +741,9 @@
             },
             legend: {
                 columnCount: 1,
-                horizontalAlignment: "right",
-                verticalAlignment: "top",
-                margin: { left: 40, top: 20 },
+                horizontalAlignment: "center",
+                verticalAlignment: "bottom",
+                //margin: { left: 40, top: 20 },
                 customizeHint: function () {
                     return this.pointName + ' - ' + data[this.pointIndex].val;
                 },
@@ -751,9 +763,13 @@
                 }
             }],
             size: {
-                width: undefined,
-                height: 600,
+                width: 200,
+                height: 200,
             },
+            adaptiveLayout: {
+                width: 0, // not 1px
+                height: 0 // not 1px
+            }
         });
     }
 
@@ -774,20 +790,20 @@
         
         $("#containerLocation").dxPieChart({
             dataSource: data,
-            export: {
-                enabled: true,
-                formats: ['PDF', 'JPEG'],
-                fileName: 'Locations',
-            },
-            title: {
-                font: {
-                    family: "'OpenSans-Semibold', arial, verdana, sans-serif;",
-                    size: 16,
-                    color: '#3c3e3f',
-                },
-                horizontalAlignment: 'left',
-                text: 'Locations',
-            },
+            //export: {
+            //    enabled: true,
+            //    formats: ['PDF', 'JPEG'],
+            //    fileName: 'Locations',
+            //},
+            //title: {
+            //    font: {
+            //        family: "'OpenSans-Semibold', arial, verdana, sans-serif;",
+            //        size: 16,
+            //        color: '#3c3e3f',
+            //    },
+            //    horizontalAlignment: 'left',
+            //    text: 'Locations',
+            //},
             tooltip: {
                 enabled: true,
                 percentPrecision: 2,
@@ -799,9 +815,9 @@
             },
             legend: {
                 columnCount: 1,
-                horizontalAlignment: "right",
-                verticalAlignment: "top",
-                margin: { left: 40, top: 20 },
+                horizontalAlignment: "center",
+                verticalAlignment: "bottom",
+                //margin: { left: 40, top: 20 },
                 customizeHint: function () {
                     return this.pointName + ' - ' + data[this.pointIndex].val;
                 },
@@ -821,8 +837,8 @@
                 }
             }],
             size: {
-                width: undefined,
-                height: 600,
+                width: 200,
+                height: 200,
             },
         });
     }
@@ -855,20 +871,20 @@
         }
         $("#containerTypesOfIncident").dxPieChart({
             dataSource: data,
-            export: {
-                enabled: true,
-                formats: ['PDF', 'JPEG'],
-                fileName: 'Type of incident',
-            },
-            title: {
-                font: {
-                    family: "'OpenSans-Semibold', arial, verdana, sans-serif;",
-                    size: 16,
-                    color: '#3c3e3f',
-                },
-                horizontalAlignment: 'left',
-                text: 'Type of incident',
-            },
+            //export: {
+            //    enabled: true,
+            //    formats: ['PDF', 'JPEG'],
+            //    fileName: 'Type of incident',
+            //},
+            //title: {
+            //    font: {
+            //        family: "'OpenSans-Semibold', arial, verdana, sans-serif;",
+            //        size: 16,
+            //        color: '#3c3e3f',
+            //    },
+            //    horizontalAlignment: 'left',
+            //    text: 'Type of incident',
+            //},
             tooltip: {
                 enabled: true,
                 percentPrecision: 2,
@@ -880,9 +896,9 @@
             },
             legend: {
                 columnCount: 1,
-                horizontalAlignment: "right",
-                verticalAlignment: "top",
-                margin: { left: 40, top: 20 },
+                horizontalAlignment: "center",
+                verticalAlignment: "bottom",
+                //margin: { left: 40, top: 20 },
                 customizeHint: function () {
                     return this.pointName + ' - ' + data[this.pointIndex].val;
                 },
@@ -902,8 +918,8 @@
                 }
             }],
             size: {
-                width: undefined,
-                height: 600,
+                width: 200,
+                height: 200,
             },
         });
     }
@@ -935,20 +951,20 @@
         }
         $("#containerTypeOfReporter").dxPieChart({
             dataSource: data,
-            export: {
-                enabled: true,
-                formats: ['PDF', 'JPEG'],
-                fileName: 'Type of Reporter',
-            },
-            title: {
-                font: {
-                    family: "'OpenSans-Semibold', arial, verdana, sans-serif;",
-                    size: 16,
-                    color: '#3c3e3f',
-                },
-                horizontalAlignment: 'left',
-                text: 'Type of Reporter',
-            },
+            //export: {
+            //    enabled: true,
+            //    formats: ['PDF', 'JPEG'],
+            //    fileName: 'Type of Reporter',
+            //},
+            //title: {
+            //    font: {
+            //        family: "'OpenSans-Semibold', arial, verdana, sans-serif;",
+            //        size: 16,
+            //        color: '#3c3e3f',
+            //    },
+            //    horizontalAlignment: 'left',
+            //    text: 'Type of Reporter',
+            //},
             tooltip: {
                 enabled: true,
                 percentPrecision: 2,
@@ -960,9 +976,9 @@
             },
             legend: {
                 columnCount: 1,
-                horizontalAlignment: "right",
-                verticalAlignment: "top",
-                margin: { left: 40, top: 20 },
+                horizontalAlignment: "center",
+                verticalAlignment: "bottom",
+                //margin: { left: 40, top: 20 },
                 customizeHint: function () {
                     return this.pointName + ' - ' + data[this.pointIndex].val;
                 },
@@ -982,8 +998,8 @@
                 }
             }],
             size: {
-                width: undefined,
-                height: 600,
+                width: 200,
+                height: 200,
             },
         });
     }
