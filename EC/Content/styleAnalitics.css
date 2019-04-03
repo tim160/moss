@@ -673,8 +673,13 @@ h2, h3 {
     color: black !important;
 }
 
-.nvd3.nv-pie .nv-pie-title {
+#rootCauseAnalysis .nvd3.nv-pie .nv-pie-title {
     font-size: 80px !important;
+    color: black !important;
+    fill: black !important;
+}
+#dashboard .nvd3.nv-pie .nv-pie-title {
+    font-size: 12px !important;
     color: black !important;
     fill: black !important;
 }
