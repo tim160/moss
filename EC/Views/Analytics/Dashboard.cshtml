@@ -267,7 +267,7 @@
 
 
         </div><!-- mainNavigationTabs__tabContent -->
-        <div class="container ">
+        <div class="container" id="dashboard">
             <div class="case-MainContent container">
                 <div class="case-MainContent-Header clearfix">
                     <div class="case-MainContent-Header__left clearfix">
@@ -293,62 +293,96 @@
                 </div>
                 <div class="case-MainContent-main" ng-controller="CasesController">
                     <div class="col-3 center">
-                        @*<div class="blockDepartments" style="width: 100%; margin: 0 auto; float: none;">
-                                <div style="width: 100%; display: table;">
-                                    <div id="containerDepartments" class="containers" ></div>
+                        <nvd3 id="containerDepartments" options="containerDepartments" data="DepartmentsData" api="apiDeparments"></nvd3>
+                        @*<div class="caseNofound" style="position: relative">
+                                <div class="caseNofound__title">
+                                    Departments
                                 </div>
+                                <div class="caseNofound__def">
+                                        No cases found
+                                    </div>
                             </div>*@
-                        <div class="caseNofound" style="position: relative">
-                            @*<div id="containerDepartments" class="containers" style="position: absolute; top: 0;left: 0"></div>*@
-                            <nvd3 id="containerDepartments" options="containerDepartments" data="DepartmentsData" api="apiDeparments"></nvd3>
-                            <div class="caseNofound__title">
-                                Departments
+
+                        <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in DepartmentsData">
+                            <div class="col-10 p-0">
+                                <div class="ng-binding RootCauseAnalysis-roudChart__title" style="padding-left: 10px; border-left: solid 5px {{chartColors[$index]}}">
+                                    {{item.name}}
+                                </div>
                             </div>
-                            @*<div class="caseNofound__def">
-                                    No cases found
-                                </div>*@
+                            <div class="col-2 RootCauseAnalysis-roudChart__count">
+                                {{item.val}}
+                            </div>
                         </div>
                     </div>
                     <div class="col-3 center">
+                        <nvd3 id="containerLocation" options="containerLocation" data="LocationData" api="apiLocation"></nvd3>
 
-                        <div class="caseNofound" style="position: relative;">
-                            @*<div id="containerLocation" class="containers" style="position: absolute; top: 0;left: 0"></div>*@
-                            <nvd3 id="containerLocation" options="containerLocation" data="LocationData" api="apiLocation"></nvd3>
-                            <div class="caseNofound__title">
-                                Location
+                        @*<div class="caseNofound" style="position: relative;">
+           <div class="caseNofound__title">
+                Location
+            </div>
+            <div class="caseNofound__def">
+                    No cases found
+                </div>
+
+        </div>*@
+                        <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in LocationData">
+                            <div class="col-10 p-0">
+                                <div class="ng-binding RootCauseAnalysis-roudChart__title" style="padding-left: 10px; border-left: solid 5px {{chartColors[$index]}}">
+                                    {{item.name}}
+                                </div>
                             </div>
-                            @*<div class="caseNofound__def">
-                                    No cases found
-                                </div>*@
-
+                            <div class="col-2 RootCauseAnalysis-roudChart__count">
+                                {{item.val}}
+                            </div>
                         </div>
 
                     </div>
                     <div class="col-3 center">
-                        <div class="caseNofound" style="position: relative;">
-                            @*<div id="containerTypesOfIncident" class="containers" style="position: absolute; top: 0;left: 0"></div>*@
-                            <nvd3 id="containerTypesOfReporter" options="containerTypesOfReporter" data="TypesOfReporterData" api="apiTypeOfReporter"></nvd3>
+                        <nvd3 id="containerTypesOfReporter" options="containerTypesOfReporter" data="TypesOfReporterData" api="apiTypeOfReporter"></nvd3>
 
-                            <div class="caseNofound__title">
-                                Type of reporter
+                        @*<div class="caseNofound" style="position: relative;">
+            <div class="caseNofound__title">
+                Type of reporter
+            </div>
+            <div class="caseNofound__def">
+                No cases found
+            </div>
+        </div>*@
+                        <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in TypesOfReporterData">
+                            <div class="col-10 p-0">
+                                <div class="ng-binding RootCauseAnalysis-roudChart__title" style="padding-left: 10px; border-left: solid 5px {{chartColors[$index]}}">
+                                    {{item.name}}
+                                </div>
                             </div>
-                            @*<div class="caseNofound__def">
-                                    No cases found
-                                </div>*@
+                            <div class="col-2 RootCauseAnalysis-roudChart__count">
+                                {{item.val}}
+                            </div>
                         </div>
                     </div>
                     <div class="col-3 center">
-                        <div class="caseNofound" style="position: relative;">
-                            @*<div id="containerTypeOfReporter" class="containers" style="position: absolute; top: 0;left: 0"></div>*@
-                            <nvd3 id="containerTypesOfIncident" options="containerTypesOfIncident" data="TypesOfIncidentData" api="apiTypesOfIncident"></nvd3>
+                        <nvd3 id="containerTypesOfIncident" options="containerTypesOfIncident" data="TypesOfIncidentData" api="apiTypesOfIncident"></nvd3>
 
-                            <div class="caseNofound__title">
-                                Type of incident
+                        @*<div class="caseNofound" style="position: relative;">
+
+            <div class="caseNofound__title">
+                Type of incident
+            </div>
+            <div class="caseNofound__def">
+                    No cases found
+                </div>
+        </div>*@
+                        <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in TypesOfIncidentData">
+                            <div class="col-10 p-0">
+                                <div class="ng-binding RootCauseAnalysis-roudChart__title" style="padding-left: 10px; border-left: solid 5px {{chartColors[$index]}}">
+                                    {{item.name}}
+                                </div>
                             </div>
-                            @*<div class="caseNofound__def">
-                                    No cases found
-                                </div>*@
+                            <div class="col-2 RootCauseAnalysis-roudChart__count">
+                                {{item.val}}
+                            </div>
                         </div>
+
                     </div>
                 </div><!--end case-MainContent-main-->
             </div>
@@ -380,7 +414,7 @@
 
             <!---->
             <div class="case-MainContent-hr"></div>
-            <div class="case-MainContent container" id="dashboard">
+            <div class="case-MainContent container">
                 <div class="case-MainContent-Header clearfix">
                     <div class="case-MainContent-Header__left clearfix">
                         <div class="case-MainContent-Header__leftTitle">
