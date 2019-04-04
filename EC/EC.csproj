@@ -358,6 +358,10 @@
     <Content Include="Content\Icons\alarm-default.png" />
     <Content Include="Content\Icons\alarm-whitepng.png" />
     <Content Include="Content\Icons\anonimousReporterIcon.png" />
+    <Content Include="Content\Icons\arrow-activeGreen.png" />
+    <Content Include="Content\Icons\arrow-listDark.png" />
+    <Content Include="Content\Icons\arrow-listLight.png" />
+    <Content Include="Content\Icons\arrow-TopRight.png" />
     <Content Include="Content\Icons\arrowMessage.png" />
     <Content Include="Content\Icons\arrowSelect.png" />
     <Content Include="Content\Icons\arrowSelect2.png" />
@@ -383,6 +387,9 @@
     <Content Include="Content\Icons\CaseScopeInternal.png" />
     <Content Include="Content\Icons\CaseScopeRegulatory.png" />
     <Content Include="Content\Icons\casesHover.png" />
+    <Content Include="Content\Icons\checkBlock-unchecked.png" />
+    <Content Include="Content\Icons\checkbox.png" />
+    <Content Include="Content\Icons\checkedActive.png" />
     <Content Include="Content\Icons\close.png" />
     <Content Include="Content\Icons\closeWhite.png" />
     <Content Include="Content\Icons\EC-logo-2x.png" />
@@ -425,8 +432,12 @@
     <Content Include="Content\Icons\pepperPhoto.png" />
     <Content Include="Content\Icons\print-icon.png" />
     <Content Include="Content\Icons\print_icon_white.png" />
+    <Content Include="Content\Icons\radio.png" />
+    <Content Include="Content\Icons\radioButton-Active.png" />
+    <Content Include="Content\Icons\radioButton-def.png" />
     <Content Include="Content\Icons\report-icon-white.png" />
     <Content Include="Content\Icons\report-icon.png" />
+    <Content Include="Content\Icons\reporterUnchecked.png" />
     <Content Include="Content\Icons\reviewStage.png" />
     <Content Include="Content\Icons\second.png" />
     <Content Include="Content\Icons\settingsPersonalNOPhoto.png" />
@@ -451,6 +462,8 @@
     <Content Include="Content\Icons\TonyStark.png" />
     <Content Include="Content\Icons\viewDoc1.png" />
     <Content Include="Content\Icons\viewDoc2.png" />
+    <Content Include="Content\Icons\view_btn_lines.png" />
+    <Content Include="Content\Icons\view_btn_tile.png" />
     <Content Include="Content\Icons\X.png" />
     <Content Include="Content\Icons\Xanal.gif" />
     <Content Include="Content\Icons\yes.png" />
@@ -1126,10 +1139,6 @@
     <Content Include="Views\Shared\IndexPages\LayoutCasesNewReport.cshtml" />
     <Content Include="Views\ReporterDashboard\Index.cshtml" />
     <Content Include="Views\Shared\IndexPages\ReporterDashboard.cshtml" />
-    <Content Include="Views\PartialViews\_ReportPreview.cshtml" />
-    <Content Include="Views\PartialViews\_ReportPendingNotification.cshtml" />
-    <Content Include="Views\Cases\Completed.cshtml" />
-    <Content Include="Views\Cases\Spam.cshtml" />
     <Content Include="Views\ReporterDashboard\Messages.cshtml" />
     <Content Include="Views\ReporterDashboard\Activity.cshtml" />
     <Content Include="Views\ReporterDashboard\Settings.cshtml" />
@@ -1155,7 +1164,6 @@
     <Content Include="Views\EmployeeAwareness\Poster.cshtml" />
     <Content Include="Views\Shared\Helpers\_CasePreview.cshtml" />
     <Content Include="Views\Shared\Helpers\_SingleMessage.cshtml" />
-    <Content Include="Views\Cases\Closed.cshtml" />
     <Content Include="Views\Settings\WorkFlow.cshtml" />
     <Content Include="Views\Settings\partial\casesHeared.cshtml" />
     <Content Include="Views\Errors\Index.cshtml" />
@@ -1216,7 +1224,9 @@
     <Content Include="Views\NewCase\PrintToPdfOriginal.cshtml" />
     <Content Include="Views\ReporterDashboard\PrintToPdf.cshtml" />
     <Content Include="Views\ReporterDashboard\settingMenu.cshtml" />
-    <Content Include="Views\Analytics\Dashboard.cshtml" />    <None Include="Web.Debug.config">
+    <Content Include="Views\Analytics\Dashboard.cshtml" />
+    <Content Include="Views\Shared\_ReportPendingNotification.cshtml" />
+    <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
@@ -1580,9 +1590,6 @@
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\status.cs">
-      <DependentUpon>ECEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Database\sysdiagrams.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\task.cs">
