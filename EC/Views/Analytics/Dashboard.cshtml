@@ -291,7 +291,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="case-MainContent-main">
+                <div class="case-MainContent-main" ng-controller="CasesController">
                     <div class="col-3 center">
                         @*<div class="blockDepartments" style="width: 100%; margin: 0 auto; float: none;">
                                 <div style="width: 100%; display: table;">
@@ -299,7 +299,8 @@
                                 </div>
                             </div>*@
                         <div class="caseNofound" style="position: relative">
-                            <div id="containerDepartments" class="containers" style="position: absolute; top: 0;left: 0"></div>
+                            @*<div id="containerDepartments" class="containers" style="position: absolute; top: 0;left: 0"></div>*@
+                            <nvd3 id="containerDepartments" options="containerDepartments" data="DepartmentsData" api="apiDeparments"></nvd3>
                             <div class="caseNofound__title">
                                 Departments
                             </div>
@@ -311,8 +312,8 @@
                     <div class="col-3 center">
 
                         <div class="caseNofound" style="position: relative;">
-                            <div id="containerLocation" class="containers" style="position: absolute; top: 0;left: 0">
-                            </div>
+                            @*<div id="containerLocation" class="containers" style="position: absolute; top: 0;left: 0"></div>*@
+                            <nvd3 id="containerLocation" options="containerLocation" data="LocationData" api="apiLocation"></nvd3>
                             <div class="caseNofound__title">
                                 Location
                             </div>
@@ -325,7 +326,8 @@
                     </div>
                     <div class="col-3 center">
                         <div class="caseNofound" style="position: relative;">
-                            <div id="containerTypesOfIncident" class="containers" style="position: absolute; top: 0;left: 0"></div>
+                            @*<div id="containerTypesOfIncident" class="containers" style="position: absolute; top: 0;left: 0"></div>*@
+                            <nvd3 id="containerTypesOfReporter" options="containerTypesOfReporter" data="TypesOfReporterData" api="apiTypeOfReporter"></nvd3>
 
                             <div class="caseNofound__title">
                                 Type of reporter
@@ -337,7 +339,8 @@
                     </div>
                     <div class="col-3 center">
                         <div class="caseNofound" style="position: relative;">
-                            <div id="containerTypeOfReporter" class="containers" style="position: absolute; top: 0;left: 0"></div>
+                            @*<div id="containerTypeOfReporter" class="containers" style="position: absolute; top: 0;left: 0"></div>*@
+                            <nvd3 id="containerTypesOfIncident" options="containerTypesOfIncident" data="TypesOfIncidentData" api="apiTypesOfIncident"></nvd3>
 
                             <div class="caseNofound__title">
                                 Type of incident
