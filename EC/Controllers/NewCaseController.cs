@@ -728,7 +728,7 @@ namespace EC.Controllers
         catch (Exception ex)
         {
           transaction.Rollback();
-          logger.Info("NewCase / CloseCase saving error " + ex.Message);
+          logger.Error("NewCase / CloseCase saving error " + ex.Message);
         }
       }
 
