@@ -921,7 +921,6 @@ namespace EC.Controllers
                             db.SaveChanges();
                             user_id = _user.id;
                             _user.password = pass;
-                            logger.Info("AddedUser" + _user?.login_nm);
                             transaction.Commit();
                         }
                         catch (Exception ex)

@@ -54,11 +54,8 @@ namespace EC.Controllers
 
         private ActionResult DoLogin(LoginViewModel model, string returnUrl, string view)
         {
-            logger.Info("DoLogin");
-            Session.Clear();
-            logger.Info("Clear");
-            GlobalFunctions glb = new GlobalFunctions();
-
+             Session.Clear();
+             GlobalFunctions glb = new GlobalFunctions();
 
             if (DomainUtil.IsSubdomain(Request.Url.AbsoluteUri.ToLower()))
             {
@@ -66,10 +63,7 @@ namespace EC.Controllers
 
                 if (!String.IsNullOrEmpty(model.Login))
                 {
-                    logger.Info("Login-NotNull");
-
                     var user = userModel.Login(model.Login, model.Password);
-                    logger.Info("Login-id " + user?.id.ToString());
 
                     if (user == null)
                     {
@@ -81,10 +75,6 @@ namespace EC.Controllers
                     Session["userName"] = user.login_nm;
                     Session["userId"] = user.id;
 
-                    logger.Info("sessid " + HttpContext.Session.SessionID);
-                    logger.Info("Session[userName] " + Session["userName"]);
-
-
                     if (!String.IsNullOrEmpty(model.HostUrl))
                     {
                         return Redirect(FreshDesk.GetSsoUrl(Server, 
@@ -95,8 +85,6 @@ namespace EC.Controllers
 
                     if (user.role_id == ECLevelConstants.level_informant)
                     {
-                        logger.Info("login - ReporterDashboard");
-
                         return RedirectToAction("Index", "ReporterDashboard");
                     }
 
@@ -117,14 +105,8 @@ namespace EC.Controllers
 
                     if (user.role_id == ECLevelConstants.level_escalation_mediator)
                     {
-                        logger.Info("Login-id level_escalation_mediator");
-
                         return RedirectToAction("Index", "Cases", new { mode = "completed" });
                     }
-                    logger.Info("Login- " + user.login_nm);
-
-                    logger.Info("Login- Cases");
-
                     return RedirectToAction("Index", "Cases");
                 }
             }
@@ -479,20 +461,16 @@ namespace EC.Controllers
 
       using (var db = new ECEntities())
       {
-        logger.Info("Scheduler, is_cc" + is_cc.ToString());
+        //logger.Info("Scheduler, is_cc" + is_cc.ToString());
         var unsend_emails = db.email.Where(x => x.is_sent == false).ToList();
         Business.Actions.Email.EmailManagement em = new Business.Actions.Email.EmailManagement(is_cc);
         Business.Actions.Email.EmailBody eb = new Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
-
-        logger.Info("Scheduler, unsend_emails" + unsend_emails.Count().ToString());
-
+        
+      
         foreach (var _email in unsend_emails)
         {
           ActionResultExtended emailResult = em.Send(_email.To, _email.Title, _email.Body, true);
-          logger.Info("Scheduler, emailResult ReturnCode" + emailResult.ReturnCode.ToString());
-          logger.Info("Scheduler, emailResult ReturnMessage" + emailResult.ReturnMessage);
-          logger.Info("Scheduler, emailResult ex" + emailResult.ExceptionMessage.ToString());
-          
+         
           //em.Send(email, "Case Management Deadline is past due", eb.Body, true);
           if (emailResult.ReturnCode == ReturnCode.Success)
           {
