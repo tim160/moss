@@ -24,7 +24,7 @@
     {
         foreach (int _report_id in pending_report_ids)
         {
-            @Html.Partial("~/Views/PartialViews/_ReportPendingNotification.cshtml", new ViewDataDictionary { { "report_id", _report_id }, { "user_id", user_id } })
+            @Html.Partial("~/Views/Shared/_ReportPendingNotification.cshtml", new ViewDataDictionary { { "report_id", _report_id }, { "user_id", user_id } })
         }
     }
 
