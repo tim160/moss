@@ -180,80 +180,52 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="filterCases-dropBlock__contentRow row clearfix">
+                        <div class="filterCases-dropBlock__contentRow row clearfix" ng-controller="MenuCases">
                             <div class="col-3 filterCases-dropBlock__contentCol">
-                                <ul class="case-DropDownList black">
+                                <ul class="case-DropDownList black" ng-repeat="location in MenuCases.LocationsList">
                                     <!--this is location-->
-                                    @if (ViewBag.dropDownSecond != null && ViewBag.dropDownSecond.Count > 0)
-                                    {
-                                        foreach (Tuple<string, string> tuple in ViewBag.dropDownSecond)
-                                        {
-                                            <li class="case-DropDownList-li clearfix checked">
-                                                <input type="hidden" value="@tuple.Item2" />
-                                                <div class="case-DropDownList-li__icon"></div>
-                                                <div class="case-DropDownList-li__text">
-                                                    @tuple.Item1
-                                                </div>
-                                            </li>
-
-                                        }
-                                    }
+                                    <li class="case-DropDownList-li clearfix checked">
+                                        <input type="hidden" value="{{location.Item2}}" />
+                                        <div class="case-DropDownList-li__icon"></div>
+                                        <div class="case-DropDownList-li__text">
+                                            {{location.Item1}}
+                                        </div>
+                                    </li>
                                 </ul>
                             </div><!-- / .col-3 filterCases-dropBlock__contentCol -->
                             <div class="col-3 filterCases-dropBlock__contentCol">
-                                <ul class="case-DropDownList black">
-
-                                    @if (ViewBag.dropDownFirst != null && ViewBag.dropDownFirst.Count > 0)
-                                    {
-                                        foreach (Tuple<string, string> tuple in ViewBag.dropDownFirst)
-                                        {
-                                            <li class="case-DropDownList-li clearfix checked">
-                                                <input type="hidden" value="@tuple.Item2" />
-                                                <div class="case-DropDownList-li__icon"></div>
-                                                <div class="case-DropDownList-li__text">
-                                                    @tuple.Item1
-                                                </div>
-                                            </li>
-                                        }
-                                    }
+                                <ul class="case-DropDownList black" ng-repeat="department in MenuCases.DepartmentsList">
+                                    <li class="case-DropDownList-li clearfix checked">
+                                        <input type="hidden" value="{{department.Item2}}" />
+                                        <div class="case-DropDownList-li__icon"></div>
+                                        <div class="case-DropDownList-li__text">
+                                            {{department.Item1}}
+                                        </div>
+                                    </li>
                                 </ul>
                             </div><!-- / .col-3 filterCases-dropBlock__contentCol -->
 
                             <div class="col-3 filterCases-dropBlock__contentCol">
-                                <ul class="case-DropDownList black">
-
-                                    @if (ViewBag.dropDownThird != null && ViewBag.dropDownThird.Count > 0)
-                                    {
-                                        foreach (Tuple<string, string> tuple in ViewBag.dropDownThird)
-                                        {
-                                            <li class="case-DropDownList-li clearfix checked">
-                                                <input type="hidden" value="@tuple.Item2" />
-                                                <div class="case-DropDownList-li__icon"></div>
-                                                <div class="case-DropDownList-li__text">
-                                                    @tuple.Item1
-                                                </div>
-                                            </li>
-                                        }
-                                    }
+                                <ul class="case-DropDownList black" ng-repeat="incident in MenuCases.RelationTypesList">
+                                    <li class="case-DropDownList-li clearfix checked">
+                                        <input type="hidden" value="{{incident.Item2}}" />
+                                        <div class="case-DropDownList-li__icon"></div>
+                                        <div class="case-DropDownList-li__text">
+                                            {{incident.Item1}}
+                                        </div>
+                                    </li>
                                 </ul>
                             </div><!-- / .col-3 filterCases-dropBlock__contentCol -->
 
                             <div class="col-3 filterCases-dropBlock__contentCol">
-                                <ul class="case-DropDownList black">
-                                    @if (ViewBag.dropDownFourth != null && ViewBag.dropDownFourth.Count > 0)
-                                    {
-                                        foreach (Tuple<string, string> tuple in ViewBag.dropDownFourth)
-                                        {
-                                            <li class="case-DropDownList-li clearfix checked">
-                                                <input type="hidden" value="@tuple.Item2" />
-                                                <div class="case-DropDownList-li__icon"></div>
-                                                <div class="case-DropDownList-li__text">
-                                                    @tuple.Item1
-                                                </div>
-                                            </li>
-                                        }
-                                    }
-
+                                <ul class="case-DropDownList black" ng-repeat="reporter in MenuCases.SecondaryTypesList">
+                                    <li class="case-DropDownList-li clearfix checked">
+                                        <input type="hidden" value="{{reporter.Item2}}" />
+                                        <div class="case-DropDownList-li__icon"></div>
+                                        <div class="case-DropDownList-li__text">
+                                            {{reporter.Item1}}
+                                        </div>
+                                    </li>
                                 </ul>
                             </div><!-- / .col-3 filterCases-dropBlock__contentCol -->
 
@@ -771,7 +743,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="case-MainContent-main">
+                <div class="case-MainContent-main" ng-controller="CaseTime">
                     <div class="col-3">
                         col 1
                     </div>

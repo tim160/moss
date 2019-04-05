@@ -209,9 +209,11 @@ namespace EC.Controllers
             return View();
         }
 
-        public ActionResult CompanyDepartmentReportAdvanced(int userId, int companyId, ReportTypes types)
+        public ActionResult CompanyDepartmentReportAdvanced(ReportTypes types)
         {
-            if (userId > 0 && companyId > 0)
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            
+            if (user != null)
             {
                 DateTime dt1 = new DateTime(2014, 8, 1);
                 if (types.dateStart != 0)
@@ -229,7 +231,7 @@ namespace EC.Controllers
 
                 GlobalFunctions func = new GlobalFunctions();
                 JsonResult json = new JsonResult();
-                json.Data = func.ReportAdvancedJson(companyId, userId, types.ReportsSecondaryTypesIDStrings, types.ReportsRelationTypesIDStrings, types.ReportsDepartmentIDStringss, types.ReportsLocationIDStrings, dt1, dt2);
+                json.Data = func.ReportAdvancedJson(user.company_id, user.id, types.ReportsSecondaryTypesIDStrings, types.ReportsRelationTypesIDStrings, types.ReportsDepartmentIDStringss, types.ReportsLocationIDStrings, dt1, dt2);
                 return json;
             }
             else
@@ -324,18 +326,18 @@ namespace EC.Controllers
             string _today = DateTimeHelper.ConvertDateToLongMonthString(DateTime.Today);
             ViewBag._today = _today;
 
-            GlobalFunctions f = new GlobalFunctions();
-            List<Tuple<string, string>> temp_tuple = f.DepartmentsListDistinct(user.company_id, user.id);
-            ViewBag.dropDownFirst = temp_tuple;
+            //GlobalFunctions f = new GlobalFunctions();
+            //List<Tuple<string, string>> temp_tuple = f.DepartmentsListDistinct(user.company_id, user.id);
+            //ViewBag.dropDownFirst = temp_tuple;
 
-            temp_tuple = f.LocationsListDistinct(user.company_id, user.id);
-            ViewBag.dropDownSecond = temp_tuple;
+            //temp_tuple = f.LocationsListDistinct(user.company_id, user.id);
+            //ViewBag.dropDownSecond = temp_tuple;
 
-            temp_tuple = f.SecondaryTypesListDistinct(user.company_id, user.id);
-            ViewBag.dropDownThird = temp_tuple;
+            //temp_tuple = f.SecondaryTypesListDistinct(user.company_id, user.id);
+            //ViewBag.dropDownThird = temp_tuple;
 
-            temp_tuple = f.RelationTypesListDistinct(user.company_id, user.id);
-            ViewBag.dropDownFourth = temp_tuple;
+            //temp_tuple = f.RelationTypesListDistinct(user.company_id, user.id);
+            //ViewBag.dropDownFourth = temp_tuple;
 
 
 

@@ -2,9 +2,20 @@
 (function () {
 
     'use strict';
-    var app = angular.module('EC', ['nvd3']); //not drawing graph but error is epsent
+    var app = angular.module('EC', ['nvd3']);
 
-    app.controller('BodyController', function ($scope, $http) {
+
+    app.controller('MenuCases', function ($scope, getMenuFilterCases) {
+        var promiseObj = getMenuFilterCases.getData();
+        promiseObj.then(function (response) {
+            $scope.MenuCases = response.data;
+        });
+    });
+
+
+
+    app.controller('BodyController', function ($scope, $http, getMenuFilterCases) {
+        getMenuFilterCases
         //getCasesService.then(function createGraph(temp) {
         //    var a = 10;
         //});
@@ -59,12 +70,8 @@
 
 
     app.controller('CasesController', function ($scope, getCasesService) {
-        var url = '/Analytics/CompanyDepartmentReportAdvanced';
-        var data = {
-            companyId: 3136,
-            userId: 12503
-        };
-        var promiseObj = getCasesService.getData(3136, 12503);
+
+        var promiseObj = getCasesService.getData();
         promiseObj.then(function (response) {
             $scope.chartColors = ['#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472', '#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472', '#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472'];
 
@@ -118,6 +125,10 @@
     });
 
 
+    app.controller('CaseTime', function ($scope) {
+
+    });
+
     app.factory('getCasesService', function ($http, $q) {
         return {
             getData: function (companyId, userId) {
@@ -132,4 +143,22 @@
             }
         }
     });
+    app.factory('getMenuFilterCases', function ($http, $q) {
+        return {
+            getData: function () {
+                var deffered = $q.defer();
+                $http({
+                    method: 'POST', data: {},
+                    url: '/api/AnalyticsDashboardAPI/GetMenuDashboard'
+                })
+                    .then(function success(response) {
+                        deffered.resolve(response);
+                    }, function error(response) {
+                        deffered.reject(response.status);
+                    });
+                return deffered.promise;
+            }
+        }
+    });
+
 }());

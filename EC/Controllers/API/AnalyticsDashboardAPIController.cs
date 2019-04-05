@@ -2,9 +2,6 @@
 using EC.Models.Database;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace EC.Controllers.API
@@ -91,6 +88,25 @@ namespace EC.Controllers.API
             //    OrganizationalTotal = organizational.Sum(x => x.count),
             //    Colors = DB.color.OrderBy(x => x.id).Select(x => "#" + x.color_code),
             //};
+        }
+
+        [HttpPost]
+        public Object GetMenuDashboard()
+        {
+            user user = (user)System.Web.HttpContext.Current.Session[ECGlobalConstants.CurrentUserMarcker];
+            if (user == null || user.id == 0)
+                return null;
+
+            GlobalFunctions f = new GlobalFunctions();
+
+            var resultObj = new {
+                DepartmentsList = f.DepartmentsListDistinct(user.company_id, user.id),
+                LocationsList = f.LocationsListDistinct(user.company_id, user.id),
+                SecondaryTypesList = f.SecondaryTypesListDistinct(user.company_id, user.id),
+                RelationTypesList = f.RelationTypesListDistinct(user.company_id, user.id)
+             };
+
+            return ResponseObject2Json(resultObj);
         }
     }
 }
