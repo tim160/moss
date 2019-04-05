@@ -19,67 +19,34 @@
 
                 $scope.chartColors = ['#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472'];
 
+                var chart = {
+                    type: 'pieChart',
+                    donut: true,
+                    donutRatio: 0.55,
+                    labelThreshold: .05,
+                    x: function (d) {
+                        return d.name;
+                    },
+                    y: function (d) {
+                        return d.count;
+                    },
+                    height: 500,
+                    showLabels: false,
+                    color: $scope.chartColors,
+                    duration: 500,
+                    labelSunbeamLayout: true,
+                    showLegend: false,
+                };
                 $scope.behavioralFactors = {
-                    chart: {
-                        type: 'pieChart',
-                        donut: true,
-                        donutRatio: 0.55,
-                        labelThreshold: .05,
-                        x: function (d) {
-                            return d.name;
-                        },
-                        y: function (d) {
-                            return d.count;
-                        },
-                        height: 500,
-                        showLabels: false,
-                        color: $scope.chartColors,
-                        duration: 500,
-                        labelSunbeamLayout: true,
-                        showLegend: false,
-                    }
+                    chart: chart
                 };
                 $scope.behavioralFactors.chart.title = "Behavioral Factors";
                 $scope.externalInfluences = {
-                    chart: {
-                        type: 'pieChart',
-                        donut: true,
-                        donutRatio: 0.55,
-                        labelThreshold: .05,
-                        x: function (d) {
-                            return d.name;
-                        },
-                        y: function (d) {
-                            return d.count;
-                        },
-                        height: 500,
-                        showLabels: false,
-                        color: $scope.chartColors,
-                        duration: 500,
-                        labelSunbeamLayout: true,
-                        showLegend: false,
-                    }
+                    chart: chart
                 };
 
                 $scope.organizationalInfluences = {
-                    chart: {
-                        type: 'pieChart',
-                        donut: true,
-                        donutRatio: 0.55,
-                        labelThreshold: .05,
-                        x: function (d) {
-                            return d.name;
-                        },
-                        y: function (d) {
-                            return d.count;
-                        },
-                        height: 500,
-                        showLabels: false,
-                        color: $scope.chartColors,
-                        duration: 500,
-                        labelSunbeamLayout: true,
-                        showLegend: false,
-                    }
+                    chart: chart
                 };
 
                 $scope.externalInfluences.chart.title = "External Influences";
@@ -91,133 +58,78 @@
     });
 
 
-    app.controller('CasesController', function ($scope, $http) {
+    app.controller('CasesController', function ($scope, getCasesService) {
         var url = '/Analytics/CompanyDepartmentReportAdvanced';
         var data = {
             companyId: 3136,
             userId: 12503
         };
-        $http.post(url, data).
-            then(function successCallback(response) {
-                $scope.chartColors = ['#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472', '#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472', '#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472'];
+        var promiseObj = getCasesService.getData(3136, 12503);
+        promiseObj.then(function (response) {
+            $scope.chartColors = ['#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472', '#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472', '#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472'];
 
-                $scope.dataCases = JSON.parse(response.data);
+            $scope.dataCases = JSON.parse(response);
 
-                $scope.DepartmentsData = $scope.dataCases.DepartmentTable;
-                $scope.LocationData = $scope.dataCases.LocationTable;
-                $scope.TypesOfIncidentData = $scope.dataCases.SecondaryTypeTable;
-                $scope.TypesOfReporterData = $scope.dataCases.RelationTable;
+            $scope.DepartmentsData = $scope.dataCases.DepartmentTable;
+            $scope.LocationData = $scope.dataCases.LocationTable;
+            $scope.TypesOfIncidentData = $scope.dataCases.SecondaryTypeTable;
+            $scope.TypesOfReporterData = $scope.dataCases.RelationTable;
 
+            var chart = {
+                type: 'pieChart',
+                donut: true,
+                donutRatio: 0.55,
+                labelThreshold: .05,
+                x: function (d) {
+                    return d.name;
+                },
+                y: function (d) {
+                    return d.val;
+                },
+                height: 500,
+                showLabels: false,
+                color: $scope.chartColors,
+                duration: 500,
+                labelSunbeamLayout: true,
+                showLegend: false,
+            };
 
-                $scope.containerDepartments = {
-                    chart: {
-                        type: 'pieChart',
-                        donut: true,
-                        donutRatio: 0.55,
-                        labelThreshold: .05,
-                        x: function (d) {
-                            return d.name;
-                        },
-                        y: function (d) {
-                            return d.val;
-                        },
-                        height: 500,
-                        showLabels: false,
-                        color: $scope.chartColors,
-                        duration: 500,
-                        labelSunbeamLayout: true,
-                        showLegend: false,
-                    }
-                };
-                
-                $scope.containerLocation = {
-                    chart: {
-                        type: 'pieChart',
-                        donut: true,
-                        donutRatio: 0.55,
-                        labelThreshold: .05,
-                        x: function (d) {
-                            return d.name;
-                        },
-                        y: function (d) {
-                            return d.val;
-                        },
-                        height: 500,
-                        showLabels: false,
-                        color: $scope.chartColors,
-                        duration: 500,
-                        labelSunbeamLayout: true,
-                        showLegend: false,
-                    }
-                };
+            $scope.containerDepartments = {
+                chart: chart
+            };
 
-                $scope.containerTypesOfIncident = {
-                    chart: {
-                        type: 'pieChart',
-                        donut: true,
-                        donutRatio: 0.55,
-                        labelThreshold: .05,
-                        x: function (d) {
-                            return d.name;
-                        },
-                        y: function (d) {
-                            return d.val;
-                        },
-                        height: 500,
-                        showLabels: false,
-                        color: $scope.chartColors,
-                        duration: 500,
-                        labelSunbeamLayout: true,
-                        showLegend: false,
-                    }
-                };
+            $scope.containerLocation = {
+                chart: chart
+            };
 
-                $scope.containerTypesOfReporter = {
-                    chart: {
-                        type: 'pieChart',
-                        donut: true,
-                        donutRatio: 0.55,
-                        labelThreshold: .05,
-                        x: function (d) {
-                            return d.name;
-                        },
-                        y: function (d) {
-                            return d.val;
-                        },
-                        height: 500,
-                        showLabels: false,
-                        color: $scope.chartColors,
-                        duration: 500,
-                        labelSunbeamLayout: true,
-                        showLegend: false,
-                    }
-                };
+            $scope.containerTypesOfIncident = {
+                chart: chart
+            };
 
-                $scope.containerDepartments.chart.title = "Departments";
-                $scope.containerLocation.chart.title = "Location";
-                $scope.containerTypesOfReporter.chart.title = "Type of reporter";
-                $scope.containerTypesOfIncident.chart.title = "Type of incident";
-                
+            $scope.containerTypesOfReporter = {
+                chart: chart
+            };
 
-            }, function errorCallback(response) {
-                console.log('error');
-            });
-
+            $scope.containerDepartments.chart.title = "Departments";
+            $scope.containerLocation.chart.title = "Location";
+            $scope.containerTypesOfReporter.chart.title = "Type of reporter";
+            $scope.containerTypesOfIncident.chart.title = "Type of incident";
+        });
     });
 
 
-    //var getCasesService = function ($http, $q) {
-    //    return {
-    //        getData: function () {
-    //            var deffered = $q.defer();
-    //            $http({ method: 'POST', url: '/Analytics/CompanyDepartmentReportAdvanced' })
-    //                .then(function success(response) {
-    //                    deffered.resolve(response.data);
-    //                }, function error(response) {
-    //                    deferred.reject(response.status);
-    //                });
-    //        }
-    //    }
-    //};
-    //app.service('getCasesService', getCasesService);
+    app.factory('getCasesService', function ($http, $q) {
+        return {
+            getData: function (companyId, userId) {
+                var deffered = $q.defer();
+                $http({ method: 'POST', data: { companyId: companyId, userId: userId }, url: '/Analytics/CompanyDepartmentReportAdvanced' })
+                    .then(function success(response) {
+                        deffered.resolve(response.data);
+                    }, function error(response) {
+                        deffered.reject(response.status);
+                    });
+                return deffered.promise;
+            }
+        }
+    });
 }());
