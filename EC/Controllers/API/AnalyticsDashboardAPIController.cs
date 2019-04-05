@@ -103,8 +103,9 @@ namespace EC.Controllers.API
                 DepartmentsList = f.DepartmentsListDistinct(user.company_id, user.id),
                 LocationsList = f.LocationsListDistinct(user.company_id, user.id),
                 SecondaryTypesList = f.SecondaryTypesListDistinct(user.company_id, user.id),
-                RelationTypesList = f.RelationTypesListDistinct(user.company_id, user.id)
-             };
+                RelationTypesList = f.RelationTypesListDistinct(user.company_id, user.id),
+                _today_spanshot = f.AnalyticsByDate(null, null, user.company_id, user.id)
+            };
 
             return ResponseObject2Json(resultObj);
         }

@@ -72,13 +72,11 @@
 
             <div class="container cases-TotalStatistics">
                 <div class="row clearfix">
-
-                    @*  *@
                     @for (var i = 0; i < _titleHeaderLegend.Length; i++)
                     {
                         <div class="col-2">
                             <div class="cases-TotalStatistics__numberOfCases">
-                                <strong>@_today_spanshot[_titleHeaderLegendIdx[i]]</strong>
+                                <strong>@*_today_spanshot[_titleHeaderLegendIdx[i]]*@</strong>
                                 <span class="cases-TotalStatistics__numberOfCases-changed color-CasesSpam" style="color: @_miniSquareColor[i];">(+2)</span>
                             </div>
                             <div class="cases-TotalStatistics__titleColored clearfix">
