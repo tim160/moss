@@ -14,19 +14,19 @@
 
 
 
-    app.controller('BodyController', function ($scope, $http, getMenuFilterCases) {
+    app.controller('BodyController', function ($scope, $http, getMenuFilterCases, addPercentageRoundGraph) {
         getMenuFilterCases
         //getCasesService.then(function createGraph(temp) {
         //    var a = 10;
         //});
 
-        $http({ method: 'GET', url: '/api/AnalyticsRootCauseAnalysis?secondaryType=0' }).
+        $http({ method: 'GET', url: '/api/AnalyticsDashboardAPI' }).
             then(function successCallback(response) {
                 $scope.data = response.data;
 
-                $scope.chartData1 = $scope.data.Behavioral;
-                $scope.chartData2 = $scope.data.External;
-                $scope.chartData3 = $scope.data.Organizational;
+                $scope.chartData1 = addPercentageRoundGraph.setPercentage($scope.data.Behavioral);
+                $scope.chartData2 = addPercentageRoundGraph.setPercentage($scope.data.External);
+                $scope.chartData3 = addPercentageRoundGraph.setPercentage($scope.data.Organizational);
 
                 $scope.chartColors = ['#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472'];
 
@@ -39,7 +39,7 @@
                         return d.name;
                     },
                     y: function (d) {
-                        return d.count;
+                        return d.val;
                     },
                     height: 500,
                     showLabels: false,
@@ -69,7 +69,7 @@
     });
 
 
-    app.controller('CasesController', function ($scope, getCasesService) {
+    app.controller('CasesController', function ($scope, getCasesService, addPercentageRoundGraph) {
 
         var promiseObj = getCasesService.getData();
         promiseObj.then(function (response) {
@@ -77,10 +77,10 @@
 
             $scope.dataCases = JSON.parse(response);
 
-            $scope.DepartmentsData = $scope.dataCases.DepartmentTable;
-            $scope.LocationData = $scope.dataCases.LocationTable;
-            $scope.TypesOfIncidentData = $scope.dataCases.SecondaryTypeTable;
-            $scope.TypesOfReporterData = $scope.dataCases.RelationTable;
+            $scope.DepartmentsData = addPercentageRoundGraph.setPercentage($scope.dataCases.DepartmentTable);
+            $scope.LocationData = addPercentageRoundGraph.setPercentage($scope.dataCases.LocationTable);
+            $scope.TypesOfIncidentData = addPercentageRoundGraph.setPercentage($scope.dataCases.SecondaryTypeTable);
+            $scope.TypesOfReporterData = addPercentageRoundGraph.setPercentage($scope.dataCases.RelationTable);
 
             var chart = {
                 type: 'pieChart',
@@ -157,6 +157,26 @@
                         deffered.reject(response.status);
                     });
                 return deffered.promise;
+            }
+        }
+    });
+
+    app.factory('addPercentageRoundGraph', function () {
+        return {
+            setPercentage: function (array) {
+                if (toString.call(array) !== "[object Array]")
+                    return false;
+
+                let sum = 0;
+                array.forEach(function (element) {
+                    sum += element.val;
+                });
+                if (sum > 0) {
+                    array.forEach(function (element) {
+                        element.percentage = Math.round((element.val * 100) / sum);
+                    });
+                }
+                return array;
             }
         }
     });

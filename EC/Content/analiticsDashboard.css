@@ -85,6 +85,16 @@ html, body {
     box-sizing: border-box;
     font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
 }
+#dashboard .RootCauseAnalysis-roudChart__title {
+    text-align: left;
+    font-family: 'OpenSans-Semibold';
+    font-size: 18px;
+}
+#dashboard .percentage {
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+    color: #abb9bb;
+    font-size: 14px;
+}
 
 .container p {
     margin: 0 0 10px 0;
@@ -124,7 +134,6 @@ html, body {
     width: 100%;
     font-size: 14px;
     font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
-    ;
 }
 
 .factsEstablished__box {
