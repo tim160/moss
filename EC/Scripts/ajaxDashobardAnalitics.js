@@ -8,7 +8,8 @@
     app.controller('MenuCases', function ($scope, getMenuFilterCases) {
         var promiseObj = getMenuFilterCases.getData();
         promiseObj.then(function (response) {
-            $scope.MenuCases = response.data;
+          $scope.MenuCases = response.data;
+          console.log('menu cases', response.data);
         });
     });
 
@@ -23,6 +24,7 @@
         $http({ method: 'GET', url: '/api/AnalyticsDashboardAPI' }).
             then(function successCallback(response) {
                 $scope.data = response.data;
+                console.log('AnalyticsRootCauseAnalysis?secondaryType=0', response.data);
 
                 $scope.chartData1 = addPercentageRoundGraph.setPercentage($scope.data.Behavioral);
                 $scope.chartData2 = addPercentageRoundGraph.setPercentage($scope.data.External);
@@ -61,6 +63,8 @@
                 };
 
                 $scope.externalInfluences.chart.title = "External Influences";
+                $scope.externalInfluences.title = "External Influences";
+
                 $scope.organizationalInfluences.chart.title = "Organizational Influences";
 
             }, function errorCallback(response) {
@@ -76,6 +80,7 @@
             $scope.chartColors = ['#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472', '#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472', '#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472'];
 
             $scope.dataCases = JSON.parse(response);
+            console.log('$scope.dataCases CasesController ', $scope.dataCases);
 
             $scope.DepartmentsData = addPercentageRoundGraph.setPercentage($scope.dataCases.DepartmentTable);
             $scope.LocationData = addPercentageRoundGraph.setPercentage($scope.dataCases.LocationTable);
@@ -135,7 +140,9 @@
                 var deffered = $q.defer();
                 $http({ method: 'POST', data: { companyId: companyId, userId: userId }, url: '/Analytics/CompanyDepartmentReportAdvanced' })
                     .then(function success(response) {
-                        deffered.resolve(response.data);
+                      deffered.resolve(response.data);
+                      console.log('getCasesService ', response.data);
+
                     }, function error(response) {
                         deffered.reject(response.status);
                     });
@@ -152,7 +159,8 @@
                     url: '/api/AnalyticsDashboardAPI/GetMenuDashboard'
                 })
                     .then(function success(response) {
-                        deffered.resolve(response);
+                      deffered.resolve(response);
+                      console.log('GetMenuDashboard ', response.data);
                     }, function error(response) {
                         deffered.reject(response.status);
                     });

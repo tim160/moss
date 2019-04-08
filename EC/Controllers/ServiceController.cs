@@ -492,7 +492,134 @@ namespace EC.Controllers
       };
 
     }
-        public ActionResult FreshDeskSSO()
+
+    /// <summary>
+    /// Run this method each hour
+    /// </summary>
+    /// <param name="param1"></param>
+    /// <returns></returns>
+    public ActionResult Scheduler_1HR(int? param1)
+    {
+      if (param1 == 1)
+      {
+        using (var db = new ECEntities())
+        {
+          //logger.Info("Scheduler, is_cc" + is_cc.ToString());
+          var unsend_emails = db.email.Where(x => x.is_sent == false).ToList();
+          Business.Actions.Email.EmailManagement em = new Business.Actions.Email.EmailManagement(is_cc);
+          Business.Actions.Email.EmailBody eb = new Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+
+
+          foreach (var _email in unsend_emails)
+          {
+            ActionResultExtended emailResult = em.Send(_email.To, _email.Title, _email.Body, true);
+
+            //em.Send(email, "Case Management Deadline is past due", eb.Body, true);
+            if (emailResult.ReturnCode == ReturnCode.Success)
+            {
+              _email.is_sent = true;
+              _email.sent_dt = DateTime.Now;
+              db.SaveChanges();
+            }
+          }
+        }
+      }
+
+      return new JsonResult
+      {
+        JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+        Data = new
+        {
+          ok = true,
+        }
+      };
+
+    }
+
+    /// <summary>
+    /// Run this method each 4 hours
+    /// </summary>
+    /// <param name="param1"></param>
+    public ActionResult Scheduler_4HR(int? param1)
+    {
+      if (param1 == 4)
+      {
+        using (var db = new ECEntities())
+        {
+          //logger.Info("Scheduler, is_cc" + is_cc.ToString());
+          var unsend_emails = db.email.Where(x => x.is_sent == false).ToList();
+          Business.Actions.Email.EmailManagement em = new Business.Actions.Email.EmailManagement(is_cc);
+          Business.Actions.Email.EmailBody eb = new Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+
+
+          foreach (var _email in unsend_emails)
+          {
+            ActionResultExtended emailResult = em.Send(_email.To, _email.Title, _email.Body, true);
+
+            //em.Send(email, "Case Management Deadline is past due", eb.Body, true);
+            if (emailResult.ReturnCode == ReturnCode.Success)
+            {
+              _email.is_sent = true;
+              _email.sent_dt = DateTime.Now;
+              db.SaveChanges();
+            }
+          }
+        }
+      }
+
+      return new JsonResult
+      {
+        JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+        Data = new
+        {
+          ok = true,
+        }
+      };
+    }
+
+    /// <summary>
+    /// Run this method each 24 hours
+    /// </summary>
+    /// <param name="param1"></param>
+    public ActionResult Scheduler_24HR(int? param1)
+    {
+      if (param1 == 24)
+      {
+        using (var db = new ECEntities())
+        {
+          //logger.Info("Scheduler, is_cc" + is_cc.ToString());
+          var unsend_emails = db.email.Where(x => x.is_sent == false).ToList();
+          Business.Actions.Email.EmailManagement em = new Business.Actions.Email.EmailManagement(is_cc);
+          Business.Actions.Email.EmailBody eb = new Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+
+
+          foreach (var _email in unsend_emails)
+          {
+            ActionResultExtended emailResult = em.Send(_email.To, _email.Title, _email.Body, true);
+
+            //em.Send(email, "Case Management Deadline is past due", eb.Body, true);
+            if (emailResult.ReturnCode == ReturnCode.Success)
+            {
+              _email.is_sent = true;
+              _email.sent_dt = DateTime.Now;
+              db.SaveChanges();
+            }
+          }
+        }
+      }
+
+      return new JsonResult
+      {
+        JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+        Data = new
+        {
+          ok = true,
+        }
+      };
+
+    }
+
+    public ActionResult FreshDeskSSO()
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
