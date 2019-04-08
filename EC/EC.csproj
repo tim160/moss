@@ -285,6 +285,7 @@
     <Content Include="App\services\onLeaveService.js" />
     <Content Include="App\util\fireEventsController.js" />
     <Content Include="App\util\parentController.js" />
+    <Content Include="Content\analiticsDashboard.css" />
     <Content Include="Content\anotherDialog.css" />
     <Content Include="Content\assets\template\css\reset.css" />
     <Content Include="Content\assets\template\css\style.css" />
@@ -302,6 +303,7 @@
     <Content Include="Content\emails\CampusSecurityAlert.html" />
     <Content Include="Content\emails\CaseCloseApproveClosed.html" />
     <Content Include="Content\emails\CaseCloseApprove.html" />
+    <Content Include="Content\emails\CaseCloseApproveClosed.html" />
     <Content Include="Content\emails\CaseCloseApprovePlatformManager.html" />
     <Content Include="Content\emails\CaseDeadlinePastDue.html" />
     <Content Include="Content\emails\ReporterNewMessage.html" />
@@ -356,6 +358,10 @@
     <Content Include="Content\Icons\alarm-default.png" />
     <Content Include="Content\Icons\alarm-whitepng.png" />
     <Content Include="Content\Icons\anonimousReporterIcon.png" />
+    <Content Include="Content\Icons\arrow-activeGreen.png" />
+    <Content Include="Content\Icons\arrow-listDark.png" />
+    <Content Include="Content\Icons\arrow-listLight.png" />
+    <Content Include="Content\Icons\arrow-TopRight.png" />
     <Content Include="Content\Icons\arrowMessage.png" />
     <Content Include="Content\Icons\arrowSelect.png" />
     <Content Include="Content\Icons\arrowSelect2.png" />
@@ -381,6 +387,9 @@
     <Content Include="Content\Icons\CaseScopeInternal.png" />
     <Content Include="Content\Icons\CaseScopeRegulatory.png" />
     <Content Include="Content\Icons\casesHover.png" />
+    <Content Include="Content\Icons\checkBlock-unchecked.png" />
+    <Content Include="Content\Icons\checkbox.png" />
+    <Content Include="Content\Icons\checkedActive.png" />
     <Content Include="Content\Icons\close.png" />
     <Content Include="Content\Icons\closeWhite.png" />
     <Content Include="Content\Icons\EC-logo-2x.png" />
@@ -423,8 +432,12 @@
     <Content Include="Content\Icons\pepperPhoto.png" />
     <Content Include="Content\Icons\print-icon.png" />
     <Content Include="Content\Icons\print_icon_white.png" />
+    <Content Include="Content\Icons\radio.png" />
+    <Content Include="Content\Icons\radioButton-Active.png" />
+    <Content Include="Content\Icons\radioButton-def.png" />
     <Content Include="Content\Icons\report-icon-white.png" />
     <Content Include="Content\Icons\report-icon.png" />
+    <Content Include="Content\Icons\reporterUnchecked.png" />
     <Content Include="Content\Icons\reviewStage.png" />
     <Content Include="Content\Icons\second.png" />
     <Content Include="Content\Icons\settingsPersonalNOPhoto.png" />
@@ -449,6 +462,8 @@
     <Content Include="Content\Icons\TonyStark.png" />
     <Content Include="Content\Icons\viewDoc1.png" />
     <Content Include="Content\Icons\viewDoc2.png" />
+    <Content Include="Content\Icons\view_btn_lines.png" />
+    <Content Include="Content\Icons\view_btn_tile.png" />
     <Content Include="Content\Icons\X.png" />
     <Content Include="Content\Icons\Xanal.gif" />
     <Content Include="Content\Icons\yes.png" />
@@ -741,8 +756,8 @@
     <Content Include="Libs\ng-file-upload\ng-file-upload.min.js" />
     <Content Include="Models\Database\ECEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ECEntities.edmx</DependentUpon>
       <LastGenOutput>ECEntities.Context.cs</LastGenOutput>
+      <DependentUpon>ECEntities.edmx</DependentUpon>
     </Content>
     <Content Include="Models\Database\ECEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1063,6 +1078,7 @@
     <Content Include="Scripts\reportDashboard\reportDashboard.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\ajaxDashobardAnalitics.js" />
     <Content Include="Scripts\updateAjax.js" />
     <Content Include="Scripts\View\blockActivityRight.js" />
     <Content Include="Scripts\View\CaseCircleDraw.js" />
@@ -1123,10 +1139,6 @@
     <Content Include="Views\Shared\IndexPages\LayoutCasesNewReport.cshtml" />
     <Content Include="Views\ReporterDashboard\Index.cshtml" />
     <Content Include="Views\Shared\IndexPages\ReporterDashboard.cshtml" />
-    <Content Include="Views\PartialViews\_ReportPreview.cshtml" />
-    <Content Include="Views\PartialViews\_ReportPendingNotification.cshtml" />
-    <Content Include="Views\Cases\Completed.cshtml" />
-    <Content Include="Views\Cases\Spam.cshtml" />
     <Content Include="Views\ReporterDashboard\Messages.cshtml" />
     <Content Include="Views\ReporterDashboard\Activity.cshtml" />
     <Content Include="Views\ReporterDashboard\Settings.cshtml" />
@@ -1152,7 +1164,6 @@
     <Content Include="Views\EmployeeAwareness\Poster.cshtml" />
     <Content Include="Views\Shared\Helpers\_CasePreview.cshtml" />
     <Content Include="Views\Shared\Helpers\_SingleMessage.cshtml" />
-    <Content Include="Views\Cases\Closed.cshtml" />
     <Content Include="Views\Settings\WorkFlow.cshtml" />
     <Content Include="Views\Settings\partial\casesHeared.cshtml" />
     <Content Include="Views\Errors\Index.cshtml" />
@@ -1210,10 +1221,11 @@
     <Content Include="Views\Trainer\Index.cshtml" />
     <Content Include="Views\Trainer\Calendar.cshtml" />
     <Content Include="Views\New\CompanyA.cshtml" />
+    <Content Include="Views\NewCase\PrintToPdfOriginal.cshtml" />
     <Content Include="Views\ReporterDashboard\PrintToPdf.cshtml" />
     <Content Include="Views\ReporterDashboard\settingMenu.cshtml" />
-    <Content Include="Views\NewCase\PrintToPdfOriginal.cshtml" />
-    <None Include="Web.Debug.config">
+    <Content Include="Views\Analytics\Dashboard.cshtml" />
+    <Content Include="Views\Shared\_ReportPendingNotification.cshtml" />    <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
@@ -1238,6 +1250,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AnalyticsController.cs" />
+    <Compile Include="Controllers\API\AnalyticsDashboardAPIController.cs" />
     <Compile Include="Controllers\API\NewCaseTopMenuController.cs" />
     <Compile Include="Controllers\API\AnalyticsRootCauseAnalysisController.cs" />
     <Compile Include="Controllers\API\BaseApiController.cs" />
