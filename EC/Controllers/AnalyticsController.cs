@@ -44,6 +44,9 @@ namespace EC.Controllers
             UserModel um = new UserModel(user_id);
             ViewBag.um = um;
 
+            int[] _today_spanshot = glb.AnalyticsByDate(null, null, um._user.company_id, um._user.id);
+            ViewBag._today_spanshot = _today_spanshot;
+
             company company_item = db.company.Where(item => (item.id == um._user.company_id)).FirstOrDefault();
             if (company_item != null)
             {

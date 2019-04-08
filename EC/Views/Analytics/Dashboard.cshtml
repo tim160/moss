@@ -65,23 +65,22 @@
                 <strong>@GlobalRes.Number_cases_stage:</strong> @_today
             </div>
 
-            <div class="container cases-TotalStatistics">
-                <div class="row clearfix">
-                    @for (var i = 0; i < _titleHeaderLegend.Length; i++)
-                    {
-                        <div class="col-2">
-                            <div class="cases-TotalStatistics__numberOfCases">
-                                <strong>@*_today_spanshot[_titleHeaderLegendIdx[i]]*@</strong>
-                                <span class="cases-TotalStatistics__numberOfCases-changed color-CasesSpam" style="color: @_miniSquareColor[i];">(+2)</span>
-                            </div>
-                            <div class="cases-TotalStatistics__titleColored clearfix">
-                                <div class="cases-TotalStatistics__titleColored-color color-CasesSpam" style="background-color: @_miniSquareColor[i];"></div>
-                                <div class="cases-TotalStatistics__titleColored-text">@_titleHeaderLegend[i]</div>
-                            </div>
+
+            <div class="container cases-TotalStatistics" ng-controller="Today_spanshot">
+                <div class="row clearfix" >
+                    <div class="col-2" ng-repeat="snapShot in _today_spanshot">
+                        <div class="cases-TotalStatistics__numberOfCases">
+                            <strong>{{snapShot.numberOfCases}}</strong>
+                            <span class="cases-TotalStatistics__numberOfCases-changed color-CasesSpam" style="color: {{snapShot.miniSquareColor}};">(+{{snapShot.month_end_spanshot}})</span>
                         </div>
-                    }
+                        <div class="cases-TotalStatistics__titleColored clearfix">
+                            <div class="cases-TotalStatistics__titleColored-color color-CasesSpam" style="background-color: {{snapShot.miniSquareColor}};"></div>
+                            <div class="cases-TotalStatistics__titleColored-text">{{snapShot.titleHeaderLegend}}</div>
+                        </div>
+                    </div>
                 </div>
             </div><!-- /.container cases-TotalStatistics -->
+
 
             <div class="container cases-TotalHeader clearfix">
                 <div class="case-TotalHeader__items timeFilterCases clearfix">

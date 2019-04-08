@@ -5,30 +5,32 @@
     var app = angular.module('EC', ['nvd3']);
 
 
+
     app.controller('MenuCases', function ($scope, getMenuFilterCases) {
         var promiseObj = getMenuFilterCases.getData();
         promiseObj.then(function (response) {
-          $scope.MenuCases = response.data;
-          console.log('menu cases', response.data);
+            $scope.MenuCases = response.data;
         });
     });
+    app.controller('Today_spanshot', function ($scope, AnalyticsByDate) {
+        var promiseObj = AnalyticsByDate.getData();
+        promiseObj.then(function (response) {
+            $scope._today_spanshot = response.data._today_spanshot
+        });
+    });
+    app.controller('CaseTime', function ($scope) {
 
-
-
-    app.controller('BodyController', function ($scope, $http, getMenuFilterCases, addPercentageRoundGraph) {
-        getMenuFilterCases
-        //getCasesService.then(function createGraph(temp) {
-        //    var a = 10;
-        //});
+    });
+    app.controller('BodyController', function ($scope, $http, addPercentageRoundGraph) {
 
         $http({ method: 'GET', url: '/api/AnalyticsDashboardAPI' }).
             then(function successCallback(response) {
-                $scope.data = response.data;
-                console.log('AnalyticsRootCauseAnalysis?secondaryType=0', response.data);
+                
+                //console.log('AnalyticsRootCauseAnalysis?secondaryType=0', response.data);
 
-                $scope.chartData1 = addPercentageRoundGraph.setPercentage($scope.data.Behavioral);
-                $scope.chartData2 = addPercentageRoundGraph.setPercentage($scope.data.External);
-                $scope.chartData3 = addPercentageRoundGraph.setPercentage($scope.data.Organizational);
+                $scope.chartData1 = addPercentageRoundGraph.setPercentage(response.data.Behavioral);
+                $scope.chartData2 = addPercentageRoundGraph.setPercentage(response.data.External);
+                $scope.chartData3 = addPercentageRoundGraph.setPercentage(response.data.Organizational);
 
                 $scope.chartColors = ['#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472'];
 
@@ -130,10 +132,6 @@
     });
 
 
-    app.controller('CaseTime', function ($scope) {
-
-    });
-
     app.factory('getCasesService', function ($http, $q) {
         return {
             getData: function (companyId, userId) {
@@ -141,7 +139,7 @@
                 $http({ method: 'POST', data: { companyId: companyId, userId: userId }, url: '/Analytics/CompanyDepartmentReportAdvanced' })
                     .then(function success(response) {
                       deffered.resolve(response.data);
-                      console.log('getCasesService ', response.data);
+                      //console.log('getCasesService ', response.data);
 
                     }, function error(response) {
                         deffered.reject(response.status);
@@ -160,7 +158,7 @@
                 })
                     .then(function success(response) {
                       deffered.resolve(response);
-                      console.log('GetMenuDashboard ', response.data);
+                      //console.log('GetMenuDashboard ', response.data);
                     }, function error(response) {
                         deffered.reject(response.status);
                     });
@@ -168,7 +166,24 @@
             }
         }
     });
-
+    app.factory('AnalyticsByDate', function ($http, $q) {
+        return {
+            getData: function () {
+                var deffered = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: '/api/AnaliticsDashboardCases/AnalyticsByDate'
+                })
+                    .then(function success(response) {
+                        deffered.resolve(response);
+                        //console.log('GetMenuDashboard ', response.data);
+                    }, function error(response) {
+                        deffered.reject(response.status);
+                    });
+                return deffered.promise;
+            }
+        }
+    });
     app.factory('addPercentageRoundGraph', function () {
         return {
             setPercentage: function (array) {

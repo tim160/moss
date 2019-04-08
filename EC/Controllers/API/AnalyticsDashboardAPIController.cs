@@ -9,12 +9,6 @@ namespace EC.Controllers.API
 {
     public class AnalyticsDashboardAPIController : BaseApiController
     {
-        public class Filter
-        {
-            //public string SecondaryType { get; set; }
-            public int SecondaryType { get; set; }
-        }
-
         [HttpGet]
         public object Get([FromUri] Filter model)
         {
@@ -104,10 +98,16 @@ namespace EC.Controllers.API
                 LocationsList = f.LocationsListDistinct(user.company_id, user.id),
                 SecondaryTypesList = f.SecondaryTypesListDistinct(user.company_id, user.id),
                 RelationTypesList = f.RelationTypesListDistinct(user.company_id, user.id),
-                _today_spanshot = f.AnalyticsByDate(null, null, user.company_id, user.id)
+
             };
 
             return ResponseObject2Json(resultObj);
         }
+
+    }
+
+    public class Filter
+    {
+        public int SecondaryType { get; set; }
     }
 }
