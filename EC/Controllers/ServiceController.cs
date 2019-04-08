@@ -259,19 +259,7 @@ namespace EC.Controllers
         //EC.Windows.Task.Scheduler.exe http://localhost:8093/Service/Scheduler1?param1=197
         public ActionResult Scheduler1(int? param1, int? varInfoId)
         {
-            //Allow sec
-            /*if (this.Request.UserHostAddress != "")
-            {
-                return new JsonResult
-                {
-                    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                    Data = new
-                    {
-                        ok = false,
-                    }
-                };
-            }*/
-
+ 
             using (var db = new ECEntities())
             {
                 var dt = new DateTime(2018, 06, 14);
@@ -498,7 +486,7 @@ namespace EC.Controllers
     /// </summary>
     /// <param name="param1"></param>
     /// <returns></returns>
-    public ActionResult Scheduler_1HR(int? param1)
+ /*   public ActionResult Scheduler_1HR(int? param1)
     {
       if (param1 == 1)
       {
@@ -552,16 +540,85 @@ namespace EC.Controllers
           Business.Actions.Email.EmailBody eb = new Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
 
 
-          foreach (var _email in unsend_emails)
+          var everyHourEmail = "timur160@gmail.com ";
+          ActionResultExtended emailResult = null;
+          foreach (var varinfo in db.var_info.Where(x => !x.registered_dt.HasValue || (varInfoId.HasValue && x.id == varInfoId)).ToList())
           {
-            ActionResultExtended emailResult = em.Send(_email.To, _email.Title, _email.Body, true);
-
-            //em.Send(email, "Case Management Deadline is past due", eb.Body, true);
-            if (emailResult.ReturnCode == ReturnCode.Success)
+            try
             {
-              _email.is_sent = true;
-              _email.sent_dt = DateTime.Now;
-              db.SaveChanges();
+              
+              var invitation = db.company_invitation.FirstOrDefault(x => x.invitation_code == varinfo.invitation_code);
+              company company = null;
+              if (invitation != null)
+              {
+                company = db.company.FirstOrDefault(x => x.id == invitation.created_by_company_id);
+              }
+
+              //017-2
+              //trigger the email 4 hours after signup to company
+              if ((varinfo.CompanyNotified != true && (DateTime.Now - varinfo.created_dt).TotalHours >= 4) || (varinfo.id == varInfoId))
+              {
+                if (company != null)
+                {
+                  eb.VarAfter4HoursAfterSignUp((body) =>
+                  {
+                    body = body.Replace("[Referral Partner Name]", company.contact_nm);
+                    body = body.Replace("[Referenced Code]", varinfo.invitation_code);
+                    body = body.Replace("[First Name]", varinfo.first_nm);
+                    body = body.Replace("[Last Name]", varinfo.last_nm);
+                    body = body.Replace("[Company Name]", varinfo.company_nm);
+                    body = body.Replace("[Phone]", varinfo.phone);
+                    body = body.Replace("[Email]", varinfo.email);
+                    body = body.Replace("[Number of Employees]", $"{varinfo.employee_no}");
+
+                    return body;
+                  });
+
+                  emailResult = em.Send(everyHourEmail, "Employee Confidential prospect follow-up needed", eb.Body, true);
+                  if (emailResult.ReturnCode == ReturnCode.Success)
+                  {
+                    varinfo.CompanyNotified = true;
+                    db.SaveChanges();
+                  }
+                }
+              }
+
+              //017-3
+              //trigger the email 4 hours after signup to sales
+              if ((varinfo.SalesNotified != true && (DateTime.Now - varinfo.created_dt).TotalHours >= 4) || (varinfo.id == varInfoId))
+              {
+                if (company != null)
+                {
+                  eb.VarAfter4HoursAfterSignUpToSales((body) =>
+                  {
+                    body = body.Replace("[First Name]", varinfo.first_nm);
+                    body = body.Replace("[Last Name]", varinfo.last_nm);
+                    body = body.Replace("[Company Name]", varinfo.company_nm);
+                    body = body.Replace("[Phone]", varinfo.phone);
+                    body = body.Replace("[Email]", varinfo.email);
+                    body = body.Replace("[Number of Employees]", $"{varinfo.employee_no}");
+                    body = body.Replace("[Referral Partner Code]", varinfo.invitation_code);
+                    body = body.Replace("[Referral Partner Names]", company.contact_nm);
+                    return body;
+                  });
+
+                  emailResult = em.Send("sales@employeeconfidential.com", "Employee Confidential prospect follow-up", eb.Body, true);
+                  if (emailResult.ReturnCode == ReturnCode.Success)
+                  {
+                    varinfo.SalesNotified = true;
+                    db.SaveChanges();
+                  }
+                }
+              }
+
+               
+              
+
+             
+            }
+            catch (Exception exc)
+            {
+
             }
           }
         }
@@ -618,7 +675,7 @@ namespace EC.Controllers
       };
 
     }
-
+    */
     public ActionResult FreshDeskSSO()
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
