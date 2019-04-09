@@ -8,24 +8,14 @@
 @{
 
     <link rel="stylesheet" href="~/Content/styleAnalitics.css" />
-    <link rel="stylesheet" href="~/Content/styleAnalitics.css" />
 
     ViewBag.Title = GlobalRes.Analytics;
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
     int user_id = (Int32)ViewBag.user_id;
-    ReportModel rm = new ReportModel();
     int companyId = ViewBag.um._user.company_id;
-    int[] _today_spanshot = ViewBag._today_spanshot;
-    int[] _month_end_spanshot = ViewBag._month_end_spanshot;
     int difference = 0;
 
     string _today = ViewBag._today;
-
-    string[] _titleHeaderLegend = { "Spam", "New Report", "Report Review", "Under Investigation", "Awaiting Sign-Off", "Closed" };
-    int[] _titleHeaderLegendIdx = { 6, 0, 1, 2, 3, 8 };
-
-    string[] _miniSquareColor = { "#abb9bb", "#d47472", "#ff9b42", "#3099be", "#64cd9b", "#e5eeee" };
-
 }
 
 <!-- Include Date Range Picker -->
@@ -61,8 +51,8 @@
     <div class="container mainNavigationTabs__tabContent-container ">
         <div id="mainTab-Cases" class="mainNavigationTabs__tabContent active">
 
-            <div class="fluidTitle">
-                <strong>@GlobalRes.Number_cases_stage:</strong> @_today
+            <div class="fluidTitle" style="font-family: 'OpenSans-Light';">
+                <strong style="color: #3c3e3f; font-family: 'OpenSans-Semibold';">@GlobalRes.Number_cases_stage:</strong> @_today
             </div>
 
 
@@ -85,7 +75,7 @@
             <div class="container cases-TotalHeader clearfix">
                 <div class="case-TotalHeader__items timeFilterCases clearfix">
                     <div class="case-DropDownList-title clearfix">
-                        <div class="case-DropDownList-title__text clearfix">All Time</div>
+                        <div class="case-DropDownList-title__text clearfix">data range</div>
                         <div class="case-DropDownList-title__arrow clearfix"></div>
                     </div>
                     <div class="timeFilterCases-dropBlock case-DropDownList-contentBlock   clearfix">
@@ -232,11 +222,20 @@
 
         </div><!-- mainNavigationTabs__tabContent -->
         <div class="container" id="dashboard">
-            <div class="case-MainContent container">
+            <div class="case-MainContent container" style="min-height: 1500px">
                 <div class="case-MainContent-Header clearfix">
                     <div class="case-MainContent-Header__left clearfix">
                         <div class="case-MainContent-Header__leftTitle">
                             Cases
+                        </div>
+                    </div>
+                    <div class="case-MainContent-Header__right clearfix">
+                        <div class="case-MainContent-HeaderLinks clearfix">
+                            <a href="#" class="case-MainContent-HeaderLinks__item expertLink clearfix">
+                                <div class="case-MainContent-HeaderLinks__itemText">
+                                    show cases
+                                </div>
+                            </a>
                         </div>
                     </div>
                     <div class="case-MainContent-Header__right clearfix">
@@ -247,7 +246,7 @@
                                     Export PDF
                                 </div>
                             </a>
-                         </div>
+                        </div>
                     </div>
                 </div>
                 <div class="case-MainContent-main" ng-controller="CasesController">
@@ -264,7 +263,7 @@
 
                         <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in DepartmentsData">
                             <div class="col-7 p-0">
-                                <div class="ng-binding RootCauseAnalysis-roudChart__title" style="padding-left: 10px; border-left: solid 10px {{chartColors[$index]}}">
+                                <div class="ng-binding RootCauseAnalysis-roudChart__title" style="margin-bottom: 10px; padding-left: 10px; border-left: solid 10px {{chartColors[$index]}}">
                                     {{item.name}}
                                 </div>
                             </div>
@@ -288,7 +287,7 @@
         </div>*@
                         <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in LocationData">
                             <div class="col-7 p-0">
-                                <div class="ng-binding RootCauseAnalysis-roudChart__title" style="padding-left: 10px; border-left: solid 10px {{chartColors[$index]}}">
+                                <div class="ng-binding RootCauseAnalysis-roudChart__title" style="margin-bottom: 10px; padding-left: 10px; border-left: solid 10px {{chartColors[$index]}}">
                                     {{item.name}}
                                 </div>
                             </div>
@@ -312,7 +311,7 @@
         </div>*@
                         <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in TypesOfReporterData">
                             <div class="col-7 p-0">
-                                <div class="ng-binding RootCauseAnalysis-roudChart__title" style="padding-left: 10px; border-left: solid 10px {{chartColors[$index]}}">
+                                <div class="ng-binding RootCauseAnalysis-roudChart__title" style="margin-bottom: 10px; padding-left: 10px; border-left: solid 10px {{chartColors[$index]}}">
                                     {{item.name}}
                                 </div>
                             </div>
@@ -336,7 +335,7 @@
         </div>*@
                         <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in TypesOfIncidentData">
                             <div class="col-7 p-0">
-                                <div class="ng-binding RootCauseAnalysis-roudChart__title" style="padding-left: 10px; border-left: solid 10px {{chartColors[$index]}}">
+                                <div class="ng-binding RootCauseAnalysis-roudChart__title" style="margin-bottom: 10px; padding-left: 10px; border-left: solid 10px {{chartColors[$index]}}">
                                     {{item.name}}
                                 </div>
                             </div>
@@ -365,7 +364,6 @@
                                     Export PDF
                                 </div>
                             </a>
- 
                         </div>
                     </div>
                 </div>
@@ -398,7 +396,7 @@
                         <nvd3 id="behavioralFactors" options="behavioralFactors" data="chartData1" api="api1"></nvd3>
                         <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in chartData1">
                             <div class="col-7 p-0">
-                                <div class="ng-binding RootCauseAnalysis-roudChart__title" style="padding-left: 10px; border-left: solid 10px {{chartColors[$index]}}">
+                                <div class="ng-binding RootCauseAnalysis-roudChart__title" style="margin-bottom: 10px; padding-left: 10px; border-left: solid 10px {{chartColors[$index]}}">
                                     {{item.name}}
                                 </div>
                             </div>
@@ -412,7 +410,7 @@
                         <nvd3 id="externalInfluences" options="externalInfluences" data="chartData2" api="api2"></nvd3>
                         <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in chartData2">
                             <div class="col-7 p-0">
-                                <div class="ng-binding RootCauseAnalysis-roudChart__title" style="padding-left: 10px; border-left: solid 10px {{chartColors[$index]}}">
+                                <div class="ng-binding RootCauseAnalysis-roudChart__title" style="margin-bottom: 10px; padding-left: 10px; border-left: solid 10px {{chartColors[$index]}}">
                                     {{item.name}}
                                 </div>
                             </div>
@@ -426,7 +424,7 @@
                         <nvd3 id="organizationalInfluences" options="organizationalInfluences" data="chartData3" api="api3"></nvd3>
                         <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in chartData3">
                             <div class="col-7 p-0">
-                                <div class="ng-binding RootCauseAnalysis-roudChart__title" style="padding-left: 10px; border-left: solid 10px {{chartColors[$index]}}">
+                                <div class="ng-binding RootCauseAnalysis-roudChart__title" style="margin-bottom: 10px; padding-left: 10px; border-left: solid 10px {{chartColors[$index]}}">
                                     {{item.name}}
                                 </div>
                             </div>

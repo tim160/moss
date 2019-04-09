@@ -34,34 +34,37 @@
 
                 $scope.chartColors = ['#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472'];
 
-                var chart = {
-                    type: 'pieChart',
-                    donut: true,
-                    donutRatio: 0.55,
-                    labelThreshold: .05,
-                    x: function (d) {
-                        return d.name;
-                    },
-                    y: function (d) {
-                        return d.val;
-                    },
-                    height: 500,
-                    showLabels: false,
-                    color: $scope.chartColors,
-                    duration: 500,
-                    labelSunbeamLayout: true,
-                    showLegend: false,
-                };
+                function returnGraph() {
+                    var chart = {
+                        type: 'pieChart',
+                        donut: true,
+                        donutRatio: 0.55,
+                        labelThreshold: .05,
+                        x: function (d) {
+                            return d.name;
+                        },
+                        y: function (d) {
+                            return d.val;
+                        },
+                        height: 500,
+                        showLabels: false,
+                        color: $scope.chartColors,
+                        duration: 500,
+                        labelSunbeamLayout: true,
+                        showLegend: false,
+                    };
+                    return chart;
+                }
                 $scope.behavioralFactors = {
-                    chart: chart
+                    chart: returnGraph()
                 };
                 $scope.behavioralFactors.chart.title = "Behavioral Factors";
                 $scope.externalInfluences = {
-                    chart: chart
+                    chart: returnGraph()
                 };
 
                 $scope.organizationalInfluences = {
-                    chart: chart
+                    chart: returnGraph()
                 };
 
                 $scope.externalInfluences.chart.title = "External Influences";
@@ -89,39 +92,42 @@
             $scope.TypesOfIncidentData = addPercentageRoundGraph.setPercentage($scope.dataCases.SecondaryTypeTable);
             $scope.TypesOfReporterData = addPercentageRoundGraph.setPercentage($scope.dataCases.RelationTable);
 
-            var chart = {
-                type: 'pieChart',
-                donut: true,
-                donutRatio: 0.55,
-                labelThreshold: .05,
-                x: function (d) {
-                    return d.name;
-                },
-                y: function (d) {
-                    return d.val;
-                },
-                height: 500,
-                showLabels: false,
-                color: $scope.chartColors,
-                duration: 500,
-                labelSunbeamLayout: true,
-                showLegend: false,
-            };
+            function returnGraph() {
+                var chart = {
+                    type: 'pieChart',
+                    donut: true,
+                    donutRatio: 0.55,
+                    labelThreshold: .05,
+                    x: function (d) {
+                        return d.name;
+                    },
+                    y: function (d) {
+                        return d.val;
+                    },
+                    height: 500,
+                    showLabels: false,
+                    color: $scope.chartColors,
+                    duration: 500,
+                    labelSunbeamLayout: true,
+                    showLegend: false,
+                };
+                return chart;
+            }
 
             $scope.containerDepartments = {
-                chart: chart
+                chart: returnGraph()
             };
 
             $scope.containerLocation = {
-                chart: chart
+                chart: returnGraph()
             };
 
             $scope.containerTypesOfIncident = {
-                chart: chart
+                chart: returnGraph()
             };
 
             $scope.containerTypesOfReporter = {
-                chart: chart
+                chart: returnGraph()
             };
 
             $scope.containerDepartments.chart.title = "Departments";
