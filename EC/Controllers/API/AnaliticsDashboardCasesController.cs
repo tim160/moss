@@ -19,7 +19,7 @@ namespace EC.Controllers.API
 
             string[] _titleHeaderLegend = { "Spam", "New Report", "Report Review", "Under Investigation", "Awaiting Sign-Off", "Closed" };
             int[] _titleHeaderLegendIdx = { 6, 0, 1, 2, 3, 8 };
-            string[] _miniSquareColor = { "#abb9bb", "#d47472", "#ff9b42", "#3099be", "#64cd9b", "#e5eeee" };
+            string[] _miniSquareColor = { "#abb9bb", "#d47472", "#ff9b42", "#3099be", "#64cd9b", "#abb9bb" };
             int[] _today_spanshot = f.AnalyticsByDate(null, null, user.company_id, user.id);
             List<TodaySnapshot> resultsnapShot = new List<TodaySnapshot>();
 
