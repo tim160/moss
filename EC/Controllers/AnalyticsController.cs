@@ -303,25 +303,6 @@ namespace EC.Controllers
             int user_id = user.id;
 
             ViewBag.user_id = user_id;
-            UserModel um = new UserModel(user_id);
-            ViewBag.um = um;
-
-            //int[] _today_spanshot = glb.AnalyticsByDate(null, null, um._user.company_id, um._user.id);
-            //ViewBag._today_spanshot = _today_spanshot;
-
-            company company_item = db.company.Where(item => (item.id == um._user.company_id)).FirstOrDefault();
-            if (company_item != null)
-            {
-
-                ViewBag.step1_delay = company_item.step1_delay;
-                ViewBag.step2_delay = company_item.step2_delay;
-                ViewBag.step3_delay = company_item.step3_delay;
-                ViewBag.step4_delay = company_item.step4_delay;
-            }
-
-            DateTime _month_end_date = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1).AddDays(-1);
-            int[] _month_end_spanshot = glb.AnalyticsByDate(null, _month_end_date, um._user.company_id, um._user.id);
-            ViewBag._month_end_spanshot = _month_end_spanshot;
 
             string _today = DateTimeHelper.ConvertDateToLongMonthString(DateTime.Today);
             ViewBag._today = _today;

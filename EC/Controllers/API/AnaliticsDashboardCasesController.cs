@@ -46,6 +46,39 @@ namespace EC.Controllers.API
 
             return ResponseObject2Json(resultObj);
         }
+        [HttpPost]
+        public Object GetTurnAroundTime()
+        {
+            List<TodaySnapshot> resultAroundTime = new List<TodaySnapshot>();
+            resultAroundTime.Add(new TodaySnapshot
+            {
+                numberOfCases = 1,
+                miniSquareColor = "#d47472",
+                titleHeaderLegend = "New Report",
+            });
+            resultAroundTime.Add(new TodaySnapshot
+            {
+                numberOfCases = 5,
+                miniSquareColor = "#ff9b42",
+                titleHeaderLegend = "Report Review",
+            });
+            resultAroundTime.Add(new TodaySnapshot
+            {
+                miniSquareColor = "#3099be",
+                titleHeaderLegend = "Under Investigation",
+            });
+            resultAroundTime.Add(new TodaySnapshot
+            {
+                miniSquareColor = "#64cd9b",
+                titleHeaderLegend = "Awaiting Sign-Off",
+            });
+
+            //var resultObj = new
+            //{
+            //    turnaroundTime = resultAroundTime
+            //};
+            return ResponseObject2Json(resultAroundTime);
+        }
     }
     class TodaySnapshot
     {

@@ -10,12 +10,23 @@
         var promiseObj = getMenuFilterCases.getData();
         promiseObj.then(function (response) {
             $scope.MenuCases = response.data;
+
+
+            //$(".case-DropDownList-title").click(function () {
+
+            //    $(".case-DropDownList-title").not(this).next(".case-DropDownList-contentBlock").hide("fast");
+            //    $(".case-DropDownList-title").not(this).parent(".case-TotalHeader__items").removeClass("selected");
+
+            //    $(this).next(".case-DropDownList-contentBlock").toggle("fast");
+            //    $(this).parent(".case-TotalHeader__items").toggleClass("selected");
+            //});
+
         });
     });
     app.controller('Today_spanshot', function ($scope, AnalyticsByDate) {
         var promiseObj = AnalyticsByDate.getData();
         promiseObj.then(function (response) {
-            $scope._today_spanshot = response.data._today_spanshot
+            $scope._today_spanshot = response.data._today_spanshot;
         });
     });
     app.controller('CaseTime', function ($scope) {
@@ -77,7 +88,7 @@
             });
     });
 
-
+    
     app.controller('CasesController', function ($scope, getCasesService, addPercentageRoundGraph) {
 
         var promiseObj = getCasesService.getData();
@@ -104,6 +115,10 @@
                     y: function (d) {
                         return d.val;
                     },
+
+                    //valueFormat: function (d) {
+                    //    d3.format('.3s');
+                    //},
                     height: 500,
                     showLabels: false,
                     color: $scope.chartColors,
@@ -137,6 +152,46 @@
         });
     });
 
+    app.controller('CaseManagamentTime', function ($scope) {
+        //var data = [
+        //    {
+        //        process: 'sales',
+        //        stage: 'visit',
+        //        count: 100
+        //    },
+        //    {
+        //        process: 'sales',
+        //        stage: 'trial',
+        //        count: 50
+        //    },
+        //    {
+        //        process: 'sales',
+        //        stage: 'buy',
+        //        count: 15
+        //    },
+        //    {
+        //        process: 'sales',
+        //        stage: 'go away',
+        //        count: -7
+        //    }
+        //];
+        //var Ratio = require("Taucharts");
+        //var chart = new Ratio.Chart({
+        //    type: 'horizontal-stacked-bar',
+        //    y: 'process',
+        //    x: 'count',
+        //    color: 'stage',
+        //    data: data
+        //});
+        //chart.renderTo(document.getElementById('bar'));
+    });
+
+    app.controller('NumberCasesTurnaroundTime', function ($scope, getTurnAroundTime) {
+        var promiseObj = getTurnAroundTime.getData();
+        promiseObj.then(function (response) {
+            $scope.turnaroundTime = response.data;
+        });
+    });
 
     app.factory('getCasesService', function ($http, $q) {
         return {
@@ -209,5 +264,35 @@
             }
         }
     });
-
+    app.factory('getTurnAroundTime', function ($http, $q) {
+        return {
+            getData: function () {
+                var deffered = $q.defer();
+                $http({
+                    method: 'POST',
+                    url: '/api/AnaliticsDashboardCases/getTurnAroundTime'
+                })
+                    .then(function success(response) {
+                        deffered.resolve(response);
+                        //console.log('GetMenuDashboard ', response.data);
+                    }, function error(response) {
+                        deffered.reject(response.status);
+                    });
+                return deffered.promise;
+            }
+        }
+    });
+    app.directive("ngToggleClass", function () {
+        return {
+            restrict: 'A',
+            compile: function (element, attr) {
+                var classes = attr.ngToggleClass.split(',');
+                element.bind('click', function () {
+                    angular.forEach(classes, function (value) {
+                        (element.hasClass(value)) ? element.removeClass(value) : element.addClass(value);
+                    });
+                });
+            }
+        }
+    });
 }());
