@@ -657,7 +657,7 @@ public class GlobalFunctions
         List<int> report_ids_list = _all_reports.Select(t => t.id).ToList();
         List<report_department> departmentsList = db.report_department.Where(t => report_ids_list.Contains(t.report_id)).ToList();
     
-        var groups = departmentsList.GroupBy(s => s.department_id).Select(s => new { key = s.Key, val = s.Count() });
+        var groups = departmentsList.GroupBy(s => s.department_id).Select(s => new { key = s.Key, val = s.Count() }).OrderByDescending(t => t.val);
 
         string temp_dep = "";
 
@@ -697,7 +697,7 @@ public class GlobalFunctions
 
         _all_reports.Where(c => c.location_id == null || !c.location_id.HasValue).ToList().ForEach(c => c.location_id = 0);
 
-        var groups = _all_reports.GroupBy(s => s.location_id).Select(s => new { key = s.Key.Value, val = s.Count() });
+        var groups = _all_reports.GroupBy(s => s.location_id).Select(s => new { key = s.Key.Value, val = s.Count() }).OrderByDescending( t=>t.val);
 
         company_location temp_cm;
         string temp_loc = "";
@@ -907,7 +907,7 @@ public class GlobalFunctions
         List<report_relationship> _all_relations = db.report_relationship.Where(item => (_report_ids.Contains(item.report_id))).ToList();
         _all_relations.Where(c => c.company_relationship_id == null || !c.company_relationship_id.HasValue).ToList().ForEach(c => c.company_relationship_id = 0);
 
-        var groups = _all_relations.GroupBy(s => s.company_relationship_id).Select(s => new { key = s.Key, val = s.Count() });
+        var groups = _all_relations.GroupBy(s => s.company_relationship_id).Select(s => new { key = s.Key, val = s.Count() }).OrderByDescending(t => t.val);
      
         string temp_rel = "";
         company_relationship temp_c_rel;
@@ -951,7 +951,7 @@ public class GlobalFunctions
 
         List<report_secondary_type> _all_types = db.report_secondary_type.Where(item => (_report_ids.Contains(item.report_id))).ToList();
      
-        var groups = _all_types.GroupBy(s => s.secondary_type_id).Select(s => new { key = s.Key, val = s.Count() });
+        var groups = _all_types.GroupBy(s => s.secondary_type_id).Select(s => new { key = s.Key, val = s.Count() }).OrderByDescending(t => t.val);
 
         string temp_sec_type = "";
         company_secondary_type temp_c_sec_type;
