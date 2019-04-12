@@ -87,8 +87,12 @@ html, body {
 }
 #dashboard .RootCauseAnalysis-roudChart__title {
     text-align: left;
-    font-family: 'OpenSans-Semibold';
-    font-size: 18px;
+    font-family: 'OpenSans-Regular';
+    font-size: 12px;
+    color: #3c3e3f;
+}
+.RootCauseAnalysis-roudChart__title {
+    padding-left: 10px;
 }
 #dashboard .percentage {
     font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
@@ -4062,14 +4066,12 @@ body .blockTodayContant .itemLegend .headerLegend span {
 .RootCauseAnalysis-roudChart {
 }
 
-.RootCauseAnalysis-roudChart__title {
-    padding-left: 10px;
-}
-
 .RootCauseAnalysis-roudChart__count {
-    font-size: 14pt;
+    font-size: 18px;
     font-weight: bold;
-    text-align: right;
+    text-align: left;
+    font-family: 'OpenSans-Semibold';
+    color: #3c3e3f;
 }
 
 body .positionText .dropMenuText,
@@ -4697,7 +4699,6 @@ body .bigBlock .blockLinesItem p {
 ==================AnalyticsNew====================
 =======================================================*/
 
-
 .breadcrumbsClean {
     margin-bottom: 35px;
 }
@@ -4714,16 +4715,23 @@ body .bigBlock .blockLinesItem p {
 
 .fluidTitle {
     padding: 50px 20px;
-    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+    font-family: 'OpenSans-Light';
     font-size: 16px;
 }
 
     .fluidTitle strong {
-        font-family: 'OpenSans-semibold', arial, verdana, sans-serif;
+        font-family: 'OpenSans-Regular';
+        color: #3c3e3f;
+        font-size: 16px;
     }
 
 .cases-TotalStatistics {
     padding-bottom: 60px;
+}
+.cases-TotalStatistics__numberOfCases strong {
+    font-family: 'OpenSans-Semibold';
+    font-size: 24px;
+    color: #3c3e3f;
 }
 
 .cases-TotalStatistics__numberOfCases {
@@ -4758,7 +4766,7 @@ body .bigBlock .blockLinesItem p {
 .cases-TotalStatistics__titleColored-text {
     display: inline-block;
     vertical-align: middle;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 18px;
     color: #3c3e3f;
     font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
@@ -4852,7 +4860,7 @@ body .bigBlock .blockLinesItem p {
     font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
     font-size: 10px;
     text-transform: uppercase;
-    color: #aeb3b4;
+    color: #727c7e;
     float: left;
 }
 
@@ -5028,8 +5036,9 @@ body .bigBlock .blockLinesItem p {
 .case-MainContent-HeaderLinks__itemText {
     float: left;
     font-size: 10px;
-    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+    font-family: 'OpenSans-Semibold';
     text-transform: uppercase;
+    color: #727c7e;
 }
 
 .case-MainContent-hr {

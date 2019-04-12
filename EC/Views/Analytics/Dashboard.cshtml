@@ -43,8 +43,8 @@
     <div class="container mainNavigationTabs__tabContent-container ">
         <div id="mainTab-Cases" class="mainNavigationTabs__tabContent active">
 
-            <div class="fluidTitle" style="font-family: 'OpenSans-Light';">
-                <strong style="color: #3c3e3f; font-family: 'OpenSans-Semibold';">@GlobalRes.Number_cases_stage:</strong> @_today
+            <div class="fluidTitle">
+                <strong>@GlobalRes.Number_cases_stage:</strong> @_today
             </div>
 
 
@@ -245,13 +245,15 @@
                             </div>*@
 
                         <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in DepartmentsData">
-                            <div class="col-7 p-0">
+                            <div class="col-8 p-0">
                                 <div class="ng-binding RootCauseAnalysis-roudChart__title" style="margin-bottom: 10px; padding-left: 10px; border-left: solid 10px {{chartColors[$index]}}">
                                     {{item.name}}
                                 </div>
                             </div>
-                            <div class="col-5 RootCauseAnalysis-roudChart__count">
+                            <div class="col-2 RootCauseAnalysis-roudChart__count">
                                 {{item.val}}
+                            </div>
+                            <div class="col-2 RootCauseAnalysis-roudChart__count">
                                 <spam class="percentage">{{item.percentage}}%</spam>
                             </div>
                         </div>
@@ -269,13 +271,15 @@
 
                             </div>*@
                         <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in LocationData">
-                            <div class="col-7 p-0">
+                            <div class="col-8 p-0">
                                 <div class="ng-binding RootCauseAnalysis-roudChart__title" style="margin-bottom: 10px; padding-left: 10px; border-left: solid 10px {{chartColors[$index]}}">
                                     {{item.name}}
                                 </div>
                             </div>
-                            <div class="col-5 RootCauseAnalysis-roudChart__count">
+                            <div class="col-2 RootCauseAnalysis-roudChart__count">
                                 {{item.val}}
+                            </div>
+                            <div class="col-2 RootCauseAnalysis-roudChart__count">
                                 <spam class="percentage">{{item.percentage}}%</spam>
                             </div>
                         </div>
@@ -293,13 +297,15 @@
                                 </div>
                             </div>*@
                         <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in TypesOfReporterData">
-                            <div class="col-7 p-0">
+                            <div class="col-8 p-0">
                                 <div class="ng-binding RootCauseAnalysis-roudChart__title" style="margin-bottom: 10px; padding-left: 10px; border-left: solid 10px {{chartColors[$index]}}">
                                     {{item.name}}
                                 </div>
                             </div>
-                            <div class="col-5 RootCauseAnalysis-roudChart__count">
+                            <div class="col-2 RootCauseAnalysis-roudChart__count">
                                 {{item.val}}
+                            </div>
+                            <div class="col-2 RootCauseAnalysis-roudChart__count">
                                 <spam class="percentage">{{item.percentage}}%</spam>
                             </div>
                         </div>
@@ -317,13 +323,15 @@
                                     </div>
                             </div>*@
                         <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in TypesOfIncidentData">
-                            <div class="col-7 p-0">
+                            <div class="col-8 p-0">
                                 <div class="ng-binding RootCauseAnalysis-roudChart__title" style="margin-bottom: 10px; padding-left: 10px; border-left: solid 10px {{chartColors[$index]}}">
                                     {{item.name}}
                                 </div>
                             </div>
-                            <div class="col-5 RootCauseAnalysis-roudChart__count">
+                            <div class="col-2 RootCauseAnalysis-roudChart__count">
                                 {{item.val}}
+                            </div>
+                            <div class="col-2 RootCauseAnalysis-roudChart__count">
                                 <spam class="percentage">{{item.percentage}}%</spam>
                             </div>
                         </div>
@@ -353,8 +361,8 @@
                 <div class="case-MainContent-main ng-scope">
                     <div id="bar"></div>
                 </div>
-                <div class="fluidTitle" style="font-family: 'OpenSans-Light';">
-                    <strong style="color: #3c3e3f; font-family: 'OpenSans-Semibold';">
+                <div class="fluidTitle">
+                    <strong>
                         Number of cases that exceeded turnaround time
                     </strong>
                 </div>
@@ -401,13 +409,15 @@
                     <div class="col-4 center" id="behavioralFactors">
                         <nvd3 id="behavioralFactors" options="behavioralFactors" data="chartData1" api="api1"></nvd3>
                         <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in chartData1">
-                            <div class="col-7 p-0">
+                            <div class="col-8 p-0">
                                 <div class="ng-binding RootCauseAnalysis-roudChart__title" style="margin-bottom: 10px; padding-left: 10px; border-left: solid 10px {{chartColors[$index]}}">
                                     {{item.name}}
                                 </div>
                             </div>
-                            <div class="col-5 RootCauseAnalysis-roudChart__count">
+                            <div class="col-2 RootCauseAnalysis-roudChart__count">
                                 {{item.val}}
+                            </div>
+                            <div class="col-2 RootCauseAnalysis-roudChart__count">
                                 <spam class="percentage">{{item.percentage}}%</spam>
                             </div>
                         </div>
@@ -415,27 +425,34 @@
                     <div class="col-4 center" id="externalInfluences">
                         <nvd3 id="externalInfluences" options="externalInfluences" data="chartData2" api="api2"></nvd3>
                         <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in chartData2">
-                            <div class="col-7 p-0">
+                            <div class="col-8 p-0">
                                 <div class="ng-binding RootCauseAnalysis-roudChart__title" style="margin-bottom: 10px; padding-left: 10px; border-left: solid 10px {{chartColors[$index]}}">
                                     {{item.name}}
                                 </div>
                             </div>
-                            <div class="col-5 RootCauseAnalysis-roudChart__count">
-                                {{item.val}}
-                                <spam class="percentage">{{item.percentage}}%</spam>
+                            <div class="col-4">
+                                <div class="col-6 RootCauseAnalysis-roudChart__count">
+                                    {{item.val}}
+                                </div>
+                                <div class="col-6 RootCauseAnalysis-roudChart__count">
+                                    <spam class="percentage">{{item.percentage}}%</spam>
+                                </div>
                             </div>
+
                         </div>
                     </div>
                     <div class="col-4 center" id="organizationalInfluences">
                         <nvd3 id="organizationalInfluences" options="organizationalInfluences" data="chartData3" api="api3"></nvd3>
                         <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in chartData3">
-                            <div class="col-7 p-0">
+                            <div class="col-8 p-0">
                                 <div class="ng-binding RootCauseAnalysis-roudChart__title" style="margin-bottom: 10px; padding-left: 10px; border-left: solid 10px {{chartColors[$index]}}">
                                     {{item.name}}
                                 </div>
                             </div>
-                            <div class="col-5 RootCauseAnalysis-roudChart__count">
+                            <div class="col-2 RootCauseAnalysis-roudChart__count">
                                 {{item.val}}
+                            </div>
+                            <div class="col-2 RootCauseAnalysis-roudChart__count">
                                 <spam class="percentage">{{item.percentage}}%</spam>
                             </div>
                         </div>

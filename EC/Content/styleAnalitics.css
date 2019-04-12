@@ -680,8 +680,10 @@ h2, h3 {
 }
 #dashboard .nvd3.nv-pie .nv-pie-title {
     font-size: 12px !important;
-    color: black !important;
-    fill: black !important;
+    color: #3c3e3f !important;
+    fill: #3c3e3f !important;
+    text-transform: uppercase;
+    font-family: 'OpenSans-Bold' !important;
 }
 
 @media print {
