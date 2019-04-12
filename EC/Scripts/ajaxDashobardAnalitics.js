@@ -44,7 +44,6 @@
                 $scope.chartData3 = addPercentageRoundGraph.setPercentage(response.data.Organizational);
 
                 $scope.chartColors = ['#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472'];
-
                 function returnGraph() {
                     var chart = {
                         type: 'pieChart',
@@ -66,22 +65,36 @@
                     };
                     return chart;
                 }
-                $scope.behavioralFactors = {
-                    chart: returnGraph()
-                };
-                $scope.behavioralFactors.chart.title = "Behavioral Factors";
-                $scope.externalInfluences = {
-                    chart: returnGraph()
-                };
 
-                $scope.organizationalInfluences = {
-                    chart: returnGraph()
-                };
+                if ($scope.chartData1.length == 0) {
+                    $scope.behavioralFactorsValues = true;
+                } else {
+                    $scope.behavioralFactors = {
+                        chart: returnGraph()
+                    };
+                    $scope.behavioralFactors.chart.title = "Behavioral Factors";
+                    $scope.behavioralFactors.chart.noData = "No cases found";
+                }
 
-                $scope.externalInfluences.chart.title = "External Influences";
-                $scope.externalInfluences.title = "External Influences";
+                if ($scope.chartData2.length == 0) {
+                    $scope.externalInfluencesValues = true;
+                } else {
+                    $scope.externalInfluences = {
+                        chart: returnGraph()
+                    };
+                    $scope.externalInfluences.chart.title = "External Influences";
+                    $scope.externalInfluences.chart.noData = "No cases found";
+                }
 
-                $scope.organizationalInfluences.chart.title = "Organizational Influences";
+                if ($scope.chartData3.length == 0) {
+                    $scope.organizationalInfluencesValues = true;
+                } else {
+                    $scope.organizationalInfluences = {
+                        chart: returnGraph()
+                    };
+                    $scope.organizationalInfluences.chart.title = "Organizational Influences";
+                    $scope.organizationalInfluences.chart.noData = "No cases found";
+                }
 
             }, function errorCallback(response) {
                 console.log('error');
@@ -97,12 +110,6 @@
 
             $scope.dataCases = JSON.parse(response);
             console.log('$scope.dataCases CasesController ', $scope.dataCases);
-
-            $scope.DepartmentsData = addPercentageRoundGraph.setPercentage($scope.dataCases.DepartmentTable);
-            $scope.LocationData = addPercentageRoundGraph.setPercentage($scope.dataCases.LocationTable);
-            $scope.TypesOfIncidentData = addPercentageRoundGraph.setPercentage($scope.dataCases.SecondaryTypeTable);
-            $scope.TypesOfReporterData = addPercentageRoundGraph.setPercentage($scope.dataCases.RelationTable);
-
             function returnGraph() {
                 var chart = {
                     type: 'pieChart',
@@ -128,27 +135,46 @@
                 };
                 return chart;
             }
-
-            $scope.containerDepartments = {
-                chart: returnGraph()
-            };
-
-            $scope.containerLocation = {
-                chart: returnGraph()
-            };
-
-            $scope.containerTypesOfIncident = {
-                chart: returnGraph()
-            };
-
-            $scope.containerTypesOfReporter = {
-                chart: returnGraph()
-            };
-
-            $scope.containerDepartments.chart.title = "Departments";
-            $scope.containerLocation.chart.title = "Location";
-            $scope.containerTypesOfReporter.chart.title = "Type of reporter";
-            $scope.containerTypesOfIncident.chart.title = "Type of incident";
+            $scope.DepartmentsData = addPercentageRoundGraph.setPercentage($scope.dataCases.DepartmentTable);
+            $scope.LocationData = addPercentageRoundGraph.setPercentage($scope.dataCases.LocationTable);
+            $scope.TypesOfIncidentData = addPercentageRoundGraph.setPercentage($scope.dataCases.SecondaryTypeTable);
+            $scope.TypesOfReporterData = addPercentageRoundGraph.setPercentage($scope.dataCases.RelationTable);
+            if ($scope.DepartmentsData.length == 0) {
+                $scope.containerDepartmentsValues = true;
+            } else {
+                $scope.containerDepartments = {
+                    chart: returnGraph()
+                };
+                $scope.containerDepartments.chart.title = "Departments";
+                $scope.containerDepartments.chart.noData = "No cases found";
+            }
+            if ($scope.LocationData.length == 0) {
+                $scope.locationDataValues = true;
+            } else {
+                $scope.containerLocation = {
+                    chart: returnGraph()
+                };
+                $scope.containerLocation.chart.title = "Location";
+                $scope.containerLocation.chart.noData = "No cases found";
+            }
+            if ($scope.TypesOfIncidentData.length == 0) {
+                $scope.typesOfIncidentDataValues = true;
+            } else {
+                $scope.containerTypesOfIncident = {
+                    chart: returnGraph()
+                };
+                $scope.containerTypesOfIncident.chart.title = "Type of incident";
+                $scope.containerTypesOfIncident.chart.noData = "No cases found";
+            }
+            if ($scope.TypesOfReporterData.length == 0) {
+                $scope.typesOfReporterDataValues = true;
+            } else {
+                $scope.containerTypesOfReporter = {
+                    chart: returnGraph()
+                };
+                $scope.containerTypesOfReporter.chart.title = "Type of reporter";
+                $scope.containerTypesOfReporter.chart.noData = "No cases found";
+            }
         });
     });
 
