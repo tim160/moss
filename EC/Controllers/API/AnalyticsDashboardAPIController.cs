@@ -42,7 +42,7 @@ namespace EC.Controllers.API
                     id = x.Key,
                     name = company_behavioral.FirstOrDefault(z => z.id == x.Key)?.name_en,
                     val = x.Count()
-                })
+                }).OrderByDescending(x => x.val)
                 .ToList();
 
 
@@ -54,7 +54,7 @@ namespace EC.Controllers.API
                     id = x.Key,
                     name = company_external.FirstOrDefault(z => z.id == x.Key)?.name_en,
                     val = x.Count()
-                })
+                }).OrderByDescending(x => x.val)
                 .ToList();
 
             var organizational = reportInfo
@@ -65,7 +65,7 @@ namespace EC.Controllers.API
                     id = x.Key,
                     name = company_organizational.FirstOrDefault(z => z.id == x.Key)?.name_en,
                     val = x.Count()
-                })
+                }).OrderByDescending(x => x.val)
                 .ToList();
 
             //var secondaryTypes = DB.company_secondary_type.Where(x => x.company_id == user.company_id).ToList();
