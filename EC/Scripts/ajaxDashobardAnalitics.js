@@ -179,37 +179,48 @@
     });
 
     app.controller('CaseManagamentTime', function ($scope) {
-        //var data = [
-        //    {
-        //        process: 'sales',
-        //        stage: 'visit',
-        //        count: 100
-        //    },
-        //    {
-        //        process: 'sales',
-        //        stage: 'trial',
-        //        count: 50
-        //    },
-        //    {
-        //        process: 'sales',
-        //        stage: 'buy',
-        //        count: 15
-        //    },
-        //    {
-        //        process: 'sales',
-        //        stage: 'go away',
-        //        count: -7
-        //    }
-        //];
-        //var Ratio = require("Taucharts");
-        //var chart = new Ratio.Chart({
-        //    type: 'horizontal-stacked-bar',
-        //    y: 'process',
-        //    x: 'count',
-        //    color: 'stage',
-        //    data: data
-        //});
-        //chart.renderTo(document.getElementById('bar'));
+        //var months = ['Jan 2016'];
+        var columnData = [
+            ['account1buy', 1],
+            ['account1sell', 2],
+            ['account2buy', 13],
+            ['account2sell', 9],
+        ];
+        $scope.chart1 = c3.generate({
+            bindto: '#responseTime',
+            data: {
+                columns: columnData,
+                type: 'bar',
+
+                groups: [['account1buy', 'account1sell', 'account2buy', 'account2sell']],
+            },
+            bar: {
+                width: {
+                    ratio: 0.35 // this makes bar width 50% of length between ticks
+                }
+                // or
+                //width: 100 // this makes bar width 100px
+            },
+            axis: {
+                rotated: true,
+                x: {
+                    type: 'category',
+                    padding: {
+                        left: 0,
+                        right: 0,
+                        top: -10,
+                        bottom: -10
+                    }
+                    //,categories: months,
+                },
+            },
+            size: {
+                height: 100
+            },
+            legend: {
+                show: false
+            }
+        });
     });
 
     app.controller('NumberCasesTurnaroundTime', function ($scope, getTurnAroundTime) {
