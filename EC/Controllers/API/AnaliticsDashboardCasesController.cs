@@ -72,12 +72,20 @@ namespace EC.Controllers.API
                 miniSquareColor = "#64cd9b",
                 titleHeaderLegend = "Awaiting Sign-Off",
             });
+            var CaseManagamentTime = new[]
+            {
+                new {Name = "Under Inves", value = 1 },  //WARNING Under Inves
+                new {Name = "Report Review", value = 2 },
+                new {Name = "Awaiting Sign-Off", value = 9 },
+                new {Name = "New Report", value = 13 }
+            };
 
-            //var resultObj = new
-            //{
-            //    turnaroundTime = resultAroundTime
-            //};
-            return ResponseObject2Json(resultAroundTime);
+            var resultobj = new
+            {
+                resultAroundTime = resultAroundTime,
+                CaseManagamentTime = CaseManagamentTime
+            };
+            return ResponseObject2Json(resultobj);
         }
     }
     class TodaySnapshot
