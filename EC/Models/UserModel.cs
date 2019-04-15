@@ -1296,5 +1296,46 @@ namespace EC.Models
       }
       return _array;
     }
-    }
+
+        public int[] AnalyticsCasesArrayByDate(DateTime? _start)
+        {
+          DateTime _real_start;
+
+          if (_start.HasValue)
+            _real_start = _start.Value;
+          else
+            _real_start = new DateTime(2019, 1, 1);
+
+          List<report> _all_reports = ReportsSearch(_user.company_id, 0);
+          var _all_reports_ids = _all_reports.Select(t => t.id);
+          int[] _array = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+          if (!_start.HasValue)
+          {
+            for (int i = 0; i < _array.Length; i++)
+            {
+              _array[i] = _all_reports.Where(t => t.status_id == i + 1).Count();
+            }
+          }
+          else
+          {
+            _all_reports = _all_reports.Where(t => t.reported_dt <= _real_start).ToList();
+
+            var refGroupInvestigationStatuses = (from m in db.report_investigation_status
+                                                 where _all_reports_ids.Contains(m.report_id) && m.created_date <= _real_start
+                                                 group m by m.report_id into refGroup
+                                                 select refGroup.OrderByDescending(x => x.id).FirstOrDefault());
+            for (int i = 0; i < _array.Length; i++)
+            {
+              _array[i] = (from m in refGroupInvestigationStatuses
+                           where m.investigation_status_id == i + 1
+                           select m.report_id).Count();
+            }
+
+            // var statuses_list = db.report_investigation_status.Where(item => ((_all_reports_ids.Contains(item.report_id) && (item.investigation_status_id == i))).FirstOrDefault();
+
+          }
+          return _array;
+        }
+  }
 }

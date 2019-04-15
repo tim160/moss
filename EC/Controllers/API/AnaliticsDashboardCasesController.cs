@@ -16,17 +16,20 @@ namespace EC.Controllers.API
             user user = (user)System.Web.HttpContext.Current.Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return null;
+            UserModel um = new UserModel(user.id);
+
             GlobalFunctions f = new GlobalFunctions();
 
             string[] _titleHeaderLegend = { "Spam", "New Report", "Report Review", "Under Investigation", "Awaiting Sign-Off", "Closed" };
             int[] _titleHeaderLegendIdx = { 6, 0, 1, 2, 3, 8 };
             string[] _miniSquareColor = { "#abb9bb", "#d47472", "#ff9b42", "#3099be", "#64cd9b", "#abb9bb" };
-            int[] _today_spanshot = f.AnalyticsByDate(null, null, user.company_id, user.id);
+
+            int[] _today_spanshot = um.AnalyticsCasesArrayByDate(null);
             List<TodaySnapshot> resultsnapShot = new List<TodaySnapshot>();
 
             DateTime _month_end_date = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1).AddDays(-1);
-            int[] _month_end_spanshot = f.AnalyticsByDate(null, _month_end_date, user.company_id, user.id);
-
+            int[] _month_end_spanshot = um.AnalyticsCasesArrayByDate(_month_end_date);
+       
 
             for (int i = 0; i < _titleHeaderLegend.Length; i++)
             {
@@ -35,8 +38,13 @@ namespace EC.Controllers.API
                     numberOfCases = _today_spanshot[_titleHeaderLegendIdx[i]],
                     titleHeaderLegend = _titleHeaderLegend[i],
                     miniSquareColor = _miniSquareColor[i],
-                    month_end_spanshot = _month_end_spanshot[i]
+                    month_end_spanshot = _month_end_spanshot[i],
+                    plus_minus_sign = ""
                 };
+                if (snapShot.numberOfCases > snapShot.month_end_spanshot)
+                  snapShot.plus_minus_sign = "+";
+                if (snapShot.numberOfCases < snapShot.month_end_spanshot)
+                  snapShot.plus_minus_sign = "-";
                 resultsnapShot.Add(snapShot);
             }
 
