@@ -10,7 +10,10 @@
         var promiseObj = getMenuFilterCases.getData();
         promiseObj.then(function (response) {
             $scope.MenuCases = response.data;
-
+            $scope.selectedItemClick = function ($event, clickedItem) {
+                var temp = clickedItem;
+                $event.currentTarget.classList.toggle('checked');
+            }
 
             //$(".case-DropDownList-title").click(function () {
 
