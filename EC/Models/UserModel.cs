@@ -1272,6 +1272,70 @@ namespace EC.Models
             return reports;
         }
 
+        public int[] AnalyticsCasesTurnAroundTime()
+    {
+      var allowed_statuses = new List<int> { ECGlobalConstants.investigation_status_pending, ECGlobalConstants.investigation_status_review, ECGlobalConstants.investigation_status_investigation, ECGlobalConstants.investigation_status_completed };
 
+      company company_item = db.company.Where(item => (item.id == _user.company_id)).FirstOrDefault();
+      int[] delay_allowed = new int[4];
+      delay_allowed[0] = company_item.step1_delay;
+      delay_allowed[1] = company_item.step2_delay;
+      delay_allowed[2] = company_item.step3_delay;
+      delay_allowed[3] = company_item.step4_delay;
+
+      List<report> _all_reports = ReportsSearch(_user.company_id, 0).Where(t => t.status_id != ECGlobalConstants.investigation_status_closed && t.status_id != ECGlobalConstants.investigation_status_spam).ToList();
+      var _all_reports_ids = _all_reports.Select(t => t.id);
+      int[] _array = new int[] { 0, 0, 0, 0 };
+
+
+      for (int i = 0; i < allowed_statuses.Count; i++)
+      {
+        _array[i] = _all_reports.Where(t => t.last_update_dt != null && t.status_id == allowed_statuses[i] && (int)(delay_allowed[i] - (DateTime.Today - t.last_update_dt).TotalDays) < 0).Count();
+        if (allowed_statuses[i] == ECGlobalConstants.investigation_status_pending)
+          _array[i] = _array[i] + _all_reports.Where(t => t.last_update_dt == null && t.status_id == allowed_statuses[i] && (int)(delay_allowed[i] - (DateTime.Today - t.reported_dt).TotalDays) < 0).Count();
+      }
+      return _array;
     }
+
+        public int[] AnalyticsCasesArrayByDate(DateTime? _start)
+        {
+          DateTime _real_start;
+
+          if (_start.HasValue)
+            _real_start = _start.Value;
+          else
+            _real_start = new DateTime(2019, 1, 1);
+
+          List<report> _all_reports = ReportsSearch(_user.company_id, 0);
+          var _all_reports_ids = _all_reports.Select(t => t.id);
+          int[] _array = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+          if (!_start.HasValue)
+          {
+            for (int i = 0; i < _array.Length; i++)
+            {
+              _array[i] = _all_reports.Where(t => t.status_id == i + 1).Count();
+            }
+          }
+          else
+          {
+            _all_reports = _all_reports.Where(t => t.reported_dt <= _real_start).ToList();
+
+            var refGroupInvestigationStatuses = (from m in db.report_investigation_status
+                                                 where _all_reports_ids.Contains(m.report_id) && m.created_date <= _real_start
+                                                 group m by m.report_id into refGroup
+                                                 select refGroup.OrderByDescending(x => x.id).FirstOrDefault());
+            for (int i = 0; i < _array.Length; i++)
+            {
+              _array[i] = (from m in refGroupInvestigationStatuses
+                           where m.investigation_status_id == i + 1
+                           select m.report_id).Count();
+            }
+
+            // var statuses_list = db.report_investigation_status.Where(item => ((_all_reports_ids.Contains(item.report_id) && (item.investigation_status_id == i))).FirstOrDefault();
+
+          }
+          return _array;
+        }
+  }
 }
