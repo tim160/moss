@@ -117,10 +117,10 @@ namespace EC.Controllers.API
 
             var resultObj = new
             {
-                DepartmentsList = DepartmentsList,
-                LocationsList = LocationsList,
-                SecondaryTypesList = SecondaryTypesList,
-                RelationTypesList = RelationTypesList,
+                DepartmentsList,
+                LocationsList,
+                SecondaryTypesList,
+                RelationTypesList
             };
 
             return ResponseObject2Json(resultObj);
