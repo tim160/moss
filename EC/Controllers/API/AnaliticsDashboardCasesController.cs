@@ -26,9 +26,6 @@ namespace EC.Controllers.API
 
             int[] _today_spanshot = um.AnalyticsCasesArrayByDate(null);
             List<TodaySnapshot> resultsnapShot = new List<TodaySnapshot>();
-
-            DateTime _month_end_date = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1).AddDays(-1);
-            int[] _month_end_spanshot = um.AnalyticsCasesArrayByDate(_month_end_date);
        
 
             for (int i = 0; i < _titleHeaderLegend.Length; i++)
@@ -37,14 +34,8 @@ namespace EC.Controllers.API
                 {
                     numberOfCases = _today_spanshot[_titleHeaderLegendIdx[i]],
                     titleHeaderLegend = _titleHeaderLegend[i],
-                    miniSquareColor = _miniSquareColor[i],
-                    month_end_spanshot = _month_end_spanshot[i],
-                    plus_minus_sign = ""
+                    miniSquareColor = _miniSquareColor[i]
                 };
-                if (snapShot.numberOfCases > snapShot.month_end_spanshot)
-                  snapShot.plus_minus_sign = "+";
-                if (snapShot.numberOfCases < snapShot.month_end_spanshot)
-                  snapShot.plus_minus_sign = "-";
                 resultsnapShot.Add(snapShot);
             }
 
@@ -112,7 +103,5 @@ namespace EC.Controllers.API
         public int numberOfCases { get; set; }
         public String miniSquareColor { get; set; }
         public String titleHeaderLegend { get; set; }
-        public int month_end_spanshot { get; set; }
-       public string plus_minus_sign { get; set; }
-  }
+    }
 }

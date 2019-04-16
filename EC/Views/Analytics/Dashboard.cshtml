@@ -29,7 +29,7 @@
 <link href="~/Content/libs/graph/c3.min.css" rel="stylesheet" />
 <link href="~/Content/daterangepickerAnalit.css" rel="stylesheet" />
 
-<input type="hidden" id="user_id" value="@user_id" />?
+<input type="hidden" id="user_id" value="@user_id" />
 <input type="hidden" id="dateStart" value="" />
 <input type="hidden" id="dateEnd" value="" />
 
@@ -59,7 +59,6 @@
                     <div class="col-2" ng-repeat="snapShot in _today_spanshot">
                         <div class="cases-TotalStatistics__numberOfCases">
                             <strong>{{snapShot.numberOfCases}}</strong>
-                            <span class="cases-TotalStatistics__numberOfCases-changed color-CasesSpam" style="color: {{snapShot.miniSquareColor}};">({{snapShot.plus_minus_sign}}{{snapShot.month_end_spanshot}})</span>
                         </div>
                         <div class="cases-TotalStatistics__titleColored clearfix">
                             <div class="cases-TotalStatistics__titleColored-color color-CasesSpam" style="background-color: {{snapShot.miniSquareColor}};"></div>
