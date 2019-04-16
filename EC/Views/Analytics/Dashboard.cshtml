@@ -164,22 +164,22 @@
                             <div class="col-3 filterCases-dropBlock__contentCol">
                                 <ul class="case-DropDownList black" ng-repeat="location in MenuCases.LocationsList">
                                     <!--this is location-->
-                                    <li class="case-DropDownList-li clearfix" ng-click="selectedItemClick($event, model.value)">
-                                        <input type="hidden" value="{{location.Item2}}" />
+                                    <li class="case-DropDownList-li clearfix checked" ng-click="selectedItemClick($event, location.id)">
+                                        <input type="hidden" value="{{location.id}}" />
                                         <div class="case-DropDownList-li__icon"></div>
                                         <div class="case-DropDownList-li__text">
-                                            {{location.Item1}}
+                                            {{location.location_en}}
                                         </div>
                                     </li>
                                 </ul>
                             </div><!-- / .col-3 filterCases-dropBlock__contentCol -->
                             <div class="col-3 filterCases-dropBlock__contentCol">
                                 <ul class="case-DropDownList black" ng-repeat="department in MenuCases.DepartmentsList">
-                                    <li class="case-DropDownList-li clearfix" ng-click="selectedItemClick($event, model.value)">
+                                    <li class="case-DropDownList-li clearfix checked" ng-click="selectedItemClick($event, department.id)">
                                         <input type="hidden" value="{{department.Item2}}" />
                                         <div class="case-DropDownList-li__icon"></div>
                                         <div class="case-DropDownList-li__text">
-                                            {{department.Item1}}
+                                            {{department.department_en}}
                                         </div>
                                     </li>
                                 </ul>
@@ -187,11 +187,11 @@
 
                             <div class="col-3 filterCases-dropBlock__contentCol">
                                 <ul class="case-DropDownList black" ng-repeat="incident in MenuCases.RelationTypesList">
-                                    <li class="case-DropDownList-li clearfix" ng-click="selectedItemClick($event, model.value)">
-                                        <input type="hidden" value="{{incident.Item2}}" />
+                                    <li class="case-DropDownList-li clearfix checked" ng-click="selectedItemClick($event, incident.id)">
+                                        <input type="hidden" value="{{incident.id}}" />
                                         <div class="case-DropDownList-li__icon"></div>
                                         <div class="case-DropDownList-li__text">
-                                            {{incident.Item1}}
+                                            {{incident.relationship_en}}
                                         </div>
                                     </li>
                                 </ul>
@@ -199,11 +199,11 @@
 
                             <div class="col-3 filterCases-dropBlock__contentCol">
                                 <ul class="case-DropDownList black" ng-repeat="reporter in MenuCases.SecondaryTypesList">
-                                    <li class="case-DropDownList-li clearfix" ng-click="selectedItemClick($event, model.value)">
-                                        <input type="hidden" value="{{reporter.Item2}}" />
+                                    <li class="case-DropDownList-li clearfix checked" ng-click="selectedItemClick($event, reporter.id)">
+                                        <input type="hidden" value="{{reporter.id}}" />
                                         <div class="case-DropDownList-li__icon"></div>
                                         <div class="case-DropDownList-li__text">
-                                            {{reporter.Item1}}
+                                            {{reporter.secondary_type_en}}
                                         </div>
                                     </li>
                                 </ul>
