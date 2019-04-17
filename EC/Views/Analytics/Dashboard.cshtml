@@ -219,7 +219,7 @@
 
         </div><!-- mainNavigationTabs__tabContent -->
         <div class="container" id="dashboard">
-            <div class="case-MainContent container" style="min-height: 1500px">
+            <div class="case-MainContent container" style="min-height: 1300px">
                 <div class="case-MainContent-Header clearfix">
                     <div class="case-MainContent-Header__left clearfix">
                         <div class="case-MainContent-Header__leftTitle">
@@ -237,7 +237,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="case-MainContent-main" >
+                <div class="case-MainContent-main">
                     <div class="col-3 center">
                         <nvd3 id="containerDepartments" options="containerDepartments" data="DepartmentsData" api="apiDeparments"></nvd3>
                         <div class="caseNofound" style="position: relative" ng-show="containerDepartmentsValues">
@@ -342,10 +342,13 @@
 
                     </div>
                 </div><!--end case-MainContent-main-->
+                
             </div>
-            <div class="case-MainContent-hr"></div>
+
             <div class="case-MainContent container" ng-controller="CaseManagamentTime">
+
                 <div class="case-MainContent-Header clearfix">
+                    <div class="case-MainContent-hr"></div>
                     <div class="case-MainContent-Header__left clearfix">
                         <div class="case-MainContent-Header__leftTitle">
                             Cases Management Turnaround Time
@@ -362,6 +365,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <div class="fluidTitle">
                     <strong>
                         Response Time Settings by Stage
@@ -379,7 +383,7 @@
                     </strong>
                 </div>
 
-                <div class="container cases-TotalStatistics" >
+                <div class="container cases-TotalStatistics">
                     <div class="row clearfix">
                         <div class="col-3" ng-repeat="snapShot in turnaroundTime">
                             <div class="cases-TotalStatistics__numberOfCases">

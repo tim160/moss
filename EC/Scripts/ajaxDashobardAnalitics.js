@@ -8,7 +8,7 @@
         incident_type: [],
         reporter_type: []
     };
-    var app = angular.module('EC', ['nvd3']);
+    var app = angular.module('EC');
 
 
 
@@ -92,6 +92,9 @@
                         chart: returnGraph()
                     };
                     $scope.containerTypesOfIncident.chart.title = "Type of incident";
+                    //$scope.containerTypesOfIncident.chart.insert('tspan').text('Type of').attr('dy', 0).attr('x', 0).attr('class', 'big-font');
+                    //$scope.containerTypesOfIncident.chart.insert('tspan').text('incident').attr('dy', 20).attr('x', 0);
+
                     $scope.containerTypesOfIncident.chart.noData = "No cases found";
                 }
                 if ($scope.TypesOfReporterData.length == 0) {
