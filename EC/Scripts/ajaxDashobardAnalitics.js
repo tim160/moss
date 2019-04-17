@@ -2,30 +2,16 @@
 (function () {
 
     'use strict';
+    var arraySelectedItems = {
+        location: [],
+        department: [],
+        incident_type: [],
+        reporter_type: []
+    };
     var app = angular.module('EC', ['nvd3']);
 
 
 
-    app.controller('MenuCases', function ($scope, getMenuFilterCases) {
-        var promiseObj = getMenuFilterCases.getData();
-        promiseObj.then(function (response) {
-            $scope.MenuCases = response.data;
-            $scope.selectedItemClick = function ($event, clickedItem) {
-                var temp = clickedItem;
-                $event.currentTarget.classList.toggle('checked');
-            }
-
-            //$(".case-DropDownList-title").click(function () {
-
-            //    $(".case-DropDownList-title").not(this).next(".case-DropDownList-contentBlock").hide("fast");
-            //    $(".case-DropDownList-title").not(this).parent(".case-TotalHeader__items").removeClass("selected");
-
-            //    $(this).next(".case-DropDownList-contentBlock").toggle("fast");
-            //    $(this).parent(".case-TotalHeader__items").toggleClass("selected");
-            //});
-
-        });
-    });
     app.controller('Today_spanshot', function ($scope, AnalyticsByDate) {
         var promiseObj = AnalyticsByDate.getData();
         promiseObj.then(function (response) {
@@ -33,80 +19,93 @@
         });
     });
     
-    app.controller('CasesController', function ($scope, getCasesService, addPercentageRoundGraph) {
-
-        var promiseObj = getCasesService.getData();
+    app.controller('CasesController', function ($scope, getCasesService, addPercentageRoundGraph, getMenuFilterCases) {
+        var promiseObj = getMenuFilterCases.getData();
         promiseObj.then(function (response) {
-            $scope.chartColors = ['#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472', '#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472', '#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472'];
+            $scope.MenuCases = response.data;
+            $scope.selectedItemClick = function ($event, clickedItemId, menu) {
+                if (arraySelectedItems[menu].indexOf(clickedItemId) == -1) {
+                    arraySelectedItems[menu].push(clickedItemId);
+                } else {
+                    arraySelectedItems[menu].splice(arraySelectedItems[menu].indexOf(clickedItemId), 1);
+                }
+                
+                $event.currentTarget.classList.toggle('checked');
+                updateGraph();
+            }
 
-            $scope.dataCases = JSON.parse(response);
-            console.log('$scope.dataCases CasesController ', $scope.dataCases);
-            function returnGraph() {
-                var chart = {
-                    type: 'pieChart',
-                    donut: true,
-                    donutRatio: 0.55,
-                    labelThreshold: .05,
-                    x: function (d) {
-                        return d.name;
-                    },
-                    y: function (d) {
-                        return d.val;
-                    },
-
-                    //valueFormat: function (d) {
-                    //    d3.format('.3s');
-                    //},
-                    height: 500,
-                    showLabels: false,
-                    color: $scope.chartColors,
-                    duration: 500,
-                    labelSunbeamLayout: true,
-                    showLegend: false,
-                };
-                return chart;
-            }
-            $scope.DepartmentsData = addPercentageRoundGraph.setPercentage($scope.dataCases.DepartmentTable);
-            $scope.LocationData = addPercentageRoundGraph.setPercentage($scope.dataCases.LocationTable);
-            $scope.TypesOfIncidentData = addPercentageRoundGraph.setPercentage($scope.dataCases.SecondaryTypeTable);
-            $scope.TypesOfReporterData = addPercentageRoundGraph.setPercentage($scope.dataCases.RelationTable);
-            if ($scope.DepartmentsData.length == 0) {
-                $scope.containerDepartmentsValues = true;
-            } else {
-                $scope.containerDepartments = {
-                    chart: returnGraph()
-                };
-                $scope.containerDepartments.chart.title = "Departments";
-                $scope.containerDepartments.chart.noData = "No cases found";
-            }
-            if ($scope.LocationData.length == 0) {
-                $scope.locationDataValues = true;
-            } else {
-                $scope.containerLocation = {
-                    chart: returnGraph()
-                };
-                $scope.containerLocation.chart.title = "Location";
-                $scope.containerLocation.chart.noData = "No cases found";
-            }
-            if ($scope.TypesOfIncidentData.length == 0) {
-                $scope.typesOfIncidentDataValues = true;
-            } else {
-                $scope.containerTypesOfIncident = {
-                    chart: returnGraph()
-                };
-                $scope.containerTypesOfIncident.chart.title = "Type of incident";
-                $scope.containerTypesOfIncident.chart.noData = "No cases found";
-            }
-            if ($scope.TypesOfReporterData.length == 0) {
-                $scope.typesOfReporterDataValues = true;
-            } else {
-                $scope.containerTypesOfReporter = {
-                    chart: returnGraph()
-                };
-                $scope.containerTypesOfReporter.chart.title = "Type of reporter";
-                $scope.containerTypesOfReporter.chart.noData = "No cases found";
-            }
         });
+        (function updateGraph() {
+            var promiseObj = getCasesService.getData(arraySelectedItems);
+            promiseObj.then(function (response) {
+                $scope.chartColors = ['#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472', '#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472', '#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472'];
+
+                $scope.dataCases = JSON.parse(response);
+                console.log('$scope.dataCases CasesController ', $scope.dataCases);
+                function returnGraph() {
+                    var chart = {
+                        type: 'pieChart',
+                        donut: true,
+                        donutRatio: 0.55,
+                        labelThreshold: .05,
+                        x: function (d) {
+                            return d.name;
+                        },
+                        y: function (d) {
+                            return d.val;
+                        },
+                        height: 500,
+                        showLabels: false,
+                        color: $scope.chartColors,
+                        duration: 500,
+                        labelSunbeamLayout: true,
+                        showLegend: false,
+                    };
+                    return chart;
+                }
+                $scope.DepartmentsData = addPercentageRoundGraph.setPercentage($scope.dataCases.DepartmentTable);
+                $scope.LocationData = addPercentageRoundGraph.setPercentage($scope.dataCases.LocationTable);
+                $scope.TypesOfIncidentData = addPercentageRoundGraph.setPercentage($scope.dataCases.SecondaryTypeTable);
+                $scope.TypesOfReporterData = addPercentageRoundGraph.setPercentage($scope.dataCases.RelationTable);
+                if ($scope.DepartmentsData.length == 0) {
+                    $scope.containerDepartmentsValues = true;
+                } else {
+                    $scope.containerDepartments = {
+                        chart: returnGraph()
+                    };
+                    $scope.containerDepartments.chart.title = "Departments";
+                    $scope.containerDepartments.chart.noData = "No cases found";
+                }
+                if ($scope.LocationData.length == 0) {
+                    $scope.locationDataValues = true;
+                } else {
+                    $scope.containerLocation = {
+                        chart: returnGraph()
+                    };
+                    $scope.containerLocation.chart.title = "Location";
+                    $scope.containerLocation.chart.noData = "No cases found";
+                }
+                if ($scope.TypesOfIncidentData.length == 0) {
+                    $scope.typesOfIncidentDataValues = true;
+                } else {
+                    $scope.containerTypesOfIncident = {
+                        chart: returnGraph()
+                    };
+                    $scope.containerTypesOfIncident.chart.title = "Type of incident";
+                    $scope.containerTypesOfIncident.chart.noData = "No cases found";
+                }
+                if ($scope.TypesOfReporterData.length == 0) {
+                    $scope.typesOfReporterDataValues = true;
+                } else {
+                    $scope.containerTypesOfReporter = {
+                        chart: returnGraph()
+                    };
+                    $scope.containerTypesOfReporter.chart.title = "Type of reporter";
+                    $scope.containerTypesOfReporter.chart.noData = "No cases found";
+                }
+            });
+        })();
+
     });
 
     app.controller('CaseManagamentTime', function ($scope, getTurnAroundTime) {
@@ -160,9 +159,22 @@
 
     app.factory('getCasesService', function ($http, $q) {
         return {
-            getData: function (companyId, userId) {
+            getData: function (arraySelectedItems) {
                 var deffered = $q.defer();
-                $http({ method: 'POST', data: { companyId: companyId, userId: userId }, url: '/Analytics/CompanyDepartmentReportAdvanced' })
+                var types = {
+                    ReportsDepartmentIDStringss:[],
+                    ReportsLocationIDStrings:[],
+                    dateStart:[],
+                    dateEnd:[]
+                };
+                var ReportsDepartmentIDStringss = arraySelectedItems.department;
+
+                //types['ReportsDepartmentIDStringss'] = 
+                types['ReportsLocationIDStrings'] = arraySelectedItems.location;
+                types['dateStart'] = [];
+                types['dateEnd'] = [];
+
+                $http({ method: 'POST', data: { ReportsDepartmentIDStringss  }, url: '/Analytics/CompanyDepartmentReportAdvanced' })
                     .then(function success(response) {
                       deffered.resolve(response.data);
                       //console.log('getCasesService ', response.data);

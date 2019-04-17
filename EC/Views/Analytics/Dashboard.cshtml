@@ -46,7 +46,7 @@
     @Html.Partial("~/Views/Analytics/AnalyticsMenu.cshtml")
 
 
-    <div class="container mainNavigationTabs__tabContent-container ">
+    <div class="container mainNavigationTabs__tabContent-container" ng-controller="CasesController">
         <div id="mainTab-Cases" class="mainNavigationTabs__tabContent active">
 
             <div class="fluidTitle">
@@ -69,7 +69,7 @@
             </div><!-- /.container cases-TotalStatistics -->
 
 
-            <div class="container cases-TotalHeader clearfix" ng-controller="MenuCases">
+            <div class="container cases-TotalHeader clearfix">
                 <div class="case-TotalHeader__items timeFilterCases clearfix">
                     <div class="case-DropDownList-title clearfix">
                         <div class="case-DropDownList-title__text clearfix">data range</div>
@@ -163,7 +163,7 @@
                             <div class="col-3 filterCases-dropBlock__contentCol">
                                 <ul class="case-DropDownList black" ng-repeat="location in MenuCases.LocationsList">
                                     <!--this is location-->
-                                    <li class="case-DropDownList-li clearfix checked" ng-click="selectedItemClick($event, location.id)">
+                                    <li class="case-DropDownList-li clearfix checked" ng-click="selectedItemClick($event, location.id, 'location')">
                                         <input type="hidden" value="{{location.id}}" />
                                         <div class="case-DropDownList-li__icon"></div>
                                         <div class="case-DropDownList-li__text">
@@ -174,7 +174,7 @@
                             </div><!-- / .col-3 filterCases-dropBlock__contentCol -->
                             <div class="col-3 filterCases-dropBlock__contentCol">
                                 <ul class="case-DropDownList black" ng-repeat="department in MenuCases.DepartmentsList">
-                                    <li class="case-DropDownList-li clearfix checked" ng-click="selectedItemClick($event, department.id)">
+                                    <li class="case-DropDownList-li clearfix checked" ng-click="selectedItemClick($event, department.id, 'department')">
                                         <input type="hidden" value="{{department.Item2}}" />
                                         <div class="case-DropDownList-li__icon"></div>
                                         <div class="case-DropDownList-li__text">
@@ -186,7 +186,7 @@
 
                             <div class="col-3 filterCases-dropBlock__contentCol">
                                 <ul class="case-DropDownList black" ng-repeat="incident in MenuCases.RelationTypesList">
-                                    <li class="case-DropDownList-li clearfix checked" ng-click="selectedItemClick($event, incident.id)">
+                                    <li class="case-DropDownList-li clearfix checked" ng-click="selectedItemClick($event, incident.id, 'incident')">
                                         <input type="hidden" value="{{incident.id}}" />
                                         <div class="case-DropDownList-li__icon"></div>
                                         <div class="case-DropDownList-li__text">
@@ -198,7 +198,7 @@
 
                             <div class="col-3 filterCases-dropBlock__contentCol">
                                 <ul class="case-DropDownList black" ng-repeat="reporter in MenuCases.SecondaryTypesList">
-                                    <li class="case-DropDownList-li clearfix checked" ng-click="selectedItemClick($event, reporter.id)">
+                                    <li class="case-DropDownList-li clearfix checked" ng-click="selectedItemClick($event, reporter.id, 'reporter')">
                                         <input type="hidden" value="{{reporter.id}}" />
                                         <div class="case-DropDownList-li__icon"></div>
                                         <div class="case-DropDownList-li__text">
@@ -237,7 +237,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="case-MainContent-main" ng-controller="CasesController">
+                <div class="case-MainContent-main" >
                     <div class="col-3 center">
                         <nvd3 id="containerDepartments" options="containerDepartments" data="DepartmentsData" api="apiDeparments"></nvd3>
                         <div class="caseNofound" style="position: relative" ng-show="containerDepartmentsValues">
