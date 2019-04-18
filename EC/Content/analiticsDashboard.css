@@ -99,7 +99,9 @@ html, body {
     color: #abb9bb;
     font-size: 14px;
 }
-
+.disablePaddingRight {
+    padding-right: 0px!important;
+}
 .container p {
     margin: 0 0 10px 0;
 }
@@ -4069,7 +4071,7 @@ body .blockTodayContant .itemLegend .headerLegend span {
 .RootCauseAnalysis-roudChart__count {
     font-size: 18px;
     font-weight: bold;
-    text-align: left;
+    text-align: right;
     font-family: 'OpenSans-Semibold';
     color: #3c3e3f;
 }
