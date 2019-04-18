@@ -28,7 +28,7 @@ namespace EC.Controllers.API
                 return null;
             }
 
-            var posters = DB.poster.AsNoTracking().ToList();
+            var posters = DB.poster.Where(t => t.status == 2).AsNoTracking().ToList();
             var messages = DB.message_posters.AsNoTracking().ToList();
 
             try
@@ -36,7 +36,7 @@ namespace EC.Controllers.API
                 var m = new
                 {
 
-                    posters = DB.poster
+                    posters = DB.poster.Where(t => t.status == 2)
                         .ToList()
                         .Select(x => new {
                             poster = x,
