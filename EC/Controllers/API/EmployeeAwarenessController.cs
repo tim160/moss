@@ -36,7 +36,7 @@ namespace EC.Controllers.API
                 var m = new
                 {
 
-                    posters = DB.poster
+                    posters = DB.poster.Where(t => t.status == 2)
                         .ToList()
                         .Select(x => new {
                             poster = x,
