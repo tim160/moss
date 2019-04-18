@@ -118,9 +118,20 @@
             $scope.turnaroundTime = response.data.resultAroundTime;
             $scope.CaseManagamentTime = response.data.CaseManagamentTime;
             var columnData = [];
+            var barData = [0];
+            var anotherBar = [];
+            var previousElement = 0;
             $scope.CaseManagamentTime.forEach(function (element) {
                 columnData.push([element.Name, element.value]);
+                barData.push(element.value);
             });
+            barData = barData.sort();
+            barData.forEach(function (element) {
+                previousElement = previousElement + element;
+                anotherBar.push([previousElement]);
+            });
+            //console.log("response.data.CaseManagamentTime " + response.data.CaseManagamentTime);
+            //console.log("barData " + barData);
             $scope.chartColors = ['#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472', '#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472', '#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472'];
 
             $scope.chart1 = c3.generate({
@@ -146,10 +157,13 @@
                     rotated: true,
                     x: {
                         type: 'category',
+
+                    }, 
+                    y: {
                         tick: {
-                            values: [ 2, 5, 60]
+                            values: anotherBar
                         }
-                    },
+                    }
                 },
                 color: $scope.chartColors,
                 size: {
