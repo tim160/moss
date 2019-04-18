@@ -13,10 +13,10 @@
 
 
     app.controller('Today_spanshot', function ($scope, AnalyticsByDate) {
-        var promiseObj = AnalyticsByDate.getData();
-        promiseObj.then(function (response) {
-            $scope._today_spanshot = response.data._today_spanshot;
-        });
+        //var promiseObj = AnalyticsByDate.getData();
+        //promiseObj.then(function (response) {
+        //    $scope._today_spanshot = response.data._today_spanshot;
+        //});
     });
     
     app.controller('CasesController', function ($scope, getCasesService, addPercentageRoundGraph, getMenuFilterCases) {
@@ -55,6 +55,7 @@
                             return d.val;
                         },
                         height: 500,
+                        format: "",
                         showLabels: false,
                         color: $scope.chartColors,
                         duration: 500,
@@ -117,9 +118,22 @@
             $scope.turnaroundTime = response.data.resultAroundTime;
             $scope.CaseManagamentTime = response.data.CaseManagamentTime;
             var columnData = [];
+            var barData = [0];
+            var anotherBar = [];
+            var previousElement = 0;
             $scope.CaseManagamentTime.forEach(function (element) {
                 columnData.push([element.Name, element.value]);
+                barData.push(element.value);
             });
+            barData = barData.sort();
+            barData.forEach(function (element) {
+                previousElement = previousElement + element;
+                anotherBar.push([previousElement]);
+            });
+            //console.log("response.data.CaseManagamentTime " + response.data.CaseManagamentTime);
+            //console.log("barData " + barData);
+            $scope.chartColors = ['#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472', '#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472', '#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472'];
+
             $scope.chart1 = c3.generate({
                 bindto: '#responseTime',
                 data: {
@@ -134,7 +148,7 @@
                 },
                 bar: {
                     width: {
-                        ratio: 0.35 // this makes bar width 50% of length between ticks
+                        ratio: 1 // this makes bar width 50% of length between ticks
                     }
                     // or
                     //width: 100 // this makes bar width 100px
@@ -143,10 +157,17 @@
                     rotated: true,
                     x: {
                         type: 'category',
-                    },
+
+                    }, 
+                    y: {
+                        tick: {
+                            values: anotherBar
+                        }
+                    }
                 },
+                color: $scope.chartColors,
                 size: {
-                    height: 100
+                    height: 50
                 },
                 legend: {
                     show: false
