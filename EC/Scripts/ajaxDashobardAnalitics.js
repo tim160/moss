@@ -6,17 +6,18 @@
         location: [],
         department: [],
         incident_type: [],
-        reporter_type: []
+        reporter_type: [],
+        data_range: []
     };
     var app = angular.module('EC');
 
 
 
     app.controller('Today_spanshot', function ($scope, AnalyticsByDate) {
-        //var promiseObj = AnalyticsByDate.getData();
-        //promiseObj.then(function (response) {
-        //    $scope._today_spanshot = response.data._today_spanshot;
-        //});
+        var promiseObj = AnalyticsByDate.getData();
+        promiseObj.then(function (response) {
+            $scope._today_spanshot = response.data._today_spanshot;
+        });
     });
     
     app.controller('CasesController', function ($scope, getCasesService, addPercentageRoundGraph, getMenuFilterCases) {
@@ -29,11 +30,13 @@
                 } else {
                     arraySelectedItems[menu].splice(arraySelectedItems[menu].indexOf(clickedItemId), 1);
                 }
-                
                 $event.currentTarget.classList.toggle('checked');
                 updateGraph();
             }
-
+            $scope.dataRangeClick = function ($event, clickedItemId) {
+                arraySelectedItems["data_range"] = clickedItemId;
+                updateGraph();
+            }
         });
         updateGraph();
         function updateGraph() {
@@ -185,24 +188,9 @@
         return {
             getData: function (arraySelectedItems) {
                 var deffered = $q.defer();
-                var types = {
-                    ReportsDepartmentIDStringss:[],
-                    ReportsLocationIDStrings:[],
-                    dateStart:[],
-                    dateEnd:[]
-                };
-                var ReportsDepartmentIDStringss = arraySelectedItems.department;
-
-                //types['ReportsDepartmentIDStringss'] = 
-                types['ReportsLocationIDStrings'] = arraySelectedItems.location;
-                types['dateStart'] = [];
-                types['dateEnd'] = [];
-
-                $http({ method: 'POST', data: { ReportsDepartmentIDStringss  }, url: '/Analytics/CompanyDepartmentReportAdvanced' })
+                $http({ method: 'POST', data: { arraySelectedItems  }, url: '/Analytics/CompanyDepartmentReportAdvanced' })
                     .then(function success(response) {
                       deffered.resolve(response.data);
-                      //console.log('getCasesService ', response.data);
-
                     }, function error(response) {
                         deffered.reject(response.status);
                     });
