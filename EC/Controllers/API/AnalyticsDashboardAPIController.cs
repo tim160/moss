@@ -93,27 +93,18 @@ namespace EC.Controllers.API
             if (user == null || user.id == 0)
                 return null;
 
-            //var resultObj = new
-            //{
-            //    DepartmentsList = f.DepartmentsListDistinct(user.company_id, user.id),
-            //    LocationsListNew = DB.company_location.Where(c => c.company_id == user.company_id),
-            //    LocationsList = f.LocationsListDistinct(user.company_id, user.id),
-            //    DepartmentsListNew = DB.company_department.Where(c => c.company_id == user.company_id),
-            //    SecondaryTypesList = f.SecondaryTypesListDistinct(user.company_id, user.id),
-            //    RelationTypesList = f.RelationTypesListDistinct(user.company_id, user.id),
-            //};
             CompanyModel model = new CompanyModel();
-            var DepartmentsList = model.CompanyDepartments(user.company_id);
-            DepartmentsList.Add(new company_department { id = 0, department_en = LocalizationGetter.GetString("Not Listed") });
+            var DepartmentsList = model.CompanyDepartments(user.company_id).Select(x => new { x.id, x.department_en }).ToList();
+            DepartmentsList.Add(new { id = 0, department_en = LocalizationGetter.GetString("Not Listed") });
 
-            var LocationsList = model.Locations(user.company_id);
-            LocationsList.Add(new company_location { id = 0, location_en = LocalizationGetter.GetString("Other") });
+            var LocationsList = model.Locations(user.company_id).Select(x => new { x.id, x.location_en }).ToList();
+            LocationsList.Add(new { id = 0, location_en = LocalizationGetter.GetString("Other") });
 
-            var SecondaryTypesList = DB.company_secondary_type.Where(s => s.company_id == user.company_id).OrderBy(t => t.secondary_type_en).ToList();
-            SecondaryTypesList.Add(new company_secondary_type { id = 0, secondary_type_en = LocalizationGetter.GetString("Other") });
+            var SecondaryTypesList = DB.company_secondary_type.Where(s => s.company_id == user.company_id).Select(m => new { m.id, m.secondary_type_en }).OrderBy(t => t.secondary_type_en).ToList();
+            SecondaryTypesList.Add(new { id = 0, secondary_type_en = LocalizationGetter.GetString("Other") });
 
-            var RelationTypesList = DB.company_relationship.Where(s => s.company_id == user.company_id).OrderBy(t => t.relationship_en).ToList();
-            RelationTypesList.Add(new company_relationship { id = 0, relationship_en = LocalizationGetter.GetString("Other") });
+            var RelationTypesList = DB.company_relationship.Where(s => s.company_id == user.company_id).Select(m => new { m.id, m.relationship_en }).OrderBy(t => t.relationship_en).ToList();
+            RelationTypesList.Add(new { id = 0, relationship_en = LocalizationGetter.GetString("Other") });
 
             var resultObj = new
             {
