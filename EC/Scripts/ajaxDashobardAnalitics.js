@@ -35,7 +35,8 @@
             }
 
         });
-        (function updateGraph() {
+        updateGraph();
+        function updateGraph() {
             var promiseObj = getCasesService.getData(arraySelectedItems);
             promiseObj.then(function (response) {
                 $scope.chartColors = ['#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472', '#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472', '#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472'];
@@ -108,8 +109,7 @@
                     $scope.containerTypesOfReporter.chart.noData = "No cases found";
                 }
             });
-        })();
-
+        };
     });
 
     app.controller('CaseManagamentTime', function ($scope, getTurnAroundTime) {
