@@ -259,6 +259,9 @@
                 if (sum > 0) {
                     array.forEach(function (element) {
                         element.percentage = Math.round((element.val * 100) / sum);
+                        if (element.percentage == 0) {
+                            element.percentage = 0.01;
+                        }
                     });
                 }
                 return array;
