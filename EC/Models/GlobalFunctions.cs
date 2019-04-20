@@ -588,56 +588,59 @@ public class GlobalFunctions
         {
             _all_reports_old = _all_reports_old.Where(t => t.reported_dt.Date >= dtReportCreationStartDate.Value.Date).ToList();
         }
+
         if (dtReportCreationEndDate.HasValue)
         {
             _all_reports_old = _all_reports_old.Where(t => t.reported_dt.Date <= dtReportCreationEndDate.Value.Date).ToList();
         }
-
         List<report> _all_reports = new List<report>();
+
         #region Get the list of ReportIDs allowed
+
         List<int> ReportsSecondaryTypesIDs = new List<int>();
+
         List<int> ReportsRelationTypesIDs = new List<int>();
+
         List<int> ReportsDepartmentIDs = new List<int>();
+
         List<int> ReportsLocationIDs = new List<int>();
+
+
 
         if (ReportsSecondaryTypesIDStrings.Trim().Length > 0)
             ReportsSecondaryTypesIDs = ReportsSecondaryTypesIDStrings.Split(',').Select(Int32.Parse).ToList();
+
         if (ReportsRelationTypesIDStrings.Trim().Length > 0)
             ReportsRelationTypesIDs = ReportsRelationTypesIDStrings.Split(',').Select(Int32.Parse).ToList();
+
         if (ReportsDepartmentIDStringss.Trim().Length > 0)
             ReportsDepartmentIDs = ReportsDepartmentIDStringss.Split(',').Select(Int32.Parse).ToList();
+
         if (ReportsLocationIDStrings.Trim().Length > 0)
             ReportsLocationIDs = ReportsLocationIDStrings.Split(',').Select(Int32.Parse).ToList();
 
-        bool _flag1 = true;
-        bool _flag2 = true;
-        bool _flag3 = true;
-        bool _flag4 = true;
-        bool _flag5 = true;
-        bool _flag6 = true;
-
-        foreach (report _report in _all_reports_old)
+        if (ReportsDepartmentIDs.Count > 0)
         {
-            _flag1 = true;
-            _flag2 = true;
-            _flag3 = true;
-            _flag4 = true;
-            _flag5 = true;
-            _flag6 = true;
-            if ((ReportsSecondaryTypesIDs.Count > 0) && (!ReportsSecondaryTypesIDs.Contains(_report.id)))
-                _flag1 = false;
-            if ((ReportsRelationTypesIDs.Count > 0) && (!ReportsRelationTypesIDs.Contains(_report.id)))
-                _flag2 = false;
-            if ((ReportsDepartmentIDs.Count > 0) && (!ReportsDepartmentIDs.Contains(_report.id)))
-                _flag3 = false;
-            if ((ReportsLocationIDs.Count > 0) && (!ReportsLocationIDs.Contains(_report.id)))
-                _flag4 = false;
-            if ((dtReportCreationStartDate.HasValue) && (dtReportCreationStartDate.Value.Date >= _report.reported_dt.Date))
-                _flag5 = false;
-            if ((dtReportCreationEndDate.HasValue) && (dtReportCreationEndDate.Value.Date <= _report.reported_dt.Date))
-                _flag6 = false;
-            if (_flag1 & _flag2 && _flag3 & _flag4 && _flag5 & _flag6)
-                _all_reports.Add(_report);
+            var report_from_departments = db.report_department.Where(t => ReportsDepartmentIDs.Contains(t.department_id)).Select(t => t.report_id);
+            //_all_reports_old = _all_reports_old.Where(report_from_departments.Contains(t.id)).ToList();
+            _all_reports_old = _all_reports_old.Where(t => report_from_departments.Any(report => report == t.id)).ToList();
+        }
+        if (ReportsRelationTypesIDs.Count > 0)
+        {
+            var report_from_relation_type = db.report_relationship.Where(t => ReportsRelationTypesIDs.Contains(t.relationship_id.Value)).Select(t => t.report_id);
+            //_all_reports_old = _all_reports_old.Where(report_from_relation_type.Contains(t.id)).ToList();
+            _all_reports_old = _all_reports_old.Where(t => report_from_relation_type.Any(report => report == t.id)).ToList();
+        }
+        if (ReportsSecondaryTypesIDs.Count > 0)
+        {
+            var report_from_secondary_type = db.report_secondary_type.Where(t => ReportsSecondaryTypesIDs.Contains(t.secondary_type_id)).Select(t => t.report_id);
+            _all_reports_old = _all_reports_old.Where(t => report_from_secondary_type.Contains(t.id)).ToList();
+        }
+
+        if (ReportsLocationIDs.Count > 0)
+        {
+            //_all_reports_old = _all_reports_old.Where(t => ReportsLocationIDs.Contains(t.location_id)).ToList();
+            _all_reports_old = _all_reports_old.Where(t => ReportsLocationIDs.Any( report => report == t.location_id)).ToList();
         }
         #endregion
 
@@ -654,7 +657,7 @@ public class GlobalFunctions
 
         List<int> report_ids_list = _all_reports.Select(t => t.id).ToList();
         List<report_department> departmentsList = db.report_department.Where(t => report_ids_list.Contains(t.report_id)).ToList();
-    
+
         var groups = departmentsList.GroupBy(s => s.department_id).Select(s => new { key = s.Key, val = s.Count() }).OrderByDescending(t => t.val);
 
         string temp_dep = "";
@@ -694,7 +697,7 @@ public class GlobalFunctions
 
         _all_reports.Where(c => c.location_id == null || !c.location_id.HasValue).ToList().ForEach(c => c.location_id = 0);
 
-        var groups = _all_reports.GroupBy(s => s.location_id).Select(s => new { key = s.Key.Value, val = s.Count() }).OrderByDescending( t=>t.val);
+        var groups = _all_reports.GroupBy(s => s.location_id).Select(s => new { key = s.Key.Value, val = s.Count() }).OrderByDescending(t => t.val);
 
         company_location temp_cm;
         string temp_loc = "";
@@ -721,7 +724,7 @@ public class GlobalFunctions
                 dt.Rows.Add(dr);
             }
         }
-       
+
         return dt;
     }
 
@@ -903,7 +906,7 @@ public class GlobalFunctions
         _all_relations.Where(c => c.company_relationship_id == null || !c.company_relationship_id.HasValue).ToList().ForEach(c => c.company_relationship_id = 0);
 
         var groups = _all_relations.GroupBy(s => s.company_relationship_id).Select(s => new { key = s.Key, val = s.Count() }).OrderByDescending(t => t.val);
-     
+
         string temp_rel = "";
         company_relationship temp_c_rel;
         DataRow dr;
@@ -943,7 +946,7 @@ public class GlobalFunctions
         DataTable dt = dtDoughnutTable();
 
         List<report_secondary_type> _all_types = db.report_secondary_type.Where(item => (_report_ids.Contains(item.report_id))).ToList();
-     
+
         var groups = _all_types.GroupBy(s => s.secondary_type_id).Select(s => new { key = s.Key, val = s.Count() }).OrderByDescending(t => t.val);
 
         string temp_sec_type = "";
@@ -974,7 +977,7 @@ public class GlobalFunctions
 
         return dt;
     }
-   
+
     public int[] AnalyticsByDateAdvanced(DateTime? _start, DateTime? _end, int company_id, int user_id, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
     {
         //List<string> result = names.Split(',').ToList();
@@ -1162,21 +1165,21 @@ public class GlobalFunctions
 
     public string ReportAdvancedJson(int company_id, int user_id, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
     {
-    ///   int[] _today_spanshot = AnalyticsByDateAdvanced(null, null, company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
+        ///   int[] _today_spanshot = AnalyticsByDateAdvanced(null, null, company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
 
-    //   DateTime _month_end_date = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1).AddDays(-1);
-    //   int[] _month_end_spanshot = AnalyticsByDateAdvanced(null, _month_end_date, company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
+        //   DateTime _month_end_date = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1).AddDays(-1);
+        //   int[] _month_end_spanshot = AnalyticsByDateAdvanced(null, _month_end_date, company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
 
-    List<report> _all_reports = ReportsListForCompany(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
+        List<report> _all_reports = ReportsListForCompany(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
 
-    string _all_json = "{\"LocationTable\":" + CompanyLocationReportAdvancedJson(_all_reports, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate)
-            + ", \"DepartmentTable\":" + CompanyDepartmentReportAdvancedJson(_all_reports, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate)
-            + ", \"RelationTable\":" + RelationshipToCompanyByDateAdvancedJson(_all_reports, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate)
-            + ", \"SecondaryTypeTable\":" + SecondaryTypesByDateAdvancedJson(_all_reports, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate)
-        ///    + ", \"AverageStageDaysTable\":" + AverageStageDaysAdvancedJson(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate)
-        ///    + ", \"TodaySnapshotTable\":" + JsonUtil.ListToJsonWithJavaScriptSerializer(new List<int>(_today_spanshot))
-         ///   + ", \"MonthEndSnapshotTable\":" + JsonUtil.ListToJsonWithJavaScriptSerializer(new List<int>(_month_end_spanshot))
-         ///   + ", \"AnalyticsTimeline\":" + AnalyticsTimelineAdvancedJson(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate)
+        string _all_json = "{\"LocationTable\":" + CompanyLocationReportAdvancedJson(_all_reports, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate)
+                + ", \"DepartmentTable\":" + CompanyDepartmentReportAdvancedJson(_all_reports, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate)
+                + ", \"RelationTable\":" + RelationshipToCompanyByDateAdvancedJson(_all_reports, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate)
+                + ", \"SecondaryTypeTable\":" + SecondaryTypesByDateAdvancedJson(_all_reports, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate)
+            ///    + ", \"AverageStageDaysTable\":" + AverageStageDaysAdvancedJson(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate)
+            ///    + ", \"TodaySnapshotTable\":" + JsonUtil.ListToJsonWithJavaScriptSerializer(new List<int>(_today_spanshot))
+            ///   + ", \"MonthEndSnapshotTable\":" + JsonUtil.ListToJsonWithJavaScriptSerializer(new List<int>(_month_end_spanshot))
+            ///   + ", \"AnalyticsTimeline\":" + AnalyticsTimelineAdvancedJson(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate)
             + "}";
 
         return _all_json;
@@ -1314,7 +1317,7 @@ public class GlobalFunctions
 
     #region Analytics Helpers List = Menu items
 
-   /// Secondary Types - Menu
+    /// Secondary Types - Menu
     public List<Tuple<string, string>> SecondaryTypesListDistinct(int company_id, int user_id)
     {
         List<Tuple<string, string>> return_array = new List<Tuple<string, string>>();
@@ -1361,10 +1364,10 @@ public class GlobalFunctions
             return_array.Add(new Tuple<string, string>(_temp_company_rel.relationship_en, string.Join(",", report_ids_by_rel_id.ToArray())));
         }
 
-       // if (relation_ids.Contains(0) )
+        // if (relation_ids.Contains(0) )
         {
             List<int> report_ids_by_rel_id = db.report_relationship.Where(item => (_report_ids.Contains(item.report_id) && (item.company_relationship_id == 0 || !item.company_relationship_id.HasValue))).Select(item => item.report_id).ToList();
-            if(report_ids_by_rel_id.Count > 0)
+            if (report_ids_by_rel_id.Count > 0)
                 return_array.Add(new Tuple<string, string>(GlobalRes.Other, string.Join(",", report_ids_by_rel_id.ToArray())));
         }
 
@@ -1579,9 +1582,9 @@ public class GlobalFunctions
         return String.Format("The password should be at least {0} characters long", PasswordLength.ToString());
     }
 
-    public void CampusSecurityAlertEmail(int user_from,report report, Uri uri, ECEntities db, string email)
+    public void CampusSecurityAlertEmail(int user_from, report report, Uri uri, ECEntities db, string email)
     {
-     ////   return;
+        ////   return;
         IEmailAddressHelper m_EmailHelper = new EmailAddressHelper();
         EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(true);
         EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, uri.AbsoluteUri.ToLower());
@@ -1590,7 +1593,7 @@ public class GlobalFunctions
         if ((user_to != null) && (email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(email.Trim()))
         {
             string phone = $"{user_to.phone}";
-            if(string.IsNullOrEmpty(phone))
+            if (string.IsNullOrEmpty(phone))
                 phone = $"{user_to.email}";
 
             eb.CampusSecurityAlert(
@@ -1635,7 +1638,7 @@ public class GlobalFunctions
                 );
             this.SaveEmailBeforeSend(0, user_pm.id, user_pm.company_id, email, ConfigurationManager.AppSettings["emailFrom"], "",
                GlobalRes.CampusSecurityAlert, eb.Body, false, 0);
-            
+
         }
     }
     public string Photo_Path_String(string photo_path, int param, int photo_user_role)
@@ -1660,10 +1663,10 @@ public class GlobalFunctions
             }
             finally
             {
-              if (response != null)
-              {
-                response.Close();
-              }
+                if (response != null)
+                {
+                    response.Close();
+                }
             }
         }
 
@@ -1680,7 +1683,7 @@ public class GlobalFunctions
             }
             else if (param == 2)
             {
-                _photo_path = base_url +"/Content/Icons/settingsPersonalNOPhoto.png";
+                _photo_path = base_url + "/Content/Icons/settingsPersonalNOPhoto.png";
             }
             else if (param == 3)
             {
@@ -1694,7 +1697,7 @@ public class GlobalFunctions
         return _photo_path;
     }
 
-    public bool SaveEmailBeforeSend(int user_id_from, int user_id_to,  int company_id, string to, string from, string cc, string subject, string msg, bool send, int email_type)
+    public bool SaveEmailBeforeSend(int user_id_from, int user_id_to, int company_id, string to, string from, string cc, string subject, string msg, bool send, int email_type)
     {
         var email = new email
         {
@@ -1702,7 +1705,7 @@ public class GlobalFunctions
             From = from,
             cc = cc,
             Title = subject,
-             Body = msg,
+            Body = msg,
             EmailType = email_type,
             is_sent = false,
             user_id_from = user_id_from,
