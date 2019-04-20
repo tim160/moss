@@ -227,17 +227,18 @@
                         </div>
                     </div>
                     <div class="case-MainContent-Header__right clearfix">
-                        <div class="case-MainContent-HeaderLinks clearfix">
-                            <a href="#" class="case-MainContent-HeaderLinks__item expertLink clearfix">
+                        <div class="case-MainContent-HeaderLinks clearfix" ng-click="printGraphs('printCases', 'Cases')" style="cursor: pointer">
+                            <div class="case-MainContent-HeaderLinks__item expertLink clearfix">
                                 <div class="case-MainContent-HeaderLinks__itemIcon"></div>
                                 <div class="case-MainContent-HeaderLinks__itemText">
-                                    Export PDF
+                                    @*Export PDF*@
+                                    Print
                                 </div>
-                            </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="case-MainContent-main">
+                <div class="case-MainContent-main" id="printCases">
                     <div class="col-3 center">
                         <nvd3 id="containerDepartments" options="containerDepartments" data="DepartmentsData" api="apiDeparments"></nvd3>
                         <div class="caseNofound" style="position: relative" ng-show="containerDepartmentsValues">
@@ -345,7 +346,7 @@
                 
             </div>
 
-            <div class="case-MainContent container" ng-controller="CaseManagamentTime">
+            <div class="case-MainContent container" ng-controller="CaseManagamentTime" id="printResponseTime">
 
                 <div class="case-MainContent-Header clearfix">
                     <div class="case-MainContent-hr"></div>
@@ -355,13 +356,14 @@
                         </div>
                     </div>
                     <div class="case-MainContent-Header__right clearfix">
-                        <div class="case-MainContent-HeaderLinks clearfix">
-                            <a href="#" class="case-MainContent-HeaderLinks__item expertLink clearfix">
+                        <div class="case-MainContent-HeaderLinks clearfix" ng-click="printGraphs('printResponseTime', 'Cases Management Turnaround Time')" style="cursor: pointer">
+                            <div class="case-MainContent-HeaderLinks__item expertLink clearfix">
                                 <div class="case-MainContent-HeaderLinks__itemIcon"></div>
                                 <div class="case-MainContent-HeaderLinks__itemText">
-                                    Export PDF
+                                    @*Export PDF*@
+                                    Print
                                 </div>
-                            </a>
+                            </div>
                         </div>
                     </div>
                 </div>
