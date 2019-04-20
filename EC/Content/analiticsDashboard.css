@@ -4852,7 +4852,7 @@ body .bigBlock .blockLinesItem p {
     z-index: 200;
 }
 
-.case-DropDownList-title {
+.case-DropDownList-title, .case-DropDownList-titleNotClick {
     float: right;
     padding: 20px 10px;
     cursor: pointer;
