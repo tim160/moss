@@ -207,7 +207,15 @@
         return {
             getData: function (arraySelectedItems) {
                 var deffered = $q.defer();
-                $http({ method: 'POST', data: { arraySelectedItems  }, url: '/Analytics/CompanyDepartmentReportAdvanced' })
+                $http({
+                    method: 'POST', data: {
+                        "ReportsSecondaryTypesIDStrings": arraySelectedItems.reporter_type.join(),
+                        "ReportsRelationTypesIDStrings": arraySelectedItems.incident_type.join(),
+                        "ReportsDepartmentIDStringss": arraySelectedItems.department.join(),
+                        "ReportsLocationIDStrings": arraySelectedItems.location.join(),
+                        "data_range": arraySelectedItems.data_range
+                    }, url: '/Analytics/CompanyDepartmentReportAdvanced'
+                })
                     .then(function success(response) {
                       deffered.resolve(response.data);
                     }, function error(response) {
