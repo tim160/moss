@@ -136,6 +136,7 @@
                         <div class="case-DropDownList-title__text clearfix">Filter Cases</div>
                         <div class="case-DropDownList-title__arrow clearfix"></div>
                     </div>
+                    <!--dropdown menu-->
                     <div class="filterCases-dropBlock case-DropDownList-contentBlock  clearfix">
                         <div class="filterCases-dropBlock__titleRow row clearfix">
                             <div class="col-3">
@@ -213,6 +214,7 @@
 
                         </div>
                     </div>
+                    <!--dropdown menu end-->
                 </div>
 
                 <!--print all graphs-->
@@ -249,7 +251,7 @@
                     </div>
                 </div>
                 <div class="case-MainContent-main" id="printCases" style="display: flex">
-                    <div class="center" style="width: 25%">
+                    <div class="center widthForPrint">
                         <nvd3 id="containerDepartments" options="containerDepartments" data="DepartmentsData" api="apiDeparments"></nvd3>
                         <div class="caseNofound" style="position: relative" ng-show="containerDepartmentsValues">
                             <div class="caseNofound__title">
@@ -274,7 +276,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="center" style="width: 25%">
+                    <div class="center widthForPrint">
                         <nvd3 id="containerLocation" options="containerLocation" data="LocationData" api="apiLocation"></nvd3>
 
                         <div class="caseNofound" style="position: relative;" ng-show="locationDataValues">
@@ -300,7 +302,7 @@
                         </div>
 
                     </div>
-                    <div class="center" style="width: 25%">
+                    <div class="center widthForPrint">
                         <nvd3 id="containerTypesOfReporter" options="containerTypesOfReporter" data="TypesOfReporterData" api="apiTypeOfReporter"></nvd3>
 
                         <div class="caseNofound" style="position: relative;" ng-show="typesOfReporterDataValues">
@@ -325,7 +327,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="center" style="width: 25%">
+                    <div class="center widthForPrint">
                         <nvd3 id="containerTypesOfIncident" options="containerTypesOfIncident" data="TypesOfIncidentData" api="apiTypesOfIncident"></nvd3>
 
                         <div class="caseNofound" style="position: relative;" ng-show="typesOfIncidentDataValues">
