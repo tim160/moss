@@ -211,8 +211,8 @@ namespace EC.Controllers
 
         public ActionResult CompanyDepartmentReportAdvanced(ReportTypes types)
         {
-            //user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
-            user user = db.user.Find(2);
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+ 
             if (user != null)
             {
                 DateTime dt1 = new DateTime(2014, 8, 1);

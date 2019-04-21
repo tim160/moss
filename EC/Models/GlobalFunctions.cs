@@ -644,7 +644,7 @@ public class GlobalFunctions
         }
         #endregion
 
-        return _all_reports;
+        return _all_reports_old;
     }
 
     #region Analytics Helpers - new version
