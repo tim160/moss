@@ -84,10 +84,10 @@ namespace EC.Controllers.API
             CompanyModel cm = new CompanyModel(um._user.company_id);
             var CaseManagamentTime = new[]
             {
-                new {Name = "Under Inves", value = cm._company.step3_delay },  //WARNING Under Inves
+                new {Name = "New Report", value = cm._company.step1_delay },
                 new {Name = "Report Review", value = cm._company.step2_delay },
-                new {Name = "Awaiting Sign-Off", value = cm._company.step4_delay },
-                new {Name = "New Report", value = cm._company.step1_delay }
+                new {Name = "Under Inves", value = cm._company.step3_delay },  //WARNING Under Inves
+                new {Name = "Awaiting Sign-Off", value = cm._company.step4_delay }
             };
 
             var resultobj = new
