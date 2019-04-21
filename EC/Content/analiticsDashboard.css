@@ -4928,6 +4928,8 @@ body .bigBlock .blockLinesItem p {
 }
 
 .filterCases-dropBlock__contentCol {
+    max-height: 450px;
+    overflow-y: auto;
 }
 
 .case-DropDownList,
