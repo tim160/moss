@@ -50,7 +50,7 @@
                     var chart = {
                         type: 'pieChart',
                         donut: true,
-                        donutRatio: 0.55,
+                        donutRatio: 0.72,
                         labelThreshold: .05,
                         x: function (d) {
                             return d.name;
@@ -58,7 +58,8 @@
                         y: function (d) {
                             return d.val;
                         },
-                        height: 500,
+                        width: 220,
+                        height: 300,
                         format: "",
                         showLabels: false,
                         color: $scope.chartColors,
