@@ -148,23 +148,25 @@
                 columnData.push([element.Name, element.value]);
                 barData.push(element.value);
             });
-            barData = barData.sort();
+            //barData = barData.sort();
             barData.forEach(function (element) {
                 previousElement = previousElement + element;
                 anotherBar.push([previousElement]);
             });
-            //console.log("response.data.CaseManagamentTime " + response.data.CaseManagamentTime);
-            //console.log("barData " + barData);
-            $scope.chartColors = ['#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472', '#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472', '#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472'];
-
             $scope.chart1 = c3.generate({
                 bindto: '#responseTime',
                 data: {
-                    columns: $scope.CaseManagamentTime.Name,
                     columns: columnData,
                     type: 'bar',
                     labels: false,
-                    groups: [['Under Inves', 'Report Review', 'New Report', 'Awaiting Sign-Off']],
+                    groups: [['New Report', 'Report Review','Under Inves', 'Awaiting Sign-Off']],
+                    order: null,
+                    colors: {
+                        'New Report': '#d47472',
+                        'Report Review': '#ff9b42',
+                        'Under Inves': '#3099be',
+                        'Awaiting Sign-Off': '#64cd9b'
+                    },
                 },
                 point: {
                     show: false
