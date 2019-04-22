@@ -10,17 +10,13 @@
         data_range: []
     };
     var app = angular.module('EC');
-
-
-
-    app.controller('Today_spanshot', function ($scope, AnalyticsByDate) {
-        var promiseObj = AnalyticsByDate.getData();
-        promiseObj.then(function (response) {
+    
+    app.controller('CasesController', function ($scope, getCasesService, addPercentageRoundGraph, getMenuFilterCases, AnalyticsByDate) {
+        var analiticsObj = AnalyticsByDate.getData();
+        analiticsObj.then(function (response) {
             $scope._today_spanshot = response.data._today_spanshot;
         });
-    });
-    
-    app.controller('CasesController', function ($scope, getCasesService, addPercentageRoundGraph, getMenuFilterCases) {
+
         var promiseObj = getMenuFilterCases.getData();
         promiseObj.then(function (response) {
             $scope.MenuCases = response.data;
