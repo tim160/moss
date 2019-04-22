@@ -49,19 +49,19 @@
     <div class="container mainNavigationTabs__tabContent-container" ng-controller="CasesController">
         <div id="mainTab-Cases" class="mainNavigationTabs__tabContent active">
 
-            <div class="fluidTitle">
+            <div class="fluidTitle ">
                 <strong>@GlobalRes.Number_cases_stage:</strong> @_today
             </div>
 
 
             <div class="container cases-TotalStatistics" >
-                <div class="row clearfix">
+                <div class="row clearfix printPadding">
                     <div class="col-2" ng-repeat="snapShot in _today_spanshot">
                         <div class="cases-TotalStatistics__numberOfCases">
                             <strong>{{snapShot.numberOfCases}}</strong>
                         </div>
                         <div class="cases-TotalStatistics__titleColored clearfix">
-                            <div class="cases-TotalStatistics__titleColored-color color-CasesSpam" style="background-color: {{snapShot.miniSquareColor}};"></div>
+                            <div class="cases-TotalStatistics__titleColored-color color-CasesSpam" style="width: 12px; height: 12px; background-color: {{snapShot.miniSquareColor}};"></div>
                             <div class="cases-TotalStatistics__titleColored-text">{{snapShot.titleHeaderLegend}}</div>
                         </div>
                     </div>
@@ -393,7 +393,7 @@
                 </div>
                 <div class="fluidTitle">
                     <strong>
-                        Number of cases that exceeded turnaround time
+                        Number of Cases That Exceeded Turnaround Time
                     </strong>
                 </div>
 
