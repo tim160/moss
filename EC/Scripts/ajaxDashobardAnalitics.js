@@ -173,8 +173,8 @@
                 },
                 bar: {
                     width: {
-                        ratio: 1 // this makes bar width 50% of length between ticks
-                    }
+                        ratio: 1 // this makes bar width 50% of length between ticks,
+                    },
                     // or
                     //width: 100 // this makes bar width 100px
                 },
@@ -182,12 +182,14 @@
                     rotated: true,
                     x: {
                         type: 'category',
-
+                        padding: 0
                     }, 
                     y: {
                         tick: {
-                            values: anotherBar
-                        }
+                            values: anotherBar,
+                            outer: false,
+                        },
+                        padding: 0
                     }
                 },
                 color: $scope.chartColors,
