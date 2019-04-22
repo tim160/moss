@@ -139,6 +139,15 @@ html, body {
     #printResponseTime .fluidTitle {
         padding: 0px;
     }
+    .lineHeightForPrint {
+        line-height: 38px;
+    }
+    .paddingTopForPrint30 {
+        padding-top: 30px
+    }
+    .showPrintElement {
+        display: block!important;
+    }
 }
 .RootCauseAnalysis-roudChart__title {
     padding-left: 10px;

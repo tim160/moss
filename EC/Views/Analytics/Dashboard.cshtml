@@ -359,11 +359,11 @@
             </div>
 
             <div class="case-MainContent container" ng-controller="CaseManagamentTime" id="printResponseTime">
-
                 <div class="case-MainContent-Header clearfix">
                     <div class="case-MainContent-hr"></div>
-                    <div class="case-MainContent-Header__left clearfix" style="padding-top: 24px">
-                        <div class="case-MainContent-Header__leftTitle">
+                    <div class="case-MainContent-Header__left clearfix" style="padding-top: 24px;">
+
+                        <div class="case-MainContent-Header__leftTitle paddingTopForPrint30">
                             Case Management Turnaround Time
                         </div>
                     </div>
@@ -379,7 +379,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="fluidTitle">
                     <strong>
                         Response Time Settings by Stage
@@ -459,3 +459,10 @@
 </div>
 
 <script src="~/Scripts/ajaxDashobardAnalitics.js"></script>
+
+
+<div id="templateForPrinting">
+    <h1 class="lineHeightForPrint showPrintElement" style="display: none">STARK INDUSTRIES</h1>
+    <h3 class="lineHeightForPrint showPrintElement" style="display: none">EMPLOYEE CONFIDENTIAL ANALITYCS</h3>
+    <h3 class="lineHeightForPrint showPrintElement" style="display: none">@_today</h3>
+</div>

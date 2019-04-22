@@ -130,6 +130,7 @@
             mywindow.document.write('</head><body onload="window.print(); window.close()">');
             mywindow.document.write('<h1>' + title + '</h1>');
             mywindow.document.write('<div class="container">');
+            mywindow.document.write(document.getElementById("templateForPrinting").innerHTML);
             mywindow.document.write(printHtml);
             mywindow.document.write('</div></body></html>');
 
