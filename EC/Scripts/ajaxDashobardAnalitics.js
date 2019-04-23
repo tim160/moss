@@ -17,8 +17,8 @@
             $scope._today_spanshot = response.data._today_spanshot;
         });
 
-        var promiseObj = getMenuFilterCases.getData();
-        promiseObj.then(function (response) {
+        var promiseObjGetMenu = getMenuFilterCases.getData();
+        promiseObjGetMenu.then(function (response) {
             $scope.MenuCases = response.data;
             $scope.selectedItemClick = function ($event, clickedItemId, menu) {
                 if (arraySelectedItems[menu].indexOf(clickedItemId) == -1) {
@@ -71,6 +71,15 @@
                 $scope.TypesOfReporterData = addPercentageRoundGraph.setPercentage($scope.dataCases.RelationTable);
                 if ($scope.DepartmentsData.length == 0) {
                     $scope.containerDepartmentsValues = true;
+
+                    promiseObjGetMenu.then(function (response) {
+                        response.data.DepartmentsList.forEach(function (item, i, arr) {
+                            $scope.DepartmentsData.push({ name: item.department_en, val: 0, percentage: 0 });
+                        });
+                    });
+
+
+
                 } else {
                     $scope.containerDepartments = {
                         chart: returnGraph()
@@ -80,6 +89,15 @@
                 }
                 if ($scope.LocationData.length == 0) {
                     $scope.locationDataValues = true;
+
+
+                    promiseObjGetMenu.then(function (response) {
+                        response.data.LocationsList.forEach(function (item, i, arr) {
+                            $scope.LocationData.push({ name: item.location_en, val: 0, percentage: 0 });
+                        });
+                    });
+
+
                 } else {
                     $scope.containerLocation = {
                         chart: returnGraph()
@@ -89,18 +107,33 @@
                 }
                 if ($scope.TypesOfIncidentData.length == 0) {
                     $scope.typesOfIncidentDataValues = true;
+
+
+                    promiseObjGetMenu.then(function (response) {
+                        response.data.SecondaryTypesList.forEach(function (item, i, arr) {
+                            $scope.TypesOfIncidentData.push({ name: item.secondary_type_en, val: 0, percentage: 0 });
+                        });
+                    });
+
+
                 } else {
                     $scope.containerTypesOfIncident = {
                         chart: returnGraph()
                     };
                     $scope.containerTypesOfIncident.chart.title = "Type of incident";
-                    //$scope.containerTypesOfIncident.chart.insert('tspan').text('Type of').attr('dy', 0).attr('x', 0).attr('class', 'big-font');
-                    //$scope.containerTypesOfIncident.chart.insert('tspan').text('incident').attr('dy', 20).attr('x', 0);
-
                     $scope.containerTypesOfIncident.chart.noData = "No cases found";
                 }
                 if ($scope.TypesOfReporterData.length == 0) {
                     $scope.typesOfReporterDataValues = true;
+
+
+                    promiseObjGetMenu.then(function (response) {
+                        response.data.RelationTypesList.forEach(function (item, i, arr) {
+                            $scope.TypesOfReporterData.push({ name: item.relationship_en, val: 0, percentage: 0 });
+                        });
+                    });
+
+
                 } else {
                     $scope.containerTypesOfReporter = {
                         chart: returnGraph()
