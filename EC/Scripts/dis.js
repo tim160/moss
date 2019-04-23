@@ -292,6 +292,25 @@
         $scope.secondaryType = { id: 0 };
         $scope.secondaryTypes = [];
 
+        function setPercentage(array) {
+            if (toString.call(array) !== "[object Array]")
+                return false;
+
+            let sum = 0;
+            array.forEach(function (element) {
+                sum += element.count;
+            });
+            if (sum > 0) {
+                array.forEach(function (element) {
+                    element.percentage = Math.round((element.count * 100) / sum);
+                    if (element.percentage == 0) {
+                        element.percentage = 0.01;
+                    }
+                });
+            }
+            return array;
+        }
+
         $scope.refresh = function () {
             /*var types = $scope.secondaryTypes.map(function (v) {
                 return v._selected;
@@ -301,9 +320,10 @@
                     $scope.secondaryTypes = data.SecondaryTypes;
                     $scope.secondaryType = $scope.secondaryTypes[0];
                 }
-                $scope.chartData1 = data.Behavioral;
-                $scope.chartData2 = data.External;
-                $scope.chartData3 = data.Organizational;
+                $scope.chartData1 = setPercentage(data.Behavioral);
+                //
+                $scope.chartData2 = setPercentage(data.External);
+                $scope.chartData3 = setPercentage(data.Organizational);
                 $scope.chart1.chart.title = data.BehavioralTotal;
                 $scope.chart2.chart.title = data.ExternalTotal;
                 $scope.chart3.chart.title = data.OrganizationalTotal;
@@ -326,66 +346,44 @@
             chart: {
                 type: 'pieChart',
                 donut: true,
-                donutRatio: 1,
+                donutRatio: 0.72,
+                labelThreshold: .05,
                 x: function (d) {
                     return d.name;
                 },
                 y: function (d) {
                     return d.count;
                 },
-                height: 500,
+                width: 220,
+                height: 300,
+                format: "",
                 showLabels: false,
                 color: $scope.chartColors,
                 duration: 500,
-                labelThreshold: 0.01,
                 labelSunbeamLayout: true,
-                //legendPosition: 'bottom',
                 showLegend: false,
-                title: {
-                    enable: true,
-                    text: '',
-                },
-                labels: {
-                    mainLabel: {
-                        fontSize: 20,
-                    },
-                },
-                legend: {
-                    margin: {
-                        top: 5,
-                        right: 35,
-                        bottom: 5,
-                        left: 0
-                    }
-                }
             }
         };
         $scope.chart2 = {
             chart: {
                 type: 'pieChart',
                 donut: true,
-                donutRatio: 1,
+                donutRatio: 0.72,
+                labelThreshold: .05,
                 x: function (d) {
                     return d.name;
                 },
                 y: function (d) {
                     return d.count;
                 },
-                height: 500,
+                width: 220,
+                height: 300,
+                format: "",
                 showLabels: false,
                 color: $scope.chartColors,
                 duration: 500,
-                labelThreshold: 0.01,
                 labelSunbeamLayout: true,
                 showLegend: false,
-                legend: {
-                    margin: {
-                        top: 5,
-                        right: 35,
-                        bottom: 5,
-                        left: 0
-                    }
-                }
             }
         };
 
@@ -393,28 +391,22 @@
             chart: {
                 type: 'pieChart',
                 donut: true,
-                donutRatio: 1,
+                donutRatio: 0.72,
+                labelThreshold: .05,
                 x: function (d) {
                     return d.name;
                 },
                 y: function (d) {
                     return d.count;
                 },
-                height: 500,
+                width: 220,
+                height: 300,
+                format: "",
                 showLabels: false,
                 color: $scope.chartColors,
                 duration: 500,
-                labelThreshold: 0.01,
                 labelSunbeamLayout: true,
                 showLegend: false,
-                legend: {
-                    margin: {
-                        top: 5,
-                        right: 35,
-                        bottom: 5,
-                        left: 0
-                    }
-                }
             }
         };
 

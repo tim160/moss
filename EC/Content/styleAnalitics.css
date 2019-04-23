@@ -10,7 +10,41 @@
     font-family: 'OpenSans-Light';
     src: url('fonts/OpenSans/OpenSans-Light.ttf');
 }
-
+#rootCauseAnalysis .percentage{
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+    color: #abb9bb;
+    font-size: 14px;
+}
+.case-MainContent-HeaderLinks__itemText {
+    float: left;
+    font-size: 10px;
+    font-family: 'OpenSans-Semibold';
+    text-transform: uppercase;
+    color: #727c7e;
+}
+.case-MainContent-HeaderLinks__itemIcon {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-image: url(Icons/arrow-TopRight.png);
+    background-repeat: no-repeat;
+    float: left;
+    margin-right: 5px;
+    margin: 4px 5px;
+}
+.case-MainContent-HeaderLinks__item {
+    display: inline-block;
+    float: left;
+    text-decoration: none;
+    color: #aeb3b4;
+    margin-left: 70px;
+    line-height: 18px;
+    vertical-align: middle;
+}
+.case-MainContent-Header__right {
+    display: inline-block;
+    float: right;
+}
 .blockAnalitics .contentSettings {
     background-color: #ffffff;
     width: 100%;
@@ -672,13 +706,7 @@ table.table:first-child tr:first-child td {
 h2, h3 {
     color: black !important;
 }
-
-#rootCauseAnalysis .nvd3.nv-pie .nv-pie-title {
-    font-size: 80px !important;
-    color: black !important;
-    fill: black !important;
-}
-#dashboard .nvd3.nv-pie .nv-pie-title {
+.nvd3.nv-pie .nv-pie-title {
     font-size: 12px !important;
     color: #b6bcd4 !important;
     fill: #b6bcd4 !important;
