@@ -39,7 +39,13 @@
             var promiseObj = getCasesService.getData(arraySelectedItems);
             promiseObj.then(function (response) {
                 $scope.chartColors = ['#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472', '#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472', '#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472'];
-
+                $scope.chartColorsFunction = function (index) {
+                    if (index >= $scope.chartColors.length) {
+                        return $scope.chartColors[index % $scope.chartColors.length];
+                    } else {
+                        return $scope.chartColors[index];
+                    }
+                };
                 $scope.dataCases = JSON.parse(response);
                 console.log('$scope.dataCases CasesController ', $scope.dataCases);
                 function returnGraph() {
