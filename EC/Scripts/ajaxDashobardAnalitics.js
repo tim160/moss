@@ -78,11 +78,11 @@
                 if ($scope.DepartmentsData.length == 0) {
                     $scope.containerDepartmentsValues = true;
 
-                    promiseObjGetMenu.then(function (response) {
-                        response.data.DepartmentsList.forEach(function (item, i, arr) {
-                            $scope.DepartmentsData.push({ name: item.department_en, val: 0, percentage: 0 });
-                        });
-                    });
+                    //promiseObjGetMenu.then(function (response) {
+                    //    response.data.DepartmentsList.forEach(function (item, i, arr) {
+                    //        $scope.DepartmentsData.push({ name: item.department_en, val: 0, percentage: 0 });
+                    //    });
+                    //});
 
 
 
@@ -97,11 +97,11 @@
                     $scope.locationDataValues = true;
 
 
-                    promiseObjGetMenu.then(function (response) {
-                        response.data.LocationsList.forEach(function (item, i, arr) {
-                            $scope.LocationData.push({ name: item.location_en, val: 0, percentage: 0 });
-                        });
-                    });
+                    //promiseObjGetMenu.then(function (response) {
+                    //    response.data.LocationsList.forEach(function (item, i, arr) {
+                    //        $scope.LocationData.push({ name: item.location_en, val: 0, percentage: 0 });
+                    //    });
+                    //});
 
 
                 } else {
@@ -115,11 +115,11 @@
                     $scope.typesOfIncidentDataValues = true;
 
 
-                    promiseObjGetMenu.then(function (response) {
-                        response.data.SecondaryTypesList.forEach(function (item, i, arr) {
-                            $scope.TypesOfIncidentData.push({ name: item.secondary_type_en, val: 0, percentage: 0 });
-                        });
-                    });
+                    //promiseObjGetMenu.then(function (response) {
+                    //    response.data.SecondaryTypesList.forEach(function (item, i, arr) {
+                    //        $scope.TypesOfIncidentData.push({ name: item.secondary_type_en, val: 0, percentage: 0 });
+                    //    });
+                    //});
 
 
                 } else {
@@ -133,11 +133,11 @@
                     $scope.typesOfReporterDataValues = true;
 
 
-                    promiseObjGetMenu.then(function (response) {
-                        response.data.RelationTypesList.forEach(function (item, i, arr) {
-                            $scope.TypesOfReporterData.push({ name: item.relationship_en, val: 0, percentage: 0 });
-                        });
-                    });
+                    //promiseObjGetMenu.then(function (response) {
+                    //    response.data.RelationTypesList.forEach(function (item, i, arr) {
+                    //        $scope.TypesOfReporterData.push({ name: item.relationship_en, val: 0, percentage: 0 });
+                    //    });
+                    //});
 
 
                 } else {
