@@ -87,6 +87,7 @@
 
 
                 } else {
+                    $scope.containerDepartmentsValues = false;
                     $scope.containerDepartments = {
                         chart: returnGraph()
                     };
@@ -105,6 +106,7 @@
 
 
                 } else {
+                    $scope.locationDataValues = false;
                     $scope.containerLocation = {
                         chart: returnGraph()
                     };
@@ -123,6 +125,7 @@
 
 
                 } else {
+                    $scope.typesOfIncidentDataValues = false;
                     $scope.containerTypesOfIncident = {
                         chart: returnGraph()
                     };
@@ -141,6 +144,7 @@
 
 
                 } else {
+                    $scope.typesOfReporterDataValues = false;
                     $scope.containerTypesOfReporter = {
                         chart: returnGraph()
                     };

@@ -252,7 +252,7 @@
                 </div>
                 <div class="case-MainContent-main" id="printCases" style="display: flex">
                     <div class="center widthForPrint">
-                        <nvd3 id="containerDepartments" options="containerDepartments" data="DepartmentsData" api="apiDeparments"></nvd3>
+                        <nvd3 id="containerDepartments" options="containerDepartments" data="DepartmentsData" api="apiDeparments" ng-show="!containerDepartmentsValues"></nvd3>
                         <div class="caseNofound" style="position: relative" ng-show="containerDepartmentsValues">
                             <div class="caseNofound__title">
                                 Departments
@@ -277,7 +277,7 @@
                         </div>
                     </div>
                     <div class="center widthForPrint">
-                        <nvd3 id="containerLocation" options="containerLocation" data="LocationData" api="apiLocation"></nvd3>
+                        <nvd3 id="containerLocation" options="containerLocation" data="LocationData" api="apiLocation" ng-show="!locationDataValues"></nvd3>
 
                         <div class="caseNofound" style="position: relative;" ng-show="locationDataValues">
                             <div class="caseNofound__title">
@@ -303,7 +303,7 @@
 
                     </div>
                     <div class="center widthForPrint">
-                        <nvd3 id="containerTypesOfReporter" options="containerTypesOfReporter" data="TypesOfReporterData" api="apiTypeOfReporter"></nvd3>
+                        <nvd3 id="containerTypesOfReporter" options="containerTypesOfReporter" data="TypesOfReporterData" api="apiTypeOfReporter" ng-show="!typesOfReporterDataValues"></nvd3>
 
                         <div class="caseNofound" style="position: relative;" ng-show="typesOfReporterDataValues">
                             <div class="caseNofound__title">
@@ -328,7 +328,7 @@
                         </div>
                     </div>
                     <div class="center widthForPrint">
-                        <nvd3 id="containerTypesOfIncident" options="containerTypesOfIncident" data="TypesOfIncidentData" api="apiTypesOfIncident"></nvd3>
+                        <nvd3 id="containerTypesOfIncident" options="containerTypesOfIncident" data="TypesOfIncidentData" api="apiTypesOfIncident" ng-show="!typesOfIncidentDataValues"></nvd3>
 
                         <div class="caseNofound" style="position: relative;" ng-show="typesOfIncidentDataValues">
 
