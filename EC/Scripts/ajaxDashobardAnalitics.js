@@ -157,9 +157,7 @@
             var mywindow = window.open('', 'PRINT', 'width=' + screen.availWidth + ',height=' + screen.availHeight);
 
             mywindow.document.write('<html><head><title>' + title + '</title>');
-            //mywindow.document.write('<link rel="stylesheet" href="/Content/styleAnalitics.css" type="text/css" />');
             mywindow.document.write('<link rel="stylesheet" href="/Content/analiticsDashboard.css" type="text/css" media="print"/>');
-            //mywindow.document.write('<link rel="stylesheet" href="/Content/newCase.css" type="text/css" />');
             mywindow.document.write('</head><body onload="window.print(); window.close()">');
             mywindow.document.write('<h1>' + title + '</h1>');
             mywindow.document.write('<div class="container">');

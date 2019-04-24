@@ -10,6 +10,7 @@
 
     int user_id = (Int32)ViewBag.user_id;
     int companyId = ViewBag.um._user.company_id;
+    string _today = ViewBag._today;
 }
 
 <link rel="stylesheet" href="~/Content/styleAnalitics.css" />
@@ -56,7 +57,7 @@
 
     <div class="container" id="rootCauseAnalysis">
         <div class="row circleGraphRow circleGraphInfoRow">
-            <div class="case-MainContent-HeaderLinks clearfix" ng-click="printGraphs('printCases', 'Cases')" style="cursor: pointer; float: right">
+            <div class="case-MainContent-HeaderLinks clearfix" ng-click="print('rootCauseAnalysis', 'Cases')" style="cursor: pointer; float: right">
                 <div class="case-MainContent-HeaderLinks__item expertLink clearfix">
                     <div class="case-MainContent-HeaderLinks__itemIcon"></div>
                     <div class="case-MainContent-HeaderLinks__itemText">
@@ -65,11 +66,11 @@
                 </div>
             </div>
             <div class="col-4" id="chart1">
-                <button type="button" class="noPrint printButton" ng-click="print('chart1', 'Behavioral Factors')" ng-show="chartData1.length > 0"><img src="~/Content/Icons/print-icon.png" /></button>
+                @*<button type="button" class="noPrint printButton" ng-click="print('chart1', 'Behavioral Factors')" ng-show="chartData1.length > 0"><img src="~/Content/Icons/print-icon.png" /></button>*@
                 <nvd3 id="chart1" options="chart1" data="chartData1" api="api1"></nvd3>
                 @*<div class="graphTitle">
-                Behavioral Factors
-            </div>*@
+                        Behavioral Factors
+                    </div>*@
                 <!-- /.graphTitle -->
                 <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in chartData1">
                     <div class="col-8 p-0">
@@ -86,11 +87,11 @@
                 </div>
             </div><!-- /.col-4 -->
             <div class="col-4" id="chart2">
-                <button type="button" class="noPrint printButton" ng-click="print('chart2', 'External Influences')" ng-show="chartData2.length > 0"><img src="~/Content/Icons/print-icon.png" /></button>
+                @*<button type="button" class="noPrint printButton" ng-click="print('chart2', 'External Influences')" ng-show="chartData2.length > 0"><img src="~/Content/Icons/print-icon.png" /></button>*@
                 <nvd3 id="chart2" options="chart2" data="chartData2" api="api2"></nvd3>
                 @*<div class="graphTitle">
-                External Influences
-            </div>*@
+                        External Influences
+                    </div>*@
                 <!-- /.graphTitle -->
                 <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in chartData2">
                     <div class="col-8 p-0">
@@ -107,11 +108,11 @@
                 </div>
             </div><!-- /.col-4 -->
             <div class="col-4" id="chart3">
-                <button type="button" class="noPrint printButton" ng-click="print('chart3', 'Organizational Influences')" ng-show="chartData3.length > 0"><img src="~/Content/Icons/print-icon.png" /></button>
+                @*<button type="button" class="noPrint printButton" ng-click="print('chart3', 'Organizational Influences')" ng-show="chartData3.length > 0"><img src="~/Content/Icons/print-icon.png" /></button>*@
                 <nvd3 id="chart3" options="chart3" data="chartData3" api="api3"></nvd3>
                 @*<div class="graphTitle">
-                Organizational Influences
-            </div>*@
+                        Organizational Influences
+                    </div>*@
                 <!-- /.graphTitle -->
                 <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in chartData3">
                     <div class="col-8 p-0">
@@ -129,4 +130,9 @@
             </div><!-- /.col-4 -->
         </div><!-- /.row -->
     </div><!-- /.container -->
+</div>
+<div id="templateForPrinting">
+    <h1 class="lineHeightForPrint showPrintElement" style="display: none">@ViewBag.companyName</h1>
+    <h3 class="lineHeightForPrint showPrintElement" style="display: none">EMPLOYEE CONFIDENTIAL ANALITYCS</h3>
+    <h3 class="lineHeightForPrint showPrintElement" style="display: none">@_today</h3>
 </div>

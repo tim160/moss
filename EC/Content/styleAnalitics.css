@@ -718,6 +718,24 @@ h2, h3 {
     .noPrint {
         display: none;
     }
+    .case-MainContent-HeaderLinks.clearfix {
+        display: none;
+    }
+    #chart1 {
+        width: 100%;
+    }
+    #chart2 {
+        width: 100%;
+    }
+    #chart3 {
+        width: 100%;
+    }
+    .showPrintElement {
+        display: block !important;
+    }
+    .lineHeightForPrint {
+        line-height: 38px;
+    }
 }
 
 .printButton {

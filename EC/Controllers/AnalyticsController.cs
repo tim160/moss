@@ -271,8 +271,10 @@ namespace EC.Controllers
             if (user == null || user.id == 0)
                 return RedirectToAction("Login", "Service");
 
-            int user_id = user.id;
-            ViewBag.user_id = user_id;
+            ViewBag.user_id = user.id;
+
+            string _today = DateTimeHelper.ConvertDateToLongMonthString(DateTime.Today);
+            ViewBag._today = _today;
 
             #region EC-CC Viewbag
             ViewBag.is_cc = is_cc;
@@ -281,7 +283,8 @@ namespace EC.Controllers
             ViewBag.cc_extension = cc_ext;
             #endregion
 
-            UserModel um = new UserModel(user_id);
+            UserModel um = new UserModel(user.id);
+            ViewBag.companyName = db.company.Where(company_name => company_name.id == user.company_id).Select(company_name => company_name.company_nm).FirstOrDefault();
             ViewBag.um = um;
 
             return View();
@@ -300,10 +303,8 @@ namespace EC.Controllers
             ViewBag.cc_extension = cc_ext;
             #endregion
 
-            int user_id = user.id;
-
-            ViewBag.user_id = user_id;
-
+            ViewBag.user_id = user.id;
+            ViewBag.companyName = db.company.Where(company_name => company_name.id == user.company_id).Select(company_name => company_name.company_nm).FirstOrDefault();
             string _today = DateTimeHelper.ConvertDateToLongMonthString(DateTime.Today);
             ViewBag._today = _today;
 

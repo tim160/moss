@@ -1997,6 +1997,7 @@ li.infoCasesBlock:first-child:hover li .status {
         font-size: 26px;
         color: #38494d;
         padding-left: 9px;
+        text-transform: capitalize;
     }
 
 .headerContent ul.lines li.line:last-child {
