@@ -5,8 +5,8 @@
     var arraySelectedItems = {
         location: [],
         department: [],
-        incident_type: [],
-        reporter_type: [],
+        incident_type: [],//SecondaryTypesList
+        reporter_type: [],//RelationTypesList
         data_range: []
     };
     var app = angular.module('EC');
@@ -20,7 +20,23 @@
         var promiseObjGetMenu = getMenuFilterCases.getData();
         promiseObjGetMenu.then(function (response) {
             $scope.MenuCases = response.data;
+
+            //arraySelectedItems
+            $scope.MenuCases["DepartmentsList"].forEach(function (item, i, arr) {
+                arraySelectedItems.department.push(item.id);
+            });
+            $scope.MenuCases["LocationsList"].forEach(function (item, i, arr) {
+                arraySelectedItems.location.push(item.id);
+            });
+            $scope.MenuCases["SecondaryTypesList"].forEach(function (item, i, arr) {
+                arraySelectedItems.incident_type.push(item.id);
+            });
+            $scope.MenuCases["RelationTypesList"].forEach(function (item, i, arr) {
+                arraySelectedItems.incident_type.push(item.id);
+            });
+            
             $scope.selectedItemClick = function ($event, clickedItemId, menu) {
+                debugger;
                 if (arraySelectedItems[menu].indexOf(clickedItemId) == -1) {
                     arraySelectedItems[menu].push(clickedItemId);
                 } else {
