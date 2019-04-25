@@ -36,5 +36,6 @@ namespace EC.Models.ECModel
         }
         public long dateStart { get; set; }
         public long dateEnd { get; set; }
-    }
+        public string data_range { get; set; }
+  }
 }

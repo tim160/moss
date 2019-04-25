@@ -215,12 +215,29 @@ namespace EC.Controllers
  
             if (user != null)
             {
-                DateTime dt1 = new DateTime(2014, 8, 1);
-                if (types.dateStart != 0)
+                  DateTime dt1 = new DateTime(2014, 8, 1);
+                  DateTime dt2 = DateTime.Today.AddDays(1);
+                  if (types.dateStart == 0 && types.dateEnd == 0 && types.data_range != null &&  types.data_range != "0" && types.data_range != "" && !types.data_range.StartsWith("custom"))
+                  {
+                    if(types.data_range == "1")
+                      dt1 = DateTime.Today.AddYears(-1);
+                    if (types.data_range == "2")
+                      dt1 = DateTime.Today.AddMonths(-6);
+                    if (types.data_range == "3")
+                      dt1 = DateTime.Today.AddMonths(-3);
+                    if (types.data_range == "4")
+                      dt1 = DateTime.Today.AddMonths(-1);
+                    if (types.data_range == "5")
+                      dt1 = DateTime.Today.AddDays(-7);
+                  }
+
+
+
+                if (types.dateStart != 0 && types.data_range.StartsWith("custom"))
                     dt1 = new DateTime(1970, 1, 1).AddTicks(types.dateStart * 10000);
 
-                DateTime dt2 = DateTime.Today.AddDays(1);
-                if (types.dateEnd != 0)
+
+                if (types.dateEnd != 0 && types.data_range.StartsWith("custom"))
                     dt2 = new DateTime(1970, 1, 1).AddTicks(types.dateEnd * 10000);
                 if (dt2 < dt1)
                 {
@@ -228,6 +245,7 @@ namespace EC.Controllers
                     dt2 = dt1;
                     dt1 = dt3;
                 }
+
 
                 GlobalFunctions func = new GlobalFunctions();
                 JsonResult json = new JsonResult();

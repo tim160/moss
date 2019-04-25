@@ -584,6 +584,7 @@ public class GlobalFunctions
     {
         UserModel um = new UserModel(user_id);
         List<report> _all_reports_old = um.ReportsSearch(company_id, 0);
+
         if (dtReportCreationStartDate.HasValue)
         {
             _all_reports_old = _all_reports_old.Where(t => t.reported_dt.Date >= dtReportCreationStartDate.Value.Date).ToList();
