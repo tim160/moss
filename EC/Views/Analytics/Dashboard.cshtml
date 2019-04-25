@@ -164,7 +164,7 @@
 
                             <div class="col-3 filterCases-dropBlock__contentCol">
                                 <ul class="case-DropDownList black" ng-repeat="department in MenuCases.DepartmentsList">
-                                    <li class="case-DropDownList-li clearfix checked" ng-click="selectedItemClick($event, department.id, 'department')">
+                                    <li class="case-DropDownList-li clearfix" ng-click="selectedItemClick($event, department.id, 'department')">
                                         <input type="hidden" value="{{department.Item2}}" />
                                         <div class="case-DropDownList-li__icon"></div>
                                         <div class="case-DropDownList-li__text">
@@ -177,7 +177,7 @@
                             <div class="col-3 filterCases-dropBlock__contentCol">
                                 <ul class="case-DropDownList black" ng-repeat="location in MenuCases.LocationsList">
                                     <!--this is location-->
-                                    <li class="case-DropDownList-li clearfix checked" ng-click="selectedItemClick($event, location.id, 'location')">
+                                    <li class="case-DropDownList-li clearfix" ng-click="selectedItemClick($event, location.id, 'location')">
                                         <input type="hidden" value="{{location.id}}" />
                                         <div class="case-DropDownList-li__icon"></div>
                                         <div class="case-DropDownList-li__text">
@@ -189,7 +189,7 @@
 
                             <div class="col-3 filterCases-dropBlock__contentCol">
                                 <ul class="case-DropDownList black" ng-repeat="incident in MenuCases.RelationTypesList">
-                                    <li class="case-DropDownList-li clearfix checked" ng-click="selectedItemClick($event, incident.id, 'incident_type')">
+                                    <li class="case-DropDownList-li clearfix" ng-click="selectedItemClick($event, incident.id, 'incident_type')">
                                         <input type="hidden" value="{{incident.id}}" />
                                         <div class="case-DropDownList-li__icon"></div>
                                         <div class="case-DropDownList-li__text">
@@ -201,7 +201,7 @@
 
                             <div class="col-3 filterCases-dropBlock__contentCol">
                                 <ul class="case-DropDownList black" ng-repeat="reporter in MenuCases.SecondaryTypesList">
-                                    <li class="case-DropDownList-li clearfix checked" ng-click="selectedItemClick($event, reporter.id, 'reporter_type')">
+                                    <li class="case-DropDownList-li clearfix" ng-click="selectedItemClick($event, reporter.id, 'reporter_type')">
                                         <input type="hidden" value="{{reporter.id}}" />
                                         <div class="case-DropDownList-li__icon"></div>
                                         <div class="case-DropDownList-li__text">

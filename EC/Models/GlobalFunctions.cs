@@ -627,7 +627,7 @@ public class GlobalFunctions
         }
         if (ReportsRelationTypesIDs.Count > 0)
         {
-            var report_from_relation_type = db.report_relationship.Where(t => ReportsRelationTypesIDs.Contains(t.relationship_id.Value)).Select(t => t.report_id);
+            var report_from_relation_type = db.report_relationship.Where(t => ReportsRelationTypesIDs.Contains(t.company_relationship_id.Value)).Select(t => t.report_id);
             //_all_reports_old = _all_reports_old.Where(report_from_relation_type.Contains(t.id)).ToList();
             _all_reports_old = _all_reports_old.Where(t => report_from_relation_type.Any(report => report == t.id)).ToList();
         }

@@ -31,7 +31,7 @@
                 arraySelectedItems.incident_type.push(item.id);
             });
             $scope.MenuCases["RelationTypesList"].forEach(function (item, i, arr) {
-                arraySelectedItems.incident_type.push(item.id);
+              arraySelectedItems.reporter_type.push(item.id);
             });
             
             $scope.selectedItemClick = function ($event, clickedItemId, menu) {
