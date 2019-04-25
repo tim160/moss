@@ -21,7 +21,6 @@
         promiseObjGetMenu.then(function (response) {
             $scope.MenuCases = response.data;
 
-            //arraySelectedItems
             $scope.MenuCases["DepartmentsList"].forEach(function (item, i, arr) {
                 arraySelectedItems.department.push(item.id);
             });
@@ -36,7 +35,6 @@
             });
             
             $scope.selectedItemClick = function ($event, clickedItemId, menu) {
-                debugger;
                 if (arraySelectedItems[menu].indexOf(clickedItemId) == -1) {
                     arraySelectedItems[menu].push(clickedItemId);
                 } else {
