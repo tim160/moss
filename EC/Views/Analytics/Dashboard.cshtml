@@ -61,7 +61,7 @@
                             <strong>{{snapShot.numberOfCases}}</strong>
                         </div>
                         <div class="cases-TotalStatistics__titleColored clearfix">
-                            <div class="cases-TotalStatistics__titleColored-color color-CasesSpam" style="width: 12px; height: 12px; background-color: {{snapShot.miniSquareColor}};"></div>
+                            <div class="cases-TotalStatistics__titleColored-color color-CasesSpam" style="border-left: solid 12px {{snapShot.miniSquareColor}};"></div>
                             <div class="cases-TotalStatistics__titleColored-text">{{snapShot.titleHeaderLegend}}</div>
                         </div>
                     </div>
@@ -404,7 +404,7 @@
                                 <strong>{{snapShot.numberOfCases}}</strong>
                             </div>
                             <div class="cases-TotalStatistics__titleColored clearfix">
-                                <div class="cases-TotalStatistics__titleColored-color color-CasesSpam" style="background-color: {{snapShot.miniSquareColor}};"></div>
+                                <div class="cases-TotalStatistics__titleColored-color color-CasesSpam" style="border-left: solid 12px {{snapShot.miniSquareColor}};"></div>
                                 <div class="cases-TotalStatistics__titleColored-text">{{snapShot.titleHeaderLegend}}</div>
                             </div>
                         </div>
@@ -463,6 +463,6 @@
 
 <div id="templateForPrinting">
     <h1 class="lineHeightForPrint showPrintElement" style="display: none">@ViewBag.companyName</h1>
-    <h3 class="lineHeightForPrint showPrintElement" style="display: none">EMPLOYEE CONFIDENTIAL ANALITYCS</h3>
+    <h3 class="lineHeightForPrint showPrintElement" style="display: none">EMPLOYEE CONFIDENTIAL ANALYTICS</h3>
     <h3 class="lineHeightForPrint showPrintElement" style="display: none">@_today</h3>
 </div>

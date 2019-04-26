@@ -143,11 +143,15 @@ html, body {
         line-height: 38px;
     }
     .paddingTopForPrint30 {
-        padding-top: 30px
+        padding-top: 15px
     }
     .showPrintElement {
-        display: block!important;
+        display: block !important;
+        color: #abb9bb;
     }
+    /*.RootCauseAnalysis-roudChart__title {
+        background-color: red;
+    }*/
 }
 .RootCauseAnalysis-roudChart__title {
     padding-left: 10px;
@@ -4817,12 +4821,8 @@ body .bigBlock .blockLinesItem p {
     font-size: 14px;
 }
 
-
-.cases-TotalStatistics__titleColored {
-}
-
 .cases-TotalStatistics__titleColored-color {
-    width: 12px;
+    /*width: 12px;*/
     height: 12px;
     display: inline-block;
     float: left;
