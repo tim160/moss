@@ -1,0 +1,14 @@
+﻿.row.circleGraphRow.circleGraphInfoRow {
+    display: flex;
+    flex-direction: column;
+}
+.positionLegendForPrint {
+    float: right;
+    padding-top: 100px;
+}
+.case-MainContent-HeaderLinks__item expertLink.clearfix {
+    display: none;
+}
+#chart1, #chart2, #chart3 {
+    width: 100%;
+}
