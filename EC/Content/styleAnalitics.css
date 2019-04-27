@@ -736,6 +736,92 @@ h2, h3 {
     .lineHeightForPrint {
         line-height: 38px;
     }
+    .showPrintElement {
+        display: block !important;
+    }
+
+    #print1 {
+        display: block !important;
+        width: 50%;
+    }
+    .showPrintElement {
+        display: block !important;
+        color: #abb9bb;
+    }
+}
+
+@media print {
+
+    .RootCauseAnalysis-roudChart__title {
+        text-align: left;
+        font-family: 'OpenSans-Regular';
+        font-size: 12px;
+        color: #3c3e3f;
+    }
+
+    .nvd3.nv-pie .nv-pie-title {
+        font-size: 12px !important;
+        color: #b6bcd4 !important;
+        fill: #b6bcd4 !important;
+        text-transform: uppercase;
+        font-family: 'OpenSans-Bold' !important;
+    }
+
+    .printPadding {
+        padding-top: 50px;
+    }
+
+    .fluidTitle {
+        padding: 50px 20px;
+        font-family: 'OpenSans-Light';
+        font-size: 16px;
+        margin: 50px 20px;
+    }
+
+        .fluidTitle strong {
+            font-family: 'OpenSans-Regular';
+            color: #3c3e3f;
+            font-size: 16px;
+            text-transform: capitalize;
+        }
+
+    .case-MainContent-HeaderLinks__itemText {
+        display: none;
+    }
+
+    #dashboard .percentage {
+        font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+        color: #abb9bb;
+        font-size: 14px;
+    }
+
+    .RootCauseAnalysis-roudChart__count {
+        font-size: 18px;
+        font-weight: bold;
+        text-align: right;
+        font-family: 'OpenSans-Semibold';
+        color: #3c3e3f;
+    }
+
+    #printResponseTime .fluidTitle {
+        padding: 0px;
+    }
+
+    .lineHeightForPrint {
+        line-height: 38px;
+    }
+
+    .paddingTopForPrint30 {
+        padding-top: 15px
+    }
+
+    .showPrintElement {
+        display: block !important;
+        color: #abb9bb;
+    }
+    /*.RootCauseAnalysis-roudChart__title {
+        background-color: red;
+    }*/
 }
 
 .printButton {

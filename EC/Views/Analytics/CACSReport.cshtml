@@ -12,7 +12,6 @@
     int companyId = ViewBag.um._user.company_id;
     string _today = ViewBag._today;
 }
-
 <link rel="stylesheet" href="~/Content/styleAnalitics.css" />
 
 <script src="~/Scripts/moment.min.js"></script>
@@ -70,20 +69,26 @@
                     </li>
                 </ul>
             </div>
-            <div class="print" ng-click="printGraphs(['#print2', '#print3'], 'Cases')" style="cursor: pointer; float: right">
+            @*<div class="print" ng-click="printGraphs(['#print1','#print2', '#print3'], 'Cases')" style="cursor: pointer; float: right">
                 <div class="case-MainContent-HeaderLinks__item expertLink clearfix">
                     <div class="case-MainContent-HeaderLinks__itemIcon"></div>
                     <div class="case-MainContent-HeaderLinks__itemText">
                         Print
                     </div>
                 </div>
-            </div>
+            </div>*@
             <div class="divider p-tb-5"></div><!-- /.divider p-tb-10 -->
 
-            <div class="borderAnalit" id="print1">
+            <div class="borderAnalit">
 
-                <nvd3 options="cacsChart" data="cacsChartData" api="api"></nvd3>
-
+    
+                <nvd3 id="print1" options="cacsChart" data="cacsChartData" api="api"></nvd3>
+                @*<div id="print1" style="display: none;">
+                    <nvd3 options="cacsChart2" data="cacsChartData2" api="api1" style="width: 50%"></nvd3>
+                </div>*@
+                @*<div style="max-width:650px">
+                    <nvd3 id="cacsChartData2" options="cacsChart2" data="cacsChartData2" api="api1"></nvd3>
+                </div>*@
             </div>
 
             <div class="divider p-tb-20"></div>
@@ -124,8 +129,6 @@
 
 <div id="templateForPrinting">
     <h1 class="lineHeightForPrint showPrintElement" style="display: none">@ViewBag.companyName</h1>
-    <h3 class="lineHeightForPrint showPrintElement" style="display: none">EMPLOYEE CONFIDENTIAL ANALITYCS</h3>
-    <h3 class="lineHeightForPrint showPrintElement" style="display: none">@_today</h3>
-
-    <nvd3 options="cacsChart" data="cacsChartData" api="api2"></nvd3>
+    <h3 class="lineHeightForPrint showPrintElement" style="display: none;color: #abb9bb!important">EMPLOYEE CONFIDENTIAL ANALITYCS</h3>
+    <h3 class="lineHeightForPrint showPrintElement" style="display: none;color: #abb9bb!important">@_today</h3>
 </div>
