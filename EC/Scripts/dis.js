@@ -195,6 +195,36 @@
             });
         };
 
+        $scope.printGraphs = function (elem, title) {
+            var printHtml = "";
+
+            if (Array.isArray(elem)) {
+                elem.forEach(function (element) {
+                    printHtml += document.querySelector(element).innerHTML;
+                });
+            } else {
+                printHtml = document.getElementById(elem).innerHTML;
+            }
+            var mywindow = window.open('', 'PRINT', 'width=' + screen.availWidth + ',height=' + screen.availHeight);
+
+            mywindow.document.write('<html><head><title>' + title + '</title>');
+            //mywindow.document.write('<link rel="stylesheet" href="/Content/styleAnalitics.css" type="text/css" />');
+            mywindow.document.write('<link rel="stylesheet" href="/Content/newCase.css" type="text/css" />');
+            mywindow.document.write('<link rel="stylesheet" href="/Content/CACSReportPrint.css" type="text/css" />');
+            mywindow.document.write('<link rel="stylesheet" href="/Libs/nvd3/build/nv.d3.min.css" type="text/css" />');
+            mywindow.document.write('</head><body onload="window.print(); window.close()">');
+            //mywindow.document.write('<h1>' + title + '</h1>');
+            mywindow.document.write('<div class="container">');
+            mywindow.document.write(document.getElementById("templateForPrinting").innerHTML.trim());
+            mywindow.document.write(printHtml);
+            mywindow.document.write('</div></body></html>');
+
+            mywindow.document.close(); // necessary for IE >= 10
+            mywindow.focus(); // necessary for IE >= 10*/
+
+            return true;
+        };
+
         $scope.refresh();
 
         $scope.selectCategory = function (item) {
@@ -312,21 +342,17 @@
         }
 
         $scope.refresh = function () {
-            /*var types = $scope.secondaryTypes.map(function (v) {
-                return v._selected;
-            });*/
             AnalyticsRootCauseAnalysisService.get({ secondaryType: $scope.secondaryType.id }, function (data) {
                 if ($scope.secondaryTypes.length === 0) {
                     $scope.secondaryTypes = data.SecondaryTypes;
                     $scope.secondaryType = $scope.secondaryTypes[0];
                 }
                 $scope.chartData1 = setPercentage(data.Behavioral);
-                //
                 $scope.chartData2 = setPercentage(data.External);
                 $scope.chartData3 = setPercentage(data.Organizational);
-                $scope.chart1.chart.title = data.BehavioralTotal;
-                $scope.chart2.chart.title = data.ExternalTotal;
-                $scope.chart3.chart.title = data.OrganizationalTotal;
+                $scope.chart1.chart.title = "Behavioral Factors";
+                $scope.chart2.chart.title = "External Influences";
+                $scope.chart3.chart.title = "Organizational Influences";
                 $scope.chartColors = data.Colors;
             });
         };
@@ -336,7 +362,6 @@
         $scope.refresh();
 
         $scope.selectSecondaryTypes = function (item) {
-            //item._selected = !item._selected;
             $scope.secondaryType = item;
             $scope.refresh();
         };
@@ -362,6 +387,14 @@
                 duration: 500,
                 labelSunbeamLayout: true,
                 showLegend: false,
+                dispatch: {
+                    renderEnd: function (e) {
+                        var label = d3.select('#chart1 text.nv-pie-title')
+                        label.html("");
+                        label.insert('tspan').text('Behavioral').attr('dy', -10).attr('x', 0);
+                        label.insert('tspan').text('Factors').attr('dy', 20).attr('x', 0);
+                    }
+                }
             }
         };
         $scope.chart2 = {
@@ -384,6 +417,14 @@
                 duration: 500,
                 labelSunbeamLayout: true,
                 showLegend: false,
+                dispatch: {
+                    renderEnd: function (e) {
+                        var label = d3.select('#chart2 text.nv-pie-title')
+                        label.html("");
+                        label.insert('tspan').text('External').attr('dy', -10).attr('x', 0);
+                        label.insert('tspan').text('Influences').attr('dy', 20).attr('x', 0);
+                    }
+                }
             }
         };
 
@@ -407,6 +448,14 @@
                 duration: 500,
                 labelSunbeamLayout: true,
                 showLegend: false,
+                dispatch: {
+                    renderEnd: function (e) {
+                        var label = d3.select('#chart3 text.nv-pie-title')
+                        label.html("");
+                        label.insert('tspan').text('Organizational').attr('dy', -10).attr('x', 0);
+                        label.insert('tspan').text('Influences').attr('dy', 20).attr('x', 0);
+                    }
+                }
             }
         };
 
@@ -417,7 +466,7 @@
             mywindow.document.write('<link rel="stylesheet" href="/Content/styleAnalitics.css" type="text/css" />');
             mywindow.document.write('<link rel="stylesheet" href="/Content/newCase.css" type="text/css" />');
             mywindow.document.write('</head><body onload="window.print(); window.close()">');
-            mywindow.document.write('<h1>' + title + '</h1>');
+            //mywindow.document.write('<h1>' + title + '</h1>');
             mywindow.document.write('<div class="container">');
             mywindow.document.write(document.getElementById("templateForPrinting").innerHTML.trim());
             mywindow.document.write(document.getElementById(elem).innerHTML);
@@ -2133,3 +2182,6 @@
         });
     };
 })();
+
+
+

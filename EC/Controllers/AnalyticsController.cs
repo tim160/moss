@@ -270,6 +270,9 @@ namespace EC.Controllers
             int user_id = user.id;
             ViewBag.user_id = user_id;
 
+            string _today = DateTimeHelper.ConvertDateToLongMonthString(DateTime.Today);
+            ViewBag._today = _today;
+
             #region EC-CC Viewbag
             ViewBag.is_cc = is_cc;
             string cc_ext = "";
@@ -278,6 +281,7 @@ namespace EC.Controllers
             #endregion
 
             UserModel um = new UserModel(user_id);
+            ViewBag.companyName = db.company.Where(company_name => company_name.id == user.company_id).Select(company_name => company_name.company_nm).FirstOrDefault();
             ViewBag.um = um;
 
             return View();
