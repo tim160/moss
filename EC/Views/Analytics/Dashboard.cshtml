@@ -1,4 +1,4 @@
-﻿<link href="~/Content/analiticsDashboard.css" rel="stylesheet" />
+﻿<link href="/Content/analiticsDashboard.css" rel="stylesheet" />
 
 @using EC.Models;
 @using EC.Models.ECModel;
@@ -48,9 +48,12 @@
 
     <div class="container mainNavigationTabs__tabContent-container" ng-controller="CasesController">
         <div id="mainTab-Cases" class="mainNavigationTabs__tabContent active">
-
-            <div class="fluidTitle ">
-                <strong>@GlobalRes.Number_cases_stage:</strong> @_today
+        
+            <div class="fluidTitle">
+                <div class="paddingTopForPrint30">
+                    <strong>@GlobalRes.Number_cases_stage:</strong> @_today
+                </div>
+                
             </div>
 
 
@@ -462,7 +465,7 @@
 
 
 <div id="templateForPrinting">
-    <h1 class="lineHeightForPrint showPrintElement" style="display: none">@ViewBag.companyName</h1>
-    <h3 class="lineHeightForPrint showPrintElement" style="display: none">EMPLOYEE CONFIDENTIAL ANALYTICS</h3>
-    <h3 class="lineHeightForPrint showPrintElement" style="display: none">@_today</h3>
+    <div class="showPrintElement" style="display: none; font-size:32px;color: #abb9bb;">@ViewBag.companyName</div>
+    <div class="showPrintElement" style="display: none;font-size: 17px;color: #abb9bb;">EMPLOYEE CONFIDENTIAL ANALYTICS</div>
+    <div class="showPrintElement" style="display: none;font-size: 17px;color: #abb9bb;">@_today</div>
 </div>
