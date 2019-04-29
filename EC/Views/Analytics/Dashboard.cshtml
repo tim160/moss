@@ -361,58 +361,58 @@
                 
             </div>
 
-            <div class="case-MainContent container" ng-controller="CaseManagamentTime" id="printResponseTime">
-                <div class="case-MainContent-Header clearfix">
-                    <div class="case-MainContent-hr"></div>
-                    <div class="case-MainContent-Header__left clearfix" style="padding-top: 24px;">
+            <div class="case-MainContent container" ng-controller="CaseManagamentTime" id="printResponseTime" style="page-break-before: always;">
+                    <div class="case-MainContent-Header clearfix">
+                        <div class="case-MainContent-hr"></div>
+                        <div class="case-MainContent-Header__left clearfix" style="padding-top: 24px;">
 
-                        <div class="case-MainContent-Header__leftTitle paddingTopForPrint30">
-                            Case Management Turnaround Time
+                            <div class="case-MainContent-Header__leftTitle paddingTopForPrint30">
+                                Case Management Turnaround Time
+                            </div>
                         </div>
-                    </div>
-                    <div class="case-MainContent-Header__right clearfix" style="padding-top: 24px;">
-                        <div class="case-MainContent-HeaderLinks clearfix" ng-click="printGraphs('printResponseTime', 'Cases Management Turnaround Time')" style="cursor: pointer">
-                            <div class="case-MainContent-HeaderLinks__item expertLink clearfix">
-                                <div class="case-MainContent-HeaderLinks__itemIcon"></div>
-                                <div class="case-MainContent-HeaderLinks__itemText">
-                                    @*Export PDF*@
-                                    Print
+                        <div class="case-MainContent-Header__right clearfix" style="padding-top: 24px;">
+                            <div class="case-MainContent-HeaderLinks clearfix" ng-click="printGraphs('printResponseTime', 'Cases Management Turnaround Time')" style="cursor: pointer">
+                                <div class="case-MainContent-HeaderLinks__item expertLink clearfix">
+                                    <div class="case-MainContent-HeaderLinks__itemIcon"></div>
+                                    <div class="case-MainContent-HeaderLinks__itemText">
+                                        @*Export PDF*@
+                                        Print
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="fluidTitle">
-                    <strong>
-                        Response Time Settings by Stage
-                    </strong>
-                </div>
-                <div class="case-MainContent-main ng-scope">
-                    <div id="responseTime"></div>
-                </div>
-                <div class="case-MainContent-main ng-scope">
-                    <div id="bar"></div>
-                </div>
-                <div class="fluidTitle">
-                    <strong>
-                        Number of Cases That Exceeded Turnaround Time
-                    </strong>
-                </div>
+                    <div class="fluidTitle">
+                        <strong>
+                            Response Time Settings by Stage
+                        </strong>
+                    </div>
+                    <div class="case-MainContent-main ng-scope">
+                        <div id="responseTime"></div>
+                    </div>
+                    <div class="case-MainContent-main ng-scope">
+                        <div id="bar"></div>
+                    </div>
+                    <div class="fluidTitle">
+                        <strong>
+                            Number of Cases That Exceeded Turnaround Time
+                        </strong>
+                    </div>
 
-                <div class="container cases-TotalStatistics">
-                    <div class="row clearfix">
-                        <div class="col-3" ng-repeat="snapShot in turnaroundTime">
-                            <div class="cases-TotalStatistics__numberOfCases">
-                                <strong>{{snapShot.numberOfCases}}</strong>
-                            </div>
-                            <div class="cases-TotalStatistics__titleColored clearfix">
-                                <div class="cases-TotalStatistics__titleColored-color color-CasesSpam" style="border-left: solid 12px {{snapShot.miniSquareColor}};"></div>
-                                <div class="cases-TotalStatistics__titleColored-text">{{snapShot.titleHeaderLegend}}</div>
+                    <div class="container cases-TotalStatistics">
+                        <div class="row clearfix">
+                            <div class="col-3" ng-repeat="snapShot in turnaroundTime">
+                                <div class="cases-TotalStatistics__numberOfCases">
+                                    <strong>{{snapShot.numberOfCases}}</strong>
+                                </div>
+                                <div class="cases-TotalStatistics__titleColored clearfix">
+                                    <div class="cases-TotalStatistics__titleColored-color color-CasesSpam" style="border-left: solid 12px {{snapShot.miniSquareColor}};"></div>
+                                    <div class="cases-TotalStatistics__titleColored-text">{{snapShot.titleHeaderLegend}}</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div><!-- /.container cases-TotalStatistics -->
+                    </div><!-- /.container cases-TotalStatistics -->
 
             </div>
         </div>
