@@ -713,6 +713,10 @@ h2, h3 {
     text-transform: uppercase;
     font-family: 'OpenSans-Bold' !important;
 }
+.nv-pie-title tspan {
+    font-family: 'OpenSans-Bold' !important;
+}
+
 
 @media print {
     .noPrint {
