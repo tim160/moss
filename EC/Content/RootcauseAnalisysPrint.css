@@ -4,11 +4,31 @@
 }
 .positionLegendForPrint {
     float: right;
-    padding-top: 68px;
+    /*padding-top: 68px;*/
 }
 .case-MainContent-HeaderLinks__item expertLink.clearfix {
     display: none;
 }
 #chart1, #chart2, #chart3 {
+   display: table;
+}
+    #chart1 nvd3 {
+        display: table-cell;
+        width: auto;
+    }
+    #chart2 nvd3 {
+        display: table-cell;
+        width: auto;
+    }
+    #chart3 nvd3 {
+        display: table-cell;
+        width: auto;
+    }
+
+.col-4 {
+    width: 100%;
+}
+table {
+    display: block!important;
     width: 100%;
 }

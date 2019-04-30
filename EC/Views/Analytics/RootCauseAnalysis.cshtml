@@ -66,11 +66,7 @@
                 </div>
             </div>
             <div class="col-4" id="chart1">
-                @*<button type="button" class="noPrint printButton" ng-click="print('chart1', 'Behavioral Factors')" ng-show="chartData1.length > 0"><img src="~/Content/Icons/print-icon.png" /></button>*@
                 <nvd3 id="chart1" options="chart1" data="chartData1" api="api1"></nvd3>
-                @*<div class="graphTitle">
-                        Behavioral Factors
-                    </div>*@
                 <!-- /.graphTitle -->
                 <div class="positionLegendForPrint">
                     <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in chartData1">
@@ -90,11 +86,7 @@
 
             </div><!-- /.col-4 -->
             <div class="col-4" id="chart2">
-                @*<button type="button" class="noPrint printButton" ng-click="print('chart2', 'External Influences')" ng-show="chartData2.length > 0"><img src="~/Content/Icons/print-icon.png" /></button>*@
                 <nvd3 id="chart2" options="chart2" data="chartData2" api="api2"></nvd3>
-                @*<div class="graphTitle">
-                        External Influences
-                    </div>*@
                 <!-- /.graphTitle -->
                 <div class="positionLegendForPrint">
                     <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in chartData2">
@@ -114,11 +106,7 @@
 
             </div><!-- /.col-4 -->
             <div class="col-4" id="chart3">
-                @*<button type="button" class="noPrint printButton" ng-click="print('chart3', 'Organizational Influences')" ng-show="chartData3.length > 0"><img src="~/Content/Icons/print-icon.png" /></button>*@
                 <nvd3 id="chart3" options="chart3" data="chartData3" api="api3"></nvd3>
-                @*<div class="graphTitle">
-                        Organizational Influences
-                    </div>*@
                 <!-- /.graphTitle -->
                 <div class="positionLegendForPrint">
                     <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in chartData3">
@@ -144,5 +132,20 @@
     <div class="showPrintElement" style="display: none; font-size:32px;color: #abb9bb;">@ViewBag.companyName</div>
     <div class="showPrintElement" style="display: none;font-size: 17px;color: #abb9bb;">EMPLOYEE CONFIDENTIAL ANALYTICS</div>
     <div class="showPrintElement" style="display: none;font-size: 17px;color: #abb9bb;">@_today</div>
+
+    <table style="display: none">
+        <tr>
+            <td id="forGraph1"></td>
+            <td id="forLabel1"></td>
+        </tr>
+        <tr>
+            <td id="forGraph2"></td>
+            <td id="forLabel2"></td>
+        </tr>
+        <tr>
+            <td id="forGraph3"></td>
+            <td id="forLabel3"></td>
+        </tr>
+    </table>
 </div>
 

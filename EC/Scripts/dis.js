@@ -535,6 +535,16 @@
         };
 
         $scope.print = function (elem, title) {
+
+            document.getElementById('forGraph1').innerHTML = document.querySelector('#chart1 nvd3').innerHTML.trim();
+            document.getElementById('forLabel1').innerHTML = document.querySelector('#chart1 .positionLegendForPrint').innerHTML.trim();
+
+            document.getElementById('forGraph2').innerHTML = document.querySelector('#chart2 nvd3').innerHTML.trim();
+            document.getElementById('forLabel2').innerHTML = document.querySelector('#chart2 .positionLegendForPrint').innerHTML.trim();
+
+            document.getElementById('forGraph3').innerHTML = document.querySelector('#chart3 nvd3').innerHTML.trim();
+            document.getElementById('forLabel3').innerHTML = document.querySelector('#chart3 .positionLegendForPrint').innerHTML.trim();
+
             var mywindow = window.open('', 'PRINT', 'width=' + screen.availWidth + ',height=' + screen.availHeight);
 
             mywindow.document.write('<html><head><title>' + title + '</title>');
@@ -546,7 +556,7 @@
             mywindow.document.write('<h1>' + title + '</h1>');
             mywindow.document.write('<div class="container">');
             mywindow.document.write(document.getElementById("templateForPrinting").innerHTML.trim());
-            mywindow.document.write(document.getElementById(elem).innerHTML);
+            //mywindow.document.write(document.getElementById(elem).innerHTML);
             mywindow.document.write('</div></body></html>');
 
             mywindow.document.close(); // necessary for IE >= 10
