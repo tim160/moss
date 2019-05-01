@@ -71,4 +71,11 @@
 .case-MainContent-HeaderLinks__itemIcon {
     display: none;
 }
+.case-MainContent-Header__leftTitle {
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    color: black;
+}
+
 

@@ -32,3 +32,18 @@ table {
     display: block!important;
     width: 100%;
 }
+h1 {
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    color: black;
+}
+.paddingTopForPrint30 {
+    padding-top: 15px;
+}
+.case-MainContent-Header__leftTitle {
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    color: black;
+}
