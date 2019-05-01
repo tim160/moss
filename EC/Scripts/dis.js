@@ -205,25 +205,30 @@
             } else {
                 printHtml = document.getElementById(elem).innerHTML;
             }
-            var mywindow = window.open('', 'PRINT', 'width=' + screen.availWidth + ',height=' + screen.availHeight);
 
-            mywindow.document.write('<html><head><title>' + title + '</title>');
-            mywindow.document.write('<link rel="stylesheet" href="/Content/styleAnalitics.css" type="text/css" />');
-            mywindow.document.write('<link rel="stylesheet" href="/Content/newCase.css" type="text/css" />');
-            //mywindow.document.write('<link rel="stylesheet" href="/Content/CACSReportPrint.css" type="text/css" />');
-            mywindow.document.write('<link rel="stylesheet" href="/Libs/nvd3/build/nv.d3.min.css" type="text/css" />');
-            mywindow.document.write('</head><body onload="window.print(); window.close()">');
-            //mywindow.document.write('</head><body >');
-            //mywindow.document.write('<h1>' + title + '</h1>');
-            mywindow.document.write('<div class="container">');
-            mywindow.document.write(document.getElementById("templateForPrinting").innerHTML.trim());
-            mywindow.document.write(printHtml);
-            mywindow.document.write('</div></body></html>');
+            setTimeout(function () {
 
-            mywindow.document.close(); // necessary for IE >= 10
-            mywindow.focus(); // necessary for IE >= 10*/
+                var mywindow = window.open('', 'PRINT', 'width=' + screen.availWidth + ',height=' + screen.availHeight);
 
-            return true;
+                mywindow.document.write('<html><head><title>' + title + '</title>');
+                mywindow.document.write('<link rel="stylesheet" href="/Content/styleAnalitics.css" type="text/css" />');
+                mywindow.document.write('<link rel="stylesheet" href="/Content/newCase.css" type="text/css" />');
+                //mywindow.document.write('<link rel="stylesheet" href="/Content/CACSReportPrint.css" type="text/css" />');
+                mywindow.document.write('<link rel="stylesheet" href="/Libs/nvd3/build/nv.d3.min.css" type="text/css" />');
+                mywindow.document.write('</head><body onload="window.print(); window.close()">');
+                //mywindow.document.write('</head><body >');
+                //mywindow.document.write('<h1>' + title + '</h1>');
+                mywindow.document.write('<div class="container">');
+                mywindow.document.write(document.getElementById("templateForPrinting").innerHTML.trim());
+                mywindow.document.write(printHtml);
+                mywindow.document.write('</div></body></html>');
+
+                mywindow.document.close(); // necessary for IE >= 10
+                mywindow.focus(); // necessary for IE >= 10*/
+
+                return true;
+            }, 250);
+
         };
 
         $scope.refresh();
@@ -536,34 +541,36 @@
         };
 
         $scope.print = function (elem, title) {
+            setTimeout(function () {
+                document.getElementById('forGraph1').innerHTML = document.querySelector('#chart1 nvd3').innerHTML.trim();
+                document.getElementById('forLabel1').innerHTML = document.querySelector('#chart1 .positionLegendForPrint').innerHTML.trim();
 
-            document.getElementById('forGraph1').innerHTML = document.querySelector('#chart1 nvd3').innerHTML.trim();
-            document.getElementById('forLabel1').innerHTML = document.querySelector('#chart1 .positionLegendForPrint').innerHTML.trim();
+                document.getElementById('forGraph2').innerHTML = document.querySelector('#chart2 nvd3').innerHTML.trim();
+                document.getElementById('forLabel2').innerHTML = document.querySelector('#chart2 .positionLegendForPrint').innerHTML.trim();
 
-            document.getElementById('forGraph2').innerHTML = document.querySelector('#chart2 nvd3').innerHTML.trim();
-            document.getElementById('forLabel2').innerHTML = document.querySelector('#chart2 .positionLegendForPrint').innerHTML.trim();
+                document.getElementById('forGraph3').innerHTML = document.querySelector('#chart3 nvd3').innerHTML.trim();
+                document.getElementById('forLabel3').innerHTML = document.querySelector('#chart3 .positionLegendForPrint').innerHTML.trim();
 
-            document.getElementById('forGraph3').innerHTML = document.querySelector('#chart3 nvd3').innerHTML.trim();
-            document.getElementById('forLabel3').innerHTML = document.querySelector('#chart3 .positionLegendForPrint').innerHTML.trim();
+                var mywindow = window.open('', 'PRINT', 'width=' + screen.availWidth + ',height=' + screen.availHeight);
 
-            var mywindow = window.open('', 'PRINT', 'width=' + screen.availWidth + ',height=' + screen.availHeight);
+                mywindow.document.write('<html><head><title>' + title + '</title>');
+                mywindow.document.write('<link rel="stylesheet" href="/Content/styleAnalitics.css" type="text/css" />');
+                mywindow.document.write('<link rel="stylesheet" href="/Content/newCase.css" type="text/css" />');
+                mywindow.document.write('<link rel="stylesheet" href="/Content/RootcauseAnalisysPrint.css" type="text/css" />');
+                //mywindow.document.write('</head><body>');
+                mywindow.document.write('</head><body onload="window.print(); window.close()">');
+                //mywindow.document.write('<h1>' + title + '</h1>');
+                mywindow.document.write('<div class="container">');
+                mywindow.document.write(document.getElementById("templateForPrinting").innerHTML.trim());
+                //mywindow.document.write(document.getElementById(elem).innerHTML);
+                mywindow.document.write('</div></body></html>');
 
-            mywindow.document.write('<html><head><title>' + title + '</title>');
-            mywindow.document.write('<link rel="stylesheet" href="/Content/styleAnalitics.css" type="text/css" />');
-            mywindow.document.write('<link rel="stylesheet" href="/Content/newCase.css" type="text/css" />');
-            mywindow.document.write('<link rel="stylesheet" href="/Content/RootcauseAnalisysPrint.css" type="text/css" />');
-            //mywindow.document.write('</head><body>');
-            mywindow.document.write('</head><body onload="window.print(); window.close()">');
-            //mywindow.document.write('<h1>' + title + '</h1>');
-            mywindow.document.write('<div class="container">');
-            mywindow.document.write(document.getElementById("templateForPrinting").innerHTML.trim());
-            //mywindow.document.write(document.getElementById(elem).innerHTML);
-            mywindow.document.write('</div></body></html>');
+                mywindow.document.close(); // necessary for IE >= 10
+                mywindow.focus(); // necessary for IE >= 10*/
 
-            mywindow.document.close(); // necessary for IE >= 10
-            mywindow.focus(); // necessary for IE >= 10*/
+                return true;
 
-            return true;
+            }, 250);
         };
     }
 }());

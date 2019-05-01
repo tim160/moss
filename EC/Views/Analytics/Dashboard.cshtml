@@ -236,17 +236,16 @@
         <div class="container" id="dashboard">
             <div class="case-MainContent1 container" style="background-color: #fff;">
                 <div class="case-MainContent-Header clearfix">
-                    <div class="case-MainContent-Header__left clearfix">
-                        <div class="case-MainContent-Header__leftTitle">
+                    <div class="case-MainContent-Header__left clearfix" id="headerCasesPrint">
+                        <div class="case-MainContent-Header__leftTitle paddingTopForPrint30" >
                             Cases
                         </div>
                     </div>
                     <div class="case-MainContent-Header__right clearfix">
-                        <div class="case-MainContent-HeaderLinks clearfix" ng-click="printGraphs('printCases', 'Cases')" style="cursor: pointer">
+                        <div class="case-MainContent-HeaderLinks clearfix" ng-click="printGraphs(['#headerCasesPrint','#printCases'], 'Cases')" style="cursor: pointer">
                             <div class="case-MainContent-HeaderLinks__item expertLink clearfix">
                                 <div class="case-MainContent-HeaderLinks__itemIcon"></div>
                                 <div class="case-MainContent-HeaderLinks__itemText">
-                                    @*Export PDF*@
                                     Print
                                 </div>
                             </div>
@@ -364,13 +363,13 @@
             <div class="case-MainContent container" ng-controller="CaseManagamentTime" id="printResponseTime" style="page-break-before: always;">
                     <div class="case-MainContent-Header clearfix">
                         <div class="case-MainContent-hr"></div>
-                        <div class="case-MainContent-Header__left clearfix" style="padding-top: 24px;">
+                        <div class="case-MainContent-Header__left clearfix addPadding24px">
 
                             <div class="case-MainContent-Header__leftTitle paddingTopForPrint30">
                                 Case Management Turnaround Time
                             </div>
                         </div>
-                        <div class="case-MainContent-Header__right clearfix" style="padding-top: 24px;">
+                        <div class="case-MainContent-Header__right clearfix addPadding24px">
                             <div class="case-MainContent-HeaderLinks clearfix" ng-click="printGraphs('printResponseTime', 'Cases Management Turnaround Time')" style="cursor: pointer">
                                 <div class="case-MainContent-HeaderLinks__item expertLink clearfix">
                                     <div class="case-MainContent-HeaderLinks__itemIcon"></div>

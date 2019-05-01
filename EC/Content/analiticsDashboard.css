@@ -5125,3 +5125,7 @@ body .bigBlock .blockLinesItem p {
             padding: 25px 15px;
             display: block;
         }
+
+#printResponseTime .addPadding24px {
+    padding-top: 24px;
+}

@@ -59,9 +59,6 @@
         display: block !important;
         color: #abb9bb;
     }
-    /*.RootCauseAnalysis-roudChart__title {
-        background-color: red;
-    }*/
     .paddingTopForPrint30 {
         padding-top: 15px;
     }
@@ -77,5 +74,10 @@
     font-size: 16px;
     color: black;
 }
-
+.case-MainContent-Header {
+    padding-top: 0px;
+}
+.addPadding24px {
+    padding-top: 0px;
+}
 
