@@ -23,85 +23,26 @@ namespace EC.Controllers
         // GET: Analytics
         public ActionResult Index()
         {
-            //int user_id = 2;
 
-            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
-            if (user == null || user.id == 0)
-                return RedirectToAction("Login", "Service");
+      user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+      if (user == null || user.id == 0)
+        return RedirectToAction("Login", "Service");
 
-            #region EC-CC Viewbag
-            ViewBag.is_cc = is_cc;
-            string cc_ext = "";
-            if (is_cc) cc_ext = "_cc";
-            ViewBag.cc_extension = cc_ext;
-            #endregion
+      #region EC-CC Viewbag
+      ViewBag.is_cc = is_cc;
+      string cc_ext = "";
+      if (is_cc) cc_ext = "_cc";
+      ViewBag.cc_extension = cc_ext;
+      #endregion
 
-
-
-            int user_id = user.id;
-
-            ViewBag.user_id = user_id;
-            UserModel um = new UserModel(user_id);
-            ViewBag.um = um;
-
-            int[] _today_spanshot = glb.AnalyticsByDate(null, null, um._user.company_id, um._user.id);
-            ViewBag._today_spanshot = _today_spanshot;
-
-            company company_item = db.company.Where(item => (item.id == um._user.company_id)).FirstOrDefault();
-            if (company_item != null)
-            {
-
-                ViewBag.step1_delay = company_item.step1_delay;
-                ViewBag.step2_delay = company_item.step2_delay;
-                ViewBag.step3_delay = company_item.step3_delay;
-                ViewBag.step4_delay = company_item.step4_delay;
-            }
-
-            DateTime _month_end_date = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1).AddDays(-1);
-            int[] _month_end_spanshot = glb.AnalyticsByDate(null, _month_end_date, um._user.company_id, um._user.id);
-            ViewBag._month_end_spanshot = _month_end_spanshot;
-
-            string _today = DateTimeHelper.ConvertDateToLongMonthString(DateTime.Today);
-            ViewBag._today = _today;
-
-            //       DataTable dtSecondaryTypes = glb.SecondaryTypesByDate( um._user.company_id, um._user.id);
-            //        DataTable dtCompanyRelationships = glb.RelationshipToCompanyByDate( um._user.company_id, um._user.id);
-
-            //      ViewBag._dtSecondaryTypes = dtSecondaryTypes;
-            //     ViewBag._dtCompanyRelationships = dtCompanyRelationships;
-
-            //int[] _company_average_days = glb.AverageStageDays(um._user.company_id, um._user.id);
-            //int[] _average_stage_days = new int[] { _company_average_days[0] - 2, _company_average_days[1] - 3, _company_average_days[2] - 5, _company_average_days[3] - 5, _company_average_days[4] - 7 };
-
-            //ViewBag._company_average_days = _company_average_days;
-            //ViewBag._average_stage_days = _average_stage_days;
-
-            //     DataTable dtCompanyLocationReport = glb.CompanyLocationReport(um._user.company_id, um._user.id);
-            //ViewBag._dtCompanyLocationReport = glb.ConvertDataTabletoString(dtCompanyLocationReport);
-
-            //   DataTable dtCompanyDepartmentReport = glb.CompanyDepartmentReport( um._user.company_id, um._user.id);
-            //ViewBag._dtCompanyDepartmentReport = glb.ConvertDataTabletoString(dtCompanyDepartmentReport);
-
-            //DataTable dtAnalyticsTimeline = glb.AnalyticsTimeline(um._user.company_id, um._user.id);
-            //ViewBag._dtAnalyticsTimeline = glb.ConvertDataTabletoString(dtAnalyticsTimeline);
-
-            GlobalFunctions f = new GlobalFunctions();
-            List<Tuple<string, string>> temp_tuple = f.DepartmentsListDistinct(user.company_id, user.id);
-            ViewBag.dropDownFirst = temp_tuple;
-
-            temp_tuple = f.LocationsListDistinct(user.company_id, user.id);
-            ViewBag.dropDownSecond = temp_tuple;
-
-            temp_tuple = f.SecondaryTypesListDistinct(user.company_id, user.id);
-            ViewBag.dropDownThird = temp_tuple;
-
-            temp_tuple = f.RelationTypesListDistinct(user.company_id, user.id);
-            ViewBag.dropDownFourth = temp_tuple;
+      ViewBag.user_id = user.id;
+      ViewBag.companyName = db.company.Where(company_name => company_name.id == user.company_id).Select(company_name => company_name.company_nm).FirstOrDefault();
+      string _today = DateTimeHelper.ConvertDateToLongMonthString(DateTime.Today);
+      ViewBag._today = _today;
 
 
-
-            return View();
-        }
+      return View("Dashboard");
+    }
 
         public ActionResult Tasks()
         {
