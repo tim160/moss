@@ -10,6 +10,7 @@ using System.Web.SessionState;
 using System.Web.Http;
 using EC.Utils;
 using Newtonsoft.Json;
+using log4net;
 
 namespace EC
 {
@@ -37,8 +38,15 @@ namespace EC
 
         void Application_BeginRequest(object sender, EventArgs e)
         {
- ///           if (!Context.Request.IsSecureConnection && !Context.Request.IsLocal && !Context.Request.Url.AbsoluteUri.ToLower().Contains("ase.com.ua") && !Context.Request.Url.AbsoluteUri.Contains("192.168."))
- ///               Response.Redirect(Context.Request.Url.ToString().Replace("http:", "https:"));
+          ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+          
+          if (!Context.Request.IsSecureConnection && !Context.Request.IsLocal && !Context.Request.Url.AbsoluteUri.ToLower().Contains("ase.com.ua") && !Context.Request.Url.AbsoluteUri.ToLower().Contains("stark.") && !Context.Request.Url.AbsoluteUri.Contains("192.168."))
+          {
+            string redirect_url = Context.Request.Url.ToString().Replace("http:", "https:");
+            Response.Redirect(redirect_url, false);
+            HttpContext.Current.ApplicationInstance.CompleteRequest();
+          }
+                 
         }
 
         protected void Application_PostAuthorizeRequest()
