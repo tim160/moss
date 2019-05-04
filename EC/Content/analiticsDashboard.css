@@ -5129,3 +5129,15 @@ body .bigBlock .blockLinesItem p {
 #printResponseTime .addPadding24px {
     padding-top: 24px;
 }
+.table-condensed thead tr:nth-child(2) {
+    display: none;
+}
+.daterangepicker td.active, .daterangepicker td.active:hover {
+    background-color: #05B5A2!important;
+}
+.daterangepicker .month, .daterangepicker tbody {
+    font-family: 'OpenSans-Regular'!important;
+    font-size: 12px!important;
+    color: #3c3e3f!important;
+    font-weight: normal;
+}

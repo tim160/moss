@@ -7,16 +7,32 @@
         department: [],
         incident_type: [],//SecondaryTypesList
         reporter_type: [],//RelationTypesList
-        data_range: []
+        data_range: [],
+        dateStart: String,
+        dateEnd: String
     };
-    var app = angular.module('EC');
+    var app = angular.module('EC', ['nvd3', 'daterangepicker']);
     
     app.controller('CasesController', function ($scope, getCasesService, addPercentageRoundGraph, getMenuFilterCases, AnalyticsByDate) {
         var analiticsObj = AnalyticsByDate.getData();
         analiticsObj.then(function (response) {
             $scope._today_spanshot = response.data._today_spanshot;
         });
-
+        $scope.datePicker = {
+            date: { startDate: null, endDate: null },
+            options: {
+                "autoApply": true,
+                //changeCallback: function (startDate, endDate, label) {
+                //    debugger;
+                //    alert(startDate, endDate, label);
+                //}
+            }
+        };
+        $scope.$watch('datePicker.date', function (newDate) {
+            arraySelectedItems.dateStart = newDate.startDate;
+            arraySelectedItems.dateEnd = newDate.endDate;
+            updateGraph();
+        }, false);
         var promiseObjGetMenu = getMenuFilterCases.getData();
         promiseObjGetMenu.then(function (response) {
             $scope.MenuCases = response.data;
@@ -271,7 +287,9 @@
                         "ReportsRelationTypesIDStrings": arraySelectedItems.incident_type.join(),
                         "ReportsDepartmentIDStringss": arraySelectedItems.department.join(),
                         "ReportsLocationIDStrings": arraySelectedItems.location.join(),
-                        "data_range": arraySelectedItems.data_range
+                        "data_range": arraySelectedItems.data_range,
+                        "dateStart": arraySelectedItems.dateStart,
+                        "dateEnd": arraySelectedItems.dateEnd
                     }, url: '/Analytics/CompanyDepartmentReportAdvanced'
                 })
                     .then(function success(response) {
@@ -371,5 +389,16 @@
                 });
             }
         }
+    });
+
+    app.directive('clickcalendar', function () {
+        return {
+            restrict: 'A',
+            link: function (scope, element) {
+                element.bind('click', function (e) {
+                    angular.element(document.querySelector('#calendarCustomDate')).triggerHandler('click');
+                });
+            }
+        };
     });
 }());

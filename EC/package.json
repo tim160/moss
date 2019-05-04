@@ -2,6 +2,7 @@
   "name": "EC",
   "version": "1.0.0",
   "dependencies": {
+    "angular-daterangepicker": "^0.2.3-alpha1",
     "express": "^4.15.3"
   },
   "devDependencies": {

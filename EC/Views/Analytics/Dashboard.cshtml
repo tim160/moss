@@ -8,7 +8,7 @@
 @{
 
     <link rel="stylesheet" href="~/Content/styleAnalitics.css" />
-
+    <link href="~/Libs/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
     ViewBag.Title = GlobalRes.Analytics;
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
     int user_id = (Int32)ViewBag.user_id;
@@ -17,17 +17,19 @@
 }
 
 <!-- Include Date Range Picker -->
+<script src="~/Libs/angular/angular-messages.js"></script>
 <script src="~/Scripts/moment.min.js"></script>
-<script src="~/Scripts/jquery.daterangepicker.min.js"></script>
+<script src="~/Libs/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script src="~/Libs/angular-daterangepicker/angular-daterangepicker.min.js"></script>
+
 <link rel="stylesheet" href="~/Libs/nvd3/build/nv.d3.min.css">
-<link href="~/Content/daterangepickerAnalit.css" rel="stylesheet" />
+
 <script type='text/javascript' src="https://ajax.aspnetcdn.com/ajax/globalize/0.1.1/globalize.min.js"></script>
 <script type='text/javascript' src="https://cdn3.devexpress.com/jslib/18.1.3/js/dx.all.js"></script>
 
 <script src="~/Content/libs/graph/d3.v3.min.js"></script>
 <script src="~/Content/libs/graph/c3.min.js"></script>
 <link href="~/Content/libs/graph/c3.min.css" rel="stylesheet" />
-<link href="~/Content/daterangepickerAnalit.css" rel="stylesheet" />
 
 <input type="hidden" id="user_id" value="@user_id" />
 <input type="hidden" id="dateStart" value="" />
@@ -37,6 +39,7 @@
     #menu a {
         max-width: 500px;
     }
+
     .c3-axis.c3-axis-x {
         display: none;
     }
@@ -48,16 +51,16 @@
 
     <div class="container mainNavigationTabs__tabContent-container" ng-controller="CasesController">
         <div id="mainTab-Cases" class="mainNavigationTabs__tabContent active">
-        
+
             <div class="fluidTitle">
                 <div class="paddingTopForPrint30">
                     <strong>@GlobalRes.Number_cases_stage:</strong> @_today
                 </div>
-                
+
             </div>
+            
 
-
-            <div class="container cases-TotalStatistics" >
+            <div class="container cases-TotalStatistics">
                 <div class="row clearfix printPadding">
                     <div class="col-2" ng-repeat="snapShot in _today_spanshot">
                         <div class="cases-TotalStatistics__numberOfCases">
@@ -70,6 +73,7 @@
                     </div>
                 </div>
             </div><!-- /.container cases-TotalStatistics -->
+
 
 
             <div class="container cases-TotalHeader clearfix">
@@ -119,12 +123,20 @@
                                                 1 Week
                                             </div>
                                         </li>
+                                        <li clickcalendar class="case-DropDownListRadio-li clearfix ">
+                                            <div class="case-DropDownListRadio-li__icon"></div>
+                                            <div class="case-DropDownListRadio-li__text">
+                                                Custom Dates
+                                            </div>
+                                            <input id="calendarCustomDate" style="width: 0px; height: 0px; padding: 0px;" date-range-picker class="form-control date-picker" type="text" options="datePicker.options" ng-model="datePicker.date" />
+                                        </li>
                                     </ul>
-                                    <div class="case-DropDownListRadio-customDate" ng-click="dataRangeClick($event, 'customDate')">
-                                        <div class="case-DropDownListRadio-customDate__text">
-                                            Custom dates
+                                    @*<div clickcalendar class="case-DropDownListRadio-customDate" ng-click="dataRangeClick($event, 'customDate')">
+                                        <div class="case-DropDownListRadio-li__icon"></div>
+                                        <div class="case-DropDownListRadio-customDate__text black">
+                                            Custom Dates
                                         </div>
-                                    </div>
+                                    </div>*@
                                 </div>
                             </div>
                         </div>
@@ -221,9 +233,9 @@
                 </div>
 
                 <!--print all graphs-->
-                <div class="case-TotalHeader__items filterCases  clearfix" ng-click="printGraphs(['#mainTab-Cases .fluidTitle', '#mainTab-Cases .container.cases-TotalStatistics','#dashboard'], 'Print Page')">
+                <div class="case-TotalHeader__items filterCases clearfix">
                     <!-- activated -->
-                    <div class="case-DropDownList-titleNotClick clearfix">
+                    <div class="case-DropDownList-titleNotClick clearfix" ng-click="printGraphs(['#mainTab-Cases .fluidTitle', '#mainTab-Cases .container.cases-TotalStatistics','#dashboard'], 'Print Page')">
                         <div class="case-DropDownList-title__text clearfix">Print Page</div>
                         @*<div class="case-DropDownList-title__arrow clearfix"></div>*@
                     </div>
@@ -237,7 +249,7 @@
             <div class="case-MainContent1 container" style="background-color: #fff;">
                 <div class="case-MainContent-Header clearfix">
                     <div class="case-MainContent-Header__left clearfix" id="headerCasesPrint">
-                        <div class="case-MainContent-Header__leftTitle paddingTopForPrint30" >
+                        <div class="case-MainContent-Header__leftTitle paddingTopForPrint30">
                             Cases
                         </div>
                     </div>
@@ -357,61 +369,60 @@
 
                     </div>
                 </div><!--end case-MainContent-main-->
-                
+
             </div>
 
             <div class="case-MainContent container" ng-controller="CaseManagamentTime" id="printResponseTime" style="page-break-before: always;">
-                    <div class="case-MainContent-Header clearfix">
-                        <div class="case-MainContent-hr"></div>
-                        <div class="case-MainContent-Header__left clearfix addPadding24px">
+                <div class="case-MainContent-Header clearfix">
+                    <div class="case-MainContent-hr"></div>
+                    <div class="case-MainContent-Header__left clearfix addPadding24px">
 
-                            <div class="case-MainContent-Header__leftTitle paddingTopForPrint30">
-                                Case Management Turnaround Time
-                            </div>
+                        <div class="case-MainContent-Header__leftTitle paddingTopForPrint30">
+                            Case Management Turnaround Time
                         </div>
-                        <div class="case-MainContent-Header__right clearfix addPadding24px">
-                            <div class="case-MainContent-HeaderLinks clearfix" ng-click="printGraphs('printResponseTime', 'Cases Management Turnaround Time')" style="cursor: pointer">
-                                <div class="case-MainContent-HeaderLinks__item expertLink clearfix">
-                                    <div class="case-MainContent-HeaderLinks__itemIcon"></div>
-                                    <div class="case-MainContent-HeaderLinks__itemText">
-                                        @*Export PDF*@
-                                        Print
-                                    </div>
+                    </div>
+                    <div class="case-MainContent-Header__right clearfix addPadding24px">
+                        <div class="case-MainContent-HeaderLinks clearfix" ng-click="printGraphs('printResponseTime', 'Cases Management Turnaround Time')" style="cursor: pointer">
+                            <div class="case-MainContent-HeaderLinks__item expertLink clearfix">
+                                <div class="case-MainContent-HeaderLinks__itemIcon"></div>
+                                <div class="case-MainContent-HeaderLinks__itemText">
+                                    Print
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="fluidTitle">
-                        <strong>
-                            Response Time Settings by Stage
-                        </strong>
-                    </div>
-                    <div class="case-MainContent-main ng-scope">
-                        <div id="responseTime"></div>
-                    </div>
-                    <div class="case-MainContent-main ng-scope">
-                        <div id="bar"></div>
-                    </div>
-                    <div class="fluidTitle">
-                        <strong>
-                            Number of Cases That Exceeded Turnaround Time
-                        </strong>
-                    </div>
+                <div class="fluidTitle">
+                    <strong>
+                        Response Time Settings by Stage
+                    </strong>
+                </div>
+                <div class="case-MainContent-main ng-scope">
+                    <div id="responseTime"></div>
+                </div>
+                <div class="case-MainContent-main ng-scope">
+                    <div id="bar"></div>
+                </div>
+                <div class="fluidTitle">
+                    <strong>
+                        Number of Cases That Exceeded Turnaround Time
+                    </strong>
+                </div>
 
-                    <div class="container cases-TotalStatistics">
-                        <div class="row clearfix">
-                            <div class="col-3" ng-repeat="snapShot in turnaroundTime">
-                                <div class="cases-TotalStatistics__numberOfCases">
-                                    <strong>{{snapShot.numberOfCases}}</strong>
-                                </div>
-                                <div class="cases-TotalStatistics__titleColored clearfix">
-                                    <div class="cases-TotalStatistics__titleColored-color color-CasesSpam" style="border-left: solid 12px {{snapShot.miniSquareColor}};"></div>
-                                    <div class="cases-TotalStatistics__titleColored-text">{{snapShot.titleHeaderLegend}}</div>
-                                </div>
+                <div class="container cases-TotalStatistics">
+                    <div class="row clearfix">
+                        <div class="col-3" ng-repeat="snapShot in turnaroundTime">
+                            <div class="cases-TotalStatistics__numberOfCases">
+                                <strong>{{snapShot.numberOfCases}}</strong>
+                            </div>
+                            <div class="cases-TotalStatistics__titleColored clearfix">
+                                <div class="cases-TotalStatistics__titleColored-color color-CasesSpam" style="border-left: solid 12px {{snapShot.miniSquareColor}};"></div>
+                                <div class="cases-TotalStatistics__titleColored-text">{{snapShot.titleHeaderLegend}}</div>
                             </div>
                         </div>
-                    </div><!-- /.container cases-TotalStatistics -->
+                    </div>
+                </div><!-- /.container cases-TotalStatistics -->
 
             </div>
         </div>
@@ -450,8 +461,6 @@
                     $(this).next(".case-DropDownList-contentBlock").toggle("fast");
                     $(this).parent(".case-TotalHeader__items").toggleClass("selected");
                 });
-
-
             });
         </script>
 
