@@ -90,43 +90,43 @@
                                         <li class="case-DropDownListRadio-li clearfix checked" ng-click="dataRangeClick($event, '0')">
                                             <div class="case-DropDownListRadio-li__icon"></div>
                                             <div class="case-DropDownListRadio-li__text">
-                                                All Time
+                                                All
                                             </div>
                                         </li>
                                         <li class="case-DropDownListRadio-li clearfix " ng-click="dataRangeClick($event, '1')">
                                             <div class="case-DropDownListRadio-li__icon"></div>
                                             <div class="case-DropDownListRadio-li__text">
-                                                1 Year
+                                              Last 12 Months
                                             </div>
                                         </li>
                                         <li class="case-DropDownListRadio-li clearfix " ng-click="dataRangeClick($event, '2')">
                                             <div class="case-DropDownListRadio-li__icon"></div>
                                             <div class="case-DropDownListRadio-li__text">
-                                                6 Month
+                                              Last 6 Months
                                             </div>
                                         </li>
                                         <li class="case-DropDownListRadio-li clearfix " ng-click="dataRangeClick($event, '3')">
                                             <div class="case-DropDownListRadio-li__icon"></div>
                                             <div class="case-DropDownListRadio-li__text">
-                                                3 Month
+                                              Last 3 Months
                                             </div>
                                         </li>
                                         <li class="case-DropDownListRadio-li clearfix " ng-click="dataRangeClick($event, '4')">
                                             <div class="case-DropDownListRadio-li__icon"></div>
                                             <div class="case-DropDownListRadio-li__text">
-                                                1 Month
+                                              Last 30 days
                                             </div>
                                         </li>
                                         <li class="case-DropDownListRadio-li clearfix " ng-click="dataRangeClick($event, '5')">
                                             <div class="case-DropDownListRadio-li__icon"></div>
                                             <div class="case-DropDownListRadio-li__text">
-                                                1 Week
+                                              Last 7 days
                                             </div>
                                         </li>
                                         <li clickcalendar class="case-DropDownListRadio-li clearfix ">
                                             <div class="case-DropDownListRadio-li__icon"></div>
                                             <div class="case-DropDownListRadio-li__text">
-                                                Custom
+                                              Custom Date Range
                                             </div>
                                             <input id="calendarCustomDate" style="width: 0px; height: 0px; padding: 0px;" date-range-picker class="form-control date-picker" type="text" options="datePicker.options" ng-model="datePicker.date" />
                                         </li>
@@ -148,7 +148,7 @@
                 <div class="case-TotalHeader__items filterCases  clearfix">
                     <!-- activated -->
                     <div class="case-DropDownList-title clearfix">
-                        <div class="case-DropDownList-title__text clearfix">Filter Cases</div>
+                        <div class="case-DropDownList-title__text clearfix">Filter Cases {{selectedCasesFilters}}</div>
                         <div class="case-DropDownList-title__arrow clearfix"></div>
                     </div>
                     <!--dropdown menu-->
@@ -250,7 +250,7 @@
                 <div class="case-MainContent-Header clearfix">
                     <div class="case-MainContent-Header__left clearfix" id="headerCasesPrint">
                         <div class="case-MainContent-Header__leftTitle paddingTopForPrint30">
-                            Cases
+                            Cases {{selectedCasesDateRange}}
                         </div>
                     </div>
                     <div class="case-MainContent-Header__right clearfix">
