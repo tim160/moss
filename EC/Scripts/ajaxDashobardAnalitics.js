@@ -65,7 +65,7 @@
                     }
                 };
                 $scope.dataCases = JSON.parse(response);
-                console.log('$scope.dataCases CasesController ', $scope.dataCases);
+                //console.log('$scope.dataCases CasesController ', $scope.dataCases);
                 function returnGraph() {
                     var chart = {
                         type: 'pieChart',
