@@ -22,6 +22,7 @@
             date: { startDate: null, endDate: null },
             options: {
                 "autoApply": true,
+                //"drops": ('.case-DropDownList-contentBlock'), 
                 //changeCallback: function (startDate, endDate, label) {
                 //    debugger;
                 //    alert(startDate, endDate, label);
@@ -31,23 +32,33 @@
         $scope.$watch('datePicker.date', function (newDate) {
             arraySelectedItems.dateStart = newDate.startDate;
             arraySelectedItems.dateEnd = newDate.endDate;
+            if (newDate.startDate != undefined && newDate.endDate != undefined) {
+                $scope.selectedCasesDateRange = ": Start Date: " + moment(newDate.startDate).format("MMMM D, YYYY") + " End Date: " + moment(newDate.endDate).format("MMMM D, YYYY");
+            }
+            
             updateGraph();
         }, false);
         var promiseObjGetMenu = getMenuFilterCases.getData();
         promiseObjGetMenu.then(function (response) {
             $scope.MenuCases = response.data;
 
-      
+            $scope.selectedCasesFilters = 0;
             $scope.selectedItemClick = function ($event, clickedItemId, menu) {
                 if (arraySelectedItems[menu].indexOf(clickedItemId) == -1) {
                     arraySelectedItems[menu].push(clickedItemId);
+                    $scope.selectedCasesFilters++;
                 } else {
                     arraySelectedItems[menu].splice(arraySelectedItems[menu].indexOf(clickedItemId), 1);
+                    $scope.selectedCasesFilters--;
                 }
                 $event.currentTarget.classList.toggle('checked');
                 updateGraph();
             }
             $scope.dataRangeClick = function ($event, clickedItemId) {
+                $scope.selectedCasesDateRange = ": " + $event.target.textContent.trim();
+                if (clickedItemId == 0) {
+                    $scope.selectedCasesDateRange = "";
+                }
                 arraySelectedItems["data_range"] = clickedItemId;
                 updateGraph();
             }
