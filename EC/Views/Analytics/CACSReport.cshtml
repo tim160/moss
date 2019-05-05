@@ -69,60 +69,56 @@
                     </li>
                 </ul>
             </div>
-            @*<div class="print" ng-click="printGraphs(['#print1','#print2', '#print3'], 'Cases')" style="cursor: pointer; float: right">
+            <div class="print" ng-click="printGraphs(['#print1','#print2', '#print3'], 'CACS Report')" style="cursor: pointer; float: right">
                 <div class="case-MainContent-HeaderLinks__item expertLink clearfix">
                     <div class="case-MainContent-HeaderLinks__itemIcon"></div>
                     <div class="case-MainContent-HeaderLinks__itemText">
                         Print
                     </div>
                 </div>
-            </div>*@
+            </div>
             <div class="divider p-tb-5"></div><!-- /.divider p-tb-10 -->
 
             <div class="borderAnalit">
-
-    
                 <nvd3 id="print1" options="cacsChart" data="cacsChartData" api="api"></nvd3>
-                @*<div id="print1" style="display: none;">
-                    <nvd3 options="cacsChart2" data="cacsChartData2" api="api1" style="width: 50%"></nvd3>
-                </div>*@
-                @*<div style="max-width:650px">
-                    <nvd3 id="cacsChartData2" options="cacsChart2" data="cacsChartData2" api="api1"></nvd3>
-                </div>*@
             </div>
 
             <div class="divider p-tb-20"></div>
-            <div class="row row-3 statistics-totalTable statistics-totalReports clearfix" id="print2">
-                <div class="statistics-totalTable__title">
-                    Total Clery Act Crimes:
-                </div><!-- /.statistics-totalTable__title -->
-                <div class="statistics-totalTable__cols">
-                    <div class="binding">{{Total(1, 0).total1}}</div>
-                </div><!-- /.statistics-totalTable__cols -->
-                <div class="statistics-totalTable__cols">
-                    <div class="binding">{{Total(1, 1).total1}}</div>
-                </div><!-- /.statistics-totalTable__cols -->
-                <div class="statistics-totalTable__cols">
-                    <div class="binding">{{Total(1, 2).total1}}</div>
-                </div><!-- /.statistics-totalTable__cols -->
-            </div><!-- /.statistics-totalCrimes -->
-            <div class="row row-3 statistics-totalTable statistics-totalReports clearfix" id="print3">
-                <div class="statistics-totalTable__title">
-                    Total Unfounded Reports:
-                </div><!-- /.statistics-totalTable__title -->
-                <div class="statistics-totalTable__cols">
-                    <div class="binding">{{Total(2, 0).total2}}</div>
-                    <div class="bindingYear">{{Total(2, 0).year}}</div><!-- /.ng-bindingYear -->
-                </div><!-- /.statistics-totalTable__cols -->
-                <div class="statistics-totalTable__cols">
-                    <div class="binding">{{Total(2, 1).total2}}</div>
-                    <div class="bindingYear">{{Total(2, 1).year}}</div><!-- /.ng-bindingYear -->
-                </div><!-- /.statistics-totalTable__cols -->
-                <div class="statistics-totalTable__cols">
-                    <div class="binding">{{Total(2, 2).total2}}</div>
-                    <div class="bindingYear">{{Total(2, 2).year}}</div><!-- /.ng-bindingYear -->
-                </div><!-- /.statistics-totalTable__cols -->
-            </div><!-- /.row -->
+            <div id="print2">
+                <div class="row row-3 statistics-totalTable statistics-totalReports clearfix">
+                    <div class="statistics-totalTable__title">
+                        Total Clery Act Crimes:
+                    </div><!-- /.statistics-totalTable__title -->
+                    <div class="statistics-totalTable__cols">
+                        <div class="binding">{{Total(1, 0).total1}}</div>
+                    </div><!-- /.statistics-totalTable__cols -->
+                    <div class="statistics-totalTable__cols">
+                        <div class="binding">{{Total(1, 1).total1}}</div>
+                    </div><!-- /.statistics-totalTable__cols -->
+                    <div class="statistics-totalTable__cols">
+                        <div class="binding">{{Total(1, 2).total1}}</div>
+                    </div><!-- /.statistics-totalTable__cols -->
+                </div><!-- /.statistics-totalCrimes -->
+            </div>
+            <div id="print3">
+                <div class="row row-3 statistics-totalTable statistics-totalReports clearfix" >
+                    <div class="statistics-totalTable__title">
+                        Total Unfounded Reports:
+                    </div><!-- /.statistics-totalTable__title -->
+                    <div class="statistics-totalTable__cols">
+                        <div class="binding">{{Total(2, 0).total2}}</div>
+                        <div class="bindingYear">{{Total(2, 0).year}}</div><!-- /.ng-bindingYear -->
+                    </div><!-- /.statistics-totalTable__cols -->
+                    <div class="statistics-totalTable__cols">
+                        <div class="binding">{{Total(2, 1).total2}}</div>
+                        <div class="bindingYear">{{Total(2, 1).year}}</div><!-- /.ng-bindingYear -->
+                    </div><!-- /.statistics-totalTable__cols -->
+                    <div class="statistics-totalTable__cols">
+                        <div class="binding">{{Total(2, 2).total2}}</div>
+                        <div class="bindingYear">{{Total(2, 2).year}}</div><!-- /.ng-bindingYear -->
+                    </div><!-- /.statistics-totalTable__cols -->
+                </div><!-- /.row -->
+            </div>
         </div>
     </div>
 </div>
@@ -131,4 +127,7 @@
     <div class="showPrintElement" style="display: none; font-size:32px;color: #abb9bb;">@ViewBag.companyName</div>
     <div class="showPrintElement" style="display: none;font-size: 17px;color: #abb9bb;">EMPLOYEE CONFIDENTIAL ANALYTICS</div>
     <div class="showPrintElement" style="display: none;font-size: 17px;color: #abb9bb;">@_today</div>
+    <div class="case-MainContent-Header__leftTitle paddingTopForPrint30" style="display: none;">
+        CACS Report
+    </div>
 </div>
