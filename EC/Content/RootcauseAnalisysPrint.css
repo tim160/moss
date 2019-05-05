@@ -10,7 +10,8 @@
     display: none;
 }
 #chart1, #chart2, #chart3 {
-   display: table;
+    display: flex;
+    flex-direction: column;
 }
     #chart1 nvd3 {
         display: table-cell;
@@ -46,4 +47,19 @@ h1 {
     font-weight: bold;
     font-size: 16px;
     color: black;
+}
+.widthForPrint {
+    width: 100%;
+}
+
+.center {
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 15px;
+}
+.case-MainContent-HeaderLinks__item {
+    display: none;
+}
+.showPrintElement, .case-MainContent-Header__leftTitle {
+    display: block !important;
 }

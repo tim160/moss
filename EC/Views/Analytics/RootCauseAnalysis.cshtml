@@ -19,8 +19,6 @@
 <script src="~/Scripts/jquery.daterangepicker.min.js"></script>
 <link rel="stylesheet" href="~/Libs/nvd3/build/nv.d3.min.css">
 
-<link href="~/Content/daterangepickerAnalit.css" rel="stylesheet" />
-
 <div class="blockSettings blockAnalitics" ng-controller="AnalyticsRootCauseAnalysisController" ng-cloak>
     @Html.Partial("~/Views/Analytics/AnalyticsMenu.cshtml")
 
@@ -55,60 +53,56 @@
         </table>
     </div>
 
-    <div class="container" id="rootCauseAnalysis">
-        <div class="row circleGraphRow circleGraphInfoRow">
-            <div class="case-MainContent-HeaderLinks clearfix" ng-click="print('rootCauseAnalysis', 'Root Cause Analysis')" style="cursor: pointer; float: right">
-                <div class="case-MainContent-HeaderLinks__item expertLink clearfix">
-                    <div class="case-MainContent-HeaderLinks__itemIcon"></div>
-                    <div class="case-MainContent-HeaderLinks__itemText">
-                        Print
-                    </div>
+    <div class="container" id="rootCauseAnalysis" style="">
+        <div class="case-MainContent-HeaderLinks clearfix" ng-click="print('rootCauseAnalysis', 'Root Cause Analysis')">
+            <div class="case-MainContent-HeaderLinks__item expertLink clearfix">
+                <div class="case-MainContent-HeaderLinks__itemIcon"></div>
+                <div class="case-MainContent-HeaderLinks__itemText">
+                    Print
                 </div>
             </div>
-            <div class="col-4" id="chart1">
+        </div>
+        <div class="row circleGraphRow circleGraphInfoRow" style="display: flex">
+
+            <div class="center widthForPrint" id="chart1">
                 <nvd3 id="chart1" options="chart1" data="chartData1" api="api1"></nvd3>
                 <!-- /.graphTitle -->
-                <div class="positionLegendForPrint">
-                    <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in chartData1">
-                        <div class="col-8 p-0">
-                            <div class="ng-binding RootCauseAnalysis-roudChart__title" style="margin-bottom: 10px; padding-left: 10px; border-left: solid 10px {{chartColors[$index]}}">
-                                {{item.name}}
-                            </div>
+                <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in chartData1">
+                    <div class="col-8 p-0">
+                        <div class="ng-binding RootCauseAnalysis-roudChart__title" style="margin-bottom: 10px; padding-left: 10px; border-left: solid 10px {{chartColors[$index]}}">
+                            {{item.name}}
                         </div>
-                        <div class="col-2 RootCauseAnalysis-roudChart__count disablePaddingRight">
-                            {{item.count}}
-                        </div>
-                        <div class="col-2 RootCauseAnalysis-roudChart__count disablePaddingRight">
-                            <spam class="percentage">{{item.percentage}}%</spam>
-                        </div>
+                    </div>
+                    <div class="col-2 RootCauseAnalysis-roudChart__count disablePaddingRight">
+                        {{item.count}}
+                    </div>
+                    <div class="col-2 RootCauseAnalysis-roudChart__count disablePaddingRight">
+                        <spam class="percentage">{{item.percentage}}%</spam>
                     </div>
                 </div>
 
             </div><!-- /.col-4 -->
-            <div class="col-4" id="chart2">
+            <div class="center widthForPrint" id="chart2">
                 <nvd3 id="chart2" options="chart2" data="chartData2" api="api2"></nvd3>
                 <!-- /.graphTitle -->
-                <div class="positionLegendForPrint">
-                    <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in chartData2">
-                        <div class="col-8 p-0">
-                            <div class="ng-binding RootCauseAnalysis-roudChart__title" style="margin-bottom: 10px; padding-left: 10px; border-left: solid 10px {{chartColors[$index]}}">
-                                {{item.name}}
-                            </div>
+                <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in chartData2">
+                    <div class="col-8 p-0">
+                        <div class="ng-binding RootCauseAnalysis-roudChart__title" style="margin-bottom: 10px; padding-left: 10px; border-left: solid 10px {{chartColors[$index]}}">
+                            {{item.name}}
                         </div>
-                        <div class="col-2 RootCauseAnalysis-roudChart__count disablePaddingRight">
-                            {{item.count}}
-                        </div>
-                        <div class="col-2 RootCauseAnalysis-roudChart__count disablePaddingRight">
-                            <spam class="percentage">{{item.percentage}}%</spam>
-                        </div>
+                    </div>
+                    <div class="col-2 RootCauseAnalysis-roudChart__count disablePaddingRight">
+                        {{item.count}}
+                    </div>
+                    <div class="col-2 RootCauseAnalysis-roudChart__count disablePaddingRight">
+                        <spam class="percentage">{{item.percentage}}%</spam>
                     </div>
                 </div>
 
             </div><!-- /.col-4 -->
-            <div class="col-4" id="chart3">
+            <div class="center widthForPrint" id="chart3">
                 <nvd3 id="chart3" options="chart3" data="chartData3" api="api3"></nvd3>
                 <!-- /.graphTitle -->
-                <div class="positionLegendForPrint">
                     <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in chartData3">
                         <div class="col-8 p-0">
                             <div class="ng-binding RootCauseAnalysis-roudChart__title" style="margin-bottom: 10px; padding-left: 10px; border-left: solid 10px {{chartColors[$index]}}">
@@ -122,7 +116,6 @@
                             <spam class="percentage">{{item.percentage}}%</spam>
                         </div>
                     </div>
-                </div>
 
             </div><!-- /.col-4 -->
         </div><!-- /.row -->
@@ -132,22 +125,8 @@
     <div class="showPrintElement" style="display: none; font-size:32px;color: #abb9bb;">@ViewBag.companyName</div>
     <div class="showPrintElement" style="display: none;font-size: 17px;color: #abb9bb;">EMPLOYEE CONFIDENTIAL ANALYTICS</div>
     <div class="showPrintElement" style="display: none;font-size: 17px;color: #abb9bb;">@_today</div>
-    <div class="case-MainContent-Header__leftTitle paddingTopForPrint30">
+    <div class="case-MainContent-Header__leftTitle paddingTopForPrint30" style="display: none;">
         Root Cause Analysis
     </div>
-    <table style="display: none">
-        <tr>
-            <td id="forGraph1"></td>
-            <td id="forLabel1"></td>
-        </tr>
-        <tr>
-            <td id="forGraph2"></td>
-            <td id="forLabel2"></td>
-        </tr>
-        <tr>
-            <td id="forGraph3"></td>
-            <td id="forLabel3"></td>
-        </tr>
-    </table>
 </div>
 

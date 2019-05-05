@@ -4040,3 +4040,23 @@ body .bigBlock  .blockLinesItem p{
 #alertModal {
     font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
 }
+#rootCauseAnalysis {
+    min-height: 500px;
+    position: relative;
+}
+    #rootCauseAnalysis .case-MainContent-HeaderLinks {
+        cursor: pointer;
+        position: absolute;
+        right: 30px;
+    }
+    #rootCauseAnalysis .widthForPrint {
+        width: 33.33%;
+    }
+    #rootCauseAnalysis .center {
+        margin: 0 auto;
+        text-align: left;
+        padding: 0 20px;
+    }
+    #rootCauseAnalysis #chart1 svg, #rootCauseAnalysis #chart2 svg, #rootCauseAnalysis #chart3 svg {
+        padding-left: 30px;
+    }
