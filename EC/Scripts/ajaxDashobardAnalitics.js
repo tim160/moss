@@ -21,19 +21,31 @@
         $scope.datePicker = {
             date: { startDate: null, endDate: null },
             options: {
+                "showDropdowns": true,
                 "autoApply": true,
-                //"drops": ('.case-DropDownList-contentBlock'), 
-                //changeCallback: function (startDate, endDate, label) {
-                //    debugger;
-                //    alert(startDate, endDate, label);
-                //}
+                ranges: {
+                    'All': [moment(), moment()],
+                    'Last 12 Months': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Last 6 Months': [moment().subtract(6, 'days'), moment()],
+                    'Last 3 Months': [moment().subtract(29, 'days'), moment()],
+                    'Last 30 days': [moment().startOf('month'), moment().endOf('month')],
+                    'Last 7 days': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                },
+                "linkedCalendars": false,
+                "autoUpdateInput": false,
+                "showCustomRangeLabel": false,
+                "alwaysShowCalendars": true,
+                //"startDate": "04/29/2019",
+                //"endDate": "05/05/2019"
+            }, function(start, end, label) {
+                console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
             }
         };
         $scope.$watch('datePicker.date', function (newDate) {
             arraySelectedItems.dateStart = newDate.startDate;
             arraySelectedItems.dateEnd = newDate.endDate;
             if (newDate.startDate != undefined && newDate.endDate != undefined) {
-                $scope.selectedCasesDateRange = ": Start Date: " + moment(newDate.startDate).format("MMMM D, YYYY") + " End Date: " + moment(newDate.endDate).format("MMMM D, YYYY");
+                angular.element('#selectedCasesDateRange').html(": <span class='bold'>Start Date: </span>" + moment(newDate.startDate).format("MMMM D, YYYY") + " <span class='bold'>End Date: </span>" + moment(newDate.endDate).format("MMMM D, YYYY"));
             }
             
             updateGraph();
@@ -55,9 +67,11 @@
                 updateGraph();
             }
             $scope.dataRangeClick = function ($event, clickedItemId) {
-                $scope.selectedCasesDateRange = ": " + $event.target.textContent.trim();
+                angular.element('#selectedCasesDateRange').html(": " + $event.target.textContent.trim());
+                //$scope.selectedCasesDateRange = 
                 if (clickedItemId == 0) {
-                    $scope.selectedCasesDateRange = "";
+                    //$scope.selectedCasesDateRange = "";
+                    angular.element('#selectedCasesDateRange').html("");
                 }
                 arraySelectedItems["data_range"] = clickedItemId;
                 updateGraph();

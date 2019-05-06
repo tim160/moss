@@ -5141,3 +5141,10 @@ body .bigBlock .blockLinesItem p {
     color: #3c3e3f!important;
     font-weight: normal;
 }
+.selectedCasesDateRange {
+    color: #abb9bb;
+}
+.selectedCasesDateRange .bold{
+    color: #abb9bb;
+    font-weight: bold;
+}

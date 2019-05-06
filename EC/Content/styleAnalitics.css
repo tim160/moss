@@ -616,9 +616,9 @@ table.table:first-child tr:first-child td {
 .daterange {
     position: relative;
 }
-.daterangepicker_input, .ranges{
+/*.daterangepicker_input, .ranges{
     display: none;
-}
+}*/
 /*end drop down menu*/
 
 .borderAnalit {
