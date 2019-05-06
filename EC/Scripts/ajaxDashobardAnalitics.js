@@ -45,7 +45,12 @@
             arraySelectedItems.dateStart = newDate.startDate;
             arraySelectedItems.dateEnd = newDate.endDate;
             if (newDate.startDate != undefined && newDate.endDate != undefined) {
+                //$scope.selectedCasesDateRange = ": Start Date: " + moment(newDate.startDate).format("MMMM D, YYYY") + " End Date: " + moment(newDate.endDate).format("MMMM D, YYYY");
                 angular.element('#selectedCasesDateRange').html(": <span class='bold'>Start Date: </span>" + moment(newDate.startDate).format("MMMM D, YYYY") + " <span class='bold'>End Date: </span>" + moment(newDate.endDate).format("MMMM D, YYYY"));
+            } else if (newDate.startDate != undefined) {
+              $scope.selectedCasesDateRange = ": Start Date: " + moment(newDate.startDate).format("MMMM D, YYYY")
+            } else if (newDate.endDate != undefined) {
+              $scope.selectedCasesDateRange = ": End Date: " + moment(newDate.endDate).format("MMMM D, YYYY")
             }
             
             updateGraph();
@@ -55,6 +60,8 @@
             $scope.MenuCases = response.data;
 
             $scope.selectedCasesFilters = 0;
+            $scope.selectedCasesFilterString = '';
+
             $scope.selectedItemClick = function ($event, clickedItemId, menu) {
                 if (arraySelectedItems[menu].indexOf(clickedItemId) == -1) {
                     arraySelectedItems[menu].push(clickedItemId);
@@ -63,14 +70,18 @@
                     arraySelectedItems[menu].splice(arraySelectedItems[menu].indexOf(clickedItemId), 1);
                     $scope.selectedCasesFilters--;
                 }
+                if ($scope.selectedCasesFilters > 0) {
+                  $scope.selectedCasesFilterString = ': [' + $scope.selectedCasesFilters +']';
+                }
+                else { $scope.selectedCasesFilterString = '';  }
                 $event.currentTarget.classList.toggle('checked');
                 updateGraph();
             }
             $scope.dataRangeClick = function ($event, clickedItemId) {
+                //$scope.selectedCasesDateRange = ": " + $event.target.textContent.trim();
                 angular.element('#selectedCasesDateRange').html(": " + $event.target.textContent.trim());
                 //$scope.selectedCasesDateRange = 
                 if (clickedItemId == 0) {
-                    //$scope.selectedCasesDateRange = "";
                     angular.element('#selectedCasesDateRange').html("");
                 }
                 arraySelectedItems["data_range"] = clickedItemId;
