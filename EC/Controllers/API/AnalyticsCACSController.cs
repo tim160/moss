@@ -73,9 +73,11 @@ namespace EC.Controllers.API
                              r = r,
                              s = s,
                              c = c,
+ 
                          })
                          .Where(x => x.s != null && x.s.investigation_status_id == 9 && x.c != null & x.c.cc_is_clear_act_crime == true)
                          .ToList();
+ 
 
             return new {
                 cc_crime_statistics_categories = categories,
@@ -89,7 +91,7 @@ namespace EC.Controllers.API
                       select new {
                           year = year,
                           total1 = totals.Count(x => x.r.reported_dt.Year == year),
-                          total2 = totals.Count(x => x.r.reported_dt.Year == year & x.s.case_closure_reason_id == 6)
+                          total2 = totals.Count(x => x.r.reported_dt.Year == year & new ReportModel(x.r.id)._previous_investigation_status_id() == 6)
                       }),
             };
        }
