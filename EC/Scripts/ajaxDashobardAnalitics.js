@@ -21,8 +21,10 @@
         $scope.datePicker = {
             date: { startDate: null, endDate: null },
             options: {
+                //"parentEl": "calendarCustomDate",
                 "showDropdowns": true,
                 "autoApply": true,
+                "opens": "left",
                 ranges: {
                     'All': [moment(), moment()],
                     'Last 12 Months': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
@@ -432,7 +434,9 @@
             restrict: 'A',
             link: function (scope, element) {
                 element.bind('click', function (e) {
-                    angular.element(document.querySelector('#calendarCustomDate')).triggerHandler('click');
+                    var daterange = document.querySelector('#calendarCustomDate');
+                    daterange.style.display = "block";
+                    angular.element(daterange).triggerHandler('click');
                 });
             }
         };
