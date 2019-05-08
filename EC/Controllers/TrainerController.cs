@@ -18,7 +18,7 @@ namespace EC.Controllers
             if (user == null || user.id == 0)
                 return RedirectToAction("Login", "Service");
 
-            if (user.role_id != ECLevelConstants.level_trainer)
+      if (user.role_id != ECLevelConstants.level_trainer)
                 return RedirectToAction("Login", "Service");
 
             ViewBag.user_id = user.id;
@@ -30,12 +30,11 @@ namespace EC.Controllers
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
-                return RedirectToAction("Login", "Service");
-
+              return RedirectToAction("Login", "Service", new { returnUrl = Url.Action("Calendar", "Trainer") });
             if (user.role_id == ECLevelConstants.level_trainer)
-                return RedirectToAction("Login", "Service");
+              return RedirectToAction("Login", "Service");
 
-            ViewBag.user_id = user.id;
+              ViewBag.user_id = user.id;
 
             //string company_left_attempts = GetOnboardingsRemaining(user.company_id);
 
