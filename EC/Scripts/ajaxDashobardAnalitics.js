@@ -26,12 +26,12 @@
                 "autoApply": true,
                 "opens": "left",
                 ranges: {
-                    'All': [moment(), moment()],
-                    'Last 12 Months': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                    'Last 6 Months': [moment().subtract(6, 'days'), moment()],
-                    'Last 3 Months': [moment().subtract(29, 'days'), moment()],
-                    'Last 30 days': [moment().startOf('month'), moment().endOf('month')],
-                    'Last 7 days': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                  'All': [null, null],
+                  'Last 12 Months': [moment().subtract(12, 'months'), moment()],
+                  'Last 6 Months': [moment().subtract(6, 'months'), moment()],
+                  'Last 3 Months': [moment().subtract(3, 'months'), moment()],
+                  'Last 30 days': [moment().subtract(30, 'days'), moment()],
+                  'Last 7 days': [moment().subtract(7, 'days'), moment()]
                 },
                 "linkedCalendars": false,
                 "autoUpdateInput": false,
