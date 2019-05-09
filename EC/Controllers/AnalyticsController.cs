@@ -156,21 +156,27 @@ namespace EC.Controllers
  
             if (user != null)
             {
-                  DateTime dt1 = new DateTime(2014, 8, 1);
-                  DateTime dt2 = DateTime.Today.AddDays(1);
-                  if (types.data_range != null &&  types.data_range != "0" && types.data_range != "" && !types.data_range.StartsWith("custom"))
-                  {
-                    if(types.data_range == "1")
-                      dt1 = DateTime.Today.AddYears(-1);
-                    if (types.data_range == "2")
-                      dt1 = DateTime.Today.AddMonths(-6);
-                    if (types.data_range == "3")
-                      dt1 = DateTime.Today.AddMonths(-3);
-                    if (types.data_range == "4")
-                      dt1 = DateTime.Today.AddMonths(-1);
-                    if (types.data_range == "5")
-                      dt1 = DateTime.Today.AddDays(-7);
-                  }
+                DateTime dt1 = new DateTime(2014, 8, 1);
+                DateTime dt2 = DateTime.Today.AddDays(1);
+                if (types.dateStart.Year < 2014)
+                {
+                    types.dateStart = dt1;
+                    types.dateEnd = dt2;
+                }
+
+                  //if (types.data_range != null &&  types.data_range != "0" && types.data_range != "" && !types.data_range.StartsWith("custom"))
+                  //{
+                  //  if(types.data_range == "1")
+                  //    dt1 = DateTime.Today.AddYears(-1);
+                  //  if (types.data_range == "2")
+                  //    dt1 = DateTime.Today.AddMonths(-6);
+                  //  if (types.data_range == "3")
+                  //    dt1 = DateTime.Today.AddMonths(-3);
+                  //  if (types.data_range == "4")
+                  //    dt1 = DateTime.Today.AddMonths(-1);
+                  //  if (types.data_range == "5")
+                  //    dt1 = DateTime.Today.AddDays(-7);
+                  //}
 
 
 
@@ -190,7 +196,11 @@ namespace EC.Controllers
 
                 GlobalFunctions func = new GlobalFunctions();
                 JsonResult json = new JsonResult();
-                json.Data = func.ReportAdvancedJson(user.company_id, user.id, types.ReportsSecondaryTypesIDStrings, types.ReportsRelationTypesIDStrings, types.ReportsDepartmentIDStringss, types.ReportsLocationIDStrings, dt1, dt2);
+                json.Data = func.ReportAdvancedJson(user.company_id, user.id,
+                    types.ReportsSecondaryTypesIDStrings,
+                    types.ReportsRelationTypesIDStrings,
+                    types.ReportsDepartmentIDStringss,
+                    types.ReportsLocationIDStrings, types.dateStart, types.dateEnd);
                 return json;
             }
             else
