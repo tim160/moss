@@ -26,7 +26,7 @@
                 "autoApply": true,
                 "opens": "left",
                 ranges: {
-                  'All': [null, null],
+                    'All': [moment().subtract(9, 'years'), moment()],
                   'Last 12 Months': [moment().subtract(12, 'months'), moment()],
                   'Last 6 Months': [moment().subtract(6, 'months'), moment()],
                   'Last 3 Months': [moment().subtract(3, 'months'), moment()],
@@ -37,6 +37,9 @@
                 "autoUpdateInput": false,
                 "showCustomRangeLabel": false,
                 "alwaysShowCalendars": true,
+                locale: {
+                    cancelLabel: 'Clear'
+                }
                 //"startDate": "04/29/2019",
                 //"endDate": "05/05/2019"
             }, function(start, end, label) {
@@ -46,7 +49,11 @@
         $scope.$watch('datePicker.date', function (newDate) {
             arraySelectedItems.dateStart = newDate.startDate;
             arraySelectedItems.dateEnd = newDate.endDate;
-            if (newDate.startDate != undefined && newDate.endDate != undefined) {
+            if (newDate.label == 'All') {
+                angular.element('#selectedCasesDateRange').html("");
+                angular.element('#calendarCustomDate').val('');
+                angular.element(".daterangepicker .cancelBtn").click();
+            } else if (newDate.startDate != undefined && newDate.endDate != undefined) {
                 //$scope.selectedCasesDateRange = ": Start Date: " + moment(newDate.startDate).format("MMMM D, YYYY") + " End Date: " + moment(newDate.endDate).format("MMMM D, YYYY");
                 angular.element('#selectedCasesDateRange').html(": <span class='bold'>Start Date: </span>" + moment(newDate.startDate).format("MMMM D, YYYY") + " <span class='bold'>End Date: </span>" + moment(newDate.endDate).format("MMMM D, YYYY"));
             } else if (newDate.startDate != undefined) {
