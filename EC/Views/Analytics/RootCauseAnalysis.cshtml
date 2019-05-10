@@ -5,12 +5,23 @@
 @using EC.App_LocalResources;
 
 @{
-    ViewBag.Title = "Root Causes report";
-    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+  ViewBag.Title = "Root Causes report";
+  Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
 
-    int user_id = (Int32)ViewBag.user_id;
-    int companyId = ViewBag.um._user.company_id;
-    string _today = ViewBag._today;
+  int user_id = (Int32)ViewBag.user_id;
+  int companyId = ViewBag.um._user.company_id;
+  string _today = ViewBag._today;
+  string ec_title = "Employee Confidential";
+  bool? is_cc = ViewBag.is_cc;
+  if (!is_cc.HasValue)
+  {
+    is_cc = false;
+  }
+  if (is_cc.Value)
+  {
+    ec_title = "Campus Confidential";
+  }
+  ec_title = ec_title.ToUpper();
 }
 
 <link rel="stylesheet" href="~/Content/styleAnalitics.css" />
@@ -123,7 +134,7 @@
 </div>
 <div id="templateForPrinting">
     <div class="showPrintElement" style="display: none; font-size:32px;color: #abb9bb;">@ViewBag.companyName</div>
-    <div class="showPrintElement" style="display: none;font-size: 17px;color: #abb9bb;">EMPLOYEE CONFIDENTIAL ANALYTICS</div>
+    <div class="showPrintElement" style="display: none;font-size: 17px;color: #abb9bb;">@ec_title ANALYTICS</div>
     <div class="showPrintElement" style="display: none;font-size: 17px;color: #abb9bb;">@_today</div>
     <div class="case-MainContent-Header__leftTitle paddingTopForPrint30" style="display: none;">
         Root Cause Analysis
