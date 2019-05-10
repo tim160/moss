@@ -2696,4 +2696,7 @@
   <data name="WeakControls" xml:space="preserve">
     <value>Weak Controls</value>
   </data>
+  <data name="SHPrevention" xml:space="preserve">
+    <value>Sexual Harassment Prevention</value>
+  </data>
 </root>

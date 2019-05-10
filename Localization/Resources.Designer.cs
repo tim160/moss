@@ -6739,6 +6739,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sexual Harassment Prevention.
+        /// </summary>
+        internal static string SHPrevention {
+            get {
+                return ResourceManager.GetString("SHPrevention", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sign-Off Pending.
         /// </summary>
         internal static string SignOffPendingUp {
