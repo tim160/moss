@@ -63,3 +63,6 @@ h1 {
 .showPrintElement, .case-MainContent-Header__leftTitle {
     display: block !important;
 }
+.circleGraphInfoRow .ng-scope {
+    text-align: left;
+}
