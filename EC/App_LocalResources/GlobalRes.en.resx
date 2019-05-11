@@ -2122,4 +2122,7 @@
   <data name="ReviewReportUp" xml:space="preserve">
     <value>Review Report</value>
   </data>
+  <data name="SHPrevention" xml:space="preserve">
+    <value>Sexual Harassment Prevention</value>
+  </data>
 </root>

@@ -5407,6 +5407,15 @@ namespace EC.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sexual Harassment Prevention.
+        /// </summary>
+        public static string SHPrevention {
+            get {
+                return ResourceManager.GetString("SHPrevention", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Someone else.
         /// </summary>
         public static string SomeoneElse {
@@ -5628,6 +5637,15 @@ namespace EC.App_LocalResources {
         public static string Team {
             get {
                 return ResourceManager.GetString("Team", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Telephone.
+        /// </summary>
+        public static string telephone {
+            get {
+                return ResourceManager.GetString("telephone", resourceCulture);
             }
         }
         

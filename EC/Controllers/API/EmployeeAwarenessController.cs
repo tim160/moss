@@ -45,7 +45,7 @@ namespace EC.Controllers.API
                         })
                         .ToList(),
 
-                    categories = DB.industry_posters.Where(x => x.status == 2).ToList(),
+                    categories = DB.industry_posters.Where(x => x.status == 2).OrderBy(t => t.industry_posters_en).ToList(),
 
                     messages = messages.Where(x => x.status == 2).ToList(),
 

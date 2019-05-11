@@ -25,36 +25,43 @@
 
 
 <div id="EmployeeAwarenessBlock" class="blockSettings" ng-controller="EmployeeAwarenessController" ng-cloak>
-    <div class="mainContent">
-        <div class="leftContent">
-            @if (!is_cc.Value)
-            {
-                <div class="blockMenu posterCategoryNames">
-                    <div class="title">@GlobalRes.Industry</div>
-                    <div ng-repeat="category in categories">
-                        <div class="itemSelect" ng-class="{'active' : category.Selected}" ng-click="category.Selected = !category.Selected" value="{{category.Id}}">{{categoryName(category)}}</div>
-                    </div>
-                </div>
-            }
-            <div class="blockMenu posterMessage" ng-show="false">
-                <div class="title">@GlobalRes.Message</div>
-                <div ng-repeat="message in messages">
-                    <div class="itemSelect" ng-class="{'active' : message.Selected}" ng-click="message.Selected = !message.Selected" value="{{message.Id}}">{{messageName(message)}}</div>
-                </div>
-            </div>
-            <div class="blockMenu">
-                <div class="title">@GlobalRes.AvailableFormat</div>
-                <div ng-repeat="avaibleFormat in avaibleFormats">
-                    <div class="itemSelect" ng-class="{'active' : avaibleFormat.Selected}" ng-click="avaibleFormat.Selected = !avaibleFormat.Selected" value="{{avaibleFormat.Id}}">{{avaibleFormat.Name}}</div>
-                </div>
-            </div>
-            <div class="blockMenu">
-                <div ng-repeat="language in languages">
-                    <div class="title">{{language.Name}}</div>
-                    <div class="itemSelect" ng-class="{'active' : language.Selected}" ng-click="language.Selected = !language.Selected" value="{{language.Id}}">{{language.Name}}</div>
-                </div>
-            </div>
+  <div class="mainContent">
+    <div class="leftContent">
+      @if (!is_cc.Value)
+      {
+        <div class="blockMenu posterCategoryNames">
+          <div class="title">@GlobalRes.Industry</div>
+          <div ng-repeat="category in categories">
+            <div class="itemSelect" ng-class="{'active' : category.Selected}" ng-click="category.Selected = !category.Selected" value="{{category.Id}}">{{categoryName(category)}}</div>
+          </div>
         </div>
+
+                <div class="blockMenu">
+                  <div class="title">@GlobalRes.SHPrevention</div>
+                <div>
+                </div>
+              </div>
+      }
+      <div class="blockMenu posterMessage" ng-show="false">
+        <div class="title">@GlobalRes.Message</div>
+        <div ng-repeat="message in messages">
+          <div class="itemSelect" ng-class="{'active' : message.Selected}" ng-click="message.Selected = !message.Selected" value="{{message.Id}}">{{messageName(message)}}</div>
+        </div>
+      </div>
+      <div class="blockMenu">
+        <div class="title">@GlobalRes.AvailableFormat</div>
+        <div ng-repeat="avaibleFormat in avaibleFormats">
+          <div class="itemSelect" ng-class="{'active' : avaibleFormat.Selected}" ng-click="avaibleFormat.Selected = !avaibleFormat.Selected" value="{{avaibleFormat.Id}}">{{avaibleFormat.Name}}</div>
+        </div>
+      </div>
+   @*   <div class="blockMenu">
+        <div ng-repeat="language in languages">
+          <div class="title">{{language.Name}}</div>
+          <div class="itemSelect" ng-class="{'active' : language.Selected}" ng-click="language.Selected = !language.Selected" value="{{language.Id}}">{{language.Name}}</div>
+        </div>
+      </div>*@
+    </div>
+
         <div class="rightContent">
             <div class="topBlockFilters">
                 <div class="info">
