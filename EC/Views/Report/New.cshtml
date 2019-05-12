@@ -46,17 +46,19 @@
 
 
 @section pageStyles{
-    <script type="text/javascript" src="~/Scripts/Common/helper.js"></script>
-}
-@section pageScripts{
-    <script type="text/javascript" src="~/Scripts/View/report.js"></script>
-    <script type="text/javascript" src="~/Scripts/lib/jquery-ui.min.js"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
     <link href="~/Content/jquery-ui.css" rel="stylesheet">
 }
+@section pageScripts{
+    <script type="text/javascript" src="~/Scripts/Common/helper.js"></script>
+    <script type="text/javascript" src="~/Scripts/View/report.js"></script>
+    <script type="text/javascript" src="~/Scripts/lib/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+
+}
 
 
-<form action="New" enctype="multipart/form-data" method="POST">
+<form action="New" enctype="multipart/form-data" method="POST" ng-app="ReportNew">
     <input type="hidden" value="" />
     <div class="headerBlock">
         <div class="firstBlock">
@@ -560,7 +562,7 @@
                             <label class="file_upload file_upload@{@class_ext}">
                                 <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
                                 <span type="button" class="button addFileButton">@GlobalRes.SelectFile</span>
-                                <input type="file" id="attachments" multiple="multiple" name="attachDocuments" />
+                                <input type="file" id="attachments" multiple="multiple" name="attachDocuments" check-file-size="" />
                             </label>
                         </div>
                     </div>
@@ -949,3 +951,18 @@
     <img id="loading-image" src='@Url.Content("~/Content/Icons/giphy.gif")' alt="Loading..." />
 </div>
 @Html.Partial("~/Views/Shared/HelpPartial.cshtml", new ViewDataDictionary { { "is_reporter", true } })
+<!-- Link to open the modal -->
+<a href="#alertModal" style="display: none" id="openModalForFileSize" rel="modal:open">Open Modal</a>
+<div id="alertModal" class="modal case-modal">
+    <p style="text-align: center">
+        ERROR! The file uploaded exceeds the 4MB maximum limit.
+        Please resize and re-upload.
+    </p>
+
+    @*<div class="case-modal__linkBlockBottom clearfix">
+        <a style="float: left" href="#" id="Cancel" rel="modal:close" class="case-modal__linkBtn whiteBtn">Cancel</a>
+    </div>*@
+    <div class="case-modal__linkBlockBottom clearfix">
+        <a href="#" id="ok" rel="modal:close" class="case-modal__linkBtn whiteBtn">Ok</a>
+    </div><!-- /.case-modal__linkBlockBottom -->
+</div>
