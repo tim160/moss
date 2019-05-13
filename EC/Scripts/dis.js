@@ -77,6 +77,41 @@
             }) + 1];
         };
     });
+    angular.module('EC').directive('checkFileSize', function () {
+        return {
+            link: function (scope, elem, attr, ctrl) {
+                function bindEvent(element, type, handler) {
+                    if (element.addEventListener) {
+                        element.addEventListener(type, handler, false);
+                    } else {
+                        element.attachEvent('on' + type, handler);
+                    }
+                }
+
+                bindEvent(elem[0], 'change', function (event) {
+                    var fsizemb = this.files[0].size;
+                    fsizemb = fsizemb / 1024;
+                    fsizemb = fsizemb / 1024;
+                    fsizemb = fsizemb.toFixed(3);
+                    if (fsizemb > 4) {
+                        angular.element('#openModalForFileSize').click();
+                    } else {
+                        switch (event.currentTarget.getAttribute('data-id')) {
+                            case 'attachments':
+                                angular.element('#formDrop').submit();
+                                break;
+                            case 'newReport':
+                                angular.element('.attach').append("<table class='attachedFilesTitle' style='color: #3c3e3f;font-size: 14px;'><tr><th><img src=/Content/Icons/generic-file.png></th> <th>" + this.files[0].name + "</th></tr></table>");
+                                break;
+                            case 'value1':
+                                console.log('');
+                                break;
+                        }
+                    }
+                });
+            }
+        }
+    });
 
     angular.module('EC').directive('dropbox', function () {
         var directive = {};
@@ -480,7 +515,7 @@
                 mywindow.document.write('<link rel="stylesheet" href="/Content/RootcauseAnalisysPrint.css" type="text/css" />');
                 //mywindow.document.write('</head><body>');
                 mywindow.document.write('</head><body onload="window.print(); window.close()">');
-                //mywindow.document.write('<h1>' + title + '</h1>');
+                mywindow.document.write('<h1>' + title + '</h1>');
                 mywindow.document.write('<div class="container">');
                 mywindow.document.write(document.getElementById("templateForPrinting").innerHTML.trim());
                 mywindow.document.write(document.getElementById(elem).innerHTML);

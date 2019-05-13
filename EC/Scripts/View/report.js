@@ -1074,34 +1074,3 @@
 
 
 
-(function () {
-    'use strict'
-    var app = angular.module("EC", []);
-
-    app.directive('checkFileSize', function () {
-        return {
-            link: function (scope, elem, attr, ctrl) {
-                function bindEvent(element, type, handler) {
-                    if (element.addEventListener) {
-                        element.addEventListener(type, handler, false);
-                    } else {
-                        element.attachEvent('on' + type, handler);
-                    }
-                }
-
-                bindEvent(elem[0], 'change', function (event) {
-                    var fsizemb = this.files[0].size;
-                    fsizemb = fsizemb / 1024;
-                    fsizemb = fsizemb / 1024;
-                    fsizemb = fsizemb.toFixed(3);
-                    if (fsizemb > 4) {
-                        angular.element('#openModalForFileSize').click();
-                    } else {
-                        angular.element('.attach').append("<table class='attachedFilesTitle' style='color: #3c3e3f;font-size: 14px;'><tr><th><img src=/Content/Icons/generic-file.png></th> <th>" + this.files[0].name + "</th></tr></table>");
-                    }
-                });
-            }
-        }
-    });
-}());
-

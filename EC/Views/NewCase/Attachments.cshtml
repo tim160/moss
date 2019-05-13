@@ -19,6 +19,23 @@
 
 @Html.Partial("~/Views/Shared/Partial/_NewCasesTopMenu.cshtml")
 
+<a href="#alertModalFileSize" style="display: none" id="openModalForFileSize" rel="modal:open">Open Modal</a>
+<div id="alertModalFileSize" class="modal case-modal">
+    <p style="text-align: center">
+        ERROR! The file uploaded exceeds the 4MB maximum limit.
+        Please resize and re-upload.
+    </p>
+
+    @*<div class="case-modal__linkBlockBottom clearfix">
+            <a style="float: left" href="#" id="Cancel" rel="modal:close" class="case-modal__linkBtn whiteBtn">Cancel</a>
+        </div>*@
+    <div class="case-modal__linkBlockBottom clearfix">
+        <a href="#" id="ok" rel="modal:close" class="case-modal__linkBtn whiteBtn">Ok</a>
+    </div><!-- /.case-modal__linkBlockBottom -->
+</div>
+@*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>*@
+
 <div class="container mainNavigationTabs__tabContent-container">
     <div id="mainTab-attachment" class="mainNavigationTabs__tabContent active">
         <div class="content-container__inner">
@@ -39,7 +56,7 @@
                         </div><!-- /.dragDrop-block__text -->
                         <div class="dragDrop-block__link">
                             <a href="#!" class="btn-linkReverse selectFiles">SELECT FILES TO UPLOAD</a>
-                            <input type="file" name="files" multiple="" style="display: none;" onchange="this.form.submit();" />
+                            <input type="file" name="files" multiple="" style="display: none;" data-id="attachments" check-file-size="" />
                         </div><!-- /.dragDrop-block__link -->
                     </div><!-- /.dragDrop-block -->
                     <div class="divider p-tb-20"></div>
@@ -86,7 +103,7 @@
                                                 </div><!-- /.contentListItem__link -->
                                             </div><!-- /.contentListItem__infoBlock -->
                                         </div><!-- /.pull-right -->
-                                    </div><!-- /.dragDrop-contentListItem -->                
+                                    </div><!-- /.dragDrop-contentListItem -->
                                 }
                             }
                         }
@@ -123,7 +140,7 @@
                                 else
                                 {
                                     <span>Uploaded by reporter</span>
-                                }                                
+                                }
                             </div><!-- /.contentListItem__forWhom -->
                             <div class="contentListItem__infoBlock">
                                 <div class="contentListItem__date">@dth.ConvertDateToLongMonthString(attachment.effective_dt)</div><!-- /.contentListItem__date -->
@@ -131,13 +148,13 @@
                                     <a href="@attachment.path_nm" class="attachLink" download="@attachment.file_nm">download</a>
                                 </div><!-- /.contentListItem__link -->
                                 <div>
-                                @if (attachment.user_id == user_id)
-                                {
-                                    using (Html.BeginForm("AttachmentDelete", null, new { id = attachment.id, report_id }, FormMethod.Post, null))
+                                    @if (attachment.user_id == user_id)
                                     {
-                                        <button type="submit">X</button>
+                                        using (Html.BeginForm("AttachmentDelete", null, new { id = attachment.id, report_id }, FormMethod.Post, null))
+                                        {
+                                            <button type="submit">X</button>
+                                        }
                                     }
-                                }
                                 </div>
                             </div><!-- /.contentListItem__infoBlock -->
                         </div><!-- /.pull-right -->
