@@ -10,15 +10,20 @@ namespace EC.COM.Controllers
     public class VARController : Controller
     {
         // GET: VAR
-        public ActionResult Index()
+        public ActionResult Index(string quickview)
         {
+            bool quickView = false;
+            if (!string.IsNullOrWhiteSpace(quickview))
+              quickView = true;
+            ViewBag.quickView = quickView;
+
             return View();
         }
 
         [HttpPost]
-        public ActionResult Index(string firstName, string lastName, string companyName, string phone, string email, int numberOfEmployees, string invitationCode)
+        public ActionResult Index(string firstName, string lastName, string companyName, string phone, string email, int numberOfEmployees, string invitationCode, string quickView)
         {
-            var data = $"{firstName}|{lastName}|{companyName}|{phone}|{email}|{numberOfEmployees}|{invitationCode}";
+            var data = $"{firstName}|{lastName}|{companyName}|{phone}|{email}|{numberOfEmployees}|{invitationCode}|{quickView}";
 
             EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(false);
             EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
@@ -75,8 +80,10 @@ namespace EC.COM.Controllers
                 }
                 db.SaveChanges();
             }
-
-            return RedirectToAction("Index", "Video", new { id = System.Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(data)) });
+            if(quickView == "1")
+              return RedirectToAction("Index", "Book", new { id = System.Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(data)) });
+            else
+              return RedirectToAction("Index", "Video", new { id = System.Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(data)) });
         }
     }
 }

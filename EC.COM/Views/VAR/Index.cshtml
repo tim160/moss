@@ -1,6 +1,16 @@
 ﻿
 @{
-    ViewBag.Title = "Welcome";
+  ViewBag.Title = "Welcome";
+  string quickView = "0";
+  if (ViewBag.quickView != null && ViewBag.quickView)
+  {
+    quickView = "1";
+  }
+  string viewVideo = "View video demo";
+  if (quickView == "1")
+  {
+    viewVideo = "Get Pricing";
+  }
 }
 
 <div class="general-container welcomePage">
@@ -98,7 +108,7 @@
         <section class="welcomeTitleSection">
             <div class="container">
                 <div class="welcomeTitle">
-                    Welcome! You have been referred by a partner
+                    Welcome. You’ve received a invitation code
                 </div>
                 <div class="welcomeSubTitle">
                     This means you have access to special pricing
@@ -144,14 +154,15 @@
                                 <input type="number" class="form-mainContent__labelInput" name="NumberOfEmployees" value="1">
                             </label>
                             <label class="form-mainContent__label">
-                                Referral Partner Invitation Code
+                                Invitation Code
                                 <input type="text" class="form-mainContent__labelInput" name="InvitationCode">
                             </label>
 
                         </div>
+                        <input  type="hidden" type="number" name="QuickView" value="@quickView">
                         <div class="form-footer ">
                             <button class="submitFormBtn btn" type="submit">
-                                View video demo
+                                @viewVideo
                             </button>
                         </div>
                     }
@@ -192,7 +203,7 @@
     $(function () {
         $('form').on('submit', function (event) {
             event.preventDefault();
-            var array = ['FirstName', 'LastName', 'CompanyName', 'Phone', 'Email', 'NumberOfEmployees'];
+            var array = ['FirstName', 'LastName', 'CompanyName', 'Phone', 'Email', 'NumberOfEmployees', 'QuickView'];
             var flag = 0;
             array.forEach(function (item, i, arr) {
                 var temp = $('[name="' + item + '"]');
