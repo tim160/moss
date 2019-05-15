@@ -123,9 +123,11 @@
                                         var from = angular.element("#urlAjaxUploadFiles").attr("from");
                                         if (from == "User") {
                                             angular.element("#logoUser").attr("src", response.data + '?' + new Date().getTime());
-                                            $(".userNavigation__logo img").attr("src", response.data);
+                                            angular.element(".userNavigation__logo img").attr("src", response.data);
                                         } else {
                                             angular.element("#logoCompany").attr("src", response.data);
+                                            angular.element(".userNavigation__info img").attr("src", response.data);
+                                            
                                         }
                                     }); 
                                 }

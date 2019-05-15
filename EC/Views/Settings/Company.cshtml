@@ -39,7 +39,7 @@
     {
         report_domain = "https://CampusConfidential.com/Report/";
     }
-    if (cm._company!= null && cm._company.company_short_name!= null && cm._company.company_short_name.Trim().Length > 0)
+    if (cm._company != null && cm._company.company_short_name != null && cm._company.company_short_name.Trim().Length > 0)
     {
         report_domain = report_domain + cm._company.company_short_name.Trim();
     }
@@ -48,6 +48,23 @@
         report_domain = "";
     }
 }
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<a href="#alertModalFileSize" style="display: none" id="openModalForFileSize" rel="modal:open">Open Modal</a>
+<div id="alertModalFileSize" class="modal case-modal">
+    <p style="text-align: center">
+        ERROR! The file uploaded exceeds the 4MB maximum limit.
+        Please resize and re-upload.
+    </p>
+
+    @*<div class="case-modal__linkBlockBottom clearfix">
+            <a style="float: left" href="#" id="Cancel" rel="modal:close" class="case-modal__linkBtn whiteBtn">Cancel</a>
+        </div>*@
+    <div class="case-modal__linkBlockBottom clearfix">
+        <a href="#" id="ok" rel="modal:close" class="case-modal__linkBtn whiteBtn">Ok</a>
+    </div><!-- /.case-modal__linkBlockBottom -->
+</div>
 <style>
     .oldstyle {
         display: table !important;
@@ -73,19 +90,19 @@
         <div class="headerCompanyProfile">
             <div class="headerBlock">
                 <div class="blockImg">
-                    <form action="@Url.Action("AddLogoCompany")" method="post" enctype="multipart/form-data" onsubmit="return handleSubmit(this);">
+                    <form>
                         <div style="width: 240px; height: 110px;">
                             <img id="logoCompany" src='@Url.Content(cm._company.path_en)' />
                         </div>
                         @if (is_valid_mediator)
                         {
-                            <input type="file" accept="image/*" id="_file" name="_file" multiple="multiple" style="width: 1px;height: 1px;opacity: 0;" />
+                            <input type="file" name="MAX_FILE_SIZE" value="9999999" data-id="settingsIndex" accept="image/*" id="_file" multiple="multiple" style="width: 1px;height: 1px;opacity: 0;" check-file-size="" />
                         }
                     </form>
                     @if (is_valid_mediator)
                     {
                         <div id="hoverCompanyPhoto">
-                            <label class="newImageBtn">@LocalizationGetter.GetString("Newimage")</label>
+                            <label class="newImageBtn" make-click-hidden-input="">@LocalizationGetter.GetString("Newimage")</label>
                         </div>
                     }
                 </div>
@@ -111,7 +128,7 @@
                     <h2 class="menuItem moldstyle">
                         @LocalizationGetter.GetString("Disclaimers")
                         <img id="DisclaimersExclamationmarkImg" style="display: none;" src="~/Content/Icons/exclamationmark.png" title="Fill Disclaimer Form in order to achieve better results during the new report submission process" />
-                    </h2>                    
+                    </h2>
                     @*
                         <h2 class="menuItem">@GlobalRes.SecondaryType</h2>
                         <h2 class="menuItem">@GlobalRes.CaseAdminDepartment</h2>
@@ -175,7 +192,7 @@
                         @Html.Partial("~/Views/Shared/Partial/_SettingsCompanyLocationTemplate.cshtml", _location, new ViewDataDictionary {
                             { "is_cc", is_cc },
                             { "is_valid_mediator", is_valid_mediator },
-                            { "LocationExtendeds", ViewBag.LocationExtendeds },                            
+                            { "LocationExtendeds", ViewBag.LocationExtendeds },
                         })
                     }
                 </div>
@@ -255,7 +272,7 @@
                     }
                 </div>
             </div><!--blockReporterType-->
-            
+
             <div class="blockOutcomes" style="display: none;">
                 @if (is_valid_mediator)
                 {
@@ -286,7 +303,7 @@
                     }
                 </div>
             </div><!--blockOutcome-->
-           
+
             <div class="blockRootCauses" style="display: none;" id="tblRootCauses">
                 @Html.Partial("~/Views/Settings/partial/blockRootCauses.cshtml", new ViewDataDictionary {
                     { "Company_root_cases_behavioral", ViewBag.Company_root_cases_behavioral},
@@ -329,7 +346,7 @@
                     </table>
                 </div>
             </div>
-           
+
             <div class="blockCaseAdminDepartment" style="display: none;" ng-controller="SettingsCompanyCaseAdminDepartmentController" ng-cloak>
                 @if (is_valid_mediator)
                 {
@@ -363,7 +380,7 @@
                 <div class="container blockDisclaimer-container">
                     <div class="blockDisclaimer__textBlock">
                         <p>
-                            This page contains the information that will be seen by all reporters, including your employees. 
+                            This page contains the information that will be seen by all reporters, including your employees.
                         </p>
                         <p>
                             Upload all conduct guidelines, policy documents, legal warnings and disclaimers.
@@ -392,17 +409,17 @@
                                 </div><!-- /.col-6 -->
                                 <div class="settingsProf-contentBlock__headMain-cols settingsProf-contentBlock__headMain-colLinks col-6">
                                     <a ng-href="{{file.file_path}}" class="link" download="{{file.display_name}}">Download</a>
-                                  @if (is_valid_mediator)
-                                  {  
-                                      <a href="#" ng-click="deleteFile(file)" class="link-delete">Delete</a>
-                                  }
+                                    @if (is_valid_mediator)
+                                    {
+                                        <a href="#" ng-click="deleteFile(file)" class="link-delete">Delete</a>
+                                    }
                                 </div><!-- /.col-6 -->
                             </div><!-- /.settingsProf-contentBlock__headMain -->
                         </div>
 
                         <div class="settingsProf-contentBlock__main">
                             <label>File Name</label>
-                            <input  class="textareaBlock textareaBlockSettings" style="font-size: 14px; height: auto;" ng-model="file.display_name" ng-change="file.DescriptionChanged = true" />
+                            <input class="textareaBlock textareaBlockSettings" style="font-size: 14px; height: auto;" ng-model="file.display_name" ng-change="file.DescriptionChanged = true" />
                             <p style="font-size: 10px;">Enter the file name you want displayed to reporters</p>
                         </div>
                         <div class="settingsProf-contentBlock__bottom clearfix">
@@ -411,9 +428,9 @@
                                 <a href="#" class="btn-link pull-right" ng-class="file.DescriptionChanged ? '' : 'btn-link__disabled'" ng-click="saveFile(file)">{{file.DescriptionChanged ? 'Save' : 'Saved'}}</a>
                             }
                         </div>
-                    
+
                     </div><!-- /.blockDisclaimer-contentBlock -->
-                    
+
                     <div class="settingsProf-contentBlock">
                         <div class="settingsProf-contentBlock__head">
                             <div class="settingsProf-contentBlock__headTop">
@@ -432,7 +449,7 @@
                             </div><!-- /.settingsProf-contentBlock__headMain -->
                         </div>
                         <div class="settingsProf-contentBlock__main">
-                            <textarea  class="textareaBlock textareaBlockSettings" ng-model="model.company_disclamer_page.message_to_employees" ng-change="model.message_to_employeesChanged = true"></textarea>
+                            <textarea class="textareaBlock textareaBlockSettings" ng-model="model.company_disclamer_page.message_to_employees" ng-change="model.message_to_employeesChanged = true"></textarea>
                         </div>
                         <div class="settingsProf-contentBlock__bottom clearfix">
                             @if (is_valid_mediator)
@@ -460,7 +477,7 @@
                             </div><!-- /.settingsProf-contentBlock__headMain -->
                         </div>
                         <div class="settingsProf-contentBlock__main">
-                            <textarea  class="textareaBlock textareaBlockSettings" ng-model="model.company_disclamer_page.message_about_guidelines" ng-change="model.message_about_guidelinesChanged = true"></textarea>
+                            <textarea class="textareaBlock textareaBlockSettings" ng-model="model.company_disclamer_page.message_about_guidelines" ng-change="model.message_about_guidelinesChanged = true"></textarea>
                         </div>
                         <div class="settingsProf-contentBlock__bottom clearfix">
                             @if (is_valid_mediator)
@@ -470,7 +487,7 @@
                         </div>
                     </div><!-- /.blockDisclaimer-contentBlock -->
                 </div><!-- /.container -->
-            </div>        
+            </div>
         </div>
     </div><!--contentSettings-->
 </div><!--contentCompanyProfile-->
