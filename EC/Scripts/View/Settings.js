@@ -83,69 +83,6 @@
     /*page company*/
 
     /*this function works for index page - update user foto too*/
-    /*for upload files add foto*/
-    $('.newImageBtn').click(function () {
-            $("#_file").click();
-    });
-    $("#_file").on('change', function (e) {
-
-        var urlAjaxUploadFiles = $("#urlAjaxUploadFiles").val();
-        var from = $("#urlAjaxUploadFiles").attr("from");
-        var files = e.target.files;
-
-        if (files.length > 0) {
-            var fd = new FormData();
-            if (from != "") {
-                fd.append("from", from);
-            } else {
-            }
-
-            var file = document.getElementById('_file');
-            for (var i = 0; i < file.files.length; i++) {
-                fd.append('_file', file.files[i]);
-            }
-            $.ajax({
-                type: "POST",
-                url: urlAjaxUploadFiles,
-                contentType: false,
-                processData: false,
-                data: fd,
-                success: function (result) {
-                    var from = $("#urlAjaxUploadFiles").attr("from");
-                    if (from == "User") {
-                        $("#logoUser").attr("src", result + '?' + new Date().getTime());
-                    } else {
-                        $("#logoCompany").attr("src", result);
-                    }
-
-                },
-                error: function (xhr, status, p3, p4) {
-                    var err = "Error " + " " + status + " " + p3 + " " + p4;
-                    if (xhr.responseText && xhr.responseText[0] == "{")
-                        err = JSON.parse(xhr.responseText).Message;
-                    console.log(err);
-                }
-            });
-        } else {
-            alert("This browser doesn't support HTML5 file uploads!");
-        }
-    });
-
-        //function blockActivityHeight() {
-        //    if ($('#menu').height() < 50) {
-        //        $('.positionActivityIcon').height(89);
-        //    }
-        //    else {
-        //        $('.positionActivityIcon').height($('#casesHeared').height());
-        //    }
-        //}
-
-        //function miniMenu() {
-        //    $('.mainTitle').click(function () {
-        //        $('.mainTitle + div').toggle();
-        //        blockActivityHeight();
-        //    });
-        //}
         var contentCompanyProfile = $('.contentCompanyProfile');
 
         $(".menuCompanyProfile .settingMenuItems .menuItem").click(function (element) {

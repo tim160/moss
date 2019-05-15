@@ -77,7 +77,7 @@
             }) + 1];
         };
     });
-    angular.module('EC').directive('checkFileSize', function () {
+    angular.module('EC').directive('checkFileSize', function (uploadImage) {
         return {
             link: function (scope, elem, attr, ctrl) {
                 function bindEvent(element, type, handler) {
@@ -103,14 +103,49 @@
                             case 'newReport':
                                 angular.element('.attach').append("<table class='attachedFilesTitle' style='color: #3c3e3f;font-size: 14px;'><tr><th><img src=/Content/Icons/generic-file.png></th> <th>" + this.files[0].name + "</th></tr></table>");
                                 break;
-                            case 'value1':
-                                console.log('');
+                            case 'settingsIndex':
+                                var from = angular.element("#urlAjaxUploadFiles").attr("from");
+
+                                var filesInput = angular.element("#_file");
+
+                                if (filesInput[0].files.length > 0) {
+                                    var fd = new FormData();
+                                    if (from != "") {
+                                        fd.append("from", from);
+                                    }
+
+                                    for (var i = 0; i < filesInput[0].files.length; i++) {
+                                        fd.append('_file', filesInput[0].files[i]);
+                                    }
+
+                                    var analiticsObj = uploadImage.getData(fd);
+                                    analiticsObj.then(function (response) {
+                                        var from = angular.element("#urlAjaxUploadFiles").attr("from");
+                                        if (from == "User") {
+                                            angular.element("#logoUser").attr("src", response.data + '?' + new Date().getTime());
+                                            $(".userNavigation__logo img").attr("src", response.data);
+                                        } else {
+                                            angular.element("#logoCompany").attr("src", response.data);
+                                        }
+                                    }); 
+                                }
                                 break;
                         }
                     }
                 });
             }
         }
+    });
+
+    angular.module('EC').directive('makeClickHiddenInput', function () {
+        return {
+            restrict: 'A',
+            link: function (scope, element) {
+                element.bind('click', function (e) {
+                    angular.element('#_file').trigger('click');
+                });
+            }
+        };
     });
 
     angular.module('EC').directive('dropbox', function () {
@@ -2232,6 +2267,33 @@
             deleteCompanyTime: { url: '/api/Trainer/DeleteCompanyTime', method: 'POST', params: {}, isArray: false },
         });
     };
+})();
+
+(function () {
+
+    'use strict';
+
+    angular.module('EC')
+        .factory('uploadImage', function ($http, $q) {
+            return {
+                getData: function (fd) {
+                    var deffered = $q.defer();
+                    $http({
+                        method: 'POST',
+                        data: fd,
+                        url: '/Settings/AddLogoCompany',
+                        headers: { 'Content-Type': undefined },
+                        transformRequest: angular.identity
+                    })
+                        .then(function success(response) {
+                            deffered.resolve(response);
+                        }, function error(response) {
+                            deffered.reject(response.status);
+                        });
+                    return deffered.promise;
+                }
+            }
+        });
 })();
 
 

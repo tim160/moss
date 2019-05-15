@@ -567,7 +567,6 @@ namespace EC.Controllers
         {
             string result = "false";
             HttpPostedFileBase photo = Request.Files["_file"];
-            /*попробую получить юзера из сессии и id компании*/
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return result;

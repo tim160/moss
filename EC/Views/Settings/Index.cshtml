@@ -59,11 +59,11 @@
             <div class="blockPersonalPhotoSetting">
                 <div class="blockPhotoSetting">
                     <img id="logoUser" class="PersonalPhotoBlock" src="@Url.Content(um._user.photo_path)" />
-                    <input type="file" accept="image/*" id="_file" name="_file" multiple="multiple" style="width: 1px;height: 1px;opacity: 0;" />
+                    <input type="file" data-id="settingsIndex" accept="image/*" id="_file" name="_file" multiple="multiple" style="width: 1px;height: 1px;opacity: 0;" check-file-size=""/>
                 </div>
                 <div class="blockHoverPhoto">
                     <label class="close"></label>
-                    <label class="newImageBtn">@LocalizationGetter.GetString("Newimage")</label>
+                    <label class="newImageBtn" make-click-hidden-input="" >@LocalizationGetter.GetString("Newimage")</label>
                 </div>
             </div>
 
