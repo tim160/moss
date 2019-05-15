@@ -373,60 +373,69 @@ namespace EC.Controllers.API
             booked_sessions_f = 0;
             CompanyModel cm = new CompanyModel(company_id);
 
+          //  string parent_url = "employeeconfidential.com/book/onboarding?company="+cm._company.guid.Value;
+           // if(is_cc)
+          //    parent_url = "campusconfidential.com/book/onboarding?company=" + cm._company.guid.Value; ;
+            //bool showAddSession = false;
             int paid_oboarding = cm._company.onboard_sessions_paid;
             if (cm != null && cm._company != null && paid_oboarding > 0)
             {
 
-                // at least customer paid for them
-                remaining_onboardings = $"You've paid for {paid_oboarding} sessions. ";
-                if (cm._company.onboard_sessions_expiry_dt != null && cm._company.onboard_sessions_expiry_dt < DateTime.Today)
+              // at least customer paid for them
+              remaining_onboardings = $"You've paid for {paid_oboarding} sessions. ";
+              if (cm._company.onboard_sessions_expiry_dt != null && cm._company.onboard_sessions_expiry_dt < DateTime.Today)
+              {
+                remaining_onboardings = "Your onboarding sessions expired.";
+             ///   showAddSession = true;
+              }
+              else
+              {
+                //var dt = cm._company.onboard_sessions_expiry_dt.Value.AddYears(-1);
+                //booked_sessions = DB.TrainerTimes.Where(t => t.CompanyId == company_id && t.Hour >= dt).Count();
+                booked_sessions = DB.TrainerTimes.Where(t => t.CompanyId == company_id).Count();
+                booked_sessions_f = DB.TrainerTimes.Where(t => t.CompanyId == company_id & t.Hour > DateTime.Now).Count();
+                switch (booked_sessions)
                 {
-                    remaining_onboardings = "Your onboarding sessions expired.";
-                }
-                else
-                {
-                    //var dt = cm._company.onboard_sessions_expiry_dt.Value.AddYears(-1);
-                    //booked_sessions = DB.TrainerTimes.Where(t => t.CompanyId == company_id && t.Hour >= dt).Count();
-                    booked_sessions = DB.TrainerTimes.Where(t => t.CompanyId == company_id).Count();
-                    booked_sessions_f = DB.TrainerTimes.Where(t => t.CompanyId == company_id & t.Hour > DateTime.Now).Count();
-                    switch (booked_sessions)
-                    {
-                        case 0:
-                            remaining_onboardings += "None taken. ";
-                            break;
-                        case 1:
-                            remaining_onboardings += "Used one. ";
-                            break;
-                        case 2:
-                            remaining_onboardings += "Used two. ";
-                            break;
-                        case 3:
-                            remaining_onboardings += "Used tree. ";
-                            break;
-
-                    }
-
-                    int remaining_sessions = paid_oboarding - booked_sessions;
-                    switch (remaining_sessions)
-                    {
-                        case 0:
-                            remaining_onboardings += "You have no onboarding and follow-up sessions remaining. ";
-                            break;
-                        case 1:
-                            remaining_onboardings += "You have one session remaining. ";
-                            break;
-                        case 2:
-                            remaining_onboardings += "You have two sessions remaining. ";
-                            break;
-                        case 3:
-                            remaining_onboardings += "You have an onboarding and two follow-up sessions remaining. ";
-                            break;
-
-                    }
+                  case 0:
+                    remaining_onboardings += "None taken. ";
+                    break;
+                  case 1:
+                    remaining_onboardings += "Used one. ";
+                    break;
+                  case 2:
+                    remaining_onboardings += "Used two. ";
+                    break;
+                  case 3:
+                    remaining_onboardings += "Used tree. ";
+                    break;
 
                 }
+
+                int remaining_sessions = paid_oboarding - booked_sessions;
+                switch (remaining_sessions)
+                {
+                  case 0:
+                    remaining_onboardings += "You have no onboarding and follow-up sessions remaining. ";
+                ///    showAddSession = true;
+                    break;
+                  case 1:
+                    remaining_onboardings += "You have one session remaining. ";
+                    break;
+                  case 2:
+                    remaining_onboardings += "You have two sessions remaining. ";
+                    break;
+                  case 3:
+                    remaining_onboardings += "You have an onboarding and two follow-up sessions remaining. ";
+                    break;
+
+                }
+
+              }
             }
-
+            else
+            {
+          //    showAddSession = true;
+            }
 
             return remaining_onboardings;
 

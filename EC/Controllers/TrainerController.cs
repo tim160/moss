@@ -36,8 +36,9 @@ namespace EC.Controllers
 
               ViewBag.user_id = user.id;
 
-            //string company_left_attempts = GetOnboardingsRemaining(user.company_id);
-
+      //string company_left_attempts = GetOnboardingsRemaining(user.company_id);
+            CompanyModel model = new CompanyModel(user.company_id);
+            ViewBag.company_guid = model._company.guid.Value.ToString();
             return View();
         }
     }

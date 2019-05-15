@@ -1,7 +1,9 @@
 ﻿
 @{
-    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
-    ViewBag.Title = "Trainer Company";
+  Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+  ViewBag.Title = "Trainer Company";
+  string company_guid = ViewBag.company_guid;
+
 }
 
 <style>
@@ -22,7 +24,7 @@
     <div ng-controller="TrainerCompanyController" ng-cloak>
         <div class="row">
             <div class="col-md-12 text-center">
-                <p><b>{{onboardingsRemaining}}</b></p>
+                <p><b>{{onboardingsRemaining}}<span> Add onboarding sessions <a href="https://employeeconfidential.com/book/onboarding?company=@company_guid">here</a></span></b></p>
             </div>
         </div>
         <div ui-calendar="uiConfig.calendar" ng-model="eventSources" calendar="calendarOne">
