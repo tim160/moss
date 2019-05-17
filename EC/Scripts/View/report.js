@@ -757,6 +757,11 @@
                 $('.contentBlock.reportingAboutArea').hide();
             }
         });
+        $(".caseInformationReport .inputRadio").click(function (event) {
+            if (event.currentTarget.getAttribute('data-val').toLowerCase() == "sexual harrasment" || event.currentTarget.getAttribute('data-val').toLowerCase() == "sexual abuse") {
+                $("#ProgrammingConsiderations").show();
+            }
+        });
 
         injuryDescription.on('change', function () {
             if ($("input:radio[name=resultInjury]:checked").val() == 'Yes') {

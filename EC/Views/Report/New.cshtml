@@ -427,31 +427,31 @@
             <div class="caseInformation tab" data-id="3">
                 <div class="content">
 
-                    <div class="contentBlock checkboxListStyle" tabindex="1">
+                    <div class="contentBlock " tabindex="1">
                         <div id="personeAgain">
                             <div class="title">@GlobalRes.YouReport</div>
                             <div style="display: flex;justify-content: center; margin-left: 10px;">
 
                             </div>
                             @*<div class="help" title="" onclick="">
-                                    ?
-                                    <div class="hoverElement">
-                                        <div class="triangleHover position"></div>
-                                        <div class="spec position">
-                                            •	Accounting, Auditing and Financial Reporting (i.e. financial misconduct, internal controls, expense reporting)<br /><br />
-                                            •	Business Integrity (i.e. bribery, falsification of documents, fraud, COI, vendor/customer issues, HIPAA)<br /><br />
-                                            •	HR, Diversity and Workplace Respect (i.e. discrimination, harassment, compensation, general HR and cases marked as “other”)<br /><br />
-                                            •	Environment, Health and Safety (i.e. EPA compliance, assault, safety, OSHA, substance abuse)<br /><br />
-                                            •	Misuse, Misappropriation of Corporate Assets (i.e. employee theft, time clock abuse)<br /><br />
-                                        </div>
-                                    </div>
-                                </div>*@
+                ?
+                <div class="hoverElement">
+                    <div class="triangleHover position"></div>
+                    <div class="spec position">
+                        •	Accounting, Auditing and Financial Reporting (i.e. financial misconduct, internal controls, expense reporting)<br /><br />
+                        •	Business Integrity (i.e. bribery, falsification of documents, fraud, COI, vendor/customer issues, HIPAA)<br /><br />
+                        •	HR, Diversity and Workplace Respect (i.e. discrimination, harassment, compensation, general HR and cases marked as “other”)<br /><br />
+                        •	Environment, Health and Safety (i.e. EPA compliance, assault, safety, OSHA, substance abuse)<br /><br />
+                        •	Misuse, Misappropriation of Corporate Assets (i.e. employee theft, time clock abuse)<br /><br />
+                    </div>
+                </div>
+            </div>*@
 
                         </div>
                         <input type="hidden" value="@ViewBag.CustomSecondaryType" name="CustomSecondaryType" />
 
 
-                        <div class="rowBlock caseInformationReport">
+                        <div class="contentBlock checkboxListStyle rowBlock caseInformationReport" style="border-bottom: 0px;">
                             <input type="hidden" class="validate" value="false" name="caseInformationReport" data-vltarget=".caseInformationReport" data-validate="notEmpty" />
                             @if (ViewBag.secondary_type_mandatory != null)
                             {
@@ -473,6 +473,14 @@
                                     <span class="radioTitle">@GlobalRes.Other</span>
                                 </label>
                             </div>
+
+                        </div>
+                        <div style="display: none" id="ProgrammingConsiderations">
+                            <p style="font-family: OpenSans-Regular, arial, verdana, sans-serif;font-size: 12px;">
+                                It is required that the alleged offender be identified in cases of sexual harassment and sexual abuse in order to allow a due process investigation.
+                                <br />
+                                It is strongly recommended that the alleged victim in cases of sexual harassment and sexual abuse is identified in order to allow a due process investigation.
+                            </p>
                         </div>
                     </div>
 
