@@ -1879,7 +1879,7 @@ namespace EC.Localization.App_GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Description of outcome for each subject.
+        ///   Looks up a localized string similar to Description of outcome for each alleged offender.
         /// </summary>
         internal static string DescriptionOutcome {
             get {
@@ -5074,7 +5074,7 @@ namespace EC.Localization.App_GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The role of an involved party could be that of a witness, victim, subject, reporter or other..
+        ///   Looks up a localized string similar to The role of an involved party could be that of a witness, victim, alleged offender, reporter or other..
         /// </summary>
         internal static string RoleInReportExpla {
             get {

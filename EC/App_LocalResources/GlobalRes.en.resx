@@ -710,7 +710,7 @@
     <value>Description</value>
   </data>
   <data name="DescriptionOutcome" xml:space="preserve">
-    <value>Description of outcome for each subject</value>
+    <value>Description of outcome for each Alleged Offender</value>
   </data>
   <data name="detailsCase" xml:space="preserve">
     <value>You can always check the case progress using the following details</value>
@@ -1757,7 +1757,7 @@
     <value>Role</value>
   </data>
   <data name="RoleInReportExpla" xml:space="preserve">
-    <value>The role of an involved party could be that of a witness, victim, subject, reporter or other.</value>
+    <value>The role of an involved party could be that of a witness, victim, alleged offender, reporter or other.</value>
   </data>
   <data name="Sales" xml:space="preserve">
     <value>Sales</value>

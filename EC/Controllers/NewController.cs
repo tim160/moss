@@ -599,7 +599,8 @@ namespace EC.Controllers
                             list_types.Add(LocalizationGetter.GetString("EmployeeRelations"));
                             list_types.Add(LocalizationGetter.GetString("SecuritiesViolation"));
                             list_types.Add(LocalizationGetter.GetString("ShareholderConcerns"));
-
+                            list_types.Add(LocalizationGetter.GetString("SexualAbuse"));
+                            list_types.Add(LocalizationGetter.GetString("HostileEnvironment"));
                         }
                         if (is_cc)
                         {
@@ -672,7 +673,9 @@ namespace EC.Controllers
                             list_types.Add(LocalizationGetter.GetString("EnvironmentalSafetyMatters"));
                             list_types.Add(LocalizationGetter.GetString("HumanAnimalResearch"));
                             list_types.Add(LocalizationGetter.GetString("ResearchGrantMisconduct"));
-                        }
+                            list_types.Add(LocalizationGetter.GetString("SexualAbuse"));
+                            list_types.Add(LocalizationGetter.GetString("HostileEnvironment"));
+                    }
 
                         foreach (string _types in list_types)
                         {

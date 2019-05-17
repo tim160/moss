@@ -226,7 +226,7 @@
     <value>Add Organizational Influences</value>
   </data>
   <data name="AddOutcomesExplanation" xml:space="preserve">
-    <value>Add disciplinary outcomes for Subjects as well as outcome options for Witnesses and Reporters</value>
+    <value>Add disciplinary outcomes for Alleged Offenders as well as outcome options for Witnesses and Reporters</value>
   </data>
   <data name="AddPerson" xml:space="preserve">
     <value>add person</value>
@@ -848,7 +848,7 @@
     <value>Description</value>
   </data>
   <data name="DescriptionOutcome" xml:space="preserve">
-    <value>Description of outcome for each subject</value>
+    <value>Description of outcome for each alleged offender</value>
   </data>
   <data name="detailsCase" xml:space="preserve">
     <value>You can always check the case progress using the following details</value>
@@ -2162,7 +2162,7 @@
     <value>Role</value>
   </data>
   <data name="RoleInReportExpla" xml:space="preserve">
-    <value>The role of an involved party could be that of a witness, victim, subject, reporter or other.</value>
+    <value>The role of an involved party could be that of a witness, victim, alleged offender, reporter or other.</value>
   </data>
   <data name="RootCauses" xml:space="preserve">
     <value>Root Causes</value>
@@ -2698,5 +2698,11 @@
   </data>
   <data name="SHPrevention" xml:space="preserve">
     <value>Sexual Harassment Prevention</value>
+  </data>
+  <data name="HostileEnvironment" xml:space="preserve">
+    <value>Hostile Environment</value>
+  </data>
+  <data name="SexualAbuse" xml:space="preserve">
+    <value>Sexual Abuse</value>
   </data>
 </root>

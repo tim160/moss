@@ -403,7 +403,7 @@ namespace EC.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add disciplinary outcomes for Subjects as well as outcome options for Witnesses and Reporters.
+        ///   Looks up a localized string similar to Add disciplinary outcomes for Alleged Offenders as well as outcome options for Witnesses and Reporters.
         /// </summary>
         internal static string AddOutcomesExplanation {
             get {
@@ -2320,7 +2320,7 @@ namespace EC.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Description of outcome for each subject.
+        ///   Looks up a localized string similar to Description of outcome for each alleged offender.
         /// </summary>
         internal static string DescriptionOutcome {
             get {
@@ -3567,6 +3567,15 @@ namespace EC.Localization {
         internal static string History {
             get {
                 return ResourceManager.GetString("History", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hostile Environment.
+        /// </summary>
+        internal static string HostileEnvironment {
+            get {
+                return ResourceManager.GetString("HostileEnvironment", resourceCulture);
             }
         }
         
@@ -6415,7 +6424,7 @@ namespace EC.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The role of an involved party could be that of a witness, victim, subject, reporter or other..
+        ///   Looks up a localized string similar to The role of an involved party could be that of a witness, victim, alleged offender, reporter or other..
         /// </summary>
         internal static string RoleInReportExpla {
             get {
@@ -6708,6 +6717,15 @@ namespace EC.Localization {
         internal static string Severity {
             get {
                 return ResourceManager.GetString("Severity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sexual Abuse.
+        /// </summary>
+        internal static string SexualAbuse {
+            get {
+                return ResourceManager.GetString("SexualAbuse", resourceCulture);
             }
         }
         
