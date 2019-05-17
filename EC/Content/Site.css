@@ -2021,3 +2021,12 @@ button {
     box-sizing: border-box;
     vertical-align: middle;
 }
+
+@media only screen and (max-width: 425px) {
+    .contentBlock.checkboxListStyle .radioTitle {
+        margin-top: -5px;
+    }
+    .contentBlock.checkboxListStyle .inputBlock {
+        display: flex;
+    }
+}
