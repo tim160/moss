@@ -160,31 +160,7 @@
                         <p class="title">@GlobalRes.Youareaan:</p>
                         <div class="rowBlock reporterType vlCorrect">
                             <input type="hidden" class="validate vlCorrect reporterTypeInput" value="1" name="reporterTypeDetail" data-vltarget=".reporterTypeDetail" data-validate="notEmpty">
-                            @*@if (ViewBag.relationship != null)
-                                {
-                                    int count = 0;
-                                    foreach (var item in ViewBag.relationship)
-                                    {
-                                        if (count == 0)
-                                        {
-                                            <div class="fourBlock inputRadio option active" data-val="@item.id">
-                                                <label class="inputBlock" for="@String.Concat(@item.relationship_en)">
-                                                    <input id="@String.Concat(@item.relationship_en)" type="radio" name="radioName" value="@item.id" /><span class="radioButton"></span><span class="radioTitle">@item.relationship_en</span>
-                                                </label>
-                                            </div>
-                                            count++;
-                                        }
-                                        else
-                                        {
-                                            <div class="fourBlock inputRadio option" data-val="@item.id">
-                                                <label class="inputBlock" for="@String.Concat(@item.relationship_en)">
-                                                    <input id="@String.Concat(@item.relationship_en)" type="radio" name="radioName" value="@String.Concat(@item.relationship_en)" /><span class="radioButton"></span><span class="radioTitle">@String.Concat(@item.relationship_en)</span>
-                                                </label>
-                                            </div>
-                                        }
-                                    ///b Employee” came through as “9” in “Reported as:”
-                                    }
-                                }*@
+                         
                             @if (ViewBag.relationship != null)
                             {
                                 foreach (var item in ViewBag.relationship)
@@ -478,7 +454,7 @@
                         <div style="display: none" id="ProgrammingConsiderations">
                             <p style="font-family: OpenSans-Regular, arial, verdana, sans-serif;font-size: 12px;">
                                 It is required that the alleged offender be identified in cases of sexual harassment and sexual abuse in order to allow a due process investigation.
-                                <br />
+                                <br /><br />
                                 It is strongly recommended that the alleged victim in cases of sexual harassment and sexual abuse is identified in order to allow a due process investigation.
                             </p>
                         </div>
@@ -568,7 +544,7 @@
                         <p class="title">@GlobalRes.PleaseAttach</p>
                         <div class="attach">
                             <label class="file_upload file_upload@{@class_ext}">
-                                <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+                                <input type="hidden" name="MAX_FILE_SIZE" value="4000" />
                                 <span type="button" class="button addFileButton">@GlobalRes.SelectFile</span>
                                 <input type="file" data-id="newReport" id="attachments" multiple="multiple" name="attachDocuments" check-file-size="" />
                             </label>

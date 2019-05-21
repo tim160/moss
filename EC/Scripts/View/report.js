@@ -758,9 +758,13 @@
             }
         });
         $(".caseInformationReport .inputRadio").click(function (event) {
-            if (event.currentTarget.getAttribute('data-val').toLowerCase() == "sexual harrasment" || event.currentTarget.getAttribute('data-val').toLowerCase() == "sexual abuse") {
+            $("#ProgrammingConsiderations").hide();
+            $("input:checkbox[name=whatHappened]:checked").each(function (indx, element) {
+              if (element.id.toLowerCase() == "sexual harassment" || element.id.toLowerCase() == "sexual abuse")
                 $("#ProgrammingConsiderations").show();
-            }
+            });
+
+
         });
 
         injuryDescription.on('change', function () {
