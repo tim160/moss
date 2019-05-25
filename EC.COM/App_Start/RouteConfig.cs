@@ -53,8 +53,12 @@ namespace EC.COM
                 name: "Book",
                 url: "Book/{id}",
                 defaults: new { controller = "Book", action = "Index", id = UrlParameter.Optional }
-                );            
-
+                );
+            routes.MapRoute(
+                name: "BookOnboarding",
+                url: "Book/Onboarding",
+                defaults: new { controller = "Book", action = "Onboarding" }
+                );
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
