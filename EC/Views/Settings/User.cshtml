@@ -24,7 +24,19 @@
 }
 @Html.Partial("~/Views/Settings/partial/casesHeared.cshtml", active)
 <!--casesHeared-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<a href="#alertModalFileSize" style="display: none" id="openModalForFileSize" rel="modal:open">Open Modal</a>
+<div id="alertModalFileSize" class="modal case-modal">
+    <p style="text-align: center">
+        ERROR! The file uploaded exceeds the 4MB maximum limit.
+        Please resize and re-upload.
+    </p>
 
+    <div class="case-modal__linkBlockBottom clearfix">
+        <a href="#" id="ok" rel="modal:close" class="case-modal__linkBtn whiteBtn">Ok</a>
+    </div><!-- /.case-modal__linkBlockBottom -->
+</div>
 <div class="blockSettings" ng-controller="SettingsUserEditController" ng-cloak>
     <div class="contentSettings">
         <div class="blockPersonalPhotoSetting">
@@ -32,13 +44,13 @@
                 <img id="logoUser" class="PersonalPhotoBlock" ng-src="{{photo_path}}">
 
                 <input type="hidden" id="urlAjaxUploadFiles" from="User" value="@Url.Action("User", "Settings")" />
-                <input type="file" accept="image/*" id="_file" name="_file" multiple="multiple" style="width: 1px;height: 1px;opacity: 0;">
+                <input type="file"  data-id="settingsIndex" name="MAX_FILE_SIZE" value="9999999" accept="image/*" id="_file" name="_file" multiple="multiple" style="width: 1px;height: 1px;opacity: 0;" check-file-size="">
             </div>
             @if (um._user.role_id == 5)
             {
                 <div class="blockHoverPhoto">
                     <label class="close"></label>
-                    <label class="newImageBtn">@LocalizationGetter.GetString("Newimage")</label>
+                    <label class="newImageBtn"make-click-hidden-input="">@LocalizationGetter.GetString("Newimage")</label>
                 </div>
             }
         </div>
