@@ -15,13 +15,26 @@
     ViewBag.active = "Attachments";
 
 }
+<!-- Modal popUp http://jquerymodal.com/ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
+<a href="#alertModalFileSize" style="display: none" id="openModalForFileSize" rel="modal:open">Open Modal</a>
+<div id="alertModalFileSize" class="modal case-modal">
+    <p style="text-align: center">
+        ERROR! The file uploaded exceeds the 4MB maximum limit.
+        Please resize and re-upload.
+    </p>
+    <div class="case-modal__linkBlockBottom clearfix">
+        <a href="#" id="ok" rel="modal:close" class="case-modal__linkBtn whiteBtn">Ok</a>
+    </div><!-- /.case-modal__linkBlockBottom -->
+</div>
 @if ((rm._report != null) && (rm._report.id != 0))
 {
     { Html.RenderPartial("~/Views/ReporterDashboard/settingMenu.cshtml", new { user_id = user_id, unread_message_number = unread_message_number, active = "Attachments" }); }
 
     <div id="attachmentPage">
-        @using (Html.BeginForm("SaveAttachments", "ReporterDashboard", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("SaveAttachments", "ReporterDashboard", FormMethod.Post, new { enctype = "multipart/form-data", id = "formDrop" }))
         {
             @Html.Hidden("report_id", report_id)
             @Html.Hidden("mode", "upload_rd")
@@ -29,11 +42,11 @@
                 <div class="dottedContainer">
                     <div class="semiboldText blackText weight18">Drag and drop files here</div>
                     <div class="secondSemiboldText">or</div>
-                        <div class="selectFiles">
-                            select files to upload
-                            <input type="file" id="attachments" class="hiddenElement btn-upload-attach" name="files" multiple="">
-                        </div>
-                        
+                    <div class="selectFiles">
+                        select files to upload
+                        <input type="file" id="attachments" class="hiddenElement btn-upload-attach" name="files" multiple="" data-id="attachments" check-file-size="">
+                    </div>
+
                 </div>
             </div>
         }
@@ -76,75 +89,19 @@
                                 <a href="@attachment.path_nm">download</a>
                             </p>
                             @*if (attachment.user_id == user_id)
-                            {
-                                <p class="download">
-                                    @using (Html.BeginForm("AttachmentDelete", null, new { id = attachment.id, report_id }, FormMethod.Post, null))
-                                    {
-                                        <button type="submit">X</button>
-                                    }
-                                </p>
-                            }*@
+                                {
+                                    <p class="download">
+                                        @using (Html.BeginForm("AttachmentDelete", null, new { id = attachment.id, report_id }, FormMethod.Post, null))
+                                        {
+                                            <button type="submit">X</button>
+                                        }
+                                    </p>
+                                }*@
                         </td>
                     </tr>
-                    }
+                }
             </tbody>
         </table>
     </div>
 
 }
-
-    <script>
-    $(function () {
-        if (typeof (window.FileReader) === 'undefined') {
-            $('.dottedContainer .semiboldText').text('');
-            $('.dottedContainer .secondSemiboldText').text('');
-        }
-        $(".dottedContainer").on("dragover", function (event) {
-            event.preventDefault();
-            event.stopPropagation();
-        });
-
-        $(".dottedContainer").on("dragleave", function (event) {
-            event.preventDefault();
-            event.stopPropagation();
-        });
-
-        $('.dottedContainer').on('drop', function () {
-            event.preventDefault();
-            event.stopPropagation();
-            makeAjaxcall();
-        });
-        $("#attachments").click(function () {
-            //makeAjaxcall();
-        });
-
-        function makeAjaxcall() {
-             var data = new FormData();
-            data.append('report_id', '@report_id');
-            data.append('mode', 'upload_rd');
-            data.append('type', $('.inputBlock > input:checked').val());
-            for (var x = 0; x < event.dataTransfer.files.length; x++) {
-                data.append('files' + x, event.dataTransfer.files[x]);
-            }
-
-            $.ajax({
-                type: "POST",
-                url: '@Url.Action("SaveAttachments", "ReporterDashboard")',
-                contentType: false,
-                processData: false,
-                data: data,
-                success: function (result) {
-                    window.location = window.location;
-                },
-                error: function (xhr, status, p3, p4) {
-                }
-            });
-        }
-
-        $('.btn-upload-attach').on('change', function () {
-            setTimeout(function () {
-                $('#attachmentPage form').submit();
-            }, 500)
-        });
-    });
-    </script>

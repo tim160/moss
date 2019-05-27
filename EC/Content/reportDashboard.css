@@ -1700,4 +1700,35 @@ margin: 21px 30px 0px 30px;
        position: relative;
        font-size: 14px;
    }
-   
+.modal.case-modal {
+    background-color: #05b5a2;
+    border-radius: 0;
+    padding: 20px;
+    color: #fff;
+    max-width: 750px;
+}
+
+.case-modal__linkBlockBottom {
+    display: block;
+    width: 100%;
+    margin-top: 50px;
+    margin-bottom: 10px;
+}
+.whiteBtn {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    font-family: 'OpenSans-Bold', arial, verdana, sans-serif;
+    font-size: 14px;
+    text-transform: uppercase;
+    border-radius: 2px;
+    padding: 6px 12px;
+    background-color: transparent;
+    border: 1px solid transparent;
+}
+.case-modal__linkBtn {
+    float: right;
+}
+.modal a.close-modal {
+    display: none !important;
+}

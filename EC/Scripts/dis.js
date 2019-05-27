@@ -89,51 +89,53 @@
                 }
 
                 bindEvent(elem[0], 'change', function (event) {
-                    var fsizemb = this.files[0].size;
-                    fsizemb = fsizemb / 1024;
-                    fsizemb = fsizemb / 1024;
-                    fsizemb = fsizemb.toFixed(3);
-                    if (fsizemb > 4) {
-                        angular.element('#openModalForFileSize').click();
-                    } else {
-                        switch (event.currentTarget.getAttribute('data-id')) {
-                            case 'attachments':
-                                angular.element('#formDrop').submit();
-                                break;
-                            case 'newReport':
-                                angular.element('.attach').append("<table class='attachedFilesTitle' style='color: #3c3e3f;font-size: 14px;'><tr><th><img src=/Content/Icons/generic-file.png></th> <th>" + this.files[0].name + "</th></tr></table>");
-                                break;
-                            case 'settingsIndex':
-                                var from = angular.element("#urlAjaxUploadFiles").attr("from");
+                    Array.from(this.files).forEach(file => {
+                        var fsizemb = file.size;
+                        fsizemb = fsizemb / 1024;
+                        fsizemb = fsizemb / 1024;
+                        fsizemb = fsizemb.toFixed(3);
+                        if (fsizemb > 4) {
+                            angular.element('#openModalForFileSize').click();
+                        } else {
+                            switch (event.currentTarget.getAttribute('data-id')) {
+                                case 'attachments':
+                                    angular.element('#formDrop').submit();
+                                    break;
+                                case 'newReport':
+                                    angular.element('.attach').append("<table class='attachedFilesTitle' style='color: #3c3e3f;font-size: 14px;'><tr><th><img src=/Content/Icons/generic-file.png></th> <th>" + file.name + "</th></tr></table>")
+                                    break;
+                                case 'settingsIndex':
+                                    var from = angular.element("#urlAjaxUploadFiles").attr("from");
 
-                                var filesInput = angular.element("#_file");
+                                    var filesInput = angular.element("#_file");
 
-                                if (filesInput[0].files.length > 0) {
-                                    var fd = new FormData();
-                                    if (from != "") {
-                                        fd.append("from", from);
-                                    }
-
-                                    for (var i = 0; i < filesInput[0].files.length; i++) {
-                                        fd.append('_file', filesInput[0].files[i]);
-                                    }
-
-                                    var analiticsObj = uploadImage.getData(fd);
-                                    analiticsObj.then(function (response) {
-                                        var from = angular.element("#urlAjaxUploadFiles").attr("from");
-                                        if (from == "User") {
-                                            angular.element("#logoUser").attr("src", response.data + '?' + new Date().getTime());
-                                            angular.element(".userNavigation__logo img").attr("src", response.data);
-                                        } else {
-                                            angular.element("#logoCompany").attr("src", response.data);
-                                            angular.element(".userNavigation__info img").attr("src", response.data);
-                                            
+                                    if (filesInput[0].files.length > 0) {
+                                        var fd = new FormData();
+                                        if (from != "") {
+                                            fd.append("from", from);
                                         }
-                                    }); 
-                                }
-                                break;
+
+                                        for (var i = 0; i < filesInput[0].files.length; i++) {
+                                            fd.append('_file', filesInput[0].files[i]);
+                                        }
+
+                                        var analiticsObj = uploadImage.getData(fd);
+                                        analiticsObj.then(function (response) {
+                                            var from = angular.element("#urlAjaxUploadFiles").attr("from");
+                                            if (from == "User") {
+                                                angular.element("#logoUser").attr("src", response.data + '?' + new Date().getTime());
+                                                angular.element(".userNavigation__logo img").attr("src", response.data);
+                                            } else {
+                                                angular.element("#logoCompany").attr("src", response.data);
+                                                angular.element(".userNavigation__info img").attr("src", response.data);
+
+                                            }
+                                        });
+                                    }
+                                    break;
+                            }
                         }
-                    }
+                    });
                 });
             }
         }
