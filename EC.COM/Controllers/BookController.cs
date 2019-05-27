@@ -256,7 +256,7 @@ namespace EC.COM.Controllers
                 varinfo.Last_nm,
                 Request.Url.AbsoluteUri.ToLower(),
                 $"{Request.Url.Scheme}://{Request.Url.Host}{(Request.Url.Port == 80 ? "" : ":" + Request.Url.Port.ToString())}/Book/CompanyRegistrationVideo?emailedcode{varinfo.Emailed_code_to_customer}&invitationcode=VAR",
-                $"{System.Configuration.ConfigurationManager.AppSettings["MainSite"]}new/company/{varinfo.Emailed_code_to_customer}"
+                $"{System.Configuration.ConfigurationManager.AppSettings["MainSite"]}new/company/registration/{varinfo.Emailed_code_to_customer}"
                 );
             string body = eb.Body;
 
@@ -338,6 +338,8 @@ namespace EC.COM.Controllers
 
         public ActionResult Onboarding()
         {
+
+            string id = "";
             return View();
         }
     }
