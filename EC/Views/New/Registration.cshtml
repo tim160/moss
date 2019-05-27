@@ -9,13 +9,10 @@
   <link rel="stylesheet" type="text/css" href="/Content/styleReportDashboard.css">
   //  @Styles.Render("~/Content/Styles");
   bool is_cc = ViewBag.is_cc;
-  var _code = ViewBag.code;
-
-
+ 
   UserModel um = new UserModel();
   CompanyModel cm = new CompanyModel();
-  int company_id = 0;
-  ViewBag.Title = LocalizationGetter.GetString("NewCompanyRegistration", is_cc);
+   ViewBag.Title = LocalizationGetter.GetString("NewCompanyRegistration", is_cc);
   Layout = "~/Views/Shared/_Layout.cshtml";
   <style>
     .fullContainer {

@@ -101,14 +101,10 @@ namespace EC.Controllers
             return View(new var_info());
         }
 
-    public ActionResult Registration(string id, string code, string data)
+    public ActionResult Registration(string id)
     {
-      string _code = "";
-      if (!string.IsNullOrEmpty(code))
-        _code = code;
+ 
 
-      ViewBag.code = _code;
-      ViewBag.id = id;
       #region EC-CC Viewbag
       bool is_cc = DomainUtil.IsCC(Request.Url.AbsoluteUri.ToLower());
       ViewBag.is_cc = is_cc;
