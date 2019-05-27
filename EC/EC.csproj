@@ -1217,6 +1217,7 @@
     <Content Include="Scripts\View\customSelectModalIndexCase.js" />
     <Content Include="Scripts\View\LoginHereCompany.js" />
     <Content Include="Scripts\View\menuWork.js" />
+    <Content Include="Scripts\View\newCompanyRegistration.js" />
     <Content Include="Scripts\View\newCompany.js" />
     <Content Include="Scripts\View\newIndex.js" />
     <Content Include="Scripts\View\newPayment.js" />
@@ -1358,7 +1359,6 @@
     <Content Include="Views\ReporterDashboard\settingMenu.cshtml" />
     <Content Include="Views\Analytics\Dashboard.cshtml" />
     <Content Include="Views\Shared\_ReportPendingNotification.cshtml" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\New\Registration.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
