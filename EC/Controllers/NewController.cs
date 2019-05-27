@@ -101,7 +101,29 @@ namespace EC.Controllers
             return View(new var_info());
         }
 
-        public ActionResult Success(string show)
+    public ActionResult Registration(string id)
+    {
+ 
+
+      #region EC-CC Viewbag
+      bool is_cc = DomainUtil.IsCC(Request.Url.AbsoluteUri.ToLower());
+      ViewBag.is_cc = is_cc;
+      string cc_ext = "";
+      if (is_cc) cc_ext = "_cc";
+      ViewBag.cc_extension = cc_ext;
+      #endregion
+
+ 
+      if (id != null && id != "0")
+      {
+        var model = db.var_info.FirstOrDefault(x => x.emailed_code_to_customer == id) ?? new var_info();
+
+        return View(model);
+      }
+      return View(new var_info());
+    }
+
+    public ActionResult Success(string show)
         {
             #region EC-CC Viewbag
             bool is_cc = DomainUtil.IsCC(Request.Url.AbsoluteUri.ToLower());

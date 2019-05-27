@@ -3,5 +3,107 @@
     ViewBag.Title = "Add Onboarding Sessions";
 }
 
-<h2>Onboarding</h2>
+<div class="general-container pricingPage">
 
+  <header class="header">
+    <div class="top-headerBg">
+      <div class="container">
+        <div class="top-header">
+          <a href="http://campusconfidential.com" class="top-header__campusLink">
+            <span class="top-header__campusLink-text">
+              Campus Confidential
+            </span>
+            <img src="~/Content/images/svg-icons/upper-right.svg" alt="" />
+          </a>
+          <div class="top-header__loginBar">
+            <nav class="top-header__loginBar-nav">
+              <li class="top-header__loginBar-li">
+                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Login" class="top-header__loginBar-a">
+                  Client Login
+                </a>
+              </li><!-- /.top-header__loginBar-li -->
+              <li class="top-header__loginBar-li">
+                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Report" class="top-header__loginBar-a">
+                  File a Report
+                </a>
+              </li><!-- /.top-header__loginBar-li -->
+              <li class="top-header__loginBar-li">
+                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/CheckStatus" class="top-header__loginBar-a">
+                  Check Report Status
+                </a>
+              </li><!-- /.top-header__loginBar-li -->
+            </nav><!-- /.top-header__loginBar-nav -->
+          </div><!-- /.top-header__loginBar -->
+        </div><!-- /.top-header -->
+      </div>
+    </div>
+    <div class="main-headerBg ">
+      <div class="container">
+        <div class="main-header">
+          <a href="/" class="main-headerLogo">
+            <div class="main-headerLogo__img">
+              <img src="~/Content/images/0-main-logo.png" alt="" />
+            </div><!-- /.main-headerLogo__img -->
+            <div class="main-headerLogo__text">
+              Reduce risk. Create trust.
+            </div><!-- /.main-headerLogo__text -->
+          </a><!-- /.main-headerLogo -->
+          <div class="main-headerMenu-mobile">
+            <a href="/" class="main-headerLogo-mobile">
+              <div class="main-headerLogo__img-mobile">
+                <img src="~/Content/images/0-main-logo.png" alt="" />
+              </div><!-- /.main-headerLogo__img -->
+              <div class="main-headerLogo__text-mobile">
+                Reduce risk. Create trust.
+              </div><!-- /.main-headerLogo__text -->
+            </a><!-- /.main-headerLogo -->
+            <a href="#" class="main-headerLogo-mobile-burgerBtn">
+              <img src="~/Content/images/svg-icons/burger.svg" alt="" />
+            </a>
+          </div><!-- /.main-headerMenu-mobile -->
+          <div class="main-headerMenu">
+            <nav class="main-headerMenu__nav">
+              <li class="main-headerMenu__li">
+                <a href="/#benefitsSection" class="main-headerMenu__a">
+                  Benefits
+                </a>
+              </li><!-- /.main-headerMenu__li -->
+              <li class="main-headerMenu__li">
+                <a href="/#gridSection" class="main-headerMenu__a">
+                  Incident Reporting
+                </a>
+              </li><!-- /.main-headerMenu__li -->
+              <li class="main-headerMenu__li">
+                <a href="/#menegementSection" class="main-headerMenu__a">
+                  Case Management
+                </a>
+              </li><!-- /.main-headerMenu__li -->
+              <li class="main-headerMenu__li">
+                <a href="about.html" data-scroll-to="" class="main-headerMenu__a">
+                  About
+                </a>
+              </li><!-- /.main-headerMenu__li -->
+              <li class="main-headerMenu__li">
+                <a href="/#contactSection" class="main-headerMenu__a">
+                  Contact
+                </a>
+              </li><!-- /.main-headerMenu__li -->
+            </nav><!-- /.main-headerMenu__nav -->
+          </div><!-- /.main-headerMenu -->
+        </div><!-- /.main-header -->
+      </div><!-- /.container -->
+    </div><!-- /.main-headerBg -->
+  </header><!-- /.header -->
+  <main class="main">
+ 
+    <section class="pricingMainSection">
+      <div class="container">
+ 
+      </div>
+    </section>
+
+
+  </main><!-- /.main -->
+  @{Html.RenderPartial("footer");}
+
+</div><!-- /.general-container -->
