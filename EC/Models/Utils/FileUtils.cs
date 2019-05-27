@@ -21,7 +21,7 @@ namespace EC.Models.Utils
             var fileItem = files[file];
             if (files.Count <= 0) return null;
             if (fileItem.ContentLength <= 0) return null;
-            if (fileItem.ContentLength > FileConstants.maxFileAllowed) return null;
+   ///////remove to make a check         if (fileItem.ContentLength > FileConstants.maxFileAllowed) return null;
 
             var fileName = DateTime.Now.Ticks + Path.GetExtension(fileItem.FileName);
             fileItem.SaveAs(UploadTarget + fileName);
