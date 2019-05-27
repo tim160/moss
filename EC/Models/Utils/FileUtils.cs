@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Hosting;
 using EC.Models.Database;
+using EC.Constants;
 
 namespace EC.Models.Utils
 {
@@ -20,7 +21,8 @@ namespace EC.Models.Utils
             var fileItem = files[file];
             if (files.Count <= 0) return null;
             if (fileItem.ContentLength <= 0) return null;
- 
+            if (fileItem.ContentLength > FileConstants.maxFileAllowed) return null;
+
             var fileName = DateTime.Now.Ticks + Path.GetExtension(fileItem.FileName);
             fileItem.SaveAs(UploadTarget + fileName);
             string extension = Path.GetExtension(fileItem.FileName);
