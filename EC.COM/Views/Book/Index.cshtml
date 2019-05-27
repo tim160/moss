@@ -241,8 +241,8 @@
                                 </div>
                             </div>
                             <div class="pricingBill-footer">
-                                <h3 id="more25k">Pricing available upon request. Contact <a href="mailto:sales@employeeconfidential.com">sales@employeeconfidential.com</a></h3>
-                                <button id="more25kb" class="submitBigBtn btn" type="submit">Buy now</button>
+                                <h3 id="more50k">Pricing available upon request. Contact <a href="mailto:sales@employeeconfidential.com">sales@employeeconfidential.com</a></h3>
+                                <button id="more50kb" class="submitBigBtn btn" type="submit">Buy now</button>
                             </div>
                         </div>
                     </div>
@@ -276,12 +276,12 @@
             var invitationCode = $('#InvitationCode').val();
             var year = $('[name="year"]:checked').val();
 
-            $('#more25k').hide();
-            $('#more25kb').show();
+            $('#more50k').hide();
+            $('#more50kb').show();
             $('.price-section').show();
-            if (numberOfEmployees > 25000) {
-                $('#more25k').show();
-                $('#more25kb').hide();
+            if (numberOfEmployees > 50000) {
+                $('#more50k').show();
+                $('#more50kb').hide();
                 $('.price-section').hide();
             }
 
