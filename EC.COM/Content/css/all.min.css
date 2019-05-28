@@ -4197,3 +4197,38 @@ body, .general-container.welcomePage, .welcomePage .main,
         width: 100%;
     }
 }
+.inputBlock input[type="radio"]:checked ~ span {
+    color: rgb(60, 62, 63);
+}
+
+.inputBlock input[type="radio"]:checked + span {
+    background-position: bottom left;
+}
+
+.inputBlock input[type="radio"] + span {
+    background-position: top left;
+}
+
+.inputBlock span.radioButton {
+    background: url(../images/radio.png) no-repeat;
+    padding-left: 22px;
+    line-height: 12px;
+    height: 12px;
+    display: block;
+    float: left;
+    margin-top: 6px;
+}
+
+.inputBlock input[type="radio"] + span {
+    background-position: top left;
+}
+
+.inputBlock span.radioButton {
+    background: url(../images/radio.png) no-repeat;
+    padding-left: 22px;
+    line-height: 12px;
+    height: 12px;
+    display: block;
+    float: left;
+    margin-top: 6px;
+}
