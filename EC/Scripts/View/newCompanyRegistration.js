@@ -53,6 +53,7 @@
         valTB(valLast);
         valTB_rv(valEmail, rv_email);
         valTB(valTitle);
+        companyInUse(valCompanyName.val().trim());
 
          if (!valCode.hasClass('error') &&
             !valCompanyName.hasClass('error') &&
@@ -131,7 +132,7 @@
         startLoader();
         $.ajax({
             method: "POST",
-            url: "/New/CreateCompany",
+            url: "/New/CreateCompanyVAR",
             data: {
                 code: $("#code").val().trim(),
                 location: $("#location").val().trim(),
