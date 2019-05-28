@@ -65,14 +65,7 @@ namespace EC.Controllers
                 string cc_ext = "";
                 if (is_cc) cc_ext = "_cc";
                 ViewBag.cc_extension = cc_ext;
-                #endregion
-
-
-                //    if(id == 1 ) - nado pokazat message reporteru iz psd
-                //         reporter - file report no company
-                ////screen - http://invis.io/QK2VGQNAW
-                ////PSD - http://invis.io/a/G91HFKB8NJ4ZV
-
+        #endregion
 
                 CompanyModel model = new CompanyModel(id);
                 company currentCompany = model.GetById(id);
