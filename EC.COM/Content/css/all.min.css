@@ -4216,7 +4216,7 @@ body, .general-container.welcomePage, .welcomePage .main,
     height: 12px;
     display: block;
     float: left;
-    margin-top: 6px;
+    margin-top: 3px;
 }
 
 .inputBlock input[type="radio"] + span {
@@ -4230,5 +4230,5 @@ body, .general-container.welcomePage, .welcomePage .main,
     height: 12px;
     display: block;
     float: left;
-    margin-top: 6px;
+    margin-top: 3px;
 }
