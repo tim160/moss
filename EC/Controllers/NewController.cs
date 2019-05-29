@@ -103,7 +103,7 @@ namespace EC.Controllers
 
     public ActionResult Registration(string id)
     {
- 
+
 
       #region EC-CC Viewbag
       bool is_cc = DomainUtil.IsCC(Request.Url.AbsoluteUri.ToLower());
@@ -113,14 +113,22 @@ namespace EC.Controllers
       ViewBag.cc_extension = cc_ext;
       #endregion
 
- 
-      if (id != null && id != "0")
+
+      if (!string.IsNullOrWhiteSpace(id))
       {
+        if (!db.var_info.Any(x => x.emailed_code_to_customer == id && x.is_registered == false))
+        {
+          return RedirectToAction("Login", "Service");
+        }
         var model = db.var_info.FirstOrDefault(x => x.emailed_code_to_customer == id && x.is_registered == false) ?? new var_info();
 
         return View(model);
       }
-      return View(new var_info());
+      else
+      {
+        return RedirectToAction("Login", "Service");
+      }
+
     }
 
     public ActionResult Success(string show)
@@ -1722,6 +1730,35 @@ namespace EC.Controllers
           string login = glb.GenerateLoginName(first, last);
           string pass = glb.GeneretedPassword().Trim();
 
+          #region VAR Update
+          if (company_id != 0)
+          {
+            if (!string.IsNullOrWhiteSpace(emailed_code_to_customer))
+            {
+              var varinfo = db.var_info.Where(x => x.emailed_code_to_customer == emailed_code_to_customer && x.is_registered == false).FirstOrDefault();
+
+              if (varinfo != null)
+              {
+                varinfo.is_registered = true;
+                varinfo.registered_dt = DateTime.Now;
+                varinfo.registered_company_nm = _company.company_nm;
+                varinfo.registered_first_nm = first;
+                varinfo.registered_last_nm = last;
+                try
+                {
+                  db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                  logger.Error(ex.ToString());
+                  return "varinfo saving failed";
+                }
+              }
+            }
+          }
+          #endregion
+
+
           #region User Saving
           if (company_id != 0)
           {
@@ -1807,41 +1844,6 @@ namespace EC.Controllers
           else
             return LocalizationGetter.GetString("UserSavingFailed");
           #endregion
-
-
-          if (company_id != 0)
-          {
-            if (!string.IsNullOrWhiteSpace(emailed_code_to_customer))
-            {
-              var varinfo = db.var_info.Where(x => x.emailed_code_to_customer == emailed_code_to_customer && x.is_registered == false).FirstOrDefault();
-
-              if (varinfo != null)
-              {
-                varinfo.is_registered = true;
-                varinfo.registered_dt = DateTime.Now;
-                varinfo.registered_company_nm = _company.company_nm;
-                varinfo.registered_first_nm = first;
-                varinfo.registered_last_nm = last;
-
-
-                try
-                {
- 
-                  db.SaveChanges();
-                   transaction.Commit();
-                }
-                catch (Exception ex)
-                {
-                  logger.Error(ex.ToString());
-                  transaction.Rollback();
-                  return "varinfo saving failed";
-                }
-
-
-              }
-            }
-          }
-
 
           return LocalizationGetter.GetString("_Completed").ToLower();
 
