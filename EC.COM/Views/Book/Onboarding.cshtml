@@ -1,4 +1,4 @@
-﻿<div class="general-container pricingPage">
+﻿<div class="general-container pricingPage" ng-controller="onboarding">
     <style>
         .inputBlock input[type="radio"] {
             display: none;
@@ -127,12 +127,6 @@
                                     platform.
                                 </div>
                                 <div class="pricingForm-block__input">
-                                    @*<div class="form-mainContent__dropDownList dropDownList ">
-                                            <label class="form-mainContent__label">
-                                                Number of employees
-                                                <input class="form-mainContent__labelInput calc" id="NumberOfEmployees" type="number" name="NumberOfEmployees" value="">
-                                            </label>
-                                        </div>*@
                                 </div>
                             </div>
                             <div class="pricingForm-block">
@@ -146,7 +140,7 @@
                                 <div class="pricingForm-block__input">
                                     <div class="form-mainContent__dropDownList" style="display: flex;flex-direction: row;flex-wrap: nowrap;justify-content: space-between;align-items: center;align-content: center;">
                                         <div class="freeBlock inputRadio option active" data-val="1">
-                                            <label class="inputBlock" for="One">
+                                            <label class="inputBlock" for="One" ng-click="checkboxItem('one')">
                                                 <input id="One" type="radio" name="stay" value="Completely Anonymous">
                                                 <span class="radioButton"></span>
                                                 <span class="radioTitle">One</span>
@@ -154,7 +148,7 @@
                                         </div>
 
                                         <div class="freeBlock inputRadio option active" data-val="1">
-                                            <label class="inputBlock" for="Two">
+                                            <label class="inputBlock" for="Two" ng-click="checkboxItem('two')">
                                                 <input id="Two" type="radio" name="stay" value="Completely Anonymous">
                                                 <span class="radioButton"></span>
                                                 <span class="radioTitle">Two</span>
@@ -162,7 +156,7 @@
                                         </div>
 
                                         <div class="freeBlock inputRadio option active" data-val="1">
-                                            <label class="inputBlock" for="Three">
+                                            <label class="inputBlock" for="Three" ng-click="checkboxItem('three')">
                                                 <input id="Three" type="radio" name="stay" value="Completely Anonymous">
                                                 <span class="radioButton"></span>
                                                 <span class="radioTitle">Three</span>
@@ -191,15 +185,15 @@
                                         $1,000
                                     </div>
                                 </div>
-                                
+
                             </div>
                             <div class="pricingBill-main price-section">
                                 <div class="pricingBill-line pricingBill-lineTotal clearfix">
                                     <div class="pricingBill-line__text">
                                         Total Price
                                     </div>
-                                    <div class="pricingBill-line__tax" id="priceT">
-                                        $1,000
+                                    <div class="pricingBill-line__tax">
+                                        ${{ priceT }}
                                     </div>
                                 </div>
 
@@ -227,3 +221,7 @@
     @{Html.RenderPartial("footer");}
 
 </div><!-- /.general-container -->
+
+@section scripts {
+    <script src="~/Scripts/Onboarding.js"></script>
+}

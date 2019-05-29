@@ -4232,3 +4232,6 @@ body, .general-container.welcomePage, .welcomePage .main,
     float: left;
     margin-top: 3px;
 }
+.submitBigBtn {
+    cursor: pointer;
+}

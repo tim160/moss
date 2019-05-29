@@ -335,8 +335,14 @@ namespace EC.COM.Controllers
 
             return RedirectToAction("CompanyRegistrationVideo", "Book", new { emailedcode = varinfo.Emailed_code_to_customer, invitationcode = "VAR" });
         }
-
+        [HttpGet]
         public ActionResult Onboarding()
+        {
+            string id = "";
+            return View();
+        }
+        [HttpPost]
+        public ActionResult OnboardingSubmit()
         {
 
             string id = "";
