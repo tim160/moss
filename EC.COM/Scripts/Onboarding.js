@@ -20,11 +20,17 @@ purchaseApp.controller("onboarding", function ($scope) {
         }
     }
     $scope.submitForm = function () {
+        var result = false;
         if ($scope.priceT == 0) {
             $scope.validationButtons = true;
+            result = true;
         }
         if ($scope.invitationCode == undefined) {
             $scope.validationInput = true;
+            result = true;
+        }
+        if (result == false) {
+            angular.element('#formDrop').submit();
         }
     }
 }); 
