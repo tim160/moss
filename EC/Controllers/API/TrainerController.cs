@@ -140,7 +140,7 @@ namespace EC.Controllers.API
                 {
                     Result = false,
                     Code = 3,
-                    Message = $"You've booked session already",
+                    Message = $"You’ve already booked a session. Do you want to change the date?",
                 };                
             }
 

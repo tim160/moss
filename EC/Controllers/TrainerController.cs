@@ -18,7 +18,7 @@ namespace EC.Controllers
             if (user == null || user.id == 0)
                 return RedirectToAction("Login", "Service");
 
-      if (user.role_id != ECLevelConstants.level_trainer)
+            if (user.role_id != ECLevelConstants.level_trainer)
                 return RedirectToAction("Login", "Service");
 
             ViewBag.user_id = user.id;
@@ -40,6 +40,15 @@ namespace EC.Controllers
             CompanyModel model = new CompanyModel(user.company_id);
             ViewBag.company_guid = model._company.guid.Value.ToString();
             return View();
+        }
+        public ActionResult AddOnboarding()
+        {
+
+          user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+          if (user == null || user.id == 0)
+            return RedirectToAction("Login", "Service");
+          company cm = new CompanyModel(user.company_id)._company;
+          return Redirect("https://www.employeeconfidential.com/book/onboarding/" + cm.guid.ToString());
         }
     }
 }
