@@ -6,7 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using EC.COM.Models;
 namespace EC.COM.Controllers
 {
     public class BookController : Controller
@@ -353,7 +353,7 @@ namespace EC.COM.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult OnboardingSubmit()
+        public ActionResult Onboarding(OnboardingForm form)
         {
 
             string id = "";
