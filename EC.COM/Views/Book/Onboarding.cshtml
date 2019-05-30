@@ -114,9 +114,9 @@
                                     Referral Partner Invitation Code
                                 </div>
                                 <div class="pricingForm-block__input">
-                                    <label class="form-mainContent__label">
+                                    <label class="form-mainContent__label" ng-class="{test: validationInput == true}">
                                         Invitation Code
-                                        <input type="text" class="form-mainContent__labelInput calc" id="InvitationCode" name="InvitationCode" value="">
+                                        <input type="text" ng-change="validationInput=false" ng-model="invitationCode" class="form-mainContent__labelInput calc" id="InvitationCode" name="InvitationCode" value="">
                                     </label>
                                 </div>
                             </div>
@@ -129,14 +129,15 @@
                                 <div class="pricingForm-block__input">
                                 </div>
                             </div>
-                            <div class="pricingForm-block">
+                            <style>
+                                .test {
+                                    border: 1px solid red;
+                                }
+                            </style>
+                            <div class="pricingForm-block" ng-class="{test: validationButtons == true}">
                                 <div class="pricingForm-block__title">
                                     Number of sessions required*:
                                 </div>
-
-
-
-
                                 <div class="pricingForm-block__input">
                                     <div class="form-mainContent__dropDownList" style="display: flex;flex-direction: row;flex-wrap: nowrap;justify-content: space-between;align-items: center;align-content: center;">
                                         <div class="freeBlock inputRadio option active" data-val="1">
@@ -146,7 +147,6 @@
                                                 <span class="radioTitle">One</span>
                                             </label>
                                         </div>
-
                                         <div class="freeBlock inputRadio option active" data-val="1">
                                             <label class="inputBlock" for="Two" ng-click="checkboxItem('two')">
                                                 <input id="Two" type="radio" name="stay" value="Completely Anonymous">
@@ -154,7 +154,6 @@
                                                 <span class="radioTitle">Two</span>
                                             </label>
                                         </div>
-
                                         <div class="freeBlock inputRadio option active" data-val="1">
                                             <label class="inputBlock" for="Three" ng-click="checkboxItem('three')">
                                                 <input id="Three" type="radio" name="stay" value="Completely Anonymous">
@@ -206,7 +205,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="pricingBill-footer">
+                            <div class="pricingBill-footer" ng-click="submitForm()">
                                 <button id="more50kb" class="submitBigBtn btn" type="submit">Buy now</button>
                             </div>
                         </div>
