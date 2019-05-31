@@ -190,13 +190,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-<<<<<<< .mine
-    <Compile Include="Models\OnboardingForm.cs" />
     <Compile Include="Models\OnboardingPaymentForm.cs" />
-=======
     <Compile Include="Models\OnboardingForm.cs" />
-
->>>>>>> .theirs
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
