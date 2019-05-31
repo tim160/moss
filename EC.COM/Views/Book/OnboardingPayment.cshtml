@@ -10,6 +10,7 @@
         -webkit-transition: box-shadow 150ms ease;
         transition: box-shadow 150ms ease;
     }
+
     .StripeElement--focus {
         box-shadow: 0 1px 3px 0 #cfd7df;
     }
@@ -20,6 +21,10 @@
 
     .StripeElement--webkit-autofill {
         background-color: #fefde5 !important;
+    }
+
+    .errorValidation {
+        border: 1px solid red;
     }
 </style>
 
@@ -123,120 +128,83 @@
         </div>
     </section>
     <section class="pricingMainSection">
-        <div class="container">
-            <div class="pricingMainContainer">
-                <div class="pricingFormContainer">
-                    <div class="pricingForm-block">
-                        <div class="pricingForm-block__title">
-                            Name on Card
-                        </div>
-                        <div class="pricingForm-block__input" id="NameOnCardDiv">
-                            <label class="form-mainContent__label">
+        <form id="formDrop">
+            <div class="container">
+                <div class="pricingMainContainer">
+                    <div class="pricingFormContainer">
+                        <div class="pricingForm-block">
+                            <div class="pricingForm-block__title">
                                 Name on Card
-                                <input type="text" class="form-mainContent__labelInput calc" id="NameOnCard">
-                            </label>
+                            </div>
+                            <div ng-class="{errorValidation: validationNameOnCard == true}" class="pricingForm-block__input" id="NameOnCardDiv">
+                                <label class="form-mainContent__label">
+                                    Name on Card
+                                    <input type="text" ng-model='NameOnCard' class="form-mainContent__labelInput calc" id="NameOnCard" name="NameOnCard">
+                                </label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="pricingForm-block">
-                        <div class="pricingForm-block__title">
-                            Card Number
-                        </div>
-                        <div class="pricingForm-block__input" id="CardNumberDiv">
-                            <label class="form-mainContent__label">
+                        <div class="pricingForm-block">
+                            <div class="pricingForm-block__title">
                                 Card Number
-                                <input type="text" class="form-mainContent__labelInput calc" id="CardNumber">
-                            </label>
+                            </div>
+                            <div ng-class="{errorValidation: validationCardNumber == true}" class="pricingForm-block__input" id="CardNumberDiv">
+                                <label class="form-mainContent__label">
+                                    Card Number
+                                    <input type="text" ng-model="CardNumber" class="form-mainContent__labelInput calc" id="CardNumber" name="CardNumber">
+                                </label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="pricingForm-block">
-                        <div class="pricingForm-block__title">
-                            Card Expire
-                        </div>
-                        <div class="pricingForm-block__input" id="CardExpireDiv">
-                            <label class="form-mainContent__label">
+                        <div class="pricingForm-block">
+                            <div class="pricingForm-block__title">
                                 Card Expire
-                                <input type="text" class="form-mainContent__labelInput calc" id="CardExpire">
-                            </label>
+                            </div>
+                            <div ng-class="{errorValidation: validationCardExpire == true}" class="pricingForm-block__input" id="CardExpireDiv">
+                                <label class="form-mainContent__label">
+                                    Card Expire
+                                    <input type="text" ng-model='CardExpire' class="form-mainContent__labelInput calc" id="CardExpire" name="CardExpire">
+                                </label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="pricingForm-block">
-                        <div class="pricingForm-block__title">
-                            CVC
-                        </div>
-                        <div class="pricingForm-block__input" id="CVCDiv">
-                            <label class="form-mainContent__label">
+                        <div class="pricingForm-block">
+                            <div class="pricingForm-block__title">
                                 CVC
-                                <input type="text" class="form-mainContent__labelInput calc" id="CVC">
-                            </label>
-                        </div>
-                    </div>
-                    <div class="pricingForm-block" style="height: 150px;">
-                    </div>
-
-                    <div class="pricingForm-block">
-                        <div id="card-element"></div>
-                        <div id="card-errors" role="alert"></div>
-                    </div>
-                    <div class="pricingBill-footer">
-                    </div>
-                </div>
-
-                <div class="pricingBillContainer">
-                    <div class="pricingBill-head price-section">
-                        <div class="pricingBill-line clearfix" style="display: flex;">
-                            <label style="display: flex; width: 50%; flex-wrap: nowrap;">
-                                <input type="radio" name="year" value="1" style="width: 20px" class="calc" disabled />
-                                1-Year License
-                            </label>
-                            <label style="display: flex; width: 50%; flex-wrap: wrap;">
-                                <input type="radio" name="year" value="2" style="width: 20px" class="calc" disabled />
-                                2-Year License <br> <i>&nbsp;&nbsp;&nbsp;&nbsp;20% saving.</i>
-                            </label>
-                        </div>
-                        <div class="pricingBill-line clearfix" style="margin-top: 20px;">
-                            <div class="pricingBill-line__text">
-                                Annual Plan Price
                             </div>
-                            <div class="pricingBill-line__tax" id="priceNE">
+                            <div ng-class="{errorValidation: validationcvc == true}" class="pricingForm-block__input" id="CVCDiv">
+                                <label class="form-mainContent__label">
+                                    CVC
+                                    <input type="text" ng-model='cvc' class="form-mainContent__labelInput calc" id="CVC">
+                                </label>
                             </div>
                         </div>
-                        <div class="pricingBill-line clearfix">
-                            <div class="pricingBill-line__text">
-                                Non-Employees Access
-                            </div>
-                            <div class="pricingBill-line__tax" id="priceNNE">
-                            </div>
-                        </div>
-                        <div class="pricingBill-line clearfix">
-                            <div class="pricingBill-line__text">
-                                Client and Customer Access
-                            </div>
-                            <div class="pricingBill-line__tax" id="priceC">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="pricingBill-main price-section" style="padding-bottom: 0px">
-                        <div class="pricingBill-line pricingBill-lineTotal clearfix" style="padding-bottom: 0px">
-                            <div class="pricingBill-line__text">
-                                Total Annual Plan Price
-                            </div>
-                            <div class="pricingBill-line__tax" id="priceT">
-                            </div>
-                        </div>
-                        <div class="pricingBill-line pricingBill-lineTotal clearfix" style="padding-top: 0px">
-                            <div class="pricingBill-line__text">
-                            </div>
-                            <div class="pricingBill-line__tax" id="priceT">
-                            </div>
+                        <div class="pricingForm-block" style="height: 150px;">
                         </div>
 
+                        <div class="pricingForm-block">
+                            <div id="card-element"></div>
+                            <div id="card-errors" role="alert"></div>
+                        </div>
+                        <div class="pricingBill-footer">
+                        </div>
+                    </div>
 
-                        <div class="pricingBill-line pricingBill-lineSmall clearfix">
-                            <div class="pricingBill-line__text">
-                                Required
-                                onboarding & training.
+                    <div class="pricingBillContainer">
+                        <div class="pricingBill-main price-section" style="padding-bottom: 0px">
+
+                            <div class="pricingBill-line pricingBill-lineSmall clearfix">
+                                <div class="pricingBill-line__text">
+                                    Required
+                                    onboarding & training.
+                                </div>
+                                <div class="pricingBill-line__tax" id="priceR">
+                                    $1000
+                                </div>
                             </div>
-                            <div class="pricingBill-line__tax" id="priceR">
+                            <div class="pricingBill-line pricingBill-lineSmall clearfix">
+                                <div class="pricingBill-line__text">
+                                    &nbsp;
+                                </div>
+                                <div class="pricingBill-line__tax" style="font-size:14px;" id="sessionN">
+                                </div>
                             </div>
                         </div>
                         <div class="pricingBill-line pricingBill-lineSmall clearfix">
@@ -244,33 +212,35 @@
                                 &nbsp;
                             </div>
                             <div class="pricingBill-line__tax" style="font-size:14px;" id="sessionN">
+                                Up to two sessions
                             </div>
                         </div>
-                    </div>
-                    <div class="pricingBill-main price-section" style="padding-bottom: 0px">
-                        <div class="pricingBill-line pricingBill-lineTotal clearfix" style="padding-top: 0px;padding-bottom: 0px">
-                            <div class="pricingBill-line__text">
-                                <b>Total</b>
-                            </div>
-                            <div class="pricingBill-line__tax" id="priceT">
+                        <div class="pricingBill-main price-section" style="padding-bottom: 0px">
+                            <div class="pricingBill-line pricingBill-lineTotal clearfix" style="padding-top: 0px;padding-bottom: 0px">
+                                <div class="pricingBill-line__text">
+                                    <b>Total</b>
+                                </div>
+                                <div class="pricingBill-line__tax" id="priceT">
+                                    $1000
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="pricingBill-footer">
-                        <div class="pricingBill-line">
-                            <p>
-                                By clicking on Buy Now, you agree to our
-                                <a href="~/TermsOfService.html" target="_blank">Terms</a>,
-                                <a href="~/LicenseAgreement.html" target="_blank">Employee Confidential License Agreement</a> and
-                                <a href="~/PrivacyStatement.html" target="_blank">Privacy Policy</a>
-                            </p>
+                        <div class="pricingBill-footer">
+                            <div class="pricingBill-line">
+                                <p>
+                                    By clicking on Buy Now, you agree to our
+                                    <a href="~/TermsOfService.html" target="_blank">Terms</a>,
+                                    <a href="~/LicenseAgreement.html" target="_blank">Employee Confidential License Agreement</a> and
+                                    <a href="~/PrivacyStatement.html" target="_blank">Privacy Policy</a>
+                                </p>
+                            </div>
+                            <button ng-click="SubmitOnboardPayment()" class="submitBigBtn btn" type="submit">Pay $1000</button>
                         </div>
-                        <button class="submitBigBtn btn" type="submit">Pay $</button>
                     </div>
                 </div>
-            </div>
 
-        </div>
+            </div>
+        </form>
     </section>
 </main>
 @{Html.RenderPartial("footer");}

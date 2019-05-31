@@ -34,3 +34,29 @@ purchaseApp.controller("onboarding", function ($scope) {
         }
     }
 }); 
+
+
+purchaseApp.controller("onboardingPayment", function ($scope) {
+    $scope.SubmitOnboardPayment = function () {
+        var result = false;
+        if ($scope.NameOnCard == undefined) {
+            $scope.validationNameOnCard = true;
+            result = true;
+        }
+        if ($scope.CardNumber == undefined) {
+            $scope.validationCardNumber = true;
+            result = true;
+        }
+        if ($scope.CardExpire == undefined) {
+            $scope.validationCardExpire = true;
+            result = true;
+        }
+        if ($scope.cvc == undefined) {
+            $scope.validationcvc = true;
+            result = true;
+        }
+        if (!result) {
+            angular.element('#formDrop').submit();
+        }
+    }
+});

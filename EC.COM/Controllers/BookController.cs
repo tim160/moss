@@ -358,5 +358,12 @@ namespace EC.COM.Controllers
             string id = "";
             return View("~/Views/Book/OnboardingPayment.cshtml");
         }
+
+        [HttpPost]
+        public ActionResult OnboardingPayment(OnboardingPaymentForm form)
+        {
+            string id = "";
+            return View("~/Views/Book/OnboardingPayment.cshtml");
+        }
     }
 }
