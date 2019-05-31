@@ -1,4 +1,15 @@
-﻿<div class="general-container clientCheckList">
+﻿@{
+  ViewBag.Title = "Check-list of next steps";
+  string quickView = "0";
+  if (ViewBag.quickView != null && ViewBag.quickView)
+  {
+    quickView = "1";
+  }
+ 
+
+}
+
+<div class="general-container clientCheckList">
 
     <header class="header">
         <div class="top-headerBg">
@@ -231,6 +242,8 @@
         </section>
         <section class="clientCheckList-step clientCheckList-step6">
             <div class="container">
+              @if (quickView == "0")
+              {
                 <div class="row clearfix">
                     <div class="col50l">
                         <div class="clientCheckList-step__titleCount">
@@ -242,10 +255,27 @@
                             Schedule the Onboarding Session. <a class="turquoiseLink"  target="_blank" href="@System.Configuration.ConfigurationManager.AppSettings["MainSite"]trainer/calendar">Click here for the calendar.</a>
                         </div>
                     </div>
-
-
-
                 </div>
+              }
+              @if (quickView == "1")
+              {
+              <div class="row clearfix">
+                <div class="col50l">
+                  <div class="clientCheckList-step__titleCount">
+                    Step 6:
+                  </div>
+                </div>
+                <div class="col50r">
+                  <div class="clientCheckList-step__titleText">
+                    <a class="turquoiseLink" target="_blank" href="@System.Configuration.ConfigurationManager.AppSettings["MainSite"]trainer/addonboarding">Purchase</a> onboarding & training sessions.
+                  </div>
+                </div>
+              </div>
+              }
+
+
+
+
               <div class="row clearfix">
                 <div class="col50l">
                   <div class="clientCheckList-step__titleCount">
@@ -258,6 +288,7 @@
                   </div>
                   </div>
              </div>
+              </div>
         </section>
 
 

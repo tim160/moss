@@ -81,7 +81,7 @@ namespace EC.COM.Controllers
                 db.SaveChanges();
             }
             if(quickView == "1")
-              return RedirectToAction("Index", "Book", new { id = System.Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(data)) });
+              return RedirectToAction("Index", "Book", new { id = System.Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(data)), quickView = 1 });
             else
               return RedirectToAction("Index", "Video", new { id = System.Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(data)) });
         }
