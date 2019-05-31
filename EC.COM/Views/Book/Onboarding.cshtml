@@ -114,7 +114,7 @@
                                     Referral Partner Invitation Code
                                 </div>
                                 <div class="pricingForm-block__input">
-                                    <label class="form-mainContent__label" ng-class="{test: validationInput == true}">
+                                    <label class="form-mainContent__label" ng-class="{errorValidation: validationInput == true}">
                                         Invitation Code
                                         <input type="text" ng-change="validationInput=false" ng-model="invitationCode" class="form-mainContent__labelInput calc" id="InvitationCode" name="InvitationCode" value="">
                                     </label>
@@ -130,11 +130,11 @@
                                 </div>
                             </div>
                             <style>
-                                .test {
+                                .errorValidation {
                                     border: 1px solid red;
                                 }
                             </style>
-                            <div class="pricingForm-block" ng-class="{test: validationButtons == true}">
+                            <div class="pricingForm-block" ng-class="{errorValidation: validationButtons == true}">
                                 <div class="pricingForm-block__title">
                                     Number of sessions required*:
                                 </div>
