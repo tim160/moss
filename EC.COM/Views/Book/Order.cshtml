@@ -159,6 +159,7 @@
                     @Html.HiddenFor(x => x.VarInfo.Id)
                     @Html.HiddenFor(x => x.VarInfo.Email)
                     @Html.Hidden("stripeToken")
+                    @Html.Hidden("QuickView")
                 }
 
                 @using (Html.BeginForm("Order", null, FormMethod.Post, new { id = "payment-form" }))
@@ -338,6 +339,7 @@
                             </div>
                         </div>
                     </div>
+                    <input type="hidden" type="number" name="QuickView" value="@quickView">
                 }
                 @*<div class="pricingInfoBlock">
                         <form action="@Url.Action("Payment")" method="post" id="payment-form">
@@ -368,7 +370,7 @@
                     </div>*@
             </div>
         </section>
-      <input type="hidden" type="number" name="QuickView" value="@quickView">
+
     </main>
 </div>
 

@@ -38,7 +38,11 @@ namespace EC.COM.Controllers
                 InvitationCode = data[6],
             };
 
-            return View(model);
+          bool QuickView = false;
+          if (!string.IsNullOrWhiteSpace(quickView))
+            QuickView = true;
+          ViewBag.quickView = QuickView;
+          return View(model);
         }
 
         public ActionResult Buy(CalculateModel model)
@@ -251,7 +255,7 @@ namespace EC.COM.Controllers
             bool QuickView = false;
             if (!string.IsNullOrWhiteSpace(quickView))
               QuickView = true;
-            ViewBag.quickView = quickView;
+            ViewBag.quickView = QuickView;
 
             return View(new OrderViewModel
             {
@@ -373,7 +377,7 @@ namespace EC.COM.Controllers
             to.Add(varinfo.Email.Trim());
             em.Send(to, cc, "Employee Confidential Registration", body, true);
 
-            return RedirectToAction("CompanyRegistrationVideo", "Book", new { emailedcode = varinfo.Emailed_code_to_customer, invitationcode = "VAR" });
+            return RedirectToAction("CompanyRegistrationVideo", "Book", new { emailedcode = varinfo.Emailed_code_to_customer, invitationcode = "VAR", quickView = quickView });
         }
         [HttpGet]
         public ActionResult Onboarding()
