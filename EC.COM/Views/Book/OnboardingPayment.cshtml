@@ -1,0 +1,343 @@
+﻿<style>
+
+    .StripeElement {
+        background-color: white;
+        height: 40px;
+        padding: 10px 12px;
+        border-radius: 4px;
+        border: 1px solid transparent;
+        box-shadow: 0 1px 3px 0 #e6ebf1;
+        -webkit-transition: box-shadow 150ms ease;
+        transition: box-shadow 150ms ease;
+    }
+    .StripeElement--focus {
+        box-shadow: 0 1px 3px 0 #cfd7df;
+    }
+
+    .StripeElement--invalid {
+        border-color: #fa755a;
+    }
+
+    .StripeElement--webkit-autofill {
+        background-color: #fefde5 !important;
+    }
+</style>
+
+<header class="header">
+    <div class="top-headerBg">
+        <div class="container">
+            <div class="top-header">
+                <a href="http://campusconfidential.com" class="top-header__campusLink">
+                    <span class="top-header__campusLink-text">
+                        Campus Confidential
+                    </span>
+                    <img src="~/Content/images/svg-icons/upper-right.svg" alt="" />
+                </a>
+                <div class="top-header__loginBar">
+                    <nav class="top-header__loginBar-nav">
+                        <li class="top-header__loginBar-li">
+                            <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Login" class="top-header__loginBar-a">
+                                Client Login
+                            </a>
+                        </li><!-- /.top-header__loginBar-li -->
+                        <li class="top-header__loginBar-li">
+                            <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Report" class="top-header__loginBar-a">
+                                File a Report
+                            </a>
+                        </li><!-- /.top-header__loginBar-li -->
+                        <li class="top-header__loginBar-li">
+                            <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/CheckStatus" class="top-header__loginBar-a">
+                                Check Report Status
+                            </a>
+                        </li><!-- /.top-header__loginBar-li -->
+                    </nav><!-- /.top-header__loginBar-nav -->
+                </div><!-- /.top-header__loginBar -->
+            </div><!-- /.top-header -->
+        </div>
+    </div>
+    <div class="main-headerBg ">
+        <div class="container">
+            <div class="main-header">
+                <a href="/" class="main-headerLogo">
+                    <div class="main-headerLogo__img">
+                        <img src="~/Content/images/0-main-logo.png" alt="" />
+                    </div><!-- /.main-headerLogo__img -->
+                    <div class="main-headerLogo__text">
+                        Reduce risk. Create trust.
+                    </div><!-- /.main-headerLogo__text -->
+                </a><!-- /.main-headerLogo -->
+                <div class="main-headerMenu-mobile">
+                    <a href="/" class="main-headerLogo-mobile">
+                        <div class="main-headerLogo__img-mobile">
+                            <img src="~/Content/images/0-main-logo.png" alt="" />
+                        </div><!-- /.main-headerLogo__img -->
+                        <div class="main-headerLogo__text-mobile">
+                            Reduce risk. Create trust.
+                        </div><!-- /.main-headerLogo__text -->
+                    </a><!-- /.main-headerLogo -->
+                    <a href="#" class="main-headerLogo-mobile-burgerBtn">
+                        <img src="~/Content/images/svg-icons/burger.svg" alt="" />
+                    </a>
+                </div><!-- /.main-headerMenu-mobile -->
+                <div class="main-headerMenu">
+                    <nav class="main-headerMenu__nav">
+                        <li class="main-headerMenu__li">
+                            <a href="/#benefitsSection" class="main-headerMenu__a">
+                                Benefits
+                            </a>
+                        </li><!-- /.main-headerMenu__li -->
+                        <li class="main-headerMenu__li">
+                            <a href="/#gridSection" class="main-headerMenu__a">
+                                Incident Reporting
+                            </a>
+                        </li><!-- /.main-headerMenu__li -->
+                        <li class="main-headerMenu__li">
+                            <a href="/#menegementSection" class="main-headerMenu__a">
+                                Case Management
+                            </a>
+                        </li><!-- /.main-headerMenu__li -->
+                        <li class="main-headerMenu__li">
+                            <a href="about.html" data-scroll-to="" class="main-headerMenu__a">
+                                About
+                            </a>
+                        </li><!-- /.main-headerMenu__li -->
+                        <li class="main-headerMenu__li">
+                            <a href="/#contactSection" class="main-headerMenu__a">
+                                Contact
+                            </a>
+                        </li><!-- /.main-headerMenu__li -->
+                    </nav><!-- /.main-headerMenu__nav -->
+                </div><!-- /.main-headerMenu -->
+            </div><!-- /.main-header -->
+        </div><!-- /.container -->
+    </div><!-- /.main-headerBg -->
+</header><!-- /.header -->
+
+<main class="main" style="padding-bottom: 165px;" ng-controller="onboardingPayment">
+    <section class="pricingTitleSection">
+        <div class="pricingTitleSection__title">
+            Checkout
+        </div>
+        <div class="pricingTitleSection__subTitle">
+            Checkout
+        </div>
+    </section>
+    <section class="pricingMainSection">
+        <div class="container">
+            <div class="pricingMainContainer">
+                <div class="pricingFormContainer">
+                    <div class="pricingForm-block">
+                        <div class="pricingForm-block__title">
+                            Name on Card
+                        </div>
+                        <div class="pricingForm-block__input" id="NameOnCardDiv">
+                            <label class="form-mainContent__label">
+                                Name on Card
+                                <input type="text" class="form-mainContent__labelInput calc" id="NameOnCard">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="pricingForm-block">
+                        <div class="pricingForm-block__title">
+                            Card Number
+                        </div>
+                        <div class="pricingForm-block__input" id="CardNumberDiv">
+                            <label class="form-mainContent__label">
+                                Card Number
+                                <input type="text" class="form-mainContent__labelInput calc" id="CardNumber">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="pricingForm-block">
+                        <div class="pricingForm-block__title">
+                            Card Expire
+                        </div>
+                        <div class="pricingForm-block__input" id="CardExpireDiv">
+                            <label class="form-mainContent__label">
+                                Card Expire
+                                <input type="text" class="form-mainContent__labelInput calc" id="CardExpire">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="pricingForm-block">
+                        <div class="pricingForm-block__title">
+                            CVC
+                        </div>
+                        <div class="pricingForm-block__input" id="CVCDiv">
+                            <label class="form-mainContent__label">
+                                CVC
+                                <input type="text" class="form-mainContent__labelInput calc" id="CVC">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="pricingForm-block" style="height: 150px;">
+                    </div>
+
+                    <div class="pricingForm-block">
+                        <div id="card-element"></div>
+                        <div id="card-errors" role="alert"></div>
+                    </div>
+                    <div class="pricingBill-footer">
+                    </div>
+                </div>
+
+                <div class="pricingBillContainer">
+                    <div class="pricingBill-head price-section">
+                        <div class="pricingBill-line clearfix" style="display: flex;">
+                            <label style="display: flex; width: 50%; flex-wrap: nowrap;">
+                                <input type="radio" name="year" value="1" style="width: 20px" class="calc" disabled />
+                                1-Year License
+                            </label>
+                            <label style="display: flex; width: 50%; flex-wrap: wrap;">
+                                <input type="radio" name="year" value="2" style="width: 20px" class="calc" disabled />
+                                2-Year License <br> <i>&nbsp;&nbsp;&nbsp;&nbsp;20% saving.</i>
+                            </label>
+                        </div>
+                        <div class="pricingBill-line clearfix" style="margin-top: 20px;">
+                            <div class="pricingBill-line__text">
+                                Annual Plan Price
+                            </div>
+                            <div class="pricingBill-line__tax" id="priceNE">
+                            </div>
+                        </div>
+                        <div class="pricingBill-line clearfix">
+                            <div class="pricingBill-line__text">
+                                Non-Employees Access
+                            </div>
+                            <div class="pricingBill-line__tax" id="priceNNE">
+                            </div>
+                        </div>
+                        <div class="pricingBill-line clearfix">
+                            <div class="pricingBill-line__text">
+                                Client and Customer Access
+                            </div>
+                            <div class="pricingBill-line__tax" id="priceC">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pricingBill-main price-section" style="padding-bottom: 0px">
+                        <div class="pricingBill-line pricingBill-lineTotal clearfix" style="padding-bottom: 0px">
+                            <div class="pricingBill-line__text">
+                                Total Annual Plan Price
+                            </div>
+                            <div class="pricingBill-line__tax" id="priceT">
+                            </div>
+                        </div>
+                        <div class="pricingBill-line pricingBill-lineTotal clearfix" style="padding-top: 0px">
+                            <div class="pricingBill-line__text">
+                            </div>
+                            <div class="pricingBill-line__tax" id="priceT">
+                            </div>
+                        </div>
+
+
+                        <div class="pricingBill-line pricingBill-lineSmall clearfix">
+                            <div class="pricingBill-line__text">
+                                Required
+                                onboarding & training.
+                            </div>
+                            <div class="pricingBill-line__tax" id="priceR">
+                            </div>
+                        </div>
+                        <div class="pricingBill-line pricingBill-lineSmall clearfix">
+                            <div class="pricingBill-line__text">
+                                &nbsp;
+                            </div>
+                            <div class="pricingBill-line__tax" style="font-size:14px;" id="sessionN">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pricingBill-main price-section" style="padding-bottom: 0px">
+                        <div class="pricingBill-line pricingBill-lineTotal clearfix" style="padding-top: 0px;padding-bottom: 0px">
+                            <div class="pricingBill-line__text">
+                                <b>Total</b>
+                            </div>
+                            <div class="pricingBill-line__tax" id="priceT">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pricingBill-footer">
+                        <div class="pricingBill-line">
+                            <p>
+                                By clicking on Buy Now, you agree to our
+                                <a href="~/TermsOfService.html" target="_blank">Terms</a>,
+                                <a href="~/LicenseAgreement.html" target="_blank">Employee Confidential License Agreement</a> and
+                                <a href="~/PrivacyStatement.html" target="_blank">Privacy Policy</a>
+                            </p>
+                        </div>
+                        <button class="submitBigBtn btn" type="submit">Pay $</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</main>
+@{Html.RenderPartial("footer");}
+
+@section scripts {
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="~/Scripts/Onboarding.js"></script>
+
+    <script>
+        var stripe = Stripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+        var elements = stripe.elements({
+            fonts: [
+                {
+                    cssSrc: 'https://fonts.googleapis.com/css?family=Source+Code+Pro',
+                },
+            ],
+            // Stripe's examples are localized to specific languages, but if
+            // you wish to have Elements automatically detect your user's locale,
+            // use `locale: 'auto'` instead.
+            locale: window.__exampleLocale
+        });
+        var elementStyles = {
+            base: {
+                color: '#32325D',
+                fontWeight: 500,
+                fontFamily: 'Source Code Pro, Consolas, Menlo, monospace',
+                fontSize: '16px',
+                fontSmoothing: 'antialiased',
+
+                '::placeholder': {
+                    color: '#CFD7DF',
+                },
+                ':-webkit-autofill': {
+                    color: '#e39f48',
+                },
+            },
+            invalid: {
+                color: '#E25950',
+
+                '::placeholder': {
+                    color: '#FFCCA5',
+                },
+            },
+        };
+
+        var elementClasses = {
+            focus: 'focused',
+            empty: 'empty',
+            invalid: 'invalid',
+        };
+
+        var cardNumber = elements.create('cardNumber', {
+            style: elementStyles,
+            classes: elementClasses,
+        });
+        cardNumber.mount('#CardNumberDiv');
+
+        var cardExpiry = elements.create('cardExpiry', {
+            style: elementStyles,
+            classes: elementClasses,
+        });
+        cardExpiry.mount('#CardExpireDiv');
+
+        var cardCvc = elements.create('cardCvc', {
+            style: elementStyles,
+            classes: elementClasses,
+        });
+        cardCvc.mount('#CVCDiv');
+    </script>
+}

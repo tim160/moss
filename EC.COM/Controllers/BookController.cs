@@ -344,9 +344,8 @@ namespace EC.COM.Controllers
         [HttpPost]
         public ActionResult Onboarding(OnboardingForm form)
         {
-
             string id = "";
-            return View();
+            return View("~/Views/Book/OnboardingPayment.cshtml");
         }
     }
 }
