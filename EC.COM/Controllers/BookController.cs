@@ -126,10 +126,21 @@ namespace EC.COM.Controllers
 
             using (var db = new DBContext())
             {
-                model.InvitationCode = String.IsNullOrEmpty(model.InvitationCode) ? "EC" : model.InvitationCode;
+                string invitation_code = String.IsNullOrEmpty(model.InvitationCode) ? "EC" : model.InvitationCode;
+                int[] invitation_code_checks = new int[] { 1, 50, 100, 200, 500, 600, 700, 800, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000, 6500, 7000, 10000, 12000, 15000, 20000, 25000, 50000 };
+
                 var items = db.CompanyInvitations
-                    .Where(x => x.Invitation_code == model.InvitationCode)
+                    .Where(x => x.Invitation_code.ToLower() == invitation_code.ToLower())
                     .ToList();
+                bool is_invitation_complete = true;
+                foreach (var check in invitation_code_checks)
+                {
+                  var is_inside = items.FirstOrDefault(x => check >= x.From_quantity && check <= x.To_quantity);
+                  if (is_inside == null)
+                    is_invitation_complete = false;
+                }
+                if(!is_invitation_complete)
+                  items = db.CompanyInvitations.Where(x => x.Invitation_code.ToLower() == "ec").ToList();
 
                 var ne = items.FirstOrDefault(x => model.NumberOfEmployees >= x.From_quantity && model.NumberOfEmployees <= x.To_quantity);
                 if ((ne != null) && (ne.Employee_price.HasValue) && (ne.Employee_price_type.HasValue))
