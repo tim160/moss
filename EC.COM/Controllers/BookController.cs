@@ -7,11 +7,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using EC.COM.Models;
+//using log4net;
+
 namespace EC.COM.Controllers
 {
     public class BookController : Controller
     {
-        // GET: Book
+     //     public ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+    // GET: Book
         public ActionResult Index(string id = "")
         {
             var data = System.Text.Encoding.Default.GetString(System.Convert.FromBase64String(id)).Split('|');
@@ -137,15 +140,22 @@ namespace EC.COM.Controllers
                 {
                   var is_inside = items.FirstOrDefault(x => check >= x.From_quantity && check <= x.To_quantity);
                   if (is_inside == null)
+                  {
                     is_invitation_complete = false;
+                  //  logger.Info("is_invitation_complete - false, quant - " + check.ToString());
+                  }
                 }
                 if(!is_invitation_complete)
                   items = db.CompanyInvitations.Where(x => x.Invitation_code.ToLower() == "ec").ToList();
-
                 var ne = items.FirstOrDefault(x => model.NumberOfEmployees >= x.From_quantity && model.NumberOfEmployees <= x.To_quantity);
+                //logger.Info("NE  " + ne.Id);
+
+
+
                 if ((ne != null) && (ne.Employee_price.HasValue) && (ne.Employee_price_type.HasValue))
                 {
-                    model.PriceNE = ne.Employee_price_type.Value == 1 ? ne.Employee_price.Value : ne.Employee_price.Value * model.NumberOfEmployees;
+                 // logger.Info("NE  " + ne.Employee_price);
+                  model.PriceNE = ne.Employee_price_type.Value == 1 ? ne.Employee_price.Value : ne.Employee_price.Value * model.NumberOfEmployees;
                     if (model.Year == 2)
                     {
                         model.PriceNE = ne.Employee_price_type.Value == 1 ? ne.TwoYearPerYear_employee_price.Value : ne.TwoYearPerYear_employee_price.Value * model.NumberOfEmployees;
