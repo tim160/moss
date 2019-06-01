@@ -14,5 +14,6 @@ namespace EC.COM.Models
         public int ExpirationMonth { get; set; }
         public int ExpirationYear { get; set; }
         public string CSVCode { get; set; }
+        public string QuickView { get; set; }
     }
 }

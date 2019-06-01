@@ -1,7 +1,12 @@
 ﻿@model EC.COM.Controllers.BookController.CalculateModel
 
 @{
-    ViewBag.Title = "Book";
+  ViewBag.Title = "Book";
+  string quickView = "0";
+  if (ViewBag.quickView != null && ViewBag.quickView)
+  {
+    quickView = "1";
+  }
 }
 
 <div class="general-container pricingPage">
@@ -114,6 +119,7 @@
                     @Html.HiddenFor(x => x.CompanyName)
                     @Html.HiddenFor(x => x.Phone)
                     @Html.HiddenFor(x => x.Email)
+
 
                     <div class="pricingMainContainer">
                         <div class="pricingFormContainer">
@@ -246,11 +252,12 @@
                             </div>
                         </div>
                     </div>
+                    <input type="hidden" name="QuickView" id="QuickView" value="@quickView">
                 }
             </div>
         </section>
 
-
+   
     </main><!-- /.main -->
     @{Html.RenderPartial("footer");}
 

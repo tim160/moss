@@ -15,7 +15,7 @@ namespace EC.COM.Controllers
     {
      //     public ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
     // GET: Book
-        public ActionResult Index(string id = "")
+        public ActionResult Index(string id = "", string quickView = "")
         {
             var data = System.Text.Encoding.Default.GetString(System.Convert.FromBase64String(id)).Split('|');
             if (data.Length < 6)
@@ -38,7 +38,11 @@ namespace EC.COM.Controllers
                 InvitationCode = data[6],
             };
 
-            return View(model);
+          bool QuickView = false;
+          if (!string.IsNullOrWhiteSpace(quickView))
+            QuickView = true;
+          ViewBag.quickView = QuickView;
+          return View(model);
         }
 
         public ActionResult Buy(CalculateModel model)
@@ -92,7 +96,7 @@ namespace EC.COM.Controllers
                 //data = System.Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(data));
                 //return Redirect($"{System.Configuration.ConfigurationManager.AppSettings["MainSite"]}new/company?data={data}");
                 //return View();
-                return RedirectToAction("Order", new { id = varinfo.Id, email = model.Email, company = model.CompanyName });
+                return RedirectToAction("Order", new { id = varinfo.Id, email = model.Email, company = model.CompanyName, quickView = model.QuickView });
             }
         }
 
@@ -207,11 +211,15 @@ namespace EC.COM.Controllers
             };
         }
 
-
-        public ActionResult Order(int id, string email, string company)
+        public ActionResult Order(int id, string email, string company, string quickView)
         {
             var db = new DBContext();
             var model = db.VarInfoes.FirstOrDefault(x => x.Id == id && x.Email == email && x.Company_nm == company);
+
+            bool QuickView = false;
+            if (!string.IsNullOrWhiteSpace(quickView))
+              QuickView = true;
+            ViewBag.quickView = QuickView;
 
             return View(new OrderViewModel
             {
@@ -244,7 +252,7 @@ namespace EC.COM.Controllers
                 model.NameOnCard,
                 varinfo.Last_nm,
                 Request.Url.AbsoluteUri.ToLower(),
-                $"{Request.Url.Scheme}://{Request.Url.Host}{(Request.Url.Port == 80 ? "" : ":" + Request.Url.Port.ToString())}/Book/CompanyRegistrationVideo?emailedcode{varinfo.Emailed_code_to_customer}&invitationcode=VAR",
+                $"{Request.Url.Scheme}://{Request.Url.Host}{(Request.Url.Port == 80 ? "" : ":" + Request.Url.Port.ToString())}/Book/CompanyRegistrationVideo?emailedcode{varinfo.Emailed_code_to_customer}&invitationcode=VAR&quickview={model.QuickView}",
                 $"{System.Configuration.ConfigurationManager.AppSettings["MainSite"]}new/registration/{varinfo.Emailed_code_to_customer}"
                 );
             string body = eb.Body;
@@ -261,18 +269,29 @@ namespace EC.COM.Controllers
             //    logger.Info("ReportController / New" + resultErrorMessage.exception.Message);
             //}
 
-            return RedirectToAction("CompanyRegistrationVideo", "Book", new { emailedcode = varinfo.Emailed_code_to_customer, invitationcode = "VAR" });
+            return RedirectToAction("CompanyRegistrationVideo", "Book", new { emailedcode = varinfo.Emailed_code_to_customer, quickview = model.QuickView, invitationcode = "VAR" });
         }
 
-        public ActionResult CompanyRegistrationVideo(string emailedcode, string invitationcode)
+        public ActionResult CompanyRegistrationVideo(string emailedcode,string quickview, string invitationcode)
         {
             ViewBag.EmailedCode = emailedcode;
+
+            bool quickView = false;
+            if (!string.IsNullOrWhiteSpace(quickview) && (quickview =="1" || quickview == "true"))
+            {
+              quickView = true;
+            }
+            ViewBag.quickView = quickView;
+
             return View();
         }
 
         [HttpPost]
-        public ActionResult Payment(VarInfoModel varInfo, string stripeToken)
+        public ActionResult Payment(VarInfoModel varInfo, string stripeToken, string QuickView)
         {
+            string quickView = "";
+            if (!string.IsNullOrWhiteSpace(QuickView))
+              quickView = "1";
             StripeConfiguration.SetApiKey("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
 
             // Token is created using Checkout or Elements!
@@ -286,7 +305,7 @@ namespace EC.COM.Controllers
             {
                 Amount = System.Convert.ToInt64(varinfo.Total_price),
                 Currency = "usd",
-                Description = "Example charge",
+                Description = "Employee Confidential Subscription Services",
                 SourceId = token,
             };
 
@@ -312,7 +331,7 @@ namespace EC.COM.Controllers
                 varinfo.Last_nm,
                 Request.Url.AbsoluteUri.ToLower(),
                 $"{Request.Url.Scheme}://{Request.Url.Host}{(Request.Url.Port == 80 ? "" : ":" + Request.Url.Port.ToString())}/Video/Index",
-                $"{Request.Url.Scheme}://{Request.Url.Host}{(Request.Url.Port == 80 ? "" : ":" + Request.Url.Port.ToString())}/Book/CompanyRegistrationVideo?emailedcode{varinfo.Emailed_code_to_customer}&invitationcode=VAR");
+                $"{Request.Url.Scheme}://{Request.Url.Host}{(Request.Url.Port == 80 ? "" : ":" + Request.Url.Port.ToString())}/Book/CompanyRegistrationVideo?emailedcode{varinfo.Emailed_code_to_customer}&invitationcode=VAR&quickview={quickView}");
             string body = eb.Body;
 
             List<string> to = new List<string>();
@@ -322,7 +341,7 @@ namespace EC.COM.Controllers
             to.Add(varinfo.Email.Trim());
             em.Send(to, cc, "Employee Confidential Registration", body, true);
 
-            return RedirectToAction("CompanyRegistrationVideo", "Book", new { emailedcode = varinfo.Emailed_code_to_customer, invitationcode = "VAR" });
+            return RedirectToAction("CompanyRegistrationVideo", "Book", new { emailedcode = varinfo.Emailed_code_to_customer, invitationcode = "VAR", quickView = quickView });
         }
         [HttpGet]
         public ActionResult Onboarding()

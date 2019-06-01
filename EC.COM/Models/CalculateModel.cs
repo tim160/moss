@@ -24,6 +24,8 @@ namespace EC.COM.Models
         public decimal AnnualyTotal { get; set; }
         public int sessionNumber { get; set; }
         public string sessionN { get; set; }
+
         public decimal GrandTotal { get; set; }
+        public string QuickView { get; set; }
     }
 }
