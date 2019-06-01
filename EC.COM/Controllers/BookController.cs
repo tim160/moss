@@ -96,29 +96,6 @@ namespace EC.COM.Controllers
             }
         }
 
-        public class CalculateModel
-        {
-            public string InvitationCode { get; set; }
-            public int NumberOfEmployees { get; set; }
-            public int NumberOfNonEmployees { get; set; }
-            public int NumberOfClients { get; set; }
-            public string FirstName { get; set; }
-            public string LastName { get; set; }
-            public string CompanyName { get; set; }
-            public string Phone { get; set; }
-            public string Email { get; set; }
-            public decimal PriceNE { get; set; }
-            public decimal PriceNNE { get; set; }
-            public decimal PriceC { get; set; }
-            public decimal PriceR { get; set; }
-            public int Year { get; set; }
-            public decimal AnnualyTotal { get; set; }
-            public int sessionNumber { get; set; }
-            public string sessionN { get; set; }
-
-            public decimal GrandTotal { get; set; }
-        }
-
         public CalculateModel DoCalculate(CalculateModel model)
         {
             model.PriceNE = 0m;
@@ -230,15 +207,6 @@ namespace EC.COM.Controllers
             };
         }
 
-        public class OrderViewModel
-        {
-            public VarInfoModel VarInfo { get; set; }
-            public string CardNo { get; set; }
-            public string NameOnCard { get; set; }
-            public int ExpirationMonth { get; set; }
-            public int ExpirationYear { get; set; }
-            public string CSVCode { get; set; }
-        }
 
         public ActionResult Order(int id, string email, string company)
         {

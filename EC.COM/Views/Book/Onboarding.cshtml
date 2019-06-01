@@ -156,7 +156,7 @@
                                         </div>
                                         <div class="freeBlock inputRadio option active" data-val="1">
                                             <label class="inputBlock" for="Three" ng-click="checkboxItem('three')">
-                                                <input id="Three" type="radio" name="NumberSessions" value="3">
+                                                <input id="Three" type="radio" name="NumberSessions" value="3" checked>
                                                 <span class="radioButton"></span>
                                                 <span class="radioTitle">Three</span>
                                             </label>
@@ -178,10 +178,10 @@
                             <div class="pricingBill-head price-section">
                                 <div class="pricingBill-line clearfix" style="margin-top: 20px;">
                                     <div class="pricingBill-line__text">
-                                        Training session X2
+                                        {{ switchTrainingSession }}
                                     </div>
                                     <div class="pricingBill-line__tax" id="priceNE">
-                                        $1,000
+                                        {{ priceSwitchTrainingSession }}
                                     </div>
                                 </div>
 
