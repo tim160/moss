@@ -48,8 +48,9 @@ purchaseApp.controller("onboarding", function ($scope, productService) {
 
 
 purchaseApp.controller("onboardingPayment", function ($scope, productService) {
-    $scope.priceT = productService.getSelectedItem().priceT;
-    $scope.switchTrainingSession = productService.getSelectedItem().switchTrainingSession;
+    var priceT = angular.element(document.querySelector('#priceT')).val();
+    productService.addSelectedItem({ priceT: priceT})
+    $scope.NumberSessions = productService.getSelectedItem().sessions;
 
     $scope.SubmitOnboardPayment = function () {
         var result = false;
@@ -57,18 +58,18 @@ purchaseApp.controller("onboardingPayment", function ($scope, productService) {
             $scope.validationNameOnCard = true;
             result = true;
         }
-        if ($scope.CardNumber == undefined) {
-            $scope.validationCardNumber = true;
-            result = true;
-        }
-        if ($scope.CardExpire == undefined) {
-            $scope.validationCardExpire = true;
-            result = true;
-        }
-        if ($scope.cvc == undefined) {
-            $scope.validationcvc = true;
-            result = true;
-        }
+        //if ($scope.CardNumber == undefined) {
+        //    $scope.validationCardNumber = true;
+        //    result = true;
+        //}
+        //if ($scope.CardExpire == undefined) {
+        //    $scope.validationCardExpire = true;
+        //    result = true;
+        //}
+        //if ($scope.cvc == undefined) {
+        //    $scope.validationcvc = true;
+        //    result = true;
+        //}
         if (!result) {
             angular.element('#formDrop').submit();
         }
@@ -87,16 +88,15 @@ purchaseApp.factory('productService', function () {
     };
     var addSelectedItem = function (newObj) {
         selectedItem.priceT = newObj.priceT;
-        selectedItem.switchTrainingSession = newObj.switchTrainingSession;
         selectedItem.priceSwitchTrainingSession = newObj.priceSwitchTrainingSession;
         switch (newObj.priceT) {
-            case 500:
+            case "500":
                 selectedItem.sessions = 'Up to one session';
                 break;
-            case 1000:
+            case "1000":
                 selectedItem.sessions = 'Up to two sessions';
                 break;
-            case 3000:
+            case "3000":
                 selectedItem.sessions = 'Up to three sessions';
                 break;
         }

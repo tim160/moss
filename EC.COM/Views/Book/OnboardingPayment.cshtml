@@ -139,7 +139,7 @@
                             <div ng-class="{errorValidation: validationNameOnCard == true}" class="pricingForm-block__input" id="NameOnCardDiv">
                                 <label class="form-mainContent__label">
                                     Name on Card
-                                    <input type="text" ng-model='NameOnCard' class="form-mainContent__labelInput calc" id="NameOnCard" name="NameOnCard">
+                                    <input type="text" ng-change="validationNameOnCard=false" ng-model='NameOnCard' class="form-mainContent__labelInput calc" id="NameOnCard" name="NameOnCard">
                                 </label>
                             </div>
                         </div>
@@ -196,7 +196,7 @@
                                     onboarding & training.
                                 </div>
                                 <div class="pricingBill-line__tax" id="priceR">
-                                    {{priceSwitchTrainingSession}}
+                                    $@ViewBag.priceT
                                 </div>
                             </div>
                             <div class="pricingBill-line pricingBill-lineSmall clearfix">
@@ -211,8 +211,9 @@
                             <div class="pricingBill-line__text">
                                 &nbsp;
                             </div>
+                            <input type="hidden" id="priceT"  value="@ViewBag.priceT"/>
                             <div class="pricingBill-line__tax" style="font-size:14px;" id="sessionN">
-                                Up to two sessions
+                                {{NumberSessions}}
                             </div>
                         </div>
                         <div class="pricingBill-main price-section" style="padding-bottom: 0px">
@@ -221,7 +222,7 @@
                                     <b>Total</b>
                                 </div>
                                 <div class="pricingBill-line__tax" id="priceT">
-                                    {{priceSwitchTrainingSession}}
+                                    $@ViewBag.priceT
                                 </div>
                             </div>
                         </div>
@@ -234,7 +235,7 @@
                                     <a href="~/PrivacyStatement.html" target="_blank">Privacy Policy</a>
                                 </p>
                             </div>
-                            <button ng-click="SubmitOnboardPayment()" class="submitBigBtn btn" type="submit">Pay $1000</button>
+                            <button ng-click="SubmitOnboardPayment()" class="submitBigBtn btn" type="submit">Pay $@ViewBag.priceT</button>
                         </div>
                     </div>
                 </div>
