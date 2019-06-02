@@ -10,6 +10,7 @@ namespace EC.COM.Models
         public string InvitationCode { get; set; }
         public int NumberSessions { get; set; }
         public int priceT { get; set; }
+        public int companyId { get; set; }
 
     }
 }

@@ -56,8 +56,8 @@ namespace EC.COM
                 );
             routes.MapRoute(
                 name: "BookOnboarding",
-                url: "Book/Onboarding",
-                defaults: new { controller = "Book", action = "Onboarding" }
+                url: "Book/Onboarding/{guid}",
+                defaults: new { controller = "Book", action = "Onboarding", guid = UrlParameter.Optional }
                 );
             routes.MapRoute(
                 name: "Default",
