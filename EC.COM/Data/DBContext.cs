@@ -9,7 +9,8 @@ namespace EC.COM.Data
     public class DBContext: DbContext
     {
         public DbSet<CompanyInvitationModel> CompanyInvitations { get; set; }
-        public DbSet<VarInfoModel> VarInfoes { get; set; }        
+        public DbSet<VarInfoModel> VarInfoes { get; set; }
+        public virtual DbSet<company> company { get; set; }
 
         public DBContext(): base("ECEntities")
         {
@@ -26,6 +27,9 @@ namespace EC.COM.Data
                 .Entity<VarInfoModel>()
                 .ToTable("var_info");
 
+            modelBuilder.Entity<company>()
+                .Property(e => e.next_payment_amount)
+                .HasPrecision(19, 4);
             base.OnModelCreating(modelBuilder);
         }
     }

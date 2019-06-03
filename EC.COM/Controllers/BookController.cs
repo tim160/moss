@@ -344,15 +344,25 @@ namespace EC.COM.Controllers
             return RedirectToAction("CompanyRegistrationVideo", "Book", new { emailedcode = varinfo.Emailed_code_to_customer, invitationcode = "VAR", quickView = quickView });
         }
         [HttpGet]
-        public ActionResult Onboarding()
+        public ActionResult Onboarding(Guid guid)
         {
-            string id = "";
+            using (var db = new DBContext())
+            {
+                var company = db.company.Where(m => m.guid == guid).FirstOrDefault();
+                if (company == null)
+                {
+                    return RedirectToAction("Index", "Var");
+                } else
+                {
+                    ViewBag.companyId = company.id;
+                }
+            }
             return View();
         }
         [HttpPost]
         public ActionResult Onboarding(OnboardingForm form)
         {
-            string id = "";
+            ViewBag.priceT = form.priceT;
             return View("~/Views/Book/OnboardingPayment.cshtml");
         }
 
