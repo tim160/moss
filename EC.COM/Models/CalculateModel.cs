@@ -27,5 +27,6 @@ namespace EC.COM.Models
 
         public decimal GrandTotal { get; set; }
         public string QuickView { get; set; }
+        public bool callCenter { get; set; }
     }
 }
