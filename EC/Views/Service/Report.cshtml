@@ -13,7 +13,7 @@
         <div class="top-headerBg">
             <div class="container">
                 <div class="top-header">
-
+                    
                     <a href="http://employeeconfidential.com" class="top-header__backLink">
                         <img src="~/Content/images/svg-icons/left.svg" alt="" />
                         <span class="top-header__backLink-text">
@@ -43,6 +43,13 @@
 
     <main class="main">
         <section class="loginSection">
+            @*<div class="loginTextForm">
+                <label class="loginForm__input">
+                    Languages
+                    <input id="languages" type="text" name="text" required="" autocomplete="off">
+                    <input id="companyCode" type="hidden" value="false" />
+                </label>
+            </div>*@
             <div class="loginSection__titleBg">
                 <div class="container loginTopSection__container">
                     <div class="loginSection__title">
@@ -73,20 +80,14 @@
                             <input id="specialInput" type="text" name="text" required="" autocomplete="off">
                             <input id="companyCode" type="hidden" value="false" />
                         </label>
-                    </div><!-- /.loginTextForm -->
-
-                    <div class="loginTextForm">
-                        <label class="loginForm__input">
-                            Languages
-                            <input id="languages" type="text" name="text" required="" autocomplete="off">
-                            <input id="companyCode" type="hidden" value="false" />
-                        </label>
                         <div class="loginTextFormLinks">
                             <a href="#" id="startBtn" class="btn loginTextFormLinks__startBtn m_t_20">
                                 Start
                             </a>
-                        </div><!-- /.loginTextFormLinks -->
+                        </div>
                     </div><!-- /.loginTextForm -->
+
+
 
 
 
@@ -149,12 +150,12 @@
             if (companyCode != 'false' && language != "") {
                 window.location.href = "/Service/Disclaimer?companyCode=" + companyCode;
             } else {
-                if (language == "") {
-                    makeElementError($('#languages'));
-                }
-                if (companyCode == "false") {
-                    makeElementError($('#companyCode'))
-                }
+                //if (language == "") {
+                //    makeElementError($('#languages'));
+                //}
+                //if (companyCode == "false") {
+                //    makeElementError($('#companyCode'))
+                //}
                 TakeCompany();
             }
         });
