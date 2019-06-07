@@ -351,10 +351,11 @@ namespace EC.COM.Controllers
                 var company = db.company.Where(m => m.guid == guid).FirstOrDefault();
                 if (company == null)
                 {
-                    return RedirectToAction("Index", "Var");
+                    return RedirectToAction("Index", "Home");
                 } else
                 {
                     ViewBag.companyId = company.id;
+                    ViewBag.companyName = company.company_nm;
                 }
             }
             return View();

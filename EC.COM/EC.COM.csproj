@@ -184,14 +184,17 @@
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\VARController.cs" />
     <Compile Include="Controllers\VideoController.cs" />
+    <Compile Include="Data\company.cs" />
     <Compile Include="Data\CompanyInvitationModel.cs" />
     <Compile Include="Data\DBContext.cs" />
     <Compile Include="Data\VarInfoModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CalculateModel.cs" />
     <Compile Include="Models\OnboardingPaymentForm.cs" />
     <Compile Include="Models\OnboardingForm.cs" />
+    <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -314,5 +314,25 @@
             classes: elementClasses,
         });
         cardCvc.mount('#CVCDiv');
+
+        //registerElements([cardNumber, cardExpiry, cardCvc], 'example2');
+        var form = document.getElementById('payment-form');
+        form.addEventListener('submit', function (event) {
+          event.preventDefault();
+
+          stripe.createToken(cardNumber).then(function (result) {
+            if (result.error) {
+              // Inform the customer that there was an error.
+              var errorElement = document.getElementById('card-errors');
+              errorElement.textContent = result.error.message;
+            } else {
+              // Send the token to your server.
+              //stripeTokenHandler(result.token);
+              console.log(result);
+              $('#stripeToken').val(result.token.id);
+              $('#main-form').submit();
+            }
+          });
+        });
     </script>
 }

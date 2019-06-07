@@ -1,5 +1,10 @@
 ﻿@{
   ViewBag.Title = "Onboarding & Training ";
+  string companyName = "";
+  if (ViewBag.companyName != null)
+  {
+    companyName = ViewBag.companyName;
+  }
 }
 <div class="general-container pricingPage" ng-controller="onboarding">
     <style>
@@ -116,13 +121,13 @@
                         <div class="pricingFormContainer">
                             <div class="pricingForm-block">
                                 <div class="pricingForm-block__title">
-                                    Referral Partner Invitation Code
                                 </div>
+
+
                                 <div class="pricingForm-block__input">
-                                    <label class="form-mainContent__label" ng-class="{errorValidation: validationInput == true}">
-                                        Invitation Code
-                                        <input type="text" ng-change="validationInput=false" ng-model="invitationCode" class="form-mainContent__labelInput calc" id="InvitationCode" name="InvitationCode" value="">
-                                    </label>
+                                  <div class="pricingTitleSection__subTitle">
+                                    @companyName
+                                  </div>
                                 </div>
                             </div>
                             <div class="pricingForm-block">

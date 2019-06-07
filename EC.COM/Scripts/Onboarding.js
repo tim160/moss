@@ -36,10 +36,6 @@ purchaseApp.controller("onboarding", function ($scope, productService) {
             $scope.validationButtons = true;
             result = true;
         }
-        if ($scope.invitationCode == undefined) {
-            $scope.validationInput = true;
-            result = true;
-        }
         if (result == false) {
             angular.element('#formDrop').submit();
         }
@@ -54,10 +50,7 @@ purchaseApp.controller("onboardingPayment", function ($scope, productService) {
 
     $scope.SubmitOnboardPayment = function () {
         var result = false;
-        if ($scope.NameOnCard == undefined) {
-            $scope.validationNameOnCard = true;
-            result = true;
-        }
+ 
         //if ($scope.CardNumber == undefined) {
         //    $scope.validationCardNumber = true;
         //    result = true;
