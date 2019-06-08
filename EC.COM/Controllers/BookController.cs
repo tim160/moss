@@ -290,7 +290,7 @@ namespace EC.COM.Controllers
         public ActionResult Payment(VarInfoModel varInfo, string stripeToken, string QuickView)
         {
             string quickView = "";
-            if (!string.IsNullOrWhiteSpace(QuickView))
+            if (!string.IsNullOrWhiteSpace(QuickView) && QuickView =="1")
               quickView = "1";
             StripeConfiguration.SetApiKey("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
 

@@ -33,7 +33,7 @@ namespace EC.Controllers
                     return RedirectToAction("Disclaimer", "Service", new { id = cmp.company_code });
                 }
             }
-            RedirectToAction("Login", "Service");
+            RedirectToAction("Report", "Service");
 
             //////////ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
             /////        logger.Info("info message to logger");
@@ -151,7 +151,7 @@ namespace EC.Controllers
 
         public ActionResult Start()
         {
-            return RedirectToAction("Login", "Service");
+            return RedirectToAction("Report", "Service");
             Session.Clear();
 
         
