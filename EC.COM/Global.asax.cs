@@ -26,11 +26,11 @@ namespace EC.COM
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-            //if (!Context.Request.IsSecureConnection && !Context.Request.IsLocal)
-            //    Response.Redirect(Context.Request.Url.ToString().Replace("http:", "https:"));
+            if (!Context.Request.IsSecureConnection && !Context.Request.IsLocal)
+                Response.Redirect(Context.Request.Url.ToString().Replace("http:", "https:"));
             if (!Context.Request.IsSecureConnection && !Context.Request.IsLocal)
             {
-                Response.Redirect(Context.Request.Url.ToString().Replace("https:", "http:"));
+        ///        Response.Redirect(Context.Request.Url.ToString().Replace("https:", "http:"));
             }
         }
 

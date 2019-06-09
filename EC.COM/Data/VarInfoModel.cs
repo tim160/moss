@@ -46,7 +46,8 @@ namespace EC.COM.Data
         public string Registered_last_nm { get; set; }
         public int Year { get; set; }
         public int Onboarding_session_numbers { get; set; }  
-        
+        public decimal CallCenterHotline { get; set; }
+
         public string Onboarding_session_explained
         {
             get {

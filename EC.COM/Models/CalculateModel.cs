@@ -20,6 +20,7 @@ namespace EC.COM.Models
         public decimal PriceNNE { get; set; }
         public decimal PriceC { get; set; }
         public decimal PriceR { get; set; }
+        public decimal PriceCC { get; set; }
         public int Year { get; set; }
         public decimal AnnualyTotal { get; set; }
         public int sessionNumber { get; set; }

@@ -11,5 +11,9 @@ namespace EC.COM.Models
         public int CardNumber { get; set; }
         public DateTime CardExpire { get; set; }
         public int CVC { get; set; }
-    }
+        public int SessionNumber { get; set; }
+        public string CompanyGuid { get; set; }
+        public decimal Amount { get; set; }
+
+  }
 }

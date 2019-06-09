@@ -275,6 +275,14 @@
                                         $@Model.VarInfo.Customers_price.ToString("N0", nfi)
                                     </div>
                                 </div>
+                              <div class="pricingBill-line clearfix">
+                                <div class="pricingBill-line__text">
+                                  Call Center Hotline
+                                </div>
+                                <div class="pricingBill-line__tax" id="priceC">
+                                  $@Model.VarInfo.CallCenterHotline.ToString("N0", nfi)
+                                </div>
+                              </div>
                             </div>
                             <div class="pricingBill-main price-section" style="padding-bottom: 0px">
                                 <div class="pricingBill-line pricingBill-lineTotal clearfix" style="padding-bottom: 0px">
@@ -282,7 +290,7 @@
                                         Total Annual Plan Price
                                     </div>
                                     <div class="pricingBill-line__tax" id="priceT">
-                                        $@((Model.VarInfo.Annual_plan_price + Model.VarInfo.Customers_price + Model.VarInfo.Non_employee_price).ToString("N0", nfi))
+                                        $@((Model.VarInfo.Annual_plan_price + Model.VarInfo.Customers_price + Model.VarInfo.Non_employee_price + Model.VarInfo.CallCenterHotline).ToString("N0", nfi))
                                     </div>
                                 </div>
                                 @if (Model.VarInfo.Year > 1)

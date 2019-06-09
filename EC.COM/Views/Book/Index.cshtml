@@ -174,7 +174,7 @@
                                 </div>
                             </div>
                             <div class="checkbox-btn pricingForm-block" style="margin-left: 50px;">
-                                <input type="checkbox" value="true" id="rc4" name="callCenter" />
+                                <input type="checkbox" value="true" id="callCenter" name="callCenter" class="calc"/>
                                 <label style="color: #434343" for="rc4" onclick>Add Call Center Hotline</label>
                             </div>
 
@@ -230,6 +230,14 @@
                                         $0
                                     </div>
                                 </div>
+                              <div class="pricingBill-line clearfix">
+                                <div class="pricingBill-line__text">
+                                  Call Center Hotline
+                                </div>
+                                <div class="pricingBill-line__tax" id="priceCC">
+                                  $0
+                                </div>
+                              </div>
                             </div>
                             <div class="pricingBill-main price-section">
                                 <div class="pricingBill-line pricingBill-lineTotal clearfix">
@@ -294,6 +302,7 @@
             var numberOfClients = $('#NumberOfClients').val();
             var invitationCode = $('#InvitationCode').val();
             var year = $('[name="year"]:checked').val();
+            var call_Center = $('[name="callCenter"]:checked').val();
 
             $('#more50k').hide();
             $('#more50kb').show();
@@ -314,6 +323,7 @@
                     numberOfNonEmployees: numberOfNonEmployees,
                     numberOfClients: numberOfClients,
                     year: year,
+                    callCenter: call_Center
                 }
             }).done(function (data) {
                 $('#priceNE').html('$' + data.priceNE);
@@ -321,6 +331,7 @@
                 $('#priceC').html('$' + data.priceC);
                 $('#priceT').html('$' + data.priceT);
                 $('#priceR').html('$' + data.priceR);
+                $('#priceCC').html('$' + data.priceCC);
                 $('#sessionN').html(data.sessionN);
             });
         }

@@ -106,6 +106,8 @@ namespace EC.COM.Controllers
             model.PriceNNE = 0m;
             model.PriceC = 0m;
             model.PriceR = 0m;
+            model.PriceCC = 0m;
+
             model.sessionNumber = 0;
 
             using (var db = new DBContext())
@@ -131,7 +133,14 @@ namespace EC.COM.Controllers
                 var ne = items.FirstOrDefault(x => model.NumberOfEmployees >= x.From_quantity && model.NumberOfEmployees <= x.To_quantity);
                 //logger.Info("NE  " + ne.Id);
 
-
+                if (model.callCenter)
+                {
+                  var callCenterItem = db.CompanyInvitations.Where(x => x.Invitation_code.ToLower() == "empathia1" && model.NumberOfEmployees >= x.From_quantity && model.NumberOfEmployees <= x.To_quantity).FirstOrDefault();
+                  if (callCenterItem != null && callCenterItem.Employee_price.HasValue)
+                  {
+                    model.PriceCC = callCenterItem.CallCenterHotline.Value;
+                  }
+                }
 
                 if ((ne != null) && (ne.Employee_price.HasValue) && (ne.Employee_price_type.HasValue))
                 {
@@ -184,6 +193,8 @@ namespace EC.COM.Controllers
                     }
             }
 
+
+
             return model;
         }
 
@@ -200,9 +211,11 @@ namespace EC.COM.Controllers
                 priceNE = model.PriceNE.ToString("N0", nfi),
                 priceNNE = model.PriceNNE.ToString("N0", nfi),
                 priceC = model.PriceC.ToString("N0", nfi),
-                priceT = (model.PriceNE + model.PriceNNE + model.PriceC).ToString("N0", nfi),
+                priceCC = model.PriceCC.ToString("N0", nfi),
+                priceT = (model.PriceNE + model.PriceNNE + model.PriceC + model.PriceCC).ToString("N0", nfi),
                 priceR = model.PriceR.ToString("N0", nfi),
                 sessionN = model.sessionN,
+                
             };
 
             return new JsonResult
@@ -368,9 +381,26 @@ namespace EC.COM.Controllers
         }
 
         [HttpPost]
-        public ActionResult OnboardingPayment(OnboardingPaymentForm form)
+        public ActionResult OnboardingPayment(OnboardingPaymentForm form, string stripeToken)
         {
-            string id = "";
+
+            StripeConfiguration.SetApiKey("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
+
+            // Token is created using Checkout or Elements!
+            // Get the payment token submitted by the form:
+            var token = stripeToken; // Using ASP.NET MVC
+            var options = new ChargeCreateOptions
+            {
+          ////    Amount = System.Convert.ToInt64(varinfo.Total_price),
+              Currency = "usd",
+              Description = "Employee Confidential Onboarding Process",
+              SourceId = token,
+            };
+
+      var service = new ChargeService();
+      Charge charge = service.Create(options);
+
+      string id = "";
             return View("~/Views/Book/OnboardingPayment.cshtml");
         }
     }
