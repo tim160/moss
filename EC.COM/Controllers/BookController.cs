@@ -290,7 +290,7 @@ namespace EC.COM.Controllers
         public ActionResult Payment(VarInfoModel varInfo, string stripeToken, string QuickView)
         {
             string quickView = "";
-            if (!string.IsNullOrWhiteSpace(QuickView))
+            if (!string.IsNullOrWhiteSpace(QuickView) && QuickView =="1")
               quickView = "1";
             StripeConfiguration.SetApiKey("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
 
@@ -351,10 +351,11 @@ namespace EC.COM.Controllers
                 var company = db.company.Where(m => m.guid == guid).FirstOrDefault();
                 if (company == null)
                 {
-                    return RedirectToAction("Index", "Var");
+                    return RedirectToAction("Index", "Home");
                 } else
                 {
                     ViewBag.companyId = company.id;
+                    ViewBag.companyName = company.company_nm;
                 }
             }
             return View();
