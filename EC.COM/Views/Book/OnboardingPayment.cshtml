@@ -239,7 +239,7 @@
                                     <a href="~/PrivacyStatement.html" target="_blank">Privacy Policy</a>
                                 </p>
                             </div>
-                            <button ng-click="SubmitOnboardPayment()" class="submitBigBtn btn" type="submit">Pay $@ViewBag.priceT</button>
+                            <button @*ng-click="SubmitOnboardPayment()"*@ class="submitBigBtn btn" type="submit">Pay $@ViewBag.priceT</button>
                         </div>
                     </div>
                 </div>
@@ -316,7 +316,7 @@
         cardCvc.mount('#CVCDiv');
 
         //registerElements([cardNumber, cardExpiry, cardCvc], 'example2');
-        var form = document.getElementById('payment-form');
+        var form = document.getElementById('formDrop');
         form.addEventListener('submit', function (event) {
           event.preventDefault();
 
@@ -330,7 +330,7 @@
               //stripeTokenHandler(result.token);
               console.log(result);
               $('#stripeToken').val(result.token.id);
-              $('#main-form').submit();
+                $('#formDrop').submit();
             }
           });
         });
