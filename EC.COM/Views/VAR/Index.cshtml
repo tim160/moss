@@ -11,6 +11,20 @@
   {
     viewVideo = "Get Pricing";
   }
+
+  string welcome1 = "Welcome. You’ve received an invitation code";
+  string welcome2 = "This means you have access to special pricing";
+  string invitation_code = "Invitation Code";
+ 
+
+  if (ViewBag.preReg != null && ViewBag.preReg)
+  {
+    welcome1 = "Welcome. Thank you for your purchase.";
+    welcome2 = "We look forward to helping you build a safe, compliant and ethical workplace";
+    invitation_code = "Purchase confirmation code";
+    viewVideo = "Register License";
+  }
+
 }
 
 <div class="general-container welcomePage">
@@ -108,10 +122,10 @@
         <section class="welcomeTitleSection">
             <div class="container">
                 <div class="welcomeTitle">
-                    Welcome. You’ve received an invitation code
+                    @welcome1
                 </div>
                 <div class="welcomeSubTitle">
-                    This means you have access to special pricing
+                    @welcome2
                 </div>
             </div>
         </section>
@@ -154,7 +168,7 @@
                                 <input type="number" class="form-mainContent__labelInput" name="NumberOfEmployees" value="1">
                             </label>
                             <label class="form-mainContent__label">
-                                Invitation Code
+                                @invitation_code
                                 <input type="text" class="form-mainContent__labelInput" name="InvitationCode">
                             </label>
 

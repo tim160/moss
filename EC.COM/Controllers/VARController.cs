@@ -10,19 +10,35 @@ namespace EC.COM.Controllers
     public class VARController : Controller
     {
         // GET: VAR
-        public ActionResult Index(string quickview)
+        public ActionResult Index(string quickview, string code)
         {
             bool quickView = false;
             if (!string.IsNullOrWhiteSpace(quickview))
               quickView = true;
             ViewBag.quickView = quickView;
 
-            return View();
+
+      ViewBag.preReg = false;
+      if (!string.IsNullOrWhiteSpace(code))
+      {
+        using (var db = new DBContext())
+        { 
+          var model = db.CompanyInvitations.FirstOrDefault(x => x.Invitation_code.ToLower().Trim() == code.ToLower().Trim());
+          if (model != null && model.Employee_price_type == 3)
+          {
+
+            ViewBag.preReg = true;
+          }
+        }
+      }
+             
+          return View();
         }
 
         [HttpPost]
         public ActionResult Index(string firstName, string lastName, string companyName, string phone, string email, int numberOfEmployees, string invitationCode, string quickView)
         {
+            string emailed_code = "";
             var data = $"{firstName}|{lastName}|{companyName}|{phone}|{email}|{numberOfEmployees}|{invitationCode}|{quickView}";
 
             EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(false);
@@ -36,11 +52,21 @@ namespace EC.COM.Controllers
 
             to.Add(email.Trim());
             // em.Send(to, cc, "Employee Confidential Registration", body, true);
-
+            var is_prepaid = false;
             using (var db = new DBContext())
             {
-                var model = db.VarInfoes.FirstOrDefault(x => x.Email == email);
-                if (model == null)
+        var check_prepaid = db.CompanyInvitations.FirstOrDefault(x => x.Invitation_code.ToLower().Trim() == invitationCode.ToLower().Trim());
+        if (check_prepaid != null && check_prepaid.Employee_price_type == 3)
+        {
+          is_prepaid = true;
+        }
+
+        var model = db.VarInfoes.FirstOrDefault(x => x.Email == email);
+
+        if (is_prepaid)
+          emailed_code = Guid.NewGuid().ToString();
+
+         if (model == null)
                 {
                     var varinfo = new Data.VarInfoModel
                     {
@@ -66,6 +92,11 @@ namespace EC.COM.Controllers
                         Registered_dt = DateTime.Now,
                         Onboarding_session_numbers = model.sessionNumber,*/
                     };
+
+                    if (is_prepaid)
+                    {
+            varinfo.Emailed_code_to_customer = emailed_code;
+                    }
                     db.VarInfoes.Add(varinfo);
                 }
                 else
@@ -77,13 +108,29 @@ namespace EC.COM.Controllers
                     model.Email = email ?? model.Email;
                     model.Invitation_code = invitationCode ?? model.Invitation_code;
                     model.Employee_no = numberOfEmployees > 0 ? numberOfEmployees : model.Employee_no;
+                    if (is_prepaid)
+                    {
+                      model.Emailed_code_to_customer = emailed_code;
+                    }
                 }
-                db.SaveChanges();
-            }
-            if(quickView == "1")
-              return RedirectToAction("Index", "Book", new { id = System.Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(data)), quickView = 1 });
-            else
-              return RedirectToAction("Index", "Video", new { id = System.Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(data)) });
+                
+
+ 
+         
+
+           db.SaveChanges();
+
+      }
+          if (quickView == "1")
+            return RedirectToAction("Index", "Book", new { id = System.Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(data)), quickView = 1 });
+          else if (is_prepaid)
+          {
+            return RedirectToAction("Index", "Video", new { id = System.Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(data)), invitation = invitationCode, emailedcode = emailed_code });
+          }
+          else
+          {
+            return RedirectToAction("Index", "Video", new { id = System.Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(data)) });
+          }
         }
     }
 }

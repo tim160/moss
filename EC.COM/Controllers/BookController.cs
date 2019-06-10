@@ -138,7 +138,14 @@ namespace EC.COM.Controllers
                   var callCenterItem = db.CompanyInvitations.Where(x => x.Invitation_code.ToLower() == "empathia1" && model.NumberOfEmployees >= x.From_quantity && model.NumberOfEmployees <= x.To_quantity).FirstOrDefault();
                   if (callCenterItem != null && callCenterItem.Employee_price.HasValue)
                   {
-                    model.PriceCC = callCenterItem.CallCenterHotline.Value;
+                    if (model.Year == 1)
+                    {
+                      model.PriceCC = callCenterItem.Employee_price_type.Value == 1 ? callCenterItem.Employee_price.Value : callCenterItem.Employee_price.Value * model.NumberOfEmployees;
+                    }
+                    else
+                    {
+                      model.PriceCC = callCenterItem.Employee_price_type.Value == 1 ? callCenterItem.TwoYearPerYear_employee_price.Value : callCenterItem.TwoYearPerYear_employee_price.Value * model.NumberOfEmployees;
+                    }
                   }
                 }
 

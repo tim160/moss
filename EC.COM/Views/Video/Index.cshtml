@@ -1,6 +1,20 @@
 ﻿
 @{
-    ViewBag.Title = "Video";
+  ViewBag.Title = "Video";
+  string invitation = "";
+  string view_video = "Get Pricing";
+  string book_redirect = "Index";
+  string emailedcode = "";
+  if (ViewBag.preReg != null && ViewBag.preReg)
+  {
+    view_video = "Next step";
+  }
+  if (ViewBag.invitation != null && ViewBag.emailedcode != null)
+  {
+    invitation = ViewBag.invitation;
+    book_redirect = "CompanyRegistrationVideo";
+    emailedcode = ViewBag.emailedcode;
+  }
 }
 
 <style>
@@ -230,8 +244,8 @@
                             </div>
                         </div>
                         <div class="sidebarActionblock__btn">
-                            <a href="@Url.Action("Index", "Book", new { id = ViewContext.RouteData.Values["id"] })" class="btn btnGreen">
-                                Get Pricing
+                            <a href="@Url.Action(@book_redirect, "Book", new { id = ViewContext.RouteData.Values["id"], code = invitation, emailedcode = emailedcode })" class="btn btnGreen">
+                                @view_video
                             </a>
                         </div>
                     </div>
@@ -321,7 +335,7 @@
                     Ready to do this?
                 </div>
                 <div class="videoAction-button">
-                    <a href="@Url.Action("Index", "Book", new { id = ViewContext.RouteData.Values["id"] })" class="btn actionBtn">Get Pricing</a>
+                    <a href="@Url.Action(@book_redirect, "Book", new { id = ViewContext.RouteData.Values["id"], code = invitation, emailedcode = emailedcode })" class="btn actionBtn">@view_video</a>
                 </div>
             </div>
         </section>
