@@ -95,7 +95,7 @@ namespace EC.COM.Controllers
 
                     if (is_prepaid)
                     {
-            varinfo.Emailed_code_to_customer = emailed_code;
+                      varinfo.Emailed_code_to_customer = emailed_code;
                     }
                     db.VarInfoes.Add(varinfo);
                 }
@@ -111,6 +111,7 @@ namespace EC.COM.Controllers
                     if (is_prepaid)
                     {
                       model.Emailed_code_to_customer = emailed_code;
+                      model.Is_registered = false;
                     }
                 }
                 
@@ -125,7 +126,7 @@ namespace EC.COM.Controllers
             return RedirectToAction("Index", "Book", new { id = System.Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(data)), quickView = 1 });
           else if (is_prepaid)
           {
-            return RedirectToAction("Index", "Video", new { id = System.Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(data)), invitation = invitationCode, emailedcode = emailed_code });
+            return RedirectToAction("CompanyRegistrationVideo", "Book", new { id = System.Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(data)), invitation = invitationCode, invitationcode = invitationCode, emailedcode = emailed_code });
           }
           else
           {

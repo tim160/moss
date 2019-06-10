@@ -85,7 +85,9 @@ namespace EC.COM.Controllers
                 varinfo.Non_employee_price = model.PriceNNE;
                 varinfo.Customers_price = model.PriceC;
                 varinfo.Onboarding_price = model.PriceR;
-                varinfo.Total_price = model.Year * (model.PriceNE + model.PriceNNE + model.PriceC) + model.PriceR;
+                varinfo.CallCenterHotline = model.PriceCC;
+
+                varinfo.Total_price = model.Year * (model.PriceNE + model.PriceNNE + model.PriceC + model.PriceCC) + model.PriceR;
 
                 varinfo.Year = model.Year;
                 varinfo.Registered_dt = DateTime.Now;

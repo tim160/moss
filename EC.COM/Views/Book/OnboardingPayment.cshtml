@@ -330,7 +330,6 @@
         var form = document.getElementById('payment-form');
         form.addEventListener('submit', function (event) {
             event.preventDefault();
-
             stripe.createToken(cardNumber).then(function (result) {
                 if (result.error) {
                     // Inform the customer that there was an error.
