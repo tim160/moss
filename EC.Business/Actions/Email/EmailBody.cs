@@ -270,9 +270,18 @@ namespace EC.Business.Actions.Email
                     //ApproveCloseCaselast
                     m_filename = "CaseCloseApproveClosed";
                     break;
-
-
-
+                case 74:
+                    //ApproveCloseCaselast
+                    m_filename = "BookingECOnboardingSessionNotifications";
+                    break;
+                case 75:
+                    //Confirmation of Timeslot
+                    m_filename = "TrainingTimeslotBooked";
+                    break;
+                case 76:
+                    //Reminder of training
+                    m_filename = "ReminderTrainingTimeslotBooked";
+                    break;
             }
 
             string appPath = Path.GetFullPath("~/EmailText/" + m_filename + ".html");
@@ -697,6 +706,26 @@ namespace EC.Business.Actions.Email
         {
             GetBody(71);
 
+            m_body = prepareBody(m_body);
+        }
+        //After booking onboarding separately
+        public void BookingOnboardingSeparately(Func<string, string> prepareBody)
+        {
+            GetBody(74);
+            m_body = prepareBody(m_body);
+        }
+
+        //Confirmation of Timeslot
+        public void ConfirmationTimeslot(Func<string, string> prepareBody)
+        {
+            GetBody(75);
+            m_body = prepareBody(m_body);
+        }
+
+        //Reminder of training
+        public void ReminderTraining(Func<string, string> prepareBody)
+        {
+            GetBody(76);
             m_body = prepareBody(m_body);
         }
         #endregion
