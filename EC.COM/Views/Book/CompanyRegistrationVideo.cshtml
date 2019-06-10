@@ -5,8 +5,12 @@
   {
     quickView = "1";
   }
- 
 
+  bool preReg = false;
+  if (ViewBag.preReg != null && ViewBag.preReg)
+  {
+    preReg = true;
+  }
 }
 
 <div class="general-container clientCheckList">
@@ -101,6 +105,8 @@
         </div><!-- /.main-headerBg -->
     </header><!-- /.header -->
     <main class="main">
+  @if (!preReg)
+  {
         <section class="thankRowNew">
             <div class="container clearfix">
                 <div class="thankRowthankRowNew__title">
@@ -111,6 +117,7 @@
                 </div>
             </div>
         </section>
+  }
         <section class="clientCheckList-contentHeader">
             <div class="container">
                 <div class="clientCheckList-contentHeader__text">

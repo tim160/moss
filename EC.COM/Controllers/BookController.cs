@@ -303,7 +303,21 @@ namespace EC.COM.Controllers
             }
             ViewBag.quickView = quickView;
 
-            return View();
+
+            ViewBag.preReg = false;
+            if (!string.IsNullOrWhiteSpace(invitationcode))
+            {
+              using (var db = new DBContext())
+              {
+                var model = db.CompanyInvitations.FirstOrDefault(x => x.Invitation_code.ToLower().Trim() == invitationcode.ToLower().Trim());
+                if (model != null && model.Employee_price_type == 3)
+                {
+                  ViewBag.preReg = true;
+                }
+              }
+            }
+
+          return View();
         }
 
         [HttpPost]
