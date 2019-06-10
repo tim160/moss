@@ -64,6 +64,7 @@
             !valEmail.hasClass('error') &&
             !valTitle.hasClass('error') && ($("#company_exist").val().length > 0)) {
             createCompany();
+            $('html, body').animate({ scrollTop: 0 }, 500);
         }
     }
 
@@ -71,7 +72,7 @@
         $('.updateProfileBtn input').click(function () {
             //createCompany();
             validationForm();
-            $('html, body').animate({ scrollTop: 0 }, 500);
+            
         });
     }
 
@@ -185,66 +186,6 @@
     });
     
     var changeTimer = false;
-
-    $("#amount").on('change', function (event) {
-        var temp = $(event.currentTarget);
-        parseInt(temp);
-    });
-    $("#code").on("change", function (event) {
-
-        if (changeTimer !== false) clearTimeout(changeTimer);
-
-        changeTimer = setTimeout(function () {
-            CheckCode($("#code").val(), $("#number").val());
-            changeTimer = false;
-        }, 3000);
-    });
-    $("#number").on("change", function (event) {
-
-        if (changeTimer !== false) clearTimeout(changeTimer);
-
-        changeTimer = setTimeout(function () {
-            CheckCode($("#code").val(), $("#number").val());
-            changeTimer = false;
-        }, 3000);
-    });
-
-
-
-    function CheckCode(code, emplquant) {
-        
-        $.ajax({
-            method: "POST",
-            url: "/new/ReturnAmount",
-            data: { code: code, emplquant: emplquant }
-        }).done(function (data) {//data from server
-            var amount = parseInt(data);
-            if (amount == 0) {
-                  $("#PayByCard").hide();
-                  $("#amount").val(0);
-            } else if (amount > 0) {
-                  $("#amount").val(data);
-                  $("#PayByCard").show();
-                //validationForm();
-                  $('.updateProfileBtn input').unbind();
-                  $('.updateProfileBtn input').click(function () {
-                      validationForm();
-                      $('html, body').animate({ scrollTop: 0 }, 500);
-                  });
-              }
-        }).fail(function (error) {
-            console.log(error);
-        });
-    }
-    $("#csv").on('keypress', function (event) {
-        //if ($(event.currentTarget).val().length == 4) {
-        //    event.preventDefault();
-        //}
-        var key_code = event.keyCode;
-        if ((key_code >= 48 && key_code <= 57) || (key_code >= 96 && key_code <= 105)) {
-            return;
-        } else if ((key_code === 8) || (key_code >= 35 && key_code <= 40) || key_code === 46 || key_code === 9 || key_code === 13) {  // Backspace, cursor keys, PgUp, PgDown, Delete, Tab, Enter
-            return;
-        }
-    });
+    var check_company = companyInUse($("#company_name").val().trim());
+ 
 });
