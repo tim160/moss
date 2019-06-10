@@ -1,6 +1,7 @@
 ﻿@{
   ViewBag.Title = "Check-list of next steps";
   string quickView = "0";
+  string schedule = "schedule";
   if (ViewBag.quickView != null && ViewBag.quickView)
   {
     quickView = "1";
@@ -10,6 +11,7 @@
   if (ViewBag.preReg != null && ViewBag.preReg)
   {
     preReg = true;
+    schedule = "buy";
   }
 }
 
@@ -249,7 +251,7 @@
         </section>
         <section class="clientCheckList-step clientCheckList-step6">
             <div class="container">
-              @if (quickView == "0")
+              @if (quickView == "0" && !preReg)
               {
                 <div class="row clearfix">
                     <div class="col50l">
@@ -264,7 +266,7 @@
                     </div>
                 </div>
               }
-              @if (quickView == "1")
+              @if (quickView == "1" || preReg)
               {
               <div class="row clearfix">
                 <div class="col50l">
@@ -291,7 +293,7 @@
                 </div>
                 <div class="col50r">
                   <div class="clientCheckList-step__titleText">
-                     You have to register your company (STEP 2) and be logged in, to schedule your onboarding session.
+                     You have to register your company (STEP 2) and be logged in, to @schedule your onboarding session.
                   </div>
                   </div>
              </div>
