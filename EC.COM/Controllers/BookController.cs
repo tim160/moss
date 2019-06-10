@@ -397,8 +397,7 @@ namespace EC.COM.Controllers
         [HttpPost]
         public ActionResult Onboarding(OnboardingForm form)
         {
-            ViewBag.priceT = form.priceT;
-            return View("~/Views/Book/OnboardingPayment.cshtml");
+            return View("~/Views/Book/OnboardingPayment.cshtml", form);
         }
 
         [HttpPost]
@@ -412,16 +411,16 @@ namespace EC.COM.Controllers
             var token = stripeToken; // Using ASP.NET MVC
             var options = new ChargeCreateOptions
             {
-          ////    Amount = System.Convert.ToInt64(varinfo.Total_price),
-              Currency = "usd",
-              Description = "Employee Confidential Onboarding Process",
-              SourceId = token,
+                ////    Amount = System.Convert.ToInt64(varinfo.Total_price),
+                Currency = "usd",
+                Description = "Employee Confidential Onboarding Process",
+                SourceId = token,
             };
 
-      var service = new ChargeService();
-      Charge charge = service.Create(options);
+            var service = new ChargeService();
+            Charge charge = service.Create(options);
 
-      string id = "";
+            string id = "";
             return View("~/Views/Book/OnboardingPayment.cshtml");
         }
     }

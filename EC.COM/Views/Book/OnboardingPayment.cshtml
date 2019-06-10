@@ -1,5 +1,6 @@
-﻿@{
-  ViewBag.Title = "Onboarding & Training Payment";
+﻿@model EC.COM.Models.OnboardingForm
+@{
+    ViewBag.Title = "Onboarding & Training Payment";
 }
 
 <style>
@@ -132,7 +133,17 @@
         </div>
     </section>
     <section class="pricingMainSection">
-        <form id="formDrop">
+        @using (Html.BeginForm("Payment", null, FormMethod.Post, new { id = "main-form" }))
+        {
+            @Html.HiddenFor(x => x.companyId)
+            @Html.HiddenFor(x => x.NumberSessions)
+            @Html.Hidden("stripeToken")
+            @Html.Hidden("QuickView")
+        }
+
+        <form method="post" id="payment-form">
+            <input type="hidden" name="id" value="@Model.companyId" />
+            <input type="hidden" name="email" value="" />
             <div class="container">
                 <div class="pricingMainContainer">
                     <div class="pricingFormContainer">
@@ -200,7 +211,7 @@
                                     onboarding & training.
                                 </div>
                                 <div class="pricingBill-line__tax" id="priceR">
-                                    $@ViewBag.priceT
+                                    $@Model.priceT
                                 </div>
                             </div>
                             <div class="pricingBill-line pricingBill-lineSmall clearfix">
@@ -215,7 +226,7 @@
                             <div class="pricingBill-line__text">
                                 &nbsp;
                             </div>
-                            <input type="hidden" id="priceT"  value="@ViewBag.priceT"/>
+                            <input type="hidden" id="priceT" value="@Model.priceT" />
                             <div class="pricingBill-line__tax" style="font-size:14px;" id="sessionN">
                                 {{NumberSessions}}
                             </div>
@@ -226,7 +237,7 @@
                                     <b>Total</b>
                                 </div>
                                 <div class="pricingBill-line__tax" id="priceT">
-                                    $@ViewBag.priceT
+                                    $@Model.priceT
                                 </div>
                             </div>
                         </div>
@@ -239,7 +250,7 @@
                                     <a href="~/PrivacyStatement.html" target="_blank">Privacy Policy</a>
                                 </p>
                             </div>
-                            <button @*ng-click="SubmitOnboardPayment()"*@ class="submitBigBtn btn" type="submit">Pay $@ViewBag.priceT</button>
+                            <button @*ng-click="SubmitOnboardPayment()"*@ class="submitBigBtn btn" type="submit">Pay $@Model.priceT</button>
                         </div>
                     </div>
                 </div>
@@ -316,23 +327,23 @@
         cardCvc.mount('#CVCDiv');
 
         //registerElements([cardNumber, cardExpiry, cardCvc], 'example2');
-        var form = document.getElementById('formDrop');
+        var form = document.getElementById('payment-form');
         form.addEventListener('submit', function (event) {
-          event.preventDefault();
+            event.preventDefault();
 
-          stripe.createToken(cardNumber).then(function (result) {
-            if (result.error) {
-              // Inform the customer that there was an error.
-              var errorElement = document.getElementById('card-errors');
-              errorElement.textContent = result.error.message;
-            } else {
-              // Send the token to your server.
-              //stripeTokenHandler(result.token);
-              console.log(result);
-              $('#stripeToken').val(result.token.id);
-                //$('#formDrop').submit();
-            }
-          });
+            stripe.createToken(cardNumber).then(function (result) {
+                if (result.error) {
+                    // Inform the customer that there was an error.
+                    var errorElement = document.getElementById('card-errors');
+                    errorElement.textContent = result.error.message;
+                } else {
+                    // Send the token to your server.
+                    //stripeTokenHandler(result.token);
+                    console.log(result);
+                    $('#stripeToken').val(result.token.id);
+                    $('#main-form').submit();
+                }
+            });
         });
     </script>
 }
