@@ -180,7 +180,7 @@ namespace EC.COM.Controllers
             //model.PriceNE = model.PriceNE * (model.Year == 1 ? 1.2m : 2m);
             model.PriceNNE = model.PriceNNE * (model.Year == 1 ? 1.2m : 1m);
             model.PriceC = model.PriceC * (model.Year == 1 ? 1.2m : 1m);
-            model.AnnualyTotal = model.PriceNE + model.PriceNNE + model.PriceC;
+            model.AnnualyTotal = model.PriceNE + model.PriceNNE + model.PriceC + model.PriceCC;
             model.GrandTotal = model.AnnualyTotal * model.Year + model.PriceR;
             model.sessionN = "";
             switch (model.sessionNumber)

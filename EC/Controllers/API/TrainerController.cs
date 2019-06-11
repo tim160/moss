@@ -347,8 +347,7 @@ namespace EC.Controllers.API
             var mediator = DB.user.FirstOrDefault(x => x.company_id == companyId && x.role_id == ECLevelConstants.level_administrator);
             if (mediator != null)
             {
-                //em.Send("alexandr@ase.com.ua", "The book training have removed", body, "", true);
-                em.Send(mediator.email, "The book training have removed", body, "", true);
+        ////               em.Send(mediator.email, "The training session have been removed", body, "", true);
             }
 
             eb.CalendarEvent(false, true, Request.RequestUri.AbsoluteUri.ToLower(), item.Hour.ToString("yyyy-MM-dd HH:mm:ss"));
@@ -356,8 +355,7 @@ namespace EC.Controllers.API
             var trainer = DB.user.FirstOrDefault(x => x.id == item.CreatedByUserId);
             if (trainer != null)
             {
-                //em.Send("alexandr@ase.com.ua", "The book training have removed", body, "", true);
-                em.Send(trainer.email, "The book training have removed", body, "", true);
+  ////              em.Send(trainer.email, "The training session have been removed", body, "", true);
             }
 
             return new
