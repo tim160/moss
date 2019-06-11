@@ -47,9 +47,13 @@ namespace EC.COM
                 name: "BookCompanyRegistrationVideo",
                 url: "Book/CompanyRegistrationVideo",
                 defaults: new { controller = "Book", action = "CompanyRegistrationVideo" }
-                );            
-
-            routes.MapRoute(
+                );
+              routes.MapRoute(
+                name: "BookOnboardingPayment",
+                url: "Book/OnboardingPayment",
+                defaults: new { controller = "Book", action = "OnboardingPayment" }
+                );
+              routes.MapRoute(
                 name: "Book",
                 url: "Book/{id}",
                 defaults: new { controller = "Book", action = "Index", id = UrlParameter.Optional }
@@ -59,6 +63,8 @@ namespace EC.COM
                 url: "Book/Onboarding/{guid}",
                 defaults: new { controller = "Book", action = "Onboarding", guid = UrlParameter.Optional }
                 );
+
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

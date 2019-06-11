@@ -422,8 +422,18 @@ namespace EC.COM.Controllers
             var service = new ChargeService();
             Charge charge = service.Create(options);
 
-            string id = "";
-            return View("~/Views/Book/OnboardingPayment.cshtml");
+            var db = new DBContext();
+            string id = charge.Id;
+            var company = db.company.Where(t => t.guid.ToString() == form.CompanyGuid).FirstOrDefault();
+            if(company != null)
+            {
+              int numberOfSessions = form.SessionNumber;
+              company.onboard_sessions_paid = company.onboard_sessions_paid + numberOfSessions;
+              company.onboard_sessions_expiry_dt = DateTime.Today.AddYears(1);
+            }
+
+            return Redirect("report.employeeconfidential.com/trainer/calendar/");
+  
         }
     }
 }

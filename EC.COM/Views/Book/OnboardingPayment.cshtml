@@ -133,7 +133,7 @@
         </div>
     </section>
     <section class="pricingMainSection">
-        @using (Html.BeginForm("Payment", null, FormMethod.Post, new { id = "main-form" }))
+        @using (Html.BeginForm("OnboardingPayment", null, FormMethod.Post, new { id = "main-form" }))
         {
             @Html.HiddenFor(x => x.companyId)
             @Html.HiddenFor(x => x.NumberSessions)
