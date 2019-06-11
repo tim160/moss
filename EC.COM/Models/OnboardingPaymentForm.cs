@@ -7,13 +7,8 @@ namespace EC.COM.Models
 {
     public class OnboardingPaymentForm
     {
-        public string NameOnCard { get; set; }
-        public int CardNumber { get; set; }
-        public DateTime CardExpire { get; set; }
-        public int CVC { get; set; }
         public int SessionNumber { get; set; }
-        public string CompanyGuid { get; set; }
-        public decimal Amount { get; set; }
-
+        public long Amount { get; set; }
+        public Guid CompanyGuid { get; set; }
   }
 }

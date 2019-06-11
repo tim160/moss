@@ -139,11 +139,12 @@
             @Html.HiddenFor(x => x.NumberSessions)
             @Html.Hidden("stripeToken")
             @Html.Hidden("QuickView")
+            <input type="hidden" id="SessionNumber" name="SessionNumber" value="@Model.NumberSessions" />
+            <input type="hidden" id="Amount" name="Amount" value="@Model.priceT" />
+            <input type="hidden" id="CompanyGuid" name="CompanyGuid" value="@Model.GuidCompany" />
         }
 
         <form method="post" id="payment-form">
-            <input type="hidden" name="id" value="@Model.companyId" />
-            <input type="hidden" name="email" value="" />
             <div class="container">
                 <div class="pricingMainContainer">
                     <div class="pricingFormContainer">

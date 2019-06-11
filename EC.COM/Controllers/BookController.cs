@@ -392,6 +392,7 @@ namespace EC.COM.Controllers
                 {
                     ViewBag.companyId = company.id;
                     ViewBag.companyName = company.company_nm;
+                    ViewBag.GuidCompany = guid;
                 }
             }
             return View();
@@ -417,6 +418,7 @@ namespace EC.COM.Controllers
                 Currency = "usd",
                 Description = "Employee Confidential Onboarding Process",
                 SourceId = token,
+                Amount = form.Amount
             };
 
             var service = new ChargeService();
@@ -424,7 +426,7 @@ namespace EC.COM.Controllers
 
             var db = new DBContext();
             string id = charge.Id;
-            var company = db.company.Where(t => t.guid.ToString() == form.CompanyGuid).FirstOrDefault();
+            var company = db.company.Where(t => t.guid == form.CompanyGuid).FirstOrDefault();
             if(company != null)
             {
               int numberOfSessions = form.SessionNumber;
@@ -432,7 +434,7 @@ namespace EC.COM.Controllers
               company.onboard_sessions_expiry_dt = DateTime.Today.AddYears(1);
             }
 
-            return Redirect("report.employeeconfidential.com/trainer/calendar/");
+            return Redirect("https://report.employeeconfidential.com/trainer/calendar/");
   
         }
     }

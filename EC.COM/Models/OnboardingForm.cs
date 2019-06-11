@@ -11,6 +11,6 @@ namespace EC.COM.Models
         public int NumberSessions { get; set; }
         public int priceT { get; set; }
         public int companyId { get; set; }
-
+        public Guid GuidCompany { get; set; }
     }
 }
