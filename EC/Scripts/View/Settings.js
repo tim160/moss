@@ -360,7 +360,7 @@
             var flag = false;
             if (data.length > 0) {
                 $(".tableDepartment p").each(function (index, value) {
-                    if (value.innerText == data) {
+                    if (value.innerText.trim().toLowerCase() == data.trim().toLowerCase()) {
                         flag = true;
                         $(".addNewDepartment input").val("");
                         return true;
