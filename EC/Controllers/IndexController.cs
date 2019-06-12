@@ -116,10 +116,10 @@ namespace EC.Controllers
 
                      ViewBag.newListComp = serializer.Serialize(searchCompanyDto.ToArray());*/
 
-            return RedirectToAction("Login", "Service");
+            return RedirectToAction("Report", "Service");
                 //return View();
             }
-      return RedirectToAction("Login", "Service");
+      return RedirectToAction("Report", "Service");
       ///// return RedirectToAction("Login", "Service");
     }
 
