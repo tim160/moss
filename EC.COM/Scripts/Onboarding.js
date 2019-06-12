@@ -1,9 +1,9 @@
 ﻿'use sctrict'
 var purchaseApp = angular.module("EC", []);
 purchaseApp.controller("onboarding", function ($scope, productService) {
-    $scope.priceT = 3000;
+    $scope.priceT = 1500;
     $scope.switchTrainingSession = 'Training session X3';
-    $scope.priceSwitchTrainingSession = "$3,000";
+    $scope.priceSwitchTrainingSession = "$1,500";
     $scope.checkboxItem = function (clickedItem) {
         switch (clickedItem) {
             case 'one':
@@ -19,10 +19,10 @@ purchaseApp.controller("onboarding", function ($scope, productService) {
                 $scope.priceSwitchTrainingSession = "$1,000";
                 break;
             case 'three':
-                $scope.priceT = 3000;
+                $scope.priceT = 1500;
                 $scope.validationButtons = false;
                 $scope.switchTrainingSession = "Training session X3";
-                $scope.priceSwitchTrainingSession = "$3,000";
+                $scope.priceSwitchTrainingSession = "$1,500";
                 break;
         }
         productService.addSelectedItem({
@@ -72,8 +72,8 @@ purchaseApp.controller("onboardingPayment", function ($scope, productService) {
 
 purchaseApp.factory('productService', function () {
     var selectedItem = {
-        priceT : 3000,
-        priceSwitchTrainingSession: "$3,000",
+        priceT : 1500,
+        priceSwitchTrainingSession: "$1,500",
         sessions: ''
     };
     var getSelectedItem = function () {
@@ -89,7 +89,7 @@ purchaseApp.factory('productService', function () {
             case "1000":
                 selectedItem.sessions = 'Up to two sessions';
                 break;
-            case "3000":
+            case "1500":
                 selectedItem.sessions = 'Up to three sessions';
                 break;
         }
