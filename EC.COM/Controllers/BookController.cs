@@ -7,14 +7,17 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using EC.COM.Models;
-//using log4net;
+using log4net;
 
 namespace EC.COM.Controllers
 {
-    public class BookController : Controller
-    {
-     //     public ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-    // GET: Book
+     
+     public class BookController : Controller
+     {
+
+        public ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        //     public ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        // GET: Book
         public ActionResult Index(string id = "", string quickView = "")
         {
             var data = System.Text.Encoding.Default.GetString(System.Convert.FromBase64String(id)).Split('|');
@@ -423,7 +426,7 @@ namespace EC.COM.Controllers
 
             var service = new ChargeService();
             Charge charge = service.Create(options);
-
+ 
             var db = new DBContext();
             string id = charge.Id;
             var company = db.company.Where(t => t.guid == form.CompanyGuid).FirstOrDefault();
@@ -432,9 +435,11 @@ namespace EC.COM.Controllers
               int numberOfSessions = form.SessionNumber;
               company.onboard_sessions_paid = company.onboard_sessions_paid + numberOfSessions;
               company.onboard_sessions_expiry_dt = DateTime.Today.AddYears(1);
+              db.SaveChanges();
             }
-
-            return Redirect("https://report.employeeconfidential.com/trainer/calendar/");
+      
+ 
+      return Redirect("https://report.employeeconfidential.com/trainer/calendar/");
   
         }
     }
