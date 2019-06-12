@@ -343,6 +343,7 @@
 
         $('#addInputDep p').click(function () {
             var temp = $(this).parent();
+
             adding("Department", temp);
         });
 
@@ -356,10 +357,20 @@
         });
         $('#addDepBtn').click(function () {
             var data = $(".addNewDepartment input").val();
+            var flag = false;
             if (data.length > 0) {
-                sendAjax("Department", data, function (id) {
-                    close("Department", data, id);
+                $(".tableDepartment p").each(function (index, value) {
+                    if (value.innerText == data) {
+                        flag = true;
+                        $(".addNewDepartment input").val("");
+                        return true;
+                    }
                 });
+                if (!flag) {
+                    sendAjax("Department", data, function (id) {
+                        close("Department", data, id);
+                    });
+                }
             } else {
                 $('.addNewDepartment').css('border-color', 'red');
             }
