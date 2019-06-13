@@ -1,27 +1,27 @@
 ﻿'use sctrict'
 var purchaseApp = angular.module("EC", []);
 purchaseApp.controller("onboarding", function ($scope, productService) {
-    $scope.priceT = 1500;
-    $scope.switchTrainingSession = 'Training session X3';
-    $scope.priceSwitchTrainingSession = "$1,500";
+    $scope.priceT = 500;
+    $scope.switchTrainingSession = 'Training session X 1';
+    $scope.priceSwitchTrainingSession = "$500";
     $scope.checkboxItem = function (clickedItem) {
         switch (clickedItem) {
             case 'one':
                 $scope.priceT = 500;
                 $scope.validationButtons = false;
-                $scope.switchTrainingSession = "Training session X1";
+                $scope.switchTrainingSession = "Training session X 1";
                 $scope.priceSwitchTrainingSession = "$500";
                 break;
             case 'two':
                 $scope.priceT = 1000;
                 $scope.validationButtons = false;
-                $scope.switchTrainingSession = "Training session X2";
+                $scope.switchTrainingSession = "Training session X 2";
                 $scope.priceSwitchTrainingSession = "$1,000";
                 break;
             case 'three':
                 $scope.priceT = 1500;
                 $scope.validationButtons = false;
-                $scope.switchTrainingSession = "Training session X3";
+                $scope.switchTrainingSession = "Training session X 3";
                 $scope.priceSwitchTrainingSession = "$1,500";
                 break;
         }
