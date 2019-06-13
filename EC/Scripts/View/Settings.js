@@ -293,28 +293,24 @@
             cc = (cc === undefined) || (cc.length == 0) ? 'none' : cc;
             var data = '' + name + '\n' + cc;
 
-            if ($('.addNewLocation input[name="newLocationName"]').val().length > 0) {
-                sendAjax('Location', data, function (html) {
-                    /*var s = '<div style="display:flex"><p>';
-                    s += '<span class="location_name">' + name + '</span>';
-                    if ($('#location_cc_extended').length != 0) {
-                        s += '<select class="location_cc_extended_items" id="location_cc_extended_' + id + '" name="location_cc_extended_' + id + '"><option value="">Not selected</option>';
-                        var elem = $('.addNewLocation #location_cc_extended').clone();
-                        s += elem.html();
-                        s += '</select>';
-                    }
-                    s += '<div data-value="' + id + '" class="deleteLocation"></div>';
-                    contentCompanyProfile.find('.tableLocation').prepend(s + '</div>');
-                    if (cc != 'none') {
-                        $('#location_cc_extended_' + id).val(cc);
-                    }
-                    init_location_cc_extended();*/
-                    $('#tableLocation').append(html);
-                    closeIcon('Location');
-                    init_location_cc_extended();
-                }, 'Location');
-            } else {
-                $('.addNewLocation').css('border-color', 'red');
+            var addNewLocationFlag = true;
+            $("#tableLocation .location_name").each(function (index, value) {
+                if (value.innerText.trim().toLowerCase() == name.trim().toLowerCase()) {
+                    addNewLocationFlag = false;
+                    $('.addNewLocation input[name="newLocationName"]').val("");
+                    return true;
+                }
+            });
+            if (addNewLocationFlag) {
+                if ($('.addNewLocation input[name="newLocationName"]').val().length > 0) {
+                    sendAjax('Location', data, function (html) {
+                        $('#tableLocation').append(html);
+                        closeIcon('Location');
+                        init_location_cc_extended();
+                    }, 'Location');
+                } else {
+                    $('.addNewLocation').css('border-color', 'red');
+                }
             }
         });
 
@@ -377,12 +373,22 @@
         });
         $('#addIncBtn').click(function () {
             var data = $(".addNewIncidentType input").val();
-            if (data.length > 0) {
-                sendAjax("IncidentType", data, function (id) {
-                    close("IncidentType", data, id);
-                });
-            } else {
-                $('.addNewIncidentType').css('border-color', 'red');
+            var flag = false;
+            $(".tableIncidentType p").each(function (index, value) {
+                if (value.innerText.trim().toLowerCase() == data.trim().toLowerCase()) {
+                    flag = true;
+                    $(".addNewIncidentType input").val("");
+                    return true;
+                }
+            });
+            if (!flag) {
+                if (data.length > 0) {
+                    sendAjax("IncidentType", data, function (id) {
+                        close("IncidentType", data, id);
+                    });
+                } else {
+                    $('.addNewIncidentType').css('border-color', 'red');
+                }
             }
         });
         /*add Reporter types*/
