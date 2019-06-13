@@ -394,12 +394,23 @@
         /*add Reporter types*/
         $('#addRepBtn p').click(function () {
             var data = $(".addNewReporterType input").val();
-            if (data.length > 0) {
-                sendAjax("addReporterType", data, function (id) {
-                    close("ReporterType", data, id);
-                });
-            } else {
-                $('.addNewReporterType').css('border-color', 'red');
+
+            var flag = false;
+            $(".tableReporterType p").each(function (index, value) {
+                if (value.innerText.trim().toLowerCase() == data.trim().toLowerCase()) {
+                    flag = true;
+                    $(".addNewReporterType input").val("");
+                    return true;
+                }
+            });
+            if (!flag) {
+                if (data.length > 0) {
+                    sendAjax("addReporterType", data, function (id) {
+                        close("ReporterType", data, id);
+                    });
+                } else {
+                    $('.addNewReporterType').css('border-color', 'red');
+                }
             }
         });
         function sendAjax(newSetting, data, action, partial) {
