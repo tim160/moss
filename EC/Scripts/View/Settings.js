@@ -723,12 +723,23 @@
         });
         $('#addOutBtn').click(function () {
             var data = $(".addNewOutcome input").val();
-            if (data.length > 0) {
-                sendAjax("Outcome", data, function (id) {
-                    close("Outcome", data, id);
-                });
-            } else {
-                $('.addNewOutcome').css('border-color', 'red');
+            var flag = true;
+
+            $(".tableOutcome p").each(function (index, value) {
+                if (value.innerText.trim().toLowerCase() == data.trim().toLowerCase()) {
+                    flag = false;
+                    $(".addNewOutcome input").val("");
+                    return true;
+                }
+            });
+            if (flag) {
+                if (data.length > 0) {
+                    sendAjax("Outcome", data, function (id) {
+                        close("Outcome", data, id);
+                    });
+                } else {
+                    $('.addNewOutcome').css('border-color', 'red');
+                }
             }
         });
 
