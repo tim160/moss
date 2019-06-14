@@ -70,6 +70,7 @@ namespace EC.Controllers.ViewModel
         // involved mediators - any mediators who were marked from 2 lists.
         public string caseMediatorsInvolved { get; set; }
         public bool report_by_myself { get; set; }
+        public int agentId { get; set; }
 
         #region 2 page
 

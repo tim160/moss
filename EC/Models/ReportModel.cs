@@ -1301,6 +1301,7 @@ namespace EC.Models
 
                         newUser.login_nm = reporter_login;
                         currentReport = model.Merge(currentReport);
+                        currentReport.agent_id = model.agentId;
                         currentReport.user_id = newUser.id;
                         currentReport.reporter_user_id = newUser.id;
                         currentReport.report_by_myself = model.report_by_myself;
