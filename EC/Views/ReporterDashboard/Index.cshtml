@@ -34,10 +34,19 @@
                     <div class="listHead" style="font-weight: bold">@GlobalRes.Casestatus: <span class="review padText">@rm.InvestigationStatusString()</span></div>
                     <div class="listLeft">
                         <p style="padding-top:4px">@GlobalRes.Datereported:</p>
+                        @if (rm._report.agent_id.HasValue)
+                        {
+                        <p style="padding-top:4px">Filed by Call Center Agent:</p>
+                        }
+
                         <p style="padding-top:4px">@GlobalRes.Timeelapsed:</p>
                     </div>
                     <div class="listRight">
                         <p> @m_DateTimeHelper.ConvertDateToLongMonthString(rm._report.reported_dt)</p>
+                        @if (rm._report.agent_id.HasValue)
+                        {
+                            <p>@rm.GetAgentName()</p>
+                        }
                         @if (rm.GetTotalDays() == 1)
                         {
                             <p> @rm.GetTotalDays().ToString() @GlobalRes.day</p>
