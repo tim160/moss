@@ -70,6 +70,11 @@ namespace EC.Controllers
                         ModelState.AddModelError("PasswordError", "Password");
                         return View($"{view}{(is_cc ? "-CC" : "")}", model);
                     }
+                    if(user.role_id == 10)
+                    {
+                        Session["id_agent"] = user.id;
+                        return RedirectToAction("report", "service");
+                    }
 
                     Session[ECGlobalConstants.CurrentUserMarcker] = user;
                     Session["userName"] = user.login_nm;

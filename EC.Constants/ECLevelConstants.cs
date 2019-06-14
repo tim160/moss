@@ -17,5 +17,6 @@ namespace EC.Constants
         public const int level_administrator = 7;
         public const int level_informant = 8;
         public const int level_trainer = 9;
+        public const int level_agent = 10;
     }
 }

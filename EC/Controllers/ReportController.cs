@@ -182,6 +182,12 @@ namespace EC.Controllers
         [HttpPost]
         public ActionResult New(ReportViewModel model)
         {
+            int agentId = 0;
+            if (Session["id_agent"] != null)
+            {
+                agentId = (int)Session["id_agent"];
+            }
+            
             companyModel.ID = model.currentCompanyId;
             model.Process(Request.Form, Request.Files);
             string password;
