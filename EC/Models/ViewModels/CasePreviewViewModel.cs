@@ -74,6 +74,7 @@ namespace EC.Models.ViewModel
 
         public IEnumerable<dynamic> mediators { get; set; }
         public IEnumerable<report_owner> owners { get; set; }
+        public String agentName { get; set; }
 
         public CasePreviewViewModel()
         {

@@ -1265,8 +1265,9 @@ namespace EC.Models
                     case_color_code = (rm._report.report_color_id == 0) ? colors.Where(item => item.id == 1).FirstOrDefault().color_code : colors.Where(item => item.id == rm._report.report_color_id).FirstOrDefault().color_code,
                     severity_s = !rm._report.severity_id.HasValue ? "UNSPECIFIED" : severities.FirstOrDefault(z => z.id == rm._report.severity_id).severity_en,
                     severity_id = !rm._report.severity_id.HasValue ? 0 : rm._report.severity_id.Value,
-                    under_status_message = rm.DaysLeftClosedSpamMessage(delay_allowed)
-                  };
+                    under_status_message = rm.DaysLeftClosedSpamMessage(delay_allowed),
+                    agentName = rm._report.agent_id > 0 ? db.user.Find(rm._report.agent_id).first_nm : ""
+                };
 
               }).ToList();
             return reports;
