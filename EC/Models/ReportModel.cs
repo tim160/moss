@@ -2715,6 +2715,17 @@ namespace EC.Models
             return $"{days_left}" + (days_left == 1 ? " day left" : " days left");
           }
         }
+        public string GetAgentName()
+        {
+            if(this._report.agent_id!=null && this._report.agent_id > 0)
+            {
+                return db.user.Find(this._report.agent_id).first_nm;
+            } else
+            {
+                return "";
+            }
+            
+        }
     }
 
 }

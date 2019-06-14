@@ -69,6 +69,19 @@
                         <p>@Model.CountryString()</p>
                     </div><!-- /.reportContentBlock__textColRight -->
                 </div><!-- /.reportContentBlock__textCols -->
+
+                @if(Model._report.agent_id.HasValue) {
+                <div class="reportContentBlock__textCols clearfix">
+                    <div class="reportContentBlock__textColFirst">
+                        Filed by Call Center Agent:
+                    </div><!-- /.reportContentBlock__textColFirst -->
+                    <div class="reportContentBlock__textColRight">
+                        <p>@Model.GetAgentName()</p>
+                    </div><!-- /.reportContentBlock__textColRight -->
+                </div><!-- /.reportContentBlock__textCols -->
+                }
+
+
                 <div class="reportContentBlock__textCols clearfix">
                     <div class="reportContentBlock__textColFirst">
                         Confidentiality level
@@ -85,9 +98,9 @@
                     </div><!-- /.reportContentBlock__textColFirst -->
                     <div class="reportContentBlock__textColRight">
                         <p>
-                            @Model._reporter_user.first_nm 
+                            @Model._reporter_user.first_nm
                             @Model._reporter_user.last_nm
-                            @{ 
+                            @{
                                 var l = new List<string>();
                                 if (!String.IsNullOrEmpty(Model._reporter_user.first_nm) || String.IsNullOrEmpty(Model._reporter_user.last_nm))
                                 {
