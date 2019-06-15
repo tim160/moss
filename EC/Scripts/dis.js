@@ -1848,6 +1848,7 @@
                 slotDuration: '01:00:00',
                 axisFormat: 'hh:mm a',
                 selectable: true,
+                selectOverlap: true,
                 select: function (start, end) {
                     var dt = new Date();
                     var d3 = moment(dt).add(3, 'days').utc().startOf('day');
@@ -1865,7 +1866,24 @@
                         TrainerService.addEvent({ DateFrom: start, DateTo: end }, function (data) {
                             $scope.refresh();
                             if (!data.Result) {
-                                alert(data.Message);
+                                if (confirm(data.Message)) {
+                                    if (data.booked_session != '') {
+                                        TrainerService.deleteCompanyTime({ Hour: data.booked_session.Hour }, function (data) {
+                                            if (data.Result) {
+                                                //$scope.refresh();
+                                                TrainerService.addEvent({ DateFrom: start, DateTo: end }, function (data) {
+                                                    if (!data.Result) {
+                                                        alert(data.Message);
+                                                    }
+                                                    $scope.refresh();
+                                                });
+                                            } else {
+                                                alert(data.Message);
+                                            }
+                                        });
+                                    }
+
+                                }
                             }
                         });
                     }

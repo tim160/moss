@@ -141,6 +141,7 @@ namespace EC.Controllers.API
                     Result = false,
                     Code = 3,
                     Message = $"You’ve already selected a timeslot. Do you want to proceed with changing the time or date?",
+                    booked_session = DB.TrainerTimes.Where(t => t.CompanyId == user.company_id & t.Hour > DateTime.Now).FirstOrDefault()
                 };                
             }
 
