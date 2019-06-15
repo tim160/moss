@@ -1827,6 +1827,7 @@
 
         $scope.uiConfig = {
             calendar: {
+                //eventColor: '#ffff00',
                 header: {
                     left: 'month,agendaWeek,agendaDay',
                     center: 'title',
@@ -1840,8 +1841,8 @@
                         timeFormat: 'H:mm' //this will return 23:00 time format
                     }
                 },
-                minTime: '06:00:00',
-                maxTime: '18:00:00',
+                minTime: '07:00:00',
+                maxTime: '19:00:00',
                 slotDuration: '01:00:00',
                 axisFormat: 'hh:mm a',
                 selectable: true,
