@@ -147,12 +147,12 @@
             </div><!-- /.task-headerRow__rightBlock -->
         </div><!-- /.headerRow -->
         <div class="task-titleRow shadowLight">
-            <div class="col-1">
+            <div class="col-1" style="display: none">
                 <div class="task-titleRow__text task-titleRow__textName">
                 </div><!-- /.task-titleRow__text -->
             </div><!-- /.col-6 -->
             <div class="col-5">
-                <div class="task-titleRow__text task-titleRow__textName">
+                <div class="task-titleRow__text task-titleRow__textName" style="padding-left:0px">
                     Task name
                 </div><!-- /.task-titleRow__text -->
             </div><!-- /.col-6 -->
@@ -184,12 +184,13 @@
                     var _assignee_photo = glb.Photo_Path_String(_assignee.photo_path, 1, 5);
                     <li class="taskList__li" data-userid="@_assignee.id" data-status="@task.TaskStatus" data-state="@circle">
                         <a href="@Url.Action("Task", "NewCase", new { id = task.TaskID })" class="taskList__a taskNameCol__taskProgress-on">
-                            <span class="col-1">
                                 @if (task.file)
                                 {
+                                <span class="col-1">
                                     <img src="~/Content/Icons/fileCases.png" />
+                                </span>
+                                    
                                 }
-                            </span>
                             <span class="col-5">
                                 <span class="taskNameCol">
                                     <span class="taskNameCol__Title">@task._task.title</span>

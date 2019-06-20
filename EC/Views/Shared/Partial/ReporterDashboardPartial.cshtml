@@ -188,6 +188,18 @@
                                     <td class="positionTitleReport">@LocalizationGetter.GetString("IncidentDateUp"):</td>
                                     <td class="positionReportText reportTextBlack">@m_DateTimeHelper.ConvertDateToLongMonthString(rm._report.incident_dt)</td>
                                 </tr>
+                                @if (rm._report.agent_id.HasValue)
+                                {
+                                    <tr>
+                                        <td class="positionTitleReport">
+                                            Filed by Call Center Agent:
+                                        </td>
+                                        <td class="positionReportText reportTextBlack">
+                                            @rm.GetAgentName()
+                                        </td>
+                                    </tr>
+                                }
+
                                 <tr>
                                     <td class="positionTitleReport">@LocalizationGetter.GetString("isOngoing"):</td>
                                     <td class="positionReportText reportTextBlack">@rm.IsOngoing()</td>

@@ -142,7 +142,7 @@ namespace EC.Controllers.API
                     Code = 3,
                     Message = $"You’ve already selected a timeslot. Do you want to proceed with changing the time or date?",
                     booked_session = DB.TrainerTimes.Where(t => t.CompanyId == user.company_id & t.Hour > DateTime.Now).FirstOrDefault()
-                };                
+                };
             }
 
             //if (DB.TrainerTimes.Count(x => x.CompanyId == user.company_id && x.Hour >= DateTime.Now) > 0)
@@ -153,14 +153,14 @@ namespace EC.Controllers.API
                     Result = false,
                     Code = 2,
                     Message = $"You cannot book training as you have it already booked",
-                };                
+                };
             }
 
             model.DateFrom = new DateTime(model.DateFrom.Year, model.DateFrom.Month, model.DateFrom.Day, model.DateFrom.Hour, 0, 0);
             var exists = DB.TrainerTimes.Where(x => x.Hour == model.DateFrom && x.Hour > now).ToList();
             if (exists.Count(x => x.CompanyId == null) == 0)
             {
-                return new 
+                return new
                 {
                     Result = false,
                     Code = 1,
@@ -174,31 +174,59 @@ namespace EC.Controllers.API
 
             EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
             EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.RequestUri.AbsoluteUri.ToLower());
-            eb.CalendarEvent(true, true, Request.RequestUri.AbsoluteUri.ToLower(), item.Hour.ToString("yyyy-MM-dd HH:mm:ss"));
-            string body = eb.Body;
+            //eb.CalendarEvent(true, true, Request.RequestUri.AbsoluteUri.ToLower(), item.Hour.ToString("yyyy-MM-dd HH:mm:ss"));
+            //string body = eb.Body;
             var mediator = DB.user.FirstOrDefault(x => x.company_id == item.CompanyId && x.role_id == ECLevelConstants.level_administrator);
+            var trainerTimeDate = item.Hour.Date.ToShortDateString();
+            var trainerTimeHours = item.Hour.TimeOfDay.ToString();
+
+
+
             GlobalFunctions glb = new GlobalFunctions();
 
             if (mediator != null)
             {
+                eb.ConfirmationTimeslot((body) =>
+                {
+                    body = body.Replace("[orderNumber]", "ORDERNUMBER");
+                    body = body.Replace("[sessionDate]", trainerTimeDate);
+                    body = body.Replace("[sessionTime]", trainerTimeHours);
+                    body = body.Replace("[First Name]", mediator.first_nm);
+                    body = body.Replace("[Last Name]", mediator.last_nm);
+                    body = body.Replace("[Contact]", "CONTACT");
+                    return body;
+                });
                 //em.Send("alexandr@ase.com.ua", "New book training added", body, "", true);
                 //em.Send(mediator.email, "New book training added", body, "", true);
-                glb.SaveEmailBeforeSend(user.id, mediator.id, mediator.company_id, mediator.email, System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", "New book training added", body, false, 61);
+                glb.SaveEmailBeforeSend(user.id, mediator.id, mediator.company_id, mediator.email, System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", "New book training added", eb.Body, false, 61);
 
-          }
+            }
 
-            eb.CalendarEvent(false, true, Request.RequestUri.AbsoluteUri.ToLower(), item.Hour.ToString("yyyy-MM-dd HH:mm:ss"));
-            body = eb.Body;
+            //eb.CalendarEvent(false, true, Request.RequestUri.AbsoluteUri.ToLower(), item.Hour.ToString("yyyy-MM-dd HH:mm:ss"));
+            //body = eb.Body;
             var trainer = DB.user.FirstOrDefault(x => x.id == item.CreatedByUserId);
+
+
+
             if (trainer != null)
             {
+                eb.ConfirmationTimeslot((body) =>
+                {
+                    body = body.Replace("[orderNumber]", "ORDERNUMBER");
+                    body = body.Replace("[sessionDate]", trainerTimeDate);
+                    body = body.Replace("[sessionTime]", trainerTimeHours);
+                    body = body.Replace("[First Name]", trainer.first_nm);
+                    body = body.Replace("[Last Name]", trainer.last_nm);
+                    body = body.Replace("[Contact]", "CONTACT");
+                    return body;
+                });
                 //em.Send("alexandr@ase.com.ua", "New book training added", body, "", true);
-               // em.Send(trainer.email, "New book training added", body, "", true);
-                glb.SaveEmailBeforeSend(user.id, trainer.id, trainer.company_id, trainer.email, System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", "New book training added", body, false, 61);
+                // em.Send(trainer.email, "New book training added", body, "", true);
+                glb.SaveEmailBeforeSend(user.id, trainer.id, trainer.company_id, trainer.email, System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", "New book training added", eb.Body, false, 61);
 
-      }
+            }
 
-      return new
+            return new
             {
                 Result = true,
             };
