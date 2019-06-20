@@ -11,7 +11,8 @@ namespace EC.COM.Data
         public DbSet<CompanyInvitationModel> CompanyInvitations { get; set; }
         public DbSet<VarInfoModel> VarInfoes { get; set; }
         public virtual DbSet<company> company { get; set; }
-
+        public DbSet<email> emails { get; set; }
+        public DbSet<user> users { get; set; }
         public DBContext(): base("ECEntities")
         {
 
@@ -30,6 +31,10 @@ namespace EC.COM.Data
             modelBuilder.Entity<company>()
                 .Property(e => e.next_payment_amount)
                 .HasPrecision(19, 4);
+            modelBuilder.Entity<email>()
+                .ToTable("email");
+            modelBuilder.Entity<user>()
+                .ToTable("user");
             base.OnModelCreating(modelBuilder);
         }
     }

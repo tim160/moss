@@ -8,15 +8,18 @@ using System.Web;
 using System.Web.Mvc;
 using EC.COM.Models;
 using log4net;
+using EC.Constants;
 
 namespace EC.COM.Controllers
 {
      
      public class BookController : Controller
      {
-
+        public GlobalFunctions glb = new GlobalFunctions();
+        private bool is_cc = false;
         public ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         //     public ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         // GET: Book
         public ActionResult Index(string id = "", string quickView = "")
         {
@@ -385,7 +388,7 @@ namespace EC.COM.Controllers
         [HttpGet]
         public ActionResult Onboarding(Guid guid)
         {
-            using (var db = new DBContext())
+                using (var db = new DBContext())
             {
                 var company = db.company.Where(m => m.guid == guid).FirstOrDefault();
                 if (company == null)
@@ -437,9 +440,12 @@ namespace EC.COM.Controllers
               company.onboard_sessions_expiry_dt = DateTime.Today.AddYears(1);
               db.SaveChanges();
             }
-      
- 
-      return Redirect("https://report.employeeconfidential.com/trainer/calendar/");
+            #region Purchase Confirmation email
+
+            glb.BookingECOnboardingSessionNotifications(company, 1, form.Amount, form.SessionNumber, is_cc, this.Request);
+            #endregion
+
+            return Redirect("https://report.employeeconfidential.com/trainer/calendar/");
   
         }
     }
