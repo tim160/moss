@@ -187,11 +187,14 @@
     <Compile Include="Data\company.cs" />
     <Compile Include="Data\CompanyInvitationModel.cs" />
     <Compile Include="Data\DBContext.cs" />
+    <Compile Include="Data\email.cs" />
+    <Compile Include="Data\user.cs" />
     <Compile Include="Data\VarInfoModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CalculateModel.cs" />
+    <Compile Include="Models\GlobalFunctions.cs" />
     <Compile Include="Models\OnboardingPaymentForm.cs" />
     <Compile Include="Models\OnboardingForm.cs" />
     <Compile Include="Models\OrderViewModel.cs" />
@@ -201,8 +204,11 @@
     <Content Include="Content\css\all.css" />
     <Content Include="Content\css\all.min.css" />
     <Content Include="Content\css\fontello.css" />
+    <Content Include="Content\emails\BookingECOnboardingSessionNotifications.html" />
     <Content Include="Content\emails\EC.COM.VAR.html" />
     <Content Include="Content\emails\OrderConfirmation_Email.html" />
+    <Content Include="Content\emails\ReminderTrainingTimeslotBooked.html" />
+    <Content Include="Content\emails\TrainingTimeslotBooked.html" />
     <Content Include="Content\fonts\fontello\fontello.svg" />
     <Content Include="Content\fonts\Lato2OFLWeb\LatoLatin\latolatin.html" />
     <Content Include="Content\fonts\Lato2OFLWeb\LatoLatin\latolatinfonts.css" />
@@ -414,6 +420,8 @@
     <Content Include="html\reset.css" />
     <Content Include="Libs\angular-animate\angular-animate.js" />
     <Content Include="Libs\angular-animate\angular-animate.min.js" />
+    <Content Include="Libs\angular-daterangepicker\angular-daterangepicker.js" />
+    <Content Include="Libs\angular-daterangepicker\angular-daterangepicker.min.js" />
     <Content Include="Libs\angular-http\angular-http.js" />
     <Content Include="Libs\angular-messages\angular-messages.js" />
     <Content Include="Libs\angular-messages\angular-messages.min.js" />
@@ -430,6 +438,25 @@
     <Content Include="Libs\angular-ui-calendar\src\calendar.js" />
     <Content Include="Libs\angular\angular.js" />
     <Content Include="Libs\angular\angular.min.js" />
+    <Content Include="Libs\bootstrap-daterangepicker\daterangepicker.css" />
+    <Content Include="Libs\bootstrap-daterangepicker\daterangepicker.js" />
+    <Content Include="Libs\bootstrap-daterangepicker\demo.html" />
+    <Content Include="Libs\bootstrap-daterangepicker\drp.png" />
+    <Content Include="Libs\bootstrap-daterangepicker\example\amd\index.html" />
+    <Content Include="Libs\bootstrap-daterangepicker\example\amd\main.js" />
+    <Content Include="Libs\bootstrap-daterangepicker\example\amd\require.js" />
+    <Content Include="Libs\bootstrap-daterangepicker\example\browserify\bundle.js" />
+    <Content Include="Libs\bootstrap-daterangepicker\example\browserify\index.html" />
+    <Content Include="Libs\bootstrap-daterangepicker\example\browserify\main.js" />
+    <Content Include="Libs\bootstrap-daterangepicker\index.html" />
+    <Content Include="Libs\bootstrap-daterangepicker\moment.min.js" />
+    <Content Include="Libs\bootstrap-daterangepicker\package.js" />
+    <Content Include="Libs\bootstrap-daterangepicker\test.html" />
+    <Content Include="Libs\bootstrap-daterangepicker\website.css" />
+    <Content Include="Libs\bootstrap-daterangepicker\website.js" />
+    <Content Include="Libs\bootstrap-daterangepicker\website\index.html" />
+    <Content Include="Libs\bootstrap-daterangepicker\website\website.css" />
+    <Content Include="Libs\bootstrap-daterangepicker\website\website.js" />
     <Content Include="Libs\d3\d3.js" />
     <Content Include="Libs\d3\d3.min.js" />
     <Content Include="Libs\fullcalendar\dist\fullcalendar.css" />
@@ -827,6 +854,10 @@
     <Content Include="Libs\nvd3\build\nv.d3.js.map" />
     <Content Include="Libs\nvd3\build\nv.d3.min.css.map" />
     <Content Include="Libs\nvd3\build\nv.d3.min.js.map" />
+    <Content Include="Libs\bootstrap-daterangepicker\bower.json" />
+    <Content Include="Libs\bootstrap-daterangepicker\example\browserify\README.md" />
+    <Content Include="Libs\bootstrap-daterangepicker\package.json" />
+    <Content Include="Libs\bootstrap-daterangepicker\README.md" />
     <None Include="Properties\PublishProfiles\EC.COM.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\emailvalidation.js" />
@@ -874,6 +905,14 @@
     <ProjectReference Include="..\EC.Common.Util\EC.Common.Util.csproj">
       <Project>{60f0f82e-fa76-4279-b980-21614256dafb}</Project>
       <Name>EC.Common.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EC.Constants\EC.Constants.csproj">
+      <Project>{f9bd7e38-db60-47dd-a9f3-1bf488708a06}</Project>
+      <Name>EC.Constants</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Localization\EC.Localization.csproj">
+      <Project>{2403521e-4e55-43c3-a91c-2d4454488003}</Project>
+      <Name>EC.Localization</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -2705,4 +2705,7 @@
   <data name="SHPrevention" xml:space="preserve">
     <value>Sexual Harassment Prevention</value>
   </data>
+  <data name="BookingECOnboardingSessionNotifications" xml:space="preserve">
+    <value>Order Confirmation from Employee Confidential</value>
+  </data>
 </root>

@@ -181,7 +181,7 @@
                     string circle = "blueCircle";
                     circle = task.IsCompleted() ? "greyBorder" : circle;
                     circle = (task.IsRead() && (!task.HasNewActivity())) ? "blueBorder" : circle;
-                    var _assignee_photo = glb.Photo_Path_String(_assignee.photo_path, 1, 5);
+                    var _assignee_photo = _assignee.photo_path;
                     <li class="taskList__li" data-userid="@_assignee.id" data-status="@task.TaskStatus" data-state="@circle">
                         <a href="@Url.Action("Task", "NewCase", new { id = task.TaskID })" class="taskList__a taskNameCol__taskProgress-on">
                                 @if (task.file)

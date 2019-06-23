@@ -925,6 +925,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Order Confirmation from Employee Confidential.
+        /// </summary>
+        internal static string BookingECOnboardingSessionNotifications {
+            get {
+                return ResourceManager.GetString("BookingECOnboardingSessionNotifications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Breach of legal obligation.
         /// </summary>
         internal static string BreachofLegalObligations {
