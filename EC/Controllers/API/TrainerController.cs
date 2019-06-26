@@ -146,7 +146,7 @@ namespace EC.Controllers.API
             }
 
             //if (DB.TrainerTimes.Count(x => x.CompanyId == user.company_id && x.Hour >= DateTime.Now) > 0)
-            if (company._company.onboard_sessions_paid - booked_sessions < 1)
+      /*      if (company._company.onboard_sessions_paid - booked_sessions < 1)
             {
                 return new
                 {
@@ -154,7 +154,7 @@ namespace EC.Controllers.API
                     Code = 2,
                     Message = $"You cannot book training as you have it already booked",
                 };
-            }
+            }*/
 
             model.DateFrom = new DateTime(model.DateFrom.Year, model.DateFrom.Month, model.DateFrom.Day, model.DateFrom.Hour, 0, 0);
             var exists = DB.TrainerTimes.Where(x => x.Hour == model.DateFrom && x.Hour > now).ToList();
@@ -174,11 +174,11 @@ namespace EC.Controllers.API
 
             EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
             EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.RequestUri.AbsoluteUri.ToLower());
-            //eb.CalendarEvent(true, true, Request.RequestUri.AbsoluteUri.ToLower(), item.Hour.ToString("yyyy-MM-dd HH:mm:ss"));
-            //string body = eb.Body;
-            var mediator = DB.user.FirstOrDefault(x => x.company_id == item.CompanyId && x.role_id == ECLevelConstants.level_administrator);
+      //eb.CalendarEvent(true, true, Request.RequestUri.AbsoluteUri.ToLower(), item.Hour.ToString("yyyy-MM-dd HH:mm:ss"));
+      //string body = eb.Body;
+      var mediator = DB.user.FirstOrDefault(x => x.company_id == item.CompanyId && x.role_id == ECLevelConstants.level_supervising_mediator);
             var trainerTimeDate = item.Hour.Date.ToShortDateString();
-            var trainerTimeHours = item.Hour.TimeOfDay.ToString() + " EST";
+            var trainerTimeHours = string.Format("{0:hh:mm tt}", item.Hour.TimeOfDay) + " EST";
 
 
 
@@ -202,7 +202,7 @@ namespace EC.Controllers.API
                 //em.Send("alexandr@ase.com.ua", "New book training added", body, "", true);
                 //em.Send(mediator.email, "New book training added", body, "", true);
                 glb.SaveEmailBeforeSend(user.id, mediator.id, mediator.company_id, mediator.email, System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", "Training/onboarding timeslot has been booked.", eb.Body, false, 75);
-                glb.SaveEmailBeforeSend(user.id, trainer.id, trainer.company_id, trainer.email, System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", "Training/onboarding timeslot has been booked.", eb.Body, false, 75);
+                glb.SaveEmailBeforeSend(user.id, trainer.id, 2, trainer.email, System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", "Training/onboarding timeslot has been booked.", eb.Body, false, 75);
 
             }
 
@@ -361,7 +361,7 @@ namespace EC.Controllers.API
             EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.RequestUri.AbsoluteUri.ToLower());
             eb.CalendarEvent(true, true, Request.RequestUri.AbsoluteUri.ToLower(), item.Hour.ToString("yyyy-MM-dd HH:mm:ss"));
             string body = eb.Body;
-            var mediator = DB.user.FirstOrDefault(x => x.company_id == companyId && x.role_id == ECLevelConstants.level_administrator);
+            var mediator = DB.user.FirstOrDefault(x => x.company_id == companyId && x.role_id == ECLevelConstants.level_supervising_mediator);
             if (mediator != null)
             {
         ////               em.Send(mediator.email, "The training session have been removed", body, "", true);

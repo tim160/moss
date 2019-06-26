@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using EC.COM.Models;
+using System.Configuration;
 using log4net;
 
 
@@ -252,7 +253,7 @@ namespace EC.COM.Controllers
 
       int t =Convert.ToInt32(mFraction * 100);
       if(t == 0)
-        return value.ToString("N", nfi);
+        return value.ToString("N0", nfi);
       return value.ToString("N2", nfi);
     }
         public ActionResult Order(int id, string email, string company, string quickView)
@@ -350,7 +351,7 @@ namespace EC.COM.Controllers
             string quickView = "";
             if (!string.IsNullOrWhiteSpace(QuickView) && QuickView =="1")
               quickView = "1";
-            StripeConfiguration.SetApiKey("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
+            StripeConfiguration.SetApiKey(ConfigurationManager.AppSettings["ApiPayKey"]);
 
             // Token is created using Checkout or Elements!
             // Get the payment token submitted by the form:
@@ -429,7 +430,7 @@ namespace EC.COM.Controllers
         public ActionResult OnboardingPayment(OnboardingPaymentForm form, string stripeToken)
         {
 
-            StripeConfiguration.SetApiKey("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
+            StripeConfiguration.SetApiKey(ConfigurationManager.AppSettings["ApiPayKey"]);
 
             // Token is created using Checkout or Elements!
             // Get the payment token submitted by the form:
