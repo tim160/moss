@@ -184,6 +184,7 @@
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\VARController.cs" />
     <Compile Include="Controllers\VideoController.cs" />
+    <Compile Include="Data\partner.cs" />
     <Compile Include="Data\company.cs" />
     <Compile Include="Data\CompanyInvitationModel.cs" />
     <Compile Include="Data\DBContext.cs" />

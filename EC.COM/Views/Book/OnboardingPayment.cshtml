@@ -126,10 +126,10 @@
 <main class="main" style="padding-bottom: 165px;" ng-controller="onboardingPayment">
     <section class="pricingTitleSection">
         <div class="pricingTitleSection__title">
-          Onboarding & Training Checkout
+          Checkout
         </div>
         <div class="pricingTitleSection__subTitle">
-          Book a screen-sharing training sessions for you and your team 
+          Onboarding & Training
         </div>
     </section>
     <section class="pricingMainSection">
@@ -209,28 +209,37 @@
                             <div class="pricingBill-line pricingBill-lineSmall clearfix">
                                 <div class="pricingBill-line__text">
                                     Required
-                                    onboarding & training.
+                                    onboarding & training
                                 </div>
                                 <div class="pricingBill-line__tax" id="priceR">
                                     $@Model.priceT
                                 </div>
-                            </div>
-                            <div class="pricingBill-line pricingBill-lineSmall clearfix">
-                                <div class="pricingBill-line__text">
-                                    &nbsp;
-                                </div>
-                                <div class="pricingBill-line__tax" style="font-size:14px;" id="sessionN">
-                                </div>
-                            </div>
+ 
                         </div>
                         <div class="pricingBill-line pricingBill-lineSmall clearfix">
                             <div class="pricingBill-line__text">
                               Number of sessions
                             </div>
                             <input type="hidden" id="priceT" value="@Model.priceT" />
-                            <div class="pricingBill-line__tax" style="font-size:14px;" id="sessionN">
+                            <div class="pricingBill-line__tax" style="font-size:24px;" id="sessionN">
                                 @Model.NumberSessions
                             </div>
+
+                          <div class="pricingBill-line pricingBill-lineSmall clearfix">
+                            <div class="pricingBill-line__text">
+                              &nbsp;
+                            </div>
+                            <div class="pricingBill-line__tax" style="font-size:14px;" id="sessionN">
+                            </div>
+                          </div>
+
+                          <div class="pricingBill-line pricingBill-lineSmall clearfix">
+                            <div class="pricingBill-line__text">
+                              &nbsp;
+                            </div>
+                            <div class="pricingBill-line__tax" style="font-size:14px;" id="sessionN">
+                            </div>
+                          </div>
                         </div>
                         <div class="pricingBill-main price-section" style="padding-bottom: 0px">
                             <div class="pricingBill-line pricingBill-lineTotal clearfix" style="padding-top: 0px;padding-bottom: 0px">

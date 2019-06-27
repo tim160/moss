@@ -59,6 +59,18 @@
                         <p>@Model.CountryString()</p>
                     </div><!-- /.reportContentBlock__textColRight -->
                 </div><!-- /.reportContentBlock__textCols -->
+@if (Model._report.agent_id.HasValue)
+{
+  <div class="reportContentBlock__textCols clearfix">
+    <div class="reportContentBlock__textColFirst">
+      Filed by Call Center Agent
+    </div><!-- /.reportContentBlock__textColFirst -->
+    <div class="reportContentBlock__textColRight">
+      <p>@Model.GetAgentName()</p>
+    </div><!-- /.reportContentBlock__textColRight -->
+  </div><!-- /.reportContentBlock__textCols -->
+
+}
                 <div class="reportContentBlock__textCols clearfix">
                     <div class="reportContentBlock__textColFirst">
                         Confidentiality Level
