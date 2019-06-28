@@ -30,8 +30,12 @@ namespace EC.COM
                 url: "Book/Calculate",
                 defaults: new { controller = "Book", action = "Calculate" }
                 );
-
-            routes.MapRoute(
+      routes.MapRoute(
+                name: "DIRECTsale",
+                url: "DIRECTsale",
+                defaults: new { controller = "Var", action = "DirectSale" }
+                );
+      routes.MapRoute(
                 name: "BookBuy",
                 url: "Book/Buy",
                 defaults: new { controller = "Book", action = "Buy" }
