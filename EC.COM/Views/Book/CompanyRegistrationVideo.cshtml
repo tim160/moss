@@ -251,7 +251,7 @@
         </section>
         <section class="clientCheckList-step clientCheckList-step6">
             <div class="container">
-              @if (quickView == "0" && !preReg)
+              @if (!preReg)
               {
                 <div class="row clearfix">
                     <div class="col50l">
@@ -266,7 +266,7 @@
                     </div>
                 </div>
               }
-              @if (quickView == "1" || preReg)
+              @if (preReg)
               {
               <div class="row clearfix">
                 <div class="col50l">
