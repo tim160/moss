@@ -13,6 +13,11 @@ namespace EC.COM.Data
         public virtual DbSet<company> company { get; set; }
         public DbSet<email> emails { get; set; }
         public DbSet<user> users { get; set; }
+
+        public DbSet<partner> partners { get; set; }
+        public DbSet<company_payments> company_paymentss { get; set; }
+        public DbSet<company_payment_training> company_payment_trainings { get; set; }
+
         public DBContext(): base("ECEntities")
         {
 
@@ -35,13 +40,12 @@ namespace EC.COM.Data
                 .ToTable("email");
             modelBuilder.Entity<user>()
                 .ToTable("user");
-
-      modelBuilder.Entity<user>()
-        .ToTable("partner");
-      modelBuilder.Entity<user>()
-        .ToTable("company_payment_training");
-      modelBuilder.Entity<user>()
-        .ToTable("company_payments");
+            modelBuilder.Entity<partner>()
+              .ToTable("partner");
+            modelBuilder.Entity<company_payment_training>()
+              .ToTable("company_payment_training");
+            modelBuilder.Entity<company_payments>()
+              .ToTable("company_payments");
 
       base.OnModelCreating(modelBuilder);
         }

@@ -241,7 +241,7 @@ namespace EC.COM.Controllers
         }
 
 
-    string CutTheZeroos(decimal value)
+        string CutTheZeroos(decimal value)
     {
       NumberFormatInfo nfi = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
       nfi.NumberGroupSeparator = ",";
@@ -455,6 +455,24 @@ namespace EC.COM.Controllers
               int numberOfSessions = form.SessionNumber;
               company.onboard_sessions_paid = company.onboard_sessions_paid + numberOfSessions;
               company.onboard_sessions_expiry_dt = DateTime.Today.AddYears(1);
+
+
+
+        var training_payment = new company_payment_training
+        {
+          company_id = company.id,
+          payment_date = DateTime.Today,
+          onboard_sessions_expiry_dt = DateTime.Today.AddYears(1),
+          auth_code = token,
+          amount = form.Amount,
+          onboard_sessions_paid = form.SessionNumber,
+          user_id = 1,
+          payment_code = "ECT-" + company.id.ToString() + "-" + DateTime.Now.ToString("yyMMddHHmmss"),
+          training_code = "ECT-" + company.id.ToString() + "-" + DateTime.Now.ToString("yyMMddHHmmss"),
+          local_invoice_number = "ECT-" + company.id.ToString() + "-" + DateTime.Now.ToString("yyMMddHHmmss")
+        };
+        db.company_payment_trainings.Add(training_payment);
+
               db.SaveChanges();
             }
             #region Purchase Confirmation email
