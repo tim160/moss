@@ -35,7 +35,15 @@ namespace EC.COM.Data
                 .ToTable("email");
             modelBuilder.Entity<user>()
                 .ToTable("user");
-            base.OnModelCreating(modelBuilder);
+
+      modelBuilder.Entity<user>()
+        .ToTable("partner");
+      modelBuilder.Entity<user>()
+        .ToTable("company_payment_training");
+      modelBuilder.Entity<user>()
+        .ToTable("company_payments");
+
+      base.OnModelCreating(modelBuilder);
         }
     }
 }
