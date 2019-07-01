@@ -910,11 +910,11 @@
       <Name>EC.Common.Util</Name>
     </ProjectReference>
     <ProjectReference Include="..\EC.Constants\EC.Constants.csproj">
-      <Project>{f9bd7e38-db60-47dd-a9f3-1bf488708a06}</Project>
+      <Project>{F9BD7E38-DB60-47DD-A9F3-1BF488708A06}</Project>
       <Name>EC.Constants</Name>
     </ProjectReference>
     <ProjectReference Include="..\Localization\EC.Localization.csproj">
-      <Project>{2403521e-4e55-43c3-a91c-2d4454488003}</Project>
+      <Project>{2403521E-4E55-43C3-A91C-2D4454488003}</Project>
       <Name>EC.Localization</Name>
     </ProjectReference>
   </ItemGroup>
