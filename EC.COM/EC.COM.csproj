@@ -187,11 +187,14 @@
     <Compile Include="Data\company.cs" />
     <Compile Include="Data\CompanyInvitationModel.cs" />
     <Compile Include="Data\DBContext.cs" />
+    <Compile Include="Data\email.cs" />
+    <Compile Include="Data\user.cs" />
     <Compile Include="Data\VarInfoModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CalculateModel.cs" />
+    <Compile Include="Models\GlobalFunctions.cs" />
     <Compile Include="Models\OnboardingPaymentForm.cs" />
     <Compile Include="Models\OnboardingForm.cs" />
     <Compile Include="Models\OrderViewModel.cs" />
@@ -874,6 +877,14 @@
     <ProjectReference Include="..\EC.Common.Util\EC.Common.Util.csproj">
       <Project>{60f0f82e-fa76-4279-b980-21614256dafb}</Project>
       <Name>EC.Common.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EC.Constants\EC.Constants.csproj">
+      <Project>{F9BD7E38-DB60-47DD-A9F3-1BF488708A06}</Project>
+      <Name>EC.Constants</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Localization\EC.Localization.csproj">
+      <Project>{2403521E-4E55-43C3-A91C-2D4454488003}</Project>
+      <Name>EC.Localization</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
