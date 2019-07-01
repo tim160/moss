@@ -385,6 +385,13 @@
                             <td>Reporting from:</td>
                             <td>@rm.CountryString()</td>
                         </tr>
+                      @if (rm._report.agent_id.HasValue)
+                      {
+                      <tr>
+                        <td>Filed by Call Center Agent:</td>
+                        <td>@rm.GetAgentName()</td>
+                      </tr>
+                      }
                         <tr>
                             <td>@GlobalRes.Reporterwouldliketostay:</td>
                             <td>@rm._anonymousLevel_mediatorVersionByCaller(user_id)</td>

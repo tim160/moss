@@ -36,7 +36,7 @@ namespace EC.COM.Models
             return true;
         }
 
-        public string BookingECOnboardingSessionNotifications(company company, int orderNumber, long price, int sessionNumber, bool is_cc, HttpRequestBase requestBase)
+        public string BookingECOnboardingSessionNotifications(company company, string orderNumber, long price, int sessionNumber, bool is_cc, HttpRequestBase requestBase)
         {
             Business.Actions.Email.EmailManagement em = new Business.Actions.Email.EmailManagement(false);
             Business.Actions.Email.EmailBody eb = new Business.Actions.Email.EmailBody(1, 1, requestBase.Url.AbsoluteUri.ToLower());
@@ -48,16 +48,29 @@ namespace EC.COM.Models
                     user = db.users.Where(us => us.company_id == company.id && us.role_id == 5).FirstOrDefault();
                 }
             }
+            string sessions = "";
+            switch (sessionNumber)
+            {
+              case 1:
+                sessions = "(one session)";
+                break;
+              case 2:
+                sessions = "(two sessions)";
+                break;
+              case 3:
+                sessions = "(three sessions)";
+                break;
+            }
 
             eb.BookingOnboardingSeparately((body) =>
             {
                 body = body.Replace("[First Name]", user.first_nm);
                 body = body.Replace("[Last Name]", user.last_nm);
 
-                body = body.Replace("[orderNumber]", orderNumber.ToString());
+                body = body.Replace("[orderNumber]", orderNumber);
 
                 body = body.Replace("[price]", price.ToString());
-                body = body.Replace("[sessionNumber]", sessionNumber.ToString());
+                body = body.Replace("[sessionNumber]", sessions);
 
                 body = body.Replace("[Company Name]", company.company_nm);
 

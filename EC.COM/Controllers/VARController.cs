@@ -133,5 +133,10 @@ namespace EC.COM.Controllers
             return RedirectToAction("Index", "Video", new { id = System.Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(data)) });
           }
         }
+
+        public ActionResult DirectSale()
+        {
+          return RedirectToAction("Index", "Var", new { quickview = "ec" });
+        }
     }
 }

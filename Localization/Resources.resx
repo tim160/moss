@@ -2705,4 +2705,7 @@
   <data name="SexualAbuse" xml:space="preserve">
     <value>Sexual Abuse</value>
   </data>
+  <data name="BookingECOnboardingSessionNotifications" xml:space="preserve">
+    <value>Order Confirmation from Employee Confidential</value>
+  </data>
 </root>
