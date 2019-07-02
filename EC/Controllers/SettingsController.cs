@@ -31,7 +31,10 @@ namespace EC.Controllers
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
-                return RedirectToAction("Login", "Service");
+            {
+                return RedirectToAction("Login", "Service", new { returnUrl = "/Settings/Index" });
+            }
+                
 
             int user_id = user.id;
 
