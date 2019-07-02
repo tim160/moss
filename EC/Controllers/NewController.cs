@@ -1120,6 +1120,10 @@ namespace EC.Controllers
                     {
                         _company.onboard_sessions_expiry_dt = DateTime.Today.AddYears(1);
                     }
+                    int next_payment_years = 1;
+                    if (varinfo.Year == 2)
+                      next_payment_years = 2;
+                    _company.next_payment_date = DateTime.Now.AddYears(next_payment_years);
 
                 }
                 else
@@ -1715,8 +1719,54 @@ namespace EC.Controllers
                                 varinfo.registered_company_nm = _company.company_nm;
                                 varinfo.registered_first_nm = first;
                                 varinfo.registered_last_nm = last;
-                                try
-                                {
+
+                #region add payment info
+                var company_payment = db.company_payments.Where(x => x.auth_code == emailed_code_to_customer).FirstOrDefault();
+                if (company_payment != null)
+                {
+                  company_payment.company_id = _company.id;
+                }
+                /*  var company_payment = new company_payments
+                  {
+                      company_id = _company.id,
+                      payment_date = DateTime.Today,
+
+                      auth_code = token,
+                      //     amount = varInfo.Annual_plan_price,
+                      // company_id = varInfo.Company_nm,
+
+                      amount = varInfo.Total_price,
+
+                      user_id = 1,
+                      local_invoice_number = "EC-" + varInfo.Id.ToString() + "-" + DateTime.Now.ToString("yyMMddHHmmss")
+                    };
+                    db.company_payments.Add(company_payment);
+                    */
+                if (varinfo.onboarding_session_numbers > 0)
+                {
+                  string time_now = DateTime.Now.ToString("yyMMddHHmmss");
+                  var company_payment_training = new company_payment_training
+                  {
+                    company_id = _company.id,
+                    payment_date = DateTime.Today,
+                    onboard_sessions_expiry_dt = DateTime.Today.AddYears(1),
+                    auth_code = varinfo.emailed_code_to_customer,
+                    amount = varinfo.onboarding_price,
+                    onboard_sessions_paid = varinfo.onboarding_session_numbers,
+                    user_id = 1,
+                    payment_code = "ECT-" + _company.id.ToString() + "-" + time_now,
+                    training_code = "ECT-" + _company.id.ToString() + "-" + time_now,
+                    local_invoice_number = "ECT-" + _company.id.ToString() + "-" + time_now
+                  };
+                  db.company_payment_training.Add(company_payment_training);
+                }
+                #endregion
+
+
+
+
+                try
+                {
                                     db.SaveChanges();
                                 }
                                 catch (Exception ex)
