@@ -373,7 +373,41 @@ namespace EC.COM.Controllers
 
             varinfo.Emailed_code_to_customer = charge.Id;
             varinfo.Registered_dt = varinfo.Registered_dt ?? DateTime.Now;
-            db.SaveChanges();
+
+      var company_payment = new company_payments
+      {
+        company_id = 1,
+        payment_date = DateTime.Today,
+
+        auth_code = token,     /// Emailed_code_to_customer
+        amount = varInfo.Total_price,
+        local_invoice_number = "EC-" +  DateTime.Now.ToString("yyMMddHHmmssfff"),
+
+        cc_name = "",
+        cc_number = "",
+        cc_month = 1,
+        cc_year = 1,
+        cc_csv = 1,
+        user_id = 1
+        };
+            db.company_paymentss.Add(company_payment);
+
+   /*   if (varinfo.Onboarding_session_numbers > 0)
+      {
+         company_id = company.id,
+          payment_date = DateTime.Today,
+          onboard_sessions_expiry_dt = DateTime.Today.AddYears(1),
+          auth_code = token,
+          amount = form.Amount,
+          onboard_sessions_paid = form.SessionNumber,
+          user_id = 1,
+          payment_code = "ECT-" + company.id.ToString() + "-" + DateTime.Now.ToString("yyMMddHHmmss"),
+          training_code = "ECT-" + company.id.ToString() + "-" + DateTime.Now.ToString("yyMMddHHmmss"),
+          local_invoice_number = "ECT-" + company.id.ToString() + "-" + DateTime.Now.ToString("yyMMddHHmmss")
+      }*/
+
+
+      db.SaveChanges();
 
             EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(false);
             EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
