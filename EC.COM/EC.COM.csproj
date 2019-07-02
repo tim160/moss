@@ -899,6 +899,7 @@
     <Content Include="Views\Shared\footer.cshtml" />
     <Content Include="Views\Book\Onboarding.cshtml" />
     <Content Include="Views\Book\OnboardingPayment.cshtml" />
+    <Content Include="Views\Book\OnboardingPaymentReceipt.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EC.Business\EC.Business.csproj">

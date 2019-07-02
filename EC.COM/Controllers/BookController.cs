@@ -13,9 +13,9 @@ using log4net;
 
 namespace EC.COM.Controllers
 {
-     
-     public class BookController : Controller
-     {
+
+    public class BookController : Controller
+    {
         public GlobalFunctions glb = new GlobalFunctions();
         private bool is_cc = false;
         public ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -45,11 +45,11 @@ namespace EC.COM.Controllers
                 InvitationCode = data[6],
             };
 
-          bool QuickView = false;
-          if (!string.IsNullOrWhiteSpace(quickView))
-            QuickView = true;
-          ViewBag.quickView = QuickView;
-          return View(model);
+            bool QuickView = false;
+            if (!string.IsNullOrWhiteSpace(quickView))
+                QuickView = true;
+            ViewBag.quickView = QuickView;
+            return View(model);
         }
 
         public ActionResult Buy(CalculateModel model)
@@ -130,38 +130,38 @@ namespace EC.COM.Controllers
                 bool is_invitation_complete = true;
                 foreach (var check in invitation_code_checks)
                 {
-                  var is_inside = items.FirstOrDefault(x => check >= x.From_quantity && check <= x.To_quantity);
-                  if (is_inside == null)
-                  {
-                    is_invitation_complete = false;
-                  //  logger.Info("is_invitation_complete - false, quant - " + check.ToString());
-                  }
+                    var is_inside = items.FirstOrDefault(x => check >= x.From_quantity && check <= x.To_quantity);
+                    if (is_inside == null)
+                    {
+                        is_invitation_complete = false;
+                        //  logger.Info("is_invitation_complete - false, quant - " + check.ToString());
+                    }
                 }
-                if(!is_invitation_complete)
-                  items = db.CompanyInvitations.Where(x => x.Invitation_code.ToLower() == "ec").ToList();
+                if (!is_invitation_complete)
+                    items = db.CompanyInvitations.Where(x => x.Invitation_code.ToLower() == "ec").ToList();
                 var ne = items.FirstOrDefault(x => model.NumberOfEmployees >= x.From_quantity && model.NumberOfEmployees <= x.To_quantity);
                 //logger.Info("NE  " + ne.Id);
 
                 if (model.callCenter)
                 {
-                  var callCenterItem = db.CompanyInvitations.Where(x => x.Invitation_code.ToLower() == "empathia1" && model.NumberOfEmployees >= x.From_quantity && model.NumberOfEmployees <= x.To_quantity).FirstOrDefault();
-                  if (callCenterItem != null && callCenterItem.Employee_price.HasValue)
-                  {
-                    if (model.Year == 1)
+                    var callCenterItem = db.CompanyInvitations.Where(x => x.Invitation_code.ToLower() == "empathia1" && model.NumberOfEmployees >= x.From_quantity && model.NumberOfEmployees <= x.To_quantity).FirstOrDefault();
+                    if (callCenterItem != null && callCenterItem.Employee_price.HasValue)
                     {
-                      model.PriceCC = callCenterItem.Employee_price_type.Value == 1 ? callCenterItem.Employee_price.Value : callCenterItem.Employee_price.Value * model.NumberOfEmployees;
+                        if (model.Year == 1)
+                        {
+                            model.PriceCC = callCenterItem.Employee_price_type.Value == 1 ? callCenterItem.Employee_price.Value : callCenterItem.Employee_price.Value * model.NumberOfEmployees;
+                        }
+                        else
+                        {
+                            model.PriceCC = callCenterItem.Employee_price_type.Value == 1 ? callCenterItem.TwoYearPerYear_employee_price.Value : callCenterItem.TwoYearPerYear_employee_price.Value * model.NumberOfEmployees;
+                        }
                     }
-                    else
-                    {
-                      model.PriceCC = callCenterItem.Employee_price_type.Value == 1 ? callCenterItem.TwoYearPerYear_employee_price.Value : callCenterItem.TwoYearPerYear_employee_price.Value * model.NumberOfEmployees;
-                    }
-                  }
                 }
 
                 if ((ne != null) && (ne.Employee_price.HasValue) && (ne.Employee_price_type.HasValue))
                 {
-                 // logger.Info("NE  " + ne.Employee_price);
-                  model.PriceNE = ne.Employee_price_type.Value == 1 ? ne.Employee_price.Value : ne.Employee_price.Value * model.NumberOfEmployees;
+                    // logger.Info("NE  " + ne.Employee_price);
+                    model.PriceNE = ne.Employee_price_type.Value == 1 ? ne.Employee_price.Value : ne.Employee_price.Value * model.NumberOfEmployees;
                     if (model.Year == 2)
                     {
                         model.PriceNE = ne.Employee_price_type.Value == 1 ? ne.TwoYearPerYear_employee_price.Value : ne.TwoYearPerYear_employee_price.Value * model.NumberOfEmployees;
@@ -231,7 +231,7 @@ namespace EC.COM.Controllers
                 priceT = CutTheZeroos((model.PriceNE + model.PriceNNE + model.PriceC + model.PriceCC)),
                 priceR = CutTheZeroos(model.PriceR),
                 sessionN = model.sessionN,
-                
+
             };
 
             return new JsonResult
@@ -242,20 +242,20 @@ namespace EC.COM.Controllers
 
 
         string CutTheZeroos(decimal value)
-    {
-      NumberFormatInfo nfi = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
-      nfi.NumberGroupSeparator = ",";
+        {
+            NumberFormatInfo nfi = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
+            nfi.NumberGroupSeparator = ",";
 
-      decimal mWhole = Math.Truncate(value);
-      // get the fractional value
-      decimal mFraction = value - mWhole;
+            decimal mWhole = Math.Truncate(value);
+            // get the fractional value
+            decimal mFraction = value - mWhole;
 
 
-      int t =Convert.ToInt32(mFraction * 100);
-      if(t == 0)
-        return value.ToString("N0", nfi);
-      return value.ToString("N2", nfi);
-    }
+            int t = Convert.ToInt32(mFraction * 100);
+            if (t == 0)
+                return value.ToString("N0", nfi);
+            return value.ToString("N2", nfi);
+        }
         public ActionResult Order(int id, string email, string company, string quickView)
         {
             var db = new DBContext();
@@ -263,7 +263,7 @@ namespace EC.COM.Controllers
 
             bool QuickView = false;
             if (!string.IsNullOrWhiteSpace(quickView))
-              QuickView = true;
+                QuickView = true;
             ViewBag.quickView = QuickView;
 
             return View(new OrderViewModel
@@ -317,14 +317,14 @@ namespace EC.COM.Controllers
             return RedirectToAction("CompanyRegistrationVideo", "Book", new { emailedcode = varinfo.Emailed_code_to_customer, quickview = model.QuickView, invitationcode = "VAR" });
         }
 
-        public ActionResult CompanyRegistrationVideo(string emailedcode,string quickview, string invitationcode)
+        public ActionResult CompanyRegistrationVideo(string emailedcode, string quickview, string invitationcode)
         {
             ViewBag.EmailedCode = emailedcode;
 
             bool quickView = false;
-            if (!string.IsNullOrWhiteSpace(quickview) && (quickview =="1" || quickview == "true"))
+            if (!string.IsNullOrWhiteSpace(quickview) && (quickview == "1" || quickview == "true"))
             {
-              quickView = true;
+                quickView = true;
             }
             ViewBag.quickView = quickView;
 
@@ -332,25 +332,30 @@ namespace EC.COM.Controllers
             ViewBag.preReg = false;
             if (!string.IsNullOrWhiteSpace(invitationcode))
             {
-              using (var db = new DBContext())
-              {
-                var model = db.CompanyInvitations.FirstOrDefault(x => x.Invitation_code.ToLower().Trim() == invitationcode.ToLower().Trim());
-                if (model != null && model.Employee_price_type == 3)
+                using (var db = new DBContext())
                 {
-                  ViewBag.preReg = true;
+                    var model = db.CompanyInvitations.FirstOrDefault(x => x.Invitation_code.ToLower().Trim() == invitationcode.ToLower().Trim());
+                    if (model != null && model.Employee_price_type == 3)
+                    {
+                        ViewBag.preReg = true;
+                    }
                 }
-              }
             }
 
-          return View();
+            return View();
+        }
+        [HttpPost]
+        public ActionResult OnboardingPaymentReceipt(VarInfoModel varInfo, string stripeToken, string QuickView)
+        {
+            return View();
         }
 
         [HttpPost]
         public ActionResult Payment(VarInfoModel varInfo, string stripeToken, string QuickView)
         {
             string quickView = "";
-            if (!string.IsNullOrWhiteSpace(QuickView) && QuickView =="1")
-              quickView = "1";
+            if (!string.IsNullOrWhiteSpace(QuickView) && QuickView == "1")
+                quickView = "1";
             StripeConfiguration.SetApiKey(ConfigurationManager.AppSettings["ApiPayKey"]);
 
             // Token is created using Checkout or Elements!
@@ -374,40 +379,40 @@ namespace EC.COM.Controllers
             varinfo.Emailed_code_to_customer = charge.Id;
             varinfo.Registered_dt = varinfo.Registered_dt ?? DateTime.Now;
 
-      var company_payment = new company_payments
-      {
-        company_id = 1,
-        payment_date = DateTime.Today,
+            var company_payment = new company_payments
+            {
+                company_id = 1,
+                payment_date = DateTime.Today,
 
-        auth_code = token,     /// Emailed_code_to_customer
-        amount = varInfo.Total_price,
-        local_invoice_number = "EC-" +  DateTime.Now.ToString("yyMMddHHmmssfff"),
+                auth_code = token,     /// Emailed_code_to_customer
+                amount = varInfo.Total_price,
+                local_invoice_number = "EC-" + DateTime.Now.ToString("yyMMddHHmmssfff"),
 
-        cc_name = "",
-        cc_number = "",
-        cc_month = 1,
-        cc_year = 1,
-        cc_csv = 1,
-        user_id = 1
-        };
+                cc_name = "",
+                cc_number = "",
+                cc_month = 1,
+                cc_year = 1,
+                cc_csv = 1,
+                user_id = 1
+            };
             db.company_paymentss.Add(company_payment);
 
-   /*   if (varinfo.Onboarding_session_numbers > 0)
-      {
-         company_id = company.id,
-          payment_date = DateTime.Today,
-          onboard_sessions_expiry_dt = DateTime.Today.AddYears(1),
-          auth_code = token,
-          amount = form.Amount,
-          onboard_sessions_paid = form.SessionNumber,
-          user_id = 1,
-          payment_code = "ECT-" + company.id.ToString() + "-" + DateTime.Now.ToString("yyMMddHHmmss"),
-          training_code = "ECT-" + company.id.ToString() + "-" + DateTime.Now.ToString("yyMMddHHmmss"),
-          local_invoice_number = "ECT-" + company.id.ToString() + "-" + DateTime.Now.ToString("yyMMddHHmmss")
-      }*/
+            /*   if (varinfo.Onboarding_session_numbers > 0)
+               {
+                  company_id = company.id,
+                   payment_date = DateTime.Today,
+                   onboard_sessions_expiry_dt = DateTime.Today.AddYears(1),
+                   auth_code = token,
+                   amount = form.Amount,
+                   onboard_sessions_paid = form.SessionNumber,
+                   user_id = 1,
+                   payment_code = "ECT-" + company.id.ToString() + "-" + DateTime.Now.ToString("yyMMddHHmmss"),
+                   training_code = "ECT-" + company.id.ToString() + "-" + DateTime.Now.ToString("yyMMddHHmmss"),
+                   local_invoice_number = "ECT-" + company.id.ToString() + "-" + DateTime.Now.ToString("yyMMddHHmmss")
+               }*/
 
 
-      db.SaveChanges();
+            db.SaveChanges();
 
             EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(false);
             EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
@@ -439,13 +444,14 @@ namespace EC.COM.Controllers
         [HttpGet]
         public ActionResult Onboarding(Guid guid)
         {
-                using (var db = new DBContext())
+            using (var db = new DBContext())
             {
                 var company = db.company.Where(m => m.guid == guid).FirstOrDefault();
                 if (company == null)
                 {
                     return RedirectToAction("Index", "Home");
-                } else
+                }
+                else
                 {
                     ViewBag.companyId = company.id;
                     ViewBag.companyName = company.company_nm;
@@ -480,34 +486,34 @@ namespace EC.COM.Controllers
 
             var service = new ChargeService();
             Charge charge = service.Create(options);
- 
+
             var db = new DBContext();
             string id = charge.Id;
             var company = db.company.Where(t => t.guid == form.CompanyGuid).FirstOrDefault();
-            if(company != null)
+            if (company != null)
             {
-              int numberOfSessions = form.SessionNumber;
-              company.onboard_sessions_paid = company.onboard_sessions_paid + numberOfSessions;
-              company.onboard_sessions_expiry_dt = DateTime.Today.AddYears(1);
+                int numberOfSessions = form.SessionNumber;
+                company.onboard_sessions_paid = company.onboard_sessions_paid + numberOfSessions;
+                company.onboard_sessions_expiry_dt = DateTime.Today.AddYears(1);
 
 
 
-        var training_payment = new company_payment_training
-        {
-          company_id = company.id,
-          payment_date = DateTime.Today,
-          onboard_sessions_expiry_dt = DateTime.Today.AddYears(1),
-          auth_code = token,
-          amount = form.Amount,
-          onboard_sessions_paid = form.SessionNumber,
-          user_id = 1,
-          payment_code = "ECT-" + company.id.ToString() + "-" + DateTime.Now.ToString("yyMMddHHmmss"),
-          training_code = "ECT-" + company.id.ToString() + "-" + DateTime.Now.ToString("yyMMddHHmmss"),
-          local_invoice_number = "ECT-" + company.id.ToString() + "-" + DateTime.Now.ToString("yyMMddHHmmss")
-        };
-        db.company_payment_trainings.Add(training_payment);
+                var training_payment = new company_payment_training
+                {
+                    company_id = company.id,
+                    payment_date = DateTime.Today,
+                    onboard_sessions_expiry_dt = DateTime.Today.AddYears(1),
+                    auth_code = token,
+                    amount = form.Amount,
+                    onboard_sessions_paid = form.SessionNumber,
+                    user_id = 1,
+                    payment_code = "ECT-" + company.id.ToString() + "-" + DateTime.Now.ToString("yyMMddHHmmss"),
+                    training_code = "ECT-" + company.id.ToString() + "-" + DateTime.Now.ToString("yyMMddHHmmss"),
+                    local_invoice_number = "ECT-" + company.id.ToString() + "-" + DateTime.Now.ToString("yyMMddHHmmss")
+                };
+                db.company_payment_trainings.Add(training_payment);
 
-              db.SaveChanges();
+                db.SaveChanges();
             }
             #region Purchase Confirmation email
 
@@ -515,7 +521,7 @@ namespace EC.COM.Controllers
             #endregion
 
             return Redirect("https://report.employeeconfidential.com/trainer/calendar/");
-  
+
         }
     }
 }

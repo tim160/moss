@@ -46,7 +46,11 @@ namespace EC.COM
                 url: "Book/Payment",
                 defaults: new { controller = "Book", action = "Payment" }
                 );
-
+            routes.MapRoute(
+                name: "OnboardingPaymentReceipt",
+                url: "Book/OnboardingPaymentReceipt",
+                defaults: new { controller = "Book", action = "OnboardingPaymentReceipt" }
+                );
             routes.MapRoute(
                 name: "BookCompanyRegistrationVideo",
                 url: "Book/CompanyRegistrationVideo",
