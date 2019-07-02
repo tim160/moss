@@ -344,11 +344,7 @@ namespace EC.COM.Controllers
 
             return View();
         }
-        [HttpPost]
-        public ActionResult OnboardingPaymentReceipt(VarInfoModel varInfo, string stripeToken, string QuickView)
-        {
-            return View();
-        }
+
 
         [HttpPost]
         public ActionResult Payment(VarInfoModel varInfo, string stripeToken, string QuickView)
@@ -438,9 +434,13 @@ namespace EC.COM.Controllers
 
             to.Add(varinfo.Email.Trim());
             em.Send(to, cc, "Employee Confidential Registration", body, true);
-
-            return RedirectToAction("CompanyRegistrationVideo", "Book", new { emailedcode = varinfo.Emailed_code_to_customer, invitationcode = "VAR", quickView = quickView });
+            return View("~/Views/Book/OnboardingPaymentReceipt.cshtml");
         }
+        public ActionResult OnboardingPaymentReceipt()
+        {
+            return View();
+        }
+
         [HttpGet]
         public ActionResult Onboarding(Guid guid)
         {

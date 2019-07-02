@@ -1,5 +1,4 @@
-﻿@model EC.COM.Models.OnboardingForm
-@{
+﻿@{
     ViewBag.Title = "Onboarding & Training Payment";
 }
 
@@ -126,24 +125,13 @@
 <main class="main" style="padding-bottom: 165px;" ng-controller="onboardingPayment">
     <section class="pricingTitleSection">
         <div class="pricingTitleSection__title">
-          Checkout
+            Checkout
         </div>
         <div class="pricingTitleSection__subTitle">
-          Onboarding & Training
+            Onboarding & Training
         </div>
     </section>
     <section class="pricingMainSection">
-        @*@using (Html.BeginForm("OnboardingPayment", null, FormMethod.Post, new { id = "main-form" }))
-        {
-            @Html.HiddenFor(x => x.companyId)
-            @Html.HiddenFor(x => x.NumberSessions)
-            @Html.Hidden("stripeToken")
-            @Html.Hidden("QuickView")
-            <input type="hidden" id="SessionNumber" name="SessionNumber" value="@Model.NumberSessions" />
-            <input type="hidden" id="Amount" name="Amount" value="@Model.priceT" />
-            <input type="hidden" id="CompanyGuid" name="CompanyGuid" value="@Model.GuidCompany" />
-        }*@
-
         <form method="post" id="payment-form">
             <div class="container">
                 <div class="pricingMainContainer">
@@ -152,44 +140,32 @@
                             <div class="pricingForm-block__title">
                                 Name on Card
                             </div>
-                            <div ng-class="{errorValidation: validationNameOnCard == true}" class="pricingForm-block__input" id="NameOnCardDiv">
-                                <label class="form-mainContent__label">
-                                    Name on Card
-                                    <input type="text" ng-change="validationNameOnCard=false" ng-model='NameOnCard' class="form-mainContent__labelInput calc" id="NameOnCard" name="NameOnCard">
-                                </label>
+                            <div class="pricingForm-block__title">
+                                Name on Card
                             </div>
                         </div>
                         <div class="pricingForm-block">
                             <div class="pricingForm-block__title">
                                 Card Number
                             </div>
-                            <div ng-class="{errorValidation: validationCardNumber == true}" class="pricingForm-block__input" id="CardNumberDiv">
-                                <label class="form-mainContent__label">
-                                    Card Number
-                                    <input type="text" ng-model="CardNumber" class="form-mainContent__labelInput calc" id="CardNumber" name="CardNumber">
-                                </label>
+                            <div class="pricingForm-block__title">
+                                Name on Card
                             </div>
                         </div>
                         <div class="pricingForm-block">
                             <div class="pricingForm-block__title">
                                 Card Expire
                             </div>
-                            <div ng-class="{errorValidation: validationCardExpire == true}" class="pricingForm-block__input" id="CardExpireDiv">
-                                <label class="form-mainContent__label">
-                                    Card Expire
-                                    <input type="text" ng-model='CardExpire' class="form-mainContent__labelInput calc" id="CardExpire" name="CardExpire">
-                                </label>
+                            <div class="pricingForm-block__title">
+                                Name on Card
                             </div>
                         </div>
                         <div class="pricingForm-block">
                             <div class="pricingForm-block__title">
                                 CVC
                             </div>
-                            <div ng-class="{errorValidation: validationcvc == true}" class="pricingForm-block__input" id="CVCDiv">
-                                <label class="form-mainContent__label">
-                                    CVC
-                                    <input type="text" ng-model='cvc' class="form-mainContent__labelInput calc" id="CVC">
-                                </label>
+                            <div class="pricingForm-block__title">
+                                Name on Card
                             </div>
                         </div>
                         <div class="pricingForm-block" style="height: 150px;">
@@ -212,65 +188,59 @@
                                     onboarding & training
                                 </div>
                                 <div class="pricingBill-line__tax" id="priceR">
-                                    $@Model.priceT
                                 </div>
- 
-                        </div>
-                        <div class="pricingBill-line pricingBill-lineSmall clearfix">
-                            <div class="pricingBill-line__text">
-                              Number of sessions
-                            </div>
-                            <input type="hidden" id="priceT" value="@Model.priceT" />
-                            <div class="pricingBill-line__tax" style="font-size:24px;" id="sessionN">
-                                @Model.NumberSessions
-                            </div>
 
-                          <div class="pricingBill-line pricingBill-lineSmall clearfix">
-                            <div class="pricingBill-line__text">
-                              &nbsp;
                             </div>
-                            <div class="pricingBill-line__tax" style="font-size:14px;" id="sessionN">
-                            </div>
-                          </div>
-
-                          <div class="pricingBill-line pricingBill-lineSmall clearfix">
-                            <div class="pricingBill-line__text">
-                              &nbsp;
-                            </div>
-                            <div class="pricingBill-line__tax" style="font-size:14px;" id="sessionN">
-                            </div>
-                          </div>
-                        </div>
-                        <div class="pricingBill-main price-section" style="padding-bottom: 0px">
-                            <div class="pricingBill-line pricingBill-lineTotal clearfix" style="padding-top: 0px;padding-bottom: 0px">
+                            <div class="pricingBill-line pricingBill-lineSmall clearfix">
                                 <div class="pricingBill-line__text">
-                                    <b>Total</b>
+                                    Number of sessions
                                 </div>
-                                <div class="pricingBill-line__tax" id="priceT">
-                                    $@Model.priceT
+                                <input type="hidden" id="priceT" value="" />
+                                <div class="pricingBill-line__tax" style="font-size:24px;" id="sessionN">
+                                </div>
+
+                                <div class="pricingBill-line pricingBill-lineSmall clearfix">
+                                    <div class="pricingBill-line__text">
+                                        &nbsp;
+                                    </div>
+                                    <div class="pricingBill-line__tax" style="font-size:14px;" id="sessionN">
+                                    </div>
+                                </div>
+
+                                <div class="pricingBill-line pricingBill-lineSmall clearfix">
+                                    <div class="pricingBill-line__text">
+                                        &nbsp;
+                                    </div>
+                                    <div class="pricingBill-line__tax" style="font-size:14px;" id="sessionN">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="pricingBill-footer">
-                            <div class="pricingBill-line">
-                                <p>
-                                    By clicking on Buy Now, you agree to our
-                                    <a href="~/TermsOfService.html" target="_blank">Terms</a>,
-                                    <a href="~/LicenseAgreement.html" target="_blank">Employee Confidential License Agreement</a> and
-                                    <a href="~/PrivacyStatement.html" target="_blank">Privacy Policy</a>
-                                </p>
+                            <div class="pricingBill-main price-section" style="padding-bottom: 0px">
+                                <div class="pricingBill-line pricingBill-lineTotal clearfix" style="padding-top: 0px;padding-bottom: 0px">
+                                    <div class="pricingBill-line__text">
+                                        <b>Total</b>
+                                    </div>
+                                    <div class="pricingBill-line__tax" id="priceT">
+                                        $
+                                    </div>
+                                </div>
                             </div>
-                            <button @*ng-click="SubmitOnboardPayment()"*@ class="submitBigBtn btn" type="submit">Pay $@Model.priceT</button>
+                            <div class="pricingBill-footer">
+                                <div class="pricingBill-line">
+                                    <p>
+                                        By clicking on Buy Now, you agree to our
+                                        <a href="~/TermsOfService.html" target="_blank">Terms</a>,
+                                        <a href="~/LicenseAgreement.html" target="_blank">Employee Confidential License Agreement</a> and
+                                        <a href="~/PrivacyStatement.html" target="_blank">Privacy Policy</a>
+                                    </p>
+                                </div>
+                                <button class="submitBigBtn btn" type="submit">Proceed to calendar to book your training timeslot</button>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-            </div>
+                </div>
         </form>
     </section>
 </main>
 @{Html.RenderPartial("footer");}
-
-@section scripts {
-<script></script>
-}
