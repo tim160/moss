@@ -76,19 +76,19 @@ namespace EC.Common.Util
 
         public static string GetSubdomainLink(string url, string site_url)
         {
-            string entrance_link = "report.employeeconfidential.com";
+            string entrance_link = "https://report.employeeconfidential.com";
 
             if (url.ToLower().Contains("campus") || site_url.ToLower().Contains("campus"))
             {
-                entrance_link = "campusconfidential.com";
+                entrance_link = "https://campusconfidential.com";
             }
             else if (url.ToLower().Contains("stark."))
             {
-                entrance_link = "stark.employeeconfidential.com";
+                entrance_link = "https://stark.employeeconfidential.com";
             }
             else if (url.ToLower().Contains("report.employeeconfidential"))
             {
-                entrance_link = "report.employeeconfidential.com";
+                entrance_link = "https://report.employeeconfidential.com";
             }
             else if (url.ToLower().Contains("cai.employeeconfidential.com"))
             {
@@ -96,7 +96,7 @@ namespace EC.Common.Util
             }
             if (url.ToLower().Contains("report.campus") || site_url.ToLower().Contains("report.campus"))
             {
-                entrance_link = "report.campusconfidential.com";
+                entrance_link = "https://report.campusconfidential.com";
             }
             return entrance_link;
         }
