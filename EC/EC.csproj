@@ -1795,6 +1795,7 @@
     <Compile Include="Models\ECModel\User.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Utils\FileUtils.cs" />
+    <Compile Include="Models\ViewModels\AllPaymentTypesViewModel.cs" />
     <Compile Include="Models\ViewModels\CaseInvestigationStatusViewModel.cs" />
     <Compile Include="Models\ViewModels\CaseMessagesViewModel.cs" />
     <Compile Include="Models\ViewModels\CasePreviewViewModel.cs" />

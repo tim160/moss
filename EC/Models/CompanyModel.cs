@@ -11,6 +11,7 @@ using System.Data.Entity.Migrations;
 using EC.Constants;
 using EC.Model.Interfaces;
 using EC.Model.Impl;
+using EC.Models.ViewModels;
 
 namespace EC.Models
 {
@@ -705,6 +706,24 @@ namespace EC.Models
         public List<company_disclamer_uploads> DisclamerUploads()
         {
             return db.company_disclamer_uploads.Where(x => x.company_id == ID).ToList();
+        }
+
+        public List<AllPaymentTypesViewModel> AllPayments()
+        {
+          List<AllPaymentTypesViewModel> all_payments = new List<AllPaymentTypesViewModel>();
+
+          var annual_company_payments = db.company_payments.Where(x => x.company_id == ID).ToList();
+          var onboarding_company_payments = db.company_payment_training.Where(x => x.company_id == ID).ToList();
+          if (annual_company_payments.Count > 0)
+          {
+            all_payments = annual_company_payments.Select(a => new AllPaymentTypesViewModel() { auth_code = a.auth_code, payment_date = a.payment_date, amount = a.amount, local_invoice_number = a.local_invoice_number, description = "License Payment" }).ToList();
+          }
+          if (onboarding_company_payments.Count > 0)
+          {
+            var temp = onboarding_company_payments.Select(a => new AllPaymentTypesViewModel() { auth_code = a.auth_code, payment_date = a.payment_date, amount = a.amount, local_invoice_number = a.local_invoice_number, description = "Onboarding Payment" }).ToList();
+            all_payments.AddRange(temp);
+          }
+          return all_payments.OrderByDescending(t => t.payment_date).ToList();
         }
     }
 }

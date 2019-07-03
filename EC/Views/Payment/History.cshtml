@@ -4,6 +4,8 @@
 @using EC.Common.Interfaces;
 @using EC.Core.Common;
 @using EC.Common.Util;
+@using EC.Models.ViewModels;
+
 @{
         // @Styles.Render("~/Content/Styles");
     IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
@@ -11,14 +13,14 @@
             ViewBag.Title = "Payment History";
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
     string user_nm = ViewBag.user_nm;
-            List<company_payments> all_payments = ViewBag.payments;
+            List<AllPaymentTypesViewModel> all_payments = ViewBag.payments;
             GlobalFunctions glb = new GlobalFunctions();
             CompanyModel cm = ViewBag.cm;
 
             int next_payment = 0;
             DateTime dt_next_payment = DateTime.Today;
 
-    if (cm._company.next_payment_date.HasValue && cm._company.next_payment_amount.HasValue)
+/*    if (cm._company.next_payment_date.HasValue && cm._company.next_payment_amount.HasValue)
     {
         DateTime dt = cm._company.next_payment_date.Value;
         if (dt < DateTime.Today.AddMonths(1))
@@ -31,7 +33,7 @@
             dt_next_payment = cm._company.next_payment_date.Value;
             next_payment = 2;
         }
-    }
+    }*/
 
     @*<style>
         .fullContainer {
@@ -43,8 +45,8 @@
     <div id="casesHeared">
         <div id="menu">
             <a class="caseesTab active casesMassage">
-                @GlobalRes.Payments @if (all_payments.Count > 0)
-                {<span>@all_payments.Count</span>}
+                @GlobalRes.Payments @*  @if (all_payments.Count > 0)
+  {<span>@all_payments.Count</span>}*@
             </a>
         </div>
     </div><!--casesHeared-->
@@ -52,24 +54,20 @@
     @if (all_payments.Count > 0)
     {
         <div class="contentSettings">
-            @foreach (company_payments _payment in all_payments)
+            @foreach (var _payment in all_payments)
             {
-                string name = "";
-                if (_payment.user_id.HasValue)
-                {
-                    UserModel um = new UserModel(_payment.user_id.Value);
-                    name = um._user.first_nm + " " + um._user.last_nm;
-                }
+  
+ 
                     <div class="myMessages">
-                        <div class="headerMessages" style="border-left: 10px solid">
+                        <div class="headerMessages" style="border-left: 10px solid  #3099be; ">
                             <div class="topBlock">
-                                <p class="titleMessages">@_payment.auth_code - @GlobalRes.AnnualSubscriptionFeeUp</p>
+                                <p class="titleMessages">@_payment.local_invoice_number</p>
                             </div>
                         </div>
-                        <div class="blockMessage withStaticBorder">
+                        <div class="blockMessage withStaticBorder  #3099be; ">
                             <div class="textMessage" style="padding-left:5%">
-                                <p class="personalName">@name</p>
-                                <p class="text"><a href="/Payment/Receipt/@_payment.id">@StringUtil.ConvertDecimalToStringAmount(_payment.amount)</a></p>
+                                <p class="personalName">@_payment.description</p>
+                                <p class="text"><a href="/Payment/Receipt/@_payment.auth_code">@StringUtil.ConvertDecimalToStringAmount(_payment.amount)</a></p>
                             </div>
                             <div class="blockDate">
                                 <p>@m_DateTimeHelper.GetFullMonth(_payment.payment_date.Month) @_payment.payment_date.Day, @_payment.payment_date.Year</p>
