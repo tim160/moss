@@ -434,6 +434,7 @@ namespace EC.COM.Controllers
 
             to.Add(varinfo.Email.Trim());
             em.Send(to, cc, "Employee Confidential Registration", body, true);
+            ViewBag.Emailed_code_to_customer = varinfo.Emailed_code_to_customer;
             return View("~/Views/Book/OnboardingPaymentReceipt.cshtml");
         }
         public ActionResult OnboardingPaymentReceipt()

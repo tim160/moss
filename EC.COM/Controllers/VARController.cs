@@ -14,25 +14,25 @@ namespace EC.COM.Controllers
         {
             bool quickView = false;
             if (!string.IsNullOrWhiteSpace(quickview))
-              quickView = true;
+                quickView = true;
             ViewBag.quickView = quickView;
 
 
-      ViewBag.preReg = false;
-      if (!string.IsNullOrWhiteSpace(code))
-      {
-        using (var db = new DBContext())
-        { 
-          var model = db.CompanyInvitations.FirstOrDefault(x => x.Invitation_code.ToLower().Trim() == code.ToLower().Trim());
-          if (model != null && model.Employee_price_type == 3)
-          {
+            ViewBag.preReg = false;
+            if (!string.IsNullOrWhiteSpace(code))
+            {
+                using (var db = new DBContext())
+                {
+                    var model = db.CompanyInvitations.FirstOrDefault(x => x.Invitation_code.ToLower().Trim() == code.ToLower().Trim());
+                    if (model != null && model.Employee_price_type == 3)
+                    {
 
-            ViewBag.preReg = true;
-          }
-        }
-      }
-             
-          return View();
+                        ViewBag.preReg = true;
+                    }
+                }
+            }
+
+            return View();
         }
 
         [HttpPost]
@@ -55,18 +55,18 @@ namespace EC.COM.Controllers
             var is_prepaid = false;
             using (var db = new DBContext())
             {
-        var check_prepaid = db.CompanyInvitations.FirstOrDefault(x => x.Invitation_code.ToLower().Trim() == invitationCode.ToLower().Trim());
-        if (check_prepaid != null && check_prepaid.Employee_price_type == 3)
-        {
-          is_prepaid = true;
-        }
+                var check_prepaid = db.CompanyInvitations.FirstOrDefault(x => x.Invitation_code.ToLower().Trim() == invitationCode.ToLower().Trim());
+                if (check_prepaid != null && check_prepaid.Employee_price_type == 3)
+                {
+                    is_prepaid = true;
+                }
 
-        var model = db.VarInfoes.FirstOrDefault(x => x.Email == email);
+                var model = db.VarInfoes.FirstOrDefault(x => x.Email == email);
 
-        if (is_prepaid)
-          emailed_code = Guid.NewGuid().ToString();
+                if (is_prepaid)
+                    emailed_code = Guid.NewGuid().ToString();
 
-         if (model == null)
+                if (model == null)
                 {
                     var varinfo = new Data.VarInfoModel
                     {
@@ -95,7 +95,7 @@ namespace EC.COM.Controllers
 
                     if (is_prepaid)
                     {
-                      varinfo.Emailed_code_to_customer = emailed_code;
+                        varinfo.Emailed_code_to_customer = emailed_code;
                     }
                     db.VarInfoes.Add(varinfo);
                 }
@@ -110,33 +110,33 @@ namespace EC.COM.Controllers
                     model.Employee_no = numberOfEmployees > 0 ? numberOfEmployees : model.Employee_no;
                     if (is_prepaid)
                     {
-                      model.Emailed_code_to_customer = emailed_code;
-                      model.Is_registered = false;
+                        model.Emailed_code_to_customer = emailed_code;
+                        model.Is_registered = false;
                     }
                 }
-                
 
- 
-         
 
-           db.SaveChanges();
 
-      }
-          if (quickView == "1")
-            return RedirectToAction("Index", "Book", new { id = System.Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(data)), quickView = 1 });
-          else if (is_prepaid)
-          {
-            return RedirectToAction("CompanyRegistrationVideo", "Book", new { id = System.Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(data)), invitation = invitationCode, invitationcode = invitationCode, emailedcode = emailed_code });
-          }
-          else
-          {
-            return RedirectToAction("Index", "Video", new { id = System.Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(data)) });
-          }
+
+
+                db.SaveChanges();
+
+            }
+            if (quickView == "1")
+                return RedirectToAction("Index", "Book", new { id = System.Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(data)), quickView = 1 });
+            else if (is_prepaid)
+            {
+                return RedirectToAction("CompanyRegistrationVideo", "Book", new { id = System.Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(data)), invitation = invitationCode, invitationcode = invitationCode, emailedcode = emailed_code });
+            }
+            else
+            {
+                return RedirectToAction("Index", "Video", new { id = System.Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(data)) });
+            }
         }
 
         public ActionResult DirectSale()
         {
-          return RedirectToAction("Index", "Var", new { quickview = "ec" });
+            return RedirectToAction("Index", "Var", new { quickview = "ec" });
         }
     }
 }

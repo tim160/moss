@@ -154,7 +154,7 @@
         </section>
         <section class="pricingMainSection">
             <div class="container">
-                @using (Html.BeginForm("OnboardingPaymentReceipt", null, FormMethod.Post, new { id = "main-form" }))
+                @using (Html.BeginForm("Payment", null, FormMethod.Post, new { id = "main-form" }))
                 {
                     @Html.HiddenFor(x => x.VarInfo.Id)
                     @Html.HiddenFor(x => x.VarInfo.Email)
