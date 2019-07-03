@@ -347,23 +347,23 @@ namespace EC.COM.Controllers
 
 
         [HttpPost]
-        public ActionResult Payment(VarInfoModel varInfo, string stripeToken, string QuickView)
+        public ActionResult Payment(OrderViewModel orderViewModel)
         {
             string quickView = "";
-            if (!string.IsNullOrWhiteSpace(QuickView) && QuickView == "1")
+            if (!string.IsNullOrWhiteSpace(orderViewModel.QuickView) && orderViewModel.QuickView == "1")
                 quickView = "1";
             StripeConfiguration.SetApiKey(ConfigurationManager.AppSettings["ApiPayKey"]);
 
             // Token is created using Checkout or Elements!
             // Get the payment token submitted by the form:
-            var token = stripeToken; // Using ASP.NET MVC
+            var token = orderViewModel.StripeToken; // Using ASP.NET MVC
 
             var db = new DBContext();
-            var varinfo = db.VarInfoes.FirstOrDefault(x => x.Id == varInfo.Id && x.Email == varInfo.Email);
+            orderViewModel.VarInfo = db.VarInfoes.FirstOrDefault(x => x.Id == orderViewModel.VarInfo.Id && x.Email == orderViewModel.VarInfo.Email);
 
             var options = new ChargeCreateOptions
             {
-                Amount = System.Convert.ToInt64(varinfo.Total_price),
+                Amount = System.Convert.ToInt64(orderViewModel.VarInfo.Total_price),
                 Currency = "usd",
                 Description = "Employee Confidential Subscription Services",
                 SourceId = token,
@@ -372,8 +372,8 @@ namespace EC.COM.Controllers
             var service = new ChargeService();
             Charge charge = service.Create(options);
 
-            varinfo.Emailed_code_to_customer = charge.Id;
-            varinfo.Registered_dt = varinfo.Registered_dt ?? DateTime.Now;
+            orderViewModel.VarInfo.Emailed_code_to_customer = charge.Id;
+            orderViewModel.VarInfo.Registered_dt = orderViewModel.VarInfo.Registered_dt ?? DateTime.Now;
 
             var company_payment = new company_payments
             {
@@ -382,7 +382,7 @@ namespace EC.COM.Controllers
                 payment_date = DateTime.Today,
 
                 auth_code = token,     /// Emailed_code_to_customer
-                amount = varInfo.Total_price,
+                amount = orderViewModel.VarInfo.Total_price,
                 local_invoice_number = "EC-" + DateTime.Now.ToString("yyMMddHHmmssfff"),
 
                 cc_name = "",
@@ -414,35 +414,31 @@ namespace EC.COM.Controllers
             EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(false);
             EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
             eb.OrderConfirmation_Email(
-                varinfo.Emailed_code_to_customer,
-                String.IsNullOrEmpty(varinfo.First_nm) && String.IsNullOrEmpty(varinfo.Last_nm) ? "Customer" : varinfo.First_nm,
-                varinfo.Last_nm,
-                varinfo.Annual_plan_price.ToString(),
-                varinfo.Onboarding_price.ToString(),
-                (varinfo.Registered_dt.Value.AddYears(varinfo.Year)).ToString("MMMM dd'st', yyyy", new CultureInfo("en-US")),
-                varinfo.Last_nm,
-                varinfo.Company_nm,
+                orderViewModel.VarInfo.Emailed_code_to_customer,
+                String.IsNullOrEmpty(orderViewModel.VarInfo.First_nm) && String.IsNullOrEmpty(orderViewModel.VarInfo.Last_nm) ? "Customer" : orderViewModel.VarInfo.First_nm,
+                orderViewModel.VarInfo.Last_nm,
+                orderViewModel.VarInfo.Annual_plan_price.ToString(),
+                orderViewModel.VarInfo.Onboarding_price.ToString(),
+                (orderViewModel.VarInfo.Registered_dt.Value.AddYears(orderViewModel.VarInfo.Year)).ToString("MMMM dd'st', yyyy", new CultureInfo("en-US")),
+                orderViewModel.VarInfo.Last_nm,
+                orderViewModel.VarInfo.Company_nm,
                 "",
-                varinfo.Last_nm,
+                orderViewModel.VarInfo.Last_nm,
                 Request.Url.AbsoluteUri.ToLower(),
                 $"{Request.Url.Scheme}://{Request.Url.Host}{(Request.Url.Port == 80 ? "" : ":" + Request.Url.Port.ToString())}/Video/Index",
-                $"{Request.Url.Scheme}://{Request.Url.Host}{(Request.Url.Port == 80 ? "" : ":" + Request.Url.Port.ToString())}/Book/CompanyRegistrationVideo?emailedcode{varinfo.Emailed_code_to_customer}&invitationcode=VAR&quickview={quickView}");
+                $"{Request.Url.Scheme}://{Request.Url.Host}{(Request.Url.Port == 80 ? "" : ":" + Request.Url.Port.ToString())}/Book/CompanyRegistrationVideo?emailedcode{orderViewModel.VarInfo.Emailed_code_to_customer}&invitationcode=VAR&quickview={quickView}");
             string body = eb.Body;
 
             List<string> to = new List<string>();
             List<string> cc = new List<string>();
             List<string> bcc = new List<string>();
 
-            to.Add(varinfo.Email.Trim());
+            to.Add(orderViewModel.VarInfo.Email.Trim());
             em.Send(to, cc, "Employee Confidential Registration", body, true);
-            ViewBag.Emailed_code_to_customer = varinfo.Emailed_code_to_customer;
-            return View("~/Views/Book/OnboardingPaymentReceipt.cshtml");
-        }
-        public ActionResult OnboardingPaymentReceipt()
-        {
-            return View();
-        }
+            ViewBag.Emailed_code_to_customer = orderViewModel.VarInfo.Emailed_code_to_customer;
 
+            return View("~/Views/Book/OrderPaymentReceipt.cshtml", orderViewModel.VarInfo);
+        }
         [HttpGet]
         public ActionResult Onboarding(Guid guid)
         {
@@ -522,8 +518,8 @@ namespace EC.COM.Controllers
 
             glb.BookingECOnboardingSessionNotifications(company, id, form.Amount, form.SessionNumber, is_cc, this.Request);
             #endregion
-
-            return Redirect("https://report.employeeconfidential.com/trainer/calendar/");
+            return View("~/Views/Book/OnboardingPaymentReceipt.cshtml");
+            //return Redirect("https://report.employeeconfidential.com/trainer/calendar/");
 
         }
     }

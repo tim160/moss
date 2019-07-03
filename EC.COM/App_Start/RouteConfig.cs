@@ -69,11 +69,6 @@ namespace EC.COM
                 );
 
             routes.MapRoute(
-                name: "OnboardingPaymentReceipt",
-                url: "Book/OnboardingPaymentReceipt",
-                defaults: new { controller = "Book", action = "OnboardingPaymentReceipt" }
-                );
-            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

@@ -15,5 +15,6 @@ namespace EC.COM.Models
         public int ExpirationYear { get; set; }
         public string CSVCode { get; set; }
         public string QuickView { get; set; }
+        public string StripeToken { get; set; }
     }
 }
