@@ -9,7 +9,7 @@ namespace EC.COM.Data
   [Table("company_payments")]
   public partial class company_payments
   {
-    public int id { get; set; }
+    public Guid id { get; set; }
     public int company_id { get; set; }
     public string cc_name { get; set; }
     public string cc_number { get; set; }

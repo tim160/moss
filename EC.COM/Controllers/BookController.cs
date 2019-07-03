@@ -377,6 +377,7 @@ namespace EC.COM.Controllers
 
             var company_payment = new company_payments
             {
+              id = Guid.NewGuid(),
                 company_id = 1,
                 payment_date = DateTime.Today,
 
@@ -498,6 +499,7 @@ namespace EC.COM.Controllers
                 company.onboard_sessions_expiry_dt = DateTime.Today.AddYears(1);
 
 
+                string time_now = DateTime.Now.ToString("yyMMddHHmmss");
 
                 var training_payment = new company_payment_training
                 {
@@ -508,9 +510,9 @@ namespace EC.COM.Controllers
                     amount = form.Amount,
                     onboard_sessions_paid = form.SessionNumber,
                     user_id = 1,
-                    payment_code = "ECT-" + company.id.ToString() + "-" + DateTime.Now.ToString("yyMMddHHmmss"),
-                    training_code = "ECT-" + company.id.ToString() + "-" + DateTime.Now.ToString("yyMMddHHmmss"),
-                    local_invoice_number = "ECT-" + company.id.ToString() + "-" + DateTime.Now.ToString("yyMMddHHmmss")
+                    payment_code = "ECT-" + company.id.ToString() + "-" + time_now,
+                    training_code = "ECT-" + company.id.ToString() + "-" + time_now,
+                    local_invoice_number = "ECT-" + company.id.ToString() + "-" + time_now
                 };
                 db.company_payment_trainings.Add(training_payment);
 
