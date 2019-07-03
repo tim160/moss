@@ -6,24 +6,26 @@
 @using EC.Core.Common;
 @using EC.Common.Util;
 
+@using System.Collections;
+@using EC.Models;
+@using EC.Models.Database;
+@using EC.App_LocalResources;
+@using EC.Common.Util;
+@using EC.Localization;
+
 @{
 // @Styles.Render("~/Content/Styles");
     <link rel="stylesheet" type="text/css" href="/Content/styleReportDashboard.css">
 
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
 
-    company_payments cp = ViewBag.cp;
+    var cp = ViewBag.cp;
 
     GlobalFunctions glb = new GlobalFunctions();
     IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
 
     ViewBag.Title = GlobalRes.Payment + " - " + m_DateTimeHelper.ConvertDateToLongMonthString(cp.payment_date);
-    string name = "";
-    if (cp.user_id.HasValue)
-    {
-        UserModel um = new UserModel(cp.user_id.Value);
-        name = um._user.first_nm + " " + um._user.last_nm;
-    }
+ 
     <style>
         .fullContainer {
             max-width: none;
@@ -32,7 +34,7 @@
 }
 <div class="blockSettings contentCompanyProfile">
     <div class="titleNewUser">
-        <h1 class="helloUser">@GlobalRes.Receipt: @cp.auth_code</h1>
+        <h1 class="helloUser">@GlobalRes.Payment on  @m_DateTimeHelper.ConvertDateToLongMonthString(cp.payment_date)</h1>
     </div>
     <div class="contentSettings">
         <div class="blockPersonalPhotoSetting">
@@ -44,27 +46,21 @@
             <div class="personalBlock">
                 <div class="blockPersonalSettings">
                     <p class="title">@GlobalRes.Amount</p>
-                    @Html.TextBox("amount", StringUtil.ConvertDecimalToStringAmount(cp.amount), new Dictionary<string, object>() { { "readonly", "true" } })
+                    @StringUtil.ConvertDecimalToStringAmount(cp.amount) 
                 </div>
                 <div class="blockPersonalSettings">
                     <p class="title">@GlobalRes.PaymentDate</p>
-                    @Html.TextBox("payment_date", m_DateTimeHelper.ConvertDateToLongMonthString(cp.payment_date), new Dictionary<string, object>() { { "readonly", "true" } })
+                    @m_DateTimeHelper.ConvertDateToLongMonthString(cp.payment_date)
                 </div>
 
-                @if (name.Length > 0)
-                {
-                    <div class="blockPersonalSettings">
-                        <p class="title">@GlobalRes.PaidBy</p>
-                        @Html.TextBox("name", name, new Dictionary<string, object>() { { "readonly", "true" } })
-                    </div>
-                }
+ 
                 <div class="blockPersonalSettings">
-                    <p class="title">@GlobalRes.CreditCardNumber</p>
-                    @Html.TextBox("payment_date", cp.cc_number, new Dictionary<string, object>() { { "readonly", "true" } })
+                    <p class="title">@GlobalRes.Description</p>
+                    @cp.description
                 </div>
                 <div class="blockPersonalSettings">
                     <p class="title">@GlobalRes.AuthCode</p>
-                    @Html.TextBox("payment_date", cp.auth_code, new Dictionary<string, object>() { { "readonly", "true" } })
+                    @cp.local_invoice_number
                 </div>
             </div>
         </div>

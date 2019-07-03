@@ -314,7 +314,14 @@
                           Book Training
                         </a>
                       </li>
-
+                      @if (cm.AllPayments().Count > 0)
+                      {
+                        <li class="dropDown-navigation__li">
+                          <a href="/Payment/History" class="dropDown-navigation__a">
+                            Subscription
+                          </a>
+                        </li>
+                      }
                         <li class="dropDown-navigation__li active">
                             <a href="/settings/password/" class="dropDown-navigation__a">
                                 @LocalizationGetter.GetString("Password")

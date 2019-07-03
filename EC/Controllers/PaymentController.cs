@@ -24,7 +24,7 @@ namespace EC.Controllers
             UserModel um = new UserModel(user.id);
             CompanyModel cm = new CompanyModel(um._user.company_id);
 
-            List<company_payments> all_payments = db.company_payments.Where(t => t.company_id == um._user.company_id).ToList();
+            var all_payments = cm.AllPayments();
             ViewBag.payments = all_payments;
             ViewBag.user_id = user.id;
             ViewBag.cm = cm;
@@ -44,27 +44,30 @@ namespace EC.Controllers
 
             UserModel um = new UserModel(user.id);
             ViewBag.user_id = user.id;
+            CompanyModel cm = new CompanyModel(um._user.company_id);
+
+
             Guid _id;
-            if ((id != null) && (id != ""))
+            if (!string.IsNullOrWhiteSpace(id))
             {
                 try
                 {
-                    _id = new Guid(id);
+         //           _id = new Guid(id);
                 }
                 catch
                 {
-                    return RedirectToAction("History", "Payment");
+           //         return RedirectToAction("History", "Payment");
                 }
             }
             else
                 return RedirectToAction("History", "Payment");
 
-            List<company_payments> all_payments = db.company_payments.Where(t => t.company_id == um._user.company_id && t.id == _id).ToList();
+            var all_payments = cm.AllPayments().Where(t => t.auth_code == id).ToList();
 
             if (all_payments.Count == 0)
                 return RedirectToAction("History", "Payment");
 
-            company_payments cp = all_payments[0];
+            var cp = all_payments[0];
 
             ViewBag.cp = cp;
             return View();
