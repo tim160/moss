@@ -16,5 +16,7 @@ namespace EC.COM.Models
         public string CSVCode { get; set; }
         public string QuickView { get; set; }
         public string StripeToken { get; set; }
-    }
+        public string receiptUrl { get; set; }
+
+  }
 }

@@ -9,7 +9,8 @@ using System.Web.Mvc;
 using EC.COM.Models;
 using System.Configuration;
 using log4net;
-
+using Newtonsoft.Json;
+ 
 
 namespace EC.COM.Controllers
 {
@@ -363,7 +364,7 @@ namespace EC.COM.Controllers
 
             var options = new ChargeCreateOptions
             {
-                Amount = System.Convert.ToInt64(orderViewModel.VarInfo.Total_price),
+                Amount = System.Convert.ToInt64(orderViewModel.VarInfo.Total_price) * 100,
                 Currency = "usd",
                 Description = "Employee Confidential Subscription Services",
                 SourceId = token,
@@ -384,7 +385,7 @@ namespace EC.COM.Controllers
                 auth_code = token,     /// Emailed_code_to_customer
                 amount = orderViewModel.VarInfo.Total_price,
                 local_invoice_number = "EC-" + DateTime.Now.ToString("yyMMddHHmmssfff"),
-
+                stripe_receipt_url = "",
                 cc_name = "",
                 cc_number = "",
                 cc_month = 1,
@@ -392,26 +393,44 @@ namespace EC.COM.Controllers
                 cc_csv = 1,
                 user_id = 1
             };
+      string receipt_url = "";
+      try
+      {
+        var stripe_response = charge.StripeResponse.ResponseJson;
+        dynamic data = JsonConvert.DeserializeObject(stripe_response);
+        receipt_url = data.receipt_url;
+        company_payment.stripe_receipt_url = receipt_url;
+      }
+      catch
+      {
+        // json failed
+      }
+
             db.company_paymentss.Add(company_payment);
 
-            /*   if (varinfo.Onboarding_session_numbers > 0)
-               {
-                  company_id = company.id,
-                   payment_date = DateTime.Today,
-                   onboard_sessions_expiry_dt = DateTime.Today.AddYears(1),
-                   auth_code = token,
-                   amount = form.Amount,
-                   onboard_sessions_paid = form.SessionNumber,
-                   user_id = 1,
-                   payment_code = "ECT-" + company.id.ToString() + "-" + DateTime.Now.ToString("yyMMddHHmmss"),
-                   training_code = "ECT-" + company.id.ToString() + "-" + DateTime.Now.ToString("yyMMddHHmmss"),
-                   local_invoice_number = "ECT-" + company.id.ToString() + "-" + DateTime.Now.ToString("yyMMddHHmmss")
-               }*/
+        /*   if (varinfo.Onboarding_session_numbers > 0)
+           {
+              company_id = company.id,
+               payment_date = DateTime.Today,
+               onboard_sessions_expiry_dt = DateTime.Today.AddYears(1),
+               auth_code = token,
+               amount = form.Amount,
+               onboard_sessions_paid = form.SessionNumber,
+               user_id = 1,
+               payment_code = "ECT-" + company.id.ToString() + "-" + DateTime.Now.ToString("yyMMddHHmmss"),
+               training_code = "ECT-" + company.id.ToString() + "-" + DateTime.Now.ToString("yyMMddHHmmss"),
+               local_invoice_number = "ECT-" + company.id.ToString() + "-" + DateTime.Now.ToString("yyMMddHHmmss")
+           }*/
 
-
+        try { 
             db.SaveChanges();
+        }
+        catch(Exception ex)
+        {
+ 
+        }
 
-            EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(false);
+          EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(false);
             EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
             eb.OrderConfirmation_Email(
                 orderViewModel.VarInfo.Emailed_code_to_customer,
@@ -436,6 +455,8 @@ namespace EC.COM.Controllers
             to.Add(orderViewModel.VarInfo.Email.Trim());
             em.Send(to, cc, "Employee Confidential Registration", body, true);
             ViewBag.Emailed_code_to_customer = orderViewModel.VarInfo.Emailed_code_to_customer;
+            ViewBag.ReceiptUrl = receipt_url;
+            orderViewModel.receiptUrl = receipt_url;
 
             return View("~/Views/Book/OrderPaymentReceipt.cshtml", orderViewModel.VarInfo);
         }
@@ -477,11 +498,11 @@ namespace EC.COM.Controllers
             {
                 ////    Amount = System.Convert.ToInt64(varinfo.Total_price),
                 Currency = "usd",
-                Description = "Employee Confidential Onboarding Process",
+                Description = "Employee Confidential Onboarding Training",
                 SourceId = token,
-                Amount = form.Amount
+                Amount = form.Amount*100
             };
-
+            string receipt_url = "";
             var service = new ChargeService();
             Charge charge = service.Create(options);
 
@@ -510,17 +531,49 @@ namespace EC.COM.Controllers
                     training_code = "ECT-" + company.id.ToString() + "-" + time_now,
                     local_invoice_number = "ECT-" + company.id.ToString() + "-" + time_now
                 };
-                db.company_payment_trainings.Add(training_payment);
+
+
+        try
+        {
+          var stripe_response = charge.StripeResponse.ResponseJson;
+          dynamic data = JsonConvert.DeserializeObject(stripe_response);
+          receipt_url = data.receipt_url;
+          training_payment.stripe_receipt_url = receipt_url;
+        }
+        catch
+        {
+          // json failed
+        }
+
+
+
+        db.company_payment_trainings.Add(training_payment);
 
                 db.SaveChanges();
             }
             #region Purchase Confirmation email
 
             glb.BookingECOnboardingSessionNotifications(company, id, form.Amount, form.SessionNumber, is_cc, this.Request);
-            #endregion
-            return View("~/Views/Book/OnboardingPaymentReceipt.cshtml", form);
+      #endregion
+      ViewBag.ReceiptUrl = receipt_url;
+      form.receiptUrl = receipt_url;
+
+      return View("~/Views/Book/OnboardingPaymentReceipt.cshtml", form);
             //return Redirect("https://report.employeeconfidential.com/trainer/calendar/");
 
         }
+
+    public ActionResult OrderPaymentReceipt(VarInfoModel VarInfo)
+    {
+
+      var db = new DBContext();
+      string receiptUrl = "";
+
+      var payment =  db.company_paymentss.Where(t => t.auth_code == VarInfo.Emailed_code_to_customer).FirstOrDefault();
+      if (payment != null)
+        receiptUrl = payment.stripe_receipt_url;
+      ViewBag.receiptUrl = receiptUrl;
+      return View();
     }
+  }
 }

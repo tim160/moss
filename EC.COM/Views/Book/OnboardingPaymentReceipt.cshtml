@@ -128,7 +128,7 @@
             Checkout
         </div>
         <div class="pricingTitleSection__subTitle">
-            Onboarding & Training
+            Thank you for your purchase!
         </div>
     </section>
     <section class="pricingMainSection">
@@ -138,33 +138,51 @@
                     <div class="pricingFormContainer">
                         <div class="pricingForm-block">
                             <div class="pricingForm-block__title">
-                                Emailed_code_to_customer
+                              Thank you for your purchase of
+
+                              @{
+                                switch (Model.SessionNumber)
+                                {
+                                  case 1: @:  an Onboarding Session. 
+                                                    break;
+                                  case 2:@:  two Onboarding Sessions.
+                                                    break;
+                                  case 3:@: three Onboarding Sessions.
+                                                    break;
+                                  default:@: Onboarding Package.
+                                       break;
+                                }
+                                  }
+                                  You will receive a confirmation email confirming this purchase.
+                              
+                              <p class="text"><a href=@Model.receiptUrl target="_blank" >Your receipt is available to view here.</a></p>
                             </div>
                             <div class="pricingForm-block__title">
+                    
                             </div>
                         </div>
                         <div class="pricingForm-block">
                             <div class="pricingForm-block__title">
-                                Card Number
+                               
                             </div>
                             <div class="pricingForm-block__title">
-                                Name on Card
-                            </div>
-                        </div>
-                        <div class="pricingForm-block">
-                            <div class="pricingForm-block__title">
-                                Card Expire
-                            </div>
-                            <div class="pricingForm-block__title">
-                                Name on Card
+                               
                             </div>
                         </div>
                         <div class="pricingForm-block">
                             <div class="pricingForm-block__title">
-                                CVC
+                                 
                             </div>
                             <div class="pricingForm-block__title">
-                                Name on Card
+                               
+                            </div>
+                        </div>
+                        <div class="pricingForm-block">
+                            <div class="pricingForm-block__title">
+                               
+                            </div>
+                            <div class="pricingForm-block__title">
+                        
                             </div>
                         </div>
                         <div class="pricingForm-block" style="height: 150px;">
@@ -229,28 +247,16 @@
                             <div class="pricingBill-footer">
                                 <div class="pricingBill-line">
                                     <p>
-                                        Thank you for your purchase of
+                                      <a class="submitBigBtn btn" href="https://report.employeeconfidential.com/trainer/calendar/">Proceed to calendar to book your training timeslot</a>
 
-                                        @{
-                                            switch (Model.SessionNumber)
-                                            {
-                                                case 1: @: "an Onboarding Session"
-                                                    break;
-                                                case 2:@: "two Onboarding Sessions"
-                                                    break;
-                                                case 3:@: "three Onboarding Sessions"
-                                                    break;
-                                            }
-                                        }
-                                        You will receive a confirmation email confirming this purchase.
                                     </p>
                                 </div>
-                                <a class="submitBigBtn btn" href="https://report.employeeconfidential.com/trainer/calendar/">Proceed to calendar to book your training timeslot</a>
-                            </div>
+                             </div>
                         </div>
                     </div>
 
                 </div>
+              </div>
         </form>
     </section>
 </main>

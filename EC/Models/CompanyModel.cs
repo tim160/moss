@@ -716,11 +716,11 @@ namespace EC.Models
           var onboarding_company_payments = db.company_payment_training.Where(x => x.company_id == ID).ToList();
           if (annual_company_payments.Count > 0)
           {
-            all_payments = annual_company_payments.Select(a => new AllPaymentTypesViewModel() { auth_code = a.auth_code, payment_date = a.payment_date, amount = a.amount, local_invoice_number = a.local_invoice_number, description = "License Payment" }).ToList();
+            all_payments = annual_company_payments.Select(a => new AllPaymentTypesViewModel() { auth_code = a.auth_code, payment_date = a.payment_date, amount = a.amount, local_invoice_number = a.local_invoice_number, description = "License Payment", receipt_url = a.stripe_receipt_url }).ToList();
           }
           if (onboarding_company_payments.Count > 0)
           {
-            var temp = onboarding_company_payments.Select(a => new AllPaymentTypesViewModel() { auth_code = a.auth_code, payment_date = a.payment_date, amount = a.amount, local_invoice_number = a.local_invoice_number, description = "Onboarding Payment" }).ToList();
+            var temp = onboarding_company_payments.Select(a => new AllPaymentTypesViewModel() { auth_code = a.auth_code, payment_date = a.payment_date, amount = a.amount, local_invoice_number = a.local_invoice_number, description = "Onboarding Payment", receipt_url = a.stripe_receipt_url }).ToList();
             all_payments.AddRange(temp);
           }
           return all_payments.OrderByDescending(t => t.payment_date).ToList();
