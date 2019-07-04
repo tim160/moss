@@ -26,6 +26,9 @@ namespace EC.COM.Data
     public int onboard_sessions_paid { get; set; }
 
     public DateTime onboard_sessions_expiry_dt { get; set; }
+    public string stripe_receipt_url { get; set; }
+
+    public string stripe_receipt_email { get; set; }
 
   }
 }

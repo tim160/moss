@@ -22,5 +22,9 @@ namespace EC.COM.Data
     public int user_id { get; set; }
 
     public DateTime payment_date { get; set; }
+    public string stripe_receipt_url { get; set; }
+
+    public string stripe_receipt_email { get; set; }
+
   }
 }

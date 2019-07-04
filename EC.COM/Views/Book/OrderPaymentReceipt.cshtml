@@ -131,7 +131,7 @@
             Checkout
         </div>
         <div class="pricingTitleSection__subTitle">
-            Onboarding & Training
+          Thank you for your purchase!
         </div>
     </section>
     <section class="pricingMainSection">
@@ -141,34 +141,37 @@
                     <div class="pricingFormContainer" style="height: 900px">
                         <div class="pricingForm-block">
                             <div class="pricingForm-block__title">
-                                Emailed_code_to_customer
+                              Thank you for your purchase of an Employee Confidential License.
+                              You will receive a confirmation email confirming this purchase.
                             </div>
                             <div class="pricingForm-block__title">
-                                @ViewBag.Emailed_code_to_customer
-                            </div>
-                        </div>
-                        <div class="pricingForm-block">
-                            <div class="pricingForm-block__title">
-                                Card Number
-                            </div>
-                            <div class="pricingForm-block__title">
-                                Name on Card
+                              <p class="text"><a href=@ViewBag.receiptUrl target="_blank">Your receipt is available to view here.</a></p> 
+
+                               
                             </div>
                         </div>
                         <div class="pricingForm-block">
                             <div class="pricingForm-block__title">
-                                Card Expire
+                            
                             </div>
                             <div class="pricingForm-block__title">
-                                Name on Card
+                                 
                             </div>
                         </div>
                         <div class="pricingForm-block">
                             <div class="pricingForm-block__title">
-                                CVC
+                                
                             </div>
                             <div class="pricingForm-block__title">
-                                Name on Card
+                                 
+                            </div>
+                        </div>
+                        <div class="pricingForm-block">
+                            <div class="pricingForm-block__title">
+                               
+                            </div>
+                            <div class="pricingForm-block__title">
+                                
                             </div>
                         </div>
                         <div class="pricingForm-block" style="height: 150px;">
@@ -280,27 +283,15 @@
                         <div class="pricingBill-footer">
                             <div class="pricingBill-line">
                                 <p>
-                                    Thank you for your purchase of
-
-                                    @{ 
-                                        switch (Model.Onboarding_session_numbers)
-                                        {
-                                            case 1: @: "an Onboarding Session"
-                                            break;
-                                            case 2:@: "two Onboarding Sessions"
-                                            break;
-                                            case 3:@: "three Onboarding Sessions"
-                                            break;
-                                            }
-                                        }
-                                        You will receive a confirmation email confirming this purchase.
+                                  <button class="submitBigBtn btn" type="submit">Schedule Training</button>
                                 </p>
                             </div>
-                            <button class="submitBigBtn btn" type="submit">Schedule Training</button>
+                            
                         </div>
                     </div>
 
                 </div>
+              </div>
         </form>
     </section>
 </main>

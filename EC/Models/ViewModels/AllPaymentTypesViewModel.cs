@@ -22,6 +22,7 @@ namespace EC.Models.ViewModels
     public decimal amount { get; set; }
     public string local_invoice_number { get; set; }
     public string description { get; set; }
+    public string receipt_url { get; set; }
 
 
   }
