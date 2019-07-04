@@ -518,7 +518,7 @@ namespace EC.COM.Controllers
 
             glb.BookingECOnboardingSessionNotifications(company, id, form.Amount, form.SessionNumber, is_cc, this.Request);
             #endregion
-            return View("~/Views/Book/OnboardingPaymentReceipt.cshtml");
+            return View("~/Views/Book/OnboardingPaymentReceipt.cshtml", form);
             //return Redirect("https://report.employeeconfidential.com/trainer/calendar/");
 
         }

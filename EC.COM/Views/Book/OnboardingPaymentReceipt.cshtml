@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "Onboarding & Training Payment";
 }
-
+@model EC.COM.Models.OnboardingPaymentForm
 <style>
 
     .StripeElement {
@@ -141,7 +141,6 @@
                                 Emailed_code_to_customer
                             </div>
                             <div class="pricingForm-block__title">
-                                @ViewBag.Emailed_code_to_customer
                             </div>
                         </div>
                         <div class="pricingForm-block">
@@ -188,6 +187,7 @@
                                     onboarding & training
                                 </div>
                                 <div class="pricingBill-line__tax" id="priceR">
+                                    @Model.Amount
                                 </div>
 
                             </div>
@@ -197,6 +197,7 @@
                                 </div>
                                 <input type="hidden" id="priceT" value="" />
                                 <div class="pricingBill-line__tax" style="font-size:24px;" id="sessionN">
+                                    @Model.SessionNumber
                                 </div>
 
                                 <div class="pricingBill-line pricingBill-lineSmall clearfix">
@@ -221,20 +222,30 @@
                                         <b>Total</b>
                                     </div>
                                     <div class="pricingBill-line__tax" id="priceT">
-                                        $
+                                        $ @Model.Amount
                                     </div>
                                 </div>
                             </div>
                             <div class="pricingBill-footer">
                                 <div class="pricingBill-line">
                                     <p>
-                                        By clicking on Buy Now, you agree to our
-                                        <a href="~/TermsOfService.html" target="_blank">Terms</a>,
-                                        <a href="~/LicenseAgreement.html" target="_blank">Employee Confidential License Agreement</a> and
-                                        <a href="~/PrivacyStatement.html" target="_blank">Privacy Policy</a>
+                                        Thank you for your purchase of
+
+                                        @{
+                                            switch (Model.SessionNumber)
+                                            {
+                                                case 1: @: "an Onboarding Session"
+                                                    break;
+                                                case 2:@: "two Onboarding Sessions"
+                                                    break;
+                                                case 3:@: "three Onboarding Sessions"
+                                                    break;
+                                            }
+                                        }
+                                        You will receive a confirmation email confirming this purchase.
                                     </p>
                                 </div>
-                                <button class="submitBigBtn btn" type="submit">Proceed to calendar to book your training timeslot</button>
+                                <a class="submitBigBtn btn" href="https://report.employeeconfidential.com/trainer/calendar/">Proceed to calendar to book your training timeslot</a>
                             </div>
                         </div>
                     </div>
