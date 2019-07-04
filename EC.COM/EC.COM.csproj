@@ -900,6 +900,7 @@
     <Content Include="Views\Book\Onboarding.cshtml" />
     <Content Include="Views\Book\OnboardingPayment.cshtml" />
     <Content Include="Views\Book\OnboardingPaymentReceipt.cshtml" />
+    <Content Include="Views\Book\OrderPaymentReceipt.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EC.Business\EC.Business.csproj">
