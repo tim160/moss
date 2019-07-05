@@ -17,6 +17,6 @@ namespace EC.COM.Models
         public string QuickView { get; set; }
         public string StripeToken { get; set; }
         public string receiptUrl { get; set; }
-
+        public string invitationCode { get; set; }
   }
 }

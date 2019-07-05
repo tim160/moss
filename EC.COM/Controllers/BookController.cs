@@ -19,6 +19,7 @@ namespace EC.COM.Controllers
     {
         public GlobalFunctions glb = new GlobalFunctions();
         private bool is_cc = false;
+        private string INVITATIONCODE = "VAR";
         public ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         //     public ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -457,7 +458,8 @@ namespace EC.COM.Controllers
             ViewBag.Emailed_code_to_customer = orderViewModel.VarInfo.Emailed_code_to_customer;
             ViewBag.ReceiptUrl = receipt_url;
             orderViewModel.receiptUrl = receipt_url;
-
+            ViewBag.RedirectLink = "/Book/CompanyRegistrationVideo?emailedcode=" + orderViewModel.VarInfo.Emailed_code_to_customer +
+                "&invitationCode=" + INVITATIONCODE + "&quickView=" + quickView;
             return View("~/Views/Book/OrderPaymentReceipt.cshtml", orderViewModel.VarInfo);
         }
         [HttpGet]
