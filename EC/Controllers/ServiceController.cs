@@ -455,7 +455,7 @@ namespace EC.Controllers
       using (var db = new ECEntities())
       {
         //logger.Info("Scheduler, is_cc" + is_cc.ToString());
-        var unsend_emails = db.email.Where(x => x.is_sent == false).ToList();
+        var unsend_emails = db.email.Where(x => x.is_sent == false && (x.email_freeze_send_dt == null || x.email_freeze_send_dt < DateTime.Now)).ToList();
         Business.Actions.Email.EmailManagement em = new Business.Actions.Email.EmailManagement(is_cc);
         Business.Actions.Email.EmailBody eb = new Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
         
