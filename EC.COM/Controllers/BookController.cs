@@ -310,13 +310,18 @@ namespace EC.COM.Controllers
 
             to.Add(varinfo.Email.Trim());
             em.Send(to, cc, "Employee Confidential Registration", body, true);
-            //var resultErrorMessage = await em.QuickSendEmailAsync(varinfo.Email.Trim(), "copy", "Employee Confidential Registration", body, true);
-            //if (resultErrorMessage.exception != null)
-            //{
-            //    logger.Info("ReportController / New" + resultErrorMessage.exception.Message);
-            //}
 
-            return RedirectToAction("CompanyRegistrationVideo", "Book", new { emailedcode = varinfo.Emailed_code_to_customer, quickview = model.QuickView, invitationcode = "VAR" });
+      glb.SaveEmailBeforeSend(2, 2, 2, varinfo.Email.Trim(), "employeeconfidential@employeeconfidential.com", null, "Employee Confidential Registration", eb.Body, false, 67);
+
+
+
+      //var resultErrorMessage = await em.QuickSendEmailAsync(varinfo.Email.Trim(), "copy", "Employee Confidential Registration", body, true);
+      //if (resultErrorMessage.exception != null)
+      //{
+      //    logger.Info("ReportController / New" + resultErrorMessage.exception.Message);
+      //}
+
+      return RedirectToAction("CompanyRegistrationVideo", "Book", new { emailedcode = varinfo.Emailed_code_to_customer, quickview = model.QuickView, invitationcode = "VAR" });
         }
 
         public ActionResult CompanyRegistrationVideo(string emailedcode, string quickview, string invitationcode)
@@ -454,8 +459,11 @@ namespace EC.COM.Controllers
             List<string> bcc = new List<string>();
 
             to.Add(orderViewModel.VarInfo.Email.Trim());
-            em.Send(to, cc, "Employee Confidential Registration", body, true);
-            ViewBag.Emailed_code_to_customer = orderViewModel.VarInfo.Emailed_code_to_customer;
+
+////            em.Send(to, cc, "Employee Confidential Registration", body, true);
+      glb.SaveEmailBeforeSend(2, 2, 2, orderViewModel.VarInfo.Email.Trim(), "employeeconfidential@employeeconfidential.com", null, "Employee Confidential Registration", eb.Body, false, 67);
+
+      ViewBag.Emailed_code_to_customer = orderViewModel.VarInfo.Emailed_code_to_customer;
             ViewBag.ReceiptUrl = receipt_url;
             orderViewModel.receiptUrl = receipt_url;
             ViewBag.RedirectLink = "/Book/CompanyRegistrationVideo?emailedcode=" + orderViewModel.VarInfo.Emailed_code_to_customer +
