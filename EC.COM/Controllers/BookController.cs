@@ -282,18 +282,24 @@ namespace EC.COM.Controllers
             var db = new DBContext();
             var varinfo = db.VarInfoes.FirstOrDefault(x => x.Id == model.VarInfo.Id && x.Email == model.VarInfo.Email);
             varinfo.Emailed_code_to_customer = varinfo.Emailed_code_to_customer ?? Guid.NewGuid().ToString();
+
+      var company_payment = db.company_paymentss.Where(t => t.auth_code == varinfo.Emailed_code_to_customer).FirstOrDefault();
+      string local_inv_num = varinfo.Emailed_code_to_customer;
+      if (company_payment != null)
+        local_inv_num = company_payment.local_invoice_number;
+
             varinfo.Registered_dt = DateTime.Now;
             db.SaveChanges();
 
             EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(false);
             EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
             eb.OrderConfirmation_Email(
-                varinfo.Emailed_code_to_customer,
+                local_inv_num,
                 String.IsNullOrEmpty(varinfo.First_nm) && String.IsNullOrEmpty(varinfo.Last_nm) ? "Customer" : varinfo.First_nm,
                 varinfo.Last_nm,
                 varinfo.Annual_plan_price.ToString(),
                 varinfo.Onboarding_price.ToString(),
-                (varinfo.Registered_dt.Value.AddYears(varinfo.Year)).ToString("MMMM dd'st', yyyy", new CultureInfo("en-US")),
+                (varinfo.Registered_dt.Value.AddYears(varinfo.Year)).ToString("MMMM dd, yyyy", new CultureInfo("en-US")),
                 varinfo.Last_nm,
                 varinfo.Company_nm,
                 model.NameOnCard,
@@ -439,12 +445,12 @@ namespace EC.COM.Controllers
           EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(false);
             EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
             eb.OrderConfirmation_Email(
-                orderViewModel.VarInfo.Emailed_code_to_customer,
+                company_payment.local_invoice_number,
                 String.IsNullOrEmpty(orderViewModel.VarInfo.First_nm) && String.IsNullOrEmpty(orderViewModel.VarInfo.Last_nm) ? "Customer" : orderViewModel.VarInfo.First_nm,
                 orderViewModel.VarInfo.Last_nm,
                 orderViewModel.VarInfo.Annual_plan_price.ToString(),
                 orderViewModel.VarInfo.Onboarding_price.ToString(),
-                (orderViewModel.VarInfo.Registered_dt.Value.AddYears(orderViewModel.VarInfo.Year)).ToString("MMMM dd'st', yyyy", new CultureInfo("en-US")),
+                (orderViewModel.VarInfo.Registered_dt.Value.AddYears(orderViewModel.VarInfo.Year)).ToString("MMMM dd, yyyy", new CultureInfo("en-US")),
                 orderViewModel.VarInfo.Last_nm,
                 orderViewModel.VarInfo.Company_nm,
                 "",
