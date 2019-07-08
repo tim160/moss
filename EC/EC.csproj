@@ -308,6 +308,10 @@
     <Content Include="Content\emails\CaseCloseApproveClosed.html" />
     <Content Include="Content\emails\CaseCloseApprovePlatformManager.html" />
     <Content Include="Content\emails\CaseDeadlinePastDue.html" />
+    <Content Include="Content\emails\ECProspectFollowUp.html" />
+    <Content Include="Content\emails\ECProspectFollowUpNeeded.html" />
+    <Content Include="Content\emails\ProspectNotPurchase.html" />
+    <Content Include="Content\emails\ProspectNotPurchase3Weeks.html" />
     <Content Include="Content\emails\ReminderTrainingTimeslotBooked.html" />
     <Content Include="Content\emails\ReporterNewMessage.html" />
     <Content Include="Content\emails\TrainingTimeslotBooked.html" />

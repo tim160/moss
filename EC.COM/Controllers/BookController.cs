@@ -268,9 +268,24 @@ namespace EC.COM.Controllers
                 QuickView = true;
             ViewBag.quickView = QuickView;
 
+          VarInfoModelString varInfoString = new VarInfoModelString();
+
+          varInfoString.Annual_plan_priceS = CutTheZeroos(model.Annual_plan_price);
+          varInfoString.CallCenterHotlineS = CutTheZeroos(model.CallCenterHotline);
+          varInfoString.Customers_priceS = CutTheZeroos(model.Customers_price);
+          varInfoString.Non_employee_priceS = CutTheZeroos(model.Non_employee_price);
+          varInfoString.Onboarding_priceS = CutTheZeroos((model.Onboarding_price));
+          varInfoString.Total_priceS  = CutTheZeroos(model.Total_price);
+
+          varInfoString.TotalAnnualPriceS = CutTheZeroos(model.Annual_plan_price + model.Customers_price + model.Non_employee_price + model.CallCenterHotline);
+          varInfoString.TwoYearPriceS = CutTheZeroos((model.Annual_plan_price + model.Customers_price + model.Non_employee_price + model.CallCenterHotline) * model.Year);
+
+
             return View(new OrderViewModel
             {
                 VarInfo = model,
+                VarInfoString = varInfoString,
+
                 ExpirationYear = DateTime.Now.Year,
                 ExpirationMonth = DateTime.Now.Month,
             });
@@ -305,7 +320,7 @@ namespace EC.COM.Controllers
                 model.NameOnCard,
                 varinfo.Last_nm,
                 Request.Url.AbsoluteUri.ToLower(),
-                $"{Request.Url.Scheme}://{Request.Url.Host}{(Request.Url.Port == 80 ? "" : ":" + Request.Url.Port.ToString())}/Book/CompanyRegistrationVideo?emailedcode{varinfo.Emailed_code_to_customer}&invitationcode=VAR&quickview={model.QuickView}",
+                $"{Request.Url.Scheme}://{Request.Url.Host}{(Request.Url.Port == 80 ? "" : ":" + Request.Url.Port.ToString())}/Book/CompanyRegistrationVideo?emailedcode={varinfo.Emailed_code_to_customer}&invitationcode=VAR&quickview={model.QuickView}",
                 $"{System.Configuration.ConfigurationManager.AppSettings["MainSite"]}new/registration/{varinfo.Emailed_code_to_customer}"
                 );
             string body = eb.Body;
@@ -376,7 +391,7 @@ namespace EC.COM.Controllers
 
             var options = new ChargeCreateOptions
             {
-                Amount = System.Convert.ToInt64(orderViewModel.VarInfo.Total_price) * 100,
+                Amount = System.Convert.ToInt64(orderViewModel.VarInfo.Total_price * 100) ,
                 Currency = "usd",
                 Description = "Employee Confidential Subscription Services",
                 SourceId = token,
@@ -457,7 +472,7 @@ namespace EC.COM.Controllers
                 orderViewModel.VarInfo.Last_nm,
                 Request.Url.AbsoluteUri.ToLower(),
                 $"{Request.Url.Scheme}://{Request.Url.Host}{(Request.Url.Port == 80 ? "" : ":" + Request.Url.Port.ToString())}/Video/Index",
-                $"{Request.Url.Scheme}://{Request.Url.Host}{(Request.Url.Port == 80 ? "" : ":" + Request.Url.Port.ToString())}/Book/CompanyRegistrationVideo?emailedcode{orderViewModel.VarInfo.Emailed_code_to_customer}&invitationcode=VAR&quickview={quickView}");
+                $"{Request.Url.Scheme}://{Request.Url.Host}{(Request.Url.Port == 80 ? "" : ":" + Request.Url.Port.ToString())}/Book/CompanyRegistrationVideo?emailedcode={orderViewModel.VarInfo.Emailed_code_to_customer}&invitationcode=VAR&quickview={quickView}");
             string body = eb.Body;
 
             List<string> to = new List<string>();

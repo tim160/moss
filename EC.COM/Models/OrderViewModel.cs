@@ -9,6 +9,8 @@ namespace EC.COM.Models
     public class OrderViewModel
     {
         public VarInfoModel VarInfo { get; set; }
+
+        public VarInfoModelString VarInfoString { get; set; }
         public string CardNo { get; set; }
         public string NameOnCard { get; set; }
         public int ExpirationMonth { get; set; }
