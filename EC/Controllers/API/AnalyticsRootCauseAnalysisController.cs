@@ -51,6 +51,8 @@ namespace EC.Controllers.API
                     && (idsB.Contains(x.company_root_cases_behavioral_id.Value) || idsE.Contains(x.company_root_cases_external_id.Value) || idsO.Contains(x.company_root_cases_organizational_id.Value)) )
                 .ToList();
 
+            reportInfo = getValidListReports(reportInfo);
+
             var behavioral = reportInfo
                 .Where(x => x.company_root_cases_behavioral_id.HasValue)
                 .GroupBy(x => x.company_root_cases_behavioral_id)
@@ -96,5 +98,23 @@ namespace EC.Controllers.API
                 Colors = DB.color.OrderBy(x => x.id).Select(x => "#" + x.color_code),
             };
        }
+        private List<report_investigation_methodology> getValidListReports(List<report_investigation_methodology> reportInfo)
+        {
+            var newListReports = new List<report_investigation_methodology>();
+            foreach(var item in reportInfo)
+            {
+                if(checkExistCompany(item))
+                    newListReports.Add(item);
+            }
+            return newListReports;
+        }
+        private bool checkExistCompany(report_investigation_methodology item)
+        {
+            if (DB.report.Find(item.report_id).company_id > 0)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
