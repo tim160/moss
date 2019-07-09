@@ -10,7 +10,7 @@ using EC.COM.Models;
 using System.Configuration;
 using log4net;
 using Newtonsoft.Json;
- 
+
 
 namespace EC.COM.Controllers
 {
@@ -268,17 +268,17 @@ namespace EC.COM.Controllers
                 QuickView = true;
             ViewBag.quickView = QuickView;
 
-          VarInfoModelString varInfoString = new VarInfoModelString();
+            VarInfoModelString varInfoString = new VarInfoModelString();
 
-          varInfoString.Annual_plan_priceS = CutTheZeroos(model.Annual_plan_price);
-          varInfoString.CallCenterHotlineS = CutTheZeroos(model.CallCenterHotline);
-          varInfoString.Customers_priceS = CutTheZeroos(model.Customers_price);
-          varInfoString.Non_employee_priceS = CutTheZeroos(model.Non_employee_price);
-          varInfoString.Onboarding_priceS = CutTheZeroos((model.Onboarding_price));
-          varInfoString.Total_priceS  = CutTheZeroos(model.Total_price);
+            varInfoString.Annual_plan_priceS = CutTheZeroos(model.Annual_plan_price);
+            varInfoString.CallCenterHotlineS = CutTheZeroos(model.CallCenterHotline);
+            varInfoString.Customers_priceS = CutTheZeroos(model.Customers_price);
+            varInfoString.Non_employee_priceS = CutTheZeroos(model.Non_employee_price);
+            varInfoString.Onboarding_priceS = CutTheZeroos((model.Onboarding_price));
+            varInfoString.Total_priceS = CutTheZeroos(model.Total_price);
 
-          varInfoString.TotalAnnualPriceS = CutTheZeroos(model.Annual_plan_price + model.Customers_price + model.Non_employee_price + model.CallCenterHotline);
-          varInfoString.TwoYearPriceS = CutTheZeroos((model.Annual_plan_price + model.Customers_price + model.Non_employee_price + model.CallCenterHotline) * model.Year);
+            varInfoString.TotalAnnualPriceS = CutTheZeroos(model.Annual_plan_price + model.Customers_price + model.Non_employee_price + model.CallCenterHotline);
+            varInfoString.TwoYearPriceS = CutTheZeroos((model.Annual_plan_price + model.Customers_price + model.Non_employee_price + model.CallCenterHotline) * model.Year);
 
 
             return View(new OrderViewModel
@@ -298,10 +298,10 @@ namespace EC.COM.Controllers
             var varinfo = db.VarInfoes.FirstOrDefault(x => x.Id == model.VarInfo.Id && x.Email == model.VarInfo.Email);
             varinfo.Emailed_code_to_customer = varinfo.Emailed_code_to_customer ?? Guid.NewGuid().ToString();
 
-      var company_payment = db.company_paymentss.Where(t => t.auth_code == varinfo.Emailed_code_to_customer).FirstOrDefault();
-      string local_inv_num = varinfo.Emailed_code_to_customer;
-      if (company_payment != null)
-        local_inv_num = company_payment.local_invoice_number;
+            var company_payment = db.company_paymentss.Where(t => t.auth_code == varinfo.Emailed_code_to_customer).FirstOrDefault();
+            string local_inv_num = varinfo.Emailed_code_to_customer;
+            if (company_payment != null)
+                local_inv_num = company_payment.local_invoice_number;
 
             varinfo.Registered_dt = DateTime.Now;
             db.SaveChanges();
@@ -332,17 +332,17 @@ namespace EC.COM.Controllers
             to.Add(varinfo.Email.Trim());
             em.Send(to, cc, "Employee Confidential Registration", body, true);
 
-      glb.SaveEmailBeforeSend(2, 2, 2, varinfo.Email.Trim(), "employeeconfidential@employeeconfidential.com", null, "Employee Confidential Registration", eb.Body, false, 67);
+            glb.SaveEmailBeforeSend(2, 2, 2, varinfo.Email.Trim(), "employeeconfidential@employeeconfidential.com", null, "Order Confirmation from Employee Confidential", eb.Body, false, 67);
 
 
 
-      //var resultErrorMessage = await em.QuickSendEmailAsync(varinfo.Email.Trim(), "copy", "Employee Confidential Registration", body, true);
-      //if (resultErrorMessage.exception != null)
-      //{
-      //    logger.Info("ReportController / New" + resultErrorMessage.exception.Message);
-      //}
+            //var resultErrorMessage = await em.QuickSendEmailAsync(varinfo.Email.Trim(), "copy", "Employee Confidential Registration", body, true);
+            //if (resultErrorMessage.exception != null)
+            //{
+            //    logger.Info("ReportController / New" + resultErrorMessage.exception.Message);
+            //}
 
-      return RedirectToAction("CompanyRegistrationVideo", "Book", new { emailedcode = varinfo.Emailed_code_to_customer, quickview = model.QuickView, invitationcode = "VAR" });
+            return RedirectToAction("CompanyRegistrationVideo", "Book", new { emailedcode = varinfo.Emailed_code_to_customer, quickview = model.QuickView, invitationcode = "VAR" });
         }
 
         public ActionResult CompanyRegistrationVideo(string emailedcode, string quickview, string invitationcode)
@@ -391,7 +391,7 @@ namespace EC.COM.Controllers
 
             var options = new ChargeCreateOptions
             {
-                Amount = System.Convert.ToInt64(orderViewModel.VarInfo.Total_price * 100) ,
+                Amount = System.Convert.ToInt64(orderViewModel.VarInfo.Total_price * 100),
                 Currency = "usd",
                 Description = "Employee Confidential Subscription Services",
                 SourceId = token,
@@ -405,7 +405,7 @@ namespace EC.COM.Controllers
 
             var company_payment = new company_payments
             {
-              id = Guid.NewGuid(),
+                id = Guid.NewGuid(),
                 company_id = 1,
                 payment_date = DateTime.Today,
 
@@ -420,44 +420,45 @@ namespace EC.COM.Controllers
                 cc_csv = 1,
                 user_id = 1
             };
-      string receipt_url = "";
-      try
-      {
-        var stripe_response = charge.StripeResponse.ResponseJson;
-        dynamic data = JsonConvert.DeserializeObject(stripe_response);
-        receipt_url = data.receipt_url;
-        company_payment.stripe_receipt_url = receipt_url;
-      }
-      catch
-      {
-        // json failed
-      }
+            string receipt_url = "";
+            try
+            {
+                var stripe_response = charge.StripeResponse.ResponseJson;
+                dynamic data = JsonConvert.DeserializeObject(stripe_response);
+                receipt_url = data.receipt_url;
+                company_payment.stripe_receipt_url = receipt_url;
+            }
+            catch
+            {
+                // json failed
+            }
 
             db.company_paymentss.Add(company_payment);
 
-        /*   if (varinfo.Onboarding_session_numbers > 0)
-           {
-              company_id = company.id,
-               payment_date = DateTime.Today,
-               onboard_sessions_expiry_dt = DateTime.Today.AddYears(1),
-               auth_code = token,
-               amount = form.Amount,
-               onboard_sessions_paid = form.SessionNumber,
-               user_id = 1,
-               payment_code = "ECT-" + company.id.ToString() + "-" + DateTime.Now.ToString("yyMMddHHmmss"),
-               training_code = "ECT-" + company.id.ToString() + "-" + DateTime.Now.ToString("yyMMddHHmmss"),
-               local_invoice_number = "ECT-" + company.id.ToString() + "-" + DateTime.Now.ToString("yyMMddHHmmss")
-           }*/
+            /*   if (varinfo.Onboarding_session_numbers > 0)
+               {
+                  company_id = company.id,
+                   payment_date = DateTime.Today,
+                   onboard_sessions_expiry_dt = DateTime.Today.AddYears(1),
+                   auth_code = token,
+                   amount = form.Amount,
+                   onboard_sessions_paid = form.SessionNumber,
+                   user_id = 1,
+                   payment_code = "ECT-" + company.id.ToString() + "-" + DateTime.Now.ToString("yyMMddHHmmss"),
+                   training_code = "ECT-" + company.id.ToString() + "-" + DateTime.Now.ToString("yyMMddHHmmss"),
+                   local_invoice_number = "ECT-" + company.id.ToString() + "-" + DateTime.Now.ToString("yyMMddHHmmss")
+               }*/
 
-        try { 
-            db.SaveChanges();
-        }
-        catch(Exception ex)
-        {
- 
-        }
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
 
-          EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(false);
+            }
+
+            EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(false);
             EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
             eb.OrderConfirmation_Email(
                 company_payment.local_invoice_number,
@@ -481,10 +482,10 @@ namespace EC.COM.Controllers
 
             to.Add(orderViewModel.VarInfo.Email.Trim());
 
-////            em.Send(to, cc, "Employee Confidential Registration", body, true);
-      glb.SaveEmailBeforeSend(2, 2, 2, orderViewModel.VarInfo.Email.Trim(), "employeeconfidential@employeeconfidential.com", null, "Employee Confidential Registration", eb.Body, false, 67);
+            ////            em.Send(to, cc, "Employee Confidential Registration", body, true);
+            glb.SaveEmailBeforeSend(2, 2, 2, orderViewModel.VarInfo.Email.Trim(), "employeeconfidential@employeeconfidential.com", null, "Order Confirmation from Employee Confidential", eb.Body, false, 67);
 
-      ViewBag.Emailed_code_to_customer = orderViewModel.VarInfo.Emailed_code_to_customer;
+            ViewBag.Emailed_code_to_customer = orderViewModel.VarInfo.Emailed_code_to_customer;
             ViewBag.ReceiptUrl = receipt_url;
             orderViewModel.receiptUrl = receipt_url;
             ViewBag.RedirectLink = "/Book/CompanyRegistrationVideo?emailedcode=" + orderViewModel.VarInfo.Emailed_code_to_customer +
@@ -531,7 +532,7 @@ namespace EC.COM.Controllers
                 Currency = "usd",
                 Description = "Employee Confidential Onboarding Training",
                 SourceId = token,
-                Amount = form.Amount*100
+                Amount = form.Amount * 100
             };
             string receipt_url = "";
             var service = new ChargeService();
@@ -564,47 +565,47 @@ namespace EC.COM.Controllers
                 };
 
 
-        try
-        {
-          var stripe_response = charge.StripeResponse.ResponseJson;
-          dynamic data = JsonConvert.DeserializeObject(stripe_response);
-          receipt_url = data.receipt_url;
-          training_payment.stripe_receipt_url = receipt_url;
-        }
-        catch
-        {
-          // json failed
-        }
+                try
+                {
+                    var stripe_response = charge.StripeResponse.ResponseJson;
+                    dynamic data = JsonConvert.DeserializeObject(stripe_response);
+                    receipt_url = data.receipt_url;
+                    training_payment.stripe_receipt_url = receipt_url;
+                }
+                catch
+                {
+                    // json failed
+                }
 
 
 
-        db.company_payment_trainings.Add(training_payment);
+                db.company_payment_trainings.Add(training_payment);
 
                 db.SaveChanges();
             }
             #region Purchase Confirmation email
 
             glb.BookingECOnboardingSessionNotifications(company, id, form.Amount, form.SessionNumber, is_cc, this.Request);
-      #endregion
-      ViewBag.ReceiptUrl = receipt_url;
-      form.receiptUrl = receipt_url;
+            #endregion
+            ViewBag.ReceiptUrl = receipt_url;
+            form.receiptUrl = receipt_url;
 
-      return View("~/Views/Book/OnboardingPaymentReceipt.cshtml", form);
+            return View("~/Views/Book/OnboardingPaymentReceipt.cshtml", form);
             //return Redirect("https://report.employeeconfidential.com/trainer/calendar/");
 
         }
 
-    public ActionResult OrderPaymentReceipt(VarInfoModel VarInfo)
-    {
+        public ActionResult OrderPaymentReceipt(VarInfoModel VarInfo)
+        {
 
-      var db = new DBContext();
-      string receiptUrl = "";
+            var db = new DBContext();
+            string receiptUrl = "";
 
-      var payment =  db.company_paymentss.Where(t => t.auth_code == VarInfo.Emailed_code_to_customer).FirstOrDefault();
-      if (payment != null)
-        receiptUrl = payment.stripe_receipt_url;
-      ViewBag.receiptUrl = receiptUrl;
-      return View();
+            var payment = db.company_paymentss.Where(t => t.auth_code == VarInfo.Emailed_code_to_customer).FirstOrDefault();
+            if (payment != null)
+                receiptUrl = payment.stripe_receipt_url;
+            ViewBag.receiptUrl = receiptUrl;
+            return View();
+        }
     }
-  }
 }
