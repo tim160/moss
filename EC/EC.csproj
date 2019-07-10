@@ -310,6 +310,8 @@
     <Content Include="Content\emails\CaseDeadlinePastDue.html" />
     <Content Include="Content\emails\ECProspectFollowUp.html" />
     <Content Include="Content\emails\ECProspectFollowUpNeeded.html" />
+    <Content Include="Content\emails\OrderConfirmationEmployeeConfidential.html" />
+    <Content Include="Content\emails\OrderConfirmationEmployeeConfidentialFrom.html" />
     <Content Include="Content\emails\ProspectNotPurchase.html" />
     <Content Include="Content\emails\ProspectNotPurchase3Weeks.html" />
     <Content Include="Content\emails\ReminderTrainingTimeslotBooked.html" />

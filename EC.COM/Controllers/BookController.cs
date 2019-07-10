@@ -330,7 +330,7 @@ namespace EC.COM.Controllers
             List<string> bcc = new List<string>();
 
             to.Add(varinfo.Email.Trim());
-            em.Send(to, cc, "Employee Confidential Registration", body, true);
+            em.Send(to, cc, "Order Confirmation from Employee Confidential", body, true);
 
             glb.SaveEmailBeforeSend(2, 2, 2, varinfo.Email.Trim(), "employeeconfidential@employeeconfidential.com", null, "Order Confirmation from Employee Confidential", eb.Body, false, 67);
 

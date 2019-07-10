@@ -1751,7 +1751,7 @@ namespace EC.Controllers
                     payment_date = DateTime.Today,
                     onboard_sessions_expiry_dt = DateTime.Today.AddYears(1),
                     auth_code = varinfo.emailed_code_to_customer,
-                    amount = varinfo.onboarding_price,
+                    amount =(varinfo.onboarding_price.HasValue? varinfo.onboarding_price.Value : 0),
                     onboard_sessions_paid = varinfo.onboarding_session_numbers,
                     user_id = 1,
                     payment_code = "ECT-" + _company.id.ToString() + "-" + time_now,
