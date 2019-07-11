@@ -11,10 +11,10 @@ namespace EC.COM.Data
   {
         public int id { get; set; }
         [Required]
-        public string partner_nm { get; set; }
+        public string partner_name { get; set; }
         [Required]
         public string partner_code { get; set; }
-        public int status_id { get; set; }
+       // public int status_id { get; set; }
 
         [Required]
         [StringLength(250)]
@@ -25,6 +25,6 @@ namespace EC.COM.Data
         public string first_nm { get; set; }
         [StringLength(250)]
         public string last_nm { get; set; }
-        public bool is_active { get; set; }
+        public int is_active { get; set; }
     }
 }

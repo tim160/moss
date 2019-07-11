@@ -10,7 +10,7 @@ using EC.COM.Models;
 using System.Configuration;
 using log4net;
 using Newtonsoft.Json;
-
+using EC.Constants;
 
 namespace EC.COM.Controllers
 {
@@ -123,7 +123,7 @@ namespace EC.COM.Controllers
 
             using (var db = new DBContext())
             {
-                string invitation_code = String.IsNullOrEmpty(model.InvitationCode) ? "EC" : model.InvitationCode;
+                string invitation_code = String.IsNullOrEmpty(model.InvitationCode) ? VarConstants.DefaultVARCode : model.InvitationCode;
                 int[] invitation_code_checks = new int[] { 1, 50, 100, 200, 500, 600, 700, 800, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000, 6500, 7000, 10000, 12000, 15000, 20000, 25000, 50000 };
 
                 var items = db.CompanyInvitations
@@ -140,7 +140,7 @@ namespace EC.COM.Controllers
                     }
                 }
                 if (!is_invitation_complete)
-                    items = db.CompanyInvitations.Where(x => x.Invitation_code.ToLower() == "ec").ToList();
+                    items = db.CompanyInvitations.Where(x => x.Invitation_code.ToLower() == VarConstants.DefaultVARCode.ToLower()).ToList();
                 var ne = items.FirstOrDefault(x => model.NumberOfEmployees >= x.From_quantity && model.NumberOfEmployees <= x.To_quantity);
                 //logger.Info("NE  " + ne.Id);
 
@@ -330,19 +330,74 @@ namespace EC.COM.Controllers
             List<string> bcc = new List<string>();
 
             to.Add(varinfo.Email.Trim());
-            em.Send(to, cc, "Employee Confidential Registration", body, true);
+      ///      em.Send(to, cc, "Employee Confidential Registration", body, true);
 
             glb.SaveEmailBeforeSend(2, 2, 2, varinfo.Email.Trim(), "employeeconfidential@employeeconfidential.com", null, "Order Confirmation from Employee Confidential", eb.Body, false, 67);
 
+      #region   Purchase was made, need to send email to Partner / EC
+      string invitationCode = VarConstants.DefaultVARCode;
+      if (!string.IsNullOrWhiteSpace(varinfo.Invitation_code))
+        invitationCode = varinfo.Invitation_code;
 
+      var company_invitation = db.CompanyInvitations.Where(t => t.Invitation_code == invitationCode).FirstOrDefault();
+      if (company_invitation != null)
+      {
+        /// need to add partner_id and replace company_id with it. 
+        var partner = db.partners.Where(t => t.id == company_invitation.Created_by_company_id).FirstOrDefault();
 
-            //var resultErrorMessage = await em.QuickSendEmailAsync(varinfo.Email.Trim(), "copy", "Employee Confidential Registration", body, true);
-            //if (resultErrorMessage.exception != null)
-            //{
-            //    logger.Info("ReportController / New" + resultErrorMessage.exception.Message);
-            //}
+        if (partner != null)
+        {
+          EC.Business.Actions.Email.EmailBody eb_partner = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+          eb_partner.GetConfirmationTextPartner(
 
-            return RedirectToAction("CompanyRegistrationVideo", "Book", new { emailedcode = varinfo.Emailed_code_to_customer, quickview = model.QuickView, invitationcode = "VAR" });
+                 String.IsNullOrEmpty(varinfo.First_nm) && String.IsNullOrEmpty(varinfo.Last_nm) ? "Customer" : varinfo.First_nm,
+                 varinfo.Last_nm,
+                 varinfo.Annual_plan_price.ToString(),
+                 varinfo.Onboarding_price.ToString(),
+                 (varinfo.Registered_dt.Value.AddYears(varinfo.Year)).ToString("MMMM dd, yyyy", new CultureInfo("en-US")),
+                 local_inv_num,
+                 varinfo.Company_nm,
+                  invitationCode
+                 );
+
+ 
+ 
+          glb.SaveEmailBeforeSend(2, 2, 2, partner.email.Trim(), "employeeconfidential@employeeconfidential.com", null, "Order Confirmation from Employee Confidential: #" + local_inv_num, eb.Body, false, 77);
+
+        }
+
+      }
+      var partnerEC = db.partners.Where(t => t.partner_code == "EC").FirstOrDefault();
+      if (partnerEC != null)
+      {
+        EC.Business.Actions.Email.EmailBody eb_EC = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+        eb_EC.GetConfirmationTextEC(
+
+               String.IsNullOrEmpty(varinfo.First_nm) && String.IsNullOrEmpty(varinfo.Last_nm) ? "Customer" : varinfo.First_nm,
+               varinfo.Last_nm,
+               varinfo.Annual_plan_price.ToString(),
+               varinfo.Onboarding_price.ToString(),
+               (varinfo.Registered_dt.Value.AddYears(varinfo.Year)).ToString("MMMM dd, yyyy", new CultureInfo("en-US")),
+               local_inv_num,
+               varinfo.Company_nm,
+                invitationCode
+               );
+
+ 
+ 
+        glb.SaveEmailBeforeSend(2, 2, 2, partnerEC.email.Trim(), "employeeconfidential@employeeconfidential.com", null, "Order Confirmation from Employee Confidential: #" +local_inv_num, eb_EC.Body, false, 78);
+
+      }
+
+      #endregion
+
+      //var resultErrorMessage = await em.QuickSendEmailAsync(varinfo.Email.Trim(), "copy", "Employee Confidential Registration", body, true);
+      //if (resultErrorMessage.exception != null)
+      //{
+      //    logger.Info("ReportController / New" + resultErrorMessage.exception.Message);
+      //}
+
+      return RedirectToAction("CompanyRegistrationVideo", "Book", new { emailedcode = varinfo.Emailed_code_to_customer, quickview = model.QuickView, invitationcode = "VAR" });
         }
 
         public ActionResult CompanyRegistrationVideo(string emailedcode, string quickview, string invitationcode)
@@ -459,7 +514,7 @@ namespace EC.COM.Controllers
             }
 
             EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(false);
-            EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+            EC.Business.Actions.Email.EmailBody eb   = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
             eb.OrderConfirmation_Email(
                 company_payment.local_invoice_number,
                 String.IsNullOrEmpty(orderViewModel.VarInfo.First_nm) && String.IsNullOrEmpty(orderViewModel.VarInfo.Last_nm) ? "Customer" : orderViewModel.VarInfo.First_nm,
@@ -474,18 +529,68 @@ namespace EC.COM.Controllers
                 Request.Url.AbsoluteUri.ToLower(),
                 $"{Request.Url.Scheme}://{Request.Url.Host}{(Request.Url.Port == 80 ? "" : ":" + Request.Url.Port.ToString())}/Video/Index",
                 $"{Request.Url.Scheme}://{Request.Url.Host}{(Request.Url.Port == 80 ? "" : ":" + Request.Url.Port.ToString())}/Book/CompanyRegistrationVideo?emailedcode={orderViewModel.VarInfo.Emailed_code_to_customer}&invitationcode=VAR&quickview={quickView}");
-            string body = eb.Body;
-
-            List<string> to = new List<string>();
-            List<string> cc = new List<string>();
-            List<string> bcc = new List<string>();
-
-            to.Add(orderViewModel.VarInfo.Email.Trim());
+ 
 
             ////            em.Send(to, cc, "Employee Confidential Registration", body, true);
             glb.SaveEmailBeforeSend(2, 2, 2, orderViewModel.VarInfo.Email.Trim(), "employeeconfidential@employeeconfidential.com", null, "Order Confirmation from Employee Confidential", eb.Body, false, 67);
 
-            ViewBag.Emailed_code_to_customer = orderViewModel.VarInfo.Emailed_code_to_customer;
+      #region   Purchase was made, need to send email to Partner / EC
+      string invitationCode = VarConstants.DefaultVARCode;
+      if (!string.IsNullOrWhiteSpace(orderViewModel.VarInfo.Invitation_code))
+        invitationCode = orderViewModel.VarInfo.Invitation_code;
+
+      var company_invitation = db.CompanyInvitations.Where(t => t.Invitation_code == invitationCode).FirstOrDefault();
+      if (company_invitation != null)
+      {
+        /// need to add partner_id and replace company_id with it. 
+        var partner = db.partners.Where(t => t.id == company_invitation.Created_by_company_id).FirstOrDefault();
+
+        if (partner != null)
+        {
+          EC.Business.Actions.Email.EmailBody eb_partner = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+          eb_partner.GetConfirmationTextPartner(
+
+                 String.IsNullOrEmpty(orderViewModel.VarInfo.First_nm) && String.IsNullOrEmpty(orderViewModel.VarInfo.Last_nm) ? "Customer" : orderViewModel.VarInfo.First_nm,
+                 orderViewModel.VarInfo.Last_nm,
+                 orderViewModel.VarInfo.Annual_plan_price.ToString(),
+                 orderViewModel.VarInfo.Onboarding_price.ToString(),
+                 (orderViewModel.VarInfo.Registered_dt.Value.AddYears(orderViewModel.VarInfo.Year)).ToString("MMMM dd, yyyy", new CultureInfo("en-US")),
+                 company_payment.local_invoice_number,
+                 orderViewModel.VarInfo.Company_nm,
+                  invitationCode
+                 );
+
+ 
+          glb.SaveEmailBeforeSend(2, 2, 2, partner.email.Trim(), "employeeconfidential@employeeconfidential.com", null, "Order Confirmation from Employee Confidential: #" + company_payment.local_invoice_number, eb_partner.Body, false, 77);
+
+        }
+
+      }
+      var partnerEC = db.partners.Where(t => t.partner_code == "EC").FirstOrDefault();
+      if (partnerEC != null)
+      {
+        EC.Business.Actions.Email.EmailBody eb_EC = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+        eb_EC.GetConfirmationTextEC(
+
+               String.IsNullOrEmpty(orderViewModel.VarInfo.First_nm) && String.IsNullOrEmpty(orderViewModel.VarInfo.Last_nm) ? "Customer" : orderViewModel.VarInfo.First_nm,
+               orderViewModel.VarInfo.Last_nm,
+               orderViewModel.VarInfo.Annual_plan_price.ToString(),
+               orderViewModel.VarInfo.Onboarding_price.ToString(),
+               (orderViewModel.VarInfo.Registered_dt.Value.AddYears(orderViewModel.VarInfo.Year)).ToString("MMMM dd, yyyy", new CultureInfo("en-US")),
+               company_payment.local_invoice_number,
+               orderViewModel.VarInfo.Company_nm,
+                invitationCode
+               );
+
+ 
+        glb.SaveEmailBeforeSend(2, 2, 2, partnerEC.email.Trim(), "employeeconfidential@employeeconfidential.com", null, "Order Confirmation from Employee Confidential: #" + company_payment.local_invoice_number, eb_EC.Body, false, 78);
+
+      }
+
+      #endregion
+
+
+      ViewBag.Emailed_code_to_customer = orderViewModel.VarInfo.Emailed_code_to_customer;
             ViewBag.ReceiptUrl = receipt_url;
             orderViewModel.receiptUrl = receipt_url;
             ViewBag.RedirectLink = "/Book/CompanyRegistrationVideo?emailedcode=" + orderViewModel.VarInfo.Emailed_code_to_customer +

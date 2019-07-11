@@ -282,7 +282,16 @@ namespace EC.Business.Actions.Email
                     //Reminder of training
                     m_filename = "ReminderTrainingTimeslotBooked";
                     break;
-            }
+
+                case 77:
+                  //Reminder of training
+                  m_filename = "OrderConfirmationEmployeeConfidential";
+                  break;
+                case 78:
+                  //Reminder of training
+                  m_filename = "OrderConfirmationEmployeeConfidentialfrom";
+                  break;
+      }
 
             string appPath = Path.GetFullPath("~/EmailText/" + m_filename + ".html");
             string path1 = Path.Combine(Environment.CurrentDirectory, @"EmailText\", m_filename + ".html");
@@ -728,7 +737,60 @@ namespace EC.Business.Actions.Email
             GetBody(76);
             m_body = prepareBody(m_body);
         }
-        #endregion
+
+
+    public void GetConfirmationTextPartner(
+            string name,
+            string surname,
+            string annualFee,
+            string onboardingFee,
+            string exparationDate,
+            string orderNumber,
+            string companyName,
+            string partnerCode
+          )
+    {
+      //OrderConfirmationEmployeeConfidential 
+      GetBody(77);
+
+      m_body = m_body.Replace("@@OrderNumber", orderNumber);
+      m_body = m_body.Replace("@@FirstName", name);
+      m_body = m_body.Replace("@@LastName", surname);
+
+      m_body = m_body.Replace("@@AnnualFee", annualFee);
+      m_body = m_body.Replace("@@OnboardingFee", onboardingFee);
+      m_body = m_body.Replace("@@ExpirationDate", exparationDate);  
+      m_body = m_body.Replace("@@CompanyName", companyName);
+      m_body = m_body.Replace("@@CodeUsed", partnerCode);
     }
+    public void GetConfirmationTextEC(
+            string name,
+            string surname,
+            string annualFee,
+            string onboardingFee,
+            string exparationDate,
+            string orderNumber,
+            string companyName,
+            string partnerCode)
+    {
+      //OrderConfirmationEmployeeConfidentialfrom
+      GetBody(78);
+
+      m_body = m_body.Replace("@@OrderNumber", orderNumber);
+      m_body = m_body.Replace("@@FirstName", name);
+      m_body = m_body.Replace("@@LastName", surname);
+
+      m_body = m_body.Replace("@@AnnualFee", annualFee);
+      m_body = m_body.Replace("@@OnboardingFee", onboardingFee);
+      m_body = m_body.Replace("@@ExpirationDate", exparationDate);
+      m_body = m_body.Replace("@@CompanyName", companyName);
+      m_body = m_body.Replace("@@CodeUsed", partnerCode);
+
+
+
+    }
+
+    #endregion
+  }
 
 }
