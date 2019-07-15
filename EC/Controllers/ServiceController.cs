@@ -127,8 +127,9 @@ namespace EC.Controllers
             return View($"Report{(is_cc ? "-CC" : "")}");
         }
 
-        public ActionResult Disclaimer(string id, string companyCode)
+        public ActionResult Disclaimer(string id, string companyCode, string lang = "en-us")
         {
+            Session["lang"] = lang;
             if (String.IsNullOrEmpty(id))
             {
                 return RedirectToAction("Disclaimer", new { id = companyCode });
