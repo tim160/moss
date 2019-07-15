@@ -440,7 +440,7 @@
             var temp = $(element.target);
             var id = $(element.target).attr("data-value");
             sendAjax("deleteIncidentType", id, function () {
-                temp.parent().hide(200);
+                temp.parent().remove();
             });
         });
         /*delete reporter Types*/
@@ -448,7 +448,7 @@
             var temp = $(element.target);
             var id = temp.attr("data-value");
             sendAjax("deleteReporterType", id, function () {
-                temp.parent().hide(200);
+                temp.parent().remove();
             });
         });
         /*delete deleteDepartment*/
@@ -456,7 +456,7 @@
             var temp = $(element.target);
             var id = temp.attr("data-value");
             sendAjax("deleteDepartment", id, function () {
-                temp.parent().hide(200);
+                temp.parent().remove();
             });
         });
         /*delete deleteLocation*/
@@ -464,7 +464,7 @@
             var temp = $(element.target);
             var id = temp.attr("data-value");
             sendAjax("deleteLocation", id, function () {
-                temp.parent().hide(200);
+                temp.parent().remove();
             });
         });
     /*end page company*/
@@ -748,7 +748,7 @@
             var temp = $(element.target);
             var id = temp.attr("data-value");
             sendAjax("deleteOutcome", id, function () {
-                temp.parent().hide(200);
+                temp.parent().remove();
             });
         });
     /*end outcomes */
