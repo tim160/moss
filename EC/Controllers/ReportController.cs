@@ -232,6 +232,7 @@ namespace EC.Controllers
                     has_involved = true;
 
                 string body = "";
+                //LocalizationGetter.Culture = Session["lang"];
                 string title = LocalizationGetter.GetString("Email_Title_NewCase", is_cc);
                 if (has_involved)
                     title = LocalizationGetter.GetString("Email_Title_NewCaseInvolved", is_cc);
