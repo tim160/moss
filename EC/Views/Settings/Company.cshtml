@@ -225,7 +225,7 @@
                         </div>
                     }
                 </div>
-            </div><!--blockIncidentTypes-->
+            </div><!--blockIncidentTypes real-->
             <div class="blockReporterTypes" style="display: none;">
                 @if (is_valid_mediator)
                 {
@@ -313,7 +313,7 @@
                 })
             </div>
 
-            <div class="blockSecondaryType" style="display: none;" ng-controller="SettingsCompanySecondaryTypeController" ng-cloak>
+            @*<div class="blockSecondaryType" style="display: none;" ng-controller="SettingsCompanySecondaryTypeController" ng-cloak>
                 @if (is_valid_mediator)
                 {
                     <div class="addIncidentTypeBtn" ng-show="!addMode">
@@ -345,7 +345,7 @@
                         </tr>
                     </table>
                 </div>
-            </div>
+            </div>*@
 
             <div class="blockCaseAdminDepartment" style="display: none;" ng-controller="SettingsCompanyCaseAdminDepartmentController" ng-cloak>
                 @if (is_valid_mediator)
@@ -361,7 +361,7 @@
                     <input type="text" name="newIncidentTypeName" required="" value="" ng-model="addName">
                     <div class="closeIcon"></div>
                 </div>
-                <div class="tableIncidentType">
+                <div class="blockCaseAdminDepartmentTable">
                     <table style="width: 100%;">
                         <tr ng-repeat="item in case_admin_departments">
                             <td width="50%">

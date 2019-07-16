@@ -974,9 +974,9 @@ titleReportTable {
         color: rgb(174, 181, 183);
     }
 
-    .inputBlock span.radioButton {
+    /*.inputBlock span.radioButton {
         margin-top: 16px;
-    }
+    }*/
 
     .steps{
         display:block;

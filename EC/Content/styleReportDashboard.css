@@ -1176,32 +1176,35 @@ h2.mainTitle {
 .contentCompanyProfile .tableIncidentType,
 .contentCompanyProfile .tableReporterType,
 .contentCompanyProfile .tableDepartment,
-.contentCompanyProfile .tableOutcome {
-    background: #ffffff;
-    border: 1px solid #e0e5e6;
-    width: 930px;
-    width: 95%;
+.contentCompanyProfile .tableOutcome,
+.contentCompanyProfile .blockCaseAdminDepartmentTable{
+background: #ffffff;
+border: 1px solid #e0e5e6;
+width: 930px;
+width: 95%;
 }
-.contentCompanyProfile .tableLanguage p ,
-.contentCompanyProfile .tableLocation p ,
-.contentCompanyProfile .tableIncidentType p ,
-.contentCompanyProfile .tableReporterType p ,
-.contentCompanyProfile .tableDepartment p,
-.contentCompanyProfile .tableOutcome p {
-    margin-left: 19px;
-    margin-right: 10px;
-    border-bottom: 1px solid #e0e5e6;
-    padding-left: 20px;
-    padding-bottom: 17px;
-    padding-top: 35px;
-    padding-right: 20px;
-    color: #3c3e3f;
-    font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
-    font-size: 18px;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    width:94%;
-}
+    .contentCompanyProfile .tableLanguage p,
+    .contentCompanyProfile .tableLocation p,
+    .contentCompanyProfile .tableIncidentType p,
+    .contentCompanyProfile .tableReporterType p,
+    .contentCompanyProfile .tableDepartment p,
+    .contentCompanyProfile .tableOutcome p,
+    .contentCompanyProfile .blockCaseAdminDepartmentTable p
+    {
+        margin-left: 19px;
+        margin-right: 10px;
+        border-bottom: 1px solid #e0e5e6;
+        padding-left: 20px;
+        padding-bottom: 17px;
+        padding-top: 35px;
+        padding-right: 20px;
+        color: #3c3e3f;
+        font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+        font-size: 18px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        width: 94%;
+    }
 .contentCompanyProfile .tableLanguage div:last-child p,
     /*.contentCompanyProfile .tableLanguage p:last-child,*/
 .contentCompanyProfile .tableLocation div:last-child p,

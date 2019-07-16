@@ -2,18 +2,14 @@
     ViewBag.Title = "Employee Confidential";
     Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
 }
-<style>
-    .error {
-        border: 2px solid red!important;
-    }
-</style>
+<input type="hidden" value="@Url.Action("SeekCompany", "Index")" id="SeekCompanyLocation" />
 <div class="general-container login">
 
     <header class="header">
         <div class="top-headerBg">
             <div class="container">
                 <div class="top-header">
-                    
+
                     <a href="http://employeeconfidential.com" class="top-header__backLink">
                         <img src="~/Content/images/svg-icons/left.svg" alt="" />
                         <span class="top-header__backLink-text">
@@ -47,7 +43,7 @@
                 <label class="loginForm__input">
                     Languages
                     <input id="languages" type="text" name="text" required="" autocomplete="off">
-                    <input id="companyCode" type="hidden" value="false" />
+                    <input id="selectedLanguage" type="hidden" value="false" />
                 </label>
             </div>*@
             <div class="loginSection__titleBg">
@@ -122,57 +118,7 @@
 
 </div><!-- /.general-container -->
 
-<script>
-    $(function () {
-        $("#specialInput").autocomplete({
-            minLength: 3,
-            source: '@Url.Action("SeekCompany", "Index")',
-            select: function (event, ui) {
-                $('#specialInput').val(ui.item.label);
-                $('#companyCode').val(ui.item.value);
-                return false;
-            }
-        });
-        var arrayLang = ['English', 'Español', 'عربى(Arabic)', '中文(Chinese)', 'Deutsch', 'Filipino', 'Français',
-            'Italiano', '日本人(Japanese)', '한국어(Korean)', 'Nederlands', 'Português', 'Русский(Russian)', 'Tiếng Việt(Vietnamese)'];
 
-        $("#languages").autocomplete({
-            minLength: 0,
-            source: arrayLang
-        }).focus(function () {
-            var lang = $(this);
-            lang.autocomplete('search', $(this).val());
-            lang.parent().removeClass('error');
-        });
-        $("#startBtn").on('click', function () {
-            var companyCode = $('#companyCode').val();
-            var language = $("#languages").val();
-            if (companyCode != 'false' && language != "") {
-                window.location.href = "/Service/Disclaimer?companyCode=" + companyCode;
-            } else {
-                //if (language == "") {
-                //    makeElementError($('#languages'));
-                //}
-                //if (companyCode == "false") {
-                //    makeElementError($('#companyCode'))
-                //}
-                TakeCompany();
-            }
-        });
-    });
-    function makeElementError(jqueryInput) {
-        jqueryInput.parent().addClass("error");
-    }
-
-    function TakeCompany(selname) {
-        $.ajax({
-            method: 'POST',
-            url: '@Url.Action("SeekCompany", "Index")',
-            data: { term: $('#specialInput').val() }
-        }).done(function (data) {
-            if (data.length > 0) {
-                window.location.href = "/Service/Disclaimer?companyCode=" + data[0].value;
-            }
-        });
-    }
-</script>
+@section scripts {
+    <script src="~/Scripts/View/ServiceReport.js"></script>
+}
