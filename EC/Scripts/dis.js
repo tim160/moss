@@ -1707,10 +1707,61 @@
 
     angular
         .module('EC')
-        .controller('SettingsUserEditController',
-            ['$scope', '$filter', '$location', 'SettingsUserEditService', SettingsUserEditController]);
+        .controller('PlatformManagerSettingsController',
+        ['$scope', 'validateSettingsUser', PlatformManagerSettingsController]);
+    function PlatformManagerSettingsController($scope, validateSettingsUser) {
 
-    function SettingsUserEditController($scope, $filter, $location, SettingsUserEditService) {
+        $scope.val_first_nm = false;
+        $scope.val_last_nm = false;
+        $scope.val_email = false;
+
+        $scope.update = function (event) {
+
+            $scope.val_first_nm = !validateSettingsUser.validate(angular.element(document.querySelector("#first_nm")).val());
+            $scope.val_last_nm = !validateSettingsUser.validate(angular.element(document.querySelector("#last_nm")).val());
+            $scope.val_email = !validateSettingsUser.validate(angular.element(document.querySelector("#email")).val(), /^([a-zA-Z0-9_-]+\.)*[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*\.[a-zA-Z]{2,6}$/);
+            if ($scope.val_first_nm || $scope.val_last_nm || $scope.val_email) {
+                //angular.element(document.querySelector("#submitPlatformManager")).submit();
+            } else {
+                angular.element('#submitPlatformManager').click();
+            }
+        } 
+    }
+}());
+
+(function () {
+
+    'use strict';
+
+    angular.module('EC')
+        .factory('validateSettingsUser', function ($http, $q) {
+            return {
+                validate: function (value, rv) {
+                    if (rv === undefined) {
+                        if ((value === null) || (value === undefined) || (value.trim() === '')) {
+                            return false;
+                        }
+                    } else {
+                        if (value === null || value.trim() === '' || !rv.test(value.trim())) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            }
+        });
+}());
+
+(function () {
+
+    'use strict';
+
+    angular
+        .module('EC')
+        .controller('SettingsUserEditController',
+        ['$scope', '$filter', '$location', 'SettingsUserEditService', 'validateSettingsUser', SettingsUserEditController]);
+
+    function SettingsUserEditController($scope, $filter, $location, SettingsUserEditService, validateSettingsUser) {
         $scope.first_nm = '';
         $scope.last_nm = '';
         $scope.title_ds = '';
@@ -1753,34 +1804,20 @@
             $scope.photo_path = data.model.photo_path;
             $scope.canEditUserProfiles = data.user.CanEditUserProfiles;
         });
-
-        $scope.validate = function (value, rv) {
-            if (rv === undefined) {
-                if ((value === null) || (value === undefined) || (value.trim() === '')) {
-                    return false;
-                }
-            } else {
-                if ( value === null || value.trim() === '' || !rv.test(value.trim())) {
-                    return false;
-                }
-            }
-            return true;
-        };
-
         $scope.post = function () {
-            $scope.val_first_nm = !$scope.validate($scope.first_nm);
-            $scope.val_last_nm = !$scope.validate($scope.last_nm);
-            $scope.val_title_ds = !$scope.validate($scope.title_ds);
-            $scope.val_email = !$scope.validate($scope.email, /^([a-zA-Z0-9_-]+\.)*[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*\.[a-zA-Z]{2,6}$/);
-            $scope.val_departmentId = $scope.departmentId == null || !$scope.validate($scope.departmentId.toString());
-            $scope.val_locationId = $scope.locationId == null || !$scope.validate($scope.locationId.toString());
+            $scope.val_first_nm = !validateSettingsUser.validate($scope.first_nm);
+            $scope.val_last_nm = !validateSettingsUser.validate($scope.last_nm);
+            //$scope.val_title_ds = !$scope.validate($scope.title_ds);
+            $scope.val_email = !validateSettingsUser.validate($scope.email, /^([a-zA-Z0-9_-]+\.)*[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*\.[a-zA-Z]{2,6}$/);
+            //$scope.val_departmentId = $scope.departmentId == null || !$scope.validate($scope.departmentId.toString());
+            //$scope.val_locationId = $scope.locationId == null || !$scope.validate($scope.locationId.toString());
 
             if (!$scope.val_first_nm
                 && !$scope.val_last_nm
-                && !$scope.val_title_ds
+                //&& !$scope.val_title_ds
                 && !$scope.val_email
-                && !$scope.val_departmentId
-                && !$scope.val_locationId
+                //&& !$scope.val_departmentId
+                //&& !$scope.val_locationId
                 ) {
 
                 var model = {

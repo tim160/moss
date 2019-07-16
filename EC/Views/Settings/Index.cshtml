@@ -42,6 +42,11 @@
     }
     String class_ext = ViewBag.cc_extension;
 }
+<style>
+    .error {
+        border: 2px solid red !important;
+    }
+</style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 <a href="#alertModalFileSize" style="display: none" id="openModalForFileSize" rel="modal:open">Open Modal</a>
@@ -54,7 +59,7 @@
         <a href="#" id="ok" rel="modal:close" class="case-modal__linkBtn whiteBtn">Ok</a>
     </div><!-- /.case-modal__linkBlockBottom -->
 </div>
-<div class="blockSettings">
+<div class="blockSettings" ng-controller="PlatformManagerSettingsController">
     <!--casesHeared-->
     @{
         int active = 1;
@@ -80,11 +85,11 @@
             </div>
 
             <div class="personalBlock">
-                <div class="blockPersonalSettings greyBorder">
+                <div class="blockPersonalSettings greyBorder" ng-class="{error: val_first_nm }">
                     <p class="title">@LocalizationGetter.GetString("Firstname")</p>
                     @Html.EditorFor(model => model.first_nm, new { first_nm = "first_nm" })
                 </div>
-                <div class="blockPersonalSettings greyBorder">
+                <div class="blockPersonalSettings greyBorder" ng-class="{error: val_last_nm }">
                     <p class="title">@LocalizationGetter.GetString("Lastname")</p>
                     @Html.EditorFor(model => model.last_nm, new { last_nm = "last_nm" })
                 </div>
@@ -100,7 +105,7 @@
                     <p class="title">@LocalizationGetter.GetString("Location")</p>
                     @Html.DropDownListFor(model => Model.company_location_id, new SelectList(cm.Locations(um._user.company_id, 2), "id", "location_en"), "", new { @class = "selectStyled" })
                 </div>
-                <div class="blockPersonalSettings greyBorder">
+                <div class="blockPersonalSettings greyBorder"ng-class="{error: val_email }">
                     <p class="title">@LocalizationGetter.GetString("Email")</p>
                     @Html.TextBoxFor(model => model.email, new { email = "email" })
                 </div>
@@ -223,8 +228,8 @@
                 }
                 <div class="blockUpdateProfile">
                     <div class="updateProfileBtn">
-                        <input class="greenButton" type="submit" value="update" />
-                        <span style="display: none;">@LocalizationGetter.GetString("UpdateProfile").ToLower()</span>
+                        <input style="display:none" id="submitPlatformManager" class="greenButton" type="submit" value="update" />
+                        <span ng-click="update()">@LocalizationGetter.GetString("update").ToLower()</span>
                     </div>
                 </div>
             </div>
