@@ -321,7 +321,10 @@ namespace EC.COM.Controllers
                 varinfo.Last_nm,
                 Request.Url.AbsoluteUri.ToLower(),
                 $"{Request.Url.Scheme}://{Request.Url.Host}{(Request.Url.Port == 80 ? "" : ":" + Request.Url.Port.ToString())}/Book/CompanyRegistrationVideo?emailedcode={varinfo.Emailed_code_to_customer}&invitationcode=VAR&quickview={model.QuickView}",
-                $"{System.Configuration.ConfigurationManager.AppSettings["MainSite"]}new/registration/{varinfo.Emailed_code_to_customer}"
+                $"{System.Configuration.ConfigurationManager.AppSettings["MainSite"]}new/registration/{varinfo.Emailed_code_to_customer}",
+                varinfo.Year.ToString(),
+                varinfo.Total_price.ToString()
+
                 );
             string body = eb.Body;
 
@@ -532,7 +535,12 @@ namespace EC.COM.Controllers
                 orderViewModel.VarInfo.Last_nm,
                 Request.Url.AbsoluteUri.ToLower(),
                 $"{Request.Url.Scheme}://{Request.Url.Host}{(Request.Url.Port == 80 ? "" : ":" + Request.Url.Port.ToString())}/Video/Index",
-                $"{Request.Url.Scheme}://{Request.Url.Host}{(Request.Url.Port == 80 ? "" : ":" + Request.Url.Port.ToString())}/Book/CompanyRegistrationVideo?emailedcode={orderViewModel.VarInfo.Emailed_code_to_customer}&invitationcode=VAR&quickview={quickView}");
+                $"{Request.Url.Scheme}://{Request.Url.Host}{(Request.Url.Port == 80 ? "" : ":" + Request.Url.Port.ToString())}/Book/CompanyRegistrationVideo?emailedcode={orderViewModel.VarInfo.Emailed_code_to_customer}&invitationcode=VAR&quickview={quickView}",
+                orderViewModel.VarInfo.Year.ToString(),
+                orderViewModel.VarInfo.Total_price.ToString()
+
+
+                );
  
 
             ////            em.Send(to, cc, "Employee Confidential Registration", body, true);

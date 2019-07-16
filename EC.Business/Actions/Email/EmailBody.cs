@@ -363,10 +363,7 @@ namespace EC.Business.Actions.Email
 
         }
 
-        public void OrderConfirmation_Email(object emailed_code_to_customer, object p1, object last_nm1, object p2, object p3, object p4, object last_nm2, object company_nm, object nameOnCard, object last_nm3, string v1, string v2, string v3)
-        {
-            throw new NotImplementedException();
-        }
+ 
 
         public void NewCase(string first, string last, string case_number)
         {
