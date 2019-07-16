@@ -1760,7 +1760,7 @@
                     return false;
                 }
             } else {
-                if (value.trim() === '' || !rv.test(value.trim())) {
+                if ( value === null || value.trim() === '' || !rv.test(value.trim())) {
                     return false;
                 }
             }
