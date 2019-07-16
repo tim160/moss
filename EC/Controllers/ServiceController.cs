@@ -472,6 +472,50 @@ namespace EC.Controllers
             db.SaveChanges();
           }
         }
+
+        // we want to send emails in case user did not bought the license during 24 hours
+        var unfinished_var = db.var_info.Where(x => x.is_registered == false && x.created_dt.AddHours(25) < DateTime.Now && x.User24HNotified != true).ToList();
+
+        foreach (var var_info in unfinished_var)
+        {
+          if (var_info.invitation_code != null)
+          {
+            // means user is 
+            var company_invitation = db.company_invitation.Where(t => t.invitation_code == var_info.invitation_code).FirstOrDefault();
+            if (company_invitation != null)
+            {
+              /// need to add partner_id and replace company_id with it. 
+              var partner = db.partner.Where(t => t.id == company_invitation.created_by_company_id).FirstOrDefault();
+              if (partner != null)
+              {
+               /* EC.Business.Actions.Email.EmailBody eb_partner = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+                eb_partner.GetConfirmationTextPartner(
+
+                       String.IsNullOrEmpty(orderViewModel.VarInfo.First_nm) && String.IsNullOrEmpty(orderViewModel.VarInfo.Last_nm) ? "Customer" : orderViewModel.VarInfo.First_nm,
+                       orderViewModel.VarInfo.Last_nm,
+                       orderViewModel.VarInfo.Annual_plan_price.ToString(),
+                       orderViewModel.VarInfo.Onboarding_price.ToString(),
+                       (orderViewModel.VarInfo.Registered_dt.Value.AddYears(orderViewModel.VarInfo.Year)).ToString("MMMM dd, yyyy", new CultureInfo("en-US")),
+                       company_payment.local_invoice_number,
+                       orderViewModel.VarInfo.Company_nm,
+                        invitationCode
+                       );
+
+
+                glb.SaveEmailBeforeSend(2, 2, 2, partner.email.Trim(), "employeeconfidential@employeeconfidential.com", null, "Order Confirmation from Employee Confidential: #" + company_payment.local_invoice_number, eb_partner.Body, false, 77);
+                */
+              }
+
+            }
+
+            }
+
+
+
+        }
+
+
+
       }
 
 

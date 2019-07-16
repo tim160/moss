@@ -209,6 +209,8 @@
     <Content Include="Content\css\fontello.css" />
     <Content Include="Content\emails\BookingECOnboardingSessionNotifications.html" />
     <Content Include="Content\emails\EC.COM.VAR.html" />
+    <Content Include="Content\emails\OrderConfirmationEmployeeConfidential.html" />
+    <Content Include="Content\emails\OrderConfirmationEmployeeConfidentialFrom.html" />
     <Content Include="Content\emails\OrderConfirmation_Email.html" />
     <Content Include="Content\emails\ReminderTrainingTimeslotBooked.html" />
     <Content Include="Content\emails\TrainingTimeslotBooked.html" />
