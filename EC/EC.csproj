@@ -1233,6 +1233,7 @@
     <Content Include="Scripts\View\newQuote.js" />
     <Content Include="Scripts\View\report.js" />
     <Content Include="Scripts\View\reportSummary.js" />
+    <Content Include="Scripts\View\ServiceReport.js" />
     <Content Include="Scripts\View\Settings.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />
     <Content Include="Scripts\WebForms\Focus.js" />
