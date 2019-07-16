@@ -357,7 +357,9 @@ namespace EC.COM.Controllers
                  (varinfo.Registered_dt.Value.AddYears(varinfo.Year)).ToString("MMMM dd, yyyy", new CultureInfo("en-US")),
                  local_inv_num,
                  varinfo.Company_nm,
-                  invitationCode
+                  invitationCode,
+                  varinfo.Year.ToString(),
+                  varinfo.Total_price.ToString()
                  );
 
  
@@ -380,7 +382,9 @@ namespace EC.COM.Controllers
                (varinfo.Registered_dt.Value.AddYears(varinfo.Year)).ToString("MMMM dd, yyyy", new CultureInfo("en-US")),
                local_inv_num,
                varinfo.Company_nm,
-                invitationCode
+                invitationCode,
+               varinfo.Year.ToString(),
+               varinfo.Total_price.ToString()
                );
 
  
@@ -557,7 +561,9 @@ namespace EC.COM.Controllers
                  (orderViewModel.VarInfo.Registered_dt.Value.AddYears(orderViewModel.VarInfo.Year)).ToString("MMMM dd, yyyy", new CultureInfo("en-US")),
                  company_payment.local_invoice_number,
                  orderViewModel.VarInfo.Company_nm,
-                  invitationCode
+                  invitationCode,
+                  orderViewModel.VarInfo.Year.ToString(),
+                  orderViewModel.VarInfo.Total_price.ToString()
                  );
 
  
@@ -579,7 +585,9 @@ namespace EC.COM.Controllers
                (orderViewModel.VarInfo.Registered_dt.Value.AddYears(orderViewModel.VarInfo.Year)).ToString("MMMM dd, yyyy", new CultureInfo("en-US")),
                company_payment.local_invoice_number,
                orderViewModel.VarInfo.Company_nm,
-                invitationCode
+                invitationCode,
+                  orderViewModel.VarInfo.Year.ToString(),
+                  orderViewModel.VarInfo.Total_price.ToString()
                );
 
  
