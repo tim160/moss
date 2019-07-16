@@ -644,7 +644,7 @@ namespace EC.Business.Actions.Email
             string CCSurname,
             string url,
             string link,
-            string linkReg)
+            string linkReg, string year, string totalAmount)
         {
             GetBody(67);
 
@@ -681,6 +681,8 @@ namespace EC.Business.Actions.Email
             {
                 m_body = m_body.Replace("@@sCCName", "none");
             }
+            m_body = m_body.Replace("@@year", year);
+            m_body = m_body.Replace("@@TotalAmount", totalAmount);
         }
 
         public void UserNotCompleteRegistration_Email(Func<string, string> prepareBody)
@@ -747,7 +749,7 @@ namespace EC.Business.Actions.Email
             string exparationDate,
             string orderNumber,
             string companyName,
-            string partnerCode
+            string partnerCode, string year, string totalAmount
           )
     {
       //OrderConfirmationEmployeeConfidential 
@@ -762,6 +764,8 @@ namespace EC.Business.Actions.Email
       m_body = m_body.Replace("@@ExpirationDate", exparationDate);  
       m_body = m_body.Replace("@@CompanyName", companyName);
       m_body = m_body.Replace("@@CodeUsed", partnerCode);
+      m_body = m_body.Replace("@@year", year);
+      m_body = m_body.Replace("@@TotalAmount", totalAmount);
     }
     public void GetConfirmationTextEC(
             string name,
@@ -771,7 +775,7 @@ namespace EC.Business.Actions.Email
             string exparationDate,
             string orderNumber,
             string companyName,
-            string partnerCode)
+            string partnerCode, string year, string totalAmount)
     {
       //OrderConfirmationEmployeeConfidentialfrom
       GetBody(78);
@@ -785,7 +789,8 @@ namespace EC.Business.Actions.Email
       m_body = m_body.Replace("@@ExpirationDate", exparationDate);
       m_body = m_body.Replace("@@CompanyName", companyName);
       m_body = m_body.Replace("@@CodeUsed", partnerCode);
-
+      m_body = m_body.Replace("@@year", year);
+      m_body = m_body.Replace("@@TotalAmount", totalAmount);
 
 
     }
