@@ -78,6 +78,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.en-US.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources.es-ES.cs" />
     <Compile Include="Resources.es-MX.Designer.cs" />
     <Compile Include="Resources.fr.Designer.cs" />
     <Compile Include="Resources.ru.Designer.cs" />
@@ -109,6 +110,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.en-US1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources.es-ES.resx" />
     <EmbeddedResource Include="Resources.es-MX.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>

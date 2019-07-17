@@ -132,7 +132,7 @@ namespace EC.Controllers.API
                 user.email = model.email.Trim();
                 user.phone = "";
                 user.preferred_contact_method_id = 1;
-                user.title_ds = model.title_ds.Trim();
+                user.title_ds = model.title_ds?.Trim();
                 user.employee_no = "";
                 user.company_department_id = model.company_department_id;
                 user.question_ds = "";

@@ -80,7 +80,7 @@
                             <div class="inputCheckbox__indicator"></div>
                         </label>
                         <div class="loginTextFormLinks">
-                            <a href="@Url.Action("New", "Report", new { companyCode = ViewBag.CID })" id="btnStart" class="btn loginTextFormLinks__startBtn m_t_20 not-active">
+                            <a href="@Url.Action("New", "Report", new { companyCode = Model._company.company_code })" id="btnStart" class="btn loginTextFormLinks__startBtn m_t_20 not-active">
                                 Start
                             </a>
                         </div><!-- /.loginTextFormLinks -->

@@ -12,6 +12,7 @@ using System.Web.Mvc;
 using EC.Business.Actions;
 using EC.Utils;
 using System.Globalization;
+using System.Threading;
 
 namespace EC.Controllers
 {
@@ -25,7 +26,7 @@ namespace EC.Controllers
         }
 
         private readonly UserModel userModel = new UserModel();
-
+        private const string DEFAULT_LANGUAGE = "en-US";
         // GET: Service
         public ActionResult Login(string host_url)
         {
@@ -124,23 +125,47 @@ namespace EC.Controllers
 
         public ActionResult Report()
         {
+            ViewBag.DEFAULT_LANGUAGE = DEFAULT_LANGUAGE;
             return View($"Report{(is_cc ? "-CC" : "")}");
         }
 
-        public ActionResult Disclaimer(string id, string companyCode, string lang = "en-us")
+        public ActionResult Disclaimer(string id, string companyCode, string lang = DEFAULT_LANGUAGE)
         {
-            Session["lang"] = lang;
-            if (String.IsNullOrEmpty(id))
-            {
-                return RedirectToAction("Disclaimer", new { id = companyCode });
-            }
-            var c = db.company.FirstOrDefault(x => x.company_code == id);
-            if (c == null)
+            this.SetSelectedCulture(lang);
+            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(lang);
+
+            var selectedCompany = GetCompanyModel(id, companyCode);
+            if (selectedCompany == null)
             {
                 return RedirectToAction("Index", "Index");
             }
-            ViewBag.CID = id;
-            return View($"Disclaimer{(is_cc ? "-CC" : "")}", new CompanyModel(c.id));
+            return View($"Disclaimer{(is_cc ? "-CC" : "")}", selectedCompany);
+        }
+
+        private void SetSelectedCulture(string lang)
+        {
+            try
+            {
+                Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(lang);
+            } catch(Exception)
+            {
+                Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(DEFAULT_LANGUAGE);
+            }
+        }
+        private CompanyModel GetCompanyModel(string id, string companyCode)
+        {
+            var selectedCompanyModel = new CompanyModel();
+
+            if (String.IsNullOrEmpty(id))
+            {
+                selectedCompanyModel.ID = selectedCompanyModel.GetCompanyByCode(companyCode);
+            }
+            else
+            {
+                selectedCompanyModel.ID = selectedCompanyModel.GetCompanyByCode(id);
+            }
+
+            return selectedCompanyModel;
         }
 
         public ActionResult CheckStatus()
