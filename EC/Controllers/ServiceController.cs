@@ -12,6 +12,7 @@ using System.Web.Mvc;
 using EC.Business.Actions;
 using EC.Utils;
 using System.Globalization;
+using EC.Business.Actions.Email;
 
 namespace EC.Controllers
 {
@@ -475,7 +476,9 @@ namespace EC.Controllers
         }
 
         // we want to send emails in case user did not bought the license during 24 hours
-        var unfinished_var = db.var_info.Where(x => x.is_registered == false && x.created_dt.AddHours(25) < DateTime.Now && x.User24HNotified != true).ToList();
+        #region 3 Hours Notification
+        var fourHours = DateTime.Now.AddHours(-4);
+        var unfinished_var = db.var_info.Where(x => x.is_registered == false && x.created_dt < fourHours && x.SalesNotified != true).ToList();
 
         foreach (var var_info in unfinished_var)
         {
@@ -489,33 +492,146 @@ namespace EC.Controllers
               var partner = db.partner.Where(t => t.id == company_invitation.created_by_company_id).FirstOrDefault();
               if (partner != null)
               {
-               /* EC.Business.Actions.Email.EmailBody eb_partner = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
-                eb_partner.GetConfirmationTextPartner(
+                EmailBody eb_partner = new EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+                eb_partner.VarAfter4HoursAfterSignUp((body) =>
+                {
+                  body = body.Replace("[Referral Partner Name]", partner.first_nm + " " + partner.last_nm);
+                  body = body.Replace("[Referenced Code]", var_info.invitation_code);
+                  body = body.Replace("[First Name]", var_info.first_nm);
+                  body = body.Replace("[Last Name]", var_info.last_nm);
+                  body = body.Replace("[Company Name]", var_info.company_nm);
+                  body = body.Replace("[Phone]", var_info.phone);
+                  body = body.Replace("[Email]", var_info.email);
+                  body = body.Replace("[Number of Employees]", $"{var_info.employee_no}");
 
-                       String.IsNullOrEmpty(orderViewModel.VarInfo.First_nm) && String.IsNullOrEmpty(orderViewModel.VarInfo.Last_nm) ? "Customer" : orderViewModel.VarInfo.First_nm,
-                       orderViewModel.VarInfo.Last_nm,
-                       orderViewModel.VarInfo.Annual_plan_price.ToString(),
-                       orderViewModel.VarInfo.Onboarding_price.ToString(),
-                       (orderViewModel.VarInfo.Registered_dt.Value.AddYears(orderViewModel.VarInfo.Year)).ToString("MMMM dd, yyyy", new CultureInfo("en-US")),
-                       company_payment.local_invoice_number,
-                       orderViewModel.VarInfo.Company_nm,
-                        invitationCode
-                       );
+                  return body;
+                });
+                glb.SaveEmailBeforeSend(2, 2, 2, partner.email, "employeeconfidential@employeeconfidential.com", null, "Employee Confidential prospect follow-up needed", eb_partner.Body, false, 69);
+              }
+
+              var partnerEC = db.partner.Where(t => t.partner_code == "EC").FirstOrDefault();
+              if (partnerEC != null)
+              {
+                EmailBody eb_EC = new EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+                eb_EC.VarAfter4HoursAfterSignUpToSales((body) =>
+                {
+                  body = body.Replace("[First Name]", var_info.first_nm);
+                  body = body.Replace("[Last Name]", var_info.last_nm);
+                  body = body.Replace("[Company Name]", var_info.company_nm);
+                  body = body.Replace("[Phone]", var_info.phone);
+                  body = body.Replace("[Email]", var_info.email);
+                  body = body.Replace("[Number of Employees]", $"{var_info.employee_no}");
+                  body = body.Replace("[Referral Partner Code]", var_info.invitation_code);
+                  body = body.Replace("[Referral Partner Names]", partner.first_nm + " " + partner.last_nm);
+                  return body;
+                });
+                glb.SaveEmailBeforeSend(2, 2, 2, partnerEC.email.Trim(), "employeeconfidential@employeeconfidential.com", null, "Employee Confidential prospect follow-up", eb_EC.Body, false, 72);
+              }
+              var_info.SalesNotified = true;
+              db.SaveChanges();
+
+            }
+          }
+        }
+        #endregion
+
+        #region 24 Hours Notification
+        var twentyfourHours = DateTime.Now.AddHours(-25);
+        var unfinished24_var = db.var_info.Where(x => x.is_registered == false && x.created_dt < twentyfourHours && x.User24HNotified != true).ToList();
+
+        foreach (var var_info in unfinished24_var)
+        {
+          if (var_info.invitation_code != null)
+          {
+            // means user is 
+            var company_invitation = db.company_invitation.Where(t => t.invitation_code == var_info.invitation_code).FirstOrDefault();
+            if (company_invitation != null)
+            {
+              /// need to add partner_id and replace company_id with it. 
+              var partner = db.partner.Where(t => t.id == company_invitation.created_by_company_id).FirstOrDefault();
+
+              if (partner == null)
+                partner = db.partner.Where(t => t.partner_code == "EC").FirstOrDefault();
+              if (partner != null)
+              {
+                EmailBody eb_partner = new EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+                var data = $"{var_info.first_nm}|{var_info.last_nm}|{var_info.company_nm}|{var_info.phone}|{var_info.email}|{var_info.employee_no}|{var_info.invitation_code}|{0}";
+
+                string url = "https://employeeconfidential.com/video/" + Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(data));
 
 
-                glb.SaveEmailBeforeSend(2, 2, 2, partner.email.Trim(), "employeeconfidential@employeeconfidential.com", null, "Order Confirmation from Employee Confidential: #" + company_payment.local_invoice_number, eb_partner.Body, false, 77);
-                */
+                eb_partner.VarAfter24HoursAfterSignUpToUser((body) =>
+                {
+                  body = body.Replace("[Prospect First Name]", var_info.first_nm);
+                  body = body.Replace("[Phone]", partner.phone);
+                  body = body.Replace("[Email]", partner.email);
+                  body = body.Replace("[Referral Partner Company Name]", partner.partner_name);
+                  body = body.Replace("[Referral Partner contact name]", partner.first_nm + " " + partner.last_nm);
+                  body = body.Replace("[CaseUrl]", url);
+
+                  
+                  return body;
+                });
+                glb.SaveEmailBeforeSend(2, 2, 2, var_info.email, "employeeconfidential@employeeconfidential.com", null, "Employee Confidential follow-up", eb_partner.Body, false, 70);
               }
 
             }
+            var_info.User24HNotified = true;
+            db.SaveChanges();
 
-            }
-
-
-
+          }
         }
 
+        #endregion
 
+        #region 3 weeks Notification
+        var days21 = DateTime.Now.AddDays(-21);
+        var unfinished21_var = db.var_info.Where(x => x.is_registered == false && x.created_dt < days21 && x.User3WNotified != true).ToList();
+
+        foreach (var var_info in unfinished21_var)
+        {
+          if (var_info.invitation_code != null)
+          {
+            // means user is 
+            var company_invitation = db.company_invitation.Where(t => t.invitation_code == var_info.invitation_code).FirstOrDefault();
+            if (company_invitation != null)
+            {
+              /// need to add partner_id and replace company_id with it. 
+              var partner = db.partner.Where(t => t.id == company_invitation.created_by_company_id).FirstOrDefault();
+
+              if (partner == null)
+                partner = db.partner.Where(t => t.partner_code == "EC").FirstOrDefault();
+              if (partner != null)
+              {
+                EmailBody eb_partner = new EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+                var data = $"{var_info.first_nm}|{var_info.last_nm}|{var_info.company_nm}|{var_info.phone}|{var_info.email}|{var_info.employee_no}|{var_info.invitation_code}|{0}";
+
+                string url = "https://employeeconfidential.com/video/" + Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(data));
+
+
+                eb_partner.VarAfter3WeekAfterSignUpToUser((body) =>
+                {
+                  body = body.Replace("[Prospect First Name]", var_info.first_nm);
+                  body = body.Replace("[Phone]", partner.phone);
+                  body = body.Replace("[Email]", partner.email);
+                  body = body.Replace("[Referral Partner Company Name]", partner.partner_name);
+                  body = body.Replace("[Referral Partner contact name]", partner.first_nm + " " + partner.last_nm);
+                  body = body.Replace("[CaseUrl]", url);
+
+
+                  return body;
+                });
+                glb.SaveEmailBeforeSend(2, 2, 2, var_info.email, "employeeconfidential@employeeconfidential.com", null, "Employee Confidential follow-up", eb_partner.Body, false, 71);
+              }
+
+            }
+            var_info.User3WNotified = true;
+            db.SaveChanges();
+
+          }
+        }
+
+        #endregion
 
       }
 
