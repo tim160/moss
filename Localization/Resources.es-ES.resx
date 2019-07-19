@@ -520,7 +520,7 @@
     <value>Company Case Administrator Settings</value>
   </data>
   <data name="Companyname" xml:space="preserve">
-    <value>Company name</value>
+    <value>Nombre de la Compañía</value>
   </data>
   <data name="CompanyNameUp" xml:space="preserve">
     <value>Company Name</value>
@@ -1841,7 +1841,7 @@
     <value>Spam Cases</value>
   </data>
   <data name="Start" xml:space="preserve">
-    <value>Start</value>
+    <value>Comenzar</value>
   </data>
   <data name="Started" xml:space="preserve">
     <value>Started</value>
@@ -2707,5 +2707,26 @@
   </data>
   <data name="BookingECOnboardingSessionNotifications" xml:space="preserve">
     <value>Order Confirmation from Employee Confidential</value>
+  </data>
+  <data name="AlreadyFiledReport" xml:space="preserve">
+    <value>¿Ya presentó un reporte?</value>
+  </data>
+  <data name="CheckReportStatus" xml:space="preserve">
+    <value>Revise el estatus de la denuncia</value>
+  </data>
+  <data name="ClientLogin" xml:space="preserve">
+    <value>Acceso del cliente</value>
+  </data>
+  <data name="FileAReport" xml:space="preserve">
+    <value>PRESENTE UNA DENUNCIA</value>
+  </data>
+  <data name="HELP" xml:space="preserve">
+    <value>AYUDA</value>
+  </data>
+  <data name="PlatformMakesEasyReport" xml:space="preserve">
+    <value>Lugar de trabajo, problemas como acoso sexual, condiciones inseguras, preocupaciones fincancieras y de auditoria, robo, soborno, abuso de sustancia, etc.</value>
+  </data>
+  <data name="YourCompanyBelowGetStarted" xml:space="preserve">
+    <value>Encuentra tu compañía debajo para comenzar con su denuncia y le haremos algunas preguntas acerca del incidente.</value>
   </data>
 </root>
