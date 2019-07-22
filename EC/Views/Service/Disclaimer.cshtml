@@ -1,8 +1,9 @@
 ﻿@model EC.Models.CompanyModel
-
+@using LocalizationGetter = EC.Localization.LocalizationGetter;
 @{
     ViewBag.Title = "Employee Confidential";
     Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
+    bool is_cc = false;
 }
 
 <style>
@@ -31,13 +32,13 @@
                         <nav class="top-header__loginBar-nav">
                             <li class="top-header__loginBar-li">
                                 <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Login" class="top-header__loginBar-a">
-                                    Client Login
+                                    @LocalizationGetter.GetString("ClientLogin", is_cc);
                                 </a>
                             </li><!-- /.top-header__loginBar-li -->
 
                             <li class="top-header__loginBar-li">
                                 <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/CheckStatus" class="top-header__loginBar-a">
-                                    Check Report Status
+                                    @LocalizationGetter.GetString("CheckReportStatus", is_cc);
                                 </a>
                             </li><!-- /.top-header__loginBar-li -->
                         </nav><!-- /.top-header__loginBar-nav -->
@@ -56,7 +57,7 @@
                         <img class="loginSection__logoImg" src="@Model.getLogoCompany(Model.ID)" alt="">
                     </a>
                     <div class="loginSection__title loginSection__titleWithLlogo">
-                        File a report
+                        @LocalizationGetter.GetString("FileAReport", is_cc)
                     </div><!-- /.loginSection__title -->
                 </div><!-- /.container -->
             </div><!-- /.loginSection__titleBg -->
@@ -64,10 +65,11 @@
                 <div class="container loginSection__container">
                     <div class="loginContentBlock">
                         <p class="loginContentBlock__textP">
-                            This platform makes it easy to report an incident about
+                            @LocalizationGetter.GetString("PlatformMakesEasyReport", is_cc)
+                            @*This platform makes it easy to report an incident about
                             workplace issues like sexual harassment, unsafe conditions,
                             financial and auditing concerns, theft, bribery, substance
-                            abuse etc.
+                            abuse etc.*@
                         </p><!-- /.loginContentBlock__textP -->
                         <p class="loginContentBlock__textP">
 
@@ -80,8 +82,8 @@
                             <div class="inputCheckbox__indicator"></div>
                         </label>
                         <div class="loginTextFormLinks">
-                            <a href="@Url.Action("New", "Report", new { companyCode = ViewBag.CID })" id="btnStart" class="btn loginTextFormLinks__startBtn m_t_20 not-active">
-                                Start
+                            <a href="@Url.Action("New", "Report", new { companyCode = Model._company.company_code })" id="btnStart" class="btn loginTextFormLinks__startBtn m_t_20 not-active">
+                                @LocalizationGetter.GetString("Start", is_cc)
                             </a>
                         </div><!-- /.loginTextFormLinks -->
                     </div><!-- /.loginTextForm -->

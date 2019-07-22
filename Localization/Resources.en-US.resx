@@ -2708,4 +2708,180 @@
   <data name="BookingECOnboardingSessionNotifications" xml:space="preserve">
     <value>Order Confirmation from Employee Confidential</value>
   </data>
+  <data name="AlreadyFiledReport" xml:space="preserve">
+    <value>Already filed a report?</value>
+  </data>
+  <data name="AnonymousToMicrosoft" xml:space="preserve">
+    <value>Anonymous to Microsoft</value>
+  </data>
+  <data name="CheckReportStatus" xml:space="preserve">
+    <value>Check Report Status</value>
+  </data>
+  <data name="CheckStatusOfReport" xml:space="preserve">
+    <value>You can check the status of your report using the login provided and password created when you submitted your report.</value>
+  </data>
+  <data name="ChooseConfidentialLevel" xml:space="preserve">
+    <value>Choose confidentiality level:</value>
+  </data>
+  <data name="CompletelyAnonymous" xml:space="preserve">
+    <value>Completely Anonymous</value>
+  </data>
+  <data name="ComplianceCurrentNationalLegislation" xml:space="preserve">
+    <value>In compliance with the current national legislation, anonymous reports are allowed.</value>
+  </data>
+  <data name="DifferentCountriesDifferentRegulations" xml:space="preserve">
+    <value>Different countries have different regulations about anonymity reporting. Please select your country to know the regulations.</value>
+  </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>Email Address</value>
+  </data>
+  <data name="EmailSentWithPass" xml:space="preserve">
+    <value>Email with updated password sent</value>
+  </data>
+  <data name="EnterEmail" xml:space="preserve">
+    <value>Enter your email</value>
+  </data>
+  <data name="FileAReport" xml:space="preserve">
+    <value>FILE A REPORT</value>
+  </data>
+  <data name="HELP" xml:space="preserve">
+    <value>HELP</value>
+  </data>
+  <data name="PlatformMakesEasyReport" xml:space="preserve">
+    <value>This platform makes it easy to report an incident about workplace issues like sexual harassment, unsafe conditions, financial and auditing concerns, theft, bribery, substance abuse etc.</value>
+  </data>
+  <data name="ReadAndAgreeCompanyPolicies" xml:space="preserve">
+    <value>I have read and agree with company policies</value>
+  </data>
+  <data name="SelectLocation" xml:space="preserve">
+    <value>Select Location</value>
+  </data>
+  <data name="ShareNameContactInfo" xml:space="preserve">
+    <value>Share Name &amp; Contact Info</value>
+  </data>
+  <data name="ShareNameEmailMicrosoft" xml:space="preserve">
+    <value>We will share your name and email address with Microsoft.</value>
+  </data>
+  <data name="SuggestCheckStatusReport" xml:space="preserve">
+    <value>We suggest that you check on status of your report on a regular basis. You can keep messaging with the Company Case Administrators in a safe and confidential manner.</value>
+  </data>
+  <data name="WantFileNewReport" xml:space="preserve">
+    <value>Want to file a new report?</value>
+  </data>
+  <data name="WouldYouToStay" xml:space="preserve">
+    <value>Would You Like To Stay</value>
+  </data>
+  <data name="YourCompanyBelowGetStarted" xml:space="preserve">
+    <value>Encuentra tu compañía debajo para comenzar con su denuncia y le haremos algunas preguntas acerca del incidente.</value>
+  </data>
+  <data name="YourIdentityNotKnownOrganization" xml:space="preserve">
+    <value>Your identity will not be known to your organization or to Employee Confidential.</value>
+  </data>
+  <data name="YourIdentityNotKnownOrganizationOnlyEC" xml:space="preserve">
+    <value>Your identity will NOT be known to your organization. Only Employee Confidential will know your name and will contact you if required.</value>
+  </data>
+  <data name="AddAnotherPerson" xml:space="preserve">
+    <value>Add Another Person</value>
+  </data>
+  <data name="AllegedOffender" xml:space="preserve">
+    <value>Alleged Offender</value>
+  </data>
+  <data name="CaseAdministrationTeam" xml:space="preserve">
+    <value>Case Administration team</value>
+  </data>
+  <data name="CaseAdministrators" xml:space="preserve">
+    <value>Case Administrators</value>
+  </data>
+  <data name="DateIncident" xml:space="preserve">
+    <value>Date of incident (or when you first became aware of it)</value>
+  </data>
+  <data name="DescribeWhatHappened" xml:space="preserve">
+    <value>Please describe what happened. Be as specific as possible.</value>
+  </data>
+  <data name="ERRORTheFileUploaded" xml:space="preserve">
+    <value>ERROR! The file uploaded exceeds the 4MB maximum limit.</value>
+  </data>
+  <data name="IncidentBeenReportedAnyoneOutside" xml:space="preserve">
+    <value>incident been reported to anyone outside</value>
+  </data>
+  <data name="IncidentLifeThreatening" xml:space="preserve">
+    <value>IF THIS INCIDENT IS LIFE THREATENING, CONTACT YOUR LOCAL POLICE.</value>
+  </data>
+  <data name="IncidentOngoing" xml:space="preserve">
+    <value>Is the incident ongoing?</value>
+  </data>
+  <data name="LeaveReportingPage" xml:space="preserve">
+    <value>WARNING.You are about to leave the reporting page. If you have not saved your Login and Password information, then please select Cancel so you record them. If you have saved your Login and Password, you can leave the reporting page</value>
+  </data>
+  <data name="LocationIncident" xml:space="preserve">
+    <value>Location of incident</value>
+  </data>
+  <data name="ManagamentKnow" xml:space="preserve">
+    <value>Does management know about this incident?</value>
+  </data>
+  <data name="Myself" xml:space="preserve">
+    <value>Myself</value>
+  </data>
+  <data name="NamesOfWitness" xml:space="preserve">
+    <value>Names Of Witnesses</value>
+  </data>
+  <data name="NamesOfWitnessInvolvedIncident" xml:space="preserve">
+    <value>Name(s) of witness(es) or people involved in the incident</value>
+  </data>
+  <data name="NoteLoginInformation" xml:space="preserve">
+    <value>Please take note of your login information NOW. Write it down somewhere safe (or enter it into your password protected smartphone) so that you can access it later to check the status of your report.</value>
+  </data>
+  <data name="NotSure" xml:space="preserve">
+    <value>Not Sure</value>
+  </data>
+  <data name="NotWantInvolve" xml:space="preserve">
+    <value>
+Do not want to involve</value>
+  </data>
+  <data name="OpenModal" xml:space="preserve">
+    <value>Open Modal</value>
+  </data>
+  <data name="ReportingFollowingIncidentType" xml:space="preserve">
+    <value>ReportingFollowingIncidentType</value>
+  </data>
+  <data name="ReportingOnBehalf" xml:space="preserve">
+    <value>Are you reporting on behalf of yourself or someone else?</value>
+  </data>
+  <data name="RequiredAllegedOffenderIdentified" xml:space="preserve">
+    <value>It is required that the alleged offender be identified in cases of sexual harassment and sexual abuse in order to allow a due process investigation.</value>
+  </data>
+  <data name="RoleOfInvolvedParty" xml:space="preserve">
+    <value>"The role of an involved party could be that of a witness, victim, alleged offender, reporter or other.
+"</value>
+  </data>
+  <data name="SelectDate" xml:space="preserve">
+    <value>Select date</value>
+  </data>
+  <data name="SituationEmergency" xml:space="preserve">
+    <value>Is the situation an emergency?</value>
+  </data>
+  <data name="SomeoneElse" xml:space="preserve">
+    <value>Someone else</value>
+  </data>
+  <data name="Telephone" xml:space="preserve">
+    <value>Telephone</value>
+  </data>
+  <data name="Victim" xml:space="preserve">
+    <value>Victim</value>
+  </data>
+  <data name="wasSubmittedSuccessfully" xml:space="preserve">
+    <value>was submitted successfully</value>
+  </data>
+  <data name="YesReportedFovernmentAgency" xml:space="preserve">
+    <value>Yes. Reported to fovernment agency</value>
+  </data>
+  <data name="YesReportedMedia" xml:space="preserve">
+    <value>Yes. Reported to media</value>
+  </data>
+  <data name="YesReportedPolice" xml:space="preserve">
+    <value>Yes. Reported to police</value>
+  </data>
+  <data name="YourCompanyRegistrationFailed" xml:space="preserve">
+    <value>Your Company Registration failed.</value>
+  </data>
 </root>

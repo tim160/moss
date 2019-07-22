@@ -63,7 +63,13 @@ namespace EC.Localization
             {
                 ResourceManager rm = Resources.ResourceManager;
                 /////      ResourceManager rm = GetResourceManager(callingAssembly);
-                culture = System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("en-Us");
+                if(is_cc)
+                {
+                    culture = System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("en-Us");
+                } else
+                {
+                    culture = System.Threading.Thread.CurrentThread.CurrentCulture = Culture;
+                }
                 if (rm == null) return key;
 
                 string temp_key = key;
