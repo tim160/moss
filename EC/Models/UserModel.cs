@@ -1266,6 +1266,7 @@ namespace EC.Models
                     severity_s = !rm._report.severity_id.HasValue ? "UNSPECIFIED" : severities.FirstOrDefault(z => z.id == rm._report.severity_id).severity_en,
                     severity_id = !rm._report.severity_id.HasValue ? 0 : rm._report.severity_id.Value,
                     under_status_message = rm.DaysLeftClosedSpamMessage(delay_allowed),
+                    last_update_dt = m_DateTimeHelper.ConvertDateToShortString(rm._report.last_update_dt),
                     agentName = rm._report.agent_id > 0 ? db.user.Find(rm._report.agent_id).first_nm : ""
                 };
 
