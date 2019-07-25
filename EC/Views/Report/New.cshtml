@@ -3,17 +3,15 @@
 @using EC.Models
 @using EC.Models.Database
 @using EC.Models.ECModel
-
+@using EC.Localization;
 @{
+
+    //LocalizationGetter.GetString("TrainingTimeslotBooked", is_cc);
     ViewBag.Title = "New Incident Report";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    //List<relationship> relationship = ViewBag.relationship;
     List<anonymity> anonimity = ViewBag.anonimity;
     List<anonymity> string_anon = new List<anonymity>();
     string_anon = anonimity;
-
-    //bool? is_cc = ViewBag.is_cc;
-    //String class_ext = ViewBag.cc_extension;
 
     bool? is_cc = ViewBag.is_cc;
     if (!is_cc.HasValue)
@@ -87,19 +85,20 @@
                 <img class="makeImgCenter" src="@logo" />
             </div>
             <div class="titlePage">
-                <p>@GlobalRes.GeneralInformation</p>
+                <p>@LocalizationGetter.GetString("GeneralInformation", is_cc)</p>
             </div>
         </div>
     </div>
 
     <div class="rowContent">
         <div class="leftBlock leftBlock@{@class_ext}">
-            <p class="titleMenu">@GlobalRes.NewIncidentReport</p>
+            <p class="titleMenu">@LocalizationGetter.GetString("NewIncidentReport", is_cc)</p>
             <ul class="verticalMenu verticalMenu@{@class_ext}">
-                <li data-id="1" class="clicked"><span>@GlobalRes.GeneralInformation</span></li>
-                <li data-id="2"><span>@GlobalRes.PartiesInvolved</span></li>
-                <li data-id="3"><span>@GlobalRes.CaseInformation</span></li>
-                <li data-id="4"><span>@GlobalRes.Summary</span></li>
+
+                <li data-id="1" class="clicked"><span>@LocalizationGetter.GetString("GeneralInformation", is_cc)</span></li>
+                <li data-id="2"><span>@LocalizationGetter.GetString("PartiesInvolved", is_cc)</span></li>
+                <li data-id="3"><span>@LocalizationGetter.GetString("CaseInformation", is_cc)</span></li>
+                <li data-id="4"><span>@LocalizationGetter.GetString("Summary", is_cc)</span></li>
             </ul>
         </div>
 
@@ -112,10 +111,10 @@
 
                 <div class="content">
                     <div class="contentBlock" tabindex="1">
-                        <p class="title">@GlobalRes.WhereAreYouReportingFrom</p>
-                        @Helpers.Select(ViewBag.countries, "reportingFrom", "reportFrom validate", GlobalRes.SelectCountry, "", "notEmpty")
+                        <p class="title">@LocalizationGetter.GetString("WhereAreYouReportingFrom", is_cc)</p>
+                        @Helpers.Select(ViewBag.countries, "reportingFrom", "reportFrom validate", LocalizationGetter.GetString("SelectCountry", is_cc), "", "notEmpty")
                         <p class="description">
-                            <span id="ReportingFromSelect">@GlobalRes.ReportingFromSelect</span>
+                            <span id="ReportingFromSelect">@LocalizationGetter.GetString("ReportingFromSelect", is_cc)</span>
                             @foreach (EC.Models.Database.country myItem in ViewBag.countriesDescription)
                             {
                                 <div class="countries" style="display: none" data-value="@myItem.id">@myItem.Description()</div>
@@ -123,7 +122,7 @@
                         </p>
                     </div>
                     <div class="contentBlock" tabindex="1">
-                        <p class="title">@GlobalRes.WouldYouLikeToStay</p>
+                        <p class="title">@LocalizationGetter.GetString("WouldYouLikeToStay", is_cc)</p>
                         <div class="rowBlock anType vlCorrect">
                             <input type="hidden" value="2" class="validate vlCorrect incidentAnonymityId" name="incident_anonymity_id" data-vltarget=".anType" data-validate="notEmpty" />
 
@@ -157,10 +156,10 @@
 
                     </div>
                     <div class="contentBlock" tabindex="1">
-                        <p class="title">@GlobalRes.Youareaan:</p>
+                        <p class="title">@LocalizationGetter.GetString("Youareaan", is_cc):</p>
                         <div class="rowBlock reporterType vlCorrect">
                             <input type="hidden" class="validate vlCorrect reporterTypeInput" value="1" name="reporterTypeDetail" data-vltarget=".reporterTypeDetail" data-validate="notEmpty">
-                         
+
                             @if (ViewBag.relationship != null)
                             {
                                 foreach (var item in ViewBag.relationship)
@@ -177,7 +176,7 @@
                                     <label class="inputBlock" for="Other2">
                                         <input id="Other2" type="radio" name="radioName" value="other" />
                                         <span class="radioButton"></span>
-                                        <span class="radioTitle">@GlobalRes.Other</span>
+                                        <span class="radioTitle">@LocalizationGetter.GetString("Other", is_cc)</span>
                                     </label>
                                 </div>
                             }
@@ -194,12 +193,12 @@
                     </div>
 
                     <div class="contentBlock incident" style="display: none;" tabindex="1">
-                        <p class="title">@GlobalRes.Pleaseexplain:</p>
+                        <p class="title">@LocalizationGetter.GetString("Pleaseexplain", is_cc):</p>
                         <textarea name="companyRelationshipOther" class="explainReportType validate" data-validate="notEmpty"></textarea>
                     </div>
 
                     <div class="contentBlock" tabindex="1">
-                        <p class="title">@GlobalRes.LocationOfIncident</p>
+                        <p class="title">@LocalizationGetter.GetString("LocationOfIncident", is_cc)</p>
                         <div class="rowBlock">
                             @if (ViewBag.locationsOfIncident.Items.Count > 0)
                             {
@@ -214,7 +213,7 @@
                         </div>
 
                         <div style="display: none;" class="otherLocation">
-                            <p class="title">@GlobalRes.Enterlocation</p>
+                            <p class="title">@LocalizationGetter.GetString("Enterlocation", is_cc)</p>
                             <textarea name="locationOfIncidentInput" class="validate" data-validate="notEmpty"></textarea>
                         </div>
                     </div>
@@ -222,12 +221,12 @@
 
 
                     <div class="contentBlock" tabindex="1">
-                        <p class="title">@GlobalRes.SelectDepartmentInvolved</p>
+                        <p class="title">@LocalizationGetter.GetString("SelectDepartmentInvolved", is_cc)</p>
                         <div class="rowBlock">
                             <div class="departmentInvolvedContainer">
                                 <input type="hidden" class="departmentInvolvedNum" name="departmentInvolvedNum">
                                 <div>
-                                    @Helpers.Select(ViewBag.departments, "department", "departmentInvolved validate selectBlock", "", GlobalRes.SelectDepartment, "notEmpty")
+                                    @Helpers.Select(ViewBag.departments, "department", "departmentInvolved validate selectBlock", "", LocalizationGetter.GetString("SelectDepartment", is_cc), "notEmpty")
                                     <span class="delete redText deleteDepartmentPosition" style="display: none;"></span>
                                     <br>
                                 </div>
@@ -248,28 +247,28 @@
                 <div class="content">
                     <div class="contentBlock">
                         <div class="rowBlock">
-                            <p class="title">@GlobalRes.report_by_myself</p>
+                            <p class="title">@LocalizationGetter.GetString("report", is_cc)_by_myself</p>
                             <div class="rowBlock report_by_myself">
                                 <input type="hidden" class="report_by_myself validate" name="report_by_myself" value="1" data-validate="notEmpty" data-vltarget=".report_by_myself">
                                 <div class="freeBlock inputRadio option" data-val="true">
                                     <label class="inputBlock" for="Myself">
                                         <input id="Myself" type="radio" name="report_by_myself" value="true" data-val="1">
                                         <span class="radioButton"></span>
-                                        <span class="radioTitle">@GlobalRes.Myself</span>
+                                        <span class="radioTitle">@LocalizationGetter.GetString("Myself", is_cc)</span>
                                     </label>
                                 </div>
                                 <div class="freeBlock inputRadio option" data-val="false">
                                     <label class="inputBlock" for="Someone else">
                                         <input id="Someone else" type="radio" name="report_by_myself" value="false" data-val="0">
                                         <span class="radioButton"></span>
-                                        <span class="radioTitle">@GlobalRes.SomeoneElse</span>
+                                        <span class="radioTitle">@LocalizationGetter.GetString("SomeoneElse", is_cc)</span>
                                     </label>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="contentBlock" tabindex="1">
-                        <p class="title">@GlobalRes.NamesOfWitnesses</p>
+                        <p class="title">@LocalizationGetter.GetString("NamesOfWitnesses", is_cc)</p>
                         <div class="inputAddPerson">
                             <div class="addPersonContainer"></div>
                         </div>
@@ -278,12 +277,12 @@
                             <input type="hidden" class="personLastNameNum" name="personLastNameNum" placeholder="Lane Name of person" />
                             <input type="hidden" class="personTitleNum" name="personTitleNum" placeholder="Title of person" />
                             <input type="hidden" class="personRoleNum" name="personRoleNum" placeholder="Select role" />
-                            <u class="button display">@GlobalRes.AddPerson</u>
+                            <u class="button display">@LocalizationGetter.GetString("AddPerson", is_cc)</u>
                         </div>
                     </div>
 
                     <div class="contentBlock" tabindex="1">
-                        <p class="title">@GlobalRes.ManagementKnow</p>
+                        <p class="title">@LocalizationGetter.GetString("ManagementKnow", is_cc)</p>
                         <div class="rowBlock managementIncident">
                             <input type="hidden" value="false" name="managamentKnowId" class="validate" data-vltarget=".managementIncident" data-validate="notEmpty" />
                             @foreach (EC.Models.Database.management_know myManagementKnow in ViewBag.managament)
@@ -298,13 +297,13 @@
                     </div>
 
                     <div class="contentBlock managementKnownExplaintion" style="display: none;" tabindex="1">
-                        <p class="title">@GlobalRes.Pleaseexplain:</p>
+                        <p class="title">@LocalizationGetter.GetString("Pleaseexplain", is_cc):</p>
                         <textarea name="management_know_text" class="largeTextArea managementIsKnown validate" data-validate="notEmpty"></textarea>
                     </div>
 
                     <div class="contentBlock" tabindex="1">
                         <div class="referredOutside title">
-                            <p>@GlobalRes.Hascasereportedoutside<br /></p>
+                            <p>@LocalizationGetter.GetString("Hascasereportedoutside", is_cc)<br /></p>
                             <div class="rowBlock whoKnow">
                                 <input type="hidden" value="false" name="reported_outside_id" class="validate" data-vltarget=".reported_outside_id" data-validate="notEmpty" />
                                 @foreach (reported_outside item in ViewBag.reportedOutsides)
@@ -318,10 +317,10 @@
                                     </div>
                                 }
                                 <div class="freeBlock inputRadio option other3" data-val="other">
-                                    <label class="inputBlock" for="@GlobalRes.Other">
-                                        <input id="OtherWhoknow" type="radio" name="isReportRefered" value="@GlobalRes.Other" />
+                                    <label class="inputBlock" for="@LocalizationGetter.GetString("Other", is_cc)">
+                                        <input id="OtherWhoknow" type="radio" name="isReportRefered" value="@LocalizationGetter.GetString("Other", is_cc)" />
                                         <span class="radioButton"></span>
-                                        <span class="radioTitle">@GlobalRes.Other</span>
+                                        <span class="radioTitle">@LocalizationGetter.GetString("Other", is_cc)</span>
                                     </label>
                                 </div>
                                 <script>
@@ -359,7 +358,7 @@
                     </div>
 
                     <div class="contentBlock reportReferedExplain" style="display: none;" tabindex="1">
-                        <p class="title">@GlobalRes.Pleaseexplain:</p>
+                        <p class="title">@LocalizationGetter.GetString("Pleaseexplain", is_cc):</p>
                         <textarea name="reported_outside_text" id="textAreaWhoKnow" class="isReportedOutside validate" data-validate="notEmpty"></textarea>
                     </div>
 
@@ -367,7 +366,7 @@
                     <div>
                         <div class="contentBlock" style="border-bottom:none; margin-bottom:0px" tabindex="1">
                             <div class="rowBlock urgent">
-                                <p class=" title">@GlobalRes.IsReportUrgent</p>
+                                <p class=" title">@LocalizationGetter.GetString("IsReportUrgent", is_cc)</p>
 
                                 <!--Here-->
 
@@ -391,7 +390,7 @@
                             </br>
                         </div>
                     </div>
-                    <div id="emergency" class="isUrgentYesTextStyle isUrgentYesTextStyle@{@class_ext}" style="display: none">@GlobalRes.LifeThreatening</div>
+                    <div id="emergency" class="isUrgentYesTextStyle isUrgentYesTextStyle@{@class_ext}" style="display: none">@LocalizationGetter.GetString("LifeThreatening", is_cc)</div>
                 </div>
                 <div class="buttonBlock buttonBlock@{@class_ext}">
                     <input type="button" class="button nextSepButton tabOption cInformation" value="continue">
@@ -405,23 +404,23 @@
 
                     <div class="contentBlock " tabindex="1">
                         <div id="personeAgain">
-                            <div class="title">@GlobalRes.YouReport</div>
+                            <div class="title">@LocalizationGetter.GetString("YouReport", is_cc)</div>
                             <div style="display: flex;justify-content: center; margin-left: 10px;">
 
                             </div>
                             @*<div class="help" title="" onclick="">
-                ?
-                <div class="hoverElement">
-                    <div class="triangleHover position"></div>
-                    <div class="spec position">
-                        •	Accounting, Auditing and Financial Reporting (i.e. financial misconduct, internal controls, expense reporting)<br /><br />
-                        •	Business Integrity (i.e. bribery, falsification of documents, fraud, COI, vendor/customer issues, HIPAA)<br /><br />
-                        •	HR, Diversity and Workplace Respect (i.e. discrimination, harassment, compensation, general HR and cases marked as “other”)<br /><br />
-                        •	Environment, Health and Safety (i.e. EPA compliance, assault, safety, OSHA, substance abuse)<br /><br />
-                        •	Misuse, Misappropriation of Corporate Assets (i.e. employee theft, time clock abuse)<br /><br />
-                    </div>
-                </div>
-            </div>*@
+                                    ?
+                                    <div class="hoverElement">
+                                        <div class="triangleHover position"></div>
+                                        <div class="spec position">
+                                            •	Accounting, Auditing and Financial Reporting (i.e. financial misconduct, internal controls, expense reporting)<br /><br />
+                                            •	Business Integrity (i.e. bribery, falsification of documents, fraud, COI, vendor/customer issues, HIPAA)<br /><br />
+                                            •	HR, Diversity and Workplace Respect (i.e. discrimination, harassment, compensation, general HR and cases marked as “other”)<br /><br />
+                                            •	Environment, Health and Safety (i.e. EPA compliance, assault, safety, OSHA, substance abuse)<br /><br />
+                                            •	Misuse, Misappropriation of Corporate Assets (i.e. employee theft, time clock abuse)<br /><br />
+                                        </div>
+                                    </div>
+                                </div>*@
 
                         </div>
                         <input type="hidden" value="@ViewBag.CustomSecondaryType" name="CustomSecondaryType" />
@@ -446,7 +445,7 @@
                                 <label class="inputBlock" for="Other">
                                     <input id="Other" type="checkbox" name="whatHappened" value="0" />
                                     @*<span class="radioButton"></span>*@
-                                    <span class="radioTitle">@GlobalRes.Other</span>
+                                    <span class="radioTitle">@LocalizationGetter.GetString("Other", is_cc)</span>
                                 </label>
                             </div>
 
@@ -461,13 +460,13 @@
                     </div>
 
                     <div class="contentBlock reportingAboutArea" style="display: none;" tabindex="1">
-                        <p class="title">@GlobalRes.Pleaseexplain:</p>
+                        <p class="title">@LocalizationGetter.GetString("Pleaseexplain", is_cc):</p>
                         <textarea name="caseInformationReportDetail" class="reportAbout validate" data-validate="notEmpty"></textarea>
                     </div>
 
                     <div class="contentBlock" tabindex="1">
-                        <p class="title">@GlobalRes.DateofIncidentAware</p>
-                        <span style="display: none">@GlobalRes.IncidentFrequency</span>
+                        <p class="title">@LocalizationGetter.GetString("DateofIncidentAware", is_cc)</p>
+                        <span style="display: none">@LocalizationGetter.GetString("IncidentFrequency", is_cc)</span>
                         <div>
                             <span style="position: relative;">
                                 <input name="dateIncidentHappened" id="datepicker" class="validate dateInputBox calendarText" data-validate="date" value="Select date">
@@ -478,7 +477,7 @@
                     </div>
                     <div class="contentBlock" tabindex="1">
                         <div>
-                            <p class="title">@GlobalRes.isOngoing?</p>
+                            <p class="title">@LocalizationGetter.GetString("isOngoing", is_cc)?</p>
 
                             <!--START-->
                             <div class="isAccidentOngoing">
@@ -489,17 +488,17 @@
                                         <label class="inputBlock" for="Not">
                                             <input id="Not" type="radio" name="isIncidentOngoing" value="No" />
                                             <span class="radioButton"></span>
-                                            <span class="radioTitle">@GlobalRes.No</span>
+                                            <span class="radioTitle">@LocalizationGetter.GetString("No", is_cc)</span>
                                         </label>
                                     </div>
                                     <div class="freeBlock inputRadio option" data-val="2">
                                         <label class="inputBlock" for="Yes">
-                                            <input id="Yes" type="radio" name="isIncidentOngoing" value="Yes" /><span class="radioButton"></span><span class="radioTitle">@GlobalRes.Yes</span>
+                                            <input id="Yes" type="radio" name="isIncidentOngoing" value="Yes" /><span class="radioButton"></span><span class="radioTitle">@LocalizationGetter.GetString("Yes", is_cc)</span>
                                         </label>
                                     </div>
                                     <div class="freeBlock inputRadio option" data-val="3">
                                         <label class="inputBlock" for="Not sure">
-                                            <input id="Not sure" type="radio" name="isIncidentOngoing" value="Not sure" /><span class="radioButton"></span><span class="radioTitle">@GlobalRes.NotSureUp</span>
+                                            <input id="Not sure" type="radio" name="isIncidentOngoing" value="Not sure" /><span class="radioButton"></span><span class="radioTitle">@LocalizationGetter.GetString("NotSureUp", is_cc)</span>
                                         </label>
                                     </div>
                                 </div>
@@ -509,18 +508,18 @@
                     </div>
 
                     <div class="contentBlock incidentOngoing" style="display: none;" tabindex="1">
-                        <p class="title">@GlobalRes.Pleaseexplain:</p>
+                        <p class="title">@LocalizationGetter.GetString("Pleaseexplain", is_cc):</p>
                         <textarea name="report_frequency_text" class="validate incidentOngoingDescription" data-validate="notEmpty"></textarea>
                     </div>
 
                     <div class="contentBlock describeHappened" tabindex="1">
-                        <p class="title">@GlobalRes.describeHappened @GlobalRes.Bespecific</p>
+                        <p class="title">@LocalizationGetter.GetString("describeHappened", is_cc) @LocalizationGetter.GetString("Bespecific", is_cc)</p>
                         <textarea id="describeHappened" name="describeHappened" class="validate describeHappenedArea largeTextArea" data-validate="notEmpty" data-vltarget=".describeHappened"></textarea>
                     </div>
 
                     <div class="contentBlock" tabindex="1">
                         <div class="incidentResultReport">
-                            <p class="title">@GlobalRes.IncidentResultInjury</p>
+                            <p class="title">@LocalizationGetter.GetString("IncidentResultInjury", is_cc)</p>
                             <input type="hidden" class="validate" value="false" name="incidentResultReport" data-vltarget=".incidentResultReport" data-validate="notEmpty" />
                             @foreach (EC.Models.Database.injury_damage item in ViewBag.injury_damage)
                             {
@@ -536,16 +535,16 @@
                     </div>
 
                     <div class="contentBlock discribeInjuryDamage" tabindex="1" @*style="display: none;"*@>
-                        <p class="title">@GlobalRes.Pleaseexplain:</p>
+                        <p class="title">@LocalizationGetter.GetString("Pleaseexplain", is_cc):</p>
                         <textarea id="injury_damage" class="validate" name="injury_damage" data-validate="notEmpty"></textarea>
                     </div>
 
                     <div class="contentBlock" tabindex="1">
-                        <p class="title">@GlobalRes.PleaseAttach</p>
+                        <p class="title">@LocalizationGetter.GetString("PleaseAttach", is_cc)</p>
                         <div class="attach">
                             <label class="file_upload file_upload@{@class_ext}">
                                 <input type="hidden" name="MAX_FILE_SIZE" value="4000" />
-                                <span type="button" class="button addFileButton">@GlobalRes.SelectFile</span>
+                                <span type="button" class="button addFileButton">@LocalizationGetter.GetString("SelectFile", is_cc)</span>
                                 <input type="file" data-id="newReport" id="attachments" multiple="multiple" name="attachDocuments" check-file-size="" />
                             </label>
                         </div>
@@ -566,23 +565,23 @@
                 <div class="content">
                     <div id="hideIfConfidential">
                         <div class="contentBlock" tabindex="1">
-                            <p class="title">@GlobalRes.YourName</p>
+                            <p class="title">@LocalizationGetter.GetString("YourName", is_cc)</p>
                             <textarea id="userName" name="userName" class="validate lessHeight" data-validate="notEmpty"></textarea>
                         </div>
 
                         <div class="contentBlock" tabindex="1">
-                            <p class="title">@GlobalRes.LastNameUp</p>
+                            <p class="title">@LocalizationGetter.GetString("LastNameUp", is_cc)</p>
                             <textarea id="userLastName" name="userLastName" class="validate lessHeight" data-validate="notEmpty"></textarea>
                         </div>
 
                         <div class="contentBlock" tabindex="1">
-                            <p class="title">@GlobalRes.YourEmail</p>
+                            <p class="title">@LocalizationGetter.GetString("YourEmail", is_cc)</p>
                             <textarea id="reporterFirstName" name="userEmail" class="validate lessHeight" data-validate="email"></textarea>
                             <div style="padding-bottom: 20px;">
                                 <img class="check" style="display: inline;">
                                 <img class="checked" style="display: none;">
                                 <input type="checkbox" name="sendUpdates" id="checkBox" value="false" class="checkBoxStyle floatLeftClass" />
-                                <span class="radioTitle sendUpdates" style="height:30px;">@GlobalRes.Sendreportupdates</span>
+                                <span class="radioTitle sendUpdates" style="height:30px;">@LocalizationGetter.GetString("Sendreportupdates", is_cc)</span>
                             </div>
                         </div>
                         <div class="contentBlock" tabindex="1">
@@ -612,24 +611,24 @@
                                 <tbody>
                                     <tr>
                                         <td class="titlereporttable" style="width: 25%;">
-                                            @GlobalRes.ReportingFrom:
+                                            @LocalizationGetter.GetString("ReportingFrom", is_cc):
                                         </td>
                                         <td class="reportTextTable" id="reportingFrom"></td>
                                     </tr>
                                     <tr>
-                                        <td class="titleReportTable">@GlobalRes.ConfidentialityLevel:</td>
+                                        <td class="titleReportTable">@LocalizationGetter.GetString("ConfidentialityLevel", is_cc):</td>
                                         <td class="reportTextTable" id="anonymityStatus"></td>
                                     </tr>
                                     <tr>
-                                        <td class="titleReportTable">@GlobalRes.Reportedas:</td>
+                                        <td class="titleReportTable">@LocalizationGetter.GetString("Reportedas", is_cc):</td>
                                         <td class="reportTextTable" id="formalRole"></td>
                                     </tr>
                                     <tr>
-                                        <td class="titleReportTable">@GlobalRes.Incidentlocation:</td>
+                                        <td class="titleReportTable">@LocalizationGetter.GetString("Incidentlocation", is_cc):</td>
                                         <td class="reportTextTable" id="incedentHappenedIn"></td>
                                     </tr>
                                     <tr>
-                                        <td class="titleReportTable">@GlobalRes.AffectedDepartment:</td>
+                                        <td class="titleReportTable">@LocalizationGetter.GetString("AffectedDepartment", is_cc):</td>
                                         <td class="reportTextTable" id="departments"></td>
                                     </tr>
                                 </tbody>
@@ -666,24 +665,24 @@
                                 <tbody>
                                     <tr>
                                         <td class="titlereportTable" style="width: 25%;">
-                                            @GlobalRes.report_by_myself
+                                            @LocalizationGetter.GetString("report", is_cc)_by_myself
                                         </td>
                                         <td class="reportTextTable" id="report_by_myself"></td>
                                     </tr>
                                     <tr>
                                         <td class="titlereportTable" style="width: 25%;">
-                                            @GlobalRes.Doesmanagementknowaboutthisincident
+                                            @LocalizationGetter.GetString("Doesmanagementknowaboutthisincident", is_cc)
                                         </td>
                                         <td class="reportTextTable" id="isManagementKnow"></td>
                                     </tr>
                                     <tr>
                                         <td class="titlereportTable">
-                                            @GlobalRes.ReportedOutside
+                                            @LocalizationGetter.GetString("ReportedOutside", is_cc)
                                         </td>
                                         <td class="reportTextTable" id="isReportedOutside"></td>
                                     </tr>
                                     <tr>
-                                        <td class="titleReportTable">@GlobalRes.IsCaseUrgent_q</td>
+                                        <td class="titleReportTable">@LocalizationGetter.GetString("IsCaseUrgent", is_cc)_q</td>
                                         <td class="reportTextTable" id="isReportUrgent"></td>
                                     </tr>
                                 </tbody>
@@ -706,23 +705,23 @@
                                 <table style="width: 100%;">
                                     <tbody>
                                         <tr>
-                                            <td class=" titlereporttable" style="width: 25%;">@GlobalRes.IncidentType:</td>
+                                            <td class=" titlereporttable" style="width: 25%;">@LocalizationGetter.GetString("IncidentType", is_cc):</td>
                                             <td class="reportTextTable" id="reportAbout"></td>
                                         </tr>
                                         <tr>
-                                            <td class="titleReportTable">@GlobalRes.IncidentDate:</td>
+                                            <td class="titleReportTable">@LocalizationGetter.GetString("IncidentDate", is_cc):</td>
                                             <td class="reportTextTable" id="incidentHappendDate"></td>
                                         </tr>
                                         <tr>
-                                            <td class="titleReportTable">@GlobalRes.ongoingIncident</td>
+                                            <td class="titleReportTable">@LocalizationGetter.GetString("ongoingIncident", is_cc)</td>
                                             <td class="reportTextTable" id="isIncidentOngoing"></td>
                                         </tr>
                                         <tr>
-                                            <td class="titleReportTable">@GlobalRes.IncidentResultInjury</td>
+                                            <td class="titleReportTable">@LocalizationGetter.GetString("IncidentResultInjury", is_cc)</td>
                                             <td class="reportTextTable" id="hasInjury"></td>
                                         </tr>
                                         <tr>
-                                            <td class="titleReportTable">@GlobalRes.IncidentDescription:</td>
+                                            <td class="titleReportTable">@LocalizationGetter.GetString("IncidentDescription", is_cc):</td>
                                             <td class="reportTextTable"></td>
                                         </tr>
                                     </tbody>
@@ -738,7 +737,7 @@
                     </div>
                 </div>
 
-                <div class="titleMediators">@GlobalRes.MediatorsAssigned</div>
+                <div class="titleMediators">@LocalizationGetter.GetString("MediatorsAssigned", is_cc)</div>
                 <div class="titleMediatorsDescrition">
                     The following case administrator(s) may be assigned to your case. If you feel that a Case Administrator may have a conflict of interest or would be obstructive to investigating the case, please check ‘Exclude’ below.
                 </div>
@@ -768,7 +767,7 @@
 
                                         </div>
                                         <label class="inputBlock floatRightClass" for="@myItem.id" style="padding-top:25px">
-                                            <span class="involvedArea">@GlobalRes.Exclude.ToUpper()</span>
+                                            <span class="involvedArea">@LocalizationGetter.GetString("Exclude", is_cc).ToUpper()</span>
                                             <input id="@myItem.id"
                                                    type="checkbox"
                                                    float="right"
@@ -791,9 +790,9 @@
                 </div>
                 @if (ViewBag.nonSupervisingMediators.Count > 0)
                 {
-                    @*<div class="titleMediators">@GlobalRes.Mediationteam</div>
-                        <div class="titleMediatorsDescrition">@GlobalRes.ThismediatorsCould</div>*@
-                    <div class="titleMediators">@GlobalRes.Mediationteam</div>
+                    @*<div class="titleMediators">@LocalizationGetter.GetString("Mediationteam", is_cc)</div>
+                        <div class="titleMediatorsDescrition">@LocalizationGetter.GetString("ThismediatorsCould", is_cc)</div>*@
+                    <div class="titleMediators">@LocalizationGetter.GetString("Mediationteam", is_cc)</div>
                 }
 
 
@@ -823,7 +822,7 @@
                                     <div class="option mediator" data-val="@myItem.id">
 
                                         <label class="inputBlock floatRightClass" for="@myItem.id" style="padding-top:25px">
-                                            <span class="involvedArea">@GlobalRes.Exclude.ToUpper()</span>
+                                            <span class="involvedArea">@LocalizationGetter.GetString("Exclude", is_cc).ToUpper()</span>
                                             <input id="@myItem.id"
                                                    value="@myItem.id"
                                                    name="mediatorsInvolved"
@@ -860,7 +859,7 @@
 
             <div id="persone" class="witnessPersone witnessPersone@{@class_ext}">
                 <div class="addPersonName sampleContainer">
-                    <div class="personTitle title">@GlobalRes.FirstNameUp</div>
+                    <div class="personTitle title">@LocalizationGetter.GetString("FirstNameUp", is_cc)</div>
                     <div class="personData">
                         <input name="personName[NUM]"
                                class="personDataTextBox fName" />
@@ -868,7 +867,7 @@
                 </div>
 
                 <div class="addPersonName sampleContainer">
-                    <div class="personTitle title">@GlobalRes.LastNameUp</div>
+                    <div class="personTitle title">@LocalizationGetter.GetString("LastNameUp", is_cc)</div>
                     <div class="personData">
                         <input name="personLastName[NUM]"
                                class="personDataTextBox lName" />
@@ -876,7 +875,7 @@
                 </div>
 
                 <div class="addPersonInfo sampleContainer">
-                    <div class="personTitle title">@GlobalRes.Title</div>
+                    <div class="personTitle title">@LocalizationGetter.GetString("Title", is_cc)</div>
                     <div class="personData">
                         <input type="text" name="personTitle[NUM]"
                                class="personDataTextBox witnessTitle" />
@@ -884,7 +883,7 @@
                 </div>
                 <div class="addPersonInfo sampleContainer">
                     <div class="personTitle title">
-                        @GlobalRes.Role
+                        @LocalizationGetter.GetString("Role", is_cc)
                         <div class="help" title="" onclick="">
                             ?
                             <div class="hoverElement">
@@ -923,7 +922,7 @@
         </div>
         <div id="departmentInvolvedTmpl">
             <div>
-                @Helpers.Select(ViewBag.departments, "department", "departmentInvolved", GlobalRes.SelectDepartment)
+                @Helpers.Select(ViewBag.departments, "department", "departmentInvolved", LocalizationGetter.GetString("SelectDepartment", is_cc))
                 <span class="delete redText deleteDepartmentPosition"></span>
                 <br>
             </div>
@@ -944,8 +943,8 @@
     </p>
 
     @*<div class="case-modal__linkBlockBottom clearfix">
-        <a style="float: left" href="#" id="Cancel" rel="modal:close" class="case-modal__linkBtn whiteBtn">Cancel</a>
-    </div>*@
+            <a style="float: left" href="#" id="Cancel" rel="modal:close" class="case-modal__linkBtn whiteBtn">Cancel</a>
+        </div>*@
     <div class="case-modal__linkBlockBottom clearfix">
         <a href="#" id="ok" rel="modal:close" class="case-modal__linkBtn whiteBtn">Ok</a>
     </div><!-- /.case-modal__linkBlockBottom -->
