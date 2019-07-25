@@ -2992,4 +2992,7 @@ Do not want to involve</value>
   <data name="StronglyRecommended" xml:space="preserve">
     <value>It is strongly recommended that the alleged victim in cases of sexual harassment and sexual abuse is identified in order to allow a due process investigation</value>
   </data>
+  <data name="report_by_myself" xml:space="preserve">
+    <value>Are you reporting on behalf of yourself or someone else?</value>
+  </data>
 </root>
