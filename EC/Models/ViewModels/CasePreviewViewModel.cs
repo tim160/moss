@@ -76,6 +76,7 @@ namespace EC.Models.ViewModel
         public IEnumerable<report_owner> owners { get; set; }
         public String agentName { get; set; }
 
+        public String last_update_dt { get; set; }
         public CasePreviewViewModel()
         {
         }

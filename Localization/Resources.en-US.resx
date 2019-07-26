@@ -2149,9 +2149,6 @@
   <data name="SignOffPendingUp" xml:space="preserve">
     <value>Sign-Off Pending</value>
   </data>
-  <data name="UnderInvestigationUp" xml:space="preserve">
-    <value>Under Investigation</value>
-  </data>
   <data name="AddBehavioralFactors" xml:space="preserve">
     <value>Add Behavioral Factors</value>
   </data>
@@ -2516,7 +2513,7 @@
     <value>Shareholder Concerns</value>
   </data>
   <data name="SoftwarePiracy" xml:space="preserve">
-    <value>Software Piracy/Intellectual Property</value>
+    <value>Software Piracy</value>
   </data>
   <data name="SpikingDrinks" xml:space="preserve">
     <value>Spiking Drinks/Rape Drug Abuse</value>
@@ -2566,7 +2563,7 @@
   <data name="UnsafeWorkingConditions" xml:space="preserve">
     <value>Unsafe Working Conditions</value>
   </data>
-  <data name="UnusualSuspiciousActivities" xml:space="preserve">
+  <data name="UnusualOrSuspiciousActivities" xml:space="preserve">
     <value>Unusual or Suspicious Activities</value>
   </data>
   <data name="Vandalism" xml:space="preserve">
@@ -2600,7 +2597,7 @@
   <data name="NewReportsUp" xml:space="preserve">
     <value>New Reports</value>
   </data>
-  <data name="String1" xml:space="preserve">
+  <data name="CreateAccount" xml:space="preserve">
     <value>Fill in the following fields and click "Create" to create an account</value>
   </data>
   <data name="FillTheFollowingFieldsRegister" xml:space="preserve">
@@ -2883,5 +2880,119 @@ Do not want to involve</value>
   </data>
   <data name="YourCompanyRegistrationFailed" xml:space="preserve">
     <value>Your Company Registration failed.</value>
+  </data>
+  <data name="AccessDashboardloginHere" xml:space="preserve">
+    <value>To access your dashboard, please login here</value>
+  </data>
+  <data name="Attachments" xml:space="preserve">
+    <value>Attachments</value>
+  </data>
+  <data name="ConnectionErrorSessionExpiration" xml:space="preserve">
+    <value>This is due to a connection error or session expiration</value>
+  </data>
+  <data name="DragDropFilesHere" xml:space="preserve">
+    <value>Drag and drop files here</value>
+  </data>
+  <data name="ExperienceProblemWithLink" xml:space="preserve">
+    <value>If you experience a problem with the link, please copy and paste this address into your browser</value>
+  </data>
+  <data name="FileANewReport" xml:space="preserve">
+    <value>File a New Report</value>
+  </data>
+  <data name="FromECTeam" xml:space="preserve">
+    <value>From the Employee Confidential team</value>
+  </data>
+  <data name="MessagePostedReporterBoard" xml:space="preserve">
+    <value>Message Posted to Reporter Board</value>
+  </data>
+  <data name="PasswordTypeFieldUpdate" xml:space="preserve">
+    <value>Password (Type in field to update)</value>
+  </data>
+  <data name="ReportSubmitted" xml:space="preserve">
+    <value>Report Submitted</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Retry</value>
+  </data>
+  <data name="SubmittingYourReport" xml:space="preserve">
+    <value>Thank you for submitting your report. You can follow the status of your case [CaseNumber] via a personal dashboard on Employee Confidential.</value>
+  </data>
+  <data name="TakeNoteSaveLogins" xml:space="preserve">
+    <value>Please take note and save your logins</value>
+  </data>
+  <data name="TheReportSubmissionFailed" xml:space="preserve">
+    <value>The Report Submission failed</value>
+  </data>
+  <data name="UploadedByCaseAdmin" xml:space="preserve">
+    <value>UPLOADED BY Case admin</value>
+  </data>
+  <data name="UploadedByReporter" xml:space="preserve">
+    <value>UPLOADED BY REPORTER</value>
+  </data>
+  <data name="YouMe" xml:space="preserve">
+    <value>You, Me,</value>
+  </data>
+  <data name="BusinessPartner" xml:space="preserve">
+    <value>Business partner</value>
+  </data>
+  <data name="ChangeAccountSettings" xml:space="preserve">
+    <value>Change your account settings</value>
+  </data>
+  <data name="Customer" xml:space="preserve">
+    <value>Customer</value>
+  </data>
+  <data name="FalsificationSimple" xml:space="preserve">
+    <value>Falsification</value>
+  </data>
+  <data name="HaveReceivedEmail" xml:space="preserve">
+    <value>You have received this email because you signed up for a EmployeeConfidential account</value>
+  </data>
+  <data name="ITSimple" xml:space="preserve">
+    <value>IT</value>
+  </data>
+  <data name="MemberPublic" xml:space="preserve">
+    <value>Member of the public</value>
+  </data>
+  <data name="RDSimple" xml:space="preserve">
+    <value>RD</value>
+  </data>
+  <data name="Unusual Suspicious Activities" xml:space="preserve">
+    <value>Unusual Suspicious Activities</value>
+  </data>
+  <data name="Supplier" xml:space="preserve">
+    <value>Supplier</value>
+  </data>
+  <data name="HostileEnvironment" xml:space="preserve">
+    <value>Hostile Environment</value>
+  </data>
+  <data name="SexualAbuse" xml:space="preserve">
+    <value>Sexual Abuse</value>
+  </data>
+  <data name="AccountingAuditingFinancialReporting" xml:space="preserve">
+    <value>Accounting, Auditing and Financial Reporting (i.e. financial misconduct, internal controls, expense reporting)</value>
+  </data>
+  <data name="BusinessIntegrity" xml:space="preserve">
+    <value>Business Integrity (i.e. bribery, falsification of documents, fraud, COI, vendor/customer issues, HIPAA)</value>
+  </data>
+  <data name="EnvironmentHealthSafety" xml:space="preserve">
+    <value>Environment, Health and Safety (i.e. EPA compliance, assault, safety, OSHA, substance abuse)</value>
+  </data>
+  <data name="HRDiversityWorkplaceRespect" xml:space="preserve">
+    <value>HR, Diversity and Workplace Respect (i.e. discrimination, harassment, compensation, general HR and cases marked as “other”)</value>
+  </data>
+  <data name="MaliciousInappropriateUseTechnology" xml:space="preserve">
+    <value>Malicious/Inappropriate Use of Technology</value>
+  </data>
+  <data name="MisuseMisappropriationCorporateAssets" xml:space="preserve">
+    <value>Misuse, Misappropriation of Corporate Assets (i.e. employee theft, time clock abuse)</value>
+  </data>
+  <data name="SoftwarePiracyIntellectualProperty" xml:space="preserve">
+    <value>Software Piracy/Intellectual Property</value>
+  </data>
+  <data name="StronglyRecommended" xml:space="preserve">
+    <value>It is strongly recommended that the alleged victim in cases of sexual harassment and sexual abuse is identified in order to allow a due process investigation</value>
+  </data>
+  <data name="report_by_myself" xml:space="preserve">
+    <value>Are you reporting on behalf of yourself or someone else?</value>
   </data>
 </root>
