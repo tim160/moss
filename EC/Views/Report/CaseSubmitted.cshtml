@@ -36,70 +36,17 @@
     }
 
 }
+
+<input type="hidden" id="ReportId" value="@rm._report.id" />
+<input type="hidden" id="UserId" value="@ViewBag.UserId" />
+<input type="hidden" id="CompanyCode" value="@ViewBag.company_code" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
 
 @section pageScripts{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <script type="text/javascript" src="~/Scripts/Common/helper.js"></script>
-    <script type="text/javascript">
-
-
-    $(document).ready(function () {
-        summaryPage();
-        $("#ok").on('click', function () {
-            window.location.href = "/Report/RedirectToReporterDashboard?reportId=@rm._report.id";
-            $('#loading').show();
-        });
-
-        function summaryPage() {
-            function setHoverBlock(item) {
-                $(this).parent().find('img, input').addClass('hover');
-            }
-
-            function setUnHoverBlock(item) {
-                $(this).parent().find('img, input').removeClass('hover');
-            }
-
-            var root = $('#summareResponce');
-            var summaryButtons = root.find('.summaryButtons');
-            var printImage = root.find('#printImage');
-            var printDashboard = root.find('#dashboardImage');
-            summaryButtons.mouseenter(setHoverBlock)
-            printImage.mouseenter(setHoverBlock);
-            printDashboard.mouseenter(setHoverBlock);
-
-            summaryButtons.mouseout(setUnHoverBlock)
-            printImage.mouseout(setUnHoverBlock);
-            printDashboard.mouseout(setUnHoverBlock);
-        }
-
-        $('.saveChanges').click(function()
-        {
-            var pass = $('.accessInfo.pass').val();
-            var userId = '@ViewBag.UserId';
-            updateLoginInfo(pass, userId);
-        });
-
-        function updateLoginInfo(pass, userId) {
-            $.ajax({
-                method: "POST",
-                url: "/Report/SaveLoginChanges",
-                dataType: 'json',
-                data: { pass: pass, userId: userId }
-            }).done(function(data) {//data from server
-                alert(data);
-                $('.saveChanges').hide();
-            }).fail(function (error) {
-                // alert(data);
-            });
-        };
-        $('.pass').keyup(function () {
-            $('.saveChanges').show();
-        });
-    });
-
-    </script>
+    <script type="text/javascript" src="~/Scripts/View/CaseSubmitted.js"></script>
     <script type="text/javascript" src="~/Scripts/View/report.js"></script>
     <script type="text/javascript" src="~/Scripts/lib/jquery-ui.min.js"></script>
 }
@@ -111,11 +58,19 @@
             <img id="loading-image" src='@Url.Content("~/Content/Icons/giphy.gif")' alt="Loading..." />
         </div>
 
-        <div id="alertModal" class="modal case-modal">
-            @*<a href="#" class="closeLink modal-close" rel="modal:close"></a>*@
-            @*<div class="case-modal__title"><p style="text-align: center">Your Company Registration failed.</p></div>*@
+        <div id="successPasswordChanged" class="modal case-modal">
             <p style="text-align: center">
-                WARNING.You are about to leave the reporting page. If you have not saved your Login and Password information, then please select Cancel so you record them. If you have saved your Login and Password, you can leave the reporting page
+                @LocalizationGetter.GetString("PasswordUpdatedSuccess", is_cc)
+            </p>
+
+            <div class="case-modal__linkBlockBottom clearfix">
+                <a href="#" rel="modal:close" class="case-modal__linkBtn whiteBtn">Ok</a>
+            </div><!-- /.case-modal__linkBlockBottom -->
+        </div>
+
+        <div id="alertModal" class="modal case-modal">
+            <p style="text-align: center">
+                @LocalizationGetter.GetString("LeaveReportingPage", is_cc)
             </p>
 
             <div class="case-modal__linkBlockBottom clearfix">
@@ -129,7 +84,7 @@
             <div class="firstBlock">
                 <div class="logo">
                     <img src='@mainLogo' />
-                    <div class="newReportNumber">@GlobalRes.Newreport: #@ViewBag.CaseNumber</div>
+                    <div class="newReportNumber">@LocalizationGetter.GetString("Newreport", is_cc): #@ViewBag.CaseNumber</div>
                 </div>
             </div>
 
@@ -148,48 +103,48 @@
                 </div>
 
                 <div class="titlePage">
-                    <p class="newReportCaseNumber">@GlobalRes.Report #@ViewBag.CaseNumber @GlobalRes.wasSubmittedSucessfully</p>
+                    <p class="newReportCaseNumber">@LocalizationGetter.GetString("Report", is_cc) #@ViewBag.CaseNumber @LocalizationGetter.GetString("wasSubmittedSucessfully", is_cc)</p>
                 </div>
             </div>
         </div>
 
         <div class="rowContent">
             <div class="leftBlock">
-                <p class="titleMenu">@GlobalRes.NewIncidentReport</p>
+                <p class="titleMenu">@LocalizationGetter.GetString("NewIncidentReport", is_cc)</p>
                 <ul class="verticalMenu">
-                    <li data-id="1" class="stepDone"><span>@GlobalRes.GeneralInformation</span></li>
-                    <li data-id="2" class="stepDone"><span>@GlobalRes.PartiesInvolved</span></li>
-                    <li data-id="3" class="stepDone"><span>@GlobalRes.CaseInformation</span></li>
-                    <li data-id="4" class="stepDone"><span>@GlobalRes.CaseSummary</span></li>
+                    <li data-id="1" class="stepDone"><span>@LocalizationGetter.GetString("GeneralInformation", is_cc)</span></li>
+                    <li data-id="2" class="stepDone"><span>@LocalizationGetter.GetString("PartiesInvolved", is_cc)</span></li>
+                    <li data-id="3" class="stepDone"><span>@LocalizationGetter.GetString("CaseInformation", is_cc)</span></li>
+                    <li data-id="4" class="stepDone"><span>@LocalizationGetter.GetString("CaseSummary", is_cc)</span></li>
                 </ul>
             </div>
 
             <div class="rightBlock sumResp" id="summareResponce">
 
                 <div class="sumResp">
-                    <div class="summaryReportInfo">@GlobalRes.canAccess</div>
-                    <div class="summaryReportInfo"><span style="font-weight: bold;"> @GlobalRes.lastOpportunity.</span></div>
-                    <div class="summaryReportInfo">@GlobalRes.detailsCase</div>
+                    <div class="summaryReportInfo">@LocalizationGetter.GetString("canAccess", is_cc)</div>
+                    <div class="summaryReportInfo"><span style="font-weight: bold;"> @LocalizationGetter.GetString("lastOpportunity", is_cc).</span></div>
+                    <div class="summaryReportInfo">@LocalizationGetter.GetString("detailsCase", is_cc).</div>
                     <p></p>
                     @if (ViewBag.Email != null && ViewBag.Email.Length != 0)
                     {
-                        <div class="summaryReportInfo" style="margin-bottom:40px;">@GlobalRes.CaseUpdates: <u class="reporterEmail">@ViewBag.Email</u></div>
+                        <div class="summaryReportInfo" style="margin-bottom:40px;">@LocalizationGetter.GetString("CaseUpdates", is_cc): <u class="reporterEmail">@ViewBag.Email</u></div>
                     }
                     <p></p>
 
                     <div class="content">
                         <div class="contentBlock reportNumberBlock contentBorder">
-                            <p class="title">@GlobalRes.Reportnumber</p>
+                            <p class="title">@LocalizationGetter.GetString("Reportnumber", is_cc)</p>
                             <div class="reportNumber">@ViewBag.CaseNumber</div>
                         </div>
 
                         <div class="contentBlock contentBorder">
-                            <p class="title">@GlobalRes.Login</p>
+                            <p class="title">@LocalizationGetter.GetString("Login", is_cc)</p>
                             <div class="reportNumber">@ViewBag.Login</div>
                         </div>
 
                         <div class="contentBlock contentBorder">
-                            <p class="title">@GlobalRes.Password (Type in field to update)</p>
+                            <p class="title">@LocalizationGetter.GetString("PasswordTypeFieldUpdate", is_cc)</p>
                             <textarea class="accessInfo pass">@ViewBag.Password</textarea>
                         </div>
                     </div>
@@ -208,18 +163,17 @@
 
                             @if (rm.ID != 0)
                             {
-                                <a href="@Url.Action("PrintToPdf", "Report", new { id = rm._report.guid })" target="_blank" class="button summaryButtons" style="width: 226px;align-items: flex-start;text-align: center;">@GlobalRes.PrintReport</a>
+                                <a href="@Url.Action("PrintToPdf", "Report", new { id = rm._report.guid })" target="_blank" class="button summaryButtons" style="width: 226px;align-items: flex-start;text-align: center;">@LocalizationGetter.GetString("PrintReport", is_cc)</a>
                             }
                             else
                             {
-                                <a href="#" target="_blank" class="button summaryButtons" style="width: 226px;align-items: flex-start;text-align: center;">@GlobalRes.PrintReport</a>
+                                <a href="#" target="_blank" class="button summaryButtons" style="width: 226px;align-items: flex-start;text-align: center;">@LocalizationGetter.GetString("PrintReport", is_cc)</a>
                             }
                         </div>
                         <div class="reportAction">
                             <img class="summaryImages" id="dashboardImage" src="~/Content/img/reportDashboard.png">
                             <img src="~/Content/img/reportDashboardHover.png" style="display: none" />
-                            @*<input type="button" id="reportDashboard" class="button summaryButtons" value="@GlobalRes.GoToReportDashboard">*@
-                            <a id="linkModal" href="#alertModal" rel="modal:open" class="button summaryButtons" style="width: 226px;align-items: flex-start;text-align: center;">@GlobalRes.GoToReportDashboard</a>
+                            <a id="linkModal" href="#alertModal" rel="modal:open" class="button summaryButtons" style="width: 226px;align-items: flex-start;text-align: center;">@LocalizationGetter.GetString("GoToReportDashboard", is_cc)</a>
                         </div>
                     </div>
                 </div>
@@ -239,80 +193,41 @@
                         <div class="content printable" id="modal-dialog">
                             @if (rm.ID != 0)
                             {
-                                <a href="@Url.Action("PrintToPdf", "Report", new { id = rm._report.guid })" target="_blank" class="button summaryButtons" style="width: 226px;align-items: flex-start;text-align: center;">@GlobalRes.PrintReport</a>
+                                <a href="@Url.Action("PrintToPdf", "Report", new { id = rm._report.guid })" target="_blank" class="button summaryButtons" style="width: 226px;align-items: flex-start;text-align: center;">@LocalizationGetter.GetString("PrintReport", is_cc)</a>
                             }
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <script>
-            $("#printReport").on('click', function () {
-                //$("#modal-dialog").toggle();
-                printElement(document.getElementById("modal-dialog"));
-                $(".fullContainer").hide();
-                $(".footer").hide();
-                window.print();
-                $(".fullContainer").show();
-                $(".footer").show();
-            });
-            $(".close").on('click', function () {
-                $("#modal-dialog").toggle();
-            });
-            function printElement(elem, append, delimiter) {
-                var domClone = elem.cloneNode(true);
-
-                var $printSection = document.getElementById("printSection");
-
-                if (!$printSection) {
-                    $printSection = document.createElement("div");
-                    $printSection.id = "printSection";
-                    document.body.appendChild($printSection);
-                }
-                if (append !== true) {
-                    $printSection.innerHTML = "";
-                }
-                else if (append === true) {
-                    if (typeof (delimiter) === "string") {
-                        $printSection.innerHTML += delimiter;
-                    }
-                    else if (typeof (delimiter) === "object") {
-                        $printSection.appendChlid(delimiter);
-                    }
-                }
-                $printSection.appendChild(domClone);
-            }
-        </script>
 
         @if (rm.ID == 0)
         {
-            <a id="linkRegistrationReport" href="#registrationReport" rel="modal:open" class="button summaryButtons" style="display: none">@GlobalRes.GoToReportDashboard</a>
+            <a id="linkRegistrationReport" href="#registrationReport" rel="modal:open" class="button summaryButtons" style="display: none">
+                @LocalizationGetter.GetString("GoToReportDashboard", is_cc)
+            </a>
 
             <div id="registrationReport" class="modal case-modal">
-                @*<a href="#" class="closeLink modal-close" rel="modal:close"></a>*@
-                <div class="case-modal__title"><p style="text-align: center">The Report Submission failed.</p></div>
+                <div class="case-modal__title">
+                    <p style="text-align: center">
+                        @LocalizationGetter.GetString("TheReportSubmissionFailed", is_cc)
+                    </p>
+                </div>
                 <p style="text-align: center">
-                    This is due to a connection error or session expiration.
+                    @LocalizationGetter.GetString("ConnectionErrorSessionExpiration", is_cc)
                 </p>
 
                 <div class="case-modal__linkBlockBottom clearfix">
-                    <a style="float: left" href="#" id="retry" rel="modal:close" class="case-modal__linkBtn whiteBtn">Retry</a>
+                    <a style="float: left" href="#" id="retry" rel="modal:close" class="case-modal__linkBtn whiteBtn">
+                        @LocalizationGetter.GetString("Retry", is_cc)
+                    </a>
                 </div><!-- /.case-modal__linkBlockBottom -->
                 <div class="case-modal__linkBlockBottom clearfix">
-                    <a href="#" id="newReport" rel="modal:close" class="case-modal__linkBtn whiteBtn">File a New Report</a>
+                    <a href="#" id="newReport" rel="modal:close" class="case-modal__linkBtn whiteBtn">
+                        @LocalizationGetter.GetString("FileANewReport", is_cc)
+                    </a>
                 </div><!-- /.case-modal__linkBlockBottom -->
             </div>
-            <script>
-                $("#retry").on('click', function () {
-                    location.reload();
-                });
-                $("#newReport").on('click', function () {
-                    window.location.href = "/Service/Disclaimer?companyCode=" + "@ViewBag.company_code";
-                });
-                $(document).ready(function () {
-                    window.onload = document.getElementById('linkRegistrationReport').click();
-                });
-            </script>
         }
     </body>
 

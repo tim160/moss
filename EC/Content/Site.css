@@ -1619,7 +1619,7 @@ table {
 }
 /*modal window*/
 
-#alertModal {
+#alertModal, #successPasswordChanged {
     font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
 }
 
