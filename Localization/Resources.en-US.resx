@@ -633,9 +633,6 @@
   <data name="CurrentStatus" xml:space="preserve">
     <value>Current Status</value>
   </data>
-  <data name="Custumer" xml:space="preserve">
-    <value>Custumer</value>
-  </data>
   <data name="Daily" xml:space="preserve">
     <value>Daily</value>
   </data>
@@ -714,9 +711,6 @@
   </data>
   <data name="detailsCase" xml:space="preserve">
     <value>You can always check the case progress using the following details</value>
-  </data>
-  <data name="DifferentCountriesHaveDifferentEtc" xml:space="preserve">
-    <value>Different countries have different regulations about anonymity reporting. Please select your country to know the regulations.</value>
   </data>
   <data name="Doesmanagementknowaboutthisincident" xml:space="preserve">
     <value>Does management know about this incident?</value>
@@ -1355,7 +1349,7 @@
     <value>Name on Card</value>
   </data>
   <data name="NamesOfWitnesses" xml:space="preserve">
-    <value>Name(s) of witness(es) or people involved in the incident</value>
+    <value>Names Of Witnesses</value>
   </data>
   <data name="NewCase" xml:space="preserve">
     <value>New Case</value>
@@ -2001,9 +1995,6 @@
   </data>
   <data name="want_to_remove" xml:space="preserve">
     <value>Do you want to remove case administrator from the team?</value>
-  </data>
-  <data name="wasSubmittedSucessfully" xml:space="preserve">
-    <value>was submitted successfully</value>
   </data>
   <data name="Wesharecontactwith0" xml:space="preserve">
     <value>We will share your contact info with {0}.</value>
@@ -2726,9 +2717,6 @@
   <data name="ComplianceCurrentNationalLegislation" xml:space="preserve">
     <value>In compliance with the current national legislation, anonymous reports are allowed.</value>
   </data>
-  <data name="DifferentCountriesDifferentRegulations" xml:space="preserve">
-    <value>Different countries have different regulations about anonymity reporting. Please select your country to know the regulations.</value>
-  </data>
   <data name="EmailAddress" xml:space="preserve">
     <value>Email Address</value>
   </data>
@@ -2819,12 +2807,6 @@
   <data name="Myself" xml:space="preserve">
     <value>Myself</value>
   </data>
-  <data name="NamesOfWitness" xml:space="preserve">
-    <value>Names Of Witnesses</value>
-  </data>
-  <data name="NamesOfWitnessInvolvedIncident" xml:space="preserve">
-    <value>Name(s) of witness(es) or people involved in the incident</value>
-  </data>
   <data name="NoteLoginInformation" xml:space="preserve">
     <value>Please take note of your login information NOW. Write it down somewhere safe (or enter it into your password protected smartphone) so that you can access it later to check the status of your report.</value>
   </data>
@@ -2846,10 +2828,6 @@ Do not want to involve</value>
   </data>
   <data name="RequiredAllegedOffenderIdentified" xml:space="preserve">
     <value>It is required that the alleged offender be identified in cases of sexual harassment and sexual abuse in order to allow a due process investigation.</value>
-  </data>
-  <data name="RoleOfInvolvedParty" xml:space="preserve">
-    <value>"The role of an involved party could be that of a witness, victim, alleged offender, reporter or other.
-"</value>
   </data>
   <data name="SelectDate" xml:space="preserve">
     <value>Select date</value>
@@ -2994,5 +2972,8 @@ Do not want to involve</value>
   </data>
   <data name="report_by_myself" xml:space="preserve">
     <value>Are you reporting on behalf of yourself or someone else?</value>
+  </data>
+  <data name="ClientLoginUp" xml:space="preserve">
+    <value>Client Login</value>
   </data>
 </root>
