@@ -120,14 +120,47 @@
   <data name="About" xml:space="preserve">
     <value>About</value>
   </data>
+  <data name="AcademicAffairs" xml:space="preserve">
+    <value>Asuntos Académicos</value>
+  </data>
+  <data name="AcademicMisconduct" xml:space="preserve">
+    <value>Academic Misconduct</value>
+  </data>
+  <data name="AcceptableUseViolations" xml:space="preserve">
+    <value>Acceptable Use Violations</value>
+  </data>
   <data name="Acceptcase" xml:space="preserve">
     <value>Accept case</value>
+  </data>
+  <data name="AcceptCaseUp" xml:space="preserve">
+    <value>Accept Case</value>
   </data>
   <data name="Accepttermsconditions" xml:space="preserve">
     <value>Accept terms and conditions</value>
   </data>
+  <data name="AccessDashboardloginHere" xml:space="preserve">
+    <value>Para acceder a su panel, por favor inicie sesión aquí.</value>
+  </data>
   <data name="Accounting" xml:space="preserve">
-    <value>Accounting</value>
+    <value>Contabilidad</value>
+  </data>
+  <data name="AccountingAuditingFinancialReporting" xml:space="preserve">
+    <value>Contabilidad , Auditing and Financial Reporting (i.e. financial misconduct, internal controls, expense reporting)</value>
+  </data>
+  <data name="AccountingAuditingMatters" xml:space="preserve">
+    <value>Contabilidad y Auditing Matters</value>
+  </data>
+  <data name="AccountingAuditRelated" xml:space="preserve">
+    <value>Contabilidad / Audit Related Concerns</value>
+  </data>
+  <data name="AccountingError" xml:space="preserve">
+    <value>Accounting Error</value>
+  </data>
+  <data name="AccountingFinance" xml:space="preserve">
+    <value>Contabilidad y Finanza</value>
+  </data>
+  <data name="AccountingMisrepresentation" xml:space="preserve">
+    <value>Accounting Misrepresentation</value>
   </data>
   <data name="ActEarly" xml:space="preserve">
     <value>Act Early</value>
@@ -151,7 +184,7 @@
     <value>Active Cases</value>
   </data>
   <data name="Activity" xml:space="preserve">
-    <value>Activity</value>
+    <value>Actividad</value>
   </data>
   <data name="Add" xml:space="preserve">
     <value>Add</value>
@@ -159,8 +192,20 @@
   <data name="AddAdditionalComments" xml:space="preserve">
     <value>Add Additional Comments</value>
   </data>
+  <data name="AddAnotherPerson" xml:space="preserve">
+    <value>Agregue otra persona</value>
+  </data>
+  <data name="AddBehavioralFactors" xml:space="preserve">
+    <value>Add Behavioral Factors</value>
+  </data>
+  <data name="AddExternalInfluences" xml:space="preserve">
+    <value>Add External Influences</value>
+  </data>
   <data name="AddFurtherNotes" xml:space="preserve">
     <value>Add any further notes regarding approval of case closure.</value>
+  </data>
+  <data name="AdditionalPermissionsExplanations" xml:space="preserve">
+    <value>Platform Managers can add additional permissions to Case Administrators’ profiles below</value>
   </data>
   <data name="Addmoremediators" xml:space="preserve">
     <value>Add more case administrators</value>
@@ -186,6 +231,12 @@
   <data name="Addnote" xml:space="preserve">
     <value>Add note</value>
   </data>
+  <data name="AddOrganizationalInfluences" xml:space="preserve">
+    <value>Add Organizational Influences</value>
+  </data>
+  <data name="AddOutcomesExplanation" xml:space="preserve">
+    <value>Add disciplinary outcomes for Alleged Offenders as well as outcome options for Witnesses and Reporters</value>
+  </data>
   <data name="AddPerson" xml:space="preserve">
     <value>add person</value>
   </data>
@@ -194,6 +245,9 @@
   </data>
   <data name="Addtoteam" xml:space="preserve">
     <value>Add to team</value>
+  </data>
+  <data name="Administration" xml:space="preserve">
+    <value>Administración</value>
   </data>
   <data name="AdministrationMediator" xml:space="preserve">
     <value>Platform Manager</value>
@@ -211,7 +265,10 @@
     <value>Do you have any advice for management?</value>
   </data>
   <data name="AffectedDepartment" xml:space="preserve">
-    <value>Affected department(s)</value>
+    <value>Departamento(s) afectado(s)</value>
+  </data>
+  <data name="AlcoholDrugAbuse" xml:space="preserve">
+    <value>Alcohol/Drug Abuse</value>
   </data>
   <data name="Allcases" xml:space="preserve">
     <value>All cases</value>
@@ -222,11 +279,17 @@
   <data name="AllegationTypeUp" xml:space="preserve">
     <value>Allegation Type</value>
   </data>
+  <data name="AllegedOffender" xml:space="preserve">
+    <value>Presunto Agresor</value>
+  </data>
   <data name="Allmediators" xml:space="preserve">
     <value>All case administrators</value>
   </data>
   <data name="Allmessages" xml:space="preserve">
     <value>All messages</value>
+  </data>
+  <data name="AlreadyFiledReport" xml:space="preserve">
+    <value>¿Ya presentó un reporte?</value>
   </data>
   <data name="AlreadyInvited" xml:space="preserve">
     <value>Case Administrator already invited</value>
@@ -256,7 +319,13 @@
     <value>You have chosen to remain anonymous to ACME Inc, but share you name and email address w</value>
   </data>
   <data name="AnonymousToAcme" xml:space="preserve">
-    <value>Anonymous to ACME Inc</value>
+    <value>Anonimo a ACME Inc</value>
+  </data>
+  <data name="AnonymousToCompany" xml:space="preserve">
+    <value>Anonimo a {0}</value>
+  </data>
+  <data name="AnonymousToMicrosoft" xml:space="preserve">
+    <value>Anonimo a Microsoft</value>
   </data>
   <data name="anonymous_reporter" xml:space="preserve">
     <value>Anonymous Reporter</value>
@@ -294,11 +363,20 @@
   <data name="Assigntaskto" xml:space="preserve">
     <value>Assign task to</value>
   </data>
+  <data name="Athletics" xml:space="preserve">
+    <value>Atléticos</value>
+  </data>
   <data name="AttachDocuments" xml:space="preserve">
     <value>Attached documents</value>
   </data>
   <data name="Attachfiles" xml:space="preserve">
     <value>Attach files</value>
+  </data>
+  <data name="Attachments" xml:space="preserve">
+    <value>Documentos Adjuntos</value>
+  </data>
+  <data name="AuditingMatters" xml:space="preserve">
+    <value>Auditing Matters</value>
   </data>
   <data name="AuthCode" xml:space="preserve">
     <value>Authorization Code</value>
@@ -333,26 +411,56 @@
   <data name="BackToResults" xml:space="preserve">
     <value>Back to results</value>
   </data>
+  <data name="BenefitsAbuses" xml:space="preserve">
+    <value>Benefits Abuses</value>
+  </data>
   <data name="Bespecific" xml:space="preserve">
     <value>Be as specific as possible.</value>
+  </data>
+  <data name="BiasIncidents" xml:space="preserve">
+    <value>Bias Incidents</value>
+  </data>
+  <data name="BookingECOnboardingSessionNotifications" xml:space="preserve">
+    <value>Order Confirmation from Employee Confidential</value>
   </data>
   <data name="BreachofLegalObligations" xml:space="preserve">
     <value>Breach of legal obligation</value>
   </data>
+  <data name="BriberyKickbacks" xml:space="preserve">
+    <value>Bribery/Kickbacks</value>
+  </data>
   <data name="Business" xml:space="preserve">
     <value>Business</value>
+  </data>
+  <data name="BusinessIntegrity" xml:space="preserve">
+    <value>Business Integrity (i.e. bribery, falsification of documents, fraud, COI, vendor/customer issues, HIPAA)</value>
+  </data>
+  <data name="BusinessPartner" xml:space="preserve">
+    <value>Business partner</value>
   </data>
   <data name="CampusAlertManager" xml:space="preserve">
     <value>Campus Alert Manager</value>
   </data>
   <data name="canAccess" xml:space="preserve">
-    <value>Please take note of your login information NOW. Write it down somewhere safe (or enter it into your password protected smartphone) so that you can access it later to check the status of your report.</value>
+    <value>Por favor tome nota de la información de su registro AHORA: Escribala en un lugar seguro (o introduzcala en su teléfono) para que puede acceder a ella luego para revisar el estatus de su reporte.</value>
   </data>
   <data name="Case" xml:space="preserve">
     <value>Case</value>
   </data>
   <data name="CaseActivityUp" xml:space="preserve">
     <value>Case Activity</value>
+  </data>
+  <data name="CaseAdministrationTeam" xml:space="preserve">
+    <value>Case Administration team</value>
+  </data>
+  <data name="CaseAdministratorDepartment" xml:space="preserve">
+    <value>Case Administrator Department</value>
+  </data>
+  <data name="CaseAdministrators" xml:space="preserve">
+    <value>Case Administrators</value>
+  </data>
+  <data name="CaseAdministratorsUp" xml:space="preserve">
+    <value>Case Administrators</value>
   </data>
   <data name="CaseCantBeResolved" xml:space="preserve">
     <value>Case Can't Be Resolved</value>
@@ -376,7 +484,7 @@
     <value>Case Flow Settings</value>
   </data>
   <data name="CaseInformation" xml:space="preserve">
-    <value>Case Information</value>
+    <value>Información del Caso</value>
   </data>
   <data name="CaseInvestigator" xml:space="preserve">
     <value>Case Investigator</value>
@@ -384,14 +492,20 @@
   <data name="CaseManagementDeadlines" xml:space="preserve">
     <value>Case Deadlines</value>
   </data>
+  <data name="CaseManagementDeadlinesUp" xml:space="preserve">
+    <value>Case Management Deadlines</value>
+  </data>
+  <data name="CaseManagerUp" xml:space="preserve">
+    <value>Administrador del Caso</value>
+  </data>
   <data name="Casemarkedasspam" xml:space="preserve">
     <value>Case marked as spam</value>
   </data>
   <data name="Casemediators" xml:space="preserve">
-    <value>case administrators</value>
+    <value>administradores del caso</value>
   </data>
   <data name="CaseMediatorsTop" xml:space="preserve">
-    <value>Case Administrators</value>
+    <value>Administradores del Caso</value>
   </data>
   <data name="CaseNumber" xml:space="preserve">
     <value>Case number</value>
@@ -433,10 +547,10 @@
     <value>Case Settings</value>
   </data>
   <data name="Casestatus" xml:space="preserve">
-    <value>Case status</value>
+    <value>Estatus del caso</value>
   </data>
   <data name="CaseStatusUp" xml:space="preserve">
-    <value>Case Status</value>
+    <value>Estatus del Caso</value>
   </data>
   <data name="CaseSubmitted" xml:space="preserve">
     <value>Case submitted</value>
@@ -451,7 +565,7 @@
     <value>Case Team</value>
   </data>
   <data name="CaseUpdates" xml:space="preserve">
-    <value>We will send you case updates to</value>
+    <value>Le enviaremos las actualizaciones del caso a:</value>
   </data>
   <data name="Caseworkflow" xml:space="preserve">
     <value>Case workflow</value>
@@ -468,14 +582,38 @@
   <data name="Change" xml:space="preserve">
     <value>Change</value>
   </data>
+  <data name="ChangeAccountSettings" xml:space="preserve">
+    <value>Change your account settings</value>
+  </data>
+  <data name="ChangePasswordUp" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="ChangeSettings" xml:space="preserve">
+    <value>Change Settings</value>
+  </data>
+  <data name="CheatingPlagiarism" xml:space="preserve">
+    <value>Cheating/Plagiarism</value>
+  </data>
   <data name="CheckCaseNumber" xml:space="preserve">
-    <value>You can always check this case progress using the following details:</value>
+    <value>Siempre puede revisar el progreso del caso usando los siguientes detalles:</value>
   </data>
   <data name="CheckCaseSummary" xml:space="preserve">
     <value>Please check your case summary and submit when ready</value>
   </data>
+  <data name="CheckReportStatus" xml:space="preserve">
+    <value>Revise el estatus de la denuncia</value>
+  </data>
+  <data name="CheckStatusOfReport" xml:space="preserve">
+    <value>Usted puede revisar el estatus del su denuncia usando el registro proporcionado y la contraseña creada cuando formuló su reporte.</value>
+  </data>
+  <data name="CheckSummarySubmit" xml:space="preserve">
+    <value>Please check your report summary and submit when ready:</value>
+  </data>
   <data name="CheckYourCase" xml:space="preserve">
     <value>Check your case status</value>
+  </data>
+  <data name="ChooseConfidentialLevel" xml:space="preserve">
+    <value>Elija el nivel de confidencialidad:</value>
   </data>
   <data name="Chooseyour" xml:space="preserve">
     <value>Choose your</value>
@@ -493,7 +631,7 @@
     <value>Close Case</value>
   </data>
   <data name="Closed" xml:space="preserve">
-    <value>Closed</value>
+    <value>Cerrado</value>
   </data>
   <data name="ClosedCases" xml:space="preserve">
     <value>Closed cases</value>
@@ -504,6 +642,15 @@
   <data name="Closedtasks" xml:space="preserve">
     <value>Closed tasks</value>
   </data>
+  <data name="CodeEthicsViolation" xml:space="preserve">
+    <value>Code of Ethics Violation</value>
+  </data>
+  <data name="CommunicateNonManagement" xml:space="preserve">
+    <value>Communicate with Non-Management Directors</value>
+  </data>
+  <data name="CommunicationBarriers" xml:space="preserve">
+    <value>Communication Barriers</value>
+  </data>
   <data name="Company" xml:space="preserve">
     <value>Company</value>
   </data>
@@ -513,14 +660,26 @@
   <data name="CompanyInUse_CC" xml:space="preserve">
     <value>Name of Educational Institution is already in use.</value>
   </data>
+  <data name="CompanyLoyaltyRealization" xml:space="preserve">
+    <value>Company Loyalty Realization</value>
+  </data>
   <data name="CompanyMediators" xml:space="preserve">
-    <value>Case Admins</value>
+    <value>Administradores del Caso</value>
   </data>
   <data name="CompanyMediatorsSettings" xml:space="preserve">
     <value>Company Case Administrator Settings</value>
   </data>
+  <data name="CompanyMediatorsSettings_CC" xml:space="preserve">
+    <value>Educational Institute Case Administrator Settings</value>
+  </data>
   <data name="Companyname" xml:space="preserve">
     <value>Nombre de la Compañía</value>
+  </data>
+  <data name="CompanyNameOrCode" xml:space="preserve">
+    <value>Company name or code</value>
+  </data>
+  <data name="CompanyNameOrCode_CC" xml:space="preserve">
+    <value>Educational Institute name or code</value>
   </data>
   <data name="CompanyNameUp" xml:space="preserve">
     <value>Company Name</value>
@@ -567,6 +726,12 @@
   <data name="Completedon" xml:space="preserve">
     <value>Completed on</value>
   </data>
+  <data name="CompletelyAnonymous" xml:space="preserve">
+    <value>Completamente anonimo</value>
+  </data>
+  <data name="CompletelyAnonymousUp" xml:space="preserve">
+    <value>Completamente Anonimo</value>
+  </data>
   <data name="Completestage" xml:space="preserve">
     <value>Complete stage</value>
   </data>
@@ -576,11 +741,17 @@
   <data name="Completiontime" xml:space="preserve">
     <value>Completion time</value>
   </data>
+  <data name="ComplianceCurrentNationalLegislation" xml:space="preserve">
+    <value>En conformidad con las leyes nacionales actuales, las denuncias anonimas son permitidas</value>
+  </data>
+  <data name="ComplianceRegulationViolations" xml:space="preserve">
+    <value>Compliance and Regulation Violations</value>
+  </data>
   <data name="Confidential" xml:space="preserve">
     <value>Confidential</value>
   </data>
   <data name="ConfidentialityLevel" xml:space="preserve">
-    <value>Confidentiality Level</value>
+    <value>Nivel de Confidencialidad</value>
   </data>
   <data name="ConfidentialToACME" xml:space="preserve">
     <value>Confidential to ACME Inc</value>
@@ -591,8 +762,14 @@
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Confirm password</value>
   </data>
+  <data name="ConflictInterest" xml:space="preserve">
+    <value>Conflict of Interest</value>
+  </data>
   <data name="ConflictofInterest" xml:space="preserve">
     <value>Conflict of interest</value>
+  </data>
+  <data name="ConnectionErrorSessionExpiration" xml:space="preserve">
+    <value>Esto es debido a un error de conexión o la sesión expiró</value>
   </data>
   <data name="ContactInfoShared" xml:space="preserve">
     <value>Contact info shared</value>
@@ -609,8 +786,17 @@
   <data name="Contractor" xml:space="preserve">
     <value>Contractor</value>
   </data>
+  <data name="CorporateScandal" xml:space="preserve">
+    <value>Corporate Scandal</value>
+  </data>
+  <data name="CostControlGoals" xml:space="preserve">
+    <value>Cost Control Goals</value>
+  </data>
   <data name="counsel_invited" xml:space="preserve">
     <value>Legal counsel will be invited to this case</value>
+  </data>
+  <data name="CreateAccount" xml:space="preserve">
+    <value>Fill in the following fields and click "Create" to create an account</value>
   </data>
   <data name="Createnewtask" xml:space="preserve">
     <value>Create new task</value>
@@ -621,6 +807,9 @@
   <data name="Createtask" xml:space="preserve">
     <value>Create Task</value>
   </data>
+  <data name="CredentialMisrepresentation" xml:space="preserve">
+    <value>Credential Misrepresentation</value>
+  </data>
   <data name="CreditCardNumber" xml:space="preserve">
     <value>Credit Card Number</value>
   </data>
@@ -630,11 +819,26 @@
   <data name="CSVCode" xml:space="preserve">
     <value>CSV Code</value>
   </data>
+  <data name="CulturalDifferencesPersonalValues" xml:space="preserve">
+    <value>Cultural Differences/Personal Values</value>
+  </data>
+  <data name="CulturalInfluences" xml:space="preserve">
+    <value>Cultural Influences</value>
+  </data>
   <data name="CurrentStatus" xml:space="preserve">
     <value>Current Status</value>
   </data>
-  <data name="Custumer" xml:space="preserve">
-    <value>Custumer</value>
+  <data name="Customer" xml:space="preserve">
+    <value>Customer</value>
+  </data>
+  <data name="CustomerDemands" xml:space="preserve">
+    <value>Customer Demands</value>
+  </data>
+  <data name="CustomerMistreatment" xml:space="preserve">
+    <value>Customer Mistreatment</value>
+  </data>
+  <data name="CustomerService" xml:space="preserve">
+    <value>Servicio al Cliente</value>
   </data>
   <data name="Daily" xml:space="preserve">
     <value>Daily</value>
@@ -642,17 +846,29 @@
   <data name="DailyCrimeLogManager" xml:space="preserve">
     <value>Daily Crime Log Manager</value>
   </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="DataPrivacy" xml:space="preserve">
+    <value>Data Privacy</value>
+  </data>
+  <data name="DataprivacyIntegrity" xml:space="preserve">
+    <value>Data privacy/Integrity</value>
+  </data>
   <data name="Date" xml:space="preserve">
     <value>Date</value>
   </data>
+  <data name="DateIncident" xml:space="preserve">
+    <value>Fecha de incidente (o cuando estuvo consciente de ello por primera vez)</value>
+  </data>
   <data name="dateIncidentHappened" xml:space="preserve">
-    <value>Date of incident</value>
+    <value>Fecha de incidente</value>
   </data>
   <data name="DateofIncidentAware" xml:space="preserve">
-    <value>Date of incident (or when you first became aware of it)</value>
+    <value>Fecha de incidente (o cuando estuvo consciente de ello por primera vez)</value>
   </data>
   <data name="Datereported" xml:space="preserve">
-    <value>Date Reported</value>
+    <value>Fecha Reportada</value>
   </data>
   <data name="day" xml:space="preserve">
     <value>day</value>
@@ -691,6 +907,9 @@
   <data name="DeadlineNotification" xml:space="preserve">
     <value>Deadline Notification</value>
   </data>
+  <data name="Deadlines" xml:space="preserve">
+    <value>Deadlines</value>
+  </data>
   <data name="Department" xml:space="preserve">
     <value>Department</value>
   </data>
@@ -704,7 +923,10 @@
     <value>Departments Involved</value>
   </data>
   <data name="describeHappened" xml:space="preserve">
-    <value>Please describe what happened.</value>
+    <value>Por favor describa lo que sucedió.</value>
+  </data>
+  <data name="DescribeWhatHappened" xml:space="preserve">
+    <value>Por favor describa lo que sucedió. Sea tan específico como sea posible.</value>
   </data>
   <data name="Description" xml:space="preserve">
     <value>Description</value>
@@ -715,11 +937,23 @@
   <data name="detailsCase" xml:space="preserve">
     <value>You can always check the case progress using the following details</value>
   </data>
-  <data name="DifferentCountriesHaveDifferentEtc" xml:space="preserve">
-    <value>Different countries have different regulations about anonymity reporting. Please select your country to know the regulations.</value>
+  <data name="DisclosureConfidential" xml:space="preserve">
+    <value>Disclosure of Confidential Information</value>
+  </data>
+  <data name="Discrimination" xml:space="preserve">
+    <value>Discrimination</value>
+  </data>
+  <data name="DiscriminationHarassment" xml:space="preserve">
+    <value>Discrimination or Harassment</value>
   </data>
   <data name="Doesmanagementknowaboutthisincident" xml:space="preserve">
-    <value>Does management know about this incident?</value>
+    <value>¿La gerencia sabe de este incidente?</value>
+  </data>
+  <data name="DomesticViolence" xml:space="preserve">
+    <value>Domestic Violence</value>
+  </data>
+  <data name="DonorStewardship" xml:space="preserve">
+    <value>Donor Stewardship</value>
   </data>
   <data name="Dontforgettoassign" xml:space="preserve">
     <value>Don’t forget to assign it</value>
@@ -728,13 +962,16 @@
     <value>Don't be a Silent Bystander</value>
   </data>
   <data name="Download" xml:space="preserve">
-    <value>Download</value>
+    <value>Descargar</value>
   </data>
   <data name="DownloadPosterPDF" xml:space="preserve">
     <value>download {0} poster (pdf)</value>
   </data>
   <data name="DoYouWantToReceiveUpdates" xml:space="preserve">
     <value>Do you want to receive report updates?</value>
+  </data>
+  <data name="DragDropFilesHere" xml:space="preserve">
+    <value>Arraste y coloque los archivos aquí</value>
   </data>
   <data name="Due" xml:space="preserve">
     <value>Due</value>
@@ -752,16 +989,28 @@
     <value>Campus Confidential recommends</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>Edit</value>
+    <value>Edite</value>
+  </data>
+  <data name="EEOCADA" xml:space="preserve">
+    <value>EEOC or ADA Matters</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>E-mail</value>
   </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>Dirección de correo</value>
+  </data>
   <data name="EmailInvalid" xml:space="preserve">
     <value>Invalid Email</value>
   </data>
+  <data name="EmailSentWithPass" xml:space="preserve">
+    <value>Email with updated password sent</value>
+  </data>
   <data name="Email_TitlePartnerNewCompanyStatusChange" xml:space="preserve">
     <value>Membership status</value>
+  </data>
+  <data name="Email_Title_CaseClosureReport" xml:space="preserve">
+    <value>Employee Confidential notification - Case Closure Report</value>
   </data>
   <data name="Email_Title_CaseEscalated" xml:space="preserve">
     <value>Employee Confidential Notification - Case Escalated</value>
@@ -818,10 +1067,10 @@
     <value>Registration with Campus Confidential</value>
   </data>
   <data name="Email_Title_NewMessage" xml:space="preserve">
-    <value>Employee Confidential Notification - New Message</value>
+    <value>Employee Confidential Notification - Mensaje nuevo</value>
   </data>
   <data name="Email_Title_NewMessage_CC" xml:space="preserve">
-    <value>Campus Confidential Notification - New Message</value>
+    <value>Campus Confidential Notification - Mensaje nuevo</value>
   </data>
   <data name="Email_Title_NewRequest" xml:space="preserve">
     <value>Request for Price Quote</value>
@@ -844,6 +1093,15 @@
   <data name="Email_Title_ReporterNewCase" xml:space="preserve">
     <value>Your report has been received</value>
   </data>
+  <data name="Email_Title_SetCaseOwner" xml:space="preserve">
+    <value>Employee Confidential assignment as Case Owner</value>
+  </data>
+  <data name="Email_Title_SetCaseOwner_CC" xml:space="preserve">
+    <value>Campus Confidential assignment as Case Owner</value>
+  </data>
+  <data name="Embezzlement" xml:space="preserve">
+    <value>Embezzlement</value>
+  </data>
   <data name="Employee" xml:space="preserve">
     <value>Employee</value>
   </data>
@@ -865,6 +1123,9 @@
   <data name="EmployeeAwareness_CC" xml:space="preserve">
     <value>Campus awareness</value>
   </data>
+  <data name="EmployeeBenefitsAbuse" xml:space="preserve">
+    <value>Employee Benefits Abuse</value>
+  </data>
   <data name="EmployeeConfidential" xml:space="preserve">
     <value>Employee Confidential</value>
   </data>
@@ -874,14 +1135,23 @@
   <data name="EmployeeConfidentialCaseNumber_CC" xml:space="preserve">
     <value>Campus Confidential Case number</value>
   </data>
+  <data name="EmployeeMisconduct" xml:space="preserve">
+    <value>Employee Misconduct</value>
+  </data>
+  <data name="EmployeeRelations" xml:space="preserve">
+    <value>Employee Relations</value>
+  </data>
   <data name="EmptyData" xml:space="preserve">
     <value>Missing Data</value>
   </data>
   <data name="English" xml:space="preserve">
     <value>English</value>
   </data>
+  <data name="EnterEmail" xml:space="preserve">
+    <value>Intruduzca su correo</value>
+  </data>
   <data name="Enterlocation" xml:space="preserve">
-    <value>Enter location</value>
+    <value>Introduzca el lugar</value>
   </data>
   <data name="EnterNewPassword" xml:space="preserve">
     <value>Enter new password</value>
@@ -892,8 +1162,23 @@
   <data name="EnterYourToken" xml:space="preserve">
     <value>Enter password token</value>
   </data>
+  <data name="EnvironmentalDamage" xml:space="preserve">
+    <value>Environmental Damage</value>
+  </data>
+  <data name="EnvironmentalIssue" xml:space="preserve">
+    <value>Environmental Issue</value>
+  </data>
+  <data name="EnvironmentalSafetyMatters" xml:space="preserve">
+    <value>Environmental and Safety Matters</value>
+  </data>
+  <data name="EnvironmentHealthSafety" xml:space="preserve">
+    <value>Environment, Health and Safety (i.e. EPA compliance, assault, safety, OSHA, substance abuse)</value>
+  </data>
   <data name="ErrorSavingLoginPass" xml:space="preserve">
     <value>Login / Pass wasn't saved.</value>
+  </data>
+  <data name="ERRORTheFileUploaded" xml:space="preserve">
+    <value>ERROR! El archivo cargado excede los 4MB del límite máximo.</value>
   </data>
   <data name="Escalate" xml:space="preserve">
     <value>Escalate</value>
@@ -910,14 +1195,23 @@
   <data name="Escalationstagemilestones" xml:space="preserve">
     <value>Escalation stage milestones</value>
   </data>
+  <data name="EthicalViolations" xml:space="preserve">
+    <value>Ethical Violations</value>
+  </data>
+  <data name="EthicsViolations" xml:space="preserve">
+    <value>Ethics Violations</value>
+  </data>
   <data name="Exclude" xml:space="preserve">
-    <value>Exclude</value>
+    <value>Excluir</value>
   </data>
   <data name="ExecutiveSummary" xml:space="preserve">
     <value>Executive Summary</value>
   </data>
   <data name="Expecta" xml:space="preserve">
     <value>Expect a</value>
+  </data>
+  <data name="ExperienceProblemWithLink" xml:space="preserve">
+    <value>If you experience a problem with the link, please copy and paste this address into your browser:</value>
   </data>
   <data name="Expired" xml:space="preserve">
     <value>Expired</value>
@@ -931,20 +1225,47 @@
   <data name="ExplainFurtherOutcome" xml:space="preserve">
     <value>Explain further on outcome</value>
   </data>
+  <data name="ExtrenalLocusofControl" xml:space="preserve">
+    <value>Extrenal Locus of Control</value>
+  </data>
   <data name="FactsEstablished" xml:space="preserve">
     <value>Facts Established</value>
+  </data>
+  <data name="Falsification" xml:space="preserve">
+    <value>Falsification of Records and Official Documents</value>
+  </data>
+  <data name="FalsificationContracts" xml:space="preserve">
+    <value>Falsification of Contracts, Reports or Records</value>
+  </data>
+  <data name="FalsificationSimple" xml:space="preserve">
+    <value>Falsification</value>
   </data>
   <data name="Faq" xml:space="preserve">
     <value>FAQ</value>
   </data>
+  <data name="FileANewReport" xml:space="preserve">
+    <value>Presente una denuncia nueva</value>
+  </data>
+  <data name="FileAReport" xml:space="preserve">
+    <value>PRESENTE UNA DENUNCIA</value>
+  </data>
   <data name="FileNewReport" xml:space="preserve">
-    <value>File New Report</value>
+    <value>Presente una Denuncia Nueva</value>
   </data>
   <data name="FileReport" xml:space="preserve">
-    <value>File a report</value>
+    <value>Presente una denuncia</value>
   </data>
   <data name="FillTheFollowingFields" xml:space="preserve">
     <value>Fill in the following fields and click "Create" to create an account</value>
+  </data>
+  <data name="FillTheFollowingFieldsRegister" xml:space="preserve">
+    <value>Fill in the following fields and click "Register" to create an account</value>
+  </data>
+  <data name="FinancialConcerns" xml:space="preserve">
+    <value>Financial Concerns</value>
+  </data>
+  <data name="FinancialorPerformanceIncentives" xml:space="preserve">
+    <value>Financial or Performance Incentives</value>
   </data>
   <data name="FinancialReportingAccountingIrregularity" xml:space="preserve">
     <value>Financial reporting /Accounting irregularity</value>
@@ -964,8 +1285,11 @@
   <data name="forEmployeeConfidentialOnly" xml:space="preserve">
     <value>FOR EMPLOYEE CONFIDENTIAL ONLY</value>
   </data>
+  <data name="forEmployeeConfidentialOnly_CC" xml:space="preserve">
+    <value>FOR CAMPUS CONFIDENTIAL ONLY</value>
+  </data>
   <data name="ForgotPassword" xml:space="preserve">
-    <value>Forgot Password</value>
+    <value>¿Olvidó su contraseña?</value>
   </data>
   <data name="format_1" xml:space="preserve">
     <value>11" X 17"</value>
@@ -985,17 +1309,26 @@
   <data name="FormerEmployee_CC" xml:space="preserve">
     <value>Former Student</value>
   </data>
+  <data name="Fraud" xml:space="preserve">
+    <value>Fraud</value>
+  </data>
   <data name="FraudEmbezzlement" xml:space="preserve">
     <value>Fraud, Embezzlement or Theft </value>
+  </data>
+  <data name="FraudulentActivities" xml:space="preserve">
+    <value>Fraudulent Activities</value>
   </data>
   <data name="French" xml:space="preserve">
     <value>Français</value>
   </data>
+  <data name="FromECTeam" xml:space="preserve">
+    <value>Del El quipo de Confidencialidad del Empleado</value>
+  </data>
   <data name="GeneralInf4ormation" xml:space="preserve">
-    <value>General Information</value>
+    <value>Información General</value>
   </data>
   <data name="GeneralInformation" xml:space="preserve">
-    <value>General Information</value>
+    <value>Información General</value>
   </data>
   <data name="GetQuoteMessage" xml:space="preserve">
     <value>Fill in the following fields and click "Request" to get your free quote.</value>
@@ -1004,16 +1337,19 @@
     <value>Given advice</value>
   </data>
   <data name="GoToReportDashboard" xml:space="preserve">
-    <value>Go to report dashboard</value>
+    <value>Vaya al panel de reportes</value>
   </data>
   <data name="happenedIn" xml:space="preserve">
     <value>The incident happened in</value>
+  </data>
+  <data name="Harassment" xml:space="preserve">
+    <value>Harassment</value>
   </data>
   <data name="HarassmentDiscrimination" xml:space="preserve">
     <value>Harassment/ Discrimination</value>
   </data>
   <data name="Hascasereportedoutside" xml:space="preserve">
-    <value>Has the incident been reported to anyone outside the organization?</value>
+    <value>¿Se ha reportado el incidente con alguien fuera de la organización?</value>
   </data>
   <data name="Hascasereportedoutside_CC" xml:space="preserve">
     <value>Has case been reported to anyone outside the educational institution?</value>
@@ -1021,8 +1357,20 @@
   <data name="HasThisIncidentBeenPrevioslyReported" xml:space="preserve">
     <value>Has this incident been previosly reported</value>
   </data>
+  <data name="HaveReceivedEmail" xml:space="preserve">
+    <value>You have received this email because you signed up for a EmployeeConfidential account</value>
+  </data>
+  <data name="Hazing" xml:space="preserve">
+    <value>Hazing</value>
+  </data>
+  <data name="HealthcareFraud" xml:space="preserve">
+    <value>Healthcare Fraud</value>
+  </data>
   <data name="Hellouser" xml:space="preserve">
     <value>Hello, user</value>
+  </data>
+  <data name="HELP" xml:space="preserve">
+    <value>AYUDA</value>
   </data>
   <data name="Hidecompleted" xml:space="preserve">
     <value>Hide completed</value>
@@ -1030,8 +1378,32 @@
   <data name="HideCompletedUp" xml:space="preserve">
     <value>Hide Completed</value>
   </data>
+  <data name="HIPAA" xml:space="preserve">
+    <value>HIPAA</value>
+  </data>
+  <data name="HIPAACompliance" xml:space="preserve">
+    <value>HIPAA Compliance</value>
+  </data>
   <data name="History" xml:space="preserve">
     <value>History</value>
+  </data>
+  <data name="HostileEnvironment" xml:space="preserve">
+    <value>Hostile Environment</value>
+  </data>
+  <data name="HRDiversityWorkplaceRespect" xml:space="preserve">
+    <value>HR, Diversity and Workplace Respect (i.e. discrimination, harassment, compensation, general HR and cases marked as “other”)</value>
+  </data>
+  <data name="HumanAnimalResearch" xml:space="preserve">
+    <value>Human or Animal Research</value>
+  </data>
+  <data name="HumanResources" xml:space="preserve">
+    <value>Recursos Humanos</value>
+  </data>
+  <data name="HumanResourcesIssues" xml:space="preserve">
+    <value>Human Resources Issues</value>
+  </data>
+  <data name="IdentityTheft" xml:space="preserve">
+    <value>Identity Theft</value>
   </data>
   <data name="IfNotReportedViaEmployeeConfidentialPleaseProvideCaseDescription" xml:space="preserve">
     <value>If not reported via Employee Confidential please provide case description</value>
@@ -1045,8 +1417,26 @@
   <data name="Ifyouwitness_CC" xml:space="preserve">
     <value>If you witness (or know of) an incident that compromises your educational institution, contribute to the solution. Report it.</value>
   </data>
+  <data name="ImproperDisclosure" xml:space="preserve">
+    <value>Improper Disclosure of Financial Records</value>
+  </data>
+  <data name="ImproperGiving" xml:space="preserve">
+    <value>Improper Giving or Receiving of Gifts</value>
+  </data>
+  <data name="ImproperGivingGifts" xml:space="preserve">
+    <value>Improper Giving or Gifts</value>
+  </data>
+  <data name="ImproperSupplier" xml:space="preserve">
+    <value>Improper Supplier or Contractor Activity</value>
+  </data>
   <data name="Inactive" xml:space="preserve">
     <value>Inactive</value>
+  </data>
+  <data name="InappropriateActivities" xml:space="preserve">
+    <value>Inappropriate Activities</value>
+  </data>
+  <data name="IncidentBeenReportedAnyoneOutside" xml:space="preserve">
+    <value>incident been reported to anyone outside</value>
   </data>
   <data name="IncidentDate" xml:space="preserve">
     <value>Incident Date</value>
@@ -1060,29 +1450,44 @@
   <data name="IncidentFrequency" xml:space="preserve">
     <value>Incident frequency</value>
   </data>
+  <data name="IncidentLifeThreatening" xml:space="preserve">
+    <value>SI ESTE INCIDENTE ES UNA AMENAZA  PARA LA VIDA, CONTACTE SU POLICÍA LOCAL</value>
+  </data>
   <data name="Incidentlocation" xml:space="preserve">
     <value>Incident Location</value>
+  </data>
+  <data name="IncidentOngoing" xml:space="preserve">
+    <value>¿Continua el incidente?</value>
+  </data>
+  <data name="Incidentreportedexternally" xml:space="preserve">
+    <value>Incident reported externally?</value>
+  </data>
+  <data name="IncidentReportedOutside" xml:space="preserve">
+    <value>Has the incident been reported to anyone outside the organization?</value>
   </data>
   <data name="Incidentreportedoutside_q" xml:space="preserve">
     <value>Incident reported outside?</value>
   </data>
   <data name="incidentResult" xml:space="preserve">
-    <value>Did this incident result in any physical injury or damage</value>
+    <value>Este incidente resultó en una lesión o daño físico</value>
   </data>
   <data name="IncidentResultInjury" xml:space="preserve">
-    <value>Did this incident result in any physical injury or damage?</value>
+    <value>¿Este incidente resultó en una lesión o daño físico?</value>
   </data>
   <data name="IncidentType" xml:space="preserve">
-    <value>Incident Type</value>
+    <value>Tipo de Incidente</value>
   </data>
   <data name="IncidentTypes" xml:space="preserve">
-    <value>Incident Types</value>
+    <value>Tipos de incidente</value>
   </data>
   <data name="IncidentTypeSavingFailed" xml:space="preserve">
     <value>Failed to save types</value>
   </data>
   <data name="increportingandcasemanag" xml:space="preserve">
     <value>Incident Reporting and Case Management</value>
+  </data>
+  <data name="IndustrialAccidents" xml:space="preserve">
+    <value>Industrial Accidents</value>
   </data>
   <data name="Industry" xml:space="preserve">
     <value>Industry</value>
@@ -1105,8 +1510,14 @@
   <data name="InformationAboutFooter" xml:space="preserve">
     <value>Information about the incident</value>
   </data>
+  <data name="InformationSecurity" xml:space="preserve">
+    <value>Information Security</value>
+  </data>
   <data name="InformationSecurityBreach" xml:space="preserve">
     <value>Breach of information security</value>
+  </data>
+  <data name="Infringement" xml:space="preserve">
+    <value>Infringement</value>
   </data>
   <data name="InjuryAndDamageDescription" xml:space="preserve">
     <value>Injury/damage description</value>
@@ -1116,6 +1527,12 @@
   </data>
   <data name="Instantly" xml:space="preserve">
     <value>Instantly</value>
+  </data>
+  <data name="Insubordination" xml:space="preserve">
+    <value>Insubordination</value>
+  </data>
+  <data name="InsuranceIssues" xml:space="preserve">
+    <value>Insurance Issues</value>
   </data>
   <data name="InvalidCode" xml:space="preserve">
     <value>Invalid Invitation Code</value>
@@ -1147,11 +1564,17 @@
   <data name="InvitationCompanyMismatch" xml:space="preserve">
     <value>Code doesn't match company</value>
   </data>
+  <data name="InvitationCompanyMismatch_CC" xml:space="preserve">
+    <value>Code doesn't match educational institute</value>
+  </data>
   <data name="InvitationSuccessfull" xml:space="preserve">
     <value>Your invitation has been sent successfully</value>
   </data>
   <data name="invite_new_mediator" xml:space="preserve">
     <value>Invite new company case administrator</value>
+  </data>
+  <data name="invite_new_mediator_CC" xml:space="preserve">
+    <value>Invite new case administrator</value>
   </data>
   <data name="Involved" xml:space="preserve">
     <value>Involved</value>
@@ -1172,16 +1595,43 @@
     <value>Is management informed</value>
   </data>
   <data name="isOngoing" xml:space="preserve">
-    <value>Is the incident ongoing</value>
+    <value>Continua el incidente</value>
   </data>
   <data name="IsReportUrgent" xml:space="preserve">
+    <value>Is the situation an emergency?</value>
+  </data>
+  <data name="IsreporturgentLow" xml:space="preserve">
     <value>Is the situation an emergency?</value>
   </data>
   <data name="IsReportUrgent_q" xml:space="preserve">
     <value>Is the situation an emergency?</value>
   </data>
+  <data name="IsSituationEmergency" xml:space="preserve">
+    <value>¿Es la situación una emergencía?</value>
+  </data>
+  <data name="IT" xml:space="preserve">
+    <value>Information Technology (IT)</value>
+  </data>
   <data name="Itemss" xml:space="preserve">
     <value>{0} Item(s)</value>
+  </data>
+  <data name="ITSimple" xml:space="preserve">
+    <value>TI</value>
+  </data>
+  <data name="LackofAwareness" xml:space="preserve">
+    <value>Lack of Awareness</value>
+  </data>
+  <data name="LackofSensitivity" xml:space="preserve">
+    <value>Lack of Sensitivity</value>
+  </data>
+  <data name="LackofSkills" xml:space="preserve">
+    <value>Lack of Skills</value>
+  </data>
+  <data name="LackofTeamwork" xml:space="preserve">
+    <value>Lack of Teamwork</value>
+  </data>
+  <data name="LackofTraining" xml:space="preserve">
+    <value>Lack of Training</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Language</value>
@@ -1193,13 +1643,19 @@
     <value>Language</value>
   </data>
   <data name="Lastname" xml:space="preserve">
-    <value>Last name</value>
+    <value>Apellido</value>
   </data>
   <data name="LastNameUp" xml:space="preserve">
-    <value>Last Name</value>
+    <value>Apellido</value>
   </data>
   <data name="lastOpportunity" xml:space="preserve">
-    <value>This is the last opportunity for you to record your login information</value>
+    <value>Esta es la última oportunidad para que grabe la información de su registro.</value>
+  </data>
+  <data name="LeaveReportingPage" xml:space="preserve">
+    <value>ADVERTENCIA. Está a punto de abandonar la página de informes. Si usted no ha guardado la información de su registro y la Contraseña, entonces por favor seleccione Cancelar para que las grabe. Si usted ha guardado su registro y la Contraseña, usted puede abandonar la página de informes.</value>
+  </data>
+  <data name="Legal" xml:space="preserve">
+    <value>Legal</value>
   </data>
   <data name="Legalcounsel" xml:space="preserve">
     <value>Legal counsel</value>
@@ -1207,11 +1663,20 @@
   <data name="LegalMessagesUp" xml:space="preserve">
     <value>Legal Messages</value>
   </data>
+  <data name="LegitimateActionRationalization" xml:space="preserve">
+    <value>Legitimate Action Rationalization</value>
+  </data>
   <data name="LifeThreatening" xml:space="preserve">
     <value>IF THIS INCIDENT IS LIFE THREATENING, CONTACT YOUR LOCAL POLICE.</value>
   </data>
+  <data name="LimitedResources" xml:space="preserve">
+    <value>Limited Resources</value>
+  </data>
   <data name="Location" xml:space="preserve">
     <value>Location</value>
+  </data>
+  <data name="LocationIncident" xml:space="preserve">
+    <value>Lugar del incidente</value>
   </data>
   <data name="LocationOfIncident" xml:space="preserve">
     <value>Location of the incident</value>
@@ -1223,7 +1688,7 @@
     <value>Failed to save location</value>
   </data>
   <data name="Login" xml:space="preserve">
-    <value>Login</value>
+    <value>Inicie sesión</value>
   </data>
   <data name="LoginInformation" xml:space="preserve">
     <value>Login Information</value>
@@ -1232,7 +1697,10 @@
     <value>Login Name</value>
   </data>
   <data name="Logout" xml:space="preserve">
-    <value>Logout</value>
+    <value>Salir</value>
+  </data>
+  <data name="Logout2" xml:space="preserve">
+    <value>Salir</value>
   </data>
   <data name="MakePamentNotice" xml:space="preserve">
     <value>Fill in the following fields and click "Submit" to renew subscription.</value>
@@ -1240,8 +1708,17 @@
   <data name="MakePayment" xml:space="preserve">
     <value>Make Payment</value>
   </data>
+  <data name="MaliciousInappropriateUseTechnology" xml:space="preserve">
+    <value>Malicious/Inappropriate Use of Technology</value>
+  </data>
+  <data name="MaliciousUseTechnology" xml:space="preserve">
+    <value>Malicious/Inappropriate Use of Technology</value>
+  </data>
   <data name="ManagamentIncidentParties" xml:space="preserve">
     <value>The management does not know about the incident</value>
+  </data>
+  <data name="ManagamentKnow" xml:space="preserve">
+    <value>Does management know about this incident?</value>
   </data>
   <data name="Management" xml:space="preserve">
     <value>Management</value>
@@ -1257,6 +1734,9 @@
   </data>
   <data name="ManagementKnow3" xml:space="preserve">
     <value>Not sure the management know about the incident or not</value>
+  </data>
+  <data name="Marketing" xml:space="preserve">
+    <value>Mercadeo</value>
   </data>
   <data name="Markspam" xml:space="preserve">
     <value>Mark spam</value>
@@ -1274,10 +1754,10 @@
     <value>Case Administrator already registered</value>
   </data>
   <data name="Mediators" xml:space="preserve">
-    <value>Case Administrators</value>
+    <value>Administradores del Caso</value>
   </data>
   <data name="MediatorsAssigned" xml:space="preserve">
-    <value>Case Administrators</value>
+    <value>Administradores del Caso</value>
   </data>
   <data name="MediatorsAssignedSecondOption" xml:space="preserve">
     <value>The following case administrator(s) may be assigned to your case. If you feel that a Case Administrator may have a conflict of interest or would be obstructive to investigating the case, please check ‘Exclude’ below.</value>
@@ -1297,6 +1777,12 @@
   <data name="Mediatorswillgetback_CC" xml:space="preserve">
     <value>Case Administrators will get back to you quickly and keep you updated on the status of the case. All companies that use Campus Confidential are required to have a C-Suite Escalation Process.</value>
   </data>
+  <data name="Medical" xml:space="preserve">
+    <value>Médicos</value>
+  </data>
+  <data name="MemberPublic" xml:space="preserve">
+    <value>Member of the public</value>
+  </data>
   <data name="MemerOfPublic" xml:space="preserve">
     <value>Member of Public</value>
   </data>
@@ -1309,14 +1795,29 @@
   <data name="Message" xml:space="preserve">
     <value>Message</value>
   </data>
+  <data name="MessageAboutGuidlines" xml:space="preserve">
+    <value>Message about Company Conduct Guidelines, Policies and Legal Disclaimers</value>
+  </data>
+  <data name="MessageAboutGuidlines_CC" xml:space="preserve">
+    <value>Message about Conduct Guidelines, Policies and Legal Disclaimers</value>
+  </data>
   <data name="messageboardopen" xml:space="preserve">
     <value>This message board is open and can be viewed by all members of the case administration team</value>
   </data>
   <data name="MessageBoardReporter" xml:space="preserve">
     <value>This message board is only for messages to the reporter</value>
   </data>
+  <data name="MessagePostedReporterBoard" xml:space="preserve">
+    <value>Mensaje enviar a la junta del reportero</value>
+  </data>
   <data name="Messages" xml:space="preserve">
     <value>Messages</value>
+  </data>
+  <data name="MessageToStaff" xml:space="preserve">
+    <value>Message to Employees</value>
+  </data>
+  <data name="MessageToStaff_CC" xml:space="preserve">
+    <value>Message to Students and Employees</value>
   </data>
   <data name="Message_1" xml:space="preserve">
     <value>Company culture</value>
@@ -1330,6 +1831,24 @@
   <data name="Message_3" xml:space="preserve">
     <value>Data security</value>
   </data>
+  <data name="MisappropriationFunds" xml:space="preserve">
+    <value>Misappropriation of Funds</value>
+  </data>
+  <data name="Misconduct" xml:space="preserve">
+    <value>Misconduct</value>
+  </data>
+  <data name="Mistreatment" xml:space="preserve">
+    <value>Mistreatment</value>
+  </data>
+  <data name="MisuseAssets" xml:space="preserve">
+    <value>Misuse of Assets, Players or Endorsements</value>
+  </data>
+  <data name="MisuseMisappropriationCorporateAssets" xml:space="preserve">
+    <value>Misuse, Misappropriation of Corporate Assets (i.e. employee theft, time clock abuse)</value>
+  </data>
+  <data name="MisuseResources" xml:space="preserve">
+    <value>Misuse of Resources</value>
+  </data>
   <data name="MM" xml:space="preserve">
     <value>MM</value>
   </data>
@@ -1341,6 +1860,9 @@
   </data>
   <data name="MyProfile" xml:space="preserve">
     <value>My Profile</value>
+  </data>
+  <data name="Myself" xml:space="preserve">
+    <value>Yo mismo</value>
   </data>
   <data name="MySettings" xml:space="preserve">
     <value>My Settings</value>
@@ -1355,7 +1877,13 @@
     <value>Name on Card</value>
   </data>
   <data name="NamesOfWitnesses" xml:space="preserve">
-    <value>Name(s) of witness(es) or people involved in the incident</value>
+    <value>Nombre(s) de testigo(s) o personas involucradas en el incidente</value>
+  </data>
+  <data name="NARootCauseExplanation" xml:space="preserve">
+    <value>If a Root Cause that is applicable this incident is not available in the dropdown, please add in Settings.</value>
+  </data>
+  <data name="Nepotism" xml:space="preserve">
+    <value>Nepotism</value>
   </data>
   <data name="NewCase" xml:space="preserve">
     <value>New Case</value>
@@ -1363,14 +1891,20 @@
   <data name="NewCompanyRegistration" xml:space="preserve">
     <value>New Company Registration</value>
   </data>
+  <data name="NewCompanyRegistration_CC" xml:space="preserve">
+    <value>New Educational Institute Registration</value>
+  </data>
   <data name="Newimage" xml:space="preserve">
     <value>New image</value>
   </data>
   <data name="NewIncidentReport" xml:space="preserve">
-    <value>New incident report</value>
+    <value>Nueva denuncia del incidente</value>
   </data>
   <data name="NewMessage" xml:space="preserve">
-    <value>New Message</value>
+    <value>Mensaje Nuevo</value>
+  </data>
+  <data name="NewMessageFromCaseAdmin" xml:space="preserve">
+    <value>You have a new message from a Case Administrator</value>
   </data>
   <data name="NewPassword" xml:space="preserve">
     <value>New password</value>
@@ -1382,10 +1916,13 @@
     <value>New Quote</value>
   </data>
   <data name="Newreport" xml:space="preserve">
-    <value>New report</value>
+    <value>Denuncia nueva</value>
+  </data>
+  <data name="NewReportsUp" xml:space="preserve">
+    <value>New Reports</value>
   </data>
   <data name="NewReportUp" xml:space="preserve">
-    <value>Nuevo reporte</value>
+    <value>Denuncia Nueva</value>
   </data>
   <data name="NewUserRegistration" xml:space="preserve">
     <value>New User Registration</value>
@@ -1394,16 +1931,19 @@
     <value>Next: Case Summary</value>
   </data>
   <data name="NextStepPartiesInvolved" xml:space="preserve">
-    <value>Next step: Parties Involved</value>
+    <value>Next step: Partes involucradas</value>
   </data>
   <data name="No" xml:space="preserve">
-    <value>No</value>
+    <value>No desea involucrarse</value>
   </data>
   <data name="NoContactInfoSharedText" xml:space="preserve">
     <value>No information is shared with ACME Inc, but we store your name and email address to strengthten your case</value>
   </data>
   <data name="NoGatheredInformation" xml:space="preserve">
     <value>No information about you is gathered, stored or shared</value>
+  </data>
+  <data name="NoHarmRationalization" xml:space="preserve">
+    <value>No Harm Rationalization</value>
   </data>
   <data name="Noinformationissharedwith0" xml:space="preserve">
     <value>No information about you is shared with {0}, but we store your name and e-mail address to strengthen your case.</value>
@@ -1412,22 +1952,31 @@
     <value>No logo</value>
   </data>
   <data name="NoneIKnow" xml:space="preserve">
-    <value>None that I know about</value>
+    <value>Ninguno que yo sepa</value>
   </data>
   <data name="NoPaymentsYet" xml:space="preserve">
     <value>Your payments has not yet been done.</value>
+  </data>
+  <data name="NoteLoginInformation" xml:space="preserve">
+    <value>Please take note of your login information NOW. Write it down somewhere safe (or enter it into your password protected smartphone) so that you can access it later to check the status of your report.</value>
   </data>
   <data name="Notification_will_sent_reporter" xml:space="preserve">
     <value>Notification will be sent to reporter.</value>
   </data>
   <data name="notListed" xml:space="preserve">
-    <value>Not Listed</value>
+    <value>No en Lista</value>
   </data>
   <data name="notMatchConfPassandPass" xml:space="preserve">
     <value>Password and Confirm Password not match</value>
   </data>
+  <data name="NotSure" xml:space="preserve">
+    <value>No estoy seguro</value>
+  </data>
   <data name="NotSureUp" xml:space="preserve">
-    <value>Not Sure</value>
+    <value>No Estoy Seguro</value>
+  </data>
+  <data name="NotWantInvolve" xml:space="preserve">
+    <value>No desea involucrarse</value>
   </data>
   <data name="NoUserFound" xml:space="preserve">
     <value>No User Found</value>
@@ -1444,6 +1993,9 @@
   <data name="Number_cases_stage" xml:space="preserve">
     <value>Number of cases per stage</value>
   </data>
+  <data name="OffensiveInappropriateCommunication" xml:space="preserve">
+    <value>Offensive or Inappropriate Communication</value>
+  </data>
   <data name="OfficersExcludedByReporter" xml:space="preserve">
     <value>Case administrator excluded at request of reporter</value>
   </data>
@@ -1459,17 +2011,29 @@
   <data name="ongoingIncident" xml:space="preserve">
     <value>Is the incident ongoing?</value>
   </data>
+  <data name="OpenModal" xml:space="preserve">
+    <value>Modal Abierto</value>
+  </data>
   <data name="Options" xml:space="preserve">
     <value>Options</value>
   </data>
   <data name="or" xml:space="preserve">
-    <value>or</value>
+    <value>o</value>
   </data>
   <data name="Other" xml:space="preserve">
-    <value>Other</value>
+    <value>Otro</value>
   </data>
   <data name="OtherDepartmentSavingFailed" xml:space="preserve">
     <value>Saving Other Deparment failed.</value>
+  </data>
+  <data name="OtherFinancialMatters" xml:space="preserve">
+    <value>Other Financial Matters</value>
+  </data>
+  <data name="OtherIncident" xml:space="preserve">
+    <value>Other Incident</value>
+  </data>
+  <data name="OtherMedicalResearch" xml:space="preserve">
+    <value>Other Medical Research or Patient Matters</value>
   </data>
   <data name="Outcome" xml:space="preserve">
     <value>Outcome</value>
@@ -1478,13 +2042,13 @@
     <value>Discipline step 1: Verbal Counseling</value>
   </data>
   <data name="OutcomeCompany2" xml:space="preserve">
-    <value>Discipline step 2: Written Warning</value>
+    <value>Discplina paso 2: Advertencia escrita</value>
   </data>
   <data name="OutcomeCompany3" xml:space="preserve">
-    <value>Discipline step 3: Decision-Making Leave</value>
+    <value>Disciplina paso 3: Licencia para la Toma de Decisiones</value>
   </data>
   <data name="OutcomeCompany4" xml:space="preserve">
-    <value>Discipline step 4: Termination</value>
+    <value>Disciplina paso 4: Finalización</value>
   </data>
   <data name="OutcomeCompany5" xml:space="preserve">
     <value>Financial</value>
@@ -1493,7 +2057,10 @@
     <value>Legal</value>
   </data>
   <data name="OutcomeCompany7" xml:space="preserve">
-    <value>Prosecution</value>
+    <value>Prosecusión</value>
+  </data>
+  <data name="OutcomeCompany8" xml:space="preserve">
+    <value>Ninguno</value>
   </data>
   <data name="Outcomes" xml:space="preserve">
     <value>Outcomes</value>
@@ -1502,16 +2069,28 @@
     <value>Paid By</value>
   </data>
   <data name="PartiesInvolved" xml:space="preserve">
-    <value>Parties involved</value>
+    <value>Partes involucradas</value>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Password</value>
+    <value>Contraseña</value>
+  </data>
+  <data name="PasswordTypeFieldUpdate" xml:space="preserve">
+    <value>Contraseña (Escriba en el campo para actualizar)</value>
   </data>
   <data name="PasswordUpdatedSuccessfully" xml:space="preserve">
     <value>Password updated successfully</value>
   </data>
   <data name="Pastnotificationtoteam" xml:space="preserve">
     <value>Past due notification to team</value>
+  </data>
+  <data name="PatientAbuse" xml:space="preserve">
+    <value>Patient Abuse/Physical or Verbal</value>
+  </data>
+  <data name="PatientCare" xml:space="preserve">
+    <value>Patient Care</value>
+  </data>
+  <data name="PatientRights" xml:space="preserve">
+    <value>Patient Rights</value>
   </data>
   <data name="Payment" xml:space="preserve">
     <value>Payment</value>
@@ -1543,26 +2122,38 @@
   <data name="Pendingstagemilestones" xml:space="preserve">
     <value>Pending stage milestones</value>
   </data>
+  <data name="PlatformMakesEasyReport" xml:space="preserve">
+    <value>Lugar de trabajo, problemas como acoso sexual, condiciones inseguras, preocupaciones fincancieras y de auditoria, robo, soborno, abuso de sustancia, etc.</value>
+  </data>
   <data name="PlatformManager" xml:space="preserve">
     <value>Platform Manager</value>
   </data>
   <data name="PleaseAttach" xml:space="preserve">
-    <value>Please attach any relevant documents, photos or videos to this report.</value>
+    <value>Por favor adjunte cualquier documento relevante, fotos o videos para esta denuncia</value>
   </data>
   <data name="Pleaseexplain" xml:space="preserve">
-    <value>Please explain</value>
+    <value>Por favor explique</value>
+  </data>
+  <data name="PoorCustomerService" xml:space="preserve">
+    <value>Poor Customer Service</value>
+  </data>
+  <data name="PoorProcessDesign" xml:space="preserve">
+    <value>Poor Process Design</value>
   </data>
   <data name="Poster" xml:space="preserve">
     <value>Poster</value>
   </data>
   <data name="PreReview" xml:space="preserve">
-    <value>New report</value>
+    <value>Denuncia nueva</value>
   </data>
   <data name="PreReviewStage" xml:space="preserve">
-    <value>New Report stage</value>
+    <value>Nueva etapa de la denuncia</value>
   </data>
   <data name="PreReviewUp" xml:space="preserve">
-    <value>New Report</value>
+    <value>Denuncia Nueva</value>
+  </data>
+  <data name="PressureofMeetingSalesQuotas" xml:space="preserve">
+    <value>Pressure of Meeting Sales Quotas</value>
   </data>
   <data name="PrimaryLanguageUp" xml:space="preserve">
     <value>Primary Language</value>
@@ -1571,10 +2162,28 @@
     <value>Primary Location</value>
   </data>
   <data name="PrintReport" xml:space="preserve">
-    <value>Print report</value>
+    <value>Imprima la denuncia</value>
+  </data>
+  <data name="PrivacyIssues" xml:space="preserve">
+    <value>Privacy Issues</value>
+  </data>
+  <data name="Production" xml:space="preserve">
+    <value>Production</value>
   </data>
   <data name="Profile" xml:space="preserve">
     <value>Profile</value>
+  </data>
+  <data name="Purchasing" xml:space="preserve">
+    <value>Compras</value>
+  </data>
+  <data name="RD" xml:space="preserve">
+    <value>DR</value>
+  </data>
+  <data name="RDSimple" xml:space="preserve">
+    <value>RD</value>
+  </data>
+  <data name="ReadAndAgreeCompanyPolicies" xml:space="preserve">
+    <value>Ya he leido y estoy de acuerdo con las políticas de la compañía</value>
   </data>
   <data name="ReasonForCaseClosure" xml:space="preserve">
     <value>Reason for Case Closure</value>
@@ -1600,11 +2209,20 @@
   <data name="RecommendSecond2" xml:space="preserve">
     <value>It is not best practise to have the same person create the closure report and approve the request to close the case.</value>
   </data>
+  <data name="Records" xml:space="preserve">
+    <value>Records</value>
+  </data>
+  <data name="RecruitingMisconduct" xml:space="preserve">
+    <value>Recruiting Misconduct</value>
+  </data>
   <data name="reEnterEmailToken" xml:space="preserve">
     <value>Please, re-enter email and token</value>
   </data>
   <data name="RelationshipsSavingFailed" xml:space="preserve">
     <value>Failed to save relationships</value>
+  </data>
+  <data name="RemoteorInadequateSupervision" xml:space="preserve">
+    <value>Remote or Inadequate Supervision</value>
   </data>
   <data name="Reopen" xml:space="preserve">
     <value>Re-open</value>
@@ -1614,6 +2232,9 @@
   </data>
   <data name="ReopenCaseUp" xml:space="preserve">
     <value>Re-open Case</value>
+  </data>
+  <data name="Reopened" xml:space="preserve">
+    <value>Reopened</value>
   </data>
   <data name="Replace" xml:space="preserve">
     <value>Replace</value>
@@ -1628,7 +2249,7 @@
     <value>Reported</value>
   </data>
   <data name="Reportedas" xml:space="preserve">
-    <value>Reported as</value>
+    <value>Reportado como</value>
   </data>
   <data name="Reportedon" xml:space="preserve">
     <value>Reported on</value>
@@ -1666,14 +2287,26 @@
   <data name="ReportingAbout" xml:space="preserve">
     <value>Reporting About</value>
   </data>
+  <data name="ReportingFollowingIncidentType" xml:space="preserve">
+    <value>ReportingFollowingIncidentType</value>
+  </data>
+  <data name="ReportingFollowingTypes" xml:space="preserve">
+    <value>You are reporting the following Incident Type(s):</value>
+  </data>
   <data name="ReportingFrom" xml:space="preserve">
-    <value>Reporting From</value>
+    <value>Reportado Desde</value>
+  </data>
+  <data name="ReportingfromLow" xml:space="preserve">
+    <value>Reportado desde</value>
   </data>
   <data name="ReportingFromSelect" xml:space="preserve">
-    <value>Different countries have different regulations about anonymity reporting. Please select your country to know the regulations.</value>
+    <value>Diferentes países tienen normas diferentes acerca de las denuncias en anonimato. Por favor seleccione el país para conocer las normas.</value>
+  </data>
+  <data name="ReportingOnBehalf" xml:space="preserve">
+    <value>Are you reporting on behalf of yourself or someone else?</value>
   </data>
   <data name="Reportnumber" xml:space="preserve">
-    <value>Report number</value>
+    <value>Número de la denuncia</value>
   </data>
   <data name="ReportPreviewNotification" xml:space="preserve">
     <value>{0} reported a/an &lt;span&gt;{1}&lt;/span&gt; in &lt;span&gt;{2}&lt;/span&gt; on &lt;span&gt;{3}&lt;/span&gt;.</value>
@@ -1681,8 +2314,14 @@
   <data name="ReportPreviewNotification_noDate" xml:space="preserve">
     <value>{0} reported a/an &lt;span&gt;{1}&lt;/span&gt; in &lt;span&gt;{2}&lt;/span&gt;.</value>
   </data>
+  <data name="ReportReviewUp" xml:space="preserve">
+    <value>Informe de la Denuncia</value>
+  </data>
   <data name="reportsabout" xml:space="preserve">
     <value>reports about</value>
+  </data>
+  <data name="ReportSubmitted" xml:space="preserve">
+    <value>Denuncia presentada</value>
   </data>
   <data name="Reportsummary" xml:space="preserve">
     <value>Report summary</value>
@@ -1693,11 +2332,14 @@
   <data name="ReportWeb" xml:space="preserve">
     <value>Report by Web</value>
   </data>
+  <data name="report_by_myself" xml:space="preserve">
+    <value>¿Está usted denunciando en su nombre o en nombre de alguien más?</value>
+  </data>
   <data name="report_review" xml:space="preserve">
-    <value>Report review</value>
+    <value>Informe de la denuncia</value>
   </data>
   <data name="report_review_1day" xml:space="preserve">
-    <value>Report review. 1 day left</value>
+    <value>Informe de la denuncia . 1 day left</value>
   </data>
   <data name="RequestCaseClosure" xml:space="preserve">
     <value>Request case closure</value>
@@ -1711,8 +2353,20 @@
   <data name="RequestQuoteUp" xml:space="preserve">
     <value>Request Quote</value>
   </data>
+  <data name="RequiredAllegedOffenderIdentified" xml:space="preserve">
+    <value>Se requiere que el presunto agresor sea identificado en casos de acoso sexual y abuso sexual para permitir un debido proceso de investigación.</value>
+  </data>
   <data name="requiredFileds" xml:space="preserve">
     <value>All fields are required</value>
+  </data>
+  <data name="Research" xml:space="preserve">
+    <value>Investigación</value>
+  </data>
+  <data name="ResearchGrantMisconduct" xml:space="preserve">
+    <value>Research Grant Misconduct</value>
+  </data>
+  <data name="ResearchMisconduct" xml:space="preserve">
+    <value>Research Misconduct</value>
   </data>
   <data name="Resolution" xml:space="preserve">
     <value>Resolution</value>
@@ -1741,11 +2395,20 @@
   <data name="Result" xml:space="preserve">
     <value>Please, check your case summary and submit it if you're ready</value>
   </data>
+  <data name="Retaliation" xml:space="preserve">
+    <value>Retaliation</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Intente de nuevo</value>
+  </data>
   <data name="Returnnvestigation" xml:space="preserve">
     <value>Return for Investigation</value>
   </data>
   <data name="Review" xml:space="preserve">
     <value>Review</value>
+  </data>
+  <data name="ReviewReportUp" xml:space="preserve">
+    <value>Review Report</value>
   </data>
   <data name="Reviewstage" xml:space="preserve">
     <value>Review stage</value>
@@ -1753,41 +2416,74 @@
   <data name="Reviewstagemilestones" xml:space="preserve">
     <value>Review stage milestones</value>
   </data>
+  <data name="RiskSafetyMatters" xml:space="preserve">
+    <value>Asuntos de Amenaza a la Seguridad</value>
+  </data>
   <data name="Role" xml:space="preserve">
-    <value>Role</value>
+    <value>Rol</value>
   </data>
   <data name="RoleInReportExpla" xml:space="preserve">
-    <value>The role of an involved party could be that of a witness, victim, alleged offender, reporter or other.</value>
+    <value>El rol de una parte involucrada podría ser de la de un testigo, victima, presunto agresor, denunciante u otro.</value>
+  </data>
+  <data name="RootCauses" xml:space="preserve">
+    <value>Root Causes</value>
+  </data>
+  <data name="S" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="Sabotage" xml:space="preserve">
+    <value>Sabotage</value>
+  </data>
+  <data name="SafeDrivingConcerns" xml:space="preserve">
+    <value>Safe Driving Concerns</value>
   </data>
   <data name="Sales" xml:space="preserve">
-    <value>Sales</value>
+    <value>Ventas</value>
   </data>
   <data name="Saved" xml:space="preserve">
     <value>Saved</value>
   </data>
+  <data name="SaveNewPasswordUp" xml:space="preserve">
+    <value>Guarde la contraseña nueva</value>
+  </data>
   <data name="SavePasswordChangeUp" xml:space="preserve">
     <value>Save Password Change</value>
+  </data>
+  <data name="ScholarshipFinancial" xml:space="preserve">
+    <value>Scholarship/Financial Aid Misconduct</value>
   </data>
   <data name="Scope" xml:space="preserve">
     <value>Scope</value>
   </data>
+  <data name="SecuritiesViolation" xml:space="preserve">
+    <value>Securities Violation</value>
+  </data>
   <data name="Selectanoption" xml:space="preserve">
     <value>Select an option...</value>
+  </data>
+  <data name="SelectCaseAdministrator" xml:space="preserve">
+    <value>Select Case Administrator</value>
   </data>
   <data name="SelectCaseReviewerToSignoff" xml:space="preserve">
     <value>Select Case Reviewer to Sign-Off</value>
   </data>
   <data name="SelectCountry" xml:space="preserve">
-    <value>Select country</value>
+    <value>Seleccione el país</value>
+  </data>
+  <data name="SelectDate" xml:space="preserve">
+    <value>Seleccione la fecha</value>
   </data>
   <data name="SelectDepartment" xml:space="preserve">
-    <value>Select department</value>
+    <value>Seleccione el departamento</value>
   </data>
   <data name="SelectDepartmentInvolved" xml:space="preserve">
-    <value>Department(s) involved</value>
+    <value>Departamento(s) involucrado</value>
   </data>
   <data name="SelectFile" xml:space="preserve">
     <value>SELECT FILE ATTACHMENTS</value>
+  </data>
+  <data name="SelectLocation" xml:space="preserve">
+    <value>Seleccione el lugar</value>
   </data>
   <data name="Selectmediatorstoaddtothisteam" xml:space="preserve">
     <value>Select case administrators to add to this team</value>
@@ -1795,8 +2491,11 @@
   <data name="SelectYourCompany" xml:space="preserve">
     <value>Select Your Company</value>
   </data>
-  <data name="S" xml:space="preserve">
-    <value>Send</value>
+  <data name="SelectYourCompany_CC" xml:space="preserve">
+    <value>Select Your New Educational Institute</value>
+  </data>
+  <data name="SelfInterest" xml:space="preserve">
+    <value>Self-Interest</value>
   </data>
   <data name="SendCaseClosureApproval" xml:space="preserve">
     <value>Send case closure for approval</value>
@@ -1808,7 +2507,7 @@
     <value>Send message</value>
   </data>
   <data name="Sendreportupdates" xml:space="preserve">
-    <value>Send me report updates</value>
+    <value>Envíeme las actualizaciones de la denuncia</value>
   </data>
   <data name="Sendtocasemediators" xml:space="preserve">
     <value>Send to case administrators</value>
@@ -1828,6 +2527,42 @@
   <data name="Severity" xml:space="preserve">
     <value>Severity</value>
   </data>
+  <data name="SexualAbuse" xml:space="preserve">
+    <value>Sexual Abuse</value>
+  </data>
+  <data name="SexualHarassment" xml:space="preserve">
+    <value>Sexual Harassment</value>
+  </data>
+  <data name="ShareholderConcerns" xml:space="preserve">
+    <value>Shareholder Concerns</value>
+  </data>
+  <data name="ShareNameContact" xml:space="preserve">
+    <value>Comparte el nombre y La información de contacto</value>
+  </data>
+  <data name="ShareNameContactInfo" xml:space="preserve">
+    <value>Comparte el nombre y La información de contacto</value>
+  </data>
+  <data name="ShareNameEmailMicrosoft" xml:space="preserve">
+    <value>We will share your name and email address with Microsoft.</value>
+  </data>
+  <data name="SHPrevention" xml:space="preserve">
+    <value>Sexual Harassment Prevention</value>
+  </data>
+  <data name="SignOffPendingUp" xml:space="preserve">
+    <value>Sign-Off Pending</value>
+  </data>
+  <data name="SituationEmergency" xml:space="preserve">
+    <value>Is the situation an emergency?</value>
+  </data>
+  <data name="SoftwarePiracy" xml:space="preserve">
+    <value>Software Piracy</value>
+  </data>
+  <data name="SoftwarePiracyIntellectualProperty" xml:space="preserve">
+    <value>Software Piracy/Intellectual Property</value>
+  </data>
+  <data name="SomeoneElse" xml:space="preserve">
+    <value>Alguien más</value>
+  </data>
   <data name="SortByMediator" xml:space="preserve">
     <value>Sort by case admins</value>
   </data>
@@ -1839,6 +2574,12 @@
   </data>
   <data name="SpamcasesUp" xml:space="preserve">
     <value>Spam Cases</value>
+  </data>
+  <data name="SpikingDrinks" xml:space="preserve">
+    <value>Spiking Drinks/Rape Drug Abuse</value>
+  </data>
+  <data name="SponsoredProjects" xml:space="preserve">
+    <value>Sponsored Projects Non-Compliance</value>
   </data>
   <data name="Start" xml:space="preserve">
     <value>Comenzar</value>
@@ -1852,14 +2593,35 @@
   <data name="Status" xml:space="preserve">
     <value>Status:</value>
   </data>
+  <data name="StronglyRecommended" xml:space="preserve">
+    <value>It is strongly recommended that the alleged victim in cases of sexual harassment and sexual abuse is identified in order to allow a due process investigation</value>
+  </data>
+  <data name="StudentSafety" xml:space="preserve">
+    <value>Student Safety</value>
+  </data>
+  <data name="StudentsAffairs" xml:space="preserve">
+    <value>Asuntos estudiantiles</value>
+  </data>
+  <data name="StudentTravel" xml:space="preserve">
+    <value>Student Travel</value>
+  </data>
   <data name="Submit" xml:space="preserve">
-    <value>Submit</value>
+    <value>Remita</value>
+  </data>
+  <data name="SubmittingYourReport" xml:space="preserve">
+    <value>Gracias por presentar su denuncia. Puede seguir el estatus de su caso [CaseNumber] a través de un panel personal en la Employee Confidential</value>
   </data>
   <data name="Subscription" xml:space="preserve">
     <value>Subscription</value>
   </data>
+  <data name="SubstanceAbuse" xml:space="preserve">
+    <value>Substance Abuse</value>
+  </data>
   <data name="Success" xml:space="preserve">
     <value>Success</value>
+  </data>
+  <data name="SuggestCheckStatusReport" xml:space="preserve">
+    <value>Le sugerimos que revise el estatus de su denuncia regularmente. Usted puede seguir intercambiando mensajes con los administradores del caso de la Compañía en una manera segura y confidencial</value>
   </data>
   <data name="SuggestedOutcome" xml:space="preserve">
     <value>Suggested outcome</value>
@@ -1868,13 +2630,19 @@
     <value>Suggested Outcome</value>
   </data>
   <data name="Summary" xml:space="preserve">
-    <value>Summary</value>
+    <value>Resúmen</value>
+  </data>
+  <data name="Supplier" xml:space="preserve">
+    <value>Supplier</value>
   </data>
   <data name="Support" xml:space="preserve">
     <value>Support</value>
   </data>
   <data name="TabletMobile" xml:space="preserve">
     <value>Tablet or Mobile</value>
+  </data>
+  <data name="TakeNoteSaveLogins" xml:space="preserve">
+    <value>Por favor tome nota y guarde sus registros.</value>
   </data>
   <data name="Task" xml:space="preserve">
     <value>Task</value>
@@ -1900,8 +2668,23 @@
   <data name="Team" xml:space="preserve">
     <value>Team</value>
   </data>
+  <data name="Telephone" xml:space="preserve">
+    <value>Teléfono</value>
+  </data>
   <data name="TermsAndConditions" xml:space="preserve">
     <value>Terms &amp; conditions</value>
+  </data>
+  <data name="Terrorism" xml:space="preserve">
+    <value>Terrorism</value>
+  </data>
+  <data name="Theft" xml:space="preserve">
+    <value>Theft</value>
+  </data>
+  <data name="TheftEmbezzlement" xml:space="preserve">
+    <value>Theft/Embezzlement</value>
+  </data>
+  <data name="TheftEquipment" xml:space="preserve">
+    <value>Theft of Equipment and Supplies</value>
   </data>
   <data name="TheIncidentHappened" xml:space="preserve">
     <value>The incident happened</value>
@@ -1909,11 +2692,23 @@
   <data name="TheIncidentHappenedIn" xml:space="preserve">
     <value>The incident happened in</value>
   </data>
+  <data name="TheReportSubmissionFailed" xml:space="preserve">
+    <value>La presentación de la denuncia fracasó</value>
+  </data>
   <data name="ThismediatorsCould" xml:space="preserve">
     <value>These case administrator(s) could possibly access your report. Mark off any case administrator who you think may be involved in the incident.</value>
   </data>
+  <data name="ThreatInappropriate" xml:space="preserve">
+    <value>Threat or Inappropriate Supervisor Directive</value>
+  </data>
+  <data name="ThreatViolence" xml:space="preserve">
+    <value>Threat of Violence</value>
+  </data>
+  <data name="TimeAbuse" xml:space="preserve">
+    <value>Time Abuse</value>
+  </data>
   <data name="Timeelapsed" xml:space="preserve">
-    <value>Time elapsed</value>
+    <value>Tiempo transcurrido</value>
   </data>
   <data name="Timeline" xml:space="preserve">
     <value>Timeline</value>
@@ -1925,7 +2720,7 @@
     <value>Time per task</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Title</value>
+    <value>Título</value>
   </data>
   <data name="ToDashboardUp" xml:space="preserve">
     <value>To Dashboard</value>
@@ -1952,7 +2747,10 @@
     <value>Unassigned</value>
   </data>
   <data name="UnderInvestigation" xml:space="preserve">
-    <value>Under Investigation</value>
+    <value>Bajo Investigación</value>
+  </data>
+  <data name="UnfairLaborPractices" xml:space="preserve">
+    <value>Unfair Labor Practices</value>
   </data>
   <data name="unknown" xml:space="preserve">
     <value>Unknown</value>
@@ -1969,14 +2767,38 @@
   <data name="unknown_secondary_type" xml:space="preserve">
     <value>Incident</value>
   </data>
+  <data name="UnsafeWorkConditions" xml:space="preserve">
+    <value>Unsafe Work Conditions</value>
+  </data>
+  <data name="UnsafeWorkingConditions" xml:space="preserve">
+    <value>Unsafe Working Conditions</value>
+  </data>
+  <data name="UnsupportiveEnvironmentorDepartment" xml:space="preserve">
+    <value>Unsupportive Environment or Department</value>
+  </data>
+  <data name="Unusual Suspicious Activities" xml:space="preserve">
+    <value>Unusual Suspicious Activities</value>
+  </data>
+  <data name="UnusualOrSuspiciousActivities" xml:space="preserve">
+    <value>Unusual or Suspicious Activities</value>
+  </data>
   <data name="UpcomingPaymentNotice" xml:space="preserve">
     <value>Upcoming Payment Notice</value>
   </data>
+  <data name="Update" xml:space="preserve">
+    <value>Update</value>
+  </data>
   <data name="UpdatePassEmailSent" xml:space="preserve">
-    <value>Email with updated password sent.</value>
+    <value>Se ha enviado un correo con la contraseña actualizada.</value>
   </data>
   <data name="UpdateProfile" xml:space="preserve">
     <value>Update Profile</value>
+  </data>
+  <data name="UploadedByCaseAdmin" xml:space="preserve">
+    <value>CARGADOR POR el administrador del caso</value>
+  </data>
+  <data name="UploadedByReporter" xml:space="preserve">
+    <value>CARGADO POR EL DENUNCIANTE</value>
   </data>
   <data name="Usecurrentlogo" xml:space="preserve">
     <value>Use current logo</value>
@@ -1993,8 +2815,29 @@
   <data name="use_top_panel" xml:space="preserve">
     <value>Please, use top panel to review another one.</value>
   </data>
+  <data name="Vandalism" xml:space="preserve">
+    <value>Vandalism</value>
+  </data>
+  <data name="VendorConcerns" xml:space="preserve">
+    <value>Vendor Concerns</value>
+  </data>
+  <data name="Victim" xml:space="preserve">
+    <value>Victima</value>
+  </data>
+  <data name="ViolenceThreat" xml:space="preserve">
+    <value>Violence or Threat</value>
+  </data>
+  <data name="VisibletoReporter" xml:space="preserve">
+    <value>Visible to Reporter</value>
+  </data>
+  <data name="VisibletoStaff" xml:space="preserve">
+    <value>Visible to Staff</value>
+  </data>
   <data name="WaitingApprovement" xml:space="preserve">
     <value>awaiting for closure approval</value>
+  </data>
+  <data name="WantFileNewReport" xml:space="preserve">
+    <value>¿Desea presentar una denuncia nueva?</value>
   </data>
   <data name="want_to_add" xml:space="preserve">
     <value>Do you want to add case administrator to the team?</value>
@@ -2002,20 +2845,30 @@
   <data name="want_to_remove" xml:space="preserve">
     <value>Do you want to remove case administrator from the team?</value>
   </data>
-  <data name="wasSubmittedSucessfully" xml:space="preserve">
-    <value>was submitted successfully</value>
+  <data name="wasSubmittedSuccessfully" xml:space="preserve">
+    <value>fue presentada exitosamente</value>
+  </data>
+  <data name="WasteAbuse" xml:space="preserve">
+    <value>Waste, Abuse or Misuse of Institution Resources</value>
+  </data>
+  <data name="WeakControls" xml:space="preserve">
+    <value>Weak Controls</value>
   </data>
   <data name="Wesharecontactwith0" xml:space="preserve">
     <value>We will share your contact info with {0}.</value>
   </data>
   <data name="WhereAreYouReportingFrom" xml:space="preserve">
-    <value>Where are you reporting from?</value>
+    <value>¿De donde está denunciando?</value>
   </data>
   <data name="Willneverexpire" xml:space="preserve">
     <value>Will never expire</value>
   </data>
+  <data name="WillSendLogin" xml:space="preserve">
+    <value>We will send your login name and password by email. You can change your password in the dashboard but, for security reasons, we do not allow users to change their assigned login name.
+                            We suggest recording your login name and password now as an extra precaution.</value>
+  </data>
   <data name="Witness" xml:space="preserve">
-    <value>Witness</value>
+    <value>Testigo</value>
   </data>
   <data name="WitnessCooperate" xml:space="preserve">
     <value>Who will cooperate?</value>
@@ -2026,17 +2879,38 @@
   <data name="WitnessNames" xml:space="preserve">
     <value>Witness Names</value>
   </data>
+  <data name="WorkersCompensationDisability" xml:space="preserve">
+    <value>Workers Compensation or Disability</value>
+  </data>
+  <data name="WorkplaceSafety" xml:space="preserve">
+    <value>Workplace Safety</value>
+  </data>
+  <data name="WorkplaceViolence" xml:space="preserve">
+    <value>Workplace Violence</value>
+  </data>
   <data name="WouldYouLikeStay" xml:space="preserve">
     <value>Choose confidentiality level:</value>
   </data>
   <data name="WouldYouLikeToStay" xml:space="preserve">
     <value>Choose confidentiality level:</value>
   </data>
+  <data name="WouldYouToStay" xml:space="preserve">
+    <value>Le gustaría permanecer</value>
+  </data>
   <data name="Yes" xml:space="preserve">
-    <value>Yes</value>
+    <value>Si</value>
   </data>
   <data name="yesEn" xml:space="preserve">
-    <value>Yes?</value>
+    <value>¿Si?</value>
+  </data>
+  <data name="YesReportedFovernmentAgency" xml:space="preserve">
+    <value>Si. Reportado a una agencia del gobierno</value>
+  </data>
+  <data name="YesReportedMedia" xml:space="preserve">
+    <value>Si. Reportado a los medios</value>
+  </data>
+  <data name="YesReportedPolice" xml:space="preserve">
+    <value>Si. Reportado a la policía</value>
   </data>
   <data name="YorAre" xml:space="preserve">
     <value>You are</value>
@@ -2048,16 +2922,31 @@
     <value>You are:</value>
   </data>
   <data name="Youareaan" xml:space="preserve">
-    <value>You are a/an</value>
+    <value>Eres un/una</value>
   </data>
   <data name="Youarecompletelyconfidential" xml:space="preserve">
     <value>You are completely confidential.</value>
   </data>
+  <data name="YouMe" xml:space="preserve">
+    <value>Tú, Yo</value>
+  </data>
+  <data name="YourCompanyBelowGetStarted" xml:space="preserve">
+    <value>Encuentra tu compañía debajo para comenzar con su denuncia y le haremos algunas preguntas acerca del incidente.</value>
+  </data>
+  <data name="YourCompanyRegistrationFailed" xml:space="preserve">
+    <value>El registro de su compañía falló.</value>
+  </data>
   <data name="YourEmail" xml:space="preserve">
-    <value>Email address</value>
+    <value>Dirección de correo</value>
   </data>
   <data name="YouReport" xml:space="preserve">
-    <value>You are reporting the following Incident Type(s):</value>
+    <value>Usted está denunciando el (los) siguiente(s) tipo(s) de incidente(s):</value>
+  </data>
+  <data name="YourIdentityNotKnownOrganization" xml:space="preserve">
+    <value>Su identidad no se conocerá por su organización o Employee Confidential</value>
+  </data>
+  <data name="YourIdentityNotKnownOrganizationOnlyEC" xml:space="preserve">
+    <value>Su identidad no será conocida por su organización. Solo Employee Confidential sabrá su nombre y le contactará si es necesario.</value>
   </data>
   <data name="YourName" xml:space="preserve">
     <value>First Name</value>
@@ -2077,656 +2966,28 @@
   <data name="yyyy" xml:space="preserve">
     <value>yyyy</value>
   </data>
+  <data name="zzzCheck" xml:space="preserve">
+    <value>CHECK REPORT STATUS +ClientLoginUp</value>
+  </data>
+  <data name="zzzLoginVerb" xml:space="preserve">
+    <value>Login ( Verb)</value>
+  </data>
+  <data name="zzzNotWantInvolve" xml:space="preserve">
+    <value>NotWantInvolve - check - report.js</value>
+  </data>
+  <data name="zzzzFind" xml:space="preserve">
+    <value>Find your company below to get started with your report and we’ll ask you a few questions about the incident.</value>
+  </data>
   <data name="_Completed" xml:space="preserve">
     <value>Completed</value>
   </data>
   <data name="_Started" xml:space="preserve">
     <value>Started</value>
   </data>
-  <data name="Update" xml:space="preserve">
-    <value>Update</value>
-  </data>
-  <data name="Dashboard" xml:space="preserve">
-    <value>Dashboard</value>
-  </data>
-  <data name="CaseAdministratorDepartment" xml:space="preserve">
-    <value>Case Administrator Department</value>
-  </data>
-  <data name="ChangeSettings" xml:space="preserve">
-    <value>Change Settings</value>
-  </data>
-  <data name="SelectCaseAdministrator" xml:space="preserve">
-    <value>Select Case Administrator</value>
-  </data>
-  <data name="VisibletoReporter" xml:space="preserve">
-    <value>Visible to Reporter</value>
-  </data>
-  <data name="VisibletoStaff" xml:space="preserve">
-    <value>Visible to Staff</value>
-  </data>
-  <data name="OtherIncident" xml:space="preserve">
-    <value>Other Incident</value>
-  </data>
-  <data name="CompanyMediatorsSettings_CC" xml:space="preserve">
-    <value>Educational Institute Case Administrator Settings</value>
-  </data>
-  <data name="forEmployeeConfidentialOnly_CC" xml:space="preserve">
-    <value>FOR CAMPUS CONFIDENTIAL ONLY</value>
-  </data>
-  <data name="InvitationCompanyMismatch_CC" xml:space="preserve">
-    <value>Code doesn't match educational institute</value>
-  </data>
-  <data name="invite_new_mediator_CC" xml:space="preserve">
-    <value>Invite new case administrator</value>
-  </data>
-  <data name="NewCompanyRegistration_CC" xml:space="preserve">
-    <value>New Educational Institute Registration</value>
-  </data>
-  <data name="SelectYourCompany_CC" xml:space="preserve">
-    <value>Select Your New Educational Institute</value>
-  </data>
-  <data name="CompanyNameOrCode" xml:space="preserve">
-    <value>Company name or code</value>
-  </data>
-  <data name="CompanyNameOrCode_CC" xml:space="preserve">
-    <value>Educational Institute name or code</value>
-  </data>
-  <data name="RootCauses" xml:space="preserve">
-    <value>Root Causes</value>
-  </data>
-  <data name="AcceptCaseUp" xml:space="preserve">
-    <value>Accept Case</value>
-  </data>
-  <data name="CaseManagementDeadlinesUp" xml:space="preserve">
-    <value>Case Management Deadlines</value>
-  </data>
-  <data name="ReportReviewUp" xml:space="preserve">
-    <value>Report Review</value>
-  </data>
-  <data name="ReviewReportUp" xml:space="preserve">
-    <value>Review Report</value>
-  </data>
-  <data name="SignOffPendingUp" xml:space="preserve">
-    <value>Sign-Off Pending</value>
-  </data>
-  <data name="UnderInvestigationUp" xml:space="preserve">
-    <value>Under Investigation</value>
-  </data>
-  <data name="AddBehavioralFactors" xml:space="preserve">
-    <value>Add Behavioral Factors</value>
-  </data>
-  <data name="AddExternalInfluences" xml:space="preserve">
-    <value>Add External Influences</value>
-  </data>
-  <data name="AdditionalPermissionsExplanations" xml:space="preserve">
-    <value>Platform Managers can add additional permissions to Case Administrators’ profiles below</value>
-  </data>
-  <data name="AddOrganizationalInfluences" xml:space="preserve">
-    <value>Add Organizational Influences</value>
-  </data>
-  <data name="AddOutcomesExplanation" xml:space="preserve">
-    <value>Add disciplinary outcomes for Alleged Offenders as well as outcome options for Witnesses and Reporters</value>
-  </data>
-  <data name="AnonymousToCompany" xml:space="preserve">
-    <value>Anonymous to {0}</value>
-  </data>
-  <data name="CaseAdministratorsUp" xml:space="preserve">
-    <value>Case Administrators</value>
-  </data>
-  <data name="CaseManagerUp" xml:space="preserve">
-    <value>Case Manager</value>
-  </data>
-  <data name="ChangePasswordUp" xml:space="preserve">
-    <value>Change Password</value>
-  </data>
-  <data name="CheckSummarySubmit" xml:space="preserve">
-    <value>Please check your report summary and submit when ready:</value>
-  </data>
-  <data name="CompletelyAnonymousUp" xml:space="preserve">
-    <value>Completely Anonymous</value>
-  </data>
-  <data name="Deadlines" xml:space="preserve">
-    <value>Deadlines</value>
-  </data>
-  <data name="IncidentReportedOutside" xml:space="preserve">
-    <value>Has the incident been reported to anyone outside the organization?</value>
-  </data>
-  <data name="IsSituationEmergency" xml:space="preserve">
-    <value>Is the situation an emergency?</value>
-  </data>
-  <data name="ReportingFollowingTypes" xml:space="preserve">
-    <value>You are reporting the following Incident Type(s):</value>
-  </data>
-  <data name="SaveNewPasswordUp" xml:space="preserve">
-    <value>Save New Password</value>
-  </data>
-  <data name="ShareNameContact" xml:space="preserve">
-    <value>Share Name &amp; Contact Info</value>
-  </data>
-  <data name="Incidentreportedexternally" xml:space="preserve">
-    <value>Incident reported externally?</value>
-  </data>
-  <data name="IsreporturgentLow" xml:space="preserve">
-    <value>Is the situation an emergency?</value>
-  </data>
-  <data name="NARootCauseExplanation" xml:space="preserve">
-    <value>If a Root Cause that is applicable this incident is not available in the dropdown, please add in Settings.</value>
-  </data>
-  <data name="Reopened" xml:space="preserve">
-    <value>Reopened</value>
-  </data>
-  <data name="ReportingfromLow" xml:space="preserve">
-    <value>Reporting from</value>
-  </data>
-  <data name="AcademicAffairs" xml:space="preserve">
-    <value>Academic Affairs</value>
-  </data>
-  <data name="AcademicMisconduct" xml:space="preserve">
-    <value>Academic Misconduct</value>
-  </data>
-  <data name="AcceptableUseViolations" xml:space="preserve">
-    <value>Acceptable Use Violations</value>
-  </data>
-  <data name="AccountingAuditingMatters" xml:space="preserve">
-    <value>Accounting and Auditing Matters</value>
-  </data>
-  <data name="AccountingAuditRelated" xml:space="preserve">
-    <value>Accounting / Audit Related Concerns</value>
-  </data>
-  <data name="AccountingError" xml:space="preserve">
-    <value>Accounting Error</value>
-  </data>
-  <data name="AccountingFinance" xml:space="preserve">
-    <value>Accounting &amp; Finance</value>
-  </data>
-  <data name="AccountingMisrepresentation" xml:space="preserve">
-    <value>Accounting Misrepresentation</value>
-  </data>
-  <data name="Administration" xml:space="preserve">
-    <value>Administration</value>
-  </data>
-  <data name="AlcoholDrugAbuse" xml:space="preserve">
-    <value>Alcohol/Drug Abuse</value>
-  </data>
-  <data name="Athletics" xml:space="preserve">
-    <value>Athletics</value>
-  </data>
-  <data name="AuditingMatters" xml:space="preserve">
-    <value>Auditing Matters</value>
-  </data>
-  <data name="BenefitsAbuses" xml:space="preserve">
-    <value>Benefits Abuses</value>
-  </data>
-  <data name="BiasIncidents" xml:space="preserve">
-    <value>Bias Incidents</value>
-  </data>
-  <data name="BriberyKickbacks" xml:space="preserve">
-    <value>Bribery/Kickbacks</value>
-  </data>
-  <data name="CheatingPlagiarism" xml:space="preserve">
-    <value>Cheating/Plagiarism</value>
-  </data>
-  <data name="CodeEthicsViolation" xml:space="preserve">
-    <value>Code of Ethics Violation</value>
-  </data>
-  <data name="CommunicateNonManagement" xml:space="preserve">
-    <value>Communicate with Non-Management Directors</value>
-  </data>
-  <data name="ComplianceRegulationViolations" xml:space="preserve">
-    <value>Compliance and Regulation Violations</value>
-  </data>
-  <data name="ConflictInterest" xml:space="preserve">
-    <value>Conflict of Interest</value>
-  </data>
-  <data name="CorporateScandal" xml:space="preserve">
-    <value>Corporate Scandal</value>
-  </data>
-  <data name="CredentialMisrepresentation" xml:space="preserve">
-    <value>Credential Misrepresentation</value>
-  </data>
-  <data name="CustomerMistreatment" xml:space="preserve">
-    <value>Customer Mistreatment</value>
-  </data>
-  <data name="CustomerService" xml:space="preserve">
-    <value>Customer Service</value>
-  </data>
-  <data name="DataPrivacy" xml:space="preserve">
-    <value>Data Privacy</value>
-  </data>
-  <data name="DataprivacyIntegrity" xml:space="preserve">
-    <value>Data privacy/Integrity</value>
-  </data>
-  <data name="DisclosureConfidential" xml:space="preserve">
-    <value>Disclosure of Confidential Information</value>
-  </data>
-  <data name="Discrimination" xml:space="preserve">
-    <value>Discrimination</value>
-  </data>
-  <data name="DiscriminationHarassment" xml:space="preserve">
-    <value>Discrimination or Harassment</value>
-  </data>
-  <data name="DomesticViolence" xml:space="preserve">
-    <value>Domestic Violence</value>
-  </data>
-  <data name="DonorStewardship" xml:space="preserve">
-    <value>Donor Stewardship</value>
-  </data>
-  <data name="EEOCADA" xml:space="preserve">
-    <value>EEOC or ADA Matters</value>
-  </data>
-  <data name="Embezzlement" xml:space="preserve">
-    <value>Embezzlement</value>
-  </data>
-  <data name="EmployeeBenefitsAbuse" xml:space="preserve">
-    <value>Employee Benefits Abuse</value>
-  </data>
-  <data name="EmployeeMisconduct" xml:space="preserve">
-    <value>Employee Misconduct</value>
-  </data>
-  <data name="EmployeeRelations" xml:space="preserve">
-    <value>Employee Relations</value>
-  </data>
-  <data name="EnvironmentalDamage" xml:space="preserve">
-    <value>Environmental Damage</value>
-  </data>
-  <data name="EnvironmentalIssue" xml:space="preserve">
-    <value>Environmental Issue</value>
-  </data>
-  <data name="EnvironmentalSafetyMatters" xml:space="preserve">
-    <value>Environmental and Safety Matters</value>
-  </data>
-  <data name="EthicalViolations" xml:space="preserve">
-    <value>Ethical Violations</value>
-  </data>
-  <data name="EthicsViolations" xml:space="preserve">
-    <value>Ethics Violations</value>
-  </data>
-  <data name="Falsification" xml:space="preserve">
-    <value>Falsification of Records and Official Documents</value>
-  </data>
-  <data name="FalsificationContracts" xml:space="preserve">
-    <value>Falsification of Contracts, Reports or Records</value>
-  </data>
-  <data name="FinancialConcerns" xml:space="preserve">
-    <value>Financial Concerns</value>
-  </data>
-  <data name="Fraud" xml:space="preserve">
-    <value>Fraud</value>
-  </data>
-  <data name="FraudulentActivities" xml:space="preserve">
-    <value>Fraudulent Activities</value>
-  </data>
-  <data name="Harassment" xml:space="preserve">
-    <value>Harassment</value>
-  </data>
-  <data name="Hazing" xml:space="preserve">
-    <value>Hazing</value>
-  </data>
-  <data name="HealthcareFraud" xml:space="preserve">
-    <value>Healthcare Fraud</value>
-  </data>
-  <data name="HIPAA" xml:space="preserve">
-    <value>HIPAA</value>
-  </data>
-  <data name="HIPAACompliance" xml:space="preserve">
-    <value>HIPAA Compliance</value>
-  </data>
-  <data name="HumanAnimalResearch" xml:space="preserve">
-    <value>Human or Animal Research</value>
-  </data>
-  <data name="HumanResources" xml:space="preserve">
-    <value>Human Resources</value>
-  </data>
-  <data name="HumanResourcesIssues" xml:space="preserve">
-    <value>Human Resources Issues</value>
-  </data>
-  <data name="IdentityTheft" xml:space="preserve">
-    <value>Identity Theft</value>
-  </data>
-  <data name="ImproperDisclosure" xml:space="preserve">
-    <value>Improper Disclosure of Financial Records</value>
-  </data>
-  <data name="ImproperGiving" xml:space="preserve">
-    <value>Improper Giving or Receiving of Gifts</value>
-  </data>
-  <data name="ImproperGivingGifts" xml:space="preserve">
-    <value>Improper Giving or Gifts</value>
-  </data>
-  <data name="ImproperSupplier" xml:space="preserve">
-    <value>Improper Supplier or Contractor Activity</value>
-  </data>
-  <data name="InappropriateActivities" xml:space="preserve">
-    <value>Inappropriate Activities</value>
-  </data>
-  <data name="IndustrialAccidents" xml:space="preserve">
-    <value>Industrial Accidents</value>
-  </data>
-  <data name="InformationSecurity" xml:space="preserve">
-    <value>Information Security</value>
-  </data>
-  <data name="Infringement" xml:space="preserve">
-    <value>Infringement</value>
-  </data>
-  <data name="InsuranceIssues" xml:space="preserve">
-    <value>Insurance Issues</value>
-  </data>
-  <data name="IT" xml:space="preserve">
-    <value>Information Technology (IT)</value>
-  </data>
-  <data name="Legal" xml:space="preserve">
-    <value>Legal</value>
-  </data>
-  <data name="MaliciousUseTechnology" xml:space="preserve">
-    <value>Malicious/Inappropriate Use of Technology</value>
-  </data>
-  <data name="Marketing" xml:space="preserve">
-    <value>Marketing</value>
-  </data>
-  <data name="Medical" xml:space="preserve">
-    <value>Medical</value>
-  </data>
-  <data name="MisappropriationFunds" xml:space="preserve">
-    <value>Misappropriation of Funds</value>
-  </data>
-  <data name="Misconduct" xml:space="preserve">
-    <value>Misconduct</value>
-  </data>
-  <data name="Mistreatment" xml:space="preserve">
-    <value>Mistreatment</value>
-  </data>
-  <data name="MisuseAssets" xml:space="preserve">
-    <value>Misuse of Assets, Players or Endorsements</value>
-  </data>
-  <data name="MisuseResources" xml:space="preserve">
-    <value>Misuse of Resources</value>
-  </data>
-  <data name="Nepotism" xml:space="preserve">
-    <value>Nepotism</value>
-  </data>
-  <data name="OffensiveInappropriateCommunication" xml:space="preserve">
-    <value>Offensive or Inappropriate Communication</value>
-  </data>
-  <data name="OtherFinancialMatters" xml:space="preserve">
-    <value>Other Financial Matters</value>
-  </data>
-  <data name="OtherMedicalResearch" xml:space="preserve">
-    <value>Other Medical Research or Patient Matters</value>
-  </data>
-  <data name="PatientAbuse" xml:space="preserve">
-    <value>Patient Abuse/Physical or Verbal</value>
-  </data>
-  <data name="PatientCare" xml:space="preserve">
-    <value>Patient Care</value>
-  </data>
-  <data name="PatientRights" xml:space="preserve">
-    <value>Patient Rights</value>
-  </data>
-  <data name="PoorCustomerService" xml:space="preserve">
-    <value>Poor Customer Service</value>
-  </data>
-  <data name="PrivacyIssues" xml:space="preserve">
-    <value>Privacy Issues</value>
-  </data>
-  <data name="Production" xml:space="preserve">
-    <value>Production</value>
-  </data>
-  <data name="Purchasing" xml:space="preserve">
-    <value>Purchasing</value>
-  </data>
-  <data name="RD" xml:space="preserve">
-    <value>Research &amp; Development (R&amp;D)</value>
-  </data>
-  <data name="Records" xml:space="preserve">
-    <value>Records</value>
-  </data>
-  <data name="RecruitingMisconduct" xml:space="preserve">
-    <value>Recruiting Misconduct</value>
-  </data>
-  <data name="Research" xml:space="preserve">
-    <value>Research</value>
-  </data>
-  <data name="ResearchGrantMisconduct" xml:space="preserve">
-    <value>Research Grant Misconduct</value>
-  </data>
-  <data name="ResearchMisconduct" xml:space="preserve">
-    <value>Research Misconduct</value>
-  </data>
-  <data name="Retaliation" xml:space="preserve">
-    <value>Retaliation</value>
-  </data>
-  <data name="RiskSafetyMatters" xml:space="preserve">
-    <value>Risk &amp; Safety Matters</value>
-  </data>
-  <data name="Sabotage" xml:space="preserve">
-    <value>Sabotage</value>
-  </data>
-  <data name="SafeDrivingConcerns" xml:space="preserve">
-    <value>Safe Driving Concerns</value>
-  </data>
-  <data name="ScholarshipFinancial" xml:space="preserve">
-    <value>Scholarship/Financial Aid Misconduct</value>
-  </data>
-  <data name="SecuritiesViolation" xml:space="preserve">
-    <value>Securities Violation</value>
-  </data>
-  <data name="SexualHarassment" xml:space="preserve">
-    <value>Sexual Harassment</value>
-  </data>
-  <data name="ShareholderConcerns" xml:space="preserve">
-    <value>Shareholder Concerns</value>
-  </data>
-  <data name="SoftwarePiracy" xml:space="preserve">
-    <value>Software Piracy/Intellectual Property</value>
-  </data>
-  <data name="SpikingDrinks" xml:space="preserve">
-    <value>Spiking Drinks/Rape Drug Abuse</value>
-  </data>
-  <data name="SponsoredProjects" xml:space="preserve">
-    <value>Sponsored Projects Non-Compliance</value>
-  </data>
-  <data name="StudentSafety" xml:space="preserve">
-    <value>Student Safety</value>
-  </data>
-  <data name="StudentsAffairs" xml:space="preserve">
-    <value>Students Affairs</value>
-  </data>
-  <data name="StudentTravel" xml:space="preserve">
-    <value>Student Travel</value>
-  </data>
-  <data name="SubstanceAbuse" xml:space="preserve">
-    <value>Substance Abuse</value>
-  </data>
-  <data name="Terrorism" xml:space="preserve">
-    <value>Terrorism</value>
-  </data>
-  <data name="Theft" xml:space="preserve">
-    <value>Theft</value>
-  </data>
-  <data name="TheftEmbezzlement" xml:space="preserve">
-    <value>Theft/Embezzlement</value>
-  </data>
-  <data name="TheftEquipment" xml:space="preserve">
-    <value>Theft of Equipment and Supplies</value>
-  </data>
-  <data name="ThreatInappropriate" xml:space="preserve">
-    <value>Threat or Inappropriate Supervisor Directive</value>
-  </data>
-  <data name="ThreatViolence" xml:space="preserve">
-    <value>Threat of Violence</value>
-  </data>
-  <data name="TimeAbuse" xml:space="preserve">
-    <value>Time Abuse</value>
-  </data>
-  <data name="UnfairLaborPractices" xml:space="preserve">
-    <value>Unfair Labor Practices</value>
-  </data>
-  <data name="UnsafeWorkConditions" xml:space="preserve">
-    <value>Unsafe Work Conditions</value>
-  </data>
-  <data name="UnsafeWorkingConditions" xml:space="preserve">
-    <value>Unsafe Working Conditions</value>
-  </data>
-  <data name="UnusualSuspiciousActivities" xml:space="preserve">
-    <value>Unusual or Suspicious Activities</value>
-  </data>
-  <data name="Vandalism" xml:space="preserve">
-    <value>Vandalism</value>
-  </data>
-  <data name="VendorConcerns" xml:space="preserve">
-    <value>Vendor Concerns</value>
-  </data>
-  <data name="ViolenceThreat" xml:space="preserve">
-    <value>Violence or Threat</value>
-  </data>
-  <data name="WasteAbuse" xml:space="preserve">
-    <value>Waste, Abuse or Misuse of Institution Resources</value>
-  </data>
-  <data name="WorkersCompensationDisability" xml:space="preserve">
-    <value>Workers Compensation or Disability</value>
-  </data>
-  <data name="WorkplaceSafety" xml:space="preserve">
-    <value>Workplace Safety</value>
-  </data>
-  <data name="WorkplaceViolence" xml:space="preserve">
-    <value>Workplace Violence</value>
-  </data>
-  <data name="Logout2" xml:space="preserve">
-    <value>Log Out</value>
-  </data>
-  <data name="WillSendLogin" xml:space="preserve">
-    <value>We will send your login name and password by email. You can change your password in the dashboard but, for security reasons, we do not allow users to change their assigned login name.
-                            We suggest recording your login name and password now as an extra precaution.</value>
-  </data>
-  <data name="NewReportsUp" xml:space="preserve">
-    <value>New Reports</value>
-  </data>
-  <data name="String1" xml:space="preserve">
-    <value>Fill in the following fields and click "Create" to create an account</value>
-  </data>
-  <data name="FillTheFollowingFieldsRegister" xml:space="preserve">
-    <value>Fill in the following fields and click "Register" to create an account</value>
-  </data>
-  <data name="MessageAboutGuidlines" xml:space="preserve">
-    <value>Message about Company Conduct Guidelines, Policies and Legal Disclaimers</value>
-  </data>
-  <data name="MessageAboutGuidlines_CC" xml:space="preserve">
-    <value>Message about Conduct Guidelines, Policies and Legal Disclaimers</value>
-  </data>
-  <data name="MessageToStaff" xml:space="preserve">
-    <value>Message to Employees</value>
-  </data>
-  <data name="MessageToStaff_CC" xml:space="preserve">
-    <value>Message to Students and Employees</value>
-  </data>
-  <data name="Email_Title_SetCaseOwner" xml:space="preserve">
-    <value>Employee Confidential assignment as Case Owner</value>
-  </data>
-  <data name="Email_Title_SetCaseOwner_CC" xml:space="preserve">
-    <value>Campus Confidential assignment as Case Owner</value>
-  </data>
-  <data name="OutcomeCompany8" xml:space="preserve">
-    <value>None</value>
-  </data>
-  <data name="CommunicationBarriers" xml:space="preserve">
-    <value>Communication Barriers</value>
-  </data>
-  <data name="CompanyLoyaltyRealization" xml:space="preserve">
-    <value>Company Loyalty Realization</value>
-  </data>
-  <data name="CostControlGoals" xml:space="preserve">
-    <value>Cost Control Goals</value>
-  </data>
-  <data name="CulturalDifferencesPersonalValues" xml:space="preserve">
-    <value>Cultural Differences/Personal Values</value>
-  </data>
-  <data name="CulturalInfluences" xml:space="preserve">
-    <value>Cultural Influences</value>
-  </data>
-  <data name="CustomerDemands" xml:space="preserve">
-    <value>Customer Demands</value>
-  </data>
-  <data name="ExtrenalLocusofControl" xml:space="preserve">
-    <value>Extrenal Locus of Control</value>
-  </data>
-  <data name="FinancialorPerformanceIncentives" xml:space="preserve">
-    <value>Financial or Performance Incentives</value>
-  </data>
-  <data name="Insubordination" xml:space="preserve">
-    <value>Insubordination</value>
-  </data>
-  <data name="LackofAwareness" xml:space="preserve">
-    <value>Lack of Awareness</value>
-  </data>
-  <data name="LackofSensitivity" xml:space="preserve">
-    <value>Lack of Sensitivity</value>
-  </data>
-  <data name="LackofSkills" xml:space="preserve">
-    <value>Lack of Skills</value>
-  </data>
-  <data name="LackofTeamwork" xml:space="preserve">
-    <value>Lack of Teamwork</value>
-  </data>
-  <data name="LackofTraining" xml:space="preserve">
-    <value>Lack of Training</value>
-  </data>
-  <data name="LegitimateActionRationalization" xml:space="preserve">
-    <value>Legitimate Action Rationalization</value>
-  </data>
-  <data name="LimitedResources" xml:space="preserve">
-    <value>Limited Resources</value>
-  </data>
-  <data name="NoHarmRationalization" xml:space="preserve">
-    <value>No Harm Rationalization</value>
-  </data>
-  <data name="PoorProcessDesign" xml:space="preserve">
-    <value>Poor Process Design</value>
-  </data>
-  <data name="PressureofMeetingSalesQuotas" xml:space="preserve">
-    <value>Pressure of Meeting Sales Quotas</value>
-  </data>
-  <data name="RemoteorInadequateSupervision" xml:space="preserve">
-    <value>Remote or Inadequate Supervision</value>
-  </data>
-  <data name="SelfInterest" xml:space="preserve">
-    <value>Self-Interest</value>
-  </data>
-  <data name="UnsupportiveEnvironmentorDepartment" xml:space="preserve">
-    <value>Unsupportive Environment or Department</value>
-  </data>
-  <data name="WeakControls" xml:space="preserve">
-    <value>Weak Controls</value>
-  </data>
-  <data name="NewMessageFromCaseAdmin" xml:space="preserve">
-    <value>You have a new message from a Case Administrator</value>
-  </data>
-  <data name="Email_Title_CaseClosureReport" xml:space="preserve">
-    <value>Employee Confidential notification - Case Closure Report</value>
-  </data>
-  <data name="SHPrevention" xml:space="preserve">
-    <value>Sexual Harassment Prevention</value>
-  </data>
-  <data name="BookingECOnboardingSessionNotifications" xml:space="preserve">
-    <value>Order Confirmation from Employee Confidential</value>
-  </data>
-  <data name="AlreadyFiledReport" xml:space="preserve">
-    <value>¿Ya presentó un reporte?</value>
-  </data>
-  <data name="CheckReportStatus" xml:space="preserve">
-    <value>Revise el estatus de la denuncia</value>
-  </data>
-  <data name="ClientLogin" xml:space="preserve">
-    <value>Acceso del cliente</value>
-  </data>
-  <data name="FileAReport" xml:space="preserve">
-    <value>PRESENTE UNA DENUNCIA</value>
-  </data>
-  <data name="HELP" xml:space="preserve">
-    <value>AYUDA</value>
-  </data>
-  <data name="PlatformMakesEasyReport" xml:space="preserve">
-    <value>Lugar de trabajo, problemas como acoso sexual, condiciones inseguras, preocupaciones fincancieras y de auditoria, robo, soborno, abuso de sustancia, etc.</value>
-  </data>
-  <data name="YourCompanyBelowGetStarted" xml:space="preserve">
-    <value>Encuentra tu compañía debajo para comenzar con su denuncia y le haremos algunas preguntas acerca del incidente.</value>
+  <data name="ClientLoginUp" xml:space="preserve">
+    <value>Acceso del Cliente</value>
+  </data>
+  <data name="PasswordUpdatedSuccess" xml:space="preserve">
+    <value>Contraseña actualizada exitosamente</value>
   </data>
 </root>
