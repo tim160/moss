@@ -3,6 +3,7 @@
 @using EC.App_LocalResources;
 @using EC.Common.Interfaces;
 @using EC.Core.Common;
+@using EC.Localization;
 
 @{
     IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
@@ -12,13 +13,26 @@
     int user_id = (Int32)ViewBag.user_id;
     int report_id = (Int32)ViewBag.report_id;
     ReportModel rm = new ReportModel(report_id);
-    List<report_non_mediator_involved> _involved = rm.GetWitnesses();
+    List<report_non_mediator_involved>
+    _involved = rm.GetWitnesses();
     UserModel um = new UserModel(user_id);
-    List<attachment> attachments = (List<attachment>)ViewBag.attachmentFiles;
+    List<attachment>
+        attachments = (List<attachment>
+            )ViewBag.attachmentFiles;
 
     int unread_message_number = um.Unread_Messages_Quantity(report_id, 1);
     GlobalFunctions glb = new GlobalFunctions();
     ViewBag.active = "Index";
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
+    String class_ext = "";
+    if (is_cc.Value)
+    {
+        class_ext = "_cc";
+    }
 }
 
 @if ((rm._report != null) && (rm._report.id != 0))
@@ -31,15 +45,15 @@
         <div class="selectedMenu">
             <div class="data">
                 <div class="leftBlock">
-                    <div class="listHead" style="font-weight: bold">@GlobalRes.Casestatus: <span class="review padText">@rm.InvestigationStatusString()</span></div>
+                    <div class="listHead" style="font-weight: bold">@LocalizationGetter.GetString("Casestatus", is_cc): <span class="review padText">@rm.InvestigationStatusString()</span></div>
                     <div class="listLeft">
-                        <p style="padding-top:4px">@GlobalRes.Datereported:</p>
+                        <p style="padding-top:4px">@LocalizationGetter.GetString("Datereported", is_cc):</p>
                         @if (rm._report.agent_id.HasValue)
                         {
-                        <p style="padding-top:4px">Filed by Call Center Agent:</p>
+                            <p style="padding-top:4px">Filed by Call Center Agent:</p>
                         }
 
-                        <p style="padding-top:4px">@GlobalRes.Timeelapsed:</p>
+                        <p style="padding-top:4px">@LocalizationGetter.GetString("Timeelapsed", is_cc):</p>
                     </div>
                     <div class="listRight">
                         <p> @m_DateTimeHelper.ConvertDateToLongMonthString(rm._report.reported_dt)</p>
@@ -49,12 +63,12 @@
                         }
                         @if (rm.GetTotalDays() == 1)
                         {
-                            <p> @rm.GetTotalDays().ToString() @GlobalRes.day</p>
+                            <p> @rm.GetTotalDays().ToString() @LocalizationGetter.GetString("day", is_cc)</p>
 
                         }
                         else
                         {
-                            <p> @rm.GetTotalDays().ToString() @GlobalRes.days1</p>
+                            <p> @rm.GetTotalDays().ToString() @LocalizationGetter.GetString("days", is_cc)1</p>
                         }
                     </div>
 
@@ -71,19 +85,3 @@
 
     </div><!--blockReportSummary-->
 }
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        //radioButton
-        var radioBlock = $('.inputBlock');
-        radioBlock.click(function () {
-            var self = $(this);
-            var arrows = self.parent('.inputRadio').parent('.rowBlock').parent('.blockSetting');
-            arrows.find('.rowBlock').find('.inputRadio').css('background', 'rgb(255, 255, 255)');
-            arrows.find('.rowBlock').find('.inputRadio').find('.radioTitle').css('color', 'rgb(174, 181, 183)');
-
-            self.parent('.inputRadio').css('background', 'rgb(242, 247, 247)');
-            self.find('.radioTitle').css('color', 'rgb(60, 62, 63)');
-        });
-    });
-</script>
