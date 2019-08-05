@@ -2990,4 +2990,16 @@
   <data name="PasswordUpdatedSuccess" xml:space="preserve">
     <value>Contraseña actualizada exitosamente</value>
   </data>
+  <data name="PleaseResizeReUpload" xml:space="preserve">
+    <value>Please resize and re-upload</value>
+  </data>
+  <data name="SelectFilesUpload" xml:space="preserve">
+    <value>select files to upload</value>
+  </data>
+  <data name="VisibleTo" xml:space="preserve">
+    <value>Visible to</value>
+  </data>
+  <data name="YourPasswordUpdatedSuccess" xml:space="preserve">
+    <value>Your password has been successfully updated</value>
+  </data>
 </root>

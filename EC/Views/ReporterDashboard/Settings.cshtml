@@ -1,10 +1,10 @@
 ﻿@using EC.Models;
 @using EC.Models.Database;
 @using EC.App_LocalResources;
-@{
-    ViewBag.Title = GlobalRes.Settings;
-    Layout = "~/Views/Shared/IndexPages/ReporterDashboard.cshtml";
+@using EC.Localization;
 
+@{
+    Layout = "~/Views/Shared/IndexPages/ReporterDashboard.cshtml";
 
     int user_id = (Int32)ViewBag.user_id;
     int report_id = (Int32)ViewBag.report_id;
@@ -22,26 +22,28 @@
     string confidentiality_level = (string)ViewBag.anon_level;
     CompanyModel cm = new CompanyModel(rm._report.company_id);
 
-    //string confidentiality_description = GlobalRes.Youarecompletelyconfidential;
-    //if (rm._report.incident_anonymity_id == 2)
-    //{
-    //    confidentiality_description = string.Format(GlobalRes.Noinformationissharedwith0, cm._company.company_nm);  
-    //}
-    //if (rm._report.incident_anonymity_id == 3)
-    //{
-    //    confidentiality_description = string.Format(GlobalRes.Wesharecontactwith0, cm._company.company_nm);
-    //}
     ViewBag.active = "Index";
 
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
+    String class_ext = "";
+    if (is_cc.Value)
+    {
+        class_ext = "_cc";
+    }
+    ViewBag.Title = LocalizationGetter.GetString("Settings", is_cc);
 }
 
 @if ((rm._report != null) && (rm._report.id != 0))
 {
     { Html.RenderPartial("~/Views/ReporterDashboard/settingMenu.cshtml", new { user_id = user_id, unread_message_number = unread_message_number, active = "Index" }); }
 
-     <div class="blockSettings">
+    <div class="blockSettings">
         <div class="headerSettings">
-            <div class="titleHeaderSettings">@GlobalRes.ConfidentialityLevel:</div>
+            <div class="titleHeaderSettings">@LocalizationGetter.GetString("ConfidentialityLevel", is_cc):</div>
             <div class="blockText">
                 <p class="title">
                     @confidentiality_level
@@ -54,39 +56,39 @@
         {
             @Html.AntiForgeryToken()
             @Html.Hidden("user_id", user_id)
-            
+
             <div class="contentSettings">
                 <div class="contentBlockSettings">
                     <div class="blockSetting" style="display:@Html.Raw(showSettings);">
-                        <p>@GlobalRes.Firstname <span>@GlobalRes.Saved.ToLower()</span></p>
+                        <p>@LocalizationGetter.GetString("Firstname", is_cc) <span>@LocalizationGetter.GetString("Saved", is_cc).ToLower()</span></p>
                         @Html.EditorFor(model => model.first_nm, new { first_nm = "first_nm" })
                     </div>
                     <div class="blockSetting" style="display:@Html.Raw(showSettings);">
-                        <p>@GlobalRes.Lastname <span>@GlobalRes.Saved.ToLower()</span></p>
+                        <p>@LocalizationGetter.GetString("Lastname", is_cc) <span>@LocalizationGetter.GetString("Saved", is_cc).ToLower()</span></p>
                         @Html.EditorFor(model => model.last_nm, new { last_nm = "last_nm" })
                     </div>
                     <div class="blockSetting" style="display:@Html.Raw(showSettings);">
-                        <p>@GlobalRes.Email<span>@GlobalRes.Saved.ToLower()</span></p>
+                        <p>@LocalizationGetter.GetString("Email", is_cc)<span>@LocalizationGetter.GetString("Saved", is_cc).ToLower()</span></p>
                         @Html.EditorFor(model => model.email, new { email = "email" })
                         <!--<input class="validate text-box single-line" id="email" name="email" type="text" data-validate="email">-->
                     </div>
                     <div class="blockSetting">
-                        <p>@GlobalRes.DoYouWantToReceiveUpdates <span>@GlobalRes.Saved.ToLower()</span></p>
+                        <p>@LocalizationGetter.GetString("DoYouWantToReceiveUpdates", is_cc) <span>@LocalizationGetter.GetString("Saved", is_cc).ToLower()</span></p>
 
                         <div class="rowBlock">
                             <div class="fourBlock inputRadio">
                                 <label class="inputBlock" for="1">
-                                    <input id="1" type="radio" name="radioName"><span class="radioButton"></span><span class="radioTitle">@GlobalRes.Yes (@GlobalRes.Instantly)</span>
+                                    <input id="1" type="radio" name="radioName"><span class="radioButton"></span><span class="radioTitle">@LocalizationGetter.GetString("Yes", is_cc) (@LocalizationGetter.GetString("Instantly", is_cc))</span>
                                 </label>
                             </div>
                             <div class="fourBlock inputRadio">
                                 <label class="inputBlock" for="2">
-                                    <input id="2" type="radio" name="radioName"><span class="radioButton"></span><span class="radioTitle">@GlobalRes.Yes (@GlobalRes.Daily)</span>
+                                    <input id="2" type="radio" name="radioName"><span class="radioButton"></span><span class="radioTitle">@LocalizationGetter.GetString("Yes", is_cc) (@LocalizationGetter.GetString("Daily", is_cc))</span>
                                 </label>
                             </div>
                             <div class="fourBlock inputRadio">
                                 <label class="inputBlock" for="3">
-                                    <input id="3" type="radio" name="radioName"><span class="radioButton"></span><span class="radioTitle">@GlobalRes.No</span>
+                                    <input id="3" type="radio" name="radioName"><span class="radioButton"></span><span class="radioTitle">@LocalizationGetter.GetString("No", is_cc)</span>
                                 </label>
                             </div>
                         </div>
@@ -100,7 +102,7 @@
                         <div class=" leftblock">
                             <div class="addDetailsBlock">
                                 <div>
-                                    <div id="saveButton" target="false">@GlobalRes.Saved.ToUpper()</div>
+                                    <div id="saveButton" target="false">@LocalizationGetter.GetString("Saved", is_cc).ToUpper()</div>
                                     <input type="button" class="greenButton" value="Update" target="false" />
                                     <input type="button" class="greenButton greyButton" value="Cancel" />
                                 </div>
@@ -117,7 +119,7 @@
 }
 
 
-    
+
 
 
 
@@ -169,9 +171,9 @@
                 form.find(myValue).click();
             }
         }
-        
+
         //radioButton
-        
+
         radioBlock.click(function () {
             var self = $(this);
             var arrows = self.parent('.inputRadio').parent('.rowBlock').parent('.blockSetting');
@@ -223,8 +225,8 @@
                     }
                 });
             }
-        }//end function sendAjax()  
-        
+        }//end function sendAjax()
+
         function saveButtonFunction() {
             if(saveButton.getAttribute("target") == "true") {
                 changeButton();

@@ -2905,7 +2905,7 @@ Do not want to involve</value>
     <value>UPLOADED BY Case admin</value>
   </data>
   <data name="UploadedByReporter" xml:space="preserve">
-    <value>UPLOADED BY REPORTER</value>
+    <value>Uploaded by reporter</value>
   </data>
   <data name="YouMe" xml:space="preserve">
     <value>You, Me,</value>
@@ -2975,5 +2975,17 @@ Do not want to involve</value>
   </data>
   <data name="ClientLoginUp" xml:space="preserve">
     <value>Client Login</value>
+  </data>
+  <data name="PleaseResizeReUpload" xml:space="preserve">
+    <value>Please resize and re-upload</value>
+  </data>
+  <data name="SelectFilesUpload" xml:space="preserve">
+    <value>select files to upload</value>
+  </data>
+  <data name="VisibleTo" xml:space="preserve">
+    <value>Visible to</value>
+  </data>
+  <data name="YourPasswordUpdatedSuccess" xml:space="preserve">
+    <value>Your password has been successfully updated</value>
   </data>
 </root>

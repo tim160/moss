@@ -2,9 +2,20 @@
 @using EC.Models.Database;
 @using EC.App_LocalResources;
 @using EC.Core.Common;
-
+@using EC.Localization;
 @{
-    ViewBag.Title = GlobalRes.Activity;
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
+    String class_ext = "";
+    if (is_cc.Value)
+    {
+        class_ext = "_cc";
+    }
+    ViewBag.active = LocalizationGetter.GetString("Activity", is_cc);
+    ViewBag.Title = LocalizationGetter.GetString("Activity", is_cc);
     Layout = "~/Views/Shared/IndexPages/ReporterDashboard.cshtml";
     int user_id = (Int32)ViewBag.user_id;
     int report_id = (Int32)ViewBag.report_id;
@@ -22,11 +33,11 @@
 <a href="#alertModalFileSize" style="display: none" id="openModalForFileSize" rel="modal:open">Open Modal</a>
 <div id="alertModalFileSize" class="modal case-modal">
     <p style="text-align: center">
-        ERROR! The file uploaded exceeds the 4MB maximum limit.
-        Please resize and re-upload.
+        @LocalizationGetter.GetString("ERRORTheFileUploaded", is_cc).
+        @LocalizationGetter.GetString("PleaseResizeReUpload", is_cc).
     </p>
     <div class="case-modal__linkBlockBottom clearfix">
-        <a href="#" id="ok" rel="modal:close" class="case-modal__linkBtn whiteBtn">Ok</a>
+        <a href="#" id="ok" rel="modal:close" class="case-modal__linkBtn whiteBtn">@LocalizationGetter.GetString("Ok", is_cc)</a>
     </div><!-- /.case-modal__linkBlockBottom -->
 </div>
 @if ((rm._report != null) && (rm._report.id != 0))
@@ -40,10 +51,12 @@
             @Html.Hidden("mode", "upload_rd")
             <div class="dragAndDropContainer">
                 <div class="dottedContainer">
-                    <div class="semiboldText blackText weight18">Drag and drop files here</div>
-                    <div class="secondSemiboldText">or</div>
+                    <div class="semiboldText blackText weight18">
+                        @LocalizationGetter.GetString("DragDropFilesHere", is_cc)
+                    </div>
+                    <div class="secondSemiboldText">@LocalizationGetter.GetString("or", is_cc)</div>
                     <div class="selectFiles">
-                        select files to upload
+                        @LocalizationGetter.GetString("SelectFilesUpload", is_cc)
                         <input type="file" id="attachments" class="hiddenElement btn-upload-attach" name="files" multiple="" data-id="attachments" check-file-size="">
                     </div>
 
@@ -65,7 +78,9 @@
                         </td>
                         <td class="customWidth">
                             <p class="secondRow">
-                            </p><div class="secondRowReporter">@(user == null ? "Anonymous reporter" : (user.first_nm + " " + user.last_nm).Trim())</div>
+                                
+                                
+                            </p><div class="secondRowReporter">@(user == null ? LocalizationGetter.GetString("anonymous_reporter", is_cc) : (user.first_nm + " " + user.last_nm).Trim())</div>
                             @attachment.file_nm
                             <p></p>
                         </td>
@@ -73,11 +88,11 @@
                             <p class="recipient">
                                 @if (attachment.user_id != rm._report.reporter_user_id)
                                 {
-                                    @((attachment.visible_reporter == null || attachment.visible_reporter == true) ? "Visible to Reporter & Case Administrators" : "Visible to Case Administrators")
+                                    @((attachment.visible_reporter == null || attachment.visible_reporter == true) ? LocalizationGetter.GetString("VisibletoReporter", is_cc) + " & " + LocalizationGetter.GetString("CaseAdministratorsUp", is_cc) : LocalizationGetter.GetString("VisibleTo", is_cc) + " " + LocalizationGetter.GetString("CaseAdministratorsUp", is_cc))
                                 }
                                 else
                                 {
-                                    <span>Uploaded by reporter</span>
+                                    <span>@LocalizationGetter.GetString("UploadedByReporter", is_cc)</span>
                                 }
                             </p>
                         </td>
@@ -88,15 +103,6 @@
                             <p class="download">
                                 <a href="@attachment.path_nm">download</a>
                             </p>
-                            @*if (attachment.user_id == user_id)
-                                {
-                                    <p class="download">
-                                        @using (Html.BeginForm("AttachmentDelete", null, new { id = attachment.id, report_id }, FormMethod.Post, null))
-                                        {
-                                            <button type="submit">X</button>
-                                        }
-                                    </p>
-                                }*@
                         </td>
                     </tr>
                 }

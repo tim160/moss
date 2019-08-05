@@ -3,8 +3,8 @@
 @using EC.App_LocalResources;
 @using EC.Common.Interfaces;
 @using EC.Core.Common;
+@using EC.Localization;
 @{
-    ViewBag.Title = GlobalRes.Activity;
     Layout = "~/Views/Shared/IndexPages/ReporterDashboard.cshtml";
     IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
     int user_id = (Int32)ViewBag.user_id;
@@ -26,8 +26,20 @@
     action _action;
     GlobalFunctions glb = new GlobalFunctions();
     Dictionary<int, string> month = m_DateTimeHelper.ShortMonth();
-    ViewBag.active = "Activity";
 
+
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
+    String class_ext = "";
+    if (is_cc.Value)
+    {
+        class_ext = "_cc";
+    }
+    ViewBag.Title = LocalizationGetter.GetString("Activity", is_cc);
+    ViewBag.active = LocalizationGetter.GetString("Activity", is_cc);
 }
 
 @if ((rm._report != null) && (rm._report.id != 0))
@@ -41,7 +53,7 @@
             <div class="blockCaseMediators">
                 @if (mediators.Count > 0)
                 {
-                    <p class="titleCaseMediators">@GlobalRes.CaseMediatorsTop:</p>
+                    <p class="titleCaseMediators">@LocalizationGetter.GetString("CaseMediatorsTop", is_cc):</p>
 
                     <div class="displayMediators">
                         @foreach (user _mediator in mediators)
@@ -59,7 +71,7 @@
                                             <img src='@Url.Content("/Content/Icons/noPhoto.png")'>
                                         }
 
-                                        
+
                                     </div>
                                 </div>
                                 <div class="personalText">
@@ -79,7 +91,7 @@
             _action = glb.GetActionById(_log.action_id.Value);
             _second_name = "";
             _string_to_add = "";
-            
+
             if (_log.second_user_id.HasValue)
             {
                 _second_user = um.GetById(_log.second_user_id.Value);
@@ -91,7 +103,7 @@
 
             if (_log.user_id == user_id)
             {
-                _sender_name =GlobalRes.You + ",";
+                _sender_name = LocalizationGetter.GetString("You", is_cc) + ",";
             }
             else
             {
@@ -100,13 +112,13 @@
 
             if (_user.role_id == 8)
             {
-              /*  if ((rm._report.incident_anonymity_id == 1) || (rm._report.incident_anonymity_id == 2))
+                /*  if ((rm._report.incident_anonymity_id == 1) || (rm._report.incident_anonymity_id == 2))
+                  {
+                      _sender_title = "(" + GlobalRes.anonymous_reporter + ")";
+                  }
+                  else*/
                 {
-                    _sender_title = "(" + GlobalRes.anonymous_reporter + ")";
-                }
-                else*/
-                {
-                    _sender_title = " (" + GlobalRes.Reporter + ")";
+                    _sender_title = " (" + LocalizationGetter.GetString("Reporter", is_cc) + ")";
                 }
             }
             else
@@ -128,7 +140,7 @@
                                 @if (_second_name.Length > 0) { _second_name = ": " + _second_name; }    @_second_name
                                 @if ((_log.string_to_add != null) && (_log.string_to_add.Trim().Length > 0))
                                 {
-                                    _string_to_add = ": " +  _log.string_to_add;
+                                    _string_to_add = ": " + _log.string_to_add;
                                 }
                                 @_string_to_add
                             </span>
@@ -152,7 +164,7 @@
 <script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-               
+
         ////Open mini menu for mobile
         //$('.mainTitle').click(function(){
         //    $('.mainTitle+div').toggle();

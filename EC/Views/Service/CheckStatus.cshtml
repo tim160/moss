@@ -13,37 +13,7 @@
 
 <div class="general-container login">
 
-    <header class="header">
-        <div class="top-headerBg">
-            <div class="container">
-                <div class="top-header">
-
-                    <a href="http://employeeconfidential.com" class="top-header__backLink">
-                        <img src="~/Content/images/svg-icons/left.svg" alt="" />
-                        <span class="top-header__backLink-text">
-                            EmployeeConfidential.com
-                        </span>
-                    </a>
-                    <div class="top-header__loginBar">
-                        <nav class="top-header__loginBar-nav">
-                            <li class="top-header__loginBar-li">
-                                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Login" class="top-header__loginBar-a">
-                                    Client Login
-                                </a>
-                            </li><!-- /.top-header__loginBar-li -->
-                            <li class="top-header__loginBar-li">
-                                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Report" class="top-header__loginBar-a">
-                                    File a Report
-                                </a>
-                            </li><!-- /.top-header__loginBar-li -->
-
-                        </nav><!-- /.top-header__loginBar-nav -->
-                    </div><!-- /.top-header__loginBar -->
-                </div><!-- /.top-header -->
-            </div>
-        </div>
-
-    </header><!-- /.header -->
+    @{Html.RenderPartial("Header"); }
 
     <main class="main">
         <section class="loginSection">
@@ -129,3 +99,6 @@
     </footer><!-- /.footer -->
 
 </div><!-- /.general-container -->
+@section scripts {
+    <script src="~/Scripts/View/ServiceHeader.js"></script>
+}
