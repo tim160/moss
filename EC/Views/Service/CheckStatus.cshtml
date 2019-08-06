@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Employee Confidential";
     Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
+    bool showDDLanguages = true;
 }
 
 <style>
@@ -13,8 +14,7 @@
 
 <div class="general-container login">
 
-    @{Html.RenderPartial("Header"); }
-
+    @Html.Partial("Header", showDDLanguages)
     <main class="main">
         <section class="loginSection">
             <div class="loginSection__titleBg">

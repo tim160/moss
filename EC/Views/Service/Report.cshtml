@@ -1,11 +1,11 @@
 ﻿@{
     ViewBag.Title = "Employee Confidential";
     Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
+    bool showDDLanguages = true;
 }
 <input type="hidden" value="@Url.Action("SeekCompany", "Index")" id="SeekCompanyLocation" />
 <div class="general-container login">
-    @{Html.RenderPartial("Header"); }
-
+    @Html.Partial("Header", showDDLanguages)
     <main class="main">
         <section class="loginSection">
             <input id="selectedLanguage" type="hidden" value="@ViewBag.DEFAULT_LANGUAGE" />

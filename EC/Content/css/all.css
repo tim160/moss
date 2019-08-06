@@ -1349,7 +1349,11 @@ textarea::-webkit-input-placeholder {
     display: grid; }
   .login .top-header__loginBar-nav {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr; }
+    grid-template-columns: 1fr 1fr; }
+    .login .top-header__loginBar-nav.language {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
   .top-header__loginBar-li {
     display: grid;
     justify-self: end; }

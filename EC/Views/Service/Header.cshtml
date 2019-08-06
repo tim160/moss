@@ -1,4 +1,7 @@
-﻿
+﻿@{
+    bool showDDLanguages = Model!=null && Model.GetType().Name == "Boolean" && Model == true;
+
+}
 <header class="header">
     <div class="top-headerBg">
         <div class="container" style="overflow: inherit">
@@ -10,20 +13,27 @@
                     </span>
                 </a>
                 <div class="top-header__loginBar">
-                    <nav class="top-header__loginBar-nav">
-                        <li class="top-header__loginBar-li">
-                            <a id="languageMenuItem" href="#" class="top-header__loginBar-a">
-                                English
-                            </a>
-                            <table id="manuLanguages">
-                                <tr>
-                                    <td value="en-US">English</td>
-                                </tr>
-                                <tr>
-                                    <td value="es-ES">Español</td>
-                                </tr>
-                            </table>
-                        </li><!-- /.top-header__loginBar-li -->
+
+
+                    <nav class="top-header__loginBar-nav @(showDDLanguages ? "language":"" )">
+
+                        @if (showDDLanguages)
+                        {
+                            <li class="top-header__loginBar-li">
+                                <a id="languageMenuItem" href="#" class="top-header__loginBar-a">
+                                    English
+                                </a>
+                                <table id="manuLanguages">
+                                    <tr>
+                                        <td value="en-US">English</td>
+                                    </tr>
+                                    <tr>
+                                        <td value="es-ES">Español</td>
+                                    </tr>
+                                </table>
+                            </li>
+                        }
+
                         <li class="top-header__loginBar-li">
                             <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Login" class="top-header__loginBar-a">
                                 Client Login
