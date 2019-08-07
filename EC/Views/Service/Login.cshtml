@@ -1,8 +1,10 @@
-﻿@model EC.Controllers.ServiceController.LoginViewModel
+﻿@using LocalizationGetter = EC.Localization.LocalizationGetter;
+@model EC.Controllers.ServiceController.LoginViewModel
 
 @{
     ViewBag.Title = "Employee Confidential";
     Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
+    bool is_cc = false;
 }
 
 <style>
@@ -24,7 +26,7 @@
             <div class="loginSection__titleBg">
                 <div class="container loginTopSection__container">
                     <div class="loginSection__title">
-                        Client Login
+                        @LocalizationGetter.GetString("ClientLoginUp", is_cc)
                     </div><!-- /.loginSection__title -->
                 </div><!-- /.container -->
             </div><!-- /.loginSection__titleBg -->
@@ -41,20 +43,21 @@
                     <div class="container loginSection__container">
                         <div class="loginForm">
                             <label class="loginForm__input">
-                                Login
+                                @LocalizationGetter.GetString("Login", is_cc)
                                 @Html.TextBoxFor(x => x.Login)
                             </label>
                             <label class="loginForm__input @(ViewData.ModelState.ContainsKey("PasswordError") ? "errorLogin" : "")">
-                                Password
+                                @LocalizationGetter.GetString("Password", is_cc)
                                 @Html.PasswordFor(x => x.Password, new { @class = ViewContext.ViewData.ModelState.ContainsKey("PasswordError") ? "error" : "" })
                             </label>
                         </div><!-- /.loginForm -->
                         <div class="loginFormLinks">
                             <a href="@Url.Action("ForgetPassword", "Service")" class="loginFormLinks__restoreLink">
+                                
                                 Forgot your password?
                             </a>
                             <button type="submit" class="loginFormLinks__loginBtn btn" style="cursor: pointer;">
-                                Login
+                                @LocalizationGetter.GetString("Login", is_cc)
                             </button>
                         </div><!-- /.loginFormLinks -->
                     </div><!-- /.container -->

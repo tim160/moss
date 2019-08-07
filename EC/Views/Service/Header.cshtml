@@ -1,6 +1,7 @@
-﻿@{
-    bool showDDLanguages = Model!=null && Model.GetType().Name == "Boolean" && Model == true;
-
+﻿@using LocalizationGetter = EC.Localization.LocalizationGetter;
+@{
+    bool showDDLanguages = Model != null && Model.GetType().Name == "Boolean" && Model == true;
+    bool is_cc = false;
 }
 <header class="header">
     <div class="top-headerBg">
@@ -19,30 +20,35 @@
 
                         @if (showDDLanguages)
                         {
-                            <li class="top-header__loginBar-li">
-                                <a id="languageMenuItem" href="#" class="top-header__loginBar-a">
-                                    English
-                                </a>
-                                <table id="manuLanguages">
-                                    <tr>
-                                        <td value="en-US">English</td>
-                                    </tr>
-                                    <tr>
-                                        <td value="es-ES">Español</td>
-                                    </tr>
-                                </table>
-                            </li>
+                            using (Html.BeginForm("ChangeCulture", "Service"))
+                            {
+                                <input name="lang" id="selectedLanguage" type="hidden" value="@ViewBag.DEFAULT_LANGUAGE" />
+                                <li class="top-header__loginBar-li">
+                                    <a id="languageMenuItem" href="#" class="top-header__loginBar-a">
+                                        English
+                                    </a>
+                                    <table id="manuLanguages">
+                                        <tr>
+                                            <td value="en-US">English</td>
+                                        </tr>
+                                        <tr>
+                                            <td value="es-ES">Español</td>
+                                        </tr>
+                                    </table>
+                                </li>
+                                <input type="submit" name="submit" id="submitChangeLanguage" value="" />
+                            }
                         }
 
                         <li class="top-header__loginBar-li">
                             <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Login" class="top-header__loginBar-a">
-                                Client Login
+                                @LocalizationGetter.GetString("ClientLoginUp", is_cc)
                             </a>
                         </li><!-- /.top-header__loginBar-li -->
 
                         <li class="top-header__loginBar-li">
                             <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/CheckStatus" class="top-header__loginBar-a">
-                                Check Report Status
+                                @LocalizationGetter.GetString("CheckReportStatus", is_cc)
                             </a>
                         </li><!-- /.top-header__loginBar-li -->
                     </nav><!-- /.top-header__loginBar-nav -->

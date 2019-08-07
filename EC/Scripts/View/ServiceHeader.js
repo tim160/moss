@@ -1,4 +1,5 @@
-﻿$("#languageMenuItem").on('click', function (event) {
+﻿'use strict';
+$("#languageMenuItem").on('click', function (event) {
     event.preventDefault();
     $('#manuLanguages').toggle();
 });
@@ -8,6 +9,7 @@ $('#manuLanguages td').on('click', function (event) {
     var valueSelected = selectedLanguageElement.getAttribute('value');
     console.log('language Selected =' + valueSelected);
     $('#selectedLanguage').val(valueSelected);
+    $("#submitChangeLanguage").click();
 });
 window.addEventListener('mouseup', function (event) {
     var manuLanguages = document.getElementById('manuLanguages');

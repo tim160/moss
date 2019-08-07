@@ -1,9 +1,10 @@
 ﻿@model EC.Controllers.ServiceController.LoginViewModel
-
+@using LocalizationGetter = EC.Localization.LocalizationGetter;
 @{
     ViewBag.Title = "Employee Confidential";
     Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
     bool showDDLanguages = true;
+    bool is_cc = false;
 }
 
 <style>
@@ -20,7 +21,7 @@
             <div class="loginSection__titleBg">
                 <div class="container loginTopSection__container">
                     <div class="loginSection__title">
-                        Check report status
+                        @LocalizationGetter.GetString("CheckReportStatus", is_cc)
                     </div><!-- /.loginSection__title -->
                 </div><!-- /.container -->
             </div><!-- /.loginSection__titleBg -->
@@ -28,9 +29,7 @@
                 <div class="container loginSection__container">
                     <div class="loginContentBlock">
                         <p class="loginContentBlock__textP">
-                            You can check the status of your report using the login
-                            provided and password created when you submitted your
-                            report.
+                            @LocalizationGetter.GetString("CheckStatusOfReport", is_cc)
                         </p><!-- /.loginContentBlock__textP -->
                         <p class="loginContentBlock__textP">
                             We suggest that you check on status of your report on a
@@ -38,7 +37,7 @@
                             Case Administrators in a safe and confidential manner.
                         </p><!-- /.loginContentBlock__textP -->
                         <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Report" class="loginContentBlock__link">
-                            Want to file a new report?
+                            @LocalizationGetter.GetString("WantFileNewReport", is_cc)
                         </a>
                     </div><!-- /.loginContentBlock -->
                     @using (Html.BeginForm("CheckStatus", "Service", FormMethod.Post, new { }))
@@ -51,11 +50,11 @@
 
                         <div class="loginForm">
                             <label class="loginForm__input">
-                                Login
+                                @LocalizationGetter.GetString("Login", is_cc)
                                 @Html.TextBoxFor(x => x.Login)
                             </label>
                             <label class="loginForm__input @(ViewData.ModelState.ContainsKey("PasswordError") ? "errorLogin" : "")">
-                                Password
+                                @LocalizationGetter.GetString("Password", is_cc)
                                 @Html.PasswordFor(x => x.Password, new { @class = ViewContext.ViewData.ModelState.ContainsKey("PasswordError") ? "error" : "" })
                             </label>
                         </div><!-- /.loginForm -->
@@ -64,7 +63,7 @@
                                 Forgot your password?
                             </a>
                             <button type="submit" class="loginFormLinks__loginBtn btn" style="cursor: pointer;">
-                                Login
+                                @LocalizationGetter.GetString("Login", is_cc)
                             </button>
                         </div><!-- /.loginFormLinks -->
                     }

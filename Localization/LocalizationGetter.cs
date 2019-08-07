@@ -14,7 +14,8 @@ namespace EC.Localization
         private static Dictionary<Assembly, ResourceManager> resourceManagers = new Dictionary<Assembly, ResourceManager>();
 
         #region PROPERTIES
-        private static CultureInfo m_Culture = CultureInfo.CurrentCulture;
+        private const string DEFAULT_LANGUAGE = "en-US";
+        private static CultureInfo m_Culture = CultureInfo.GetCultureInfo(DEFAULT_LANGUAGE);
         public static CultureInfo Culture
         {
             get

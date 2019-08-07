@@ -1,18 +1,19 @@
-﻿@{
+﻿@using LocalizationGetter = EC.Localization.LocalizationGetter;
+@{
     ViewBag.Title = "Employee Confidential";
     Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
     bool showDDLanguages = true;
+    bool is_cc = false;
 }
 <input type="hidden" value="@Url.Action("SeekCompany", "Index")" id="SeekCompanyLocation" />
 <div class="general-container login">
     @Html.Partial("Header", showDDLanguages)
     <main class="main">
         <section class="loginSection">
-            <input id="selectedLanguage" type="hidden" value="@ViewBag.DEFAULT_LANGUAGE" />
             <div class="loginSection__titleBg">
                 <div class="container loginTopSection__container">
                     <div class="loginSection__title">
-                        File a report
+                        @LocalizationGetter.GetString("FileReport", is_cc)
                     </div><!-- /.loginSection__title -->
                 </div><!-- /.container -->
             </div><!-- /.loginSection__titleBg -->
@@ -20,28 +21,25 @@
                 <div class="container loginSection__container">
                     <div class="loginContentBlock">
                         <p class="loginContentBlock__textP">
-                            This platform makes it easy to report an incident about
-                            workplace issues like sexual harassment, unsafe conditions,
-                            financial and auditing concerns, theft, bribery, substance
-                            abuse etc.
+                            @LocalizationGetter.GetString("PlatformMakesEasyReport", is_cc)
                         </p><!-- /.loginContentBlock__textP -->
                         <p class="loginContentBlock__textP">
                             Find your company below to get started with your report
                             and we’ll ask you a few questions about the incident.
                         </p><!-- /.loginContentBlock__textP -->
                         <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/CheckStatus" class="loginContentBlock__link">
-                            Already filed a report?
+                            @LocalizationGetter.GetString("AlreadyFiledReport", is_cc)
                         </a>
                     </div><!-- /.loginContentBlock -->
                     <div class="loginTextForm">
                         <label class="loginForm__input">
-                            Company name
+                            @LocalizationGetter.GetString("Companyname", is_cc)
                             <input id="specialInput" type="text" name="text" required="" autocomplete="off">
                             <input id="companyCode" type="hidden" value="false" />
                         </label>
                         <div class="loginTextFormLinks">
                             <a href="#" id="startBtn" class="btn loginTextFormLinks__startBtn m_t_20">
-                                Start
+                                @LocalizationGetter.GetString("Start", is_cc)
                             </a>
                         </div>
                     </div><!-- /.loginTextForm -->
