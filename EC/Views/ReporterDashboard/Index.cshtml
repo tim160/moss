@@ -1,15 +1,12 @@
 ﻿@using EC.Models;
 @using EC.Models.Database;
-@using EC.App_LocalResources;
 @using EC.Common.Interfaces;
 @using EC.Core.Common;
 @using EC.Localization;
 
 @{
     IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
-    ViewBag.Title = GlobalRes.ReporterDashboard;
     Layout = "~/Views/Shared/IndexPages/ReporterDashboard.cshtml";
-
     int user_id = (Int32)ViewBag.user_id;
     int report_id = (Int32)ViewBag.report_id;
     ReportModel rm = new ReportModel(report_id);
@@ -33,6 +30,7 @@
     {
         class_ext = "_cc";
     }
+    ViewBag.Title = LocalizationGetter.GetString("ReporterDashboard", is_cc);
 }
 
 @if ((rm._report != null) && (rm._report.id != 0))

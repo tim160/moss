@@ -1,32 +1,53 @@
 ﻿@using EC.App_LocalResources;
+@using EC.Localization;
+@{ 
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
+    String class_ext = "";
+    if (is_cc.Value)
+    {
+        class_ext = "_cc";
+    }
+}
 <div class="settingMenu">
     <div class="settingMenuItems">
-        <h2 class="mainTitle">@GlobalRes.Menu:</h2>
+        <h2 class="mainTitle">
+            @LocalizationGetter.GetString("Menu", is_cc):
+        </h2>
         <div>
-            <a href="/ReporterDashboard/Index/@ViewBag.user_id" class="menuItem @(ViewBag.active == "Index"?  "active" : "")" style="margin-right:44px;">@GlobalRes.ReportSummaryUp</a>
+            <a href="/ReporterDashboard/Index/@ViewBag.user_id" class="menuItem @(ViewBag.active == "Index"?  "active" : "")" style="margin-right:44px;">
+                @LocalizationGetter.GetString("ReportSummaryUp", is_cc)
+            </a>
 
             @if (ViewBag.unread_message_number > 0)
             {
                 <a href="/ReporterDashboard/Messages/@ViewBag.user_id" class="menuItem @(ViewBag.active == "Messages"?  "active" : "")" style="margin-right:45px;">
-                    @GlobalRes.Messages
+                    @LocalizationGetter.GetString("Messages", is_cc)
                     <span>@ViewBag.unread_message_number</span>
                 </a>
             }
             else
             {
                 <a href="/ReporterDashboard/Messages/@ViewBag.user_id" class="menuItem @(ViewBag.active == "Messages"?  "active" : "")" style="margin-right:80px;">
-                    @GlobalRes.Messages
+                    @LocalizationGetter.GetString("Messages", is_cc)
                 </a>
             }
-            <a href="/ReporterDashboard/Activity/@ViewBag.user_id" class="menuItem @(ViewBag.active == "Activity"?  "active" : "")">@GlobalRes.Activity</a>
+                <a href="/ReporterDashboard/Activity/@ViewBag.user_id" class="menuItem @(ViewBag.active == "Activity"?  "active" : "")">
+                    @LocalizationGetter.GetString("Activity", is_cc)
+                </a>
             @*<a href="/ReporterDashboard/Settings/@user_id" class="menuItem settings" style="margin-right:-2px;">@GlobalRes.Settings</a>*@
             <div class="settings menuItem" style="margin-top: -4px">
 
                 @*<a href="/ReporterDashboard/PrintToPdf/@ViewBag.guid" class="menuItem" target="_blank" style="padding: 0 10px;">
-                    <img src="http://stark.employeeconfidential.com/Content/Icons/print_icon_white.png" />
-                </a>*@
+                        <img src="http://stark.employeeconfidential.com/Content/Icons/print_icon_white.png" />
+                    </a>*@
 
-                <a href="/ReporterDashboard/Attachments/@ViewBag.user_id" class="menuItem @(ViewBag.active == "Attachments"?  "active" : "")" style="margin-right:-2px;">@GlobalRes.Attachments</a>
+                <a href="/ReporterDashboard/Attachments/@ViewBag.user_id" class="menuItem @(ViewBag.active == "Attachments"?  "active" : "")" style="margin-right:-2px;">
+                    @LocalizationGetter.GetString("Attachments", is_cc)
+                </a>
             </div>
 
         </div>

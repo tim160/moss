@@ -1,11 +1,11 @@
 ﻿@using EC.Models;
 @using EC.Models.Database;
-@using EC.App_LocalResources;
+@using EC.Localization;
 @using EC.Models.ViewModel;
 @using EC.Models.App.Case;
 @using EC.Constants;
 @{
-    ViewBag.Title = GlobalRes.Messages;
+
     Layout = "~/Views/Shared/IndexPages/ReporterDashboard.cshtml";
 
     int user_id = (Int32)ViewBag.user_id;
@@ -15,8 +15,18 @@
     int unread_message_number = ViewBag.unread_message_number;
 
     user _user;
-    ViewBag.active = "Messages";
-
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
+    String class_ext = "";
+    if (is_cc.Value)
+    {
+        class_ext = "_cc";
+    }
+    ViewBag.active = LocalizationGetter.GetString("Messages", is_cc);
+    ViewBag.Title = LocalizationGetter.GetString("Messages", is_cc);
 }
 @model CaseMessagesModel
 
@@ -42,27 +52,27 @@
                         <div class="blockPhoto">
                             @{
                                 _user = um.GetById(user_id);
-                                    if ((_user != null) && (_user.id != 0))
+                                if ((_user != null) && (_user.id != 0))
+                                {
+                                    if (_user.photo_path.Trim() != "")
                                     {
-                                        if (_user.photo_path.Trim() != "")
-                                        {
-                                                    <img src='@Url.Content(_user.photo_path.Trim())' />
-                                        }
-                                        else
-                                        {
-                                                    <img src='@Url.Content("/Content/Icons/anonimousReporterIcon.png")' />
-                                        }
+                                        <img src='@Url.Content(_user.photo_path.Trim())' />
                                     }
+                                    else
+                                    {
+                                        <img src='@Url.Content("/Content/Icons/anonimousReporterIcon.png")' />
+                                    }
+                                }
                             }
                         </div>
                         <div class="arrow gray"></div>
                     </div>
                     <div class="messageText">
-                        @Html.TextAreaFor(model => model.body_tx, new { body_tx = "body_tx", @class="gray" })
+                        @Html.TextAreaFor(model => model.body_tx, new { body_tx = "body_tx", @class = "gray" })
                     </div>
                 </div>
                 <div class="newMessageBtn">
-                    <span>@GlobalRes.NewMessage.ToLower()</span>
+                    <span>@LocalizationGetter.GetString("NewMessage", is_cc).ToLower()</span>
                     <input type="submit" value="new message" style="display: none;" />
                 </div>
             </div>

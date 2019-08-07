@@ -39,7 +39,7 @@
                     {
                         <div class="report">
                             <div class="titleReport">
-                                Reporter name
+                                @LocalizationGetter.GetString("Reportername")
                             </div>
                             <div class="reportText">
                                 <text>
@@ -51,7 +51,7 @@
                         </div>
                         <div class="report">
                             <div class="titleReport">
-                                Email
+                                @LocalizationGetter.GetString("Email")
                             </div>
                             <div class="reportText">
                                 @rm._reporter_user.email
@@ -61,7 +61,7 @@
                         {
                             <div class="report">
                                 <div class="titleReport">
-                                    Phone
+                                    @LocalizationGetter.GetString("Phone")
                                 </div>
                                 <div class="reportText">
                                     @rm._reporter_user.phone
@@ -103,7 +103,9 @@
                 <div class="listHead">@LocalizationGetter.GetString("PartiesInvolved")</div>
                 <div class="reportBlock">
                     <div class="report">
-                        <div class="titleReport">Reporting on behalf of yourself or someone else?</div>
+                        <div class="titleReport">
+                            @LocalizationGetter.GetString("ReportingOnBehalf")
+                        </div>
                         <div class="reportText">
                             @(rm._report.report_by_myself ? @LocalizationGetter.GetString("Myself") : @LocalizationGetter.GetString("SomeoneElse"))
                         </div>
@@ -266,7 +268,7 @@
                 <div class="reportBlock">
                     <table style="width:28%;">
                         <tr>
-                            <td>Download report </td>
+                            <td>@LocalizationGetter.GetString("Download") @LocalizationGetter.GetString("report") </td>
                             <td>
                                 <a href="/ReporterDashboard/PrintToPdf/@ViewBag.guid" class="menuItem" target="_blank" style="padding: 0 10px;">
                                     <img src="http://stark.employeeconfidential.com/Content/Icons/print-icon.png" />
