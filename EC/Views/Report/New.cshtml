@@ -10,7 +10,7 @@
     ViewBag.Title = "New Incident Report";
     Layout = "~/Views/Shared/_Layout.cshtml";
     List<anonymity> anonimity = ViewBag.anonimity;
-    List<anonymity> string_anon = new List<anonymity>();
+    List<anonymity> string_anon = null;
     string_anon = anonimity;
 
     bool? is_cc = ViewBag.is_cc;
@@ -202,12 +202,10 @@
                         <div class="rowBlock">
                             @if (ViewBag.locationsOfIncident.Items.Count > 0)
                             {
-                                @*@Helpers.Select(ViewBag.locationsOfIncident, "locationsOfIncident validate selectBlock", "Not listed", "Select location", "notEmpty")*@
-                                @Helpers.Select(ViewBag.locationsOfIncident, "location", "locationsOfIncident selectBlock validate", "Not listed", "Select location", "notEmpty")
+                                @Helpers.Select(ViewBag.locationsOfIncident, "location", "locationsOfIncident selectBlock validate", LocalizationGetter.GetString("notListed", is_cc), LocalizationGetter.GetString("SelectLocation", is_cc), "notEmpty")
                             }
                             else
                             {
-                                @*<input type="text" class="current" placeholder="new location" name="other_location_name">*@
                                 <textarea class="current" name="other_location_name"></textarea>
                             }
                         </div>
@@ -237,7 +235,8 @@
                 </div>
 
                 <div class="buttonBlock buttonBlock@{@class_ext}">
-                    <input type="button" class="button nextSepButton tabOption pInvolved" value="continue">
+                    
+                    <input type="button" class="button nextSepButton tabOption pInvolved" value="@LocalizationGetter.GetString("continue", is_cc)">
                 </div>
 
             </div>
@@ -373,12 +372,12 @@
                                 <div class="rowBlock isReportUrgent">
                                     <div class="freeBlock inputRadio option">
                                         <label class="inputBlock" for="firstUrgent">
-                                            <input id="firstUrgent" type="radio" name="isUrgent" value="1" data-val="Yes" /><span class="radioButton"></span><span class="radioTitle">Yes</span>
+                                            <input id="firstUrgent" type="radio" name="isUrgent" value="1" data-val="Yes" /><span class="radioButton"></span><span class="radioTitle">@LocalizationGetter.GetString("Yes", is_cc)</span>
                                         </label>
                                     </div>
                                     <div class="freeBlock inputRadio option">
                                         <label class="inputBlock" for="secondUrgent">
-                                            <input id="secondUrgent" type="radio" name="isUrgent" value="0" data-val="No" /><span class="radioButton"></span><span class="radioTitle">No</span>
+                                            <input id="secondUrgent" type="radio" name="isUrgent" value="0" data-val="No" /><span class="radioButton"></span><span class="radioTitle">@LocalizationGetter.GetString("No", is_cc)</span>
                                         </label>
                                     </div>
                                 </div>
@@ -393,7 +392,7 @@
                     <div id="emergency" class="isUrgentYesTextStyle isUrgentYesTextStyle@{@class_ext}" style="display: none">@LocalizationGetter.GetString("LifeThreatening", is_cc)</div>
                 </div>
                 <div class="buttonBlock buttonBlock@{@class_ext}">
-                    <input type="button" class="button nextSepButton tabOption cInformation" value="continue">
+                    <input type="button" class="button nextSepButton tabOption cInformation" value="@LocalizationGetter.GetString("continue", is_cc)">
                 </div>
 
             </div>
@@ -452,9 +451,9 @@
                         </div>
                         <div style="display: none" id="ProgrammingConsiderations">
                             <p style="font-family: OpenSans-Regular, arial, verdana, sans-serif;font-size: 12px;">
-                                It is required that the alleged offender be identified in cases of sexual harassment and sexual abuse in order to allow a due process investigation.
+                                @LocalizationGetter.GetString("RequiredAllegedOffenderIdentified", is_cc)
                                 <br /><br />
-                                It is strongly recommended that the alleged victim in cases of sexual harassment and sexual abuse is identified in order to allow a due process investigation.
+                                @LocalizationGetter.GetString("StronglyRecommended", is_cc)
                             </p>
                         </div>
                     </div>
@@ -469,7 +468,7 @@
                         <span style="display: none">@LocalizationGetter.GetString("IncidentFrequency", is_cc)</span>
                         <div>
                             <span style="position: relative;">
-                                <input name="dateIncidentHappened" id="datepicker" class="validate dateInputBox calendarText" data-validate="date" value="Select date">
+                                <input name="dateIncidentHappened" id="datepicker" class="validate dateInputBox calendarText" data-validate="date" value="@LocalizationGetter.GetString("SelectDate", is_cc)">
                                 <div class="borderTriangle"></div>
                                 <!--<div name="dateIncidentHappened" id="datepicker" class="validate dateInputBox " data-validate="notEmpty"></div>-->
                             </span>
@@ -590,8 +589,8 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="summaryContentTitle">Please check your report summary and submit when ready:</div>
+                
+                <div class="summaryContentTitle">@LocalizationGetter.GetString("CheckSummarySubmit", is_cc)</div>
 
                 <div class="content">
                     <div class="contentBlock summaryBackground" tabindex="1" style="border: none!important">
@@ -599,10 +598,10 @@
                         <table style="width: 100%;">
                             <tr>
                                 <td class=" demotd listtext">
-                                    <span class="listText listHead">General&nbsp;information</span>
+                                    <span class="listText listHead">@LocalizationGetter.GetString("GeneralInf4ormation", is_cc)</span>
                                 </td>
                                 <td class="demoTD" style="width: 100%;"><hr class="listHR"></td>
-                                <td class="demoTD goToStep1"><input class="listInput" type="button" value="EDIT"></td>
+                                <td class="demoTD goToStep1"><input class="listInput" type="button" value="@LocalizationGetter.GetString("EDIT", is_cc)"></td>
                             </tr>
                         </table>
 
@@ -638,10 +637,10 @@
                         <table>
                             <tr>
                                 <td class="demoTD listText">
-                                    <span class="listText listHead">Parties&nbsp;involved</span>
+                                    <span class="listText listHead">@LocalizationGetter.GetString("PartiesInvolved", is_cc)</span>
                                 </td>
                                 <td class="demoTD" style="width: 100%;"><hr class="listHR"></td>
-                                <td class="demoTD goToStep2"><input class="listInput" type="button" value="EDIT"></td>
+                                <td class="demoTD goToStep2"><input class="listInput" type="button" value="@LocalizationGetter.GetString("EDIT", is_cc)"></td>
                             </tr>
                         </table>
 
@@ -649,14 +648,14 @@
                             <div class="report">
                                 <div class="partiesInvolvedBlock">
                                     @*<div class="reportText" style="float: left; padding-left: 0px;" id="FirstLastName">Stan Lee,</div>
-                                        <div class="titleReport">Title unknown</div>+
-                                        <div class="reportText" id="witnessRole">Witness</div>
-                                        <div id="addedPepsones"></div>*@
+                            <div class="titleReport">Title unknown</div>+
+                            <div class="reportText" id="witnessRole">Witness</div>
+                            <div id="addedPepsones"></div>*@
                                 </div>
 
                                 <!--<span id="managementTrue">The management knows about the incident</span>
-                                <span id="managementFalse">The management doesn't know about the incident</span>
-                                <div class="titleReportAll" id="isManagementKnow"></div>-->
+                    <span id="managementFalse">The management doesn't know about the incident</span>
+                    <div class="titleReportAll" id="isManagementKnow"></div>-->
                             </div>
                         </div>
 
@@ -692,10 +691,10 @@
                         <table>
                             <tr>
                                 <td class="demoTD listText">
-                                    <span class="listText listHead">Case&nbsp;Information</span>
+                                    <span class="listText listHead">@LocalizationGetter.GetString("CaseInformation", is_cc)</span>
                                 </td>
                                 <td class="demoTD" style="width: 100%;"><hr class="listHR"></td>
-                                <td class="demoTD goToStep3"><input class="listInput" type="button" value="EDIT"></td>
+                                <td class="demoTD goToStep3"><input class="listInput" type="button" value="@LocalizationGetter.GetString("EDIT", is_cc)"></td>
                             </tr>
                         </table>
 
@@ -739,7 +738,7 @@
 
                 <div class="titleMediators">@LocalizationGetter.GetString("MediatorsAssigned", is_cc)</div>
                 <div class="titleMediatorsDescrition">
-                    The following case administrator(s) may be assigned to your case. If you feel that a Case Administrator may have a conflict of interest or would be obstructive to investigating the case, please check ‘Exclude’ below.
+                    @LocalizationGetter.GetString("MediatorsAssignedSecondOption", is_cc)
                 </div>
 
 
@@ -791,7 +790,7 @@
                 @if (ViewBag.nonSupervisingMediators.Count > 0)
                 {
                     @*<div class="titleMediators">@LocalizationGetter.GetString("Mediationteam", is_cc)</div>
-                        <div class="titleMediatorsDescrition">@LocalizationGetter.GetString("ThismediatorsCould", is_cc)</div>*@
+            <div class="titleMediatorsDescrition">@LocalizationGetter.GetString("ThismediatorsCould", is_cc)</div>*@
                     <div class="titleMediators">@LocalizationGetter.GetString("Mediationteam", is_cc)</div>
                 }
 
@@ -847,7 +846,7 @@
                 </div>
 
                 <div class="buttonSubmitBlock buttonSubmitBlock@{@class_ext}">
-                    <input type="submit" class="buttonSubmit nextSepButton tabOption cSummary" value="submit">
+                    <input type="submit" class="buttonSubmit nextSepButton tabOption cSummary" value="@LocalizationGetter.GetString("Submit", is_cc)">
                 </div>
             </div>
         </div>
