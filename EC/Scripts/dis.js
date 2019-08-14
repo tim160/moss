@@ -102,7 +102,7 @@
                                     angular.element('#formDrop').submit();
                                     break;
                                 case 'newReport':
-                                    angular.element('.attach').append("<table class='attachedFilesTitle' style='color: #3c3e3f;font-size: 14px;'><tr><th><img src=/Content/Icons/generic-file.png></th> <th>" + file.name + "</th></tr></table>")
+                                    angular.element('.attach').append("<table class='attachedFilesTitle' style='color: #3c3e3f;font-size: 14px;'><tr><th><img src=/Content/Icons/generic-file.png></th> <th>" + file.name + "</th><th><div class='delete deleteAttachmentPosition'></div></tr></table>")
                                     break;
                                 case 'settingsIndex':
                                     var from = angular.element("#urlAjaxUploadFiles").attr("from");

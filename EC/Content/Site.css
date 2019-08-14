@@ -1558,6 +1558,10 @@ input[type=checkbox]:checked.checkboxMediatorInvolved + span{
     cursor: pointer;
 }
 
+.deleteAttachmentPosition {
+    display: none;
+}
+
 .attachedFilesTitle {
     color: rgb(114,124,126);
     padding-top: 13px;
