@@ -5,7 +5,7 @@ $("#languageMenuItem").on('click', function (event) {
 });
 $('#manuLanguages td').on('click', function (event) {
     var selectedLanguageElement = event.currentTarget;
-    document.getElementById('languageMenuItem').innerHTML = selectedLanguageElement.innerHTML;
+    document.getElementById('fullNameLanguage').value = selectedLanguageElement.innerHTML;
     var valueSelected = selectedLanguageElement.getAttribute('value');
     console.log('language Selected =' + valueSelected);
     $('#selectedLanguage').val(valueSelected);

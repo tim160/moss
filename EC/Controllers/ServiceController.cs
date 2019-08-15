@@ -28,6 +28,7 @@ namespace EC.Controllers
 
         private readonly UserModel userModel = new UserModel();
         private const string DEFAULT_LANGUAGE = "en-US";
+        private static string FullNameLanguage = "English";
         // GET: Service
         public ActionResult Login(string host_url)
         {
@@ -58,7 +59,6 @@ namespace EC.Controllers
         {
             Session.Clear();
             GlobalFunctions glb = new GlobalFunctions();
-
             if (DomainUtil.IsSubdomain(Request.Url.AbsoluteUri.ToLower()))
             {
 
@@ -127,13 +127,12 @@ namespace EC.Controllers
         public ActionResult Report()
         {
             ViewBag.DEFAULT_LANGUAGE = DEFAULT_LANGUAGE;
+            ViewBag.fullNameLanguage = FullNameLanguage;
             return View($"Report{(is_cc ? "-CC" : "")}");
         }
 
         public ActionResult Disclaimer(string id, string companyCode)
         {
-
-
             var selectedCompany = GetCompanyModel(id, companyCode);
             if (selectedCompany == null)
             {
@@ -172,6 +171,7 @@ namespace EC.Controllers
 
         public ActionResult CheckStatus()
         {
+            ViewBag.fullNameLanguage = FullNameLanguage;
             return View($"CheckStatus{(is_cc ? "-CC" : "")}", new LoginViewModel());
         }
 
@@ -880,10 +880,10 @@ namespace EC.Controllers
                System.Configuration.ConfigurationManager.AppSettings["FreshDeskSecret"],
                user.login_nm, user.email));
         }
-        public ActionResult ChangeCulture(string lang)
+        public ActionResult ChangeCulture(string lang, string fullNameLanguage = "English")
         {
             string returnUrl = Request.UrlReferrer.AbsolutePath;
-            
+            FullNameLanguage = fullNameLanguage;
             this.SetSelectedCulture(lang);
             Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(lang);
             Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture(lang);

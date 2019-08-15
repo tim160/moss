@@ -23,9 +23,10 @@
                             using (Html.BeginForm("ChangeCulture", "Service"))
                             {
                                 <input name="lang" id="selectedLanguage" type="hidden" value="@ViewBag.DEFAULT_LANGUAGE" />
+                                <input name="fullNameLanguage" id="fullNameLanguage" type="hidden" value="English" />
                                 <li class="top-header__loginBar-li" style="text-align: right">
                                     <a id="languageMenuItem" href="#" class="top-header__loginBar-a">
-                                        English
+                                        @ViewBag.fullNameLanguage
                                     </a>
                                     <table id="manuLanguages">
                                         <tr>
