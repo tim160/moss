@@ -238,7 +238,7 @@
     <value>Add disciplinary outcomes for Alleged Offenders as well as outcome options for Witnesses and Reporters</value>
   </data>
   <data name="AddPerson" xml:space="preserve">
-    <value>add person</value>
+    <value>Agregue otra persona</value>
   </data>
   <data name="AddReasonWhy" xml:space="preserve">
     <value>Add reason why the case requires further investigation.</value>
@@ -451,7 +451,7 @@
     <value>Case Activity</value>
   </data>
   <data name="CaseAdministrationTeam" xml:space="preserve">
-    <value>Case Administration team</value>
+    <value>Equipos de Administración del Caso</value>
   </data>
   <data name="CaseAdministratorDepartment" xml:space="preserve">
     <value>Case Administrator Department</value>
@@ -935,7 +935,7 @@
     <value>Description of outcome for each alleged offender</value>
   </data>
   <data name="detailsCase" xml:space="preserve">
-    <value>You can always check the case progress using the following details</value>
+    <value>Siempre puede revisar el progreso del caso usando los siguientes detalles</value>
   </data>
   <data name="DisclosureConfidential" xml:space="preserve">
     <value>Disclosure of Confidential Information</value>
@@ -1439,22 +1439,22 @@
     <value>incident been reported to anyone outside</value>
   </data>
   <data name="IncidentDate" xml:space="preserve">
-    <value>Incident Date</value>
+    <value>Fecha del incidente</value>
   </data>
   <data name="IncidentDateUp" xml:space="preserve">
-    <value>Incident Date</value>
+    <value>Fecha Del Incidente</value>
   </data>
   <data name="IncidentDescription" xml:space="preserve">
-    <value>Incident description</value>
+    <value>Descripción del incidente</value>
   </data>
   <data name="IncidentFrequency" xml:space="preserve">
-    <value>Incident frequency</value>
+    <value>Frecuencia del incidente</value>
   </data>
   <data name="IncidentLifeThreatening" xml:space="preserve">
     <value>SI ESTE INCIDENTE ES UNA AMENAZA  PARA LA VIDA, CONTACTE SU POLICÍA LOCAL</value>
   </data>
   <data name="Incidentlocation" xml:space="preserve">
-    <value>Incident Location</value>
+    <value>Lugar del incidente</value>
   </data>
   <data name="IncidentOngoing" xml:space="preserve">
     <value>¿Continua el incidente?</value>
@@ -1463,7 +1463,7 @@
     <value>Incident reported externally?</value>
   </data>
   <data name="IncidentReportedOutside" xml:space="preserve">
-    <value>Has the incident been reported to anyone outside the organization?</value>
+    <value>¿Se ha reportado el incidente con alguien fuera de la organización?</value>
   </data>
   <data name="Incidentreportedoutside_q" xml:space="preserve">
     <value>Incident reported outside?</value>
@@ -1586,7 +1586,7 @@
     <value>in</value>
   </data>
   <data name="IsCaseUrgent_q" xml:space="preserve">
-    <value>Is the situation an emergency?</value>
+    <value>¿Es la situación una emergencía?</value>
   </data>
   <data name="IsCleryActCrime" xml:space="preserve">
     <value>Is this a Clery Act Crime?</value>
@@ -1598,13 +1598,13 @@
     <value>Continua el incidente</value>
   </data>
   <data name="IsReportUrgent" xml:space="preserve">
-    <value>Is the situation an emergency?</value>
+    <value>¿Es la situación una emergencía?</value>
   </data>
   <data name="IsreporturgentLow" xml:space="preserve">
-    <value>Is the situation an emergency?</value>
+    <value>¿Es la situación una emergencía?</value>
   </data>
   <data name="IsReportUrgent_q" xml:space="preserve">
-    <value>Is the situation an emergency?</value>
+    <value>¿Es la situación una emergencía?</value>
   </data>
   <data name="IsSituationEmergency" xml:space="preserve">
     <value>¿Es la situación una emergencía?</value>
@@ -1679,7 +1679,7 @@
     <value>Lugar del incidente</value>
   </data>
   <data name="LocationOfIncident" xml:space="preserve">
-    <value>Location of the incident</value>
+    <value>Lugar del incidente</value>
   </data>
   <data name="Locations" xml:space="preserve">
     <value>Locations</value>
@@ -1718,7 +1718,7 @@
     <value>The management does not know about the incident</value>
   </data>
   <data name="ManagamentKnow" xml:space="preserve">
-    <value>Does management know about this incident?</value>
+    <value>¿La gerencia sabe de este incidente?</value>
   </data>
   <data name="Management" xml:space="preserve">
     <value>Management</value>
@@ -1760,7 +1760,7 @@
     <value>Administradores del Caso</value>
   </data>
   <data name="MediatorsAssignedSecondOption" xml:space="preserve">
-    <value>The following case administrator(s) may be assigned to your case. If you feel that a Case Administrator may have a conflict of interest or would be obstructive to investigating the case, please check ‘Exclude’ below.</value>
+    <value>Los siguientes administradores de casos pueden ser asignados a su caso. Si cree que un administrador de casos puede tener un conflicto de intereses o sería un obstáculo para investigar el caso, marque "Excluir" a continuación.</value>
   </data>
   <data name="Mediatorsinvolved" xml:space="preserve">
     <value>Case Administrators excluded</value>
@@ -1811,7 +1811,7 @@
     <value>Mensaje enviar a la junta del reportero</value>
   </data>
   <data name="Messages" xml:space="preserve">
-    <value>Messages</value>
+    <value>Mensajes</value>
   </data>
   <data name="MessageToStaff" xml:space="preserve">
     <value>Message to Employees</value>
@@ -2009,7 +2009,7 @@
     <value>Once a day</value>
   </data>
   <data name="ongoingIncident" xml:space="preserve">
-    <value>Is the incident ongoing?</value>
+    <value>¿Continua el incidente?</value>
   </data>
   <data name="OpenModal" xml:space="preserve">
     <value>Modal Abierto</value>
@@ -2240,7 +2240,7 @@
     <value>Replace</value>
   </data>
   <data name="Report" xml:space="preserve">
-    <value>Report</value>
+    <value>Informe</value>
   </data>
   <data name="ReportAnon" xml:space="preserve">
     <value>Report anonymously or confidentially. If you choose to report confidentially, you control whether or not your name &amp; contact information is shared.</value>
@@ -2303,7 +2303,7 @@
     <value>Diferentes países tienen normas diferentes acerca de las denuncias en anonimato. Por favor seleccione el país para conocer las normas.</value>
   </data>
   <data name="ReportingOnBehalf" xml:space="preserve">
-    <value>Are you reporting on behalf of yourself or someone else?</value>
+    <value>¿Está usted denunciando en su nombre o en nombre de alguien más?</value>
   </data>
   <data name="Reportnumber" xml:space="preserve">
     <value>Número de la denuncia</value>
@@ -2324,10 +2324,10 @@
     <value>Denuncia presentada</value>
   </data>
   <data name="Reportsummary" xml:space="preserve">
-    <value>Report summary</value>
+    <value>Resumen del informe</value>
   </data>
   <data name="ReportSummaryUp" xml:space="preserve">
-    <value>Report Summary</value>
+    <value>Resumen del Informe</value>
   </data>
   <data name="ReportWeb" xml:space="preserve">
     <value>Report by Web</value>
@@ -2552,7 +2552,7 @@
     <value>Sign-Off Pending</value>
   </data>
   <data name="SituationEmergency" xml:space="preserve">
-    <value>Is the situation an emergency?</value>
+    <value>¿Es la situación una emergencía?</value>
   </data>
   <data name="SoftwarePiracy" xml:space="preserve">
     <value>Software Piracy</value>
@@ -2594,7 +2594,7 @@
     <value>Status:</value>
   </data>
   <data name="StronglyRecommended" xml:space="preserve">
-    <value>It is strongly recommended that the alleged victim in cases of sexual harassment and sexual abuse is identified in order to allow a due process investigation</value>
+    <value>Se recomienda la presunta víctima en casos de acoso sexual y abuso sexual sea identificado para permitir el debido proceso de investigación.</value>
   </data>
   <data name="StudentSafety" xml:space="preserve">
     <value>Student Safety</value>
@@ -2892,7 +2892,7 @@
     <value>Choose confidentiality level:</value>
   </data>
   <data name="WouldYouLikeToStay" xml:space="preserve">
-    <value>Choose confidentiality level:</value>
+    <value>Elija el nivel de confidencialidad:</value>
   </data>
   <data name="WouldYouToStay" xml:space="preserve">
     <value>Le gustaría permanecer</value>
@@ -2976,7 +2976,7 @@
     <value>NotWantInvolve - check - report.js</value>
   </data>
   <data name="zzzzFind" xml:space="preserve">
-    <value>Find your company below to get started with your report and we’ll ask you a few questions about the incident.</value>
+    <value>Encuentra tu compañía debajo para comenzar con su denuncia y le haremos algunas preguntas acerca del incidente.</value>
   </data>
   <data name="_Completed" xml:space="preserve">
     <value>Completed</value>
@@ -2994,7 +2994,7 @@
     <value>Please resize and re-upload</value>
   </data>
   <data name="SelectFilesUpload" xml:space="preserve">
-    <value>select files to upload</value>
+    <value>seleccionar archivos para cargar</value>
   </data>
   <data name="VisibleTo" xml:space="preserve">
     <value>Visible to</value>

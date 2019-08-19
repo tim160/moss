@@ -17,6 +17,7 @@ using EC.Common.Base;
 using EC.Localization;
 using Rotativa.MVC;
 using System.Threading.Tasks;
+using EC.Models.ViewModels;
 
 namespace EC.Controllers
 {
@@ -110,29 +111,27 @@ namespace EC.Controllers
                     selectedRoleInReport.Add(role);
                 }
                 ViewBag.selectedRoleInReport = selectedRoleInReport;
-                List<anonymity> list_anon = companyModel.GetAnonymities(id, 0);
-                foreach (anonymity _anon in list_anon)
-                {
-                    _anon.anonymity_company_en = string.Format(_anon.anonymity_company_en, currentCompany.company_nm);
-                    _anon.anonymity_ds_en = string.Format(_anon.anonymity_ds_en, currentCompany.company_nm);
-                    _anon.anonymity_en = string.Format(_anon.anonymity_en, currentCompany.company_nm);
-
-
-                }
-                ViewBag.anonimity = list_anon;
+                EC.Models.ViewModels.AnonimityCulture viewModelAnonimity = new EC.Models.ViewModels.AnonimityCulture(currentCompany, companyModel);
+                ViewBag.anonimity = viewModelAnonimity.getAnonimityCultrure();
+                //List<anonymity> list_anon = companyModel.GetAnonymities(id, 0);
+                //foreach (anonymity _anon in list_anon)
+                //{
+                //    _anon.anonymity_company_en = string.Format(_anon.anonymity_company_en, currentCompany.company_nm);
+                //    _anon.anonymity_ds_en = string.Format(_anon.anonymity_ds_en, currentCompany.company_nm);
+                //    _anon.anonymity_en = string.Format(_anon.anonymity_en, currentCompany.company_nm);
+                //}
+                //ViewBag.anonimity = list_anon;
                 /*Relationship to company*/
+                RelationshipCulture relationshipCulture = new RelationshipCulture(companyModel);
                 List<company_relationship> relationship = reportModel.getCustomRelationshipCompany(ViewBag.currentCompanyId);
                 if (relationship.Count > 0)
                 {
                     //loadCustom
-                    //get other
-                    //company_relationship other = companyModel.getOtherRelationship();
-                    //relationship.Add(other);
-                    ViewBag.relationship = relationship;
+                    ViewBag.relationship = relationshipCulture.getOtherRelationshipCulture(reportModel, currentCompany.id);
                 }
                 else
                 {
-                    ViewBag.relationship = companyModel.getRelationships();
+                    ViewBag.relationship = relationshipCulture.getRelationshipCulture();
                 }
 
 

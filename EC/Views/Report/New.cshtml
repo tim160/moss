@@ -9,9 +9,8 @@
     //LocalizationGetter.GetString("TrainingTimeslotBooked", is_cc);
     ViewBag.Title = "New Incident Report";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    List<anonymity> anonimity = ViewBag.anonimity;
-    List<anonymity> string_anon = null;
-    string_anon = anonimity;
+    //List<anonymity> anonimity = ViewBag.anonimity;
+    //List<anonymity> string_anon = anonimity;
 
     bool? is_cc = ViewBag.is_cc;
     if (!is_cc.HasValue)
@@ -105,7 +104,6 @@
         <div class="rightBlock rightBlock@{@class_ext}">
             <input type="hidden" value="@ViewBag.currentCompany" class="validate" name="currentCompany" data-validate="notEmpty" />
             <input type="hidden" value=@ViewBag.currentCompanyId class="validate" id="currentCompanyId" name="currentCompanyId" data-validate="notEmpty" />
-            <input type="hidden" value=@anonimity name="str_anon" id="str_anon" />
             <!--generalInfo tab-->
             <div class="generalInfo tab" data-id="1">
 
@@ -126,30 +124,53 @@
                         <div class="rowBlock anType vlCorrect">
                             <input type="hidden" value="2" class="validate vlCorrect incidentAnonymityId" name="incident_anonymity_id" data-vltarget=".anType" data-validate="notEmpty" />
 
-                            @for (int i = 10; i < string_anon.Count + 10; i++)
+                            @for (int i = 10; i < ViewBag.anonimity.Count + 10; i++)
                             {
+
                                 if (i == 10)
                                 {
-                                    <div class="freeBlock inputRadio option active" data-val="@string_anon[i - 10].id">
-                                        <label class="inputBlock" for="@string_anon[i - 10].AnonymityCompany()">
-                                            <input id="@string_anon[i - 10].AnonymityCompany()" type="radio" name="stay" value="@string_anon[i - 10].AnonymityCompany()" />
+                                    <div class="freeBlock inputRadio option active" data-val="@ViewBag.anonimity[i - 10].id">
+                                        <label class="inputBlock" for="@ViewBag.anonimity[i - 10].anonymity_for_company">
+                                            <input id="@ViewBag.anonimity[i - 10].anonymity_for_company" type="radio" name="stay" value="@ViewBag.anonimity[i - 10].anonymity_for_company" />
                                             <span class="radioButton"></span>
-                                            <span class="radioTitle">@string_anon[i - 10].AnonymityCompany()</span>
-                                            <p class="descriptionRadio">@string_anon[i - 10].AnonymityDs()</p>
+                                            <span class="radioTitle">@ViewBag.anonimity[i - 10].anonymity_for_company</span>
+                                            <p class="descriptionRadio">@ViewBag.anonimity[i - 10].anonymity_description</p>
                                         </label>
                                     </div>
                                 }
                                 else
                                 {
-                                    <div class="freeBlock inputRadio option" data-val="@string_anon[i - 10].id">
-                                        <label class="inputBlock" for="@string_anon[i - 10].Anonymity()">
-                                            <input id="@string_anon[i - 10].Anonymity()" type="radio" name="stay" value="@string_anon[i - 10].Anonymity()" />
+                                    <div class="freeBlock inputRadio option" data-val="@ViewBag.anonimity[i - 10].id">
+                                        <label class="inputBlock" for="@ViewBag.anonimity[i - 10].anonymity">
+                                            <input id="@ViewBag.anonimity[i - 10].anonymity" type="radio" name="stay" value="@ViewBag.anonimity[i - 10].anonymity" />
                                             <span class="radioButton"></span>
-                                            <span class="radioTitle">@string_anon[i - 10].Anonymity()</span>
-                                            <p class="descriptionRadio">@string_anon[i - 10].AnonymityDs()</p>
+                                            <span class="radioTitle">@ViewBag.anonimity[i - 10].anonymity</span>
+                                            <p class="descriptionRadio">@ViewBag.anonimity[i - 10].anonymity_description</p>
                                         </label>
                                     </div>
                                 }
+                                @*if (i == 10)
+            {
+                <div class="freeBlock inputRadio option active" data-val="@string_anon[i - 10].id">
+                    <label class="inputBlock" for="@string_anon[i - 10].AnonymityCompany()">
+                        <input id="@string_anon[i - 10].AnonymityCompany()" type="radio" name="stay" value="@string_anon[i - 10].AnonymityCompany()" />
+                        <span class="radioButton"></span>
+                        <span class="radioTitle">@string_anon[i - 10].AnonymityCompany()</span>
+                        <p class="descriptionRadio">@string_anon[i - 10].AnonymityDs()</p>
+                    </label>
+                </div>
+            }
+            else
+            {
+                <div class="freeBlock inputRadio option" data-val="@string_anon[i - 10].id">
+                    <label class="inputBlock" for="@string_anon[i - 10].Anonymity()">
+                        <input id="@string_anon[i - 10].Anonymity()" type="radio" name="stay" value="@string_anon[i - 10].Anonymity()" />
+                        <span class="radioButton"></span>
+                        <span class="radioTitle">@string_anon[i - 10].Anonymity()</span>
+                        <p class="descriptionRadio">@string_anon[i - 10].AnonymityDs()</p>
+                    </label>
+                </div>
+            }*@
 
                             }
                         </div>
@@ -165,10 +186,10 @@
                                 foreach (var item in ViewBag.relationship)
                                 {
                                     <div class="fourBlock inputRadio option" data-val="@item.id">
-                                        <label class="inputBlock" for="@String.Concat(@item.relationship_en)">
-                                            <input id="@String.Concat(@item.relationship_en)" type="radio" name="radioName" value="@String.Concat(@item.relationship_en)" />
+                                        <label class="inputBlock" for="@String.Concat(@item.relationship_nm)">
+                                            <input id="@String.Concat(@item.relationship_nm)" type="radio" name="radioName" value="@String.Concat(@item.relationship_nm)" />
                                             <span class="radioButton"></span>
-                                            <span class="radioTitle">@String.Concat(@item.relationship_en)</span>
+                                            <span class="radioTitle">@String.Concat(@item.relationship_nm)</span>
                                         </label>
                                     </div>
                                 }

@@ -32,6 +32,8 @@ namespace EC.Models.ECModel
         #endregion
 
         #region constructor - anonymity by id
+
+        public Anonymity() { }
         public Anonymity(int anonymity_id, int? language_id)
         {
             Database.anonymity _anonymity = db.anonymity.First(a => a.id == anonymity_id);

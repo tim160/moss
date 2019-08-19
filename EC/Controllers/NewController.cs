@@ -14,6 +14,7 @@ using LavaBlast.Util.CreditCards;
 using EC.Common.Util;
 using EC.Localization;
 using EC.Utils;
+using System.Globalization;
 
 namespace EC.Controllers
 {
@@ -510,7 +511,7 @@ namespace EC.Controllers
                                     createOtherDepartment = false;
                                 }
                                 _department.department_ar = _dep.Trim();
-                                _department.department_es = _dep.Trim();
+                                _department.department_es = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("es-ES"), _dep.Trim(), is_cc);
                                 _department.department_fr = _dep.Trim();
                                 _department.department_ru = _dep.Trim();
                                 //         _department.department_en = _dep.Trim();
@@ -529,7 +530,7 @@ namespace EC.Controllers
                             company_department other_department = new company_department();
                             other_department.department_en = departments.Trim();
                             other_department.department_ar = departments.Trim();
-                            other_department.department_es = departments.Trim();
+                            other_department.department_es = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("es-ES"), departments.Trim(), is_cc);
                             other_department.department_fr = departments.Trim();
                             other_department.department_ru = departments.Trim();
 
