@@ -18,6 +18,7 @@ using EC.Localization;
 using Rotativa.MVC;
 using System.Threading.Tasks;
 using EC.Models.ViewModels;
+using EC.Models.Culture;
 
 namespace EC.Controllers
 {
@@ -134,23 +135,21 @@ namespace EC.Controllers
                     ViewBag.relationship = relationshipCulture.getRelationshipCulture();
                 }
 
+                DepartmentCulture departmentCulture = new DepartmentCulture(companyModel, currentCompany.id);
+                ViewBag.departments = departmentCulture.GetDepartmentsCultureSelect();
 
                 //  ViewBag.departments = HtmlDataHelper.MakeSelect(currentCompany.company_department.ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("department")));
-                var departmentsActive = companyModel.CompanyDepartmentsActive(id).ToList();
+                //var departmentsActive = companyModel.CompanyDepartmentsActive(id).ToList();
+                //company_department empty = new company_department();
+                //empty.department_en = App_LocalResources.GlobalRes.notListed;
+                //empty.id = 0;
+                //departmentsActive.Add(empty);
+                //ViewBag.departments = HtmlDataHelper.MakeSelect(departmentsActive, item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("department")));
 
-                company_department empty = new company_department();
-                empty.department_en = App_LocalResources.GlobalRes.notListed;
-                empty.id = 0;
-                departmentsActive.Add(empty);
-                ViewBag.departments = HtmlDataHelper.MakeSelect(departmentsActive, item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("department")));
 
-
-                ViewBag.locationsOfIncident = HtmlDataHelper.MakeSelect(companyModel.Locations(id).Where(t => t.status_id == 2).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
-
-                // ViewBag.departments2 = currentCompany.company_department.ToList();
-                ViewBag.departments2 = companyModel.CompanyDepartmentsActive(id).ToList();
-
-                ViewBag.locationsOfIncident2 = companyModel.Locations(id).Where(t => t.status_id == 2).ToList();
+                CompanyLocationCulture locationCulture = new CompanyLocationCulture(companyModel, currentCompany.id);
+                ViewBag.locationsOfIncident = locationCulture.getLocationsCompanyCultureSelect();
+               // ViewBag.locationsOfIncident = HtmlDataHelper.MakeSelect(companyModel.Locations(id).Where(t => t.status_id == 2).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
 
                 ViewBag.injury_damage = companyModel.GetInjuryDamages().ToList();
 
