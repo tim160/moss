@@ -680,11 +680,11 @@
 
 
             if (personCount > 0) {
-                passiveCircle.find('.display.button').text('Add another person');
+                passiveCircle.find('.display.button').text($("#AddAnotherPerson").val());
                 passiveCircle.find('.display.button').css({ "border-color": "#AEB5B7", "color": "#AEB5B7", "background": "transparent" });
             }
             else {
-                passiveCircle.find('.display.button').text('Add person');
+                passiveCircle.find('.display.button').text($("#AddPerson").val());
             }
 
             //var buff = tmpl.render(addPersonTempl, { 'num': ++num });
@@ -699,10 +699,10 @@
                 personCount--;
 
                 if (personCount > 0) {
-                    passiveCircle.find('.display.button').text('Add another person');
+                    passiveCircle.find('.display.button').text($("#AddAnotherPerson").val());
                 }
                 else {
-                    passiveCircle.find('.display.button').text('Add person');
+                    passiveCircle.find('.display.button').text($("#AddPerson").val());
                 }
             });
 

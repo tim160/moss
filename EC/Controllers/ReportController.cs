@@ -101,27 +101,13 @@ namespace EC.Controllers
                 ViewBag.countries = HtmlDataHelper.MakeSelect(arr, item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.country_nm.ToString()));
                 ViewBag.countriesDescription = arr;
                 ViewBag.reportedOutsides = companyModel.getReportedOutside();
-                List<role_in_report> roleInReport = db.role_in_report.ToList();
-                List<SelectListItem> selectedRoleInReport = new List<SelectListItem>();
-                /*put other*/
-                SelectListItem temp = new SelectListItem { Text = App_LocalResources.GlobalRes.Other, Value = "0", Selected = true };
-                selectedRoleInReport.Add(temp);
-                foreach (var item in roleInReport)
-                {
-                    SelectListItem role = new SelectListItem { Text = item.role_en, Value = item.id.ToString() };
-                    selectedRoleInReport.Add(role);
-                }
-                ViewBag.selectedRoleInReport = selectedRoleInReport;
+
+                RoleInReportCulture roleInReportCulture = new RoleInReportCulture(db, is_cc);
+                ViewBag.selectedRoleInReport = roleInReportCulture.getRoleInReportCultureSelect();
+
                 EC.Models.ViewModels.AnonimityCulture viewModelAnonimity = new EC.Models.ViewModels.AnonimityCulture(currentCompany, companyModel);
                 ViewBag.anonimity = viewModelAnonimity.getAnonimityCultrure();
-                //List<anonymity> list_anon = companyModel.GetAnonymities(id, 0);
-                //foreach (anonymity _anon in list_anon)
-                //{
-                //    _anon.anonymity_company_en = string.Format(_anon.anonymity_company_en, currentCompany.company_nm);
-                //    _anon.anonymity_ds_en = string.Format(_anon.anonymity_ds_en, currentCompany.company_nm);
-                //    _anon.anonymity_en = string.Format(_anon.anonymity_en, currentCompany.company_nm);
-                //}
-                //ViewBag.anonimity = list_anon;
+
                 /*Relationship to company*/
                 RelationshipCulture relationshipCulture = new RelationshipCulture(companyModel);
                 List<company_relationship> relationship = reportModel.getCustomRelationshipCompany(ViewBag.currentCompanyId);

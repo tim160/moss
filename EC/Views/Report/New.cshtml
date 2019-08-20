@@ -53,7 +53,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 
 }
-
+<input type="hidden" value="@LocalizationGetter.GetString("AddPerson", is_cc)" id="AddPerson" />
+<input type="hidden" value="@LocalizationGetter.GetString("AddAnotherPerson", is_cc)" id="AddAnotherPerson" />
 
 <form action="New" enctype="multipart/form-data" method="POST" ng-app="ReportNew">
     <input type="hidden" value="" />
@@ -150,27 +151,27 @@
                                     </div>
                                 }
                                 @*if (i == 10)
-            {
-                <div class="freeBlock inputRadio option active" data-val="@string_anon[i - 10].id">
-                    <label class="inputBlock" for="@string_anon[i - 10].AnonymityCompany()">
-                        <input id="@string_anon[i - 10].AnonymityCompany()" type="radio" name="stay" value="@string_anon[i - 10].AnonymityCompany()" />
-                        <span class="radioButton"></span>
-                        <span class="radioTitle">@string_anon[i - 10].AnonymityCompany()</span>
-                        <p class="descriptionRadio">@string_anon[i - 10].AnonymityDs()</p>
-                    </label>
-                </div>
-            }
-            else
-            {
-                <div class="freeBlock inputRadio option" data-val="@string_anon[i - 10].id">
-                    <label class="inputBlock" for="@string_anon[i - 10].Anonymity()">
-                        <input id="@string_anon[i - 10].Anonymity()" type="radio" name="stay" value="@string_anon[i - 10].Anonymity()" />
-                        <span class="radioButton"></span>
-                        <span class="radioTitle">@string_anon[i - 10].Anonymity()</span>
-                        <p class="descriptionRadio">@string_anon[i - 10].AnonymityDs()</p>
-                    </label>
-                </div>
-            }*@
+                                    {
+                                        <div class="freeBlock inputRadio option active" data-val="@string_anon[i - 10].id">
+                                            <label class="inputBlock" for="@string_anon[i - 10].AnonymityCompany()">
+                                                <input id="@string_anon[i - 10].AnonymityCompany()" type="radio" name="stay" value="@string_anon[i - 10].AnonymityCompany()" />
+                                                <span class="radioButton"></span>
+                                                <span class="radioTitle">@string_anon[i - 10].AnonymityCompany()</span>
+                                                <p class="descriptionRadio">@string_anon[i - 10].AnonymityDs()</p>
+                                            </label>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="freeBlock inputRadio option" data-val="@string_anon[i - 10].id">
+                                            <label class="inputBlock" for="@string_anon[i - 10].Anonymity()">
+                                                <input id="@string_anon[i - 10].Anonymity()" type="radio" name="stay" value="@string_anon[i - 10].Anonymity()" />
+                                                <span class="radioButton"></span>
+                                                <span class="radioTitle">@string_anon[i - 10].Anonymity()</span>
+                                                <p class="descriptionRadio">@string_anon[i - 10].AnonymityDs()</p>
+                                            </label>
+                                        </div>
+                                    }*@
 
                             }
                         </div>
@@ -256,7 +257,7 @@
                 </div>
 
                 <div class="buttonBlock buttonBlock@{@class_ext}">
-                    
+
                     <input type="button" class="button nextSepButton tabOption pInvolved" value="@LocalizationGetter.GetString("continue", is_cc)">
                 </div>
 
@@ -610,7 +611,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="summaryContentTitle">@LocalizationGetter.GetString("CheckSummarySubmit", is_cc)</div>
 
                 <div class="content">
@@ -669,14 +670,14 @@
                             <div class="report">
                                 <div class="partiesInvolvedBlock">
                                     @*<div class="reportText" style="float: left; padding-left: 0px;" id="FirstLastName">Stan Lee,</div>
-                            <div class="titleReport">Title unknown</div>+
-                            <div class="reportText" id="witnessRole">Witness</div>
-                            <div id="addedPepsones"></div>*@
+                                        <div class="titleReport">Title unknown</div>+
+                                        <div class="reportText" id="witnessRole">Witness</div>
+                                        <div id="addedPepsones"></div>*@
                                 </div>
 
                                 <!--<span id="managementTrue">The management knows about the incident</span>
-                    <span id="managementFalse">The management doesn't know about the incident</span>
-                    <div class="titleReportAll" id="isManagementKnow"></div>-->
+                                <span id="managementFalse">The management doesn't know about the incident</span>
+                                <div class="titleReportAll" id="isManagementKnow"></div>-->
                             </div>
                         </div>
 
@@ -811,7 +812,7 @@
                 @if (ViewBag.nonSupervisingMediators.Count > 0)
                 {
                     @*<div class="titleMediators">@LocalizationGetter.GetString("Mediationteam", is_cc)</div>
-            <div class="titleMediatorsDescrition">@LocalizationGetter.GetString("ThismediatorsCould", is_cc)</div>*@
+                        <div class="titleMediatorsDescrition">@LocalizationGetter.GetString("ThismediatorsCould", is_cc)</div>*@
                     <div class="titleMediators">@LocalizationGetter.GetString("Mediationteam", is_cc)</div>
                 }
 

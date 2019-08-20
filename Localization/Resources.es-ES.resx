@@ -1277,10 +1277,10 @@
     <value>Find an Educational Institute by name or code</value>
   </data>
   <data name="Firstname" xml:space="preserve">
-    <value>First name</value>
+    <value>Primer nombre</value>
   </data>
   <data name="FirstNameUp" xml:space="preserve">
-    <value>First Name</value>
+    <value>Primer Nombre</value>
   </data>
   <data name="forEmployeeConfidentialOnly" xml:space="preserve">
     <value>FOR EMPLOYEE CONFIDENTIAL ONLY</value>

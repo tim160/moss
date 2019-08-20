@@ -49,7 +49,6 @@ namespace EC.Models.Culture
                         departments.Add(temp);
                     }
                     break;
-
             }
             return departments;
         }
