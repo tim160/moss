@@ -95,7 +95,9 @@ namespace EC.Controllers
                 ViewBag.currentCompany = currentCompany.company_nm;
                 //ViewBag.country = currentCompany.address.country.country_nm;
                 ViewBag.locations = HtmlDataHelper.MakeSelect(companyModel.Locations(id).Where(t => t.status_id == 2).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
-                ViewBag.managament = companyModel.getManagamentKnow();
+                //ViewBag.managament = companyModel.getManagamentKnow();
+                ManagamentKnowCulture managamentKnowCulture = new ManagamentKnowCulture(companyModel);
+                ViewBag.managament = managamentKnowCulture.GetManagamentKnowCulture();
                 ViewBag.frequencies = HtmlDataHelper.MakeSelect(companyModel.getFrequencies(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("description")));
                 List<country> arr = companyModel.getCountries();
                 ViewBag.countries = HtmlDataHelper.MakeSelect(arr, item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.country_nm.ToString()));
@@ -276,7 +278,10 @@ namespace EC.Controllers
 
             //ViewBag.country = currentCompany.address.country.country_nm;
             ViewBag.locations = HtmlDataHelper.MakeSelect(companyModel.Locations(id), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
-            ViewBag.managament = companyModel.getManagamentKnow();
+            //ViewBag.managament = companyModel.getManagamentKnow();
+            ManagamentKnowCulture managamentKnowCulture = new ManagamentKnowCulture(companyModel);
+            ViewBag.managament = managamentKnowCulture.GetManagamentKnowCulture();
+
             ViewBag.frequencies = HtmlDataHelper.MakeSelect(companyModel.getFrequencies(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("description")));
             List<country> arr = companyModel.getCountries();
             ViewBag.countries = HtmlDataHelper.MakeSelect(arr, item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.country_nm.ToString()));

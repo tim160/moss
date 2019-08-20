@@ -303,14 +303,14 @@
                     </div>
 
                     <div class="contentBlock" tabindex="1">
-                        <p class="title">@LocalizationGetter.GetString("ManagementKnow", is_cc)</p>
+                        <p class="title">@LocalizationGetter.GetString("Doesmanagementknowaboutthisincident", is_cc)</p>
                         <div class="rowBlock managementIncident">
                             <input type="hidden" value="false" name="managamentKnowId" class="validate" data-vltarget=".managementIncident" data-validate="notEmpty" />
-                            @foreach (EC.Models.Database.management_know myManagementKnow in ViewBag.managament)
+                            @foreach (var myManagementKnow in ViewBag.managament)
                             {
                                 <div class="freeBlock inputRadio option" data-val="@myManagementKnow.id">
                                     <label class="inputBlock" for="Html.Raw(@myManagementKnow.id)">
-                                        <input id="Html.Raw(@myManagementKnow.id)" type="radio" name="managementKnow" value="@myManagementKnow.Managament()" /><span class="radioButton"></span><span class="radioTitle">@myManagementKnow.Managament()</span>
+                                        <input id="Html.Raw(@myManagementKnow.id)" type="radio" name="managementKnow" value="@myManagementKnow.ManagamentKnow" /><span class="radioButton"></span><span class="radioTitle">@myManagementKnow.ManagamentKnow</span>
                                     </label>
                                 </div>
                             }
