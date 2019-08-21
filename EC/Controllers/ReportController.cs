@@ -75,18 +75,19 @@ namespace EC.Controllers
                 ViewBag.currentCompanyId = currentCompany.id;
 
                 /*caseInformation*/
-
-                if (reportModel.isCustomIncidentTypes(ViewBag.currentCompanyId))
+                SecondaryMandatoryCulture secondaryMandatoryCulture = new SecondaryMandatoryCulture(reportModel, currentCompany.id);
+                if (reportModel.isCustomIncidentTypes(currentCompany.id))
                 {
                     /*custom types*/
-                    List<company_secondary_type> list = reportModel.getCompanySecondaryType(ViewBag.currentCompanyId);
-                    ViewBag.secondary_type_mandatory = list.Where(t => t.status_id == 2).OrderBy(x => x.secondary_type_en).ToList();
+                    ViewBag.secondary_type_mandatory = secondaryMandatoryCulture.GetSecondaryMandCustom();
+                    //List<company_secondary_type> list = reportModel.getCompanySecondaryType(ViewBag.currentCompanyId);
+                    //ViewBag.secondary_type_mandatory = list.Where(t => t.status_id == 2).OrderBy(x => x.secondary_type_en).ToList();
                     ViewBag.CustomSecondaryType = true;
                 }
                 else
                 {
                     /*default*/
-                    ViewBag.secondary_type_mandatory = reportModel.getSecondaryTypeMandatory().Where(t => t.status_id == 2).OrderBy(x => x.secondary_type_en).ToList();
+                    ViewBag.secondary_type_mandatory = secondaryMandatoryCulture.getSecondaryTypeMandatory();
                     ViewBag.CustomSecondaryType = false;
                 }
 
@@ -95,14 +96,15 @@ namespace EC.Controllers
                 ViewBag.currentCompany = currentCompany.company_nm;
                 //ViewBag.country = currentCompany.address.country.country_nm;
                 ViewBag.locations = HtmlDataHelper.MakeSelect(companyModel.Locations(id).Where(t => t.status_id == 2).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
-                //ViewBag.managament = companyModel.getManagamentKnow();
                 ManagamentKnowCulture managamentKnowCulture = new ManagamentKnowCulture(companyModel);
                 ViewBag.managament = managamentKnowCulture.GetManagamentKnowCulture();
                 ViewBag.frequencies = HtmlDataHelper.MakeSelect(companyModel.getFrequencies(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("description")));
                 List<country> arr = companyModel.getCountries();
                 ViewBag.countries = HtmlDataHelper.MakeSelect(arr, item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.country_nm.ToString()));
                 ViewBag.countriesDescription = arr;
-                ViewBag.reportedOutsides = companyModel.getReportedOutside();
+                ReportedOutsideCulture reportedOutsideCulture = new ReportedOutsideCulture(companyModel);
+                ViewBag.reportedOutsides =reportedOutsideCulture.getReportedOutside();
+                //ViewBag.reportedOutsides = companyModel.getReportedOutside();
 
                 RoleInReportCulture roleInReportCulture = new RoleInReportCulture(db, is_cc);
                 ViewBag.selectedRoleInReport = roleInReportCulture.getRoleInReportCultureSelect();
@@ -137,9 +139,10 @@ namespace EC.Controllers
 
                 CompanyLocationCulture locationCulture = new CompanyLocationCulture(companyModel, currentCompany.id);
                 ViewBag.locationsOfIncident = locationCulture.getLocationsCompanyCultureSelect();
-               // ViewBag.locationsOfIncident = HtmlDataHelper.MakeSelect(companyModel.Locations(id).Where(t => t.status_id == 2).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
+                // ViewBag.locationsOfIncident = HtmlDataHelper.MakeSelect(companyModel.Locations(id).Where(t => t.status_id == 2).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
 
-                ViewBag.injury_damage = companyModel.GetInjuryDamages().ToList();
+                InjuryDamageCulture injuryDamageCulture = new InjuryDamageCulture(companyModel);
+                ViewBag.injury_damage = injuryDamageCulture.getInjuryDamageCulture();
 
                 ViewBag.supervisingMediators = companyModel.AllSupervisingMediators(id, true); // HtmlDataHelper.MakeSelect(companyModel.AllSupervisingMediators(id, true).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.last_nm));
                 ViewBag.nonSupervisingMediators = companyModel.AllNonSupervisingMediators(id, true); // HtmlDataHelper.MakeSelect(companyModel.AllSupervisingMediators(id, true).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.last_nm));

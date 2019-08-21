@@ -542,13 +542,13 @@
                         <div class="incidentResultReport">
                             <p class="title">@LocalizationGetter.GetString("IncidentResultInjury", is_cc)</p>
                             <input type="hidden" class="validate" value="false" name="incidentResultReport" data-vltarget=".incidentResultReport" data-validate="notEmpty" />
-                            @foreach (EC.Models.Database.injury_damage item in ViewBag.injury_damage)
+                            @foreach (var item in ViewBag.injury_damage)
                             {
                                 <div class="freeBlock inputRadio option" data-val="@item.id">
-                                    <label class="inputBlock" for="@item.id + '-' + @item.InjuryDamage()">
-                                        <input id="@item.id + '-' + @item.InjuryDamage()" type="radio" name="resultInjury" value="@item.InjuryDamage()" />
+                                    <label class="inputBlock" for="@item.id + '-' + @item.InjuryDamage">
+                                        <input id="@item.id + '-' + @item.InjuryDamage" type="radio" name="resultInjury" value="@item.InjuryDamage" />
                                         <span class="radioButton"></span>
-                                        <span class="radioTitle">@item.InjuryDamage()</span>
+                                        <span class="radioTitle">@item.InjuryDamage</span>
                                     </label>
                                 </div>
                             }
@@ -623,7 +623,7 @@
                                     <span class="listText listHead">@LocalizationGetter.GetString("GeneralInf4ormation", is_cc)</span>
                                 </td>
                                 <td class="demoTD" style="width: 100%;"><hr class="listHR"></td>
-                                <td class="demoTD goToStep1"><input class="listInput" type="button" value="@LocalizationGetter.GetString("EDIT", is_cc)"></td>
+                                <td class="demoTD goToStep1"><input class="listInput uppercase" type="button" value="@LocalizationGetter.GetString("Edit", is_cc)"></td>
                             </tr>
                         </table>
 
@@ -662,7 +662,7 @@
                                     <span class="listText listHead">@LocalizationGetter.GetString("PartiesInvolved", is_cc)</span>
                                 </td>
                                 <td class="demoTD" style="width: 100%;"><hr class="listHR"></td>
-                                <td class="demoTD goToStep2"><input class="listInput" type="button" value="@LocalizationGetter.GetString("EDIT", is_cc)"></td>
+                                <td class="demoTD goToStep2"><input class="listInput uppercase" type="button" value="@LocalizationGetter.GetString("Edit", is_cc)"></td>
                             </tr>
                         </table>
 
@@ -716,7 +716,7 @@
                                     <span class="listText listHead">@LocalizationGetter.GetString("CaseInformation", is_cc)</span>
                                 </td>
                                 <td class="demoTD" style="width: 100%;"><hr class="listHR"></td>
-                                <td class="demoTD goToStep3"><input class="listInput" type="button" value="@LocalizationGetter.GetString("EDIT", is_cc)"></td>
+                                <td class="demoTD goToStep3"><input class="listInput uppercase" type="button" value="@LocalizationGetter.GetString("Edit", is_cc)"></td>
                             </tr>
                         </table>
 

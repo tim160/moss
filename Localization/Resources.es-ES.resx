@@ -607,7 +607,7 @@
     <value>Usted puede revisar el estatus del su denuncia usando el registro proporcionado y la contraseña creada cuando formuló su reporte.</value>
   </data>
   <data name="CheckSummarySubmit" xml:space="preserve">
-    <value>Please check your report summary and submit when ready:</value>
+    <value>Verifique el resumen de su informe y envíelo cuando esté listo:</value>
   </data>
   <data name="CheckYourCase" xml:space="preserve">
     <value>Check your case status</value>
@@ -2480,7 +2480,7 @@
     <value>Departamento(s) involucrado</value>
   </data>
   <data name="SelectFile" xml:space="preserve">
-    <value>SELECT FILE ATTACHMENTS</value>
+    <value>SELECCIONAR ACCESORIOS DE ARCHIVO</value>
   </data>
   <data name="SelectLocation" xml:space="preserve">
     <value>Seleccione el lugar</value>
