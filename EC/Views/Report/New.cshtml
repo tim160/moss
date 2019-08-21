@@ -327,19 +327,19 @@
                             <p>@LocalizationGetter.GetString("Hascasereportedoutside", is_cc)<br /></p>
                             <div class="rowBlock whoKnow">
                                 <input type="hidden" value="false" name="reported_outside_id" class="validate" data-vltarget=".reported_outside_id" data-validate="notEmpty" />
-                                @foreach (reported_outside item in ViewBag.reportedOutsides)
+                                @foreach (var item in ViewBag.reportedOutsides)
                                 {
                                     <div class="freeBlock inputRadio option" data-val="@item.id">
-                                        <label class="inputBlock" for="@item.description_en">
-                                            <input id="@item.description_en" type="radio" name="isReportRefered" value="@item.description_en" />
+                                        <label class="inputBlock" for="@item.ReportedOutside">
+                                            <input id="@item.ReportedOutside" type="radio" name="isReportRefered" value="@item.ReportedOutside" />
                                             <span class="radioButton"></span>
-                                            <span class="radioTitle">@item.description_en</span>
+                                            <span class="radioTitle">@item.ReportedOutside</span>
                                         </label>
                                     </div>
                                 }
                                 <div class="freeBlock inputRadio option other3" data-val="other">
-                                    <label class="inputBlock" for="@LocalizationGetter.GetString("Other", is_cc)">
-                                        <input id="OtherWhoknow" type="radio" name="isReportRefered" value="@LocalizationGetter.GetString("Other", is_cc)" />
+                                    <label class="inputBlock" for="other">
+                                        <input id="OtherWhoknow" type="radio" name="isReportRefered" value="other" />
                                         <span class="radioButton"></span>
                                         <span class="radioTitle">@LocalizationGetter.GetString("Other", is_cc)</span>
                                     </label>
@@ -411,7 +411,7 @@
                             </br>
                         </div>
                     </div>
-                    <div id="emergency" class="isUrgentYesTextStyle isUrgentYesTextStyle@{@class_ext}" style="display: none">@LocalizationGetter.GetString("LifeThreatening", is_cc)</div>
+                    <div id="emergency" class="isUrgentYesTextStyle isUrgentYesTextStyle@{@class_ext}" style="display: none">@LocalizationGetter.GetString("IncidentLifeThreatening", is_cc)</div>
                 </div>
                 <div class="buttonBlock buttonBlock@{@class_ext}">
                     <input type="button" class="button nextSepButton tabOption cInformation" value="@LocalizationGetter.GetString("continue", is_cc)">
@@ -453,11 +453,11 @@
                             {
                                 foreach (var item in ViewBag.secondary_type_mandatory)
                                 {
-                                    <div class="freeBlock inputRadio option" data-val="@String.Concat(@item.secondary_type_en)">
-                                        <label class="inputBlock" for="@String.Concat(@item.secondary_type_en)">
-                                            <input id="@String.Concat(@item.secondary_type_en)" type="checkbox" name="whatHappened" value="@item.id" />
+                                    <div class="freeBlock inputRadio option" data-val="@String.Concat(@item.SecondaryMandatory)">
+                                        <label class="inputBlock" for="@String.Concat(@item.SecondaryMandatory)">
+                                            <input id="@String.Concat(@item.SecondaryMandatory)" type="checkbox" name="whatHappened" value="@item.id" />
                                             @*<span class="radioButton"></span>*@
-                                            <span class="radioTitle">@item.secondary_type_en</span>
+                                            <span class="radioTitle">@item.SecondaryMandatory</span>
                                         </label>
                                     </div>
                                 }
