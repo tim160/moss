@@ -354,7 +354,7 @@
                                         $(event.currentTarget).find('.radioButton').css({ "background-position": "0px 100%" });
 
                                         $(event.currentTarget).find('.radioTitle').css("color", "#3C3E3F");
-                                        if ($(event.currentTarget).find('input').val() == "No") {
+                                        if ($(event.currentTarget).find('input').val() == '@LocalizationGetter.GetString("No", is_cc)') {
                                             $('.contentBlock.reportReferedExplain').hide();
                                         } else {
                                             $('.contentBlock.reportReferedExplain').show();
