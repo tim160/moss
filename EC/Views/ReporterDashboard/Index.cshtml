@@ -48,7 +48,7 @@
                         <p style="padding-top:4px">@LocalizationGetter.GetString("Datereported", is_cc):</p>
                         @if (rm._report.agent_id.HasValue)
                         {
-                            <p style="padding-top:4px">Filed by Call Center Agent:</p>
+                        <p style="padding-top:4px">@LocalizationGetter.GetString("FiledCenterAgent", is_cc):</p>
                         }
 
                         <p style="padding-top:4px">@LocalizationGetter.GetString("Timeelapsed", is_cc):</p>
