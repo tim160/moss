@@ -781,7 +781,7 @@
     <value>Contact Reporter</value>
   </data>
   <data name="Continue" xml:space="preserve">
-    <value>Continue</value>
+    <value>Continuar</value>
   </data>
   <data name="Contractor" xml:space="preserve">
     <value>Contractor</value>
@@ -3001,5 +3001,11 @@
   </data>
   <data name="YourPasswordUpdatedSuccess" xml:space="preserve">
     <value>Your password has been successfully updated</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Okay</value>
   </data>
 </root>
