@@ -74,7 +74,7 @@ namespace EC.Models.Culture
                     {
                         SecondaryMandatoryViewModel temp = new SecondaryMandatoryViewModel();
                         temp.id = type.id;
-                        if (type.description_es != null && type.description_es != "")
+                        if (type.secondary_type_es != null && type.secondary_type_es != "")
                         {
                             temp.SecondaryMandatory = type.secondary_type_es;
                         }

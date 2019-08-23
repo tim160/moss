@@ -104,7 +104,6 @@ namespace EC.Controllers
                 ViewBag.countriesDescription = arr;
                 ReportedOutsideCulture reportedOutsideCulture = new ReportedOutsideCulture(companyModel);
                 ViewBag.reportedOutsides =reportedOutsideCulture.getReportedOutside();
-                //ViewBag.reportedOutsides = companyModel.getReportedOutside();
 
                 RoleInReportCulture roleInReportCulture = new RoleInReportCulture(db, is_cc);
                 ViewBag.selectedRoleInReport = roleInReportCulture.getRoleInReportCultureSelect();
@@ -128,18 +127,8 @@ namespace EC.Controllers
                 DepartmentCulture departmentCulture = new DepartmentCulture(companyModel, currentCompany.id);
                 ViewBag.departments = departmentCulture.GetDepartmentsCultureSelect();
 
-                //  ViewBag.departments = HtmlDataHelper.MakeSelect(currentCompany.company_department.ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("department")));
-                //var departmentsActive = companyModel.CompanyDepartmentsActive(id).ToList();
-                //company_department empty = new company_department();
-                //empty.department_en = App_LocalResources.GlobalRes.notListed;
-                //empty.id = 0;
-                //departmentsActive.Add(empty);
-                //ViewBag.departments = HtmlDataHelper.MakeSelect(departmentsActive, item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("department")));
-
-
                 CompanyLocationCulture locationCulture = new CompanyLocationCulture(companyModel, currentCompany.id);
                 ViewBag.locationsOfIncident = locationCulture.getLocationsCompanyCultureSelect();
-                // ViewBag.locationsOfIncident = HtmlDataHelper.MakeSelect(companyModel.Locations(id).Where(t => t.status_id == 2).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
 
                 InjuryDamageCulture injuryDamageCulture = new InjuryDamageCulture(companyModel);
                 ViewBag.injury_damage = injuryDamageCulture.getInjuryDamageCulture();
@@ -158,7 +147,6 @@ namespace EC.Controllers
                 {
                     ViewBag.companyLogo = null;
                 }
-                //
             }
             else
             {

@@ -21,7 +21,10 @@ window.addEventListener('mouseup', function (event) {
     //var arrayLang =
     //    [
     //        { label: "English", value: "en-US" },
-    //        { label: "Español", value: "es-ES" }
+    //        { label: "Español", value: "es-ES" },
+    //        { label: "Arabic", value: "ar-SA" }
+    //        { label: "French", value: "fr-FR" }
+    //        { label: "Russian", value: "ru" }
     //        //'عربى(Arabic)', '中文(Chinese)', 'Deutsch', 'Filipino', 'Français',
     //        //'Italiano', '日本人(Japanese)', '한국어(Korean)', 'Nederlands', 'Português', 'Русский(Russian)', 'Tiếng Việt(Vietnamese)'];
     //    ]

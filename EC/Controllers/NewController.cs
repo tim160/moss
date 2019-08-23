@@ -461,30 +461,50 @@ namespace EC.Controllers
                     List<string> list_departments = new List<string>();
                     if (!is_cc)
                     {
-                        list_departments.Add(LocalizationGetter.GetString("Administration"));
-                        list_departments.Add(LocalizationGetter.GetString("AccountingFinance"));
-                        list_departments.Add(LocalizationGetter.GetString("CustomerService"));
-                        list_departments.Add(LocalizationGetter.GetString("HumanResources"));
-                        list_departments.Add(LocalizationGetter.GetString("IT"));
-                        list_departments.Add(LocalizationGetter.GetString("Legal"));
-                        list_departments.Add(LocalizationGetter.GetString("Marketing"));
-                        list_departments.Add(LocalizationGetter.GetString("Production"));
-                        list_departments.Add(LocalizationGetter.GetString("Purchasing"));
-                        list_departments.Add(LocalizationGetter.GetString("RD"));
-                        list_departments.Add(LocalizationGetter.GetString("Sales"));
+                        //list_departments.Add(LocalizationGetter.GetString("Administration"));
+                        //list_departments.Add(LocalizationGetter.GetString("AccountingFinance"));
+                        //list_departments.Add(LocalizationGetter.GetString("CustomerService"));
+                        //list_departments.Add(LocalizationGetter.GetString("HumanResources"));
+                        //list_departments.Add(LocalizationGetter.GetString("IT"));
+                        //list_departments.Add(LocalizationGetter.GetString("Legal"));
+                        //list_departments.Add(LocalizationGetter.GetString("Marketing"));
+                        //list_departments.Add(LocalizationGetter.GetString("Production"));
+                        //list_departments.Add(LocalizationGetter.GetString("Purchasing"));
+                        //list_departments.Add(LocalizationGetter.GetString("RD"));
+                        //list_departments.Add(LocalizationGetter.GetString("Sales"));
+                        list_departments.Add("Administration");
+                        list_departments.Add("AccountingFinance");
+                        list_departments.Add("CustomerService");
+                        list_departments.Add("HumanResources");
+                        list_departments.Add("IT");
+                        list_departments.Add("Legal");
+                        list_departments.Add("Marketing");
+                        list_departments.Add("Production");
+                        list_departments.Add("Purchasing");
+                        list_departments.Add("RD");
+                        list_departments.Add("Sales");
                     }
 
                     if (is_cc)
                     {
-                        list_departments.Add(LocalizationGetter.GetString("AcademicAffairs"));
-                        list_departments.Add(LocalizationGetter.GetString("AccountingFinance"));
-                        list_departments.Add(LocalizationGetter.GetString("Athletics"));
-                        list_departments.Add(LocalizationGetter.GetString("HumanResources"));
-                        list_departments.Add(LocalizationGetter.GetString("IT"));
-                        list_departments.Add(LocalizationGetter.GetString("Medical"));
-                        list_departments.Add(LocalizationGetter.GetString("Research"));
-                        list_departments.Add(LocalizationGetter.GetString("RiskSafetyMatters"));
-                        list_departments.Add(LocalizationGetter.GetString("StudentsAffairs"));
+                        //list_departments.Add(LocalizationGetter.GetString("AcademicAffairs"));
+                        //list_departments.Add(LocalizationGetter.GetString("AccountingFinance"));
+                        //list_departments.Add(LocalizationGetter.GetString("Athletics"));
+                        //list_departments.Add(LocalizationGetter.GetString("HumanResources"));
+                        //list_departments.Add(LocalizationGetter.GetString("IT"));
+                        //list_departments.Add(LocalizationGetter.GetString("Medical"));
+                        //list_departments.Add(LocalizationGetter.GetString("Research"));
+                        //list_departments.Add(LocalizationGetter.GetString("RiskSafetyMatters"));
+                        //list_departments.Add(LocalizationGetter.GetString("StudentsAffairs"));
+                        list_departments.Add("AcademicAffairs");
+                        list_departments.Add("AccountingFinance");
+                        list_departments.Add("Athletics");
+                        list_departments.Add("HumanResources");
+                        list_departments.Add("IT");
+                        list_departments.Add("Medical");
+                        list_departments.Add("Research");
+                        list_departments.Add("RiskSafetyMatters");
+                        list_departments.Add("StudentsAffairs");
                     }
                     bool createOtherDepartment = true;
                     string tempDepartment = String.Empty;
@@ -505,16 +525,15 @@ namespace EC.Controllers
                             if (_dep.Trim().Length > 0)
                             {
                                 company_department _department = new company_department();
-                                _department.department_en = _dep.Trim();
+                                _department.department_en = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("en-US"), _dep.Trim(), is_cc);
                                 if (_department.department_en.ToLower() == tempDepartment)
                                 {
                                     createOtherDepartment = false;
                                 }
-                                _department.department_ar = _dep.Trim();
+                                _department.department_ar = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("ar-SA"), _dep.Trim(), is_cc);
                                 _department.department_es = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("es-ES"), _dep.Trim(), is_cc);
-                                _department.department_fr = _dep.Trim();
-                                _department.department_ru = _dep.Trim();
-                                //         _department.department_en = _dep.Trim();
+                                _department.department_fr = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("fr-FR"), _dep.Trim(), is_cc);
+                                _department.department_ru = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("ru"), _dep.Trim(), is_cc);
                                 _department.client_id = client_id;
                                 _department.company_id = company_id;
                                 _department.last_update_dt = DateTime.Now;
@@ -528,11 +547,11 @@ namespace EC.Controllers
                         if (createOtherDepartment)
                         {
                             company_department other_department = new company_department();
-                            other_department.department_en = departments.Trim();
-                            other_department.department_ar = departments.Trim();
+                            other_department.department_en = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("en-US"), departments.Trim(), is_cc);
+                            other_department.department_ar = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("ar-SA"), departments.Trim(), is_cc);
                             other_department.department_es = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("es-ES"), departments.Trim(), is_cc);
-                            other_department.department_fr = departments.Trim();
-                            other_department.department_ru = departments.Trim();
+                            other_department.department_fr = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("fr-FR"), departments.Trim(), is_cc);
+                            other_department.department_ru = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("ru"), departments.Trim(), is_cc);
 
                             other_department.client_id = client_id;
                             other_department.company_id = company_id;
@@ -553,134 +572,260 @@ namespace EC.Controllers
                         List<string> list_types = new List<string>();
                         if (!is_cc)
                         {
-                            list_types.Add(LocalizationGetter.GetString("AccountingAuditRelated"));
-                            list_types.Add(LocalizationGetter.GetString("AccountingError"));
-                            list_types.Add(LocalizationGetter.GetString("AccountingMisrepresentation"));
-                            list_types.Add(LocalizationGetter.GetString("AuditingMatters"));
-                            list_types.Add(LocalizationGetter.GetString("BriberyKickbacks"));
-                            list_types.Add(LocalizationGetter.GetString("Embezzlement"));
-                            list_types.Add(LocalizationGetter.GetString("FinancialConcerns"));
-                            list_types.Add(LocalizationGetter.GetString("Falsification"));
-                            list_types.Add(LocalizationGetter.GetString("MisappropriationFunds"));
-                            list_types.Add(LocalizationGetter.GetString("HumanResourcesIssues"));
-                            list_types.Add(LocalizationGetter.GetString("Discrimination"));
-                            list_types.Add(LocalizationGetter.GetString("DomesticViolence"));
-                            list_types.Add(LocalizationGetter.GetString("SubstanceAbuse"));
-                            list_types.Add(LocalizationGetter.GetString("CommunicateNonManagement"));
-                            list_types.Add(LocalizationGetter.GetString("ComplianceRegulationViolations"));
-                            list_types.Add(LocalizationGetter.GetString("CorporateScandal"));
-                            list_types.Add(LocalizationGetter.GetString("Harassment"));
-                            list_types.Add(LocalizationGetter.GetString("Mistreatment"));
-                            list_types.Add(LocalizationGetter.GetString("Retaliation"));
+                            //list_types.Add(LocalizationGetter.GetString("AccountingAuditRelated"));
+                            //list_types.Add(LocalizationGetter.GetString("AccountingError"));
+                            //list_types.Add(LocalizationGetter.GetString("AccountingMisrepresentation"));
+                            //list_types.Add(LocalizationGetter.GetString("AuditingMatters"));
+                            //list_types.Add(LocalizationGetter.GetString("BriberyKickbacks"));
+                            //list_types.Add(LocalizationGetter.GetString("Embezzlement"));
+                            //list_types.Add(LocalizationGetter.GetString("FinancialConcerns"));
+                            //list_types.Add(LocalizationGetter.GetString("Falsification"));
+                            //list_types.Add(LocalizationGetter.GetString("MisappropriationFunds"));
+                            //list_types.Add(LocalizationGetter.GetString("HumanResourcesIssues"));
+                            //list_types.Add(LocalizationGetter.GetString("Discrimination"));
+                            //list_types.Add(LocalizationGetter.GetString("DomesticViolence"));
+                            //list_types.Add(LocalizationGetter.GetString("SubstanceAbuse"));
+                            //list_types.Add(LocalizationGetter.GetString("CommunicateNonManagement"));
+                            //list_types.Add(LocalizationGetter.GetString("ComplianceRegulationViolations"));
+                            //list_types.Add(LocalizationGetter.GetString("CorporateScandal"));
+                            //list_types.Add(LocalizationGetter.GetString("Harassment"));
+                            //list_types.Add(LocalizationGetter.GetString("Mistreatment"));
+                            //list_types.Add(LocalizationGetter.GetString("Retaliation"));
 
-                            list_types.Add(LocalizationGetter.GetString("SexualHarassment"));
-                            list_types.Add(LocalizationGetter.GetString("ThreatViolence"));
-                            list_types.Add(LocalizationGetter.GetString("WorkplaceViolence"));
-                            list_types.Add(LocalizationGetter.GetString("PrivacyIssues"));
-                            list_types.Add(LocalizationGetter.GetString("AcceptableUseViolations"));
-                            list_types.Add(LocalizationGetter.GetString("HIPAACompliance"));
-                            list_types.Add(LocalizationGetter.GetString("IdentityTheft"));
-                            list_types.Add(LocalizationGetter.GetString("InformationSecurity"));
-                            list_types.Add(LocalizationGetter.GetString("EthicsViolations"));
-                            list_types.Add(LocalizationGetter.GetString("CodeEthicsViolation"));
-                            list_types.Add(LocalizationGetter.GetString("EthicalViolations"));
-                            list_types.Add(LocalizationGetter.GetString("Misconduct"));
-                            list_types.Add(LocalizationGetter.GetString("TheftEquipment"));
+                            list_types.Add("AccountingAuditRelated");
+                            list_types.Add("AccountingError");
+                            list_types.Add("AccountingMisrepresentation");
+                            list_types.Add("AuditingMatters");
+                            list_types.Add("BriberyKickbacks");
+                            list_types.Add("Embezzlement");
+                            list_types.Add("FinancialConcerns");
+                            list_types.Add("Falsification");
+                            list_types.Add("MisappropriationFunds");
+                            list_types.Add("HumanResourcesIssues");
+                            list_types.Add("Discrimination");
+                            list_types.Add("DomesticViolence");
+                            list_types.Add("SubstanceAbuse");
+                            list_types.Add("CommunicateNonManagement");
+                            list_types.Add("ComplianceRegulationViolations");
+                            list_types.Add("CorporateScandal");
+                            list_types.Add("Harassment");
+                            list_types.Add("Mistreatment");
+                            list_types.Add("Retaliation");
 
-                            list_types.Add(LocalizationGetter.GetString("Theft"));
-                            list_types.Add(LocalizationGetter.GetString("UnfairLaborPractices"));
-                            list_types.Add(LocalizationGetter.GetString("VendorConcerns"));
-                            list_types.Add(LocalizationGetter.GetString("WorkplaceSafety"));
-                            list_types.Add(LocalizationGetter.GetString("EnvironmentalDamage"));
-                            list_types.Add(LocalizationGetter.GetString("EnvironmentalIssue"));
-                            list_types.Add(LocalizationGetter.GetString("IndustrialAccidents"));
+                            //list_types.Add(LocalizationGetter.GetString("SexualHarassment"));
+                            //list_types.Add(LocalizationGetter.GetString("ThreatViolence"));
+                            //list_types.Add(LocalizationGetter.GetString("WorkplaceViolence"));
+                            //list_types.Add(LocalizationGetter.GetString("PrivacyIssues"));
+                            //list_types.Add(LocalizationGetter.GetString("AcceptableUseViolations"));
+                            //list_types.Add(LocalizationGetter.GetString("HIPAACompliance"));
+                            //list_types.Add(LocalizationGetter.GetString("IdentityTheft"));
+                            //list_types.Add(LocalizationGetter.GetString("InformationSecurity"));
+                            //list_types.Add(LocalizationGetter.GetString("EthicsViolations"));
+                            //list_types.Add(LocalizationGetter.GetString("CodeEthicsViolation"));
+                            //list_types.Add(LocalizationGetter.GetString("EthicalViolations"));
+                            //list_types.Add(LocalizationGetter.GetString("Misconduct"));
+                            //list_types.Add(LocalizationGetter.GetString("TheftEquipment"));
 
-                            list_types.Add(LocalizationGetter.GetString("Sabotage"));
-                            list_types.Add(LocalizationGetter.GetString("SafeDrivingConcerns"));
-                            list_types.Add(LocalizationGetter.GetString("UnsafeWorkConditions"));
-                            list_types.Add(LocalizationGetter.GetString("UnusualSuspiciousActivities"));
-                            list_types.Add(LocalizationGetter.GetString("Vandalism"));
-                            list_types.Add(LocalizationGetter.GetString("PoorCustomerService"));
-                            list_types.Add(LocalizationGetter.GetString("CustomerMistreatment"));
-                            list_types.Add(LocalizationGetter.GetString("EmployeeRelations"));
-                            list_types.Add(LocalizationGetter.GetString("SecuritiesViolation"));
-                            list_types.Add(LocalizationGetter.GetString("ShareholderConcerns"));
-                            list_types.Add(LocalizationGetter.GetString("SexualAbuse"));
-                            list_types.Add(LocalizationGetter.GetString("HostileEnvironment"));
+                            //list_types.Add(LocalizationGetter.GetString("Theft"));
+                            //list_types.Add(LocalizationGetter.GetString("UnfairLaborPractices"));
+                            //list_types.Add(LocalizationGetter.GetString("VendorConcerns"));
+                            //list_types.Add(LocalizationGetter.GetString("WorkplaceSafety"));
+                            //list_types.Add(LocalizationGetter.GetString("EnvironmentalDamage"));
+                            //list_types.Add(LocalizationGetter.GetString("EnvironmentalIssue"));
+                            //list_types.Add(LocalizationGetter.GetString("IndustrialAccidents"));
+
+                            //list_types.Add(LocalizationGetter.GetString("Sabotage"));
+                            //list_types.Add(LocalizationGetter.GetString("SafeDrivingConcerns"));
+                            //list_types.Add(LocalizationGetter.GetString("UnsafeWorkConditions"));
+                            //list_types.Add(LocalizationGetter.GetString("UnusualSuspiciousActivities"));
+                            //list_types.Add(LocalizationGetter.GetString("Vandalism"));
+                            //list_types.Add(LocalizationGetter.GetString("PoorCustomerService"));
+                            //list_types.Add(LocalizationGetter.GetString("CustomerMistreatment"));
+                            //list_types.Add(LocalizationGetter.GetString("EmployeeRelations"));
+                            //list_types.Add(LocalizationGetter.GetString("SecuritiesViolation"));
+                            //list_types.Add(LocalizationGetter.GetString("ShareholderConcerns"));
+                            //list_types.Add(LocalizationGetter.GetString("SexualAbuse"));
+                            //list_types.Add(LocalizationGetter.GetString("HostileEnvironment"));
+                            list_types.Add("SexualHarassment");
+                            list_types.Add("ThreatViolence");
+                            list_types.Add("WorkplaceViolence");
+                            list_types.Add("PrivacyIssues");
+                            list_types.Add("AcceptableUseViolations");
+                            list_types.Add("HIPAACompliance");
+                            list_types.Add("IdentityTheft");
+                            list_types.Add("InformationSecurity");
+                            list_types.Add("EthicsViolations");
+                            list_types.Add("CodeEthicsViolation");
+                            list_types.Add("EthicalViolations");
+                            list_types.Add("Misconduct");
+                            list_types.Add("TheftEquipment");
+
+                            list_types.Add("Theft");
+                            list_types.Add("UnfairLaborPractices");
+                            list_types.Add("VendorConcerns");
+                            list_types.Add("WorkplaceSafety");
+                            list_types.Add("EnvironmentalDamage");
+                            list_types.Add("EnvironmentalIssue");
+                            list_types.Add("IndustrialAccidents");
+
+                            list_types.Add("Sabotage");
+                            list_types.Add("SafeDrivingConcerns");
+                            list_types.Add("UnsafeWorkConditions");
+                            list_types.Add("UnusualSuspiciousActivities");
+                            list_types.Add("Vandalism");
+                            list_types.Add("PoorCustomerService");
+                            list_types.Add("CustomerMistreatment");
+                            list_types.Add("EmployeeRelations");
+                            list_types.Add("SecuritiesViolation");
+                            list_types.Add("ShareholderConcerns");
+                            list_types.Add("SexualAbuse");
+                            list_types.Add("HostileEnvironment");
                         }
                         if (is_cc)
                         {
-                            list_types.Add(LocalizationGetter.GetString("AcademicMisconduct"));
-                            list_types.Add(LocalizationGetter.GetString("AlcoholDrugAbuse"));
-                            list_types.Add(LocalizationGetter.GetString("CheatingPlagiarism"));
-                            list_types.Add(LocalizationGetter.GetString("CredentialMisrepresentation"));
-                            list_types.Add(LocalizationGetter.GetString("Hazing"));
-                            list_types.Add(LocalizationGetter.GetString("SexualHarassment"));
+                            //list_types.Add(LocalizationGetter.GetString("AcademicMisconduct"));
+                            //list_types.Add(LocalizationGetter.GetString("AlcoholDrugAbuse"));
+                            //list_types.Add(LocalizationGetter.GetString("CheatingPlagiarism"));
+                            //list_types.Add(LocalizationGetter.GetString("CredentialMisrepresentation"));
+                            //list_types.Add(LocalizationGetter.GetString("Hazing"));
+                            //list_types.Add(LocalizationGetter.GetString("SexualHarassment"));
 
-                            list_types.Add(LocalizationGetter.GetString("SpikingDrinks"));
-                            list_types.Add(LocalizationGetter.GetString("StudentSafety"));
-                            list_types.Add(LocalizationGetter.GetString("StudentTravel"));
-                            list_types.Add(LocalizationGetter.GetString("Terrorism"));
-                            list_types.Add(LocalizationGetter.GetString("AccountingAuditingMatters"));
-                            list_types.Add(LocalizationGetter.GetString("DonorStewardship"));
-                            list_types.Add(LocalizationGetter.GetString("FalsificationContracts"));
-                            list_types.Add(LocalizationGetter.GetString("Records"));
-                            list_types.Add(LocalizationGetter.GetString("Fraud"));
+                            //list_types.Add(LocalizationGetter.GetString("SpikingDrinks"));
+                            //list_types.Add(LocalizationGetter.GetString("StudentSafety"));
+                            //list_types.Add(LocalizationGetter.GetString("StudentTravel"));
+                            //list_types.Add(LocalizationGetter.GetString("Terrorism"));
+                            //list_types.Add(LocalizationGetter.GetString("AccountingAuditingMatters"));
+                            //list_types.Add(LocalizationGetter.GetString("DonorStewardship"));
+                            //list_types.Add(LocalizationGetter.GetString("FalsificationContracts"));
+                            //list_types.Add(LocalizationGetter.GetString("Records"));
+                            //list_types.Add(LocalizationGetter.GetString("Fraud"));
 
 
-                            list_types.Add(LocalizationGetter.GetString("ImproperDisclosure"));
-                            list_types.Add(LocalizationGetter.GetString("ImproperGiving"));
-                            list_types.Add(LocalizationGetter.GetString("ImproperSupplier"));
-                            list_types.Add(LocalizationGetter.GetString("TheftEmbezzlement"));
-                            list_types.Add(LocalizationGetter.GetString("WasteAbuse"));
-                            list_types.Add(LocalizationGetter.GetString("OtherFinancialMatters"));
-                            list_types.Add(LocalizationGetter.GetString("FraudulentActivities"));
-                            list_types.Add(LocalizationGetter.GetString("ImproperGivingGifts"));
-                            list_types.Add(LocalizationGetter.GetString("InappropriateActivities"));
+                            //list_types.Add(LocalizationGetter.GetString("ImproperDisclosure"));
+                            //list_types.Add(LocalizationGetter.GetString("ImproperGiving"));
+                            //list_types.Add(LocalizationGetter.GetString("ImproperSupplier"));
+                            //list_types.Add(LocalizationGetter.GetString("TheftEmbezzlement"));
+                            //list_types.Add(LocalizationGetter.GetString("WasteAbuse"));
+                            //list_types.Add(LocalizationGetter.GetString("OtherFinancialMatters"));
+                            //list_types.Add(LocalizationGetter.GetString("FraudulentActivities"));
+                            //list_types.Add(LocalizationGetter.GetString("ImproperGivingGifts"));
+                            //list_types.Add(LocalizationGetter.GetString("InappropriateActivities"));
 
-                            list_types.Add(LocalizationGetter.GetString("MisuseAssets"));
-                            list_types.Add(LocalizationGetter.GetString("RecruitingMisconduct"));
-                            list_types.Add(LocalizationGetter.GetString("ScholarshipFinancial"));
-                            list_types.Add(LocalizationGetter.GetString("SubstanceAbuse"));
-                            list_types.Add(LocalizationGetter.GetString("BiasIncidents"));
-                            list_types.Add(LocalizationGetter.GetString("ConflictInterest"));
-                            list_types.Add(LocalizationGetter.GetString("DiscriminationHarassment"));
-                            list_types.Add(LocalizationGetter.GetString("EEOCADA"));
+                            //list_types.Add(LocalizationGetter.GetString("MisuseAssets"));
+                            //list_types.Add(LocalizationGetter.GetString("RecruitingMisconduct"));
+                            //list_types.Add(LocalizationGetter.GetString("ScholarshipFinancial"));
+                            //list_types.Add(LocalizationGetter.GetString("SubstanceAbuse"));
+                            //list_types.Add(LocalizationGetter.GetString("BiasIncidents"));
+                            //list_types.Add(LocalizationGetter.GetString("ConflictInterest"));
+                            //list_types.Add(LocalizationGetter.GetString("DiscriminationHarassment"));
+                            //list_types.Add(LocalizationGetter.GetString("EEOCADA"));
 
-                            list_types.Add(LocalizationGetter.GetString("EmployeeBenefitsAbuse"));
-                            list_types.Add(LocalizationGetter.GetString("EmployeeMisconduct"));
-                            list_types.Add(LocalizationGetter.GetString("Nepotism"));
-                            list_types.Add(LocalizationGetter.GetString("OffensiveInappropriateCommunication"));
-                            list_types.Add(LocalizationGetter.GetString("ThreatInappropriate"));
-                            list_types.Add(LocalizationGetter.GetString("TimeAbuse"));
-                            list_types.Add(LocalizationGetter.GetString("UnsafeWorkingConditions"));
-                            list_types.Add(LocalizationGetter.GetString("ViolenceThreat"));
-                            list_types.Add(LocalizationGetter.GetString("WorkersCompensationDisability"));
-                            list_types.Add(LocalizationGetter.GetString("BenefitsAbuses"));
-                            list_types.Add(LocalizationGetter.GetString("DataprivacyIntegrity"));
-                            list_types.Add(LocalizationGetter.GetString("MaliciousUseTechnology"));
+                            //list_types.Add(LocalizationGetter.GetString("EmployeeBenefitsAbuse"));
+                            //list_types.Add(LocalizationGetter.GetString("EmployeeMisconduct"));
+                            //list_types.Add(LocalizationGetter.GetString("Nepotism"));
+                            //list_types.Add(LocalizationGetter.GetString("OffensiveInappropriateCommunication"));
+                            //list_types.Add(LocalizationGetter.GetString("ThreatInappropriate"));
+                            //list_types.Add(LocalizationGetter.GetString("TimeAbuse"));
+                            //list_types.Add(LocalizationGetter.GetString("UnsafeWorkingConditions"));
+                            //list_types.Add(LocalizationGetter.GetString("ViolenceThreat"));
+                            //list_types.Add(LocalizationGetter.GetString("WorkersCompensationDisability"));
+                            //list_types.Add(LocalizationGetter.GetString("BenefitsAbuses"));
+                            //list_types.Add(LocalizationGetter.GetString("DataprivacyIntegrity"));
+                            //list_types.Add(LocalizationGetter.GetString("MaliciousUseTechnology"));
 
-                            list_types.Add(LocalizationGetter.GetString("SoftwarePiracy"));
-                            list_types.Add(LocalizationGetter.GetString("Infringement"));
-                            list_types.Add(LocalizationGetter.GetString("MisuseResources"));
-                            list_types.Add(LocalizationGetter.GetString("HealthcareFraud"));
-                            list_types.Add(LocalizationGetter.GetString("HIPAA"));
-                            list_types.Add(LocalizationGetter.GetString("InsuranceIssues"));
-                            list_types.Add(LocalizationGetter.GetString("PatientCare"));
-                            list_types.Add(LocalizationGetter.GetString("PatientAbuse"));
-                            list_types.Add(LocalizationGetter.GetString("PatientRights"));
-                            list_types.Add(LocalizationGetter.GetString("ResearchMisconduct"));
+                            //list_types.Add(LocalizationGetter.GetString("SoftwarePiracy"));
+                            //list_types.Add(LocalizationGetter.GetString("Infringement"));
+                            //list_types.Add(LocalizationGetter.GetString("MisuseResources"));
+                            //list_types.Add(LocalizationGetter.GetString("HealthcareFraud"));
+                            //list_types.Add(LocalizationGetter.GetString("HIPAA"));
+                            //list_types.Add(LocalizationGetter.GetString("InsuranceIssues"));
+                            //list_types.Add(LocalizationGetter.GetString("PatientCare"));
+                            //list_types.Add(LocalizationGetter.GetString("PatientAbuse"));
+                            //list_types.Add(LocalizationGetter.GetString("PatientRights"));
+                            //list_types.Add(LocalizationGetter.GetString("ResearchMisconduct"));
 
-                            list_types.Add(LocalizationGetter.GetString("SponsoredProjects"));
-                            list_types.Add(LocalizationGetter.GetString("OtherMedicalResearch"));
-                            list_types.Add(LocalizationGetter.GetString("ConflictInterest"));
-                            list_types.Add(LocalizationGetter.GetString("DataPrivacy"));
-                            list_types.Add(LocalizationGetter.GetString("DisclosureConfidential"));
-                            list_types.Add(LocalizationGetter.GetString("EnvironmentalSafetyMatters"));
-                            list_types.Add(LocalizationGetter.GetString("HumanAnimalResearch"));
-                            list_types.Add(LocalizationGetter.GetString("ResearchGrantMisconduct"));
-                            list_types.Add(LocalizationGetter.GetString("SexualAbuse"));
-                            list_types.Add(LocalizationGetter.GetString("HostileEnvironment"));
+                            //list_types.Add(LocalizationGetter.GetString("SponsoredProjects"));
+                            //list_types.Add(LocalizationGetter.GetString("OtherMedicalResearch"));
+                            //list_types.Add(LocalizationGetter.GetString("ConflictInterest"));
+                            //list_types.Add(LocalizationGetter.GetString("DataPrivacy"));
+                            //list_types.Add(LocalizationGetter.GetString("DisclosureConfidential"));
+                            //list_types.Add(LocalizationGetter.GetString("EnvironmentalSafetyMatters"));
+                            //list_types.Add(LocalizationGetter.GetString("HumanAnimalResearch"));
+                            //list_types.Add(LocalizationGetter.GetString("ResearchGrantMisconduct"));
+                            //list_types.Add(LocalizationGetter.GetString("SexualAbuse"));
+                            //list_types.Add(LocalizationGetter.GetString("HostileEnvironment"));
+
+                            list_types.Add("AcademicMisconduct");
+                            list_types.Add("AlcoholDrugAbuse");
+                            list_types.Add("CheatingPlagiarism");
+                            list_types.Add("CredentialMisrepresentation");
+                            list_types.Add("Hazing");
+                            list_types.Add("SexualHarassment");
+
+                            list_types.Add("SpikingDrinks");
+                            list_types.Add("StudentSafety");
+                            list_types.Add("StudentTravel");
+                            list_types.Add("Terrorism");
+                            list_types.Add("AccountingAuditingMatters");
+                            list_types.Add("DonorStewardship");
+                            list_types.Add("FalsificationContracts");
+                            list_types.Add("Records");
+                            list_types.Add("Fraud");
+
+
+                            list_types.Add("ImproperDisclosure");
+                            list_types.Add("ImproperGiving");
+                            list_types.Add("ImproperSupplier");
+                            list_types.Add("TheftEmbezzlement");
+                            list_types.Add("WasteAbuse");
+                            list_types.Add("OtherFinancialMatters");
+                            list_types.Add("FraudulentActivities");
+                            list_types.Add("ImproperGivingGifts");
+                            list_types.Add("InappropriateActivities");
+
+                            list_types.Add("MisuseAssets");
+                            list_types.Add("RecruitingMisconduct");
+                            list_types.Add("ScholarshipFinancial");
+                            list_types.Add("SubstanceAbuse");
+                            list_types.Add("BiasIncidents");
+                            list_types.Add("ConflictInterest");
+                            list_types.Add("DiscriminationHarassment");
+                            list_types.Add("EEOCADA");
+
+                            list_types.Add("EmployeeBenefitsAbuse");
+                            list_types.Add("EmployeeMisconduct");
+                            list_types.Add("Nepotism");
+                            list_types.Add("OffensiveInappropriateCommunication");
+                            list_types.Add("ThreatInappropriate");
+                            list_types.Add("TimeAbuse");
+                            list_types.Add("UnsafeWorkingConditions");
+                            list_types.Add("ViolenceThreat");
+                            list_types.Add("WorkersCompensationDisability");
+                            list_types.Add("BenefitsAbuses");
+                            list_types.Add("DataprivacyIntegrity");
+                            list_types.Add("MaliciousUseTechnology");
+
+                            list_types.Add("SoftwarePiracy");
+                            list_types.Add("Infringement");
+                            list_types.Add("MisuseResources");
+                            list_types.Add("HealthcareFraud");
+                            list_types.Add("HIPAA");
+                            list_types.Add("InsuranceIssues");
+                            list_types.Add("PatientCare");
+                            list_types.Add("PatientAbuse");
+                            list_types.Add("PatientRights");
+                            list_types.Add("ResearchMisconduct");
+
+                            list_types.Add("SponsoredProjects");
+                            list_types.Add("OtherMedicalResearch");
+                            list_types.Add("ConflictInterest");
+                            list_types.Add("DataPrivacy");
+                            list_types.Add("DisclosureConfidential");
+                            list_types.Add("EnvironmentalSafetyMatters");
+                            list_types.Add("HumanAnimalResearch");
+                            list_types.Add("ResearchGrantMisconduct");
+                            list_types.Add("SexualAbuse");
+                            list_types.Add("HostileEnvironment");
                         }
 
                         foreach (string _types in list_types)
@@ -688,11 +833,11 @@ namespace EC.Controllers
                             if (_types.Trim().Length > 0)
                             {
                                 company_secondary_type _incident_type = new company_secondary_type();
-                                _incident_type.secondary_type_en = _types.Trim();
-                                _incident_type.secondary_type_ar = _types.Trim();
-                                _incident_type.secondary_type_es = _types.Trim();
-                                _incident_type.secondary_type_fr = _types.Trim();
-                                _incident_type.secondary_type_ru = _types.Trim();
+                                _incident_type.secondary_type_en = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("en-US"), _types.Trim(), is_cc);
+                                _incident_type.secondary_type_ar = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("ar-SA"), _types.Trim(), is_cc);
+                                _incident_type.secondary_type_es = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("es-ES"), _types.Trim(), is_cc);
+                                _incident_type.secondary_type_fr = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("fr-FR"), _types.Trim(), is_cc);
+                                _incident_type.secondary_type_ru = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("ru"), _types.Trim(), is_cc);
                                 //       _incident_type.secondary_type_ar = _types.Trim();
                                 _incident_type.client_id = client_id;
                                 _incident_type.company_id = company_id;
@@ -702,17 +847,7 @@ namespace EC.Controllers
                                 _incident_type.weight = 200;
                                 _incident_type.parent_secondary_type = 0;
 
-                                //try
-                                //{
                                 db.company_secondary_type.Add(_incident_type);
-                                //db.SaveChanges();
-                                //}
-                                //catch (Exception ex)
-                                //{
-                                //    ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-                                //    logger.Error(ex.ToString());
-                                //    return LocalizationGetter.GetString("IncidentTypeSavingFailed");
-                                //}
                             }
                         }
                     }
@@ -721,21 +856,22 @@ namespace EC.Controllers
                     #region Relationship // Reporter Types
                     if (company_id != 0)
                     {
-                        List<string> list_relationship = db.relationship.Select(item => item.relationship_en).ToList();
+                        //List<string> list_relationship = db.relationship.Select(item => item.relationship_en).ToList();
+                        List<relationship> list_relationship = db.relationship.ToList();
                         //   LocalizationGetter.GetString("Administrative")
 
-
-                        foreach (string _relationships in list_relationship)
+                    
+                        foreach (var _relationships in list_relationship)
                         {
-                            if ((_relationships.Trim().Length > 0) && (_relationships.Trim().ToLower() != "other"))
+                            if ((_relationships != null) && (_relationships.relationship_en.Trim().ToLower() != "other"))
                             {
                                 company_relationship _company_relationship = new company_relationship();
-                                _company_relationship.relationship_en = _relationships.Trim();
-                                _company_relationship.relationship_ar = _relationships.Trim();
-                                _company_relationship.relationship_es = _relationships.Trim();
-                                _company_relationship.relationship_fr = _relationships.Trim();
-                                _company_relationship.relationship_jp = _relationships.Trim();
-                                _company_relationship.relationship_ru = _relationships.Trim();
+                                _company_relationship.relationship_en = _relationships.relationship_en.Trim();
+                                _company_relationship.relationship_ar = _relationships.relationship_ar.Trim();
+                                _company_relationship.relationship_es = _relationships.relationship_es.Trim();
+                                _company_relationship.relationship_fr = _relationships.relationship_fr.Trim();
+                                _company_relationship.relationship_jp = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("jp"), _relationships.relationship_en.Trim(), is_cc);
+                                _company_relationship.relationship_ru = _relationships.relationship_ru.Trim();
                                 _company_relationship.client_id = client_id;
                                 _company_relationship.company_id = company_id;
                                 ///??     _company_relationship.last_update_dt = DateTime.Now;
@@ -791,28 +927,35 @@ namespace EC.Controllers
                     if (company_id != 0)
                     {
                         List<string> list_outcomes = new List<string>();
-                        list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany1"));
-                        list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany2"));
-                        list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany3"));
-                        list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany4"));
-                        list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany5"));
-                        list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany6"));
-                        list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany7"));
-                        list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany8"));
+                        //list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany1"));
+                        //list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany2"));
+                        //list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany3"));
+                        //list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany4"));
+                        //list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany5"));
+                        //list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany6"));
+                        //list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany7"));
+                        //list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany8"));
 
-
+                        list_outcomes.Add("OutcomeCompany1");
+                        list_outcomes.Add("OutcomeCompany2");
+                        list_outcomes.Add("OutcomeCompany3");
+                        list_outcomes.Add("OutcomeCompany4");
+                        list_outcomes.Add("OutcomeCompany5");
+                        list_outcomes.Add("OutcomeCompany6");
+                        list_outcomes.Add("OutcomeCompany7");
+                        list_outcomes.Add("OutcomeCompany8");
 
                         foreach (string _outcome in list_outcomes)
                         {
                             if ((_outcome.Trim().Length > 0) && (_outcome.Trim().ToLower() != "other"))
                             {
                                 company_outcome _company_outcome = new company_outcome();
-                                _company_outcome.outcome_en = _outcome.Trim();
-                                _company_outcome.outcome_ar = _outcome.Trim();
-                                _company_outcome.outcome_es = _outcome.Trim();
-                                _company_outcome.outcome_fr = _outcome.Trim();
-                                _company_outcome.outcome_jp = _outcome.Trim();
-                                _company_outcome.outcome_ru = _outcome.Trim();
+                                _company_outcome.outcome_en = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("en-US"), _outcome.Trim(), is_cc);
+                                _company_outcome.outcome_ar = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("ar-SA"), _outcome.Trim(), is_cc);
+                                _company_outcome.outcome_es = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("es-ES"), _outcome.Trim(), is_cc);
+                                _company_outcome.outcome_fr = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("fr-FR"), _outcome.Trim(), is_cc);
+                                _company_outcome.outcome_jp = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("jp"), _outcome.Trim(), is_cc);
+                                _company_outcome.outcome_ru = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("ru"), _outcome.Trim(), is_cc);
                                 _company_outcome.company_id = company_id;
                                 _company_outcome.last_update_dt = DateTime.Now;
                                 _company_outcome.status_id = 2;
@@ -836,48 +979,92 @@ namespace EC.Controllers
                     var list_root_cases = new List<string>();
                     if (company_id != 0)
                     {
-                        list_root_cases.Add(LocalizationGetter.GetString("CulturalInfluences"));
-                        list_root_cases.Add(LocalizationGetter.GetString("CustomerDemands"));
-                        list_root_cases.Add(LocalizationGetter.GetString("CommunicationBarriers"));
+                        //list_root_cases.Add(LocalizationGetter.GetString("CulturalInfluences"));
+                        //list_root_cases.Add(LocalizationGetter.GetString("CustomerDemands"));
+                        //list_root_cases.Add(LocalizationGetter.GetString("CommunicationBarriers"));
+                        list_root_cases.Add("CulturalInfluences");
+                        list_root_cases.Add("CustomerDemands");
+                        list_root_cases.Add("CommunicationBarriers");
                     }
                     foreach (var itemString in list_root_cases)
                     {
-                        var temp_cases_external = new company_root_cases_external { company_id = company_id, name_en = itemString, name_es = itemString, name_fr = itemString, status_id = 2 };
+                        var temp_cases_external = new company_root_cases_external {
+                            company_id = company_id,
+                            name_en = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("en-US"), itemString.Trim(), is_cc),
+                            name_es = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("es-ES"), itemString.Trim(), is_cc),
+                            name_fr = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("fr-FR"), itemString.Trim(), is_cc),
+                            status_id = 2
+                        };
                         db.company_root_cases_external.Add(temp_cases_external);
                         //db.SaveChanges();
                     }
                     list_root_cases = new List<string>();
-                    list_root_cases.Add(LocalizationGetter.GetString("CostControlGoals"));
-                    list_root_cases.Add(LocalizationGetter.GetString("FinancialorPerformanceIncentives"));
-                    list_root_cases.Add(LocalizationGetter.GetString("LackofTeamwork"));
-                    list_root_cases.Add(LocalizationGetter.GetString("PoorProcessDesign"));
-                    list_root_cases.Add(LocalizationGetter.GetString("PressureofMeetingSalesQuotas"));
-                    list_root_cases.Add(LocalizationGetter.GetString("RemoteorInadequateSupervision"));
-                    list_root_cases.Add(LocalizationGetter.GetString("UnsupportiveEnvironmentorDepartment"));
-                    list_root_cases.Add(LocalizationGetter.GetString("WeakControls"));
-                    list_root_cases.Add(LocalizationGetter.GetString("LackofTraining"));
-                    list_root_cases.Add(LocalizationGetter.GetString("LimitedResources"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("CostControlGoals"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("FinancialorPerformanceIncentives"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("LackofTeamwork"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("PoorProcessDesign"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("PressureofMeetingSalesQuotas"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("RemoteorInadequateSupervision"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("UnsupportiveEnvironmentorDepartment"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("WeakControls"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("LackofTraining"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("LimitedResources"));
+                    list_root_cases.Add("CostControlGoals");
+                    list_root_cases.Add("FinancialorPerformanceIncentives");
+                    list_root_cases.Add("LackofTeamwork");
+                    list_root_cases.Add("PoorProcessDesign");
+                    list_root_cases.Add("PressureofMeetingSalesQuotas");
+                    list_root_cases.Add("RemoteorInadequateSupervision");
+                    list_root_cases.Add("UnsupportiveEnvironmentorDepartment");
+                    list_root_cases.Add("WeakControls");
+                    list_root_cases.Add("LackofTraining");
+                    list_root_cases.Add("LimitedResources");
+
                     foreach (var itemString in list_root_cases)
                     {
-                        var temp_cases_organizational = new company_root_cases_organizational { company_id = company_id, name_en = itemString, name_es = itemString, name_fr = itemString, status_id = 2 };
+                        var temp_cases_organizational = new company_root_cases_organizational {
+                            company_id = company_id,
+                            name_en = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("en-US"), itemString.Trim(), is_cc),
+                            name_es = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("es-ES"), itemString.Trim(), is_cc),
+                            name_fr = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("fr-FR"), itemString.Trim(), is_cc),
+                            status_id = 2
+                        };
                         db.company_root_cases_organizational.Add(temp_cases_organizational);
                         //db.SaveChanges();
                     }
                     list_root_cases = new List<string>();
-                    list_root_cases.Add(LocalizationGetter.GetString("CompanyLoyaltyRealization"));
-                    list_root_cases.Add(LocalizationGetter.GetString("ExtrenalLocusofControl"));
-                    list_root_cases.Add(LocalizationGetter.GetString("Insubordination"));
-                    list_root_cases.Add(LocalizationGetter.GetString("LackofAwareness"));
-                    list_root_cases.Add(LocalizationGetter.GetString("LackofSensitivity"));
-                    list_root_cases.Add(LocalizationGetter.GetString("LegitimateActionRationalization"));
-                    list_root_cases.Add(LocalizationGetter.GetString("NoHarmRationalization"));
-                    list_root_cases.Add(LocalizationGetter.GetString("SelfInterest"));
-                    list_root_cases.Add(LocalizationGetter.GetString("CulturalDifferencesPersonalValues"));
-                    list_root_cases.Add(LocalizationGetter.GetString("LackofSkills"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("CompanyLoyaltyRealization"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("ExtrenalLocusofControl"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("Insubordination"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("LackofAwareness"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("LackofSensitivity"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("LegitimateActionRationalization"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("NoHarmRationalization"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("SelfInterest"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("CulturalDifferencesPersonalValues"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("LackofSkills"));
+
+                    list_root_cases.Add("CompanyLoyaltyRealization");
+                    list_root_cases.Add("ExtrenalLocusofControl");
+                    list_root_cases.Add("Insubordination");
+                    list_root_cases.Add("LackofAwareness");
+                    list_root_cases.Add("LackofSensitivity");
+                    list_root_cases.Add("LegitimateActionRationalization");
+                    list_root_cases.Add("NoHarmRationalization");
+                    list_root_cases.Add("SelfInterest");
+                    list_root_cases.Add("CulturalDifferencesPersonalValues");
+                    list_root_cases.Add("LackofSkills");
 
                     foreach (var itemString in list_root_cases)
                     {
-                        var temp_cases_behavioral = new company_root_cases_behavioral { company_id = company_id, name_en = itemString, name_es = itemString, name_fr = itemString, status_id = 2 };
+                        var temp_cases_behavioral = new company_root_cases_behavioral
+                        {
+                            company_id = company_id,
+                            name_en = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("en-US"), itemString.Trim(), is_cc),
+                            name_es = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("es-ES"), itemString.Trim(), is_cc),
+                            name_fr = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("fr-FR"), itemString.Trim(), is_cc),
+                            status_id = 2
+                        };
                         db.company_root_cases_behavioral.Add(temp_cases_behavioral);
                         //db.SaveChanges();
                     }
@@ -1215,11 +1402,11 @@ namespace EC.Controllers
                     {
                         // LocationSavingFailed
                         company_location _location = new company_location();
-                        _location.location_en = location.Trim();
-                        _location.location_fr = location.Trim();
-                        _location.location_es = location.Trim();
-                        _location.location_ru = location.Trim();
-                        _location.location_ar = location.Trim();
+                        _location.location_en = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("en-US"), location.Trim(), is_cc);
+                        _location.location_fr = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("fr-FR"), location.Trim(), is_cc);
+                        _location.location_es = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("es-ES"), location.Trim(), is_cc);
+                        _location.location_ru = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("ru"), location.Trim(), is_cc);
+                        _location.location_ar = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("ar-SA"), location.Trim(), is_cc);
                         _location.status_id = 2;
                         _location.company_id = company_id;
                         _location.client_id = client_id;
@@ -1251,30 +1438,52 @@ namespace EC.Controllers
                     List<string> list_departments = new List<string>();
                     if (!is_cc)
                     {
-                        list_departments.Add(LocalizationGetter.GetString("Administration"));
-                        list_departments.Add(LocalizationGetter.GetString("AccountingFinance"));
-                        list_departments.Add(LocalizationGetter.GetString("CustomerService"));
-                        list_departments.Add(LocalizationGetter.GetString("HumanResources"));
-                        list_departments.Add(LocalizationGetter.GetString("IT"));
-                        list_departments.Add(LocalizationGetter.GetString("Legal"));
-                        list_departments.Add(LocalizationGetter.GetString("Marketing"));
-                        list_departments.Add(LocalizationGetter.GetString("Production"));
-                        list_departments.Add(LocalizationGetter.GetString("Purchasing"));
-                        list_departments.Add(LocalizationGetter.GetString("RD"));
-                        list_departments.Add(LocalizationGetter.GetString("Sales"));
+                        //list_departments.Add(LocalizationGetter.GetString("Administration"));
+                        //list_departments.Add(LocalizationGetter.GetString("AccountingFinance"));
+                        //list_departments.Add(LocalizationGetter.GetString("CustomerService"));
+                        //list_departments.Add(LocalizationGetter.GetString("HumanResources"));
+                        //list_departments.Add(LocalizationGetter.GetString("IT"));
+                        //list_departments.Add(LocalizationGetter.GetString("Legal"));
+                        //list_departments.Add(LocalizationGetter.GetString("Marketing"));
+                        //list_departments.Add(LocalizationGetter.GetString("Production"));
+                        //list_departments.Add(LocalizationGetter.GetString("Purchasing"));
+                        //list_departments.Add(LocalizationGetter.GetString("RD"));
+                        //list_departments.Add(LocalizationGetter.GetString("Sales"));
+
+                        list_departments.Add("Administration");
+                        list_departments.Add("AccountingFinance");
+                        list_departments.Add("CustomerService");
+                        list_departments.Add("HumanResources");
+                        list_departments.Add("IT");
+                        list_departments.Add("Legal");
+                        list_departments.Add("Marketing");
+                        list_departments.Add("Production");
+                        list_departments.Add("Purchasing");
+                        list_departments.Add("RD");
+                        list_departments.Add("Sales");
                     }
 
                     if (is_cc)
                     {
-                        list_departments.Add(LocalizationGetter.GetString("AcademicAffairs"));
-                        list_departments.Add(LocalizationGetter.GetString("AccountingFinance"));
-                        list_departments.Add(LocalizationGetter.GetString("Athletics"));
-                        list_departments.Add(LocalizationGetter.GetString("HumanResources"));
-                        list_departments.Add(LocalizationGetter.GetString("IT"));
-                        list_departments.Add(LocalizationGetter.GetString("Medical"));
-                        list_departments.Add(LocalizationGetter.GetString("Research"));
-                        list_departments.Add(LocalizationGetter.GetString("RiskSafetyMatters"));
-                        list_departments.Add(LocalizationGetter.GetString("StudentsAffairs"));
+                        //list_departments.Add(LocalizationGetter.GetString("AcademicAffairs"));
+                        //list_departments.Add(LocalizationGetter.GetString("AccountingFinance"));
+                        //list_departments.Add(LocalizationGetter.GetString("Athletics"));
+                        //list_departments.Add(LocalizationGetter.GetString("HumanResources"));
+                        //list_departments.Add(LocalizationGetter.GetString("IT"));
+                        //list_departments.Add(LocalizationGetter.GetString("Medical"));
+                        //list_departments.Add(LocalizationGetter.GetString("Research"));
+                        //list_departments.Add(LocalizationGetter.GetString("RiskSafetyMatters"));
+                        //list_departments.Add(LocalizationGetter.GetString("StudentsAffairs"));
+
+                        list_departments.Add("AcademicAffairs");
+                        list_departments.Add("AccountingFinance");
+                        list_departments.Add("Athletics");
+                        list_departments.Add("HumanResources");
+                        list_departments.Add("IT");
+                        list_departments.Add("Medical");
+                        list_departments.Add("Research");
+                        list_departments.Add("RiskSafetyMatters");
+                        list_departments.Add("StudentsAffairs");
                     }
 
 
@@ -1288,11 +1497,17 @@ namespace EC.Controllers
                             if (_dep.Trim().Length > 0)
                             {
                                 company_department _department = new company_department();
-                                _department.department_en = _dep.Trim();
-                                _department.department_ar = _dep.Trim();
-                                _department.department_es = _dep.Trim();
-                                _department.department_fr = _dep.Trim();
-                                _department.department_ru = _dep.Trim();
+                                //_department.department_en = _dep.Trim();
+                                //_department.department_ar = _dep.Trim();
+                                //_department.department_es = _dep.Trim();
+                                //_department.department_fr = _dep.Trim();
+                                //_department.department_ru = _dep.Trim();
+
+                                _department.department_en = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("en-US"), _dep.Trim(), is_cc);
+                                _department.department_ar = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("ar-SA"), _dep.Trim(), is_cc);
+                                _department.department_es = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("es-ES"), _dep.Trim(), is_cc);
+                                _department.department_fr = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("fr-FR"), _dep.Trim(), is_cc);
+                                _department.department_ru = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("ru"), _dep.Trim(), is_cc);
                                 //         _department.department_en = _dep.Trim();
                                 _department.client_id = client_id;
                                 _department.company_id = company_id;
@@ -1319,48 +1534,37 @@ namespace EC.Controllers
                         {
                             departments = departments.Trim();
                             string tempDepartment = departments.ToLower();
-                            company_department otherDepartment = departmentsNewCompany.Where(m => m.department_en.Trim().ToLower() == tempDepartment).SingleOrDefault();
+                            company_department other_department = new company_department();
+                            //other_department.department_en = departments.Trim();
+                            //other_department.department_ar = departments.Trim();
+                            //other_department.department_es = departments.Trim();
+                            //other_department.department_fr = departments.Trim();
+                            //other_department.department_ru = departments.Trim();
 
-                            if (otherDepartment != null)
-                            {
-                                selectedDepartment = otherDepartment;
-                            }
-                            else
-                            {
-                                //создаем other department
+                            other_department.department_en = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("en-US"), tempDepartment, is_cc);
+                            other_department.department_ar = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("ar-SA"), tempDepartment, is_cc);
+                            other_department.department_es = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("es-ES"), tempDepartment, is_cc);
+                            other_department.department_fr = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("fr-FR"), tempDepartment, is_cc);
+                            other_department.department_ru = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("ru"), tempDepartment, is_cc);
 
-                                company_department other_department = new company_department();
-                                other_department.department_en = departments.Trim();
-                                other_department.department_ar = departments.Trim();
-                                other_department.department_es = departments.Trim();
-                                other_department.department_fr = departments.Trim();
-                                other_department.department_ru = departments.Trim();
+                            other_department.client_id = client_id;
+                            other_department.company_id = company_id;
+                            other_department.last_update_dt = DateTime.Now;
+                            other_department.status_id = 2;
 
-                                other_department.client_id = client_id;
-                                other_department.company_id = company_id;
-                                other_department.last_update_dt = DateTime.Now;
-                                other_department.status_id = 2;
-
-                                //try
-                                //{
-                                db.company_department.Add(other_department);
-                                //db.SaveChanges();
-                                selectedDepartment = other_department;
-                                //    }
-                                //    catch (Exception ex)
-                                //    {
-                                //        logger.Error(ex.ToString());
-                                //        return LocalizationGetter.GetString("OtherDepartmentSavingFailed");
-                                //    }
-                            }
+                            //try
+                            //{
+                            db.company_department.Add(other_department);
+                            db.SaveChanges();
+                            selectedDepartment = other_department;
+                            //    }
+                            //    catch (Exception ex)
+                            //    {
+                            //        logger.Error(ex.ToString());
+                            //        return LocalizationGetter.GetString("OtherDepartmentSavingFailed");
+                            //    }
                         }
-                        else
-                        {
-                            selectedDepartment = new company_department
-                            {
-                                id = 0
-                            };
-                        }
+
                     }
                     #endregion
 
@@ -1372,134 +1576,261 @@ namespace EC.Controllers
                         List<string> list_types = new List<string>();
                         if (!is_cc)
                         {
-                            list_types.Add(LocalizationGetter.GetString("AccountingAuditRelated"));
-                            list_types.Add(LocalizationGetter.GetString("AccountingError"));
-                            list_types.Add(LocalizationGetter.GetString("AccountingMisrepresentation"));
-                            list_types.Add(LocalizationGetter.GetString("AuditingMatters"));
-                            list_types.Add(LocalizationGetter.GetString("BriberyKickbacks"));
-                            list_types.Add(LocalizationGetter.GetString("Embezzlement"));
-                            list_types.Add(LocalizationGetter.GetString("FinancialConcerns"));
-                            list_types.Add(LocalizationGetter.GetString("Falsification"));
-                            list_types.Add(LocalizationGetter.GetString("MisappropriationFunds"));
-                            list_types.Add(LocalizationGetter.GetString("HumanResourcesIssues"));
-                            list_types.Add(LocalizationGetter.GetString("Discrimination"));
-                            list_types.Add(LocalizationGetter.GetString("DomesticViolence"));
-                            list_types.Add(LocalizationGetter.GetString("SubstanceAbuse"));
-                            list_types.Add(LocalizationGetter.GetString("CommunicateNonManagement"));
-                            list_types.Add(LocalizationGetter.GetString("ComplianceRegulationViolations"));
-                            list_types.Add(LocalizationGetter.GetString("CorporateScandal"));
-                            list_types.Add(LocalizationGetter.GetString("Harassment"));
-                            list_types.Add(LocalizationGetter.GetString("Mistreatment"));
-                            list_types.Add(LocalizationGetter.GetString("Retaliation"));
+                            //list_types.Add(LocalizationGetter.GetString("AccountingAuditRelated"));
+                            //list_types.Add(LocalizationGetter.GetString("AccountingError"));
+                            //list_types.Add(LocalizationGetter.GetString("AccountingMisrepresentation"));
+                            //list_types.Add(LocalizationGetter.GetString("AuditingMatters"));
+                            //list_types.Add(LocalizationGetter.GetString("BriberyKickbacks"));
+                            //list_types.Add(LocalizationGetter.GetString("Embezzlement"));
+                            //list_types.Add(LocalizationGetter.GetString("FinancialConcerns"));
+                            //list_types.Add(LocalizationGetter.GetString("Falsification"));
+                            //list_types.Add(LocalizationGetter.GetString("MisappropriationFunds"));
+                            //list_types.Add(LocalizationGetter.GetString("HumanResourcesIssues"));
+                            //list_types.Add(LocalizationGetter.GetString("Discrimination"));
+                            //list_types.Add(LocalizationGetter.GetString("DomesticViolence"));
+                            //list_types.Add(LocalizationGetter.GetString("SubstanceAbuse"));
+                            //list_types.Add(LocalizationGetter.GetString("CommunicateNonManagement"));
+                            //list_types.Add(LocalizationGetter.GetString("ComplianceRegulationViolations"));
+                            //list_types.Add(LocalizationGetter.GetString("CorporateScandal"));
+                            //list_types.Add(LocalizationGetter.GetString("Harassment"));
+                            //list_types.Add(LocalizationGetter.GetString("Mistreatment"));
+                            //list_types.Add(LocalizationGetter.GetString("Retaliation"));
 
-                            list_types.Add(LocalizationGetter.GetString("SexualHarassment"));
-                            list_types.Add(LocalizationGetter.GetString("ThreatViolence"));
-                            list_types.Add(LocalizationGetter.GetString("WorkplaceViolence"));
-                            list_types.Add(LocalizationGetter.GetString("PrivacyIssues"));
-                            list_types.Add(LocalizationGetter.GetString("AcceptableUseViolations"));
-                            list_types.Add(LocalizationGetter.GetString("HIPAACompliance"));
-                            list_types.Add(LocalizationGetter.GetString("IdentityTheft"));
-                            list_types.Add(LocalizationGetter.GetString("InformationSecurity"));
-                            list_types.Add(LocalizationGetter.GetString("EthicsViolations"));
-                            list_types.Add(LocalizationGetter.GetString("CodeEthicsViolation"));
-                            list_types.Add(LocalizationGetter.GetString("EthicalViolations"));
-                            list_types.Add(LocalizationGetter.GetString("Misconduct"));
-                            list_types.Add(LocalizationGetter.GetString("TheftEquipment"));
+                            //list_types.Add(LocalizationGetter.GetString("SexualHarassment"));
+                            //list_types.Add(LocalizationGetter.GetString("ThreatViolence"));
+                            //list_types.Add(LocalizationGetter.GetString("WorkplaceViolence"));
+                            //list_types.Add(LocalizationGetter.GetString("PrivacyIssues"));
+                            //list_types.Add(LocalizationGetter.GetString("AcceptableUseViolations"));
+                            //list_types.Add(LocalizationGetter.GetString("HIPAACompliance"));
+                            //list_types.Add(LocalizationGetter.GetString("IdentityTheft"));
+                            //list_types.Add(LocalizationGetter.GetString("InformationSecurity"));
+                            //list_types.Add(LocalizationGetter.GetString("EthicsViolations"));
+                            //list_types.Add(LocalizationGetter.GetString("CodeEthicsViolation"));
+                            //list_types.Add(LocalizationGetter.GetString("EthicalViolations"));
+                            //list_types.Add(LocalizationGetter.GetString("Misconduct"));
+                            //list_types.Add(LocalizationGetter.GetString("TheftEquipment"));
 
-                            list_types.Add(LocalizationGetter.GetString("Theft"));
-                            list_types.Add(LocalizationGetter.GetString("UnfairLaborPractices"));
-                            list_types.Add(LocalizationGetter.GetString("VendorConcerns"));
-                            list_types.Add(LocalizationGetter.GetString("WorkplaceSafety"));
-                            list_types.Add(LocalizationGetter.GetString("EnvironmentalDamage"));
-                            list_types.Add(LocalizationGetter.GetString("EnvironmentalIssue"));
-                            list_types.Add(LocalizationGetter.GetString("IndustrialAccidents"));
+                            //list_types.Add(LocalizationGetter.GetString("Theft"));
+                            //list_types.Add(LocalizationGetter.GetString("UnfairLaborPractices"));
+                            //list_types.Add(LocalizationGetter.GetString("VendorConcerns"));
+                            //list_types.Add(LocalizationGetter.GetString("WorkplaceSafety"));
+                            //list_types.Add(LocalizationGetter.GetString("EnvironmentalDamage"));
+                            //list_types.Add(LocalizationGetter.GetString("EnvironmentalIssue"));
+                            //list_types.Add(LocalizationGetter.GetString("IndustrialAccidents"));
 
-                            list_types.Add(LocalizationGetter.GetString("Sabotage"));
-                            list_types.Add(LocalizationGetter.GetString("SafeDrivingConcerns"));
-                            list_types.Add(LocalizationGetter.GetString("UnsafeWorkConditions"));
-                            list_types.Add(LocalizationGetter.GetString("UnusualSuspiciousActivities"));
-                            list_types.Add(LocalizationGetter.GetString("Vandalism"));
-                            list_types.Add(LocalizationGetter.GetString("PoorCustomerService"));
-                            list_types.Add(LocalizationGetter.GetString("CustomerMistreatment"));
-                            list_types.Add(LocalizationGetter.GetString("EmployeeRelations"));
-                            list_types.Add(LocalizationGetter.GetString("SecuritiesViolation"));
-                            list_types.Add(LocalizationGetter.GetString("ShareholderConcerns"));
-                            list_types.Add(LocalizationGetter.GetString("SexualAbuse"));
-                            list_types.Add(LocalizationGetter.GetString("HostileEnvironment"));
+                            //list_types.Add(LocalizationGetter.GetString("Sabotage"));
+                            //list_types.Add(LocalizationGetter.GetString("SafeDrivingConcerns"));
+                            //list_types.Add(LocalizationGetter.GetString("UnsafeWorkConditions"));
+                            //list_types.Add(LocalizationGetter.GetString("UnusualSuspiciousActivities"));
+                            //list_types.Add(LocalizationGetter.GetString("Vandalism"));
+                            //list_types.Add(LocalizationGetter.GetString("PoorCustomerService"));
+                            //list_types.Add(LocalizationGetter.GetString("CustomerMistreatment"));
+                            //list_types.Add(LocalizationGetter.GetString("EmployeeRelations"));
+                            //list_types.Add(LocalizationGetter.GetString("SecuritiesViolation"));
+                            //list_types.Add(LocalizationGetter.GetString("ShareholderConcerns"));
+                            //list_types.Add(LocalizationGetter.GetString("SexualAbuse"));
+                            //list_types.Add(LocalizationGetter.GetString("HostileEnvironment"));
+
+                            list_types.Add("AccountingAuditRelated");
+                            list_types.Add("AccountingError");
+                            list_types.Add("AccountingMisrepresentation");
+                            list_types.Add("AuditingMatters");
+                            list_types.Add("BriberyKickbacks");
+                            list_types.Add("Embezzlement");
+                            list_types.Add("FinancialConcerns");
+                            list_types.Add("Falsification");
+                            list_types.Add("MisappropriationFunds");
+                            list_types.Add("HumanResourcesIssues");
+                            list_types.Add("Discrimination");
+                            list_types.Add("DomesticViolence");
+                            list_types.Add("SubstanceAbuse");
+                            list_types.Add("CommunicateNonManagement");
+                            list_types.Add("ComplianceRegulationViolations");
+                            list_types.Add("CorporateScandal");
+                            list_types.Add("Harassment");
+                            list_types.Add("Mistreatment");
+                            list_types.Add("Retaliation");
+
+                            list_types.Add("SexualHarassment");
+                            list_types.Add("ThreatViolence");
+                            list_types.Add("WorkplaceViolence");
+                            list_types.Add("PrivacyIssues");
+                            list_types.Add("AcceptableUseViolations");
+                            list_types.Add("HIPAACompliance");
+                            list_types.Add("IdentityTheft");
+                            list_types.Add("InformationSecurity");
+                            list_types.Add("EthicsViolations");
+                            list_types.Add("CodeEthicsViolation");
+                            list_types.Add("EthicalViolations");
+                            list_types.Add("Misconduct");
+                            list_types.Add("TheftEquipment");
+
+                            list_types.Add("Theft");
+                            list_types.Add("UnfairLaborPractices");
+                            list_types.Add("VendorConcerns");
+                            list_types.Add("WorkplaceSafety");
+                            list_types.Add("EnvironmentalDamage");
+                            list_types.Add("EnvironmentalIssue");
+                            list_types.Add("IndustrialAccidents");
+
+                            list_types.Add("Sabotage");
+                            list_types.Add("SafeDrivingConcerns");
+                            list_types.Add("UnsafeWorkConditions");
+                            list_types.Add("UnusualSuspiciousActivities");
+                            list_types.Add("Vandalism");
+                            list_types.Add("PoorCustomerService");
+                            list_types.Add("CustomerMistreatment");
+                            list_types.Add("EmployeeRelations");
+                            list_types.Add("SecuritiesViolation");
+                            list_types.Add("ShareholderConcerns");
+                            list_types.Add("SexualAbuse");
+                            list_types.Add("HostileEnvironment");
                         }
                         if (is_cc)
                         {
-                            list_types.Add(LocalizationGetter.GetString("AcademicMisconduct"));
-                            list_types.Add(LocalizationGetter.GetString("AlcoholDrugAbuse"));
-                            list_types.Add(LocalizationGetter.GetString("CheatingPlagiarism"));
-                            list_types.Add(LocalizationGetter.GetString("CredentialMisrepresentation"));
-                            list_types.Add(LocalizationGetter.GetString("Hazing"));
-                            list_types.Add(LocalizationGetter.GetString("SexualHarassment"));
+                            //list_types.Add(LocalizationGetter.GetString("AcademicMisconduct"));
+                            //list_types.Add(LocalizationGetter.GetString("AlcoholDrugAbuse"));
+                            //list_types.Add(LocalizationGetter.GetString("CheatingPlagiarism"));
+                            //list_types.Add(LocalizationGetter.GetString("CredentialMisrepresentation"));
+                            //list_types.Add(LocalizationGetter.GetString("Hazing"));
+                            //list_types.Add(LocalizationGetter.GetString("SexualHarassment"));
 
-                            list_types.Add(LocalizationGetter.GetString("SpikingDrinks"));
-                            list_types.Add(LocalizationGetter.GetString("StudentSafety"));
-                            list_types.Add(LocalizationGetter.GetString("StudentTravel"));
-                            list_types.Add(LocalizationGetter.GetString("Terrorism"));
-                            list_types.Add(LocalizationGetter.GetString("AccountingAuditingMatters"));
-                            list_types.Add(LocalizationGetter.GetString("DonorStewardship"));
-                            list_types.Add(LocalizationGetter.GetString("FalsificationContracts"));
-                            list_types.Add(LocalizationGetter.GetString("Records"));
-                            list_types.Add(LocalizationGetter.GetString("Fraud"));
+                            //list_types.Add(LocalizationGetter.GetString("SpikingDrinks"));
+                            //list_types.Add(LocalizationGetter.GetString("StudentSafety"));
+                            //list_types.Add(LocalizationGetter.GetString("StudentTravel"));
+                            //list_types.Add(LocalizationGetter.GetString("Terrorism"));
+                            //list_types.Add(LocalizationGetter.GetString("AccountingAuditingMatters"));
+                            //list_types.Add(LocalizationGetter.GetString("DonorStewardship"));
+                            //list_types.Add(LocalizationGetter.GetString("FalsificationContracts"));
+                            //list_types.Add(LocalizationGetter.GetString("Records"));
+                            //list_types.Add(LocalizationGetter.GetString("Fraud"));
 
 
-                            list_types.Add(LocalizationGetter.GetString("ImproperDisclosure"));
-                            list_types.Add(LocalizationGetter.GetString("ImproperGiving"));
-                            list_types.Add(LocalizationGetter.GetString("ImproperSupplier"));
-                            list_types.Add(LocalizationGetter.GetString("TheftEmbezzlement"));
-                            list_types.Add(LocalizationGetter.GetString("WasteAbuse"));
-                            list_types.Add(LocalizationGetter.GetString("OtherFinancialMatters"));
-                            list_types.Add(LocalizationGetter.GetString("FraudulentActivities"));
-                            list_types.Add(LocalizationGetter.GetString("ImproperGivingGifts"));
-                            list_types.Add(LocalizationGetter.GetString("InappropriateActivities"));
+                            //list_types.Add(LocalizationGetter.GetString("ImproperDisclosure"));
+                            //list_types.Add(LocalizationGetter.GetString("ImproperGiving"));
+                            //list_types.Add(LocalizationGetter.GetString("ImproperSupplier"));
+                            //list_types.Add(LocalizationGetter.GetString("TheftEmbezzlement"));
+                            //list_types.Add(LocalizationGetter.GetString("WasteAbuse"));
+                            //list_types.Add(LocalizationGetter.GetString("OtherFinancialMatters"));
+                            //list_types.Add(LocalizationGetter.GetString("FraudulentActivities"));
+                            //list_types.Add(LocalizationGetter.GetString("ImproperGivingGifts"));
+                            //list_types.Add(LocalizationGetter.GetString("InappropriateActivities"));
 
-                            list_types.Add(LocalizationGetter.GetString("MisuseAssets"));
-                            list_types.Add(LocalizationGetter.GetString("RecruitingMisconduct"));
-                            list_types.Add(LocalizationGetter.GetString("ScholarshipFinancial"));
-                            list_types.Add(LocalizationGetter.GetString("SubstanceAbuse"));
-                            list_types.Add(LocalizationGetter.GetString("BiasIncidents"));
-                            list_types.Add(LocalizationGetter.GetString("ConflictInterest"));
-                            list_types.Add(LocalizationGetter.GetString("DiscriminationHarassment"));
-                            list_types.Add(LocalizationGetter.GetString("EEOCADA"));
+                            //list_types.Add(LocalizationGetter.GetString("MisuseAssets"));
+                            //list_types.Add(LocalizationGetter.GetString("RecruitingMisconduct"));
+                            //list_types.Add(LocalizationGetter.GetString("ScholarshipFinancial"));
+                            //list_types.Add(LocalizationGetter.GetString("SubstanceAbuse"));
+                            //list_types.Add(LocalizationGetter.GetString("BiasIncidents"));
+                            //list_types.Add(LocalizationGetter.GetString("ConflictInterest"));
+                            //list_types.Add(LocalizationGetter.GetString("DiscriminationHarassment"));
+                            //list_types.Add(LocalizationGetter.GetString("EEOCADA"));
 
-                            list_types.Add(LocalizationGetter.GetString("EmployeeBenefitsAbuse"));
-                            list_types.Add(LocalizationGetter.GetString("EmployeeMisconduct"));
-                            list_types.Add(LocalizationGetter.GetString("Nepotism"));
-                            list_types.Add(LocalizationGetter.GetString("OffensiveInappropriateCommunication"));
-                            list_types.Add(LocalizationGetter.GetString("ThreatInappropriate"));
-                            list_types.Add(LocalizationGetter.GetString("TimeAbuse"));
-                            list_types.Add(LocalizationGetter.GetString("UnsafeWorkingConditions"));
-                            list_types.Add(LocalizationGetter.GetString("ViolenceThreat"));
-                            list_types.Add(LocalizationGetter.GetString("WorkersCompensationDisability"));
-                            list_types.Add(LocalizationGetter.GetString("BenefitsAbuses"));
-                            list_types.Add(LocalizationGetter.GetString("DataprivacyIntegrity"));
-                            list_types.Add(LocalizationGetter.GetString("MaliciousUseTechnology"));
+                            //list_types.Add(LocalizationGetter.GetString("EmployeeBenefitsAbuse"));
+                            //list_types.Add(LocalizationGetter.GetString("EmployeeMisconduct"));
+                            //list_types.Add(LocalizationGetter.GetString("Nepotism"));
+                            //list_types.Add(LocalizationGetter.GetString("OffensiveInappropriateCommunication"));
+                            //list_types.Add(LocalizationGetter.GetString("ThreatInappropriate"));
+                            //list_types.Add(LocalizationGetter.GetString("TimeAbuse"));
+                            //list_types.Add(LocalizationGetter.GetString("UnsafeWorkingConditions"));
+                            //list_types.Add(LocalizationGetter.GetString("ViolenceThreat"));
+                            //list_types.Add(LocalizationGetter.GetString("WorkersCompensationDisability"));
+                            //list_types.Add(LocalizationGetter.GetString("BenefitsAbuses"));
+                            //list_types.Add(LocalizationGetter.GetString("DataprivacyIntegrity"));
+                            //list_types.Add(LocalizationGetter.GetString("MaliciousUseTechnology"));
 
-                            list_types.Add(LocalizationGetter.GetString("SoftwarePiracy"));
-                            list_types.Add(LocalizationGetter.GetString("Infringement"));
-                            list_types.Add(LocalizationGetter.GetString("MisuseResources"));
-                            list_types.Add(LocalizationGetter.GetString("HealthcareFraud"));
-                            list_types.Add(LocalizationGetter.GetString("HIPAA"));
-                            list_types.Add(LocalizationGetter.GetString("InsuranceIssues"));
-                            list_types.Add(LocalizationGetter.GetString("PatientCare"));
-                            list_types.Add(LocalizationGetter.GetString("PatientAbuse"));
-                            list_types.Add(LocalizationGetter.GetString("PatientRights"));
-                            list_types.Add(LocalizationGetter.GetString("ResearchMisconduct"));
+                            //list_types.Add(LocalizationGetter.GetString("SoftwarePiracy"));
+                            //list_types.Add(LocalizationGetter.GetString("Infringement"));
+                            //list_types.Add(LocalizationGetter.GetString("MisuseResources"));
+                            //list_types.Add(LocalizationGetter.GetString("HealthcareFraud"));
+                            //list_types.Add(LocalizationGetter.GetString("HIPAA"));
+                            //list_types.Add(LocalizationGetter.GetString("InsuranceIssues"));
+                            //list_types.Add(LocalizationGetter.GetString("PatientCare"));
+                            //list_types.Add(LocalizationGetter.GetString("PatientAbuse"));
+                            //list_types.Add(LocalizationGetter.GetString("PatientRights"));
+                            //list_types.Add(LocalizationGetter.GetString("ResearchMisconduct"));
 
-                            list_types.Add(LocalizationGetter.GetString("SponsoredProjects"));
-                            list_types.Add(LocalizationGetter.GetString("OtherMedicalResearch"));
-                            list_types.Add(LocalizationGetter.GetString("ConflictInterest"));
-                            list_types.Add(LocalizationGetter.GetString("DataPrivacy"));
-                            list_types.Add(LocalizationGetter.GetString("DisclosureConfidential"));
-                            list_types.Add(LocalizationGetter.GetString("EnvironmentalSafetyMatters"));
-                            list_types.Add(LocalizationGetter.GetString("HumanAnimalResearch"));
-                            list_types.Add(LocalizationGetter.GetString("ResearchGrantMisconduct"));
-                            list_types.Add(LocalizationGetter.GetString("SexualAbuse"));
-                            list_types.Add(LocalizationGetter.GetString("HostileEnvironment"));
+                            //list_types.Add(LocalizationGetter.GetString("SponsoredProjects"));
+                            //list_types.Add(LocalizationGetter.GetString("OtherMedicalResearch"));
+                            //list_types.Add(LocalizationGetter.GetString("ConflictInterest"));
+                            //list_types.Add(LocalizationGetter.GetString("DataPrivacy"));
+                            //list_types.Add(LocalizationGetter.GetString("DisclosureConfidential"));
+                            //list_types.Add(LocalizationGetter.GetString("EnvironmentalSafetyMatters"));
+                            //list_types.Add(LocalizationGetter.GetString("HumanAnimalResearch"));
+                            //list_types.Add(LocalizationGetter.GetString("ResearchGrantMisconduct"));
+                            //list_types.Add(LocalizationGetter.GetString("SexualAbuse"));
+                            //list_types.Add(LocalizationGetter.GetString("HostileEnvironment"));
+
+                            list_types.Add("AcademicMisconduct");
+                            list_types.Add("AlcoholDrugAbuse");
+                            list_types.Add("CheatingPlagiarism");
+                            list_types.Add("CredentialMisrepresentation");
+                            list_types.Add("Hazing");
+                            list_types.Add("SexualHarassment");
+
+                            list_types.Add("SpikingDrinks");
+                            list_types.Add("StudentSafety");
+                            list_types.Add("StudentTravel");
+                            list_types.Add("Terrorism");
+                            list_types.Add("AccountingAuditingMatters");
+                            list_types.Add("DonorStewardship");
+                            list_types.Add("FalsificationContracts");
+                            list_types.Add("Records");
+                            list_types.Add("Fraud");
+
+
+                            list_types.Add("ImproperDisclosure");
+                            list_types.Add("ImproperGiving");
+                            list_types.Add("ImproperSupplier");
+                            list_types.Add("TheftEmbezzlement");
+                            list_types.Add("WasteAbuse");
+                            list_types.Add("OtherFinancialMatters");
+                            list_types.Add("FraudulentActivities");
+                            list_types.Add("ImproperGivingGifts");
+                            list_types.Add("InappropriateActivities");
+
+                            list_types.Add("MisuseAssets");
+                            list_types.Add("RecruitingMisconduct");
+                            list_types.Add("ScholarshipFinancial");
+                            list_types.Add("SubstanceAbuse");
+                            list_types.Add("BiasIncidents");
+                            list_types.Add("ConflictInterest");
+                            list_types.Add("DiscriminationHarassment");
+                            list_types.Add("EEOCADA");
+
+                            list_types.Add("EmployeeBenefitsAbuse");
+                            list_types.Add("EmployeeMisconduct");
+                            list_types.Add("Nepotism");
+                            list_types.Add("OffensiveInappropriateCommunication");
+                            list_types.Add("ThreatInappropriate");
+                            list_types.Add("TimeAbuse");
+                            list_types.Add("UnsafeWorkingConditions");
+                            list_types.Add("ViolenceThreat");
+                            list_types.Add("WorkersCompensationDisability");
+                            list_types.Add("BenefitsAbuses");
+                            list_types.Add("DataprivacyIntegrity");
+                            list_types.Add("MaliciousUseTechnology");
+
+                            list_types.Add("SoftwarePiracy");
+                            list_types.Add("Infringement");
+                            list_types.Add("MisuseResources");
+                            list_types.Add("HealthcareFraud");
+                            list_types.Add("HIPAA");
+                            list_types.Add("InsuranceIssues");
+                            list_types.Add("PatientCare");
+                            list_types.Add("PatientAbuse");
+                            list_types.Add("PatientRights");
+                            list_types.Add("ResearchMisconduct");
+
+                            list_types.Add("SponsoredProjects");
+                            list_types.Add("OtherMedicalResearch");
+                            list_types.Add("ConflictInterest");
+                            list_types.Add("DataPrivacy");
+                            list_types.Add("DisclosureConfidential");
+                            list_types.Add("EnvironmentalSafetyMatters");
+                            list_types.Add("HumanAnimalResearch");
+                            list_types.Add("ResearchGrantMisconduct");
+                            list_types.Add("SexualAbuse");
+                            list_types.Add("HostileEnvironment");
                         }
 
                         foreach (string _types in list_types)
@@ -1507,11 +1838,11 @@ namespace EC.Controllers
                             if (_types.Trim().Length > 0)
                             {
                                 company_secondary_type _incident_type = new company_secondary_type();
-                                _incident_type.secondary_type_en = _types.Trim();
-                                _incident_type.secondary_type_ar = _types.Trim();
-                                _incident_type.secondary_type_es = _types.Trim();
-                                _incident_type.secondary_type_fr = _types.Trim();
-                                _incident_type.secondary_type_ru = _types.Trim();
+                                _incident_type.secondary_type_en = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("en-US"), _types.Trim(), is_cc);
+                                _incident_type.secondary_type_ar = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("ar-SA"), _types.Trim(), is_cc);
+                                _incident_type.secondary_type_es = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("es-ES"), _types.Trim(), is_cc);
+                                _incident_type.secondary_type_fr = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("fr-FR"), _types.Trim(), is_cc);
+                                _incident_type.secondary_type_ru = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("ru"), _types.Trim(), is_cc);
                                 //       _incident_type.secondary_type_ar = _types.Trim();
                                 _incident_type.client_id = client_id;
                                 _incident_type.company_id = company_id;
@@ -1540,21 +1871,21 @@ namespace EC.Controllers
                     #region Relationship // Reporter Types
                     if (company_id != 0)
                     {
-                        List<string> list_relationship = db.relationship.Select(item => item.relationship_en).ToList();
+                        List<relationship> list_relationship = db.relationship.ToList();
                         //   LocalizationGetter.GetString("Administrative")
 
 
-                        foreach (string _relationships in list_relationship)
+                        foreach (var _relationships in list_relationship)
                         {
-                            if ((_relationships.Trim().Length > 0) && (_relationships.Trim().ToLower() != "other"))
+                            if ((_relationships.relationship_en.Trim().Length > 0) && (_relationships.relationship_en.Trim().ToLower() != "other"))
                             {
                                 company_relationship _company_relationship = new company_relationship();
-                                _company_relationship.relationship_en = _relationships.Trim();
-                                _company_relationship.relationship_ar = _relationships.Trim();
-                                _company_relationship.relationship_es = _relationships.Trim();
-                                _company_relationship.relationship_fr = _relationships.Trim();
-                                _company_relationship.relationship_jp = _relationships.Trim();
-                                _company_relationship.relationship_ru = _relationships.Trim();
+                                _company_relationship.relationship_en = _relationships.relationship_en.Trim();
+                                _company_relationship.relationship_ar = _relationships.relationship_ar.Trim();
+                                _company_relationship.relationship_es = _relationships.relationship_es.Trim();
+                                _company_relationship.relationship_fr = _relationships.relationship_fr.Trim();
+                                _company_relationship.relationship_jp = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("jp"), _relationships.relationship_en.Trim(), is_cc);
+                                _company_relationship.relationship_ru = _relationships.relationship_ru.Trim();
                                 _company_relationship.client_id = client_id;
                                 _company_relationship.company_id = company_id;
                                 ///??     _company_relationship.last_update_dt = DateTime.Now;
@@ -1610,28 +1941,35 @@ namespace EC.Controllers
                     if (company_id != 0)
                     {
                         List<string> list_outcomes = new List<string>();
-                        list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany1"));
-                        list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany2"));
-                        list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany3"));
-                        list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany4"));
-                        list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany5"));
-                        list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany6"));
-                        list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany7"));
-                        list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany8"));
+                        //list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany1"));
+                        //list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany2"));
+                        //list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany3"));
+                        //list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany4"));
+                        //list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany5"));
+                        //list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany6"));
+                        //list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany7"));
+                        //list_outcomes.Add(LocalizationGetter.GetString("OutcomeCompany8"));
 
-
+                        list_outcomes.Add("OutcomeCompany1");
+                        list_outcomes.Add("OutcomeCompany2");
+                        list_outcomes.Add("OutcomeCompany3");
+                        list_outcomes.Add("OutcomeCompany4");
+                        list_outcomes.Add("OutcomeCompany5");
+                        list_outcomes.Add("OutcomeCompany6");
+                        list_outcomes.Add("OutcomeCompany7");
+                        list_outcomes.Add("OutcomeCompany8");
 
                         foreach (string _outcome in list_outcomes)
                         {
                             if ((_outcome.Trim().Length > 0) && (_outcome.Trim().ToLower() != "other"))
                             {
                                 company_outcome _company_outcome = new company_outcome();
-                                _company_outcome.outcome_en = _outcome.Trim();
-                                _company_outcome.outcome_ar = _outcome.Trim();
-                                _company_outcome.outcome_es = _outcome.Trim();
-                                _company_outcome.outcome_fr = _outcome.Trim();
-                                _company_outcome.outcome_jp = _outcome.Trim();
-                                _company_outcome.outcome_ru = _outcome.Trim();
+                                _company_outcome.outcome_en = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("en-US"), _outcome.Trim(), is_cc);
+                                _company_outcome.outcome_ar = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("ar-SA"), _outcome.Trim(), is_cc);
+                                _company_outcome.outcome_es = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("es-ES"), _outcome.Trim(), is_cc);
+                                _company_outcome.outcome_fr = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("fr-FR"), _outcome.Trim(), is_cc);
+                                _company_outcome.outcome_jp = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("jp"), _outcome.Trim(), is_cc);
+                                _company_outcome.outcome_ru = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("ru"), _outcome.Trim(), is_cc);
                                 _company_outcome.company_id = company_id;
                                 _company_outcome.last_update_dt = DateTime.Now;
                                 _company_outcome.status_id = 2;
@@ -1655,48 +1993,92 @@ namespace EC.Controllers
                     var list_root_cases = new List<string>();
                     if (company_id != 0)
                     {
-                        list_root_cases.Add(LocalizationGetter.GetString("CulturalInfluences"));
-                        list_root_cases.Add(LocalizationGetter.GetString("CustomerDemands"));
-                        list_root_cases.Add(LocalizationGetter.GetString("CommunicationBarriers"));
+                        //list_root_cases.Add(LocalizationGetter.GetString("CulturalInfluences"));
+                        //list_root_cases.Add(LocalizationGetter.GetString("CustomerDemands"));
+                        //list_root_cases.Add(LocalizationGetter.GetString("CommunicationBarriers"));
+
+                        list_root_cases.Add("CulturalInfluences");
+                        list_root_cases.Add("CustomerDemands");
+                        list_root_cases.Add("CommunicationBarriers");
                     }
                     foreach (var itemString in list_root_cases)
                     {
-                        var temp_cases_external = new company_root_cases_external { company_id = company_id, name_en = itemString, name_es = itemString, name_fr = itemString, status_id = 2 };
+                        var temp_cases_external = new company_root_cases_external {
+                            company_id = company_id,
+                            name_en = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("en-US"), itemString.Trim(), is_cc),
+                            name_es = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("es-ES"), itemString.Trim(), is_cc),
+                            name_fr = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("fr-FR"), itemString.Trim(), is_cc),
+                            status_id = 2
+                        };
                         db.company_root_cases_external.Add(temp_cases_external);
                         //db.SaveChanges();
                     }
                     list_root_cases = new List<string>();
-                    list_root_cases.Add(LocalizationGetter.GetString("CostControlGoals"));
-                    list_root_cases.Add(LocalizationGetter.GetString("FinancialorPerformanceIncentives"));
-                    list_root_cases.Add(LocalizationGetter.GetString("LackofTeamwork"));
-                    list_root_cases.Add(LocalizationGetter.GetString("PoorProcessDesign"));
-                    list_root_cases.Add(LocalizationGetter.GetString("PressureofMeetingSalesQuotas"));
-                    list_root_cases.Add(LocalizationGetter.GetString("RemoteorInadequateSupervision"));
-                    list_root_cases.Add(LocalizationGetter.GetString("UnsupportiveEnvironmentorDepartment"));
-                    list_root_cases.Add(LocalizationGetter.GetString("WeakControls"));
-                    list_root_cases.Add(LocalizationGetter.GetString("LackofTraining"));
-                    list_root_cases.Add(LocalizationGetter.GetString("LimitedResources"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("CostControlGoals"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("FinancialorPerformanceIncentives"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("LackofTeamwork"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("PoorProcessDesign"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("PressureofMeetingSalesQuotas"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("RemoteorInadequateSupervision"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("UnsupportiveEnvironmentorDepartment"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("WeakControls"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("LackofTraining"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("LimitedResources"));
+
+                    list_root_cases.Add("CostControlGoals");
+                    list_root_cases.Add("FinancialorPerformanceIncentives");
+                    list_root_cases.Add("LackofTeamwork");
+                    list_root_cases.Add("PoorProcessDesign");
+                    list_root_cases.Add("PressureofMeetingSalesQuotas");
+                    list_root_cases.Add("RemoteorInadequateSupervision");
+                    list_root_cases.Add("UnsupportiveEnvironmentorDepartment");
+                    list_root_cases.Add("WeakControls");
+                    list_root_cases.Add("LackofTraining");
+                    list_root_cases.Add("LimitedResources");
                     foreach (var itemString in list_root_cases)
                     {
-                        var temp_cases_organizational = new company_root_cases_organizational { company_id = company_id, name_en = itemString, name_es = itemString, name_fr = itemString, status_id = 2 };
+                        var temp_cases_organizational = new company_root_cases_organizational {
+                            company_id = company_id,
+                            name_en = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("en-US"), itemString.Trim(), is_cc),
+                            name_es = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("es-ES"), itemString.Trim(), is_cc),
+                            name_fr = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("fr-FR"), itemString.Trim(), is_cc),
+                            status_id = 2
+                        };
                         db.company_root_cases_organizational.Add(temp_cases_organizational);
                         //db.SaveChanges();
                     }
                     list_root_cases = new List<string>();
-                    list_root_cases.Add(LocalizationGetter.GetString("CompanyLoyaltyRealization"));
-                    list_root_cases.Add(LocalizationGetter.GetString("ExtrenalLocusofControl"));
-                    list_root_cases.Add(LocalizationGetter.GetString("Insubordination"));
-                    list_root_cases.Add(LocalizationGetter.GetString("LackofAwareness"));
-                    list_root_cases.Add(LocalizationGetter.GetString("LackofSensitivity"));
-                    list_root_cases.Add(LocalizationGetter.GetString("LegitimateActionRationalization"));
-                    list_root_cases.Add(LocalizationGetter.GetString("NoHarmRationalization"));
-                    list_root_cases.Add(LocalizationGetter.GetString("SelfInterest"));
-                    list_root_cases.Add(LocalizationGetter.GetString("CulturalDifferencesPersonalValues"));
-                    list_root_cases.Add(LocalizationGetter.GetString("LackofSkills"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("CompanyLoyaltyRealization"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("ExtrenalLocusofControl"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("Insubordination"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("LackofAwareness"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("LackofSensitivity"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("LegitimateActionRationalization"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("NoHarmRationalization"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("SelfInterest"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("CulturalDifferencesPersonalValues"));
+                    //list_root_cases.Add(LocalizationGetter.GetString("LackofSkills"));
+
+                    list_root_cases.Add("CompanyLoyaltyRealization");
+                    list_root_cases.Add("ExtrenalLocusofControl");
+                    list_root_cases.Add("Insubordination");
+                    list_root_cases.Add("LackofAwareness");
+                    list_root_cases.Add("LackofSensitivity");
+                    list_root_cases.Add("LegitimateActionRationalization");
+                    list_root_cases.Add("NoHarmRationalization");
+                    list_root_cases.Add("SelfInterest");
+                    list_root_cases.Add("CulturalDifferencesPersonalValues");
+                    list_root_cases.Add("LackofSkills");
 
                     foreach (var itemString in list_root_cases)
                     {
-                        var temp_cases_behavioral = new company_root_cases_behavioral { company_id = company_id, name_en = itemString, name_es = itemString, name_fr = itemString, status_id = 2 };
+                        var temp_cases_behavioral = new company_root_cases_behavioral {
+                            company_id = company_id,
+                            name_en = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("en-US"), itemString.Trim(), is_cc),
+                            name_es = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("es-ES"), itemString.Trim(), is_cc),
+                            name_fr = LocalizationGetter.GetString_bkp(CultureInfo.GetCultureInfo("fr-FR"), itemString.Trim(), is_cc),
+                            status_id = 2
+                        };
                         db.company_root_cases_behavioral.Add(temp_cases_behavioral);
                         //db.SaveChanges();
                     }

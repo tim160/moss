@@ -2552,7 +2552,7 @@
     <value>Unsafe Work Conditions</value>
   </data>
   <data name="UnsafeWorkingConditions" xml:space="preserve">
-    <value>Unsafe Working Conditions</value>
+    <value>Unsafe Work Conditions</value>
   </data>
   <data name="UnusualOrSuspiciousActivities" xml:space="preserve">
     <value>Unusual or Suspicious Activities</value>
@@ -3002,5 +3002,8 @@ Do not want to involve</value>
   </data>
   <data name="FiledCenterAgent" xml:space="preserve">
     <value>Filed by Call Center Agent</value>
+  </data>
+  <data name="UnusualSuspiciousActivities" xml:space="preserve">
+    <value>Unusual Suspicious Activities</value>
   </data>
 </root>
