@@ -7,7 +7,7 @@
     <title>@ViewBag.Title - Employee Confidential</title>
     <link rel="stylesheet" type="text/css" href="~/Content/Site.css">
     @*<link rel="stylesheet" type="text/css" href="~/Content/bStart">
-    <link rel="stylesheet" type="text/css" href="~/Content/aStart.css">    ---*@
+        <link rel="stylesheet" type="text/css" href="~/Content/aStart.css">    ---*@
 
     @*   @Styles.Render("~/Content/Styles")*@
     <script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
@@ -24,28 +24,63 @@
     </script>
     <!-- End Inspectlet Embed Code -->
     <script>
-    (function (i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-            (i[r].q = i[r].q || []).push(arguments)
-        }, i[r].l = 1 * new Date(); a = s.createElement(o),
-        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-    ga('create', 'UA-54295621-1', 'auto');
-    ga('send', 'pageview');
+        ga('create', 'UA-54295621-1', 'auto');
+        ga('send', 'pageview');
 
     </script>
 
-    <script src="~/Libs/angular/angular.min.js"></script>
-    <script src="~/Libs/angular-http/angular-http.js"></script>
-    <script src="~/Libs/angular-resource/angular-resource.min.js"></script>
-    <script src="~/Libs/angular-animate/angular-animate.min.js"></script>
-    <script src="~/Libs/angular-sanitize/angular-sanitize.min.js"></script>
-    <script src="~/Libs/angular-nvd3/dist/angular-nvd3.min.js"></script>
-    <script src="~/Libs/ng-file-upload/ng-file-upload.min.js"></script>
-    <script type="text/javascript" src="~/Libs/angular-ui-calendar/src/calendar.js"></script>
+    <script>
+        // Internet Explorer 6-11
+        var isIE = false || !!document.documentMode;
 
-    <script src="~/Scripts/dis.js"></script>
+        // Edge 20+
+        var isEdge = !isIE && !!window.StyleMedia;
+
+        var head = document.getElementsByTagName('head')[0];
+
+        
+
+        if (isIE || isEdge) {
+            //js.src = "edge.js";
+        }
+        else {
+            var array = [
+                '/Libs/angular/angular.min.js',
+                '/Libs/angular-http/angular-http.js',
+                '/Libs/angular-resource/angular-resource.min.js',
+                '/Libs/angular-animate/angular-animate.min.js',
+                '/Libs/angular-sanitize/angular-sanitize.min.js',
+                '/Libs/angular-nvd3/dist/angular-nvd3.min.js',
+                '/Libs/ng-file-upload/ng-file-upload.min.js',
+                '/Libs/angular-ui-calendar/src/calendar.js'
+            ];
+            array.forEach(function (element) {
+                var js = document.createElement("script");
+                js.type = "text/javascript";
+                js.src = element;
+                head.appendChild(js);
+            });
+        }
+
+    </script>
+
+    @*<script src="~/Libs/angular/angular.min.js"></script>
+        <script src="~/Libs/angular-http/angular-http.js"></script>
+            <script src="~/Libs/angular-resource/angular-resource.min.js"></script>
+            <script src="~/Libs/angular-animate/angular-animate.min.js"></script>
+            <script src="~/Libs/angular-sanitize/angular-sanitize.min.js"></script>
+            <script src="~/Libs/angular-nvd3/dist/angular-nvd3.min.js"></script>
+            <script src="~/Libs/ng-file-upload/ng-file-upload.min.js"></script>
+            <script type="text/javascript" src="~/Libs/angular-ui-calendar/src/calendar.js"></script>*@
+
+    @*<script src="~/Scripts/dis.js"></script>*@
 </head>
 <body ng-app="EC">
 <div class="fullContainer">
