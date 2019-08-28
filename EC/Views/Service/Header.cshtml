@@ -6,55 +6,98 @@
 <header class="header">
     <div class="top-headerBg">
         <div class="container" style="overflow: inherit">
-            <div class="top-header" style="overflow: inherit">
-                <a href="http://employeeconfidential.com" class="top-header__backLink">
-                    <img src="~/Content/images/svg-icons/left.svg" alt="" />
-                    <span class="top-header__backLink-text">
-                        EmployeeConfidential.com
-                    </span>
-                </a>
-                <div class="top-header__loginBar">
+            <style>
+                .container {
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: nowrap;
+                    justify-content: space-between;
+                    align-items: center;
+                    align-content: stretch;
+                }
 
+                .t1 ul {
+                    list-style: none;
+                    margin: 0;
+                }
 
-                    <nav class="top-header__loginBar-nav @(showDDLanguages ? "language":"" )">
+                    .t1 ul li {
+                        float: left;
+                    }
+            </style>
 
-                        @if (showDDLanguages)
-                        {
-                            using (Html.BeginForm("ChangeCulture", "Service"))
+            <a href="http://employeeconfidential.com" class="top-header__backLink">
+                <img src="/Content/images/svg-icons/left.svg" alt="">
+                <span class="top-header__backLink-text">
+                    EmployeeConfidential.com
+                </span>
+            </a>
+            <div class="t1">
+                <ul>
+                    <li>
+                        <a id="languageMenuItem" href="#" class="top-header__loginBar-a">
+                            @ViewBag.fullNameLanguage
+                        </a>
+                    </li>
+                    <li >
+                        <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Login" class="top-header__loginBar-a">
+                            @LocalizationGetter.GetString("ClientLoginUp", is_cc)
+                        </a>
+                    </li>
+                    <li >
+                        <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/CheckStatus" class="top-header__loginBar-a">
+                            @LocalizationGetter.GetString("CheckReportStatus", is_cc)
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+            @*<div class="top-header" style="overflow: inherit">
+                    <a href="http://employeeconfidential.com" class="top-header__backLink">
+                        <img src="~/Content/images/svg-icons/left.svg" alt="" />
+                        <span class="top-header__backLink-text">
+                            EmployeeConfidential.com
+                        </span>
+                    </a>
+                    <div class="top-header__loginBar">
+                        <nav class="top-header__loginBar-nav @(showDDLanguages ? "language":"" )">
+                            @if (showDDLanguages)
                             {
-                                <input name="lang" id="selectedLanguage" type="hidden" value="@ViewBag.DEFAULT_LANGUAGE" />
-                                <input name="fullNameLanguage" id="fullNameLanguage" type="hidden" value="English" />
-                                <li class="top-header__loginBar-li" style="text-align: right">
-                                    <a id="languageMenuItem" href="#" class="top-header__loginBar-a">
-                                        @ViewBag.fullNameLanguage
-                                    </a>
-                                    <table id="manuLanguages">
-                                        <tr>
-                                            <td value="en-US">English</td>
-                                        </tr>
-                                        <tr>
-                                            <td value="es-ES">Español</td>
-                                        </tr>
-                                    </table>
-                                </li>
-                                <input type="submit" name="submit" id="submitChangeLanguage" value="" />
+                                using (Html.BeginForm("ChangeCulture", "Service"))
+                                {
+                                    <input name="lang" id="selectedLanguage" type="hidden" value="@ViewBag.DEFAULT_LANGUAGE" />
+                                    <input name="fullNameLanguage" id="fullNameLanguage" type="hidden" value="English" />
+                                    <li class="top-header__loginBar-li" style="text-align: right">
+                                        <a id="languageMenuItem" href="#" class="top-header__loginBar-a">
+                                            @ViewBag.fullNameLanguage
+                                        </a>
+                                        <table id="manuLanguages">
+                                            <tr>
+                                                <td value="en-US">English</td>
+                                            </tr>
+                                            <tr>
+                                                <td value="es-ES">Español</td>
+                                            </tr>
+                                        </table>
+                                    </li>
+                                    <input type="submit" name="submit" id="submitChangeLanguage" value="" />
+                                }
                             }
-                        }
+                            <li class="top-header__loginBar-li">
+                                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Login" class="top-header__loginBar-a">
+                                    @LocalizationGetter.GetString("ClientLoginUp", is_cc)
+                                </a>
+                            </li><!-- /.top-header__loginBar-li -->
 
-                        <li class="top-header__loginBar-li">
-                            <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Login" class="top-header__loginBar-a">
-                                @LocalizationGetter.GetString("ClientLoginUp", is_cc)
-                            </a>
-                        </li><!-- /.top-header__loginBar-li -->
+                            <li class="top-header__loginBar-li">
+                                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/CheckStatus" class="top-header__loginBar-a">
+                                    @LocalizationGetter.GetString("CheckReportStatus", is_cc)
+                                </a>
+                            </li><!-- /.top-header__loginBar-li -->
+                        </nav><!-- /.top-header__loginBar-nav -->
+                    </div><!-- /.top-header__loginBar -->
+                </div><!-- /.top-header -->*@
 
-                        <li class="top-header__loginBar-li">
-                            <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/CheckStatus" class="top-header__loginBar-a">
-                                @LocalizationGetter.GetString("CheckReportStatus", is_cc)
-                            </a>
-                        </li><!-- /.top-header__loginBar-li -->
-                    </nav><!-- /.top-header__loginBar-nav -->
-                </div><!-- /.top-header__loginBar -->
-            </div><!-- /.top-header -->
-        </div>
+        </div><!--container-->
     </div>
 </header><!-- /.header -->
