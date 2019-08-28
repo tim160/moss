@@ -2733,10 +2733,10 @@
     <value>HELP</value>
   </data>
   <data name="PlatformMakesEasyReport" xml:space="preserve">
-    <value>This platform makes it easy to report an incident about workplace issues like sexual harassment, unsafe conditions, financial and auditing concerns, theft, bribery, substance abuse etc.</value>
+    <value>This platform makes it easy to report a workplace incident or issue, such as sexual harassment, unsafe conditions, financial and auditing concerns, theft, bribery, substance abuse, etc.</value>
   </data>
   <data name="ReadAndAgreeCompanyPolicies" xml:space="preserve">
-    <value>I have read and agree with company policies</value>
+    <value>I have read and agree with the company policies applicable to my employment, provided at the links below and which were previously provided to me in via hard copy.</value>
   </data>
   <data name="SelectLocation" xml:space="preserve">
     <value>Select Location</value>

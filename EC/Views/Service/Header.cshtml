@@ -5,26 +5,7 @@
 }
 <header class="header">
     <div class="top-headerBg">
-        <div class="container" style="overflow: inherit">
-            @*<style>
-                .container {
-                    display: flex;
-                    flex-direction: row;
-                    flex-wrap: nowrap;
-                    justify-content: space-between;
-                    align-items: center;
-                    align-content: stretch;
-                }
-
-                .t1 ul {
-                    list-style: none;
-                    margin: 0;
-                }
-
-                    .t1 ul li {
-                        float: left;
-                    }
-            </style>
+        <div class="containerCustom" style="overflow: inherit">
 
             <a href="http://employeeconfidential.com" class="top-header__backLink">
                 <img src="/Content/images/svg-icons/left.svg" alt="">
@@ -34,11 +15,11 @@
             </a>
             <div class="t1">
                 <ul>
-                    <li>
+                    @*<li>
                         <a id="languageMenuItem" href="#" class="top-header__loginBar-a">
                             @ViewBag.fullNameLanguage
                         </a>
-                    </li>
+                    </li>*@
                     <li >
                         <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Login" class="top-header__loginBar-a">
                             @LocalizationGetter.GetString("ClientLoginUp", is_cc)
@@ -51,8 +32,8 @@
                     </li>
                 </ul>
 
-            </div>*@
-            <div class="top-header" style="overflow: inherit">
+            </div>
+            @*<div class="top-header" style="overflow: inherit">
                     <a href="http://employeeconfidential.com" class="top-header__backLink">
                         <img src="~/Content/images/svg-icons/left.svg" alt="" />
                         <span class="top-header__backLink-text">
@@ -61,7 +42,7 @@
                     </a>
                     <div class="top-header__loginBar" >
                         <nav class="top-header__loginBar-nav @(showDDLanguages ? "language":"" )">
-                             @*@if (showDDLanguages)
+                             @if (showDDLanguages)
                             {
                                using (Html.BeginForm("ChangeCulture", "Service"))
                                 {
@@ -82,7 +63,7 @@
                                     </li>
                                     <input type="submit" name="submit" id="submitChangeLanguage" value="" />
                                 }
-                            }*@
+                            }
                             <li class="top-header__loginBar-li">
                                 <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Login" class="top-header__loginBar-a">
                                     @LocalizationGetter.GetString("ClientLoginUp", is_cc)
@@ -96,7 +77,7 @@
                             </li><!-- /.top-header__loginBar-li -->
                         </nav><!-- /.top-header__loginBar-nav -->
                     </div><!-- /.top-header__loginBar -->
-                </div><!-- /.top-header -->
+                </div><!-- /.top-header -->*@
 
         </div><!--container-->
     </div>
