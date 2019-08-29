@@ -1187,7 +1187,7 @@ textarea::-webkit-input-placeholder {
   margin: auto; }
 
 .loginSection__title.loginSection__titleWithLlogo {
-  margin-top: 70px; }
+  padding-top: 70px; }
 
 .loginForm__inputCheckBox {
   font-family: Lato-Light-LatinWeb;
@@ -1204,13 +1204,13 @@ textarea::-webkit-input-placeholder {
   padding: 15px;
   border-bottom: 1px solid #d6dcdc;
   font-family: "Lato-Regular-LatinWeb";
-  font-size: 14px;
+  font-size: 16px;
   color: #434343; }
 
 .footerInfo__textContent {
   padding: 15px;
   font-family: "Lato-Light-LatinWeb";
-  font-size: 14px;
+  font-size: 16px;
   color: #434343; }
 
 .footerInfo__textList-li {
@@ -1229,7 +1229,7 @@ textarea::-webkit-input-placeholder {
   margin-bottom: 30px;
   margin-top: 50px;
   cursor: pointer;
-  font-size: 18px; }
+  font-size: 16px; }
 
 .inputCheckbox input {
   position: absolute;
@@ -1690,12 +1690,23 @@ textarea::-webkit-input-placeholder {
     padding-left: 20px; }
   .loginSection__title {
     font-size: 20px;
-    margin: 50px auto 20px auto;
+    padding-top: 50px;
+    padding-bottom: 20px;
+    /*padding: 50px auto 20px auto;*/
     padding-left: 40px;
     padding-top: 3px; }
     .loginSection__title:before {
-      top: -4.5px;
-      left: 0; }
+        left: 0;
+        bottom: 16px;}
+    .footerFlex {
+        padding-top: 133.5px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        align-content: space-between;
+    }
   .loginForm {
     margin-top: 30px;
     margin-bottom: 20px; }
@@ -2266,7 +2277,7 @@ textarea::-webkit-input-placeholder {
   .loginSection-cc .loginSection__title {
     padding-top: 0; }
   .loginSection__title {
-    margin-top: 150px; }
+    padding-top: 150px; }
   .loginForm {
     margin-top: 50px; }
   .loginForm__input {
