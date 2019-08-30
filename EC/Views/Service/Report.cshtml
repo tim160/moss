@@ -10,7 +10,7 @@
     @Html.Partial("Header", showDDLanguages)
     <main class="main">
         <section class="loginSection">
-            <div class="loginSection__titleBg"  style="background-color: #edf0f0">
+            <div class="loginSection__titleBg" style="background-color: #edf0f0">
                 <div class="container loginTopSection__container">
                     <div class="loginSection__title">
                         @LocalizationGetter.GetString("FileReport", is_cc)
@@ -21,8 +21,7 @@
                 <div class="container loginSection__container">
                     <div class="loginContentBlock">
                         <p class="loginContentBlock__textP">
-                            @*@LocalizationGetter.GetString("PlatformMakesEasyReport", is_cc)*@
-                            This platform makes it easy to report a workplace incident or issue, such as sexual harassment, unsafe conditions, financial and auditing concerns, theft, bribery, substance abuse, etc.
+                            @LocalizationGetter.GetString("PlatformMakesEasyReport", is_cc)
                         </p><!-- /.loginContentBlock__textP -->
                         <p class="loginContentBlock__textP">
                             @LocalizationGetter.GetString("zzzzFind", is_cc)
@@ -46,45 +45,20 @@
                 </div><!-- /.loginSection__contentBg -->
         </section><!-- /.loginSection -->
     </main><!-- /.main -->
-    <!-- ------------------  Footer ---------------- -->
-    <footer class="footerBg">
-        <div class="container" style="padding-left: 31%; margin: 0">
-            @*<div class="footer">
-                <div></div>
-                <div class="footer__copyright">
-                    Copyright © 2019 Employee Confidential LLC. All Rights Reserved
-                </div><!-- /.footer__copyright -->
-                <div class="footer__navLinks">
-                    <nav class="footer__navLinks-nav">
-                        <li class="footer__navLinks-li">
-                            <a href="http://employeeconfidential.com/PrivacyStatement.html" class="footer__navLinks-a">
-                                Privacy Policy
-                            </a>
-                        </li><!-- /.footer__navLinks-li -->
-                        <li class="footer__navLinks-li">
-                            <a href="http://employeeconfidential.com/TermsOfService.html" class="footer__navLinks-a">
-                                Terms of Use
-                            </a>
-                        </li><!-- /.footer__navLinks-li -->
-                    </nav><!-- /.footer__navLinks-nav -->
-                </div><!-- /.footer__navLinks -->
-            </div><!-- /.footer -->*@
-            <div class="footerFlex">
-                <div class="footer__copyright">
-                    Copyright © 2019 Employee Confidential LLC. All Rights Reserved
-                </div><!-- /.footer__copyright -->
-                <a href="http://employeeconfidential.com/PrivacyStatement.html" class="footer__navLinks-a">
-                    Privacy Policy
-                </a>
-                <a href="http://employeeconfidential.com/TermsOfService.html" class="footer__navLinks-a">
-                    Terms of Use
-                </a>
-            </div>
-        </div><!-- /.container -->
-    </footer><!-- /.footer -->
+
+    @Html.Partial("Footer")
 
 </div><!-- /.general-container -->
-
+<style>
+    .loginTextFormLinks {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+        align-items: center;
+        align-content: stretch;
+    }
+</style>
 
 @section scripts {
     <script src="~/Scripts/View/ServiceReport.js"></script>
