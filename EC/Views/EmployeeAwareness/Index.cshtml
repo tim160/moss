@@ -31,13 +31,16 @@
       {
         <div class="blockMenu posterCategoryNames">
           <div class="title">@GlobalRes.Industry</div>
-          <div ng-repeat="category in categories">
+          <div ng-if="category.status === 2" ng-repeat="category in categories">
             <div class="itemSelect" ng-class="{'active' : category.Selected}" ng-click="category.Selected = !category.Selected" value="{{category.Id}}">{{categoryName(category)}}</div>
           </div>
         </div>
 
                 <div class="blockMenu">
                   <div class="title">@GlobalRes.SHPrevention</div>
+                  <div ng-if="category.status === 3" ng-repeat="category in categories">
+                    <div class="itemSelect" ng-class="{'active' : category.Selected}" ng-click="category.Selected = !category.Selected" value="{{category.Id}}">{{categoryName(category)}}</div>
+                  </div>
                 <div>
                 </div>
               </div>
