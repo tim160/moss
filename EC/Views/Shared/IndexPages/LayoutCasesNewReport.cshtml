@@ -371,222 +371,233 @@
                         }
                     }
                 </div>
-                        if ((investigationstatus > 2 && investigationstatus < 7) || (investigationstatus == 9))
-                        {
-                            string Res_or_comp = GlobalRes.CloseCaseUp.ToUpper();
+                if ((investigationstatus > 2 && investigationstatus < 7) || (investigationstatus == 9))
+                {
+                    string Res_or_comp = GlobalRes.CloseCaseUp.ToUpper();
 
-                            if ((investigationstatus == 4) || (investigationstatus == 6))
-                            {
-                                Res_or_comp = "";
-                                normal_button_value = "";
-                                left_button_value = "";
-                            }
+                    if ((investigationstatus == 4) || (investigationstatus == 6))
+                    {
+                        Res_or_comp = "";
+                        normal_button_value = "";
+                        left_button_value = "";
+                    }
 
 
-                            if ((investigationstatus == 9) && (_user.role_id == 4 || _user.role_id == 5))
-                            {
-                                Res_or_comp = GlobalRes.Reopen.ToUpper();
-                                overlay_title = GlobalRes.ReopenCase;
-                                textbox_title = GlobalRes.Description;
-                                normal_button_promotion = GlobalRes.ReopenCaseUp;
-                                normal_button_value = ECGlobalConstants.investigation_status_investigation.ToString();
+                    if ((investigationstatus == 9) && (_user.role_id == 4 || _user.role_id == 5))
+                    {
+                        Res_or_comp = GlobalRes.Reopen.ToUpper();
+                        overlay_title = GlobalRes.ReopenCase;
+                        textbox_title = GlobalRes.Description;
+                        normal_button_promotion = GlobalRes.ReopenCaseUp;
+                        normal_button_value = ECGlobalConstants.investigation_status_investigation.ToString();
 
-                            }
-                            @Html.Partial("~/Views/Shared/EditorTemplates/CreateTaskModal.cshtml", new ViewDataDictionary {
-                        { "normal_button_promotion", normal_button_promotion },
-                        { "Res_or_comp", Res_or_comp },
-                        { "overlay_title", overlay_title },
-                        { "textbox_title", textbox_title },
-                        {"investigationstatus", investigationstatus },
-                        {"left_button_promotion", left_button_promotion },
-                        {"normal_button_value", normal_button_value },
-                        {"left_button_value", left_button_value },
-                        {"company_outcomes", company_outcomes },
-                        { "report_id", ViewBag.report_id },
-                        { "is_cc", is_cc }
-                    })
+                    }
+                    @Html.Partial("~/Views/Shared/EditorTemplates/CreateTaskModal.cshtml", new ViewDataDictionary {
+                { "normal_button_promotion", normal_button_promotion },
+                { "Res_or_comp", Res_or_comp },
+                { "overlay_title", overlay_title },
+                { "textbox_title", textbox_title },
+                {"investigationstatus", investigationstatus },
+                {"left_button_promotion", left_button_promotion },
+                {"normal_button_value", normal_button_value },
+                {"left_button_value", left_button_value },
+                {"company_outcomes", company_outcomes },
+                { "report_id", ViewBag.report_id },
+                { "is_cc", is_cc }
+            })
 
-                            @Html.Partial("~/Views/Shared/EditorTemplates/ApproveDialogModal.cshtml", new ViewDataDictionary
-                       {
-                       })
+                    @Html.Partial("~/Views/Shared/EditorTemplates/ApproveDialogModal.cshtml", new ViewDataDictionary
+               {
+               })
 
-                            if (((rm._investigation_status == ECGlobalConstants.investigation_status_completed || rm._investigation_status == ECGlobalConstants.investigation_status_resolution)))
-                            {
-                                <div id="resoveCompletedTopmessage">
-                                    <div class="buttonNoneBorderGray">
-                                        <div class="textInButton">
-                                            @GlobalRes.Awaitingapproval
-                                        </div>
-                                    </div>
+                    if (((rm._investigation_status == ECGlobalConstants.investigation_status_completed || rm._investigation_status == ECGlobalConstants.investigation_status_resolution)))
+                    {
+                        <div id="resoveCompletedTopmessage">
+                            <div class="buttonNoneBorderGray">
+                                <div class="textInButton">
+                                    @GlobalRes.Awaitingapproval
                                 </div>
-                            }
-                            else
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+
+                        if (Res_or_comp.Trim().Length > 0)
+                        {
+                            <span id="resoveCompletedTopBtn" class="acceptCaseBtn resolveCase">@Res_or_comp</span>
+                        }
+                    }
+                    if (mediators.Count > 0)
+                    {
+                        <div class="displayMediators">
+                            @foreach (user _mediator in mediators)
                             {
 
-                                if (Res_or_comp.Trim().Length > 0)
+                                if (_mediator != null && _mediator.id != 0)
                                 {
-                                    <span id="resoveCompletedTopBtn" class="acceptCaseBtn resolveCase">@Res_or_comp</span>
+                                    @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", _mediator.id }, { "is_owner", true } })
                                 }
-                            }
-                            if (mediators.Count > 0)
-                            {
-                                <div class="displayMediators">
-                                    @foreach (user _mediator in mediators)
-                        {
-
-                            if (_mediator != null && _mediator.id != 0)
-                            {
-                                            @Html.Partial("~/Views/Shared/Helpers/_UserPreviewFace.cshtml", new ViewDataDictionary { { "user_id", _mediator.id }, { "is_owner", true } })
-                                        }
-                                        else
-                                        {
-                                            <div class="status"></div>
-                                            <div class="anonimousReporterIcon"></div>
-                                        }
-
-                                    }
-                                </div><!--displayMediators-->
+                                else
+                                {
+                                    <div class="status"></div>
+                                    <div class="anonimousReporterIcon"></div>
                                 }
-                            }
-                        }
-                        else
-                        {
-                            string CurrentURL = Request.Url.AbsoluteUri.ToLower();
-                            string _temp = "";
-                            bool flag = false;
-                            if (CurrentURL.Contains("/cases"))
-                            {
-                                _temp = GlobalRes.ActiveCasesUp;
-                                flag = true;
-                            }
-                            if (CurrentURL.Contains("/cases/index"))
-                            {
-                                _temp = GlobalRes.ActiveCasesUp;
-                                flag = true;
-                            }
-                            if (CurrentURL.Contains("/cases/completed"))
-                            {
-                                _temp = GlobalRes.CompletedcasesUp;
-                                flag = true;
-                            }
-                            if (CurrentURL.Contains("/cases/closed"))
-                            {
-                                _temp = GlobalRes.ClosedCasesUp;
-                                flag = true;
-                            }
-                            if (CurrentURL.Contains("/cases/spam"))
-                            {
-                                _temp = GlobalRes.SpamcasesUp;
-                                flag = true;
-                            }
-
-                            if (CurrentURL.Contains("settings/"))
-                            {
-                                _temp = GlobalRes.MyProfile;
-                                flag = true;
-                            }
-                            if (CurrentURL.Contains("settings/company"))
-                            {
-                                _temp = LocalizationGetter.GetString("CompanyProfile", is_cc);
-                                flag = true;
-                            }
-                            if (CurrentURL.Contains("settings/mediators"))
-                            {
-                                _temp = GlobalRes.CompanyMediators;
-                                flag = true;
-                            }
-                            if (CurrentURL.Contains("settings/password"))
-                            {
-                                _temp = GlobalRes.Password;
-                                flag = true;
-                            }
-                            if (CurrentURL.Contains("settings/cases"))
-                            {
-                                _temp = GlobalRes.CaseSettings;
-                                flag = true;
-                            }
-                            if (CurrentURL.Contains("settings/user"))
-                            {
-                                _temp = GlobalRes.Profile;
-                                flag = true;
-                            }
-
-                            if (CurrentURL.Contains("tasks/"))
-                            {
-                                _temp = GlobalRes.Mytasks;
-                                flag = true;
-                            }
-                            if (CurrentURL.Contains("tasks/completed"))
-                            {
-                                _temp = GlobalRes.Closedtasks;
-                                flag = true;
 
                             }
-                            if (CurrentURL.Contains("analytics/index") || CurrentURL.Contains("/analytics"))
-                            {
-                                _temp = GlobalRes.Cases;
-                                flag = true;
-                            }
-                            if (CurrentURL.Contains("analytics/tasks"))
-                            {
-                                _temp = GlobalRes.Tasks;
-                                flag = true;
-                            }
-                            if (CurrentURL.Contains("analytics/rootcauseanalysis"))
-                            {
-                                _temp = "Root cause analysis";
-                                flag = true;
-                            }
-                            if (CurrentURL.Contains("analytics/cacsreport"))
-                            {
-                                _temp = "Clery Act Crime Statistics Report";
-                                flag = true;
-                            }
-                            if (CurrentURL.Contains("analytics/mediators"))
-                            {
-                                _temp = GlobalRes.Mediators;
-                                flag = true;
-                            }
-                            if (CurrentURL.Contains("messages/"))
-                            {
-                                _temp = GlobalRes.Allmessages;
-                                flag = true;
-                            }
-                            if (CurrentURL.Contains("payment/history") || CurrentURL.Contains("payment"))
-                            {
-                                _temp = GlobalRes.History;
-                                flag = true;
-                            }
-                            if (CurrentURL.Contains("payment/receipt"))
-                            {
-                                _temp = GlobalRes.Receipt;
-                                flag = true;
-                            }
-                            if (CurrentURL.Contains("payment/newpayment"))
-                            {
-                                _temp = GlobalRes.newpayment;
-                                flag = true;
-                            }
-                            if (CurrentURL.Contains("/employeeawareness/poster"))
-                            {
-                                _temp = "Poster";
-                                flag = true;
-                            }
-                            else if (CurrentURL.Contains("/employeeawareness"))
-                            {
-                                _temp = "Posters";
-                                flag = true;
-                            }
-                            if (flag)
-                            {
-                                @*<span></span><span></span>*@
-                                @Html.Raw("</div>");
+                        </div><!--displayMediators-->
+                    }
+                }
+            }
+            else
+            {
+                string CurrentURL = Request.Url.AbsoluteUri.ToLower();
+                string _temp = "";
+                bool flag = false;
+                if (CurrentURL.Contains("/cases"))
+                {
+                    _temp = GlobalRes.ActiveCasesUp;
+                    flag = true;
+                }
+                if (CurrentURL.Contains("/cases/index"))
+                {
+                    _temp = GlobalRes.ActiveCasesUp;
+                    flag = true;
+                }
+                if (CurrentURL.Contains("/cases/completed"))
+                {
+                    _temp = GlobalRes.CompletedcasesUp;
+                    flag = true;
+                }
+                if (CurrentURL.Contains("/cases/closed"))
+                {
+                    _temp = GlobalRes.ClosedCasesUp;
+                    flag = true;
+                }
+                if (CurrentURL.Contains("/cases/spam"))
+                {
+                    _temp = GlobalRes.SpamcasesUp;
+                    flag = true;
+                }
 
-                                <div class="headerBlockTextRight">
-                                    <span class="text">@_temp</span>
-                                </div>
-                            }
-                        }
+                if (CurrentURL.Contains("settings/"))
+                {
+                    _temp = GlobalRes.MyProfile;
+                    flag = true;
+                }
+                if (CurrentURL.Contains("settings/company"))
+                {
+                    _temp = LocalizationGetter.GetString("CompanyProfile", is_cc);
+                    flag = true;
+                }
+                if (CurrentURL.Contains("settings/mediators"))
+                {
+                    _temp = GlobalRes.CompanyMediators;
+                    flag = true;
+                }
+                if (CurrentURL.Contains("settings/password"))
+                {
+                    _temp = GlobalRes.Password;
+                    flag = true;
+                }
+                if (CurrentURL.Contains("settings/cases"))
+                {
+                    _temp = GlobalRes.CaseSettings;
+                    flag = true;
+                }
+                if (CurrentURL.Contains("settings/user"))
+                {
+                    _temp = GlobalRes.Profile;
+                    flag = true;
+                }
+
+                if (CurrentURL.Contains("tasks/"))
+                {
+                    _temp = GlobalRes.Mytasks;
+                    flag = true;
+                }
+                if (CurrentURL.Contains("tasks/completed"))
+                {
+                    _temp = GlobalRes.Closedtasks;
+                    flag = true;
+
+                }
+                if (CurrentURL.Contains("analytics/index") || CurrentURL.Contains("/analytics"))
+                {
+                    _temp = GlobalRes.Cases;
+                    flag = true;
+                }
+                if (CurrentURL.Contains("analytics/tasks"))
+                {
+                    _temp = GlobalRes.Tasks;
+                    flag = true;
+                }
+                if (CurrentURL.Contains("analytics/rootcauseanalysis"))
+                {
+                    _temp = "Root cause analysis";
+                    flag = true;
+                }
+                if (CurrentURL.Contains("analytics/cacsreport"))
+                {
+                    _temp = "Clery Act Crime Statistics Report";
+                    flag = true;
+                }
+                if (CurrentURL.Contains("analytics/mediators"))
+                {
+                    _temp = GlobalRes.Mediators;
+                    flag = true;
+                }
+                if (CurrentURL.Contains("messages/"))
+                {
+                    _temp = GlobalRes.Allmessages;
+                    flag = true;
+                }
+                if (CurrentURL.Contains("payment/history") || CurrentURL.Contains("payment"))
+                {
+                    _temp = GlobalRes.History;
+                    flag = true;
+                }
+                if (CurrentURL.Contains("payment/receipt"))
+                {
+                    _temp = GlobalRes.Receipt;
+                    flag = true;
+                }
+                if (CurrentURL.Contains("payment/newpayment"))
+                {
+                    _temp = GlobalRes.newpayment;
+                    flag = true;
+                }
+                if (CurrentURL.Contains("/employeeawareness/poster"))
+                {
+                    _temp = "Poster";
+                    flag = true;
+                }
+                else if (CurrentURL.Contains("/employeeawareness"))
+                {
+                    _temp = "Posters";
+                    flag = true;
+                }
+                if (flag)
+                {
+                    @*<span></span><span></span>*@
+                    @Html.Raw("</div>");
+
+                    <div class="headerBlockTextRight">
+                        <span class="text">@_temp</span>
+                    </div>
+                    <div class="boxDDlistPosition">
+                        <div class="boxDDlist textColot">
+                            All CHURCHES 
+                            <img src="~/Content/Icons/arrow-listDark.png" />
+                            <ul>
+                                <li>text1</li>
+                                <li>text2</li>
+                                <li>text3</li>
+                            </ul>
+                        </div>
+                    </div>
+                }
+            }
             @if ((hrefURL.Contains("/case/")) && (_report_id != 0))
             {
                 int _investigation_status = rm._investigation_status;
@@ -605,19 +616,20 @@
                             </div>
 
                             <div class="polos"></div>
-    }
-    else
-    {
-        <div class="positionN">
-            <span>@_statuses[i]</span>
-        </div>
-        <div class="polos"></div>
-        }
+                        }
+                        else
+                        {
+                            <div class="positionN">
+                                <span>@_statuses[i]</span>
+                            </div>
+                            <div class="polos"></div>
+                        }
 
-    }
+                    }
                 </div><!--headerPos-->
-    }
+            }
         </div>
+
     </div>
     @RenderBody()
     @Html.Partial("~/Views/Shared/HelpPartial.cshtml", new ViewDataDictionary { { "is_reporter", false } })

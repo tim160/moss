@@ -4169,3 +4169,28 @@ html body .selectStyled{
     margin: 25px 28px;
     padding-left: 10px;
 }
+.textColot {
+    color: #727c7e;
+    font-family: 'OpenSans-Bold';
+    font-size: 10px;
+}
+
+.boxDDlist {
+    background-color: #ececec;
+    text-transform: uppercase;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.boxDDlistPosition {
+    float: right;
+    margin-right: 30px;
+}
+
+.boxDDlist ul {
+    text-align: center;
+}
+
+    .boxDDlist ul li:hover {
+        background-color: #929292;
+    }
