@@ -106,7 +106,7 @@
     <script type="text/javascript" src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="~/Scripts/lib/jquery-ui.min.js"></script>
     <script src="~/Scripts/View/reportSummary.js"></script>
-    <script src="~/Libs/angular/angular.min.js"></script>
+    <script src="~/Libs/angular/angular.js"></script>
     <script src="~/Libs/angular-http/angular-http.js"></script>
     <script src="~/Libs/angular-resource/angular-resource.min.js"></script>
     <script src="~/Libs/angular-animate/angular-animate.min.js"></script>
@@ -193,7 +193,7 @@
                                 <span class="navConteiner__icon navConteiner__icon_messages"></span>
                                 <span class="navConteiner__name">Messages</span>
                                 @if (unread_message_number_string.Length > 0)
-                                { <span class="navConteiner__badgeCount ">@unread_message_number_string</span> }
+                                {<span class="navConteiner__badgeCount ">@unread_message_number_string</span>}
                             </a>
                         </li><!-- /.navConteiner -->
                         <li class="navConteiner @_menuCases">
@@ -210,23 +210,23 @@
             <div class="header__rightBlock">
                 <div class="userNavigation">
                     <a href="#" class="userNavigation__a">
-                        
-                      @if (_user.role_id != ECLevelConstants.level_trainer)
-                      {
-                        <div class="userNavigation__info">
-                              @*
-                                  <div class="userNavigation__name">@(um._user != null ? um._user.first_nm : "")</div>
-                                  <div class="userNavigation__surname">@(um._user != null ? um._user.last_nm : "")</div>
-                              *@
-                              @if (_user != null)
-                              {
-                                var logo = cm.getLogoCompany(_user.company_id);
-                                if (!String.IsNullOrEmpty(logo))
+
+                        @if (_user.role_id != ECLevelConstants.level_trainer)
+                        {
+                            <div class="userNavigation__info">
+                                @*
+                                    <div class="userNavigation__name">@(um._user != null ? um._user.first_nm : "")</div>
+                                    <div class="userNavigation__surname">@(um._user != null ? um._user.last_nm : "")</div>
+                                *@
+                                @if (_user != null)
                                 {
-                                      <img src="@Url.Content(cm.getLogoCompany(_user.company_id))" style="max-height: 44px;" alt="CompanyLogo" />
+                                    var logo = cm.getLogoCompany(_user.company_id);
+                                    if (!String.IsNullOrEmpty(logo))
+                                    {
+                                        <img src="@Url.Content(cm.getLogoCompany(_user.company_id))" style="max-height: 44px;" alt="CompanyLogo" />
+                                    }
                                 }
-                              }
-                          </div>
+                            </div>
                         }
                         <div class="userNavigation__logo">
                             @if ((um._user != null) && (um._user.photo_path.Trim() != ""))
@@ -249,20 +249,20 @@
                                     Posters
                                 </a>
                             </li>
-                             <li class="dropDown-navigation__li active">
-                                  <a href="/Trainer/Calendar" class="dropDown-navigation__a">
+                            <li class="dropDown-navigation__li active">
+                                <a href="/Trainer/Calendar" class="dropDown-navigation__a">
                                     Book Training
-                                  </a>
-                                </li>
-                                if (cm.AllPayments().Count > 0)
-                                {
-                                  <li class="dropDown-navigation__li active">
+                                </a>
+                            </li>
+                            if (cm.AllPayments().Count > 0)
+                            {
+                                <li class="dropDown-navigation__li active">
                                     <a href="/Payment/History" class="dropDown-navigation__a">
-                                      Subscription
+                                        Subscription
                                     </a>
-                                  </li>
-                                }
-                          
+                                </li>
+                            }
+
                         }
                         <li class="dropDown-navigation__li active">
                             <a href="/settings/password/" class="dropDown-navigation__a">
@@ -282,7 +282,7 @@
         </div>
     </header>
 
-    <div class="menuCasesBlock" style="margin-top: 35px; margin-bottom: 35px;">
+    <div class="menuCasesBlock" style="margin-top: 35px; margin-bottom: 35px;" >
         <div class="headerBlockTextLeft">
             @{
                 string hrefURL = Request.Url.AbsoluteUri.ToLower();
@@ -585,17 +585,21 @@
                     <div class="headerBlockTextRight">
                         <span class="text">@_temp</span>
                     </div>
-                    <div class="boxDDlistPosition">
-                        <div class="boxDDlist textColot">
-                            All CHURCHES 
-                            <img src="~/Content/Icons/arrow-listDark.png" />
-                            <ul>
-                                <li>text1</li>
-                                <li>text2</li>
-                                <li>text3</li>
-                            </ul>
+                    if (ViewBag.showDropDownList == true)
+                    {
+                        <div class="boxDDlistPosition">
+                            <div class="boxDDlist textColot">
+                                All CHURCHES
+                                <img src="~/Content/Icons/arrow-listDark.png" />
+                                <ul style="display: none">
+                                    <li>text1</li>
+                                    <li>text2</li>
+                                    <li>text3</li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
+                    }
+
                 }
             }
             @if ((hrefURL.Contains("/case/")) && (_report_id != 0))
@@ -631,6 +635,7 @@
         </div>
 
     </div>
+
     @RenderBody()
     @Html.Partial("~/Views/Shared/HelpPartial.cshtml", new ViewDataDictionary { { "is_reporter", false } })
     <script src="~/Scripts/View/Settings.js"></script>
@@ -695,6 +700,10 @@
             $("#escalate_btn").val(9);
             $("#_overlay_title").text("@Html.Raw(GlobalRes.CloseCaseUp)");
             $("#textbox_title").text("@Html.Raw(same_mediator_warning)");
+        });
+
+        $(".boxDDlist.textColot").on('click', function () {
+            $(".boxDDlistPosition ul").toggle();
         });
     </script>
 </body>

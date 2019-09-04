@@ -4030,11 +4030,6 @@ body .menuUl .positionText {
     width: calc( 100% - 37px );
     float: left;
 }
-
-.menuCasesBlock {
-    overflow: hidden;
-}
-
 .daterange.menuItem .date-picker-wrapper {
     top: 45px !important;
     left: -160px !important;

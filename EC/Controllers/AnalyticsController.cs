@@ -39,9 +39,9 @@ namespace EC.Controllers
       ViewBag.companyName = db.company.Where(company_name => company_name.id == user.company_id).Select(company_name => company_name.company_nm).FirstOrDefault();
       string _today = DateTimeHelper.ConvertDateToLongMonthString(DateTime.Today);
       ViewBag._today = _today;
+            ViewBag.showDropDownList = true;
 
-
-      return View("Dashboard");
+            return View("Dashboard");
     }
 
         public ActionResult Tasks()

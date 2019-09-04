@@ -4180,6 +4180,8 @@ html body .selectStyled{
     text-transform: uppercase;
     padding: 5px;
     border-radius: 3px;
+    position:relative;
+    cursor: pointer;
 }
 
 .boxDDlistPosition {
@@ -4189,7 +4191,15 @@ html body .selectStyled{
 
 .boxDDlist ul {
     text-align: center;
+    position: absolute;
+    margin-left: -5px;
+    margin-top: 2px;
 }
+    .boxDDlist ul li {
+        width: 100px;
+        height: 20px;
+        background-color: #ececec;
+    }
 
     .boxDDlist ul li:hover {
         background-color: #929292;
