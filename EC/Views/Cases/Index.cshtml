@@ -94,14 +94,12 @@
                 <a href="#" class="caseesTab">
                 </a>
 
-              <div class="boxDDlistPosition">
+              <div class="boxDDlistPosition" ng-show="Companies.length > 0">
                 <div class="boxDDlist textColot" ng-value="filterValue">
                   All CHURCHES
                   <img src="~/Content/Icons/arrow-listDark.png" />
-                  <ul style="display: none">
-                    <li>text1</li>
-                    <li>text2</li>
-                    <li>text3</li>
+                  <ul style="display: none" >
+                      <li ng-click="ddListClickedCompany(company.id)" ng-repeat="company in Companies">{{company.company_nm}}</li>
                   </ul>
                 </div>
               </div>

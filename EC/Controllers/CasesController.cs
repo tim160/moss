@@ -33,7 +33,6 @@ namespace EC.Controllers
         pending_report_ids.Sort();
         all_pending_reports_ids.Add(pending_report_ids[0]);
       }
-      ViewBag.showDropDownList = true;
       ViewBag.pending_report_ids = all_pending_reports_ids;
 
 

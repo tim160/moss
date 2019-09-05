@@ -4186,7 +4186,6 @@ html body .selectStyled{
 
 .boxDDlistPosition {
     float: right;
-    margin-right: 30px;
 }
 
 .boxDDlist ul {
@@ -4194,6 +4193,7 @@ html body .selectStyled{
     position: absolute;
     margin-left: -5px;
     margin-top: 2px;
+    z-index: 100;
 }
     .boxDDlist ul li {
         width: 100px;

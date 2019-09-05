@@ -1,4 +1,4 @@
-(function () {
+﻿(function () {
     ROOT = $('base').attr('href');
 
     'use strict';
@@ -17,8 +17,8 @@
     angular.module('EC').config(['$locationProvider',
         function () {
         }])
-    .run(function () {
-    });
+        .run(function () {
+        });
 
     angular.module('EC').filter('getBy', function () {
         return function (arr, prop, val, valprop, array) {
@@ -185,7 +185,7 @@
                     scope.$apply(function () {
                         scope.expanded = false;
                     });
-            });
+                });
             scope.onSelectFunction = function (item) {
                 scope.expanded = false;
                 var getType = {};
@@ -224,14 +224,14 @@
         };
     });
 
-    angular.module('EC').directive('stringToNumber', function() {
+    angular.module('EC').directive('stringToNumber', function () {
         return {
             require: 'ngModel',
-            link: function(scope, element, attrs, ngModel) {
-                ngModel.$parsers.push(function(value) {
+            link: function (scope, element, attrs, ngModel) {
+                ngModel.$parsers.push(function (value) {
                     return '' + value;
                 });
-                ngModel.$formatters.push(function(value) {
+                ngModel.$formatters.push(function (value) {
                     return parseFloat(value);
                 });
             }
@@ -239,7 +239,25 @@
     });
 
 })();
+//(function () {
 
+//    'use strict';
+
+//    angular
+//        .module('EC')
+//        .controller('TestController',
+//        ['$scope', 'AnalyticsCACSService', TestController]);
+
+//    function TestController($scope, AnalyticsCACSService) {
+//        $scope.showlistBoolean = false;
+//        $scope.showList = function () {
+//            $scope.showlistBoolean = !$scope.showlistBoolean;
+//        }
+//    }
+//}());
+angular.module('EC')['_invokeQueue'].forEach(function (value) {
+    console.log(value[2][0])
+});
 
 (function () {
 
@@ -273,7 +291,7 @@
             var offsetWidthOld = document.querySelectorAll(".borderAnalit")[0].offsetWidth;
             $scope.cacsChart.chart.width = 700;
             var printHtml = "";
-            
+
             setTimeout(function () {
 
                 if (Array.isArray(elem)) {
@@ -303,10 +321,10 @@
                 $scope.refresh();
                 mywindow.document.close(); // necessary for IE >= 10
                 mywindow.focus(); // necessary for IE >= 10*/
-                
+
                 return true;
             }, 550);
-            
+
         };
 
         $scope.refresh();
@@ -335,7 +353,7 @@
                 },
                 useInteractiveGuideline: true,
                 dispatch: {
-                    renderEnd: function(){
+                    renderEnd: function () {
                         var wa = d3.select('.nv-legendWrap')[0][0].parentNode.getBBox().width;
                         var wl = d3.select('.nv-legendWrap')[0][0].getBBox().width;
                         var x = (wa - wl) / 2;
@@ -592,6 +610,7 @@
         $scope.mode = tab === 'new' ? 4 : $scope.mode;
         $scope.mode = tab === 'closed' ? 5 : $scope.mode;
 
+
         var titles = ['', 'Active Cases', 'Cases Awaiting Sign-off', 'Spam Cases', 'New Reports', 'Closed Cases'];
         $('title').html(titles[$scope.mode]);
 
@@ -644,13 +663,14 @@
                 });
                 $scope.mode = data.Mode;
                 $scope.counts = data.Counts;
+                $scope.Companies = data.Companies;
             });
         };
         $scope.refresh($scope.mode);
 
         $scope.openCase = function (id) {
             if ($scope.mode === 3 || $scope.mode === 4) {
-                window.location = '/NewReport/' +id;
+                window.location = '/NewReport/' + id;
             } else {
                 window.location = '/newCase/Index/' + id;
             }
@@ -659,12 +679,23 @@
         $scope.sort = function (column) {
             if (column === $scope.sortColumn) {
                 $scope.sortColumnDesc = !$scope.sortColumnDesc;
-        } else {
+            } else {
                 $scope.sortColumn = column;
                 $scope.sortColumnDesc = false;
-        }
-
+            }
             $scope.reports = orderByFilter($scope.reports, $scope.sortColumn, $scope.sortColumnDesc);
+
+        };
+        $scope.ddListClickedCompany = function (company_id) {
+            $scope.filterValue = company_id;
+        }
+        $scope.filterValue = null;
+        $scope.casesFilterFunction = (item) => {
+            if ($scope.filterValue != null) {
+                return item.company_id == $scope.filterValue;
+            } else {
+                return item;
+            }
         };
     }
 }());
@@ -800,7 +831,7 @@
             ['$scope', '$filter', 'orderByFilter', '$location', 'NewCaseCaseClosureReportService', NewCaseCaseClosureReportController]);
 
     function NewCaseCaseClosureReportController($scope, $filter, orderByFilter, $location, NewCaseCaseClosureReportService) {
-        $scope.model = { };
+        $scope.model = {};
         $scope.report_id = $filter('parseUrl')($location.$$absUrl, 'report_id');
 
         $scope.refresh = function (data) {
@@ -1327,7 +1358,7 @@
         $scope.setIsLifeThreating = function (isLifeThreating) {
             if (isLifeThreating) {
                 /*eslint max-len: [2, 200, 4]*/
-              if (confirm('Does this Case or Alleged Offender pose an ongoing threat to the safety or health of the students and employees on campus? A Campus Alert will be requested if you select "OK"')) {
+                if (confirm('Does this Case or Alleged Offender pose an ongoing threat to the safety or health of the students and employees on campus? A Campus Alert will be requested if you select "OK"')) {
                     NewCaseTopMenuService.setLifeThreating({ reportId: $scope.report_id, isLifeThreating: isLifeThreating }, function () {
                         $scope.refresh();
                     });
@@ -1380,7 +1411,7 @@
         $scope.model.CSV = 123;*/
 
         $scope.years = [];
-        for (var i = new Date().getFullYear() ; i <= 2030; i++) {
+        for (var i = new Date().getFullYear(); i <= 2030; i++) {
             $scope.years.push(i);
         }
 
@@ -1568,7 +1599,7 @@
                 transformRequest: angular.identity //also important
             }).then(function (data) {
                 $scope.refresh(data.data);
-            }).catch(function(){
+            }).catch(function () {
             });
         };
 
@@ -1708,7 +1739,7 @@
     angular
         .module('EC')
         .controller('PlatformManagerSettingsController',
-        ['$scope', 'validateSettingsUser', PlatformManagerSettingsController]);
+            ['$scope', 'validateSettingsUser', PlatformManagerSettingsController]);
     function PlatformManagerSettingsController($scope, validateSettingsUser) {
 
         $scope.val_first_nm = false;
@@ -1725,7 +1756,7 @@
             } else {
                 angular.element('#submitPlatformManager').click();
             }
-        } 
+        }
     }
 }());
 
@@ -1759,7 +1790,7 @@
     angular
         .module('EC')
         .controller('SettingsUserEditController',
-        ['$scope', '$filter', '$location', 'SettingsUserEditService', 'validateSettingsUser', SettingsUserEditController]);
+            ['$scope', '$filter', '$location', 'SettingsUserEditService', 'validateSettingsUser', SettingsUserEditController]);
 
     function SettingsUserEditController($scope, $filter, $location, SettingsUserEditService, validateSettingsUser) {
         $scope.first_nm = '';
@@ -1818,7 +1849,7 @@
                 && !$scope.val_email
                 //&& !$scope.val_departmentId
                 //&& !$scope.val_locationId
-                ) {
+            ) {
 
                 var model = {
                     id: $scope.id,
@@ -1925,7 +1956,7 @@
                         });
                     }
                 },
-                viewRender: function(view) {
+                viewRender: function (view) {
                     $scope.period = {
                         start: view.start.toDate(),
                         end: view.end.toDate(),
