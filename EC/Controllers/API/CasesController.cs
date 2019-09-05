@@ -97,6 +97,9 @@ namespace EC.Controllers.API
             title = filter.ReportFlag == 3 ? LocalizationGetter.GetString("SpamcasesUp") : title;
             title = filter.ReportFlag == 4 ? LocalizationGetter.GetString("NewReportsUp") : title;
 
+            CompanyModel cm = new CompanyModel(um._user.company_id);
+            var additionalCompanies = cm.AdditionalCompanies();
+
             var m = new
             {
                 Mode = filter.ReportFlag,
@@ -113,6 +116,8 @@ namespace EC.Controllers.API
                 },
 
                 Title = title,
+                
+              Companies = additionalCompanies
               /*    counter4 = counter4,
                 counter5 = counter5,
                               counter = (DateTime.Now - _started).TotalMilliseconds,

@@ -725,5 +725,19 @@ namespace EC.Models
           }
           return all_payments.OrderByDescending(t => t.payment_date).ToList();
         }
+
+
+    //// GetAllUserReportIdsLists  -- use here 
+
+    /// <summary>
+    ///  List of dependent companies
+    /// </summary>
+    /// <returns></returns>
+    public List<company> AdditionalCompanies()
+    {
+      var additional_companies = db.company.Where(x => x.client_id == ID).ToList();
+      return additional_companies;
     }
+
+  }
 }

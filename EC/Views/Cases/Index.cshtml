@@ -93,6 +93,21 @@
                 </a>
                 <a href="#" class="caseesTab">
                 </a>
+
+              <div class="boxDDlistPosition">
+                <div class="boxDDlist textColot" ng-value="filterValue">
+                  All CHURCHES
+                  <img src="~/Content/Icons/arrow-listDark.png" />
+                  <ul style="display: none">
+                    <li>text1</li>
+                    <li>text2</li>
+                    <li>text3</li>
+                  </ul>
+                </div>
+              </div>
+
+
+
             </div>
         </div>
     </div>
@@ -175,7 +190,7 @@
                             }
                         </div><!-- /.dashboard-rowHeader -->
 
-                        <div class="dashboard-rowbody" ng-repeat="report in reports" ng-click="openCase(report.report_id)">
+                        <div class="dashboard-rowbody" ng-repeat="report in reports | filter:casesFilterFunction"  ng-click="openCase(report.report_id)">
                             <div class="rowbody__colorLine colorLine" style="background-color:#{{report.case_color_code}}"></div><!-- /.rowbody__colorLine yellow -->
                             <div class="dashboard-col__case dashboard-colbody clearfix">
                                 <div class="dashboard-col__case-text">

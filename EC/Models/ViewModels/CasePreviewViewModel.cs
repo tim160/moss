@@ -17,6 +17,7 @@ namespace EC.Models.ViewModel
         protected IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
 
         public int report_id { get; set; }
+        public int company_id { get; set; }
         public string case_secondary_types { get; set; }
         public string case_secondary_types_all { get; set; }
         public string current_status { get; set; }
@@ -97,6 +98,8 @@ namespace EC.Models.ViewModel
             CasePreviewViewModel vm_case = new CasePreviewViewModel();
 
             this.report_id = rm._report.id;
+            this.company_id = rm._report.company_id;
+
             this.case_dt = rm.IncidentDateString();
             this.reported_dt = rm.ReportedDateString();
             this.case_number = rm._report.display_name;

@@ -1127,17 +1127,23 @@ namespace EC.Models
             UsersReportIDsViewModel vm = new UsersReportIDsViewModel();
             List<int> all_reports_id = new List<int>();
             List<int> statuses_match_all_report_id = new List<int>();
+            CompanyModel cm = new CompanyModel(_user.company_id);
+            List<company> availableCompanies = cm.AdditionalCompanies();
+            List<int> availableCompaniesID = new List<int> { _user.company_id };
+
+            if (availableCompanies.Count > 0)
+                 availableCompaniesID.AddRange(availableCompanies.Select(t => t.id).ToList());
 
             if ((_user.role_id == 4) || (_user.role_id == 5))
             {
                 var involved_report_ids = (db.report_mediator_involved.Where(item => (item.mediator_id == _user.id)).Select(item => item.report_id));
 
-                vm.all_report_ids = (db.report.Where(item => ((item.company_id == _user.company_id) && (!involved_report_ids.Contains(item.id)))).Select(item => item.id)).ToList();
-                vm.all_active_report_ids = (db.report.Where(item => ((item.company_id == _user.company_id) && (!involved_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_investigation))).Select(item => item.id)).ToList();
-                vm.all_completed_report_ids = (db.report.Where(item => ((item.company_id == _user.company_id) && (!involved_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_completed))).Select(item => item.id)).ToList();
-                vm.all_spam_report_ids = (db.report.Where(item => ((item.company_id == _user.company_id) && (!involved_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_spam))).Select(item => item.id)).ToList();
-                vm.all_closed_report_ids = (db.report.Where(item => ((item.company_id == _user.company_id) && (!involved_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_closed))).Select(item => item.id)).ToList();
-                vm.all_pending_report_ids = (db.report.Where(item => ((item.company_id == _user.company_id) && (!involved_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_pending || item.status_id == ECGlobalConstants.investigation_status_review))).Select(item => item.id)).ToList();
+                vm.all_report_ids = (db.report.Where(item => ((availableCompaniesID.Contains(item.company_id)) && (!involved_report_ids.Contains(item.id)))).Select(item => item.id)).ToList();
+                vm.all_active_report_ids = (db.report.Where(item => ((availableCompaniesID.Contains(item.company_id)) && (!involved_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_investigation))).Select(item => item.id)).ToList();
+                vm.all_completed_report_ids = (db.report.Where(item => ((availableCompaniesID.Contains(item.company_id))  && (!involved_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_completed))).Select(item => item.id)).ToList();
+                vm.all_spam_report_ids = (db.report.Where(item => ((availableCompaniesID.Contains(item.company_id)) && (!involved_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_spam))).Select(item => item.id)).ToList();
+                vm.all_closed_report_ids = (db.report.Where(item => ((availableCompaniesID.Contains(item.company_id)) && (!involved_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_closed))).Select(item => item.id)).ToList();
+                vm.all_pending_report_ids = (db.report.Where(item => ((availableCompaniesID.Contains(item.company_id))  && (!involved_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_pending || item.status_id == ECGlobalConstants.investigation_status_review))).Select(item => item.id)).ToList();
             }
 
             // if user is regular mediator/ legal counsil - we show only reports where he is assigned and hide all others
@@ -1238,6 +1244,8 @@ namespace EC.Models
                     current_status = investigation_status,
 
                     report_id = rm._report.id,
+                    company_id = rm._report.company_id,
+
                     case_number = rm._report.display_name,
                     case_dt_s = rm._report.reported_dt.Ticks,
                     cc_is_life_threating = rm._report.cc_is_life_threating,
