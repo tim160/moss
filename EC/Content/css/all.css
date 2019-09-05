@@ -554,16 +554,22 @@ p {
     z-index: 1000;
     top: 36px;
     width: 300px;
-    left: -241px;
     padding: 10px;
     border: 1px solid #ccc;
     border: 1px solid rgba(0,0,0,.15);
     border-radius: 4px;
     -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
     box-shadow: 0 6px 12px rgba(0,0,0,.175);}
+#submitChangeLanguage {
+    display: none;
+}
+.t1 form {
+    display: inline;
+}
 
 #manuLanguages td {
-padding: 10px; }
+    padding: 10px;
+}
 
 #manuLanguages td:hover {
 background-color: #337ab7;

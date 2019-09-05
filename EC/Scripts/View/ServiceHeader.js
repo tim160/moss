@@ -5,9 +5,10 @@ $("#languageMenuItem").on('click', function (event) {
 });
 $('#manuLanguages td').on('click', function (event) {
     var selectedLanguageElement = event.currentTarget;
-    document.getElementById('fullNameLanguage').value = selectedLanguageElement.innerHTML;
+    document.getElementById('languageMenuItem').value = selectedLanguageElement.innerHTML;
     var valueSelected = selectedLanguageElement.getAttribute('value');
     console.log('language Selected =' + valueSelected);
+    $("#fullNameLanguage").val(selectedLanguageElement.innerHTML);
     $('#selectedLanguage').val(valueSelected);
     $("#submitChangeLanguage").click();
 });
