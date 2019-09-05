@@ -690,6 +690,9 @@ angular.module('EC')['_invokeQueue'].forEach(function (value) {
             $scope.filterValue = company_id;
         }
         $scope.filterValue = null;
+        $scope.returnListReports = function () {
+            $scope.filterValue = null;
+        }
         $scope.casesFilterFunction = (item) => {
             if ($scope.filterValue != null) {
                 return item.company_id == $scope.filterValue;
@@ -697,6 +700,9 @@ angular.module('EC')['_invokeQueue'].forEach(function (value) {
                 return item;
             }
         };
+
+        $scope.showDDlist = false;
+        $scope.displayCompanyName = "All CHURCHES";
     }
 }());
 
