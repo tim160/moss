@@ -100,7 +100,7 @@
                   
                   <img src="~/Content/Icons/arrow-listDark.png" />
                   <ul ng-show="showDDlist" >
-                      <li ng-click="ddListClickedCompany(company.id)" ng-repeat="company in Companies">{{company.company_nm}}</li>
+                      <li ng-click="ddListClickedCompany(company.id, company.company_nm)" ng-repeat="company in Companies">{{company.company_nm}}</li>
                   </ul>
                 </div>
               </div>

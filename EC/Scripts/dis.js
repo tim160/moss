@@ -686,8 +686,9 @@ angular.module('EC')['_invokeQueue'].forEach(function (value) {
             $scope.reports = orderByFilter($scope.reports, $scope.sortColumn, $scope.sortColumnDesc);
 
         };
-        $scope.ddListClickedCompany = function (company_id) {
+        $scope.ddListClickedCompany = function (company_id, company_name) {
             $scope.filterValue = company_id;
+            $scope.displayCompanyName = company_name;
         }
         $scope.filterValue = null;
         $scope.returnListReports = function () {
