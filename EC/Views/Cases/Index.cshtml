@@ -1,7 +1,7 @@
 ﻿@using EC.App_LocalResources;
 @using EC.Models.ViewModel;
 @using EC.Models;
-
+@using EC.Localization;
 @{
     bool? is_cc = ViewBag.is_cc;
     if (!is_cc.HasValue)
@@ -13,7 +13,7 @@
 
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
     ViewBag.Title = GlobalRes.ActiveCasesUp;
- 
+
 
     <script src="~/Scripts/View/menuWork.js"></script>
     <script src="~/Scripts/View/CaseCircleDraw.js"></script>
@@ -32,34 +32,43 @@
         td.case {
             width: 8%;
         }
+
         td.stage {
             width: 12%;
         }
+
         td.reportDate {
             width: 14%;
         }
+
         td.age {
             min-width: 80px;
             max-width: 80px;
             width: 80px;
         }
+
         td.incidentType {
             width: 18%;
         }
+
         td.location {
             width: 20%;
         }
+
         td.severity {
             width: 8%;
         }
+
         td.messages {
             width: 7%;
         }
+
         td.team {
             min-width: 170px;
             max-width: 170px;
             width: 170px;
         }
+
         td.tableCasesIndex {
             width: 4%;
         }
@@ -94,23 +103,24 @@
                 <a href="#" class="caseesTab">
                 </a>
 
-              <div class="boxDDlistPosition" ng-show="Companies.length > 0">
-                <div class="boxDDlist textColot" ng-click="showDDlist = !showDDlist">
-                    {{displayCompanyName}}
-                  
-                  <img src="~/Content/Icons/arrow-listDark.png" />
-                  <ul ng-show="showDDlist" >
-                      <li ng-click="ddListClickedCompany(company.id, company.company_nm)" ng-repeat="company in Companies">{{company.company_nm}}</li>
-                  </ul>
+                <div class="boxDDlistPosition" ng-show="Companies.length > 0">
+                    <div class="boxDDlist textColot" ng-click="showDDlist = !showDDlist">
+                        {{displayCompanyName}}
+
+                        <img src="~/Content/Icons/arrow-listDark.png" />
+                        <ul ng-show="showDDlist">
+                            <li ng-click="ddListClickedCompany(null, null)">@LocalizationGetter.GetString("AllCHURCHES", is_cc)</li>
+                            <li ng-click="ddListClickedCompany(company.id, company.company_nm)" ng-repeat="company in Companies">{{company.company_nm}}</li>
+                        </ul>
+                    </div>
                 </div>
-              </div>
 
 
 
             </div>
         </div>
     </div>
-   
+
     <div id="casesIndex">
         <div class="container mainNavigationTabs__tabContent-container ">
             <div id="mainTab-ActiveCases" class="mainNavigationTabs__tabContent active">
@@ -124,12 +134,12 @@
                                 </div>
                                 <div class="dashboard-colHeader__sortArrow sortArrow" ng-class="sortClass('case_number')"></div>
                             </div><!-- /.dashboard-col__Case dashboard-colHeader -->
-						    <div class="dashboard-col__severity dashboard-colHeader clearfix" ng-click="sort('severity_id')">
-							    <div class="dashboard-colHeader__text">
-								    Severity
-							    </div>
-							    <div class="dashboard-colHeader__sortArrow sortArrow" ng-class="sortClass('severity_id')"></div>
-						    </div><!-- /.dashboard-col__severity dashboard-colHeader -->
+                            <div class="dashboard-col__severity dashboard-colHeader clearfix" ng-click="sort('severity_id')">
+                                <div class="dashboard-colHeader__text">
+                                    Severity
+                                </div>
+                                <div class="dashboard-colHeader__sortArrow sortArrow" ng-class="sortClass('severity_id')"></div>
+                            </div><!-- /.dashboard-col__severity dashboard-colHeader -->
                             <div class="dashboard-col__stage dashboard-colHeader clearfix" ng-click="sort('last_update_dt')">
                                 <div class="dashboard-colHeader__text">
                                     Stage
@@ -189,18 +199,18 @@
                             }
                         </div><!-- /.dashboard-rowHeader -->
 
-                        <div class="dashboard-rowbody" ng-repeat="report in reports | filter:casesFilterFunction"  ng-click="openCase(report.report_id)">
+                        <div class="dashboard-rowbody" ng-repeat="report in reports | filter:casesFilterFunction" ng-click="openCase(report.report_id)">
                             <div class="rowbody__colorLine colorLine" style="background-color:#{{report.case_color_code}}"></div><!-- /.rowbody__colorLine yellow -->
                             <div class="dashboard-col__case dashboard-colbody clearfix">
                                 <div class="dashboard-col__case-text">
                                     {{report.case_number}}
                                 </div><!-- /.dashboard-col__case-text -->
                             </div><!-- /.dashboard-col__case dashboard-colbody clearfix -->
-						    <div class="dashboard-col__severity dashboard-colbody clearfix">
-							    <div class="dashboard-col__severity-text" ng-class="severityClass(report)">
-								    {{report.severity_s}}
-							    </div><!-- /.dashboard-col__case-text -->
-						    </div><!-- /.dashboard-col__severity dashboard-colbody clearfix -->
+                            <div class="dashboard-col__severity dashboard-colbody clearfix">
+                                <div class="dashboard-col__severity-text" ng-class="severityClass(report)">
+                                    {{report.severity_s}}
+                                </div><!-- /.dashboard-col__case-text -->
+                            </div><!-- /.dashboard-col__severity dashboard-colbody clearfix -->
 
 
                             <div class="dashboard-col__stage dashboard-colbody clearfix">
@@ -208,8 +218,8 @@
                                     {{report.current_status}}
                                 </div><!-- /.dashboard-col__stage-type -->
                                 <div class="dashboard-col__stage-date {{(report.days_left > 0) ? 'dashboard-col__stage-date_green' : 'dashboard-col__stage-date_red'}}" style="font-size: 10px;">
-                                   {{report.under_status_message}} 
-                                 </div>
+                                    {{report.under_status_message}}
+                                </div>
                             </div>
 
 

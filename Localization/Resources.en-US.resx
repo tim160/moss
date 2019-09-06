@@ -3006,4 +3006,7 @@ Do not want to involve</value>
   <data name="UnusualSuspiciousActivities" xml:space="preserve">
     <value>Unusual Suspicious Activities</value>
   </data>
+  <data name="AllCHURCHES" xml:space="preserve">
+    <value>All CHURCHES</value>
+  </data>
 </root>
