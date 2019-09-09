@@ -103,20 +103,18 @@
                 <a href="#" class="caseesTab">
                 </a>
 
-                <div class="boxDDlistPosition" ng-show="Companies.length > 0">
-                    <div class="boxDDlist textColot" ng-click="showDDlist = !showDDlist">
-                        {{displayCompanyName}}
+            </div>
 
-                        <img src="~/Content/Icons/arrow-listDark.png" />
-                        <ul ng-show="showDDlist">
-                            <li ng-click="ddListClickedCompany(null, null)">@LocalizationGetter.GetString("AllCHURCHES", is_cc)</li>
-                            <li ng-click="ddListClickedCompany(company.id, company.company_nm)" ng-repeat="company in Companies">{{company.company_nm}}</li>
-                        </ul>
-                    </div>
+            <div class="boxDDlistPosition" ng-show="Companies.length > 0">
+                <div class="boxDDlist textColot" ng-click="showDDlist = !showDDlist">
+                    {{displayCompanyName}}
+
+                    <img src="~/Content/Icons/arrow-listDark.png" />
+                    <ul ng-show="showDDlist">
+                        <li ng-click="ddListClickedCompany(null, null)">@LocalizationGetter.GetString("AllCHURCHES", is_cc)</li>
+                        <li ng-click="ddListClickedCompany(company.id, company.company_nm)" ng-repeat="company in Companies">{{company.company_nm}}</li>
+                    </ul>
                 </div>
-
-
-
             </div>
         </div>
     </div>
