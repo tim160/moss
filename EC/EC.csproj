@@ -1223,6 +1223,7 @@
     <Content Include="Scripts\updateAjax.js" />
     <Content Include="Scripts\View\blockActivityRight.js" />
     <Content Include="Scripts\View\CaseCircleDraw.js" />
+    <Content Include="Scripts\View\CaseSubmitted.js" />
     <Content Include="Scripts\View\customSelectModalIndexCase.js" />
     <Content Include="Scripts\View\LoginHereCompany.js" />
     <Content Include="Scripts\View\menuWork.js" />
@@ -1233,6 +1234,7 @@
     <Content Include="Scripts\View\newQuote.js" />
     <Content Include="Scripts\View\report.js" />
     <Content Include="Scripts\View\reportSummary.js" />
+    <Content Include="Scripts\View\ServiceHeader.js" />
     <Content Include="Scripts\View\ServiceReport.js" />
     <Content Include="Scripts\View\Settings.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />
@@ -1370,6 +1372,8 @@
     <Content Include="Views\Analytics\Dashboard.cshtml" />
     <Content Include="Views\Shared\_ReportPendingNotification.cshtml" />
     <Content Include="Views\New\Registration.cshtml" />
+    <Content Include="Views\Service\Header.cshtml" />
+    <Content Include="Views\Service\Footer.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1452,6 +1456,13 @@
     <Compile Include="Models\App\Case\CaseMessagesModel.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\CountryModel.cs" />
+    <Compile Include="Models\Culture\CompanyLocationCulture.cs" />
+    <Compile Include="Models\Culture\DepartmentCulture.cs" />
+    <Compile Include="Models\Culture\InjuryDamageCulture.cs" />
+    <Compile Include="Models\Culture\ManagamentKnowCulture.cs" />
+    <Compile Include="Models\Culture\ReportedOutsideCulture.cs" />
+    <Compile Include="Models\Culture\RoleInReportCulture.cs" />
+    <Compile Include="Models\Culture\SecondaryMandatoryCulture.cs" />
     <Compile Include="Models\Database\action.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
@@ -1803,11 +1814,20 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Utils\FileUtils.cs" />
     <Compile Include="Models\ViewModels\AllPaymentTypesViewModel.cs" />
+    <Compile Include="Models\ViewModels\AnonimityCultrure.cs" />
     <Compile Include="Models\ViewModels\CaseInvestigationStatusViewModel.cs" />
     <Compile Include="Models\ViewModels\CaseMessagesViewModel.cs" />
     <Compile Include="Models\ViewModels\CasePreviewViewModel.cs" />
+    <Compile Include="Models\ViewModels\CompanyLocationViewModel.cs" />
+    <Compile Include="Models\ViewModels\DepartmentsViewModel.cs" />
     <Compile Include="Models\ViewModels\HeaderPos.cs" />
+    <Compile Include="Models\ViewModels\InjuryDamageViewModel.cs" />
+    <Compile Include="Models\ViewModels\ManagamentViewModel.cs" />
     <Compile Include="Models\ViewModels\QuickUserViewModel.cs" />
+    <Compile Include="Models\ViewModels\RelationshipCulture.cs" />
+    <Compile Include="Models\ViewModels\ReportedOutsideViewModel.cs" />
+    <Compile Include="Models\ViewModels\RoleInReportViewModel.cs" />
+    <Compile Include="Models\ViewModels\SecondaryMandatoryViewModel.cs" />
     <Compile Include="Models\ViewModels\UsersReportIDsViewModel.cs" />
     <Compile Include="Models\ViewModels\UsersUnreadReportsNumberViewModel.cs" />
     <Compile Include="Models\ViewModels\UserViewModel.cs" />

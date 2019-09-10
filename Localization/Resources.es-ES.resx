@@ -3014,4 +3014,7 @@
   <data name="UnusualSuspiciousActivities" xml:space="preserve">
     <value>Actividades Sospechosas Inusuales</value>
   </data>
+  <data name="AllSchools" xml:space="preserve">
+    <value>All Schools</value>
+  </data>
 </root>

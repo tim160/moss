@@ -113,14 +113,14 @@
                             <span class="dropMenuText">{{displayCompanyName}}</span>
                             <img src="~/Content/img/arrowSelect.png" />
                         </div>
-                        <ul class="menuUl" ng-show="Companies.length > 0">
+                        <ul class="menuUl" ng-show="Companies.length > 1">
                             <li>
                                 <div class="liItem" ng-class="{'selected': company._selected}" value=null nameDropdown="ReportsDepartmentIDStringss">
                                     <div class="checked">
                                         <img class="" src="~/Content/img/check.png" />
                                     </div>
                                     <span class="positionText liText" ng-click="ddListClickedCompany(null, null)">
-                                        @LocalizationGetter.GetString("AllCHURCHES", is_cc)`
+                                        @LocalizationGetter.GetString("AllSchools", is_cc)`
                                     </span>
                                 </div>
                             </li>

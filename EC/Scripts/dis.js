@@ -688,7 +688,7 @@ angular.module('EC')['_invokeQueue'].forEach(function (value) {
         };
         $scope.ddListClickedCompany = function (company_id, company_name) {
             if (company_name == undefined) {
-                $scope.displayCompanyName = 'All CHURCHES';
+                $scope.displayCompanyName = 'All SCHOOLS';
                 $scope.filterValue = null;
             } else {
                 $scope.filterValue = company_id;
@@ -708,7 +708,7 @@ angular.module('EC')['_invokeQueue'].forEach(function (value) {
         };
 
         $scope.showDDlist = false;
-        $scope.displayCompanyName = "All CHURCHES";
+        $scope.displayCompanyName = "All SCHOOLS";
     }
 }());
 

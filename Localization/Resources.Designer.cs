@@ -556,6 +556,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All Schools.
+        /// </summary>
+        internal static string AllSchools {
+            get {
+                return ResourceManager.GetString("AllSchools", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Case Administrator already invited.
         /// </summary>
         internal static string AlreadyInvited {

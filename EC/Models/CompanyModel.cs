@@ -735,8 +735,13 @@ namespace EC.Models
     /// <returns></returns>
     public List<company> AdditionalCompanies()
     {
+      List<company> initial = db.company.Where(x => x.id == ID).ToList();
       var additional_companies = db.company.Where(x => x.client_id == ID).ToList();
-      return additional_companies;
+      foreach (company cm in additional_companies)
+      {
+        initial.Add(cm);
+      }
+      return initial;
     }
 
   }

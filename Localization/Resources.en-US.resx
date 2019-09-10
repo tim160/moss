@@ -3009,4 +3009,7 @@ Do not want to involve</value>
   <data name="AllCHURCHES" xml:space="preserve">
     <value>All CHURCHES</value>
   </data>
+  <data name="AllSchools" xml:space="preserve">
+    <value>All Schools</value>
+  </data>
 </root>

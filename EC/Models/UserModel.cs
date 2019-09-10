@@ -1129,57 +1129,66 @@ namespace EC.Models
             List<int> statuses_match_all_report_id = new List<int>();
             CompanyModel cm = new CompanyModel(_user.company_id);
             List<company> availableCompanies = cm.AdditionalCompanies();
-            List<int> availableCompaniesID = new List<int> { _user.company_id };
 
-            if (availableCompanies.Count > 0)
-                 availableCompaniesID.AddRange(availableCompanies.Select(t => t.id).ToList());
+      if ((_user.role_id == 4) || (_user.role_id == 5))
+      {
+        var involved_report_ids = (db.report_mediator_involved.Where(item => (item.mediator_id == _user.id)).Select(item => item.report_id));
 
-            if ((_user.role_id == 4) || (_user.role_id == 5))
-            {
-                var involved_report_ids = (db.report_mediator_involved.Where(item => (item.mediator_id == _user.id)).Select(item => item.report_id));
+        if (availableCompanies.Count > 1)
+        {
+          List<int> availableCompaniesID = availableCompanies.Select(t => t.id).ToList();
 
-                vm.all_report_ids = (db.report.Where(item => ((availableCompaniesID.Contains(item.company_id)) && (!involved_report_ids.Contains(item.id)))).Select(item => item.id)).ToList();
-                vm.all_active_report_ids = (db.report.Where(item => ((availableCompaniesID.Contains(item.company_id)) && (!involved_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_investigation))).Select(item => item.id)).ToList();
-                vm.all_completed_report_ids = (db.report.Where(item => ((availableCompaniesID.Contains(item.company_id))  && (!involved_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_completed))).Select(item => item.id)).ToList();
-                vm.all_spam_report_ids = (db.report.Where(item => ((availableCompaniesID.Contains(item.company_id)) && (!involved_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_spam))).Select(item => item.id)).ToList();
-                vm.all_closed_report_ids = (db.report.Where(item => ((availableCompaniesID.Contains(item.company_id)) && (!involved_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_closed))).Select(item => item.id)).ToList();
-                vm.all_pending_report_ids = (db.report.Where(item => ((availableCompaniesID.Contains(item.company_id))  && (!involved_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_pending || item.status_id == ECGlobalConstants.investigation_status_review))).Select(item => item.id)).ToList();
-            }
+          vm.all_report_ids = (db.report.Where(item => ((availableCompaniesID.Contains(item.company_id)) && (!involved_report_ids.Contains(item.id)))).Select(item => item.id)).ToList();
+          vm.all_active_report_ids = (db.report.Where(item => ((availableCompaniesID.Contains(item.company_id)) && (!involved_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_investigation))).Select(item => item.id)).ToList();
+          vm.all_completed_report_ids = (db.report.Where(item => ((availableCompaniesID.Contains(item.company_id)) && (!involved_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_completed))).Select(item => item.id)).ToList();
+          vm.all_spam_report_ids = (db.report.Where(item => ((availableCompaniesID.Contains(item.company_id)) && (!involved_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_spam))).Select(item => item.id)).ToList();
+          vm.all_closed_report_ids = (db.report.Where(item => ((availableCompaniesID.Contains(item.company_id)) && (!involved_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_closed))).Select(item => item.id)).ToList();
+          vm.all_pending_report_ids = (db.report.Where(item => ((availableCompaniesID.Contains(item.company_id)) && (!involved_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_pending || item.status_id == ECGlobalConstants.investigation_status_review))).Select(item => item.id)).ToList();
+        }
+        else
+        {
+          vm.all_report_ids = (db.report.Where(item => ((item.company_id == _user.company_id) && (!involved_report_ids.Contains(item.id)))).Select(item => item.id)).ToList();
+          vm.all_active_report_ids = (db.report.Where(item => ((item.company_id == _user.company_id) && (!involved_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_investigation))).Select(item => item.id)).ToList();
+          vm.all_completed_report_ids = (db.report.Where(item => ((item.company_id == _user.company_id) && (!involved_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_completed))).Select(item => item.id)).ToList();
+          vm.all_spam_report_ids = (db.report.Where(item => ((item.company_id == _user.company_id) && (!involved_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_spam))).Select(item => item.id)).ToList();
+          vm.all_closed_report_ids = (db.report.Where(item => ((item.company_id == _user.company_id) && (!involved_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_closed))).Select(item => item.id)).ToList();
+          vm.all_pending_report_ids = (db.report.Where(item => ((item.company_id == _user.company_id) && (!involved_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_pending || item.status_id == ECGlobalConstants.investigation_status_review))).Select(item => item.id)).ToList();
 
-            // if user is regular mediator/ legal counsil - we show only reports where he is assigned and hide all others
+        }
+      }
+        // if user is regular mediator/ legal counsil - we show only reports where he is assigned and hide all others
 
-            if ((_user.role_id == 6) || (_user.role_id == 7))
-            {
-                var assigned_report_ids = (db.report_mediator_assigned.Where(item => ((item.mediator_id == _user.id) && (item.status_id == 2))).Select(item => item.report_id));
+        if ((_user.role_id == 6) || (_user.role_id == 7))
+        {
+          var assigned_report_ids = (db.report_mediator_assigned.Where(item => ((item.mediator_id == _user.id) && (item.status_id == 2))).Select(item => item.report_id));
 
-                vm.all_report_ids = (db.report.Where(item => ((assigned_report_ids.Contains(item.id)))).Select(item => item.id)).ToList();
-                vm.all_active_report_ids = (db.report.Where(item => ((assigned_report_ids.Contains(item.id) && (item.status_id == ECGlobalConstants.investigation_status_investigation)  ))).Select(item => item.id)).ToList();
-                vm.all_completed_report_ids = (db.report.Where(item => ((assigned_report_ids.Contains(item.id) && (item.status_id == ECGlobalConstants.investigation_status_completed)))).Select(item => item.id)).ToList();
-                vm.all_spam_report_ids = (db.report.Where(item => ((assigned_report_ids.Contains(item.id) && (item.status_id == ECGlobalConstants.investigation_status_spam)))).Select(item => item.id)).ToList();
-                vm.all_closed_report_ids = (db.report.Where(item => ((assigned_report_ids.Contains(item.id) && (item.status_id == ECGlobalConstants.investigation_status_closed)))).Select(item => item.id)).ToList();
-                vm.all_pending_report_ids = (db.report.Where(item => ((assigned_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_pending || item.status_id == ECGlobalConstants.investigation_status_review))).Select(item => item.id)).ToList();
-            }
+          vm.all_report_ids = (db.report.Where(item => ((assigned_report_ids.Contains(item.id)))).Select(item => item.id)).ToList();
+          vm.all_active_report_ids = (db.report.Where(item => ((assigned_report_ids.Contains(item.id) && (item.status_id == ECGlobalConstants.investigation_status_investigation)))).Select(item => item.id)).ToList();
+          vm.all_completed_report_ids = (db.report.Where(item => ((assigned_report_ids.Contains(item.id) && (item.status_id == ECGlobalConstants.investigation_status_completed)))).Select(item => item.id)).ToList();
+          vm.all_spam_report_ids = (db.report.Where(item => ((assigned_report_ids.Contains(item.id) && (item.status_id == ECGlobalConstants.investigation_status_spam)))).Select(item => item.id)).ToList();
+          vm.all_closed_report_ids = (db.report.Where(item => ((assigned_report_ids.Contains(item.id) && (item.status_id == ECGlobalConstants.investigation_status_closed)))).Select(item => item.id)).ToList();
+          vm.all_pending_report_ids = (db.report.Where(item => ((assigned_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_pending || item.status_id == ECGlobalConstants.investigation_status_review))).Select(item => item.id)).ToList();
+        }
 
+        
+   
+      /*   List<int> reports_with_history = (from m in refGroupInvestigationStatuses
 
+                                           where m.investigation_status_id > 0
 
+                                           select m.report_id).ToList();
 
-            /*   List<int> reports_with_history = (from m in refGroupInvestigationStatuses
-
-                                                 where m.investigation_status_id > 0
-
-                                                 select m.report_id).ToList();
-
-               IEnumerable<int> excluded = all_reports_id.Except(reports_with_history);
-
-
-
-               statuses_match_all_report_id.AddRange(excluded);
-
-               vm.all_pending_report_ids = all_reports_id.Intersect(statuses_match_all_report_id).OrderByDescending(t => t).ToList();
-               */
+         IEnumerable<int> excluded = all_reports_id.Except(reports_with_history);
 
 
-            return vm;
+
+         statuses_match_all_report_id.AddRange(excluded);
+
+         vm.all_pending_report_ids = all_reports_id.Intersect(statuses_match_all_report_id).OrderByDescending(t => t).ToList();
+         */
+
+
+      return vm;
 
         }
         public UsersUnreadReportsNumberViewModel GetUserUnreadCasesNumbers(UsersReportIDsViewModel vmReportIds)
