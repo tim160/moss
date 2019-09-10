@@ -114,6 +114,16 @@
                             <img src="~/Content/img/arrowSelect.png" />
                         </div>
                         <ul class="menuUl" ng-show="Companies.length > 0">
+                            <li>
+                                <div class="liItem" ng-class="{'selected': company._selected}" value=null nameDropdown="ReportsDepartmentIDStringss">
+                                    <div class="checked">
+                                        <img class="" src="~/Content/img/check.png" />
+                                    </div>
+                                    <span class="positionText liText" ng-click="ddListClickedCompany(null, null)">
+                                        @LocalizationGetter.GetString("AllCHURCHES", is_cc)`
+                                    </span>
+                                </div>
+                            </li>
                             <li ng-repeat="company in Companies">
                                 <div class="liItem" ng-class="{'selected': company._selected}" value="{{company.id}}" nameDropdown="ReportsDepartmentIDStringss">
                                     <div class="checked">
