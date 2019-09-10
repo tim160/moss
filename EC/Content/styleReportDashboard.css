@@ -2705,9 +2705,9 @@ p.helloUser {
     .pageCases #menu .caseesTab:first-child{
         width: 180px;
     }
-    .pageCases #menu .caseesTab:last-child{
+    /*.pageCases #menu .caseesTab:last-child{
         width: 110px;
-    }
+    }*/
 }
 @media (min-width: 970px) {
     #casesHeared,

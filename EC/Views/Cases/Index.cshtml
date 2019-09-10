@@ -100,22 +100,45 @@
                     New Reports
                     <span ng-show="counts.Pending > 0">{{counts.Pending}}</span>
                 </a>
-                <a href="#" class="caseesTab">
-                </a>
+                @*<a href="#" class="caseesTab">
+            </a>*@
+
+
 
             </div>
-
-            <div class="boxDDlistPosition" ng-show="Companies.length > 0">
-                <div class="boxDDlist textColot" ng-click="showDDlist = !showDDlist">
-                    {{displayCompanyName}}
-
-                    <img src="~/Content/Icons/arrow-listDark.png" />
-                    <ul ng-show="showDDlist">
-                        <li ng-click="ddListClickedCompany(null, null)">@LocalizationGetter.GetString("AllCHURCHES", is_cc)</li>
-                        <li ng-click="ddListClickedCompany(company.id, company.company_nm)" ng-repeat="company in Companies">{{company.company_nm}}</li>
-                    </ul>
+            <div id="ddListForCases">
+                <div class="parentClass">
+                    <div class="menuItem">
+                        <div class="positionText">
+                            <span class="dropMenuText">{{displayCompanyName}}</span>
+                            <img src="~/Content/img/arrowSelect.png" />
+                        </div>
+                        <ul class="menuUl" ng-show="Companies.length > 0">
+                            <li ng-repeat="company in Companies">
+                                <div class="liItem" ng-class="{'selected': company._selected}" value="{{company.id}}" nameDropdown="ReportsDepartmentIDStringss">
+                                    <div class="checked">
+                                        <img class="" src="~/Content/img/check.png" />
+                                    </div>
+                                    <span class="positionText liText" ng-click="ddListClickedCompany(company.id, company.company_nm)">
+                                        {{company.company_nm}}
+                                    </span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
+            @*<div class="boxDDlistPosition" ng-show="Companies.length > 0">
+            <div class="boxDDlist textColot" ng-click="showDDlist = !showDDlist">
+                {{displayCompanyName}}
+
+                <img src="~/Content/Icons/arrow-listDark.png" />
+                <ul ng-show="showDDlist">
+                    <li ng-click="ddListClickedCompany(null, null)">@LocalizationGetter.GetString("AllCHURCHES", is_cc)</li>
+                    <li ng-click="ddListClickedCompany(company.id, company.company_nm)" ng-repeat="company in Companies">{{company.company_nm}}</li>
+                </ul>
+            </div>
+        </div>*@
         </div>
     </div>
 

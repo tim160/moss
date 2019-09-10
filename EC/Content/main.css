@@ -252,9 +252,16 @@ ul {
 }
 
 #menu {
-    float: left;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+    align-content: stretch;
     padding: 25px 25px 0px 40px;
-    width: 80%;
+    /*float: left;
+    padding: 25px 25px 0px 40px;
+    width: 80%;*/
 }
 
 .positionActivityIcon {
@@ -4203,4 +4210,115 @@ html body .selectStyled{
 
     .boxDDlist ul li:hover {
         background-color: #929292;
+    }
+
+#ddListForCases .parentClass {
+    position: relative;
+    display: inline-block;
+}
+
+#ddListForCases {
+    width: 20%;
+    display: inline-block;
+    width: initial;
+    height: initial;
+    vertical-align: middle;
+    margin: 0;
+    padding: 0 40px;
+    position: relative;
+    text-align: center;
+    font-size: 20px;
+    font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+    cursor: pointer;
+    color: #909495;
+}
+
+    #ddListForCases .liItem:active {
+        background-color: #05b5a2;
+        color: #ffffff;
+    }
+
+    #ddListForCases .liItem:hover {
+        background-color: #ebf1f1;
+    }
+
+    #ddListForCases .positionText {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: left;
+    }
+
+    #ddListForCases .dropMenuText.ng-binding {
+        font-weight: normal;
+        font-size: 16px;
+        font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
+        display: inline-block;
+        padding: 17px 0;
+        color: #3c3e3f;
+    }
+
+    #ddListForCases .blockAnalitics .menuItem .menuUl {
+        max-height: 380px;
+        overflow-y: scroll;
+    }
+
+    #ddListForCases .menuUl {
+        display: none;
+        list-style-type: none;
+        font-size: 14px;
+        color: #727c7e;
+        border: 1px solid #e0e5e6;
+        border-top: none;
+        position: absolute;
+        left: 0;
+        top: 49px;
+        z-index: 1000;
+        width: 100%;
+    }
+
+    #ddListForCases ul {
+        list-style-type: none;
+        margin: 0px;
+        padding: 0px;
+    }
+
+    #ddListForCases .blockAnalitics .menuItem:hover .menuUl {
+        width: 100%;
+    }
+
+    #ddListForCases .menuItem:hover .menuUl {
+        display: block;
+    }
+
+    #ddListForCases .menuItem:hover {
+        background-color: #dce2e3;
+        color: #3c3e3f;
+        font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+    }
+
+    #ddListForCases .blockAnalitics .menuItem .menuUl {
+        max-height: 380px;
+        overflow-y: scroll;
+    }
+
+    #ddListForCases .liItem {
+        display: block;
+        text-align: initial;
+        height: initial;
+        overflow: hidden;
+        width: 100%;
+        background-color: #ffffff;
+    }
+
+    #ddListForCases .menuUl .checked {
+        padding: 0;
+        line-height: normal;
+        height: initial;
+        overflow: hidden;
+        float: left;
+        width: 12px;
+        min-height: 1px;
+        margin-left: 10px;
+        margin-right: 10px;
+        line-height: 46px;
     }

@@ -18,7 +18,7 @@
 <div id="casesHeared">
     <div id="menu">
         <h2 class="mainTitle">@GlobalRes.Menu:</h2>
-        <div>
+        <div style="width:80%">
             <a href="@Url.Action("Index")" class="caseesTab @(action == "index" || action == "dashboard" ? "active" : "")">@GlobalRes.Cases</a>
             <a href="@Url.Action("RootCauseAnalysis")" class="caseesTab @(action == "rootcauseanalysis" ? "active" : "")">Root Cause Analysis</a>
             @if (is_cc.Value)
