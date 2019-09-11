@@ -4213,11 +4213,15 @@ html body .selectStyled{
     }
 
 #ddListForCases .parentClass {
-    position: relative;
+    position: static;
     display: inline-block;
-    width: auto;
+    width: 250px;
+    background-color: #dce2e3;
 }
-
+#ddListForCases .menuUl .positionText {
+    width: 250px;
+    text-align: center;
+}
 #ddListForCases {
     width: 20%;
     display: inline-block;
@@ -4261,6 +4265,9 @@ html body .selectStyled{
         max-height: 380px;
         overflow-y: scroll;
     }
+    #ddListForCases .menuItem {
+        padding: 0px;
+    }
 
     #ddListForCases .menuUl {
         /*display: none;*/
@@ -4270,8 +4277,8 @@ html body .selectStyled{
         border: 1px solid #e0e5e6;
         border-top: none;
         position: absolute;
-        left: 0;
-        top: 49px;
+        right: -2px;
+        top: 56px;
         z-index: 1000;
         width: 100%;
     }
@@ -4294,6 +4301,7 @@ html body .selectStyled{
         background-color: #dce2e3;
         color: #3c3e3f;
         font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+        position: static;
     }
 
     #ddListForCases .blockAnalitics .menuItem .menuUl {
@@ -4306,10 +4314,11 @@ html body .selectStyled{
         text-align: initial;
         height: initial;
         overflow: hidden;
-        width: 100%;
+        width: 250px;
+        text-align: center;
         background-color: #ffffff;
+        position: relative;
     }
-
     #ddListForCases .menuUl .checked {
         padding: 0;
         line-height: normal;
@@ -4321,4 +4330,6 @@ html body .selectStyled{
         margin-left: 10px;
         margin-right: 10px;
         line-height: 46px;
+        text-align: center;
+        position: absolute;
     }
