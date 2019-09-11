@@ -4215,6 +4215,7 @@ html body .selectStyled{
 #ddListForCases .parentClass {
     position: relative;
     display: inline-block;
+    width: auto;
 }
 
 #ddListForCases {
@@ -4262,7 +4263,7 @@ html body .selectStyled{
     }
 
     #ddListForCases .menuUl {
-        display: none;
+        /*display: none;*/
         list-style-type: none;
         font-size: 14px;
         color: #727c7e;
@@ -4285,11 +4286,11 @@ html body .selectStyled{
         width: 100%;
     }
 
-    #ddListForCases .menuItem:hover .menuUl {
+    /*#ddListForCases .menuItem:hover .menuUl {
         display: block;
-    }
+    }*/
 
-    #ddListForCases .menuItem:hover {
+    #ddListForCases .menuItem {
         background-color: #dce2e3;
         color: #3c3e3f;
         font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;

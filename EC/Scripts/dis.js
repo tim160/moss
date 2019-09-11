@@ -239,22 +239,6 @@
     });
 
 })();
-//(function () {
-
-//    'use strict';
-
-//    angular
-//        .module('EC')
-//        .controller('TestController',
-//        ['$scope', 'AnalyticsCACSService', TestController]);
-
-//    function TestController($scope, AnalyticsCACSService) {
-//        $scope.showlistBoolean = false;
-//        $scope.showList = function () {
-//            $scope.showlistBoolean = !$scope.showlistBoolean;
-//        }
-//    }
-//}());
 angular.module('EC')['_invokeQueue'].forEach(function (value) {
     console.log(value[2][0])
 });
@@ -652,7 +636,9 @@ angular.module('EC')['_invokeQueue'].forEach(function (value) {
             }
             return false;
         };
-
+        $scope.onEnd = function () {
+            alert("Hello World!!!");
+        }
         $scope.refresh = function (mode, preload) {
             CasesService.get({ ReportFlag: mode, Preload: preload }, function (data) {
                 $('.headerBlockTextRight > span').text(data.Title);
@@ -664,7 +650,13 @@ angular.module('EC')['_invokeQueue'].forEach(function (value) {
                 $scope.mode = data.Mode;
                 $scope.counts = data.Counts;
                 $scope.Companies = data.Companies;
-            });
+
+                var maxWidth = Math.max.apply(Math, $('.liItem').map(function () { return $(this).width(); }).get());
+                console.log(maxWidth);
+                if (maxWidth > 194) {
+                    $("#ddListForCases .parentClass").width(maxWidth);
+                }
+             });
         };
         $scope.refresh($scope.mode);
 
@@ -684,11 +676,12 @@ angular.module('EC')['_invokeQueue'].forEach(function (value) {
                 $scope.sortColumnDesc = false;
             }
             $scope.reports = orderByFilter($scope.reports, $scope.sortColumn, $scope.sortColumnDesc);
-
+            
         };
         $scope.ddListClickedCompany = function (company_id, company_name) {
+            //$scope.showDDMenu = false;
             if (company_name == undefined) {
-                $scope.displayCompanyName = 'All SCHOOLS';
+                $scope.displayCompanyName = document.querySelector("#ddListDefaultValue").value;
                 $scope.filterValue = null;
             } else {
                 $scope.filterValue = company_id;
@@ -707,11 +700,21 @@ angular.module('EC')['_invokeQueue'].forEach(function (value) {
             }
         };
 
-        $scope.showDDlist = false;
-        $scope.displayCompanyName = "All SCHOOLS";
+
+        $scope.showDDMenu = false;
+        $scope.displayCompanyName = document.querySelector("#ddListDefaultValue").value;
     }
 }());
-
+//angular.module('EC').directive("callbackOnEnd", function () {
+//    return {
+//        restrict: "A",
+//        link: function (scope, element, attrs) {
+//            if (scope.$last) {
+//                scope.$eval(attrs.callbackOnEnd);
+//            }
+//        }
+//    };
+//});
 (function () {
 
     'use strict';
