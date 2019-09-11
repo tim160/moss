@@ -117,7 +117,7 @@ namespace EC.Controllers.API
 
                 Title = title,
                 
-              Companies = additionalCompanies
+              Companies = additionalCompanies.Distinct()
               /*    counter4 = counter4,
                 counter5 = counter5,
                               counter = (DateTime.Now - _started).TotalMilliseconds,

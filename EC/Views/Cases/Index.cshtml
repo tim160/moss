@@ -106,14 +106,14 @@
 
 
             </div>
-            <div id="ddListForCases">
+            <div id="ddListForCases"  ng-show="Companies.length > 1">
                 <div class="parentClass">
                     <div class="menuItem">
                         <div class="positionText">
                             <span class="dropMenuText">{{displayCompanyName}}</span>
                             <img src="~/Content/img/arrowSelect.png" />
                         </div>
-                        <ul class="menuUl" ng-show="Companies.length > 1">
+                        <ul class="menuUl">
                             <li>
                                 <div class="liItem" ng-class="{'selected': company._selected}" value=null nameDropdown="ReportsDepartmentIDStringss">
                                     <div class="checked">

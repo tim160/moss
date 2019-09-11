@@ -1136,7 +1136,7 @@ namespace EC.Models
 
         if (availableCompanies.Count > 1)
         {
-          List<int> availableCompaniesID = availableCompanies.Select(t => t.id).ToList();
+          List<int> availableCompaniesID = availableCompanies.Select(t => t.id).ToList().Distinct().ToList();
 
           vm.all_report_ids = (db.report.Where(item => ((availableCompaniesID.Contains(item.company_id)) && (!involved_report_ids.Contains(item.id)))).Select(item => item.id)).ToList();
           vm.all_active_report_ids = (db.report.Where(item => ((availableCompaniesID.Contains(item.company_id)) && (!involved_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_investigation))).Select(item => item.id)).ToList();
