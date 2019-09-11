@@ -1661,7 +1661,7 @@ width: 95%;
     position: absolute;
 }
 .caseesTab.active::after {
-    bottom: -12px;
+    bottom: -31px;
 }
 
 .headerCaseWorkflow .contentSettings{
@@ -2702,9 +2702,9 @@ p.helloUser {
     .pageCases #activityIcon {
         /*margin-top: 28px;*/
     }
-    .pageCases #menu .caseesTab:first-child{
+    /*.pageCases #menu .caseesTab:first-child{
         width: 180px;
-    }
+    }*/
     /*.pageCases #menu .caseesTab:last-child{
         width: 110px;
     }*/

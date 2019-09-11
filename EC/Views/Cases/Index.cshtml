@@ -79,7 +79,7 @@
     <div id="casesHeared" class="pageCases">
         <div id="menu">
             <h2 class="mainTitle">@GlobalRes.Menu:</h2>
-            <div>
+            <div class="casesHeadMenu">
                 <a href="@Url.Content("~/Cases/Index?mode=active")" class="caseesTab" ng-class="{'active': mode == 1}" qng-click="refresh(1)">
                     @GlobalRes.Activecases
                     <span ng-show="counts.Active > 0">{{counts.Active}}</span>

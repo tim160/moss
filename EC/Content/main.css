@@ -333,14 +333,14 @@ ul {
 .caseesTab {
     color: rgb(215, 219, 219);
     display: inline-block;
-    margin-right: 20px;
+    /*margin-right: 20px;*/
     /*width: 170px;*/
-    position: relative;
+    /*position: relative;*/
     text-align: center;
     text-decoration: none;
     cursor: pointer;
-    padding-left: 3%;
-    padding-right: 0%;
+    /*padding-left: 3%;*/
+    /*padding-right: 0%;*/
 }
 
     .caseesTab:hover {
@@ -351,8 +351,17 @@ ul {
         color: #fff;
         cursor: default;
         font-family: 'OpenSans-Semibold', arial, verdana, sans-serif;
+        position: relative;
     }
-
+.casesHeadMenu {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    width: 80%;
+}
 #casesHeared #menu {
     padding-bottom: 0px;
 }
@@ -1661,7 +1670,6 @@ ul.infoCases .textRight {
     padding-left: 5px;
     padding-right: 6px;
     border-radius: 50%;
-    margin-left: 14px;
     font-size: 14px;
     height: 22px;
     width: 21px;
