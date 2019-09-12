@@ -5,6 +5,8 @@
 @using EC.Models.Database;
 @using System.Data;
 @using EC.App_LocalResources;
+@using EC.Localization;
+
 @{
 
     <link rel="stylesheet" href="~/Content/styleAnalitics.css" />
@@ -69,10 +71,43 @@
         <div id="mainTab-Cases" class="mainNavigationTabs__tabContent active">
 
             <div class="fluidTitle">
-                <div class="paddingTopForPrint30">
-                    <strong>@GlobalRes.Number_cases_stage:</strong> @_today
+              <div class="paddingTopForPrint30">
+                <strong>@GlobalRes.Number_cases_stage:</strong> @_today
+
+                <div id="ddListForCases" ng-show="MenuCases.Companies.length > 1">
+                  <div class="parentClass">
+                    <div class="menuItem">
+                      <div class="positionText">
+                        <span class="dropMenuText">{{displayCompanyName}}</span>
+                        <img src="~/Content/img/arrowSelect.png" />
+                      </div>
+                      <ul class="menuUl">
+                        <li>
+                          <div class="liItem" ng-class="{'selected': company._selected}" value=null nameDropdown="ReportsDepartmentIDStringss">
+                            <div class="checked">
+                              <img class="" src="~/Content/img/check.png" />
+                            </div>
+                            <span class="positionText liText" ng-click="ddListClickedCompany(null, null)">
+                              @LocalizationGetter.GetString("AllSchools", is_cc)`
+                            </span>
+                          </div>
+                        </li>
+                        <li ng-repeat="company in MenuCases.Companies">
+                          <div class="liItem" ng-class="{'selected': company._selected}" value="{{company.id}}" nameDropdown="ReportsDepartmentIDStringss">
+                            <div class="checked">
+                              <img class="" src="~/Content/img/check.png" />
+                            </div>
+                            <span class="positionText liText" ng-click="ddListClickedCompany(company.id, company.company_nm)">
+                              {{company.company_nm}}
+                            </span>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
 
+              </div>
             </div>
 
 

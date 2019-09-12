@@ -28,7 +28,7 @@ namespace EC.Controllers
 
       var pending_report_ids = vmAllIDs.all_pending_report_ids;
       List<int> all_pending_reports_ids = new List<int>();
-      if (pending_report_ids.Count > 0)
+      if (pending_report_ids != null && pending_report_ids.Count > 0)
       {
         pending_report_ids.Sort();
         all_pending_reports_ids.Add(pending_report_ids[0]);

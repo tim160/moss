@@ -13,6 +13,13 @@ namespace EC.Models.ECModel
         private string _reportRelationIDStrings;
         private string _reportDepartmentIDStrings;
         private string _reportLocationIDStrings;
+        private string _companyIDsStrings;
+
+        public string CompanyIDsStrings
+        {
+          get { return string.IsNullOrEmpty(_companyIDsStrings) ? "" : _companyIDsStrings; }
+          set { _companyIDsStrings = value; }
+        }
 
         public string ReportsSecondaryTypesIDStrings
         {

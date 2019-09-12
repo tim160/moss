@@ -185,7 +185,7 @@
                 data: { companyId: companyId, userId: userId, types: types }
             }).done(function (data) {//data from server
                 var temp = $.parseJSON(data);
-
+                console.log('company_id selector');
                 if (temp['LocationTable'] != null && temp['LocationTable'].length >= 1) {
                     _dtCompanyLocationReport(temp['LocationTable']);
                     addValDep($("#containerLocation tspan"), temp['LocationTable']);

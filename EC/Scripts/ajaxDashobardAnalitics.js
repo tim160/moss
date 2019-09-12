@@ -9,7 +9,8 @@
         reporter_type: [],//RelationTypesList
         data_range: [],
         dateStart: String,
-        dateEnd: String
+        dateEnd: String,
+        company_id:id
     };
     var app = angular.module('EC', ['nvd3', 'daterangepicker']);
     
@@ -67,7 +68,6 @@
         var promiseObjGetMenu = getMenuFilterCases.getData();
         promiseObjGetMenu.then(function (response) {
             $scope.MenuCases = response.data;
-
             $scope.selectedCasesFilters = 0;
             $scope.selectedCasesFilterString = '';
 
@@ -247,6 +247,31 @@
                 return true;
             }, 250);
         }
+
+        $scope.ddListClickedCompany = function (company_id, company_name) {
+          if (company_name == undefined) {
+            $scope.displayCompanyName = 'All SCHOOLS';
+            $scope.filterValue = null;
+          } else {
+            $scope.filterValue = company_id;
+            $scope.displayCompanyName = company_name;
+          }
+        }
+        $scope.filterValue = null;
+        $scope.returnListReports = function () {
+          $scope.filterValue = null;
+        }
+        $scope.casesFilterFunction = (item) => {
+          if ($scope.filterValue != null) {
+            return item.company_id == $scope.filterValue;
+          } else {
+            return item;
+          }
+        };
+
+        $scope.showDDlist = false;
+        $scope.displayCompanyName = "All SCHOOLS";
+
     });
 
     app.controller('CaseManagamentTime', function ($scope, getTurnAroundTime) {
@@ -334,7 +359,8 @@
                         "ReportsLocationIDStrings": arraySelectedItems.location.join(),
                         "data_range": arraySelectedItems.data_range,
                         "dateStart": arraySelectedItems.dateStart,
-                        "dateEnd": arraySelectedItems.dateEnd
+                        "dateEnd": arraySelectedItems.dateEnd,
+                        "CompanyIDStrings": 2// arraySelectedItems.company_id
                     }, url: '/Analytics/CompanyDepartmentReportAdvanced'
                 })
                     .then(function success(response) {
