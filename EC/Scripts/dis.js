@@ -1544,7 +1544,7 @@ angular.module('EC')['_invokeQueue'].forEach(function (value) {
         $scope.uploadLine = 0;
         $scope.locations = [];
         $scope.locationItems = [];
-
+        $scope.RoutingByLocation = false;
         $scope.onShow = function () {
             SettingsCompanyRoutingService.get({}, function (data) {
                 $scope.refresh(data);
@@ -1567,6 +1567,10 @@ angular.module('EC')['_invokeQueue'].forEach(function (value) {
             $scope.usersLocation.splice(0, 0, { id: 0, first_nm: 'Select Case Administrator', last_nm: '' });
             $scope.locations = data.locations;
             $scope.locationItems = data.locationItems;
+
+            if (data.clientCompanyName.length > 0) {
+                $scope.RoutingByLocation = true;
+            }
         };
 
         $scope.onShow();
