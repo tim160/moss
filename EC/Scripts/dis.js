@@ -651,11 +651,11 @@ angular.module('EC')['_invokeQueue'].forEach(function (value) {
                 $scope.counts = data.Counts;
                 $scope.Companies = data.Companies;
 
-                var maxWidth = Math.max.apply(Math, $('.liItem').map(function () { return $(this).width(); }).get());
-                console.log(maxWidth);
-                if (maxWidth > 194) {
-                    $("#ddListForCases .parentClass").width(maxWidth);
-                }
+                //var maxWidth = Math.max.apply(Math, $('.liItem').map(function () { return $(this).width(); }).get());
+                //console.log(maxWidth);
+                //if (maxWidth > 194) {
+                //    $("#ddListForCases .parentClass").width(maxWidth);
+                //}
              });
         };
         $scope.refresh($scope.mode);

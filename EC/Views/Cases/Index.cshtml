@@ -108,7 +108,7 @@
             </div>
             <input type="hidden" value="@LocalizationGetter.GetString("AllSchools", is_cc)" id="ddListDefaultValue" />
             <div id="ddListForCases" ng-show="Companies.length > 1">
-                <div class="parentClass">
+                <div class="parentClass" style="width: 200px">
                     <div class="menuItem" ng-click="showDDMenu = !showDDMenu">
                         <div class="positionText">
                             <span class="dropMenuText">{{displayCompanyName}}</span>
@@ -117,9 +117,9 @@
                         <ul class="menuUl" ng-show="showDDMenu" >
                             <li>
                                 <div class="liItem" ng-class="{'selected': company._selected}" value=null nameDropdown="ReportsDepartmentIDStringss">
-                                    <div class="checked">
+                                    @*<div class="checked">
                                         <img class="" src="~/Content/img/check.png" />
-                                    </div>
+                                    </div>*@
                                     <span class="positionText liText" ng-click="ddListClickedCompany(null, null)">
                                         @LocalizationGetter.GetString("AllSchools", is_cc)
                                     </span>
@@ -127,9 +127,9 @@
                             </li>
                             <li ng-repeat="company in Companies" callback-on-end="onEnd()">
                                 <div class="liItem" ng-class="{'selected': company._selected}" value="{{company.id}}" nameDropdown="ReportsDepartmentIDStringss">
-                                    <div class="checked">
+                                    @*<div class="checked">
                                         <img class="" src="~/Content/img/check.png" />
-                                    </div>
+                                    </div>*@
                                     <span class="positionText liText" ng-click="ddListClickedCompany(company.id, company.company_nm)">
                                         {{company.company_nm}}
                                     </span>
