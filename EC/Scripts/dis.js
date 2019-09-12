@@ -1568,8 +1568,10 @@ angular.module('EC')['_invokeQueue'].forEach(function (value) {
             $scope.locations = data.locations;
             $scope.locationItems = data.locationItems;
             $scope.userCommpanyClientId = data.userCommpanyClientId;
+            data.userCompanyName.length = "";
             if (data.userCompanyName.length > 0) {
                 $scope.RoutingByLocation = true;
+                $scope.userCompanyName = data.userCompanyName;
             }
         };
 

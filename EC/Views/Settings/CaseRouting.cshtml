@@ -33,7 +33,10 @@
             <div id="caseRouting" class="blockCaseRouting" ng-controller="SettingsCompanyRoutingController" ng-cloak>
                 <div class="positionTableCases">
                     <p style="float: left">Routing by Location</p>
-                    <input type="checkbox" style="float: right" class="bigCheckBox" ng-click="makeClientDisabled()" ng-checked="RoutingByLocation" checked="checked">
+                    <div style="float: right">
+                        <p style="float: right" ng-show="userCompanyName.length > 0">{{userCompanyName}}</p>
+                        <input type="checkbox" ng-show="userCompanyName.length > 0" style="float: right; width:120px" class="bigCheckBox" ng-click="makeClientDisabled()" ng-checked="RoutingByLocation" checked="checked">
+                    </div>
                     <table class="tableCasesIndex">
                         <thead>
                             <tr>
