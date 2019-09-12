@@ -129,9 +129,13 @@ namespace EC.Controllers.API
                     });
                 }
             });
-
+            string userCompanyName = String.Empty;
             var cm = new CompanyModel(user.company_id);
-            string clientCompanyName = DB.company.Where(c => c.id == cm._company.client_id).Select(c => c.company_nm).FirstOrDefault();
+            if (user.company_id > 1)
+            {
+                userCompanyName = DB.company.Where(c => c.id == cm._company.client_id).Select(c => c.company_nm).FirstOrDefault();
+            }
+
             var m = new
             {
                 types = types,
@@ -146,7 +150,8 @@ namespace EC.Controllers.API
                 files = files,
                 locations = locations,
                 locationItems = locationItems,
-                clientCompanyName = clientCompanyName,
+                userCompanyName = userCompanyName,
+                userCommpanyClientId = cm._company.client_id
             };
             return ResponseObject2Json(m);
         }

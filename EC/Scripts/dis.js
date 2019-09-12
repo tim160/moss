@@ -1567,13 +1567,17 @@ angular.module('EC')['_invokeQueue'].forEach(function (value) {
             $scope.usersLocation.splice(0, 0, { id: 0, first_nm: 'Select Case Administrator', last_nm: '' });
             $scope.locations = data.locations;
             $scope.locationItems = data.locationItems;
-
-            if (data.clientCompanyName.length > 0) {
+            $scope.userCommpanyClientId = data.userCommpanyClientId;
+            if (data.userCompanyName.length > 0) {
                 $scope.RoutingByLocation = true;
             }
         };
 
         $scope.onShow();
+        $scope.makeClientDisabled = function () {
+            $scope.userCommpanyClientId = -1 * $scope.userCommpanyClientId;
+            console.log($scope.userCommpanyClientId);
+        }
 
         $scope.delete = function (id) {
             SettingsCompanyRoutingService.delete({ DeleteId: id }, function (data) {
