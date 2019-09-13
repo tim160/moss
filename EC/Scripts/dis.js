@@ -239,9 +239,9 @@
     });
 
 })();
-angular.module('EC')['_invokeQueue'].forEach(function (value) {
-    console.log(value[2][0])
-});
+//angular.module('EC')['_invokeQueue'].forEach(function (value) {
+//    console.log(value[2][0])
+//});
 
 (function () {
 
@@ -651,11 +651,11 @@ angular.module('EC')['_invokeQueue'].forEach(function (value) {
                 $scope.counts = data.Counts;
                 $scope.Companies = data.Companies;
 
-                var maxWidth = Math.max.apply(Math, $('.liItem').map(function () { return $(this).width(); }).get());
-                console.log(maxWidth);
-                if (maxWidth > 194) {
-                    $("#ddListForCases .parentClass").width(maxWidth);
-                }
+                //var maxWidth = Math.max.apply(Math, $('.liItem').map(function () { return $(this).width(); }).get());
+                //console.log(maxWidth);
+                //if (maxWidth > 194) {
+                //    $("#ddListForCases .parentClass").width(maxWidth);
+                //}
              });
         };
         $scope.refresh($scope.mode);
@@ -1568,8 +1568,9 @@ angular.module('EC')['_invokeQueue'].forEach(function (value) {
             $scope.locations = data.locations;
             $scope.locationItems = data.locationItems;
             $scope.userCommpanyClientId = data.userCommpanyClientId;
-            if (data.userCompanyName.length > 0) {
+            if (data.userCompanyName != null && data.userCompanyName.length > 0) {
                 $scope.RoutingByLocation = true;
+                $scope.userCompanyName = data.userCompanyName;
             }
         };
 
