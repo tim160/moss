@@ -1194,102 +1194,131 @@ namespace EC.Models
         public UsersUnreadReportsNumberViewModel GetUserUnreadCasesNumbers(UsersReportIDsViewModel vmReportIds)
         {
              UsersUnreadReportsNumberViewModel vm = new UsersUnreadReportsNumberViewModel();
- 
-            var active = vmReportIds.all_active_report_ids.Where(item => !(
-            db.report.Where(t => (t.id == item && 
-            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date > t.last_update_dt).Any()
-            )).Any())).Count();
-            vm.unread_active_reports = active;
 
-            var spam = vmReportIds.all_spam_report_ids.Where(item => !(
-            db.report.Where(t => (t.id == item &&
-            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date > t.last_update_dt).Any()
-            )).Any())).Count();
-            vm.unread_spam_reports = spam;
+            vm.unread_active_reports = 0;
+            vm.unread_spam_reports = 0;
 
-            var newreport = vmReportIds.all_pending_report_ids.Where(item => !(
-            db.report.Where(t => (t.id == item &&
-            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date > t.last_update_dt).Any()
-            )).Any())).Count();
-            vm.unread_pending_reports = newreport;
+            vm.unread_pending_reports = 0;
+            vm.unread_completed_reports = 0;
+            vm.unread_closed_reports = 0;
 
-            var completed = vmReportIds.all_completed_report_ids.Where(item => !(
-            db.report.Where(t => (t.id == item &&
-            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date > t.last_update_dt).Any()
-            )).Any())).Count();
-            vm.unread_completed_reports = completed;
+            if (vmReportIds != null && vmReportIds.all_active_report_ids != null)
+            {
+              var active = vmReportIds.all_active_report_ids.Where(item => !(
+               db.report.Where(t => (t.id == item &&
+               db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date > t.last_update_dt).Any()
+               )).Any())).Count();
 
-            var closed = vmReportIds.all_closed_report_ids.Where(item => !(
-            db.report.Where(t => (t.id == item &&
-            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date > t.last_update_dt).Any()
-            )).Any()
-            )).Count();
-            vm.unread_closed_reports = closed;
- 
+              vm.unread_active_reports = active;
+            }
+
+            if (vmReportIds != null && vmReportIds.all_spam_report_ids != null)
+            {
+              var spam = vmReportIds.all_spam_report_ids.Where(item => !(
+                  db.report.Where(t => (t.id == item &&
+                  db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date > t.last_update_dt).Any()
+                  )).Any())).Count();
+              vm.unread_spam_reports = spam;
+            }
+
+            if (vmReportIds != null && vmReportIds.all_pending_report_ids != null)
+            {
+              var newreport = vmReportIds.all_pending_report_ids.Where(item => !(
+                  db.report.Where(t => (t.id == item &&
+                  db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date > t.last_update_dt).Any()
+                  )).Any())).Count();
+              vm.unread_pending_reports = newreport;
+            }
+
+            if (vmReportIds != null && vmReportIds.all_completed_report_ids != null)
+            {
+              var completed = vmReportIds.all_completed_report_ids.Where(item => !(
+                  db.report.Where(t => (t.id == item &&
+                  db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date > t.last_update_dt).Any()
+                  )).Any())).Count();
+              vm.unread_completed_reports = completed;
+            }
+            if (vmReportIds != null && vmReportIds.all_closed_report_ids != null)
+            {
+
+              var closed = vmReportIds.all_closed_report_ids.Where(item => !(
+                  db.report.Where(t => (t.id == item &&
+                  db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date > t.last_update_dt).Any()
+                  )).Any()
+                  )).Count();
+              vm.unread_closed_reports = closed;
+            }
             return vm;
 
         }
 
- 
 
 
-        public List<CasePreviewViewModel> ReportPreviews(List<int> report_ids, string investigation_status, int delay_allowed)
-        {
-            var severities = db.severity.Select( z => new { id =z.id, severity_en = z.severity_en});
-            var colors = db.color.Select(z => new { id = z.id, color_code = z.color_code });
-            IEnumerable<int> top_mediator_ids = db.user.Where(item => (item.company_id == _user.company_id) && (item.role_id == 4 || item.role_id == 5)).Select(t => t.id);
-            string base_url = ConfigurationManager.AppSettings["SiteRoot"];
-            string _no_photo_path = base_url + "/Content/Icons/noPhoto.png";
-            report_ids = report_ids.OrderByDescending(t => t).ToList();
 
-              //var reports = report_ids.Select(x => new CasePreviewViewModel(x, user.id)).ToList();
-              var reports = report_ids
-              .Select(x =>
+    public List<CasePreviewViewModel> ReportPreviews(List<int> report_ids, string investigation_status, int delay_allowed)
+    {
+      var severities = db.severity.Select(z => new { id = z.id, severity_en = z.severity_en });
+      var colors = db.color.Select(z => new { id = z.id, color_code = z.color_code });
+      IEnumerable<int> top_mediator_ids = db.user.Where(item => (item.company_id == _user.company_id) && (item.role_id == 4 || item.role_id == 5)).Select(t => t.id);
+      string base_url = ConfigurationManager.AppSettings["SiteRoot"];
+      string _no_photo_path = base_url + "/Content/Icons/noPhoto.png";
+      if (report_ids != null)
+      {
+        report_ids = report_ids.OrderByDescending(t => t).ToList();
+      }
+      //var reports = report_ids.Select(x => new CasePreviewViewModel(x, user.id)).ToList();
+      var reports = new List<CasePreviewViewModel>();
+      if (report_ids != null)
+      {
+        reports = report_ids
+            .Select(x =>
               {
-                  var rm = new ReportModel(x);
-                  var access_mediators = rm.MediatorsWhoHasAccessToReportQuick(top_mediator_ids);
+                var rm = new ReportModel(x);
+                var access_mediators = rm.MediatorsWhoHasAccessToReportQuick(top_mediator_ids);
                 return new CasePreviewViewModel
                 {
-                    current_status = investigation_status,
+                  current_status = investigation_status,
 
-                    report_id = rm._report.id,
-                    company_id = rm._report.company_id,
+                  report_id = rm._report.id,
+                  company_id = rm._report.company_id,
 
-                    case_number = rm._report.display_name,
-                    case_dt_s = rm._report.reported_dt.Ticks,
-                    cc_is_life_threating = rm._report.cc_is_life_threating,
-                    total_days = Math.Floor((DateTime.Now.Date - rm._report.reported_dt.Date).TotalDays),
+                  case_number = rm._report.display_name,
+                  case_dt_s = rm._report.reported_dt.Ticks,
+                  cc_is_life_threating = rm._report.cc_is_life_threating,
+                  total_days = Math.Floor((DateTime.Now.Date - rm._report.reported_dt.Date).TotalDays),
 
-                    location = rm.LocationString(),
-                    case_secondary_types = rm.SecondaryTypeString(),
-                    days_left = rm.GetThisStepDaysLeft(delay_allowed),
+                  location = rm.LocationString(),
+                  case_secondary_types = rm.SecondaryTypeString(),
+                  days_left = rm.GetThisStepDaysLeft(delay_allowed),
 
-                    reported_dt = rm.ReportedDateString(),
-                    //  case_dt = rm.IncidentDateString(),
+                  reported_dt = rm.ReportedDateString(),
+                  //  case_dt = rm.IncidentDateString(),
 
-                    tasks_number = rm.ReportTasksCount(0).ToString(),
-                    messages_number = rm.UserMessagesCountNotSecure(ID, 0).ToString(),
+                  tasks_number = rm.ReportTasksCount(0).ToString(),
+                  messages_number = rm.UserMessagesCountNotSecure(ID, 0).ToString(),
 
 
-                    mediators = (access_mediators == null || access_mediators.Count == 0) ? null : access_mediators.Select(z => new {
-                      id = z.id,
-                      first_nm = z.first_nm,
-                      last_nm = z.last_nm,
-                      photo_path = string.IsNullOrWhiteSpace(z.photo_path) ? _no_photo_path : z.photo_path,
-                      //photo_path = glb.Photo_Path_String(z.photo_path, 1, 5),
-                      is_owner = z.is_owner
-                    }),
-                    case_color_code = (rm._report.report_color_id == 0) ? colors.Where(item => item.id == 1).FirstOrDefault().color_code : colors.Where(item => item.id == rm._report.report_color_id).FirstOrDefault().color_code,
-                    severity_s = !rm._report.severity_id.HasValue ? "UNSPECIFIED" : severities.FirstOrDefault(z => z.id == rm._report.severity_id).severity_en,
-                    severity_id = !rm._report.severity_id.HasValue ? 0 : rm._report.severity_id.Value,
-                    under_status_message = rm.DaysLeftClosedSpamMessage(delay_allowed),
-                    last_update_dt = m_DateTimeHelper.ConvertDateToShortString(rm._report.last_update_dt),
-                    agentName = rm._report.agent_id > 0 ? db.user.Find(rm._report.agent_id).first_nm : ""
+                  mediators = (access_mediators == null || access_mediators.Count == 0) ? null : access_mediators.Select(z => new
+                  {
+                    id = z.id,
+                    first_nm = z.first_nm,
+                    last_nm = z.last_nm,
+                    photo_path = string.IsNullOrWhiteSpace(z.photo_path) ? _no_photo_path : z.photo_path,
+                    //photo_path = glb.Photo_Path_String(z.photo_path, 1, 5),
+                    is_owner = z.is_owner
+                  }),
+                  case_color_code = (rm._report.report_color_id == 0) ? colors.Where(item => item.id == 1).FirstOrDefault().color_code : colors.Where(item => item.id == rm._report.report_color_id).FirstOrDefault().color_code,
+                  severity_s = !rm._report.severity_id.HasValue ? "UNSPECIFIED" : severities.FirstOrDefault(z => z.id == rm._report.severity_id).severity_en,
+                  severity_id = !rm._report.severity_id.HasValue ? 0 : rm._report.severity_id.Value,
+                  under_status_message = rm.DaysLeftClosedSpamMessage(delay_allowed),
+                  last_update_dt = m_DateTimeHelper.ConvertDateToShortString(rm._report.last_update_dt),
+                  agentName = rm._report.agent_id > 0 ? db.user.Find(rm._report.agent_id).first_nm : ""
                 };
 
               }).ToList();
-            return reports;
-        }
+      }
+      return reports;
+    }
 
         public int[] AnalyticsCasesTurnAroundTime()
     {

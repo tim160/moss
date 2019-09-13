@@ -76,7 +76,7 @@ namespace EC.Controllers.API
             string investigation_status = LocalizationGetter.GetString("Investigation");
             int delay_allowed = 2;
             int investigation_status_id = Constants.ECGlobalConstants.investigation_status_investigation;
-            if (report_ids.Count > 0)
+            if (report_ids!= null &&  report_ids.Count > 0)
             {
                 ReportModel tempRm = new ReportModel(report_ids[0]);
                 investigation_status = tempRm.InvestigationStatusString();
