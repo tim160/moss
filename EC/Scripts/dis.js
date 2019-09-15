@@ -1531,9 +1531,9 @@
     angular
         .module('EC')
         .controller('SettingsCompanyRoutingController',
-            ['$scope', '$filter', 'orderByFilter', '$http', 'SettingsCompanyRoutingService', SettingsCompanyRoutingController]);
+        ['$scope', '$filter', 'orderByFilter', '$http', 'SettingsCompanyRoutingService', 'SettingsCompanyRoutingServiceSetClientId',SettingsCompanyRoutingController]);
 
-    function SettingsCompanyRoutingController($scope, $filter, orderByFilter, $http, SettingsCompanyRoutingService) {
+    function SettingsCompanyRoutingController($scope, $filter, orderByFilter, $http, SettingsCompanyRoutingService, SettingsCompanyRoutingServiceSetClientId) {
         $scope.types = [];
         $scope.departments = [];
         $scope.users = [];
@@ -1568,7 +1568,7 @@
             $scope.locations = data.locations;
             $scope.locationItems = data.locationItems;
             $scope.userCommpanyClientId = data.userCommpanyClientId;
-            if (data.userCompanyName != null && data.userCompanyName.length > 0) {
+            if (data.userCommpanyClientId != 0 && data.userCommpanyClientId != 1 && data.userCompanyName != null && data.userCompanyName.length > 0) {
                 $scope.RoutingByLocation = true;
                 $scope.userCompanyName = data.userCompanyName;
             }
@@ -1578,6 +1578,9 @@
         $scope.makeClientDisabled = function () {
             $scope.userCommpanyClientId = -1 * $scope.userCommpanyClientId;
             console.log($scope.userCommpanyClientId);
+            SettingsCompanyRoutingServiceSetClientId.post({ newClientId: $scope.userCommpanyClientId }, function (data) {
+                console.log(data);
+            });
         }
 
         $scope.delete = function (id) {
@@ -2314,6 +2317,21 @@
             get: { method: 'GET', params: {}, isArray: false },
             post: { method: 'POST', params: {}, isArray: false },
             delete: { method: 'POST', params: {}, isArray: false },
+            put: { method: 'PUT', params: {}, isArray: false },
+        });
+    };
+})();
+
+(function () {
+
+    'use strict';
+
+    angular.module('EC')
+        .service('SettingsCompanyRoutingServiceSetClientId', ['$resource', SettingsCompanyRoutingServiceSetClientId]);
+
+    function SettingsCompanyRoutingServiceSetClientId($resource) {
+        return $resource('/api/SettingsCompanyClient', {}, {
+            post: { method: 'POST', params: {}, isArray: false }
         });
     };
 })();
