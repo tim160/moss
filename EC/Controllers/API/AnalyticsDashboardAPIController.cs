@@ -106,12 +106,16 @@ namespace EC.Controllers.API
             var RelationTypesList = DB.company_relationship.Where(s => s.company_id == user.company_id).Select(m => new { m.id, m.relationship_en }).OrderBy(t => t.relationship_en).ToList();
             RelationTypesList.Add(new { id = 0, relationship_en = LocalizationGetter.GetString("Other") });
 
+            CompanyModel cm = new CompanyModel(user.company_id);
+            var additionalCompanies = cm.AdditionalCompanies();
+
             var resultObj = new
             {
                 DepartmentsList,
                 LocationsList,
                 SecondaryTypesList,
-                RelationTypesList
+                RelationTypesList,
+                Companies = additionalCompanies.Distinct().Select(m => new { m.id, m.company_nm }).ToList()
             };
 
             return ResponseObject2Json(resultObj);
