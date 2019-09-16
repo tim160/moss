@@ -11,22 +11,22 @@
 
     <link rel="stylesheet" href="~/Content/styleAnalitics.css" />
     <link href="~/Libs/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
-  ViewBag.Title = GlobalRes.Analytics;
-  Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
-  int user_id = (Int32)ViewBag.user_id;
+    ViewBag.Title = GlobalRes.Analytics;
+    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+    int user_id = (Int32)ViewBag.user_id;
 
-  string _today = ViewBag._today;
-  string ec_title = "Employee Confidential";
-  bool? is_cc = ViewBag.is_cc;
-  if (!is_cc.HasValue)
-  {
-    is_cc = false;
-  }
-  if (is_cc.Value)
-  {
-    ec_title = "Campus Confidential";
-  }
-  ec_title = ec_title.ToUpper();
+    string _today = ViewBag._today;
+    string ec_title = "Employee Confidential";
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
+    if (is_cc.Value)
+    {
+        ec_title = "Campus Confidential";
+    }
+    ec_title = ec_title.ToUpper();
 }
 
 <!-- Include Date Range Picker -->
@@ -47,6 +47,7 @@
 <input type="hidden" id="user_id" value="@user_id" />
 <input type="hidden" id="dateStart" value="" />
 <input type="hidden" id="dateEnd" value="" />
+<input type="hidden" value="@LocalizationGetter.GetString("AllSchools", is_cc)" id="ddListDefaultValue" />
 
 <style>
     #menu a {
@@ -56,13 +57,13 @@
     .c3-axis.c3-axis-x {
         display: none;
     }
+
     .case-DropDownList-title1 {
         float: right;
         padding: 20px 10px;
         cursor: pointer;
     }
 </style>
-
 <div class="blockSettings blockAnalitics">
     @Html.Partial("~/Views/Analytics/AnalyticsMenu.cshtml")
 
@@ -71,43 +72,43 @@
         <div id="mainTab-Cases" class="mainNavigationTabs__tabContent active">
 
             <div class="fluidTitle">
-              <div class="paddingTopForPrint30">
-                <strong>@GlobalRes.Number_cases_stage:</strong> @_today
+                <div class="paddingTopForPrint30">
+                    <strong>@GlobalRes.Number_cases_stage:</strong> @_today
 
-                <div id="ddListForCases" ng-show="MenuCases.Companies.length > 1">
-                  <div class="parentClass">
-                    <div class="menuItem">
-                      <div class="positionText">
-                        <span class="dropMenuText">{{displayCompanyName}}</span>
-                        <img src="~/Content/img/arrowSelect.png" />
-                      </div>
-                      <ul class="menuUl">
-                        <li>
-                          <div class="liItem" ng-class="{'selected': company._selected}" value=null nameDropdown="ReportsDepartmentIDStringss">
-                            <div class="checked">
-                              <img class="" src="~/Content/img/check.png" />
+                    <div id="ddListForCases" ng-show="MenuCases.additionalCompanies.length > 1">
+                        <div class="parentClass" ng-click="showDDMenu = !showDDMenu">
+                            <div class="menuItem">
+                                <div class="positionText">
+                                    <span class="dropMenuText">{{displayCompanyName}}</span>
+                                    <img src="~/Content/img/arrowSelect.png" />
+                                </div>
+                                <ul class="menuUl" ng-show="showDDMenu" style="display: block">
+                                    <li>
+                                        <div class="liItem" ng-class="{'selected': company._selected}" value=null nameDropdown="ReportsDepartmentIDStringss">
+                                            <div class="checked">
+                                                <img class="" src="~/Content/img/check.png" />
+                                            </div>
+                                            <span class="positionText liText" ng-click="ddListClickedCompany(null, null)">
+                                                @LocalizationGetter.GetString("AllSchools", is_cc)`
+                                            </span>
+                                        </div>
+                                    </li>
+                                    <li ng-repeat="company in MenuCases.additionalCompanies">
+                                        <div class="liItem" ng-class="{'selected': company._selected}" value="{{company.id}}" nameDropdown="ReportsDepartmentIDStringss">
+                                            <div class="checked">
+                                                <img class="" src="~/Content/img/check.png" />
+                                            </div>
+                                            <span class="positionText liText" ng-click="ddListClickedCompany(company.id, company.company_nm)">
+                                                {{company.company_nm}}
+                                            </span>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
-                            <span class="positionText liText" ng-click="ddListClickedCompany(null, null)">
-                              @LocalizationGetter.GetString("AllSchools", is_cc)`
-                            </span>
-                          </div>
-                        </li>
-                        <li ng-repeat="company in MenuCases.Companies">
-                          <div class="liItem" ng-class="{'selected': company._selected}" value="{{company.id}}" nameDropdown="ReportsDepartmentIDStringss">
-                            <div class="checked">
-                              <img class="" src="~/Content/img/check.png" />
-                            </div>
-                            <span class="positionText liText" ng-click="ddListClickedCompany(company.id, company.company_nm)">
-                              {{company.company_nm}}
-                            </span>
-                          </div>
-                        </li>
-                      </ul>
+                        </div>
                     </div>
-                  </div>
-                </div>
 
-              </div>
+                </div>
             </div>
 
 
@@ -128,15 +129,15 @@
 
 
 
-                <div class="container cases-TotalHeader clearfix">
-                    <div class="case-TotalHeader__items timeFilterCases clearfix">
-                        <div class="case-DropDownList-title1 clearfix" id="dateRange2">
-                            <div class="case-DropDownList-title__text clearfix">date range</div>
-                            <div class="case-DropDownList-title__arrow clearfix"></div>
-                        </div>
-                        <input autocomplete="false" id="calendarCustomDate" style="width:200px;display: none" date-range-picker class="form-control date-picker" type="text" options="datePicker.options" ng-model="datePicker.date" />
+            <div class="container cases-TotalHeader clearfix">
+                <div class="case-TotalHeader__items timeFilterCases clearfix">
+                    <div class="case-DropDownList-title1 clearfix" id="dateRange2">
+                        <div class="case-DropDownList-title__text clearfix">date range</div>
+                        <div class="case-DropDownList-title__arrow clearfix"></div>
+                    </div>
+                    <input autocomplete="false" id="calendarCustomDate" style="width:200px;display: none" date-range-picker class="form-control date-picker" type="text" options="datePicker.options" ng-model="datePicker.date" />
 
-                        @*<div class="timeFilterCases-dropBlock case-DropDownList-contentBlock clearfix">
+                    @*<div class="timeFilterCases-dropBlock case-DropDownList-contentBlock clearfix">
                             <div class="timeFilterCases-dropBlock__titleRow row clearfix">
                                 <div class="col-12">
                                     <div class="timeFilterCases-dropBlock__titleRowText" id="something">
@@ -145,106 +146,106 @@
                             </div>
                         </div>*@
 
+                </div>
+
+
+                <div class="case-TotalHeader__items filterCases  clearfix">
+                    <!-- activated -->
+                    <div class="case-DropDownList-title clearfix">
+                        <div class="case-DropDownList-title__text clearfix">Filter Cases {{selectedCasesFilterString}}</div>
+                        <div class="case-DropDownList-title__arrow clearfix"></div>
                     </div>
-
-
-                    <div class="case-TotalHeader__items filterCases  clearfix">
-                        <!-- activated -->
-                        <div class="case-DropDownList-title clearfix">
-                            <div class="case-DropDownList-title__text clearfix">Filter Cases {{selectedCasesFilterString}}</div>
-                            <div class="case-DropDownList-title__arrow clearfix"></div>
-                        </div>
-                        <!--dropdown menu-->
-                        <div class="filterCases-dropBlock case-DropDownList-contentBlock  clearfix">
-                            <div class="filterCases-dropBlock__titleRow row clearfix">
-                                <div class="col-3">
-                                    <div class="filterCases-dropBlock__titleRowText">
-                                        Department
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="filterCases-dropBlock__titleRowText">
-                                        Location
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="filterCases-dropBlock__titleRowText">
-                                        Reporter type
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="filterCases-dropBlock__titleRowText">
-                                        Incident type
-                                    </div>
+                    <!--dropdown menu-->
+                    <div class="filterCases-dropBlock case-DropDownList-contentBlock  clearfix">
+                        <div class="filterCases-dropBlock__titleRow row clearfix">
+                            <div class="col-3">
+                                <div class="filterCases-dropBlock__titleRowText">
+                                    Department
                                 </div>
                             </div>
-                            <div class="filterCases-dropBlock__contentRow row clearfix">
-
-                                <div class="col-3 filterCases-dropBlock__contentCol">
-                                    <ul class="case-DropDownList black" ng-repeat="department in MenuCases.DepartmentsList">
-                                        <li class="case-DropDownList-li clearfix" ng-click="selectedItemClick($event, department.id, 'department')">
-                                            <input type="hidden" value="{{department.Item2}}" />
-                                            <div class="case-DropDownList-li__icon"></div>
-                                            <div class="case-DropDownList-li__text">
-                                                {{department.department_en}}
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div><!-- / .col-3 filterCases-dropBlock__contentCol -->
-
-                                <div class="col-3 filterCases-dropBlock__contentCol">
-                                    <ul class="case-DropDownList black" ng-repeat="location in MenuCases.LocationsList">
-                                        <!--this is location-->
-                                        <li class="case-DropDownList-li clearfix" ng-click="selectedItemClick($event, location.id, 'location')">
-                                            <input type="hidden" value="{{location.id}}" />
-                                            <div class="case-DropDownList-li__icon"></div>
-                                            <div class="case-DropDownList-li__text">
-                                                {{location.location_en}}
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div><!-- / .col-3 filterCases-dropBlock__contentCol -->
-
-                                <div class="col-3 filterCases-dropBlock__contentCol">
-                                    <ul class="case-DropDownList black" ng-repeat="incident in MenuCases.RelationTypesList">
-                                        <li class="case-DropDownList-li clearfix" ng-click="selectedItemClick($event, incident.id, 'incident_type')">
-                                            <input type="hidden" value="{{incident.id}}" />
-                                            <div class="case-DropDownList-li__icon"></div>
-                                            <div class="case-DropDownList-li__text">
-                                                {{incident.relationship_en}}
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div><!-- / .col-3 filterCases-dropBlock__contentCol -->
-
-                                <div class="col-3 filterCases-dropBlock__contentCol">
-                                    <ul class="case-DropDownList black" ng-repeat="reporter in MenuCases.SecondaryTypesList">
-                                        <li class="case-DropDownList-li clearfix" ng-click="selectedItemClick($event, reporter.id, 'reporter_type')">
-                                            <input type="hidden" value="{{reporter.id}}" />
-                                            <div class="case-DropDownList-li__icon"></div>
-                                            <div class="case-DropDownList-li__text">
-                                                {{reporter.secondary_type_en}}
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div><!-- / .col-3 filterCases-dropBlock__contentCol -->
-
-
+                            <div class="col-3">
+                                <div class="filterCases-dropBlock__titleRowText">
+                                    Location
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="filterCases-dropBlock__titleRowText">
+                                    Reporter type
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="filterCases-dropBlock__titleRowText">
+                                    Incident type
+                                </div>
                             </div>
                         </div>
-                        <!--dropdown menu end-->
-                    </div>
+                        <div class="filterCases-dropBlock__contentRow row clearfix">
 
-                    <!--print all graphs-->
-                    <div class="case-TotalHeader__items filterCases clearfix">
-                        <!-- activated -->
-                        <div class="case-DropDownList-titleNotClick clearfix" ng-click="printGraphs(['#mainTab-Cases .fluidTitle', '#mainTab-Cases .container.cases-TotalStatistics','#dashboard'], 'Print Page')">
-                            <div class="case-DropDownList-title__text clearfix">Print Page</div>
-                            @*<div class="case-DropDownList-title__arrow clearfix"></div>*@
+                            <div class="col-3 filterCases-dropBlock__contentCol">
+                                <ul class="case-DropDownList black" ng-repeat="department in MenuCases.DepartmentsList">
+                                    <li class="case-DropDownList-li clearfix" ng-click="selectedItemClick($event, department.id, 'department')">
+                                        <input type="hidden" value="{{department.Item2}}" />
+                                        <div class="case-DropDownList-li__icon"></div>
+                                        <div class="case-DropDownList-li__text">
+                                            {{department.department_en}}
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div><!-- / .col-3 filterCases-dropBlock__contentCol -->
+
+                            <div class="col-3 filterCases-dropBlock__contentCol">
+                                <ul class="case-DropDownList black" ng-repeat="location in MenuCases.LocationsList">
+                                    <!--this is location-->
+                                    <li class="case-DropDownList-li clearfix" ng-click="selectedItemClick($event, location.id, 'location')">
+                                        <input type="hidden" value="{{location.id}}" />
+                                        <div class="case-DropDownList-li__icon"></div>
+                                        <div class="case-DropDownList-li__text">
+                                            {{location.location_en}}
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div><!-- / .col-3 filterCases-dropBlock__contentCol -->
+
+                            <div class="col-3 filterCases-dropBlock__contentCol">
+                                <ul class="case-DropDownList black" ng-repeat="incident in MenuCases.RelationTypesList">
+                                    <li class="case-DropDownList-li clearfix" ng-click="selectedItemClick($event, incident.id, 'incident_type')">
+                                        <input type="hidden" value="{{incident.id}}" />
+                                        <div class="case-DropDownList-li__icon"></div>
+                                        <div class="case-DropDownList-li__text">
+                                            {{incident.relationship_en}}
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div><!-- / .col-3 filterCases-dropBlock__contentCol -->
+
+                            <div class="col-3 filterCases-dropBlock__contentCol">
+                                <ul class="case-DropDownList black" ng-repeat="reporter in MenuCases.SecondaryTypesList">
+                                    <li class="case-DropDownList-li clearfix" ng-click="selectedItemClick($event, reporter.id, 'reporter_type')">
+                                        <input type="hidden" value="{{reporter.id}}" />
+                                        <div class="case-DropDownList-li__icon"></div>
+                                        <div class="case-DropDownList-li__text">
+                                            {{reporter.secondary_type_en}}
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div><!-- / .col-3 filterCases-dropBlock__contentCol -->
+
+
                         </div>
                     </div>
-                    <!--end orint all graphs-->
-                </div><!-- /.cases-TotalHeader -->
+                    <!--dropdown menu end-->
+                </div>
+
+                <!--print all graphs-->
+                <div class="case-TotalHeader__items filterCases clearfix">
+                    <!-- activated -->
+                    <div class="case-DropDownList-titleNotClick clearfix" ng-click="printGraphs(['#mainTab-Cases .fluidTitle', '#mainTab-Cases .container.cases-TotalStatistics','#dashboard'], 'Print Page')">
+                        <div class="case-DropDownList-title__text clearfix">Print Page</div>
+                        @*<div class="case-DropDownList-title__arrow clearfix"></div>*@
+                    </div>
+                </div>
+                <!--end orint all graphs-->
+            </div><!-- /.cases-TotalHeader -->
 
 
         </div><!-- mainNavigationTabs__tabContent -->

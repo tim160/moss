@@ -29,6 +29,11 @@
 <script src="~/Scripts/moment.min.js"></script>
 <script src="~/Scripts/jquery.daterangepicker.min.js"></script>
 <link rel="stylesheet" href="~/Libs/nvd3/build/nv.d3.min.css">
+<style>
+    .menuItem:hover .menuUl{
+    display: block;
+}
+</style>
 
 <div class="blockSettings blockAnalitics" ng-controller="AnalyticsRootCauseAnalysisController" ng-cloak>
     @Html.Partial("~/Views/Analytics/AnalyticsMenu.cshtml")

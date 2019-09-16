@@ -636,9 +636,9 @@
             }
             return false;
         };
-        $scope.onEnd = function () {
-            alert("Hello World!!!");
-        }
+        //$scope.onEnd = function () {
+        //    alert("Hello World!!!");
+        //}
         $scope.refresh = function (mode, preload) {
             CasesService.get({ ReportFlag: mode, Preload: preload }, function (data) {
                 $('.headerBlockTextRight > span').text(data.Title);

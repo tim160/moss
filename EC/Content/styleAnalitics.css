@@ -565,9 +565,9 @@ table.table:first-child tr:first-child td {
     padding-left: 10px;
     padding-right: 24px;
 }
-.menuItem:hover .menuUl{
+/*.menuItem:hover .menuUl{
     display: block;
-}
+}*/
 .menuUl {
     display: none;
     list-style-type: none;
