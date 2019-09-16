@@ -115,7 +115,7 @@ namespace EC.Controllers.API
                 LocationsList,
                 SecondaryTypesList,
                 RelationTypesList,
-                Companies = additionalCompanies.Distinct().Select(m => new { m.id, m.company_nm }).ToList()
+                additionalCompanies = additionalCompanies.Distinct().Select(m => new { m.id, m.company_nm }).ToList()
             };
 
             return ResponseObject2Json(resultObj);

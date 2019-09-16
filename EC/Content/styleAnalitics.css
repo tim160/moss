@@ -289,7 +289,7 @@
     margin-top: 20px;
 }
 .caseesTab.active::after {
-    margin-left: 45%;
+    bottom: -12px;
 }
 
 .blockLinesItem p label{

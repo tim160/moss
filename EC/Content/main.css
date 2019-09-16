@@ -4229,6 +4229,7 @@ html body .selectStyled{
 #ddListForCases .menuUl .positionText {
     width: 188px;
     text-align: left;
+    padding-left: 10px;
 }
 #ddListForCases {
     width: 20%;
@@ -4263,10 +4264,11 @@ html body .selectStyled{
     #ddListForCases .dropMenuText.ng-binding {
         font-weight: normal;
         font-size: 14px;
+        padding-left: 10px;
         font-family: 'OpenSans-Regular', arial, verdana, sans-serif;
         display: inline-block;
-        padding: 17px 0;
         color: #3c3e3f;
+        line-height: 19px;
     }
 
     #ddListForCases .blockAnalitics .menuItem .menuUl {

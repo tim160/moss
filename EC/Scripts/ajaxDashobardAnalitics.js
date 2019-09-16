@@ -10,7 +10,7 @@
         data_range: [],
         dateStart: String,
         dateEnd: String,
-        company_id:id
+        //company_id:id
     };
     var app = angular.module('EC', ['nvd3', 'daterangepicker']);
     
@@ -65,6 +65,9 @@
             
             updateGraph();
         }, false);
+
+        $scope.showDDMenu = false;
+        $scope.displayCompanyName = document.querySelector("#ddListDefaultValue").value;
         var promiseObjGetMenu = getMenuFilterCases.getData();
         promiseObjGetMenu.then(function (response) {
             $scope.MenuCases = response.data;
@@ -250,7 +253,7 @@
 
         $scope.ddListClickedCompany = function (company_id, company_name) {
           if (company_name == undefined) {
-            $scope.displayCompanyName = 'All SCHOOLS';
+              $scope.displayCompanyName = document.querySelector("#ddListDefaultValue").value;
             $scope.filterValue = null;
           } else {
             $scope.filterValue = company_id;
@@ -270,7 +273,7 @@
         };
 
         $scope.showDDlist = false;
-        $scope.displayCompanyName = "All SCHOOLS";
+        $scope.displayCompanyName = document.querySelector("#ddListDefaultValue").value;
 
     });
 

@@ -75,21 +75,21 @@
                 <div class="paddingTopForPrint30">
                     <strong>@GlobalRes.Number_cases_stage:</strong> @_today
 
-                    <div id="ddListForCases" ng-show="MenuCases.additionalCompanies.length > 1">
+                    <div id="ddListForCases" ng-show="MenuCases.additionalCompanies.length > 1" style="float: right;top: -11px">
                         <div class="parentClass" ng-click="showDDMenu = !showDDMenu">
                             <div class="menuItem">
                                 <div class="positionText">
                                     <span class="dropMenuText">{{displayCompanyName}}</span>
                                     <img src="~/Content/img/arrowSelect.png" />
                                 </div>
-                                <ul class="menuUl" ng-show="showDDMenu" style="display: block">
+                                <ul class="menuUl" ng-show="showDDMenu" style="display: block; overflow: hidden;">
                                     <li>
                                         <div class="liItem" ng-class="{'selected': company._selected}" value=null nameDropdown="ReportsDepartmentIDStringss">
                                             <div class="checked">
                                                 <img class="" src="~/Content/img/check.png" />
                                             </div>
                                             <span class="positionText liText" ng-click="ddListClickedCompany(null, null)">
-                                                @LocalizationGetter.GetString("AllSchools", is_cc)`
+                                                @LocalizationGetter.GetString("AllSchools", is_cc)
                                             </span>
                                         </div>
                                     </li>
