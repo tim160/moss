@@ -131,9 +131,15 @@ namespace EC.Controllers.API
             });
             string userCompanyName = String.Empty;
             var cm = new CompanyModel(user.company_id);
-            if (user.company_id > 1)
+            if (cm._company.client_id != 0 && cm._company.client_id != 1 && cm._company.client_id != 2)
             {
-                userCompanyName = DB.company.Where(c => c.id == cm._company.client_id).Select(c => c.company_nm).FirstOrDefault();
+                if(cm._company.client_id < 0)
+                {
+                    userCompanyName = DB.company.Where(c => c.id == cm._company.client_id * -1).Select(c => c.company_nm).FirstOrDefault();
+                } else
+                {
+                    userCompanyName = DB.company.Where(c => c.id == cm._company.client_id).Select(c => c.company_nm).FirstOrDefault();
+                }
             }
 
             var m = new

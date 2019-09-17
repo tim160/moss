@@ -1569,7 +1569,12 @@
             $scope.locationItems = data.locationItems;
             $scope.userCommpanyClientId = data.userCommpanyClientId;
             if (data.userCommpanyClientId != 0 && data.userCommpanyClientId != 1 && data.userCompanyName != null && data.userCompanyName.length > 0) {
-                $scope.RoutingByLocation = true;
+                if (data.userCommpanyClientId > 0) {
+                    $scope.RoutingByLocation = true;
+                } else if (data.userCommpanyClientId < 0) {
+                    $scope.RoutingByLocation = false;
+                }
+                
                 $scope.userCompanyName = data.userCompanyName;
             }
         };
