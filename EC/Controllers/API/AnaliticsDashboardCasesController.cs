@@ -24,7 +24,7 @@ namespace EC.Controllers.API
             int[] _titleHeaderLegendIdx = { 6, 0, 1, 2, 3, 8 };
             string[] _miniSquareColor = { "#abb9bb", "#d47472", "#ff9b42", "#3099be", "#64cd9b", "#abb9bb" };
 
-            int[] _today_spanshot = um.AnalyticsCasesArrayByDate(null);
+            int[] _today_spanshot = um.AnalyticsCasesArrayByDate(null, um._user.company_id);
             List<TodaySnapshot> resultsnapShot = new List<TodaySnapshot>();
        
 
