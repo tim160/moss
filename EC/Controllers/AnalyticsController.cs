@@ -24,24 +24,25 @@ namespace EC.Controllers
         public ActionResult Index()
         {
 
-      user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
-      if (user == null || user.id == 0)
-        return RedirectToAction("Login", "Service");
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            if (user == null || user.id == 0)
+                return RedirectToAction("Login", "Service");
 
-      #region EC-CC Viewbag
-      ViewBag.is_cc = is_cc;
-      string cc_ext = "";
-      if (is_cc) cc_ext = "_cc";
-      ViewBag.cc_extension = cc_ext;
-      #endregion
+            #region EC-CC Viewbag
+            ViewBag.is_cc = is_cc;
+            string cc_ext = "";
+            if (is_cc) cc_ext = "_cc";
+            ViewBag.cc_extension = cc_ext;
+            #endregion
 
-      ViewBag.user_id = user.id;
-      ViewBag.companyName = db.company.Where(company_name => company_name.id == user.company_id).Select(company_name => company_name.company_nm).FirstOrDefault();
-      string _today = DateTimeHelper.ConvertDateToLongMonthString(DateTime.Today);
-      ViewBag._today = _today;
+            ViewBag.user_id = user.id;
+            ViewBag.company_id = user.company_id;
+            ViewBag.companyName = db.company.Where(company_name => company_name.id == user.company_id).Select(company_name => company_name.company_nm).FirstOrDefault();
+            string _today = DateTimeHelper.ConvertDateToLongMonthString(DateTime.Today);
+            ViewBag._today = _today;
 
             return View("Dashboard");
-    }
+        }
 
         public ActionResult Tasks()
         {
@@ -152,7 +153,7 @@ namespace EC.Controllers
         public ActionResult CompanyDepartmentReportAdvanced(ReportTypes types)
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
- 
+
             if (user != null)
             {
                 DateTime dt1 = new DateTime(2014, 8, 1);
@@ -163,19 +164,19 @@ namespace EC.Controllers
                     types.dateEnd = dt2;
                 }
 
-                  //if (types.data_range != null &&  types.data_range != "0" && types.data_range != "" && !types.data_range.StartsWith("custom"))
-                  //{
-                  //  if(types.data_range == "1")
-                  //    dt1 = DateTime.Today.AddYears(-1);
-                  //  if (types.data_range == "2")
-                  //    dt1 = DateTime.Today.AddMonths(-6);
-                  //  if (types.data_range == "3")
-                  //    dt1 = DateTime.Today.AddMonths(-3);
-                  //  if (types.data_range == "4")
-                  //    dt1 = DateTime.Today.AddMonths(-1);
-                  //  if (types.data_range == "5")
-                  //    dt1 = DateTime.Today.AddDays(-7);
-                  //}
+                //if (types.data_range != null &&  types.data_range != "0" && types.data_range != "" && !types.data_range.StartsWith("custom"))
+                //{
+                //  if(types.data_range == "1")
+                //    dt1 = DateTime.Today.AddYears(-1);
+                //  if (types.data_range == "2")
+                //    dt1 = DateTime.Today.AddMonths(-6);
+                //  if (types.data_range == "3")
+                //    dt1 = DateTime.Today.AddMonths(-3);
+                //  if (types.data_range == "4")
+                //    dt1 = DateTime.Today.AddMonths(-1);
+                //  if (types.data_range == "5")
+                //    dt1 = DateTime.Today.AddDays(-7);
+                //}
 
 
 

@@ -45,6 +45,8 @@
 <link href="~/Content/libs/graph/c3.min.css" rel="stylesheet" />
 
 <input type="hidden" id="user_id" value="@user_id" />
+<input type="hidden" id="company_id" value="@ViewBag.company_id" />
+
 <input type="hidden" id="dateStart" value="" />
 <input type="hidden" id="dateEnd" value="" />
 <input type="hidden" value="@LocalizationGetter.GetString("AllSchools", is_cc)" id="ddListDefaultValue" />
@@ -125,8 +127,6 @@
                     </div>
                 </div>
             </div><!-- /.container cases-TotalStatistics -->
-            @*<input id="calendarCustomDate2" date-range-picker class="form-control " type="text" options="datePicker.options" ng-model="datePicker.date" />*@
-
 
 
             <div class="container cases-TotalHeader clearfix">

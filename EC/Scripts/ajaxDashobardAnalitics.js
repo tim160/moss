@@ -9,30 +9,38 @@
         reporter_type: [],//RelationTypesList
         data_range: [],
         dateStart: String,
-        dateEnd: String,
-        //company_id:id
+        dateEnd: String
     };
     var app = angular.module('EC', ['nvd3', 'daterangepicker']);
-    
-    app.controller('CasesController', function ($scope, getCasesService, addPercentageRoundGraph, getMenuFilterCases, AnalyticsByDate) {
-        var analiticsObj = AnalyticsByDate.getData();
+
+    function makeTodaySnapshot(AnalyticsByDate, $scope, companyId) {
+        var analiticsObj = AnalyticsByDate.getData(companyId);
+
         analiticsObj.then(function (response) {
             $scope._today_spanshot = response.data._today_spanshot;
         });
+    }
+
+
+    app.controller('CasesController', function ($scope, getCasesService, addPercentageRoundGraph, getMenuFilterCases, AnalyticsByDate) {
+
+        var DEFAULT_COMPANY = document.querySelector("#company_id").value;
+
+        makeTodaySnapshot(AnalyticsByDate, $scope, DEFAULT_COMPANY);
+
         $scope.datePicker = {
             date: { startDate: null, endDate: null },
             options: {
-                //"parentEl": "calendarCustomDate",
                 "showDropdowns": true,
                 "autoApply": true,
                 "opens": "left",
                 ranges: {
                     'All': [moment().subtract(9, 'years'), moment()],
-                  'Last 12 Months': [moment().subtract(12, 'months'), moment()],
-                  'Last 6 Months': [moment().subtract(6, 'months'), moment()],
-                  'Last 3 Months': [moment().subtract(3, 'months'), moment()],
-                  'Last 30 days': [moment().subtract(30, 'days'), moment()],
-                  'Last 7 days': [moment().subtract(7, 'days'), moment()]
+                    'Last 12 Months': [moment().subtract(12, 'months'), moment()],
+                    'Last 6 Months': [moment().subtract(6, 'months'), moment()],
+                    'Last 3 Months': [moment().subtract(3, 'months'), moment()],
+                    'Last 30 days': [moment().subtract(30, 'days'), moment()],
+                    'Last 7 days': [moment().subtract(7, 'days'), moment()]
                 },
                 "linkedCalendars": false,
                 "autoUpdateInput": false,
@@ -41,8 +49,6 @@
                 locale: {
                     cancelLabel: 'Clear'
                 }
-                //"startDate": "04/29/2019",
-                //"endDate": "05/05/2019"
             }, function(start, end, label) {
                 console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
             }
@@ -55,19 +61,18 @@
                 angular.element('#calendarCustomDate').val('');
                 angular.element(".daterangepicker .cancelBtn").click();
             } else if (newDate.startDate != undefined && newDate.endDate != undefined) {
-                //$scope.selectedCasesDateRange = ": Start Date: " + moment(newDate.startDate).format("MMMM D, YYYY") + " End Date: " + moment(newDate.endDate).format("MMMM D, YYYY");
                 angular.element('#selectedCasesDateRange').html(": <span class='bold'>Start Date: </span>" + moment(newDate.startDate).format("MMMM D, YYYY") + " <span class='bold'>End Date: </span>" + moment(newDate.endDate).format("MMMM D, YYYY"));
             } else if (newDate.startDate != undefined) {
-              $scope.selectedCasesDateRange = ": Start Date: " + moment(newDate.startDate).format("MMMM D, YYYY")
+                $scope.selectedCasesDateRange = ": Start Date: " + moment(newDate.startDate).format("MMMM D, YYYY")
             } else if (newDate.endDate != undefined) {
-              $scope.selectedCasesDateRange = ": End Date: " + moment(newDate.endDate).format("MMMM D, YYYY")
+                $scope.selectedCasesDateRange = ": End Date: " + moment(newDate.endDate).format("MMMM D, YYYY")
             }
-            
+
             updateGraph();
         }, false);
 
-        $scope.showDDMenu = false;
-        $scope.displayCompanyName = document.querySelector("#ddListDefaultValue").value;
+
+
         var promiseObjGetMenu = getMenuFilterCases.getData();
         promiseObjGetMenu.then(function (response) {
             $scope.MenuCases = response.data;
@@ -83,16 +88,14 @@
                     $scope.selectedCasesFilters--;
                 }
                 if ($scope.selectedCasesFilters > 0) {
-                  $scope.selectedCasesFilterString = ': [' + $scope.selectedCasesFilters +']';
+                    $scope.selectedCasesFilterString = ': [' + $scope.selectedCasesFilters + ']';
                 }
-                else { $scope.selectedCasesFilterString = '';  }
+                else { $scope.selectedCasesFilterString = ''; }
                 $event.currentTarget.classList.toggle('checked');
                 updateGraph();
             }
             $scope.dataRangeClick = function ($event, clickedItemId) {
-                //$scope.selectedCasesDateRange = ": " + $event.target.textContent.trim();
                 angular.element('#selectedCasesDateRange').html(": " + $event.target.textContent.trim());
-                //$scope.selectedCasesDateRange = 
                 if (clickedItemId == 0) {
                     angular.element('#selectedCasesDateRange').html("");
                 }
@@ -250,26 +253,31 @@
                 return true;
             }, 250);
         }
-
+        /* drop down list functionality */
         $scope.ddListClickedCompany = function (company_id, company_name) {
-          if (company_name == undefined) {
-              $scope.displayCompanyName = document.querySelector("#ddListDefaultValue").value;
-            $scope.filterValue = null;
-          } else {
-            $scope.filterValue = company_id;
-            $scope.displayCompanyName = company_name;
-          }
+            if (company_name == undefined) {
+                $scope.displayCompanyName = document.querySelector("#ddListDefaultValue").value;
+                $scope.filterValue = null;
+            } else {
+                $scope.filterValue = company_id;
+                $scope.displayCompanyName = company_name;
+                makeTodaySnapshot(AnalyticsByDate, $scope, company_id);
+            }
         }
+        $scope.showDDMenu = false;
+        $scope.displayCompanyName = document.querySelector("#ddListDefaultValue").value;
+        /* end drop down list functionality */
+
         $scope.filterValue = null;
         $scope.returnListReports = function () {
-          $scope.filterValue = null;
+            $scope.filterValue = null;
         }
         $scope.casesFilterFunction = (item) => {
-          if ($scope.filterValue != null) {
-            return item.company_id == $scope.filterValue;
-          } else {
-            return item;
-          }
+            if ($scope.filterValue != null) {
+                return item.company_id == $scope.filterValue;
+            } else {
+                return item;
+            }
         };
 
         $scope.showDDlist = false;
@@ -301,7 +309,7 @@
                     columns: columnData,
                     type: 'bar',
                     labels: false,
-                    groups: [['New Report', 'Report Review','Under Inves', 'Awaiting Sign-Off']],
+                    groups: [['New Report', 'Report Review', 'Under Inves', 'Awaiting Sign-Off']],
                     order: null,
                     colors: {
                         'New Report': '#d47472',
@@ -325,7 +333,7 @@
                     x: {
                         type: 'category',
                         padding: 0
-                    }, 
+                    },
                     y: {
                         tick: {
                             values: anotherBar,
@@ -367,7 +375,7 @@
                     }, url: '/Analytics/CompanyDepartmentReportAdvanced'
                 })
                     .then(function success(response) {
-                      deffered.resolve(response.data);
+                        deffered.resolve(response.data);
                     }, function error(response) {
                         deffered.reject(response.status);
                     });
@@ -384,8 +392,8 @@
                     url: '/api/AnalyticsDashboardAPI/GetMenuDashboard'
                 })
                     .then(function success(response) {
-                      deffered.resolve(response);
-                      //console.log('GetMenuDashboard ', response.data);
+                        deffered.resolve(response);
+                        //console.log('GetMenuDashboard ', response.data);
                     }, function error(response) {
                         deffered.reject(response.status);
                     });
@@ -395,15 +403,14 @@
     });
     app.factory('AnalyticsByDate', function ($http, $q) {
         return {
-            getData: function () {
+            getData: function (id) {
                 var deffered = $q.defer();
                 $http({
                     method: 'GET',
-                    url: '/api/AnaliticsDashboardCases/AnalyticsByDate'
+                    url: '/api/AnaliticsDashboardCases/AnalyticsByDate/?id=' + id
                 })
                     .then(function success(response) {
                         deffered.resolve(response);
-                        //console.log('GetMenuDashboard ', response.data);
                     }, function error(response) {
                         deffered.reject(response.status);
                     });
