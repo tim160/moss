@@ -1345,7 +1345,7 @@ namespace EC.Models
       return _array;
     }
 
-        public int[] AnalyticsCasesArrayByDate(DateTime? _start, int company_id)
+        public int[] AnalyticsCasesArrayByDate(DateTime? _start, int[] ArrCompanyId)
         {
           DateTime _real_start;
 
@@ -1354,9 +1354,9 @@ namespace EC.Models
           else
             _real_start = new DateTime(2019, 1, 1);
 
-            //List<report> _all_reports = ReportsSearch(company_id, 0);
-            List<report> _all_reports = db.report.Where(c => c.company_id == company_id).ToList();
-          var _all_reports_ids = _all_reports.Select(t => t.id);
+            List<report> _all_reports = db.report.Where(c => ArrCompanyId.Contains(c.company_id)).ToList();
+
+            var _all_reports_ids = _all_reports.Select(t => t.id);
           int[] _array = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
           if (!_start.HasValue)

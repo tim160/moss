@@ -13,8 +13,8 @@
     };
     var app = angular.module('EC', ['nvd3', 'daterangepicker']);
 
-    function makeTodaySnapshot(AnalyticsByDate, $scope, companyId) {
-        var analiticsObj = AnalyticsByDate.getData(companyId);
+    function makeTodaySnapshot(AnalyticsByDate, $scope, companyIdArray) {
+        var analiticsObj = AnalyticsByDate.getData(companyIdArray);
 
         analiticsObj.then(function (response) {
             $scope._today_spanshot = response.data._today_spanshot;
@@ -26,7 +26,7 @@
 
         var DEFAULT_COMPANY = document.querySelector("#company_id").value;
 
-        makeTodaySnapshot(AnalyticsByDate, $scope, DEFAULT_COMPANY);
+        //makeTodaySnapshot(AnalyticsByDate, $scope, DEFAULT_COMPANY);
 
         $scope.datePicker = {
             date: { startDate: null, endDate: null },
@@ -72,12 +72,18 @@
         }, false);
 
 
-
+        var companyIdArray = "";
         var promiseObjGetMenu = getMenuFilterCases.getData();
         promiseObjGetMenu.then(function (response) {
             $scope.MenuCases = response.data;
             $scope.selectedCasesFilters = 0;
             $scope.selectedCasesFilterString = '';
+            function returnCompanyId(company) {
+                return company.id;
+            }
+            companyIdArray = $scope.MenuCases.additionalCompanies.map(returnCompanyId);
+
+            makeTodaySnapshot(AnalyticsByDate, $scope, companyIdArray);
 
             $scope.selectedItemClick = function ($event, clickedItemId, menu) {
                 if (arraySelectedItems[menu].indexOf(clickedItemId) == -1) {
@@ -116,7 +122,6 @@
                     }
                 };
                 $scope.dataCases = JSON.parse(response);
-                //console.log('$scope.dataCases CasesController ', $scope.dataCases);
                 function returnGraph() {
                     var chart = {
                         type: 'pieChart',
@@ -146,15 +151,6 @@
                 $scope.TypesOfReporterData = addPercentageRoundGraph.setPercentage($scope.dataCases.RelationTable);
                 if ($scope.DepartmentsData.length == 0) {
                     $scope.containerDepartmentsValues = true;
-
-                    //promiseObjGetMenu.then(function (response) {
-                    //    response.data.DepartmentsList.forEach(function (item, i, arr) {
-                    //        $scope.DepartmentsData.push({ name: item.department_en, val: 0, percentage: 0 });
-                    //    });
-                    //});
-
-
-
                 } else {
                     $scope.containerDepartmentsValues = false;
                     $scope.containerDepartments = {
@@ -165,15 +161,6 @@
                 }
                 if ($scope.LocationData.length == 0) {
                     $scope.locationDataValues = true;
-
-
-                    //promiseObjGetMenu.then(function (response) {
-                    //    response.data.LocationsList.forEach(function (item, i, arr) {
-                    //        $scope.LocationData.push({ name: item.location_en, val: 0, percentage: 0 });
-                    //    });
-                    //});
-
-
                 } else {
                     $scope.locationDataValues = false;
                     $scope.containerLocation = {
@@ -184,15 +171,6 @@
                 }
                 if ($scope.TypesOfIncidentData.length == 0) {
                     $scope.typesOfIncidentDataValues = true;
-
-
-                    //promiseObjGetMenu.then(function (response) {
-                    //    response.data.SecondaryTypesList.forEach(function (item, i, arr) {
-                    //        $scope.TypesOfIncidentData.push({ name: item.secondary_type_en, val: 0, percentage: 0 });
-                    //    });
-                    //});
-
-
                 } else {
                     $scope.typesOfIncidentDataValues = false;
                     $scope.containerTypesOfIncident = {
@@ -203,15 +181,6 @@
                 }
                 if ($scope.TypesOfReporterData.length == 0) {
                     $scope.typesOfReporterDataValues = true;
-
-
-                    //promiseObjGetMenu.then(function (response) {
-                    //    response.data.RelationTypesList.forEach(function (item, i, arr) {
-                    //        $scope.TypesOfReporterData.push({ name: item.relationship_en, val: 0, percentage: 0 });
-                    //    });
-                    //});
-
-
                 } else {
                     $scope.typesOfReporterDataValues = false;
                     $scope.containerTypesOfReporter = {
@@ -258,10 +227,11 @@
             if (company_name == undefined) {
                 $scope.displayCompanyName = document.querySelector("#ddListDefaultValue").value;
                 $scope.filterValue = null;
+                makeTodaySnapshot(AnalyticsByDate, $scope, companyIdArray);
             } else {
                 $scope.filterValue = company_id;
                 $scope.displayCompanyName = company_name;
-                makeTodaySnapshot(AnalyticsByDate, $scope, company_id);
+                makeTodaySnapshot(AnalyticsByDate, $scope, [company_id]);
             }
         }
         $scope.showDDMenu = false;
@@ -393,7 +363,6 @@
                 })
                     .then(function success(response) {
                         deffered.resolve(response);
-                        //console.log('GetMenuDashboard ', response.data);
                     }, function error(response) {
                         deffered.reject(response.status);
                     });
@@ -403,11 +372,15 @@
     });
     app.factory('AnalyticsByDate', function ($http, $q) {
         return {
-            getData: function (id) {
+            getData: function (idArray) {
+                var strVithResult = '?'
+                idArray.map((item) => {
+                    strVithResult += '&id=' + item;
+                });
                 var deffered = $q.defer();
                 $http({
                     method: 'GET',
-                    url: '/api/AnaliticsDashboardCases/AnalyticsByDate/?id=' + id
+                    url: '/api/AnaliticsDashboardCases/AnalyticsByDate/' + strVithResult
                 })
                     .then(function success(response) {
                         deffered.resolve(response);

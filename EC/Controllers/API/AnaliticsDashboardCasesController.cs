@@ -11,7 +11,7 @@ namespace EC.Controllers.API
     public class AnaliticsDashboardCasesController : BaseApiController
     {
         [HttpGet]
-        public Object AnalyticsByDate(int id)
+        public Object AnalyticsByDate([FromUri] int[] id)
         {
             user user = (user)System.Web.HttpContext.Current.Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
