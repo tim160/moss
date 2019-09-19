@@ -20,11 +20,12 @@
             $scope._today_spanshot = response.data._today_spanshot;
         });
     }
+    //function getMenuFilterCases.getData();
 
 
     app.controller('CasesController', function ($scope, getCasesService, addPercentageRoundGraph, getMenuFilterCases, AnalyticsByDate) {
 
-        var DEFAULT_COMPANY = document.querySelector("#company_id").value;
+        //var DEFAULT_COMPANY = document.querySelector("#company_id").value;
 
         //makeTodaySnapshot(AnalyticsByDate, $scope, DEFAULT_COMPANY);
 
@@ -71,8 +72,7 @@
             updateGraph();
         }, false);
 
-
-        var companyIdArray = "";
+        var companyIdArray = null;
         var promiseObjGetMenu = getMenuFilterCases.getData();
         promiseObjGetMenu.then(function (response) {
             $scope.MenuCases = response.data;
@@ -232,6 +232,10 @@
                 $scope.filterValue = company_id;
                 $scope.displayCompanyName = company_name;
                 makeTodaySnapshot(AnalyticsByDate, $scope, [company_id]);
+                
+                //promiseObjGetMenu.then(function (response) {
+                   // $scope.MenuCases = getMenuFilterCases.getData();
+                //need up menu
             }
         }
         $scope.showDDMenu = false;

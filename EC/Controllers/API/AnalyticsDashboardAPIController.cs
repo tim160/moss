@@ -87,27 +87,32 @@ namespace EC.Controllers.API
         }
 
         [HttpPost]
-        public Object GetMenuDashboard()
+        public Object GetMenuDashboard([FromUri] int[] id)
         {
             user user = (user)System.Web.HttpContext.Current.Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return null;
 
-            CompanyModel model = new CompanyModel();
-            var DepartmentsList = model.CompanyDepartments(user.company_id).Select(x => new { x.id, x.department_en }).ToList();
-            DepartmentsList.Add(new { id = 0, department_en = LocalizationGetter.GetString("Not Listed") });
-
-            var LocationsList = model.Locations(user.company_id).Select(x => new { x.id, x.location_en }).ToList();
-            LocationsList.Add(new { id = 0, location_en = LocalizationGetter.GetString("Other") });
-
-            var SecondaryTypesList = DB.company_secondary_type.Where(s => s.company_id == user.company_id).Select(m => new { m.id, m.secondary_type_en }).OrderBy(t => t.secondary_type_en).ToList();
-            SecondaryTypesList.Add(new { id = 0, secondary_type_en = LocalizationGetter.GetString("Other") });
-
-            var RelationTypesList = DB.company_relationship.Where(s => s.company_id == user.company_id).Select(m => new { m.id, m.relationship_en }).OrderBy(t => t.relationship_en).ToList();
-            RelationTypesList.Add(new { id = 0, relationship_en = LocalizationGetter.GetString("Other") });
-
             CompanyModel cm = new CompanyModel(user.company_id);
             var additionalCompanies = cm.AdditionalCompanies();
+
+            if (id == null || id.FirstOrDefault() == 0)
+            {
+                id = additionalCompanies.Select(c => c.id).ToArray();
+            }
+            var DepartmentsList = DB.company_department.Where(s => id.Contains(s.company_id)).Select(x => new { x.id, x.department_en }).Distinct().ToList();
+            DepartmentsList.Add(new { id = 0, department_en = LocalizationGetter.GetString("Not Listed") });
+            
+            var LocationsList = DB.company_location.Where(s => id.Contains(s.company_id)).Select(x => new { x.id, x.location_en }).Distinct().ToList();
+            LocationsList.Add(new { id = 0, location_en = LocalizationGetter.GetString("Other") });
+
+            var SecondaryTypesList = DB.company_secondary_type.Where(s => id.Contains(s.company_id)).Select(m => new { m.id, m.secondary_type_en }).OrderBy(t => t.secondary_type_en).Distinct().ToList();
+            SecondaryTypesList.Add(new { id = 0, secondary_type_en = LocalizationGetter.GetString("Other") });
+
+            var RelationTypesList = DB.company_relationship.Where(s => id.Contains(s.company_id)).Select(m => new { m.id, m.relationship_en }).OrderBy(t => t.relationship_en).Distinct().ToList();
+            RelationTypesList.Add(new { id = 0, relationship_en = LocalizationGetter.GetString("Other") });
+
+
 
             var resultObj = new
             {
