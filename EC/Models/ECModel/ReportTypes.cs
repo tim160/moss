@@ -44,5 +44,6 @@ namespace EC.Models.ECModel
         public DateTime dateStart { get; set; }
         public DateTime dateEnd { get; set; }
         public string data_range { get; set; }
+        public int[] companyIdArray { get; set; }
   }
 }

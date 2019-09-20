@@ -580,10 +580,11 @@ public class GlobalFunctions
 
     #endregion
 
-    public List<report> ReportsListForCompany(int company_id, int user_id, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
+    public List<report> ReportsListForCompany(int[] company_id, int user_id, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
     {
-        UserModel um = new UserModel(user_id);
-        List<report> _all_reports_old = um.ReportsSearch(company_id, 0);
+        //UserModel um = new UserModel(user_id);
+        //List<report> _all_reports_old = um.ReportsSearch(company_id, 0);
+        var _all_reports_old = db.report.Where(r => company_id.Contains(r.company_id)).ToList();
 
         if (dtReportCreationStartDate.HasValue)
         {
@@ -739,7 +740,7 @@ public class GlobalFunctions
     {
         //List<string> result = names.Split(',').ToList();
         UserModel um = new UserModel(user_id);
-        List<report> _all_reports = ReportsListForCompany(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
+        List<report> _all_reports = ReportsListForCompany(new int[company_id], user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
 
         //  public List<report> ReportsSearch(int? company_id, int flag)
         ReportModel rm = new ReportModel();
@@ -806,7 +807,7 @@ public class GlobalFunctions
     {
         //List<string> result = names.Split(',').ToList();
         UserModel um = new UserModel(user_id);
-        List<report> _all_reports = ReportsListForCompany(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
+        List<report> _all_reports = ReportsListForCompany(new int[company_id], user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
 
         DataTable dt = dtTaskLengthTable();
 
@@ -983,7 +984,7 @@ public class GlobalFunctions
     {
         //List<string> result = names.Split(',').ToList();
         UserModel um = new UserModel(user_id);
-        List<report> _all_reports = ReportsListForCompany(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
+        List<report> _all_reports = ReportsListForCompany(new int[company_id], user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
 
         DateTime _real_start, _real_end;
 
@@ -1164,7 +1165,7 @@ public class GlobalFunctions
 
     #region JsonReports
 
-    public string ReportAdvancedJson(int company_id, int user_id, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
+    public string ReportAdvancedJson(int []company_id, int user_id, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
     {
         ///   int[] _today_spanshot = AnalyticsByDateAdvanced(null, null, company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
 
