@@ -20,14 +20,61 @@
             $scope._today_spanshot = response.data._today_spanshot;
         });
     }
-    //function getMenuFilterCases.getData();
+
+    function makeMenuWithFilter(getMenuFilterCases, $scope, companyIdArray) {
+        var promiseObjGetMenu = getMenuFilterCases.getData(companyIdArray);
+        promiseObjGetMenu.then(function (response) {
+            $scope.MenuCases = response.data;
+            $scope.selectedCasesFilters = 0;
+            $scope.selectedCasesFilterString = '';
+            $scope.selectedItemClick = function ($event, clickedItemId, menu) {
+                if (arraySelectedItems[menu].indexOf(clickedItemId) == -1) {
+                    arraySelectedItems[menu].push(clickedItemId);
+                    $scope.selectedCasesFilters++;
+                } else {
+                    arraySelectedItems[menu].splice(arraySelectedItems[menu].indexOf(clickedItemId), 1);
+                    $scope.selectedCasesFilters--;
+                }
+                if ($scope.selectedCasesFilters > 0) {
+                    $scope.selectedCasesFilterString = ': [' + $scope.selectedCasesFilters + ']';
+                }
+                else { $scope.selectedCasesFilterString = ''; }
+                $event.currentTarget.classList.toggle('checked');
+                updateGraph();
+            }
+            $scope.dataRangeClick = function ($event, clickedItemId) {
+                angular.element('#selectedCasesDateRange').html(": " + $event.target.textContent.trim());
+                if (clickedItemId == 0) {
+                    angular.element('#selectedCasesDateRange').html("");
+                }
+                arraySelectedItems["data_range"] = clickedItemId;
+                updateGraph();
+            }
+        });
+    }
 
 
-    app.controller('CasesController', function ($scope, getCasesService, addPercentageRoundGraph, getMenuFilterCases, AnalyticsByDate) {
+    app.controller('CasesController', function ($scope, getCasesService, addPercentageRoundGraph, getMenuFilterCases, AnalyticsByDate, getAdditionalCompanies) {
+        var companyIdArray = Array();
+        $scope.additionalCompanies = Array();
+        $scope.showDDMenu = false;
+        $scope.displayCompanyName = document.querySelector("#ddListDefaultValue").value;
 
-        //var DEFAULT_COMPANY = document.querySelector("#company_id").value;
+        var companyIdArrayPromise = getAdditionalCompanies.getData(document.querySelector("#company_id").value);
+        companyIdArrayPromise.then(function (response) {
+            $scope.additionalCompanies = response.data.additionalCompanies;
+            companyIdArray = $scope.additionalCompanies.map((item) => { return item.id; });
 
-        //makeTodaySnapshot(AnalyticsByDate, $scope, DEFAULT_COMPANY);
+            putDataToPage(companyIdArray);
+
+        });
+
+
+        function putDataToPage(companyIdArray) {
+            makeTodaySnapshot(AnalyticsByDate, $scope, companyIdArray);
+            makeMenuWithFilter(getMenuFilterCases, $scope, companyIdArray);
+        }
+
 
         $scope.datePicker = {
             date: { startDate: null, endDate: null },
@@ -72,44 +119,9 @@
             updateGraph();
         }, false);
 
-        var companyIdArray = null;
-        var promiseObjGetMenu = getMenuFilterCases.getData();
-        promiseObjGetMenu.then(function (response) {
-            $scope.MenuCases = response.data;
-            $scope.selectedCasesFilters = 0;
-            $scope.selectedCasesFilterString = '';
-            function returnCompanyId(company) {
-                return company.id;
-            }
-            companyIdArray = $scope.MenuCases.additionalCompanies.map(returnCompanyId);
+        
 
-            makeTodaySnapshot(AnalyticsByDate, $scope, companyIdArray);
-
-            $scope.selectedItemClick = function ($event, clickedItemId, menu) {
-                if (arraySelectedItems[menu].indexOf(clickedItemId) == -1) {
-                    arraySelectedItems[menu].push(clickedItemId);
-                    $scope.selectedCasesFilters++;
-                } else {
-                    arraySelectedItems[menu].splice(arraySelectedItems[menu].indexOf(clickedItemId), 1);
-                    $scope.selectedCasesFilters--;
-                }
-                if ($scope.selectedCasesFilters > 0) {
-                    $scope.selectedCasesFilterString = ': [' + $scope.selectedCasesFilters + ']';
-                }
-                else { $scope.selectedCasesFilterString = ''; }
-                $event.currentTarget.classList.toggle('checked');
-                updateGraph();
-            }
-            $scope.dataRangeClick = function ($event, clickedItemId) {
-                angular.element('#selectedCasesDateRange').html(": " + $event.target.textContent.trim());
-                if (clickedItemId == 0) {
-                    angular.element('#selectedCasesDateRange').html("");
-                }
-                arraySelectedItems["data_range"] = clickedItemId;
-                updateGraph();
-            }
-        });
-        updateGraph();
+        updateGraph(getCasesService, $scope, arraySelectedItems);
         function updateGraph() {
             var promiseObj = getCasesService.getData(arraySelectedItems);
             promiseObj.then(function (response) {
@@ -227,19 +239,14 @@
             if (company_name == undefined) {
                 $scope.displayCompanyName = document.querySelector("#ddListDefaultValue").value;
                 $scope.filterValue = null;
-                makeTodaySnapshot(AnalyticsByDate, $scope, companyIdArray);
+                putDataToPage(companyIdArray);
             } else {
                 $scope.filterValue = company_id;
                 $scope.displayCompanyName = company_name;
-                makeTodaySnapshot(AnalyticsByDate, $scope, [company_id]);
-                
-                //promiseObjGetMenu.then(function (response) {
-                   // $scope.MenuCases = getMenuFilterCases.getData();
-                //need up menu
+                putDataToPage([company_id]);
             }
         }
-        $scope.showDDMenu = false;
-        $scope.displayCompanyName = document.querySelector("#ddListDefaultValue").value;
+
         /* end drop down list functionality */
 
         $scope.filterValue = null;
@@ -359,11 +366,15 @@
     });
     app.factory('getMenuFilterCases', function ($http, $q) {
         return {
-            getData: function () {
+            getData: function (comapanyIdArray) {
                 var deffered = $q.defer();
+                var strVithResult = '?';
+                comapanyIdArray.map((item) => {
+                    strVithResult += '&id=' + item;
+                });
                 $http({
                     method: 'POST', data: {},
-                    url: '/api/AnalyticsDashboardAPI/GetMenuDashboard'
+                    url: '/api/AnalyticsDashboardAPI/GetMenuDashboard/' + strVithResult
                 })
                     .then(function success(response) {
                         deffered.resolve(response);
@@ -376,9 +387,9 @@
     });
     app.factory('AnalyticsByDate', function ($http, $q) {
         return {
-            getData: function (idArray) {
-                var strVithResult = '?'
-                idArray.map((item) => {
+            getData: function (comapanyIdArray) {
+                var strVithResult = '?';
+                comapanyIdArray.map((item) => {
                     strVithResult += '&id=' + item;
                 });
                 var deffered = $q.defer();
@@ -435,6 +446,24 @@
             }
         }
     });
+    app.factory('getAdditionalCompanies', function ($http, $q) {
+        return {
+            getData: function (id) {
+                var deffered = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: '/api/AdditionalCompanies/' + id
+                })
+                    .then(function success(response) {
+                        deffered.resolve(response);
+                    }, function error(response) {
+                        deffered.reject(response.status);
+                    });
+                return deffered.promise;
+            }
+        }
+    });
+
     app.directive("ngToggleClass", function () {
         return {
             restrict: 'A',

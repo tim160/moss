@@ -93,13 +93,6 @@ namespace EC.Controllers.API
             if (user == null || user.id == 0)
                 return null;
 
-            CompanyModel cm = new CompanyModel(user.company_id);
-            var additionalCompanies = cm.AdditionalCompanies();
-
-            if (id == null || id.FirstOrDefault() == 0)
-            {
-                id = additionalCompanies.Select(c => c.id).ToArray();
-            }
             var DepartmentsList = DB.company_department.Where(s => id.Contains(s.company_id)).Select(x => new { x.id, x.department_en }).Distinct().ToList();
             DepartmentsList.Add(new { id = 0, department_en = LocalizationGetter.GetString("Not Listed") });
             
@@ -112,15 +105,12 @@ namespace EC.Controllers.API
             var RelationTypesList = DB.company_relationship.Where(s => id.Contains(s.company_id)).Select(m => new { m.id, m.relationship_en }).OrderBy(t => t.relationship_en).Distinct().ToList();
             RelationTypesList.Add(new { id = 0, relationship_en = LocalizationGetter.GetString("Other") });
 
-
-
             var resultObj = new
             {
                 DepartmentsList,
                 LocationsList,
                 SecondaryTypesList,
-                RelationTypesList,
-                additionalCompanies = additionalCompanies.Distinct().Select(m => new { m.id, m.company_nm }).ToList()
+                RelationTypesList
             };
 
             return ResponseObject2Json(resultObj);

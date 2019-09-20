@@ -77,7 +77,7 @@
                 <div class="paddingTopForPrint30">
                     <strong>@GlobalRes.Number_cases_stage:</strong> @_today
 
-                    <div id="ddListForCases" ng-show="MenuCases.additionalCompanies.length > 1" style="float: right;top: -11px">
+                    <div id="ddListForCases" ng-show="additionalCompanies.length > 1" style="float: right;top: -11px">
                         <div class="parentClass" ng-click="showDDMenu = !showDDMenu">
                             <div class="menuItem">
                                 <div class="positionText">
@@ -95,7 +95,7 @@
                                             </span>
                                         </div>
                                     </li>
-                                    <li ng-repeat="company in MenuCases.additionalCompanies">
+                                    <li ng-repeat="company in additionalCompanies">
                                         <div class="liItem" ng-class="{'selected': company._selected}" value="{{company.id}}" nameDropdown="ReportsDepartmentIDStringss">
                                             <div class="checked">
                                                 <img class="" src="~/Content/img/check.png" />
