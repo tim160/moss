@@ -56,7 +56,6 @@
     function updateGraph(getCasesService, $scope, arraySelectedItems, companyIdArray, addPercentageRoundGraph) {
         var promiseObj = getCasesService.getData(arraySelectedItems, companyIdArray);
         promiseObj.then(function (response) {
-            console.log(response);
             $scope.chartColors = ['#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472', '#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472', '#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472'];
             $scope.chartColorsFunction = function (index) {
                 if (index >= $scope.chartColors.length) {
@@ -135,9 +134,14 @@
             }
         });
     };
+    function calculateAverage(arrayInt) {
+        var sum = 0;
+        sum += arrayInt.map(item => item);
+        return sum / arrayInt.length;
+    }
 
 
-    app.controller('CasesController', function ($scope, getCasesService, addPercentageRoundGraph, getMenuFilterCases, AnalyticsByDate, getAdditionalCompanies) {
+    app.controller('CasesController', function ($scope, getCasesService, addPercentageRoundGraph, getMenuFilterCases, AnalyticsByDate, getAdditionalCompanies, Holder) {
         var companyIdArray = Array();
         $scope.additionalCompanies = Array();
         $scope.showDDMenu = false;
@@ -147,11 +151,9 @@
         companyIdArrayPromise.then(function (response) {
             $scope.additionalCompanies = response.data.additionalCompanies;
             companyIdArray = $scope.additionalCompanies.map((item) => { return item.id; });
-
+            Holder.value = companyIdArray;
             putDataToPage(companyIdArray);
-
         });
-
 
         function putDataToPage(companyIdArray) {
             makeTodaySnapshot(AnalyticsByDate, $scope, companyIdArray);
@@ -267,11 +269,17 @@
 
     });
 
-    app.controller('CaseManagamentTime', function ($scope, getTurnAroundTime) {
+    app.controller('CaseManagamentTime', function ($scope, getTurnAroundTime, Holder) {
+        console.log(Holder.value);
+        //Holder
         var promiseObj = getTurnAroundTime.getData();
         promiseObj.then(function (response) {
+
             $scope.turnaroundTime = response.data.resultAroundTime;
+            console.log(response.data.resultAroundTime);
             $scope.CaseManagamentTime = response.data.CaseManagamentTime;
+            console.log(response.data.CaseManagamentTime);
+
             var columnData = [];
             var barData = [0];
             var anotherBar = [];
@@ -490,6 +498,12 @@
                     angular.element(daterange).triggerHandler('click');
                 });
             }
+        };
+    });
+
+    app.factory('Holder', function () {
+        return {
+            value: 0
         };
     });
 }());
