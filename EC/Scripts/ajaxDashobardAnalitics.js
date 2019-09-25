@@ -12,7 +12,12 @@
     };
     var app = angular.module('EC', ['nvd3', 'daterangepicker']);
 
-    app.controller('CasesController', function ($scope, getCasesService, addPercentageRoundGraph, getMenuFilterCases, AnalyticsByDate, HolderAdditionalCompanies) {
+    app.controller('CasesController', function ($scope, getCasesService, addPercentageRoundGraph, getMenuFilterCases, AnalyticsByDate, HolderAdditionalCompanies, getTurnAroundTime, responseTimeSettingsByStage ) {
+        var columnData = [];
+        var barData = [0];
+        var anotherBar = [];
+        var previousElement = 0;
+
         var companyIdArray = Array();
         $scope.additionalCompanies = Array();
         $scope.showDDMenu = false;
@@ -29,6 +34,7 @@
             makeTodaySnapshot(AnalyticsByDate, $scope, companyIdArray);
             makeMenuWithFilter(getMenuFilterCases, $scope, companyIdArray);
             updateGraph(getCasesService, $scope, arraySelectedItems, companyIdArray, addPercentageRoundGraph);
+            getTurnAroundTimeGraphs(companyIdArray);
         }
 
 
@@ -132,18 +138,11 @@
         $scope.showDDlist = false;
         $scope.displayCompanyName = document.querySelector("#ddListDefaultValue").value;
 
-    });
+        function getTurnAroundTimeGraphs(companyIdArray) {
 
-    app.controller('CaseManagamentTime', function ($scope, getTurnAroundTime, HolderAdditionalCompanies, responseTimeSettingsByStage) {
-        var columnData = [];
-        var barData = [0];
-        var anotherBar = [];
-        var previousElement = 0;
-
-        HolderAdditionalCompanies.getAdditionalCompaniesFactory().then(function (response) {
-            var additionalCompanies = response.data.additionalCompanies;
+            //var additionalCompanies = response.data.additionalCompanies;
             //Number Of Cases That Exceeded Turnaround Time
-            var promiseObj = getTurnAroundTime.getData(additionalCompanies);
+            var promiseObj = getTurnAroundTime.getData(companyIdArray);
             promiseObj.then(function (TurnAroundTime) {
 
                 $scope.turnaroundTime = TurnAroundTime.data.resultAroundTime;
@@ -160,11 +159,8 @@
                 //Response Time Settings By Stage
                 $scope.chart1 = responseTimeSettingsByStage.graph(columnData, anotherBar, $scope.chartColors);
             });
-        });
+        }
     });
-
-
-
 
     function makeTodaySnapshot(AnalyticsByDate, $scope, companyIdArray) {
         var analiticsObj = AnalyticsByDate.getData(companyIdArray);
@@ -386,12 +382,11 @@
     app.factory('getTurnAroundTime', function ($http, $q) {
         return {
             getData: function (arrayAdditionalCompanyId) {
-                debugger;
                 var deffered = $q.defer();
                 $http({
                     method: 'POST',
                     url: '/api/AnaliticsDashboardCases/getTurnAroundTime',
-                    params: arrayAdditionalCompanyId
+                    data: arrayAdditionalCompanyId
                 })
                     .then(function success(response) {
                         deffered.resolve(response);

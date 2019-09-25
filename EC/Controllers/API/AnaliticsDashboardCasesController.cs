@@ -45,13 +45,13 @@ namespace EC.Controllers.API
             return ResponseObject2Json(resultObj);
         }
         [HttpPost]
-        public Object GetTurnAroundTime()
+        public Object GetTurnAroundTime(int[] id)
         {
             user user = (user)System.Web.HttpContext.Current.Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
              return null;
             UserModel um = new UserModel(user.id);
-            var casesTurnAroundTime = um.AnalyticsCasesTurnAroundTime();
+            var casesTurnAroundTime = um.AnalyticsCasesTurnAroundTime(id);
        
             List<TodaySnapshot> resultAroundTime = new List<TodaySnapshot>();
             resultAroundTime.Add(new TodaySnapshot
