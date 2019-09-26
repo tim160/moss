@@ -1329,15 +1329,14 @@ namespace EC.Models
 
             foreach (var dbCompany in company_item)
             {
-
-                _array = calculateReportsInCompany(dbCompany);
+                _array = calculateReportsInCompany(dbCompany, ref _array);
                 //List<report> _all_reports = ReportsSearch(dbCompany.id, 0).Where(t => t.status_id != ECGlobalConstants.investigation_status_closed && t.status_id != ECGlobalConstants.investigation_status_spam).ToList();
 
             }
             return _array;
         }
 
-        private int[] calculateReportsInCompany(company dbCompany)
+        private int[] calculateReportsInCompany(company dbCompany, ref int[] _array)
         {
             int[] delay_allowed = new int[4];
             delay_allowed[0] = dbCompany.step1_delay;
@@ -1345,7 +1344,7 @@ namespace EC.Models
             delay_allowed[2] = dbCompany.step3_delay;
             delay_allowed[3] = dbCompany.step4_delay;
 
-            int[] _array = new int[] { 0, 0, 0, 0 };
+            
             List<int> allowed_statuses = new List<int> { ECGlobalConstants.investigation_status_pending, ECGlobalConstants.investigation_status_review, ECGlobalConstants.investigation_status_investigation, ECGlobalConstants.investigation_status_completed };
 
             List<report> _all_reports = db.report.Where(
