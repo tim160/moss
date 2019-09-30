@@ -694,39 +694,52 @@ public class GlobalFunctions
     {
         ReportModel rm = new ReportModel();
         DataTable dt = dtDoughnutTable();
-
         DataRow dr;
 
-        _all_reports.Where(c => c.location_id == null || !c.location_id.HasValue).ToList().ForEach(c => c.location_id = 0);
+        List<CompanyLocation> ResultLocations = _all_reports.Select(rep => rep.location_id).Select(rep => new CompanyLocation { id = rep.Value }).ToList();
+        int[] idLocations = ResultLocations.Select(idLoc => idLoc.id).ToArray();
+        var locations = db.company_location.Where(location => idLocations.Contains(location.id)).ToArray();
+        //Dictionary<int, company_location> countCompanyLocations = new Dictionary<int, company_location>();
 
-        var groups = _all_reports.GroupBy(s => s.location_id).Select(s => new { key = s.Key.Value, val = s.Count() }).OrderByDescending(t => t.val);
-
-        company_location temp_cm;
-        string temp_loc = "";
-
-        foreach (var item in groups)
+        List<CompanyLocation> ResultResultLocations = new List<CompanyLocation>();
+        foreach(var location in locations)
         {
-            if (item.key != 0)
+            //checkisAlreadyAdded
+            int countAlreadyadded = 0;
+            if(ResultResultLocations.Count > 0)
             {
-                temp_loc = "";
-                temp_cm = db.company_location.Where(t => t.id == item.key).FirstOrDefault();
-                if (temp_cm != null)
+                foreach(var rrlocation in ResultResultLocations)
                 {
-                    temp_loc = temp_cm.location_en;
+                    if (rrlocation.NameLocation.Equals(location.location_en, StringComparison.OrdinalIgnoreCase))
+                    {
+                        countAlreadyadded++;
+                    }
+                    
                 }
             }
-            else
-                temp_loc = GlobalRes.Other;
-
-            if (temp_loc.Length > 0)
+            if (countAlreadyadded > 0)
             {
-                dr = dt.NewRow();
-                dr["name"] = temp_loc;
-                dr["val"] = item.val;
-                dt.Rows.Add(dr);
+                int countSameLocations = idLocations.Where(idLoc => idLoc == location.id).Count();
+                CompanyLocation updateLocation = ResultResultLocations.Where(rl => rl.NameLocation == location.location_en).FirstOrDefault();
+                if (updateLocation!=null) { updateLocation.countLocations += countSameLocations; }
+            }
+            else
+            {
+                //create New Location
+                CompanyLocation newLocation = new CompanyLocation();
+                newLocation.id = location.id;
+                newLocation.NameLocation = location.location_en;
+                newLocation.countLocations = ResultLocations.Where(rl => rl.id == location.id).Count();
+                ResultResultLocations.Add(newLocation);
             }
         }
-
+        foreach (var resultLocation in ResultResultLocations)
+        {
+            dr = dt.NewRow();
+            dr["name"] = resultLocation.NameLocation;
+            dr["val"] = resultLocation.countLocations;
+            dt.Rows.Add(dr);
+        }
         return dt;
     }
 
@@ -1721,4 +1734,10 @@ public class GlobalFunctions
 
         return true;
     }
+}
+class CompanyLocation
+{
+    public int id { get; set; }
+    public int countLocations { get; set; }
+    public string NameLocation { get; set; }
 }
