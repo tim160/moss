@@ -20,6 +20,7 @@ using log4net;
 using EC.Common.Util;
 using EC.Common.Base;
 using System.Net;
+using EC.Localization;
 
 /// <summary>
 /// Global Functions for EC Project
@@ -706,11 +707,23 @@ public class GlobalFunctions
         DataTable dt = dtDoughnutTable();
         DataRow dr;
 
-        List<CompanyLocation> ResultLocations = _all_reports.Select(rep => rep.location_id).Select(rep => new CompanyLocation { id = rep.Value }).ToList();
+        List<CompanyLocation> ResultLocations = _all_reports.Select(rep => rep.location_id != null ? rep.location_id : 0).Select(rep => new CompanyLocation {
+            id = rep.Value }).ToList();
         int[] idLocations = ResultLocations.Select(idLoc => idLoc.id).ToArray();
         var locations = db.company_location.Where(location => idLocations.Contains(location.id)).ToArray();
 
         List<CompanyLocation> ResultResultLocations = new List<CompanyLocation>();
+        int countOther = idLocations.Where(idLoc => idLoc == 0).Count();
+        if(countOther > 0)
+        {
+            ResultResultLocations.Add(new CompanyLocation
+            {
+                id = 0,
+                countLocations = countOther,
+                NameLocation = LocalizationGetter.GetString("Other", false)
+            });
+
+        }
         foreach(var location in locations)
         {
             //checkisAlreadyAdded
@@ -919,44 +932,86 @@ public class GlobalFunctions
 
     public DataTable RelationshipToCompanyByDateAdvanced(List<report> _all_reports, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
     {
-        ReportModel rm = new ReportModel();
+        //ReportModel rm = new ReportModel();
 
         // merge with previous
         List<Int32> _report_ids = _all_reports.Select(t => t.id).ToList();
 
         DataTable dt = dtDoughnutTable();
-
-        List<report_relationship> _all_relations = db.report_relationship.Where(item => (_report_ids.Contains(item.report_id))).ToList();
-        _all_relations.Where(c => c.company_relationship_id == null || !c.company_relationship_id.HasValue).ToList().ForEach(c => c.company_relationship_id = 0);
-
-        var groups = _all_relations.GroupBy(s => s.company_relationship_id).Select(s => new { key = s.Key, val = s.Count() }).OrderByDescending(t => t.val);
-
-        string temp_rel = "";
-        company_relationship temp_c_rel;
         DataRow dr;
+        var ShipCompany = db.report_relationship.Join(db.company_relationship,
+                                                        post => post.relationship_id.Value,
+                                                        meta => meta.id,
+                                                        (post, meta) => new { Post = post, Meta = meta })
+                                                        .Where(postAndMeta => _report_ids.Contains(postAndMeta.Post.report_id));
 
-        foreach (var item in groups)
+        List<CompanyLocation> shipComapanies = new List<CompanyLocation>();
+
+        foreach(var ship in ShipCompany)
         {
-            if (item.key != 0)
+            //checkisAlreadyAdded
+            int countAlreadyadded = 0;
+            if (shipComapanies.Count > 0)
             {
-                temp_rel = "";
-                temp_c_rel = db.company_relationship.Where(t => t.id == item.key).FirstOrDefault();
-                if (temp_c_rel != null)
+                foreach (var rrlocation in shipComapanies)
                 {
-                    temp_rel = temp_c_rel.relationship_en;
+                    if (rrlocation.NameLocation.Equals(ship.Meta.relationship_en, StringComparison.OrdinalIgnoreCase))
+                    {
+                        countAlreadyadded++;
+                    }
                 }
             }
-            else
-                temp_rel = GlobalRes.Other;
 
-            if (temp_rel.Length > 0)
+            if (countAlreadyadded == 0)
             {
-                dr = dt.NewRow();
-                dr["name"] = temp_rel;
-                dr["val"] = item.val;
-                dt.Rows.Add(dr);
+                int countSameShip = ShipCompany.Where(sameLoc => sameLoc.Meta.relationship_en.Equals(ship.Meta.relationship_en)).Count();
+                CompanyLocation newLocation = new CompanyLocation();
+                newLocation.id = ship.Meta.id;
+                newLocation.NameLocation = ship.Meta.relationship_en;
+                newLocation.countLocations = countSameShip;
+                shipComapanies.Add(newLocation);
             }
         }
+
+        foreach (var ship in shipComapanies)
+        {
+            dr = dt.NewRow();
+            dr["name"] = ship.NameLocation;
+            dr["val"] = ship.countLocations;
+            dt.Rows.Add(dr);
+        }
+
+        //List<report_relationship> _all_relations = db.report_relationship.Where(item => (_report_ids.Contains(item.report_id))).ToList();
+        //_all_relations.Where(c => c.company_relationship_id == null || !c.company_relationship_id.HasValue).ToList().ForEach(c => c.company_relationship_id = 0);
+
+        //var groups = _all_relations.GroupBy(s => s.company_relationship_id).Select(s => new { key = s.Key, val = s.Count() }).OrderByDescending(t => t.val);
+
+        //string temp_rel = "";
+        //company_relationship temp_c_rel;
+        //DataRow dr;
+
+        //foreach (var item in groups)
+        //{
+        //    if (item.key != 0)
+        //    {
+        //        temp_rel = "";
+        //        temp_c_rel = db.company_relationship.Where(t => t.id == item.key).FirstOrDefault();
+        //        if (temp_c_rel != null)
+        //        {
+        //            temp_rel = temp_c_rel.relationship_en;
+        //        }
+        //    }
+        //    else
+        //        temp_rel = GlobalRes.Other;
+
+        //    if (temp_rel.Length > 0)
+        //    {
+        //        dr = dt.NewRow();
+        //        dr["name"] = temp_rel;
+        //        dr["val"] = item.val;
+        //        dt.Rows.Add(dr);
+        //    }
+        //}
 
         return dt;
     }
