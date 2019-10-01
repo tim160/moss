@@ -655,36 +655,46 @@ public class GlobalFunctions
     {
         DataTable dt = dtDoughnutTable();
         DataRow dr;
-        company_department temp_c_dep;
-
         List<int> report_ids_list = _all_reports.Select(t => t.id).ToList();
-        List<report_department> departmentsList = db.report_department.Where(t => report_ids_list.Contains(t.report_id)).ToList();
 
-        var groups = departmentsList.GroupBy(s => s.department_id).Select(s => new { key = s.Key, val = s.Count() }).OrderByDescending(t => t.val);
+        var DepAndReports = db.report_department.Join(db.company_department,
+                                            post => post.department_id,
+                                            meta => meta.id,
+                                            (post, meta) => new { Post = post, Meta = meta })
+                                            .Where(postAndMeta => report_ids_list.Contains(postAndMeta.Post.report_id));
+        List<CompanyLocation> companyDepatments = new List<CompanyLocation>();
 
-        string temp_dep = "";
-
-        foreach (var item in groups)
+        foreach(var department in DepAndReports)
         {
-            if (item.key != 0)
+            //checkisAlreadyAdded
+            int countAlreadyadded = 0;
+            if (companyDepatments.Count > 0)
             {
-                temp_dep = "";
-                temp_c_dep = db.company_department.Where(t => t.id == item.key).FirstOrDefault();
-                if (temp_c_dep != null)
+                foreach (var rrlocation in companyDepatments)
                 {
-                    temp_dep = temp_c_dep.department_en;
+                    if (rrlocation.NameLocation.Equals(department.Meta.department_en, StringComparison.OrdinalIgnoreCase))
+                    {
+                        countAlreadyadded++;
+                    }
                 }
             }
-            else
-                temp_dep = GlobalRes.Other;
 
-            if (temp_dep.Length > 0)
+            if (countAlreadyadded == 0)
             {
-                dr = dt.NewRow();
-                dr["name"] = temp_dep;
-                dr["val"] = item.val;
-                dt.Rows.Add(dr);
+                int countSameLocations = DepAndReports.Where(sameLoc => sameLoc.Meta.department_en.Equals(department.Meta.department_en)).Count();
+                CompanyLocation newLocation = new CompanyLocation();
+                newLocation.id = department.Meta.id;
+                newLocation.NameLocation = department.Meta.department_en;
+                newLocation.countLocations = countSameLocations;
+                companyDepatments.Add(newLocation);
             }
+        }
+        foreach (var department in companyDepatments)
+        {
+            dr = dt.NewRow();
+            dr["name"] = department.NameLocation;
+            dr["val"] = department.countLocations;
+            dt.Rows.Add(dr);
         }
         return dt;
     }
@@ -699,7 +709,6 @@ public class GlobalFunctions
         List<CompanyLocation> ResultLocations = _all_reports.Select(rep => rep.location_id).Select(rep => new CompanyLocation { id = rep.Value }).ToList();
         int[] idLocations = ResultLocations.Select(idLoc => idLoc.id).ToArray();
         var locations = db.company_location.Where(location => idLocations.Contains(location.id)).ToArray();
-        //Dictionary<int, company_location> countCompanyLocations = new Dictionary<int, company_location>();
 
         List<CompanyLocation> ResultResultLocations = new List<CompanyLocation>();
         foreach(var location in locations)
