@@ -932,45 +932,64 @@ public class GlobalFunctions
 
     public DataTable RelationshipToCompanyByDateAdvanced(List<report> _all_reports, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
     {
-        //ReportModel rm = new ReportModel();
-
         // merge with previous
         List<Int32> _report_ids = _all_reports.Select(t => t.id).ToList();
 
         DataTable dt = dtDoughnutTable();
         DataRow dr;
-        var ShipCompany = db.report_relationship.Join(db.company_relationship,
-                                                        post => post.relationship_id.Value,
-                                                        meta => meta.id,
-                                                        (post, meta) => new { Post = post, Meta = meta })
-                                                        .Where(postAndMeta => _report_ids.Contains(postAndMeta.Post.report_id));
+
+        var ShipCompany = (
+            db.report_relationship.GroupJoin(
+                db.company_relationship,
+                left => left.company_relationship_id,
+                right => right.id,
+                (left, right) => new
+                {
+                    TableA = right,
+                    TableB = left
+                }).SelectMany(p => p.TableA.DefaultIfEmpty(), (x, y) => new
+                {
+                    TableA = y,
+                    TableB = x.TableB
+                }).Where(u => _report_ids.Contains(u.TableB.report_id)));
+
 
         List<CompanyLocation> shipComapanies = new List<CompanyLocation>();
 
-        foreach(var ship in ShipCompany)
+        foreach (var ship in ShipCompany)
         {
-            //checkisAlreadyAdded
-            int countAlreadyadded = 0;
-            if (shipComapanies.Count > 0)
+            if(ship.TableA != null)
             {
-                foreach (var rrlocation in shipComapanies)
+                //checkisAlreadyAdded
+                int countAlreadyadded = 0;
+                if (shipComapanies.Count > 0)
                 {
-                    if (rrlocation.NameLocation.Equals(ship.Meta.relationship_en, StringComparison.OrdinalIgnoreCase))
+                    foreach (var rrlocation in shipComapanies)
                     {
-                        countAlreadyadded++;
+                        if (rrlocation.NameLocation.Equals(ship.TableA.relationship_en, StringComparison.OrdinalIgnoreCase))
+                        {
+                            countAlreadyadded++;
+                        }
                     }
                 }
-            }
 
-            if (countAlreadyadded == 0)
-            {
-                int countSameShip = ShipCompany.Where(sameLoc => sameLoc.Meta.relationship_en.Equals(ship.Meta.relationship_en)).Count();
-                CompanyLocation newLocation = new CompanyLocation();
-                newLocation.id = ship.Meta.id;
-                newLocation.NameLocation = ship.Meta.relationship_en;
-                newLocation.countLocations = countSameShip;
-                shipComapanies.Add(newLocation);
+                if (countAlreadyadded == 0)
+                {
+                    int countSameShip = ShipCompany.Where(sameLoc => sameLoc.TableA.relationship_en.Equals(ship.TableA.relationship_en)).Count();
+                    CompanyLocation newLocation = new CompanyLocation();
+                    newLocation.id = ship.TableA.id;
+                    newLocation.NameLocation = ship.TableA.relationship_en;
+                    newLocation.countLocations = countSameShip;
+                    shipComapanies.Add(newLocation);
+                }
             }
+        }
+        var countOther = new CompanyLocation();
+        countOther.countLocations = ShipCompany.Where(t => t.TableA == null).Count();
+        countOther.NameLocation = LocalizationGetter.GetString("Other", false);
+        if(countOther.countLocations > 0)
+        {
+            shipComapanies.Add(countOther);
         }
 
         foreach (var ship in shipComapanies)
@@ -980,38 +999,6 @@ public class GlobalFunctions
             dr["val"] = ship.countLocations;
             dt.Rows.Add(dr);
         }
-
-        //List<report_relationship> _all_relations = db.report_relationship.Where(item => (_report_ids.Contains(item.report_id))).ToList();
-        //_all_relations.Where(c => c.company_relationship_id == null || !c.company_relationship_id.HasValue).ToList().ForEach(c => c.company_relationship_id = 0);
-
-        //var groups = _all_relations.GroupBy(s => s.company_relationship_id).Select(s => new { key = s.Key, val = s.Count() }).OrderByDescending(t => t.val);
-
-        //string temp_rel = "";
-        //company_relationship temp_c_rel;
-        //DataRow dr;
-
-        //foreach (var item in groups)
-        //{
-        //    if (item.key != 0)
-        //    {
-        //        temp_rel = "";
-        //        temp_c_rel = db.company_relationship.Where(t => t.id == item.key).FirstOrDefault();
-        //        if (temp_c_rel != null)
-        //        {
-        //            temp_rel = temp_c_rel.relationship_en;
-        //        }
-        //    }
-        //    else
-        //        temp_rel = GlobalRes.Other;
-
-        //    if (temp_rel.Length > 0)
-        //    {
-        //        dr = dt.NewRow();
-        //        dr["name"] = temp_rel;
-        //        dr["val"] = item.val;
-        //        dt.Rows.Add(dr);
-        //    }
-        //}
 
         return dt;
     }
