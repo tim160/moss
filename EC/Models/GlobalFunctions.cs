@@ -643,7 +643,7 @@ public class GlobalFunctions
         if (ReportsLocationIDs.Count > 0)
         {
             //_all_reports_old = _all_reports_old.Where(t => ReportsLocationIDs.Contains(t.location_id)).ToList();
-            _all_reports_old = _all_reports_old.Where(t => ReportsLocationIDs.Any( report => report == t.location_id)).ToList();
+            _all_reports_old = _all_reports_old.Where(t => ReportsLocationIDs.Any(report => report == t.location_id)).ToList();
         }
         #endregion
 
@@ -665,7 +665,7 @@ public class GlobalFunctions
                                             .Where(postAndMeta => report_ids_list.Contains(postAndMeta.Post.report_id));
         List<CompanyLocation> companyDepatments = new List<CompanyLocation>();
 
-        foreach(var department in DepAndReports)
+        foreach (var department in DepAndReports)
         {
             //checkisAlreadyAdded
             int countAlreadyadded = 0;
@@ -707,14 +707,16 @@ public class GlobalFunctions
         DataTable dt = dtDoughnutTable();
         DataRow dr;
 
-        List<CompanyLocation> ResultLocations = _all_reports.Select(rep => rep.location_id != null ? rep.location_id : 0).Select(rep => new CompanyLocation {
-            id = rep.Value }).ToList();
+        List<CompanyLocation> ResultLocations = _all_reports.Select(rep => rep.location_id != null ? rep.location_id : 0).Select(rep => new CompanyLocation
+        {
+            id = rep.Value
+        }).ToList();
         int[] idLocations = ResultLocations.Select(idLoc => idLoc.id).ToArray();
         var locations = db.company_location.Where(location => idLocations.Contains(location.id)).ToArray();
 
         List<CompanyLocation> ResultResultLocations = new List<CompanyLocation>();
         int countOther = idLocations.Where(idLoc => idLoc == 0).Count();
-        if(countOther > 0)
+        if (countOther > 0)
         {
             ResultResultLocations.Add(new CompanyLocation
             {
@@ -724,26 +726,26 @@ public class GlobalFunctions
             });
 
         }
-        foreach(var location in locations)
+        foreach (var location in locations)
         {
             //checkisAlreadyAdded
             int countAlreadyadded = 0;
-            if(ResultResultLocations.Count > 0)
+            if (ResultResultLocations.Count > 0)
             {
-                foreach(var rrlocation in ResultResultLocations)
+                foreach (var rrlocation in ResultResultLocations)
                 {
                     if (rrlocation.NameLocation.Equals(location.location_en, StringComparison.OrdinalIgnoreCase))
                     {
                         countAlreadyadded++;
                     }
-                    
+
                 }
             }
             if (countAlreadyadded > 0)
             {
                 int countSameLocations = idLocations.Where(idLoc => idLoc == location.id).Count();
                 CompanyLocation updateLocation = ResultResultLocations.Where(rl => rl.NameLocation == location.location_en).FirstOrDefault();
-                if (updateLocation!=null) { updateLocation.countLocations += countSameLocations; }
+                if (updateLocation != null) { updateLocation.countLocations += countSameLocations; }
             }
             else
             {
@@ -958,7 +960,7 @@ public class GlobalFunctions
 
         foreach (var ship in ShipCompany)
         {
-            if(ship.TableA != null)
+            if (ship.TableA != null)
             {
                 //checkisAlreadyAdded
                 int countAlreadyadded = 0;
@@ -984,10 +986,11 @@ public class GlobalFunctions
                 }
             }
         }
+        //put other
         var countOther = new CompanyLocation();
         countOther.countLocations = ShipCompany.Where(t => t.TableA == null).Count();
         countOther.NameLocation = LocalizationGetter.GetString("Other", false);
-        if(countOther.countLocations > 0)
+        if (countOther.countLocations > 0)
         {
             shipComapanies.Add(countOther);
         }
@@ -1005,40 +1008,68 @@ public class GlobalFunctions
 
     public DataTable SecondaryTypesByDateAdvanced(List<report> _all_reports, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
     {
-        ReportModel rm = new ReportModel();
+        //ReportModel rm = new ReportModel();
         // merge with previous
         List<Int32> _report_ids = _all_reports.Select(t => t.id).ToList();
 
         DataTable dt = dtDoughnutTable();
-
-        List<report_secondary_type> _all_types = db.report_secondary_type.Where(item => (_report_ids.Contains(item.report_id))).ToList();
-
-        var groups = _all_types.GroupBy(s => s.secondary_type_id).Select(s => new { key = s.Key, val = s.Count() }).OrderByDescending(t => t.val);
-
-        string temp_sec_type = "";
-        company_secondary_type temp_c_sec_type;
         DataRow dr;
-        foreach (var item in groups)
+        var secondaryType =
+        (
+        db.report_secondary_type.GroupJoin
+        (
+            db.company_secondary_type, left => left.secondary_type_id, right => right.id,
+            (left, right) => new { TableA = right, TableB = left })
+            .SelectMany(p => p.TableA.DefaultIfEmpty(), (x, y) =>
+                new { TableA = y, TableB = x.TableB })
+                .Where(u => _report_ids.Contains(u.TableB.report_id))
+        );
+
+        List<CompanyLocation> secondaryTypeResult = new List<CompanyLocation>();
+
+        foreach (var secondType in secondaryType)
         {
-            if (item.key != 0)
+            if (secondType.TableA != null)
             {
-                temp_sec_type = "";
-                temp_c_sec_type = db.company_secondary_type.Where(t => t.id == item.key).FirstOrDefault();
-                if (temp_c_sec_type != null)
+                //checkisAlreadyAdded
+                int countAlreadyadded = 0;
+                if (secondaryTypeResult.Count > 0)
                 {
-                    temp_sec_type = temp_c_sec_type.secondary_type_en;
+                    foreach (var rrlocation in secondaryTypeResult)
+                    {
+                        if (rrlocation.NameLocation.Equals(secondType.TableA.secondary_type_en, StringComparison.OrdinalIgnoreCase))
+                        {
+                            countAlreadyadded++;
+                        }
+                    }
+                }
+
+                if (countAlreadyadded == 0)
+                {
+                    int countSameShip = secondaryType.Where(sameLoc => sameLoc.TableA.secondary_type_en.Equals(secondType.TableA.secondary_type_en)).Count();
+                    CompanyLocation newLocation = new CompanyLocation();
+                    newLocation.id = secondType.TableA.id;
+                    newLocation.NameLocation = secondType.TableA.secondary_type_en;
+                    newLocation.countLocations = countSameShip;
+                    secondaryTypeResult.Add(newLocation);
                 }
             }
-            else
-                temp_sec_type = GlobalRes.Other;
+        }
+        //put other
+        var countOther = new CompanyLocation();
+        countOther.countLocations = secondaryType.Where(t => t.TableA == null).Count();
+        countOther.NameLocation = LocalizationGetter.GetString("Other", false);
+        if (countOther.countLocations > 0)
+        {
+            secondaryTypeResult.Add(countOther);
+        }
 
-            if (temp_sec_type.Length > 0)
-            {
-                dr = dt.NewRow();
-                dr["name"] = temp_sec_type;
-                dr["val"] = item.val;
-                dt.Rows.Add(dr);
-            }
+        foreach (var ship in secondaryTypeResult)
+        {
+            dr = dt.NewRow();
+            dr["name"] = ship.NameLocation;
+            dr["val"] = ship.countLocations;
+            dt.Rows.Add(dr);
         }
 
         return dt;
@@ -1229,7 +1260,7 @@ public class GlobalFunctions
 
     #region JsonReports
 
-    public string ReportAdvancedJson(int []company_id, int user_id, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
+    public string ReportAdvancedJson(int[] company_id, int user_id, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
     {
         ///   int[] _today_spanshot = AnalyticsByDateAdvanced(null, null, company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
 
