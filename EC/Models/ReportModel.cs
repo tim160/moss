@@ -2142,9 +2142,11 @@ namespace EC.Models
                 // if user is mediator from a company
                 if ((_user.role_id == 4) || (_user.role_id == 5) || (_user.role_id == 6) || (_user.role_id == 7))
                 {
-                    List<user> mediators = MediatorsWhoHasAccessToReport();
-                    if (mediators.Any(item => (item.id == user_id)))
-                        return true;
+
+                  UserModel um = new UserModel(user_id);
+                  var user_report_ids = um.GetReportIds(null);
+                  if (user_report_ids.Contains(ID))
+                          return true;
                 }
 
                 //legal cannot access any report
