@@ -216,13 +216,7 @@ namespace EC.Models
             return user;
         }
         #endregion
-
-        public List<user_role> GetAllRoles()
-        {
-            return db.user_role.ToList();
-        }
-
-
+     
         /// <summary>
         /// list of all reports user can access.
         /// </summary>
@@ -250,8 +244,19 @@ namespace EC.Models
                 // if user is top mediator - we can show all reports from company where user is not involved
                 if ((_user.role_id == 4) || (_user.role_id == 5))
                 {
+
+                  CompanyModel cm = new CompanyModel(_user.company_id);
+                  List<company> availableCompanies = cm.AdditionalCompanies();
+
                     List<int> involved_report_ids = (db.report_mediator_involved.Where(item => (item.mediator_id == _user.id)).Select(item => item.report_id)).ToList();
-                    all_reports = (db.report.Where(item => ((item.company_id == _user.company_id) && (!involved_report_ids.Contains(item.id))))).ToList();
+                    if (availableCompanies.Count > 1)
+                    {
+                      List<int> availableCompaniesID = availableCompanies.Select(t => t.id).ToList().Distinct().ToList();
+                      all_reports = (db.report.Where(item => ((availableCompaniesID.Contains(item.company_id)) && (!involved_report_ids.Contains(item.id))))).ToList();
+
+                    }
+                    else
+                      all_reports = (db.report.Where(item => ((item.company_id == _user.company_id) && (!involved_report_ids.Contains(item.id))))).ToList();
                 }
                 // if user is regular mediator - we show only reports where he is assigned and hide all others
                 if ((_user.role_id == 6))
@@ -345,63 +350,86 @@ namespace EC.Models
             return reports;
         }
 
-        /// <summary>
-        /// returns id's of reports user can access
-        /// </summary>
-        /// <param name="user_id"></param>
-        /// <param name="report_id"></param>
-        /// <returns></returns>
-        public List<int> GetReportIds(int? report_id)
+    /// <summary>
+    /// returns id's of reports user can access
+    /// </summary>
+    /// <param name="user_id"></param>
+    /// <param name="report_id"></param>
+    /// <returns></returns>
+    public List<int> GetReportIds(int? report_id)
+    {
+      List<int> all_report_ids = new List<int>();
+
+      // if user is top mediator - we can show all reports from company where user is not involved
+      if ((_user != null) && (_user.id != 0))
+      {
+        #region List of reports for the user
+        if ((report_id.HasValue) && (report_id != 0))
         {
-            List<int> all_report_ids = new List<int>();
+          // if user is top mediator - we can show all reports from company where user is not involved
+          if ((_user.role_id == 4) || (_user.role_id == 5))
+          {
+            List<int> involved_report_ids = (db.report_mediator_involved.Where(item => (item.mediator_id == _user.id)).Select(item => item.report_id)).ToList();
 
-            // if user is top mediator - we can show all reports from company where user is not involved
-            if ((_user != null) && (_user.id != 0))
+            CompanyModel cm = new CompanyModel(_user.company_id);
+            List<company> availableCompanies = cm.AdditionalCompanies();
+
+            if (availableCompanies.Count > 1)
             {
-                #region List of reports for the user
-                if ((report_id.HasValue) && (report_id != 0))
-                {
-                    // if user is top mediator - we can show all reports from company where user is not involved
-                    if ((_user.role_id == 4) || (_user.role_id == 5))
-                    {
-                        List<int> involved_report_ids = (db.report_mediator_involved.Where(item => (item.mediator_id == _user.id)).Select(item => item.report_id)).ToList();
-                        all_report_ids = (db.report.Where(item => ((item.company_id == _user.company_id) && (!involved_report_ids.Contains(item.id)) && (item.id == report_id))).Select(item => item.id)).ToList();
-                    }
-                    // if user is regular mediator - we show only reports where he is assigned and hide all others
-                    if ((_user.role_id == 6))
-                    {
-                        List<int> assigned_report_ids = (db.report_mediator_assigned.Where(item => (item.mediator_id == _user.id) && (item.status_id == 2) && (item.report_id == report_id)).Select(item => item.report_id)).ToList();
-                        all_report_ids = (db.report.Where(item => assigned_report_ids.Contains(item.id)).Select(item => item.id)).ToList();
-                    }
-                    if ((_user.role_id == 8))
-                    {
-                        all_report_ids = (db.report.Where(item => (item.reporter_user_id == _user.id) && (item.id == report_id)).Select(item => item.id)).ToList();
-                    }
-                }
-                else
-                {
-                    // if user is top mediator - we can show all reports from company where user is not involved
-                    if ((_user.role_id == 4) || (_user.role_id == 5))
-                    {
-                        List<int> involved_report_ids = (db.report_mediator_involved.Where(item => (item.mediator_id == _user.id)).Select(item => item.report_id)).ToList();
-                        all_report_ids = (db.report.Where(item => ((item.company_id == _user.company_id) && (!involved_report_ids.Contains(item.id)))).Select(item => item.id)).ToList();
-                    }
-                    // if user is regular mediator/ legal counsil - we show only reports where he is assigned and hide all others
-                    if ((_user.role_id == 6) || (_user.role_id == 7))
-                    {
-                        List<int> assigned_report_ids = (db.report_mediator_assigned.Where(item => ((item.mediator_id == _user.id) && (item.status_id == 2))).Select(item => item.report_id)).ToList();
-                        all_report_ids = (db.report.Where(item => assigned_report_ids.Contains(item.id)).Select(item => item.id)).ToList();
-                    }
-                    if ((_user.role_id == 8))
-                    {
-                        all_report_ids = (db.report.Where(item => item.reporter_user_id == _user.id).Select(item => item.id)).ToList();
-                    }
-                }
-                #endregion
-            }
+              List<int> availableCompaniesID = availableCompanies.Select(t => t.id).ToList().Distinct().ToList();
 
-            return all_report_ids;
+              all_report_ids = (db.report.Where(item => (((availableCompaniesID.Contains(item.company_id)) && (!involved_report_ids.Contains(item.id)) && (item.id == report_id)))).Select(item => item.id)).ToList();
+
+            }
+            else
+              all_report_ids = (db.report.Where(item => ((item.company_id == _user.company_id) && (!involved_report_ids.Contains(item.id)) && (item.id == report_id))).Select(item => item.id)).ToList();
+          }
+          // if user is regular mediator - we show only reports where he is assigned and hide all others
+          if ((_user.role_id == 6))
+          {
+            List<int> assigned_report_ids = (db.report_mediator_assigned.Where(item => (item.mediator_id == _user.id) && (item.status_id == 2) && (item.report_id == report_id)).Select(item => item.report_id)).ToList();
+            all_report_ids = (db.report.Where(item => assigned_report_ids.Contains(item.id)).Select(item => item.id)).ToList();
+          }
+          if ((_user.role_id == 8))
+          {
+            all_report_ids = (db.report.Where(item => (item.reporter_user_id == _user.id) && (item.id == report_id)).Select(item => item.id)).ToList();
+          }
         }
+        else
+        {
+          // if user is top mediator - we can show all reports from company where user is not involved
+          if ((_user.role_id == 4) || (_user.role_id == 5))
+          {
+            List<int> involved_report_ids = (db.report_mediator_involved.Where(item => (item.mediator_id == _user.id)).Select(item => item.report_id)).ToList();
+
+            CompanyModel cm = new CompanyModel(_user.company_id);
+            List<company> availableCompanies = cm.AdditionalCompanies();
+
+            if (availableCompanies.Count > 1)
+            {
+              List<int> availableCompaniesID = availableCompanies.Select(t => t.id).ToList().Distinct().ToList();
+              all_report_ids = (db.report.Where(item => (((availableCompaniesID.Contains(item.company_id)) && (!involved_report_ids.Contains(item.id))))).Select(item => item.id)).ToList();
+
+            }
+            else
+                all_report_ids = (db.report.Where(item => ((item.company_id == _user.company_id) && (!involved_report_ids.Contains(item.id)))).Select(item => item.id)).ToList();
+          }
+          // if user is regular mediator/ legal counsil - we show only reports where he is assigned and hide all others
+          if ((_user.role_id == 6) || (_user.role_id == 7))
+          {
+            List<int> assigned_report_ids = (db.report_mediator_assigned.Where(item => ((item.mediator_id == _user.id) && (item.status_id == 2))).Select(item => item.report_id)).ToList();
+            all_report_ids = (db.report.Where(item => assigned_report_ids.Contains(item.id)).Select(item => item.id)).ToList();
+          }
+          if ((_user.role_id == 8))
+          {
+            all_report_ids = (db.report.Where(item => item.reporter_user_id == _user.id).Select(item => item.id)).ToList();
+          }
+        }
+        #endregion
+      }
+
+      return all_report_ids;
+    }
 
         public List<int> ReportsSearchIds(int? company_id, int flag)
         {
@@ -537,26 +565,7 @@ namespace EC.Models
 
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="user_id"></param>
-        /// <param name="report_id"></param>
-        /// <param name="flag">0 - all reports, 1 - active, 2 - closed, 3 - spam, 4 - pending only</param>
-        /// <returns></returns>
-        public List<int> ReportsSearchIds_bkp(int? company_id, int flag)
-        {
-            List<report> _reportsSearch = ReportsSearch(company_id, flag).ToList();
-
-            List<int> search_report_ids = new List<int>();
-            foreach (report _report in _reportsSearch)
-            {
-                search_report_ids.Add(_report.id);
-            }
-
-            return search_report_ids;
-        }
-
+       
 
         /// <summary>
         ///  https://projects.invisionapp.com/d/#/console/2453713/75211865/preview
@@ -1171,25 +1180,7 @@ namespace EC.Models
                 vm.all_closed_report_ids = (db.report.Where(item => ((assigned_report_ids.Contains(item.id) && (item.status_id == ECGlobalConstants.investigation_status_closed)))).Select(item => item.id)).ToList();
                 vm.all_pending_report_ids = (db.report.Where(item => ((assigned_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_pending || item.status_id == ECGlobalConstants.investigation_status_review))).Select(item => item.id)).ToList();
             }
-
-
-
-            /*   List<int> reports_with_history = (from m in refGroupInvestigationStatuses
-
-                                                 where m.investigation_status_id > 0
-
-                                                 select m.report_id).ToList();
-
-               IEnumerable<int> excluded = all_reports_id.Except(reports_with_history);
-
-
-
-               statuses_match_all_report_id.AddRange(excluded);
-
-               vm.all_pending_report_ids = all_reports_id.Intersect(statuses_match_all_report_id).OrderByDescending(t => t).ToList();
-               */
-
-
+             
             return vm;
 
         }
