@@ -53,47 +53,7 @@ namespace EC.Controllers.API
             UserModel um = new UserModel(user.id);
             var casesTurnAroundTime = um.AnalyticsCasesTurnAroundTime(id);
        
-            List<TodaySnapshot> resultAroundTime = new List<TodaySnapshot>();
-            resultAroundTime.Add(new TodaySnapshot
-            {
-                numberOfCases = casesTurnAroundTime[0],
-                miniSquareColor = "#d47472",
-                titleHeaderLegend = "New Report",
-            });
-            resultAroundTime.Add(new TodaySnapshot
-            {
-                numberOfCases = casesTurnAroundTime[1],
-                miniSquareColor = "#ff9b42",
-                titleHeaderLegend = "Report Review",
-            });
-            resultAroundTime.Add(new TodaySnapshot
-            {
-                numberOfCases = casesTurnAroundTime[2],
-                miniSquareColor = "#3099be",
-                titleHeaderLegend = "Under Investigation",
-            });
-            resultAroundTime.Add(new TodaySnapshot
-            {
-                numberOfCases = casesTurnAroundTime[3],
-                miniSquareColor = "#64cd9b",
-                titleHeaderLegend = "Awaiting Sign-Off",
-            });
-
-            CompanyModel cm = new CompanyModel(um._user.company_id);
-            var CaseManagamentTime = new[]
-            {
-                new {Name = "New Report", value = cm._company.step1_delay },
-                new {Name = "Report Review", value = cm._company.step2_delay },
-                new {Name = "Under Inves", value = cm._company.step3_delay },  //WARNING Under Inves
-                new {Name = "Awaiting Sign-Off", value = cm._company.step4_delay }
-            };
-
-            var resultobj = new
-            {
-                resultAroundTime = resultAroundTime,
-                CaseManagamentTime = CaseManagamentTime
-            };
-            return ResponseObject2Json(resultobj);
+            return ResponseObject2Json(casesTurnAroundTime);
         }
     }
     class TodaySnapshot

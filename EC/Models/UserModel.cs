@@ -18,6 +18,7 @@ using EC.Models.ViewModels;
 using EC.Models.ViewModel;
 using EC.Utils;
 using System.Threading.Tasks;
+using EC.Controllers.API;
 
 namespace EC.Models
 {
@@ -1321,19 +1322,73 @@ namespace EC.Models
             return reports;
         }
 
-        public int[] AnalyticsCasesTurnAroundTime(int[] idAdditionalComapanies)
+        public Object AnalyticsCasesTurnAroundTime(int[] idAdditionalComapanies)
         {
-
             List<company> company_item = db.company.Where(c => idAdditionalComapanies.Contains(c.id)).ToList();
-            int[] _array = new int[] { 0, 0, 0, 0 };
 
-            foreach (var dbCompany in company_item)
+            var resultobj = new
+            {
+                resultAroundTime = calcAroundTime(company_item),
+                CaseManagamentTime = calculateResponseTimeCompanies(company_item),
+            };
+            return resultobj;
+        }
+        private List<TodaySnapshot> calcAroundTime(List<company> companies)
+        {
+            int[] _array = new int[] { 0, 0, 0, 0 };
+            foreach (var dbCompany in companies)
             {
                 _array = calculateReportsInCompany(dbCompany, ref _array);
-                //List<report> _all_reports = ReportsSearch(dbCompany.id, 0).Where(t => t.status_id != ECGlobalConstants.investigation_status_closed && t.status_id != ECGlobalConstants.investigation_status_spam).ToList();
-
             }
-            return _array;
+            List<TodaySnapshot> resultAroundTime = new List<TodaySnapshot>();
+            resultAroundTime.Add(new TodaySnapshot
+            {
+                numberOfCases = _array[0],
+                miniSquareColor = "#d47472",
+                titleHeaderLegend = "New Report",
+            });
+            resultAroundTime.Add(new TodaySnapshot
+            {
+                numberOfCases = _array[1],
+                miniSquareColor = "#ff9b42",
+                titleHeaderLegend = "Report Review",
+            });
+            resultAroundTime.Add(new TodaySnapshot
+            {
+                numberOfCases = _array[2],
+                miniSquareColor = "#3099be",
+                titleHeaderLegend = "Under Investigation",
+            });
+            resultAroundTime.Add(new TodaySnapshot
+            {
+                numberOfCases = _array[3],
+                miniSquareColor = "#64cd9b",
+                titleHeaderLegend = "Awaiting Sign-Off",
+            });
+            return resultAroundTime;
+        }
+        private object calculateResponseTimeCompanies(List<company> companies)
+        {
+            int[] _array = new int[] { 0, 0, 0, 0 };
+            foreach (var company in companies)
+            {
+                _array[0] += company.step1_delay;
+                _array[1] += company.step2_delay;
+                _array[2] += company.step3_delay;
+                _array[3] += company.step4_delay;
+            }
+            _array[0] = _array[0] / companies.Count();
+            _array[1] = _array[1] / companies.Count();
+            _array[2] = _array[2] / companies.Count();
+            _array[3] = _array[3] / companies.Count();
+
+            return new []
+            {
+                new {Name = "New Report", value = _array[0] },
+                new {Name = "Report Review", value = _array[1] },
+                new {Name = "Under Inves", value = _array[2] },  //WARNING Under Inves
+                new {Name = "Awaiting Sign-Off", value = _array[3] }
+            };
         }
 
         private int[] calculateReportsInCompany(company dbCompany, ref int[] _array)
