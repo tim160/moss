@@ -32,7 +32,7 @@
 
         function putDataToPage(companyIdArray) {
             makeTodaySnapshot(AnalyticsByDate, $scope, companyIdArray);
-            makeMenuWithFilter(getMenuFilterCases, $scope, companyIdArray);
+            //makeMenuWithFilter(getMenuFilterCases, $scope, companyIdArray); //it's goes to updated graph
             updateGraph(getCasesService, $scope, arraySelectedItems, companyIdArray, addPercentageRoundGraph);
             getTurnAroundTimeGraphs(companyIdArray);
         }
@@ -156,6 +156,7 @@
                     previousElement = previousElement + element;
                     anotherBar.push([previousElement]);
                 });
+
                 //Response Time Settings By Stage
                 $scope.chart1 = responseTimeSettingsByStage.graph(columnData, anotherBar, $scope.chartColors);
             });
@@ -170,10 +171,11 @@
         });
     }
 
-    function makeMenuWithFilter(getMenuFilterCases, $scope, companyIdArray) {
-        var promiseObjGetMenu = getMenuFilterCases.getData(companyIdArray);
-        promiseObjGetMenu.then(function (response) {
-            $scope.MenuCases = response.data;
+    function makeMenuWithFilter($scope) {
+        //var promiseObjGetMenu = getMenuFilterCases.getData(companyIdArray);
+        //promiseObjGetMenu.then(function (response) {
+        console.log($scope.dataCases);
+            //$scope.MenuCases = response.data;
             $scope.selectedCasesFilters = 0;
             $scope.selectedCasesFilterString = '';
             $scope.selectedItemClick = function ($event, clickedItemId, menu) {
@@ -199,12 +201,17 @@
                 arraySelectedItems["data_range"] = clickedItemId;
                 //updateGraph();
             }
-        });
+        //});
     }
 
     function updateGraph(getCasesService, $scope, arraySelectedItems, companyIdArray, addPercentageRoundGraph) {
         var promiseObj = getCasesService.getData(arraySelectedItems, companyIdArray);
         promiseObj.then(function (response) {
+            $scope.dataCases = JSON.parse(response);
+            //update menu
+
+            makeMenuWithFilter($scope, companyIdArray);
+
             $scope.chartColors = ['#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472', '#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472', '#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472'];
             $scope.chartColorsFunction = function (index) {
                 if (index >= $scope.chartColors.length) {
@@ -213,7 +220,7 @@
                     return $scope.chartColors[index];
                 }
             };
-            $scope.dataCases = JSON.parse(response);
+            
             function returnGraph() {
                 var chart = {
                     type: 'pieChart',

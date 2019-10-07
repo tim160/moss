@@ -172,49 +172,49 @@
                         <div class="filterCases-dropBlock__contentRow row clearfix">
 
                             <div class="col-3 filterCases-dropBlock__contentCol">
-                                <ul class="case-DropDownList black" ng-repeat="department in MenuCases.DepartmentsList">
-                                    <li class="case-DropDownList-li clearfix" ng-click="selectedItemClick($event, department.id, 'department')">
-                                        <input type="hidden" value="{{department.Item2}}" />
+                                <ul class="case-DropDownList black" ng-repeat="department in dataCases.DepartmentTable">
+                                    <li class="case-DropDownList-li clearfix" ng-click="selectedItemClick($event, department.name, 'department')">
+                                        @*<input type="hidden" value="{{department.Item2}}" />*@
                                         <div class="case-DropDownList-li__icon"></div>
                                         <div class="case-DropDownList-li__text">
-                                            {{department.department_en}}
+                                            {{department.name}}
                                         </div>
                                     </li>
                                 </ul>
                             </div><!-- / .col-3 filterCases-dropBlock__contentCol -->
 
                             <div class="col-3 filterCases-dropBlock__contentCol">
-                                <ul class="case-DropDownList black" ng-repeat="location in MenuCases.LocationsList">
+                                <ul class="case-DropDownList black" ng-repeat="location in dataCases.LocationTable">
                                     <!--this is location-->
-                                    <li class="case-DropDownList-li clearfix" ng-click="selectedItemClick($event, location.id, 'location')">
-                                        <input type="hidden" value="{{location.id}}" />
+                                    <li class="case-DropDownList-li clearfix" ng-click="selectedItemClick($event, location.name, 'location')">
+                                        @*<input type="hidden" value="{{location.id}}" />*@
                                         <div class="case-DropDownList-li__icon"></div>
                                         <div class="case-DropDownList-li__text">
-                                            {{location.location_en}}
+                                            {{location.name}}
                                         </div>
                                     </li>
                                 </ul>
                             </div><!-- / .col-3 filterCases-dropBlock__contentCol -->
 
                             <div class="col-3 filterCases-dropBlock__contentCol">
-                                <ul class="case-DropDownList black" ng-repeat="incident in MenuCases.RelationTypesList">
-                                    <li class="case-DropDownList-li clearfix" ng-click="selectedItemClick($event, incident.id, 'incident_type')">
+                                <ul class="case-DropDownList black" ng-repeat="incident in dataCases.RelationTable">
+                                    <li class="case-DropDownList-li clearfix" ng-click="selectedItemClick($event, incident.name, 'incident_type')">
                                         <input type="hidden" value="{{incident.id}}" />
                                         <div class="case-DropDownList-li__icon"></div>
                                         <div class="case-DropDownList-li__text">
-                                            {{incident.relationship_en}}
+                                            {{incident.name}}
                                         </div>
                                     </li>
                                 </ul>
                             </div><!-- / .col-3 filterCases-dropBlock__contentCol -->
 
                             <div class="col-3 filterCases-dropBlock__contentCol">
-                                <ul class="case-DropDownList black" ng-repeat="reporter in MenuCases.SecondaryTypesList">
+                                <ul class="case-DropDownList black" ng-repeat="reporter in dataCases.SecondaryTypeTable">
                                     <li class="case-DropDownList-li clearfix" ng-click="selectedItemClick($event, reporter.id, 'reporter_type')">
-                                        <input type="hidden" value="{{reporter.id}}" />
+                                        @*<input type="hidden" value="{{reporter.id}}" />*@
                                         <div class="case-DropDownList-li__icon"></div>
                                         <div class="case-DropDownList-li__text">
-                                            {{reporter.secondary_type_en}}
+                                            {{reporter.name}}
                                         </div>
                                     </li>
                                 </ul>
