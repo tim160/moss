@@ -604,7 +604,7 @@ public class GlobalFunctions
 
         List<int> ReportsRelationTypesIDs = new List<int>();
 
-        List<int> ReportsDepartmentIDs = new List<int>();
+        List<String> ReportsDepartmentIDs = new List<String>();
 
         List<String> ReportsLocationIDs = new List<String>();
 
@@ -617,7 +617,7 @@ public class GlobalFunctions
             ReportsRelationTypesIDs = ReportsRelationTypesIDStrings.Split(',').Select(Int32.Parse).ToList();
 
         if (ReportsDepartmentIDStringss.Trim().Length > 0)
-            ReportsDepartmentIDs = ReportsDepartmentIDStringss.Split(',').Select(Int32.Parse).ToList();
+            ReportsDepartmentIDs = ReportsDepartmentIDStringss.Split(',').ToList();
 
         if (ReportsLocationIDStrings.Trim().Length > 0)
             //ReportsLocationIDs = ReportsLocationIDStrings.Split(',').Select(Int32.Parse).ToList();
@@ -625,9 +625,19 @@ public class GlobalFunctions
 
         if (ReportsDepartmentIDs.Count > 0)
         {
-            var report_from_departments = db.report_department.Where(t => ReportsDepartmentIDs.Contains(t.department_id)).Select(t => t.report_id);
+            //var report_from_departments = db.report_department.Where(t => ReportsDepartmentIDs.Contains(t.department_id)).Select(t => t.report_id);
             //_all_reports_old = _all_reports_old.Where(report_from_departments.Contains(t.id)).ToList();
-            _all_reports_old = _all_reports_old.Where(t => report_from_departments.Any(report => report == t.id)).ToList();
+            //_all_reports_old = _all_reports_old.Where(t => report_from_departments.Any(report => report == t.id)).ToList();
+            //var temp = _all_reports_old.Join(db.company_department,
+            //    post => post.
+            //    );
+            var idReports = _all_reports_old.Select(report => report.id).ToList();
+            var DepAndReports = db.report_department.Join(db.company_department,
+                                    post => post.department_id,
+                                    meta => meta.id,
+                                    (post, meta) => new { Post = post, Meta = meta })
+                                    .Where(postAndMeta => ReportsDepartmentIDs.Any(repDep => repDep.Equals(postAndMeta.Meta.department_en)) && idReports.Contains(postAndMeta.Post.report_id));
+            _all_reports_old = _all_reports_old.Where(oldReport => DepAndReports.Select(res => res.Post.report_id).Contains(oldReport.id)).ToList();
         }
         if (ReportsRelationTypesIDs.Count > 0)
         {
