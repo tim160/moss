@@ -216,6 +216,8 @@
                 return function () {
                     if (!executed) {
                         executed = true;
+                        console.log('execitesd=' + executed);
+                        $scope.Menu = $scope.dataCases;
                         makeMenuWithFilter(getCasesService, $scope, arraySelectedItems, companyIdArray, addPercentageRoundGraph);
                     }
                 };
