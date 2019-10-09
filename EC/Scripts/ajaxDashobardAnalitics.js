@@ -171,7 +171,7 @@
         });
     }
 
-    function makeMenuWithFilter($scope) {
+    function makeMenuWithFilter(getCasesService, $scope, arraySelectedItems, companyIdArray, addPercentageRoundGraph) {
         //var promiseObjGetMenu = getMenuFilterCases.getData(companyIdArray);
         //promiseObjGetMenu.then(function (response) {
         console.log($scope.dataCases);
@@ -191,7 +191,7 @@
                 }
                 else { $scope.selectedCasesFilterString = ''; }
                 $event.currentTarget.classList.toggle('checked');
-                //updateGraph();
+                updateGraph(getCasesService, $scope, arraySelectedItems, companyIdArray, addPercentageRoundGraph);
             }
             $scope.dataRangeClick = function ($event, clickedItemId) {
                 angular.element('#selectedCasesDateRange').html(": " + $event.target.textContent.trim());
@@ -199,18 +199,29 @@
                     angular.element('#selectedCasesDateRange').html("");
                 }
                 arraySelectedItems["data_range"] = clickedItemId;
-                //updateGraph();
+                updateGraph(getCasesService, $scope, arraySelectedItems, companyIdArray, addPercentageRoundGraph);
             }
         //});
     }
 
+    //need to global
+    var executed = false;
     function updateGraph(getCasesService, $scope, arraySelectedItems, companyIdArray, addPercentageRoundGraph) {
         var promiseObj = getCasesService.getData(arraySelectedItems, companyIdArray);
         promiseObj.then(function (response) {
             $scope.dataCases = JSON.parse(response);
             //update menu
-
-            makeMenuWithFilter($scope, companyIdArray);
+            var updateMenu = (function () {
+                
+                return function () {
+                    if (!executed) {
+                        executed = true;
+                        makeMenuWithFilter(getCasesService, $scope, arraySelectedItems, companyIdArray, addPercentageRoundGraph);
+                    }
+                };
+            })();
+            updateMenu();
+           // makeMenuWithFilter(getCasesService, $scope, arraySelectedItems, companyIdArray, addPercentageRoundGraph);
 
             $scope.chartColors = ['#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472', '#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472', '#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472'];
             $scope.chartColorsFunction = function (index) {

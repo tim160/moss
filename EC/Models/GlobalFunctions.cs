@@ -606,7 +606,7 @@ public class GlobalFunctions
 
         List<int> ReportsDepartmentIDs = new List<int>();
 
-        List<int> ReportsLocationIDs = new List<int>();
+        List<String> ReportsLocationIDs = new List<String>();
 
 
 
@@ -620,7 +620,8 @@ public class GlobalFunctions
             ReportsDepartmentIDs = ReportsDepartmentIDStringss.Split(',').Select(Int32.Parse).ToList();
 
         if (ReportsLocationIDStrings.Trim().Length > 0)
-            ReportsLocationIDs = ReportsLocationIDStrings.Split(',').Select(Int32.Parse).ToList();
+            //ReportsLocationIDs = ReportsLocationIDStrings.Split(',').Select(Int32.Parse).ToList();
+            ReportsLocationIDs = ReportsLocationIDStrings.Split(',').ToList();
 
         if (ReportsDepartmentIDs.Count > 0)
         {
@@ -643,7 +644,25 @@ public class GlobalFunctions
         if (ReportsLocationIDs.Count > 0)
         {
             //_all_reports_old = _all_reports_old.Where(t => ReportsLocationIDs.Contains(t.location_id)).ToList();
-            _all_reports_old = _all_reports_old.Where(t => ReportsLocationIDs.Any(report => report == t.location_id)).ToList();
+            //_all_reports_old = _all_reports_old.Where(t => ReportsLocationIDs.Any(report => report == t.location_id)).ToList();
+            int a = 10;
+            var temp = _all_reports_old.Join(db.company_location,
+                                            post => post.location_id,
+                                            meta => meta.id,
+                                            (post, meta) => new { Post = post, Meta = meta })
+                                            .Where(postAndMeta => ReportsLocationIDs.Any(listLocation => listLocation.Equals(postAndMeta.Meta.location_en))
+                                            );
+            _all_reports_old = new List<report>();
+            foreach (var item in temp)
+            {
+                _all_reports_old.Add(item.Post);
+            };
+            //var DepAndReports = db.report_department.Join(db.company_department,
+            //                        post => post.department_id,
+            //                        meta => meta.id,
+            //                        (post, meta) => new { Post = post, Meta = meta })
+            //                        .Where(postAndMeta => report_ids_list.Contains(postAndMeta.Post.report_id));
+
         }
         #endregion
 
@@ -652,10 +671,12 @@ public class GlobalFunctions
 
     #region Analytics Helpers - new version
 
-    public DataTable CompanyDepartmentReportAdvanced(List<report> _all_reports, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
+    public DataTable CompanyDepartmentReportAdvanced(List<report> _all_reports)
     {
         DataTable dt = dtDoughnutTable();
         DataRow dr;
+
+
         List<int> report_ids_list = _all_reports.Select(t => t.id).ToList();
 
         var DepAndReports = db.report_department.Join(db.company_department,
@@ -701,7 +722,7 @@ public class GlobalFunctions
     }
 
 
-    public DataTable CompanyLocationReportAdvanced(List<report> _all_reports, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
+    public DataTable CompanyLocationReportAdvanced(List<report> _all_reports)
     {
         ReportModel rm = new ReportModel();
         DataTable dt = dtDoughnutTable();
@@ -932,7 +953,7 @@ public class GlobalFunctions
     }
 
 
-    public DataTable RelationshipToCompanyByDateAdvanced(List<report> _all_reports, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
+    public DataTable RelationshipToCompanyByDateAdvanced(List<report> _all_reports)
     {
         // merge with previous
         List<Int32> _report_ids = _all_reports.Select(t => t.id).ToList();
@@ -1006,9 +1027,8 @@ public class GlobalFunctions
         return dt;
     }
 
-    public DataTable SecondaryTypesByDateAdvanced(List<report> _all_reports, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
+    public DataTable SecondaryTypesByDateAdvanced(List<report> _all_reports)
     {
-        //ReportModel rm = new ReportModel();
         // merge with previous
         List<Int32> _report_ids = _all_reports.Select(t => t.id).ToList();
 
@@ -1269,10 +1289,10 @@ public class GlobalFunctions
 
         List<report> _all_reports = ReportsListForCompany(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
 
-        string _all_json = "{\"LocationTable\":" + CompanyLocationReportAdvancedJson(_all_reports, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate)
-                + ", \"DepartmentTable\":" + CompanyDepartmentReportAdvancedJson(_all_reports, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate)
-                + ", \"RelationTable\":" + RelationshipToCompanyByDateAdvancedJson(_all_reports, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate)
-                + ", \"SecondaryTypeTable\":" + SecondaryTypesByDateAdvancedJson(_all_reports, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate)
+        string _all_json = "{\"LocationTable\":" + CompanyLocationReportAdvancedJson(_all_reports)
+                + ", \"DepartmentTable\":" + CompanyDepartmentReportAdvancedJson(_all_reports)
+                + ", \"RelationTable\":" + RelationshipToCompanyByDateAdvancedJson(_all_reports)
+                + ", \"SecondaryTypeTable\":" + SecondaryTypesByDateAdvancedJson(_all_reports)
             ///    + ", \"AverageStageDaysTable\":" + AverageStageDaysAdvancedJson(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate)
             ///    + ", \"TodaySnapshotTable\":" + JsonUtil.ListToJsonWithJavaScriptSerializer(new List<int>(_today_spanshot))
             ///   + ", \"MonthEndSnapshotTable\":" + JsonUtil.ListToJsonWithJavaScriptSerializer(new List<int>(_month_end_spanshot))
@@ -1284,28 +1304,28 @@ public class GlobalFunctions
 
 
 
-    public string CompanyLocationReportAdvancedJson(List<report> _all_reports, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
+    public string CompanyLocationReportAdvancedJson(List<report> _all_reports)
     {
-        DataTable dt = CompanyLocationReportAdvanced(_all_reports, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
+        DataTable dt = CompanyLocationReportAdvanced(_all_reports);
         return JsonUtil.DataTableToJSONWithJavaScriptSerializer(dt);
     }
 
-    public string CompanyDepartmentReportAdvancedJson(List<report> _all_reports, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
+    public string CompanyDepartmentReportAdvancedJson(List<report> _all_reports)
     {
-        DataTable dt = CompanyDepartmentReportAdvanced(_all_reports, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
+        DataTable dt = CompanyDepartmentReportAdvanced(_all_reports);
         return JsonUtil.DataTableToJSONWithJavaScriptSerializer(dt);
     }
 
-    public string RelationshipToCompanyByDateAdvancedJson(List<report> _all_reports, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
+    public string RelationshipToCompanyByDateAdvancedJson(List<report> _all_reports)
     {
-        DataTable dt = RelationshipToCompanyByDateAdvanced(_all_reports, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
+        DataTable dt = RelationshipToCompanyByDateAdvanced(_all_reports);
         return JsonUtil.DataTableToJSONWithJavaScriptSerializer(dt);
     }
 
 
-    public string SecondaryTypesByDateAdvancedJson(List<report> _all_reports, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
+    public string SecondaryTypesByDateAdvancedJson(List<report> _all_reports)
     {
-        DataTable dt = SecondaryTypesByDateAdvanced(_all_reports, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
+        DataTable dt = SecondaryTypesByDateAdvanced(_all_reports);
         return JsonUtil.DataTableToJSONWithJavaScriptSerializer(dt);
     }
 
@@ -1816,10 +1836,4 @@ public class GlobalFunctions
 
         return true;
     }
-}
-class CompanyLocation
-{
-    public int id { get; set; }
-    public int countLocations { get; set; }
-    public string NameLocation { get; set; }
 }
