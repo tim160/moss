@@ -600,7 +600,7 @@ public class GlobalFunctions
 
         #region Get the list of ReportIDs allowed
 
-        List<int> ReportsSecondaryTypesIDs = new List<int>();
+        List<String> ReportsSecondaryTypesIDs = new List<String>();
 
         List<String> ReportsRelationTypesIDs = new List<String>();
 
@@ -611,7 +611,7 @@ public class GlobalFunctions
 
 
         if (ReportsSecondaryTypesIDStrings.Trim().Length > 0)
-            ReportsSecondaryTypesIDs = ReportsSecondaryTypesIDStrings.Split(',').Select(Int32.Parse).ToList();
+            ReportsSecondaryTypesIDs = ReportsSecondaryTypesIDStrings.Split(',').ToList();
 
         if (ReportsRelationTypesIDStrings.Trim().Length > 0)
             ReportsRelationTypesIDs = ReportsRelationTypesIDStrings.Split(',').ToList();
@@ -675,8 +675,23 @@ public class GlobalFunctions
         }
         if (ReportsSecondaryTypesIDs.Count > 0)
         {
-            var report_from_secondary_type = db.report_secondary_type.Where(t => ReportsSecondaryTypesIDs.Contains(t.secondary_type_id)).Select(t => t.report_id);
-            _all_reports_old = _all_reports_old.Where(t => report_from_secondary_type.Contains(t.id)).ToList();
+            //var report_from_secondary_type = db.report_secondary_type.Where(t => ReportsSecondaryTypesIDs.Contains(t.secondary_type_id)).Select(t => t.report_id);
+            //_all_reports_old = _all_reports_old.Where(t => report_from_secondary_type.Contains(t.id)).ToList();
+            //var DepAndReports = db.report_department.Join(db.company_department,
+            //                                   post => post.department_id,
+            //                                   meta => meta.id,
+            //                                   (post, meta) => new { Post = post, Meta = meta })
+            //                                   .Where(postAndMeta => ReportsDepartmentIDs.Any(repDep => repDep.Equals(postAndMeta.Meta.department_en)) && idReports.Contains(postAndMeta.Post.report_id));
+            //_all_reports_old = _all_reports_old.Where(oldReport => DepAndReports.Select(res => res.Post.report_id).Contains(oldReport.id)).ToList();
+
+            var idReports = _all_reports_old.Select(report => report.id).ToList();
+            var secondaryTypes = db.report_secondary_type.Join(db.company_secondary_type,
+                                                        post => post.secondary_type_id,
+                                                        meta => meta.id,
+                                                        (post, meta) => new { Post = post, Meta = meta })
+                                                        .Where(postAndMeta => ReportsSecondaryTypesIDs.Any(listReports => listReports.Equals(postAndMeta.Meta.secondary_type_en))
+                                                        && idReports.Contains(postAndMeta.Post.report_id));
+            _all_reports_old = _all_reports_old.Where(oldReport => secondaryTypes.Select(res => res.Post.report_id).Contains(oldReport.id)).ToList();
         }
 
         if (ReportsLocationIDs.Count > 0)
