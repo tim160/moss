@@ -182,6 +182,8 @@ namespace EC.Controllers
 
             //UserModel um = new UserModel(_user.id);
             //ViewBag.um = um;
+            //ViewBag.user_id = _user.id;
+            ViewBag.MediatorId = id;
             ViewBag.user_id = _user.id;
 
             /*if (_user.role_id != 5)
@@ -569,11 +571,26 @@ namespace EC.Controllers
         public string AddLogoCompany()
         {
             string result = "false";
-            HttpPostedFileBase photo = Request.Files["_file"];
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return result;
+            
+            HttpPostedFileBase photo = Request.Files["_file"];
+            string MediatorIdParams = Request.Params["MediatorId"];
+            //int MediatorId = 0;
             int user_id = user.id;
+            if (MediatorIdParams != null)
+            {
+                try
+                {
+                    user_id = Convert.ToInt32(MediatorIdParams);
+                } catch(FormatException ex)
+                {
+                    return ex.Message;
+                }
+            }
+
+            
             UserModel um = new UserModel(user_id);
             int company_id = um._user.company_id;
             var cm = new CompanyModel(company_id);

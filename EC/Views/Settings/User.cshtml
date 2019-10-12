@@ -9,8 +9,10 @@
     {
         is_cc = false;
     }
-    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+
     UserModel um = new UserModel(ViewBag.user_id);
+    //ViewBag.user_id = ViewBag.MediatorId;
+    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
 }
 <style>
     .error {
@@ -23,6 +25,7 @@
     int active = 4;
 }
 @Html.Partial("~/Views/Settings/partial/casesHeared.cshtml", active)
+<input type="hidden" value="@ViewBag.MediatorId" id="MediatorId" />
 <!--casesHeared-->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
@@ -44,13 +47,13 @@
                 <img id="logoUser" class="PersonalPhotoBlock" ng-src="{{photo_path}}">
 
                 <input type="hidden" id="urlAjaxUploadFiles" from="User" value="@Url.Action("User", "Settings")" />
-                <input type="file"  data-id="settingsIndex" name="MAX_FILE_SIZE" value="9999999" accept="image/*" id="_file" name="_file" multiple="multiple" style="width: 1px;height: 1px;opacity: 0;" check-file-size="">
+                <input type="file" data-id="settingsIndex" name="MAX_FILE_SIZE" value="9999999" accept="image/*" id="_file" name="_file" multiple="multiple" style="width: 1px;height: 1px;opacity: 0;" check-file-size="">
             </div>
             @if (um._user.role_id == 5)
             {
                 <div class="blockHoverPhoto">
                     <label class="close"></label>
-                    <label class="newImageBtn"make-click-hidden-input="">@LocalizationGetter.GetString("Newimage")</label>
+                    <label class="newImageBtn" make-click-hidden-input="">@LocalizationGetter.GetString("Newimage")</label>
                 </div>
             }
         </div>

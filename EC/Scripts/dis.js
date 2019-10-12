@@ -118,7 +118,10 @@
                                         for (var i = 0; i < filesInput[0].files.length; i++) {
                                             fd.append('_file', filesInput[0].files[i]);
                                         }
-
+                                        var MediatorId = angular.element("#MediatorId").val();
+                                        if (MediatorId > 0) {
+                                            fd.append("MediatorId", MediatorId);
+                                        }
                                         var analiticsObj = uploadImage.getData(fd);
                                         analiticsObj.then(function (response) {
                                             var from = angular.element("#urlAjaxUploadFiles").attr("from");
