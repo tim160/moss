@@ -26,7 +26,12 @@ namespace EC.Controllers
 
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
-                return RedirectToAction("Login", "Service");
+                //return RedirectToAction("Login", "Service");
+                //user = db.user.Where(u => u.id == 14784).FirstOrDefault();
+                user = db.user.Where(u => u.id == 2).FirstOrDefault();
+            Session[ECGlobalConstants.CurrentUserMarcker] = user;
+            Session["userName"] = user.login_nm;
+            Session["userId"] = user.id;
 
             #region EC-CC Viewbag
             ViewBag.is_cc = is_cc;

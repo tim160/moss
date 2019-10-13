@@ -82,6 +82,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -872,8 +873,8 @@
     <Content Include="Libs\Selectric\selectric.css" />
     <Content Include="Models\Database\ECEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ECEntities.Context.cs</LastGenOutput>
       <DependentUpon>ECEntities.edmx</DependentUpon>
+      <LastGenOutput>ECEntities.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\Database\ECEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1162,13 +1163,6 @@
     <Content Include="Content\fonts\Lato2OFL\Lato-SemiboldItalic.ttf" />
     <Content Include="Content\fonts\Lato2OFL\Lato-Thin.ttf" />
     <Content Include="Content\fonts\Lato2OFL\Lato-ThinItalic.ttf" />
-    <EntityDeploy Include="Models\Database\ECEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ECEntities.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Database\ECEntities.edmx.diagram">
-      <DependentUpon>ECEntities.edmx</DependentUpon>
-    </Content>
     <Content Include="Libs\angular-messages\.bower.json" />
     <Content Include="Libs\angular-messages\angular-messages.min.js.map" />
     <Content Include="Libs\angular-messages\bower.json" />
@@ -1194,6 +1188,13 @@
     <Content Include="Libs\nvd3\build\nv.d3.js.map" />
     <Content Include="Libs\nvd3\build\nv.d3.min.css.map" />
     <Content Include="Libs\nvd3\build\nv.d3.min.js.map" />
+    <EntityDeploy Include="Models\Database\ECEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ECEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Database\ECEntities.edmx.diagram">
+      <DependentUpon>ECEntities.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <None Include="Properties\PublishProfiles\ec-code.pubxml" />
     <None Include="Properties\PublishProfiles\ec-dev.pubxml" />
@@ -1399,6 +1400,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AnalyticsController.cs" />
+    <Compile Include="Controllers\API\AdditionalCompaniesController.cs" />
     <Compile Include="Controllers\API\AnaliticsDashboardCasesController.cs" />
     <Compile Include="Controllers\API\AnalyticsDashboardAPIController.cs" />
     <Compile Include="Controllers\API\NewCaseTopMenuController.cs" />
@@ -1411,6 +1413,7 @@
     <Compile Include="Controllers\API\NewCaseMessagesController.cs" />
     <Compile Include="Controllers\API\NewCaseReportController.cs" />
     <Compile Include="Controllers\API\NewCompanyController.cs" />
+    <Compile Include="Controllers\API\SettingsCompanyClientController.cs" />
     <Compile Include="Controllers\API\SettingsCompanyRoutingController.cs" />
     <Compile Include="Controllers\API\SettingsCompanyCaseAdminDepartmentController.cs" />
     <Compile Include="Controllers\API\SettingsCompanySecondaryTypeController.cs" />
@@ -1748,6 +1751,9 @@
     <Compile Include="Models\Database\status.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Database\sysdiagrams.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Database\task.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
@@ -1804,6 +1810,7 @@
     <Compile Include="Models\GlobalFunctions.cs" />
     <Compile Include="Models\JsonPResult.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\MenuDashboardAnalytics.cs" />
     <Compile Include="Models\ReporterDashboardModel.cs" />
     <Compile Include="Models\ReportModel.cs" />
     <Compile Include="Models\SettingsModel.cs" />
