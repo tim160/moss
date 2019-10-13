@@ -86,10 +86,10 @@ namespace EC.Controllers.API
 
             if (investigation_status.ToLower().Contains(LocalizationGetter.GetString("Investigation").ToLower()))
                 investigation_status = LocalizationGetter.GetString("Investigation");
-            //////  var reports = report_ids.Select(x => new CasePreviewViewModel(x, user.id)).ToList();
+
+            report_ids = report_ids.OrderByDescending(t => t).ToList();
 
             var reports = um.ReportPreviews(report_ids, investigation_status, delay_allowed).ToList();
-         //   var counter5 = (DateTime.Now - _started).TotalMilliseconds;
 
             string title = LocalizationGetter.GetString("ActiveCasesUp");
             title = filter.ReportFlag == 2 ? LocalizationGetter.GetString("CompletedcasesUp") : title;
@@ -118,18 +118,6 @@ namespace EC.Controllers.API
                 Title = title,
                 
               Companies = additionalCompanies.Distinct()
-              /*    counter4 = counter4,
-                counter5 = counter5,
-                              counter = (DateTime.Now - _started).TotalMilliseconds,
-                                counter1 = counter1,
-                                counter2 = counter2,
-                                counter3 = counter3,
-                                counter4 = counter4,
-                                counter5 = counter5,
-                                temp1 = temp1,
-                                temp2 = temp2,
-                                temp3 = temp3,*/
-
             };
 
             return ResponseObject2Json(m);
