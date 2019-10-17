@@ -24,6 +24,7 @@ namespace EC.Controllers.API
         {
             //public string SecondaryType { get; set; }
             public int SecondaryType { get; set; }
+            public int [] companyId { get; set; }
         }
 
         [HttpGet]
@@ -38,9 +39,9 @@ namespace EC.Controllers.API
                 return null;
             }
 
-            var company_behavioral = DB.company_root_cases_behavioral.Where(x => x.company_id == user.company_id).ToList();
-            var company_external = DB.company_root_cases_external.Where(x => x.company_id == user.company_id).ToList();
-            var company_organizational = DB.company_root_cases_organizational.Where(x => x.company_id == user.company_id).ToList();
+            var company_behavioral = DB.company_root_cases_behavioral.Where(x => model.companyId.Contains(x.company_id)).ToList();
+            var company_external = DB.company_root_cases_external.Where(x => model.companyId.Contains(x.company_id)).ToList();
+            var company_organizational = DB.company_root_cases_organizational.Where(x =>model.companyId.Contains(x.company_id)).ToList();
             var idsB = company_behavioral.Select(x => x.id).ToList();
             var idsE = company_external.Select(x => x.id).ToList();
             var idsO = company_organizational.Select(x => x.id).ToList();

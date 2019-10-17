@@ -526,7 +526,6 @@ table.table:first-child tr:first-child td {
 /**drop down menu*/
 
 .dropDownMenu {
-    width: 100%;
     height: 70px;
 }
 .menuItem {
@@ -636,8 +635,15 @@ table.table:first-child tr:first-child td {
 }
 .dropDownMenuPadding {
     padding-left: 40px;
+    padding-right: 40px;
     background-color: #ebf1f1;
     border-bottom: 1px solid #dce2e3;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap-reverse;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
 }
 /*8/12/2016*/
 .filterUp {
