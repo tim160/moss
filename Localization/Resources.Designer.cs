@@ -1573,6 +1573,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Company conduct guidelines, policies and legal disclaimers.
+        /// </summary>
+        internal static string CompanyConductGuidelines {
+            get {
+                return ResourceManager.GetString("CompanyConductGuidelines", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Company name is already in use..
         /// </summary>
         internal static string CompanyInUse {
@@ -4804,6 +4813,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Message to our employees.
+        /// </summary>
+        internal static string MessageToEmployees {
+            get {
+                return ResourceManager.GetString("MessageToEmployees", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Message to Employees.
         /// </summary>
         internal static string MessageToStaff {
@@ -5115,6 +5133,15 @@ namespace EC.Localization {
         internal static string no_permission {
             get {
                 return ResourceManager.GetString("no_permission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Employee Confidential ethics-reporting platform shall be used only to report serious acts of ethics violations, ethics irregularities or potential crimes relating to the areas of finance, accounting, banking, anti-corruption or the misconduct of senior level managers. Reports are limited only to circumstances and situations where coming forward within the usual corporate chain of command is impossible or inefficient. In compliance with the current whistleblowing legislation, anonymous reports are allowe [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string NoAnon {
+            get {
+                return ResourceManager.GetString("NoAnon", resourceCulture);
             }
         }
         
@@ -7708,6 +7735,15 @@ namespace EC.Localization {
         internal static string Yes {
             get {
                 return ResourceManager.GetString("Yes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In compliance with the current national legislation, anonymous reports are allowed..
+        /// </summary>
+        internal static string YesAnon {
+            get {
+                return ResourceManager.GetString("YesAnon", resourceCulture);
             }
         }
         

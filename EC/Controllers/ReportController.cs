@@ -101,6 +101,8 @@ namespace EC.Controllers
                 ViewBag.frequencies = HtmlDataHelper.MakeSelect(companyModel.getFrequencies(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("description")));
                 List<country> arr = companyModel.getCountries();
                 ViewBag.countries = HtmlDataHelper.MakeSelect(arr, item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.country_nm.ToString()));
+
+                arr.ForEach(t => t.country_description = ( t.country_cl.Length > 0 ? @LocalizationGetter.GetString("YesAnon", is_cc) : @LocalizationGetter.GetString(t.country_cl.Trim(), is_cc)));
                 ViewBag.countriesDescription = arr;
                 ReportedOutsideCulture reportedOutsideCulture = new ReportedOutsideCulture(companyModel);
                 ViewBag.reportedOutsides =reportedOutsideCulture.getReportedOutside();
@@ -249,158 +251,7 @@ namespace EC.Controllers
             return View("CaseSubmitted");
         }
 
-        // case details
-        public ActionResult Details(int case_id = 1, int user_id = 2)
-        {
-            #region EC-CC Viewbag
-            ViewBag.is_cc = is_cc;
-            string cc_ext = "";
-            if (is_cc) cc_ext = "_cc";
-            ViewBag.cc_extension = cc_ext;
-            #endregion
-
-
-
-            int id = 1;
-            var currentCompany = new CompanyModel().GetById(id);
-            ViewBag.currentCompany = currentCompany.company_nm;
-            ViewBag.currentCompanyId = currentCompany.id;
-            ViewBag.currentCompanySubmitted = currentCompany.company_nm;
-
-            //ViewBag.country = currentCompany.address.country.country_nm;
-            ViewBag.locations = HtmlDataHelper.MakeSelect(companyModel.Locations(id), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
-            //ViewBag.managament = companyModel.getManagamentKnow();
-            ManagamentKnowCulture managamentKnowCulture = new ManagamentKnowCulture(companyModel);
-            ViewBag.managament = managamentKnowCulture.GetManagamentKnowCulture();
-
-            ViewBag.frequencies = HtmlDataHelper.MakeSelect(companyModel.getFrequencies(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("description")));
-            List<country> arr = companyModel.getCountries();
-            ViewBag.countries = HtmlDataHelper.MakeSelect(arr, item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.country_nm.ToString()));
-            ViewBag.countriesDescription = arr;
-            ViewBag.anonimity = companyModel.GetAnonymities(id, 0);
-            ViewBag.relationship = companyModel.getRelationships();
-            ViewBag.departments = HtmlDataHelper.MakeSelect(currentCompany.company_department.ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("department")));
-            ViewBag.locationsOfIncident = HtmlDataHelper.MakeSelect(companyModel.Locations(id).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
-
-            ViewBag.injury_damage = companyModel.GetInjuryDamages().ToList();
-
-            ViewBag.supervisingMediators = companyModel.AllSupervisingMediators(id, true); // HtmlDataHelper.MakeSelect(companyModel.AllSupervisingMediators(id, true).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.last_nm));
-            ViewBag.nonSupervisingMediators = companyModel.AllNonSupervisingMediators(id, true); // HtmlDataHelper.MakeSelect(companyModel.AllSupervisingMediators(id, true).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.last_nm));
-
-            return View();
-        }
-
-        // messages in the case
-        public ActionResult Messages(int case_id = 1, int user_id = 2)
-        {
-            #region EC-CC Viewbag
-            ViewBag.is_cc = is_cc;
-            string cc_ext = "";
-            if (is_cc) cc_ext = "_cc";
-            ViewBag.cc_extension = cc_ext;
-            #endregion
-
-
-
-            int id = 1;
-            var currentCompany = new CompanyModel().GetById(id);
-            ViewBag.currentCompany = currentCompany.company_nm;
-            ViewBag.currentCompanyId = currentCompany.id;
-            ViewBag.currentCompanySubmitted = currentCompany.company_nm;
-
-            //ViewBag.country = currentCompany.address.country.country_nm;
-            ViewBag.locations = HtmlDataHelper.MakeSelect(companyModel.Locations(id), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
-            ViewBag.managament = companyModel.getManagamentKnow();
-            ViewBag.frequencies = HtmlDataHelper.MakeSelect(companyModel.getFrequencies(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("description")));
-            List<country> arr = companyModel.getCountries();
-            ViewBag.countries = HtmlDataHelper.MakeSelect(arr, item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.country_nm.ToString()));
-            ViewBag.countriesDescription = arr;
-            ViewBag.anonimity = companyModel.GetAnonymities(id, 0);
-            ViewBag.relationship = companyModel.getRelationships();
-            ViewBag.departments = HtmlDataHelper.MakeSelect(currentCompany.company_department.ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("department")));
-            ViewBag.locationsOfIncident = HtmlDataHelper.MakeSelect(companyModel.Locations(id).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
-
-            ViewBag.injury_damage = companyModel.GetInjuryDamages().ToList();
-
-            ViewBag.supervisingMediators = companyModel.AllSupervisingMediators(id, true); // HtmlDataHelper.MakeSelect(companyModel.AllSupervisingMediators(id, true).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.last_nm));
-            ViewBag.nonSupervisingMediators = companyModel.AllNonSupervisingMediators(id, true); // HtmlDataHelper.MakeSelect(companyModel.AllSupervisingMediators(id, true).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.last_nm));
-
-            return View();
-        }
-
-        // tasks in the case
-        public ActionResult Tasks(int case_id = 1, int user_id = 2)
-        {
-            #region EC-CC Viewbag
-            ViewBag.is_cc = is_cc;
-            string cc_ext = "";
-            if (is_cc) cc_ext = "_cc";
-            ViewBag.cc_extension = cc_ext;
-            #endregion
-
-
-            int id = 1;
-            var currentCompany = new CompanyModel().GetById(id);
-            ViewBag.currentCompany = currentCompany.company_nm;
-            ViewBag.currentCompanyId = currentCompany.id;
-            ViewBag.currentCompanySubmitted = currentCompany.company_nm;
-
-            //ViewBag.country = currentCompany.address.country.country_nm;
-            ViewBag.locations = HtmlDataHelper.MakeSelect(companyModel.Locations(id), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
-            ViewBag.managament = companyModel.getManagamentKnow();
-            ViewBag.frequencies = HtmlDataHelper.MakeSelect(companyModel.getFrequencies(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("description")));
-            List<country> arr = companyModel.getCountries();
-            ViewBag.countries = HtmlDataHelper.MakeSelect(arr, item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.country_nm.ToString()));
-            ViewBag.countriesDescription = arr;
-            ViewBag.anonimity = companyModel.GetAnonymities(id, 0);
-            ViewBag.relationship = companyModel.getRelationships();
-            ViewBag.departments = HtmlDataHelper.MakeSelect(currentCompany.company_department.ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("department")));
-            ViewBag.locationsOfIncident = HtmlDataHelper.MakeSelect(companyModel.Locations(id).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
-
-            ViewBag.injury_damage = companyModel.GetInjuryDamages().ToList();
-
-            ViewBag.supervisingMediators = companyModel.AllSupervisingMediators(id, true); // HtmlDataHelper.MakeSelect(companyModel.AllSupervisingMediators(id, true).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.last_nm));
-            ViewBag.nonSupervisingMediators = companyModel.AllNonSupervisingMediators(id, true); // HtmlDataHelper.MakeSelect(companyModel.AllSupervisingMediators(id, true).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.last_nm));
-
-            return View();
-        }
-
-        // messages for reporter in the case
-        public ActionResult MessagesWithReporter(int case_id = 1, int user_id = 2)
-        {
-            #region EC-CC Viewbag
-            ViewBag.is_cc = is_cc;
-            string cc_ext = "";
-            if (is_cc) cc_ext = "_cc";
-            ViewBag.cc_extension = cc_ext;
-            #endregion
-
-
-            int id = 1;
-            var currentCompany = new CompanyModel().GetById(id);
-            ViewBag.currentCompany = currentCompany.company_nm;
-            ViewBag.currentCompanyId = currentCompany.id;
-            ViewBag.currentCompanySubmitted = currentCompany.company_nm;
-
-            //ViewBag.country = currentCompany.address.country.country_nm;
-            ViewBag.locations = HtmlDataHelper.MakeSelect(companyModel.Locations(id), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
-            ViewBag.managament = companyModel.getManagamentKnow();
-            ViewBag.frequencies = HtmlDataHelper.MakeSelect(companyModel.getFrequencies(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("description")));
-            List<country> arr = companyModel.getCountries();
-            ViewBag.countries = HtmlDataHelper.MakeSelect(arr, item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.country_nm.ToString()));
-            ViewBag.countriesDescription = arr;
-            ViewBag.anonimity = companyModel.GetAnonymities(id, 0);
-            ViewBag.relationship = companyModel.getRelationships();
-            ViewBag.departments = HtmlDataHelper.MakeSelect(currentCompany.company_department.ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("department")));
-            ViewBag.locationsOfIncident = HtmlDataHelper.MakeSelect(companyModel.Locations(id).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
-
-            ViewBag.injury_damage = companyModel.GetInjuryDamages().ToList();
-
-            ViewBag.supervisingMediators = companyModel.AllSupervisingMediators(id, true); // HtmlDataHelper.MakeSelect(companyModel.AllSupervisingMediators(id, true).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.last_nm));
-            ViewBag.nonSupervisingMediators = companyModel.AllNonSupervisingMediators(id, true); // HtmlDataHelper.MakeSelect(companyModel.AllSupervisingMediators(id, true).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.last_nm));
-
-            return View();
-        }
+ 
 
         public ActionResult SaveLoginChanges()
         {

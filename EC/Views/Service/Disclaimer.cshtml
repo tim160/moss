@@ -74,12 +74,12 @@
         <div class="container">
             <div class="row">
                 <div class="column">
-                    <p class="title">Message to our employees</p>
+                    <p class="title">@LocalizationGetter.GetString("MessageToEmployees", is_cc)</p>
                     <p>@Model.DisclamerPage().message_to_employees</p>
                 </div>
 
                 <div class="column">
-                    <p class="title">Company conduct guidelines, policies and legal disclaimers</p>
+                    <p class="title">@LocalizationGetter.GetString("CompanyConductGuidelines", is_cc)</p>
                     <p>@Model.DisclamerPage().message_about_guidelines</p>
                     <ul class="footerInfo__textList">
                         @foreach (var item in Model.DisclamerUploads())

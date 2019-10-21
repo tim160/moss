@@ -1220,9 +1220,14 @@
     <Content Include="Libs\bootstrap-daterangepicker\example\browserify\README.md" />
     <Content Include="Libs\bootstrap-daterangepicker\package.json" />
     <Content Include="Libs\bootstrap-daterangepicker\README.md" />
+    <Content Include="Metadata\deploymentTemplates\apiappconfig.azureresource.json" />
+    <Content Include="apiapp.json" />
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <None Include="Properties\PublishProfiles\ec-code.pubxml" />
     <None Include="Properties\PublishProfiles\ec-dev.pubxml" />
+    <None Include="Properties\PublishProfiles\eccAzure.pubxml" />
+    <None Include="Properties\PublishProfiles\ecreportingazure %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\ecreportingazure.pubxml" />
     <None Include="Properties\PublishProfiles\File.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FTP.pubxml" />
@@ -1833,6 +1838,7 @@
     <Compile Include="Models\GlobalFunctions.cs" />
     <Compile Include="Models\JsonPResult.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\MenuDashboardAnalytics.cs" />
     <Compile Include="Models\ReporterDashboardModel.cs" />
     <Compile Include="Models\ReportModel.cs" />
     <Compile Include="Models\SettingsModel.cs" />

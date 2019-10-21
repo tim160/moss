@@ -1745,7 +1745,7 @@
     <value>Mark case as spam</value>
   </data>
   <data name="Mediationteam" xml:space="preserve">
-    <value>Case Administration team</value>
+    <value>Equipo de administración de casos</value>
   </data>
   <data name="Mediator" xml:space="preserve">
     <value>Case Investigator</value>
@@ -3016,5 +3016,17 @@
   </data>
   <data name="AllSchools" xml:space="preserve">
     <value>All Schools</value>
+  </data>
+  <data name="CompanyConductGuidelines" xml:space="preserve">
+    <value>Pautas de conducta, políticas y renuncias legales de la compañía</value>
+  </data>
+  <data name="MessageToEmployees" xml:space="preserve">
+    <value>Mensaje a nuestros empleados</value>
+  </data>
+  <data name="NoAnon" xml:space="preserve">
+    <value>La plataforma de informes éticos se utilizará solo para denunciar actos graves de violaciones éticas, irregularidades éticas o posibles delitos relacionados con las áreas de finanzas, contabilidad, banca, anticorrupción o la mala conducta de los gerentes de nivel superior. Los informes se limitan solo a circunstancias y situaciones en las que presentarse dentro de la cadena de mando corporativa habitual es imposible o ineficiente. De conformidad con la legislación actual de denuncia de irregularidades, se permiten informes anónimos, pero generalmente se desalientan. Al informar un problema, le recomendamos encarecidamente que se identifique y que brinde tanta información detallada como sea posible sobre su inquietud. Su identidad permanecerá confidencial y se preservará su privacidad, de conformidad con las leyes de protección de datos aplicables.</value>
+  </data>
+  <data name="YesAnon" xml:space="preserve">
+    <value>En conformidad con las leyes nacionales actuales, las denuncias anonimas son permitidas.</value>
   </data>
 </root>
