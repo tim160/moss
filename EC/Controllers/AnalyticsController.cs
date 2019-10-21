@@ -27,6 +27,9 @@ namespace EC.Controllers
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Login", "Service");
+            Session[ECGlobalConstants.CurrentUserMarcker] = user;
+            Session["userName"] = user.login_nm;
+            Session["userId"] = user.id;
 
             #region EC-CC Viewbag
             ViewBag.is_cc = is_cc;

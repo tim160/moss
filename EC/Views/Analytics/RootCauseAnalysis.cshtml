@@ -3,36 +3,38 @@
 @using EC.Models.Database;
 @using System.Data;
 @using EC.App_LocalResources;
+@using EC.Localization;
 
 @{
-  ViewBag.Title = "Root Causes report";
-  Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+    ViewBag.Title = "Root Causes report";
+    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
 
-  int user_id = (Int32)ViewBag.user_id;
-  int companyId = ViewBag.um._user.company_id;
-  string _today = ViewBag._today;
-  string ec_title = "Employee Confidential";
-  bool? is_cc = ViewBag.is_cc;
-  if (!is_cc.HasValue)
-  {
-    is_cc = false;
-  }
-  if (is_cc.Value)
-  {
-    ec_title = "Campus Confidential";
-  }
-  ec_title = ec_title.ToUpper();
+    int user_id = (Int32)ViewBag.user_id;
+    int companyId = ViewBag.um._user.company_id;
+    string _today = ViewBag._today;
+    string ec_title = "Employee Confidential";
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
+    if (is_cc.Value)
+    {
+        ec_title = "Campus Confidential";
+    }
+    ec_title = ec_title.ToUpper();
 }
 
 <link rel="stylesheet" href="~/Content/styleAnalitics.css" />
-
+<input type="hidden" value="@companyId" id="company_id" />
+<input type="hidden" value="@LocalizationGetter.GetString("AllSchools", is_cc)" id="ddListDefaultValue" />
 <script src="~/Scripts/moment.min.js"></script>
 <script src="~/Scripts/jquery.daterangepicker.min.js"></script>
 <link rel="stylesheet" href="~/Libs/nvd3/build/nv.d3.min.css">
 <style>
-    .menuItem:hover .menuUl{
-    display: block;
-}
+    .menuItem:hover .menuUl {
+        display: block;
+    }
 </style>
 
 <div class="blockSettings blockAnalitics" ng-controller="AnalyticsRootCauseAnalysisController" ng-cloak>
@@ -67,6 +69,40 @@
                 </tr>
             </tbody>
         </table>
+
+        <div id="ddListForCases" ng-show="additionalCompanies.length > 1" style="float: right;" class="">
+            <div class="parentClass" ng-click="showDDMenu = !showDDMenu">
+                <div class="menuItem">
+                    <div class="positionText">
+                        <span class="dropMenuText ng-binding">{{displayCompanyName}}</span>
+                        <img src="/Content/img/arrowSelect.png">
+                    </div>
+                    <ul class="menuUl" ng-show="showDDMenu" style="display: block; overflow: hidden;">
+                        <li>
+                            <div class="liItem" ng-class="{'selected': company._selected}" value="null" namedropdown="ReportsDepartmentIDStringss">
+                                <div class="checked">
+                                    <img class="" src="/Content/img/check.png">
+                                </div>
+                                <span class="positionText liText" ng-click="ddListClickedCompany(null, null)">
+                                    @LocalizationGetter.GetString("AllSchools", is_cc)
+                                </span>
+                            </div>
+                        </li>
+                        <li ng-repeat="company in additionalCompanies" class="ng-scope">
+                            <div class="liItem" ng-class="{'selected': company._selected}" value="{{company.id}}" namedropdown="ReportsDepartmentIDStringss">
+                                <div class="checked">
+                                    <img class="" src="/Content/img/check.png">
+                                </div>
+                                <span class="positionText liText ng-binding" ng-click="ddListClickedCompany(company.id, company.company_nm)">
+                                    {{company.company_nm}}
+                                </span>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="container" id="rootCauseAnalysis" style="">
@@ -119,19 +155,19 @@
             <div class="center widthForPrint" id="chart3">
                 <nvd3 id="chart3" options="chart3" data="chartData3" api="api3"></nvd3>
                 <!-- /.graphTitle -->
-                    <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in chartData3">
-                        <div class="col-8 p-0">
-                            <div class="ng-binding RootCauseAnalysis-roudChart__title" style="margin-bottom: 10px; padding-left: 10px; border-left: solid 10px {{chartColors[$index]}}">
-                                {{item.name}}
-                            </div>
-                        </div>
-                        <div class="col-2 RootCauseAnalysis-roudChart__count disablePaddingRight">
-                            {{item.count}}
-                        </div>
-                        <div class="col-2 RootCauseAnalysis-roudChart__count disablePaddingRight">
-                            <spam class="percentage">{{item.percentage}}%</spam>
+                <div class="RootCauseAnalysis-roudChart ng-scope clearfix" ng-repeat="item in chartData3">
+                    <div class="col-8 p-0">
+                        <div class="ng-binding RootCauseAnalysis-roudChart__title" style="margin-bottom: 10px; padding-left: 10px; border-left: solid 10px {{chartColors[$index]}}">
+                            {{item.name}}
                         </div>
                     </div>
+                    <div class="col-2 RootCauseAnalysis-roudChart__count disablePaddingRight">
+                        {{item.count}}
+                    </div>
+                    <div class="col-2 RootCauseAnalysis-roudChart__count disablePaddingRight">
+                        <spam class="percentage">{{item.percentage}}%</spam>
+                    </div>
+                </div>
 
             </div><!-- /.col-4 -->
         </div><!-- /.row -->

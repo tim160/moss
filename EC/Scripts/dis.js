@@ -405,12 +405,54 @@
     angular
         .module('EC')
         .controller('AnalyticsRootCauseAnalysisController',
-            ['$scope', 'AnalyticsRootCauseAnalysisService', AnalyticsRootCauseAnalysisController]);
+            ['$scope', 'AnalyticsRootCauseAnalysisService', 'getAdditionalCompanies', AnalyticsRootCauseAnalysisController]);
 
-    function AnalyticsRootCauseAnalysisController($scope, AnalyticsRootCauseAnalysisService) {
+    function AnalyticsRootCauseAnalysisController($scope, AnalyticsRootCauseAnalysisService, getAdditionalCompanies) {
 
-        $scope.secondaryType = { id: 0 };
-        $scope.secondaryTypes = [];
+        $scope.displayCompanyName = document.querySelector("#ddListDefaultValue").value;
+        var companyIdArray = Array();
+        $scope.additionalCompanies = Array();
+        $scope.showDDMenu = false;
+
+        getAdditionalCompanies.getData(document.querySelector("#company_id").value).then(function (response) {
+            $scope.additionalCompanies = response.data.additionalCompanies;
+            companyIdArray = $scope.additionalCompanies.map((item) => { return item.id; });
+
+            $scope.secondaryType = { id: 0 };
+            $scope.secondaryTypes = [];
+
+            $scope.refresh($scope.secondaryType, companyIdArray);
+        });
+
+        /* drop down list functionality */
+        $scope.ddListClickedCompany = function (company_id, company_name) {
+            if (company_name == undefined) {
+                $scope.displayCompanyName = document.querySelector("#ddListDefaultValue").value;
+                $scope.filterValue = null;
+                $scope.refresh($scope.secondaryType.id, companyIdArray);
+            } else {
+                $scope.filterValue = company_id;
+                $scope.displayCompanyName = company_name;
+                $scope.refresh($scope.secondaryType.id, company_id);
+            }
+        }
+
+        $scope.refresh = function (secondaryType, companyIdArray) {
+            AnalyticsRootCauseAnalysisService.get({ secondaryType: secondaryType, companyId: companyIdArray }, function (data) {
+                if ($scope.secondaryTypes.length === 0) {
+                    $scope.secondaryTypes = data.SecondaryTypes;
+                    $scope.secondaryType = $scope.secondaryTypes[0];
+                }
+                $scope.chartData1 = setPercentage(data.Behavioral);
+                $scope.chartData2 = setPercentage(data.External);
+                $scope.chartData3 = setPercentage(data.Organizational);
+                $scope.chart1.chart.title = "Behavioral Factors";
+                $scope.chart2.chart.title = "External Influences";
+                $scope.chart3.chart.title = "Organizational Influences";
+                $scope.chartColors = data.Colors;
+            });
+        };
+
 
         function setPercentage(array) {
             if (toString.call(array) !== "[object Array]")
@@ -431,29 +473,17 @@
             return array;
         }
 
-        $scope.refresh = function () {
-            AnalyticsRootCauseAnalysisService.get({ secondaryType: $scope.secondaryType.id }, function (data) {
-                if ($scope.secondaryTypes.length === 0) {
-                    $scope.secondaryTypes = data.SecondaryTypes;
-                    $scope.secondaryType = $scope.secondaryTypes[0];
-                }
-                $scope.chartData1 = setPercentage(data.Behavioral);
-                $scope.chartData2 = setPercentage(data.External);
-                $scope.chartData3 = setPercentage(data.Organizational);
-                $scope.chart1.chart.title = "Behavioral Factors";
-                $scope.chart2.chart.title = "External Influences";
-                $scope.chart3.chart.title = "Organizational Influences";
-                $scope.chartColors = data.Colors;
-            });
-        };
+
 
         $scope.chartColors = ['#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472'];
 
-        $scope.refresh();
+        
 
         $scope.selectSecondaryTypes = function (item) {
             $scope.secondaryType = item;
-            $scope.refresh();
+            var companyIDSelected = $scope.filterValue == undefined ? $scope.additionalCompanies.map((item) => { return item.id; })
+                : $scope.filterValue;
+            $scope.refresh(item.id, companyIDSelected);
         };
 
 
@@ -579,6 +609,54 @@
 
     'use strict';
 
+    angular.module('EC')
+        .factory('getAdditionalCompanies', function ($http, $q) {
+            return {
+                getData: function (id) {
+                    var deffered = $q.defer();
+                    $http({
+                        method: 'GET',
+                        url: '/api/AdditionalCompanies/' + id
+                    })
+                        .then(function success(response) {
+                            deffered.resolve(response);
+                        }, function error(response) {
+                            deffered.reject(response.status);
+                        });
+                    return deffered.promise;
+                }
+            }
+        });
+})();
+
+//(function () {
+
+//    'use strict';
+
+//    angular.module('EC')
+//        .factory('getAdditionalCompanies', function ($http, $q) {
+//            return {
+//                getData: function (id) {
+//                    var deffered = $q.defer();
+//                    $http({
+//                        method: 'GET',
+//                        url: '/api/AdditionalCompanies/' + id
+//                    })
+//                        .then(function success(response) {
+//                            deffered.resolve(response);
+//                        }, function error(response) {
+//                            deffered.reject(response.status);
+//                        });
+//                    return deffered.promise;
+//                }
+//            }
+//        })();
+//});
+
+(function () {
+
+    'use strict';
+
     angular
         .module('EC')
         .controller('CasesController',
@@ -659,7 +737,7 @@
                 //if (maxWidth > 194) {
                 //    $("#ddListForCases .parentClass").width(maxWidth);
                 //}
-             });
+            });
         };
         $scope.refresh($scope.mode);
 
@@ -679,7 +757,7 @@
                 $scope.sortColumnDesc = false;
             }
             $scope.reports = orderByFilter($scope.reports, $scope.sortColumn, $scope.sortColumnDesc);
-            
+
         };
         $scope.ddListClickedCompany = function (company_id, company_name) {
             //$scope.showDDMenu = false;
@@ -1534,7 +1612,7 @@
     angular
         .module('EC')
         .controller('SettingsCompanyRoutingController',
-        ['$scope', '$filter', 'orderByFilter', '$http', 'SettingsCompanyRoutingService', 'SettingsCompanyRoutingServiceSetClientId',SettingsCompanyRoutingController]);
+            ['$scope', '$filter', 'orderByFilter', '$http', 'SettingsCompanyRoutingService', 'SettingsCompanyRoutingServiceSetClientId', SettingsCompanyRoutingController]);
 
     function SettingsCompanyRoutingController($scope, $filter, orderByFilter, $http, SettingsCompanyRoutingService, SettingsCompanyRoutingServiceSetClientId) {
         $scope.types = [];
@@ -1577,7 +1655,7 @@
                 } else if (data.userCommpanyClientId < 0) {
                     $scope.RoutingByLocation = false;
                 }
-                
+
                 $scope.userCompanyName = data.userCompanyName;
             }
         };
@@ -2438,6 +2516,8 @@
             }
         });
 })();
+
+
 
 
 
