@@ -5,6 +5,13 @@
     ViewBag.Title = "Employee Confidential";
     Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
     bool is_cc = false;
+    ModelState accLoked = new ModelState();
+    string errorMessage = "";
+    ViewData.ModelState.TryGetValue("accountIsLocked", out accLoked);
+    if (accLoked != null && accLoked.Errors != null)
+    {
+        errorMessage = accLoked.Errors.Select(err => err.ErrorMessage).FirstOrDefault();
+    }
 }
 
 <style>
@@ -50,10 +57,13 @@
                                 @LocalizationGetter.GetString("Password", is_cc)
                                 @Html.PasswordFor(x => x.Password, new { @class = ViewContext.ViewData.ModelState.ContainsKey("PasswordError") ? "error" : "" })
                             </label>
+                            <text>
+                                <p class="red">@errorMessage</p>
+                            </text>
                         </div><!-- /.loginForm -->
                         <div class="loginFormLinks">
                             <a href="@Url.Action("ForgetPassword", "Service")" class="loginFormLinks__restoreLink">
-                                
+
                                 Forgot your password?
                             </a>
                             <button type="submit" class="loginFormLinks__loginBtn btn" style="cursor: pointer;">

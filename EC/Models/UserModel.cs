@@ -134,8 +134,9 @@ namespace EC.Models
             }
         }
 
-        public user Login(string login, string password)
+        public LoginUserViewModel Login(string login, string password)
         {
+            LoginUserViewModel loginUser = new LoginUserViewModel();
             /*   var hash = PasswordUtils.GetHash(password);
                var validate = PasswordUtils.Validate(password, hash);
 
@@ -148,6 +149,24 @@ namespace EC.Models
             //_user = db.user.FirstOrDefault(item => item.login_nm.Trim() == login);
             if (_user == null)
             {
+                var userWhoHasNoAccess = db.user.FirstOrDefault(item => item.login_nm.Trim() == login);
+                if (userWhoHasNoAccess != null)
+                {
+                    if (userWhoHasNoAccess.last_tried_login_dt > DateTime.Now.AddHours(-1) && userWhoHasNoAccess.number_of_attempts < 5)
+                    {
+                        userWhoHasNoAccess.number_of_attempts++;
+                        db.SaveChanges();
+                    }else if(userWhoHasNoAccess.last_tried_login_dt < DateTime.Now.AddHours(-1) && userWhoHasNoAccess.number_of_attempts < 5)
+                    {
+                        userWhoHasNoAccess.number_of_attempts++;
+                        db.SaveChanges();
+                    }
+                    else if(userWhoHasNoAccess.last_tried_login_dt < DateTime.Now.AddHours(-1) && userWhoHasNoAccess.number_of_attempts == 5)
+                    {
+                        loginUser.ErrorMessage = "Maximum number of login attempts exceeded. The account is locked for 60 minutes";
+                        return loginUser;
+                    }
+                }
                 return null;
             }
             if ((_user.status_id != 2) & (_user.last_login_dt != null))
@@ -174,7 +193,12 @@ namespace EC.Models
                 ////////        if (is_valid_pass)
                 {
                     if (_user.last_login_dt.HasValue)
+                    {
                         _user.previous_login_dt = _user.last_login_dt;
+                        
+                    }
+                    _user.last_tried_login_dt = DateTime.Now;
+                    _user.number_of_attempts = 0;
                     _user.last_login_dt = DateTime.Now;
 
                     if ((new int[] { 4, 5, 6, 10 }.Contains(_user.role_id)) && (_user.status_id == 3)) //Pending
@@ -182,7 +206,8 @@ namespace EC.Models
                         _user.status_id = 2;
                     }
                     db.SaveChanges();
-                    return _user;
+                    loginUser.user = _user;
+                    return loginUser;
 
                     //  _user.save();
                 }

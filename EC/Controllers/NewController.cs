@@ -1134,7 +1134,7 @@ namespace EC.Controllers
                     if (login != null && login.Length > 0)
                     {
                         UserModel userModel = new UserModel();
-                        var user = userModel.Login(login, pass);
+                        var user = userModel.Login(login, pass).user;
                         Session[ECGlobalConstants.CurrentUserMarcker] = user;
                         Session["userName"] = "";
                         Session["userId"] = user.id;
@@ -2223,7 +2223,7 @@ namespace EC.Controllers
                     if (login != null && login.Length > 0)
                     {
                         UserModel userModel = new UserModel();
-                        var user = userModel.Login(login, pass);
+                        var user = userModel.Login(login, pass).user;
                         Session[ECGlobalConstants.CurrentUserMarcker] = user;
                         Session["userName"] = "";
                         Session["userId"] = user.id;
@@ -2388,7 +2388,7 @@ namespace EC.Controllers
             if (login != null && login.Length > 0)
             {
                 UserModel userModel = new UserModel();
-                var user = userModel.Login(login, pass);
+                var user = userModel.Login(login, pass).user;
                 Session[ECGlobalConstants.CurrentUserMarcker] = user;
                 Session["userName"] = "";
                 Session["userId"] = user.id;

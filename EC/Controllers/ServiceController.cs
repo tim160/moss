@@ -65,13 +65,24 @@ namespace EC.Controllers
 
                 if (!String.IsNullOrEmpty(model.Login))
                 {
-                    var user = userModel.Login(model.Login, model.Password);
+                    
+                    var loginUser = userModel.Login(model.Login, model.Password);
 
-                    if (user == null)
+
+                    if (loginUser == null || loginUser.user == null)
                     {
-                        ModelState.AddModelError("PasswordError", "Password");
+                        if(loginUser != null && loginUser.ErrorMessage != null)
+                        {
+                            ModelState.AddModelError("accountIsLocked", loginUser.ErrorMessage);
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("PasswordError", "Password");
+                        }
+                        
                         return View($"{view}{(is_cc ? "-CC" : "")}", model);
                     }
+                    var user = loginUser.user;
                     if (user.role_id == 10)
                     {
                         Session["id_agent"] = user.id;
