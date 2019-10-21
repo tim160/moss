@@ -1810,7 +1810,7 @@
     <Compile Include="Models\GlobalFunctions.cs" />
     <Compile Include="Models\JsonPResult.cs" />
     <Compile Include="Models\LoginModel.cs" />
-    <Compile Include="Models\MenuDashboardAnalytics.cs" />
+    <Compile Include="Models\Services\AnaliticsService\MenuDashboardAnalytics.cs" />
     <Compile Include="Models\ReporterDashboardModel.cs" />
     <Compile Include="Models\ReportModel.cs" />
     <Compile Include="Models\SettingsModel.cs" />
@@ -1829,6 +1829,7 @@
     <Compile Include="Models\ViewModels\DepartmentsViewModel.cs" />
     <Compile Include="Models\ViewModels\HeaderPos.cs" />
     <Compile Include="Models\ViewModels\InjuryDamageViewModel.cs" />
+    <Compile Include="Models\ViewModels\LoginUserViewModel.cs" />
     <Compile Include="Models\ViewModels\ManagamentViewModel.cs" />
     <Compile Include="Models\ViewModels\QuickUserViewModel.cs" />
     <Compile Include="Models\ViewModels\RelationshipCulture.cs" />
