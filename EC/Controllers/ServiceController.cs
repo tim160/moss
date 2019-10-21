@@ -125,7 +125,7 @@ namespace EC.Controllers
                     {
                         return RedirectToAction("Index", "Cases", new { mode = "completed" });
                     }
-                    return RedirectToAction("Index", "analytics");
+                    return RedirectToAction("Index", "Cases");
                 }
             }
 

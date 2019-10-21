@@ -47,10 +47,14 @@ namespace EC.Controllers.API
                 reporterIs = rm.ReporterCompanyRelationShort(),
                 incidentHappenedIn = rm.LocationString(),
                 affectedDepartment = rm.DepartmentsString(),
-                partiesInvolvedName = "(Margot) Cooper1",
-                partiesInvolvedTitle = "CFO1",
-                partiesInvolvedType = "Case Administrators excluded1",
-                reportingAbout = rm.SecondaryTypeString(),
+                partiesInvolvedName = "",
+                partiesInvolvedTitle = "",
+                partiesInvolvedType = "",
+           //   partiesInvolvedName = "(Margot) Cooper1",
+             // partiesInvolvedTitle = "CFO1",
+           //   partiesInvolvedType = "Case Administrators excluded1",
+
+              reportingAbout = rm.SecondaryTypeString(),
                 incidentDate = rm.IncidentDateStringMonthLong(),
                 report_by_myself = rm._report.report_by_myself,
                 non_mediator_involved = DB.report_non_mediator_involved

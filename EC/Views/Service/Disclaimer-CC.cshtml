@@ -97,7 +97,7 @@
                     @if (!String.IsNullOrEmpty(Model.DisclamerPage().message_to_employees))
                     {
                         <div class="footerInfo__title">
-                            Message to our employees
+                            @LocalizationGetter.GetString("MessageToEmployees", is_cc)
                         </div>
                         <div class="footerInfo__textContent">
                             @Model.DisclamerPage().message_to_employees
@@ -108,7 +108,7 @@
                     @if (!String.IsNullOrEmpty(Model.DisclamerPage().message_about_guidelines))
                     {
                         <div class="footerInfo__title">
-                            Company conduct guidelines, policies and legal disclaimers
+                            @LocalizationGetter.GetString("CompanyConductGuidelines", is_cc)
                         </div>
                         <div class="footerInfo__textContent">
                             @Model.DisclamerPage().message_about_guidelines

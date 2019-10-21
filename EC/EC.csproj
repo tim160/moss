@@ -82,7 +82,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -753,6 +752,8 @@
     <Content Include="html\reset.css" />
     <Content Include="Libs\angular-animate\angular-animate.js" />
     <Content Include="Libs\angular-animate\angular-animate.min.js" />
+    <Content Include="Libs\angular-daterangepicker\angular-daterangepicker.js" />
+    <Content Include="Libs\angular-daterangepicker\angular-daterangepicker.min.js" />
     <Content Include="Libs\angular-http\angular-http.js" />
     <Content Include="Libs\angular-messages\angular-messages.js" />
     <Content Include="Libs\angular-messages\angular-messages.min.js" />
@@ -767,8 +768,28 @@
     <Content Include="Libs\angular-sanitize\angular-sanitize.js" />
     <Content Include="Libs\angular-sanitize\angular-sanitize.min.js" />
     <Content Include="Libs\angular-ui-calendar\src\calendar.js" />
+    <Content Include="Libs\angular\angular-messages.js" />
     <Content Include="Libs\angular\angular.js" />
     <Content Include="Libs\angular\angular.min.js" />
+    <Content Include="Libs\bootstrap-daterangepicker\daterangepicker.css" />
+    <Content Include="Libs\bootstrap-daterangepicker\daterangepicker.js" />
+    <Content Include="Libs\bootstrap-daterangepicker\demo.html" />
+    <Content Include="Libs\bootstrap-daterangepicker\drp.png" />
+    <Content Include="Libs\bootstrap-daterangepicker\example\amd\index.html" />
+    <Content Include="Libs\bootstrap-daterangepicker\example\amd\main.js" />
+    <Content Include="Libs\bootstrap-daterangepicker\example\amd\require.js" />
+    <Content Include="Libs\bootstrap-daterangepicker\example\browserify\bundle.js" />
+    <Content Include="Libs\bootstrap-daterangepicker\example\browserify\index.html" />
+    <Content Include="Libs\bootstrap-daterangepicker\example\browserify\main.js" />
+    <Content Include="Libs\bootstrap-daterangepicker\index.html" />
+    <Content Include="Libs\bootstrap-daterangepicker\moment.min.js" />
+    <Content Include="Libs\bootstrap-daterangepicker\package.js" />
+    <Content Include="Libs\bootstrap-daterangepicker\test.html" />
+    <Content Include="Libs\bootstrap-daterangepicker\website.css" />
+    <Content Include="Libs\bootstrap-daterangepicker\website.js" />
+    <Content Include="Libs\bootstrap-daterangepicker\website\index.html" />
+    <Content Include="Libs\bootstrap-daterangepicker\website\website.css" />
+    <Content Include="Libs\bootstrap-daterangepicker\website\website.js" />
     <Content Include="Libs\d3\d3.js" />
     <Content Include="Libs\d3\d3.min.js" />
     <Content Include="Libs\fullcalendar\dist\fullcalendar.css" />
@@ -873,8 +894,8 @@
     <Content Include="Libs\Selectric\selectric.css" />
     <Content Include="Models\Database\ECEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ECEntities.edmx</DependentUpon>
       <LastGenOutput>ECEntities.Context.cs</LastGenOutput>
+      <DependentUpon>ECEntities.edmx</DependentUpon>
     </Content>
     <Content Include="Models\Database\ECEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1163,6 +1184,13 @@
     <Content Include="Content\fonts\Lato2OFL\Lato-SemiboldItalic.ttf" />
     <Content Include="Content\fonts\Lato2OFL\Lato-Thin.ttf" />
     <Content Include="Content\fonts\Lato2OFL\Lato-ThinItalic.ttf" />
+    <EntityDeploy Include="Models\Database\ECEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ECEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Database\ECEntities.edmx.diagram">
+      <DependentUpon>ECEntities.edmx</DependentUpon>
+    </Content>
     <Content Include="Libs\angular-messages\.bower.json" />
     <Content Include="Libs\angular-messages\angular-messages.min.js.map" />
     <Content Include="Libs\angular-messages\bower.json" />
@@ -1188,16 +1216,18 @@
     <Content Include="Libs\nvd3\build\nv.d3.js.map" />
     <Content Include="Libs\nvd3\build\nv.d3.min.css.map" />
     <Content Include="Libs\nvd3\build\nv.d3.min.js.map" />
-    <EntityDeploy Include="Models\Database\ECEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ECEntities.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Database\ECEntities.edmx.diagram">
-      <DependentUpon>ECEntities.edmx</DependentUpon>
-    </Content>
+    <Content Include="Libs\bootstrap-daterangepicker\bower.json" />
+    <Content Include="Libs\bootstrap-daterangepicker\example\browserify\README.md" />
+    <Content Include="Libs\bootstrap-daterangepicker\package.json" />
+    <Content Include="Libs\bootstrap-daterangepicker\README.md" />
+    <Content Include="Metadata\deploymentTemplates\apiappconfig.azureresource.json" />
+    <Content Include="apiapp.json" />
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <None Include="Properties\PublishProfiles\ec-code.pubxml" />
     <None Include="Properties\PublishProfiles\ec-dev.pubxml" />
+    <None Include="Properties\PublishProfiles\eccAzure.pubxml" />
+    <None Include="Properties\PublishProfiles\ecreportingazure %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\ecreportingazure.pubxml" />
     <None Include="Properties\PublishProfiles\File.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FTP.pubxml" />
@@ -1208,6 +1238,7 @@
     <None Include="Scripts\lib\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Common\helper.js" />
     <Content Include="Scripts\dis.js" />
+    <Content Include="Scripts\dis.min.js" />
     <Content Include="Scripts\jquery.daterangepicker.min.js" />
     <Content Include="Scripts\jquery.the-modal.js" />
     <Content Include="Scripts\lib\Chart.min.js" />
@@ -1749,9 +1780,6 @@
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\status.cs">
-      <DependentUpon>ECEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Database\sysdiagrams.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\task.cs">
