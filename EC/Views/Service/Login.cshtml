@@ -26,7 +26,36 @@
 
 <div class="general-container login">
 
-    @{Html.RenderPartial("Header"); }
+  <header class="header">
+    <div class="top-headerBg">
+      <div class="container">
+        <div class="top-header">
+
+          <a href="http://employeeconfidential.com" class="top-header__backLink">
+            <img src="~/Content/images/svg-icons/left.svg" alt="" />
+            <span class="top-header__backLink-text">
+              EmployeeConfidential.com
+            </span>
+          </a>
+          <div class="top-header__loginBar">
+            <nav class="top-header__loginBar-nav">
+              <li class="top-header__loginBar-li">
+                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Report" class="top-header__loginBar-a">
+                  File a Report
+                </a>
+              </li>
+              <li class="top-header__loginBar-li">
+                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/CheckStatus" class="top-header__loginBar-a">
+                  Check Report Status
+                </a>
+              </li>
+            </nav><!-- /.top-header__loginBar-nav -->
+          </div><!-- /.top-header__loginBar -->
+        </div><!-- /.top-header -->
+      </div>
+    </div>
+
+  </header><!-- /.header -->
 
     <main class="main">
         <section class="loginSection">
