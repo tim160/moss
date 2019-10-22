@@ -66,14 +66,15 @@ namespace EC.Controllers
                 if (!String.IsNullOrEmpty(model.Login))
                 {
                     
-                    var loginUser = userModel.Login(model.Login, model.Password);
+                    var loginUser = userModel.Login(model.Login, model.Password, is_cc);
 
 
                     if (loginUser == null || loginUser.user == null)
                     {
                         if(loginUser != null && loginUser.ErrorMessage != null)
                         {
-                            ModelState.AddModelError("accountIsLocked", loginUser.ErrorMessage);
+                            
+                            ModelState.AddModelError("accountIsLocked", LocalizationGetter.GetString("AccountLocked", is_cc));
                         }
                         else
                         {

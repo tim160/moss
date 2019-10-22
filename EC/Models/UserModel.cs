@@ -19,6 +19,7 @@ using EC.Models.ViewModel;
 using EC.Utils;
 using System.Threading.Tasks;
 using EC.Controllers.API;
+using EC.Localization;
 
 namespace EC.Models
 {
@@ -134,7 +135,7 @@ namespace EC.Models
             }
         }
 
-        public LoginUserViewModel Login(string login, string password)
+        public LoginUserViewModel Login(string login, string password, bool is_cc)
         {
             LoginUserViewModel loginUser = new LoginUserViewModel();
             /*   var hash = PasswordUtils.GetHash(password);
@@ -145,8 +146,25 @@ namespace EC.Models
 
                //user _user = db.user.FirstOrDefault(item => item.login_nm.Trim() == login && item.password.Trim() == password && item.status_id == 2);
                */
-            user _user = db.user.FirstOrDefault(item => item.login_nm.Trim() == login && item.password.Trim() == password);
+            user _user = db.user.FirstOrDefault(
+                item => item.login_nm.Trim() == login &&
+                item.password.Trim() == password);
             //_user = db.user.FirstOrDefault(item => item.login_nm.Trim() == login);
+            if(_user != null)
+            {
+                if (_user.number_of_attempts == 5 && _user.last_tried_login_dt > DateTime.Now.AddHours(-1))
+                {
+                    loginUser.ErrorMessage = "AccountLocked";
+                    return loginUser;
+                }
+                if (_user.number_of_attempts == 5 && _user.last_tried_login_dt < DateTime.Now.AddHours(-1))
+                {
+                    _user.number_of_attempts = 0;
+                    db.SaveChanges();
+                }
+            }
+
+
             if (_user == null)
             {
                 var userWhoHasNoAccess = db.user.FirstOrDefault(item => item.login_nm.Trim() == login);
@@ -155,16 +173,31 @@ namespace EC.Models
                     if (userWhoHasNoAccess.last_tried_login_dt > DateTime.Now.AddHours(-1) && userWhoHasNoAccess.number_of_attempts < 5)
                     {
                         userWhoHasNoAccess.number_of_attempts++;
-                        db.SaveChanges();
-                    }else if(userWhoHasNoAccess.last_tried_login_dt < DateTime.Now.AddHours(-1) && userWhoHasNoAccess.number_of_attempts < 5)
-                    {
-                        userWhoHasNoAccess.number_of_attempts++;
+                        userWhoHasNoAccess.last_tried_login_dt = DateTime.Now;
                         db.SaveChanges();
                     }
-                    else if(userWhoHasNoAccess.last_tried_login_dt < DateTime.Now.AddHours(-1) && userWhoHasNoAccess.number_of_attempts == 5)
+                    else if (userWhoHasNoAccess.last_tried_login_dt < DateTime.Now.AddHours(-1) && userWhoHasNoAccess.number_of_attempts < 5)
                     {
-                        loginUser.ErrorMessage = "Maximum number of login attempts exceeded. The account is locked for 60 minutes";
+                        userWhoHasNoAccess.number_of_attempts++;
+                        userWhoHasNoAccess.last_tried_login_dt = DateTime.Now;
+                        db.SaveChanges();
+                    }
+                    else if (userWhoHasNoAccess.last_tried_login_dt > DateTime.Now.AddHours(-1) && userWhoHasNoAccess.number_of_attempts == 5)
+                    {
+                        userWhoHasNoAccess.last_tried_login_dt = DateTime.Now;
+                        db.SaveChanges();
+                        loginUser.ErrorMessage = "AccountLocked";
+                        glb.SaveEmailBeforeSend(0, 0, 0, System.Configuration.ConfigurationManager.AppSettings["BCCEmail"],
+                            System.Configuration.ConfigurationManager.AppSettings["emailFrom"], is_cc.ToString(), "failed login attempts",
+                            "user loginName = " + userWhoHasNoAccess.login_nm + " had failed login attempts in a row", false, 0);
                         return loginUser;
+                    }
+                    else if (userWhoHasNoAccess.last_tried_login_dt < DateTime.Now.AddHours(-1) && userWhoHasNoAccess.number_of_attempts == 5)
+                    {
+                        userWhoHasNoAccess.last_tried_login_dt = DateTime.Now;
+                        userWhoHasNoAccess.number_of_attempts = 0;
+
+                        db.SaveChanges();
                     }
                 }
                 return null;
@@ -195,7 +228,7 @@ namespace EC.Models
                     if (_user.last_login_dt.HasValue)
                     {
                         _user.previous_login_dt = _user.last_login_dt;
-                        
+
                     }
                     _user.last_tried_login_dt = DateTime.Now;
                     _user.number_of_attempts = 0;
@@ -241,7 +274,7 @@ namespace EC.Models
             return user;
         }
         #endregion
-     
+
         /// <summary>
         /// list of all reports user can access.
         /// </summary>
@@ -270,18 +303,18 @@ namespace EC.Models
                 if ((_user.role_id == 4) || (_user.role_id == 5))
                 {
 
-                  CompanyModel cm = new CompanyModel(_user.company_id);
-                  List<company> availableCompanies = cm.AdditionalCompanies();
+                    CompanyModel cm = new CompanyModel(_user.company_id);
+                    List<company> availableCompanies = cm.AdditionalCompanies();
 
                     List<int> involved_report_ids = (db.report_mediator_involved.Where(item => (item.mediator_id == _user.id)).Select(item => item.report_id)).ToList();
                     if (availableCompanies.Count > 1)
                     {
-                      List<int> availableCompaniesID = availableCompanies.Select(t => t.id).ToList().Distinct().ToList();
-                      all_reports = (db.report.Where(item => ((availableCompaniesID.Contains(item.company_id)) && (!involved_report_ids.Contains(item.id))))).ToList();
+                        List<int> availableCompaniesID = availableCompanies.Select(t => t.id).ToList().Distinct().ToList();
+                        all_reports = (db.report.Where(item => ((availableCompaniesID.Contains(item.company_id)) && (!involved_report_ids.Contains(item.id))))).ToList();
 
                     }
                     else
-                      all_reports = (db.report.Where(item => ((item.company_id == _user.company_id) && (!involved_report_ids.Contains(item.id))))).ToList();
+                        all_reports = (db.report.Where(item => ((item.company_id == _user.company_id) && (!involved_report_ids.Contains(item.id))))).ToList();
                 }
                 // if user is regular mediator - we show only reports where he is assigned and hide all others
                 if ((_user.role_id == 6))
@@ -375,86 +408,86 @@ namespace EC.Models
             return reports;
         }
 
-    /// <summary>
-    /// returns id's of reports user can access
-    /// </summary>
-    /// <param name="user_id"></param>
-    /// <param name="report_id"></param>
-    /// <returns></returns>
-    public List<int> GetReportIds(int? report_id)
-    {
-      List<int> all_report_ids = new List<int>();
-
-      // if user is top mediator - we can show all reports from company where user is not involved
-      if ((_user != null) && (_user.id != 0))
-      {
-        #region List of reports for the user
-        if ((report_id.HasValue) && (report_id != 0))
+        /// <summary>
+        /// returns id's of reports user can access
+        /// </summary>
+        /// <param name="user_id"></param>
+        /// <param name="report_id"></param>
+        /// <returns></returns>
+        public List<int> GetReportIds(int? report_id)
         {
-          // if user is top mediator - we can show all reports from company where user is not involved
-          if ((_user.role_id == 4) || (_user.role_id == 5))
-          {
-            List<int> involved_report_ids = (db.report_mediator_involved.Where(item => (item.mediator_id == _user.id)).Select(item => item.report_id)).ToList();
+            List<int> all_report_ids = new List<int>();
 
-            CompanyModel cm = new CompanyModel(_user.company_id);
-            List<company> availableCompanies = cm.AdditionalCompanies();
-
-            if (availableCompanies.Count > 1)
+            // if user is top mediator - we can show all reports from company where user is not involved
+            if ((_user != null) && (_user.id != 0))
             {
-              List<int> availableCompaniesID = availableCompanies.Select(t => t.id).ToList().Distinct().ToList();
+                #region List of reports for the user
+                if ((report_id.HasValue) && (report_id != 0))
+                {
+                    // if user is top mediator - we can show all reports from company where user is not involved
+                    if ((_user.role_id == 4) || (_user.role_id == 5))
+                    {
+                        List<int> involved_report_ids = (db.report_mediator_involved.Where(item => (item.mediator_id == _user.id)).Select(item => item.report_id)).ToList();
 
-              all_report_ids = (db.report.Where(item => (((availableCompaniesID.Contains(item.company_id)) && (!involved_report_ids.Contains(item.id)) && (item.id == report_id)))).Select(item => item.id)).ToList();
+                        CompanyModel cm = new CompanyModel(_user.company_id);
+                        List<company> availableCompanies = cm.AdditionalCompanies();
 
+                        if (availableCompanies.Count > 1)
+                        {
+                            List<int> availableCompaniesID = availableCompanies.Select(t => t.id).ToList().Distinct().ToList();
+
+                            all_report_ids = (db.report.Where(item => (((availableCompaniesID.Contains(item.company_id)) && (!involved_report_ids.Contains(item.id)) && (item.id == report_id)))).Select(item => item.id)).ToList();
+
+                        }
+                        else
+                            all_report_ids = (db.report.Where(item => ((item.company_id == _user.company_id) && (!involved_report_ids.Contains(item.id)) && (item.id == report_id))).Select(item => item.id)).ToList();
+                    }
+                    // if user is regular mediator - we show only reports where he is assigned and hide all others
+                    if ((_user.role_id == 6))
+                    {
+                        List<int> assigned_report_ids = (db.report_mediator_assigned.Where(item => (item.mediator_id == _user.id) && (item.status_id == 2) && (item.report_id == report_id)).Select(item => item.report_id)).ToList();
+                        all_report_ids = (db.report.Where(item => assigned_report_ids.Contains(item.id)).Select(item => item.id)).ToList();
+                    }
+                    if ((_user.role_id == 8))
+                    {
+                        all_report_ids = (db.report.Where(item => (item.reporter_user_id == _user.id) && (item.id == report_id)).Select(item => item.id)).ToList();
+                    }
+                }
+                else
+                {
+                    // if user is top mediator - we can show all reports from company where user is not involved
+                    if ((_user.role_id == 4) || (_user.role_id == 5))
+                    {
+                        List<int> involved_report_ids = (db.report_mediator_involved.Where(item => (item.mediator_id == _user.id)).Select(item => item.report_id)).ToList();
+
+                        CompanyModel cm = new CompanyModel(_user.company_id);
+                        List<company> availableCompanies = cm.AdditionalCompanies();
+
+                        if (availableCompanies.Count > 1)
+                        {
+                            List<int> availableCompaniesID = availableCompanies.Select(t => t.id).ToList().Distinct().ToList();
+                            all_report_ids = (db.report.Where(item => (((availableCompaniesID.Contains(item.company_id)) && (!involved_report_ids.Contains(item.id))))).Select(item => item.id)).ToList();
+
+                        }
+                        else
+                            all_report_ids = (db.report.Where(item => ((item.company_id == _user.company_id) && (!involved_report_ids.Contains(item.id)))).Select(item => item.id)).ToList();
+                    }
+                    // if user is regular mediator/ legal counsil - we show only reports where he is assigned and hide all others
+                    if ((_user.role_id == 6) || (_user.role_id == 7))
+                    {
+                        List<int> assigned_report_ids = (db.report_mediator_assigned.Where(item => ((item.mediator_id == _user.id) && (item.status_id == 2))).Select(item => item.report_id)).ToList();
+                        all_report_ids = (db.report.Where(item => assigned_report_ids.Contains(item.id)).Select(item => item.id)).ToList();
+                    }
+                    if ((_user.role_id == 8))
+                    {
+                        all_report_ids = (db.report.Where(item => item.reporter_user_id == _user.id).Select(item => item.id)).ToList();
+                    }
+                }
+                #endregion
             }
-            else
-              all_report_ids = (db.report.Where(item => ((item.company_id == _user.company_id) && (!involved_report_ids.Contains(item.id)) && (item.id == report_id))).Select(item => item.id)).ToList();
-          }
-          // if user is regular mediator - we show only reports where he is assigned and hide all others
-          if ((_user.role_id == 6))
-          {
-            List<int> assigned_report_ids = (db.report_mediator_assigned.Where(item => (item.mediator_id == _user.id) && (item.status_id == 2) && (item.report_id == report_id)).Select(item => item.report_id)).ToList();
-            all_report_ids = (db.report.Where(item => assigned_report_ids.Contains(item.id)).Select(item => item.id)).ToList();
-          }
-          if ((_user.role_id == 8))
-          {
-            all_report_ids = (db.report.Where(item => (item.reporter_user_id == _user.id) && (item.id == report_id)).Select(item => item.id)).ToList();
-          }
+
+            return all_report_ids;
         }
-        else
-        {
-          // if user is top mediator - we can show all reports from company where user is not involved
-          if ((_user.role_id == 4) || (_user.role_id == 5))
-          {
-            List<int> involved_report_ids = (db.report_mediator_involved.Where(item => (item.mediator_id == _user.id)).Select(item => item.report_id)).ToList();
-
-            CompanyModel cm = new CompanyModel(_user.company_id);
-            List<company> availableCompanies = cm.AdditionalCompanies();
-
-            if (availableCompanies.Count > 1)
-            {
-              List<int> availableCompaniesID = availableCompanies.Select(t => t.id).ToList().Distinct().ToList();
-              all_report_ids = (db.report.Where(item => (((availableCompaniesID.Contains(item.company_id)) && (!involved_report_ids.Contains(item.id))))).Select(item => item.id)).ToList();
-
-            }
-            else
-                all_report_ids = (db.report.Where(item => ((item.company_id == _user.company_id) && (!involved_report_ids.Contains(item.id)))).Select(item => item.id)).ToList();
-          }
-          // if user is regular mediator/ legal counsil - we show only reports where he is assigned and hide all others
-          if ((_user.role_id == 6) || (_user.role_id == 7))
-          {
-            List<int> assigned_report_ids = (db.report_mediator_assigned.Where(item => ((item.mediator_id == _user.id) && (item.status_id == 2))).Select(item => item.report_id)).ToList();
-            all_report_ids = (db.report.Where(item => assigned_report_ids.Contains(item.id)).Select(item => item.id)).ToList();
-          }
-          if ((_user.role_id == 8))
-          {
-            all_report_ids = (db.report.Where(item => item.reporter_user_id == _user.id).Select(item => item.id)).ToList();
-          }
-        }
-        #endregion
-      }
-
-      return all_report_ids;
-    }
 
         public List<int> ReportsSearchIds(int? company_id, int flag)
         {
@@ -590,7 +623,7 @@ namespace EC.Models
 
         }
 
-       
+
 
         /// <summary>
         ///  https://projects.invisionapp.com/d/#/console/2453713/75211865/preview
@@ -1205,7 +1238,7 @@ namespace EC.Models
                 vm.all_closed_report_ids = (db.report.Where(item => ((assigned_report_ids.Contains(item.id) && (item.status_id == ECGlobalConstants.investigation_status_closed)))).Select(item => item.id)).ToList();
                 vm.all_pending_report_ids = (db.report.Where(item => ((assigned_report_ids.Contains(item.id)) && (item.status_id == ECGlobalConstants.investigation_status_pending || item.status_id == ECGlobalConstants.investigation_status_review))).Select(item => item.id)).ToList();
             }
-             
+
             return vm;
 
         }
@@ -1398,7 +1431,7 @@ namespace EC.Models
             _array[2] = _array[2] / companies.Count();
             _array[3] = _array[3] / companies.Count();
 
-            return new []
+            return new[]
             {
                 new {Name = "New Report", value = _array[0] },
                 new {Name = "Report Review", value = _array[1] },
@@ -1415,7 +1448,7 @@ namespace EC.Models
             delay_allowed[2] = dbCompany.step3_delay;
             delay_allowed[3] = dbCompany.step4_delay;
 
-            
+
             List<int> allowed_statuses = new List<int> { ECGlobalConstants.investigation_status_pending, ECGlobalConstants.investigation_status_review, ECGlobalConstants.investigation_status_investigation, ECGlobalConstants.investigation_status_completed };
 
             List<report> _all_reports = db.report.Where(

@@ -5,10 +5,26 @@
     Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
     bool showDDLanguages = true;
     bool is_cc = false;
+
+    ModelState accLoked = new ModelState();
+    string errorMessage = "";
+    ViewData.ModelState.TryGetValue("accountIsLocked", out accLoked);
+    if (accLoked != null && accLoked.Errors != null)
+    {
+        errorMessage = accLoked.Errors.Select(err => err.ErrorMessage).FirstOrDefault();
+    }
+
+    ModelState passError = new ModelState();
+    string passErrorString = "";
+    ViewData.ModelState.TryGetValue("PasswordError", out passError);
+    if (passError != null && passError.Errors != null)
+    {
+        passErrorString = "errorLogin";
+    }
 }
 
 <style>
-    .errorLogin.loginForm__input:last-child {
+    .errorLogin.loginForm__input {
         border: 2px solid red;
     }
 </style>
@@ -48,16 +64,19 @@
                             <input type="password" style="opacity: 0;position: absolute;">
                         }
 
-                        <div class="loginForm">
-                            <label class="loginForm__input">
-                                @LocalizationGetter.GetString("Login", is_cc)
-                                @Html.TextBoxFor(x => x.Login)
-                            </label>
-                            <label class="loginForm__input @(ViewData.ModelState.ContainsKey("PasswordError") ? "errorLogin" : "")">
-                                @LocalizationGetter.GetString("Password", is_cc)
-                                @Html.PasswordFor(x => x.Password, new { @class = ViewContext.ViewData.ModelState.ContainsKey("PasswordError") ? "error" : "" })
-                            </label>
-                        </div><!-- /.loginForm -->
+                            <div class="loginForm">
+                                <label class="loginForm__input">
+                                    @LocalizationGetter.GetString("Login", is_cc)
+                                    @Html.TextBoxFor(x => x.Login)
+                                </label>
+                                <label class="loginForm__input @(passErrorString)">
+                                    @LocalizationGetter.GetString("Password", is_cc)
+                                    @Html.PasswordFor(x => x.Password, new { @class = ViewContext.ViewData.ModelState.ContainsKey("PasswordError") ? "error" : "" })
+                                </label>
+                                <text>
+                                    <p class="red">@errorMessage</p>
+                                </text>
+                            </div><!-- /.loginForm -->
                         <div class="loginFormLinks">
                             <a href="@Url.Action("ForgetPassword", "Service")" class="loginFormLinks__restoreLink">
                                 Forgot your password?
