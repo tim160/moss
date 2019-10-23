@@ -102,7 +102,10 @@ namespace EC.Controllers
                 List<country> arr = companyModel.getCountries();
                 ViewBag.countries = HtmlDataHelper.MakeSelect(arr, item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.country_nm.ToString()));
 
-                arr.ForEach(t => t.country_description = ( t.country_cl.Length > 0 ? @LocalizationGetter.GetString("YesAnon", is_cc) : @LocalizationGetter.GetString(t.country_cl.Trim(), is_cc)));
+                arr.ForEach(t => t.country_description = (string.IsNullOrWhiteSpace(t.country_cl)  ? LocalizationGetter.GetString("YesAnon", is_cc) : LocalizationGetter.GetString(t.country_cl.Trim(), is_cc)));
+                arr.ForEach(t => t.country_description_en = (string.IsNullOrWhiteSpace(t.country_cl) ? LocalizationGetter.GetString("YesAnon", is_cc) : LocalizationGetter.GetString(t.country_cl.Trim(), is_cc)));
+                arr.ForEach(t => t.country_description_es = (string.IsNullOrWhiteSpace(t.country_cl) ? LocalizationGetter.GetString("YesAnon", is_cc) : LocalizationGetter.GetString(t.country_cl.Trim(), is_cc)));
+
                 ViewBag.countriesDescription = arr;
                 ReportedOutsideCulture reportedOutsideCulture = new ReportedOutsideCulture(companyModel);
                 ViewBag.reportedOutsides =reportedOutsideCulture.getReportedOutside();

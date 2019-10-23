@@ -114,7 +114,7 @@
                         @Helpers.Select(ViewBag.countries, "reportingFrom", "reportFrom validate", LocalizationGetter.GetString("SelectCountry", is_cc), "", "notEmpty")
                         <p class="description">
                             <span id="ReportingFromSelect">@LocalizationGetter.GetString("ReportingFromSelect", is_cc)</span>
-                            @foreach (EC.Models.Database.country myItem in ViewBag.countriesDescription)
+                            @foreach (country myItem in ViewBag.countriesDescription)
                             {
                                 <div class="countries" style="display: none" data-value="@myItem.id">@myItem.Description()</div>
                             }
