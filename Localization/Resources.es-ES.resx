@@ -3029,4 +3029,7 @@
   <data name="YesAnon" xml:space="preserve">
     <value>En conformidad con las leyes nacionales actuales, las denuncias anonimas son permitidas.</value>
   </data>
+  <data name="AccountLocked" xml:space="preserve">
+    <value>Se excedió el número máximo de intentos de inicio de sesión. La cuenta está bloqueada durante 60 minutos.</value>
+  </data>
 </root>

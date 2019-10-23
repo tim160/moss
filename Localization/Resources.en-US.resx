@@ -3021,4 +3021,7 @@ Do not want to involve</value>
   <data name="NoAnon" xml:space="preserve">
     <value>The Employee Confidential ethics-reporting platform shall be used only to report serious acts of ethics violations, ethics irregularities or potential crimes relating to the areas of finance, accounting, banking, anti-corruption or the misconduct of senior level managers. Reports are limited only to circumstances and situations where coming forward within the usual corporate chain of command is impossible or inefficient. In compliance with the current whistleblowing legislation, anonymous reports are allowed but generally discouraged. When reporting an issue, we strongly encourage you to identify yourself and to provide as much detailed information as possible regarding your concern. Your identity shall remain confidential and your privacy shall be preserved, in accordance with the applicable data protection laws.</value>
   </data>
+  <data name="AccountLocked" xml:space="preserve">
+    <value>Maximum number of login attempts exceeded. The account is locked for 60 minutes</value>
+  </data>
 </root>

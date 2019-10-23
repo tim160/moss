@@ -89,7 +89,7 @@
                 }
 
                 bindEvent(elem[0], 'change', function (event) {
-                    Array.from(this.files).forEach(file => {
+                    Array.from(this.files).forEach(function(file) {
                         var fsizemb = file.size;
                         fsizemb = fsizemb / 1024;
                         fsizemb = fsizemb / 1024;
@@ -404,20 +404,46 @@
 
     angular
         .module('EC')
-        .controller('AnalyticsRootCauseAnalysisController',
-            ['$scope', 'AnalyticsRootCauseAnalysisService', 'getAdditionalCompanies', AnalyticsRootCauseAnalysisController]);
+        .factory('AdditionalComp', ['$http', '$q', function ($http, $q) {
+            return {
+                getData: function (id) {
+                    var deffered = $q.defer();
+                    $http({
+                        method: 'GET',
+                        url: '/api/AdditionalCompanies/' + id
+                    })
+                        .then(function success(response) {
+                            deffered.resolve(response);
+                        }, function error(response) {
+                            deffered.reject(response.status);
+                        });
+                    return deffered.promise;
+                }
+            }
+        }]);
+})();
 
-    function AnalyticsRootCauseAnalysisController($scope, AnalyticsRootCauseAnalysisService, getAdditionalCompanies) {
+(function () {
+
+    'use strict';
+
+    angular
+        .module('EC')
+        .controller('AnalyticsRootCauseAnalysisController',
+            ['$scope', 'AnalyticsRootCauseAnalysisService', 'AdditionalComp', AnalyticsRootCauseAnalysisController]);
+
+    function AnalyticsRootCauseAnalysisController($scope, AnalyticsRootCauseAnalysisService, AdditionalComp) {
 
         $scope.displayCompanyName = document.querySelector("#ddListDefaultValue").value;
         var companyIdArray = Array();
         $scope.additionalCompanies = Array();
         $scope.showDDMenu = false;
 
-        getAdditionalCompanies.getData(document.querySelector("#company_id").value).then(function (response) {
+        AdditionalComp.getData(document.querySelector("#company_id").value).then(function (response) {
             $scope.additionalCompanies = response.data.additionalCompanies;
-            companyIdArray = $scope.additionalCompanies.map((item) => { return item.id; });
-
+            companyIdArray = $scope.additionalCompanies.map(function (item) {
+                return item.id;
+            });
             $scope.secondaryType = { id: 0 };
             $scope.secondaryTypes = [];
 
@@ -439,6 +465,8 @@
 
         $scope.refresh = function (secondaryType, companyIdArray) {
             AnalyticsRootCauseAnalysisService.get({ secondaryType: secondaryType, companyId: companyIdArray }, function (data) {
+                debugger;
+
                 if ($scope.secondaryTypes.length === 0) {
                     $scope.secondaryTypes = data.SecondaryTypes;
                     $scope.secondaryType = $scope.secondaryTypes[0];
@@ -458,7 +486,7 @@
             if (toString.call(array) !== "[object Array]")
                 return false;
 
-            let sum = 0;
+            var sum = 0;
             array.forEach(function (element) {
                 sum += element.count;
             });
@@ -481,7 +509,7 @@
 
         $scope.selectSecondaryTypes = function (item) {
             $scope.secondaryType = item;
-            var companyIDSelected = $scope.filterValue == undefined ? $scope.additionalCompanies.map((item) => { return item.id; })
+            var companyIDSelected = $scope.filterValue == undefined ? $scope.additionalCompanies.map(function (item) { return item.id; })
                 : $scope.filterValue;
             $scope.refresh(item.id, companyIDSelected);
         };
@@ -609,54 +637,6 @@
 
     'use strict';
 
-    angular.module('EC')
-        .factory('getAdditionalCompanies', function ($http, $q) {
-            return {
-                getData: function (id) {
-                    var deffered = $q.defer();
-                    $http({
-                        method: 'GET',
-                        url: '/api/AdditionalCompanies/' + id
-                    })
-                        .then(function success(response) {
-                            deffered.resolve(response);
-                        }, function error(response) {
-                            deffered.reject(response.status);
-                        });
-                    return deffered.promise;
-                }
-            }
-        });
-})();
-
-//(function () {
-
-//    'use strict';
-
-//    angular.module('EC')
-//        .factory('getAdditionalCompanies', function ($http, $q) {
-//            return {
-//                getData: function (id) {
-//                    var deffered = $q.defer();
-//                    $http({
-//                        method: 'GET',
-//                        url: '/api/AdditionalCompanies/' + id
-//                    })
-//                        .then(function success(response) {
-//                            deffered.resolve(response);
-//                        }, function error(response) {
-//                            deffered.reject(response.status);
-//                        });
-//                    return deffered.promise;
-//                }
-//            }
-//        })();
-//});
-
-(function () {
-
-    'use strict';
-
     angular
         .module('EC')
         .controller('CasesController',
@@ -717,9 +697,7 @@
             }
             return false;
         };
-        //$scope.onEnd = function () {
-        //    alert("Hello World!!!");
-        //}
+
         $scope.refresh = function (mode, preload) {
             CasesService.get({ ReportFlag: mode, Preload: preload }, function (data) {
                 $('.headerBlockTextRight > span').text(data.Title);
@@ -731,12 +709,6 @@
                 $scope.mode = data.Mode;
                 $scope.counts = data.Counts;
                 $scope.Companies = data.Companies;
-
-                //var maxWidth = Math.max.apply(Math, $('.liItem').map(function () { return $(this).width(); }).get());
-                //console.log(maxWidth);
-                //if (maxWidth > 194) {
-                //    $("#ddListForCases .parentClass").width(maxWidth);
-                //}
             });
         };
         $scope.refresh($scope.mode);
@@ -760,7 +732,6 @@
 
         };
         $scope.ddListClickedCompany = function (company_id, company_name) {
-            //$scope.showDDMenu = false;
             if (company_name == undefined) {
                 $scope.displayCompanyName = document.querySelector("#ddListDefaultValue").value;
                 $scope.filterValue = null;
@@ -773,7 +744,7 @@
         $scope.returnListReports = function () {
             $scope.filterValue = null;
         }
-        $scope.casesFilterFunction = (item) => {
+        $scope.casesFilterFunction = function (item) {
             if ($scope.filterValue != null) {
                 return item.company_id == $scope.filterValue;
             } else {
@@ -786,16 +757,7 @@
         $scope.displayCompanyName = document.querySelector("#ddListDefaultValue").value;
     }
 }());
-//angular.module('EC').directive("callbackOnEnd", function () {
-//    return {
-//        restrict: "A",
-//        link: function (scope, element, attrs) {
-//            if (scope.$last) {
-//                scope.$eval(attrs.callbackOnEnd);
-//            }
-//        }
-//    };
-//});
+
 (function () {
 
     'use strict';
@@ -1036,7 +998,7 @@
             data.incidentTypeAdd = 0;
             data.mediatorAdd = 0;
             data.departmentAdd = 0;
-
+            console.log(data.report_secondary_type_selected.length);
             for (var i = 0; i < data.report_secondary_type_selected.length; i++) {
                 data.report_secondary_type_selected[i].inv_meth_bf_note = '';
                 data.report_secondary_type_selected[i].inv_meth_ei_note = '';
