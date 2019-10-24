@@ -26,6 +26,7 @@ namespace EC.Models.Culture
                         ManagamentViewModel temp = new ManagamentViewModel();
                         temp.id = man.id;
                         temp.ManagamentKnow = man.text_en;
+                        temp.ManagamentValueEn = man.text_en;
                         ManagamentKnow.Add(temp);
                     }
                     break;
@@ -43,6 +44,7 @@ namespace EC.Models.Culture
                         {
                             temp.ManagamentKnow = man.text_en;
                         }
+                        temp.ManagamentValueEn = man.text_en;
                         ManagamentKnow.Add(temp);
                     }
                     break;

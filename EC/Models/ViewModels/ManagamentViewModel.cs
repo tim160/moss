@@ -9,5 +9,6 @@ namespace EC.Models.ViewModels
     {
         public int id { get; set; }
         public string ManagamentKnow { get; set; }
+        public string ManagamentValueEn { get; set; }
     }
 }

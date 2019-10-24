@@ -150,29 +150,6 @@
                                         </label>
                                     </div>
                                 }
-                                @*if (i == 10)
-                                    {
-                                        <div class="freeBlock inputRadio option active" data-val="@string_anon[i - 10].id">
-                                            <label class="inputBlock" for="@string_anon[i - 10].AnonymityCompany()">
-                                                <input id="@string_anon[i - 10].AnonymityCompany()" type="radio" name="stay" value="@string_anon[i - 10].AnonymityCompany()" />
-                                                <span class="radioButton"></span>
-                                                <span class="radioTitle">@string_anon[i - 10].AnonymityCompany()</span>
-                                                <p class="descriptionRadio">@string_anon[i - 10].AnonymityDs()</p>
-                                            </label>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="freeBlock inputRadio option" data-val="@string_anon[i - 10].id">
-                                            <label class="inputBlock" for="@string_anon[i - 10].Anonymity()">
-                                                <input id="@string_anon[i - 10].Anonymity()" type="radio" name="stay" value="@string_anon[i - 10].Anonymity()" />
-                                                <span class="radioButton"></span>
-                                                <span class="radioTitle">@string_anon[i - 10].Anonymity()</span>
-                                                <p class="descriptionRadio">@string_anon[i - 10].AnonymityDs()</p>
-                                            </label>
-                                        </div>
-                                    }*@
-
                             }
                         </div>
 
@@ -310,7 +287,7 @@
                             {
                                 <div class="freeBlock inputRadio option" data-val="@myManagementKnow.id">
                                     <label class="inputBlock" for="Html.Raw(@myManagementKnow.id)">
-                                        <input id="Html.Raw(@myManagementKnow.id)" type="radio" name="managementKnow" value="@myManagementKnow.ManagamentKnow" /><span class="radioButton"></span><span class="radioTitle">@myManagementKnow.ManagamentKnow</span>
+                                        <input id="Html.Raw(@myManagementKnow.id)" type="radio" name="managementKnow" value="@myManagementKnow.ManagamentValueEn" /><span class="radioButton"></span><span class="radioTitle">@myManagementKnow.ManagamentKnow</span>
                                     </label>
                                 </div>
                             }
