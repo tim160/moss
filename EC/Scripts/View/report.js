@@ -626,7 +626,12 @@
         cmp.OptionSelect(managementIncident);
         var report_by_myself = passiveCircle.find('.report_by_myself');
         cmp.OptionSelect(report_by_myself);
-
+        $("#report_by_myselfContentBlock").click(function (event) {
+            $(event.currentTarget).css("border-color", "rgb(5, 181, 162)");
+            $(event.currentTarget).mouseleave(function (element) {
+                $(element.currentTarget).css("border-color", "transparent transparent #E5EBEB transparent");
+            });
+        });
         var whoKnow = passiveCircle.find('.whoKnow');
         cmp.OptionSelect(whoKnow);
         var isReportUrgent = passiveCircle.find('.isReportUrgent');
