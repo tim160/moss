@@ -243,7 +243,7 @@
             <!--partiesInvolved-->
             <div class="partiesInvolved tab" data-id="2">
                 <div class="content">
-                    <div class="contentBlock">
+                    <div class="contentBlock" id="report_by_myselfContentBlock">
                         <div class="rowBlock">
                             <p class="title">@LocalizationGetter.GetString("report_by_myself", is_cc)</p>
                             <div class="rowBlock report_by_myself">
@@ -872,14 +872,14 @@
                     </div>
                 </div>
 
-                <div class="addPersonInfo sampleContainer">
+                <div class="addPersonName sampleContainer">
                     <div class="personTitle title">@LocalizationGetter.GetString("Title", is_cc)</div>
                     <div class="personData">
                         <input type="text" name="personTitle[NUM]"
                                class="personDataTextBox witnessTitle" />
                     </div>
                 </div>
-                <div class="addPersonInfo sampleContainer">
+                <div class="addPersonName sampleContainer">
                     <div class="personTitle title">
                         @LocalizationGetter.GetString("Role", is_cc)
                         <div class="help" title="" onclick="">
