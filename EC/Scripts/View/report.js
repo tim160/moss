@@ -632,6 +632,7 @@
                 $(element.currentTarget).css("border-color", "transparent transparent #E5EBEB transparent");
             });
         });
+        $("#Myself").click();
         var whoKnow = passiveCircle.find('.whoKnow');
         cmp.OptionSelect(whoKnow);
         var isReportUrgent = passiveCircle.find('.isReportUrgent');
