@@ -988,6 +988,12 @@
                 }
             }
         });
+        if (document.querySelector('#attachments') != null) {
+            document.querySelector('#attachments').onchange = function (event) {
+                attachmentsFiles = this.files;
+                $('.attach').append("<table class='attachedFilesTitle' style='color: #3c3e3f;font-size: 14px;'><tr><th><img src=/Content/Icons/generic-file.png></th> <th>" + this.files[0].name + "</th></tr></table>");
+            }
+        }
     };
 
     function setDropdown() {
