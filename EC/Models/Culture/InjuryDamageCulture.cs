@@ -1,4 +1,7 @@
-﻿using EC.Models.ViewModels;
+﻿using EC.Constants;
+using EC.Models.Database;
+using EC.Models.ECModel;
+using EC.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,36 +23,33 @@ namespace EC.Models.Culture
         {
             var allDamages = companyModel.GetInjuryDamages().ToList();
 
-            switch (Localization.LocalizationGetter.Culture.Name)
+            foreach (var damage in allDamages)
             {
-                case "en-US":
-                    foreach (var damage in allDamages)
-                    {
-                        InjuryDamageViewModel temp = new InjuryDamageViewModel();
-                        temp.id = damage.id;
-                        temp.InjuryDamage = damage.text_en;
-                        injuryDamageViewModels.Add(temp);
-                    }
-                    break;
-
-                case "es-ES":
-                    foreach (var damage in allDamages)
-                    {
-                        InjuryDamageViewModel temp = new InjuryDamageViewModel();
-                        temp.id = damage.id;
-                        if (damage.text_es != null && damage.text_es != "")
-                        {
-                            temp.InjuryDamage = damage.text_es;
-                        }
-                        else
-                        {
-                            temp.InjuryDamage = damage.text_en;
-                        }
-                        injuryDamageViewModels.Add(temp);
-                    }
-                    break;
+                InjuryDamageViewModel temp = new InjuryDamageViewModel();
+                temp.id = damage.id;
+                temp.InjuryDamage = damage.text_en;
+                temp.InjuryDamage = getCulturyDamage(damage);
+                temp.InjuryDamageVal = damage.text_en;
+                injuryDamageViewModels.Add(temp);
             }
+
             return injuryDamageViewModels;
+        }
+
+        private string getCulturyDamage(injury_damage damage)
+        {
+            switch(Localization.LocalizationGetter.Culture.TwoLetterISOLanguageName)
+            {
+                case ECLanguageConstants.LanguageArabic:
+                    return damage.text_ar != null ? damage.text_ar : damage.text_en;
+                case ECLanguageConstants.LanguageFrench:
+                    return damage.text_fr != null ? damage.text_fr : damage.text_en;
+                case ECLanguageConstants.LanguageRussian:
+                    return damage.text_ru != null ? damage.text_ru : damage.text_en;
+                case ECLanguageConstants.LanguageSpanish:
+                    return damage.text_es != null ? damage.text_es : damage.text_en;
+            }
+            return "";
         }
     }
 }

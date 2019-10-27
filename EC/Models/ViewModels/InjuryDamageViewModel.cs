@@ -9,5 +9,6 @@ namespace EC.Models.ViewModels
     {
         public int id { get; set; }
         public string InjuryDamage { get; set; }
+        public string InjuryDamageVal { get; set; }
     }
 }
