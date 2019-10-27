@@ -19,6 +19,7 @@ namespace EC.Models.ECModel
             get;
             set;
         }
+        public string relationship_nm_val { get; set; }
         #endregion
 
         #region constructor - relationship by id

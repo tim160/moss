@@ -317,9 +317,11 @@
 
                                 var formalRole = content.find('#formalRole');
                                 formalRole.empty();
-                                formalRole.append(generalInfo.find("input:radio[name=radioName]:checked").val());
-                                if (generalInfo.find("input:radio[name=radioName]:checked").val() == "Other" ||
-                                    generalInfo.find("input:radio[name=radioName]:checked").val() == "Former employee") {
+                                formalRole.append(generalInfo.find("input:radio[name=radioName]:checked").siblings('.radioTitle').text());
+                                var generalInfoTher = generalInfo.find("input:radio[name=radioName]:checked").val().toLowerCase();
+
+                                if (generalInfoTher == "other" ||
+                                    generalInfoTher == "former employee") {
                                     formalRole.append(', ' + generalInfo.find(".explainReportType").val());
                                 }
 
@@ -345,7 +347,7 @@
                                 //Parties involved
                                 var isManagementKnow = content.find('#isManagementKnow');
                                 isManagementKnow.empty();
-                                isManagementKnow.append($(' input[name=managementKnow]:checked').val());
+                                isManagementKnow.append($(' input[name=managementKnow]:checked').siblings(".radioTitle").text());
                                 if ($(' input[name=managementKnow]:checked').val() == "Yes" ||
                                     $(' input[name=managementKnow]:checked').val() == "Do not want to involve") {
                                     isManagementKnow.append(".<br />" + $('.managementIsKnown').val());
@@ -403,10 +405,7 @@
 
                                 var isReportUrgent = content.find('#isReportUrgent');
                                 isReportUrgent.empty();
-                                if ($('.isReportUrgent input[name=isUrgent]:checked').val() == 0)
-                                    isReportUrgent.append("No");
-                                else
-                                    isReportUrgent.append("Yes");
+                                isReportUrgent.append($('.isReportUrgent input[name=isUrgent]:checked').siblings('.radioTitle').text());
 
                                 //Case Information
                                 $('.addedFilesList').empty();
@@ -438,14 +437,16 @@
 
                                 var isIncidentOngoing = content.find('#isIncidentOngoing');
                                 isIncidentOngoing.empty();
-                                isIncidentOngoing.append($(' input[name=isIncidentOngoing]:checked').val());
+                                isIncidentOngoing.append($(' input[name=isIncidentOngoing]:checked').siblings('.radioTitle').text());
+
                                 if ($(' input[name=isIncidentOngoing]:checked').val() == "Yes") {
                                     isIncidentOngoing.append(".<br />" + $('.incidentOngoingDescription').val());
                                 }
 
                                 var hasInjury = content.find('#hasInjury');
                                 hasInjury.empty();
-                                hasInjury.append($(' input[name=resultInjury]:checked').val());
+                                hasInjury.append($(' input[name=resultInjury]:checked').siblings('.radioTitle').text());
+
                                 if ($(' input[name=resultInjury]:checked').val() == "Yes") {
                                     hasInjury.append(".<br />" + $('#injury_damage').val());
                                 }
