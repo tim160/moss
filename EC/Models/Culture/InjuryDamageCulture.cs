@@ -49,7 +49,7 @@ namespace EC.Models.Culture
                 case ECLanguageConstants.LanguageSpanish:
                     return damage.text_es != null ? damage.text_es : damage.text_en;
             }
-            return "";
+            return damage.text_en;
         }
     }
 }
