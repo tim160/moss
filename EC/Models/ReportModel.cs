@@ -1245,7 +1245,7 @@ namespace EC.Models
                         /**
                         * addUserID to the getAttachment.user_id, add report_id to the getAttachment.report_id
                         * */
-                        attachment[] getAttachment = FileUtils.SaveFile(model.files, "attachDocuments", "attachDocuments");
+                        var getAttachmentList = FileUtils.SaveFile(model.files);
                         MailAddress mail = null;
                         string nameOfEmail = String.Empty;
 
@@ -1318,14 +1318,17 @@ namespace EC.Models
                         currentReport.report_color_id = GetNextColor(currentReport.company_id, currentReport.id);
                         //t = adv.SaveChanges();
 
-                        if (getAttachment != null)
+                        if (getAttachmentList != null)
                         {
-                            for (int i = 0; i < getAttachment.Length; i++)
+                            for (int i = 0; i < getAttachmentList.Count; i++)
                             {
-                                getAttachment[i].report_id = currentReport.id;
-                                getAttachment[i].user_id = newUser.id;
+                                if (getAttachmentList[i] != null)
+                                {
+                                    getAttachmentList[i].report_id = currentReport.id;
+                                    getAttachmentList[i].user_id = newUser.id;
+                                    db.attachment.Add(getAttachmentList[i]);
+                                }
                             }
-                            db.attachment.AddRange(getAttachment);
                         }
 
                         if (model.mediatorsInvolved != null)

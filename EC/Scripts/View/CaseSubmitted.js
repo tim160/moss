@@ -4,14 +4,7 @@
         document.getElementById('linkRegistrationReport').click();
     }
 
-    var ReportId = document.getElementById('ReportId').value;
     var CompanyCode = document.getElementById('CompanyCode').value;
-
-
-    $("#ok").on('click', function () {
-        window.location.href = "/Report/RedirectToReporterDashboard?reportId=" + ReportId;
-        $('#loading').show();
-    });
 
     function summaryPage() {
         function setHoverBlock(item) {

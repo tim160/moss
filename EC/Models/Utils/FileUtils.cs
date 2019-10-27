@@ -16,32 +16,33 @@ namespace EC.Models.Utils
         public readonly static string UploadTarget = Root + UploadedDirectory + @"\";
 
 
-        public static attachment[] SaveFile(HttpFileCollectionBase files, string file, string newFielPath)
+        public static List<attachment> SaveFile(HttpFileCollectionBase files)
         {
-            var fileItem = files[file];
-            var temp = files.AllKeys;
-            attachment[] FilesArray = new attachment[files.Count];
+            List<attachment> FilesAttach = new List<attachment>();
             for (int i = 0; i < files.Count; i++)
             {
                 var oneFile = files[i];
-                var fileNameOne = DateTime.Now.Ticks + Path.GetExtension(oneFile.FileName);
-                oneFile.SaveAs(UploadTarget + fileNameOne);
-                string extension = Path.GetExtension(oneFile.FileName);
-                string path = @"\" + UploadedDirectory + @"\" + fileNameOne;
-
-                attachment attach = new attachment
+                if (oneFile.ContentLength > 0 && oneFile.FileName != "")
                 {
-                    report_message_id = null,
-                    status_id = 2, //soglasno letter
-                    path_nm = path,
-                    file_nm = oneFile.FileName,
-                    extension_nm = extension,
-                    user_id = 1,
-                    effective_dt = System.DateTime.Now,
-                    expiry_dt = System.DateTime.Now,
-                    last_update_dt = System.DateTime.Now
-                };
-                FilesArray[i] = attach;
+                    var fileNameOne = DateTime.Now.Ticks + Path.GetExtension(oneFile.FileName);
+                    oneFile.SaveAs(UploadTarget + fileNameOne);
+                    string extension = Path.GetExtension(oneFile.FileName);
+                    string path = @"\" + UploadedDirectory + @"\" + fileNameOne;
+
+                    attachment attach = new attachment
+                    {
+                        report_message_id = null,
+                        status_id = 2, //soglasno letter
+                        path_nm = path,
+                        file_nm = oneFile.FileName,
+                        extension_nm = extension,
+                        user_id = 1,
+                        effective_dt = System.DateTime.Now,
+                        expiry_dt = System.DateTime.Now,
+                        last_update_dt = System.DateTime.Now
+                    };
+                    FilesAttach.Add(attach);
+                }                
             }
             //foreach (var fileUpload in files)
             //{
@@ -67,7 +68,7 @@ namespace EC.Models.Utils
             //    expiry_dt = System.DateTime.Now,
             //    last_update_dt = System.DateTime.Now
             //};
-            return FilesArray;
+            return FilesAttach;
         }
     }
 }

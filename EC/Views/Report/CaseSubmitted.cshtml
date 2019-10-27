@@ -231,3 +231,11 @@
         }
     </body>
 
+<script>
+
+    $("#ok").on('click', function () {
+        var ReportId = document.getElementById('ReportId').value;
+        window.location.href = "/Report/RedirectToReporterDashboard?reportId=" + ReportId;
+        $('#loading').show();
+    });
+</script>

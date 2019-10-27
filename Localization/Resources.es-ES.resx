@@ -2255,7 +2255,7 @@
     <value>Reported on</value>
   </data>
   <data name="ReportedOutside" xml:space="preserve">
-    <value>Has this incident been reported to anyone outside the organization?</value>
+    <value>¿Se ha informado este incidente a alguien fuera de la organización?</value>
   </data>
   <data name="Reporter" xml:space="preserve">
     <value>Reporter</value>
