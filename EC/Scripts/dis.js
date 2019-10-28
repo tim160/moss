@@ -77,7 +77,7 @@
             }) + 1];
         };
     });
-    angular.module('EC').directive('checkFileSizeDirective', [ 'uploadImage', function (uploadImage) {
+    angular.module('EC').directive('checkFileSize', [ 'uploadImage', function (uploadImage) {
         return {
             link: function (scope, elem, attr, ctrl) {
                 function bindEvent(element, type, handler) {
@@ -2457,7 +2457,7 @@
     'use strict';
 
     angular.module('EC')
-        .factory('uploadImage', function ($http, $q) {
+        .factory('uploadImage',['$http', '$q', function ($http, $q) {
             return {
                 getData: function (fd) {
                     var deffered = $q.defer();
@@ -2476,7 +2476,7 @@
                     return deffered.promise;
                 }
             }
-        });
+        }]);
 })();
 
 
