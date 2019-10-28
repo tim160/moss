@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 @font-face {
   font-family: 'Lato-Regular-LatinWeb';
   src: url("../fonts/Lato2OFLWeb/LatoLatin/fonts/LatoLatin-Regular.eot");
@@ -772,7 +772,7 @@ p {
     background-image: url("../images/charts-img.jpg"); }
 
 .analyticsSection.analyticsSection-cc .analyticsSection__imageBlock {
-  background-image: url("../images/charts-img-сс.jpg"); }
+  background-image: url("../images/chart.jpg"); }
 
 .analyticsSection.analyticsSection-cc {
   background-color: #dae7db; }
