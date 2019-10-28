@@ -1,8 +1,9 @@
 ﻿@model EC.Models.CompanyModel
-
+@using LocalizationGetter = EC.Localization.LocalizationGetter;
 @{
-    ViewBag.Title = "Campus Confidential";
-    Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
+  ViewBag.Title = "Campus Confidential";
+  Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
+  bool is_cc = true;
 }
 
 <style>
