@@ -41,13 +41,13 @@ namespace EC.Models.Culture
             switch(Localization.LocalizationGetter.Culture.TwoLetterISOLanguageName)
             {
                 case ECLanguageConstants.LanguageArabic:
-                    return damage.text_ar != null ? damage.text_ar : damage.text_en;
+                    return !String.IsNullOrEmpty(damage.text_ar) ? damage.text_ar : damage.text_en;
                 case ECLanguageConstants.LanguageFrench:
-                    return damage.text_fr != null ? damage.text_fr : damage.text_en;
+                    return !String.IsNullOrEmpty(damage.text_fr) ? damage.text_fr : damage.text_en;
                 case ECLanguageConstants.LanguageRussian:
-                    return damage.text_ru != null ? damage.text_ru : damage.text_en;
+                    return !String.IsNullOrEmpty(damage.text_ru) ? damage.text_ru : damage.text_en;
                 case ECLanguageConstants.LanguageSpanish:
-                    return damage.text_es != null ? damage.text_es : damage.text_en;
+                    return !String.IsNullOrEmpty(damage.text_es) ? damage.text_es : damage.text_en;
             }
             return damage.text_en;
         }
