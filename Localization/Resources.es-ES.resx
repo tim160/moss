@@ -1934,7 +1934,7 @@
     <value>Next step: Partes involucradas</value>
   </data>
   <data name="No" xml:space="preserve">
-    <value>No desea involucrarse</value>
+    <value>No</value>
   </data>
   <data name="NoContactInfoSharedText" xml:space="preserve">
     <value>No information is shared with ACME Inc, but we store your name and email address to strengthten your case</value>
