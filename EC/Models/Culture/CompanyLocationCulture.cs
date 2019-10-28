@@ -1,4 +1,6 @@
-﻿using EC.Models.ViewModels;
+﻿using EC.Constants;
+using EC.Models.Database;
+using EC.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,35 +24,33 @@ namespace EC.Models.Culture
         public List<CompanyLocationViewModel> getLocationsCompanyCulture()
         {
             var allLocations = companyModel.Locations(currentCompanyId);
-            switch (Localization.LocalizationGetter.Culture.Name)
-            {
-                case "en-US":
-                    foreach (var location in allLocations)
-                    {
-                        CompanyLocationViewModel temp = new CompanyLocationViewModel();
-                        temp.id = location.id;
-                        temp.locationName = location.location_en;
-                        locations.Add(temp);
-                    }
-                    break;
 
-                case "es-ES":
-                    foreach (var location in allLocations)
-                    {
-                        CompanyLocationViewModel temp = new CompanyLocationViewModel();
-                        temp.id = location.id;
-                        if (location.location_es != null && location.location_es != "")
-                        {
-                            temp.locationName = location.location_es;
-                        } else
-                        {
-                            temp.locationName = location.location_en;
-                        }
-                        locations.Add(temp);
-                    }
-                    break;
+            foreach(var location in allLocations)
+            {
+                CompanyLocationViewModel temp = new CompanyLocationViewModel();
+                temp.id = location.id;
+                temp.locationName = location.location_en;
+                temp.locationName = getCulturyLocation(location);
+                locations.Add(temp);
             }
+
+
             return locations;
+        }
+        private string getCulturyLocation(company_location location)
+        {
+            switch (Localization.LocalizationGetter.Culture.TwoLetterISOLanguageName)
+            {
+                case ECLanguageConstants.LanguageArabic:
+                    return location.location_ar != null ? location.location_ar : location.location_en;
+                case ECLanguageConstants.LanguageFrench:
+                    return location.location_fr != null ? location.location_fr : location.location_en;
+                case ECLanguageConstants.LanguageRussian:
+                    return location.location_ru != null ? location.location_ru : location.location_en;
+                case ECLanguageConstants.LanguageSpanish:
+                    return location.location_es != null ? location.location_es : location.location_en;
+            }
+            return location.location_en;
         }
 
         public SelectViewModel getLocationsCompanyCultureSelect()
