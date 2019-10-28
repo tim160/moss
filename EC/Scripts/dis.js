@@ -77,7 +77,7 @@
             }) + 1];
         };
     });
-    angular.module('EC').directive('checkFileSize', function (uploadImage) {
+    angular.module('EC').directive('checkFileSizeDirective', [ 'uploadImage', function (uploadImage) {
         return {
             link: function (scope, elem, attr, ctrl) {
                 function bindEvent(element, type, handler) {
@@ -142,7 +142,7 @@
                 });
             }
         }
-    });
+    }]);
 
     angular.module('EC').directive('makeClickHiddenInput', function () {
         return {
@@ -1840,7 +1840,7 @@
     'use strict';
 
     angular.module('EC')
-        .factory('validateSettingsUser', function ($http, $q) {
+        .factory('validateSettingsUser',['$http','$q', function ($http, $q) {
             return {
                 validate: function (value, rv) {
                     if (rv === undefined) {
@@ -1855,7 +1855,7 @@
                     return true;
                 }
             }
-        });
+        }]);
 }());
 
 (function () {
