@@ -77,7 +77,7 @@
             }) + 1];
         };
     });
-    angular.module('EC').directive('checkFileSizeDirective', [ 'uploadImage', function (uploadImage) {
+    angular.module('EC').directive('checkFileSize', [ 'uploadImage', function (uploadImage) {
         return {
             link: function (scope, elem, attr, ctrl) {
                 function bindEvent(element, type, handler) {
