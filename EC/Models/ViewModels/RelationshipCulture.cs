@@ -40,13 +40,13 @@ namespace EC.Models.ViewModels
             switch (Localization.LocalizationGetter.Culture.TwoLetterISOLanguageName)
             {
                 case ECLanguageConstants.LanguageArabic:
-                    return relationship.relationship_ar != null ? relationship.relationship_ar : relationship.relationship_en;
+                    return !String.IsNullOrEmpty(relationship.relationship_ar) ? relationship.relationship_ar : relationship.relationship_en;
                 case ECLanguageConstants.LanguageFrench:
-                    return relationship.relationship_fr != null ? relationship.relationship_fr : relationship.relationship_en;
+                    return !String.IsNullOrEmpty(relationship.relationship_fr) ? relationship.relationship_fr : relationship.relationship_en;
                 case ECLanguageConstants.LanguageRussian:
-                    return relationship.relationship_ru != null ? relationship.relationship_ru : relationship.relationship_en;
+                    return !String.IsNullOrEmpty(relationship.relationship_ru) ? relationship.relationship_ru : relationship.relationship_en;
                 case ECLanguageConstants.LanguageSpanish:
-                    return relationship.relationship_es != null ? relationship.relationship_es : relationship.relationship_en;
+                    return !String.IsNullOrEmpty(relationship.relationship_es) ? relationship.relationship_es : relationship.relationship_en;
             }
             return relationship.relationship_en;
         }
@@ -55,13 +55,13 @@ namespace EC.Models.ViewModels
             switch (Localization.LocalizationGetter.Culture.TwoLetterISOLanguageName)
             {
                 case ECLanguageConstants.LanguageArabic:
-                    return relationship.relationship_ar != null ? relationship.relationship_ar : relationship.relationship_en;
+                    return !String.IsNullOrEmpty(relationship.relationship_ar) ? relationship.relationship_ar : relationship.relationship_en;
                 case ECLanguageConstants.LanguageFrench:
-                    return relationship.relationship_fr != null ? relationship.relationship_fr : relationship.relationship_en;
+                    return !String.IsNullOrEmpty(relationship.relationship_fr) ? relationship.relationship_fr : relationship.relationship_en;
                 case ECLanguageConstants.LanguageRussian:
-                    return relationship.relationship_ru != null ? relationship.relationship_ru : relationship.relationship_en;
+                    return !String.IsNullOrEmpty(relationship.relationship_ru) ? relationship.relationship_ru : relationship.relationship_en;
                 case ECLanguageConstants.LanguageSpanish:
-                    return relationship.relationship_es != null ? relationship.relationship_es : relationship.relationship_en;
+                    return !String.IsNullOrEmpty(relationship.relationship_es) ? relationship.relationship_es : relationship.relationship_en;
             }
             return relationship.relationship_en;
         }
