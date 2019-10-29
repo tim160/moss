@@ -799,7 +799,7 @@ cursor: pointer; }
   .analyticsSection__imageBlock {
     background-repeat: no-repeat;
     background-size: contain;
-    background-image: url("../images/charts-img.jpg"); }
+    background-image: url("../images/chart2.jpg"); }
 
 .analyticsSection.analyticsSection-cc .analyticsSection__imageBlock {
   background-image: url("../images/chart.jpg"); }
