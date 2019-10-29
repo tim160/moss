@@ -1729,8 +1729,8 @@ textarea::-webkit-input-placeholder {
     .footerBg .row {
         margin-top: 60px;
         margin-bottom: 60px;
-        margin-left: 160px;
-        margin-right: 160px;}
+        margin-left: 120px;
+        margin-right: 120px;}
     .footerBg .title {
         font-family: "Lato-Regular-LatinWeb";
         border-bottom: 1px solid #d6dcdc;   }
