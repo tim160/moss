@@ -576,10 +576,11 @@ background-color: #337ab7;
 color: white;
 cursor: pointer; }
 .firstSection {
-  background-image: url("../images/first-section-BG.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover; }
+    background-image: url("../images/section.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
 
 .firstSection.firstSection-cc {
   background-image: url("../images/first-section.jpg"); }
