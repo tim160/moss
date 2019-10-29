@@ -726,8 +726,9 @@ p {
   align-self: center; }
 
 .menegementSection__imageBlock {
-  background-image: url("../images/dashboard-img.png");
-  background-repeat: no-repeat; }
+    background-image: url("../images/dashd.png");
+    background-repeat: no-repeat;
+}
 
 .menegementSection-cc .menegementSection__imageBlock {
   background-image: url("../images/dashboard.png");
