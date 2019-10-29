@@ -1702,7 +1702,7 @@ textarea::-webkit-input-placeholder {
     padding-bottom: 20px;
     /*padding: 50px auto 20px auto;*/
     padding-left: 40px;
-    padding-top: 3px; }
+    padding-top: 20px; }
     .loginSection__title:before {
         left: 0;
         bottom: 16px;}
@@ -1835,7 +1835,8 @@ textarea::-webkit-input-placeholder {
   .loginTopSection__container {
     overflow: visible; }
   .loginSection__title {
-    margin-left: -40px; }
+    margin-left: -40px;
+    padding-top: 50px;}
   .loginForm__input {
     font-size: 14px;
     padding: 6px 10px 2px 10px; }
@@ -2301,8 +2302,6 @@ textarea::-webkit-input-placeholder {
     margin-left: -50px;
     padding-left: 50px;
     font-size: 24px; }
-  .loginSection-cc .loginSection__title {
-    padding-top: 0; }
   .loginSection__title {
     padding-top: 150px; }
   .loginForm {
