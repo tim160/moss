@@ -96,21 +96,9 @@
         };
 
         $scope.filterValue = null;
-        $scope.casesFilterFunction = (item) => {
-          return item.company_id == $scope.filterValue;
+        $scope.casesFilterFunction = function (item) {
+          //return item.company_id == $scope.filterValue;
+            return null;
         };
-
-      /*  $scope.casesFilterFunction = function (company_id) {
-       return function (item) {
-         return item.company_id === company_id;
-       };
-
-https://stackoverflow.com/questions/22235535/angular-reinclude-null-values-when-filter-parameter-is-empty
-     }
-     ng-repeat="item in items | filter: {age: searchObj.age || undefined}"
-     
-     */
-
-
     }
 }());
