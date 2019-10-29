@@ -18,7 +18,7 @@ $("#startBtn").on('click', function (event) {
         language = "en-us"
     }
     if (companyCode != 'false' && language != "") {
-        window.location.href = "/Service/Disclaimer?companyCode=" + companyCode + "&lang=" + language;
+        window.location.href = "/Service/Disclaimer?companyCode=" + companyCode;
     } else {
         TakeCompany();
     }
