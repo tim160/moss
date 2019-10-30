@@ -1,5 +1,4 @@
 ﻿@using EC.Models
-@using EC.App_LocalResources
 @using EC.Models.Database
 @using EC.Localization
 
@@ -119,7 +118,7 @@
                         Incident Location
                     </div><!-- /.reportContentBlock__textColFirst -->
                     <div class="reportContentBlock__textColRight">
-                        <p>@Model.LocationString()</p>
+                        <p>@Model.LocationString(is_cc.Value)</p>
                     </div><!-- /.reportContentBlock__textColRight -->
                 </div><!-- /.reportContentBlock__textCols -->
                 <div class="reportContentBlock__textCols clearfix">
@@ -146,7 +145,7 @@
                     </div><!-- /.reportContentBlock__textColFirst -->
                     <div class="reportContentBlock__textColRight">
                         <p>
-                            @(Model._report.report_by_myself ? @GlobalRes.Myself : @GlobalRes.SomeoneElse)
+                            @(Model._report.report_by_myself ? @LocalizationGetter.GetString("Myself", is_cc) : @LocalizationGetter.GetString("SomeoneElse", is_cc))
                         </p>
                     </div><!-- /.reportContentBlock__textColRight -->
                 </div><!-- /.reportContentBlock__textCols -->

@@ -1,14 +1,18 @@
 ﻿@using EC.Models;
 @using EC.Models.Database;
-@using EC.App_LocalResources;
 @using EC.Common.Interfaces;
 @using EC.Core.Common;
 @using EC.Common.Util;
 @using EC.Models.ViewModels;
-
+@using EC.Localization;
 @{
-        // @Styles.Render("~/Content/Styles");
-    IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
+  bool? is_cc = ViewBag.is_cc;
+  if (!is_cc.HasValue)
+  {
+    is_cc = false;
+  }
+  // @Styles.Render("~/Content/Styles");
+  IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
     <link rel="stylesheet" type="text/css" href="/Content/styleReportDashboard.css">
             ViewBag.Title = "Payment History";
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
@@ -45,7 +49,7 @@
     <div id="casesHeared">
         <div id="menu">
             <a class="caseesTab active casesMassage">
-                @GlobalRes.Payments @*  @if (all_payments.Count > 0)
+                @LocalizationGetter.GetString("Payments", is_cc) @*  @if (all_payments.Count > 0)
   {<span>@all_payments.Count</span>}*@
             </a>
         </div>
@@ -81,14 +85,14 @@
                 <br />
                 <br />
                 <br />
-                <h4>@GlobalRes.UpcomingPaymentNotice</h4>
+                <h4>@LocalizationGetter.GetString("UpcomingPaymentNotice", is_cc)</h4>
             }
             @if (next_payment == 2)
             {
                 <br />
                 <br />
                 <br />
-                <h4>@GlobalRes.PaymentDueReminderUp</h4>
+                <h4>@LocalizationGetter.GetString("PaymentDueReminderUp", is_cc)</h4>
             }
 
                 @if (next_payment == 1 || next_payment == 2)
@@ -100,7 +104,7 @@
 
                     <div class="blockMessage withStaticBorder">
                         <div class="textMessage" style="padding-left:5%">
-                            <p class="personalName">@GlobalRes.Amount:</p>
+                            <p class="personalName">@LocalizationGetter.GetString("Amount", is_cc):</p>
                             <p class="text">@StringUtil.ConvertDecimalToStringAmount(cm._company.next_payment_amount.Value)</p>
                             @*<p class="text"><a href="/Payment/Receipt/@_payment.id">@StringUtil.ConvertDecimalToStringAmount(_payment.amount)</a></p>*@
                         </div>
@@ -113,8 +117,8 @@
             </div>
                      <div class="blockUpdateProfile">
                 <div class="updateProfileBtn">
-                    <input class="greenButton" type="submit" value="@GlobalRes.MakePayment">
-                    <span style="display: none;">@GlobalRes.MakePayment</span>
+                    <input class="greenButton" type="submit" value="@LocalizationGetter.GetString("MakePayment", is_cc)">
+                    <span style="display: none;">@LocalizationGetter.GetString("MakePayment", is_cc)</span>
 
                 </div>
             </div>
@@ -127,7 +131,7 @@
         <div class="myMessages">
             <div class="headerMessages" style="border-left: 10px solid">
                 <div class="topBlock">
-                    <p class="titleMessages">@GlobalRes.NoPaymentsYet</p>
+                    <p class="titleMessages">@LocalizationGetter.GetString("NoPaymentsYet", is_cc)</p>
                 </div>
             </div>
         </div>

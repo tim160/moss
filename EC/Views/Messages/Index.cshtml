@@ -2,27 +2,31 @@
 @using EC.Models.ECModel;
 @using EC.Models.Database;
 @using EC.Controllers.ViewModel;
-@using EC.App_LocalResources;
 @using EC.Common.Interfaces;
 @using EC.Core.Common;
-
+@using EC.Localization;
 @{
-    ViewBag.Title = "My Messages";
-    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
-    int user_id = (Int32)ViewBag.user_id;
-    ReportModel rm = new ReportModel();
-    MessagesViewModel _mvm = (MessagesViewModel)ViewBag.Message;
-    GlobalFunctions glb = new GlobalFunctions();
-    UserModel um = new UserModel();
-    string _old = "";
-    IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
+  bool? is_cc = ViewBag.is_cc;
+  if (!is_cc.HasValue)
+  {
+    is_cc = false;
+  }
+  ViewBag.Title = "My Messages";
+  Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+  int user_id = (Int32)ViewBag.user_id;
+  ReportModel rm = new ReportModel();
+  MessagesViewModel _mvm = (MessagesViewModel)ViewBag.Message;
+  GlobalFunctions glb = new GlobalFunctions();
+  UserModel um = new UserModel();
+  string _old = "";
+  IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
 }
 
 <div class="blockSettings blockAllTasks">
     <div id="casesHeared">
         <div id="menu">
             <a class="caseesTab active casesMassage">
-                @GlobalRes.Allmessages @if (_mvm.Unread_Number > 0)
+                @LocalizationGetter.GetString("Allmessages", is_cc) @if (_mvm.Unread_Number > 0)
                 {<span>@_mvm.Unread_Number</span>}
             </a>
         </div>
@@ -52,7 +56,7 @@
                     <div class="myMessages @_old">
                         <div class="headerMessages" style="border-left: 10px solid #@rm.ColorCode();">
                             <div class="topBlock">
-                                <p class="titleMessages">@rm.SecondaryTypeString() &mdash; @rm.LocationString() &mdash; #@rm._report.display_name</p>
+                                <p class="titleMessages">@rm.SecondaryTypeString() &mdash; @rm.LocationString(is_cc.Value) &mdash; #@rm._report.display_name</p>
                             </div>
                         </div>
                         <div class="blockMessage withStaticBorder">

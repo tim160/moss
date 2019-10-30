@@ -863,7 +863,6 @@
     <Content Include="Libs\bootstrap-daterangepicker\example\browserify\README.md" />
     <Content Include="Libs\bootstrap-daterangepicker\package.json" />
     <Content Include="Libs\bootstrap-daterangepicker\README.md" />
-    <Content Include="Content\Employee Confidential-Overview_%28c%29_2018.pdf" />
     <Content Include="Content\Employee Confidential-Overview_Two-Pager_2019 %28c%29.pdf" />
     <None Include="Properties\PublishProfiles\EC.COM.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

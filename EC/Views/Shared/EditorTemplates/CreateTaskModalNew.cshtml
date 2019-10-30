@@ -1,4 +1,4 @@
-﻿@using EC.App_LocalResources;
+﻿@using EC.Localization;
 @using EC.Models;
 @using EC.Models.Database;
 @using EC.Constants;
@@ -11,7 +11,7 @@
     string normal_button_value = ViewBag.normal_button_value;
     int investigationstatus = (int)ViewBag.investigationstatus;
 
-    string left_button_promotion = ViewBag.left_button_promotion; // @GlobalRes.Returnnvestigation.ToUpper()
+    string left_button_promotion = ViewBag.left_button_promotion; // @LocalizationGetter.GetString("Returnnvestigation", is_cc).ToUpper()
     string left_button_value = ViewBag.left_button_value;
 
     GlobalFunctions glb = new GlobalFunctions();
@@ -104,7 +104,7 @@
         </div><!-- /.case-modal__selectRow-selectric -->
     </div><!-- /.case-modal__selectRow -->
     <div id="infomsg1" style="display: none;">
-        @GlobalRes.RecommendSecond1 @GlobalRes.RecommendSecond2
+        @LocalizationGetter.GetString("RecommendSecond1", is_cc) @LocalizationGetter.GetString("RecommendSecond2", is_cc)
     </div>
     <div class="case-modal__linkBlockBottom clearfix">
         <a href="#" id="requestToclose" class="case-modal__linkBtn whiteBtn" value="@normal_button_value">Request to close case</a>

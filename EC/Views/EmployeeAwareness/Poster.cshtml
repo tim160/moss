@@ -1,17 +1,21 @@
 ﻿@using EC.Models;
 @using EC.Models.Database;
-@using EC.App_LocalResources;
+@using EC.Localization;
 @{
 
     <link rel="stylesheet" href="~/Content/EmployeeAwareness.css" />
+  bool? is_cc = ViewBag.is_cc;
+  if (!is_cc.HasValue)
+  {
+    is_cc = false;
+  }
+  ViewBag.Title = LocalizationGetter.GetString("EmployeeAwarenessUp", is_cc);
+  Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
 
-    ViewBag.Title = GlobalRes.EmployeeAwarenessUp;
-    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+  var um = (UserModel)ViewBag.um;
+  var user_id = ViewBag.user_id;
+  int company_id = um._user.company_id;
 
-    var um = (UserModel)ViewBag.um;
-    var user_id = ViewBag.user_id;
-    int company_id = um._user.company_id;
-    
 }
 
 
@@ -21,9 +25,9 @@
         <div class="rightContent">
             <div class="topBlockFilters">
                 <a href="@Url.Action("Index", "employeeawareness")" class="toBack">
-                    @GlobalRes.BackToResults
+                    @LocalizationGetter.GetString("BackToResults", is_cc)
                 </a>
-                <span class="textShot">@GlobalRes.EmployeeAwarenessMaterials</span>
+                <span class="textShot">@LocalizationGetter.GetString("EmployeeAwarenessMaterials", is_cc)</span>
             </div>
 
             <div class="rezoultItems">
@@ -32,11 +36,11 @@
                     <img ng-src="{{mainImage}}" />
                 </div>
                 <div class="rightInfoSelect">
-                    <div class="downloadPdf" ng-click="Process()">@string.Format(GlobalRes.DownloadPosterPDF, GlobalRes.format_2)</div>
+                    <div class="downloadPdf" ng-click="Process()">@string.Format(LocalizationGetter.GetString("DownloadPosterPDF", is_cc), LocalizationGetter.GetString("format_2", is_cc))</div>
                     <div class="availableFormat">
-                        <div class="titleFormat">@GlobalRes.AvailableFormat: </div>
+                        <div class="titleFormat">@LocalizationGetter.GetString("AvailableFormat", is_cc): </div>
                         <div class="blockFormat">
-                            <div class="titleBlockFormat active">@GlobalRes.Poster</div>
+                            <div class="titleBlockFormat active">@LocalizationGetter.GetString("Poster", is_cc)</div>
                             <div class="itemsFormat">
                                 <div class="itemFormat active" ng-click="SelectedSize = 1620">
                                     <div class="format format1"></div>
@@ -62,20 +66,6 @@
                         </div>
 
                     </div>
-
-             @*       <div class="titleFormat">@GlobalRes.Options: </div>
-    <div class="blockFormat blockOption">
-        <div class="itemFormat active" ng-click="SelectedLogo = 1">
-            <div class="format noLogo"></div>
-            <div class="size">@GlobalRes.Nologo</div>
-        </div> *@
-        @*// removed eariler
-        <div class="itemFormat" ng-click="SelectedLogo = 2">
-            <div class="format useCurrentLogo"></div>
-            <div class="size">@GlobalRes.Usecurrentlogo</div>
-        </div>
-            *@
-                 @*   </div> *@
 
                     </div>
                 </div>

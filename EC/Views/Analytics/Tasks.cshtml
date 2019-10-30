@@ -1,12 +1,12 @@
 ﻿@using EC.Models;
 @using EC.Models.ECModel;
 @using EC.Models.Database;
-@using EC.App_LocalResources;
+@using EC.Localization;
 @{
 
     <link href="~/Content/styleAnalitics.css" rel="stylesheet" />
 
-    ViewBag.Title = GlobalRes.TaskAnalyticsUp;
+    ViewBag.Title = LocalizationGetter.GetString("TaskAnalyticsUp", is_cc);
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
     int user_id = (Int32)ViewBag.user_id;
     ReportModel rm = new ReportModel();
@@ -17,7 +17,7 @@
     string _today = ViewBag._today;
 
 
-    string[] _titleHeaderLegend = { GlobalRes.NewReportUp, GlobalRes.NewCase, GlobalRes.UnderInvestigation, GlobalRes.AwaitingSignOff };
+    string[] _titleHeaderLegend = { LocalizationGetter.GetString("NewReportUp", is_cc), LocalizationGetter.GetString("NewCase", is_cc), LocalizationGetter.GetString("UnderInvestigation", is_cc), LocalizationGetter.GetString("AwaitingSignOff", is_cc) };
     string[] _miniSquareColor = { "#D6F9F6", "#c0ece8", "#82dad0", "#44c8b9" };
 
     UserModel um = new UserModel(user_id);
@@ -32,10 +32,10 @@
 <div class="blockSettings blockAnalitics">
     <div id="casesHeared">
         <div id="menu">
-            <h2 class="mainTitle">@GlobalRes.Menu:</h2>
+            <h2 class="mainTitle">@LocalizationGetter.GetString("Menu", is_cc):</h2>
             <div>
-                <a href="/Analytics/Index" class="caseesTab">@GlobalRes.Cases</a>
-                <a class="caseesTab active">@GlobalRes.Tasks</a>
+                <a href="/Analytics/Index" class="caseesTab">@LocalizationGetter.GetString("Cases", is_cc)</a>
+                <a class="caseesTab active">@LocalizationGetter.GetString("Tasks", is_cc)</a>
             </div>
         </div>
         @*    <div class="positionActivityIcon">
@@ -48,7 +48,7 @@
         <!-- 1 All cases -->
         <div class="blockAllCases">
             <div class="headerBlockActivity">
-                <div class="titleBlock">@GlobalRes.Allcases</div>
+                <div class="titleBlock">@LocalizationGetter.GetString("Allcases", is_cc)</div>
                 @for (var i = 0; i < 4; i++)
                 {
                     <div class="itemLegend">
@@ -63,7 +63,7 @@
         <!-- 2 Today -->
         <div class="blockToday">
             <div class="headerBlockActivity">
-                <div class="titleBlock">@GlobalRes.Today: @_today</div>
+                <div class="titleBlock">@LocalizationGetter.GetString("Today", is_cc): @_today</div>
                 <div class="blockTodayContant analyticsTasks">
                     @for (var i = 0; i < 4; i++)
                     {
@@ -102,7 +102,7 @@
 
         <div class="blockAverage">
             <div class="headerBlockActivity">
-                <div class="titleBlock">@GlobalRes.Timeontask<span>, @GlobalRes.days1</span></div>
+                <div class="titleBlock">@LocalizationGetter.GetString("Timeontask", is_cc)<span>, @LocalizationGetter.GetString("days1", is_cc)</span></div>
                 @*<div class="timeOnTask"></div>*@
                 <div id="timeOnTask"></div>
             </div>
@@ -113,7 +113,7 @@
             <!-- 4_1 Type of incident -->
             <div class="blockTypeOfIncident">
                 <div class="headerBlockActivity">
-                    <div class="titleBlock">@GlobalRes.Taskspercase</div>
+                    <div class="titleBlock">@LocalizationGetter.GetString("Taskspercase", is_cc)</div>
                 </div>
                 <div class="allBlockLines">
 
@@ -123,7 +123,7 @@
                         if (rm.ReportTasks(0).Count > 0)
                         {
                             <div class="blockLinesItem">
-                                <p>@rm.SecondaryTypeString() - @rm._location_string - @GlobalRes.Report # @rm._report.display_name</p>
+                                <p>@rm.SecondaryTypeString() - @rm.LocationString(is_cc) - @LocalizationGetter.GetString("Report", is_cc) # @rm._report.display_name</p>
                                 <div class="linesShow">
                                     <div class="blockLineFirst" style="border-bottom-color: #@rm.ColorCode();"></div>
                                     <label>@rm.ReportTasks(0).Count</label>
@@ -152,7 +152,7 @@
             <!-- 4_2 Reporter -->
             <div class="blockReporter">
                 <div class="headerBlockActivity">
-                    <div class="titleBlock">@GlobalRes.Timepertask</div>
+                    <div class="titleBlock">@LocalizationGetter.GetString("Timepertask", is_cc)</div>
                 </div>
 
                 <div class="allBlockLines">
@@ -167,7 +167,7 @@
                                 TaskExtended _extended_task = new TaskExtended(_task.id, user_id);
 
                                 <div class="blockLinesItem">
-                                    <p><label>@rm.SecondaryTypeString() - @rm.LocationString() - @GlobalRes.Report # @rm._report.display_name</label><label>></label>@_extended_task.TaskTitle</p>
+                                    <p><label>@rm.SecondaryTypeString() - @rm.LocationString(is_cc) - @LocalizationGetter.GetString("Report", is_cc) # @rm._report.display_name</label><label>></label>@_extended_task.TaskTitle</p>
                                     <div class="linesShow">
                                         <div class="blockLineFirst" style="border-bottom-color: #@rm.ColorCode();"></div>
 

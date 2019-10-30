@@ -1,7 +1,7 @@
 ﻿@using EC.Models;
 @using EC.Models.ECModel;
 @using EC.Models.Database;
-@using EC.App_LocalResources;
+@using EC.Localization;
 @{
 
     <link rel="stylesheet" href="~/Content/styleAnalitics.css" />
@@ -16,11 +16,11 @@
 <div class="blockSettings blockAnalitics">
     <div id="casesHeared">
         <div id="menu">
-            <h2 class="mainTitle">@GlobalRes.Menu:</h2>
+            <h2 class="mainTitle">@LocalizationGetter.GetString("Menu", is_cc):</h2>
             <div>
-                <a class="caseesTab">@GlobalRes.Cases</a>
-                <a href="/Analitics/Tasks" class="caseesTab">@GlobalRes.Tasks</a>
-                <a href="/Analitics/Mediators" class="caseesTab active">Mediators</a>
+                <a class="caseesTab">@LocalizationGetter.GetString("Cases", is_cc)</a>
+                <a href="/Analitics/Tasks" class="caseesTab">@LocalizationGetter.GetString("Tasks", is_cc)</a>
+                <a href="/Analitics/Mediators" class="caseesTab active">@LocalizationGetter.GetString("Mediators", is_cc)</a>
             </div>
         </div>
        @* <div class="positionActivityIcon">
@@ -33,7 +33,7 @@
             <!-- 1 All cases -->
             <div class="blockAllCases">
                 <div class="headerBlockActivity">
-                    <div class="titleBlock">@GlobalRes.Allcases</div>
+                    <div class="titleBlock">@LocalizationGetter.GetString("Allcases", is_cc)</div>
                 </div>
 
                 <div id="chartContainer" style="width: 90%; height: 300px; margin: auto;"></div>
@@ -41,7 +41,7 @@
             <!-- 2 Today -->
             <div class="blockToday">
                 <div class="headerBlockActivity">
-                    <div class="titleBlock">@GlobalRes.Today: April 29, 2015</div>
+                    <div class="titleBlock">@LocalizationGetter.GetString("Today", is_cc): April 29, 2020</div>
                 </div>
 
             </div>

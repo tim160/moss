@@ -9,7 +9,7 @@ using EC.Models.ECModel;
 using EC.Models.ViewModel;
 
 using EC.Common.Interfaces;
-using EC.App_LocalResources;
+
 
 namespace EC.Models.App.Case
 {

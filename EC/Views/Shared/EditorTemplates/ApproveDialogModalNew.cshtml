@@ -1,10 +1,14 @@
-﻿@using EC.App_LocalResources;
-@using EC.App_LocalResources;
+﻿@using EC.Localization;
 @{
-    string overlay_title = GlobalRes.CloseCaseUp;
-    string textbox_title = GlobalRes.Description;
-    string normal_button_promotion = GlobalRes.CloseCaseUp;
-    int normal_button_value = 9;
+  bool? is_cc = ViewBag.is_cc;
+  if (!is_cc.HasValue)
+  {
+    is_cc = false;
+  }
+  string overlay_title = LocalizationGetter.GetString("CloseCaseUp", is_cc);
+  string textbox_title = LocalizationGetter.GetString("Description", is_cc);
+  string normal_button_promotion = LocalizationGetter.GetString("CloseCaseUp", is_cc);
+  int normal_button_value = 9;
 }
 
 <div id="approveDialog" class="modal case-modal">

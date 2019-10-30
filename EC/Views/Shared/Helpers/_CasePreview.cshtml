@@ -1,29 +1,34 @@
 ﻿@using EC.Models.ViewModel;
-@using EC.App_LocalResources;
+@using EC.Localization;
 @using EC.Models;
 @using EC.Common.Interfaces;
 @using EC.Core.Common;
 @using EC.Constants;
 
 @{
-    IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
-    string color = "";
-    string position = "";
-    if (Model.investigation_status_number == ECGlobalConstants.investigation_status_resolution || Model.investigation_status_number == ECGlobalConstants.investigation_status_completed || Model.investigation_status_number == ECGlobalConstants.investigation_status_closed)
-    {
-        color = "grey";
-        position = "completedPosition";
-    }
-    else if (Model.investigation_status_number == ECGlobalConstants.investigation_status_closed)
-    {
-        color = "red";
-    }
-    else if (Model.investigation_status_number == ECGlobalConstants.investigation_status_investigation)
-    {
-        color = "yellow";
-    }
-    GlobalFunctions glb = new GlobalFunctions();
-    ReportModel rm = new ReportModel(Model.report_id);
+  bool? is_cc = ViewBag.is_cc;
+  if (!is_cc.HasValue)
+  {
+    is_cc = false;
+  }
+  IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
+  string color = "";
+  string position = "";
+  if (Model.investigation_status_number == ECGlobalConstants.investigation_status_resolution || Model.investigation_status_number == ECGlobalConstants.investigation_status_completed || Model.investigation_status_number == ECGlobalConstants.investigation_status_closed)
+  {
+    color = "grey";
+    position = "completedPosition";
+  }
+  else if (Model.investigation_status_number == ECGlobalConstants.investigation_status_closed)
+  {
+    color = "red";
+  }
+  else if (Model.investigation_status_number == ECGlobalConstants.investigation_status_investigation)
+  {
+    color = "yellow";
+  }
+  GlobalFunctions glb = new GlobalFunctions();
+  ReportModel rm = new ReportModel(Model.report_id);
 }
 @model CasePreviewViewModel
 
@@ -134,12 +139,12 @@
                 {
                     if (Model.days_left == 1)
                     {
-                        @Model.days_left@Html.Raw("&nbsp;")@GlobalRes.dayleft
+                        @Model.days_left@Html.Raw("&nbsp;")@LocalizationGetter.GetString("dayleft", is_cc)
 
                     }
                     else
                     {
-                        @Model.days_left@Html.Raw("&nbsp;")@GlobalRes.daysleft
+                        @Model.days_left@Html.Raw("&nbsp;")@LocalizationGetter.GetString("daysleft", is_cc)
                     }
                 }
                             </
@@ -175,7 +180,7 @@
                             </div>
                             <div class="column4">
                                 <div class="negative">
-                                    @GlobalRes.CaseCantBeResolved.
+                                    @LocalizationGetter.GetString("CaseCantBeResolved", is_cc).
                                 </div>
                                 <div class="dates">
                                     @Model.last_sender_name, @Model.last_sender_date:
@@ -224,13 +229,13 @@
                                 @if (Model.previous_investigation_status_number == ECGlobalConstants.investigation_status_completed)
                                 {
                                     <div class="negative">
-                                        @GlobalRes.CaseCantBeResolved.
+                                        @LocalizationGetter.GetString("CaseCantBeResolved", is_cc).
                                     </div>
                                 }
                                 else if (Model.previous_investigation_status_number == ECGlobalConstants.investigation_status_resolution)
                                 {
                                     <div class="positive">
-                                        @GlobalRes.CaseResolved.
+                                        @LocalizationGetter.GetString("CaseResolved", is_cc).
                                     </div>
                                 }
 
@@ -264,7 +269,7 @@
                             </div>
                             <div class="column4">
                                 <div class="negative">
-                                    @GlobalRes.CaseClosed
+                                    @LocalizationGetter.GetString("CaseClosed", is_cc)
                                 </div>
                                 <div class="dates">
                                     @Model.last_sender_name, @Model.last_sender_date:
@@ -303,7 +308,7 @@
                             </div>
                             <div class="column4">
                                 <div class="positive">
-                                    @GlobalRes.CaseResolved.
+                                    @LocalizationGetter.GetString("CaseResolved", is_cc).
                                 </div>
                                 <div class="dates">
                                     @Model.last_sender_name, @Model.last_sender_date:
@@ -321,29 +326,29 @@
 
                 <div class="bottom location">
                     <div class="col1"></div>
-                    <div class="col2">@GlobalRes.Location.ToLower()</div>
+                    <div class="col2">@LocalizationGetter.GetString("Location", is_cc).ToLower()</div>
                     <div class="col3">@Model.location</div>
                 </div>
                 <div class="bottom date">
                     <div class="col1"></div>
-                    <div class="col2">@GlobalRes.IncidentDateUp.ToLower()</div>
+                    <div class="col2">@LocalizationGetter.GetString("IncidentDateUp", is_cc).ToLower()</div>
                     <div class="col3">@Model.case_dt</div>
                 </div>
                 <div class="bottom department">
                     <div class="col1"></div>
-                    <div class="col2">@GlobalRes.Departments.ToLower()</div>
+                    <div class="col2">@LocalizationGetter.GetString("Departments", is_cc).ToLower()</div>
                     <div class="col3">@Model.departments</div>
                 </div>
                 <div class="flex-block">
                     <a class="flex3 flexBlockShow" href="/NewCase/Index/@Model.report_id">
                         @if (Model.new_tasks > 0)
             {
-                            <span class="text green">@GlobalRes.Tasks.ToLower() - @Model.new_tasks new </span>
+                            <span class="text green">@LocalizationGetter.GetString("Tasks", is_cc).ToLower() - @Model.new_tasks new </span>
                             @Model.tasks_number
                         }
                         else
                         {
-                            <span class="text">@GlobalRes.Tasks.ToLower()</span>
+                            <span class="text">@LocalizationGetter.GetString("Tasks", is_cc).ToLower()</span>
                             @Model.tasks_number
                         }
                     </a>
@@ -351,17 +356,17 @@
                     <a class="flex2 flexBlockShow" href="/NewCase/Messages/@Model.report_id">
                         @if (Model.new_messages > 0)
             {
-                            <span class="text green">@GlobalRes.Messages.ToLower() - @Model.new_messages new </span>
+                            <span class="text green">@LocalizationGetter.GetString("Messages", is_cc).ToLower() - @Model.new_messages new </span>
                             @Model.messages_number
                         }
                         else
                         {
-                            <span class="text">@GlobalRes.Messages.ToLower()</span>@Model.messages_number
+                            <span class="text">@LocalizationGetter.GetString("Messages", is_cc).ToLower()</span>@Model.messages_number
                         }
                     </a>
 
                     <a class="flex1 flexBlockShow" href="/NewCase/Team/@Model.report_id">
-                        <span class="text">@GlobalRes.Team.ToLower()</span>
+                        <span class="text">@LocalizationGetter.GetString("Team", is_cc).ToLower()</span>
                         @if (Model.team_invovled)
             {
                             <span class="exclamationmark" title=@Model.team_involved_names></span>

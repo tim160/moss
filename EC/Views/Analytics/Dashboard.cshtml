@@ -4,29 +4,29 @@
 @using EC.Models.ECModel;
 @using EC.Models.Database;
 @using System.Data;
-@using EC.App_LocalResources;
 @using EC.Localization;
 
 @{
 
     <link rel="stylesheet" href="~/Content/styleAnalitics.css" />
     <link href="~/Libs/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
-    ViewBag.Title = GlobalRes.Analytics;
-    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
-    int user_id = (Int32)ViewBag.user_id;
 
-    string _today = ViewBag._today;
-    string ec_title = "Employee Confidential";
-    bool? is_cc = ViewBag.is_cc;
-    if (!is_cc.HasValue)
-    {
-        is_cc = false;
-    }
-    if (is_cc.Value)
-    {
-        ec_title = "Campus Confidential";
-    }
-    ec_title = ec_title.ToUpper();
+  Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+  int user_id = (Int32)ViewBag.user_id;
+
+  string _today = ViewBag._today;
+  string ec_title = "Employee Confidential";
+  bool? is_cc = ViewBag.is_cc;
+  if (!is_cc.HasValue)
+  {
+    is_cc = false;
+  }
+  if (is_cc.Value)
+  {
+    ec_title = "Campus Confidential";
+  }
+  ViewBag.Title = LocalizationGetter.GetString("Analytics", is_cc);
+  ec_title = ec_title.ToUpper();
 }
 
 <!-- Include Date Range Picker -->
@@ -75,7 +75,7 @@
 
             <div class="fluidTitle">
                 <div class="paddingTopForPrint30">
-                    <strong>@GlobalRes.Number_cases_stage:</strong> @_today
+                    <strong>@LocalizationGetter.GetString("Number_cases_stage", is_cc):</strong> @_today
 
                     <div id="ddListForCases" ng-show="additionalCompanies.length > 1" style="float: right;top: -11px">
                         <div class="parentClass" ng-click="showDDMenu = !showDDMenu">

@@ -1,25 +1,28 @@
 ﻿@using EC.Core.Common;
 @using EC.Models.Database;
 @using EC.Models;
-@using EC.App_LocalResources;
 @using EC.Common.Interfaces;
-
+@using EC.Localization;
 @{
-    Layout = "~/Views/Shared/IndexPages/LayoutNewCases.cshtml";
-
-    var report_id = (Int32)ViewBag.report_id;
-    var user_id = (Int32)ViewBag.user_id;
-    UserModel um = new UserModel(user_id);
-    ReportModel rm = new ReportModel(report_id);
-    List<report_log> actions_log = rm.ReportActions(user_id, rm._report.id);
-    action _action;
-    user _user;
-    string _sender_name = "";
-    string _sender_title = "";
-    string _month_name = "";
-    GlobalFunctions glb = new GlobalFunctions();
-    IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
-    ViewBag.Title = "Activity";
+  Layout = "~/Views/Shared/IndexPages/LayoutNewCases.cshtml";
+  bool? is_cc = ViewBag.is_cc;
+  if (!is_cc.HasValue)
+  {
+    is_cc = false;
+  }
+  var report_id = (Int32)ViewBag.report_id;
+  var user_id = (Int32)ViewBag.user_id;
+  UserModel um = new UserModel(user_id);
+  ReportModel rm = new ReportModel(report_id);
+  List<report_log> actions_log = rm.ReportActions(user_id, rm._report.id);
+  action _action;
+  user _user;
+  string _sender_name = "";
+  string _sender_title = "";
+  string _month_name = "";
+  GlobalFunctions glb = new GlobalFunctions();
+  IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
+  ViewBag.Title = "Activity";
 }
 
 @Html.Partial("~/Views/Shared/Partial/_NewCasesTopMenu.cshtml")
@@ -47,7 +50,7 @@
                 }
                 if (_user.role_id == 8)
                 {
-                    _sender_title = " (" + GlobalRes.Reporter + ")";
+                    _sender_title = " (" + LocalizationGetter.GetString("Reporter", is_cc) + ")";
                     _sender_name = "";
                 }
                 else

@@ -1,4 +1,4 @@
-﻿@using EC.App_LocalResources;
+﻿@using EC.Localization;
 @using EC.Models;
 @using EC.Models.Database;
 @using EC.Constants;
@@ -11,7 +11,7 @@
     string normal_button_value = ViewBag.normal_button_value;
     int investigationstatus = (int)ViewBag.investigationstatus;
 
-    string left_button_promotion = ViewBag.left_button_promotion; // @GlobalRes.Returnnvestigation.ToUpper()
+    string left_button_promotion = ViewBag.left_button_promotion; // @LocalizationGetter.GetString("Returnnvestigation", is_cc).ToUpper()
     string left_button_value = ViewBag.left_button_value;
 
     GlobalFunctions glb = new GlobalFunctions();
@@ -40,10 +40,10 @@
                 <label class="close1"></label>
                 <div class="closeIcon" onclick='overlay()'></div>
             </div>
-            @if (overlay_title == GlobalRes.ReopenCase)
+            @if (overlay_title == LocalizationGetter.GetString("ReopenCase", is_cc))
             {
                 <div>&nbsp;</div>
-                <div>@GlobalRes.AddReasonWhy</div>
+                <div>@LocalizationGetter.GetString("AddReasonWhy", is_cc)</div>
                 <div class="caseResolution">
                     <textarea class="form-control" type="text" name="txtDescription" id="txtDescription"></textarea>
                 </div>
@@ -51,9 +51,9 @@
             @if (((normal_button_value == ECGlobalConstants.investigation_status_completed.ToString())))
             {
                 <div class="caseResolution custom">
-                    <div class="outcomeText">@GlobalRes.SelectCaseReviewerToSignoff:</div>
+                    <div class="outcomeText">@LocalizationGetter.GetString("SelectCaseReviewerToSignoff", is_cc):</div>
                     <div class="dropdown3">
-                        <label id="ddlSignOffMediator" data-value="">@GlobalRes.Selectanoption</label><span class="arrow-down"></span>
+                        <label id="ddlSignOffMediator" data-value="">@LocalizationGetter.GetString("Selectanoption", is_cc)</label><span class="arrow-down"></span>
                         <ul>
                             @foreach (user _user in cm.AllMediators(company_id, true, null).Where(t => (t.user_permissions_approve_case_closure.HasValue && t.user_permissions_approve_case_closure.Value == 1) || t.role_id == 5).ToList())
                             {
@@ -65,11 +65,11 @@
                 <div>&nbsp;</div>
 
                 <div class="caseResolution custom">
-                    <div class="outcomeText">@GlobalRes.ReasonForCaseClosure:</div>
+                    <div class="outcomeText">@LocalizationGetter.GetString("ReasonForCaseClosure_noDate", is_cc):</div>
                     <div class="dropdown3">
-                        <label id="ddlReasonClosure" data-value="">@GlobalRes.Selectanoption...</label><span class="arrow-down"></span>
+                        <label id="ddlReasonClosure" data-value="">@LocalizationGetter.GetString("Selectanoption", is_cc)...</label><span class="arrow-down"></span>
                         <ul>
-                            @foreach (case_closure_reason _reason in glb.GetCaseClosureReasonsWithStatus())
+                            @foreach (case_closure_reason _reason in glb.GetCaseClosureReasonsWithStatus(is_cc.Value))
                             {
                                 <li data-value=@_reason.id>@_reason.case_closure_reason_en</li>
                             }

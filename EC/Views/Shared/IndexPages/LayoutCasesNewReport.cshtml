@@ -1,12 +1,10 @@
 ﻿@using EC.Models;
 @using EC.Models.Database;
-@using EC.App_LocalResources;
 @using EC.Constants;
 @using EC.Localization;
 @using EC.Constants;
 @using EC.Models;
 @using EC.Models.ViewModels;
-
 @{
     bool? is_cc = ViewBag.is_cc;
     if (!is_cc.HasValue)
@@ -71,8 +69,8 @@
         _report_id = (int)ViewBag.report_id;
         rm = new EC.Models.ReportModel(_report_id);
 
-        report_name = rm.SecondaryTypeString() + " - " + rm.LocationString() + " - #" + rm._report.display_name;
-        report_name_code = GlobalRes.Newreport + ": #" + rm._report.display_name;
+        report_name = rm.SecondaryTypeString() + " - " + rm.LocationString(is_cc.Value) + " - #" + rm._report.display_name;
+        report_name_code = LocalizationGetter.GetString("Newreport", is_cc) + ": #" + rm._report.display_name;
         report_color = rm.ColorDescr();
         report_color_code = rm.ColorCode();
         investigationstatus = rm._investigation_status;
@@ -80,10 +78,10 @@
 
     string[] _statuses = ECGlobalConstants.ReportFlowStatusesList;
 
-    string same_mediator_warning = GlobalRes.AddFurtherNotes;
+    string same_mediator_warning = LocalizationGetter.GetString("AddFurtherNotes", is_cc);
     if (rm != null && user_id == rm.Last_investigation_status_user_id())
     {
-        same_mediator_warning = GlobalRes.RecommendSecond1 + " " + GlobalRes.RecommendSecond2;
+        same_mediator_warning = LocalizationGetter.GetString("RecommendSecond1", is_cc) + " " + LocalizationGetter.GetString("RecommendSecond2", is_cc);
     }
 
 }
@@ -279,44 +277,44 @@
                 if (hrefURL.Contains("/settings"))
                 {
                     hrefURL = "/settings/index";
-                    page_subtitle = GlobalRes.Settings;
+                    page_subtitle = LocalizationGetter.GetString("Settings", is_cc);
                 }
                 if ((hrefURL.Contains("/tasks")))
                 {
                     if (!mainURL.Contains("analytics"))
                     {
                         hrefURL = "/tasks/index";
-                        page_subtitle = GlobalRes.Tasks;
+                        page_subtitle = LocalizationGetter.GetString("Tasks", is_cc);
                     }
                 }
                 if ((hrefURL.Contains("NewCase/")) || (hrefURL.Contains("/cases")) || (hrefURL.Contains("/newreport") || (hrefURL.Contains("NewCase/task/"))))
                 {
                     hrefURL = "/cases/index";
-                    page_subtitle = GlobalRes.Cases;
+                    page_subtitle = LocalizationGetter.GetString("Cases", is_cc);
                 }
 
                 if (hrefURL.Contains("/cases"))
                 {
                     hrefURL = "/cases/index";
-                    page_subtitle = GlobalRes.Dashboard;
+                    page_subtitle = LocalizationGetter.GetString("Dashboard", is_cc);
                 }
 
                 if (hrefURL.Contains("/analytics"))
                 {
                     hrefURL = "/analytics/index";
-                    page_subtitle = GlobalRes.Analytics;
+                    page_subtitle = LocalizationGetter.GetString("Analytics", is_cc);
                 }
 
                 if (hrefURL.Contains("/messages"))
                 {
                     hrefURL = "/messages/index";
-                    page_subtitle = GlobalRes.Messages;
+                    page_subtitle = LocalizationGetter.GetString("Messages", is_cc);
                 }
 
                 if (hrefURL.Contains("/payment"))
                 {
                     hrefURL = "/Payment/History";
-                    page_subtitle = GlobalRes.Payments;
+                    page_subtitle = LocalizationGetter.GetString("Payments", is_cc);
                 }
                 if (hrefURL.Contains("/employeeawareness"))
                 {
@@ -331,9 +329,9 @@
             <span class="labelArrow">></span>
             @if (_report_id != 0)
             {
-                string overlay_title = GlobalRes.RequestCloseCase;
-                string textbox_title = GlobalRes.Caseresolution;
-                string normal_button_promotion = GlobalRes.RequestCloseCase; //ResolveCaseUp
+                string overlay_title = LocalizationGetter.GetString("RequestCloseCase", is_cc);
+                string textbox_title = LocalizationGetter.GetString("Caseresolution", is_cc);
+                string normal_button_promotion = LocalizationGetter.GetString("RequestCloseCase", is_cc); //ResolveCaseUp
                 string left_button_promotion = "";
 
                 string normal_button_value = ECGlobalConstants.investigation_status_completed.ToString();
@@ -363,7 +361,7 @@
                 </div>
                 if ((investigationstatus > 2 && investigationstatus < 7) || (investigationstatus == 9))
                 {
-                    string Res_or_comp = GlobalRes.CloseCaseUp.ToUpper();
+                    string Res_or_comp = LocalizationGetter.GetString("CloseCaseUp", is_cc).ToUpper();
 
                     if ((investigationstatus == 4) || (investigationstatus == 6))
                     {
@@ -375,10 +373,10 @@
 
                     if ((investigationstatus == 9) && (_user.role_id == 4 || _user.role_id == 5))
                     {
-                        Res_or_comp = GlobalRes.Reopen.ToUpper();
-                        overlay_title = GlobalRes.ReopenCase;
-                        textbox_title = GlobalRes.Description;
-                        normal_button_promotion = GlobalRes.ReopenCaseUp;
+                        Res_or_comp = LocalizationGetter.GetString("Reopen", is_cc).ToUpper();
+                        overlay_title = LocalizationGetter.GetString("ReopenCase", is_cc);
+                        textbox_title = LocalizationGetter.GetString("Description", is_cc);
+                        normal_button_promotion = LocalizationGetter.GetString("ReopenCaseUp", is_cc);
                         normal_button_value = ECGlobalConstants.investigation_status_investigation.ToString();
 
                     }
@@ -405,7 +403,7 @@
                         <div id="resoveCompletedTopmessage">
                             <div class="buttonNoneBorderGray">
                                 <div class="textInButton">
-                                    @GlobalRes.Awaitingapproval
+                                    @LocalizationGetter.GetString("Awaitingapproval", is_cc)
                                 </div>
                             </div>
                         </div>
@@ -446,33 +444,33 @@
                 bool flag = false;
                 if (CurrentURL.Contains("/cases"))
                 {
-                    _temp = GlobalRes.ActiveCasesUp;
+                    _temp = LocalizationGetter.GetString("ActiveCasesUp", is_cc);
                     flag = true;
                 }
                 if (CurrentURL.Contains("/cases/index"))
                 {
-                    _temp = GlobalRes.ActiveCasesUp;
+                    _temp = LocalizationGetter.GetString("ActiveCasesUp", is_cc);
                     flag = true;
                 }
                 if (CurrentURL.Contains("/cases/completed"))
                 {
-                    _temp = GlobalRes.CompletedcasesUp;
+                    _temp = LocalizationGetter.GetString("CompletedcasesUp", is_cc);
                     flag = true;
                 }
                 if (CurrentURL.Contains("/cases/closed"))
                 {
-                    _temp = GlobalRes.ClosedCasesUp;
+                    _temp = LocalizationGetter.GetString("ClosedCasesUp", is_cc);
                     flag = true;
                 }
                 if (CurrentURL.Contains("/cases/spam"))
                 {
-                    _temp = GlobalRes.SpamcasesUp;
+                    _temp = LocalizationGetter.GetString("SpamcasesUp", is_cc);
                     flag = true;
                 }
 
                 if (CurrentURL.Contains("settings/"))
                 {
-                    _temp = GlobalRes.MyProfile;
+                    _temp = LocalizationGetter.GetString("MyProfile", is_cc);
                     flag = true;
                 }
                 if (CurrentURL.Contains("settings/company"))
@@ -482,44 +480,44 @@
                 }
                 if (CurrentURL.Contains("settings/mediators"))
                 {
-                    _temp = GlobalRes.CompanyMediators;
+                    _temp = LocalizationGetter.GetString("CompanyMediators", is_cc);
                     flag = true;
                 }
                 if (CurrentURL.Contains("settings/password"))
                 {
-                    _temp = GlobalRes.Password;
+                    _temp = LocalizationGetter.GetString("Password", is_cc);
                     flag = true;
                 }
                 if (CurrentURL.Contains("settings/cases"))
                 {
-                    _temp = GlobalRes.CaseSettings;
+                    _temp = LocalizationGetter.GetString("CaseSettings", is_cc);
                     flag = true;
                 }
                 if (CurrentURL.Contains("settings/user"))
                 {
-                    _temp = GlobalRes.Profile;
+                    _temp = LocalizationGetter.GetString("Profile", is_cc);
                     flag = true;
                 }
 
                 if (CurrentURL.Contains("tasks/"))
                 {
-                    _temp = GlobalRes.Mytasks;
+                    _temp = LocalizationGetter.GetString("Mytasks", is_cc);
                     flag = true;
                 }
                 if (CurrentURL.Contains("tasks/completed"))
                 {
-                    _temp = GlobalRes.Closedtasks;
+                    _temp = LocalizationGetter.GetString("Closedtasks", is_cc);
                     flag = true;
 
                 }
                 if (CurrentURL.Contains("analytics/index") || CurrentURL.Contains("/analytics"))
                 {
-                    _temp = GlobalRes.Cases;
+                    _temp = LocalizationGetter.GetString("Cases", is_cc);
                     flag = true;
                 }
                 if (CurrentURL.Contains("analytics/tasks"))
                 {
-                    _temp = GlobalRes.Tasks;
+                    _temp = LocalizationGetter.GetString("Tasks", is_cc);
                     flag = true;
                 }
                 if (CurrentURL.Contains("analytics/rootcauseanalysis"))
@@ -534,27 +532,27 @@
                 }
                 if (CurrentURL.Contains("analytics/mediators"))
                 {
-                    _temp = GlobalRes.Mediators;
+                    _temp = LocalizationGetter.GetString("Mediators", is_cc);
                     flag = true;
                 }
                 if (CurrentURL.Contains("messages/"))
                 {
-                    _temp = GlobalRes.Allmessages;
+                    _temp = LocalizationGetter.GetString("Allmessages", is_cc);
                     flag = true;
                 }
                 if (CurrentURL.Contains("payment/history") || CurrentURL.Contains("payment"))
                 {
-                    _temp = GlobalRes.History;
+                    _temp = LocalizationGetter.GetString("History", is_cc);
                     flag = true;
                 }
                 if (CurrentURL.Contains("payment/receipt"))
                 {
-                    _temp = GlobalRes.Receipt;
+                    _temp = LocalizationGetter.GetString("Receipt", is_cc);
                     flag = true;
                 }
                 if (CurrentURL.Contains("payment/newpayment"))
                 {
-                    _temp = GlobalRes.newpayment;
+                    _temp = LocalizationGetter.GetString("newpayment", is_cc);
                     flag = true;
                 }
                 if (CurrentURL.Contains("/employeeawareness/poster"))
@@ -660,20 +658,20 @@
         $("#return_investigation").on('click', function (el) {
 
             $("#approveDialog").toggle();
-            $("#txtEscalate").attr('placeholder', "@Html.Raw(GlobalRes.AddReasonWhy)");
+            $("#txtEscalate").attr('placeholder', "@Html.Raw(LocalizationGetter.GetString("AddReasonWhy", is_cc))");
 
-            $("#escalate_btn").text("@Html.Raw(GlobalRes.Returnnvestigation)");
+            $("#escalate_btn").text("@Html.Raw(LocalizationGetter.GetString("Returnnvestigation", is_cc))");
             $("#escalate_btn").val(3);
-            $("#_overlay_title").text("@Html.Raw(GlobalRes.Returnnvestigation)");
-            $("#textbox_title").text("@Html.Raw(GlobalRes.AddReasonWhy)");
+            $("#_overlay_title").text("@Html.Raw(LocalizationGetter.GetString("Returnnvestigation", is_cc))");
+            $("#textbox_title").text("@Html.Raw(LocalizationGetter.GetString("AddReasonWhy", is_cc))");
         });
         $("#approve_close").on('click', function (el) {
 
             $("#approveDialog").toggle();
             $("#txtEscalate").attr('placeholder', "@Html.Raw(same_mediator_warning)");
-            $("#escalate_btn").text("@Html.Raw(GlobalRes.CloseCaseUp)");
+            $("#escalate_btn").text("@Html.Raw(LocalizationGetter.GetString("CloseCaseUp", is_cc))");
             $("#escalate_btn").val(9);
-            $("#_overlay_title").text("@Html.Raw(GlobalRes.CloseCaseUp)");
+            $("#_overlay_title").text("@Html.Raw(LocalizationGetter.GetString("CloseCaseUp", is_cc))");
             $("#textbox_title").text("@Html.Raw(same_mediator_warning)");
         });
     </script>

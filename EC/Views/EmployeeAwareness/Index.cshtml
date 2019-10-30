@@ -1,25 +1,23 @@
 ﻿@using EC.Models;
 @using EC.Models.Database;
 @using EC.Model.Impl;
-@using EC.App_LocalResources;
+@using EC.Localization;
 @{
 
     <link rel="stylesheet" href="~/Content/EmployeeAwareness.css" />
+  bool? is_cc = ViewBag.is_cc;
+  if (!is_cc.HasValue)
+  {
+    is_cc = false;
+  }
+  ViewBag.Title = LocalizationGetter.GetString("EmployeeAwarenessUp", is_cc);
+  Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
 
-    ViewBag.Title = GlobalRes.EmployeeAwarenessUp;
-    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+  var um = (UserModel)ViewBag.um;
+  var user_id = ViewBag.user_id;
+  int company_id = um._user.company_id;
 
-    var um = (UserModel)ViewBag.um;
-    var user_id = ViewBag.user_id;
-    int company_id = um._user.company_id;
-
-    List<PosterItem> allPosters = ViewBag.all_posters;
-
-    bool? is_cc = ViewBag.is_cc;
-    if (!is_cc.HasValue)
-    {
-        is_cc = false;
-    }
+  List<PosterItem> allPosters = ViewBag.all_posters;
 
 }
 
@@ -30,14 +28,14 @@
       @if (!is_cc.Value)
       {
         <div class="blockMenu posterCategoryNames">
-          <div class="title">@GlobalRes.Industry</div>
+          <div class="title">@LocalizationGetter.GetString("Industry", is_cc)</div>
           <div ng-if="category.status === 2" ng-repeat="category in categories">
             <div class="itemSelect" ng-class="{'active' : category.Selected}" ng-click="category.Selected = !category.Selected" value="{{category.Id}}">{{categoryName(category)}}</div>
           </div>
         </div>
 
                 <div class="blockMenu">
-                  <div class="title">@GlobalRes.SHPrevention</div>
+                  <div class="title">@LocalizationGetter.GetString("SHPrevention", is_cc)</div>
                   <div ng-if="category.status === 3" ng-repeat="category in categories">
                     <div class="itemSelect" ng-class="{'active' : category.Selected}" ng-click="category.Selected = !category.Selected" value="{{category.Id}}">{{categoryName(category)}}</div>
                   </div>
@@ -46,13 +44,13 @@
               </div>
       }
       <div class="blockMenu posterMessage" ng-show="false">
-        <div class="title">@GlobalRes.Message</div>
+        <div class="title">@LocalizationGetter.GetString("Message", is_cc)</div>
         <div ng-repeat="message in messages">
           <div class="itemSelect" ng-class="{'active' : message.Selected}" ng-click="message.Selected = !message.Selected" value="{{message.Id}}">{{messageName(message)}}</div>
         </div>
       </div>
       <div class="blockMenu">
-        <div class="title">@GlobalRes.AvailableFormat</div>
+        <div class="title">@LocalizationGetter.GetString("AvailableFormat", is_cc)</div>
         <div ng-repeat="avaibleFormat in avaibleFormats">
           <div class="itemSelect" ng-class="{'active' : avaibleFormat.Selected}" ng-click="avaibleFormat.Selected = !avaibleFormat.Selected" value="{{avaibleFormat.Id}}">{{avaibleFormat.Name}}</div>
         </div>
@@ -68,13 +66,13 @@
         <div class="rightContent">
             <div class="topBlockFilters">
                 <div class="info">
-                    @GlobalRes.EmployeeAwarenessMaterials
+                    @LocalizationGetter.GetString("EmployeeAwarenessMaterials", is_cc)
                 </div>
                 <div ng-repeat="category in categories" class="itemFilter" ng-show="category.Selected" value="{{category.Id}}">{{categoryName(category)}}<div class="imgClose" ng-click="category.Selected = false"></div></div>
                 <div ng-repeat="message in messages" class="itemFilter" ng-show="message.Selected" value="{{message.Id}}">{{messageName(message)}}<div class="imgClose" ng-click="message.Selected = false"></div></div>
                 <div ng-repeat="avaibleFormat in avaibleFormats" class="itemFilter" ng-show="avaibleFormat.Selected" value="{{avaibleFormat.Id}}">{{avaibleFormat.Name}}<div class="imgClose" ng-click="avaibleFormat.Selected = false"></div></div>
                 <div ng-repeat="language in languages" class="itemFilter" ng-show="language.Selected" value="{{language.Id}}">{{language.Name}}<div class="imgClose" ng-click="language.Selected = false"></div></div>
-                <div class="calcItems"><span>{{selectedItemsCount()}}</span>@String.Format(GlobalRes.Itemss, "")</div>
+                <div class="calcItems"><span>{{selectedItemsCount()}}</span>@String.Format(LocalizationGetter.GetString("Itemss", is_cc), "")</div>
             </div>
 
             <div class="rezoultItems">

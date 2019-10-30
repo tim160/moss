@@ -1,16 +1,21 @@
 ﻿@using System.Collections;
 @using EC.Models;
 @using EC.Models.Database;
-@using EC.App_LocalResources;
+@using EC.Localization;
 @{
-    // @Styles.Render("~/Content/Styles");
+  bool? is_cc = ViewBag.is_cc;
+  if (!is_cc.HasValue)
+  {
+    is_cc = false;
+  }
+  // @Styles.Render("~/Content/Styles");
     <link rel="stylesheet" type="text/css" href="/Content/styleReportDashboard.css">
-    ViewBag.Title = "Quote details";
-    decimal amount = 0;
-    if (ViewBag.amount != null && ViewBag.amount != "" && ViewBag.amount != "0")
-    {
-        decimal.TryParse(ViewBag.amount, out amount);
-    }
+  ViewBag.Title = "Quote details";
+  decimal amount = 0;
+  if (ViewBag.amount != null && ViewBag.amount != "" && ViewBag.amount != "0")
+  {
+    decimal.TryParse(ViewBag.amount, out amount);
+  }
     <style>
         .fullContainer {
             max-width: none;
@@ -20,7 +25,7 @@
 
 <div class="blockSettings contentCompanyProfile">
     <div class="titleNewUser">
-        <h1 class="helloUser">@GlobalRes.NewQuoteUp:</h1>
+        <h1 class="helloUser">@LocalizationGetter.GetString("NewQuoteUp", is_cc):</h1>
     </div>
     <div class="contentSettings">
         <div class="blockPersonalPhotoSetting">
@@ -35,21 +40,21 @@
                 @if (amount > 0)
                 {
                     <div class="blockPersonalSettings">
-                        <p class="title">@GlobalRes.Amount</p>
+                        <p class="title">@LocalizationGetter.GetString("Amount", is_cc)</p>
                         @Html.TextBox("amount", amount, new Dictionary<string, object>() { { "readonly", "true" } })
                     </div>
                 }
                 else
                 {
                     <div class="blockPersonalSettings">
-                        <p class="title">@GlobalRes.Amount</p>
+                        <p class="title">@LocalizationGetter.GetString("Amount", is_cc)</p>
                         @Html.TextBox("amount", amount, new Dictionary<string, object>() { { "readonly", "true" } })
                     </div>
                 }
                 <div class="blockUpdateProfile">
                     <div class="updateProfileBtn">
-                        <input type="submit" value="@GlobalRes.NewCompanyRegistration" />
-                        <span style="display: none;">@GlobalRes.NewCompanyRegistration</span>
+                        <input type="submit" value="@LocalizationGetter.GetString("NewCompanyRegistration", is_cc)" />
+                        <span style="display: none;">@LocalizationGetter.GetString("NewCompanyRegistration", is_cc)</span>
                     </div>
                 </div>
             </div>

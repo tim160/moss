@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using EC.Models.Database;
-using EC.App_LocalResources;
+using EC.Localization;
 using EC.Common.Interfaces;
 using EC.Core.Common;
 using EC.Models.ECModel;
@@ -41,7 +41,7 @@ namespace EC.Models.ViewModel
                 _sender_name = "";
                 if (_message.sender_id == caller_id)
                 {
-                    _sender_name = GlobalRes.You;
+                    _sender_name = LocalizationGetter.GetString("You");
                 }
                 else
                 {
@@ -49,11 +49,11 @@ namespace EC.Models.ViewModel
                     {
                         if ((rm._report.incident_anonymity_id == 1) || (rm._report.incident_anonymity_id == 2))
                         {
-                            _sender_name = GlobalRes.anonymous_reporter;
+                            _sender_name = LocalizationGetter.GetString("anonymous_reporter");
                         }
                         else
                         {
-                            _sender_name = GlobalRes.Reporter;
+                            _sender_name = LocalizationGetter.GetString("Reporter");
                         }
                     }
                     else

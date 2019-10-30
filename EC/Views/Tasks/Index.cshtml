@@ -1,27 +1,31 @@
 ﻿@using EC.Models;
 @using EC.Models.ECModel;
 @using EC.Models.Database;
-@using EC.App_LocalResources;
+@using EC.Localization;
 @{
-    GlobalFunctions glb = new GlobalFunctions();
+  GlobalFunctions glb = new GlobalFunctions();
+  bool? is_cc = ViewBag.is_cc;
+  if (!is_cc.HasValue)
+  {
+    is_cc = false;
+  }
+  ViewBag.Title = LocalizationGetter.GetString("Mytasks", is_cc);
+  Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+  int user_id = (Int32)ViewBag.user_id;
+  List<TaskExtended> tasks = (List<TaskExtended>)ViewBag.tasks;
+  ReportModel rm = new ReportModel();
+  UserModel um = new UserModel(user_id);
 
-    ViewBag.Title = GlobalRes.Mytasks;
-    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
-    int user_id = (Int32)ViewBag.user_id;
-    List<TaskExtended> tasks = (List<TaskExtended>)ViewBag.tasks;
-    ReportModel rm = new ReportModel();
-    UserModel um = new UserModel(user_id);
-    
-    List<report> reports = (List<report>)ViewBag.reports;
-    string _nameBlockShow = "";
-    int unread_tasks = ViewBag.unread_tasks;
+  List<report> reports = (List<report>)ViewBag.reports;
+  string _nameBlockShow = "";
+  int unread_tasks = ViewBag.unread_tasks;
 }
 
 <div class="blockSettings blockAllTasks">
     <div id="casesHeared">
         <div id="menu">
-            <a href="/tasks/Index" class="caseesTab active">@GlobalRes.Myactivetasks @if(unread_tasks > 0){<span>@unread_tasks</span>}</a>
-            <a href="/tasks/Completed" class="caseesTab">@GlobalRes.Mycompletedtasks</a>
+            <a href="/tasks/Index" class="caseesTab active">@LocalizationGetter.GetString("Myactivetasks", is_cc) @if(unread_tasks > 0){<span>@unread_tasks</span>}</a>
+            <a href="/tasks/Completed" class="caseesTab">@LocalizationGetter.GetString("Mycompletedtasks", is_cc)</a>
         </div>
   @*      <div class="positionActivityIcon">
                 <div id="activityIcon"></div>
@@ -37,12 +41,12 @@
                 <header>
                     <div class="menuTasks">
                         <div class="caseTasksName">
-                            <span>@GlobalRes.Case > @GlobalRes.Taskname</span>
+                            <span>@LocalizationGetter.GetString("Case", is_cc) > @LocalizationGetter.GetString("Taskname", is_cc)</span>
                             <span class="labelArrow">></span>
                         </div>
-                        <div class="assignedMediator">@GlobalRes.Assignedby</div>
+                        <div class="assignedMediator">@LocalizationGetter.GetString("Assignedby", is_cc)</div>
                         <div class="dueDate">
-                            <span>@GlobalRes.Duedate</span>
+                            <span>@LocalizationGetter.GetString("Duedate", is_cc)</span>
                             <span class="labelArrow">></span>
                         </div>
                     </div>
@@ -150,7 +154,7 @@
                                     <span class="@_classCircle" style="@_styleCircle"></span>
                                     <span class="taskName @_fontName">
                                         <span class="titleTask @_colorTextBefore">
-                                            @rm._report.display_name - @rm.LocationString()
+                                            @rm._report.display_name - @rm.LocationString(is_cc.Value)
                                         </span>
                                         <span class="labelArrow">></span>
                                         <a href="/newCase/Task/@_task.TaskID">
@@ -200,7 +204,7 @@
                                         if (!_task.IsCompleted())
                                         {
                                             // expired
-                                            <span class="textInfo">@GlobalRes.Expired.ToLower()</span>
+                                            <span class="textInfo">@LocalizationGetter.GetString("Expired", is_cc).ToLower()</span>
                                         }
                                     }
                                     else
@@ -211,11 +215,11 @@
                                             int total_days = (_task.TaskDueDate.Value - dt).Days;
                                             if ((total_days > 1) && (total_days < 6))
                                             {
-                                                <span class="textDays">@total_days @GlobalRes.dayslate</span>
+                                                <span class="textDays">@total_days @LocalizationGetter.GetString("daysleft", is_cc)</span>
                                             }
                                             if ((total_days == 1))
                                             {
-                                                <span class="textDays">@total_days @GlobalRes.dayleft</span>
+                                                <span class="textDays">@total_days @LocalizationGetter.GetString("dayleft", is_cc)</span>
                                             }
                                         }
                                     }
@@ -238,7 +242,7 @@
                                         <div class="headerContentTask" style="border-left: 10px solid #@rm.ColorCode(); ">
                                             <div class="blockTitle">
                                                 <span class="taskName">
-                                                    <span class="titleTask">@rm._report.display_name - @rm.LocationString()</span>
+                                                    <span class="titleTask">@rm._report.display_name - @rm.LocationString(is_cc.Value)</span>
                                                     <span class="labelArrow">></span>
                                                 </span>
                                             </div>
@@ -341,7 +345,7 @@
                                                     if (!tsk.IsCompleted())
                                                     {
                                                         // expired
-                                                <span class="textInfo">@GlobalRes.Expired.ToLower()</span>
+                                                <span class="textInfo">@LocalizationGetter.GetString("Expired", is_cc).ToLower()</span>
                                                     }
                                                 }
                                                 else
@@ -352,11 +356,11 @@
                                                         int total_days = (tsk.TaskDueDate.Value - dt).Days;
                                                         if ((total_days > 1) && (total_days < 6))
                                                         {
-                                                <span class="textDays">@total_days @GlobalRes.daysleft</span>
+                                                <span class="textDays">@total_days @LocalizationGetter.GetString("daysleft", is_cc)</span>
                                                         }
                                                         if ((total_days == 1))
                                                         {
-                                                <span class="textDays">@total_days @GlobalRes.dayleft</span>
+                                                <span class="textDays">@total_days @LocalizationGetter.GetString("dayleft", is_cc)</span>
                                                         }
                                                     }
                                                 }

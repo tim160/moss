@@ -99,11 +99,11 @@ namespace EC.Controllers.ViewModel
             if ((rm._investigation_status == 1) && (user.role_id == 4 || user.role_id == 5 || user.role_id == 6 || user.role_id == 7))
             {
 
-                ///if (!db.report_log.Any(item => ((item.action_id == 28) && (item.report_id == report_id) && (item.string_to_add == App_LocalResources.GlobalRes._Completed))))
-               ////// if (!db.report_investigation_status.Any(item => (item.report_id == report_id)))
-                {
-                        // need to update investigation status from pending to review after first mediator accessed the report
-                        report_investigation_status _review_status = new report_investigation_status();
+        ///if (!db.report_log.Any(item => ((item.action_id == 28) && (item.report_id == report_id) && (item.string_to_add == LocalizationGetter.GetString("_Completed", is_cc)))))
+        ////// if (!db.report_investigation_status.Any(item => (item.report_id == report_id)))
+        {
+          // need to update investigation status from pending to review after first mediator accessed the report
+          report_investigation_status _review_status = new report_investigation_status();
                     _review_status.created_date = DateTime.Now;
                     _review_status.investigation_status_id = ECGlobalConstants.investigation_status_review;
                     _review_status.report_id = report_id;
@@ -118,9 +118,8 @@ namespace EC.Controllers.ViewModel
                     report.user_id = user_id;
 
                     db.SaveChanges();
-
- ///////                   glb.UpdateReportLog(user_id, 28, report_id, App_LocalResources.GlobalRes._Completed, null, "");
-                    glb.UpdateReportLog(user_id, 20, report_id, App_LocalResources.GlobalRes._Started, null, "");
+ 
+                    glb.UpdateReportLog(user_id, 20, report_id, LocalizationGetter.GetString("_Started", is_cc), null, "");
                 }
             }
 
@@ -166,11 +165,11 @@ namespace EC.Controllers.ViewModel
 
                 try
                 {
-                    //     db.SaveChanges();
-                    // need to save new row to report_log about 
-                    //glb.UpdateReportLog(newStatus.user_id, 20, newStatus.report_id, App_LocalResources.GlobalRes._Completed , null, newStatus.description);
-                }
-                catch (Exception ex)
+          //     db.SaveChanges();
+          // need to save new row to report_log about 
+          //glb.UpdateReportLog(newStatus.user_id, 20, newStatus.report_id, LocalizationGetter.GetString("_Completed", is_cc) , null, newStatus.description);
+        }
+        catch (Exception ex)
                 {
                     logger.Error(ex.ToString());
                     return View(newStatus);
@@ -337,10 +336,10 @@ namespace EC.Controllers.ViewModel
             // Case accepted
             # endregion
             glb.UpdateReportLog(user_id, 17, report_id, description, null, "");
-            ///// to return        glb.UpdateReportLog(user_id, 20, report_id, App_LocalResources.GlobalRes._Completed, null, "");
+      ///// to return        glb.UpdateReportLog(user_id, 20, report_id, LocalizationGetter.GetString("_Completed", is_cc), null, "");
 
 
-            report_log _log = new report_log();
+      report_log _log = new report_log();
 
             CompanyModel cm = new CompanyModel(rm._report.company_id);
             UserModel um = new UserModel(user_id);
@@ -394,7 +393,7 @@ namespace EC.Controllers.ViewModel
                                */
                 }
             }
-            glb.UpdateReportLog(user_id, 21, report_id, App_LocalResources.GlobalRes._Started, null, "");
+            glb.UpdateReportLog(user_id, 21, report_id, LocalizationGetter.GetString("_Started", is_cc), null, "");
             if (!db.report_log.Any(item => ((item.action_id == 19) && (item.report_id == report_id))))
             {
                 //case opened
@@ -412,10 +411,10 @@ namespace EC.Controllers.ViewModel
                         //to.Add(_user.email.Trim());
 
                         eb.NextStep(_user.first_nm, _user.last_nm, rm._report.display_name);
-                        //body = eb.Body;
+            //body = eb.Body;
 
-                        ///   em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_NextStep, body, true);
-                        glb.SaveEmailBeforeSend(user.id, _user.id, _user.company_id, _user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
+              ///   em.Send(to, cc, LocalizationGetter.GetString("Email_Title_NextStep", is_cc)  , body, true);
+            glb.SaveEmailBeforeSend(user.id, _user.id, _user.company_id, _user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
                             LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 7);
                     }
                 }
@@ -445,7 +444,7 @@ namespace EC.Controllers.ViewModel
                     {
                         eb.CaseReopened(_user.first_nm, _user.last_nm, rm._report.display_name, um._user.first_nm, um._user.last_nm);
                         glb.SaveEmailBeforeSend(user.id, _user.id, _user.company_id, _user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
-                            App_LocalResources.GlobalRes.Email_Title_CaseReopened, eb.Body, false, 8);
+                         LocalizationGetter.GetString("Email_Title_CaseReopened", is_cc), eb.Body, false, 8);
                     }
                 }
                 #endregion
@@ -455,14 +454,12 @@ namespace EC.Controllers.ViewModel
                 {
                     eb.ReporterCaseReopened(rm._report.display_name);
                     glb.SaveEmailBeforeSend(user.id, rm._reporter_user.id, rm._reporter_user.company_id, rm._reporter_user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
-                            App_LocalResources.GlobalRes.Email_Title_CaseReopened, eb.Body, false, 33);
+                            LocalizationGetter.GetString("Email_Title_CaseReopened", is_cc), eb.Body, false, 33);
                 }
 
                 #endregion
             }
-
-            /////     glb.UpdateReportLog(user_id, 20, report_id, App_LocalResources.GlobalRes._Completed, null, description);
-            //////    glb.UpdateReportLog(user_id, 21, report_id, App_LocalResources.GlobalRes._Started, null, "");
+ 
             switch (severityId)
             {
                 case 2:

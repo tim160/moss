@@ -2,26 +2,30 @@
 @using EC.Models.ECModel;
 @using EC.Models.Database;
 @using System.Data;
-@using EC.App_LocalResources;
+@using EC.Localization;
 @{
 
     <link rel="stylesheet" href="~/Content/styleAnalitics.css" />
+  bool? is_cc = ViewBag.is_cc;
+  if (!is_cc.HasValue)
+  {
+    is_cc = false;
+  }
+  ViewBag.Title = LocalizationGetter.GetString("Analytics", is_cc);
+  Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+  int user_id = (Int32)ViewBag.user_id;
+  ReportModel rm = new ReportModel();
+  int companyId = ViewBag.um._user.company_id;
+  int[] _today_spanshot = ViewBag._today_spanshot;
+  int[] _month_end_spanshot = ViewBag._month_end_spanshot;
+  int difference = 0;
 
-    ViewBag.Title = GlobalRes.Analytics;
-    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
-    int user_id = (Int32)ViewBag.user_id;
-    ReportModel rm = new ReportModel();
-    int companyId = ViewBag.um._user.company_id;
-    int[] _today_spanshot = ViewBag._today_spanshot;
-    int[] _month_end_spanshot = ViewBag._month_end_spanshot;
-    int difference = 0;
+  string _today = ViewBag._today;
 
-    string _today = ViewBag._today;
+  string[] _titleHeaderLegend = { "Spam", "New Report", "Report Review", "Under Investigation", "Awaiting Sign-Off", "Closed" };
+  int[] _titleHeaderLegendIdx = { 6, 0, 1, 2, 3, 8 };
 
-    string[] _titleHeaderLegend = { "Spam", "New Report", "Report Review", "Under Investigation", "Awaiting Sign-Off", "Closed" };
-    int[] _titleHeaderLegendIdx = { 6, 0, 1, 2, 3, 8 };
-
-    string[] _miniSquareColor = { "#abb9bb", "#d47472", "#ff9b42", "#3099be", "#64cd9b", "#e5eeee" };
+  string[] _miniSquareColor = { "#abb9bb", "#d47472", "#ff9b42", "#3099be", "#64cd9b", "#e5eeee" };
 
 }
 
@@ -57,7 +61,7 @@
             <div class="parentClass">
                 <div class="menuItem">
                     <div class="positionText">
-                        <span class="dropMenuText">@GlobalRes.Department</span>
+                        <span class="dropMenuText">@LocalizationGetter.GetString("Department", is_cc)</span>
                         <img src="~/Content/img/arrowSelect.png" />
                     </div>
                     <ul class="menuUl">
@@ -83,7 +87,7 @@
             <div class="parentClass">
                 <div class="menuItem">
                     <div class="positionText">
-                        <span class="dropMenuText">@GlobalRes.Location</span>
+                        <span class="dropMenuText">@LocalizationGetter.GetString("Location", is_cc)</span>
                         <img src="~/Content/img/arrowSelect.png" />
                     </div>
                     <ul class="menuUl">
@@ -109,7 +113,7 @@
             <div class="parentClass">
                 <div class="menuItem">
                     <div class="positionText">
-                        <span class="dropMenuText">@GlobalRes.IncidentType</span>
+                        <span class="dropMenuText">@LocalizationGetter.GetString("IncidentType", is_cc)</span>
                         <img src="~/Content/img/arrowSelect.png" />
                     </div>
                     <ul class="menuUl">
@@ -192,7 +196,7 @@
                 <!-- 1 All cases -->
                 <div class="blockAllCases">
                     <div class="headerBlockActivity">
-                        <div class="titleBlock">@GlobalRes.Allcases</div>
+                        <div class="titleBlock">@LocalizationGetter.GetString("Allcases", is_cc)</div>
                         @for (var i = 0; i < 5; i++)
                     {
                     <div class="itemLegend">
@@ -207,7 +211,7 @@
                 <!-- 2 Today -->
                 <div class="blockToday">
                     <div class="headerBlockActivity">
-                        <div class="titleBlock">@GlobalRes.Number_cases_stage: @_today</div>
+                        <div class="titleBlock">@LocalizationGetter.GetString("Number_cases_stage", is_cc): @_today</div>
                         <div class="blockTodayContant">
                             @for (var i = 0; i < _titleHeaderLegend.Length; i++)
                             {

@@ -1,10 +1,10 @@
-﻿using EC.App_LocalResources;
-using EC.Models;
+﻿using EC.Models;
 using EC.Models.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using EC.Localization;
 
 namespace EC.Controllers.ViewModel
 {
@@ -121,7 +121,7 @@ namespace EC.Controllers.ViewModel
                 }
                 if(affectedDepartments == null)
                 {
-                    affectedDepartments = GlobalRes.notListed;
+                    affectedDepartments = LocalizationGetter.GetString("notListed");
                 }
             }
 
@@ -142,10 +142,10 @@ namespace EC.Controllers.ViewModel
 
             if(model.isUrgent == 0)
             {
-                isCaseUrgent = GlobalRes.No;
+                isCaseUrgent = LocalizationGetter.GetString("No");
             } else
             {
-                isCaseUrgent = GlobalRes.Yes;
+                isCaseUrgent = LocalizationGetter.GetString("Yes");
             }
 
             if (reportModel.isCustomIncidentTypes(model.currentCompanyId))
@@ -160,7 +160,7 @@ namespace EC.Controllers.ViewModel
                         IncidentType += something.secondary_type_en + ", ";
                     } else
                     {
-                        IncidentType += GlobalRes.Other + ", ";
+                        IncidentType += LocalizationGetter.GetString("Other") + ", ";
                     }
                 }
             }
@@ -178,7 +178,7 @@ namespace EC.Controllers.ViewModel
                     }
                     else
                     {
-                        IncidentType += GlobalRes.Other + ", ";
+                        IncidentType += LocalizationGetter.GetString("Other") + ", ";
                     }
                 }
             }
@@ -188,13 +188,13 @@ namespace EC.Controllers.ViewModel
             switch (model.isOnGoing)
             {
                 case 1:
-                    incidentOngoing = GlobalRes.No;
+                    incidentOngoing = LocalizationGetter.GetString("No");
                     break;
                 case 2:
-                    incidentOngoing = GlobalRes.Yes;
+                    incidentOngoing = LocalizationGetter.GetString("Yes");
                     break;
                 case 3:
-                    incidentOngoing = GlobalRes.NotSureUp;
+                    incidentOngoing = LocalizationGetter.GetString("NotSureUp");
                     break;
             }
 
@@ -219,7 +219,7 @@ namespace EC.Controllers.ViewModel
                     attachFiles = fileItem.FileName;
                 }
             }
-            this.report_by_myself = model.report_by_myself == true ? GlobalRes.Myself : GlobalRes.SomeoneElse;
+            this.report_by_myself = model.report_by_myself == true ? LocalizationGetter.GetString("Myself") : LocalizationGetter.GetString("SomeoneElse");
 
             this.personName = new List<string>();
             this.personLastName = new List<string>();

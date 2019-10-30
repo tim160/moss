@@ -1,7 +1,6 @@
 ﻿@using System.Collections;
 @using EC.Models;
 @using EC.Models.Database;
-@using EC.App_LocalResources;
 @using EC.Common.Interfaces;
 @using EC.Core.Common;
 @using EC.Common.Util;
@@ -9,23 +8,27 @@
 @using System.Collections;
 @using EC.Models;
 @using EC.Models.Database;
-@using EC.App_LocalResources;
 @using EC.Common.Util;
 @using EC.Localization;
 
 @{
-// @Styles.Render("~/Content/Styles");
+  bool? is_cc = ViewBag.is_cc;
+  if (!is_cc.HasValue)
+  {
+    is_cc = false;
+  }
+  // @Styles.Render("~/Content/Styles");
     <link rel="stylesheet" type="text/css" href="/Content/styleReportDashboard.css">
 
-    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+  Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
 
-    var cp = ViewBag.cp;
+  var cp = ViewBag.cp;
 
-    GlobalFunctions glb = new GlobalFunctions();
-    IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
+  GlobalFunctions glb = new GlobalFunctions();
+  IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
 
-    ViewBag.Title = GlobalRes.Payment + " - " + m_DateTimeHelper.ConvertDateToLongMonthString(cp.payment_date);
- 
+  ViewBag.Title = LocalizationGetter.GetString("Payment", is_cc) + " - " + m_DateTimeHelper.ConvertDateToLongMonthString(cp.payment_date);
+
     <style>
         .fullContainer {
             max-width: none;
@@ -34,7 +37,7 @@
 }
 <div class="blockSettings contentCompanyProfile">
     <div class="titleNewUser">
-        <h1 class="helloUser">@GlobalRes.Payment on  @m_DateTimeHelper.ConvertDateToLongMonthString(cp.payment_date)</h1>
+        <h1 class="helloUser">@LocalizationGetter.GetString("Payment", is_cc) on  @m_DateTimeHelper.ConvertDateToLongMonthString(cp.payment_date)</h1>
     </div>
     <div class="contentSettings">
         <div class="blockPersonalPhotoSetting">
@@ -45,21 +48,21 @@
 
             <div class="personalBlock">
                 <div class="blockPersonalSettings">
-                    <p class="title">@GlobalRes.Amount</p>
+                    <p class="title">@LocalizationGetter.GetString("Amount", is_cc)</p>
                     @StringUtil.ConvertDecimalToStringAmount(cp.amount) 
                 </div>
                 <div class="blockPersonalSettings">
-                    <p class="title">@GlobalRes.PaymentDate</p>
+                    <p class="title">@LocalizationGetter.GetString("PaymentDate", is_cc)</p>
                     @m_DateTimeHelper.ConvertDateToLongMonthString(cp.payment_date)
                 </div>
 
  
                 <div class="blockPersonalSettings">
-                    <p class="title">@GlobalRes.Description</p>
+                    <p class="title">@LocalizationGetter.GetString("Description", is_cc)</p>
                     @cp.description
                 </div>
                 <div class="blockPersonalSettings">
-                    <p class="title">@GlobalRes.AuthCode</p>
+                    <p class="title">@LocalizationGetter.GetString("AuthCode", is_cc)</p>
                     @cp.local_invoice_number
                 </div>
             </div>

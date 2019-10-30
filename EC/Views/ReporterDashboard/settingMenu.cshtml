@@ -1,5 +1,4 @@
-﻿@using EC.App_LocalResources;
-@using EC.Localization;
+﻿@using EC.Localization;
 @{ 
     bool? is_cc = ViewBag.is_cc;
     if (!is_cc.HasValue)
@@ -38,7 +37,7 @@
                 <a href="/ReporterDashboard/Activity/@ViewBag.user_id" class="menuItem @(ViewBag.active == "Activity"?  "active" : "")">
                     @LocalizationGetter.GetString("Activity", is_cc)
                 </a>
-            @*<a href="/ReporterDashboard/Settings/@user_id" class="menuItem settings" style="margin-right:-2px;">@GlobalRes.Settings</a>*@
+            @*<a href="/ReporterDashboard/Settings/@user_id" class="menuItem settings" style="margin-right:-2px;">@LocalizationGetter.GetString("Settings", is_cc)</a>*@
             <div class="settings menuItem" style="margin-top: -4px">
 
                 @*<a href="/ReporterDashboard/PrintToPdf/@ViewBag.guid" class="menuItem" target="_blank" style="padding: 0 10px;">

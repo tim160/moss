@@ -1,4 +1,4 @@
-﻿using EC.App_LocalResources;
+﻿using EC.Localization;
 using EC.Models.Database;
 using System.Linq;
 using System;
@@ -25,7 +25,7 @@ namespace EC.Models
                             UserModel um = new UserModel(user_id);
                             if (um._user.email.Trim().ToLower() != email.Trim().ToLower())
                             {
-                                return GlobalRes.InvalidToken;
+                                return LocalizationGetter.GetString("InvalidToken");
                             }
                             else
                             {
@@ -33,16 +33,16 @@ namespace EC.Models
                             }
                         }
                         else
-                            return GlobalRes.InvalidToken;
+                            return LocalizationGetter.GetString("InvalidToken");
                     }
                     else
-                        return GlobalRes.EmailInvalid;
+                        return LocalizationGetter.GetString("EmailInvalid");
                 }
                 else
-                    return GlobalRes.EmailInvalid;
+                    return LocalizationGetter.GetString("EmailInvalid");
             }
             else
-                return GlobalRes.NoUserFound;
+                return LocalizationGetter.GetString("NoUserFound");
         }
         public string setNewPass(string email, string token, string password, string confirmPassword)
         {
@@ -73,12 +73,12 @@ namespace EC.Models
                 }
                 else
                 {
-                    return GlobalRes.notMatchConfPassandPass;
+                    return LocalizationGetter.GetString("notMatchConfPassandPass");
                 }
             }
             else
             {
-                return GlobalRes.reEnterEmailToken;
+                return LocalizationGetter.GetString("reEnterEmailToken");
             }
             return "";
         }

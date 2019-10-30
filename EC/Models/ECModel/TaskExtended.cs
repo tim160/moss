@@ -5,6 +5,7 @@ using System.Web;
 using EC.Models.Database;
 using EC.Core.Common;
 using EC.Common.Util;
+using EC.Localization;
 
 namespace EC.Models.ECModel
 {
@@ -242,7 +243,7 @@ namespace EC.Models.ECModel
 
                 #region TaskAssignedBy
                 if (_task_original.created_by == user_id)
-                    TaskAssigner = App_LocalResources.GlobalRes.You;
+                    TaskAssigner = LocalizationGetter.GetString("You");
                 user _user = db.user.Where(item => item.id == _task_original.created_by).FirstOrDefault();
                 if ((_user != null) && (_task_original.created_by != user_id))
                     TaskAssigner = _user.first_nm.Trim() + " " + _user.last_nm.Trim();
@@ -256,7 +257,7 @@ namespace EC.Models.ECModel
 
                 #region TaskAssignedTo
                 if (_task_original.assigned_to == user_id)
-                    TaskAssignee = App_LocalResources.GlobalRes.You;
+                    TaskAssignee = LocalizationGetter.GetString("You");
                 _user = db.user.Where(item => item.id == _task_original.assigned_to).FirstOrDefault();
                 if ((_user != null) && (_task_original.assigned_to != user_id))
                     TaskAssignee = _user.first_nm.Trim() + " " + _user.last_nm.Trim();

@@ -946,7 +946,7 @@ namespace EC.Models
             }
         }
 
-        public bool CreateNewTask(NameValueCollection form, HttpFileCollectionBase files)
+        public bool CreateNewTask(NameValueCollection form, HttpFileCollectionBase files, bool is_cc)
         {
             int mediator_id = Convert.ToInt16(form["user_id"]);
             int report_id = Convert.ToInt16(form["report_id"]);
@@ -1026,7 +1026,7 @@ namespace EC.Models
                     EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, HttpContext.Current.Request.Url.AbsoluteUri.ToLower());
                     eb.NewTask(um._user.first_nm, um._user.last_nm, _rm._report.display_name);
                     glb.SaveEmailBeforeSend(mediator_id, um._user.id, um._user.company_id, um._user.email.Trim(), ConfigurationManager.AppSettings["emailFrom"], "",
-                        App_LocalResources.GlobalRes.Email_Title_NewTask, eb.Body, false, 6);
+                      LocalizationGetter.GetString("Email_Title_NewTask", is_cc), eb.Body, false, 6);
                 }
 
                 #endregion
@@ -1125,7 +1125,7 @@ namespace EC.Models
         }
 
 
-        public bool ReassignTask(int task_id, int mediator_id, int reporter_user)
+        public bool ReassignTask(int task_id, int mediator_id, int reporter_user, bool is_cc)
         {
             try
             {
@@ -1150,7 +1150,7 @@ namespace EC.Models
                     EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, HttpContext.Current.Request.Url.AbsoluteUri.ToLower());
                     eb.NewTask(um._user.first_nm, um._user.last_nm, _rm._report.display_name);
                     glb.SaveEmailBeforeSend(reporter_user, um._user.id, um._user.company_id, um._user.email.Trim(), ConfigurationManager.AppSettings["emailFrom"], "",
-                        App_LocalResources.GlobalRes.Email_Title_NewTask, eb.Body, false, 6);
+                        LocalizationGetter.GetString("Email_Title_NewTask", is_cc), eb.Body, false, 6);
                 }
 
                 #endregion
@@ -1306,7 +1306,7 @@ namespace EC.Models
 
 
 
-        public List<CasePreviewViewModel> ReportPreviews(List<int> report_ids, string investigation_status, int delay_allowed)
+        public List<CasePreviewViewModel> ReportPreviews(List<int> report_ids, string investigation_status, int delay_allowed, bool is_cc)
         {
             var severities = db.severity.Select(z => new { id = z.id, severity_en = z.severity_en });
             var colors = db.color.Select(z => new { id = z.id, color_code = z.color_code });
@@ -1338,7 +1338,7 @@ namespace EC.Models
                               cc_is_life_threating = rm._report.cc_is_life_threating,
                               total_days = Math.Floor((DateTime.Now.Date - rm._report.reported_dt.Date).TotalDays),
 
-                              location = rm.LocationString(),
+                              location = rm.LocationString(is_cc),
                               case_secondary_types = rm.SecondaryTypeString(),
                               days_left = rm.GetThisStepDaysLeft(delay_allowed),
 
@@ -1359,7 +1359,7 @@ namespace EC.Models
                                   is_owner = z.is_owner
                               }),
                               case_color_code = (rm._report.report_color_id == 0) ? colors.Where(item => item.id == 1).FirstOrDefault().color_code : colors.Where(item => item.id == rm._report.report_color_id).FirstOrDefault().color_code,
-                              severity_s = !rm._report.severity_id.HasValue ? "UNSPECIFIED" : severities.FirstOrDefault(z => z.id == rm._report.severity_id).severity_en,
+                              severity_s = !rm._report.severity_id.HasValue ? LocalizationGetter.GetString("Unspecified").ToUpper() : severities.FirstOrDefault(z => z.id == rm._report.severity_id).severity_en,
                               severity_id = !rm._report.severity_id.HasValue ? 0 : rm._report.severity_id.Value,
                               under_status_message = rm.DaysLeftClosedSpamMessage(delay_allowed),
                               last_update_dt = m_DateTimeHelper.ConvertDateToShortString(rm._report.last_update_dt),

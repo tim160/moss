@@ -1,12 +1,16 @@
 ﻿@using EC.Models.Database;
-@using EC.App_LocalResources;
-
+@using EC.Localization;
 @{
-    var report_id = (Int32)ViewBag.report_id;
-    var user_id = (Int32)ViewBag.user_id;
-    List<attachment> attachmentFiles = (List<attachment>)ViewBag.attachmentFiles;
-    Layout = "~/Views/Shared/IndexPages/LayoutNewCases.cshtml";
-    ViewBag.Title = "Case Details";
+  var report_id = (Int32)ViewBag.report_id;
+  var user_id = (Int32)ViewBag.user_id;
+  List<attachment> attachmentFiles = (List<attachment>)ViewBag.attachmentFiles;
+  Layout = "~/Views/Shared/IndexPages/LayoutNewCases.cshtml";
+  bool? is_cc = ViewBag.is_cc;
+  if (!is_cc.HasValue)
+  {
+    is_cc = false;
+  }
+  ViewBag.Title = "Case Details";
 }
 
 @Html.Partial("~/Views/Shared/Partial/_NewCasesTopMenu.cshtml")
@@ -15,7 +19,7 @@
     <div id="mainTab-1" class="mainNavigationTabs__tabContent active">
         <section class="content-container content-container_pbn">
             <div class="content-container__inner">
-                <p class="sectionHeader">@GlobalRes.GeneralInformation</p><!-- /.sectionHeader -->
+                <p class="sectionHeader">@LocalizationGetter.GetString("GeneralInformation", is_cc)</p><!-- /.sectionHeader -->
                 <div class="content-container__inner-additional clearfix">
                     <div class="col-6">
                         <div class="row row-noP-fl">
@@ -34,7 +38,7 @@
                         <div class="row row-noP-fl">
                             <div class="col-6">
                                 <p class="content-container__p">
-                                    @GlobalRes.Reporterwouldliketostay:
+                                    @LocalizationGetter.GetString("Reporterwouldliketostay", is_cc):
                                 </p><!-- /.content-container__p -->
                             </div><!-- /.col-4 -->
                             <div class="col-6">
@@ -60,7 +64,7 @@
                         <div class="row row-noP-fl" ng-if="model.incident_anonymity_id === 3">
                             <div class="col-6">
                                 <p class="content-container__p">
-                                    @GlobalRes.Reportername:
+                                    @LocalizationGetter.GetString("Reportername", is_cc):
                                 </p><!-- /.content-container__p -->
                             </div><!-- /.col-4 -->
                             <div class="col-6">
@@ -73,7 +77,7 @@
                         <div class="row row-noP-fl" ng-if="model.reporterEmail">
                             <div class="col-6">
                                 <p class="content-container__p">
-                                    @GlobalRes.Email:
+                                    @LocalizationGetter.GetString("Email", is_cc):
                                 </p><!-- /.content-container__p -->
                             </div><!-- /.col-4 -->
                             <div class="col-6">
@@ -100,7 +104,7 @@
                         <div class="row row-noP-fl">
                             <div class="col-6">
                                 <p class="content-container__p">
-                                    @GlobalRes.TheIncidentHappened @GlobalRes.in_:
+                                    @LocalizationGetter.GetString("TheIncidentHappened", is_cc) @LocalizationGetter.GetString("in_", is_cc):
                                 </p><!-- /.content-container__p -->
                             </div><!-- /.col-4 -->
                             <div class="col-6">
@@ -113,7 +117,7 @@
                         <div class="row row-noP-fl">
                             <div class="col-6">
                                 <p class="content-container__p">
-                                    @GlobalRes.AffectedDepartment:
+                                    @LocalizationGetter.GetString("AffectedDepartment", is_cc):
                                 </p><!-- /.content-container__p -->
                             </div><!-- /.col-4 -->
                             <div class="col-6">
@@ -147,7 +151,7 @@
                         <div class="row row-noP-fl">
                             <div class="col-6">
                                 <p class="content-container__p">
-                                    @GlobalRes.Doesmanagementknowaboutthisincident
+                                    @LocalizationGetter.GetString("Doesmanagementknowaboutthisincident", is_cc)
                                 </p><!-- /.content-container__p -->
                             </div><!-- /.col-12 -->
                             <div class="col-6">
@@ -159,7 +163,7 @@
                         <div class="row row-noP-fl">
                             <div class="col-6">
                                 <p class="content-container__p">
-                                    @GlobalRes.Incidentreportedoutside_q
+                                    @LocalizationGetter.GetString("Incidentreportedoutside_q", is_cc)
                                 </p><!-- /.content-container__p -->
                             </div><!-- /.col-12 -->
                             <div class="col-6">
@@ -171,7 +175,7 @@
                         <div class="row row-noP-fl">
                             <div class="col-6">
                                 <p class="content-container__p">
-                                    @GlobalRes.IsReportUrgent_q
+                                    @LocalizationGetter.GetString("IsReportUrgent_q", is_cc)
                                 </p><!-- /.content-container__p -->
                             </div><!-- /.col-12 -->
                             <div class="col-6">
@@ -232,7 +236,7 @@
                         <div class="row row-noP-fl">
                             <div class="col-6">
                                 <p class="content-container__p">
-                                    @GlobalRes.isOngoing?
+                                    @LocalizationGetter.GetString("isOngoing", is_cc)?
                                 </p><!-- /.content-container__p -->
                             </div><!-- /.col-4 -->
                             <div class="col-6">
@@ -258,7 +262,7 @@
                         <div class="row row-noP-fl">
                             <div class="col-6">
                                 <p class="content-container__p">
-                                    @GlobalRes.IncidentResultInjury
+                                    @LocalizationGetter.GetString("IncidentResultInjury", is_cc)
                                 </p><!-- /.content-container__p -->
                             </div><!-- /.col-4 -->
                             <div class="col-6">

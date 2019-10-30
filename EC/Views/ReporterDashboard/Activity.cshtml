@@ -1,6 +1,5 @@
 ﻿@using EC.Models;
 @using EC.Models.Database;
-@using EC.App_LocalResources;
 @using EC.Common.Interfaces;
 @using EC.Core.Common;
 @using EC.Localization;
@@ -114,7 +113,7 @@
             {
                 /*  if ((rm._report.incident_anonymity_id == 1) || (rm._report.incident_anonymity_id == 2))
                   {
-                      _sender_title = "(" + GlobalRes.anonymous_reporter + ")";
+                      _sender_title = "(" + LocalizationGetter.GetString("anonymous_reporter", is_cc) + ")";
                   }
                   else*/
                 {

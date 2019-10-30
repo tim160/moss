@@ -1,4 +1,4 @@
-﻿@using EC.App_LocalResources;
+﻿@using EC.Localization;
 @using EC.Models;
 @using EC.Models.Database;
 @using EC.Constants;
@@ -11,7 +11,7 @@
     string normal_button_value = ViewBag.normal_button_value;
     int investigationstatus = (int)ViewBag.investigationstatus;
 
-    string left_button_promotion = ViewBag.left_button_promotion; // @GlobalRes.Returnnvestigation.ToUpper()
+    string left_button_promotion = ViewBag.left_button_promotion; // @LocalizationGetter.GetString("Returnnvestigation", is_cc).ToUpper()
     string left_button_value = ViewBag.left_button_value;
 
     GlobalFunctions glb = new GlobalFunctions();

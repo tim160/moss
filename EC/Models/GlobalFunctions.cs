@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using EC.Models;
 using System.Text.RegularExpressions;
-using EC.App_LocalResources;
+
 using EC.Common.Interfaces;
 using EC.Core.Common;
 using System.Web.Script.Serialization;
@@ -1542,7 +1542,7 @@ public class GlobalFunctions
         if (sec_type_ids.Contains(0))
         {
             List<int> report_ids_by_rel_id = db.report_secondary_type.Where(item => (_report_ids.Contains(item.id) && item.secondary_type_id == 0)).Select(item => item.report_id).ToList();
-            return_array.Add(new Tuple<string, string>(GlobalRes.Other, string.Join(",", report_ids_by_rel_id.ToArray())));
+            return_array.Add(new Tuple<string, string>(LocalizationGetter.GetString("Other"), string.Join(",", report_ids_by_rel_id.ToArray())));
         }
         return return_array;
     }
@@ -1571,7 +1571,7 @@ public class GlobalFunctions
         {
             List<int> report_ids_by_rel_id = db.report_relationship.Where(item => (_report_ids.Contains(item.report_id) && (item.company_relationship_id == 0 || !item.company_relationship_id.HasValue))).Select(item => item.report_id).ToList();
             if (report_ids_by_rel_id.Count > 0)
-                return_array.Add(new Tuple<string, string>(GlobalRes.Other, string.Join(",", report_ids_by_rel_id.ToArray())));
+                return_array.Add(new Tuple<string, string>(LocalizationGetter.GetString("Other"), string.Join(",", report_ids_by_rel_id.ToArray())));
         }
 
         return return_array;
@@ -1600,7 +1600,7 @@ public class GlobalFunctions
         if (departments_ids.Contains(0))
         {
             List<int> report_ids_by_dept_id = db.report_department.Where(item => (_report_ids.Contains(item.report_id) && item.department_id == 0)).Select(item => item.report_id).ToList();
-            return_array.Add(new Tuple<string, string>(GlobalRes.Other, string.Join(",", report_ids_by_dept_id.ToArray())));
+            return_array.Add(new Tuple<string, string>(LocalizationGetter.GetString("Other"), string.Join(",", report_ids_by_dept_id.ToArray())));
         }
         return return_array;
     }
@@ -1632,7 +1632,7 @@ public class GlobalFunctions
         if (db.report.Any(item => (_user_report_ids.Contains(item.id) && (item.location_id.Value == 0 || !item.location_id.HasValue))))
         {
             List<int> temp_location_ids = db.report.Where(item => (_user_report_ids.Contains(item.id) && (item.location_id.Value == 0 || !item.location_id.HasValue))).Select(item => item.id).ToList();
-            return_array.Add(new Tuple<string, string>(GlobalRes.Other, string.Join(",", temp_location_ids.ToArray())));
+            return_array.Add(new Tuple<string, string>(LocalizationGetter.GetString("Other"), string.Join(",", temp_location_ids.ToArray())));
         }
 
         return return_array;
@@ -1806,7 +1806,7 @@ public class GlobalFunctions
                 phone
                 );
             SaveEmailBeforeSend(user_from, user_to.id, user_to.company_id, email.Trim(), ConfigurationManager.AppSettings["emailFrom"], "",
-                EC.App_LocalResources.GlobalRes.CampusSecurityAlert, eb.Body, false, 51);
+               LocalizationGetter.GetString("CampusSecurityAlert", true), eb.Body, false, 51);
         }
     }
 
@@ -1840,7 +1840,7 @@ public class GlobalFunctions
                 phone
                 );
             this.SaveEmailBeforeSend(0, user_pm.id, user_pm.company_id, email, ConfigurationManager.AppSettings["emailFrom"], "",
-               GlobalRes.CampusSecurityAlert, eb.Body, false, 0);
+             LocalizationGetter.GetString("CampusSecurityAlert", true), eb.Body, false, 0);
 
         }
     }

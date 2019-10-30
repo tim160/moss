@@ -1,18 +1,22 @@
 ﻿@using EC.Models;
 @using EC.Models.ECModel;
 @using EC.Models.Database;
-@using EC.App_LocalResources;
-
+@using EC.Localization;
 @{
-    ViewBag.Title = "Tasks";
-    Layout = "~/Views/Shared/IndexPages/LayoutNewCases.cshtml";
-    List<TaskExtended> tasks = (List<TaskExtended>)ViewBag.tasks;
+  bool? is_cc = ViewBag.is_cc;
+  if (!is_cc.HasValue)
+  {
+    is_cc = false;
+  }
+  ViewBag.Title = "Tasks";
+  Layout = "~/Views/Shared/IndexPages/LayoutNewCases.cshtml";
+  List<TaskExtended> tasks = (List<TaskExtended>)ViewBag.tasks;
 
-    var report_id = (Int32)ViewBag.report_id;
-    var user_id = (Int32)ViewBag.user_id;
-    ReportModel rm = new ReportModel(report_id);
-    UserModel um = new UserModel(user_id);
-    GlobalFunctions glb = new GlobalFunctions();
+  var report_id = (Int32)ViewBag.report_id;
+  var user_id = (Int32)ViewBag.user_id;
+  ReportModel rm = new ReportModel(report_id);
+  UserModel um = new UserModel(user_id);
+  GlobalFunctions glb = new GlobalFunctions();
 }
 
 <link href="~/Content/jquery-ui.css" rel="stylesheet">
@@ -199,7 +203,7 @@
                             </span>
                             <span class="col-2">
                                 <span class="taskActivityCol pull-left">
-                                    <span class="taskActivityCol__date">@(task.TaskStatusString.Length > 0 ? task.TaskStatusString : @GlobalRes.Active)</span>
+                                    <span class="taskActivityCol__date">@(task.TaskStatusString.Length > 0 ? task.TaskStatusString : @LocalizationGetter.GetString("Active", is_cc))</span>
                                 </span>
                             </span>
                             <span class="col-2">
@@ -213,7 +217,7 @@
                                     <!-- <span class="taskActivityCol__attached">
                                         <img src="Icons/fileCases.png" alt="" />
                                     </span> -->
-                                    <span class="taskActivityCol__date">@(task.TaskDueDate.HasValue ? task.TaskDueDateString : @GlobalRes.Willneverexpire)</span>
+                                    <span class="taskActivityCol__date">@(task.TaskDueDate.HasValue ? task.TaskDueDateString : @LocalizationGetter.GetString("Willneverexpire", is_cc))</span>
                                 </span>
                             </span>
                         </a>
@@ -371,7 +375,7 @@
                         });
                     }
                     else {
-                        alert('@GlobalRes.Taskshouldbeassigned');
+                        alert('@LocalizationGetter.GetString("Taskshouldbeassigned", is_cc)');
                     }
                 }
                 else {

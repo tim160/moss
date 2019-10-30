@@ -1,5 +1,4 @@
-﻿@using EC.App_LocalResources;
-@using EC.Models.ViewModel;
+﻿@using EC.Models.ViewModel;
 @using EC.Models;
 @using EC.Localization;
 @{
@@ -12,7 +11,7 @@
     String class_ext = ViewBag.cc_extension;
 
     Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
-    ViewBag.Title = GlobalRes.ActiveCasesUp;
+    ViewBag.Title = LocalizationGetter.GetString("ActiveCasesUp", is_cc);
 
 
     <script src="~/Scripts/View/menuWork.js"></script>
@@ -78,22 +77,22 @@
 <div ng-controller="CasesController" ng-cloak>
     <div id="casesHeared" class="pageCases">
         <div id="menu">
-            <h2 class="mainTitle">@GlobalRes.Menu:</h2>
+            <h2 class="mainTitle">@LocalizationGetter.GetString("Menu", is_cc):</h2>
             <div class="casesHeadMenu">
                 <a href="@Url.Content("~/Cases/Index?mode=active")" class="caseesTab" ng-class="{'active': mode == 1}" qng-click="refresh(1)">
-                    @GlobalRes.Activecases
+                    @LocalizationGetter.GetString("Activecases", is_cc)
                     <span ng-show="counts.Active > 0">{{counts.Active}}</span>
                 </a>
                 <a href="@Url.Content("~/Cases/Index?mode=completed")" class="caseesTab" ng-class="{'active': mode == 2}" qng-click="refresh(2)">
-                    @GlobalRes.Completedcases
+                    @LocalizationGetter.GetString("Completedcases", is_cc)
                     <span ng-show="counts.Completed > 0">{{counts.Completed}}</span>
                 </a>
                 <a href="@Url.Content("~/Cases/Index?mode=closed")" class="caseesTab" ng-class="{'active': mode == 5}" qng-click="refresh(5)">
-                    @GlobalRes.ClosedCases
+                    @LocalizationGetter.GetString("ClosedCases", is_cc)
                     <span ng-show="counts.Closed > 0">{{counts.Closed}}</span>
                 </a>
                 <a href="@Url.Content("~/Cases/Index?mode=spam")" class="caseesTab" ng-class="{'active': mode == 3}" qng-click="refresh(3)">
-                    @GlobalRes.Spam
+                    @LocalizationGetter.GetString("Spam", is_cc)
                     <span ng-show="counts.Spam > 0">{{counts.Spam}}</span>
                 </a>
                 <a href="@Url.Content("~/Cases/Index?mode=new")" class="caseesTab" ng-class="{'active': mode == 4}" qng-click="refresh(4)">

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using EC.Models.Database;
-using EC.App_LocalResources;
+
 using EC.Models.App;
 using EC.Core.Common;
 using EC.Common.Interfaces;
@@ -103,7 +103,7 @@ namespace EC.Models.ViewModel
             this.case_dt = rm.IncidentDateString();
             this.reported_dt = rm.ReportedDateString();
             this.case_number = rm._report.display_name;
-            this.location = rm.LocationString();
+            this.location = rm.LocationString(false);
             this.case_secondary_types = rm.SecondaryTypeString();
             this.case_secondary_types_all = rm.SecondaryTypeStringAll();            
             this.case_color_code = rm.ColorCode();

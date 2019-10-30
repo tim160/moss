@@ -10,7 +10,7 @@ using EC.Models;
 using EC.Models.Database;
 using EC.Constants;
 using EC.Core.Common;
-using EC.App_LocalResources;
+
 using System.IO;
 using System.Net.Http.Headers;
 

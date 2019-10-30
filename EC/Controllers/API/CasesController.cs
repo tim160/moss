@@ -11,7 +11,7 @@ using EC.Models;
 using EC.Models.Database;
 using EC.Constants;
 using EC.Core.Common;
-using EC.App_LocalResources;
+
 using EC.Models.ViewModel;
 using EC.Common.Interfaces;
 using EC.Localization;
@@ -89,7 +89,7 @@ namespace EC.Controllers.API
 
             report_ids = report_ids.OrderByDescending(t => t).ToList();
 
-            var reports = um.ReportPreviews(report_ids, investigation_status, delay_allowed).ToList();
+            var reports = um.ReportPreviews(report_ids, investigation_status, delay_allowed, is_cc).ToList();
 
             string title = LocalizationGetter.GetString("ActiveCasesUp");
             title = filter.ReportFlag == 2 ? LocalizationGetter.GetString("CompletedcasesUp") : title;

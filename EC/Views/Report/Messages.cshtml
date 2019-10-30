@@ -1,10 +1,14 @@
-﻿@using EC.App_LocalResources
-@using EC.Controllers.Utils
+﻿@using EC.Controllers.Utils
 @using EC.Models
-
+@using EC.Localization;
 @{
-    ViewBag.Title = "Report";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+  bool? is_cc = ViewBag.is_cc;
+  if (!is_cc.HasValue)
+  {
+    is_cc = false;
+  }
+  ViewBag.Title = "Report";
+  Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
@@ -22,24 +26,24 @@
             <!--5 window begins-->
 
             <div class="header">
-                <p>@GlobalRes.CaseSubmitted</p>
+                <p>@LocalizationGetter.GetString("CaseSubmitted", is_cc)</p>
             </div>
-            <h2>@GlobalRes.Case @ViewBag.CaseNumber @GlobalRes.wasSubmittedSuccessfully</h2>
-            <p>@GlobalRes.caseWorking</p>
+            <h2>@LocalizationGetter.GetString("Case", is_cc) @ViewBag.CaseNumber @LocalizationGetter.GetString("wasSubmittedSuccessfully", is_cc)</h2>
+            <p>@LocalizationGetter.GetString("caseWorking", is_cc)</p>
 
-            <p>@GlobalRes.detailsCase</p>
-            <!--<p class="checkCaseNumber">@GlobalRes.CheckCaseNumber</p>-->
+            <p>@LocalizationGetter.GetString("detailsCase", is_cc)</p>
+            <!--<p class="checkCaseNumber">@LocalizationGetter.GetString("CheckCaseNumber", is_cc)</p>-->
             <table class="caseProgress">
                 <tr>
-                    <td>@GlobalRes.CaseNumber</td>
+                    <td>@LocalizationGetter.GetString("CaseNumber", is_cc)</td>
                     <td><input type="text" disabled value="@ViewBag.CaseNumber"></td>
                 </tr>
                 <tr>
-                    <td>@GlobalRes.Login</td>
+                    <td>@LocalizationGetter.GetString("Login", is_cc)</td>
                     <td><input type="text" name="login" class="validate" data-validate="login" disabled value="@ViewBag.CaseNumber"></td>
                 </tr>
                 <tr>
-                    <td>@GlobalRes.Password</td>
+                    <td>@LocalizationGetter.GetString("Password", is_cc)</td>
                     <td><input type="text" name="password" class="validate" data-validate="password" disabled value="@ViewBag.CaseNumber"></td>
                     <td>
                         <div>Change</div>
@@ -48,7 +52,7 @@
             </table>
             @if (ViewBag.Email != null && ViewBag.Email.Length != 0)
             {
-                <p>@GlobalRes.CaseUpdates</p>
+                <p>@LocalizationGetter.GetString("CaseUpdates", is_cc)</p>
                 <p>@ViewBag.Email</p>
             }
 
@@ -60,32 +64,32 @@
         <div id="map">
             <!--list 1 2 3 4-->
 
-            <p>@GlobalRes.NewIncidentReport</p>
+            <p>@LocalizationGetter.GetString("NewIncidentReport", is_cc)</p>
 
             <div class="tabOption gInfo">
                 <div class="circle passiveCircle">
                     <span class="include">1</span>
                 </div>
 
-                <p>@GlobalRes.GeneralInformation</p>
+                <p>@LocalizationGetter.GetString("GeneralInformation", is_cc)</p>
             </div>
             <div class="tabOption pInvolved">
                 <div class="circle passiveCircle">
                     <span class="include">2</span>
                 </div>
-                <p>@GlobalRes.PartiesInvolved</p>
+                <p>@LocalizationGetter.GetString("PartiesInvolved", is_cc)</p>
             </div>
             <div class="tabOption cInformation">
                 <div class="circle passiveCircle">
                     <span class="include">3</span>
                 </div>
-                <p>@GlobalRes.CaseInformation</p>
+                <p>@LocalizationGetter.GetString("CaseInformation", is_cc)</p>
             </div>
             <div class="tabOption cSummary">
                 <div class="circle passiveCircle">
                     <span class="include">4</span>
                 </div>
-                <p>@GlobalRes.CaseSummary</p>
+                <p>@LocalizationGetter.GetString("CaseSummary", is_cc)</p>
             </div>
             <div class="tabOption cLogin active">
                 <div class="circle passiveCircle">

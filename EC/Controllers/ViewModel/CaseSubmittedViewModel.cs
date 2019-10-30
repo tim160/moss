@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using EC.Models.Database;
+using EC.Localization;
 
 namespace EC.Controllers.ViewModel
 {
@@ -60,15 +61,15 @@ namespace EC.Controllers.ViewModel
                     dateIncidentHappened = model.dateIncidentHappened.ToShortDateString();
                     if (model.isOnGoing == 1)
                     {
-                        isOnGoing = EC.App_LocalResources.GlobalRes.No;
+                        isOnGoing = LocalizationGetter.GetString("No");
                     }
                     else if (model.isOnGoing == 2)
                     {
-                        isOnGoing = EC.App_LocalResources.GlobalRes.Yes;// +" Description : " + _report.report_frequency_text;
+                        isOnGoing = LocalizationGetter.GetString("Yes");// +" Description : " + _report.report_frequency_text;
                     }
                     else if (model.isOnGoing == 3)
                     {
-                        isOnGoing = EC.App_LocalResources.GlobalRes.NotSureUp;
+                        isOnGoing = LocalizationGetter.GetString("NotSureUp");
                     }
                     describeHappened = model.describeHappened;
                     this.Login = model.userName;

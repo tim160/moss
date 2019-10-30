@@ -8,6 +8,7 @@ using EC.Constants;
 using EC.Models;
 using LavaBlast.Util.CreditCards;
 using System.Configuration;
+using EC.Localization;
 using CommonUtil = EC.Common.Util;
 
 namespace EC.Controllers
@@ -121,7 +122,7 @@ namespace EC.Controllers
             {
                 if ((string.IsNullOrEmpty(cardnumber)) || (string.IsNullOrEmpty(cardname)) || (string.IsNullOrEmpty(csv)) || (string.IsNullOrEmpty(selectedMonth)) || (string.IsNullOrEmpty(selectedYear)))
                 {
-                    return App_LocalResources.GlobalRes.EmptyData;
+                    return LocalizationGetter.GetString("EmptyData", is_cc);
                 }
             }
             #region Credit Card
@@ -146,7 +147,7 @@ namespace EC.Controllers
                 int.TryParse(selectedYear, out _year);
 
                 if (_month == 0 || _year == 0)
-                    return App_LocalResources.GlobalRes.EmptyData;
+                    return LocalizationGetter.GetString("EmptyData", is_cc);
 
                 var random = new Random();
                 payment_auth_code = glb.GenerateInvoiceNumber(); // "INV_" + random.Next(10001, 99999).ToString(); 
@@ -212,7 +213,7 @@ namespace EC.Controllers
                 }
             }
 
-            return App_LocalResources.GlobalRes._Completed.ToLower();
+            return LocalizationGetter.GetString("_Completed", is_cc).ToLower();
 
             //  return user_id.ToString();
 

@@ -1,8 +1,13 @@
-﻿@using EC.App_LocalResources;
+﻿@using EC.Localization;
 
 @{
-    ViewBag.Title = "Restore";
-    Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
+  bool? is_cc = ViewBag.is_cc;
+  if (!is_cc.HasValue)
+  {
+    is_cc = false;
+  }
+  ViewBag.Title = "Restore";
+  Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
 }
 
 <div class="general-container login">
@@ -43,7 +48,7 @@
             <div class="loginSection__titleBg">
                 <div class="container loginTopSection__container">
                     <div class="loginSection__title">
-                        @GlobalRes.RestoreYourPassword.ToUpper()
+                        @LocalizationGetter.GetString("RestoreYourPassword", is_cc).ToUpper()
                     </div><!-- /.loginSection__title -->
                 </div><!-- /.container -->
             </div><!-- /.loginSection__titleBg -->
@@ -53,11 +58,11 @@
                     <div class="container loginSection__container">
                         <div class="loginForm">
                             <label class="loginForm__input">
-                                @GlobalRes.Email
+                                @LocalizationGetter.GetString("Email", is_cc)
                                 <input type="text" class="loginText" name="email" value="@ViewBag.email" />
                             </label>
                             <label class="loginForm__input">
-                                @GlobalRes.Yourpasswordtoken
+                                @LocalizationGetter.GetString("Yourpasswordtoken", is_cc)
                                 <input type="text" class="loginText" name="token" value="@ViewBag.token" />
                             </label>
                         </div><!-- /.loginForm -->
@@ -108,11 +113,11 @@
             var token = $('input[name=token]');
             if (email.val() == "") {
                 event.preventDefault();
-                alert('@GlobalRes.EnterYourEmail');
+                alert('@LocalizationGetter.GetString("EnterYourEmail", is_cc)');
             } else {
                 if (token.val() == "") {
                     event.preventDefault();
-                    alert('@GlobalRes.EnterYourToken');
+                    alert('@LocalizationGetter.GetString("EnterYourToken", is_cc)');
                 }
             }
         });

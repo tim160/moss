@@ -1,4 +1,4 @@
-﻿@using EC.App_LocalResources;
+﻿@using EC.Localization;
 @using EC.Models;
 @using EC.Models.Database;
 @using EC.Constants;
@@ -11,7 +11,7 @@
     string normal_button_value = ViewBag.normal_button_value;
     int investigationstatus = (int)ViewBag.investigationstatus;
 
-    string left_button_promotion = ViewBag.left_button_promotion; // @GlobalRes.Returnnvestigation.ToUpper()
+    string left_button_promotion = ViewBag.left_button_promotion; // @LocalizationGetter.GetString("Returnnvestigation", is_cc).ToUpper()
     string left_button_value = ViewBag.left_button_value;
 
     GlobalFunctions glb = new GlobalFunctions();
@@ -28,11 +28,11 @@
         is_cc = false;
     }
 
-    string same_mediator_warning = GlobalRes.AddFurtherNotes;
+    string same_mediator_warning = LocalizationGetter.GetString("AddFurtherNotes", is_cc);
     var user_id = ViewBag.user_id;
     if (rm != null && user_id == rm.Last_investigation_status_user_id())
     {
-     ///   same_mediator_warning = GlobalRes.RecommendSecond1 + " " + GlobalRes.RecommendSecond2;
+     ///   same_mediator_warning = LocalizationGetter.GetString("RecommendSecond1", is_cc) + " " + LocalizationGetter.GetString("RecommendSecond2", is_cc);
     }
 }
 
@@ -63,20 +63,20 @@
             $("#approveDialog").toggle();
 
             $("#approveDialog .case-modal__title").text('RETURN FOR INVESTIGATION')
-            $("#txtEscalate").attr('placeholder', "@Html.Raw(GlobalRes.AddReasonWhy)");
-            $("#escalate_btn").text("@Html.Raw(GlobalRes.Returnnvestigation)");
+            $("#txtEscalate").attr('placeholder', "@Html.Raw(LocalizationGetter.GetString("AddReasonWhy", is_cc))");
+            $("#escalate_btn").text("@Html.Raw(LocalizationGetter.GetString("Returnnvestigation", is_cc))");
             $("#escalate_btn").val(3);
-            $("#_overlay_title").text("@Html.Raw(GlobalRes.Returnnvestigation)");
-            $("#textbox_title").text("@Html.Raw(GlobalRes.AddReasonWhy)");
+            $("#_overlay_title").text("@Html.Raw(LocalizationGetter.GetString("Returnnvestigation", is_cc))");
+            $("#textbox_title").text("@Html.Raw(LocalizationGetter.GetString("AddReasonWhy", is_cc))");
         });
         $("#approve_close").on('click', function (el) {
             $("#approveDialog").toggle();
 
             $("#approveDialog .case-modal__title").text('APPROVE')
             $("#txtEscalate").attr('placeholder', "@Html.Raw(same_mediator_warning)");
-            $("#escalate_btn").text("@Html.Raw(GlobalRes.CloseCaseUp)");
+            $("#escalate_btn").text("@Html.Raw(LocalizationGetter.GetString("CloseCaseUp", is_cc))");
             $("#escalate_btn").val(9);
-            $("#_overlay_title").text("@Html.Raw(GlobalRes.CloseCaseUp)");
+            $("#_overlay_title").text("@Html.Raw(LocalizationGetter.GetString("CloseCaseUp", is_cc))");
             $("#textbox_title").text("@Html.Raw(same_mediator_warning)");
         });
     });

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using EC.Constants;
-
+using EC.Localization;
 
 namespace EC.Models.ECModel
 {
@@ -349,7 +349,7 @@ namespace EC.Models.ECModel
                 company_departments.Add(_new_department);
             }
             /*adding other deparment*/
-            ECModel.Department otherDeparment = new Department { id = 0, department_nm = EC.App_LocalResources.GlobalRes.Other };
+            ECModel.Department otherDeparment = new Department { id = 0, department_nm = LocalizationGetter.GetString("_Completed") };
             company_departments.Add(otherDeparment);
             return company_departments;
 

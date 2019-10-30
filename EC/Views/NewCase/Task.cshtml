@@ -1,48 +1,52 @@
 ﻿@using EC.Models;
 @using EC.Models.ECModel;
 @using EC.Models.Database;
-@using EC.App_LocalResources;
 @using EC.Constants;
 @using EC.Common.Interfaces;
 @using EC.Core.Common;
+@using EC.Localization;
 @{
+  bool? is_cc = ViewBag.is_cc;
+  if (!is_cc.HasValue)
+  {
+    is_cc = false;
+  }
+  int report_id = (Int32)ViewBag.report_id;
+  int user_id = (Int32)ViewBag.user_id;
+  int task_id = (Int32)ViewBag.task_id;
+  int task_status = (Int32)ViewBag.taskStatus;
+  List<attachment> attachmentFiles = (List<attachment>)ViewBag.attachmentFiles;
+  List<TaskExtended> tasks = (List<TaskExtended>)ViewBag.tasks;
+  IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
 
-    int report_id = (Int32)ViewBag.report_id;
-    int user_id = (Int32)ViewBag.user_id;
-    int task_id = (Int32)ViewBag.task_id;
-    int task_status = (Int32)ViewBag.taskStatus;
-    List<attachment> attachmentFiles = (List<attachment>)ViewBag.attachmentFiles;
-    List<TaskExtended> tasks = (List<TaskExtended>)ViewBag.tasks;
-    IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
 
+  //Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+  Layout = "~/Views/Shared/IndexPages/LayoutNewCases.cshtml";
 
-    //Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
-    Layout = "~/Views/Shared/IndexPages/LayoutNewCases.cshtml";
+  ReportModel rm = new ReportModel(report_id);
+  UserModel um = new UserModel(user_id);
 
-    ReportModel rm = new ReportModel(report_id);
-    UserModel um = new UserModel(user_id);
+  List<report_log> actions_log = rm.ReportActions(user_id, rm._report.id);
 
-    List<report_log> actions_log = rm.ReportActions(user_id, rm._report.id);
+  user _assignee = new user();
+  UserModel temp_user = new UserModel();
+  string _temp = "";
+  List<user> _mediators_whoHasAccess_toReport = rm.MediatorsWhoHasAccessToReport();
 
-    user _assignee = new user();
-    UserModel temp_user = new UserModel();
-    string _temp = "";
-    List<user> _mediators_whoHasAccess_toReport = rm.MediatorsWhoHasAccessToReport();
+  TaskExtended _tsk = new TaskExtended(task_id, user_id);
 
-    TaskExtended _tsk = new TaskExtended(task_id, user_id);
+  string _month_name = "";
+  string _sender_name = "";
+  string _sender_title = "";
+  string _second_name = "";
+  string _string_to_add = "";
+  user _userActivity;
+  user _second_user;
+  action _action;
 
-    string _month_name = "";
-    string _sender_name = "";
-    string _sender_title = "";
-    string _second_name = "";
-    string _string_to_add = "";
-    user _userActivity;
-    user _second_user;
-    action _action;
-
-    string task_name = " - #" + rm._report.display_name + " - " + _tsk._task.title;
-    ViewBag.Title = GlobalRes.Task + task_name;
-    //    string task_comment_color = "#ffffff";
+  string task_name = " - #" + rm._report.display_name + " - " + _tsk._task.title;
+  ViewBag.Title = LocalizationGetter.GetString("Task", is_cc) + task_name;
+  //    string task_comment_color = "#ffffff";
 
 }
 @{
@@ -78,11 +82,11 @@
 								    <div class="breadcrumbs-fullInfo__currentPegeContent-timeText">
                                         @if (_tsk.TaskDueDate.HasValue)
                                         {
-                                            <span class="textDate">@GlobalRes.Due: @_tsk.TaskDueDateString</span>
+                                            <span class="textDate">@LocalizationGetter.GetString("Due", is_cc): @_tsk.TaskDueDateString</span>
                                         }
                                         else
                                         {
-                                            <span class="textDate">@GlobalRes.Willneverexpire</span>
+                                            <span class="textDate">@LocalizationGetter.GetString("Willneverexpire", is_cc)</span>
                                         }
 								    </div><!-- /.breadcrumbs-fullInfo__currentPegeContent-timeText -->
 							    </div><!-- /.breadcrumbs-fullInfo__currentPegeContent -->
@@ -94,7 +98,7 @@
 					    </div><!-- /.breadcrumbs-fullInfo clearfix -->
 					    <div class="taskUserMenu ">
 						    <a href="#" class="taskUserMenu-topBlock ">
-							    <div class="taskUserMenu-topBlock__title">@GlobalRes.AssignedToUpper:</div><!-- /.taskUserMenu-topBlock__title -->
+							    <div class="taskUserMenu-topBlock__title">@LocalizationGetter.GetString("AssignedToUpper", is_cc):</div><!-- /.taskUserMenu-topBlock__title -->
 							    <div class="taskUserMenu-topBlock__userBlock clearfix">
 								    <div class="taskUserMenu-topBlock__userBlock-logo col-3">
 									    <img src="@Url.Content(_tsk.TaskAssigneePhoto)" alt="" />

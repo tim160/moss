@@ -525,7 +525,7 @@ namespace EC.Controllers
       var userModel = new UserModel();
       user reporter_user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
 
-      userModel.ReassignTask(id, mediator_id, reporter_user.id);
+      userModel.ReassignTask(id, mediator_id, reporter_user.id, is_cc);
 
       return RedirectToAction("Task", new { id = id });
     }
@@ -599,7 +599,7 @@ namespace EC.Controllers
       user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
       if (user == null || user.id == 0)
         return false;
-      return userModel.CreateNewTask(Request.Form, Request.Files);
+      return userModel.CreateNewTask(Request.Form, Request.Files, is_cc);
     }
 
     public int CloseCaseValidate()
@@ -792,23 +792,18 @@ namespace EC.Controllers
         case 3:
           if (old_status == 9)
             glb.UpdateReportLog(user.id, 29, report_id, "", null, description);
-          glb.UpdateReportLog(user.id, 21, report_id, App_LocalResources.GlobalRes._Started, null, description);
+          glb.UpdateReportLog(user.id, 21, report_id, LocalizationGetter.GetString("_Started", is_cc), null, description);
  
           break;
         case 6:
-          ///////             glb.UpdateReportLog(user.id, 21, report_id, App_LocalResources.GlobalRes._Completed, null, description);
-          glb.UpdateReportLog(user.id, 27, report_id, App_LocalResources.GlobalRes._Started, null, "");
+          glb.UpdateReportLog(user.id, 27, report_id, LocalizationGetter.GetString("_Started", is_cc), null, "");
           break;
 
         case 9:
 
           if (old_status == 6)
-            glb.UpdateReportLog(user.id, 27, report_id, App_LocalResources.GlobalRes._Completed, null, description);
-          ////               if (rm._investigation_status == 6)
-          ////                    glb.UpdateReportLog(user.id, 27, report_id, App_LocalResources.GlobalRes._Completed, null, description);
-          /////                 else if (rm._investigation_status == 4)
-          /////                       glb.UpdateReportLog(user.id, 22, report_id, App_LocalResources.GlobalRes._Completed, null, description);
-          glb.UpdateReportLog(user.id, 25, report_id, "", null, description);
+            glb.UpdateReportLog(user.id, 27, report_id, LocalizationGetter.GetString("_Completed", is_cc), null, description);
+            glb.UpdateReportLog(user.id, 25, report_id, "", null, description);
           break;
       }
       return 1;

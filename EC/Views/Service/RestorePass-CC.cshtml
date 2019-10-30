@@ -1,8 +1,13 @@
-﻿@using EC.App_LocalResources;
+﻿@using EC.Localization;
 
 @{
-    ViewBag.Title = "RestorePass";
-    Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
+  bool? is_cc = ViewBag.is_cc;
+  if (!is_cc.HasValue)
+  {
+    is_cc = false;
+  }
+  ViewBag.Title = "RestorePass";
+  Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
 }
 
 <div class="general-container login">
@@ -43,7 +48,7 @@
             <div class="loginSection__titleBg">
                 <div class="container loginTopSection__container">
                     <div class="loginSection__title">
-                        @GlobalRes.EnterNewPassword.ToUpper()
+                        @LocalizationGetter.GetString("EnterNewPassword", is_cc).ToUpper()
                     </div><!-- /.loginSection__title -->
                 </div><!-- /.container -->
             </div><!-- /.loginSection__titleBg -->
@@ -56,11 +61,11 @@
                     <div class="container loginSection__container">
                         <div class="loginForm">
                             <label class="loginForm__input">
-                                @GlobalRes.EnterNewPassword
+                                @LocalizationGetter.GetString("EnterNewPassword", is_cc)
                                 <input type="password" class="loginText" name="password" />
                             </label>
                             <label class="loginForm__input">
-                                @GlobalRes.ConfirmNewPassword
+                                @LocalizationGetter.GetString("ConfirmNewPassword", is_cc)
                                 <input type="password" class="loginText" name="confirmPassword" />
                             </label>
                         </div><!-- /.loginForm -->
@@ -111,21 +116,21 @@
             var confirmPassword = $('input[name=confirmPassword]');
             if (password.val() == "") {
                 event.preventDefault();
-                alert('@GlobalRes.requiredFileds');
+                alert('@LocalizationGetter.GetString("requiredFileds", is_cc)');
             } else {
                 if (confirmPassword.val() == "") {
                     event.preventDefault();
-                    alert('@GlobalRes.requiredFileds');
+                    alert('@LocalizationGetter.GetString("requiredFileds", is_cc)');
                 } else {
                     if (password.val() != confirmPassword.val()) {
                         event.preventDefault();
-                        alert('@GlobalRes.notMatchConfPassandPass');
+                        alert('@LocalizationGetter.GetString("notMatchConfPassandPass", is_cc)');
                     }
                     var email = $("#email");
                     var token = $("#token");
                     if (email.val() == "" && token.val() == "") {
                         event.preventDefault();
-                        alert('@GlobalRes.reEnterEmailToken');
+                        alert('@LocalizationGetter.GetString("reEnterEmailToken", is_cc)');
                         window.location.replace("Service/Restore");
                     }
                 }

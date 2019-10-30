@@ -115,50 +115,50 @@ namespace EC.Controllers
 
             if (ModelState.IsValid)
             {
-                /*         db.message.Add(newMessage);
-                         try
+        /*         db.message.Add(newMessage);
+                 try
+                 {
+                     db.SaveChanges();
+                     glb.UpdateReportLog(newMessage.sender_id, 7, newMessage.report_id, "", null, "");
+
+                     // send emails to Case Admin    
+
+                     #region Email to Case Admin
+                     ReportModel rm = new ReportModel(newMessage.report_id);
+
+                     foreach (user _user in rm.MediatorsWhoHasAccessToReport())
+                     {
+                         if ((_user.email.Trim().Length > 0) && glb.IsValidEmail(_user.email.Trim()))
                          {
-                             db.SaveChanges();
-                             glb.UpdateReportLog(newMessage.sender_id, 7, newMessage.report_id, "", null, "");
+                             List<string> to = new List<string>();
+                             List<string> cc = new List<string>();
+                             List<string> bcc = new List<string>();
 
-                             // send emails to Case Admin    
+                             to.Add(_user.email.Trim());
+                               ///     bcc.Add("timur160@hotmail.com");
 
-                             #region Email to Case Admin
-                             ReportModel rm = new ReportModel(newMessage.report_id);
-
-                             foreach (user _user in rm.MediatorsWhoHasAccessToReport())
-                             {
-                                 if ((_user.email.Trim().Length > 0) && glb.IsValidEmail(_user.email.Trim()))
-                                 {
-                                     List<string> to = new List<string>();
-                                     List<string> cc = new List<string>();
-                                     List<string> bcc = new List<string>();
-
-                                     to.Add(_user.email.Trim());
-                                       ///     bcc.Add("timur160@hotmail.com");
-
-                                     EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
-                                     EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
-                                     eb.NewMessage(_user.first_nm, _user.last_nm, rm._report.display_name);
-                                     string body = eb.Body;
-                            ///////         em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_NewMessage, body, true);
-                                 }
-                             }
-
-
-                             #endregion
-
+                             EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
+                             EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+                             eb.NewMessage(_user.first_nm, _user.last_nm, rm._report.display_name);
+                             string body = eb.Body;
+                           ///////         em.Send(to, cc, LocalizationGetter.GetString("Email_Title_NewMessage", is_cc) , body, true);
                          }
-                         catch (Exception ex)
-                         {
-                             return View(newMessage);
-                         }
-              ////////           return RedirectToAction("Messages/" + newMessage.sender_id.ToString());
-                         // return RedirectToAction("Messages/208");
-         */
-            }
+                     }
 
-            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+
+                     #endregion
+
+                 }
+                 catch (Exception ex)
+                 {
+                     return View(newMessage);
+                 }
+      ////////           return RedirectToAction("Messages/" + newMessage.sender_id.ToString());
+                 // return RedirectToAction("Messages/208");
+ */
+      }
+
+      user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0 || user.role_id == 4 || user.role_id == 5 || user.role_id == 6 || user.role_id == 7)
                 return RedirectToAction("Login", "Service");
 
@@ -234,21 +234,21 @@ namespace EC.Controllers
 
                 foreach (user _user in rm.MediatorsWhoHasAccessToReport())
                 {
-                    if ((_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_user.email.Trim()))
-                    {
-                        List<string> to = new List<string>();
-                        List<string> cc = new List<string>();
-                        List<string> bcc = new List<string>();
+                  if ((_user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_user.email.Trim()))
+                  {
+                    List<string> to = new List<string>();
+                    List<string> cc = new List<string>();
+                    List<string> bcc = new List<string>();
 
-                        to.Add(_user.email.Trim());
-                        ///     bcc.Add("timur160@hotmail.com");
+                    to.Add(_user.email.Trim());
+                    ///     bcc.Add("timur160@hotmail.com");
 
-                        EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
-                        EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
-                        eb.NewMessage(_user.first_nm, _user.last_nm, rm._report.display_name);
-                        string body = eb.Body;
-                        ///////         em.Send(to, cc, App_LocalResources.GlobalRes.Email_Title_NewMessage, body, true);
-                    }
+                    EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
+                    EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+                    eb.NewMessage(_user.first_nm, _user.last_nm, rm._report.display_name);
+                    string body = eb.Body;
+                    ///////         em.Send(to, cc, LocalizationGetter.GetString("Email_Title_NewMessage", is_cc) , body, true);
+                  }
                 }
 
 

@@ -1,6 +1,5 @@
 ﻿@using EC.Models;
 @using EC.Models.Database;
-@using EC.App_LocalResources;
 @using EC.Common.Interfaces;
 @using EC.Localization;
 @using EC.Core.Common;
@@ -43,7 +42,7 @@
     string[] _statuses = EC.Constants.ECGlobalConstants.ReportFlowStatusesList;
 
 
-    string report_name = " - #" + rm._report.display_name + " - " + rm.SecondaryTypeString() + " - " + rm.LocationString();
+    string report_name = " - #" + rm._report.display_name + " - " + rm.SecondaryTypeString() + " - " + rm.LocationString(is_cc.Value);
     ViewBag.Title = LocalizationGetter.GetString("NewReportUp") + report_name;
 }
 <body>
@@ -70,8 +69,8 @@
         }
         else
         {
-            <div style="color: #38494d;">@GlobalRes.no_permission</div>
-            <div style="color: #38494d;">@GlobalRes.use_top_panel</div>
+            <div style="color: #38494d;">@LocalizationGetter.GetString("no_permission", is_cc)</div>
+            <div style="color: #38494d;">@LocalizationGetter.GetString("use_top_panel", is_cc)</div>
         }
     </div><!--headerPos-->
     @if (rm._report != null)
@@ -89,44 +88,44 @@
                                 if (rm.GetThisStepDaysLeft() == 1)
                                 {
                                     <div class="title">
-                                        @GlobalRes.report_review_1day
+                                        @LocalizationGetter.GetString("report_review_1day", is_cc)
                                     </div>
                                 }
                                 else
                                 {
                                     <div class="title">
-                                        @GlobalRes.report_review @rm.GetThisStepDaysLeft().ToString() @GlobalRes.daysleft
+                                        @LocalizationGetter.GetString("report_review", is_cc) @rm.GetThisStepDaysLeft().ToString() @LocalizationGetter.GetString("daysleft", is_cc)
                                     </div>
                                 }
                             }
                             else
                             {
                                 <div class="title">
-                                    @GlobalRes.report_review.
+                                    @LocalizationGetter.GetString("report_review", is_cc).
                                 </div>
                             }
                         </div>
                         <table id="timeReport">
                             <tr>
-                                <td class="openSans">@GlobalRes.Reported:</td>
+                                <td class="openSans">@LocalizationGetter.GetString("Reported", is_cc):</td>
                                 <td class="openSansSemibold">@m_DateTimeHelper.ConvertDateToLongMonthString(rm._report.reported_dt)</td>
                             </tr>
                             <tr>
                                 @if (!is_spam)
                                 {
-                                    <td class="openSans">@GlobalRes.Timeelapsed:</td>
+                                    <td class="openSans">@LocalizationGetter.GetString("Timeelapsed", is_cc):</td>
                                 }
                                 else
                                 {
-                                    <td class="openSans">@GlobalRes.Totaltime:</td>
+                                    <td class="openSans">@LocalizationGetter.GetString("Totaltime", is_cc):</td>
                                 }
                                 @if (rm.GetTotalDays() == 1)
                                 {
-                                    <td class="openSansSemibold">1 @GlobalRes.day</td>
+                                    <td class="openSansSemibold">1 @LocalizationGetter.GetString("day", is_cc)</td>
                                 }
                                 else
                                 {
-                                    <td class="openSansSemibold">@rm.GetTotalDays().ToString() @GlobalRes.days1</td>
+                                    <td class="openSansSemibold">@rm.GetTotalDays().ToString() @LocalizationGetter.GetString("days1", is_cc)</td>
                                 }
                             </tr>
                         </table>
@@ -148,7 +147,7 @@
                             </div><!--blockPhoto-->
                         </div>
                         <div class="blockInfoTextSpam">
-                            <p class="textSpamTitle">@GlobalRes.Casemarkedasspam.</p>
+                            <p class="textSpamTitle">@LocalizationGetter.GetString("Casemarkedasspam", is_cc).</p>
                             <p class="textSpamDate">@_last_user_promotion_model._user.first_nm @_last_user_promotion_model._user.last_nm,@m_DateTimeHelper.ConvertDateToLongMonthString(@rm.LastPromotedDate()):</p>
                             <p class="textSpam">@rm.LastPromotion().description</p>
                         </div>
@@ -159,30 +158,30 @@
                     <!-- accept_case button -->
                     if (is_cc.Value)
                     {
-                        <label class="acceptCaseBtn acceptCaseBtn_cc">@GlobalRes.Acceptcase.ToLower()</label>
+                        <label class="acceptCaseBtn acceptCaseBtn_cc">@LocalizationGetter.GetString("Acceptcase", is_cc).ToLower()</label>
                     }
                     else
                     {
-                        <label class="acceptCaseBtn">@GlobalRes.Acceptcase.ToLower()</label>
+                        <label class="acceptCaseBtn">@LocalizationGetter.GetString("Acceptcase", is_cc).ToLower()</label>
                     }
                     <input id="accept_case" type="submit" name="accept_case" />
                     <!-- mark_spam button -->
-                    <label class="markSpamBtn">@GlobalRes.Markspam.ToLower()</label>
+                    <label class="markSpamBtn">@LocalizationGetter.GetString("Markspam", is_cc).ToLower()</label>
                     <input id="mark_spam" type="submit" name="mark_spam" />
                 }
                 else
                 {
                     <div class="buttonBlock">
-                        @*    <label class="spamBtn">@GlobalRes.Spam.ToUpper()</label>
+                        @*    <label class="spamBtn">@LocalizationGetter.GetString("Spam", is_cc).ToUpper()</label>
                             <input id="spam_case" type="submit" name="spam_case" />*@
                         <!-- mark_spam button -->
                         @if (is_cc.Value)
                         {
-                            <label class="acceptCaseBtn acceptCaseBtn_cc">@GlobalRes.Reopen.ToUpper()</label>
+                            <label class="acceptCaseBtn acceptCaseBtn_cc">@LocalizationGetter.GetString("Reopen", is_cc).ToUpper()</label>
                         }
                         else
                         {
-                            <label class="acceptCaseBtn">@GlobalRes.Reopen.ToUpper()</label>
+                            <label class="acceptCaseBtn">@LocalizationGetter.GetString("Reopen", is_cc).ToUpper()</label>
                         }
                         <input id="reopen_case" type="submit" name="reopen_case" />
                     </div>
@@ -224,11 +223,11 @@
                     <table>
                         <tbody>
                             <tr>
-                                <td class="floatLeft"><p class="header">@GlobalRes.Acceptcase</p></td>
+                                <td class="floatLeft"><p class="header">@LocalizationGetter.GetString("Acceptcase", is_cc)</p></td>
                                 <td class="headerblockButtons"><div class="closeIcon"></div></td>
                             </tr>
                             <tr>
-                                <td class="aroundSelect">@GlobalRes.Scope:</td>
+                                <td class="aroundSelect">@LocalizationGetter.GetString("Scope", is_cc):</td>
                                 <td class="inSelect">
                                     @{
                                         var selectedScopeId = 0;
@@ -245,7 +244,7 @@
                                     }
                                     @Html.DropDownList("ScopeId", new SelectList(allScopes, "id", "scope_en", selectedScopeId), new { @class = "" })
                                 </td>
-                                <td class="aroundSelect">@GlobalRes.Severity:</td>
+                                <td class="aroundSelect">@LocalizationGetter.GetString("Severity", is_cc):</td>
                                 <td class="inSelect">
                                     @Html.DropDownList("SeverityId", new SelectList(allSeverities, "id", "severity_en"), new { @class = "" })
                                 </td>
@@ -326,11 +325,11 @@
                     <div class="newMessageBtn">
                         @if (is_cc.Value)
                         {
-                            <span class="acceptNewCase acceptNewCase_cc">@GlobalRes.Acceptcase.ToLower()</span>
+                            <span class="acceptNewCase acceptNewCase_cc">@LocalizationGetter.GetString("Acceptcase", is_cc).ToLower()</span>
                         }
                         else
                         {
-                            <span class="acceptNewCase">@GlobalRes.Acceptcase.ToLower()</span>
+                            <span class="acceptNewCase">@LocalizationGetter.GetString("Acceptcase", is_cc).ToLower()</span>
                         }
                         <input type="submit" value="new message" style="display: none;">
                     </div>
@@ -349,8 +348,8 @@
                         <div class="closeIcon"></div>
                     </div>
                     <div class="contentBlockCase">
-                        <p class="titleCase">@GlobalRes.Mark_case_spam</p>
-                        <p class="textCace">@GlobalRes.Notification_will_sent_reporter</p>
+                        <p class="titleCase">@LocalizationGetter.GetString("Mark_case_spam", is_cc)</p>
+                        <p class="textCace">@LocalizationGetter.GetString("Notification_will_sent_reporter", is_cc)</p>
                     </div>
                     <form action="" method="post">
                         <div class="addComment addComment2@{@class_ext}">
@@ -366,7 +365,7 @@
                             </div>
                         </div>
                         <div class="newMessageBtn">
-                            <span class="markAsSpam">@GlobalRes.Mark_case_spam</span>
+                            <span class="markAsSpam">@LocalizationGetter.GetString("Mark_case_spam", is_cc)</span>
                             <input type="submit" value="new message" style="display: none;">
                         </div>
                     </form>
@@ -379,7 +378,7 @@
         <div id="generalInfo">
             <div class="firstPosition">
                 <div class="blockGeneralInformation">
-                    <span class="title">@GlobalRes.GeneralInformation</span>
+                    <span class="title">@LocalizationGetter.GetString("GeneralInformation", is_cc)</span>
                     <table class="generalInformation">
                         <tr>
                             <td>Reporting from:</td>
@@ -393,20 +392,20 @@
                       </tr>
                       }
                         <tr>
-                            <td>@GlobalRes.Reporterwouldliketostay:</td>
+                            <td>@LocalizationGetter.GetString("Reporterwouldliketostay", is_cc):</td>
                             <td>@rm._anonymousLevel_mediatorVersionByCaller(user_id)</td>
                         </tr>
-                        @if (rm.Get_reporter_name(user_id).ToLower() != GlobalRes.anonymous_reporter.ToLower())
+                        @if (rm.Get_reporter_name(user_id).ToLower() != LocalizationGetter.GetString("anonymous_reporter", is_cc).ToLower())
                         {
                             <tr>
-                                <td>@GlobalRes.Reportername</td>
+                                <td>@LocalizationGetter.GetString("Reportername", is_cc)</td>
                                 <td>@rm.Get_reporter_name(user_id)</td>
                             </tr>
                         }
                         @if (rm._report.incident_anonymity_id == 3)
                         {
                             <tr>
-                                <td>@GlobalRes.Email</td>
+                                <td>@LocalizationGetter.GetString("Email", is_cc)</td>
                                 <td>@rm._reporter_user.email</td>
                             </tr>
                         }
@@ -418,7 +417,7 @@
                             </tr>
                         }
                         <tr>
-                            <td>@GlobalRes.Reporteris:</td>
+                            <td>@LocalizationGetter.GetString("Reporteris", is_cc):</td>
                             <td>@rm.ReporterCompanyRelationShort()</td>
                         </tr>
                         @if (!String.IsNullOrEmpty(rm._report.not_current_employee))
@@ -429,24 +428,24 @@
                             </tr>
                         }
                         <tr>
-                            <td>@GlobalRes.TheIncidentHappenedIn:</td>
-                            <td>@rm.LocationString()</td>
+                            <td>@LocalizationGetter.GetString("TheIncidentHappenedIn", is_cc):</td>
+                            <td>@rm.LocationString(is_cc.Value)</td>
                         </tr>
                         <tr>
-                            <td>@GlobalRes.AffectedDepartment:</td>
-                            <td>@rm.DepartmentsString()</td>
+                            <td>@LocalizationGetter.GetString("AffectedDepartment", is_cc):</td>
+                            <td>@rm.DepartmentsString(is_cc.Value)</td>
                         </tr>
                     </table>
                 </div>
                 <div class="blockPartiesInformation">
-                    <span class="title">@GlobalRes.PartiesInvolved</span>
+                    <span class="title">@LocalizationGetter.GetString("PartiesInvolved", is_cc)</span>
                     <table class="generalInformation">
                         <tr>
                             <td>
-                                @GlobalRes.report_by_myself
+                                @LocalizationGetter.GetString("report_by_myself", is_cc)
                             </td>
                             <td>
-                                @(rm._report.report_by_myself ? @GlobalRes.Myself : @GlobalRes.SomeoneElse)
+                                @(rm._report.report_by_myself ? @LocalizationGetter.GetString("Myself", is_cc) : @LocalizationGetter.GetString("SomeoneElse", is_cc))
                             </td>
                         </tr>
                     </table>
@@ -480,7 +479,7 @@
                     }
                     <table class="generalInformation">
                         <tr>
-                            <td>@GlobalRes.Doesmanagementknowaboutthisincident</td>
+                            <td>@LocalizationGetter.GetString("Doesmanagementknowaboutthisincident", is_cc)</td>
                             <td>@rm.ManagementKnowString()</td>
                         </tr>
                         @if (!String.IsNullOrEmpty(rm._report.management_know_text))
@@ -510,18 +509,18 @@
                     </table>
                 </div>
                 <div class="blockCaseInformation">
-                    <span class="title">@GlobalRes.CaseInformation</span>
+                    <span class="title">@LocalizationGetter.GetString("CaseInformation", is_cc)</span>
                     <table class="caseInformation">
                         <tr>
                             <td>Incident Type:</td>
                             <td>@rm.SecondaryTypeString()</td>
                         </tr>
                         <tr>
-                            <td>@GlobalRes.IncidentDate:</td>
+                            <td>@LocalizationGetter.GetString("IncidentDate", is_cc):</td>
                             <td>@rm.IncidentDateStringMonthLong()</td>
                         </tr>
                         <tr>
-                            <td>@GlobalRes.isOngoing?</td>
+                            <td>@LocalizationGetter.GetString("isOngoing", is_cc)?</td>
                             <td>@rm.IsOngoing()</td>
                         </tr>
                         @if (!String.IsNullOrEmpty(rm._report.report_frequency_text))
@@ -532,7 +531,7 @@
                             </tr>
                         }
                         <tr>
-                            <td>@GlobalRes.incidentResult?</td>
+                            <td>@LocalizationGetter.GetString("incidentResult", is_cc)?</td>
                             <td>@rm.HasInjuryDamage()</td>
                         </tr>
                         @if (!String.IsNullOrEmpty(rm._report.injury_damage))
@@ -545,7 +544,7 @@
                     </table>
                 </div>
                 <div class="incidentDescription">
-                    <p class="titleIncidentDescription">@GlobalRes.IncidentDescription:</p>
+                    <p class="titleIncidentDescription">@LocalizationGetter.GetString("IncidentDescription", is_cc):</p>
                     <div class="text">
                         @rm._report.description
                     </div>
@@ -560,7 +559,7 @@
                         </div>
                         <div class="infoBlock">
                             <p>@file.file_nm</p>
-                            <a href="@file.path_nm" download>@GlobalRes.Download.ToLower()</a>
+                            <a href="@file.path_nm" download>@LocalizationGetter.GetString("Download", is_cc).ToLower()</a>
                         </div>
                     </div>
                 }

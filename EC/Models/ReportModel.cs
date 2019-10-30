@@ -8,7 +8,7 @@ using EC.Controllers.ViewModel;
 using EC.Models.Database;
 using EC.Models.ECModel;
 using EC.Models.Utils;
-using EC.App_LocalResources;
+
 using System.Data.Entity.Validation;
 using EC.Constants;
 using EC.Models.ViewModels;
@@ -17,6 +17,7 @@ using EC.Common.Interfaces;
 using EC.Core.Common;
 using System.IO;
 using EC.Utils;
+using EC.Localization;
 
 namespace EC.Models
 {
@@ -60,7 +61,7 @@ namespace EC.Models
             if (_reporter_user != null)
             {
                 if (caller_id == _reporter_user.id)
-                    return App_LocalResources.GlobalRes.You;
+                    return LocalizationGetter.GetString("You");
 
                 user _caller = db.user.Where(item => item.id == caller_id).FirstOrDefault();
 
@@ -88,13 +89,13 @@ namespace EC.Models
                         if ((_reporter_user.first_nm + " " + _reporter_user.last_nm).Trim().Length > 0)
                             return name;
                         if (name.Trim().Length == 0)
-                            name = App_LocalResources.GlobalRes.anonymous_reporter;
+                            name = LocalizationGetter.GetString("anonymous_reporter");
                     }
                 }
 
             }
             if (name.Trim().Length == 0)
-                name = App_LocalResources.GlobalRes.anonymous_reporter;
+                name = LocalizationGetter.GetString("anonymous_reporter");
 
             return name.Trim();
 
@@ -110,9 +111,9 @@ namespace EC.Models
         /// </summary>
         /// <param name="report_id"></param>
         /// <returns></returns>
-        public string LocationString()
+        public string LocationString(bool is_cc)
         {
-            string location = App_LocalResources.GlobalRes.unknown_location;
+            string location = LocalizationGetter.GetString("unknown_location", is_cc);
             if ((_report != null) && (ID != 0))
             {
                 if (_report.location_id.HasValue)
@@ -135,7 +136,7 @@ namespace EC.Models
         /// <returns></returns>
         public string CountryString()
         {
-            string country_nm = App_LocalResources.GlobalRes.unknown;
+            string country_nm = LocalizationGetter.GetString("unknown");
 
             if (_report != null)
             {
@@ -152,7 +153,7 @@ namespace EC.Models
         public string IsReportedOutside()
         {
 
-            string report_outside = App_LocalResources.GlobalRes.unknown;
+            string report_outside = LocalizationGetter.GetString("unknown");
 
             if (_report != null)
             {
@@ -174,33 +175,33 @@ namespace EC.Models
         }
         public string IsReportedUrgent()
         {
-            string report_urgent = App_LocalResources.GlobalRes.unknown;
+            string report_urgent = LocalizationGetter.GetString("unknown");
 
             if (_report.priority_id == 0)
-                report_urgent = App_LocalResources.GlobalRes.No;
+                report_urgent = LocalizationGetter.GetString("No");
             else if (_report.priority_id == 1)
-                report_urgent = App_LocalResources.GlobalRes.Yes;
+                report_urgent = LocalizationGetter.GetString("Yes");
 
             return report_urgent;
         }
 
         public string IsOngoing()
         {
-            string is_ongoing = App_LocalResources.GlobalRes.unknown;
+            string is_ongoing = LocalizationGetter.GetString("unknown");
 
             if (_report != null)
             {
                 if (_report.is_ongoing == 1)
                 {
-                    is_ongoing = GlobalRes.No;
+                    is_ongoing = LocalizationGetter.GetString("No");
                 }
                 else if (_report.is_ongoing == 2)
                 {
-                    is_ongoing = GlobalRes.Yes;// +" Description : " + _report.report_frequency_text;
+                    is_ongoing = LocalizationGetter.GetString("Yes");// +" Description : " + _report.report_frequency_text;
                 }
                 else if (_report.is_ongoing == 3)
                 {
-                    is_ongoing = GlobalRes.NotSureUp;
+                    is_ongoing = LocalizationGetter.GetString("NotSureUp");
                 }
             }
             return is_ongoing;
@@ -208,7 +209,7 @@ namespace EC.Models
 
         public string HasInjuryDamage()
         {
-            string injury_damage = App_LocalResources.GlobalRes.unknown;
+            string injury_damage = LocalizationGetter.GetString("unknown");
 
             if (_report != null)
             {
@@ -274,7 +275,7 @@ namespace EC.Models
             }
             if (list.Count == 0)
             {
-                list.Add(App_LocalResources.GlobalRes.unknown_departments);
+                list.Add(LocalizationGetter.GetString("unknown_departments"));
             }
 
             return list;
@@ -285,7 +286,7 @@ namespace EC.Models
         /// </summary>
         /// <param name="report_id"></param>
         /// <returns></returns>
-        public string DepartmentsString()
+        public string DepartmentsString(bool is_cc)
         {
             string departments = "";
 
@@ -312,14 +313,14 @@ namespace EC.Models
                         departments = _report.other_department_name.Trim();
             }
             if (departments.Length == 0)
-                departments = App_LocalResources.GlobalRes.unknown_departments;
+                departments = LocalizationGetter.GetString("unknown_departments", is_cc);
 
             return departments;
         }
 
         public string ReporterCompanyRelationShort()
         {
-            string relationship_text = App_LocalResources.GlobalRes.Other;
+            string relationship_text = LocalizationGetter.GetString("Other");
 
             if (_report != null)
             {
@@ -396,11 +397,11 @@ namespace EC.Models
                         {
                             if (secondary_type.Length > 0)
                             {
-                                secondary_type = secondary_type + ", " + GlobalRes.Other;
+                                secondary_type = secondary_type + ", " + LocalizationGetter.GetString("Other");
                             }
                             else
                             {
-                                secondary_type = GlobalRes.Other;
+                                secondary_type = LocalizationGetter.GetString("Other");
                             }
                         }
                     }
@@ -408,7 +409,7 @@ namespace EC.Models
                 }
             }
             if (secondary_type.Length == 0)
-                secondary_type = App_LocalResources.GlobalRes.unknown_secondary_type;
+                secondary_type = LocalizationGetter.GetString("unknown_secondary_type");
 
             return secondary_type.Trim();
         }
@@ -457,7 +458,7 @@ namespace EC.Models
                         }
                         else if (_report_secondary_type.secondary_type_id == 0)
                         {
-                            list.Add(GlobalRes.Other);
+                            list.Add(LocalizationGetter.GetString("Other"));
                         }
                     }
                 }
@@ -558,11 +559,11 @@ namespace EC.Models
                         {
                             if (secondary_type.Length > 0)
                             {
-                                secondary_type = secondary_type + ", " + GlobalRes.Other;
+                                secondary_type = secondary_type + ", " + LocalizationGetter.GetString("Other");
                             }
                             else
                             {
-                                secondary_type = GlobalRes.Other;
+                                secondary_type = LocalizationGetter.GetString("Other");
                             }
                         }
                     }
@@ -570,7 +571,7 @@ namespace EC.Models
                 }
             }
             if (secondary_type.Length == 0)
-                secondary_type = App_LocalResources.GlobalRes.unknown_secondary_type;
+                secondary_type = LocalizationGetter.GetString("unknown_secondary_type");
 
             return secondary_type.Trim();
         }
@@ -591,7 +592,7 @@ namespace EC.Models
             }
 
             if (date_string.Trim().Length == 0)
-                date_string = App_LocalResources.GlobalRes.unknown_date;
+                date_string = LocalizationGetter.GetString("unknown_date");
 
             return date_string.Trim();
         }
@@ -612,7 +613,7 @@ namespace EC.Models
             }
 
             if (date_string.Trim().Length == 0)
-                date_string = App_LocalResources.GlobalRes.unknown_date;
+                date_string = LocalizationGetter.GetString("unknown_date");
 
             return date_string.Trim();
         }
@@ -632,7 +633,7 @@ namespace EC.Models
             }
 
             if (date_string.Trim().Length == 0)
-                date_string = App_LocalResources.GlobalRes.unknown_date;
+                date_string = LocalizationGetter.GetString("unknown_date");
 
             return date_string.Trim();
         }
@@ -652,7 +653,7 @@ namespace EC.Models
             }
 
             if (date_string.Trim().Length == 0)
-                date_string = App_LocalResources.GlobalRes.unknown_date;
+                date_string = LocalizationGetter.GetString("unknown_date");
 
             return date_string.Trim();
         }
@@ -739,7 +740,7 @@ namespace EC.Models
 
         public string ManagementKnowString()
         {
-            string management_know = App_LocalResources.GlobalRes.unknown;
+            string management_know = LocalizationGetter.GetString("unknown");
 
             if (_report != null)
             {
@@ -1183,13 +1184,13 @@ namespace EC.Models
                         int role_id = um._user.role_id;
                         if ((role_id > 3) && (role_id < 8))
                         {
-                            return EC.App_LocalResources.GlobalRes.anonymous_reporter;
+                            return LocalizationGetter.GetString("anonymous_reporter");
                         }
                         if ((role_id > 0) && (role_id < 4))
                         {
                             return String.Format(_anonymity.anonymity_en, CompanyName());
                         }
-                        return EC.App_LocalResources.GlobalRes.anonymous_reporter;
+                        return LocalizationGetter.GetString("anonymous_reporter");
 
                     }
 
@@ -1811,7 +1812,7 @@ namespace EC.Models
             foreach (var item in result)
             {
                 var role = db.role_in_report.FirstOrDefault(m => m.id == item.role_in_report_id);
-                item.Role = role != null ? role.role_en : App_LocalResources.GlobalRes.Other;
+                item.Role = role != null ? role.role_en : LocalizationGetter.GetString("Other");
             }
             return result;
         }
@@ -2422,7 +2423,7 @@ namespace EC.Models
                         }
                         else
                         {
-                            return GlobalRes.NoUserFound;
+                            return LocalizationGetter.GetString("NoUserFound");
                         }
                     }
                     else
@@ -2432,12 +2433,12 @@ namespace EC.Models
                 catch (Exception ex)
                 {
                     logger.Error(ex.ToString());
-                    return "Cannot update password " + ex.ToString();// GlobalRes.ErrorSavingLoginPass;
+                    return "Cannot update password " + ex.ToString();// LocalizationGetter.GetString("ErrorSavingLoginPass", is_cc);
                 }
             }
             else
             {
-                return "Cannot update your password "; // GlobalRes.ErrorSavingLoginPass;
+                return "Cannot update your password "; // LocalizationGetter.GetString("ErrorSavingLoginPass", is_cc);
             }
         }
 
@@ -2463,7 +2464,7 @@ namespace EC.Models
             {
                 CaseInvestigationStatusViewModel cisvm = investiogationStatusesList[0];
                 if (cisvm.investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Resolution)
-                    cisvm.query_new_investigation_status_name = App_LocalResources.GlobalRes.CaseSentToEsacaltionMediatorForReview;
+                    cisvm.query_new_investigation_status_name = LocalizationGetter.GetString("CaseSentToEsacaltionMediatorForReview");
 
             }
 
@@ -2474,11 +2475,11 @@ namespace EC.Models
 
                 cisvm.previous_investigation_status = cisvm_prev.investigation_status_id;
                 if (cisvm.investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Resolution)
-                    cisvm.query_new_investigation_status_name = App_LocalResources.GlobalRes.CaseSentToEsacaltionMediatorForReview;
+                    cisvm.query_new_investigation_status_name = LocalizationGetter.GetString("CaseSentToEsacaltionMediatorForReview");
 
                 //case just closed
                 if (cisvm.investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Closed)
-                    cisvm.query_new_investigation_status_name = App_LocalResources.GlobalRes.Approved;
+                    cisvm.query_new_investigation_status_name = LocalizationGetter.GetString("Approved");
 
                 //case just sent to investigation
                 if (cisvm.investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Investigation && (cisvm.previous_investigation_status == 0 || cisvm.previous_investigation_status == 1 || cisvm.previous_investigation_status == 2 || cisvm.previous_investigation_status == 7))
@@ -2486,11 +2487,11 @@ namespace EC.Models
 
                 //case just sent to investigation
                 if (cisvm.investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Investigation && cisvm.previous_investigation_status == (Int32)CaseStatusConstants.CaseStatusValues.Resolution)
-                    cisvm.query_new_investigation_status_name = App_LocalResources.GlobalRes.CaseReturnedFutherInvestigation;
+                    cisvm.query_new_investigation_status_name = LocalizationGetter.GetString("CaseReturnedFutherInvestigation");
 
                 //case just sent to investigation
                 if (cisvm.investigation_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Investigation && cisvm.previous_investigation_status == (Int32)CaseStatusConstants.CaseStatusValues.Closed)
-                    cisvm.query_new_investigation_status_name = App_LocalResources.GlobalRes.CaseReOpened;
+                    cisvm.query_new_investigation_status_name = LocalizationGetter.GetString("CaseReOpened");
 
             }
             return investiogationStatusesList;
@@ -2503,24 +2504,24 @@ namespace EC.Models
 
             //case just closed
             if (_investigation_status == (Int32)CaseStatusConstants.CaseStatusValues.Closed)
-                _green_bar_status = GlobalRes.CaseClosed;
+                _green_bar_status = LocalizationGetter.GetString("CaseClosed");
 
             //current - investigation, previous - closed => Re-opened
             if (_investigation_status == (Int32)CaseStatusConstants.CaseStatusValues.Investigation && _prev_inv_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Closed)
             {
-                _green_bar_status = GlobalRes.CaseReOpened;
+                _green_bar_status = LocalizationGetter.GetString("CaseReOpened");
             }
 
             //current - investigation, previous - Resolution => Returned for futher investigation
             if (_investigation_status == (Int32)CaseStatusConstants.CaseStatusValues.Investigation && _prev_inv_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Resolution)
             {
-                _green_bar_status = GlobalRes.CaseReturnedFutherInvestigation;
+                _green_bar_status = LocalizationGetter.GetString("CaseReturnedFutherInvestigation");
             }
 
             //current - Resolution
             if (_investigation_status == (Int32)CaseStatusConstants.CaseStatusValues.Resolution)
             {
-                _green_bar_status = GlobalRes.CaseClosureReport;
+                _green_bar_status = LocalizationGetter.GetString("CaseClosureReport");
             }
 
 
@@ -2533,7 +2534,7 @@ namespace EC.Models
             //current - Resolution
             if (_investigation_status == (Int32)CaseStatusConstants.CaseStatusValues.Resolution)
             {
-                _green_bar_status = GlobalRes.CaseSentToEsacaltionMediatorForReview;
+                _green_bar_status = LocalizationGetter.GetString("CaseSentToEsacaltionMediatorForReview");
             }
 
             return _green_bar_status;

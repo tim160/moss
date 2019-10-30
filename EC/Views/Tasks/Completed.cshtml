@@ -1,23 +1,28 @@
 ﻿@using EC.Models;
 @using EC.Models.ECModel;
 @using EC.Models.Database;
-@using EC.App_LocalResources;
+@using EC.Localization;
 @using EC.Common.Interfaces;
 @using EC.Core.Common;
 @{
-    GlobalFunctions glb = new GlobalFunctions();
-    IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
+  bool? is_cc = ViewBag.is_cc;
+  if (!is_cc.HasValue)
+  {
+    is_cc = false;
+  }
+  GlobalFunctions glb = new GlobalFunctions();
+  IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
 
-    ViewBag.Title = GlobalRes.Mycompletedtasks;
-    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+  ViewBag.Title = LocalizationGetter.GetString("Mycompletedtasks", is_cc);
+  Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
 
-    int user_id = (Int32)ViewBag.user_id;
-    List<TaskExtended> tasks = (List<TaskExtended>)ViewBag.tasks;
-    ReportModel rm = new ReportModel();
+  int user_id = (Int32)ViewBag.user_id;
+  List<TaskExtended> tasks = (List<TaskExtended>)ViewBag.tasks;
+  ReportModel rm = new ReportModel();
 
-    List<report> reports = (List<report>)ViewBag.reports;
-    UserModel um = new UserModel(user_id);
-    int unread_tasks = ViewBag.unread_tasks;
+  List<report> reports = (List<report>)ViewBag.reports;
+  UserModel um = new UserModel(user_id);
+  int unread_tasks = ViewBag.unread_tasks;
 
 }
 
@@ -25,9 +30,9 @@
     <div id="casesHeared">
         <div id="menu">
 
-            <a href="/tasks/Index" class="caseesTab">@GlobalRes.Myactivetasks @if (unread_tasks > 0)
+            <a href="/tasks/Index" class="caseesTab">@LocalizationGetter.GetString("Myactivetasks", is_cc) @if (unread_tasks > 0)
             {<span>@unread_tasks</span>}</a>
-            <a href="/tasks/Completed" class="caseesTab active">@GlobalRes.Mycompletedtasks</a>
+            <a href="/tasks/Completed" class="caseesTab active">@LocalizationGetter.GetString("Mycompletedtasks", is_cc)</a>
         </div>
         @*     <div class="positionActivityIcon">
                 <div id="activityIcon"></div>
@@ -43,12 +48,12 @@
                 <header>
                     <div class="menuTasks">
                         <div class="caseTasksName">
-                            <span>@GlobalRes.Case > @GlobalRes.Taskname</span>
+                            <span>@LocalizationGetter.GetString("Case", is_cc) > @LocalizationGetter.GetString("Taskname", is_cc)</span>
                             <span class="labelArrow">></span>
                         </div>
-                        <div class="assignedMediator">@GlobalRes.Assignedby</div>
+                        <div class="assignedMediator">@LocalizationGetter.GetString("Assignedby", is_cc)</div>
                         <div class="dueDate">
-                            <span>@GlobalRes.Completedon</span>
+                            <span>@LocalizationGetter.GetString("Completedon", is_cc)</span>
                             <span class="labelArrow">></span>
                         </div>
                     </div>
@@ -99,7 +104,7 @@
                                     <span class="@_classCircle" style="@_styleCircle"></span>
                                     <span class="taskName @_fontName">
                                         <span class="titleTask @_colorTextBefore">
-                                            @rm._report.display_name - @rm.LocationString()
+                                            @rm._report.display_name - @rm.LocationString(is_cc.Value)
                                         </span>
                                         <span class="labelArrow">></span>
                                         <a href="/newCase/Task/@_task.TaskID">
@@ -137,11 +142,11 @@
                                         int total_days = (_task.TaskDueDate.Value - dt).Days;
                                         if ((total_days > 1))
                                         {
-                                            <span class="textDays">@total_days @GlobalRes.dayslate</span>
+                                            <span class="textDays">@total_days @LocalizationGetter.GetString("dayslate", is_cc)</span>
                                         }
                                         if ((total_days == 1))
                                         {
-                                            <span class="textDays">@total_days @GlobalRes.daylate</span>
+                                            <span class="textDays">@total_days @LocalizationGetter.GetString("daylate", is_cc)</span>
                                         }
                                     }
                                 </div>
@@ -164,7 +169,7 @@
                                         <div class="headerContentTask" style="border-left: 10px solid #@rm.ColorCode(); ">
                                             <div class="blockTitle">
                                                 <span class="taskName">
-                                                    <span class="titleTask">@rm._report.display_name - @rm.LocationString()</span>
+                                                    <span class="titleTask">@rm._report.display_name - @rm.LocationString(is_cc.Value)</span>
                                                     <span class="labelArrow">></span>
                                                 </span>
                                             </div>
@@ -228,11 +233,11 @@
                                                     int total_days = (tsk.TaskDueDate.Value - dt).Days;
                                                     if ((total_days > 1))
                                                     {
-                                                        <span class="textDays">@total_days @GlobalRes.dayslate</span>
+                                                        <span class="textDays">@total_days @LocalizationGetter.GetString("dayslate", is_cc)</span>
                                                     }
                                                     if ((total_days == 1))
                                                     {
-                                                        <span class="textDays">@total_days @GlobalRes.daylate</span>
+                                                        <span class="textDays">@total_days @LocalizationGetter.GetString("daylate", is_cc)</span>
                                                     }
                                                 }
                                             </div>

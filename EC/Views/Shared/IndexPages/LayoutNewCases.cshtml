@@ -1,6 +1,5 @@
 ﻿@using EC.Models;
 @using EC.Models.Database;
-@using EC.App_LocalResources;
 @using EC.Constants;
 @using EC.Localization;
 @using EC.Constants;
@@ -68,7 +67,7 @@
         _report_id = (int)ViewBag.report_id;
         rm = new ReportModel(_report_id);
 
-        report_name = rm.SecondaryTypeString() + " - " + rm.LocationString() + " - #" + rm._report.display_name;
+        report_name = rm.SecondaryTypeString() + " - " + rm.LocationString(is_cc.Value) + " - #" + rm._report.display_name;
         report_name_code = LocalizationGetter.GetString("Newreport") + ": #" + rm._report.display_name;
         report_color = rm.ColorDescr();
         report_color_code = rm.ColorCode();

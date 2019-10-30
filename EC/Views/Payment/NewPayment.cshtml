@@ -1,19 +1,24 @@
 ﻿@using System.Collections;
 @using EC.Models;
 @using EC.Models.Database;
-@using EC.App_LocalResources;
 @using EC.Common.Util;
+@using EC.Localization;
 @{
-    // @Styles.Render("~/Content/Styles");
+  bool? is_cc = ViewBag.is_cc;
+  if (!is_cc.HasValue)
+  {
+    is_cc = false;
+  }
+  // @Styles.Render("~/Content/Styles");
     <link rel="stylesheet" type="text/css" href="/Content/styleReportDashboard.css">
-    ViewBag.Title = GlobalRes.newpayment;
-    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
-    string user_nm = ViewBag.user_nm;
+  ViewBag.Title = LocalizationGetter.GetString("newpayment", is_cc);
+  Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+  string user_nm = ViewBag.user_nm;
 
-    GlobalFunctions glb = new GlobalFunctions();
-    CompanyModel cm = ViewBag.cm;
-    Decimal _amount = ViewBag.amount;
-    String sAmount = StringUtil.ConvertDecimalToStringAmount(_amount);
+  GlobalFunctions glb = new GlobalFunctions();
+  CompanyModel cm = ViewBag.cm;
+  Decimal _amount = ViewBag.amount;
+  String sAmount = StringUtil.ConvertDecimalToStringAmount(_amount);
     <style>
         .fullContainer {
             max-width: none;
@@ -23,30 +28,30 @@
 
 <div class="blockSettings contentCompanyProfile">
     <div class="contentSettings">
-        <p class="helloUser" id="hello">@GlobalRes.MakePamentNotice</p>
+        <p class="helloUser" id="hello">@LocalizationGetter.GetString("MakePamentNotice", is_cc)</p>
 
 
         <div id="PayByCard">
             <div class="blockPersonalSettings">
-                <p class="title">@GlobalRes.Amount</p>
+                <p class="title">@LocalizationGetter.GetString("Amount", is_cc)</p>
                 <input type="text" id="amount" value=@sAmount readonly="readonly" />
             </div>
 
             <div class="blockPersonalSettings">
-                <p class="title">@GlobalRes.CreditCardNumber</p>
+                <p class="title">@LocalizationGetter.GetString("CreditCardNumber", is_cc)</p>
                 <input type="text" id="cardnumber" />
             </div>
             <div class="blockPersonalSettings">
-                <p class="title">@GlobalRes.NameonCard</p>
+                <p class="title">@LocalizationGetter.GetString("NameonCard", is_cc)</p>
                 <input type="text" id="cardname" />
             </div>
 
 
             <div class="blockPersonalSettings">
-                <p class="title">@GlobalRes.ExpiryDate</p>
+                <p class="title">@LocalizationGetter.GetString("ExpiryDate", is_cc)</p>
                 <div class="positioncreditCardSelect">
                     <select class="creditCardSelect" id="selectedMonth">
-                        <option selected="selected" disabled>@GlobalRes.MM.ToLower()</option>
+                        <option selected="selected" disabled>@LocalizationGetter.GetString("MM", is_cc).ToLower()</option>
                         <option value="1">01</option>
                         <option value="2">02</option>
                         <option value="3">03</option>
@@ -61,7 +66,7 @@
                         <option value="12">12</option>
                     </select>
                     <select class="creditCardSelect" id="selectedYear">
-                        <option selected="selected" disabled>@GlobalRes.yyyy</option>
+                        <option selected="selected" disabled>@LocalizationGetter.GetString("yyyy", is_cc)</option>
                         @{
                             for (int i = DateTime.Today.Year; i <= 2030; i++)
                             {
@@ -72,15 +77,15 @@
                 </div>
             </div>
             <div class="blockPersonalSettings">
-                <p class="title">@GlobalRes.CSVCode</p>
+                <p class="title">@LocalizationGetter.GetString("CSVCode", is_cc)</p>
                 <input type="number" id="csv"  />
             </div>
         </div>
 
         <div class="blockUpdateProfile">
             <div class="updateProfileBtn">
-                <input type="submit" value=@GlobalRes.Submit />
-                <span style="display: none;">@GlobalRes.MakePayment.ToLower()</span>
+                <input type="submit" value=@LocalizationGetter.GetString("Submit", is_cc) />
+                <span style="display: none;">@LocalizationGetter.GetString("MakePayment", is_cc).ToLower()</span>
             </div>
         </div>
 

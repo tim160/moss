@@ -1,4 +1,4 @@
-﻿using EC.App_LocalResources;
+﻿
 using EC.Common.Util;
 using EC.Constants;
 using EC.Localization;
@@ -228,11 +228,11 @@ namespace EC.Controllers
                                 to.Add(email.Trim());
                                 ///     bcc.Add("timur160@hotmail.com");
 
-                                EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
-                                EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+                                EmailManagement em = new EmailManagement(is_cc);
+                                EmailBody eb = new EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
                                 eb.ForgetPasswordNew(Request.Url.AbsoluteUri.ToLower(), email, password_token);
                                 string body = eb.Body;
-                                em.Send(to, cc, App_LocalResources.GlobalRes.ChangePasswordRequest, body, true);
+                                em.Send(to, cc, LocalizationGetter.GetString("ChangePasswordRequest", is_cc), body, true);
 
                                 #endregion
                             }
@@ -241,22 +241,22 @@ namespace EC.Controllers
                                 logger.Error(ex.ToString());
                                 return ex.ToString();
                             }
-                            return GlobalRes.Success.ToLower();
+                            return LocalizationGetter.GetString("Success", is_cc).ToLower();
                         }
                     }
-                    return GlobalRes.NoUserFound;
+                    return LocalizationGetter.GetString("NoUserFound", is_cc);
                 }
                 else
-                    return GlobalRes.EmailInvalid;
+                    return LocalizationGetter.GetString("EmailInvalid", is_cc);
             }
             else
-                return GlobalRes.EnterYourEmail;
+                return LocalizationGetter.GetString("EnterYourEmail", is_cc);
         }
 
         LoginModel loginModel = new LoginModel();
         public ActionResult Restore(string email, string token)
         {
-            if ((loginModel.restorePass(token, email).ToLower().Trim() == App_LocalResources.GlobalRes.Success.ToLower().Trim()))
+            if ((loginModel.restorePass(token, email).ToLower().Trim() == LocalizationGetter.GetString("Success", is_cc).ToLower().Trim()))
             {
                 Session.Clear();
                 ViewBag.email = email;

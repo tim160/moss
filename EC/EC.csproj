@@ -493,13 +493,16 @@
     <Content Include="Content\images\about-Steve.jpg" />
     <Content Include="Content\images\about-Tim.jpg" />
     <Content Include="Content\images\cal.png" />
-    <Content Include="Content\images\charts-img-сс.jpg" />
-    <Content Include="Content\images\charts-img.jpg" />
-    <Content Include="Content\images\dashboard-img-CC.png" />
-    <Content Include="Content\images\dashboard-img.png" />
+    <Content Include="Content\images\CC\favicon.ico" />
+    <Content Include="Content\images\chart.jpg" />
+    <Content Include="Content\images\chart2.jpg" />
+    <Content Include="Content\images\css\all.css" />
+    <Content Include="Content\images\css\all.min.css" />
+    <Content Include="Content\images\css\fontello.css" />
+    <Content Include="Content\images\dashboard.png" />
+    <Content Include="Content\images\dashd.png" />
     <Content Include="Content\images\favicon.ico" />
-    <Content Include="Content\images\first-section-BG.jpg" />
-    <Content Include="Content\images\first-section-СС-BG.jpg" />
+    <Content Include="Content\images\first-section.jpg" />
     <Content Include="Content\images\lawsuits-img.png" />
     <Content Include="Content\images\loginSection-logoImg__Dutchess.jpg" />
     <Content Include="Content\images\logo-mini-CC.png" />
@@ -1415,16 +1418,6 @@
     <TypeScriptCompile Include="Scripts\Common\test.ts" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_LocalResources\GlobalRes.en1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GlobalRes.en.resx</DependentUpon>
-    </Compile>
-    <Compile Include="App_LocalResources\GlobalRes1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GlobalRes.resx</DependentUpon>
-    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -1895,18 +1888,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="App_LocalResources\GlobalRes.en.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>GlobalRes.en1.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="App_LocalResources\GlobalRes.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>GlobalRes1.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BeanStream\BeanStream.csproj">

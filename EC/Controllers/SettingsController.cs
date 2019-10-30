@@ -12,11 +12,11 @@ using EC.Models.Database;
 using EC.Models.ECModel;
 using EC.Controllers.ViewModel;
 using System.Data.Entity.Migrations;
-using EC.App_LocalResources;
+
 using EC.Constants;
 using EC.Common.Util;
 using EC.Utils;
-using System.Threading.Tasks;
+using EC.Localization;
 
 namespace EC.Controllers
 {
@@ -49,7 +49,7 @@ namespace EC.Controllers
             Company ecModelCompany = new Company();
             um.listDepartments = ecModelCompany.CompanyDepartments(user.company_id, 1, true);
             ViewBag.um = um;
-            ViewBag.page_subtitle = GlobalRes.Settings;
+            ViewBag.page_subtitle = LocalizationGetter.GetString("Settings", is_cc);
             ViewBag.user_id = user_id;
             um._user.user_permissions_approve_case_closure = um._user.user_permissions_approve_case_closure == null ? 2 : um._user.user_permissions_approve_case_closure;
             um._user.user_permissions_change_settings = um._user.user_permissions_change_settings == null ? 2 : um._user.user_permissions_change_settings;
@@ -69,7 +69,7 @@ namespace EC.Controllers
             int user_id = user.id;
 
             UserModel um = new UserModel(user_id);
-            ViewBag.page_subtitle = GlobalRes.Settings;
+            ViewBag.page_subtitle = LocalizationGetter.GetString("Settings", is_cc);
             ViewBag.um = um;
 
             //int company_id = 2;
@@ -110,7 +110,7 @@ namespace EC.Controllers
             int company_id = um._user.company_id;
             CompanyModel cm = new CompanyModel(company_id);
 
-            ViewBag.page_subtitle = GlobalRes.Settings;
+            ViewBag.page_subtitle = LocalizationGetter.GetString("Settings", is_cc);
 
             #region EC-CC Viewbag
             ViewBag.is_cc = is_cc;
@@ -146,7 +146,7 @@ namespace EC.Controllers
                 _user.location_nm = "";
                 _user.photo_path = "";
                 _user.title_ds = "";
-                _user.notepad_tx = App_LocalResources.GlobalRes.Awaiting_registration;
+                _user.notepad_tx = LocalizationGetter.GetString("Awaiting_registration", is_cc);
                 all_users.Add(_user);
             }
             ViewBag.AllUser = all_users;
@@ -223,7 +223,7 @@ namespace EC.Controllers
             CompanyModel cm = new CompanyModel(company_id);
             UserModel um = new UserModel(_user.id);
 
-            ViewBag.page_subtitle = GlobalRes.Settings;
+            ViewBag.page_subtitle = LocalizationGetter.GetString("Settings", is_cc);
 
             if ((viewd_user._user.role_id < 4) || (viewd_user._user.role_id > 7))
                 return RedirectToAction("Login", "Service");
@@ -251,7 +251,7 @@ namespace EC.Controllers
             }
             if (_user.company_department_id == null || _user.company_department_id == 0)
             {
-                viewd_user.selectedDepartment = App_LocalResources.GlobalRes.Other;
+                viewd_user.selectedDepartment = LocalizationGetter.GetString("Other", is_cc);
             }
             else
             {
@@ -334,7 +334,7 @@ namespace EC.Controllers
 
             UserModel um = new UserModel(user_id);
             ViewBag.um = um;
-            ViewBag.page_subtitle = GlobalRes.Settings;
+            ViewBag.page_subtitle = LocalizationGetter.GetString("Settings", is_cc);
             ViewBag.user_id = user_id;
             ViewBag.companyId = user.company_id;
 
@@ -371,7 +371,7 @@ namespace EC.Controllers
         {
             if (!(_user.company_location_id.HasValue) || (_user.company_location_id == 0))
             {
-                ModelState.AddModelError("company_location_id", @GlobalRes.Location);
+                ModelState.AddModelError("company_location_id", LocalizationGetter.GetString("Location", is_cc));
             }
             if (ModelState.IsValid)
             {
@@ -410,7 +410,7 @@ namespace EC.Controllers
             Company ecModelCompany = new Company();
             um.listDepartments = ecModelCompany.CompanyDepartments(user.company_id, 1, true);
             ViewBag.um = um;
-            ViewBag.page_subtitle = GlobalRes.Settings;
+            ViewBag.page_subtitle = LocalizationGetter.GetString("Settings", is_cc);
             ViewBag.user_id = user_id;
             um._user.user_permissions_approve_case_closure = um._user.user_permissions_approve_case_closure == null ? 2 : um._user.user_permissions_approve_case_closure;
             um._user.user_permissions_change_settings = um._user.user_permissions_change_settings == null ? 2 : um._user.user_permissions_change_settings;
@@ -461,7 +461,7 @@ namespace EC.Controllers
 
                             eb.MediatorRoleChange(_updateuser.first_nm, _updateuser.last_nm, session_user.first_nm, session_user.last_nm, new_role);
                             glb.SaveEmailBeforeSend(session_user.id, _user.id, _user.company_id, _updateuser.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
-                                GlobalRes.Email_Title_MediatorRoleChanged, eb.Body, false, 42);
+                            LocalizationGetter.GetString("Email_Title_MediatorRoleChanged", is_cc), eb.Body, false, 42);
                         }
                     }
                     if (_status_change)
@@ -475,7 +475,7 @@ namespace EC.Controllers
 
                             eb.MediatorStatusChange(_updateuser.first_nm, _updateuser.last_nm, session_user.first_nm, session_user.last_nm, new_status);
                             glb.SaveEmailBeforeSend(session_user.id, _user.id, _user.company_id, _updateuser.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
-                                GlobalRes.Email_Title_MediatorStatusChanged, eb.Body, false, 43);
+                            LocalizationGetter.GetString("Email_Title_MediatorStatusChanged", is_cc) , eb.Body, false, 43);
                         }
                     }
 
@@ -661,20 +661,20 @@ namespace EC.Controllers
 
             user _user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (_user == null || _user.id == 0)
-                return App_LocalResources.GlobalRes.EmptyData;
+                return LocalizationGetter.GetString("EmptyData", is_cc);
 
             if (_user.role_id == 8)
             {
-                return App_LocalResources.GlobalRes.EmptyData;
+                return LocalizationGetter.GetString("EmptyData", is_cc);
             }
 
             if (string.IsNullOrEmpty(email))
             {
-                return App_LocalResources.GlobalRes.EmptyData;
+                return LocalizationGetter.GetString("EmptyData", is_cc);
             }
             if (!m_EmailHelper.IsValidEmail(email))
             {
-                return App_LocalResources.GlobalRes.EmailInvalid;
+                return LocalizationGetter.GetString("EmailInvalid", is_cc);
             }
 
             UserModel um = new UserModel(_user.id);
@@ -686,13 +686,13 @@ namespace EC.Controllers
             _company_user_allowed = (db.user.Where(t => ((t.company_id == um._user.company_id) && (t.role_id != ECLevelConstants.level_informant))).Select(t => t.id)).ToList();
 
             if (_company_user_emails.Contains(email))
-                return App_LocalResources.GlobalRes.MediatorAlreadyRegistered + "!";
+                return LocalizationGetter.GetString("MediatorAlreadyRegistered", is_cc) + "!";
 
             if ((db.invitation.Any(t => ((t.email.ToLower().Trim() == email) && (t.used_flag == 1) && (_company_user_allowed.Contains(t.sent_by_user_id))))) || (db.user.Any(u => ((u.email.ToLower().Trim() == email.ToLower().Trim() && u.role_id != 8)))))
-                return App_LocalResources.GlobalRes.MediatorAlreadyRegistered;
+                return LocalizationGetter.GetString("MediatorAlreadyRegistered", is_cc);
 
             if (db.invitation.Any(t => ((t.email.ToLower().Trim() == email) && (_company_user_allowed.Contains(t.sent_by_user_id)))))
-                return App_LocalResources.GlobalRes.AlreadyInvited;
+                return LocalizationGetter.GetString("AlreadyInvited", is_cc);
 
 
             string generated_code = StringUtil.RandomString(6);
@@ -721,10 +721,10 @@ namespace EC.Controllers
                 CompanyModel cm = new CompanyModel(_user.company_id);
                 eb.MediatorInvited(_user.first_nm, _user.last_nm, _user.first_nm, _user.last_nm, cm._company.company_nm, generated_code, DomainUtil.GetSubdomainLink(Request.Url.AbsoluteUri.ToLower(), Request.Url.AbsoluteUri.ToLower()) + "/new/?code=" + generated_code + "&email=" + email);
                 glb.SaveEmailBeforeSend(_user.id, 0, 0, email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
-                    GlobalRes.Email_Title_MediatorInvited, eb.Body, false, 41);
+                   LocalizationGetter.GetString("Email_Title_MediatorInvited", is_cc), eb.Body, false, 41);
             }
 
-            return App_LocalResources.GlobalRes._Completed.ToLower();
+            return LocalizationGetter.GetString("_Completed", is_cc).ToLower();
         }
         public ActionResult Password()
         {
@@ -743,7 +743,7 @@ namespace EC.Controllers
 
             UserModel um = new UserModel(user_id);
             ViewBag.um = um;
-            ViewBag.page_subtitle = GlobalRes.Settings;
+            ViewBag.page_subtitle = LocalizationGetter.GetString("Settings", is_cc);
             ViewBag.user_id = user_id;
             return View(um._user);
         }
@@ -758,7 +758,7 @@ namespace EC.Controllers
             ViewBag.status = SettingsModel.IsValidPass(oldPass, newPass, confPass, user_id);
             UserModel um = new UserModel(user_id);
             ViewBag.um = um;
-            ViewBag.page_subtitle = GlobalRes.Settings;
+            ViewBag.page_subtitle = LocalizationGetter.GetString("Settings", is_cc);
             ViewBag.user_id = user_id;
 
             #region EC-CC Viewbag

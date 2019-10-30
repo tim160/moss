@@ -11,7 +11,7 @@ using EC.Models;
 using EC.Models.Database;
 using EC.Constants;
 using EC.Core.Common;
-using EC.App_LocalResources;
+
 using EC.Models.ViewModel;
 using EC.Common.Interfaces;
 
@@ -45,8 +45,8 @@ namespace EC.Controllers.API
                 reporterWouldLike = rm._anonymousLevel_mediatorVersionByCaller(user.id),
                 reporterName = rm.Get_reporter_name(user.id),
                 reporterIs = rm.ReporterCompanyRelationShort(),
-                incidentHappenedIn = rm.LocationString(),
-                affectedDepartment = rm.DepartmentsString(),
+                incidentHappenedIn = rm.LocationString(is_cc),
+                affectedDepartment = rm.DepartmentsString(is_cc),
                 partiesInvolvedName = "",
                 partiesInvolvedTitle = "",
                 partiesInvolvedType = "",

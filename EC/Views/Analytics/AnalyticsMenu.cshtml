@@ -1,5 +1,4 @@
-﻿@using EC.App_LocalResources;
-
+﻿@using EC.Localization;
 @{ 
     string action = ViewContext.RouteData.Values["action"].ToString().ToLower();
     bool? is_cc = ViewBag.is_cc;
@@ -17,9 +16,9 @@
 
 <div id="casesHeared">
     <div id="menu">
-        <h2 class="mainTitle">@GlobalRes.Menu:</h2>
+        <h2 class="mainTitle">@LocalizationGetter.GetString("Menu", is_cc):</h2>
         <div style="width:80%">
-            <a href="@Url.Action("Index")" class="caseesTab @(action == "index" || action == "dashboard" ? "active" : "")">@GlobalRes.Cases</a>
+            <a href="@Url.Action("Index")" class="caseesTab @(action == "index" || action == "dashboard" ? "active" : "")">@LocalizationGetter.GetString("Cases", is_cc)</a>
             <a href="@Url.Action("RootCauseAnalysis")" style="padding-left:60px;" class="caseesTab @(action == "rootcauseanalysis" ? "active" : "")">Root Cause Analysis</a>
             @if (is_cc.Value)
             {
