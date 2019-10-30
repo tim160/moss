@@ -85,11 +85,11 @@
                     }
                     <div class="report">
                         <div class="titleReport">@LocalizationGetter.GetString("Incidentlocation"):</div>
-                        <div class="reportText">@rm.LocationString()</div>
+                        <div class="reportText">@rm.LocationString(is_cc.Value)</div>
                     </div>
                     <div class="report">
                         <div class="titleReport">@LocalizationGetter.GetString("AffectedDepartment"):</div>
-                        <div class="reportText">@rm.DepartmentsString()</div>
+                        <div class="reportText">@rm.DepartmentsString(is_cc.Value)</div>
                     </div>
                 </div><!--reportBlock-->
             </div><!--leftBlock-->
