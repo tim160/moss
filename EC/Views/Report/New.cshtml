@@ -542,7 +542,7 @@
                             <label class="file_upload file_upload@{@class_ext}">
                                 <input type="hidden" name="MAX_FILE_SIZE" value="4000" />
                                 <span type="button" class="button addFileButton">@LocalizationGetter.GetString("SelectFile", is_cc)</span>
-                                <input type="file" data-id="newReport" id="attachments" multiple="multiple" name="attachDocuments" check-file-size="" />
+                                @*<input type="file" data-id="newReport" id="attachments" multiple="multiple"  />*@
                             </label>
                         </div>
                     </div>
@@ -725,10 +725,20 @@
                                 </table>
                                 <p class="reportDescriptionText" id="incidentDescription"></p>
 
-                                <div class="attachedFilesTitle">
-                                    @*Attached files:*@
-                                    <div class="addedFilesList"></div>
-                                </div>
+                                <table class='attachedFilesTitle' style='color: #3c3e3f;font-size: 14px;'>
+                                    <tr>
+                                        <th>
+                                            <img src=/Content/Icons/generic-file.png>
+                                            <input style="display: none" type="file" data-id="newReport" id="attachments" multiple="multiple" name="attachDocuments" check-file-size="">
+                                        </th>
+                                        <th class="fileName">" + file.name + "</th>
+                                        <th><p style="margin-left:10px" class="delete disableInputFile"></p></th>
+                                    </tr>
+                                </table>
+
+                                @*<div class="attachedFilesTitle">
+            <div class="addedFilesList"></div>
+        </div>*@
                             </div>
                         </div>
                     </div>

@@ -749,9 +749,7 @@
         cmp.OptionSelect(caseInformationReport);
         cmp.OptionSelect(incidentResultReport);
         cmp.OptionSelect(isAccidentOngoing);
-        $(".addFileButton").on('onclick', function (event) {
-            $("#attachments").click();
-        });
+        
         caseInformationReport.on('change', function () {
             if ($("input:radio[name=whatHappened]:checked").val() == 'Other') {
                 $('.reportAbout').addClass('validate');
@@ -851,6 +849,35 @@
         otherFlag.on("click", function () {
             $("#Other").prop('checked', true);
         });
+        var counterFiles = 0;
+        var tableFile = $(".attachedFilesTitle").clone();
+        $(".addFileButton").on('click', function (event) {
+            var table = tableFile.clone();
+            //tableFile.clone().appendTo(".attach");
+            var index = 'attachDocuments[' + counterFiles + ']';
+            var input = table.find('input').attr('name', index);
+            var newElement = table.appendTo(".attach");
+            input.click();
+            
+            newElement.attr('style', "display:none"); 
+            newElement.on('change', function (event) {
+                changeInput(event);
+            });
+            counterFiles++;
+        });
+        function changeInput(event) {
+            var current = $(event.currentTarget);
+            current.attr('style', "display:block"); 
+
+            current.find('.disableInputFile').bind('click', function (event) {
+                var element = $(event.currentTarget);
+                element.parents('.attachedFilesTitle').remove();
+            });
+
+            Array.from(current.find('input')[0].files).forEach(function (file) {
+                current.find('.fileName').text(file.name);
+            });
+        }
     }
     function caseSummaryProcess() {
         caseSummary.find('input.validate').change(function () {
@@ -990,14 +1017,8 @@
                 }
             }
         });
-        if (document.querySelector('#attachments') != null) {
-            document.querySelector('#attachments').onchange = function (event) {
-                Array.from(this.files).forEach(function (file) {
-                    $('.attach').append("<table class='attachedFilesTitle' style='color: #3c3e3f;font-size: 14px;'><tr><th><img src=/Content/Icons/generic-file.png></th> <th>" + file.name + "</th></tr></table>");
-                });
-            }
-        }
     };
+
 
     function setDropdown() {
         $('.dropdown').unbind('click');
