@@ -3033,4 +3033,7 @@ Do not want to involve</value>
   <data name="Unspecified" xml:space="preserve">
     <value>Unspecified</value>
   </data>
+  <data name="ListSaveSites" xml:space="preserve">
+    <value>Please add @employeeconfidential.com to the list of your safe sites in your corporation’s email settings.</value>
+  </data>
 </root>
