@@ -636,104 +636,64 @@ public class GlobalFunctions
         }
         if (ReportsRelationTypesIDs.Count > 0)
         {
-
-
-            //var report_from_relation_type = db.report_relationship.Where(t => ReportsRelationTypesIDs.Contains(t.company_relationship_id.Value)).Select(t => t.report_id);
-            //_all_reports_old = _all_reports_old.Where(t => report_from_relation_type.Any(report => report == t.id)).ToList();
-
-
-            
             var idReports = _all_reports_old.Select(report => report.id).ToList();
             HashSet<report> listReports = new HashSet<report>();
 
-            if(ReportsRelationTypesIDs.Where(x => x == "Other").ToList().Count > 0)
+            if (ReportsRelationTypesIDs.Where(x => x == "Other").ToList().Count > 0)
             {
-                //select* from report_relationship where
-                //report_id in (select id from report where report.company_id IN(4207, 4206, 4205))
-                //and company_relationship_id is null
                 var listOther = db.report_relationship.Where(rel_rel => rel_rel.company_relationship_id == null && idReports.Contains(rel_rel.report_id)).Select(rep => rep.report_id).ToList();
-                //db.report.Where(rep => listOther.Contains(rep.id)).ToList();
 
                 var reportsContainstOther = _all_reports_old.Where(old_rep => listOther.Contains(old_rep.id));
 
-                foreach(var item in reportsContainstOther)
+                foreach (var item in reportsContainstOther)
                 {
                     listReports.Add(item);
                 }
             }
-
-            //select* from report_relationship
-            //join company_relationship on company_relationship.id = report_relationship.company_relationship_id
-            //where
-            //report_relationship.report_id in (select id from report where report.company_id IN(4207, 4206, 4205))
-            //and
-            //company_relationship.relationship_en = 'Employee'
+            //здесь неправильно скорей всего
             var relationship = _all_reports_old.Join(db.company_relationship,
                                             post => post.company_relationship_id,
                                             meta => meta.id,
                                             (post, meta) => new { Post = post, Meta = meta })
                                             .Where(postAndMeta => ReportsRelationTypesIDs.Any(listReportsRel => listReportsRel.Equals(postAndMeta.Meta.relationship_en)));
             var reportsWithFilter = relationship.Select(rel => rel.Post).ToList();
-            foreach(var item in reportsWithFilter)
+            foreach (var item in reportsWithFilter)
             {
                 listReports.Add(item);
             }
             _all_reports_old = listReports.ToList();
-            //_all_reports_old = _all_reports_old.Where(oldReport => relationship.Select(res => res.Post))
-             //_all_reports_old = relationship.Select(rel => rel.Post).ToList();
-
-            //_all_reports_old = _all_reports_old.Where(oldReport => ShipCompany.Select(res => res.TableB.report_id).Contains(oldReport.id)).ToList();
-            //for (int i = 0; i < ReportsRelationTypesIDs.Count; i++)
-            //{
-            //    if (ReportsRelationTypesIDs[i] == "Other")
-            //    {
-            //        ReportsRelationTypesIDs[i] = String.Empty;
-            //    }
-            //}
-            //var ShipCompany = db.report_relationship.Where(rel => idReports.Contains(rel.report_id) && ReportsRelationTypesIDs.Contains(rel.company_relationship_id)).ToList();
-
-            //var ShipCompany = (
-            //        db.report_relationship.GroupJoin(
-            //            db.company_relationship,
-            //            left => left.company_relationship_id,
-            //            right => right.id,
-            //            (left, right) => new
-            //            {
-            //                TableA = right,
-            //                TableB = left
-            //            }).SelectMany(p => p.TableA.DefaultIfEmpty(), (x, y) => new
-            //            {
-            //                TableA = y,
-            //                TableB = x.TableB
-            //            }).Where(u => idReports.Contains(u.TableB.report_id) && ReportsRelationTypesIDs.Any(old_repo => old_repo.Equals(u.TableA.relationship_en))));
-
-
-
-            //_all_reports_old= _all_reports_old.Where(oldReport => relationship.Select(res => res.Post))
-            // _all_reports_old = relationship.Select(rel => rel.Post).ToList();
-
-            //  //_all_reports_old = _all_reports_old.Where(oldReport => ShipCompany.Select(res => res.TableB.report_id).Contains(oldReport.id)).ToList();
-
         }
         if (ReportsSecondaryTypesIDs.Count > 0)
         {
-            //var report_from_secondary_type = db.report_secondary_type.Where(t => ReportsSecondaryTypesIDs.Contains(t.secondary_type_id)).Select(t => t.report_id);
-            //_all_reports_old = _all_reports_old.Where(t => report_from_secondary_type.Contains(t.id)).ToList();
-            //var DepAndReports = db.report_department.Join(db.company_department,
-            //                                   post => post.department_id,
-            //                                   meta => meta.id,
-            //                                   (post, meta) => new { Post = post, Meta = meta })
-            //                                   .Where(postAndMeta => ReportsDepartmentIDs.Any(repDep => repDep.Equals(postAndMeta.Meta.department_en)) && idReports.Contains(postAndMeta.Post.report_id));
-            //_all_reports_old = _all_reports_old.Where(oldReport => DepAndReports.Select(res => res.Post.report_id).Contains(oldReport.id)).ToList();
-
             var idReports = _all_reports_old.Select(report => report.id).ToList();
+            HashSet<report> listReports = new HashSet<report>();
+            if (ReportsSecondaryTypesIDs.Where(x => x.Equals("Other")).ToList().Count > 0)
+            {
+                var listOther = db.report_secondary_type.Where(sec_type => sec_type.secondary_type_id == 0 && idReports.Contains(sec_type.report_id)).Select(sec_type => sec_type.report_id).ToList();
+
+                var reportsContainstOther = _all_reports_old.Where(old_rep => listOther.Contains(old_rep.id));
+
+                foreach (var item in reportsContainstOther)
+                {
+                    listReports.Add(item);
+                }
+            }
+
             var secondaryTypes = db.report_secondary_type.Join(db.company_secondary_type,
-                                                        post => post.secondary_type_id,
-                                                        meta => meta.id,
-                                                        (post, meta) => new { Post = post, Meta = meta })
-                                                        .Where(postAndMeta => ReportsSecondaryTypesIDs.Any(listReports => listReports.Equals(postAndMeta.Meta.secondary_type_en))
-                                                        && idReports.Contains(postAndMeta.Post.report_id));
-            _all_reports_old = _all_reports_old.Where(oldReport => secondaryTypes.Select(res => res.Post.report_id).Contains(oldReport.id)).ToList();
+                post => post.secondary_type_id,
+                meta => meta.id,
+                (post, meta) => new { Post = post, Meta = meta })
+                .Where(postAndMeta => ReportsSecondaryTypesIDs.Any(listSecTypes => listSecTypes.Equals(postAndMeta.Meta.secondary_type_en))
+                && idReports.Contains(postAndMeta.Post.report_id));
+            var reportsWithFilter = secondaryTypes.Select(types => types.Post.report_id).ToList();
+
+            var selectedReports = _all_reports_old.Where(rep => reportsWithFilter.Contains(rep.id));
+
+            foreach (var item in selectedReports)
+            {
+                listReports.Add(item);
+            }
+            _all_reports_old = listReports.ToList();
         }
 
         if (ReportsLocationIDs.Count > 0)
