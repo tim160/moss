@@ -675,7 +675,7 @@ namespace EC.Controllers
       {
         try
         {
-          if (sign_off_mediator_id != 0 && promotion_value == ECGlobalConstants.investigation_status_completed)
+          if (sign_off_mediator_id != 0 && promotion_value == (int)CaseStatusConstants.CaseStatusValues.Completed)
           {
             #region Save to Assign Mediator from drop
             if (!db.report_mediator_assigned.Any(x => x.report_id == report_id && x.mediator_id == sign_off_mediator_id))
@@ -734,7 +734,7 @@ namespace EC.Controllers
 
       if (was_case_promoted)
       {
-        if (promotion_value == ECGlobalConstants.investigation_status_completed)
+        if (promotion_value == (int)CaseStatusConstants.CaseStatusValues.Completed)
         {
           Business.Actions.Email.EmailBody eb = new Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
 
@@ -755,15 +755,15 @@ namespace EC.Controllers
           glb.SaveEmailBeforeSend(user.id, um_temp.id, user.company_id, um_temp.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 9);
 
         }
-        else if (promotion_value == ECGlobalConstants.investigation_status_investigation && old_status == ECGlobalConstants.investigation_status_closed)
+        else if (promotion_value == (int)CaseStatusConstants.CaseStatusValues.Investigation && old_status == (int)CaseStatusConstants.CaseStatusValues.Closed)
         {
           //case was re-open, send re-open email
         }
-        else if (promotion_value == ECGlobalConstants.investigation_status_investigation && old_status == ECGlobalConstants.investigation_status_completed)
+        else if (promotion_value == (int)CaseStatusConstants.CaseStatusValues.Investigation && old_status == (int)CaseStatusConstants.CaseStatusValues.Completed)
         {
           //case was returned to investigation, send rereturn to investigation email
         }
-        else if (promotion_value == ECGlobalConstants.investigation_status_closed)
+        else if (promotion_value == (int)CaseStatusConstants.CaseStatusValues.Closed)
         {
           #region sendsms
           TextMessage text = new TextMessage();

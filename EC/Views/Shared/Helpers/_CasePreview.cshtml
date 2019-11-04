@@ -14,16 +14,16 @@
   IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
   string color = "";
   string position = "";
-  if (Model.investigation_status_number == ECGlobalConstants.investigation_status_resolution || Model.investigation_status_number == ECGlobalConstants.investigation_status_completed || Model.investigation_status_number == ECGlobalConstants.investigation_status_closed)
+  if (Model.investigation_status_number == (int)CaseStatusConstants.CaseStatusValues.Resolution || Model.investigation_status_number == (int)CaseStatusConstants.CaseStatusValues.Completed || Model.investigation_status_number == (int)CaseStatusConstants.CaseStatusValues.Closed)
   {
     color = "grey";
     position = "completedPosition";
   }
-  else if (Model.investigation_status_number == ECGlobalConstants.investigation_status_closed)
+  else if (Model.investigation_status_number == (int)CaseStatusConstants.CaseStatusValues.Closed)
   {
     color = "red";
   }
-  else if (Model.investigation_status_number == ECGlobalConstants.investigation_status_investigation)
+  else if (Model.investigation_status_number == (int)CaseStatusConstants.CaseStatusValues.Investigation)
   {
     color = "yellow";
   }
@@ -42,7 +42,7 @@
             </div>
         </a>
         <div class="timeScale">
-            @if (Model.investigation_status_number == ECGlobalConstants.investigation_status_investigation)
+            @if (Model.investigation_status_number == (int)CaseStatusConstants.CaseStatusValues.Investigation)
             {
 
                 <div class="greenLabel"></div>
@@ -52,7 +52,7 @@
                 <div class="greyLabel"></div>
                 <div class="greyLabel"></div>
             }
-            else if (Model.investigation_status_number == ECGlobalConstants.investigation_status_completed)
+            else if (Model.investigation_status_number == (int)CaseStatusConstants.CaseStatusValues.Completed)
             {
                 // <p class="caseBtn caseCompletedBtn"></p>
                 <div class="greenLabel orangeLabel"></div>
@@ -62,9 +62,9 @@
                 <div class="circle orange"></div>
                 <div class="greyLabel"></div>
             }
-            else if (Model.investigation_status_number == ECGlobalConstants.investigation_status_closed)
+            else if (Model.investigation_status_number == (int)CaseStatusConstants.CaseStatusValues.Closed)
             {
-                // vmesto greyLabel - caseClosedBtn
+              // vmesto greyLabel - caseClosedBtn
                 <div class="redLabel"></div>
                 <div class="circle red"></div>
                 <div class="redLabel"></div>
@@ -76,7 +76,7 @@
                 <div class="redLabel"></div>
                 <div class="circle red"></div>
             }
-            else if (Model.investigation_status_number == ECGlobalConstants.investigation_status_spam)
+            else if (Model.investigation_status_number == (int)CaseStatusConstants.CaseStatusValues.Spam)
             {
                 <div class="greyLabel"></div>
                 <div class="greyLabel"></div>
@@ -88,20 +88,20 @@
         </div>
         <div class="text2 @position">
 
-            @if (Model.investigation_status_number == ECGlobalConstants.investigation_status_investigation)
+            @if (Model.investigation_status_number == (int)CaseStatusConstants.CaseStatusValues.Investigation)
             {
                 <div>
                     @Model.current_status
                 </div>
             }
-            else if ((Model.investigation_status_number == ECGlobalConstants.investigation_status_resolution))
+            else if ((Model.investigation_status_number == (int)CaseStatusConstants.CaseStatusValues.Resolution))
             {
                 // cvet takoi je kak investigation
                 <div class="buttonForCase resolvedButton">
                     @Model.current_status
                 </div>
             }
-            else if ((Model.investigation_status_number == ECGlobalConstants.investigation_status_completed))
+            else if ((Model.investigation_status_number == (int)CaseStatusConstants.CaseStatusValues.Completed))
             {
                 // <p class="caseBtn caseCompletedBtn"></p>
                 @* case resolved *@
@@ -109,13 +109,13 @@
                     @Model.current_status
                 </div>
             }
-            else if (Model.investigation_status_number == ECGlobalConstants.investigation_status_escalation)
+            else if (Model.investigation_status_number == (int)CaseStatusConstants.CaseStatusValues.Escalation)
             {
                 <div class="orangeLabel">
                     @Model.current_status
                 </div>
             }
-            else if (Model.investigation_status_number == ECGlobalConstants.investigation_status_closed)
+            else if (Model.investigation_status_number == (int)CaseStatusConstants.CaseStatusValues.Closed)
             {
                 <div class="buttonForCase closedButton">
                     @Model.current_status
@@ -125,7 +125,7 @@
                 </div>
 
             }
-            else if (Model.investigation_status_number == ECGlobalConstants.investigation_status_spam)
+            else if (Model.investigation_status_number == (int)CaseStatusConstants.CaseStatusValues.Spam)
             {
                 //
                 <div class="greyLabel">
@@ -135,10 +135,10 @@
 
 
             <span>
-                @if ((Model.investigation_status_number != ECGlobalConstants.investigation_status_closed) && (Model.investigation_status_number != ECGlobalConstants.investigation_status_spam))
+                @if ((Model.investigation_status_number != (int)CaseStatusConstants.CaseStatusValues.Closed) && (Model.investigation_status_number != (int)CaseStatusConstants.CaseStatusValues.Spam))
                 {
-                    if (Model.days_left == 1)
-                    {
+                  if (Model.days_left == 1)
+                  {
                         @Model.days_left@Html.Raw("&nbsp;")@LocalizationGetter.GetString("dayleft", is_cc)
 
                     }
@@ -154,7 +154,7 @@
                 <div class="text3">
                     Reported by @Model.reported_by_whom?.ToLower() on @Model.reported_dt
                 </div>
-                @if (Model.investigation_status_number == ECGlobalConstants.investigation_status_completed)
+                @if (Model.investigation_status_number == (int)CaseStatusConstants.CaseStatusValues.Completed)
                 {
                     @* work here *@
                     <div class="descriptionCasePosition">
@@ -195,15 +195,15 @@
 
                     </div>
                 }
-                else if (Model.investigation_status_number == ECGlobalConstants.investigation_status_closed)
+                else if (Model.investigation_status_number == (int)CaseStatusConstants.CaseStatusValues.Closed)
                 {
                     <div class="descriptionCasePosition">
                         <div class="column1">
-                            @if (Model.previous_investigation_status_number == ECGlobalConstants.investigation_status_completed)
+                            @if (Model.previous_investigation_status_number == (int)CaseStatusConstants.CaseStatusValues.Completed)
                 {
                                 <img src="~/Content/Icons/caseNotResolvedIcons.png" />
                             }
-                            else if (Model.previous_investigation_status_number == ECGlobalConstants.investigation_status_resolution)
+                            else if (Model.previous_investigation_status_number == (int)CaseStatusConstants.CaseStatusValues.Resolution)
                             {
                                 <img src="~/Content/Icons/yes.png" />
                             }
@@ -226,13 +226,13 @@
                                 </div>
                             </div>
                             <div class="column4">
-                                @if (Model.previous_investigation_status_number == ECGlobalConstants.investigation_status_completed)
+                                @if (Model.previous_investigation_status_number == (int)CaseStatusConstants.CaseStatusValues.Completed)
                                 {
                                     <div class="negative">
                                         @LocalizationGetter.GetString("CaseCantBeResolved", is_cc).
                                     </div>
                                 }
-                                else if (Model.previous_investigation_status_number == ECGlobalConstants.investigation_status_resolution)
+                                else if (Model.previous_investigation_status_number == (int)CaseStatusConstants.CaseStatusValues.Resolution)
                                 {
                                     <div class="positive">
                                         @LocalizationGetter.GetString("CaseResolved", is_cc).
@@ -282,7 +282,7 @@
 
                     </div>
                 }
-                else if (Model.investigation_status_number == ECGlobalConstants.investigation_status_resolution)
+                else if (Model.investigation_status_number == (int)CaseStatusConstants.CaseStatusValues.Resolution)
                 {
 
                     <div class="descriptionCasePosition">

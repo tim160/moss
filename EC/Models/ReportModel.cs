@@ -855,7 +855,7 @@ namespace EC.Models
         // Overloaded method when we know the delay
         public int GetThisStepDaysLeft(int step_delay_allowed)
         {
-          if (_report.status_id == ECGlobalConstants.investigation_status_closed || _report.status_id == ECGlobalConstants.investigation_status_spam)
+          if (_report.status_id == (int)CaseStatusConstants.CaseStatusValues.Closed || _report.status_id == (int)CaseStatusConstants.CaseStatusValues.Spam)
             return 0;
             DateTime promoted_date = LastPromotedDate();
             double days_left = 2;
@@ -911,7 +911,7 @@ namespace EC.Models
 
             int _prev_inv_status_id = _previous_investigation_status_id();
             bool is_spam = false;
-            if ((_investigation_status == ECGlobalConstants.investigation_status_spam) || (_prev_inv_status_id == ECGlobalConstants.investigation_status_spam && _investigation_status == ECGlobalConstants.investigation_status_closed))
+            if ((_investigation_status == (int)CaseStatusConstants.CaseStatusValues.Spam) || (_prev_inv_status_id == (int)CaseStatusConstants.CaseStatusValues.Spam && _investigation_status == (int)CaseStatusConstants.CaseStatusValues.Closed))
             {
                 is_spam = true;
                 // at least its spam
@@ -927,7 +927,7 @@ namespace EC.Models
         public bool IsCompletedScreen()
         {
             bool is_completed = false;
-            if ((_investigation_status == ECGlobalConstants.investigation_status_completed) || (_investigation_status == ECGlobalConstants.investigation_status_resolution))
+            if ((_investigation_status == (int)CaseStatusConstants.CaseStatusValues.Completed) || (_investigation_status == (int)CaseStatusConstants.CaseStatusValues.Resolution))
             {
                 is_completed = true;
                 /*    // at least its spam
@@ -942,7 +942,7 @@ namespace EC.Models
         {
             int _prev_inv_status_id = _previous_investigation_status_id();
             bool is_closed = false;
-            if (((_investigation_status == ECGlobalConstants.investigation_status_closed) && (_prev_inv_status_id != ECGlobalConstants.investigation_status_spam)))
+            if (((_investigation_status == (int)CaseStatusConstants.CaseStatusValues.Closed) && (_prev_inv_status_id != (int)CaseStatusConstants.CaseStatusValues.Spam)))
             {
                 is_closed = true;
                 /*    // at least its spam
@@ -957,7 +957,7 @@ namespace EC.Models
         public bool IsPendingScreen()
         {
             bool is_closed = false;
-            if ((_investigation_status == ECGlobalConstants.investigation_status_pending) || (_investigation_status == ECGlobalConstants.investigation_status_review))
+            if ((_investigation_status == (int)CaseStatusConstants.CaseStatusValues.Pending) || (_investigation_status == (int)CaseStatusConstants.CaseStatusValues.Review))
             {
                 is_closed = true;
                 /*    // at least its spam
@@ -977,9 +977,9 @@ namespace EC.Models
                 return ECGlobalConstants._default_date;
             }
             List<int> _active_classes = new List<int>();
-            _active_classes.Add(ECGlobalConstants.investigation_status_investigation);
-            _active_classes.Add(ECGlobalConstants.investigation_status_completed);
-            _active_classes.Add(ECGlobalConstants.investigation_status_closed);
+            _active_classes.Add((int)CaseStatusConstants.CaseStatusValues.Investigation);
+            _active_classes.Add((int)CaseStatusConstants.CaseStatusValues.Completed);
+            _active_classes.Add((int)CaseStatusConstants.CaseStatusValues.Closed);
 
             report_investigation_status last_status = new report_investigation_status();
             if (db.report_investigation_status.Any(item => (item.report_id == ID)))
@@ -2713,9 +2713,9 @@ namespace EC.Models
 
         public string DaysLeftClosedSpamMessage(int delay_allowed)
         {
-          if (_report.status_id == ECGlobalConstants.investigation_status_spam)
+          if (_report.status_id == (int)CaseStatusConstants.CaseStatusValues.Spam)
             return $"Sent on {m_DateTimeHelper.ConvertDateToShortString(_report.last_update_dt) }";
-          else if (_report.status_id == ECGlobalConstants.investigation_status_closed)
+          else if (_report.status_id == (int)CaseStatusConstants.CaseStatusValues.Closed)
             return $"Closed on {m_DateTimeHelper.ConvertDateToShortString(_report.last_update_dt) }";
           else
           {

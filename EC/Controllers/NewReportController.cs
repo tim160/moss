@@ -105,7 +105,7 @@ namespace EC.Controllers.ViewModel
           // need to update investigation status from pending to review after first mediator accessed the report
           report_investigation_status _review_status = new report_investigation_status();
                     _review_status.created_date = DateTime.Now;
-                    _review_status.investigation_status_id = ECGlobalConstants.investigation_status_review;
+                    _review_status.investigation_status_id = (int)CaseStatusConstants.CaseStatusValues.Review;
                     _review_status.report_id = report_id;
                     _review_status.user_id = user_id;
                     _review_status.description = "";
@@ -113,7 +113,7 @@ namespace EC.Controllers.ViewModel
                     db.report_investigation_status.Add(_review_status);
 
                     var report = db.report.FirstOrDefault(x => x.id == report_id);
-                    report.status_id = ECGlobalConstants.investigation_status_review;
+                    report.status_id = (int)CaseStatusConstants.CaseStatusValues.Review;
                     report.last_update_dt = DateTime.Now;
                     report.user_id = user_id;
 
@@ -192,7 +192,7 @@ namespace EC.Controllers.ViewModel
                 new report_investigation_status()
                 {
                     report_id = report_id,
-                    investigation_status_id = ECGlobalConstants.investigation_status_spam,
+                    investigation_status_id = (int)CaseStatusConstants.CaseStatusValues.Spam,
                     created_date = DateTime.Now,
                     user_id = user_id,
                     description = spam_Message
@@ -201,7 +201,7 @@ namespace EC.Controllers.ViewModel
             db.report_investigation_status.Add(addStatus);
 
             var report = db.report.FirstOrDefault(x => x.id == report_id);
-            report.status_id = ECGlobalConstants.investigation_status_spam;
+            report.status_id = (int)CaseStatusConstants.CaseStatusValues.Spam;
             report.last_update_dt = DateTime.Now;
             report.user_id = user_id;
 
@@ -239,7 +239,7 @@ namespace EC.Controllers.ViewModel
                 new report_investigation_status()
                 {
                     report_id = report_id,
-                    investigation_status_id = ECGlobalConstants.investigation_status_investigation,
+                    investigation_status_id = (int)CaseStatusConstants.CaseStatusValues.Investigation,
                     created_date = DateTime.Now,
                     user_id = user_id,
                     description = description
@@ -248,7 +248,7 @@ namespace EC.Controllers.ViewModel
                 adv.report_investigation_status.Add(addStatus);
 
                 var report = adv.report.FirstOrDefault(x => x.id == report_id);
-                report.status_id = ECGlobalConstants.investigation_status_investigation;
+                report.status_id = (int)CaseStatusConstants.CaseStatusValues.Investigation;
                 report.last_update_dt = DateTime.Now;
                 report.user_id = user_id;
 

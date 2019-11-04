@@ -13,6 +13,7 @@ namespace EC.Constants
         public const string Investigation = "Investigation";
         public const string Resolution = "Resolution";
         public const string Escalation = "Escalation";
+        public const string Completed = "Completed";
         public const string Closed = "Closed";
         public const string Spam = "Spam";
         public const string Closed_Not_Resolved = "Closed, not resolved";
@@ -24,6 +25,7 @@ namespace EC.Constants
             Investigation = 3,
             Resolution = 4,
             Escalation = 5,
+            Completed  = 6,
             Closed = 9,
             Spam = 7,
             Closed_Not_Resolved = 8,
