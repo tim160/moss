@@ -1342,7 +1342,6 @@
     <Content Include="Views\Shared\EditorTemplates\ApproveDialogModal.cshtml" />
     <Content Include="Views\EmployeeAwareness\Index.cshtml" />
     <Content Include="Views\EmployeeAwareness\Poster.cshtml" />
-    <Content Include="Views\Shared\Helpers\_CasePreview.cshtml" />
     <Content Include="Views\Shared\Helpers\_SingleMessage.cshtml" />
     <Content Include="Views\Settings\WorkFlow.cshtml" />
     <Content Include="Views\Settings\partial\casesHeared.cshtml" />
