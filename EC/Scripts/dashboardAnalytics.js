@@ -164,9 +164,9 @@
     });
 
     function makeTodaySnapshot(AnalyticsByDate, $scope, companyIdArray) {
-        var analiticsObj = AnalyticsByDate.getData(companyIdArray);
+        var analyticsObj = AnalyticsByDate.getData(companyIdArray);
 
-        analiticsObj.then(function (response) {
+        analyticsObj.then(function (response) {
             $scope._today_spanshot = response.data._today_spanshot;
         });
     }

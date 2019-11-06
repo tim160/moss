@@ -64,7 +64,7 @@ namespace EC
 
                bundles.Add(new StyleBundle("~/Content/styleAnalytics").Include(
                     "~/Content/styleAnalytics.css",
-                    "~/Content/daterangepickerAnalit.css"));
+                    "~/Content/daterangepickerAnalytic.css"));
 
                bundles.Add(new StyleBundle("~/Content/lcnr").Include(
                     "~/Content/main.css",

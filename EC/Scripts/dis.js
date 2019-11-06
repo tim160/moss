@@ -122,8 +122,8 @@
                                         if (MediatorId > 0) {
                                             fd.append("MediatorId", MediatorId);
                                         }
-                                        var analiticsObj = uploadImage.getData(fd);
-                                        analiticsObj.then(function (response) {
+                                        var analyticsObj = uploadImage.getData(fd);
+                                        analyticsObj.then(function (response) {
                                             var from = angular.element("#urlAjaxUploadFiles").attr("from");
                                             if (from == "User") {
                                                 angular.element("#logoUser").attr("src", response.data + '?' + new Date().getTime());
