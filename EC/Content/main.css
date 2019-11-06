@@ -4271,7 +4271,7 @@ html body .selectStyled{
         line-height: 19px;
     }
 
-    #ddListForCases .blockAnalitics .menuItem .menuUl {
+    #ddListForCases .blockAnalytics .menuItem .menuUl {
         max-height: 380px;
         overflow-y: scroll;
     }
@@ -4298,7 +4298,7 @@ html body .selectStyled{
         padding: 0px;
     }
 
-    #ddListForCases .blockAnalitics .menuItem:hover .menuUl {
+    #ddListForCases .blockAnalytics .menuItem:hover .menuUl {
         width: 100%;
     }
 
@@ -4313,7 +4313,7 @@ html body .selectStyled{
         position: static;
     }
 
-    #ddListForCases .blockAnalitics .menuItem .menuUl {
+    #ddListForCases .blockAnalytics .menuItem .menuUl {
         max-height: 380px;
         overflow-y: scroll;
     }

@@ -4035,11 +4035,11 @@ body .menuUl .positionText {
     left: -160px !important;
 }
 
-.blockAnalitics .menuItem:hover .menuUl {
+.blockAnalytics .menuItem:hover .menuUl {
     width: 100%;
 }
 
-.blockAnalitics .menuItem .menuUl {
+.blockAnalytics .menuItem .menuUl {
     max-height: 380px;
     overflow-y: scroll;
 }
@@ -4054,7 +4054,7 @@ body .menuUl .positionText {
         transform: rotate(180deg);
     }
 
-.blockAnalitics .blockTodayContant {
+.blockAnalytics .blockTodayContant {
     margin: 0 auto;
 }
 
