@@ -568,7 +568,8 @@
                     email: email.trim(),
                 }
             }).done(function (data) {//data from server
-                currentItem.text(data)
+                //currentItem.text(data)
+                alert(data);
             }).fail(function (error) {
                 console.log(error);
             });
