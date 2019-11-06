@@ -158,8 +158,16 @@
                                 </div>
                                 <div class="blockInfo">
                                     <img src='@Url.Content("/Content/Icons/blockInfo_img2"+@class_ext+".png")'>
-                                    <label>@_user.email</label>
+                                    <label class="emailBlockInfo">@_user.email</label>
                                 </div>
+                                @if (_user.status_id == 3 || (_user.status_id == 0 && _user.id == 0))
+                                {
+                                    <div class="blockInfo resendInvitation">
+                                        <img src='@Url.Content("/Content/Icons/resend.png")' style="cursor:pointer">
+                                        <label style="cursor:pointer">Resend invitation</label>
+                                    </div>
+                                }
+
                             </div>
                         </div><!--blockIteamTeam-->
                     }
@@ -220,7 +228,7 @@
     }
     <div class="footerInputPosition footerInputStyle">
         <div class="contentSettings secondHeader oldstyle">
-        @if (1 == 0)
+        @if (0 == 0)
         {
             <div class="headerCompanyProfile">
                 @if (is_cc.Value && is_valid_mediator)
@@ -242,7 +250,7 @@
                 {
                     if (is_valid_mediator)
                     {
-                        @*@<div class="headerBlock">
+                        <div class="headerBlock">
                                 <div class="blockText">
                                     <p class="title">@LocalizationGetter.GetString("invite_new_mediator", is_cc)</p>
                                 </div>
@@ -252,7 +260,8 @@
                                 <div class="closeIcon"></div>
                                 <input id="sendMessage" type="submit" />
                                 <span class="sendBtn">@LocalizationGetter.GetString("Send", is_cc).ToLower()</span>
-                            </div>*@<div class="headerBlock">
+                            </div>
+                        <div class="headerBlock">
                             <div class="blockText">
                                 <p class="title"></p>
                             </div>

@@ -90,7 +90,7 @@
     string overlay_title = LocalizationGetter.GetString("RequestCloseCase");
     string textbox_title = LocalizationGetter.GetString("Caseresolution");
     string left_button_promotion = "";
-    string normal_button_value = ECGlobalConstants.investigation_status_completed.ToString();
+    string normal_button_value = CaseStatusConstants.CaseStatusValues.Completed.ToString();
     string left_button_value = "";// Constant.investigation_status_completed.ToString();
     List<company_outcome> company_outcomes = cm.Outcomes(_user.company_id, 2);
 
@@ -104,9 +104,9 @@
         if ((investigationstatus == 9) && (_user.role_id == 4 || _user.role_id == 5))
         {
             Res_or_comp = LocalizationGetter.GetString("Reopen");
-            normal_button_value = ECGlobalConstants.investigation_status_investigation.ToString();
+            normal_button_value = CaseStatusConstants.CaseStatusValues.Investigation.ToString();
         }
-        if (((rm._investigation_status == ECGlobalConstants.investigation_status_completed || rm._investigation_status == ECGlobalConstants.investigation_status_resolution)))
+        if (((rm._investigation_status == (int)CaseStatusConstants.CaseStatusValues.Completed || rm._investigation_status == (int)CaseStatusConstants.CaseStatusValues.Resolution)))
         {
             Res_or_comp = LocalizationGetter.GetString("Awaitingapproval");
         }
@@ -160,7 +160,7 @@
                                { "is_cc", is_cc }
                         })
     }
-    else if (((rm._investigation_status == ECGlobalConstants.investigation_status_completed || rm._investigation_status == ECGlobalConstants.investigation_status_resolution)))
+    else if (((rm._investigation_status == (int)CaseStatusConstants.CaseStatusValues.Completed || rm._investigation_status == (int)CaseStatusConstants.CaseStatusValues.Resolution)))
     {
         @Html.Partial("~/Views/Shared/EditorTemplates/AwaitingApprovalModalNew.cshtml", new ViewDataDictionary {
                                { "normal_button_promotion", normal_button_promotion },

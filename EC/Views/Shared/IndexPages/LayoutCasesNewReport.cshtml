@@ -334,7 +334,8 @@
                 string normal_button_promotion = LocalizationGetter.GetString("RequestCloseCase", is_cc); //ResolveCaseUp
                 string left_button_promotion = "";
 
-                string normal_button_value = ECGlobalConstants.investigation_status_completed.ToString();
+                //string normal_button_value = ECGlobalConstants.investigation_status_completed;
+                string normal_button_value = CaseStatusConstants.CaseStatusValues.Completed.ToString();
                 string left_button_value = "";// Constant.investigation_status_completed.ToString();
 
 
@@ -377,7 +378,7 @@
                         overlay_title = LocalizationGetter.GetString("ReopenCase", is_cc);
                         textbox_title = LocalizationGetter.GetString("Description", is_cc);
                         normal_button_promotion = LocalizationGetter.GetString("ReopenCaseUp", is_cc);
-                        normal_button_value = ECGlobalConstants.investigation_status_investigation.ToString();
+                        normal_button_value = CaseStatusConstants.CaseStatusValues.Investigation.ToString();
 
                     }
                     @Html.Partial("~/Views/Shared/EditorTemplates/CreateTaskModal.cshtml", new ViewDataDictionary {
@@ -398,7 +399,7 @@
                {
                })
 
-                    if (((rm._investigation_status == ECGlobalConstants.investigation_status_completed || rm._investigation_status == ECGlobalConstants.investigation_status_resolution)))
+                    if (((rm._investigation_status == (int)CaseStatusConstants.CaseStatusValues.Completed || rm._investigation_status == (int)CaseStatusConstants.CaseStatusValues.Resolution)))
                     {
                         <div id="resoveCompletedTopmessage">
                             <div class="buttonNoneBorderGray">

@@ -3041,4 +3041,10 @@
   <data name="Unspecified" xml:space="preserve">
     <value>Unspecified</value>
   </data>
+  <data name="InvitationWasSent" xml:space="preserve">
+    <value>La invitación fue enviada</value>
+  </data>
+  <data name="ErrorResendingEmail" xml:space="preserve">
+    <value>Error resending email to selected case admin</value>
+  </data>
 </root>

@@ -719,12 +719,38 @@ namespace EC.Controllers
                 EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
 
                 CompanyModel cm = new CompanyModel(_user.company_id);
-                eb.MediatorInvited(_user.first_nm, _user.last_nm, _user.first_nm, _user.last_nm, cm._company.company_nm, generated_code, DomainUtil.GetSubdomainLink(Request.Url.AbsoluteUri.ToLower(), Request.Url.AbsoluteUri.ToLower()) + "/new/?code=" + generated_code + "&email=" + email);
+                eb.MediatorInvited(_user.first_nm, _user.last_nm, _user.first_nm, _user.last_nm, cm._company.company_nm, generated_code,
+                    DomainUtil.GetSubdomainLink(Request.Url.AbsoluteUri.ToLower(),
+                    Request.Url.AbsoluteUri.ToLower()) + "/new/?code=" + generated_code + "&email=" + email);
                 glb.SaveEmailBeforeSend(_user.id, 0, 0, email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
                    LocalizationGetter.GetString("Email_Title_MediatorInvited", is_cc), eb.Body, false, 41);
             }
 
             return LocalizationGetter.GetString("_Completed", is_cc).ToLower();
+        }
+        public string resendInvitation(string email)
+        {
+            email = email.ToLower().Trim();
+
+            user _user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            if (_user == null || _user.id == 0)
+                return LocalizationGetter.GetString("EmptyData", is_cc);
+
+            if (_user.role_id == 8)
+            {
+                return LocalizationGetter.GetString("EmptyData", is_cc);
+            }
+
+            if (string.IsNullOrEmpty(email))
+            {
+                return LocalizationGetter.GetString("EmptyData", is_cc);
+            }
+            if (!m_EmailHelper.IsValidEmail(email))
+            {
+                return LocalizationGetter.GetString("EmailInvalid", is_cc);
+            }
+
+            return glb.resendInvitation(email, is_cc, Request, _user);
         }
         public ActionResult Password()
         {

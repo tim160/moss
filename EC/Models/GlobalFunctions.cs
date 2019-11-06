@@ -1882,4 +1882,73 @@ public class GlobalFunctions
 
         return true;
     }
+
+    public string resendInvitation(string email, bool is_cc, HttpRequestBase Request, user AdminUser)
+    {
+        email = email.ToLower().Trim();
+        var invite = db.invitation.Where(i => i.email == email).FirstOrDefault();
+
+        if (invite != null)
+        {
+            var userSender = db.user.Find(invite.sent_by_user_id);
+            var company = db.company.FirstOrDefault(x => x.id == userSender.company_id);
+
+            IEmailAddressHelper m_EmailHelper = new EmailAddressHelper();
+
+            if ((email.Length > 0) && m_EmailHelper.IsValidEmail(email))
+            {
+                EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
+                EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+
+                eb.MediatorInvited(AdminUser.first_nm, AdminUser.last_nm,
+                    userSender.first_nm, userSender.last_nm, company.company_nm, invite.code,
+                    DomainUtil.GetSubdomainLink(Request.Url.AbsoluteUri.ToLower(),
+                    Request.Url.AbsoluteUri.ToLower()) + "/new/?code=" + invite.code + "&email=" + email);
+
+                SaveEmailBeforeSend(userSender.id, 0, 0, email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
+                   LocalizationGetter.GetString("Email_Title_MediatorInvited", is_cc), eb.Body, false, 41);
+
+                return LocalizationGetter.GetString("InvitationWasSent", is_cc);
+            }
+        }
+        else
+        {
+            var newAdminUser = db.user.Where(u =>
+                u.email.Equals(email) &&
+                u.company_id == AdminUser.company_id &&
+                u.status_id == EC.Constants.ECStatusConstants.Pending_Value).FirstOrDefault();
+
+            if (newAdminUser != null)
+            {
+                var company = db.company.Where(c => c.id == newAdminUser.company_id).FirstOrDefault();
+
+                var oldMail = db.email.Where(mail => mail.To == email && mail.Title == "You have been added as a Case Administrator").FirstOrDefault();
+                if (oldMail != null)
+                {
+                    email resendEmail = new email();
+                    resendEmail.company_id = oldMail.company_id;
+                    resendEmail.user_id_from = oldMail.user_id_from;
+                    resendEmail.To = oldMail.To;
+                    resendEmail.From = oldMail.From;
+                    resendEmail.cc = oldMail.cc;
+                    resendEmail.bcc = oldMail.bcc;
+                    resendEmail.Title = oldMail.Title;
+                    resendEmail.Body = oldMail.Body;
+                    resendEmail.EmailType = oldMail.EmailType;
+                    resendEmail.attachment = oldMail.attachment;
+                    resendEmail.isSSL = oldMail.isSSL;
+                    resendEmail.user_id_to = oldMail.user_id_to;
+                    resendEmail.is_sent = false;
+                    resendEmail.created_dt = DateTime.Now;
+
+                    db.email.Add(resendEmail);
+                    db.SaveChanges();
+
+                    return LocalizationGetter.GetString("InvitationWasSent", is_cc);
+
+                }
+            }
+        }
+        return LocalizationGetter.GetString("ErrorResendingEmail", is_cc);
+    }
 }

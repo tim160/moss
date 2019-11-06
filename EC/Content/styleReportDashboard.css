@@ -1843,6 +1843,15 @@ p.headerText span {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+.resendInvitation {
+    color: black;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.blockIteamTeam .resendInvitation label {
+    color: black;
+}
 .blockIteamTeam .blockInfo img {
     display: inline-block;
     vertical-align: middle;
@@ -2008,10 +2017,9 @@ p.addMoreMediatorsBtn {
     right: 36px;
 }
 
-
-.headerCompanyProfile .blockSendEmail span.sendBtn:hover, .headerCompanyProfile .blockSendEmail span.sendBtn:focus{
-    background-color: #049787;
-}
+    .headerCompanyProfile .blockSendEmail span.sendBtn:hover, .headerCompanyProfile .blockSendEmail span.sendBtn:focus {
+        background-color: #049787;
+    }
 .headerCompanyProfile .blockSendEmail span.sendBtn:active{
     border-color: #345c60;
     background-color: #345c60;

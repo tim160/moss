@@ -117,7 +117,7 @@
                     <img class="subNavigationIcons__imgPrint" src="~/Content/Icons/print_icon_white.png" alt="Print/Download Original Report" />
                 </a>
             </li>*@
-            @if (rm._investigation_status == ECGlobalConstants.investigation_status_closed)
+            @if (rm._investigation_status == (int)CaseStatusConstants.CaseStatusValues.Closed)
             {
                 <li class="mainNavigationTabs__tab-link" data-tab="mainTab-2" style="padding: 14px 25px;">
                     <a href="@Url.Action("PrintToPdf", new { id = rm.ID })" class="subNavigationIcons__a" target="_blank">
