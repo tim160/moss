@@ -275,7 +275,7 @@
         };
 
         $scope.printGraphs = function (elem, title) {
-            var offsetWidthOld = document.querySelectorAll(".borderAnalit")[0].offsetWidth;
+            var offsetWidthOld = document.querySelectorAll(".borderAnalyt")[0].offsetWidth;
             $scope.cacsChart.chart.width = 700;
             var printHtml = "";
 
