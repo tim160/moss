@@ -93,8 +93,8 @@
             setTimeout(function () {
                 var mywindow = window.open('', 'PRINT', 'width=' + screen.availWidth + ',height=' + screen.availHeight);
                 mywindow.document.write('<html><head><title>' + title + '</title>');
-                mywindow.document.write('<link rel="stylesheet" href="/Content/analiticsDashboard.css" type="text/css"/>');
-                mywindow.document.write('<link rel="stylesheet" href="/Content/analiticsDashboardPrint.css" type="text/css"/>');
+                mywindow.document.write('<link rel="stylesheet" href="/Content/analyticsDashboard.css" type="text/css"/>');
+                mywindow.document.write('<link rel="stylesheet" href="/Content/analyticsDashboardPrint.css" type="text/css"/>');
                 mywindow.document.write('</head><body onload="window.print(); window.close()">');
                 //mywindow.document.write('</head><body>');
                 //mywindow.document.write('<h1>' + title + '</h1>');
@@ -366,7 +366,7 @@
                 var deffered = $q.defer();
                 $http({
                     method: 'GET',
-                    url: '/api/AnaliticsDashboardCases/AnalyticsByDate/' + strVithResult
+                    url: '/api/AnalyticsDashboardCases/AnalyticsByDate/' + strVithResult
                 })
                     .then(function success(response) {
                         deffered.resolve(response);
@@ -405,7 +405,7 @@
                 var deffered = $q.defer();
                 $http({
                     method: 'POST',
-                    url: '/api/AnaliticsDashboardCases/getTurnAroundTime',
+                    url: '/api/AnalyticsDashboardCases/getTurnAroundTime',
                     data: arrayAdditionalCompanyId
                 })
                     .then(function success(response) {

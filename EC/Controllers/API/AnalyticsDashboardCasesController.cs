@@ -8,7 +8,7 @@ using EC.Models;
 
 namespace EC.Controllers.API
 {
-    public class AnaliticsDashboardCasesController : BaseApiController
+    public class AnalyticsDashboardCasesController : BaseApiController
     {
         [HttpGet]
         public Object AnalyticsByDate([FromUri] int[] id)

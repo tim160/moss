@@ -26,7 +26,8 @@ namespace EC.Controllers.API
             var model = DB.user.FirstOrDefault(x => x.id == id);
             var um = new UserModel(user.id);
 
-            model = model ?? new user {
+            model = model ?? new user
+            {
                 user_permissions_approve_case_closure = 2,
                 user_permissions_change_settings = 2,
                 role_id = 6,
@@ -47,11 +48,12 @@ namespace EC.Controllers.API
                     departmentId = model == null ? 0 : model.company_department_id,
                     locationId = model == null ? 0 : model.company_location_id,
                     user_permissions_approve_case_closure = model == null || (model.user_permissions_approve_case_closure == null || model.user_permissions_approve_case_closure == 0) ? 2 : model.user_permissions_approve_case_closure,
-                    user_permissions_change_settings = model == null || (model.user_permissions_change_settings == null || model.user_permissions_change_settings == 0)? 2 : model.user_permissions_change_settings,
+                    user_permissions_change_settings = model == null || (model.user_permissions_change_settings == null || model.user_permissions_change_settings == 0) ? 2 : model.user_permissions_change_settings,
                     status_id = model == null ? 3 : model.status_id,
                     photo_path = model.photo_path,
                 },
-                user = new {
+                user = new
+                {
                     role = user.role_id,
                     CanEditUserProfiles = um.CanEditUserProfiles,
                 },
@@ -61,12 +63,12 @@ namespace EC.Controllers.API
         [HttpPost]
         public object Post(user model)
         {
-            user curUser = (user)HttpContext.Current.Session[ECGlobalConstants.CurrentUserMarcker];
+            user sessionUser = (user)HttpContext.Current.Session[ECGlobalConstants.CurrentUserMarcker];
             var user = DB.user.FirstOrDefault(x => x.id == model.id);
 
             //Change only own settings
             //Can not add
-            if ((curUser.role_id != 5) & (user == null || curUser.id != user.id))
+            if ((sessionUser.role_id != 5) & (user == null || sessionUser.id != user.id))
             {
                 return new
                 {
@@ -92,9 +94,10 @@ namespace EC.Controllers.API
             {
                 var glb = new GlobalFunctions();
 
-                if (DB.user.Any(x => x.email.ToLower() == model.email.ToLower() && x.company_id == curUser.company_id && (x.role_id == ECLevelConstants.level_escalation_mediator || x.role_id == ECLevelConstants.level_mediator || x.role_id == ECLevelConstants.level_supervising_mediator)))
+                if (DB.user.Any(x => x.email.ToLower() == model.email.ToLower() && x.company_id == sessionUser.company_id && (x.role_id == ECLevelConstants.level_escalation_mediator || x.role_id == ECLevelConstants.level_mediator || x.role_id == ECLevelConstants.level_supervising_mediator)))
                 {
-                    return new {
+                    return new
+                    {
                         ok = false,
                         message = $"User with email '{model.email}' already exists!",
                     };
@@ -104,7 +107,7 @@ namespace EC.Controllers.API
                 int location_id = model.company_location_id ?? 0;
                 if (model.company_location_id == 0)
                 {
-                    List<company_location> company_locations = DB.company_location.Where(t => t.company_id == curUser.company_id && t.status_id == 2).OrderBy(t => t.id).ToList();
+                    List<company_location> company_locations = DB.company_location.Where(t => t.company_id == sessionUser.company_id && t.status_id == 2).OrderBy(t => t.id).ToList();
                     if (company_locations.Count > 0)
                         location_id = company_locations[0].id;
                 }
@@ -112,8 +115,8 @@ namespace EC.Controllers.API
                 user = new user();
                 user.first_nm = model.first_nm.Trim();
                 user.last_nm = model.last_nm.Trim();
-                user.company_id = curUser.company_id;
-                if (curUser.role_id == 5)
+                user.company_id = sessionUser.company_id;
+                if (sessionUser.role_id == 5)
                 {
                     user.role_id = model.role_id;
                     user.status_id = model.status_id;
@@ -152,12 +155,13 @@ namespace EC.Controllers.API
                 user.guid = Guid.NewGuid();
                 DB.user.Add(user);
                 DB.SaveChanges();
-                var company = DB.company.FirstOrDefault(x => x.id == curUser.company_id);
+
+                var company = DB.company.FirstOrDefault(x => x.id == sessionUser.company_id);
                 EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
                 EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, HttpContext.Current.Request.Url.AbsoluteUri.ToLower());
                 eb.NewMediator(
-                    $"{curUser.first_nm} {curUser.last_nm}", 
-                    $"{company.company_nm}", 
+                    $"{sessionUser.first_nm} {sessionUser.last_nm}",
+                    $"{company.company_nm}",
                     HttpContext.Current.Request.Url.AbsoluteUri.ToLower(),
                     HttpContext.Current.Request.Url.AbsoluteUri.ToLower(),
                     $"{user.login_nm}",
@@ -165,10 +169,10 @@ namespace EC.Controllers.API
                 string body = eb.Body;
                 //em.Send(model.email.ToLower(), "You have been added as a Case Administrator", body, true);
                 //need to check
-                glb.SaveEmailBeforeSend(curUser.id, user.id, curUser.company_id, model.email, System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", "You have been added as a Case Administrator", body, false, 0);
+                glb.SaveEmailBeforeSend(sessionUser.id, user.id, sessionUser.company_id, model.email, System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", "You have been added as a Case Administrator", body, false, 0);
 
             }
-      DB.SaveChanges();
+            DB.SaveChanges();
 
             return new
             {
