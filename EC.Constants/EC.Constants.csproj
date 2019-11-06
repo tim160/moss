@@ -48,9 +48,9 @@
     <Compile Include="ECLanguageConstants.cs" />
     <Compile Include="ECLevelConstants.cs" />
     <Compile Include="ECSessionConstants.cs" />
+    <Compile Include="ECStatusConstants.cs" />
     <Compile Include="EncryptionConstants.cs" />
     <Compile Include="FileConstants.cs" />
-    <Compile Include="GlobalActivity.cs" />
     <Compile Include="LanguageConstants.cs" />
     <Compile Include="PasswordConstants.cs" />
     <Compile Include="PasswordErrorConstants.cs" />

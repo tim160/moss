@@ -207,16 +207,23 @@
                                     Team
                                 </div>
                                 <div class="dashboard-colHeader__sortArrow sortArrow" ng-class="sortClass('team_number')"></div>
-                            </div><!-- /.dashboard-col__team dashboard-colHeader -->
+                            </div> 
                             @if (is_cc == true)
                             {
-                                <div class="dashboard-col__alert dashboard-colHeader clearfix" ng-click="sort('team_number')">
+                                <div class="dashboard-col__alert dashboard-colHeader clearfix" ng-hide="mode == 5" ng-click="sort('team_number')">
                                     <div class="dashboard-colHeader__text">
                                         Campus Alert
                                     </div>
                                     <div class="dashboard-colHeader__sortArrow sortArrow" ng-class="sortClass('team_number')"></div>
                                 </div><!-- /.dashboard-col__team dashboard-colHeader -->
                             }
+
+                          <div class="dashboard-col__alert dashboard-colHeader clearfix" ng-show="mode == 5">
+                            <div class="dashboard-colHeader__text">
+                              Closure Report
+                            </div>
+                            <div class="dashboard-colHeader__sortArrow sortArrow"></div>
+                          </div>
                         </div><!-- /.dashboard-rowHeader -->
 
                         <div class="dashboard-rowbody" ng-repeat="report in reports | filter:casesFilterFunction" ng-click="openCase(report.report_id)">
@@ -293,13 +300,20 @@
                             </div><!-- /.dashboard-col__team dashboard-colbody clearfix -->
                             @if (is_cc == true)
                             {
-                                <div class="dashboard-col__alert dashboard-colbody clearfix">
+                                <div class="dashboard-col__alert dashboard-colbody clearfix" ng-hide="mode == 5">
                                     <div class="dashboard-col__tasks-text">
                                         <img src="@Url.Content("~/Content/Icons/alarm-active.png")" ng-show="report.cc_is_life_threating == true" />
                                         <img src="@Url.Content("~/Content/Icons/alarm-default.png")" ng-show="report.cc_is_life_threating != true" />
                                     </div><!-- /.dashboard-col__tasks-text -->
                                 </div><!-- /.dashboard-col__tasks dashboard-colbody clearfix -->
                             }
+                          <div class="dashboard-col__alert dashboard-colbody clearfix" ng-show="mode == 5">
+                            <div class="dashboard-col__tasks-text">
+                              <a href='/NewCase/PrintToPdf/{{report.report_id}}' class="subNavigationIcons__a" target="_blank">
+                                <img class="subNavigationIcons__imgPrint" src="@Url.Content("~/Content/Icons/print-icon.png")" alt="Print/Download Case Closure Report" />
+                              </a>
+                            </div>
+                          </div> 
                         </div><!-- /.dashboard-rowbody -->
 
                     </div><!-- /.dashboard -->

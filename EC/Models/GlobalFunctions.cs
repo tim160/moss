@@ -21,6 +21,7 @@ using EC.Common.Util;
 using EC.Common.Base;
 using System.Net;
 using EC.Localization;
+using EC.Constants;
 
 /// <summary>
 /// Global Functions for EC Project
@@ -1916,7 +1917,7 @@ public class GlobalFunctions
             var newAdminUser = db.user.Where(u =>
                 u.email.Equals(email) &&
                 u.company_id == AdminUser.company_id &&
-                u.status_id == EC.Constants.ECStatusConstants.Pending_Value).FirstOrDefault();
+                u.status_id == ECStatusConstants.Pending_Value).FirstOrDefault();
 
             if (newAdminUser != null)
             {
