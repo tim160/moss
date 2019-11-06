@@ -294,7 +294,7 @@
                 var mywindow = window.open('', 'PRINT', 'width=' + screen.availWidth + ',height=' + screen.availHeight);
 
                 mywindow.document.write('<html><head><title>' + title + '</title>');
-                //mywindow.document.write('<link rel="stylesheet" href="/Content/styleAnalitics.css" type="text/css" />');
+                //mywindow.document.write('<link rel="stylesheet" href="/Content/styleAnalytics.css" type="text/css" />');
                 mywindow.document.write('<link rel="stylesheet" href="/Content/newCase.css" type="text/css" />');
                 mywindow.document.write('<link rel="stylesheet" href="/Content/RootcauseAnalisysPrint.css" type="text/css" />');
                 mywindow.document.write('<link rel="stylesheet" href="/Libs/nvd3/build/nv.d3.min.css" type="text/css" />');
@@ -612,7 +612,7 @@
                 var mywindow = window.open('', 'PRINT', 'width=' + screen.availWidth + ',height=' + screen.availHeight);
 
                 mywindow.document.write('<html><head><title>' + title + '</title>');
-                mywindow.document.write('<link rel="stylesheet" href="/Content/styleAnalitics.css" type="text/css" />');
+                mywindow.document.write('<link rel="stylesheet" href="/Content/styleAnalytics.css" type="text/css" />');
                 mywindow.document.write('<link rel="stylesheet" href="/Content/newCase.css" type="text/css" />');
                 mywindow.document.write('<link rel="stylesheet" href="/Content/RootcauseAnalisysPrint.css" type="text/css" />');
                 //mywindow.document.write('</head><body>');
