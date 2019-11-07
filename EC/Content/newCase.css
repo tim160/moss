@@ -1153,25 +1153,28 @@ header.header{
 		}
 			.subNavigationIcons__imgPrint{
 				display: block;
-				height: 32px;
-				width: 32px;
+				height: 25px;
+				width: 25px;
 			}
+                .subNavigationIcons__imgPrintPosition {
+                    margin: 0 auto;
+                }
 
-.subNavigation-Badge{
-	font-size: 12px;
-	vertical-align: middle;
-	background-color: #CC141A;
-	border-radius: 50%;
-	color: #fff;
-	text-align: center;
-	width: 32px;
-	height: 32px;
-	line-height: 32px;
-	float: left;
-	margin-left: 30px;
-	display: block;
-	text-decoration: none;
-}
+                .subNavigation-Badge {
+                    font-size: 12px;
+                    vertical-align: middle;
+                    background-color: #CC141A;
+                    border-radius: 50%;
+                    color: #fff;
+                    text-align: center;
+                    width: 32px;
+                    height: 32px;
+                    line-height: 32px;
+                    float: left;
+                    margin-left: 30px;
+                    display: block;
+                    text-decoration: none;
+                }
 
 /*----------------subNavigationTabs__tabContent-----------------*/
 
