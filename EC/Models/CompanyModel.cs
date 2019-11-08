@@ -360,11 +360,7 @@ namespace EC.Models
         {
             file.SaveAs(path);
         }
-
-        public List<frequency> getFrequencies()
-        {
-            return db.frequency.ToList();
-        }
+ 
         public List<AnonimityViewModel> getCA(int companyId, int country_id)
         {
             List<anonymity> list= GetAnonymities(companyId, country_id);
@@ -421,74 +417,12 @@ namespace EC.Models
             }
             return anonymities;
         }
-        public List<country> getCountries()
-        {
-            return db.country.ToList();
-        }
-
-        public List<management_know> getManagamentKnow()
-        {
-            return db.management_know.ToList();
-        }
-
-        public List<relationship> getRelationships()
-        {
-            return db.relationship.ToList();
-        }
-
-        public List<priority> getPriorities()
-        {
-            return db.priority.ToList();
-        }
-
-        public List<injury_damage> GetInjuryDamages()
-        {
-            return db.injury_damage.ToList();
-        }
-        public List<reported_outside> getReportedOutside()
-        {
-            return db.reported_outside.ToList();
-        }
+          
 
         public user GetUser(int id)
         {
             return db.user.FirstOrDefault(item => item.id == id);
         }
-
-        public List<company> GeCompaniesWithStatus()
-        {
-            //[company_nm]
-            //return (from comp in db.company where comp.status_id == 2 select comp.company_nm, comp.id).ToList();
-            return db.company.Where(item => item.status_id == 2).ToList();   
-        }
-        public List<company> GeCompaniesWithStatusAndTerm(string term)
-        {
-            return db.company.Where(item => item.status_id == 2 && item.company_nm.ToLower().Contains(term.ToLower())).ToList();
-        }
-
-        public List<company> GeCompaniesWithStatus(string company_name)
-        {
-            if (company_name !=null && company_name.Trim().Length >= 3)
-                return db.company.Where(item => item.status_id == 2 && item.company_nm.ToLower().Trim().Contains(company_name.ToLower().Trim())).ToList();
-            else
-                return new List<company>();
-        }
-
-        public int GetCompanyByCode(string companyCode)
-        {
-            company getInfoCompany = db.company.FirstOrDefault(item => item.company_code.ToLower() == companyCode.ToLower());
-            if (getInfoCompany != null)
-            {
-                return getInfoCompany.id;
-            }
-            else
-            {
-                return 0;
-            }
-            
-
-        }
-
 
         public bool hideLocationCompany(int companyCode, int userId, string nameLocation)
         {

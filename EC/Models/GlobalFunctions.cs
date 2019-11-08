@@ -38,70 +38,7 @@ public class GlobalFunctions
     {
 
     }
-
  
-
-    //Used in EC\Views\Shared\EditorTemplates\CreateTaskModal.cshtml 
-    public List<case_closure_reason> GetCaseClosureReasonsWithStatus(bool isCC)
-    {
-        //[company_nm]
-        //return (from comp in db.company where comp.status_id == 2 select comp.company_nm, comp.id).ToList();
-        var r = db.case_closure_reason.Where(item => item.status_id == 2).ToList();
-        var other = r.FirstOrDefault(x => x.id == 5);
-        r.Remove(other);
-        r.Add(other);
-        var unfounded = r.FirstOrDefault(x => x.id == 6);
-        if (!isCC)
-        {
-            r.Remove(unfounded);
-        }
-
-        return r;
-    }
-
-    //Used in 
-    //EC\Views\Case\Messages.cshtml 
-    //EC\Views\Case\PartialView\GreenBarCaseResolutionRequest.cshtml 
-    //EC\Views\Case\Team.cshtml
-    public string GetOutcomeNameById(int id)
-    {
-        if (id != 0)
-        {
-            // EC.Models.Database.outcome _outcome = db.outcomes.FirstOrDefault(item => item.id == id);
-            var item = db.company_outcome.Find(id);
-            return item.outcome_en;
-        }
-        else
-            return "";
-
-    }
-
-    //Used in 
-    //EC\Views\Case\Messages.cshtml 
-    //EC\Views\Case\PartialView\GreenBarCaseResolutionRequest.cshtml 
-    //EC\Views\Case\Team.cshtml
-    public string GetCaseClosureReasonById(int id)
-    {
-        if (id != 0)
-        {
-            // EC.Models.Database.outcome _outcome = db.outcomes.FirstOrDefault(item => item.id == id);
-            var item = db.case_closure_reason.Find(id);
-            return item.case_closure_reason_en;
-        }
-        else
-            return "";
-
-    }
-
-    //used in
-    //EC\Views\Case\Activity.cshtml 
-    //EC\Views\Case\GetAjaxActivity.cshtml 
-    //EC\Views\Case\Task.cshtml 
-    //EC\Views\ReporterDashboard\Activity.cshtml
-    public action GetActionById(int id)
-    {
-        return db.action.FirstOrDefault(item => item.id == id);
-    }
 
     /// <summary>
     /// 

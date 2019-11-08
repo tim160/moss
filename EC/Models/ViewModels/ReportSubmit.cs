@@ -44,6 +44,8 @@ namespace EC.Controllers.ViewModel
         public List<string> namesFile { get; set; }
         public string attachFiles { get; set; }
         public ReportModelResult result { get; set; }
+
+        GetDBEntityModel getDBEntityModel = new GetDBEntityModel();
         public void merge(ReportViewModel rvm, CompanyModel companyModel, ReportModel reportModel, ReportViewModel model)
         {
             this.confidentialLevelInt = model.incident_anonymity_id;
@@ -125,7 +127,7 @@ namespace EC.Controllers.ViewModel
                 }
             }
 
-            List<management_know> managament = companyModel.getManagamentKnow();
+            List<management_know> managament = getDBEntityModel.getManagamentKnow();
             if(managament != null && model.managamentKnowId > 0)
             {
                 var temp = from n in managament
@@ -133,7 +135,7 @@ namespace EC.Controllers.ViewModel
                            select n.text_en;
                 managamentKnow = temp.FirstOrDefault();
             }
-            List<reported_outside> reported_outside = companyModel.getReportedOutside();
+            List<reported_outside> reported_outside = getDBEntityModel.getReportedOutside();
             if(model.reported_outside_id > 0 && reported_outside!=null)
             {
                 var temp = from n in reported_outside where n.id == model.reported_outside_id select n;
@@ -200,7 +202,7 @@ namespace EC.Controllers.ViewModel
 
 
 
-            List<injury_damage> injuryDamage = companyModel.GetInjuryDamages().ToList();
+            List<injury_damage> injuryDamage = getDBEntityModel.GetInjuryDamages().ToList();
             if(injuryDamage!=null && injuryDamage.Count > 0 && model.incidentResultReport > 0)
             {
                 var temp = from n in injuryDamage where n.id == model.incidentResultReport select n;

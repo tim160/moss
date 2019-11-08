@@ -4,41 +4,42 @@
 @using EC.Core.Common;
 @using EC.Localization;
 @{
-    Layout = "~/Views/Shared/IndexPages/ReporterDashboard.cshtml";
-    IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
-    int user_id = (Int32)ViewBag.user_id;
-    int report_id = (Int32)ViewBag.report_id;
-    ReportModel rm = new ReportModel(report_id);
-    UserModel um = new UserModel(user_id);
+  Layout = "~/Views/Shared/IndexPages/ReporterDashboard.cshtml";
+  IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
+  int user_id = (Int32)ViewBag.user_id;
+  int report_id = (Int32)ViewBag.report_id;
+  ReportModel rm = new ReportModel(report_id);
+  UserModel um = new UserModel(user_id);
+  GetDBEntityModel getDBEntityModel = new GetDBEntityModel();
 
-    int unread_message_number = um.Unread_Messages_Quantity(report_id, 1);
+  int unread_message_number = um.Unread_Messages_Quantity(report_id, 1);
 
-    List<report_log> actions_log = rm.ReportActions(user_id, rm._report.id);
+  List<report_log> actions_log = rm.ReportActions(user_id, rm._report.id);
 
-    string _month_name = "";
-    string _sender_name = "";
-    string _sender_title = "";
-    string _second_name = "";
-    string _string_to_add = "";
-    user _user;
-    user _second_user;
-    action _action;
-    GlobalFunctions glb = new GlobalFunctions();
-    Dictionary<int, string> month = m_DateTimeHelper.ShortMonth();
+  string _month_name = "";
+  string _sender_name = "";
+  string _sender_title = "";
+  string _second_name = "";
+  string _string_to_add = "";
+  user _user;
+  user _second_user;
+  action _action;
+  GlobalFunctions glb = new GlobalFunctions();
+  Dictionary<int, string> month = m_DateTimeHelper.ShortMonth();
 
 
-    bool? is_cc = ViewBag.is_cc;
-    if (!is_cc.HasValue)
-    {
-        is_cc = false;
-    }
-    String class_ext = "";
-    if (is_cc.Value)
-    {
-        class_ext = "_cc";
-    }
-    ViewBag.Title = LocalizationGetter.GetString("Activity", is_cc);
-    ViewBag.active = LocalizationGetter.GetString("Activity", is_cc);
+  bool? is_cc = ViewBag.is_cc;
+  if (!is_cc.HasValue)
+  {
+    is_cc = false;
+  }
+  String class_ext = "";
+  if (is_cc.Value)
+  {
+    class_ext = "_cc";
+  }
+  ViewBag.Title = LocalizationGetter.GetString("Activity", is_cc);
+  ViewBag.active = LocalizationGetter.GetString("Activity", is_cc);
 }
 
 @if ((rm._report != null) && (rm._report.id != 0))
@@ -87,7 +88,7 @@
         {
             _user = um.GetById(_log.user_id);
             _month_name = m_DateTimeHelper.GetFullMonth(_log.created_dt.Month);
-            _action = glb.GetActionById(_log.action_id.Value);
+            _action = getDBEntityModel.GetActionById(_log.action_id.Value);
             _second_name = "";
             _string_to_add = "";
 

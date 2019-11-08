@@ -43,7 +43,9 @@ namespace EC.Controllers
             int id = 0;
             if (companyCode != null)
             {
-                id = companyModel.GetCompanyByCode(companyCode);
+                var getDBEntityModel = new GetDBEntityModel();
+
+                id = getDBEntityModel.GetCompanyByCode(companyCode);
                 if (id == 0)
                 {
                     return RedirectToAction("Index", "Index");
@@ -71,6 +73,7 @@ namespace EC.Controllers
 
                 CompanyModel model = new CompanyModel(id);
                 company currentCompany = model.GetById(id);
+                GetDBEntityModel getDBEntityModel = new GetDBEntityModel();
                 //company currentCompany = CompanyModel.inst.GetById(id);
                 ViewBag.currentCompanyId = currentCompany.id;
 
@@ -98,8 +101,8 @@ namespace EC.Controllers
                 ViewBag.locations = HtmlDataHelper.MakeSelect(companyModel.Locations(id).Where(t => t.status_id == 2).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
                 ManagamentKnowCulture managamentKnowCulture = new ManagamentKnowCulture(companyModel);
                 ViewBag.managament = managamentKnowCulture.GetManagamentKnowCulture();
-                ViewBag.frequencies = HtmlDataHelper.MakeSelect(companyModel.getFrequencies(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("description")));
-                List<country> arr = companyModel.getCountries();
+                ViewBag.frequencies = HtmlDataHelper.MakeSelect(getDBEntityModel.getFrequencies(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("description")));
+                List<country> arr = getDBEntityModel.getCountries();
                 ViewBag.countries = HtmlDataHelper.MakeSelect(arr, item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.country_nm.ToString()));
 
                 arr.ForEach(t => t.country_description = (string.IsNullOrWhiteSpace(t.country_cl)  ? LocalizationGetter.GetString("YesAnon", is_cc) : LocalizationGetter.GetString(t.country_cl.Trim(), is_cc)));

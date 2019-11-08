@@ -11,7 +11,9 @@ namespace EC.Models.ViewModels
     public class RelationshipCulture
     {
         private List<EC.Models.ECModel.Relationship> relationshipViewModel;
+        GetDBEntityModel getDBEntityModel = new GetDBEntityModel();
         private CompanyModel companyModel;
+
         public RelationshipCulture(CompanyModel companyModel)
         {
             relationshipViewModel = new List<Relationship>();
@@ -20,7 +22,7 @@ namespace EC.Models.ViewModels
 
         public List<EC.Models.ECModel.Relationship> getRelationshipCulture()
         {
-            var allRelationships = companyModel.getRelationships();
+            var allRelationships = getDBEntityModel.getRelationships();
 
             foreach(var relation in allRelationships)
             {

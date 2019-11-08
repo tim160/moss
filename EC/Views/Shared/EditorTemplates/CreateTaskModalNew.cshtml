@@ -4,31 +4,33 @@
 @using EC.Constants;
 
 @{
-    string Res_or_comp = ViewBag.Res_or_comp;
-    string overlay_title = ViewBag.overlay_title;
-    string textbox_title = ViewBag.textbox_title;
-    string normal_button_promotion = ViewBag.normal_button_promotion;
-    string normal_button_value = ViewBag.normal_button_value;
-    int investigationstatus = (int)ViewBag.investigationstatus;
+  string Res_or_comp = ViewBag.Res_or_comp;
+  string overlay_title = ViewBag.overlay_title;
+  string textbox_title = ViewBag.textbox_title;
+  string normal_button_promotion = ViewBag.normal_button_promotion;
+  string normal_button_value = ViewBag.normal_button_value;
+  int investigationstatus = (int)ViewBag.investigationstatus;
 
-    string left_button_promotion = ViewBag.left_button_promotion; // @LocalizationGetter.GetString("Returnnvestigation", is_cc).ToUpper()
-    string left_button_value = ViewBag.left_button_value;
+  string left_button_promotion = ViewBag.left_button_promotion; // @LocalizationGetter.GetString("Returnnvestigation", is_cc).ToUpper()
+  string left_button_value = ViewBag.left_button_value;
 
-    GlobalFunctions glb = new GlobalFunctions();
-    List<company_outcome> _all_outcomes = ViewBag.company_outcomes;
-    int report_id = ViewBag.report_id;
-    if (ViewBag.report_id == null)
-    {
-        report_id = 0;
-    }
-    ReportModel rm = new ReportModel(report_id);
-    bool? is_cc = ViewBag.is_cc;
-    if (!is_cc.HasValue)
-    {
-        is_cc = false;
-    }
-    int user_id = ViewBag.user_id;
-    CompanyModel cm = new CompanyModel(rm._report.company_id);
+  GlobalFunctions glb = new GlobalFunctions();
+  GetDBEntityModel getDBEntityModel = new GetDBEntityModel();
+
+  List<company_outcome> _all_outcomes = ViewBag.company_outcomes;
+  int report_id = ViewBag.report_id;
+  if (ViewBag.report_id == null)
+  {
+    report_id = 0;
+  }
+  ReportModel rm = new ReportModel(report_id);
+  bool? is_cc = ViewBag.is_cc;
+  if (!is_cc.HasValue)
+  {
+    is_cc = false;
+  }
+  int user_id = ViewBag.user_id;
+  CompanyModel cm = new CompanyModel(rm._report.company_id);
 }
 
 <div id="openModal" class="modal case-modal">
@@ -44,7 +46,7 @@
             <div class="select-container case-modal__selectContainer ddlReasonClosure">
                 <select id="ddlReasonClosure" class="case-modal__selectOption">
                     <option value="0" disabled selected>Select an option...</option>
-                    @foreach (case_closure_reason _reason in glb.GetCaseClosureReasonsWithStatus(is_cc ?? false))
+                    @foreach (case_closure_reason _reason in getDBEntityModel.GetCaseClosureReasonsWithStatus(is_cc ?? false))
                     {
                         if (_reason.id == 6)
                         {
