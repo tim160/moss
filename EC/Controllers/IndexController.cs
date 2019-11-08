@@ -20,6 +20,7 @@ namespace EC.Controllers
     public class IndexController : BaseController
     {
         private readonly CompanyModel companyModel = new CompanyModel();
+        GetDBEntityModel getDBEntityModel = new GetDBEntityModel();
         //
         // GET: /Index/
         //[EcAuthorized("admin, moderator, mediator")] //раскоментировать когда будет использоваться авторизация! и в BaseController
@@ -126,7 +127,7 @@ namespace EC.Controllers
         [AllowAnonymous]
         public JsonResult SeekCompany(string term)
         {
-            var list = companyModel.GeCompaniesWithStatusAndTerm(term).Select(x => new {
+            var list = getDBEntityModel.GeCompaniesWithStatusAndTerm(term).Select(x => new {
                 label = x.company_nm,
                 value = x.company_code
             });
@@ -163,7 +164,7 @@ namespace EC.Controllers
             if (is_cc) cc_ext = "_cc";
             ViewBag.cc_extension = cc_ext;
             #endregion
-            List<company> list = companyModel.GeCompaniesWithStatus();
+            List<company> list = getDBEntityModel.GeCompaniesWithStatus();
             List<SearchCompanyDto> searchCompanyDto = new List<SearchCompanyDto>();
 
             ViewBag.LogoPath = DomainUtil.LogoBaseUrl(Request.Url.AbsoluteUri.ToLower());
@@ -226,7 +227,7 @@ namespace EC.Controllers
         public JsonResult CompanyLookup(string lookup)
         {
             List<SearchCompanyDto> searchCompanyDto = new List<SearchCompanyDto>();
-            List<company> list = companyModel.GeCompaniesWithStatus(lookup);
+            List<company> list = getDBEntityModel.GeCompaniesWithStatus(lookup);
             foreach (var item in list)
             {
                 SearchCompanyDto searchCompany = new SearchCompanyDto();

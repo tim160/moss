@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using EC.Models;
 
 namespace EC.Controllers.API
 {
@@ -100,7 +101,8 @@ namespace EC.Controllers.API
             var message = "";
             if (!String.IsNullOrEmpty(model.CompanyName))
             {
-                result = !glb.isCompanyInUse(model.CompanyName);
+                var generateModel = new GenerateRecordsModel();
+                result = !generateModel.isCompanyInUse(model.CompanyName);
                 message = !result ? "Organization name is already in use" : message;
             }
             if (result)

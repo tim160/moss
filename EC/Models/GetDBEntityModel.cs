@@ -9,24 +9,13 @@ namespace EC.Models
     public class GetDBEntityModel
     {
         ECEntities db = new ECEntities();
-        ///AddPendingStatus hideLocationCompany, addDepartmentCompany getOtherRelationship Companies()? - remove 
+        ///  hideLocationCompany,    Companies()? - remove 
         /////public void SaveFile(HttpPostedFileBase file, string path)   -- move
         ///  public string SaveLoginChanges(int userId, string password)  - move
         /// 
-        /// AddPendingStatus, AddReportNonMediatorInvolved, AddManagementKnow, AddSecondaryType AddReportDepartment?
+        ///     AddReportDepartment?
         /// 
-
-        /// <summary>
-        /// Remove
-        /// </summary>
-        /// <returns></returns>
-        public List<company> Companies()
-        {
-            return db.company.ToList();
-        }
-
-
-
+  
         //Used in EC\Views\Shared\EditorTemplates\CreateTaskModal.cshtml 
         public List<case_closure_reason> GetCaseClosureReasonsWithStatus(bool isCC)
         {
@@ -44,41 +33,8 @@ namespace EC.Models
 
             return r;
         }
-
-
-        //Used in 
-        //EC\Views\Case\Messages.cshtml 
-        //EC\Views\Case\PartialView\GreenBarCaseResolutionRequest.cshtml 
-        //EC\Views\Case\Team.cshtml
-        public string GetOutcomeNameById(int id)
-        {
-            if (id != 0)
-            {
-                // EC.Models.Database.outcome _outcome = db.outcomes.FirstOrDefault(item => item.id == id);
-                var item = db.company_outcome.Find(id);
-                return item.outcome_en;
-            }
-            else
-                return "";
-
-        }
-
-        //Used in 
-        //EC\Views\Case\Messages.cshtml 
-        //EC\Views\Case\PartialView\GreenBarCaseResolutionRequest.cshtml 
-        //EC\Views\Case\Team.cshtml
-        public string GetCaseClosureReasonById(int id)
-        {
-            if (id != 0)
-            {
-                // EC.Models.Database.outcome _outcome = db.outcomes.FirstOrDefault(item => item.id == id);
-                var item = db.case_closure_reason.Find(id);
-                return item.case_closure_reason_en;
-            }
-            else
-                return "";
-
-        }
+ 
+     
 
         //used in
         //EC\Views\Case\Activity.cshtml 

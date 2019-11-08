@@ -168,14 +168,15 @@ namespace EC.Controllers
         private CompanyModel GetCompanyModel(string id, string companyCode)
         {
             var selectedCompanyModel = new CompanyModel();
+            var getDBEntityModel = new GetDBEntityModel();
 
             if (String.IsNullOrEmpty(id))
             {
-                selectedCompanyModel.ID = selectedCompanyModel.GetCompanyByCode(companyCode);
+                selectedCompanyModel.ID = getDBEntityModel.GetCompanyByCode(companyCode);
             }
             else
             {
-                selectedCompanyModel.ID = selectedCompanyModel.GetCompanyByCode(id);
+                selectedCompanyModel.ID = getDBEntityModel.GetCompanyByCode(id);
             }
 
             return selectedCompanyModel;

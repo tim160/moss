@@ -13,6 +13,8 @@ namespace EC.Models.Culture
     {
         private List<InjuryDamageViewModel> injuryDamageViewModels;
         private CompanyModel companyModel;
+        GetDBEntityModel getDBEntityModel = new GetDBEntityModel();
+
         public InjuryDamageCulture(CompanyModel companyModel)
         {
             this.companyModel = companyModel;
@@ -21,7 +23,7 @@ namespace EC.Models.Culture
 
         public List<InjuryDamageViewModel> getInjuryDamageCulture()
         {
-            var allDamages = companyModel.GetInjuryDamages().ToList();
+            var allDamages = getDBEntityModel.GetInjuryDamages().ToList();
 
             foreach (var damage in allDamages)
             {

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
+using EC.Constants;
 
 namespace EC.Models
 {
@@ -152,10 +153,7 @@ namespace EC.Models
 
         public string GeneretedPassword()
         {
-            int PasswordExtraSymbolsCount = 0;
-            int PasswordLength = 0;
-
-            string newPassword = System.Web.Security.Membership.GeneratePassword(PasswordLength, PasswordExtraSymbolsCount);
+            string newPassword = System.Web.Security.Membership.GeneratePassword(PasswordConstants.PASSWORD_MIN_LENGTH, PasswordConstants.PASSWORD_EXTRA_SYMBOLS_COUNT);
 
             Random rnd = new Random();
 

@@ -149,8 +149,10 @@ namespace EC.Controllers
                 if (_month == 0 || _year == 0)
                     return LocalizationGetter.GetString("EmptyData", is_cc);
 
+                var generateModel = new GenerateRecordsModel();
                 var random = new Random();
-                payment_auth_code = glb.GenerateInvoiceNumber(); // "INV_" + random.Next(10001, 99999).ToString(); 
+
+                payment_auth_code = generateModel.GenerateInvoiceNumber(); // "INV_" + random.Next(10001, 99999).ToString(); 
 
 
 

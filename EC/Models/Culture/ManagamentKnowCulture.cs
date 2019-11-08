@@ -10,6 +10,8 @@ namespace EC.Models.Culture
     {
         private List<ManagamentViewModel> ManagamentKnow;
         private CompanyModel companyModel;
+        GetDBEntityModel getDBEntityModel = new GetDBEntityModel();
+
         public ManagamentKnowCulture(CompanyModel companyModel)
         {
             this.companyModel = companyModel;
@@ -17,7 +19,7 @@ namespace EC.Models.Culture
         }
         public List<ManagamentViewModel> GetManagamentKnowCulture()
         {
-            var allManagamentKnow = companyModel.getManagamentKnow();
+            var allManagamentKnow = getDBEntityModel.getManagamentKnow();
             switch (Localization.LocalizationGetter.Culture.Name)
             {
                 case "en-US":

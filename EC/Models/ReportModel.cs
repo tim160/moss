@@ -1263,8 +1263,10 @@ namespace EC.Models
                         {
                             notification = 3;
                         }
-                       
-                        password = glb.GeneretedPassword();
+
+                        var generateModel = new GenerateRecordsModel();
+
+                        password = generateModel.GeneretedPassword();
                         user newUser = new user()
                         {
                             company_id = model.currentCompanyId,
@@ -1295,7 +1297,7 @@ namespace EC.Models
                         adv.SaveChanges();
                         string reporter_login = GenerateReporterLogin();
 
-                        while (glb.isLoginInUse(reporter_login))
+                        while (generateModel.isLoginInUse(reporter_login))
                         {
                             reporter_login = GenerateReporterLogin();
                         }
@@ -1368,7 +1370,7 @@ namespace EC.Models
                         _review_status.description = "";
                         ///adv.report_investigation_status.Add(_review_status);
                         ////   t = adv.SaveChanges();
-                        //AddPendingStatus(_review_status);
+ 
                         adv.report_investigation_status.Add(_review_status);
 
                         //var report = adv.report.FirstOrDefault(x => x.id == _review_status.report_id);
@@ -1406,7 +1408,7 @@ namespace EC.Models
                             temp.user_id = 1;
                             temp.added_by_reporter = true;
                             //adv.
-                            //AddSecondaryType(temp);
+ 
                             adv.report_secondary_type.Add(temp);
                         }
 
@@ -1510,7 +1512,7 @@ namespace EC.Models
                             item.added_by_reporter = true;
                             item.report_id = currentReport.id;
                             db.report_non_mediator_involved.Add(item);
-                            //AddReportNonMediatorInvolved(item, currentReport);
+ 
                         }
 
                         db.SaveChanges();
@@ -1558,46 +1560,7 @@ namespace EC.Models
                 }
             }
         }
-
-
-    public report_investigation_status AddPendingStatus(report_investigation_status item)
-        {
-            using (ECEntities adv = new ECEntities())
-            {
-                adv.report_investigation_status.Add(item);
-
-                var report = adv.report.FirstOrDefault(x => x.id == item.report_id);
-                report.status_id = item.investigation_status_id;
-                report.last_update_dt = DateTime.Now;
-                report.user_id = item.user_id;
-
-                adv.SaveChanges();
-            }
-            return item;
-        }
-
-
-        public report_non_mediator_involved AddReportNonMediatorInvolved(report_non_mediator_involved item, report currentReport)
-        {
-            item.report_id = currentReport.id;
-            using (ECEntities adv = new ECEntities())
-            {
-                adv.report_non_mediator_involved.Add(item);
-                adv.SaveChanges();
-            }
-            return item;
-        }
-
-        public management_know AddManagementKnow(management_know item)
-        {
-            using (ECEntities adv = new ECEntities())
-            {
-                adv.management_know.Add(item);
-                adv.SaveChanges();
-            }
-            return item;
-        }
-
+  
         public report_department AddReportDepartment(report_department item)
         {
             using (ECEntities adv = new ECEntities())
@@ -1607,21 +1570,7 @@ namespace EC.Models
             }
             return item;
         }
-
-        public report_secondary_type AddSecondaryType(report_secondary_type item)
-        {
-            using (ECEntities adv = new ECEntities())
-            {
-                adv.report_secondary_type.Add(item);
-                adv.SaveChanges();
-            }
-            return item;
-        }
-
-        public report ReportByName(string name)
-        {
-            return db.report.FirstOrDefault(item => item.display_name == name);
-        }
+ 
 
         public report ReportById(int id)
         {

@@ -10,6 +10,8 @@ namespace EC.Models.Culture
     {
         private List<ReportedOutsideViewModel> reportedOutsideViewModels;
         private CompanyModel companyModel;
+        GetDBEntityModel getDBEntityModel = new GetDBEntityModel();
+
         public ReportedOutsideCulture(CompanyModel companyModel)
         {
             this.companyModel = companyModel;
@@ -17,7 +19,7 @@ namespace EC.Models.Culture
         }
         public List<ReportedOutsideViewModel> getReportedOutside()
         {
-            var allReports = companyModel.getReportedOutside();
+            var allReports = getDBEntityModel.getReportedOutside();
 
             switch (Localization.LocalizationGetter.Culture.Name)
             {
