@@ -73,26 +73,7 @@ namespace EC.Models
             }
         }
 
-        /*
-        public List<ECModel.Location> CompanyLocations(int company_id, int? language_id)
-        {
-            List<ECModel.Location> company_locations = new List<ECModel.Location>();
-            List<Database.company_location> _locations_list = new List<Database.company_location>();
-            Location _new_location;
-
-            _locations_list = db.company_location.Where(s => s.company_id == company_id).ToList();
-            
-            for (int i = 0; i < _locations_list.Count; i++)
-            {
-                _new_location = new Location(_locations_list[i].id, language_id);
-                company_locations.Add(_new_location);
-            }
-
-            return company_locations;
-
-        }
-         */
-
+  
         public List<company_location> Locations(int companyId, int? statusId = null)
         {
             if(statusId.HasValue)
@@ -120,39 +101,7 @@ namespace EC.Models
 
         }
 
-        /*
-        public List<ECModel.User> Company_All_Mediators(int company_id, bool active_only_flag, int? role_id)
-        {
-            List<User> users = new List<User>();
-            List<Database.user> _users_list = new List<Database.user>();
-            User _new_user;
-
-            if (role_id == null)
-            {
-                // returns all or only active mediators from current company
-                if (active_only_flag == false)
-                    _users_list = db.user.Where(s => s.company_id == company_id).ToList();
-                else
-                    _users_list = db.user.Where(s => s.company_id == company_id && s.status_id == Constant.status_active).ToList();
-            }
-            else
-            {
-                if (active_only_flag == false)
-                    _users_list = db.user.Where(s => s.company_id == company_id && s.role_id == role_id.Value).ToList();
-                else
-                    _users_list = db.user.Where(s => s.company_id == company_id && s.role_id == role_id.Value).ToList();
-            }
-
-            for (int i = 0; i < _users_list.Count; i++)
-            {
-                _new_user = new User(_users_list[i].id);
-                users.Add(_new_user);
-            }
-
-            return users;
-        }
- */
-
+  
         public List<user> AllMediators(int companyId, bool isActiveOnly, int? roleId)
         {
             List<int> role_ids = new List<int>();
@@ -202,59 +151,8 @@ namespace EC.Models
 
 
         }
-        /*
-          public List<ECModel.Anonymity> CompanyAnonimities(int company_id, int? language_id)
-          {
-            List<ECModel.Anonymity> company_anonymities = new List<ECModel.Anonymity>();
-            List<Database.anonymity> _anonymities_list = new List<Database.anonymity>();
-            Anonymity _new_anonymity;
-
-            if (db.company_anonymity.Any(o => o.company_id == company_id))
-            {
-                // Return anonymity from company_anonymity table
-                List<int> company_anonymities_id = (from _ca in db.company_anonymity
-                                                    where (_ca.company_id == company_id)
-                                                    select _ca.anonymity_id).ToList();
-
-                _anonymities_list = db.anonymity.Where(s => company_anonymities_id.Contains(s.id)).ToList();
-            }
-            else
-            {
-                // Return all anonymity from anonymity table
-                _anonymities_list = db.anonymity.ToList();
-            }
-            
-            for (int i = 0; i < _anonymities_list.Count; i++)
-            {
-                _new_anonymity = new Anonymity(_anonymities_list[i].id, language_id);
-                company_anonymities.Add(_new_anonymity);
-            }
-
-             return company_anonymities;
-
-        } 
-         
-         */
-
-        /*      
-        public List<ECModel.Department> CompanyDepartments(int company_id, int? language_id)
-        {
-            List<ECModel.Department> company_departments = new List<ECModel.Department>();
-            List<Database.company_department> _departments_list = new List<Database.company_department>();
-            Department _new_department;
-
-            _departments_list = db.company_department.Where(s => s.company_id == company_id).ToList();
-
-            for (int i = 0; i < _departments_list.Count; i++)
-            {
-                _new_department = new Department(_departments_list[i].id, language_id);
-                company_departments.Add(_new_department);
-            }
-
-            return company_departments;
-
-        }
-         */
+    
+ 
         public List<company_department> CompanyDepartments(int companyId)
         {
             return db.company_department.Where(s => s.company_id == companyId).OrderBy(t => t.department_en).ToList();
@@ -351,11 +249,7 @@ namespace EC.Models
                 return null;
             
         }
-        public List<company> Companies()
-        {
-            return db.company.ToList();
-        }
-
+ 
         public void SaveFile(HttpPostedFileBase file, string path)
         {
             file.SaveAs(path);
@@ -424,59 +318,7 @@ namespace EC.Models
             return db.user.FirstOrDefault(item => item.id == id);
         }
 
-        public bool hideLocationCompany(int companyCode, int userId, string nameLocation)
-        {
-            bool status = false; 
-            try
-            {
-                if (companyCode != 0)
-                {
-                    company_location location = db.company_location.FirstOrDefault(item => (item.company_id == companyCode && item.location_en == nameLocation));
-
-                    if (location != null)
-                    {
-                        location.status_id = 1;
-                    }
-
-                    db.company_location.AddOrUpdate(location);
-                    db.SaveChanges();
-                    status = true;
-                }
-            }
-            catch (System.Data.DataException ex)
-            {
-                logger.Error(ex.ToString());
-                return false;
-            }
-            return status;
-        }
-
-        public bool addDepartmentCompany(int companyCode, int userId, string nameDepartment)
-        {
-            try
-            {
-                if (companyCode != 0)
-                {
-                    company_department department = new company_department
-                    {
-                        client_id = userId,
-                        company_id = companyCode,
-                        status_id = 2,
-                        department_en = nameDepartment,
-                        last_update_dt = DateTime.Now,
-                        user_id = 1
-                    };
-                    db.company_department.Add(department);
-                    db.SaveChanges();
-                }
-            }
-            catch (System.Data.DataException ex)
-            {
-                logger.Error(ex.ToString());
-                return false;
-            }
-            return true;
-        }
+ 
         public bool addLogoCompany(int companyCode, string pathLogo)
         {
             try
@@ -496,29 +338,7 @@ namespace EC.Models
             }
             return true;
         }
-        public company_relationship getOtherRelationship()
-        {
-            company_relationship other = null;
-            try
-            {
-                relationship otherDefault = db.relationship.Where(item => item.id == 20 || item.relationship_en.ToLower() == "other").FirstOrDefault();
-                if(otherDefault != null)
-                {
-                    other = new company_relationship();
-                    other.relationship_en = otherDefault.relationship_en;
-                    other.relationship_ar = otherDefault.relationship_ar;
-                    other.relationship_es = other.relationship_es;
-                    other.relationship_fr = otherDefault.relationship_fr;
-                    other.relationship_ru = otherDefault.relationship_ru;
-                }
-                
-            }
-            catch (System.Data.DataException ex)
-            {
-                logger.Error(ex.ToString());
-            }
-            return other;
-        }
+ 
         public string getLogoCompany(int id = 0)
         {
             if (id == 0)

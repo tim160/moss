@@ -9,24 +9,13 @@ namespace EC.Models
     public class GetDBEntityModel
     {
         ECEntities db = new ECEntities();
-        ///AddPendingStatus hideLocationCompany, addDepartmentCompany getOtherRelationship Companies()? - remove 
+        ///  hideLocationCompany,    Companies()? - remove 
         /////public void SaveFile(HttpPostedFileBase file, string path)   -- move
         ///  public string SaveLoginChanges(int userId, string password)  - move
         /// 
-        /// AddPendingStatus, AddReportNonMediatorInvolved, AddManagementKnow, AddSecondaryType AddReportDepartment?
+        ///     AddReportDepartment?
         /// 
-
-        /// <summary>
-        /// Remove
-        /// </summary>
-        /// <returns></returns>
-        public List<company> Companies()
-        {
-            return db.company.ToList();
-        }
-
-
-
+  
         //Used in EC\Views\Shared\EditorTemplates\CreateTaskModal.cshtml 
         public List<case_closure_reason> GetCaseClosureReasonsWithStatus(bool isCC)
         {
@@ -45,8 +34,7 @@ namespace EC.Models
             return r;
         }
  
-
- 
+     
 
         //used in
         //EC\Views\Case\Activity.cshtml 
