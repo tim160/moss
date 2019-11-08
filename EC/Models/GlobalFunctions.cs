@@ -1680,7 +1680,9 @@ public class GlobalFunctions
     }
     public void sendAddNewAdmin(user adminUser, company company, user newUser, bool is_cc)
     {
-        var password = GeneretedPassword().Trim();
+        var generateModel = new GenerateRecordsModel();
+
+        var password = generateModel.GeneretedPassword();
 
         EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
         EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, HttpContext.Current.Request.Url.AbsoluteUri.ToLower());
