@@ -153,6 +153,8 @@ namespace EC.Models
 
         public string GeneretedPassword()
         {
+            int PasswordExtraSymbolsCount = 0;
+            int PasswordLength = 0;
 
             string newPassword = System.Web.Security.Membership.GeneratePassword(PasswordConstants.PASSWORD_MIN_LENGTH, PasswordConstants.PASSWORD_EXTRA_SYMBOLS_COUNT);
 

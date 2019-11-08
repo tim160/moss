@@ -271,6 +271,7 @@ html, body {
     outline: none;
     border: none;
     padding-left: 17px;
+    padding-right: 17px;
 }
 #blockAcceptCase .linkPdf a{
     font-size: 14px;
