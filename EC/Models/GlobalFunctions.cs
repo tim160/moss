@@ -22,6 +22,7 @@ using EC.Common.Base;
 using System.Net;
 using EC.Localization;
 using EC.Constants;
+using EC.Utils;
 
 /// <summary>
 /// Global Functions for EC Project
@@ -1923,33 +1924,32 @@ public class GlobalFunctions
             {
                 var company = db.company.Where(c => c.id == newAdminUser.company_id).FirstOrDefault();
 
-                var oldMail = db.email.Where(mail => mail.To == email && mail.Title == "You have been added as a Case Administrator").FirstOrDefault();
-                if (oldMail != null)
-                {
-                    email resendEmail = new email();
-                    resendEmail.company_id = oldMail.company_id;
-                    resendEmail.user_id_from = oldMail.user_id_from;
-                    resendEmail.To = oldMail.To;
-                    resendEmail.From = oldMail.From;
-                    resendEmail.cc = oldMail.cc;
-                    resendEmail.bcc = oldMail.bcc;
-                    resendEmail.Title = oldMail.Title;
-                    resendEmail.Body = oldMail.Body;
-                    resendEmail.EmailType = oldMail.EmailType;
-                    resendEmail.attachment = oldMail.attachment;
-                    resendEmail.isSSL = oldMail.isSSL;
-                    resendEmail.user_id_to = oldMail.user_id_to;
-                    resendEmail.is_sent = false;
-                    resendEmail.created_dt = DateTime.Now;
+                sendAddNewAdmin(AdminUser, company, newAdminUser, is_cc);
 
-                    db.email.Add(resendEmail);
-                    db.SaveChanges();
-
-                    return LocalizationGetter.GetString("InvitationWasSent", is_cc);
-
-                }
+                return LocalizationGetter.GetString("InvitationWasSent", is_cc);
             }
         }
         return LocalizationGetter.GetString("ErrorResendingEmail", is_cc);
+    }
+    public void sendAddNewAdmin(user adminUser, company company, user newUser, bool is_cc)
+    {
+        var password = GeneretedPassword().Trim();
+
+        EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement(is_cc);
+        EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, HttpContext.Current.Request.Url.AbsoluteUri.ToLower());
+        eb.NewMediator(
+            $"{adminUser.first_nm} {adminUser.last_nm}",
+            $"{company.company_nm}",
+            HttpContext.Current.Request.Url.AbsoluteUri.ToLower(),
+            HttpContext.Current.Request.Url.AbsoluteUri.ToLower(),
+            $"{newUser.login_nm}",
+            $"{password}");
+        string body = eb.Body;
+        SaveEmailBeforeSend(adminUser.id, newUser.id, adminUser.company_id,
+            newUser.email, System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", "You have been added as a Case Administrator", body, false, 0);
+
+        var newUserDb = db.user.Find(newUser.id);
+        newUserDb.password = PasswordUtils.GetHash(password);
+        db.SaveChanges();
     }
 }
