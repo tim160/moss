@@ -93,6 +93,7 @@ namespace EC.Controllers.API
             else
             {
                 var glb = new GlobalFunctions();
+                var generateModel = new GenerateRecordsModel();
 
                 if (DB.user.Any(x => x.email.ToLower() == model.email.ToLower() && x.company_id == sessionUser.company_id && (x.role_id == ECLevelConstants.level_escalation_mediator || x.role_id == ECLevelConstants.level_mediator || x.role_id == ECLevelConstants.level_supervising_mediator)))
                 {
@@ -128,8 +129,8 @@ namespace EC.Controllers.API
                     //Activate if pendind
                     user.status_id = user.status_id == 3 ? 2 : user.status_id;
                 }
-                user.login_nm = glb.GenerateLoginName(user.first_nm, user.last_nm);
-                var password = glb.GeneretedPassword().Trim();
+                user.login_nm = generateModel.GenerateLoginName(user.first_nm, user.last_nm);
+                var password = generateModel.GeneretedPassword().Trim();
                 user.password = PasswordUtils.GetHash(password);
                 user.photo_path = "";
                 user.email = model.email.Trim();

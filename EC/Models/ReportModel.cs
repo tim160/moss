@@ -1263,8 +1263,10 @@ namespace EC.Models
                         {
                             notification = 3;
                         }
-                       
-                        password = glb.GeneretedPassword();
+
+                        var generateModel = new GenerateRecordsModel();
+
+                        password = generateModel.GeneretedPassword();
                         user newUser = new user()
                         {
                             company_id = model.currentCompanyId,
@@ -1295,7 +1297,7 @@ namespace EC.Models
                         adv.SaveChanges();
                         string reporter_login = GenerateReporterLogin();
 
-                        while (glb.isLoginInUse(reporter_login))
+                        while (generateModel.isLoginInUse(reporter_login))
                         {
                             reporter_login = GenerateReporterLogin();
                         }

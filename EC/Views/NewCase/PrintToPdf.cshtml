@@ -6,6 +6,11 @@
 @model ReportModel
 
 @{
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
     Layout = null;
     IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
     var user_id = (int)ViewBag.user_id;
@@ -124,7 +129,7 @@
                         Incident location
                     </div><!-- /.reportContentBlock__textColFirst -->
                     <div class="reportContentBlock__textColRight">
-                        <p>@Model.LocationString()</p>
+                        <p>@Model.LocationString(is_cc.Value)</p>
                     </div><!-- /.reportContentBlock__textColRight -->
                 </div><!-- /.reportContentBlock__textCols -->
                 <div class="reportContentBlock__textCols clearfix">

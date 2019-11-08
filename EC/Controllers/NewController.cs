@@ -20,6 +20,7 @@ namespace EC.Controllers
 {
     public class NewController : BaseController
     {
+        GenerateRecordsModel generateModel = new GenerateRecordsModel();
 
         // GET: New
         public ActionResult Index(string code, string email)
@@ -230,16 +231,16 @@ namespace EC.Controllers
             {
                 return LocalizationGetter.GetString("EmptyData");
             }
-            if (glb.isCompanyInUse(company_name))
+            if (generateModel.isCompanyInUse(company_name))
             {
                 return LocalizationGetter.GetString("CompanyInUse", is_cc);
             }
             var company_short_name = StringUtil.ShortString(company_name.Trim());
-            if (glb.isCompanyShortInUse(company_short_name))
+            if (generateModel.isCompanyShortInUse(company_short_name))
             {
                 for (var i = 1; i < 1000; i++)
                 {
-                    if (!glb.isCompanyShortInUse(company_short_name + i))
+                    if (!generateModel.isCompanyShortInUse(company_short_name + i))
                     {
                         company_short_name = company_short_name + i;
                         break;
@@ -317,7 +318,7 @@ namespace EC.Controllers
 
 
 
-            string company_code = glb.GenerateCompanyCode(company_name);
+            string company_code = generateModel.GenerateCompanyCode(company_name);
 
             var varinfo = db.var_info.FirstOrDefault(x => x.emailed_code_to_customer == emailed_code_to_customer);
 
@@ -1068,11 +1069,12 @@ namespace EC.Controllers
                         db.company_root_cases_behavioral.Add(temp_cases_behavioral);
                         //db.SaveChanges();
                     }
-                    #endregion
+          #endregion
 
+                    var generateModel = new GenerateRecordsModel();
 
-                    string login = glb.GenerateLoginName(first, last);
-                    string pass = glb.GeneretedPassword().Trim();
+                    string login = generateModel.GenerateLoginName(first, last);
+                    string pass = generateModel.GeneretedPassword().Trim();
 
                     #region User Saving
                     if (company_id != 0)
@@ -1247,16 +1249,16 @@ namespace EC.Controllers
             {
                 return LocalizationGetter.GetString("EmptyData");
             }
-            if (glb.isCompanyInUse(company_name))
+            if (generateModel.isCompanyInUse(company_name))
             {
                 return LocalizationGetter.GetString("CompanyInUse", is_cc);
             }
             var company_short_name = StringUtil.ShortString(company_name.Trim());
-            if (glb.isCompanyShortInUse(company_short_name))
+            if (generateModel.isCompanyShortInUse(company_short_name))
             {
                 for (var i = 1; i < 1000; i++)
                 {
-                    if (!glb.isCompanyShortInUse(company_short_name + i))
+                    if (!generateModel.isCompanyShortInUse(company_short_name + i))
                     {
                         company_short_name = company_short_name + i;
                         break;
@@ -1285,7 +1287,7 @@ namespace EC.Controllers
             client_id = _invitation.created_by_company_id;
 
 
-            string company_code = glb.GenerateCompanyCode(company_name);
+            string company_code = generateModel.GenerateCompanyCode(company_name);
             company _company = new company();
             _company.company_nm = company_name.Trim();
             _company.company_invitation_id = company_invitation_id;
@@ -2082,11 +2084,12 @@ namespace EC.Controllers
                         db.company_root_cases_behavioral.Add(temp_cases_behavioral);
                         //db.SaveChanges();
                     }
-                    #endregion
+          #endregion
 
+                    var generateModel = new GenerateRecordsModel();
 
-                    string login = glb.GenerateLoginName(first, last);
-                    string pass = glb.GeneretedPassword().Trim();
+                    string login = generateModel.GenerateLoginName(first, last);
+                    string pass = generateModel.GeneretedPassword().Trim();
 
                     #region VAR Update
                     if (company_id != 0)
@@ -2319,8 +2322,11 @@ namespace EC.Controllers
             {
                 return LocalizationGetter.GetString("InvitationCompanyMismatch", is_cc);
             }
-            string login = glb.GenerateLoginName(first, last);
-            string pass = glb.GeneretedPassword();
+
+            var generateModel = new GenerateRecordsModel();
+
+            string login = generateModel.GenerateLoginName(first, last);
+            string pass = generateModel.GeneretedPassword();
 
             #region User Saving
             if (company_id != 0)
@@ -2439,7 +2445,7 @@ namespace EC.Controllers
 
             if (company_nm.Length > 0)
             {
-                bool result = glb.isCompanyInUse(company_nm);
+                bool result = generateModel.isCompanyInUse(company_nm);
                 //TODO: Do the validation
 
                 if (!result)
