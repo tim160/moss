@@ -3047,4 +3047,7 @@
   <data name="ErrorResendingEmail" xml:space="preserve">
     <value>Error resending email to selected case admin</value>
   </data>
+  <data name="sendInvitation" xml:space="preserve">
+    <value>ENVIAR INVITACION</value>
+  </data>
 </root>
