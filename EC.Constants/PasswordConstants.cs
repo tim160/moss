@@ -16,6 +16,10 @@ namespace EC.Constants
     public static class PasswordConstants
     {
 
+        public const int PASSWORD_MIN_LENGTH = 6;
+        public const int PASSWORD_EXTRA_SYMBOLS_COUNT = 0;
+
+
         public const int ENCRYPTION_WORKLOAD = 10;
 
 
