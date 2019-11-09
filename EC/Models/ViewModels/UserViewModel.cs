@@ -40,4 +40,9 @@ namespace EC.Models.ViewModels
             }
         }
     }
+    public class WrapperUserViewModel
+    {
+        public List<UserViewModel> listMediators { get; set; }
+        public int Selectedmediator { get; set; }
+    }
 }
