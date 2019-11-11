@@ -1707,9 +1707,8 @@ textarea::-webkit-input-placeholder {
         left: 0;
         bottom: 16px;}
     .footerFlex {
-        padding-top: 133.5px;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         flex-wrap: nowrap;
         justify-content: center;
         align-items: center;
@@ -1717,7 +1716,6 @@ textarea::-webkit-input-placeholder {
     }
     .footerBg .column {
         float: left;
-        width: 50%;
         padding: 10px;
         font-family: "Lato-Light-LatinWeb";
         font-size: 16px;
@@ -1726,11 +1724,6 @@ textarea::-webkit-input-placeholder {
         content: "";
         display: table;
         clear: both;}
-    .footerBg .row {
-        margin-top: 60px;
-        margin-bottom: 60px;
-        margin-left: 120px;
-        margin-right: 120px;}
     .footerBg .title {
         font-family: "Lato-Regular-LatinWeb";
         border-bottom: 1px solid #d6dcdc;   }
@@ -1857,7 +1850,33 @@ textarea::-webkit-input-placeholder {
 
 /* Small Devices, Tablets */
 @media only screen and (min-width: 768px) {
-
+    .customPaddingFooter {
+        padding-left: 31%;
+        margin: 0;
+    }
+    .footerBg .column {
+        float: left;
+        width: 50%;
+        padding: 10px;
+        font-family: "Lato-Light-LatinWeb";
+        font-size: 16px;
+        color: #434343;
+    }
+    .footerBg .row {
+        margin-top: 60px;
+        margin-bottom: 60px;
+        margin-left: 120px;
+        margin-right: 120px;
+    }
+    .footerFlex {
+        padding-top: 133.5px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        align-content: space-between;
+    }
   .login .main {
     min-height: calc( 100vh - 36px - 125px); }
   .top-header {
@@ -1955,6 +1974,13 @@ textarea::-webkit-input-placeholder {
     padding: 0 20px;
     margin: auto;
     position: relative; }
+    .customPaddingFooter {
+        padding-left: 31%;
+        margin: 0;
+    }
+    /*#manuLanguages {
+        left: auto;
+    }*/
   .general-container {
     font-family: "Lato-Regular-LatinWeb";
     display: grid;
@@ -2375,11 +2401,6 @@ textarea::-webkit-input-placeholder {
 
 @media only screen and (min-width: 1690px) {
   /**/ }
-@media only screen and (max-width: 768px) {
-    #manuLanguages {
-        left: -33px;
-    }
-}
 
 @media only screen and (min-width: 1280px){
     .containerCustom {
