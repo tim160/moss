@@ -168,11 +168,8 @@ namespace EC.Controllers
                 }
 
                 JsonResult json = new JsonResult();
-                json.Data = glb.ReportAdvancedJson(types.companyIdArray, user.id,
-                    types.ReportsSecondaryTypesIDStrings,
-                    types.ReportsRelationTypesIDStrings,
-                    types.ReportsDepartmentIDStringss,
-                    types.ReportsLocationIDStrings, types.dateStart, types.dateEnd);
+                MenuDashboardAnalitics AnaliticsService = new MenuDashboardAnalitics(db, glb);
+                json.Data = AnaliticsService.ReportAdvancedJson(types, user.id);
                 return json;
             }
             else
