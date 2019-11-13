@@ -168,7 +168,7 @@ namespace EC.Controllers
                 }
 
                 JsonResult json = new JsonResult();
-                MenuDashboardAnalitics AnaliticsService = new MenuDashboardAnalitics(db, glb);
+                MenuDashboardAnalytics AnaliticsService = new MenuDashboardAnalytics(db, glb);
                 json.Data = AnaliticsService.ReportAdvancedJson(types, user.id);
                 return json;
             }

@@ -10,12 +10,12 @@ using System.Web;
 
 namespace EC.Models
 {
-    public class MenuDashboardAnalitics
+    public class MenuDashboardAnalytics
     {
         private ECEntities DB;
         private GlobalFunctions global;
 
-        public MenuDashboardAnalitics(ECEntities DB, GlobalFunctions globalFunctions)
+        public MenuDashboardAnalytics(ECEntities DB, GlobalFunctions globalFunctions)
         {
             this.global = globalFunctions;
             this.DB = DB;
