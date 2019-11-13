@@ -22,13 +22,16 @@ using EC.Localization;
 namespace EC.Models
 {
     public class ReportModelResult
-    {
-        public report report { get; set; }
-        public int StatusCode { get; set; }
-        public string ErrorMessage { get; set; }
-    }
+  {
+    public report report { get; set; }
+    public int StatusCode { get; set; }
+    public string ErrorMessage { get; set; }
+  }
+
     public class ReportModel : BaseModel
     {
+
+        
 
         #region Properties
         public int ID
@@ -1295,11 +1298,11 @@ namespace EC.Models
 
                         newUser = adv.user.Add(newUser);
                         adv.SaveChanges();
-                        string reporter_login = GenerateReporterLogin();
+                        string reporter_login = generateModel.GenerateReporterLogin();
 
                         while (generateModel.isLoginInUse(reporter_login))
                         {
-                            reporter_login = GenerateReporterLogin();
+                            reporter_login = generateModel.GenerateReporterLogin();
                         }
 
                         newUser.login_nm = reporter_login;
@@ -1317,7 +1320,7 @@ namespace EC.Models
                         currentReport = adv.report.Add(currentReport);
                         adv.SaveChanges();
                         //  t = db.SaveChanges();
-                        currentReport.display_name = GenerateCaseNumber(currentReport.id, currentReport.company_id, currentReport.company_nm);
+                        currentReport.display_name = generateModel.GenerateCaseNumber(currentReport.id, currentReport.company_id, currentReport.company_nm);
                         currentReport.report_color_id = GetNextColor(currentReport.company_id, currentReport.id);
                         //t = adv.SaveChanges();
 
@@ -1830,122 +1833,9 @@ namespace EC.Models
         }
         #endregion
 
-        #region Report - Last Message Routine
-        /// <summary>
-        /// returns last message_id of the report or 0 if message is not exists
-        /// </summary>
-        /// <param name="report_id"></param>
-        /// <returns></returns>
-        public int ReportLastMessageID(int user_id)
-        {
-            int message_id = 0;
+ 
+        #region Report - Tasks  
 
-            message _message;
-            UserModel um = new UserModel(user_id);
-            if (HasAccessToReport(user_id))
-            {
-                if (_report != null)
-                {
-                    if (um._user.role_id != 8)
-                    {
-                        if (db.message.Any(item => (item.report_id == ID) && ((item.reporter_access != 3) || ((item.reporter_access == 3) && ((item.sent_to_id == user_id || item.sender_id == user_id))))))
-                        {
-                            _message = db.message.Where(item => (item.report_id == ID) && ((item.reporter_access != 3) || ((item.reporter_access == 3) && ((item.sent_to_id == user_id || item.sender_id == user_id))))).OrderByDescending(item => item.created_dt).First();
-                            message_id = _message.id;
-                        }
-                    }
-                    else
-                    {
-                        // we need to show last message for reporter quey if requestor = reporter
-                        if (db.message.Any(item => (item.report_id == ID) && (item.reporter_access == 1)))
-                        {
-                            _message = db.message.Where(item => (item.report_id == ID) && (item.reporter_access == 1)).OrderByDescending(item => item.created_dt).First();
-                            message_id = _message.id;
-                        }
-                    }
-                }
-            }
-
-            return message_id;
-        }
-
-        public MessageExtended LastMessage(int user_id)
-        {
-            MessageExtended msg = new MessageExtended();
-            int msg_id = ReportLastMessageID(user_id);
-            if (msg_id != 0)
-            {
-                msg = new MessageExtended(msg_id, user_id);
-            }
-            return msg;
-        }
-        #endregion
-
-        #region Report - Last Task Routine
-
-        public int ReportLastTaskID(int user_id)
-        {
-            int task_id = 0;
-
-            task _task;
-
-            if (_report != null)
-            {
-                user _user = db.user.Where(item => item.id == user_id).FirstOrDefault();
-                if (_user.role_id != 8)
-                {
-                    if (db.task.Any(item => (item.report_id == ID) && (item.assigned_to == user_id)))
-                    {
-                        _task = db.task.Where(item => (item.report_id == ID) && (item.assigned_to == user_id)).OrderByDescending(item => item.created_on).First();
-                        task_id = _task.id;
-                    }
-                }
-                else
-                {
-                    // no tasks for reporter
-                }
-            }
-
-            return task_id;
-        }
-
-        public TaskExtended LastTask(int user_id)
-        {
-            TaskExtended tsk = new TaskExtended();
-            int task_id = ReportLastTaskID(user_id);
-            if (task_id != 0)
-            {
-                tsk = new TaskExtended(task_id, user_id);
-            }
-            return tsk;
-        }
-
-        #endregion
-
-        #region Report - 3 LastTask Routine
-
-        public List<TaskExtended> ThreeLastTasks(int user_id)
-        {
-            int task_id = 0;
-            List<task> _task_list = new List<task>();
-            List<TaskExtended> list_tsk = new List<TaskExtended>();
-            if (_report != null)
-            {
-                user _user = db.user.Where(item => item.id == user_id).FirstOrDefault();
-                if (db.task.Any(item => (item.report_id == ID)))
-                {
-                    _task_list = db.task.Where(item => (item.report_id == ID)).OrderByDescending(item => item.created_on).Take(3).ToList();
-                    foreach (task _task in _task_list)
-                    {
-                        task_id = _task.id;
-                        TaskExtended tsk = new TaskExtended(_task.id, user_id);
-                        list_tsk.Add(tsk);
-                    }
-                }
-            }
-
-            return list_tsk;
-        }
 
         public List<TaskExtended> ExtendedTasks(int user_id)
         {
@@ -2489,37 +2379,8 @@ namespace EC.Models
             return _green_bar_status;
         }
 
-        private string GenerateCaseNumber(int report_id, int company_id, string company_name)
-        {
-            string letter = "EMP";
-            if (company_name.Length > 0)
-                letter = company_name[0].ToString().ToUpper();
-            if (company_id == 1)
-                letter = "UNK";
-            if (company_id == 2)
-                letter = "STA";
-            int number = 2000 + report_id;
-            string case_number = number.ToString() + "-" + letter + "-" + company_id.ToString();
-
-            return case_number;
-        }
-
-        private string GenerateReporterLogin()
-        {
-            Random rd = new Random();
-            string reporter_login = "";
-
-            do
-            {
-                reporter_login = reporter_login + rd.Next(0, 9).ToString();
-            }
-            while (reporter_login.Length < 6);
-
-            //     ?while ((reporter_login.Length + report_id.ToString().Length) < 6);
-
-            return "RE" + reporter_login;
-        }
-
+     
+     
         private int GetNextColor(int company_id, int report_id)
         {
             int color_id = 1;

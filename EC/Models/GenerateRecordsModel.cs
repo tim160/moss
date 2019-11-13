@@ -169,7 +169,7 @@ namespace EC.Models
 
 
 
-        private string GenerateCaseNumber(int report_id, int company_id, string company_name)
+        public string GenerateCaseNumber(int report_id, int company_id, string company_name)
         {
             string letter = "EMP";
             if (company_name.Length > 0)
@@ -184,7 +184,7 @@ namespace EC.Models
             return case_number;
         }
 
-        private string GenerateReporterLogin()
+        public string GenerateReporterLogin()
         {
             Random rd = new Random();
             string reporter_login = "";

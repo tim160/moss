@@ -1791,6 +1791,7 @@
     </Compile>
     <Compile Include="Models\GenerateRecordsModel.cs" />
     <Compile Include="Models\GetDBEntityModel.cs" />
+    <Compile Include="Models\Services\AnaliticsService\MenuDashboardAnalitics.cs" />
     <Compile Include="Models\Utils\HtmlDataHelper.cs" />
     <Compile Include="Models\Utils\SessionManager.cs" />
     <Compile Include="Models\ViewModels\ActiveCasesViewModel.cs" />
@@ -1832,7 +1833,6 @@
     <Compile Include="Models\GlobalFunctions.cs" />
     <Compile Include="Models\JsonPResult.cs" />
     <Compile Include="Models\LoginModel.cs" />
-    <Compile Include="Models\Services\AnalyticsService\MenuDashboardAnalytics.cs" />
     <Compile Include="Models\ReporterDashboardModel.cs" />
     <Compile Include="Models\ReportModel.cs" />
     <Compile Include="Models\SettingsModel.cs" />
@@ -1885,6 +1885,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\assets\content\" />
     <Folder Include="Content\assets\template\php\" />
+    <Folder Include="Models\Services\AnalyticsService\" />
     <Folder Include="Upload\CompanyLogo\" />
   </ItemGroup>
   <ItemGroup>
