@@ -35,8 +35,11 @@
     }
 
 }
+@if (rm.ID != 0)
+{
+    <input type="hidden" id="ReportId" value="@rm._report.id" />
+}
 
-<input type="hidden" id="ReportId" value="@rm._report.id" />
 <input type="hidden" id="UserId" value="@ViewBag.UserId" />
 <input type="hidden" id="CompanyCode" value="@ViewBag.company_code" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
@@ -50,185 +53,185 @@
     <script type="text/javascript" src="~/Scripts/lib/jquery-ui.min.js"></script>
 }
 
-    <body>
+<body>
 
 
-        <div id="loading" style="display: none">
-            <img id="loading-image" src='@Url.Content("~/Content/Icons/giphy.gif")' alt="Loading..." />
-        </div>
+    <div id="loading" style="display: none">
+        <img id="loading-image" src='@Url.Content("~/Content/Icons/giphy.gif")' alt="Loading..." />
+    </div>
 
-        <div id="successPasswordChanged" class="modal case-modal">
-            <p style="text-align: center">
-                @LocalizationGetter.GetString("PasswordUpdatedSuccess", is_cc)
-            </p>
+    <div id="successPasswordChanged" class="modal case-modal">
+        <p style="text-align: center">
+            @LocalizationGetter.GetString("PasswordUpdatedSuccess", is_cc)
+        </p>
 
-            <div class="case-modal__linkBlockBottom clearfix">
-                <a href="#" rel="modal:close" class="case-modal__linkBtn whiteBtn">Ok</a>
-            </div><!-- /.case-modal__linkBlockBottom -->
-        </div>
+        <div class="case-modal__linkBlockBottom clearfix">
+            <a href="#" rel="modal:close" class="case-modal__linkBtn whiteBtn">Ok</a>
+        </div><!-- /.case-modal__linkBlockBottom -->
+    </div>
 
-        <div id="alertModal" class="modal case-modal">
-            <p style="text-align: center">
-                @LocalizationGetter.GetString("LeaveReportingPage", is_cc)
-            </p>
+    <div id="alertModal" class="modal case-modal">
+        <p style="text-align: center">
+            @LocalizationGetter.GetString("LeaveReportingPage", is_cc)
+        </p>
 
-            <div class="case-modal__linkBlockBottom clearfix">
-                <a style="float: left" href="#" id="Cancel" rel="modal:close" class="case-modal__linkBtn whiteBtn">@LocalizationGetter.GetString("Cancel", is_cc)</a>
-            </div><!-- /.case-modal__linkBlockBottom -->
-            <div class="case-modal__linkBlockBottom clearfix">
-                <a href="#" id="ok" rel="modal:close" class="case-modal__linkBtn whiteBtn"> @LocalizationGetter.GetString("Ok", is_cc)</a>
-            </div><!-- /.case-modal__linkBlockBottom -->
-        </div>
-        <div class="headerBlock">
-            <div class="firstBlock">
-                <div class="logo">
-                    <img src='@mainLogo' />
-                    <div class="newReportNumber">@LocalizationGetter.GetString("Newreport", is_cc): #@ViewBag.CaseNumber</div>
-                </div>
-            </div>
-
-            <div class="steps" style="height: 65px; background-color: rgb(51,59,64); border-bottom: 5px solid rgb(5, 181, 162);">
-                <div class="selectedStep" data-val="1">1</div>
-                <div class="selectedStep" data-val="2">2</div>
-                <div class="selectedStep" data-val="3">3</div>
-                <div class="selectedStep" data-val="4">4</div>
-                <div class="selectedStep clicked" data-val="5" style="border-color: rgb(5, 181, 162); color: rgb(5, 181, 162);">5</div>
-            </div>
-
-            <div class="secondBlock">
-
-                <div class="positionImageLogo">
-                    <img class="makeImgCenter" src='@logo' />
-                </div>
-
-                <div class="titlePage">
-                    <p class="newReportCaseNumber">@LocalizationGetter.GetString("Report", is_cc) #@ViewBag.CaseNumber @LocalizationGetter.GetString("wasSubmittedSuccessfully", is_cc)</p>
-                </div>
+        <div class="case-modal__linkBlockBottom clearfix">
+            <a style="float: left" href="#" id="Cancel" rel="modal:close" class="case-modal__linkBtn whiteBtn">@LocalizationGetter.GetString("Cancel", is_cc)</a>
+        </div><!-- /.case-modal__linkBlockBottom -->
+        <div class="case-modal__linkBlockBottom clearfix">
+            <a href="#" id="ok" rel="modal:close" class="case-modal__linkBtn whiteBtn"> @LocalizationGetter.GetString("Ok", is_cc)</a>
+        </div><!-- /.case-modal__linkBlockBottom -->
+    </div>
+    <div class="headerBlock">
+        <div class="firstBlock">
+            <div class="logo">
+                <img src='@mainLogo' />
+                <div class="newReportNumber">@LocalizationGetter.GetString("Newreport", is_cc): #@ViewBag.CaseNumber</div>
             </div>
         </div>
 
-        <div class="rowContent">
-            <div class="leftBlock">
-                <p class="titleMenu">@LocalizationGetter.GetString("NewIncidentReport", is_cc)</p>
-                <ul class="verticalMenu">
-                    <li data-id="1" class="stepDone"><span>@LocalizationGetter.GetString("GeneralInformation", is_cc)</span></li>
-                    <li data-id="2" class="stepDone"><span>@LocalizationGetter.GetString("PartiesInvolved", is_cc)</span></li>
-                    <li data-id="3" class="stepDone"><span>@LocalizationGetter.GetString("CaseInformation", is_cc)</span></li>
-                    <li data-id="4" class="stepDone"><span>@LocalizationGetter.GetString("CaseSummary", is_cc)</span></li>
-                </ul>
+        <div class="steps" style="height: 65px; background-color: rgb(51,59,64); border-bottom: 5px solid rgb(5, 181, 162);">
+            <div class="selectedStep" data-val="1">1</div>
+            <div class="selectedStep" data-val="2">2</div>
+            <div class="selectedStep" data-val="3">3</div>
+            <div class="selectedStep" data-val="4">4</div>
+            <div class="selectedStep clicked" data-val="5" style="border-color: rgb(5, 181, 162); color: rgb(5, 181, 162);">5</div>
+        </div>
+
+        <div class="secondBlock">
+
+            <div class="positionImageLogo">
+                <img class="makeImgCenter" src='@logo' />
             </div>
 
-            <div class="rightBlock sumResp" id="summareResponce">
+            <div class="titlePage">
+                <p class="newReportCaseNumber">@LocalizationGetter.GetString("Report", is_cc) #@ViewBag.CaseNumber @LocalizationGetter.GetString("wasSubmittedSuccessfully", is_cc)</p>
+            </div>
+        </div>
+    </div>
 
-                <div class="sumResp">
-                    <div class="summaryReportInfo">@LocalizationGetter.GetString("canAccess", is_cc)</div>
-                    <div class="summaryReportInfo"><span style="font-weight: bold;"> @LocalizationGetter.GetString("lastOpportunity", is_cc).</span></div>
-                    <div class="summaryReportInfo">@LocalizationGetter.GetString("detailsCase", is_cc).</div>
-                    <p></p>
-                    @if (ViewBag.Email != null && ViewBag.Email.Length != 0)
-                    {
-                        <div class="summaryReportInfo" style="margin-bottom:40px;">@LocalizationGetter.GetString("CaseUpdates", is_cc): <u class="reporterEmail">@ViewBag.Email</u></div>
-                    }
-                    <p></p>
+    <div class="rowContent">
+        <div class="leftBlock">
+            <p class="titleMenu">@LocalizationGetter.GetString("NewIncidentReport", is_cc)</p>
+            <ul class="verticalMenu">
+                <li data-id="1" class="stepDone"><span>@LocalizationGetter.GetString("GeneralInformation", is_cc)</span></li>
+                <li data-id="2" class="stepDone"><span>@LocalizationGetter.GetString("PartiesInvolved", is_cc)</span></li>
+                <li data-id="3" class="stepDone"><span>@LocalizationGetter.GetString("CaseInformation", is_cc)</span></li>
+                <li data-id="4" class="stepDone"><span>@LocalizationGetter.GetString("CaseSummary", is_cc)</span></li>
+            </ul>
+        </div>
 
-                    <div class="content">
-                        <div class="contentBlock reportNumberBlock contentBorder">
-                            <p class="title">@LocalizationGetter.GetString("Reportnumber", is_cc)</p>
-                            <div class="reportNumber">@ViewBag.CaseNumber</div>
-                        </div>
+        <div class="rightBlock sumResp" id="summareResponce">
 
-                        <div class="contentBlock contentBorder">
-                            <p class="title">@LocalizationGetter.GetString("Login", is_cc)</p>
-                            <div class="reportNumber">@ViewBag.Login</div>
-                        </div>
+            <div class="sumResp">
+                <div class="summaryReportInfo">@LocalizationGetter.GetString("canAccess", is_cc)</div>
+                <div class="summaryReportInfo"><span style="font-weight: bold;"> @LocalizationGetter.GetString("lastOpportunity", is_cc).</span></div>
+                <div class="summaryReportInfo">@LocalizationGetter.GetString("detailsCase", is_cc).</div>
+                <p></p>
+                @if (ViewBag.Email != null && ViewBag.Email.Length != 0)
+                {
+                    <div class="summaryReportInfo" style="margin-bottom:40px;">@LocalizationGetter.GetString("CaseUpdates", is_cc): <u class="reporterEmail">@ViewBag.Email</u></div>
+                }
+                <p></p>
 
-                        <div class="contentBlock contentBorder">
-                            <p class="title">@LocalizationGetter.GetString("PasswordTypeFieldUpdate", is_cc)</p>
-                            <textarea class="accessInfo pass">@ViewBag.Password</textarea>
-                        </div>
+                <div class="content">
+                    <div class="contentBlock reportNumberBlock contentBorder">
+                        <p class="title">@LocalizationGetter.GetString("Reportnumber", is_cc)</p>
+                        <div class="reportNumber">@ViewBag.CaseNumber</div>
                     </div>
 
-                    <div class="buttonBlock">
-                        <input type="button" class="button saveChanges" style="display: none;" value="@LocalizationGetter.GetString("SaveNewPasswordUp")">
+                    <div class="contentBlock contentBorder">
+                        <p class="title">@LocalizationGetter.GetString("Login", is_cc)</p>
+                        <div class="reportNumber">@ViewBag.Login</div>
+                    </div>
+
+                    <div class="contentBlock contentBorder">
+                        <p class="title">@LocalizationGetter.GetString("PasswordTypeFieldUpdate", is_cc)</p>
+                        <textarea class="accessInfo pass">@ViewBag.Password</textarea>
                     </div>
                 </div>
 
-
-                <div style="clear: both; margin-top: 150px;">
-                    <div class="printPanel">
-                        <div class="reportAction">
-                            <img class="summaryImages" id="printImage" src="~/Content/img/print.png">
-                            <img src="~/Content/img/printSelected.png" style="display: none" />
-
-                            @if (rm.ID != 0)
-                            {
-                                <a href="@Url.Action("PrintToPdf", "Report", new { id = rm._report.guid })" target="_blank" class="button summaryButtons" style="width: 226px;align-items: flex-start;text-align: center;">@LocalizationGetter.GetString("PrintReport", is_cc)</a>
-                            }
-                            else
-                            {
-                                <a href="#" target="_blank" class="button summaryButtons" style="width: 226px;align-items: flex-start;text-align: center;">@LocalizationGetter.GetString("PrintReport", is_cc)</a>
-                            }
-                        </div>
-                        <div class="reportAction">
-                            <img class="summaryImages" id="dashboardImage" src="~/Content/img/reportDashboard.png">
-                            <img src="~/Content/img/reportDashboardHover.png" style="display: none" />
-                            <a id="linkModal" href="#alertModal" rel="modal:open" class="button summaryButtons" style="width: 226px;align-items: flex-start;text-align: center;">@LocalizationGetter.GetString("GoToReportDashboard", is_cc)</a>
-                        </div>
-                    </div>
+                <div class="buttonBlock">
+                    <input type="button" class="button saveChanges" style="display: none;" value="@LocalizationGetter.GetString("SaveNewPasswordUp")">
                 </div>
             </div>
-        </div>
 
 
-        <div id="caseSubmitted">
-            <!--5 window ends-->
-        </div>
+            <div style="clear: both; margin-top: 150px;">
+                <div class="printPanel">
+                    <div class="reportAction">
+                        <img class="summaryImages" id="printImage" src="~/Content/img/print.png">
+                        <img src="~/Content/img/printSelected.png" style="display: none" />
 
-        <div class="modal fade in">
-            <div class="modal-dialog">
-                <div class="modal-content ">
-
-                    <div class="modal-body">
-                        <div class="content printable" id="modal-dialog">
-                            @if (rm.ID != 0)
-                            {
-                                <a href="@Url.Action("PrintToPdf", "Report", new { id = rm._report.guid })" target="_blank" class="button summaryButtons" style="width: 226px;align-items: flex-start;text-align: center;">@LocalizationGetter.GetString("PrintReport", is_cc)</a>
-                            }
-                        </div>
+                        @if (rm.ID != 0)
+                        {
+                            <a href="@Url.Action("PrintToPdf", "Report", new { id = rm._report.guid })" target="_blank" class="button summaryButtons" style="width: 226px;align-items: flex-start;text-align: center;">@LocalizationGetter.GetString("PrintReport", is_cc)</a>
+                        }
+                        else
+                        {
+                            <a href="#" target="_blank" class="button summaryButtons" style="width: 226px;align-items: flex-start;text-align: center;">@LocalizationGetter.GetString("PrintReport", is_cc)</a>
+                        }
+                    </div>
+                    <div class="reportAction">
+                        <img class="summaryImages" id="dashboardImage" src="~/Content/img/reportDashboard.png">
+                        <img src="~/Content/img/reportDashboardHover.png" style="display: none" />
+                        <a id="linkModal" href="#alertModal" rel="modal:open" class="button summaryButtons" style="width: 226px;align-items: flex-start;text-align: center;">@LocalizationGetter.GetString("GoToReportDashboard", is_cc)</a>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        @if (rm.ID == 0)
-        {
-            <a id="linkRegistrationReport" href="#registrationReport" rel="modal:open" class="button summaryButtons" style="display: none">
-                @LocalizationGetter.GetString("GoToReportDashboard", is_cc)
-            </a>
 
-            <div id="registrationReport" class="modal case-modal">
-                <div class="case-modal__title">
-                    <p style="text-align: center">
-                        @LocalizationGetter.GetString("TheReportSubmissionFailed", is_cc)
-                    </p>
+    <div id="caseSubmitted">
+        <!--5 window ends-->
+    </div>
+
+    <div class="modal fade in">
+        <div class="modal-dialog">
+            <div class="modal-content ">
+
+                <div class="modal-body">
+                    <div class="content printable" id="modal-dialog">
+                        @if (rm.ID != 0)
+                        {
+                            <a href="@Url.Action("PrintToPdf", "Report", new { id = rm._report.guid })" target="_blank" class="button summaryButtons" style="width: 226px;align-items: flex-start;text-align: center;">@LocalizationGetter.GetString("PrintReport", is_cc)</a>
+                        }
+                    </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    @if (rm.ID == 0)
+    {
+        <a id="linkRegistrationReport" href="#registrationReport" rel="modal:open" class="button summaryButtons" style="display: none">
+            @LocalizationGetter.GetString("GoToReportDashboard", is_cc)
+        </a>
+
+        <div id="registrationReport" class="modal case-modal">
+            <div class="case-modal__title">
                 <p style="text-align: center">
-                    @LocalizationGetter.GetString("ConnectionErrorSessionExpiration", is_cc)
+                    @LocalizationGetter.GetString("TheReportSubmissionFailed", is_cc)
                 </p>
-
-                <div class="case-modal__linkBlockBottom clearfix">
-                    <a style="float: left" href="#" id="retry" rel="modal:close" class="case-modal__linkBtn whiteBtn">
-                        @LocalizationGetter.GetString("Retry", is_cc)
-                    </a>
-                </div><!-- /.case-modal__linkBlockBottom -->
-                <div class="case-modal__linkBlockBottom clearfix">
-                    <a href="#" id="newReport" rel="modal:close" class="case-modal__linkBtn whiteBtn">
-                        @LocalizationGetter.GetString("FileANewReport", is_cc)
-                    </a>
-                </div><!-- /.case-modal__linkBlockBottom -->
             </div>
-        }
-    </body>
+            <p style="text-align: center">
+                @LocalizationGetter.GetString("ConnectionErrorSessionExpiration", is_cc)
+            </p>
+
+            <div class="case-modal__linkBlockBottom clearfix">
+                <a style="float: left" href="#" id="retry" rel="modal:close" class="case-modal__linkBtn whiteBtn">
+                    @LocalizationGetter.GetString("Retry", is_cc)
+                </a>
+            </div><!-- /.case-modal__linkBlockBottom -->
+            <div class="case-modal__linkBlockBottom clearfix">
+                <a href="#" id="newReport" rel="modal:close" class="case-modal__linkBtn whiteBtn">
+                    @LocalizationGetter.GetString("FileANewReport", is_cc)
+                </a>
+            </div><!-- /.case-modal__linkBlockBottom -->
+        </div>
+    }
+</body>
 
 <script>
 

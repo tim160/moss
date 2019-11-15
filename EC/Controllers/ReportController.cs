@@ -26,7 +26,6 @@ namespace EC.Controllers
     {
         private readonly CompanyModel companyModel = new CompanyModel();
         private readonly ReportModel reportModel = new ReportModel();
-
         //
         // GET: /Report/
         [HttpGet]
@@ -175,7 +174,10 @@ namespace EC.Controllers
             companyModel.ID = model.currentCompanyId;
             model.Process(Request.Form, Request.Files);
             string password;
-            var currentReport = reportModel.AddReport(model, out password);
+
+            ReportAddModel report = new ReportAddModel();
+            var currentReport = report.AddReport(model, out password);
+
             ReportSubmit submit = new ReportSubmit();
             submit.result = new ReportModelResult();
             submit.result.StatusCode = currentReport.StatusCode;
@@ -199,33 +201,25 @@ namespace EC.Controllers
                     base.glb.UpdateReportLog(user.id, 2, currentReport.report.id, "", null, "");
                     base.glb.UpdateReportLog(user.id, 28, currentReport.report.id, LocalizationGetter.GetString("_Started", is_cc), null, "");
                 }
-                //ReportViewModel rvm = new ReportViewModel();
-                //rvm.Merge(currentReport.report);
-                //submit.merge(rvm, companyModel, reportModel, model);
-                ViewBag.ReportModel = new ReportModel(currentReport.report.id);
-
+               
 
                 #region SendEmail To Admins
                 ReportModel rm = new ReportModel(currentReport.report.id);
+                ViewBag.ReportModel = rm;
 
                 Business.Actions.Email.EmailManagement em = new Business.Actions.Email.EmailManagement(is_cc);
                 Business.Actions.Email.EmailBody eb = new Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
                 bool has_involved = false;
-                //List<string> to = new List<string>();
-                //List<string> cc = new List<string>();
                 if (rm.InvolvedMediatorsUserList().Count > 0)
                     has_involved = true;
 
                 string body = "";
-                //LocalizationGetter.Culture = Session["lang"];
                 string title = LocalizationGetter.GetString("Email_Title_NewCase", is_cc);
                 if (has_involved)
                     title = LocalizationGetter.GetString("Email_Title_NewCaseInvolved", is_cc);
                 foreach (var _user in rm.MediatorsWhoHasAccessToReport().Where(t => t.role_id != ECLevelConstants.level_escalation_mediator).ToList())
                 {
                     eb = new Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
-                    //to = new List<string>();
-                    //to.Add(_user.email.Trim());
                     int email_type = 0;
                     if (has_involved)
                     {
