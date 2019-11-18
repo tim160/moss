@@ -9,7 +9,7 @@ namespace EC.Models
     public class GetDBEntityModel
     {
         ECEntities db = new ECEntities();
-        ///  hideLocationCompany,    Companies()? - remove 
+        ///  Companies()? - remove 
         /////public void SaveFile(HttpPostedFileBase file, string path)   -- move
         ///  public string SaveLoginChanges(int userId, string password)  - move
         /// 
