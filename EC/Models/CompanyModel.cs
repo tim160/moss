@@ -112,11 +112,11 @@ namespace EC.Models
 
          return  roleId == null 
            ? isActiveOnly
-                    ? db.user.Where(s => s.company_id == companyId && s.status_id == ECGlobalConstants.status_active && role_ids.Contains(s.role_id)).ToList()
+                    ? db.user.Where(s => s.company_id == companyId && s.status_id == ECStatusConstants.Active_Value && role_ids.Contains(s.role_id)).ToList()
                     : db.user.Where(s => s.company_id == companyId && role_ids.Contains(s.role_id)).ToList()
             
             : isActiveOnly
-                    ? db.user.Where(s => s.company_id == companyId && s.role_id == roleId.Value && s.status_id == ECGlobalConstants.status_active && role_ids.Contains(s.role_id)).ToList()
+                    ? db.user.Where(s => s.company_id == companyId && s.role_id == roleId.Value && s.status_id == ECStatusConstants.Active_Value && role_ids.Contains(s.role_id)).ToList()
                     : db.user.Where(s => s.company_id == companyId && s.role_id == roleId.Value && role_ids.Contains(s.role_id)).ToList();
 
         }
