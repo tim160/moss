@@ -45,7 +45,7 @@ namespace EC.Controllers.API
                 reporterWouldLike = rm._anonymousLevel_mediatorVersionByCaller(user.id),
                 reporterName = rm.Get_reporter_name(user.id),
                 reporterIs = rm.ReporterCompanyRelationShort(),
-                incidentHappenedIn = rm.LocationString(is_cc),
+                incidentHappenedIn = rm.LocationString(),
                 affectedDepartment = rm.DepartmentsString(is_cc),
                 partiesInvolvedName = "",
                 partiesInvolvedTitle = "",

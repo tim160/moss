@@ -6,26 +6,32 @@
 
     <link href="~/Content/styleAnalytics.css" rel="stylesheet" />
 
-    ViewBag.Title = LocalizationGetter.GetString("TaskAnalyticsUp", is_cc);
-    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
-    int user_id = (Int32)ViewBag.user_id;
-    ReportModel rm = new ReportModel();
-    int[] _today_spanshot = ViewBag._today_spanshot;
-    int[] _month_end_spanshot = ViewBag._month_end_spanshot;
-    int difference = 0;
+  bool? is_cc = ViewBag.is_cc;
+  if (!is_cc.HasValue)
+  {
+    is_cc = false;
+  }
 
-    string _today = ViewBag._today;
+  ViewBag.Title = LocalizationGetter.GetString("TaskAnalyticsUp", is_cc);
+  Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+  int user_id = (Int32)ViewBag.user_id;
+  ReportModel rm = new ReportModel();
+  int[] _today_spanshot = ViewBag._today_spanshot;
+  int[] _month_end_spanshot = ViewBag._month_end_spanshot;
+  int difference = 0;
+
+  string _today = ViewBag._today;
 
 
-    string[] _titleHeaderLegend = { LocalizationGetter.GetString("NewReportUp", is_cc), LocalizationGetter.GetString("NewCase", is_cc), LocalizationGetter.GetString("UnderInvestigation", is_cc), LocalizationGetter.GetString("AwaitingSignOff", is_cc) };
-    string[] _miniSquareColor = { "#D6F9F6", "#c0ece8", "#82dad0", "#44c8b9" };
+  string[] _titleHeaderLegend = { LocalizationGetter.GetString("NewReportUp", is_cc), LocalizationGetter.GetString("NewCase", is_cc), LocalizationGetter.GetString("UnderInvestigation", is_cc), LocalizationGetter.GetString("AwaitingSignOff", is_cc) };
+  string[] _miniSquareColor = { "#D6F9F6", "#c0ece8", "#82dad0", "#44c8b9" };
 
-    UserModel um = new UserModel(user_id);
-    List<report> _reports = um.ReportsSearch(null, 0);
+  UserModel um = new UserModel(user_id);
+  List<report> _reports = um.ReportsSearch(null, 0);
 
-    var _dtAnalyticsTimeline = ViewBag._dtAnalyticsTimeline;
-    var _dtTasksColored = ViewBag._dtTasksColored;
-    var dt_series = ViewBag.dt_series;
+  var _dtAnalyticsTimeline = ViewBag._dtAnalyticsTimeline;
+  var _dtTasksColored = ViewBag._dtTasksColored;
+  var dt_series = ViewBag.dt_series;
 
 }
 
@@ -123,7 +129,7 @@
                         if (rm.ReportTasks(0).Count > 0)
                         {
                             <div class="blockLinesItem">
-                                <p>@rm.SecondaryTypeString() - @rm.LocationString(is_cc) - @LocalizationGetter.GetString("Report", is_cc) # @rm._report.display_name</p>
+                                <p>@rm.SecondaryTypeString() - @rm.LocationString() - @LocalizationGetter.GetString("Report", is_cc) # @rm._report.display_name</p>
                                 <div class="linesShow">
                                     <div class="blockLineFirst" style="border-bottom-color: #@rm.ColorCode();"></div>
                                     <label>@rm.ReportTasks(0).Count</label>
@@ -167,7 +173,7 @@
                                 TaskExtended _extended_task = new TaskExtended(_task.id, user_id);
 
                                 <div class="blockLinesItem">
-                                    <p><label>@rm.SecondaryTypeString() - @rm.LocationString(is_cc) - @LocalizationGetter.GetString("Report", is_cc) # @rm._report.display_name</label><label>></label>@_extended_task.TaskTitle</p>
+                                    <p><label>@rm.SecondaryTypeString() - @rm.LocationString() - @LocalizationGetter.GetString("Report", is_cc) # @rm._report.display_name</label><label>></label>@_extended_task.TaskTitle</p>
                                     <div class="linesShow">
                                         <div class="blockLineFirst" style="border-bottom-color: #@rm.ColorCode();"></div>
 

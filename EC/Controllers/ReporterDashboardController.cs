@@ -96,8 +96,8 @@ namespace EC.Controllers
 
             CaseMessagesModel cm = new CaseMessagesModel(report_id, 1, id.Value);
 
-            GlobalFunctions glb = new GlobalFunctions();
-            glb.UpdateReadMessages(report_id, id.Value, 1);
+            ReadStatusModel readStatusModel = new ReadStatusModel();
+            readStatusModel.UpdateReadMessages(report_id, id.Value, 1);
 
             return View(cm);
         }

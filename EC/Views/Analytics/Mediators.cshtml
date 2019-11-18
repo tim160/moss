@@ -5,12 +5,16 @@
 @{
 
     <link rel="stylesheet" href="~/Content/styleAnalytics.css" />
-
-    ViewBag.Title = "Analytics";
-    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
-    int user_id = (Int32)ViewBag.user_id;
-    ReportModel rm = new ReportModel();
-    var _dtAnalyticsTimeline = ViewBag._dtAnalyticsTimeline;
+  bool? is_cc = ViewBag.is_cc;
+  if (!is_cc.HasValue)
+  {
+    is_cc = false;
+  }
+  ViewBag.Title = "Analytics";
+  Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+  int user_id = (Int32)ViewBag.user_id;
+  ReportModel rm = new ReportModel();
+  var _dtAnalyticsTimeline = ViewBag._dtAnalyticsTimeline;
 }
 
 <div class="blockSettings blockAnalytics">
