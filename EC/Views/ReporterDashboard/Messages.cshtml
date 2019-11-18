@@ -42,7 +42,7 @@
             }
         </div>
 
-        @if ((rm._investigation_status != ECGlobalConstants.investigation_status_closed) && (rm._investigation_status != ECGlobalConstants.investigation_status_spam))
+        @if ((rm._investigation_status != (int)CaseStatusConstants.CaseStatusValues.Closed) && (rm._investigation_status != (int)CaseStatusConstants.CaseStatusValues.Spam))
         {
             @Html.AntiForgeryToken()
 
