@@ -57,9 +57,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SortDirectionEnum.cs" />
     <Compile Include="TimeZoneConstants.cs" />
-    <Compile Include="UserConstants.cs" />
     <Compile Include="UserExceptionConstants.cs" />
-    <Compile Include="UserLevelConstants.cs" />
     <Compile Include="VarConstants.cs" />
     <Compile Include="WCFHeaderConstants.cs" />
   </ItemGroup>

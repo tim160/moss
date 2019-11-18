@@ -233,7 +233,7 @@ namespace EC.Models.ECModel
                 if (active_only_flag == false)
                     _users_list = db.user.Where(s => s.company_id == company_id).ToList();
                 else
-                    _users_list = db.user.Where(s => s.company_id == company_id && s.status_id == ECGlobalConstants.status_active).ToList();
+                    _users_list = db.user.Where(s => s.company_id == company_id && s.status_id == ECStatusConstants.Active_Value).ToList();
             }
             else
             {

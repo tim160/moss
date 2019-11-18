@@ -42,7 +42,7 @@
     string[] _statuses = EC.Constants.ECGlobalConstants.ReportFlowStatusesList;
 
 
-    string report_name = " - #" + rm._report.display_name + " - " + rm.SecondaryTypeString() + " - " + rm.LocationString(is_cc.Value);
+    string report_name = " - #" + rm._report.display_name + " - " + rm.SecondaryTypeString() + " - " + rm.LocationString();
     ViewBag.Title = LocalizationGetter.GetString("NewReportUp") + report_name;
     var MediatorsAcceptCase = rm.MediatorsAcceptCase();
     var mediatorsAcces = MediatorsAcceptCase.listMediators;
@@ -432,7 +432,7 @@
                         }
                         <tr>
                             <td>@LocalizationGetter.GetString("TheIncidentHappenedIn", is_cc):</td>
-                            <td>@rm.LocationString(is_cc.Value)</td>
+                            <td>@rm.LocationString()</td>
                         </tr>
                         <tr>
                             <td>@LocalizationGetter.GetString("AffectedDepartment", is_cc):</td>

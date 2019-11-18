@@ -535,7 +535,7 @@ namespace EC.Controllers
                                 EmailBody eb_partner = new EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
                                 eb_partner.VarAfter4HoursAfterSignUp((body) =>
                                 {
-                                    body = body.Replace("[Referral Partner Name]", partner.first_nm + " " + partner.last_nm);
+                                    body = body.Replace("[Referral Partner Name]", partner.first_nm);
                                     body = body.Replace("[Referenced Code]", var_info.invitation_code);
                                     body = body.Replace("[First Name]", var_info.first_nm);
                                     body = body.Replace("[Last Name]", var_info.last_nm);

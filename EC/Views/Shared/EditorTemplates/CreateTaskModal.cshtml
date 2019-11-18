@@ -49,7 +49,7 @@
                     <textarea class="form-control" type="text" name="txtDescription" id="txtDescription"></textarea>
                 </div>
             }
-            @if (((normal_button_value == ECGlobalConstants.investigation_status_completed.ToString())))
+            @if (((normal_button_value == ((int)CaseStatusConstants.CaseStatusValues.Completed).ToString())))
             {
                 <div class="caseResolution custom">
                     <div class="outcomeText">@LocalizationGetter.GetString("SelectCaseReviewerToSignoff", is_cc):</div>

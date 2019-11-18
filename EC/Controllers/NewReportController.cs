@@ -42,7 +42,7 @@ namespace EC.Controllers.ViewModel
             if (!rm.HasAccessToReport(user_id))
                 return RedirectToAction("Login", "Service");
 
-            glb.UpdateReportRead(user_id, report_id);
+            readStatusModel.UpdateReportRead(user_id, report_id);
 
             if ((rm._investigation_status != 1) && (rm._investigation_status != 2) && (rm._investigation_status != 7))
             {

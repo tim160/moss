@@ -30,17 +30,6 @@ namespace EC.Constants
             LocalizationGetter.GetString("Closed") };
 
 
-        #region Status Constants
-        public const int status_active = 2;
-        public const int status_inactive = 3;
-        public const int status_reopened = 4;
-        public const int status_responded = 5;
-        public const int status_closed = 6;
-        public const int status_assigned = 7;
-        public const int status_escalated = 8;
-        #endregion
-
- 
 
         public const int anonymity_Anonymous = 1;
         public const int anonymity_Anonymous_to_company_only = 2;

@@ -213,7 +213,7 @@
                         }
 							
 				    </div><!-- /.fullTaskBlock-content -->
-                    @if (rm._investigation_status != ECGlobalConstants.investigation_status_closed)
+                    @if (rm._investigation_status != (int)CaseStatusConstants.CaseStatusValues.Closed)
                     {
                         using (Html.BeginForm())
                         {

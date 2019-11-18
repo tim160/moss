@@ -1338,7 +1338,7 @@ namespace EC.Models
                               cc_is_life_threating = rm._report.cc_is_life_threating,
                               total_days = Math.Floor((DateTime.Now.Date - rm._report.reported_dt.Date).TotalDays),
 
-                              location = rm.LocationString(is_cc),
+                              location = rm.LocationString(),
                               case_secondary_types = rm.SecondaryTypeString(),
                               days_left = rm.GetThisStepDaysLeft(delay_allowed),
 

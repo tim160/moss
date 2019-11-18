@@ -103,7 +103,7 @@ namespace EC.Models.ViewModel
             this.case_dt = rm.IncidentDateString();
             this.reported_dt = rm.ReportedDateString();
             this.case_number = rm._report.display_name;
-            this.location = rm.LocationString(false);
+            this.location = rm.LocationString();
             this.case_secondary_types = rm.SecondaryTypeString();
             this.case_secondary_types_all = rm.SecondaryTypeStringAll();            
             this.case_color_code = rm.ColorCode();

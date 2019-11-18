@@ -111,9 +111,9 @@ namespace EC.Models
         /// </summary>
         /// <param name="report_id"></param>
         /// <returns></returns>
-        public string LocationString(bool is_cc)
+        public string LocationString()
         {
-            string location = LocalizationGetter.GetString("unknown_location", is_cc);
+            string location = LocalizationGetter.GetString("unknown_location");
             if ((_report != null) && (ID != 0))
             {
                 if (_report.location_id.HasValue)
