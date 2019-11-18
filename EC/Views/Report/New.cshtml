@@ -421,27 +421,29 @@
 
                         </div>
                         <input type="hidden" value="@ViewBag.CustomSecondaryType" name="CustomSecondaryType" />
-
-
                         <div class="contentBlock checkboxListStyle rowBlock caseInformationReport" style="border-bottom: 0px;">
                             <input type="hidden" class="validate" value="false" name="caseInformationReport" data-vltarget=".caseInformationReport" data-validate="notEmpty" />
                             @if (ViewBag.secondary_type_mandatory != null)
                             {
                                 foreach (var item in ViewBag.secondary_type_mandatory)
                                 {
-                                    <div class="freeBlock inputRadio option" data-val="@String.Concat(@item.SecondaryMandatory)">
-                                        <label class="inputBlock" for="@String.Concat(@item.SecondaryMandatory)">
-                                            <input id="@String.Concat(@item.SecondaryMandatory)" type="checkbox" name="whatHappened" value="@item.id" />
-                                            @*<span class="radioButton"></span>*@
-                                            <span class="radioTitle">@item.SecondaryMandatory</span>
-                                        </label>
-                                    </div>
+                            <div style="padding: 10px 20px" class="freeBlock inputRadio option" data-val="@String.Concat(@item.SecondaryMandatory)">
+                                <div style="width:13px;height:13px;float:left;padding-top: 5px;">
+                                <input id="@String.Concat(@item.SecondaryMandatory)" type="checkbox" name="whatHappened" value="@item.id" />
+                                </div>
+                                <div>
+                                    <label style="padding:0px;" class="inputBlock" for="@String.Concat(@item.SecondaryMandatory)">
+                                        <span class="radioTitle">@item.SecondaryMandatory</span>
+                                    </label>
+                                </div>
+
+
+                            </div>
                                 }
                             }
                             <div class="freeBlock inputRadio option" data-val="Other">
                                 <label class="inputBlock" for="Other">
                                     <input id="Other" type="checkbox" name="whatHappened" value="0" />
-                                    @*<span class="radioButton"></span>*@
                                     <span class="radioTitle">@LocalizationGetter.GetString("Other", is_cc)</span>
                                 </label>
                             </div>
@@ -773,16 +775,19 @@
                                             }
 
                                         </div>
-                                        <label class="inputBlock floatRightClass" for="@myItem.id" style="padding-top:25px">
-                                            <span class="involvedArea">@LocalizationGetter.GetString("Exclude", is_cc).ToUpper()</span>
-                                            <input id="@myItem.id"
-                                                   type="checkbox"
-                                                   float="right"
-                                                   class="checkboxMediatorInvolved" />
-                                            <span for="@myItem.id"></span>
-                                        </label>
+                                        <div>
+                                            <label class="inputBlock floatRightClass" for="@myItem.id" style="padding-top:25px">
+                                                <span class="involvedArea">@LocalizationGetter.GetString("Exclude", is_cc).ToUpper()</span>
+                                                <input id="@myItem.id"
+                                                       type="checkbox"
+                                                       float="right"
+                                                       class="checkboxMediatorInvolved" />
+                                                <span for="@myItem.id"></span>
+                                            </label>
 
-                                        <div class="specialBigButton mediatorsName">@myItem.first_nm @myItem.last_nm </div>
+                                            <div class="specialBigButton mediatorsName">@myItem.first_nm @myItem.last_nm </div>
+                                        </div>
+
                                         <div class="labelUnderBigButton mediatorsInfo">@myItem.title_ds</div>
                                         <div class="labelUnderBigButton mediatorsInfo">@ViewBag.currentCompany</div>
                                     </div>
