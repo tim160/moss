@@ -22,6 +22,7 @@
     <TypeScriptToolsVersion>2.1</TypeScriptToolsVersion>
     <NuGetPackageImportStamp>8acab050</NuGetPackageImportStamp>
     <UseGlobalApplicationHostFile />
+    <MvcBuildViews>true</MvcBuildViews>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -1338,7 +1339,6 @@
     <Content Include="Views\Shared\Helpers\_UserPreviewFace.cshtml" />
     <Content Include="Views\Settings\Password.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\CreateTaskModal.cshtml" />
-    <Content Include="Views\Analytics\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ApproveDialogModal.cshtml" />
     <Content Include="Views\EmployeeAwareness\Index.cshtml" />
     <Content Include="Views\EmployeeAwareness\Poster.cshtml" />
@@ -1791,7 +1791,8 @@
     </Compile>
     <Compile Include="Models\GenerateRecordsModel.cs" />
     <Compile Include="Models\GetDBEntityModel.cs" />
-    <Compile Include="Models\Services\AnaliticsService\MenuDashboardAnalitics.cs" />
+    <Compile Include="Models\ReadStatusModel.cs" />
+    <Compile Include="Models\Services\AnalyticsService\MenuDashboardAnalytics.cs" />
     <Compile Include="Models\Utils\HtmlDataHelper.cs" />
     <Compile Include="Models\Utils\SessionManager.cs" />
     <Compile Include="Models\ViewModels\ActiveCasesViewModel.cs" />
@@ -1801,6 +1802,7 @@
     <Compile Include="Models\ViewModels\CaseSubmittedViewModel.cs" />
     <Compile Include="Models\ViewModels\MediatorsView.cs" />
     <Compile Include="Models\ViewModels\MessagesViewModel.cs" />
+    <Compile Include="Models\ViewModels\ReportAddModel.cs" />
     <Compile Include="Models\ViewModels\ReporterDashboardViewModel.cs" />
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
     <Compile Include="Models\ViewModels\ReportSubmit.cs" />
@@ -1885,7 +1887,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\assets\content\" />
     <Folder Include="Content\assets\template\php\" />
-    <Folder Include="Models\Services\AnalyticsService\" />
     <Folder Include="Upload\CompanyLogo\" />
   </ItemGroup>
   <ItemGroup>
@@ -1955,6 +1956,9 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
