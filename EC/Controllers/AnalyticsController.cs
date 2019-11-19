@@ -13,13 +13,14 @@ using EC.Core.Common;
 using EC.Common.Interfaces;
 using EC.Constants;
 using EC.Common.Util;
+using EC.Models.Services.AnalyticsService;
 
 namespace EC.Controllers
 {
     public class AnalyticsController : BaseController
     {
         protected IDateTimeHelper DateTimeHelper = new DateTimeHelper();
-
+        private TimeLineAnalyticsService analyticsService = new TimeLineAnalyticsService();
         // GET: Analytics
         public ActionResult Index()
         {
@@ -76,8 +77,9 @@ namespace EC.Controllers
 
             string _today = DateTimeHelper.ConvertDateToLongMonthString(DateTime.Today);
             ViewBag._today = _today;
+            
 
-            DataTable dtAnalyticsTimeline = glb.AnalyticsTimeline(um._user.company_id, um._user.id);
+            DataTable dtAnalyticsTimeline = analyticsService.AnalyticsTimeline(um._user.company_id, um._user.id);
             ViewBag._dtAnalyticsTimeline = StringUtil.ConvertDataTabletoString(dtAnalyticsTimeline);
 
             DataTable dtTasksColored = glb.TasksPerDay(um._user.company_id, um._user.id);
@@ -147,7 +149,7 @@ namespace EC.Controllers
 
             ViewBag.user_id = user_id;
 
-            DataTable dtAnalyticsTimeline = glb.AnalyticsTimeline(um._user.company_id, um._user.id);
+            DataTable dtAnalyticsTimeline = analyticsService.AnalyticsTimeline(um._user.company_id, um._user.id);
             ViewBag._dtAnalyticsTimeline = StringUtil.ConvertDataTabletoString(dtAnalyticsTimeline);
 
             return View();
@@ -168,7 +170,7 @@ namespace EC.Controllers
                 }
 
                 JsonResult json = new JsonResult();
-                MenuDashboardAnalytics AnaliticsService = new MenuDashboardAnalytics(db, glb);
+                MenuDashboardAnalytics AnaliticsService = new MenuDashboardAnalytics(db, new ReportModel());
                 json.Data = AnaliticsService.ReportAdvancedJson(types, user.id);
                 return json;
             }
