@@ -222,19 +222,15 @@ namespace EC.Controllers
 
                                 #region Email Sending
 
-                                List<string> to = new List<string>();
-                                List<string> cc = new List<string>();
-                                List<string> bcc = new List<string>();
-
-                                to.Add(email.Trim());
-                                ///     bcc.Add("timur160@hotmail.com");
-
                                 EmailManagement em = new EmailManagement(is_cc);
                                 EmailBody eb = new EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
                                 eb.ForgetPasswordNew(Request.Url.AbsoluteUri.ToLower(), email, password_token);
-                                string body = eb.Body;
-                                em.Send(to, cc, LocalizationGetter.GetString("ChangePasswordRequest", is_cc), body, true);
 
+                                string body = eb.Body;
+
+                                glb.SaveEmailBeforeSend(0, _user.id, _user.company_id, _user.email.Trim(), 
+                                    System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
+                                    LocalizationGetter.GetString("ChangePasswordRequest", is_cc), body, false, 53);
                                 #endregion
                             }
                             catch (Exception ex)

@@ -19,7 +19,6 @@ namespace EC.Controllers
     public class AnalyticsController : BaseController
     {
         protected IDateTimeHelper DateTimeHelper = new DateTimeHelper();
-
         // GET: Analytics
         public ActionResult Index()
         {
@@ -168,7 +167,7 @@ namespace EC.Controllers
                 }
 
                 JsonResult json = new JsonResult();
-                MenuDashboardAnalytics AnaliticsService = new MenuDashboardAnalytics(db, glb);
+                MenuDashboardAnalytics AnaliticsService = new MenuDashboardAnalytics(db, new ReportModel());
                 json.Data = AnaliticsService.ReportAdvancedJson(types, user.id);
                 return json;
             }
