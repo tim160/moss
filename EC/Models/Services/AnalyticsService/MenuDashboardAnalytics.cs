@@ -13,16 +13,16 @@ namespace EC.Models
     public class MenuDashboardAnalytics
     {
         private ECEntities DB;
-        private GlobalFunctions global;
+        private ReportModel reportModel;
 
-        public MenuDashboardAnalytics(ECEntities DB, GlobalFunctions globalFunctions)
+        public MenuDashboardAnalytics(ECEntities DB, ReportModel reportModel)
         {
-            this.global = globalFunctions;
             this.DB = DB;
+            this.reportModel = reportModel;
         }
         public string ReportAdvancedJson(ReportTypes types, int userId)
         {
-            List<report> _all_reports = global.ReportsListForCompany(types.companyIdArray,
+            List<report> _all_reports = reportModel.ReportsListForCompany(types.companyIdArray,
                 userId,
                 types.ReportsSecondaryTypesIDStrings, 
                 types.ReportsRelationTypesIDStrings,
@@ -42,7 +42,7 @@ namespace EC.Models
         public string ReportAdvancedJson(int[] company_id, int user_id, string ReportsSecondaryTypesIDStrings, string ReportsRelationTypesIDStrings, string ReportsDepartmentIDStringss, string ReportsLocationIDStrings, DateTime? dtReportCreationStartDate, DateTime? dtReportCreationEndDate)
         {
 
-            List<report> _all_reports = global.ReportsListForCompany(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
+            List<report> _all_reports = reportModel.ReportsListForCompany(company_id, user_id, ReportsSecondaryTypesIDStrings, ReportsRelationTypesIDStrings, ReportsDepartmentIDStringss, ReportsLocationIDStrings, dtReportCreationStartDate, dtReportCreationEndDate);
 
             string _all_json = "{\"LocationTable\":" + CompanyLocationReportAdvancedJson(_all_reports)
                     + ", \"DepartmentTable\":" + CompanyDepartmentReportAdvancedJson(_all_reports)
@@ -78,7 +78,7 @@ namespace EC.Models
 
         private DataTable CompanyDepartmentReportAdvanced(List<report> _all_reports)
         {
-            DataTable dt = global.dtDoughnutTable();
+            DataTable dt = dtDoughnutTable();
             DataRow dr;
 
 
@@ -130,7 +130,7 @@ namespace EC.Models
         private DataTable CompanyLocationReportAdvanced(List<report> _all_reports)
         {
             ReportModel rm = new ReportModel();
-            DataTable dt = global.dtDoughnutTable();
+            DataTable dt = dtDoughnutTable();
             DataRow dr;
 
             List<CompanyLocation> ResultLocations = _all_reports.Select(rep => rep.location_id != null ? rep.location_id : 0).Select(rep => new CompanyLocation
@@ -198,7 +198,7 @@ namespace EC.Models
             // merge with previous
             List<Int32> _report_ids = _all_reports.Select(t => t.id).ToList();
 
-            DataTable dt = global.dtDoughnutTable();
+            DataTable dt = dtDoughnutTable();
             DataRow dr;
 
             var ShipCompany = (
@@ -272,7 +272,7 @@ namespace EC.Models
             // merge with previous
             List<Int32> _report_ids = _all_reports.Select(t => t.id).ToList();
 
-            DataTable dt = global.dtDoughnutTable();
+            DataTable dt = dtDoughnutTable();
             DataRow dr;
             var secondaryType =
             (
@@ -332,6 +332,14 @@ namespace EC.Models
                 dt.Rows.Add(dr);
             }
 
+            return dt;
+        }
+        public DataTable dtDoughnutTable()
+        {
+            DataTable dt = new DataTable();
+
+            dt.Columns.Add("name", typeof(string));
+            dt.Columns.Add("val", typeof(int));
             return dt;
         }
     }

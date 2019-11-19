@@ -709,14 +709,7 @@ public class GlobalFunctions
 
     #region ReportsDataTables
     
-    public DataTable dtDoughnutTable()
-    {
-        DataTable dt = new DataTable();
 
-        dt.Columns.Add("name", typeof(string));
-        dt.Columns.Add("val", typeof(int));
-        return dt;
-    }
 
     private DataTable dtAnalyticsTimeLineTable()
     {
