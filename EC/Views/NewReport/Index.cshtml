@@ -390,7 +390,7 @@
                       @if (rm._report.agent_id.HasValue)
                       {
                       <tr>
-                        <td>Filed by Call Center Agent:</td>
+                          <td>@LocalizationGetter.GetString("FiledCenterAgent", is_cc):</td>
                         <td>@rm.GetAgentName()</td>
                       </tr>
                       }
