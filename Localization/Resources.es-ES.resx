@@ -3050,4 +3050,7 @@
   <data name="sendInvitation" xml:space="preserve">
     <value>ENVIAR INVITACION</value>
   </data>
+  <data name="ForgotLogin" xml:space="preserve">
+    <value>Olvidé sesión</value>
+  </data>
 </root>

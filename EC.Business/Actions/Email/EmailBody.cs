@@ -284,14 +284,17 @@ namespace EC.Business.Actions.Email
                     break;
 
                 case 77:
-                  //Reminder of training
-                  m_filename = "OrderConfirmationEmployeeConfidential";
-                  break;
+                    //Reminder of training
+                    m_filename = "OrderConfirmationEmployeeConfidential";
+                    break;
                 case 78:
-                  //Reminder of training
-                  m_filename = "OrderConfirmationEmployeeConfidentialfrom";
-                  break;
-      }
+                    //Reminder of training
+                    m_filename = "OrderConfirmationEmployeeConfidentialfrom";
+                    break;
+                case 79:
+                    m_filename = "ForgetLogin";
+                    break;
+            }
 
             string appPath = Path.GetFullPath("~/EmailText/" + m_filename + ".html");
             string path1 = Path.Combine(Environment.CurrentDirectory, @"EmailText\", m_filename + ".html");
@@ -363,7 +366,7 @@ namespace EC.Business.Actions.Email
 
         }
 
- 
+
 
         public void NewCase(string first, string last, string case_number)
         {
@@ -445,7 +448,7 @@ namespace EC.Business.Actions.Email
         }
         public void NewUser(string first, string last, string login, string pass)
         {
-                GetBody(13);
+            GetBody(13);
 
             m_body = m_body.Replace("[MediatorName]", (first + " " + last).Trim());
             m_body = m_body.Replace("[LoginName]", login.Trim());
@@ -605,10 +608,10 @@ namespace EC.Business.Actions.Email
         {
             GetBody(60);
 
-            m_body = m_body.Replace("[CaseNumber]", caseNumber); 
+            m_body = m_body.Replace("[CaseNumber]", caseNumber);
         }
 
-        public void CalendarEvent(bool company, bool added,string url, string date)
+        public void CalendarEvent(bool company, bool added, string url, string date)
         {
             if ((company) && (added)) GetBody(61);
             if ((company) && (!added)) GetBody(62);
@@ -627,15 +630,15 @@ namespace EC.Business.Actions.Email
             m_body = m_body.Replace("[CompanyName]", companyName);
             m_body = m_body.Replace("[Url]", url);
         }
-        
+
         public void OrderConfirmation_Email(
-            string orderNumber, 
-            string name, 
-            string surname, 
-            string annualFee, 
-            string onboardingFee, 
-            string registrationDate, 
-            string last, 
+            string orderNumber,
+            string name,
+            string surname,
+            string annualFee,
+            string onboardingFee,
+            string registrationDate,
+            string last,
             string companyName,
             string CCName,
             string CCSurname,
@@ -701,7 +704,7 @@ namespace EC.Business.Actions.Email
             GetBody(72);
 
             m_body = prepareBody(m_body);
-        }        
+        }
 
         public void VarAfter24HoursAfterSignUpToUser(Func<string, string> prepareBody)
         {
@@ -738,61 +741,66 @@ namespace EC.Business.Actions.Email
         }
 
 
-    public void GetConfirmationTextPartner(
-            string name,
-            string surname,
-            string annualFee,
-            string onboardingFee,
-            string exparationDate,
-            string orderNumber,
-            string companyName,
-            string partnerCode, string year, string totalAmount
-          )
-    {
-      //OrderConfirmationEmployeeConfidential 
-      GetBody(77);
+        public void GetConfirmationTextPartner(
+                string name,
+                string surname,
+                string annualFee,
+                string onboardingFee,
+                string exparationDate,
+                string orderNumber,
+                string companyName,
+                string partnerCode, string year, string totalAmount
+              )
+        {
+            //OrderConfirmationEmployeeConfidential 
+            GetBody(77);
 
-      m_body = m_body.Replace("@@OrderNumber", orderNumber);
-      m_body = m_body.Replace("@@FirstName", name);
-      m_body = m_body.Replace("@@LastName", surname);
+            m_body = m_body.Replace("@@OrderNumber", orderNumber);
+            m_body = m_body.Replace("@@FirstName", name);
+            m_body = m_body.Replace("@@LastName", surname);
 
-      m_body = m_body.Replace("@@AnnualFee", annualFee);
-      m_body = m_body.Replace("@@OnboardingFee", onboardingFee);
-      m_body = m_body.Replace("@@ExpirationDate", exparationDate);  
-      m_body = m_body.Replace("@@CompanyName", companyName);
-      m_body = m_body.Replace("@@CodeUsed", partnerCode);
-      m_body = m_body.Replace("@@year", year);
-      m_body = m_body.Replace("@@TotalAmount", totalAmount);
+            m_body = m_body.Replace("@@AnnualFee", annualFee);
+            m_body = m_body.Replace("@@OnboardingFee", onboardingFee);
+            m_body = m_body.Replace("@@ExpirationDate", exparationDate);
+            m_body = m_body.Replace("@@CompanyName", companyName);
+            m_body = m_body.Replace("@@CodeUsed", partnerCode);
+            m_body = m_body.Replace("@@year", year);
+            m_body = m_body.Replace("@@TotalAmount", totalAmount);
+        }
+        public void GetConfirmationTextEC(
+                string name,
+                string surname,
+                string annualFee,
+                string onboardingFee,
+                string exparationDate,
+                string orderNumber,
+                string companyName,
+                string partnerCode, string year, string totalAmount)
+        {
+            //OrderConfirmationEmployeeConfidentialfrom
+            GetBody(78);
+
+            m_body = m_body.Replace("@@OrderNumber", orderNumber);
+            m_body = m_body.Replace("@@FirstName", name);
+            m_body = m_body.Replace("@@LastName", surname);
+
+            m_body = m_body.Replace("@@AnnualFee", annualFee);
+            m_body = m_body.Replace("@@OnboardingFee", onboardingFee);
+            m_body = m_body.Replace("@@ExpirationDate", exparationDate);
+            m_body = m_body.Replace("@@CompanyName", companyName);
+            m_body = m_body.Replace("@@CodeUsed", partnerCode);
+            m_body = m_body.Replace("@@year", year);
+            m_body = m_body.Replace("@@TotalAmount", totalAmount);
+
+
+        }
+        public void forgetLogin(string login)
+        {
+            GetBody(79);
+
+            m_body = m_body.Replace("[Login]", login.Trim());
+        }
+        #endregion
     }
-    public void GetConfirmationTextEC(
-            string name,
-            string surname,
-            string annualFee,
-            string onboardingFee,
-            string exparationDate,
-            string orderNumber,
-            string companyName,
-            string partnerCode, string year, string totalAmount)
-    {
-      //OrderConfirmationEmployeeConfidentialfrom
-      GetBody(78);
-
-      m_body = m_body.Replace("@@OrderNumber", orderNumber);
-      m_body = m_body.Replace("@@FirstName", name);
-      m_body = m_body.Replace("@@LastName", surname);
-
-      m_body = m_body.Replace("@@AnnualFee", annualFee);
-      m_body = m_body.Replace("@@OnboardingFee", onboardingFee);
-      m_body = m_body.Replace("@@ExpirationDate", exparationDate);
-      m_body = m_body.Replace("@@CompanyName", companyName);
-      m_body = m_body.Replace("@@CodeUsed", partnerCode);
-      m_body = m_body.Replace("@@year", year);
-      m_body = m_body.Replace("@@TotalAmount", totalAmount);
-
-
-    }
-
-    #endregion
-  }
 
 }

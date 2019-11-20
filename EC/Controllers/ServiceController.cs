@@ -211,24 +211,29 @@ namespace EC.Controllers
                         user _user = (db.user.Where(t => t.email.ToLower().Trim() == email.ToLower().Trim())).First();
                         if (_user != null)
                         {
-
                             #region Email Sending
 
                             EmailManagement em = new EmailManagement(is_cc);
                             EmailBody eb = new EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
-                            eb.ForgetPasswordNew(Request.Url.AbsoluteUri.ToLower(), email, "0000");
+                            eb.forgetLogin(_user.login_nm);
 
                             string body = eb.Body;
 
                             glb.SaveEmailBeforeSend(0, _user.id, _user.company_id, _user.email.Trim(),
                                 System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
-                                LocalizationGetter.GetString("ChangePasswordRequest", is_cc), body, false, 53);
+                                LocalizationGetter.GetString("ForgotLogin", is_cc), body, false, 53);
                             #endregion
+                            return LocalizationGetter.GetString("Success", is_cc).ToLower();
                         }
+                        return LocalizationGetter.GetString("NoUserFound", is_cc);
                     }
+                    return LocalizationGetter.GetString("NoUserFound", is_cc);
                 }
+                else
+                    return LocalizationGetter.GetString("EmailInvalid", is_cc);
             }
-            return null;
+            else
+                return LocalizationGetter.GetString("EnterYourEmail", is_cc);
         }
         public string Email(string email, string login)
         {

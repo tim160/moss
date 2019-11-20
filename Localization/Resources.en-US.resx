@@ -3045,4 +3045,7 @@ Do not want to involve</value>
   <data name="sendInvitation" xml:space="preserve">
     <value>Send Invitation</value>
   </data>
+  <data name="ForgotLogin" xml:space="preserve">
+    <value>Forgot Login</value>
+  </data>
 </root>
