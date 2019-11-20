@@ -35,9 +35,9 @@ namespace EC.Controllers
         {
             foreach (var user in db.user.Where(x => !x.password.EndsWith("=")).ToList())
             {
-                user.password = PasswordUtils.GetHash(user.password);
+         //       user.password = PasswordUtils.GetHash(user.password);
             }
-            db.SaveChanges();
+     //       db.SaveChanges();
 
             Session.Clear();
             return View($"Login{(is_cc ? "-CC" : "")}", new LoginViewModel { HostUrl = host_url });
