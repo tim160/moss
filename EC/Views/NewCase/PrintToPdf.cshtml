@@ -2,7 +2,7 @@
 @using EC.Common.Interfaces
 @using EC.Core.Common
 @using EC.Models.Database
-
+@using EC.Localization;
 @model ReportModel
 
 @{
@@ -15,6 +15,34 @@
     IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
     var user_id = (int)ViewBag.user_id;
     var cm = new CompanyModel();
+    string agentName = Model.GetAgentName().Trim();
+
+    //Model._reporter_user.first_nm
+    //@Model._reporter_user.last_nm
+    var userDetails = new List<string>();
+    if (!String.IsNullOrEmpty(Model._reporter_user.first_nm) || String.IsNullOrEmpty(Model._reporter_user.last_nm))
+    {
+        userDetails.Add(String.Format("{0} {1}", Model._reporter_user.first_nm, Model._reporter_user.last_nm));
+    }
+    if (!String.IsNullOrEmpty(Model._reporter_user.email))
+    {
+        userDetails.Add(Model._reporter_user.email);
+    }
+    if (!String.IsNullOrEmpty(Model._reporter_user.phone))
+    {
+        userDetails.Add(Model._reporter_user.phone);
+    }
+    string userName = String.Join(", ", userDetails).Trim();
+
+    var NonInvolvedMediatorsAll = Model.NonInvolvedMediatorsAll();
+    var ReportOwnersUserList = Model.ReportOwnersUserList();
+    var InvestigationMethodology = Model.InvestigationMethodology();
+    var FactsEstablished = Model.FactsEstablished();
+    var ExecutiveSummary = Model.ExecutiveSummary();
+    var Last_investigation_case_closure_reason = Model.Last_investigation_case_closure_reason();
+
+    var status = Model._last_investigation_status();
+    var description = status != null ? status.description : "";
 }
 
 <!DOCTYPE html>
@@ -75,15 +103,16 @@
                     </div><!-- /.reportContentBlock__textColRight -->
                 </div><!-- /.reportContentBlock__textCols -->
 
-                @if(Model._report.agent_id.HasValue) {
-                <div class="reportContentBlock__textCols clearfix">
-                    <div class="reportContentBlock__textColFirst">
-                        Filed by Call Center Agent:
-                    </div><!-- /.reportContentBlock__textColFirst -->
-                    <div class="reportContentBlock__textColRight">
-                        <p>@Model.GetAgentName()</p>
-                    </div><!-- /.reportContentBlock__textColRight -->
-                </div><!-- /.reportContentBlock__textCols -->
+                @if (Model._report.agent_id.HasValue && !String.IsNullOrEmpty(agentName))
+                {
+                    <div class="reportContentBlock__textCols clearfix">
+                        <div class="reportContentBlock__textColFirst">
+                            @LocalizationGetter.GetString("FiledCenterAgent", is_cc):
+                        </div><!-- /.reportContentBlock__textColFirst -->
+                        <div class="reportContentBlock__textColRight">
+                            <p>@agentName</p>
+                        </div><!-- /.reportContentBlock__textColRight -->
+                    </div><!-- /.reportContentBlock__textCols -->
                 }
 
 
@@ -97,33 +126,20 @@
                         </p>
                     </div><!-- /.reportContentBlock__textColRight -->
                 </div><!-- /.reportContentBlock__textCols -->
-                <div class="reportContentBlock__textCols clearfix">
-                    <div class="reportContentBlock__textColFirst">
-                        Name
-                    </div><!-- /.reportContentBlock__textColFirst -->
-                    <div class="reportContentBlock__textColRight">
-                        <p>
-                            @Model._reporter_user.first_nm
-                            @Model._reporter_user.last_nm
-                            @{
-                                var l = new List<string>();
-                                if (!String.IsNullOrEmpty(Model._reporter_user.first_nm) || String.IsNullOrEmpty(Model._reporter_user.last_nm))
-                                {
-                                    l.Add(String.Format("{0} {1}", Model._reporter_user.first_nm, Model._reporter_user.last_nm));
-                                }
-                                if (!String.IsNullOrEmpty(Model._reporter_user.email))
-                                {
-                                    l.Add(Model._reporter_user.email);
-                                }
-                                if (!String.IsNullOrEmpty(Model._reporter_user.phone))
-                                {
-                                    l.Add(Model._reporter_user.phone);
-                                }
-                            }
-                            @String.Join(", ", l);
-                        </p>
-                    </div><!-- /.reportContentBlock__textColRight -->
-                </div><!-- /.reportContentBlock__textCols -->
+                @if (!String.IsNullOrEmpty(userName))
+                {
+                    <div class="reportContentBlock__textCols clearfix">
+                        <div class="reportContentBlock__textColFirst">
+                            Name
+                        </div><!-- /.reportContentBlock__textColFirst -->
+                        <div class="reportContentBlock__textColRight">
+                            <p>
+                                @userName
+                            </p>
+                        </div><!-- /.reportContentBlock__textColRight -->
+                    </div><!-- /.reportContentBlock__textCols -->
+                }
+
                 <div class="reportContentBlock__textCols clearfix">
                     <div class="reportContentBlock__textColFirst">
                         Incident location
@@ -132,28 +148,33 @@
                         <p>@Model.LocationString()</p>
                     </div><!-- /.reportContentBlock__textColRight -->
                 </div><!-- /.reportContentBlock__textCols -->
-                <div class="reportContentBlock__textCols clearfix">
-                    <div class="reportContentBlock__firstColTitle">
-                        Case owner
-                    </div><!-- /.reportContentBlock__firstColTitle -->
-                    <div class="reportRow clearfix">
-                        @foreach (var item in Model.ReportOwnersUserList())
-                        {
-                            var um = new UserModel(item.id);
-                            <div class="col-4" style="width: 33.33% !important">
-                                <p>
-                                    @item.first_nm @item.last_nm
-                                </p>
-                            </div><!-- /.col-4 -->
-                            <div class="col-4" style="width: 33.33% !important">
-                                <p>@um.GetDepartmentString()</p>
-                            </div><!-- /.col-4 -->
-                            <div class="col-4" style="width: 33.33% !important">
-                                <p>@item.email</p>
-                            </div><!-- /.col-4 -->
-                        }
-                    </div><!-- /.reportRow -->
-                </div><!-- /.reportContentBlock__textCols clearfix -->
+                @if (ReportOwnersUserList.Count > 0)
+                {
+                    <div class="reportContentBlock__textCols clearfix">
+                        <div class="reportContentBlock__firstColTitle">
+                            Case owner
+                        </div><!-- /.reportContentBlock__firstColTitle -->
+                        <div class="reportRow clearfix">
+                            @foreach (var item in ReportOwnersUserList)
+                            {
+                                var um = new UserModel(item.id);
+                                <div class="col-4" style="width: 33.33% !important">
+                                    <p>
+                                        @item.first_nm @item.last_nm
+                                    </p>
+                                </div><!-- /.col-4 -->
+                                <div class="col-4" style="width: 33.33% !important">
+                                    <p>@um.GetDepartmentString()</p>
+                                </div><!-- /.col-4 -->
+                                <div class="col-4" style="width: 33.33% !important">
+                                    <p>@item.email</p>
+                                </div><!-- /.col-4 -->
+                            }
+                        </div><!-- /.reportRow -->
+                    </div><!-- /.reportContentBlock__textCols clearfix -->
+                }
+
+
                 <div class="reportContentBlock__textCols clearfix">
                     <div class="reportContentBlock__firstColTitle">
                         Case administration team
@@ -198,33 +219,37 @@
                         </div><!-- /.col-4 -->
                     </div><!-- /.reportRow -->
                 </div><!-- /.reportContentBlock__textCols clearfix -->
-                <div class="reportContentBlock__textCols clearfix">
-                    <div class="reportContentBlock__firstColTitle">
-                        Involved parties
-                    </div><!-- /.reportContentBlock__firstColTitle -->
-                    @{
-                        rClass = "";
-                        var roles = Model.RoleInReport();
-                        foreach (var item in Model.NonInvolvedMediatorsAll())
-                        {
-                            var role = roles.FirstOrDefault(x => x.id == item.role_in_report_id);
-                            <div class="reportRow @rClass clearfix">
-                                <div class="col-4">
-                                    <p>@item.Name @item.last_name</p>
-                                </div><!-- /.col-4 -->
-                                <div class="col-4">
-                                    <p>@item.Title</p>
-                                </div><!-- /.col-4 -->
-                                <div class="col-4">
-                                    <p>
-                                        @(role == null ? "" : role.role_en)
-                                    </p>
-                                </div><!-- /.col-4 -->
-                            </div><!-- /.reportRow -->
-                            rClass = "reportRow_mt";
+                @if (NonInvolvedMediatorsAll.Count > 0)
+                {
+                    <div class="reportContentBlock__textCols clearfix">
+                        <div class="reportContentBlock__firstColTitle">
+                            Involved parties
+                        </div><!-- /.reportContentBlock__firstColTitle -->
+                        @{
+                            rClass = "";
+                            var roles = Model.RoleInReport();
+                            foreach (var item in NonInvolvedMediatorsAll)
+                            {
+                                var role = roles.FirstOrDefault(x => x.id == item.role_in_report_id);
+                                <div class="reportRow @rClass clearfix">
+                                    <div class="col-4">
+                                        <p>@item.Name @item.last_name</p>
+                                    </div><!-- /.col-4 -->
+                                    <div class="col-4">
+                                        <p>@item.Title</p>
+                                    </div><!-- /.col-4 -->
+                                    <div class="col-4">
+                                        <p>
+                                            @(role == null ? "" : role.role_en)
+                                        </p>
+                                    </div><!-- /.col-4 -->
+                                </div><!-- /.reportRow -->
+                                rClass = "reportRow_mt";
+                            }
                         }
-                    }
-                </div><!-- /.reportContentBlock__textCols clearfix -->
+                    </div><!-- /.reportContentBlock__textCols clearfix -->
+                }
+
                 <div class="reportContentBlock__textCols clearfix">
                     <div class="reportContentBlock__firstColTitle">
                         Involved departments
@@ -245,30 +270,42 @@
                     }
                 </div><!-- /.reportContentBlock__textCols clearfix -->
             </div><!-- /.reportContentBlock clearfix -->
-            <div class="reportContentBlock clearfix">
-                <div class="reportContentBlock__title">
-                    INVESTIGATION METHODOLOGY
-                </div><!-- /.reportContentBlock__title -->
-                <div class="reportContentBlock__wideText">
-                    @Html.Raw(Model.InvestigationMethodology().Replace("\n", "<br/>"))
-                </div><!-- /.reportContentBlock__wideText -->
-            </div><!-- /.reportContentBlock clearfix -->
-            <div class="reportContentBlock clearfix">
-                <div class="reportContentBlock__title">
-                    FACTS ESTABLISHED
-                </div><!-- /.reportContentBlock__title -->
-                <div class="reportContentBlock__wideText">
-                    @Html.Raw(Model.FactsEstablished().Replace("\n", "<br/>"))
-                </div><!-- /.reportContentBlock__wideText -->
-            </div><!-- /.reportContentBlock clearfix -->
-            <div class="reportContentBlock clearfix">
-                <div class="reportContentBlock__title">
-                    EXECUTIVE SUMMARY
-                </div><!-- /.reportContentBlock__title -->
-                <div class="reportContentBlock__wideText">
-                    @Html.Raw(Model.ExecutiveSummary().Replace("\n", "<br/>"))
-                </div><!-- /.reportContentBlock__wideText -->
-            </div><!-- /.reportContentBlock clearfix -->
+            @if (InvestigationMethodology.Length > 0)
+            {
+                <div class="reportContentBlock clearfix">
+                    <div class="reportContentBlock__title">
+                        INVESTIGATION METHODOLOGY
+                    </div><!-- /.reportContentBlock__title -->
+                    <div class="reportContentBlock__wideText">
+                        @Html.Raw(Model.InvestigationMethodology().Replace("\n", "<br/>"))
+                    </div><!-- /.reportContentBlock__wideText -->
+                </div><!-- /.reportContentBlock clearfix -->
+            }
+
+            @if (FactsEstablished.Length > 0)
+            {
+                <div class="reportContentBlock clearfix">
+                    <div class="reportContentBlock__title">
+                        FACTS ESTABLISHED
+                    </div><!-- /.reportContentBlock__title -->
+                    <div class="reportContentBlock__wideText">
+                        @Html.Raw(FactsEstablished.Replace("\n", "<br/>"))
+                    </div><!-- /.reportContentBlock__wideText -->
+                </div><!-- /.reportContentBlock clearfix -->
+            }
+
+            @if (ExecutiveSummary.Length > 0)
+            {
+                <div class="reportContentBlock clearfix">
+                    <div class="reportContentBlock__title">
+                        EXECUTIVE SUMMARY
+                    </div><!-- /.reportContentBlock__title -->
+                    <div class="reportContentBlock__wideText">
+                        @Html.Raw(ExecutiveSummary.Replace("\n", "<br/>"))
+                    </div><!-- /.reportContentBlock__wideText -->
+                </div><!-- /.reportContentBlock clearfix -->
+            }
+
 
         </div><!-- /.reportTemplateContent -->
 
@@ -319,37 +356,37 @@
                         Behavioral factors
                     </div><!-- /.reportContentBlock__firstColTitle -->
                     <div class="reportRow__twoCols clearfix">
-                            <div class="reportRow__twoCols-title">
-                                @b.name_en
-                            </div><!-- /.reportRow__twoCols-title -->
-                            <div class="reportRow__twoCols-text" style="margin-bottom: 20px;">
-                                @Html.Raw((im.company_root_cases_behavioral_note ?? "").Replace("\n", "<br/>"))
-                            </div><!-- /.reportRow__twoCols-text -->
-                    
+                        <div class="reportRow__twoCols-title">
+                            @b.name_en
+                        </div><!-- /.reportRow__twoCols-title -->
+                        <div class="reportRow__twoCols-text" style="margin-bottom: 20px;">
+                            @Html.Raw((im.company_root_cases_behavioral_note ?? "").Replace("\n", "<br/>"))
+                        </div><!-- /.reportRow__twoCols-text -->
+
                     </div><!-- /.reportRow clearfix -->
                 }
                 if ((e != null) && (im != null) && (im.company_root_cases_behavioral_note != null) && (im.company_root_cases_external_note.Length > 0 || e.name_en.Length > 0))
                 {
-                <div class="reportContentBlock__firstColTitle report_m-l">
-                    External influences
-                </div><!-- /.reportContentBlock__firstColTitle -->
-                <div class="reportRow__twoCols clearfix">
- 
+                    <div class="reportContentBlock__firstColTitle report_m-l">
+                        External influences
+                    </div><!-- /.reportContentBlock__firstColTitle -->
+                    <div class="reportRow__twoCols clearfix">
+
                         <div class="reportRow__twoCols-title">
                             @e.name_en
                         </div><!-- /.reportRow__twoCols-title -->
                         <div class="reportRow__twoCols-text" style="margin-bottom: 20px;">
                             @Html.Raw((im.company_root_cases_external_note ?? "").Replace("\n", "<br/>"))
                         </div><!-- /.reportRow__twoCols-text -->
-                    
-                </div><!-- /.reportRow clearfix -->
+
+                    </div><!-- /.reportRow clearfix -->
                 }
                 if ((o != null) && (im != null) && (im.company_root_cases_behavioral_note != null) && (im.company_root_cases_organizational_note.Length > 0 || o.name_en.Length > 0))
                 {
-                <div class="reportContentBlock__firstColTitle report_m-l">
-                    Internal influences:
-                </div><!-- /.reportContentBlock__firstColTitle -->
-                <div class="reportRow__twoCols clearfix">
+                    <div class="reportContentBlock__firstColTitle report_m-l">
+                        Internal influences:
+                    </div><!-- /.reportContentBlock__firstColTitle -->
+                    <div class="reportRow__twoCols clearfix">
 
                         <div class="reportRow__twoCols-title">
                             @o.name_en
@@ -357,13 +394,13 @@
                         <div class="reportRow__twoCols-text" style="margin-bottom: 20px;">
                             @Html.Raw((im.company_root_cases_organizational_note ?? "").Replace("\n", "<br/>"))
                         </div><!-- /.reportRow__twoCols-text -->
-                    
-                </div><!-- /.reportRow clearfix -->
-                    }
+
+                    </div><!-- /.reportRow clearfix -->
                 }
+            }
         </div><!-- /.reportContentBlock clearfix -->
 
-        @{ 
+        @{
             var mediators = Model.NonInvolvedMediatorsAll();
             var caseClosureOutcome = Model.CaseClosureOutcome();
             var companyOutcomes = Model.CompanyOutcomes();
@@ -385,8 +422,8 @@
                 </div><!-- /.reportContentBlock__wideText -->
             </div><!-- /.reportContentBlock clearfix -->
         }
-        
-        @{ 
+
+        @{
             var reporter = caseClosureOutcome.FirstOrDefault(x => !x.non_mediator_involved_id.HasValue);
         }
         @if (reporter != null)
@@ -442,21 +479,23 @@
             <div class="reportContentBlock__title">
                 CASE CLOSURE
             </div><!-- /.reportContentBlock__title -->
-
-            <div class="reportContentBlock__textCols clearfix">
-                <div class="reportContentBlock__textColFirst">
-                    Reason for closure
-                </div><!-- /.reportContentBlock__textColFirst -->
-                <div class="reportContentBlock__textColRight">
-                    <p>@Model.Last_investigation_case_closure_reason()</p>
-                </div><!-- /.reportContentBlock__textColRight -->
-            </div><!-- /.reportContentBlock__textCols -->
+            @if (Last_investigation_case_closure_reason != null && !String.IsNullOrEmpty(Last_investigation_case_closure_reason.Trim()))
+            {
+                <div class="reportContentBlock__textCols clearfix">
+                    <div class="reportContentBlock__textColFirst">
+                        Reason for closure
+                    </div><!-- /.reportContentBlock__textColFirst -->
+                    <div class="reportContentBlock__textColRight">
+                        <p>@Last_investigation_case_closure_reason</p>
+                    </div><!-- /.reportContentBlock__textColRight -->
+                </div><!-- /.reportContentBlock__textCols -->
+            }
             <div class="reportContentBlock__textCols clearfix">
                 <div class="reportContentBlock__textColFirst">
                     Case closure approved by
                 </div><!-- /.reportContentBlock__textColFirst -->
                 <div class="reportContentBlock__textColRight">
-                    @{ 
+                    @{
                         var som = Model.Last_investigation_status_user();
                     }
                     @if (som != null)
@@ -465,21 +504,18 @@
                     }
                 </div><!-- /.reportContentBlock__textColRight -->
             </div><!-- /.reportContentBlock__textCols -->
-            <div class="reportContentBlock__textCols clearfix">
-                <div class="reportContentBlock__firstColTitle">
-                    Approval notes
-                </div><!-- /.reportContentBlock__firstColTitle -->
-                <div class="reportContentBlock__wideText">
-                    @{
-                        var status = Model._last_investigation_status();
-                        var description = status != null ? status.description : "";
-                    }
-                    @description
-                </div><!-- /.reportContentBlock__wideText -->
-            </div><!-- /.reportContentBlock__textCols clearfix -->
-
+            @if (!String.IsNullOrEmpty(description))
+            {
+                <div class="reportContentBlock__textCols clearfix">
+                    <div class="reportContentBlock__firstColTitle">
+                        Approval notes
+                    </div><!-- /.reportContentBlock__firstColTitle -->
+                    <div class="reportContentBlock__wideText">
+                        @description
+                    </div><!-- /.reportContentBlock__wideText -->
+                </div><!-- /.reportContentBlock__textCols clearfix -->
+            }
         </div><!-- /.reportContentBlock clearfix -->
-
     </div><!-- /.reportTemplate container clearfix -->
 </body>
 </html>
