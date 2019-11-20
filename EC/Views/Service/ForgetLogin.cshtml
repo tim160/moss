@@ -28,29 +28,19 @@
             <div class="loginSection__contentBg">
                 @using (Html.BeginForm("Login", "Service", FormMethod.Post, new { }))
                 {
-                <div class="container loginSection__container">
-                    <div class="loginForm">
-                        <label class="loginForm__input">
-                            Login
-                            @Html.TextBoxFor(x => x.Login)
-                        </label>
-                    </div><!-- /.loginForm -->
-
-                    <div class="loginForm">
-                        <label class="loginForm__input">
-                            Email address
-                            @Html.TextBoxFor(x => x.Email)
-                        </label>
-                    </div><!-- /.loginForm -->
-                    <div class="loginFormLinks">
-                        <button id="submit" class="loginFormLinks__loginBtn btn" style="cursor: pointer;">
-                            Submit
-                        </button>
-                        <a href="/Service/ForgetLogin" style="text-align: right" class="loginFormLinks__restoreLink">
-                            Forgot your login?
-                        </a>
-                    </div><!-- /.loginFormLinks -->
-                </div><!-- /.container -->
+                    <div class="container loginSection__container">
+                        <div class="loginForm">
+                            <label class="loginForm__input">
+                                Email address
+                                @Html.TextBoxFor(x => x.Login)
+                            </label>
+                        </div><!-- /.loginForm -->
+                        <div class="loginFormLinks">
+                            <button id="submit" class="loginFormLinks__loginBtn btn" style="cursor: pointer;">
+                                Submit
+                            </button>
+                        </div><!-- /.loginFormLinks -->
+                    </div><!-- /.container -->
                 }
             </div><!-- /.loginSection__contentBg -->
         </section><!-- /.loginSection -->
@@ -89,19 +79,19 @@
     $(document).ready(function (event) {
         $('#submit').on('click', function (event) {
             event.preventDefault();
-            if (($('input[name=Login]').val() != "") && $('input[name=Email]').val() != "") {
-                ForgetPass($('input[name=Login]').val(), $('input[name=Email]').val());
+            if (($('input[name=Login]').val() != "")) {
+                ForgetPass($('input[name=Login]').val());
             }
             else
                 alert('@LocalizationGetter.GetString("EnterYourEmail", is_cc)');
         });
 
-        function ForgetPass(login, email) {
+        function ForgetPass(email) {
 
             $.ajax({
                 method: "POST",
-                url: "/Service/Email",
-                data: { email: email, login: login }
+                url: "/Service/SendLogin",
+                data: { email: email }
             }).done(function (data) {//data from server
                 if (data == 'success') {
                     alert('@LocalizationGetter.GetString("UpdatePassEmailSent", is_cc)');

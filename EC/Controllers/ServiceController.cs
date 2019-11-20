@@ -24,6 +24,7 @@ namespace EC.Controllers
             public string Login { get; set; }
             public string Password { get; set; }
             public string HostUrl { get; set; }
+            public string Email { get; set; }
         }
 
         private readonly UserModel userModel = new UserModel();
@@ -193,8 +194,12 @@ namespace EC.Controllers
             Session.Clear();
             return View($"ForgetPassword{(is_cc ? "-CC" : "")}");
         }
-
-        public string Email(string email)
+        public ActionResult ForgetLogin()
+        {
+            Session.Clear();
+            return View($"ForgetLogin{(is_cc ? "-CC" : "")}");
+        }
+        public string SendLogin(string email)
         {
             if (email != null && email.Length > 0)
             {
@@ -202,6 +207,38 @@ namespace EC.Controllers
                 {
                     ECEntities db = new ECEntities();
                     if (db.user.Any(t => (t.email.ToLower().Trim() == email.ToLower().Trim()) && (t.role_id != 8)))
+                    {
+                        user _user = (db.user.Where(t => t.email.ToLower().Trim() == email.ToLower().Trim())).First();
+                        if (_user != null)
+                        {
+
+                            #region Email Sending
+
+                            EmailManagement em = new EmailManagement(is_cc);
+                            EmailBody eb = new EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
+                            eb.ForgetPasswordNew(Request.Url.AbsoluteUri.ToLower(), email, "0000");
+
+                            string body = eb.Body;
+
+                            glb.SaveEmailBeforeSend(0, _user.id, _user.company_id, _user.email.Trim(),
+                                System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
+                                LocalizationGetter.GetString("ChangePasswordRequest", is_cc), body, false, 53);
+                            #endregion
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+        public string Email(string email, string login)
+        {
+            if (email != null && email.Length > 0 && login != null && login.Length > 0)
+            {
+                if (m_EmailHelper.IsValidEmail(email.Trim()))
+                {
+                    ECEntities db = new ECEntities();
+                    if (db.user.Any(t => (t.email.ToLower().Trim() == email.ToLower().Trim()) &&
+                    (t.login_nm.ToLower().Trim() == login.ToLower().Trim()) && (t.role_id != 8)))
                     {
                         user _user = (db.user.Where(t => t.email.ToLower().Trim() == email.ToLower().Trim())).First();
                         if (_user != null)
