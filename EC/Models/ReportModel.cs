@@ -2188,7 +2188,7 @@ namespace EC.Models
         }
         public string GetAgentName()
         {
-            if(this._report.agent_id!=null && this._report.agent_id > 0)
+            if(this._report.agent_id != null && this._report.agent_id > 0)
             {
                 return db.user.Find(this._report.agent_id).first_nm;
             } else

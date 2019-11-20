@@ -31,6 +31,7 @@
         class_ext = "_cc";
     }
     ViewBag.Title = LocalizationGetter.GetString("ReporterDashboard", is_cc);
+
 }
 
 @if ((rm._report != null) && (rm._report.id != 0))
@@ -46,7 +47,7 @@
                     <div class="listHead" style="font-weight: bold">@LocalizationGetter.GetString("Casestatus", is_cc): <span class="review padText">@rm.InvestigationStatusString()</span></div>
                     <div class="listLeft">
                         <p style="padding-top:4px">@LocalizationGetter.GetString("Datereported", is_cc):</p>
-                        @if (rm._report.agent_id.HasValue)
+                        @if (rm._report.agent_id.HasValue && rm._report.agent_id != 0)
                         {
                         <p style="padding-top:4px">@LocalizationGetter.GetString("FiledCenterAgent", is_cc):</p>
                         }
@@ -55,7 +56,7 @@
                     </div>
                     <div class="listRight">
                         <p> @m_DateTimeHelper.ConvertDateToLongMonthString(rm._report.reported_dt)</p>
-                        @if (rm._report.agent_id.HasValue)
+                        @if (rm._report.agent_id.HasValue && rm._report.agent_id != 0)
                         {
                             <p>@rm.GetAgentName()</p>
                         }
@@ -66,7 +67,7 @@
                         }
                         else
                         {
-                            <p> @rm.GetTotalDays().ToString() @LocalizationGetter.GetString("days", is_cc)1</p>
+                            <p> @rm.GetTotalDays().ToString() @LocalizationGetter.GetString("days", is_cc)</p>
                         }
                     </div>
 
