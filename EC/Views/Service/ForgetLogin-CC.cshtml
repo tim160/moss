@@ -1,5 +1,4 @@
 ﻿@using EC.Localization;
-
 @model EC.Controllers.ServiceController.LoginViewModel
 
 @{
@@ -8,17 +7,46 @@
   {
     is_cc = false;
   }
-  ViewBag.Title = "Restore Login";
+  ViewBag.Title = "ForgetPassword";
   Layout = "~/Views/Shared/_LayoutECCOM.cshtml";
 }
 
 <div class="general-container login">
 
-    @{Html.RenderPartial("Header"); }
+    <header class="header header-cc">
+        <div class="top-headerBg">
+            <div class="container">
+                <div class="top-header">
+
+                    <a href="http://campusconfidential.com" class="top-header__backLink">
+                        <img src="~/Content/images/svg-icons/left.svg" alt="" />
+                        <span class="top-header__backLink-text">
+                            CampusConfidential.com
+                        </span>
+                    </a>
+                    <div class="top-header__loginBar">
+                        <nav class="top-header__loginBar-nav">
+                            <li class="top-header__loginBar-li">
+                                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/Report" class="top-header__loginBar-a">
+                                    File a Report
+                                </a>
+                            </li>
+                            <li class="top-header__loginBar-li">
+                                <a href="@System.Configuration.ConfigurationManager.AppSettings["serviceUrl"]/Service/CheckStatus" class="top-header__loginBar-a">
+                                    Check Report Status
+                                </a>
+                            </li>
+                        </nav><!-- /.top-header__loginBar-nav -->
+                    </div><!-- /.top-header__loginBar -->
+                </div><!-- /.top-header -->
+            </div>
+        </div>
+
+    </header><!-- /.header -->
 
     <main class="main">
-        <section class="loginSection">
-            <div class="loginSection__titleBg" style="background-color: #edf0f0">
+        <section class="loginSection loginSection-cc">
+            <div class="loginSection__titleBg">
                 <div class="container loginTopSection__container">
                     <div class="loginSection__title">
                         ENTER YOUR EMAIL
@@ -76,7 +104,7 @@
 <script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
 
 <script>
-    $(document).ready(function (event) {
+  $(document).ready(function (event) {
         $('#submit').on('click', function (event) {
             event.preventDefault();
             if (($('input[name=Email]').val() != "")) {
@@ -94,7 +122,7 @@
                 data: { email: email }
             }).done(function (data) {//data from server
                 if (data == 'success') {
-                  alert('@LocalizationGetter.GetString("LoginEmailSent", is_cc)');
+                  alert('@LocalizationGetter.GetString("LoginEmailSent")');
                     $('input[name=Email]').val('');
                 }
                 else
@@ -104,5 +132,4 @@
             });
         }
     });
-
 </script>

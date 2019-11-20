@@ -2723,4 +2723,10 @@
   <data name="YesAnon" xml:space="preserve">
     <value>In compliance with the current national legislation, anonymous reports are allowed.</value>
   </data>
+  <data name="EnterYourLogin" xml:space="preserve">
+    <value>Enter Your Login</value>
+  </data>
+  <data name="LoginEmailSent" xml:space="preserve">
+    <value>Email with login sent.</value>
+  </data>
 </root>

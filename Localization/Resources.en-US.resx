@@ -3048,4 +3048,10 @@ Do not want to involve</value>
   <data name="ForgotLogin" xml:space="preserve">
     <value>Forgot Login</value>
   </data>
+  <data name="EnterYourLogin" xml:space="preserve">
+    <value>Enter Your Login</value>
+  </data>
+  <data name="LoginEmailSent" xml:space="preserve">
+    <value>Email with login sent.</value>
+  </data>
 </root>

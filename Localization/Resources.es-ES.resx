@@ -3053,4 +3053,10 @@
   <data name="ForgotLogin" xml:space="preserve">
     <value>Olvidé sesión</value>
   </data>
+  <data name="EnterYourLogin" xml:space="preserve">
+    <value>Ingrese su inicio de sesión</value>
+  </data>
+  <data name="LoginEmailSent" xml:space="preserve">
+    <value>Correo electrónico con inicio de sesión enviado.</value>
+  </data>
 </root>

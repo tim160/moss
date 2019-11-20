@@ -2995,6 +2995,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter Your Login.
+        /// </summary>
+        internal static string EnterYourLogin {
+            get {
+                return ResourceManager.GetString("EnterYourLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter password token.
         /// </summary>
         internal static string EnterYourToken {
@@ -4440,6 +4449,15 @@ namespace EC.Localization {
         internal static string Login {
             get {
                 return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email with login sent..
+        /// </summary>
+        internal static string LoginEmailSent {
+            get {
+                return ResourceManager.GetString("LoginEmailSent", resourceCulture);
             }
         }
         
