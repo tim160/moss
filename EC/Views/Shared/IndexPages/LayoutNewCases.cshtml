@@ -90,7 +90,7 @@
     string overlay_title = LocalizationGetter.GetString("RequestCloseCase");
     string textbox_title = LocalizationGetter.GetString("Caseresolution");
     string left_button_promotion = "";
-    string normal_button_value = CaseStatusConstants.CaseStatusValues.Completed.ToString();
+    string normal_button_value = ((int)CaseStatusConstants.CaseStatusValues.Completed).ToString();
     string left_button_value = "";// Constant.investigation_status_completed.ToString();
     List<company_outcome> company_outcomes = cm.Outcomes(_user.company_id, 2);
 
@@ -104,7 +104,7 @@
         if ((investigationstatus == 9) && (_user.role_id == 4 || _user.role_id == 5))
         {
             Res_or_comp = LocalizationGetter.GetString("Reopen");
-            normal_button_value = CaseStatusConstants.CaseStatusValues.Investigation.ToString();
+            normal_button_value = ((int)CaseStatusConstants.CaseStatusValues.Investigation).ToString();
         }
         if (((rm._investigation_status == (int)CaseStatusConstants.CaseStatusValues.Completed || rm._investigation_status == (int)CaseStatusConstants.CaseStatusValues.Resolution)))
         {
