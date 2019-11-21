@@ -13,6 +13,7 @@
     {
         is_cc = false;
     }
+    string nameReporter = Model.Get_reporter_name(Model._reporter_user.id);
 }
 
 <!DOCTYPE html>
@@ -66,19 +67,20 @@
                         <p>@Model._anonymousLevel_reporterVersion()</p>
                     </div><!-- /.reportContentBlock__textColRight -->
                 </div><!-- /.reportContentBlock__textCols -->
-                <div class="reportContentBlock__textCols clearfix">
-                    <div class="reportContentBlock__textColFirst">
-                        Name
-                    </div><!-- /.reportContentBlock__textColFirst -->
-                    <div class="reportContentBlock__textColRight">
-                        <p>
-                            @Model._reporter_user.first_nm
-                            @Model._reporter_user.last_nm
-                            @(String.IsNullOrEmpty(Model._reporter_user.first_nm) && String.IsNullOrEmpty(Model._reporter_user.last_nm) && String.IsNullOrEmpty(Model._reporter_user.email) ? "" : ", ")
-                            @Model._reporter_user.email
-                        </p>
-                    </div><!-- /.reportContentBlock__textColRight -->
-                </div><!-- /.reportContentBlock__textCols -->
+                @if (!String.IsNullOrWhiteSpace(nameReporter))
+                {
+                    <div class="reportContentBlock__textCols clearfix">
+                        <div class="reportContentBlock__textColFirst">
+                            Name
+                        </div><!-- /.reportContentBlock__textColFirst -->
+                        <div class="reportContentBlock__textColRight">
+                            <p>
+                                @nameReporter
+                            </p>
+                        </div><!-- /.reportContentBlock__textColRight -->
+                    </div><!-- /.reportContentBlock__textCols -->
+                }
+
                 <div style="@(String.IsNullOrEmpty(Model._reporter_user.phone) ? "display: none" : "display: block")  ">
                     <div class="reportContentBlock__textCols clearfix">
                         <div class="reportContentBlock__textColFirst">
