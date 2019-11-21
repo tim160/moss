@@ -47,6 +47,7 @@
     var MediatorsAcceptCase = rm.MediatorsAcceptCase();
     var mediatorsAcces = MediatorsAcceptCase.listMediators;
     var selectedmediator = MediatorsAcceptCase.Selectedmediator;
+    var agentName = rm.GetAgentName();
 }
 <body>
     <div class="headerPos">
@@ -387,11 +388,11 @@
                             <td>Reporting from:</td>
                             <td>@rm.CountryString()</td>
                         </tr>
-                      @if (rm._report.agent_id.HasValue)
+                      @if (!String.IsNullOrWhiteSpace(agentName))
                       {
                       <tr>
                           <td>@LocalizationGetter.GetString("FiledCenterAgent", is_cc):</td>
-                        <td>@rm.GetAgentName()</td>
+                        <td>@agentName</td>
                       </tr>
                       }
                         <tr>
