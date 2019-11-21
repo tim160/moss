@@ -13,7 +13,7 @@
     {
         is_cc = false;
     }
-    string agentName = Model.GetAgentName().Trim();
+    string agentName = Model.GetAgentName();
 
     var userDetails = new List<string>();
     if (!String.IsNullOrEmpty(Model._reporter_user.first_nm) || String.IsNullOrEmpty(Model._reporter_user.last_nm))
@@ -28,7 +28,7 @@
     {
         userDetails.Add(Model._reporter_user.phone);
     }
-    string userName = String.Join(", ", userDetails).Trim();
+    string userName = String.Join(", ", userDetails);
 }
 
 <!DOCTYPE html>
@@ -74,14 +74,14 @@
                         <p>@Model.CountryString()</p>
                     </div><!-- /.reportContentBlock__textColRight -->
                 </div><!-- /.reportContentBlock__textCols -->
-                @if (Model._report.agent_id.HasValue && !String.IsNullOrEmpty(agentName))
+                @if (!String.IsNullOrWhiteSpace(agentName))
                 {
                     <div class="reportContentBlock__textCols clearfix">
                         <div class="reportContentBlock__textColFirst">
                             @LocalizationGetter.GetString("FiledCenterAgent", is_cc):
                         </div><!-- /.reportContentBlock__textColFirst -->
                         <div class="reportContentBlock__textColRight">
-                            <p>agentName</p>
+                            <p>@agentName</p>
                         </div><!-- /.reportContentBlock__textColRight -->
                     </div><!-- /.reportContentBlock__textCols -->
                 }
@@ -93,7 +93,7 @@
                         <p>@Model._anonymousLevel_reporterVersion()</p>
                     </div><!-- /.reportContentBlock__textColRight -->
                 </div><!-- /.reportContentBlock__textCols -->
-                @if (!String.IsNullOrEmpty(userName))
+                @if (!String.IsNullOrWhiteSpace(userName))
                 {
                     <div class="reportContentBlock__textCols clearfix">
                         <div class="reportContentBlock__textColFirst">
