@@ -31,7 +31,7 @@
         class_ext = "_cc";
     }
     ViewBag.Title = LocalizationGetter.GetString("ReporterDashboard", is_cc);
-
+    var agentName = rm.GetAgentName();
 }
 
 @if ((rm._report != null) && (rm._report.id != 0))
@@ -56,9 +56,9 @@
                     </div>
                     <div class="listRight">
                         <p> @m_DateTimeHelper.ConvertDateToLongMonthString(rm._report.reported_dt)</p>
-                        @if (rm._report.agent_id.HasValue && rm._report.agent_id != 0)
+                        @if (!String.IsNullOrWhiteSpace(agentName))
                         {
-                            <p>@rm.GetAgentName()</p>
+                            <p>@agentName</p>
                         }
                         @if (rm.GetTotalDays() == 1)
                         {
