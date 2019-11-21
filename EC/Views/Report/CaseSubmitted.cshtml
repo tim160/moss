@@ -48,13 +48,13 @@
 @section pageScripts{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <script type="text/javascript" src="~/Scripts/Common/helper.js"></script>
-    <script type="text/javascript" src="~/Scripts/View/CaseSubmitted.js"></script>
+    <script type="text/javascript" src="~/Scripts/View/reportSubmitted.js"></script>
     <script type="text/javascript" src="~/Scripts/View/report.js"></script>
     <script type="text/javascript" src="~/Scripts/lib/jquery-ui.min.js"></script>
 }
 
 <body>
-
+    <input type="hidden" value="" id="" />
 
     <div id="loading" style="display: none">
         <img id="loading-image" src='@Url.Content("~/Content/Icons/giphy.gif")' alt="Loading..." />
@@ -62,7 +62,7 @@
 
     <div id="successPasswordChanged" class="modal case-modal">
         <p style="text-align: center">
-            @LocalizationGetter.GetString("PasswordUpdatedSuccess", is_cc)
+            @LocalizationGetter.GetString("PasswordUpdatedSuccessfully", is_cc)
         </p>
 
         <div class="case-modal__linkBlockBottom clearfix">
@@ -121,7 +121,7 @@
             </ul>
         </div>
 
-        <div class="rightBlock sumResp" id="summareResponce">
+        <div class="rightBlock sumResp" id="summaryResponse">
 
             <div class="sumResp">
                 <div class="summaryReportInfo">@LocalizationGetter.GetString("canAccess", is_cc)</div>
@@ -232,12 +232,3 @@
         </div>
     }
 </body>
-
-<script>
-
-    $("#ok").on('click', function () {
-        var ReportId = document.getElementById('ReportId').value;
-        window.location.href = "/Report/RedirectToReporterDashboard?reportId=" + ReportId;
-        $('#loading').show();
-    });
-</script>
