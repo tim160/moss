@@ -71,16 +71,14 @@ namespace EC.Models
                     {
                         if (_report.incident_anonymity_id == 3)
                         {
-                            if ((_reporter_user.first_nm + " " + _reporter_user.last_nm).Trim().Length > 0)
-                                return _reporter_user.first_nm + " " + _reporter_user.last_nm;
+                          return Get_reporter_name_reporterView();
                         }
                     }
                     if ((_caller.role_id < 4) && (_caller.role_id > 0))
                     {
                         if ((_report.incident_anonymity_id == 3) || (_report.incident_anonymity_id == 2))
                         {
-                            if ((_reporter_user.first_nm + " " + _reporter_user.last_nm).Trim().Length > 0)
-                                return _reporter_user.first_nm + " " + _reporter_user.last_nm;
+                          return Get_reporter_name_reporterView();
                         }
                     }
                     if (_caller.role_id == 8)
@@ -100,6 +98,21 @@ namespace EC.Models
             return name.Trim();
 
         }
+
+        /// <summary>
+        /// Use it in Reporter Pages - REport/New, ReporterDashboard ( pdfs for them)
+        /// </summary>
+        /// <returns></returns>
+        public string Get_reporter_name_reporterView()
+        {
+          string name = "";
+ 
+          if ((_reporter_user != null) && ((_reporter_user.first_nm + " " + _reporter_user.last_nm).Trim().Length > 0))
+              name = _reporter_user.first_nm + " " + _reporter_user.last_nm;
+
+          return name.Trim();
+        }
+
         /// <summary>
         /// green line on top of report - Review, Investigation, etc
         /// </summary>
