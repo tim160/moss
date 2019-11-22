@@ -3054,4 +3054,16 @@ Do not want to involve</value>
   <data name="LoginEmailSent" xml:space="preserve">
     <value>Email with login sent.</value>
   </data>
+  <data name="AllCampuses" xml:space="preserve">
+    <value>All Campuses</value>
+  </data>
+  <data name="AllColleges" xml:space="preserve">
+    <value>All Colleges</value>
+  </data>
+  <data name="AllCompanies" xml:space="preserve">
+    <value>All Companies</value>
+  </data>
+  <data name="AllMembers" xml:space="preserve">
+    <value>All Members</value>
+  </data>
 </root>

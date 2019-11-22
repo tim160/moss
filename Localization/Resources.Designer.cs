@@ -511,11 +511,38 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All Campuses.
+        /// </summary>
+        internal static string AllCampuses {
+            get {
+                return ResourceManager.GetString("AllCampuses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to All cases.
         /// </summary>
         internal static string Allcases {
             get {
                 return ResourceManager.GetString("Allcases", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All Colleges.
+        /// </summary>
+        internal static string AllColleges {
+            get {
+                return ResourceManager.GetString("AllColleges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All Companies.
+        /// </summary>
+        internal static string AllCompanies {
+            get {
+                return ResourceManager.GetString("AllCompanies", resourceCulture);
             }
         }
         
@@ -543,6 +570,15 @@ namespace EC.Localization {
         internal static string Allmediators {
             get {
                 return ResourceManager.GetString("Allmediators", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All Members.
+        /// </summary>
+        internal static string AllMembers {
+            get {
+                return ResourceManager.GetString("AllMembers", resourceCulture);
             }
         }
         

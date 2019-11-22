@@ -46,6 +46,7 @@ namespace EC.Models
             return db.action.FirstOrDefault(item => item.id == id);
         }
 
+
         public List<frequency> getFrequencies()
         {
             return db.frequency.ToList();

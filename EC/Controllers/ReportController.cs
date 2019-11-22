@@ -183,12 +183,15 @@ namespace EC.Controllers
             submit.result.StatusCode = currentReport.StatusCode;
             submit.result.ErrorMessage = currentReport.ErrorMessage;
             ViewBag.companylogo = companyModel._company.path_en;
+
+
             if (currentReport.StatusCode == 200)
             {
                 ViewBag.CaseNumber = currentReport.report.display_name;//Request.Form["caseNumber"];model.caseNumber
                 if (currentReport.report.user_id > 0)
                 {
-                    var user = companyModel.GetUser(currentReport.report.user_id);
+                    UserModel um = new UserModel(currentReport.report.user_id);
+                    var user = um._user;
                     ViewBag.UserId = user.id;
                     /*model.userName = */
                     ViewBag.Login = user.login_nm;
