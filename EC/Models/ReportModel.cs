@@ -100,7 +100,7 @@ namespace EC.Models
         }
 
         /// <summary>
-        /// Use it in Reporter Pages - REport/New, ReporterDashboard ( pdfs for them)
+        /// Use it in Reporter Pages ONLY!!!! - Report/New, ReporterDashboard ( pdfs for them)   - GET THE REPORTER NAME WITHOUT ANONYMITY CHECK
         /// </summary>
         /// <returns></returns>
         public string Get_reporter_name_reporterView()

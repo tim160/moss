@@ -35,7 +35,7 @@ namespace EC.Controllers
             CompanyModel cm = new CompanyModel(um._user.company_id);
 
             ViewBag.user_id = user_id;
-            ViewBag.all_posters = cm.GetAllPosters();
+         /////   ViewBag.all_posters = cm.GetAllPosters();
 
             return View();
         }
