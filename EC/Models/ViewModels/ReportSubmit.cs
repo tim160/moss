@@ -59,9 +59,9 @@ namespace EC.Controllers.ViewModel
 
             if(companyModel != null && rvm != null)
             {
-                CountryModel country = new CountryModel();
-                country selectedCountry = country.loadById(model.reportFrom);
-                reportingFrom = selectedCountry.country_nm;
+                country selectedCountry = getDBEntityModel.getCountryById(model.reportFrom);
+                if(selectedCountry != null)
+                    reportingFrom = selectedCountry.country_nm;
             }
             List<anonymity> list_anon = companyModel.GetAnonymities(companyModel._company.id, 0);
             if (list_anon != null)

@@ -22,7 +22,6 @@
     <TypeScriptToolsVersion>2.1</TypeScriptToolsVersion>
     <NuGetPackageImportStamp>8acab050</NuGetPackageImportStamp>
     <UseGlobalApplicationHostFile />
-    <MvcBuildViews>true</MvcBuildViews>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -311,6 +310,7 @@
     <Content Include="Content\emails\CaseDeadlinePastDue.html" />
     <Content Include="Content\emails\ECProspectFollowUp.html" />
     <Content Include="Content\emails\ECProspectFollowUpNeeded.html" />
+    <Content Include="Content\emails\ForgetLogin.html" />
     <Content Include="Content\emails\OrderConfirmationEmployeeConfidential.html" />
     <Content Include="Content\emails\OrderConfirmationEmployeeConfidentialFrom.html" />
     <Content Include="Content\emails\ProspectNotPurchase.html" />
@@ -1229,8 +1229,10 @@
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <None Include="Properties\PublishProfiles\ec-code.pubxml" />
     <None Include="Properties\PublishProfiles\ec-dev.pubxml" />
-    <None Include="Properties\PublishProfiles\eccAzure.pubxml" />
-    <None Include="Properties\PublishProfiles\ecreportingazure %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\ecappservice - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\ecappservice - ReadOnly - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\ecappservice - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\ecappservice.pubxml" />
     <None Include="Properties\PublishProfiles\ecreportingazure.pubxml" />
     <None Include="Properties\PublishProfiles\File.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
@@ -1259,7 +1261,6 @@
     <Content Include="Scripts\indexAnalytics.js" />
     <Content Include="Scripts\View\blockActivityRight.js" />
     <Content Include="Scripts\View\CaseCircleDraw.js" />
-    <Content Include="Scripts\View\CaseSubmitted.js" />
     <Content Include="Scripts\View\customSelectModalIndexCase.js" />
     <Content Include="Scripts\View\LoginHereCompany.js" />
     <Content Include="Scripts\View\menuWork.js" />
@@ -1269,6 +1270,7 @@
     <Content Include="Scripts\View\newPayment.js" />
     <Content Include="Scripts\View\newQuote.js" />
     <Content Include="Scripts\View\report.js" />
+    <Content Include="Scripts\View\reportSubmitted.js" />
     <Content Include="Scripts\View\reportSummary.js" />
     <Content Include="Scripts\View\ServiceHeader.js" />
     <Content Include="Scripts\View\ServiceReport.js" />
@@ -1330,8 +1332,6 @@
     <Content Include="Views\Tasks\Index.cshtml" />
     <Content Include="Views\Tasks\Completed.cshtml" />
     <Content Include="Views\Messages\Index.cshtml" />
-    <Content Include="Views\Analytics\Tasks.cshtml" />
-    <Content Include="Views\Analytics\Mediators.cshtml" />
     <Content Include="Views\New\Company.cshtml" />
     <Content Include="Views\New\Index.cshtml" />
     <Content Include="Views\New\Success.cshtml" />
@@ -1408,6 +1408,8 @@
     <Content Include="Views\New\Registration.cshtml" />
     <Content Include="Views\Service\Header.cshtml" />
     <Content Include="Views\Service\Footer.cshtml" />
+    <Content Include="Views\Service\ForgetLogin.cshtml" />
+    <Content Include="Views\Service\ForgetLogin-CC.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1789,9 +1791,11 @@
     <Compile Include="Models\Database\var_info.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmailNotificationModel.cs" />
     <Compile Include="Models\GenerateRecordsModel.cs" />
     <Compile Include="Models\GetDBEntityModel.cs" />
     <Compile Include="Models\ReadStatusModel.cs" />
+    <Compile Include="Models\ReportStringModel.cs" />
     <Compile Include="Models\Services\AnalyticsService\MenuDashboardAnalytics.cs" />
     <Compile Include="Models\Utils\HtmlDataHelper.cs" />
     <Compile Include="Models\Utils\SessionManager.cs" />
@@ -1813,7 +1817,6 @@
     </Compile>
     <Compile Include="Models\App\Case\CaseMessagesModel.cs" />
     <Compile Include="Models\BaseModel.cs" />
-    <Compile Include="Models\CountryModel.cs" />
     <Compile Include="Models\Culture\CompanyLocationCulture.cs" />
     <Compile Include="Models\Culture\DepartmentCulture.cs" />
     <Compile Include="Models\Culture\InjuryDamageCulture.cs" />
@@ -1833,7 +1836,6 @@
     <Compile Include="Models\ECModel\TaskCommentExtended.cs" />
     <Compile Include="Models\ECModel\TaskExtended.cs" />
     <Compile Include="Models\GlobalFunctions.cs" />
-    <Compile Include="Models\JsonPResult.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\ReporterDashboardModel.cs" />
     <Compile Include="Models\ReportModel.cs" />

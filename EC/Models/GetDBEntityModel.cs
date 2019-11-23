@@ -58,6 +58,11 @@ namespace EC.Models
             return db.country.ToList();
         }
 
+        public country getCountryById(int idCountry)
+        {
+          return db.country.Where(item => item.id == idCountry).FirstOrDefault();
+        }
+
         public List<management_know> getManagamentKnow()
         {
             return db.management_know.ToList();
