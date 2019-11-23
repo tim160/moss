@@ -260,7 +260,8 @@ namespace EC.Controllers
         {
             int user_Id = Convert.ToInt16(Request["userId"]);
             string pass = Request["pass"];
-            string result = reportModel.SaveLoginChanges(user_Id, pass);
+            LoginModel lm = new LoginModel();
+            string result = lm.SaveLoginChanges(user_Id, pass);
             if(result.ToLower() == "success")
             {
                 SignIn(db.user.Find(user_Id));

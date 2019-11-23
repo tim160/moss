@@ -81,42 +81,6 @@ namespace EC.Models.ViewModel
         public CasePreviewViewModel()
         {
         }
-        public CasePreviewViewModel(int report_id, int caller_id)
-        {
-            ReportModel rm = new ReportModel(report_id);
-            BindCaseModelToCasePreviewViewModel(rm, caller_id);
-        }
 
-        public CasePreviewViewModel(ReportModel rm, int caller_id)
-        {
-            BindCaseModelToCasePreviewViewModel(rm, caller_id);
-        }
-
-        public CasePreviewViewModel BindCaseModelToCasePreviewViewModel(ReportModel rm, int caller_id)
-        {
-            var watch = System.Diagnostics.Stopwatch.StartNew();
-            CasePreviewViewModel vm_case = new CasePreviewViewModel();
-
-            this.report_id = rm._report.id;
-            this.company_id = rm._report.company_id;
-
-            this.case_dt = rm.IncidentDateString();
-            this.reported_dt = rm.ReportedDateString();
-            this.case_number = rm._report.display_name;
-            this.location = rm.LocationString();
-            this.case_secondary_types = rm.SecondaryTypeString();
-            this.case_secondary_types_all = rm.SecondaryTypeStringAll();            
-            this.case_color_code = rm.ColorCode();
-            this.days_left = rm.GetThisStepDaysLeft();
-            this.current_status = rm.InvestigationStatusString();
-            this.under_status_message = "";
-
-            this.tasks_number = rm.ReportTasks(0).Count().ToString();
-            this.messages_number = rm.UserMessagesCountNotSecure(caller_id, 0).ToString();
-
-            //?
-            return vm_case;
-
-        }
     }
 }

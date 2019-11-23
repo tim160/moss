@@ -3,6 +3,8 @@ using EC.Models.Database;
 using System.Linq;
 using System;
 using EC.Common.Util;
+using EC.Utils;
+using System.Data.Entity.Migrations;
 
 namespace EC.Models
 {
@@ -82,5 +84,51 @@ namespace EC.Models
             }
             return "";
         }
+
+    public string SaveLoginChanges(int userId, string password)
+    {
+      if (userId > 0)
+      {
+        try
+        {
+          string result = GlobalFunctions.IsValidPass(password);
+          if (result.ToLower() == "success")
+          {
+
+            user user = db.user.FirstOrDefault(item => (item.id == userId));
+            if (user != null)
+            {
+              using (ECEntities adv = new ECEntities())
+              {
+                user.password = PasswordUtils.GetHash(password);
+                user.last_update_dt = DateTime.Now;
+                adv.user.AddOrUpdate(user);
+                adv.SaveChanges();
+
+                //  db.user.AddOrUpdate(user);
+                //  db.SaveChanges();
+              }
+              return result;
+            }
+            else
+            {
+              return LocalizationGetter.GetString("NoUserFound");
+            }
+          }
+          else
+            return result;
+
+        }
+        catch (Exception ex)
+        {
+          logger.Error(ex.ToString());
+          return "Cannot update password " + ex.ToString();// LocalizationGetter.GetString("ErrorSavingLoginPass", is_cc);
+        }
+      }
+      else
+      {
+        return "Cannot update your password "; // LocalizationGetter.GetString("ErrorSavingLoginPass", is_cc);
+      }
     }
+  }
 }

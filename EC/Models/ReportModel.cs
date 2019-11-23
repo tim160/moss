@@ -723,33 +723,6 @@ namespace EC.Models
             return color_descr.Trim();
         }
 
-        public string ColorSecondaryCode()
-        {
-            string color_code = "";
-            color _color;
-
-            if (_report != null)
-            {
-                int color_id = _report.report_color_id;
-
-                _color = db.color.Where(item => item.id == _report.report_color_id).FirstOrDefault();
-                if (_color != null)
-                    color_code = _color.secondary_color_code;
-                else
-                {
-
-                    _color = db.color.Where(item => item.id == 1).FirstOrDefault();
-                    color_code = _color.secondary_color_code;
-                }
-            }
-            else
-            {
-                _color = db.color.Where(item => item.id == 1).FirstOrDefault();
-                color_code = _color.secondary_color_code;
-            }
-
-            return color_code.Trim();
-        }
 
         public string ManagementKnowString()
         {
@@ -1115,17 +1088,6 @@ namespace EC.Models
 
         }
 
-        public bool _Is_New_Activity(int user_id)
-        {
-            bool _new_activity = false;
-
-            if (LastEventDate() > LastReadDate(user_id))
-            {
-                _new_activity = true;
-            }
-
-            return _new_activity;
-        }
         /// <summary>
         /// show Reporter Anon Level to reporter
         /// </summary>
@@ -1154,27 +1116,6 @@ namespace EC.Models
             return anon_level;
         }
 
-        public string _anonymousLevel_mediatorVersion()
-        {
-            string anon_level = "";
-            int anon_level_id = 0;
-
-            if (_report != null)
-            {
-                anon_level_id = _report.incident_anonymity_id;
-                anonymity _anonymity = db.anonymity.Where(item => (item.id == anon_level_id)).FirstOrDefault();
-
-                if (_anonymity != null)
-                {
-                    if ((anon_level_id == 1) || (anon_level_id == 3))
-                        anon_level = _anonymity.anonymity_en;
-                    if (anon_level_id == 2)
-                        anon_level = String.Format(_anonymity.anonymity_en, CompanyName());
-                }
-            }
-
-            return anon_level;
-        }
 
         public string _anonymousLevel_mediatorVersionByCaller(int caller_id)
         {
@@ -1504,29 +1445,6 @@ namespace EC.Models
  
         #region Report - Tasks  
 
-
-        public List<TaskExtended> ExtendedTasks(int user_id)
-        {
-            int task_id = 0;
-            List<task> _task_list = new List<task>();
-            List<TaskExtended> list_tsk = new List<TaskExtended>();
-            if (_report != null)
-            {
-                user _user = db.user.Where(item => item.id == user_id).FirstOrDefault();
-                if (db.task.Any(item => (item.report_id == ID)))
-                {
-                    _task_list = db.task.Where(item => (item.report_id == ID)).OrderByDescending(item => item.created_on).ToList();
-                    foreach (task _task in _task_list)
-                    {
-                        task_id = _task.id;
-                        TaskExtended tsk = new TaskExtended(_task.id, user_id);
-                        list_tsk.Add(tsk);
-                    }
-                }
-            }
-
-            return list_tsk;
-        }
         /// <summary>
         ///  number of tasks in case
         /// </summary>
@@ -1568,29 +1486,6 @@ namespace EC.Models
                     tasks_count = db.task.Where(item => item.report_id == ID && item.is_completed == true).Count();
             }
             return tasks_count;
-        }
-
-        /// <summary>
-        /// number of tasks by previous month
-        /// </summary>
-        /// <param name="task_status"></param>
-        /// <returns></returns>
-        public List<task> ReportTaskByMonthEnd(int task_status)
-        {
-            DateTime _month_end_date = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1).AddDays(-1);
-
-            List<task> all_tasks = new List<task>();
-            if (ID != 0)
-            {
-                if (task_status == 0)
-                    all_tasks = db.task.Where(item => ((item.report_id == ID) && (item.created_on >= _month_end_date))).ToList();
-                if (task_status == 1)
-                    all_tasks = db.task.Where(item => item.report_id == ID && item.is_completed == false && item.created_on >= _month_end_date).ToList();
-                if (task_status == 2)
-                    all_tasks = db.task.Where(item => item.report_id == ID && item.is_completed == true && item.created_on >= _month_end_date).ToList();
-            }
-
-            return all_tasks;
         }
 
 
@@ -1846,31 +1741,6 @@ namespace EC.Models
         }
         #endregion
 
-        public int report_status_id_by_date(DateTime dt)
-        {
-            if ((_report == null) || (_report.reported_dt > dt))
-            {
-                // error in report or its not created yet
-                return 0;
-            }
-
-            report_investigation_status last_status = new report_investigation_status();
-            if (db.report_investigation_status.Any(item => item.report_id == ID))
-            {
-                List<report_investigation_status> _statuses = db.report_investigation_status.Where(item => item.report_id == ID && item.created_date < dt).OrderByDescending(x => x.created_date).ToList();
-                if (_statuses.Count > 0)
-                {
-                    last_status = _statuses[0];
-                    return last_status.investigation_status_id;
-                }
-                else
-                    return 1;
-            }
-            else
-                return 1;
-
-            //          return 0;
-        }
 
         public bool isCustomIncidentTypes(int companyId)
         {

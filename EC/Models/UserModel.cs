@@ -98,14 +98,12 @@ namespace EC.Models
 
         public string GetDepartmentString()
         {
-
             if ((_user != null) && (_user.id != 0))
             {
                 var d = db.company_department.FirstOrDefault(x => x.id == _user.company_department_id && x.company_id == _user.company_id);
                 return d == null ? "" : d.department_en;
             }
             return "";
-
         }
 
         public UserModel()
@@ -591,13 +589,6 @@ namespace EC.Models
             return unread_report;
         }
 
-        public int UnreadReportQuantity(int? company_id, int flag)
-        {
-            int quantity = 0;
-            List<report> all_reports = UnreadReport(company_id, flag);
-            quantity = all_reports.Count;
-            return quantity;
-        }
 
         public UsersUnreadEntitiesNumberViewModel GetUserUnreadEntitiesNumbers()
         {
@@ -1303,9 +1294,6 @@ namespace EC.Models
 
         }
 
-
-
-
         public List<CasePreviewViewModel> ReportPreviews(List<int> report_ids, string investigation_status, int delay_allowed, bool is_cc)
         {
             var severities = db.severity.Select(z => new { id = z.id, severity_en = z.severity_en });
@@ -1494,13 +1482,6 @@ namespace EC.Models
             //    _array[i] += _all_reports.Where(t => t.last_update_dt == null && t.status_id == allowed_statuses[i]
             //    && (int)(delay_allowed[i] - (DateTime.Today - t.reported_dt).TotalDays) < 0).Count();
             //return 0;
-        }
-
-        private void testcalculateReportsInCompany()
-        {
-            report test1report = new report();
-            test1report.last_update_dt = DateTime.Now.AddDays(-2);
-            test1report.status_id = 1;
         }
 
         public int[] AnalyticsCasesArrayByDate(DateTime? _start, int[] ArrCompanyId)

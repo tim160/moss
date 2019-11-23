@@ -30,20 +30,14 @@ namespace EC.Models
   public class EmailNotificationModel : BaseModel
   {
 
-    //   NewReportModel??
-    // App_LocalResources.GlobalRes.Awaiting_registration
     ///Email.EmailManagement = check if we need it   , add emailHelper. add this to BaseModel, controllers
-    // remove -  DepartmentsViewModel, CaseInvestigationStatusViewModel? -- BindCaseModelToCasePreviewViewModel, ActiveCasesModel
-    //replace - CompanyLocationViewModel, DepartmentsViewModel, InjuryDamageViewModel, ManagamentViewModel, ReportedOutsideViewModel
-    // UserModel - ReportsSearch() - merge with ReportSearchID/ Remove UnreadReportQuantity,etc   -- CloseTask/OpenTask
-    //userModel  - testcalculateReportsInCompany,
-    // reportModel - ExtendedTasks, SaveLoginChanges(move)--to LoginModel? getCompanySecondaryType(3 func)  isCustomIncidentTypes(check,not needed),
-    // reportModel - _Is_New_Activity, ColorSecondaryCode, ReportedDateStringMonthLong, _anonymousLevel_mediatorVersion
-    // reportModel - report_status_id_by_date   ReportActions
-    // reportModel - 
+    //replace with select2item - CompanyLocationViewModel, DepartmentsViewModel, InjuryDamageViewModel, ManagamentViewModel, ReportedOutsideViewModel
+    // UserModel - ReportsSearch() - merge with ReportSearchID/ Remove UnreadReportQuantity,etc   -- CloseTask/OpenTask- Move to TaskModel?
+    // reportModel  getCompanySecondaryType(3 func)  isCustomIncidentTypes(check,not needed),
+    // reportModel -  ReportedDateStringMonthLong,
     //Unread_message_number_string1  +ReporterDashboardModel(save call)
-    //   ReportStringPropertiesModel???    AnalyticsModel?
-    //      @Model._reporter_user.first_nm   @Model._reporter_user.last_nm  -- PDF!!!!
+    //  Add new models -  ReportStringPropertiesModel???    AnalyticsModel?
+    //      @Model._reporter_user.first_nm   @Model._reporter_user.last_nm  -- PDF!!!! - move 2 userDetails to function/Model. Rename 3 to Const
     public EmailNotificationModel()
     {
 

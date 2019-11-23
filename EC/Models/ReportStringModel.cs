@@ -550,7 +550,7 @@ namespace EC.Models
     {
       string status = "";
 
-      investigation_status _status = db.investigation_status.Where(item => item.id == _investigation_status).FirstOrDefault();
+      investigation_status _status = db.investigation_status.Where(item => item.id == _report.status_id).FirstOrDefault();
       if (_status != null)
       {
         status = _status.investigation_status_en;
