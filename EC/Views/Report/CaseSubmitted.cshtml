@@ -147,12 +147,12 @@
 
                     <div class="contentBlock contentBorder">
                         <p class="title">@LocalizationGetter.GetString("PasswordTypeFieldUpdate", is_cc)</p>
-                        <textarea class="accessInfo pass">@ViewBag.Password</textarea>
+                        <textarea id="passField" class="accessInfo pass">@ViewBag.Password</textarea>
                     </div>
                 </div>
 
                 <div class="buttonBlock">
-                    <input type="button" class="button saveChanges" style="display: none;" value="@LocalizationGetter.GetString("SaveNewPasswordUp")">
+                    <input type="button" id="saveChangesButton" class="button saveChanges" style="display: none;" value="@LocalizationGetter.GetString("SaveNewPasswordUp")">
                 </div>
             </div>
 

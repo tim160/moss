@@ -8,9 +8,8 @@
     <link rel="stylesheet" type="text/css" href="~/Content/Site.css">
     @*<link rel="stylesheet" type="text/css" href="~/Content/bStart">
         <link rel="stylesheet" type="text/css" href="~/Content/aStart.css">    ---*@
-
+    <script src="~/Scripts/lib/jquery.min.js"></script>
     @*   @Styles.Render("~/Content/Styles")*@
-    <script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
     @RenderSection("pageStyles", required: false)
     <!--<link rel="stylesheet" type="text/css" href="~/Content/main.min.css" />-->
     <script>
@@ -29,14 +28,9 @@
     <script>
         // Internet Explorer 6-11
         var isIE = false || !!document.documentMode;
-
         // Edge 20+
         var isEdge = !isIE && !!window.StyleMedia;
-
         var head = document.getElementsByTagName('head')[0];
-
-        
-
         if (isIE || isEdge) {
             //js.src = "edge.js";
         }
@@ -60,17 +54,6 @@
         }
 
     </script>
-
-    @*<script src="~/Libs/angular/angular.min.js"></script>
-        <script src="~/Libs/angular-http/angular-http.js"></script>
-            <script src="~/Libs/angular-resource/angular-resource.min.js"></script>
-            <script src="~/Libs/angular-animate/angular-animate.min.js"></script>
-            <script src="~/Libs/angular-sanitize/angular-sanitize.min.js"></script>
-            <script src="~/Libs/angular-nvd3/dist/angular-nvd3.min.js"></script>
-            <script src="~/Libs/ng-file-upload/ng-file-upload.min.js"></script>
-            <script type="text/javascript" src="~/Libs/angular-ui-calendar/src/calendar.js"></script>*@
-
-    @*<script src="~/Scripts/dis.js"></script>*@
 </head>
 <body ng-app="EC">
 <div class="fullContainer">
