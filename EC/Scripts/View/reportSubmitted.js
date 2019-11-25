@@ -20,11 +20,14 @@
 
     function updateLoginInfo(pass, userId) {
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/Report/SaveLoginChanges', false);
-        xhr.send();
+        var body = 'pass=' + encodeURIComponent(pass) +
+            '&userId=' + encodeURIComponent(userId);
 
-        if (xhr.status != 200) {
-        } else {
+        xhr.open('POST', '/Report/SaveLoginChanges', false);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send(body);
+
+        if (xhr.status == 200) {
             $("#successPasswordChanged").modal();
             document.getElementById("saveChangesButton").style.display = "none";
         }
@@ -33,9 +36,13 @@
     if (linkRegistrReport) {
         linkRegistrReport.click();
     }
-    document.getElementById('retry').onclick = function () {
-        location.reload();
+    var retry = document.getElementById('retry');
+    if (retry != null) {
+        retry.onclick = function () {
+            location.reload();
+        }
     }
+
 });
 
 
