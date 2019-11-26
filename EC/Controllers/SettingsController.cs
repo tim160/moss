@@ -750,7 +750,7 @@ namespace EC.Controllers
                 return LocalizationGetter.GetString("EmailInvalid", is_cc);
             }
 
-            return glb.resendInvitation(email, is_cc, Request, _user);
+            return emailNotificationModel.resendInvitation(email, is_cc, Request, _user);
         }
         public ActionResult Password()
         {

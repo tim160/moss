@@ -29,6 +29,8 @@ namespace EC.Controllers
         public CultureInfo m_CultureInfo = null;
         public GlobalFunctions glb = new GlobalFunctions();
         public ReadStatusModel readStatusModel = new ReadStatusModel();
+        public EmailNotificationModel emailNotificationModel = new EmailNotificationModel();
+
         public string CurrentLangCode { get; protected set; }
         private SessionManager sessionManager = SessionManager.inst;
         internal IEmailAddressHelper m_EmailHelper = new EmailAddressHelper();

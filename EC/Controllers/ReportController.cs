@@ -78,7 +78,7 @@ namespace EC.Controllers
 
                 /*caseInformation*/
                 SecondaryMandatoryCulture secondaryMandatoryCulture = new SecondaryMandatoryCulture(reportModel, currentCompany.id);
-                if (reportModel.isCustomIncidentTypes(currentCompany.id))
+                if (model.IsCustomIncidentTypes())
                 {
                     /*custom types*/
                     ViewBag.secondary_type_mandatory = secondaryMandatoryCulture.GetSecondaryMandCustom();
@@ -120,7 +120,9 @@ namespace EC.Controllers
 
                 /*Relationship to company*/
                 RelationshipCulture relationshipCulture = new RelationshipCulture(companyModel);
-                List<company_relationship> relationship = reportModel.getCustomRelationshipCompany(ViewBag.currentCompanyId);
+
+                CompanyModel cm = new CompanyModel(ViewBag.currentCompanyId);
+                List<company_relationship> relationship = cm.GetCustomRelationshipCompany();
                 if (relationship.Count > 0)
                 {
                     //loadCustom

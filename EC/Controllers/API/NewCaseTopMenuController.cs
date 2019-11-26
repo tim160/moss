@@ -64,6 +64,7 @@ namespace EC.Controllers.API
             }
 
             GlobalFunctions glb = new GlobalFunctions();
+            EmailNotificationModel emailNotificationModel = new EmailNotificationModel();
 
             var report = DB.report.FirstOrDefault(x => x.id == model.ReportId);
             if (report.cc_is_life_threating != true)
@@ -83,14 +84,14 @@ namespace EC.Controllers.API
 
                 if (!String.IsNullOrEmpty(cm._company.cc_campus_alert_manager_email))
                 {
-                    glb.CampusSecurityAlertEmail(user.id, report, Request.RequestUri, DB, cm._company.cc_campus_alert_manager_email);
+                    emailNotificationModel.CampusSecurityAlertEmail(user.id, report, Request.RequestUri, DB, cm._company.cc_campus_alert_manager_email);
 
-                //    glb.CampusSecurityAlertEmail(report, Request.RequestUri, DB, cm._company.cc_campus_alert_manager_email, cm._company.cc_campus_alert_manager_first_name, cm._company.cc_campus_alert_manager_last_name);
+                    //    glb.CampusSecurityAlertEmail(report, Request.RequestUri, DB, cm._company.cc_campus_alert_manager_email, cm._company.cc_campus_alert_manager_first_name, cm._company.cc_campus_alert_manager_last_name);
                     glb.UpdateReportLog(user.id, 24, report.id, "", null, "");
                 }
                 else if (platform_manager_email.Length > 0)
                 {
-                    glb.CampusSecurityAlertEmail(user.id, report, Request.RequestUri, DB, platform_manager_email);
+                    emailNotificationModel.CampusSecurityAlertEmail(user.id, report, Request.RequestUri, DB, platform_manager_email);
                     sent_email = true;
                     glb.UpdateReportLog(user.id, 24, report.id, "", null, "");
                 }

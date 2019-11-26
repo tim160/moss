@@ -71,7 +71,8 @@ namespace EC.Controllers.ViewModel
                 confidentialLevel = anon.anonymity_company_en;
             }
 
-            List<company_relationship> relationship = reportModel.getCustomRelationshipCompany(companyModel._company.id);
+            CompanyModel cm = new CompanyModel(companyModel._company.id);
+            List<company_relationship> relationship = cm.GetCustomRelationshipCompany();
             if(relationship!=null)
             {
                 var temp = from n in relationship where n.id == model.reporterTypeDetail select n;
@@ -149,11 +150,12 @@ namespace EC.Controllers.ViewModel
             {
                 isCaseUrgent = LocalizationGetter.GetString("Yes");
             }
-
-            if (reportModel.isCustomIncidentTypes(model.currentCompanyId))
+            CompanyModel cmModel = new CompanyModel(model.currentCompanyId);
+            if (cmModel.IsCustomIncidentTypes())
             {
                 /*custom types*/
-                List<company_secondary_type> company_secondary_type = reportModel.getCompanySecondaryType(model.currentCompanyId);
+                
+                List<company_secondary_type> company_secondary_type = cmModel.GettCompanySecondaryType();
                 foreach(int item in model.whatHappened)
                 {
                     if(item != 0)
@@ -169,7 +171,7 @@ namespace EC.Controllers.ViewModel
             else
             {
                 /*default*/
-                List<secondary_type_mandatory> secondary_type_mandatory = reportModel.getSecondaryTypeMandatory();
+                List<secondary_type_mandatory> secondary_type_mandatory = getDBEntityModel.GetSecondaryTypeMandatory();
                 foreach (int item in model.whatHappened)
                 {
 
@@ -237,7 +239,7 @@ namespace EC.Controllers.ViewModel
             }
 
 
-            List<role_in_report> roleInReport = ReportModel.getRoleInReport();
+            List<role_in_report> roleInReport = getDBEntityModel.getRoleInReport();
             for(int i=0; i< personRoles.Count; i++)
             {
                 role_in_report nameRole = roleInReport.Where(m => m.id == personRoles[i]).FirstOrDefault();

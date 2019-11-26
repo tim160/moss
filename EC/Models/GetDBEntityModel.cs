@@ -11,7 +11,6 @@ namespace EC.Models
         ECEntities db = new ECEntities();
         ///  Companies()? - remove 
         /////public void SaveFile(HttpPostedFileBase file, string path)   -- move
-        ///  public string SaveLoginChanges(int userId, string password)  - move
         /// 
         ///     AddReportDepartment?
         /// 
@@ -46,6 +45,12 @@ namespace EC.Models
             return db.action.FirstOrDefault(item => item.id == id);
         }
 
+        public List<secondary_type_mandatory> GetSecondaryTypeMandatory()
+        {
+          List<secondary_type_mandatory> types = new List<secondary_type_mandatory>();
+          types = db.secondary_type_mandatory.Where(item => item.type_id == 1).ToList();
+          return types;
+        }
 
         public List<frequency> getFrequencies()
         {
@@ -87,8 +92,13 @@ namespace EC.Models
             return db.reported_outside.ToList();
         }
 
-
-
+        public List<role_in_report> getRoleInReport()
+        {
+          using (ECEntities adv = new ECEntities())
+          {
+            return adv.role_in_report.ToList();
+          }
+        }
 
 
         public List<company> GeCompaniesWithStatus()

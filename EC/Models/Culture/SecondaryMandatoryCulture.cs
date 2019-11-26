@@ -19,7 +19,8 @@ namespace EC.Models.Culture
         }
         public List<SecondaryMandatoryViewModel> getSecondaryTypeMandatory()
         {
-            var allTypes = reportModel.getSecondaryTypeMandatory().Where(t => t.status_id == 2).OrderBy(x => x.secondary_type_en).ToList();
+            GetDBEntityModel getDBEntityModel = new GetDBEntityModel();
+            var allTypes = getDBEntityModel.GetSecondaryTypeMandatory().Where(t => t.status_id == 2).OrderBy(x => x.secondary_type_en).ToList();
 
             switch (Localization.LocalizationGetter.Culture.Name)
             {
@@ -55,7 +56,8 @@ namespace EC.Models.Culture
         }
         public List<SecondaryMandatoryViewModel> GetSecondaryMandCustom()
         {
-            var allTypes = reportModel.getCompanySecondaryType(companyId);
+          CompanyModel cm = new CompanyModel(companyId);
+          var allTypes = cm.GettCompanySecondaryType();
 
             switch (Localization.LocalizationGetter.Culture.Name)
             {

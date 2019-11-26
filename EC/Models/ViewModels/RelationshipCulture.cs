@@ -69,7 +69,8 @@ namespace EC.Models.ViewModels
         }
         public List<EC.Models.ECModel.Relationship> getOtherRelationshipCulture(ReportModel reportModel, int companyId)
         {
-            var allRelationships = reportModel.getCustomRelationshipCompany(companyId);
+            CompanyModel cm = new CompanyModel(companyId);
+            var allRelationships = cm.GetCustomRelationshipCompany();
 
             foreach (var relation in allRelationships)
             {
