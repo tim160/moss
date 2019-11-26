@@ -1467,6 +1467,7 @@
     <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Controllers\TrainerController.cs" />
     <Compile Include="Controllers\IndexController.cs" />
+    <Compile Include="Models\AnalyticsModel.cs" />
     <Compile Include="Models\Database\action.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>

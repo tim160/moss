@@ -22,7 +22,9 @@ namespace EC.Controllers.API
             int[] _titleHeaderLegendIdx = { 6, 0, 1, 2, 3, 8 };
             string[] _miniSquareColor = { "#abb9bb", "#d47472", "#ff9b42", "#3099be", "#64cd9b", "#abb9bb" };
 
-            int[] _today_spanshot = um.AnalyticsCasesArrayByDate(null, id);
+            AnalyticsModel am = new AnalyticsModel();
+            int[] _today_spanshot = am.AnalyticsCasesArrayByDate(null, id);
+      
             List<TodaySnapshot> resultsnapShot = new List<TodaySnapshot>();
        
 
@@ -51,7 +53,8 @@ namespace EC.Controllers.API
             if (user == null || user.id == 0)
              return null;
             UserModel um = new UserModel(user.id);
-            var casesTurnAroundTime = um.AnalyticsCasesTurnAroundTime(id);
+            AnalyticsModel am = new AnalyticsModel();
+            var casesTurnAroundTime = am.AnalyticsCasesTurnAroundTime(id);
        
             return ResponseObject2Json(casesTurnAroundTime);
         }
