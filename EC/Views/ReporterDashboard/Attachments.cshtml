@@ -63,50 +63,82 @@
             </div>
         }
 
-        <table>
-            <tbody>
+        @*<table>
+            <tbody>*@
                 @{
                     var users = (List<user>)ViewBag.attachmentAdvUsers;
                 }
                 @foreach (attachment attachment in ViewBag.attachmentAdvFiles)
                 {
                     var user = users.FirstOrDefault(x => x.id == attachment.user_id);
-                    <tr>
-                        <td class="image">
-                            <img src="/Content/Icons/attachment-icon_preview.png">
-                        </td>
-                        <td class="customWidth">
-                            <p class="secondRow">
-                                
-                                
-                            </p><div class="secondRowReporter">@(user == null ? LocalizationGetter.GetString("anonymous_reporter", is_cc) : (user.first_nm + " " + user.last_nm).Trim())</div>
-                            @attachment.file_nm
-                            <p></p>
-                        </td>
-                        <td>
-                            <p class="recipient">
-                                @if (attachment.user_id != rm._report.reporter_user_id)
-                                {
-                                    @((attachment.visible_reporter == null || attachment.visible_reporter == true) ? LocalizationGetter.GetString("VisibletoReporter", is_cc) + " & " + LocalizationGetter.GetString("CaseAdministratorsUp", is_cc) : LocalizationGetter.GetString("VisibleTo", is_cc) + " " + LocalizationGetter.GetString("CaseAdministratorsUp", is_cc))
-                                }
-                                else
-                                {
-                                    <span>@LocalizationGetter.GetString("UploadedByReporter", is_cc)</span>
-                                }
-                            </p>
-                        </td>
-                        <td>
-                            <p class="date">
-                                @dth.ConvertDateToLongMonthString(attachment.effective_dt)
-                            </p>
-                            <p class="download">
-                                <a href="@attachment.path_nm" download>download</a>
-                            </p>
-                        </td>
-                    </tr>
+                    
+                    <div class="files" style = "width: 100%;height:50px;background-color:#e5ebeb;">
+                        <div class="item">
+                            <div class="setAllFilesPaddingLeft">
+                                <div class="imgCorner">
+                                    <img src="/Content/Icons/generic-file.png">
+                                    <div class="square"></div>
+                                    <div class="treangle"></div>
+                                </div>
+                                <div class="description">
+                                    @attachment.file_nm
+                                    <div class="download">
+                                        <a href="@attachment.path_nm" download="">download</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="right setAllFilesPaddingRight">
+                                <p class="date">
+                                    @dth.ConvertDateToLongMonthString(attachment.effective_dt)
+                                </p>
+                                <p class="recipient">
+                                    @if (attachment.user_id != rm._report.reporter_user_id)
+                                    {
+                                        @((attachment.visible_reporter == null || attachment.visible_reporter == true) ? LocalizationGetter.GetString("VisibletoReporter", is_cc) + " & " + LocalizationGetter.GetString("CaseAdministratorsUp", is_cc) : LocalizationGetter.GetString("VisibleTo", is_cc) + " " + LocalizationGetter.GetString("CaseAdministratorsUp", is_cc))
+                                    }
+                                    else
+                                    {
+                                        <span>@LocalizationGetter.GetString("UploadedByReporter", is_cc)</span>
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    @*<tr>
+                <td class="image">
+                    <img src="/Content/Icons/attachment-icon_preview.png">
+                </td>
+                <td class="customWidth">
+                    <p class="secondRow"></p>
+                    <div class="secondRowReporter">@(user == null ? LocalizationGetter.GetString("anonymous_reporter", is_cc) : (user.first_nm + " " + user.last_nm).Trim())</div>
+                    @attachment.file_nm
+                    <p></p>
+                </td>
+                <td>
+                    <p class="recipient">
+                        @if (attachment.user_id != rm._report.reporter_user_id)
+                        {
+                            @((attachment.visible_reporter == null || attachment.visible_reporter == true) ? LocalizationGetter.GetString("VisibletoReporter", is_cc) + " & " + LocalizationGetter.GetString("CaseAdministratorsUp", is_cc) : LocalizationGetter.GetString("VisibleTo", is_cc) + " " + LocalizationGetter.GetString("CaseAdministratorsUp", is_cc))
+                        }
+                        else
+                        {
+                            <span>@LocalizationGetter.GetString("UploadedByReporter", is_cc)</span>
+                        }
+                    </p>
+                </td>
+                <td>
+                    <p class="date">
+                        @dth.ConvertDateToLongMonthString(attachment.effective_dt)
+                    </p>
+                    <p class="download">
+                        <a href="@attachment.path_nm" download>download</a>
+                    </p>
+                </td>
+            </tr>*@
                 }
-            </tbody>
-        </table>
+            @*</tbody>
+        </table>*@
     </div>
 
 }

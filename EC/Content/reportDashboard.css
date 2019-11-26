@@ -380,12 +380,20 @@ body{
 .padText{
     padding-left: 25px;
 }
-
-.files .item{
-    width: 50%;
-    float:left;
+.setAllFilesPaddingLeft {
+    padding-left: 30px;
+}
+.setAllFilesPaddingRight {
+    padding-right: 30px;
+}
+.right {
+    float: right;
+}
+.files .item {
+    width: 100%;
+    float: left;
     padding-bottom: 45px;
-    padding-left: 20px;
+    background-color: #e5ebeb;
 }
 .files .item .description{
     font-weight: bold;
