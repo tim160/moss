@@ -1740,85 +1740,7 @@ namespace EC.Models
             return 0;
         }
         #endregion
-
-
-        public bool isCustomIncidentTypes(int companyId)
-        {
-            bool flag = false;
-            int array = 0;
-            array = db.company_secondary_type.Where(item => item.company_id == companyId && item.status_id == 2).Count();
-            if (array > 0)
-            {
-                flag = true;
-            }
-            return flag;
-        }
-        public List<secondary_type_mandatory> getSecondaryTypeMandatory()
-        {
-            List<secondary_type_mandatory> types = new List<secondary_type_mandatory>();
-            types = db.secondary_type_mandatory.Where(item => item.type_id == 1).ToList();
-            return types;
-        }
-        public List<company_secondary_type> getCompanySecondaryType(int companyId)
-        {
-            List<company_secondary_type> types = new List<company_secondary_type>();
-            types = db.company_secondary_type.Where(item => item.company_id == companyId && item.status_id == 2).ToList();
-            return types;
-        }
-        public List<company_relationship> getCustomRelationshipCompany(int idCompany)
-        {
-
-            /*List<company_relationship> relationShipCompany = new List<company_relationship>();
-            relationShipCompany = db.company_relationship.Where(item => item.company_id == idCompany && item.status_id == 2).ToList();*/
-            List<company_relationship> relationShipCompany = db.company_relationship.Where(item => item.company_id == idCompany && item.status_id == 2).ToList();
-            return relationShipCompany;
-        }
-        public string SaveLoginChanges(int userId, string password)
-        {
-            if (userId > 0)
-            {
-                try
-                {
-                    string result = GlobalFunctions.IsValidPass(password);
-                    if (result.ToLower() == "success")
-                    {
-
-                        user user = db.user.FirstOrDefault(item => (item.id == userId));
-                        if (user != null)
-                        {
-                            using (ECEntities adv = new ECEntities())
-                            {
-                                user.password = PasswordUtils.GetHash(password);
-                                user.last_update_dt = DateTime.Now;
-                                adv.user.AddOrUpdate(user);
-                                adv.SaveChanges();
-
-                                //  db.user.AddOrUpdate(user);
-                                //  db.SaveChanges();
-                            }
-                            return result;
-                        }
-                        else
-                        {
-                            return LocalizationGetter.GetString("NoUserFound");
-                        }
-                    }
-                    else
-                        return result;
-
-                }
-                catch (Exception ex)
-                {
-                    logger.Error(ex.ToString());
-                    return "Cannot update password " + ex.ToString();// LocalizationGetter.GetString("ErrorSavingLoginPass", is_cc);
-                }
-            }
-            else
-            {
-                return "Cannot update your password "; // LocalizationGetter.GetString("ErrorSavingLoginPass", is_cc);
-            }
-        }
-
+ 
         public List<CaseInvestigationStatusViewModel> CaseClosuresMessages()
         {
             List<report_investigation_status> dbReport_Investigation_statuses = db.report_investigation_status.Where(item => item.report_id == ID).OrderBy(item => item.created_date).ToList();
@@ -1874,56 +1796,6 @@ namespace EC.Models
             return investiogationStatusesList;
         }
 
-        public string CaseStatusGreenBarTitle()
-        {
-            string _green_bar_status = "";
-            int _prev_inv_status_id = _previous_investigation_status_id();
-
-            //case just closed
-            if (_investigation_status == (Int32)CaseStatusConstants.CaseStatusValues.Closed)
-                _green_bar_status = LocalizationGetter.GetString("CaseClosed");
-
-            //current - investigation, previous - closed => Re-opened
-            if (_investigation_status == (Int32)CaseStatusConstants.CaseStatusValues.Investigation && _prev_inv_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Closed)
-            {
-                _green_bar_status = LocalizationGetter.GetString("CaseReOpened");
-            }
-
-            //current - investigation, previous - Resolution => Returned for futher investigation
-            if (_investigation_status == (Int32)CaseStatusConstants.CaseStatusValues.Investigation && _prev_inv_status_id == (Int32)CaseStatusConstants.CaseStatusValues.Resolution)
-            {
-                _green_bar_status = LocalizationGetter.GetString("CaseReturnedFutherInvestigation");
-            }
-
-            //current - Resolution
-            if (_investigation_status == (Int32)CaseStatusConstants.CaseStatusValues.Resolution)
-            {
-                _green_bar_status = LocalizationGetter.GetString("CaseClosureReport");
-            }
-
-
-            return _green_bar_status;
-        }
-
-        public string CaseStatusGreenBarSubTitle()
-        {
-            string _green_bar_status = "";
-            //current - Resolution
-            if (_investigation_status == (Int32)CaseStatusConstants.CaseStatusValues.Resolution)
-            {
-                _green_bar_status = LocalizationGetter.GetString("CaseSentToEsacaltionMediatorForReview");
-            }
-
-            return _green_bar_status;
-        }
-
-        public static List<role_in_report> getRoleInReport()
-        {
-            using (ECEntities adv = new ECEntities())
-            {
-                return adv.role_in_report.ToList();
-            }
-        }
 
         public List<user> MediatorsApproveCaseClosure()
         {

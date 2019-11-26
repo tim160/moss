@@ -606,8 +606,8 @@ namespace EC.Controllers
     {
       int report_id = Convert.ToInt16(Request["report_id"]);
       ReportModel rm = new ReportModel(report_id);
-
-      if (!rm.getSecondaryTypeMandatory().Any())
+      GetDBEntityModel getDBEntityModel = new GetDBEntityModel();
+      if (!getDBEntityModel.GetSecondaryTypeMandatory().Any())
       {
         return -2;
       }

@@ -409,5 +409,35 @@ namespace EC.Models
 
       return company_dropdown;
     }
+
+
+    //CompanyIncidentTypes  - check if we could merge with
+    public List<company_secondary_type> GettCompanySecondaryType()
+    {
+      List<company_secondary_type> types = new List<company_secondary_type>();
+      types = db.company_secondary_type.Where(item => item.company_id == ID && item.status_id == 2).ToList();
+      return types;
+    }
+
+    public List<company_relationship> GetCustomRelationshipCompany()
+    {
+
+      /*List<company_relationship> relationShipCompany = new List<company_relationship>();
+      relationShipCompany = db.company_relationship.Where(item => item.company_id == idCompany && item.status_id == 2).ToList();*/
+      List<company_relationship> relationShipCompany = db.company_relationship.Where(item => item.company_id == ID && item.status_id == 2).ToList();
+      return relationShipCompany;
+    }
+
+    public bool IsCustomIncidentTypes()
+    {
+      bool flag = false;
+      int array = 0;
+      array = db.company_secondary_type.Where(item => item.company_id == ID && item.status_id == 2).Count();
+      if (array > 0)
+      {
+        flag = true;
+      }
+      return flag;
+    }
   }
 }
