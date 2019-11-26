@@ -369,14 +369,14 @@ namespace EC.Controllers.ViewModel
                     {
                         //glb.CampusSecurityAlertEmail(rm._report, Request.Url, db, cm._company.cc_campus_alert_manager_email, cm._company.cc_campus_alert_manager_first_name, cm._company.cc_campus_alert_manager_last_name);
 
-                        glb.CampusSecurityAlertEmail(user.id, rm._report, Request.Url, db, cm._company.cc_campus_alert_manager_email);
+                        emailNotificationModel.CampusSecurityAlertEmail(user.id, rm._report, Request.Url, db, cm._company.cc_campus_alert_manager_email);
                         glb.UpdateReportLog(user_id, 24, report_id, "", null, "");
                     }
                     else if (platform_manager_email.Length > 0)
                     {
                         //glb.CampusSecurityAlertEmail(rm._report, Request.Url, db, platformManager.email, platformManager.first_nm, platformManager.last_nm);
 
-                        glb.CampusSecurityAlertEmail(user.id, rm._report, Request.Url, db, platformManager.email);
+                        emailNotificationModel.CampusSecurityAlertEmail(user.id, rm._report, Request.Url, db, platformManager.email);
                         sent_email = true;
                         glb.UpdateReportLog(user_id, 24, report_id, "", null, "");
                     }

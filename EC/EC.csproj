@@ -449,6 +449,7 @@
     <Content Include="Content\Icons\report-icon-white.png" />
     <Content Include="Content\Icons\report-icon.png" />
     <Content Include="Content\Icons\reporterUnchecked.png" />
+    <Content Include="Content\Icons\resend.png" />
     <Content Include="Content\Icons\reviewStage.png" />
     <Content Include="Content\Icons\second.png" />
     <Content Include="Content\Icons\settingsPersonalNOPhoto.png" />
@@ -1233,6 +1234,8 @@
     <None Include="Properties\PublishProfiles\ecappservice - ReadOnly - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\ecappservice - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\ecappservice.pubxml" />
+    <None Include="Properties\PublishProfiles\ECReport - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\ECReport - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\ecreportingazure.pubxml" />
     <None Include="Properties\PublishProfiles\File.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
