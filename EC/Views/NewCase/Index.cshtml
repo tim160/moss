@@ -305,13 +305,13 @@
                     </div><!-- /.col-6 -->
                     <div class="col-12" ng-show="model.attachments.length > 0">
                         <div class="row">
-                            <div class="col-3" style="padding-left: 0px;">
+                            <div class="col-9" style="padding-left: 0px;">
                                 <p class="content-container__p">
                                     Attached evidence:
                                 </p>
                             </div>
 
-                            <div class="col-9" ng-repeat="item in model.attachments" style="padding: 0px">
+                            <div class="col-9 setPaddingFiles" ng-repeat="item in model.attachments" >
                                 <div class="attachmentBlock clearfix">
                                     <div class="attachmentBlock__img">
                                         <img src="~/Content/Icons/attachment-icon_preview.png" alt="icon" />
@@ -320,7 +320,7 @@
                                         <div class="attachmentBlock__name">
                                             {{item.file_nm}}
                                         </div><!-- /.attachmentBlock__name -->
-                                        <a href="{{item.path_nm}}" class="attachmentBlock__link">
+                                        <a href="{{item.path_nm}}" download class="attachmentBlock__link">
                                             download
                                         </a>
                                     </div><!-- /.attachmentBlock__info -->

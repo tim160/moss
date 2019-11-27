@@ -1399,7 +1399,10 @@ ul.drop.slide{
 			display: inline-block;
 			color: #6ccec3;
 		}
-
+        .setPaddingFiles {
+            padding: 0px;
+            padding-bottom: 45px;
+        }
 
 .content-container__footer{
 	margin: 0 -30px;
