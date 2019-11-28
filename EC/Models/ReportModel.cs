@@ -1167,20 +1167,7 @@ namespace EC.Models
 
       return null;
     }
-
-    public string Last_investigation_case_closure_reason()
-    {
-      report_investigation_status last_status = _last_investigation_status();
-
-      if ((last_status == null) || (!last_status.case_closure_reason_id.HasValue))
-      {
-        return null;
-      }
-
-      var reason = db.case_closure_reason.FirstOrDefault(x => x.id == last_status.case_closure_reason_id);
-
-      return reason == null ? null : reason.case_closure_reason_en;
-    }
+ 
     #endregion
 
 

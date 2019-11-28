@@ -33,7 +33,7 @@ namespace EC.Models
     ///Email.EmailManagement = check if we need it   , add emailHelper. add this to BaseModel, controllers
     //replace with select2item - CompanyLocationViewModel, DepartmentsViewModel, InjuryDamageViewModel, ManagamentViewModel, ReportedOutsideViewModel
     // UserModel - ReportsSearch() - merge with ReportSearchID/ Remove UnreadReportQuantity,etc   -- CloseTask/OpenTask- Move to TaskModel?
-    // reportModel  getCompanySecondaryType(3 func)  isCustomIncidentTypes(check,not needed),  ReportedDateStringMonthLong
+    // reportModel  getCompanySecondaryType(3 func)  isCustomIncidentTypes(check,not needed) 
     //     LocalizationGetter.GetString_bkp
     //Unread_message_number_string1  +ReporterDashboardModel(save call)
     //  Add new models -  ReportStringPropertiesModel???    AnaslyticsModel?

@@ -258,26 +258,7 @@ namespace EC.Models
 
       return date_string.Trim();
     }
-    /// <summary>
-    /// Returns "January 31, 2015"
-    /// </summary>
-    /// <param name="report_id"></param>
-    /// <returns></returns>
-    public string ReportedDateStringMonthLong()
-    {
-      string date_string = "";
-      DateTime dt;
-      if (_report != null)
-      {
-        dt = _report.reported_dt;
-        date_string = m_DateTimeHelper.GetFullMonth(dt.Month) + " " + dt.Day.ToString() + ", " + dt.Year.ToString();
-      }
-
-      if (date_string.Trim().Length == 0)
-        date_string = LocalizationGetter.GetString("unknown_date");
-
-      return date_string.Trim();
-    }
+ 
 
     public string ColorCode()
     {
