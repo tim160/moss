@@ -91,7 +91,7 @@ namespace EC.Controllers.API
                     if (userReporter.email.Trim() != "" && userReporter.email.Trim().Length > 0)
                     {
                         GlobalFunctions glb = new GlobalFunctions();
-                        glb.SaveEmailBeforeSend(user.id, userReporter.id, userReporter.company_id, userReporter.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"],
+                        emailNotificationModel.SaveEmailBeforeSend(user.id, userReporter.id, userReporter.company_id, userReporter.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"],
                                 "", Localization.LocalizationGetter.GetString("NewMessageFromCaseAdmin", is_cc), eb.Body, false, 31);
                     }
                 }

@@ -7,110 +7,111 @@
 @using EC.Models.ViewModels;
 
 @{
-    bool? is_cc = ViewBag.is_cc;
-    if (!is_cc.HasValue)
+  bool? is_cc = ViewBag.is_cc;
+  if (!is_cc.HasValue)
+  {
+    is_cc = false;
+  }
+  String class_ext = ViewBag.cc_extension;
+
+  var user_id = ViewBag.user_id;
+
+  string hrefURL_1 = Request.Url.AbsoluteUri.ToLower();
+
+  UserModel um = new UserModel(user_id);
+  CompanyModel cm = new CompanyModel(um._user.company_id);
+  ReportModel rm = new ReportModel();
+
+  ReadStatusModel rsm = new ReadStatusModel();
+
+  UsersUnreadEntitiesNumberViewModel userUnreadEntities = rsm.GetUserUnreadEntitiesNumbers(user_id);
+
+  var unread_report_number = userUnreadEntities.unread_reports;
+
+  // var unread_report_number = um.UnreadReport(0, 0).Count;
+  var unread_report_number_string = "";
+  string page_subtitle = "";
+  if (unread_report_number > 0)
+  {
+    unread_report_number_string = unread_report_number.ToString();
+  }
+
+  int unread_message_number = userUnreadEntities.unread_messages;
+  // int unread_message_number = um.Unread_Messages_Quantity(0, 1) + um.Unread_Messages_Quantity(0, 2) + um.Unread_Messages_Quantity(0, 3);
+  var unread_message_number_string = "";
+  if (unread_message_number > 0)
+  {
+    unread_message_number_string = unread_message_number.ToString();
+  }
+
+  int unread_task_number = userUnreadEntities.unread_tasks;
+  //int unread_task_number = um.UnreadTasksQuantity(0, true, 1);
+  var unread_task_number_string = "";
+  if (unread_task_number > 0)
+  {
+    unread_task_number_string = unread_task_number.ToString();
+  }
+
+  user _user = um.GetById(user_id);
+  company _company = cm.GetById(_user.company_id);
+
+  string report_name = "Case";
+
+  int _report_id = 0;
+  int investigationstatus = 1;
+  string report_color = "", report_color_code = "", report_name_code = "";
+  bool is_owner = false;
+  user soff = null;
+
+  if ((ViewBag.report_id != null) && ((int)ViewBag.report_id != 0))
+  {
+    _report_id = (int)ViewBag.report_id;
+    rm = new ReportModel(_report_id);
+
+    report_name = rm.SecondaryTypeString() + " - " + rm.LocationString() + " - #" + rm._report.display_name;
+    report_name_code = LocalizationGetter.GetString("Newreport") + ": #" + rm._report.display_name;
+    report_color = rm.ColorDescr();
+    report_color_code = rm.ColorCode();
+    investigationstatus = rm._investigation_status;
+
+    is_owner = rm.ReportOwners().FirstOrDefault(x => x.report_id == _report_id && x.user_id == user_id && x.status_id == 2) != null;
+    soff = rm.GetSignOffMeditoar();
+  }
+
+  string[] _statuses = ECGlobalConstants.ReportFlowStatusesList;
+
+  string same_mediator_warning = LocalizationGetter.GetString("AddFurtherNotes");
+  if (rm != null && user_id == rm.Last_investigation_status_user_id())
+  {
+    ///     same_mediator_warning = LocalizationGetter.GetString("RecommendSecond1") + " " + LocalizationGetter.GetString("RecommendSecond2");
+  }
+
+  string normal_button_promotion = LocalizationGetter.GetString("RequestCloseCase"); //ResolveCaseUp
+  string Res_or_comp = LocalizationGetter.GetString("CloseCaseUp");
+  string overlay_title = LocalizationGetter.GetString("RequestCloseCase");
+  string textbox_title = LocalizationGetter.GetString("Caseresolution");
+  string left_button_promotion = "";
+  string normal_button_value = ((int)CaseStatusConstants.CaseStatusValues.Completed).ToString();
+  string left_button_value = "";// Constant.investigation_status_completed.ToString();
+  List<company_outcome> company_outcomes = cm.Outcomes(_user.company_id, 2);
+
+  if ((investigationstatus > 2 && investigationstatus < 7) || (investigationstatus == 9))
+  {
+    Res_or_comp = LocalizationGetter.GetString("CloseCaseUp");
+    if ((investigationstatus == 4) || (investigationstatus == 6))
     {
-        is_cc = false;
+      Res_or_comp = "";
     }
-    String class_ext = ViewBag.cc_extension;
-
-    var user_id = ViewBag.user_id;
-
-    string hrefURL_1 = Request.Url.AbsoluteUri.ToLower();
-
-    UserModel um = new UserModel(user_id);
-    CompanyModel cm = new CompanyModel(um._user.company_id);
-    ReportModel rm = new ReportModel();
-
-
-    UsersUnreadEntitiesNumberViewModel userUnreadEntities = um.GetUserUnreadEntitiesNumbers();
-
-    var unread_report_number = userUnreadEntities.unread_reports;
-
-    // var unread_report_number = um.UnreadReport(0, 0).Count;
-    var unread_report_number_string = "";
-    string page_subtitle = "";
-    if (unread_report_number > 0)
+    if ((investigationstatus == 9) && (_user.role_id == 4 || _user.role_id == 5))
     {
-        unread_report_number_string = unread_report_number.ToString();
+      Res_or_comp = LocalizationGetter.GetString("Reopen");
+      normal_button_value = ((int)CaseStatusConstants.CaseStatusValues.Investigation).ToString();
     }
-
-    int unread_message_number = userUnreadEntities.unread_messages;
-    // int unread_message_number = um.Unread_Messages_Quantity(0, 1) + um.Unread_Messages_Quantity(0, 2) + um.Unread_Messages_Quantity(0, 3);
-    var unread_message_number_string = "";
-    if (unread_message_number > 0)
+    if (((rm._investigation_status == (int)CaseStatusConstants.CaseStatusValues.Completed || rm._investigation_status == (int)CaseStatusConstants.CaseStatusValues.Resolution)))
     {
-        unread_message_number_string = unread_message_number.ToString();
+      Res_or_comp = LocalizationGetter.GetString("Awaitingapproval");
     }
-
-    int unread_task_number = userUnreadEntities.unread_tasks;
-    //int unread_task_number = um.UnreadTasksQuantity(0, true, 1);
-    var unread_task_number_string = "";
-    if (unread_task_number > 0)
-    {
-        unread_task_number_string = unread_task_number.ToString();
-    }
-
-    user _user = um.GetById(user_id);
-    company _company = cm.GetById(_user.company_id);
-
-    string report_name = "Case";
-
-    int _report_id = 0;
-    int investigationstatus = 1;
-    string report_color = "", report_color_code = "", report_name_code = "";
-    bool is_owner = false;
-    user soff = null;
-
-    if ((ViewBag.report_id != null) && ((int)ViewBag.report_id != 0))
-    {
-        _report_id = (int)ViewBag.report_id;
-        rm = new ReportModel(_report_id);
-
-        report_name = rm.SecondaryTypeString() + " - " + rm.LocationString() + " - #" + rm._report.display_name;
-        report_name_code = LocalizationGetter.GetString("Newreport") + ": #" + rm._report.display_name;
-        report_color = rm.ColorDescr();
-        report_color_code = rm.ColorCode();
-        investigationstatus = rm._investigation_status;
-
-        is_owner = rm.ReportOwners().FirstOrDefault(x => x.report_id == _report_id && x.user_id == user_id && x.status_id == 2) != null;
-        soff = rm.GetSignOffMeditoar();
-    }
-
-    string[] _statuses = ECGlobalConstants.ReportFlowStatusesList;
-
-    string same_mediator_warning = LocalizationGetter.GetString("AddFurtherNotes");
-    if (rm != null && user_id == rm.Last_investigation_status_user_id())
-    {
-        ///     same_mediator_warning = LocalizationGetter.GetString("RecommendSecond1") + " " + LocalizationGetter.GetString("RecommendSecond2");
-    }
-
-    string normal_button_promotion = LocalizationGetter.GetString("RequestCloseCase"); //ResolveCaseUp
-    string Res_or_comp = LocalizationGetter.GetString("CloseCaseUp");
-    string overlay_title = LocalizationGetter.GetString("RequestCloseCase");
-    string textbox_title = LocalizationGetter.GetString("Caseresolution");
-    string left_button_promotion = "";
-    string normal_button_value = ((int)CaseStatusConstants.CaseStatusValues.Completed).ToString();
-    string left_button_value = "";// Constant.investigation_status_completed.ToString();
-    List<company_outcome> company_outcomes = cm.Outcomes(_user.company_id, 2);
-
-    if ((investigationstatus > 2 && investigationstatus < 7) || (investigationstatus == 9))
-    {
-        Res_or_comp = LocalizationGetter.GetString("CloseCaseUp");
-        if ((investigationstatus == 4) || (investigationstatus == 6))
-        {
-            Res_or_comp = "";
-        }
-        if ((investigationstatus == 9) && (_user.role_id == 4 || _user.role_id == 5))
-        {
-            Res_or_comp = LocalizationGetter.GetString("Reopen");
-            normal_button_value = ((int)CaseStatusConstants.CaseStatusValues.Investigation).ToString();
-        }
-        if (((rm._investigation_status == (int)CaseStatusConstants.CaseStatusValues.Completed || rm._investigation_status == (int)CaseStatusConstants.CaseStatusValues.Resolution)))
-        {
-            Res_or_comp = LocalizationGetter.GetString("Awaitingapproval");
-        }
-    }
+  }
 }
 <!DOCTYPE html>
 <html>

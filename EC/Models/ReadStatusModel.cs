@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using EC.Models.Database;
 using EC.Common.Interfaces;
+using EC.Models.ViewModels;
+using EC.Models.ECModel;
 using log4net;
 
 namespace EC.Models
@@ -12,7 +14,7 @@ namespace EC.Models
   {
 
     ECEntities db = new ECEntities();
-///    IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
+    ///  _CaseStatus --- UnreadActivityUserTaskQuantity    IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
 
 
     ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -145,5 +147,170 @@ namespace EC.Models
       }
     }
     #endregion
+
+
+    public int Unread_Messages_Quantity(int user_id, int? report_id, int thread_id)
+    {
+
+      UserModel um = new UserModel(user_id);
+      int quantity = 0;
+      List<message> all_messages = um.UserMessages(report_id, thread_id);
+      MessageExtended _extended;
+      foreach (message _message in all_messages)
+      {
+        _extended = new MessageExtended(_message.id, user_id);
+
+        // is unread
+        if (!_extended.IsRead())
+          quantity++;
+      }
+      return quantity;
+    }
+
+    public UsersUnreadEntitiesNumberViewModel GetUserUnreadEntitiesNumbers(int user_id)
+    {
+      UserModel um = new UserModel(user_id);
+      List<int> all_reports_id = um.GetReportIds(null);
+
+      UsersUnreadEntitiesNumberViewModel vm = new UsersUnreadEntitiesNumberViewModel();
+      var all_unread_messages = (db.message.Where(item => (all_reports_id.Contains(item.report_id) && item.sender_id != user_id && !db.message_user_read.Where(mur => (mur.message_id == item.id) && (mur.user_id == user_id)).Any()))).Select(t => t.id).Count();
+      vm.unread_messages = all_unread_messages;
+
+      var all_unread_reports = (all_reports_id.Where(item => (!db.report_user_read.Where(t => ((t.user_id == user_id) && (t.report_id == item))).Any()))).Count();
+      vm.unread_reports = all_unread_reports;
+
+
+      var all_tasks_ids = db.task.Where(item => item.assigned_to == user_id && all_reports_id.Contains(item.report_id)).Select(item => item.id);
+      var all_unread_tasks = (all_tasks_ids.Where(item => (!db.task_user_read.Where(t => ((t.user_id == user_id) && (t.task_id == item))).Any()))).Count();
+      vm.unread_tasks = all_unread_tasks;
+
+      return vm;
+
+    }
+
+    public UsersUnreadReportsNumberViewModel GetUserUnreadCasesNumbers(UsersReportIDsViewModel vmReportIds, int user_id)
+    {
+      UsersUnreadReportsNumberViewModel vm = new UsersUnreadReportsNumberViewModel();
+
+      vm.unread_active_reports = 0;
+      vm.unread_spam_reports = 0;
+
+      vm.unread_pending_reports = 0;
+      vm.unread_completed_reports = 0;
+      vm.unread_closed_reports = 0;
+
+      if (vmReportIds != null && vmReportIds.all_active_report_ids != null)
+      {
+        var active = vmReportIds.all_active_report_ids.Where(item => !(
+         db.report.Where(t => (t.id == item &&
+         db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == user_id && rl.read_date > t.last_update_dt).Any()
+         )).Any())).Count();
+
+        vm.unread_active_reports = active;
+      }
+
+      if (vmReportIds != null && vmReportIds.all_spam_report_ids != null)
+      {
+        var spam = vmReportIds.all_spam_report_ids.Where(item => !(
+            db.report.Where(t => (t.id == item &&
+            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == user_id && rl.read_date > t.last_update_dt).Any()
+            )).Any())).Count();
+        vm.unread_spam_reports = spam;
+      }
+
+      if (vmReportIds != null && vmReportIds.all_pending_report_ids != null)
+      {
+        var newreport = vmReportIds.all_pending_report_ids.Where(item => !(
+            db.report.Where(t => (t.id == item &&
+            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == user_id && rl.read_date > t.last_update_dt).Any()
+            )).Any())).Count();
+        vm.unread_pending_reports = newreport;
+      }
+
+      if (vmReportIds != null && vmReportIds.all_completed_report_ids != null)
+      {
+        var completed = vmReportIds.all_completed_report_ids.Where(item => !(
+            db.report.Where(t => (t.id == item &&
+            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == user_id && rl.read_date > t.last_update_dt).Any()
+            )).Any())).Count();
+        vm.unread_completed_reports = completed;
+      }
+      if (vmReportIds != null && vmReportIds.all_closed_report_ids != null)
+      {
+
+        var closed = vmReportIds.all_closed_report_ids.Where(item => !(
+            db.report.Where(t => (t.id == item &&
+            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == user_id && rl.read_date > t.last_update_dt).Any()
+            )).Any()
+            )).Count();
+        vm.unread_closed_reports = closed;
+      }
+      return vm;
+
+    }
+
+    public UsersUnreadReportViewModel GetUsersUnreadEntitiesInReport(int user_id, int report_id)
+    {
+
+      UsersUnreadReportViewModel vm = new UsersUnreadReportViewModel();
+      UserModel um = new UserModel(user_id);
+      ReportModel rm = new ReportModel(report_id);
+
+
+      //public int UnreadTasksQuantity(int? report_id, bool is_user_only, int status_id)
+      List<int> all_report_ids = new List<int>();
+      all_report_ids = um.GetReportIds(report_id);
+
+      int tasks_quantity = 0;
+
+      List<int> all_task_ids = new List<int>();
+      List<int> read_task_ids = new List<int>();
+      List<int> unread_task_ids = new List<int>();
+
+      // 1?? - only non-completed tasks
+      List<task> tasks = um.UserTasks(1, report_id, true);
+      List<TaskExtended> list_tsk = new List<TaskExtended>();
+      foreach (task _task in tasks)
+      {
+        TaskExtended tsk = new TaskExtended(_task.id, user_id);
+
+        if (!tsk.IsRead())
+          tasks_quantity++;
+      }
+
+      vm.unread_tasks = tasks_quantity;
+
+
+      int quantity = 0;
+      MessageExtended _extended;
+
+      List<message> all_messages = um.UserMessages(report_id, 1);
+
+      foreach (message _message in all_messages)
+      {
+        _extended = new MessageExtended(_message.id, user_id);
+
+        // is unread
+        if (!_extended.IsRead())
+          quantity++;
+      }
+      vm.mediatorsUnreaded = quantity;
+
+      all_messages = um.UserMessages(report_id, 2);
+
+      foreach (message _message in all_messages)
+      {
+        quantity = 0;
+        _extended = new MessageExtended(_message.id, user_id);
+
+        // is unread
+        if (!_extended.IsRead())
+          quantity++;
+      }
+      vm.reportersUnreaded = quantity;
+
+      return vm;
+
+    }
   }
 }

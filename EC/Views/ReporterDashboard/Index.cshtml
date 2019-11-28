@@ -31,7 +31,7 @@
         class_ext = "_cc";
     }
     ViewBag.Title = LocalizationGetter.GetString("ReporterDashboard", is_cc);
-    var agentName = rm.GetAgentName();
+    var agentName = rm._reportStringModel.GetAgentName();
 }
 
 @if ((rm._report != null) && (rm._report.id != 0))
@@ -44,7 +44,7 @@
         <div class="selectedMenu">
             <div class="data">
                 <div class="leftBlock">
-                    <div class="listHead" style="font-weight: bold">@LocalizationGetter.GetString("Casestatus", is_cc): <span class="review padText">@rm.InvestigationStatusString()</span></div>
+                    <div class="listHead" style="font-weight: bold">@LocalizationGetter.GetString("Casestatus", is_cc): <span class="review padText">@rm._reportStringModel.InvestigationStatusString()</span></div>
                     <div class="listLeft">
                         <p style="padding-top:4px">@LocalizationGetter.GetString("Datereported", is_cc):</p>
                         @if (rm._report.agent_id.HasValue && rm._report.agent_id != 0)

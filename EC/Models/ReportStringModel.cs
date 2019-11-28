@@ -26,17 +26,20 @@ namespace EC.Models
 
 
     #region Base constructors
-    public ReportStringModel()
+    public ReportStringModel(report _report_from_parent, user _report_user)
     {
-      ID = 0;
+      ID = _report_from_parent.id;
+      _report = _report_from_parent;
+      _reporter_user = _report_user;
     }
 
     public ReportStringModel(int report_id)
     {
       ID = report_id;
+      _report = ReportById(ID);
+      _reporter_user = GetReporterUser(ID);
     }
-
-    public report ReportById(int id)
+    private report ReportById(int id)
     {
       ID = id;
 
@@ -46,6 +49,18 @@ namespace EC.Models
       }
       else
         return null;
+
+    }
+
+
+    private user GetReporterUser(int id)
+    {
+      if ((_report != null) && (ID != 0))
+      {
+        user _user = db.user.Where(item => item.id == _report.reporter_user_id).FirstOrDefault();
+        return _user;
+      }
+      return null;
     }
     #endregion
 
@@ -53,27 +68,10 @@ namespace EC.Models
     public int ID
     { get; set; }
 
-    public report _report
-    {
-      get
-      {
-        return ReportById(ID);
-      }
-    }
-
-    public user _reporter_user
-    {
-      get
-      {
-        if ((_report != null) && (ID != 0))
-        {
-          user _user = db.user.Where(item => item.id == _report.reporter_user_id).FirstOrDefault();
-          return _user;
-        }
-        return null;
-      }
-    }
+    public report _report;
+    public user _reporter_user;
     #endregion
+
 
 
     /// <summary>
@@ -260,26 +258,7 @@ namespace EC.Models
 
       return date_string.Trim();
     }
-    /// <summary>
-    /// Returns "January 31, 2015"
-    /// </summary>
-    /// <param name="report_id"></param>
-    /// <returns></returns>
-    public string ReportedDateStringMonthLong()
-    {
-      string date_string = "";
-      DateTime dt;
-      if (_report != null)
-      {
-        dt = _report.reported_dt;
-        date_string = m_DateTimeHelper.GetFullMonth(dt.Month) + " " + dt.Day.ToString() + ", " + dt.Year.ToString();
-      }
-
-      if (date_string.Trim().Length == 0)
-        date_string = LocalizationGetter.GetString("unknown_date");
-
-      return date_string.Trim();
-    }
+ 
 
     public string ColorCode()
     {
@@ -558,7 +537,5 @@ namespace EC.Models
 
       return status.Trim();
     }
-
-
   }
 }

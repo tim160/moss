@@ -201,8 +201,8 @@ namespace EC.Controllers.API
                 });
                 //em.Send("alexandr@ase.com.ua", "New book training added", body, "", true);
                 //em.Send(mediator.email, "New book training added", body, "", true);
-                glb.SaveEmailBeforeSend(user.id, mediator.id, mediator.company_id, mediator.email, System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", "Training/onboarding timeslot has been booked.", eb.Body, false, 75);
-                glb.SaveEmailBeforeSend(user.id, trainer.id, 2, trainer.email, System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", "Training/onboarding timeslot has been booked.", eb.Body, false, 75);
+                emailNotificationModel.SaveEmailBeforeSend(user.id, mediator.id, mediator.company_id, mediator.email, System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", "Training/onboarding timeslot has been booked.", eb.Body, false, 75);
+                emailNotificationModel.SaveEmailBeforeSend(user.id, trainer.id, 2, trainer.email, System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", "Training/onboarding timeslot has been booked.", eb.Body, false, 75);
       }
 
       //eb.CalendarEvent(false, true, Request.RequestUri.AbsoluteUri.ToLower(), item.Hour.ToString("yyyy-MM-dd HH:mm:ss"));

@@ -219,7 +219,7 @@ namespace EC.Controllers
 
                             string body = eb.Body;
 
-                            glb.SaveEmailBeforeSend(0, _user.id, _user.company_id, _user.email.Trim(),
+                            emailNotificationModel.SaveEmailBeforeSend(0, _user.id, _user.company_id, _user.email.Trim(),
                                 System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
                                 LocalizationGetter.GetString("ForgotLogin", is_cc), body, false, 53);
                             #endregion
@@ -270,7 +270,7 @@ namespace EC.Controllers
 
                                 string body = eb.Body;
 
-                                glb.SaveEmailBeforeSend(0, _user.id, _user.company_id, _user.email.Trim(), 
+                                emailNotificationModel.SaveEmailBeforeSend(0, _user.id, _user.company_id, _user.email.Trim(), 
                                     System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "",
                                     LocalizationGetter.GetString("ChangePasswordRequest", is_cc), body, false, 53);
                                 #endregion
@@ -584,7 +584,7 @@ namespace EC.Controllers
 
                                     return body;
                                 });
-                                glb.SaveEmailBeforeSend(2, 2, 2, partner.email, "employeeconfidential@employeeconfidential.com", null, "Employee Confidential prospect follow-up needed", eb_partner.Body, false, 69);
+                                emailNotificationModel.SaveEmailBeforeSend(2, 2, 2, partner.email, "employeeconfidential@employeeconfidential.com", null, "Employee Confidential prospect follow-up needed", eb_partner.Body, false, 69);
                             }
 
                             var partnerEC = db.partner.Where(t => t.partner_code == "EC").FirstOrDefault();
@@ -603,7 +603,7 @@ namespace EC.Controllers
                                     body = body.Replace("[Referral Partner Names]", partner.first_nm + " " + partner.last_nm);
                                     return body;
                                 });
-                                glb.SaveEmailBeforeSend(2, 2, 2, partnerEC.email.Trim(), "employeeconfidential@employeeconfidential.com", null, "Employee Confidential prospect follow-up", eb_EC.Body, false, 72);
+                                emailNotificationModel.SaveEmailBeforeSend(2, 2, 2, partnerEC.email.Trim(), "employeeconfidential@employeeconfidential.com", null, "Employee Confidential prospect follow-up", eb_EC.Body, false, 72);
                             }
                             var_info.SalesNotified = true;
                             db.SaveChanges();
@@ -650,7 +650,7 @@ namespace EC.Controllers
 
                                     return body;
                                 });
-                                glb.SaveEmailBeforeSend(2, 2, 2, var_info.email, "employeeconfidential@employeeconfidential.com", null, "Employee Confidential follow-up", eb_partner.Body, false, 70);
+                                emailNotificationModel.SaveEmailBeforeSend(2, 2, 2, var_info.email, "employeeconfidential@employeeconfidential.com", null, "Employee Confidential follow-up", eb_partner.Body, false, 70);
                             }
 
                         }
@@ -699,7 +699,7 @@ namespace EC.Controllers
 
                                     return body;
                                 });
-                                glb.SaveEmailBeforeSend(2, 2, 2, var_info.email, "employeeconfidential@employeeconfidential.com", null, "Employee Confidential follow-up", eb_partner.Body, false, 71);
+                                emailNotificationModel.SaveEmailBeforeSend(2, 2, 2, var_info.email, "employeeconfidential@employeeconfidential.com", null, "Employee Confidential follow-up", eb_partner.Body, false, 71);
                             }
 
                         }

@@ -151,7 +151,7 @@ namespace EC.Models.ECModel
                 if (TaskReportID != 0)
                 {
                     ReportModel rm = new ReportModel(TaskReportID);
-                    return rm.ColorDescr();
+                    return rm._reportStringModel.ColorDescr();
                 }
                 else
                     return "blue";
@@ -164,7 +164,7 @@ namespace EC.Models.ECModel
                 if (TaskReportID != 0)
                 {
                     ReportModel rm = new ReportModel(TaskReportID);
-                    return rm.ColorCode();
+                    return rm._reportStringModel.ColorCode();
                 }
                 else
                     return "3099be";

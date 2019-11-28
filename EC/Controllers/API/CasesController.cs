@@ -39,9 +39,10 @@ namespace EC.Controllers.API
             }
 
             UserModel um = new UserModel(user.id);
+            ReadStatusModel rsm = new ReadStatusModel();
             UsersReportIDsViewModel vmAllIDs = um.GetAllUserReportIdsLists();
 
-            UsersUnreadReportsNumberViewModel vmUnreadReports = um.GetUserUnreadCasesNumbers(vmAllIDs);
+            UsersUnreadReportsNumberViewModel vmUnreadReports = rsm.GetUserUnreadCasesNumbers(vmAllIDs, user.id);
 
             List<int> report_ids = new List<int>();
             switch (filter.ReportFlag)
@@ -79,7 +80,7 @@ namespace EC.Controllers.API
             if (report_ids!= null &&  report_ids.Count > 0)
             {
                 ReportModel tempRm = new ReportModel(report_ids[0]);
-                investigation_status = tempRm.InvestigationStatusString();
+                investigation_status = tempRm._reportStringModel.InvestigationStatusString();
                 delay_allowed = tempRm.GetDelayAllowed();
                 investigation_status_id = tempRm._report.status_id;
             }

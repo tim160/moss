@@ -18,7 +18,7 @@
     {
         ViewBag.attachmentAdvFiles = new List<attachment>();
     }
-    var agentName = rm.GetAgentName();
+    var agentName = rm._reportStringModel.GetAgentName();
 }
 <div class="content">
     <div class="post">
@@ -28,7 +28,7 @@
                 <div class="reportBlock">
                     <div class="report">
                         <div class="titleReport">@LocalizationGetter.GetString("ReportingFrom"):</div>
-                        <div class="reportText">@rm.CountryString()</div>
+                        <div class="reportText">@rm._reportStringModel.CountryString()</div>
                     </div>
 
                     <div class="report">
@@ -73,7 +73,7 @@
 
                     <div class="report">
                         <div class="titleReport">@LocalizationGetter.GetString("Reportedas"):</div>
-                        <div class="reportText">@rm.ReporterCompanyRelationShort()</div>
+                        <div class="reportText">@rm._reportStringModel.ReporterCompanyRelationShort()</div>
                     </div>
                     @if (!String.IsNullOrEmpty(rm._report.not_current_employee))
                     {
@@ -86,11 +86,11 @@
                     }
                     <div class="report">
                         <div class="titleReport">@LocalizationGetter.GetString("Incidentlocation"):</div>
-                        <div class="reportText">@rm.LocationString()</div>
+                        <div class="reportText">@rm._reportStringModel.LocationString()</div>
                     </div>
                     <div class="report">
                         <div class="titleReport">@LocalizationGetter.GetString("AffectedDepartment"):</div>
-                        <div class="reportText">@rm.DepartmentsString(is_cc.Value)</div>
+                        <div class="reportText">@rm._reportStringModel.DepartmentsString(is_cc.Value)</div>
                     </div>
                 </div><!--reportBlock-->
             </div><!--leftBlock-->
@@ -140,7 +140,7 @@
                     <div class="report">
                         <div class="titleReport">@LocalizationGetter.GetString("Doesmanagementknowaboutthisincident")</div>
                         <div class="reportText">
-                            @rm.ManagementKnowString()
+                            @rm._reportStringModel.ManagementKnowString()
                         </div>
                     </div>
                     @if (!String.IsNullOrEmpty(rm._report.management_know_text))
@@ -155,7 +155,7 @@
 
                     <div class="report">
                         <div class="titleReport">@LocalizationGetter.GetString("Hascasereportedoutside")</div>
-                        <div class="reportText" style="height: 55px; ">@rm.IsReportedOutside()</div>
+                        <div class="reportText" style="height: 55px; ">@rm._reportStringModel.IsReportedOutside()</div>
                         @if (!String.IsNullOrEmpty(rm._report.reported_outside_text))
                         {
                             <div class="titleReport">&nbsp;</div>
@@ -166,7 +166,7 @@
                     </div>
                     <div class="report">
                         <div class="titleReport">@LocalizationGetter.GetString("IsCaseUrgent_q")</div>
-                        <div class="reportText">@rm.IsReportedUrgent()</div>
+                        <div class="reportText">@rm._reportStringModel.IsReportedUrgent()</div>
                     </div>
 
                 </div><!--reportBlock-->
@@ -185,7 +185,7 @@
                             <tbody>
                                 <tr>
                                     <td class="positionTitleReport">@LocalizationGetter.GetString("IncidentType"):</td>
-                                    <td class="positionReportText reportTextBlack">@rm.SecondaryTypeString()</td>
+                                    <td class="positionReportText reportTextBlack">@rm._reportStringModel.SecondaryTypeString()</td>
                                 </tr>
                                 <tr>
                                     <td class="positionTitleReport">@LocalizationGetter.GetString("IncidentDateUp"):</td>
@@ -198,14 +198,14 @@
                                             @LocalizationGetter.GetString("FiledCenterAgent", is_cc):
                                         </td>
                                         <td class="positionReportText reportTextBlack">
-                                            @rm.GetAgentName()
+                                            @rm._reportStringModel.GetAgentName()
                                         </td>
                                     </tr>
                                 }
 
                                 <tr>
                                     <td class="positionTitleReport">@LocalizationGetter.GetString("isOngoing"):</td>
-                                    <td class="positionReportText reportTextBlack">@rm.IsOngoing()</td>
+                                    <td class="positionReportText reportTextBlack">@rm._reportStringModel.IsOngoing()</td>
                                 </tr>
                                 @if (!String.IsNullOrEmpty(rm._report.report_frequency_text))
                                 {
@@ -218,7 +218,7 @@
                                 }
                                 <tr>
                                     <td class="positionTitleReport">@LocalizationGetter.GetString("incidentResult"):</td>
-                                    <td class="positionReportText reportTextBlack">@rm.HasInjuryDamage()</td>
+                                    <td class="positionReportText reportTextBlack">@rm._reportStringModel.HasInjuryDamage()</td>
                                 </tr>
                                 @if (!String.IsNullOrEmpty(rm._report.injury_damage))
                                 {

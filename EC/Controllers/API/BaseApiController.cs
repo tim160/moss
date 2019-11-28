@@ -10,6 +10,7 @@ using System.Text;
 using System.Web;
 using System.Web.Http;
 using EC.Common.Util;
+using EC.Models;
 
 namespace EC.Controllers.API
 {
@@ -53,5 +54,6 @@ namespace EC.Controllers.API
                 return DomainUtil.IsCC(HttpContext.Current.Request.Url.AbsoluteUri.ToLower());
             }
         }
-    }
+        public EmailNotificationModel emailNotificationModel = new EmailNotificationModel();
+  }
 }
