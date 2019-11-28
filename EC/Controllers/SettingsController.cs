@@ -358,7 +358,12 @@ namespace EC.Controllers
                 settings.userId = Convert.ToInt32(Request.QueryString["userId"]);
                 settings.newSetting = Request.QueryString["newSetting"];
                 settings.data = Request.QueryString["data"];
-                flag = SettingsModel.setNewItem(settings);
+
+                if (settings.userId == user.id && settings.companyId == user.company_id)
+                {
+                    flag = SettingsModel.setNewItem(settings);
+                }
+
             }
             if (Request.QueryString["partial"] == "BlockRootCauses")
             {
