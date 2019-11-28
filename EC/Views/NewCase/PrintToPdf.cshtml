@@ -86,7 +86,7 @@
                         Report date
                     </div><!-- /.reportContentBlock__textColFirst -->
                     <div class="reportContentBlock__textColSecond">
-                        <p>@Model.ReportedDateString()</p>
+                        <p>@Model._reportStringModel.ReportedDateString()</p>
                     </div><!-- /.reportContentBlock__textColRight -->
                     <div class="reportContentBlock__textColThird">
                         Case closure date
@@ -100,7 +100,7 @@
                         Reporting from
                     </div><!-- /.reportContentBlock__textColFirst -->
                     <div class="reportContentBlock__textColRight">
-                        <p>@Model.CountryString()</p>
+                        <p>@Model._reportStringModel.CountryString()</p>
                     </div><!-- /.reportContentBlock__textColRight -->
                 </div><!-- /.reportContentBlock__textCols -->
 
@@ -146,7 +146,7 @@
                         Incident location
                     </div><!-- /.reportContentBlock__textColFirst -->
                     <div class="reportContentBlock__textColRight">
-                        <p>@Model.LocationString()</p>
+                        <p>@Model._reportStringModel.LocationString()</p>
                     </div><!-- /.reportContentBlock__textColRight -->
                 </div><!-- /.reportContentBlock__textCols -->
                 @if (ReportOwnersUserList.Count > 0)
