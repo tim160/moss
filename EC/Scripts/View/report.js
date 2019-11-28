@@ -322,7 +322,8 @@
 
                                 if (generalInfoTher == "other" ||
                                     generalInfoTher == "former employee") {
-                                    formalRole.append(', ' + generalInfo.find(".explainReportType").val());
+                                    var html = $('.explainReportType').val().replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                                    formalRole.append(', ' + html);
                                 }
 
                                 var happenedIn = content.find('#incedentHappenedIn');
@@ -350,7 +351,8 @@
                                 isManagementKnow.append($(' input[name=managementKnow]:checked').siblings(".radioTitle").text());
                                 if ($(' input[name=managementKnow]:checked').val() == "Yes" ||
                                     $(' input[name=managementKnow]:checked').val() == "Do not want to involve") {
-                                    isManagementKnow.append(".<br />" + $('.managementIsKnown').val());
+                                    var html = $('.managementIsKnown').val().replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                                    isManagementKnow.append(".<br />" + html);
                                 }
                                 var report_by_myself = content.find("#report_by_myself");
                                 report_by_myself.empty();
@@ -367,10 +369,10 @@
                                 $('.partiesInvolvedBlock').empty();
                                 witnessPersone.each(function (indx, element) {
                                     var temp = $(element);
-                                    var fname = temp.find('.fName').val();
-                                    var lName = temp.find('.lName').val();
+                                    var fname = temp.find('.fName').val().replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                                    var lName = temp.find('.lName').val().replace(/</g, "&lt;").replace(/>/g, "&gt;");
                                     var witnessRole = temp.find('.selectedRoleInReport option:selected').text();
-                                    var witnessTitle = temp.find('.witnessTitle').val();
+                                    var witnessTitle = temp.find('.witnessTitle').val().replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
                                     if (temp.parent().hasClass('addPersonContainer')
                                         && fname != "" && lName != "" && witnessRole != "" && witnessTitle != "") {
@@ -394,7 +396,8 @@
                                 isReportedOutside.empty();
                                 isReportedOutside.append($(' input[name=isReportRefered]:checked').val());
                                 if ($(".whoKnow .active input").val() != "No") {
-                                    isReportedOutside.append($(".whoKnow .active input").val() + "<br />" + $('.isReportedOutside').val());
+                                    var html = $('.isReportedOutside').val().replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                                    isReportedOutside.append($(".whoKnow .active input").val() + "<br />" + html);
                                 } else {
                                     isReportedOutside.append("<br /> No");
                                 }
@@ -440,7 +443,8 @@
                                 isIncidentOngoing.append($(' input[name=isIncidentOngoing]:checked').siblings('.radioTitle').text());
 
                                 if ($(' input[name=isIncidentOngoing]:checked').val() == "Yes") {
-                                    isIncidentOngoing.append(".<br />" + $('.incidentOngoingDescription').val());
+                                    var html = $('.incidentOngoingDescription').val().replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                                    isIncidentOngoing.append(".<br />" + html);
                                 }
 
                                 var hasInjury = content.find('#hasInjury');
@@ -448,13 +452,13 @@
                                 hasInjury.append($(' input[name=resultInjury]:checked').siblings('.radioTitle').text());
 
                                 if ($(' input[name=resultInjury]:checked').val() == "Yes") {
-                                    hasInjury.append(".<br />" + $('#injury_damage').val());
+                                    hasInjury.append(".<br />" + $('#injury_damage').val().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
                                 }
 
                                 var incidentDescription = content.find('#incidentDescription');
                                 incidentDescription.empty();
                                 //incidentDescription.append(generalInfo.find('#describeHappened').val());
-                                incidentDescription.append($('#describeHappened').val());
+                                incidentDescription.append($('#describeHappened').val().replace(/</g, "&lt;").replace(/>/g, "&gt;"));
 
                                 //content.find('#reportingFrom').
                                 /*
