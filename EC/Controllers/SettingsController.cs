@@ -342,8 +342,14 @@ namespace EC.Controllers
             company _comp = cm._company;
             return View(_comp);
         }
-        public string addNewfunction()
+        //[Authorize]
+        //[ValidateAntiForgeryToken]
+        public ActionResult addNewfunction()
         {
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            if (user == null || user.id == 0)
+                return RedirectToAction("Login", "Service");
+
             SettingsViewModel settings = new SettingsViewModel();
             string flag = "false";
             if (Request.IsAjaxRequest())
@@ -356,13 +362,13 @@ namespace EC.Controllers
             }
             if (Request.QueryString["partial"] == "BlockRootCauses")
             {
-                return BlockRootCauses();
+                return Content(BlockRootCauses());
             }
             if (Request.QueryString["partial"] == "Location")
             {
-                return LocationPartial(flag);
+                return Content(LocationPartial(flag));
             }
-            return flag;
+            return Content(flag);
         }
 
         [HttpPost]
