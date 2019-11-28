@@ -70,10 +70,10 @@
         _report_id = (int)ViewBag.report_id;
         rm = new EC.Models.ReportModel(_report_id);
 
-        report_name = rm.SecondaryTypeString() + " - " + rm.LocationString() + " - #" + rm._report.display_name;
+        report_name = rm._reportStringModel.SecondaryTypeString() + " - " + rm._reportStringModel.LocationString() + " - #" + rm._report.display_name;
         report_name_code = LocalizationGetter.GetString("Newreport", is_cc) + ": #" + rm._report.display_name;
-        report_color = rm.ColorDescr();
-        report_color_code = rm.ColorCode();
+        report_color = rm._reportStringModel.ColorDescr();
+        report_color_code = rm._reportStringModel.ColorCode();
         investigationstatus = rm._investigation_status;
     }
 
