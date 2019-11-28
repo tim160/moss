@@ -18,7 +18,7 @@
     {
         ViewBag.attachmentAdvFiles = new List<attachment>();
     }
-    var agentName = rm.GetAgentName();
+    var agentName = rm._reportStringModel.GetAgentName();
 }
 <div class="content">
     <div class="post">
@@ -198,7 +198,7 @@
                                             @LocalizationGetter.GetString("FiledCenterAgent", is_cc):
                                         </td>
                                         <td class="positionReportText reportTextBlack">
-                                            @rm.GetAgentName()
+                                            @rm._reportStringModel.GetAgentName()
                                         </td>
                                     </tr>
                                 }

@@ -29,7 +29,8 @@
     UserModel um = new UserModel(user_id);
     CompanyModel cm = new CompanyModel(um._user.company_id);
     ReportModel rm = new ReportModel();
-    UsersUnreadEntitiesNumberViewModel userUnreadEntities = um.GetUserUnreadEntitiesNumbers();
+    ReadStatusModel rsm = new ReadStatusModel();
+    UsersUnreadEntitiesNumberViewModel userUnreadEntities = rsm.GetUserUnreadEntitiesNumbers(user_id);
 
     var unread_report_number = userUnreadEntities.unread_reports;
 

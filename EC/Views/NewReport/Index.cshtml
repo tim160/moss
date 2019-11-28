@@ -42,12 +42,12 @@
     string[] _statuses = EC.Constants.ECGlobalConstants.ReportFlowStatusesList;
 
 
-    string report_name = " - #" + rm._report.display_name + " - " + rm.SecondaryTypeString() + " - " + rm.LocationString();
+    string report_name = " - #" + rm._report.display_name + " - " + rm._reportStringModel.SecondaryTypeString() + " - " + rm._reportStringModel.LocationString();
     ViewBag.Title = LocalizationGetter.GetString("NewReportUp") + report_name;
     var MediatorsAcceptCase = rm.MediatorsAcceptCase();
     var mediatorsAcces = MediatorsAcceptCase.listMediators;
     var selectedmediator = MediatorsAcceptCase.Selectedmediator;
-    var agentName = rm.GetAgentName();
+    var agentName = rm._reportStringModel.GetAgentName();
 }
 <body>
     <div class="headerPos">
@@ -386,7 +386,7 @@
                     <table class="generalInformation">
                         <tr>
                             <td>Reporting from:</td>
-                            <td>@rm.CountryString()</td>
+                            <td>@rm._reportStringModel.CountryString()</td>
                         </tr>
                       @if (!String.IsNullOrWhiteSpace(agentName))
                       {
@@ -422,7 +422,7 @@
                         }
                         <tr>
                             <td>@LocalizationGetter.GetString("Reporteris", is_cc):</td>
-                            <td>@rm.ReporterCompanyRelationShort()</td>
+                            <td>@rm._reportStringModel.ReporterCompanyRelationShort()</td>
                         </tr>
                         @if (!String.IsNullOrEmpty(rm._report.not_current_employee))
                         {
@@ -433,11 +433,11 @@
                         }
                         <tr>
                             <td>@LocalizationGetter.GetString("TheIncidentHappenedIn", is_cc):</td>
-                            <td>@rm.LocationString()</td>
+                            <td>@rm._reportStringModel.LocationString()</td>
                         </tr>
                         <tr>
                             <td>@LocalizationGetter.GetString("AffectedDepartment", is_cc):</td>
-                            <td>@rm.DepartmentsString(is_cc.Value)</td>
+                            <td>@rm._reportStringModel.DepartmentsString(is_cc.Value)</td>
                         </tr>
                     </table>
                 </div>
@@ -484,7 +484,7 @@
                     <table class="generalInformation">
                         <tr>
                             <td>@LocalizationGetter.GetString("Doesmanagementknowaboutthisincident", is_cc)</td>
-                            <td>@rm.ManagementKnowString()</td>
+                            <td>@rm._reportStringModel.ManagementKnowString()</td>
                         </tr>
                         @if (!String.IsNullOrEmpty(rm._report.management_know_text))
                         {
@@ -497,7 +497,7 @@
                     <table class="generalInformation">
                         <tr>
                             <td>Incident reported externally?</td>
-                            <td>@rm.IsReportedOutside()</td>
+                            <td>@rm._reportStringModel.IsReportedOutside()</td>
                         </tr>
                         @if (!String.IsNullOrEmpty(rm._report.reported_outside_text))
                         {
@@ -508,7 +508,7 @@
                         }
                         <tr>
                             <td>Is report urgent?</td>
-                            <td>@rm.IsReportedUrgent()</td>
+                            <td>@rm._reportStringModel.IsReportedUrgent()</td>
                         </tr>
                     </table>
                 </div>
@@ -517,15 +517,15 @@
                     <table class="caseInformation">
                         <tr>
                             <td>Incident Type:</td>
-                            <td>@rm.SecondaryTypeString()</td>
+                            <td>@rm._reportStringModel.SecondaryTypeString()</td>
                         </tr>
                         <tr>
                             <td>@LocalizationGetter.GetString("IncidentDate", is_cc):</td>
-                            <td>@rm.IncidentDateStringMonthLong()</td>
+                            <td>@rm._reportStringModel.IncidentDateStringMonthLong()</td>
                         </tr>
                         <tr>
                             <td>@LocalizationGetter.GetString("isOngoing", is_cc)?</td>
-                            <td>@rm.IsOngoing()</td>
+                            <td>@rm._reportStringModel.IsOngoing()</td>
                         </tr>
                         @if (!String.IsNullOrEmpty(rm._report.report_frequency_text))
                         {
@@ -536,7 +536,7 @@
                         }
                         <tr>
                             <td>@LocalizationGetter.GetString("incidentResult", is_cc)?</td>
-                            <td>@rm.HasInjuryDamage()</td>
+                            <td>@rm._reportStringModel.HasInjuryDamage()</td>
                         </tr>
                         @if (!String.IsNullOrEmpty(rm._report.injury_damage))
                         {

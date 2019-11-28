@@ -13,7 +13,7 @@
   {
     is_cc = false;
   }
-  string agentName = Model.GetAgentName();
+  string agentName = Model._reportStringModel.GetAgentName();
 
   var userDetails = new List<string>();
   if (Model._report.incident_anonymity_id == 3)
@@ -59,7 +59,7 @@
                     Report <b>#@Model._report.display_name</b>
                 </div><!-- /.reportTemplateHeader-info__id -->
                 <div class="reportTemplateHeader-info__date">
-                    Reported on <b>@Model.ReportedDateString()</b>
+                    Reported on <b>@Model._reportStringModel.ReportedDateString()</b>
                 </div><!-- /.reportTemplateHeader-info__date -->
             </div><!-- /.reportTemplateHeader-info pull-right -->
         </div><!-- /.reportTemplateHeader -->
@@ -74,7 +74,7 @@
                         Reporting From
                     </div><!-- /.reportContentBlock__textColFirst -->
                     <div class="reportContentBlock__textColRight">
-                        <p>@Model.CountryString()</p>
+                        <p>@Model._reportStringModel.CountryString()</p>
                     </div><!-- /.reportContentBlock__textColRight -->
                 </div><!-- /.reportContentBlock__textCols -->
                 @if (!String.IsNullOrWhiteSpace(agentName))
@@ -128,7 +128,7 @@
                         Reported as
                     </div><!-- /.reportContentBlock__textColFirst -->
                     <div class="reportContentBlock__textColRight">
-                        <p>@Model.ReporterCompanyRelationShort()</p>
+                        <p>@Model._reportStringModel.ReporterCompanyRelationShort()</p>
                         <p>@Model._report.not_current_employee</p>
                     </div><!-- /.reportContentBlock__textColRight -->
                 </div><!-- /.reportContentBlock__textCols -->
@@ -137,7 +137,7 @@
                         Incident Location
                     </div><!-- /.reportContentBlock__textColFirst -->
                     <div class="reportContentBlock__textColRight">
-                        <p>@Model.LocationString()</p>
+                        <p>@Model._reportStringModel.LocationString()</p>
                     </div><!-- /.reportContentBlock__textColRight -->
                 </div><!-- /.reportContentBlock__textCols -->
                 <div class="reportContentBlock__textCols clearfix">
@@ -188,7 +188,7 @@
                     </div><!-- /.reportContentBlock__textColFirst -->
                     <div class="reportContentBlock__textColRight">
                         <p>
-                            @Model.ManagementKnowString()
+                            @Model._reportStringModel.ManagementKnowString()
                         </p>
                         <p>
                             @Model._report.management_know_text
@@ -201,7 +201,7 @@
                     </div><!-- /.reportContentBlock__textColFirst -->
                     <div class="reportContentBlock__textColRight">
                         <p>
-                            @Model.IsReportedOutside()
+                            @Model._reportStringModel.IsReportedOutside()
                         </p>
                         <p>
                             @Model._report.reported_outside_text
@@ -214,7 +214,7 @@
                     </div><!-- /.reportContentBlock__textColFirst -->
                     <div class="reportContentBlock__textColRight">
                         <p>
-                            @Model.IsReportedUrgent()
+                            @Model._reportStringModel.IsReportedUrgent()
                         </p>
                     </div><!-- /.reportContentBlock__textColRight -->
                 </div><!-- /.reportContentBlock__textCols -->
@@ -243,7 +243,7 @@
                     </div><!-- /.reportContentBlock__textColFirst -->
                     <div class="reportContentBlock__textColRight">
                         <p>
-                            @Model.IncidentDateString()
+                            @Model._reportStringModel.IncidentDateString()
                         </p>
                     </div><!-- /.reportContentBlock__textColRight -->
                 </div><!-- /.reportContentBlock__textCols -->
@@ -253,7 +253,7 @@
                     </div><!-- /.reportContentBlock__textColFirst -->
                     <div class="reportContentBlock__textColRight">
                         <p>
-                            @Model.IsOngoing()
+                            @Model._reportStringModel.IsOngoing()
                         </p>
                         <p>@Model._report.report_frequency_text</p>
                     </div><!-- /.reportContentBlock__textColRight -->
@@ -264,7 +264,7 @@
                     </div><!-- /.reportContentBlock__textColFirst -->
                     <div class="reportContentBlock__textColRight">
                         <p>
-                            @Model.HasInjuryDamage()
+                            @Model._reportStringModel.HasInjuryDamage()
                         </p>
                         <p>@Model._report.injury_damage</p>
                     </div><!-- /.reportContentBlock__textColRight -->

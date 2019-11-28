@@ -15,7 +15,7 @@
   IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
   var user_id = (int)ViewBag.user_id;
   var cm = new CompanyModel();
-  string agentName = Model.GetAgentName();
+  string agentName = Model._reportStringModel.GetAgentName();
 
   var userDetails = new List<string>();
   if (Model._report.incident_anonymity_id == 3)
@@ -37,9 +37,9 @@
 
   var NonInvolvedMediatorsAll = Model.NonInvolvedMediatorsAll();
   var ReportOwnersUserList = Model.ReportOwnersUserList();
-  var InvestigationMethodology = Model.InvestigationMethodology();
-  var FactsEstablished = Model.FactsEstablished();
-  var ExecutiveSummary = Model.ExecutiveSummary();
+  var InvestigationMethodology = Model._reportStringModel.InvestigationMethodology();
+  var FactsEstablished = Model._reportStringModel.FactsEstablished();
+  var ExecutiveSummary = Model._reportStringModel.ExecutiveSummary();
   var Last_investigation_case_closure_reason = Model.Last_investigation_case_closure_reason();
 
   var status = Model._last_investigation_status();
@@ -278,7 +278,7 @@
                         INVESTIGATION METHODOLOGY
                     </div><!-- /.reportContentBlock__title -->
                     <div class="reportContentBlock__wideText">
-                        @Html.Raw(Model.InvestigationMethodology().Replace("\n", "<br/>"))
+                        @Html.Raw(Model._reportStringModel.InvestigationMethodology().Replace("\n", "<br/>"))
                     </div><!-- /.reportContentBlock__wideText -->
                 </div><!-- /.reportContentBlock clearfix -->
             }

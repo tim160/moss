@@ -27,6 +27,7 @@ namespace EC.Models
   {
     GlobalFunctions glb = new GlobalFunctions();
     UserItems ui = new UserItems();
+    public EmailNotificationModel emailNotificationModel = new EmailNotificationModel();
 
     #region Properties
     public int ID
@@ -611,29 +612,7 @@ namespace EC.Models
 
       return tasks_quantity;
     }
-
-
-    /// <summary>
-    ///  https://projects.invisionapp.com/d/#/console/2453713/75211865/preview
-    /// </summary>
-    /// <param name="task_status">0 - all tasks, 1 - active, 2 - competed</param>
-    /// <returns></returns>
-    public int UnreadActivityUserTaskQuantity(int? report_id, bool is_user_only)
-    {
-      int quantity = 0;
-      List<task> all_tasks = UserTasks(0, report_id, is_user_only);
-      TaskExtended _extended;
-      foreach (task _task in all_tasks)
-      {
-        _extended = new TaskExtended(_task.id, ID);
-
-        // is unread or has new actvity
-        if ((!_extended.IsRead()) || (_extended.HasNewActivity()))
-          quantity++;
-      }
-      return quantity;
-    }
-
+ 
 
     /// <summary>
     /// 
@@ -1127,66 +1106,7 @@ namespace EC.Models
       return vm;
 
     }
-    public UsersUnreadReportsNumberViewModel GetUserUnreadCasesNumbers(UsersReportIDsViewModel vmReportIds)
-    {
-      UsersUnreadReportsNumberViewModel vm = new UsersUnreadReportsNumberViewModel();
 
-      vm.unread_active_reports = 0;
-      vm.unread_spam_reports = 0;
-
-      vm.unread_pending_reports = 0;
-      vm.unread_completed_reports = 0;
-      vm.unread_closed_reports = 0;
-
-      if (vmReportIds != null && vmReportIds.all_active_report_ids != null)
-      {
-        var active = vmReportIds.all_active_report_ids.Where(item => !(
-         db.report.Where(t => (t.id == item &&
-         db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date > t.last_update_dt).Any()
-         )).Any())).Count();
-
-        vm.unread_active_reports = active;
-      }
-
-      if (vmReportIds != null && vmReportIds.all_spam_report_ids != null)
-      {
-        var spam = vmReportIds.all_spam_report_ids.Where(item => !(
-            db.report.Where(t => (t.id == item &&
-            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date > t.last_update_dt).Any()
-            )).Any())).Count();
-        vm.unread_spam_reports = spam;
-      }
-
-      if (vmReportIds != null && vmReportIds.all_pending_report_ids != null)
-      {
-        var newreport = vmReportIds.all_pending_report_ids.Where(item => !(
-            db.report.Where(t => (t.id == item &&
-            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date > t.last_update_dt).Any()
-            )).Any())).Count();
-        vm.unread_pending_reports = newreport;
-      }
-
-      if (vmReportIds != null && vmReportIds.all_completed_report_ids != null)
-      {
-        var completed = vmReportIds.all_completed_report_ids.Where(item => !(
-            db.report.Where(t => (t.id == item &&
-            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date > t.last_update_dt).Any()
-            )).Any())).Count();
-        vm.unread_completed_reports = completed;
-      }
-      if (vmReportIds != null && vmReportIds.all_closed_report_ids != null)
-      {
-
-        var closed = vmReportIds.all_closed_report_ids.Where(item => !(
-            db.report.Where(t => (t.id == item &&
-            db.report_user_read.Where(rl => rl.report_id == t.id && rl.user_id == ID && rl.read_date > t.last_update_dt).Any()
-            )).Any()
-            )).Count();
-        vm.unread_closed_reports = closed;
-      }
-      return vm;
-
-    }
 
     public List<CasePreviewViewModel> ReportPreviews(List<int> report_ids, string investigation_status, int delay_allowed, bool is_cc)
     {
@@ -1220,11 +1140,11 @@ namespace EC.Models
                 cc_is_life_threating = rm._report.cc_is_life_threating,
                 total_days = Math.Floor((DateTime.Now.Date - rm._report.reported_dt.Date).TotalDays),
 
-                location = rm.LocationString(),
-                case_secondary_types = rm.SecondaryTypeString(),
+                location = rm._reportStringModel.LocationString(),
+                case_secondary_types = rm._reportStringModel.SecondaryTypeString(),
                 days_left = rm.GetThisStepDaysLeft(delay_allowed),
 
-                reported_dt = rm.ReportedDateString(),
+                reported_dt = rm._reportStringModel.ReportedDateString(),
                         //  case_dt = rm.IncidentDateString(),
 
                         tasks_number = rm.ReportTasksCount(0).ToString(),
@@ -1243,7 +1163,7 @@ namespace EC.Models
                 case_color_code = (rm._report.report_color_id == 0) ? colors.Where(item => item.id == 1).FirstOrDefault().color_code : colors.Where(item => item.id == rm._report.report_color_id).FirstOrDefault().color_code,
                 severity_s = !rm._report.severity_id.HasValue ? LocalizationGetter.GetString("Unspecified").ToUpper() : severities.FirstOrDefault(z => z.id == rm._report.severity_id).severity_en,
                 severity_id = !rm._report.severity_id.HasValue ? 0 : rm._report.severity_id.Value,
-                under_status_message = rm.DaysLeftClosedSpamMessage(delay_allowed),
+                under_status_message = rm._reportStringModel.DaysLeftClosedSpamMessage(delay_allowed),
                 last_update_dt = m_DateTimeHelper.ConvertDateToShortString(rm._report.last_update_dt),
                 agentName = rm._report.agent_id > 0 ? db.user.Find(rm._report.agent_id).first_nm : ""
               };
