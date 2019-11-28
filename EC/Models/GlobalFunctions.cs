@@ -140,29 +140,6 @@ public class GlobalFunctions
         }
         return _photo_path;
     }
-
-    public bool SaveEmailBeforeSend(int user_id_from, int user_id_to, int company_id, string to, string from, string cc, string subject, string msg, bool send, int email_type)
-    {
-        var email = new email
-        {
-            To = to,
-            From = from,
-            cc = cc,
-            Title = subject,
-            Body = msg,
-            EmailType = email_type,
-            is_sent = false,
-            user_id_from = user_id_from,
-            user_id_to = user_id_to,
-            company_id = company_id,
-            created_dt = DateTime.Now,
-            isSSL = false
-        };
-        db.email.Add(email);
-        db.SaveChanges();
-
-        return true;
-    }
-
+   
  
 }

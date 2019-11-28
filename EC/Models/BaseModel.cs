@@ -16,5 +16,6 @@ namespace EC.Models
         protected IEmailAddressHelper m_EmailHelper = new EmailAddressHelper();
         public ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         protected IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
+        public EmailNotificationModel emailNotificationModel = new EmailNotificationModel();
     }
 }

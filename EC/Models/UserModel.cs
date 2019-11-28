@@ -178,7 +178,7 @@ namespace EC.Models
             userWhoHasNoAccess.last_tried_login_dt = DateTime.Now;
             db.SaveChanges();
             loginUser.ErrorMessage = "AccountLocked";
-            glb.SaveEmailBeforeSend(0, 0, 0, System.Configuration.ConfigurationManager.AppSettings["BCCEmail"],
+            emailNotificationModel.SaveEmailBeforeSend(0, 0, 0, System.Configuration.ConfigurationManager.AppSettings["BCCEmail"],
                 System.Configuration.ConfigurationManager.AppSettings["emailFrom"], is_cc.ToString(), "failed login attempts",
                 "user loginName = " + userWhoHasNoAccess.login_nm + " had failed login attempts in a row", false, 0);
             return loginUser;
@@ -910,7 +910,7 @@ namespace EC.Models
           EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
           EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, HttpContext.Current.Request.Url.AbsoluteUri.ToLower());
           eb.NewTask(um._user.first_nm, um._user.last_nm, _rm._report.display_name);
-          glb.SaveEmailBeforeSend(mediator_id, um._user.id, um._user.company_id, um._user.email.Trim(), ConfigurationManager.AppSettings["emailFrom"], "",
+          emailNotificationModel.SaveEmailBeforeSend(mediator_id, um._user.id, um._user.company_id, um._user.email.Trim(), ConfigurationManager.AppSettings["emailFrom"], "",
             LocalizationGetter.GetString("Email_Title_NewTask", is_cc), eb.Body, false, 6);
         }
 
@@ -1034,7 +1034,7 @@ namespace EC.Models
           EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
           EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, HttpContext.Current.Request.Url.AbsoluteUri.ToLower());
           eb.NewTask(um._user.first_nm, um._user.last_nm, _rm._report.display_name);
-          glb.SaveEmailBeforeSend(reporter_user, um._user.id, um._user.company_id, um._user.email.Trim(), ConfigurationManager.AppSettings["emailFrom"], "",
+          emailNotificationModel.SaveEmailBeforeSend(reporter_user, um._user.id, um._user.company_id, um._user.email.Trim(), ConfigurationManager.AppSettings["emailFrom"], "",
               LocalizationGetter.GetString("Email_Title_NewTask", is_cc), eb.Body, false, 6);
         }
 

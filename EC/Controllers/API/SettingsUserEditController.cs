@@ -168,7 +168,7 @@ namespace EC.Controllers.API
                     $"{user.login_nm}",
                     $"{password}");
                 string body = eb.Body;
-                glb.SaveEmailBeforeSend(sessionUser.id, user.id, sessionUser.company_id, model.email, System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", "You have been added as a Case Administrator", body, false, 0);
+                emailNotificationModel.SaveEmailBeforeSend(sessionUser.id, user.id, sessionUser.company_id, model.email, System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", "You have been added as a Case Administrator", body, false, 0);
 
             }
             DB.SaveChanges();

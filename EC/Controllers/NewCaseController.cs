@@ -747,12 +747,12 @@ namespace EC.Controllers
           List<user> mediators_to_update = rm.MediatorsWhoHasAccessToReport().Where(t => t.id != sign_off_mediator_id).ToList();
           foreach (var mediators in mediators_to_update)
           {
-            glb.SaveEmailBeforeSend(user.id, mediators.id, user.company_id, mediators.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 10);
+            emailNotificationModel.SaveEmailBeforeSend(user.id, mediators.id, user.company_id, mediators.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 10);
           }
  
           eb.CaseCloseApprove(rm._report.display_name);
           // send to actual sign-off user
-          glb.SaveEmailBeforeSend(user.id, um_temp.id, user.company_id, um_temp.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 9);
+          emailNotificationModel.SaveEmailBeforeSend(user.id, um_temp.id, user.company_id, um_temp.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_NextStep", is_cc), eb.Body, false, 9);
 
         }
         else if (promotion_value == (int)CaseStatusConstants.CaseStatusValues.Investigation && old_status == (int)CaseStatusConstants.CaseStatusValues.Closed)
@@ -779,7 +779,7 @@ namespace EC.Controllers
 
           foreach (var mediators in mediators_to_update)
           {
-            glb.SaveEmailBeforeSend(user.id, mediators.id, user.company_id, mediators.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_CaseClosureReport", is_cc), eb.Body, false, 73);
+            emailNotificationModel.SaveEmailBeforeSend(user.id, mediators.id, user.company_id, mediators.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_CaseClosureReport", is_cc), eb.Body, false, 73);
           }
 
           

@@ -165,7 +165,7 @@ namespace EC.Controllers.API
                     EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, HttpContext.Current.Request.Url.AbsoluteUri.ToLower());
                     eb.MediatorAssigned(_um._user.first_nm, _um._user.last_nm, user.first_nm, user.last_nm, _rm._report.display_name);
                     string body = eb.Body;
-                    glb.SaveEmailBeforeSend(user.id, _um._user.id, _um._user.company_id, _um._user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_MediatorAssigned", is_cc), body, false, 40);
+                    emailNotificationModel.SaveEmailBeforeSend(user.id, _um._user.id, _um._user.company_id, _um._user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_MediatorAssigned", is_cc), body, false, 40);
                     //em.Send(to, cc, LocalizationGetter.GetString("Email_Title_MediatorAssigned", is_cc), body, true);
                 }
             }
@@ -220,7 +220,7 @@ namespace EC.Controllers.API
                 EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, HttpContext.Current.Request.Url.AbsoluteUri.ToLower());
                 eb.SetCaseOwner(_um._user.first_nm, _um._user.last_nm, user.first_nm, user.last_nm, _rm._report.display_name);
                 string body = eb.Body;
-                glb.SaveEmailBeforeSend(user.id, _um._user.id, _um._user.company_id, _um._user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_SetCaseOwner", is_cc), body, false, 65);
+                emailNotificationModel.SaveEmailBeforeSend(user.id, _um._user.id, _um._user.company_id, _um._user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", LocalizationGetter.GetString("Email_Title_SetCaseOwner", is_cc), body, false, 65);
 
                 //em.Send(to, cc, LocalizationGetter.GetString("Email_Title_SetCaseOwner", is_cc), body, true);
             }

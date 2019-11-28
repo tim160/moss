@@ -238,7 +238,7 @@ namespace EC.Controllers
                     }
 
                     body = eb.Body;
-                    glb.SaveEmailBeforeSend(0, _user.id, companyModel._company.id, _user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", title, body, false, email_type);
+                    emailNotificationModel.SaveEmailBeforeSend(0, _user.id, companyModel._company.id, _user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", title, body, false, email_type);
                 }
                 #endregion
             }
@@ -343,7 +343,7 @@ namespace EC.Controllers
                     Business.Actions.Email.EmailBody eb = new Business.Actions.Email.EmailBody(1, 1, Request.Url.AbsoluteUri.ToLower());
 
                     eb.ReporterNewCase(user.login_nm, user.password, reportModel._report.display_name);
-                    glb.SaveEmailBeforeSend(0, user.id, user.company_id, user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"],
+                    emailNotificationModel.SaveEmailBeforeSend(0, user.id, user.company_id, user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"],
                         "", LocalizationGetter.GetString("Email_Title_NewCase", is_cc), eb.Body, false, 30);
                 }
             } else
