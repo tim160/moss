@@ -659,14 +659,6 @@
     //});
 
 
-    $('.newMessageBtn span').click(function () {
-        if (($("#first_nm").val().trim.length > 0) && ($("#last_nm").val().trim.length > 0) && ($("#title_ds").val().trim.length > 0) && ($("#email").val().trim.length > 0)) {
-            $('.newMessageBtn input').click();
-        }
-    });
-    //RadioButton
-    //pod katei vse knopki najimautsya. Mne nado, chtobi eta ne najimalas nikogda
-
     var levelId = $("#levelId").val();
 
     if (levelId == 5) {
