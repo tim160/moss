@@ -3,25 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using EC.Constants;
+using EC.Models.Database;
 
 namespace EC.Models.ViewModels
 {
     public class UserLevelViewModel
     {
-        public UserStatusButtonsStatus GetStatusButtonsState(int user_id)
+        public UserStatusViewModel GetStatusButtonsState(int user_id, user sessionUser)
         {
-            UserStatusButtonsStatus buttons_status = new UserStatusButtonsStatus();
+            UserStatusViewModel buttons_status = new UserStatusViewModel();
 
-            //user session_user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
-
-            //if (session_user == null || session_user.id == 0)
-
-            //    return buttons_status;
-
-            if (user_id <= 0)
-            {
+            if (sessionUser == null || sessionUser.id == 0)
                 return buttons_status;
-            }
 
             UserModel um = new UserModel(user_id);
 
@@ -85,12 +78,5 @@ namespace EC.Models.ViewModels
             }
             return buttons_status;
         }
-    }
-    public class UserStatusButtonsStatus
-    {
-        public int active_button_status = 0;
-        public int pending_button_status = 0;
-        public int inactive_button_status = 0;
-        public int current_user_status = -1; // ili inactive?
     }
 }

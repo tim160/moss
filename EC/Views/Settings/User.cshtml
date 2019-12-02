@@ -232,3 +232,38 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            method: "GET",
+            url: "/api/UserStatusButtons?user_id=" + $("#MediatorId").val(),
+        }).done(function (data) {
+            console.log(data);
+            var data = JSON.parse(data);
+            debugger;
+            if ("undefined" === typeof (data["active_button_status"])) {
+                // The property DOESN'T exists
+            } else {
+                // The property exists
+                $("#oneIncident");
+            }
+            if ("undefined" === typeof (data["pending_button_status"])) {
+                // The property DOESN'T exists
+            } else {
+                // The property exists
+                twoIncident
+                $("#oneIncident");
+            }
+            if ("undefined" === typeof (data["inactive_button_status"])) {
+                // The property DOESN'T exists
+            } else {
+                // The property exists
+                threeIncident
+            }
+        //current_user_status = -1; // ili inactive?
+
+        }).fail(function (error) {
+            console.log(error);
+        });
+    });
+</script>
