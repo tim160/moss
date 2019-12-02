@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using EC.Constants;
 
 namespace EC.Models.ViewModels
 {
     public class UserLevelViewModel
     {
-        public const int INACTIVE = 1;
-        public const int ACTIVE = 2;
-        public const int PENDING = 3;
-
         public UserStatusButtonsStatus GetStatusButtonsState(int user_id)
         {
             UserStatusButtonsStatus buttons_status = new UserStatusButtonsStatus();
@@ -36,7 +33,7 @@ namespace EC.Models.ViewModels
 
             {
 
-                case INACTIVE:
+                case ECStatusConstants.Inactive_Value:
 
                     buttons_status.active_button_status = 0;
 
@@ -54,7 +51,7 @@ namespace EC.Models.ViewModels
 
                     break;
 
-                case ACTIVE:
+                case ECStatusConstants.Active_Value:
 
                     buttons_status.active_button_status = 1; //selected in line current_user_status
 
@@ -64,7 +61,7 @@ namespace EC.Models.ViewModels
 
                     break;
 
-                case PENDING:
+                case ECStatusConstants.Pending_Value:
 
                     buttons_status.active_button_status = 0;
 
