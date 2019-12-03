@@ -498,4 +498,7 @@
   <data name="LoginEmailSent" xml:space="preserve">
     <value>Correo electrónico con inicio de sesión enviado.</value>
   </data>
+  <data name="ReadAndAgreeCompanyPolicies" xml:space="preserve">
+    <value>Ya he leido y estoy de acuerdo con las políticas de la compañía</value>
+  </data>
 </root>
