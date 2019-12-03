@@ -2741,4 +2741,7 @@
   <data name="AllMembers" xml:space="preserve">
     <value>All Members</value>
   </data>
+  <data name="ReadAndAgreeCompanyPolicies" xml:space="preserve">
+    <value>I have read and agree with the company policies applicable to my employment, provided at the links below and which were previously provided to me in via hard copy.</value>
+  </data>
 </root>

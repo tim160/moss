@@ -173,7 +173,7 @@ namespace EC.Controllers
                 model.agentId = (int)Session["id_agent"];
             }
             
-            companyModel.ID = model.currentCompanyId;
+            var cm = new CompanyModel(model.currentCompanyId);
             model.Process(Request.Form, Request.Files);
             string password;
 
@@ -184,7 +184,7 @@ namespace EC.Controllers
             submit.result = new ReportModelResult();
             submit.result.StatusCode = currentReport.StatusCode;
             submit.result.ErrorMessage = currentReport.ErrorMessage;
-            ViewBag.companylogo = companyModel._company.path_en;
+            ViewBag.companylogo = cm._company.path_en;
 
 
             if (currentReport.StatusCode == 200)
@@ -238,7 +238,7 @@ namespace EC.Controllers
                     }
 
                     body = eb.Body;
-                    emailNotificationModel.SaveEmailBeforeSend(0, _user.id, companyModel._company.id, _user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", title, body, false, email_type);
+                    emailNotificationModel.SaveEmailBeforeSend(0, _user.id, cm._company.id, _user.email.Trim(), System.Configuration.ConfigurationManager.AppSettings["emailFrom"], "", title, body, false, email_type);
                 }
                 #endregion
             }
@@ -250,7 +250,7 @@ namespace EC.Controllers
                 ViewBag.Email = "";
                 ViewBag.ReportModel = new ReportModel();
                 ViewBag.CaseNumber = 0;
-                ViewBag.company_code = companyModel._company.company_code;
+                ViewBag.company_code = cm._company.company_code;
             }
 
             return View("CaseSubmitted");

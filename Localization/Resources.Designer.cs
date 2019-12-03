@@ -5866,6 +5866,15 @@ namespace EC.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to I have read and agree with the company policies applicable to my employment, provided at the links below and which were previously provided to me in via hard copy..
+        /// </summary>
+        internal static string ReadAndAgreeCompanyPolicies {
+            get {
+                return ResourceManager.GetString("ReadAndAgreeCompanyPolicies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reason for Case Closure.
         /// </summary>
         internal static string ReasonForCaseClosure {
