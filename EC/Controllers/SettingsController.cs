@@ -180,16 +180,9 @@ namespace EC.Controllers
             if (_user == null || _user.id == 0)
                 return RedirectToAction("Login", "Service");
 
-            //UserModel um = new UserModel(_user.id);
-            //ViewBag.um = um;
-            //ViewBag.user_id = _user.id;
             ViewBag.MediatorId = id;
             ViewBag.user_id = _user.id;
 
-            /*if (_user.role_id != 5)
-            {
-                return RedirectToAction("Index", "Settings");
-            }*/
 
             return View();
 

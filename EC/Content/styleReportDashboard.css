@@ -932,6 +932,9 @@ h2.mainTitle {
     margin-left: 3%;
     margin-right: 0px;
 }
+.notAllowed {
+    cursor: not-allowed!important;
+}
 .inputRadio.mediator.active{
     background: #aeb5b7 !important;
 }

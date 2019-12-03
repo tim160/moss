@@ -12,15 +12,22 @@ namespace EC.Models.ViewModels
         public UserStatusViewModel GetStatusButtonsState(int user_id, user sessionUser)
         {
             UserStatusViewModel buttons_status = new UserStatusViewModel();
-
+            UserModel um = null;
             if (sessionUser == null || sessionUser.id == 0)
                 return buttons_status;
+            if (user_id == 0)
+            {
+                buttons_status.current_user_status = 0;
+                um = new UserModel();
+            } else
+            {
+                um = new UserModel(user_id);
 
-            UserModel um = new UserModel(user_id);
+                /// what is the 'selected' button
 
-            /// what is the 'selected' button
+                buttons_status.current_user_status = um._user.status_id;
+            }
 
-            buttons_status.current_user_status = um._user.status_id;
 
             switch (buttons_status.current_user_status)
 
