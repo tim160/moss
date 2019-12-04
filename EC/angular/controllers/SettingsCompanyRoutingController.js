@@ -5,9 +5,9 @@
     angular
         .module('EC')
         .controller('SettingsCompanyRoutingController',
-            ['$scope', '$filter', 'orderByFilter', '$http', 'SettingsCompanyRoutingService', SettingsCompanyRoutingController]);
+            ['$scope', '$filter', 'orderByFilter', '$http', 'SettingsCompanyRoutingService', 'SettingsCompanyRoutingServiceSetClientId', SettingsCompanyRoutingController]);
 
-    function SettingsCompanyRoutingController($scope, $filter, orderByFilter, $http, SettingsCompanyRoutingService) {
+    function SettingsCompanyRoutingController($scope, $filter, orderByFilter, $http, SettingsCompanyRoutingService, SettingsCompanyRoutingServiceSetClientId) {
         $scope.types = [];
         $scope.departments = [];
         $scope.users = [];
@@ -18,7 +18,7 @@
         $scope.uploadLine = 0;
         $scope.locations = [];
         $scope.locationItems = [];
-
+        $scope.RoutingByLocation = false;
         $scope.onShow = function () {
             SettingsCompanyRoutingService.get({}, function (data) {
                 $scope.refresh(data);
@@ -41,9 +41,26 @@
             $scope.usersLocation.splice(0, 0, { id: 0, first_nm: 'Select Case Administrator', last_nm: '' });
             $scope.locations = data.locations;
             $scope.locationItems = data.locationItems;
+            $scope.userCommpanyClientId = data.userCommpanyClientId;
+            if (data.userCommpanyClientId !== 0 && data.userCommpanyClientId !== 1 && data.userCompanyName != null && data.userCompanyName.length > 0) {
+                if (data.userCommpanyClientId > 0) {
+                    $scope.RoutingByLocation = true;
+                } else if (data.userCommpanyClientId < 0) {
+                    $scope.RoutingByLocation = false;
+                }
+
+                $scope.userCompanyName = data.userCompanyName;
+            }
         };
 
         $scope.onShow();
+        $scope.makeClientDisabled = function () {
+            $scope.userCommpanyClientId = -1 * $scope.userCommpanyClientId;
+            console.log($scope.userCommpanyClientId);
+            SettingsCompanyRoutingServiceSetClientId.post({ newClientId: $scope.userCommpanyClientId }, function (data) {
+                console.log(data);
+            });
+        };
 
         $scope.delete = function (id) {
             SettingsCompanyRoutingService.delete({ DeleteId: id }, function (data) {
@@ -88,7 +105,7 @@
                 transformRequest: angular.identity //also important
             }).then(function (data) {
                 $scope.refresh(data.data);
-            }).catch(function(){
+            }).catch(function () {
             });
         };
 

@@ -10,6 +10,7 @@
             get: { method: 'GET', params: {}, isArray: false },
             post: { method: 'POST', params: {}, isArray: false },
             delete: { method: 'POST', params: {}, isArray: false },
+            put: { method: 'PUT', params: {}, isArray: false },
         });
     };
 })();

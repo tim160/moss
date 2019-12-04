@@ -17,8 +17,8 @@
     angular.module('EC').config(['$locationProvider',
         function () {
         }])
-    .run(function () {
-    });
+        .run(function () {
+        });
 
     angular.module('EC').filter('getBy', function () {
         return function (arr, prop, val, valprop, array) {
@@ -78,6 +78,84 @@
         };
     });
 
+    angular.module('EC').directive('checkFileSize', ['uploadImage', function (uploadImage) {
+        return {
+            link: function (scope, elem, attr, ctrl) {
+                function bindEvent(element, type, handler) {
+                    if (element.addEventListener) {
+                        element.addEventListener(type, handler, false);
+                    } else {
+                        element.attachEvent('on' + type, handler);
+                    }
+                }
+
+                bindEvent(elem[0], 'change', function (event) {
+                    Array.from(this.files).forEach(function(file) {
+                        var fsizemb = file.size;
+                        fsizemb = fsizemb / 1024;
+                        fsizemb = fsizemb / 1024;
+                        fsizemb = fsizemb.toFixed(3);
+                        if (fsizemb > 4) {
+                            angular.element('#openModalForFileSize').click();
+                        } else {
+                            switch (event.currentTarget.getAttribute('data-id')) {
+                                case 'attachments':
+                                    angular.element('#formDrop').submit();
+                                    break;
+                                case 'newReport':
+                                    angular.element('.attach').append("<table class='attachedFilesTitle' style='color: #3c3e3f;font-size: 14px;'><tr><th><img src=/Content/Icons/generic-file.png></th> <th>" + file.name + "</th><th><div class='delete deleteAttachmentPosition'></div></tr></table>");
+                                    break;
+                                case 'settingsIndex':
+                                    var from = angular.element('#urlAjaxUploadFiles').attr('from');
+
+                                    var filesInput = angular.element('#_file');
+
+                                    if (filesInput[0].files.length > 0) {
+                                        var fd = new FormData();
+                                        if (from !== '') {
+                                            fd.append('from', from);
+                                        }
+
+                                        for (var i = 0; i < filesInput[0].files.length; i++) {
+                                            fd.append('_file', filesInput[0].files[i]);
+                                        }
+                                        var MediatorId = angular.element('#MediatorId').val();
+                                        if (MediatorId > 0) {
+                                            fd.append('MediatorId', MediatorId);
+                                        }
+                                        var analyticsObj = uploadImage.getData(fd);
+                                        analyticsObj.then(function (response) {
+                                            var from = angular.element('#urlAjaxUploadFiles').attr('from');
+                                            if (from === 'User') {
+                                                angular.element('#logoUser').attr('src', response.data + '?' + new Date().getTime());
+                                                angular.element('.userNavigation__logo img').attr('src', response.data);
+                                            } else {
+                                                angular.element('#logoCompany').attr('src', response.data);
+                                                angular.element('.userNavigation__info img').attr('src', response.data);
+
+                                            }
+                                        });
+                                    }
+                                    break;
+                            }
+                        }
+                    });
+                });
+            }
+        };
+    }]);
+
+    angular.module('EC').directive('makeClickHiddenInput', function () {
+        return {
+            restrict: 'A',
+            link: function (scope, element) {
+                element.bind('click', function (e) {
+                    angular.element('#_file').trigger('click');
+                });
+            }
+        };
+    });
+
     angular.module('EC').directive('dropbox', function () {
         var directive = {};
 
@@ -111,7 +189,7 @@
                     scope.$apply(function () {
                         scope.expanded = false;
                     });
-            });
+                });
             scope.onSelectFunction = function (item) {
                 scope.expanded = false;
                 var getType = {};

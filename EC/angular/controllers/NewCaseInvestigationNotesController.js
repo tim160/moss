@@ -25,7 +25,7 @@
             data.incidentTypeAdd = 0;
             data.mediatorAdd = 0;
             data.departmentAdd = 0;
-
+            console.log(data.report_secondary_type_selected.length);
             for (var i = 0; i < data.report_secondary_type_selected.length; i++) {
                 data.report_secondary_type_selected[i].inv_meth_bf_note = '';
                 data.report_secondary_type_selected[i].inv_meth_ei_note = '';

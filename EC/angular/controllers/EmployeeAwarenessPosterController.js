@@ -20,7 +20,6 @@
         $scope.Process = function () {
             var p = { posterId: $scope.id, type: 1, size: $scope.SelectedSize, logo1: $scope.SelectedLogo };
             EmployeeAwarenessPosterService.post(p, function (data) {
-                //window.location = data.file;
                 $scope.downloadLink = data.file;
                 document.getElementById('downloadA').setAttribute('href', data.file);
                 document.getElementById('downloadA').click();

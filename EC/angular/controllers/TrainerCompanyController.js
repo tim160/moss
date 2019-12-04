@@ -18,19 +18,20 @@
                     center: 'title',
                 },
                 defaultView: 'agendaWeek',
-                //eventClick: function(date, jsEvent, view) {
-                //},
                 agenda: 'H:mm',
                 views: {
                     week: {
-                        timeFormat: 'H:mm' //this will return 23:00 time format
+                        timeFormat: 'H:mm'
                     }
                 },
-                minTime: '06:00:00',
-                maxTime: '18:00:00',
+                height: 'auto',
+                minTime: '07:00:00',
+                maxTime: '19:00:00',
+                scrollTime: '19:00:00',
                 slotDuration: '01:00:00',
                 axisFormat: 'hh:mm a',
                 selectable: true,
+                selectOverlap: true,
                 select: function (start, end) {
                     var dt = new Date();
                     var d3 = moment(dt).add(3, 'days').utc().startOf('day');
@@ -48,12 +49,28 @@
                         TrainerService.addEvent({ DateFrom: start, DateTo: end }, function (data) {
                             $scope.refresh();
                             if (!data.Result) {
-                                alert(data.Message);
+                                if (confirm(data.Message)) {
+                                    if (data.booked_session !== '') {
+                                        TrainerService.deleteCompanyTime({ Hour: data.booked_session.Hour }, function (data) {
+                                            if (data.Result) {
+                                                TrainerService.addEvent({ DateFrom: start, DateTo: end }, function (data) {
+                                                    if (!data.Result) {
+                                                        alert(data.Message);
+                                                    }
+                                                    $scope.refresh();
+                                                });
+                                            } else {
+                                                alert(data.Message);
+                                            }
+                                        });
+                                    }
+
+                                }
                             }
                         });
                     }
                 },
-                viewRender: function(view) {
+                viewRender: function (view) {
                     $scope.period = {
                         start: view.start.toDate(),
                         end: view.end.toDate(),

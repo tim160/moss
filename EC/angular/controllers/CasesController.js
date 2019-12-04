@@ -20,6 +20,7 @@
         $scope.mode = tab === 'new' ? 4 : $scope.mode;
         $scope.mode = tab === 'closed' ? 5 : $scope.mode;
 
+
         var titles = ['', 'Active Cases', 'Cases Awaiting Sign-off', 'Spam Cases', 'New Reports', 'Closed Cases'];
         $('title').html(titles[$scope.mode]);
 
@@ -65,20 +66,21 @@
         $scope.refresh = function (mode, preload) {
             CasesService.get({ ReportFlag: mode, Preload: preload }, function (data) {
                 $('.headerBlockTextRight > span').text(data.Title);
-                for (var i = 0; i < data.Reports.length; i++) {
-                    //var r = $filter('filter')(data.ReportsAdv, { 'id': data.Reports[i].report_id }, true);
-                }
 
                 $scope.reports = data.Reports;
+                $scope.reports.forEach(function (element) {
+                    element.last_update_dt = new Date(element.last_update_dt);
+                });
                 $scope.mode = data.Mode;
                 $scope.counts = data.Counts;
+                $scope.Companies = data.Companies;
             });
         };
         $scope.refresh($scope.mode);
 
         $scope.openCase = function (id) {
             if ($scope.mode === 3 || $scope.mode === 4) {
-                window.location = '/NewReport/' +id;
+                window.location = '/NewReport/' + id;
             } else {
                 window.location = '/newCase/Index/' + id;
             }
@@ -87,18 +89,36 @@
         $scope.sort = function (column) {
             if (column === $scope.sortColumn) {
                 $scope.sortColumnDesc = !$scope.sortColumnDesc;
-        } else {
+            } else {
                 $scope.sortColumn = column;
                 $scope.sortColumnDesc = false;
-        }
-
+            }
             $scope.reports = orderByFilter($scope.reports, $scope.sortColumn, $scope.sortColumnDesc);
+
+        };
+        $scope.ddListClickedCompany = function (company_id, company_name) {
+            if (company_name === undefined) {
+                $scope.displayCompanyName = document.querySelector('#ddListDefaultValue').value;
+                $scope.filterValue = null;
+            } else {
+                $scope.filterValue = company_id;
+                $scope.displayCompanyName = company_name;
+            }
+        };
+        $scope.filterValue = null;
+        $scope.returnListReports = function () {
+            $scope.filterValue = null;
+        };
+        $scope.casesFilterFunction = function (item) {
+            if ($scope.filterValue != null) {
+                return item.company_id === $scope.filterValue;
+            } else {
+                return item;
+            }
         };
 
-        $scope.filterValue = null;
-        $scope.casesFilterFunction = function (item) {
-          //return item.company_id == $scope.filterValue;
-            return null;
-        };
+
+        $scope.showDDMenu = false;
+        $scope.displayCompanyName = document.querySelector('#ddListDefaultValue').value;
     }
 }());

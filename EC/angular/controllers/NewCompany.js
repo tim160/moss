@@ -31,17 +31,9 @@
             SelectedYear: 'yyyy',
             CSV: 0,
         };
-        /*$scope.model.PrimaryLocationUp = 'q';
-        $scope.model.CreditCardNumber = 'q';
-        $scope.model.NameonCard = 'q';
-        $scope.model.ExpiryDate = '01';
-        $scope.model.SelectedYear = '2018';
-        $scope.model.Title = '2018';
-        $scope.model.CompanyName = 'MailTest11';
-        $scope.model.CSV = 123;*/
 
         $scope.years = [];
-        for (var i = new Date().getFullYear() ; i <= 2030; i++) {
+        for (var i = new Date().getFullYear(); i <= 2030; i++) {
             $scope.years.push(i);
         }
 
@@ -83,7 +75,7 @@
                                 contractors_number: $scope.model.NumberOfNonEmployees,
                                 customers_number: $scope.model.NumberOfClients,
                             }
-                        }).done(function (data) {//data from server
+                        }).done(function (data) {
                             if (data !== 'completed') {
                             } else {
                                 window.location.href = '/new/success?show=1';

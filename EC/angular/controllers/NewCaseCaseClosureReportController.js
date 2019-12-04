@@ -8,7 +8,7 @@
             ['$scope', '$filter', 'orderByFilter', '$location', 'NewCaseCaseClosureReportService', NewCaseCaseClosureReportController]);
 
     function NewCaseCaseClosureReportController($scope, $filter, orderByFilter, $location, NewCaseCaseClosureReportService) {
-        $scope.model = { };
+        $scope.model = {};
         $scope.report_id = $filter('parseUrl')($location.$$absUrl, 'report_id');
 
         $scope.refresh = function (data) {

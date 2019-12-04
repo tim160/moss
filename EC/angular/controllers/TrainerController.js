@@ -37,7 +37,7 @@
                 agenda: 'H:mm',
                 views: {
                     week: {
-                        timeFormat: 'H:mm' //this will return 23:00 time format
+                        timeFormat: 'H:mm'
                     }
                 },
                 defaultView: 'agendaWeek',
@@ -46,8 +46,6 @@
                 slotDuration: '01:00:00',
                 axisFormat: 'hh:mm a',
                 selectable: true,
-                //eventClick: function (date, jsEvent, view) {
-                //},
                 select: function (start, end) {
                     TrainerService.addTime({ DateFrom: start, DateTo: end }, function (data) {
                         if (!data.Result) {
