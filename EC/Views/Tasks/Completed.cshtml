@@ -104,7 +104,7 @@
                                     <span class="@_classCircle" style="@_styleCircle"></span>
                                     <span class="taskName @_fontName">
                                         <span class="titleTask @_colorTextBefore">
-                                            @rm._report.display_name - @rm.LocationString()
+                                            @rm._report.display_name - @rm._reportStringModel.LocationString()
                                         </span>
                                         <span class="labelArrow">></span>
                                         <a href="/newCase/Task/@_task.TaskID">
@@ -166,10 +166,10 @@
                             {
                                 <div class="contentBlockTasks">
                                     <div class="contentBlockTask contentMainTask">
-                                        <div class="headerContentTask" style="border-left: 10px solid #@rm.ColorCode(); ">
+                                        <div class="headerContentTask" style="border-left: 10px solid #@rm._reportStringModel.ColorCode(); ">
                                             <div class="blockTitle">
                                                 <span class="taskName">
-                                                    <span class="titleTask">@rm._report.display_name - @rm.LocationString()</span>
+                                                    <span class="titleTask">@rm._report.display_name - @rm._reportStringModel.LocationString()</span>
                                                     <span class="labelArrow">></span>
                                                 </span>
                                             </div>
@@ -197,7 +197,7 @@
 
                                         <div class="contentBlockTask tasksForMain">
                                             <div class="blockTitle">
-                                                <span class="@_classCircle" style="@_styleCircle@rm.ColorCode();"></span>
+                                                <span class="@_classCircle" style="@_styleCircle@rm._reportStringModel.ColorCode();"></span>
                                                 <span class="taskName @_fontName">
                                                     <a href="/newCase/Task/@tsk.TaskID">
                                                         <span class="text @_colorTextAfter">@_tasks.title</span>
