@@ -4,30 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <title>@ViewBag.Title - Employee Confidential</title>
-    <link rel="stylesheet" type="text/css" href="~/Content/Site.css">
-    <script>
-        var head = document.getElementsByTagName('head')[0];
-
-        function checkBrowserForAngualr() {
-            var isIE = false || !!document.documentMode;
-            var isEdge = !isIE && !!window.StyleMedia;
-            if (isIE || isEdge) {
-                return false;
-            } else {
-                return true;
-            }
-        }
-        function loadAngular() {
-            var js = document.createElement("script");
-            js.type = "text/javascript";
-            js.src = '/Libs/angular/angular.min.js';
-            head.appendChild(js);
-        }
-        if (checkBrowserForAngualr()) {
-            console.log('try load angular');
-            loadAngular();
-        }
-    </script>
+    <link rel="stylesheet" type="text/css" href="~/Content/Site.css">s
     <script src="~/Scripts/lib/jquery.min.js"></script>
     @RenderSection("pageStyles", required: false)
     <!--<link rel="stylesheet" type="text/css" href="~/Content/main.min.css" />-->
@@ -43,42 +20,16 @@
         ga('send', 'pageview');
 
     </script>
-
-    <script>
-        if (checkBrowserForAngualr()) {
-            var array = [
-                '/Libs/angular-http/angular-http.js',
-                '/Libs/angular-resource/angular-resource.min.js',
-                '/Libs/angular-animate/angular-animate.min.js',
-                '/Libs/angular-sanitize/angular-sanitize.min.js',
-                '/Libs/angular-nvd3/dist/angular-nvd3.min.js',
-                '/Libs/ng-file-upload/ng-file-upload.min.js',
-                '/Libs/angular-ui-calendar/src/calendar.js'
-            ];
-            function loadOther() {
-                try {
-                    array.forEach(function (element) {
-                        var js = document.createElement("script");
-                        js.type = "text/javascript";
-                        js.src = element;
-                        head.appendChild(js);
-                    });
-                } catch (error) {
-                    setTimeout(2000);
-                }
-            }
-            if (typeof angular !== 'undefined') {
-                loadOther();
-            } else {
-                setTimeout(function () {
-                    if (typeof angular !== 'undefined') {
-                        loadOther();
-                    }
-                }, 4000);
-                
-            }
-        }
-    </script>
+    @if (ViewBag.displayAngular)
+    {
+        <script src="~/Libs/angular/angular.js"></script>
+        <script src="~/Libs/angular-http/angular-http.js"></script>
+        <script src="~/Libs/angular-resource/angular-resource.min.js"></script>
+        <script src="~/Libs/angular-animate/angular-animate.min.js"></script>
+        <script src="~/Libs/angular-sanitize/angular-sanitize.min.js"></script>
+        <script src="~/Libs/ng-file-upload/ng-file-upload.min.js"></script>
+        <script type="text/javascript" src="~/Libs/angular-ui-calendar/src/calendar.js"></script>
+    }
 </head>
 <body ng-app="EC">
 <div class="fullContainer">

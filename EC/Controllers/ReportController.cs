@@ -38,7 +38,14 @@ namespace EC.Controllers
             ///     userModel = new UserModel();
             ////   companyModel = new CompanyModel();
             ModelState.Clear();
-
+            if (Request.Browser.Type.ToUpper().Contains("IE"))
+            {
+                ViewBag.displayAngular = false;
+            }
+            else
+            {
+                ViewBag.displayAngular = true;
+            }
             int id = 0;
             if (companyCode != null)
             {
@@ -172,7 +179,15 @@ namespace EC.Controllers
             {
                 model.agentId = (int)Session["id_agent"];
             }
-            
+            if (Request.Browser.Type.ToUpper().Contains("IE"))
+            {
+                ViewBag.displayAngular = false;
+            }
+            else
+            {
+                ViewBag.displayAngular = true;
+            }
+
             var cm = new CompanyModel(model.currentCompanyId);
             model.Process(Request.Form, Request.Files);
             string password;

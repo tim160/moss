@@ -80,6 +80,15 @@ namespace EC.Controllers
             if (!string.IsNullOrEmpty(code))
                 _code = code;
 
+            if (Request.Browser.Type.ToUpper().Contains("IE"))
+            {
+                ViewBag.displayAngular = false;
+            }
+            else
+            {
+                ViewBag.displayAngular = true;
+            }
+
             ViewBag.code = _code;
             ViewBag.id = id;
             #region EC-CC Viewbag
@@ -114,7 +123,14 @@ namespace EC.Controllers
             if (is_cc) cc_ext = "_cc";
             ViewBag.cc_extension = cc_ext;
             #endregion
-
+            if (Request.Browser.Type.ToUpper().Contains("IE"))
+            {
+                ViewBag.displayAngular = false;
+            }
+            else
+            {
+                ViewBag.displayAngular = true;
+            }
 
             if (!string.IsNullOrWhiteSpace(id))
             {
@@ -142,7 +158,14 @@ namespace EC.Controllers
             if (is_cc) cc_ext = "_cc";
             ViewBag.cc_extension = cc_ext;
             #endregion
-
+            if (Request.Browser.Type.ToUpper().Contains("IE"))
+            {
+                ViewBag.displayAngular = false;
+            }
+            else
+            {
+                ViewBag.displayAngular = true;
+            }
             int _show = 0;
             if (!string.IsNullOrEmpty(show))
             {
