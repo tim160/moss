@@ -3,13 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-    @*<link href="~/Content/fonts.css" rel="stylesheet" type="text/css">*@
     <title>@ViewBag.Title - Employee Confidential</title>
     <link rel="stylesheet" type="text/css" href="~/Content/Site.css">
-    @*<link rel="stylesheet" type="text/css" href="~/Content/bStart">
-        <link rel="stylesheet" type="text/css" href="~/Content/aStart.css">    ---*@
+    <script>
+        var head = document.getElementsByTagName('head')[0];
+
+        function checkBrowserForAngualr() {
+            var isIE = false || !!document.documentMode;
+            var isEdge = !isIE && !!window.StyleMedia;
+            if (isIE || isEdge) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+        function loadAngular() {
+            var js = document.createElement("script");
+            js.type = "text/javascript";
+            js.src = '/Libs/angular/angular.min.js';
+            head.appendChild(js);
+        }
+        if (checkBrowserForAngualr()) {
+            console.log('try load angular');
+            loadAngular();
+        }
+    </script>
     <script src="~/Scripts/lib/jquery.min.js"></script>
-    @*   @Styles.Render("~/Content/Styles")*@
     @RenderSection("pageStyles", required: false)
     <!--<link rel="stylesheet" type="text/css" href="~/Content/main.min.css" />-->
     <script>
@@ -26,17 +45,8 @@
     </script>
 
     <script>
-        // Internet Explorer 6-11
-        var isIE = false || !!document.documentMode;
-        // Edge 20+
-        var isEdge = !isIE && !!window.StyleMedia;
-        var head = document.getElementsByTagName('head')[0];
-        if (isIE || isEdge) {
-            //js.src = "edge.js";
-        }
-        else {
+        if (checkBrowserForAngualr()) {
             var array = [
-                '/Libs/angular/angular.min.js',
                 '/Libs/angular-http/angular-http.js',
                 '/Libs/angular-resource/angular-resource.min.js',
                 '/Libs/angular-animate/angular-animate.min.js',
@@ -45,14 +55,29 @@
                 '/Libs/ng-file-upload/ng-file-upload.min.js',
                 '/Libs/angular-ui-calendar/src/calendar.js'
             ];
-            array.forEach(function (element) {
-                var js = document.createElement("script");
-                js.type = "text/javascript";
-                js.src = element;
-                head.appendChild(js);
-            });
+            function loadOther() {
+                try {
+                    array.forEach(function (element) {
+                        var js = document.createElement("script");
+                        js.type = "text/javascript";
+                        js.src = element;
+                        head.appendChild(js);
+                    });
+                } catch (error) {
+                    setTimeout(2000);
+                }
+            }
+            if (typeof angular !== 'undefined') {
+                loadOther();
+            } else {
+                setTimeout(function () {
+                    if (typeof angular !== 'undefined') {
+                        loadOther();
+                    }
+                }, 4000);
+                
+            }
         }
-
     </script>
 </head>
 <body ng-app="EC">

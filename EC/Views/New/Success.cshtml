@@ -4,32 +4,32 @@
 @using EC.Common.Util;
 @using EC.Localization;
 @{
-  bool? is_cc = ViewBag.is_cc;
-  if (!is_cc.HasValue)
-  {
-    is_cc = false;
-  }
-  // @Styles.Render("~/Content/Styles");
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
+    // @Styles.Render("~/Content/Styles");
     <link rel="stylesheet" type="text/css" href="/Content/styleReportDashboard.css">
-  GlobalFunctions glb = new GlobalFunctions();
-  ViewBag.Title = "Registration Details";
-  string user_nm = ViewBag.user_nm;
-  string password = ViewBag.password;
-  string company_nm = ViewBag.company_nm;
-  string logo = ViewBag.logo;
-  string code = ViewBag.code;
-  string redirect_string = LocalizationGetter.GetString("ToDashboardUp", is_cc).ToLower();
-  string auth_code = ViewBag.authCode;
-  decimal amount = 0;
-  if (ViewBag.amount != null && ViewBag.amount != "" && ViewBag.amount != "0")
-  {
-    decimal.TryParse(ViewBag.amount, out amount);
-  }
-  if (code.Length > 0)
-  {
-    redirect_string = LocalizationGetter.GetString("Continue", is_cc).ToLower();
-  }
-  Layout = "~/Views/Shared/_Layout.cshtml";
+    GlobalFunctions glb = new GlobalFunctions();
+    ViewBag.Title = "Registration Details";
+    string user_nm = ViewBag.user_nm;
+    string password = ViewBag.password;
+    string company_nm = ViewBag.company_nm;
+    string logo = ViewBag.logo;
+    string code = ViewBag.code;
+    string redirect_string = LocalizationGetter.GetString("ToDashboardUp", is_cc).ToLower();
+    string auth_code = ViewBag.authCode;
+    decimal amount = 0;
+    if (ViewBag.amount != null && ViewBag.amount != "" && ViewBag.amount != "0")
+    {
+        decimal.TryParse(ViewBag.amount, out amount);
+    }
+    if (code.Length > 0)
+    {
+        redirect_string = LocalizationGetter.GetString("Continue", is_cc).ToLower();
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
     <style>
         .fullContainer {
             max-width: none;
@@ -66,19 +66,19 @@
                 {
                     <div class="blockPersonalSettings">
                         <p class="title">@LocalizationGetter.GetString("EasyCodeUp", is_cc)</p>
-                        @Html.TextBox("code", code, new Dictionary<string, object>(){{"readonly", "true"}})
+                        @Html.TextBox("code", code, new Dictionary<string, object>() { { "readonly", "true" } })
                     </div>
                 }
                 <div class="blockPersonalSettings">
                     <p class="title">@LocalizationGetter.GetString("LoginNameUp", is_cc)</p>
-                    @Html.TextBox("user_nm", user_nm, new Dictionary<string, object>(){{"readonly", "true"}})
+                    @Html.TextBox("user_nm", user_nm, new Dictionary<string, object>() { { "readonly", "true" } })
                 </div>
                 <div class="blockPersonalSettings">
                     <p class="title">@LocalizationGetter.GetString("Password", is_cc)</p>
                     @Html.TextBox("password", password, new Dictionary<string, object>() { { "readonly", "true" } })
                 </div>
-                @if(auth_code != "")
-                { 
+                @if (auth_code != "")
+                {
                     <div class="blockPersonalSettings">
                         <p class="title">@LocalizationGetter.GetString("AuthCode", is_cc)</p>
                         @Html.TextBox("auth_code", auth_code, new Dictionary<string, object>() { { "readonly", "true" } })
@@ -95,43 +95,35 @@
                     <div class="title">
                         <p style="padding-left: 38px">
                             @LocalizationGetter.GetString("WillSendLogin")
-                            
+
                         </p>
                     </div>
-               </div>
-                    <div class="blockUpdateProfile">
-                        <div class="updateProfileBtn">
-                            <input type="submit" class="greenButton" value="@redirect_string" />
-                            <span style="display: none;">@redirect_string</span>
-                        </div>
+                </div>
+                <div class="blockUpdateProfile">
+                    <div class="updateProfileBtn">
+                        <input type="submit" class="greenButton" value="@redirect_string" />
+                        <span style="display: none;">@redirect_string</span>
                     </div>
                 </div>
+            </div>
 
         </div>
 
     </div>
     <!--</form>-->
 </div>
-<script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('.blockUpdateProfile, .updateProfileBtn span').click(function (event) {
-            if (event.currentTarget.textContent.trim() == "to dashboard") {
-                window.location.href = "/settings/index?first=1";
-            } else {
-               // window.location.href = "/settings/company?first=1";
-                window.location.href = "/settings/index?first=1";
+@section pageScripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.blockUpdateProfile, .updateProfileBtn span').click(function (event) {
+                if (event.currentTarget.textContent.trim() == "to dashboard") {
+                    window.location.href = "/settings/index?first=1";
+                } else {
+                    window.location.href = "/settings/index?first=1";
 
-            }
-            //if ($("#code").length > 0) {
-            //    window.location.href = "/cases";
-            //} else {
-            //    window.location.href = "/settings/company?first=1";
-            //}
+                }
+            });
         });
+    </script>
+}
 
-        //$('.updateProfileBtn, .updateProfileBtn span').on('click', function () {
-        //});
-    });
-
-</script>
