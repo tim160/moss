@@ -19,6 +19,7 @@ using Rotativa.MVC;
 using System.Threading.Tasks;
 using EC.Models.ViewModels;
 using EC.Models.Culture;
+using EC.Utils;
 
 namespace EC.Controllers
 {
@@ -26,26 +27,15 @@ namespace EC.Controllers
     {
         private readonly CompanyModel companyModel = new CompanyModel();
         private readonly ReportModel reportModel = new ReportModel();
-        //
+
         // GET: /Report/
         [HttpGet]
         public ActionResult New(string companyCode)
         {
-            ///    private readonly UserModel userModel = UserModel.inst;
-            ///    
-
-            ///    reportModel = new ReportModel();
-            ///     userModel = new UserModel();
-            ////   companyModel = new CompanyModel();
             ModelState.Clear();
-            if (Request.Browser.Type.ToUpper().Contains("IE"))
-            {
-                ViewBag.displayAngular = false;
-            }
-            else
-            {
-                ViewBag.displayAngular = true;
-            }
+
+            ViewBag.displayAngular = !CheckBrowser.detectOldIE(Request.Browser.Type);
+
             int id = 0;
             if (companyCode != null)
             {
@@ -55,10 +45,6 @@ namespace EC.Controllers
                 if (id == 0)
                 {
                     return RedirectToAction("Index", "Index");
-                    // zmachit kod v baze ne nashl
-                    ViewBag.currentCompanySubmitted = companyCode;
-                    ViewBag.currentCompany = "";
-                    id = 1;
                 }
             }
             else
@@ -80,7 +66,6 @@ namespace EC.Controllers
                 CompanyModel model = new CompanyModel(id);
                 company currentCompany = model.GetById(id);
                 GetDBEntityModel getDBEntityModel = new GetDBEntityModel();
-                //company currentCompany = CompanyModel.inst.GetById(id);
                 ViewBag.currentCompanyId = currentCompany.id;
 
                 /*caseInformation*/
@@ -89,8 +74,6 @@ namespace EC.Controllers
                 {
                     /*custom types*/
                     ViewBag.secondary_type_mandatory = secondaryMandatoryCulture.GetSecondaryMandCustom();
-                    //List<company_secondary_type> list = reportModel.getCompanySecondaryType(ViewBag.currentCompanyId);
-                    //ViewBag.secondary_type_mandatory = list.Where(t => t.status_id == 2).OrderBy(x => x.secondary_type_en).ToList();
                     ViewBag.CustomSecondaryType = true;
                 }
                 else
@@ -100,10 +83,8 @@ namespace EC.Controllers
                     ViewBag.CustomSecondaryType = false;
                 }
 
-                //ViewBag.currentCompanySubmitted = CompanyModel.inst.GetById(id).company_nm;
                 ViewBag.currentCompanySubmitted = currentCompany.company_nm;
                 ViewBag.currentCompany = currentCompany.company_nm;
-                //ViewBag.country = currentCompany.address.country.country_nm;
                 ViewBag.locations = HtmlDataHelper.MakeSelect(companyModel.Locations(id).Where(t => t.status_id == 2).ToList(), item => new HtmlDataHelper.SelectItem(item.id.ToString(), item.T("location")));
                 ManagamentKnowCulture managamentKnowCulture = new ManagamentKnowCulture(companyModel);
                 ViewBag.managament = managamentKnowCulture.GetManagamentKnowCulture();
@@ -122,7 +103,7 @@ namespace EC.Controllers
                 RoleInReportCulture roleInReportCulture = new RoleInReportCulture(db, is_cc);
                 ViewBag.selectedRoleInReport = roleInReportCulture.getRoleInReportCultureSelect();
 
-                EC.Models.ViewModels.AnonimityCulture viewModelAnonimity = new EC.Models.ViewModels.AnonimityCulture(currentCompany, companyModel);
+                AnonimityCulture viewModelAnonimity = new AnonimityCulture(currentCompany, companyModel);
                 ViewBag.anonimity = viewModelAnonimity.getAnonimityCultrure();
 
                 /*Relationship to company*/
@@ -179,14 +160,7 @@ namespace EC.Controllers
             {
                 model.agentId = (int)Session["id_agent"];
             }
-            if (Request.Browser.Type.ToUpper().Contains("IE"))
-            {
-                ViewBag.displayAngular = false;
-            }
-            else
-            {
-                ViewBag.displayAngular = true;
-            }
+            ViewBag.displayAngular = !CheckBrowser.detectOldIE(Request.Browser.Type);
 
             var cm = new CompanyModel(model.currentCompanyId);
             model.Process(Request.Form, Request.Files);

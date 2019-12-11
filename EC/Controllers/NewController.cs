@@ -80,14 +80,7 @@ namespace EC.Controllers
             if (!string.IsNullOrEmpty(code))
                 _code = code;
 
-            if (Request.Browser.Type.ToUpper().Contains("IE"))
-            {
-                ViewBag.displayAngular = false;
-            }
-            else
-            {
-                ViewBag.displayAngular = true;
-            }
+            ViewBag.displayAngular = !CheckBrowser.detectOldIE(Request.Browser.Type);
 
             ViewBag.code = _code;
             ViewBag.id = id;
@@ -123,14 +116,7 @@ namespace EC.Controllers
             if (is_cc) cc_ext = "_cc";
             ViewBag.cc_extension = cc_ext;
             #endregion
-            if (Request.Browser.Type.ToUpper().Contains("IE"))
-            {
-                ViewBag.displayAngular = false;
-            }
-            else
-            {
-                ViewBag.displayAngular = true;
-            }
+            ViewBag.displayAngular = !CheckBrowser.detectOldIE(Request.Browser.Type);
 
             if (!string.IsNullOrWhiteSpace(id))
             {
