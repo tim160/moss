@@ -6,11 +6,22 @@ using EC.Models.Database;
 using EC.Core.Common;
 using EC.Common.Util;
 using EC.Localization;
+using System.Collections.Specialized;
+using System.Globalization;
+using System.IO;
+using EC.Common.Interfaces;
+using log4net;
+using System.Configuration;
+using System.Data.Entity.Migrations;
+using EC.Constants;
 
 namespace EC.Models.ECModel
 {
     public class TaskExtended : BaseEntity
     {
+        protected IEmailAddressHelper m_EmailHelper = new EmailAddressHelper();
+        public EmailNotificationModel emailNotificationModel = new EmailNotificationModel();
+        public ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         #region Properties
 
         public task _task;
@@ -337,6 +348,190 @@ namespace EC.Models.ECModel
                 file = true;
             }
             fileAttach = list;
+        }
+        public bool CreateNewTask(NameValueCollection form, HttpFileCollectionBase files, bool is_cc, HttpSessionStateBase httpSession)
+        {
+            user reporter_user = (user)httpSession[ECGlobalConstants.CurrentUserMarcker];
+
+            if (reporter_user == null)
+            {
+                return false;
+            }
+            int mediator_id = Convert.ToInt16(form["user_id"]);
+            int report_id = Convert.ToInt16(form["report_id"]);
+            string taskName = form["taskName"];
+            string taskDescription = form["taskDescription"];
+            int assignTo = Convert.ToInt16(form["taskAssignTo"]);
+            DateTime? dueDate = null;
+            try
+            {
+                dueDate = DateTime.ParseExact(form["dueDate"], "MM/dd/yyyy", CultureInfo.InvariantCulture);
+            }
+            catch
+            {
+                dueDate = null;
+            }
+
+            string Root = System.Web.Hosting.HostingEnvironment.MapPath("~/");
+            string UploadedDirectory = "Upload";
+            string UploadTarget = Root + UploadedDirectory + @"\";
+
+            try
+            {
+
+
+                task newTask = new task()
+                {
+                    report_id = report_id,
+                    title = taskName,
+                    description = taskDescription,
+                    assigned_to = assignTo,
+                    is_completed = false,
+                    due_date = dueDate,
+                    created_on = DateTime.Now,
+                    created_by = mediator_id
+                };
+
+                db.task.Add(newTask);
+                db.SaveChanges();
+
+
+                for (var i = 0; i < files.Count; i++)
+                {
+                    HttpPostedFileBase file = files[i];
+                    var fileName = DateTime.Now.Ticks + Path.GetExtension(file.FileName);
+                    string path = @"\" + UploadedDirectory + @"\" + fileName;
+
+                    attachment attach = new attachment()
+                    {
+                        report_id = null,
+                        report_task_id = newTask.id,
+                        status_id = 2,
+                        path_nm = path,
+                        file_nm = file.FileName,
+                        extension_nm = Path.GetExtension(file.FileName),
+                        effective_dt = System.DateTime.Now,
+                        expiry_dt = System.DateTime.Now,
+                        last_update_dt = System.DateTime.Now,
+                        user_id = mediator_id
+                    };
+
+                    file.SaveAs(UploadTarget + fileName);
+                    db.attachment.Add(attach);
+                    db.SaveChanges();
+
+                }
+
+                glb.UpdateReportLog(mediator_id, 10, report_id, taskName, null, "");
+                glb.UpdateReportLog(mediator_id, 12, report_id, taskName, null, "");
+
+                #region New Task - Email to Asignee
+                UserModel um = new UserModel(assignTo);
+                ReportModel _rm = new ReportModel(report_id);
+
+                if ((um._user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(um._user.email.Trim()))
+                {
+                    EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
+                    EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, HttpContext.Current.Request.Url.AbsoluteUri.ToLower());
+                    eb.NewTask(um._user.first_nm, um._user.last_nm, _rm._report.display_name);
+                    emailNotificationModel.SaveEmailBeforeSend(mediator_id, um._user.id, um._user.company_id, um._user.email.Trim(), ConfigurationManager.AppSettings["emailFrom"], "",
+                      LocalizationGetter.GetString("Email_Title_NewTask", is_cc), eb.Body, false, 6);
+                }
+
+                #endregion
+
+                return true;
+            }
+            catch (System.Data.DataException ex)
+            {
+                logger.Error(ex.ToString());
+                Console.WriteLine("Task/Attachments didn't add");
+                Console.WriteLine(ex.Data);
+                return false;
+            }
+        }
+
+        public bool CloseTask(int task_id, int mediator_id, HttpSessionStateBase httpSession)
+        {
+            user reporter_user = (user)httpSession[ECGlobalConstants.CurrentUserMarcker];
+
+            if (reporter_user == null)
+            {
+                return false;
+            }
+            try
+            {
+                task completedTask = db.task.Where(item => (item.id == task_id)).FirstOrDefault();
+
+                completedTask.is_completed = true;
+                completedTask.completed_by = mediator_id;
+                completedTask.completed_on = DateTime.Now;
+
+                db.task.AddOrUpdate(completedTask);
+                db.SaveChanges();
+
+                TaskExtended tsk = new TaskExtended(task_id, mediator_id);
+                glb.UpdateReportLog(mediator_id, 11, tsk.TaskReportID, tsk._task.title, null, "");
+
+
+                return true;
+            }
+            catch (System.Data.DataException ex)
+            {
+                logger.Error(ex.ToString());
+                Console.WriteLine("Task wasn't close");
+                Console.WriteLine(ex.Data);
+                return false;
+            }
+        }
+
+        public bool ReassignTask(int task_id, int mediator_id, bool is_cc, HttpSessionStateBase httpSession)
+        {
+            try
+            {
+                user reporter_user = (user)httpSession[ECGlobalConstants.CurrentUserMarcker];
+
+                if (reporter_user == null)
+                {
+                    return false;
+                }
+
+
+                task currentTask = new task();
+
+                currentTask = db.task.Where(item => (item.id == task_id)).FirstOrDefault();
+                currentTask.assigned_to = mediator_id;
+                db.task.AddOrUpdate(currentTask);
+                db.SaveChanges();
+
+
+                TaskExtended tsk = new TaskExtended(task_id, mediator_id);
+                glb.UpdateReportLog(mediator_id, 12, tsk.TaskReportID, tsk._task.title, mediator_id, "");
+
+                #region Task Reassigned - Email to Asignee
+                UserModel um = new UserModel(mediator_id);
+                ReportModel _rm = new ReportModel(tsk.TaskReportID);
+
+                if ((um._user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(um._user.email.Trim()))
+                {
+                    EC.Business.Actions.Email.EmailManagement em = new EC.Business.Actions.Email.EmailManagement();
+                    EC.Business.Actions.Email.EmailBody eb = new EC.Business.Actions.Email.EmailBody(1, 1, HttpContext.Current.Request.Url.AbsoluteUri.ToLower());
+                    eb.NewTask(um._user.first_nm, um._user.last_nm, _rm._report.display_name);
+                    emailNotificationModel.SaveEmailBeforeSend(reporter_user.id, um._user.id, um._user.company_id, um._user.email.Trim(), ConfigurationManager.AppSettings["emailFrom"], "",
+                        LocalizationGetter.GetString("Email_Title_NewTask", is_cc), eb.Body, false, 6);
+                }
+
+                #endregion
+
+                return true;
+            }
+            catch (System.Data.DataException ex)
+            {
+                logger.Error(ex.ToString());
+                Console.WriteLine("Task wasn't reassigned");
+                Console.WriteLine(ex.Data);
+                return false;
+            }
         }
 
     }
