@@ -375,7 +375,10 @@ namespace EC.Models.ECModel
             string Root = System.Web.Hosting.HostingEnvironment.MapPath("~/");
             string UploadedDirectory = "Upload";
             string UploadTarget = Root + UploadedDirectory + @"\";
-
+            if (!IsMedaitorHasAccessReport(mediator_id, report_id))
+            {
+                return false;
+            }
             try
             {
 
@@ -463,6 +466,11 @@ namespace EC.Models.ECModel
             {
                 task completedTask = db.task.Where(item => (item.id == task_id)).FirstOrDefault();
 
+                if (!IsMedaitorHasAccessReport(mediator_id, completedTask.report_id))
+                {
+                    return false;
+                }
+
                 completedTask.is_completed = true;
                 completedTask.completed_by = mediator_id;
                 completedTask.completed_on = DateTime.Now;
@@ -500,6 +508,10 @@ namespace EC.Models.ECModel
                 task currentTask = new task();
 
                 currentTask = db.task.Where(item => (item.id == task_id)).FirstOrDefault();
+                if (!IsMedaitorHasAccessReport(mediator_id, currentTask.report_id))
+                {
+                    return false;
+                }
                 currentTask.assigned_to = mediator_id;
                 db.task.AddOrUpdate(currentTask);
                 db.SaveChanges();
@@ -533,6 +545,17 @@ namespace EC.Models.ECModel
                 return false;
             }
         }
-
+        private bool IsMedaitorHasAccessReport(int mediatorId, int reportId)
+        {
+            var rm = new ReportModel();
+            List<int> top_mediator_ids = new List<int>();
+            top_mediator_ids.Add(mediatorId);
+            var access_mediators = rm.MediatorsWhoHasAccessToReportQuick(top_mediator_ids);
+            if (access_mediators.Where(am => am.id == mediatorId).Count() == 0)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }
