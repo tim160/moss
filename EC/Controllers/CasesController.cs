@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using EC.Controllers.Utils;
 using EC.Models;
 using EC.Models.Database;
-using EC.Models.ECModel;
-using EC.Controllers.ViewModel;
-using EC.Models.ViewModel;
 using EC.Constants;
-using log4net;
 using EC.Models.ViewModels;
 
 namespace EC.Controllers

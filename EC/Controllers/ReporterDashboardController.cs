@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using EC.Models;
 using EC.Models.Database;
 using EC.Models.ViewModel;
-using EC.Models.App.Case;
 using EC.Constants;
 using Rotativa.MVC;
 
@@ -14,7 +12,6 @@ namespace EC.Controllers
 {
     public class ReporterDashboardController : BaseController
     {
-        EC.Models.App.Case.CaseMessagesModel temp_cm;
         // GET: ReporterDashboard
         public ActionResult Index(int? id)
         {
@@ -106,7 +103,6 @@ namespace EC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Messages([Bind(Include = "body_tx,report_id,sender_id,reporter_access")]  CaseMessagesModel cm)
         {
-            temp_cm = cm;
             cm._message.created_dt = DateTime.Now;
             cm._message.ip_ds = "";
             cm._message.subject_ds = "";

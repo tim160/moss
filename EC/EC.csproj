@@ -1760,6 +1760,9 @@
     <Compile Include="Models\Database\status.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Database\sysdiagrams.cs">
+      <DependentUpon>ECEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Database\task.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
@@ -1802,6 +1805,7 @@
     <Compile Include="Models\Database\var_info.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CaseMessagesModel.cs" />
     <Compile Include="Models\EmailNotificationModel.cs" />
     <Compile Include="Models\GenerateRecordsModel.cs" />
     <Compile Include="Models\GetDBEntityModel.cs" />
@@ -1827,7 +1831,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\App\Case\CaseMessagesModel.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\Culture\CompanyLocationCulture.cs" />
     <Compile Include="Models\Culture\DepartmentCulture.cs" />

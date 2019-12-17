@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using EC.Models.Database;
 using EC.Models.ViewModels;
@@ -10,7 +9,6 @@ using EC.Models;
 using EC.Models.ECModel;
 using Rotativa.MVC;
 using EC.Localization;
-using System.Threading.Tasks;
 using EC.Business.Actions;
 
 namespace EC.Controllers

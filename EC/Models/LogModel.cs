@@ -1,28 +1,6 @@
 ﻿using System;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Collections;
-using System.IO;
-using System.Configuration;
-using System.Data;
 using EC.Models.Database;
-using EC.Models.ECModel;
-using System.Collections.Generic;
-using System.Linq;
-using EC.Models;
-using System.Text.RegularExpressions;
 
-using EC.Common.Interfaces;
-using EC.Core.Common;
-using System.Web.Script.Serialization;
-using log4net;
-using EC.Common.Util;
-using EC.Common.Base;
-using System.Net;
-using EC.Localization;
-using EC.Constants;
-using EC.Utils;
 namespace EC.Models
 {
   public class LogModel : BaseModel

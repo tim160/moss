@@ -1,19 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using EC.Controllers.Utils;
 using EC.Models;
 using EC.Models.Database;
-using EC.Models.ECModel;
-using EC.Controllers.ViewModel;
 using EC.Localization;
 using EC.Constants;
 using EC.Model.Impl;
-using EC.Core.Common;
-using EC.Common.Interfaces;
-using System.Threading.Tasks;
 
 namespace EC.Controllers.ViewModel
 {

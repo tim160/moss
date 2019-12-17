@@ -1,15 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using EC.Models.Database;
-
-using EC.Models.App;
 using EC.Core.Common;
 using EC.Common.Interfaces;
-using EC.Constants;
-using log4net;
-
 
 namespace EC.Models.ViewModels
 {

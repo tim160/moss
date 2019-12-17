@@ -1,22 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Net.Mail;
-using System.Web;
-using EC.Controllers.ViewModel;
 using EC.Models.Database;
-using EC.Models.ECModel;
-using EC.Models.Utils;
-
-using System.Data.Entity.Validation;
 using EC.Constants;
 using EC.Models.ViewModels;
 using Newtonsoft.Json;
-using EC.Common.Interfaces;
-using EC.Core.Common;
-using System.IO;
-using EC.Utils;
 using EC.Localization;
 
 namespace EC.Models

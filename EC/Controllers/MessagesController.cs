@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
+﻿using System.Web.Mvc;
 using EC.Models.Database;
-using EC.Models.ECModel;
 using EC.Controllers.ViewModel;
 using EC.Models;
 using EC.Constants;
