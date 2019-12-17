@@ -32,7 +32,7 @@ namespace EC.Models.Utils
                     attachment attach = new attachment
                     {
                         report_message_id = null,
-                        status_id = 2, //soglasno letter
+                        status_id = 2,
                         path_nm = path,
                         file_nm = oneFile.FileName,
                         extension_nm = extension,
@@ -44,30 +44,7 @@ namespace EC.Models.Utils
                     FilesAttach.Add(attach);
                 }                
             }
-            //foreach (var fileUpload in files)
-            //{
 
-            //}
-            //if (files.Count <= 0) return null;
-            //if (fileItem.ContentLength <= 0) return null;
-            //  /// if (fileItem.ContentLength > FileConstants.maxFileAllowed) return null;
-
-            //var fileName = DateTime.Now.Ticks + Path.GetExtension(fileItem.FileName);
-
-            //string extension = Path.GetExtension(fileItem.FileName);
-            //string path = @"\" + UploadedDirectory + @"\" + fileName;
-            //attachment attach = new attachment
-            //{
-            //    report_message_id = null,
-            //    status_id = 2, //soglasno letter
-            //    path_nm = path,
-            //    file_nm = fileItem.FileName,
-            //    extension_nm = extension,
-            //    user_id = 1,
-            //    effective_dt = System.DateTime.Now,
-            //    expiry_dt = System.DateTime.Now,
-            //    last_update_dt = System.DateTime.Now
-            //};
             return FilesAttach;
         }
     }
