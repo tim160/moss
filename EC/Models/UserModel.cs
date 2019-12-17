@@ -25,7 +25,6 @@ namespace EC.Models
 {
   public class UserModel : BaseModel
   {
-    GlobalFunctions glb = new GlobalFunctions();
     UserItems ui = new UserItems();
     public EmailNotificationModel emailNotificationModel = new EmailNotificationModel();
 

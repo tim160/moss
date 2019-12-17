@@ -225,7 +225,7 @@ namespace EC.Controllers
             try
             {
                 db.SaveChanges();
-                glb.UpdateReportLog(_message.sender_id, 7, _message.report_id, "", null, "");
+        logModel.UpdateReportLog(_message.sender_id, 7, _message.report_id, "", null, "");
 
                 // send emails to Case Admin    
 

@@ -118,8 +118,8 @@ namespace EC.Controllers.ViewModel
                     report.user_id = user_id;
 
                     db.SaveChanges();
- 
-                    glb.UpdateReportLog(user_id, 20, report_id, LocalizationGetter.GetString("_Started", is_cc), null, "");
+
+                  logModel.UpdateReportLog(user_id, 20, report_id, LocalizationGetter.GetString("_Started", is_cc), null, "");
                 }
             }
 
@@ -208,7 +208,7 @@ namespace EC.Controllers.ViewModel
 
             db.SaveChanges();
 
-            glb.UpdateReportLog(user_id, 18, report_id, spam_Message, null, "");
+            logModel.UpdateReportLog(user_id, 18, report_id, spam_Message, null, "");
 
             return true;
         }
@@ -307,35 +307,35 @@ namespace EC.Controllers.ViewModel
                 adv.SaveChanges();
 
             }
-            #region commited code
-            /*   if (scopeId == 2)
-               {
-                   glb.UpdateReportLog(user_id, 41, report_id, "Case Scope: Internal", null, "");
-               }
-               if (scopeId == 1)
-               {
-                   glb.UpdateReportLog(user_id, 42, report_id, "Case Scope: Regulatory", null, "");
-               }
-               if (severityId == 2)
-               {
-                   glb.UpdateReportLog(user_id, 43, report_id, "Case Severity: Low", null, "");
-               }
-               if (severityId == 3)
-               {
-                   glb.UpdateReportLog(user_id, 44, report_id, "Case Severity: Medium", null, "");
-               }
-               if (severityId == 4)
-               {
-                   glb.UpdateReportLog(user_id, 45, report_id, "Case Severity: High", null, "");
-               }
-               if (severityId == 5)
-               {
-                   glb.UpdateReportLog(user_id, 46, report_id, "Case Severity: Critical", null, "");
-               }*/
+              #region commited code
+      /*   if (scopeId == 2)
+         {
+             glb.UpdateReportLog(user_id, 41, report_id, "Case Scope: Internal", null, "");
+         }
+         if (scopeId == 1)
+         {
+             glb.UpdateReportLog(user_id, 42, report_id, "Case Scope: Regulatory", null, "");
+         }
+         if (severityId == 2)
+         {
+             glb.UpdateReportLog(user_id, 43, report_id, "Case Severity: Low", null, "");
+         }
+         if (severityId == 3)
+         {
+             glb.UpdateReportLog(user_id, 44, report_id, "Case Severity: Medium", null, "");
+         }
+         if (severityId == 4)
+         {
+             glb.UpdateReportLog(user_id, 45, report_id, "Case Severity: High", null, "");
+         }
+         if (severityId == 5)
+         {
+             glb.UpdateReportLog(user_id, 46, report_id, "Case Severity: Critical", null, "");
+         }*/
 
-            // Case accepted
-            # endregion
-            glb.UpdateReportLog(user_id, 17, report_id, description, null, "");
+      // Case accepted
+      #endregion
+              logModel.UpdateReportLog(user_id, 17, report_id, description, null, "");
       ///// to return        glb.UpdateReportLog(user_id, 20, report_id, LocalizationGetter.GetString("_Completed", is_cc), null, "");
 
 
@@ -354,7 +354,7 @@ namespace EC.Controllers.ViewModel
             {
                 if (lifeThreat)
                 {
-                    glb.UpdateReportLog(user_id, 16, report_id, "", null, "");
+                  logModel.UpdateReportLog(user_id, 16, report_id, "", null, "");
 
 
                     string platform_manager_email = "";
@@ -363,14 +363,12 @@ namespace EC.Controllers.ViewModel
                         platform_manager_email = platformManager.email;
                     bool sent_email = false;
 
-
-
                     if (!String.IsNullOrEmpty(cm._company.cc_campus_alert_manager_email))
                     {
                         //glb.CampusSecurityAlertEmail(rm._report, Request.Url, db, cm._company.cc_campus_alert_manager_email, cm._company.cc_campus_alert_manager_first_name, cm._company.cc_campus_alert_manager_last_name);
 
                         emailNotificationModel.CampusSecurityAlertEmail(user.id, rm._report, Request.Url, db, cm._company.cc_campus_alert_manager_email);
-                        glb.UpdateReportLog(user_id, 24, report_id, "", null, "");
+                        logModel.UpdateReportLog(user_id, 24, report_id, "", null, "");
                     }
                     else if (platform_manager_email.Length > 0)
                     {
@@ -378,7 +376,7 @@ namespace EC.Controllers.ViewModel
 
                         emailNotificationModel.CampusSecurityAlertEmail(user.id, rm._report, Request.Url, db, platformManager.email);
                         sent_email = true;
-                        glb.UpdateReportLog(user_id, 24, report_id, "", null, "");
+                        logModel.UpdateReportLog(user_id, 24, report_id, "", null, "");
                     }
 
                     /*         if (!String.IsNullOrEmpty(cm._company.cc_daily_crime_log_manager_email))
@@ -393,11 +391,12 @@ namespace EC.Controllers.ViewModel
                                */
                 }
             }
-            glb.UpdateReportLog(user_id, 21, report_id, LocalizationGetter.GetString("_Started", is_cc), null, "");
+
+              logModel.UpdateReportLog(user_id, 21, report_id, LocalizationGetter.GetString("_Started", is_cc), null, "");
             if (!db.report_log.Any(item => ((item.action_id == 19) && (item.report_id == report_id))))
             {
                 //case opened
-                glb.UpdateReportLog(user_id, 19, report_id, description, null, "");
+                logModel.UpdateReportLog(user_id, 19, report_id, description, null, "");
 
                 #region Email To Mediators About Case Approved
                 foreach (user _user in rm.MediatorsWhoHasAccessToReport())
@@ -434,7 +433,7 @@ namespace EC.Controllers.ViewModel
             else
             {
                 // case re-opened
-                glb.UpdateReportLog(user_id, 29, report_id, description, null, "");
+                logModel.UpdateReportLog(user_id, 29, report_id, description, null, "");
 
 
                 #region Email To Mediators About Case re-opening
@@ -463,25 +462,25 @@ namespace EC.Controllers.ViewModel
             switch (severityId)
             {
                 case 2:
-                    glb.UpdateReportLog(user_id, 43, report_id, "", null, "");
+                    logModel.UpdateReportLog(user_id, 43, report_id, "", null, "");
                     break;
                 case 3:
-                    glb.UpdateReportLog(user_id, 44, report_id, "", null, "");
+                    logModel.UpdateReportLog(user_id, 44, report_id, "", null, "");
                     break;
                 case 4:
-                    glb.UpdateReportLog(user_id, 45, report_id, "", null, "");
+                    logModel.UpdateReportLog(user_id, 45, report_id, "", null, "");
                     break;
                 case 5:
-                    glb.UpdateReportLog(user_id, 46, report_id, "", null, "");
+                  logModel.UpdateReportLog(user_id, 46, report_id, "", null, "");
                     break;
             }
             switch (scopeId)
             {
                 case 1:
-                    glb.UpdateReportLog(user_id, 41, report_id, "", null, "");
+                  logModel.UpdateReportLog(user_id, 41, report_id, "", null, "");
                     break;
                 case 2:
-                    glb.UpdateReportLog(user_id, 42, report_id, "", null, "");
+                  logModel.UpdateReportLog(user_id, 42, report_id, "", null, "");
                     break;
             }
             return true;

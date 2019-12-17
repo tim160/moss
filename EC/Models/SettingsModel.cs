@@ -619,7 +619,7 @@ namespace EC.Models
             {
                 return "Some fields are empty!";
             }
-            result = GlobalFunctions.IsValidPass(newPass);
+            result = PasswordUtils.IsValidPass(newPass);
             if (result == "Success")
             {
                 if (newPass != confPass)

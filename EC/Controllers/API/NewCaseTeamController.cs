@@ -22,7 +22,6 @@ namespace EC.Controllers.API
 {
     public class NewCaseTeamController : BaseApiController
     {
-        GlobalFunctions glb = new GlobalFunctions();
         string base_url = ConfigurationManager.AppSettings["SiteRoot"];
 
         public class Filter
@@ -141,15 +140,13 @@ namespace EC.Controllers.API
 
             if (filter.AddToTeam.HasValue)
             {
-                GlobalFunctions glb = new GlobalFunctions();
+                LogModel logModel = new LogModel();
                 IEmailAddressHelper m_EmailHelper = new EmailAddressHelper();
-
-                
-
+               
                 UserModel _um = new UserModel(filter.AddToTeam.Value);
                 _um.AddToMediators(filter.AddToTeam.Value, filter.Report_id.Value);
                 _um = _um._user.company_id == user.company_id ? _um : null;
-                glb.UpdateReportLog(user.id, 5, filter.Report_id.Value, _um._user.first_nm + " " + _um._user.last_nm, null, "");
+                logModel.UpdateReportLog(user.id, 5, filter.Report_id.Value, _um._user.first_nm + " " + _um._user.last_nm, null, "");
 
                 if ((_um._user.email.Trim().Length > 0) && m_EmailHelper.IsValidEmail(_um._user.email.Trim()))
                 {
@@ -177,10 +174,10 @@ namespace EC.Controllers.API
                 int tasks_number = _um.UserTasks(1, filter.Report_id.Value, true).Count();
                 if (tasks_number == 0)
                 {
-                    GlobalFunctions glb = new GlobalFunctions();
+                    LogModel logModel = new LogModel();
 
                     _um.RemoveMediator(filter.RemoveFromTeam.Value, filter.Report_id.Value);
-                    glb.UpdateReportLog(user.id, 6, filter.Report_id.Value, _um._user.first_nm + " " + _um._user.last_nm, null, "");
+                    logModel.UpdateReportLog(user.id, 6, filter.Report_id.Value, _um._user.first_nm + " " + _um._user.last_nm, null, "");
                 }
                 else
                 {

@@ -192,8 +192,8 @@ namespace EC.Controllers
                     ViewBag.Email = user.email;
                     SignIn(user);
 
-                    base.glb.UpdateReportLog(user.id, 2, currentReport.report.id, "", null, "");
-                    base.glb.UpdateReportLog(user.id, 28, currentReport.report.id, LocalizationGetter.GetString("_Started", is_cc), null, "");
+                    base.logModel.UpdateReportLog(user.id, 2, currentReport.report.id, "", null, "");
+                    base.logModel.UpdateReportLog(user.id, 28, currentReport.report.id, LocalizationGetter.GetString("_Started", is_cc), null, "");
                 }
                
 

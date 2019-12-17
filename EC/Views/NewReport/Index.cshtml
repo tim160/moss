@@ -31,7 +31,6 @@
     var cm = new CompanyModel(rm._report.company_id);
 
     bool is_spam = ((rm._investigation_status != 1) && (rm._investigation_status != 2));
-    GlobalFunctions glb = new GlobalFunctions();
 
     UserModel _last_user_promotion_model = new UserModel();
     if ((is_spam) && (rm.LastPromotion() != null))

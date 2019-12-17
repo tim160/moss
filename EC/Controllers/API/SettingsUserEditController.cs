@@ -92,7 +92,6 @@ namespace EC.Controllers.API
             }
             else
             {
-                var glb = new GlobalFunctions();
                 var generateModel = new GenerateRecordsModel();
 
                 if (DB.user.Any(x => x.email.ToLower() == model.email.ToLower() && x.company_id == sessionUser.company_id && (x.role_id == ECLevelConstants.level_escalation_mediator || x.role_id == ECLevelConstants.level_mediator || x.role_id == ECLevelConstants.level_supervising_mediator)))

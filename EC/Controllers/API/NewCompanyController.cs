@@ -10,8 +10,7 @@ namespace EC.Controllers.API
 {
     public class NewCompanyController : BaseApiController
     {
-        public GlobalFunctions glb = new GlobalFunctions();
-
+        
         public class NewCompanyModel
         {
             public string Data { get; set; }

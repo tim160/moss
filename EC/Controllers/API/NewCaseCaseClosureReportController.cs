@@ -207,14 +207,14 @@ namespace EC.Controllers.API
                 var mediator = DB.report_non_mediator_involved.FirstOrDefault(x => x.id == item.non_mediator_involved_id);
                 var outcome = DB.company_outcome.FirstOrDefault(x => x.id == item.outcome_id);
 
-                GlobalFunctions gf = new GlobalFunctions();
+                LogModel logModel = new LogModel();
                 if ((mediator != null) && (mediator.role_in_report_id == 3)) //49	Recommended Outcome for Alleged Offender Added
-        {
-                    gf.UpdateReportLog(user.id, 49, filter.Report_id, outcome.outcome_en, null, "");
+                {
+                  logModel.UpdateReportLog(user.id, 49, filter.Report_id, outcome.outcome_en, null, "");
                 }
                 else //50	Recommended Action for Witness or Reporter Added
                 {
-                    gf.UpdateReportLog(user.id, 50, filter.Report_id, outcome.outcome_en, null, "");
+                    logModel.UpdateReportLog(user.id, 50, filter.Report_id, outcome.outcome_en, null, "");
                 }
             }
 

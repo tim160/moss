@@ -12,8 +12,6 @@ namespace EC.Models
     {
         public string restorePass(string token, string email)
         {
-            GlobalFunctions glb = new GlobalFunctions();
-
             if (token != null && token.Length > 0)
             {
                 if (email != null && email.Length > 0)
@@ -52,7 +50,7 @@ namespace EC.Models
             {
                 if (password == confirmPassword)
                 {
-                    string result = GlobalFunctions.IsValidPass(password);
+                    string result = PasswordUtils.IsValidPass(password);
                     if (result == "Success")
                     {
                         user_change_password _ucp = (db.user_change_password.Where(t => t.password_token.ToLower().Trim() == token.ToLower().Trim())).FirstOrDefault();
@@ -91,7 +89,7 @@ namespace EC.Models
       {
         try
         {
-          string result = GlobalFunctions.IsValidPass(password);
+          string result = PasswordUtils.IsValidPass(password);
           if (result.ToLower() == "success")
           {
 

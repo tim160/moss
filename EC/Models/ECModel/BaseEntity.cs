@@ -19,6 +19,6 @@ namespace EC.Models.ECModel
         public string IP { get; set; }
         protected IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
 
-        public GlobalFunctions glb = new GlobalFunctions();
-    }
+        public LogModel logModel = new LogModel();
+  }
 }

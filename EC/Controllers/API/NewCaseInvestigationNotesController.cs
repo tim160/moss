@@ -196,7 +196,7 @@ namespace EC.Controllers.API
             {
                 return null;
             }
-            GlobalFunctions glb = new GlobalFunctions();
+              LogModel logModel = new LogModel();
 
             UserModel um = new UserModel(user.id);
 
@@ -219,7 +219,7 @@ namespace EC.Controllers.API
                         });
                         DB.SaveChanges();
 
-                        glb.UpdateReportLog(user.id, 30, filter.Report_id, company_secondary_type.secondary_type_en, null, "");
+                        logModel.UpdateReportLog(user.id, 30, filter.Report_id, company_secondary_type.secondary_type_en, null, "");
                     }
                 }
             }
@@ -229,7 +229,7 @@ namespace EC.Controllers.API
                 var report_secondary_type = DB.report_secondary_type.FirstOrDefault(x => x.report_id == filter.Report_id & x.secondary_type_id == filter.Company_secondary_type_delete.Value & x.added_by_reporter != true);
                 DB.report_secondary_type.Remove(report_secondary_type);
                 DB.SaveChanges();
-                glb.UpdateReportLog(user.id, 31, filter.Report_id, report_secondary_type.secondary_type_nm, null, "");
+                logModel.UpdateReportLog(user.id, 31, filter.Report_id, report_secondary_type.secondary_type_nm, null, "");
             }
 
             if (filter.Mediator_add.HasValue)
@@ -250,7 +250,7 @@ namespace EC.Controllers.API
                         user_id = user.id,
                         added_by_reporter = false,
                     });
-                    glb.UpdateReportLog(user.id, 31, filter.Report_id, model.mediator_id.ToString(), null, "");
+                    logModel.UpdateReportLog(user.id, 31, filter.Report_id, model.mediator_id.ToString(), null, "");
 
                 }
                 DB.SaveChanges();
@@ -262,13 +262,13 @@ namespace EC.Controllers.API
                 {
                     var model = DB.report_non_mediator_involved.FirstOrDefault(x => x.report_id == filter.Report_id & x.id == filter.Mediator_delete.Value);
                     DB.report_non_mediator_involved.Remove(model);
-                    glb.UpdateReportLog(user.id, 32, filter.Report_id, model.Role, null, "");
+                    logModel.UpdateReportLog(user.id, 32, filter.Report_id, model.Role, null, "");
                 }
                 else
                 {
                     var model = DB.report_mediator_involved.FirstOrDefault(x => x.report_id == filter.Report_id & x.mediator_id == filter.Mediator_delete.Value & x.added_by_reporter == false);
                     model.status_id = 1;
-                    glb.UpdateReportLog(user.id, 32, filter.Report_id, model.mediator_id.ToString(), null, "");
+                    logModel.UpdateReportLog(user.id, 32, filter.Report_id, model.mediator_id.ToString(), null, "");
                 }
                 DB.SaveChanges();
                 
@@ -288,7 +288,7 @@ namespace EC.Controllers.API
                     };
                     DB.report_department.Add(model);
                     DB.SaveChanges();
-                    glb.UpdateReportLog(user.id, 35, filter.Report_id, model.department_id.ToString(), null, "");
+                    logModel.UpdateReportLog(user.id, 35, filter.Report_id, model.department_id.ToString(), null, "");
                 }
             }
 
@@ -298,7 +298,7 @@ namespace EC.Controllers.API
                 DB.report_department.Remove(model);
                 DB.SaveChanges();
 
-                glb.UpdateReportLog(user.id, 37, filter.Report_id, model.department_id.ToString(), null, "");
+                logModel.UpdateReportLog(user.id, 37, filter.Report_id, model.department_id.ToString(), null, "");
 
             }
 
@@ -318,9 +318,9 @@ namespace EC.Controllers.API
                         type = type,
                     });
                     if (type == 1)
-                        glb.UpdateReportLog(user.id, 38, filter.Report_id, filter.Note1, null, "");
+                        logModel.UpdateReportLog(user.id, 38, filter.Report_id, filter.Note1, null, "");
                     else
-                        glb.UpdateReportLog(user.id, 47, filter.Report_id, filter.Note2, null, "");
+                        logModel.UpdateReportLog(user.id, 47, filter.Report_id, filter.Note2, null, "");
                 }
                 else
                 {
@@ -328,9 +328,9 @@ namespace EC.Controllers.API
                     model.user_id = user.id;
                     model.note = filter.Note1 != null ? filter.Note1 : filter.Note2;
                     if (type == 1)
-                        glb.UpdateReportLog(user.id, 38, filter.Report_id, filter.Note1, null, "");
+                        logModel.UpdateReportLog(user.id, 38, filter.Report_id, filter.Note1, null, "");
                     else
-                        glb.UpdateReportLog(user.id, 48, filter.Report_id, filter.Note2, null, "");
+                        logModel.UpdateReportLog(user.id, 48, filter.Report_id, filter.Note2, null, "");
                 }
                 DB.SaveChanges();
             }
@@ -403,7 +403,7 @@ namespace EC.Controllers.API
                         added_by_reporter = false,
                     });
                     DB.SaveChanges();
-                    glb.UpdateReportLog(user.id, 51, filter.Report_id, $"{filter.addPersonLastName} {filter.addPersonFirstName}", null, "");
+                    logModel.UpdateReportLog(user.id, 51, filter.Report_id, $"{filter.addPersonLastName} {filter.addPersonFirstName}", null, "");
                 }
             }
 

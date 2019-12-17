@@ -24,7 +24,6 @@
 
   var cp = ViewBag.cp;
 
-  GlobalFunctions glb = new GlobalFunctions();
   IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
 
   ViewBag.Title = LocalizationGetter.GetString("Payment", is_cc) + " - " + m_DateTimeHelper.ConvertDateToLongMonthString(cp.payment_date);

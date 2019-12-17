@@ -786,19 +786,19 @@ namespace EC.Controllers
 
                 case 3:
                     if (old_status == 9)
-                        glb.UpdateReportLog(user.id, 29, report_id, "", null, description);
-                    glb.UpdateReportLog(user.id, 21, report_id, LocalizationGetter.GetString("_Started", is_cc), null, description);
+                      logModel.UpdateReportLog(user.id, 29, report_id, "", null, description);
+                    logModel.UpdateReportLog(user.id, 21, report_id, LocalizationGetter.GetString("_Started", is_cc), null, description);
 
                     break;
                 case 6:
-                    glb.UpdateReportLog(user.id, 27, report_id, LocalizationGetter.GetString("_Started", is_cc), null, "");
+                    logModel.UpdateReportLog(user.id, 27, report_id, LocalizationGetter.GetString("_Started", is_cc), null, "");
                     break;
 
                 case 9:
 
                     if (old_status == 6)
-                        glb.UpdateReportLog(user.id, 27, report_id, LocalizationGetter.GetString("_Completed", is_cc), null, description);
-                    glb.UpdateReportLog(user.id, 25, report_id, "", null, description);
+                      logModel.UpdateReportLog(user.id, 27, report_id, LocalizationGetter.GetString("_Completed", is_cc), null, description);
+                  logModel.UpdateReportLog(user.id, 25, report_id, "", null, description);
                     break;
             }
             return 1;

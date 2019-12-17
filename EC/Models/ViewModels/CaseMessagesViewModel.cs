@@ -25,7 +25,6 @@ namespace EC.Models.ViewModel
         public CaseMessagesViewModel BindMessageToViewMessage(message _message, int caller_id)
         {
             IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
-            GlobalFunctions glb = new GlobalFunctions();
             UserModel um = new UserModel(caller_id);
             CaseMessagesViewModel vm_message = new CaseMessagesViewModel();
             ReportModel rm = new ReportModel(_message.report_id);

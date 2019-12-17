@@ -234,6 +234,7 @@
     <Content Include="angular\controllers\NewCaseTeamController.js" />
     <Content Include="angular\controllers\NewCaseMessagesController.js" />
     <Content Include="angular\controllers\NewCaseReportController.js" />
+    <Content Include="angular\controllers\PlatformManagerSettingsController.js" />
     <Content Include="angular\controllers\SettingsCompanyRoutingController.js" />
     <Content Include="angular\controllers\SettingsCompanySecondaryTypeController.js" />
     <Content Include="angular\controllers\SettingsCompanyCaseAdminDepartmentController.js" />
@@ -245,6 +246,8 @@
     <Content Include="angular\controllers\TrainerCompanyController.js" />
     <Content Include="angular\controllers\NewCompany.js" />
     <Content Include="angular\controllers\TrainerController.js" />
+    <Content Include="angular\factories\UploadImageFactory.js" />
+    <Content Include="angular\factories\ValidateSettingsUserFactory.js" />
     <Content Include="angular\services\AnalyticsRootCauseAnalysisService.js" />
     <Content Include="angular\services\AnalyticsCASService.js" />
     <Content Include="angular\services\NewCaseTopMenuService.js" />
@@ -255,6 +258,7 @@
     <Content Include="angular\services\NewCaseReportService.js" />
     <Content Include="angular\services\SettingsCompanyRoutingService.js" />
     <Content Include="angular\services\SettingsCompanyCaseAdminDepartmentService.js" />
+    <Content Include="angular\services\SettingsCompanyRoutingServiceSetClientId.js" />
     <Content Include="angular\services\SettingsCompanySecondaryTypeService.js" />
     <Content Include="angular\services\EmployeeAwarenessPosterService.js" />
     <Content Include="angular\services\CasesService.js" />
@@ -1254,6 +1258,7 @@
     <Content Include="Scripts\lib\jquery-1.10.2.js" />
     <Content Include="Scripts\lib\jquery-1.10.2.min.js" />
     <Content Include="Scripts\lib\jquery-ui.min.js" />
+    <Content Include="Scripts\lib\jquery.min.js" />
     <Content Include="Scripts\Models\CaseMessagesModel.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\moment.min.js" />
@@ -1278,6 +1283,7 @@
     <Content Include="Scripts\View\ServiceHeader.js" />
     <Content Include="Scripts\View\ServiceReport.js" />
     <Content Include="Scripts\View\Settings.js" />
+    <Content Include="Scripts\View\SettingsUser.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />
     <Content Include="Scripts\WebForms\Focus.js" />
     <Content Include="Scripts\WebForms\GridView.js" />
@@ -1451,6 +1457,7 @@
     <Compile Include="Controllers\API\EmployeeAwarenessPosterController.cs" />
     <Compile Include="Controllers\API\EmployeeAwarenessController.cs" />
     <Compile Include="Controllers\API\TrainerController.cs" />
+    <Compile Include="Controllers\API\UserStatusButtonsController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CasesController.cs" />
@@ -1798,6 +1805,7 @@
     <Compile Include="Models\EmailNotificationModel.cs" />
     <Compile Include="Models\GenerateRecordsModel.cs" />
     <Compile Include="Models\GetDBEntityModel.cs" />
+    <Compile Include="Models\LogModel.cs" />
     <Compile Include="Models\ReadStatusModel.cs" />
     <Compile Include="Models\ReportStringModel.cs" />
     <Compile Include="Models\Services\AnalyticsService\MenuDashboardAnalytics.cs" />
@@ -1839,7 +1847,6 @@
     <Compile Include="Models\ECModel\Relationship.cs" />
     <Compile Include="Models\ECModel\TaskCommentExtended.cs" />
     <Compile Include="Models\ECModel\TaskExtended.cs" />
-    <Compile Include="Models\GlobalFunctions.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\ReporterDashboardModel.cs" />
     <Compile Include="Models\ReportModel.cs" />
@@ -1866,7 +1873,9 @@
     <Compile Include="Models\ViewModels\ReportedOutsideViewModel.cs" />
     <Compile Include="Models\ViewModels\RoleInReportViewModel.cs" />
     <Compile Include="Models\ViewModels\SecondaryMandatoryViewModel.cs" />
+    <Compile Include="Models\ViewModels\UserLevelViewModel.cs" />
     <Compile Include="Models\ViewModels\UsersReportIDsViewModel.cs" />
+    <Compile Include="Models\ViewModels\UserStatusViewModel.cs" />
     <Compile Include="Models\ViewModels\UsersUnreadReportsNumberViewModel.cs" />
     <Compile Include="Models\ViewModels\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1881,6 +1890,7 @@
     <Compile Include="Utils\Auth\Repo.cs" />
     <Compile Include="Utils\Auth\User.cs" />
     <Compile Include="Utils\Auth\UserIndentity .cs" />
+    <Compile Include="Utils\CheckBrowser.cs" />
     <Compile Include="Utils\CustomContractResolver .cs" />
     <Compile Include="Utils\DateTimeKindAttribute.cs" />
     <Compile Include="Utils\FreshDesk.cs" />
@@ -1889,7 +1899,6 @@
     <Compile Include="Utils\PasswordUtils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="angular\factories\" />
     <Folder Include="App_Data\" />
     <Folder Include="Content\assets\content\" />
     <Folder Include="Content\assets\template\php\" />

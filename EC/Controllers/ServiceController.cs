@@ -59,7 +59,6 @@ namespace EC.Controllers
         private ActionResult DoLogin(LoginViewModel model, string returnUrl, string view)
         {
             Session.Clear();
-            GlobalFunctions glb = new GlobalFunctions();
             if (DomainUtil.IsSubdomain(Request.Url.AbsoluteUri.ToLower()))
             {
 

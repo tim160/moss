@@ -375,7 +375,9 @@ namespace EC.Models.ECModel
             string Root = System.Web.Hosting.HostingEnvironment.MapPath("~/");
             string UploadedDirectory = "Upload";
             string UploadTarget = Root + UploadedDirectory + @"\";
-            if (!IsMedaitorHasAccessReport(mediator_id, report_id))
+
+            ReportModel rm = new ReportModel(report_id);
+            if(!rm.HasAccessToReport(reporter_user.id))
             {
                 return false;
             }
@@ -425,8 +427,8 @@ namespace EC.Models.ECModel
 
                 }
 
-                glb.UpdateReportLog(mediator_id, 10, report_id, taskName, null, "");
-                glb.UpdateReportLog(mediator_id, 12, report_id, taskName, null, "");
+                logModel.UpdateReportLog(mediator_id, 10, report_id, taskName, null, "");
+                logModel.UpdateReportLog(mediator_id, 12, report_id, taskName, null, "");
 
                 #region New Task - Email to Asignee
                 UserModel um = new UserModel(assignTo);
@@ -448,7 +450,7 @@ namespace EC.Models.ECModel
             catch (System.Data.DataException ex)
             {
                 logger.Error(ex.ToString());
-                Console.WriteLine("Task/Attachments didn't add");
+                Console.WriteLine("Task/Attachments was not created");
                 Console.WriteLine(ex.Data);
                 return false;
             }
@@ -466,7 +468,8 @@ namespace EC.Models.ECModel
             {
                 task completedTask = db.task.Where(item => (item.id == task_id)).FirstOrDefault();
 
-                if (!IsMedaitorHasAccessReport(mediator_id, completedTask.report_id))
+                ReportModel rm = new ReportModel(completedTask.report_id);
+                if (!rm.HasAccessToReport(reporter_user.id))
                 {
                     return false;
                 }
@@ -479,7 +482,7 @@ namespace EC.Models.ECModel
                 db.SaveChanges();
 
                 TaskExtended tsk = new TaskExtended(task_id, mediator_id);
-                glb.UpdateReportLog(mediator_id, 11, tsk.TaskReportID, tsk._task.title, null, "");
+                logModel.UpdateReportLog(mediator_id, 11, tsk.TaskReportID, tsk._task.title, null, "");
 
 
                 return true;
@@ -508,7 +511,9 @@ namespace EC.Models.ECModel
                 task currentTask = new task();
 
                 currentTask = db.task.Where(item => (item.id == task_id)).FirstOrDefault();
-                if (!IsMedaitorHasAccessReport(mediator_id, currentTask.report_id))
+
+                ReportModel rm = new ReportModel(currentTask.report_id);
+                if (!rm.HasAccessToReport(reporter_user.id))
                 {
                     return false;
                 }
@@ -518,7 +523,7 @@ namespace EC.Models.ECModel
 
 
                 TaskExtended tsk = new TaskExtended(task_id, mediator_id);
-                glb.UpdateReportLog(mediator_id, 12, tsk.TaskReportID, tsk._task.title, mediator_id, "");
+                logModel.UpdateReportLog(mediator_id, 12, tsk.TaskReportID, tsk._task.title, mediator_id, "");
 
                 #region Task Reassigned - Email to Asignee
                 UserModel um = new UserModel(mediator_id);
@@ -545,17 +550,6 @@ namespace EC.Models.ECModel
                 return false;
             }
         }
-        private bool IsMedaitorHasAccessReport(int mediatorId, int reportId)
-        {
-            var rm = new ReportModel();
-            List<int> top_mediator_ids = new List<int>();
-            top_mediator_ids.Add(mediatorId);
-            var access_mediators = rm.MediatorsWhoHasAccessToReportQuick(top_mediator_ids);
-            if (access_mediators.Where(am => am.id == mediatorId).Count() == 0)
-            {
-                return false;
-            }
-            return true;
-        }
+
     }
 }

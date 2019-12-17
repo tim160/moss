@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Configuration;
+using EC.Constants;
 
 namespace EC.Utils
 {
@@ -27,5 +28,15 @@ namespace EC.Utils
 
             return hash == hash2;
         }
-    }
+
+        public static string IsValidPass(string password)
+        {
+          if (password != "" && password.Length >= PasswordConstants.PASSWORD_MIN_LENGTH)
+          {
+            return "Success";
+          }
+          return String.Format("The password should be at least {0} characters long", PasswordConstants.PASSWORD_MIN_LENGTH.ToString());
+        }
+
+  }
 }

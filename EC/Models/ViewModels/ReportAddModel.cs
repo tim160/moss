@@ -41,7 +41,6 @@ namespace EC.Models.ViewModels
                             nameOfEmail = mail.User;
                         }
 
-                        //GlobalFunctions gfFunctions = new GlobalFunctions();
                         int notification = Convert.ToInt16(model.sendUpdates);
                         //if not checked = 3, if  check = 1
                         if (notification != 1)

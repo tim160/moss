@@ -27,7 +27,7 @@ namespace EC.Controllers
 
         public ECEntities db = new ECEntities();
         public CultureInfo m_CultureInfo = null;
-        public GlobalFunctions glb = new GlobalFunctions();
+        public LogModel logModel = new LogModel();
         public ReadStatusModel readStatusModel = new ReadStatusModel();
         public EmailNotificationModel emailNotificationModel = new EmailNotificationModel();
 

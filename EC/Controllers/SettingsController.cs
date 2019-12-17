@@ -299,6 +299,12 @@ namespace EC.Controllers
             var dbUser = db.user.FirstOrDefault(x => x.id == id);
             //var url = String.Format("~/Upload/Company/{0}/users/{1}{2}", cm._company.guid, um._user.guid, fi.Extension);
             var url = System.Configuration.ConfigurationManager.AppSettings["SiteRoot"];
+
+            var is_cloud = System.Configuration.ConfigurationManager.AppSettings["IsCloud"];
+            var ext = System.Configuration.ConfigurationManager.AppSettings["ImageExtensionRoot"];
+            if (is_cloud != null && is_cloud.ToString() == "1" && ext != null && !string.IsNullOrWhiteSpace(ext))
+              url = url + ext;
+
             url = url ?? Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port);
             url += String.Format("/Upload/Company/{0}/users/{1}{2}", cm._company.guid, um._user.guid, fi.Extension);
 
@@ -642,6 +648,11 @@ namespace EC.Controllers
 
                             var url = System.Configuration.ConfigurationManager.AppSettings["SiteRoot"];
                             url = url ?? Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port);
+                            var is_cloud = System.Configuration.ConfigurationManager.AppSettings["IsCloud"];
+                            var ext = System.Configuration.ConfigurationManager.AppSettings["ImageExtensionRoot"];
+                            if (is_cloud != null && is_cloud.ToString() == "1" && ext != null && !string.IsNullOrWhiteSpace(ext))
+                              url = url + ext;
+
                             url += String.Format("/Upload/Company/{0}/users/{1}{2}", cm._company.guid, um._user.guid, fi.Extension);
 
                             UserModel model = new UserModel();

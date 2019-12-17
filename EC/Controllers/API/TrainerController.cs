@@ -181,8 +181,6 @@ namespace EC.Controllers.API
             var trainerTimeHours = string.Format("{0:hh:mm tt}", item.Hour) + " EST";
 
 
-
-            GlobalFunctions glb = new GlobalFunctions();
             var trainer = DB.user.FirstOrDefault(x => x.id == item.CreatedByUserId);
             if (mediator != null && trainer != null)
             {

@@ -18,7 +18,6 @@
             )ViewBag.attachmentFiles;
 
     int unread_message_number = um.Unread_Messages_Quantity(report_id, 1);
-    GlobalFunctions glb = new GlobalFunctions();
     ViewBag.active = "Index";
     bool? is_cc = ViewBag.is_cc;
     if (!is_cc.HasValue)
