@@ -22,13 +22,13 @@ namespace EC.Controllers.API
     {
         public class Filter
         {
-            public int ReportId { get; set; }
+            public int Id { get; set; }
             public bool IsLifeThreating { get; set; }
         }
 
         [HttpGet]
         [Route("api/NewCaseTopMenu/get")]
-        public object Get([FromUri] int reportId)
+        public object Get([FromUri] int id)
         {
             user user = (user)HttpContext.Current.Session[ECGlobalConstants.CurrentUserMarcker];
             // -- DEBUG
@@ -39,13 +39,13 @@ namespace EC.Controllers.API
                 return null;
             }
 
-            var log = DB.report_log.OrderByDescending(x => x.id).FirstOrDefault(x => x.report_id == reportId && (x.action_id == 16 || (x.action_id == 24)));
+            var log = DB.report_log.OrderByDescending(x => x.id).FirstOrDefault(x => x.report_id == id && (x.action_id == 16 || (x.action_id == 24)));
             var action = log == null ? null : DB.action.FirstOrDefault(x => x.id == log.action_id);
             var loguser = log == null ? null : DB.user.FirstOrDefault(x => x.id == log.user_id);
             var lifeThreatingInfo = (log == null || action == null || loguser == null) ? "" : $"{action.description_en} at {log.created_dt.ToString()} by {loguser.first_nm} {loguser.last_nm}";
 
             return new {
-                LifeThreating = DB.report.FirstOrDefault(x => x.id == reportId).cc_is_life_threating,
+                LifeThreating = DB.report.FirstOrDefault(x => x.id == id).cc_is_life_threating,
                 LifeThreatingInfo = lifeThreatingInfo,
             };
        }
@@ -66,7 +66,7 @@ namespace EC.Controllers.API
             LogModel logModel = new LogModel();
             EmailNotificationModel emailNotificationModel = new EmailNotificationModel();
 
-            var report = DB.report.FirstOrDefault(x => x.id == model.ReportId);
+            var report = DB.report.FirstOrDefault(x => x.id == model.Id);
             if (report.cc_is_life_threating != true)
             {
                 report.cc_is_life_threating = model.IsLifeThreating;
@@ -109,7 +109,7 @@ namespace EC.Controllers.API
 
             return new
             {
-                LifeThreating = DB.report.FirstOrDefault(x => x.id == model.ReportId).cc_is_life_threating,
+                LifeThreating = DB.report.FirstOrDefault(x => x.id == model.Id).cc_is_life_threating,
             };
         }
     }

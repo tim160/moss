@@ -52,20 +52,20 @@
             return note.split('\n').join('<br/>');
         };
 
-        NewCaseInvestigationNotesService.get({ report_id: $scope.report_id }, function (data) {
+        NewCaseInvestigationNotesService.get({ id: $scope.report_id }, function (data) {
             $scope.refresh(data);
         });
 
         $scope.incidentTypeAdd = function (item) {
             $scope.incidentTypeAddMode = false;
-            var param = { report_id: $scope.report_id, company_secondary_type_add: item.id };
+            var param = { id: $scope.report_id, company_secondary_type_add: item.id };
             NewCaseInvestigationNotesService.post(param, function (data) {
                 $scope.refresh(data);
             });
         };
 
         $scope.incidentTypeDelete = function (id) {
-            var param = { report_id: $scope.report_id, company_secondary_type_delete: id };
+            var param = { id: $scope.report_id, company_secondary_type_delete: id };
             NewCaseInvestigationNotesService.post(param, function (data) {
                 $scope.refresh(data);
             });
@@ -73,14 +73,14 @@
 
         $scope.mediatorAdd = function (item) {
             $scope.mediatorAddMode = false;
-            var param = { report_id: $scope.report_id, mediator_add: item.id };
+            var param = { id: $scope.report_id, mediator_add: item.id };
             NewCaseInvestigationNotesService.post(param, function (data) {
                 $scope.refresh(data);
             });
         };
 
         $scope.mediatorDelete = function (id, mode) {
-            var param = { report_id: $scope.report_id, mediator_delete: id, mode: mode };
+            var param = { id: $scope.report_id, mediator_delete: id, mode: mode };
             NewCaseInvestigationNotesService.post(param, function (data) {
                 $scope.refresh(data);
             });
@@ -88,14 +88,14 @@
 
         $scope.departmentAdd = function (item) {
             $scope.departmentAddMode = false;
-            var param = { report_id: $scope.report_id, department_add: item.id };
+            var param = { id: $scope.report_id, department_add: item.id };
             NewCaseInvestigationNotesService.post(param, function (data) {
                 $scope.refresh(data);
             });
         };
 
         $scope.departmentDelete = function (id) {
-            var param = { report_id: $scope.report_id, department_delete: id };
+            var param = { id: $scope.report_id, department_delete: id };
             NewCaseInvestigationNotesService.post(param, function (data) {
                 $scope.refresh(data);
             });
@@ -105,8 +105,8 @@
             $scope.editNote1 = false;
             $scope.editNote2 = false;
             var param = type === 1 ?
-                { report_id: $scope.report_id, note1: $scope.model.note1 } :
-                { report_id: $scope.report_id, note2: $scope.model.note2 };
+                { id: $scope.report_id, note1: $scope.model.note1 } :
+                { id: $scope.report_id, note2: $scope.model.note2 };
 
             NewCaseInvestigationNotesService.post(param, function (data) {
                 $scope.refresh(data);
@@ -159,21 +159,21 @@
         };
 
         $scope.changeBehavioralFactors = function (item, item2) {
-            var param = { report_id: $scope.report_id, inv_meth_st_id: item.id, inv_meth_bf_id: item2.id, };
+            var param = { id: $scope.report_id, inv_meth_st_id: item.id, inv_meth_bf_id: item2.id, };
             NewCaseInvestigationNotesService.post(param, function (data) {
                 $scope.refresh(data);
             });
         };
 
         $scope.changeExternalInfluences = function (item, item2) {
-            var param = { report_id: $scope.report_id, inv_meth_st_id: item.id, inv_meth_ei_id: item2.id, };
+            var param = { id: $scope.report_id, inv_meth_st_id: item.id, inv_meth_ei_id: item2.id, };
             NewCaseInvestigationNotesService.post(param, function (data) {
                 $scope.refresh(data);
             });
         };
 
         $scope.changeCampusInfluences = function (item, item2) {
-            var param = { report_id: $scope.report_id, inv_meth_st_id: item.id, inv_meth_ci_id: item2.id, };
+            var param = { id: $scope.report_id, inv_meth_st_id: item.id, inv_meth_ci_id: item2.id, };
             NewCaseInvestigationNotesService.post(param, function (data) {
                 $scope.refresh(data);
             });
@@ -181,7 +181,7 @@
 
         $scope.saveNoteBehavioralFactors = function (item) {
             item.behavioralEditMode = false;
-            var param = { report_id: $scope.report_id, inv_meth_st_id: item.id, inv_meth_bf_note: item.inv_meth_bf_note, };
+            var param = { id: $scope.report_id, inv_meth_st_id: item.id, inv_meth_bf_note: item.inv_meth_bf_note, };
             NewCaseInvestigationNotesService.post(param, function (data) {
                 $scope.refresh(data);
             });
@@ -189,7 +189,7 @@
 
         $scope.saveNoteExternalInfluences = function (item) {
             item.externalInfluencesEditMode = false;
-            var param = { report_id: $scope.report_id, inv_meth_st_id: item.id, inv_meth_ei_note: item.inv_meth_ei_note, };
+            var param = { id: $scope.report_id, inv_meth_st_id: item.id, inv_meth_ei_note: item.inv_meth_ei_note, };
             NewCaseInvestigationNotesService.post(param, function (data) {
                 $scope.refresh(data);
             });
@@ -197,7 +197,7 @@
 
         $scope.saveNoteCampusInfluences = function (item) {
             item.campusInfluencesEditMode = false;
-            var param = { report_id: $scope.report_id, inv_meth_st_id: item.id, inv_meth_ci_note: item.inv_meth_ci_note, };
+            var param = { id: $scope.report_id, inv_meth_st_id: item.id, inv_meth_ci_note: item.inv_meth_ci_note, };
             NewCaseInvestigationNotesService.post(param, function (data) {
                 $scope.refresh(data);
             });
@@ -214,7 +214,7 @@
             }
             $scope.mediatorAddMode = false;
             var param = {
-                report_id: $scope.report_id,
+                id: $scope.report_id,
                 addPersonFirstName: $scope.addPerson.FirstName,
                 addPersonLastName: $scope.addPerson.LastName,
                 addPersonTitle: $scope.addPerson.Title,

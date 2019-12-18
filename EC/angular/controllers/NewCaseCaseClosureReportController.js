@@ -32,12 +32,12 @@
             $scope.model = data;
         };
 
-        NewCaseCaseClosureReportService.get({ report_id: $scope.report_id }, function (data) {
+        NewCaseCaseClosureReportService.get({ id: $scope.report_id }, function (data) {
             $scope.refresh(data);
         });
 
         $scope.saveCrime = function () {
-            NewCaseCaseClosureReportService.post({ report_id: $scope.report_id, report_cc_crime: $scope.model.report_cc_crime }, function (data) {
+            NewCaseCaseClosureReportService.post({ id: $scope.report_id, report_cc_crime: $scope.model.report_cc_crime }, function (data) {
                 $scope.editExecutiveSummary = false;
                 $scope.refresh(data);
             });
@@ -78,7 +78,7 @@
                 item.outcome.outcome_id = outcome.id;
             }
             item.editNote = false;
-            NewCaseCaseClosureReportService.post({ report_id: $scope.report_id, report_case_closure_outcome: item.outcome }, function (data) {
+            NewCaseCaseClosureReportService.post({ id: $scope.report_id, report_case_closure_outcome: item.outcome }, function (data) {
                 $scope.refresh(data);
             });
         };

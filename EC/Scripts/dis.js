@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
     ROOT = $('base').attr('href');
 
     'use strict';
@@ -77,7 +77,8 @@
             }) + 1];
         };
     });
-    angular.module('EC').directive('checkFileSize', [ 'uploadImage', function (uploadImage) {
+
+    angular.module('EC').directive('checkFileSize', ['uploadImage', function (uploadImage) {
         return {
             link: function (scope, elem, attr, ctrl) {
                 function bindEvent(element, type, handler) {
@@ -102,35 +103,35 @@
                                     angular.element('#formDrop').submit();
                                     break;
                                 case 'newReport':
-                                    angular.element('.attach').append("<table class='attachedFilesTitle' style='color: #3c3e3f;font-size: 14px;'><tr><th><img src=/Content/Icons/generic-file.png></th> <th>" + file.name + "</th><th><div class='delete deleteAttachmentPosition'></div></tr></table>")
+                                    angular.element('.attach').append("<table class='attachedFilesTitle' style='color: #3c3e3f;font-size: 14px;'><tr><th><img src=/Content/Icons/generic-file.png></th> <th>" + file.name + "</th><th><div class='delete deleteAttachmentPosition'></div></tr></table>");
                                     break;
                                 case 'settingsIndex':
-                                    var from = angular.element("#urlAjaxUploadFiles").attr("from");
+                                    var from = angular.element('#urlAjaxUploadFiles').attr('from');
 
-                                    var filesInput = angular.element("#_file");
+                                    var filesInput = angular.element('#_file');
 
                                     if (filesInput[0].files.length > 0) {
                                         var fd = new FormData();
-                                        if (from != "") {
-                                            fd.append("from", from);
+                                        if (from !== '') {
+                                            fd.append('from', from);
                                         }
 
                                         for (var i = 0; i < filesInput[0].files.length; i++) {
                                             fd.append('_file', filesInput[0].files[i]);
                                         }
-                                        var MediatorId = angular.element("#MediatorId").val();
+                                        var MediatorId = angular.element('#MediatorId').val();
                                         if (MediatorId > 0) {
-                                            fd.append("MediatorId", MediatorId);
+                                            fd.append('MediatorId', MediatorId);
                                         }
                                         var analyticsObj = uploadImage.getData(fd);
                                         analyticsObj.then(function (response) {
-                                            var from = angular.element("#urlAjaxUploadFiles").attr("from");
-                                            if (from == "User") {
-                                                angular.element("#logoUser").attr("src", response.data + '?' + new Date().getTime());
-                                                angular.element(".userNavigation__logo img").attr("src", response.data);
+                                            var from = angular.element('#urlAjaxUploadFiles').attr('from');
+                                            if (from === 'User') {
+                                                angular.element('#logoUser').attr('src', response.data + '?' + new Date().getTime());
+                                                angular.element('.userNavigation__logo img').attr('src', response.data);
                                             } else {
-                                                angular.element("#logoCompany").attr("src", response.data);
-                                                angular.element(".userNavigation__info img").attr("src", response.data);
+                                                angular.element('#logoCompany').attr('src', response.data);
+                                                angular.element('.userNavigation__info img').attr('src', response.data);
 
                                             }
                                         });
@@ -141,7 +142,7 @@
                     });
                 });
             }
-        }
+        };
     }]);
 
     angular.module('EC').directive('makeClickHiddenInput', function () {
@@ -227,14 +228,14 @@
         };
     });
 
-    angular.module('EC').directive('stringToNumber', function () {
+    angular.module('EC').directive('stringToNumber', function() {
         return {
             require: 'ngModel',
-            link: function (scope, element, attrs, ngModel) {
-                ngModel.$parsers.push(function (value) {
+            link: function(scope, element, attrs, ngModel) {
+                ngModel.$parsers.push(function(value) {
                     return '' + value;
                 });
-                ngModel.$formatters.push(function (value) {
+                ngModel.$formatters.push(function(value) {
                     return parseFloat(value);
                 });
             }
@@ -242,9 +243,7 @@
     });
 
 })();
-//angular.module('EC')['_invokeQueue'].forEach(function (value) {
-//    console.log(value[2][0])
-//});
+
 
 (function () {
 
@@ -275,9 +274,9 @@
         };
 
         $scope.printGraphs = function (elem, title) {
-            var offsetWidthOld = document.querySelectorAll(".borderAnalyt")[0].offsetWidth;
+            var offsetWidthOld = document.querySelectorAll('.borderAnalyt')[0].offsetWidth;
             $scope.cacsChart.chart.width = 700;
-            var printHtml = "";
+            var printHtml = '';
 
             setTimeout(function () {
 
@@ -290,28 +289,22 @@
                 }
 
                 $scope.cacsChart.chart.width = offsetWidthOld;
-                //console.log(offsetWidthOld);
                 var mywindow = window.open('', 'PRINT', 'width=' + screen.availWidth + ',height=' + screen.availHeight);
 
                 mywindow.document.write('<html><head><title>' + title + '</title>');
-                //mywindow.document.write('<link rel="stylesheet" href="/Content/styleAnalytics.css" type="text/css" />');
                 mywindow.document.write('<link rel="stylesheet" href="/Content/newCase.css" type="text/css" />');
                 mywindow.document.write('<link rel="stylesheet" href="/Content/RootcauseAnalisysPrint.css" type="text/css" />');
                 mywindow.document.write('<link rel="stylesheet" href="/Libs/nvd3/build/nv.d3.min.css" type="text/css" />');
                 mywindow.document.write('</head><body onload="window.print(); window.close()">');
-                //mywindow.document.write('</head><body >');
-                //mywindow.document.write('<h1>' + title + '</h1>');
                 mywindow.document.write('<div class="container">');
-                mywindow.document.write(document.getElementById("templateForPrinting").innerHTML.trim());
+                mywindow.document.write(document.getElementById('templateForPrinting').innerHTML.trim());
                 mywindow.document.write(printHtml);
                 mywindow.document.write('</div></body></html>');
                 $scope.refresh();
                 mywindow.document.close(); // necessary for IE >= 10
                 mywindow.focus(); // necessary for IE >= 10*/
-
                 return true;
             }, 550);
-
         };
 
         $scope.refresh();
@@ -325,7 +318,6 @@
             chart: {
                 type: 'lineChart',
                 height: 450,
-                //width: 700,
                 margin: {
                     top: 20,
                     right: 20,
@@ -404,42 +396,17 @@
 
     angular
         .module('EC')
-        .factory('AdditionalComp', ['$http', '$q', function ($http, $q) {
-            return {
-                getData: function (id) {
-                    var deffered = $q.defer();
-                    $http({
-                        method: 'GET',
-                        url: '/api/AdditionalCompanies/' + id
-                    })
-                        .then(function success(response) {
-                            deffered.resolve(response);
-                        }, function error(response) {
-                            deffered.reject(response.status);
-                        });
-                    return deffered.promise;
-                }
-            }
-        }]);
-})();
-
-(function () {
-
-    'use strict';
-
-    angular
-        .module('EC')
         .controller('AnalyticsRootCauseAnalysisController',
             ['$scope', 'AnalyticsRootCauseAnalysisService', 'AdditionalComp', AnalyticsRootCauseAnalysisController]);
 
     function AnalyticsRootCauseAnalysisController($scope, AnalyticsRootCauseAnalysisService, AdditionalComp) {
 
-        $scope.displayCompanyName = document.querySelector("#ddListDefaultValue").value;
+        $scope.displayCompanyName = document.querySelector('#ddListDefaultValue').value;
         var companyIdArray = Array();
         $scope.additionalCompanies = Array();
         $scope.showDDMenu = false;
 
-        AdditionalComp.getData(document.querySelector("#company_id").value).then(function (response) {
+        AdditionalComp.getData(document.querySelector('#company_id').value).then(function (response) {
             $scope.additionalCompanies = response.data.additionalCompanies;
             companyIdArray = $scope.additionalCompanies.map(function (item) {
                 return item.id;
@@ -450,10 +417,9 @@
             $scope.refresh($scope.secondaryType, companyIdArray);
         });
 
-        /* drop down list functionality */
         $scope.ddListClickedCompany = function (company_id, company_name) {
-            if (company_name == undefined) {
-                $scope.displayCompanyName = document.querySelector("#ddListDefaultValue").value;
+            if (company_name === undefined) {
+                $scope.displayCompanyName = document.querySelector('#ddListDefaultValue').value;
                 $scope.filterValue = null;
                 $scope.refresh($scope.secondaryType.id, companyIdArray);
             } else {
@@ -461,7 +427,7 @@
                 $scope.displayCompanyName = company_name;
                 $scope.refresh($scope.secondaryType.id, company_id);
             }
-        }
+        };
 
         $scope.refresh = function (secondaryType, companyIdArray) {
             AnalyticsRootCauseAnalysisService.get({ secondaryType: secondaryType, companyId: companyIdArray }, function (data) {
@@ -474,17 +440,16 @@
                 $scope.chartData1 = setPercentage(data.Behavioral);
                 $scope.chartData2 = setPercentage(data.External);
                 $scope.chartData3 = setPercentage(data.Organizational);
-                $scope.chart1.chart.title = "Behavioral Factors";
-                $scope.chart2.chart.title = "External Influences";
-                $scope.chart3.chart.title = "Organizational Influences";
+                $scope.chart1.chart.title = 'Behavioral Factors';
+                $scope.chart2.chart.title = 'External Influences';
+                $scope.chart3.chart.title = 'Organizational Influences';
                 $scope.chartColors = data.Colors;
             });
         };
-
-
         function setPercentage(array) {
-            if (toString.call(array) !== "[object Array]")
+            if (toString.call(array) !== '[object Array]') {
                 return false;
+            }
 
             var sum = 0;
             array.forEach(function (element) {
@@ -493,28 +458,26 @@
             if (sum > 0) {
                 array.forEach(function (element) {
                     element.percentage = Math.round((element.count * 100) / sum);
-                    if (element.percentage == 0) {
+                    if (element.percentage === 0) {
                         element.percentage = 0.01;
                     }
                 });
             }
             return array;
         }
-
-
-
         $scope.chartColors = ['#3099be', '#ff9b42', '#868fb8', '#64cd9b', '#ba83b8', '#c6c967', '#73cbcc', '#d47472'];
-
-        
-
         $scope.selectSecondaryTypes = function (item) {
             $scope.secondaryType = item;
-            var companyIDSelected = $scope.filterValue == undefined ? $scope.additionalCompanies.map(function (item) { return item.id; })
-                : $scope.filterValue;
+            var companyIDSelected = '';
+            if($scope.filterValue === undefined) {
+                companyIDSelected = $scope.additionalCompanies.map(function (item) {
+                    return item.id;
+                });
+            } else {
+                companyIDSelected = $scope.filterValue;
+            }
             $scope.refresh(item.id, companyIDSelected);
         };
-
-
         $scope.chart1 = {
             chart: {
                 type: 'pieChart',
@@ -529,7 +492,7 @@
                 },
                 width: 220,
                 height: 300,
-                format: "",
+                format: '',
                 showLabels: false,
                 color: $scope.chartColors,
                 duration: 500,
@@ -537,8 +500,8 @@
                 showLegend: false,
                 dispatch: {
                     renderEnd: function (e) {
-                        var label = d3.select('#chart1 text.nv-pie-title')
-                        label.html("");
+                        var label = d3.select('#chart1 text.nv-pie-title');
+                        label.html('');
                         label.insert('tspan').text('Behavioral').attr('dy', -10).attr('x', 0);
                         label.insert('tspan').text('Factors').attr('dy', 20).attr('x', 0);
                     }
@@ -559,7 +522,7 @@
                 },
                 width: 220,
                 height: 300,
-                format: "",
+                format: '',
                 showLabels: false,
                 color: $scope.chartColors,
                 duration: 500,
@@ -567,8 +530,8 @@
                 showLegend: false,
                 dispatch: {
                     renderEnd: function (e) {
-                        var label = d3.select('#chart2 text.nv-pie-title')
-                        label.html("");
+                        var label = d3.select('#chart2 text.nv-pie-title');
+                        label.html('');
                         label.insert('tspan').text('External').attr('dy', -10).attr('x', 0);
                         label.insert('tspan').text('Influences').attr('dy', 20).attr('x', 0);
                     }
@@ -590,7 +553,7 @@
                 },
                 width: 220,
                 height: 300,
-                format: "",
+                format: '',
                 showLabels: false,
                 color: $scope.chartColors,
                 duration: 500,
@@ -598,8 +561,8 @@
                 showLegend: false,
                 dispatch: {
                     renderEnd: function (e) {
-                        var label = d3.select('#chart3 text.nv-pie-title')
-                        label.html("");
+                        var label = d3.select('#chart3 text.nv-pie-title');
+                        label.html('');
                         label.insert('tspan').text('Organizational').attr('dy', -10).attr('x', 0);
                         label.insert('tspan').text('Influences').attr('dy', 20).attr('x', 0);
                     }
@@ -615,11 +578,10 @@
                 mywindow.document.write('<link rel="stylesheet" href="/Content/styleAnalytics.css" type="text/css" />');
                 mywindow.document.write('<link rel="stylesheet" href="/Content/newCase.css" type="text/css" />');
                 mywindow.document.write('<link rel="stylesheet" href="/Content/RootcauseAnalisysPrint.css" type="text/css" />');
-                //mywindow.document.write('</head><body>');
                 mywindow.document.write('</head><body onload="window.print(); window.close()">');
                 mywindow.document.write('<h1>' + title + '</h1>');
                 mywindow.document.write('<div class="container">');
-                mywindow.document.write(document.getElementById("templateForPrinting").innerHTML.trim());
+                mywindow.document.write(document.getElementById('templateForPrinting').innerHTML.trim());
                 mywindow.document.write(document.getElementById(elem).innerHTML);
                 mywindow.document.write('</div></body></html>');
 
@@ -732,21 +694,21 @@
 
         };
         $scope.ddListClickedCompany = function (company_id, company_name) {
-            if (company_name == undefined) {
-                $scope.displayCompanyName = document.querySelector("#ddListDefaultValue").value;
+            if (company_name === undefined) {
+                $scope.displayCompanyName = document.querySelector('#ddListDefaultValue').value;
                 $scope.filterValue = null;
             } else {
                 $scope.filterValue = company_id;
                 $scope.displayCompanyName = company_name;
             }
-        }
+        };
         $scope.filterValue = null;
         $scope.returnListReports = function () {
             $scope.filterValue = null;
-        }
+        };
         $scope.casesFilterFunction = function (item) {
             if ($scope.filterValue != null) {
-                return item.company_id == $scope.filterValue;
+                return item.company_id === $scope.filterValue;
             } else {
                 return item;
             }
@@ -754,7 +716,7 @@
 
 
         $scope.showDDMenu = false;
-        $scope.displayCompanyName = document.querySelector("#ddListDefaultValue").value;
+        $scope.displayCompanyName = document.querySelector('#ddListDefaultValue').value;
     }
 }());
 
@@ -868,7 +830,6 @@
         $scope.Process = function () {
             var p = { posterId: $scope.id, type: 1, size: $scope.SelectedSize, logo1: $scope.SelectedLogo };
             EmployeeAwarenessPosterService.post(p, function (data) {
-                //window.location = data.file;
                 $scope.downloadLink = data.file;
                 document.getElementById('downloadA').setAttribute('href', data.file);
                 document.getElementById('downloadA').click();
@@ -913,12 +874,12 @@
             $scope.model = data;
         };
 
-        NewCaseCaseClosureReportService.get({ report_id: $scope.report_id }, function (data) {
+        NewCaseCaseClosureReportService.get({ id: $scope.report_id }, function (data) {
             $scope.refresh(data);
         });
 
         $scope.saveCrime = function () {
-            NewCaseCaseClosureReportService.post({ report_id: $scope.report_id, report_cc_crime: $scope.model.report_cc_crime }, function (data) {
+            NewCaseCaseClosureReportService.post({ id: $scope.report_id, report_cc_crime: $scope.model.report_cc_crime }, function (data) {
                 $scope.editExecutiveSummary = false;
                 $scope.refresh(data);
             });
@@ -959,7 +920,7 @@
                 item.outcome.outcome_id = outcome.id;
             }
             item.editNote = false;
-            NewCaseCaseClosureReportService.post({ report_id: $scope.report_id, report_case_closure_outcome: item.outcome }, function (data) {
+            NewCaseCaseClosureReportService.post({ id: $scope.report_id, report_case_closure_outcome: item.outcome }, function (data) {
                 $scope.refresh(data);
             });
         };
@@ -1025,20 +986,20 @@
             return note.split('\n').join('<br/>');
         };
 
-        NewCaseInvestigationNotesService.get({ report_id: $scope.report_id }, function (data) {
+        NewCaseInvestigationNotesService.get({ id: $scope.report_id }, function (data) {
             $scope.refresh(data);
         });
 
         $scope.incidentTypeAdd = function (item) {
             $scope.incidentTypeAddMode = false;
-            var param = { report_id: $scope.report_id, company_secondary_type_add: item.id };
+            var param = { id: $scope.report_id, company_secondary_type_add: item.id };
             NewCaseInvestigationNotesService.post(param, function (data) {
                 $scope.refresh(data);
             });
         };
 
         $scope.incidentTypeDelete = function (id) {
-            var param = { report_id: $scope.report_id, company_secondary_type_delete: id };
+            var param = { id: $scope.report_id, company_secondary_type_delete: id };
             NewCaseInvestigationNotesService.post(param, function (data) {
                 $scope.refresh(data);
             });
@@ -1046,14 +1007,14 @@
 
         $scope.mediatorAdd = function (item) {
             $scope.mediatorAddMode = false;
-            var param = { report_id: $scope.report_id, mediator_add: item.id };
+            var param = { id: $scope.report_id, mediator_add: item.id };
             NewCaseInvestigationNotesService.post(param, function (data) {
                 $scope.refresh(data);
             });
         };
 
         $scope.mediatorDelete = function (id, mode) {
-            var param = { report_id: $scope.report_id, mediator_delete: id, mode: mode };
+            var param = { id: $scope.report_id, mediator_delete: id, mode: mode };
             NewCaseInvestigationNotesService.post(param, function (data) {
                 $scope.refresh(data);
             });
@@ -1061,14 +1022,14 @@
 
         $scope.departmentAdd = function (item) {
             $scope.departmentAddMode = false;
-            var param = { report_id: $scope.report_id, department_add: item.id };
+            var param = { id: $scope.report_id, department_add: item.id };
             NewCaseInvestigationNotesService.post(param, function (data) {
                 $scope.refresh(data);
             });
         };
 
         $scope.departmentDelete = function (id) {
-            var param = { report_id: $scope.report_id, department_delete: id };
+            var param = { id: $scope.report_id, department_delete: id };
             NewCaseInvestigationNotesService.post(param, function (data) {
                 $scope.refresh(data);
             });
@@ -1078,8 +1039,8 @@
             $scope.editNote1 = false;
             $scope.editNote2 = false;
             var param = type === 1 ?
-                { report_id: $scope.report_id, note1: $scope.model.note1 } :
-                { report_id: $scope.report_id, note2: $scope.model.note2 };
+                { id: $scope.report_id, note1: $scope.model.note1 } :
+                { id: $scope.report_id, note2: $scope.model.note2 };
 
             NewCaseInvestigationNotesService.post(param, function (data) {
                 $scope.refresh(data);
@@ -1132,21 +1093,21 @@
         };
 
         $scope.changeBehavioralFactors = function (item, item2) {
-            var param = { report_id: $scope.report_id, inv_meth_st_id: item.id, inv_meth_bf_id: item2.id, };
+            var param = { id: $scope.report_id, inv_meth_st_id: item.id, inv_meth_bf_id: item2.id, };
             NewCaseInvestigationNotesService.post(param, function (data) {
                 $scope.refresh(data);
             });
         };
 
         $scope.changeExternalInfluences = function (item, item2) {
-            var param = { report_id: $scope.report_id, inv_meth_st_id: item.id, inv_meth_ei_id: item2.id, };
+            var param = { id: $scope.report_id, inv_meth_st_id: item.id, inv_meth_ei_id: item2.id, };
             NewCaseInvestigationNotesService.post(param, function (data) {
                 $scope.refresh(data);
             });
         };
 
         $scope.changeCampusInfluences = function (item, item2) {
-            var param = { report_id: $scope.report_id, inv_meth_st_id: item.id, inv_meth_ci_id: item2.id, };
+            var param = { id: $scope.report_id, inv_meth_st_id: item.id, inv_meth_ci_id: item2.id, };
             NewCaseInvestigationNotesService.post(param, function (data) {
                 $scope.refresh(data);
             });
@@ -1154,7 +1115,7 @@
 
         $scope.saveNoteBehavioralFactors = function (item) {
             item.behavioralEditMode = false;
-            var param = { report_id: $scope.report_id, inv_meth_st_id: item.id, inv_meth_bf_note: item.inv_meth_bf_note, };
+            var param = { id: $scope.report_id, inv_meth_st_id: item.id, inv_meth_bf_note: item.inv_meth_bf_note, };
             NewCaseInvestigationNotesService.post(param, function (data) {
                 $scope.refresh(data);
             });
@@ -1162,7 +1123,7 @@
 
         $scope.saveNoteExternalInfluences = function (item) {
             item.externalInfluencesEditMode = false;
-            var param = { report_id: $scope.report_id, inv_meth_st_id: item.id, inv_meth_ei_note: item.inv_meth_ei_note, };
+            var param = { id: $scope.report_id, inv_meth_st_id: item.id, inv_meth_ei_note: item.inv_meth_ei_note, };
             NewCaseInvestigationNotesService.post(param, function (data) {
                 $scope.refresh(data);
             });
@@ -1170,7 +1131,7 @@
 
         $scope.saveNoteCampusInfluences = function (item) {
             item.campusInfluencesEditMode = false;
-            var param = { report_id: $scope.report_id, inv_meth_st_id: item.id, inv_meth_ci_note: item.inv_meth_ci_note, };
+            var param = { id: $scope.report_id, inv_meth_st_id: item.id, inv_meth_ci_note: item.inv_meth_ci_note, };
             NewCaseInvestigationNotesService.post(param, function (data) {
                 $scope.refresh(data);
             });
@@ -1187,7 +1148,7 @@
             }
             $scope.mediatorAddMode = false;
             var param = {
-                report_id: $scope.report_id,
+                id: $scope.report_id,
                 addPersonFirstName: $scope.addPerson.FirstName,
                 addPersonLastName: $scope.addPerson.LastName,
                 addPersonTitle: $scope.addPerson.Title,
@@ -1246,14 +1207,14 @@
         };
 
         $scope.sendMessage = function () {
-            NewCaseMessagesService.post({ mode: 1, report_id: $scope.report_id, newMessage: $scope.newMessage }, function () {
+            NewCaseMessagesService.post({ mode: 1, id: $scope.report_id, newMessage: $scope.newMessage }, function () {
                 $scope.newMessage = '';
                 $scope.refresh();
             });
         };
 
         $scope.sendMessageReporter = function () {
-            NewCaseMessagesService.post({ mode: 2, report_id: $scope.report_id, newMessage: $scope.newMessageReporter }, function () {
+            NewCaseMessagesService.post({ mode: 2, id: $scope.report_id, newMessage: $scope.newMessageReporter }, function () {
                 $scope.newMessageReporter = '';
                 $scope.refresh();
             });
@@ -1281,7 +1242,6 @@
             ['$scope', '$filter', 'orderByFilter', '$location', 'NewCaseReportService', NewCaseReportController]);
 
     function NewCaseReportController($scope, $filter, orderByFilter, $location, NewCaseReportService) {
-        //$scope.report_id = parseInt(parseInt($location.absUrl().substring($location.absUrl().indexOf('report_id=') + 'report_id='.length)));
         $scope.report_id = $filter('parseUrl')($location.$$absUrl, 'report_id');
 
         $scope.model = {
@@ -1364,7 +1324,7 @@
         });
 
         $scope.closeBtn = function (item) {
-            NewCaseTeamService.post({ removeFromTeam: item.user.id, report_id: $scope.report_id }, function (data) {
+            NewCaseTeamService.post({ removeFromTeam: item.user.id, id: $scope.report_id }, function (data) {
                 $scope.refresh(data);
                 if (!data.success) {
                     $scope.messageModal = {
@@ -1377,13 +1337,13 @@
         };
 
         $scope.addToTeam = function (item) {
-            NewCaseTeamService.post({ addToTeam: item.user.id, report_id: $scope.report_id }, function (data) {
+            NewCaseTeamService.post({ addToTeam: item.user.id, id: $scope.report_id }, function (data) {
                 $scope.refresh(data);
             });
         };
 
         $scope.makeCaseOwner = function (item) {
-            NewCaseTeamService.post({ makeCaseOwner: item.user.id, report_id: $scope.report_id }, function (data) {
+            NewCaseTeamService.post({ makeCaseOwner: item.user.id, id: $scope.report_id }, function (data) {
                 $scope.refresh(data);
             });
         };
@@ -1403,7 +1363,7 @@
         $scope.report_id = $filter('parseUrl')($location.$$absUrl, 'report_id');
 
         $scope.refresh = function () {
-            NewCaseTopMenuService.get({ reportId: $scope.report_id }, function (data) {
+            NewCaseTopMenuService.get({ id: $scope.report_id }, function (data) {
                 $scope.state = data;
             });
         };
@@ -1416,8 +1376,9 @@
         $scope.setIsLifeThreating = function (isLifeThreating) {
             if (isLifeThreating) {
                 /*eslint max-len: [2, 200, 4]*/
-                if (confirm('Does this Case or Alleged Offender pose an ongoing threat to the safety or health of the students and employees on campus? A Campus Alert will be requested if you select "OK"')) {
-                    NewCaseTopMenuService.setLifeThreating({ reportId: $scope.report_id, isLifeThreating: isLifeThreating }, function () {
+                if (confirm('Does this Case or Alleged Offender pose an ongoing threat to the safety or health of the students and employees on campus?' +
+                    ' A Campus Alert will be requested if you select "OK"')) {
+                    NewCaseTopMenuService.setLifeThreating({ id: $scope.report_id, isLifeThreating: isLifeThreating }, function () {
                         $scope.refresh();
                     });
                 }
@@ -1459,14 +1420,6 @@
             SelectedYear: 'yyyy',
             CSV: 0,
         };
-        /*$scope.model.PrimaryLocationUp = 'q';
-        $scope.model.CreditCardNumber = 'q';
-        $scope.model.NameonCard = 'q';
-        $scope.model.ExpiryDate = '01';
-        $scope.model.SelectedYear = '2018';
-        $scope.model.Title = '2018';
-        $scope.model.CompanyName = 'MailTest11';
-        $scope.model.CSV = 123;*/
 
         $scope.years = [];
         for (var i = new Date().getFullYear(); i <= 2030; i++) {
@@ -1511,7 +1464,7 @@
                                 contractors_number: $scope.model.NumberOfNonEmployees,
                                 customers_number: $scope.model.NumberOfClients,
                             }
-                        }).done(function (data) {//data from server
+                        }).done(function (data) {
                             if (data !== 'completed') {
                             } else {
                                 window.location.href = '/new/success?show=1';
@@ -1524,6 +1477,33 @@
 
             } else {
                 console.log(form);
+            }
+        };
+    }
+}());
+
+(function () {
+
+    'use strict';
+
+    angular
+        .module('EC')
+        .controller('PlatformManagerSettingsController',
+            ['$scope', 'validateSettingsUser', PlatformManagerSettingsController]);
+    function PlatformManagerSettingsController($scope, validateSettingsUser) {
+
+        $scope.val_first_nm = false;
+        $scope.val_last_nm = false;
+        $scope.val_email = false;
+
+        $scope.update = function (event) {
+
+            $scope.val_first_nm = !validateSettingsUser.validate(angular.element(document.querySelector('#first_nm')).val());
+            $scope.val_last_nm = !validateSettingsUser.validate(angular.element(document.querySelector('#last_nm')).val());
+            $scope.val_email = !validateSettingsUser.validate(angular.element(document.querySelector('#email')).val(), /^([a-zA-Z0-9_-]+\.)*[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*\.[a-zA-Z]{2,6}$/);
+            if ($scope.val_first_nm || $scope.val_last_nm || $scope.val_email) {
+            } else {
+                angular.element('#submitPlatformManager').click();
             }
         };
     }
@@ -1611,7 +1591,7 @@
             $scope.locations = data.locations;
             $scope.locationItems = data.locationItems;
             $scope.userCommpanyClientId = data.userCommpanyClientId;
-            if (data.userCommpanyClientId != 0 && data.userCommpanyClientId != 1 && data.userCompanyName != null && data.userCompanyName.length > 0) {
+            if (data.userCommpanyClientId !== 0 && data.userCommpanyClientId !== 1 && data.userCompanyName != null && data.userCompanyName.length > 0) {
                 if (data.userCommpanyClientId > 0) {
                     $scope.RoutingByLocation = true;
                 } else if (data.userCommpanyClientId < 0) {
@@ -1629,7 +1609,7 @@
             SettingsCompanyRoutingServiceSetClientId.post({ newClientId: $scope.userCommpanyClientId }, function (data) {
                 console.log(data);
             });
-        }
+        };
 
         $scope.delete = function (id) {
             SettingsCompanyRoutingService.delete({ DeleteId: id }, function (data) {
@@ -1813,57 +1793,6 @@
 
     angular
         .module('EC')
-        .controller('PlatformManagerSettingsController',
-            ['$scope', 'validateSettingsUser', PlatformManagerSettingsController]);
-    function PlatformManagerSettingsController($scope, validateSettingsUser) {
-
-        $scope.val_first_nm = false;
-        $scope.val_last_nm = false;
-        $scope.val_email = false;
-
-        $scope.update = function (event) {
-
-            $scope.val_first_nm = !validateSettingsUser.validate(angular.element(document.querySelector("#first_nm")).val());
-            $scope.val_last_nm = !validateSettingsUser.validate(angular.element(document.querySelector("#last_nm")).val());
-            $scope.val_email = !validateSettingsUser.validate(angular.element(document.querySelector("#email")).val(), /^([a-zA-Z0-9_-]+\.)*[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*\.[a-zA-Z]{2,6}$/);
-            if ($scope.val_first_nm || $scope.val_last_nm || $scope.val_email) {
-                //angular.element(document.querySelector("#submitPlatformManager")).submit();
-            } else {
-                angular.element('#submitPlatformManager').click();
-            }
-        }
-    }
-}());
-
-(function () {
-
-    'use strict';
-
-    angular.module('EC')
-        .factory('validateSettingsUser',['$http','$q', function ($http, $q) {
-            return {
-                validate: function (value, rv) {
-                    if (rv === undefined) {
-                        if ((value === null) || (value === undefined) || (value.trim() === '')) {
-                            return false;
-                        }
-                    } else {
-                        if (value === null || value.trim() === '' || !rv.test(value.trim())) {
-                            return false;
-                        }
-                    }
-                    return true;
-                }
-            }
-        }]);
-}());
-
-(function () {
-
-    'use strict';
-
-    angular
-        .module('EC')
         .controller('SettingsUserEditController',
             ['$scope', '$filter', '$location', 'SettingsUserEditService', 'validateSettingsUser', SettingsUserEditController]);
 
@@ -1913,17 +1842,11 @@
         $scope.post = function () {
             $scope.val_first_nm = !validateSettingsUser.validate($scope.first_nm);
             $scope.val_last_nm = !validateSettingsUser.validate($scope.last_nm);
-            //$scope.val_title_ds = !$scope.validate($scope.title_ds);
             $scope.val_email = !validateSettingsUser.validate($scope.email, /^([a-zA-Z0-9_-]+\.)*[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*\.[a-zA-Z]{2,6}$/);
-            //$scope.val_departmentId = $scope.departmentId == null || !$scope.validate($scope.departmentId.toString());
-            //$scope.val_locationId = $scope.locationId == null || !$scope.validate($scope.locationId.toString());
 
             if (!$scope.val_first_nm
                 && !$scope.val_last_nm
-                //&& !$scope.val_title_ds
                 && !$scope.val_email
-                //&& !$scope.val_departmentId
-                //&& !$scope.val_locationId
             ) {
 
                 var model = {
@@ -1970,21 +1893,18 @@
 
         $scope.uiConfig = {
             calendar: {
-                //eventColor: '#ffff00',
                 header: {
                     left: 'month,agendaWeek,agendaDay',
                     center: 'title',
                 },
                 defaultView: 'agendaWeek',
-                //eventClick: function(date, jsEvent, view) {
-                //},
                 agenda: 'H:mm',
                 views: {
                     week: {
-                        timeFormat: 'H:mm' //this will return 23:00 time format
+                        timeFormat: 'H:mm'
                     }
                 },
-                height: "auto",
+                height: 'auto',
                 minTime: '07:00:00',
                 maxTime: '19:00:00',
                 scrollTime: '19:00:00',
@@ -2010,10 +1930,9 @@
                             $scope.refresh();
                             if (!data.Result) {
                                 if (confirm(data.Message)) {
-                                    if (data.booked_session != '') {
+                                    if (data.booked_session !== '') {
                                         TrainerService.deleteCompanyTime({ Hour: data.booked_session.Hour }, function (data) {
                                             if (data.Result) {
-                                                //$scope.refresh();
                                                 TrainerService.addEvent({ DateFrom: start, DateTo: end }, function (data) {
                                                     if (!data.Result) {
                                                         alert(data.Message);
@@ -2117,7 +2036,7 @@
                 agenda: 'H:mm',
                 views: {
                     week: {
-                        timeFormat: 'H:mm' //this will return 23:00 time format
+                        timeFormat: 'H:mm'
                     }
                 },
                 defaultView: 'agendaWeek',
@@ -2126,8 +2045,6 @@
                 slotDuration: '01:00:00',
                 axisFormat: 'hh:mm a',
                 selectable: true,
-                //eventClick: function (date, jsEvent, view) {
-                //},
                 select: function (start, end) {
                     TrainerService.addTime({ DateFrom: start, DateTo: end }, function (data) {
                         if (!data.Result) {
@@ -2160,6 +2077,81 @@
             },
         };
     }
+}());
+
+(function () {
+
+    'use strict';
+
+    angular
+        .module('EC')
+        .factory('AdditionalComp', ['$http', '$q', function ($http, $q) {
+            return {
+                getData: function (id) {
+                    var deffered = $q.defer();
+                    $http({
+                        method: 'GET',
+                        url: '/api/AdditionalCompanies/' + id
+                    })
+                        .then(function success(response) {
+                            deffered.resolve(response);
+                        }, function error(response) {
+                            deffered.reject(response.status);
+                        });
+                    return deffered.promise;
+                }
+            };
+        }]);
+})();
+
+(function () {
+
+    'use strict';
+
+    angular.module('EC')
+        .factory('uploadImage',['$http', '$q', function ($http, $q) {
+            return {
+                getData: function (fd) {
+                    var deffered = $q.defer();
+                    $http({
+                        method: 'POST',
+                        data: fd,
+                        url: '/Settings/AddLogoCompany',
+                        headers: { 'Content-Type': undefined },
+                        transformRequest: angular.identity
+                    })
+                        .then(function success(response) {
+                            deffered.resolve(response);
+                        }, function error(response) {
+                            deffered.reject(response.status);
+                        });
+                    return deffered.promise;
+                }
+            };
+        }]);
+})();
+
+(function () {
+
+    'use strict';
+
+    angular.module('EC')
+        .factory('validateSettingsUser',['$http','$q', function ($http, $q) {
+            return {
+                validate: function (value, rv) {
+                    if (rv === undefined) {
+                        if ((value === null) || (value === undefined) || (value.trim() === '')) {
+                            return false;
+                        }
+                    } else {
+                        if (value === null || value.trim() === '' || !rv.test(value.trim())) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            };
+        }]);
 }());
 
 (function () {
@@ -2277,6 +2269,7 @@
         });
     };
 })();
+
 
 (function () {
 
@@ -2451,35 +2444,3 @@
         });
     };
 })();
-
-(function () {
-
-    'use strict';
-
-    angular.module('EC')
-        .factory('uploadImage',['$http', '$q', function ($http, $q) {
-            return {
-                getData: function (fd) {
-                    var deffered = $q.defer();
-                    $http({
-                        method: 'POST',
-                        data: fd,
-                        url: '/Settings/AddLogoCompany',
-                        headers: { 'Content-Type': undefined },
-                        transformRequest: angular.identity
-                    })
-                        .then(function success(response) {
-                            deffered.resolve(response);
-                        }, function error(response) {
-                            deffered.reject(response.status);
-                        });
-                    return deffered.promise;
-                }
-            }
-        }]);
-})();
-
-
-
-
-

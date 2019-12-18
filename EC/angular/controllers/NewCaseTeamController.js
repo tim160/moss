@@ -58,7 +58,7 @@
         });
 
         $scope.closeBtn = function (item) {
-            NewCaseTeamService.post({ removeFromTeam: item.user.id, report_id: $scope.report_id }, function (data) {
+            NewCaseTeamService.post({ removeFromTeam: item.user.id, id: $scope.report_id }, function (data) {
                 $scope.refresh(data);
                 if (!data.success) {
                     $scope.messageModal = {
@@ -71,13 +71,13 @@
         };
 
         $scope.addToTeam = function (item) {
-            NewCaseTeamService.post({ addToTeam: item.user.id, report_id: $scope.report_id }, function (data) {
+            NewCaseTeamService.post({ addToTeam: item.user.id, id: $scope.report_id }, function (data) {
                 $scope.refresh(data);
             });
         };
 
         $scope.makeCaseOwner = function (item) {
-            NewCaseTeamService.post({ makeCaseOwner: item.user.id, report_id: $scope.report_id }, function (data) {
+            NewCaseTeamService.post({ makeCaseOwner: item.user.id, id: $scope.report_id }, function (data) {
                 $scope.refresh(data);
             });
         };

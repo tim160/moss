@@ -18,29 +18,29 @@ namespace EC.Controllers
     {
         private TaskExtended taskService = new TaskExtended();
         // GET: NewCase
-        public ActionResult Index(int report_id)
+        public ActionResult Index(int id)
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Login", "Service", new { returnUrl = Request.Url.LocalPath });
 
-            ReportModel rm = new ReportModel(report_id);
+            ReportModel rm = new ReportModel(id);
             if (!rm.HasAccessToReport(user.id))
                 return RedirectToAction("Login", "Service");
             if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
             {
                 // case is not approved to work on it yet, need to approve first. if == 7 - its spam, so they will share the view.
-                return RedirectToAction("Index", "NewReport", new { id = report_id });
+                return RedirectToAction("Index", "NewReport", new { id = id });
             }
 
             int user_id = user.id;
 
-            readStatusModel.UpdateReportRead(user_id, report_id);
+            readStatusModel.UpdateReportRead(user_id, id);
 
             ViewBag.user_id = user_id;
-            ViewBag.report_id = report_id;
+            ViewBag.report_id = id;
             ViewBag.guid = rm._report.guid;
-            ViewBag.attachmentFiles = getAttachmentFiles(report_id);
+            ViewBag.attachmentFiles = getAttachmentFiles(id);
 
             #region EC-CC Viewbag
             ViewBag.is_cc = is_cc;
@@ -53,7 +53,7 @@ namespace EC.Controllers
             return View();
         }
 
-        public ActionResult InvestigationNotes(int report_id)
+        public ActionResult InvestigationNotes(int id)
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             //DEBUG
@@ -62,22 +62,22 @@ namespace EC.Controllers
             if (user == null || user.id == 0)
                 return RedirectToAction("Login", "Service");
 
-            ReportModel rm = new ReportModel(report_id);
+            ReportModel rm = new ReportModel(id);
             if (!rm.HasAccessToReport(user.id))
                 return RedirectToAction("Login", "Service");
 
             if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
             {
                 // case is not approved to work on it yet, need to approve first. if == 7 - its spam, so they will share the view.
-                return RedirectToAction("Index", "NewReport", new { id = report_id });
+                return RedirectToAction("Index", "NewReport", new { id = id });
             }
 
             int user_id = user.id;
             ViewBag.user_id = user_id;
-            ViewBag.report_id = report_id;
-            ViewBag.attachmentFiles = getAttachmentFiles(report_id);
+            ViewBag.report_id = id;
+            ViewBag.attachmentFiles = getAttachmentFiles(id);
 
-            readStatusModel.UpdateReportRead(user_id, report_id);
+            readStatusModel.UpdateReportRead(user_id, id);
 
             #region EC-CC Viewbag
             ViewBag.is_cc = is_cc;
@@ -89,7 +89,7 @@ namespace EC.Controllers
             ViewBag.headerPos = headerPos;
             return View();
         }
-        public ActionResult CaseClosureReport(int report_id)
+        public ActionResult CaseClosureReport(int id)
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             //DEBUG
@@ -98,14 +98,14 @@ namespace EC.Controllers
             if (user == null || user.id == 0)
                 return RedirectToAction("Login", "Service");
 
-            ReportModel rm = new ReportModel(report_id);
+            ReportModel rm = new ReportModel(id);
             if (!rm.HasAccessToReport(user.id))
                 return RedirectToAction("Login", "Service");
 
             if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
             {
                 // case is not approved to work on it yet, need to approve first. if == 7 - its spam, so they will share the view.
-                return RedirectToAction("Index", "NewReport", new { id = report_id });
+                return RedirectToAction("Index", "NewReport", new { id = id });
             }
 
             #region EC-CC Viewbag
@@ -118,16 +118,16 @@ namespace EC.Controllers
 
             int user_id = user.id;
 
-            readStatusModel.UpdateReportRead(user_id, report_id);
+            readStatusModel.UpdateReportRead(user_id, id);
 
             ViewBag.user_id = user_id;
-            ViewBag.report_id = report_id;
-            ViewBag.attachmentFiles = getAttachmentFiles(report_id);
+            ViewBag.report_id = id;
+            ViewBag.attachmentFiles = getAttachmentFiles(id);
 
             return View();
         }
 
-        public ActionResult Activity(int report_id)
+        public ActionResult Activity(int id)
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             //DEBUG
@@ -136,26 +136,26 @@ namespace EC.Controllers
             if (user == null || user.id == 0)
                 return RedirectToAction("Login", "Service");
 
-            ReportModel rm = new ReportModel(report_id);
+            ReportModel rm = new ReportModel(id);
             if (!rm.HasAccessToReport(user.id))
                 return RedirectToAction("Login", "Service");
 
             if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
             {
                 // case is not approved to work on it yet, need to approve first. if == 7 - its spam, so they will share the view.
-                return RedirectToAction("Index", "NewReport", new { id = report_id });
+                return RedirectToAction("Index", "NewReport", new { id = id });
             }
 
             int user_id = user.id;
 
-            readStatusModel.UpdateReportRead(user_id, report_id);
+            readStatusModel.UpdateReportRead(user_id, id);
             ViewBag.user_id = user_id;
-            ViewBag.report_id = report_id;
+            ViewBag.report_id = id;
 
             return View();
         }
 
-        public ActionResult Tasks(int report_id)
+        public ActionResult Tasks(int id)
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             //DEBUG
@@ -164,21 +164,21 @@ namespace EC.Controllers
             if (user == null || user.id == 0)
                 return RedirectToAction("Login", "Service");
 
-            ReportModel rm = new ReportModel(report_id);
+            ReportModel rm = new ReportModel(id);
             if (!rm.HasAccessToReport(user.id))
                 return RedirectToAction("Login", "Service");
 
             if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
             {
                 // case is not approved to work on it yet, need to approve first. if == 7 - its spam, so they will share the view.
-                return RedirectToAction("Index", "NewReport", new { id = report_id });
+                return RedirectToAction("Index", "NewReport", new { id = id });
             }
 
             int user_id = user.id;
             UserModel um = new UserModel(user_id);
             List<task> tasks = rm.ReportTasks(0);
 
-            readStatusModel.UpdateReportRead(user_id, report_id);
+            readStatusModel.UpdateReportRead(user_id, id);
 
             List<TaskExtended> list_tsk = new List<TaskExtended>();
             int task_id = 0;
@@ -191,97 +191,97 @@ namespace EC.Controllers
             }
             ViewBag.tasks = list_tsk;
             ViewBag.um = um;
-            ViewBag.attachmentFiles = getAttachmentFiles(report_id);
-            ViewBag.report_id = report_id; // 167-171
+            ViewBag.attachmentFiles = getAttachmentFiles(id);
+            ViewBag.report_id = id; // 167-171
             ViewBag.user_id = user_id;
 
             return View();
         }
 
-        public ActionResult Messages(int report_id)
+        public ActionResult Messages(int id)
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Login", "Service");
 
-            ReportModel rm = new ReportModel(report_id);
+            ReportModel rm = new ReportModel(id);
             if (!rm.HasAccessToReport(user.id))
                 return RedirectToAction("Login", "Service");
 
             if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
             {
                 // case is not approved to work on it yet, need to approve first. if == 7 - its spam, so they will share the view.
-                return RedirectToAction("Index", "NewReport", new { id = report_id });
+                return RedirectToAction("Index", "NewReport", new { id = id });
             }
 
             int user_id = user.id;
             UserModel um = new UserModel(user_id);
 
-            readStatusModel.UpdateReportRead(user_id, report_id);
-            readStatusModel.UpdateReadMessages(report_id, user_id, 2);
+            readStatusModel.UpdateReportRead(user_id, id);
+            readStatusModel.UpdateReadMessages(id, user_id, 2);
 
             ViewBag.um = um;
-            ViewBag.report_id = report_id; // 167-171
+            ViewBag.report_id = id; // 167-171
             ViewBag.user_id = user_id;
 
             return View();
         }
 
-        public ActionResult Reporter(int report_id)
+        public ActionResult Reporter(int id)
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Login", "Service");
 
-            ReportModel rm = new ReportModel(report_id);
+            ReportModel rm = new ReportModel(id);
             if (!rm.HasAccessToReport(user.id))
                 return RedirectToAction("Login", "Service");
 
             if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
             {
                 // case is not approved to work on it yet, need to approve first. if == 7 - its spam, so they will share the view.
-                return RedirectToAction("Index", "NewReport", new { id = report_id });
+                return RedirectToAction("Index", "NewReport", new { id = id });
             }
 
             int user_id = user.id;
             UserModel um = new UserModel(user_id);
 
-            readStatusModel.UpdateReportRead(user_id, report_id);
-            readStatusModel.UpdateReadMessages(report_id, user_id, 1);
+            readStatusModel.UpdateReportRead(user_id, id);
+            readStatusModel.UpdateReadMessages(id, user_id, 1);
 
             ViewBag.um = um;
-            ViewBag.report_id = report_id; // 167-171
+            ViewBag.report_id = id; // 167-171
             ViewBag.user_id = user_id;
 
             return View("Messages");
         }
 
-        public ActionResult Team(int report_id)
+        public ActionResult Team(int id)
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Login", "Service");
 
-            ReportModel rm = new ReportModel(report_id);
+            ReportModel rm = new ReportModel(id);
             if (!rm.HasAccessToReport(user.id))
                 return RedirectToAction("Login", "Service");
 
             if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
             {
                 // case is not approved to work on it yet, need to approve first. if == 7 - its spam, so they will share the view.
-                return RedirectToAction("Index", "NewReport", new { id = report_id });
+                return RedirectToAction("Index", "NewReport", new { id = id });
             }
 
             int user_id = user.id;
             ViewBag.user_id = user_id;
-            ViewBag.report_id = report_id;
+            ViewBag.report_id = id;
 
-            readStatusModel.UpdateReportRead(user_id, report_id);
+            readStatusModel.UpdateReportRead(user_id, id);
 
             return View();
         }
 
-        public ActionResult Attachments(int report_id)
+        public ActionResult Attachments(int id)
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             // DEBUG
@@ -290,32 +290,32 @@ namespace EC.Controllers
             if (user == null || user.id == 0)
                 return RedirectToAction("Login", "Service");
 
-            ReportModel rm = new ReportModel(report_id);
+            ReportModel rm = new ReportModel(id);
             if (!rm.HasAccessToReport(user.id))
                 return RedirectToAction("Login", "Service");
 
 
-            readStatusModel.UpdateReportRead(user.id, report_id);
+            readStatusModel.UpdateReportRead(user.id, id);
 
             if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
             {
                 // case is not approved to work on it yet, need to approve first. if == 7 - its spam, so they will share the view.
-                return RedirectToAction("Index", "NewReport", new { id = report_id });
+                return RedirectToAction("Index", "NewReport", new { id = id });
             }
 
             ViewBag.rm = rm;
-            ViewBag.report_id = report_id;
+            ViewBag.report_id = id;
             ViewBag.user_id = user.id;
-            ViewBag.attachmentFiles = getAttachmentFiles(report_id);
+            ViewBag.attachmentFiles = getAttachmentFiles(id);
             var files = db.attachment
-                .Where(item => item.report_id == report_id && item.status_id == 2 && (item.visible_mediators_only.HasValue || item.visible_reporter.HasValue || item.user_id == rm._report.reporter_user_id))
+                .Where(item => item.report_id == id && item.status_id == 2 && (item.visible_mediators_only.HasValue || item.visible_reporter.HasValue || item.user_id == rm._report.reporter_user_id))
                 .ToList(); ;
             var users = files.Select(x => x.user_id).ToList();
             ViewBag.attachmentAdvFiles = files;
             ViewBag.attachmentAdvUsers = db.user.Where(x => users.Contains(x.id)).ToList();
             ViewBag.popup = null;
 
-            var report_secondary_type = db.report_secondary_type.Where(x => x.report_id == report_id);
+            var report_secondary_type = db.report_secondary_type.Where(x => x.report_id == id);
             ViewBag.report_secondary_type = db.company_secondary_type
                     .Where(x => x.company_id == rm._report.company_id)
                     .Where(x => report_secondary_type.Select(z => z.secondary_type_id).Contains(x.id))
@@ -349,11 +349,11 @@ namespace EC.Controllers
                 }
             }
 
-            return RedirectToAction("Attachments", new { report_id = report_id });
+            return RedirectToAction("Attachments", new { id = id });
         }
 
         [HttpPost]
-        public ActionResult Attachments(int report_id, string mode, string type)
+        public ActionResult Attachments(int id, string mode, string type)
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             // DEBUG
@@ -372,13 +372,13 @@ namespace EC.Controllers
                     {
                         continue;
                     }
-                    var report = db.report.FirstOrDefault(x => x.id == report_id);
+                    var report = db.report.FirstOrDefault(x => x.id == id);
 
                     var a = new attachment();
                     a.file_nm = file.FileName;
                     a.extension_nm = System.IO.Path.GetExtension(file.FileName);
                     a.path_nm = "";
-                    a.report_id = report_id;
+                    a.report_id = id;
                     a.status_id = 2;
                     a.effective_dt = DateTime.Now;
                     a.expiry_dt = DateTime.Now;
@@ -408,7 +408,7 @@ namespace EC.Controllers
             {
                 return RedirectToAction("Attachments", "ReporterDashboard", new { id = user.id });
             }
-            return RedirectToAction("Attachments", new { report_id = report_id });
+            return RedirectToAction("Attachments", new { report_id = id });
         }
 
         [HttpPost]
@@ -567,9 +567,9 @@ namespace EC.Controllers
             //return new ReportController().PrintToPdf(id);
         }
 
-        public List<attachment> getAttachmentFilesTask(int task_id)
+        public List<attachment> getAttachmentFilesTask(int id)
         {
-            List<attachment> attachmentFiles = db.attachment.Where(item => (item.report_task_id == task_id)).ToList();
+            List<attachment> attachmentFiles = db.attachment.Where(item => (item.report_task_id == id)).ToList();
             return attachmentFiles;
         }
 
@@ -581,9 +581,9 @@ namespace EC.Controllers
         }
 
 
-        public List<attachment> getAttachmentFiles(int report_id)
+        public List<attachment> getAttachmentFiles(int id)
         {
-            List<attachment> attachmentFiles = db.attachment.Where(item => (item.report_id == report_id && !item.visible_mediators_only.HasValue && !item.visible_reporter.HasValue)).ToList();
+            List<attachment> attachmentFiles = db.attachment.Where(item => (item.report_id == id && !item.visible_mediators_only.HasValue && !item.visible_reporter.HasValue)).ToList();
             return attachmentFiles;
         }
 

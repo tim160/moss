@@ -20,15 +20,15 @@ namespace EC
 
             #region /Case
             routes.MapRoute(
-        name: "CaseMessages",
-        url: "NewCase/Messages/{id}",
-        defaults: new
-        {
-            controller = "NewCase",
-            action = "Messages",
-            id = UrlParameter.Optional
-        }
-    );
+                name: "CaseMessages",
+                url: "NewCase/Messages/{id}",
+                defaults: new
+                {
+                    controller = "NewCase",
+                    action = "Messages",
+                    id = UrlParameter.Optional
+                }
+            );
 
             routes.MapRoute(
                 name: "CaseTask",
@@ -43,14 +43,14 @@ namespace EC
 
 
             routes.MapRoute(
-    name: "SaveLoginChanges",
-    url: "Report/SaveLoginChanges",
-     defaults: new
-     {
-         controller = "Report",
-         action = "SaveLoginChanges",
-         id = UrlParameter.Optional
-     });
+                name: "SaveLoginChanges",
+                url: "Report/SaveLoginChanges",
+                 defaults: new
+                 {
+                     controller = "Report",
+                     action = "SaveLoginChanges",
+                     id = UrlParameter.Optional
+                 });
             routes.MapRoute(
                 name: "AddToMediators",
                 url: "NewCase/AddToMediators",
@@ -356,97 +356,97 @@ namespace EC
 
             routes.MapRoute(
                 name: "NewCaseIndex",
-                url: "NewCase/Index/{report_id}",
+                url: "NewCase/Index/{id}",
                 defaults: new
                 {
                     controller = "NewCase",
                     action = "Index",
-                    report_id = UrlParameter.Optional
+                    id = UrlParameter.Optional
                 }
             );
 
             routes.MapRoute(
                 name: "NewCaseActivity",
-                url: "NewCase/Activity/{report_id}",
+                url: "NewCase/Activity/{id}",
                 defaults: new
                 {
                     controller = "NewCase",
                     action = "Activity",
-                    report_id = UrlParameter.Optional
+                    id = UrlParameter.Optional
                 }
             );
 
             routes.MapRoute(
                 name: "NewCaseTasks",
-                url: "NewCase/Tasks/{report_id}",
+                url: "NewCase/Tasks/{id}",
                 defaults: new
                 {
                     controller = "NewCase",
                     action = "Tasks",
-                    report_id = UrlParameter.Optional
+                    id = UrlParameter.Optional
                 }
             );
 
             routes.MapRoute(
                 name: "NewCaseMessages",
-                url: "NewCase/Messages/{report_id}",
+                url: "NewCase/Messages/{id}",
                 defaults: new
                 {
                     controller = "NewCase",
                     action = "Messages",
-                    report_id = UrlParameter.Optional
+                    id = UrlParameter.Optional
                 }
             );
             routes.MapRoute(
                 name: "NewCaseReporter",
-                url: "NewCase/Reporter/{report_id}",
+                url: "NewCase/Reporter/{id}",
                 defaults: new
                 {
                     controller = "NewCase",
                     action = "Reporter",
-                    report_id = UrlParameter.Optional
+                    id = UrlParameter.Optional
                 }
             );
 
             routes.MapRoute(
                 name: "NewCaseInvestigationNotes",
-                url: "NewCase/InvestigationNotes/{report_id}",
+                url: "NewCase/InvestigationNotes/{id}",
                 defaults: new
                 {
                     controller = "NewCase",
                     action = "InvestigationNotes",
-                    report_id = UrlParameter.Optional
+                    id = UrlParameter.Optional
                 }
             );
 
             routes.MapRoute(
                 name: "NewCaseCaseClosureReport",
-                url: "NewCase/CaseClosureReport/{report_id}",
+                url: "NewCase/CaseClosureReport/{id}",
                 defaults: new
                 {
                     controller = "NewCase",
                     action = "CaseClosureReport",
-                    report_id = UrlParameter.Optional
+                    id = UrlParameter.Optional
                 }
             );
             routes.MapRoute(
                 name: "NewCaseTeam",
-                url: "NewCase/Team/{report_id}",
+                url: "NewCase/Team/{id}",
                 defaults: new
                 {
                     controller = "NewCase",
                     action = "Team",
-                    report_id = UrlParameter.Optional
+                    id = UrlParameter.Optional
                 }
             );
             routes.MapRoute(
                 name: "NewCaseAttachments",
-                url: "NewCase/Attachments/{report_id}",
+                url: "NewCase/Attachments/{id}",
                 defaults: new
                 {
                     controller = "NewCase",
                     action = "Attachments",
-                    report_id = UrlParameter.Optional
+                    id = UrlParameter.Optional
                 }
             );
 

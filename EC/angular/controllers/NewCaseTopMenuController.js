@@ -11,7 +11,7 @@
         $scope.report_id = $filter('parseUrl')($location.$$absUrl, 'report_id');
 
         $scope.refresh = function () {
-            NewCaseTopMenuService.get({ reportId: $scope.report_id }, function (data) {
+            NewCaseTopMenuService.get({ id: $scope.report_id }, function (data) {
                 $scope.state = data;
             });
         };
@@ -26,7 +26,7 @@
                 /*eslint max-len: [2, 200, 4]*/
                 if (confirm('Does this Case or Alleged Offender pose an ongoing threat to the safety or health of the students and employees on campus?' +
                     ' A Campus Alert will be requested if you select "OK"')) {
-                    NewCaseTopMenuService.setLifeThreating({ reportId: $scope.report_id, isLifeThreating: isLifeThreating }, function () {
+                    NewCaseTopMenuService.setLifeThreating({ id: $scope.report_id, isLifeThreating: isLifeThreating }, function () {
                         $scope.refresh();
                     });
                 }
