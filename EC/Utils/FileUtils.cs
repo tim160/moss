@@ -7,7 +7,7 @@ using System.Web.Hosting;
 using EC.Models.Database;
 using EC.Constants;
 
-namespace EC.Models.Utils
+namespace EC.Utils
 {
     public class FileUtils
     {

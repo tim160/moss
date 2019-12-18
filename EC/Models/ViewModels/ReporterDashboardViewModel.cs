@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
-using EC.Controllers.Utils;
 using EC.Models.Database;
 
 namespace EC.Controllers.ViewModel

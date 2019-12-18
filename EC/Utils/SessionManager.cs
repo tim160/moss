@@ -5,7 +5,7 @@ using System.Threading;
 using System.Web;
 using EC.Models.Database;
 
-namespace EC.Controllers.Utils
+namespace EC.Utils
 {
     public class SessionManager
     {

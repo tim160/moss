@@ -1760,9 +1760,6 @@
     <Compile Include="Models\Database\status.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Database\sysdiagrams.cs">
-      <DependentUpon>ECEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Database\task.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
@@ -1813,8 +1810,6 @@
     <Compile Include="Models\ReadStatusModel.cs" />
     <Compile Include="Models\ReportStringModel.cs" />
     <Compile Include="Models\Services\AnalyticsService\MenuDashboardAnalytics.cs" />
-    <Compile Include="Models\Utils\HtmlDataHelper.cs" />
-    <Compile Include="Models\Utils\SessionManager.cs" />
     <Compile Include="Models\ViewModels\ActiveCasesViewModel.cs" />
     <Compile Include="Models\ViewModels\AnonimityViewModel.cs" />
     <Compile Include="Models\ViewModels\BaseViewModel.cs" />
@@ -1859,7 +1854,6 @@
     <Compile Include="Models\ECModel\Company.cs" />
     <Compile Include="Models\ECModel\User.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\Utils\FileUtils.cs" />
     <Compile Include="Models\ViewModels\AllPaymentTypesViewModel.cs" />
     <Compile Include="Models\ViewModels\AnonimityCultrure.cs" />
     <Compile Include="Models\ViewModels\CaseInvestigationStatusViewModel.cs" />
@@ -1896,13 +1890,15 @@
     <Compile Include="Utils\CheckBrowser.cs" />
     <Compile Include="Utils\CustomContractResolver .cs" />
     <Compile Include="Utils\DateTimeKindAttribute.cs" />
+    <Compile Include="Utils\FileUtils.cs" />
     <Compile Include="Utils\FreshDesk.cs" />
     <Compile Include="Utils\ImageUtils.cs" />
+    <Compile Include="Utils\Localization.cs" />
     <Compile Include="Utils\MVCExtensions.cs" />
     <Compile Include="Utils\PasswordUtils.cs" />
+    <Compile Include="Utils\SessionManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Content\assets\content\" />
     <Folder Include="Content\assets\template\php\" />
     <Folder Include="Upload\CompanyLogo\" />

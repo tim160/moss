@@ -1,5 +1,4 @@
-﻿using EC.Controllers.Utils;
-using EC.Models.Database;
+﻿using EC.Models.Database;
 using System.Linq;
 
 namespace EC.Utils
