@@ -851,7 +851,7 @@
 
     function NewCaseCaseClosureReportController($scope, $filter, orderByFilter, $location, NewCaseCaseClosureReportService) {
         $scope.model = {};
-        $scope.report_id = $filter('parseUrl')($location.$$absUrl, 'report_id');
+        $scope.report_id = $filter('parseUrl')($location.$$absUrl, 'id');
 
         $scope.refresh = function (data) {
             data.report_cc_crime.cc_is_clear_act_crime = '' + data.report_cc_crime.cc_is_clear_act_crime;
@@ -953,7 +953,7 @@
         $scope.isEditNote1 = false;
         $scope.isEditNote2 = false;
 
-        $scope.report_id = $filter('parseUrl')($location.$$absUrl, 'report_id');
+        $scope.report_id = $filter('parseUrl')($location.$$absUrl, 'id');
 
         $scope.refresh = function (data) {
             data.incidentTypeAdd = 0;
@@ -1182,7 +1182,7 @@
             ['$scope', '$filter', 'orderByFilter', '$location', 'NewCaseMessagesService', NewCaseMessagesController]);
 
     function NewCaseMessagesController($scope, $filter, orderByFilter, $location, NewCaseMessagesService) {
-        $scope.report_id = $filter('parseUrl')($location.$$absUrl, 'report_id');
+        $scope.report_id = $filter('parseUrl')($location.$$absUrl, 'id');
 
         $scope.activeTab = $location.$$absUrl.toLowerCase().indexOf('/reporter') === -1 ? 1 : 2;
         $scope.activeMessage = {};
@@ -1242,7 +1242,7 @@
             ['$scope', '$filter', 'orderByFilter', '$location', 'NewCaseReportService', NewCaseReportController]);
 
     function NewCaseReportController($scope, $filter, orderByFilter, $location, NewCaseReportService) {
-        $scope.report_id = $filter('parseUrl')($location.$$absUrl, 'report_id');
+        $scope.report_id = $filter('parseUrl')($location.$$absUrl, 'id');
 
         $scope.model = {
             reportingFrom: 'Canada',
@@ -1274,7 +1274,7 @@
             ['$scope', '$filter', 'orderByFilter', '$location', 'NewCaseTeamService', NewCaseTeamController]);
 
     function NewCaseTeamController($scope, $filter, orderByFilter, $location, NewCaseTeamService) {
-        $scope.report_id = $filter('parseUrl')($location.$$absUrl, 'report_id');
+        $scope.report_id = $filter('parseUrl')($location.$$absUrl, 'id');
 
         $scope.roleNames = ['', '', '', '', 'Case Reviewer', 'Platform Manager', 'Case Investigator', 'Legal counsel'];
         $scope.roleClasses = ['', '', '', '', 'teamBlock-body__profileSpec_reviewer', 'teamBlock-body__profileSpec_owner', '', ''];
@@ -1360,7 +1360,7 @@
             ['$scope', '$filter', '$location', 'NewCaseTopMenuService', NewCaseTopMenuController]);
 
     function NewCaseTopMenuController($scope, $filter, $location, NewCaseTopMenuService) {
-        $scope.report_id = $filter('parseUrl')($location.$$absUrl, 'report_id');
+        $scope.report_id = $filter('parseUrl')($location.$$absUrl, 'id');
 
         $scope.refresh = function () {
             NewCaseTopMenuService.get({ id: $scope.report_id }, function (data) {
