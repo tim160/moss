@@ -294,7 +294,6 @@ namespace EC.Controllers
             if (!rm.HasAccessToReport(user.id))
                 return RedirectToAction("Login", "Service");
 
-
             readStatusModel.UpdateReportRead(user.id, id);
 
             if ((rm._investigation_status == 1) || (rm._investigation_status == 2) || (rm._investigation_status == 7))
@@ -339,6 +338,10 @@ namespace EC.Controllers
             if (user == null || user.id == 0)
                 return RedirectToAction("Login", "Service");
 
+            ReportModel rm = new ReportModel(report_id);
+            if (!rm.HasAccessToReport(user.id))
+                return RedirectToAction("Login", "Service");
+
             var att = db.attachment.FirstOrDefault(x => x.id == id && x.report_id == report_id);
             if (att != null)
             {
@@ -361,6 +364,10 @@ namespace EC.Controllers
             //user = user ?? db.user.FirstOrDefault(x => x.id == 167);
             //
             if (user == null || user.id == 0)
+                return RedirectToAction("Login", "Service");
+
+            ReportModel rm = new ReportModel(id);
+            if (!rm.HasAccessToReport(user.id))
                 return RedirectToAction("Login", "Service");
 
             if ((mode == "upload") || (mode == "upload_rd"))
@@ -422,6 +429,10 @@ namespace EC.Controllers
             if (user == null || user.id == 0)
                 return RedirectToAction("Login", "Service");
 
+            ReportModel rm = new ReportModel(id);
+            if (!rm.HasAccessToReport(user.id))
+                return RedirectToAction("Login", "Service");
+
             var file = db.attachment.FirstOrDefault(x => x.report_id == id & x.id == file_id);
             file.visible_mediators_only = type == 1;
             file.visible_reporter = type == 2;
@@ -439,7 +450,6 @@ namespace EC.Controllers
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)
                 return RedirectToAction("Login", "Service");
-
 
             int user_id = user.id;
 
@@ -502,6 +512,14 @@ namespace EC.Controllers
 
             if (ModelState.IsValid)
             {
+                user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+                if (user == null || user.id == 0)
+                    return RedirectToAction("Login", "Service");
+
+                ReportModel rm = new ReportModel(newTask.id);
+                if (!rm.HasAccessToReport(user.id))
+                    return RedirectToAction("Login", "Service");
+
                 db.task_comment.Add(newTask);
                 try
                 {
@@ -521,6 +539,14 @@ namespace EC.Controllers
 
         public ActionResult ReassignTask(int id, int mediator_id)
         {
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            if (user == null || user.id == 0)
+                return RedirectToAction("Login", "Service");
+
+            ReportModel rm = new ReportModel(id);
+            if (!rm.HasAccessToReport(user.id))
+                return RedirectToAction("Login", "Service");
+
             taskService.ReassignTask(id, mediator_id, is_cc, Session);
             return RedirectToAction("Task", new { id = id });
         }
@@ -538,6 +564,8 @@ namespace EC.Controllers
             }
 
             var rm = new ReportModel(id);
+            if (!rm.HasAccessToReport(user.id))
+                return RedirectToAction("Login", "Service");
 
             if (pdf)
             {
@@ -554,7 +582,15 @@ namespace EC.Controllers
         public ActionResult PrintToPdfOriginal(Guid id, bool pdf = true)
         {
             var report = db.report.FirstOrDefault(x => x.guid == id);
+
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            if (user == null || user.id == 0)
+                return RedirectToAction("Login", "Service");
+
             var rm = new ReportModel(report.id);
+            if (!rm.HasAccessToReport(user.id))
+                return RedirectToAction("Login", "Service");
+
             if (pdf)
             {
                 var fn = $"Report to {rm.CompanyName()}";
@@ -569,6 +605,14 @@ namespace EC.Controllers
 
         public List<attachment> getAttachmentFilesTask(int id)
         {
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            if (user == null || user.id == 0)
+                return null;
+
+            var rm = new ReportModel(id);
+            if (!rm.HasAccessToReport(user.id))
+                return null;
+
             List<attachment> attachmentFiles = db.attachment.Where(item => (item.report_task_id == id)).ToList();
             return attachmentFiles;
         }
