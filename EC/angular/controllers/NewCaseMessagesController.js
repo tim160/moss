@@ -8,7 +8,7 @@
             ['$scope', '$filter', 'orderByFilter', '$location', 'NewCaseMessagesService', NewCaseMessagesController]);
 
     function NewCaseMessagesController($scope, $filter, orderByFilter, $location, NewCaseMessagesService) {
-        $scope.report_id = $filter('parseUrl')($location.$$absUrl, 'report_id');
+        $scope.report_id = $filter('parseUrl')($location.$$absUrl, 'id');
 
         $scope.activeTab = $location.$$absUrl.toLowerCase().indexOf('/reporter') === -1 ? 1 : 2;
         $scope.activeMessage = {};

@@ -9,7 +9,7 @@
 
     function NewCaseCaseClosureReportController($scope, $filter, orderByFilter, $location, NewCaseCaseClosureReportService) {
         $scope.model = {};
-        $scope.report_id = $filter('parseUrl')($location.$$absUrl, 'report_id');
+        $scope.report_id = $filter('parseUrl')($location.$$absUrl, 'id');
 
         $scope.refresh = function (data) {
             data.report_cc_crime.cc_is_clear_act_crime = '' + data.report_cc_crime.cc_is_clear_act_crime;

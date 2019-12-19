@@ -8,7 +8,7 @@
             ['$scope', '$filter', '$location', 'NewCaseTopMenuService', NewCaseTopMenuController]);
 
     function NewCaseTopMenuController($scope, $filter, $location, NewCaseTopMenuService) {
-        $scope.report_id = $filter('parseUrl')($location.$$absUrl, 'report_id');
+        $scope.report_id = $filter('parseUrl')($location.$$absUrl, 'id');
 
         $scope.refresh = function () {
             NewCaseTopMenuService.get({ id: $scope.report_id }, function (data) {

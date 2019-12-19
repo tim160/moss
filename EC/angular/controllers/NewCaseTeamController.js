@@ -8,7 +8,7 @@
             ['$scope', '$filter', 'orderByFilter', '$location', 'NewCaseTeamService', NewCaseTeamController]);
 
     function NewCaseTeamController($scope, $filter, orderByFilter, $location, NewCaseTeamService) {
-        $scope.report_id = $filter('parseUrl')($location.$$absUrl, 'report_id');
+        $scope.report_id = $filter('parseUrl')($location.$$absUrl, 'id');
 
         $scope.roleNames = ['', '', '', '', 'Case Reviewer', 'Platform Manager', 'Case Investigator', 'Legal counsel'];
         $scope.roleClasses = ['', '', '', '', 'teamBlock-body__profileSpec_reviewer', 'teamBlock-body__profileSpec_owner', '', ''];

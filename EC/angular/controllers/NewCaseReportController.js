@@ -8,7 +8,7 @@
             ['$scope', '$filter', 'orderByFilter', '$location', 'NewCaseReportService', NewCaseReportController]);
 
     function NewCaseReportController($scope, $filter, orderByFilter, $location, NewCaseReportService) {
-        $scope.report_id = $filter('parseUrl')($location.$$absUrl, 'report_id');
+        $scope.report_id = $filter('parseUrl')($location.$$absUrl, 'id');
 
         $scope.model = {
             reportingFrom: 'Canada',

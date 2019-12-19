@@ -19,7 +19,7 @@
         $scope.isEditNote1 = false;
         $scope.isEditNote2 = false;
 
-        $scope.report_id = $filter('parseUrl')($location.$$absUrl, 'report_id');
+        $scope.report_id = $filter('parseUrl')($location.$$absUrl, 'id');
 
         $scope.refresh = function (data) {
             data.incidentTypeAdd = 0;
