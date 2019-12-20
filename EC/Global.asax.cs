@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using System.Web.Security;
 using System.Web.SessionState;
 using System.Web.Http;
-using EC.Utils;
-using Newtonsoft.Json;
 using log4net;
+using EC.Common.Util;
+using Newtonsoft.Json;
 
 namespace EC
 {
