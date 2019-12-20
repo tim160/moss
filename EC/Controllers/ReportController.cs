@@ -13,6 +13,7 @@ using Rotativa.MVC;
 using EC.Models.ViewModels;
 using EC.Models.Culture;
 using EC.Utils;
+using EC.Common.Util;
 
 namespace EC.Controllers
 {

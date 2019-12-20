@@ -72,6 +72,7 @@
     <Compile Include="ActionResultExtended.cs" />
     <Compile Include="AsyncActionResult.cs" />
     <Compile Include="BlockedDateType.cs" />
+    <Compile Include="CheckBrowser.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="DomainUtil.cs" />
     <Compile Include="IValues.cs" />
