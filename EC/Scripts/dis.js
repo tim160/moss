@@ -129,10 +129,11 @@
                                             if (from === 'User') {
                                                 angular.element('#logoUser').attr('src', response.data + '?' + new Date().getTime());
                                                 angular.element('.userNavigation__logo img').attr('src', response.data);
+                                            } else if (from === 'mediatorCreateUpdate') {
+                                                angular.element('#logoUser').attr('src', response.data + '?' + new Date().getTime());
                                             } else {
                                                 angular.element('#logoCompany').attr('src', response.data);
                                                 angular.element('.userNavigation__info img').attr('src', response.data);
-
                                             }
                                         });
                                     }

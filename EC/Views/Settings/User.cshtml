@@ -45,7 +45,7 @@
             <div class="blockPhotoSetting">
                 <img id="logoUser" class="PersonalPhotoBlock" ng-src="{{photo_path}}">
 
-                <input type="hidden" id="urlAjaxUploadFiles" from="User" value="@Url.Action("User", "Settings")" />
+                <input type="hidden" id="urlAjaxUploadFiles" from="mediatorCreateUpdate" value="@Url.Action("User", "Settings")" />
                 <input type="file" data-id="settingsIndex" name="MAX_FILE_SIZE" value="9999999" accept="image/*" id="_file" name="_file" multiple="multiple" style="width: 1px;height: 1px;opacity: 0;" check-file-size="">
             </div>
             @if (um._user.role_id == 5)

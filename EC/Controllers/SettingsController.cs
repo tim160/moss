@@ -629,7 +629,7 @@ namespace EC.Controllers
                             }
                             result = pathLogo;
                         }
-                        if (Request.Form["from"] == "User")
+                        if (Request.Form["from"] == "User" || Request.Form["from"] == "mediatorCreateUpdate")
                         {
                             var fi = new System.IO.FileInfo(photo.FileName);
                             var folder = Server.MapPath(String.Format("~/Upload/Company/{0}/users", cm._company.guid));
@@ -650,9 +650,12 @@ namespace EC.Controllers
                     //          url = url + ext;
 
                             url += String.Format("/Upload/Company/{0}/users/{1}{2}", cm._company.guid, um._user.guid, fi.Extension);
+                            if (MediatorIdParams != null)
+                            {
+                                UserModel model = new UserModel();
+                                tempResult = model.updateLogoUser(user_id, url);
+                            }
 
-                            UserModel model = new UserModel();
-                            tempResult = model.updateLogoUser(user_id, url);
                             result = url;
                         }
                     }
