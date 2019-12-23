@@ -69,7 +69,6 @@
     <Compile Include="IMarkDatesTimesAsUtc.cs" />
     <Compile Include="IModifiableDateTimeItem.cs" />
     <Compile Include="IRepository.cs" />
-    <Compile Include="ISchemaConfigurator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
