@@ -51,6 +51,8 @@ TestResults/
 ######################
 *.log
 *.sqlite
+# Visual Studio cache/options directory
+.vs/
 # OS generated files #
 ######################
 .DS_Store?
@@ -80,6 +82,7 @@ EC/Upload/
 EC/Models/Database/
 EC/Web.config
 EC.COM/Areas/
+EC/ConnectionStrings.config
 EC.COM/ConnectionStrings.config
 EC.COM/Smtp.config
 EC/Properties/PublishProfiles/File.pubxml
