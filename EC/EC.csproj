@@ -47,10 +47,6 @@
     <Reference Include="Castle.Windsor">
       <HintPath>..\packages\Castle.Windsor.3.2.1\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
-    <Reference Include="EC.Common.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\EC.Common.Interfaces.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -107,7 +103,7 @@
     </Reference>
     <Reference Include="System.Web.Http.WebHost, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.4\lib\net45\System.Web.Http.WebHost.dll</HintPath>
-	</Reference>
+    </Reference>
     <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
@@ -1227,6 +1223,7 @@
     <Content Include="Models\Database\ECEntities.edmx.diagram">
       <DependentUpon>ECEntities.edmx</DependentUpon>
     </Content>
+    <Content Include="ConnectionStrings.config" />
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <None Include="Properties\PublishProfiles\ec-code.pubxml" />
     <None Include="Properties\PublishProfiles\ec-dev.pubxml" />
@@ -1757,9 +1754,6 @@
     <Compile Include="Models\Database\status.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Database\sysdiagrams.cs">
-      <DependentUpon>ECEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Database\task.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
@@ -1914,6 +1908,10 @@
     <ProjectReference Include="..\EC.Common.Base\EC.Common.Base.csproj">
       <Project>{eece5e11-2f95-4f21-b108-5c6d12dc5603}</Project>
       <Name>EC.Common.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EC.Common.Interfaces\EC.Common.Interfaces.csproj">
+      <Project>{1b096edd-7575-4bbb-a93b-deb482acfbcd}</Project>
+      <Name>EC.Common.Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\EC.Common.Util\EC.Common.Util.csproj">
       <Project>{60f0f82e-fa76-4279-b980-21614256dafb}</Project>
