@@ -29,7 +29,8 @@ namespace EC.Models.ViewModel
             string _sender_name = "";
 
             #region message_sender_name
-            user temp_sender = um.GetById(_message.sender_id);
+            UserModel sender = new UserModel(_message.sender_id);
+            user temp_sender = sender._user;
 
             if ((temp_sender != null) && (temp_sender.id != 0))
             {

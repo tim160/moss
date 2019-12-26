@@ -510,72 +510,7 @@ namespace EC.Models
       return is_closed;
     }
 
-    public DateTime promotion_toactive_status_date()
-    {
-      if ((_report == null) || (ID == 0))
-      {
-        // error in report or its not created yet
-        return ECGlobalConstants._default_date;
-      }
-      List<int> _active_classes = new List<int>();
-      _active_classes.Add((int)CaseStatusConstants.CaseStatusValues.Investigation);
-      _active_classes.Add((int)CaseStatusConstants.CaseStatusValues.Completed);
-      _active_classes.Add((int)CaseStatusConstants.CaseStatusValues.Closed);
-
-      report_investigation_status last_status = new report_investigation_status();
-      if (db.report_investigation_status.Any(item => (item.report_id == ID)))
-      {
-        List<report_investigation_status> _statuses = db.report_investigation_status.Where(item => (item.report_id == ID)).OrderByDescending(x => x.created_date).ToList();
-
-        if (_statuses.Count > 0)
-        {
-          int first_non_active_status_place = -1;
-          int last_active_status_place = -1;
-
-          int count = _statuses.Count;
-          while ((last_active_status_place < 0) && (count >= 0))
-          {
-            if (_active_classes.Contains(_statuses[count - 1].investigation_status_id))
-            {
-              last_active_status_place = count;
-            }
-
-            count--;
-          }
-          if (last_active_status_place < 0)
-          {
-            // no active statuses
-            return ECGlobalConstants._default_date;
-          }
-          else
-          {
-            count = last_active_status_place;
-            // we need to go and find last active status before not active
-            while ((count > 0) && (_active_classes.Contains(_statuses[count - 1].investigation_status_id)))
-            {
-              count--;
-            }
-            first_non_active_status_place = count;
-
-
-            if (first_non_active_status_place < 0)
-            {
-              // no active statuses
-              return ECGlobalConstants._default_date;
-            }
-            return _statuses[first_non_active_status_place + 1].created_date;
-          }
-
-        }
-        else
-          return ECGlobalConstants._default_date;
-      }
-      else
-        return ECGlobalConstants._default_date;
-
-      //          return 0;
-    }
-
+ 
     public report_investigation_status LastPromotion()
     {
       int status_id = _investigation_status;
@@ -590,30 +525,6 @@ namespace EC.Models
       }
     }
  
-    public DateTime LastEventDate()
-    {
-      if ((_report == null) || (ID == 0))
-      {
-        // error in report or its not created yet
-        return ECGlobalConstants._default_date;
-      }
-      report_log last_status_log = new report_log();
-      if (db.report_log.Any(item => (item.report_id == ID)))
-      {
-        List<report_log> _statuses = db.report_log.Where(item => (item.report_id == ID)).OrderByDescending(x => x.id).ToList();
-
-        if (_statuses.Count > 0)
-        {
-          last_status_log = _statuses[0];
-          return last_status_log.created_dt;
-        }
-        else
-          return ECGlobalConstants._default_date;
-      }
-      else
-        return ECGlobalConstants._default_date;
-
-    }
 
     /// <summary>
     /// show Reporter Anon Level to reporter
@@ -680,10 +591,7 @@ namespace EC.Models
       return anon_level;
 
     }
-    public bool _has_attachments()
-    {
-      return (_attachments().Count > 0);
-    }
+
 
     public List<string> _attachments()
     {
@@ -815,10 +723,6 @@ namespace EC.Models
       return db.company_outcome.Where(item => item.company_id == _report.company_id).ToList();
     }
 
-    public List<role_in_report> RoleInReport()
-    {
-      return db.role_in_report.ToList();
-    }
 
     public List<report_mediator_involved> InvolvedMediators()
     {

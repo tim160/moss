@@ -2,7 +2,6 @@
 @using EC.Models.Database;
 @using EC.Localization;
 @using EC.Models.ViewModel;
-@using EC.Models.App.Case;
 @using EC.Constants;
 @{
 
@@ -51,7 +50,7 @@
                     <div class="blockPersonal">
                         <div class="blockPhoto">
                             @{
-                                _user = um.GetById(user_id);
+                                _user = um._user;
                                 if ((_user != null) && (_user.id != 0))
                                 {
                                     if (_user.photo_path.Trim() != "")
@@ -68,7 +67,7 @@
                         <div class="arrow gray"></div>
                     </div>
                     <div class="messageText">
-                        @Html.TextAreaFor(model => model.body_tx, new { body_tx = "body_tx", @class = "gray" })
+                        @Html.TextAreaFor(model => model._message.body_tx, new { body_tx = "body_tx", @class = "gray" })
                     </div>
                 </div>
                 <div class="newMessageBtn">

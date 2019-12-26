@@ -34,7 +34,6 @@
 
     var unread_report_number = userUnreadEntities.unread_reports;
 
-    // var unread_report_number = um.UnreadReport(0, 0).Count;
     var unread_report_number_string = "";
     string page_subtitle = "";
     if (unread_report_number > 0)
@@ -58,7 +57,7 @@
         unread_task_number_string = unread_task_number.ToString();
     }
 
-    user _user = um.GetById(user_id);
+    user _user = um._user;
     company _company = cm.GetById(_user.company_id);
     string report_name = "Case";
 

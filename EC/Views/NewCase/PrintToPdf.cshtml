@@ -44,6 +44,7 @@
 
   var status = Model._last_investigation_status();
   var description = status != null ? status.description : "";
+  GetDBEntityModel getDBEntityModel = new GetDBEntityModel();
 }
 
 <!DOCTYPE html>
@@ -228,7 +229,7 @@
                         </div><!-- /.reportContentBlock__firstColTitle -->
                         @{
                             rClass = "";
-                            var roles = Model.RoleInReport();
+                            var roles = getDBEntityModel.getRoleInReport();
                             foreach (var item in NonInvolvedMediatorsAll)
                             {
                                 var role = roles.FirstOrDefault(x => x.id == item.role_in_report_id);
