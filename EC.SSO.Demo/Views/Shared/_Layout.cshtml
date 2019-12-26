@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>@ViewBag.Title - SSO Demo</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">
+            <img src="/Content/Images/Logo.svg" width="30" height="30" alt="Company name">
+        </a>
+        @if (Convert.ToBoolean(ViewBag.Logged))
+        {
+            <span class="navbar-text">
+                Welcome, @ViewBag.UserName.
+            </span>
+        }
+        else
+        {
+            using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @class = "form-inline" }))
+            {
+                @Html.TextBox("Username", null, new
+                {
+                    @class = "form-control mr-sm-2",
+                    placeholder = "Username",
+                    aria_label = "Username"
+                });
+                @Html.Password("Password", null, new
+                {
+                    @class = "form-control mr-sm-2",
+                    placeholder = "Password",
+                    aria_label = "Password"
+                });
+                <button class="btn btn-outline-light my-2 my-sm-0"
+                        type="submit">
+                    Login
+                </button>
+            }
+        }
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
