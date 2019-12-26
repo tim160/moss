@@ -1,48 +1,55 @@
 ﻿@using EC.Models.Database
 @using EC.Constants
 @using EC.Models
-
+@using EC.Models.ViewModels
 @{
-    bool? is_cc = ViewBag.is_cc;
-    if (!is_cc.HasValue)
-    {
-        is_cc = false;
-    }
+  bool? is_cc = ViewBag.is_cc;
+  if (!is_cc.HasValue)
+  {
+    is_cc = false;
+  }
 
-    var user_id = ViewBag.user_id;
-    EC.Models.UserModel um = new EC.Models.UserModel(user_id);
+  var user_id = ViewBag.user_id;
+  EC.Models.UserModel um = new EC.Models.UserModel(user_id);
 
-    EC.Models.ReportModel rm = new EC.Models.ReportModel();
-    int _report_id = 0;
-    int investigationstatus = 1;
-    if ((ViewBag.report_id != null) && ((int)ViewBag.report_id != 0))
-    {
-        _report_id = (int)ViewBag.report_id;
-        rm = new EC.Models.ReportModel(_report_id);
+  EC.Models.ReportModel rm = new EC.Models.ReportModel();
+  int _report_id = 0;
+  int investigationstatus = 1;
+  if ((ViewBag.report_id != null) && ((int)ViewBag.report_id != 0))
+  {
+    _report_id = (int)ViewBag.report_id;
+    rm = new EC.Models.ReportModel(_report_id);
 
-        investigationstatus = rm._investigation_status;
-    }
+    investigationstatus = rm._investigation_status;
+  }
 
-    var unread_report_number = um.UnreadReport(0, 0).Count;
-    var unread_report_number_string = "";
-    if (unread_report_number > 0)
-    {
-        unread_report_number_string = unread_report_number.ToString();
-    }
 
-    int unread_message_number = um.Unread_Messages_Quantity(_report_id, 1) + um.Unread_Messages_Quantity(_report_id, 2) + um.Unread_Messages_Quantity(_report_id, 3);
-    var unread_message_number_string = "";
-    if (unread_message_number > 0)
-    {
-        unread_message_number_string = unread_message_number.ToString();
-    }
+  ReadStatusModel rsm = new ReadStatusModel();
+  UsersUnreadEntitiesNumberViewModel userUnreadEntities = rsm.GetUserUnreadEntitiesNumbers(user_id);
+  // is it replacing um.UnreadReport(0, 0).Count ??
+  var unread_report_number1 = userUnreadEntities.unread_reports;
 
-    int unread_task_number = um.UnreadTasksQuantity(_report_id, true, 1);
-    var unread_task_number_string = "";
-    if (unread_task_number > 0)
-    {
-        unread_task_number_string = unread_task_number.ToString();
-    }
+
+  var unread_report_number = um.UnreadReport(0, 0).Count;
+  var unread_report_number_string = "";
+  if (unread_report_number > 0)
+  {
+    unread_report_number_string = unread_report_number.ToString();
+  }
+
+  int unread_message_number = um.Unread_Messages_Quantity(_report_id, 1) + um.Unread_Messages_Quantity(_report_id, 2) + um.Unread_Messages_Quantity(_report_id, 3);
+  var unread_message_number_string = "";
+  if (unread_message_number > 0)
+  {
+    unread_message_number_string = unread_message_number.ToString();
+  }
+
+  int unread_task_number = um.UnreadTasksQuantity(_report_id, true, 1);
+  var unread_task_number_string = "";
+  if (unread_task_number > 0)
+  {
+    unread_task_number_string = unread_task_number.ToString();
+  }
 }
 
 <style>

@@ -239,25 +239,7 @@ namespace EC.Models
       return null;
     }
 
-
-    public user registration(string name, string pasword)
-    {
-      //    users.Add(name, new User() { Email = name, Login = name, Password = pasword });
-      return null;
-    }
-    public user GetUserByEmail(string email)
-    {
-      return db.user.FirstOrDefault(item => item.email == email);
-    }
-
-    public user GetUserByLogin(string login)
-    {
-      user _user = db.user.FirstOrDefault(item => item.login_nm == login);
-      // ui.SetUserDetails(_user.id, _user.password, _user.login_nm);
-
-      return _user;
-    }
-
+ 
     public user Add(user user)
     {
       db.user.Add(user);

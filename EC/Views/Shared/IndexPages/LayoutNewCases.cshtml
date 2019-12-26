@@ -52,7 +52,7 @@
     unread_task_number_string = unread_task_number.ToString();
   }
 
-  user _user = um.GetById(user_id);
+  user _user = um._user;
   company _company = cm.GetById(_user.company_id);
 
   string report_name = "Case";
