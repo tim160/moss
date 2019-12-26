@@ -131,7 +131,7 @@ namespace EC.Controllers.API
                 user.login_nm = generateModel.GenerateLoginName(user.first_nm, user.last_nm);
                 var password = generateModel.GeneretedPassword().Trim();
                 user.password = PasswordUtils.GetHash(password);
-                user.photo_path = "";
+                user.photo_path = model.photo_path != String.Empty ? model.photo_path : "";
                 user.email = model.email.Trim();
                 user.phone = "";
                 user.preferred_contact_method_id = 1;
@@ -152,7 +152,7 @@ namespace EC.Controllers.API
                 user.company_location_id = location_id;
                 user.location_nm = "";
                 user.sign_in_code = null;
-                user.guid = Guid.NewGuid();
+                user.guid = model.guid != null ? model.guid : Guid.NewGuid();
                 DB.user.Add(user);
                 DB.SaveChanges();
 

@@ -128,9 +128,14 @@
                                             var from = angular.element('#urlAjaxUploadFiles').attr('from');
                                             if (from === 'User') {
                                                 angular.element('#logoUser').attr('src', response.data + '?' + new Date().getTime());
-                                                angular.element('.userNavigation__logo img').attr('src', response.data);
+                                                angular.element('.userNavigation__logo img').attr('src', response.data + '?' + new Date().getTime());
                                             } else if (from === 'mediatorCreateUpdate') {
-                                                angular.element('#logoUser').attr('src', response.data + '?' + new Date().getTime());
+                                                if (angular.element('#MediatorId').val() === '0') {
+                                                    angular.element('#logoUser').attr('src', response.data.url + '?' + new Date().getTime());
+                                                    angular.element('#guid').attr('value', response.data.guid);
+                                                } else {
+                                                    angular.element('#logoUser').attr('src', response.data + '?' + new Date().getTime());
+                                                }
                                             } else {
                                                 angular.element('#logoCompany').attr('src', response.data);
                                                 angular.element('.userNavigation__info img').attr('src', response.data);

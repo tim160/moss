@@ -13,6 +13,7 @@ using EC.Constants;
 using EC.Common.Util;
 using EC.Utils;
 using EC.Localization;
+using System.Web.Script.Serialization;
 
 namespace EC.Controllers
 {
@@ -582,14 +583,15 @@ namespace EC.Controllers
                 return result;
             
             HttpPostedFileBase photo = Request.Files["_file"];
-            string MediatorIdParams = Request.Params["MediatorId"];
-            //int MediatorId = 0;
+            string MediatorId = Request.Params["MediatorId"];
+            string from = Request.Params["from"];
+
             int user_id = user.id;
-            if (MediatorIdParams != null)
+            if (MediatorId != null)
             {
                 try
                 {
-                    user_id = Convert.ToInt32(MediatorIdParams);
+                    user_id = Convert.ToInt32(MediatorId);
                 } catch(FormatException ex)
                 {
                     return ex.Message;
@@ -600,63 +602,95 @@ namespace EC.Controllers
             UserModel um = new UserModel(user_id);
             int company_id = um._user.company_id;
             var cm = new CompanyModel(company_id);
-            /**/
 
             try
             {
                 if (photo.ContentLength > 0 && company_id > 0)
                 {
-                    if (Request.Form["from"] != null && Request.Form["from"] != String.Empty)
+                    if (from != null && from != String.Empty)
                     {
                         string temp = Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port);
-                        string UploadedDirectory = "Upload\\" + Request.Form["from"] + "Logo";
-                        string pathLogo = temp + "//" + "Upload//" + Request.Form["from"] + "Logo";
-                        //UploadedDirectory = temp + "\\" + UploadedDirectory;
+                        string UploadedDirectory = "Upload\\" + from + "Logo";
+                        string pathLogo = temp + "//" + "Upload//" + from + "Logo";
                         string Root = System.Web.Hosting.HostingEnvironment.MapPath("~/");
                         string UploadTarget = Root + UploadedDirectory + @"\";
-                        bool tempResult = false;
-                        if (Request.Form["from"] == "Company")
+                        if (from == "Company")
                         {
                             var fileName = company_id + "_" + DateTime.Now.Ticks + System.IO.Path.GetExtension(photo.FileName);
                             string path = @"\" + UploadedDirectory + @"\" + fileName;
-                            //result = "/Upload/" + Request.Form["from"] + "Logo/" + fileName;
                             pathLogo += "/" + fileName;
-                            CompanyModel model = new CompanyModel();
-                            tempResult = model.addLogoCompany(company_id, pathLogo);
-                            if (tempResult)
+                            if (cm.addLogoCompany(company_id, pathLogo))
                             {
                                 photo.SaveAs(UploadTarget + fileName);
                             }
                             result = pathLogo;
                         }
-                        if (Request.Form["from"] == "User" || Request.Form["from"] == "mediatorCreateUpdate")
+                        if (from == "User" || from == "mediatorCreateUpdate")
                         {
                             var fi = new System.IO.FileInfo(photo.FileName);
                             var folder = Server.MapPath(String.Format("~/Upload/Company/{0}/users", cm._company.guid));
                             if (!System.IO.Directory.Exists(folder))
                             {
-                                System.IO.Directory.CreateDirectory(folder);
+                                try
+                                {
+                                    System.IO.Directory.CreateDirectory(folder);
+                                } catch(UnauthorizedAccessException ex)
+                                {
+                                    logger.Error(ex.ToString());
+                                } catch(System.IO.IOException ex)
+                                {
+                                    logger.Error(ex.ToString());
+                                }
                             }
-                            var file = String.Format("{0}\\{1}{2}", folder, um._user.guid, fi.Extension);
-                            photo.SaveAs(file);
+                            string file = String.Empty;
+                            
 
-                            ImageUtils.MakeSquarePhoto(file);
 
-                            var url = System.Configuration.ConfigurationManager.AppSettings["SiteRoot"];
-                            url = url ?? Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port);
-                   //         var is_cloud = System.Configuration.ConfigurationManager.AppSettings["IsCloud"];
-                   //         var ext = System.Configuration.ConfigurationManager.AppSettings["ImageExtensionRoot"];
-                   //         if (is_cloud != null && is_cloud.ToString() == "1" && ext != null && !string.IsNullOrWhiteSpace(ext))
-                    //          url = url + ext;
-
-                            url += String.Format("/Upload/Company/{0}/users/{1}{2}", cm._company.guid, um._user.guid, fi.Extension);
-                            if (MediatorIdParams != null)
+                            if (from == "mediatorCreateUpdate" && MediatorId == null)
                             {
-                                UserModel model = new UserModel();
-                                tempResult = model.updateLogoUser(user_id, url);
-                            }
+                                var guid = Guid.NewGuid();
+                                file = String.Format("{0}\\{1}{2}", folder, guid, fi.Extension);
+                                photo.SaveAs(file);
 
-                            result = url;
+                                try
+                                {
+                                    ImageUtils.MakeSquarePhoto(file);
+
+                                }
+                                catch (OutOfMemoryException ex)
+                                {
+                                    logger.Error(ex.ToString());
+                                }
+
+                                var url = System.Configuration.ConfigurationManager.AppSettings["SiteRoot"];
+                                url = url ?? Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port);
+
+                                url += String.Format("/Upload/Company/{0}/users/{1}{2}", cm._company.guid, guid, fi.Extension);
+                                return new JavaScriptSerializer().Serialize(new
+                                {
+                                    guid = guid,
+                                    url = url,
+                                });
+                            } else
+                            {
+                                file = String.Format("{0}\\{1}{2}", folder, um._user.guid, fi.Extension);
+                                photo.SaveAs(file);
+                                try
+                                {
+                                    ImageUtils.MakeSquarePhoto(file);
+
+                                } catch (OutOfMemoryException ex)
+                                {
+                                    logger.Error(ex.ToString());
+                                }
+
+                                var url = System.Configuration.ConfigurationManager.AppSettings["SiteRoot"];
+                                url = url ?? Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port);
+
+                                url += String.Format("/Upload/Company/{0}/users/{1}{2}", cm._company.guid, um._user.guid, fi.Extension);
+                                um.updateLogoUser(user_id, url);
+                                return url;
+                            }
                         }
                     }
                 }

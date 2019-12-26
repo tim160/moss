@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Web;
 
-namespace EC.Utils
+namespace EC.Common.Util
 {
     public class ImageUtils
     {

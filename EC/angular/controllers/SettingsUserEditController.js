@@ -29,6 +29,7 @@
         $scope.val_email = false;
         $scope.val_departmentId = false;
         $scope.val_locationId = false;
+        $scope.guid = false;
 
         $scope.id = parseInt($location.absUrl().substring($location.absUrl().indexOf('user/') + 'user/'.length));
         $scope.id = isNaN($scope.id) ? 0 : $scope.id;
@@ -54,6 +55,8 @@
             $scope.val_first_nm = !validateSettingsUser.validate($scope.first_nm);
             $scope.val_last_nm = !validateSettingsUser.validate($scope.last_nm);
             $scope.val_email = !validateSettingsUser.validate($scope.email, /^([a-zA-Z0-9_-]+\.)*[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*\.[a-zA-Z]{2,6}$/);
+            var guid = angular.element('#guid').attr('value');
+            var photo_path = angular.element('#logoUser').attr('src');
 
             if (!$scope.val_first_nm
                 && !$scope.val_last_nm
@@ -72,6 +75,8 @@
                     user_permissions_approve_case_closure: $scope.user_permissions_approve_case_closure,
                     user_permissions_change_settings: $scope.user_permissions_change_settings,
                     status_id: $scope.status_id,
+                    guid: guid,
+                    photo_path: photo_path,
                 };
                 SettingsUserEditService.post(model, function (data) {
                     if (data.ok) {

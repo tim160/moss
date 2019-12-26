@@ -119,7 +119,7 @@
     <script type="text/javascript" src="~/Libs/moment/min/moment.min.js"></script>
     <script type="text/javascript" src="~/Libs/fullcalendar/dist/fullcalendar.min.js"></script>
     <script type="text/javascript" src="~/Libs/fullcalendar/dist/gcal.js"></script>
-    <script src="~/Scripts/dis.min.js"></script>
+    <script src="~/Scripts/dis.min.js?version=@System.Configuration.ConfigurationManager.AppSettings["versionDisJS"]"></script>
 </head>
 <body ng-app="EC">
     <input type="hidden" id="_report_id" value="@Html.Raw(_report_id)" />
