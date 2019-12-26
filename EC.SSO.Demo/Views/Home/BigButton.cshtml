@@ -1,9 +1,12 @@
 ﻿@{
-    string username = (Model as EC.SSO.Demo.Models.User)?.Username;
-
-    ViewBag.Title = "Application selection";
-    ViewBag.Logged = true;
-    ViewBag.UserName = username;
+  string username = "";
+  if ((Model as EC.SSO.Demo.Models.User) != null)
+  {
+    username = Model.Username;
+  }
+  ViewBag.Title = "Application selection";
+  ViewBag.Logged = true;
+  ViewBag.UserName = username;
 
 }
 
