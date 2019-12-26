@@ -1,0 +1,24 @@
+﻿@{
+    string username = (Model as EC.SSO.Demo.Models.User)?.Username;
+
+    ViewBag.Title = "Application selection";
+    ViewBag.Logged = true;
+    ViewBag.UserName = username;
+
+}
+
+<div class="container align-content-center" style="padding-top: 100px;">
+    @Html.ActionLink(
+        "Employee Confidential App",
+        "EmbeddedApp",
+        "Home",
+        new
+        {
+            username = username
+        },
+        new
+        {
+            @class = "btn btn-primary btn-block",
+            role = "button"
+        })
+</div>
