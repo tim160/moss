@@ -22,14 +22,14 @@
 }
 
 <div class="blockSettings blockAllTasks">
-    <div id="casesHeared">
+    <div id="casesHeader">
         <div id="menu">
             <a class="caseesTab active casesMassage">
                 @LocalizationGetter.GetString("Allmessages", is_cc) @if (_mvm.Unread_Number > 0)
                 {<span>@_mvm.Unread_Number</span>}
             </a>
         </div>
-    </div><!--casesHeared-->
+    </div><!--casesHeader-->
 
         <div class="contentSettings">
             @foreach (MessageExtended _message in _mvm._messages)

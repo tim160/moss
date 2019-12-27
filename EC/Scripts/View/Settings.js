@@ -5,7 +5,7 @@
             $('.positionActivityIcon').height(89);
         }
         else {
-            $('.positionActivityIcon').height($('#casesHeared').height());
+            $('.positionActivityIcon').height($('#casesHeader').height());
         }
     }
     $('.mainTitle').click(function () {
@@ -534,7 +534,7 @@
     //        $('.positionActivityIcon').height(89);
     //    }
     //    else {
-    //        $('.positionActivityIcon').height($('#casesHeared').height());
+    //        $('.positionActivityIcon').height($('#casesHeader').height());
     //    }
     //}
     //$('.mainTitle').click(function () {
@@ -650,7 +650,7 @@
     //        $('.positionActivityIcon').height(89);
     //    }
     //    else {
-    //        $('.positionActivityIcon').height($('#casesHeared').height());
+    //        $('.positionActivityIcon').height($('#casesHeader).height());
     //    }
     //}
     //$('.mainTitle').click(function () {

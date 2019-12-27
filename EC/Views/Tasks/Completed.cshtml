@@ -5,23 +5,23 @@
 @using EC.Common.Interfaces;
 @using EC.Core.Common;
 @{
-  bool? is_cc = ViewBag.is_cc;
-  if (!is_cc.HasValue)
-  {
-    is_cc = false;
-  }
-  IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
+    IDateTimeHelper m_DateTimeHelper = new DateTimeHelper();
 
-  ViewBag.Title = LocalizationGetter.GetString("Mycompletedtasks", is_cc);
-  Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+    ViewBag.Title = LocalizationGetter.GetString("Mycompletedtasks", is_cc);
+    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
 
-  int user_id = (Int32)ViewBag.user_id;
-  List<TaskExtended> tasks = (List<TaskExtended>)ViewBag.tasks;
-  ReportModel rm = new ReportModel();
+    int user_id = (Int32)ViewBag.user_id;
+    List<TaskExtended> tasks = (List<TaskExtended>)ViewBag.tasks;
+    ReportModel rm = new ReportModel();
 
-  List<report> reports = (List<report>)ViewBag.reports;
-  UserModel um = new UserModel(user_id);
-  int unread_tasks = ViewBag.unread_tasks;
+    List<report> reports = (List<report>)ViewBag.reports;
+    UserModel um = new UserModel(user_id);
+    int unread_tasks = ViewBag.unread_tasks;
 
 }
 
@@ -29,18 +29,17 @@
     <div id="casesHeared">
         <div id="menu">
 
-            <a href="/tasks/Index" class="caseesTab">@LocalizationGetter.GetString("Myactivetasks", is_cc) @if (unread_tasks > 0)
-            {<span>@unread_tasks</span>}</a>
+            <a href="/tasks/Index" class="caseesTab">
+                @LocalizationGetter.GetString("Myactivetasks", is_cc) @if (unread_tasks > 0)
+            {<span>@unread_tasks</span>}
+            </a>
             <a href="/tasks/Completed" class="caseesTab active">@LocalizationGetter.GetString("Mycompletedtasks", is_cc)</a>
         </div>
-        @*     <div class="positionActivityIcon">
-                <div id="activityIcon"></div>
-            </div>*@
-    </div><!--casesHeared-->
+    </div>
 
 
     <div class="contentSettings">
-        <!--START myCompletedTasks-->
+
         @if (tasks.Where(m => m._task.assigned_to == user_id).Count() > 0)
         {
             <div class="myCompletedTasks myTasks">
@@ -250,57 +249,57 @@
                 </div>
 
             </div>
-            <!--END myCompletedTasks-->
-                        }
+
+        }
     </div><!--contentSettings-->
 </div>
 
 <script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
 <script>
-        $(document).ready(function () {
+    $(document).ready(function () {
 
-            $('.menuTasks .caseTasksName span').click(function () {
-                $('.blockTask.taskByDate').hide();
-                $('.blockTask.taskByName').show();
-                $('.myTasks header .menuTasks .dueDate .labelArrow').hide();
-                $('.myTasks header .menuTasks .caseTasksName .labelArrow').show();
-                $('.myTasks header .menuTasks .dueDate').css('background', '#ebf1f1');
-                $('.myTasks header .menuTasks .caseTasksName').css('background', '#d6dcdc');
-            });
-            $('.menuTasks .dueDate span').click(function () {
-                $('.blockTask.taskByDate').show();
-                $('.blockTask.taskByName').hide();
-                $('.myTasks header .menuTasks .dueDate .labelArrow').show();
-                $('.myTasks header .menuTasks .dueDate').css('background', '#d6dcdc');
-                $('.myTasks header .menuTasks .caseTasksName .labelArrow').hide();
-                $('.myTasks header .menuTasks .caseTasksName').css('background', '#ebf1f1');
-            });
-
-
-
-            $('.contentMainTask').click(function () {
-                $(this).parent().find('.tasksForMain').toggle();
-                var element = $(this).find('.labelArrow');
-                var styleElement = element.css('transform');
-                if (styleElement == "matrix(-0.707107, 0.707107, -0.707107, -0.707107, 0, 0)") {
-
-                    element.css({
-                        '-ms-transform': 'rotate(45deg)',
-                        '-webkit-transform': 'rotate(45deg)',
-                        '-moz-transform': 'rotate(45deg)',
-                        'transform': 'rotate(45deg)'
-                    });
-                }
-                else {
-                    element.css({
-                        '-ms-transform': 'rotate(135deg)',
-                        '-webkit-transform': 'rotate(135deg)',
-                        '-moz-transform': 'rotate(135deg)',
-                        'transform': 'rotate(135deg)'
-                    });
-                }
-            });
-
+        $('.menuTasks .caseTasksName span').click(function () {
+            $('.blockTask.taskByDate').hide();
+            $('.blockTask.taskByName').show();
+            $('.myTasks header .menuTasks .dueDate .labelArrow').hide();
+            $('.myTasks header .menuTasks .caseTasksName .labelArrow').show();
+            $('.myTasks header .menuTasks .dueDate').css('background', '#ebf1f1');
+            $('.myTasks header .menuTasks .caseTasksName').css('background', '#d6dcdc');
         });
+        $('.menuTasks .dueDate span').click(function () {
+            $('.blockTask.taskByDate').show();
+            $('.blockTask.taskByName').hide();
+            $('.myTasks header .menuTasks .dueDate .labelArrow').show();
+            $('.myTasks header .menuTasks .dueDate').css('background', '#d6dcdc');
+            $('.myTasks header .menuTasks .caseTasksName .labelArrow').hide();
+            $('.myTasks header .menuTasks .caseTasksName').css('background', '#ebf1f1');
+        });
+
+
+
+        $('.contentMainTask').click(function () {
+            $(this).parent().find('.tasksForMain').toggle();
+            var element = $(this).find('.labelArrow');
+            var styleElement = element.css('transform');
+            if (styleElement == "matrix(-0.707107, 0.707107, -0.707107, -0.707107, 0, 0)") {
+
+                element.css({
+                    '-ms-transform': 'rotate(45deg)',
+                    '-webkit-transform': 'rotate(45deg)',
+                    '-moz-transform': 'rotate(45deg)',
+                    'transform': 'rotate(45deg)'
+                });
+            }
+            else {
+                element.css({
+                    '-ms-transform': 'rotate(135deg)',
+                    '-webkit-transform': 'rotate(135deg)',
+                    '-moz-transform': 'rotate(135deg)',
+                    'transform': 'rotate(135deg)'
+                });
+            }
+        });
+
+    });
 
 </script>

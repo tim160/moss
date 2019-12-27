@@ -60,12 +60,10 @@
     </div><!-- /.case-modal__linkBlockBottom -->
 </div>
 <div class="blockSettings" ng-controller="PlatformManagerSettingsController">
-    <!--casesHeared-->
     @{
         int active = 1;
     }
     @Html.Partial("~/Views/Settings/partial/casesHeared.cshtml", active)
-    <!--casesHeared-->
 
     @using (Html.BeginForm("UpdateUser", "Settings", FormMethod.Post, new { }))
     {

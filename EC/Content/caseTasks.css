@@ -32,7 +32,7 @@
     cursor: default;
     display: table-cell;
 }
-.leftBlockContent + .rightBlockContent #casesHeared{
+.leftBlockContent + .rightBlockContent #casesHeader{
     margin-left: -2px;
     border-left: 2px solid rgb(137, 148, 150);
     /*margin-top: 3px;*/
@@ -2208,7 +2208,7 @@ form.selectBlock.assignedToSelect .dropdown li .blockPhoto {
 }
 ======END Left-block with days===*/
 
-/*====#casesHeared======*/
+/*====#casesHeader======*/
 @media (max-width: 1349px) {
     .caseesTab {
         /*width: 130px;*/
@@ -2248,7 +2248,7 @@ form.selectBlock.assignedToSelect .dropdown li .blockPhoto {
         width: 70px;
     }
 }
-/*=======END #casesHeared======*/
+/*=======END #casesHeader======*/
 
 /*======HEADER======*/
 
@@ -2387,15 +2387,15 @@ form.selectBlock.assignedToSelect .dropdown li .blockPhoto {
     padding-top: 0px;
 }
 @media (max-width: 1503px) {
-    div#casesHeared .caseesTab {
+    div#casesHeader .caseesTab {
         /*width: 130px;*/
         margin-right: 5px;
         white-space: nowrap;
     }
-    #casesHeared #menu {
+    #casesHeader #menu {
         padding-right: 0px;
     }
-    div#casesHeared .caseesTab span {
+    div#casesHeader .caseesTab span {
         margin-left: 7px;
     }
 }

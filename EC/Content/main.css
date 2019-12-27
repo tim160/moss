@@ -242,7 +242,7 @@ ul {
         margin-left: 30px;
     }
 
-#casesHeared {
+#casesHeader {
     width: 100%;
     background-color: #ABB9BB;
     display: table;
@@ -362,7 +362,7 @@ ul {
     align-content: center;
     width: 75%;
 }
-#casesHeared #menu {
+#casesHeader #menu {
     padding-bottom: 0px;
 }
 
@@ -2716,7 +2716,7 @@ li.infoCasesBlock:first-child:hover li .status {
 
 
 @media (max-width: 550px) {
-    #casesHeared.pageCases #menu {
+    #casesHeader.pageCases #menu {
         width: 78%;
     }
 

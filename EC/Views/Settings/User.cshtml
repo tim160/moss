@@ -19,15 +19,12 @@
     }
 </style>
 
-<!--casesHeared-->
 @{
     int active = 4;
 }
 @Html.Partial("~/Views/Settings/partial/casesHeared.cshtml", active)
 <input type="hidden" value="@ViewBag.MediatorId" id="MediatorId" />
 <input type="hidden" value="" id="guid" ng-model="guid" />
-
-<!--casesHeared-->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 <a href="#alertModalFileSize" style="display: none" id="openModalForFileSize" rel="modal:open">Open Modal</a>

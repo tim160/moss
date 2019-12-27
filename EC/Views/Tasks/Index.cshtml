@@ -3,39 +3,37 @@
 @using EC.Models.Database;
 @using EC.Localization;
 @{
-  bool? is_cc = ViewBag.is_cc;
-  if (!is_cc.HasValue)
-  {
-    is_cc = false;
-  }
-  ViewBag.Title = LocalizationGetter.GetString("Mytasks", is_cc);
-  Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
-  int user_id = (Int32)ViewBag.user_id;
-  List<TaskExtended> tasks = (List<TaskExtended>)ViewBag.tasks;
-  ReportModel rm = new ReportModel();
-  UserModel um = new UserModel(user_id);
+    bool? is_cc = ViewBag.is_cc;
+    if (!is_cc.HasValue)
+    {
+        is_cc = false;
+    }
+    ViewBag.Title = LocalizationGetter.GetString("Mytasks", is_cc);
+    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+    int user_id = (Int32)ViewBag.user_id;
+    List<TaskExtended> tasks = (List<TaskExtended>)ViewBag.tasks;
+    ReportModel rm = new ReportModel();
+    UserModel um = new UserModel(user_id);
 
-  List<report> reports = (List<report>)ViewBag.reports;
-  string _nameBlockShow = "";
-  int unread_tasks = ViewBag.unread_tasks;
+    List<report> reports = (List<report>)ViewBag.reports;
+    string _nameBlockShow = "";
+    int unread_tasks = ViewBag.unread_tasks;
 }
 
 <div class="blockSettings blockAllTasks">
-    <div id="casesHeared">
+    <div id="casesHeader">
         <div id="menu">
-            <a href="/tasks/Index" class="caseesTab active">@LocalizationGetter.GetString("Myactivetasks", is_cc) @if(unread_tasks > 0){<span>@unread_tasks</span>}</a>
+            <a href="/tasks/Index" class="caseesTab active">@LocalizationGetter.GetString("Myactivetasks", is_cc) @if (unread_tasks > 0)
+            {<span>@unread_tasks</span>}</a>
             <a href="/tasks/Completed" class="caseesTab">@LocalizationGetter.GetString("Mycompletedtasks", is_cc)</a>
         </div>
-  @*      <div class="positionActivityIcon">
-                <div id="activityIcon"></div>
-            </div>*@
-        </div><!--casesHeared-->
+    </div>
 
 
-        <div class="contentSettings">
-            <!--START myActiveTasks-->
-            @if(tasks.Where(m => m._task.assigned_to == user_id).Count() > 0)
-            {
+    <div class="contentSettings">
+        <!--START myActiveTasks-->
+        @if (tasks.Where(m => m._task.assigned_to == user_id).Count() > 0)
+        {
             <div class="myActiveTasks myTasks">
                 <header>
                     <div class="menuTasks">
@@ -66,7 +64,7 @@
                         //little red dot
                         _smallCircle = "littleDotShow"; //show
                         _smallCircle = "littleDot"; //hide
-                        //If we have red dot than need to change font in taskName
+                                                    //If we have red dot than need to change font in taskName
                         _fontName = "fontSamibold"; //change
                         _fontName = ""; //not changed
 
@@ -93,8 +91,8 @@
                             else
                             {
                             }
-                            
-                            
+
+
                             if (_task.IsRead() && (!_task.HasNewActivity()))
                             {
                                 _classCircle = "notShadedCircle";
@@ -106,10 +104,10 @@
                                 _styleCircle = "background: " + _circle_color + ";";
 
                             }
-                            
-                            
-                            
-                            
+
+
+
+
                             if (_task.IsCompleted())
                             {
                                 _colorTextBefore = "colorTextGrey";
@@ -137,16 +135,16 @@
                             }
                             if (_task.IsRead())
                             {
-                               // _fontName = "fontSamibold";
+                                // _fontName = "fontSamibold";
                             }
                             else
                             {
-                               // _fontName = "";
+                                // _fontName = "";
                             }
                             if (_task.IsExpired)
                             {
-                                    //    _colorTextAfter = "colorTextGrey";
-                                     //   _colorTextBefore = "colorTextGrey";
+                                //    _colorTextAfter = "colorTextGrey";
+                                //   _colorTextBefore = "colorTextGrey";
                             }
                             <div class="contentBlockTask">
                                 <div class="blockTitle">
@@ -305,47 +303,21 @@
                                                 </div>
                                                 <div class="blockPeople">
                                                     @if (@tsk.TaskAssignerPhoto.Trim().Length > 0)
-                                                {
-                                                <img src='@Url.Content(tsk.TaskAssignerPhoto)'>
-                                                }
-                                                else
-                                                {
-                                                <img src='@Url.Content("/Content/Icons/noPhoto.png")'>
-                                                }
+                                                    {
+                                                        <img src='@Url.Content(tsk.TaskAssignerPhoto)'>
+                                                    }
+                                                    else
+                                                    {
+                                                        <img src='@Url.Content("/Content/Icons/noPhoto.png")'>
+                                                    }
                                                     <label class="name">@tsk.TaskAssigner</label>
                                                 </div>
 
                                                 <div class="date"> @tsk.TaskDueDateString</div>
 
                                                 @if (tsk.IsExpired)
-                                            {
-                                                _nameBlockShow = "blockExpired";
-                                            }
-                                            else
-                                            {
-                                                if (tsk.TaskDueDate.HasValue)
                                                 {
-                                                    DateTime dt = DateTime.Today;
-                                                    int total_days = (tsk.TaskDueDate.Value - dt).Days;
-                                                    if ((total_days > 0) && (total_days < 6))
-                                                    {
-                                                        _nameBlockShow = "blockDays";
-                                                    }
-                                                }
-                                            }
-
-                                                <div class="info @_nameBlockShow">
-                                                    <div class="file">
-                                                        <img src='@Url.Content("/Content/Icons/fileCases.png")'>
-                                                    </div>
-
-                                                    @if (tsk.IsExpired)
-                                                {
-                                                    if (!tsk.IsCompleted())
-                                                    {
-                                                        // expired
-                                                <span class="textInfo">@LocalizationGetter.GetString("Expired", is_cc).ToLower()</span>
-                                                    }
+                                                    _nameBlockShow = "blockExpired";
                                                 }
                                                 else
                                                 {
@@ -353,16 +325,42 @@
                                                     {
                                                         DateTime dt = DateTime.Today;
                                                         int total_days = (tsk.TaskDueDate.Value - dt).Days;
-                                                        if ((total_days > 1) && (total_days < 6))
+                                                        if ((total_days > 0) && (total_days < 6))
                                                         {
-                                                <span class="textDays">@total_days @LocalizationGetter.GetString("daysleft", is_cc)</span>
-                                                        }
-                                                        if ((total_days == 1))
-                                                        {
-                                                <span class="textDays">@total_days @LocalizationGetter.GetString("dayleft", is_cc)</span>
+                                                            _nameBlockShow = "blockDays";
                                                         }
                                                     }
                                                 }
+
+                                                <div class="info @_nameBlockShow">
+                                                    <div class="file">
+                                                        <img src='@Url.Content("/Content/Icons/fileCases.png")'>
+                                                    </div>
+
+                                                    @if (tsk.IsExpired)
+                                                    {
+                                                        if (!tsk.IsCompleted())
+                                                        {
+                                                            // expired
+                                                            <span class="textInfo">@LocalizationGetter.GetString("Expired", is_cc).ToLower()</span>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        if (tsk.TaskDueDate.HasValue)
+                                                        {
+                                                            DateTime dt = DateTime.Today;
+                                                            int total_days = (tsk.TaskDueDate.Value - dt).Days;
+                                                            if ((total_days > 1) && (total_days < 6))
+                                                            {
+                                                                <span class="textDays">@total_days @LocalizationGetter.GetString("daysleft", is_cc)</span>
+                                                            }
+                                                            if ((total_days == 1))
+                                                            {
+                                                                <span class="textDays">@total_days @LocalizationGetter.GetString("dayleft", is_cc)</span>
+                                                            }
+                                                        }
+                                                    }
                                                 </div>
 
                                             </div>
@@ -377,55 +375,55 @@
                 </div>
             </div>
             <!--END myActiveTasks-->
-            }
-        </div><!--contentSettings-->
-    </div>
+        }
+    </div><!--contentSettings-->
+</div>
 
 
-    <script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('.menuTasks .dueDate span').click(function () {
-                $('.blockTask.taskByDate').show();
-                $('.blockTask.taskByName').hide();
-                $('.myTasks header .menuTasks .dueDate .labelArrow').show();
-                $('.myTasks header .menuTasks .dueDate').css('background', '#d6dcdc');
-                $('.myTasks header .menuTasks .caseTasksName .labelArrow').hide();
-                $('.myTasks header .menuTasks .caseTasksName').css('background', '#ebf1f1');
-            });
-            $('.menuTasks .caseTasksName span').click(function () {
-                $('.blockTask.taskByDate').hide();
-                $('.blockTask.taskByName').show();
-                $('.myTasks header .menuTasks .dueDate .labelArrow').hide();
-                $('.myTasks header .menuTasks .caseTasksName .labelArrow').show();
-                $('.myTasks header .menuTasks .dueDate').css('background', '#ebf1f1');
-                $('.myTasks header .menuTasks .caseTasksName').css('background', '#d6dcdc');
-            });
-
-
-            $('.contentMainTask').click(function () {
-                $(this).parent().find('.tasksForMain').toggle();
-                var element = $(this).find('.labelArrow');
-                var styleElement = element.css('transform');
-                if (styleElement == "matrix(-0.707106781186548, 0.707106781186548, -0.707106781186548, -0.707106781186548, 0, 0)") {
-
-                    element.css({
-                        '-ms-transform': 'rotate(45deg)',
-                        '-webkit-transform': 'rotate(45deg)',
-                        '-moz-transform': 'rotate(45deg)',
-                        'transform': 'rotate(45deg)'
-                    });
-                }
-                else {
-                    element.css({
-                        '-ms-transform': 'rotate(135deg)',
-                        '-webkit-transform': 'rotate(135deg)',
-                        '-moz-transform': 'rotate(135deg)',
-                        'transform': 'rotate(135deg)'
-                    });
-                }
-            });
-
+<script src="~/Scripts/lib/jquery-1.10.2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.menuTasks .dueDate span').click(function () {
+            $('.blockTask.taskByDate').show();
+            $('.blockTask.taskByName').hide();
+            $('.myTasks header .menuTasks .dueDate .labelArrow').show();
+            $('.myTasks header .menuTasks .dueDate').css('background', '#d6dcdc');
+            $('.myTasks header .menuTasks .caseTasksName .labelArrow').hide();
+            $('.myTasks header .menuTasks .caseTasksName').css('background', '#ebf1f1');
+        });
+        $('.menuTasks .caseTasksName span').click(function () {
+            $('.blockTask.taskByDate').hide();
+            $('.blockTask.taskByName').show();
+            $('.myTasks header .menuTasks .dueDate .labelArrow').hide();
+            $('.myTasks header .menuTasks .caseTasksName .labelArrow').show();
+            $('.myTasks header .menuTasks .dueDate').css('background', '#ebf1f1');
+            $('.myTasks header .menuTasks .caseTasksName').css('background', '#d6dcdc');
         });
 
-    </script>
+
+        $('.contentMainTask').click(function () {
+            $(this).parent().find('.tasksForMain').toggle();
+            var element = $(this).find('.labelArrow');
+            var styleElement = element.css('transform');
+            if (styleElement == "matrix(-0.707106781186548, 0.707106781186548, -0.707106781186548, -0.707106781186548, 0, 0)") {
+
+                element.css({
+                    '-ms-transform': 'rotate(45deg)',
+                    '-webkit-transform': 'rotate(45deg)',
+                    '-moz-transform': 'rotate(45deg)',
+                    'transform': 'rotate(45deg)'
+                });
+            }
+            else {
+                element.css({
+                    '-ms-transform': 'rotate(135deg)',
+                    '-webkit-transform': 'rotate(135deg)',
+                    '-moz-transform': 'rotate(135deg)',
+                    'transform': 'rotate(135deg)'
+                });
+            }
+        });
+
+    });
+
+</script>

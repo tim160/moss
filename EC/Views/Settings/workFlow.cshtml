@@ -26,7 +26,7 @@
         step4Delay = Model.step4_delay;
         step5Delay = Model.step5_delay;
         @Html.HiddenFor(model => model.id, new { @class = "companyIdHidden" })
-        <div id="casesHeared">
+        <div id="casesHeader">
             <div id="menu">
                 <h2 class="mainTitle">@LocalizationGetter.GetString("Menu"):</h2>
                 <div>
@@ -38,7 +38,7 @@
                     <a href="/Settings/workFlow" class="caseesTab">workFlow</a>
                 </div>
             </div>
-        </div><!--casesHeared-->
+        </div><!--casesHeader-->
         <div class="caseWorkflowPosition">
             <div class="caseFlow">
                 <div class="caseFlowTop">

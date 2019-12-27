@@ -2258,7 +2258,7 @@ p.helloUser {
         width: 99px;
         margin-right: 40px;
     }*/
-    #casesHeared,
+    #casesHeader,
     .positionActivityIcon {
         /*height: 89px;*/
     }
@@ -2301,8 +2301,8 @@ p.helloUser {
     }
 }
 @media (max-width: 630px) {
-    .blockSettings #casesHeared #menu,
-    #casesHeared.pageCases #menu {
+    .blockSettings #casesHeader #menu,
+    #casesHeader.pageCases #menu {
         width: 85%;
     }
 }
@@ -2397,8 +2397,8 @@ p.helloUser {
 
 }
 @media (max-width: 551px) {
-    .blockSettings #casesHeared #menu,
-    .pageCases #casesHeared #menu {
+    .blockSettings #casesHeader #menu,
+    .pageCases #casesHeader #menu {
         width: 80%;
     }
     .caseesTab.active::after {
@@ -2428,7 +2428,7 @@ p.helloUser {
     .blockSection .dot.third {
         margin-left: 30%;
     }
-    .blockSettings #casesHeared #menu {
+    .blockSettings #casesHeader #menu {
         width: 85%;
     }
     .positionActivityIcon {
@@ -2516,7 +2516,7 @@ p.helloUser {
     .headerCompanyProfile .blockSendEmail input[type="text"] {
         width: 65%;
     }
-    #casesHeared #menu {
+    #casesHeader #menu {
         width: 100%;
     }
     #activityIcon{
@@ -2696,7 +2696,7 @@ p.helloUser {
 
 
 @media (min-width: 621px) and (max-width: 970px) {
-    #casesHeared,
+    #casesHeader,
     .positionActivityIcon {
         /*height: 89px !important;*/
     }
@@ -2706,7 +2706,7 @@ p.helloUser {
     /*h2.mainTitle + div{
         display: block !important;/*need uprove*/
     }*/
-    #casesHeared.pageCases,
+    #casesHeader.pageCases,
     .pageCases .positionActivityIcon {
         height: 50px !important;
         padding-bottom: 10px;
@@ -2722,14 +2722,14 @@ p.helloUser {
     }*/
 }
 @media (min-width: 970px) {
-    #casesHeared,
+    #casesHeader,
     .positionActivityIcon {
         /*height: 64px !important;*/ /*need uprove*/
     }
     /*h2.mainTitle + div{
         display: block !important;
     }*/
-    #casesHeared.pageCases,
+    #casesHeader.pageCases,
     .pageCases .positionActivityIcon {
         height: 50px !important;
         padding-bottom: 10px;

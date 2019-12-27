@@ -45,14 +45,14 @@
     </style>*@
 }
 <div class="blockSettings blockAllTasks">
-    <div id="casesHeared">
+    <div id="casesHeader">
         <div id="menu">
             <a class="caseesTab active casesMassage">
                 @LocalizationGetter.GetString("Payments", is_cc) @*  @if (all_payments.Count > 0)
   {<span>@all_payments.Count</span>}*@
             </a>
         </div>
-    </div><!--casesHeared-->
+    </div><!--casesHeader-->
 
     @if (all_payments.Count > 0)
     {

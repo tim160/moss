@@ -37,10 +37,9 @@
         step5Delay = Model.step5_delay;
         @Html.HiddenFor(model => model.id, new { @class = "companyIdHidden" })
 
-        <!--casesHeared-->
+
         int active = 5;
         @Html.Partial("~/Views/Settings/partial/casesHeared.cshtml", active)
-        <!--casesHeared-->
 
 
         <div class="caseWorkflowPosition">
