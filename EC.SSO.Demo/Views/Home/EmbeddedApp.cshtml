@@ -4,9 +4,63 @@
     ViewBag.Title = title;
     ViewBag.Logged = true;
     ViewBag.UserName = Model;
+
+    string loginFormId = "loginForm";
+    string iFrameName = "embeddedIframe";
 }
 
-<iframe title = @title
-        src="https://ecreport.azurewebsites.net/"
+@*<iframe title = @title
+    src="https://ecreport.azurewebsites.net/"
+    width="1240"
+    height="680"></iframe>*@
+
+
+
+@*<form id=@loginFormId
+      target=@iFrameName
+      action="https://ec.conveyor.cloud/Service/LoginSso"
+      method="post">
+    <input type="text" name="Login" value="" />
+    <input type="text" name="Password" value="" />
+    <input type="submit">
+</form>*@
+<form id=@loginFormId
+      target=@iFrameName
+      action="https://ecreport.azurewebsites.net/Service/LoginSso"
+      method="post">
+    <input type="text" name="Login" value="@ViewBag.UserName" />
+    <input type="text" name="Password" value="@ViewBag.TokenPassword" />
+    <input type="submit">
+</form>
+
+<iframe name=@iFrameName
+        title=@title
+        src="about:blank"
         width="1240"
-        height="680"></iframe>
+        height="680">
+</iframe>
+@*<iframe name="embeddedIframe"
+            title=@title
+            src="https://ecreport.azurewebsites.net/"
+            width="1240"
+            height="680">
+    </iframe>*@
+
+@*<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>*@
+<script>
+    $(document).ready(function () {
+        $('#@loginFormId').on('submit', function (e) {
+            e.preventDefault();
+            //if(validates){
+            $(e).submit();
+            // }
+        });
+    });
+</script>
+@*<script>
+    $(document).ready(function () {
+        var loginform = document.getElementById(@loginFormId);
+        loginform.style.display = "none";
+        loginform.submit();
+    });
+</script>*@
