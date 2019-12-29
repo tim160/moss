@@ -1,12 +1,14 @@
 ﻿@{
-    string title = "Employee Confidential";
+  string title = "Employee Confidential";
 
-    ViewBag.Title = title;
-    ViewBag.Logged = true;
-    ViewBag.UserName = Model;
+  ViewBag.Title = title;
+  ViewBag.Logged = true;
+ 
 
-    string loginFormId = "loginForm";
-    string iFrameName = "embeddedIframe";
+  string username = ViewBag.username;
+  string pass = ViewBag.pass;
+
+  string iFrameName = "embeddedIframe";
 }
 
 @*<iframe title = @title
@@ -17,20 +19,24 @@
 
 
 @*<form id=@loginFormId
+        target=@iFrameName
+        action="https://ec.conveyor.cloud/Service/LoginSso"
+        method="post">
+      <input type="text" name="Login" value="" />
+      <input type="text" name="Password" value="" />
+      <input type="submit">
+  </form>
+
+
+       action="https://ecreport.azurewebsites.net/Service/LoginSso"
+*@
+<form id="loginForm"
       target=@iFrameName
-      action="https://ec.conveyor.cloud/Service/LoginSso"
+      action="http://stark.employeeconfidential.com/Service/LoginSso"
       method="post">
-    <input type="text" name="Login" value="" />
-    <input type="text" name="Password" value="" />
-    <input type="submit">
-</form>*@
-<form id=@loginFormId
-      target=@iFrameName
-      action="https://ecreport.azurewebsites.net/Service/LoginSso"
-      method="post">
-    <input type="text" name="Login" value="@ViewBag.UserName" />
-    <input type="text" name="Password" value="@ViewBag.TokenPassword" />
-    <input type="submit">
+    <input type="text" hidden  name="Login" value="@username" />
+    <input type="text" hidden  name="Password" value="@pass" />
+    <input type="submit" hidden>
 </form>
 
 <iframe name=@iFrameName
@@ -48,14 +54,12 @@
 
 @*<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>*@
 <script>
-    $(document).ready(function () {
-        $('#@loginFormId').on('submit', function (e) {
-            e.preventDefault();
-            //if(validates){
-            $(e).submit();
-            // }
-        });
-    });
+  window.onload = function () {
+    document.forms['loginForm'].submit();
+  }
+
+
+
 </script>
 @*<script>
     $(document).ready(function () {

@@ -13,37 +13,47 @@ namespace EC.SSO.Demo.Controllers
 		{
 			new User
 			{
-				Username="Test1",
-				Name="Test 1",
-				Password="111",
-				CompanyName="Company 1"
+				Username="kmilton",
+				Name="Kate Milton",
+				Password="1234567",
+				CompanyName="Stark Industries"
 			},
 			new User
 			{
-				Username="Test2",
-				Name="Test 2",
-				Password="222",
-				CompanyName="Company 2"
-			},
+				Username="4",
+				Name="Alex Grace",
+				Password="123456",
+				CompanyName="Stark Industries"
+      },
 			new User
 			{
-				Username="Test3",
-				Name="Test 3",
-				Password="333",
-				CompanyName="Company 3"
-			},
+				Username="6",
+				Name="Jeff Wood",
+				Password="123456",
+				CompanyName="Stark Industries"
+      },
 			new User
 			{
-				Username="Test4",
-				Name="Test 4",
-				Password="444",
-				CompanyName="Company 4"
-			}
+				Username="222",
+				Name="John McDonald",
+				Password="123456",
+				CompanyName="Stark Industries"
+      }
 		};
 
 		public ActionResult Index() => View();
 
-		public ActionResult EmbeddedApp(string username) => View(nameof(EmbeddedApp), (object)username);
+    public ActionResult EmbeddedApp(string username) {
+      ViewBag.username = username;
+      var user = _users.Where(t => t.Username.Trim().ToLower() == username.Trim().ToLower()).FirstOrDefault();
+      string pass = "";
+      if (user != null)
+        pass = user.Password;
+
+      ViewBag.pass = pass;
+      return View();
+
+    }
 
 		[HttpPost]
 		public ActionResult Login(string username, string password)
