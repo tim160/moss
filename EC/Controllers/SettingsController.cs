@@ -373,8 +373,8 @@ namespace EC.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult UpdateUser([Bind(Include = "id,first_nm,last_nm,title_ds,email,company_department_id,user_permissions_approve_case_closure,user_permissions_change_settings,company_location_id")] user _user)
+    ////cors for sso- remove for live site      [ValidateAntiForgeryToken]
+    public ActionResult UpdateUser([Bind(Include = "id,first_nm,last_nm,title_ds,email,company_department_id,user_permissions_approve_case_closure,user_permissions_change_settings,company_location_id")] user _user)
         {
             if (!(_user.company_location_id.HasValue) || (_user.company_location_id == 0))
             {
@@ -424,8 +424,8 @@ namespace EC.Controllers
             return View("Index", _user);
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult UpdateMediator([Bind(Include = "id,status_id,role_id")] user _user)
+    ////cors for sso- remove for live site        [ValidateAntiForgeryToken]
+    public ActionResult UpdateMediator([Bind(Include = "id,status_id,role_id")] user _user)
         {
             user session_user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (session_user == null || session_user.id == 0)
@@ -494,8 +494,8 @@ namespace EC.Controllers
             return RedirectToAction("User", new { id = _user.id });
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult UpdateCompany(company _company)
+    ////cors for sso- remove for live site           [ValidateAntiForgeryToken]
+    public ActionResult UpdateCompany(company _company)
         {
             if (ModelState.IsValid)
             {
@@ -822,8 +822,8 @@ namespace EC.Controllers
             return View(um._user);
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult ChangePass(string oldPass, string newPass, string confPass)
+    ////cors for sso- remove for live site        [ValidateAntiForgeryToken]
+    public ActionResult ChangePass(string oldPass, string newPass, string confPass)
         {
             user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
             if (user == null || user.id == 0)

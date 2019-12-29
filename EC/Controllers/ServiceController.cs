@@ -45,26 +45,30 @@ namespace EC.Controllers
 		[HttpPost]
 		public ActionResult Login(LoginViewModel model, string returnUrl)
 		{
-			return DoLogin(model, returnUrl, "Login");
+			return DoLogin(model, returnUrl, "Login", false);
 		}
 
 		[HttpPost]
 		public ActionResult LoginSso(LoginViewModel model, string returnUrl)
 		{
-			return DoLogin(model, returnUrl, "Login");
+      
+			return DoLogin(model, returnUrl, "Login", true);
 		}
 
 		[HttpPost]
 		public ActionResult CheckStatus(LoginViewModel model, string returnUrl)
 		{
 			Session.Clear();
-			return DoLogin(model, returnUrl, "CheckStatus");
+			return DoLogin(model, returnUrl, "CheckStatus", false);
 		}
 
-		private ActionResult DoLogin(LoginViewModel model, string returnUrl, string view)
+		private ActionResult DoLogin(LoginViewModel model, string returnUrl, string view, bool is_sso = false)
 		{
 			Session.Clear();
-			if (DomainUtil.IsSubdomain(Request.Url.AbsoluteUri.ToLower()))
+      Session[ECSessionConstants.SessionIsSSO] = "0";
+      if (is_sso)
+        Session[ECSessionConstants.SessionIsSSO] = "1";
+      if (DomainUtil.IsSubdomain(Request.Url.AbsoluteUri.ToLower()))
 			{
 
 

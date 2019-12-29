@@ -67,7 +67,7 @@
 
     @using (Html.BeginForm("UpdateUser", "Settings", FormMethod.Post, new { }))
     {
-        @Html.AntiForgeryToken()
+      @*   @Html.AntiForgeryToken() *@
         @model user
         @Html.HiddenFor(model => Model.id)
         <div class="contentSettings">

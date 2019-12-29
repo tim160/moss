@@ -112,6 +112,11 @@
       Res_or_comp = LocalizationGetter.GetString("Awaitingapproval");
     }
   }
+  bool is_sso = false;
+  if (Session[ECSessionConstants.SessionIsSSO] != null && Session[ECSessionConstants.SessionIsSSO].ToString() == "1")
+  { is_sso = true; }
+
+
 }
 <!DOCTYPE html>
 <html>
@@ -312,16 +317,21 @@
                           </a>
                         </li>
                       }
+                      @if (is_sso == false)
+                      {
                         <li class="dropDown-navigation__li active">
                             <a href="/settings/password/" class="dropDown-navigation__a">
                                 @LocalizationGetter.GetString("Password")
                             </a>
                         </li>
+                      }
                         @*<li class="dropDown-navigation__li">
                                 <a href="/Payment/History" class="dropDown-navigation__a">
                                     @LocalizationGetter.GetString("Subscription")
                                 </a>
                             </li>*@
+                        @if ( is_sso == false)
+                        {
                         <li class="dropDown-navigation__li">
                             <form id="logout_form" action="@Url.Action("Logout", "Base")">
                                 <a href="javascript:{}" onclick="document.getElementById('logout_form').submit();" class="dropDown-navigation__a">
@@ -329,6 +339,7 @@
                                 </a>
                             </form>
                         </li>
+                        }
                     </ul>
                 </div>
             </div>

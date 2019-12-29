@@ -52,5 +52,7 @@ namespace EC.Constants
 
         public const String CurrentUserMarcker = "CurentUser";
         public const String AuthUserCookies = "temp_templ_store";
+        public const String SessionIsSSO = "isSSO";
+    
     }
 }

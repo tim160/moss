@@ -6,84 +6,86 @@
 @using EC.Models;
 @using EC.Models.ViewModels;
 @{
-    bool? is_cc = ViewBag.is_cc;
-    if (!is_cc.HasValue)
-    {
-        is_cc = false;
-    }
-    String class_ext = ViewBag.cc_extension;
+  bool? is_cc = ViewBag.is_cc;
+  if (!is_cc.HasValue)
+  {
+    is_cc = false;
+  }
+  String class_ext = ViewBag.cc_extension;
 
-    //bool is_cc = true;
-    //String class_ext = "";
-    //if (is_cc)
-    //{
-    //    class_ext = "_cc";
-    //}
+  //bool is_cc = true;
+  //String class_ext = "";
+  //if (is_cc)
+  //{
+  //    class_ext = "_cc";
+  //}
 
 
-    //var um2 = (UserModel)ViewBag.um;
-    var user_id = ViewBag.user_id;
+  //var um2 = (UserModel)ViewBag.um;
+  var user_id = ViewBag.user_id;
 
-    string hrefURL_1 = Request.Url.AbsoluteUri.ToLower();
+  string hrefURL_1 = Request.Url.AbsoluteUri.ToLower();
 
-    UserModel um = new UserModel(user_id);
-    CompanyModel cm = new CompanyModel(um._user.company_id);
-    ReportModel rm = new ReportModel();
-    ReadStatusModel rsm = new ReadStatusModel();
-    UsersUnreadEntitiesNumberViewModel userUnreadEntities = rsm.GetUserUnreadEntitiesNumbers(user_id);
+  UserModel um = new UserModel(user_id);
+  CompanyModel cm = new CompanyModel(um._user.company_id);
+  ReportModel rm = new ReportModel();
+  ReadStatusModel rsm = new ReadStatusModel();
+  UsersUnreadEntitiesNumberViewModel userUnreadEntities = rsm.GetUserUnreadEntitiesNumbers(user_id);
 
-    var unread_report_number = userUnreadEntities.unread_reports;
+  var unread_report_number = userUnreadEntities.unread_reports;
 
-    var unread_report_number_string = "";
-    string page_subtitle = "";
-    if (unread_report_number > 0)
-    {
-        unread_report_number_string = unread_report_number.ToString();
-    }
+  var unread_report_number_string = "";
+  string page_subtitle = "";
+  if (unread_report_number > 0)
+  {
+    unread_report_number_string = unread_report_number.ToString();
+  }
 
-    int unread_message_number = userUnreadEntities.unread_messages;
-    // int unread_message_number = um.Unread_Messages_Quantity(0, 1) + um.Unread_Messages_Quantity(0, 2) + um.Unread_Messages_Quantity(0, 3);
-    var unread_message_number_string = "";
-    if (unread_message_number > 0)
-    {
-        unread_message_number_string = unread_message_number.ToString();
-    }
+  int unread_message_number = userUnreadEntities.unread_messages;
+  // int unread_message_number = um.Unread_Messages_Quantity(0, 1) + um.Unread_Messages_Quantity(0, 2) + um.Unread_Messages_Quantity(0, 3);
+  var unread_message_number_string = "";
+  if (unread_message_number > 0)
+  {
+    unread_message_number_string = unread_message_number.ToString();
+  }
 
-    int unread_task_number = userUnreadEntities.unread_tasks;
-    //int unread_task_number = um.UnreadTasksQuantity(0, true, 1);
-    var unread_task_number_string = "";
-    if (unread_task_number > 0)
-    {
-        unread_task_number_string = unread_task_number.ToString();
-    }
+  int unread_task_number = userUnreadEntities.unread_tasks;
+  //int unread_task_number = um.UnreadTasksQuantity(0, true, 1);
+  var unread_task_number_string = "";
+  if (unread_task_number > 0)
+  {
+    unread_task_number_string = unread_task_number.ToString();
+  }
 
-    user _user = um._user;
-    company _company = cm.GetById(_user.company_id);
-    string report_name = "Case";
+  user _user = um._user;
+  company _company = cm.GetById(_user.company_id);
+  string report_name = "Case";
 
-    int _report_id = 0;
-    int investigationstatus = 1;
-    string report_color = "", report_color_code = "", report_name_code = "";
-    if ((ViewBag.report_id != null) && ((int)ViewBag.report_id != 0))
-    {
-        _report_id = (int)ViewBag.report_id;
-        rm = new EC.Models.ReportModel(_report_id);
+  int _report_id = 0;
+  int investigationstatus = 1;
+  string report_color = "", report_color_code = "", report_name_code = "";
+  if ((ViewBag.report_id != null) && ((int)ViewBag.report_id != 0))
+  {
+    _report_id = (int)ViewBag.report_id;
+    rm = new EC.Models.ReportModel(_report_id);
 
-        report_name = rm._reportStringModel.SecondaryTypeString() + " - " + rm._reportStringModel.LocationString() + " - #" + rm._report.display_name;
-        report_name_code = LocalizationGetter.GetString("Newreport", is_cc) + ": #" + rm._report.display_name;
-        report_color = rm._reportStringModel.ColorDescr();
-        report_color_code = rm._reportStringModel.ColorCode();
-        investigationstatus = rm._investigation_status;
-    }
+    report_name = rm._reportStringModel.SecondaryTypeString() + " - " + rm._reportStringModel.LocationString() + " - #" + rm._report.display_name;
+    report_name_code = LocalizationGetter.GetString("Newreport", is_cc) + ": #" + rm._report.display_name;
+    report_color = rm._reportStringModel.ColorDescr();
+    report_color_code = rm._reportStringModel.ColorCode();
+    investigationstatus = rm._investigation_status;
+  }
 
-    string[] _statuses = ECGlobalConstants.ReportFlowStatusesList;
+  string[] _statuses = ECGlobalConstants.ReportFlowStatusesList;
 
-    string same_mediator_warning = LocalizationGetter.GetString("AddFurtherNotes", is_cc);
-    if (rm != null && user_id == rm.Last_investigation_status_user_id())
-    {
-        same_mediator_warning = LocalizationGetter.GetString("RecommendSecond1", is_cc) + " " + LocalizationGetter.GetString("RecommendSecond2", is_cc);
-    }
-
+  string same_mediator_warning = LocalizationGetter.GetString("AddFurtherNotes", is_cc);
+  if (rm != null && user_id == rm.Last_investigation_status_user_id())
+  {
+    same_mediator_warning = LocalizationGetter.GetString("RecommendSecond1", is_cc) + " " + LocalizationGetter.GetString("RecommendSecond2", is_cc);
+  }
+  bool is_sso = false;
+  if (Session[ECSessionConstants.SessionIsSSO] != null && Session[ECSessionConstants.SessionIsSSO].ToString() == "1")
+  { is_sso = true; }
 }
 <!DOCTYPE html>
 <html>
@@ -252,11 +254,16 @@
                             }
 
                         }
-                        <li class="dropDown-navigation__li active">
-                            <a href="/settings/password/" class="dropDown-navigation__a">
-                                @LocalizationGetter.GetString("Password")
-                            </a>
-                        </li>
+                        @if(is_sso == false)
+                        {
+                          <li class="dropDown-navigation__li active">
+                              <a href="/settings/password/" class="dropDown-navigation__a">
+                                  @LocalizationGetter.GetString("Password")
+                              </a>
+                          </li>
+                        }
+                        @if (is_sso == false)
+                        {
                         <li class="dropDown-navigation__li">
                             <form id="logout_form" action="@Url.Action("Logout", "Base")">
                                 <a href="" onclick="document.getElementById('logout_form').submit();" class="dropDown-navigation__a">
@@ -264,6 +271,7 @@
                                 </a>
                             </form>
                         </li>
+                        }
                     </ul>
                 </div>
             </div>

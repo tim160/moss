@@ -504,7 +504,7 @@ namespace EC.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+   ////cors for sso- remove for live site    [ValidateAntiForgeryToken]
         public ActionResult Task([Bind(Include = "body,task_id,user_id")] task_comment newTask)
         {
             newTask.created_date = DateTime.Now;

@@ -43,6 +43,14 @@ namespace EC.Controllers
             }
         }
 
+        internal bool is_sso
+        {
+          get
+          {
+            return (Session[ECSessionConstants.SessionIsSSO] != null && Session[ECSessionConstants.SessionIsSSO].ToString() == "1");
+          }
+        }
+
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             base.OnActionExecuting(filterContext);

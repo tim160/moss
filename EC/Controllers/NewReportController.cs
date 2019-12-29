@@ -142,8 +142,8 @@ namespace EC.Controllers.ViewModel
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult UpdateStatus([Bind(Include = "report_id,report_investigation_status, description, user_id")] report_investigation_status newStatus)
+    ////cors for sso- remove for live site       [ValidateAntiForgeryToken]
+    public ActionResult UpdateStatus([Bind(Include = "report_id,report_investigation_status, description, user_id")] report_investigation_status newStatus)
         {
             newStatus.created_date = DateTime.Now;
 
