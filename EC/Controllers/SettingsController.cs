@@ -928,5 +928,22 @@ namespace EC.Controllers
 
             return View();
         }
+        public ActionResult GlobalSettings()
+        {
+            user user = (user)Session[ECGlobalConstants.CurrentUserMarcker];
+            if (user == null || user.id == 0)
+            {
+                user = db.user.Find(2);
+            }
+            Session[ECGlobalConstants.CurrentUserMarcker] = user;
+            Session["userName"] = user.login_nm;
+            Session["userId"] = user.id;
+
+            UserModel um = new UserModel(user.id);
+            ViewBag.um = um;
+            ViewBag.user_id = user.id;
+
+            return View();
+        }
     }
 }

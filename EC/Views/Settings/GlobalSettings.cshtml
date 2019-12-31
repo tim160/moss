@@ -1,0 +1,105 @@
+﻿@using EC.Localization;
+@{
+    ViewBag.Title = LocalizationGetter.GetString("MySettings");
+    Layout = "~/Views/Shared/IndexPages/LayoutCasesNewReport.cshtml";
+    int activePageId = 8;
+}
+
+@Html.Partial("~/Views/Settings/partial/casesHeader.cshtml", activePageId)
+<style>
+    .oldstyle {
+        display: table !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    #hoverCompanyPhoto {
+        width: 203px;
+        height: 62px;
+        top: -16px;
+    }
+</style>
+<link href="~/Content/libs/farbtastic/farbtastic.css" rel="stylesheet" />
+<script src="~/Content/libs/farbtastic/farbtastic.min.js"></script>
+<div class="blockSettings">
+    <section class="content-container">
+        <div class="row container__inner">
+            <div class="col-12">
+                <p class="sectionHeader">Change Global Logo</p>
+                <div class="contentSettings secondHeader oldstyle">
+                    <div class="headerCompanyProfile">
+                        <div class="headerBlock">
+                            <div class="blockImg">
+                                <form>
+                                    <div style="width: 203px; height: 32px;">
+                                        <img id="logoCompany" src="~/Content/Icons/logo.png" />
+                                    </div>
+                                    <input type="file" name="MAX_FILE_SIZE" value="9999999" data-id="settingsIndex" accept="image/*" id="_file" multiple="multiple" style="width: 1px;height: 1px;opacity: 0;" check-file-size="" />
+                                </form>
+                                <div id="hoverCompanyPhoto">
+                                    <label class="newImageBtn" make-click-hidden-input="">Change Global Logo</label>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="content-container">
+        <div class="row container__inner">
+            <div class="col-4">
+                <p class="sectionHeader">Color Managament</p>
+                <p>Header color Managament</p>
+                <form><input type="text" id="HeaderColor" name="color" value="#123456" /></form>
+                <div id="HeaderColorpicker"></div>
+            </div>
+            <div class="col-4">
+                <p>Bottom color Managament</p>
+                <form><input type="text" id="BottomColor" name="color" value="#123456" /></form>
+                <div id="BottomColorpicker"></div>
+            </div>
+            <div class="col-4">
+                <p>Text color Managament</p>
+                <form><input type="text" id="TextColor" name="color" value="#123456" /></form>
+                <div id="TextColorpicker"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-container">
+        <div class="row container__inner">
+            <div class="col-12">
+                <p class="sectionHeader">Employee Confidential</p>
+                <div class="row container__innerContent">
+                    <div class="row m-0">
+                        <textarea class="facts-established--text m-b-20 ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="model.note2" ng-show="editNote2" style=""> </textarea>
+                    </div><!-- /.row -->
+                    <div class="row m-0 clearfix">
+                        <p ng-show="!editNote2" class="content-container__p m-b-20 ng-binding ng-hide" ng-bind-html="noteP(model.note2)" style="">e hwtrb wrtbwrtb w4bn54btb</p>
+                        <div class="row m-0 clearfix">
+                            <a href="#" class="btn-link btn-link_small pull-right" ng-show="editNote2" ng-click="saveNote(2)" style="">Save</a>
+                            <a href="#" class="btn-link btn-link_small pull-right ng-binding ng-hide" ng-show="!editNote2" ng-click="editNote2 = true" style="">
+                                Edit
+                            </a>
+                        </div>
+
+                    </div><!-- /.row -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+<script>
+    $(document).ready(function () {
+        $('#HeaderColorpicker').farbtastic('#HeaderColor');
+        $('#BottomColorpicker').farbtastic('#BottomColorpicker');
+        $('#TextColorpicker').farbtastic('#TextColorpicker');
+    });
+</script>
+
