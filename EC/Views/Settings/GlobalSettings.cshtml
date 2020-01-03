@@ -34,7 +34,7 @@
                                     <div style="width: 203px; height: 32px;">
                                         <img id="logoCompany" src="~/Content/Icons/logo.png" />
                                     </div>
-                                    <input type="file" name="MAX_FILE_SIZE" value="9999999" data-id="settingsIndex" accept="image/*" id="_file" multiple="multiple" style="width: 1px;height: 1px;opacity: 0;" check-file-size="" />
+                                    <input type="file" name="MAX_FILE_SIZE" value="9999999" data-id="globalSettings" accept="image/*" id="_file" style="width: 1px;height: 1px;opacity: 0;" check-file-size="" />
                                 </form>
                                 <div id="hoverCompanyPhoto">
                                     <label class="newImageBtn" make-click-hidden-input="">Change Global Logo</label>
@@ -59,15 +59,11 @@
                 <div id="HeaderColorpicker"></div>
             </div>
             <div class="col-4">
-                <p>Bottom color Managament</p>
-                <form><input type="text" id="BottomColor" name="color" value="#123456" /></form>
-                <div id="BottomColorpicker"></div>
+                <p>Header Links color Managament</p>
+                <form><input type="text" id="HeaderLinks" name="color" value="#123456" /></form>
+                <div id="HeaderLinksColorpicker"></div>
             </div>
-            <div class="col-4">
-                <p>Text color Managament</p>
-                <form><input type="text" id="TextColor" name="color" value="#123456" /></form>
-                <div id="TextColorpicker"></div>
-            </div>
+
         </div>
     </section>
 
@@ -98,8 +94,7 @@
 <script>
     $(document).ready(function () {
         $('#HeaderColorpicker').farbtastic('#HeaderColor');
-        $('#BottomColorpicker').farbtastic('#BottomColorpicker');
-        $('#TextColorpicker').farbtastic('#TextColorpicker');
+        $('#HeaderLinksColorpicker').farbtastic('#HeaderLinks');
     });
 </script>
 

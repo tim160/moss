@@ -1,4 +1,5 @@
 ﻿using EC.Controllers.ViewModel;
+using EC.Localization;
 using EC.Models.Database;
 using EC.Utils;
 using System;
@@ -639,6 +640,40 @@ namespace EC.Models
                 }
             }
             return result;
+        }
+
+        public bool checkIsExistGlobalSettings(int userId)
+        {
+            var globalSetting = db.global_settings.Where(gl_settings => gl_settings.client_id == userId).FirstOrDefault();
+            if (globalSetting != null)
+            {
+                return true;
+            } else
+            {
+                return createNewGlobalSetting(userId);
+            }
+        }
+        public bool createNewGlobalSetting(int userId)
+        {
+            var globalSetting = new global_settings();
+            globalSetting.client_id = userId;
+            globalSetting.application_name = LocalizationGetter.GetString("EmployeeConfidential");
+            db.global_settings.Add(globalSetting);
+            db.SaveChanges();
+            return true;
+        }
+        public bool updateIconPath(int userId, string iconPath)
+        {
+            var globalSetting = db.global_settings.Where(gl_settings => gl_settings.client_id == userId).FirstOrDefault();
+            if (globalSetting != null)
+            {
+                globalSetting.custom_logo_path = iconPath;
+                db.SaveChanges();
+                return true;
+            } else
+            {
+                return false;
+            }
         }
     }
 }

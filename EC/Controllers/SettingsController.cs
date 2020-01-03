@@ -942,8 +942,13 @@ namespace EC.Controllers
             UserModel um = new UserModel(user.id);
             ViewBag.um = um;
             ViewBag.user_id = user.id;
-
-            return View();
+            if(SettingsModel.checkIsExistGlobalSettings(user.id))
+            {
+                return View();
+            } else
+            {
+                return RedirectToAction("Login", "Service");
+            }
         }
     }
 }

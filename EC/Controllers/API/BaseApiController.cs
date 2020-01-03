@@ -42,13 +42,11 @@ namespace EC.Controllers.API
 
         internal bool is_cc
         {
-            
-
-                   get
+            get
             {
                 return DomainUtil.IsCC(HttpContext.Current.Request.Url.AbsoluteUri.ToLower());
             }
         }
         public EmailNotificationModel emailNotificationModel = new EmailNotificationModel();
-  }
+    }
 }

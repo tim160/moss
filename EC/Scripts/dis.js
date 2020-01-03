@@ -78,7 +78,7 @@
         };
     });
 
-    angular.module('EC').directive('checkFileSize', ['uploadImage', function (uploadImage) {
+    angular.module('EC').directive('checkFileSize', ['uploadImage', 'SettingsGlobalLogo',  function (uploadImage, SettingsGlobalLogo) {
         return {
             link: function (scope, elem, attr, ctrl) {
                 function bindEvent(element, type, handler) {
@@ -142,6 +142,16 @@
                                             }
                                         });
                                     }
+                                    break;
+                                case 'globalSettings':
+                                    var formData = new FormData();
+                                    var fileInput = angular.element('#_file');
+                                    formData.append('_file', fileInput[0].files[0]);
+                                    var globalSettings = SettingsGlobalLogo.getData(formData);
+                                    globalSettings.then(function (response) {
+                                        console.log(response);
+                                        alert('Image updated success');
+                                    });
                                     break;
                             }
                         }
@@ -2103,6 +2113,33 @@
                     $http({
                         method: 'GET',
                         url: '/api/AdditionalCompanies/' + id
+                    })
+                        .then(function success(response) {
+                            deffered.resolve(response);
+                        }, function error(response) {
+                            deffered.reject(response.status);
+                        });
+                    return deffered.promise;
+                }
+            };
+        }]);
+})();
+
+(function () {
+
+    'use strict';
+
+    angular.module('EC')
+        .factory('SettingsGlobalLogo',['$http', '$q', function ($http, $q) {
+            return {
+                getData: function (fd) {
+                    var deffered = $q.defer();
+                    $http({
+                        method: 'POST',
+                        data: fd,
+                        url: '/api/SettingsGlobalLogo',
+                        headers: { 'Content-Type': undefined },
+                        transformRequest: angular.identity
                     })
                         .then(function success(response) {
                             deffered.resolve(response);
