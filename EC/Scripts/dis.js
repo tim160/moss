@@ -149,8 +149,9 @@
                                     formData.append('_file', fileInput[0].files[0]);
                                     var globalSettings = SettingsGlobalLogo.getData(formData);
                                     globalSettings.then(function (response) {
-                                        console.log(response);
-                                        alert('Image updated success');
+                                        var srcLink = angular.element('#logoCompany').attr('src') + '?' + new Date().getTime();
+                                        angular.element('#logoCompany').attr('src', srcLink );
+                                        angular.element('.headerTop-logo__img').attr('src', srcLink);
                                     });
                                     break;
                             }
