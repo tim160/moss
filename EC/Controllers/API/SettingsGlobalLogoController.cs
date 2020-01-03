@@ -35,14 +35,6 @@ namespace EC.Controllers.API
                         photo.SaveAs(folder);
                         SettingsModel settingsModel = new SettingsModel();
                         settingsModel.updateIconPath(user.id, folder);
-                        try
-                        {
-                            ImageUtils.MakeSquarePhoto(folder);
-                        }
-                        catch (OutOfMemoryException ex)
-                        {
-                            logger.Error(ex.ToString());
-                        }
                     }
                 }
             }

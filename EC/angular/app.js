@@ -151,7 +151,8 @@
                                     globalSettings.then(function (response) {
                                         var srcLink = angular.element('#logoCompany').attr('src') + '?' + new Date().getTime();
                                         angular.element('#logoCompany').attr('src', srcLink );
-                                        angular.element('.headerTop-logo__img').attr('src', srcLink);
+                                         var result = 'url(' + srcLink + ')';
+                                         angular.element('.headerTop-logo__img').css('background-image', result);
                                     });
                                     break;
                             }
