@@ -48,53 +48,55 @@
         </div>
     </section>
 
-
-
-    <section class="content-container">
-        <div class="row container__inner">
-            <div class="col-4">
-                <p class="sectionHeader">Color Managament</p>
-                <p>Header color Managament</p>
-                <form><input type="text" id="HeaderColor" name="color" value="#123456" /></form>
-                <div id="HeaderColorpicker"></div>
-            </div>
-            <div class="col-4">
-                <p>Header Links color Managament</p>
-                <form><input type="text" id="HeaderLinks" name="color" value="#123456" /></form>
-                <div id="HeaderLinksColorpicker"></div>
-            </div>
-
-        </div>
-    </section>
-
     <section class="content-container">
         <div class="row container__inner">
             <div class="col-12">
-                <p class="sectionHeader">Employee Confidential</p>
-                <div class="row container__innerContent">
-                    <div class="row m-0">
-                        <textarea class="facts-established--text m-b-20 ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="model.note2" ng-show="editNote2" style=""> </textarea>
-                    </div><!-- /.row -->
-                    <div class="row m-0 clearfix">
-                        <p ng-show="!editNote2" class="content-container__p m-b-20 ng-binding ng-hide" ng-bind-html="noteP(model.note2)" style="">e hwtrb wrtbwrtb w4bn54btb</p>
-                        <div class="row m-0 clearfix">
-                            <a href="#" class="btn-link btn-link_small pull-right" ng-show="editNote2" ng-click="saveNote(2)" style="">Save</a>
-                            <a href="#" class="btn-link btn-link_small pull-right ng-binding ng-hide" ng-show="!editNote2" ng-click="editNote2 = true" style="">
-                                Edit
-                            </a>
-                        </div>
-
-                    </div><!-- /.row -->
+                <p class="sectionHeader">Color Managament</p>
+                <div class="row container__inner setCenterItems">
+                    <div class="col-3">
+                        <p>Header color Managament</p>
+                        <form><input type="text" id="HeaderColor" name="color" value="#123456" /></form>
+                        <div id="HeaderColorpicker"></div>
+                    </div>
+                    <div class="col-3">
+                        <p>Header Links color Managament</p>
+                        <form><input type="text" id="HeaderLinks" name="color" value="#123456" /></form>
+                        <div id="HeaderLinksColorpicker"></div>
+                    </div>
                 </div>
             </div>
         </div>
+
     </section>
 
-</div>
-<script>
-    $(document).ready(function () {
-        $('#HeaderColorpicker').farbtastic('#HeaderColor');
-        $('#HeaderLinksColorpicker').farbtastic('#HeaderLinks');
-    });
-</script>
+            <section class="content-container">
+                <div class="row container__inner">
+                    <div class="col-12">
+                        <p class="sectionHeader">Employee Confidential</p>
+                        <div class="row container__innerContent">
+                            <div class="row m-0">
+                                <textarea class="facts-established--text m-b-20 ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="model.note2" ng-show="editNote2" style=""> </textarea>
+                            </div><!-- /.row -->
+                            <div class="row m-0 clearfix">
+                                <p ng-show="!editNote2" class="content-container__p m-b-20 ng-binding ng-hide" ng-bind-html="noteP(model.note2)" style="">e hwtrb wrtbwrtb w4bn54btb</p>
+                                <div class="row m-0 clearfix">
+                                    <a href="#" class="btn-link btn-link_small pull-right" ng-show="editNote2" ng-click="saveNote(2)" style="">Save</a>
+                                    <a href="#" class="btn-link btn-link_small pull-right ng-binding ng-hide" ng-show="!editNote2" ng-click="editNote2 = true" style="">
+                                        Edit
+                                    </a>
+                                </div>
+
+                            </div><!-- /.row -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+        <script>
+            $(document).ready(function () {
+                $('#HeaderColorpicker').farbtastic('#HeaderColor');
+                $('#HeaderLinksColorpicker').farbtastic('#HeaderLinks');
+            });
+        </script>
 
