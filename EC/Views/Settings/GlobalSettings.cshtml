@@ -16,7 +16,18 @@
     #hoverCompanyPhoto {
         width: 203px;
         height: 62px;
-        top: -16px;
+        /*top: -16px;*/
+        top: calc(50% - 31px);
+    }
+
+    div > img {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        min-height: 100%;
+        min-width: 100%;
+        transform: translate(-50%, -50%);
     }
 </style>
 <link href="~/Content/libs/farbtastic/farbtastic.css" rel="stylesheet" />
@@ -34,6 +45,7 @@
                                     <div style="width: 203px; height: 32px;">
                                         <img id="logoCompany" src="~/Content/Icons/logo.png" />
                                     </div>
+
                                     <input type="file" name="MAX_FILE_SIZE" value="9999999" data-id="globalSettings" accept="image/*" id="_file" style="width: 1px;height: 1px;opacity: 0;" check-file-size="" />
                                 </form>
                                 <div id="hoverCompanyPhoto">
