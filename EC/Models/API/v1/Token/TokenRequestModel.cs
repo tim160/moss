@@ -1,4 +1,4 @@
-﻿namespace EC.Models.API.Token
+﻿namespace EC.Models.API.v1.Token
 {
 	public class TokenRequestModel
 	{

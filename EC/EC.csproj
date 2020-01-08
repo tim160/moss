@@ -1487,7 +1487,7 @@
     <Compile Include="Models\AnalyticsModel.cs" />
     <Compile Include="Models\API\ApiUnauthorizedResult.cs" />
     <Compile Include="Models\API\ApiResponseResult.cs" />
-    <Compile Include="Models\API\Token\TokenRequestModel.cs" />
+    <Compile Include="Models\API\v1\Token\TokenRequestModel.cs" />
     <Compile Include="Models\CaseMessagesModel.cs" />
     <Compile Include="Models\Database\action.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
@@ -1911,6 +1911,7 @@
   <ItemGroup>
     <Folder Include="Content\assets\content\" />
     <Folder Include="Content\assets\template\php\" />
+    <Folder Include="Services\API\v1\" />
     <Folder Include="Upload\CompanyLogo\" />
   </ItemGroup>
   <ItemGroup>

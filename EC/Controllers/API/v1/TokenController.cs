@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
-using EC.Models.API.Token;
+using EC.Models.API.v1.Token;
 using EC.Utils.Auth;
 
 namespace EC.Controllers.API.v1
