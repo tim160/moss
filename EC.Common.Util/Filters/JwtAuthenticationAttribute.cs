@@ -6,10 +6,10 @@ using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http.Filters;
-using EC.Models.API;
-using EC.Utils.Auth;
+using EC.Common.Util.Authentication;
+using EC.Common.Util.Models.API;
 
-namespace EC.Filters
+namespace EC.Common.Util.Filters
 {
 	public class JwtAuthenticationAttribute : Attribute, IAuthenticationFilter
 	{

@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace EC.Models.API
+namespace EC.Common.Util.Models.API
 {
 	public class ApiUnauthorizedResult : ApiResponseResult
 	{

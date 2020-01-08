@@ -1,13 +1,13 @@
-﻿using EC.Models.Database;
+﻿using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Web;
 using System.Web.Http;
 using EC.Common.Util;
+using EC.Common.Util.Models.API;
 using EC.Models;
+using EC.Models.Database;
 using Newtonsoft.Json;
-using EC.Models.API;
-using System.Net;
 
 namespace EC.Controllers.API
 {
@@ -46,7 +46,7 @@ namespace EC.Controllers.API
 		{
 
 
-				   get
+			get
 			{
 				return DomainUtil.IsCC(HttpContext.Current.Request.Url.AbsoluteUri.ToLower());
 			}

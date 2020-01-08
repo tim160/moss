@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 
-namespace EC.Filters
+namespace EC.Common.Util.Filters
 {
 	public class AddChallengeOnUnauthorizedResult : IHttpActionResult
 	{

@@ -1,8 +1,8 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
-using EC.Models.API.v1.Token;
-using EC.Utils.Auth;
+using EC.Common.Util.Authentication;
+using EC.Common.Util.Models.API.v1.Token;
 
 namespace EC.Controllers.API.v1
 {

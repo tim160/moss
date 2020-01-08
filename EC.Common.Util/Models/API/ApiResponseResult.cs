@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 
-namespace EC.Models.API
+namespace EC.Common.Util.Models.API
 {
 	public class ApiResponseResult : IHttpActionResult
 	{

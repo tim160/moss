@@ -3,7 +3,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
-using EC.Filters;
+using EC.Common.Util.Filters;
 using EC.Models.Database;
 
 namespace EC.Controllers.API.v1

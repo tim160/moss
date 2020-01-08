@@ -6,7 +6,7 @@ using System.Text;
 using log4net;
 using Microsoft.IdentityModel.Tokens;
 
-namespace EC.Utils.Auth
+namespace EC.Common.Util.Authentication
 {
 	public static class JwtManager
 	{
