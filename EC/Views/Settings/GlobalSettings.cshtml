@@ -16,11 +16,10 @@
     #hoverCompanyPhoto {
         width: 203px;
         height: 62px;
-        /*top: -16px;*/
         top: calc(50% - 31px);
     }
 
-    div > img {
+    div > #logoCompany {
         display: block;
         position: absolute;
         top: 50%;
@@ -67,13 +66,21 @@
                 <div class="row container__inner setCenterItems">
                     <div class="col-3">
                         <p>Header color Managament</p>
-                        <form><input type="text" id="HeaderColor" name="color" value="#123456" /></form>
+                        <form><input type="text" id="HeaderColor" name="color" value="@ViewBag.header_color_code" /></form>
                         <div id="HeaderColorpicker"></div>
+                        <div id="HeaderColorSave" class="btn-link btn-link_small pull-right ng-binding" >
+                            Save
+                        </div>
                     </div>
                     <div class="col-3">
                         <p>Header Links color Managament</p>
-                        <form><input type="text" id="HeaderLinks" name="color" value="#123456" /></form>
+                        <form>
+                            <input type="text" id="HeaderLinks" name="color" value="@ViewBag.header_links_color_code" />
+                        </form>
                         <div id="HeaderLinksColorpicker"></div>
+                        <div id="HeaderLinksSave" class="btn-link btn-link_small pull-right ng-binding" >
+                            Save
+                        </div>
                     </div>
                 </div>
             </div>
@@ -109,6 +116,26 @@
     $(document).ready(function () {
         $('#HeaderColorpicker').farbtastic('#HeaderColor');
         $('#HeaderLinksColorpicker').farbtastic('#HeaderLinks');
+
+        $("#HeaderColorSave, #HeaderLinksSave").on('click', function (event) {
+            var headerColor = $("#HeaderColor").val();
+            var headerLinks = $("#HeaderLinks").val();
+            if (headerColor === undefined || headerLinks === undefined) {
+                alert("Colors are empty");
+            }
+            $.ajax({
+                method: 'POST',
+                url: '/api/SettingsGlobalColor',
+                data: {
+                    header_color_code: headerColor,
+                    header_links_color_code: headerLinks
+                }
+            }).done(function (data) {
+                alert("Saved success");
+            }).fail(function (error) {
+                console.log(error);
+            });
+        });
     });
 </script>
 
