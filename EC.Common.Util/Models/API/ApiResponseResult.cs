@@ -10,7 +10,7 @@ namespace EC.Common.Util.Models.API
 {
 	public class ApiResponseResult : IHttpActionResult
 	{
-		private readonly MediaTypeFormatter _mediaTypeFormatter = new JsonMediaTypeFormatter();
+		protected readonly MediaTypeFormatter _mediaTypeFormatter = new JsonMediaTypeFormatter();
 
 		public ApiResponseResult(
 			HttpStatusCode code,

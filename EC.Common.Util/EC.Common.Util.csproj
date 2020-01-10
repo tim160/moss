@@ -115,6 +115,7 @@
     <Compile Include="MapClusterType.cs" />
     <Compile Include="MobileProxyType.cs" />
     <Compile Include="Models\API\ApiResponseResult.cs" />
+    <Compile Include="Models\API\ApiBadRequestResult.cs" />
     <Compile Include="Models\API\ApiUnauthorizedResult.cs" />
     <Compile Include="Models\API\v1\Token\TokenRequestModel.cs" />
     <Compile Include="MruDictionary.cs" />
