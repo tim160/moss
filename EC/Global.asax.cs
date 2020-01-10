@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.SessionState;
+using AutoMapper;
 using EC.Common.Util;
 using log4net;
 using Newtonsoft.Json;
@@ -31,6 +34,8 @@ namespace EC
 				ContractResolver = new CustomContractResolver(),
 				ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
 			};
+
+			InitAutoMapper();
 		}
 
 		private void Application_BeginRequest(object sender, EventArgs e)
@@ -73,5 +78,17 @@ namespace EC
 		{
 			Response.Cache.SetCacheability(HttpCacheability.NoCache);
 		}
+
+		private void InitAutoMapper()
+		{
+			List<Type> automapperProfiles = GetTypesInheritedFrom(typeof(Profile)).ToList();
+			Mapper.Initialize(cfg => automapperProfiles.ForEach(profile => cfg.AddProfile(profile)));
+		}
+
+		private IEnumerable<Type> GetTypesInheritedFrom(Type baseType) =>
+			AppDomain.CurrentDomain.GetAssemblies()
+				.Where(assembly => !assembly.IsDynamic)
+				.SelectMany(Assembly => Assembly.GetExportedTypes())
+				.Where(type => type.IsSubclassOf(baseType));
 	}
 }

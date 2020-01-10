@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Description;
+using EC.Common.Base;
 using EC.Common.Util.Filters;
-using EC.Models.Database;
+using EC.Errors.CommonExceptions;
+using EC.Models.API.v1.Company;
+using EC.Services.API.v1.CompanyServices;
+using log4net;
 
 namespace EC.Controllers.API.v1
 {
@@ -13,72 +15,84 @@ namespace EC.Controllers.API.v1
 	[Authorize]
 	public class CompanyController : BaseApiController
 	{
+		private readonly CompanyService _companyService;
+		protected readonly ILog _logger;
+
+		public CompanyController()
+		{
+			_logger = LogManager.GetLogger(GetType());
+			_companyService = new CompanyService();
+		}
+
 		[HttpGet]
 		[Route]
-		public async Task<IHttpActionResult> GetList()
+		[ResponseType(typeof(PagedList<CompanyModel>))]
+		public async Task<IHttpActionResult> GetList(int page = 1, int pageSize = 10)
 		{
-			if (false)
+			_logger.Debug($"page={page}; pageSize={pageSize}");
+
+			if (!ModelState.IsValid)
 			{
-				return BadRequest();
+				return ApiBadRequest(ModelState);
 			}
 
-			//if (!CheckCredentials())
-			////if (await CheckCredentials())
-			//{
-			//	return StatusCode(HttpStatusCode.Unauthorized);
-			//}
-
-			List<company> companies = await DB.company
-				.Take(10)
-				.ToListAsync()
+			PagedList<CompanyModel> result = await _companyService
+				.GetPagedAsync(page, pageSize)
 				.ConfigureAwait(false);
-			return ApiOk(companies);
+			return ApiOk(result);
 		}
 
 		[HttpPost]
 		[Route("new")]
-		public async Task<IHttpActionResult> Create(/*NewCompanyDto newCompanyDto*/)
+		public async Task<IHttpActionResult> Create(ModifyCompanyModel modifyCompanyModel)
 		{
-			//ResponseModel response = new ResponseModel();
+			if (modifyCompanyModel is null)
+			{
+				ModelState.AddModelError(nameof(modifyCompanyModel), "Company data required.");
+			}
 
-			//if (false)
-			//{
-			//	return BadRequest();
-			//}
+			if (!ModelState.IsValid)
+			{
+				return ApiBadRequest(ModelState);
+			}
 
-			//if (!CheckCredentials())
-			////if (await CheckCredentials())
-			//{
-			//	//response.Code = HttpStatusCode.Unauthorized;
-			//	//response.Status = HttpStatusCode.Unauthorized.ToString();
-			//	//return response;
+			int id = await _companyService
+				.CreateOrUpdate(modifyCompanyModel)
+				.ConfigureAwait(false);
 
-			//	return new ApiResponseResult();
-
-			//	//return StatusCode(HttpStatusCode.Unauthorized);
-			//}
-
-			//response.Code = HttpStatusCode.Created;
-			//response.Status = HttpStatusCode.Created.ToString();
-			//return response;
-
-			return ApiCreated();
+			return ApiCreated(id);
 		}
 
 		[HttpPut]
 		[Route("{id}")]
-		public async Task<IHttpActionResult> Update(int id/*, UpdateCompanyDto updateCompanyDto*/)
+		public async Task<IHttpActionResult> Update(int id, ModifyCompanyModel modifyCompanyModel)
 		{
-			//if (false)
-			//{
-			//	return BadRequest();
-			//}
+			_logger.Debug($"id={id}");
 
-			//if (!CheckCredentials())
-			////if (await CheckCredentials())
-			//{
-			//	return StatusCode(HttpStatusCode.Unauthorized);
-			//}
+			if (modifyCompanyModel is null)
+			{
+				ModelState.AddModelError(nameof(modifyCompanyModel), "Company data required.");
+			}
+			if (id == 0)
+			{
+				ModelState.AddModelError(nameof(id), "Company ID required.");
+			}
+
+			if (!ModelState.IsValid)
+			{
+				return ApiBadRequest(ModelState);
+			}
+
+			try
+			{
+				await _companyService
+					.CreateOrUpdate(modifyCompanyModel, id)
+					.ConfigureAwait(false);
+			}
+			catch (NotFoundException exception)
+			{
+				return ApiNotFound(exception.Message);
+			}
 
 			return ApiOk();
 		}

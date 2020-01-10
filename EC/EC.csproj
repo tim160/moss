@@ -41,6 +41,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Castle.Core">
       <HintPath>..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
@@ -89,6 +92,9 @@
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Abstractions">
       <Private>True</Private>
     </Reference>
@@ -1427,6 +1433,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="AutoMapperProfiles\API\v1\CompanyProfile.cs" />
     <Compile Include="Controllers\AnalyticsController.cs" />
     <Compile Include="Controllers\API\AdditionalCompaniesController.cs" />
     <Compile Include="Controllers\API\AnalyticsDashboardCasesController.cs" />
@@ -1471,6 +1478,8 @@
     <Compile Include="Controllers\TrainerController.cs" />
     <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Models\AnalyticsModel.cs" />
+    <Compile Include="Models\API\v1\Company\ModifyCompanyModel.cs" />
+    <Compile Include="Models\API\v1\Company\CompanyModel.cs" />
     <Compile Include="Models\CaseMessagesModel.cs" />
     <Compile Include="Models\Database\action.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
@@ -1601,6 +1610,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ECEntities.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Database\Contexts\ApplicationContext.cs" />
     <Compile Include="Models\Database\email.cs">
       <DependentUpon>ECEntities.tt</DependentUpon>
     </Compile>
@@ -1872,7 +1882,10 @@
     <Compile Include="Models\ViewModels\UsersUnreadReportsNumberViewModel.cs" />
     <Compile Include="Models\ViewModels\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\API\v1\CompanyService.cs" />
+    <Compile Include="Services\API\v1\ActionsBase.cs" />
+    <Compile Include="Services\API\v1\CompanyServices\CompanyActions.cs" />
+    <Compile Include="Services\API\v1\QueriesBase.cs" />
+    <Compile Include="Services\API\v1\CompanyServices\CompanyService.cs" />
     <Compile Include="Services\API\v1\CompanyServices\CompanyQueries.cs" />
     <Compile Include="Services\API\v1\ServiceBase.cs" />
     <Compile Include="Startup.cs" />
@@ -1896,7 +1909,6 @@
   <ItemGroup>
     <Folder Include="Content\assets\content\" />
     <Folder Include="Content\assets\template\php\" />
-    <Folder Include="Models\API\v1\" />
     <Folder Include="Upload\CompanyLogo\" />
   </ItemGroup>
   <ItemGroup>
@@ -1930,6 +1942,10 @@
     <ProjectReference Include="..\EC.Core.Common\EC.Core.Common.csproj">
       <Project>{a6dc770d-89c5-483b-b73c-077df5c7fefe}</Project>
       <Name>EC.Core.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EC.Errors\EC.Errors.csproj">
+      <Project>{A84CFBFD-9BCD-423A-B8F8-8175C0EA93EF}</Project>
+      <Name>EC.Errors</Name>
     </ProjectReference>
     <ProjectReference Include="..\EC.Model.Impl\EC.Model.Impl.csproj">
       <Project>{ff040d47-bd8a-4c3c-a285-0d6f2f11754c}</Project>
